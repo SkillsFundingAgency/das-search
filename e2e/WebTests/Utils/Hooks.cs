@@ -9,6 +9,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using NUnit.Framework.Interfaces;
 using TechTalk.SpecFlow;
 
 namespace Specflow_Selenium_PO_Example2.Utils
@@ -69,7 +70,7 @@ namespace Specflow_Selenium_PO_Example2.Utils
 
             else if (host == "saucelabs")
             {
-                bool passed = TestContext.CurrentContext.Result.Status == TestStatus.Passed;
+                bool passed = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
                 try
                 {
                     // Logs the result to Sauce Labs
