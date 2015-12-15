@@ -143,6 +143,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
+    <Compile Include="DependencyResolution\SearchRegistry.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
@@ -154,6 +155,8 @@
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Models\SearchResultsItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ISearchForStandards.cs" />
+    <Compile Include="Services\StubSearchService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

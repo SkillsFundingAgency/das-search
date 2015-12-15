@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sfa.Eds.Das.Web;
 using Sfa.Eds.Das.Web.Controllers;
 
 namespace Sfa.Eds.Das.Web.Tests.Controllers
@@ -16,7 +11,7 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(null);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;

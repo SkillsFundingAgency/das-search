@@ -18,7 +18,7 @@
 namespace Sfa.Eds.Das.Web.DependencyResolution {
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
-	
+
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 
@@ -29,7 +29,6 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
                     scan.WithDefaultConventions();
 					scan.With(new ControllerConvention());
                 });
-            //For<IExample>().Use<Example>();
         }
 
         #endregion
