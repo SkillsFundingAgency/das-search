@@ -1,7 +1,6 @@
-﻿@using Sfa.Eds.Das.Web.Models
-@model Sfa.Eds.Das.Web.Models.SearchResults
+﻿@model Sfa.Eds.Das.Web.Models.SearchResults
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Search Results";
 }
 
 <div class="jumbotron">
@@ -14,6 +13,9 @@
     <div class="col-md-8">
         <div>
             <strong>Total results found:</strong> @Model.TotalResults
+        </div>
+        <div>
+            @Html.ActionLink("< back to search", "Index")
         </div>
     @foreach (var item in Model.Results)
     {
