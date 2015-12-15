@@ -12,5 +12,15 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Search(SearchCriteria criteria)
+        {
+            return View();
+        }
+    }
+
+    public class SearchCriteria
+    {
+        public string Keywords { get; set; }
     }
 }
