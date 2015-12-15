@@ -1,4 +1,5 @@
-﻿@model Sfa.Eds.Das.Web.Controllers.SearchCriteria
+﻿@using Sfa.Eds.Das.Web.Models
+@model Sfa.Eds.Das.Web.Models.SearchResults
 @{
     ViewBag.Title = "Home Page";
 }
@@ -11,7 +12,15 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-8">
-        
+        <div>
+            <strong>Total results found:</strong> @Model.TotalResults
+        </div>
+    @foreach (var item in Model.Results)
+    {
+        <div><h3><strong>@item.Name</strong></h3></div>
+        <div>@item.TextSnippet</div>
+        <hr/>
+    }
     </div>
     <div class="col-md-2">
     </div>
