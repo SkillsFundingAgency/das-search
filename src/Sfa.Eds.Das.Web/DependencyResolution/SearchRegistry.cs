@@ -5,7 +5,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
     public class SearchRegistry : Registry {
 
         public SearchRegistry() {
-            For<ISearchForStandards>().Use<StubSearchService>();
+            For<ISearchForStandards>().Use<SearchService>();
         }
     }
 }
