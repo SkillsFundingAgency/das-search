@@ -25,11 +25,11 @@ namespace Sfa.Eds.Das.Web.Services
         {
             var resultItems = new List<SearchResultsItem>(5)
             {
-                new SearchResultsItem {Name = "DENTAL_HEALTH_Dental_Technician.ashx.pdf" },
-                new SearchResultsItem {Name = "BUTCHERY_Butcher.ashx.pdf" },
-                new SearchResultsItem {Name = "AUTOMOTIVE_Manufacturing_Engineer_standard.ashx.pdf" },
-                new SearchResultsItem {Name = "ACTUARIAL_-_Actuarial_Technician.pdf" },
-                new SearchResultsItem {Name = "AEROSPACE_-_Aerospace_Engineer.pdf" }
+                new SearchResultsItem {Title = "DENTAL_HEALTH_Dental_Technician.ashx.pdf" },
+                new SearchResultsItem {Title = "BUTCHERY_Butcher.ashx.pdf" },
+                new SearchResultsItem {Title = "AUTOMOTIVE_Manufacturing_Engineer_standard.ashx.pdf" },
+                new SearchResultsItem {Title = "ACTUARIAL_-_Actuarial_Technician.pdf" },
+                new SearchResultsItem {Title = "AEROSPACE_-_Aerospace_Engineer.pdf" }
             };
 
             return resultItems;

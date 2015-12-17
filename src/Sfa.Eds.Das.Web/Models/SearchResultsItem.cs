@@ -2,6 +2,6 @@
 {
     public sealed class SearchResultsItem
     {
-        public string Name { get; set; }
+        public string Title { get; set; }
     }
 }
