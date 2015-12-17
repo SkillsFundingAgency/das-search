@@ -1,6 +1,7 @@
 ﻿using Nest;
 using Sfa.Eds.Das.Web.Models;
 using System;
+using System.Configuration;
 
 namespace Sfa.Eds.Das.Web.Services
 {
@@ -8,20 +9,21 @@ namespace Sfa.Eds.Das.Web.Services
     {
         public SearchResults Search(string keywords)
         {
-            var node = new Uri("http://192.168.99.100:9200");
+            var searchHost = ConfigurationManager.AppSettings["SearchHost"];
+            var node = new Uri(searchHost);
 
             var settings = new ConnectionSettings(
                 node,
-                defaultIndex: "trying-out-mapper-attachements"
+                defaultIndex: "elasticsearchmapperattachments-test"
             );
 
-            settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "search-results-item"));
+            settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "mydocument"));
 
             var client = new ElasticClient(settings);
 
             var results = client.Search<SearchResultsItem>(s => s
             .From(0)
-            .Size(10)
+            .Size(1000)
             .QueryRaw(@"{""query_string"": {""query"": """ + keywords + @"""}}")
             );
 
