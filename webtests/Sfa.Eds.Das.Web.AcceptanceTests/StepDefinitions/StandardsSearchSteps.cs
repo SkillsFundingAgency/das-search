@@ -37,7 +37,16 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
            // ScenarioContext.Current.Pending();
         }
-        
+
+        [When(@"I am on Search landing page")]
+        public void WhenIAmOnSearchLandingPage()
+        {
+            srchPage = new SearchPage();
+            srchPage.StartSelenium();
+            srchPage.launchLandingPage();
+        }
+
+
         [Given(@"I enter keyword '(.*)' in search box")]
         public void GivenIEnterKeywordInSearchBox(string p0)
         {
@@ -55,16 +64,33 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         }
 
 
+        [Then(@"I should be able to see home page with title as ""(.*)""")]
+        public void ThenIShouldBeAbleToSeeHomePageWithTitleAs(string p0)
+        {
+            srchPage.verifyPage("Home Page - Employer Apprenticeship Search");
+        }
+
+
+
         [Then(@"I should see matching '(.*)' standards on result page")]
         public void ThenIShouldSeeMatchingStandardsOnResultPage(string p0)
         {
-            srchPage.verifyPage("- Employer Apprenticeship Search");
+            srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
             srchPage.verifyresultsPages();
             srchPage.verifyStandardFoundinResultPage(p0);
            
         }
 
-[AfterScenario]
+        [Then(@"I should see standards count on result page")]
+        public void ThenIShouldSeeStandardsCountOnResultPage()
+        {
+            srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
+            srchPage.verifyresultsPages();
+
+
+        }
+
+        [AfterScenario]
 
 public void closeBrowser()
         {
@@ -110,6 +136,11 @@ public void closeBrowser()
                 Console.WriteLine("Error while taking screenshot: {0}", ex);
             }
         }
+
+        
+
+
+
     }
 
 

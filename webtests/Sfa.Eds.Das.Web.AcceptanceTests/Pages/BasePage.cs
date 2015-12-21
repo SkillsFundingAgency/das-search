@@ -35,7 +35,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             try
             {
-                driver = new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DAS_WebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
+                driver = new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
                 // driver.FindElement(By.TagName("body")).SendKeys(Keys.F11);
 
             }

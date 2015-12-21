@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features
+namespace Specflow_Selenium_PO_Example2.Features
 {
     using TechTalk.SpecFlow;
     
@@ -25,7 +25,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "StandardSearch.feature"
+#line 1 "StandardSearch1.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
@@ -66,36 +66,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify landing page")]
-        [NUnit.Framework.CategoryAttribute("Smoke")]
-        public virtual void VerifyLandingPage()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify landing page", new string[] {
-                        "Smoke"});
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 9
-testRunner.When("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 10
-testRunner.Then("I should be able to see home page with title as \"Home Page - Employer Apprentices" +
-                    "hip Search\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search by keyword")]
         [NUnit.Framework.CategoryAttribute("Smoke")]
-        [NUnit.Framework.TestCaseAttribute("actuarial technician", null)]
-        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
-        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("Legal Services", null)]
-        [NUnit.Framework.TestCaseAttribute("Designer", null)]
-        [NUnit.Framework.TestCaseAttribute("dental nurse", null)]
-        [NUnit.Framework.TestCaseAttribute("Electrician", null)]
-        [NUnit.Framework.TestCaseAttribute("car mechanic", null)]
-        [NUnit.Framework.TestCaseAttribute("Manager", null)]
+        [NUnit.Framework.TestCaseAttribute("Mechtronics Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Software Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Mechanical Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Health carer", null)]
+        [NUnit.Framework.TestCaseAttribute("Charted Accountant", null)]
+        [NUnit.Framework.TestCaseAttribute("Accountancy", null)]
         public virtual void SearchByKeyword(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -105,57 +83,16 @@ testRunner.Then("I should be able to see home page with title as \"Home Page - E
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search by keyword", @__tags);
-#line 15
+#line 7
 this.ScenarioSetup(scenarioInfo);
-#line 16
+#line 8
  testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
+#line 9
  testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
+#line 10
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
+#line 11
  testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify invalid search")]
-        public virtual void VerifyInvalidSearch()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify invalid search", ((string[])(null)));
-#line 34
-this.ScenarioSetup(scenarioInfo);
-#line 35
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
-testRunner.And("I enter keyword \'<JOBROLE>\' in search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
-testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
-testRunner.Then("I should see message \"Total Results found:0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Validate result count")]
-        [NUnit.Framework.TestCaseAttribute("actuarial technician", null)]
-        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
-        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
-        public virtual void ValidateResultCount(string jOBROLE, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate result count", exampleTags);
-#line 44
-this.ScenarioSetup(scenarioInfo);
-#line 45
- testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
- testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
- testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 48
- testRunner.Then("I should see standards count on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -174,18 +111,37 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search result Page to have best match", @__tags);
-#line 61
+#line 22
 this.ScenarioSetup(scenarioInfo);
-#line 62
+#line 23
 testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 63
+#line 24
 testRunner.When(string.Format("I enter keyword \'{0}\'", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 64
+#line 25
 testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 26
 testRunner.Then("I should result search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 66
+#line 27
 testRunner.And(string.Format("it should list most best match \'{0}\' on top of the search list", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search result to have title matched standards on top list")]
+        [NUnit.Framework.CategoryAttribute("smoke")]
+        public virtual void SearchResultToHaveTitleMatchedStandardsOnTopList()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search result to have title matched standards on top list", new string[] {
+                        "smoke"});
+#line 36
+this.ScenarioSetup(scenarioInfo);
+#line 37
+testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 38
+testRunner.When("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 39
+testRunner.Then("", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
