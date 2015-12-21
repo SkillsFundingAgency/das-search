@@ -17,11 +17,24 @@
         <div>
             @Html.ActionLink("< back to search", "Index")
         </div>
-    @foreach (var item in Model.Results)
-    {
-        <div><h3><strong>@item.Title</strong></h3></div>
-        <hr/>
-    }
+        @foreach (var item in Model.Results)
+        {
+            <div><h3><strong>@item.Title</strong></h3></div>
+            <div>
+                <strong>Funding cap:</strong> @item.FundingCap
+            </div>
+            <div>
+                <strong>Effective end day:</strong> @item.EffectiveEndDay
+            </div>
+            <div>
+                <strong>Notional end level:</strong> @item.NotionalEndLevel
+            </div>
+            <div>
+                <strong>Download PDF:</strong> <a href="@item.PdfUrl">@item.PdfUrl</a> 
+            </div>
+            <hr />
+
+        }
     </div>
     <div class="col-md-2">
     </div>
