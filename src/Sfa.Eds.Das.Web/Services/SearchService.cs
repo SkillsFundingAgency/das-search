@@ -24,7 +24,7 @@ namespace Sfa.Eds.Das.Web.Services
             var results = client.Search<SearchResultsItem>(s => s
             .From(0)
             .Size(1000)
-            .QueryRaw(@"{""query_string"": {""query"": """ + keywords + @"""}}")
+            .QueryString(keywords)
             );
 
             return new SearchResults
