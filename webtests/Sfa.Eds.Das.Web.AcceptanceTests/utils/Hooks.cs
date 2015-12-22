@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
@@ -36,7 +37,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         {
             if (host == "localhost")
             {
-                localDriver = new FirefoxDriver();
+                localDriver = new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
                 ScenarioContext.Current["driver"] = localDriver;
             }
             else if (host == "saucelabs")

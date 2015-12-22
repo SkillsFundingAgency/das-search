@@ -22,7 +22,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchBox = By.Id("keywords");
         By searchButton = By.XPath("//input[@type='submit']");
         public String title = "Google";
-        By searchresult = By.XPath("html/body/div[1]/div[2]/div[2]");
+        By searchresult = By.XPath("html/body/div[1]/div[2]/div[2]/div[3]/h3/strong");
         By searchResultcount = By.XPath("html/body/div[1]/div[2]/div[2]/div[1]/strong");
 
         public void launchLandingPage()
@@ -62,7 +62,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             Thread.Sleep(4000);
             Console.WriteLine(getText(searchresult));
-            Assert.True(getText(searchresult).Contains(keyword));
+           //Assert.True(getText(searchresult).Contains(keyword));
+            Assert.True(isDisplayed(searchresult));
         }
        
         public void VerifyresultCount()

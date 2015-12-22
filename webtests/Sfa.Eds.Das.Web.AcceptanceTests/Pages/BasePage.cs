@@ -3,6 +3,8 @@ using System;
 using TechTalk.SpecFlow;
 using OpenQA.Selenium.Chrome;
 using System.Configuration;
+using System.Diagnostics.Eventing;
+using Sfa.Eds.Das.Web.AcceptanceTests.utils;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
@@ -17,35 +19,16 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
 
             
-            //driver = (IWebDriver)ScenarioContext.Current["driver"];
-            //baseUrl = ConfigurationManager.AppSettings["baseUrl"];
-
-
-
-
-
-            // driver = (IWebDriver)ScenarioContext.Current["driver"];
-            // driver = new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DAS_WebTests\\DAS_WebTests\\Test\Resources");
-
-            // baseUrl = ConfigurationManager.AppSettings["baseUrl"];
+            driver = (IWebDriver)ScenarioContext.Current["driver"];
+            baseUrl = ConfigurationManager.AppSettings["baseUrl"];
+                     
         }
 
 
-        public void StartSelenium()
-        {
-            try
-            {
-                driver = new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
-                // driver.FindElement(By.TagName("body")).SendKeys(Keys.F11);
-
-            }
-            catch
-            {
-
-            }
+       
 
 
-        }
+        
 
         
         public void type(string inputText, By locator)
@@ -71,8 +54,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void Launch(string url, string pageTitle)
         {
+           // Console.WriteLine("Test" + baseUrl);
+        
 
-            driver.Navigate().GoToUrl(baseUrl + url);
+        
+
+         driver.Navigate().GoToUrl(baseUrl);
             verifyPage(pageTitle);
         }
 
@@ -103,12 +90,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             }
 
         }
-public void closeBrowser()
-        {
-            driver.Quit();
 
-
-        }
 
     }
 }

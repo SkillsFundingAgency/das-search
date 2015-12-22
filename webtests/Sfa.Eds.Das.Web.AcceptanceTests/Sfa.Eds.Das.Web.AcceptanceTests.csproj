@@ -59,7 +59,12 @@
     <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\StandardsSearchSteps.cs" />
-    <Compile Include="Test\Features\StandardSearch.feature.cs">
+    <Compile Include="Test\Features\Sprint1\SearchStandardByTitle.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchStandardByTitle.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint1\StandardSearch.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardSearch.feature</DependentUpon>
@@ -67,8 +72,14 @@
     <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Test\Features\StandardSearch.feature">
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Test\Features\Sprint1\SearchStandardByTitle.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchStandardByTitle.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint1\StandardSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>StandardSearch.feature.cs</LastGenOutput>
     </None>
