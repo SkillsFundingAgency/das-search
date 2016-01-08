@@ -29,7 +29,6 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
                     scan.WithDefaultConventions();
 					scan.With(new ControllerConvention());
                 });
-            //For<IExample>().Use<Example>();
         }
 
         #endregion

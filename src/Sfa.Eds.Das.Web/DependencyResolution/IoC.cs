@@ -15,12 +15,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-namespace Sfa.Eds.Das.Web.DependencyResolution {
+namespace Sfa.Eds.Das.Web.DependencyResolution
+{
     using StructureMap;
-	
-    public static class IoC {
-        public static IContainer Initialize() {
+
+    public static class IoC
+    {
+        public static IContainer Initialize()
+        {
             return new Container(c => { c.AddRegistry<DefaultRegistry>(); c.AddRegistry<SearchRegistry>(); });
         }
     }

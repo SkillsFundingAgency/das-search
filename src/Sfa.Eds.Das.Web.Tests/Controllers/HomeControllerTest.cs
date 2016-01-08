@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using Sfa.Eds.Das.Web.Controllers;
-using Sfa.Eds.Das.Web.Services;
 using Moq;
 using NUnit.Framework;
+using Sfa.Eds.Das.Web.Controllers;
+using Sfa.Eds.Das.Web.Services;
 
 namespace Sfa.Eds.Das.Web.Tests.Controllers
 {
