@@ -20,7 +20,6 @@
   <!--<Property Name="sonar.host.url">http://localhost:9000</Property>-->
 
   <Property Name="sonar.verbose">true</Property>
-  <Property Name="sonar.cs.vstest.reportsPaths">$(Common.TestResultsDirectory)\*.trx</Property>
   <Property Name="sonar.exclusions">**/Scripts/jquery*.js</Property>
 
   <!--
