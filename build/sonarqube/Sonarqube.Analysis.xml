@@ -21,12 +21,6 @@
 
   <Property Name="sonar.verbose">true</Property>
   <Property Name="sonar.exclusions">**/Scripts/jquery*.js,**/App_Start/BundleConfig.cs,**/Scripts/*.js</Property>
-  <Property Name="sonar.issue.ignore.multicriteria">*,*</Property>
-
-
-
-
-
   <!--
   <Property Name="sonar.login"></Property>
   <Property Name="sonar.password"></Property>
