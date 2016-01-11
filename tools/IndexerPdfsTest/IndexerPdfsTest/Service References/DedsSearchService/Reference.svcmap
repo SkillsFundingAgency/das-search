@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5e002865-5ca7-406d-bc9a-228a096be356" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DedsSearchService.disco" MetadataType="Disco" ID="a36e1f9b-e353-4a71-a739-24960ecca66b" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?disco" />
+    <MetadataFile FileName="DedsSearchService.wsdl" MetadataType="Wsdl" ID="a8eca539-fd8d-4b82-bf02-4dfca0164f4d" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?wsdl" />
+    <MetadataFile FileName="DedsSearchService1.wsdl" MetadataType="Wsdl" ID="fc5055dd-8362-41d4-9a36-491fe677cb66" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="DedsSearchService.xsd" MetadataType="Schema" ID="820b92a6-a7c0-46ef-9873-dc958929bc6f" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DedsSearchService1.xsd" MetadataType="Schema" ID="bf0cf776-5e2f-4280-b3b0-2480c1af7a5b" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DedsSearchService2.xsd" MetadataType="Schema" ID="9d115010-a8a5-44cb-8dfc-07f2e16a0866" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DedsSearchService3.xsd" MetadataType="Schema" ID="869b04b1-3107-4e42-94b3-42b5896f17b8" SourceId="1" SourceUrl="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
