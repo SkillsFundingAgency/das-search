@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Sfa.Eds.Das.Web.Testing.New.ID</id>
+    <version>0.0.0.0</version>
+    <authors>SFA DAS</authors>
+    <owners>Christofer_Froberg</owners>
+    <licenseUrl>http://example.com</licenseUrl>
+    <projectUrl>http://example.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Cloud Service Package</description>
+  </metadata>
+</package>
