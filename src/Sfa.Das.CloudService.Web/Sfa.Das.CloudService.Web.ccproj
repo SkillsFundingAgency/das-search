@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>2.8</ProductVersion>
-    <ProjectGuid>97aef83b-d8b9-4b73-a560-0b5b800a6a23</ProjectGuid>
+    <ProjectGuid>f638fb0d-3a54-48a3-b04b-52e45341891e</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sfa.Das.CloudService.Web</RootNamespace>
@@ -48,9 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sfa.Eds.Das.WebContent\" />
+    <Folder Include="Sfa.Eds.Das.WebContent\bin" />
   </ItemGroup>
   <ItemGroup>
     <DiagnosticsConfiguration Include="Sfa.Eds.Das.WebContent\diagnostics.wadcfgx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sfa.Eds.Das.WebContent\bin\Install.cmd">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Sfa.Eds.Das.WebContent\bin\NDP452-KB2901954-Web.exe">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
