@@ -12,6 +12,6 @@
         </dependencies>
     </metadata>
      <files>
-        <file src="src\Sfa.Eds.Standards.Indexer.AzureAzureCloudService\bin\Release\app.publish\*.*" target="" />
+        <file src="\src\Sfa.Eds.Standards.Indexer.AzureAzureCloudService\bin\Release\app.publish\*.*" target="" />
      </files>
 </package>
