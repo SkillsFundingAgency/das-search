@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Nest;
 using Newtonsoft.Json;
@@ -24,7 +25,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri("http://104.45.94.2:9200/");//ConfigurationManager.AppSettings["serverUri"]);
+            var node = new Uri(CloudConfigurationManager.GetSetting("ServerUri"));
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
@@ -46,7 +47,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private static string GetIndexAlias()
         {
-            return "standardIndexAlias"; //ConfigurationManager.AppSettings["indexesAlias"];
+            return CloudConfigurationManager.GetSetting("StandardIndexesAlias");
         }
 
         private static string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
@@ -67,11 +68,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                     return c;
                 });
 
-                if (totalResults.Count == 0)
-                {
+                //if (totalResults.Count == 0)
+                //{
                     _client.DeleteIndex(indexName);
                     indexExistsResponse = _client.IndexExists(indexName);
-                }
+                //}
             }
 
             //create index
@@ -89,38 +90,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return creation;
         }
 
-        static public async Task<List<JsonMetadataObject>> GetStandards()
-        {
-            //TODO: retrieve jsons from internet
-            var standardsJsonBaseRoute = "C:\\Projects\\SFA\\ElasticSearchIndexer\\json";
-            var standardsList = new List<JsonMetadataObject>();
-
-            if (Directory.Exists(standardsJsonBaseRoute))
-            {
-                var directory = new DirectoryInfo(standardsJsonBaseRoute);
-                var files = directory.GetFiles();
-
-                foreach (var fileInfo in files)
-                {
-                    using (StreamReader file = File.OpenText(fileInfo.FullName))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        JsonMetadataObject standard = (JsonMetadataObject)serializer.Deserialize(file, typeof(JsonMetadataObject));
-                        standardsList.Add(standard);
-                    }
-                }
-            }
-
-            standardsList = standardsList.OrderBy(s => s.Id).ToList();
-
-            return standardsList;
-        }
-
-        static public async Task UploadStandardsToAzure(List<JsonMetadataObject> standardList)
+        static public async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)
         {
             foreach (var standard in standardList)
             {
-                await UploadStandardJson(standard);
+                //await UploadStandardJson(standard);
                 await UploadStandardPdf(standard);
             }
         }
@@ -162,21 +136,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        static private void DownloadPdf(JsonMetadataObject standard, string path)
-        {
-            using (WebClient wClient = new WebClient())
-            {
-                wClient.DownloadFile(standard.Pdf, path);
-            }
-        }
-
         private static async Task IndexStandards(string newIndexName)
         {
-            var standards = await GetStandards();
+            var standards = await GetStandardsFromAzure();
 
-            await UploadStandardsToAzure(standards);
-
-            standards = await GetStandardsFromAzure();
+            await UploadStandardsContentToAzure(standards);
 
             try
             {

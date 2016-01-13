@@ -29,15 +29,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             {
                 try
                 {
-                    var connectionString = "DefaultEndpointsProtocol=https;AccountName=indexerstorage;AccountKey=jVvVtb02mUNn/QiFJB71czOBNXqMYxj0UIpq3paGO+u3MiXzqxrbz7rO9RYASYkD/JXiRlWxn/s/o/lFYujkaA==";
-                    _standardControlQueueConsumer.CheckMessage(connectionString, "indexerqueue");
+                    _standardControlQueueConsumer.CheckMessage("indexerqueue");
                 }
                 catch (Exception ex)
                 {
                     //TODO: manage exceptions
                 }
 
-                Thread.Sleep(TimeSpan.FromMinutes(10));
+                Thread.Sleep(TimeSpan.FromMinutes(20));
             }
         }
 
