@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
     public class BlobStorageHelper
     {
         private readonly CloudStorageAccount _storageAccount;
-        private string _accountName = CloudConfigurationManager.GetSetting("StorageAccountName");
-        string _key = CloudConfigurationManager.GetSetting("StorageAccountKey");
+        private string _accountName = ConfigurationManager.AppSettings["StorageAccountName"];
+        string _key = ConfigurationManager.AppSettings["StorageAccountKey"];
 
         public BlobStorageHelper()
         {

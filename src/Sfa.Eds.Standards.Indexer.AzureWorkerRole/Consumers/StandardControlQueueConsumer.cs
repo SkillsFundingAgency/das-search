@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
     public class StandardControlQueueConsumer
     {
-        private string _connectionString = CloudConfigurationManager.GetSetting("ConnectionString");
+        private string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
         public CloudQueue GetQueue(string connectionstring, string queueName)
         {

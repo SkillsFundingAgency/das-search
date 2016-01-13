@@ -25,7 +25,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri(CloudConfigurationManager.GetSetting("ServerUri"));
+            var node = new Uri(ConfigurationManager.AppSettings["ServerUri"]);
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
@@ -47,7 +47,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private static string GetIndexAlias()
         {
-            return CloudConfigurationManager.GetSetting("StandardIndexesAlias");
+            return ConfigurationManager.AppSettings["StandardIndexesAlias"];
         }
 
         private static string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
