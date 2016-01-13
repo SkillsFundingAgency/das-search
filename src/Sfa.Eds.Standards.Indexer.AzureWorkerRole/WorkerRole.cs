@@ -36,7 +36,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                     //TODO: manage exceptions
                 }
 
-                Thread.Sleep(TimeSpan.FromMinutes(20));
+                Thread.Sleep(TimeSpan.FromMinutes(10));
             }
         }
 
