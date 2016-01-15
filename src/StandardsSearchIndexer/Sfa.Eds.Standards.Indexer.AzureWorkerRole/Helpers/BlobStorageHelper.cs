@@ -19,8 +19,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
     public class BlobStorageHelper
     {
         private readonly CloudStorageAccount _storageAccount;
-        private string _accountName = ConfigurationManager.AppSettings["StorageAccountName"];
-        string _key = ConfigurationManager.AppSettings["StorageAccountKey"];
+        private readonly string _accountName = ConfigurationManager.AppSettings["StorageAccountName"];
+        readonly string _key = ConfigurationManager.AppSettings["StorageAccountKey"];
 
         public BlobStorageHelper()
         {

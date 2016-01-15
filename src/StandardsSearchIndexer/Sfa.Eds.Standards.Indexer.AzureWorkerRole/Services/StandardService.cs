@@ -21,7 +21,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
     {
         private static ElasticClient _client = new ElasticClient();
 
-        public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        public static async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = GetIndexAlias();
 
@@ -58,7 +58,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private static bool CreateIndex(string indexName)
         {
-            var indexExistsResponse = _client.IndexExists(indexName);// IndexExists(i => i.Index(indexName));
+            var indexExistsResponse = _client.IndexExists(indexName);
 
             //If it already exists and is empty, let's delete it.
             if (indexExistsResponse.Exists)
@@ -87,8 +87,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         static public IIndicesOperationResponse CreateDocumentIndex(string indexName)
         {
-            var creation = _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
-            return creation;
+            return _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
         }
 
         static public async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)

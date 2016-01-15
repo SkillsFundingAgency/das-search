@@ -40,7 +40,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                     try
                     {
                         var standardService = new StandardService();
-                        standardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
+                        StandardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
                     }
                     catch (Exception e)
                     {
