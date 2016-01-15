@@ -19,10 +19,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
     public class BlobStorageHelper
     {
         private readonly CloudStorageAccount _storageAccount;
-        //private string _accountName = ConfigurationManager.AppSettings["StorageAccountName"];
-        //string _key = ConfigurationManager.AppSettings["StorageAccountKey"];
-        private string _accountName = "indexerstorage";
-        string _key = "jVvVtb02mUNn/QiFJB71czOBNXqMYxj0UIpq3paGO+u3MiXzqxrbz7rO9RYASYkD/JXiRlWxn/s/o/lFYujkaA==";
+        private string _accountName = ConfigurationManager.AppSettings["StorageAccountName"];
+        string _key = ConfigurationManager.AppSettings["StorageAccountKey"];
 
         public BlobStorageHelper()
         {
@@ -147,8 +145,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
             catch (Exception e)
             {
-                Trace.TraceError(e.Message);
-
                 var error = e.Message;
                 throw;
             }

@@ -14,10 +14,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
     public class StandardControlQueueConsumer
     {
-        //private string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
-        private string _connectionString = "DefaultEndpointsProtocol=https;AccountName=indexerstorage;AccountKey=jVvVtb02mUNn/QiFJB71czOBNXqMYxj0UIpq3paGO+u3MiXzqxrbz7rO9RYASYkD/JXiRlWxn/s/o/lFYujkaA==";
+        private string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
-        public CloudQueue GetQueue(string connectionstring, string queueName)
+        public static CloudQueue GetQueue(string connectionstring, string queueName)
         {
             var storageAccount = CloudStorageAccount.Parse(connectionstring);
             var queueClient = storageAccount.CreateCloudQueueClient();
@@ -30,35 +29,27 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 
         public void CheckMessage(string queueName)
         {
-            Trace.TraceInformation("Entramos al metodo de mensajes");
-
             var queue = GetQueue(_connectionString, queueName);
-            Trace.TraceInformation("Reading the queue");
             var messages = queue.GetMessages(10).OrderByDescending(x => x.InsertionTime);
-            Trace.TraceInformation("Getting messages");
+
             if (messages.Any())
             {
-                Trace.TraceInformation("There is at least one message");
                 var message = messages.FirstOrDefault();
                 if (message != null)
                 {
                     try
                     {
                         var standardService = new StandardService();
-                        Trace.TraceInformation("Going to standard service");
                         standardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
                     }
                     catch (Exception e)
                     {
-                        Trace.TraceError(e.Message);
                         var error = e;
                         throw;
                     }
 
                 }
             }
-
-            Trace.TraceInformation("Delete messages");
 
             foreach (var cloudQueueMessage in messages)
             {

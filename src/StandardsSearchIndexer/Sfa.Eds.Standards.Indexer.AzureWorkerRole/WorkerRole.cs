@@ -25,25 +25,21 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         {
             Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
 
-            Trace.TraceInformation("Empezamos");
-
             _standardControlQueueConsumer = new StandardControlQueueConsumer();
 
             while (true)
             {
                 try
                 {
-                    Trace.TraceInformation("Vamos a chequear mensajes");
-
                     _standardControlQueueConsumer.CheckMessage("indexerqueue");
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.Message);
+                    var error = ex.Message;
                     //TODO: manage exceptions
                 }
 
-                Thread.Sleep(TimeSpan.FromMinutes(20));
+                Thread.Sleep(TimeSpan.FromMinutes(10));
             }
         }
 
