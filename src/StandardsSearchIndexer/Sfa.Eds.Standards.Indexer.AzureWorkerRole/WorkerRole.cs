@@ -83,7 +83,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 
     sealed class SampleEventSourceWriter : EventSource
     {
-        public static SampleEventSourceWriter Log = new SampleEventSourceWriter();
+        public static readonly SampleEventSourceWriter Log = new SampleEventSourceWriter();
         public void SendEnums(MyColor color, MyFlags flags) { if (IsEnabled()) WriteEvent(1, (int)color, (int)flags); }// Cast enums to int for efficient logging.
         public void MessageMethod(string Message) { if (IsEnabled()) WriteEvent(2, Message); }
         public void SetOther(bool flag, int myInt) { if (IsEnabled()) WriteEvent(3, flag, myInt); }

@@ -14,7 +14,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
     public class StandardControlQueueConsumer
     {
-        private string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+        private readonly string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
 
         public static CloudQueue GetQueue(string connectionstring, string queueName)
         {
@@ -55,8 +55,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
             {
                 queue.DeleteMessage(cloudQueueMessage);
             }
-
-            var testDeletion = queue.GetMessages(10);
         }
     }
 }

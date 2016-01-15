@@ -94,7 +94,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 {
                     cloudBlockBlob.UploadFromStream(fileStream);
                 }
-                //await cloudBlockBlob.UploadFromFileAsync(filePath, FileMode.OpenOrCreate);
             }
             catch (Exception e)
             {
@@ -126,17 +125,13 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                     foreach (var blob in blobsList)
                     {
                         var tempBlockBlob = (CloudBlob)blob;
-                        var destBlob = blob as CloudBlob;
 
                         if (tempBlockBlob.Name == fileName)
                         {
                             var copyStatus = tempBlockBlob.CopyState;
-                            if (copyStatus != null)
+                            if (copyStatus != null && (copyStatus.Status != CopyStatus.Pending))
                             {
-                                if (copyStatus.Status != CopyStatus.Pending)
-                                {
-                                    continueLoop = false;
-                                }
+                                continueLoop = false;
                             }
                         }
                     }

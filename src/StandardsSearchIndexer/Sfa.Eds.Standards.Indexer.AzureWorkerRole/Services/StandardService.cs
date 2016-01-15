@@ -21,8 +21,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
     {
         private static ElasticClient _client = new ElasticClient();
 
-        private static int counter = 0;
-
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = GetIndexAlias();
@@ -116,10 +114,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         static public async Task<List<JsonMetadataObject>> GetStandardsFromAzure()
         {
-            var standardsList = new List<JsonMetadataObject>();
-
             BlobStorageHelper bsh = new BlobStorageHelper();
-            standardsList = await bsh.ReadStandardsAsync("standardsjson");
+            var standardsList = await bsh.ReadStandardsAsync("standardsjson");
 
             standardsList = standardsList.OrderBy(s => s.Id).ToList();
             
@@ -133,7 +129,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             {
                 var doc = await CreateDocument(standard);
 
-                var indexResponse = _client.Index(doc, i => i
+                _client.Index(doc, i => i
                     .Index(indexName)
                     .Id(doc.StandardId));
             }
@@ -166,7 +162,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                 Name = standard.PdfFileName
             };
 
-            var doc = new StandardDocument()
+            var doc = new StandardDocument
             {
                 StandardId = standard.Id,
                 Title = standard.Title,

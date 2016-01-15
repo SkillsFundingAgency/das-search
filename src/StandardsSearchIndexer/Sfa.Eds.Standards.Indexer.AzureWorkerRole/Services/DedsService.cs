@@ -10,10 +10,10 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
-    public class DedsService
+    public static class DedsService
     {
-        private static string _searchEndpointConfiguration = ConfigurationManager.AppSettings["SearchEndpointConfigurationName"];
-        private static string datasetName = ConfigurationManager.AppSettings["DatasetName"];
+        private static readonly string _searchEndpointConfiguration = ConfigurationManager.AppSettings["SearchEndpointConfigurationName"];
+        private static readonly string datasetName = ConfigurationManager.AppSettings["DatasetName"];
 
         public static int GetNotationLevelFromLars(int standardId)
         {
@@ -34,7 +34,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             {
                 var dataSetVersionDescriptor = client.GetLatestPublishedDataSetVersion(dataSetName);
 
-                var queryDescriptors = client.DiscoverQueries(new DiscoverQueriesCriteria() { DataSetVersionId = dataSetVersionDescriptor.Id });
+                var queryDescriptors = client.DiscoverQueries(new DiscoverQueriesCriteria { DataSetVersionId = dataSetVersionDescriptor.Id });
                 return queryDescriptors;
             }
         }
