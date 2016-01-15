@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure;
+using Microsoft.WindowsAzure.ServiceRuntime;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Nest;
 using Newtonsoft.Json;
@@ -19,22 +21,31 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
     {
         private static ElasticClient _client = new ElasticClient();
 
+        private static int counter = 0;
+
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
+            Trace.TraceInformation(counter++ + "Getting index alias");
             var indexAlias = GetIndexAlias();
 
+            Trace.TraceInformation(counter++ + "Getting new index name");
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri(ConfigurationManager.AppSettings["ServerUri"]);
+            Trace.TraceInformation(counter++ + "Setting node");
+            //var node = new Uri(ConfigurationManager.AppSettings["ServerUri"]);
+            var node = new Uri("http://104.45.94.2:9200/");
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
+            Trace.TraceInformation(counter++ + "New Elasticsearch client");
             _client = new ElasticClient(connectionSettings);
 
+            Trace.TraceInformation(counter++ + "Create index if doesn't exists");
             var existingPreviousIndex = CreateIndex(newIndexName);
-
+            Trace.TraceInformation(counter++ + "Checking if index exists");
             if (existingPreviousIndex) return;
 
+            Trace.TraceInformation(counter++ + "Indexing pdfs");
             await IndexStandards(newIndexName);
 
             PauseWhileIndexingIsBeingRun();
@@ -47,7 +58,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private static string GetIndexAlias()
         {
-            return ConfigurationManager.AppSettings["StandardIndexesAlias"];
+            //return ConfigurationManager.AppSettings["StandardIndexesAlias"];
+            return "standardIndexAlias";
         }
 
         private static string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
@@ -57,6 +69,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private static bool CreateIndex(string indexName)
         {
+            //indexName = "patatuela";
+            Trace.TraceInformation("Creating index with name: " + indexName);
+
             var indexExistsResponse = _client.IndexExists(indexName);// IndexExists(i => i.Index(indexName));
 
             //If it already exists and is empty, let's delete it.
@@ -92,11 +107,15 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         static public async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)
         {
+            Trace.TraceInformation(counter++ + "EMPIEZA updateo de pdfs");
+
             foreach (var standard in standardList)
             {
                 //await UploadStandardJson(standard);
                 await UploadStandardPdf(standard);
             }
+            Trace.TraceInformation(counter++ + "ACABADO updateo de pdfs");
+
         }
 
         static public async Task UploadStandardJson(JsonMetadataObject standard)
@@ -113,18 +132,24 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         static public async Task<List<JsonMetadataObject>> GetStandardsFromAzure()
         {
+            Trace.TraceInformation(counter++ + "Pillando Standards de Azure");
+
             var standardsList = new List<JsonMetadataObject>();
 
             BlobStorageHelper bsh = new BlobStorageHelper();
             standardsList = await bsh.ReadStandardsAsync("standardsjson");
 
             standardsList = standardsList.OrderBy(s => s.Id).ToList();
+            
+            Trace.TraceInformation(counter++ + "Standards de Azure ya pillados: " + standardsList.Count);
 
             return standardsList;
         }
 
         private static async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
         {
+            Trace.TraceInformation(counter++ + "Indexando documentos");
+
             //index the items
             foreach (var standard in standards)
             {
@@ -134,20 +159,29 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                     .Index(indexName)
                     .Id(doc.StandardId));
             }
+
+            Trace.TraceInformation(counter++ + "Supuestamente indexado");
         }
 
         private static async Task IndexStandards(string newIndexName)
         {
+            Trace.TraceInformation(counter++ + "Vamos a pillar la info de Azure");
+
             var standards = await GetStandardsFromAzure();
+
+            Trace.TraceInformation(counter++ + "Ahora toca updatear los pdfs a azure");
 
             await UploadStandardsContentToAzure(standards);
 
+            Trace.TraceInformation(counter++ + "VAMOS A INDEXAR ALGO");
+            
             try
             {
                 await IndexStandardPdfs(newIndexName, standards);
             }
             catch (Exception e)
             {
+                Trace.TraceError(counter++ + "ERROR!!!! -> " + e.Message);
                 var error = e;
             }
         }

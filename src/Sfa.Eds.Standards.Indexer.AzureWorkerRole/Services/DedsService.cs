@@ -12,12 +12,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class DedsService
     {
-        private static string _searchEndpointConfiguration = ConfigurationManager.AppSettings["SearchEndpointConfigurationName"];
-        private static string datasetName = ConfigurationManager.AppSettings["DatasetName"];
+        //private static string _searchEndpointConfiguration = ConfigurationManager.AppSettings["SearchEndpointConfigurationName"];
+        //private static string datasetName = ConfigurationManager.AppSettings["DatasetName"];
+        private static string _searchEndpointConfiguration = "BasicHttpBinding_IDedsSearchService";
+        private static string datasetName = "LARS";
 
         public static int GetNotationLevelFromLars(int standardId)
         {
-            var queryDescriptorStandard = GetQueryDescriptors(datasetName).Single(qd => qd.Name == ConfigurationManager.AppSettings["StandardDescriptorName"]);
+            var queryDescriptorStandard = GetQueryDescriptors(datasetName).Single(qd => qd.Name == "GetStandardCommonComponent"/*ConfigurationManager.AppSettings["StandardDescriptorName"]*/);
             var result = RunQuery(queryDescriptorStandard, standardId);
 
             return result[1].Results.Length != 0 ? int.Parse(result[1].Results[0][5]) : 0;
