@@ -13,10 +13,10 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(null);
+            HomeController contr_oller = new HomeController(null);
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = contr_oller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

@@ -10,7 +10,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
         public HomeController(ISearchForStandards searchService)
         {
-            _searchService = searchService;
+            this._searchService = searchService;
         }
 
         public ActionResult Index()
