@@ -77,6 +77,14 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -94,7 +102,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
     <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
+    <Compile Include="DEpendencyResolution\IoC.cs" />
+    <Compile Include="DEpendencyResolution\IndexerRegistry.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Models\Attachement.cs" />
     <Compile Include="Models\Document.cs" />
@@ -106,6 +117,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\DedsService.cs" />
+    <Compile Include="Services\IStandardService.cs" />
     <Compile Include="Services\StandardService.cs" />
     <Compile Include="Settings\IStandardIndexSettings.cs" />
     <Compile Include="Settings\StandardIndexSettings.cs" />

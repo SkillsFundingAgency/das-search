@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
@@ -12,13 +13,15 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
-        private StandardControlQueueConsumer _standardControlQueueConsumer;
+        private IStandardControlQueueConsumer _standardControlQueueConsumer;
 
         public override void Run()
         {
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
+            var container = IoC.Initialize();
 
-            _standardControlQueueConsumer = new StandardControlQueueConsumer();
+            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
+            
+            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
 
             while (true)
             {

@@ -11,12 +11,12 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
-    public class StandardService
+    public class StandardService : IStandardService
     {
-        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
-        private static ElasticClient _client = new ElasticClient();
+        private readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private ElasticClient _client;
 
-        public static async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = GetIndexAlias();
 
@@ -44,17 +44,17 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static string GetIndexAlias()
+        private string GetIndexAlias()
         {
             return StandardIndexSettings.StandardIndexesAlias;
         }
 
-        private static string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
+        private string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
         {
             return string.Format("{0}-{1}", indexAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower();
         }
 
-        private static bool CreateIndex(string indexName)
+        private bool CreateIndex(string indexName)
         {
             var indexExistsResponse = _client.IndexExists(indexName);
 
@@ -83,12 +83,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return indexExistsResponse.Exists;
         }
 
-        private static void CreateDocumentIndex(string indexName)
+        private void CreateDocumentIndex(string indexName)
         {
             _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
         }
 
-        private static async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)
+        private async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)
         {
             foreach (var standard in standardList)
             {
@@ -97,19 +97,19 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static async Task UploadStandardJson(JsonMetadataObject standard)
+        private async Task UploadStandardJson(JsonMetadataObject standard)
         {
             var bsh = new BlobStorageHelper();
             await bsh.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"), JsonConvert.SerializeObject(standard));
         }
 
-        private static async Task UploadStandardPdf(JsonMetadataObject standard)
+        private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
             var bsh = new BlobStorageHelper();
             await bsh.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
         }
 
-        private static List<JsonMetadataObject> GetStandardsFromAzure()
+        private List<JsonMetadataObject> GetStandardsFromAzure()
         {
             var bsh = new BlobStorageHelper();
             var standardsList = bsh.ReadStandards("standardsjson");
@@ -119,7 +119,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return standardsList;
         }
 
-        private static async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
+        private async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
         {
             // index the items
             foreach (var standard in standards)
@@ -136,7 +136,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static async Task IndexStandards(string newIndexName)
+        private async Task IndexStandards(string newIndexName)
         {
             var standards = GetStandardsFromAzure();
 
@@ -152,7 +152,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
+        private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
         {
             var bsh = new BlobStorageHelper();
 
@@ -176,20 +176,20 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return doc;
         }
 
-        private static void PauseWhileIndexingIsBeingRun()
+        private void PauseWhileIndexingIsBeingRun()
         {
             var sleepTime = 1000;
             Thread.Sleep(sleepTime);
         }
 
-        private static bool IsIndexCorrectlyCreated()
+        private bool IsIndexCorrectlyCreated()
         {
             var searchResults = _client.Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll()).Documents.ToList();
 
             return searchResults.Any();
         }
 
-        private static void SwapIndexes(DateTime scheduledRefreshDateTime)
+        private void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = GetIndexAlias();
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);

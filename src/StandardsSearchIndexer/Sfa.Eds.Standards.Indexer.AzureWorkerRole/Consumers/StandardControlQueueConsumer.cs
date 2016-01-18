@@ -7,12 +7,18 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
-    public class StandardControlQueueConsumer
+    public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {
+        private readonly IStandardService _standardService;
         private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
         private readonly string _connectionString = StandardIndexSettings.ConnectionString;
 
-        public static CloudQueue GetQueue(string connectionstring, string queueName)
+        public StandardControlQueueConsumer(IStandardService standardService)
+        {
+            _standardService = standardService;
+        }
+
+        public CloudQueue GetQueue(string connectionstring, string queueName)
         {
             var storageAccount = CloudStorageAccount.Parse(connectionstring);
             var queueClient = storageAccount.CreateCloudQueueClient();
@@ -35,8 +41,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                 {
                     try
                     {
-                        var standardService = new StandardService();
-                        StandardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
+                        _standardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
                     }
                     catch (Exception e)
                     {
