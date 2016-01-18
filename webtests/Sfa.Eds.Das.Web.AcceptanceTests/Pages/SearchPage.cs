@@ -47,6 +47,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void clickSearchBox()
         {
            click(searchButton);
+            Thread.Sleep(3000);
         }
 
 
