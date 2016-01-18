@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Web", "Sfa.Eds.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Web.Tests", "Sfa.Eds.Das.Web.Tests\Sfa.Eds.Das.Web.Tests.csproj", "{FA064318-8BC8-4589-AF79-10C2A8572808}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Das.CloudService.Web", "Sfa.Das.CloudService.Web\Sfa.Das.CloudService.Web.ccproj", "{F638FB0D-3A54-48A3-B04B-52E45341891E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FA064318-8BC8-4589-AF79-10C2A8572808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA064318-8BC8-4589-AF79-10C2A8572808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA064318-8BC8-4589-AF79-10C2A8572808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F638FB0D-3A54-48A3-B04B-52E45341891E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F638FB0D-3A54-48A3-B04B-52E45341891E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F638FB0D-3A54-48A3-B04B-52E45341891E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F638FB0D-3A54-48A3-B04B-52E45341891E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
