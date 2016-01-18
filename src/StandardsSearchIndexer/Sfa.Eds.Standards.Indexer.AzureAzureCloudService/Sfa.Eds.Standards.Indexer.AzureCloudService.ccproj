@@ -11,7 +11,7 @@
     <RootNamespace>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</RootNamespace>
     <AssemblyName>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</Name>
+    <Name>Sfa.Eds.Standards.Indexer.AzureCloudService</Name>
     <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

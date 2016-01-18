@@ -107,6 +107,8 @@
     </Compile>
     <Compile Include="Services\DedsService.cs" />
     <Compile Include="Services\StandardService.cs" />
+    <Compile Include="Settings\IStandardIndexSettings.cs" />
+    <Compile Include="Settings\StandardIndexSettings.cs" />
     <Compile Include="WorkerRole.cs" />
   </ItemGroup>
   <ItemGroup>

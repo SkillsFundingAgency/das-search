@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
     public class StandardControlQueueConsumer
     {
-        private readonly string _connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private readonly string _connectionString = StandardIndexSettings.ConnectionString;
 
         public static CloudQueue GetQueue(string connectionstring, string queueName)
         {

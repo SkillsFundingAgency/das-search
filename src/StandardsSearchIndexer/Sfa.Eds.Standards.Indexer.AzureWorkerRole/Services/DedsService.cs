@@ -1,40 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure;
-using Microsoft.WindowsAzure.ServiceRuntime;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public static class DedsService
     {
-        private static readonly string _searchEndpointConfiguration = ConfigurationManager.AppSettings["SearchEndpointConfigurationName"];
-        private static readonly string datasetName = ConfigurationManager.AppSettings["DatasetName"];
+        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+
+        private static readonly string SearchEndpointConfiguration = StandardIndexSettings.SearchEndpointConfigurationName;
+        private static readonly string DatasetName = StandardIndexSettings.DatasetName;
 
         public static int GetNotationLevelFromLars(int standardId)
         {
-            var queryDescriptorStandard = GetQueryDescriptors(datasetName).Single(qd => qd.Name == ConfigurationManager.AppSettings["StandardDescriptorName"]);
+            var queryDescriptorStandard =
+                GetQueryDescriptors(DatasetName).Single(qd => qd.Name == StandardIndexSettings.StandardDescriptorName);
             var result = RunQuery(queryDescriptorStandard, standardId);
 
             return result[1].Results.Length != 0 ? int.Parse(result[1].Results[0][5]) : 0;
         }
 
         /// <summary>
-        /// Query Descriptors contain parameter listings under the FilterDescriptors property
+        ///     Query Descriptors contain parameter listings under the FilterDescriptors property
         /// </summary>
         /// <param name="dataSetName"></param>
         /// <returns></returns>
         private static QueryDescriptor[] GetQueryDescriptors(string dataSetName)
         {
-            using (var client = new DedsSearchServiceClient(_searchEndpointConfiguration))
+            using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
             {
                 var dataSetVersionDescriptor = client.GetLatestPublishedDataSetVersion(dataSetName);
 
-                var queryDescriptors = client.DiscoverQueries(new DiscoverQueriesCriteria { DataSetVersionId = dataSetVersionDescriptor.Id });
+                var queryDescriptors = client.DiscoverQueries(new DiscoverQueriesCriteria {DataSetVersionId = dataSetVersionDescriptor.Id});
                 return queryDescriptors;
             }
         }
@@ -71,9 +70,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private static IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
         {
-            using (var client = new DedsSearchServiceClient(_searchEndpointConfiguration))
+            using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
             {
-                return client.ExecuteQuery((Guid)queryDescriptor.Id, queryExecution);
+                return client.ExecuteQuery((Guid) queryDescriptor.Id, queryExecution);
             }
         }
 
