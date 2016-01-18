@@ -1,10 +1,12 @@
-namespace Sfa.Eds.Das.Web.DependencyResolution {
+namespace Sfa.Eds.Das.Web.DependencyResolution
+{
     using Services;
     using StructureMap.Configuration.DSL;
 
-    public class SearchRegistry : Registry {
-
-        public SearchRegistry() {
+    public class SearchRegistry : Registry
+    {
+        public SearchRegistry()
+        {
             For<ISearchForStandards>().Use<SearchService>();
         }
     }

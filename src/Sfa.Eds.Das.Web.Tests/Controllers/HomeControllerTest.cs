@@ -1,13 +1,15 @@
 ﻿using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using NUnit.Framework;
 using Sfa.Eds.Das.Web.Controllers;
+using Sfa.Eds.Das.Web.Services;
 
 namespace Sfa.Eds.Das.Web.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [Test]
         public void Index()
         {
             // Arrange
@@ -15,6 +17,21 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Search()
+        {
+            var mockSearchService = new Mock<ISearchForStandards>();
+
+            // Arrange
+            HomeController controller = new HomeController(mockSearchService.Object);
+
+            // Act
+            ViewResult result = controller.Search(new Models.SearchCriteria()) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

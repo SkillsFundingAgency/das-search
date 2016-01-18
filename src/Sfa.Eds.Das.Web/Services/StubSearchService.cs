@@ -1,5 +1,5 @@
-﻿using Sfa.Eds.Das.Web.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Sfa.Eds.Das.Web.Models;
 
 namespace Sfa.Eds.Das.Web.Services
 {
@@ -25,11 +25,11 @@ namespace Sfa.Eds.Das.Web.Services
         {
             var resultItems = new List<SearchResultsItem>(5)
             {
-                new SearchResultsItem {Title = "DENTAL_HEALTH_Dental_Technician.ashx.pdf" },
-                new SearchResultsItem {Title = "BUTCHERY_Butcher.ashx.pdf" },
-                new SearchResultsItem {Title = "AUTOMOTIVE_Manufacturing_Engineer_standard.ashx.pdf" },
-                new SearchResultsItem {Title = "ACTUARIAL_-_Actuarial_Technician.pdf" },
-                new SearchResultsItem {Title = "AEROSPACE_-_Aerospace_Engineer.pdf" }
+                new SearchResultsItem { Title = "DENTAL_HEALTH_Dental_Technician.ashx.pdf" },
+                new SearchResultsItem { Title = "BUTCHERY_Butcher.ashx.pdf" },
+                new SearchResultsItem { Title = "AUTOMOTIVE_Manufacturing_Engineer_standard.ashx.pdf" },
+                new SearchResultsItem { Title = "ACTUARIAL_-_Actuarial_Technician.pdf" },
+                new SearchResultsItem { Title = "AEROSPACE_-_Aerospace_Engineer.pdf" }
             };
 
             return resultItems;

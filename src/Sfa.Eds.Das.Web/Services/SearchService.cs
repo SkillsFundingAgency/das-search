@@ -1,7 +1,7 @@
-﻿using Nest;
-using Sfa.Eds.Das.Web.Models;
-using System;
+﻿using System;
 using System.Configuration;
+using Nest;
+using Sfa.Eds.Das.Web.Models;
 
 namespace Sfa.Eds.Das.Web.Services
 {
@@ -14,8 +14,7 @@ namespace Sfa.Eds.Das.Web.Services
 
             var settings = new ConnectionSettings(
                 node,
-                defaultIndex: "elasticsearchmapperattachments-test"
-            );
+                defaultIndex: "elasticsearchmapperattachments-test");
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "mydocument"));
 
@@ -24,8 +23,7 @@ namespace Sfa.Eds.Das.Web.Services
             var results = client.Search<SearchResultsItem>(s => s
             .From(0)
             .Size(1000)
-            .QueryString(keywords)
-            );
+            .QueryString(keywords));
 
             return new SearchResults
             {

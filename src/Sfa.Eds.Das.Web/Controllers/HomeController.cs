@@ -6,7 +6,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 {
     public class HomeController : Controller
     {
-        ISearchForStandards _searchService;
+        private readonly ISearchForStandards _searchService;
 
         public HomeController(ISearchForStandards searchService)
         {
