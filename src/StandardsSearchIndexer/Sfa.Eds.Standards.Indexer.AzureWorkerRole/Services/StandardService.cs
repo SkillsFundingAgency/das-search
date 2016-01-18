@@ -27,7 +27,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri(ConfigurationManager.AppSettings["ServerUri"]);
+            var node = new Uri(ConfigurationManager.AppSettings["SearchHost"]);
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
