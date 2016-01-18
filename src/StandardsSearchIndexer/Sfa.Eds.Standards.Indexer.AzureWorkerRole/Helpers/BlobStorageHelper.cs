@@ -28,7 +28,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             _storageAccount = new CloudStorageAccount(storageCredentials, true);
         }
 
-        public async Task<List<JsonMetadataObject>> ReadStandardsAsync(string containerName)
+        public List<JsonMetadataObject> ReadStandards(string containerName)
         {
             List<JsonMetadataObject> standardList = new List<JsonMetadataObject>();
 

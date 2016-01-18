@@ -47,7 +47,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                         var error = e;
                         throw;
                     }
-
                 }
             }
 

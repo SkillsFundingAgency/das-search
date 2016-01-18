@@ -69,11 +69,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                     return c;
                 });
 
-                if (totalResults.Count == 0)
-                {
+                //if (totalResults.Count == 0)
+                //{
                     _client.DeleteIndex(indexName);
                     indexExistsResponse = _client.IndexExists(indexName);
-                }
+                //}
             }
 
             //create index
@@ -114,7 +114,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         static public async Task<List<JsonMetadataObject>> GetStandardsFromAzure()
         {
             BlobStorageHelper bsh = new BlobStorageHelper();
-            var standardsList = await bsh.ReadStandardsAsync("standardsjson");
+            var standardsList = bsh.ReadStandards("standardsjson");
 
             standardsList = standardsList.OrderBy(s => s.Id).ToList();
             
@@ -128,9 +128,13 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             {
                 var doc = await CreateDocument(standard);
 
+                _client.Index<StandardDocument>(doc);
+
+                /*
                 _client.Index(doc, i => i
                     .Index(indexName)
                     .Id(doc.StandardId));
+                */
             }
         }
 
