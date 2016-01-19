@@ -14,12 +14,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
     public class StandardService : IStandardService
     {
         private readonly IDedsService _dedsService;
+        private readonly IBlobStorageHelper _blobStorageHelper;
         private readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
         private ElasticClient _client;
 
-        public StandardService(IDedsService dedsService)
+        public StandardService(IDedsService dedsService, IBlobStorageHelper blobStorageHelper)
         {
             _dedsService = dedsService;
+            _blobStorageHelper = blobStorageHelper;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
@@ -105,20 +107,17 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private async Task UploadStandardJson(JsonMetadataObject standard)
         {
-            var bsh = new BlobStorageHelper();
-            await bsh.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"), JsonConvert.SerializeObject(standard));
+            await _blobStorageHelper.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"), JsonConvert.SerializeObject(standard));
         }
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            var bsh = new BlobStorageHelper();
-            await bsh.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
+            await _blobStorageHelper.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
         }
 
         private List<JsonMetadataObject> GetStandardsFromAzure()
         {
-            var bsh = new BlobStorageHelper();
-            var standardsList = bsh.ReadStandards("standardsjson");
+            var standardsList = _blobStorageHelper.ReadStandards("standardsjson");
 
             standardsList = standardsList.OrderBy(s => s.Id).ToList();
 
@@ -160,11 +159,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
         {
-            var bsh = new BlobStorageHelper();
-
             var attachment = new Attachment
             {
-                Content = Convert.ToBase64String(await bsh.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
+                Content = Convert.ToBase64String(await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
                 ContentType = "application/pdf",
                 Name = standard.PdfFileName
             };

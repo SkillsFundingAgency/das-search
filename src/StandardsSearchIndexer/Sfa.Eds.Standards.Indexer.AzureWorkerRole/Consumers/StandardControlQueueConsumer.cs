@@ -10,11 +10,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {
         private readonly IStandardService _standardService;
-        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
-        private readonly string _connectionString = StandardIndexSettings.ConnectionString;
+        private readonly IStandardIndexSettings _standardIndexSettings;
 
-        public StandardControlQueueConsumer(IStandardService standardService)
+        public StandardControlQueueConsumer(IStandardService standardService, IStandardIndexSettings standardIndexSettings)
         {
+            _standardIndexSettings = standardIndexSettings;
             _standardService = standardService;
         }
 
@@ -31,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 
         public void CheckMessage(string queueName)
         {
-            var queue = GetQueue(_connectionString, queueName);
+            var queue = GetQueue(_standardIndexSettings.ConnectionString, queueName);
             var messages = queue.GetMessages(10).OrderByDescending(x => x.InsertionTime);
 
             if (messages.Any())

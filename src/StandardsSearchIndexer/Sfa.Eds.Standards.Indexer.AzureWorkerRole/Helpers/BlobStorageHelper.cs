@@ -13,7 +13,7 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
-    public class BlobStorageHelper
+    public class BlobStorageHelper : IBlobStorageHelper
     {
         private static IStandardIndexSettings _standardIndexSettings;
 
