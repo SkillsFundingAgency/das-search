@@ -17,18 +17,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
             _standardIndexSettings = standardIndexSettings;
             _standardService = standardService;
         }
-
-        public CloudQueue GetQueue(string queueName)
-        {
-            var storageAccount = CloudStorageAccount.Parse(_standardIndexSettings.ConnectionString);
-            var queueClient = storageAccount.CreateCloudQueueClient();
-
-            var queue = queueClient.GetQueueReference(queueName);
-
-            queue.CreateIfNotExists();
-            return queue;
-        }
-
         public void CheckMessage(string queueName)
         {
             var queue = GetQueue(queueName);
@@ -55,6 +43,17 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
             {
                 queue.DeleteMessage(cloudQueueMessage);
             }
+        }
+
+        private CloudQueue GetQueue(string queueName)
+        {
+            var storageAccount = CloudStorageAccount.Parse(_standardIndexSettings.ConnectionString);
+            var queueClient = storageAccount.CreateCloudQueueClient();
+
+            var queue = queueClient.GetQueueReference(queueName);
+
+            queue.CreateIfNotExists();
+            return queue;
         }
     }
 }

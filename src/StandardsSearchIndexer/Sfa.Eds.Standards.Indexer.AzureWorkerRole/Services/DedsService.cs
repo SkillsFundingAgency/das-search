@@ -8,15 +8,17 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class DedsService : IDedsService
     {
-        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private static IStandardIndexSettings _standardIndexSettings;
 
-        private readonly string SearchEndpointConfiguration = StandardIndexSettings.SearchEndpointConfigurationName;
-        private readonly string DatasetName = StandardIndexSettings.DatasetName;
+        public DedsService(IStandardIndexSettings standardIndexSettings)
+        {
+            _standardIndexSettings = standardIndexSettings;
+        }
 
         public int GetNotationLevelFromLars(int standardId)
         {
             var queryDescriptorStandard =
-                GetQueryDescriptors(DatasetName).Single(qd => qd.Name == StandardIndexSettings.StandardDescriptorName);
+                GetQueryDescriptors(_standardIndexSettings.DatasetName).Single(qd => qd.Name == _standardIndexSettings.StandardDescriptorName);
             var result = RunQuery(queryDescriptorStandard, standardId);
 
             return result[1].Results.Length != 0 ? int.Parse(result[1].Results[0][5]) : 0;
@@ -29,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         /// <returns></returns>
         private QueryDescriptor[] GetQueryDescriptors(string dataSetName)
         {
-            using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
+            using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
             {
                 var dataSetVersionDescriptor = client.GetLatestPublishedDataSetVersion(dataSetName);
 
@@ -70,7 +72,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
         {
-            using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
+            using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
             {
                 return client.ExecuteQuery((Guid) queryDescriptor.Id, queryExecution);
             }
