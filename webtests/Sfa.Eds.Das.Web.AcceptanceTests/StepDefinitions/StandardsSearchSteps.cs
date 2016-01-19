@@ -15,13 +15,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
 
     [Binding]
+    
     public class StandardsSearchSteps
     {
 
 
 
         SearchPage srchPage;
-
+        
 
         [Given(@"I am on Search landing page")]
         public void GivenIAmOnSearchLandingPage()
@@ -42,9 +43,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [When(@"I am on Search landing page")]
         public void WhenIAmOnSearchLandingPage()
         {
-            // srchPage = new SearchPage();
-            // srchPage.StartSelenium();
-            // srchPage.launchLandingPage();
+            srchPage = new SearchPage();
+
+            srchPage.launchLandingPage();
         }
 
 
@@ -86,8 +87,16 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         {
             srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
             srchPage.verifyresultsPages();
+            srchPage.VerifyresultCount();
 
 
+        }
+
+
+        [Then(@"I should see message ""(.*)""")]
+        public void ThenIShouldSeeMessage(string p0)
+        {
+            srchPage.VerifyresultCount_invalidSearch();
         }
 
 

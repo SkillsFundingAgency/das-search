@@ -22,6 +22,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
        // static CustomRemoteDriver driver;
         //load from app.config
         static string host = ConfigurationManager.AppSettings["host"];
+         static string baseurl = ConfigurationManager.AppSettings["baseUrl"];
         static string browser = ConfigurationManager.AppSettings["browser"];
         static string platform = ConfigurationManager.AppSettings["platform"];
         static string browserVersion = ConfigurationManager.AppSettings["browserVersion"];
@@ -32,13 +33,27 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
 
-        [BeforeScenario("web")]
+
+        [BeforeFeature]
+        public static void BeforeFeatureRun()
+        {
+            if (host == "localhost")
+            {
+                Console.Write("#####################  Feature Run- Started  ######################");
+                Console.Write(FeatureContext.Current.FeatureInfo.Title);
+                localDriver =new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
+                FeatureContext.Current["driver"] = localDriver;
+            }
+
+        }
+
+        [BeforeScenario]
+        
         public static void BeforeWebScenario()
         {
             if (host == "localhost")
             {
-                localDriver = new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
-                ScenarioContext.Current["driver"] = localDriver;
+               // to do 
             }
             else if (host == "saucelabs")
             {
@@ -56,8 +71,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
               //  ScenarioContext.Current["driver"] = driver;
             }
         }
-
-        [AfterScenario("web")]
+        
+        [AfterScenario]
         public static void AfterWebScenario()
         {
             if (host == "localhost")
@@ -66,9 +81,26 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 if (ScenarioContext.Current.TestError != null)
                 {
                     IWebDriver driver = null;
-                    TakeScreenshot(driver);
+                    //TakeScreenshot(driver); // this is throwing some warning , need to fix.
                 }
-                localDriver.Quit();
+               // localDriver.Quit(); //no need to kill driver after each scenario
+            }
+
+
+        }
+
+        [AfterFeature()]
+        public static void AfterFeatureRun()
+        {
+
+            if (host == "localhost")
+            {
+
+               
+               // Console.Write(FeatureContext.Current.FeatureInfo);
+                Console.Write("###################### Feature Run-Ended #######################");
+
+                localDriver.Quit(); // kill driver after feature run.
             }
         }
 

@@ -17,18 +17,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public BasePage()
         {
-
-            
-            driver = (IWebDriver)ScenarioContext.Current["driver"];
+         
+            driver = (IWebDriver)FeatureContext.Current["driver"];
             baseUrl = ConfigurationManager.AppSettings["baseUrl"];
                      
         }
-
-
-       
-
-
-        
 
         
         public void type(string inputText, By locator)
@@ -54,15 +47,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void Launch(string url, string pageTitle)
         {
-           // Console.WriteLine("Test" + baseUrl);
-        
-
-        
-
          driver.Navigate().GoToUrl(baseUrl);
             verifyPage(pageTitle);
         }
-
        
         public void click(By locator)
         {
@@ -74,8 +61,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             return find(locator).Text;
         }
-
-
 
         public bool isDisplayed(By locator)
         {

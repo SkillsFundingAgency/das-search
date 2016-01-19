@@ -23,7 +23,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.XPath("//input[@type='submit']");
         public String title = "Google";
         By searchresult = By.XPath("html/body/div[1]/div[2]/div[2]/div[3]/h3/strong");
-        By searchResultcount = By.XPath("html/body/div[1]/div[2]/div[2]/div[1]/strong");
+        By searchResultcount = By.XPath("html/body/div[1]/div[2]/div[2]/div[1]");
 
         public void launchLandingPage()
         {
@@ -66,12 +66,22 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
            //Assert.True(getText(searchresult).Contains(keyword));
             Assert.True(isDisplayed(searchresult));
         }
-       
+
+
         public void VerifyresultCount()
         {
 
-            Assert.True(isDisplayed(searchResultcount));
+            Assert.True(getText(searchResultcount).Contains("Total results found:"));
         }
+
+
+        public void VerifyresultCount_invalidSearch()
+        {
+
+            Assert.True(getText(searchResultcount).Contains("Total results found: 0"));
+        }
+
+
 
         public static string AssemblyDirectory
         {

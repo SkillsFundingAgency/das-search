@@ -4,14 +4,14 @@
 	I want to be able to search from available Standards
 
 
-@Smoke
+
 Scenario: Verify landing page
 When I am on Search landing page
 Then I should be able to see home page with title as "Home Page - Employer Apprenticeship Search"
 
 
 
-@web
+
 Scenario Outline: Search by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
@@ -30,12 +30,17 @@ Examples:
 | car mechanic           |
 | Manager                |
 
-@web
-Scenario: Verify invalid search
+
+Scenario Outline: Verify invalid search
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 When I click on search button 
-Then I should see message "Total Results found:0"
+Then I should see message "Total results found: 0"
+Examples: 
+| JOBROLE     |
+| kdjfdkfjdfk |
+| 1232322     |
+
 
 @web
 Scenario Outline: Validate result count
