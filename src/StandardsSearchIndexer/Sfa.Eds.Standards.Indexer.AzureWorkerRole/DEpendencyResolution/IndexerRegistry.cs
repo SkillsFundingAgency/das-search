@@ -4,7 +4,7 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 using StructureMap;
 
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution
+namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
 {
     public class IndexerRegistry : Registry
     {

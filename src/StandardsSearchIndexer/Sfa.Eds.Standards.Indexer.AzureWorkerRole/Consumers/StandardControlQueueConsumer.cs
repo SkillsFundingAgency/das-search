@@ -18,9 +18,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
             _standardService = standardService;
         }
 
-        public CloudQueue GetQueue(string connectionstring, string queueName)
+        public CloudQueue GetQueue(string queueName)
         {
-            var storageAccount = CloudStorageAccount.Parse(connectionstring);
+            var storageAccount = CloudStorageAccount.Parse(_standardIndexSettings.ConnectionString);
             var queueClient = storageAccount.CreateCloudQueueClient();
 
             var queue = queueClient.GetQueueReference(queueName);
@@ -31,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 
         public void CheckMessage(string queueName)
         {
-            var queue = GetQueue(_standardIndexSettings.ConnectionString, queueName);
+            var queue = GetQueue(queueName);
             var messages = queue.GetMessages(10).OrderByDescending(x => x.InsertionTime);
 
             if (messages.Any())
@@ -41,7 +41,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                 {
                     try
                     {
-                        _standardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
+                        _standardService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                     }
                     catch (Exception e)
                     {
