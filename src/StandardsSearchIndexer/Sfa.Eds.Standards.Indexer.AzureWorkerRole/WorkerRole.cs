@@ -11,8 +11,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
     public class WorkerRole : RoleEntryPoint
     {
-        private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
 
         public override void Run()
@@ -57,8 +57,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         {
             Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is stopping");
 
-            cancellationTokenSource.Cancel();
-            runCompleteEvent.WaitOne();
+            _cancellationTokenSource.Cancel();
+            _runCompleteEvent.WaitOne();
 
             base.OnStop();
 
