@@ -24,5 +24,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         public string StorageAccountKey => ConfigurationManager.AppSettings["StorageAccountKey"];
 
         public string ConnectionString => ConfigurationManager.AppSettings["ConnectionString"];
+        public string QueueName => ConfigurationManager.AppSettings["QueueName"];
     }
 }

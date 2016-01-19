@@ -15,13 +15,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
     {
         private readonly IDedsService _dedsService;
         private readonly IBlobStorageHelper _blobStorageHelper;
-        private readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private readonly IStandardIndexSettings _standardIndexSettings;
         private ElasticClient _client;
 
-        public StandardService(IDedsService dedsService, IBlobStorageHelper blobStorageHelper)
+        public StandardService(IDedsService dedsService, IBlobStorageHelper blobStorageHelper, IStandardIndexSettings standardIndexSettings)
         {
             _dedsService = dedsService;
             _blobStorageHelper = blobStorageHelper;
+            _standardIndexSettings = standardIndexSettings;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
@@ -30,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri(StandardIndexSettings.SearchHost);
+            var node = new Uri(_standardIndexSettings.SearchHost);
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
@@ -54,7 +55,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private string GetIndexAlias()
         {
-            return StandardIndexSettings.StandardIndexesAlias;
+            return _standardIndexSettings.StandardIndexesAlias;
         }
 
         private string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)

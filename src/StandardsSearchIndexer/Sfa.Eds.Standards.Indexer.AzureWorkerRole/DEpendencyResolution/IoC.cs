@@ -15,7 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution
+namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
 {
     using StructureMap;
 

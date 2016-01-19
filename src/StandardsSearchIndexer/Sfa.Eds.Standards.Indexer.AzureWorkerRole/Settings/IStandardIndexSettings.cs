@@ -17,5 +17,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         string StorageAccountName { get; }
         string StorageAccountKey { get; }
         string ConnectionString { get; }
+        string QueueName { get; }
     }
 }
