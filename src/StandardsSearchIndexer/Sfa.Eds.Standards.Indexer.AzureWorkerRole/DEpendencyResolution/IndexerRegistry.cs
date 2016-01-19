@@ -10,6 +10,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution
         {
             For<IStandardService>().Use<StandardService>();
             For<IStandardControlQueueConsumer>().Use<StandardControlQueueConsumer>();
+            For<IDedsService>().Use<Services.DedsService>();
         }
     }
 }

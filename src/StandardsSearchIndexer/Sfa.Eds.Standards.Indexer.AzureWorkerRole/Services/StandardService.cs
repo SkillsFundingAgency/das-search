@@ -13,8 +13,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class StandardService : IStandardService
     {
+        private readonly IDedsService _dedsService;
         private readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
         private ElasticClient _client;
+
+        public StandardService(IDedsService dedsService)
+        {
+            _dedsService = dedsService;
+        }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
@@ -167,7 +173,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             {
                 StandardId = standard.Id,
                 Title = standard.Title,
-                NotionalEndLevel = DedsService.GetNotationLevelFromLars(standard.Id),
+                NotionalEndLevel = _dedsService.GetNotationLevelFromLars(standard.Id),
                 PdfFileName = standard.PdfFileName,
                 PdfUrl = standard.Pdf,
                 File = attachment

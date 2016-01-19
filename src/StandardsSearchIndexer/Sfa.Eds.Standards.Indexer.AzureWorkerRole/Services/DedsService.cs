@@ -6,14 +6,14 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
-    public static class DedsService
+    public class DedsService : IDedsService
     {
         private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
 
-        private static readonly string SearchEndpointConfiguration = StandardIndexSettings.SearchEndpointConfigurationName;
-        private static readonly string DatasetName = StandardIndexSettings.DatasetName;
+        private readonly string SearchEndpointConfiguration = StandardIndexSettings.SearchEndpointConfigurationName;
+        private readonly string DatasetName = StandardIndexSettings.DatasetName;
 
-        public static int GetNotationLevelFromLars(int standardId)
+        public int GetNotationLevelFromLars(int standardId)
         {
             var queryDescriptorStandard =
                 GetQueryDescriptors(DatasetName).Single(qd => qd.Name == StandardIndexSettings.StandardDescriptorName);
@@ -27,7 +27,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         /// </summary>
         /// <param name="dataSetName"></param>
         /// <returns></returns>
-        private static QueryDescriptor[] GetQueryDescriptors(string dataSetName)
+        private QueryDescriptor[] GetQueryDescriptors(string dataSetName)
         {
             using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
             {
@@ -38,12 +38,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static Dictionary<string, string> QueryFilterValuesFromConsole(QueryDescriptor queryDescriptor, int larsCode)
+        private Dictionary<string, string> QueryFilterValuesFromConsole(QueryDescriptor queryDescriptor, int larsCode)
         {
             return queryDescriptor.FilterDescriptors.ToDictionary(filter => filter.FieldName, filter => larsCode.ToString());
         }
 
-        private static QueryExecution GetQueryExecution(Dictionary<string, string> queryFilterValues, int? page, int? itemsPerPage)
+        private QueryExecution GetQueryExecution(Dictionary<string, string> queryFilterValues, int? page, int? itemsPerPage)
         {
             var filterValues = new List<FilterValue>();
 
@@ -68,7 +68,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return queryExecution;
         }
 
-        private static IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
+        private IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
         {
             using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
             {
@@ -76,7 +76,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
+        private IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
         {
             var queryFilterValues = QueryFilterValuesFromConsole(qds, larsCode);
 
