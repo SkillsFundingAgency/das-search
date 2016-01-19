@@ -22,7 +22,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
 
             Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
-            
+
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
 

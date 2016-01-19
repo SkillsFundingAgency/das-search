@@ -9,14 +9,15 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {
-        private readonly IStandardService _standardService;
         private readonly IStandardIndexSettings _standardIndexSettings;
+        private readonly IStandardService _standardService;
 
         public StandardControlQueueConsumer(IStandardService standardService, IStandardIndexSettings standardIndexSettings)
         {
             _standardIndexSettings = standardIndexSettings;
             _standardService = standardService;
         }
+
         public void CheckMessage(string queueName)
         {
             var queue = GetQueue(queueName);

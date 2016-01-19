@@ -13,8 +13,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class StandardService : IStandardService
     {
-        private readonly IDedsService _dedsService;
         private readonly IBlobStorageHelper _blobStorageHelper;
+        private readonly IDedsService _dedsService;
         private readonly IStandardIndexSettings _standardIndexSettings;
         private ElasticClient _client;
 
@@ -108,7 +108,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private async Task UploadStandardJson(JsonMetadataObject standard)
         {
-            await _blobStorageHelper.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"), JsonConvert.SerializeObject(standard));
+            await
+                _blobStorageHelper.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"),
+                    JsonConvert.SerializeObject(standard));
         }
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
@@ -162,7 +164,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         {
             var attachment = new Attachment
             {
-                Content = Convert.ToBase64String(await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
+                Content =
+                    Convert.ToBase64String(
+                        await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
                 ContentType = "application/pdf",
                 Name = standard.PdfFileName
             };
