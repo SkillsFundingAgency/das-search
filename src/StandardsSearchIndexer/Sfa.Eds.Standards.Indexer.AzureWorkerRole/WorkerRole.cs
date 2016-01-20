@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
 
             Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
+            Trace.TraceInformation("PATATA");
 
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
@@ -30,6 +32,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             {
                 try
                 {
+                    Trace.TraceInformation("LET'S GO TO CHECK MESSAGES into " + _standardIndexSettings.QueueName);
+
                     _standardControlQueueConsumer.CheckMessage(_standardIndexSettings.QueueName);
                 }
                 catch (Exception ex)
@@ -77,5 +81,27 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 await Task.Delay(1000);
             }
         }
+    }
+
+    sealed class SampleEventSourceWriter : EventSource
+    {
+        public static SampleEventSourceWriter Log = new SampleEventSourceWriter();
+        public void SendEnums(MyColor color, MyFlags flags) { if (IsEnabled()) WriteEvent(1, (int)color, (int)flags); }// Cast enums to int for efficient logging.
+        public void MessageMethod(string Message) { if (IsEnabled()) WriteEvent(2, Message); }
+        public void SetOther(bool flag, int myInt) { if (IsEnabled()) WriteEvent(3, flag, myInt); }
+        public void HighFreq(int value) { if (IsEnabled()) WriteEvent(4, value); }
+    }
+    enum MyColor
+    {
+        Red,
+        Blue,
+        Green
+    }
+    [Flags]
+    enum MyFlags
+    {
+        Flag1 = 1,
+        Flag2 = 2,
+        Flag3 = 4
     }
 }

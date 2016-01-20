@@ -7,7 +7,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
     public interface IBlobStorageHelper
     {
-        List<JsonMetadataObject> ReadStandards(string containerName);
+        Task<List<JsonMetadataObject>> ReadStandardsAsync(string containerName);
         Task<byte[]> ReadStandardPdfAsync(string containerName, string fileName);
         Task UploadStandardAsync(string containerName, string fileName, string serializedStandard);
         Task UploadPdfFromUrl(string containerName, string fileName, string url);

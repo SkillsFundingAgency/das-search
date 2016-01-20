@@ -26,7 +26,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             _storageAccount = new CloudStorageAccount(storageCredentials, true);
         }
 
-        public List<JsonMetadataObject> ReadStandards(string containerName)
+        public async Task<List<JsonMetadataObject>> ReadStandardsAsync(string containerName)
         {
             var standardList = new List<JsonMetadataObject>();
 
@@ -34,23 +34,33 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
             // Retrieve reference to a previously created container.
             var container = cloudBlobClient.GetContainerReference(containerName);
+            await container.CreateIfNotExistsAsync();
 
-            string text;
-            foreach (var item in container.ListBlobs(null, false))
+            try
             {
-                if (item is CloudBlockBlob)
+                foreach (var item in container.ListBlobs(null, false))
                 {
-                    var blob = (CloudBlockBlob) item;
-
-                    using (var memoryStream = new MemoryStream())
+                    if (item is CloudBlockBlob)
                     {
-                        blob.DownloadToStream(memoryStream);
-                        text = Encoding.UTF8.GetString(memoryStream.ToArray());
-                    }
+                        var blob = (CloudBlockBlob)item;
 
-                    standardList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
+                        string text;
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            blob.DownloadToStream(memoryStream);
+                            text = Encoding.UTF8.GetString(memoryStream.ToArray());
+                        }
+
+                        standardList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                var error = e.Message;
+                throw;
+            }
+            
 
             return standardList;
         }
@@ -61,6 +71,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
             // Retrieve reference to a previously created container.
             var container = cloudBlobClient.GetContainerReference(containerName);
+            await container.CreateIfNotExistsAsync();
 
             // Retrieve reference to a blob named "myblob.txt"
             var blockBlob = container.GetBlockBlobReference(fileName);

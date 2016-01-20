@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,11 +33,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
+            
             var node = new Uri(_standardIndexSettings.SearchHost);
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
             _client = new ElasticClient(connectionSettings);
+            
+            
 
             var existingPreviousIndex = CreateIndex(newIndexName);
             if (existingPreviousIndex)
@@ -76,11 +81,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                     return c;
                 });
 
-                if (totalResults.Count == 0)
-                {
+                //if (totalResults.Count == 0)
+                //{
                     _client.DeleteIndex(indexName);
                     indexExistsResponse = _client.IndexExists(indexName);
-                }
+                //}
             }
 
             // create index
@@ -101,7 +106,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         {
             foreach (var standard in standardList)
             {
-                // await UploadStandardJson(standard);
+                await UploadStandardJson(standard);
                 await UploadStandardPdf(standard);
             }
         }
@@ -118,9 +123,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             await _blobStorageHelper.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
         }
 
-        private List<JsonMetadataObject> GetStandardsFromAzure()
+        private async Task<List<JsonMetadataObject>> GetStandardsFromAzureAsync()
         {
-            var standardsList = _blobStorageHelper.ReadStandards("standardsjson");
+            var standardsList = await _blobStorageHelper.ReadStandardsAsync("standardsjson");
 
             standardsList = standardsList.OrderBy(s => s.Id).ToList();
 
@@ -143,10 +148,10 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                 */
             }
         }
-
+        
         private async Task IndexStandards(string newIndexName)
         {
-            var standards = GetStandardsFromAzure();
+            var standards = await GetStandardsFromAzureAsync();
 
             await UploadStandardsContentToAzure(standards);
 
