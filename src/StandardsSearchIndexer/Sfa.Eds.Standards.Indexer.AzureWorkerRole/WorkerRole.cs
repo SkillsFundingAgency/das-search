@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,19 +8,22 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
+    using System.Diagnostics;
+    using System.IO;
+
+    using log4net;
+
     public class WorkerRole : RoleEntryPoint
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
+        //private ILog _log;
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public override void Run()
         {
-            var container = IoC.Initialize();
-
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
-            
-            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+            _log.Info("Starting...");
 
             while (true)
             {
@@ -40,29 +42,37 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             }
         }
 
+        private void Initialise()
+        {
+            var container = IoC.Initialize();
+            //_log = container.GetInstance<ILog>();
+            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+        }
+
         public override bool OnStart()
         {
             // Set the maximum number of concurrent connections
             ServicePointManager.DefaultConnectionLimit = 12;
+            Initialise();
 
             // For information on handling configuration changes see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
             var result = base.OnStart();
 
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole has been started");
+            _log.Info("Started...");
 
             return result;
         }
 
         public override void OnStop()
         {
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is stopping");
+            _log.Info("Stopping...");
 
             cancellationTokenSource.Cancel();
             runCompleteEvent.WaitOne();
 
             base.OnStop();
 
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole has stopped");
+            _log.Info("Stopped...");
         }
 
         private async Task RunAsync(CancellationToken cancellationToken)
@@ -70,7 +80,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             // TODO: Replace the following with your own logic.
             while (!cancellationToken.IsCancellationRequested)
             {
-                Trace.TraceInformation("Working");
+                _log.Info("Working");
                 await Task.Delay(1000);
             }
         }
