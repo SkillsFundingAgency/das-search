@@ -60,7 +60,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 var error = e.Message;
                 throw;
             }
-            
 
             return standardList;
         }

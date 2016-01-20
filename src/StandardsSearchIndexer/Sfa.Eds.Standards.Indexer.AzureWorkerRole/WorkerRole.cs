@@ -21,7 +21,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
-        //private ILog _log;
+        // private ILog _log;
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IStandardIndexSettings _standardIndexSettings;
 
@@ -58,7 +58,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private void Initialise()
         {
             var container = IoC.Initialize();
-            //_log = container.GetInstance<ILog>();
+            
+            // _log = container.GetInstance<ILog>();
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
         }
@@ -98,27 +99,5 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 await Task.Delay(1000);
             }
         }
-    }
-
-    sealed class SampleEventSourceWriter : EventSource
-    {
-        public static SampleEventSourceWriter Log = new SampleEventSourceWriter();
-        public void SendEnums(MyColor color, MyFlags flags) { if (IsEnabled()) WriteEvent(1, (int)color, (int)flags); }// Cast enums to int for efficient logging.
-        public void MessageMethod(string Message) { if (IsEnabled()) WriteEvent(2, Message); }
-        public void SetOther(bool flag, int myInt) { if (IsEnabled()) WriteEvent(3, flag, myInt); }
-        public void HighFreq(int value) { if (IsEnabled()) WriteEvent(4, value); }
-    }
-    enum MyColor
-    {
-        Red,
-        Blue,
-        Green
-    }
-    [Flags]
-    enum MyFlags
-    {
-        Flag1 = 1,
-        Flag2 = 2,
-        Flag3 = 4
     }
 }

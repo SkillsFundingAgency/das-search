@@ -33,14 +33,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            
             var node = new Uri(_standardIndexSettings.SearchHost);
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
             _client = new ElasticClient(connectionSettings);
-            
-            
 
             var existingPreviousIndex = CreateIndex(newIndexName);
             if (existingPreviousIndex)
@@ -106,7 +103,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         {
             foreach (var standard in standardList)
             {
-                await UploadStandardJson(standard);
+                // await UploadStandardJson(standard);
                 await UploadStandardPdf(standard);
             }
         }
@@ -137,15 +134,21 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             // index the items
             foreach (var standard in standards)
             {
-                var doc = await CreateDocument(standard);
+                try
+                {
+                    var doc = await CreateDocument(standard);
 
-                _client.Index(doc);
+                    // _client.Index(doc);
 
-                /*
-                _client.Index(doc, i => i
-                    .Index(indexName)
-                    .Id(doc.StandardId));
-                */
+                    _client.Index(doc, i => i
+                        .Index(indexName)
+                        .Id(doc.StandardId));
+                }
+                catch (Exception e)
+                {
+                    var error = e.Message;
+                    throw;
+                }
             }
         }
         
@@ -167,26 +170,34 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
         {
-            var attachment = new Attachment
+            try
             {
-                Content =
+                var attachment = new Attachment
+                {
+                    Content =
                     Convert.ToBase64String(
                         await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
-                ContentType = "application/pdf",
-                Name = standard.PdfFileName
-            };
+                    ContentType = "application/pdf",
+                    Name = standard.PdfFileName
+                };
 
-            var doc = new StandardDocument
+                var doc = new StandardDocument
+                {
+                    StandardId = standard.Id,
+                    Title = standard.Title,
+                    NotionalEndLevel = _dedsService.GetNotationLevelFromLars(standard.Id),
+                    PdfFileName = standard.PdfFileName,
+                    PdfUrl = standard.Pdf,
+                    File = attachment
+                };
+
+                return doc;
+            }
+            catch (Exception e)
             {
-                StandardId = standard.Id,
-                Title = standard.Title,
-                NotionalEndLevel = _dedsService.GetNotationLevelFromLars(standard.Id),
-                PdfFileName = standard.PdfFileName,
-                PdfUrl = standard.Pdf,
-                File = attachment
-            };
-
-            return doc;
+                var error = e.Message;
+                throw;
+            }
         }
 
         private void PauseWhileIndexingIsBeingRun()
