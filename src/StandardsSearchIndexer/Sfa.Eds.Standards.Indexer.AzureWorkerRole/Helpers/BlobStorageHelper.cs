@@ -13,17 +13,16 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
-    public class BlobStorageHelper
+    public class BlobStorageHelper : IBlobStorageHelper
     {
-        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private static IStandardIndexSettings _standardIndexSettings;
 
-        private readonly string _accountName = StandardIndexSettings.StorageAccountName;
-        private readonly string _key = StandardIndexSettings.StorageAccountKey;
         private readonly CloudStorageAccount _storageAccount;
 
-        public BlobStorageHelper()
+        public BlobStorageHelper(IStandardIndexSettings standardIndexSettings)
         {
-            var storageCredentials = new StorageCredentials(_accountName, _key);
+            _standardIndexSettings = standardIndexSettings;
+            var storageCredentials = new StorageCredentials(_standardIndexSettings.StorageAccountName, _standardIndexSettings.StorageAccountKey);
             _storageAccount = new CloudStorageAccount(storageCredentials, true);
         }
 

@@ -13,8 +13,17 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class StandardService : IStandardService
     {
-        private readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private readonly IBlobStorageHelper _blobStorageHelper;
+        private readonly IDedsService _dedsService;
+        private readonly IStandardIndexSettings _standardIndexSettings;
         private ElasticClient _client;
+
+        public StandardService(IDedsService dedsService, IBlobStorageHelper blobStorageHelper, IStandardIndexSettings standardIndexSettings)
+        {
+            _dedsService = dedsService;
+            _blobStorageHelper = blobStorageHelper;
+            _standardIndexSettings = standardIndexSettings;
+        }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
@@ -22,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri(StandardIndexSettings.SearchHost);
+            var node = new Uri(_standardIndexSettings.SearchHost);
 
             var connectionSettings = new ConnectionSettings(node, newIndexName);
 
@@ -46,7 +55,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private string GetIndexAlias()
         {
-            return StandardIndexSettings.StandardIndexesAlias;
+            return _standardIndexSettings.StandardIndexesAlias;
         }
 
         private string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
@@ -99,20 +108,19 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private async Task UploadStandardJson(JsonMetadataObject standard)
         {
-            var bsh = new BlobStorageHelper();
-            await bsh.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"), JsonConvert.SerializeObject(standard));
+            await
+                _blobStorageHelper.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"),
+                    JsonConvert.SerializeObject(standard));
         }
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            var bsh = new BlobStorageHelper();
-            await bsh.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
+            await _blobStorageHelper.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
         }
 
         private List<JsonMetadataObject> GetStandardsFromAzure()
         {
-            var bsh = new BlobStorageHelper();
-            var standardsList = bsh.ReadStandards("standardsjson");
+            var standardsList = _blobStorageHelper.ReadStandards("standardsjson");
 
             standardsList = standardsList.OrderBy(s => s.Id).ToList();
 
@@ -154,11 +162,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
         {
-            var bsh = new BlobStorageHelper();
-
             var attachment = new Attachment
             {
-                Content = Convert.ToBase64String(await bsh.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
+                Content =
+                    Convert.ToBase64String(
+                        await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
                 ContentType = "application/pdf",
                 Name = standard.PdfFileName
             };
@@ -167,7 +175,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             {
                 StandardId = standard.Id,
                 Title = standard.Title,
-                NotionalEndLevel = DedsService.GetNotationLevelFromLars(standard.Id),
+                NotionalEndLevel = _dedsService.GetNotationLevelFromLars(standard.Id),
                 PdfFileName = standard.PdfFileName,
                 PdfUrl = standard.Pdf,
                 File = attachment

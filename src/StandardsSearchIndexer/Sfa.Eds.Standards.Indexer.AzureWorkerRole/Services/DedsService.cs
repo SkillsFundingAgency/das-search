@@ -6,17 +6,19 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
-    public static class DedsService
+    public class DedsService : IDedsService
     {
-        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
+        private static IStandardIndexSettings _standardIndexSettings;
 
-        private static readonly string SearchEndpointConfiguration = StandardIndexSettings.SearchEndpointConfigurationName;
-        private static readonly string DatasetName = StandardIndexSettings.DatasetName;
+        public DedsService(IStandardIndexSettings standardIndexSettings)
+        {
+            _standardIndexSettings = standardIndexSettings;
+        }
 
-        public static int GetNotationLevelFromLars(int standardId)
+        public int GetNotationLevelFromLars(int standardId)
         {
             var queryDescriptorStandard =
-                GetQueryDescriptors(DatasetName).Single(qd => qd.Name == StandardIndexSettings.StandardDescriptorName);
+                GetQueryDescriptors(_standardIndexSettings.DatasetName).Single(qd => qd.Name == _standardIndexSettings.StandardDescriptorName);
             var result = RunQuery(queryDescriptorStandard, standardId);
 
             return result[1].Results.Length != 0 ? int.Parse(result[1].Results[0][5]) : 0;
@@ -27,9 +29,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         /// </summary>
         /// <param name="dataSetName"></param>
         /// <returns></returns>
-        private static QueryDescriptor[] GetQueryDescriptors(string dataSetName)
+        private QueryDescriptor[] GetQueryDescriptors(string dataSetName)
         {
-            using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
+            using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
             {
                 var dataSetVersionDescriptor = client.GetLatestPublishedDataSetVersion(dataSetName);
 
@@ -38,12 +40,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             }
         }
 
-        private static Dictionary<string, string> QueryFilterValuesFromConsole(QueryDescriptor queryDescriptor, int larsCode)
+        private Dictionary<string, string> QueryFilterValuesFromConsole(QueryDescriptor queryDescriptor, int larsCode)
         {
             return queryDescriptor.FilterDescriptors.ToDictionary(filter => filter.FieldName, filter => larsCode.ToString());
         }
 
-        private static QueryExecution GetQueryExecution(Dictionary<string, string> queryFilterValues, int? page, int? itemsPerPage)
+        private QueryExecution GetQueryExecution(Dictionary<string, string> queryFilterValues, int? page, int? itemsPerPage)
         {
             var filterValues = new List<FilterValue>();
 
@@ -68,15 +70,15 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return queryExecution;
         }
 
-        private static IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
+        private IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
         {
-            using (var client = new DedsSearchServiceClient(SearchEndpointConfiguration))
+            using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
             {
                 return client.ExecuteQuery((Guid) queryDescriptor.Id, queryExecution);
             }
         }
 
-        private static IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
+        private IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
         {
             var queryFilterValues = QueryFilterValuesFromConsole(qds, larsCode);
 

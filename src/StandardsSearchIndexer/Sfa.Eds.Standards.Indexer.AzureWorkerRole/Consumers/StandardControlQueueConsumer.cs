@@ -9,29 +9,18 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {
+        private readonly IStandardIndexSettings _standardIndexSettings;
         private readonly IStandardService _standardService;
-        private static readonly StandardIndexSettings StandardIndexSettings = new StandardIndexSettings();
-        private readonly string _connectionString = StandardIndexSettings.ConnectionString;
 
-        public StandardControlQueueConsumer(IStandardService standardService)
+        public StandardControlQueueConsumer(IStandardService standardService, IStandardIndexSettings standardIndexSettings)
         {
+            _standardIndexSettings = standardIndexSettings;
             _standardService = standardService;
-        }
-
-        public CloudQueue GetQueue(string connectionstring, string queueName)
-        {
-            var storageAccount = CloudStorageAccount.Parse(connectionstring);
-            var queueClient = storageAccount.CreateCloudQueueClient();
-
-            var queue = queueClient.GetQueueReference(queueName);
-
-            queue.CreateIfNotExists();
-            return queue;
         }
 
         public void CheckMessage(string queueName)
         {
-            var queue = GetQueue(_connectionString, queueName);
+            var queue = GetQueue(queueName);
             var messages = queue.GetMessages(10).OrderByDescending(x => x.InsertionTime);
 
             if (messages.Any())
@@ -41,7 +30,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                 {
                     try
                     {
-                        _standardService.CreateScheduledIndex(message.InsertionTime.Value.DateTime);
+                        _standardService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                     }
                     catch (Exception e)
                     {
@@ -55,6 +44,17 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
             {
                 queue.DeleteMessage(cloudQueueMessage);
             }
+        }
+
+        private CloudQueue GetQueue(string queueName)
+        {
+            var storageAccount = CloudStorageAccount.Parse(_standardIndexSettings.ConnectionString);
+            var queueClient = storageAccount.CreateCloudQueueClient();
+
+            var queue = queueClient.GetQueueReference(queueName);
+
+            queue.CreateIfNotExists();
+            return queue;
         }
     }
 }

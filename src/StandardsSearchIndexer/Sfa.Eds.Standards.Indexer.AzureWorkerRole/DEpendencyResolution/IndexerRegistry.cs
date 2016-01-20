@@ -1,8 +1,10 @@
 ﻿using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 using StructureMap;
 
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution
+namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
 {
     using log4net;
 
@@ -12,6 +14,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution
         {
             For<IStandardService>().Use<StandardService>();
             For<IStandardControlQueueConsumer>().Use<StandardControlQueueConsumer>();
+            For<IDedsService>().Use<Services.DedsService>();
+            For<IStandardIndexSettings>().Use<StandardIndexSettings>();
+            For<IBlobStorageHelper>().Use<BlobStorageHelper>();
             For<ILog>().AlwaysUnique().Use(x => x.ParentType == null
                     ? LogManager.GetLogger(x.RootType)
                     : LogManager.GetLogger(x.ParentType));

@@ -4,8 +4,6 @@
     <ConfigurationSettings>
     </ConfigurationSettings>
     <Imports>
-      <Import moduleName="RemoteAccess" />
-      <Import moduleName="RemoteForwarder" />
     </Imports>
   </WorkerRole>
 </ServiceDefinition>

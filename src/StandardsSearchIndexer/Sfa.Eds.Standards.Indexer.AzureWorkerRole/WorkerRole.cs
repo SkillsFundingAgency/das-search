@@ -4,7 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DEpendencyResolution;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
@@ -15,11 +16,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 
     public class WorkerRole : RoleEntryPoint
     {
-        private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
         //private ILog _log;
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private IStandardIndexSettings _standardIndexSettings;
 
         public override void Run()
         {
@@ -29,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             {
                 try
                 {
-                    _standardControlQueueConsumer.CheckMessage("indexerqueue");
+                    _standardControlQueueConsumer.CheckMessage(_standardIndexSettings.QueueName);
                 }
                 catch (Exception ex)
                 {
@@ -47,6 +49,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
             //_log = container.GetInstance<ILog>();
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+            _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
         }
 
         public override bool OnStart()
@@ -67,8 +70,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         {
             _log.Info("Stopping...");
 
-            cancellationTokenSource.Cancel();
-            runCompleteEvent.WaitOne();
+            _cancellationTokenSource.Cancel();
+            _runCompleteEvent.WaitOne();
 
             base.OnStop();
 

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
+﻿namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
 {
     public interface IStandardIndexSettings
     {
@@ -17,5 +10,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         string StorageAccountName { get; }
         string StorageAccountKey { get; }
         string ConnectionString { get; }
+        string QueueName { get; }
     }
 }
