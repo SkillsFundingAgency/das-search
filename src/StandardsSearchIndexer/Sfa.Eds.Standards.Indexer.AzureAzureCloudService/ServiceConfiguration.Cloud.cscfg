@@ -4,7 +4,5 @@
     <Instances count="1" />
     <ConfigurationSettings>
     </ConfigurationSettings>
-    <Certificates>
-    </Certificates>
   </Role>
 </ServiceConfiguration>

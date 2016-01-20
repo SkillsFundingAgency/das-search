@@ -11,11 +11,18 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
+    using System.Diagnostics;
+    using System.IO;
+
+    using log4net;
+
     public class WorkerRole : RoleEntryPoint
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
+        //private ILog _log;
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IStandardIndexSettings _standardIndexSettings;
 
         public override void Run()
@@ -23,10 +30,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
 
             Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is running");
-            Trace.TraceInformation("PATATA");
 
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
+
+            _log.Info("Starting...");
 
             while (true)
             {
@@ -47,29 +55,38 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             }
         }
 
+        private void Initialise()
+        {
+            var container = IoC.Initialize();
+            //_log = container.GetInstance<ILog>();
+            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+            _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
+        }
+
         public override bool OnStart()
         {
             // Set the maximum number of concurrent connections
             ServicePointManager.DefaultConnectionLimit = 12;
+            Initialise();
 
             // For information on handling configuration changes see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
             var result = base.OnStart();
 
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole has been started");
+            _log.Info("Started...");
 
             return result;
         }
 
         public override void OnStop()
         {
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole is stopping");
+            _log.Info("Stopping...");
 
             _cancellationTokenSource.Cancel();
             _runCompleteEvent.WaitOne();
 
             base.OnStop();
 
-            Trace.TraceInformation("Sfa.Eds.Standards.Indexer.AzureWorkerRole has stopped");
+            _log.Info("Stopped...");
         }
 
         private async Task RunAsync(CancellationToken cancellationToken)
@@ -77,7 +94,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             // TODO: Replace the following with your own logic.
             while (!cancellationToken.IsCancellationRequested)
             {
-                Trace.TraceInformation("Working");
+                _log.Info("Working");
                 await Task.Delay(1000);
             }
         }
