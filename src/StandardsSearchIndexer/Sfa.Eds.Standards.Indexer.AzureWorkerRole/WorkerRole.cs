@@ -18,11 +18,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 
     public class WorkerRole : RoleEntryPoint
     {
+        // private ILog _log;
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
-        // private ILog _log;
-        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IStandardIndexSettings _standardIndexSettings;
 
         public override void Run()
@@ -40,8 +40,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             {
                 try
                 {
-                    Trace.TraceInformation("LET'S GO TO CHECK MESSAGES into " + _standardIndexSettings.QueueName);
-
                     _standardControlQueueConsumer.CheckMessage(_standardIndexSettings.QueueName);
                 }
                 catch (Exception ex)
@@ -54,16 +52,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 Thread.Sleep(TimeSpan.FromMinutes(10));
             }
         }
-
-        private void Initialise()
-        {
-            var container = IoC.Initialize();
-            
-            // _log = container.GetInstance<ILog>();
-            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
-            _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
-        }
-
+        
         public override bool OnStart()
         {
             // Set the maximum number of concurrent connections
@@ -98,6 +87,15 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 _log.Info("Working");
                 await Task.Delay(1000);
             }
+        }
+
+        private void Initialise()
+        {
+            var container = IoC.Initialize();
+
+            // _log = container.GetInstance<ILog>();
+            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+            _standardIndexSettings = container.GetInstance<IStandardIndexSettings>();
         }
     }
 }

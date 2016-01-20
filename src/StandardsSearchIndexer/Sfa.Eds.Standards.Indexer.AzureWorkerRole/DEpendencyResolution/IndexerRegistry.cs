@@ -1,4 +1,6 @@
-﻿using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
+﻿using Nest;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
@@ -17,6 +19,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
             For<IDedsService>().Use<Services.DedsService>();
             For<IStandardIndexSettings>().Use<StandardIndexSettings>();
             For<IBlobStorageHelper>().Use<BlobStorageHelper>();
+            For<IElasticClient>().Use<ElasticClient>();
+            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILog>().AlwaysUnique().Use(x => x.ParentType == null
                     ? LogManager.GetLogger(x.RootType)
                     : LogManager.GetLogger(x.ParentType));

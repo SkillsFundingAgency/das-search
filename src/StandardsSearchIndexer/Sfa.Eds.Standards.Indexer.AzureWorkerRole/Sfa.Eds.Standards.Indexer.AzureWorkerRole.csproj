@@ -110,6 +110,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ElasticsearchClientFactory.cs" />
+    <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
     <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />

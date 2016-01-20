@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Nest;
 using Newtonsoft.Json;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
@@ -18,13 +19,19 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         private readonly IBlobStorageHelper _blobStorageHelper;
         private readonly IDedsService _dedsService;
         private readonly IStandardIndexSettings _standardIndexSettings;
-        private ElasticClient _client;
+        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private IElasticClient _client;
 
-        public StandardService(IDedsService dedsService, IBlobStorageHelper blobStorageHelper, IStandardIndexSettings standardIndexSettings)
+        public StandardService(
+            IDedsService dedsService, 
+            IBlobStorageHelper blobStorageHelper, 
+            IStandardIndexSettings standardIndexSettings,
+            IElasticsearchClientFactory elasticsearchClientFactory)
         {
             _dedsService = dedsService;
             _blobStorageHelper = blobStorageHelper;
             _standardIndexSettings = standardIndexSettings;
+            _elasticsearchClientFactory = elasticsearchClientFactory;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
@@ -33,11 +40,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
 
-            var node = new Uri(_standardIndexSettings.SearchHost);
-
-            var connectionSettings = new ConnectionSettings(node, newIndexName);
-
-            _client = new ElasticClient(connectionSettings);
+            _client = _elasticsearchClientFactory.GetElasticClient();
 
             var existingPreviousIndex = CreateIndex(newIndexName);
             if (existingPreviousIndex)
@@ -78,11 +81,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                     return c;
                 });
 
-                //if (totalResults.Count == 0)
-                //{
+                if (totalResults.Count == 0)
+                {
                     _client.DeleteIndex(indexName);
                     indexExistsResponse = _client.IndexExists(indexName);
-                //}
+                }
             }
 
             // create index
@@ -111,7 +114,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         private async Task UploadStandardJson(JsonMetadataObject standard)
         {
             await
-                _blobStorageHelper.UploadStandardAsync("standardsjson", string.Format(standard.Id.ToString(), ".txt"),
+                _blobStorageHelper.UploadStandardAsync("standardsjson", 
+                    string.Format(standard.Id.ToString(), ".txt"),
                     JsonConvert.SerializeObject(standard));
         }
 
@@ -139,10 +143,10 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                     var doc = await CreateDocument(standard);
 
                     // _client.Index(doc);
-
-                    _client.Index(doc, i => i
-                        .Index(indexName)
-                        .Id(doc.StandardId));
+                    _client
+                        .Index(doc, i => i
+                            .Index(indexName)
+                            .Id(doc.StandardId));
                 }
                 catch (Exception e)
                 {
