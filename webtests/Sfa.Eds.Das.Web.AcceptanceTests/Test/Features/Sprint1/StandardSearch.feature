@@ -1,18 +1,18 @@
-﻿Feature: Standards Search
+﻿Feature: Search for a Standard by keyword
 	In order to find an apprenticeship as per my needs
 	As an employer 
 	I want to be able to search from available Standards
 
 
-
+@smoke
 Scenario: Verify landing page
 When I am on Search landing page
 Then I should be able to see home page with title as "Home Page - Employer Apprenticeship Search"
 
 
 
-
-Scenario Outline: Search by keyword
+@regression
+Scenario Outline: Search Standard by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	When I click on search button
@@ -30,7 +30,7 @@ Examples:
 | car mechanic           |
 | Manager                |
 
-
+@regression
 Scenario Outline: Verify invalid search
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
@@ -42,7 +42,7 @@ Examples:
 | 1232322     |
 
 
-@web
+@regression
 Scenario Outline: Validate result count
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
@@ -55,7 +55,7 @@ Examples:
 | software engineer    | 
 
 
-@web
+@ignore
 Scenario Outline: Search result Page to have best match 
 Given I am on Search landing page
 When I enter keyword '<keyword>'

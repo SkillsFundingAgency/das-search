@@ -13,7 +13,7 @@ Scenario Outline:Search By title1
 	| title                  |
 	| Actuarial Technician   |
 
-
+@regression
 Scenario Outline:Search By title
 	Given I am on Search landing page
 	And I enter keyword '<title>' in search box
@@ -32,6 +32,7 @@ Scenario Outline:Search By title
 	| Dental nurse           |
 	| Electrician            |
 
+	@ignore
 Scenario: Standards searched to display level informaiton
 Given I am on Search landing page
 And I enter keyword '{p0}' in search box

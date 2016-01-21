@@ -12,7 +12,12 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
+/*
+Purpose of this class is to 
+-Define actions to perform before and after feature/Scenario
+-Define local and remote test execution, sauce lab settings and local host browser setting are defined
 
+*/
 namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 {
     [Binding]
@@ -40,7 +45,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             if (host == "localhost")
             {
                 Console.Write("#####################  Feature Run- Started  ######################");
-                Console.Write(FeatureContext.Current.FeatureInfo.Title);
+                Console.Write("Feature : " + FeatureContext.Current.FeatureInfo.Title);
+                //localDriver = new FirefoxDriver();
+                //localDriver.Manage().Window.Maximize();
+
                 localDriver =new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
                 FeatureContext.Current["driver"] = localDriver;
             }
@@ -53,10 +61,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         {
             if (host == "localhost")
             {
-               // to do 
+               Console.Write("Test Scenario : " +  ScenarioContext.Current.ScenarioInfo.Title); 
             }
             else if (host == "saucelabs")
             {
+
+                Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.SetCapability(CapabilityType.BrowserName, browser);
                 capabilities.SetCapability(CapabilityType.Platform, platform);
@@ -81,7 +91,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 if (ScenarioContext.Current.TestError != null)
                 {
                     IWebDriver driver = null;
-                    //TakeScreenshot(driver); // this is throwing some warning , need to fix.
+                    TakeScreenshot(driver); // this is throwing some warning , need to fix.
                 }
                // localDriver.Quit(); //no need to kill driver after each scenario
             }
@@ -96,9 +106,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             if (host == "localhost")
             {
 
-               
-               // Console.Write(FeatureContext.Current.FeatureInfo);
-                Console.Write("###################### Feature Run-Ended #######################");
+              Console.Write("###################### Feature Run-Ended #######################");
 
                 localDriver.Quit(); // kill driver after feature run.
             }
