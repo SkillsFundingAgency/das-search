@@ -21,7 +21,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                 GetQueryDescriptors(_standardIndexSettings.DatasetName).Single(qd => qd.Name == _standardIndexSettings.StandardDescriptorName);
             var result = RunQuery(queryDescriptorStandard, standardId);
 
-            return result[1].Results.Length != 0 ? int.Parse(result[1].Results[0][5]) : 0;
+            return GetNotationLevelFromResponse(result[1]);
+        }
+
+        private int GetNotationLevelFromResponse(QueryResults result)
+        {
+            return result.Results.Length != 0 ? int.Parse(result.Results[0][5]) : 0;
         }
 
         /// <summary>

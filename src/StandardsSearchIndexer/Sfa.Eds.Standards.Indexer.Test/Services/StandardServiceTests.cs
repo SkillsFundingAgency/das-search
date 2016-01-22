@@ -28,7 +28,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Services
         }
 
         [Test]
-        public void should_not_index_pdfs_if_that_index_already_exists()
+        public void ShouldNotIndexPdfsIfThatIndexAlreadyExists()
         {
             // Arrange
             _mockHelper
@@ -44,7 +44,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Services
         }
 
         [Test]
-        public void should_index_pdfs_if_that_index_does_not_exists_previously()
+        public void ShouldIndexIdfsIfThatIndexDoesNotExistsPreviously()
         {
             // Arrange
             _mockHelper
@@ -62,7 +62,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Services
         }
 
         [Test]
-        public void should_not_swap_idexes_if_new_one_has_not_been_created_properly()
+        public void ShouldNotSwapIdexesIfNewOneHasNotBeenCreatedProperly()
         {
             // Arrange
             _mockHelper
@@ -83,7 +83,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Services
         }
 
         [Test]
-        public void should_swap_idexes_if_new_one_has_been_created_properly()
+        public void ShouldSwapIdexesIfNewOneHasBeenCreatedProperly()
         {
             // Arrange
             _mockHelper

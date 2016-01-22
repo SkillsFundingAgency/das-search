@@ -31,7 +31,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Consumers
         }
 
         [Test]
-        public void shouldnt_create_an_index_if_there_arent_any_messages()
+        public void ShouldntCreateAnIndexIfThereArentAnyMessages()
         {
             //Arrange
             _mockCloudQueueService
@@ -50,7 +50,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Consumers
         }
 
         [Test]
-        public void should_create_an_index_if_there_are_messages()
+        public void ShouldCreateAnIndexIfThereAreMessages()
         {
             // Arrange
             _mockCloudQueueService
