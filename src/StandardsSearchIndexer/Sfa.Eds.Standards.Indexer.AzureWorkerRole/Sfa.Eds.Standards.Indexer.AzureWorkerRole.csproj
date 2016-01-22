@@ -124,6 +124,7 @@
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
     <Compile Include="Helpers\IIndexerScheduler.cs" />
     <Compile Include="Helpers\IndexerScheduler.cs" />
+    <Compile Include="Helpers\IStandardHelper.cs" />
     <Compile Include="Models\Attachement.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\JsonMetadataObject.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Services\DedsService.cs" />
     <Compile Include="Services\IDedsService.cs" />
     <Compile Include="Services\IStandardService.cs" />
+    <Compile Include="Helpers\StandardHelper.cs" />
     <Compile Include="Services\StandardService.cs" />
     <Compile Include="Settings\IStandardIndexSettings.cs" />
     <Compile Include="Settings\StandardIndexSettings.cs" />

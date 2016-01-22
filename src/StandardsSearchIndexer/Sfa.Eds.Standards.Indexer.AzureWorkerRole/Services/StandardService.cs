@@ -17,29 +17,26 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class StandardService : IStandardService
     {
-        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IStandardIndexSettings _standardIndexSettings;
         private readonly IStandardHelper _standardHelper;
 
         public StandardService(
-            IElasticsearchClientFactory elasticsearchClientFactory,
             IStandardIndexSettings standardIndexSettings,
             IStandardHelper standardHelper)
         {
-            _elasticsearchClientFactory = elasticsearchClientFactory;
             _standardIndexSettings = standardIndexSettings;
             _standardHelper = standardHelper;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            _log.Info("Creating new index...");
+            Log.Info("Creating new index...");
 
             var existingPreviousIndex = _standardHelper.CreateIndex(scheduledRefreshDateTime);
             if (existingPreviousIndex)
             {
-                _log.Info("Index already exists, exiting...");
+                Log.Info("Index already exists, exiting...");
                 return;
             }
 
@@ -49,7 +46,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
             if (_standardHelper.IsIndexCorrectlyCreated())
             {
-                _log.Info("Swapping indexes...");
+                Log.Info("Swapping indexes...");
 
                 _standardHelper.SwapIndexes(scheduledRefreshDateTime);
             }
@@ -57,7 +54,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         
         private void PauseWhileIndexingIsBeingRun()
         {
-            Thread.Sleep(int.Parse(_standardIndexSettings.PauseTime));
+            var time = _standardIndexSettings.PauseTime;
+            Thread.Sleep(int.Parse(time));
         }
     }
 }
