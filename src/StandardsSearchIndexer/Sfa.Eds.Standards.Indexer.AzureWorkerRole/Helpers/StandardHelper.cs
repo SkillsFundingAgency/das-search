@@ -15,32 +15,22 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
     {
         private readonly IDedsService _dedsService;
         private readonly IBlobStorageHelper _blobStorageHelper;
-        private readonly IStandardIndexSettings _standardIndexSettings;
+        private readonly IStandardIndexSettings _settings;
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private IElasticClient _client;
         
         public StandardHelper(
             IDedsService dedsService,
             IBlobStorageHelper blobStorageHelper,
-            IStandardIndexSettings standardIndexSettings,
+            IStandardIndexSettings settings,
             IElasticsearchClientFactory elasticsearchClientFactory)
         {
             _dedsService = dedsService;
             _blobStorageHelper = blobStorageHelper;
-            _standardIndexSettings = standardIndexSettings;
+            _settings = settings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
 
             _client = _elasticsearchClientFactory.GetElasticClient();
-        }
-
-        public string GetIndexAlias()
-        {
-            return _standardIndexSettings.StandardIndexesAlias;
-        }
-
-        public string GetIndexNameAndDateExtension(DateTime dateTime)
-        {
-            return string.Format("{0}-{1}", GetIndexAlias(), dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower();
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
@@ -67,26 +57,22 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             // create index
             if (!indexExistsResponse.Exists)
             {
-                CreateDocumentIndex(indexName);
+                _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
             }
 
             return indexExistsResponse.Exists;
-        }
-
-        public void CreateDocumentIndex(string indexName)
-        {
-            _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
         }
 
         public async Task IndexStandards(DateTime scheduledRefreshDateTime)
         {
             var standards = await GetStandardsFromAzureAsync();
 
-            await UploadStandardsContentToAzure(standards);
+            await standards.ForEachAsync(UploadStandardPdf);
 
             try
             {
-                await IndexStandardPdfs(GetIndexNameAndDateExtension(scheduledRefreshDateTime), standards);
+                var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+                await IndexStandardPdfs(indexNameAndDateExtension, standards);
             }
             catch (Exception e)
             {
@@ -94,38 +80,48 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
         }
 
-        public async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)
+        public bool IsIndexCorrectlyCreated()
         {
-            foreach (var standard in standardList)
+            var searchResults = _client.Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll()).Documents.ToList();
+
+            return searchResults.Any();
+        }
+
+        public void SwapIndexes(DateTime scheduledRefreshDateTime)
+        {
+            var indexAlias = _settings.StandardIndexesAlias;
+            var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+
+            var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
+            var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
+
+            foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                // await UploadStandardJson(standard);
-                await UploadStandardPdf(standard);
+                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
             }
+
+            aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
+            _client.Alias(aliasRequest);
         }
 
-        public async Task UploadStandardJson(JsonMetadataObject standard)
+        private string GetIndexNameAndDateExtension(DateTime dateTime)
         {
-            await
-                _blobStorageHelper.UploadStandardAsync("standardsjson",
-                    string.Format(standard.Id.ToString(), ".txt"),
-                    JsonConvert.SerializeObject(standard));
+            return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower();
         }
 
-        public async Task UploadStandardPdf(JsonMetadataObject standard)
+        private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            await _blobStorageHelper.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
+            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
         }
 
-        public async Task<List<JsonMetadataObject>> GetStandardsFromAzureAsync()
+        private async Task<List<JsonMetadataObject>> GetStandardsFromAzureAsync()
         {
-            var standardsList = await _blobStorageHelper.ReadStandardsAsync("standardsjson");
+            var standardsList = await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer);
 
-            standardsList = standardsList.OrderBy(s => s.Id).ToList();
-
-            return standardsList;
+            return standardsList.OrderBy(s => s.Id).ToList();
         }
 
-        public async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
+        private async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
         {
             // index the items
             foreach (var standard in standards)
@@ -148,7 +144,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
         }
 
-        public async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
+        private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
         {
             try
             {
@@ -156,8 +152,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 {
                     Content =
                     Convert.ToBase64String(
-                        await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
-                    ContentType = "application/pdf",
+                        await _blobStorageHelper.ReadStandardPdfAsync(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".txt"))),
+                    ContentType = _settings.StandardContentType,
                     Name = standard.PdfFileName
                 };
 
@@ -180,28 +176,5 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
         }
 
-        public bool IsIndexCorrectlyCreated()
-        {
-            var searchResults = _client.Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll()).Documents.ToList();
-
-            return searchResults.Any();
-        }
-
-        public void SwapIndexes(DateTime scheduledRefreshDateTime)
-        {
-            var indexAlias = GetIndexAlias();
-            var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-
-            var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
-            var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
-
-            foreach (var existingIndexOnAlias in existingIndexesOnAlias)
-            {
-                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
-            }
-
-            aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
-            _client.Alias(aliasRequest);
-        }
     }
 }

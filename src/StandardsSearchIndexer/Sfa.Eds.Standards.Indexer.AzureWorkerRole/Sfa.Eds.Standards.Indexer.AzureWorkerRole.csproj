@@ -125,6 +125,7 @@
     <Compile Include="Helpers\IIndexerScheduler.cs" />
     <Compile Include="Helpers\IndexerScheduler.cs" />
     <Compile Include="Helpers\IStandardHelper.cs" />
+    <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Attachement.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\JsonMetadataObject.cs" />

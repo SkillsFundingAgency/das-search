@@ -16,7 +16,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
         public void should_something()
         {
             // Arrange
-            StandardHelper sh = new StandardHelper();
+            // StandardHelper sh = new StandardHelper();
             // Act
 
             // Assert

@@ -23,5 +23,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         public string QueueName => ConfigurationManager.AppSettings["QueueName"];
 
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
+
+        public string StandardJsonContainer => ConfigurationManager.AppSettings["Standard.JsonContainer"];
+
+        public string StandardPdfContainer => ConfigurationManager.AppSettings["Standard.PdfContainer"];
+
+        public string StandardContentType => ConfigurationManager.AppSettings["Standard.ContentType"];
+
     }
 }

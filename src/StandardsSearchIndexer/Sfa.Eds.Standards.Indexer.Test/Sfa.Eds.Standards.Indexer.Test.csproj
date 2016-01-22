@@ -88,6 +88,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Consumers\StandardControlQueueConsumerTests.cs" />
+    <Compile Include="Helpers\StandardHelperTests.cs" />
     <Compile Include="IndexerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\StandardServiceTests.cs" />

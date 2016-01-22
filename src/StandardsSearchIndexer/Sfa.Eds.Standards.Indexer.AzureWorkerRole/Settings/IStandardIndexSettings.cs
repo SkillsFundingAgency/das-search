@@ -12,5 +12,9 @@
         string ConnectionString { get; }
         string QueueName { get; }
         string PauseTime { get; }
+        string StandardJsonContainer { get; }
+        string StandardPdfContainer { get; }
+        string StandardContentType { get; }
+        
     }
 }
