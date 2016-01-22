@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Moq;
+using Nest;
 using NUnit.Framework;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
+using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
@@ -17,7 +20,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
     {
         Mock<IDedsService> _mockDeds;
         Mock<IBlobStorageHelper> _mockBlob;
-        Mock<IElasticsearchClientFactory> _mockClient;
+        Mock<IElasticsearchClientFactory> _mockClientFactory;
         IStandardIndexSettings _mockSettings;
 
         [SetUp]
@@ -25,18 +28,22 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
         {
             _mockDeds = new Mock<IDedsService>();
             _mockBlob = new Mock<IBlobStorageHelper>();
-            _mockClient = new Mock<IElasticsearchClientFactory>();
+            _mockClientFactory = new Mock<IElasticsearchClientFactory>();
             _mockSettings = Mock.Of<IStandardIndexSettings>();
         }
         [Test]
+        [Ignore]
         public void should_something()
         {
             // Arrange
-            StandardHelper sut = new StandardHelper(_mockDeds.Object, _mockBlob.Object, _mockSettings, _mockClient.Object);
+            var mockClient = new Mock<IElasticClient>();
+            StandardHelper sut = new StandardHelper(_mockDeds.Object, _mockBlob.Object, _mockSettings, _mockClientFactory.Object);
+            _mockClientFactory.Setup(x => x.GetElasticClient()).Returns(mockClient.Object);
+            mockClient.Setup(x => x.IndexExists(It.IsAny<string>())).Returns(Mock.Of<IExistsResponse>(x => x.Exists));
+            mockClient.Setup(x => x.Count<StandardDocument>(It.IsAny<ICountRequest>())).Returns(Mock.Of<ICountResponse>(x => x.Count == 7));
 
-            //sut.CreateIndex(It.IsAny<DateTime>());
             // Act
-
+            sut.CreateIndex(It.IsAny<DateTime>());
             // Assert
 
         }
