@@ -34,7 +34,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
             // Arrange
             StandardHelper sut = new StandardHelper(_mockDeds.Object, _mockBlob.Object, _mockSettings, _mockClient.Object);
 
-            sut.CreateIndex(It.IsAny<DateTime>());
+            //sut.CreateIndex(It.IsAny<DateTime>());
             // Act
 
             // Assert
