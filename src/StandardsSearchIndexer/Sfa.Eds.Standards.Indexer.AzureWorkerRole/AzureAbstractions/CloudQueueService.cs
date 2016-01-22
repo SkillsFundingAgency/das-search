@@ -10,13 +10,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.AzureAbstractions
 {
     public class CloudQueueService : ICloudQueueService
     {
-        private readonly ICloudQueueWrapper _cloudQueueWrapper;
-
-        public CloudQueueService(ICloudQueueWrapper cloudQueueWrapper)
-        {
-            _cloudQueueWrapper = cloudQueueWrapper;
-        }
-
         public ICloudQueueWrapper GetQueueReference(string connectionString, string queueName)
         {
             var storageAccount = CloudStorageAccount.Parse(connectionString);
