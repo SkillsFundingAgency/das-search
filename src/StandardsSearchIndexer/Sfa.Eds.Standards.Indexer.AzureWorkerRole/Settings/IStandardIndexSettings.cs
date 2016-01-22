@@ -11,5 +11,6 @@
         string StorageAccountKey { get; }
         string ConnectionString { get; }
         string QueueName { get; }
+        string PauseTime { get; }
     }
 }

@@ -21,5 +21,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         public string ConnectionString => ConfigurationManager.AppSettings["ConnectionString"];
 
         public string QueueName => ConfigurationManager.AppSettings["QueueName"];
+
+        public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
     }
 }

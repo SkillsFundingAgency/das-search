@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using log4net;
 using Nest;
 using Newtonsoft.Json;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
@@ -16,222 +17,47 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class StandardService : IStandardService
     {
-        private readonly IBlobStorageHelper _blobStorageHelper;
-        private readonly IDedsService _dedsService;
-        private readonly IStandardIndexSettings _standardIndexSettings;
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
-        private IElasticClient _client;
+        private readonly IStandardIndexSettings _standardIndexSettings;
+        private readonly IStandardHelper _standardHelper;
 
         public StandardService(
-            IDedsService dedsService, 
-            IBlobStorageHelper blobStorageHelper, 
+            IElasticsearchClientFactory elasticsearchClientFactory,
             IStandardIndexSettings standardIndexSettings,
-            IElasticsearchClientFactory elasticsearchClientFactory)
+            IStandardHelper standardHelper)
         {
-            _dedsService = dedsService;
-            _blobStorageHelper = blobStorageHelper;
-            _standardIndexSettings = standardIndexSettings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
+            _standardIndexSettings = standardIndexSettings;
+            _standardHelper = standardHelper;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            var indexAlias = GetIndexAlias();
+            _log.Info("Creating new index...");
 
-            var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
-
-            _client = _elasticsearchClientFactory.GetElasticClient();
-
-            var existingPreviousIndex = CreateIndex(newIndexName);
+            var existingPreviousIndex = _standardHelper.CreateIndex(scheduledRefreshDateTime);
             if (existingPreviousIndex)
             {
+                _log.Info("Index already exists, exiting...");
                 return;
             }
 
-            await IndexStandards(newIndexName);
+            await _standardHelper.IndexStandards(scheduledRefreshDateTime);
 
             PauseWhileIndexingIsBeingRun();
 
-            if (IsIndexCorrectlyCreated())
+            if (_standardHelper.IsIndexCorrectlyCreated())
             {
-                SwapIndexes(scheduledRefreshDateTime);
-            }
-        }
+                _log.Info("Swapping indexes...");
 
-        private string GetIndexAlias()
-        {
-            return _standardIndexSettings.StandardIndexesAlias;
-        }
-
-        private string GetIndexNameAndDateExtension(string indexAlias, DateTime dateTime)
-        {
-            return string.Format("{0}-{1}", indexAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower();
-        }
-
-        private bool CreateIndex(string indexName)
-        {
-            var indexExistsResponse = _client.IndexExists(indexName);
-
-            // If it already exists and is empty, let's delete it.
-            if (indexExistsResponse.Exists)
-            {
-                var totalResults = _client.Count<StandardDocument>(c =>
-                {
-                    c.Index(indexName);
-                    return c;
-                });
-
-                if (totalResults.Count == 0)
-                {
-                    _client.DeleteIndex(indexName);
-                    indexExistsResponse = _client.IndexExists(indexName);
-                }
-            }
-
-            // create index
-            if (!indexExistsResponse.Exists)
-            {
-                CreateDocumentIndex(indexName);
-            }
-
-            return indexExistsResponse.Exists;
-        }
-
-        private void CreateDocumentIndex(string indexName)
-        {
-            _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
-        }
-
-        private async Task UploadStandardsContentToAzure(List<JsonMetadataObject> standardList)
-        {
-            foreach (var standard in standardList)
-            {
-                // await UploadStandardJson(standard);
-                await UploadStandardPdf(standard);
-            }
-        }
-
-        private async Task UploadStandardJson(JsonMetadataObject standard)
-        {
-            await
-                _blobStorageHelper.UploadStandardAsync("standardsjson", 
-                    string.Format(standard.Id.ToString(), ".txt"),
-                    JsonConvert.SerializeObject(standard));
-        }
-
-        private async Task UploadStandardPdf(JsonMetadataObject standard)
-        {
-            await _blobStorageHelper.UploadPdfFromUrl("standardspdf", string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
-        }
-
-        private async Task<List<JsonMetadataObject>> GetStandardsFromAzureAsync()
-        {
-            var standardsList = await _blobStorageHelper.ReadStandardsAsync("standardsjson");
-
-            standardsList = standardsList.OrderBy(s => s.Id).ToList();
-
-            return standardsList;
-        }
-
-        private async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
-        {
-            // index the items
-            foreach (var standard in standards)
-            {
-                try
-                {
-                    var doc = await CreateDocument(standard);
-
-                    // _client.Index(doc);
-                    _client
-                        .Index(doc, i => i
-                            .Index(indexName)
-                            .Id(doc.StandardId));
-                }
-                catch (Exception e)
-                {
-                    var error = e.Message;
-                    throw;
-                }
+                _standardHelper.SwapIndexes(scheduledRefreshDateTime);
             }
         }
         
-        private async Task IndexStandards(string newIndexName)
-        {
-            var standards = await GetStandardsFromAzureAsync();
-
-            await UploadStandardsContentToAzure(standards);
-
-            try
-            {
-                await IndexStandardPdfs(newIndexName, standards);
-            }
-            catch (Exception e)
-            {
-                var error = e;
-            }
-        }
-
-        private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
-        {
-            try
-            {
-                var attachment = new Attachment
-                {
-                    Content =
-                    Convert.ToBase64String(
-                        await _blobStorageHelper.ReadStandardPdfAsync("standardspdf", string.Format(standard.Id.ToString(), ".txt"))),
-                    ContentType = "application/pdf",
-                    Name = standard.PdfFileName
-                };
-
-                var doc = new StandardDocument
-                {
-                    StandardId = standard.Id,
-                    Title = standard.Title,
-                    NotionalEndLevel = _dedsService.GetNotationLevelFromLars(standard.Id),
-                    PdfFileName = standard.PdfFileName,
-                    PdfUrl = standard.Pdf,
-                    File = attachment
-                };
-
-                return doc;
-            }
-            catch (Exception e)
-            {
-                var error = e.Message;
-                throw;
-            }
-        }
-
         private void PauseWhileIndexingIsBeingRun()
         {
-            var sleepTime = 1000;
-            Thread.Sleep(sleepTime);
-        }
-
-        private bool IsIndexCorrectlyCreated()
-        {
-            var searchResults = _client.Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll()).Documents.ToList();
-
-            return searchResults.Any();
-        }
-
-        private void SwapIndexes(DateTime scheduledRefreshDateTime)
-        {
-            var indexAlias = GetIndexAlias();
-            var newIndexName = GetIndexNameAndDateExtension(indexAlias, scheduledRefreshDateTime);
-
-            var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
-            var aliasRequest = new AliasRequest {Actions = new List<IAliasAction>()};
-
-            foreach (var existingIndexOnAlias in existingIndexesOnAlias)
-            {
-                aliasRequest.Actions.Add(new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = indexAlias, Index = existingIndexOnAlias}});
-            }
-
-            aliasRequest.Actions.Add(new AliasAddAction {Add = new AliasAddOperation {Alias = indexAlias, Index = newIndexName}});
-            _client.Alias(aliasRequest);
+            Thread.Sleep(int.Parse(_standardIndexSettings.PauseTime));
         }
     }
 }

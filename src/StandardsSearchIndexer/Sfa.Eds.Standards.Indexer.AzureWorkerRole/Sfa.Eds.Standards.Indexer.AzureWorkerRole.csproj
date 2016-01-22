@@ -110,14 +110,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureAbstractions\CloudQueueService.cs" />
+    <Compile Include="AzureAbstractions\ICloudQueueService.cs" />
+    <Compile Include="AzureAbstractions\ICloudQueueWrapper.cs" />
     <Compile Include="Configuration\ElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
+    <Compile Include="AzureAbstractions\CloudQueueWrapper.cs" />
     <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
     <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\IndexerRegistry.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
+    <Compile Include="Helpers\IIndexerScheduler.cs" />
+    <Compile Include="Helpers\IndexerScheduler.cs" />
     <Compile Include="Models\Attachement.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\JsonMetadataObject.cs" />
