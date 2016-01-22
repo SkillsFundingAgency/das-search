@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nest;
-using Newtonsoft.Json;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
@@ -13,12 +12,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
     public class StandardHelper : IStandardHelper
     {
-        private readonly IDedsService _dedsService;
         private readonly IBlobStorageHelper _blobStorageHelper;
-        private readonly IStandardIndexSettings _settings;
+        private readonly IDedsService _dedsService;
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
-        private IElasticClient _client;
-        
+        private readonly IStandardIndexSettings _settings;
+        private readonly IElasticClient _client;
+
         public StandardHelper(
             IDedsService dedsService,
             IBlobStorageHelper blobStorageHelper,
@@ -82,9 +81,10 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
         public bool IsIndexCorrectlyCreated()
         {
-            var searchResults = _client.Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll()).Documents.ToList();
-
-            return searchResults.Any();
+            return _client
+                .Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll())
+                .Documents
+                .Any();
         }
 
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
@@ -93,14 +93,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
-            var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
+            var aliasRequest = new AliasRequest {Actions = new List<IAliasAction>()};
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
+                aliasRequest.Actions.Add(new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = indexAlias, Index = existingIndexOnAlias}});
             }
 
-            aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
+            aliasRequest.Actions.Add(new AliasAddAction {Add = new AliasAddOperation {Alias = indexAlias, Index = newIndexName}});
             _client.Alias(aliasRequest);
         }
 
@@ -111,17 +111,15 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".txt"), standard.Pdf);
+            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.Pdf);
         }
 
-        private async Task<List<JsonMetadataObject>> GetStandardsFromAzureAsync()
+        private async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
         {
-            var standardsList = await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer);
-
-            return standardsList.OrderBy(s => s.Id).ToList();
+            return (await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
         }
 
-        private async Task IndexStandardPdfs(string indexName, List<JsonMetadataObject> standards)
+        private async Task IndexStandardPdfs(string indexName, IEnumerable<JsonMetadataObject> standards)
         {
             // index the items
             foreach (var standard in standards)
@@ -151,8 +149,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 var attachment = new Attachment
                 {
                     Content =
-                    Convert.ToBase64String(
-                        await _blobStorageHelper.ReadStandardPdfAsync(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".txt"))),
+                        Convert.ToBase64String(
+                            await
+                                _blobStorageHelper.ReadStandardPdfAsync(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"))),
                     ContentType = _settings.StandardContentType,
                     Name = standard.PdfFileName
                 };
@@ -175,6 +174,5 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 throw;
             }
         }
-
     }
 }

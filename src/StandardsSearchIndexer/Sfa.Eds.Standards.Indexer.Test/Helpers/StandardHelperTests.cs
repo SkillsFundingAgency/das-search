@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework.Internal;
 using NUnit.Framework;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 
@@ -16,7 +15,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
         public void should_something()
         {
             // Arrange
-            // StandardHelper sh = new StandardHelper();
+            // StandardHelper sut = new StandardHelper();
             // Act
 
             // Assert
