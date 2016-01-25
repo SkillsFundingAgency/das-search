@@ -36,6 +36,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                 var message = messages.FirstOrDefault();
                 if (message != null)
                 {
+                    Log.Info("Creating new scheduled index at " + DateTime.Now);
                     _standardService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                 }
             }
