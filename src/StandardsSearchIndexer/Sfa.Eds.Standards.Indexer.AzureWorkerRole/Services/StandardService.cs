@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
+using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using log4net;
-using Nest;
-using Newtonsoft.Json;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
     public class StandardService : IStandardService
     {
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IStandardIndexSettings _standardIndexSettings;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IStandardHelper _standardHelper;
+        private readonly IStandardIndexSettings _standardIndexSettings;
 
         public StandardService(
             IStandardIndexSettings standardIndexSettings,
@@ -51,7 +43,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                 _standardHelper.SwapIndexes(scheduledRefreshDateTime);
             }
         }
-        
+
         private void PauseWhileIndexingIsBeingRun()
         {
             var time = _standardIndexSettings.PauseTime;

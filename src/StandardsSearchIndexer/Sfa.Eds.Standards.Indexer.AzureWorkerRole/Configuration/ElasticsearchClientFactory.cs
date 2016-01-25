@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
@@ -10,8 +6,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration
 {
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
-        private readonly IStandardIndexSettings _standardIndexSettings;
         private readonly ConnectionSettings _connectionSettings;
+        private readonly IStandardIndexSettings _standardIndexSettings;
 
         public ElasticsearchClientFactory(IStandardIndexSettings standardIndexSettings)
         {

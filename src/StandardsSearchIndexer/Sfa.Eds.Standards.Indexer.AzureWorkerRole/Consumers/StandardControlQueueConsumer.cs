@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using log4net;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Queue;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.AzureAbstractions;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
@@ -13,12 +11,13 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ICloudQueueService _cloudQueueService;
 
         private readonly IStandardIndexSettings _standardIndexSettings;
-        private readonly ICloudQueueService _cloudQueueService;
         private readonly IStandardService _standardService;
 
-        public StandardControlQueueConsumer(IStandardService standardService, IStandardIndexSettings standardIndexSettings, ICloudQueueService cloudQueueService)
+        public StandardControlQueueConsumer(IStandardService standardService, IStandardIndexSettings standardIndexSettings,
+            ICloudQueueService cloudQueueService)
         {
             _standardIndexSettings = standardIndexSettings;
             _cloudQueueService = cloudQueueService;
