@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://ws.imservices.org.uk/dcft/deds/1.0" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws.imservices.org.uk/dcft/deds/1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ws.imservices.org.uk/dcft/deds/1.0/Imports">
+      <xsd:import schemaLocation="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd0" namespace="http://ws.imservices.org.uk/dcft/deds/1.0" />
+      <xsd:import schemaLocation="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd2" namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" />
+      <xsd:import schemaLocation="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDedsSearchService_GetDataSet_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetDataSet" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetDataSet_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetDataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetDataSetByCode_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetDataSetByCode" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetDataSetByCode_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetDataSetByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverDataSetVersions_Inputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverDataSetVersions" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverDataSetVersions_Outputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverDataSetVersionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverQueries_Inputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverQueries" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverQueries_Outputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverQueriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverFiles_Inputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverFiles" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverFiles_Outputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverFilesCount_Inputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverFilesCount" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_DiscoverFilesCount_Outputmessage">
+    <wsdl:part name="parameters" element="tns:DiscoverFilesCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_ExecuteQuery_Inputmessage">
+    <wsdl:part name="parameters" element="tns:ExecuteQuery" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_ExecuteQuery_Outputmessage">
+    <wsdl:part name="parameters" element="tns:ExecuteQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetTotalCount_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetTotalCount" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetTotalCount_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetTotalCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_ExecuteQueryByCode_Inputmessage">
+    <wsdl:part name="parameters" element="tns:ExecuteQueryByCode" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_ExecuteQueryByCode_Outputmessage">
+    <wsdl:part name="parameters" element="tns:ExecuteQueryByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetTotalCountByCode_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetTotalCountByCode" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetTotalCountByCode_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetTotalCountByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetFile_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetFile" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetFile_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetLatestPublishedDataSetVersion_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetLatestPublishedDataSetVersion" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetLatestPublishedDataSetVersion_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetLatestPublishedDataSetVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetPublishedDataSetVersions_Inputmessage">
+    <wsdl:part name="parameters" element="tns:GetPublishedDataSetVersions" />
+  </wsdl:message>
+  <wsdl:message name="IDedsSearchService_GetPublishedDataSetVersions_Outputmessage">
+    <wsdl:part name="parameters" element="tns:GetPublishedDataSetVersionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDedsSearchService">
+    <wsdl:operation name="GetDataSet">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSet" message="tns:IDedsSearchService_GetDataSet_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetResponse" message="tns:IDedsSearchService_GetDataSet_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetByCode">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCode" message="tns:IDedsSearchService_GetDataSetByCode_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCodeResponse" message="tns:IDedsSearchService_GetDataSetByCode_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DiscoverDataSetVersions">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersions" message="tns:IDedsSearchService_DiscoverDataSetVersions_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersionsResponse" message="tns:IDedsSearchService_DiscoverDataSetVersions_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DiscoverQueries">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueries" message="tns:IDedsSearchService_DiscoverQueries_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueriesResponse" message="tns:IDedsSearchService_DiscoverQueries_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DiscoverFiles">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFiles" message="tns:IDedsSearchService_DiscoverFiles_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesResponse" message="tns:IDedsSearchService_DiscoverFiles_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DiscoverFilesCount">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCount" message="tns:IDedsSearchService_DiscoverFilesCount_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCountResponse" message="tns:IDedsSearchService_DiscoverFilesCount_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQuery" message="tns:IDedsSearchService_ExecuteQuery_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryResponse" message="tns:IDedsSearchService_ExecuteQuery_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCount">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCount" message="tns:IDedsSearchService_GetTotalCount_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountResponse" message="tns:IDedsSearchService_GetTotalCount_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQueryByCode">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCode" message="tns:IDedsSearchService_ExecuteQueryByCode_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCodeResponse" message="tns:IDedsSearchService_ExecuteQueryByCode_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalCountByCode">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCode" message="tns:IDedsSearchService_GetTotalCountByCode_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCodeResponse" message="tns:IDedsSearchService_GetTotalCountByCode_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFile">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFile" message="tns:IDedsSearchService_GetFile_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFileResponse" message="tns:IDedsSearchService_GetFile_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestPublishedDataSetVersion">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDataSetVersion" message="tns:IDedsSearchService_GetLatestPublishedDataSetVersion_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDataSetVersionResponse" message="tns:IDedsSearchService_GetLatestPublishedDataSetVersion_Outputmessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishedDataSetVersions">
+      <wsdl:input wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetVersions" message="tns:IDedsSearchService_GetPublishedDataSetVersions_Inputmessage" />
+      <wsdl:output wsaw:Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetVersionsResponse" message="tns:IDedsSearchService_GetPublishedDataSetVersions_Outputmessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

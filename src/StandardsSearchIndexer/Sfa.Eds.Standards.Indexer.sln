@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Eds.Standards.Indexer.AzureCloudService", "Sfa.Eds.Standards.Indexer.AzureAzureCloudService\Sfa.Eds.Standards.Indexer.AzureCloudService.ccproj", "{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.AzureWorkerRole", "Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Standards.Indexer.AzureWorkerRole.csproj", "{6163C031-06EA-4929-BC84-AB67ED0E93DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.Test", "Sfa.Eds.Standards.Indexer.Test\Sfa.Eds.Standards.Indexer.Test.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6163C031-06EA-4929-BC84-AB67ED0E93DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6163C031-06EA-4929-BC84-AB67ED0E93DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6163C031-06EA-4929-BC84-AB67ED0E93DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6163C031-06EA-4929-BC84-AB67ED0E93DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
