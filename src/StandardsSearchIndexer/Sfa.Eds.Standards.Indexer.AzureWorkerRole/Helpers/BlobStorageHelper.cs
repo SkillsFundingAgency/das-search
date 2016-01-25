@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using log4net;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -15,6 +17,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
     public class BlobStorageHelper : IBlobStorageHelper
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private static IStandardIndexSettings _standardIndexSettings;
 
         private readonly CloudStorageAccount _storageAccount;
@@ -38,27 +42,21 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
             try
             {
-                foreach (var item in container.ListBlobs(null, false))
+                foreach (var blob in container.ListBlobs(null, false).OfType<CloudBlockBlob>())
                 {
-                    if (item is CloudBlockBlob)
+                    string text;
+                    using (var memoryStream = new MemoryStream())
                     {
-                        var blob = (CloudBlockBlob)item;
-
-                        string text;
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            blob.DownloadToStream(memoryStream);
-                            text = Encoding.UTF8.GetString(memoryStream.ToArray());
-                        }
-
-                        standardList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
+                        blob.DownloadToStream(memoryStream);
+                        text = Encoding.UTF8.GetString(memoryStream.ToArray());
                     }
+
+                    standardList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
                 }
             }
             catch (Exception e)
             {
-                var error = e.Message;
-                throw;
+                Log.Error("Error reading standards from Azure: " + e.Message);
             }
 
             return standardList;
@@ -107,8 +105,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
             catch (Exception e)
             {
-                var error = e.Message;
-                throw;
+                Log.Error("Error uploading standards to Azure: " + e.Message);
             }
         }
 
@@ -149,8 +146,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
             catch (Exception e)
             {
-                var error = e.Message;
-                throw;
+                Log.Error("Error uploading standards pdfs to Azure: " + e.Message);
+
             }
         }
 

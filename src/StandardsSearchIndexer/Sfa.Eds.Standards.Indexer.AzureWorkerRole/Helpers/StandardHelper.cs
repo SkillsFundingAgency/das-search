@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
 using Nest;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
@@ -12,6 +13,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
     public class StandardHelper : IStandardHelper
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IBlobStorageHelper _blobStorageHelper;
         private readonly IDedsService _dedsService;
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
@@ -48,6 +50,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
                 if (totalResults.Count == 0)
                 {
+                    Log.Info("Empty index already exists, deleting and creating a new one");
+
                     _client.DeleteIndex(indexName);
                     indexExistsResponse = _client.IndexExists(indexName);
                 }
@@ -75,6 +79,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
             catch (Exception e)
             {
+                Log.Error("Error indexing PDFs: " + e.Message);
                 var error = e;
             }
         }
@@ -170,6 +175,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
             catch (Exception e)
             {
+                Log.Error("Error creating document: " + e.Message);
+
                 var error = e.Message;
                 throw;
             }
