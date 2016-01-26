@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Xml.Linq;
+using Nito.AsyncEx;
 
-namespace Sfa.Eds.Das.Web.Services
+namespace LatLongLocator
 {
-    public class LocationService : ILocationService
+    public class LocationService
     {
+        static void Main(string[] args)
+        {
+            LocationService ls = new LocationService();
+            AsyncContext.Run(() => ls.MainAsync(args));
+        }
+
+        async void MainAsync(string[] args)
+        {
+            await IsLatLonIntoGb(51.889908, -2.117493);
+        }
+
         public async Task<bool> IsLatLonIntoGb(double lat, double lon)
         {
             string countryShortName = string.Empty;
-            
+
             string baseUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?latlng={0},{1}&sensor=false", lat, lon);
             HttpClient client = new HttpClient();
             var response = await client.GetStringAsync(baseUri);

@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Moq;
-using NUnit.Core;
 using NUnit.Framework;
-using Sfa.Eds.Das.Web.Models;
-using Sfa.Eds.Das.Web.Services;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace Sfa.Eds.Das.Web.Tests.Services
+namespace LatLongLocator.Test
 {
     [TestFixture]
     public class LocationServiceTests
     {
         [Test]
-        public async void ShouldReturnTrueIfLocationIsIntoGb()
+        public async Task ShouldReturnTrueIfLocationIsIntoGb()
         {
             // Arrange
             LocationService sut = new LocationService();
@@ -28,7 +22,7 @@ namespace Sfa.Eds.Das.Web.Tests.Services
         }
 
         [Test]
-        public async void ShouldReturnFalseIfLocationIsNotIntoGb()
+        public async Task ShouldReturnFalseIfLocationIsNotIntoGb()
         {
             // Arrange
             LocationService sut = new LocationService();
