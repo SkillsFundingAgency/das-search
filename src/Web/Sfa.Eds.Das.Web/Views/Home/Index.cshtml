@@ -15,10 +15,7 @@
             @using (Html.BeginForm("Search", "Home", FormMethod.Post))
             {
                 <input id="keywords" name="Keywords" type="text" placeholder="Enter search term" />
-                <input type="submit" value="Search"/>
-                <p>
-                    #{ElasticBox}
-                </p>
+                <input type="submit" value="Search" />
             }
         </div>
     </div>
