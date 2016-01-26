@@ -26,5 +26,9 @@
         </Environment>
       </Task>
     </Startup>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
   </WebRole>
 </ServiceDefinition>

@@ -3,6 +3,14 @@
   <Role name="Sfa.Eds.Standards.Indexer.AzureWorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="froberg" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEEtQm+z1CeGkRi+DCvGr2I4wDQYJKoZIhvcNAQEBBQAEggEAjmphMlueKfM2a6Wa+hfl1A468Bum+P7/rFzekdjQoKy9hGXwc77w67GPcoo1OtToYYw0U7Y77nwZZem+w+Dh/H0B0HIq+Gh/0LZ//JmMXa46N25VE23zqRpJDsWRiwkbt0a9pkyZWIVvxcSliIs1OWJUnwPUn0FZhGNTJwuwi4ezTiCjqsifMY3j0S4IQqroQLTlxTlcPEorCjyg0I2bY80qP8WIDD7MWPmjJMxSi/UvGgbI+nekYMdlU/tuxXXjf5Dm7c3zUC41E5dRIxEgxBOvjG7NaPdAE3IAW7TQdDVdBsocGRNa6ofDe8xupQrjKJyVNIBtShGB/7la7PTjVTAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECMJOUy5U/5SdgBDjvWTkBXK181T5CVZD544G" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2017-01-26T23:59:59.0000000+00:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="CA85F2844B42B2A265EA62B96546A30473E365ED" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
 </ServiceConfiguration>
