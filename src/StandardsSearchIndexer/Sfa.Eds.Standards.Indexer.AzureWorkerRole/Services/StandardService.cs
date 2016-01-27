@@ -42,6 +42,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                 Log.Info("Swapping indexes...");
 
                 _standardHelper.SwapIndexes(scheduledRefreshDateTime);
+
+                Log.Info("Swap completed...");
             }
         }
 
