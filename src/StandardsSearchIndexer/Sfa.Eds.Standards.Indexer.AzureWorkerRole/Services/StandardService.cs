@@ -32,6 +32,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
                 return;
             }
 
+            Log.Info("Indexing PDFs...");
             await _standardHelper.IndexStandards(scheduledRefreshDateTime);
 
             PauseWhileIndexingIsBeingRun();
