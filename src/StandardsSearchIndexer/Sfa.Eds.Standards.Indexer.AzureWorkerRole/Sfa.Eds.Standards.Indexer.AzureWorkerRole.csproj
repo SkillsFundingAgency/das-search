@@ -148,15 +148,15 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="app.CI.config">
-    	<DependentUpon>app.config</DependentUpon>
-    </None>
-    <None Include="app.SystemTest.config">
-    	<DependentUpon>app.config</DependentUpon>
-    </None>
-    <None Include="app.Demo.config">
-    	<DependentUpon>app.config</DependentUpon>
-    </None>
+    <Content Include="CI.Log.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SystemTest.Log.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Demo.Log.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="log.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
