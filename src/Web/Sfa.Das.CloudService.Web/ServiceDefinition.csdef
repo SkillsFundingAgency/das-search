@@ -26,5 +26,9 @@
         </Environment>
       </Task>
     </Startup>
+    <Imports>
+    </Imports>
+    <Certificates>
+    </Certificates>
   </WebRole>
 </ServiceDefinition>
