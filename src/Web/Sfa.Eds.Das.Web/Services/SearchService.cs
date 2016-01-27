@@ -46,7 +46,5 @@ namespace Sfa.Eds.Das.Web.Services
 
             return queryContainer;
         }
-
-
     }
 }

@@ -5,8 +5,6 @@ using log4net;
 
 namespace Sfa.Eds.Das.Web
 {
-    
-
     public class MvcApplication : System.Web.HttpApplication
     {
         private static readonly ILog Log = LogManager.GetLogger("HomeController");
