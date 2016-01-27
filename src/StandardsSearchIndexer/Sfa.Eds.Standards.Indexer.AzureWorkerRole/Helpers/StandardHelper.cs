@@ -133,11 +133,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 {
                     var doc = await CreateDocument(standard);
 
-                    // _client.Index(doc);
-                    _client
-                        .Index(doc, i => i
-                            .Index(indexName)
-                            .Id(doc.StandardId));
+                    _client.Index(doc, i => i.Index(indexName).Id(doc.StandardId));
                 }
                 catch (Exception e)
                 {
