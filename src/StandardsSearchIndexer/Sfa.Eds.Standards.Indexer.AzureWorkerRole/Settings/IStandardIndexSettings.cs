@@ -15,6 +15,5 @@
         string StandardJsonContainer { get; }
         string StandardPdfContainer { get; }
         string StandardContentType { get; }
-        
     }
 }

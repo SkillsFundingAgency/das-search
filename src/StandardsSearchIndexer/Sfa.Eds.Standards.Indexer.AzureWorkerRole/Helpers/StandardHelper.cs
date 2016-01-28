@@ -70,10 +70,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
         {
             var standards = await GetStandardsFromAzureAsync();
 
+            Log.Info("Uploading " + standards.Count() + " standard's PDF to Azure");
+            
             await standards.ForEachAsync(UploadStandardPdf);
 
             try
             {
+                Log.Info("Indexing " + standards.Count() + " standards");
+
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
                 await IndexStandardPdfs(indexNameAndDateExtension, standards);
             }
@@ -133,14 +137,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 {
                     var doc = await CreateDocument(standard);
 
-                    // _client.Index(doc);
-                    _client
-                        .Index(doc, i => i
-                            .Index(indexName)
-                            .Id(doc.StandardId));
+                    _client.Index(doc, i => i.Index(indexName).Id(doc.StandardId));
                 }
                 catch (Exception e)
                 {
+                    Log.Info("Error indexing standard PDF: " + e.Message);
                     var error = e.Message;
                     throw;
                 }
