@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
+using OpenQA.Selenium.PhantomJS;
 /*
 Purpose of this class is to 
 -Define actions to perform before and after feature/Scenario
@@ -49,7 +50,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 //localDriver = new FirefoxDriver();
                 //localDriver.Manage().Window.Maximize();
 
-                localDriver =new ChromeDriver(@"C:\\Users\\khann\\Documents\\Visual Studio 2015\\Projects\\DASWebTests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\Resources");
+               localDriver= new PhantomJSDriver();
+                //localDriver =new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
                 FeatureContext.Current["driver"] = localDriver;
             }
 
