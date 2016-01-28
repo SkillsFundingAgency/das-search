@@ -4,8 +4,13 @@ using Sfa.Eds.Das.Web.Services;
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
+    using System.Reflection;
+
+    using log4net;
+
     public class HomeController : Controller
     {
+        private static readonly ILog Log = LogManager.GetLogger("HomeController");
         private readonly ISearchForStandards _searchService;
 
         public HomeController(ISearchForStandards searchService)
@@ -15,6 +20,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
         public ActionResult Index()
         {
+            Log.Warn("Hello from!");
             return View();
         }
 

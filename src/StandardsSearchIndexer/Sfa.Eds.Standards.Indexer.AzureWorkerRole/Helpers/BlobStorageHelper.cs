@@ -147,7 +147,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             catch (Exception e)
             {
                 Log.Error("Error uploading standards pdfs to Azure: " + e.Message);
-
             }
         }
 

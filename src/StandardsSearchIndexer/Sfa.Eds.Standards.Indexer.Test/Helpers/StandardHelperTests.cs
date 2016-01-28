@@ -31,6 +31,8 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
             _mockClientFactory = new Mock<IElasticsearchClientFactory>();
             _mockSettings = Mock.Of<IStandardIndexSettings>();
         }
+
+        /*
         [Test]
         [Ignore]
         public void should_something()
@@ -46,6 +48,6 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
             sut.CreateIndex(It.IsAny<DateTime>());
             // Assert
 
-        }
+        }*/
     }
 }

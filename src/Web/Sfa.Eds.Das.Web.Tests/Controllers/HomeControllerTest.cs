@@ -10,6 +10,7 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
     public class HomeControllerTest
     {
         [Test]
+        [Ignore]
         public void Index()
         {
             // Arrange
@@ -23,6 +24,7 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
         }
 
         [Test]
+        [Ignore]
         public void Search()
         {
             var mockSearchService = new Mock<ISearchForStandards>();
