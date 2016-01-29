@@ -1,0 +1,152 @@
+@import "govuk-elements";
+@import "govuk-templates";
+
+
+@import "partials/_footer";
+@import "partials/_header";
+@import "partials/_phases";
+
+
+
+
+
+
+
+
+
+
+.heading-xlarge {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 48px;
+    line-height: 1.0416666667;
+    font-weight: 400;
+    text-transform: none;
+    font-weight: 700;
+    margin-bottom: 0.9375em
+}
+@media (max-width: 640px) {
+    .heading-xlarge {
+        font-size: 32px;
+        line-height: 1.09375
+    }
+}
+@media (min-width: 641px) {
+    .heading-xlarge {
+      margin-top: 1.25em;
+      margin-bottom: 0.625em;
+    }
+}
+
+
+
+
+
+.related-container {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 60px;
+    float: left;
+    width: 100%;
+}
+.related {
+    border-top: 10px solid #005ea5;
+    padding-top: 5px
+}
+.related nav {
+    margin-bottom: 1.25em
+}
+.related h2 {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    text-transform: none;
+    font-weight: 600;
+    color: #0b0c0c;
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+    position: relative
+}
+@media (min-width: 641px) {
+    .related h2 {
+        font-size: 24px;
+        line-height: 1.25
+    }
+}
+@media (max-width: 640px) {
+    .related h2 {
+        font-size: 17px;
+        margin-bottom: 0.625em
+    }
+}
+aside ul {
+    font-family: "nta", Arial, sans-serif;
+    line-height: 1.14286;
+    font-weight: 400;
+    text-transform: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden
+}
+@media (min-width: 641px) {
+    aside ul {
+        line-height: 1.25
+    }
+}
+.related li {
+    margin-bottom: 0.75em;
+    padding-left: 0
+}
+.related li.related-topic {
+    list-style: none outside none
+}
+.related li.related-topic a {
+    display: inline;
+    font-weight: bold
+}
+.related li a {
+    background-position: 0 -287px;
+    background-repeat: no-repeat;
+    display: block;
+    line-height: 1.25em;
+    orphans: 2
+}
+.related li a:hover {
+    background-position: 0 10px
+}
+.related li a.view-all {
+    margin: 10px 0 10px
+}
+.related li a[rel="external"]:after {
+    content: "\A0\A0\A0\A0\A0\A0";
+    background-position: 5px 0px
+}
+.related li a[rel="external"]:hover:after {
+    background-position: 5px -388px
+}
+.related .return-to-top {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.14286;
+    font-weight: 400;
+    text-transform: none;
+    margin: 0.25em 0 0;
+    padding: 0.75em 0
+}
+@media (min-width: 641px) {
+    .related .return-to-top {
+        font-size: 16px;
+        line-height: 1.25
+    }
+}
+@media (min-width: 769px) {
+    .related .return-to-top {
+        position: absolute;
+        left: -9999em
+    }
+}
+aside h2:first-child {
+  margin-top: 15px;
+}

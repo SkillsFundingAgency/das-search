@@ -1,0 +1,98 @@
+
+
+footer {
+    background: #dee0e2;
+    color: #454A4C;
+    font-size: 16px;
+    overflow: hidden
+}
+.footer__wrapper {
+    border-top: 1px solid #a1acb2
+}
+.footer__wrapper a {
+    color: #454A4C
+}
+.footer__wrapper a:hover {
+    color: #171819
+}
+@media print {
+    .footer__wrapper {
+        border-top: none
+    }
+}
+.footer__meta {
+    margin: 0 auto;
+    max-width: 1000px;
+    overflow: hidden;
+    padding: 10px 15px 60px
+}
+@media (min-width: 641px) {
+    .footer__meta {
+        padding-top: 60px
+    }
+}
+@media print {
+    .footer__meta {
+        padding: 0
+    }
+}
+.footer__nav {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: 30px;
+    padding: 0;
+    width: 100%
+}
+@media (min-width: 641px) {
+    .footer__nav {
+        margin-bottom: 0;
+        margin-right: -4px;
+        width: 75%
+    }
+}
+@media print {
+    .footer__nav {
+        display: none !important
+    }
+}
+.footer__contact {
+    margin-bottom: 10px
+}
+.footer__link {
+    padding-right: 20px;
+    vertical-align: bottom
+}
+@media (min-width: 641px) {
+    .footer__link {
+        display: inline-block;
+        margin-bottom: 0
+    }
+}
+.footer__ogl {
+    margin-top: 15px;
+    margin-bottom: 0
+}
+.footer__copyright {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    width: 100%
+}
+@media (min-width: 641px) {
+    .footer__copyright {
+        margin-right: -4px;
+        width: 25%
+    }
+}
+.footer__copyright:hover {
+    text-decoration: underline
+}
+@media print {
+    .footer__copyright {
+        display: none !important
+    }
+}
+
+.gov-border {
+  border-top: 10px solid #005ea5;
+}
