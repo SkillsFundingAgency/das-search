@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <% include ./partials/header %>
+
+
+    <main id="content" role="main">
+      <a href="appBrowseSearch.html" class="link-back">Back</a>
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+
+          <h1 class="heading-xlarge">
+            <span class="heading-secondary">Apprenticeship programmes</span>
+            Search
+          </h1>
+
+          <form class="search-box">
+            <div class="form-group">
+              <legend>
+                <label for="input-keywords">
+                  <span class="form-hint">Enter the job role or keyword you’re looking for, eg Engineering or Accountant.
+                  </span>
+                </label>
+
+                <span class="error-message"></span>
+              </legend>
+              <input type="text" id="input-keywords" class="text-box form-control" name="q" maxlength="200" style="width: 100%;">
+            </div>
+
+            <a class="button margin-top-x2" id="submit-keywords" href="appSearchResults_noStandards.html">
+              Search
+            </a>
+          </form>
+
+        </div>
+
+        <div class="column-third">
+          <div class="related-container">
+            <aside class="related" id="related">
+              <div class="inner group related-subsection">
+                <h2 id="parent-subsection">Employers</h2>
+                <nav role="navigation" aria-labelledby="parent-subsection">
+                  <a href="">
+                    Employ an apprentice
+                  </a>
+                </nav>
+              </div>
+
+              <div class="inner group">
+                <a class="return-to-top" href="#content">Return to top ↑</a>
+              </div>
+
+            </aside>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+
+    <% include ./partials/footer %>
+
+  </body>
+</html>
