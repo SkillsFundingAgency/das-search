@@ -18,10 +18,10 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
     [TestFixture]
     public class StandardHelperTests
     {
-        Mock<IDedsService> _mockDeds;
-        Mock<IBlobStorageHelper> _mockBlob;
-        Mock<IElasticsearchClientFactory> _mockClientFactory;
-        IStandardIndexSettings _mockSettings;
+        private Mock<IDedsService> _mockDeds;
+        private Mock<IBlobStorageHelper> _mockBlob;
+        private Mock<IElasticsearchClientFactory> _mockClientFactory;
+        private IStandardIndexSettings _mockSettings;
 
         [SetUp]
         public void Setup()

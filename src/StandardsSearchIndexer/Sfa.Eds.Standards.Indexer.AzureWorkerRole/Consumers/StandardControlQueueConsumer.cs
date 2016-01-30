@@ -16,7 +16,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
         private readonly IStandardIndexSettings _standardIndexSettings;
         private readonly IStandardService _standardService;
 
-        public StandardControlQueueConsumer(IStandardService standardService, IStandardIndexSettings standardIndexSettings,
+        public StandardControlQueueConsumer(
+            IStandardService standardService,
+            IStandardIndexSettings standardIndexSettings,
             ICloudQueueService cloudQueueService)
         {
             _standardIndexSettings = standardIndexSettings;

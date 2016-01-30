@@ -34,7 +34,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Services
             _mockHelper
                 .Setup(x => x.CreateIndex(It.IsAny<DateTime>()))
                 .Returns(true);
-            
+
             // Act
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 

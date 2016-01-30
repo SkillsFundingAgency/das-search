@@ -71,7 +71,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var standards = await GetStandardsFromAzureAsync();
 
             Log.Info("Uploading " + standards.Count() + " standard's PDF to Azure");
-            
+
             await standards.ForEachAsync(UploadStandardPdf);
 
             try
@@ -102,14 +102,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
-            var aliasRequest = new AliasRequest {Actions = new List<IAliasAction>()};
+            var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = indexAlias, Index = existingIndexOnAlias}});
+                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
             }
 
-            aliasRequest.Actions.Add(new AliasAddAction {Add = new AliasAddOperation {Alias = indexAlias, Index = newIndexName}});
+            aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
         }
 
