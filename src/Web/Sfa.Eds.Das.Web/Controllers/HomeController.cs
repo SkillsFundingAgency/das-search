@@ -6,11 +6,11 @@
 
     public class HomeController : Controller
     {
-        private readonly ISearchForStandards searchService;
+        private readonly ISearchForStandards _searchService;
 
         public HomeController(ISearchForStandards searchService)
         {
-            this.searchService = searchService;
+            this._searchService = searchService;
         }
 
         public ActionResult Index()
@@ -21,7 +21,7 @@
         [HttpPost]
         public ActionResult Search(SearchCriteria criteria)
         {
-            var searchResults = this.searchService.Search(criteria.Keywords);
+            var searchResults = this._searchService.Search(criteria.Keywords);
 
             return View(searchResults);
         }

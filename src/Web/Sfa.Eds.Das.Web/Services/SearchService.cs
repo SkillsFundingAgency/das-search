@@ -32,19 +32,5 @@ namespace Sfa.Eds.Das.Web.Services
                 Results = results.Documents
             };
         }
-
-        private QueryContainer BuildContainer(QueryContainer queryContainer, QueryContainer queryClause)
-        {
-            if (queryContainer == null)
-            {
-                queryContainer = queryClause;
-            }
-            else
-            {
-                queryContainer |= queryClause;
-            }
-
-            return queryContainer;
-        }
     }
 }

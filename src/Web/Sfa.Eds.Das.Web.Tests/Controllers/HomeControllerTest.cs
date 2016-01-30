@@ -10,21 +10,19 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
     public class HomeControllerTest
     {
         [Test]
-        [Ignore]
         public void Index()
         {
             // Arrange
-            HomeController contr_oller = new HomeController(null);
+            HomeController controller = new HomeController(null);
 
             // Act
-            ViewResult result = contr_oller.Index() as ViewResult;
+            ViewResult result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [Test]
-        [Ignore]
         public void Search()
         {
             var mockSearchService = new Mock<ISearchForStandards>();

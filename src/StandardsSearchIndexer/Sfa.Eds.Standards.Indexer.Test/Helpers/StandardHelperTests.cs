@@ -31,23 +31,5 @@ namespace Sfa.Eds.Standards.Indexer.Test.Helpers
             _mockClientFactory = new Mock<IElasticsearchClientFactory>();
             _mockSettings = Mock.Of<IStandardIndexSettings>();
         }
-
-        /*
-        [Test]
-        [Ignore]
-        public void should_something()
-        {
-            // Arrange
-            var mockClient = new Mock<IElasticClient>();
-            StandardHelper sut = new StandardHelper(_mockDeds.Object, _mockBlob.Object, _mockSettings, _mockClientFactory.Object);
-            _mockClientFactory.Setup(x => x.GetElasticClient()).Returns(mockClient.Object);
-            mockClient.Setup(x => x.IndexExists(It.IsAny<string>())).Returns(Mock.Of<IExistsResponse>(x => x.Exists));
-            mockClient.Setup(x => x.Count<StandardDocument>(It.IsAny<ICountRequest>())).Returns(Mock.Of<ICountResponse>(x => x.Count == 7));
-
-            // Act
-            sut.CreateIndex(It.IsAny<DateTime>());
-            // Assert
-
-        }*/
     }
 }
