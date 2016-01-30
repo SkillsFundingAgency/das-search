@@ -119,6 +119,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Sfa.Eds.Das.Web.Tests.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Eds.Das.Web\Sfa.Eds.Das.Web.csproj">

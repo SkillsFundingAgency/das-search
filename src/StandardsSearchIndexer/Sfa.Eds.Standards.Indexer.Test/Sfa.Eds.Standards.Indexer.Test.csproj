@@ -107,6 +107,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Sfa.Eds.Standards.Indexer.Test.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Standards.Indexer.AzureWorkerRole.csproj">

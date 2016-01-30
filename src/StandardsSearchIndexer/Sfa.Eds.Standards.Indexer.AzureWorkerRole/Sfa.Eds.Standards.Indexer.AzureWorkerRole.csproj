@@ -196,6 +196,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Sfa.Eds.Standards.Indexer.AzureWorkerRole.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
