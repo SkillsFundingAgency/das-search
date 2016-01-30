@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Linq;
 using Nest;
 using Sfa.Eds.Das.Web.Models;
 
