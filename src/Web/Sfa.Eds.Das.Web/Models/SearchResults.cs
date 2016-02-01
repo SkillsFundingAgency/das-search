@@ -6,6 +6,8 @@ namespace Sfa.Eds.Das.Web.Models
     {
         public long TotalResults { get; set; }
 
+        public string SearchTerm { get; set; }
+
         public IEnumerable<SearchResultsItem> Results { get; set; }
     }
 }
