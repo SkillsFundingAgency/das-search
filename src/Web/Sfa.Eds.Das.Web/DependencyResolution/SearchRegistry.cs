@@ -1,6 +1,6 @@
 namespace Sfa.Eds.Das.Web.DependencyResolution
 {
-    using Elasticsearch.Net;
+    using log4net;
 
     using Services;
 
@@ -15,6 +15,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
             For<ISearchForStandards>().Use<SearchService>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IApplicationSettings>().Use<ApplicationSettings>();
+            For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
         }
     }
 }

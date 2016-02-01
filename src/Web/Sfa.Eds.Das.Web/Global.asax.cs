@@ -1,10 +1,9 @@
-﻿using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using log4net;
-
-namespace Sfa.Eds.Das.Web
+﻿namespace Sfa.Eds.Das.Web
 {
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using log4net;
     using System.Web.Http;
 
     public class MvcApplication : System.Web.HttpApplication
@@ -20,6 +19,8 @@ namespace Sfa.Eds.Das.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Log4NetSettings.Initialise();
 
             Log.Info("Web applications started...");
         }
