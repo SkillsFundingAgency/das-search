@@ -214,6 +214,7 @@
     <Compile Include="Services\ISearchForStandards.cs" />
     <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\StubSearchService.cs" />
+    <Compile Include="WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\fonts.css" />

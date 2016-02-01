@@ -7,6 +7,8 @@ using System.Web.Routing;
 
 namespace Sfa.Eds.Das.Web
 {
+    using System.Web.Http;
+
     public static class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
