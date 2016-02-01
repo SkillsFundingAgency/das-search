@@ -24,7 +24,7 @@
 
             var settings = new ConnectionSettings(
                 node,
-                defaultIndex: "cistandardindexesalias");
+                defaultIndex: this.applicationSettings.StandardIndexesAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
 
