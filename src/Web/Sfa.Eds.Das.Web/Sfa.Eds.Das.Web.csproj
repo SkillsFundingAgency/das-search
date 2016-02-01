@@ -193,6 +193,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
@@ -261,7 +262,7 @@
     <Content Include="stylecop.json" />
     <Content Include="Sfa.Eds.Das.Web.ruleset" />
     <Content Include="Views\Home\StandardDetail.cshtml" />
-    <Content Include="Views\Shared\_Error404.cshtml" />
+    <Content Include="Views\Error\_Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

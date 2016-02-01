@@ -32,7 +32,8 @@
 
             if (standardResult == null)
             {
-                return this.View("_Error404", null, $"Cannot find standard: {id}");
+                var message = $"Cannot find standard: {id}";
+                return new HttpNotFoundResult(message);
             }
 
             return View(standardResult);
