@@ -21,7 +21,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Consumers
         private StandardControlQueueConsumer _sut;
 
         [SetUp]
-        public void setup()
+        public void Setup()
         {
             // Arrange
             _mockService = new Mock<IStandardService>();
@@ -34,11 +34,11 @@ namespace Sfa.Eds.Standards.Indexer.Test.Consumers
         [Test]
         public void ShouldntCreateAnIndexIfThereArentAnyMessages()
         {
-            //Arrange
+            // Arrange
             _mockCloudQueueService
                 .Setup(x => x.GetQueueReference(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(_mockQueue.Object);
-            
+
             // Act
             _sut.CheckMessage();
 
@@ -59,7 +59,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Consumers
                 .Returns(_mockQueue.Object);
             _mockQueue
                 .Setup(x => x.GetMessages(It.IsAny<int>()))
-                .Returns(new List<CloudQueueMessage>() { new CloudQueueMessage(string.Empty)});
+                .Returns(new List<CloudQueueMessage>() { new CloudQueueMessage(string.Empty) });
 
             // Act
             _sut.CheckMessage();

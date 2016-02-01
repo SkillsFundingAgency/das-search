@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Linq;
 using Nest;
 using Sfa.Eds.Das.Web.Models;
 
@@ -31,20 +30,6 @@ namespace Sfa.Eds.Das.Web.Services
                 TotalResults = results.Total,
                 Results = results.Documents
             };
-        }
-
-        private QueryContainer BuildContainer(QueryContainer queryContainer, QueryContainer queryClause)
-        {
-            if (queryContainer == null)
-            {
-                queryContainer = queryClause;
-            }
-            else
-            {
-                queryContainer |= queryClause;
-            }
-
-            return queryContainer;
         }
     }
 }

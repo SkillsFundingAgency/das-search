@@ -8,6 +8,7 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Models;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
+using System.Globalization;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 {
@@ -71,20 +72,19 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var standards = await GetStandardsFromAzureAsync();
 
             Log.Info("Uploading " + standards.Count() + " standard's PDF to Azure");
-            
-            await standards.ForEachAsync(UploadStandardPdf);
+
+            await standards.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
 
             try
             {
                 Log.Info("Indexing " + standards.Count() + " standards");
 
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                await IndexStandardPdfs(indexNameAndDateExtension, standards);
+                await IndexStandardPdfs(indexNameAndDateExtension, standards).ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 Log.Error("Error indexing PDFs: " + e.Message);
-                var error = e;
             }
         }
 
@@ -102,25 +102,25 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
-            var aliasRequest = new AliasRequest {Actions = new List<IAliasAction>()};
+            var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = indexAlias, Index = existingIndexOnAlias}});
+                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
             }
 
-            aliasRequest.Actions.Add(new AliasAddAction {Add = new AliasAddOperation {Alias = indexAlias, Index = newIndexName}});
+            aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
         }
 
         private string GetIndexNameAndDateExtension(DateTime dateTime)
         {
-            return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower();
+            return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
         }
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.Pdf);
+            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.Pdf).ConfigureAwait(false);
         }
 
         private async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
@@ -142,7 +142,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 catch (Exception e)
                 {
                     Log.Info("Error indexing standard PDF: " + e.Message);
-                    var error = e.Message;
                     throw;
                 }
             }
@@ -178,7 +177,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             {
                 Log.Error("Error creating document: " + e.Message);
 
-                var error = e.Message;
                 throw;
             }
         }
