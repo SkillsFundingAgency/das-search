@@ -3,33 +3,80 @@
     ViewBag.Title = "Search Results";
 }
 
-<div class="jumbotron">
-    <h1>Employer Apprenticeship Search</h1>
-</div>
+<main id="content" role="main">
+    @Html.ActionLink("Search", "Index", null, new {@class = "link-back"})
+    <div id="results" class="grid-row">
 
-<div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8">
-        <div>
-            <strong>Total results found:</strong> @Model.TotalResults
-        </div>
-        <div>
-            @Html.ActionLink("< back to search", "Index")
-        </div>
-        @foreach (var item in Model.Results)
-        {
-            <div><h3><strong>@item.Title</strong></h3></div>
-            <div>
-                <strong>Notional end level:</strong> @item.NotionalEndLevel
-            </div>
-            <div>
-                <strong>Download PDF:</strong> <a href="@item.PdfUrl">@item.PdfUrl</a> 
-            </div>
-            <hr />
+        <div class="column-two-thirds">
 
-        }
+            <div class="hgroup">
+
+                <h1 class="heading-xlarge">
+                    <span class="heading-secondary">Apprenticeship programmes</span>
+                    Search results
+                </h1>
+
+            </div>
+            <h2 class="heading-large">
+                Apprenticeship pathways
+            </h2>
+            <p>
+                There are 6 apprenticeship pathways matching your search for ‘design’.
+            </p>
+            <ol class="frameworkResults">
+                @foreach (var item in Model.Results)
+                {
+                    <li class="result">
+                        <div class="column details">
+                            <h2 class="heading-medium">
+                                <a href="appDetails_frameworks_design.html">@item.Title</a>
+                            </h2>
+                            <dl>
+                                <dt class="entryLevel">Entry Level</dt>
+                                <dd class="entryLevel">
+                                    <span>@item.NotionalEntryLevel</span>
+                                </dd>
+                                <dt class="endLevel">End Level</dt>
+                                <dd class="endLevel">
+                                    <span>@item.NotionalEndLevel</span>
+                                </dd>
+                                <dt class="min_length">Minimum length</dt>
+                                <dd class="min_length">
+                                    <span>@item.MinimumLength</span>
+                                    years
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                }
+            </ol>
+
+        </div>
+
+        <div class="column-third">
+
+            <div class="related-container">
+                <aside class="related" id="related">
+                    <div class="inner group related-subsection">
+
+                        <h2 id="parent-subsection">Help</h2>
+
+                        <ul class="link-list">
+                            <li>
+                                <a href="help_frameworks.html">What is a framework</a>
+                            </li>
+                            <li>
+                                <a href="help_standards.html">What is a standard</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="inner group">
+                        <a class="return-to-top" href="#content">Return to top ↑</a>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
     </div>
-    <div class="col-md-2">
-    </div>
-</div>
+</main>

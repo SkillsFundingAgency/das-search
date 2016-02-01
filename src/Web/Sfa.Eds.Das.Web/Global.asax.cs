@@ -5,6 +5,8 @@ using log4net;
 
 namespace Sfa.Eds.Das.Web
 {
+    using System.Web.Http;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         private static readonly ILog Log = LogManager.GetLogger("HomeController");
@@ -14,6 +16,7 @@ namespace Sfa.Eds.Das.Web
             Log.Info("Starting web applications...");
 
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -1,5 +1,4 @@
-﻿
-namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Eds.Das.Web.Controllers
 {
     using System.Web.Mvc;
     using Models;
@@ -7,11 +6,11 @@ namespace Sfa.Eds.Das.Web.Controllers
 
     public class HomeController : Controller
     {
-        private readonly ISearchForStandards searchService;
+        private readonly ISearchForStandards _searchService;
 
         public HomeController(ISearchForStandards searchService)
         {
-            this.searchService = searchService;
+            this._searchService = searchService;
         }
 
         public ActionResult Index()
@@ -22,9 +21,21 @@ namespace Sfa.Eds.Das.Web.Controllers
         [HttpPost]
         public ActionResult Search(SearchCriteria criteria)
         {
-            var searchResults = this.searchService.Search(criteria.Keywords);
+            var searchResults = this._searchService.Search(criteria.Keywords);
 
             return View(searchResults);
+        }
+
+        public ActionResult StandardDetail(string id)
+        {
+            var standardResult = this._searchService.GetStandardItem(id);
+
+            if (standardResult == null)
+            {
+                return this.View("_Error404", null, $"Cannot find standard: {id}");
+            }
+
+            return View(standardResult);
         }
     }
 }

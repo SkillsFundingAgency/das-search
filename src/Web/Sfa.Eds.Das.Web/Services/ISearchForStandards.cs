@@ -5,5 +5,7 @@ namespace Sfa.Eds.Das.Web.Services
     public interface ISearchForStandards
     {
         SearchResults Search(string keywords);
+
+        SearchResultsItem GetStandardItem(string id);
     }
 }

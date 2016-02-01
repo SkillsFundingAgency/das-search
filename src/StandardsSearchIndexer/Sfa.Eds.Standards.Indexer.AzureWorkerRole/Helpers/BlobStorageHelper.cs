@@ -129,7 +129,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                     var blobsList = cloudBlobContainer.ListBlobs(null, true, BlobListingDetails.Copy);
                     foreach (var blob in blobsList)
                     {
-                        var tempBlockBlob = (CloudBlob) blob;
+                        var tempBlockBlob = (CloudBlob)blob;
 
                         if (tempBlockBlob.Name == fileName)
                         {

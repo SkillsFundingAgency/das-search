@@ -29,6 +29,5 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         public string StandardPdfContainer => ConfigurationManager.AppSettings["Standard.PdfContainer"];
 
         public string StandardContentType => ConfigurationManager.AppSettings["Standard.ContentType"];
-
     }
 }

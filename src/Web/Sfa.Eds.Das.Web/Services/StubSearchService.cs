@@ -10,6 +10,11 @@ namespace Sfa.Eds.Das.Web.Services
             return CreateStubSearchResults();
         }
 
+        public SearchResultsItem GetStandardItem(string id)
+        {
+            return new SearchResultsItem();
+        }
+
         private static SearchResults CreateStubSearchResults()
         {
             var results = new SearchResults
