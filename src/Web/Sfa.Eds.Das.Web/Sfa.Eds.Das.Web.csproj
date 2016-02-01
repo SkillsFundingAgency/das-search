@@ -257,6 +257,8 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="stylecop.json" />
     <Content Include="Sfa.Eds.Das.Web.ruleset" />
+    <Content Include="Views\Home\StandardDetail.cshtml" />
+    <Content Include="Views\Shared\_Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

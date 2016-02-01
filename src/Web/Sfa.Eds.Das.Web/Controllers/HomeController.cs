@@ -25,5 +25,17 @@
 
             return View(searchResults);
         }
+
+        public ActionResult StandardDetail(string id)
+        {
+            var standardResult = this._searchService.GetStandardItem(id);
+
+            if (standardResult == null)
+            {
+                return this.View("_Error404", null, $"Cannot find standard: {id}");
+            }
+
+            return View(standardResult);
+        }
     }
 }
