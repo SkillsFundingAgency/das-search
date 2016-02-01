@@ -1,0 +1,39 @@
+
+//
+// #standard-results .result, #framework-results .result {
+//     border-bottom: 1px solid #bfc1c3;
+//     padding: 15px 0;
+// }
+//
+// #standard-results .result:first-child, #framework-results .result:first-child {
+//     padding-top: 0;
+// }
+// #standard-results .result .actions, #framework-results .result .actions {
+//     text-align: center;
+// }
+// #standard-results .result .actions i, #framework-results .result .actions i {
+//     display: block;
+// }
+// #standard-results .result .actions a, #framework-results .result .actions a {
+//     display: block;
+//     text-decoration: none;
+// }
+
+
+.standard-results .result dt,
+.standard_detail .hgroup dt,
+.framework-results .result dt,
+.standard_detail .hgroup dt,
+.standard-result-summary dt  {
+    font-weight: 900;
+    float: left;
+    padding-right: 5px;
+}
+
+
+.standard-results .result dt:after,
+.standard_detail .hgroup dt:after,
+.framework-results .result dt:after,
+.framework_detail .hgroup dt:after {
+    content: ":";
+}
