@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <% include ./partials/head %>
+  <body>
+    <% include ./partials/header %>
+
+    <main id="content" role="main">
+
+      <p class="small-btm-margin">
+        <a href="results.html" class="link-back">results</a>
+      </p>
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <div class="hgroup">
+            <h1 class="heading-xlarge">
+              <span class="heading-secondary">Apprenticeship programmes</span>
+              Product Design and Development Engineer</h1>
+            <div class="standard-result-summary">
+              <dl>
+                <dt class="minLength">Minimum length</dt>
+                <dd class="minLength">3 years</dd>
+                <dt class="entryLevel">Entry Level</dt>
+                <dd class="entryLevel">2</dd>
+                <dt class="endLevel">End Level</dt>
+                <dd class="endLevel">3</dd>
+              </dl>
+
+            </div>
+          </div>
+
+          <section>
+            <div class="panel-indent panel-indent-info">
+              <ul>
+                <li>
+                  <a href="#">
+                    Download full details (PDF, 268KB)
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Download assessment plan (PDF, 183KB)
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </section>
+        </div>
+        <div class="column-third">
+
+          <div class="related-container">
+            <aside class="related">
+
+              <h2 class="heading-medium">Find training providers</h2>
+              <form action="/g-cloud/search" method="get" class="search-box">
+                <div class="form-group">
+                  <label class="form-label" for="q">
+                    Postcode (optional)
+                    <span class="form-hint">
+                      See all training providers in a given location.
+                    </span>
+                  </label>
+                  <input type="text" class="text-box form-control" name="q" maxlength="200">
+                </div>
+                <a href="proDetails_link_london_design.html" class="button">
+                  Search Providers
+                </a>
+              </form>
+
+            </aside>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <% include ./partials/footer %>
+
+  </body>
+</html>
