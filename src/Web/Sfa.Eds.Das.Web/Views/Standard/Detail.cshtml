@@ -1,4 +1,5 @@
-﻿@model Sfa.Eds.Das.Web.Models.SearchResultsItem
+﻿@using Sfa.Eds.Das.Web.Extensions
+@model Sfa.Eds.Das.Web.Models.SearchResultsItem
 
 @{
     ViewBag.Title = "Standard - " + @Model.Title;
@@ -7,7 +8,7 @@
 <main id="content" role="main">
 
     <p class="small-btm-margin">
-        <a href="results.html" class="link-back">results</a>
+        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
     </p>
 
     <div class="grid-row">
@@ -77,9 +78,9 @@
 
 @helper GetStandardDetailItem(string title, string item, string unit = "")
 {
-    if (!string.IsNullOrEmpty(item))
-    {
-            <dt class="minLength">@title</dt>
+if (!string.IsNullOrEmpty(item))
+{
+        <dt class="minLength">@title</dt>
             <dd class="minLength">@item @unit</dd>
-    }
+}
 }

@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web
 {
+    using System;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
@@ -8,10 +9,12 @@
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static readonly ILog Log = LogManager.GetLogger("HomeController");
+        private static readonly ILog Log = LogManager.GetLogger("MainLogger");
 
         protected void Application_Start()
         {
+            Log4NetSettings.Initialise();
+
             Log.Info("Starting web applications...");
 
             AreaRegistration.RegisterAllAreas();
@@ -20,9 +23,14 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Log4NetSettings.Initialise();
-
             Log.Info("Web applications started...");
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError().GetBaseException();
+
+            Log.Error("App_Error", ex);
         }
     }
 }
