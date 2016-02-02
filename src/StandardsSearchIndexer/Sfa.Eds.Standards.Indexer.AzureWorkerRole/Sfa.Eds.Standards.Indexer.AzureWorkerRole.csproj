@@ -117,6 +117,7 @@
     <Compile Include="Configuration\ElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="AzureAbstractions\CloudQueueWrapper.cs" />
+    <Compile Include="Configuration\Log4NetSettings.cs" />
     <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
     <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -149,15 +150,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="CI.Log.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SystemTest.Log.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Demo.Log.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="log.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
