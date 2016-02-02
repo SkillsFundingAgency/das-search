@@ -6,8 +6,8 @@
     <ProjectGuid>{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Standards.Indexer.Test</RootNamespace>
-    <AssemblyName>Sfa.Eds.Standards.Indexer.Test</AssemblyName>
+    <RootNamespace>Sfa.Eds.Standards.Indexer.Tests</RootNamespace>
+    <AssemblyName>Sfa.Eds.Standards.Indexer.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Standards.Indexer.Test.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.Standards.Indexer.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Standards.Indexer.Test.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.Standards.Indexer.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
@@ -121,7 +121,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Sfa.Eds.Standards.Indexer.Test.ruleset" />
+    <None Include="Sfa.Eds.Standards.Indexer.Tests.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>

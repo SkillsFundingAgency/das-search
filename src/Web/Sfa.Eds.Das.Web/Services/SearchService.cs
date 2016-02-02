@@ -1,25 +1,22 @@
 ﻿namespace Sfa.Eds.Das.Web.Services
 {
     using System.Linq;
-    using System;
-    using System.Configuration;
-    using Nest;
+
     using Sfa.Eds.Das.Web.Models;
+    using Sfa.Eds.Das.Web.Services.Factories;
 
     public class SearchService : ISearchForStandards
     {
+        private readonly IElasticsearchClientFactory elasticsearchClientFactory;
+
+        public SearchService(IElasticsearchClientFactory elasticsearchClientFactory)
+        {
+            this.elasticsearchClientFactory = elasticsearchClientFactory;
+        }
+
         public SearchResults Search(string keywords)
         {
-            var searchHost = ConfigurationManager.AppSettings["SearchHost"];
-            var node = new Uri(searchHost);
-
-            var settings = new ConnectionSettings(
-                node,
-                defaultIndex: "cistandardindexesalias");
-
-            settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
-
-            var client = new ElasticClient(settings);
+            var client = elasticsearchClientFactory.Create();
 
             var results = client.Search<SearchResultsItem>(s => s
             .From(0)
@@ -29,21 +26,14 @@
             return new SearchResults
             {
                 TotalResults = results.Total,
-                Results = results.Documents
+                SearchTerm = keywords,
+                Results = results.Documents.Where(i => !string.IsNullOrEmpty(i.Title))
             };
         }
 
         public SearchResultsItem GetStandardItem(string standardId)
         {
-            var searchHost = ConfigurationManager.AppSettings["SearchHost"];
-            var node = new Uri(searchHost);
-
-            var settings = new ConnectionSettings(
-                node,
-                defaultIndex: "cistandardindexesalias");
-
-            settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
-            var client = new ElasticClient(settings);
+            var client = elasticsearchClientFactory.Create();
 
             var results =
                 client.Search<SearchResultsItem>(

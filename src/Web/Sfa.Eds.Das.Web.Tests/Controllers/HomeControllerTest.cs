@@ -13,7 +13,7 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(null);
+            HomeController controller = new HomeController(null, null);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -28,7 +28,7 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
             var mockSearchService = new Mock<ISearchForStandards>();
 
             // Arrange
-            HomeController controller = new HomeController(mockSearchService.Object);
+            HomeController controller = new HomeController(mockSearchService.Object, null);
 
             // Act
             ViewResult result = controller.Search(new Models.SearchCriteria()) as ViewResult;

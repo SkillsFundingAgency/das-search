@@ -21,7 +21,7 @@
                 Apprenticeship pathways
             </h2>
             <p>
-                There are 6 apprenticeship pathways matching your search for ‘design’.
+                There are @Model.TotalResults  apprenticeship pathways matching your search for @Model.SearchTerm.
             </p>
             <ol class="frameworkResults">
                 @foreach (var item in Model.Results)
@@ -29,7 +29,7 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                <a href="appDetails_frameworks_design.html">@item.Title</a>
+                                @Html.ActionLink(item.Title, "StandardDetail", new { @id = item.StandardId })
                             </h2>
                             <dl>
                                 <dt class="entryLevel">Entry Level</dt>
