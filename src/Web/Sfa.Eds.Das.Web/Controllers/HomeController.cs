@@ -1,22 +1,18 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
-    using log4net;
-
-    using Models;
-    using Services;
+    using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Models;
+    using Sfa.Eds.Das.Web.ViewModels;
 
     public class HomeController : Controller
     {
-        private readonly ILog logger;
-
-        private readonly ISearchForStandards searchService;
-        
-        public HomeController(ISearchForStandards searchService, ILog logger)
+        private readonly ISearchService searchService;
+        public HomeController(ISearchService searchService)
         {
             this.searchService = searchService;
-            this.logger = logger;
         }
 
         public ActionResult Index()
@@ -24,26 +20,31 @@
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Search(SearchCriteria criteria)
         {
-            var searchResults = this.searchService.Search(criteria.Keywords);
+            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords);
 
-            return View(searchResults);
-        }
-
-        public ActionResult StandardDetail(string id)
-        {
-            var standardResult = this.searchService.GetStandardItem(id);
-
-            if (standardResult == null)
+            if (searchResults == null)
             {
-                var message = $"Cannot find standard: {id}";
-                this.logger.Warn($"404 - {message}");
-                return new HttpNotFoundResult(message);
+                return View(new StandardSearchResultViewModel());
             }
 
-            return View(standardResult);
+            var viewModel = new StandardSearchResultViewModel // AutoMapper
+                                {
+                                    TotalResults = searchResults.TotalResults,
+                                    SearchTerm = searchResults.SearchTerm,
+                                    Results =
+                                        searchResults.Results.Select(
+                                            m =>
+                                            new StandardResultItemViewModel
+                                                {
+                                                    StandardId = m.StandardId,
+                                                    NotionalEndLevel = m.NotionalEndLevel,
+                                                    Title = m.Title
+                                                })
+                                };
+            return View(viewModel);
         }
     }
 }

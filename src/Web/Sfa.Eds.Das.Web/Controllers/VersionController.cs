@@ -1,5 +1,4 @@
-﻿
-namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Eds.Das.Web.Controllers
 {
     using System.Web.Http;
     using System.Configuration;
