@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Eds.Das.Web.Models
+﻿namespace Sfa.Eds.Das.Core.Models
 {
+    using System.Collections.Generic;
+
     public sealed class SearchResults
     {
         public long TotalResults { get; set; }

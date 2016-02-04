@@ -1,13 +1,11 @@
-﻿namespace Sfa.Eds.Das.Web.Services.Factories
+﻿namespace Sfa.Eds.Das.Core.BusinessLogic.Services.Factories
 {
     using System;
-    using Models;
+
     using Nest;
 
-    public interface IElasticsearchClientFactory
-    {
-        ElasticClient Create();
-    }
+    using Interfaces;
+    using Models;
 
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {

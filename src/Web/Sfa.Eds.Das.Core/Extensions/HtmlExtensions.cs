@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Web.Extensions
+﻿namespace Sfa.Eds.Das.Core.Extensions
 {
     using System.Web.Mvc;
 

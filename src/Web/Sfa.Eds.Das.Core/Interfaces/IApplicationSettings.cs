@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Web.Services
+namespace Sfa.Eds.Das.Core.Interfaces
 {
     public interface IApplicationSettings
     {

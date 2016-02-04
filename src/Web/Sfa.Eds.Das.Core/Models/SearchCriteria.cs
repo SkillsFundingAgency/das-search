@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Web.Models
+﻿namespace Sfa.Eds.Das.Core.Models
 {
     public sealed class SearchCriteria
     {

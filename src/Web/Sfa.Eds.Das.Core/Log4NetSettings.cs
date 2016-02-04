@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Web
+﻿namespace Sfa.Eds.Das.Core
 {
     using System.Configuration;
     using System.Net;
@@ -22,7 +22,6 @@
 
             var logger = LogManager.GetLogger(LoggerName);
             logger.Info($"Log appender added: {logserver}");
-
         }
 
         private static void AddAppender(string loggerName, IAppender appender)
