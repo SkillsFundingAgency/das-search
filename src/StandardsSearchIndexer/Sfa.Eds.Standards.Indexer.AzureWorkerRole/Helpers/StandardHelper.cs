@@ -101,6 +101,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var indexAlias = _settings.StandardIndexesAlias;
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
+            if (!CheckIfAliasExists(indexAlias))
+            {
+                CreateAlias(newIndexName);
+            }
+
             var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
             var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
 
@@ -111,6 +116,23 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
+        }
+
+        private void CreateAlias(string indexName)
+        {
+            _client.Alias(a => a
+                .Add(add => add
+                    .Index(indexName)
+                    .Alias(_settings.StandardIndexesAlias)
+                )
+            );
+        }
+
+        private bool CheckIfAliasExists(string aliasName)
+        {
+            var aliasExistsResponse = _client.AliasExists(aliasName);
+
+            return aliasExistsResponse.Exists;
         }
 
         private string GetIndexNameAndDateExtension(DateTime dateTime)
