@@ -1,5 +1,7 @@
 Param($url, $username, $password)
 
+ls .
+
 $webClient = new-object System.Net.WebClient
 $buildId = $webClient.DownloadString($url + "/api/version") -replace '"', ''
 Write-Host $buildId
