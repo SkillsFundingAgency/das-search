@@ -1,7 +1,5 @@
 Param($url, $username, $password)
 
-ls .
-
 $webClient = new-object System.Net.WebClient
 $buildId = $webClient.DownloadString($url + "/api/version") -replace '"', ''
 Write-Host $buildId
@@ -29,3 +27,7 @@ foreach($item in $zip.items())
 {
 	$shell.Namespace($buildFolder).copyhere($item)
 }
+
+Get-ChildItem -Path ".\" -Filter *.dll -Recurse
+
+ls ".\build\test"
