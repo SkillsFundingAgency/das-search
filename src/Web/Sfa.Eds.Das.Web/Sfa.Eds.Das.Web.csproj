@@ -191,7 +191,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\Log4NetSettings.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -199,30 +198,21 @@
     <Compile Include="Controllers\StandardController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
-    <Compile Include="DependencyResolution\SearchRegistry.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
+    <Compile Include="DependencyResolution\SearchRegistry.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
-    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\SearchCriteria.cs" />
-    <Compile Include="Models\SearchResults.cs" />
-    <Compile Include="Models\SearchResultsItem.cs" />
-    <Compile Include="Models\StandardDocument.cs" />
-    <Compile Include="Models\ViewModels\LinkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ApplicationSettings.cs" />
-    <Compile Include="Services\Factories\ElasticsearchClientFactory.cs" />
-    <Compile Include="Services\IApplicationSettings.cs" />
-    <Compile Include="Services\ISearchForStandards.cs" />
-    <Compile Include="Services\SearchService.cs" />
-    <Compile Include="Services\StubSearchService.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ViewModels\LinkViewModel.cs" />
+    <Compile Include="ViewModels\StandardResultItemViewModel.cs" />
+    <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\StandardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\fonts.css" />
@@ -273,6 +263,12 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Core\Sfa.Eds.Das.Core.csproj">
+      <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
+      <Name>Sfa.Eds.Das.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

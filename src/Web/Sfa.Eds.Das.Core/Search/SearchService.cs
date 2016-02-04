@@ -1,11 +1,13 @@
-﻿namespace Sfa.Eds.Das.Web.Services
+﻿namespace Sfa.Eds.Das.Core.Search
 {
     using System.Linq;
 
-    using Sfa.Eds.Das.Web.Models;
-    using Sfa.Eds.Das.Web.Services.Factories;
+    using Interfaces.Search;
+    using Models;
 
-    public class SearchService : ISearchForStandards
+    using Interfaces;
+
+    public class SearchService : ISearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
 
@@ -14,9 +16,9 @@
             this.elasticsearchClientFactory = elasticsearchClientFactory;
         }
 
-        public SearchResults Search(string keywords)
+        public SearchResults SearchByKeyword(string keywords)
         {
-            var client = elasticsearchClientFactory.Create();
+            var client = this.elasticsearchClientFactory.Create();
 
             var results = client.Search<SearchResultsItem>(s => s
             .From(0)
@@ -33,7 +35,7 @@
 
         public SearchResultsItem GetStandardItem(string standardId)
         {
-            var client = elasticsearchClientFactory.Create();
+            var client = this.elasticsearchClientFactory.Create();
 
             var results =
                 client.Search<SearchResultsItem>(
@@ -43,11 +45,8 @@
                     .Query(q =>
                         q.QueryString(qs =>
                             qs.OnFields(e => e.StandardId)
-                            .Query(standardId)))
-                    );
-
+                            .Query(standardId))));
             return results.Documents.Any() ? results.Documents.First() : null;
         }
-
     }
 }

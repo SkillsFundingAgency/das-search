@@ -1,8 +1,5 @@
-﻿namespace Sfa.Eds.Das.Web.Models
+﻿namespace Sfa.Eds.Das.Core.Models
 {
-    using System;
-
-    using Sfa.Eds.Das.Web.Models.ViewModels;
 
     public sealed class SearchResultsItem
     {
@@ -17,7 +14,5 @@
         public string PdfUrl { get; set; }
 
         public string MinimumLength { get; set; }
-
-        public LinkViewModel SearchResultLink { get; set; }
     }
 }

@@ -2,7 +2,7 @@ namespace Sfa.Eds.Das.Web
 {
     using System.Web.Http;
 
-    public class WebApiConfig
+    public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {

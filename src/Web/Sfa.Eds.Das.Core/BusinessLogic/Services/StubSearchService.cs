@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using Sfa.Eds.Das.Web.Models;
-
-namespace Sfa.Eds.Das.Web.Services
+﻿namespace Sfa.Eds.Das.Core.BusinessLogic.Services
 {
-    public class StubSearchService : ISearchForStandards
+    using System.Collections.Generic;
+
+    using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Models;
+
+    public class StubSearchService : ISearchService
     {
-        public SearchResults Search(string keywords)
+        public SearchResults SearchByKeyword(string keywords)
         {
             return CreateStubSearchResults();
         }

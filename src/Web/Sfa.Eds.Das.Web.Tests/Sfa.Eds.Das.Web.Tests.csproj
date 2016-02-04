@@ -126,6 +126,10 @@
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Core\Sfa.Eds.Das.Core.csproj">
+      <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
+      <Name>Sfa.Eds.Das.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Web\Sfa.Eds.Das.Web.csproj">
       <Project>{E288C11D-B65E-4FD4-9C8D-7D734A7E947D}</Project>
       <Name>Sfa.Eds.Das.Web</Name>

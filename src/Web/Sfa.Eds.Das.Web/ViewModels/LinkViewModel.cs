@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Web.Models.ViewModels
+namespace Sfa.Eds.Das.Web.ViewModels
 {
     public class LinkViewModel
     {

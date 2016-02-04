@@ -42,7 +42,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
             if (container == null) {
                 throw new ArgumentNullException("container");
             }
-            Container = container;
+            this.Container = container;
         }
 
         #endregion
@@ -53,10 +53,10 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
 
         public IContainer CurrentNestedContainer {
             get {
-                return (IContainer)HttpContext.Items[NestedContainerKey];
+                return (IContainer)this.HttpContext.Items[NestedContainerKey];
             }
             set {
-                HttpContext.Items[NestedContainerKey] = value;
+                this.HttpContext.Items[NestedContainerKey] = value;
             }
         }
 
@@ -66,7 +66,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
 
         private HttpContextBase HttpContext {
             get {
-                var ctx = Container.TryGetInstance<HttpContextBase>();
+                var ctx = this.Container.TryGetInstance<HttpContextBase>();
                 return ctx ?? new HttpContextWrapper(System.Web.HttpContext.Current);
             }
         }
@@ -76,26 +76,26 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
         #region Public Methods and Operators
 
         public void CreateNestedContainer() {
-            if (CurrentNestedContainer != null) {
+            if (this.CurrentNestedContainer != null) {
                 return;
             }
-            CurrentNestedContainer = Container.GetNestedContainer();
+            this.CurrentNestedContainer = this.Container.GetNestedContainer();
         }
 
         public void Dispose() {
-            DisposeNestedContainer();
-            Container.Dispose();
+            this.DisposeNestedContainer();
+            this.Container.Dispose();
         }
 
         public void DisposeNestedContainer() {
-            if (CurrentNestedContainer != null) {
-                CurrentNestedContainer.Dispose();
-				CurrentNestedContainer = null;
+            if (this.CurrentNestedContainer != null) {
+                this.CurrentNestedContainer.Dispose();
+				this.CurrentNestedContainer = null;
             }
         }
 
         public IEnumerable<object> GetServices(Type serviceType) {
-            return DoGetAllInstances(serviceType);
+            return this.DoGetAllInstances(serviceType);
         }
 
         #endregion
@@ -103,11 +103,11 @@ namespace Sfa.Eds.Das.Web.DependencyResolution {
         #region Methods
 
         protected override IEnumerable<object> DoGetAllInstances(Type serviceType) {
-            return (CurrentNestedContainer ?? Container).GetAllInstances(serviceType).Cast<object>();
+            return Enumerable.Cast<object>((this.CurrentNestedContainer ?? this.Container).GetAllInstances(serviceType));
         }
 
         protected override object DoGetInstance(Type serviceType, string key) {
-            IContainer container = (CurrentNestedContainer ?? Container);
+            IContainer container = (this.CurrentNestedContainer ?? this.Container);
 
             if (string.IsNullOrEmpty(key)) {
                 return serviceType.IsAbstract || serviceType.IsInterface
