@@ -10,6 +10,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
         bool CreateIndex(DateTime scheduledRefreshDateTime);
         Task IndexStandards(DateTime scheduledRefreshDateTime);
         void SwapIndexes(DateTime scheduledRefreshDateTime);
+        void DeleteOldIndexes(DateTime scheduledRefreshDateTime);
         bool IsIndexCorrectlyCreated();
     }
 }
