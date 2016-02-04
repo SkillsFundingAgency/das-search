@@ -24,6 +24,12 @@
         public ActionResult Search(SearchCriteria criteria)
         {
             var searchResults = this.searchService.SearchByKeyword(criteria.Keywords);
+
+            if (searchResults == null)
+            {
+                return View(new StandardSearchResultViewModel());
+            }
+
             var viewModel = new StandardSearchResultViewModel // AutoMapper
                                 {
                                     TotalResults = searchResults.TotalResults,
