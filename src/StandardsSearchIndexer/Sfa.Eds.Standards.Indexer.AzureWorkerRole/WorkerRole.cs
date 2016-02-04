@@ -9,6 +9,8 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
+    using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
+
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -54,6 +56,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _scheduler = container.GetInstance<IIndexerScheduler>();
+
+            Log4NetSettings.Initialise();
         }
     }
 }

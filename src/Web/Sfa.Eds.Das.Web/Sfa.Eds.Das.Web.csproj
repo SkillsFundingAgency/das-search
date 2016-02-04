@@ -196,6 +196,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StandardController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\SearchRegistry.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +214,7 @@
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Models\SearchResultsItem.cs" />
     <Compile Include="Models\StandardDocument.cs" />
+    <Compile Include="Models\ViewModels\LinkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationSettings.cs" />
     <Compile Include="Services\Factories\ElasticsearchClientFactory.cs" />
@@ -251,9 +254,9 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="stylecop.json" />
     <Content Include="Sfa.Eds.Das.Web.ruleset" />
-    <Content Include="Views\Home\StandardDetail.cshtml" />
     <Content Include="Views\Error\_Error404.cshtml" />
     <Content Include="Views\Error\_Error500.cshtml" />
+    <Content Include="Views\Standard\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
