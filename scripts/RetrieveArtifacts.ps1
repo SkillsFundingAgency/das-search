@@ -8,7 +8,7 @@ Write-Host $buildId
 $url2 = "https://sfa-gov-uk.visualstudio.com/DefaultCollection/Digital%20Apprenticeship%20Service/_apis/build/builds/$buildId/artifacts?api-version=2.0"
 Write-Host $url2
 
-$buildFolder = (Get-Item -Path "..\build" -Verbose).FullName
+$buildFolder = (Get-Item -Path ".\build" -Verbose).FullName
 $zipFile = $buildFolder + "\tests.zip"
 Write-Host $zipFile
 
