@@ -29,18 +29,13 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
             return result.Results.Length != 0 ? int.Parse(result.Results[0][5]) : 0;
         }
 
-        /// <summary>
-        ///     Query Descriptors contain parameter listings under the FilterDescriptors property
-        /// </summary>
-        /// <param name="dataSetName"></param>
-        /// <returns></returns>
         private QueryDescriptor[] GetQueryDescriptors(string dataSetName)
         {
             using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
             {
                 var dataSetVersionDescriptor = client.GetLatestPublishedDataSetVersion(dataSetName);
 
-                var queryDescriptors = client.DiscoverQueries(new DiscoverQueriesCriteria {DataSetVersionId = dataSetVersionDescriptor.Id});
+                var queryDescriptors = client.DiscoverQueries(new DiscoverQueriesCriteria { DataSetVersionId = dataSetVersionDescriptor.Id });
                 return queryDescriptors;
             }
         }
@@ -79,7 +74,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
         {
             using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
             {
-                return client.ExecuteQuery((Guid) queryDescriptor.Id, queryExecution);
+                return client.ExecuteQuery((Guid)queryDescriptor.Id, queryExecution);
             }
         }
 

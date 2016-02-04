@@ -102,7 +102,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 if (ScenarioContext.Current.TestError != null)
                 {
                     IWebDriver driver = null;
-                    TakeScreenshot(driver); // this is throwing some warning , need to fix.
+                   // TakeScreenshot(driver); // this is throwing some warning , need to fix.
                 }
                // localDriver.Quit(); //no need to kill driver after each scenario
             }

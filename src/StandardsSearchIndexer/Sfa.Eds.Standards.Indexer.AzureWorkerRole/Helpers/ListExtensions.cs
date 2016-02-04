@@ -10,7 +10,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
         {
             foreach (var item in list)
             {
-                await action(item);
+                await action(item).ConfigureAwait(false);
             }
         }
     }

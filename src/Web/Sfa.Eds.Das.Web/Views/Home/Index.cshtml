@@ -2,23 +2,56 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<main id="content" role="main">
+    <a href="appBrowseSearch.html" class="link-back">Back</a>
 
-<div class="jumbotron">
-    <h1>Employer Apprenticeship Search - Sprint 2</h1>
-</div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
 
-<div class="row">
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-4">
-        <div>
-            @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+            <h1 class="heading-xlarge">
+                <span class="heading-secondary">Apprenticeship programmes</span>
+                Search
+            </h1>
+
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post, new {@class = "search-box" }))
             {
-                <input id="keywords" name="Keywords" type="text" placeholder="Enter search term" />
-                <input type="submit" value="Search" />
+                <div class="form-group">
+                    <legend>
+                        <label for="input-keywords">
+                            <span class="form-hint">
+                            Enter the job role or keyword you’re looking for, eg Engineering or Accountant.
+                        </span>
+                        </label>
+
+                        <span class="error-message"></span>
+                    </legend>
+                    <input type="text" id="keywords" name="Keywords" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
+                </div>                       
+                <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
             }
+           
         </div>
+
+        <div class="column-third">
+            <div class="related-container">
+                <aside class="related" id="related">
+                    <div class="inner group related-subsection">
+                        <h2 id="parent-subsection">Employers</h2>
+                        <nav role="navigation" aria-labelledby="parent-subsection">
+                            <a href="">
+                                Employ an apprentice
+                            </a>
+                        </nav>
+                    </div>
+
+                    <div class="inner group">
+                        <a class="return-to-top" href="#content">Return to top ↑</a>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+
     </div>
-    <div class="col-md-4">
-    </div>
-</div>
+
+</main>

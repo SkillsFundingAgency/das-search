@@ -1,0 +1,36 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "500";
+}
+
+<main id="content" role="main">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <div class="hgroup">
+                <h1 class="heading-xlarge">
+                    @if (string.IsNullOrEmpty(Model))
+                    {
+                        @Html.Raw("Error");
+                    }
+                    else
+                    {
+                        @Model
+                    }
+                </h1>
+            </div>
+
+            <div class="inner">
+                <p>Error</p>
+                <p>
+                    You can also
+                    <a href="/search">search GOV.UK</a>
+                    or
+                    <a href="/">browse from the homepage</a>
+                    to find the information you need.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>

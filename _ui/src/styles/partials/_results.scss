@@ -1,0 +1,31 @@
+/* Mobile First CSS */
+
+.standardResults, .frameworkResults {
+    border-top: 1px solid #bfc1c3;
+    list-style-type:none;
+}
+
+.standardResults .result dt, .frameworkResults .result dt {
+    font-weight: 900;
+    float: left;
+    padding-right: 5px;
+}
+.standardResults h2, .frameworkResults h2 {
+    margin-top: 0;
+    text-transform: lowercase;
+}
+
+.standardResults .result, .frameworkResults .result {
+    border-bottom: 1px solid #bfc1c3;
+    padding: 15px 0;
+}
+
+.standardResults h2::first-letter, .frameworkResults h2::first-letter {
+    text-transform: uppercase;
+}
+
+.trailblazerMessage {
+    border: 5px solid #2B8CC4;
+    background: white;
+    padding: 15px;
+}

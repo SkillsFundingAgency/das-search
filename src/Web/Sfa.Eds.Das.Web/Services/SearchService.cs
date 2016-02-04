@@ -1,25 +1,22 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using Nest;
-using Sfa.Eds.Das.Web.Models;
-
-namespace Sfa.Eds.Das.Web.Services
+﻿namespace Sfa.Eds.Das.Web.Services
 {
+    using System.Linq;
+
+    using Sfa.Eds.Das.Web.Models;
+    using Sfa.Eds.Das.Web.Services.Factories;
+
     public class SearchService : ISearchForStandards
     {
+        private readonly IElasticsearchClientFactory elasticsearchClientFactory;
+
+        public SearchService(IElasticsearchClientFactory elasticsearchClientFactory)
+        {
+            this.elasticsearchClientFactory = elasticsearchClientFactory;
+        }
+
         public SearchResults Search(string keywords)
         {
-            var searchHost = ConfigurationManager.AppSettings["SearchHost"];
-            var node = new Uri(searchHost);
-
-            var settings = new ConnectionSettings(
-                node,
-                defaultIndex: "cistandardindexesalias");
-
-            settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
-
-            var client = new ElasticClient(settings);
+            var client = elasticsearchClientFactory.Create();
 
             var results = client.Search<SearchResultsItem>(s => s
             .From(0)
@@ -29,22 +26,28 @@ namespace Sfa.Eds.Das.Web.Services
             return new SearchResults
             {
                 TotalResults = results.Total,
-                Results = results.Documents
+                SearchTerm = keywords,
+                Results = results.Documents.Where(i => !string.IsNullOrEmpty(i.Title))
             };
         }
 
-        private QueryContainer BuildContainer(QueryContainer queryContainer, QueryContainer queryClause)
+        public SearchResultsItem GetStandardItem(string standardId)
         {
-            if (queryContainer == null)
-            {
-                queryContainer = queryClause;
-            }
-            else
-            {
-                queryContainer |= queryClause;
-            }
+            var client = elasticsearchClientFactory.Create();
 
-            return queryContainer;
+            var results =
+                client.Search<SearchResultsItem>(
+                    s => s
+                    .From(0)
+                    .Size(1000)
+                    .Query(q =>
+                        q.QueryString(qs =>
+                            qs.OnFields(e => e.StandardId)
+                            .Query(standardId)))
+                    );
+
+            return results.Documents.Any() ? results.Documents.First() : null;
         }
+
     }
 }

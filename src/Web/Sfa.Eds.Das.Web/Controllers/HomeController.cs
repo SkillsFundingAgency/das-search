@@ -1,35 +1,49 @@
-﻿using System.Web.Mvc;
-using Sfa.Eds.Das.Web.Models;
-using Sfa.Eds.Das.Web.Services;
-
-namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System.Reflection;
+    using System.Web.Mvc;
 
     using log4net;
 
+    using Models;
+    using Services;
+
     public class HomeController : Controller
     {
-        private static readonly ILog Log = LogManager.GetLogger("HomeController");
-        private readonly ISearchForStandards _searchService;
+        private readonly ILog logger;
 
-        public HomeController(ISearchForStandards searchService)
+        private readonly ISearchForStandards searchService;
+        
+        public HomeController(ISearchForStandards searchService, ILog logger)
         {
-            this._searchService = searchService;
+            this.searchService = searchService;
+            this.logger = logger;
         }
 
         public ActionResult Index()
         {
-            Log.Warn("Hello from!");
             return View();
         }
 
         [HttpPost]
         public ActionResult Search(SearchCriteria criteria)
         {
-            var searchResults = _searchService.Search(criteria.Keywords);
+            var searchResults = this.searchService.Search(criteria.Keywords);
 
             return View(searchResults);
+        }
+
+        public ActionResult StandardDetail(string id)
+        {
+            var standardResult = this.searchService.GetStandardItem(id);
+
+            if (standardResult == null)
+            {
+                var message = $"Cannot find standard: {id}";
+                this.logger.Warn($"404 - {message}");
+                return new HttpNotFoundResult(message);
+            }
+
+            return View(standardResult);
         }
     }
 }

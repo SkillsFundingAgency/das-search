@@ -10,27 +10,25 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
     public class HomeControllerTest
     {
         [Test]
-        [Ignore]
         public void Index()
         {
             // Arrange
-            HomeController contr_oller = new HomeController(null);
+            HomeController controller = new HomeController(null, null);
 
             // Act
-            ViewResult result = contr_oller.Index() as ViewResult;
+            ViewResult result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [Test]
-        [Ignore]
         public void Search()
         {
             var mockSearchService = new Mock<ISearchForStandards>();
 
             // Arrange
-            HomeController controller = new HomeController(mockSearchService.Object);
+            HomeController controller = new HomeController(mockSearchService.Object, null);
 
             // Act
             ViewResult result = controller.Search(new Models.SearchCriteria()) as ViewResult;

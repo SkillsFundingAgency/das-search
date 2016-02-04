@@ -1,19 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Employer Apprenticeship Search</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>@ViewBag.Title - Employer Apprenticeship Search</title>
+        <meta name="description" content="Description to go here" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="format-detection" content="date=no" />
+        <meta name="format-detection" content="address=no" />
+        <meta name="ROBOTS" content="NOFOLLOW,NOINDEX" />
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        @*<link href="~/Content/css/screen.min.css" rel="stylesheet" />
+        <link href="~/Content/css/fonts.css" rel="stylesheet" />*@
+
+        @Styles.Render("/styles")
+
+
+    </head>
+
+    <body>
+
+        @Html.Partial("_Header")
+
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+
+        @Html.Partial("_Footer")
+
+    </body>
 </html>

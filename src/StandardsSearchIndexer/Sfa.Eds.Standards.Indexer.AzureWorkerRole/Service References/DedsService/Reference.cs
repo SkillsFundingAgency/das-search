@@ -8,12 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-#pragma warning disable 1125
-
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService {
     using System.Runtime.Serialization;
     using System;
-
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DataContractBase", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
@@ -1751,4 +1750,3 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService {
         }
     }
 }
-#pragma warning restore 1125
