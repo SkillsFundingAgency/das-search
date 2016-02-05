@@ -14,16 +14,16 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
         private readonly ICloudQueueService _cloudQueueService;
 
         private readonly IStandardIndexSettings _standardIndexSettings;
-        private readonly IStandardService _standardService;
+        private readonly IStandardIndexerService _standardIndexerService;
 
         public StandardControlQueueConsumer(
-            IStandardService standardService,
+            IStandardIndexerService standardIndexerService,
             IStandardIndexSettings standardIndexSettings,
             ICloudQueueService cloudQueueService)
         {
             _standardIndexSettings = standardIndexSettings;
             _cloudQueueService = cloudQueueService;
-            _standardService = standardService;
+            _standardIndexerService = standardIndexerService;
         }
 
         public void CheckMessage()
@@ -38,7 +38,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                 if (message != null)
                 {
                     Log.Info("Creating new scheduled index at " + DateTime.Now);
-                    _standardService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                    _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                 }
             }
 

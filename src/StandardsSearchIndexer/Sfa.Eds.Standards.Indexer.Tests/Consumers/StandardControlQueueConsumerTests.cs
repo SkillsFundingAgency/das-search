@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Moq;
 using NUnit.Framework;
@@ -9,12 +8,12 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
-namespace Sfa.Eds.Standards.Indexer.Test.Consumers
+namespace Sfa.Eds.Standards.Indexer.Tests.Consumers
 {
     [TestFixture]
     public class StandardControlQueueConsumerTests
     {
-        private Mock<IStandardService> _mockService;
+        private Mock<IStandardIndexerService> _mockService;
         private Mock<ICloudQueueService> _mockCloudQueueService;
         private Mock<ICloudQueueWrapper> _mockQueue;
         private IStandardIndexSettings _mockSettings;
@@ -24,7 +23,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Consumers
         public void Setup()
         {
             // Arrange
-            _mockService = new Mock<IStandardService>();
+            _mockService = new Mock<IStandardIndexerService>();
             _mockCloudQueueService = new Mock<ICloudQueueService>();
             _mockQueue = new Mock<ICloudQueueWrapper>();
             _mockSettings = Mock.Of<IStandardIndexSettings>();

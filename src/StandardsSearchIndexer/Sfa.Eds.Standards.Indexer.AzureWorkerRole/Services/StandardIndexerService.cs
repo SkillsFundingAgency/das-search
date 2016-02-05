@@ -7,13 +7,13 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
-    public class StandardService : IStandardService
+    public class StandardIndexerService : IStandardIndexerService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IStandardHelper _standardHelper;
         private readonly IStandardIndexSettings _standardIndexSettings;
 
-        public StandardService(
+        public StandardIndexerService(
             IStandardIndexSettings standardIndexSettings,
             IStandardHelper standardHelper)
         {
