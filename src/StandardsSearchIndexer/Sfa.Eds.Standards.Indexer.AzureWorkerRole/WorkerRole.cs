@@ -20,7 +20,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IIndexerScheduler _scheduler;
-        private IControlQueueConsumer _standardControlQueueConsumer;
+        private IStandardControlQueueConsumer _standardControlQueueConsumer;
+        private IProviderControlQueueConsumer _providerControlQueueConsumer;
 
         public override void Run()
         {
@@ -31,7 +32,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 {
                     var tasks = new List<Task>
                     {
-                        _standardControlQueueConsumer.CheckMessage()
+                        _standardControlQueueConsumer.CheckMessage(),
+                        _providerControlQueueConsumer.CheckMessage()
                     };
 
                     Task.WaitAll(tasks.ToArray());
@@ -75,7 +77,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private void Initialise()
         {
             var container = IoC.Initialize();
-            _standardControlQueueConsumer = container.GetInstance<IControlQueueConsumer>();
+            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+            _providerControlQueueConsumer = container.GetInstance<IProviderControlQueueConsumer>();
             _scheduler = container.GetInstance<IIndexerScheduler>();
 
             Log4NetSettings.Initialise();

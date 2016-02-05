@@ -118,7 +118,9 @@
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="AzureAbstractions\CloudQueueWrapper.cs" />
     <Compile Include="Configuration\Log4NetSettings.cs" />
+    <Compile Include="Consumers\IProviderControlQueueConsumer.cs" />
     <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
+    <Compile Include="Consumers\ProviderControlQueueConsumer.cs" />
     <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\IndexerRegistry.cs" />
@@ -139,8 +141,10 @@
     </Compile>
     <Compile Include="Services\DedsService.cs" />
     <Compile Include="Services\IDedsService.cs" />
+    <Compile Include="Services\IProviderIndexerService.cs" />
     <Compile Include="Services\IStandardIndexerService.cs" />
     <Compile Include="Helpers\StandardHelper.cs" />
+    <Compile Include="Services\ProviderIndexerService.cs" />
     <Compile Include="Services\StandardIndexerService.cs" />
     <Compile Include="Settings\IProviderIndexSettings.cs" />
     <Compile Include="Settings\IStandardIndexSettings.cs" />

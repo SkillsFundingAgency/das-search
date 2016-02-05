@@ -9,29 +9,29 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
-    public class StandardControlQueueConsumer : IStandardControlQueueConsumer
+    public class ProviderControlQueueConsumer : IProviderControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICloudQueueService _cloudQueueService;
 
-        private readonly IStandardIndexSettings _standardIndexSettings;
-        private readonly IStandardIndexerService _standardIndexerService;
+        private readonly IProviderIndexSettings _providerIndexSettings;
+        private readonly IProviderIndexerService _providerIndexerService;
 
-        public StandardControlQueueConsumer(
-            IStandardIndexerService standardIndexerService,
-            IStandardIndexSettings standardIndexSettings,
+        public ProviderControlQueueConsumer(
+            IProviderIndexerService providerIndexerService,
+            IProviderIndexSettings providerIndexSettings,
             ICloudQueueService cloudQueueService)
         {
-            _standardIndexSettings = standardIndexSettings;
+            _providerIndexSettings = providerIndexSettings;
             _cloudQueueService = cloudQueueService;
-            _standardIndexerService = standardIndexerService;
+            _providerIndexerService = providerIndexerService;
         }
 
         public Task CheckMessage()
         {
             return Task.Run(() =>
             {
-                var queue = _cloudQueueService.GetQueueReference(_standardIndexSettings.ConnectionString, _standardIndexSettings.QueueName);
+                var queue = _cloudQueueService.GetQueueReference(_providerIndexSettings.ConnectionString, _providerIndexSettings.QueueName);
                 var cloudQueueMessages = queue.GetMessages(10);
                 var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
 
@@ -40,8 +40,8 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
                     var message = messages.FirstOrDefault();
                     if (message != null)
                     {
-                        Log.Info("Creating new scheduled standard index at " + DateTime.Now);
-                        _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                        Log.Info("Creating new scheduled provider index at " + DateTime.Now);
+                        _providerIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                     }
                 }
 
