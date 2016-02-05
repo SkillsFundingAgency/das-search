@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Elasticsearch.Net.Connection;
+
     using Nest;
 
     using Interfaces;
@@ -16,7 +18,7 @@
             this.applicationSettings = applicationSettings;
         }
 
-        public ElasticClient Create()
+        public IElasticClient Create()
         {
             var node = new Uri(this.applicationSettings.SearchHost);
 
@@ -25,7 +27,7 @@
                 defaultIndex: this.applicationSettings.StandardIndexesAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
-
+            
             return new ElasticClient(settings);
         }
     }

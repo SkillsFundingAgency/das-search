@@ -34,7 +34,7 @@
             // Arrange
 
             var mockSearchService = new Mock<ISearchService>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>())).Returns(new SearchResults());
+            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new SearchResults());
 
             var moqMappingServices = new Mock<IMappingService>();
             moqMappingServices.Setup(

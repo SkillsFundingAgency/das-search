@@ -7,7 +7,7 @@
 
     public class StubSearchService : ISearchService
     {
-        public SearchResults SearchByKeyword(string keywords)
+        public SearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             return CreateStubSearchResults();
         }

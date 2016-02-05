@@ -8,7 +8,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class when_RenderIfExists
+    public class WhenRenderIfExists
     {
         private HtmlHelper helper = new HtmlHelper(new ViewContext(), Mock.Of<IViewDataContainer>());
 

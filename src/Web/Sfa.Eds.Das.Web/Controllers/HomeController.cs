@@ -27,7 +27,7 @@
         [HttpGet]
         public ActionResult Search(SearchCriteria criteria)
         {
-            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords);
+            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
             if (searchResults == null)
             {
