@@ -142,7 +142,9 @@
     <Compile Include="Services\IStandardIndexerService.cs" />
     <Compile Include="Helpers\StandardHelper.cs" />
     <Compile Include="Services\StandardIndexerService.cs" />
+    <Compile Include="Settings\IProviderIndexSettings.cs" />
     <Compile Include="Settings\IStandardIndexSettings.cs" />
+    <Compile Include="Settings\ProviderIndexSettings.cs" />
     <Compile Include="Settings\StandardIndexSettings.cs" />
     <Compile Include="WorkerRole.cs" />
   </ItemGroup>

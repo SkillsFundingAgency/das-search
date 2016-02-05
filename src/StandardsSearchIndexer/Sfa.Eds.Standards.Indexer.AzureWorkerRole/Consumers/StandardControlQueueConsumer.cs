@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.AzureAbstractions;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
@@ -8,7 +9,7 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
 {
-    public class StandardControlQueueConsumer : IStandardControlQueueConsumer
+    public class StandardControlQueueConsumer : IControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICloudQueueService _cloudQueueService;
@@ -26,26 +27,29 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers
             _standardIndexerService = standardIndexerService;
         }
 
-        public void CheckMessage()
+        public Task CheckMessage()
         {
-            var queue = _cloudQueueService.GetQueueReference(_standardIndexSettings.ConnectionString, _standardIndexSettings.QueueName);
-            var cloudQueueMessages = queue.GetMessages(10);
-            var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
-
-            if (messages.Any())
+            return Task.Run(() =>
             {
-                var message = messages.FirstOrDefault();
-                if (message != null)
+                var queue = _cloudQueueService.GetQueueReference(_standardIndexSettings.ConnectionString, _standardIndexSettings.QueueName);
+                var cloudQueueMessages = queue.GetMessages(10);
+                var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
+
+                if (messages.Any())
                 {
-                    Log.Info("Creating new scheduled index at " + DateTime.Now);
-                    _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                    var message = messages.FirstOrDefault();
+                    if (message != null)
+                    {
+                        Log.Info("Creating new scheduled standard index at " + DateTime.Now);
+                        _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                    }
                 }
-            }
 
-            foreach (var cloudQueueMessage in messages)
-            {
-                queue.DeleteMessage(cloudQueueMessage);
-            }
+                foreach (var cloudQueueMessage in messages)
+                {
+                    queue.DeleteMessage(cloudQueueMessage);
+                }
+            });
         }
     }
 }

@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using log4net;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
@@ -17,12 +20,30 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
         private IIndexerScheduler _scheduler;
-        private IStandardControlQueueConsumer _standardControlQueueConsumer;
+        private IControlQueueConsumer _standardControlQueueConsumer;
 
         public override void Run()
         {
             Log.Info("Starting indexer...");
-            _scheduler.Schedule(() => _standardControlQueueConsumer.CheckMessage(), 10);
+            while (true)
+            {
+                try
+                {
+                    var tasks = new List<Task>
+                    {
+                        _standardControlQueueConsumer.CheckMessage()
+                    };
+
+                    Task.WaitAll(tasks.ToArray());
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Exception from  " + ex.Message);
+                }
+
+                Thread.Sleep(TimeSpan.FromMinutes(10));
+            }
+            //_scheduler.Schedule(() => _standardControlQueueConsumer.CheckMessage(), 10);
         }
 
         public override bool OnStart()
@@ -54,7 +75,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private void Initialise()
         {
             var container = IoC.Initialize();
-            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
+            _standardControlQueueConsumer = container.GetInstance<IControlQueueConsumer>();
             _scheduler = container.GetInstance<IIndexerScheduler>();
 
             Log4NetSettings.Initialise();
