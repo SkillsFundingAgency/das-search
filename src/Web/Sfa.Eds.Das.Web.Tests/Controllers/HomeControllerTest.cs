@@ -14,7 +14,7 @@
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(null);
+            HomeController controller = new HomeController(null, null);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +29,7 @@
             var mockSearchService = new Mock<ISearchService>();
 
             // Arrange
-            HomeController controller = new HomeController(mockSearchService.Object);
+            HomeController controller = new HomeController(mockSearchService.Object, null);
 
             // Act
             ViewResult result = controller.Search(new SearchCriteria()) as ViewResult;

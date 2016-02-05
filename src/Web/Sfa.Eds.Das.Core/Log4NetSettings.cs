@@ -27,8 +27,8 @@
         private static void AddAppender(string loggerName, IAppender appender)
         {
             ILog log = LogManager.GetLogger(loggerName);
-            var l = (Logger)log.Logger;
-
+            var l = log.Logger as Logger;
+            
             l.Hierarchy.Root.AddAppender(appender);
             l.AddAppender(appender);
         }
