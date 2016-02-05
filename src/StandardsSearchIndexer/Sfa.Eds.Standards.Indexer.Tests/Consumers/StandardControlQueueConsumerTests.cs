@@ -39,7 +39,8 @@ namespace Sfa.Eds.Standards.Indexer.Tests.Consumers
                 .Returns(_mockQueue.Object);
 
             // Act
-            _sut.CheckMessage();
+            var task = _sut.CheckMessage();
+            task.Wait();
 
             // Assert
             _mockService.Verify(x => x.CreateScheduledIndex(It.IsAny<DateTime>()), Times.Never);
@@ -61,7 +62,8 @@ namespace Sfa.Eds.Standards.Indexer.Tests.Consumers
                 .Returns(new List<CloudQueueMessage>() { new CloudQueueMessage(string.Empty) });
 
             // Act
-            _sut.CheckMessage();
+            var task = _sut.CheckMessage();
+            task.Wait();
 
             // Assert
             _mockService.Verify(x => x.CreateScheduledIndex(It.IsAny<DateTime>()), Times.Once);
