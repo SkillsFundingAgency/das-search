@@ -7,22 +7,23 @@ using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 {
-    public class StandardService : IStandardService
+    public class ProviderIndexerService : IProviderIndexerService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IStandardHelper _standardHelper;
-        private readonly IStandardIndexSettings _standardIndexSettings;
+        private readonly IProviderIndexSettings _providerIndexSettings;
 
-        public StandardService(
-            IStandardIndexSettings standardIndexSettings,
+        public ProviderIndexerService(
+            IProviderIndexSettings providerIndexSettings,
             IStandardHelper standardHelper)
         {
-            _standardIndexSettings = standardIndexSettings;
+            _providerIndexSettings = providerIndexSettings;
             _standardHelper = standardHelper;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
+            /*
             Log.Info("Creating new index...");
 
             var existingPreviousIndex = _standardHelper.CreateIndex(scheduledRefreshDateTime);
@@ -51,11 +52,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
                 Log.Info("Deletion completed...");
             }
+            */
         }
 
         private void PauseWhileIndexingIsBeingRun()
         {
-            var time = _standardIndexSettings.PauseTime;
+            var time = _providerIndexSettings.PauseTime;
             Thread.Sleep(int.Parse(time));
         }
     }

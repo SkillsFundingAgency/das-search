@@ -100,7 +100,7 @@
     <Compile Include="Consumers\StandardControlQueueConsumerTests.cs" />
     <Compile Include="Helpers\StandardHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\StandardServiceTests.cs" />
+    <Compile Include="Services\StandardIndexerServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

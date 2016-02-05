@@ -15,11 +15,14 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
     {
         public IndexerRegistry()
         {
-            For<IStandardService>().Use<StandardService>();
+            For<IStandardIndexerService>().Use<StandardIndexerService>();
+            For<IProviderIndexerService>().Use<ProviderIndexerService>();
             For<IStandardHelper>().Use<StandardHelper>();
             For<IStandardControlQueueConsumer>().Use<StandardControlQueueConsumer>();
+            For<IProviderControlQueueConsumer>().Use<ProviderControlQueueConsumer>();
             For<IDedsService>().Use<Services.DedsService>();
             For<IStandardIndexSettings>().Use<StandardIndexSettings>();
+            For<IProviderIndexSettings>().Use<ProviderIndexSettings>();
             For<IBlobStorageHelper>().Use<BlobStorageHelper>();
             For<IElasticClient>().Use<ElasticClient>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();

@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
 
-namespace Sfa.Eds.Standards.Indexer.Test.Services
+namespace Sfa.Eds.Standards.Indexer.Tests.Services
 {
     [TestFixture]
-    public class StandardServiceTests
+    public class StandardIndexerServiceTests
     {
         private Mock<IStandardHelper> _mockHelper;
         private IStandardIndexSettings _mockSettings;
-        private StandardService _sut;
+        private StandardIndexerService _sut;
 
         [SetUp]
         public void Setup()
@@ -24,7 +20,7 @@ namespace Sfa.Eds.Standards.Indexer.Test.Services
             _mockHelper = new Mock<IStandardHelper>();
             _mockSettings = Mock.Of<IStandardIndexSettings>(x => x.PauseTime == "10");
 
-            _sut = new StandardService(_mockSettings, _mockHelper.Object);
+            _sut = new StandardIndexerService(_mockSettings, _mockHelper.Object);
         }
 
         [Test]

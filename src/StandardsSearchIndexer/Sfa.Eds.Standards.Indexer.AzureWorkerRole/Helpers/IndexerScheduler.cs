@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using log4net;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
