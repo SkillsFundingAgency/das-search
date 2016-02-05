@@ -1,8 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
-
-namespace Sfa.Eds.Das.Web
+﻿namespace Sfa.Eds.Das.Web
 {
+    using System.Web.Optimization;
     public static class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862

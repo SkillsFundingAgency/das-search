@@ -8,6 +8,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
     using Sfa.Eds.Das.Core.Interfaces;
     using Sfa.Eds.Das.Core.Interfaces.Search;
     using Sfa.Eds.Das.Core.Search;
+    using Sfa.Eds.Das.Web.Services;
 
     using StructureMap.Configuration.DSL;
 
@@ -18,6 +19,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
             this.For<ISearchService>().Use<SearchService>();
             this.For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             this.For<IApplicationSettings>().Use<ApplicationSettings>();
+            this.For<IMappingService>().Use<MappingService>();
             this.For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
         }
     }
