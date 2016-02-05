@@ -253,6 +253,7 @@
     <Content Include="Views\Error\_Error404.cshtml" />
     <Content Include="Views\Error\_Error500.cshtml" />
     <Content Include="Views\Standard\Detail.cshtml" />
+    <Content Include="Views\Home\_SearchResultMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
