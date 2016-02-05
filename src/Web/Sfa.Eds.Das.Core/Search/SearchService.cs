@@ -41,7 +41,7 @@
                 client.Search<SearchResultsItem>(
                     s => s
                     .From(0)
-                    .Size(1000)
+                    .Size(1)
                     .Query(q =>
                         q.QueryString(qs =>
                             qs.OnFields(e => e.StandardId)

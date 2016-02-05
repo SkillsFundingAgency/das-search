@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
 
     using Sfa.Eds.Das.Core.Interfaces.Search;
