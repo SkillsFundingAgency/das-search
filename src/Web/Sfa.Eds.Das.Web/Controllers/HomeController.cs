@@ -29,11 +29,6 @@
         {
             var searchResults = this.searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
-            if (searchResults == null)
-            {
-                return View(new StandardSearchResultViewModel());
-            }
-
             var viewModel = this.mappingService.Map<SearchResults, StandardSearchResultViewModel>(searchResults);
 
             return View(viewModel);

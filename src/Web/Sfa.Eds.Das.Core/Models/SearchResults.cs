@@ -9,5 +9,7 @@
         public string SearchTerm { get; set; }
 
         public IEnumerable<SearchResultsItem> Results { get; set; }
+
+        public bool HasError { get; set; }
     }
 }

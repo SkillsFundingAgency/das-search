@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Core.Search
 {
+    using System;
     using System.Linq;
 
     using Interfaces.Search;
@@ -7,13 +8,18 @@
 
     using Interfaces;
 
+    using log4net;
+
     public class SearchService : ISearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
 
-        public SearchService(IElasticsearchClientFactory elasticsearchClientFactory)
+        private readonly ILog logging;
+
+        public SearchService(IElasticsearchClientFactory elasticsearchClientFactory, ILog logging)
         {
             this.elasticsearchClientFactory = elasticsearchClientFactory;
+            this.logging = logging;
         }
 
         public SearchResults SearchByKeyword(string keywords, int skip, int take)
@@ -33,7 +39,8 @@
             {
                 TotalResults = results.Total,
                 SearchTerm = keywords,
-                Results = documents
+                Results = documents,
+                HasError = results.ConnectionStatus.HttpStatusCode != 200
             };
         }
 
@@ -50,6 +57,13 @@
                         q.QueryString(qs =>
                             qs.OnFields(e => e.StandardId)
                             .Query(standardId))));
+
+            if (results.ConnectionStatus.HttpStatusCode != 200)
+            {
+                this.logging.Error($"Trying to get standard with id {standardId}");
+                throw new ApplicationException($"Failed query standard with id {standardId}");
+            }
+
             return results.Documents.Any() ? results.Documents.First() : null;
         }
     }

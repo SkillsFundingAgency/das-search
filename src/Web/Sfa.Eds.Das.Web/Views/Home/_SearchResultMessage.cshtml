@@ -1,8 +1,12 @@
 ﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
 
 <div>
-    
-    @if (Model.TotalResults == 0)
+
+    @if (Model.HasError)
+    {
+        @RenderErrorMessage()
+    }
+    else if (Model.TotalResults == 0)
     {
         @RenderZeroResult();
     }
@@ -12,7 +16,7 @@
     }
     else
     {
-        @RenderMessage();
+        @RenderMessage()
     }
 </div>
 
@@ -40,5 +44,12 @@
     </h2>
     <p>
         There are @Model.TotalResults apprenticeship pathways matching your search for "@Model.SearchTerm".
+    </p>
+}
+
+@helper  RenderErrorMessage()
+{
+    <p class="strong">
+        There was a problem performing a search. Try again later.
     </p>
 }

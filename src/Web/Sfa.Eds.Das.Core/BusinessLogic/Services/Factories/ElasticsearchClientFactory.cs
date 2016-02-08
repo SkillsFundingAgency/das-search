@@ -2,8 +2,6 @@
 {
     using System;
 
-    using Elasticsearch.Net.Connection;
-
     using Nest;
 
     using Interfaces;
@@ -22,9 +20,7 @@
         {
             var node = new Uri(this.applicationSettings.SearchHost);
 
-            var settings = new ConnectionSettings(
-                node,
-                defaultIndex: this.applicationSettings.StandardIndexesAlias);
+            var settings = new ConnectionSettings(node, defaultIndex: this.applicationSettings.StandardIndexesAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
             
