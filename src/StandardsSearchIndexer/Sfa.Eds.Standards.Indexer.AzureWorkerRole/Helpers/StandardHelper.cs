@@ -46,17 +46,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
                 Log.Info("Index already exists, deleting and creating a new one");
 
                 _client.DeleteIndex(indexName);
-                indexExistsResponse = _client.IndexExists(indexName);
-                
             }
 
             // create index
-            if (!indexExistsResponse.Exists)
-            {
-                _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
-            }
+            _client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
 
-            return indexExistsResponse.Exists;
+            return _client.IndexExists(indexName).Exists;
         }
 
         public async Task IndexStandards(DateTime scheduledRefreshDateTime)
@@ -80,10 +75,12 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             }
         }
 
-        public bool IsIndexCorrectlyCreated()
+        public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
+            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+
             return _client
-                .Search<StandardDocument>(s => s.From(0).Size(1000).MatchAll())
+                .Search<StandardDocument>(s => s.Index(indexName).From(0).Size(1000).MatchAll())
                 .Documents
                 .Any();
         }

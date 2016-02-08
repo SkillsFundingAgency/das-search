@@ -23,29 +23,29 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            Log.Info("Creating new index...");
+            Log.Info("Creating new standard index...");
 
-            var existingPreviousIndex = _standardHelper.CreateIndex(scheduledRefreshDateTime);
-            if (existingPreviousIndex)
+            var indexProperlyCreated = _standardHelper.CreateIndex(scheduledRefreshDateTime);
+            if (!indexProperlyCreated)
             {
-                Log.Info("Index already exists, exiting...");
+                Log.Info("Standard index not created properly, exiting...");
                 return;
             }
 
-            Log.Info("Indexing PDFs...");
+            Log.Info("Indexing standard PDFs...");
             await _standardHelper.IndexStandards(scheduledRefreshDateTime).ConfigureAwait(false);
 
             PauseWhileIndexingIsBeingRun();
 
-            if (_standardHelper.IsIndexCorrectlyCreated())
+            if (_standardHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
             {
-                Log.Info("Swapping indexes...");
+                Log.Info("Swapping standard indexes...");
 
                 _standardHelper.SwapIndexes(scheduledRefreshDateTime);
 
                 Log.Info("Swap completed...");
 
-                Log.Info("Deleting old indexes...");
+                Log.Info("Deleting old standard indexes...");
 
                 _standardHelper.DeleteOldIndexes(scheduledRefreshDateTime);
 

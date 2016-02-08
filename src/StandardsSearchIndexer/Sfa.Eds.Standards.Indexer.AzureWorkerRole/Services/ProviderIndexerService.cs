@@ -10,49 +10,47 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services
     public class ProviderIndexerService : IProviderIndexerService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IStandardHelper _standardHelper;
+        private readonly IProviderHelper _providerHelper;
         private readonly IProviderIndexSettings _providerIndexSettings;
 
         public ProviderIndexerService(
             IProviderIndexSettings providerIndexSettings,
-            IStandardHelper standardHelper)
+            IProviderHelper providerHelper)
         {
             _providerIndexSettings = providerIndexSettings;
-            _standardHelper = standardHelper;
+            _providerHelper = providerHelper;
         }
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            /*
-            Log.Info("Creating new index...");
+            Log.Info("Creating new provider index...");
 
-            var existingPreviousIndex = _standardHelper.CreateIndex(scheduledRefreshDateTime);
-            if (existingPreviousIndex)
+            var indexProperlyCreated = _providerHelper.CreateIndex(scheduledRefreshDateTime);
+            if (!indexProperlyCreated)
             {
-                Log.Info("Index already exists, exiting...");
+                Log.Info("Provider index not created properly, exiting...");
                 return;
             }
 
-            Log.Info("Indexing PDFs...");
-            await _standardHelper.IndexStandards(scheduledRefreshDateTime).ConfigureAwait(false);
+            Log.Info("Indexing providers...");
+            await _providerHelper.IndexProviders(scheduledRefreshDateTime).ConfigureAwait(false);
 
             PauseWhileIndexingIsBeingRun();
 
-            if (_standardHelper.IsIndexCorrectlyCreated())
+            if (_providerHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
             {
-                Log.Info("Swapping indexes...");
+                Log.Info("Swapping provider indexes...");
 
-                _standardHelper.SwapIndexes(scheduledRefreshDateTime);
+                _providerHelper.SwapIndexes(scheduledRefreshDateTime);
 
                 Log.Info("Swap completed...");
 
-                Log.Info("Deleting old indexes...");
+                Log.Info("Deleting old provider indexes...");
 
-                _standardHelper.DeleteOldIndexes(scheduledRefreshDateTime);
+                _providerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
 
                 Log.Info("Deletion completed...");
             }
-            */
         }
 
         private void PauseWhileIndexingIsBeingRun()

@@ -128,9 +128,13 @@
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
     <Compile Include="Helpers\IIndexerScheduler.cs" />
     <Compile Include="Helpers\IndexerScheduler.cs" />
+    <Compile Include="Helpers\IProviderHelper.cs" />
     <Compile Include="Helpers\IStandardHelper.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />
+    <Compile Include="Helpers\ProviderHelper.cs" />
     <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Models\JsonMetadataObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
