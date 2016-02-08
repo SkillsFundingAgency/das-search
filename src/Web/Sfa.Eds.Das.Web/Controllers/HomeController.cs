@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
 
     using Sfa.Eds.Das.Core.Interfaces.Search;
@@ -28,12 +27,7 @@
         [HttpGet]
         public ActionResult Search(SearchCriteria criteria)
         {
-            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords);
-
-            if (searchResults == null)
-            {
-                return View(new StandardSearchResultViewModel());
-            }
+            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
             var viewModel = this.mappingService.Map<SearchResults, StandardSearchResultViewModel>(searchResults);
 

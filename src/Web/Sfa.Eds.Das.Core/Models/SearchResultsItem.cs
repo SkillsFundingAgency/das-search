@@ -14,5 +14,7 @@
         public string PdfUrl { get; set; }
 
         public string MinimumLength { get; set; }
+
+        public bool HasError { get; set; }
     }
 }

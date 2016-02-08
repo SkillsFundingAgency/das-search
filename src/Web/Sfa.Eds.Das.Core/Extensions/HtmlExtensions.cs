@@ -6,7 +6,7 @@
     {
         public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes)
         {
-            if (string.IsNullOrEmpty(source))
+            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(title))
             {
                 return new MvcHtmlString(string.Empty);
             }

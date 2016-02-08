@@ -4,7 +4,7 @@
 
     public interface ISearchService
     {
-        SearchResults SearchByKeyword(string keywords);
+        SearchResults SearchByKeyword(string keywords, int skip, int take);
 
         SearchResultsItem GetStandardItem(string id);
     }

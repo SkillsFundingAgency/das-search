@@ -4,6 +4,6 @@
 
     public interface IElasticsearchClientFactory
     {
-        ElasticClient Create();
+        IElasticClient Create();
     }
 }

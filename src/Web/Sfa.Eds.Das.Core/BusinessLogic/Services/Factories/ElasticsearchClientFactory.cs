@@ -16,16 +16,14 @@
             this.applicationSettings = applicationSettings;
         }
 
-        public ElasticClient Create()
+        public IElasticClient Create()
         {
             var node = new Uri(this.applicationSettings.SearchHost);
 
-            var settings = new ConnectionSettings(
-                node,
-                defaultIndex: this.applicationSettings.StandardIndexesAlias);
+            var settings = new ConnectionSettings(node, defaultIndex: this.applicationSettings.StandardIndexesAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(SearchResultsItem), "standarddocument"));
-
+            
             return new ElasticClient(settings);
         }
     }
