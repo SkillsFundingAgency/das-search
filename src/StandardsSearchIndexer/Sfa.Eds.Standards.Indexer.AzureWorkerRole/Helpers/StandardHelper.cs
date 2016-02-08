@@ -111,14 +111,24 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var ts = new TimeSpan(2, 0, 0, 0, 0);
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime.Subtract(ts));
-
-            var indexExistsResponse = _client.IndexExists(indexName);
-
-            if (indexExistsResponse.Exists)
+            for (int z = -2; z > -40; z--)
             {
-                _client.DeleteIndex(indexName);
+                var dateTime = scheduledRefreshDateTime.AddDays(z);
+
+                for (int i = 0; i < 23; i++)
+                {
+                    var timeSpan = new TimeSpan(i, 0, 0);
+                    var dateTimeTmp = dateTime.Date + timeSpan;
+
+                    var indexName = GetIndexNameAndDateExtension(dateTimeTmp);
+
+                    var indexExistsResponse = _client.IndexExists(indexName);
+
+                    if (indexExistsResponse.Exists)
+                    {
+                        _client.DeleteIndex(indexName);
+                    }
+                }
             }
         }
 
