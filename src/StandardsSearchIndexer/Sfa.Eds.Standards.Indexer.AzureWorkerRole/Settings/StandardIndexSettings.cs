@@ -4,7 +4,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
 {
     public class StandardIndexSettings : IStandardIndexSettings
     {
-        public string SearchHost => ConfigurationManager.AppSettings["SearchHost"];
+        public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
         public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 
@@ -18,7 +18,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
 
         public string StorageAccountKey => ConfigurationManager.AppSettings["StorageAccountKey"];
 
-        public string ConnectionString => ConfigurationManager.AppSettings["ConnectionString"];
+        public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
 
         public string QueueName => ConfigurationManager.AppSettings["QueueName"];
 
@@ -29,5 +29,9 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings
         public string StandardPdfContainer => ConfigurationManager.AppSettings["Standard.PdfContainer"];
 
         public string StandardContentType => ConfigurationManager.AppSettings["Standard.ContentType"];
+
+        public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
+
+        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
     }
 }
