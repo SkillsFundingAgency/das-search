@@ -7,6 +7,8 @@
     using log4net;
     using System.Web.Http;
 
+    using Sfa.Eds.Das.Core;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         private static readonly ILog Log = LogManager.GetLogger("MainLogger");

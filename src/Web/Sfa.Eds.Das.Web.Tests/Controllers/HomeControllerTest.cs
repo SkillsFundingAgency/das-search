@@ -1,11 +1,12 @@
-﻿using System.Web.Mvc;
-using Moq;
-using NUnit.Framework;
-using Sfa.Eds.Das.Web.Controllers;
-using Sfa.Eds.Das.Web.Services;
-
-namespace Sfa.Eds.Das.Web.Tests.Controllers
+﻿namespace Sfa.Eds.Das.Web.Tests.Controllers
 {
+    using System.Web.Mvc;
+    using Core.Interfaces.Search;
+    using Core.Models;
+    using Moq;
+    using NUnit.Framework;
+    using Web.Controllers;
+
     [TestFixture]
     public class HomeControllerTest
     {
@@ -13,7 +14,7 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(null);
+            HomeController controller = new HomeController(null, null);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -25,13 +26,13 @@ namespace Sfa.Eds.Das.Web.Tests.Controllers
         [Test]
         public void Search()
         {
-            var mockSearchService = new Mock<ISearchForStandards>();
+            var mockSearchService = new Mock<ISearchService>();
 
             // Arrange
-            HomeController controller = new HomeController(mockSearchService.Object);
+            HomeController controller = new HomeController(mockSearchService.Object, null);
 
             // Act
-            ViewResult result = controller.Search(new Models.SearchCriteria()) as ViewResult;
+            ViewResult result = controller.Search(new SearchCriteria()) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

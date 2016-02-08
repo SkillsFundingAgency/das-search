@@ -1,0 +1,44 @@
+﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+
+<div>
+    
+    @if (Model.TotalResults == 0)
+    {
+        @RenderZeroResult();
+    }
+    else if (string.IsNullOrEmpty(Model.SearchTerm) || Model.SearchTerm == "*")
+    {
+        @RenderAllResult()
+    }
+    else
+    {
+        @RenderMessage();
+    }
+</div>
+
+@helper RenderZeroResult()
+{
+    <p class="strong">
+        There are currently no apprenticeships that match your search.
+    </p>
+}
+
+@helper  RenderAllResult()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        All apprenticeship standards.
+    </p>
+}
+
+@helper  RenderMessage()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There are @Model.TotalResults apprenticeship pathways matching your search for "@Model.SearchTerm".
+    </p>
+}

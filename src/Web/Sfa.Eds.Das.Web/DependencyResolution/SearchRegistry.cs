@@ -2,9 +2,13 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
 {
     using log4net;
 
-    using Services;
-
-    using Sfa.Eds.Das.Web.Services.Factories;
+    using Sfa.Eds.Das.Core;
+    using Sfa.Eds.Das.Core.BusinessLogic.Services;
+    using Sfa.Eds.Das.Core.BusinessLogic.Services.Factories;
+    using Sfa.Eds.Das.Core.Interfaces;
+    using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Search;
+    using Sfa.Eds.Das.Web.Services;
 
     using StructureMap.Configuration.DSL;
 
@@ -12,10 +16,11 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
     {
         public SearchRegistry()
         {
-            For<ISearchForStandards>().Use<SearchService>();
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<IApplicationSettings>().Use<ApplicationSettings>();
-            For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
+            this.For<ISearchService>().Use<SearchService>();
+            this.For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
+            this.For<IApplicationSettings>().Use<ApplicationSettings>();
+            this.For<IMappingService>().Use<MappingService>();
+            this.For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
         }
     }
 }

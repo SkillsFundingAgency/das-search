@@ -11,7 +11,6 @@ Then I should be able to see home page with title as "Home Page - Employer Appre
 
 
 
-@regression
 Scenario Outline: Search Standard by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box

@@ -30,6 +30,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         static string host = ConfigurationManager.AppSettings["host"];
          static string baseurl = ConfigurationManager.AppSettings["baseUrl"];
         static string browser = ConfigurationManager.AppSettings["browser"];
+        static string testExecution = ConfigurationManager.AppSettings["testExecutionType"];
         static string platform = ConfigurationManager.AppSettings["platform"];
         static string browserVersion = ConfigurationManager.AppSettings["browserVersion"];
         static string saucelabsAccountName = ConfigurationManager.AppSettings["sauce_labs_account_name"];
@@ -49,10 +50,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 Console.Write("Feature : " + FeatureContext.Current.FeatureInfo.Title);
                 //localDriver = new FirefoxDriver();
                 //localDriver.Manage().Window.Maximize();
+                if (testExecution =="headless")
+                {
+                    localDriver = new PhantomJSDriver();
+                    FeatureContext.Current["driver"] = localDriver;
+                }
 
-               localDriver= new PhantomJSDriver();
-                //localDriver =new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
-                FeatureContext.Current["driver"] = localDriver;
+              else
+                {
+                    localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
+                    FeatureContext.Current["driver"] = localDriver;
+                }
+                
             }
 
         }
@@ -93,7 +102,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 if (ScenarioContext.Current.TestError != null)
                 {
                     IWebDriver driver = null;
-                    TakeScreenshot(driver); // this is throwing some warning , need to fix.
+                   // TakeScreenshot(driver); // this is throwing some warning , need to fix.
                 }
                // localDriver.Quit(); //no need to kill driver after each scenario
             }

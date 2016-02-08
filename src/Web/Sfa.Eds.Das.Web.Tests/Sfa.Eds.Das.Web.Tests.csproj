@@ -42,6 +42,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -116,6 +119,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\MappingSearchResultsToViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -126,14 +130,16 @@
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Core\Sfa.Eds.Das.Core.csproj">
+      <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
+      <Name>Sfa.Eds.Das.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Web\Sfa.Eds.Das.Web.csproj">
       <Project>{E288C11D-B65E-4FD4-9C8D-7D734A7E947D}</Project>
       <Name>Sfa.Eds.Das.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />
     <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.dll" />

@@ -1,4 +1,4 @@
-﻿@model Sfa.Eds.Das.Web.Models.SearchResults
+﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
 @{
     ViewBag.Title = "Search Results";
 }
@@ -17,11 +17,10 @@
                 </h1>
 
             </div>
-            <h2 class="heading-large">
-                Apprenticeship pathways
-            </h2>
             <p>
-                There are @Model.TotalResults  apprenticeship pathways matching your search for @Model.SearchTerm.
+                @{
+                    Html.RenderPartial("_SearchResultMessage");
+                }
             </p>
             <ol class="frameworkResults">
                 @foreach (var item in Model.Results)
@@ -32,18 +31,9 @@
                                 @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
                             </h2>
                             <dl>
-                                <dt class="entryLevel">Entry Level</dt>
-                                <dd class="entryLevel">
-                                    <span>@item.NotionalEntryLevel</span>
-                                </dd>
-                                <dt class="endLevel">End Level</dt>
+                                <dt class="endLevel">Level</dt>
                                 <dd class="endLevel">
                                     <span>@item.NotionalEndLevel</span>
-                                </dd>
-                                <dt class="min_length">Minimum length</dt>
-                                <dd class="min_length">
-                                    <span>@item.MinimumLength</span>
-                                    years
                                 </dd>
                             </dl>
                         </div>

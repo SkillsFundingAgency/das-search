@@ -43,19 +43,11 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             // If it already exists and is empty, let's delete it.
             if (indexExistsResponse.Exists)
             {
-                var totalResults = _client.Count<StandardDocument>(c =>
-                {
-                    c.Index(indexName);
-                    return c;
-                });
+                Log.Info("Index already exists, deleting and creating a new one");
 
-                if (totalResults.Count == 0)
-                {
-                    Log.Info("Empty index already exists, deleting and creating a new one");
-
-                    _client.DeleteIndex(indexName);
-                    indexExistsResponse = _client.IndexExists(indexName);
-                }
+                _client.DeleteIndex(indexName);
+                indexExistsResponse = _client.IndexExists(indexName);
+                
             }
 
             // create index
@@ -101,6 +93,13 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
             var indexAlias = _settings.StandardIndexesAlias;
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
+            if (!CheckIfAliasExists(indexAlias))
+            {
+                Log.Info("Alias doesn't exists, creating a new one...");
+
+                CreateAlias(newIndexName);
+            }
+
             var existingIndexesOnAlias = _client.GetIndicesPointingToAlias(indexAlias);
             var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
 
@@ -111,6 +110,36 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
+        }
+
+        public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
+        {
+            var ts = new TimeSpan(2, 0, 0, 0, 0);
+            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime.Subtract(ts));
+
+            var indexExistsResponse = _client.IndexExists(indexName);
+
+            if (indexExistsResponse.Exists)
+            {
+                _client.DeleteIndex(indexName);
+            }
+        }
+
+        private void CreateAlias(string indexName)
+        {
+            _client.Alias(a => a
+                .Add(add => add
+                    .Index(indexName)
+                    .Alias(_settings.StandardIndexesAlias)
+                )
+            );
+        }
+
+        private bool CheckIfAliasExists(string aliasName)
+        {
+            var aliasExistsResponse = _client.AliasExists(aliasName);
+
+            return aliasExistsResponse.Exists;
         }
 
         private string GetIndexNameAndDateExtension(DateTime dateTime)
