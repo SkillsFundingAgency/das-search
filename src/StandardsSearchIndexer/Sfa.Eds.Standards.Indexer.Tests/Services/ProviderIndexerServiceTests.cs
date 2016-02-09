@@ -1,11 +1,11 @@
 ﻿using System;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
+using Sfa.Eds.Indexer.Indexers.Helpers;
+using Sfa.Eds.Indexer.Indexers.Services;
+using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Standards.Indexer.Tests.Services
+namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
 {
     [TestFixture]
     public class ProviderIndexerServiceTests
@@ -18,7 +18,7 @@ namespace Sfa.Eds.Standards.Indexer.Tests.Services
         public void Setup()
         {
             _mockHelper = new Mock<IProviderHelper>();
-            _mockSettings = Mock.Of<IProviderIndexSettings>(x => x.PauseTime == "10");
+            _mockSettings = Mock.Of<IProviderIndexSettings>(x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.ProviderIndexesAlias == "ciproviderindexesalias");
 
             _sut = new ProviderIndexerService(_mockSettings, _mockHelper.Object);
         }

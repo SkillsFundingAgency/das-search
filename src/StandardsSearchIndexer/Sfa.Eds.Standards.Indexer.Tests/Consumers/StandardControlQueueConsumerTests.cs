@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.AzureAbstractions;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
+using Sfa.Eds.Indexer.Indexers.AzureAbstractions;
+using Sfa.Eds.Indexer.Indexers.Consumers;
+using Sfa.Eds.Indexer.Indexers.Services;
+using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Standards.Indexer.Tests.Consumers
+namespace Sfa.Eds.Standards.Indexer.UnitTests.Consumers
 {
     [TestFixture]
     public class StandardControlQueueConsumerTests

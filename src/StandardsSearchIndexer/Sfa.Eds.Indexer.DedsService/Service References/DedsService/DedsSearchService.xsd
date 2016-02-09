@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://ws.imservices.org.uk/dcft/deds/1.0" elementFormDefault="qualified" targetNamespace="http://ws.imservices.org.uk/dcft/deds/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://fct-mocks-dat.azurewebsites.net/DedsSearchService.svc?xsd=xsd2" namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" />
+  <xs:element name="GetDataSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="dataSetId" type="q1:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataSetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="GetDataSetResult" nillable="true" type="q2:DataSetDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataSetByCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataSetByCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="GetDataSetByCodeResult" nillable="true" type="q3:DataSetDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverDataSetVersions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="discoverDataSetVersionsCriteria" nillable="true" type="q4:DiscoverDataSetVersionsCriteria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverDataSetVersionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="DiscoverDataSetVersionsResult" nillable="true" type="q5:ArrayOfDataSetVersionDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverQueries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="discoverQueriesCriteria" nillable="true" type="q6:DiscoverQueriesCriteria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverQueriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="DiscoverQueriesResult" nillable="true" type="q7:ArrayOfQueryDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverFiles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="discoverFilesCriteria" nillable="true" type="q8:DiscoverFilesCriteria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverFilesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="DiscoverFilesResult" nillable="true" type="q9:ArrayOfFileDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverFilesCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="discoverFilesCriteria" nillable="true" type="q10:DiscoverFilesCriteria" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DiscoverFilesCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DiscoverFilesCountResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecuteQuery">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="queryId" type="q11:guid" />
+        <xs:element xmlns:q12="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="queryExecution" nillable="true" type="q12:QueryExecution" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecuteQueryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="ExecuteQueryResult" nillable="true" type="q13:ArrayOfQueryResults" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTotalCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="queryId" type="q14:guid" />
+        <xs:element xmlns:q15="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="queryExecution" nillable="true" type="q15:QueryExecution" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTotalCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTotalCountResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecuteQueryByCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="dataSetVersionId" type="q16:guid" />
+        <xs:element minOccurs="0" name="queryCode" nillable="true" type="xs:string" />
+        <xs:element xmlns:q17="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="queryExecution" nillable="true" type="q17:QueryExecution" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExecuteQueryByCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="ExecuteQueryByCodeResult" nillable="true" type="q18:ArrayOfQueryResults" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTotalCountByCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="dataSetVersionId" type="q19:guid" />
+        <xs:element minOccurs="0" name="queryCode" nillable="true" type="xs:string" />
+        <xs:element xmlns:q20="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="queryExecution" nillable="true" type="q20:QueryExecution" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTotalCountByCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTotalCountByCodeResult" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="fileId" type="q21:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="GetFileResult" nillable="true" type="q22:FileData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestPublishedDataSetVersion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dataSetCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLatestPublishedDataSetVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="GetLatestPublishedDataSetVersionResult" nillable="true" type="q23:DataSetVersionDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublishedDataSetVersions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dataSetCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublishedDataSetVersionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts" minOccurs="0" name="GetPublishedDataSetVersionsResult" nillable="true" type="q24:ArrayOfDataSetVersionDescriptor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
