@@ -1,5 +1,11 @@
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+function Unzip($zipfile, $outpath)
+{
+
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+}
+
 Param($url, $username, $password)
 
 $webClient = new-object System.Net.WebClient
@@ -38,16 +44,10 @@ Unzip $zipFile $buildFolder
 # 	$shell.Namespace($buildFolder).copyhere($item)
 #     Wite-Host "item"
 # }
+
 Write-Host "Copy done"
 Get-ChildItem -Path ".\" -Filter *.dll -Recurse
 
 ls ".\build\test"
 
 Write-Host "Retrive artifact done"
-
-function Unzip
-{
-    param([string]$zipfile, [string]$outpath)
-
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
-}
