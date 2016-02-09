@@ -33,7 +33,9 @@ namespace Sfa.Eds.Indexer.Indexers.Services
             }
 
             Log.Info("Indexing providers...");
-            await _providerHelper.IndexProviders(scheduledRefreshDateTime).ConfigureAwait(false);
+            var providers = await _providerHelper.GetProviders();
+
+            await _providerHelper.IndexProviders(scheduledRefreshDateTime, providers).ConfigureAwait(false);
 
             PauseWhileIndexingIsBeingRun();
 

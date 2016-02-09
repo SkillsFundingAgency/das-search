@@ -113,7 +113,9 @@
     <Compile Include="Services\StandardIndexerService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
+      <Link>app.config</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="stylecop.json" />
   </ItemGroup>

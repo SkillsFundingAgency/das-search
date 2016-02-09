@@ -50,10 +50,8 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
             return _client.IndexExists(indexName).Exists;
         }
 
-        public async Task IndexProviders(DateTime scheduledRefreshDateTime)
+        public async Task IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
         {
-            var providers = await GetProviders();
-
             try
             {
                 Log.Info("Indexing " + providers.Count() + " providers");
@@ -63,11 +61,11 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
             }
             catch (Exception e)
             {
-                Log.Error("Error indexing PDFs: " + e.Message);
+                Log.Error("Error indexing providerss: " + e.Message);
             }
         }
 
-        private async Task<IEnumerable<Provider>> GetProviders()
+        public async Task<List<Provider>> GetProviders()
         {
             // TODO: Replace Demo data
             var providers = new List<Provider>
@@ -194,7 +192,7 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
             return providers;
         }
 
-        private void IndexProviders(string indexName, IEnumerable<Provider> providers)
+        private void IndexProviders(string indexName, List<Provider> providers)
         {
             // index the items
             foreach (var provider in providers)

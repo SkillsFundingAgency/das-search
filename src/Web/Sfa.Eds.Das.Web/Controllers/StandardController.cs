@@ -13,32 +13,45 @@
 
     public class StandardController : Controller
     {
-        private readonly ISearchService searchService;
-
-        private readonly ILog logger;
-
-        private readonly IMappingService mappingService;
+        private readonly ISearchService _searchService;
+        private readonly ILog _logger;
+        private readonly IMappingService _mappingService;
 
         public StandardController(ISearchService searchService, ILog logger, IMappingService mappingService)
         {
-            this.searchService = searchService;
-            this.logger = logger;
-            this.mappingService = mappingService;
+            _searchService = searchService;
+            _logger = logger;
+            _mappingService = mappingService;
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchResults(SearchCriteria criteria)
+        {
+            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+
+            var viewModel = _mappingService.Map<SearchResults, StandardSearchResultViewModel>(searchResults);
+
+            return View(viewModel);
         }
 
         // GET: Standard
         public ActionResult Detail(string id)
         {
-            var standardResult = this.searchService.GetStandardItem(id);
+            var standardResult = _searchService.GetStandardItem(id);
 
             if (standardResult == null)
             {
                 var message = $"Cannot find standard: {id}";
-                this.logger.Warn($"404 - {message}");
+                _logger.Warn($"404 - {message}");
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = this.mappingService.Map<SearchResultsItem, StandardViewModel>(standardResult);
+            var viewModel = _mappingService.Map<SearchResultsItem, StandardViewModel>(standardResult);
             viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
             return View(viewModel);
         }
@@ -50,7 +63,7 @@
                 return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
             }
 
-            return new LinkViewModel { Title = "Back to search page", Url = Url.Action("Index", "Home") };
+            return new LinkViewModel { Title = "Back to search page", Url = Url.Action("Search", "Standard") };
         }
     }
 }
