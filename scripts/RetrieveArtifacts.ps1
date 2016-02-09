@@ -4,8 +4,8 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Unzip($zipfile, $outpath)
 {
-    Remove-Item -Recurse -Force $outpath
-    Write-Host "Output path deleted: $outpath"
+    Remove-Item -Recurse -Force "$outpath\test"
+    Write-Host "Output path deleted: $outpath\test"
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
     Write-Host "Copy done"
 }
