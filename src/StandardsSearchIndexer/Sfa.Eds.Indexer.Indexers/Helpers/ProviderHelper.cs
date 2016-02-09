@@ -50,7 +50,7 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
             return _client.IndexExists(indexName).Exists;
         }
 
-        public async Task IndexProviders(DateTime scheduledRefreshDateTime, IEnumerable<Provider> providers)
+        public async Task IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
             }
         }
 
-        public async Task<IEnumerable<Provider>> GetProviders()
+        public async Task<List<Provider>> GetProviders()
         {
             // TODO: Replace Demo data
             var providers = new List<Provider>
@@ -192,7 +192,7 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
             return providers;
         }
 
-        private void IndexProviders(string indexName, IEnumerable<Provider> providers)
+        private void IndexProviders(string indexName, List<Provider> providers)
         {
             // index the items
             foreach (var provider in providers)

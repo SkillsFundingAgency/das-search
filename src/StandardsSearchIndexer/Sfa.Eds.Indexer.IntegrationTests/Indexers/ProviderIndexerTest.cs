@@ -61,6 +61,19 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
 
             var providersTest = GetProvidersTest();
+            var expectedProviderResult = new Provider
+                {
+                    UkPrn = "10031241",
+                    PostCode = "B4 7LR",
+                    ProviderName = "ASPIRE ACHIEVE ADVANCE LIMITED",
+                    VenueName = "3AAA BIRMINGHAM",
+                    Radius = 30,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.4819902,
+                        Lon = -1.8923181
+                    }
+                };
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
@@ -71,9 +84,13 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             _providerHelper.IndexProviders(scheduledDate, providersTest);
 
 
+            var retrievedProvider =_elasticClient.Search<Provider>(p => p
+                .QueryString(expectedProviderResult.PostCode));
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
+            Assert.Equals(retrievedProvider, expectedProviderResult);
         }
 
         private void DeleteIndexIfExists(string indexName)
@@ -85,7 +102,7 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             }
         }
 
-        private IEnumerable<Provider> GetProvidersTest()
+        private List<Provider> GetProvidersTest()
         {
             return new List<Provider>
             {
