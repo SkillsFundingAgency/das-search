@@ -1,3 +1,5 @@
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
 Param($url, $username, $password)
 
 $webClient = new-object System.Net.WebClient
@@ -25,18 +27,27 @@ $webClient.DownloadFile($downloadUrl, $zipFile)
 
 Write-Host "Download done"
 
-$shell = new-object -com shell.application
-Write-Host "Shell: $shell"
-$zip = $shell.NameSpace($zipFile)
- Write-Host "Zip: $zip "
-foreach($item in $zip.items())
-{
-	$shell.Namespace($buildFolder).copyhere($item)
-    Wite-Host "item"
-}
+Unzip $zipFile $buildFolder
+
+# $shell = new-object -com shell.application
+# Write-Host "Shell: $shell"
+# $zip = $shell.NameSpace($zipFile)
+#  Write-Host "Zip: $zip "
+# foreach($item in $zip.items())
+# {
+# 	$shell.Namespace($buildFolder).copyhere($item)
+#     Wite-Host "item"
+# }
 Write-Host "Copy done"
 Get-ChildItem -Path ".\" -Filter *.dll -Recurse
 
 ls ".\build\test"
 
 Write-Host "Retrive artifact done"
+
+function Unzip
+{
+    param([string]$zipfile, [string]$outpath)
+
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+}
