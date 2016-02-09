@@ -21,7 +21,7 @@ Write-Host $downloadUrl
 # $webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
 # $webClient.DownloadFile($downloadUrl, $zipFile)
 
-Invoke-RestMethod -Uri $uri -headers $headers -OutFile $zipFile
+Invoke-RestMethod -Uri $downloadUrl -headers $headers -OutFile $zipFile
 
 Write-Host "Download done"
 
