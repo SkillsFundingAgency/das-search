@@ -7,7 +7,7 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Eds.Standards.Indexer.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.AzureWorkerRole", "Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Standards.Indexer.AzureWorkerRole.csproj", "{6163C031-06EA-4929-BC84-AB67ED0E93DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.UnitTests", "Sfa.Eds.Standards.Indexer.Tests\Sfa.Eds.Standards.Indexer.UnitTests.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.UnitTests", "Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Standards.Indexer.UnitTests.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Indexers", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexers.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
 EndProject
