@@ -1,5 +1,20 @@
 Param($url, $username, $password)
 
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+function Unzip($zipfile, $outpath)
+{
+    $testdir = "$outpath\test"
+    if(Test-Path $testdir){
+        Write-Host "OK"
+        Remove-Item -Recurse -Force $testdir
+        Write-Host "Output path deleted: $testdir"
+    }
+    
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+    Write-Host "Copy done"
+}
+
 $webClient = new-object System.Net.WebClient
 $buildId = $webClient.DownloadString($url + "/api/version") -replace '"', ''
 Write-Host $buildId
@@ -18,20 +33,13 @@ $headers = @{Authorization=("Basic {0}" -f $basicAuth)}
 $json = Invoke-RestMethod -Uri $url2 -headers $headers -Method Get
 $downloadUrl = $json.value[1].resource.downloadUrl
 Write-Host $downloadUrl
-# $webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
-# $webClient.DownloadFile($downloadUrl, $zipFile)
-
-Invoke-RestMethod -Uri $uri -headers $headers -OutFile $zipFile
+$webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
+$webClient.DownloadFile($downloadUrl, $zipFile)
 
 Write-Host "Download done"
 
-$shell = new-object -com shell.application
-$zip = $shell.NameSpace($zipFile)
-foreach($item in $zip.items())
-{
-	$shell.Namespace($buildFolder).copyhere($item)
-}
-Write-Host "Copy done"
+Unzip $zipFile $buildFolder
+
 Get-ChildItem -Path ".\" -Filter *.dll -Recurse
 
 ls ".\build\test"
