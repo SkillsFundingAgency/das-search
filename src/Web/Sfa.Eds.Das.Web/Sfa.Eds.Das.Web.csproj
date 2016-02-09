@@ -244,8 +244,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Standard\Search.cshtml" />
+    <Content Include="Views\Standard\SearchResults.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="stylecop.json" />
@@ -253,10 +253,11 @@
     <Content Include="Views\Error\_Error404.cshtml" />
     <Content Include="Views\Error\_Error500.cshtml" />
     <Content Include="Views\Standard\Detail.cshtml" />
-    <Content Include="Views\Home\_SearchResultMessage.cshtml" />
+    <Content Include="Views\Standard\_SearchResultMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

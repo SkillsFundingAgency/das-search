@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using Core.Interfaces.Search;
     using Core.Models;
+    using log4net;
     using Moq;
     using NUnit.Framework;
     using ViewModels;
@@ -10,59 +11,47 @@
     using Web.Services;
 
     [TestFixture]
-    public class HomeControllerTest
+    public class StandardControllerTest
     {
         [Test]
-        public void Index()
+        public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()
         {
             // Arrange
-            HomeController controller = new HomeController(null, null);
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [Test]
-        public void Search()
-        {
-            // Arrange
-
             var mockSearchService = new Mock<ISearchService>();
+            var mockLogger = new Mock<ILog>();
             mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new SearchResults());
 
-            var moqMappingServices = new Mock<IMappingService>();
-            moqMappingServices.Setup(
+            var mockMappingServices = new Mock<IMappingService>();
+            mockMappingServices.Setup(
                 x => x.Map<SearchResults, StandardSearchResultViewModel>(It.IsAny<SearchResults>()))
                 .Returns(new StandardSearchResultViewModel());
 
-            HomeController controller = new HomeController(mockSearchService.Object, moqMappingServices.Object);
+            StandardController controller = new StandardController(mockSearchService.Object, mockLogger.Object, mockMappingServices.Object);
 
             // Act
-            ViewResult result = controller.Search(new SearchCriteria { Keywords = "test" }) as ViewResult;
+            ViewResult result = controller.SearchResults(new SearchCriteria { Keywords = "test" }) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [Test]
-        public void WhenSearchResultIsNull()
+        public void Search_WhenSearchResponseReturnsANull_ModelShouldContainTheSearchKeyword()
         {
             // Arrange
             var mockSearchService = new Mock<ISearchService>();
+            var mockLogger = new Mock<ILog>();
             mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(value: null);
 
-            var moqMappingServices = new Mock<IMappingService>();
-            moqMappingServices.Setup(
+            var mockMappingServices = new Mock<IMappingService>();
+            mockMappingServices.Setup(
                 x => x.Map<SearchResults, StandardSearchResultViewModel>(It.IsAny<SearchResults>()))
                 .Returns(new StandardSearchResultViewModel());
 
-            HomeController controller = new HomeController(mockSearchService.Object, moqMappingServices.Object);
+            StandardController controller = new StandardController(mockSearchService.Object, mockLogger.Object, mockMappingServices.Object);
 
             // Act
-            ViewResult result = controller.Search(new SearchCriteria { Keywords = "test" }) as ViewResult;
+            ViewResult result = controller.SearchResults(new SearchCriteria { Keywords = "test" }) as ViewResult;
 
             // Assert
             Assert.NotNull(result);
