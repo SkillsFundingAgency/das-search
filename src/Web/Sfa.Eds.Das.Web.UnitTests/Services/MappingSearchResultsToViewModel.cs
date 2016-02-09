@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Web.Tests.Services
+﻿namespace Sfa.Eds.Das.Web.UnitTests.Services
 {
     using System.Collections.Generic;
     using System.Linq;

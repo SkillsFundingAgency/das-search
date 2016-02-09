@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Core.Test.Extensions.For_HtmlExtensions
+﻿namespace Sfa.Eds.Das.Core.UnitTests.For_HtmlExtensions
 {
     using Core.Extensions;
     using System.Web.Mvc;
