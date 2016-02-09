@@ -4,8 +4,10 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Unzip($zipfile, $outpath)
 {
-
+    Remove-Item -Recurse -Force $outpath
+    Write-Host "Output path deleted: $outpath"
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+    Write-Host "Copy done"
 }
 
 $webClient = new-object System.Net.WebClient
@@ -29,23 +31,10 @@ Write-Host $downloadUrl
 $webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
 $webClient.DownloadFile($downloadUrl, $zipFile)
 
-#Invoke-RestMethod -Uri $downloadUrl -headers $headers -OutFile $zipFile
-
 Write-Host "Download done"
 
 Unzip $zipFile $buildFolder
 
-# $shell = new-object -com shell.application
-# Write-Host "Shell: $shell"
-# $zip = $shell.NameSpace($zipFile)
-#  Write-Host "Zip: $zip "
-# foreach($item in $zip.items())
-# {
-# 	$shell.Namespace($buildFolder).copyhere($item)
-#     Wite-Host "item"
-# }
-
-Write-Host "Copy done"
 Get-ChildItem -Path ".\" -Filter *.dll -Recurse
 
 ls ".\build\test"
