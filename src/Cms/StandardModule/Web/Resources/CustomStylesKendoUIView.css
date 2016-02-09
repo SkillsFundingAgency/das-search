@@ -1,0 +1,81 @@
+﻿.rgWrap {
+    padding: 0 10px;
+}
+
+.NumericPages .rgNumPart {
+    padding: 0 10px;
+}
+
+.rgNumPart a {
+    float: left;
+    line-height: 22px;
+    padding: 0 5px 0 0;
+}
+
+.rgNumPart span {
+    float: left;
+    padding: 0 0 0 5px;
+}
+
+.rgNumPart a:hover span {
+    cursor: pointer;
+}
+
+.rgNumPart a.rgCurrentPage, .rgNumPart a.rgCurrentPage:hover, .rgNumPart a.rgCurrentPage span, .rgNumPart a.rgCurrentPage:hover span {
+    cursor: default;
+}
+
+.rgNumPart a:hover, .rgNumPart a:hover span, .rgNumPart a.rgCurrentPage, .rgNumPart a.rgCurrentPage span {
+    background: url(<% = WebResource("StandardModule.Web.Resources.paging.png") %>) no-repeat scroll 0 0 transparent;
+}
+
+.rgNumPart a:hover {
+    background-position: 100% -100px;
+    color: #000000;
+}
+
+.rgNumPart a:hover span {
+    background-position: 0 0px;
+}
+
+.rgNumPart a.rgCurrentPage, .rgNumPart a.rgCurrentPage:hover {
+    background-position: 100% -300px;
+    color: #000000;
+}
+
+.rgNumPart a.rgCurrentPage span, .rgNumPart a.rgCurrentPage:hover span {
+    background-position: 0 -200px;
+}
+
+.rgMasterTable .rgPager .rgPagerCell {
+    border-top: 0 none;
+}
+
+td.rgPagerCell {
+    border: 0 none;
+    padding: 5px 0 4px;
+}
+
+td.rgPagerCell {
+    border-top: 1px solid #CCCCCC;
+}
+
+.rgPager {
+    cursor: default;
+}
+
+.rgPager:hover {
+    background-color: #F8F8F8;
+}
+
+.rgPager img {
+    vertical-align: middle;
+}
+
+.rgPager td {
+    padding: 0;
+}
+
+.rgPager {
+    font: 12px/16px arial,sans-serif;
+}

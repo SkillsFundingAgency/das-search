@@ -1,0 +1,2 @@
+If you are wondering how to enable intellisense for all of the RadControls and Sitefinity controls in your .ascx files that are placed inside that class library as embedded resources, please read this:
+http://www.sitefinity.com/blogs/ivan-georgiev/posts/ivan-georgievs-blog/2013/06/18/add-intellisense-for-radcontrols-and-sitefinity-controls-in-your-ascx-files-placed-inside-a-class-library-project
