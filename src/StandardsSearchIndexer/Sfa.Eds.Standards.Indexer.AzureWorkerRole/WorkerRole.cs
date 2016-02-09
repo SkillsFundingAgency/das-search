@@ -6,14 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Consumers;
+using Sfa.Eds.Indexer.Indexers.Configuration;
+using Sfa.Eds.Indexer.Indexers.Consumers;
+using Sfa.Eds.Indexer.Indexers.Helpers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 {
-    using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
-
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

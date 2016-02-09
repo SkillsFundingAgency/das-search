@@ -1,11 +1,5 @@
 ﻿
 using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using System;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Text;
 using TechTalk.SpecFlow;
 
 

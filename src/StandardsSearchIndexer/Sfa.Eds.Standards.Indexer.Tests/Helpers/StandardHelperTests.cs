@@ -1,11 +1,11 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Configuration;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Helpers;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Services;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.Settings;
+using Sfa.Eds.Indexer.DedsService.Services;
+using Sfa.Eds.Indexer.Indexers.Configuration;
+using Sfa.Eds.Indexer.Indexers.Helpers;
+using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Standards.Indexer.Tests.Helpers
+namespace Sfa.Eds.Standards.Indexer.UnitTests.Helpers
 {
     [TestFixture]
     public class StandardHelperTests

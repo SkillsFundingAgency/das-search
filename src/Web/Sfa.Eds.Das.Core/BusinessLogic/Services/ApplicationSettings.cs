@@ -6,10 +6,12 @@ namespace Sfa.Eds.Das.Core.BusinessLogic.Services
 
     public class ApplicationSettings : IApplicationSettings
     {
-        public string SearchHost => ConfigurationManager.AppSettings["SearchHost"];
+        public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
         public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
+
+        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
     }
 }

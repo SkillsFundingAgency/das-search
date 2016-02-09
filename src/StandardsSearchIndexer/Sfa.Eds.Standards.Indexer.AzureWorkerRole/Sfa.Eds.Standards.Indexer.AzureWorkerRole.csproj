@@ -111,45 +111,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureAbstractions\CloudQueueService.cs" />
-    <Compile Include="AzureAbstractions\ICloudQueueService.cs" />
-    <Compile Include="AzureAbstractions\ICloudQueueWrapper.cs" />
-    <Compile Include="Configuration\ElasticsearchClientFactory.cs" />
-    <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
-    <Compile Include="AzureAbstractions\CloudQueueWrapper.cs" />
-    <Compile Include="Configuration\Log4NetSettings.cs" />
-    <Compile Include="Consumers\IProviderControlQueueConsumer.cs" />
-    <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
-    <Compile Include="Consumers\ProviderControlQueueConsumer.cs" />
-    <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
-    <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\IndexerRegistry.cs" />
-    <Compile Include="Helpers\BlobStorageHelper.cs" />
-    <Compile Include="Helpers\IBlobStorageHelper.cs" />
-    <Compile Include="Helpers\IIndexerScheduler.cs" />
-    <Compile Include="Helpers\IndexerScheduler.cs" />
-    <Compile Include="Helpers\IStandardHelper.cs" />
-    <Compile Include="Helpers\ListExtensions.cs" />
-    <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\StandardDocument.cs" />
-    <Compile Include="Models\JsonMetadataObject.cs" />
+    <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Services\DedsService.cs" />
-    <Compile Include="Services\IDedsService.cs" />
-    <Compile Include="Services\IProviderIndexerService.cs" />
-    <Compile Include="Services\IStandardIndexerService.cs" />
-    <Compile Include="Helpers\StandardHelper.cs" />
-    <Compile Include="Services\ProviderIndexerService.cs" />
-    <Compile Include="Services\StandardIndexerService.cs" />
-    <Compile Include="Settings\IProviderIndexSettings.cs" />
-    <Compile Include="Settings\IStandardIndexSettings.cs" />
-    <Compile Include="Settings\ProviderIndexSettings.cs" />
-    <Compile Include="Settings\StandardIndexSettings.cs" />
     <Compile Include="WorkerRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +195,20 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj">
+      <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
+      <Name>Sfa.Eds.Indexer.DedsService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexers.csproj">
+      <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
+      <Name>Sfa.Eds.Indexer.Indexers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
+      <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
+      <Name>Sfa.Eds.Indexer.Settings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

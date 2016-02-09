@@ -20,6 +20,13 @@
     }
 </div>
 
+@helper  RenderErrorMessage()
+{
+    <p class="strong">
+        There was a problem performing a search. Try again later.
+    </p>
+}
+
 @helper RenderZeroResult()
 {
     <p class="strong">
@@ -47,9 +54,3 @@
     </p>
 }
 
-@helper  RenderErrorMessage()
-{
-    <p class="strong">
-        There was a problem performing a search. Try again later.
-    </p>
-}
