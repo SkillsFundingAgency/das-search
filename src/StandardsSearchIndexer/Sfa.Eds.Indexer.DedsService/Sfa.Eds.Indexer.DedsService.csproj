@@ -55,7 +55,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
+      <Link>app.config</Link>
+    </None>
     <None Include="Service References\DedsService\DedsSearchService.wsdl" />
     <None Include="Service References\DedsService\DedsSearchService.xsd">
       <SubType>Designer</SubType>
