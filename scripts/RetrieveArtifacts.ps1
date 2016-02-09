@@ -18,18 +18,21 @@ $headers = @{Authorization=("Basic {0}" -f $basicAuth)}
 $json = Invoke-RestMethod -Uri $url2 -headers $headers -Method Get
 $downloadUrl = $json.value[1].resource.downloadUrl
 Write-Host $downloadUrl
-# $webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
-# $webClient.DownloadFile($downloadUrl, $zipFile)
+$webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
+$webClient.DownloadFile($downloadUrl, $zipFile)
 
-Invoke-RestMethod -Uri $downloadUrl -headers $headers -OutFile $zipFile
+#Invoke-RestMethod -Uri $downloadUrl -headers $headers -OutFile $zipFile
 
 Write-Host "Download done"
 
 $shell = new-object -com shell.application
+Write-Host "Shell: $shell"
 $zip = $shell.NameSpace($zipFile)
+ Write-Host "Zip: $zip "
 foreach($item in $zip.items())
 {
 	$shell.Namespace($buildFolder).copyhere($item)
+    Wite-Host "item"
 }
 Write-Host "Copy done"
 Get-ChildItem -Path ".\" -Filter *.dll -Recurse
