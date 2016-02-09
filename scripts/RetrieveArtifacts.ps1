@@ -1,3 +1,5 @@
+Param($url, $username, $password)
+
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Unzip($zipfile, $outpath)
@@ -5,8 +7,6 @@ function Unzip($zipfile, $outpath)
 
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
 }
-
-Param($url, $username, $password)
 
 $webClient = new-object System.Net.WebClient
 $buildId = $webClient.DownloadString($url + "/api/version") -replace '"', ''
