@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.Indexers.Helpers;
+using Sfa.Eds.Indexer.Indexers.Models;
 using Sfa.Eds.Indexer.Indexers.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
 
@@ -35,7 +37,7 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>()), Times.Never);
+            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -51,7 +53,7 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
@@ -72,7 +74,7 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Never);
             _mockHelper.VerifyAll();
@@ -93,7 +95,7 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.VerifyAll();
