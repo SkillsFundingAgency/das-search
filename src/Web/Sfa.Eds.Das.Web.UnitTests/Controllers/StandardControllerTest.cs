@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Web.Tests.Controllers
+﻿namespace Sfa.Eds.Das.Web.UnitTests.Controllers
 {
     using System.Web.Mvc;
     using Core.Interfaces.Search;
