@@ -7,8 +7,8 @@
     <ProjectGuid>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Indexer.Indexers</RootNamespace>
-    <AssemblyName>Sfa.Eds.Indexer.Indexers</AssemblyName>
+    <RootNamespace>Sfa.Eds.Indexer.Indexer.Infrastructure</RootNamespace>
+    <AssemblyName>Sfa.Eds.Indexer.Indexer.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -88,29 +88,17 @@
     <Compile Include="Configuration\ElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\Log4NetSettings.cs" />
-    <Compile Include="Consumers\IProviderControlQueueConsumer.cs" />
-    <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
-    <Compile Include="Consumers\ProviderControlQueueConsumer.cs" />
-    <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
     <Compile Include="Helpers\IIndexerScheduler.cs" />
     <Compile Include="Helpers\IndexerScheduler.cs" />
-    <Compile Include="Helpers\IProviderHelper.cs" />
-    <Compile Include="Helpers\IStandardHelper.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />
-    <Compile Include="Helpers\ProviderHelper.cs" />
-    <Compile Include="Helpers\StandardHelper.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\JsonMetadataObject.cs" />
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IProviderIndexerService.cs" />
-    <Compile Include="Services\IStandardIndexerService.cs" />
-    <Compile Include="Services\ProviderIndexerService.cs" />
-    <Compile Include="Services\StandardIndexerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">

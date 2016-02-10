@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Threading;
 using log4net;
-using Sfa.Eds.Indexer.Indexers.Helpers;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Indexer.StandardIndexer.Helpers;
 
-namespace Sfa.Eds.Indexer.Indexers.Services
+namespace Sfa.Eds.Indexer.StandardIndexer.Services
 {
     public class StandardIndexerService : IStandardIndexerService
     {

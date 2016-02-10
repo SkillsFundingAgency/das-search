@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Sfa.Eds.Indexer.Indexers.Helpers
+namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
 {
     public interface IStandardHelper
     {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Indexers.AzureAbstractions;
-using Sfa.Eds.Indexer.Indexers.Consumers;
-using Sfa.Eds.Indexer.Indexers.Services;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Indexer.StandardIndexer.Consumers;
+using Sfa.Eds.Indexer.StandardIndexer.Services;
 
 namespace Sfa.Eds.Standards.Indexer.UnitTests.Consumers
 {

@@ -96,9 +96,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexers.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Infrastructure.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
-      <Name>Sfa.Eds.Indexer.Indexers</Name>
+      <Name>Sfa.Eds.Indexer.Indexer.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Indexer.ProviderIndexer.csproj">
+      <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
+      <Name>Sfa.Eds.Indexer.ProviderIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2f1b878f-2412-489f-a286-cd73b8b1dd81}</Project>

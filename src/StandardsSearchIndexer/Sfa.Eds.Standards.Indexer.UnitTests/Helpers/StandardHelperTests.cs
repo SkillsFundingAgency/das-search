@@ -1,8 +1,8 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.Indexers.Configuration;
-using Sfa.Eds.Indexer.Indexers.Helpers;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers;
 using Sfa.Eds.Indexer.Settings.Settings;
 
 namespace Sfa.Eds.Standards.Indexer.UnitTests.Helpers

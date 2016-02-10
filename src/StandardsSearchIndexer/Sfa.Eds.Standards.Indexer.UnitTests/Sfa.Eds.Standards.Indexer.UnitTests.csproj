@@ -140,13 +140,21 @@
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.Eds.Indexer.DedsService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexers.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Infrastructure.csproj">
       <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
-      <Name>Sfa.Eds.Indexer.Indexers</Name>
+      <Name>Sfa.Eds.Indexer.Indexer.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Indexer.ProviderIndexer.csproj">
+      <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
+      <Name>Sfa.Eds.Indexer.ProviderIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
       <Name>Sfa.Eds.Indexer.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Indexer.StandardIndexer.csproj">
+      <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
+      <Name>Sfa.Eds.Indexer.StandardIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Standards.Indexer.AzureWorkerRole.csproj">
       <Project>{6163C031-06EA-4929-BC84-AB67ED0E93DA}</Project>
