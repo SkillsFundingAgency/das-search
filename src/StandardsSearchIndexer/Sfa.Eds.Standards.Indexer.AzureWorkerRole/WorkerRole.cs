@@ -40,7 +40,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Exception from  " + ex.Message);
+                    Log.Error("Exception from  " + ex);
                 }
 
                 Thread.Sleep(TimeSpan.FromMinutes(10));
