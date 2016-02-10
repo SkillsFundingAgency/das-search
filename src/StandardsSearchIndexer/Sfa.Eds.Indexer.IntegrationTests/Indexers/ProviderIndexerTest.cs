@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading;
 using FluentAssertions;
 using Nest;
 using NUnit.Framework;
@@ -93,8 +94,10 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            //Assert.AreEqual(1, amountRetrieved);
-            //Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
+            Thread.Sleep(1000);
+
+            Assert.AreEqual(1, amountRetrieved);
+            Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
         }
 
         private void DeleteIndexIfExists(string indexName)
