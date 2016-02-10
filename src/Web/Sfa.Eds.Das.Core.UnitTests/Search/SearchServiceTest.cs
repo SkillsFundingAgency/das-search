@@ -86,5 +86,15 @@
             Assert.AreEqual(countTotal, searchResult.Results.Count());
             Assert.AreEqual(resultsTotal, searchResult.TotalResults);
         }
+
+        [Test]
+        [TestCase(null, 4, 4, TestName = "Keyword is null")]
+        public void SearchByKeywordNullInput(string keyword, int countTotal, int resultsTotal)
+        {
+            var searchResult = classSearchService.SearchByKeyword(keyword, 0, 0);
+
+            Assert.AreEqual(countTotal, searchResult.Results.Count());
+            Assert.AreEqual(resultsTotal, searchResult.TotalResults);
+        }
     }
 }
