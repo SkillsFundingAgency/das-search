@@ -128,8 +128,8 @@
     <Compile Include="Services\StandardIndexerServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
-      <Link>app.config</Link>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Sfa.Eds.Standards.Indexer.Tests.ruleset" />

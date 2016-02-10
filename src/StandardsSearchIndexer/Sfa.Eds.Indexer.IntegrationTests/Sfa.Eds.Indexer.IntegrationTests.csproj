@@ -90,8 +90,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
-      <Link>app.config</Link>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
