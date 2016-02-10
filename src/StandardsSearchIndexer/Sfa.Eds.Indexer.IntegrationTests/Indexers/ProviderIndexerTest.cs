@@ -85,6 +85,8 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             _providerHelper.IndexProviders(scheduledDate, providersTest);
 
+            Thread.Sleep(1000);
+
             var retrievedResult =_elasticClient.Search<Provider>(p => p
                 .Index(indexName)
                 .QueryString(expectedProviderResult.PostCode));
@@ -93,8 +95,6 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-
-            Thread.Sleep(1000);
 
             Assert.AreEqual(1, amountRetrieved);
             Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
