@@ -107,7 +107,6 @@
     <Compile Include="BusinessLogic\Services\Factories\ElasticsearchClientFactory.cs" />
     <Compile Include="Interfaces\IElasticsearchClientFactory.cs" />
     <Compile Include="Interfaces\IApplicationSettings.cs" />
-    <Compile Include="BusinessLogic\Services\StubSearchService.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Log4NetSettings.cs" />
     <Compile Include="Models\Attachment.cs" />
