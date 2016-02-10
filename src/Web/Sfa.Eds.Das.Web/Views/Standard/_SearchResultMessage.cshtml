@@ -14,6 +14,10 @@
     {
         @RenderAllResult()
     }
+    else if (Model.TotalResults == 1)
+    {
+        @RenderMessageOneResult()
+    }
     else
     {
         @RenderMessage()
@@ -43,6 +47,17 @@
         All apprenticeship standards.
     </p>
 }
+
+@helper  RenderMessageOneResult()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There is @Model.TotalResults apprenticeship pathway matching your search for "@Model.SearchTerm".
+    </p>
+}
+
 
 @helper  RenderMessage()
 {
