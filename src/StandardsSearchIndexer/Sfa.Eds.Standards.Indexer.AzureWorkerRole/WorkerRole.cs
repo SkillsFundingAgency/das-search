@@ -45,7 +45,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 
                 Thread.Sleep(TimeSpan.FromMinutes(10));
             }
-            //_scheduler.Schedule(() => _standardControlQueueConsumer.CheckMessage(), 10);
         }
 
         public override bool OnStart()

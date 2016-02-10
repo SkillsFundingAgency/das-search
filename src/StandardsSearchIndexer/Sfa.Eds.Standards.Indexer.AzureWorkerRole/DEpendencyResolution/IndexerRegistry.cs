@@ -34,9 +34,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IIndexerScheduler>().Use<IndexerScheduler>();
             For<ICloudQueueService>().Use<CloudQueueService>();
-            For<ILog>().AlwaysUnique().Use(x => x.ParentType == null
-                    ? LogManager.GetLogger(x.RootType)
-                    : LogManager.GetLogger(x.ParentType));
+            For<ILog>().AlwaysUnique().Use(x => LogManager.GetLogger(x.ParentType) ?? LogManager.GetLogger(x.RootType));
         }
     }
 }

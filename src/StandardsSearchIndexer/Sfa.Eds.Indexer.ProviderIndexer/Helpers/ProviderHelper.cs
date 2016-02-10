@@ -54,7 +54,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         {
             try
             {
-                Log.Info("Indexing " + providers.Count() + " providers");
+                Log.Info("Indexing " + providers.Count + " providers");
 
                 var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
                 IndexProviders(indexName, providers);
