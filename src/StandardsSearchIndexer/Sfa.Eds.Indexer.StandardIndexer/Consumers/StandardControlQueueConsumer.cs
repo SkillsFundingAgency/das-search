@@ -31,24 +31,33 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
         {
             return Task.Run(() =>
             {
-                var queue = _cloudQueueService.GetQueueReference(_standardIndexSettings.ConnectionString, _standardIndexSettings.QueueName);
-                var cloudQueueMessages = queue.GetMessages(10);
-                var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
-
-                if (messages.Any())
+                try
                 {
-                    var message = messages.FirstOrDefault();
-                    if (message != null)
+                    var queue = _cloudQueueService.GetQueueReference(_standardIndexSettings.ConnectionString, _standardIndexSettings.QueueName);
+                    var cloudQueueMessages = queue.GetMessages(10);
+                    var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
+
+                    if (messages.Any())
                     {
-                        Log.Info("Creating new scheduled standard index at " + DateTime.Now);
-                        _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                        var message = messages.FirstOrDefault();
+                        if (message != null)
+                        {
+                            Log.Info("Creating new scheduled standard index at " + DateTime.Now);
+                            _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                        }
+                    }
+
+                    foreach (var cloudQueueMessage in messages)
+                    {
+                        queue.DeleteMessage(cloudQueueMessage);
                     }
                 }
-
-                foreach (var cloudQueueMessage in messages)
+                catch (Exception ex)
                 {
-                    queue.DeleteMessage(cloudQueueMessage);
+                    Log.Error("Something failed creating standard index: " + ex);
+                    throw;
                 }
+                
             });
         }
     }
