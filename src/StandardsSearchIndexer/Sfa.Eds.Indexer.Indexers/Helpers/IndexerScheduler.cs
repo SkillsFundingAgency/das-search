@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Threading;
 using log4net;
 
-namespace Sfa.Eds.Indexer.Indexers.Helpers
+namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers
 {
     public class IndexerScheduler : IIndexerScheduler
     {

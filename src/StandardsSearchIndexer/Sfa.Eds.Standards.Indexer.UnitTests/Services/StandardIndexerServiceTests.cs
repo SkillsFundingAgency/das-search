@@ -1,9 +1,9 @@
 ﻿using System;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Indexers.Helpers;
-using Sfa.Eds.Indexer.Indexers.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Indexer.StandardIndexer.Helpers;
+using Sfa.Eds.Indexer.StandardIndexer.Services;
 
 namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
 {

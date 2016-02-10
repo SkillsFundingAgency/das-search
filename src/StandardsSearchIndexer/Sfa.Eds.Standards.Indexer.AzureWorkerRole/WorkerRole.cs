@@ -6,9 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Sfa.Eds.Indexer.Indexers.Configuration;
-using Sfa.Eds.Indexer.Indexers.Consumers;
-using Sfa.Eds.Indexer.Indexers.Helpers;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers;
+using Sfa.Eds.Indexer.ProviderIndexer.Consumers;
+using Sfa.Eds.Indexer.StandardIndexer.Consumers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
@@ -44,7 +45,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
 
                 Thread.Sleep(TimeSpan.FromMinutes(10));
             }
-            //_scheduler.Schedule(() => _standardControlQueueConsumer.CheckMessage(), 10);
         }
 
         public override bool OnStart()

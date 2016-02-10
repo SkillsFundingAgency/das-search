@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Threading;
 using FluentAssertions;
 using Nest;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Indexers.Configuration;
-using Sfa.Eds.Indexer.Indexers.Helpers;
-using Sfa.Eds.Indexer.Indexers.Models;
-using Sfa.Eds.Indexer.Indexers.Services;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
+using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
+using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
@@ -83,14 +85,19 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             _providerHelper.IndexProviders(scheduledDate, providersTest);
 
-
-            var retrievedProvider =_elasticClient.Search<Provider>(p => p
+            var retrievedResult =_elasticClient.Search<Provider>(p => p
+                .Index(indexName)
                 .QueryString(expectedProviderResult.PostCode));
+            var amountRetrieved = retrievedResult.Documents.Count();
+            var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            Assert.Equals(retrievedProvider, expectedProviderResult);
+            Thread.Sleep(1000);
+
+            Assert.AreEqual(1, amountRetrieved);
+            Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
         }
 
         private void DeleteIndexIfExists(string indexName)

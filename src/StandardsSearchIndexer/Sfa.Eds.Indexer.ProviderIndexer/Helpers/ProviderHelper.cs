@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using log4net;
 using Nest;
-using Sfa.Eds.Indexer.Indexers.Configuration;
-using Sfa.Eds.Indexer.Indexers.Models;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Indexer.Indexers.Helpers
+namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
 {
     public class ProviderHelper : IProviderHelper
     {
@@ -54,7 +54,7 @@ namespace Sfa.Eds.Indexer.Indexers.Helpers
         {
             try
             {
-                Log.Info("Indexing " + providers.Count() + " providers");
+                Log.Info("Indexing " + providers.Count + " providers");
 
                 var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
                 IndexProviders(indexName, providers);

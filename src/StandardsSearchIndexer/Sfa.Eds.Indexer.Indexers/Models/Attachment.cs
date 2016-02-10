@@ -1,6 +1,6 @@
 ﻿using Nest;
 
-namespace Sfa.Eds.Indexer.Indexers.Models
+namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Models
 {
     public class Attachment
     {

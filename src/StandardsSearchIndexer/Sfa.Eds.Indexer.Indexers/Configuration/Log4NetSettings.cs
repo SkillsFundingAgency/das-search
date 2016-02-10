@@ -5,7 +5,7 @@ using log4net.Appender;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
 
-namespace Sfa.Eds.Indexer.Indexers.Configuration
+namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration
 {
     public static class Log4NetSettings
     {

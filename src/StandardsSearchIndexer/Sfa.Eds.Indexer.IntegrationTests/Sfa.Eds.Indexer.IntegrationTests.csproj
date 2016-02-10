@@ -55,8 +55,8 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
@@ -90,15 +90,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
-      <Link>app.config</Link>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexers.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Infrastructure.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
-      <Name>Sfa.Eds.Indexer.Indexers</Name>
+      <Name>Sfa.Eds.Indexer.Indexer.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Indexer.ProviderIndexer.csproj">
+      <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
+      <Name>Sfa.Eds.Indexer.ProviderIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2f1b878f-2412-489f-a286-cd73b8b1dd81}</Project>
@@ -129,6 +133,7 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="Publish" DependsOnTargets="Build" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

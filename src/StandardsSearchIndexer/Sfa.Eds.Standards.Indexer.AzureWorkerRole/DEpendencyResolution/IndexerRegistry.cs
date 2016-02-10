@@ -1,11 +1,15 @@
 ﻿using Nest;
 using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.Indexers.AzureAbstractions;
-using Sfa.Eds.Indexer.Indexers.Configuration;
-using Sfa.Eds.Indexer.Indexers.Consumers;
-using Sfa.Eds.Indexer.Indexers.Helpers;
-using Sfa.Eds.Indexer.Indexers.Services;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
+using Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers;
+using Sfa.Eds.Indexer.ProviderIndexer.Consumers;
+using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
+using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Indexer.StandardIndexer.Consumers;
+using Sfa.Eds.Indexer.StandardIndexer.Helpers;
+using Sfa.Eds.Indexer.StandardIndexer.Services;
 using StructureMap;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
@@ -30,9 +34,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IIndexerScheduler>().Use<IndexerScheduler>();
             For<ICloudQueueService>().Use<CloudQueueService>();
-            For<ILog>().AlwaysUnique().Use(x => x.ParentType == null
-                    ? LogManager.GetLogger(x.RootType)
-                    : LogManager.GetLogger(x.ParentType));
+            For<ILog>().AlwaysUnique().Use(x => LogManager.GetLogger(x.ParentType) ?? LogManager.GetLogger(x.RootType));
         }
     }
 }

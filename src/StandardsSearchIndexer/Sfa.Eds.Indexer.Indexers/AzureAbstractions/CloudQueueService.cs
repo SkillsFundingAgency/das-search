@@ -1,6 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 
-namespace Sfa.Eds.Indexer.Indexers.AzureAbstractions
+namespace Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions
 {
     public class CloudQueueService : ICloudQueueService
     {

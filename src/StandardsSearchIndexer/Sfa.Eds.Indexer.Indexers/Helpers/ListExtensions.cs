@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Sfa.Eds.Indexer.Indexers.Helpers
+namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers
 {
     public static class ListExtensions
     {
