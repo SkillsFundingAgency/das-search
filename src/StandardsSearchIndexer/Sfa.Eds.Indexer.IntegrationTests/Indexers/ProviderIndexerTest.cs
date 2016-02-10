@@ -87,11 +87,13 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             var retrievedResult =_elasticClient.Search<Provider>(p => p
                 .Index(indexName)
                 .QueryString(expectedProviderResult.PostCode));
+            var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
+            Assert.AreEqual(1, amountRetrieved);
             Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
         }
 
