@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using NUnit.Framework;
@@ -83,14 +84,15 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             _providerHelper.IndexProviders(scheduledDate, providersTest);
 
-
-            var retrievedProvider =_elasticClient.Search<Provider>(p => p
+            var retrievedResult =_elasticClient.Search<Provider>(p => p
+                .Index(indexName)
                 .QueryString(expectedProviderResult.PostCode));
+            var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            //Assert.Equals(retrievedProvider, expectedProviderResult);
+            Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
         }
 
         private void DeleteIndexIfExists(string indexName)
