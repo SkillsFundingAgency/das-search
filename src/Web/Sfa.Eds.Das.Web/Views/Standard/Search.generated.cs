@@ -70,20 +70,16 @@ WriteLiteral(">\r\n\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                <span");
-
-WriteLiteral(" class=\"heading-secondary\"");
-
-WriteLiteral(">Apprenticeship programmes</span>\r\n                Search\r\n            </h1>\r\n\r\n");
+WriteLiteral(">\r\n                Find an apprenticeship standard\r\n            </h1>\r\n\r\n");
 
             
-            #line 16 "..\..\Views\Standard\Search.cshtml"
+            #line 15 "..\..\Views\Standard\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 16 "..\..\Views\Standard\Search.cshtml"
+            #line 15 "..\..\Views\Standard\Search.cshtml"
              using (Html.BeginForm("SearchResults", "Standard", FormMethod.Get, new {@class = "search-box" }))
             {
 
@@ -102,9 +98,9 @@ WriteLiteral(">\r\n                            <span");
 
 WriteLiteral(" class=\"form-hint\"");
 
-WriteLiteral(">\r\n                            Enter the job role or keyword you’re looking for, " +
-"eg Engineering or Accountant.\r\n                        </span>\r\n                " +
-"        </label>\r\n\r\n                        <span");
+WriteLiteral(">\r\n                            Enter a job role or keyword (eg \'accountant\' or \'e" +
+"ngineering\')\r\n                        </span>\r\n                        </label>\r" +
+"\n\r\n                        <span");
 
 WriteLiteral(" class=\"error-message\"");
 
@@ -139,7 +135,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 31 "..\..\Views\Standard\Search.cshtml"
+            #line 30 "..\..\Views\Standard\Search.cshtml"
             }
 
             
