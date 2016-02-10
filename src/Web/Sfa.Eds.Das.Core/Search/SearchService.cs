@@ -12,6 +12,7 @@
 
     using Nest;
 
+
     public class SearchService : ISearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
@@ -26,13 +27,13 @@
 
         public SearchResults SearchByKeyword(string keywords, int skip, int take)
         {
-            take = take == 0 ? 1000 : take;
+            var t = take == 0 ? 1000 : take;
 
             var client = this.elasticsearchClientFactory.Create();
             
             var results = client.Search<SearchResultsItem>(s => s
             .Skip(skip)
-            .Take(take)
+            .Take(t)
             .QueryString(QueryHelper.FormatQuery(keywords)));
 
             var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.Title)).ToList();

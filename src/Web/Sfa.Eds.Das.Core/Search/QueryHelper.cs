@@ -2,13 +2,13 @@
 {
     using System.Text.RegularExpressions;
 
-    class QueryHelper
+    static class QueryHelper
     {
-        protected internal static string FormatQuery(string query, bool toLower = true)
+        internal static string FormatQuery(string query, bool toLower = true)
         {
-            query = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ").Trim();
-            query = query == string.Empty ? "*" : query;
-            return toLower ? query.ToLowerInvariant() : query;
+            var q = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ").Trim();
+            var queryformated = q == string.Empty ? "*" : query;
+            return toLower ? queryformated.ToLowerInvariant() : queryformated;
         }
     }
 }
