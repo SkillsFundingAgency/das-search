@@ -10,6 +10,8 @@
 
     using log4net;
 
+    using Nest;
+
     public class SearchService : ISearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
@@ -31,7 +33,7 @@
             var results = client.Search<SearchResultsItem>(s => s
             .Skip(skip)
             .Take(take)
-            .QueryString(keywords));
+            .QueryString(QueryHelper.FormatQuery(keywords)));
 
             var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.Title)).ToList();
 
@@ -67,4 +69,5 @@
             return results.Documents.Any() ? results.Documents.First() : null;
         }
     }
+
 }

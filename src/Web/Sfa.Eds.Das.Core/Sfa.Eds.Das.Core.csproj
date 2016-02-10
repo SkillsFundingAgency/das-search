@@ -116,6 +116,7 @@
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\Search\ISearchService.cs" />
+    <Compile Include="Search\QueryHelper.cs" />
     <Compile Include="Search\SearchService.cs" />
   </ItemGroup>
   <ItemGroup>
