@@ -40,7 +40,6 @@ Examples:
 | kdjfdkfjdfk |
 | 1232322     |
 
-
 @ignore
 Scenario Outline: Validate result count
 	Given I am on Search landing page
