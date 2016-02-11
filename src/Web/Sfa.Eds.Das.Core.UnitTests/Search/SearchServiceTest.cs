@@ -13,13 +13,12 @@
 
     using Interfaces.Search;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Models;
 
     using Assert = NUnit.Framework.Assert;
 
-    [TestFixture]    
+    [TestFixture]
+    [Category("Nightly")]
     public class SearchServiceTest
     {
         private IElasticClient client;
@@ -56,7 +55,7 @@
             elasticsearch.Dispose();
         }
 
-        [TestCategory("Nightly")]
+        [Category("Nightly")]
         [TestCase("standard", 3, TestName = "Search on title keyword")]
         [TestCase("Standard%20One", 3, TestName = "Search with space")]
         [TestCase("StandardFour", 1, TestName = "Search unique name")]
@@ -68,7 +67,7 @@
             Assert.AreEqual(countTotal, searchResult.Results.Count());
         }
 
-        [TestCategory("Nightly")]
+        [Category("Nightly")]
         [TestCase(@"\/", 1, TestName = @"Search with \/")]
         [TestCase("/", 1, TestName = "Search with /")]
         [TestCase("~", 0, TestName = "Search with ~")]
@@ -80,7 +79,7 @@
             Assert.IsFalse(searchResult.HasError);
         }
 
-        [TestCategory("Nightly")]
+        [Category("Nightly")]
         [TestCase("Standard", 0, 2, 2, 3, TestName = "Take 3 of 4")]
         [TestCase("Standard", 2, 10, 1, 3, TestName = "Skip 2 take 10 return 2")]
         public void SearchByKeywordSkipTake(string keyword, int skip, int take, int countTotal, int resultsTotal)
@@ -91,7 +90,7 @@
             Assert.AreEqual(resultsTotal, searchResult.TotalResults);
         }
 
-        [TestCategory("Nightly"), TestCategory("CIBuild")]
+        [Category("Nightly"), Category("CIBuild")]
         [TestCase(null, 4, 4, TestName = "Keyword is null")]
         public void SearchByKeywordNullInput(string keyword, int countTotal, int resultsTotal)
         {
