@@ -29,7 +29,7 @@ Examples:
 | car mechanic           |
 | Manager                |
 
-@regression
+@ignore
 Scenario Outline: Verify invalid search
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
@@ -40,8 +40,7 @@ Examples:
 | kdjfdkfjdfk |
 | 1232322     |
 
-
-@regression
+@ignore
 Scenario Outline: Validate result count
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box

@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Core.Models
 {
 
-    public sealed class SearchResultsItem
+    public sealed class StandardSearchResultsItem
     {
         public int StandardId { get; set; }
 

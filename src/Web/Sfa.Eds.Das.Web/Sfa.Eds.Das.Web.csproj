@@ -198,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -221,14 +222,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
+    <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\StandardResultItemViewModel.cs" />
+    <Compile Include="ViewModels\ProviderSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
-    <Compile Include="Views\Standard\Detail.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Detail.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Standard\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -291,6 +290,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Provider\SearchResults.cshtml" />
+    <Content Include="Views\Provider\Detail.cshtml" />
+    <Content Include="Views\Provider\_SearchResultMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
