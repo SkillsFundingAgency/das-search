@@ -112,6 +112,7 @@
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\ProviderSearchResultsItem.cs" />
+    <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\ProviderSearchResults.cs" />
     <Compile Include="Models\StandardSearchResults.cs" />

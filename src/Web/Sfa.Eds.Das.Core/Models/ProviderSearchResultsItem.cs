@@ -18,8 +18,5 @@ namespace Sfa.Eds.Das.Core.Models
         public int Radius { get; set; }
 
         public List<int> StandardsId { get; set; }
-
-        public bool HasError { get; set; }
-
     }
 }

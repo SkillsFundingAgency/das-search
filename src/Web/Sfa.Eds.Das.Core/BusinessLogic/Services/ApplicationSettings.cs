@@ -10,6 +10,8 @@ namespace Sfa.Eds.Das.Core.BusinessLogic.Services
 
         public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 
+        public string ProviderIndexAlias => ConfigurationManager.AppSettings["ProviderIndexAlias"];
+
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
         public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];

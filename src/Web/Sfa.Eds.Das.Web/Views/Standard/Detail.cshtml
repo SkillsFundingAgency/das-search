@@ -47,29 +47,24 @@
             </section>
         </div>
         <div class="column-third">
+            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            {
+                <div class="form-group">
+                    <legend>
+                        <label for="input-keywords">
+                            <span class="form-hint">
+                                Enter a job role or keyword (eg 'accountant' or 'engineering')
+                            </span>
+                        </label>
 
-            <div class="related-container">
-                <aside class="related">
-
-                    <h2 class="heading-medium">Find training providers</h2>
-                    <form action="/g-cloud/search" method="get" class="search-box">
-                        <div class="form-group">
-                            <label class="form-label" for="q">
-                                Postcode (optional)
-                                <span class="form-hint">
-                                    See all training providers in a given location.
-                                </span>
-                            </label>
-                            <input type="text" class="text-box form-control" name="q" maxlength="200">
-                        </div>
-                        <a href="proDetails_link_london_design.html" class="button">
-                            Search Providers
-                        </a>
-                    </form>
-
-                </aside>
-            </div>
-
+                        <span class="error-message"></span>
+                    </legend>
+                    <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId" >
+                    <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
+                </div>
+                <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
+            }
+            
         </div>
     </div>
 

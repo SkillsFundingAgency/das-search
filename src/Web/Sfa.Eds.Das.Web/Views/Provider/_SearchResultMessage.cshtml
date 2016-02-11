@@ -1,4 +1,4 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
 
 <div>
 
@@ -9,10 +9,6 @@
     else if (Model.TotalResults == 0)
     {
         @RenderZeroResult();
-    }
-    else if (string.IsNullOrEmpty(Model.SearchTerm) || Model.SearchTerm == "*")
-    {
-        @RenderAllResult()
     }
     else if (Model.TotalResults == 1)
     {
@@ -37,30 +33,30 @@
 @helper RenderZeroResult()
 {
     <h2 class="heading-large">
-        Apprenticeship standards
+        Apprenticeship providers
     </h2>
     <p>
-        There are no standards matching your search for '@Model.SearchTerm'
+        There are no providers matching this standard
     </p>
 }
 
 @helper  RenderAllResult()
 {
     <h2 class="heading-large">
-        Apprenticeship standards
+        Apprenticeship providers
     </h2>
     <p>
-        All apprenticeship standards.
+        All apprenticeship providers.
     </p>
 }
 
 @helper  RenderMessageOneResult()
 {
     <h2 class="heading-large">
-        Apprenticeship standards
+        Apprenticeship providers
     </h2>
     <p>
-        There is @Model.TotalResults standard matching your search for '@Model.SearchTerm'.
+        There is @Model.TotalResults provider matching this standard.
     </p>
 }
 
@@ -68,10 +64,9 @@
 @helper  RenderMessage()
 {
     <h2 class="heading-large">
-        Apprenticeship standards
+        Apprenticeship providers
     </h2>
     <p>
-        There are @Model.TotalResults standards matching your search for '@Model.SearchTerm'.
+        There are @Model.TotalResults providers matching this standard.
     </p>
 }
-

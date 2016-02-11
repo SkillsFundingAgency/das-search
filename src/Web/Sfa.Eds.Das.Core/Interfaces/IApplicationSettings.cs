@@ -4,6 +4,7 @@ namespace Sfa.Eds.Das.Core.Interfaces
     {
         string SearchHost { get; }
         string StandardIndexesAlias { get; }
+        string ProviderIndexAlias { get; }
         string ElasticServerIp { get; }
     }
 }

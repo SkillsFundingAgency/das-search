@@ -16,10 +16,14 @@
 
         private readonly ILog logging;
 
-        public ProviderSearchService(IElasticsearchClientFactory elasticsearchClientFactory, ILog logging)
+        private readonly IApplicationSettings _applicationSettings;
+
+
+        public ProviderSearchService(IElasticsearchClientFactory elasticsearchClientFactory, ILog logging, IApplicationSettings applicationSettings)
         {
             this.elasticsearchClientFactory = elasticsearchClientFactory;
             this.logging = logging;
+            _applicationSettings = applicationSettings;
         }
 
         public ProviderSearchResults SearchByStandardId(string standardId, int skip, int take)
@@ -30,6 +34,7 @@
             
             var results = client
                 .Search<ProviderSearchResultsItem>(s => s
+                    .Index(_applicationSettings.ProviderIndexAlias)
                     .MatchAll()
                     .Filter(f => f
                         .Term(y => y.StandardsId, standardId)));

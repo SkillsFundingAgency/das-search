@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Web.Controllers
+﻿using Sfa.Eds.Das.Core.Search;
+
+namespace Sfa.Eds.Das.Web.Controllers
 {
     using System;
     using System.Globalization;
@@ -13,28 +15,23 @@
 
     public class ProviderController : Controller
     {
-        private readonly ISearchService _searchService;
+        private readonly IProviderSearchService _searchService;
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        public ProviderController(ISearchService searchService, ILog logger, IMappingService mappingService)
+        public ProviderController(IProviderSearchService searchService, ILog logger, IMappingService mappingService)
         {
             _searchService = searchService;
             _logger = logger;
             _mappingService = mappingService;
         }
 
-        public ActionResult Search()
-        {
-            return View();
-        }
-
         [HttpGet]
-        public ActionResult SearchResults(SearchCriteria criteria)
+        public ActionResult SearchResults(ProviderSearchCriteria criteria)
         {
-            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+            var searchResults = _searchService.SearchByStandardId(criteria.StandardId, criteria.Skip, criteria.Take);
 
-            var viewModel = _mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }
@@ -42,7 +39,7 @@
         // GET: Standard
         public ActionResult Detail(string id)
         {
-            var standardResult = _searchService.GetStandardItem(id);
+            /*var standardResult = _searchService.GetStandardItem(id);
 
             if (standardResult == null)
             {
@@ -53,7 +50,8 @@
 
             var viewModel = _mappingService.Map<StandardSearchResultsItem, StandardViewModel>(standardResult);
             viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
-            return View(viewModel);
+            return View(viewModel);*/
+            return View();
         }
 
         private LinkViewModel GetSearchResultUrl(Uri urlReferrer)
