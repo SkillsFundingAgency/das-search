@@ -57,7 +57,7 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
         }
 
         [Test, Category("Integration")]
-        public void ShouldRetrieveProvider()
+        public void ShouldRetrieveProvidersSearchigForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
@@ -98,6 +98,45 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             Assert.AreEqual(1, amountRetrieved);
             Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
+        }
+
+        [Test, Category("Integration")]
+        public void ShouldRetrieveProvidersSearchigForLatLong()
+        {
+            var scheduledDate = new DateTime(2000, 1, 1);
+            var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
+
+            var providersTest = GetProvidersTest();
+            var coordinateToSearch = new Coordinate
+            {
+                Lat = 52.4819902,
+                Lon = -1.8923181
+            };
+
+            DeleteIndexIfExists(indexName);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
+            _providerHelper.CreateIndex(scheduledDate);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+
+            _providerHelper.IndexProviders(scheduledDate, providersTest);
+
+            Thread.Sleep(1000);
+
+            var retrievedProviders = _elasticClient.Search<Provider>(s => s
+                .Index(indexName)
+                .Filter(f => f
+                    .GeoDistance(
+                        n => n.Coordinate,
+                        d => d.Distance(20, GeoUnit.Kilometers).Location(51.386615, -0.039525)
+                    )
+                )
+            );
+
+            
+            _elasticClient.DeleteIndex(i => i.Index(indexName));
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
         }
 
         private void DeleteIndexIfExists(string indexName)
