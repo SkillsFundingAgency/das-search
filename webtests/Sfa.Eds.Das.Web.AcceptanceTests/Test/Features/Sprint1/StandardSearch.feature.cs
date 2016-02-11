@@ -18,8 +18,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Search for a Standard by keyword", Description="In order to find an apprenticeship as per my needs\r\nAs an employer \r\nI want to be" +
-        " able to search from available Standards", SourceFile="Test\\Features\\Sprint1\\StandardSearch.feature", SourceLine=0)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Search for a Standard by keyword")]
     public partial class SearchForAStandardByKeywordFeature
     {
         
@@ -28,7 +28,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
 #line 1 "StandardSearch.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -37,18 +37,19 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.TestFixtureTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -64,8 +65,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Verify landing page", new string[] {
-                "smoke"}, SourceLine=7)]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify landing page")]
+        [NUnit.Framework.CategoryAttribute("smoke")]
         public virtual void VerifyLandingPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify landing page", new string[] {
@@ -81,99 +83,40 @@ testRunner.Then("I should be able to see home page with title as \"Home Page - E
             this.ScenarioCleanup();
         }
         
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search Standard by keyword")]
+        [NUnit.Framework.TestCaseAttribute("Actuarial technician", null)]
+        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
+        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Legal Services", null)]
+        [NUnit.Framework.TestCaseAttribute("Designer", null)]
+        [NUnit.Framework.TestCaseAttribute("dental nurse", null)]
+        [NUnit.Framework.TestCaseAttribute("Electrician", null)]
+        [NUnit.Framework.TestCaseAttribute("car mechanic", null)]
+        [NUnit.Framework.TestCaseAttribute("Manager", null)]
         public virtual void SearchStandardByKeyword(string jOBROLE, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "regression"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Standard by keyword", @__tags);
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Standard by keyword", exampleTags);
+#line 14
 this.ScenarioSetup(scenarioInfo);
-#line 16
+#line 15
  testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
+#line 16
  testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
+#line 17
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
+#line 18
  testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, Actuarial technician", new string[] {
-                "regression"}, SourceLine=21)]
-        public virtual void SearchStandardByKeyword_ActuarialTechnician()
-        {
-            this.SearchStandardByKeyword("Actuarial technician", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, Financial Adviser", new string[] {
-                "regression"}, SourceLine=22)]
-        public virtual void SearchStandardByKeyword_FinancialAdviser()
-        {
-            this.SearchStandardByKeyword("Financial Adviser", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, software engineer", new string[] {
-                "regression"}, SourceLine=23)]
-        public virtual void SearchStandardByKeyword_SoftwareEngineer()
-        {
-            this.SearchStandardByKeyword("software engineer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, manufacturing engineer", new string[] {
-                "regression"}, SourceLine=24)]
-        public virtual void SearchStandardByKeyword_ManufacturingEngineer()
-        {
-            this.SearchStandardByKeyword("manufacturing engineer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, Legal Services", new string[] {
-                "regression"}, SourceLine=25)]
-        public virtual void SearchStandardByKeyword_LegalServices()
-        {
-            this.SearchStandardByKeyword("Legal Services", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, Designer", new string[] {
-                "regression"}, SourceLine=26)]
-        public virtual void SearchStandardByKeyword_Designer()
-        {
-            this.SearchStandardByKeyword("Designer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, dental nurse", new string[] {
-                "regression"}, SourceLine=27)]
-        public virtual void SearchStandardByKeyword_DentalNurse()
-        {
-            this.SearchStandardByKeyword("dental nurse", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, Electrician", new string[] {
-                "regression"}, SourceLine=28)]
-        public virtual void SearchStandardByKeyword_Electrician()
-        {
-            this.SearchStandardByKeyword("Electrician", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, car mechanic", new string[] {
-                "regression"}, SourceLine=29)]
-        public virtual void SearchStandardByKeyword_CarMechanic()
-        {
-            this.SearchStandardByKeyword("car mechanic", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search Standard by keyword, Manager", new string[] {
-                "regression"}, SourceLine=30)]
-        public virtual void SearchStandardByKeyword_Manager()
-        {
-            this.SearchStandardByKeyword("Manager", ((string[])(null)));
-        }
-        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify invalid search")]
+        [NUnit.Framework.CategoryAttribute("regression")]
+        [NUnit.Framework.TestCaseAttribute("kdjfdkfjdfk", null)]
+        [NUnit.Framework.TestCaseAttribute("1232322", null)]
         public virtual void VerifyInvalidSearch(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -183,34 +126,26 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify invalid search", @__tags);
-#line 34
+#line 33
 this.ScenarioSetup(scenarioInfo);
-#line 35
+#line 34
 testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 35
 testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 36
 testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
+#line 37
 testRunner.Then("I should see message \"Total results found: 0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Verify invalid search, kdjfdkfjdfk", new string[] {
-                "regression"}, SourceLine=40)]
-        public virtual void VerifyInvalidSearch_Kdjfdkfjdfk()
-        {
-            this.VerifyInvalidSearch("kdjfdkfjdfk", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Verify invalid search, 1232322", new string[] {
-                "regression"}, SourceLine=41)]
-        public virtual void VerifyInvalidSearch_1232322()
-        {
-            this.VerifyInvalidSearch("1232322", ((string[])(null)));
-        }
-        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Validate result count")]
+        [NUnit.Framework.CategoryAttribute("regression")]
+        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
+        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
+        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
         public virtual void ValidateResultCount(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -220,41 +155,25 @@ testRunner.Then("I should see message \"Total results found: 0\"", ((string)(nul
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate result count", @__tags);
-#line 46
+#line 45
 this.ScenarioSetup(scenarioInfo);
-#line 47
+#line 46
  testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
+#line 47
  testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 48
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 50
+#line 49
  testRunner.Then("I should see standards count on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Validate result count, Actuarial Technician", new string[] {
-                "regression"}, SourceLine=52)]
-        public virtual void ValidateResultCount_ActuarialTechnician()
-        {
-            this.ValidateResultCount("Actuarial Technician", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Validate result count, Financial Adviser", new string[] {
-                "regression"}, SourceLine=53)]
-        public virtual void ValidateResultCount_FinancialAdviser()
-        {
-            this.ValidateResultCount("Financial Adviser", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Validate result count, software engineer", new string[] {
-                "regression"}, SourceLine=54)]
-        public virtual void ValidateResultCount_SoftwareEngineer()
-        {
-            this.ValidateResultCount("software engineer", ((string[])(null)));
-        }
-        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search result Page to have best match")]
+        [NUnit.Framework.IgnoreAttribute()]
+        [NUnit.Framework.TestCaseAttribute("Mechanical Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Software Engineer", null)]
         public virtual void SearchResultPageToHaveBestMatch(string keyword, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -264,40 +183,20 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search result Page to have best match", @__tags);
-#line 59
+#line 58
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 59
 testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 60
 testRunner.When(string.Format("I enter keyword \'{0}\'", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 62
+#line 61
 testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 62
 testRunner.Then("I should result search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 64
+#line 63
 testRunner.And(string.Format("it should list most best match \'{0}\' on top of the search list", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search result Page to have best match, Mechanical Engineer", SourceLine=66)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void SearchResultPageToHaveBestMatch_MechanicalEngineer()
-        {
-            this.SearchResultPageToHaveBestMatch("Mechanical Engineer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search result Page to have best match, Software Engineer", SourceLine=67)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
-        public virtual void SearchResultPageToHaveBestMatch_SoftwareEngineer()
-        {
-            this.SearchResultPageToHaveBestMatch("Software Engineer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.TestRunCleanup()]
-        public virtual void TestRunCleanup()
-        {
-TechTalk.SpecFlow.TestRunnerManager.GetTestRunner().OnTestRunEnd();
         }
     }
 }
