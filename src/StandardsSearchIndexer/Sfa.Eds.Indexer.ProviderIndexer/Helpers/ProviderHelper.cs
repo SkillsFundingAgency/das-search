@@ -52,7 +52,8 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     .DistanceErrorPercentage(0.025))*/
                 .GeoPoint(g => g.Name(n => n.Coordinate).IndexLatLon()))));
 
-            return _client.IndexExists(indexName).Exists;
+            var exists = _client.IndexExists(indexName).Exists;
+            return exists;
         }
 
         public async Task IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
@@ -342,7 +343,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             {
                 try
                 {
-                    _client.Index(provider, i => i.Index(indexName));
+                    var a = _client.Index(provider, i => i.Index(indexName));
                 }
                 catch (Exception e)
                 {

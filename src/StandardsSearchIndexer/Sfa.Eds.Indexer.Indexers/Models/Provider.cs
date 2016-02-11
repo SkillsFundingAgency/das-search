@@ -17,7 +17,7 @@ namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Models
 
         public int Radius { get; set; }
 
-        public IEnumerable<int> StandardsId { get; set; }
+        public List<int> StandardsId { get; set; }
         //public EnvelopeGeoShape Circle { get; set; }
     }
 }
