@@ -35,12 +35,12 @@
             var model = new StandardSearchResultViewModel
             {
                 TotalResults = 0,
-                SearchTerm = string.Empty,
+                SearchTerm = "SearchTerm",
                 Results = new List<StandardResultItemViewModel>(),
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There are currently no apprenticeships that match your search.");
+            GetPartial(html, "p").Should().Contain("There are no standards matching your search for 'SearchTerm'");
         }
 
         [Test]
@@ -81,7 +81,7 @@
             var result = GetPartial(html, "p");
 
             resultHeading.Should().Be("Apprenticeship standards");
-            result.Should().Be("There is 1 apprenticeship pathway matching your search for \"SearchTerm\".");
+            result.Should().Be("There is 1 standard matching your search for 'SearchTerm'.");
         }
 
         [Test]
@@ -100,7 +100,7 @@
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, "h2").Should().Be("Apprenticeship standards");
-            GetPartial(html, "p").Should().Be("There are 2 apprenticeship pathways matching your search for \"SearchTerm\".");
+            GetPartial(html, "p").Should().Be("There are 2 standards matching your search for 'SearchTerm'.");
         }
     }
 }

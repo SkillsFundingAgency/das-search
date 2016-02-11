@@ -47,66 +47,79 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p");
+WriteLiteralTo(__razor_helper_writer, "    <h2");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"strong\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        There was a problem performing a search. Try again later.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n    </h2>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There was a problem performing a search. Try again later.\r\n    <" +
+"/p>\r\n");
 
 
-#line 32 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 35 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 32 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 35 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 34 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 37 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult RenderZeroResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 35 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 38 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p");
+WriteLiteralTo(__razor_helper_writer, "    <h2");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"strong\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        There are currently no apprenticeships that match your search.\r\n    </" +
-"p>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n    </h2>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are no standards matching your search for \'");
 
 
-#line 39 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 43 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+                           WriteTo(__razor_helper_writer, Model.SearchTerm);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\'\r\n    </p>\r\n");
+
+
+#line 45 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 39 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 45 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 41 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 47 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderAllResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 42 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 48 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -121,26 +134,26 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        All apprenticeship standards.\r\n    </p>\r\n");
 
 
-#line 49 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 55 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 49 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 55 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 51 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 57 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessageOneResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 52 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 58 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -155,44 +168,44 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There is ");
 
 
-#line 57 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 63 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " apprenticeship pathway matching your search for \"");
+WriteLiteralTo(__razor_helper_writer, " standard matching your search for \'");
 
 
-#line 57 "..\..\Views\Standard\_SearchResultMessage.cshtml"
-                                                        WriteTo(__razor_helper_writer, Model.SearchTerm);
+#line 63 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+                                          WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\".\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
 
 
-#line 59 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 65 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 59 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 65 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 62 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 68 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 63 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 69 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -207,32 +220,32 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are ");
 
 
-#line 68 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 74 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " apprenticeship pathways matching your search for \"");
+WriteLiteralTo(__razor_helper_writer, " standards matching your search for \'");
 
 
-#line 68 "..\..\Views\Standard\_SearchResultMessage.cshtml"
-                                                          WriteTo(__razor_helper_writer, Model.SearchTerm);
+#line 74 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+                                            WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\".\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
 
 
-#line 70 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 76 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 70 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 76 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
