@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AF0198
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "SitefinityWebApp.CloudService", "SitefinityWebApp.CloudService\SitefinityWebApp.CloudService.ccproj", "{F2571D34-AAB0-4676-97A2-4E6C7E762E72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,12 @@ Global
 		{153A7B0D-059A-44E4-B119-9BEE33CBB233}.Release Pro|Any CPU.Build.0 = Release|Any CPU
 		{153A7B0D-059A-44E4-B119-9BEE33CBB233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{153A7B0D-059A-44E4-B119-9BEE33CBB233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2571D34-AAB0-4676-97A2-4E6C7E762E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2571D34-AAB0-4676-97A2-4E6C7E762E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2571D34-AAB0-4676-97A2-4E6C7E762E72}.Release Pro|Any CPU.ActiveCfg = Release|Any CPU
+		{F2571D34-AAB0-4676-97A2-4E6C7E762E72}.Release Pro|Any CPU.Build.0 = Release|Any CPU
+		{F2571D34-AAB0-4676-97A2-4E6C7E762E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2571D34-AAB0-4676-97A2-4E6C7E762E72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
