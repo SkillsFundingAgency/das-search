@@ -338,12 +338,15 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
 
         private void IndexProviders(string indexName, List<Provider> providers)
         {
+            int id = 1;
             // index the items
             foreach (var provider in providers)
             {
                 try
                 {
-                    var a = _client.Index(provider, i => i.Index(indexName));
+                    provider.ProviderId = id;
+                    _client.Index(provider, i => i.Index(indexName));
+                    id++;
                 }
                 catch (Exception e)
                 {

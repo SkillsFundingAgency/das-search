@@ -10,7 +10,7 @@
 
     using log4net;
 
-    public class ProviderSearchService
+    public class ProviderSearchService : IProviderSearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
 

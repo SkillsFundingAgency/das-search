@@ -1,0 +1,77 @@
+﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+
+<div>
+
+    @if (Model.HasError)
+    {
+        @RenderErrorMessage()
+    }
+    else if (Model.TotalResults == 0)
+    {
+        @RenderZeroResult();
+    }
+    else if (string.IsNullOrEmpty(Model.SearchTerm) || Model.SearchTerm == "*")
+    {
+        @RenderAllResult()
+    }
+    else if (Model.TotalResults == 1)
+    {
+        @RenderMessageOneResult()
+    }
+    else
+    {
+        @RenderMessage()
+    }
+</div>
+
+@helper  RenderErrorMessage()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There was a problem performing a search. Try again later.
+    </p>
+}
+
+@helper RenderZeroResult()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There are no standards matching your search for '@Model.SearchTerm'
+    </p>
+}
+
+@helper  RenderAllResult()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        All apprenticeship standards.
+    </p>
+}
+
+@helper  RenderMessageOneResult()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There is @Model.TotalResults standard matching your search for '@Model.SearchTerm'.
+    </p>
+}
+
+
+@helper  RenderMessage()
+{
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There are @Model.TotalResults standards matching your search for '@Model.SearchTerm'.
+    </p>
+}
+

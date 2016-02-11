@@ -1,0 +1,68 @@
+﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<main id="content" role="main">
+    @Html.ActionLink("Search", "Search", null, new {@class = "link-back"})
+    <div id="results" class="grid-row">
+
+        <div class="column-two-thirds">
+
+            <div class="hgroup">
+
+                <h1 class="heading-xlarge">
+                    Search results
+                </h1>
+
+            </div>
+            <p>
+                @{
+                    Html.RenderPartial("_SearchResultMessage");
+                }
+            </p>
+            <ol class="frameworkResults">
+                @foreach (var item in Model.Results)
+                {
+                    <li class="result">
+                        <div class="column details">
+                            <h2 class="heading-medium">
+                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                            </h2>
+                            <dl>
+                                <dt class="endLevel">Level</dt>
+                                <dd class="endLevel">
+                                    <span>@item.NotionalEndLevel</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                }
+            </ol>
+
+        </div>
+
+        <div class="column-third">
+
+            <div class="related-container">
+                <aside class="related" id="related">
+                    <div class="inner group related-subsection">
+
+                        <h2 id="parent-subsection">Help</h2>
+
+                        <ul class="link-list">
+                            <li>
+                                <a href="help_standards.html">What is a standard</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="inner group">
+                        <a class="return-to-top" href="#content">Return to top ↑</a>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</main>

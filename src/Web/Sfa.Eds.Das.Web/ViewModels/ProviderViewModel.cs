@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using Nest;
+using Sfa.Eds.Das.Core.Models;
 
-namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Models
+namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public class Provider
+    public class ProviderViewModel
     {
-        public int ProviderId { get; set; }
-
         public string UkPrn { get; set; }
 
         public string ProviderName { get; set; }
@@ -20,6 +18,7 @@ namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Models
         public int Radius { get; set; }
 
         public List<int> StandardsId { get; set; }
-        //public EnvelopeGeoShape Circle { get; set; }
+
+        public LinkViewModel SearchResultLink { get; set; }
     }
 }

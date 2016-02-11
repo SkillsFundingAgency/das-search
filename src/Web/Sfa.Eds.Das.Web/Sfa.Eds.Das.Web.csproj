@@ -198,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -291,6 +292,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Provider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

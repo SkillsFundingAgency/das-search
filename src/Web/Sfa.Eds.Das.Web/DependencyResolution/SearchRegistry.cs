@@ -17,6 +17,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
         public SearchRegistry()
         {
             this.For<ISearchService>().Use<SearchService>();
+            this.For<IProviderSearchService>().Use<ProviderSearchService>();
             this.For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             this.For<IApplicationSettings>().Use<ApplicationSettings>();
             this.For<IMappingService>().Use<MappingService>();
