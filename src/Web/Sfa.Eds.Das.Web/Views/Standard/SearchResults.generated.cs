@@ -81,21 +81,17 @@ WriteLiteral(">\r\n\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                    <span");
-
-WriteLiteral(" class=\"heading-secondary\"");
-
-WriteLiteral(">Apprenticeship programmes</span>\r\n                    Search results\r\n          " +
-"      </h1>\r\n\r\n            </div>\r\n            <p>\r\n");
+WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n\r\n            </div" +
+">\r\n            <p>\r\n");
 
             
-            #line 21 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 20 "..\..\Views\Standard\SearchResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 20 "..\..\Views\Standard\SearchResults.cshtml"
                   
                     Html.RenderPartial("_SearchResultMessage");
                 
@@ -109,13 +105,13 @@ WriteLiteral(" class=\"frameworkResults\"");
 WriteLiteral(">\r\n");
 
             
-            #line 26 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 25 "..\..\Views\Standard\SearchResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 25 "..\..\Views\Standard\SearchResults.cshtml"
                  foreach (var item in Model.Results)
                 {
 
@@ -139,7 +135,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 31 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 30 "..\..\Views\Standard\SearchResults.cshtml"
                            Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
 
             
@@ -157,7 +153,7 @@ WriteLiteral(" class=\"endLevel\"");
 WriteLiteral(">\r\n                                    <span>");
 
             
-            #line 36 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 35 "..\..\Views\Standard\SearchResults.cshtml"
                                      Write(item.NotionalEndLevel);
 
             
@@ -167,7 +163,7 @@ WriteLiteral("</span>\r\n                                </dd>\r\n              
 "\r\n                        </div>\r\n                    </li>\r\n");
 
             
-            #line 41 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 40 "..\..\Views\Standard\SearchResults.cshtml"
                 }
 
             
@@ -200,11 +196,6 @@ WriteLiteral(">Help</h2>\r\n\r\n                        <ul");
 WriteLiteral(" class=\"link-list\"");
 
 WriteLiteral(">\r\n                            <li>\r\n                                <a");
-
-WriteLiteral(" href=\"help_frameworks.html\"");
-
-WriteLiteral(">What is a framework</a>\r\n                            </li>\r\n                    " +
-"        <li>\r\n                                <a");
 
 WriteLiteral(" href=\"help_standards.html\"");
 
