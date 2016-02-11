@@ -6,8 +6,11 @@
     {
         internal static string FormatQuery(string query, bool toLower = true)
         {
-            var q = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ").Trim();
-            var queryformated = q == string.Empty ? "*" : query;
+            if (string.IsNullOrEmpty(query))
+            {
+                return "*";
+            }
+            var queryformated = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ");            
             return toLower ? queryformated.ToLowerInvariant() : queryformated;
         }
     }
