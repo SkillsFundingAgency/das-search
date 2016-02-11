@@ -1,4 +1,4 @@
-Param($url, $username, $password)
+Param($username, $password)
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
