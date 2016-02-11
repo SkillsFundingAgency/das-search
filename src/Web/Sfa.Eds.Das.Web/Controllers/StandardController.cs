@@ -34,7 +34,7 @@
         {
             var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
-            var viewModel = _mappingService.Map<SearchResults, StandardSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }
@@ -51,7 +51,7 @@
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _mappingService.Map<SearchResultsItem, StandardViewModel>(standardResult);
+            var viewModel = _mappingService.Map<StandardSearchResultsItem, StandardViewModel>(standardResult);
             viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
             return View(viewModel);
         }

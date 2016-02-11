@@ -35,10 +35,10 @@
             elasticsearch = new Elasticsearch(e => e.Port(4444));
             client = new ElasticClient(new ConnectionSettings(elasticsearch.Url));
 
-            client.Index(new SearchResultsItem() { Title = "Standard One", StandardId = 1 }, i => i.Index(indexname));
-            client.Index(new SearchResultsItem() { Title = "Standard 2", StandardId = 2 }, i => i.Index(indexname));
-            client.Index(new SearchResultsItem() { Title = "Standard 3", StandardId = 3 }, i => i.Index(indexname));
-            client.Index(new SearchResultsItem() { Title = "StandardFour", StandardId = 0 }, i => i.Index(indexname));
+            client.Index(new StandardSearchResultsItem() { Title = "Standard One", StandardId = 1 }, i => i.Index(indexname));
+            client.Index(new StandardSearchResultsItem() { Title = "Standard 2", StandardId = 2 }, i => i.Index(indexname));
+            client.Index(new StandardSearchResultsItem() { Title = "Standard 3", StandardId = 3 }, i => i.Index(indexname));
+            client.Index(new StandardSearchResultsItem() { Title = "StandardFour", StandardId = 0 }, i => i.Index(indexname));
 
             Thread.Sleep(2 * 1000);
 
