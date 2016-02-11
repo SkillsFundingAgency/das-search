@@ -25,6 +25,8 @@ $buildFolder = (Get-Item -Path ".\build" -Verbose).FullName
 $zipFile = $buildFolder + "\tests.zip"
 Write-Host $zipFile
 
+$headers = @{Authorization=("Bearer {0}" -f $authToken)}
+
 $json = Invoke-RestMethod -Uri $url2 -headers $headers -Method Get
 $downloadUrl = $json.value[1].resource.downloadUrl
 Write-Host $downloadUrl
