@@ -10,35 +10,40 @@
 
     using log4net;
 
-    public class SearchService : ISearchService
+    public class ProviderSearchService : IProviderSearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
 
         private readonly ILog logging;
 
-        public SearchService(IElasticsearchClientFactory elasticsearchClientFactory, ILog logging)
+        private readonly IApplicationSettings _applicationSettings;
+
+
+        public ProviderSearchService(IElasticsearchClientFactory elasticsearchClientFactory, ILog logging, IApplicationSettings applicationSettings)
         {
             this.elasticsearchClientFactory = elasticsearchClientFactory;
             this.logging = logging;
+            _applicationSettings = applicationSettings;
         }
 
-        public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
+        public ProviderSearchResults SearchByStandardId(string standardId, int skip, int take)
         {
             var t = take == 0 ? 1000 : take;
 
             var client = this.elasticsearchClientFactory.Create();
             
-            var results = client.Search<StandardSearchResultsItem>(s => s
-            .Skip(skip)
-            .Take(t)
-            .QueryString(QueryHelper.FormatQuery(keywords)));
+            var results = client
+                .Search<ProviderSearchResultsItem>(s => s
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .MatchAll()
+                    .Filter(f => f
+                        .Term(y => y.StandardsId, standardId)));
 
-            var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.Title)).ToList();
+            var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).ToList();
 
-            return new StandardSearchResults
+            return new ProviderSearchResults
             {
                 TotalResults = results.Total,
-                SearchTerm = keywords,
                 Results = documents,
                 HasError = results.ConnectionStatus.HttpStatusCode != 200
             };
@@ -67,5 +72,4 @@
             return results.Documents.Any() ? results.Documents.First() : null;
         }
     }
-
 }

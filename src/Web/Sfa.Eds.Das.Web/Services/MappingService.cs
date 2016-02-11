@@ -49,9 +49,12 @@
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<SearchResultsItem, StandardResultItemViewModel>();
-                cfg.CreateMap<SearchResultsItem, StandardViewModel>();
-                cfg.CreateMap<SearchResults, StandardSearchResultViewModel>();
+                cfg.CreateMap<ProviderSearchResultsItem, ProviderResultItemViewModel>();
+                cfg.CreateMap<ProviderSearchResultsItem, ProviderViewModel>();
+                cfg.CreateMap<ProviderSearchResults, ProviderSearchResultViewModel>();
+                cfg.CreateMap<StandardSearchResultsItem, StandardResultItemViewModel>();
+                cfg.CreateMap<StandardSearchResultsItem, StandardViewModel>();
+                cfg.CreateMap<StandardSearchResults, StandardSearchResultViewModel>();
             });
         }
     }

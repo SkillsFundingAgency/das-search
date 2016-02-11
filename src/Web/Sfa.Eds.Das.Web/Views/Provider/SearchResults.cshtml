@@ -1,9 +1,11 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
+
 @{
-    ViewBag.Title = "Search Results";
+    ViewBag.Title = "Provider Search Results";
 }
 
 <main id="content" role="main">
+    @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
     <div id="results" class="grid-row">
 
         <div class="column-two-thirds">
@@ -26,12 +28,12 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.ProviderId }, null)
                             </h2>
                             <dl>
-                                <dt class="endLevel">Level</dt>
-                                <dd class="endLevel">
-                                    <span>@item.NotionalEndLevel</span>
+                                <dt class="postCode">PostCode</dt>
+                                <dd class="postCode">
+                                    <span>@item.PostCode</span>
                                 </dd>
                             </dl>
                         </div>
@@ -65,3 +67,4 @@
         </div>
     </div>
 </main>
+

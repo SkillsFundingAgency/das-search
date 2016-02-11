@@ -19,11 +19,11 @@
             // Arrange
             var mockSearchService = new Mock<ISearchService>();
             var mockLogger = new Mock<ILog>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new SearchResults());
+            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new StandardSearchResults());
 
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
-                x => x.Map<SearchResults, StandardSearchResultViewModel>(It.IsAny<SearchResults>()))
+                x => x.Map<StandardSearchResults, StandardSearchResultViewModel>(It.IsAny<StandardSearchResults>()))
                 .Returns(new StandardSearchResultViewModel());
 
             StandardController controller = new StandardController(mockSearchService.Object, mockLogger.Object, mockMappingServices.Object);
@@ -45,7 +45,7 @@
 
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
-                x => x.Map<SearchResults, StandardSearchResultViewModel>(It.IsAny<SearchResults>()))
+                x => x.Map<StandardSearchResults, StandardSearchResultViewModel>(It.IsAny<StandardSearchResults>()))
                 .Returns(new StandardSearchResultViewModel());
 
             StandardController controller = new StandardController(mockSearchService.Object, mockLogger.Object, mockMappingServices.Object);

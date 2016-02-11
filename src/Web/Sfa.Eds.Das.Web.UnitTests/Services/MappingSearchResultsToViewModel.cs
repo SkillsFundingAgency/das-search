@@ -17,15 +17,15 @@
         public void MappSearchResultsToViewModel()
         {
             MappingService mappingService = new MappingService(null);
-            var sri = new SearchResultsItem
+            var sri = new StandardSearchResultsItem
             {
                 StandardId = 101,
                 Title = "Standard 1"
             };
-            var resultList = new List<SearchResultsItem> { sri };
-            var model = new SearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
+            var resultList = new List<StandardSearchResultsItem> { sri };
+            var model = new StandardSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
 
-            var mappedResult = mappingService.Map<SearchResults, StandardSearchResultViewModel>(model);
+            var mappedResult = mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(model);
 
             Assert.AreEqual(model.TotalResults, mappedResult.TotalResults);
             Assert.AreEqual(model.Results.First().Title, mappedResult.Results.First().Title);
