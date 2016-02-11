@@ -12,11 +12,13 @@
     using Core.Search;
 
     using Interfaces.Search;
+
     using Models;
 
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture]
+    [Category("Nightly")]
     public class SearchServiceTest
     {
         private IElasticClient client;
@@ -53,7 +55,7 @@
             elasticsearch.Dispose();
         }
 
-        [Test]
+        [Category("Nightly")]
         [TestCase("standard", 3, TestName = "Search on title keyword")]
         [TestCase("Standard%20One", 3, TestName = "Search with space")]
         [TestCase("StandardFour", 1, TestName = "Search unique name")]
@@ -65,6 +67,7 @@
             Assert.AreEqual(countTotal, searchResult.Results.Count());
         }
 
+        [Category("Nightly")]
         [TestCase(@"\/", 1, TestName = @"Search with \/")]
         [TestCase("/", 1, TestName = "Search with /")]
         [TestCase("~", 0, TestName = "Search with ~")]
@@ -76,12 +79,22 @@
             Assert.IsFalse(searchResult.HasError);
         }
 
-        [Test]
+        [Category("Nightly")]
         [TestCase("Standard", 0, 2, 2, 3, TestName = "Take 3 of 4")]
         [TestCase("Standard", 2, 10, 1, 3, TestName = "Skip 2 take 10 return 2")]
         public void SearchByKeywordSkipTake(string keyword, int skip, int take, int countTotal, int resultsTotal)
         {
             var searchResult = classSearchService.SearchByKeyword(keyword, skip, take);
+
+            Assert.AreEqual(countTotal, searchResult.Results.Count());
+            Assert.AreEqual(resultsTotal, searchResult.TotalResults);
+        }
+
+        [Category("Nightly"), Category("CIBuild")]
+        [TestCase(null, 4, 4, TestName = "Keyword is null")]
+        public void SearchByKeywordNullInput(string keyword, int countTotal, int resultsTotal)
+        {
+            var searchResult = classSearchService.SearchByKeyword(keyword, 0, 0);
 
             Assert.AreEqual(countTotal, searchResult.Results.Count());
             Assert.AreEqual(resultsTotal, searchResult.TotalResults);

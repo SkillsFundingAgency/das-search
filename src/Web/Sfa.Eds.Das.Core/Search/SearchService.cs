@@ -10,9 +10,6 @@
 
     using log4net;
 
-    using Nest;
-
-
     public class SearchService : ISearchService
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
