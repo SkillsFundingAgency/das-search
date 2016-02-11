@@ -26,15 +26,21 @@
 
 @helper  RenderErrorMessage()
 {
-    <p class="strong">
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
         There was a problem performing a search. Try again later.
     </p>
 }
 
 @helper RenderZeroResult()
 {
-    <p class="strong">
-        There are currently no apprenticeships that match your search.
+    <h2 class="heading-large">
+        Apprenticeship standards
+    </h2>
+    <p>
+        There are no standards matching your search for '@Model.SearchTerm'
     </p>
 }
 
@@ -54,7 +60,7 @@
         Apprenticeship standards
     </h2>
     <p>
-        There is @Model.TotalResults apprenticeship pathway matching your search for "@Model.SearchTerm".
+        There is @Model.TotalResults standard matching your search for '@Model.SearchTerm'.
     </p>
 }
 
@@ -65,7 +71,7 @@
         Apprenticeship standards
     </h2>
     <p>
-        There are @Model.TotalResults apprenticeship pathways matching your search for "@Model.SearchTerm".
+        There are @Model.TotalResults standards matching your search for '@Model.SearchTerm'.
     </p>
 }
 
