@@ -45,9 +45,15 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             _client.CreateIndex(indexName, c => c.AddMapping<Provider>(m => m
                 .MapFromAttributes()
                 .Properties(p => p
-                    .GeoPoint(g => g.Name(n => n.Coordinate).IndexLatLon()))));
+                /*.GeoShape(x => x
+                    .Name(n => n.Circle)
+                    .Tree(GeoTree.Geohash)
+                    .TreeLevels(2)
+                    .DistanceErrorPercentage(0.025))*/
+                .GeoPoint(g => g.Name(n => n.Coordinate).IndexLatLon()))));
 
-            return _client.IndexExists(indexName).Exists;
+            var exists = _client.IndexExists(indexName).Exists;
+            return exists;
         }
 
         public async Task IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
@@ -81,6 +87,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.3714464,
                         Lon = -1.2669471
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -94,6 +104,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.290897,
                         Lon = -1.528915
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -107,6 +121,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.4819902,
                         Lon = -1.8923181
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -120,6 +138,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.4754573,
                         Lon = -1.8857531
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12, 25
                     }
                 },
                 new Provider
@@ -133,6 +155,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.9106629,
                         Lon = -1.4467433
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -146,6 +172,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.918635,
                         Lon = -1.4761639
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -159,6 +189,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 51.5292025,
                         Lon = -0.1202702
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -172,6 +206,10 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 51.4938191,
                         Lon = -0.2236763
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
                     }
                 },
                 new Provider
@@ -185,6 +223,112 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     {
                         Lat = 52.8967801,
                         Lon = -1.2682401
+                    },
+                    StandardsId = new List<int>
+                    {
+                        25
+                    }
+                },
+                new Provider
+                {
+                    UkPrn = "10004355",
+                    PostCode = "CV1 2JG",
+                    ProviderName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
+                    VenueName = "Midland Group Training Services Ltd",
+                    Radius = 10,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.4050479,
+                        Lon = -1.4966412
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12
+                    }
+                },
+                new Provider
+                {
+                    UkPrn = "10001919",
+                    PostCode = "DE248JE",
+                    ProviderName = "DERBY COLLEGE",
+                    VenueName = "DERBY COLLEGE @ THE ROUNDHOUSE",
+                    Radius = 30,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.9159961,
+                        Lon = -1.4589891
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12
+                    }
+                },
+                new Provider
+                {
+                    UkPrn = "10005991",
+                    PostCode = "NG7 2RU",
+                    ProviderName = "CENTRAL COLLEGE NOTTINGHAM",
+                    VenueName = "Highfields",
+                    Radius = 30,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.9367136,
+                        Lon = -1.1869524
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12
+                    }
+                },
+                new Provider
+                {
+                    UkPrn = "10007924",
+                    PostCode = "DY1 3AH",
+                    ProviderName = "DUDLEY COLLEGE OF TECHNOLOGY",
+                    VenueName = "Wolverhampton Street",
+                    Radius = 40,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.5113022,
+                        Lon = -2.090677
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12
+                    }
+                },
+                new Provider
+                {
+                    UkPrn = "10004355",
+                    PostCode = "B98 8LY",
+                    ProviderName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
+                    VenueName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
+                    Radius = 30,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.3063609,
+                        Lon = -1.9297031
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12
+                    }
+                },
+                new Provider
+                {
+                    UkPrn = "10005673",
+                    PostCode = "B70 0AE",
+                    ProviderName = "ANDWELL TRAINING ASSOCIATION LIMITED",
+                    VenueName = "PHOENIX STREET",
+                    Radius = 40,
+                    Coordinate = new Coordinate
+                    {
+                        Lat = 52.5257464,
+                        Lon = -2.0192208
+                    },
+                    StandardsId = new List<int>
+                    {
+                        12
                     }
                 }
             };
@@ -199,7 +343,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             {
                 try
                 {
-                    _client.Index(provider, i => i.Index(indexName));
+                    var a = _client.Index(provider, i => i.Index(indexName));
                 }
                 catch (Exception e)
                 {

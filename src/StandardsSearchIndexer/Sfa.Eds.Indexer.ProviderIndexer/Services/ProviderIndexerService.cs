@@ -24,35 +24,43 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             Log.Info("Creating new provider index...");
-
-            var indexProperlyCreated = _providerHelper.CreateIndex(scheduledRefreshDateTime);
-            if (!indexProperlyCreated)
+            try
             {
-                Log.Info("Provider index not created properly, exiting...");
-                return;
+                var indexProperlyCreated = _providerHelper.CreateIndex(scheduledRefreshDateTime);
+                if (!indexProperlyCreated)
+                {
+                    Log.Info("Provider index not created properly, exiting...");
+                    return;
+                }
+
+                Log.Info("Indexing providers...");
+                var providers = await _providerHelper.GetProviders();
+
+                await _providerHelper.IndexProviders(scheduledRefreshDateTime, providers).ConfigureAwait(false);
+
+                PauseWhileIndexingIsBeingRun();
+
+                if (_providerHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
+                {
+                    Log.Info("Swapping provider indexes...");
+
+                    _providerHelper.SwapIndexes(scheduledRefreshDateTime);
+
+                    Log.Info("Swap completed...");
+
+                    Log.Info("Deleting old provider indexes...");
+
+                    _providerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
+
+                    Log.Info("Deletion completed...");
+                }
             }
-
-            Log.Info("Indexing providers...");
-            var providers = await _providerHelper.GetProviders();
-
-            await _providerHelper.IndexProviders(scheduledRefreshDateTime, providers).ConfigureAwait(false);
-
-            PauseWhileIndexingIsBeingRun();
-
-            if (_providerHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
+            catch (Exception ex)
             {
-                Log.Info("Swapping provider indexes...");
-
-                _providerHelper.SwapIndexes(scheduledRefreshDateTime);
-
-                Log.Info("Swap completed...");
-
-                Log.Info("Deleting old provider indexes...");
-
-                _providerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
-
-                Log.Info("Deletion completed...");
+                var a = ex.Message;
+                throw;
             }
+            
         }
 
         private void PauseWhileIndexingIsBeingRun()
