@@ -18,8 +18,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Search standards by title", Description="In order to choose an apprenticeship\r\nAs an employer \r\nI want to be able to Searc" +
-        "h by title", SourceFile="Test\\Features\\Sprint1\\SearchStandardByTitle.feature", SourceLine=0)]
+    [NUnit.Framework.TestFixtureAttribute()]
+    [NUnit.Framework.DescriptionAttribute("Search standards by title")]
     public partial class SearchStandardsByTitleFeature
     {
         
@@ -28,7 +28,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
 #line 1 "SearchStandardByTitle.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
+        [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -37,18 +37,19 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
+        [NUnit.Framework.TestFixtureTearDownAttribute()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
+        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
+        [NUnit.Framework.TearDownAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -64,6 +65,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint1
             testRunner.CollectScenarioErrors();
         }
         
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search By title1")]
+        [NUnit.Framework.CategoryAttribute("smoke")]
+        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
         public virtual void SearchByTitle1(string title, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -87,13 +92,19 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title1, Actuarial Technician", new string[] {
-                "smoke"}, SourceLine=13)]
-        public virtual void SearchByTitle1_ActuarialTechnician()
-        {
-            this.SearchByTitle1("Actuarial Technician", ((string[])(null)));
-        }
-        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search By title")]
+        [NUnit.Framework.CategoryAttribute("regression")]
+        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
+        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
+        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("car mechanic", null)]
+        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Manager", null)]
+        [NUnit.Framework.TestCaseAttribute("Legal Services", null)]
+        [NUnit.Framework.TestCaseAttribute("Designer", null)]
+        [NUnit.Framework.TestCaseAttribute("Dental nurse", null)]
+        [NUnit.Framework.TestCaseAttribute("Electrician", null)]
         public virtual void SearchByTitle(string title, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -117,78 +128,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Actuarial Technician", new string[] {
-                "regression"}, SourceLine=23)]
-        public virtual void SearchByTitle_ActuarialTechnician()
-        {
-            this.SearchByTitle("Actuarial Technician", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Financial Adviser", new string[] {
-                "regression"}, SourceLine=24)]
-        public virtual void SearchByTitle_FinancialAdviser()
-        {
-            this.SearchByTitle("Financial Adviser", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, software engineer", new string[] {
-                "regression"}, SourceLine=25)]
-        public virtual void SearchByTitle_SoftwareEngineer()
-        {
-            this.SearchByTitle("software engineer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, car mechanic", new string[] {
-                "regression"}, SourceLine=26)]
-        public virtual void SearchByTitle_CarMechanic()
-        {
-            this.SearchByTitle("car mechanic", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, manufacturing engineer", new string[] {
-                "regression"}, SourceLine=27)]
-        public virtual void SearchByTitle_ManufacturingEngineer()
-        {
-            this.SearchByTitle("manufacturing engineer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Manager", new string[] {
-                "regression"}, SourceLine=28)]
-        public virtual void SearchByTitle_Manager()
-        {
-            this.SearchByTitle("Manager", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Legal Services", new string[] {
-                "regression"}, SourceLine=29)]
-        public virtual void SearchByTitle_LegalServices()
-        {
-            this.SearchByTitle("Legal Services", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Designer", new string[] {
-                "regression"}, SourceLine=30)]
-        public virtual void SearchByTitle_Designer()
-        {
-            this.SearchByTitle("Designer", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Dental nurse", new string[] {
-                "regression"}, SourceLine=31)]
-        public virtual void SearchByTitle_DentalNurse()
-        {
-            this.SearchByTitle("Dental nurse", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Search By title, Electrician", new string[] {
-                "regression"}, SourceLine=32)]
-        public virtual void SearchByTitle_Electrician()
-        {
-            this.SearchByTitle("Electrician", ((string[])(null)));
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Standards searched to display level informaiton", SourceLine=35)]
-        [TechTalk.SpecRun.IgnoreAttribute()]
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Standards searched to display level informaiton")]
+        [NUnit.Framework.IgnoreAttribute()]
         public virtual void StandardsSearchedToDisplayLevelInformaiton()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Standards searched to display level informaiton", new string[] {
@@ -205,12 +147,6 @@ testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlo
 testRunner.Then("I should see level information againts again standards found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.TestRunCleanup()]
-        public virtual void TestRunCleanup()
-        {
-TechTalk.SpecFlow.TestRunnerManager.GetTestRunner().OnTestRunEnd();
         }
     }
 }
