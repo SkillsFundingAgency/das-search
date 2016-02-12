@@ -56,8 +56,7 @@
                 standardName = standardSearchResultsItem.Title;
             }
 
-            var a = client
-                .Raw();
+            
 
             return new ProviderSearchResults
             {
