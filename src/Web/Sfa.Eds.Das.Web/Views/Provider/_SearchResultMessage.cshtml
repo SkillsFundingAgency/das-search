@@ -23,7 +23,7 @@
 @helper  RenderErrorMessage()
 {
     <h2 class="heading-large">
-        Apprenticeship standards
+        Training standards
     </h2>
     <p>
         There was a problem performing a search. Try again later.
@@ -33,20 +33,20 @@
 @helper RenderZeroResult()
 {
     <h2 class="heading-large">
-        Apprenticeship providers
+        Training providers
     </h2>
     <p>
-        There are no providers for '@Model.StandardName'
+        There are no training providers for '@Model.StandardName'
     </p>
 }
 
 @helper  RenderMessageOneResult()
 {
     <h2 class="heading-large">
-        Apprenticeship providers
+        Training providers
     </h2>
     <p>
-        @Model.TotalResults provider found for '@Model.StandardName'.
+        There is @Model.TotalResults training provider found for '@Model.StandardName'.
     </p>
 }
 
@@ -54,9 +54,9 @@
 @helper  RenderMessage()
 {
     <h2 class="heading-large">
-        Apprenticeship providers
+        Training providers
     </h2>
     <p>
-        @Model.TotalResults providers found for '@Model.StandardName'.
+        There are @Model.TotalResults training providers found for '@Model.StandardName'.
     </p>
 }

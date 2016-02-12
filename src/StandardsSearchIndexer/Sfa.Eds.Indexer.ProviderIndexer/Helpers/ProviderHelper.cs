@@ -318,7 +318,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10005673",
                     PostCode = "B70 0AE",
-                    ProviderName = "ANDWELL TRAINING ASSOCIATION LIMITED",
+                    ProviderName = "SANDWELL TRAINING ASSOCIATION LIMITED",
                     VenueName = "PHOENIX STREET",
                     Radius = 40,
                     Coordinate = new Coordinate
