@@ -6,6 +6,8 @@
     {
         public long TotalResults { get; set; }
 
+        public int StandardId { get; set; }
+
         public string StandardName { get; set; }
 
         public IEnumerable<ProviderSearchResultsItem> Results { get; set; }

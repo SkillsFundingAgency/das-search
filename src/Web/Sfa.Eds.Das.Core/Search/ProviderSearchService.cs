@@ -59,6 +59,7 @@
             return new ProviderSearchResults
             {
                 TotalResults = results.Total,
+                StandardId = int.Parse(standardId),
                 StandardName = standardName,
                 Results = documents,
                 HasError = results.ConnectionStatus.HttpStatusCode != 200
