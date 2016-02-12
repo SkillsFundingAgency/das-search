@@ -890,7 +890,6 @@
     <Content Include="App_Data\Sitefinity\Configuration\VersionConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\VirtualPathSettingsConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\WorkflowConfig.config" />
-    <Content Include="App_Data\Sitefinity\Sitefinity.lic" />
     <Content Include="App_Data\Sitefinity\Configuration\DataConfig.Azure.config">
       <DependentUpon>DataConfig.config</DependentUpon>
       <SubType>Designer</SubType>
