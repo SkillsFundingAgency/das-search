@@ -117,7 +117,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
       <Private>True</Private>
@@ -229,14 +231,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -729,6 +733,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\GeoLocation\citieslist.txt" />
     <Content Include="ClientBin\Telerik.Sitefinity.Analytics.xap" />
     <Content Include="ClientBin\Telerik.Sitefinity.Silverlight.xap" />
     <Content Include="Default.aspx" />
@@ -856,12 +861,49 @@
     <Content Include="App_Data\RadSpell\en-US.tdf" />
     <Content Include="App_Data\RadSpell\fr-FR.tdf" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\Sitefinity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App_Data\GeoLocation\GeoLiteCity.dat" />
     <Content Include="packages.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\AnalyticsConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\CatalogConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\CatalogConfig.contentViewControls.ProductsBackendDefinitionName.views.ProductsBackendMaster.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\CatalogConfig.contentViewControls.ProductTypesBackendDefinitionName.views.ProductTypesBackendMaster.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\CommentsModuleConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\ContentViewConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\DataConfig.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Sitefinity\Configuration\DigitalExperienceCloudConnectorConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\EcommerceConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\FormsConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\ForumsConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\LibrariesConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\PagesConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\PersonalizationConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\ProjectConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\SearchConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\SecurityConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\SystemConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\ToolboxesConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\TranslationsConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\VersionConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\VirtualPathSettingsConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\WorkflowConfig.config" />
+    <Content Include="App_Data\Sitefinity\Sitefinity.lic" />
+    <Content Include="App_Data\Sitefinity\Configuration\DataConfig.Azure.config">
+      <DependentUpon>DataConfig.config</DependentUpon>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="web.Azure.config">
+      <DependentUpon>web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StandardModule\StandardModule.csproj">
