@@ -39,11 +39,28 @@
                     .Filter(f => f
                         .Term(y => y.StandardsId, standardId)));
 
-            var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).ToList();
+            var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
+
+            string standardName = string.Empty;
+            var standardSearchResultsItem = client
+                .Search<StandardSearchResultsItem>(s => s
+                    .Index(_applicationSettings.StandardIndexesAlias)
+                    .From(0)
+                    .Size(1)
+                    .Query(q =>
+                        q.QueryString(qs =>
+                            qs.OnFields(e => e.StandardId)
+                                .Query(standardId)))).Documents.FirstOrDefault();
+            if (standardSearchResultsItem != null)
+            {
+                standardName = standardSearchResultsItem.Title;
+            }
 
             return new ProviderSearchResults
             {
                 TotalResults = results.Total,
+                StandardId = int.Parse(standardId),
+                StandardName = standardName,
                 Results = documents,
                 HasError = results.ConnectionStatus.HttpStatusCode != 200
             };

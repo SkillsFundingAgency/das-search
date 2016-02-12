@@ -4,6 +4,7 @@
 }
 
 <main id="content" role="main">
+    @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
     <div id="results" class="grid-row">
 
         <div class="column-two-thirds">
@@ -26,7 +27,7 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                @Html.ActionLink(item.Title, "Detail", "Standard", new {@id = item.StandardId}, null)
                             </h2>
                             <dl>
                                 <dt class="endLevel">Level</dt>

@@ -5,7 +5,7 @@
 }
 
 <main id="content" role="main">
-    @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
+    @Html.ActionLink("Back to Standard", "Detail", "Standard", new {@id = @Model.StandardId} , new { @class = "link-back" } )
     <div id="results" class="grid-row">
 
         <div class="column-two-thirds">

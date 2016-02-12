@@ -36,17 +36,7 @@
         Apprenticeship providers
     </h2>
     <p>
-        There are no providers matching this standard
-    </p>
-}
-
-@helper  RenderAllResult()
-{
-    <h2 class="heading-large">
-        Apprenticeship providers
-    </h2>
-    <p>
-        All apprenticeship providers.
+        There are no providers for '@Model.StandardName'
     </p>
 }
 
@@ -56,7 +46,7 @@
         Apprenticeship providers
     </h2>
     <p>
-        There is @Model.TotalResults provider matching this standard.
+        @Model.TotalResults provider found for '@Model.StandardName'.
     </p>
 }
 
@@ -67,6 +57,6 @@
         Apprenticeship providers
     </h2>
     <p>
-        There are @Model.TotalResults providers matching this standard.
+        @Model.TotalResults providers found for '@Model.StandardName'.
     </p>
 }
