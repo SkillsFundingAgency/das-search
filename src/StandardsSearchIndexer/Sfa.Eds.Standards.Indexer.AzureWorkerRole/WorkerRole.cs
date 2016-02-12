@@ -32,7 +32,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 {
                     var tasks = new List<Task>
                     {
-                        //_standardControlQueueConsumer.CheckMessage(),
+                        _standardControlQueueConsumer.CheckMessage(),
                         _providerControlQueueConsumer.CheckMessage()
                     };
 

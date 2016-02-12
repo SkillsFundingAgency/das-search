@@ -40,23 +40,13 @@
     </p>
 }
 
-@helper  RenderAllResult()
-{
-    <h2 class="heading-large">
-        Apprenticeship providers
-    </h2>
-    <p>
-        All apprenticeship providers.
-    </p>
-}
-
 @helper  RenderMessageOneResult()
 {
     <h2 class="heading-large">
         Apprenticeship providers
     </h2>
     <p>
-        @Model.TotalResults provider found.
+        @Model.TotalResults provider found for '@Model.StandardName'.
     </p>
 }
 
@@ -67,6 +57,6 @@
         Apprenticeship providers
     </h2>
     <p>
-        @Model.TotalResults providers found.
+        @Model.TotalResults providers found for '@Model.StandardName'.
     </p>
 }
