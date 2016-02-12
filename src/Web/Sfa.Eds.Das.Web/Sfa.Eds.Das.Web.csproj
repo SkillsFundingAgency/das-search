@@ -54,10 +54,6 @@
       <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Elasticsearch.Net.1.7.1\lib\net45\Elasticsearch.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -95,10 +91,6 @@
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Nest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEST.1.7.1\lib\net45\Nest.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -199,6 +191,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Models\ProviderSearchCriteria.cs" />
+    <Compile Include="Models\StandardCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -228,6 +223,11 @@
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
+    <Compile Include="Views\Standard\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Standard\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -312,9 +312,17 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Das.ApplicationServices\Sfa.Das.ApplicationServices.csproj">
+      <Project>{F8946F39-EDEC-457A-857B-5A76D4151082}</Project>
+      <Name>Sfa.Das.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Core\Sfa.Eds.Das.Core.csproj">
       <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
       <Name>Sfa.Eds.Das.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Das.Infrastructure\Sfa.Eds.Das.Infrastructure.csproj">
+      <Project>{3f5631ab-7190-4203-96db-af5664c72100}</Project>
+      <Name>Sfa.Eds.Das.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

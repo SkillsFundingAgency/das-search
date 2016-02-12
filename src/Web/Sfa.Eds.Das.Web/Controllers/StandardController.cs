@@ -4,22 +4,28 @@
     using System.Globalization;
     using System.Web.Mvc;
 
-    using log4net;
-
+    using Sfa.Das.ApplicationServices;
+    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Core.Models;
+    using Sfa.Eds.Das.Web.Models;
     using Sfa.Eds.Das.Web.Services;
     using Sfa.Eds.Das.Web.ViewModels;
 
     public class StandardController : Controller
     {
-        private readonly ISearchService _searchService;
-        private readonly ILog _logger;
+        private readonly IStandardSearchService searchService;
+
+        private readonly IStandardRepository standardRepository;
+
+        private readonly IApplicationLogger _logger;
         private readonly IMappingService _mappingService;
 
-        public StandardController(ISearchService searchService, ILog logger, IMappingService mappingService)
+        public StandardController(IStandardSearchService searchService, IStandardRepository standardRepository, IApplicationLogger logger, IMappingService mappingService)
         {
-            _searchService = searchService;
+            this.searchService = searchService;
+            this.standardRepository = standardRepository;
             _logger = logger;
             _mappingService = mappingService;
         }
@@ -30,9 +36,9 @@
         }
 
         [HttpGet]
-        public ActionResult SearchResults(SearchCriteria criteria)
+        public ActionResult SearchResults(StandardCriteria criteria)
         {
-            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
             var viewModel = _mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(searchResults);
 
@@ -42,8 +48,7 @@
         // GET: Standard
         public ActionResult Detail(string id)
         {
-            var standardResult = _searchService.GetStandardItem(id);
-
+            var standardResult = this.standardRepository.GetById(id);
             if (standardResult == null)
             {
                 var message = $"Cannot find standard: {id}";
@@ -51,7 +56,7 @@
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _mappingService.Map<StandardSearchResultsItem, StandardViewModel>(standardResult);
+            var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
             viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
             return View(viewModel);
         }

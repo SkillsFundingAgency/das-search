@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Core.Models;
-
     using NUnit.Framework;
+
+    using Sfa.Das.ApplicationServices.Models;
 
     using ViewModels;
     using Web.Services;
