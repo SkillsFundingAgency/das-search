@@ -1,4 +1,4 @@
-Param($url, $username, $password)
+Param($url, $authToken)
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
@@ -25,15 +25,12 @@ $buildFolder = (Get-Item -Path ".\build" -Verbose).FullName
 $zipFile = $buildFolder + "\tests.zip"
 Write-Host $zipFile
 
-$basicAuth = ("{0}:{1}" -f $username,$password)
-$basicAuth = [System.Text.Encoding]::UTF8.GetBytes($basicAuth)
-$basicAuth = [System.Convert]::ToBase64String($basicAuth)
-$headers = @{Authorization=("Basic {0}" -f $basicAuth)}
+$headers = @{Authorization=("Bearer {0}" -f $authToken)}
 
 $json = Invoke-RestMethod -Uri $url2 -headers $headers -Method Get
 $downloadUrl = $json.value[1].resource.downloadUrl
 Write-Host $downloadUrl
-$webClient.Headers.Add("Authorization", ("Basic {0}" -f $basicAuth))
+$webClient.Headers.Add("Authorization", ("Bearer {0}" -f $authToken))
 $webClient.DownloadFile($downloadUrl, $zipFile)
 
 Write-Host "Download done"
