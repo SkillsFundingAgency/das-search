@@ -7,20 +7,20 @@
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Configuration;
 
-    public class ElasticsearchClientFactory : IElasticsearchClientFactory
+    public sealed class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
-        private readonly IConfigurationSettings applicationSettings;
+        private readonly IConfigurationSettings _applicationSettings;
 
         public ElasticsearchClientFactory(IConfigurationSettings applicationSettings)
         {
-            this.applicationSettings = applicationSettings;
+            _applicationSettings = applicationSettings;
         }
 
         public IElasticClient Create()
         {
-            var node = new Uri(this.applicationSettings.SearchHost);
+            var node = new Uri(_applicationSettings.SearchHost);
 
-            var settings = new ConnectionSettings(node, defaultIndex: this.applicationSettings.StandardIndexesAlias);
+            var settings = new ConnectionSettings(node, defaultIndex: _applicationSettings.StandardIndexesAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
             settings.MapDefaultTypeNames(d => d.Add(typeof(ProviderSearchResultsItem), "provider"));

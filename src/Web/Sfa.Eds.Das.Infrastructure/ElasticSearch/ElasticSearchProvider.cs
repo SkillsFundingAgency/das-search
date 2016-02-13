@@ -6,22 +6,22 @@
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Configuration;
 
-    public class ElasticsearchProvider : ISearchProvider
+    public sealed class ElasticsearchProvider : ISearchProvider
     {
-        private readonly IElasticsearchClientFactory elasticsearchClientFactory;
-        private readonly IConfigurationSettings applicationSettings;
+        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IConfigurationSettings _applicationSettings;
 
         public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, IConfigurationSettings applicationSettings)
         {
-            this.elasticsearchClientFactory = elasticsearchClientFactory;
-            this.applicationSettings = applicationSettings;
+            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _applicationSettings = applicationSettings;
         }
 
         public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             keywords = QueryHelper.FormatQuery(keywords);
 
-            var client = this.elasticsearchClientFactory.Create();
+            var client = this._elasticsearchClientFactory.Create();
             var results = client.Search<StandardSearchResultsItem>(s => s.Skip(skip).Take(take).QueryString(keywords));
 
             return new StandardSearchResults
@@ -35,11 +35,11 @@
 
         public ProviderSearchResults SearchByStandardId(string standardId, int skip, int take)
         {
-            var client = this.elasticsearchClientFactory.Create();
+            var client = this._elasticsearchClientFactory.Create();
 
             var results = client
                 .Search<ProviderSearchResultsItem>(s => s
-                    .Index(applicationSettings.ProviderIndexAlias)
+                    .Index(_applicationSettings.ProviderIndexAlias)
                     .MatchAll()
                     .Filter(f => f
                         .Term(y => y.StandardsId, standardId)));
@@ -47,9 +47,10 @@
             var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
 
             string standardName = string.Empty;
+
             var standardSearchResultsItem = client
                 .Search<StandardSearchResultsItem>(s => s
-                    .Index(applicationSettings.StandardIndexesAlias)
+                    .Index(_applicationSettings.StandardIndexesAlias)
                     .From(0)
                     .Size(1)
                     .Query(q =>

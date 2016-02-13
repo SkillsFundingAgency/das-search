@@ -8,21 +8,20 @@
     using Sfa.Eds.Das.Core.Logging;
     using Core.Domain.Model;
 
-    public class StandardRepository : IStandardRepository
+    public sealed class StandardRepository : IStandardRepository
     {
-        private readonly IElasticsearchClientFactory elasticsearchClientFactory;
-
-        private readonly ILog applicationLogger;
+        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly ILog _applicationLogger;
 
         public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger)
         {
-            this.elasticsearchClientFactory = elasticsearchClientFactory;
-            this.applicationLogger = applicationLogger;
+            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _applicationLogger = applicationLogger;
         }
 
         public Standard GetById(string id)
         {
-            var client = this.elasticsearchClientFactory.Create();
+            var client = this._elasticsearchClientFactory.Create();
             var results =
                 client.Search<StandardSearchResultsItem>(
                     s => s
@@ -35,7 +34,8 @@
 
             if (results.ConnectionStatus.HttpStatusCode != 200)
             {
-                applicationLogger.Error($"Trying to get standard with id {id}");
+                _applicationLogger.Error($"Trying to get standard with id {id}");
+
                 throw new ApplicationException($"Failed query standard with id {id}");
             }
 

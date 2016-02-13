@@ -2,7 +2,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch.Models
 {
     using System.Collections.Generic;
 
-    public class ElasticsearchResponse<T> : IElasticsearchResponse<T>
+    public sealed class ElasticsearchResponse<T> : IElasticsearchResponse<T>
     {
         public long Total { get; set; }
 

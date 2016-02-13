@@ -4,9 +4,9 @@ namespace Sfa.Eds.Das.Infrastructure.Configuration
 
     using Core.Configuration;
 
-    public class ApplicationSettings : IConfigurationSettings
+    public sealed class ApplicationSettings : IConfigurationSettings
     {
-        public string SearchHost => $"http://{this.ElasticServerIp}:{this.ElasticsearchPort}";
+        public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
         public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 

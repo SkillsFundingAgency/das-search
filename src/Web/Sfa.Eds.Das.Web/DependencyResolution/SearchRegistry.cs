@@ -21,7 +21,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<IMappingService>().Use<MappingService>();
             For<log4net.ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
-            For<Core.Logging.ILog>().Use<ApplicationLogger>();
+            For<Core.Logging.ILog>().Use<Log4NetLogger>();
 
             // New infrastructure
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();

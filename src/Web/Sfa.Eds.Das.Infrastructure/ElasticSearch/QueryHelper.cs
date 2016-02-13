@@ -12,6 +12,7 @@
             }
 
             var queryformated = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ");
+
             return toLower ? queryformated.ToLowerInvariant() : queryformated;
         }
     }
