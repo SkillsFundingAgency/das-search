@@ -13,7 +13,6 @@
 
     public class ProviderController : Controller
     {
-
         private readonly ISearchProvider providerSearchService;
 
         private readonly IApplicationLogger _logger;

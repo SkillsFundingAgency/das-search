@@ -17,22 +17,18 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
     {
         public SearchRegistry()
         {
-            //For<ISearchService>().Use<SearchService>();
-            //this.For<IProviderSearchProvider>().Use<ElasticSearchProviderSearchProvider>();
-            this.For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            this.For<IApplicationSettings>().Use<ApplicationSettings>();
-            this.For<IMappingService>().Use<MappingService>();
-            this.For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
-            this.For<IApplicationLogger>().Use<ApplicationLogger>();
+            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
+            For<IApplicationSettings>().Use<ApplicationSettings>();
+            For<IMappingService>().Use<MappingService>();
+            For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
+            For<IApplicationLogger>().Use<ApplicationLogger>();
 
             // New infrastructure
-
-            this.For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
+            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
 
             For<IStandardSearchService>().Use<StandardSearchService>();
             For<IStandardRepository>().Use<StandardRepository>();
             For<ISearchProvider>().Use<ElasticsearchProvider>();
-
         }
     }
 }

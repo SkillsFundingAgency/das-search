@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Das.ApplicationServices.Models
 {
-
     public sealed class StandardSearchResultsItem
     {
         public int StandardId { get; set; }

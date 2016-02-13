@@ -13,7 +13,6 @@
 
         public static void Initialise(string logserver)
         {
-            //var logserver = ConfigurationManager.AppSettings["ElasticServerIp"];
             var logstashport = 5960;
 
             var appender = CreateUdpAppender("UdpAppender", logserver, logstashport);
@@ -27,7 +26,7 @@
         {
             ILog log = LogManager.GetLogger(loggerName);
             var l = log.Logger as Logger;
-            
+
             l.Hierarchy.Root.AddAppender(appender);
             l.AddAppender(appender);
         }

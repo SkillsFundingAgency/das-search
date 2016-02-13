@@ -56,6 +56,7 @@
                         q.QueryString(qs =>
                             qs.OnFields(e => e.StandardId)
                                 .Query(standardId)))).Documents.FirstOrDefault();
+
             if (standardSearchResultsItem != null)
             {
                 standardName = standardSearchResultsItem.Title;

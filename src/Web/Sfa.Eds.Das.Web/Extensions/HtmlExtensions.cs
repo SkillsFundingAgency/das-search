@@ -10,6 +10,7 @@
             {
                 return new MvcHtmlString(string.Empty);
             }
+
             var html = $"<a href=\"{source}\" class=\"{classes}\">{title}</a>";
 
             return new MvcHtmlString(html);

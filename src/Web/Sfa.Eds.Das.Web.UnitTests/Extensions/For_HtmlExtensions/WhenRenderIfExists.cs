@@ -11,13 +11,13 @@
     [TestFixture]
     public class WhenRenderIfExists
     {
-        private HtmlHelper helper = new HtmlHelper(new ViewContext(), Mock.Of<IViewDataContainer>());
+        private readonly HtmlHelper helper = new HtmlHelper(new ViewContext(), Mock.Of<IViewDataContainer>());
 
         [Test]
         public void ItShouldCreateLink()
         {
             var result = this.helper.RenderAIfExists("hello", "http://localhost:8888", null);
-            
+
             Assert.AreEqual(new MvcHtmlString("<a href=\"http://localhost:8888\" class=\"\">hello</a>").ToHtmlString(), result.ToHtmlString());
         }
 
@@ -26,23 +26,23 @@
         {
             var result = this.helper.RenderAIfExists("hello", null, null);
 
-            Assert.AreEqual(new MvcHtmlString("").ToHtmlString(), result.ToHtmlString());
+            Assert.AreEqual(new MvcHtmlString(string.Empty).ToHtmlString(), result.ToHtmlString());
         }
 
         [Test]
         public void ItShouldBeEmptyIfLinkEmpty()
         {
-            var result = this.helper.RenderAIfExists("hello", "", null);
+            var result = this.helper.RenderAIfExists("hello", string.Empty, null);
 
-            Assert.AreEqual(new MvcHtmlString("").ToHtmlString(), result.ToHtmlString());
+            Assert.AreEqual(new MvcHtmlString(string.Empty).ToHtmlString(), result.ToHtmlString());
         }
 
         [Test]
         public void ItShouldBeEmptyIfTitleEmpty()
         {
-            var result = this.helper.RenderAIfExists("", "http://localhost:8888", null);
+            var result = this.helper.RenderAIfExists(string.Empty, "http://localhost:8888", null);
 
-            Assert.AreEqual(new MvcHtmlString("").ToHtmlString(), result.ToHtmlString());
+            Assert.AreEqual(new MvcHtmlString(string.Empty).ToHtmlString(), result.ToHtmlString());
         }
 
         [Test]
@@ -50,8 +50,7 @@
         {
             var result = this.helper.RenderAIfExists(null, "http://localhost:8888", null);
 
-            Assert.AreEqual(new MvcHtmlString("").ToHtmlString(), result.ToHtmlString());
+            Assert.AreEqual(new MvcHtmlString(string.Empty).ToHtmlString(), result.ToHtmlString());
         }
     }
 }
-

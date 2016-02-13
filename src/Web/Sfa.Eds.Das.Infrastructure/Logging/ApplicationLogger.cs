@@ -6,7 +6,7 @@
 
     public class ApplicationLogger : IApplicationLogger
     {
-        private ILog _logger;
+        private readonly ILog _logger;
 
         public ApplicationLogger()
         {
@@ -32,8 +32,5 @@
         {
             this._logger.Error(msg);
         }
-
-        
-
     }
 }

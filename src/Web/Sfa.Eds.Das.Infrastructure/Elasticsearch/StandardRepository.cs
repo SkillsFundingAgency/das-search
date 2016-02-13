@@ -10,7 +10,7 @@
 
     public class StandardRepository : IStandardRepository
     {
-        private readonly IElasticsearchClientFactory elasticsearchClientFactory ;
+        private readonly IElasticsearchClientFactory elasticsearchClientFactory;
 
         private readonly IApplicationLogger applicationLogger;
 
@@ -22,7 +22,6 @@
 
         public Standard GetById(string id)
         {
-
             var client = this.elasticsearchClientFactory.Create();
             var results =
                 client.Search<StandardSearchResultsItem>(
@@ -46,6 +45,7 @@
             {
                 return new Standard { StandardId = document.StandardId, Title = document.Title, NotionalEndLevel = document.NotionalEndLevel };
             }
+
             return null;
         }
     }

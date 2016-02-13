@@ -5,8 +5,8 @@
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using log4net;
     using System.Web.Http;
+    using log4net;
 
     using Sfa.Eds.Das.Infrastructure.Logging;
 
