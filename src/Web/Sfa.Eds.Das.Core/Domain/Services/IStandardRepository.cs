@@ -1,6 +1,6 @@
-﻿namespace Sfa.Eds.Das.Core.Interfaces.Search
+﻿namespace Sfa.Eds.Das.Core.Domain.Services
 {
-    using Sfa.Eds.Das.Core.Models;
+    using Model;
 
     public interface IStandardRepository
     {

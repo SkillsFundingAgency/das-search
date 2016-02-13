@@ -3,20 +3,18 @@
     using System;
 
     using AutoMapper;
-    using Core.Models;
 
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Infrastructure.Logging;
-
     using ViewModels;
+    using Core.Domain.Model;
 
     public class MappingService : IMappingService
     {
         private static IMapper mapper;
-        private readonly IApplicationLogger logger;
+        private readonly ILog logger;
 
-        public MappingService(IApplicationLogger logger)
+        public MappingService(ILog logger)
         {
             this.logger = logger;
         }

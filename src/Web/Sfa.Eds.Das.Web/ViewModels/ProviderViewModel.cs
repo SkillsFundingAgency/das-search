@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sfa.Eds.Das.Core.Models;
+using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Eds.Das.Web.ViewModels
 {

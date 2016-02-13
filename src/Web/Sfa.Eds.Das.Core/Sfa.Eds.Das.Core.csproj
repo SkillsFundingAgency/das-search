@@ -105,11 +105,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IApplicationSettings.cs" />
-    <Compile Include="Interfaces\IStandardRepository.cs" />
-    <Compile Include="Logging\IApplicationLogger.cs" />
-    <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\Standard.cs" />
+    <Compile Include="Configuration\IConfigurationSettings.cs" />
+    <Compile Include="Domain\Services\IStandardRepository.cs" />
+    <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Domain\Model\Coordinate.cs" />
+    <Compile Include="Domain\Model\Standard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

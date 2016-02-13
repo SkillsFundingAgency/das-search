@@ -9,9 +9,9 @@
 
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
-        private readonly IApplicationSettings applicationSettings;
+        private readonly IConfigurationSettings applicationSettings;
 
-        public ElasticsearchClientFactory(IApplicationSettings applicationSettings)
+        public ElasticsearchClientFactory(IConfigurationSettings applicationSettings)
         {
             this.applicationSettings = applicationSettings;
         }

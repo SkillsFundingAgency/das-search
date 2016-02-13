@@ -4,17 +4,17 @@
     using System.Linq;
 
     using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Core.Models;
+    using Core.Domain.Model;
 
     public class StandardRepository : IStandardRepository
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
 
-        private readonly IApplicationLogger applicationLogger;
+        private readonly ILog applicationLogger;
 
-        public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, IApplicationLogger applicationLogger)
+        public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger)
         {
             this.elasticsearchClientFactory = elasticsearchClientFactory;
             this.applicationLogger = applicationLogger;

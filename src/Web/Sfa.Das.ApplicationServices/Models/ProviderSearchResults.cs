@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Sfa.Eds.Das.Core.Models;
+    using Sfa.Eds.Das.Core.Domain;
 
     public sealed class ProviderSearchResults
     {

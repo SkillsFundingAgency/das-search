@@ -7,9 +7,9 @@
 
     public class ErrorController : Controller
     {
-        private readonly IApplicationLogger logger;
+        private readonly ILog logger;
 
-        public ErrorController(IApplicationLogger logger)
+        public ErrorController(ILog logger)
         {
             this.logger = logger;
         }

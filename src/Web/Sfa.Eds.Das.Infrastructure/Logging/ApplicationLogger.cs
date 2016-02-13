@@ -4,9 +4,9 @@
 
     using Sfa.Eds.Das.Core.Logging;
 
-    public class ApplicationLogger : IApplicationLogger
+    public class ApplicationLogger : Core.Logging.ILog
     {
-        private readonly ILog _logger;
+        private readonly log4net.ILog _logger;
 
         public ApplicationLogger()
         {

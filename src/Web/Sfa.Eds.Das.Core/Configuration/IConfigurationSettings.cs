@@ -1,6 +1,6 @@
 namespace Sfa.Eds.Das.Core.Configuration
 {
-    public interface IApplicationSettings
+    public interface IConfigurationSettings
     {
         string SearchHost { get; }
         string StandardIndexesAlias { get; }

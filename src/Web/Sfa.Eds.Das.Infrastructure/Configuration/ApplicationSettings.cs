@@ -4,7 +4,7 @@ namespace Sfa.Eds.Das.Infrastructure.Configuration
 
     using Core.Configuration;
 
-    public class ApplicationSettings : IApplicationSettings
+    public class ApplicationSettings : IConfigurationSettings
     {
         public string SearchHost => $"http://{this.ElasticServerIp}:{this.ElasticsearchPort}";
 

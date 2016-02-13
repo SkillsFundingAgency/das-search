@@ -15,10 +15,10 @@
     {
         private readonly ISearchProvider providerSearchService;
 
-        private readonly IApplicationLogger _logger;
+        private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        public ProviderController(ISearchProvider providerSearchService, IApplicationLogger logger, IMappingService mappingService)
+        public ProviderController(ISearchProvider providerSearchService, ILog logger, IMappingService mappingService)
         {
             this.providerSearchService = providerSearchService;
             _logger = logger;

@@ -1,6 +1,6 @@
-﻿namespace Sfa.Eds.Das.Core.Models
+﻿namespace Sfa.Eds.Das.Core.Domain.Model
 {
-    public class Coordinate
+    public sealed class Coordinate
     {
         public double Lat { get; set; }
 

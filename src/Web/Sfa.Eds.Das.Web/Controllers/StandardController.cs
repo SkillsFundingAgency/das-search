@@ -6,12 +6,12 @@
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Core.Models;
     using Sfa.Eds.Das.Web.Models;
     using Sfa.Eds.Das.Web.Services;
     using Sfa.Eds.Das.Web.ViewModels;
+    using Core.Domain.Model;
 
     public class StandardController : Controller
     {
@@ -19,10 +19,10 @@
 
         private readonly IStandardRepository standardRepository;
 
-        private readonly IApplicationLogger _logger;
+        private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        public StandardController(IStandardSearchService searchService, IStandardRepository standardRepository, IApplicationLogger logger, IMappingService mappingService)
+        public StandardController(IStandardSearchService searchService, IStandardRepository standardRepository, ILog logger, IMappingService mappingService)
         {
             this.searchService = searchService;
             this.standardRepository = standardRepository;

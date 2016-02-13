@@ -9,9 +9,9 @@
     public class ElasticsearchProvider : ISearchProvider
     {
         private readonly IElasticsearchClientFactory elasticsearchClientFactory;
-        private readonly IApplicationSettings applicationSettings;
+        private readonly IConfigurationSettings applicationSettings;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, IApplicationSettings applicationSettings)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, IConfigurationSettings applicationSettings)
         {
             this.elasticsearchClientFactory = elasticsearchClientFactory;
             this.applicationSettings = applicationSettings;

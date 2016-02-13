@@ -4,7 +4,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Eds.Das.Core.Configuration;
-    using Sfa.Eds.Das.Core.Interfaces.Search;
+    using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Infrastructure.Configuration;
     using Sfa.Eds.Das.Infrastructure.ElasticSearch;
@@ -18,10 +18,10 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
         public SearchRegistry()
         {
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<IApplicationSettings>().Use<ApplicationSettings>();
+            For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<IMappingService>().Use<MappingService>();
-            For<ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
-            For<IApplicationLogger>().Use<ApplicationLogger>();
+            For<log4net.ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
+            For<Core.Logging.ILog>().Use<ApplicationLogger>();
 
             // New infrastructure
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();

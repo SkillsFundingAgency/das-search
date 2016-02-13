@@ -22,7 +22,7 @@
         {
             // Arrange
             var mockSearchService = new Mock<IStandardSearchService>();
-            var mockLogger = new Mock<IApplicationLogger>();
+            var mockLogger = new Mock<ILog>();
             mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new StandardSearchResults());
 
             var mockMappingServices = new Mock<IMappingService>();
@@ -44,7 +44,7 @@
         {
             // Arrange
             var mockSearchService = new Mock<IStandardSearchService>();
-            var mockLogger = new Mock<IApplicationLogger>();
+            var mockLogger = new Mock<ILog>();
             mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(value: null);
 
             var mockMappingServices = new Mock<IMappingService>();

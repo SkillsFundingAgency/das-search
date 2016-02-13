@@ -1,6 +1,6 @@
-﻿namespace Sfa.Eds.Das.Core.Models
+﻿namespace Sfa.Eds.Das.Core.Domain.Model
 {
-    public class Standard
+    public sealed class Standard
     {
         public int StandardId { get; set; }
 
