@@ -2,7 +2,7 @@
 {
     using System.Web.Mvc;
 
-    public class HomeController : Controller
+    public sealed class HomeController : Controller
     {
         public HomeController()
         {

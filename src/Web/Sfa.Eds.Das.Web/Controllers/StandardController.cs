@@ -15,17 +15,15 @@
 
     public class StandardController : Controller
     {
-        private readonly IStandardSearchService searchService;
-
-        private readonly IStandardRepository standardRepository;
-
+        private readonly IStandardSearchService _searchService;
+        private readonly IStandardRepository _standardRepository;
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
         public StandardController(IStandardSearchService searchService, IStandardRepository standardRepository, ILog logger, IMappingService mappingService)
         {
-            this.searchService = searchService;
-            this.standardRepository = standardRepository;
+            _searchService = searchService;
+            _standardRepository = standardRepository;
             _logger = logger;
             _mappingService = mappingService;
         }
@@ -36,9 +34,9 @@
         }
 
         [HttpGet]
-        public ActionResult SearchResults(StandardCriteria criteria)
+        public ActionResult SearchResults(StandardSearchCriteria criteria)
         {
-            var searchResults = this.searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
             var viewModel = _mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(searchResults);
 
@@ -48,7 +46,8 @@
         // GET: Standard
         public ActionResult Detail(string id)
         {
-            var standardResult = this.standardRepository.GetById(id);
+            var standardResult = _standardRepository.GetById(id);
+
             if (standardResult == null)
             {
                 var message = $"Cannot find standard: {id}";
@@ -58,6 +57,7 @@
 
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
             viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
+
             return View(viewModel);
         }
 

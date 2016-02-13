@@ -1,6 +1,6 @@
 namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public class LinkViewModel
+    public sealed class LinkViewModel
     {
         public string Title { get; set; }
 
