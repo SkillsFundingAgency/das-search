@@ -62,6 +62,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Sfa.Das.ApplicationServices.UnitTests.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Das.ApplicationServices\Sfa.Das.ApplicationServices.csproj">

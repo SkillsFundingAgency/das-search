@@ -11,7 +11,7 @@
     using Web.Services;
 
     [TestFixture]
-    public class MappingSearchResultsToViewModel
+    public sealed class MappingSearchResultsToViewModel
     {
         [Test]
         public void MappSearchResultsToViewModel()

@@ -5,7 +5,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class StandardSearchServiceTest
+    public sealed class StandardSearchServiceTest
     {
         [Test]
         public void ShouldCallWithProvidedParameters()

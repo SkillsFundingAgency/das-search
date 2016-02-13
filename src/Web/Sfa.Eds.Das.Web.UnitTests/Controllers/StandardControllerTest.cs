@@ -15,7 +15,7 @@
     using Web.Services;
 
     [TestFixture]
-    public class StandardControllerTest
+    public sealed class StandardControllerTest
     {
         [Test]
         public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()

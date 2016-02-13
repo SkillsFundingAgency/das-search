@@ -84,6 +84,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Sfa.Eds.Das.Infrastructure.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />

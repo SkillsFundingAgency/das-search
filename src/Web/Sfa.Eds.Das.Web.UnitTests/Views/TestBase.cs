@@ -4,7 +4,7 @@ namespace Sfa.Eds.Das.Web.UnitTests.Views
 
     using AngleSharp.Dom.Html;
 
-    public class TestBase
+    public abstract class TestBase
     {
         protected string GetPartial(IHtmlDocument html, string selector)
         {
