@@ -2,19 +2,19 @@
 {
     using Sfa.Das.ApplicationServices.Models;
 
-    public class StandardSearchService : IStandardSearchService
+    public sealed class StandardSearchService : IStandardSearchService
     {
-        private readonly ISearchProvider searchProvider;
+        private readonly ISearchProvider _searchProvider;
 
         public StandardSearchService(ISearchProvider searchProvider)
         {
-            this.searchProvider = searchProvider;
+            _searchProvider = searchProvider;
         }
 
         public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             take = take == 0 ? 1000 : take;
-            var results = this.searchProvider.SearchByKeyword(keywords, skip, take);
+            var results = _searchProvider.SearchByKeyword(keywords, skip, take);
 
             return results;
         }
