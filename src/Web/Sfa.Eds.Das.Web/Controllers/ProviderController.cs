@@ -14,6 +14,7 @@
     public sealed class ProviderController : Controller
     {
         private readonly ISearchProvider _providerSearchService;
+
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 

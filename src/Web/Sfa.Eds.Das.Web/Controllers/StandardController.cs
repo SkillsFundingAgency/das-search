@@ -13,10 +13,12 @@
     using Sfa.Eds.Das.Web.ViewModels;
     using Core.Domain.Model;
 
-    public class StandardController : Controller
+    public sealed class StandardController : Controller
     {
         private readonly IStandardSearchService _searchService;
+
         private readonly IStandardRepository _standardRepository;
+
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
@@ -46,12 +48,13 @@
         // GET: Standard
         public ActionResult Detail(string id)
         {
-            var standardResult = _standardRepository.GetById(id);
+            var standardResult = this._standardRepository.GetById(id);
 
             if (standardResult == null)
             {
                 var message = $"Cannot find standard: {id}";
                 _logger.Warn($"404 - {message}");
+
                 return new HttpNotFoundResult(message);
             }
 

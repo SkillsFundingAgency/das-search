@@ -1,6 +1,5 @@
 namespace Sfa.Eds.Das.Infrastructure.Configuration
 {
-    using System;
     using System.Configuration;
 
     using Core.Configuration;
