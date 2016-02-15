@@ -10,7 +10,7 @@
     using Web.Views.Standard;
 
     [TestFixture]
-    public class ForSearchResultPage : TestBase
+    public sealed class ForSearchResultPage : TestBase
     {
         [Test]
         public void When_SearchResultHasErrors()

@@ -31,7 +31,7 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Standard/Search.cshtml")]
-    public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Core.Models.SearchCriteria>
+    public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.Models.StandardSearchCriteria>
     {
         public Search()
         {

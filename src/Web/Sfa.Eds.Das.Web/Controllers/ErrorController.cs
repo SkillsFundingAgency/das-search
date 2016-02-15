@@ -1,17 +1,16 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System;
     using System.Web.Mvc;
 
-    using log4net;
+    using Sfa.Eds.Das.Core.Logging;
 
-    public class ErrorController : Controller
+    public sealed class ErrorController : Controller
     {
-        private readonly ILog logger;
+        private readonly ILog _logger;
 
         public ErrorController(ILog logger)
         {
-            this.logger = logger;
+            this._logger = logger;
         }
 
         // GET: Error

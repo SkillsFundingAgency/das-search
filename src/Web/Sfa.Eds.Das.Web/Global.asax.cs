@@ -1,13 +1,14 @@
 ﻿namespace Sfa.Eds.Das.Web
 {
     using System;
+    using System.Configuration;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using log4net;
     using System.Web.Http;
+    using log4net;
 
-    using Sfa.Eds.Das.Core;
+    using Sfa.Eds.Das.Infrastructure.Logging;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -15,7 +16,8 @@
 
         protected void Application_Start()
         {
-            Log4NetSettings.Initialise();
+            var logserver = ConfigurationManager.AppSettings["ElasticServerIp"];
+            Log4NetSettings.Initialise(logserver);
 
             Log.Info("Starting web applications...");
 

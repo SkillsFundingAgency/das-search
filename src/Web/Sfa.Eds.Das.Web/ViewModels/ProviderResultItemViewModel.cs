@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public class ProviderResultItemViewModel
+    public sealed class ProviderResultItemViewModel
     {
         public int ProviderId { get; set; }
 

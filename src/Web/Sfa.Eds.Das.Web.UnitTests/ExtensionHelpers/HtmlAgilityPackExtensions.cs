@@ -10,6 +10,7 @@ namespace Sfa.Eds.Das.Web.UnitTests.ExtensionHelpers
         {
             var html = document?.DocumentNode?.OuterHtml;
             var ss = new HtmlParser().Parse(html ?? string.Empty);
+
             return ss;
         }
     }
