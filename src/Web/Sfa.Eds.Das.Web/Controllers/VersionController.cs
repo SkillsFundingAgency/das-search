@@ -3,7 +3,7 @@
     using System.Configuration;
     using System.Web.Http;
 
-    public class VersionController : ApiController
+    public sealed class VersionController : ApiController
     {
         // GET: api/Version
         public string Get()
