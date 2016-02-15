@@ -57,7 +57,6 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
                     Log.Error("Something failed creating standard index: " + ex);
                     throw;
                 }
-                
             });
         }
     }

@@ -135,9 +135,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
             _client.Alias(a => a
                 .Add(add => add
                     .Index(indexName)
-                    .Alias(_settings.StandardIndexesAlias)
-                )
-            );
+                    .Alias(_settings.StandardIndexesAlias)));
         }
 
         private bool CheckIfAliasExists(string aliasName)

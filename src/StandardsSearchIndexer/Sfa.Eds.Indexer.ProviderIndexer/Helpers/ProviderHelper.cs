@@ -31,7 +31,8 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-            //SearchIndex(indexName);
+
+            // SearchIndex(indexName);
             var indexExistsResponse = _client.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -120,25 +121,29 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     standardsId += string.Concat(", ", standardId);
                 }
+
                 i++;
             }
 
-            var rawProvider = string.Concat(@"{ ""id"": """, 
-                provider.ProviderId, 
-                @""", ""providerName"": """, 
-                provider.ProviderName, 
-                @""", ""postCode"": """, 
-                provider.PostCode, 
-                @""", ""standardsId"": [", 
-                standardsId , 
-                @"], ""venueName"": """, 
-                provider.VenueName, 
-                @""", ""ukPrn"": """, 
-                provider.UkPrn, 
-                @""",""location"": { ""type"": ""circle"", ""coordinates"": [", 
-                provider.Coordinate.Lon, ", ", provider.Coordinate.Lat, 
-                @"], ""radius"": """, 
-                provider.Radius, 
+            var rawProvider = string.Concat(
+                @"{ ""id"": """,
+                provider.ProviderId,
+                @""", ""providerName"": """,
+                provider.ProviderName,
+                @""", ""postCode"": """,
+                provider.PostCode,
+                @""", ""standardsId"": [",
+                standardsId,
+                @"], ""venueName"": """,
+                provider.VenueName,
+                @""", ""ukPrn"": """,
+                provider.UkPrn,
+                @""",""location"": { ""type"": ""circle"", ""coordinates"": [",
+                provider.Coordinate.Lon,
+                ", ",
+                provider.Coordinate.Lat,
+                @"], ""radius"": """,
+                provider.Radius,
                 @"mi"" }}");
             return rawProvider;
         }
@@ -426,6 +431,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         private void IndexProviders(string indexName, List<Provider> providers)
         {
             int id = 1;
+
             // index the items
             foreach (var provider in providers)
             {
@@ -489,9 +495,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             _client.Alias(a => a
                 .Add(add => add
                     .Index(indexName)
-                    .Alias(_settings.ProviderIndexesAlias)
-                )
-            );
+                    .Alias(_settings.ProviderIndexesAlias)));
         }
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)

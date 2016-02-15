@@ -38,7 +38,8 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             _sut = _ioc.GetInstance<IProviderIndexerService>();
         }
 
-        [Test, Category("Integration")]
+        [Test]
+        [Category("Integration")]
         public void ShouldCreateScheduledIndexAndMapping()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
@@ -56,7 +57,8 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
         }
 
-        [Test, Category("Integration")]
+        [Test]
+        [Category("Integration")]
         public void ShouldRetrieveProvidersSearchigForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
@@ -87,7 +89,7 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             Thread.Sleep(1000);
 
-            var retrievedResult =_elasticClient.Search<Provider>(p => p
+            var retrievedResult = _elasticClient.Search<Provider>(p => p
                 .Index(indexName)
                 .QueryString(expectedProviderResult.PostCode));
             var amountRetrieved = retrievedResult.Documents.Count();
@@ -100,14 +102,15 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
             Assert.AreEqual(expectedProviderResult.ProviderName, retrievedProvider.ProviderName);
         }
 
-        [Test, Category("Integration")]
+        [Test]
+        [Category("Integration")]
         public void ShouldRetrieveProvidersSearchigForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
 
             var providersTest = GetProvidersTest();
-            
+
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
@@ -145,7 +148,6 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-
         }
 
         private void DeleteIndexIfExists(string indexName)
@@ -417,6 +419,6 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
                     }
                 }
             };
-        } 
+        }
     }
 }
