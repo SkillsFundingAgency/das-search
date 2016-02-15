@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public sealed class StandardResultItemViewModel
+    public class StandardResultItemViewModel
     {
         public int StandardId { get; set; }
 

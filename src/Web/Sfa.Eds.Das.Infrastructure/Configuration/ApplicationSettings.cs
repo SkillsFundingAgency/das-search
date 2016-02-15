@@ -1,6 +1,5 @@
 namespace Sfa.Eds.Das.Infrastructure.Configuration
 {
-    using System;
     using System.Configuration;
 
     using Core.Configuration;
@@ -16,7 +15,5 @@ namespace Sfa.Eds.Das.Infrastructure.Configuration
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
         public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
-
-        public string BuildId => ConfigurationManager.AppSettings["BuildId"];
     }
 }

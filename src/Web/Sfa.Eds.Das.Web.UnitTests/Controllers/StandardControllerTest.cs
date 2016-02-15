@@ -33,7 +33,7 @@
             StandardController controller = new StandardController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
 
             // Act
-            ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
+            ViewResult result = controller.SearchResults(new StandardCriteria { Keywords = "test" }) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -55,7 +55,7 @@
             StandardController controller = new StandardController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
 
             // Act
-            ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
+            ViewResult result = controller.SearchResults(new StandardCriteria { Keywords = "test" }) as ViewResult;
 
             // Assert
             Assert.NotNull(result);

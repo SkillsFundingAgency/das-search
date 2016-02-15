@@ -5,6 +5,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
     using Sfa.Das.ApplicationServices;
     using Sfa.Eds.Das.Core.Configuration;
     using Sfa.Eds.Das.Core.Domain.Services;
+    using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Infrastructure.Configuration;
     using Sfa.Eds.Das.Infrastructure.ElasticSearch;
     using Sfa.Eds.Das.Infrastructure.Logging;
