@@ -31,7 +31,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-
+            //SearchIndex(indexName);
             var indexExistsResponse = _client.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -91,6 +91,19 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
 
             var exists = _client.IndexExists(indexName).Exists;
             return exists;
+        }
+
+        public void SearchIndex(string indexName)
+        {
+            indexName = _settings.ProviderIndexesAlias;
+
+            var x = _client.Search<Provider>(s => s
+                .Index(indexName)
+                .From(0)
+                .Size(1000)
+                .MatchAll());
+
+            var a = "patata";
         }
 
         private string CreateProviderRawFormat(Provider provider)
@@ -206,7 +219,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                     UkPrn = "10005967",
                     PostCode = "B5 5SU",
                     ProviderName = "SOUTH & CITY COLLEGE BIRMINGHAM",
-                    VenueName = "	Digbeth Campus",
+                    VenueName = "Digbeth Campus",
                     Radius = 30,
                     Coordinate = new Coordinate
                     {
@@ -419,7 +432,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 try
                 {
                     provider.ProviderId = id;
-                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                    var response = _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
                     id++;
                 }
                 catch (Exception e)

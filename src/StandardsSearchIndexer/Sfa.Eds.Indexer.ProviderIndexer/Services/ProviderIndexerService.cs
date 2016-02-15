@@ -60,7 +60,6 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
                 var a = ex.Message;
                 throw;
             }
-            
         }
 
         private void PauseWhileIndexingIsBeingRun()

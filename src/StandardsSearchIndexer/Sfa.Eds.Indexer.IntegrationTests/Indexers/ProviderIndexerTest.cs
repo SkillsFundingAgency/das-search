@@ -217,7 +217,7 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
                     UkPrn = "10005967",
                     PostCode = "B5 5SU",
                     ProviderName = "SOUTH & CITY COLLEGE BIRMINGHAM",
-                    VenueName = "	Digbeth Campus",
+                    VenueName = "Digbeth Campus",
                     Radius = 30,
                     Coordinate = new Coordinate
                     {
