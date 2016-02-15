@@ -1,19 +1,23 @@
-﻿namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
+﻿using Nest;
+using Sfa.Das.ApplicationServices;
+using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Domain.Services;
+
+namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
     using System.Linq;
-
-    using Sfa.Das.ApplicationServices;
-    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Configuration;
 
     public sealed class ElasticsearchProvider : ISearchProvider
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IStandardRepository _standardRepository;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, IConfigurationSettings applicationSettings)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, IStandardRepository standardRepository, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
+            _standardRepository = standardRepository;
             _applicationSettings = applicationSettings;
         }
 
@@ -33,34 +37,40 @@
             };
         }
 
-        public ProviderSearchResults SearchByStandardId(string standardId, int skip, int take)
+        public ProviderSearchResults SearchByLatLon(string standardId, int skip, int take, string postcode = null)
         {
             var client = this._elasticsearchClientFactory.Create();
 
-            var results = client
-                .Search<ProviderSearchResultsItem>(s => s
+            Nest.ISearchResponse<ProviderSearchResultsItem> results;
+
+            if (string.IsNullOrEmpty(postcode))
+            {
+                results = client
+                    .Search<ProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .MatchAll()
+                        .Filter(f => f
+                            .Term(y => y.StandardsId, standardId)));
+            }
+            else
+            {
+                var qryStr = CreateRawQuery(standardId, postcode);
+
+                results = client
+                    .Search<ProviderSearchResultsItem>(s => s
                     .Index(_applicationSettings.ProviderIndexAlias)
-                    .MatchAll()
-                    .Filter(f => f
-                        .Term(y => y.StandardsId, standardId)));
+                    .QueryRaw(qryStr));
+            }
 
             var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
 
             string standardName = string.Empty;
 
-            var standardSearchResultsItem = client
-                .Search<StandardSearchResultsItem>(s => s
-                    .Index(_applicationSettings.StandardIndexesAlias)
-                    .From(0)
-                    .Size(1)
-                    .Query(q =>
-                        q.QueryString(qs =>
-                            qs.OnFields(e => e.StandardId)
-                                .Query(standardId)))).Documents.FirstOrDefault();
+            var standard = _standardRepository.GetById(standardId);
 
-            if (standardSearchResultsItem != null)
+            if (standard != null)
             {
-                standardName = standardSearchResultsItem.Title;
+                standardName = standard.Title;
             }
 
             return new ProviderSearchResults
@@ -71,6 +81,14 @@
                 Results = documents,
                 HasError = results.ConnectionStatus.HttpStatusCode != 200
             };
+        }
+
+        private string CreateRawQuery(string standardId, string postcode)
+        {
+            // TODO: transform postcode to latlon
+            var lat = 52.4754573;
+            var lon = -1.8857541;
+            return string.Concat(@"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """, standardId, @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [", lon, ", ", lat, "] }}}}}}");
         }
     }
 }

@@ -5,6 +5,6 @@
     public interface ISearchProvider
     {
         StandardSearchResults SearchByKeyword(string keywords, int skip, int take);
-        ProviderSearchResults SearchByStandardId(string standardId, int skip, int take);
+        ProviderSearchResults SearchByLatLon(string standardId, int skip, int take, string postCode);
     }
 }
