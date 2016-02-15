@@ -58,7 +58,7 @@ WriteLiteral("    ");
 
             
             #line 7 "..\..\Views\Standard\SearchResults.cshtml"
-Write(Html.ActionLink("Search", "Search", null, new {@class = "link-back"}));
+Write(Html.ActionLink("Search", "Search", null, new { @class = "link-back" }));
 
             
             #line default
@@ -136,7 +136,7 @@ WriteLiteral("                                ");
 
             
             #line 30 "..\..\Views\Standard\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
+                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new {@id = item.StandardId}, null));
 
             
             #line default

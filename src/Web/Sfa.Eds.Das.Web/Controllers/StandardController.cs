@@ -36,7 +36,7 @@
         }
 
         [HttpGet]
-        public ActionResult SearchResults(StandardCriteria criteria)
+        public ActionResult SearchResults(StandardSearchCriteria criteria)
         {
             var searchResults = this.searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 

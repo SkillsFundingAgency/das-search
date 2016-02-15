@@ -193,7 +193,7 @@
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
-    <Compile Include="Models\StandardCriteria.cs" />
+    <Compile Include="Models\StandardSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
