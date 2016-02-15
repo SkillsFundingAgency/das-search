@@ -11,15 +11,16 @@
     using Sfa.Eds.Das.Web.Services;
     using Sfa.Eds.Das.Web.ViewModels;
 
-    public sealed class ProviderController : Controller
+    public class ProviderController : Controller
     {
-        private readonly ISearchProvider _providerSearchService;
+        private readonly ISearchProvider providerSearchService;
+
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
         public ProviderController(ISearchProvider providerSearchService, ILog logger, IMappingService mappingService)
         {
-            _providerSearchService = providerSearchService;
+            this.providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
         }
@@ -27,7 +28,7 @@
         [HttpGet]
         public ActionResult SearchResults(ProviderSearchCriteria criteria)
         {
-            var searchResults = _providerSearchService.SearchByStandardId(criteria.StandardId, criteria.Skip, criteria.Take);
+            var searchResults = providerSearchService.SearchByStandardId(criteria.StandardId, criteria.Skip, criteria.Take);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 

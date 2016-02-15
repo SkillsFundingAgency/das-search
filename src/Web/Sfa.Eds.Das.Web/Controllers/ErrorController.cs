@@ -3,14 +3,15 @@
     using System.Web.Mvc;
 
     using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Infrastructure.Logging;
 
-    public sealed class ErrorController : Controller
+    public class ErrorController : Controller
     {
-        private readonly ILog _logger;
+        private readonly ILog logger;
 
         public ErrorController(ILog logger)
         {
-            this._logger = logger;
+            this.logger = logger;
         }
 
         // GET: Error

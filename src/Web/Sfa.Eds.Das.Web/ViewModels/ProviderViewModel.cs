@@ -3,7 +3,7 @@ using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public sealed class ProviderViewModel
+    public class ProviderViewModel
     {
         public string UkPrn { get; set; }
 

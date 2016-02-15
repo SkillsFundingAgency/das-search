@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.Models
 {
-    public sealed class StandardSearchCriteria
+    public sealed class StandardCriteria
     {
         public string Keywords { get; set; }
 

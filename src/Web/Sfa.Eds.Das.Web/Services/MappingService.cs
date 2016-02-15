@@ -11,25 +11,25 @@
 
     public class MappingService : IMappingService
     {
-        private static IMapper _mapper;
-        private readonly ILog _logger;
+        private static IMapper mapper;
+        private readonly ILog logger;
 
         public MappingService(ILog logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         private static IMapper Mapper
         {
             get
             {
-                if (_mapper == null)
+                if (mapper == null)
                 {
                     var config = Config();
-                    _mapper = config.CreateMapper();
+                    mapper = config.CreateMapper();
                 }
 
-                return _mapper;
+                return mapper;
             }
         }
 
@@ -42,7 +42,7 @@
             }
             catch (Exception exp)
             {
-                _logger.Error($"Error mapping objects: {exp.Message}");
+                logger.Error($"Error mapping objects: {exp.Message}");
             }
 
             return tempDest;
