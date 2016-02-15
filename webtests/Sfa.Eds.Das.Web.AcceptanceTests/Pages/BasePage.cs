@@ -69,7 +69,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
                 IWebElement element = find(locator);
                 return element.Displayed && element.Enabled;
             }
-            catch (NoSuchElementException ex)
+            catch (NoSuchElementException)
             {
                 return false;
             }
