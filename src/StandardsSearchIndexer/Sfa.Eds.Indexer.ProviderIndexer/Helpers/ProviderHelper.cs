@@ -95,7 +95,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         }
 
         public void SearchIndex(string indexName)
-        {
+        { 
             indexName = _settings.ProviderIndexesAlias;
             var qryStr = @"{""filtered"": { ""query"": { ""match"": { ""standardsId"": ""12"" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [-1.8857541, 52.4754573] }}}}}}";
             var x = _client.Search<Provider>(s => s
