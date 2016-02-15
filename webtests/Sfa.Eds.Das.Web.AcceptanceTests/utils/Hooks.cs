@@ -35,6 +35,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         static string browserVersion = ConfigurationManager.AppSettings["browserVersion"];
         static string saucelabsAccountName = ConfigurationManager.AppSettings["sauce_labs_account_name"];
         static string saucelabsAccountKey = ConfigurationManager.AppSettings["sauce_labs_account_key"];
+        static String browserStackKey = ConfigurationManager.AppSettings["browserstack_key"];
+        static String browserStacUser = ConfigurationManager.AppSettings["browserstack_user"];
+
 
         //public static CustomRemoteDriver driver { get; private set; }
 
@@ -55,31 +58,53 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                     localDriver = new PhantomJSDriver();
                     FeatureContext.Current["driver"] = localDriver;
                 }
-
                 else
                 {
-
-
                     localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
                     FeatureContext.Current["driver"] = localDriver;
-
-                    //Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
-                    //DesiredCapabilities capabilities = new DesiredCapabilities();
-                    //capabilities.SetCapability(CapabilityType.BrowserName, browser);
-                    //capabilities.SetCapability(CapabilityType.Platform, platform);
-                    //capabilities.SetCapability(CapabilityType.Version, browserVersion);
-                    //capabilities.SetCapability("username", saucelabsAccountName);
-                    //capabilities.SetCapability("accessKey", saucelabsAccountKey);
-                    ////capabilities.SetCapability("name", TestContext.CurrentContext.Test.Name);
-                    ////enables sauce plugin for Jenkins to display results on job page
-                    //// capabilities.SetCapability("build", Environment.GetEnvironmentVariable("JENKINS_BUILD_NUMBER"));
-
-                    //driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), capabilities, TimeSpan.FromSeconds(600));
-                    //ScenarioContext.Current["driver"] = driver;
-
                 }
 
+
             }
+
+            else if (host == "browserstack")
+            {
+                DesiredCapabilities desiredCap = new DesiredCapabilities();
+                desiredCap.SetCapability("platform", "MAC");
+                desiredCap.SetCapability("browserName", "iPhone");
+                desiredCap.SetCapability("device", "iPad Air");
+                desiredCap.SetCapability("browserstack.key", browserStackKey);
+                desiredCap.SetCapability("browserstack.user", browserStacUser);
+                desiredCap.SetCapability("browserstack.debug", "true");
+                driver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), desiredCap);
+                FeatureContext.Current["driver"] = driver;
+
+            }
+        
+            else
+            {
+
+
+                localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
+                FeatureContext.Current["driver"] = localDriver;
+
+                //Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
+                //DesiredCapabilities capabilities = new DesiredCapabilities();
+                //capabilities.SetCapability(CapabilityType.BrowserName, browser);
+                //capabilities.SetCapability(CapabilityType.Platform, platform);
+                //capabilities.SetCapability(CapabilityType.Version, browserVersion);
+                //capabilities.SetCapability("username", saucelabsAccountName);
+                //capabilities.SetCapability("accessKey", saucelabsAccountKey);
+                ////capabilities.SetCapability("name", TestContext.CurrentContext.Test.Name);
+                ////enables sauce plugin for Jenkins to display results on job page
+                //// capabilities.SetCapability("build", Environment.GetEnvironmentVariable("JENKINS_BUILD_NUMBER"));
+
+                //driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), capabilities, TimeSpan.FromSeconds(600));
+                //ScenarioContext.Current["driver"] = driver;
+
+            }
+
+            
 
         }
 
@@ -107,6 +132,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
                 //   driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), capabilities, TimeSpan.FromSeconds(600));
                 //ScenarioContext.Current["driver"] = driver;
+            }
+
+            else if ( host == "browserstack")
+            {
+                ScenarioContext.Current["driver"] = driver;
+                Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
+
             }
         }
 
@@ -138,6 +170,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
                 localDriver.Quit(); // kill driver after feature run.
 
+            }
+
+            if (host== "browserstack")
+            {
+                driver.Quit();
             }
 
             else if (host == "saucelabs")
