@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.DedsService.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.DedsService.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -58,6 +60,7 @@
     <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
       <Link>app.config</Link>
     </None>
+    <None Include="packages.config" />
     <None Include="Service References\DedsService\DedsSearchService.wsdl" />
     <None Include="Service References\DedsService\DedsSearchService.xsd">
       <SubType>Designer</SubType>
@@ -90,6 +93,7 @@
     <None Include="Service References\DedsService\Sfa.Eds.Indexer.DedsService.DedsService.QueryResults.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Sfa.Eds.Indexer.DedsService.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +119,13 @@
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
       <Name>Sfa.Eds.Indexer.Settings</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -190,10 +190,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
+    <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
-    <Compile Include="Models\StandardCriteria.cs" />
+    <Compile Include="Models\StandardSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

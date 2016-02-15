@@ -21,7 +21,6 @@ namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration
 
             var logger = LogManager.GetLogger(LoggerName);
             logger.Info($"Log appender added: {logserver}");
-
         }
 
         private static void AddAppender(string loggerName, IAppender appender)
