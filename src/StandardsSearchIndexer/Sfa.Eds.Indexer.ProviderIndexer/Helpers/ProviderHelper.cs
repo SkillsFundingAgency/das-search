@@ -31,6 +31,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+
             var indexExistsResponse = _client.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -42,18 +43,91 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             }
 
             // create index
-            _client.CreateIndex(indexName, c => c.AddMapping<Provider>(m => m
-                .MapFromAttributes()
-                .Properties(p => p
-                /*.GeoShape(x => x
-                    .Name(n => n.Circle)
-                    .Tree(GeoTree.Geohash)
-                    .TreeLevels(2)
-                    .DistanceErrorPercentage(0.025))*/
-                .GeoPoint(g => g.Name(n => n.Coordinate).IndexLatLon()))));
+            var json = @"
+                {
+                    ""mappings"": 
+                    {
+                        ""provider"": 
+                        { 
+                            ""properties"": 
+                            {
+                                ""id"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""providerName"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""postCode"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""radius"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""ukPrn"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""venueName"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardsId"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""location"": 
+                                {
+                                    ""type"": ""geo_shape""
+                                }
+                            }
+                        }
+                    }
+                }";
+            _client.Raw.IndicesCreatePost(indexName, json);
 
             var exists = _client.IndexExists(indexName).Exists;
             return exists;
+        }
+
+        private string CreateProviderRawFormat(Provider provider)
+        {
+            int i = 0;
+            var standardsId = string.Empty;
+            foreach (var standardId in provider.StandardsId)
+            {
+                if (i == 0)
+                {
+                    standardsId += standardId;
+                }
+                else
+                {
+                    standardsId += string.Concat(", ", standardId);
+                }
+                i++;
+            }
+
+            var rawProvider = string.Concat(@"{ ""id"": """, 
+                provider.ProviderId, 
+                @""", ""providerName"": """, 
+                provider.ProviderName, 
+                @""", ""postCode"": """, 
+                provider.PostCode, 
+                @""", ""standardsId"": [", 
+                standardsId , 
+                @"], ""venueName"": """, 
+                provider.VenueName, 
+                @""", ""ukPrn"": """, 
+                provider.UkPrn, 
+                @""",""location"": { ""type"": ""circle"", ""coordinates"": [", 
+                provider.Coordinate.Lon, ", ", provider.Coordinate.Lat, 
+                @"], ""radius"": """, 
+                provider.Radius, 
+                @"mi"" }}");
+            return rawProvider;
         }
 
         public async Task IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
@@ -345,7 +419,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 try
                 {
                     provider.ProviderId = id;
-                    _client.Index(provider, i => i.Index(indexName));
+                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
                     id++;
                 }
                 catch (Exception e)
