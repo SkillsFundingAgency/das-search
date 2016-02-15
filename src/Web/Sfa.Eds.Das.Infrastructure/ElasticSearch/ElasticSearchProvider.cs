@@ -86,8 +86,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private string CreateRawQuery(string standardId, string postcode)
         {
             // TODO: transform postcode to latlon
-            var lat = 52.4754573;
-            var lon = -1.8857541;
+            var lat = 52.4006274;
+            var lon = -1.5104302;
             return string.Concat(@"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """, standardId, @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [", lon, ", ", lat, "] }}}}}}");
         }
     }
