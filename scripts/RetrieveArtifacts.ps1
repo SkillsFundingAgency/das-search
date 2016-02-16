@@ -28,7 +28,7 @@ Write-Host $zipFile
 $headers = @{Authorization=("Bearer {0}" -f $authToken)}
 
 $json = Invoke-RestMethod -Uri $url2 -headers $headers -Method Get
-$downloadUrl = $json.value[1].resource.downloadUrl
+$downloadUrl = $json.value[0].resource.downloadUrl
 Write-Host $downloadUrl
 $webClient.Headers.Add("Authorization", ("Bearer {0}" -f $authToken))
 $webClient.DownloadFile($downloadUrl, $zipFile)
