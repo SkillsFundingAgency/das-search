@@ -170,7 +170,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10003347",
                     PostCode = "CV21 2BB",
-                    ProviderName = "INTEC BUSINESS COLLEGES",
+                    ProviderName = "Intec Business Colleges",
                     VenueName = "INTEC BUSINESS COLLEGES",
                     Radius = 35,
                     Coordinate = new Coordinate
@@ -187,7 +187,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10001309",
                     PostCode = "CV32 4JE",
-                    ProviderName = "COVENTRY & WARWICKSHIRE CHAMBER TRAINING (CWT)",
+                    ProviderName = "Coventry & Warwickshire Chamber Training (CWT)",
                     VenueName = "COVENTRY & WARWICKSHIRE CHAMBER TRAINING (CWT)",
                     Radius = 40,
                     Coordinate = new Coordinate
@@ -204,7 +204,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10031241",
                     PostCode = "B4 7LR",
-                    ProviderName = "ASPIRE ACHIEVE ADVANCE LIMITED",
+                    ProviderName = "Aspire Achieve Advance Limited",
                     VenueName = "3AAA BIRMINGHAM",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -221,7 +221,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10005967",
                     PostCode = "B5 5SU",
-                    ProviderName = "SOUTH & CITY COLLEGE BIRMINGHAM",
+                    ProviderName = "South & City College Birmingham",
                     VenueName = "Digbeth Campus",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -238,7 +238,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10007015",
                     PostCode = "DE24 8AJ",
-                    ProviderName = "TRAINING SERVICES 2000 LTD",
+                    ProviderName = "Training Services 2000 Ltd",
                     VenueName = "TRAINING SERVICES 2000 LTD",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -255,7 +255,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10031241",
                     PostCode = "DE1 2JT",
-                    ProviderName = "ASPIRE ACHIEVE ADVANCE LIMITED",
+                    ProviderName = "Aspire Archive Advance Limited",
                     VenueName = "3AAA DERBY",
                     Radius = 60,
                     Coordinate = new Coordinate
@@ -272,7 +272,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10031241",
                     PostCode = "WC1X 8QB",
-                    ProviderName = "ASPIRE ACHIEVE ADVANCE LIMITED",
+                    ProviderName = "Aspire Achieve Advance Limited",
                     VenueName = "3AAA KINGS CROSS",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -289,7 +289,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10012834",
                     PostCode = "W6 7AN",
-                    ProviderName = "SKILLS TEAM LTD",
+                    ProviderName = "Skills Team Ltd",
                     VenueName = "EMPLOYERS WORK PLACE",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -306,7 +306,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10005264",
                     PostCode = "NG10 1LL",
-                    ProviderName = "MILLBROOK MANAGEMENT SERVICES LIMITED",
+                    ProviderName = "Millbrook Management Services Limited",
                     VenueName = "PROSTART TRAINING",
                     Radius = 60,
                     Coordinate = new Coordinate
@@ -323,7 +323,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10004355",
                     PostCode = "CV1 2JG",
-                    ProviderName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
+                    ProviderName = "Midland Group Training Services Limited",
                     VenueName = "Midland Group Training Services Ltd",
                     Radius = 10,
                     Coordinate = new Coordinate
@@ -340,7 +340,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10001919",
                     PostCode = "DE248JE",
-                    ProviderName = "DERBY COLLEGE",
+                    ProviderName = "Derby College",
                     VenueName = "DERBY COLLEGE @ THE ROUNDHOUSE",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -357,7 +357,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10005991",
                     PostCode = "NG7 2RU",
-                    ProviderName = "CENTRAL COLLEGE NOTTINGHAM",
+                    ProviderName = "Central College Nottingham",
                     VenueName = "Highfields",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -374,7 +374,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10007924",
                     PostCode = "DY1 3AH",
-                    ProviderName = "DUDLEY COLLEGE OF TECHNOLOGY",
+                    ProviderName = "Dudley College of Technology",
                     VenueName = "Wolverhampton Street",
                     Radius = 40,
                     Coordinate = new Coordinate
@@ -391,7 +391,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10004355",
                     PostCode = "B98 8LY",
-                    ProviderName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
+                    ProviderName = "Midland Group Training Services Limited",
                     VenueName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
                     Radius = 30,
                     Coordinate = new Coordinate
@@ -408,7 +408,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 {
                     UkPrn = "10005673",
                     PostCode = "B70 0AE",
-                    ProviderName = "SANDWELL TRAINING ASSOCIATION LIMITED",
+                    ProviderName = "Sandwell Training Association Limited",
                     VenueName = "PHOENIX STREET",
                     Radius = 40,
                     Coordinate = new Coordinate
