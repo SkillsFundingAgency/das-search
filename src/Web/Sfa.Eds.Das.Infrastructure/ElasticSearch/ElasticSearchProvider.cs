@@ -105,8 +105,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         {
             // TODO: transform postcode to latlon
             var coordinates = postcode.Split(',');
-            var lat = coordinates[0];//52.4006274;
-            var lon = coordinates[1];//-1.5104302;
+            var lat = coordinates[0];
+            var lon = coordinates[1];
             return string.Concat(@"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """, standardId, @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [", lon, ", ", lat, "] }}}}}}");
         }
     }

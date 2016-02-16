@@ -3,11 +3,10 @@
     using System;
 
     using AutoMapper;
-
+    using Core.Domain.Model;
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Logging;
     using ViewModels;
-    using Core.Domain.Model;
 
     public class MappingService : IMappingService
     {

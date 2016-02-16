@@ -3,10 +3,10 @@
     using System;
     using System.Linq;
 
+    using Core.Domain.Model;
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
-    using Core.Domain.Model;
 
     public sealed class StandardRepository : IStandardRepository
     {
