@@ -28,7 +28,7 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.ProviderId }, null)
+                                @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.ProviderId }, new { @style = "text-transform:capitalize;" })
                             </h2>
                             <dl>
                                 <dt class="postCode">PostCode</dt>
