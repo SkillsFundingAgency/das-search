@@ -55,16 +55,14 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
             return _client.IndexExists(indexName).Exists;
         }
 
-        public async Task IndexStandards(DateTime scheduledRefreshDateTime)
+        public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<JsonMetadataObject> standards)
         {
-            var standards = await GetStandardsFromAzureAsync();
-
             Log.Info("Uploading " + standards.Count() + " standard's PDF to Azure");
-
-            await standards.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
 
             try
             {
+                await standards.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
+
                 Log.Info("Indexing " + standards.Count() + " standards");
 
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
@@ -130,6 +128,16 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
             }
         }
 
+        public string GetIndexNameAndDateExtension(DateTime dateTime)
+        {
+            return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
+        }
+
+        public async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
+        {
+            return (await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
+        }
+
         private void CreateAlias(string indexName)
         {
             _client.Alias(a => a
@@ -145,19 +153,9 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
             return aliasExistsResponse.Exists;
         }
 
-        private string GetIndexNameAndDateExtension(DateTime dateTime)
-        {
-            return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
-        }
-
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
             await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.Pdf).ConfigureAwait(false);
-        }
-
-        private async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
-        {
-            return (await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
         }
 
         private async Task IndexStandardPdfs(string indexName, IEnumerable<JsonMetadataObject> standards)

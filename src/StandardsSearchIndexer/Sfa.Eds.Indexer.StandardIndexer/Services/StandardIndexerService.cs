@@ -33,7 +33,9 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Services
             }
 
             Log.Info("Indexing standard PDFs...");
-            await _standardHelper.IndexStandards(scheduledRefreshDateTime).ConfigureAwait(false);
+            var standards = await _standardHelper.GetStandardsFromAzureAsync();
+
+            await _standardHelper.IndexStandards(scheduledRefreshDateTime, standards).ConfigureAwait(false);
 
             PauseWhileIndexingIsBeingRun();
 

@@ -122,7 +122,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Consumers\StandardControlQueueConsumerTests.cs" />
-    <Compile Include="Helpers\StandardHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProviderIndexerServiceTests.cs" />
     <Compile Include="Services\StandardIndexerServiceTests.cs" />

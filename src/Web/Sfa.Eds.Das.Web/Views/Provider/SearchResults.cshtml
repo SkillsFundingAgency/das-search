@@ -1,4 +1,5 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
+﻿@using Sfa.Eds.Das.Web.Extensions
+@model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
 
 @{
     ViewBag.Title = "Provider Search Results";
@@ -28,7 +29,8 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.ProviderId }, new { @style = "text-transform:capitalize;" })
+                                @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.ProviderId }, null)
+                                @Html.RenderLinkWithoutModifications(item.ProviderName, "/provider/details/2", "")
                             </h2>
                             <dl>
                                 <dt class="postCode">PostCode</dt>
