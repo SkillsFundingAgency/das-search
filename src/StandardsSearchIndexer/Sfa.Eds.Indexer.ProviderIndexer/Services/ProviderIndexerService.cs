@@ -21,7 +21,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
             _providerHelper = providerHelper;
         }
 
-        public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        public void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             Log.Info("Creating new provider index...");
             try
@@ -34,9 +34,9 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
                 }
 
                 Log.Info("Indexing providers...");
-                var providers = await _providerHelper.GetProviders();
+                var providers = _providerHelper.GetProviders();
 
-                await _providerHelper.IndexProviders(scheduledRefreshDateTime, providers).ConfigureAwait(false);
+                _providerHelper.IndexProviders(scheduledRefreshDateTime, providers);
 
                 PauseWhileIndexingIsBeingRun();
 
@@ -57,7 +57,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
             }
             catch (Exception ex)
             {
-                var a = ex.Message;
+                Log.Error(ex);
                 throw;
             }
         }

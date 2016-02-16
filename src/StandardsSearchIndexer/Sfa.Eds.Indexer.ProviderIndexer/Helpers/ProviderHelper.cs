@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using Nest;
@@ -32,7 +33,6 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
-            // SearchIndex(indexName);
             var indexExistsResponse = _client.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -94,59 +94,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             return exists;
         }
 
-        public void SearchIndex(string indexName)
-        { 
-            indexName = _settings.ProviderIndexesAlias;
-            var qryStr = @"{""filtered"": { ""query"": { ""match"": { ""standardsId"": ""12"" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [-1.8857541, 52.4754573] }}}}}}";
-            var x = _client.Search<Provider>(s => s
-                .Index(indexName)
-                .QueryRaw(qryStr));
-
-            var a = "patata";
-        }
-
-        private string CreateProviderRawFormat(Provider provider)
-        {
-            int i = 0;
-            var standardsId = string.Empty;
-            foreach (var standardId in provider.StandardsId)
-            {
-                if (i == 0)
-                {
-                    standardsId += standardId;
-                }
-                else
-                {
-                    standardsId += string.Concat(", ", standardId);
-                }
-
-                i++;
-            }
-
-            var rawProvider = string.Concat(
-                @"{ ""id"": """,
-                provider.ProviderId,
-                @""", ""providerName"": """,
-                provider.ProviderName,
-                @""", ""postCode"": """,
-                provider.PostCode,
-                @""", ""standardsId"": [",
-                standardsId,
-                @"], ""venueName"": """,
-                provider.VenueName,
-                @""", ""ukPrn"": """,
-                provider.UkPrn,
-                @""",""location"": { ""type"": ""circle"", ""coordinates"": [",
-                provider.Coordinate.Lon,
-                ", ",
-                provider.Coordinate.Lat,
-                @"], ""radius"": """,
-                provider.Radius,
-                @"mi"" }}");
-            return rawProvider;
-        }
-
-        public async Task IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
+        public void IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
         {
             try
             {
@@ -161,7 +109,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             }
         }
 
-        public async Task<List<Provider>> GetProviders()
+        public List<Provider> GetProviders()
         {
             // TODO: Replace Demo data
             var providers = new List<Provider>
@@ -426,26 +374,6 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             return providers;
         }
 
-        private void IndexProviders(string indexName, List<Provider> providers)
-        {
-            int id = 1;
-
-            // index the items
-            foreach (var provider in providers)
-            {
-                try
-                {
-                    provider.ProviderId = id;
-                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
-                }
-                catch (Exception e)
-                {
-                    Log.Info("Error indexing provider: " + e.Message);
-                    throw;
-                }
-            }
-        }
-
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
@@ -480,21 +408,6 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             _client.Alias(aliasRequest);
         }
 
-        private bool CheckIfAliasExists(string aliasName)
-        {
-            var aliasExistsResponse = _client.AliasExists(aliasName);
-
-            return aliasExistsResponse.Exists;
-        }
-
-        private void CreateAlias(string indexName)
-        {
-            _client.Alias(a => a
-                .Add(add => add
-                    .Index(indexName)
-                    .Alias(_settings.ProviderIndexesAlias)));
-        }
-
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
             var dateTime = scheduledRefreshDateTime.AddDays(-2);
@@ -518,6 +431,82 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         public string GetIndexNameAndDateExtension(DateTime dateTime)
         {
             return string.Format("{0}-{1}", _settings.ProviderIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
+        }
+
+        private string CreateProviderRawFormat(Provider provider)
+        {
+            int i = 0;
+            var standardsId = new StringBuilder();
+            foreach (var standardId in provider.StandardsId)
+            {
+                if (i == 0)
+                {
+                    standardsId.Append(standardId);
+                }
+                else
+                {
+                    standardsId.Append(string.Concat(", ", standardId));
+                }
+
+                i++;
+            }
+
+            var rawProvider = string.Concat(
+                @"{ ""id"": """,
+                provider.ProviderId,
+                @""", ""providerName"": """,
+                provider.ProviderName,
+                @""", ""postCode"": """,
+                provider.PostCode,
+                @""", ""standardsId"": [",
+                standardsId,
+                @"], ""venueName"": """,
+                provider.VenueName,
+                @""", ""ukPrn"": """,
+                provider.UkPrn,
+                @""",""location"": { ""type"": ""circle"", ""coordinates"": [",
+                provider.Coordinate.Lon,
+                ", ",
+                provider.Coordinate.Lat,
+                @"], ""radius"": """,
+                provider.Radius,
+                @"mi"" }}");
+            return rawProvider;
+        }
+
+        private void IndexProviders(string indexName, List<Provider> providers)
+        {
+            int id = 1;
+
+            // index the items
+            foreach (var provider in providers)
+            {
+                try
+                {
+                    provider.ProviderId = id;
+                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                }
+                catch (Exception e)
+                {
+                    Log.Info("Error indexing provider: " + e.Message);
+                    throw;
+                }
+            }
+        }
+
+        private bool CheckIfAliasExists(string aliasName)
+        {
+            var aliasExistsResponse = _client.AliasExists(aliasName);
+
+            return aliasExistsResponse.Exists;
+        }
+
+        private void CreateAlias(string indexName)
+        {
+            _client.Alias(a => a
+                .Add(add => add
+                    .Index(indexName)
+                    .Alias(_settings.ProviderIndexesAlias)));
         }
     }
 }

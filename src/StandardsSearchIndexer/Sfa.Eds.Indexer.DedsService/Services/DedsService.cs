@@ -8,20 +8,20 @@ namespace Sfa.Eds.Indexer.DedsService.Services
 {
     public class DedsService : IDedsService
     {
-        private static IStandardIndexSettings _standardIndexSettings;
+        private static IStandardIndexSettings standardIndexSettings;
 
         public DedsService(IStandardIndexSettings standardIndexSettings)
         {
-            _standardIndexSettings = standardIndexSettings;
+            DedsService.standardIndexSettings = standardIndexSettings;
         }
 
         public int GetNotationLevelFromLars(int standardId)
         {
             var queryDescriptorStandard =
-                GetQueryDescriptors(_standardIndexSettings.DatasetName).Single(qd => qd.Name == _standardIndexSettings.StandardDescriptorName);
-            var result = RunQuery(queryDescriptorStandard, standardId);
+                this.GetQueryDescriptors(standardIndexSettings.DatasetName).Single(qd => qd.Name == standardIndexSettings.StandardDescriptorName);
+            var result = this.RunQuery(queryDescriptorStandard, standardId);
 
-            return GetNotationLevelFromResponse(result[1]);
+            return this.GetNotationLevelFromResponse(result[1]);
         }
 
         private int GetNotationLevelFromResponse(QueryResults result)
@@ -31,7 +31,7 @@ namespace Sfa.Eds.Indexer.DedsService.Services
 
         private QueryDescriptor[] GetQueryDescriptors(string dataSetName)
         {
-            using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
+            using (var client = new DedsSearchServiceClient(standardIndexSettings.SearchEndpointConfigurationName))
             {
                 var dataSetVersionDescriptor = client.GetLatestPublishedDataSetVersion(dataSetName);
 
@@ -72,7 +72,7 @@ namespace Sfa.Eds.Indexer.DedsService.Services
 
         private IList<QueryResults> ExecuteQuery(QueryDescriptor queryDescriptor, QueryExecution queryExecution)
         {
-            using (var client = new DedsSearchServiceClient(_standardIndexSettings.SearchEndpointConfigurationName))
+            using (var client = new DedsSearchServiceClient(standardIndexSettings.SearchEndpointConfigurationName))
             {
                 return client.ExecuteQuery((Guid)queryDescriptor.Id, queryExecution);
             }
@@ -80,11 +80,11 @@ namespace Sfa.Eds.Indexer.DedsService.Services
 
         private IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
         {
-            var queryFilterValues = QueryFilterValuesFromConsole(qds, larsCode);
+            var queryFilterValues = this.QueryFilterValuesFromConsole(qds, larsCode);
 
-            var queryExecution = GetQueryExecution(queryFilterValues, null, null);
+            var queryExecution = this.GetQueryExecution(queryFilterValues, null, null);
 
-            return ExecuteQuery(qds, queryExecution);
+            return this.ExecuteQuery(qds, queryExecution);
         }
     }
 }

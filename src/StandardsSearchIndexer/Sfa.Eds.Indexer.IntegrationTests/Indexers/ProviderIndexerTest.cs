@@ -132,17 +132,6 @@ namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
                     .Filter(f => f
                         .Term(t => t.StandardsId, "12")));
 
-            /*
-            var retrievedProviders = _elasticClient.Search<Provider>(s => s
-                .Index(indexName)
-                .Filter(f => f
-                    .GeoDistance(
-                        n => n.Coordinate,
-                        d => d.Distance(20, GeoUnit.Kilometers).Location(51.386615, -0.039525)
-                    )
-                )
-            );*/
-
             Assert.AreEqual(9, providersCase1.Documents.Count());
             Assert.AreEqual(7, providersCase2.Documents.Count());
 
