@@ -8,11 +8,11 @@ namespace Sfa.Eds.Indexer.DedsService.Services
 {
     public class DedsService : IDedsService
     {
-        private IStandardIndexSettings _standardIndexSettings;
+        private readonly IStandardIndexSettings _standardIndexSettings;
 
         public DedsService(IStandardIndexSettings standardIndexSettings)
         {
-            _standardIndexSettings = standardIndexSettings;
+            this._standardIndexSettings = standardIndexSettings;
         }
 
         public int GetNotationLevelFromLars(int standardId)
