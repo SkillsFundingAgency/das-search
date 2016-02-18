@@ -4,10 +4,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Indexer.Common.AzureAbstractions;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.ProviderIndexer.Services;
 
-namespace Sfa.Eds.Indexer.ProviderIndexer.Consumers
+namespace Sfa.Eds.ProviderIndexer.Consumers
 {
     public class ProviderControlQueueConsumer : IProviderControlQueueConsumer
     {

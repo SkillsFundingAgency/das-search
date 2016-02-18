@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Sfa.Eds.Indexer.Common.Models;
 
-namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
+namespace Sfa.Eds.ProviderIndexer.Helpers
 {
     public interface IProviderHelper
     {

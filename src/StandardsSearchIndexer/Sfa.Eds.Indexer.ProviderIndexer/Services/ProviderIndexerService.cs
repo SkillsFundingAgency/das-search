@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Threading;
 using log4net;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.ProviderIndexer.Helpers;
 
-namespace Sfa.Eds.Indexer.ProviderIndexer.Services
+namespace Sfa.Eds.ProviderIndexer.Services
 {
     public class ProviderIndexerService : IProviderIndexerService
     {

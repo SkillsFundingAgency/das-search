@@ -8,9 +8,9 @@ using Nest;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.Common.Configuration;
 using Sfa.Eds.Indexer.Common.Models;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.ProviderIndexer.Helpers;
+using Sfa.Eds.ProviderIndexer.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 

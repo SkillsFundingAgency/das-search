@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.Common.Models;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.ProviderIndexer.Helpers;
+using Sfa.Eds.ProviderIndexer.Services;
 
 namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
 {

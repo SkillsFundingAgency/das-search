@@ -3,13 +3,13 @@ using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Common.Configuration;
 using Sfa.Eds.Indexer.Common.Helpers;
 using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.ProviderIndexer.Consumers;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Consumers;
 using Sfa.Eds.Indexer.StandardIndexer.Helpers;
 using Sfa.Eds.Indexer.StandardIndexer.Services;
+using Sfa.Eds.ProviderIndexer.Consumers;
+using Sfa.Eds.ProviderIndexer.Helpers;
+using Sfa.Eds.ProviderIndexer.Services;
 using StructureMap;
 
 namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution

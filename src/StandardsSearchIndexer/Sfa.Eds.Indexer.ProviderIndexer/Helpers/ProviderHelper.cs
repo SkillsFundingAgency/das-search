@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using log4net;
 using Nest;
 using Sfa.Eds.Indexer.Common.Configuration;
 using Sfa.Eds.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
+namespace Sfa.Eds.ProviderIndexer.Helpers
 {
     public class ProviderHelper : IProviderHelper
     {

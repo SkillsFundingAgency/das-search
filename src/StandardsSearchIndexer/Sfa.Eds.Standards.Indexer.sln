@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.UnitTests", "Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Standards.Indexer.UnitTests.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.DedsService", "Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
 EndProject
@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.StandardInd
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Indexers", "Indexers", "{B16F419E-4F1A-4251-9678-DBB6D0EB762D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.ProviderIndexer", "Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Indexer.ProviderIndexer.csproj", "{DB90F92F-8A86-4239-8F7D-F99161E4282D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.ProviderIndexer", "Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.csproj", "{DB90F92F-8A86-4239-8F7D-F99161E4282D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
