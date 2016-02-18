@@ -38,7 +38,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
             // If it already exists and is empty, let's delete it.
             if (indexExistsResponse.Exists)
             {
-                Log.Info("Index already exists, deleting and creating a new one");
+                Log.Warn("Index already exists, deleting and creating a new one");
 
                 _client.DeleteIndex(indexName);
             }
@@ -98,7 +98,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
         {
             try
             {
-                Log.Info("Indexing " + providers.Count + " providers");
+                Log.Debug("Indexing " + providers.Count + " providers");
 
                 var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
                 IndexProviders(indexName, providers);
@@ -391,7 +391,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
 
             if (!CheckIfAliasExists(indexAlias))
             {
-                Log.Info("Alias doesn't exists, creating a new one...");
+                Log.Warn("Alias doesn't exists, creating a new one...");
 
                 CreateAlias(newIndexName);
             }
@@ -488,7 +488,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Helpers
                 }
                 catch (Exception e)
                 {
-                    Log.Info("Error indexing provider: " + e.Message);
+                    Log.Error("Error indexing provider: " + e.Message);
                     throw;
                 }
             }
