@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
+using Sfa.Eds.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Helpers;
 using Sfa.Eds.Indexer.StandardIndexer.Services;

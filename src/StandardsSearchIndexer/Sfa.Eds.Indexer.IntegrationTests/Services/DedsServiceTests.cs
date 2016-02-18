@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
 using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
 using Sfa.Eds.Indexer.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;

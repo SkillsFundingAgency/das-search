@@ -1,8 +1,8 @@
 ﻿using Nest;
+using Sfa.Eds.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Indexer.Common.Configuration;
+using Sfa.Eds.Indexer.Common.Helpers;
 using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers;
 using Sfa.Eds.Indexer.ProviderIndexer.Consumers;
 using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
 using Sfa.Eds.Indexer.ProviderIndexer.Services;

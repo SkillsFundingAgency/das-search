@@ -2,7 +2,7 @@
 using Nest;
 using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration
+namespace Sfa.Eds.Indexer.Common.Configuration
 {
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {

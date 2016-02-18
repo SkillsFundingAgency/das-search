@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions;
+using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Consumers;
 using Sfa.Eds.Indexer.StandardIndexer.Services;

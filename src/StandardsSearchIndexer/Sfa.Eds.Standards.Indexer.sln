@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.UnitTests", "Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Standards.Indexer.UnitTests.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Indexer.Infrastructure", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Infrastructure.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.DedsService", "Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
 EndProject
