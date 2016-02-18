@@ -5,8 +5,8 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Indexer.StandardIndexer.Consumers;
 using Sfa.Eds.Indexer.StandardIndexer.Services;
+using Sfa.Eds.StandardIndexer.Consumers;
 
 namespace Sfa.Eds.Standards.Indexer.UnitTests.Consumers
 {

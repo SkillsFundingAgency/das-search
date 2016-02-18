@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.DedsService.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.DedsService.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
@@ -198,9 +198,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.DedsService.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Eds.DedsService</Name>
+      <Name>Sfa.DedsService</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
@@ -214,9 +214,9 @@
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
       <Name>Sfa.Eds.Indexer.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Indexer.StandardIndexer.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.csproj">
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
-      <Name>Sfa.Eds.Indexer.StandardIndexer</Name>
+      <Name>Sfa.Eds.StandardIndexer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

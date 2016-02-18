@@ -7,8 +7,8 @@
     <ProjectGuid>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.DedsService</RootNamespace>
-    <AssemblyName>Sfa.Eds.DedsService</AssemblyName>
+    <RootNamespace>Sfa.DedsService</RootNamespace>
+    <AssemblyName>Sfa.DedsService</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.DedsService.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.DedsService.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,22 +75,22 @@
     <None Include="Service References\DedsService\DedsSearchService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DedsService\Sfa.Eds.DedsService.DedsService.DataSetDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.DataSetDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.Eds.DedsService.DedsService.DataSetVersionDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.Eds.DedsService.DedsService.FileData.datasource">
+    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.FileData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.Eds.DedsService.DedsService.FileDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.FileDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.Eds.DedsService.DedsService.QueryDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.QueryDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.Eds.DedsService.DedsService.QueryResults.datasource">
+    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.QueryResults.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Sfa.Eds.DedsService.ruleset" />

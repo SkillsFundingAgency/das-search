@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Threading;
 using FluentAssertions;
@@ -14,7 +13,7 @@ using Sfa.Eds.ProviderIndexer.Services;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
-namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
+namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
     [TestFixture]
     public class ProviderIndexerTest

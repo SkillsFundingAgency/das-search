@@ -7,7 +7,7 @@ using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Services;
 
-namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
+namespace Sfa.Eds.StandardIndexer.Consumers
 {
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {

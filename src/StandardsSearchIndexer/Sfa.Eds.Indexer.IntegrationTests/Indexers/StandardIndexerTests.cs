@@ -9,12 +9,12 @@ using NUnit.Framework;
 using Sfa.Eds.Indexer.Common.Configuration;
 using Sfa.Eds.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Indexer.StandardIndexer.Helpers;
 using Sfa.Eds.Indexer.StandardIndexer.Services;
+using Sfa.Eds.StandardIndexer.Helpers;
 using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
-namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
+namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
     [TestFixture]
     public class StandardIndexerTests

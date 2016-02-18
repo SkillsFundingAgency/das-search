@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
+namespace Sfa.Eds.StandardIndexer.Consumers
 {
     public interface IStandardControlQueueConsumer
     {

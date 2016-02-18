@@ -3,9 +3,10 @@ using System.Reflection;
 using System.Threading;
 using log4net;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Indexer.StandardIndexer.Helpers;
+using Sfa.Eds.Indexer.StandardIndexer.Services;
+using Sfa.Eds.StandardIndexer.Helpers;
 
-namespace Sfa.Eds.Indexer.StandardIndexer.Services
+namespace Sfa.Eds.StandardIndexer.Services
 {
     public class StandardIndexerService : IStandardIndexerService
     {

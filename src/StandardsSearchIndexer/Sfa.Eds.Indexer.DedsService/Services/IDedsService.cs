@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.DedsService.Services
+﻿namespace Sfa.DedsService.Services
 {
     public interface IDedsService
     {

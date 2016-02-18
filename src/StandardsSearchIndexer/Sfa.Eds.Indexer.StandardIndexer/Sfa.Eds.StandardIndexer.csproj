@@ -7,8 +7,8 @@
     <ProjectGuid>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Indexer.StandardIndexer</RootNamespace>
-    <AssemblyName>Sfa.Eds.Indexer.StandardIndexer</AssemblyName>
+    <RootNamespace>Sfa.Eds.StandardIndexer</RootNamespace>
+    <AssemblyName>Sfa.Eds.StandardIndexer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -99,9 +99,9 @@
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.DedsService.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Eds.DedsService</Name>
+      <Name>Sfa.DedsService</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj">
       <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
