@@ -53,7 +53,7 @@ Sitefinity CMS
 
 |             |             |
 |-------------|-------------|
-|| CMS to store content and manage structured data for standards |
+|| CMS to store content and manage structured data for standards | 
 | Version  |  |
 | Web  |   |
 | Keywords  | sitefinity |

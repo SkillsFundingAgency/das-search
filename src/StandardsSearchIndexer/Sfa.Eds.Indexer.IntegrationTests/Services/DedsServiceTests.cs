@@ -31,7 +31,8 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             _sut = _ioc.GetInstance<IDedsService>();
         }
 
-        [Test, Category("Integration")]
+        [Test]
+        [Category("Integration")]
         public void ShouldReturnNotationLevelWhenStandardIdExists()
         {
             var expectedNotationLevel = 4;
@@ -42,7 +43,8 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             notationLevel.Should().Be(expectedNotationLevel);
         }
 
-        [Test, Category("Integration")]
+        [Test]
+        [Category("Integration")]
         public void ShouldReturnZeroWhenStandardIdDoesntExists()
         {
             var expectedNotationLevel = 0;
@@ -53,7 +55,8 @@ namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
             notationLevel.Should().Be(expectedNotationLevel);
         }
 
-        [Test, Category("Integration")]
+        [Test]
+        [Category("Integration")]
         public void ShouldReturnZeroWhenStandardIdIsNegative()
         {
             var expectedNotationLevel = 0;
