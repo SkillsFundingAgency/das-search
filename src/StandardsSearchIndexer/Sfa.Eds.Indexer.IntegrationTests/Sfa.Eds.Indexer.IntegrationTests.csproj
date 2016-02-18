@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
@@ -94,6 +94,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Sfa.Eds.Indexer.IntegrationTests.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj">

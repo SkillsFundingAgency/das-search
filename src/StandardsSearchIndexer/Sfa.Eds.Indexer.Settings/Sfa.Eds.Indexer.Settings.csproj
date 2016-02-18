@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,6 +54,7 @@
       <Link>app.config</Link>
     </None>
     <None Include="packages.config" />
+    <None Include="Sfa.Eds.Indexer.Settings.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
