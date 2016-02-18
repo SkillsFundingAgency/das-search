@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using log4net;
+using Nest;
 using Sfa.DedsService.Services;
 using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Common.Configuration;
@@ -14,10 +15,8 @@ using Sfa.Eds.StandardIndexer.Helpers;
 using Sfa.Eds.StandardIndexer.Services;
 using StructureMap;
 
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
+namespace Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution
 {
-    using log4net;
-
     public class IndexerRegistry : Registry
     {
         public IndexerRegistry()

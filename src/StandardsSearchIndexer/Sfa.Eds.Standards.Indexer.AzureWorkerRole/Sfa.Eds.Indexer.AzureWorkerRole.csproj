@@ -8,8 +8,8 @@
     <ProjectGuid>{6163C031-06EA-4929-BC84-AB67ED0E93DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Standards.Indexer.AzureWorkerRole</RootNamespace>
-    <AssemblyName>Sfa.Eds.Standards.Indexer.AzureWorkerRole</AssemblyName>
+    <RootNamespace>Sfa.Eds.Indexer.AzureWorkerRole</RootNamespace>
+    <AssemblyName>Sfa.Eds.Indexer.AzureWorkerRole</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RoleType>Worker</RoleType>
@@ -131,6 +131,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileData.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryResults.datasource" />
     <None Include="Service References\DedsService\DedsSearchService.wsdl" />
     <None Include="Service References\DedsService\DedsSearchService.xsd">
       <SubType>Designer</SubType>
@@ -144,24 +150,6 @@
     </None>
     <None Include="Service References\DedsService\DedsSearchService3.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.DataSetDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.DataSetVersionDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.FileData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.FileDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.QueryDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.QueryResults.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Sfa.Eds.Standards.Indexer.AzureWorkerRole.ruleset" />
     <None Include="stylecop.json" />

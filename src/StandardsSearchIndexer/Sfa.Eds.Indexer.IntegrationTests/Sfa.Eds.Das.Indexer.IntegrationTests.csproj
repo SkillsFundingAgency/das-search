@@ -117,9 +117,9 @@
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
       <Name>Sfa.Eds.StandardIndexer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Standards.Indexer.AzureWorkerRole.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Indexer.AzureWorkerRole.csproj">
       <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>
-      <Name>Sfa.Eds.Standards.Indexer.AzureWorkerRole</Name>
+      <Name>Sfa.Eds.Indexer.AzureWorkerRole</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

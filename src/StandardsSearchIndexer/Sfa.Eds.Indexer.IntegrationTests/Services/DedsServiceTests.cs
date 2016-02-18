@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Sfa.DedsService.Services;
+using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
