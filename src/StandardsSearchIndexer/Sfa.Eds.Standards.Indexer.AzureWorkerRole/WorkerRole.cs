@@ -19,7 +19,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
-        private IIndexerScheduler _scheduler;
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
         private IProviderControlQueueConsumer _providerControlQueueConsumer;
 
