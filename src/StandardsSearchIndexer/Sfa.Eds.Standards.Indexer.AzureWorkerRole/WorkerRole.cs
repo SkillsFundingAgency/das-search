@@ -77,7 +77,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _providerControlQueueConsumer = container.GetInstance<IProviderControlQueueConsumer>();
-            _scheduler = container.GetInstance<IIndexerScheduler>();
 
             Log4NetSettings.Initialise();
         }
