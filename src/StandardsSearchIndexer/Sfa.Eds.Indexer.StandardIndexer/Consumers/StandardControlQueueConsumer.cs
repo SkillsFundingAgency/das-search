@@ -54,7 +54,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Something failed creating standard index: " + ex);
+                    Log.Fatal("Something failed creating standard index: " + ex);
                     throw;
                 }
             });

@@ -107,7 +107,6 @@
       <Link>app.config</Link>
     </None>
     <None Include="packages.config" />
-    <None Include="Sfa.Eds.Indexer.Indexer.Infrastructure.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>

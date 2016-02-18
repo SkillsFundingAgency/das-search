@@ -28,7 +28,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Services
             var indexProperlyCreated = _standardHelper.CreateIndex(scheduledRefreshDateTime);
             if (!indexProperlyCreated)
             {
-                Log.Info("Standard index not created properly, exiting...");
+                Log.Error("Standard index not created properly, exiting...");
                 return;
             }
 
@@ -41,17 +41,19 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Services
 
             if (_standardHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
             {
-                Log.Info("Swapping standard indexes...");
+                Log.Info("Standard index created, pointing alias to new index...");
+
+                Log.Debug("Swapping standard indexes...");
 
                 _standardHelper.SwapIndexes(scheduledRefreshDateTime);
 
-                Log.Info("Swap completed...");
+                Log.Debug("Swap completed...");
 
-                Log.Info("Deleting old standard indexes...");
+                Log.Debug("Deleting old standard indexes...");
 
                 _standardHelper.DeleteOldIndexes(scheduledRefreshDateTime);
 
-                Log.Info("Deletion completed...");
+                Log.Debug("Deletion completed...");
             }
         }
 
