@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Standards.Indexer.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.DedsService", "Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.DedsService", "Sfa.Eds.Indexer.DedsService\Sfa.Eds.DedsService.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Settings", "Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj", "{2F1B878F-2412-489F-A286-CD73B8B1DD81}"
 EndProject
