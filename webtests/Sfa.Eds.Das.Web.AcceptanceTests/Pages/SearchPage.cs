@@ -15,16 +15,25 @@ using System.Threading.Tasks;
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
     class SearchPage : BasePage
+             
 
     {
 
-       // private IWebDriver driver;
+        /// <summary>
+        /// Purpose of this class is to 
+        /// Create and maintain all Search Page objects and methods.
+        /// Any changes to search functionality can be maintained under this page.
+        /// </summary>
+
+        // private IWebDriver driver;
         By searchBox = By.Id("keywords");
         By searchButton = By.XPath("//input[@type='submit']");
         public String title = "Google";
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
-        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/h2/a");
+        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]");
         By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
+        By selectStaandard = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/h2/a");
+        By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
 
         public void launchLandingPage()
         {
@@ -51,6 +60,20 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Thread.Sleep(3000);
         }
 
+        public void clickProviderSearch()
+        {
+            click(searchProviderbutton);
+            Thread.Sleep(3000);
+        }
+
+
+        public void chooseStandard()
+        {
+            click(selectStaandard);
+            Thread.Sleep(3000);
+        }
+
+
 
 
         public void verifyresultsPages()
@@ -63,8 +86,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyStandardFoundinResultPage(String keyword)
         {
             Thread.Sleep(4000);
-            Console.WriteLine(getText(searchresult));
-           //Assert.True(getText(searchkeywordresult).Contains(keyword));
+           // Console.WriteLine(getText(searchresult));
+            Console.WriteLine(getText(searchkeywordresult));
+            Console.WriteLine(keyword);
+            //Assert.True(getText(searchkeywordresult).Contains(keyword));
             Assert.True(isDisplayed(searchresult));
         }
 

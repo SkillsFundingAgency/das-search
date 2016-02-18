@@ -4,7 +4,7 @@
 	I want to be able to search all providers for a given standard
 
 @regression
-Scenario outline : Show available providers for given standard
+Scenario Outline:Show available providers for given standard
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	And I click on search button
@@ -13,6 +13,7 @@ Scenario outline : Show available providers for given standard
 	Then I should all providers in result page
 	And I should see all providers listed in Alphabetical order 
 Examples:
-| JOBROLE                |
-| Actuarial technician   |
-| Financial Adviser      |
+| JOBROLE									|
+| Product Design and Development Engineer   |
+
+

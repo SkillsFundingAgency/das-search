@@ -10,6 +10,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
     class BasePage // :  Base
     {
+        /// <summary>
+        /// Puprose of this Base class is to
+        /// Create and maintain generic functions which will be called across other pages.
+        /// 
+        /// </summary>
         public IWebDriver driver;
         private static string baseUrl;
 
@@ -32,7 +37,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public IWebElement find(By locator)
         {
             // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-            //  wait.Until(ExpectedConditions.ElementIsVisible(locator));
+          //  wait.Until(ExpectedConditions.ElementIsVisible(locator));
             return driver.FindElement(locator);
         }
 
