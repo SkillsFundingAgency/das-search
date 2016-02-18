@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Indexer.DedsService.Services
+﻿namespace Sfa.Eds.DedsService.Services
 {
     public interface IDedsService
     {

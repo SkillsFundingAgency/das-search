@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using log4net;
 using Nest;
+using Sfa.Eds.DedsService.Services;
 using Sfa.Eds.Indexer.Common.Configuration;
 using Sfa.Eds.Indexer.Common.Helpers;
 using Sfa.Eds.Indexer.Common.Models;
-using Sfa.Eds.Indexer.DedsService.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
 
 namespace Sfa.Eds.Indexer.StandardIndexer.Helpers

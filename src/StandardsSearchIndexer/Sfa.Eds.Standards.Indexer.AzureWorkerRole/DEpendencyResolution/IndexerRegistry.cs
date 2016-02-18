@@ -1,8 +1,8 @@
 ﻿using Nest;
+using Sfa.Eds.DedsService.Services;
 using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Common.Configuration;
 using Sfa.Eds.Indexer.Common.Helpers;
-using Sfa.Eds.Indexer.DedsService.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Consumers;
 using Sfa.Eds.Indexer.StandardIndexer.Helpers;
@@ -26,7 +26,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
             For<IProviderHelper>().Use<ProviderHelper>();
             For<IStandardControlQueueConsumer>().Use<StandardControlQueueConsumer>();
             For<IProviderControlQueueConsumer>().Use<ProviderControlQueueConsumer>();
-            For<IDedsService>().Use<Eds.Indexer.DedsService.Services.DedsService>();
+            For<IDedsService>().Use<Eds.DedsService.Services.DedsService>();
             For<IStandardIndexSettings>().Use<StandardIndexSettings>();
             For<IProviderIndexSettings>().Use<ProviderIndexSettings>();
             For<IBlobStorageHelper>().Use<BlobStorageHelper>();

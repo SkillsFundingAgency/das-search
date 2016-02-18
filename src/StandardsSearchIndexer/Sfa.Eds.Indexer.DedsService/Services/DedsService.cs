@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sfa.Eds.Indexer.DedsService.DedsService;
+using Sfa.Eds.DedsService.DedsService;
 using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Indexer.DedsService.Services
+namespace Sfa.Eds.DedsService.Services
 {
     public class DedsService : IDedsService
     {
