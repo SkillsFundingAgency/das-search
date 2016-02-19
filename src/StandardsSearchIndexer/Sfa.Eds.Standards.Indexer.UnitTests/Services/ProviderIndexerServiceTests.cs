@@ -7,7 +7,7 @@ using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.ProviderIndexer.Helpers;
 using Sfa.Eds.ProviderIndexer.Services;
 
-namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
+namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
 {
     [TestFixture]
     public class ProviderIndexerServiceTests

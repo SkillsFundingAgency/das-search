@@ -8,7 +8,7 @@ using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Services;
 using Sfa.Eds.StandardIndexer.Consumers;
 
-namespace Sfa.Eds.Standards.Indexer.UnitTests.Consumers
+namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Consumers
 {
     [TestFixture]
     public class StandardControlQueueConsumerTests

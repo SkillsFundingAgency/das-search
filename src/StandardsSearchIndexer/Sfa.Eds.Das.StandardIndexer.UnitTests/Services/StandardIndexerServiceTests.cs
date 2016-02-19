@@ -4,12 +4,10 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Indexer.StandardIndexer.Helpers;
-using Sfa.Eds.Indexer.StandardIndexer.Services;
 using Sfa.Eds.StandardIndexer.Helpers;
 using Sfa.Eds.StandardIndexer.Services;
 
-namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
+namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Services
 {
     [TestFixture]
     public class StandardIndexerServiceTests
