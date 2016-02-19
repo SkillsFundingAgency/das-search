@@ -9,7 +9,7 @@
             <!-- Match assembly file paths: -->
             <ModulePaths>
               <Include>
-                <ModulePath>.*sfa\.eds(\.[a-zA-Z]+){2,3}\.dll$</ModulePath>
+                <ModulePath>.*\\Sfa[^\\]*\.dll$</ModulePath>
               </Include>
               <Exclude>
                 <ModulePath>.*Tests\.dll$</ModulePath>
