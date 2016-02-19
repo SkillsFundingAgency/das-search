@@ -1,12 +1,9 @@
-﻿namespace Sfa.Eds.Das.Indexer.Settings.Configuration
+﻿namespace Sfa.Eds.Das.StandardIndexer.Settings
 {
     public interface IStandardIndexSettings
     {
         string SearchHost { get; }
         string StandardIndexesAlias { get; }
-        string SearchEndpointConfigurationName { get; }
-        string DatasetName { get; }
-        string StandardDescriptorName { get; }
         string StorageAccountName { get; }
         string StorageAccountKey { get; }
         string ConnectionString { get; }

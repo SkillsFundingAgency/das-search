@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Indexer.Settings.Configuration
+namespace Sfa.Eds.Das.ProviderIndexer.Settings
 {
     public interface IProviderIndexSettings
     {

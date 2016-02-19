@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using log4net;
 using Nest;
-using Sfa.DedsService.Services;
+using Sfa.Deds.Services;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Helpers;
 using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
+using Sfa.Eds.Das.StandardIndexer.Settings;
 
 namespace Sfa.Eds.Das.StandardIndexer.Helpers
 {
@@ -17,18 +17,18 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IBlobStorageHelper _blobStorageHelper;
-        private readonly IDedsService _dedsService;
+        private readonly ILarsClient _larsClient;
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly IStandardIndexSettings _settings;
         private readonly IElasticClient _client;
 
         public StandardHelper(
-            IDedsService dedsService,
+            ILarsClient larsClient,
             IBlobStorageHelper blobStorageHelper,
             IStandardIndexSettings settings,
             IElasticsearchClientFactory elasticsearchClientFactory)
         {
-            _dedsService = dedsService;
+            _larsClient = larsClient;
             _blobStorageHelper = blobStorageHelper;
             _settings = settings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
@@ -195,7 +195,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 {
                     StandardId = standard.Id,
                     Title = standard.Title,
-                    NotionalEndLevel = _dedsService.GetNotationLevelFromLars(standard.Id),
+                    NotionalEndLevel = _larsClient.GetNotationLevelFromLars(standard.Id),
                     PdfFileName = standard.PdfFileName,
                     PdfUrl = standard.Pdf,
                     File = attachment

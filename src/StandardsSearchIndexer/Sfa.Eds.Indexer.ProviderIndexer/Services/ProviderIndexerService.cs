@@ -2,8 +2,8 @@
 using System.Reflection;
 using System.Threading;
 using log4net;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
+using Sfa.Eds.Das.ProviderIndexer.Settings;
 
 namespace Sfa.Eds.Das.ProviderIndexer.Services
 {
@@ -23,7 +23,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Services
 
         public void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            Log.Info("Creating new provider index...");
+            Log.Info("Creating new scheduled provider index at " + DateTime.Now);
             try
             {
                 var indexProperlyCreated = _providerHelper.CreateIndex(scheduledRefreshDateTime);

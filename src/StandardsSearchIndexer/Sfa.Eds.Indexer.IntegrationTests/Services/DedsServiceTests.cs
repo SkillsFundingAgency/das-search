@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Sfa.DedsService.Services;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
+using Sfa.Deds.Services;
+using Sfa.Eds.Das.StandardIndexer.Settings;
 using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
@@ -12,7 +12,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
     {
         private IContainer _ioc;
         private IStandardIndexSettings _standardSettings;
-        private IDedsService _sut;
+        private ILarsClient _sut;
 
         [SetUp]
         public void Setup()
@@ -20,7 +20,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
             _ioc = IoC.Initialize();
             _standardSettings = _ioc.GetInstance<IStandardIndexSettings>();
 
-            _sut = _ioc.GetInstance<IDedsService>();
+            _sut = _ioc.GetInstance<ILarsClient>();
         }
 
         [Test]

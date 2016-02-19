@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
-using Sfa.Eds.Das.Indexer.Common.Settings;
 using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Das.StandardIndexer.Settings;
 
@@ -15,15 +14,15 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICloudQueueService _cloudQueueService;
 
-        private readonly IAzureSettings _azureSettings;
+        private readonly IStandardIndexSettings _standardIndexSettings;
         private readonly IStandardIndexerService _standardIndexerService;
 
         public StandardControlQueueConsumer(
             IStandardIndexerService standardIndexerService,
-            IAzureSettings azureSettings,
+            IStandardIndexSettings standardIndexSettings,
             ICloudQueueService cloudQueueService)
         {
-            _azureSettings = azureSettings;
+            _standardIndexSettings = standardIndexSettings;
             _cloudQueueService = cloudQueueService;
             _standardIndexerService = standardIndexerService;
         }
@@ -34,7 +33,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
             {
                 try
                 {
-                    var queue = _cloudQueueService.GetQueueReference(_azureSettings.ConnectionString, _azureSettings.QueueName);
+                    var queue = _cloudQueueService.GetQueueReference(_standardIndexSettings.ConnectionString, _standardIndexSettings.QueueName);
                     var cloudQueueMessages = queue.GetMessages(10);
                     var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
 
@@ -54,7 +53,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
                 }
                 catch (Exception ex)
                 {
-                    Log.Fatal("Something failed creating index: " + ex);
+                    Log.Fatal("Something failed creating standard index: " + ex);
                     throw;
                 }
             });

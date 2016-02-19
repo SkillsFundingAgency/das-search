@@ -7,8 +7,8 @@
     <ProjectGuid>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.DedsService</RootNamespace>
-    <AssemblyName>Sfa.DedsService</AssemblyName>
+    <RootNamespace>Sfa.Deds</RootNamespace>
+    <AssemblyName>Sfa.Deds</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,7 +32,16 @@
     <CodeAnalysisRuleSet>..\Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Das.ProviderIndexer.UnitTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -44,14 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyResolution\DedsRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Services\DedsService.cs" />
-    <Compile Include="Services\IDedsService.cs" />
+    <Compile Include="Services\LarsClient.cs" />
+    <Compile Include="Services\ILarsClient.cs" />
+    <Compile Include="Settings\LarsSettings.cs" />
+    <Compile Include="Settings\ILarsSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -75,22 +87,22 @@
     <None Include="Service References\DedsService\DedsSearchService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.DataSetDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.Deds.DedsService.DataSetDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.Deds.DedsService.DataSetVersionDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.FileData.datasource">
+    <None Include="Service References\DedsService\Sfa.Deds.DedsService.FileData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.FileDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.Deds.DedsService.FileDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.QueryDescriptor.datasource">
+    <None Include="Service References\DedsService\Sfa.Deds.DedsService.QueryDescriptor.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DedsService\Sfa.DedsService.DedsService.QueryResults.datasource">
+    <None Include="Service References\DedsService\Sfa.Deds.DedsService.QueryResults.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Sfa.Eds.DedsService.ruleset" />
@@ -113,12 +125,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Das.Indexer.Settings.csproj">
-      <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
-      <Name>Sfa.Eds.Das.Indexer.Settings</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />

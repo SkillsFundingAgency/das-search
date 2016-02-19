@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sfa.DedsService.DedsService {
+namespace Sfa.Deds.DedsService {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,20 +17,20 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DataContractBase", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.DiscoverDataSetVersionsCriteria))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.DataSetVersionDescriptor))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.DiscoverQueriesCriteria))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.QueryDescriptor))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.FilterDescriptor))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.SortDescriptor))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.DiscoverFilesCriteria))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.SortValue))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.FileDescriptor))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.QueryExecution))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.FilterValue))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.QueryResults))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.FileData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.DedsService.DedsService.DataSetDescriptor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.DiscoverDataSetVersionsCriteria))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.DataSetVersionDescriptor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.DiscoverQueriesCriteria))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.QueryDescriptor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.FilterDescriptor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.SortDescriptor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.DiscoverFilesCriteria))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.SortValue))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.FileDescriptor))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.QueryExecution))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.FilterValue))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.QueryResults))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.FileData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Sfa.Deds.DedsService.DataSetDescriptor))]
     public partial class DataContractBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -60,7 +60,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DiscoverDataSetVersionsCriteria", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class DiscoverDataSetVersionsCriteria : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class DiscoverDataSetVersionsCriteria : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DataSetCollectionIdField;
@@ -99,7 +99,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DataSetVersionDescriptor", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class DataSetVersionDescriptor : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class DataSetVersionDescriptor : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> DataSetIdField;
@@ -120,7 +120,7 @@ namespace Sfa.DedsService.DedsService {
         private System.Nullable<System.DateTime> PublishedDateTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<Sfa.DedsService.DedsService.PublishedStateDescriptor> PublishedStateField;
+        private System.Nullable<Sfa.Deds.DedsService.PublishedStateDescriptor> PublishedStateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ReasonForVersionField;
@@ -210,7 +210,7 @@ namespace Sfa.DedsService.DedsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<Sfa.DedsService.DedsService.PublishedStateDescriptor> PublishedState {
+        public System.Nullable<Sfa.Deds.DedsService.PublishedStateDescriptor> PublishedState {
             get {
                 return this.PublishedStateField;
             }
@@ -266,7 +266,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DiscoverQueriesCriteria", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class DiscoverQueriesCriteria : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class DiscoverQueriesCriteria : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> DataSetVersionIdField;
@@ -289,7 +289,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="QueryDescriptor", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class QueryDescriptor : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class QueryDescriptor : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CodeField;
@@ -298,7 +298,7 @@ namespace Sfa.DedsService.DedsService {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Sfa.DedsService.DedsService.FilterDescriptor[] FilterDescriptorsField;
+        private Sfa.Deds.DedsService.FilterDescriptor[] FilterDescriptorsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<bool> GetTotalCountSupportedField;
@@ -316,7 +316,7 @@ namespace Sfa.DedsService.DedsService {
         private string[] RolesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Sfa.DedsService.DedsService.SortDescriptor[] SortDescriptorsField;
+        private Sfa.Deds.DedsService.SortDescriptor[] SortDescriptorsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Code {
@@ -345,7 +345,7 @@ namespace Sfa.DedsService.DedsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Sfa.DedsService.DedsService.FilterDescriptor[] FilterDescriptors {
+        public Sfa.Deds.DedsService.FilterDescriptor[] FilterDescriptors {
             get {
                 return this.FilterDescriptorsField;
             }
@@ -423,7 +423,7 @@ namespace Sfa.DedsService.DedsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Sfa.DedsService.DedsService.SortDescriptor[] SortDescriptors {
+        public Sfa.Deds.DedsService.SortDescriptor[] SortDescriptors {
             get {
                 return this.SortDescriptorsField;
             }
@@ -440,7 +440,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FilterDescriptor", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class FilterDescriptor : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class FilterDescriptor : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FieldDescriptionField;
@@ -543,7 +543,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SortDescriptor", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class SortDescriptor : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class SortDescriptor : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FieldDescriptionField;
@@ -598,7 +598,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DiscoverFilesCriteria", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class DiscoverFilesCriteria : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class DiscoverFilesCriteria : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CollectionIdField;
@@ -619,7 +619,7 @@ namespace Sfa.DedsService.DedsService {
         private string[] RolesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Sfa.DedsService.DedsService.SortValue[] SortValuesField;
+        private Sfa.Deds.DedsService.SortValue[] SortValuesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> SubmissionIdField;
@@ -703,7 +703,7 @@ namespace Sfa.DedsService.DedsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Sfa.DedsService.DedsService.SortValue[] SortValues {
+        public Sfa.Deds.DedsService.SortValue[] SortValues {
             get {
                 return this.SortValuesField;
             }
@@ -733,13 +733,13 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SortValue", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class SortValue : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class SortValue : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FieldNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<Sfa.DedsService.DedsService.SortOrder> SortOrderField;
+        private System.Nullable<Sfa.Deds.DedsService.SortOrder> SortOrderField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string FieldName {
@@ -755,7 +755,7 @@ namespace Sfa.DedsService.DedsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<Sfa.DedsService.DedsService.SortOrder> SortOrder {
+        public System.Nullable<Sfa.Deds.DedsService.SortOrder> SortOrder {
             get {
                 return this.SortOrderField;
             }
@@ -772,7 +772,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FileDescriptor", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class FileDescriptor : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class FileDescriptor : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CollectionIdField;
@@ -987,10 +987,10 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="QueryExecution", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class QueryExecution : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class QueryExecution : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Sfa.DedsService.DedsService.FilterValue[] FilterValuesField;
+        private Sfa.Deds.DedsService.FilterValue[] FilterValuesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> PageNumberField;
@@ -999,10 +999,10 @@ namespace Sfa.DedsService.DedsService {
         private System.Nullable<int> PageSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Sfa.DedsService.DedsService.SortValue[] SortValuesField;
+        private Sfa.Deds.DedsService.SortValue[] SortValuesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Sfa.DedsService.DedsService.FilterValue[] FilterValues {
+        public Sfa.Deds.DedsService.FilterValue[] FilterValues {
             get {
                 return this.FilterValuesField;
             }
@@ -1041,7 +1041,7 @@ namespace Sfa.DedsService.DedsService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Sfa.DedsService.DedsService.SortValue[] SortValues {
+        public Sfa.Deds.DedsService.SortValue[] SortValues {
             get {
                 return this.SortValuesField;
             }
@@ -1058,7 +1058,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FilterValue", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class FilterValue : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class FilterValue : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FieldNameField;
@@ -1097,7 +1097,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="QueryResults", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class QueryResults : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class QueryResults : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string[] FieldNamesField;
@@ -1136,7 +1136,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FileData", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class FileData : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class FileData : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CollectionIdField;
@@ -1351,7 +1351,7 @@ namespace Sfa.DedsService.DedsService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DataSetDescriptor", Namespace="http://ws.imservices.org.uk/dcft/deds/1.0/datacontracts")]
     [System.SerializableAttribute()]
-    public partial class DataSetDescriptor : Sfa.DedsService.DedsService.DataContractBase {
+    public partial class DataSetDescriptor : Sfa.Deds.DedsService.DataContractBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CodeField;
@@ -1512,119 +1512,119 @@ namespace Sfa.DedsService.DedsService {
     public interface IDedsSearchService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSet", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetResponse")]
-        Sfa.DedsService.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId);
+        Sfa.Deds.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSet", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetResponse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCodeResp" +
             "onse")]
-        Sfa.DedsService.DedsService.DataSetDescriptor GetDataSetByCode(string code);
+        Sfa.Deds.DedsService.DataSetDescriptor GetDataSetByCode(string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCodeResp" +
             "onse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "ons", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "onsResponse")]
-        Sfa.DedsService.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Sfa.DedsService.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
+        Sfa.Deds.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Sfa.Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "ons", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "onsResponse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Sfa.DedsService.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Sfa.Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueries", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueriesRespo" +
             "nse")]
-        Sfa.DedsService.DedsService.QueryDescriptor[] DiscoverQueries(Sfa.DedsService.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
+        Sfa.Deds.DedsService.QueryDescriptor[] DiscoverQueries(Sfa.Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueries", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueriesRespo" +
             "nse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Sfa.DedsService.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Sfa.Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFiles", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesRespons" +
             "e")]
-        Sfa.DedsService.DedsService.FileDescriptor[] DiscoverFiles(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        Sfa.Deds.DedsService.FileDescriptor[] DiscoverFiles(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFiles", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesRespons" +
             "e")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.FileDescriptor[]> DiscoverFilesAsync(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.FileDescriptor[]> DiscoverFilesAsync(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCountRe" +
             "sponse")]
-        long DiscoverFilesCount(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        long DiscoverFilesCount(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCountRe" +
             "sponse")]
-        System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQuery", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryResponse" +
             "")]
-        Sfa.DedsService.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        Sfa.Deds.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQuery", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryResponse" +
             "")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountRespons" +
             "e")]
-        long GetTotalCount(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        long GetTotalCount(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountRespons" +
             "e")]
-        System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCodeRe" +
             "sponse")]
-        Sfa.DedsService.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        Sfa.Deds.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCodeRe" +
             "sponse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCodeR" +
             "esponse")]
-        long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCodeR" +
             "esponse")]
-        System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFile", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFileResponse")]
-        Sfa.DedsService.DedsService.FileData GetFile(System.Guid fileId);
+        Sfa.Deds.DedsService.FileData GetFile(System.Guid fileId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFile", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFileResponse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.FileData> GetFileAsync(System.Guid fileId);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.FileData> GetFileAsync(System.Guid fileId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersion", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersionResponse")]
-        Sfa.DedsService.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode);
+        Sfa.Deds.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersion", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersionResponse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersions", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersionsResponse")]
-        Sfa.DedsService.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode);
+        Sfa.Deds.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersions", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersionsResponse")]
-        System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode);
+        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDedsSearchServiceChannel : Sfa.DedsService.DedsService.IDedsSearchService, System.ServiceModel.IClientChannel {
+    public interface IDedsSearchServiceChannel : Sfa.Deds.DedsService.IDedsSearchService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DedsSearchServiceClient : System.ServiceModel.ClientBase<Sfa.DedsService.DedsService.IDedsSearchService>, Sfa.DedsService.DedsService.IDedsSearchService {
+    public partial class DedsSearchServiceClient : System.ServiceModel.ClientBase<Sfa.Deds.DedsService.IDedsSearchService>, Sfa.Deds.DedsService.IDedsSearchService {
         
         public DedsSearchServiceClient() {
         }
@@ -1645,107 +1645,107 @@ namespace Sfa.DedsService.DedsService {
                 base(binding, remoteAddress) {
         }
         
-        public Sfa.DedsService.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId) {
+        public Sfa.Deds.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId) {
             return base.Channel.GetDataSet(dataSetId);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId) {
             return base.Channel.GetDataSetAsync(dataSetId);
         }
         
-        public Sfa.DedsService.DedsService.DataSetDescriptor GetDataSetByCode(string code) {
+        public Sfa.Deds.DedsService.DataSetDescriptor GetDataSetByCode(string code) {
             return base.Channel.GetDataSetByCode(code);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code) {
             return base.Channel.GetDataSetByCodeAsync(code);
         }
         
-        public Sfa.DedsService.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Sfa.DedsService.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
+        public Sfa.Deds.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Sfa.Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
             return base.Channel.DiscoverDataSetVersions(discoverDataSetVersionsCriteria);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Sfa.DedsService.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Sfa.Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
             return base.Channel.DiscoverDataSetVersionsAsync(discoverDataSetVersionsCriteria);
         }
         
-        public Sfa.DedsService.DedsService.QueryDescriptor[] DiscoverQueries(Sfa.DedsService.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
+        public Sfa.Deds.DedsService.QueryDescriptor[] DiscoverQueries(Sfa.Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
             return base.Channel.DiscoverQueries(discoverQueriesCriteria);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Sfa.DedsService.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Sfa.Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
             return base.Channel.DiscoverQueriesAsync(discoverQueriesCriteria);
         }
         
-        public Sfa.DedsService.DedsService.FileDescriptor[] DiscoverFiles(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public Sfa.Deds.DedsService.FileDescriptor[] DiscoverFiles(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFiles(discoverFilesCriteria);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.FileDescriptor[]> DiscoverFilesAsync(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.FileDescriptor[]> DiscoverFilesAsync(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFilesAsync(discoverFilesCriteria);
         }
         
-        public long DiscoverFilesCount(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public long DiscoverFilesCount(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFilesCount(discoverFilesCriteria);
         }
         
-        public System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Sfa.DedsService.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Sfa.Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFilesCountAsync(discoverFilesCriteria);
         }
         
-        public Sfa.DedsService.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public Sfa.Deds.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQuery(queryId, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQueryAsync(queryId, queryExecution);
         }
         
-        public long GetTotalCount(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public long GetTotalCount(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCount(queryId, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCountAsync(queryId, queryExecution);
         }
         
-        public Sfa.DedsService.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public Sfa.Deds.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQueryByCode(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQueryByCodeAsync(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCountByCode(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.DedsService.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Sfa.Deds.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCountByCodeAsync(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public Sfa.DedsService.DedsService.FileData GetFile(System.Guid fileId) {
+        public Sfa.Deds.DedsService.FileData GetFile(System.Guid fileId) {
             return base.Channel.GetFile(fileId);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.FileData> GetFileAsync(System.Guid fileId) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.FileData> GetFileAsync(System.Guid fileId) {
             return base.Channel.GetFileAsync(fileId);
         }
         
-        public Sfa.DedsService.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode) {
+        public Sfa.Deds.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode) {
             return base.Channel.GetLatestPublishedDataSetVersion(dataSetCode);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode) {
             return base.Channel.GetLatestPublishedDataSetVersionAsync(dataSetCode);
         }
         
-        public Sfa.DedsService.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode) {
+        public Sfa.Deds.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode) {
             return base.Channel.GetPublishedDataSetVersions(dataSetCode);
         }
         
-        public System.Threading.Tasks.Task<Sfa.DedsService.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode) {
+        public System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode) {
             return base.Channel.GetPublishedDataSetVersionsAsync(dataSetCode);
         }
     }

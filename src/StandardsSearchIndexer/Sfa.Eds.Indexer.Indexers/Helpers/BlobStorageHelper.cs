@@ -11,7 +11,7 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
+using Sfa.Eds.Indexer.Settings.Settings;
 
 namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {

@@ -7,7 +7,7 @@ using log4net;
 using Nest;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
+using Sfa.Eds.Das.ProviderIndexer.Settings;
 
 namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 {

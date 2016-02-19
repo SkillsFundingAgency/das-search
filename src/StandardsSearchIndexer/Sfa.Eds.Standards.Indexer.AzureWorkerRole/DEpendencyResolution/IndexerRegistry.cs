@@ -1,16 +1,16 @@
 ﻿using log4net;
 using Nest;
-using Sfa.DedsService.Services;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Helpers;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Das.ProviderIndexer.Consumers;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Services;
+using Sfa.Eds.Das.ProviderIndexer.Settings;
 using Sfa.Eds.Das.StandardIndexer.Consumers;
 using Sfa.Eds.Das.StandardIndexer.Helpers;
 using Sfa.Eds.Das.StandardIndexer.Services;
+using Sfa.Eds.Das.StandardIndexer.Settings;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
@@ -25,7 +25,6 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
             For<IProviderHelper>().Use<ProviderHelper>();
             For<IStandardControlQueueConsumer>().Use<StandardControlQueueConsumer>();
             For<IProviderControlQueueConsumer>().Use<ProviderControlQueueConsumer>();
-            For<IDedsService>().Use<Sfa.DedsService.Services.DedsService>();
             For<IStandardIndexSettings>().Use<StandardIndexSettings>();
             For<IProviderIndexSettings>().Use<ProviderIndexSettings>();
             For<IBlobStorageHelper>().Use<BlobStorageHelper>();

@@ -68,6 +68,17 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sfa.Eds.Indexer.Settings">
+      <HintPath>..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\bin\Debug\Sfa.Eds.Indexer.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -90,6 +101,7 @@
     <Compile Include="Configuration\ElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\Log4NetSettings.cs" />
+    <Compile Include="DependencyResolution\CommonRegistry.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
     <Compile Include="Helpers\IIndexerScheduler.cs" />
@@ -101,6 +113,8 @@
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\IAzureSettings.cs" />
+    <Compile Include="Settings\AzureSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
@@ -121,13 +135,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Deds.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.DedsService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Das.Indexer.Settings.csproj">
-      <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
-      <Name>Sfa.Eds.Das.Indexer.Settings</Name>
+      <Name>Sfa.Deds</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

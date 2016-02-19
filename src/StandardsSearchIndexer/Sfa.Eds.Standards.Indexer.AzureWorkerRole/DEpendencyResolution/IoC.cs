@@ -16,6 +16,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Sfa.Deds.DependencyResolution;
+using Sfa.Eds.Das.Indexer.Common.DependencyResolution;
+using Sfa.Eds.Das.ProviderIndexer.DependencyResolution;
+using Sfa.Eds.Das.StandardIndexer.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
@@ -24,7 +28,14 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
     {
         public static IContainer Initialize()
         {
-            return new Container(c => { c.AddRegistry<IndexerRegistry>(); });
+            return new Container(c =>
+            {
+                c.AddRegistry<CommonRegistry>();
+                c.AddRegistry<IndexerRegistry>();
+                c.AddRegistry<StandardRegistry>();
+                c.AddRegistry<ProviderRegistry>();
+                c.AddRegistry<DedsRegistry>();
+            });
         }
     }
 }

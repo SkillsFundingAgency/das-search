@@ -2,8 +2,8 @@
 using System.Reflection;
 using System.Threading;
 using log4net;
-using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Das.StandardIndexer.Helpers;
+using Sfa.Eds.Das.StandardIndexer.Settings;
 
 namespace Sfa.Eds.Das.StandardIndexer.Services
 {
@@ -23,7 +23,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Services
 
         public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            Log.Info("Creating new standard index...");
+            Log.Info("Creating new scheduled standard index at " + DateTime.Now);
 
             var indexProperlyCreated = _standardHelper.CreateIndex(scheduledRefreshDateTime);
             if (!indexProperlyCreated)

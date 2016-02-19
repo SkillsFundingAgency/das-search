@@ -4,28 +4,27 @@ using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
-using Sfa.Eds.Das.Indexer.Common.Settings;
-using Sfa.Eds.Das.StandardIndexer.Services;
-using Sfa.Eds.Das.StandardIndexer.Settings;
+using Sfa.Eds.Das.ProviderIndexer.Services;
+using Sfa.Eds.Das.ProviderIndexer.Settings;
 
-namespace Sfa.Eds.Das.StandardIndexer.Consumers
+namespace Sfa.Eds.Das.ProviderIndexer.Consumers
 {
-    public class StandardControlQueueConsumer : IStandardControlQueueConsumer
+    public class ProviderControlQueueConsumer : IProviderControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICloudQueueService _cloudQueueService;
 
-        private readonly IAzureSettings _azureSettings;
-        private readonly IStandardIndexerService _standardIndexerService;
+        private readonly IProviderIndexSettings _providerIndexSettings;
+        private readonly IProviderIndexerService _providerIndexerService;
 
-        public StandardControlQueueConsumer(
-            IStandardIndexerService standardIndexerService,
-            IAzureSettings azureSettings,
+        public ProviderControlQueueConsumer(
+            IProviderIndexerService providerIndexerService,
+            IProviderIndexSettings providerIndexSettings,
             ICloudQueueService cloudQueueService)
         {
-            _azureSettings = azureSettings;
+            _providerIndexSettings = providerIndexSettings;
             _cloudQueueService = cloudQueueService;
-            _standardIndexerService = standardIndexerService;
+            _providerIndexerService = providerIndexerService;
         }
 
         public Task CheckMessage()
@@ -34,7 +33,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
             {
                 try
                 {
-                    var queue = _cloudQueueService.GetQueueReference(_azureSettings.ConnectionString, _azureSettings.QueueName);
+                    var queue = _cloudQueueService.GetQueueReference(_providerIndexSettings.ConnectionString, _providerIndexSettings.QueueName);
                     var cloudQueueMessages = queue.GetMessages(10);
                     var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
 
@@ -43,7 +42,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
                         var message = messages.FirstOrDefault();
                         if (message != null)
                         {
-                            _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                            _providerIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                         }
                     }
 
@@ -54,7 +53,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
                 }
                 catch (Exception ex)
                 {
-                    Log.Fatal("Something failed creating index: " + ex);
+                    Log.Fatal("Something failed creating provider index: " + ex);
                     throw;
                 }
             });
