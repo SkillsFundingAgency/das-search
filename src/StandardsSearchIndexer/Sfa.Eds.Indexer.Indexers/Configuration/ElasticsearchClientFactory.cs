@@ -1,6 +1,6 @@
 ﻿using System;
 using Nest;
-using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Settings;
 
 namespace Sfa.Eds.Das.Indexer.Common.Configuration
 {

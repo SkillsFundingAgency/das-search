@@ -145,9 +145,9 @@
       <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
       <Name>Sfa.Eds.Das.ProviderIndexer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Das.Indexer.Settings.csproj">
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
-      <Name>Sfa.Eds.Indexer.Settings</Name>
+      <Name>Sfa.Eds.Das.Indexer.Settings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj">
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>

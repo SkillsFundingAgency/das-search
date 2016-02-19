@@ -18,7 +18,7 @@
 
 using StructureMap;
 
-namespace Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution
+namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
 {
     public static class IoC
     {

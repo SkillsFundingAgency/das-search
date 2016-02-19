@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Eds.Indexer.AzureCloudService", "Sfa.Eds.Standards.Indexer.AzureAzureCloudService\Sfa.Eds.Indexer.AzureCloudService.ccproj", "{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Eds.Das.Indexer.AzureCloudService", "Sfa.Eds.Standards.Indexer.AzureAzureCloudService\Sfa.Eds.Das.Indexer.AzureCloudService.ccproj", "{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.AzureWorkerRole", "Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Indexer.AzureWorkerRole.csproj", "{6163C031-06EA-4929-BC84-AB67ED0E93DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.AzureWorkerRole", "Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj", "{6163C031-06EA-4929-BC84-AB67ED0E93DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.ProviderIndexer.UnitTests", "Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Das.ProviderIndexer.UnitTests.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.DedsService", "Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Settings", "Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj", "{2F1B878F-2412-489F-A286-CD73B8B1DD81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Settings", "Sfa.Eds.Indexer.Settings\Sfa.Eds.Das.Indexer.Settings.csproj", "{2F1B878F-2412-489F-A286-CD73B8B1DD81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.IntegrationTests", "Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.csproj", "{23C1681A-12B5-44B5-BF4C-FDE64DEACC2A}"
 EndProject

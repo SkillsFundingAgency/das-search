@@ -7,8 +7,8 @@
     <ProjectGuid>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Indexer.Settings</RootNamespace>
-    <AssemblyName>Sfa.Eds.Indexer.Settings</AssemblyName>
+    <RootNamespace>Sfa.Eds.Das.Indexer.Settings</RootNamespace>
+    <AssemblyName>Sfa.Eds.Das.Indexer.Settings</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

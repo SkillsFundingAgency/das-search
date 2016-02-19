@@ -7,10 +7,10 @@ using Nest;
 using NUnit.Framework;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Models;
+using Sfa.Eds.Das.Indexer.Settings.Settings;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
-using Sfa.Eds.Indexer.Settings.Settings;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers

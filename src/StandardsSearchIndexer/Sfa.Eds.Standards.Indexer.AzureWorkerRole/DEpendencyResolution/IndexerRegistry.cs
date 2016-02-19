@@ -4,16 +4,16 @@ using Sfa.DedsService.Services;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Helpers;
+using Sfa.Eds.Das.Indexer.Settings.Settings;
 using Sfa.Eds.Das.ProviderIndexer.Consumers;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Das.StandardIndexer.Consumers;
 using Sfa.Eds.Das.StandardIndexer.Helpers;
 using Sfa.Eds.Das.StandardIndexer.Services;
-using Sfa.Eds.Indexer.Settings.Settings;
 using StructureMap;
 
-namespace Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution
+namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
 {
     public class IndexerRegistry : Registry
     {

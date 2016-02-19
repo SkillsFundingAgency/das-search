@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sfa.Eds.Indexer.AzureWorkerRole.DedsService {
+namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DedsService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -123,12 +123,12 @@ namespace Sfa.Eds.Indexer.AzureWorkerRole.DedsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDedsSearchServiceChannel : Sfa.Eds.Indexer.AzureWorkerRole.DedsService.IDedsSearchService, System.ServiceModel.IClientChannel {
+    public interface IDedsSearchServiceChannel : Sfa.Eds.Das.Indexer.AzureWorkerRole.DedsService.IDedsSearchService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DedsSearchServiceClient : System.ServiceModel.ClientBase<Sfa.Eds.Indexer.AzureWorkerRole.DedsService.IDedsSearchService>, Sfa.Eds.Indexer.AzureWorkerRole.DedsService.IDedsSearchService {
+    public partial class DedsSearchServiceClient : System.ServiceModel.ClientBase<Sfa.Eds.Das.Indexer.AzureWorkerRole.DedsService.IDedsSearchService>, Sfa.Eds.Das.Indexer.AzureWorkerRole.DedsService.IDedsSearchService {
         
         public DedsSearchServiceClient() {
         }

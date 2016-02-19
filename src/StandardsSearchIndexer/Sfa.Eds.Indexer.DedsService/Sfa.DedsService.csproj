@@ -115,9 +115,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Das.Indexer.Settings.csproj">
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
-      <Name>Sfa.Eds.Indexer.Settings</Name>
+      <Name>Sfa.Eds.Das.Indexer.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@
     <RootNamespace>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</RootNamespace>
     <AssemblyName>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>Sfa.Eds.Indexer.AzureCloudService</Name>
+    <Name>Sfa.Eds.Das.Indexer.AzureCloudService</Name>
     <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,18 +39,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Profiles" />
-    <Folder Include="Sfa.Eds.Indexer.AzureWorkerRoleContent" />
+    <Folder Include="Sfa.Eds.Das.Indexer.AzureWorkerRoleContent" />
   </ItemGroup>
   <ItemGroup>
-    <DiagnosticsConfiguration Include="Sfa.Eds.Indexer.AzureWorkerRoleContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="Sfa.Eds.Das.Indexer.AzureWorkerRoleContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Indexer.AzureWorkerRole.csproj">
-      <Name>Sfa.Eds.Indexer.AzureWorkerRole</Name>
+    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
+      <Name>Sfa.Eds.Das.Indexer.AzureWorkerRole</Name>
       <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>
       <Private>True</Private>
       <RoleType>Worker</RoleType>
-      <RoleName>Sfa.Eds.Indexer.AzureWorkerRole</RoleName>
+      <RoleName>Sfa.Eds.Das.Indexer.AzureWorkerRole</RoleName>
     </ProjectReference>
   </ItemGroup>
   <!-- Import the target files for this project template -->

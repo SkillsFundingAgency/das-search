@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sfa.DedsService.DedsService;
-using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Settings;
 
 namespace Sfa.DedsService.Services
 {
