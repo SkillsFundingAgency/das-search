@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Threading;
 using log4net;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.ProviderIndexer.Helpers;
 
-namespace Sfa.Eds.Indexer.ProviderIndexer.Services
+namespace Sfa.Eds.ProviderIndexer.Services
 {
     public class ProviderIndexerService : IProviderIndexerService
     {
@@ -29,7 +29,7 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
                 var indexProperlyCreated = _providerHelper.CreateIndex(scheduledRefreshDateTime);
                 if (!indexProperlyCreated)
                 {
-                    Log.Info("Provider index not created properly, exiting...");
+                    Log.Error("Provider index not created properly, exiting...");
                     return;
                 }
 
@@ -42,17 +42,19 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Services
 
                 if (_providerHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
                 {
-                    Log.Info("Swapping provider indexes...");
+                    Log.Info("Provider index created, pointing alias to new index...");
+
+                    Log.Debug("Swapping provider indexes...");
 
                     _providerHelper.SwapIndexes(scheduledRefreshDateTime);
 
-                    Log.Info("Swap completed...");
+                    Log.Debug("Swap completed...");
 
-                    Log.Info("Deleting old provider indexes...");
+                    Log.Debug("Deleting old provider indexes...");
 
                     _providerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
 
-                    Log.Info("Deletion completed...");
+                    Log.Debug("Deletion completed...");
                 }
             }
             catch (Exception ex)

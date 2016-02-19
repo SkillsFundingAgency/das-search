@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
+using Sfa.DedsService.Services;
+using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
-namespace Sfa.Eds.Standards.Indexer.UnitTests.Services
+namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 {
     [TestFixture]
     public class DedsServiceTests

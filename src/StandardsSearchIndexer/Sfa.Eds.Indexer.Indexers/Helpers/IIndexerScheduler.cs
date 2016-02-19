@@ -1,6 +1,6 @@
 using System;
 
-namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers
+namespace Sfa.Eds.Indexer.Common.Helpers
 {
     public interface IIndexerScheduler
     {

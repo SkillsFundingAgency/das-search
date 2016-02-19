@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
+using Sfa.Eds.Indexer.Common.Models;
 
-namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
+namespace Sfa.Eds.StandardIndexer.Helpers
 {
     public interface IStandardHelper
     {

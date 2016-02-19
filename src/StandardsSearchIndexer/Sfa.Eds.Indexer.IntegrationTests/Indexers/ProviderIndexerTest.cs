@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Threading;
 using FluentAssertions;
 using Nest;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
-using Sfa.Eds.Indexer.ProviderIndexer.Helpers;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
+using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Indexer.Common.Configuration;
+using Sfa.Eds.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.ProviderIndexer.Helpers;
+using Sfa.Eds.ProviderIndexer.Services;
 using StructureMap;
 
-namespace Sfa.Eds.Indexer.IntegrationTests.Indexers
+namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
     [TestFixture]
     public class ProviderIndexerTest

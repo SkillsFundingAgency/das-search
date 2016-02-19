@@ -1,6 +1,6 @@
 ﻿using Nest;
 
-namespace Sfa.Eds.Indexer.Indexer.Infrastructure.Models
+namespace Sfa.Eds.Indexer.Common.Models
 {
     public class StandardDocument
     {

@@ -5,11 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using log4net;
 using Nest;
-using Sfa.Eds.Indexer.DedsService.Services;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Models;
+using Sfa.DedsService.Services;
+using Sfa.Eds.Indexer.Common.Configuration;
+using Sfa.Eds.Indexer.Common.Helpers;
+using Sfa.Eds.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.StandardIndexer.Helpers;
 
 namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
 {
@@ -44,7 +45,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
             // If it already exists and is empty, let's delete it.
             if (indexExistsResponse.Exists)
             {
-                Log.Info("Index already exists, deleting and creating a new one");
+                Log.Warn("Index already exists, deleting and creating a new one");
 
                 _client.DeleteIndex(indexName);
             }
@@ -57,13 +58,13 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
 
         public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<JsonMetadataObject> standards)
         {
-            Log.Info("Uploading " + standards.Count() + " standard's PDF to Azure");
+            Log.Debug("Uploading " + standards.Count() + " standard's PDF to Azure");
 
             try
             {
                 await standards.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
 
-                Log.Info("Indexing " + standards.Count() + " standards");
+                Log.Debug("Indexing " + standards.Count() + " standards");
 
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
                 await IndexStandardPdfs(indexNameAndDateExtension, standards).ConfigureAwait(false);
@@ -91,7 +92,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
 
             if (!CheckIfAliasExists(indexAlias))
             {
-                Log.Info("Alias doesn't exists, creating a new one...");
+                Log.Warn("Alias doesn't exists, creating a new one...");
 
                 CreateAlias(newIndexName);
             }
@@ -171,7 +172,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Helpers
                 }
                 catch (Exception e)
                 {
-                    Log.Info("Error indexing standard PDF: " + e.Message);
+                    Log.Error("Error indexing standard PDF: " + e.Message);
                     throw;
                 }
             }

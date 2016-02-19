@@ -3,11 +3,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions;
+using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Settings.Settings;
 using Sfa.Eds.Indexer.StandardIndexer.Services;
 
-namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
+namespace Sfa.Eds.StandardIndexer.Consumers
 {
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {
@@ -54,7 +54,7 @@ namespace Sfa.Eds.Indexer.StandardIndexer.Consumers
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Something failed creating standard index: " + ex);
+                    Log.Fatal("Something failed creating standard index: " + ex);
                     throw;
                 }
             });

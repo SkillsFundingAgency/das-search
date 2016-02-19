@@ -6,20 +6,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Configuration;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.Helpers;
-using Sfa.Eds.Indexer.ProviderIndexer.Consumers;
-using Sfa.Eds.Indexer.StandardIndexer.Consumers;
-using Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Indexer.Common.Configuration;
+using Sfa.Eds.ProviderIndexer.Consumers;
+using Sfa.Eds.StandardIndexer.Consumers;
 
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
+namespace Sfa.Eds.Indexer.AzureWorkerRole
 {
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
-        private IIndexerScheduler _scheduler;
         private IStandardControlQueueConsumer _standardControlQueueConsumer;
         private IProviderControlQueueConsumer _providerControlQueueConsumer;
 
@@ -40,7 +38,7 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Exception from  " + ex);
+                    Log.Fatal("Exception from  " + ex);
                 }
 
                 Thread.Sleep(TimeSpan.FromMinutes(10));
@@ -78,7 +76,6 @@ namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole
             var container = IoC.Initialize();
             _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
             _providerControlQueueConsumer = container.GetInstance<IProviderControlQueueConsumer>();
-            _scheduler = container.GetInstance<IIndexerScheduler>();
 
             Log4NetSettings.Initialise();
         }

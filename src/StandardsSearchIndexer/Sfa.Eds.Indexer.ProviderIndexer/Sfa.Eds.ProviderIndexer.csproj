@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</ProjectGuid>
+    <ProjectGuid>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Indexer.StandardIndexer</RootNamespace>
-    <AssemblyName>Sfa.Eds.Indexer.StandardIndexer</AssemblyName>
+    <RootNamespace>Sfa.Eds.ProviderIndexer</RootNamespace>
+    <AssemblyName>Sfa.Eds.ProviderIndexer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.StandardIndexer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.ProviderIndexer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.StandardIndexer.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.ProviderIndexer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
@@ -82,30 +82,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\IStandardControlQueueConsumer.cs" />
-    <Compile Include="Consumers\StandardControlQueueConsumer.cs" />
-    <Compile Include="Helpers\IStandardHelper.cs" />
-    <Compile Include="Helpers\StandardHelper.cs" />
+    <Compile Include="Consumers\IProviderControlQueueConsumer.cs" />
+    <Compile Include="Consumers\ProviderControlQueueConsumer.cs" />
+    <Compile Include="Helpers\IProviderHelper.cs" />
+    <Compile Include="Helpers\ProviderHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IStandardIndexerService.cs" />
-    <Compile Include="Services\StandardIndexerService.cs" />
+    <Compile Include="Services\IProviderIndexerService.cs" />
+    <Compile Include="Services\ProviderIndexerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
       <Link>app.config</Link>
     </None>
     <None Include="packages.config" />
-    <None Include="Sfa.Eds.Indexer.StandardIndexer.ruleset" />
+    <None Include="Sfa.Eds.ProviderIndexer.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj">
-      <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Eds.Indexer.DedsService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Infrastructure.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj">
       <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
-      <Name>Sfa.Eds.Indexer.Indexer.Infrastructure</Name>
+      <Name>Sfa.Eds.Indexer.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>

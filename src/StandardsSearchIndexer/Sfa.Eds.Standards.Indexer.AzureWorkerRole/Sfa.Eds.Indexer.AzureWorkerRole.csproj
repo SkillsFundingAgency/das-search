@@ -8,8 +8,8 @@
     <ProjectGuid>{6163C031-06EA-4929-BC84-AB67ED0E93DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Standards.Indexer.AzureWorkerRole</RootNamespace>
-    <AssemblyName>Sfa.Eds.Standards.Indexer.AzureWorkerRole</AssemblyName>
+    <RootNamespace>Sfa.Eds.Indexer.AzureWorkerRole</RootNamespace>
+    <AssemblyName>Sfa.Eds.Indexer.AzureWorkerRole</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RoleType>Worker</RoleType>
@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Standards.Indexer.AzureWorkerRole.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Standards.Indexer.AzureWorkerRole.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
@@ -131,6 +131,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileData.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryDescriptor.datasource" />
+    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryResults.datasource" />
     <None Include="Service References\DedsService\DedsSearchService.wsdl" />
     <None Include="Service References\DedsService\DedsSearchService.xsd">
       <SubType>Designer</SubType>
@@ -144,24 +150,6 @@
     </None>
     <None Include="Service References\DedsService\DedsSearchService3.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.DataSetDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.DataSetVersionDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.FileData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.FileDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.QueryDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Standards.Indexer.AzureWorkerRole.DedsService.QueryResults.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Sfa.Eds.Standards.Indexer.AzureWorkerRole.ruleset" />
     <None Include="stylecop.json" />
@@ -198,25 +186,25 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Eds.Indexer.DedsService</Name>
+      <Name>Sfa.DedsService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Indexer.Infrastructure.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
-      <Name>Sfa.Eds.Indexer.Indexer.Infrastructure</Name>
+      <Name>Sfa.Eds.Indexer.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Indexer.ProviderIndexer.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.csproj">
       <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
-      <Name>Sfa.Eds.Indexer.ProviderIndexer</Name>
+      <Name>Sfa.Eds.ProviderIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>
       <Name>Sfa.Eds.Indexer.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Indexer.StandardIndexer.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.csproj">
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
-      <Name>Sfa.Eds.Indexer.StandardIndexer</Name>
+      <Name>Sfa.Eds.StandardIndexer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

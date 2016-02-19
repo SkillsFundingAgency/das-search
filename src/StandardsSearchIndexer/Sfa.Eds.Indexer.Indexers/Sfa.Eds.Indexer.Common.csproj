@@ -7,8 +7,8 @@
     <ProjectGuid>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Indexer.Indexer.Infrastructure</RootNamespace>
-    <AssemblyName>Sfa.Eds.Indexer.Indexer.Infrastructure</AssemblyName>
+    <RootNamespace>Sfa.Eds.Indexer.Common</RootNamespace>
+    <AssemblyName>Sfa.Eds.Indexer.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.Indexer.Infrastructure.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.Indexer.Common.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -107,7 +107,7 @@
       <Link>app.config</Link>
     </None>
     <None Include="packages.config" />
-    <None Include="Sfa.Eds.Indexer.Indexer.Infrastructure.ruleset" />
+    <None Include="Sfa.Eds.Indexer.Common.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
@@ -121,9 +121,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Eds.Indexer.DedsService.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Eds.Indexer.DedsService</Name>
+      <Name>Sfa.DedsService</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2F1B878F-2412-489F-A286-CD73B8B1DD81}</Project>

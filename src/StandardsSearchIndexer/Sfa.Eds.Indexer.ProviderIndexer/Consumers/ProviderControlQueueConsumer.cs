@@ -3,11 +3,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
-using Sfa.Eds.Indexer.Indexer.Infrastructure.AzureAbstractions;
-using Sfa.Eds.Indexer.ProviderIndexer.Services;
+using Sfa.Eds.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.ProviderIndexer.Services;
 
-namespace Sfa.Eds.Indexer.ProviderIndexer.Consumers
+namespace Sfa.Eds.ProviderIndexer.Consumers
 {
     public class ProviderControlQueueConsumer : IProviderControlQueueConsumer
     {
@@ -31,23 +31,31 @@ namespace Sfa.Eds.Indexer.ProviderIndexer.Consumers
         {
             return Task.Run(() =>
             {
-                var queue = _cloudQueueService.GetQueueReference(_providerIndexSettings.ConnectionString, _providerIndexSettings.QueueName);
-                var cloudQueueMessages = queue.GetMessages(10);
-                var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
-
-                if (messages.Any())
+                try
                 {
-                    var message = messages.FirstOrDefault();
-                    if (message != null)
+                    var queue = _cloudQueueService.GetQueueReference(_providerIndexSettings.ConnectionString, _providerIndexSettings.QueueName);
+                    var cloudQueueMessages = queue.GetMessages(10);
+                    var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
+
+                    if (messages.Any())
                     {
-                        Log.Info("Creating new scheduled provider index at " + DateTime.Now);
-                        _providerIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                        var message = messages.FirstOrDefault();
+                        if (message != null)
+                        {
+                            Log.Info("Creating new scheduled provider index at " + DateTime.Now);
+                            _providerIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                        }
+                    }
+
+                    foreach (var cloudQueueMessage in messages)
+                    {
+                        queue.DeleteMessage(cloudQueueMessage);
                     }
                 }
-
-                foreach (var cloudQueueMessage in messages)
+                catch (Exception ex)
                 {
-                    queue.DeleteMessage(cloudQueueMessage);
+                    Log.Fatal("Something failed creating provider index: " + ex);
+                    throw;
                 }
             });
         }

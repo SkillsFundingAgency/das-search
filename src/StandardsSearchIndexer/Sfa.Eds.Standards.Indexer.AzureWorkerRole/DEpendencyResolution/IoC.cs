@@ -16,10 +16,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sfa.Eds.Standards.Indexer.AzureWorkerRole.DependencyResolution
-{
-    using StructureMap;
+using StructureMap;
 
+namespace Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution
+{
     public static class IoC
     {
         public static IContainer Initialize()
