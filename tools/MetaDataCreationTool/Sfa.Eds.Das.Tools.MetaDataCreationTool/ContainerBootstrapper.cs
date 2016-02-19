@@ -20,6 +20,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
                         c.For<IFileService>().Use<FileService>();
                         c.For<IAngleSharpService>().Use<AngleSharpService>();
                         c.For<IJsonStringFormater>().Use<JsonStringFormater>();
+                        c.For<IVstsService>().Use<VstsService>();
                     });
             return container;
         }

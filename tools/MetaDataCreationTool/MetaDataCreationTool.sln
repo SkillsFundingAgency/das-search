@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool", "Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj", "{D838757D-63EC-4FE6-B565-470D5BF424A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test", "UnitTestProject1\Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.csproj", "{B9388285-61E5-4C76-91E7-896FC52A3C36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test", "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test\Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.csproj", "{B9388285-61E5-4C76-91E7-896FC52A3C36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
