@@ -1,5 +1,6 @@
 ﻿using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Das.Indexer.Common.Helpers;
+using Sfa.Eds.Das.Indexer.Common.Services;
 using Sfa.Eds.Das.Indexer.Common.Settings;
 using StructureMap;
 
@@ -9,6 +10,8 @@ namespace Sfa.Eds.Das.Indexer.Common.DependencyResolution
     {
         public CommonRegistry()
         {
+            For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
+            For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
             For<IAzureSettings>().Use<AzureSettings>();
             For<ICommonSettings>().Use<CommonSettings>();
             For<ICloudQueueService>().Use<CloudQueueService>();

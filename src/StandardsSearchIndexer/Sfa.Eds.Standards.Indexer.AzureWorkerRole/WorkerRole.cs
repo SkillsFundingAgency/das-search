@@ -8,8 +8,9 @@ using log4net;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
-using Sfa.Eds.Das.ProviderIndexer.Consumers;
-using Sfa.Eds.Das.StandardIndexer.Consumers;
+using Sfa.Eds.Das.Indexer.Common.Services;
+using Sfa.Eds.Das.ProviderIndexer.Services;
+using Sfa.Eds.Das.StandardIndexer.Services;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
@@ -18,8 +19,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
-        private IStandardControlQueueConsumer _standardControlQueueConsumer;
-        private IProviderControlQueueConsumer _providerControlQueueConsumer;
+        private IGenericControlQueueConsumer _controlQueueConsumer;
 
         public override void Run()
         {
@@ -30,8 +30,8 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
                 {
                     var tasks = new List<Task>
                     {
-                        _standardControlQueueConsumer.CheckMessage(),
-                        _providerControlQueueConsumer.CheckMessage()
+                        // _controlQueueConsumer.CheckMessage<IStandardIndexerService>(),
+                        _controlQueueConsumer.CheckMessage<IProviderIndexerService>()
                     };
 
                     Task.WaitAll(tasks.ToArray());
@@ -74,8 +74,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
         private void Initialise()
         {
             var container = IoC.Initialize();
-            _standardControlQueueConsumer = container.GetInstance<IStandardControlQueueConsumer>();
-            _providerControlQueueConsumer = container.GetInstance<IProviderControlQueueConsumer>();
+            _controlQueueConsumer = container.GetInstance<IGenericControlQueueConsumer>();
 
             Log4NetSettings.Initialise();
         }

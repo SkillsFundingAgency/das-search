@@ -91,8 +91,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\IProviderControlQueueConsumer.cs" />
-    <Compile Include="Consumers\ProviderControlQueueConsumer.cs" />
     <Compile Include="DependencyResolution\ProviderRegistry.cs" />
     <Compile Include="Helpers\IProviderHelper.cs" />
     <Compile Include="Helpers\ProviderHelper.cs" />
