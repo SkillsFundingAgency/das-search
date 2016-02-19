@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Models
 {
     internal class LarsData
     {
