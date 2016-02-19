@@ -58,6 +58,7 @@
                     Keywords = new List<string>(1),
                     TypicalLength = new TypicalLength {Unit = "m"},
                     IntroductoryText = "",
+                    OverviewOfRole = "",
                     EntryRequirements = "",
                     WhatApprenticesWillLearn = "",
                     Qualifications = "",

@@ -1,10 +1,9 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
 {
-    using Newtonsoft.Json;
     using System;
-    using System.IO;
-    using System.Net;
+
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
 
     class Program
     {
@@ -14,11 +13,15 @@
             var cmdArgs = new CmdArgs() { UseLocalCsvFile = false };
             var container = ContainerBootstrapper.BootstrapStructureMap();
             var meta = container.GetInstance<IMetaDataCreation>();
+            //meta.Run(cmdArgs);
 
             var stringFormater = container.GetInstance<IJsonStringFormater>();
-            //meta.Run(cmdArgs);
-            stringFormater.StartStatic();
+            //stringFormater.StartStatic();
 
+            var vstsService= container.GetInstance<IVstsService>();
+            vstsService.Start();
+
+            Console.WriteLine(".....-O-O-o-o-0-0 ThE eNd 0-0-o-o-O-O-.....");
             Console.ReadLine();
         }
     }
