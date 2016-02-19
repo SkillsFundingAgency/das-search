@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.WindowsAzure.Storage.Queue;
 
-namespace Sfa.Eds.Indexer.Common.AzureAbstractions
+namespace Sfa.Eds.Das.Indexer.Common.AzureAbstractions
 {
     public interface ICloudQueueWrapper
     {

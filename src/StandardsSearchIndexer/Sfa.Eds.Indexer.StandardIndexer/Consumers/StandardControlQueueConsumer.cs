@@ -3,11 +3,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
-using Sfa.Eds.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Indexer.StandardIndexer.Services;
 
-namespace Sfa.Eds.StandardIndexer.Consumers
+namespace Sfa.Eds.Das.StandardIndexer.Consumers
 {
     public class StandardControlQueueConsumer : IStandardControlQueueConsumer
     {

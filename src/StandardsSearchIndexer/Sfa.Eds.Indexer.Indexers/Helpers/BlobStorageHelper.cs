@@ -10,10 +10,10 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
-using Sfa.Eds.Indexer.Common.Models;
+using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Indexer.Settings.Settings;
 
-namespace Sfa.Eds.Indexer.Common.Helpers
+namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
     public class BlobStorageHelper : IBlobStorageHelper
     {

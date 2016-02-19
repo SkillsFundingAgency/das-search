@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sfa.Eds.ProviderIndexer.Services
+namespace Sfa.Eds.Das.ProviderIndexer.Services
 {
     public interface IProviderIndexerService
     {

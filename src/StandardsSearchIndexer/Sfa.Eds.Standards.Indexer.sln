@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.AzureWorker
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.ProviderIndexer.UnitTests", "Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Das.ProviderIndexer.UnitTests.csproj", "{B9B0AE4B-C881-4CE3-AF65-4118216AF75F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.DedsService", "Sfa.Eds.Indexer.DedsService\Sfa.DedsService.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
 EndProject
@@ -17,11 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Indexer.Settings", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.IntegrationTests", "Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.csproj", "{23C1681A-12B5-44B5-BF4C-FDE64DEACC2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.StandardIndexer", "Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.csproj", "{CD403DBC-FA8A-4004-8494-63BE9766C57F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.StandardIndexer", "Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj", "{CD403DBC-FA8A-4004-8494-63BE9766C57F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Indexers", "Indexers", "{B16F419E-4F1A-4251-9678-DBB6D0EB762D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.ProviderIndexer", "Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.csproj", "{DB90F92F-8A86-4239-8F7D-F99161E4282D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.ProviderIndexer", "Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Das.ProviderIndexer.csproj", "{DB90F92F-8A86-4239-8F7D-F99161E4282D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{725EF154-0F71-4FA7-9B79-5FA023E40F2F}"
 EndProject

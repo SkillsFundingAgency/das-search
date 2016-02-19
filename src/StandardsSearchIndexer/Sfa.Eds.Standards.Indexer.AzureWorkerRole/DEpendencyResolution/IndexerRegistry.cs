@@ -1,18 +1,16 @@
 ﻿using log4net;
 using Nest;
 using Sfa.DedsService.Services;
-using Sfa.Eds.Indexer.Common.AzureAbstractions;
-using Sfa.Eds.Indexer.Common.Configuration;
-using Sfa.Eds.Indexer.Common.Helpers;
+using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Das.Indexer.Common.Configuration;
+using Sfa.Eds.Das.Indexer.Common.Helpers;
+using Sfa.Eds.Das.ProviderIndexer.Consumers;
+using Sfa.Eds.Das.ProviderIndexer.Helpers;
+using Sfa.Eds.Das.ProviderIndexer.Services;
+using Sfa.Eds.Das.StandardIndexer.Consumers;
+using Sfa.Eds.Das.StandardIndexer.Helpers;
+using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.Indexer.StandardIndexer.Helpers;
-using Sfa.Eds.Indexer.StandardIndexer.Services;
-using Sfa.Eds.ProviderIndexer.Consumers;
-using Sfa.Eds.ProviderIndexer.Helpers;
-using Sfa.Eds.ProviderIndexer.Services;
-using Sfa.Eds.StandardIndexer.Consumers;
-using Sfa.Eds.StandardIndexer.Helpers;
-using Sfa.Eds.StandardIndexer.Services;
 using StructureMap;
 
 namespace Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution

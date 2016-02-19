@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using Sfa.Eds.Indexer.Common.Models;
+using Sfa.Eds.Das.Indexer.Common.Models;
+using Sfa.Eds.Das.StandardIndexer.Helpers;
+using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.StandardIndexer.Helpers;
-using Sfa.Eds.StandardIndexer.Services;
 
 namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Services
 {

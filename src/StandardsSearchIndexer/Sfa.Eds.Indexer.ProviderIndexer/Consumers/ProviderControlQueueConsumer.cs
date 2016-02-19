@@ -3,11 +3,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
-using Sfa.Eds.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Indexer.Settings.Settings;
-using Sfa.Eds.ProviderIndexer.Services;
 
-namespace Sfa.Eds.ProviderIndexer.Consumers
+namespace Sfa.Eds.Das.ProviderIndexer.Consumers
 {
     public class ProviderControlQueueConsumer : IProviderControlQueueConsumer
     {

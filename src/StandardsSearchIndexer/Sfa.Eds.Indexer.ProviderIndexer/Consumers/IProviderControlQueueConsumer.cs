@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Sfa.Eds.ProviderIndexer.Consumers
+namespace Sfa.Eds.Das.ProviderIndexer.Consumers
 {
     public interface IProviderControlQueueConsumer
     {

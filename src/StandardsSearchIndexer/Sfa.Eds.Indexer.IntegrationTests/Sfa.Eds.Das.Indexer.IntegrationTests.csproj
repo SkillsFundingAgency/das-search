@@ -61,6 +61,10 @@
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sfa.Eds.Indexer.AzureWorkerRole, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\bin\Debug\Sfa.Eds.Indexer.AzureWorkerRole.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -101,25 +105,21 @@
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.DedsService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Indexer.Common.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
-      <Name>Sfa.Eds.Indexer.Common</Name>
+      <Name>Sfa.Eds.Das.Indexer.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.ProviderIndexer.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Das.ProviderIndexer.csproj">
       <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
-      <Name>Sfa.Eds.ProviderIndexer</Name>
+      <Name>Sfa.Eds.Das.ProviderIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Settings\Sfa.Eds.Indexer.Settings.csproj">
       <Project>{2f1b878f-2412-489f-a286-cd73b8b1dd81}</Project>
       <Name>Sfa.Eds.Indexer.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.StandardIndexer.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj">
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
-      <Name>Sfa.Eds.StandardIndexer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Indexer.AzureWorkerRole.csproj">
-      <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>
-      <Name>Sfa.Eds.Indexer.AzureWorkerRole</Name>
+      <Name>Sfa.Eds.Das.StandardIndexer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

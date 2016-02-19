@@ -6,10 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using Sfa.Eds.Das.Indexer.Common.Configuration;
+using Sfa.Eds.Das.ProviderIndexer.Consumers;
+using Sfa.Eds.Das.StandardIndexer.Consumers;
 using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
-using Sfa.Eds.Indexer.Common.Configuration;
-using Sfa.Eds.ProviderIndexer.Consumers;
-using Sfa.Eds.StandardIndexer.Consumers;
 
 namespace Sfa.Eds.Indexer.AzureWorkerRole
 {

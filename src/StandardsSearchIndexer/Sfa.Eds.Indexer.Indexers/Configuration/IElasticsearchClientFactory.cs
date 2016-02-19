@@ -1,6 +1,6 @@
 ﻿using Nest;
 
-namespace Sfa.Eds.Indexer.Common.Configuration
+namespace Sfa.Eds.Das.Indexer.Common.Configuration
 {
     public interface IElasticsearchClientFactory
     {

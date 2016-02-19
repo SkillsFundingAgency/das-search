@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Indexer.Common.AzureAbstractions
+﻿namespace Sfa.Eds.Das.Indexer.Common.AzureAbstractions
 {
     public interface ICloudQueueService
     {

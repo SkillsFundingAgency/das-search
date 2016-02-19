@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Sfa.Eds.Indexer.Common.Models;
+using Sfa.Eds.Das.Indexer.Common.Models;
 
-namespace Sfa.Eds.Indexer.Common.Helpers
+namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
     public interface IBlobStorageHelper
     {
