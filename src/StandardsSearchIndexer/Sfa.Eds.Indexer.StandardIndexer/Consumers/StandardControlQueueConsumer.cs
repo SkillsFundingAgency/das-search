@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
-using Sfa.Eds.Das.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Das.StandardIndexer.Services;
 
 namespace Sfa.Eds.Das.StandardIndexer.Consumers

@@ -4,7 +4,7 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
-using Sfa.Eds.Das.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Das.StandardIndexer.Consumers;
 using Sfa.Eds.Das.StandardIndexer.Services;
 

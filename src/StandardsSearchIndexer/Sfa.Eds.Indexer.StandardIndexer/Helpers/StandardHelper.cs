@@ -9,7 +9,7 @@ using Sfa.DedsService.Services;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Helpers;
 using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Configuration;
 
 namespace Sfa.Eds.Das.StandardIndexer.Helpers
 {

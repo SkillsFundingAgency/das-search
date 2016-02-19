@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Sfa.DedsService.Services;
-using Sfa.Eds.Das.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 

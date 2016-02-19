@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading;
 using log4net;
-using Sfa.Eds.Das.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Settings.Configuration;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 
 namespace Sfa.Eds.Das.ProviderIndexer.Services

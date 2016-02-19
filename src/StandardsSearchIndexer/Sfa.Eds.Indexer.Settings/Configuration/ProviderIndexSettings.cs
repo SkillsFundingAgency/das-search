@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Sfa.Eds.Das.Indexer.Settings.Settings
+namespace Sfa.Eds.Das.Indexer.Settings.Configuration
 {
     public class ProviderIndexSettings : IProviderIndexSettings
     {
