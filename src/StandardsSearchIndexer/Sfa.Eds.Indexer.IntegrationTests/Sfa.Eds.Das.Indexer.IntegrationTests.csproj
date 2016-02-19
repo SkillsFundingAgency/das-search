@@ -61,10 +61,6 @@
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sfa.Eds.Indexer.AzureWorkerRole, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\bin\Debug\Sfa.Eds.Indexer.AzureWorkerRole.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -116,6 +112,10 @@
     <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj">
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
       <Name>Sfa.Eds.Das.StandardIndexer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
+      <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>
+      <Name>Sfa.Eds.Das.Indexer.AzureWorkerRole</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

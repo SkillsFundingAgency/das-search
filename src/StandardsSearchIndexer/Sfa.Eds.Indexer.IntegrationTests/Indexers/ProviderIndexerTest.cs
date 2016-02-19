@@ -10,7 +10,7 @@ using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Das.ProviderIndexer.Settings;
-using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers

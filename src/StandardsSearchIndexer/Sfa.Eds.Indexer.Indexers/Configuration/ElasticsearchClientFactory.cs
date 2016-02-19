@@ -1,18 +1,18 @@
 ﻿using System;
 using Nest;
-using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Common.Settings;
 
 namespace Sfa.Eds.Das.Indexer.Common.Configuration
 {
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
         private readonly ConnectionSettings _connectionSettings;
-        private readonly IStandardIndexSettings _standardIndexSettings;
+        private readonly ICommonSettings _commonSettings;
 
-        public ElasticsearchClientFactory(IStandardIndexSettings standardIndexSettings)
+        public ElasticsearchClientFactory(ICommonSettings commonSettings)
         {
-            _standardIndexSettings = standardIndexSettings;
-            _connectionSettings = new ConnectionSettings(new Uri(_standardIndexSettings.SearchHost));
+            _commonSettings = commonSettings;
+            _connectionSettings = new ConnectionSettings(new Uri(_commonSettings.SearchHost));
         }
 
         public IElasticClient GetElasticClient()

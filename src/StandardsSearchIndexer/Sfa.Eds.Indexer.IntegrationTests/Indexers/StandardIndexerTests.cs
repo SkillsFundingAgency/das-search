@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using NUnit.Framework;
+using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.StandardIndexer.Helpers;
 using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Das.StandardIndexer.Settings;
-using Sfa.Eds.Indexer.AzureWorkerRole.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers

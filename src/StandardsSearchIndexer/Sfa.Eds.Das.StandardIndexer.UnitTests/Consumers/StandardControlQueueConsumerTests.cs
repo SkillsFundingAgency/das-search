@@ -4,6 +4,7 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
+using Sfa.Eds.Das.Indexer.Common.Settings;
 using Sfa.Eds.Das.StandardIndexer.Consumers;
 using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Das.StandardIndexer.Settings;
@@ -16,7 +17,7 @@ namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Consumers
         private Mock<IStandardIndexerService> _mockService;
         private Mock<ICloudQueueService> _mockCloudQueueService;
         private Mock<ICloudQueueWrapper> _mockQueue;
-        private IStandardIndexSettings _mockSettings;
+        private IAzureSettings _mockSettings;
         private StandardControlQueueConsumer _sut;
 
         [SetUp]
@@ -26,7 +27,7 @@ namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Consumers
             _mockService = new Mock<IStandardIndexerService>();
             _mockCloudQueueService = new Mock<ICloudQueueService>();
             _mockQueue = new Mock<ICloudQueueWrapper>();
-            _mockSettings = Mock.Of<IStandardIndexSettings>();
+            _mockSettings = Mock.Of<IAzureSettings>();
             _sut = new StandardControlQueueConsumer(_mockService.Object, _mockSettings, _mockCloudQueueService.Object);
         }
 

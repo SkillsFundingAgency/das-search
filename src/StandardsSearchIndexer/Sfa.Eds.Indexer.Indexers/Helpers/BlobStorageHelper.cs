@@ -11,7 +11,7 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
 using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Indexer.Settings.Settings;
+using Sfa.Eds.Das.Indexer.Common.Settings;
 
 namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
@@ -19,14 +19,14 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static IStandardIndexSettings _standardIndexSettings;
+        private static ICommonSettings _commonSettings;
 
         private readonly CloudStorageAccount _storageAccount;
 
-        public BlobStorageHelper(IStandardIndexSettings standardIndexSettings)
+        public BlobStorageHelper(ICommonSettings commonSettings)
         {
-            _standardIndexSettings = standardIndexSettings;
-            var storageCredentials = new StorageCredentials(_standardIndexSettings.StorageAccountName, _standardIndexSettings.StorageAccountKey);
+            _commonSettings = commonSettings;
+            var storageCredentials = new StorageCredentials(_commonSettings.StorageAccountName, _commonSettings.StorageAccountKey);
             _storageAccount = new CloudStorageAccount(storageCredentials, true);
         }
 
