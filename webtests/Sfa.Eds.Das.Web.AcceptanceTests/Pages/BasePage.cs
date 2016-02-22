@@ -36,8 +36,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public IWebElement find(By locator)
         {
-            // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-          //  wait.Until(ExpectedConditions.ElementIsVisible(locator));
+                        
+            // WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
+            // wait.Until(ExpectedConditions.ElementIsVisible(locator));
             return driver.FindElement(locator);
         }
 
@@ -50,12 +51,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         }
 
 
-        public void Launch(string url, string pageTitle)
+        public void Launch(string pageTitle)
         {
          driver.Navigate().GoToUrl(baseUrl);
             verifyPage(pageTitle);
         }
        
+
+        public void Open(String standard)
+        {
+            driver.Navigate().GoToUrl(baseUrl+ "Standard/Detail/" + standard);
+
+        }
         public void click(By locator)
         {
             find(locator).Click();
@@ -64,8 +71,30 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
        
         public string getText(By locator)
         {
-            return find(locator).Text;
+           return find(locator).Text;
+            
         }
+
+        public bool isElementPresent(By locator,string provider)
+        {
+            try
+            {
+                IWebElement element = find(locator);
+                Console.Write(getText(locator));
+                if (getText(locator).Contains(provider))
+                    return true;
+
+                else { return false; }
+            }
+
+
+            catch (NoSuchElementException)
+            {
+                return false;
+
+            } 
+        }
+       
 
         public bool isDisplayed(By locator)
         {

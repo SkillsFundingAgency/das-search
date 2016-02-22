@@ -67,8 +67,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 }
                 else
                 {
+
+                                       
                     localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
                     FeatureContext.Current["driver"] = localDriver;
+                    localDriver.Manage().Window.Maximize();
+
+                    
                 }
 
 
@@ -130,7 +135,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             {
 
                 ScenarioContext.Current["driver"] = localDriver;
-                Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.Write("Test Scenario ##### : " + ScenarioContext.Current.ScenarioInfo.Title);
             }
             else if (host == "saucelabs")
             {

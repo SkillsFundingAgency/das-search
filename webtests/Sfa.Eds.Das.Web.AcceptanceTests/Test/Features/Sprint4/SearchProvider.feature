@@ -13,7 +13,8 @@ Scenario Outline:Show available providers for given standard
 	Then I should all providers in result page
 	And I should see all providers listed in Alphabetical order 
 Examples:
-| JOBROLE									|
-| Product Design and Development Engineer   |
+| JOBROLE                                     |
+| Product Design and Development Engineer     |
+| Digital & technology solutions professional |
 
 

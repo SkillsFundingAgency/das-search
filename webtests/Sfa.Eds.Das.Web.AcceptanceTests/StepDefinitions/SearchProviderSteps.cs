@@ -18,6 +18,30 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         SearchPage srchPage;
         ProviderResultPage prvdrPage;
 
+
+        [Given(@"I am on the Standard detail page")]
+        public void GivenIAmOnTheStandardDetailPage()
+        {
+           
+
+        }
+
+
+        [Given(@"I enter ""(.*)""  in provider search box")]
+        public void GivenIEnterInProviderSearchBox(string p0)
+        {
+            prvdrPage.enterlocation(p0);
+        }
+
+
+        [Given(@"I click Search button")]
+        public void GivenIClickSearchButton()
+        {
+           
+        }
+
+
+
         [When(@"I choose any of the standard from search result page")]
         public void WhenIChooseAnyOfTheStandardFromSearchResultPage()
         {

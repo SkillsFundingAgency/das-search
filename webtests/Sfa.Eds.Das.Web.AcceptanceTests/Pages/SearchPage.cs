@@ -37,7 +37,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void launchLandingPage()
         {
-            Launch("http://das-searchwebsystemtest.azurewebsites.net/", "Home Page - Employer Apprenticeship Search");
+            Launch("Home Page - Employer Apprenticeship Search");
+            Thread.Sleep(3000);
+        }
+
+        public void OpenStandarDetails(String standard)
+        {
+            Open(standard);
             Thread.Sleep(3000);
         }
 
@@ -87,8 +93,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             Thread.Sleep(4000);
            // Console.WriteLine(getText(searchresult));
-            Console.WriteLine(getText(searchkeywordresult));
-            Console.WriteLine(keyword);
+          //  Console.WriteLine(getText(searchkeywordresult));
+            //Console.WriteLine(keyword);
             //Assert.True(getText(searchkeywordresult).Contains(keyword));
             Assert.True(isDisplayed(searchresult));
         }

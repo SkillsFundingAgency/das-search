@@ -19,21 +19,21 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SearchProvider")]
-    public partial class SearchProviderFeature
+    [NUnit.Framework.DescriptionAttribute("SearchProvider by latlong")]
+    public partial class SearchProviderByLatlongFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SearchProvider.feature"
+#line 1 "ProviderSearchbyLatLong.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SearchProvider", "In order to choose from provider list\nAs an employer\nI want to be able to search " +
-                    "all providers for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SearchProvider by latlong", "In order to choose from provider list\nAs an employer\nI want to be able to search " +
+                    " providers by entering Lat long in search box.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,11 +66,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Show available providers for given standard")]
+        [NUnit.Framework.DescriptionAttribute("When entered Lat long to search provider is within provider given radius")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Product Design and Development Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("52.4113623,-1.5256923", null)]
         [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", null)]
-        public virtual void ShowAvailableProvidersForGivenStandard(string jOBROLE, string[] exampleTags)
+        public virtual void WhenEnteredLatLongToSearchProviderIsWithinProviderGivenRadius(string latLong, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -78,23 +78,38 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show available providers for given standard", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When entered Lat long to search provider is within provider given radius", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am on Standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I enter latlong \'{0}\' in provider search box", latLong), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
  testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.When("I choose any of the standard from search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
- testRunner.And("I click on search under provider search section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 13
- testRunner.Then("I should all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 14
- testRunner.And("I should see all providers listed in Alphabetical order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should list of providers on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Return 2 providers in search result for given Standard 25")]
+        [NUnit.Framework.TestCaseAttribute("Aspire archive advance limited", null)]
+        [NUnit.Framework.TestCaseAttribute("Millbrook management services limited", null)]
+        public virtual void Return2ProvidersInSearchResultForGivenStandard25(string providers, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Return 2 providers in search result for given Standard 25", exampleTags);
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+testRunner.Given("I am on the Standard detail page \'<25>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+testRunner.And("I enter lat long \'<53.2183781,-0.6255364>\'  in provider search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+testRunner.And("I click Searcbu button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+testRunner.Then(string.Format("I should see below \'{0}\' in result page.", providers), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

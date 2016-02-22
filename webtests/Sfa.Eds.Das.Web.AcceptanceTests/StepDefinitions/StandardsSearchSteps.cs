@@ -19,15 +19,22 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
 
 
+
         SearchPage srchPage;
+        public StandardsSearchSteps()
+        {
+           
+            srchPage = new SearchPage();
+        }
         
+
 
         [Given(@"I am on Search landing page")]
         public void GivenIAmOnSearchLandingPage()
         {
 
 
-            srchPage = new SearchPage();
+           // srchPage = new SearchPage();
 
            srchPage.launchLandingPage();
 
@@ -41,7 +48,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [When(@"I am on Search landing page")]
         public void WhenIAmOnSearchLandingPage()
         {
-            srchPage = new SearchPage();
+           // srchPage = new SearchPage();
 
            srchPage.launchLandingPage();
         }

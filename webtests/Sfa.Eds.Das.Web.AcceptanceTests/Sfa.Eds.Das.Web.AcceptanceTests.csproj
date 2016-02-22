@@ -73,6 +73,7 @@
     <Compile Include="Pages\ProviderResultPage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepDefinitions\SearchProviderByLocationSteps.cs" />
     <Compile Include="StepDefinitions\SearchProviderSteps.cs" />
     <Compile Include="StepDefinitions\StandardsSearchSteps.cs" />
     <Compile Include="Test\Features\Sprint1\SearchStandardByTitle.feature.cs">
@@ -85,10 +86,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardSearch.feature</DependentUpon>
     </Compile>
+    <Compile Include="Test\Features\Sprint4\ProviderSearchbyLatLong.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderSearchbyLatLong.feature</DependentUpon>
+    </Compile>
     <Compile Include="Test\Features\Sprint4\SearchProvider.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProvider.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchProviderbyPostcode.feature</DependentUpon>
     </Compile>
     <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
@@ -105,9 +116,17 @@
       <LastGenOutput>StandardSearch.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="Test\Features\Sprint4\ProviderSearchbyLatLong.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProviderSearchbyLatLong3.feature.cs</LastGenOutput>
+    </None>
     <None Include="Test\Features\Sprint4\SearchProvider.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProviderbyPostcode.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
