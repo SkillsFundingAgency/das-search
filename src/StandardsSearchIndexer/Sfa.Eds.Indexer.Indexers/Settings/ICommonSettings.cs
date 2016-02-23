@@ -3,6 +3,7 @@
     public interface ICommonSettings
     {
         string SearchHost { get; }
+        string WorkerRolePauseTime { get; }
         string StandardIndexesAlias { get; }
         string StorageAccountName { get; }
         string StorageAccountKey { get; }

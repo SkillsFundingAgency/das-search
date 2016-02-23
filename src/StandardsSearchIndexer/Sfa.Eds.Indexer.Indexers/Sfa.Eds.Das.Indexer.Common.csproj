@@ -101,8 +101,10 @@
     <Compile Include="DependencyResolution\CommonRegistry.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
-    <Compile Include="Helpers\IIndexerScheduler.cs" />
-    <Compile Include="Helpers\IndexerScheduler.cs" />
+    <Compile Include="Helpers\CloudBlobClientWrapper.cs" />
+    <Compile Include="Helpers\CloudBlobContainerWrapper.cs" />
+    <Compile Include="Helpers\ICloudBlobClientWrapper.cs" />
+    <Compile Include="Helpers\ICloudBlobContainerWrapper.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />

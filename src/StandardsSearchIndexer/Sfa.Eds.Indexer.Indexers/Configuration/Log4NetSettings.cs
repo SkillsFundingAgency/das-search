@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Net;
 using log4net;
 using log4net.Appender;
@@ -7,6 +8,7 @@ using log4net.Repository.Hierarchy;
 
 namespace Sfa.Eds.Das.Indexer.Common.Configuration
 {
+    [Obsolete("This configuration should be done in the log4net config section")]
     public static class Log4NetSettings
     {
         public static string LoggerName => "MainLogger";

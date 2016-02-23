@@ -12,6 +12,8 @@ namespace Sfa.Eds.Das.Indexer.Common.DependencyResolution
         {
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
+            For<ICloudBlobContainerWrapper>().Use<CloudBlobContainerWrapper>();
+            For<ICloudBlobClientWrapper>().Use<CloudBlobClientWrapper>();
             For<IAzureSettings>().Use<AzureSettings>();
             For<ICommonSettings>().Use<CommonSettings>();
             For<ICloudQueueService>().Use<CloudQueueService>();
