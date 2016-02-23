@@ -10,6 +10,8 @@ namespace Sfa.Eds.Das.Indexer.Common.Settings
 
         public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
 
-        public string QueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
+        public string StandardQueueName => ConfigurationManager.AppSettings["QueueName"];
+
+        public string ProviderQueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
     }
 }
