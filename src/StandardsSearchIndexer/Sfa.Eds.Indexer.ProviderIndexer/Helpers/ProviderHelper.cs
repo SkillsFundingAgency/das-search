@@ -79,6 +79,20 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                                 {
                                     ""type"": ""long""
                                 },
+                                ""coordinate"":
+                                {
+                                    ""properties"": 
+                                    {
+                                        ""lat"": 
+                                        {
+                                            ""type"": ""double""
+                                        },
+                                        ""lon"":
+                                        {
+                                            ""type"": ""double""
+                                        }
+                                    }
+                                },
                                 ""location"": 
                                 {
                                     ""type"": ""geo_shape""
