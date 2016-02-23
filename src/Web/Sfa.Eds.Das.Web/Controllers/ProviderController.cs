@@ -28,7 +28,7 @@
         [HttpGet]
         public ActionResult SearchResults(ProviderSearchCriteria criteria)
         {
-            var searchResults = _providerSearchService.SearchByLatLon(criteria.StandardId, criteria.Skip, criteria.Take, criteria.PostCode);
+            var searchResults = _providerSearchService.SearchByLocation(criteria.StandardId, criteria.Skip, criteria.Take, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 

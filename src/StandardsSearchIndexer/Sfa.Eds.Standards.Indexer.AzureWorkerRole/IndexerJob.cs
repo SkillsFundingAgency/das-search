@@ -19,7 +19,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
         {
             var tasks = new List<Task>
             {
-                _controlQueueConsumer.CheckMessage<IStandardIndexerService>(),
+                //_controlQueueConsumer.CheckMessage<IStandardIndexerService>(),
                 _controlQueueConsumer.CheckMessage<IProviderIndexerService>()
             };
 

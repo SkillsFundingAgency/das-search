@@ -18,6 +18,8 @@
 
         public int Radius { get; set; }
 
+        public double Distance { get; set; }
+
         public List<int> StandardsId { get; set; }
     }
 }

@@ -1,6 +1,9 @@
-﻿using Nest;
+﻿using System;
+using System.Collections.Generic;
+using Nest;
 using Sfa.Das.ApplicationServices;
 using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
 
@@ -40,13 +43,13 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        public ProviderSearchResults SearchByLatLon(string standardId, int skip, int take, string postcode = null)
+        public ProviderSearchResults SearchByLocation(string standardId, int skip, int take, string location = null)
         {
             var client = this._elasticsearchClientFactory.Create();
 
             Nest.ISearchResponse<ProviderSearchResultsItem> results;
 
-            if (string.IsNullOrEmpty(postcode))
+            if (string.IsNullOrEmpty(location))
             {
                 results = client
                     .Search<ProviderSearchResultsItem>(s => s
@@ -54,33 +57,48 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                         .MatchAll()
                         .Filter(f => f
                             .Term(y => y.StandardsId, standardId)));
-                if (results.ConnectionStatus.HttpStatusCode != 200)
-                {
-                    _logger.Error("1. Something failed");
-                    _logger.Error("2. " + _applicationSettings.ProviderIndexAlias);
-                    _logger.Error("3. " + results.RequestInformation.RequestUrl);
-                    _logger.Error("4. " + results.RequestInformation);
-                }
             }
             else
             {
-                var qryStr = CreateRawQuery(standardId, postcode);
+                var qryStr = CreateRawQuery(standardId, location);
+
+                var coordinate = new Coordinate();
+                if (IsLatLong(location))
+                {
+                    var coordinates = location.Split(',');
+                    coordinate.Lat = double.Parse(coordinates[0]);
+                    coordinate.Lon= double.Parse(coordinates[1]);
+                }
 
                 results = client
                     .Search<ProviderSearchResultsItem>(s => s
                     .Index(_applicationSettings.ProviderIndexAlias)
-                    .QueryRaw(qryStr));
-                if (results.ConnectionStatus.HttpStatusCode != 200)
-                {
-                    _logger.Error("1. Something failed");
-                    _logger.Error("2. " + _applicationSettings.ProviderIndexAlias);
-                    _logger.Error("3. " + qryStr);
-                    _logger.Error("4. " + results.RequestInformation.RequestUrl);
-                    _logger.Error("5. " + results.RequestInformation);
-                }
+                    .QueryRaw(qryStr)
+                    .SortGeoDistance(g =>
+                    {
+                        g.PinTo( coordinate.Lat, coordinate.Lon)
+                            .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
+                        return g;
+                    }));
             }
 
-            var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
+            var hits = results.Hits;//.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
+
+            var documents = new List<ProviderSearchResultsItem>();
+
+            foreach (var hit in hits)
+            {
+                var pr = new ProviderSearchResultsItem
+                {
+                    ProviderName = hit.Source.ProviderName,
+                    PostCode = hit.Source.PostCode,
+                    UkPrn = hit.Source.UkPrn,
+                    VenueName = hit.Source.VenueName,
+                    StandardsId = hit.Source.StandardsId,
+                    Distance = Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1)
+                };
+                documents.Add(pr);
+            }
 
             string standardName = string.Empty;
 
@@ -101,13 +119,47 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        private string CreateRawQuery(string standardId, string postcode)
+        private string CreateRawQuery(string standardId, string location)
         {
-            // TODO: transform postcode to latlon
-            var coordinates = postcode.Split(',');
-            var lat = coordinates[0];
-            var lon = coordinates[1];
-            return string.Concat(@"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """, standardId, @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [", lon, ", ", lat, "] }}}}}}");
+            var lat = string.Empty;
+            var lon = string.Empty;
+            if (IsLatLong(location))
+            {
+                var coordinates = location.Split(',');
+                lat = coordinates[0];
+                lon = coordinates[1];
+            }
+            else
+            {
+                // TODO: transform postcode to latlon
+                var coordinates = location.Split(',');
+                lat = coordinates[0];
+                lon = coordinates[1];
+            }
+
+            return string.Concat(
+                @"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """,
+                standardId,
+                @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
+                lon,
+                ", ",
+                lat,
+                "] }}}}}}");
+        }
+
+        private bool IsLatLong(string location)
+        {
+            var index = location.IndexOf(',');
+
+            if (index == -1) return false;
+
+            var coordinates = location.Split(',');
+            var lat = coordinates[0].Trim();
+            var lon = coordinates[1].Trim();
+            double latDouble;
+            double lonDouble;
+
+            return double.TryParse(lat, out latDouble) && double.TryParse(lon, out lonDouble);
         }
     }
 }
