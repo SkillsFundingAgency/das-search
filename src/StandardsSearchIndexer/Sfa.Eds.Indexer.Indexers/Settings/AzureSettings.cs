@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Sfa.Eds.Das.Indexer.Common.Settings
 {
@@ -13,5 +14,9 @@ namespace Sfa.Eds.Das.Indexer.Common.Settings
         public string StandardQueueName => ConfigurationManager.AppSettings["QueueName"];
 
         public string ProviderQueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
+        public string QueueName(Type type)
+        {
+            return ConfigurationManager.AppSettings[type.Name.Replace("IndexerService", string.Empty).Substring(1) + ".QueueName"];
+        }
     }
 }
