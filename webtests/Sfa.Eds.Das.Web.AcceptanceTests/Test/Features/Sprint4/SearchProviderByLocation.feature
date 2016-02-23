@@ -24,7 +24,7 @@ Examples:
 | LatLong               | id |
 | 52.4113623,-1.5256923 | 25 |
 
-
+@ignore
 Scenario Outline: Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by latlong falling on Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box

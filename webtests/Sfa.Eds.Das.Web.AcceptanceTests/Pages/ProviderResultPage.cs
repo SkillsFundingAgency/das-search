@@ -22,7 +22,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
         By providerlist = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
         By providersearchbox = By.XPath(".//*[@id='postcode']");
-        By findProvider = By.XPath(".//*[@id='results']/div[1]/ol/li/div/h2/a");
+        By providerlist1 = By.XPath(".//*[@id='results']/div[1]/ol/li/div/h2");
         
 
         public void verifyProviderResultsPage()
@@ -39,9 +39,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         }
 
-        public void verifyProviderFound(String p0)
+        public void verifyProviderinSearchResults(String p0)
         {
-            Assert.True(isElementPresent(findProvider, p0));
+            Assert.True(isElementPresent(providerlist1, p0));
         }
 
 
