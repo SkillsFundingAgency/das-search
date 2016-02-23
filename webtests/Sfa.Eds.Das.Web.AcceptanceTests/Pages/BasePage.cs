@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using System.Configuration;
 using System.Diagnostics.Eventing;
 using Sfa.Eds.Das.Web.AcceptanceTests.utils;
+using System.Collections.Generic;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
@@ -22,13 +23,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public BasePage()
         {
-         
+
             driver = (IWebDriver)FeatureContext.Current["driver"];
             baseUrl = ConfigurationManager.AppSettings["baseUrl"];
-                     
+
         }
 
-        
+
         public void type(string inputText, By locator)
         {
             find(locator).SendKeys(inputText);
@@ -36,7 +37,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public IWebElement find(By locator)
         {
-                        
+
             // WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
             // wait.Until(ExpectedConditions.ElementIsVisible(locator));
             return driver.FindElement(locator);
@@ -53,14 +54,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void Launch(string pageTitle)
         {
-         driver.Navigate().GoToUrl(baseUrl);
+            driver.Navigate().GoToUrl(baseUrl);
             verifyPage(pageTitle);
         }
-       
+
 
         public void Open(String standard)
         {
-            driver.Navigate().GoToUrl(baseUrl+ "Standard/Detail/" + standard);
+            driver.Navigate().GoToUrl(baseUrl + "Standard/Detail/" + standard);
 
         }
         public void click(By locator)
@@ -68,32 +69,39 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             find(locator).Click();
         }
 
-       
+
         public string getText(By locator)
         {
-           return find(locator).Text;
+            return find(locator).Text;
+
+        }
+
+    //    public bool isElementPresent(By locator, string provider)
+    //    {
+
+    //       
+    //        IList<IWebElement> subelements = driver.FindElements(locator);
+    //        for (int i = 0; i < subelements.Count; i++)
+    //        {
+    //            if (subelements[1].Text == provider)
+    //            {
+    //                Console.Write(subelements[1].Text);
+    //                return true;
+    //            }
+
+    //            else
+    //                return false;
+
+    //        }
+    //    }
+
+    //}
+                
+       
             
-        }
 
-        public bool isElementPresent(By locator,string provider)
-        {
-            try
-            {
-                IWebElement element = find(locator);
-                Console.Write(getText(locator));
-                if (getText(locator).Contains(provider))
-                    return true;
-
-                else { return false; }
-            }
-
-
-            catch (NoSuchElementException)
-            {
-                return false;
-
-            } 
-        }
+           
+        
        
 
         public bool isDisplayed(By locator)
