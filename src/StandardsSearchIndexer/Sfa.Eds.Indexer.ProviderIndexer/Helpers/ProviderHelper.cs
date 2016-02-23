@@ -81,17 +81,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                                 },
                                 ""coordinate"":
                                 {
-                                    ""properties"": 
-                                    {
-                                        ""lat"": 
-                                        {
-                                            ""type"": ""double""
-                                        },
-                                        ""lon"":
-                                        {
-                                            ""type"": ""double""
-                                        }
-                                    }
+                                    ""type"": ""geo_point""
                                 },
                                 ""location"": 
                                 {
@@ -477,11 +467,11 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 provider.VenueName,
                 @""", ""ukPrn"": """,
                 provider.UkPrn,
-                @""", ""coordinate"": {""lat"":",
-                provider.Coordinate.Lat,
-                @", ""lon"":",
+                @""", ""coordinate"": [",
                 provider.Coordinate.Lon,
-                @"},""location"": { ""type"": ""circle"", ""coordinates"": [",
+                ", ",
+                provider.Coordinate.Lat,
+                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
                 provider.Coordinate.Lon,
                 ", ",
                 provider.Coordinate.Lat,
