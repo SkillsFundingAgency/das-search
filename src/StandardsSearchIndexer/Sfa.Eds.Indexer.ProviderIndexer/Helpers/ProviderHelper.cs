@@ -479,7 +479,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 provider.UkPrn,
                 @""", ""coordinate"": {""lat"":",
                 provider.Coordinate.Lat,
-                @""", ""lon"":",
+                @", ""lon"":",
                 provider.Coordinate.Lon,
                 @"},""location"": { ""type"": ""circle"", ""coordinates"": [",
                 provider.Coordinate.Lon,
@@ -501,7 +501,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 try
                 {
                     provider.ProviderId = id;
-                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                    var a = _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
                 }
                 catch (Exception e)
                 {

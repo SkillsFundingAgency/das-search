@@ -86,7 +86,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             _providerHelper.IndexProviders(scheduledDate, providersTest);
 
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 
             var retrievedResult = _elasticClient.Search<Provider>(p => p
                 .Index(indexName)
@@ -118,7 +118,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             _providerHelper.IndexProviders(scheduledDate, providersTest);
 
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 
             var providersCase1 = _elasticClient.Search<Provider>(s => s
                 .Index(indexName)
