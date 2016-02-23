@@ -28,6 +28,7 @@ Examples:
 | Electrician            |
 | car mechanic           |
 | Manager                |
+| Actuarial              |
 
 @ignore
 Scenario Outline: Verify invalid search
