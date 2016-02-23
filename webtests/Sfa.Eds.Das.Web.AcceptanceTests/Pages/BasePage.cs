@@ -82,27 +82,56 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             IList<IWebElement> subelements = driver.FindElements(locator);
             for (int i = 0; i < subelements.Count; i++)
             {
-                Console.Write(subelements[1].Text);
+                
+                //Console.Write(subelements[i].Text);
 
-                if (subelements[1].Text == provider)
+                if (subelements[i].Text == provider)
                 {
-                    Console.Write(subelements[1].Text);
+                    Console.Write("Provider Found " + subelements[i].Text);
                     return true;
 
                 }
                
-                else
-                    return false;
+                
 
             }
             return false;
         }
 
-    
 
 
 
-    public bool isDisplayed(By locator)
+
+        public bool isElementNotPresent(By locator, string provider)
+        {
+
+            IList<IWebElement> subelements = driver.FindElements(locator);
+            for (int i = 0; i < subelements.Count; i++)
+            {
+
+                //Console.Write(subelements[i].Text);
+
+                while(subelements[i].Text != provider)
+                {
+                    Console.Write("Provider not Found " + provider);
+                    return true;
+
+                }
+
+
+
+            }
+            return false;
+        }
+
+
+
+
+
+
+
+
+        public bool isDisplayed(By locator)
         {
             try
             {

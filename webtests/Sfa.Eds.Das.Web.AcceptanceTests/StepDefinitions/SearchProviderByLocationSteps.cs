@@ -87,13 +87,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should not see provider ""(.*)"" in provider results page\.")]
         public void ThenIShouldNotSeeProviderInProviderResultsPage_(string p0)
         {
-            ScenarioContext.Current.Pending();
+            prvdrPage.verifyProviderNotinSearchResults(p0);
         }
         
         [Then(@"I should see provider ""(.*)"" listed in top as nearest training provider\.")]
         public void ThenIShouldSeeProviderListedInTopAsNearestTrainingProvider_(string p0)
         {
-            ScenarioContext.Current.Pending();
+            prvdrPage.verifyProviderinSearchResults(p0);
         }
         
         [Then(@"I should see total of ""(.*)"" providers found\.")]
