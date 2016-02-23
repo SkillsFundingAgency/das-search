@@ -117,11 +117,18 @@ testRunner.Then("I should see provider \"INTEC BUSINESS COLLEGES\" in provider r
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by latlong falling on Provider rad" +
             "ius")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("53.4679071,-0.3699098", "25", null)]
         public virtual void SearchASPIREACHIEVEADVANCELIMITEDProviderByLatlongFallingOnProviderRadius(string latLong, string id, string[] exampleTags)
         {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by latlong falling on Provider rad" +
-                    "ius", exampleTags);
+                    "ius", @__tags);
 #line 28
 this.ScenarioSetup(scenarioInfo);
 #line 29

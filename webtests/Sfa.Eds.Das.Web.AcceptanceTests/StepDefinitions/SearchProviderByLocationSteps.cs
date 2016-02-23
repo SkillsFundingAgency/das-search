@@ -80,8 +80,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see provider ""(.*)"" in provider results page\.")]
         public void ThenIShouldSeeProviderInProviderResultsPage_(string p0)
         {
-          //  prvdrPage.verifyProviderResultsPage();
-            prvdrPage.verifyProviderFound(p0);
+
+            prvdrPage.verifyProviderinSearchResults(p0);
         }
         
         [Then(@"I should not see provider ""(.*)"" in provider results page\.")]

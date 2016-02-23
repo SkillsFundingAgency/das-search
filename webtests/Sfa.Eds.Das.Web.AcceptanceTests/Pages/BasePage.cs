@@ -76,35 +76,33 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         }
 
-    //    public bool isElementPresent(By locator, string provider)
-    //    {
-
-    //       
-    //        IList<IWebElement> subelements = driver.FindElements(locator);
-    //        for (int i = 0; i < subelements.Count; i++)
-    //        {
-    //            if (subelements[1].Text == provider)
-    //            {
-    //                Console.Write(subelements[1].Text);
-    //                return true;
-    //            }
-
-    //            else
-    //                return false;
-
-    //        }
-    //    }
-
-    //}
-                
-       
+        public bool isElementPresent(By locator, string provider)
+        {
             
+            IList<IWebElement> subelements = driver.FindElements(locator);
+            for (int i = 0; i < subelements.Count; i++)
+            {
+                Console.Write(subelements[1].Text);
 
-           
-        
-       
+                if (subelements[1].Text == provider)
+                {
+                    Console.Write(subelements[1].Text);
+                    return true;
 
-        public bool isDisplayed(By locator)
+                }
+               
+                else
+                    return false;
+
+            }
+            return false;
+        }
+
+    
+
+
+
+    public bool isDisplayed(By locator)
         {
             try
             {
