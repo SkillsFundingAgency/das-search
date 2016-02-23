@@ -113,6 +113,8 @@
   <ItemGroup>
     <Compile Include="DependencyResolution\IndexerRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
+    <Compile Include="IIndexerJob.cs" />
+    <Compile Include="IndexerJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
       <AutoGen>True</AutoGen>
