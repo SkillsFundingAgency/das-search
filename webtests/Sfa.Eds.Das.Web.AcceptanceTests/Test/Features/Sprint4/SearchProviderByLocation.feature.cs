@@ -88,11 +88,18 @@ testRunner.Then("I should list of providers on provider search result page.", ((
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Provider INTEC BUSINESS COLLEGES searchable when entered latlong with in Provider" +
             " radius")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("52.4113623,-1.5256923", "25", null)]
         public virtual void ProviderINTECBUSINESSCOLLEGESSearchableWhenEnteredLatlongWithInProviderRadius(string latLong, string id, string[] exampleTags)
         {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider INTEC BUSINESS COLLEGES searchable when entered latlong with in Provider" +
-                    " radius", exampleTags);
+                    " radius", @__tags);
 #line 18
 this.ScenarioSetup(scenarioInfo);
 #line 19
@@ -131,10 +138,17 @@ testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in pro
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Provider by latlong falling inside Provider radius")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("53.5152058,-0.5601394", "25", null)]
         public virtual void SearchProviderByLatlongFallingInsideProviderRadius(string latLong, string id, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by latlong falling inside Provider radius", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by latlong falling inside Provider radius", @__tags);
 #line 38
 this.ScenarioSetup(scenarioInfo);
 #line 39
@@ -154,10 +168,17 @@ testRunner.And("I should see provider \"Millbrook management services limited\" 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Provider by latlong outside  Provider radius 60 miles")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("53.5117482,-0.3669604", "25", null)]
         public virtual void SearchProviderByLatlongOutsideProviderRadius60Miles(string latLong, string id, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by latlong outside  Provider radius 60 miles", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by latlong outside  Provider radius 60 miles", @__tags);
 #line 50
 this.ScenarioSetup(scenarioInfo);
 #line 51
@@ -178,10 +199,17 @@ testRunner.And("I should see provider \"Millbrook management services limited\" 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Provider by latlong falling inside two provider radius.")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("53.5152058,-0.5601394", "25", null)]
         public virtual void SearchProviderByLatlongFallingInsideTwoProviderRadius_(string latLong, string id, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by latlong falling inside two provider radius.", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by latlong falling inside two provider radius.", @__tags);
 #line 61
 this.ScenarioSetup(scenarioInfo);
 #line 62
@@ -202,10 +230,17 @@ testRunner.And("I should see provider \"Millbrook management services limited\" 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search results More than on provider returned in search result page.")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("52.7365701,-1.0496998", null)]
         public virtual void SearchResultsMoreThanOnProviderReturnedInSearchResultPage_(string latLong, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search results More than on provider returned in search result page.", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search results More than on provider returned in search result page.", @__tags);
 #line 74
 this.ScenarioSetup(scenarioInfo);
 #line 75
