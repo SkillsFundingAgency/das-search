@@ -1,10 +1,10 @@
-﻿Feature: SearchProvider
+﻿Feature: SearchProvider-end to end test
 	In order to choose from provider list
 	As an employer
 	I want to be able to search all providers for a given standard
 
 @regression
-Scenario Outline:Show available providers for given standard
+Scenario Outline:Show available providers for given standard -End to End Test
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	And I click on search button

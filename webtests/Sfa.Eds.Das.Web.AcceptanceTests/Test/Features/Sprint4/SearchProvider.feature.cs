@@ -19,8 +19,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SearchProvider")]
-    public partial class SearchProviderFeature
+    [NUnit.Framework.DescriptionAttribute("SearchProvider-end to end test")]
+    public partial class SearchProvider_EndToEndTestFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -32,8 +32,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SearchProvider", "In order to choose from provider list\nAs an employer\nI want to be able to search " +
-                    "all providers for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SearchProvider-end to end test", "In order to choose from provider list\r\nAs an employer\r\nI want to be able to searc" +
+                    "h all providers for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,11 +66,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Show available providers for given standard")]
+        [NUnit.Framework.DescriptionAttribute("Show available providers for given standard -End to End Test")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("Product Design and Development Engineer", null)]
         [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", null)]
-        public virtual void ShowAvailableProvidersForGivenStandard(string jOBROLE, string[] exampleTags)
+        public virtual void ShowAvailableProvidersForGivenStandard_EndToEndTest(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -78,7 +78,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show available providers for given standard", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show available providers for given standard -End to End Test", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
