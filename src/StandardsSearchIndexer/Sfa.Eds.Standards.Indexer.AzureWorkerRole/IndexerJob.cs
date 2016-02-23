@@ -10,7 +10,6 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     {
         private readonly IGenericControlQueueConsumer _controlQueueConsumer;
 
-
         public IndexerJob(IGenericControlQueueConsumer controlQueueConsumer)
         {
             _controlQueueConsumer = controlQueueConsumer;
@@ -20,7 +19,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
         {
             var tasks = new List<Task>
             {
-                _controlQueueConsumer.CheckMessage<IStandardIndexerService>(),
+                //_controlQueueConsumer.CheckMessage<IStandardIndexerService>(),
                 _controlQueueConsumer.CheckMessage<IProviderIndexerService>()
             };
 

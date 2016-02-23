@@ -34,7 +34,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
             {
                 try
                 {
-                    var queue = _cloudQueueService.GetQueueReference(_azureSettings.ConnectionString, _azureSettings.QueueName);
+                    var queue = _cloudQueueService.GetQueueReference(_azureSettings.ConnectionString, _azureSettings.ProviderQueueName);
                     var cloudQueueMessages = queue.GetMessages(10);
                     var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
 
