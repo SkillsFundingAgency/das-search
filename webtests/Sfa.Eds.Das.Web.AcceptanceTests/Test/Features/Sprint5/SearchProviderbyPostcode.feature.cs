@@ -67,9 +67,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint5
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate post code field mandatory")]
+        [NUnit.Framework.IgnoreAttribute()]
         public virtual void ValidatePostCodeFieldMandatory()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate post code field mandatory", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate post code field mandatory", new string[] {
+                        "ignore"});
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -86,13 +88,20 @@ testRunner.Then("I should see error message \"Please enter a valid postcode\"", 
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate post code search inside provider radius.")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.TestCaseAttribute("CV1 2wt", null)]
         [NUnit.Framework.TestCaseAttribute("CV6 1PT", null)]
         [NUnit.Framework.TestCaseAttribute("CV1 2wt", null)]
         [NUnit.Framework.TestCaseAttribute("CV6 1PT", null)]
         public virtual void ValidatePostCodeSearchInsideProviderRadius_(string postcode, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate post code search inside provider radius.", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate post code search inside provider radius.", @__tags);
 #line 13
 this.ScenarioSetup(scenarioInfo);
 #line 14
@@ -109,9 +118,11 @@ testRunner.Then("I should list of providers on result page who operates within e
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate partial post code search inside provider radius")]
+        [NUnit.Framework.IgnoreAttribute()]
         public virtual void ValidatePartialPostCodeSearchInsideProviderRadius()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate partial post code search inside provider radius", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate partial post code search inside provider radius", new string[] {
+                        "ignore"});
 #line 23
 this.ScenarioSetup(scenarioInfo);
 #line 24
