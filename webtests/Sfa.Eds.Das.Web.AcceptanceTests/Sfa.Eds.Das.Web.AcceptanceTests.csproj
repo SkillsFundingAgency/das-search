@@ -86,15 +86,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="Test\Features\Sprint4\ProviderSearchbyLatLong.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProviderSearchbyLatLong.feature</DependentUpon>
-    </Compile>
     <Compile Include="Test\Features\Sprint4\SearchProvider.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProvider.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint4\SearchProviderByLocation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchProviderByLocation.feature</DependentUpon>
     </Compile>
     <Compile Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature.cs">
       <AutoGen>True</AutoGen>
@@ -116,13 +116,13 @@
       <LastGenOutput>StandardSearch.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="Test\Features\Sprint4\ProviderSearchbyLatLong.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ProviderSearchbyLatLong3.feature.cs</LastGenOutput>
-    </None>
     <None Include="Test\Features\Sprint4\SearchProvider.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint4\SearchProviderByLocation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProviderByLocation.feature.cs</LastGenOutput>
     </None>
     <None Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
