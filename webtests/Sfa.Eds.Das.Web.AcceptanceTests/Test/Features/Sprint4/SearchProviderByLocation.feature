@@ -14,7 +14,7 @@ Examples:
 | 52.4113623,-1.5256923 | 25 |
 
 
-
+@ignore
 Scenario Outline:Provider INTEC BUSINESS COLLEGES searchable when entered latlong with in Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
@@ -34,7 +34,7 @@ Examples:
 | LatLong              | id |
 | 53.4679071,-0.3699098 | 25 |
 
-
+@ignore
 Scenario Outline:Search Provider by latlong falling inside Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
@@ -45,7 +45,7 @@ Examples:
 | LatLong               | id |
 | 53.5152058,-0.5601394 | 25 |
 
-
+@ignore
 #search for by location(latlong or postcode) which falls outside 60 miles provider radius
 Scenario Outline: Search Provider by latlong outside  Provider radius 60 miles
 Given I am on Standard '<id>' detail page
@@ -57,7 +57,7 @@ Examples:
 | LatLong               | id |
 | 53.5117482,-0.3669604 | 25 |
 
-
+@ignore
 Scenario Outline: Search Provider by latlong falling inside two provider radius.
 Given I have entered '<LatLong>' which is inside radius of two providers.
 When I search Search for provider
@@ -68,7 +68,7 @@ Examples:
 | LatLong               | id |
 | 53.5152058,-0.5601394 | 25 |
 
-
+@ignore
 #Provider "INTEC BUSINESS COLLEGES" in CV21 2BB with radius of 35 miles
 #Provider "COVENTRY & WARWICKSHIRE CHAMBER TRAINING (CWT)" in CV32 4JE with radius of 40 miles
 Scenario Outline: Search results More than on provider returned in search result page.
