@@ -79,7 +79,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                                 {
                                     ""type"": ""long""
                                 },
-                                ""coordinate"":
+                                ""locationPoint"":
                                 {
                                     ""type"": ""geo_point""
                                 },
@@ -467,7 +467,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 provider.VenueName,
                 @""", ""ukPrn"": """,
                 provider.UkPrn,
-                @""", ""coordinate"": [",
+                @""", ""locationPoint"": [",
                 provider.Coordinate.Lon,
                 ", ",
                 provider.Coordinate.Lat,
