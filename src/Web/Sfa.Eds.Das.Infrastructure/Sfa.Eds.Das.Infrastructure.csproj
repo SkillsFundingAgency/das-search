@@ -67,6 +67,8 @@
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
     <Compile Include="Elasticsearch\StandardRepository.cs" />
+    <Compile Include="Location\ILocator.cs" />
+    <Compile Include="Location\PostCodesIOLocator.cs" />
     <Compile Include="Logging\Log4NetLogger.cs" />
     <Compile Include="Logging\Log4NetSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
