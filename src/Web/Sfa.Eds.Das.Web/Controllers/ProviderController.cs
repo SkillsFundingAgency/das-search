@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Web.Controllers
+﻿using System.Threading.Tasks;
+
+namespace Sfa.Eds.Das.Web.Controllers
 {
     using System;
     using System.Globalization;
@@ -26,9 +28,9 @@
         }
 
         [HttpGet]
-        public ActionResult SearchResults(ProviderSearchCriteria criteria)
+        public async Task<ActionResult> SearchResults(ProviderSearchCriteria criteria)
         {
-            var searchResults = _providerSearchService.SearchByLocation(criteria.StandardId, criteria.Skip, criteria.Take, criteria.PostCode);
+            var searchResults = await _providerSearchService.SearchByLocation(criteria.StandardId, criteria.Skip, criteria.Take, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 

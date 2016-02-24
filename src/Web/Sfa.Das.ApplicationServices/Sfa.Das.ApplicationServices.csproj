@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="IStandardSearchService.cs" />
     <Compile Include="ISearchProvider.cs" />
+    <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultsItem.cs" />
     <Compile Include="Models\StandardSearchResults.cs" />
