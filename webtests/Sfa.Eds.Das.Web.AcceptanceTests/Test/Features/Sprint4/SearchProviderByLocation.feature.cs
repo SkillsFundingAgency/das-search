@@ -102,7 +102,7 @@ testRunner.And(string.Format("I enter \'{0}\' in provider search box", latLong),
 #line 21
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 22
-testRunner.Then("I should see provider \"INTEC BUSINESS COLLEGES\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see provider \"intec business colleges\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -124,7 +124,7 @@ testRunner.And(string.Format("I enter \'{0}\' in provider search box", latLong),
 #line 31
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 32
-testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see provider \"aspire archive advance limited\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -144,9 +144,9 @@ testRunner.And(string.Format("I enter \'{0}\' in provider search box", latLong),
 #line 41
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 42
-testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see provider \"aspire archive advance limited\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 43
-testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" in provider results" +
+testRunner.And("I should see provider \"millbrook management services limited\" in provider results" +
                     " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -167,10 +167,10 @@ testRunner.And(string.Format("I enter \'{0}\' in provider search box", latLong),
 #line 53
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 54
-testRunner.Then("I should not see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results pa" +
+testRunner.Then("I should not see provider \"aspire archive advance limited\" in provider results pa" +
                     "ge.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 55
-testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" in provider results" +
+testRunner.And("I should see provider \"millbrook management services limited\" in provider results" +
                     " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -198,12 +198,12 @@ testRunner.And(string.Format("I enter \'{0}\' in provider search box", latLong),
 #line 64
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 65
-testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I should see provider \"aspire archive advance limited\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 66
-testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" in provider results" +
+testRunner.And("I should see provider \"millbrook management services limited\" in provider results" +
                     " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
-testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" listed in top as ne" +
+testRunner.And("I should see provider \"millbrook management services limited\" listed in top as ne" +
                     "arest training provider.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
