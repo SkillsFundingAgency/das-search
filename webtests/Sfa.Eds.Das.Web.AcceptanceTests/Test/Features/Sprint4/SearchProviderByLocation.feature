@@ -57,7 +57,7 @@ Examples:
 | LatLong               | id |
 | 53.5117482,-0.3669604 | 25 |
 
-
+@ignore
 Scenario Outline: Search Provider by latlong falling inside two provider radius.
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
