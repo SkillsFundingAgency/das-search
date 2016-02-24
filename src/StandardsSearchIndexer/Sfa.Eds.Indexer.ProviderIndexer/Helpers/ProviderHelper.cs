@@ -79,6 +79,10 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                                 {
                                     ""type"": ""long""
                                 },
+                                ""locationPoint"":
+                                {
+                                    ""type"": ""geo_point""
+                                },
                                 ""location"": 
                                 {
                                     ""type"": ""geo_shape""
@@ -463,7 +467,11 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 provider.VenueName,
                 @""", ""ukPrn"": """,
                 provider.UkPrn,
-                @""",""location"": { ""type"": ""circle"", ""coordinates"": [",
+                @""", ""locationPoint"": [",
+                provider.Coordinate.Lon,
+                ", ",
+                provider.Coordinate.Lat,
+                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
                 provider.Coordinate.Lon,
                 ", ",
                 provider.Coordinate.Lat,
@@ -483,7 +491,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 try
                 {
                     provider.ProviderId = id;
-                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                    var a = _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
                 }
                 catch (Exception e)
                 {

@@ -21,16 +21,16 @@ Scenario Outline:Search By title
 	Then I should see matching '<title>' standards on result page
 	Examples: 
 	| title                  |
-	| Actuarial Technician   |
-	| Financial Adviser      |
+	| actuarial technician   |
+	| financial adviser      |
 	| software engineer      |
 	| car mechanic           |
 	| manufacturing engineer |
-	| Manager                |
-	| Legal Services         |
-	| Designer               |
-	| Dental nurse           |
-	| Electrician            |
+	| manager                |
+	| legal services         |
+	| designer               |
+	| dental nurse           |
+	| electrician            |
 
 @ignore
 Scenario: Standards searched to display level informaiton

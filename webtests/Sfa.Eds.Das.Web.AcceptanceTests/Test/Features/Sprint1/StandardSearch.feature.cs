@@ -95,6 +95,7 @@ testRunner.Then("I should be able to see home page with title as \"Home Page - E
         [NUnit.Framework.TestCaseAttribute("Electrician", null)]
         [NUnit.Framework.TestCaseAttribute("car mechanic", null)]
         [NUnit.Framework.TestCaseAttribute("Manager", null)]
+        [NUnit.Framework.TestCaseAttribute("Actuarial", null)]
         public virtual void SearchStandardByKeyword(string jOBROLE, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Standard by keyword", exampleTags);
@@ -126,15 +127,15 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify invalid search", @__tags);
-#line 33
-this.ScenarioSetup(scenarioInfo);
 #line 34
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 35
-testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 36
-testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 37
+testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
 testRunner.Then("I should see message \"Total results found: 0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -155,15 +156,15 @@ testRunner.Then("I should see message \"Total results found: 0\"", ((string)(nul
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate result count", @__tags);
-#line 44
-this.ScenarioSetup(scenarioInfo);
 #line 45
- testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 46
- testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
- testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 48
+ testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 49
  testRunner.Then("I should see standards count on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -183,17 +184,17 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search result Page to have best match", @__tags);
-#line 57
-this.ScenarioSetup(scenarioInfo);
 #line 58
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 59
-testRunner.When(string.Format("I enter keyword \'{0}\'", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 60
-testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When(string.Format("I enter keyword \'{0}\'", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 61
-testRunner.Then("I should result search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
+testRunner.Then("I should result search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 63
 testRunner.And(string.Format("it should list most best match \'{0}\' on top of the search list", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

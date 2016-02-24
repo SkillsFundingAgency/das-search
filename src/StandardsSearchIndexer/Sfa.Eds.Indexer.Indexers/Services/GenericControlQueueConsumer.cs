@@ -1,40 +1,40 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
 using Sfa.Eds.Das.Indexer.Common.Settings;
-using Sfa.Eds.Das.StandardIndexer.Services;
-using Sfa.Eds.Das.StandardIndexer.Settings;
+using StructureMap;
 
-namespace Sfa.Eds.Das.StandardIndexer.Consumers
+namespace Sfa.Eds.Das.Indexer.Common.Services
 {
-    public class StandardControlQueueConsumer : IStandardControlQueueConsumer
+    public class GenericControlQueueConsumer : IGenericControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ICloudQueueService _cloudQueueService;
+        private readonly IContainer _container;
 
         private readonly IAzureSettings _azureSettings;
-        private readonly IStandardIndexerService _standardIndexerService;
 
-        public StandardControlQueueConsumer(
-            IStandardIndexerService standardIndexerService,
+        public GenericControlQueueConsumer(
             IAzureSettings azureSettings,
-            ICloudQueueService cloudQueueService)
+            ICloudQueueService cloudQueueService,
+            IContainer container)
         {
             _azureSettings = azureSettings;
             _cloudQueueService = cloudQueueService;
-            _standardIndexerService = standardIndexerService;
+            _container = container;
         }
 
-        public Task CheckMessage()
+        public Task CheckMessage<T>() where T : IIndexerService
         {
+            var indexerService = _container.GetInstance<T>();
             return Task.Run(() =>
             {
                 try
                 {
-                    var queue = _cloudQueueService.GetQueueReference(_azureSettings.ConnectionString, _azureSettings.QueueName);
+                    var queue = _cloudQueueService.GetQueueReference(_azureSettings.ConnectionString, _azureSettings.QueueName(typeof(T)));
                     var cloudQueueMessages = queue.GetMessages(10);
                     var messages = cloudQueueMessages.OrderByDescending(x => x.InsertionTime);
 
@@ -43,7 +43,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Consumers
                         var message = messages.FirstOrDefault();
                         if (message != null)
                         {
-                            _standardIndexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                            indexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
                         }
                     }
 

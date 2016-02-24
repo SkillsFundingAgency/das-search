@@ -6,6 +6,8 @@ namespace Sfa.Eds.Das.Indexer.Common.Settings
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
+        public string WorkerRolePauseTime => ConfigurationManager.AppSettings["WorkerRolePauseTime"];
+
         public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 
         public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];

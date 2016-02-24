@@ -1,8 +1,13 @@
-﻿using Nest;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Nest;
 using Sfa.Das.ApplicationServices;
 using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
+using Sfa.Eds.Das.Infrastructure.Location;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
@@ -15,13 +20,15 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private readonly ILog _logger;
         private readonly IStandardRepository _standardRepository;
         private readonly IConfigurationSettings _applicationSettings;
+        private readonly ILocator _locatorService;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings, ILocator locatorService)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
             _standardRepository = standardRepository;
             _applicationSettings = applicationSettings;
+            _locatorService = locatorService;
         }
 
         public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
@@ -40,49 +47,19 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        public ProviderSearchResults SearchByLatLon(string standardId, int skip, int take, string postcode = null)
+        public async Task<ProviderSearchResults> SearchByLocation(string standardId, int skip, int take, string location = null)
         {
-            var client = this._elasticsearchClientFactory.Create();
-
-            Nest.ISearchResponse<ProviderSearchResultsItem> results;
-
-            if (string.IsNullOrEmpty(postcode))
+            if (string.IsNullOrEmpty(location))
             {
-                results = client
-                    .Search<ProviderSearchResultsItem>(s => s
-                        .Index(_applicationSettings.ProviderIndexAlias)
-                        .MatchAll()
-                        .Filter(f => f
-                            .Term(y => y.StandardsId, standardId)));
-                if (results.ConnectionStatus.HttpStatusCode != 200)
+                return new ProviderSearchResults
                 {
-                    _logger.Error("1. Something failed");
-                    _logger.Error("2. " + _applicationSettings.ProviderIndexAlias);
-                    _logger.Error("3. " + results.RequestInformation.RequestUrl);
-                    _logger.Error("4. " + results.RequestInformation);
-                }
-            }
-            else
-            {
-                var qryStr = CreateRawQuery(standardId, postcode);
-
-                results = client
-                    .Search<ProviderSearchResultsItem>(s => s
-                    .Index(_applicationSettings.ProviderIndexAlias)
-                    .QueryRaw(qryStr));
-                if (results.ConnectionStatus.HttpStatusCode != 200)
-                {
-                    _logger.Error("1. Something failed");
-                    _logger.Error("2. " + _applicationSettings.ProviderIndexAlias);
-                    _logger.Error("3. " + qryStr);
-                    _logger.Error("4. " + results.RequestInformation.RequestUrl);
-                    _logger.Error("5. " + results.RequestInformation);
-                }
+                    HasError = true
+                };
             }
 
-            var documents = results.Documents.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
+            var client = _elasticsearchClientFactory.Create();
 
-            string standardName = string.Empty;
+            var standardName = string.Empty;
 
             var standard = _standardRepository.GetById(standardId);
 
@@ -91,23 +68,73 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 standardName = standard.Title;
             }
 
-            return new ProviderSearchResults
+            ISearchResponse<ProviderSearchResultsItem> results = new SearchResponse<ProviderSearchResultsItem>();
+
+            if (string.IsNullOrEmpty(location))
+            {
+                results = client
+                    .Search<ProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .MatchAll()
+                        .Filter(f => f
+                            .Term(y => y.StandardsId, standardId)));
+            }
+            else
+            {
+                var coordinates = await _locatorService.GetLatLongFromPostCode(location);
+                if (coordinates.Lat != 0 && coordinates.Lon != 0)
+                {
+                    var qryStr = CreateRawQuery(standardId, coordinates);
+
+                    results = client
+                        .Search<ProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .QueryRaw(qryStr)
+                        .SortGeoDistance(g =>
+                        {
+                            g.PinTo(coordinates.Lat, coordinates.Lon)
+                                .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
+                            return g;
+                        }));
+                }
+            }
+
+            var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
+            {
+                ProviderName = hit.Source.ProviderName, PostCode = hit.Source.PostCode, UkPrn = hit.Source.UkPrn, VenueName = hit.Source.VenueName, StandardsId = hit.Source.StandardsId, Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+            }).ToList();
+
+            var result = new ProviderSearchResults
             {
                 TotalResults = results.Total,
                 StandardId = int.Parse(standardId),
                 StandardName = standardName,
-                Results = documents,
-                HasError = results.ConnectionStatus.HttpStatusCode != 200
+                PostCode = location,
+                Results = documents
             };
+
+            if (results.ConnectionStatus != null)
+            {
+                result.HasError = results.ConnectionStatus.HttpStatusCode != 200;
+            }
+            else
+            {
+                result.HasError = true;
+            }
+
+            return result;
         }
 
-        private string CreateRawQuery(string standardId, string postcode)
+        private string CreateRawQuery(string standardId, Coordinate location)
         {
-            // TODO: transform postcode to latlon
-            var coordinates = postcode.Split(',');
-            var lat = coordinates[0];
-            var lon = coordinates[1];
-            return string.Concat(@"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """, standardId, @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [", lon, ", ", lat, "] }}}}}}");
+            return string.Concat(
+                @"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """,
+                standardId,
+                @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
+                location.Lon,
+                ", ",
+                location.Lat,
+                "] }}}}}}");
         }
     }
 }

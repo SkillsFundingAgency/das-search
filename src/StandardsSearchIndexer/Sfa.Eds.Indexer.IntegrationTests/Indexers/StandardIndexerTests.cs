@@ -82,7 +82,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             await _standardHelper.IndexStandards(scheduledDate, standardsTest);
 
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 
             var retrievedResult = _elasticClient.Search<StandardDocument>(p => p
                 .Index(indexName)

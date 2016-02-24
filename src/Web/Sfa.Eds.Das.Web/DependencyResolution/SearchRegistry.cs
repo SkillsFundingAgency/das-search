@@ -1,3 +1,5 @@
+using Sfa.Eds.Das.Infrastructure.Location;
+
 namespace Sfa.Eds.Das.Web.DependencyResolution
 {
     using log4net;
@@ -24,6 +26,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
 
             // New infrastructure
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
+            For<ILocator>().Use<PostCodesIOLocator>();
 
             For<IStandardSearchService>().Use<StandardSearchService>();
             For<IStandardRepository>().Use<StandardRepository>();

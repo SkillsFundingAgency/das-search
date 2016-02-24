@@ -138,7 +138,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 
         public async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
         {
-            return (await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
+            return (await _blobStorageHelper.ReadAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
         }
 
         public IEnumerable<JsonMetadataObject> GetStandardsFromGit()

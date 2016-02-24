@@ -19,30 +19,25 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static ICommonSettings _commonSettings;
+        private readonly ICloudBlobClientWrapper _client;
 
-        private readonly CloudStorageAccount _storageAccount;
-
-        public BlobStorageHelper(ICommonSettings commonSettings)
+        public BlobStorageHelper(ICloudBlobClientWrapper client)
         {
-            _commonSettings = commonSettings;
-            var storageCredentials = new StorageCredentials(_commonSettings.StorageAccountName, _commonSettings.StorageAccountKey);
-            _storageAccount = new CloudStorageAccount(storageCredentials, true);
+            _client = client;
         }
 
-        public async Task<List<JsonMetadataObject>> ReadStandardsAsync(string containerName)
+        public async Task<List<JsonMetadataObject>> ReadAsync(string containerName)
         {
-            var standardList = new List<JsonMetadataObject>();
-
-            var cloudBlobClient = _storageAccount.CreateCloudBlobClient();
+            var jsonList = new List<JsonMetadataObject>();
 
             // Retrieve reference to a previously created container.
-            var container = cloudBlobClient.GetContainerReference(containerName);
+            var container = _client.GetContainerReference(containerName);
             await container.CreateIfNotExistsAsync();
 
             try
             {
-                foreach (var blob in container.ListBlobs(null, false).OfType<CloudBlockBlob>())
+                var elements = container.ListBlobs(null, false);
+                foreach (var blob in elements.OfType<ICloudBlob>())
                 {
                     string text;
                     using (var memoryStream = new MemoryStream())
@@ -51,7 +46,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
                         text = Encoding.UTF8.GetString(memoryStream.ToArray());
                     }
 
-                    standardList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
+                    jsonList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
                 }
             }
             catch (Exception e)
@@ -59,15 +54,13 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
                 Log.Error("Error reading standards from Azure: " + e.Message);
             }
 
-            return standardList;
+            return jsonList;
         }
 
         public async Task<byte[]> ReadStandardPdfAsync(string containerName, string fileName)
         {
-            var cloudBlobClient = _storageAccount.CreateCloudBlobClient();
-
             // Retrieve reference to a previously created container.
-            var container = cloudBlobClient.GetContainerReference(containerName);
+            var container = _client.GetContainerReference(containerName);
             await container.CreateIfNotExistsAsync();
 
             // Retrieve reference to a blob named "myblob.txt"
@@ -86,36 +79,11 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
             return fileContent;
         }
 
-        public async Task UploadStandardAsync(string containerName, string fileName, string serializedStandard)
-        {
-            try
-            {
-                var cloudBlobClient = _storageAccount.CreateCloudBlobClient();
-
-                var cloudBlobContainer = cloudBlobClient.GetContainerReference(containerName);
-
-                await cloudBlobContainer.CreateIfNotExistsAsync();
-
-                var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(fileName);
-
-                using (var fileStream = GenerateStreamFromString(serializedStandard))
-                {
-                    cloudBlockBlob.UploadFromStream(fileStream);
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error("Error uploading standards to Azure: " + e.Message);
-            }
-        }
-
         public async Task UploadPdfFromUrl(string containerName, string fileName, string url)
         {
             try
             {
-                var cloudBlobClient = _storageAccount.CreateCloudBlobClient();
-
-                var cloudBlobContainer = cloudBlobClient.GetContainerReference(containerName);
+                var cloudBlobContainer = _client.GetContainerReference(containerName);
 
                 await cloudBlobContainer.CreateIfNotExistsAsync();
 
@@ -148,16 +116,6 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
             {
                 Log.Error("Error uploading standards pdfs to Azure: " + e.Message);
             }
-        }
-
-        public Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
         }
     }
 }

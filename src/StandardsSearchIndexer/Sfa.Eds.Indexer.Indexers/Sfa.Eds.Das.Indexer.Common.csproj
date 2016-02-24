@@ -68,9 +68,6 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sfa.Eds.Indexer.Settings">
-      <HintPath>..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\bin\Debug\Sfa.Eds.Indexer.Settings.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -104,8 +101,10 @@
     <Compile Include="DependencyResolution\CommonRegistry.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
-    <Compile Include="Helpers\IIndexerScheduler.cs" />
-    <Compile Include="Helpers\IndexerScheduler.cs" />
+    <Compile Include="Helpers\CloudBlobClientWrapper.cs" />
+    <Compile Include="Helpers\CloudBlobContainerWrapper.cs" />
+    <Compile Include="Helpers\ICloudBlobClientWrapper.cs" />
+    <Compile Include="Helpers\ICloudBlobContainerWrapper.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
@@ -113,6 +112,9 @@
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GenericControlQueueConsumer.cs" />
+    <Compile Include="Services\IIndexerService.cs" />
+    <Compile Include="Services\IGenericControlQueueConsumer.cs" />
     <Compile Include="Settings\IAzureSettings.cs" />
     <Compile Include="Settings\AzureSettings.cs" />
     <Compile Include="Settings\ICommonSettings.cs" />

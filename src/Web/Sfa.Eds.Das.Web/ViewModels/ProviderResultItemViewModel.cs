@@ -7,5 +7,7 @@
         public string ProviderName { get; set; }
 
         public string PostCode { get; set; }
+
+        public double Distance { get; set; }
     }
 }

@@ -6,7 +6,11 @@ using TechTalk.SpecFlow;
 namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 {
 
-
+    /// <summary>
+    /// Purpose of this Step definition class is to 
+    /// Create and maintain all step definitions related Standard search functionality.
+    /// Any change to business features under Standard search can be modified here.
+    /// </summary>
 
     [Binding]
     
@@ -15,17 +19,24 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
 
 
+
         SearchPage srchPage;
+        public StandardsSearchSteps()
+        {
+           
+            srchPage = new SearchPage();
+        }
         
+
 
         [Given(@"I am on Search landing page")]
         public void GivenIAmOnSearchLandingPage()
         {
 
 
-            srchPage = new SearchPage();
+           // srchPage = new SearchPage();
 
-            srchPage.launchLandingPage();
+           srchPage.launchLandingPage();
 
 
 
@@ -37,9 +48,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [When(@"I am on Search landing page")]
         public void WhenIAmOnSearchLandingPage()
         {
-            srchPage = new SearchPage();
+           // srchPage = new SearchPage();
 
-            srchPage.launchLandingPage();
+           srchPage.launchLandingPage();
         }
 
 
@@ -50,6 +61,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
             srchPage.SearchKeyword(p0);
 
+        }
+
+        [Given(@"I click on search button")]
+        public void GivenIClickOnSearchButton()
+        {
+            srchPage.clickSearchBox();
         }
 
         [When(@"I click on search button")]

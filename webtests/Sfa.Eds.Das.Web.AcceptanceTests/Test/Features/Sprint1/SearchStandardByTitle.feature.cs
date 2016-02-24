@@ -95,16 +95,16 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search By title")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
-        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
+        [NUnit.Framework.TestCaseAttribute("actuarial technician", null)]
+        [NUnit.Framework.TestCaseAttribute("financial adviser", null)]
         [NUnit.Framework.TestCaseAttribute("software engineer", null)]
         [NUnit.Framework.TestCaseAttribute("car mechanic", null)]
         [NUnit.Framework.TestCaseAttribute("manufacturing engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("Manager", null)]
-        [NUnit.Framework.TestCaseAttribute("Legal Services", null)]
-        [NUnit.Framework.TestCaseAttribute("Designer", null)]
-        [NUnit.Framework.TestCaseAttribute("Dental nurse", null)]
-        [NUnit.Framework.TestCaseAttribute("Electrician", null)]
+        [NUnit.Framework.TestCaseAttribute("manager", null)]
+        [NUnit.Framework.TestCaseAttribute("legal services", null)]
+        [NUnit.Framework.TestCaseAttribute("designer", null)]
+        [NUnit.Framework.TestCaseAttribute("dental nurse", null)]
+        [NUnit.Framework.TestCaseAttribute("electrician", null)]
         public virtual void SearchByTitle(string title, string[] exampleTags)
         {
             string[] @__tags = new string[] {

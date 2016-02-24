@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Sfa.Eds.Das.Indexer.Common.Settings
 {
@@ -10,6 +11,16 @@ namespace Sfa.Eds.Das.Indexer.Common.Settings
 
         public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
 
-        public string QueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
+        public string QueueName(Type type)
+        {
+            var name = type.Name.Replace("IndexerService", string.Empty).Substring(1) + ".QueueName";
+            var setting = ConfigurationManager.AppSettings[name];
+            if (setting != null)
+            {
+                return setting;
+            }
+
+            throw new ArgumentException("setting '" + name + "' not found");
+        }
     }
 }

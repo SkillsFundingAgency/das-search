@@ -24,8 +24,16 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
     [Binding]
     public sealed class Hooks
     {
+        /// <summary>
+        ///  Purupse of this Hooks class is to 
+        ///  Maintain shared objects across the feature scenarios
+        ///  Declare any standard actions required to run pre and post scneario and feature
+        ///  Declare and instantiate driver object which is shared across all features.
+        /// </summary>
+
+
         static IWebDriver localDriver;
-        static RemoteWebDriver driver;
+        static RemoteWebDriver driver; // used to run test on saucelabs or browserstack tool.
         //load from app.config
         static string host = ConfigurationManager.AppSettings["host"];
         static string baseurl = ConfigurationManager.AppSettings["baseUrl"];
@@ -51,28 +59,41 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             {
                 Console.Write("#####################  Feature Run- Started  ######################");
                 Console.Write("Feature : " + FeatureContext.Current.FeatureInfo.Title);
-                //localDriver = new FirefoxDriver();
-                //localDriver.Manage().Window.Maximize();
-                if (testExecution == "headless")
+               
+                if (testExecution == "headless") // headlessrun is performed on deployment server.
                 {
                     localDriver = new PhantomJSDriver();
                     FeatureContext.Current["driver"] = localDriver;
                 }
                 else
                 {
+
+                                       
                     localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
                     FeatureContext.Current["driver"] = localDriver;
+                    localDriver.Manage().Window.Maximize();
+
+                    
                 }
 
 
             }
 
+            /*
+           Tests can be run on below devices available on browserstack tool. 
+            Android - Samsung Galaxy S5,Google Nexus 5,Samsung Galaxy Tab 4 10.1
+            IOS-iPhone 6S Plus,iPhone 6S,iPad Air,iPhone 5S
+             
+
+            */
+
             else if (host == "browserstack")
             {
                 DesiredCapabilities desiredCap = new DesiredCapabilities();
-                desiredCap.SetCapability("platform", "MAC");
-                desiredCap.SetCapability("browserName", "iPhone");
-                desiredCap.SetCapability("device", "iPad Air");
+                desiredCap.SetCapability("platform", "android");// these values will be moved to app config.
+                desiredCap.SetCapability("browserName", "Android");
+                desiredCap.SetCapability("device", "Samsung Galaxy Tab 4 10.1");
+                desiredCap.SetCapability("browserVersion", "4.4");
                 desiredCap.SetCapability("browserstack.key", browserStackKey);
                 desiredCap.SetCapability("browserstack.user", browserStacUser);
                 desiredCap.SetCapability("browserstack.debug", "true");
@@ -80,31 +101,29 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 FeatureContext.Current["driver"] = driver;
 
             }
-        
-            else
+
+            /* TestS can be run on below devices available in sauce labs tool
+            Andriod 4.4  : Google Nexus 7 HD Emulator, Samsung Galaxy S4 Emulator,Samsung Galaxy Tab 3 Emulator.
+            IOS 9.2 : iPad Air, iPhone 5, iPhone 6, iPhone 6 plus
+
+     */
+
+            else if (host == "saucelabs")
             {
-
-
-                localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
-                FeatureContext.Current["driver"] = localDriver;
-
-                //Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
-                //DesiredCapabilities capabilities = new DesiredCapabilities();
-                //capabilities.SetCapability(CapabilityType.BrowserName, browser);
-                //capabilities.SetCapability(CapabilityType.Platform, platform);
-                //capabilities.SetCapability(CapabilityType.Version, browserVersion);
-                //capabilities.SetCapability("username", saucelabsAccountName);
-                //capabilities.SetCapability("accessKey", saucelabsAccountKey);
-                ////capabilities.SetCapability("name", TestContext.CurrentContext.Test.Name);
-                ////enables sauce plugin for Jenkins to display results on job page
-                //// capabilities.SetCapability("build", Environment.GetEnvironmentVariable("JENKINS_BUILD_NUMBER"));
-
-                //driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), capabilities, TimeSpan.FromSeconds(600));
-                //ScenarioContext.Current["driver"] = driver;
+                DesiredCapabilities desiredCap = new DesiredCapabilities();
+                desiredCap.SetCapability("platform", "MAC");
+                desiredCap.SetCapability("browserName", "iPhone");
+                desiredCap.SetCapability("device", "iPhone 6 Plus");
+                desiredCap.SetCapability("browserVersion", "9.2");
+                desiredCap.SetCapability("username", saucelabsAccountName);
+                desiredCap.SetCapability("accessKey", saucelabsAccountKey);
+                //desiredCap.SetCapability("browserstack.debug", "true");
+                driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), desiredCap, TimeSpan.FromSeconds(600));
+                FeatureContext.Current["driver"] = driver;
 
             }
 
-            
+          
 
         }
 
@@ -114,30 +133,21 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         {
             if (host == "localhost")
             {
-                Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
+
+                ScenarioContext.Current["driver"] = localDriver;
+                Console.Write("Test Scenario ##### : " + ScenarioContext.Current.ScenarioInfo.Title);
             }
             else if (host == "saucelabs")
             {
 
-                //  Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
-                //  DesiredCapabilities capabilities = new DesiredCapabilities();
-                //  capabilities.SetCapability(CapabilityType.BrowserName, browser);
-                //  capabilities.SetCapability(CapabilityType.Platform, platform);
-                //  capabilities.SetCapability(CapabilityType.Version, browserVersion);
-                //  capabilities.SetCapability("username", saucelabsAccountName);
-                //  capabilities.SetCapability("accessKey", saucelabsAccountKey);
-                //  //capabilities.SetCapability("name", TestContext.CurrentContext.Test.Name);
-                //  //enables sauce plugin for Jenkins to display results on job page
-                // // capabilities.SetCapability("build", Environment.GetEnvironmentVariable("JENKINS_BUILD_NUMBER"));
-
-                //   driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), capabilities, TimeSpan.FromSeconds(600));
-                //ScenarioContext.Current["driver"] = driver;
+               ScenarioContext.Current["driver"] = driver;
+                Console.Write("Test Scenario ######: " + ScenarioContext.Current.ScenarioInfo.Title);
             }
 
             else if ( host == "browserstack")
             {
                 ScenarioContext.Current["driver"] = driver;
-                Console.Write("Test Scenario : " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.Write("Test Scenario ###### : " + ScenarioContext.Current.ScenarioInfo.Title);
 
             }
         }
@@ -179,29 +189,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
             else if (host == "saucelabs")
             {
-                //// bool passed = TestContext.CurrentContext.Result.Status == TestStatus.Passed;
-                // try
-                // {
-                //     // Logs the result to Sauce Labs
-                //     ((IJavaScriptExecutor)driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-                //     if (ScenarioContext.Current.TestError != null)
-                //     {
-                //         // TakeScreenshot(driver);
-                //     }
-                //    // string message = string.Format("SauceOnDemandSessionID=%1$s job-name=%2$s", driver.GetSessionId().ToString(), "some jobs name");
-                //    // Console.Write(message);
-                // }
-                // finally
-                // {
+                
                 driver.Quit();
             }
 
         }
 
-        //}
-
-
-
+        
         private static void TakeScreenshot(IWebDriver driver)
         {
             try
