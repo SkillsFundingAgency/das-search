@@ -49,7 +49,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public async Task<ProviderSearchResults> SearchByLocation(string standardId, int skip, int take, string location = null)
         {
-            var client = this._elasticsearchClientFactory.Create();
+            var client = _elasticsearchClientFactory.Create();
 
             ISearchResponse<ProviderSearchResultsItem> results = new SearchResponse<ProviderSearchResultsItem>();
 
