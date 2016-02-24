@@ -14,6 +14,7 @@ namespace Sfa.Eds.Das.StandardIndexer.DependencyResolution
             For<IStandardHelper>().Use<StandardHelper>();
             For<IStandardControlQueueConsumer>().Use<StandardControlQueueConsumer>();
             For<IStandardIndexSettings>().Use<StandardIndexSettings>();
+            For<IMetaDataHelper>().Use<MetaDataHelper>();
         }
     }
 }

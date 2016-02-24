@@ -11,7 +11,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Configuration
     {
         public static string LoggerName => "MainLogger";
 
-        public static void Initialise()
+        public static void Initialise(string text = "")
         {
             var logserver = ConfigurationManager.AppSettings["ElasticServerIp"];
             var logstashport = 5960;
@@ -20,7 +20,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Configuration
             AddAppender(LoggerName, appender);
 
             var logger = LogManager.GetLogger(LoggerName);
-            logger.Info($"Log appender added: {logserver}");
+            logger.Info($"Log appender added: {logserver} - {text}");
         }
 
         private static void AddAppender(string loggerName, IAppender appender)

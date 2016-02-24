@@ -14,5 +14,6 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
         bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime);
         string GetIndexNameAndDateExtension(DateTime dateTime);
         Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync();
+        IEnumerable<JsonMetadataObject> GetStandardsFromGit();
     }
 }

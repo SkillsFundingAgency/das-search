@@ -19,6 +19,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
         private readonly IBlobStorageHelper _blobStorageHelper;
         private readonly ILarsClient _larsClient;
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IMetaDataHelper _metaDataHelper;
         private readonly IStandardIndexSettings _settings;
         private readonly IElasticClient _client;
 
@@ -26,12 +27,14 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             ILarsClient larsClient,
             IBlobStorageHelper blobStorageHelper,
             IStandardIndexSettings settings,
-            IElasticsearchClientFactory elasticsearchClientFactory)
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            IMetaDataHelper metaDataHelper)
         {
             _larsClient = larsClient;
             _blobStorageHelper = blobStorageHelper;
             _settings = settings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
+            _metaDataHelper = metaDataHelper;
 
             _client = _elasticsearchClientFactory.GetElasticClient();
         }
@@ -136,6 +139,11 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
         public async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
         {
             return (await _blobStorageHelper.ReadStandardsAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
+        }
+
+        public IEnumerable<JsonMetadataObject> GetStandardsFromGit()
+        {
+            return _metaDataHelper.GetAllStandardsFromGit();
         }
 
         private void CreateAlias(string indexName)

@@ -13,6 +13,8 @@ using Sfa.Eds.Das.StandardIndexer.Consumers;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool;
+
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -23,7 +25,10 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public override void Run()
         {
-            Log.Info("Starting indexer...");
+            Log.Info("Starting indexer... LOCAL");
+            MetaData meta = new MetaData();
+            meta.Start();
+            return;
             while (true)
             {
                 try

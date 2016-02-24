@@ -12,12 +12,12 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces
 
     internal interface IVstsService
     {
-        void Start();
+        List<string> Start();
     }
 
     internal class VstsService : IVstsService
     {
-        public void Start()
+        public List<string> Start()
         {
             var gitrepository = "SFA-DAS-MetaDataStorage";
             var folderPath = "/standards/ci/json";
@@ -30,12 +30,15 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces
             var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
 
             var standards = new List<Standard>();
+            var standardsAsJson = new List<string>();
             foreach (var blob in tree.Value.Where(x => x.IsBlob))
             {
                 var str = Get(blob.Url);
+                standardsAsJson.Add(str);
                 var standard = JsonConvert.DeserializeObject<Standard>(str);
                 standards.Add(standard);
             }
+            return standardsAsJson;
         }
 
         private string Get(string streamUrl)
