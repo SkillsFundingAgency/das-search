@@ -76,31 +76,18 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                     .QueryRaw(qryStr)
                     .SortGeoDistance(g =>
                     {
-                        g.PinTo( coordinate.Lat, coordinate.Lon)
+                        g.PinTo(coordinate.Lat, coordinate.Lon)
                             .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
                         return g;
                     }));
             }
 
-            var hits = results.Hits;//.Where(i => !string.IsNullOrEmpty(i.UkPrn)).OrderBy(x => x.ProviderName);
-
-            var documents = new List<ProviderSearchResultsItem>();
-
-            foreach (var hit in hits)
+            var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
             {
-                var pr = new ProviderSearchResultsItem
-                {
-                    ProviderName = hit.Source.ProviderName,
-                    PostCode = hit.Source.PostCode,
-                    UkPrn = hit.Source.UkPrn,
-                    VenueName = hit.Source.VenueName,
-                    StandardsId = hit.Source.StandardsId,
-                    Distance = Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1)
-                };
-                documents.Add(pr);
-            }
-
-            string standardName = string.Empty;
+                ProviderName = hit.Source.ProviderName, PostCode = hit.Source.PostCode, UkPrn = hit.Source.UkPrn, VenueName = hit.Source.VenueName, StandardsId = hit.Source.StandardsId, Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+            }).ToList();
+            
+            var standardName = string.Empty;
 
             var standard = _standardRepository.GetById(standardId);
 
@@ -129,8 +116,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 lat = coordinates[0];
                 lon = coordinates[1];
             }
-            else
+            else if ((location.Length >= 5) && (location.Length <= 7))
             {
+                // It is full postcode
                 // TODO: transform postcode to latlon
                 var coordinates = location.Split(',');
                 lat = coordinates[0];
