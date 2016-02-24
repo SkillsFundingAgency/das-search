@@ -10,6 +10,8 @@
 
         public string StandardName { get; set; }
 
+        public string PostCode { get; set; }
+
         public IEnumerable<ProviderSearchResultsItem> Results { get; set; }
 
         public bool HasError { get; set; }

@@ -49,7 +49,24 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public async Task<ProviderSearchResults> SearchByLocation(string standardId, int skip, int take, string location = null)
         {
+            if (string.IsNullOrEmpty(location))
+            {
+                return new ProviderSearchResults
+                {
+                    HasError = true
+                };
+            }
+
             var client = _elasticsearchClientFactory.Create();
+
+            var standardName = string.Empty;
+
+            var standard = _standardRepository.GetById(standardId);
+
+            if (standard != null)
+            {
+                standardName = standard.Title;
+            }
 
             ISearchResponse<ProviderSearchResultsItem> results = new SearchResponse<ProviderSearchResultsItem>();
 
@@ -87,21 +104,13 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 ProviderName = hit.Source.ProviderName, PostCode = hit.Source.PostCode, UkPrn = hit.Source.UkPrn, VenueName = hit.Source.VenueName, StandardsId = hit.Source.StandardsId, Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
             }).ToList();
 
-            var standardName = string.Empty;
-
-            var standard = _standardRepository.GetById(standardId);
-
-            if (standard != null)
-            {
-                standardName = standard.Title;
-            }
-
             var result = new ProviderSearchResults
             {
                 TotalResults = results.Total,
                 StandardId = int.Parse(standardId),
                 StandardName = standardName,
-                Results = documents,
+                PostCode = location,
+                Results = documents
             };
 
             if (results.ConnectionStatus != null)
