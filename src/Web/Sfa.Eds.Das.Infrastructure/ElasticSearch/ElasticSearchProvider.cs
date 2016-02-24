@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
 using Sfa.Das.ApplicationServices;
@@ -12,7 +11,7 @@ using Sfa.Eds.Das.Infrastructure.Location;
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
     using System.Linq;
-    using Sfa.Eds.Das.Core.Configuration;
+    using Core.Configuration;
 
     public sealed class ElasticsearchProvider : ISearchProvider
     {
