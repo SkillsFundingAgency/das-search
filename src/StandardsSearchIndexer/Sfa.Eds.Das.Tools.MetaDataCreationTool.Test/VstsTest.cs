@@ -13,7 +13,7 @@
         {
             var vsts = new VstsService(new Settings());
             var standandards = vsts.GetStandards();
-            Assert.AreEqual(2, standandards.Count());
+            Assert.IsTrue(50 < standandards.Count());
         }
     }
 }
