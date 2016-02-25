@@ -141,6 +141,11 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return (await _blobStorageHelper.ReadAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
         }
 
+        public void UpdateMetadataRepository()
+        {
+            _metaDataHelper.UpdateMetadataRepository();
+        }
+
         public IEnumerable<JsonMetadataObject> GetStandardsFromGit()
         {
             return _metaDataHelper.GetAllStandardsFromGit();
@@ -163,7 +168,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.Pdf).ConfigureAwait(false);
+            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdf).ConfigureAwait(false);
         }
 
         private async Task IndexStandardPdfs(string indexName, IEnumerable<JsonMetadataObject> standards)
@@ -203,9 +208,11 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 {
                     StandardId = standard.Id,
                     Title = standard.Title,
-                    NotionalEndLevel = _larsClient.GetNotationLevelFromLars(standard.Id),
+                    NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
-                    PdfUrl = standard.Pdf,
+                    StandardPdf = standard.StandardPdf,
+                    AssessmentPlanPdf = standard.AssessmentPlanPdf.ToString(),
+                    TypicalLength = standard.TypicalLength,
                     File = attachment
                 };
 

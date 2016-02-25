@@ -1,19 +1,17 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
 {
-    [TestClass]
+    using NUnit.Framework;
+
+    [TestFixture]    
     public class MetaDataTest
     {
-        [TestMethod]
+        [Test]
+        [Category("ExternalDependency")]
+        [Ignore("Integration run")]
         public void TestMethod1()
         {
             MetaData metaData = new MetaData();
-            metaData.Start();
-            //var ids = metaData.GetExistingStandardIds();
-            //var standards = metaData.GenerateStandardMetadataFiles(ids);
-            //metaData.GetStandards();
+            metaData.GenerateStandardMetadataFiles();
         }
     }
 }

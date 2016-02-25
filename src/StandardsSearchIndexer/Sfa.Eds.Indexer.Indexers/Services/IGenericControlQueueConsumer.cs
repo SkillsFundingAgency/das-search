@@ -4,6 +4,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
 {
     public interface IGenericControlQueueConsumer
     {
-        Task CheckMessage<T>() where T : IIndexerService;
+        Task CheckMessage<T>()
+            where T : IIndexerService;
     }
 }

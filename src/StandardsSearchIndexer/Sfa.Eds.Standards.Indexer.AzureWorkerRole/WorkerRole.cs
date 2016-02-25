@@ -23,10 +23,8 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public override void Run()
         {
-            Log.Info("Starting indexer... LOCAL");
-            MetaData meta = new MetaData();
-            meta.Start();
-            return;
+            Log.Info("Starting indexer... ");
+
             while (true)
             {
                 try

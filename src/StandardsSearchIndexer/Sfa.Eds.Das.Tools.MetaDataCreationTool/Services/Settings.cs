@@ -1,37 +1,12 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
-    using System;
     using System.IO;
-    using Microsoft.WindowsAzure.ServiceRuntime;
+
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
 
     public class Settings : BaseSettings, ISettings
     {
-        private readonly ILog4NetLogger _logger;
-
-        public Settings(ILog4NetLogger logger)
-        {
-            _logger = logger;
-        }
-
-        public string WorkingFolder
-        {
-            get
-            {
-                try
-                {
-                    var localResource = RoleEnvironment.GetLocalResource("WorkingSpace");
-                    return Path.Combine(localResource.RootPath, "CourseDirectory");
-                }
-                catch (Exception exception)
-                {
-                    _logger.Warn($"Failed to use local resource");
-                    // Delete
-                }
-                _logger.Debug("Trying to use temp path");
-                return Path.Combine(Path.GetTempPath(), "CourseDirectory");
-            }
-        }
+        public string WorkingFolder => Path.Combine(Path.GetTempPath(), "WorkingSpace");
 
         public string GovLearningUrl => GetSetting();
 
@@ -52,7 +27,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         public string GitBranch => GetSetting();
 
         // Private settings
-
         private string VstsGitBaseUrl => GetSetting();
 
         // Helpers

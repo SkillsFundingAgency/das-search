@@ -8,7 +8,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
     public class CloudBlobClientWrapper : ICloudBlobClientWrapper
     {
         private readonly ICommonSettings _commonSettings;
-        private CloudBlobClient _cloudBlobClient;
+        private readonly CloudBlobClient _cloudBlobClient;
         public CloudBlobClientWrapper(ICommonSettings commonSettings)
         {
             _commonSettings = commonSettings;

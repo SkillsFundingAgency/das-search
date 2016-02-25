@@ -27,7 +27,8 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
             _container = container;
         }
 
-        public Task CheckMessage<T>() where T : IIndexerService
+        public Task CheckMessage<T>()
+            where T : IIndexerService
         {
             var indexerService = _container.GetInstance<T>();
             return Task.Run(() =>

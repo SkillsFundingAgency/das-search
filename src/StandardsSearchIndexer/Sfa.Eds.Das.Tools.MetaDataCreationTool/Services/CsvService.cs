@@ -10,13 +10,13 @@
 
     public class CsvService : ICsvService
     {
-        private readonly IAngleSharpService _angelService;
-        private readonly ISettings _settings;
+        private readonly IAngleSharpService angelService;
+        private readonly ISettings settings;
 
         public CsvService(IAngleSharpService angelService, ISettings settings)
         {
-            _angelService = angelService;
-            _settings = settings;
+            this.angelService = angelService;
+            this.settings = settings;
         }
 
         public List<Standard> GetAllStandardsFromCsv(string csvFile)
@@ -24,70 +24,82 @@
             List<Standard> standards;
             using (var reader = new StreamReader(File.OpenRead(csvFile)))
             {
-                standards = new List<Standard>();
                 reader.ReadLine();
+                standards = new List<Standard>();
                 var i = 0;
-                while (!reader.EndOfStream && i < this._settings.MaxStandards)
+                while (!reader.EndOfStream && i < this.settings.MaxStandards)
                 {
                     i++;
-                    var line = reader.ReadLine();
-                    var values = line?.Split(',');
+                    var values = reader.ReadLine()?.Split(',');
                     Standard standard;
-                    if(CreateStandard(values, out standard))
+                    if (CreateStandard(values, out standard))
                     {
                         standards.Add(standard);
                     }
                 }
             }
+
             return standards;
         }
 
         private bool CreateStandard(string[] values, out Standard standard)
         {
             standard = null;
-            if (values == null || values.Length < 7) return false;
-            int standardid = TryParse(values[0]);
+            var standardid = GetStandardId(values);
             if (standardid >= 0)
             {
                 standard = new Standard()
                 {
                     Id = standardid,
-                    Title = values[2].Replace("\"", ""),
+                    Title = values[2].Replace("\"", string.Empty),
                     NotionalEndLevel = TryParse(values[4]),
                     StandardPdf = GetPdfUri(values[8]),
                     AssessmentPlanPdf = GetPdfUri(values[8]),
                     JobRoles = new List<string>(),
                     Keywords = new List<string>(1),
-                    TypicalLength = new TypicalLength {Unit = "m"},
-                    IntroductoryText = "",
-                    OverviewOfRole = "",
-                    EntryRequirements = "",
-                    WhatApprenticesWillLearn = "",
-                    Qualifications = "",
-                    ProfessionalRegistration = ""
+                    TypicalLength = new TypicalLength { Unit = "m" },
+                    IntroductoryText = string.Empty,
+                    OverviewOfRole = string.Empty,
+                    EntryRequirements = string.Empty,
+                    WhatApprenticesWillLearn = string.Empty,
+                    Qualifications = string.Empty,
+                    ProfessionalRegistration = string.Empty
                 };
                 return true;
             }
+
             return false;
         }
 
-        private Uri GetPdfUri(string s)
+        private int GetStandardId(string[] values)
         {
-            var url = _angelService.GetLinks(s.Replace("\"", ""), ".attachment-details h2 a", "Assessment").FirstOrDefault();
+            if (values == null || values.Length < 7)
+            {
+                return -1;
+            }
+
+            return TryParse(values[0]);
+        }
+
+        private string GetPdfUri(string s)
+        {
+            var url = angelService.GetLinks(s.Replace("\"", string.Empty), ".attachment-details h2 a", "Assessment").FirstOrDefault();
             if (url != null)
             {
-                return new Uri($"https://www.gov.uk/{url}");
+                return new Uri($"https://www.gov.uk/{url}").ToString();
             }
-            return null;
+
+            return string.Empty;
         }
 
         private int TryParse(string s)
         {
             int i;
-            if (int.TryParse(s.Replace("\"", ""), out i))
+            if (int.TryParse(s.Replace("\"", string.Empty), out i))
             {
                 return i;
             }
+
             return -1;
         }
     }

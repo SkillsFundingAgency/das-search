@@ -2,7 +2,7 @@
 {
     using System.IO;
 
-    public class FileHelper
+    public static class FileHelper
     {
         public static void EnsureDir(string path)
         {
@@ -15,7 +15,9 @@
         public static void DeleteFile(string zipFilePath)
         {
             if (File.Exists(zipFilePath))
+            {
                 File.Delete(zipFilePath);
+            }
         }
 
         public static void DeleteRecursive(string dirPath)

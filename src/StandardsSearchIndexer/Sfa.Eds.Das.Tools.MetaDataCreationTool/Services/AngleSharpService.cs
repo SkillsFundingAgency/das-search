@@ -4,10 +4,7 @@
     using System.Linq;
     using AngleSharp;
 
-    public interface IAngleSharpService
-    {
-        IList<string> GetLinks(string fromUrl, string selector, string textInTitle);
-    }
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
 
     public class AngleSharpService : IAngleSharpService
     {

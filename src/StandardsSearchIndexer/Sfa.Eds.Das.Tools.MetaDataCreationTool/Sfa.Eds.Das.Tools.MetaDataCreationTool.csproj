@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Sfa.Eds.Das.Tools.MetaDataCreationTool.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Sfa.Eds.Das.Tools.MetaDataCreationTool.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -81,29 +83,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
     <Compile Include="Models\GovLearn\GovLearnResponse.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
+    <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Services\BaseSettings.cs" />
+    <Compile Include="Services\interfaces\IAngleSharpService.cs" />
+    <Compile Include="Services\interfaces\ILarsDataService.cs" />
     <Compile Include="Services\interfaces\ILog4NetLogger.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Models\StandardObject.cs" />
     <Compile Include="VSTS\GitDynamicModel.cs" />
     <Compile Include="MetaData.cs" />
-    <Compile Include="Models\Git\GitPushFile.cs" />
     <Compile Include="Models\Git\GitTree.cs" />
     <Compile Include="Models\Git\Entity.cs" />
     <Compile Include="Services\interfaces\IVstsService.cs" />
     <Compile Include="ContainerBootstrapper.cs" />
-    <Compile Include="MetaDataCreation.cs" />
+    <Compile Include="Services\LarsDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\DedsService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Services\AngleSharpService.cs" />
     <Compile Include="Services\CsvService.cs" />
     <Compile Include="Services\interfaces\ICsvService.cs" />
@@ -114,59 +114,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Service References\DedsService\DedsSearchService.wsdl" />
-    <None Include="Service References\DedsService\DedsSearchService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DedsService\DedsSearchService1.wsdl" />
-    <None Include="Service References\DedsService\DedsSearchService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DedsService\DedsSearchService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DedsService\DedsSearchService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Das.Tools.MetaDataCreationTool.DedsService.DataSetDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Das.Tools.MetaDataCreationTool.DedsService.DataSetVersionDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Das.Tools.MetaDataCreationTool.DedsService.FileData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Das.Tools.MetaDataCreationTool.DedsService.FileDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Das.Tools.MetaDataCreationTool.DedsService.QueryDescriptor.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DedsService\Sfa.Eds.Das.Tools.MetaDataCreationTool.DedsService.QueryResults.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Sfa.Eds.Das.Tools.MetaDataCreationTool.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\DedsService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DedsService\DedsSearchService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DedsService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DedsService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DedsService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MappingLinks.txt">
@@ -179,7 +130,13 @@
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

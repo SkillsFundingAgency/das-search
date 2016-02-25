@@ -21,5 +21,10 @@
             var standards = _metaData.GetStandards();
             return standards.Select(JsonConvert.DeserializeObject<JsonMetadataObject>).ToList();
         }
+
+        public void UpdateMetadataRepository()
+        {
+            _metaData.GenerateStandardMetadataFiles();
+        }
     }
 }

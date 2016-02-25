@@ -13,7 +13,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
                 c =>
                     {
                         c.For<ISettings>().Use<Settings>();
-                        c.For<IMetaDataCreation>().Use<MetaDataCreation>();
+                        c.For<ILarsDataService>().Use<LarsDataService>();
                         c.For<ICsvService>().Use<CsvService>();
                         c.For<IAngleSharpService>().Use<AngleSharpService>();
                         c.For<IVstsService>().Use<VstsService>();

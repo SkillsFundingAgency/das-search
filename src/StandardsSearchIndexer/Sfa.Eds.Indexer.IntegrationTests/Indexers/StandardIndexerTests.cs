@@ -71,7 +71,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                 Title = "Dental Nurse",
                 NotionalEndLevel = 3,
                 PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                PdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
+                StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
                 File = null
             };
 
@@ -117,14 +117,14 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                     Id = 1,
                     Title = "Network Engineer",
                     PdfFileName = "1-Apprenticeship standard for a network engineer",
-                    Pdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
+                    StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
                 },
                 new JsonMetadataObject
                 {
                     Id = 2,
                     Title = "Software Developer",
                     PdfFileName = "2-Apprenticeship standard for a software developer",
-                    Pdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
+                    StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
                 },
                 new JsonMetadataObject
                 {
@@ -132,7 +132,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                     Title = "Dental Nurse",
                     NotionalEndLevel = 3,
                     PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                    Pdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                    StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
                 }
             };
         }

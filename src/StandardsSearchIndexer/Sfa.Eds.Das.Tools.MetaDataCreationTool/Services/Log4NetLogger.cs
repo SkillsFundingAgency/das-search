@@ -7,31 +7,31 @@
 
     public sealed class Log4NetLogger : ILog4NetLogger
     {
-        private readonly ILog _logger;
+        private readonly ILog logger;
 
         public Log4NetLogger()
         {
-            _logger = LogManager.GetLogger(Log4NetSettings.LoggerName);
+            logger = LogManager.GetLogger(Log4NetSettings.LoggerName);
         }
 
         public void Debug(string msg)
         {
-            _logger.Debug(msg);
+            logger.Debug(msg);
         }
 
         public void Info(string msg)
         {
-            _logger.Info(msg);
+            logger.Info(msg);
         }
 
         public void Warn(string msg)
         {
-            _logger.Warn(msg);
+            logger.Warn(msg);
         }
 
         public void Error(string msg)
         {
-            _logger.Error(msg);
+            logger.Error(msg);
         }
     }
 }

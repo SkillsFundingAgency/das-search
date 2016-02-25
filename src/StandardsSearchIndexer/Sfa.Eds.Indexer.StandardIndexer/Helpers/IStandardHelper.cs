@@ -13,7 +13,8 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
         void DeleteOldIndexes(DateTime scheduledRefreshDateTime);
         bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime);
         string GetIndexNameAndDateExtension(DateTime dateTime);
-        Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync();
+        Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync();    
+        void UpdateMetadataRepository();
         IEnumerable<JsonMetadataObject> GetStandardsFromGit();
     }
 }

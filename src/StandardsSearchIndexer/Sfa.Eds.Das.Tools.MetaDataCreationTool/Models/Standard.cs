@@ -14,9 +14,9 @@
         [Obsolete]
         public string PdfFileName { get; set; }
 
-        public Uri StandardPdf { get; set; }
+        public string StandardPdf { get; set; }
 
-        public Uri AssessmentPlanPdf { get; set; }
+        public string AssessmentPlanPdf { get; set; }
 
         public List<string> JobRoles { get; set; }
 
@@ -34,14 +34,5 @@
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }
-    }
-
-    public class TypicalLength
-    {
-        public int From { get; set; }
-
-        public int  To { get; set; }
-
-        public string Unit { get; set; }
     }
 }

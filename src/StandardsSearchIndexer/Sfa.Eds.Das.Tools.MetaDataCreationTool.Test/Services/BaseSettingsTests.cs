@@ -26,7 +26,7 @@
         [Test]
         public void GetInteger()
         {
-            var settings = new Settings(new Log4NetLogger());
+            var settings = new Settings();
             var int1 = settings.GetSetting("int", 2);
             Assert.AreEqual(5, int1);
 
@@ -38,14 +38,14 @@
         [ExpectedException(typeof(ConfigurationErrorsException), ExpectedMessage = "Setting with key FailToGetSetting is missing")]
         public void TryGetMissingSetting()
         {
-            var settings = new Settings(new Log4NetLogger());
+            var settings = new Settings();
             settings.GetSetting("FailToGetSetting");
         }
 
         [Test]
         public void GettingSetting()
         {
-            var settings = new Settings(new Log4NetLogger());
+            var settings = new Settings();
             var setting = settings.GetSetting("intAsString");
             Assert.AreEqual("five", setting);
         }

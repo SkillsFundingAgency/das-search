@@ -1,5 +1,7 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git
 {
+    using System;
+
     public class Entity
     {
         public string CommitId { get; set; }
@@ -12,6 +14,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git
 
         public string Path { get; set; }
 
-        public bool IsBlob => GitObjectType.Equals("blob");
+        public bool IsBlob => GitObjectType.Equals("blob", StringComparison.InvariantCulture);
     }
 }

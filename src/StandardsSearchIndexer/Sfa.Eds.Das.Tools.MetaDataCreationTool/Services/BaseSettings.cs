@@ -9,18 +9,19 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         {
             StackFrame frame = new StackFrame(1);
             var method = frame.GetMethod();
-            var name = method.Name.Split('_')[1];
-            return GetSetting(name);
+            var settingKey = method.Name.Split('_')[1];
+            return GetSetting(settingKey);
         }
 
         public int GetSetting(string settingKey, int defaultValue)
         {
             var setting = ConfigurationManager.AppSettings[settingKey];
             int parsedValue;
-            if(int.TryParse(setting, out parsedValue))
+            if (int.TryParse(setting, out parsedValue))
             {
                 return parsedValue;
             }
+
             return defaultValue;
         }
 
@@ -28,7 +29,10 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         {
             var setting = ConfigurationManager.AppSettings[settingKey];
             if (string.IsNullOrEmpty(setting))
+            {
                 throw new ConfigurationErrorsException($"Setting with key {settingKey} is missing");
+            }
+
             return setting;
         }
     }

@@ -1,11 +1,10 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
-    using System.Net;
 
     using Newtonsoft.Json;
 
@@ -14,19 +13,12 @@
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.GovLearn;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
 
-    public interface IMetaDataCreation
-    {
-        string GetZipFilePath();
-        string DownloadZipFile(string zipFilePath);
-        List<StandardObject> GenerateJsons(string extractedPath, IEnumerable<string> excludeIds);
-    }
-
-    public class MetaDataCreation : IMetaDataCreation
+    public class LarsDataService : ILarsDataService
     {
         private readonly ISettings _settings;
         private readonly ICsvService _csvService;
 
-        public MetaDataCreation(ISettings settings, ICsvService csvService)
+        public LarsDataService(ISettings settings, ICsvService csvService)
         {
             _settings = settings;
             _csvService = csvService;
@@ -36,13 +28,18 @@
         {
             var json = HttpHelper.DownloadString(_settings.GovLearningUrl, null, null);
             var govLearnResponse = JsonConvert.DeserializeObject<GovLearnResponse>(json);
+            if (govLearnResponse == null)
+            {
+                return string.Empty;
+            }
+
             var govLearnResource = govLearnResponse.Resources.FirstOrDefault(m => m.Description.StartsWith("Current download"));
             return govLearnResource?.Url ?? string.Empty;
         }
 
         public string DownloadZipFile(string zipFilePath)
         {
-            var zipFile = DownloadFile(zipFilePath, _settings.WorkingFolder);
+            var zipFile = HttpHelper.DownloadFile(zipFilePath, _settings.WorkingFolder);
             var extractedPath = UnPackZipFile(zipFile, _settings.CsvFileName);
             return extractedPath;
         }
@@ -55,28 +52,39 @@
                 Console.WriteLine($"Can't find file {csvFile}");
                 return new List<StandardObject>();
             }
+
             var retlist = new List<StandardObject>();
             var standards = _csvService.GetAllStandardsFromCsv(csvFile);
             foreach (var standard in standards.Where(m => !excludeIds.Contains($"{m.Id}")))
             {
                 var json = JsonConvert.SerializeObject(standard, Formatting.Indented);
-                var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standard.Title, (current, c) => current.Replace(c, '_')).Replace(" ", "");
+                var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standard.Title, (current, c) => current.Replace(c, '_')).Replace(" ", string.Empty);
                 var gitFilePath = $"{_settings.VstsGitFolderPath}/{standard.Id}-{standardTitle}.json";
                 retlist.Add(new StandardObject(gitFilePath, json));
             }
+
             FileHelper.DeleteRecursive(extractedPath);
             return retlist;
         }
 
         public string UnPackZipFile(string zipFilePath, string file)
         {
+            if (string.IsNullOrEmpty(zipFilePath))
+            {
+                return string.Empty;
+            }
+
             var workingDir = Path.GetDirectoryName(zipFilePath);
-            if (string.IsNullOrEmpty(workingDir)) return string.Empty;
+            if (string.IsNullOrEmpty(workingDir))
+            {
+                return string.Empty;
+            }
+
             var extractedPath = Path.Combine(workingDir, "extracted");
-            
+
             FileHelper.DeleteRecursive(extractedPath);
             FileHelper.EnsureDir(extractedPath);
-            
+
             using (var zip = ZipFile.OpenRead(zipFilePath))
             {
                 foreach (var entry in zip.Entries)
@@ -87,21 +95,9 @@
                     }
                 }
             }
-            Console.WriteLine($"Files extracted. [{extractedPath}]");
+
             FileHelper.DeleteFile(zipFilePath);
             return extractedPath;
-        }
-
-        private string DownloadFile(string larsZipFileUrl, string workingfolder)
-        {
-            FileHelper.EnsureDir(workingfolder);
-            var zipFile = Path.Combine(workingfolder, "lars.zip");
-            using (var client = new WebClient())
-            {
-                client.DownloadFile(larsZipFileUrl, zipFile);
-            }
-            Console.WriteLine($"File downloaded [{zipFile}]");
-            return zipFile;
         }
     }
 }

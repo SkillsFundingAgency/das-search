@@ -3,8 +3,10 @@ using Sfa.Eds.Das.Indexer.Common.Models;
 
 namespace Sfa.Eds.Das.StandardIndexer.Helpers
 {
-    internal interface IMetaDataHelper
+    public interface IMetaDataHelper
     {
         List<JsonMetadataObject> GetAllStandardsFromGit();
+
+        void UpdateMetadataRepository();
     }
 }

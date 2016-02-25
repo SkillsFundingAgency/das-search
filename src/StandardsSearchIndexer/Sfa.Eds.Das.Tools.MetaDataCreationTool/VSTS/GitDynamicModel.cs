@@ -9,8 +9,10 @@
         {
             var str = new
             {
-                refUpdates = new dynamic[] { new { name = branchPath, oldObjectId = oldObjectId } },
-                commits = new dynamic[] { new
+                refUpdates = new dynamic[] { new { name = branchPath, oldObjectId } },
+                commits = new dynamic[]
+                {
+                    new
                     {
                         comment = $"{items.Count} files created",
                         changes = Changes(items)
@@ -20,7 +22,7 @@
             return Newtonsoft.Json.JsonConvert.SerializeObject(str);
         }
 
-        private dynamic[] Changes(List<StandardObject> items)
+        private dynamic[] Changes(IEnumerable<StandardObject> items)
         {
             var returnList = new List<dynamic>();
             foreach (var item in items)
@@ -37,10 +39,10 @@
                         content = item.Json,
                         contentType = "rawtext"
                     }
-
                 };
                 returnList.Add(obj);
             }
+
             return returnList.ToArray();
         }
     }
