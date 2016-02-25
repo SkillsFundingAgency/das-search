@@ -29,3 +29,45 @@ Examples:
 |postcode|
 |CV1 2wt |
 |CV6 1PT|
+
+Scenario Outline: Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by postcode falling on Provider radius
+Given I am on Standard '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+Then I should see provider "aspire archive advance limited" in provider results page.
+Examples:
+| Postcode| id |
+| LN76HN  | 25 |
+
+
+
+Scenario Outline: Search Provider by postcode outside  Provider radius 60 miles
+Given I am on Standard '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+Then I should not see provider "aspire archive advance limited" in provider results page.
+And I should see provider "millbrook management services limited" in provider results page.
+Examples:
+| Postcode | id |
+| LN76HJ   | 25 |
+
+
+Scenario Outline:Search Provider by postcode falling inside Provider radius
+Given I am on Standard '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+Then I should see provider "aspire archive advance limited" in provider results page.
+And I should see provider "millbrook management services limited" in provider results page.
+Examples:
+| Postcode| id |
+| DN209NH | 25 |
+
+Scenario Outline:Search Provider by postcode falling inside more than one provider radius.
+Given I am on Standard '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+Then I should see provider "skills team ltd" in provider results page.
+And I should see provider "aspire achieve advance limited" in provider results page.
+Examples:
+| Postcode| id |
+| NW66AY | 25 |

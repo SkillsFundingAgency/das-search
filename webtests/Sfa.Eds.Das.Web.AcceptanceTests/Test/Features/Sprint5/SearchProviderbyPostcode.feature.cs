@@ -136,6 +136,97 @@ testRunner.Then("I should list of providers on result page who operates within e
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by postcode falling on Provider ra" +
+            "dius")]
+        [NUnit.Framework.TestCaseAttribute("LN76HN", "25", null)]
+        public virtual void SearchASPIREACHIEVEADVANCELIMITEDProviderByPostcodeFallingOnProviderRadius(string postcode, string id, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by postcode falling on Provider ra" +
+                    "dius", exampleTags);
+#line 33
+this.ScenarioSetup(scenarioInfo);
+#line 34
+testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 35
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 37
+testRunner.Then("I should see provider \"aspire archive advance limited\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search Provider by postcode outside  Provider radius 60 miles")]
+        [NUnit.Framework.TestCaseAttribute("LN76HJ", "25", null)]
+        public virtual void SearchProviderByPostcodeOutsideProviderRadius60Miles(string postcode, string id, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode outside  Provider radius 60 miles", exampleTags);
+#line 44
+this.ScenarioSetup(scenarioInfo);
+#line 45
+testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 46
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 48
+testRunner.Then("I should not see provider \"aspire archive advance limited\" in provider results pa" +
+                    "ge.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 49
+testRunner.And("I should see provider \"millbrook management services limited\" in provider results" +
+                    " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search Provider by postcode falling inside Provider radius")]
+        [NUnit.Framework.TestCaseAttribute("DN209NH", "25", null)]
+        public virtual void SearchProviderByPostcodeFallingInsideProviderRadius(string postcode, string id, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode falling inside Provider radius", exampleTags);
+#line 55
+this.ScenarioSetup(scenarioInfo);
+#line 56
+testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 57
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
+testRunner.Then("I should see provider \"aspire archive advance limited\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 60
+testRunner.And("I should see provider \"millbrook management services limited\" in provider results" +
+                    " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search Provider by postcode falling inside more than one provider radius.")]
+        [NUnit.Framework.TestCaseAttribute("NW66AY", "25", null)]
+        public virtual void SearchProviderByPostcodeFallingInsideMoreThanOneProviderRadius_(string postcode, string id, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode falling inside more than one provider radius.", exampleTags);
+#line 65
+this.ScenarioSetup(scenarioInfo);
+#line 66
+testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 67
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 69
+testRunner.Then("I should see provider \"skills team ltd\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 70
+testRunner.And("I should see provider \"aspire achieve advance limited\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
