@@ -52,7 +52,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             {
                 return new ProviderSearchResults
                 {
-                    HasError = true
+                    StandardId = int.Parse(standardId),
+                    PostCodeMissing = true
                 };
             }
 
