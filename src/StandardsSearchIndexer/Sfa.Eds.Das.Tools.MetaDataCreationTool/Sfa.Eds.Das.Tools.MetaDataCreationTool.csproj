@@ -95,6 +95,7 @@
     <Compile Include="Services\Interfaces\IGenerateStandardMetaData.cs" />
     <Compile Include="Services\Interfaces\ILarsDataService.cs" />
     <Compile Include="Services\Interfaces\ILog4NetLogger.cs" />
+    <Compile Include="Services\Interfaces\IUnzipFiles.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Models\StandardObject.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Services\Settings.cs" />
     <Compile Include="Services\Interfaces\ISettings.cs" />
     <Compile Include="Services\Interfaces\IGitDynamicModelGenerator.cs" />
+    <Compile Include="Services\ZipFileExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

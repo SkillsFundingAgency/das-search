@@ -10,6 +10,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
             StackFrame frame = new StackFrame(1);
             var method = frame.GetMethod();
             var settingKey = method.Name.Split('_')[1];
+
             return GetSetting(settingKey);
         }
 
@@ -17,6 +18,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         {
             var setting = ConfigurationManager.AppSettings[settingKey];
             int parsedValue;
+
             if (int.TryParse(setting, out parsedValue))
             {
                 return parsedValue;

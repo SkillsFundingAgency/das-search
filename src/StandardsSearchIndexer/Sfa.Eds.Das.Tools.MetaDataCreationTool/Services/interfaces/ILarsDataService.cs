@@ -6,8 +6,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
 
     public interface ILarsDataService
     {
-        string GetZipFilePath();
-        string DownloadZipFile(string zipFilePath);
-        List<StandardObject> GenerateJsons(string extractedPath, IEnumerable<string> excludeIds);
+        IEnumerable<Standard> GetListOfCurrentStandards();
     }
 }

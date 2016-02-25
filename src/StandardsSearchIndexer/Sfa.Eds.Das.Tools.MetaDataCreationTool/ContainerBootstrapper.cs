@@ -21,7 +21,9 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
                         c.For<ILog4NetLogger>().Use<Log4NetLogger>();
                         c.For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
                         c.For<IHttpHelper>().Use<HttpHelper>();
+                        c.For<IUnzipFiles>().Use<ZipFileExtractor>();
                     });
+
             return container;
         }
     }
