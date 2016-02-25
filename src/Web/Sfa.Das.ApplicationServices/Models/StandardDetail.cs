@@ -1,13 +1,13 @@
 ﻿using Sfa.Eds.Das.Core.Domain.Model;
 
-namespace Sfa.Eds.Das.Web.ViewModels
+namespace Sfa.Das.ApplicationServices.Models
 {
-    public class StandardViewModel
+    using System.Collections.Generic;
+
+    public sealed class StandardDetail
     {
         public Standard Standard { get; set; }
 
         public bool HasError { get; set; }
-
-        public LinkViewModel SearchResultLink { get; set; }
     }
 }
