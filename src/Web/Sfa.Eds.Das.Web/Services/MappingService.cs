@@ -57,7 +57,7 @@
                 cfg.CreateMap<StandardSearchResultsItem, StandardResultItemViewModel>();
                 cfg.CreateMap<StandardSearchResultsItem, StandardViewModel>();
                 cfg.CreateMap<StandardSearchResults, StandardSearchResultViewModel>();
-                cfg.CreateMap<Standard, StandardViewModel>();
+                cfg.CreateMap<StandardDetail, StandardViewModel>();
             });
         }
     }

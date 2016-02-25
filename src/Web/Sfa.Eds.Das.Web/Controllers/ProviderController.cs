@@ -36,7 +36,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             if (viewModel.PostCodeMissing)
             {
-                Response.Redirect("../Standard/Detail/" + viewModel.StandardId);
+                Response.Redirect(string.Concat("../Standard/Detail?id=", viewModel.StandardId, "&HasError=", viewModel.PostCodeMissing.ToString().ToLower()));
             }
 
             return View(viewModel);
