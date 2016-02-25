@@ -11,7 +11,7 @@
         public void TestMethod1()
         {
             // Set GitUserName/GitPassword in app.config to run this
-            MetaData metaData = new MetaData();
+            MetaDataManager metaData = new MetaDataManager();
             metaData.GenerateStandardMetadataFiles();
         }
     }

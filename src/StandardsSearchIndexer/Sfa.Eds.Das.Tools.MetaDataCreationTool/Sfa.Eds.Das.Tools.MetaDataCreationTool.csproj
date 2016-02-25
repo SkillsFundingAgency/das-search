@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\IHttpHelper.cs" />
-    <Compile Include="IMetaData.cs" />
+    <Compile Include="IGetStandardMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
     <Compile Include="Models\GovLearn\GovLearnResponse.cs" />
     <Compile Include="Helper\FileHelper.cs" />
@@ -92,13 +92,14 @@
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Services\BaseSettings.cs" />
     <Compile Include="Services\Interfaces\IAngleSharpService.cs" />
+    <Compile Include="Services\Interfaces\IGenerateStandardMetaData.cs" />
     <Compile Include="Services\Interfaces\ILarsDataService.cs" />
     <Compile Include="Services\Interfaces\ILog4NetLogger.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Models\StandardObject.cs" />
     <Compile Include="Services\GitDynamicModelGenerator.cs" />
-    <Compile Include="MetaData.cs" />
+    <Compile Include="MetaDataManager.cs" />
     <Compile Include="Models\Git\GitTree.cs" />
     <Compile Include="Models\Git\Entity.cs" />
     <Compile Include="Services\Interfaces\IVstsService.cs" />

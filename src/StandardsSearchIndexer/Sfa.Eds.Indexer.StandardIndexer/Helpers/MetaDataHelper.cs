@@ -10,16 +10,16 @@
 
     internal class MetaDataHelper : IMetaDataHelper
     {
-        private readonly MetaData _metaData;
+        private readonly MetaDataManager _metaData;
 
         public MetaDataHelper()
         {
-            _metaData = new MetaData();
+            _metaData = new MetaDataManager();
         }
 
         public List<MetaDataItem> GetAllStandardsFromGit()
         {
-            var standards = _metaData.GetStandards();
+            var standards = _metaData.GetAllAsJson();
 
             return standards.Select(JsonConvert.DeserializeObject<MetaDataItem>).ToList();
         }
