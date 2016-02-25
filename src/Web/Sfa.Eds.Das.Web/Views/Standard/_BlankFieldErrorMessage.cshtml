@@ -1,0 +1,16 @@
+﻿@model Sfa.Eds.Das.Web.ViewModels.StandardViewModel
+
+<div>
+    @if (Model.HasError)
+    {
+        @RenderErrorMessage()
+    }
+</div>
+
+@helper  RenderErrorMessage()
+{
+    <p>
+        This field can't be blank
+    </p>
+}
+

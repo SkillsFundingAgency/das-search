@@ -226,11 +226,6 @@
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
-    <Compile Include="Views\Standard\Detail.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Detail.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Standard\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -296,6 +291,10 @@
     <Content Include="Views\Provider\SearchResults.cshtml" />
     <Content Include="Views\Provider\Detail.cshtml" />
     <Content Include="Views\Provider\_SearchResultMessage.cshtml" />
+    <Content Include="Views\Standard\_BlankFieldErrorMessage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_BlankFieldErrorMessage.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

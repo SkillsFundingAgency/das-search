@@ -46,7 +46,7 @@
         }
 
         // GET: Standard
-        public ActionResult Detail(string id)
+        public ActionResult Detail(string id, string hasError)
         {
             var standardResult = this._standardRepository.GetById(id);
 
@@ -58,7 +58,19 @@
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
+            var error = false;
+            if (!string.IsNullOrEmpty(hasError))
+            {
+                error = bool.Parse(hasError);
+            }
+
+            var standardDetail = new StandardDetail
+            {
+                Standard = standardResult,
+                HasError = error
+            };
+
+            var viewModel = _mappingService.Map<StandardDetail, StandardViewModel>(standardDetail);
             viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
 
             return View(viewModel);

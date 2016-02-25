@@ -49,6 +49,7 @@
     <Compile Include="Models\ProviderSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultsItem.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\StandardDetail.cs" />
     <Compile Include="Models\StandardSearchResults.cs" />
     <Compile Include="Models\StandardSearchResultsItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
