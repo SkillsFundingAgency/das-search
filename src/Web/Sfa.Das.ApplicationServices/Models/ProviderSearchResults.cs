@@ -15,5 +15,7 @@
         public IEnumerable<ProviderSearchResultsItem> Results { get; set; }
 
         public bool HasError { get; set; }
+
+        public bool PostCodeMissing { get; set; }
     }
 }

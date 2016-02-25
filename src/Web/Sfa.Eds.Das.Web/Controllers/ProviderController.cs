@@ -34,6 +34,11 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
+            if (viewModel.PostCodeMissing)
+            {
+                Response.Redirect(string.Concat("../Standard/Detail?id=", viewModel.StandardId, "&HasError=", viewModel.PostCodeMissing.ToString().ToLower()));
+            }
+
             return View(viewModel);
         }
 
