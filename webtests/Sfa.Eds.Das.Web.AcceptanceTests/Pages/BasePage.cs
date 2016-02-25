@@ -38,8 +38,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public IWebElement find(By locator)
         {
 
-            // WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
-            // wait.Until(ExpectedConditions.ElementIsVisible(locator));
+         //   WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
+            //wait.Until(ExpectedConditions.ElementIsVisible(locator));
             return driver.FindElement(locator);
         }
 
@@ -98,7 +98,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             return false;
         }
 
-
+        public bool verifyTextMessage(By locator,String text)
+        {
+            if (find(locator).Text.Contains(text))
+                return true;
+            else 
+                return false;
+        }
 
 
 
