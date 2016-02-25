@@ -26,9 +26,9 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
             _client = client;
         }
 
-        public async Task<List<JsonMetadataObject>> ReadAsync(string containerName)
+        public async Task<List<MetaDataItem>> ReadAsync(string containerName)
         {
-            var jsonList = new List<JsonMetadataObject>();
+            var jsonList = new List<MetaDataItem>();
 
             // Retrieve reference to a previously created container.
             var container = _client.GetContainerReference(containerName);
@@ -46,7 +46,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
                         text = Encoding.UTF8.GetString(memoryStream.ToArray());
                     }
 
-                    jsonList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
+                    jsonList.Add(JsonConvert.DeserializeObject<MetaDataItem>(text));
                 }
             }
             catch (Exception e)

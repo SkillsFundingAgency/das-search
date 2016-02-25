@@ -12,7 +12,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
-
+    using System.Threading.Tasks;
     public class VstsService : IVstsService
     {
         private readonly ISettings _settings;
@@ -56,7 +56,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         public void PushCommit(List<StandardObject> items)
         {
             var body = _gitDynamicModelGenerator.GenerateCommitBody(_settings.GitBranch, GetLatesCommit(), items);
-            Post(_settings.GitBranch, _settings.GitUsername, _settings.GitPassword, body);
+            Post(_settings.VstsGitPushUrl, _settings.GitUsername, _settings.GitPassword, body);
         }
 
         // Helpers
@@ -99,7 +99,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
                 var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{pwd}"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
                 HttpContent content = new StringContent(body, Encoding.UTF8, "application/json");
-                client.PostAsync(streamUrl, content).RunSynchronously();
+                client.PostAsync(streamUrl, content).Wait();
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Models
 {
-    using System;
     using System.Collections.Generic;
 
     public sealed class Standard
@@ -11,12 +10,9 @@
 
         public int NotionalEndLevel { get; set; }
 
-        [Obsolete]
-        public string PdfFileName { get; set; }
+        public string StandardPdfUrl { get; set; }
 
-        public string StandardPdf { get; set; }
-
-        public string AssessmentPlanPdf { get; set; }
+        public string AssessmentPlanPdfUrl { get; set; }
 
         public List<string> JobRoles { get; set; }
 
@@ -31,6 +27,7 @@
         public string WhatApprenticesWillLearn { get; set; }
 
         public string Qualifications { get; set; }
+
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }

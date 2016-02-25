@@ -8,7 +8,7 @@
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
-    public class CsvService : ICsvService
+    public class CsvService : IReadStandardsFromCsv
     {
         private readonly IAngleSharpService angelService;
         private readonly ISettings settings;
@@ -19,17 +19,16 @@
             this.settings = settings;
         }
 
-        public List<Standard> GetAllStandardsFromCsv(string csvFile)
+        public List<Standard> ReadStandardsFromFile(string csvFile)
         {
             List<Standard> standards;
             using (var reader = new StreamReader(File.OpenRead(csvFile)))
             {
                 reader.ReadLine();
                 standards = new List<Standard>();
-                var i = 0;
-                while (!reader.EndOfStream && i < this.settings.MaxStandards)
+
+                while (!reader.EndOfStream)
                 {
-                    i++;
                     var values = reader.ReadLine()?.Split(',');
                     Standard standard;
                     if (CreateStandard(values, out standard))
@@ -53,8 +52,8 @@
                     Id = standardid,
                     Title = values[2].Replace("\"", string.Empty),
                     NotionalEndLevel = TryParse(values[4]),
-                    StandardPdf = GetPdfUri(values[8]),
-                    AssessmentPlanPdf = GetPdfUri(values[8]),
+                    StandardPdfUrl = GetPdfUri(values[8]),
+                    AssessmentPlanPdfUrl = GetPdfUri(values[8]),
                     JobRoles = new List<string>(),
                     Keywords = new List<string>(1),
                     TypicalLength = new TypicalLength { Unit = "m" },

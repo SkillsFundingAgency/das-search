@@ -9,8 +9,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
         public string GovLearningUrl => GetSetting();
 
-        public int MaxStandards => GetSetting("MaxStandards", int.MaxValue); // Delete
-
         public string CsvFileName => GetSetting();
 
         public string VstsGitFolderPath => GetSetting();

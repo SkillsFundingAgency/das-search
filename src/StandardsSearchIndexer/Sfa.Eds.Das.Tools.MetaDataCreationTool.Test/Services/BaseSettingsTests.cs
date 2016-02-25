@@ -24,17 +24,6 @@
         }
 
         [Test]
-        public void GetInteger()
-        {
-            var settings = new Settings();
-            var int1 = settings.GetSetting("int", 2);
-            Assert.AreEqual(5, int1);
-
-            var int2 = settings.GetSetting("intAsString", 2);
-            Assert.AreEqual(2, int2);
-        }
-
-        [Test]
         [ExpectedException(typeof(ConfigurationErrorsException), ExpectedMessage = "Setting with key FailToGetSetting is missing")]
         public void TryGetMissingSetting()
         {

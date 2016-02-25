@@ -7,7 +7,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
     public interface IBlobStorageHelper
     {
-        Task<List<JsonMetadataObject>> ReadAsync(string containerName);
+        Task<List<MetaDataItem>> ReadAsync(string containerName);
         Task<byte[]> ReadStandardPdfAsync(string containerName, string fileName);
         bool FileExists(string containerName, string fileName);
         Task UploadPdfFromUrl(string containerName, string fileName, string url);

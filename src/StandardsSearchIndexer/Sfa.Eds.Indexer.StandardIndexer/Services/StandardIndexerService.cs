@@ -27,7 +27,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Services
         {
             Log.Info("Creating new scheduled standard index at " + DateTime.Now);
 
-            _standardHelper.UpdateMetadataRepository();
+            _standardHelper.UpdateMetadataRepositoryWithNewStandards();
 
             var indexProperlyCreated = _standardHelper.CreateIndex(scheduledRefreshDateTime);
             if (!indexProperlyCreated)
@@ -38,7 +38,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Services
 
             Log.Info("Indexing standard PDFs...");
 
-            var standards = _standardHelper.GetStandardsFromGit();
+            var standards = _standardHelper.GetStandardsMetaDataFromGit();
 
             await _standardHelper.IndexStandards(scheduledRefreshDateTime, standards).ConfigureAwait(false);
 

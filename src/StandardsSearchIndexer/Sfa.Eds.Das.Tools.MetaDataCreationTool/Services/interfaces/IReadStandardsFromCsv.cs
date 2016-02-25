@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
 
-    public interface ICsvService
+    public interface IReadStandardsFromCsv
     {
-        List<Standard> GetAllStandardsFromCsv(string csvFile);
+        List<Standard> ReadStandardsFromFile(string csvFile);
     }
 }

@@ -108,7 +108,7 @@
     <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\JsonMetadataObject.cs" />
+    <Compile Include="Models\MetaDataItem.cs" />
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Models\TypicalLength.cs" />

@@ -10,6 +10,7 @@
         [Ignore("Integration run")]
         public void TestMethod1()
         {
+            // Set GitUserName/GitPassword in app.config to run this
             MetaData metaData = new MetaData();
             metaData.GenerateStandardMetadataFiles();
         }

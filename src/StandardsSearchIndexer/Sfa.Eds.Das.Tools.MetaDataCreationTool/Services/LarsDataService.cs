@@ -13,14 +13,13 @@
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.GovLearn;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
-    public class LarsDataService : ILarsDataService
+    public sealed class LarsDataService : ILarsDataService
     {
         private readonly ISettings _settings;
-        private readonly ICsvService _csvService;
-
+        private readonly IReadStandardsFromCsv _csvService;
         private readonly IHttpHelper _httpHelper;
 
-        public LarsDataService(ISettings settings, ICsvService csvService, IHttpHelper httpHelper)
+        public LarsDataService(ISettings settings, IReadStandardsFromCsv csvService, IHttpHelper httpHelper)
         {
             _settings = settings;
             _csvService = csvService;
@@ -57,7 +56,7 @@
             }
 
             var retlist = new List<StandardObject>();
-            var standards = _csvService.GetAllStandardsFromCsv(csvFile);
+            var standards = _csvService.ReadStandardsFromFile(csvFile);
             foreach (var standard in standards.Where(m => !excludeIds.Contains($"{m.Id}")))
             {
                 var json = JsonConvert.SerializeObject(standard, Formatting.Indented);

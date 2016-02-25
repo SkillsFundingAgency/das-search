@@ -5,7 +5,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 {
     public interface IMetaDataHelper
     {
-        List<JsonMetadataObject> GetAllStandardsFromGit();
+        List<MetaDataItem> GetAllStandardsFromGit();
 
         void UpdateMetadataRepository();
     }

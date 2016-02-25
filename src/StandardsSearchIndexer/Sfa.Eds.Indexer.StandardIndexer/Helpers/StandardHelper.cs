@@ -58,7 +58,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return _client.IndexExists(indexName).Exists;
         }
 
-        public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<JsonMetadataObject> standards)
+        public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<MetaDataItem> standards)
         {
             Log.Debug("Uploading " + standards.Count() + " standard's PDF to Azure");
 
@@ -136,17 +136,17 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
         }
 
-        public async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
+        public async Task<IEnumerable<MetaDataItem>> GetStandardsFromAzureAsync()
         {
             return (await _blobStorageHelper.ReadAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
         }
 
-        public void UpdateMetadataRepository()
+        public void UpdateMetadataRepositoryWithNewStandards()
         {
             _metaDataHelper.UpdateMetadataRepository();
         }
 
-        public IEnumerable<JsonMetadataObject> GetStandardsFromGit()
+        public IEnumerable<MetaDataItem> GetStandardsMetaDataFromGit()
         {
             return _metaDataHelper.GetAllStandardsFromGit();
         }
@@ -166,15 +166,15 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return aliasExistsResponse.Exists;
         }
 
-        private async Task UploadStandardPdf(JsonMetadataObject standard)
+        private async Task UploadStandardPdf(MetaDataItem standard)
         {
             if (!_blobStorageHelper.FileExists(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf")))
             {
-                await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdf).ConfigureAwait(false);
+                await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdfUrl).ConfigureAwait(false);
             }
         }
 
-        private async Task IndexStandardPdfs(string indexName, IEnumerable<JsonMetadataObject> standards)
+        private async Task IndexStandardPdfs(string indexName, IEnumerable<MetaDataItem> standards)
         {
             // index the items
             foreach (var standard in standards)
@@ -193,7 +193,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             }
         }
 
-        private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
+        private async Task<StandardDocument> CreateDocument(MetaDataItem standard)
         {
             try
             {
@@ -213,8 +213,8 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                     Title = standard.Title,
                     NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
-                    StandardPdf = standard.StandardPdf,
-                    AssessmentPlanPdf = standard.AssessmentPlanPdf,
+                    StandardPdf = standard.StandardPdfUrl,
+                    AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
                     TypicalLength = standard.TypicalLength,
                     File = attachment
                 };
