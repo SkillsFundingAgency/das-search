@@ -3,7 +3,7 @@
 	As an employer
 	I want to search providers by entering geo lcoation
 	
-
+@ignore
 Scenario Outline: Entered Lat long to search provider is within provider given radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
@@ -14,57 +14,57 @@ Examples:
 | 52.4113623,-1.5256923 | 25 |
 
 
-
+@ignore
 Scenario Outline:Provider INTEC BUSINESS COLLEGES searchable when entered latlong with in Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
 When I search Search for provider
-Then I should see provider "INTEC BUSINESS COLLEGES" in provider results page.
+Then I should see provider "intec business colleges" in provider results page.
 Examples:
 | LatLong               | id |
 | 52.4113623,-1.5256923 | 25 |
 
-
+@ignore
 Scenario Outline: Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by latlong falling on Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
 When I search Search for provider
-Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
+Then I should see provider "aspire archive advance limited" in provider results page.
 Examples:
 | LatLong              | id |
 | 53.4679071,-0.3699098 | 25 |
 
-
+@ignore
 Scenario Outline:Search Provider by latlong falling inside Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
 When I search Search for provider
-Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
-And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
+Then I should see provider "aspire archive advance limited" in provider results page.
+And I should see provider "millbrook management services limited" in provider results page.
 Examples:
 | LatLong               | id |
 | 53.5152058,-0.5601394 | 25 |
 
-
+@ignore
 #search for by location(latlong or postcode) which falls outside 60 miles provider radius
 Scenario Outline: Search Provider by latlong outside  Provider radius 60 miles
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
 When I search Search for provider
-Then I should not see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
-And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
+Then I should not see provider "aspire archive advance limited" in provider results page.
+And I should see provider "millbrook management services limited" in provider results page.
 Examples:
 | LatLong               | id |
 | 53.5117482,-0.3669604 | 25 |
 
 @ignore
-Scenario Outline: Search Provider by latlong falling inside two provider radius.
+Scenario Outline: Search Provider by latlong falling inside two provider radius and result in sorted order
 Given I am on Standard '<id>' detail page
 And I enter '<LatLong>' in provider search box
 When I search Search for provider
-Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
-And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
-And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" listed in top as nearest training provider.
+Then I should see provider "aspire archive advance limited" in provider results page.
+And I should see provider "millbrook management services limited" in provider results page.
+And I should see provider "millbrook management services limited" listed in top as nearest training provider.
 Examples:
 | LatLong               | id |
 | 53.5152058,-0.5601394 | 25 |
