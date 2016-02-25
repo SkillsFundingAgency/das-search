@@ -10,7 +10,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class VstsService : IVstsService
     {

@@ -3,7 +3,7 @@
     using log4net;
 
     using Sfa.Eds.Das.Indexer.Common.Configuration;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public sealed class Log4NetLogger : ILog4NetLogger
     {

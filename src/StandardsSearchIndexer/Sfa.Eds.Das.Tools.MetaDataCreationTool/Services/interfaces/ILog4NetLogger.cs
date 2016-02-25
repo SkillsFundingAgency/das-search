@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
 {
     public interface ILog4NetLogger
     {

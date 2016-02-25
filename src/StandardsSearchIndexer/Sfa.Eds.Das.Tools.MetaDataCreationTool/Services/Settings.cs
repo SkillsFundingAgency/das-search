@@ -1,8 +1,7 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
     using System.IO;
-
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class Settings : BaseSettings, ISettings
     {

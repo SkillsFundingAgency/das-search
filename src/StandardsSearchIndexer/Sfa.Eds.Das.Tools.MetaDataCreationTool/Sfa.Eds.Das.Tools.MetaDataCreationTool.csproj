@@ -90,9 +90,9 @@
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Services\BaseSettings.cs" />
-    <Compile Include="Services\interfaces\IAngleSharpService.cs" />
-    <Compile Include="Services\interfaces\ILarsDataService.cs" />
-    <Compile Include="Services\interfaces\ILog4NetLogger.cs" />
+    <Compile Include="Services\Interfaces\IAngleSharpService.cs" />
+    <Compile Include="Services\Interfaces\ILarsDataService.cs" />
+    <Compile Include="Services\Interfaces\ILog4NetLogger.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Models\StandardObject.cs" />
@@ -100,16 +100,16 @@
     <Compile Include="MetaData.cs" />
     <Compile Include="Models\Git\GitTree.cs" />
     <Compile Include="Models\Git\Entity.cs" />
-    <Compile Include="Services\interfaces\IVstsService.cs" />
+    <Compile Include="Services\Interfaces\IVstsService.cs" />
     <Compile Include="ContainerBootstrapper.cs" />
     <Compile Include="Services\LarsDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AngleSharpService.cs" />
     <Compile Include="Services\CsvService.cs" />
-    <Compile Include="Services\interfaces\ICsvService.cs" />
+    <Compile Include="Services\Interfaces\ICsvService.cs" />
     <Compile Include="Models\Standard.cs" />
     <Compile Include="Services\Settings.cs" />
-    <Compile Include="Services\interfaces\ISettings.cs" />
+    <Compile Include="Services\Interfaces\ISettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

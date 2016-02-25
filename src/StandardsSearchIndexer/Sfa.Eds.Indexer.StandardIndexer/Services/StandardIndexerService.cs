@@ -38,7 +38,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Services
 
             Log.Info("Indexing standard PDFs...");
 
-            var standards = _standardHelper.GetStandardsFromGit().Take(7);
+            var standards = _standardHelper.GetStandardsFromGit();
 
             await _standardHelper.IndexStandards(scheduledRefreshDateTime, standards).ConfigureAwait(false);
 

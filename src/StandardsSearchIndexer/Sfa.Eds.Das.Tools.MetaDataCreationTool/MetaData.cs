@@ -4,7 +4,7 @@
     using System.Linq;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Vsts;
 
     public class MetaData : IMetaData

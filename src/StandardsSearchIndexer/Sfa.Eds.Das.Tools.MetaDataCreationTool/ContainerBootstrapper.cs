@@ -1,7 +1,7 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
 {
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     using StructureMap;
     public static class ContainerBootstrapper

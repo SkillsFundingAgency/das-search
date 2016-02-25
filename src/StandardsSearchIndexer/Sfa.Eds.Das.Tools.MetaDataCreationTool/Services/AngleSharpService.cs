@@ -4,7 +4,7 @@
     using System.Linq;
     using AngleSharp;
 
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.interfaces;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class AngleSharpService : IAngleSharpService
     {

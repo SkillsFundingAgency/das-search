@@ -211,7 +211,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                     NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
                     StandardPdf = standard.StandardPdf,
-                    AssessmentPlanPdf = standard.AssessmentPlanPdf.ToString(),
+                    AssessmentPlanPdf = standard.AssessmentPlanPdf,
                     TypicalLength = standard.TypicalLength,
                     File = attachment
                 };

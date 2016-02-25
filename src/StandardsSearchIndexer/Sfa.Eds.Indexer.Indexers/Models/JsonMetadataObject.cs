@@ -9,7 +9,7 @@
         public int NotionalEndLevel { get; set; }
         public string PdfFileName { get; set; }
         public string StandardPdf { get; set; }
-        public Uri AssessmentPlanPdf { get; set; }
+        public string AssessmentPlanPdf { get; set; }
         public TypicalLength TypicalLength { get; set; }
     }
 }
