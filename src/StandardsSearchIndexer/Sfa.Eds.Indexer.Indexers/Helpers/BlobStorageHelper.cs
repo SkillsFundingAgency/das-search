@@ -79,6 +79,14 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
             return fileContent;
         }
 
+        public bool FileExists(string containerName, string fileName)
+        {
+            var container = _client.GetContainerReference(containerName);
+            var file = container.GetBlockBlobReference(fileName);
+
+            return file != null;
+        }
+
         public async Task UploadPdfFromUrl(string containerName, string fileName, string url)
         {
             try

@@ -9,68 +9,65 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class VstsService : IVstsService
     {
-        private readonly ISettings settings;
+        private readonly ISettings _settings;
+        private readonly IGitDynamicModelGenerator _gitDynamicModelGenerator;
+        private readonly IHttpHelper _httpHelper;
 
-        public VstsService(ISettings settings)
+        public VstsService(ISettings settings, IGitDynamicModelGenerator gitDynamicModelGenerator, IHttpHelper httpHelper)
         {
-            this.settings = settings;
+            _settings = settings;
+            _gitDynamicModelGenerator = gitDynamicModelGenerator;
+            _httpHelper = httpHelper;
         }
 
         public IEnumerable<string> GetStandardObjectsIds()
         {
-            var folderTreeStr = HttpHelper.DownloadString(settings.VstsGitGetFilesUrl, settings.GitUsername, settings.GitPassword);
-            var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
-            if (tree == null)
-            {
-                return new List<string>();
-            }
+            var blobs = GetAllBlobs();
 
-            return tree.Value.Where(x => x.IsBlob).Select(m => GetIdFromPath(m.Path));
+            return blobs?.Select(m => GetIdFromPath(m.Path)) ?? new List<string>();
         }
 
         public IEnumerable<string> GetStandards()
         {
-            var folderTreeStr = HttpHelper.DownloadString(settings.VstsGitGetFilesUrl, settings.GitUsername, settings.GitPassword);
-            var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
+            var blobs = GetAllBlobs();
 
-            var standardsAsJson = new List<string>();
-            if (tree == null)
+            if (blobs == null)
             {
-                return standardsAsJson;
+                return new List<string>();
             }
 
-            foreach (var blob in tree.Value.Where(x => x.IsBlob))
+            var standardsAsJson = new List<string>();
+            foreach (var blob in blobs)
             {
-                var str = HttpHelper.DownloadString(blob.Url, settings.GitUsername, settings.GitPassword);
+                var str = _httpHelper.DownloadString(blob.Url, _settings.GitUsername, _settings.GitPassword);
                 standardsAsJson.Add(str);
             }
 
             return standardsAsJson;
         }
 
-        public string GetLatesCommit()
-        {
-            var commitResponse = HttpHelper.DownloadString(settings.VstsGitAllCommitsUrl, settings.GitUsername, settings.GitPassword);
-            var gitTree = JsonConvert.DeserializeObject<GitTree>(commitResponse);
-            if (gitTree == null)
-            {
-                return string.Empty;
-            }
 
-            return gitTree.Value[0]?.CommitId;
-        }
-
-        public void PushCommit(string body)
+        public void PushCommit(List<StandardObject> items)
         {
-            Post(settings.VstsGitPushUrl, settings.GitUsername, settings.GitPassword, body);
+            var body = _gitDynamicModelGenerator.GenerateCommitBody(_settings.GitBranch, GetLatesCommit(), items);
+            Post(_settings.GitBranch, _settings.GitUsername, _settings.GitPassword, body);
         }
 
         // Helpers
+        private IEnumerable<Entity> GetAllBlobs()
+        {
+            var folderTreeStr = _httpHelper.DownloadString(_settings.VstsGitGetFilesUrl, _settings.GitUsername, _settings.GitPassword);
+            var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
+
+            return tree?.Value.Where(x => x.IsBlob);
+        }
+
         private string GetIdFromPath(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -102,8 +99,20 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
                 var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{pwd}"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
                 HttpContent content = new StringContent(body, Encoding.UTF8, "application/json");
-                var result = client.PostAsync(streamUrl, content).Result;
+                client.PostAsync(streamUrl, content).RunSynchronously();
             }
+        }
+
+        private string GetLatesCommit()
+        {
+            var commitResponse = _httpHelper.DownloadString(_settings.VstsGitAllCommitsUrl, _settings.GitUsername, _settings.GitPassword);
+            var gitTree = JsonConvert.DeserializeObject<GitTree>(commitResponse);
+            if (gitTree == null)
+            {
+                return string.Empty;
+            }
+
+            return gitTree.Value[0]?.CommitId;
         }
     }
 }

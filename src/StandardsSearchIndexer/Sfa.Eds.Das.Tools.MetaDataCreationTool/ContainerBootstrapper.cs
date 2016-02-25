@@ -1,5 +1,6 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
 {
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
@@ -18,6 +19,8 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
                         c.For<IAngleSharpService>().Use<AngleSharpService>();
                         c.For<IVstsService>().Use<VstsService>();
                         c.For<ILog4NetLogger>().Use<Log4NetLogger>();
+                        c.For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
+                        c.For<IHttpHelper>().Use<HttpHelper>();
                     });
             return container;
         }

@@ -5,7 +5,6 @@
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Vsts;
 
     public class MetaData : IMetaData
     {
@@ -39,10 +38,7 @@
         {
             if (standards.Any())
             {
-                var oldObjectId = vstsService.GetLatesCommit();
-                var git = new GitDynamicModel();
-                var body = git.GenerateCommitBody(settings.GitBranch, oldObjectId, standards);
-                vstsService.PushCommit(body);
+                vstsService.PushCommit(standards);
             }
         }
     }

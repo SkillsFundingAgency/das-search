@@ -1,9 +1,11 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Vsts
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
     using System.Collections.Generic;
-    using Models;
 
-    public class GitDynamicModel
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
+
+    public class GitDynamicModelGenerator : IGitDynamicModelGenerator
     {
         public string GenerateCommitBody(string branchPath, string oldObjectId, List<StandardObject> items)
         {

@@ -168,7 +168,10 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 
         private async Task UploadStandardPdf(JsonMetadataObject standard)
         {
-            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdf).ConfigureAwait(false);
+            if (!_blobStorageHelper.FileExists(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf")))
+            {
+                await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdf).ConfigureAwait(false);
+            }
         }
 
         private async Task IndexStandardPdfs(string indexName, IEnumerable<JsonMetadataObject> standards)

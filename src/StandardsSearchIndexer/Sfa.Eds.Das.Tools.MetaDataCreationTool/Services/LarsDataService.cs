@@ -18,15 +18,18 @@
         private readonly ISettings _settings;
         private readonly ICsvService _csvService;
 
-        public LarsDataService(ISettings settings, ICsvService csvService)
+        private readonly IHttpHelper _httpHelper;
+
+        public LarsDataService(ISettings settings, ICsvService csvService, IHttpHelper httpHelper)
         {
             _settings = settings;
             _csvService = csvService;
+            _httpHelper = httpHelper;
         }
 
         public string GetZipFilePath()
         {
-            var json = HttpHelper.DownloadString(_settings.GovLearningUrl, null, null);
+            var json = _httpHelper.DownloadString(_settings.GovLearningUrl, null, null);
             var govLearnResponse = JsonConvert.DeserializeObject<GovLearnResponse>(json);
             if (govLearnResponse == null)
             {
@@ -39,7 +42,7 @@
 
         public string DownloadZipFile(string zipFilePath)
         {
-            var zipFile = HttpHelper.DownloadFile(zipFilePath, _settings.WorkingFolder);
+            var zipFile = _httpHelper.DownloadFile(zipFilePath, _settings.WorkingFolder);
             var extractedPath = UnPackZipFile(zipFile, _settings.CsvFileName);
             return extractedPath;
         }

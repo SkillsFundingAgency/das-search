@@ -7,9 +7,9 @@
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
 
-    public static class HttpHelper
+    public class HttpHelper : IHttpHelper
     {
-        public static string DownloadString(string streamUrl, string username, string pwd)
+        public string DownloadString(string streamUrl, string username, string pwd)
         {
             using (WebClient client = new WebClient())
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        public static string DownloadFile(string downloadFileUrl, string workingfolder)
+        public string DownloadFile(string downloadFileUrl, string workingfolder)
         {
             if (string.IsNullOrEmpty(downloadFileUrl))
             {

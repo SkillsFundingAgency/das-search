@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\IHttpHelper.cs" />
     <Compile Include="IMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
     <Compile Include="Models\GovLearn\GovLearnResponse.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Models\StandardObject.cs" />
-    <Compile Include="VSTS\GitDynamicModel.cs" />
+    <Compile Include="Services\GitDynamicModelGenerator.cs" />
     <Compile Include="MetaData.cs" />
     <Compile Include="Models\Git\GitTree.cs" />
     <Compile Include="Models\Git\Entity.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Models\Standard.cs" />
     <Compile Include="Services\Settings.cs" />
     <Compile Include="Services\Interfaces\ISettings.cs" />
+    <Compile Include="Services\Interfaces\IGitDynamicModelGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -136,6 +138,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VSTS\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
