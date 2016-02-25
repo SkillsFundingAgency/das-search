@@ -1,0 +1,120 @@
+
+.global-header {
+    background: #0b0c0c;
+    color: #fff
+}
+@media print {
+    .global-header * {
+        color: #0b0c0c !important
+    }
+}
+.global-header__wrapper {
+    margin: 0 auto;
+    max-width: 960px;
+    overflow: hidden;
+    padding: 15px
+}
+@media (min-width: 641px) {
+    .global-header__wrapper {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 10px
+    }
+}
+.global-header__logo {
+    display: inline-block;
+    font-size: 0;
+    margin: 0 -4px 15px 0;
+    vertical-align: top
+}
+@media (min-width: 641px) {
+    .global-header__logo {
+        margin-bottom: 0;
+        width: 33.33%
+    }
+}
+.govuk-logo {
+    color: #fff;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1em;
+    padding-bottom: 1px;
+    text-decoration: none
+}
+.govuk-logo img {
+    display: inline-block;
+    line-height: inherit;
+    margin: -6px 6px 0 0;
+    max-width: 35px;
+    vertical-align: middle;
+    width: 35px;
+    height: 31px
+}
+.govuk-logo:hover,
+.govuk-logo:visited,
+.govuk-logo:link {
+    color: #fff
+}
+.govuk-logo:hover,
+.govuk-logo:focus {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 0
+}
+.govuk-logo:active {
+    color: #2e8aca
+}
+.govuk-logo:active:hover {
+    border-color: #2e8aca
+}
+.global-header__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.11111;
+    margin: 0;
+    margin-bottom: 0;
+    padding: 0
+}
+@media (min-width: 641px) {
+    .global-header__title {
+        font-size: 24px
+    }
+}
+.global-header__title a {
+    border-bottom: 1px solid transparent;
+    color: #fff;
+    display: inline-block;
+    padding: 2px 0;
+    text-decoration: none
+}
+.global-header__title a:hover {
+    border-color: #fff
+}
+.global-header__link {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none
+}
+.global-header__link:hover {
+    color: #fff
+}
+.no-touch .global-header__link:hover {
+    text-decoration: underline
+}
+@media (min-width: 641px) {
+    .global-header__link {
+        font-size: 16px
+    }
+}
+.global-header__nav {
+    display: block;
+    vertical-align: top
+}
+@media (min-width: 641px) {
+    .global-header__nav {
+        display: inline-block;
+        margin-right: -4px;
+        width: 66.66%
+    }
+}

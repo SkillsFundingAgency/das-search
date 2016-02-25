@@ -1,0 +1,25 @@
+{
+  "name": "ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devenv": "gulp dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp" : "*",
+    "gulp-ruby-sass" : "*",
+    "gulp-plumber" : "*",
+    "browser-sync" : "*",
+    "gulp-autoprefixer" : "*",
+    "gulp-concat" : "*",
+    "run-sequence": "*",
+    "gulp-minify-css" : "*",
+    "gulp-util" : "*",
+    "gulp-rename" : "*",
+    "chalk" : "*"
+  }
+}
