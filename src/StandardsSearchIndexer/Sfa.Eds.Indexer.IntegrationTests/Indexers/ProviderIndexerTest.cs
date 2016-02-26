@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using FluentAssertions;
-using Nest;
-using NUnit.Framework;
+using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Das.ProviderIndexer.Settings;
-using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
+using FluentAssertions;
+using Nest;
+using NUnit.Framework;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers

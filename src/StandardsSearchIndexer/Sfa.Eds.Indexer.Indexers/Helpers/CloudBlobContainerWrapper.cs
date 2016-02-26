@@ -15,7 +15,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
 
         public async Task<bool> CreateIfNotExistsAsync()
         {
-            return _cloudBlobContainer.CreateIfNotExists();
+            return await _cloudBlobContainer.CreateIfNotExistsAsync();
         }
 
         public IEnumerable<IListBlobItem> ListBlobs(string prefix = null, bool useFlatBlobListing = false, BlobListingDetails blobListingDetails = BlobListingDetails.None)
@@ -26,11 +26,6 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
         public CloudBlockBlob GetBlockBlobReference(string blobName)
         {
             return _cloudBlobContainer.GetBlockBlobReference(blobName);
-        }
-
-        public IEnumerable<IListBlobItem> ListBlobs(string prefix = null, bool useFlatBlobListing = false)
-        {
-            return _cloudBlobContainer.ListBlobs(prefix, useFlatBlobListing);
         }
     }
 }

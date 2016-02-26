@@ -36,7 +36,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
 
             try
             {
-                var elements = container.ListBlobs(null, false);
+                var elements = container.ListBlobs(null, false, 0);
                 foreach (var blob in elements.OfType<ICloudBlob>())
                 {
                     string text;
