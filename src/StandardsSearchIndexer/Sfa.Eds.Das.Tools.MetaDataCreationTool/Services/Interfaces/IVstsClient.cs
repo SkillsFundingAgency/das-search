@@ -6,6 +6,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
     public interface IVstsClient
     {
         void PushCommit(List<StandardObject> items);
-        IEnumerable<string> GetAllFileContents();
+        IEnumerable<string> GetAllFileContents(string path);
     }
 }

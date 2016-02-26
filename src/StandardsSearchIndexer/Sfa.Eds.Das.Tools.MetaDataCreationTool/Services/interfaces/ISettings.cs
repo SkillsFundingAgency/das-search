@@ -18,6 +18,8 @@
 
         string VstsGitGetFilesUrl { get; }
 
+        string VstsGitGetFilesUrlFormat { get; }
+
         string VstsGitAllCommitsUrl { get; }
 
         string VstsGitPushUrl { get; }

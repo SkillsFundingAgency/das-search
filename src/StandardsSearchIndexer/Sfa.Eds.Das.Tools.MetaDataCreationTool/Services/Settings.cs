@@ -16,6 +16,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         public string EnvironmentName => GetSetting();
 
         public string VstsGitGetFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitFolderPath}&recursionLevel=Full&api-version=2.0";
+        public string VstsGitGetFilesUrlFormat => VstsGitBaseUrl + "/items?scopePath={0}&recursionLevel=Full&api-version=2.0";
 
         public string VstsGitAllCommitsUrl => $"{VstsGitBaseUrl}/commits?api-version=1.0&$top=1";
 

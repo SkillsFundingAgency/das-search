@@ -40,9 +40,9 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
             return gitTree.Value[0]?.CommitId;
         }
 
-        public IEnumerable<string> GetAllFileContents()
+        public IEnumerable<string> GetAllFileContents(string path)
         {
-            var blobs = GetAllBlobs();
+            var blobs = GetAllBlobs(path);
 
             if (blobs == null)
             {
@@ -59,9 +59,10 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
             return standardsAsJson;
         }
 
-        private IEnumerable<Entity> GetAllBlobs()
+        private IEnumerable<Entity> GetAllBlobs(string path)
         {
-            var folderTreeStr = _httpHelper.DownloadString(_settings.VstsGitGetFilesUrl, _settings.GitUsername, _settings.GitPassword);
+            var url = string.Format(_settings.VstsGitGetFilesUrlFormat, path);
+            var folderTreeStr = _httpHelper.DownloadString(url, _settings.GitUsername, _settings.GitPassword);
             var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
 
             return tree?.Value.Where(x => x.IsBlob);
