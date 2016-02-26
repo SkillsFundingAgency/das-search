@@ -43,7 +43,7 @@
             _logger.Info($"Got {currentMetaDataIds.Count()} current meta data files from vsts.");
 
             var missingStandards = DetermineMissingMetaData(currentStandards, currentMetaDataIds);
-            _logger.Info($"There are {missingStandards.Count()} meta data files that need to be created.");
+            _logger.Info($"There are {missingStandards.Count} meta data files that need to be created.");
 
             PushStandardsToGit(missingStandards);
             _logger.Info($"Pushed new meta files to Git Repository.");
