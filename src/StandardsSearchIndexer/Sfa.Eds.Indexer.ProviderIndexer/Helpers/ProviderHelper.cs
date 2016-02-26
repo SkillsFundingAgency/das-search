@@ -491,7 +491,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 try
                 {
                     provider.ProviderId = id;
-                    var a = _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
                 }
                 catch (Exception e)
                 {

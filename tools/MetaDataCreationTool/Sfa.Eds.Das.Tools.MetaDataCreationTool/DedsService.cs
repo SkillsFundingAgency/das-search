@@ -48,36 +48,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
             return queryExecution;
         }
 
-        private static void PrintResultsToConsole()
-        {
-            //for (int i = 0; i < _results.Count; i++)
-            //{
-            //    Logger.Info("========================================================");
-
-            //    var fieldsNames = string.Join(", ", _results[i].FieldNames);
-            //    Logger.Info(string.Format("Fields Names: {0}, with {1} results", fieldsNames, _results[i].Results.Count()));
-
-            //    foreach (var result in _results[i].Results)
-            //    {
-            //        var fieldscount = _results[i].FieldNames.Length;
-            //        for (var j = 0; j < fieldscount; j++)
-            //        {
-            //            var value = string.Format("{0}:{1}", _results[i].FieldNames[j], result[j]);
-            //            Logger.Info(value);
-            //        }
-
-            //        Logger.Info("========================================================");
-            //    }
-
-            //    Logger.Info("========================================================");
-            //}
-
-            //Logger.Info("Process Completed");
-            //Console.WriteLine("Press any key to start a new query");
-            //Console.ReadLine();
-        }
-
-
         /// <summary>
         /// Query Descriptors contain parameter listings under the FilterDescriptors property
         /// </summary>
