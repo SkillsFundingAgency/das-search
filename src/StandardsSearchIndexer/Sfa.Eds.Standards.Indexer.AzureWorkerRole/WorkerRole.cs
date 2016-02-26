@@ -11,6 +11,8 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool;
+
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -21,7 +23,8 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public override void Run()
         {
-            Log.Info("Starting indexer...");
+            Log.Info("Starting indexer... ");
+
             while (true)
             {
                 try

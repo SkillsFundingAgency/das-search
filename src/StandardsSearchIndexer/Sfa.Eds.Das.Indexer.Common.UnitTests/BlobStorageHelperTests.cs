@@ -35,7 +35,7 @@ namespace Sfa.Eds.Das.Indexer.Common.UnitTests
             var result = await sut.ReadAsync(It.IsAny<string>());
 
             // Assert
-            var expectedList = new List<JsonMetadataObject>
+            var expectedList = new List<MetaDataItem>
             {
                 null
             };
