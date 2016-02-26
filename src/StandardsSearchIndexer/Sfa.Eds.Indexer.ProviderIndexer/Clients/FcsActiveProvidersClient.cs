@@ -8,16 +8,16 @@
 
     public class FcsActiveProvidersClient : IActiveProviderClient
     {
-        private readonly IVstsService _vstsService;
+        private readonly IVstsClient _vstsClient;
 
-        public FcsActiveProvidersClient(IVstsService vstsService)
+        public FcsActiveProvidersClient(IVstsClient vstsClient)
         {
-            _vstsService = vstsService;
+            _vstsClient = vstsClient;
         }
 
-        public Task<IEnumerable<string>> GetProviders()
+        public async Task<IEnumerable<string>> GetProviders()
         {
-            throw new NotImplementedException();
+            return _vstsClient.GetAllFileContents("fcs");
         }
     }
 }
