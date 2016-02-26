@@ -205,7 +205,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 var doc = new StandardDocument
                 {
                     StandardId = standard.Id,
-                    Title = standard.Title,
+                    StandardTitle = standard.Title,
                     NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
                     StandardPdf = standard.StandardPdfUrl,
