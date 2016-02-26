@@ -19,12 +19,14 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         private readonly ISettings _settings;
         private readonly IGitDynamicModelGenerator _gitDynamicModelGenerator;
         private readonly IHttpHelper _httpHelper;
+        private readonly ILog4NetLogger _logger;
 
-        public VstsService(ISettings settings, IGitDynamicModelGenerator gitDynamicModelGenerator, IHttpHelper httpHelper)
+        public VstsService(ISettings settings, IGitDynamicModelGenerator gitDynamicModelGenerator, IHttpHelper httpHelper, ILog4NetLogger logger)
         {
             _settings = settings;
             _gitDynamicModelGenerator = gitDynamicModelGenerator;
             _httpHelper = httpHelper;
+            _logger = logger;
         }
 
         public IEnumerable<string> GetExistingStandardIds()
