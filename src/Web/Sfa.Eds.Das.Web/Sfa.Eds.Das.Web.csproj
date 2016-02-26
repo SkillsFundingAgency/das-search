@@ -226,6 +226,26 @@
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
+    <Compile Include="Views\Provider\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\SearchResults.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\_SearchResultMessage.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Standard\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Standard\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,6 +255,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Standard\_BlankFieldErrorMessage.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_BlankFieldErrorMessage.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Standard\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
@@ -288,12 +313,21 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Provider\SearchResults.cshtml" />
-    <Content Include="Views\Provider\Detail.cshtml" />
-    <Content Include="Views\Provider\_SearchResultMessage.cshtml" />
+    <Content Include="Views\Provider\SearchResults.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SearchResults.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\Detail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Detail.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_SearchResultMessage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Standard\_BlankFieldErrorMessage.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_BlankFieldErrorMessage.cs</LastGenOutput>
+      <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
