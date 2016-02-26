@@ -2,34 +2,13 @@
 	In order to choose from a provider list
 	As an employer
 	I want to be able to search provider in my area by entering postcode
-@ignore
+#validate postcode search field mandatory.
 Scenario: Validate post code field mandatory
-Given I am on Standard detail page
-When I keep the post code field empty
-And I click on search provider button
-Then I should see error message "Please enter a valid postcode"
+Given I am on Standard '25' detail page
+When I search Search for provider
+Then I should see error message "This field can't be blank"
 
-@ignore
-Scenario Outline:Validate post code search inside provider radius.
-Given I am on Standard detail page
-When I enter post code '<postcode>' which is inside provider radius
-And I click on search provider button
-Then I should list of providers on result page who operates within entered postcode.
-Examples:
-|postcode|
-|CV1 2wt |
-|CV6 1PT|
-@ignore
-Scenario: Validate partial post code search inside provider radius
-Given I am on Standard detail page
-When I enter post code '<postcode>' which is inside provider radius
-And I click on search provider button
-Then I should list of providers on result page who operates within entered postcode.
-Examples:
-|postcode|
-|CV1 2wt |
-|CV6 1PT|
-
+# Provider found( on radius)
 Scenario Outline: Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by postcode falling on Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
@@ -39,8 +18,7 @@ Examples:
 | Postcode| id |
 | LN76HN  | 25 |
 
-
-
+## Provider not found , but other provider closer one found
 Scenario Outline: Search Provider by postcode outside  Provider radius 60 miles
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
@@ -51,6 +29,7 @@ Examples:
 | Postcode | id |
 | LN76HJ   | 25 |
 
+## More than on provider found.
 
 Scenario Outline:Search Provider by postcode falling inside Provider radius
 Given I am on Standard '<id>' detail page
@@ -71,3 +50,11 @@ And I should see provider "aspire achieve advance limited" in provider results p
 Examples:
 | Postcode| id |
 | NW66AY | 25 |
+
+## No matched providers
+
+Scenario: Search Provider by invalid postcode1
+Given I am on Standard '25' detail page
+When I enter 'test' in provider search box
+And I search Search for provider
+Then I should see message searchresult "There are currently no providers for the apprenticeship standard: Digital & Technology Solutions Professional in test"
