@@ -3,6 +3,8 @@
     using System;
     using System.IO;
     using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
@@ -30,6 +32,17 @@
                 }
 
                 return string.Empty;
+            }
+        }
+
+        public void Post(string url, string body, string user, string password)
+        {
+            using (var client = new HttpClient())
+            {
+                var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{password}"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+                HttpContent content = new StringContent(body, Encoding.UTF8, "application/json");
+                client.PostAsync(url, content).Wait();
             }
         }
 

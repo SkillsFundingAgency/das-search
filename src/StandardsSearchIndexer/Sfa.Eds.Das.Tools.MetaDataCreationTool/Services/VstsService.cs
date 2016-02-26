@@ -39,7 +39,8 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
             return GetAllFileContents();
         }
 
-        public IEnumerable<string> GetAllFileContents() {
+        public IEnumerable<string> GetAllFileContents()
+        {
             var blobs = GetAllBlobs();
 
             if (blobs == null)

@@ -27,7 +27,5 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
         // Private settings
         private string VstsGitBaseUrl => GetSetting();
-
-        // Helpers
     }
 }

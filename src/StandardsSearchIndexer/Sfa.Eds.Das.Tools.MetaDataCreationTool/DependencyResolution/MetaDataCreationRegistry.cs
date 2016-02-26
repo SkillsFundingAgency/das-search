@@ -14,6 +14,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution
             For<IReadStandardsFromCsv>().Use<CsvService>();
             For<IAngleSharpService>().Use<AngleSharpService>();
             For<IVstsService>().Use<VstsService>();
+            For<IVstsClient>().Use<VstsClient>();
             For<ILog4NetLogger>().Use<Log4NetLogger>();
             For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
             For<IHttpHelper>().Use<HttpHelper>();
