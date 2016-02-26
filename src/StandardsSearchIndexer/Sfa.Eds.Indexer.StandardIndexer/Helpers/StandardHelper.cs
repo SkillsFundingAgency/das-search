@@ -148,7 +148,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 
         public IEnumerable<MetaDataItem> GetStandardsMetaDataFromGit()
         {
-            return _metaDataHelper.GetAllStandardsFromGit();
+            return _metaDataHelper.GetAllStandardsMetaData();
         }
 
         private void CreateAlias(string indexName)

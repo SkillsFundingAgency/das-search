@@ -17,7 +17,7 @@
             _metaData = new MetaDataManager();
         }
 
-        public List<MetaDataItem> GetAllStandardsFromGit()
+        public List<MetaDataItem> GetAllStandardsMetaData()
         {
             var standards = _metaData.GetAllAsJson();
 
