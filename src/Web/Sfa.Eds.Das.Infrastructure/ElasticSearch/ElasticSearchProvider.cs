@@ -52,7 +52,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             {
                 return new ProviderSearchResults
                 {
-                    HasError = true
+                    StandardId = int.Parse(standardId),
+                    PostCodeMissing = true
                 };
             }
 
@@ -69,33 +70,21 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             ISearchResponse<ProviderSearchResultsItem> results = new SearchResponse<ProviderSearchResultsItem>();
 
-            if (string.IsNullOrEmpty(location))
+            var coordinates = await _locatorService.GetLatLongFromPostCode(location);
+            if (coordinates.Lat != 0 && coordinates.Lon != 0)
             {
+                var qryStr = CreateRawQuery(standardId, coordinates);
+
                 results = client
                     .Search<ProviderSearchResultsItem>(s => s
-                        .Index(_applicationSettings.ProviderIndexAlias)
-                        .MatchAll()
-                        .Filter(f => f
-                            .Term(y => y.StandardsId, standardId)));
-            }
-            else
-            {
-                var coordinates = await _locatorService.GetLatLongFromPostCode(location);
-                if (coordinates.Lat != 0 && coordinates.Lon != 0)
-                {
-                    var qryStr = CreateRawQuery(standardId, coordinates);
-
-                    results = client
-                        .Search<ProviderSearchResultsItem>(s => s
-                        .Index(_applicationSettings.ProviderIndexAlias)
-                        .QueryRaw(qryStr)
-                        .SortGeoDistance(g =>
-                        {
-                            g.PinTo(coordinates.Lat, coordinates.Lon)
-                                .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
-                            return g;
-                        }));
-                }
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .QueryRaw(qryStr)
+                    .SortGeoDistance(g =>
+                    {
+                        g.PinTo(coordinates.Lat, coordinates.Lon)
+                            .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
+                        return g;
+                    }));
             }
 
             var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
@@ -118,7 +107,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             }
             else
             {
-                result.HasError = true;
+                result.HasError = false;
             }
 
             return result;

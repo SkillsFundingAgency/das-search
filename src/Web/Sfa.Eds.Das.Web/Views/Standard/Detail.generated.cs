@@ -40,14 +40,14 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     public partial class Detail : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardViewModel>
     {
 
-#line 79 "..\..\Views\Standard\Detail.cshtml"
+#line 84 "..\..\Views\Standard\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string item, string unit = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 80 "..\..\Views\Standard\Detail.cshtml"
+#line 85 "..\..\Views\Standard\Detail.cshtml"
  
 if (!string.IsNullOrEmpty(item))
 {
@@ -62,7 +62,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 83 "..\..\Views\Standard\Detail.cshtml"
+#line 88 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -77,7 +77,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 84 "..\..\Views\Standard\Detail.cshtml"
+#line 89 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -86,7 +86,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 84 "..\..\Views\Standard\Detail.cshtml"
+#line 89 "..\..\Views\Standard\Detail.cshtml"
       WriteTo(__razor_helper_writer, unit);
 
 
@@ -95,7 +95,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 85 "..\..\Views\Standard\Detail.cshtml"
+#line 90 "..\..\Views\Standard\Detail.cshtml"
 }
 
 
@@ -103,7 +103,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 86 "..\..\Views\Standard\Detail.cshtml"
+#line 91 "..\..\Views\Standard\Detail.cshtml"
 }
 #line default
 #line hidden
@@ -116,7 +116,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
             
             #line 4 "..\..\Views\Standard\Detail.cshtml"
   
-    ViewBag.Title = "Standard - " + @Model.Title;
+    ViewBag.Title = "Standard - " + @Model.Standard.Title;
 
             
             #line default
@@ -164,7 +164,7 @@ WriteLiteral("                    ");
 
             
             #line 18 "..\..\Views\Standard\Detail.cshtml"
-               Write(Model.Title);
+               Write(Model.Standard.Title);
 
             
             #line default
@@ -179,7 +179,7 @@ WriteLiteral("                        ");
 
             
             #line 22 "..\..\Views\Standard\Detail.cshtml"
-                   Write(GetStandardDetailItem("Minimum length", @Model.MinimumLength, "years"));
+                   Write(GetStandardDetailItem("Minimum length", @Model.Standard.MinimumLength, "years"));
 
             
             #line default
@@ -190,7 +190,7 @@ WriteLiteral("                        ");
 
             
             #line 23 "..\..\Views\Standard\Detail.cshtml"
-                   Write(GetStandardDetailItem("Entry Level", @Model.NotionalEndLevel.ToString()));
+                   Write(GetStandardDetailItem("Entry Level", @Model.Standard.NotionalEndLevel.ToString()));
 
             
             #line default
@@ -201,7 +201,7 @@ WriteLiteral("                        ");
 
             
             #line 24 "..\..\Views\Standard\Detail.cshtml"
-                   Write(GetStandardDetailItem("End Level", @Model.NotionalEndLevel.ToString()));
+                   Write(GetStandardDetailItem("End Level", @Model.Standard.NotionalEndLevel.ToString()));
 
             
             #line default
@@ -214,14 +214,14 @@ WriteLiteral(" class=\"panel-indent panel-indent-info\"");
 WriteLiteral(">\r\n                    <ul>\r\n                        <li>\r\n                      " +
 "      <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1162), Tuple.Create("\"", 1182)
+WriteAttribute("href", Tuple.Create(" href=\"", 1207), Tuple.Create("\"", 1236)
             
             #line 34 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 1169), Tuple.Create<System.Object, System.Int32>(Model.PdfUrl
+, Tuple.Create(Tuple.Create("", 1214), Tuple.Create<System.Object, System.Int32>(Model.Standard.PdfUrl
             
             #line default
             #line hidden
-, 1169), false)
+, 1214), false)
 );
 
 WriteLiteral(">\r\n                                Download full details (PDF, 268KB)\r\n          " +
@@ -283,14 +283,31 @@ WriteLiteral(" class=\"form-label\"");
 
 WriteLiteral(" for=\"q\"");
 
-WriteLiteral(">\r\n                                    Postcode (optional)\r\n                     " +
-"               <span");
+WriteLiteral(">\r\n                                    Postcode (mandatory)\r\n                    " +
+"                <span");
 
 WriteLiteral(" class=\"form-hint\"");
 
 WriteLiteral(">\r\n                                        See all training providers in a given " +
 "location.\r\n                                    </span>\r\n                        " +
-"        </label>\r\n                                <input");
+"            <p>\r\n");
+
+            
+            #line 63 "..\..\Views\Standard\Detail.cshtml"
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 63 "..\..\Views\Standard\Detail.cshtml"
+                                          
+                                            Html.RenderPartial("_BlankFieldErrorMessage");
+                                        
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </p>\r\n                                </lab" +
+"el>\r\n                                <input");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -300,14 +317,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2589), Tuple.Create("\"", 2614)
+WriteAttribute("value", Tuple.Create(" value=\"", 2906), Tuple.Create("\"", 2940)
             
-            #line 63 "..\..\Views\Standard\Detail.cshtml"
-                                            , Tuple.Create(Tuple.Create("", 2597), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+            #line 68 "..\..\Views\Standard\Detail.cshtml"
+                                            , Tuple.Create(Tuple.Create("", 2914), Tuple.Create<System.Object, System.Int32>(Model.Standard.StandardId
             
             #line default
             #line hidden
-, 2597), false)
+, 2914), false)
 );
 
 WriteLiteral(">\r\n                                <input");
@@ -340,7 +357,7 @@ WriteLiteral(" />\r\n                        </form>\r\n\r\n                    
 "     </div>\r\n");
 
             
-            #line 71 "..\..\Views\Standard\Detail.cshtml"
+            #line 76 "..\..\Views\Standard\Detail.cshtml"
             }
 
             
