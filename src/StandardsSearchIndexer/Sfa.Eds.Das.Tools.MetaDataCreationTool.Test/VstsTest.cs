@@ -33,7 +33,7 @@
             httpHelperMock.Setup(m => m.DownloadString(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(AllIdsResponse);
             var vsts = new VstsService(new Settings(), new GitDynamicModelGenerator(), httpHelperMock.Object);
-            var ids = vsts.GetStandardObjectsIds();
+            var ids = vsts.GetExistingStandardIds();
 
             Debug.Assert(ids != null, "ids != null");
 

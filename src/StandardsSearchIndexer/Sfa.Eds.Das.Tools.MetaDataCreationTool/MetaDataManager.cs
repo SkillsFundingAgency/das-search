@@ -13,12 +13,11 @@
         private readonly IVstsService _vstsService;
         private readonly ISettings _settings;
 
-        public MetaDataManager()
+        public MetaDataManager(ILarsDataService larsDataService, IVstsService vstsService, ISettings settings)
         {
-            var container = ContainerBootstrapper.BootstrapStructureMap();
-            _larsDataService = container.GetInstance<ILarsDataService>();
-            _vstsService = container.GetInstance<IVstsService>();
-            _settings = container.GetInstance<ISettings>();
+            _larsDataService = larsDataService;
+            _vstsService = vstsService;
+            _settings = settings;
         }
 
         public IEnumerable<string> GetAllAsJson()
@@ -35,7 +34,7 @@
         public void GenerateStandardMetadataFiles()
         {
             var currentStandards = _larsDataService.GetListOfCurrentStandards();
-            var currentMetaDataIds = _vstsService.GetStandardObjectsIds();
+            var currentMetaDataIds = _vstsService.GetExistingStandardIds();
 
             var missingStandards = DetermineMissingMetaData(currentStandards, currentMetaDataIds);
 

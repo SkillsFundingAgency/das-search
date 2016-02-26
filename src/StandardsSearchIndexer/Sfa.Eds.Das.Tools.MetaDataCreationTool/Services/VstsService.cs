@@ -26,7 +26,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
             _httpHelper = httpHelper;
         }
 
-        public IEnumerable<string> GetStandardObjectsIds()
+        public IEnumerable<string> GetExistingStandardIds()
         {
             var blobs = GetAllBlobs();
 

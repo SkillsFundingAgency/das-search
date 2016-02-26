@@ -7,26 +7,29 @@
 
     using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool;
+    using Tools.MetaDataCreationTool.Services.Interfaces;
 
     internal class MetaDataHelper : IMetaDataHelper
     {
-        private readonly MetaDataManager _metaData;
+        private readonly IGetStandardMetaData _metaDataReader;
+        private readonly IGenerateStandardMetaData _metaDataWriter;
 
-        public MetaDataHelper()
+        public MetaDataHelper(IGetStandardMetaData metaDataReader, IGenerateStandardMetaData metaDataGenerator)
         {
-            _metaData = new MetaDataManager();
+            _metaDataReader = metaDataReader;
+            _metaDataWriter = metaDataGenerator;
         }
 
         public List<MetaDataItem> GetAllStandardsMetaData()
         {
-            var standards = _metaData.GetAllAsJson();
+            var standards = _metaDataReader.GetAllAsJson();
 
             return standards.Select(JsonConvert.DeserializeObject<MetaDataItem>).ToList();
         }
 
         public void UpdateMetadataRepository()
         {
-            _metaData.GenerateStandardMetadataFiles();
+            _metaDataWriter.GenerateStandardMetadataFiles();
         }
     }
 }
