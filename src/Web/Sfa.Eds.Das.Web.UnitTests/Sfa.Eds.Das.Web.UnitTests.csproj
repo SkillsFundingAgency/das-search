@@ -128,11 +128,12 @@
     <Compile Include="Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\StandardControllerTest.cs" />
-    <Compile Include="Services\MappingSearchResultsToViewModel.cs" />
+    <Compile Include="Services\ForMappingStandardSearchResultsToViewModel.cs" />
     <Compile Include="ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
     <Compile Include="Views\ProviderSearchResultPage.cs" />
     <Compile Include="Views\StandardDetailPage.cs" />
     <Compile Include="Views\StandardSearchResultPage.cs" />
+    <Compile Include="Views\ForStandardSearchResultPage.cs" />
     <Compile Include="Views\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

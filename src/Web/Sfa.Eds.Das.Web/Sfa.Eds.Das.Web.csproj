@@ -219,6 +219,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Services\MappingActions\StandardViewModelMappingAction.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\StandardResultItemViewModel.cs" />

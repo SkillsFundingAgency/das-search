@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
+    <Compile Include="Domain\Model\TypicalLength.cs" />
     <Compile Include="Domain\Services\IStandardRepository.cs" />
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Domain\Model\Coordinate.cs" />

@@ -11,7 +11,6 @@
     using Sfa.Eds.Das.Web.Models;
     using Sfa.Eds.Das.Web.Services;
     using Sfa.Eds.Das.Web.ViewModels;
-    using Core.Domain.Model;
 
     public sealed class StandardController : Controller
     {

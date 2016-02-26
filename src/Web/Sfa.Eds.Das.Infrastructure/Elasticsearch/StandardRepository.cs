@@ -43,7 +43,15 @@
 
             if (document != null)
             {
-                return new Standard { StandardId = document.StandardId, Title = document.Title, NotionalEndLevel = document.NotionalEndLevel };
+                return new Standard
+                           {
+                               StandardId = document.StandardId,
+                               Title = document.Title,
+                               NotionalEndLevel = document.NotionalEndLevel,
+                               JobRoles = document.JobRoles,
+                               Keywords = document.Keywords,
+                               TypicalLength = document.TypicalLength
+                           };
             }
 
             return null;
