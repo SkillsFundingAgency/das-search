@@ -1,12 +1,13 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
     using Newtonsoft.Json;
-    using System.IO;
+
     public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData
     {
         private readonly ILarsDataService _larsDataService;

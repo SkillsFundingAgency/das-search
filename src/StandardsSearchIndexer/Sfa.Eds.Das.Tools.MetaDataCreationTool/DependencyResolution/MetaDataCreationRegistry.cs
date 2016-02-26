@@ -18,6 +18,8 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution
             For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
             For<IHttpHelper>().Use<HttpHelper>();
             For<IUnzipFiles>().Use<ZipFileExtractor>();
+            For<IGetStandardMetaData>().Use<MetaDataManager>();
+            For<IGenerateStandardMetaData>().Use<MetaDataManager>();
         }
     }
 }

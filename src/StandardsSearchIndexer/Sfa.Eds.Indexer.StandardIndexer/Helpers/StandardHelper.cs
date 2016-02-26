@@ -136,11 +136,6 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
         }
 
-        public async Task<IEnumerable<MetaDataItem>> GetStandardsFromAzureAsync()
-        {
-            return (await _blobStorageHelper.ReadAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
-        }
-
         public void UpdateMetadataRepositoryWithNewStandards()
         {
             _metaDataHelper.UpdateMetadataRepository();
