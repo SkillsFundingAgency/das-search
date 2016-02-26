@@ -68,7 +68,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             var expectedStandardResult = new StandardDocument()
             {
                 StandardId = 61,
-                StandardTitle = "Dental Nurse",
+                Title = "Dental Nurse",
                 NotionalEndLevel = 3,
                 PdfFileName = "61-Apprenticeship standard for a dental nurse",
                 StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
@@ -86,7 +86,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             var retrievedResult = _elasticClient.Search<StandardDocument>(p => p
                 .Index(indexName)
-                .QueryString(expectedStandardResult.StandardTitle));
+                .QueryString(expectedStandardResult.Title));
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
 
@@ -94,7 +94,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
             Assert.AreEqual(1, amountRetrieved);
-            Assert.AreEqual(expectedStandardResult.StandardTitle, retrievedStandard.StandardTitle);
+            Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
             Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
             Assert.AreEqual(expectedStandardResult.StandardId, retrievedStandard.StandardId);
         }
