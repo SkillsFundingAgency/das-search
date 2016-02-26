@@ -10,8 +10,6 @@ namespace Sfa.Eds.Das.Indexer.Common.Models
 
         public string Title { get; set; }
 
-        public string JobTitle { get; set; }
-
         public int NotionalEndLevel { get; set; }
 
         public string PdfFileName { get; set; }
