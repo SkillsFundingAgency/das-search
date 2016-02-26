@@ -36,6 +36,10 @@
       <HintPath>..\packages\Elasticsearch.Net.1.7.1\lib\net45\Elasticsearch.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LINQtoCSV, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LINQtoCSV.1.5.0.0\lib\net35\LINQtoCSV.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +95,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\StubActiveProvidersClient.cs" />
+    <Compile Include="Models\FcsProviderRecord.cs" />
+    <Compile Include="Clients\IActiveProviderClient.cs" />
+    <Compile Include="Clients\ICourseDirectoryClient.cs" />
+    <Compile Include="Clients\StubCourseDirectoryClient.cs" />
     <Compile Include="DependencyResolution\ProviderRegistry.cs" />
     <Compile Include="Helpers\IProviderHelper.cs" />
     <Compile Include="Helpers\ProviderHelper.cs" />

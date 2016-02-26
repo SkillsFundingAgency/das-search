@@ -5,6 +5,8 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.ProviderIndexer.DependencyResolution
 {
+    using Sfa.Eds.Das.ProviderIndexer.Clients;
+
     public class ProviderRegistry : Registry
     {
         public ProviderRegistry()
@@ -12,6 +14,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.DependencyResolution
             For<IProviderIndexerService>().Use<ProviderIndexerService>();
             For<IProviderHelper>().Use<ProviderHelper>();
             For<IProviderIndexSettings>().Use<ProviderIndexSettings>();
+            For<ICourseDirectoryClient>().Use<StubCourseDirectoryClient>();
         }
     }
 }

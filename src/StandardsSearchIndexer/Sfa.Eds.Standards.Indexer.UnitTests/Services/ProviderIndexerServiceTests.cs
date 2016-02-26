@@ -9,20 +9,26 @@ using Sfa.Eds.Das.ProviderIndexer.Settings;
 
 namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
 {
+    using Sfa.Eds.Das.ProviderIndexer.Clients;
+
     [TestFixture]
     public class ProviderIndexerServiceTests
     {
         private Mock<IProviderHelper> _mockHelper;
         private IProviderIndexSettings _mockSettings;
         private ProviderIndexerService _sut;
+        private Mock<ICourseDirectoryClient> _mockClient;
+        private Mock<IActiveProviderClient> _mockActiveProviderClient;
 
         [SetUp]
         public void Setup()
         {
             _mockHelper = new Mock<IProviderHelper>();
+            _mockClient = new Mock<ICourseDirectoryClient>();
             _mockSettings = Mock.Of<IProviderIndexSettings>(x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.ProviderIndexesAlias == "ciproviderindexesalias");
+            _mockActiveProviderClient = new Mock<IActiveProviderClient>();
 
-            _sut = new ProviderIndexerService(_mockSettings, _mockHelper.Object);
+            _sut = new ProviderIndexerService(_mockSettings, _mockHelper.Object, _mockClient.Object, _mockActiveProviderClient.Object);
         }
 
         [Test]

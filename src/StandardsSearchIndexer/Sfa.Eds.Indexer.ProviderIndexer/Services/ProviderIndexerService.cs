@@ -7,21 +7,33 @@ using Sfa.Eds.Das.ProviderIndexer.Settings;
 
 namespace Sfa.Eds.Das.ProviderIndexer.Services
 {
+    using System.Linq;
+
+    using Sfa.Eds.Das.ProviderIndexer.Clients;
+
     public class ProviderIndexerService : IProviderIndexerService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IProviderHelper _providerHelper;
+        private readonly ICourseDirectoryClient _courseDirectoryClient;
+
+        private readonly IActiveProviderClient _activeProviderClient;
+
         private readonly IProviderIndexSettings _providerIndexSettings;
 
         public ProviderIndexerService(
             IProviderIndexSettings providerIndexSettings,
-            IProviderHelper providerHelper)
+            IProviderHelper providerHelper,
+            ICourseDirectoryClient courseDirectoryClient,
+            IActiveProviderClient activeProviderClient)
         {
             _providerIndexSettings = providerIndexSettings;
             _providerHelper = providerHelper;
+            _courseDirectoryClient = courseDirectoryClient;
+            _activeProviderClient = activeProviderClient;
         }
 
-        public void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             Log.Info("Creating new scheduled provider index at " + DateTime.Now);
             try
@@ -34,9 +46,10 @@ namespace Sfa.Eds.Das.ProviderIndexer.Services
                 }
 
                 Log.Info("Indexing providers...");
-                var providers = _providerHelper.GetProviders();
+                var providers = await _courseDirectoryClient.GetProviders();
+                var activeProviders = await _activeProviderClient.GetProviders();
 
-                _providerHelper.IndexProviders(scheduledRefreshDateTime, providers);
+                _providerHelper.IndexProviders(scheduledRefreshDateTime, providers.Where(x => activeProviders.Contains(x.UkPrn)).ToList());
 
                 PauseWhileIndexingIsBeingRun();
 
