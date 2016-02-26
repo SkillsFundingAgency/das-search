@@ -20,7 +20,7 @@
             var sri = new StandardSearchResultsItem
             {
                 StandardId = 101,
-                StandardTitle = "Standard 1"
+                Title = "Standard 1"
             };
             var resultList = new List<StandardSearchResultsItem> { sri };
             var model = new StandardSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
@@ -28,7 +28,7 @@
             var mappedResult = mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(model);
 
             Assert.AreEqual(model.TotalResults, mappedResult.TotalResults);
-            Assert.AreEqual(model.Results.First().StandardTitle, mappedResult.Results.First().StandardTitle);
+            Assert.AreEqual(model.Results.First().Title, mappedResult.Results.First().Title);
         }
     }
 }

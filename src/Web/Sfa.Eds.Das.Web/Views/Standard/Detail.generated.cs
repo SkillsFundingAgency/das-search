@@ -116,7 +116,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
             
             #line 4 "..\..\Views\Standard\Detail.cshtml"
   
-    ViewBag.Title = "Standard - " + @Model.Standard.StandardTitle;
+    ViewBag.Title = "Standard - " + @Model.Standard.Title;
 
             
             #line default
@@ -164,7 +164,7 @@ WriteLiteral("                    ");
 
             
             #line 18 "..\..\Views\Standard\Detail.cshtml"
-               Write(Model.Standard.StandardTitle);
+               Write(Model.Standard.Title);
 
             
             #line default

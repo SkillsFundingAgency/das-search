@@ -136,7 +136,7 @@ WriteLiteral("                                ");
 
             
             #line 30 "..\..\Views\Standard\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.StandardTitle, "Detail", "Standard", new {@id = item.StandardId}, null));
+                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new {@id = item.StandardId}, null));
 
             
             #line default

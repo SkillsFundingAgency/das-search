@@ -4,7 +4,7 @@
     {
         public int StandardId { get; set; }
 
-        public string StandardTitle { get; set; }
+        public string Title { get; set; }
 
         public int NotionalEndLevel { get; set; }
     }

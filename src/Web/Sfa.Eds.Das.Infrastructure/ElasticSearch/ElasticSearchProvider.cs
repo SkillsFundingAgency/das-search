@@ -72,7 +72,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             if (standard != null)
             {
-                standardName = standard.StandardTitle;
+                standardName = standard.Title;
             }
 
             ISearchResponse<ProviderSearchResultsItem> results = new SearchResponse<ProviderSearchResultsItem>();

@@ -2,7 +2,7 @@
 @model Sfa.Eds.Das.Web.ViewModels.StandardViewModel
 
 @{
-    ViewBag.Title = "Standard - " + @Model.Standard.StandardTitle;
+    ViewBag.Title = "Standard - " + @Model.Standard.Title;
 }
 
 <main id="content" role="main">
@@ -15,7 +15,7 @@
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
-                    @Model.Standard.StandardTitle
+                    @Model.Standard.Title
                 </h1>
                 <div class="standard-result-summary">
                     <dl>
