@@ -6,13 +6,13 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
+
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
-    using System.Threading.Tasks;
     public class VstsService : IVstsService
     {
         private readonly ISettings _settings;
@@ -35,7 +35,11 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
         public IEnumerable<string> GetStandards()
         {
-            var blobs = GetAllBlobs();
+            return GetAllFileContents();
+        }
+
+        public IEnumerable<string> GetAllFileContents() {
+        var blobs = GetAllBlobs();
 
             if (blobs == null)
             {
