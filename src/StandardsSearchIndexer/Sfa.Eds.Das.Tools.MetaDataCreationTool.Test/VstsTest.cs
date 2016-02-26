@@ -9,6 +9,7 @@
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
+    using MetaDataCreationTool.Services.Interfaces;
 
     [TestFixture]
     public class VstsTest
@@ -18,10 +19,12 @@
         public void GeStandards()
         {
             var httpHelperMock = new Mock<IHttpHelper>();
+            var mockLogger = new Mock<ILog4NetLogger>(MockBehavior.Loose);
+
             httpHelperMock.Setup(m => m.DownloadString(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(AllIdsResponse);
 
-            var vsts = new VstsService(new Settings(), new GitDynamicModelGenerator(), httpHelperMock.Object);
+            var vsts = new VstsService(new Settings(), new GitDynamicModelGenerator(), httpHelperMock.Object, mockLogger.Object);
             var standards = vsts.GetStandards();
             Assert.AreEqual(5, standards.Count());
         }
@@ -30,9 +33,11 @@
         public void GetIds()
         {
             var httpHelperMock = new Mock<IHttpHelper>();
+            var mockLogger = new Mock<ILog4NetLogger>(MockBehavior.Loose);
+
             httpHelperMock.Setup(m => m.DownloadString(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(AllIdsResponse);
-            var vsts = new VstsService(new Settings(), new GitDynamicModelGenerator(), httpHelperMock.Object);
+            var vsts = new VstsService(new Settings(), new GitDynamicModelGenerator(), httpHelperMock.Object, mockLogger.Object);
             var ids = vsts.GetExistingStandardIds();
 
             Debug.Assert(ids != null, "ids != null");
