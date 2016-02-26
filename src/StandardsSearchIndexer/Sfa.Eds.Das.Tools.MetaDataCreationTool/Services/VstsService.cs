@@ -6,13 +6,14 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
+
     public class VstsService : IVstsService
     {
         private readonly ISettings _settings;
@@ -39,7 +40,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         }
 
         public IEnumerable<string> GetAllFileContents() {
-        var blobs = GetAllBlobs();
+            var blobs = GetAllBlobs();
 
             if (blobs == null)
             {
@@ -55,7 +56,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
             return standardsAsJson;
         }
-
 
         public void PushCommit(List<StandardObject> items)
         {

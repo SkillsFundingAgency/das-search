@@ -7,7 +7,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
     public interface ICloudBlobContainerWrapper
     {
         Task<bool> CreateIfNotExistsAsync();
-        IEnumerable<IListBlobItem> ListBlobs(string prefix = null, bool useFlatBlobListing = false, BlobListingDetails blobListingDetails = 0);
+        IEnumerable<IListBlobItem> ListBlobs(string prefix, bool useFlatBlobListing, BlobListingDetails blobListingDetails);
         CloudBlockBlob GetBlockBlobReference(string blobName);
     }
 }

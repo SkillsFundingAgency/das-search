@@ -142,7 +142,7 @@ WriteLiteral("                                ");
 
             
             #line 32 "..\..\Views\Provider\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.ProviderId }, null));
+                           Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.Id }, null));
 
             
             #line default

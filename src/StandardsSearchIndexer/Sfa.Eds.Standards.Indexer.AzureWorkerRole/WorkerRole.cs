@@ -16,9 +16,9 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private IContainer _container;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
+        private IContainer _container;
         private ICommonSettings _commonSettings;
 
         public override void Run()
@@ -50,7 +50,6 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
             Log4NetSettings.Initialise();
 
             // For information on handling configuration changes see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
-
             var result = base.OnStart();
 
             Log.Info("Started...");

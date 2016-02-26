@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
+using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {

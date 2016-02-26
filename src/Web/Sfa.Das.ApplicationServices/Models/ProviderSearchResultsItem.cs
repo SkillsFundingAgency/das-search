@@ -6,6 +6,8 @@
 
     public sealed class ProviderSearchResultsItem
     {
+        public int Id { get; set; }
+
         public string UkPrn { get; set; }
 
         public string ProviderName { get; set; }
