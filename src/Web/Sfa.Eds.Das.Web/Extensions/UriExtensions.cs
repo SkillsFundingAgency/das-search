@@ -6,7 +6,6 @@
 
     public static class UriExtensions
     {
-
         public static LinkViewModel GetSearchResultUrl(this Uri urlReferrer, string action)
         {
             if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?keywords"))

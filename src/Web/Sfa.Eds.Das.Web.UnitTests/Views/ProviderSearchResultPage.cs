@@ -10,7 +10,7 @@
     using Web.Views.Provider;
 
     [TestFixture]
-    public sealed class ProviderSearchResultPage : TestBase
+    public sealed class ProviderSearchResultPage : ViewTestBase
     {
         [Test]
         public void ShouldShowAnErrorWhenSomethingIsWrong()

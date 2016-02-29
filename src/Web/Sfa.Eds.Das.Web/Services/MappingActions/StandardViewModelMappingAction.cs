@@ -22,7 +22,6 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
 
             destination.StandardPdfUrlTitle = ExtractPdfTitle(source.StandardPdfUrl);
             destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdfUrl);
-
         }
 
         private string ExtractPdfTitle(string pdfUrl)

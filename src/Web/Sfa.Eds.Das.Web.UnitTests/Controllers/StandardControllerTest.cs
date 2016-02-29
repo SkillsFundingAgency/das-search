@@ -89,8 +89,7 @@
 
             controller.Url = new UrlHelper(
                 new RequestContext(context.Object, new RouteData()),
-                new RouteCollection()
-            );
+                new RouteCollection());
 
             var result = controller.Detail("1", hasErrorParmeter) as ViewResult;
 
