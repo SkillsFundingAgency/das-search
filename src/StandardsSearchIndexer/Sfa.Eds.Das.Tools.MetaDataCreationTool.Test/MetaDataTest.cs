@@ -11,7 +11,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
     {
         [Test]
         [Category("ExternalDependency")]
-        //[Ignore("Integration run")]
+        [Ignore("Integration run")]
         public void TestGenerationOfFiles()
         {
             var container = new Container(c =>

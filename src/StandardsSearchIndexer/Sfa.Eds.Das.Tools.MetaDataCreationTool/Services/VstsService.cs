@@ -6,7 +6,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-    using System.Threading.Tasks;
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
@@ -36,20 +35,21 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
             return blobs?.Select(m => GetIdFromPath(m.Path)) ?? new List<string>();
         }
 
-        public IEnumerable<string> GetStandards()
+        public IDictionary<string, string> GetStandards()
         {
             var blobs = GetAllBlobs();
 
             if (blobs == null)
             {
-                return new List<string>();
+                return new Dictionary<string, string>(0);
             }
 
-            var standardsAsJson = new List<string>();
+            var standardsAsJson = new Dictionary<string, string>();
+
             foreach (var blob in blobs)
             {
                 var str = _httpHelper.DownloadString(blob.Url, _settings.GitUsername, _settings.GitPassword);
-                standardsAsJson.Add(str);
+                standardsAsJson.Add(blob.Path, str);
             }
 
             return standardsAsJson;
