@@ -49,10 +49,11 @@ namespace Sfa.Eds.Das.ProviderIndexer.Services
                 }
 
                 Log.Info("Indexing providers...");
-                var providers = await _courseDirectoryClient.GetProviders();
-                var activeProviders = await _activeProviderClient.GetProviders();
+                var providers = _courseDirectoryClient.GetProviders();
+                var activeProviders = _activeProviderClient.GetProviders();
+                Task.WaitAll();
 
-                _providerHelper.IndexProviders(scheduledRefreshDateTime, providers.Where(x => activeProviders.Contains(x.UkPrn)).ToList());
+                _providerHelper.IndexProviders(scheduledRefreshDateTime, providers.Result.Where(x => activeProviders.Result.Contains(x.UkPrn)).ToList());
 
                 PauseWhileIndexingIsBeingRun();
 
