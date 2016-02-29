@@ -56,10 +56,12 @@
                 cfg.CreateMap<ProviderSearchResultsItem, ProviderResultItemViewModel>();
                 cfg.CreateMap<ProviderSearchResults, ProviderSearchResultViewModel>();
 
-                // Standards
-                cfg.CreateMap<StandardSearchResultsItem, StandardResultItemViewModel>().AfterMap<StandardViewModelMappingAction>();
+                // Standard search listing
                 cfg.CreateMap<StandardSearchResults, StandardSearchResultViewModel>();
-                cfg.CreateMap<StandardDetail, StandardViewModel>();
+                cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
+
+                // Standard detail page
+                cfg.CreateMap<Standard, StandardViewModel>().AfterMap<StandardViewModelMappingAction>();
             });
         }
     }

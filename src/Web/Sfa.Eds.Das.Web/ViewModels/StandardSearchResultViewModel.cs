@@ -8,7 +8,7 @@
 
         public string SearchTerm { get; set; }
 
-        public IEnumerable<StandardResultItemViewModel> Results { get; set; }
+        public IEnumerable<StandardSearchResultItemViewModel> Results { get; set; }
 
         public bool HasError { get; set; }
     }

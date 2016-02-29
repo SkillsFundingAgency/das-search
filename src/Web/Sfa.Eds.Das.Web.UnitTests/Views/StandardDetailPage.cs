@@ -20,7 +20,6 @@ namespace Sfa.Eds.Das.Web.UnitTests.Views
             var detail = new BlankFieldErrorMessage();
             var model = new StandardViewModel
             {
-                Standard = new Standard(),
                 HasError = true
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -34,7 +33,6 @@ namespace Sfa.Eds.Das.Web.UnitTests.Views
             var detail = new BlankFieldErrorMessage();
             var model = new StandardViewModel
             {
-                Standard = new Standard(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();

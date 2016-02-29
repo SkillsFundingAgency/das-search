@@ -1,57 +1,51 @@
-﻿namespace Sfa.Eds.Das.Web.Services.MappingActions
+namespace Sfa.Eds.Das.Web.Services.MappingActions
 {
+    using System;
+
     using AutoMapper;
 
-    using Sfa.Das.ApplicationServices.Models;
-    using ViewModels;
+    using Sfa.Eds.Das.Core.Domain.Model;
+    using Sfa.Eds.Das.Web.Services.MappingActions.Helpers;
+    using Sfa.Eds.Das.Web.ViewModels;
 
-    internal class StandardViewModelMappingAction : IMappingAction<StandardSearchResultsItem, StandardResultItemViewModel>
+    internal class StandardViewModelMappingAction : IMappingAction<Standard, StandardViewModel>
     {
-        public void Process(StandardSearchResultsItem source, StandardResultItemViewModel destination)
+        public void Process(Standard source, StandardViewModel destination)
         {
-            if (source.TypicalLength == null || source.TypicalLength.From > source.TypicalLength.To)
-            {
-                destination.TypicalLengthMessage = string.Empty;
-            }
-            else if (this.GetSingelValue(source.TypicalLength.From, source.TypicalLength.To) != 0)
-            {
-                var value = this.GetSingelValue(source.TypicalLength.From, source.TypicalLength.To);
-                destination.TypicalLengthMessage = $"{value} {this.GetUnit(source.TypicalLength.Unit)}";
-            }
-            else
-            {
-                destination.TypicalLengthMessage = $"{source.TypicalLength.From} to {source.TypicalLength.To} {this.GetUnit(source.TypicalLength.Unit)}";
-            }
+            destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
+            destination.IntroductoryTextHtml = MarkdownToHtml(source.IntroductoryText);
+            destination.EntryRequirementsHtml = MarkdownToHtml(source.EntryRequirements);
+            destination.WhatApprenticesWillLearnHtml = MarkdownToHtml(source.WhatApprenticesWillLearn);
+            destination.QualificationsHtml = MarkdownToHtml(source.Qualifications);
+            destination.ProfessionalRegistrationHtml = MarkdownToHtml(source.ProfessionalRegistration);
+            destination.OverviewOfRoleHtml = MarkdownToHtml(source.OverviewOfRole);
+
+            destination.StandardPdfUrlTitle = ExtractPdfTitle(source.StandardPdfUrl);
+            destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdfUrl);
+
         }
 
-        private int GetSingelValue(int from, int to)
+        private string ExtractPdfTitle(string pdfUrl)
         {
-            if (from == to)
+            if (string.IsNullOrEmpty(pdfUrl))
             {
-                return from;
+                return string.Empty;
             }
 
-            if (from > 0 && to == 0)
+            var lastIndex = pdfUrl.LastIndexOf("/", StringComparison.Ordinal) + 1;
+            var pdfName = pdfUrl;
+
+            if (lastIndex >= 0)
             {
-                return from;
+                 pdfName = pdfUrl.Substring(lastIndex);
             }
 
-            if (from == 0 && to > 0)
-            {
-                return to;
-            }
-
-            return 0;
+            return pdfName.Replace("_", " ").Replace(".pdf", string.Empty);
         }
 
-        private string GetUnit(string unit)
+        private string MarkdownToHtml(string markdownText)
         {
-            if (unit == "m")
-            {
-                return "months";
-            }
-
-            return string.Empty;
+            return CommonMark.CommonMarkConverter.Convert(markdownText);
         }
     }
 }

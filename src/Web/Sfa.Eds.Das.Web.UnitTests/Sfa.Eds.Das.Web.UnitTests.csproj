@@ -126,10 +126,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
+    <Compile Include="Extensions\ForUriExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\StandardControllerTest.cs" />
     <Compile Include="Services\ForMappingStandardSearchResultsToViewModel.cs" />
     <Compile Include="ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
+    <Compile Include="Services\ForMappingStandardToViewModel.cs" />
     <Compile Include="Views\ProviderSearchResultPage.cs" />
     <Compile Include="Views\StandardDetailPage.cs" />
     <Compile Include="Views\StandardSearchResultPage.cs" />
