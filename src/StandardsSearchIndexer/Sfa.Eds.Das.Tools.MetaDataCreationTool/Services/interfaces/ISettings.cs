@@ -23,5 +23,7 @@
         string VstsGitAllCommitsUrl { get; }
 
         string VstsGitPushUrl { get; }
+
+        string EnvironmentName { get; }
     }
 }

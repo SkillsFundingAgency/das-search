@@ -88,6 +88,7 @@
     <Compile Include="Indexers\StandardIndexerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DedsServiceTests.cs" />
+    <Compile Include="Services\VstsClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -97,6 +98,10 @@
     <None Include="Sfa.Eds.Das.Indexer.IntegrationTests.ruleset" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj">
+      <Project>{D838757D-63EC-4FE6-B565-470D5BF424A3}</Project>
+      <Name>Sfa.Eds.Das.Tools.MetaDataCreationTool</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Deds.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.Deds</Name>

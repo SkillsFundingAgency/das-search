@@ -1,13 +1,10 @@
 ﻿namespace Sfa.Eds.Das.ProviderIndexer.Clients
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using LINQtoCSV;
-
+    using Sfa.Eds.Das.Indexer.Common.Extensions;
     using Sfa.Eds.Das.ProviderIndexer.Models;
     using Sfa.Eds.Das.ProviderIndexer.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
@@ -16,9 +13,9 @@
     {
         private readonly IVstsClient _vstsClient;
 
-        private readonly IProviderIndexSettings _settings;
+        private readonly ISettings _settings;
 
-        public FcsActiveProvidersClient(IVstsClient vstsClient, IProviderIndexSettings settings)
+        public FcsActiveProvidersClient(IVstsClient vstsClient, ISettings settings)
         {
             _vstsClient = vstsClient;
             _settings = settings;
@@ -26,22 +23,16 @@
 
         public async Task<IEnumerable<string>> GetProviders()
         {
-            var result = _vstsClient.GetFileContent(_settings.ActiveProvidersPath);
-            var cc = new CsvContext();
-            var stream = GenerateStreamFromString(result);
-            var reader = new StreamReader(stream);
-            var records = cc.Read<FcsProviderRecord>(reader).ToList();
+            var path = CreatePath();
+            var result = _vstsClient.GetFileContent(path);
+            var records = result.FromCsv<FcsProviderRecord>();
             return records.Select(x => x.UkPrn);
         }
 
-        public Stream GenerateStreamFromString(string s)
+        private string CreatePath()
         {
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
+            var path = $"fcs/{_settings.EnvironmentName}/fcs-active.csv";
+            return string.Format(_settings.VstsGitGetFilesUrlFormat, path);
         }
     }
 }

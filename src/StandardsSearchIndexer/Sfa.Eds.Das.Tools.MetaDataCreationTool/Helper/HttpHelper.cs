@@ -6,7 +6,6 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-    using System.Threading.Tasks;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
 
@@ -33,20 +32,6 @@
                 }
 
                 return string.Empty;
-            }
-        }
-
-        public async Task<Stream> DownloadStream(string streamUrl, string username, string pwd)
-        {
-            using (var client = new HttpClient())
-            {
-                var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{pwd}"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                using (HttpResponseMessage response = await client.GetAsync(streamUrl))
-                {
-                    
-                }
-                    return client.GetStreamAsync(streamUrl).Result;
             }
         }
 
