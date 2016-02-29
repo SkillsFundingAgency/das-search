@@ -17,25 +17,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.StandardIndexer", "Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj", "{CD403DBC-FA8A-4004-8494-63BE9766C57F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B16F419E-4F1A-4251-9678-DBB6D0EB762D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.ProviderIndexer", "Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Das.ProviderIndexer.csproj", "{DB90F92F-8A86-4239-8F7D-F99161E4282D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.StandardIndexer.UnitTests", "Sfa.Eds.Das.StandardIndexer.UnitTests\Sfa.Eds.Das.StandardIndexer.UnitTests.csproj", "{1E8E7BE5-A633-47B8-AC2A-500A81E3045D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool", "Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj", "{D838757D-63EC-4FE6-B565-470D5BF424A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test", "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test\Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.csproj", "{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests", "Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests\Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests.csproj", "{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests", "Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests\Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests.csproj", "{C6FA51F8-857F-43AE-8ECF-D96E7E3D1B5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Common.UnitTests", "Sfa.Eds.Das.Indexer.Common.UnitTests\Sfa.Eds.Das.Indexer.Common.UnitTests.csproj", "{FD7E4CE2-5560-4E2D-8E9E-A151E15D237F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{34370D1E-1148-4996-B80E-6936DA76883A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Standards", "Standards", "{34324604-4A92-44B1-81E4-F6D75730531E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerJob", "WorkerJob", "{EFD57D06-70C6-48F8-8E7D-3F88068BBAEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -254,20 +246,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2} = {EFD57D06-70C6-48F8-8E7D-3F88068BBAEE}
-		{6163C031-06EA-4929-BC84-AB67ED0E93DA} = {EFD57D06-70C6-48F8-8E7D-3F88068BBAEE}
-		{B9B0AE4B-C881-4CE3-AF65-4118216AF75F} = {34370D1E-1148-4996-B80E-6936DA76883A}
-		{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F} = {B16F419E-4F1A-4251-9678-DBB6D0EB762D}
-		{4E8DA796-33BA-43ED-A931-4841E108A7E0} = {B16F419E-4F1A-4251-9678-DBB6D0EB762D}
-		{23C1681A-12B5-44B5-BF4C-FDE64DEACC2A} = {EFD57D06-70C6-48F8-8E7D-3F88068BBAEE}
-		{CD403DBC-FA8A-4004-8494-63BE9766C57F} = {34324604-4A92-44B1-81E4-F6D75730531E}
-		{DB90F92F-8A86-4239-8F7D-F99161E4282D} = {34370D1E-1148-4996-B80E-6936DA76883A}
-		{1E8E7BE5-A633-47B8-AC2A-500A81E3045D} = {34324604-4A92-44B1-81E4-F6D75730531E}
-		{D838757D-63EC-4FE6-B565-470D5BF424A3} = {B16F419E-4F1A-4251-9678-DBB6D0EB762D}
-		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94} = {B16F419E-4F1A-4251-9678-DBB6D0EB762D}
-		{C6FA51F8-857F-43AE-8ECF-D96E7E3D1B5E} = {EFD57D06-70C6-48F8-8E7D-3F88068BBAEE}
-		{FD7E4CE2-5560-4E2D-8E9E-A151E15D237F} = {B16F419E-4F1A-4251-9678-DBB6D0EB762D}
 	EndGlobalSection
 EndGlobal

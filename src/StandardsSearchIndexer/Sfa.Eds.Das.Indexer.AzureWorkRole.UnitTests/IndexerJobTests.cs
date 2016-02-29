@@ -1,13 +1,13 @@
-﻿using Moq;
-using NUnit.Framework;
-using Sfa.Eds.Das.Indexer.AzureWorkerRole;
-using Sfa.Eds.Das.Indexer.Common.Services;
-using Sfa.Eds.Das.Indexer.Common.Settings;
-using Sfa.Eds.Das.ProviderIndexer.Services;
-using Sfa.Eds.Das.StandardIndexer.Services;
-
-namespace Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests
+﻿namespace Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests
 {
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Sfa.Eds.Das.Indexer.AzureWorkerRole;
+    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Common.Services;
+
     [TestFixture]
     public class IndexerJobTests
     {
@@ -22,8 +22,8 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests
             sut.Run();
 
             // Assert
-            mockConsumer.Verify(x => x.CheckMessage<IStandardIndexerService>());
-            mockConsumer.Verify(x => x.CheckMessage<IProviderIndexerService>());
+            mockConsumer.Verify(x => x.CheckMessage<StandardDocument>());
+            mockConsumer.Verify(x => x.CheckMessage<Provider>());
         }
     }
 }

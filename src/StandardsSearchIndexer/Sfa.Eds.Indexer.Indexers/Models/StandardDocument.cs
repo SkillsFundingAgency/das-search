@@ -5,7 +5,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Models
     using System;
     using System.Collections.Generic;
 
-    public class StandardDocument
+    public class StandardDocument : IIndexEntry
     {
         public int StandardId { get; set; }
 

@@ -4,32 +4,37 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
-using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Das.ProviderIndexer.Settings;
 using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
 {
+    using Sfa.Eds.Das.Indexer.Common.Helpers;
+    using Sfa.Eds.Das.Indexer.Common.Services;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
     using Sfa.Eds.Das.ProviderIndexer.Clients;
 
     [TestFixture]
     public class ProviderIndexerServiceTests
     {
         private Mock<IProviderHelper> _mockHelper;
-        private IProviderIndexSettings _mockSettings;
-        private ProviderIndexerService _sut;
+        private IIndexSettings<Provider> _mockSettings;
+        private IndexerService<Provider> _sut;
         private Mock<ICourseDirectoryClient> _mockClient;
         private Mock<IActiveProviderClient> _mockActiveProviderClient;
+
+        private Mock<IGenericIndexerHelper<Provider>> _mockIndexerHelper;
 
         [SetUp]
         public void Setup()
         {
             _mockHelper = new Mock<IProviderHelper>();
             _mockClient = new Mock<ICourseDirectoryClient>();
-            _mockSettings = Mock.Of<IProviderIndexSettings>(x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.ProviderIndexesAlias == "ciproviderindexesalias");
+            _mockSettings = Mock.Of<IIndexSettings<Provider>>(x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.IndexesAlias == "ciproviderindexesalias");
             _mockActiveProviderClient = new Mock<IActiveProviderClient>();
+            _mockIndexerHelper = new Mock<IGenericIndexerHelper<Provider>>();
 
-            _sut = new ProviderIndexerService(_mockSettings, _mockHelper.Object, _mockClient.Object, _mockActiveProviderClient.Object);
+            _sut = new IndexerService<Provider>(_mockSettings, _mockIndexerHelper.Object);
         }
 
         [Test]

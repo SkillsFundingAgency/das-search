@@ -9,6 +9,8 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.Common.Services
 {
+    using Sfa.Eds.Das.Indexer.Common.Models;
+
     public class GenericControlQueueConsumer : IGenericControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -28,9 +30,9 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
         }
 
         public Task CheckMessage<T>()
-            where T : IIndexerService
+            where T : IIndexEntry
         {
-            var indexerService = _container.GetInstance<T>();
+            var indexerService = _container.GetInstance<IIndexerService<T>>();
             return Task.Run(async () =>
             {
                 try

@@ -2,11 +2,14 @@
 
 namespace Sfa.Eds.Das.ProviderIndexer.Settings
 {
-    public class ProviderIndexSettings : IProviderIndexSettings
+    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
+
+    public class ProviderIndexSettings : IIndexSettings<Provider>
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
-        public string ProviderIndexesAlias => ConfigurationManager.AppSettings["ProviderIndexesAlias"];
+        public string IndexesAlias => ConfigurationManager.AppSettings["ProviderIndexesAlias"];
 
         public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
 

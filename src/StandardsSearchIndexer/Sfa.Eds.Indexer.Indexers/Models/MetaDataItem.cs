@@ -3,7 +3,7 @@
 namespace Sfa.Eds.Das.Indexer.Common.Models
 {
 
-    public class MetaDataItem
+    public class MetaDataItem : IIndexEntry
     {
         public int Id { get; set; }
 

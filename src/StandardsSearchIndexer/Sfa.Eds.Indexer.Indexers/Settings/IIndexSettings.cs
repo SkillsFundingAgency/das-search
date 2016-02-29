@@ -1,10 +1,9 @@
-namespace Sfa.Eds.Das.ProviderIndexer.Settings
+namespace Sfa.Eds.Das.Indexer.Common.Settings
 {
-    public interface IProviderIndexSettings
+    public interface IIndexSettings<T>
     {
         string SearchHost { get; }
-        string ActiveProvidersPath { get; }
-        string ProviderIndexesAlias { get; }
+        string IndexesAlias { get; }
         string StorageAccountName { get; }
         string StorageAccountKey { get; }
         string ConnectionString { get; }

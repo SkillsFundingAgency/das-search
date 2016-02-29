@@ -6,6 +6,8 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.Common.DependencyResolution
 {
+    using Sfa.Eds.Das.Indexer.Common.Models;
+
     public class CommonRegistry : Registry
     {
         public CommonRegistry()
@@ -18,6 +20,8 @@ namespace Sfa.Eds.Das.Indexer.Common.DependencyResolution
             For<ICommonSettings>().Use<CommonSettings>();
             For<ICloudQueueService>().Use<CloudQueueService>();
             For<IBlobStorageHelper>().Use<BlobStorageHelper>();
+            For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
+            For<IIndexerService<StandardDocument>>().Use<IndexerService<StandardDocument>>();
         }
     }
 }

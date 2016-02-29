@@ -13,7 +13,7 @@ using Sfa.Eds.Das.StandardIndexer.Settings;
 
 namespace Sfa.Eds.Das.StandardIndexer.Helpers
 {
-    public class StandardHelper : IStandardHelper
+    public class StandardHelper : IStandardHelper, IGenericIndexerHelper<MetaDataItem>
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IBlobStorageHelper _blobStorageHelper;
@@ -60,21 +60,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 
         public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<MetaDataItem> standards)
         {
-            Log.Debug("Uploading " + standards.Count() + " standard's PDF to Azure");
-
-            try
-            {
-                await standards.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
-
-                Log.Debug("Indexing " + standards.Count() + " standards");
-
-                var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                await IndexStandards(indexNameAndDateExtension, standards).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                Log.Error("Error indexing PDFs: " + e.Message);
-            }
+            await IndexEntries(scheduledRefreshDateTime, standards.ToList());
         }
 
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
@@ -109,6 +95,31 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
+        }
+
+        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<MetaDataItem> entries)
+        {
+            Log.Debug("Uploading " + entries.Count() + " standard's PDF to Azure");
+
+            try
+            {
+                await entries.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
+
+                Log.Debug("Indexing " + entries.Count() + " standards");
+
+                var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+                await IndexStandards(indexNameAndDateExtension, entries).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error indexing PDFs: " + e.Message);
+            }
+        }
+
+        public ICollection<MetaDataItem> LoadEntries()
+        {
+            UpdateMetadataRepositoryWithNewStandards();
+            return GetStandardsMetaDataFromGit().ToList();
         }
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)

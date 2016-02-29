@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using Sfa.Eds.Das.Indexer.Common.Models;
-
-namespace Sfa.Eds.Das.ProviderIndexer.Helpers
+﻿namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
-    public interface IProviderHelper
-    {
-        void IndexProviders(DateTime scheduledRefreshDateTime, ICollection<Provider> providers);
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
+    public interface IGenericIndexerHelper<T>
+    {
+        Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<T> entries);
+        ICollection<T> LoadEntries();
         void DeleteOldIndexes(DateTime scheduledRefreshDateTime);
         bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime);
         string GetIndexNameAndDateExtension(DateTime dateTime);

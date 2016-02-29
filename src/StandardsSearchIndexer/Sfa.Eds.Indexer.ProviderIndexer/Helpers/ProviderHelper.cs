@@ -11,22 +11,41 @@ using Sfa.Eds.Das.ProviderIndexer.Settings;
 
 namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 {
-    public class ProviderHelper : IProviderHelper
+    using System.Threading.Tasks;
+
+    using Sfa.Eds.Das.Indexer.Common.Helpers;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
+    using Sfa.Eds.Das.ProviderIndexer.Clients;
+
+    public class ProviderHelper : IProviderHelper, IGenericIndexerHelper<Provider>
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly ICourseDirectoryClient _courseDirectoryClient;
 
-        private readonly IProviderIndexSettings _settings;
+        private readonly IActiveProviderClient _activeProviderClient;
+        private readonly IIndexSettings<Provider> _settings;
         private readonly IElasticClient _client;
 
         public ProviderHelper(
-            IProviderIndexSettings settings,
-            IElasticsearchClientFactory elasticsearchClientFactory)
+            IIndexSettings<Provider> settings,
+            IElasticsearchClientFactory elasticsearchClientFactory, ICourseDirectoryClient courseDirectoryClient, IActiveProviderClient activeProviderClient)
         {
             _settings = settings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
+            _courseDirectoryClient = courseDirectoryClient;
+            _activeProviderClient = activeProviderClient;
 
             _client = _elasticsearchClientFactory.GetElasticClient();
+        }
+
+        public ICollection<Provider> LoadEntries()
+        {
+            var providers = _courseDirectoryClient.GetProviders();
+            var activeProviders = _activeProviderClient.GetProviders();
+            Task.WaitAll();
+
+            return providers.Result.Where(x => activeProviders.Contains(x.UkPrn)).ToList();
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
@@ -98,14 +117,14 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
             return exists;
         }
 
-        public void IndexProviders(DateTime scheduledRefreshDateTime, ICollection<Provider> providers)
+        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Provider> entries)
         {
             try
             {
-                Log.Debug("Indexing " + providers.Count() + " providers");
+                Log.Debug("Indexing " + entries.Count + " providers");
 
                 var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                IndexProviders(indexName, providers);
+                await IndexProviders(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -125,7 +144,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
-            var indexAlias = _settings.ProviderIndexesAlias;
+            var indexAlias = _settings.IndexesAlias;
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             if (!CheckIfAliasExists(indexAlias))
@@ -145,6 +164,11 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
+        }
+
+        public void IndexProviders(DateTime scheduledRefreshDateTime, ICollection<Provider> providers)
+        {
+            IndexEntries(scheduledRefreshDateTime, providers);
         }
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
@@ -169,7 +193,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         public string GetIndexNameAndDateExtension(DateTime dateTime)
         {
-            return string.Format("{0}-{1}", _settings.ProviderIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
+            return string.Format("{0}-{1}", _settings.IndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
         }
 
         private string CreateProviderRawFormat(Provider provider)
@@ -217,7 +241,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
             return rawProvider;
         }
 
-        private void IndexProviders(string indexName, IEnumerable<Provider> providers)
+        private Task IndexProviders(string indexName, IEnumerable<Provider> providers)
         {
             int id = 1;
 
@@ -236,6 +260,8 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                     throw;
                 }
             }
+
+            return null;
         }
 
         private bool CheckIfAliasExists(string aliasName)
@@ -250,7 +276,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
             _client.Alias(a => a
                 .Add(add => add
                     .Index(indexName)
-                    .Alias(_settings.ProviderIndexesAlias)));
+                    .Alias(_settings.IndexesAlias)));
         }
     }
 }

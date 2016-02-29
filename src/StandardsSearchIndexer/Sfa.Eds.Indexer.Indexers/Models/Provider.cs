@@ -2,7 +2,7 @@
 
 namespace Sfa.Eds.Das.Indexer.Common.Models
 {
-    public class Provider
+    public class Provider : IIndexEntry
     {
         public int ProviderId { get; set; }
 

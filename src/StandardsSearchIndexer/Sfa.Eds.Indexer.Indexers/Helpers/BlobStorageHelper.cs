@@ -24,7 +24,6 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
             var container = _client.GetContainerReference(containerName);
             await container.CreateIfNotExistsAsync();
 
-            // Retrieve reference to a blob named "myblob.txt"
             var blockBlob = container.GetBlockBlobReference(fileName);
 
             blockBlob.FetchAttributes();

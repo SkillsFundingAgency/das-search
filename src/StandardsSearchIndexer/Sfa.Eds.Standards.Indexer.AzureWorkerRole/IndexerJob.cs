@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Sfa.Eds.Das.Indexer.Common.Services;
-using Sfa.Eds.Das.ProviderIndexer.Services;
-using Sfa.Eds.Das.StandardIndexer.Services;
-
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Common.Services;
+
     public class IndexerJob : IIndexerJob
     {
         private readonly IGenericControlQueueConsumer _controlQueueConsumer;
@@ -17,11 +17,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public void Run()
         {
-            var tasks = new List<Task>
-            {
-                _controlQueueConsumer.CheckMessage<IStandardIndexerService>(),
-                _controlQueueConsumer.CheckMessage<IProviderIndexerService>()
-            };
+            var tasks = new List<Task> { _controlQueueConsumer.CheckMessage<MetaDataItem>(), _controlQueueConsumer.CheckMessage<Provider>() };
 
             Task.WaitAll(tasks.ToArray());
         }

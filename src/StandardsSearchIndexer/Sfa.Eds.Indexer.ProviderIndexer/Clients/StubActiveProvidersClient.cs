@@ -1,16 +1,10 @@
 ﻿namespace Sfa.Eds.Das.ProviderIndexer.Clients
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public class StubActiveProvidersClient : IActiveProviderClient
     {
-        public async Task<IEnumerable<string>> GetProviders()
-        {
-            return ListOfProviders();
-        }
-
-        public IEnumerable<string> ListOfProviders()
+        public IEnumerable<string> GetProviders()
         {
             yield return "10001309";
             yield return "10031241";

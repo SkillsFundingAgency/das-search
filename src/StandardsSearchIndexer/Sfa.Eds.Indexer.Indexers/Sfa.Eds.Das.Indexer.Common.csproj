@@ -110,9 +110,11 @@
     <Compile Include="Helpers\CloudBlobContainerWrapper.cs" />
     <Compile Include="Helpers\ICloudBlobClientWrapper.cs" />
     <Compile Include="Helpers\ICloudBlobContainerWrapper.cs" />
+    <Compile Include="Helpers\IGenericIndexerHelper.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\IIndexEntry.cs" />
     <Compile Include="Models\MetaDataItem.cs" />
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
@@ -121,10 +123,12 @@
     <Compile Include="Services\GenericControlQueueConsumer.cs" />
     <Compile Include="Services\IIndexerService.cs" />
     <Compile Include="Services\IGenericControlQueueConsumer.cs" />
+    <Compile Include="Services\IndexerService.cs" />
     <Compile Include="Settings\IAzureSettings.cs" />
     <Compile Include="Settings\AzureSettings.cs" />
     <Compile Include="Settings\ICommonSettings.cs" />
     <Compile Include="Settings\CommonSettings.cs" />
+    <Compile Include="Settings\IIndexSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">
