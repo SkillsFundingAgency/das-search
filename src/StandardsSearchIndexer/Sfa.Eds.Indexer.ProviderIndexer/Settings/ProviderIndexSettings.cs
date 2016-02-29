@@ -21,5 +21,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Settings
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
         public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
+
+        public string ActiveProvidersPath => ConfigurationManager.AppSettings["VstsProvidersFolderPath"];
     }
 }

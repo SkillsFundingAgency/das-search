@@ -9,20 +9,24 @@
     using LINQtoCSV;
 
     using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.ProviderIndexer.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class FcsActiveProvidersClient : IActiveProviderClient
     {
         private readonly IVstsClient _vstsClient;
 
-        public FcsActiveProvidersClient(IVstsClient vstsClient)
+        private readonly IProviderIndexSettings _settings;
+
+        public FcsActiveProvidersClient(IVstsClient vstsClient, IProviderIndexSettings settings)
         {
             _vstsClient = vstsClient;
+            _settings = settings;
         }
 
         public async Task<IEnumerable<string>> GetProviders()
         {
-            var result = _vstsClient.GetFileContent("fcs/fcs-active.csv");
+            var result = _vstsClient.GetFileContent(_settings.ActiveProvidersPath);
             var cc = new CsvContext();
             var stream = GenerateStreamFromString(result);
             var reader = new StreamReader(stream);
