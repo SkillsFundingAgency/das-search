@@ -12,7 +12,7 @@
 
         public string PostCode { get; set; }
 
-        public IEnumerable<ProviderResultItemViewModel> Results { get; set; }
+        public IEnumerable<ProviderResultItemViewModel> Hits { get; set; }
 
         public bool HasError { get; set; }
 

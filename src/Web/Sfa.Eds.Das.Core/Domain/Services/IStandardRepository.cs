@@ -4,6 +4,6 @@
 
     public interface IStandardRepository
     {
-        Standard GetById(string id);
+        Standard GetById(int id);
     }
 }

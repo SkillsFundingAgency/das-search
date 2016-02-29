@@ -1,12 +1,15 @@
 ﻿using System.Threading.Tasks;
+using System.Collections.Generic;
+
+using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Das.ApplicationServices
 {
-    using Sfa.Das.ApplicationServices.Models;
-
     public interface ISearchProvider
     {
         StandardSearchResults SearchByKeyword(string keywords, int skip, int take);
-        Task<ProviderSearchResults> SearchByLocation(string standardId, int skip, int take, string location);
+
+        SearchResult<ProviderSearchResultsItem> SearchByLocation(int standardId, Coordinate testCoordinates);
     }
 }

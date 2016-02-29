@@ -45,7 +45,7 @@
         }
 
         // GET: Standard
-        public ActionResult Detail(string id, string hasError)
+        public ActionResult Detail(int id, string hasError)
         {
             var standardResult = _standardRepository.GetById(id);
 

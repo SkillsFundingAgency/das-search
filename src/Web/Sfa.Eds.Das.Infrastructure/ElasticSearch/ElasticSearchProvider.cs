@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Nest;
 using Sfa.Das.ApplicationServices;
@@ -6,22 +7,21 @@ using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
-using Sfa.Eds.Das.Infrastructure.Location;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
-    using System.Linq;
+    using ApplicationServices;
     using Core.Configuration;
-
+    using System.Collections.Generic;
     public sealed class ElasticsearchProvider : ISearchProvider
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _logger;
         private readonly IStandardRepository _standardRepository;
         private readonly IConfigurationSettings _applicationSettings;
-        private readonly ILocator _locatorService;
+        private readonly ILookupLocations _locatorService;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings, ILocator locatorService)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings, ILookupLocations locatorService)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
@@ -35,13 +35,6 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             keywords = QueryHelper.FormatQuery(keywords);
 
             var client = this._elasticsearchClientFactory.Create();
-            //var results = client.Search<StandardSearchResultsItem>(s => s
-            //    .From(0)
-            //    .Size(10)
-            //    .Query(q => q
-            //        .QueryString(qs => qs
-            //            .OnFields(e => e.StandardTitle)
-            //            .Query(keywords))));
             var results = client.Search<StandardSearchResultsItem>(s => s.Skip(skip).Take(take).QueryString(keywords));
 
             return new StandardSearchResults
@@ -53,71 +46,45 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        public async Task<ProviderSearchResults> SearchByLocation(string standardId, int skip, int take, string location = null)
+        public SearchResult<ProviderSearchResultsItem> SearchByLocation(int standardId, Coordinate geoPoint)
         {
-            if (string.IsNullOrEmpty(location))
-            {
-                return new ProviderSearchResults
-                {
-                    StandardId = int.Parse(standardId),
-                    PostCodeMissing = true
-                };
-            }
-
             var client = _elasticsearchClientFactory.Create();
 
-            var standardName = string.Empty;
+            var qryStr = CreateRawQuery(standardId.ToString(), geoPoint);
 
-            var standard = _standardRepository.GetById(standardId);
-
-            if (standard != null)
-            {
-                standardName = standard.Title;
-            }
-
-            ISearchResponse<ProviderSearchResultsItem> results = new SearchResponse<ProviderSearchResultsItem>();
-
-            var coordinates = await _locatorService.GetLatLongFromPostCode(location);
-            if (coordinates.Lat != 0 && coordinates.Lon != 0)
-            {
-                var qryStr = CreateRawQuery(standardId, coordinates);
-
-                results = client
-                    .Search<ProviderSearchResultsItem>(s => s
-                    .Index(_applicationSettings.ProviderIndexAlias)
-                    .QueryRaw(qryStr)
-                    .SortGeoDistance(g =>
-                    {
-                        g.PinTo(coordinates.Lat, coordinates.Lon)
-                            .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
-                        return g;
-                    }));
-            }
+            ISearchResponse<ProviderSearchResultsItem> results = client
+                .Search<ProviderSearchResultsItem>(s => s
+                .Index(_applicationSettings.ProviderIndexAlias)
+                .QueryRaw(qryStr)
+                .SortGeoDistance(g =>
+                {
+                    g.PinTo(geoPoint.Lat, geoPoint.Lon)
+                        .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
+                    return g;
+                }));
 
             var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
             {
-                Id = hit.Source.Id, ProviderName = hit.Source.ProviderName, PostCode = hit.Source.PostCode, UkPrn = hit.Source.UkPrn, VenueName = hit.Source.VenueName, StandardsId = hit.Source.StandardsId, Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                Id = hit.Source.Id,
+                ProviderName = hit.Source.ProviderName,
+                PostCode = hit.Source.PostCode,
+                UkPrn = hit.Source.UkPrn,
+                VenueName = hit.Source.VenueName,
+                StandardsId = hit.Source.StandardsId,
+                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).ToList();
 
-            var result = new ProviderSearchResults
-            {
-                TotalResults = results.Total,
-                StandardId = int.Parse(standardId),
-                StandardName = standardName,
-                PostCode = location,
-                Results = documents
-            };
+            // TODO: LWA - Reimplement this logic? Error condition.
+            //if (results.ConnectionStatus != null)
+            //{
+            //    result.HasError = results.ConnectionStatus.HttpStatusCode != 200;
+            //}
+            //else
+            //{
+            //    result.HasError = false;
+            //}
 
-            if (results.ConnectionStatus != null)
-            {
-                result.HasError = results.ConnectionStatus.HttpStatusCode != 200;
-            }
-            else
-            {
-                result.HasError = false;
-            }
-
-            return result;
+            return new SearchResult<ProviderSearchResultsItem> { Hits = documents, Total = results.Total };
         }
 
         private string CreateRawQuery(string standardId, Coordinate location)

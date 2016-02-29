@@ -19,7 +19,7 @@
             _applicationLogger = applicationLogger;
         }
 
-        public Standard GetById(string id)
+        public Standard GetById(int id)
         {
             var client = this._elasticsearchClientFactory.Create();
             var results =
@@ -30,7 +30,7 @@
                     .Query(q =>
                         q.QueryString(qs =>
                             qs.OnFields(e => e.StandardId)
-                            .Query(id))));
+                            .Query(id.ToString()))));
 
             if (results.ConnectionStatus.HttpStatusCode != 200)
             {

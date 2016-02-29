@@ -118,7 +118,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 27 "..\..\Views\Provider\SearchResults.cshtml"
-                 foreach (var item in Model.Results)
+                 foreach (var item in Model.Hits)
                 {
 
             
