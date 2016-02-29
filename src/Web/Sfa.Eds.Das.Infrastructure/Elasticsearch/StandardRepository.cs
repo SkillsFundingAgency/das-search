@@ -43,7 +43,23 @@
 
             if (document != null)
             {
-                return new Standard { StandardId = document.StandardId, Title = document.Title, NotionalEndLevel = document.NotionalEndLevel };
+                return new Standard
+                           {
+                               StandardId = document.StandardId,
+                               Title = document.Title,
+                               StandardPdfUrl = document.StandardPdfUrl,
+                               AssessmentPlanPdfUrl = document.AssessmentPlanPdfUrl,
+                               NotionalEndLevel = document.NotionalEndLevel,
+                               JobRoles = document.JobRoles,
+                               Keywords = document.Keywords,
+                               TypicalLength = document.TypicalLength,
+                               IntroductoryText = document.IntroductoryText,
+                               EntryRequirements = document.EntryRequirements,
+                               WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
+                               Qualifications = document.Qualifications,
+                               ProfessionalRegistration = document.ProfessionalRegistration,
+                               OverviewOfRole = document.OverviewOfRole
+                };
             }
 
             return null;

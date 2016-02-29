@@ -8,6 +8,5 @@
         public string Parish { get; set; }
         public string Ccg { get; set; }
         public string Nuts { get; set; }
-
     }
 }

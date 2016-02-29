@@ -10,10 +10,10 @@
     using Web.Views.Standard;
 
     [TestFixture]
-    public sealed class StandardSearchResultPage : ViewTestBase
+    public sealed class ForStandardSearchResultPage : TestBase
     {
         [Test]
-        public void When_SearchResultHasErrors()
+        public void WhenSearchResultHasErrors()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -29,7 +29,7 @@
         }
 
         [Test]
-        public void When_SearchResultIsZero()
+        public void WhenSearchResultIsZero()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -44,7 +44,7 @@
         }
 
         [Test]
-        public void When_SearchResultReturnsAll()
+        public void WhenSearchResultReturnsAll()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -63,7 +63,7 @@
         }
 
         [Test]
-        public void When_SearchResultReturnsOneResult()
+        public void WhenSearchResultReturnsOneResult()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -85,7 +85,7 @@
         }
 
         [Test]
-        public void When_SearchResultReturnsMoreThanOne()
+        public void WhenSearchResultReturnsMoreThanOne()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -101,6 +101,38 @@
 
             GetPartial(html, "h2").Should().Be("Apprenticeship standards");
             GetPartial(html, "p").Should().Be("There are 2 standards matching your search for 'SearchTerm'.");
+        }
+
+        [Test]
+        public void When_Bla()
+        {
+            var searchPage = new SearchResults();
+            var model = new StandardSearchResultViewModel
+            {
+                TotalResults = 2,
+                SearchTerm = "test",
+                Results = new List<StandardSearchResultItemViewModel>
+                              {
+                                  new StandardSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months"
+                                      },
+                                  new StandardSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 2"
+                                      }
+                              }
+            };
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            // First result
+            GetPartialWhere(html, ".details", "Test title").Should().Contain("72 months");
+            GetPartialWhere(html, ".details", "Test title").Should().Contain("Typical length:");
+
+            // Second result
+            GetPartialWhere(html, ".details", "Test title 2").Should().NotContain("72 months");
+            GetPartialWhere(html, ".details", "Test title 2").Should().NotContain("Typical length:");
         }
     }
 }

@@ -6,6 +6,8 @@
     using Core.Domain.Model;
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Web.Services.MappingActions;
+
     using ViewModels;
 
     public class MappingService : IMappingService
@@ -52,12 +54,14 @@
             return new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ProviderSearchResultsItem, ProviderResultItemViewModel>();
-                cfg.CreateMap<ProviderSearchResultsItem, ProviderViewModel>();
                 cfg.CreateMap<ProviderSearchResults, ProviderSearchResultViewModel>();
-                cfg.CreateMap<StandardSearchResultsItem, StandardResultItemViewModel>();
-                cfg.CreateMap<StandardSearchResultsItem, StandardViewModel>();
+
+                // Standard search listing
                 cfg.CreateMap<StandardSearchResults, StandardSearchResultViewModel>();
-                cfg.CreateMap<StandardDetail, StandardViewModel>();
+                cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
+
+                // Standard detail page
+                cfg.CreateMap<Standard, StandardViewModel>().AfterMap<StandardViewModelMappingAction>();
             });
         }
     }

@@ -27,14 +27,16 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                @Html.ActionLink(item.Title, "Detail", "Standard", new {@id = item.StandardId}, null)
+                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
                             </h2>
-                            <dl>
+                            @*<dl>
                                 <dt class="endLevel">Level</dt>
                                 <dd class="endLevel">
                                     <span>@item.NotionalEndLevel</span>
                                 </dd>
-                            </dl>
+                            </dl>*@
+                            @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
+                            @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
                         </div>
                     </li>
                 }
@@ -66,3 +68,12 @@
         </div>
     </div>
 </main>
+
+@helper GetStandardDetailItem(string title, string item, string unit = "")
+{
+    if (!string.IsNullOrEmpty(item))
+    {
+            <dt class="minLength">@title</dt>
+                <dd class="minLength">@item @unit</dd>
+    }
+}
