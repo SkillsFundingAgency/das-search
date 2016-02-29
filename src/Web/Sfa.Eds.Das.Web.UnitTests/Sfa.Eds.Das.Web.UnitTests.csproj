@@ -130,7 +130,9 @@
     <Compile Include="Controllers\StandardControllerTest.cs" />
     <Compile Include="Services\MappingSearchResultsToViewModel.cs" />
     <Compile Include="ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
-    <Compile Include="Views\ForSearchResultPage.cs" />
+    <Compile Include="Views\ProviderSearchResultPage.cs" />
+    <Compile Include="Views\StandardDetailPage.cs" />
+    <Compile Include="Views\StandardSearchResultPage.cs" />
     <Compile Include="Views\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

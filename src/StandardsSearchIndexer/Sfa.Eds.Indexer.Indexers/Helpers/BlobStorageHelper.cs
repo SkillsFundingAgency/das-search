@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
+
 using Microsoft.WindowsAzure.Storage.Blob;
-using Newtonsoft.Json;
-using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Common.Settings;
 
 namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
@@ -24,37 +16,6 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
         public BlobStorageHelper(ICloudBlobClientWrapper client)
         {
             _client = client;
-        }
-
-        public async Task<List<JsonMetadataObject>> ReadAsync(string containerName)
-        {
-            var jsonList = new List<JsonMetadataObject>();
-
-            // Retrieve reference to a previously created container.
-            var container = _client.GetContainerReference(containerName);
-            await container.CreateIfNotExistsAsync();
-
-            try
-            {
-                var elements = container.ListBlobs(null, false);
-                foreach (var blob in elements.OfType<ICloudBlob>())
-                {
-                    string text;
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        blob.DownloadToStream(memoryStream);
-                        text = Encoding.UTF8.GetString(memoryStream.ToArray());
-                    }
-
-                    jsonList.Add(JsonConvert.DeserializeObject<JsonMetadataObject>(text));
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error("Error reading standards from Azure: " + e.Message);
-            }
-
-            return jsonList;
         }
 
         public async Task<byte[]> ReadStandardPdfAsync(string containerName, string fileName)
@@ -77,6 +38,14 @@ namespace Sfa.Eds.Das.Indexer.Common.Helpers
 
             await blockBlob.DownloadToByteArrayAsync(fileContent, 0);
             return fileContent;
+        }
+
+        public bool FileExists(string containerName, string fileName)
+        {
+            var container = _client.GetContainerReference(containerName);
+            var file = container.GetBlockBlobReference(fileName);
+
+            return file != null;
         }
 
         public async Task UploadPdfFromUrl(string containerName, string fileName, string url)

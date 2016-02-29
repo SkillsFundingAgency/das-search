@@ -19,6 +19,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
         private readonly IBlobStorageHelper _blobStorageHelper;
         private readonly ILarsClient _larsClient;
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IMetaDataHelper _metaDataHelper;
         private readonly IStandardIndexSettings _settings;
         private readonly IElasticClient _client;
 
@@ -26,12 +27,14 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             ILarsClient larsClient,
             IBlobStorageHelper blobStorageHelper,
             IStandardIndexSettings settings,
-            IElasticsearchClientFactory elasticsearchClientFactory)
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            IMetaDataHelper metaDataHelper)
         {
             _larsClient = larsClient;
             _blobStorageHelper = blobStorageHelper;
             _settings = settings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
+            _metaDataHelper = metaDataHelper;
 
             _client = _elasticsearchClientFactory.GetElasticClient();
         }
@@ -55,7 +58,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return _client.IndexExists(indexName).Exists;
         }
 
-        public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<JsonMetadataObject> standards)
+        public async Task IndexStandards(DateTime scheduledRefreshDateTime, IEnumerable<MetaDataItem> standards)
         {
             Log.Debug("Uploading " + standards.Count() + " standard's PDF to Azure");
 
@@ -66,7 +69,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 Log.Debug("Indexing " + standards.Count() + " standards");
 
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                await IndexStandardPdfs(indexNameAndDateExtension, standards).ConfigureAwait(false);
+                await IndexStandards(indexNameAndDateExtension, standards).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -133,9 +136,14 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
         }
 
-        public async Task<IEnumerable<JsonMetadataObject>> GetStandardsFromAzureAsync()
+        public void UpdateMetadataRepositoryWithNewStandards()
         {
-            return (await _blobStorageHelper.ReadAsync(_settings.StandardJsonContainer)).OrderBy(s => s.Id);
+            _metaDataHelper.UpdateMetadataRepository();
+        }
+
+        public IEnumerable<MetaDataItem> GetStandardsMetaDataFromGit()
+        {
+            return _metaDataHelper.GetAllStandardsMetaData();
         }
 
         private void CreateAlias(string indexName)
@@ -153,12 +161,15 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             return aliasExistsResponse.Exists;
         }
 
-        private async Task UploadStandardPdf(JsonMetadataObject standard)
+        private async Task UploadStandardPdf(MetaDataItem standard)
         {
-            await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.Pdf).ConfigureAwait(false);
+            if (!_blobStorageHelper.FileExists(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf")))
+            {
+                await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdfUrl).ConfigureAwait(false);
+            }
         }
 
-        private async Task IndexStandardPdfs(string indexName, IEnumerable<JsonMetadataObject> standards)
+        private async Task IndexStandards(string indexName, IEnumerable<MetaDataItem> standards)
         {
             // index the items
             foreach (var standard in standards)
@@ -177,7 +188,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             }
         }
 
-        private async Task<StandardDocument> CreateDocument(JsonMetadataObject standard)
+        private async Task<StandardDocument> CreateDocument(MetaDataItem standard)
         {
             try
             {
@@ -195,9 +206,12 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 {
                     StandardId = standard.Id,
                     Title = standard.Title,
-                    NotionalEndLevel = _larsClient.GetNotationLevelFromLars(standard.Id),
+                    JobRoles = standard.JobRoles,
+                    NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
-                    PdfUrl = standard.Pdf,
+                    StandardPdf = standard.StandardPdfUrl,
+                    AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
+                    TypicalLength = standard.TypicalLength,
                     File = attachment
                 };
 

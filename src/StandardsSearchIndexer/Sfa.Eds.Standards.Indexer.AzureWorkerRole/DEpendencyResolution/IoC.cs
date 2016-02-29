@@ -20,6 +20,7 @@ using Sfa.Deds.DependencyResolution;
 using Sfa.Eds.Das.Indexer.Common.DependencyResolution;
 using Sfa.Eds.Das.ProviderIndexer.DependencyResolution;
 using Sfa.Eds.Das.StandardIndexer.DependencyResolution;
+using Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
@@ -35,6 +36,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
                 c.AddRegistry<StandardRegistry>();
                 c.AddRegistry<ProviderRegistry>();
                 c.AddRegistry<DedsRegistry>();
+                c.AddRegistry<MetaDataCreationRegistry>();
             });
         }
     }

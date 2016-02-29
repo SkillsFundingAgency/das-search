@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.StandardIndexer.UnitTests", "Sfa.Eds.Das.StandardIndexer.UnitTests\Sfa.Eds.Das.StandardIndexer.UnitTests.csproj", "{1E8E7BE5-A633-47B8-AC2A-500A81E3045D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool", "Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj", "{D838757D-63EC-4FE6-B565-470D5BF424A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test", "Sfa.Eds.Das.Tools.MetaDataCreationTool.Test\Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.csproj", "{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests", "Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests\Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests.csproj", "{C6FA51F8-857F-43AE-8ECF-D96E7E3D1B5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Common.UnitTests", "Sfa.Eds.Das.Indexer.Common.UnitTests\Sfa.Eds.Das.Indexer.Common.UnitTests.csproj", "{FD7E4CE2-5560-4E2D-8E9E-A151E15D237F}"
@@ -179,6 +183,38 @@ Global
 		{1E8E7BE5-A633-47B8-AC2A-500A81E3045D}.Release|x64.Build.0 = Release|Any CPU
 		{1E8E7BE5-A633-47B8-AC2A-500A81E3045D}.Release|x86.ActiveCfg = Release|Any CPU
 		{1E8E7BE5-A633-47B8-AC2A-500A81E3045D}.Release|x86.Build.0 = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|x64.Build.0 = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Debug|x86.Build.0 = Debug|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|ARM.Build.0 = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|x64.ActiveCfg = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|x64.Build.0 = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{D838757D-63EC-4FE6-B565-470D5BF424A3}.Release|x86.Build.0 = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|x64.Build.0 = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Debug|x86.Build.0 = Debug|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|ARM.Build.0 = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|x64.ActiveCfg = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|x64.Build.0 = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|x86.ActiveCfg = Release|Any CPU
+		{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}.Release|x86.Build.0 = Release|Any CPU
 		{C6FA51F8-857F-43AE-8ECF-D96E7E3D1B5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6FA51F8-857F-43AE-8ECF-D96E7E3D1B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6FA51F8-857F-43AE-8ECF-D96E7E3D1B5E}.Debug|ARM.ActiveCfg = Debug|Any CPU

@@ -37,7 +37,7 @@ namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<JsonMetadataObject>>()), Times.Never);
+            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<MetaDataItem>>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -53,7 +53,7 @@ namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<JsonMetadataObject>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<MetaDataItem>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
@@ -74,7 +74,7 @@ namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<JsonMetadataObject>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<MetaDataItem>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Never);
             _mockHelper.VerifyAll();
@@ -95,7 +95,7 @@ namespace Sfa.Eds.Das.StandardIndexer.UnitTests.Services
             _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<JsonMetadataObject>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexStandards(It.IsAny<DateTime>(), It.IsAny<IEnumerable<MetaDataItem>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.VerifyAll();

@@ -27,10 +27,11 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
             _container = container;
         }
 
-        public Task CheckMessage<T>() where T : IIndexerService
+        public Task CheckMessage<T>()
+            where T : IIndexerService
         {
             var indexerService = _container.GetInstance<T>();
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
                 try
                 {
@@ -43,7 +44,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
                         var message = messages.FirstOrDefault();
                         if (message != null)
                         {
-                            indexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                            await indexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now).ConfigureAwait(false);
                         }
                     }
 

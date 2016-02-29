@@ -6,12 +6,11 @@
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Domain.Services;
-    using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Web.Models;
-    using Sfa.Eds.Das.Web.Services;
-    using Sfa.Eds.Das.Web.ViewModels;
-    using Core.Domain.Model;
+    using Core.Domain.Services;
+    using Core.Logging;
+    using Models;
+    using Services;
+    using ViewModels;
 
     public sealed class StandardController : Controller
     {
