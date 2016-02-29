@@ -1,6 +1,7 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -60,6 +61,11 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
             return standardsAsJson;
         }
 
+        public string GetFileContent(string path)
+        {
+            return GetSpecificBlob(path);
+        }
+
         private IEnumerable<Entity> GetAllBlobs(string path)
         {
             var url = string.Format(_settings.VstsGitGetFilesUrlFormat, path);
@@ -67,6 +73,12 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
             var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
 
             return tree?.Value.Where(x => x.IsBlob);
+        }
+
+        private string GetSpecificBlob(string path)
+        {
+            var url = string.Format(_settings.VstsGitGetFilesUrlFormat, path);
+            return _httpHelper.DownloadString(url, _settings.GitUsername, _settings.GitPassword);
         }
     }
 }

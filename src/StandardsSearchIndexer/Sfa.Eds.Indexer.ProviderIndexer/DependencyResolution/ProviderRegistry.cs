@@ -15,6 +15,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.DependencyResolution
             For<IProviderHelper>().Use<ProviderHelper>();
             For<IProviderIndexSettings>().Use<ProviderIndexSettings>();
             For<ICourseDirectoryClient>().Use<StubCourseDirectoryClient>();
+            For<IActiveProviderClient>().Use<FcsActiveProvidersClient>();
         }
     }
 }
