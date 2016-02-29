@@ -23,16 +23,9 @@
 
         public async Task<IEnumerable<string>> GetProviders()
         {
-            var path = CreatePath();
-            var result = _vstsClient.GetFileContent(path);
+            var result = _vstsClient.GetFileContent($"fcs/{_settings.EnvironmentName}/fcs-active.csv");
             var records = result.FromCsv<FcsProviderRecord>();
             return records.Select(x => x.UkPrn);
-        }
-
-        private string CreatePath()
-        {
-            var path = $"fcs/{_settings.EnvironmentName}/fcs-active.csv";
-            return string.Format(_settings.VstsGitGetFilesUrlFormat, path);
         }
     }
 }
