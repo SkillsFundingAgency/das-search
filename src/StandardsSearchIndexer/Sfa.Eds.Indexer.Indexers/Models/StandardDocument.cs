@@ -3,12 +3,15 @@
 namespace Sfa.Eds.Das.Indexer.Common.Models
 {
     using System;
+    using System.Collections.Generic;
 
     public class StandardDocument
     {
         public int StandardId { get; set; }
 
         public string Title { get; set; }
+
+        public IEnumerable<string> JobRoles { get; set; }
 
         public int NotionalEndLevel { get; set; }
 

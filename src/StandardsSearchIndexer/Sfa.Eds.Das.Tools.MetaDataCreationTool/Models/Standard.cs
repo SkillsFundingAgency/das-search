@@ -8,6 +8,8 @@
 
         public string Title { get; set; }
 
+        public string OverviewOfRole { get; set; }
+
         public int NotionalEndLevel { get; set; }
 
         public string StandardPdfUrl { get; set; }
@@ -21,8 +23,6 @@
         public TypicalLength TypicalLength { get; set; }
 
         public string IntroductoryText { get; set; }
-
-        public string OverviewOfRole { get; set; }
 
         public string EntryRequirements { get; set; }
 

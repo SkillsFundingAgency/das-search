@@ -206,6 +206,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 {
                     StandardId = standard.Id,
                     Title = standard.Title,
+                    JobRoles = standard.JobRoles,
                     NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
                     StandardPdf = standard.StandardPdfUrl,
