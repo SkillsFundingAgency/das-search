@@ -21,33 +21,6 @@
                     @Html.Raw(@Model.IntroductoryTextHtml)
                 </div>
             </div>
-
-            <section>
-                @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
-                {
-                    <div class="panel-indent panel-indent-info">
-                        <h2 class="heading-large">
-                            Documents
-                        </h2>
-                        <ul>
-                            @GetDocumentItem(@Model.StandardPdfUrl, @Model.StandardPdfUrlTitle)
-                            @GetDocumentItem(@Model.AssessmentPlanPdfUrl, @Model.AssessmentPlanPdfUrlTitle)
-                        </ul>
-                    </div>
-                }
-                <div class="summary">
-                    <h2 class="heading-large">
-                        Summary of apprenticeship standard
-                    </h2>
-                    @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
-                    @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
-                    @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
-                    @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
-                    @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
-                    @GetStandardProperty("Qualifications", Model.QualificationsHtml)
-                    @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
-                </div>
-            </section>
         </div>
         <div class="column-third">
             @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
@@ -72,13 +45,41 @@
                                 <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
                             </div>
-                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
+                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search"/>
                         </form>
 
                     </aside>
                 </div>
             }
 
+        </div>
+        <div class="column">
+            <section>
+                <div class="summary">
+                    <h2 class="heading-large">
+                        Summary of apprenticeship standard
+                    </h2>
+                    @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
+                    @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
+                    @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
+                    @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
+                    @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
+                    @GetStandardProperty("Qualifications", Model.QualificationsHtml)
+                    @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
+                </div>
+                @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
+                {
+                    <div class="panel-indent panel-indent-info">
+                        <h2 class="heading-large">
+                            Documents
+                        </h2>
+                        <ul>
+                            @GetDocumentItem(@Model.StandardPdfUrl, @Model.StandardPdfUrlTitle)
+                            @GetDocumentItem(@Model.AssessmentPlanPdfUrl, @Model.AssessmentPlanPdfUrlTitle)
+                        </ul>
+                    </div>
+                }
+            </section>
         </div>
     </div>
 
