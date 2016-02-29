@@ -6,6 +6,7 @@ using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Services;
 using Sfa.Eds.Das.ProviderIndexer.Settings;
+using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
 {
@@ -32,7 +33,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
         }
 
         [Test]
-        public void ShouldNotIndexProvidersIfThatIndexHasNotBeenCreatedProperly()
+        public async Task ShouldNotIndexProvidersIfThatIndexHasNotBeenCreatedProperly()
         {
             // Arrange
             _mockHelper
@@ -40,7 +41,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
                 .Returns(false);
 
             // Act
-            _sut.CreateScheduledIndex(It.IsAny<DateTime>());
+            await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
             _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Never);
@@ -48,7 +49,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
         }
 
         [Test]
-        public void ShouldIndexProvidersIfThatIndexHasBeenCreatedProperly()
+        public async Task ShouldIndexProvidersIfThatIndexHasBeenCreatedProperly()
         {
             // Arrange
             _mockHelper
@@ -56,7 +57,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
                 .Returns(true);
 
             // Act
-            _sut.CreateScheduledIndex(It.IsAny<DateTime>());
+            await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
             _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Once);
@@ -66,7 +67,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
         }
 
         [Test]
-        public void ShouldNotSwapIdexesIfNewOneHasNotBeenCreatedProperly()
+        public async Task ShouldNotSwapIdexesIfNewOneHasNotBeenCreatedProperly()
         {
             // Arrange
             _mockHelper
@@ -77,7 +78,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
                 .Returns(false);
 
             // Act
-            _sut.CreateScheduledIndex(It.IsAny<DateTime>());
+            await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
             _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Once);
@@ -87,7 +88,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
         }
 
         [Test]
-        public void ShouldSwapIdexesIfNewOneHasBeenCreatedProperly()
+        public async Task ShouldSwapIdexesIfNewOneHasBeenCreatedProperly()
         {
             // Arrange
             _mockHelper
@@ -98,7 +99,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.UnitTests.Services
                 .Returns(true);
 
             // Act
-            _sut.CreateScheduledIndex(It.IsAny<DateTime>());
+            await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
             _mockHelper.Verify(x => x.IndexProviders(It.IsAny<DateTime>(), It.IsAny<List<Provider>>()), Times.Once);

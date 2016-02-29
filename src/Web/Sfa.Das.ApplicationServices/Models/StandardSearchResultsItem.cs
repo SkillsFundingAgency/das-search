@@ -6,6 +6,8 @@
 
         public string Title { get; set; }
 
+        public string JobTitle { get; set; }
+
         public int NotionalEntryLevel { get; set; }
 
         public int NotionalEndLevel { get; set; }

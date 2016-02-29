@@ -6,7 +6,6 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-    using System.Threading.Tasks;
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
@@ -19,12 +18,14 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
         private readonly ISettings _settings;
         private readonly IGitDynamicModelGenerator _gitDynamicModelGenerator;
         private readonly IHttpHelper _httpHelper;
+        private readonly ILog4NetLogger _logger;
 
-        public VstsService(ISettings settings, IGitDynamicModelGenerator gitDynamicModelGenerator, IHttpHelper httpHelper)
+        public VstsService(ISettings settings, IGitDynamicModelGenerator gitDynamicModelGenerator, IHttpHelper httpHelper, ILog4NetLogger logger)
         {
             _settings = settings;
             _gitDynamicModelGenerator = gitDynamicModelGenerator;
             _httpHelper = httpHelper;
+            _logger = logger;
         }
 
         public IEnumerable<string> GetExistingStandardIds()
@@ -34,7 +35,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
             return blobs?.Select(m => GetIdFromPath(m.Path)) ?? new List<string>();
         }
 
-        public IEnumerable<string> GetStandards()
+        public IDictionary<string, string> GetStandards()
         {
             return GetAllFileContents();
         }
@@ -45,14 +46,15 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
             if (blobs == null)
             {
-                return new List<string>();
+                return new Dictionary<string, string>(0);
             }
 
-            var standardsAsJson = new List<string>();
+            var standardsAsJson = new Dictionary<string, string>();
+
             foreach (var blob in blobs)
             {
                 var str = _httpHelper.DownloadString(blob.Url, _settings.GitUsername, _settings.GitPassword);
-                standardsAsJson.Add(str);
+                standardsAsJson.Add(blob.Path, str);
             }
 
             return standardsAsJson;

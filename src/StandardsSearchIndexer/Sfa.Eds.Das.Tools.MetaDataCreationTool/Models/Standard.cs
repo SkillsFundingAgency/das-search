@@ -8,6 +8,8 @@
 
         public string Title { get; set; }
 
+        public string OverviewOfRole { get; set; }
+
         public int NotionalEndLevel { get; set; }
 
         public string StandardPdfUrl { get; set; }
@@ -29,7 +31,5 @@
         public string Qualifications { get; set; }
 
         public string ProfessionalRegistration { get; set; }
-
-        public string OverviewOfRole { get; set; }
     }
 }

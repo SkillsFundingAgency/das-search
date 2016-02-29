@@ -86,7 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="Test\Features\Sprint4\SearchProvider.feature.cs">
+    <Compile Include="Test\Features\Sprint4\SearchProvider1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProvider.feature</DependentUpon>

@@ -8,6 +8,6 @@
         /// Returns all standards
         /// </summary>
         /// <returns>List of jsonstings</returns>
-        IEnumerable<string> GetAllAsJson();
+        IDictionary<string, string> GetAllAsJson();
     }
 }

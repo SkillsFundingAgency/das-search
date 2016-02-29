@@ -12,6 +12,7 @@ using FluentAssertions;
 using Nest;
 using NUnit.Framework;
 using StructureMap;
+using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
@@ -39,14 +40,14 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
-        public void ShouldCreateScheduledIndexAndMapping()
+        public async Task ShouldCreateScheduledIndexAndMapping()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _sut.CreateScheduledIndex(scheduledDate);
+            await _sut.CreateScheduledIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
             var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
