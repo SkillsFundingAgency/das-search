@@ -109,7 +109,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 
 #line 98 "..\..\Views\Standard\Detail.cshtml"
-public System.Web.WebPages.HelperResult GetStandardProperty(string title, string item)
+public System.Web.WebPages.HelperResult GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
@@ -117,7 +117,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 99 "..\..\Views\Standard\Detail.cshtml"
  
-    if (!string.IsNullOrEmpty(item))
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
 
 
@@ -191,14 +191,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4670), Tuple.Create("\"", 4684)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4718), Tuple.Create("\"", 4732)
 
 #line 119 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4677), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 4725), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4677), false)
+, 4725), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -442,7 +442,7 @@ WriteLiteral("                    ");
 
             
             #line 48 "..\..\Views\Standard\Detail.cshtml"
-               Write(GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml));
+               Write(GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true));
 
             
             #line default
@@ -531,14 +531,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 3480), Tuple.Create("\"", 3505)
+WriteAttribute("value", Tuple.Create(" value=\"", 3486), Tuple.Create("\"", 3511)
             
             #line 72 "..\..\Views\Standard\Detail.cshtml"
-                                            , Tuple.Create(Tuple.Create("", 3488), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                                            , Tuple.Create(Tuple.Create("", 3494), Tuple.Create<System.Object, System.Int32>(Model.StandardId
             
             #line default
             #line hidden
-, 3488), false)
+, 3494), false)
 );
 
 WriteLiteral(">\r\n                                <input");

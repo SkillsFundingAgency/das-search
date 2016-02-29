@@ -45,7 +45,11 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
 
         private string MarkdownToHtml(string markdownText)
         {
-            return CommonMark.CommonMarkConverter.Convert(markdownText);
+            if (!string.IsNullOrEmpty(markdownText))
+            {
+                return CommonMark.CommonMarkConverter.Convert(markdownText);
+            }
+            return string.Empty;
         }
     }
 }

@@ -45,7 +45,7 @@
                     @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
                     @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
                     @GetStandardProperty("Qualifications", Model.QualificationsHtml)
-                    @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml)
+                    @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
                 </div>
             </section>
         </div>
@@ -95,9 +95,9 @@
 }
 
 
-@helper GetStandardProperty(string title, string item)
+@helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item))
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
 
         <div class="row">
