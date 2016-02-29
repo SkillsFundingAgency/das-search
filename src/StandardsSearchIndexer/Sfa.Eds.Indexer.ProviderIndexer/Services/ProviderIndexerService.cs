@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using log4net;
 using Sfa.Eds.Das.ProviderIndexer.Helpers;
 using Sfa.Eds.Das.ProviderIndexer.Settings;
@@ -33,7 +34,9 @@ namespace Sfa.Eds.Das.ProviderIndexer.Services
             _activeProviderClient = activeProviderClient;
         }
 
-        public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        public async Task CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        {
+            await Task.Run(() =>
         {
             Log.Info("Creating new scheduled provider index at " + DateTime.Now);
             try
@@ -75,6 +78,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Services
                 Log.Error(ex);
                 throw;
             }
+            }).ConfigureAwait(false);
         }
 
         private void PauseWhileIndexingIsBeingRun()

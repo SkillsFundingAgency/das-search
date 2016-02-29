@@ -22,9 +22,10 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
             var larsDataService = container.GetInstance<ILarsDataService>();
             var vstsDataService = container.GetInstance<IVstsService>();
             var settings = container.GetInstance<ISettings>();
+            var logger = container.GetInstance<ILog4NetLogger>();
 
             // Set GitUserName/GitPassword in app.config to run this
-            MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings);
+            MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, logger);
 
             metaData.GenerateStandardMetadataFiles();
         }

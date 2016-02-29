@@ -69,7 +69,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 Log.Debug("Indexing " + standards.Count() + " standards");
 
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                await IndexStandardPdfs(indexNameAndDateExtension, standards).ConfigureAwait(false);
+                await IndexStandards(indexNameAndDateExtension, standards).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             }
         }
 
-        private async Task IndexStandardPdfs(string indexName, IEnumerable<MetaDataItem> standards)
+        private async Task IndexStandards(string indexName, IEnumerable<MetaDataItem> standards)
         {
             // index the items
             foreach (var standard in standards)
@@ -206,11 +206,17 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 {
                     StandardId = standard.Id,
                     Title = standard.Title,
+                    JobRoles = standard.JobRoles,
                     NotionalEndLevel = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
                     StandardPdf = standard.StandardPdfUrl,
                     AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
                     TypicalLength = standard.TypicalLength,
+                    IntroductoryText = standard.IntroductoryText,
+                    EntryRequirements = standard.EntryRequirements,
+                    WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
+                    Qualifications = standard.Qualifications,
+                    ProfessionalRegistration = standard.ProfessionalRegistration,
                     File = attachment
                 };
 

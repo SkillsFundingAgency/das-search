@@ -16,6 +16,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Tests
             var mockLarsDataService = new Mock<ILarsDataService>();
             var mockVstsService = new Mock<IVstsService>();
             var mockSettings = new Mock<ISettings>();
+            var mockLogger = new Mock<ILog4NetLogger>(MockBehavior.Loose);
             List<StandardObject> standardsToAdd = null;
 
             var currentStandards = new List<Standard> { new Standard { Id = 1, Title = "One" }, new Standard { Id = 2, Title = "Two" }, new Standard { Id = 3, Title = "Three" } };
@@ -26,7 +27,7 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Tests
             mockVstsService.Setup(x => x.PushCommit(It.IsAny<List<StandardObject>>()))
                 .Callback<List<StandardObject>>(x => { standardsToAdd = x; });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, mockLogger.Object);
 
             metaDataManager.GenerateStandardMetadataFiles();
 

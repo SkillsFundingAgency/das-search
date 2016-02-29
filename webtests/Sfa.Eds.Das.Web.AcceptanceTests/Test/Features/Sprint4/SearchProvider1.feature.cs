@@ -68,9 +68,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Show available providers for given standard -End to End Test")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Product Design and Development Engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", null)]
-        public virtual void ShowAvailableProvidersForGivenStandard_EndToEndTest(string jOBROLE, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Product Design and Development Engineer", "CV1 2wt", null)]
+        [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", "CV6 1PT", null)]
+        public virtual void ShowAvailableProvidersForGivenStandard_EndToEndTest(string jOBROLE, string postcode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -90,10 +90,12 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
  testRunner.When("I choose any of the standard from search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.And("I click on search under provider search section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.Then("I should all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.And("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
+ testRunner.Then("I should all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 15
  testRunner.And("I should see all providers listed in Alphabetical order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

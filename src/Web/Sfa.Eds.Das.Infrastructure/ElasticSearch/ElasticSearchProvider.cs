@@ -35,6 +35,13 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             keywords = QueryHelper.FormatQuery(keywords);
 
             var client = this._elasticsearchClientFactory.Create();
+            //var results = client.Search<StandardSearchResultsItem>(s => s
+            //    .From(0)
+            //    .Size(10)
+            //    .Query(q => q
+            //        .QueryString(qs => qs
+            //            .OnFields(e => e.StandardTitle)
+            //            .Query(keywords))));
             var results = client.Search<StandardSearchResultsItem>(s => s.Skip(skip).Take(take).QueryString(keywords));
 
             return new StandardSearchResults

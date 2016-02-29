@@ -9,12 +9,13 @@ Scenario Outline:Show available providers for given standard -End to End Test
 	And I enter keyword '<JOBROLE>' in search box
 	And I click on search button
 	When I choose any of the standard from search result page
-	And I click on search under provider search section
+	And I enter '<Postcode>' in provider search box
+    And I search Search for provider
 	Then I should all providers in result page
 	And I should see all providers listed in Alphabetical order 
 Examples:
-| JOBROLE                                     |
-| Product Design and Development Engineer     |
-| Digital & technology solutions professional |
+| JOBROLE                                     | Postcode |
+| Product Design and Development Engineer     | CV1 2wt  |
+| Digital & technology solutions professional | CV6 1PT  |
 
 

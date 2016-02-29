@@ -11,8 +11,6 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool;
-
     public class WorkerRole : RoleEntryPoint
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

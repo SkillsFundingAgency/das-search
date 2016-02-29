@@ -8,7 +8,7 @@ using Sfa.Eds.Das.StandardIndexer.Settings;
 namespace Sfa.Eds.Das.StandardIndexer.Services
 {
     using System.Linq;
-
+    using System.Threading.Tasks;
     public class StandardIndexerService : IStandardIndexerService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -23,7 +23,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Services
             _standardHelper = standardHelper;
         }
 
-        public async void CreateScheduledIndex(DateTime scheduledRefreshDateTime)
+        public async Task CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
             Log.Info("Creating new scheduled standard index at " + DateTime.Now);
 

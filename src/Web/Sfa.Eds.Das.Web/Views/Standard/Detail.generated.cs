@@ -214,14 +214,14 @@ WriteLiteral(" class=\"panel-indent panel-indent-info\"");
 WriteLiteral(">\r\n                    <ul>\r\n                        <li>\r\n                      " +
 "      <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1207), Tuple.Create("\"", 1236)
+WriteAttribute("href", Tuple.Create(" href=\"", 1223), Tuple.Create("\"", 1252)
             
             #line 34 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 1214), Tuple.Create<System.Object, System.Int32>(Model.Standard.PdfUrl
+, Tuple.Create(Tuple.Create("", 1230), Tuple.Create<System.Object, System.Int32>(Model.Standard.PdfUrl
             
             #line default
             #line hidden
-, 1214), false)
+, 1230), false)
 );
 
 WriteLiteral(">\r\n                                Download full details (PDF, 268KB)\r\n          " +
@@ -317,14 +317,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2906), Tuple.Create("\"", 2940)
+WriteAttribute("value", Tuple.Create(" value=\"", 2922), Tuple.Create("\"", 2956)
             
             #line 68 "..\..\Views\Standard\Detail.cshtml"
-                                            , Tuple.Create(Tuple.Create("", 2914), Tuple.Create<System.Object, System.Int32>(Model.Standard.StandardId
+                                            , Tuple.Create(Tuple.Create("", 2930), Tuple.Create<System.Object, System.Int32>(Model.Standard.StandardId
             
             #line default
             #line hidden
-, 2914), false)
+, 2930), false)
 );
 
 WriteLiteral(">\r\n                                <input");

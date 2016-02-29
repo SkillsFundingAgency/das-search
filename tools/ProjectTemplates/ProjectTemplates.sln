@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfaTemplateVsix", "SfaTemplateVsix\SfaTemplateVsix.csproj", "{206860D2-C1EB-4474-8485-66B6DBB0645E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfaTemplate", "SfaTemplate\SfaTemplate.csproj", "{B8E2EE86-3962-496D-BA4C-5C09261BCEC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfaTemplateUnitTest", "SfaTemplateUnitTest\SfaTemplateUnitTest.csproj", "{22A0A1B0-D1C9-4802-9F7D-16C2E34BB01A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{206860D2-C1EB-4474-8485-66B6DBB0645E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206860D2-C1EB-4474-8485-66B6DBB0645E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206860D2-C1EB-4474-8485-66B6DBB0645E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206860D2-C1EB-4474-8485-66B6DBB0645E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E2EE86-3962-496D-BA4C-5C09261BCEC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E2EE86-3962-496D-BA4C-5C09261BCEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E2EE86-3962-496D-BA4C-5C09261BCEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E2EE86-3962-496D-BA4C-5C09261BCEC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22A0A1B0-D1C9-4802-9F7D-16C2E34BB01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A0A1B0-D1C9-4802-9F7D-16C2E34BB01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A0A1B0-D1C9-4802-9F7D-16C2E34BB01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A0A1B0-D1C9-4802-9F7D-16C2E34BB01A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
