@@ -212,6 +212,11 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                     StandardPdf = standard.StandardPdfUrl,
                     AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
                     TypicalLength = standard.TypicalLength,
+                    IntroductoryText = standard.IntroductoryText,
+                    EntryRequirements = standard.EntryRequirements,
+                    WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
+                    Qualifications = standard.Qualifications,
+                    ProfessionalRegistration = standard.ProfessionalRegistration,
                     File = attachment
                 };
 
