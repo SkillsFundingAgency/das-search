@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Indexer.Common.Models
+﻿using System.Collections.Generic;
+
+namespace Sfa.Eds.Das.Indexer.Common.Models
 {
 
     public class MetaDataItem
@@ -6,6 +8,8 @@
         public int Id { get; set; }
 
         public string Title { get; set; }
+
+        public IEnumerable<string> JobRoles { get; set; }
 
         public int NotionalEndLevel { get; set; }
 

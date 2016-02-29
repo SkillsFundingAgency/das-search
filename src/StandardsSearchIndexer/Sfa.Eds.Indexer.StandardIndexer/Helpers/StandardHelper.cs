@@ -69,7 +69,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                 Log.Debug("Indexing " + standards.Count() + " standards");
 
                 var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                await IndexStandardPdfs(indexNameAndDateExtension, standards).ConfigureAwait(false);
+                await IndexStandards(indexNameAndDateExtension, standards).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             }
         }
 
-        private async Task IndexStandardPdfs(string indexName, IEnumerable<MetaDataItem> standards)
+        private async Task IndexStandards(string indexName, IEnumerable<MetaDataItem> standards)
         {
             // index the items
             foreach (var standard in standards)
