@@ -234,7 +234,7 @@
 
         [Test]
         [Category("Integration")]
-        public void ShouldRetrieveProvidersSearchigForPostCode()
+        public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
@@ -273,7 +273,7 @@
 
         [Test]
         [Category("Integration")]
-        public void ShouldRetrieveProvidersSearchigForStandardId()
+        public void ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
