@@ -10,7 +10,7 @@
     using Web.Views.Provider;
 
     [TestFixture]
-    public sealed class ProviderSearchResultPage : TestBase
+    public sealed class ProviderSearchResultPage : ViewTestBase
     {
         [Test]
         public void ShouldShowAnErrorWhenSomethingIsWrong()
@@ -21,7 +21,7 @@
                 TotalResults = 0,
                 PostCodeMissing = false,
                 StandardId = 1,
-                Results = new List<ProviderResultItemViewModel>(),
+                Hits = new List<ProviderResultItemViewModel>(),
                 HasError = true
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -39,7 +39,7 @@
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test name",
-                Results = new List<ProviderResultItemViewModel>(),
+                Hits = new List<ProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -57,7 +57,7 @@
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test name",
-                Results = new List<ProviderResultItemViewModel>(),
+                Hits = new List<ProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();

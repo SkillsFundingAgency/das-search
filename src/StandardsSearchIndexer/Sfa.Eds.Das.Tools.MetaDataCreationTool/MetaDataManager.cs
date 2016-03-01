@@ -23,7 +23,7 @@
             _logger = logger;
         }
 
-        public IEnumerable<string> GetAllAsJson()
+        public IDictionary<string, string> GetAllAsJson()
         {
             return _vstsService.GetStandards();
         }

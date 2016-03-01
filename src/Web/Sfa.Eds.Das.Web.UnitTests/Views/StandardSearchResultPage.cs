@@ -10,7 +10,7 @@
     using Web.Views.Standard;
 
     [TestFixture]
-    public sealed class StandardSearchResultPage : TestBase
+    public sealed class StandardSearchResultPage : ViewTestBase
     {
         [Test]
         public void When_SearchResultHasErrors()
@@ -20,7 +20,7 @@
             {
                 TotalResults = 0,
                 SearchTerm = string.Empty,
-                Results = new List<StandardResultItemViewModel>(),
+                Results = new List<StandardSearchResultItemViewModel>(),
                 HasError = true
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -36,7 +36,7 @@
             {
                 TotalResults = 0,
                 SearchTerm = "SearchTerm",
-                Results = new List<StandardResultItemViewModel>(),
+                Results = new List<StandardSearchResultItemViewModel>(),
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -51,9 +51,9 @@
             {
                 TotalResults = 68,
                 SearchTerm = string.Empty,
-                Results = new List<StandardResultItemViewModel>
+                Results = new List<StandardSearchResultItemViewModel>
                               {
-                                  new StandardResultItemViewModel()
+                                  new StandardSearchResultItemViewModel()
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -70,9 +70,9 @@
             {
                 TotalResults = 1,
                 SearchTerm = "SearchTerm",
-                Results = new List<StandardResultItemViewModel>
+                Results = new List<StandardSearchResultItemViewModel>
                               {
-                                  new StandardResultItemViewModel()
+                                  new StandardSearchResultItemViewModel()
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -92,9 +92,9 @@
             {
                 TotalResults = 2,
                 SearchTerm = "SearchTerm",
-                Results = new List<StandardResultItemViewModel>
+                Results = new List<StandardSearchResultItemViewModel>
                               {
-                                  new StandardResultItemViewModel()
+                                  new StandardSearchResultItemViewModel()
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();

@@ -8,9 +8,13 @@
     using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool;
     using Tools.MetaDataCreationTool.Services.Interfaces;
+    using log4net;
+    using System.Reflection;
 
-    internal class MetaDataHelper : IMetaDataHelper
+    public class MetaDataHelper : IMetaDataHelper
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly IGetStandardMetaData _metaDataReader;
         private readonly IGenerateStandardMetaData _metaDataWriter;
 
@@ -22,9 +26,22 @@
 
         public List<MetaDataItem> GetAllStandardsMetaData()
         {
-            var standards = _metaDataReader.GetAllAsJson();
+            var standardsMetaDataJson = _metaDataReader.GetAllAsJson();
+            var standardsMetaData = new List<MetaDataItem>();
 
-            return standards.Select(JsonConvert.DeserializeObject<MetaDataItem>).ToList();
+            foreach (var item in standardsMetaDataJson)
+            {
+                try
+                {
+                    standardsMetaData.Add(JsonConvert.DeserializeObject<MetaDataItem>(item.Value));
+                }
+                catch (JsonReaderException ex)
+                {
+                    Log.Warn($"Couldn't deserialise meta data for: {item.Key}");
+                }
+            }
+
+            return standardsMetaData;
         }
 
         public void UpdateMetadataRepository()

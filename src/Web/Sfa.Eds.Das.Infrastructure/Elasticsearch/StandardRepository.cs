@@ -19,7 +19,7 @@
             _applicationLogger = applicationLogger;
         }
 
-        public Standard GetById(string id)
+        public Standard GetById(int id)
         {
             var client = this._elasticsearchClientFactory.Create();
             var results =
@@ -30,7 +30,7 @@
                     .Query(q =>
                         q.QueryString(qs =>
                             qs.OnFields(e => e.StandardId)
-                            .Query(id))));
+                            .Query(id.ToString()))));
 
             if (results.ConnectionStatus.HttpStatusCode != 200)
             {
@@ -43,7 +43,23 @@
 
             if (document != null)
             {
-                return new Standard { StandardId = document.StandardId, Title = document.Title, NotionalEndLevel = document.NotionalEndLevel };
+                return new Standard
+                           {
+                               StandardId = document.StandardId,
+                               Title = document.Title,
+                               StandardPdfUrl = document.StandardPdfUrl,
+                               AssessmentPlanPdfUrl = document.AssessmentPlanPdfUrl,
+                               NotionalEndLevel = document.NotionalEndLevel,
+                               JobRoles = document.JobRoles,
+                               Keywords = document.Keywords,
+                               TypicalLength = document.TypicalLength,
+                               IntroductoryText = document.IntroductoryText,
+                               EntryRequirements = document.EntryRequirements,
+                               WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
+                               Qualifications = document.Qualifications,
+                               ProfessionalRegistration = document.ProfessionalRegistration,
+                               OverviewOfRole = document.OverviewOfRole
+                };
             }
 
             return null;

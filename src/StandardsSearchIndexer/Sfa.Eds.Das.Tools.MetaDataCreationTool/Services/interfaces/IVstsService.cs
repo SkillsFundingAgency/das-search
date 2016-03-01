@@ -7,7 +7,9 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
     public interface IVstsService
     {
         IEnumerable<string> GetExistingStandardIds();
-        IEnumerable<string> GetStandards();
+
+        IDictionary<string, string> GetStandards();
+
         void PushCommit(List<StandardObject> items);
     }
 }

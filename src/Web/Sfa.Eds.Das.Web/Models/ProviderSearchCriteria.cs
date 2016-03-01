@@ -4,10 +4,6 @@
     {
         public string PostCode { get; set; }
 
-        public string StandardId { get; set; }
-
-        public int Skip { get; set; }
-
-        public int Take { get; set; }
+        public int StandardId { get; set; }
     }
 }
