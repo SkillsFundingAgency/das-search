@@ -33,6 +33,75 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Standard/SearchResults.cshtml")]
     public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel>
     {
+
+#line 72 "..\..\Views\Standard\SearchResults.cshtml"
+public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string item, string unit = "")
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 73 "..\..\Views\Standard\SearchResults.cshtml"
+ 
+    if (!string.IsNullOrEmpty(item))
+    {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "            <dt");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 76 "..\..\Views\Standard\SearchResults.cshtml"
+    WriteTo(__razor_helper_writer, title);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "                <dd");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 77 "..\..\Views\Standard\SearchResults.cshtml"
+        WriteTo(__razor_helper_writer, item);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " ");
+
+
+#line 77 "..\..\Views\Standard\SearchResults.cshtml"
+              WriteTo(__razor_helper_writer, unit);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
+
+
+#line 78 "..\..\Views\Standard\SearchResults.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 79 "..\..\Views\Standard\SearchResults.cshtml"
+}
+#line default
+#line hidden
+
         public SearchResults()
         {
         }
@@ -136,34 +205,39 @@ WriteLiteral("                                ");
 
             
             #line 30 "..\..\Views\Standard\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new {@id = item.StandardId}, null));
+                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                            </h2>\r\n                            <dl>\r\n          " +
-"                      <dt");
+WriteLiteral("\r\n                            </h2>\r\n                            ");
 
-WriteLiteral(" class=\"endLevel\"");
+WriteLiteral("\r\n");
 
-WriteLiteral(">Level</dt>\r\n                                <dd");
-
-WriteLiteral(" class=\"endLevel\"");
-
-WriteLiteral(">\r\n                                    <span>");
+WriteLiteral("                            ");
 
             
-            #line 35 "..\..\Views\Standard\SearchResults.cshtml"
-                                     Write(item.NotionalEndLevel);
+            #line 38 "..\..\Views\Standard\SearchResults.cshtml"
+                       Write(GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString()));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n                                </dd>\r\n                            </dl>" +
-"\r\n                        </div>\r\n                    </li>\r\n");
+WriteLiteral("\r\n");
+
+WriteLiteral("                            ");
 
             
-            #line 40 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 39 "..\..\Views\Standard\SearchResults.cshtml"
+                       Write(GetStandardDetailItem("Typical length:", item.TypicalLengthMessage));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                        </div>\r\n                    </li>\r\n");
+
+            
+            #line 42 "..\..\Views\Standard\SearchResults.cshtml"
                 }
 
             
@@ -211,7 +285,7 @@ WriteLiteral(" class=\"return-to-top\"");
 WriteLiteral(" href=\"#content\"");
 
 WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n                </aside>\r\n     " +
-"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>");
+"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
 
         }
     }

@@ -1,15 +1,15 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System;
-    using System.Globalization;
     using System.Web.Mvc;
 
-    using Sfa.Das.ApplicationServices;
-    using Sfa.Das.ApplicationServices.Models;
     using Core.Domain.Services;
     using Core.Logging;
     using Models;
     using Services;
+    using Sfa.Das.ApplicationServices;
+    using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.Core.Domain.Model;
+    using Sfa.Eds.Das.Web.Extensions;
     using ViewModels;
 
     public sealed class StandardController : Controller
@@ -45,9 +45,9 @@
         }
 
         // GET: Standard
-        public ActionResult Detail(string id, string hasError)
+        public ActionResult Detail(int id, string hasError)
         {
-            var standardResult = this._standardRepository.GetById(id);
+            var standardResult = _standardRepository.GetById(id);
 
             if (standardResult == null)
             {
@@ -57,32 +57,12 @@
                 return new HttpNotFoundResult(message);
             }
 
-            var error = false;
-            if (!string.IsNullOrEmpty(hasError))
-            {
-                error = bool.Parse(hasError);
-            }
+            var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
-            var standardDetail = new StandardDetail
-            {
-                Standard = standardResult,
-                HasError = error
-            };
-
-            var viewModel = _mappingService.Map<StandardDetail, StandardViewModel>(standardDetail);
-            viewModel.SearchResultLink = GetSearchResultUrl(Request.UrlReferrer);
+            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
 
             return View(viewModel);
-        }
-
-        private LinkViewModel GetSearchResultUrl(Uri urlReferrer)
-        {
-            if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?keywords"))
-            {
-                return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
-            }
-
-            return new LinkViewModel { Title = "Back to search page", Url = Url.Action("Search", "Standard") };
         }
     }
 }

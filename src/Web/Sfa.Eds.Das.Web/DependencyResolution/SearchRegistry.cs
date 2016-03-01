@@ -1,7 +1,7 @@
-using Sfa.Eds.Das.Infrastructure.Location;
-
 namespace Sfa.Eds.Das.Web.DependencyResolution
 {
+    using ApplicationServices;
+    using Infrastructure.PostCodeIo;
     using log4net;
 
     using Sfa.Das.ApplicationServices;
@@ -26,11 +26,13 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
 
             // New infrastructure
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<ILocator>().Use<PostCodesIOLocator>();
+            For<ILookupLocations>().Use<PostCodesIOLocator>();
 
             For<IStandardSearchService>().Use<StandardSearchService>();
             For<IStandardRepository>().Use<StandardRepository>();
             For<ISearchProvider>().Use<ElasticsearchProvider>();
+
+            For<IProviderSearchService>().Use<ProviderSearchService>();
         }
     }
 }

@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderSearchServiceTests.cs" />
     <Compile Include="StandardSearchServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\Sfa.Das.ApplicationServices\Sfa.Das.ApplicationServices.csproj">
       <Project>{f8946f39-edec-457a-857b-5a76d4151082}</Project>
       <Name>Sfa.Das.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Das.Core\Sfa.Eds.Das.Core.csproj">
+      <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
+      <Name>Sfa.Eds.Das.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

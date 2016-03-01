@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.ApplicationServices;
 using Sfa.Eds.Das.Core.Domain.Model;
 
-namespace Sfa.Eds.Das.Infrastructure.Location
+namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
 {
-    public class PostCodesIOLocator : ILocator
+    public class PostCodesIOLocator : ILookupLocations
     {
         public async Task<Coordinate> GetLatLongFromPostCode(string postcode)
         {
@@ -23,7 +18,7 @@ namespace Sfa.Eds.Das.Infrastructure.Location
             {
                 HttpRequestMessage request = new HttpRequestMessage(
                     HttpMethod.Get,
-                    string.Concat(sURL));
+                    sURL);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)

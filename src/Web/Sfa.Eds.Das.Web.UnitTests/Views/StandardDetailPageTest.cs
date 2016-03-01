@@ -1,9 +1,5 @@
-﻿using Sfa.Eds.Das.Core.Domain.Model;
-
-namespace Sfa.Eds.Das.Web.UnitTests.Views
+﻿namespace Sfa.Eds.Das.Web.UnitTests.Views
 {
-    using System.Collections.Generic;
-
     using ExtensionHelpers;
     using FluentAssertions;
     using NUnit.Framework;
@@ -12,7 +8,7 @@ namespace Sfa.Eds.Das.Web.UnitTests.Views
     using Web.Views.Standard;
 
     [TestFixture]
-    public sealed class StandardDetailPage : TestBase
+    public sealed class StandardDetailPageTest : ViewTestBase
     {
         [Test]
         public void ShouldShowRequiredFieldWhenErrorIsReceived()
@@ -20,7 +16,6 @@ namespace Sfa.Eds.Das.Web.UnitTests.Views
             var detail = new BlankFieldErrorMessage();
             var model = new StandardViewModel
             {
-                Standard = new Standard(),
                 HasError = true
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -34,7 +29,6 @@ namespace Sfa.Eds.Das.Web.UnitTests.Views
             var detail = new BlankFieldErrorMessage();
             var model = new StandardViewModel
             {
-                Standard = new Standard(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();

@@ -35,5 +35,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Models
         public string Qualifications { get; set; }
 
         public string ProfessionalRegistration { get; set; }
+
+        public string OverviewOfRole { get; set; }
     }
 }
