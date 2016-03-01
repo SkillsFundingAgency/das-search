@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Eds.Das.ProviderIndexer.Clients
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -21,9 +22,15 @@
 
         public IEnumerable<string> GetProviders()
         {
-            var result = _vstsClient.GetFileContent($"fcs/{_settings.EnvironmentName}/fcs-active.csv");
+            Func<string> func = LoadProvidersFromVsts;
+            var result = func.RetryWebRequest();
             var records = result.FromCsv<FcsProviderRecord>();
             return records.Select(x => x.UkPrn);
+        }
+
+        private string LoadProvidersFromVsts()
+        {
+            return _vstsClient.GetFileContent($"fcs/{_settings.EnvironmentName}/fcs-active.csv");
         }
     }
 }

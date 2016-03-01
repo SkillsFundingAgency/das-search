@@ -1,6 +1,7 @@
-namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces
+namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class VstsClient : IVstsClient
     {

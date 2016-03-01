@@ -98,7 +98,7 @@
     <Compile Include="Services\Interfaces\ILog4NetLogger.cs" />
     <Compile Include="Services\Interfaces\IUnzipFiles.cs" />
     <Compile Include="Services\Interfaces\IVstsClient.cs" />
-    <Compile Include="Services\Interfaces\VstsClient.cs" />
+    <Compile Include="Services\VstsClient.cs" />
     <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Models\StandardObject.cs" />

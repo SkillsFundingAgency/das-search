@@ -102,8 +102,8 @@
     <Compile Include="Clients\ICourseDirectoryClient.cs" />
     <Compile Include="Clients\StubCourseDirectoryClient.cs" />
     <Compile Include="DependencyResolution\ProviderRegistry.cs" />
-    <Compile Include="Helpers\IProviderHelper.cs" />
     <Compile Include="Helpers\ProviderHelper.cs" />
+    <Compile Include="Models\Provider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\ProviderIndexSettings.cs" />
   </ItemGroup>
@@ -132,9 +132,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

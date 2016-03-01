@@ -5,6 +5,7 @@
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     [TestFixture]

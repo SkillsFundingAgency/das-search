@@ -13,6 +13,8 @@ using Sfa.Eds.Das.StandardIndexer.Settings;
 
 namespace Sfa.Eds.Das.StandardIndexer.Helpers
 {
+    using Sfa.Eds.Das.Indexer.Common.Extensions;
+
     public class StandardHelper : IStandardHelper, IGenericIndexerHelper<MetaDataItem>
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -119,6 +121,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
         public ICollection<MetaDataItem> LoadEntries()
         {
             UpdateMetadataRepositoryWithNewStandards();
+            Log.Info("Indexing standard PDFs...");
             return GetStandardsMetaDataFromGit().ToList();
         }
 

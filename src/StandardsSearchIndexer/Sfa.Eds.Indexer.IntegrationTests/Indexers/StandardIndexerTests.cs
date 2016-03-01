@@ -10,19 +10,20 @@ using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.StandardIndexer.Helpers;
-using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Das.StandardIndexer.Settings;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
+    using Sfa.Eds.Das.Indexer.Common.Services;
+
     [TestFixture]
     public class StandardIndexerTests
     {
         private IContainer _ioc;
         private IStandardIndexSettings _standardSettings;
         private IStandardHelper _standardHelper;
-        private IStandardIndexerService _sut;
+        private IIndexerService<MetaDataItem> _sut;
         private IElasticClient _elasticClient;
 
         [SetUp]
@@ -35,7 +36,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
-            _sut = _ioc.GetInstance<IStandardIndexerService>();
+            _sut = _ioc.GetInstance<IIndexerService<MetaDataItem>>();
         }
 
         [Test]

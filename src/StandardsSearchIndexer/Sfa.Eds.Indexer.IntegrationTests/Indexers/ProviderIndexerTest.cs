@@ -14,10 +14,12 @@
 
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
     using Sfa.Eds.Das.Indexer.Common.Configuration;
+    using Sfa.Eds.Das.Indexer.Common.Helpers;
     using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Indexer.Common.Services;
     using Sfa.Eds.Das.Indexer.Common.Settings;
     using Sfa.Eds.Das.ProviderIndexer.Helpers;
+    using Sfa.Eds.Das.ProviderIndexer.Models;
 
     using StructureMap;
 
@@ -29,7 +31,7 @@
         {
             _ioc = IoC.Initialize();
             _ioc.GetInstance<IIndexSettings<Provider>>();
-            _providerHelper = _ioc.GetInstance<IProviderHelper>();
+            _providerHelper = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
 
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -39,7 +41,7 @@
 
         private IContainer _ioc;
 
-        private IProviderHelper _providerHelper;
+        private IGenericIndexerHelper<Provider> _providerHelper;
 
         private IIndexerService<Provider> _sut;
 
@@ -254,7 +256,7 @@
             _providerHelper.CreateIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _providerHelper.IndexProviders(scheduledDate, providersTest);
+            _providerHelper.IndexEntries(scheduledDate, providersTest);
 
             Thread.Sleep(2000);
 
@@ -284,7 +286,7 @@
             _providerHelper.CreateIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _providerHelper.IndexProviders(scheduledDate, providersTest);
+            _providerHelper.IndexEntries(scheduledDate, providersTest);
 
             Thread.Sleep(2000);
 

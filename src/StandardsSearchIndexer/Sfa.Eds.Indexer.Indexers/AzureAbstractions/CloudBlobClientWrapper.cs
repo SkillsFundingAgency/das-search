@@ -1,10 +1,12 @@
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Sfa.Eds.Das.Indexer.Common.Settings;
-
-namespace Sfa.Eds.Das.Indexer.Common.Helpers
+namespace Sfa.Eds.Das.Indexer.Common.AzureAbstractions
 {
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Auth;
+    using Microsoft.WindowsAzure.Storage.Blob;
+
+    using Sfa.Eds.Das.Indexer.Common.Helpers;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
+
     public class CloudBlobClientWrapper : ICloudBlobClientWrapper
     {
         private readonly ICommonSettings _commonSettings;

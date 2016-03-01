@@ -20,7 +20,6 @@ namespace Sfa.Eds.Das.Indexer.Common.DependencyResolution
             For<ICommonSettings>().Use<CommonSettings>();
             For<ICloudQueueService>().Use<CloudQueueService>();
             For<IBlobStorageHelper>().Use<BlobStorageHelper>();
-            For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
             For<IIndexerService<StandardDocument>>().Use<IndexerService<StandardDocument>>();
         }
     }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Eds.Das.Indexer.Common.Models
+﻿namespace Sfa.Eds.Das.ProviderIndexer.Models
 {
+    using System.Collections.Generic;
+
+    using Sfa.Eds.Das.Indexer.Common.Models;
+
     public class Provider : IIndexEntry
     {
         public int ProviderId { get; set; }

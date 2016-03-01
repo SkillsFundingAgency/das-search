@@ -1,9 +1,12 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Blob;
-
-namespace Sfa.Eds.Das.Indexer.Common.Helpers
+namespace Sfa.Eds.Das.Indexer.Common.AzureAbstractions
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Microsoft.WindowsAzure.Storage.Blob;
+
+    using Sfa.Eds.Das.Indexer.Common.Helpers;
+
     public class CloudBlobContainerWrapper : ICloudBlobContainerWrapper
     {
         private readonly CloudBlobContainer _cloudBlobContainer;

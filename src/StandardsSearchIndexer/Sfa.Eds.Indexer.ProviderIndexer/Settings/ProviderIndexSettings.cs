@@ -4,6 +4,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Settings
 {
     using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Indexer.Common.Settings;
+    using Sfa.Eds.Das.ProviderIndexer.Models;
 
     public class ProviderIndexSettings : IIndexSettings<Provider>
     {

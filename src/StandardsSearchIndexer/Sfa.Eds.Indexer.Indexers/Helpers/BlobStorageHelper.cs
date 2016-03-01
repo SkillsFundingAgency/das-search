@@ -7,6 +7,8 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Sfa.Eds.Das.Indexer.Common.Helpers
 {
+    using Sfa.Eds.Das.Indexer.Common.AzureAbstractions;
+
     public class BlobStorageHelper : IBlobStorageHelper
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

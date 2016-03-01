@@ -1,42 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using log4net;
-using Nest;
-using Sfa.Eds.Das.Indexer.Common.Configuration;
-using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.ProviderIndexer.Settings;
-
-namespace Sfa.Eds.Das.ProviderIndexer.Helpers
+﻿namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
     using System.Threading.Tasks;
 
+    using log4net;
+
+    using Nest;
+
+    using Sfa.Eds.Das.Indexer.Common.Configuration;
     using Sfa.Eds.Das.Indexer.Common.Helpers;
     using Sfa.Eds.Das.Indexer.Common.Settings;
     using Sfa.Eds.Das.ProviderIndexer.Clients;
+    using Sfa.Eds.Das.ProviderIndexer.Models;
 
-    public class ProviderHelper : IProviderHelper, IGenericIndexerHelper<Provider>
+    public class ProviderHelper : IGenericIndexerHelper<Provider>
     {
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
-        private readonly ICourseDirectoryClient _courseDirectoryClient;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly IActiveProviderClient _activeProviderClient;
-        private readonly IIndexSettings<Provider> _settings;
+
         private readonly IElasticClient _client;
+
+        private readonly ICourseDirectoryClient _courseDirectoryClient;
+
+        private readonly IIndexSettings<Provider> _settings;
 
         public ProviderHelper(
             IIndexSettings<Provider> settings,
-            IElasticsearchClientFactory elasticsearchClientFactory, ICourseDirectoryClient courseDirectoryClient, IActiveProviderClient activeProviderClient)
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ICourseDirectoryClient courseDirectoryClient,
+            IActiveProviderClient activeProviderClient)
         {
             _settings = settings;
-            _elasticsearchClientFactory = elasticsearchClientFactory;
             _courseDirectoryClient = courseDirectoryClient;
             _activeProviderClient = activeProviderClient;
 
-            _client = _elasticsearchClientFactory.GetElasticClient();
+            _client = elasticsearchClientFactory.GetElasticClient();
         }
 
         public ICollection<Provider> LoadEntries()
@@ -136,9 +140,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
-            var a = _client
-                .Search<Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll())
-                .Documents;
+            var a = _client.Search<Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
             return a.Any();
         }
 
@@ -159,23 +161,19 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
+                aliasRequest.Actions.Add(
+                    new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
             }
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
             _client.Alias(aliasRequest);
         }
 
-        public void IndexProviders(DateTime scheduledRefreshDateTime, ICollection<Provider> providers)
-        {
-            IndexEntries(scheduledRefreshDateTime, providers);
-        }
-
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
             var dateTime = scheduledRefreshDateTime.AddDays(-2);
 
-            for (int i = 0; i < 23; i++)
+            for (var i = 0; i < 23; i++)
             {
                 var timeSpan = new TimeSpan(i, 0, 0);
                 var dateTimeTmp = dateTime.Date + timeSpan;
@@ -193,12 +191,14 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         public string GetIndexNameAndDateExtension(DateTime dateTime)
         {
-            return string.Format("{0}-{1}", _settings.IndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
+            return
+                string.Format("{0}-{1}", _settings.IndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH"))
+                    .ToLower(CultureInfo.InvariantCulture);
         }
 
         private string CreateProviderRawFormat(Provider provider)
         {
-            int i = 0;
+            var i = 0;
             var standardsId = new StringBuilder();
             foreach (var standardId in provider.StandardsId)
             {
@@ -243,7 +243,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         private Task IndexProviders(string indexName, IEnumerable<Provider> providers)
         {
-            int id = 1;
+            var id = 1;
 
             // index the items
             foreach (var provider in providers)
@@ -273,10 +273,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         private void CreateAlias(string indexName)
         {
-            _client.Alias(a => a
-                .Add(add => add
-                    .Index(indexName)
-                    .Alias(_settings.IndexesAlias)));
+            _client.Alias(a => a.Add(add => add.Index(indexName).Alias(_settings.IndexesAlias)));
         }
     }
 }

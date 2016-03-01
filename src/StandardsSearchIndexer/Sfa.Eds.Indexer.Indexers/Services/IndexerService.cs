@@ -43,8 +43,8 @@
                             }
 
                             Log.Info($"Indexing {_name}s...");
-                            var providers = _indexerHelper.LoadEntries();
-                            _indexerHelper.IndexEntries(scheduledRefreshDateTime, providers);
+                            var entries = _indexerHelper.LoadEntries();
+                            _indexerHelper.IndexEntries(scheduledRefreshDateTime, entries);
 
                             PauseWhileIndexingIsBeingRun();
 

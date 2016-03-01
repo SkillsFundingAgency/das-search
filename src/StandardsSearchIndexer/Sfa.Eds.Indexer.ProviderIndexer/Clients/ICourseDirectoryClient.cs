@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.ProviderIndexer.Models;
 
     public interface ICourseDirectoryClient
     {

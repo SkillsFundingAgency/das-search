@@ -72,6 +72,10 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Polly, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.4.0.0\lib\net45\Polly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -103,20 +107,20 @@
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\Log4NetSettings.cs" />
     <Compile Include="DependencyResolution\CommonRegistry.cs" />
+    <Compile Include="Extensions\FuncExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
-    <Compile Include="Helpers\CloudBlobClientWrapper.cs" />
-    <Compile Include="Helpers\CloudBlobContainerWrapper.cs" />
-    <Compile Include="Helpers\ICloudBlobClientWrapper.cs" />
-    <Compile Include="Helpers\ICloudBlobContainerWrapper.cs" />
+    <Compile Include="AzureAbstractions\CloudBlobClientWrapper.cs" />
+    <Compile Include="AzureAbstractions\CloudBlobContainerWrapper.cs" />
+    <Compile Include="AzureAbstractions\ICloudBlobClientWrapper.cs" />
+    <Compile Include="AzureAbstractions\ICloudBlobContainerWrapper.cs" />
     <Compile Include="Helpers\IGenericIndexerHelper.cs" />
-    <Compile Include="Helpers\ListExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\IIndexEntry.cs" />
     <Compile Include="Models\MetaDataItem.cs" />
-    <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\StandardDocument.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
