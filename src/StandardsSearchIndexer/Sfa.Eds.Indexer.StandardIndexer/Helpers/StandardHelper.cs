@@ -213,6 +213,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
                     AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
                     TypicalLength = standard.TypicalLength,
                     IntroductoryText = standard.IntroductoryText,
+                    OverviewOfRole = standard.OverviewOfRole,
                     EntryRequirements = standard.EntryRequirements,
                     WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
                     Qualifications = standard.Qualifications,
