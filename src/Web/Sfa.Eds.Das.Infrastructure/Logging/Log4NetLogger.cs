@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Infrastructure.Logging
 {
     using log4net;
+    using System;
 
     public sealed class Log4NetLogger : Core.Logging.ILog
     {
@@ -29,6 +30,11 @@
         public void Error(string msg)
         {
             _logger.Error(msg);
+        }
+
+        public void Error(Exception ex, string msg)
+        {
+            _logger.Error(msg, ex);
         }
     }
 }

@@ -10,24 +10,21 @@ using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
-    using ApplicationServices;
     using Core.Configuration;
-    using System.Collections.Generic;
+    using Sfa.Das.ApplicationServices.Exceptions;
     public sealed class ElasticsearchProvider : ISearchProvider
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _logger;
         private readonly IStandardRepository _standardRepository;
         private readonly IConfigurationSettings _applicationSettings;
-        private readonly ILookupLocations _locatorService;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings, ILookupLocations locatorService)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
             _standardRepository = standardRepository;
             _applicationSettings = applicationSettings;
-            _locatorService = locatorService;
         }
 
         public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
@@ -74,15 +71,10 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).ToList();
 
-            // TODO: LWA - Reimplement this logic? Error condition.
-            //if (results.ConnectionStatus != null)
-            //{
-            //    result.HasError = results.ConnectionStatus.HttpStatusCode != 200;
-            //}
-            //else
-            //{
-            //    result.HasError = false;
-            //}
+            if (results?.ConnectionStatus?.HttpStatusCode != 200)
+            {
+                throw new SearchException($"Search returned a status code of {results?.ConnectionStatus?.HttpStatusCode}");
+            }
 
             return new SearchResult<ProviderSearchResultsItem> { Hits = documents, Total = results.Total };
         }
