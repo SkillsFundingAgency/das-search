@@ -23,7 +23,7 @@
             sut.Run();
 
             // Assert
-            mockConsumer.Verify(x => x.CheckMessage<StandardDocument>());
+            mockConsumer.Verify(x => x.CheckMessage<MetaDataItem>());
             mockConsumer.Verify(x => x.CheckMessage<Provider>());
         }
     }
