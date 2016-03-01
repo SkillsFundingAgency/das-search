@@ -1,5 +1,5 @@
-﻿using Sfa.Das.ApplicationServices.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Sfa.Das.ApplicationServices.Models;
 
 namespace Sfa.Das.ApplicationServices
 {

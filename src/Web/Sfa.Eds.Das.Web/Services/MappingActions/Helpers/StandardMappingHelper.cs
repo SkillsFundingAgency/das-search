@@ -2,7 +2,7 @@
 {
     using Core.Domain.Model;
 
-    public class StandardMappingHelper
+    public static class StandardMappingHelper
     {
         public static string GetTypicalLengthMessage(TypicalLength typicalLength)
         {

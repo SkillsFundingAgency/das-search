@@ -48,6 +48,7 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
             {
                 return CommonMark.CommonMarkConverter.Convert(markdownText);
             }
+
             return string.Empty;
         }
     }

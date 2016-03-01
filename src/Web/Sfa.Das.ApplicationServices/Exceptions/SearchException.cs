@@ -17,6 +17,5 @@ namespace Sfa.Das.ApplicationServices.Exceptions
             : base(message, inner)
         {
         }
-
     }
 }

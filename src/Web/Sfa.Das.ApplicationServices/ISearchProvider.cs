@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Collections.Generic;
-
-using Sfa.Das.ApplicationServices.Models;
+﻿using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Das.ApplicationServices

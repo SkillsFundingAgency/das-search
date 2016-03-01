@@ -72,7 +72,7 @@
             var mockSearchRepository = new Mock<IStandardRepository>();
 
             var standard = new Standard { Title = "Hello", };
-            mockSearchRepository.Setup(x => x.GetById(It.IsAny<string>())).Returns(standard);
+            mockSearchRepository.Setup(x => x.GetById(It.IsAny<int>())).Returns(standard);
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
                 x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
@@ -91,7 +91,7 @@
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
-            var result = controller.Detail("1", hasErrorParmeter) as ViewResult;
+            var result = controller.Detail(1, hasErrorParmeter) as ViewResult;
 
             Assert.NotNull(result);
             var actual = ((StandardViewModel)result.Model).HasError;

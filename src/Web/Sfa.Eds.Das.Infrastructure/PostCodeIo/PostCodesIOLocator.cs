@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.ApplicationServices;
+using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
 {
@@ -18,7 +18,7 @@ namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
             {
                 HttpRequestMessage request = new HttpRequestMessage(
                     HttpMethod.Get,
-                    string.Concat(sURL));
+                    sURL);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)

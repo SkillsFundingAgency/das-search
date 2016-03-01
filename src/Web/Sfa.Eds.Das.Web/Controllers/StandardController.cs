@@ -2,15 +2,15 @@
 {
     using System.Web.Mvc;
 
-    using Sfa.Das.ApplicationServices;
-    using Sfa.Das.ApplicationServices.Models;
     using Core.Domain.Services;
     using Core.Logging;
     using Models;
     using Services;
-    using ViewModels;
+    using Sfa.Das.ApplicationServices;
+    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Model;
     using Sfa.Eds.Das.Web.Extensions;
+    using ViewModels;
 
     public sealed class StandardController : Controller
     {
