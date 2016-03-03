@@ -181,7 +181,7 @@ namespace Sfa.Eds.Das.StandardIndexer.Helpers
             {
                 await _blobStorageHelper.UploadPdfFromUrl(_settings.StandardPdfContainer, string.Format(standard.Id.ToString(), ".pdf"), standard.StandardPdfUrl).ConfigureAwait(false);
             }
-        }
+        } 
 
         private async Task IndexStandards(string indexName, IEnumerable<MetaDataItem> standards)
         {
