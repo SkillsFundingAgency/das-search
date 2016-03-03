@@ -14,15 +14,18 @@
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <h1 class="heading-xlarge">
-                @Model.Title
-            </h1>
-            @if (!string.IsNullOrEmpty(@Model.IntroductoryTextHtml))
-            {
-                <div class="standard-result-summary">
-                    @Html.Raw(@Model.IntroductoryTextHtml)
-                </div>
-            }
+            <div class="hgroup">
+                <h1 class="heading-xlarge">
+                    <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
+                    @Model.Title
+                </h1>
+                @if (!string.IsNullOrEmpty(@Model.IntroductoryTextHtml))
+                {
+                    <div class="standard-result-summary">
+                        @Html.Raw(@Model.IntroductoryTextHtml)
+                    </div>
+                }
+            </div>
         </div>
 
         <div class="column-third">
@@ -34,11 +37,8 @@
                         <h2 class="heading-medium">Find training providers</h2>
                         <form action="/g-cloud/search" method="get" class="search-box">
                             <div class="form-group">
-                                <label class="form-label" for="q">
-                                    Postcode (mandatory)
-                                    <span class="form-hint">
-                                        See all training providers in a given location.
-                                    </span>
+                                <label class="form-label" for="postcode">
+                                    Enter postcode@* or partial postcode *@
                                     <p>
                                         @{
                                             Html.RenderPartial("_BlankFieldErrorMessage");
@@ -46,14 +46,14 @@
                                     </p>
                                 </label>
                                 <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
-                                <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
+                                <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
                             <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
                         </form>
 
                     </aside>
                 </div>
-                                            }
+             }
 
             </div>
         </div>
@@ -61,9 +61,11 @@
         <div class="column">
             <section>
                 <div class="summary">
-                    <h2 class="heading-large">
-                        Summary of apprenticeship standard
-                    </h2>
+                    <header>
+                        <h2 class="heading-large">
+                            Summary of apprenticeship standard
+                        </h2>
+                    </header>
                     @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
                     @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
                     @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
