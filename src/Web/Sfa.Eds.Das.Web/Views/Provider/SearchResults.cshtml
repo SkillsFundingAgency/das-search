@@ -24,7 +24,7 @@
                 }
             </p>
             <ol class="frameworkResults">
-                @foreach (var item in Model.Results)
+                @foreach (var item in Model.Hits)
                 {
                     <li class="result">
                         <div class="column details">
@@ -34,7 +34,25 @@
                             <dl>
                                 <dt class="distance">Distance:</dt>
                                 <dd class="distance">
-                                    <span>@item.Distance miles</span>
+                                    <span>@item.Distance miles away</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="distance">Website:</dt>
+                                <dd class="website">
+                                    <a href="@item.Website"> @item.Website INSERT DATA HERE</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="distance">Employer satisfaction:</dt>
+                                <dd class="distance">
+                                    <span>@item.EmployerSatisfaction %</span>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt class="distance">Learner satisfaction:</dt>
+                                <dd class="distance">
+                                    <span>@item.LearnerSatisfaction %</span>
                                 </dd>
                             </dl>
                         </div>

@@ -9,5 +9,15 @@
         public string PostCode { get; set; }
 
         public double Distance { get; set; }
+
+        public string Website { get; set; }
+
+        public string TrainingLocationName { get; set; }
+
+        public string TrainingLocationAddress { get; set; }
+
+        public double EmployerSatisfaction { get; set; }
+
+        public double LearnerSatisfaction { get; set; }
     }
 }
