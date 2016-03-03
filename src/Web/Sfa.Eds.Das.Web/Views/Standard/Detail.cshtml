@@ -5,23 +5,26 @@
     ViewBag.Title = "Standard - " + @Model.Title;
 }
 
-<main id="content" role="main">
+<main id="content">
 
     <p class="small-btm-margin">
         @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
     </p>
 
     <div class="grid-row">
+
         <div class="column-two-thirds">
-            <div class="hgroup">
-                <h1 class="heading-xlarge">
-                    @Model.Title
-                </h1>
+            <h1 class="heading-xlarge">
+                @Model.Title
+            </h1>
+            @if (!string.IsNullOrEmpty(@Model.IntroductoryTextHtml))
+            {
                 <div class="standard-result-summary">
                     @Html.Raw(@Model.IntroductoryTextHtml)
                 </div>
-            </div>
+            }
         </div>
+
         <div class="column-third">
             @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
@@ -45,14 +48,16 @@
                                 <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
                             </div>
-                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search"/>
+                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
                         </form>
 
                     </aside>
                 </div>
-            }
+                                            }
 
+            </div>
         </div>
+
         <div class="column">
             <section>
                 <div class="summary">
@@ -81,25 +86,24 @@
                 }
             </section>
         </div>
-    </div>
 
 </main>
 
 
 @helper GetStandardDetailItem(string title, string item, string unit = "")
 {
-    if (!string.IsNullOrEmpty(item))
-    {
-            <dt class="minLength">@title</dt>
+if (!string.IsNullOrEmpty(item))
+{
+        <dt class="minLength">@title</dt>
             <dd class="minLength">@item @unit</dd>
-    }
+}
 }
 
 
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty) 
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
 
         <div class="row">
             <div class="left">
@@ -109,13 +113,13 @@
                 @Html.Raw(item)
             </div>
         </div>
-    }
+}
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)
 {
-    if (!string.IsNullOrEmpty(title))
-    {
+if (!string.IsNullOrEmpty(title))
+{
         <li>
             <a href="@pdfUrl">
                 @title
@@ -124,5 +128,5 @@
                 PDF, 268KB, 2 pages
             </p>
         </li>
-    }
+}
 }
