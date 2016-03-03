@@ -278,7 +278,6 @@
     <Content Include="images\govuk-crest-2x.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Log.config" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
