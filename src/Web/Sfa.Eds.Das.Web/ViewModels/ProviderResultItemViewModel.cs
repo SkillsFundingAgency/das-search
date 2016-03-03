@@ -1,4 +1,7 @@
-﻿namespace Sfa.Eds.Das.Web.ViewModels
+﻿using System.Collections.Generic;
+using Sfa.Das.ApplicationServices.Models;
+
+namespace Sfa.Eds.Das.Web.ViewModels
 {
     public class ProviderResultItemViewModel
     {
@@ -19,5 +22,7 @@
         public double EmployerSatisfaction { get; set; }
 
         public double LearnerSatisfaction { get; set; }
+
+        public List<DeliveryMode> DeliveryModes { get; set; }
     }
 }

@@ -1,0 +1,81 @@
+﻿@using Sfa.Das.ApplicationServices.Models
+@using Sfa.Eds.Das.Web.ViewModels
+@model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
+
+<div>
+    @foreach (var item in Model.Hits)
+    {
+        <li class="result">
+            <div class="column details">
+                <h2 class="heading-medium">
+                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new {@id = item.Id}, null)
+                </h2>
+                @if (item.DeliveryModes.Count == 1 && item.DeliveryModes.First() == DeliveryMode.HundredPercentEmployer)
+                {
+                    @RenderEmployersLocationProviderDetails(item)
+                }
+                else
+                {
+                    @RenderProviderDetails(item)
+                }
+                
+                <dl>
+                    <dt class="distance">Employer satisfaction:</dt>
+                    <dd class="distance">
+                        <span>@item.EmployerSatisfaction %</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="distance">Learner satisfaction:</dt>
+                    <dd class="distance">
+                        <span>@item.LearnerSatisfaction %</span>
+                    </dd>
+                </dl>
+            </div>
+        </li>
+    }
+</div>
+
+@helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
+{
+    <dl>
+        <dt class="distance">Distance:</dt>
+        <dd class="distance">
+            <span>Training will take place at the employer's location.</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="distance">Website:</dt>
+        <dd class="website">
+            <a href="@item.Website"> @item.Website INSERT DATA HERE</a>
+        </dd>
+    </dl>
+}
+
+@helper  RenderProviderDetails(ProviderResultItemViewModel item)
+{
+    <dl>
+        <dt class="distance">Distance:</dt>
+        <dd class="distance">
+            <span>@item.Distance miles away</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="distance">Website:</dt>
+        <dd class="website">
+            <a href="@item.Website"> @item.Website INSERT DATA HERE</a>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="distance">Trainer location name:</dt>
+        <dd class="distance">
+            <span>@item.TrainingLocationName a</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="distance">Trainer location address:</dt>
+        <dd class="distance">
+            <span>@item.TrainingLocationAddress a</span>
+        </dd>
+    </dl>
+}

@@ -244,6 +244,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Provider\_ProviderInformation.generated.cs">
+      <DependentUpon>_ProviderInformation.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Provider\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -336,6 +341,10 @@
     <Content Include="Views\Standard\_BlankFieldErrorMessage.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_ProviderInformation.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ProviderInformation.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

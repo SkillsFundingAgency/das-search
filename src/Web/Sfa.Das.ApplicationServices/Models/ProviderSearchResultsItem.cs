@@ -33,5 +33,7 @@
         public double EmployerSatisfaction { get; set; }
 
         public double LearnerSatisfaction { get; set; }
+
+        public List<DeliveryMode> DeliveryModes { get; set; }
     }
 }
