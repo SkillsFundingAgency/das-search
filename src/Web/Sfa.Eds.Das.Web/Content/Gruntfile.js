@@ -4,76 +4,56 @@ module.exports = function (grunt) {
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
-
-    // Automatically load required Grunt tasks
-    require('jit-grunt')(grunt, {
-        useminPrepare: 'grunt-usemin'
-    });
-
-    // Configurable paths
-    var config = {
-        src: 'src',
-        dist: 'dist'
-    };
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
 
-        // Project settings
-        config: config,
-
-        // Watches files for changes and runs tasks based on the changed files
-        watch: {
-            gruntfile: {
-                files: ['Gruntfile.js']
-            },
-            styles: {
-                files: ['<%= config.app %>/styles/{,*/}*.css'],
-                tasks: []
-            }
-        },
-
-        // Empties folders to start fresh
-        clean: {
-            images: {
+        sass: {
+            dist: {
+                options: {
+                    outputStyle: 'compressed',
+                    noCache: true,
+                    sourceMap: false,
+                    precision: 3
+                },
                 files: [{
-                    src: [
-                      '<%= config.dist %>/images/*'
-                    ]
+                    expand: true,
+                    cwd: 'src/styles/',
+                    src: '*.scss',
+                    dest: 'css/',
+                    ext: '.min.css'
                 }]
             }
         },
 
-        imagemin: {
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 9'],
+                cascade: false,
+                map: false
+            },
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= config.src %>/images',
-                    src: '{,*/}*.{gif,jpeg,jpg,png}',
-                    dest: '<%= config.dist %>/images'
+                    cwd: 'css/',
+                    src: '{,*/}*.css',
+                    dest: 'css/'
                 }]
             }
-        }//,
+        },
 
-        //svgmin: {
-        //    dist: {
-        //        files: [{
-        //            expand: true,
-        //            cwd: '<%= config.src %>/images',
-        //            src: '{,*/}*.svg',
-        //            dest: '<%= config.dist %>/images'
-        //        }]
-        //    }
-        //}
+        // Watches files for changes and runs tasks based on the changed files
+        watch: {
+            styles: {
+                files: ['src/styles/{,*/}*.scss'],
+                tasks: ['sass', 'autoprefixer']
+            }
+        }
     });
 
-    grunt.loadNpmTasks('grunt-clean');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-
     grunt.registerTask('build', [
-      'clean',
-      'imagemin',
-      'watch'
+      'sass',
+      'autoprefixer'
     ]);
 
     grunt.registerTask('default', [
