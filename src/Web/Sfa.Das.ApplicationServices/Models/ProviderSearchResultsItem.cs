@@ -23,5 +23,15 @@
         public double Distance { get; set; }
 
         public List<int> StandardsId { get; set; }
+
+        public string Website { get; set; }
+
+        public string TrainingLocationName { get; set; }
+
+        public string TrainingLocationAddress { get; set; }
+
+        public double EmployerSatisfaction { get; set; }
+
+        public double LearnerSatisfaction { get; set; }
     }
 }
