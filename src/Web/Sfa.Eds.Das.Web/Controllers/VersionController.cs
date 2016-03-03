@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
-    using Core.Configuration;
     using System.Web.Http;
+    using Core.Configuration;
 
     public sealed class VersionController : ApiController
     {

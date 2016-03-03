@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Indexer.Common.Services
 {
     public interface IIndexerService
     {
-        void CreateScheduledIndex(DateTime scheduledRefreshDateTime);
+        Task CreateScheduledIndex(DateTime scheduledRefreshDateTime);
+
+    }
+
+    public interface IIndexerService<T>
+    {
+        Task CreateScheduledIndex(DateTime scheduledRefreshDateTime);
     }
 }

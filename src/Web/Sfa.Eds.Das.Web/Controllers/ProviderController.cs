@@ -2,8 +2,6 @@
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System;
-    using System.Globalization;
     using System.Web.Mvc;
 
     using Sfa.Das.ApplicationServices;
@@ -15,12 +13,11 @@ namespace Sfa.Eds.Das.Web.Controllers
 
     public sealed class ProviderController : Controller
     {
-        private readonly ISearchProvider _providerSearchService;
-
+        private readonly IProviderSearchService _providerSearchService;
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        public ProviderController(ISearchProvider providerSearchService, ILog logger, IMappingService mappingService)
+        public ProviderController(IProviderSearchService providerSearchService, ILog logger, IMappingService mappingService)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
@@ -30,32 +27,22 @@ namespace Sfa.Eds.Das.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> SearchResults(ProviderSearchCriteria criteria)
         {
-            var searchResults = await _providerSearchService.SearchByLocation(criteria.StandardId, criteria.Skip, criteria.Take, criteria.PostCode);
+            if (string.IsNullOrEmpty(criteria?.PostCode))
+            {
+                return RedirectToAction("Detail", "Standard", new { id = criteria.StandardId, HasError = true });
+            }
+
+            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
-
-            if (viewModel.PostCodeMissing)
-            {
-                Response.Redirect(string.Concat("../Standard/Detail?id=", viewModel.StandardId, "&HasError=", viewModel.PostCodeMissing.ToString().ToLower()));
-            }
 
             return View(viewModel);
         }
 
-        // GET: Standard
+        [HttpGet]
         public ActionResult Detail(string id)
         {
             return View();
-        }
-
-        private LinkViewModel GetSearchResultUrl(Uri urlReferrer)
-        {
-            if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?keywords"))
-            {
-                return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
-            }
-
-            return new LinkViewModel { Title = "Back to search page", Url = Url.Action("Search", "Standard") };
         }
     }
 }

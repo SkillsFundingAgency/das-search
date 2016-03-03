@@ -92,12 +92,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\StandardRegistry.cs" />
+    <Compile Include="Helpers\IMetaDataHelper.cs" />
     <Compile Include="Helpers\IStandardHelper.cs" />
+    <Compile Include="Helpers\MetaDataHelper.cs" />
     <Compile Include="Helpers\StandardHelper.cs" />
     <Compile Include="Settings\IStandardIndexSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IStandardIndexerService.cs" />
-    <Compile Include="Services\StandardIndexerService.cs" />
     <Compile Include="Settings\StandardIndexSettings.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +109,10 @@
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj">
+      <Project>{D838757D-63EC-4FE6-B565-470D5BF424A3}</Project>
+      <Name>Sfa.Eds.Das.Tools.MetaDataCreationTool</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Deds.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.Deds</Name>
@@ -125,7 +129,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

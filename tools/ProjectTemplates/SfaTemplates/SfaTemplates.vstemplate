@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>SfaTemplates</Name>
+    <Description>SfaTemplates</Description>
+    <ProjectType>CSharp</ProjectType>
+    <Icon>SfaTemplates.ico</Icon>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>2995259f-f27c-4b48-97dc-28813d8d6d8d</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>SfaTemplates</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <ProjectTemplateLink ProjectName="Sfa Basic">
+        ..\SfaTemplate\SfaTemplate.vstemplate
+      </ProjectTemplateLink>
+    </ProjectCollection>
+  </TemplateContent>
+</VSTemplate>

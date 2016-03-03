@@ -2,9 +2,13 @@
 
 namespace Sfa.Eds.Das.StandardIndexer.Settings
 {
-    public class StandardIndexSettings : IStandardIndexSettings
+    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
+    public class StandardIndexSettings : IStandardIndexSettings, IIndexSettings<MetaDataItem>
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
+
+        public string IndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 
         public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
 

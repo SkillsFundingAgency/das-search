@@ -9,6 +9,8 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.Common.Services
 {
+    using Sfa.Eds.Das.Indexer.Common.Models;
+
     public class GenericControlQueueConsumer : IGenericControlQueueConsumer
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -27,10 +29,11 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
             _container = container;
         }
 
-        public Task CheckMessage<T>() where T : IIndexerService
+        public Task CheckMessage<T>()
+            where T : IIndexEntry
         {
-            var indexerService = _container.GetInstance<T>();
-            return Task.Run(() =>
+            var indexerService = _container.GetInstance<IIndexerService<T>>();
+            return Task.Run(async () =>
             {
                 try
                 {
@@ -43,7 +46,7 @@ namespace Sfa.Eds.Das.Indexer.Common.Services
                         var message = messages.FirstOrDefault();
                         if (message != null)
                         {
-                            indexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now);
+                            await indexerService.CreateScheduledIndex(message.InsertionTime?.DateTime ?? DateTime.Now).ConfigureAwait(false);
                         }
                     }
 

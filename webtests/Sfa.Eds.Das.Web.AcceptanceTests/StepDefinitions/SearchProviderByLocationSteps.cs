@@ -64,7 +64,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         {
             ScenarioContext.Current.Pending();
         }
-        
+
+        [When(@"I enter '(.*)' in provider search box")]
+        public void WhenIEnterInProviderSearchBox(string p0)
+        {
+            prvdrPage.enterlocation(p0);
+        }
+
+
         [When(@"I search Search for provider")]
         public void WhenISearchSearchForProvider()
         {
@@ -107,5 +114,22 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         {
             ScenarioContext.Current.Pending();
         }
+
+
+        [Then(@"I should see error message ""(.*)""")]
+        public void ThenIShouldSeeErrorMessage(string p0)
+        {
+            prvdrPage.validateErrorMessage_postcodefield(p0);
+        }
+
+
+        [Then(@"I should see message searchresult ""(.*)""")]
+        public void ThenIShouldSeeMessageSearchresult(string p0)
+        {
+            prvdrPage.validateProviderSrchResultMsg(p0);
+        }
+
+
+
     }
 }

@@ -86,7 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="Test\Features\Sprint4\SearchProvider.feature.cs">
+    <Compile Include="Test\Features\Sprint4\SearchProvider1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProvider.feature</DependentUpon>
@@ -109,16 +109,16 @@
     </None>
     <None Include="Test\Features\Sprint1\SearchStandardByTitle.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SearchStandardByTitle.feature.cs</LastGenOutput>
+      <LastGenOutput>SearchStandardByTitle1.feature.cs</LastGenOutput>
     </None>
     <None Include="Test\Features\Sprint1\StandardSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>StandardSearch.feature.cs</LastGenOutput>
+      <LastGenOutput>StandardSearch1.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Test\Features\Sprint4\SearchProvider.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
+      <LastGenOutput>SearchProvider1.feature.cs</LastGenOutput>
     </None>
     <None Include="Test\Features\Sprint4\SearchProviderByLocation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

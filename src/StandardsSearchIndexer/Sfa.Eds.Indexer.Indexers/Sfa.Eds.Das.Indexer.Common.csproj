@@ -36,6 +36,10 @@
       <HintPath>..\packages\Elasticsearch.Net.1.7.1\lib\net45\Elasticsearch.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LINQtoCSV, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LINQtoCSV.1.5.0.0\lib\net35\LINQtoCSV.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -66,6 +70,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Polly, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.4.0.0\lib\net45\Polly.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
@@ -99,26 +107,32 @@
     <Compile Include="Configuration\IElasticsearchClientFactory.cs" />
     <Compile Include="Configuration\Log4NetSettings.cs" />
     <Compile Include="DependencyResolution\CommonRegistry.cs" />
+    <Compile Include="Extensions\FuncExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\BlobStorageHelper.cs" />
     <Compile Include="Helpers\IBlobStorageHelper.cs" />
-    <Compile Include="Helpers\CloudBlobClientWrapper.cs" />
-    <Compile Include="Helpers\CloudBlobContainerWrapper.cs" />
-    <Compile Include="Helpers\ICloudBlobClientWrapper.cs" />
-    <Compile Include="Helpers\ICloudBlobContainerWrapper.cs" />
-    <Compile Include="Helpers\ListExtensions.cs" />
+    <Compile Include="AzureAbstractions\CloudBlobClientWrapper.cs" />
+    <Compile Include="AzureAbstractions\CloudBlobContainerWrapper.cs" />
+    <Compile Include="AzureAbstractions\ICloudBlobClientWrapper.cs" />
+    <Compile Include="AzureAbstractions\ICloudBlobContainerWrapper.cs" />
+    <Compile Include="Helpers\IGenericIndexerHelper.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\JsonMetadataObject.cs" />
-    <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\IIndexEntry.cs" />
+    <Compile Include="Models\MetaDataItem.cs" />
     <Compile Include="Models\StandardDocument.cs" />
+    <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GenericControlQueueConsumer.cs" />
     <Compile Include="Services\IIndexerService.cs" />
     <Compile Include="Services\IGenericControlQueueConsumer.cs" />
+    <Compile Include="Services\IndexerService.cs" />
     <Compile Include="Settings\IAzureSettings.cs" />
     <Compile Include="Settings\AzureSettings.cs" />
     <Compile Include="Settings\ICommonSettings.cs" />
     <Compile Include="Settings\CommonSettings.cs" />
+    <Compile Include="Settings\IIndexSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\app.config">

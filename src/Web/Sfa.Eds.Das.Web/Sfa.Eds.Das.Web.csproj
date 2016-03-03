@@ -54,6 +54,10 @@
       <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonMark.NET.0.11.0\lib\net45\CommonMark.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -195,9 +199,11 @@
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Models\StandardSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
+    <Compile Include="Services\MappingActions\Helpers\StandardMappingHelper.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -219,6 +225,8 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Services\MappingActions\StandardSearchResultViewModelMappingAction.cs" />
+    <Compile Include="Services\MappingActions\StandardViewModelMappingAction.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\StandardResultItemViewModel.cs" />
@@ -226,6 +234,26 @@
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
+    <Compile Include="Views\Provider\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\SearchResults.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\_SearchResultMessage.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Standard\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Standard\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,6 +263,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Standard\_BlankFieldErrorMessage.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_BlankFieldErrorMessage.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Standard\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
@@ -339,12 +372,21 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Provider\SearchResults.cshtml" />
-    <Content Include="Views\Provider\Detail.cshtml" />
-    <Content Include="Views\Provider\_SearchResultMessage.cshtml" />
+    <Content Include="Views\Provider\SearchResults.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SearchResults.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\Detail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Detail.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_SearchResultMessage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Standard\_BlankFieldErrorMessage.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_BlankFieldErrorMessage.cs</LastGenOutput>
+      <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

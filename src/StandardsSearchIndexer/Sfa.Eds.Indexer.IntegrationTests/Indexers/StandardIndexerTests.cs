@@ -10,19 +10,20 @@ using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Das.Indexer.Common.Configuration;
 using Sfa.Eds.Das.Indexer.Common.Models;
 using Sfa.Eds.Das.StandardIndexer.Helpers;
-using Sfa.Eds.Das.StandardIndexer.Services;
 using Sfa.Eds.Das.StandardIndexer.Settings;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
+    using Sfa.Eds.Das.Indexer.Common.Services;
+
     [TestFixture]
     public class StandardIndexerTests
     {
         private IContainer _ioc;
         private IStandardIndexSettings _standardSettings;
         private IStandardHelper _standardHelper;
-        private IStandardIndexerService _sut;
+        private IIndexerService<MetaDataItem> _sut;
         private IElasticClient _elasticClient;
 
         [SetUp]
@@ -35,7 +36,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
-            _sut = _ioc.GetInstance<IStandardIndexerService>();
+            _sut = _ioc.GetInstance<IIndexerService<MetaDataItem>>();
         }
 
         [Test]
@@ -71,7 +72,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                 Title = "Dental Nurse",
                 NotionalEndLevel = 3,
                 PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                PdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
+                StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
                 File = null
             };
 
@@ -108,31 +109,31 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             }
         }
 
-        private IEnumerable<JsonMetadataObject> GetStandardsTest()
+        private IEnumerable<MetaDataItem> GetStandardsTest()
         {
-            return new List<JsonMetadataObject>
+            return new List<MetaDataItem>
             {
-                new JsonMetadataObject
+                new MetaDataItem
                 {
                     Id = 1,
                     Title = "Network Engineer",
                     PdfFileName = "1-Apprenticeship standard for a network engineer",
-                    Pdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
+                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
                 },
-                new JsonMetadataObject
+                new MetaDataItem
                 {
                     Id = 2,
                     Title = "Software Developer",
                     PdfFileName = "2-Apprenticeship standard for a software developer",
-                    Pdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
+                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
                 },
-                new JsonMetadataObject
+                new MetaDataItem
                 {
                     Id = 61,
                     Title = "Dental Nurse",
                     NotionalEndLevel = 3,
                     PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                    Pdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
                 }
             };
         }

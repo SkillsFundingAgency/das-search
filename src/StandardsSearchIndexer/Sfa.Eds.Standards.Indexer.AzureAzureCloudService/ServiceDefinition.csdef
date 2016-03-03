@@ -5,5 +5,8 @@
     </ConfigurationSettings>
     <Imports>
     </Imports>
+    <LocalResources>
+      <LocalStorage name="WorkingSpace" cleanOnRoleRecycle="false" sizeInMB="50" />
+    </LocalResources>
   </WorkerRole>
 </ServiceDefinition>

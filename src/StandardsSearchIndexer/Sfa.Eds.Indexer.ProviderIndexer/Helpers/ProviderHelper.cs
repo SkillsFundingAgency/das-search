@@ -1,31 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using log4net;
-using Nest;
-using Sfa.Eds.Das.Indexer.Common.Configuration;
-using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.ProviderIndexer.Settings;
-
-namespace Sfa.Eds.Das.ProviderIndexer.Helpers
+﻿namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 {
-    public class ProviderHelper : IProviderHelper
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using log4net;
+
+    using Nest;
+
+    using Sfa.Eds.Das.Indexer.Common.Configuration;
+    using Sfa.Eds.Das.Indexer.Common.Helpers;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
+    using Sfa.Eds.Das.ProviderIndexer.Clients;
+    using Sfa.Eds.Das.ProviderIndexer.Models;
+
+    public class ProviderHelper : IGenericIndexerHelper<Provider>
     {
-        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
-        private readonly IProviderIndexSettings _settings;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private readonly IActiveProviderClient _activeProviderClient;
+
         private readonly IElasticClient _client;
 
+        private readonly ICourseDirectoryClient _courseDirectoryClient;
+
+        private readonly IIndexSettings<Provider> _settings;
+
         public ProviderHelper(
-            IProviderIndexSettings settings,
-            IElasticsearchClientFactory elasticsearchClientFactory)
+            IIndexSettings<Provider> settings,
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ICourseDirectoryClient courseDirectoryClient,
+            IActiveProviderClient activeProviderClient)
         {
             _settings = settings;
-            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _courseDirectoryClient = courseDirectoryClient;
+            _activeProviderClient = activeProviderClient;
 
-            _client = _elasticsearchClientFactory.GetElasticClient();
+            _client = elasticsearchClientFactory.GetElasticClient();
+        }
+
+        public ICollection<Provider> LoadEntries()
+        {
+            var providers = _courseDirectoryClient.GetProviders();
+            var activeProviders = _activeProviderClient.GetProviders();
+            Task.WaitAll();
+
+            return providers.Result.Where(x => activeProviders.Contains(x.UkPrn)).ToList();
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
@@ -97,14 +121,14 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
             return exists;
         }
 
-        public void IndexProviders(DateTime scheduledRefreshDateTime, List<Provider> providers)
+        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Provider> entries)
         {
             try
             {
-                Log.Debug("Indexing " + providers.Count + " providers");
+                Log.Debug("Indexing " + entries.Count + " providers");
 
                 var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
-                IndexProviders(indexName, providers);
+                await IndexProviders(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -112,284 +136,17 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
             }
         }
 
-        public List<Provider> GetProviders()
-        {
-            // TODO: Replace Demo data
-            var providers = new List<Provider>
-            {
-                new Provider
-                {
-                    UkPrn = "10003347",
-                    PostCode = "CV21 2BB",
-                    ProviderName = "Intec Business Colleges",
-                    VenueName = "INTEC BUSINESS COLLEGES",
-                    Radius = 35,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.3714464,
-                        Lon = -1.2669471
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10001309",
-                    PostCode = "CV32 4JE",
-                    ProviderName = "Coventry & Warwickshire Chamber Training (CWT)",
-                    VenueName = "COVENTRY & WARWICKSHIRE CHAMBER TRAINING (CWT)",
-                    Radius = 40,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.290897,
-                        Lon = -1.528915
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10031241",
-                    PostCode = "B4 7LR",
-                    ProviderName = "Aspire Achieve Advance Limited",
-                    VenueName = "3AAA BIRMINGHAM",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.4819902,
-                        Lon = -1.8923181
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10005967",
-                    PostCode = "B5 5SU",
-                    ProviderName = "South & City College Birmingham",
-                    VenueName = "Digbeth Campus",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.4754573,
-                        Lon = -1.8857531
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12, 25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10007015",
-                    PostCode = "DE24 8AJ",
-                    ProviderName = "Training Services 2000 Ltd",
-                    VenueName = "TRAINING SERVICES 2000 LTD",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.9106629,
-                        Lon = -1.4467433
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10031241",
-                    PostCode = "DE1 2JT",
-                    ProviderName = "Aspire Archive Advance Limited",
-                    VenueName = "3AAA DERBY",
-                    Radius = 60,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.918635,
-                        Lon = -1.4761639
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10031241",
-                    PostCode = "WC1X 8QB",
-                    ProviderName = "Aspire Achieve Advance Limited",
-                    VenueName = "3AAA KINGS CROSS",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 51.5292025,
-                        Lon = -0.1202702
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10012834",
-                    PostCode = "W6 7AN",
-                    ProviderName = "Skills Team Ltd",
-                    VenueName = "EMPLOYERS WORK PLACE",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 51.4938191,
-                        Lon = -0.2236763
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10005264",
-                    PostCode = "NG10 1LL",
-                    ProviderName = "Millbrook Management Services Limited",
-                    VenueName = "PROSTART TRAINING",
-                    Radius = 60,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.8967801,
-                        Lon = -1.2682401
-                    },
-                    StandardsId = new List<int>
-                    {
-                        25
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10004355",
-                    PostCode = "CV1 2JG",
-                    ProviderName = "Midland Group Training Services Limited",
-                    VenueName = "Midland Group Training Services Ltd",
-                    Radius = 10,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.4050479,
-                        Lon = -1.4966412
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10001919",
-                    PostCode = "DE248JE",
-                    ProviderName = "Derby College",
-                    VenueName = "DERBY COLLEGE @ THE ROUNDHOUSE",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.9159961,
-                        Lon = -1.4589891
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10005991",
-                    PostCode = "NG7 2RU",
-                    ProviderName = "Central College Nottingham",
-                    VenueName = "Highfields",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.9367136,
-                        Lon = -1.1869524
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10007924",
-                    PostCode = "DY1 3AH",
-                    ProviderName = "Dudley College of Technology",
-                    VenueName = "Wolverhampton Street",
-                    Radius = 40,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.5113022,
-                        Lon = -2.090677
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10004355",
-                    PostCode = "B98 8LY",
-                    ProviderName = "Midland Group Training Services Limited",
-                    VenueName = "MIDLAND GROUP TRAINING SERVICES LIMITED",
-                    Radius = 30,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.3063609,
-                        Lon = -1.9297031
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12
-                    }
-                },
-                new Provider
-                {
-                    UkPrn = "10005673",
-                    PostCode = "B70 0AE",
-                    ProviderName = "Sandwell Training Association Limited",
-                    VenueName = "PHOENIX STREET",
-                    Radius = 40,
-                    Coordinate = new Coordinate
-                    {
-                        Lat = 52.5257464,
-                        Lon = -2.0192208
-                    },
-                    StandardsId = new List<int>
-                    {
-                        12
-                    }
-                }
-            };
-
-            return providers;
-        }
-
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
-            var a = _client
-                .Search<Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll())
-                .Documents;
+            var a = _client.Search<Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
             return a.Any();
         }
 
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
-            var indexAlias = _settings.ProviderIndexesAlias;
+            var indexAlias = _settings.IndexesAlias;
             var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             if (!CheckIfAliasExists(indexAlias))
@@ -404,7 +161,8 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
+                aliasRequest.Actions.Add(
+                    new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = indexAlias, Index = existingIndexOnAlias } });
             }
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = indexAlias, Index = newIndexName } });
@@ -415,7 +173,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
         {
             var dateTime = scheduledRefreshDateTime.AddDays(-2);
 
-            for (int i = 0; i < 23; i++)
+            for (var i = 0; i < 23; i++)
             {
                 var timeSpan = new TimeSpan(i, 0, 0);
                 var dateTimeTmp = dateTime.Date + timeSpan;
@@ -433,12 +191,14 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         public string GetIndexNameAndDateExtension(DateTime dateTime)
         {
-            return string.Format("{0}-{1}", _settings.ProviderIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH")).ToLower(CultureInfo.InvariantCulture);
+            return
+                string.Format("{0}-{1}", _settings.IndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH"))
+                    .ToLower(CultureInfo.InvariantCulture);
         }
 
         private string CreateProviderRawFormat(Provider provider)
         {
-            int i = 0;
+            var i = 0;
             var standardsId = new StringBuilder();
             foreach (var standardId in provider.StandardsId)
             {
@@ -481,9 +241,9 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
             return rawProvider;
         }
 
-        private void IndexProviders(string indexName, List<Provider> providers)
+        private Task IndexProviders(string indexName, IEnumerable<Provider> providers)
         {
-            int id = 1;
+            var id = 1;
 
             // index the items
             foreach (var provider in providers)
@@ -491,7 +251,8 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                 try
                 {
                     provider.ProviderId = id;
-                    var a = _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
+                    id++;
                 }
                 catch (Exception e)
                 {
@@ -499,6 +260,8 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
                     throw;
                 }
             }
+
+            return null;
         }
 
         private bool CheckIfAliasExists(string aliasName)
@@ -510,10 +273,7 @@ namespace Sfa.Eds.Das.ProviderIndexer.Helpers
 
         private void CreateAlias(string indexName)
         {
-            _client.Alias(a => a
-                .Add(add => add
-                    .Index(indexName)
-                    .Alias(_settings.ProviderIndexesAlias)));
+            _client.Alias(a => a.Add(add => add.Index(indexName).Alias(_settings.IndexesAlias)));
         }
     }
 }
