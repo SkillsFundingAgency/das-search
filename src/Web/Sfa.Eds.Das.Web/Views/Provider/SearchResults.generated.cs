@@ -165,11 +165,79 @@ WriteLiteral(">\r\n                                    <span>");
             
             #line default
             #line hidden
-WriteLiteral(" miles</span>\r\n                                </dd>\r\n                           " +
-" </dl>\r\n                        </div>\r\n                    </li>\r\n");
+WriteLiteral(" miles away</span>\r\n                                </dd>\r\n                      " +
+"      </dl>\r\n                            <dl>\r\n                                <" +
+"dt");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">Website:</dt>\r\n                                <dd");
+
+WriteLiteral(" class=\"website\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1628), Tuple.Create("\"", 1648)
+            
+            #line 43 "..\..\Views\Provider\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create("", 1635), Tuple.Create<System.Object, System.Int32>(item.Website
+            
+            #line default
+            #line hidden
+, 1635), false)
+);
+
+WriteLiteral("> ");
 
             
-            #line 42 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 43 "..\..\Views\Provider\SearchResults.cshtml"
+                                                        Write(item.Website);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" INSERT DATA HERE</a>\r\n                                </dd>\r\n                   " +
+"         </dl>\r\n                            <dl>\r\n                              " +
+"  <dt");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">Employer satisfaction:</dt>\r\n                                <dd");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">\r\n                                    <span>");
+
+            
+            #line 49 "..\..\Views\Provider\SearchResults.cshtml"
+                                     Write(item.EmployerSatisfaction);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" %</span>\r\n                                </dd>\r\n                            </d" +
+"l>\r\n                            <dl>\r\n                                <dt");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">Learner satisfaction:</dt>\r\n                                <dd");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">\r\n                                    <span>");
+
+            
+            #line 55 "..\..\Views\Provider\SearchResults.cshtml"
+                                     Write(item.LearnerSatisfaction);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" %</span>\r\n                                </dd>\r\n                            </d" +
+"l>\r\n                        </div>\r\n                    </li>\r\n");
+
+            
+            #line 60 "..\..\Views\Provider\SearchResults.cshtml"
                 }
 
             
@@ -217,7 +285,7 @@ WriteLiteral(" class=\"return-to-top\"");
 WriteLiteral(" href=\"#content\"");
 
 WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n                </aside>\r\n     " +
-"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
+"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>");
 
         }
     }
