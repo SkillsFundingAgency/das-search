@@ -2,6 +2,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
 {
     using ApplicationServices;
     using Core.Logging;
+    using Infrastructure;
     using Infrastructure.Logging;
     using Infrastructure.PostCodeIo;
 
@@ -32,6 +33,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
             For<ISearchProvider>().Use<ElasticsearchProvider>();
 
             For<IProviderSearchService>().Use<ProviderSearchService>();
+            For<IRetryWebRequests>().Use<WebRequestRetryService>();
         }
     }
 }

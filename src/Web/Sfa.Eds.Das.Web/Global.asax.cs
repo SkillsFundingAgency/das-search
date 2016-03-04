@@ -13,7 +13,6 @@
 
         protected void Application_Start()
         {
-            var lee = DependencyResolver.Current.GetService<Sfa.Eds.Das.Web.Services.IMappingService>();
             _logger = DependencyResolver.Current.GetService<ILog>();
 
             _logger.Info("Starting web applications...");
