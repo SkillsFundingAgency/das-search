@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Infrastructure.Settings
 {
+    using System;
     using System.Configuration;
 
     using Sfa.Eds.Das.Indexer.Common.Settings;
@@ -27,6 +28,8 @@
         public string StandardPdfContainer => ConfigurationManager.AppSettings["Standard.PdfContainer"];
 
         public string StandardContentType => ConfigurationManager.AppSettings["Standard.ContentType"];
+
+        public Uri CourseDirectoryUri => new Uri(ConfigurationManager.AppSettings["CourseDirectoryUri"]);
 
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 

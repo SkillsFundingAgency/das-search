@@ -55,7 +55,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             var activeProviders = _activeProviderClient.GetActiveProviders();
             Task.WaitAll();
 
-            return providers.Result.Where(x => activeProviders.Contains(x.UkPrn)).ToList();
+            return providers.Result.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)

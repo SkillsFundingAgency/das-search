@@ -99,7 +99,6 @@
     <Compile Include="Infrastructure\IUnzipFiles.cs" />
     <Compile Include="MetaData\IVstsClient.cs" />
     <Compile Include="MetaData\IVstsService.cs" />
-    <Compile Include="Provider\StubCourseDirectoryClient.cs" />
     <Compile Include="Settings\IIndexSettings.cs" />
     <Compile Include="Settings\IAppServiceSettings.cs" />
     <Compile Include="Standard\IStandardIndexSettings.cs" />

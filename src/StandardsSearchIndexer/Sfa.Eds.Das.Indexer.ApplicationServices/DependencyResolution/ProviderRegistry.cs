@@ -15,7 +15,6 @@
         public ProviderRegistry()
         {
             For<IIndexSettings<Provider>>().Use<ProviderIndexSettings>();
-            For<IGetProviders>().Use<StubCourseDirectoryClient>();
             For<IGenericIndexerHelper<Provider>>().Use<ProviderHelper>();
             For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
             For<IIndexMaintenanceService>().Use<IndexMaintenanceService>();
