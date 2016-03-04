@@ -49,13 +49,13 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 96 "..\..\Views\Standard\Detail.cshtml"
  
-if (!string.IsNullOrEmpty(item))
-{
+    if (!string.IsNullOrEmpty(item))
+    {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <dt");
+WriteLiteralTo(__razor_helper_writer, "            <dt");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
 
@@ -63,7 +63,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 99 "..\..\Views\Standard\Detail.cshtml"
-WriteTo(__razor_helper_writer, title);
+    WriteTo(__razor_helper_writer, title);
 
 
 #line default
@@ -96,7 +96,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
 #line 101 "..\..\Views\Standard\Detail.cshtml"
-}
+    }
 
 
 #line default
@@ -117,114 +117,101 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 106 "..\..\Views\Standard\Detail.cshtml"
  
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
 
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <div");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"row\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"left\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "                ");
+WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 112 "..\..\Views\Standard\Detail.cshtml"
+#line 110 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n            </div>\r\n            <div");
+WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"right\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "                ");
+WriteLiteralTo(__razor_helper_writer, "        <dd>");
 
 
-#line 115 "..\..\Views\Standard\Detail.cshtml"
+#line 111 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.Raw(item));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n            </div>\r\n        </div>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 118 "..\..\Views\Standard\Detail.cshtml"
-}
+#line 112 "..\..\Views\Standard\Detail.cshtml"
+
+    }
 
 
 #line default
 #line hidden
 });
 
-#line 119 "..\..\Views\Standard\Detail.cshtml"
+#line 114 "..\..\Views\Standard\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 121 "..\..\Views\Standard\Detail.cshtml"
+#line 116 "..\..\Views\Standard\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 122 "..\..\Views\Standard\Detail.cshtml"
+#line 117 "..\..\Views\Standard\Detail.cshtml"
  
-if (!string.IsNullOrEmpty(title))
-{
+    if (!string.IsNullOrEmpty(title))
+    {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
+WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4839), Tuple.Create("\"", 4853)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4719), Tuple.Create("\"", 4733)
 
-#line 126 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4846), Tuple.Create<System.Object, System.Int32>(pdfUrl
+#line 121 "..\..\Views\Standard\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 4726), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4846), false)
+, 4726), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "                ");
+WriteLiteralTo(__razor_helper_writer, "                    ");
 
 
-#line 127 "..\..\Views\Standard\Detail.cshtml"
+#line 122 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n            <p>\r\n                PDF, 268KB, 2 pages\r\n       " +
-"     </p>\r\n        </li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "\r\n                </a>\r\n                <p>\r\n                    PDF, 268KB, 2 pa" +
+"ges\r\n                </p>\r\n            </li>\r\n");
 
 
-#line 133 "..\..\Views\Standard\Detail.cshtml"
-}
+#line 128 "..\..\Views\Standard\Detail.cshtml"
+    }
 
 
 #line default
 #line hidden
 });
 
-#line 134 "..\..\Views\Standard\Detail.cshtml"
+#line 129 "..\..\Views\Standard\Detail.cshtml"
 }
 #line default
 #line hidden
@@ -459,16 +446,16 @@ WriteLiteral("\r\n            </div>\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column\"");
 
-WriteLiteral(">\r\n            <section>\r\n                <div");
-
-WriteLiteral(" class=\"summary\"");
-
-WriteLiteral(">\r\n                    <header>\r\n                        <h2");
+WriteLiteral(">\r\n            <section>\r\n                <header>\r\n                    <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">\r\n                            Summary of apprenticeship standard\r\n              " +
-"          </h2>\r\n                    </header>\r\n");
+WriteLiteral(">\r\n                        Summary of apprenticeship standard\r\n                  " +
+"  </h2>\r\n                </header>\r\n                <dl");
+
+WriteLiteral(" class=\"data-list\"");
+
+WriteLiteral(">\r\n");
 
 WriteLiteral("                    ");
 
@@ -545,7 +532,7 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </div>\r\n");
+WriteLiteral("\r\n                </dl>\r\n");
 
             
             #line 77 "..\..\Views\Standard\Detail.cshtml"

@@ -1,0 +1,55 @@
+﻿@import "../fe_toolkit/_conditionals";
+
+$module: 'data-list';
+
+@mixin data-list($titleWidth: 30%) {
+
+    //Give 'cells' explicit width to facilitate floating kvp's
+    $dataWidth: 100% - $titleWidth;
+
+    dt, dd {
+        float: left;
+        box-sizing: border-box;
+    }
+
+    dt {
+        font-weight: bold;
+        width: $titleWidth;
+        padding: 0 $gutter-one-quarter ($gutter * 2) 0;
+    }
+
+    dd {
+        width: $dataWidth;
+        padding: 0 0 ($gutter * 2) $gutter-one-quarter;
+
+        //In the cases where child elements have additional bottom spacing we remove it for consitency
+        & >:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+
+    //Mobile considerations
+    @include media(mobile) {
+        dt, dd {
+            float: none;
+            width: 100%;
+            padding: 0;
+        }
+        dd {
+            padding-bottom: $gutter-two-thirds;
+        }
+    }
+
+}
+
+//Apply styles to '.data-list'
+.#{$module} {
+    @include data-list();
+
+    ul {
+        //TODO: apply '.list-bullet' directly to desired lists in case numbered list may be required interchangably
+        @extend .list-bullet;
+    }
+}
