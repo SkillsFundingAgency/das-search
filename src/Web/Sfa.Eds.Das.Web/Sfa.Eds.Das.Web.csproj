@@ -275,11 +275,8 @@
     <Content Include="Content\Gruntfile.js" />
     <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
     <Content Include="Content\src\images\govuk-crest.svg" />
-    <Content Include="images\gov.uk_logotype_crown.png" />
-    <Content Include="images\govuk-crest-2x.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-<<<<<<< HEAD
     <Content Include="Log.config" />
     <Content Include="Content\src\styles\elements\forms\_form-block-labels.scss" />
     <Content Include="Content\src\styles\elements\forms\_form-date.scss" />
@@ -328,8 +325,6 @@
     <Content Include="Content\package.json" />
     <Content Include="Content\src\styles\_fonts.scss" />
     <Content Include="Content\README.md" />
-=======
->>>>>>> dc25b2bd843f0eb4d7f92d67f7307106b086f4d3
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
