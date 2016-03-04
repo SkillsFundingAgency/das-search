@@ -29,7 +29,7 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
             For<ICourseDirectoryProviderDataService>().Use<CourseDirectoryProviderDataService>();
-            For<IImportProviders>().Use<IImportProviders>();
+            For<IImportProviders>().Use<ProviderImportService>();
         }
     }
 }

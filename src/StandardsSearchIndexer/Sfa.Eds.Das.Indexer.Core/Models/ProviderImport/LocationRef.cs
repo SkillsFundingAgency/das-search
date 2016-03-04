@@ -7,7 +7,7 @@
         public IEnumerable<string> DeliveryModes { get; set; }
         public int ID { get; set; }
         public string MarketingInfo { get; set; }
-        public long? Radius { get; set; }
+        public int Radius { get; set; }
         public string StandardInfoUrl { get; set; }
     }
 }

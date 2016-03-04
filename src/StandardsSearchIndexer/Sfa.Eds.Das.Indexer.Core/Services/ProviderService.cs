@@ -27,6 +27,27 @@
         {
             foreach (var provider in incoming)
             {
+                foreach (var standard in provider.Standards)
+                {
+                    foreach (var locationRef in standard.Locations)
+                    {
+                        var location = provider.Locations.FirstOrDefault(x => x.ID == locationRef.ID);
+                        var address = location.Address ?? new Address();
+                        yield return
+                            new Provider
+                            {
+                                Coordinate = new Coordinate { Lat = address.Lat.Value, Lon = address.Long.Value },
+                                PostCode = address.Postcode,
+                                ProviderName = provider.Name,
+                                Radius = locationRef.Radius,
+                                StandardsId = new List<int>() {standard.StandardCode},
+                                UkPrn = provider.Ukprn.ToString(),
+                                VenueName = location.Name
+                            };
+
+                    }
+                }
+
                 foreach (var location in provider.Locations)
                 {
                     var standards = provider.Standards.Where(x => x.Locations.Any(y => y.ID == location.ID.Value));
