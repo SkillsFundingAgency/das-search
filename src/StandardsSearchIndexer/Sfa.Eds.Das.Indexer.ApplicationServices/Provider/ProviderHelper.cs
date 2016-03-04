@@ -289,21 +289,23 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var dateTime = scheduledRefreshDateTime.AddDays(-2);
+            var indices = _client.IndicesStats().Indices;
 
-            for (var i = 0; i < 23; i++)
+            var providerIndexToday = string.Concat("ciproviderindexalias-", scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd"));
+            var providerIndexOneDayAgo = string.Concat("ciproviderindexalias-", scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd"));
+            var providerIndexTwoDaysAgo = string.Concat("ciproviderindexalias-", scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd"));
+            var standardIndex = "standard";
+            var logIndex = "log";
+            var kibanaIndex = "kibana";
+
+            foreach (var index in indices.Where(index => !index.Key.Contains(providerIndexToday)
+                                                         && !index.Key.Contains(providerIndexOneDayAgo)
+                                                         && !index.Key.Contains(providerIndexTwoDaysAgo)
+                                                         && !index.Key.Contains(standardIndex)
+                                                         && !index.Key.Contains(logIndex)
+                                                         && !index.Key.Contains(kibanaIndex)))
             {
-                var timeSpan = new TimeSpan(i, 0, 0);
-                var dateTimeTmp = dateTime.Date + timeSpan;
-
-                var indexName = GetIndexNameAndDateExtension(dateTimeTmp);
-
-                var indexExistsResponse = _client.IndexExists(indexName);
-
-                if (indexExistsResponse.Exists)
-                {
-                    _client.DeleteIndex(indexName);
-                }
+                _client.DeleteIndex(index.Key);
             }
         }
 
