@@ -58,36 +58,34 @@
             </div>
         </div>
 
-        <div class="column">
-            <section>
-                <header>
+        <section>
+            <header>
+                <h2 class="heading-large">
+                    Summary of apprenticeship standard
+                </h2>
+            </header>
+            <dl class="data-list">
+                @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
+                @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
+                @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
+                @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
+                @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
+                @GetStandardProperty("Qualifications", Model.QualificationsHtml)
+                @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
+            </dl>
+            @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
+            {
+                <div class="panel-indent panel-indent-info">
                     <h2 class="heading-large">
-                        Summary of apprenticeship standard
+                        Documents
                     </h2>
-                </header>
-                <dl class="data-list">
-                    @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
-                    @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
-                    @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
-                    @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
-                    @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
-                    @GetStandardProperty("Qualifications", Model.QualificationsHtml)
-                    @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
-                </dl>
-                @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
-                {
-                    <div class="panel-indent panel-indent-info">
-                        <h2 class="heading-large">
-                            Documents
-                        </h2>
-                        <ul>
-                            @GetDocumentItem(@Model.StandardPdfUrl, @Model.StandardPdfUrlTitle)
-                            @GetDocumentItem(@Model.AssessmentPlanPdfUrl, @Model.AssessmentPlanPdfUrlTitle)
-                        </ul>
-                    </div>
-                }
-            </section>
-        </div>
+                    <ul>
+                        @GetDocumentItem(@Model.StandardPdfUrl, @Model.StandardPdfUrlTitle)
+                        @GetDocumentItem(@Model.AssessmentPlanPdfUrl, @Model.AssessmentPlanPdfUrlTitle)
+                    </ul>
+                </div>
+            }
+        </section>
 
 </main>
 
