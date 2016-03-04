@@ -55,6 +55,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
+            // TODO: replace this method with CreateIndexForBulkData when Course directory data is available
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             var indexExistsResponse = _client.IndexExists(indexName);
@@ -111,6 +112,122 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                                 ""location"": 
                                 {
                                     ""type"": ""geo_shape""
+                                }
+                            }
+                        }
+                    }
+                }";
+            _client.Raw.IndicesCreatePost(indexName, json);
+
+            var exists = _client.IndexExists(indexName).Exists;
+            return exists;
+        }
+
+        public bool CreateIndexForBulkData(DateTime scheduledRefreshDateTime)
+        {
+            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+
+            var indexExistsResponse = _client.IndexExists(indexName);
+
+            // If it already exists and is empty, let's delete it.
+            if (indexExistsResponse.Exists)
+            {
+                Log.Warn("Index already exists, deleting and creating a new one");
+
+                _client.DeleteIndex(indexName);
+            }
+
+            // create index
+            var json = @"
+                {
+                    ""mappings"": 
+                    {
+                        ""provider"": 
+                        { 
+                            ""properties"": 
+                            {
+                                ""ukprn"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""name"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardCode"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""venueName"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""marketingInfo"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardInfoUrl"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""deliveryModes"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""website"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""phone"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""email"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""contactUsUrl"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardsId"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""locationPoint"":
+                                {
+                                    ""type"": ""geo_point""
+                                },
+                                ""location"": 
+                                {
+                                    ""type"": ""geo_shape""
+                                },
+                                ""address"": 
+                                {
+                                    ""type"": ""nested"",
+                                    ""properties"": 
+                                    {
+                                        ""address1"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""address2"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },  
+                                        ""town"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""county"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""postcode"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -270,6 +387,12 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 location.Name ?? "Unspecified",
                 @""", ""marketingInfo"": """,
                 standard.MarketingInfo ?? "Unspecified",
+                @""", ""phone"": """,
+                standard.Contact.Phone ?? "Unspecified",
+                @""", ""email"": """,
+                standard.Contact.Email ?? "Unspecified",
+                @""", ""contactUsUrl"": """,
+                standard.Contact.ContactUsUrl ?? "Unspecified",
                 @""", ""standardInfoUrl"": """,
                 standard.StandardInfoUrl ?? "Unspecified",
                 @""", ""deliveryModes"": [",
