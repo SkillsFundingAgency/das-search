@@ -52,11 +52,11 @@
 
         public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<MetaDataItem> entries)
         {
-            Log.Debug("Uploading " + entries.Count() + " standard's PDF to Azure");
+            //Log.Debug("Uploading " + entries.Count() + " standard's PDF to Azure");
 
             try
             {
-                await entries.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
+                //await entries.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
 
                 Log.Debug("Indexing " + entries.Count() + " standards");
 
@@ -244,7 +244,6 @@
                                   WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
                                   Qualifications = standard.Qualifications,
                                   ProfessionalRegistration = standard.ProfessionalRegistration,
-                                  File = attachment
                               };
 
                 return doc;
