@@ -44,10 +44,17 @@
     <Compile Include="IGetActiveProviders.cs" />
     <Compile Include="IGetProviders.cs" />
     <Compile Include="IGetStandardLevel.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\FrameworkProvider.cs" />
     <Compile Include="Models\IIndexEntry.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LocationBasic.cs" />
     <Compile Include="Models\MetaDataItem.cs" />
     <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\ProviderBulk.cs" />
+    <Compile Include="Models\StandardProvider.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

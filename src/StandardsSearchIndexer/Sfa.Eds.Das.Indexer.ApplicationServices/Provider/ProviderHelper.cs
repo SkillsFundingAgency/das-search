@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
+﻿using Sfa.Eds.Das.Indexer.Core.Models;
+
+namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
     using System;
     using System.Collections.Generic;
@@ -19,9 +21,9 @@
     {
         private readonly IGetActiveProviders _activeProviderClient;
 
-        private readonly IElasticClient _client;
-
         private readonly IGetProviders _courseDirectoryClient;
+
+        private readonly IElasticClient _client;
 
         private readonly IIndexSettings<Provider> _settings;
 
@@ -238,6 +240,68 @@
                 provider.Radius,
                 @"mi"" }}");
             return rawProvider;
+        }
+
+        public List<string> CreateListRawFormat(ProviderBulk provider, StandardProvider standard)
+        {
+            var list = new List<string>();
+
+            foreach (var standardLocation in standard.Locations)
+            {
+                var location = provider.Locations.FirstOrDefault(x => x.Id == standardLocation.Id);
+
+                var i = 0;
+                var deliveryModes = new StringBuilder();
+                foreach (var deliveryMode in standardLocation.DeliveryModes)
+                {
+                    deliveryModes.Append(i == 0 ? string.Concat(@"""", deliveryMode, @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
+
+                    i++;
+                }
+
+                var rawProvider = string.Concat(
+                @"{ ""ukprn"": """,
+                provider.UkPrn,
+                @""", ""name"": """,
+                provider.Name ?? "Unspecified",
+                @""", ""standardcode"": ",
+                standard.StandardCode,
+                @", ""locationName"": """,
+                location.Name ?? "Unspecified",
+                @""", ""marketingInfo"": """,
+                standard.MarketingInfo ?? "Unspecified",
+                @""", ""standardInfoUrl"": """,
+                standard.StandardInfoUrl ?? "Unspecified",
+                @""", ""deliveryModes"": [",
+                deliveryModes,
+                @"], ""website"": """,
+                location.Website ?? "Unspecified",
+                @""", ""address"": {""address1"":""",
+                location.Address.Address1 ?? "Unspecified",
+                @""", ""address2"": """,
+                location.Address.Address2 ?? "Unspecified",
+                @""", ""town"": """,
+                location.Address.Town ?? "Unspecified",
+                @""", ""county"": """,
+                location.Address.County ?? "Unspecified",
+                @""", ""postcode"": """,
+                location.Address.Postcode ?? "Unspecified",
+                @"""}, ""locationPoint"": [",
+                location.Address.Long,
+                ", ",
+                location.Address.Lat,
+                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
+                location.Address.Long,
+                ", ",
+                location.Address.Lat,
+                @"], ""radius"": """,
+                standardLocation.Radius,
+                @"mi"" }}");
+
+                list.Add(rawProvider);
+            }
+
+            return list;
         }
 
         private Task IndexProviders(string indexName, IEnumerable<Provider> providers)
