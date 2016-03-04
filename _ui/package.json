@@ -10,18 +10,18 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "gulp" : "*",
-    "gulp-ruby-sass" : "*",
-    "gulp-plumber" : "*",
-    "browser-sync" : "*",
-    "gulp-connect" : "*",
-    "gulp-autoprefixer" : "*",
-    "gulp-concat" : "*",
-    "run-sequence": "*",
-    "gulp-minify-css" : "*",
-    "gulp-util" : "*",
-    "gulp-rename" : "*",
-    "gulp-ejs" : "1.2.1",
-    "chalk" : "*"
+    "browser-sync": "*",
+    "chalk": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-concat": "*",
+    "gulp-connect": "*",
+    "gulp-ejs": "1.2.1",
+    "gulp-minify-css": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-util": "*",
+    "run-sequence": "*"
   }
 }

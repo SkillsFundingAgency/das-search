@@ -5,23 +5,29 @@
     ViewBag.Title = "Standard - " + @Model.Title;
 }
 
-<main id="content" role="main">
+<main id="content">
 
     <p class="small-btm-margin">
         @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
     </p>
 
     <div class="grid-row">
+
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
+                    <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
                     @Model.Title
                 </h1>
-                <div class="standard-result-summary">
-                    @Html.Raw(@Model.IntroductoryTextHtml)
-                </div>
+                @if (!string.IsNullOrEmpty(@Model.IntroductoryTextHtml))
+                {
+                    <div class="standard-result-summary">
+                        @Html.Raw(@Model.IntroductoryTextHtml)
+                    </div>
+                }
             </div>
         </div>
+
         <div class="column-third">
             @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
@@ -31,11 +37,8 @@
                         <h2 class="heading-medium">Find training providers</h2>
                         <form action="/g-cloud/search" method="get" class="search-box">
                             <div class="form-group">
-                                <label class="form-label" for="q">
-                                    Postcode (mandatory)
-                                    <span class="form-hint">
-                                        See all training providers in a given location.
-                                    </span>
+                                <label class="form-label" for="postcode">
+                                    Enter postcode@* or partial postcode *@
                                     <p>
                                         @{
                                             Html.RenderPartial("_BlankFieldErrorMessage");
@@ -43,22 +46,26 @@
                                     </p>
                                 </label>
                                 <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
-                                <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
+                                <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
-                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search"/>
+                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
                         </form>
 
                     </aside>
                 </div>
-            }
+             }
 
+            </div>
         </div>
+
         <div class="column">
             <section>
                 <div class="summary">
-                    <h2 class="heading-large">
-                        Summary of apprenticeship standard
-                    </h2>
+                    <header>
+                        <h2 class="heading-large">
+                            Summary of apprenticeship standard
+                        </h2>
+                    </header>
                     @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
                     @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
                     @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
@@ -81,25 +88,24 @@
                 }
             </section>
         </div>
-    </div>
 
 </main>
 
 
 @helper GetStandardDetailItem(string title, string item, string unit = "")
 {
-    if (!string.IsNullOrEmpty(item))
-    {
-            <dt class="minLength">@title</dt>
+if (!string.IsNullOrEmpty(item))
+{
+        <dt class="minLength">@title</dt>
             <dd class="minLength">@item @unit</dd>
-    }
+}
 }
 
 
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty) 
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
 
         <div class="row">
             <div class="left">
@@ -109,13 +115,13 @@
                 @Html.Raw(item)
             </div>
         </div>
-    }
+}
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)
 {
-    if (!string.IsNullOrEmpty(title))
-    {
+if (!string.IsNullOrEmpty(title))
+{
         <li>
             <a href="@pdfUrl">
                 @title
@@ -124,5 +130,5 @@
                 PDF, 268KB, 2 pages
             </p>
         </li>
-    }
+}
 }
