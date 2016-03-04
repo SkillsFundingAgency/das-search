@@ -291,9 +291,9 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         {
             var indices = _client.IndicesStats().Indices;
 
-            var providerIndexToday = string.Concat("ciproviderindexalias-", scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd"));
-            var providerIndexOneDayAgo = string.Concat("ciproviderindexalias-", scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd"));
-            var providerIndexTwoDaysAgo = string.Concat("ciproviderindexalias-", scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd"));
+            var providerIndexToday = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd")}";
+            var providerIndexOneDayAgo = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd")}";
+            var providerIndexTwoDaysAgo = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd")}";
             var standardIndex = "standard";
             var logIndex = "log";
             var kibanaIndex = "kibana";
