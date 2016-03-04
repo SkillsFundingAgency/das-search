@@ -1,5 +1,6 @@
 namespace Sfa.Eds.Das.Indexer.Common.Settings
 {
+    using System;
     using System.Configuration;
     using System.Diagnostics;
 
@@ -37,5 +38,18 @@ namespace Sfa.Eds.Das.Indexer.Common.Settings
 
             return setting;
         }
+
+        public Uri CreateUri(string key)
+        {
+            var setting = ConfigurationManager.AppSettings[key];
+            Uri uri;
+            if (setting == null || Uri.TryCreate(setting, UriKind.Absolute, out uri))
+            {
+                throw new ConfigurationErrorsException($"You need to specify a valid {key} in the config file");
+            }
+
+            return uri;
+        }
+
     }
 }

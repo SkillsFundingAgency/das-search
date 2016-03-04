@@ -15,6 +15,6 @@
         string StandardJsonContainer { get; }
         string StandardPdfContainer { get; }
         string StandardContentType { get; }
-        Uri CourseDirectoryUri { get; }
+        string CourseDirectoryUri { get; }
     }
 }

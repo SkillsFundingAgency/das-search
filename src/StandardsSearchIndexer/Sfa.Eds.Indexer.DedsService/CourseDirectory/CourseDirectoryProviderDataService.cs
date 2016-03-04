@@ -18,6 +18,11 @@ namespace Sfa.Infrastructure
 
     public class CourseDirectoryProviderDataService : ServiceClient<CourseDirectoryProviderDataService>, ICourseDirectoryProviderDataService
     {
+        public CourseDirectoryProviderDataService()
+        {
+            
+        }
+
         /// <summary>
         ///     Initializes a new instance of the
         ///     CourseDirectoryProviderDataService class.

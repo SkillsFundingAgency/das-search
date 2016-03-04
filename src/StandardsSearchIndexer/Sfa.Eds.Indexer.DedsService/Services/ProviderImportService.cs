@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Infrastructure.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -16,15 +17,15 @@
 
         private readonly IInfrastructureSettings _settings;
 
-        public ProviderImportService(ICourseDirectoryProviderDataService courseDirectoryProvider, IInfrastructureSettings settings)
+        public ProviderImportService(IInfrastructureSettings settings)
         {
-            _courseDirectoryProvider = courseDirectoryProvider;
+            _courseDirectoryProvider = new CourseDirectoryProviderDataService();
             _settings = settings;
         }
 
         public async Task<IEnumerable<ProviderImport>> GetProviders()
         {
-            _courseDirectoryProvider.BaseUri = _settings.CourseDirectoryUri;
+            _courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
             var responseAsync = _courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
             return CreateMapper().Map<IEnumerable<ProviderImport>>(responseAsync.Result);
         }

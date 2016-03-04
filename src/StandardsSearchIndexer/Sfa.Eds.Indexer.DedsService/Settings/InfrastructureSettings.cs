@@ -5,7 +5,7 @@
 
     using Sfa.Eds.Das.Indexer.Common.Settings;
 
-    public class InfrastructureSettings : IInfrastructureSettings
+    public class InfrastructureSettings : BaseSettings, IInfrastructureSettings
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
@@ -29,7 +29,7 @@
 
         public string StandardContentType => ConfigurationManager.AppSettings["Standard.ContentType"];
 
-        public Uri CourseDirectoryUri => new Uri(ConfigurationManager.AppSettings["CourseDirectoryUri"]);
+        public string CourseDirectoryUri => ConfigurationManager.AppSettings["CourseDirectoryUri"];
 
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
