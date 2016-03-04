@@ -8,7 +8,6 @@
 
     using NUnit.Framework;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Helpers;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;

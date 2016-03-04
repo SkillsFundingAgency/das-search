@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.DependencyResolution
 {
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Helpers;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;

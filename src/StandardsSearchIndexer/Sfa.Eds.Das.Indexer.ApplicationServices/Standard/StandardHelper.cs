@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Helpers
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +10,7 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Models;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
     using Sfa.Eds.Das.Indexer.Common.Extensions;
     using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
@@ -67,7 +65,7 @@
             }
             catch (Exception e)
             {
-                Log.Error("Error indexing PDFs: " + e.Message);
+                Log.Error("Error indexing PDFs", e);
             }
         }
 
@@ -208,7 +206,7 @@
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Error indexing standard PDF: " + e.Message);
+                    Log.Error("Error indexing standard PDF", e);
                     throw;
                 }
             }
@@ -253,7 +251,7 @@
             }
             catch (Exception e)
             {
-                Log.Error("Error creating document: " + e.Message);
+                Log.Error("Error creating document", e);
 
                 throw;
             }

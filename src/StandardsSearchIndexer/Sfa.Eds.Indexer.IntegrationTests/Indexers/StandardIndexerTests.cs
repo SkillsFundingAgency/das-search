@@ -15,6 +15,7 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
     using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
@@ -134,7 +135,7 @@
 
             Thread.Sleep(2000);
 
-            var retrievedResult = _elasticClient.Search<MetaDataItem>(p => p.Index(indexName).QueryString(expectedStandardResult.Title));
+            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p.Index(indexName).QueryString(expectedStandardResult.Title));
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
 
@@ -144,7 +145,7 @@
             Assert.AreEqual(1, amountRetrieved);
             Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
             Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
-            Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.Id);
+            Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.StandardId);
         }
     }
 }
