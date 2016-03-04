@@ -60,12 +60,12 @@
 
         <div class="column">
             <section>
-                <div class="summary">
-                    <header>
-                        <h2 class="heading-large">
-                            Summary of apprenticeship standard
-                        </h2>
-                    </header>
+                <header>
+                    <h2 class="heading-large">
+                        Summary of apprenticeship standard
+                    </h2>
+                </header>
+                <dl class="data-list">
                     @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
                     @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
                     @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
@@ -73,7 +73,7 @@
                     @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
                     @GetStandardProperty("Qualifications", Model.QualificationsHtml)
                     @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
-                </div>
+                </dl>
                 @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
                 {
                     <div class="panel-indent panel-indent-info">
@@ -94,41 +94,36 @@
 
 @helper GetStandardDetailItem(string title, string item, string unit = "")
 {
-if (!string.IsNullOrEmpty(item))
-{
-        <dt class="minLength">@title</dt>
+    if (!string.IsNullOrEmpty(item))
+    {
+            <dt class="minLength">@title</dt>
             <dd class="minLength">@item @unit</dd>
-}
+    }
 }
 
 
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
 
-        <div class="row">
-            <div class="left">
-                @title
-            </div>
-            <div class="right">
-                @Html.Raw(item)
-            </div>
-        </div>
-}
+        <dt>@title</dt>
+        <dd>@Html.Raw(item)</dd>
+
+    }
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)
 {
-if (!string.IsNullOrEmpty(title))
-{
-        <li>
-            <a href="@pdfUrl">
-                @title
-            </a>
-            <p>
-                PDF, 268KB, 2 pages
-            </p>
-        </li>
-}
+    if (!string.IsNullOrEmpty(title))
+    {
+            <li>
+                <a href="@pdfUrl">
+                    @title
+                </a>
+                <p>
+                    PDF, 268KB, 2 pages
+                </p>
+            </li>
+    }
 }
