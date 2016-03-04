@@ -16,110 +16,110 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DedsService {
     public interface IDedsSearchService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSet", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetResponse")]
-        Sfa.Deds.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId);
+        Sfa.Infrastructure.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSet", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetResponse")]
-        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId);
+        System.Threading.Tasks.Task<Sfa.Infrastructure.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCodeResp" +
             "onse")]
-        Sfa.Deds.DedsService.DataSetDescriptor GetDataSetByCode(string code);
+        Sfa.Infrastructure.DedsService.DataSetDescriptor GetDataSetByCode(string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetDataSetByCodeResp" +
             "onse")]
-        System.Threading.Tasks.Task<Sfa.Deds.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code);
+        System.Threading.Tasks.Task<Sfa.Infrastructure.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "ons", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "onsResponse")]
-        Sfa.Deds.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Sfa.Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
+        Sfa.Infrastructure.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Sfa.Infrastructure.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "ons", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverDataSetVersi" +
             "onsResponse")]
-        System.Threading.Tasks.Task<Deds.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Infrastructure.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueries", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueriesRespo" +
             "nse")]
-        Deds.DedsService.QueryDescriptor[] DiscoverQueries(Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
+        Infrastructure.DedsService.QueryDescriptor[] DiscoverQueries(Infrastructure.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueries", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverQueriesRespo" +
             "nse")]
-        System.Threading.Tasks.Task<Deds.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Infrastructure.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFiles", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesRespons" +
             "e")]
-        Deds.DedsService.FileDescriptor[] DiscoverFiles(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        Infrastructure.DedsService.FileDescriptor[] DiscoverFiles(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFiles", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesRespons" +
             "e")]
-        System.Threading.Tasks.Task<Deds.DedsService.FileDescriptor[]> DiscoverFilesAsync(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.FileDescriptor[]> DiscoverFilesAsync(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCountRe" +
             "sponse")]
-        long DiscoverFilesCount(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        long DiscoverFilesCount(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/DiscoverFilesCountRe" +
             "sponse")]
-        System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
+        System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQuery", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryResponse" +
             "")]
-        Deds.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution);
+        Infrastructure.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQuery", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryResponse" +
             "")]
-        System.Threading.Tasks.Task<Deds.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountRespons" +
             "e")]
-        long GetTotalCount(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution);
+        long GetTotalCount(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCount", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountRespons" +
             "e")]
-        System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCodeRe" +
             "sponse")]
-        Deds.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution);
+        Infrastructure.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/ExecuteQueryByCodeRe" +
             "sponse")]
-        System.Threading.Tasks.Task<Deds.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCodeR" +
             "esponse")]
-        long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution);
+        long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCode", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetTotalCountByCodeR" +
             "esponse")]
-        System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution);
+        System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFile", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFileResponse")]
-        Deds.DedsService.FileData GetFile(System.Guid fileId);
+        Infrastructure.DedsService.FileData GetFile(System.Guid fileId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFile", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetFileResponse")]
-        System.Threading.Tasks.Task<Deds.DedsService.FileData> GetFileAsync(System.Guid fileId);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.FileData> GetFileAsync(System.Guid fileId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersion", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersionResponse")]
-        Deds.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode);
+        Infrastructure.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersion", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetLatestPublishedDa" +
             "taSetVersionResponse")]
-        System.Threading.Tasks.Task<Deds.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersions", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersionsResponse")]
-        Deds.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode);
+        Infrastructure.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersions", ReplyAction="http://ws.imservices.org.uk/dcft/deds/1.0/IDedsSearchService/GetPublishedDataSetV" +
             "ersionsResponse")]
-        System.Threading.Tasks.Task<Deds.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode);
+        System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -149,107 +149,107 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DedsService {
                 base(binding, remoteAddress) {
         }
         
-        public Deds.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId) {
+        public Infrastructure.DedsService.DataSetDescriptor GetDataSet(System.Guid dataSetId) {
             return base.Channel.GetDataSet(dataSetId);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetDescriptor> GetDataSetAsync(System.Guid dataSetId) {
             return base.Channel.GetDataSetAsync(dataSetId);
         }
         
-        public Deds.DedsService.DataSetDescriptor GetDataSetByCode(string code) {
+        public Infrastructure.DedsService.DataSetDescriptor GetDataSetByCode(string code) {
             return base.Channel.GetDataSetByCode(code);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetDescriptor> GetDataSetByCodeAsync(string code) {
             return base.Channel.GetDataSetByCodeAsync(code);
         }
         
-        public Deds.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
+        public Infrastructure.DedsService.DataSetVersionDescriptor[] DiscoverDataSetVersions(Infrastructure.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
             return base.Channel.DiscoverDataSetVersions(discoverDataSetVersionsCriteria);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Deds.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetVersionDescriptor[]> DiscoverDataSetVersionsAsync(Infrastructure.DedsService.DiscoverDataSetVersionsCriteria discoverDataSetVersionsCriteria) {
             return base.Channel.DiscoverDataSetVersionsAsync(discoverDataSetVersionsCriteria);
         }
         
-        public Deds.DedsService.QueryDescriptor[] DiscoverQueries(Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
+        public Infrastructure.DedsService.QueryDescriptor[] DiscoverQueries(Infrastructure.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
             return base.Channel.DiscoverQueries(discoverQueriesCriteria);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Deds.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.QueryDescriptor[]> DiscoverQueriesAsync(Infrastructure.DedsService.DiscoverQueriesCriteria discoverQueriesCriteria) {
             return base.Channel.DiscoverQueriesAsync(discoverQueriesCriteria);
         }
         
-        public Deds.DedsService.FileDescriptor[] DiscoverFiles(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public Infrastructure.DedsService.FileDescriptor[] DiscoverFiles(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFiles(discoverFilesCriteria);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.FileDescriptor[]> DiscoverFilesAsync(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.FileDescriptor[]> DiscoverFilesAsync(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFilesAsync(discoverFilesCriteria);
         }
         
-        public long DiscoverFilesCount(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public long DiscoverFilesCount(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFilesCount(discoverFilesCriteria);
         }
         
-        public System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Deds.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
+        public System.Threading.Tasks.Task<long> DiscoverFilesCountAsync(Infrastructure.DedsService.DiscoverFilesCriteria discoverFilesCriteria) {
             return base.Channel.DiscoverFilesCountAsync(discoverFilesCriteria);
         }
         
-        public Deds.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution) {
+        public Infrastructure.DedsService.QueryResults[] ExecuteQuery(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQuery(queryId, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.QueryResults[]> ExecuteQueryAsync(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQueryAsync(queryId, queryExecution);
         }
         
-        public long GetTotalCount(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution) {
+        public long GetTotalCount(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCount(queryId, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Deds.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<long> GetTotalCountAsync(System.Guid queryId, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCountAsync(queryId, queryExecution);
         }
         
-        public Deds.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution) {
+        public Infrastructure.DedsService.QueryResults[] ExecuteQueryByCode(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQueryByCode(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.QueryResults[]> ExecuteQueryByCodeAsync(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.ExecuteQueryByCodeAsync(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution) {
+        public long GetTotalCountByCode(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCountByCode(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Deds.DedsService.QueryExecution queryExecution) {
+        public System.Threading.Tasks.Task<long> GetTotalCountByCodeAsync(System.Guid dataSetVersionId, string queryCode, Infrastructure.DedsService.QueryExecution queryExecution) {
             return base.Channel.GetTotalCountByCodeAsync(dataSetVersionId, queryCode, queryExecution);
         }
         
-        public Deds.DedsService.FileData GetFile(System.Guid fileId) {
+        public Infrastructure.DedsService.FileData GetFile(System.Guid fileId) {
             return base.Channel.GetFile(fileId);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.FileData> GetFileAsync(System.Guid fileId) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.FileData> GetFileAsync(System.Guid fileId) {
             return base.Channel.GetFileAsync(fileId);
         }
         
-        public Deds.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode) {
+        public Infrastructure.DedsService.DataSetVersionDescriptor GetLatestPublishedDataSetVersion(string dataSetCode) {
             return base.Channel.GetLatestPublishedDataSetVersion(dataSetCode);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetVersionDescriptor> GetLatestPublishedDataSetVersionAsync(string dataSetCode) {
             return base.Channel.GetLatestPublishedDataSetVersionAsync(dataSetCode);
         }
         
-        public Deds.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode) {
+        public Infrastructure.DedsService.DataSetVersionDescriptor[] GetPublishedDataSetVersions(string dataSetCode) {
             return base.Channel.GetPublishedDataSetVersions(dataSetCode);
         }
         
-        public System.Threading.Tasks.Task<Deds.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode) {
+        public System.Threading.Tasks.Task<Infrastructure.DedsService.DataSetVersionDescriptor[]> GetPublishedDataSetVersionsAsync(string dataSetCode) {
             return base.Channel.GetPublishedDataSetVersionsAsync(dataSetCode);
         }
     }

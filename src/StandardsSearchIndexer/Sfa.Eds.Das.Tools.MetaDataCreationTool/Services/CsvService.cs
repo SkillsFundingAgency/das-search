@@ -5,18 +5,19 @@
     using System.IO;
     using System.Linq;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class CsvService : IReadStandardsFromCsv
     {
         private readonly IAngleSharpService angelService;
-        private readonly ISettings settings;
+        private readonly IAppServiceSettings appServiceSettings;
 
-        public CsvService(IAngleSharpService angelService, ISettings settings)
+        public CsvService(IAngleSharpService angelService, IAppServiceSettings appServiceSettings)
         {
             this.angelService = angelService;
-            this.settings = settings;
+            this.appServiceSettings = appServiceSettings;
         }
 
         public List<Standard> ReadStandardsFromFile(string csvFile)
