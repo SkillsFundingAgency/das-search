@@ -1,8 +1,116 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
+﻿@using Sfa.Eds.Das.Web.Extensions
+@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Provider - " + @Model.ProviderName;
 }
 
-<h2>Detail</h2>
+<main id="content" role="main">
 
+    <p class="small-btm-margin">
+        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
+    </p>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="hgroup">
+                <h1 class="heading-xlarge">
+                    @Model.ProviderName
+                </h1>
+            </div>
+        </div>
+        <div class="column-third">
+            <div class="related-container">
+                <aside class="related">
+
+                    <h2 class="heading-medium">Find training providers</h2>
+                    <form action="/g-cloud/search" method="get" class="search-box">
+                        <div class="form-group">
+                            <label class="form-label" for="q">
+                                Provider 
+                                <span class="form-hint">
+                                    See all training providers in a given location.
+                                </span>
+                            </label>
+                            <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
+                            <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
+                        </div>
+                        <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
+                    </form>
+
+                </aside>
+            </div>
+        </div>
+        <div class="column">
+            <section>
+                <div class="summary">
+                    <h2 class="heading-large">
+                        Summary of apprenticeship standard
+                    </h2>
+                    @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
+                    @GetStandardProperty("Level", @Model.NotionalEndLevel.ToString())
+                    @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
+                    @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
+                    @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
+                    @GetStandardProperty("Qualifications", Model.QualificationsHtml)
+                    @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
+                </div>
+                @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
+                {
+                    <div class="panel-indent panel-indent-info">
+                        <h2 class="heading-large">
+                            Documents
+                        </h2>
+                        <ul>
+                            @GetDocumentItem(@Model.StandardPdfUrl, @Model.StandardPdfUrlTitle)
+                            @GetDocumentItem(@Model.AssessmentPlanPdfUrl, @Model.AssessmentPlanPdfUrlTitle)
+                        </ul>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+
+</main>
+
+
+@helper GetStandardDetailItem(string title, string item, string unit = "")
+{
+if (!string.IsNullOrEmpty(item))
+{
+        <dt class="minLength">@title</dt>
+            <dd class="minLength">@item @unit</dd>
+}
+}
+
+
+@helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+
+        <div class="row">
+            <div class="left">
+                @title
+            </div>
+            <div class="right">
+                @Html.Raw(item)
+            </div>
+        </div>
+}
+}
+
+@helper GetDocumentItem(string pdfUrl, string title)
+{
+if (!string.IsNullOrEmpty(title))
+{
+        <li>
+            <a href="@pdfUrl">
+                @title
+            </a>
+            <p>
+                PDF, 268KB, 2 pages
+            </p>
+        </li>
+}
+}
