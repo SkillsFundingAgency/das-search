@@ -1,6 +1,7 @@
 @import "govuk-templates";
 // @import "govuk-elements";
 @import "_elements";
+@import "_fonts";
 
 @import "partials/_footer";
 @import "partials/_header";
@@ -23,6 +24,6 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-p.strong{
+p.strong {
     font-weight: bold;
 }
