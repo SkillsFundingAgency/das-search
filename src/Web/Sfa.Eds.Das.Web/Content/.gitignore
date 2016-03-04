@@ -1,2 +1,2 @@
 # Ignoring build generated files
-*.css
+dist/
