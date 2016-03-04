@@ -185,7 +185,7 @@ WriteAttribute("href", Tuple.Create(" href=\"", 1624), Tuple.Create("\"", 1690)
             #line default
             #line hidden
 , 1631), false)
-, Tuple.Create(Tuple.Create(" ", 1644), Tuple.Create("http://www.trainingassociation.co.uk/privider", 1645), true)
+, Tuple.Create(Tuple.Create(" ", 1644), Tuple.Create("http://www.trainingassociation.co.uk/provider", 1645), true)
 );
 
 WriteLiteral("> ");
@@ -197,7 +197,7 @@ WriteLiteral("> ");
             
             #line default
             #line hidden
-WriteLiteral(" www.trainingassociation.co.uk/privider</a>\r\n                                </dd" +
+WriteLiteral(" www.trainingassociation.co.uk/provider</a>\r\n                                </dd" +
 ">\r\n                            </dl>\r\n                            <dl>\r\n        " +
 "                        <dt");
 
