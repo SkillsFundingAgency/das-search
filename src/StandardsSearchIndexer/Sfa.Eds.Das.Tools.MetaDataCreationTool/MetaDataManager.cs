@@ -4,35 +4,36 @@
     using System.IO;
     using System.Linq;
 
+    using Newtonsoft.Json;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
-    using Newtonsoft.Json;
 
     public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData
     {
-        private readonly ILarsDataService _larsDataService;
-        private readonly IVstsService _vstsService;
-        private readonly ISettings _settings;
-        private readonly ILog4NetLogger _logger;
+        private readonly IAppServiceSettings _appServiceSettings;
 
-        public MetaDataManager(ILarsDataService larsDataService, IVstsService vstsService, ISettings settings, ILog4NetLogger logger)
+        private readonly ILarsDataService _larsDataService;
+
+        private readonly ILog _logger;
+
+        private readonly IVstsService _vstsService;
+
+        public MetaDataManager(ILarsDataService larsDataService, IVstsService vstsService, IAppServiceSettings appServiceSettings, ILog logger)
         {
             _larsDataService = larsDataService;
             _vstsService = vstsService;
-            _settings = settings;
+            _appServiceSettings = appServiceSettings;
             _logger = logger;
         }
 
-        public IDictionary<string, string> GetAllAsJson()
-        {
-            return _vstsService.GetStandards();
-        }
-
         /// <summary>
-        ///
-        ///    Will
-        ///    - download zip file from course directory and unzip standard.csv file.
-        ///    - Creates metadata json for new standards and then push them to git repository
+        ///     Will
+        ///     - download zip file from course directory and unzip standard.csv file.
+        ///     - Creates metadata json for new standards and then push them to git repository
         /// </summary>
         public void GenerateStandardMetadataFiles()
         {
@@ -47,25 +48,31 @@
 
             PushStandardsToGit(missingStandards);
             _logger.Info($"Pushed new meta files to Git Repository.");
-
         }
 
-        private List<StandardObject> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)
+        public IDictionary<string, string> GetAllAsJson()
         {
-            var missingStandards = new List<StandardObject>();
+            return _vstsService.GetStandards();
+        }
+
+        private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)
+        {
+            var missingStandards = new List<FileContents>();
 
             foreach (var standard in currentStandards.Where(m => !currentMetaDataIds.Contains($"{m.Id}")))
             {
                 var json = JsonConvert.SerializeObject(standard, Formatting.Indented);
-                var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standard.Title, (current, c) => current.Replace(c, '_')).Replace(" ", string.Empty);
-                var gitFilePath = $"{_settings.VstsGitFolderPath}/{standard.Id}-{standardTitle}.json";
-                missingStandards.Add(new StandardObject(gitFilePath, json));
+                var standardTitle = Path.GetInvalidFileNameChars()
+                    .Aggregate(standard.Title, (current, c) => current.Replace(c, '_'))
+                    .Replace(" ", string.Empty);
+                var gitFilePath = $"{_appServiceSettings.VstsGitFolderPath}/{standard.Id}-{standardTitle}.json";
+                missingStandards.Add(new FileContents(gitFilePath, json));
             }
 
             return missingStandards;
         }
 
-        private void PushStandardsToGit(List<StandardObject> standards)
+        private void PushStandardsToGit(List<FileContents> standards)
         {
             if (standards.Any())
             {

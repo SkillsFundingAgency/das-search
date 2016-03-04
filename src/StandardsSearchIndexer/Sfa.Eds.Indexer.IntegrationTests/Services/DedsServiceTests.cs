@@ -1,18 +1,19 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Sfa.Deds.Services;
 using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Eds.Das.StandardIndexer.Settings;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 {
+    using Sfa.Eds.Das.Indexer.Core;
+
     [TestFixture]
     public class DedsServiceTests
     {
         private IContainer _ioc;
         private IStandardIndexSettings _standardSettings;
-        private ILarsClient _sut;
+        private IGetStandardLevel _sut;
 
         [SetUp]
         public void Setup()
@@ -20,7 +21,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
             _ioc = IoC.Initialize();
             _standardSettings = _ioc.GetInstance<IStandardIndexSettings>();
 
-            _sut = _ioc.GetInstance<ILarsClient>();
+            _sut = _ioc.GetInstance<IGetStandardLevel>();
         }
 
         [Test]
@@ -29,7 +30,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
         {
             var expectedNotationLevel = 4;
 
-            var notationLevel = _sut.GetNotationLevelFromLars(1);
+            var notationLevel = _sut.GetNotationLevel(1);
 
             notationLevel.Should().NotBe(null);
             notationLevel.Should().Be(expectedNotationLevel);
@@ -41,7 +42,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
         {
             var expectedNotationLevel = 0;
 
-            var notationLevel = _sut.GetNotationLevelFromLars(int.MaxValue);
+            var notationLevel = _sut.GetNotationLevel(int.MaxValue);
 
             notationLevel.Should().NotBe(null);
             notationLevel.Should().Be(expectedNotationLevel);
@@ -53,7 +54,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
         {
             var expectedNotationLevel = 0;
 
-            var notationLevel = _sut.GetNotationLevelFromLars(int.MinValue);
+            var notationLevel = _sut.GetNotationLevel(int.MinValue);
 
             notationLevel.Should().NotBe(null);
             notationLevel.Should().Be(expectedNotationLevel);

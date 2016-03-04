@@ -12,13 +12,12 @@
 
     using NUnit.Framework;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Common.Configuration;
-    using Sfa.Eds.Das.Indexer.Common.Helpers;
     using Sfa.Eds.Das.Indexer.Common.Models;
-    using Sfa.Eds.Das.Indexer.Common.Services;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
-    using Sfa.Eds.Das.ProviderIndexer.Helpers;
+    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.ProviderIndexer.Models;
 
     using StructureMap;

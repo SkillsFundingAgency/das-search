@@ -6,6 +6,7 @@
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.Common.Extensions;
+    using Sfa.Infrastructure.Services;
 
     [TestFixture]
     public class StringExtensionsTests
@@ -14,7 +15,9 @@
         public void ShouldFindTheValueOfACellInACSV()
         {
             var csv = "UKPRN\n10001309\n10031241";
-            var models = csv.FromCsv<CsvTestModel>();
+            var sut = new CsvService();
+
+            var models = sut.CsvTo<CsvTestModel>(csv);
 
             Assert.AreEqual("10001309", models.First().UkPrn);
         }
@@ -23,7 +26,9 @@
         public void ShouldReturnElementCountFromCsv()
         {
             var csv = "UKPRN\n10001309\n10031241";
-            var models = csv.FromCsv<CsvTestModel>();
+            var sut = new CsvService();
+
+            var models = sut.CsvTo<CsvTestModel>(csv);
 
             Assert.AreEqual(2, models.Count);
         }
@@ -32,7 +37,9 @@
         public void ShouldReturnEmptyEnumerableIfCsvDoesntContainAnything()
         {
             var csv = "";
-            var models = csv.FromCsv<CsvTestModel>();
+            var sut = new CsvService();
+
+            var models = sut.CsvTo<CsvTestModel>(csv);
 
             Assert.AreEqual(0, models.Count);
         }
