@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'src/styles/',
                     src: '*.scss',
-                    dest: 'css/',
+                    dest: 'dist/css/',
                     ext: '.min.css'
                 }]
             }
@@ -35,9 +35,20 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'css/',
+                    cwd: 'dist/css/',
                     src: '{,*/}*.css',
-                    dest: 'css/'
+                    dest: 'dist/css/'
+                }]
+            }
+        },
+
+        svgmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/images/',
+                    src: '{,*/}*.svg',
+                    dest: 'dist/images/'
                 }]
             }
         },
@@ -45,15 +56,21 @@ module.exports = function (grunt) {
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             styles: {
-                files: ['src/styles/{,*/}*.scss'],
-                tasks: ['sass', 'autoprefixer']
+                    files: ['src/styles/{,*/}*.scss'],
+                    tasks: ['sass', 'autoprefixer']
+            },
+
+            svg: {
+                    files: ['src/images/{,*/}*.svg'],
+                    tasks: ['svgmin']
             }
         }
     });
 
     grunt.registerTask('build', [
       'sass',
-      'autoprefixer'
+      'autoprefixer',
+      'svgmin'
     ]);
 
     grunt.registerTask('default', [
