@@ -23,6 +23,9 @@
           <Variable name="PathToNETFXInstall">
             <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='NETFXInstall']/@path" />
           </Variable>
+          <Variable name="ComputeEmulatorRunning">
+            <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+          </Variable>
         </Environment>
       </Task>
     </Startup>

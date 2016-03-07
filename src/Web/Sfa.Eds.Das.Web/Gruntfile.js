@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
 
-        libsass: {
+        sass: {
             dist: {
                 options: {
                     outputStyle: 'compressed',
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         watch: {
             styles: {
                     files: ['Content/src/styles/{,*/}*.scss'],
-                    tasks: ['libsass', 'autoprefixer']
+                    tasks: ['sass', 'autoprefixer']
             },
 
             svg: {
@@ -68,12 +68,10 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-libsass');
-
     grunt.loadNpmTasks('grunt-autoprefixer');
 
     grunt.registerTask('build', [
-      'libsass',
+      'sass',
       'autoprefixer',
       'svgmin'
     ]);
