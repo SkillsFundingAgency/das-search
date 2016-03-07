@@ -3,7 +3,7 @@ REM ***** To install .NET 4.5.2 set the variable netfx to "NDP452" *****
 REM ***** To install .NET 4.6 set the variable netfx to "NDP46" *****
 REM ***** To install .NET 4.6.1 set the variable netfx to "NDP461" *****
 
-IF "" == "true" (
+IF "%ComputeEmulatorRunning%" == "true" (
 	set netfx="NDP452"
 
 	REM ***** Needed to correctly install .NET 4.6.1, otherwise you may see an out of disk space error *****
