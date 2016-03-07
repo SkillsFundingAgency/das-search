@@ -305,15 +305,61 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\fonts.css" />
-    <Content Include="Content\css\screen.min.css" />
-    <Content Include="images\gov.uk_logotype_crown.png" />
-    <Content Include="images\govuk-crest-2x.png" />
+    <Content Include="Content\Gruntfile.js" />
+    <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
+    <Content Include="Content\src\images\govuk-crest.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\src\styles\elements\forms\_form-block-labels.scss" />
+    <Content Include="Content\src\styles\elements\forms\_form-date.scss" />
+    <Content Include="Content\src\styles\elements\forms\_form-validation.scss" />
+    <Content Include="Content\src\styles\elements\_base.scss" />
+    <Content Include="Content\src\styles\elements\_breadcrumbs.scss" />
+    <Content Include="Content\src\styles\elements\_buttons.scss" />
+    <Content Include="Content\src\styles\elements\_components.scss" />
+    <Content Include="Content\src\styles\elements\_details.scss" />
+    <Content Include="Content\src\styles\elements\_elements-typography.scss" />
+    <Content Include="Content\src\styles\elements\_forms.scss" />
+    <Content Include="Content\src\styles\elements\_helpers.scss" />
+    <Content Include="Content\src\styles\elements\_icons.scss" />
+    <Content Include="Content\src\styles\elements\_layout.scss" />
+    <Content Include="Content\src\styles\elements\_lists.scss" />
+    <Content Include="Content\src\styles\elements\_panels.scss" />
+    <Content Include="Content\src\styles\elements\_phase-banner.scss" />
+    <Content Include="Content\src\styles\elements\_reset.scss" />
+    <Content Include="Content\src\styles\elements\_tables.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\design-patterns\_alpha-beta.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\design-patterns\_breadcrumbs.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\design-patterns\_buttons.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\design-patterns\_media-player.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_colours.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_conditionals.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_css3.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_device-pixels.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_font_stack.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_grid_layout.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_helpers.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_measurements.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_shims.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_typography.scss" />
+    <Content Include="Content\src\styles\fe_toolkit\_url-helpers.scss" />
+    <Content Include="Content\src\styles\partials\_details.scss" />
+    <Content Include="Content\src\styles\partials\_footer.scss" />
+    <Content Include="Content\src\styles\partials\_header.scss" />
+    <Content Include="Content\src\styles\partials\_headings.scss" />
+    <Content Include="Content\src\styles\partials\_phases.scss" />
+    <Content Include="Content\src\styles\partials\_related.scss" />
+    <Content Include="Content\src\styles\partials\_results.scss" />
+    <Content Include="Content\src\styles\screen.scss" />
+    <Content Include="Content\src\styles\_elements.scss" />
+    <Content Include="Content\src\styles\_govuk-elements.scss" />
+    <Content Include="Content\src\styles\_govuk-templates.scss" />
+    <Content Include="Content\package.json" />
+    <Content Include="Content\src\styles\_fonts.scss" />
+    <Content Include="Content\README.md" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
