@@ -51,22 +51,12 @@
             _logger.Debug($"Zip file path: {zipFilePath}");
 
             var zipStream = _httpGetFile.GetFile(zipFilePath);
-            //, _appServiceSettings.WorkingFolder
             _logger.Debug($"Zip file downloaded");
 
-            var extractedPath = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileName);
-            _logger.Debug($"Path to csv file: {extractedPath}");
+            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileName);
+            _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
 
-            var csvFile = Path.Combine(extractedPath, _appServiceSettings.CsvFileName);
-
-            if (!File.Exists(csvFile))
-            {
-                _logger.Warn($"Can't find file {csvFile}");
-
-                return new List<Standard>();
-            }
-
-            var standards = _csvService.ReadStandardsFromFile(csvFile);
+            var standards = _csvService.ReadStandardsFromStream(fileContent);
             _logger.Debug($"Read: {standards.Count} standards from file.");
 
             return standards;
