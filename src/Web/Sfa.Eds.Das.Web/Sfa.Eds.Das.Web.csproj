@@ -305,7 +305,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Gruntfile.js" />
     <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
     <Content Include="Content\src\images\govuk-crest.svg" />
     <Content Include="favicon.ico" />
