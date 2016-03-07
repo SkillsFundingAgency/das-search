@@ -98,7 +98,6 @@
     <Compile Include="Settings\IInfrastructureSettings.cs" />
     <Compile Include="Settings\LarsSettings.cs" />
     <Compile Include="Settings\ILarsSettings.cs" />
-    <Compile Include="Settings\Log4NetSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
