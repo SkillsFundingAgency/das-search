@@ -20,10 +20,10 @@
             this.appServiceSettings = appServiceSettings;
         }
 
-        public List<Standard> ReadStandardsFromFile(string csvFile)
+        public List<Standard> ReadStandardsFromFile(string csvFilePath)
         {
             List<Standard> standards;
-            using (var reader = new StreamReader(File.OpenRead(csvFile)))
+            using (var reader = new StreamReader(File.OpenRead(csvFilePath)))
             {
                 reader.ReadLine();
                 standards = new List<Standard>();
@@ -36,6 +36,22 @@
                     {
                         standards.Add(standard);
                     }
+                }
+            }
+
+            return standards;
+        }
+
+        public List<Standard> ReadStandardsFromStream(string csvFile)
+        {
+            var standards = new List<Standard>();
+            foreach (var line in csvFile.Split('\n'))
+            {
+                var values = line?.Split(',');
+                Standard standard;
+                if (CreateStandard(values, out standard))
+                {
+                    standards.Add(standard);
                 }
             }
 

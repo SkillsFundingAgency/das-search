@@ -5,6 +5,8 @@
 
     public interface IReadStandardsFromCsv
     {
-        List<Standard> ReadStandardsFromFile(string csvFile);
+        List<Standard> ReadStandardsFromFile(string csvFilePath);
+
+        List<Standard> ReadStandardsFromStream(string csvFile);
     }
 }
