@@ -1,23 +1,28 @@
-using System;
-using System.Net;
-using System.Reflection;
-using System.Threading;
-using log4net;
-using Microsoft.WindowsAzure.ServiceRuntime;
-using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-using Sfa.Eds.Das.Indexer.Common.Configuration;
-using Sfa.Eds.Das.Indexer.Common.Settings;
-using StructureMap;
-
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
+    using System;
+    using System.Net;
+    using System.Threading;
+
+    using Microsoft.WindowsAzure.ServiceRuntime;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
+    using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
+
+    using StructureMap;
+
     public class WorkerRole : RoleEntryPoint
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
+
+        private ILog Log;
+
+        private IWorkerRoleSettings _commonSettings;
+
         private IContainer _container;
-        private ICommonSettings _commonSettings;
 
         public override void Run()
         {
@@ -43,9 +48,8 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
             // Set the maximum number of concurrent connections
             ServicePointManager.DefaultConnectionLimit = 12;
             _container = IoC.Initialize();
-            _commonSettings = _container.GetInstance<ICommonSettings>();
-
-            Log4NetSettings.Initialise();
+            Log = _container.GetInstance<ILog>();
+            _commonSettings = _container.GetInstance<IWorkerRoleSettings>();
 
             // For information on handling configuration changes see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
             var result = base.OnStart();

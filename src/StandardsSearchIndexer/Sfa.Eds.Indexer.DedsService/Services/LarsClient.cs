@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Sfa.Deds.DedsService;
-using Sfa.Deds.Settings;
-
-namespace Sfa.Deds.Services
+﻿namespace Sfa.Infrastructure.Services
 {
-    public class LarsClient : ILarsClient
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Sfa.Deds.Settings;
+    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Infrastructure.DedsService;
+
+    public class LarsClient : IGetStandardLevel
     {
         private readonly ILarsSettings _larsSettings;
 
         public LarsClient(ILarsSettings larsSettings)
         {
-            this._larsSettings = larsSettings;
+            _larsSettings = larsSettings;
         }
 
-        public int GetNotationLevelFromLars(int standardId)
+        public int GetNotationLevel(int standardId)
         {
-            var queryDescriptorStandard =
-                this.GetQueryDescriptors(_larsSettings.DatasetName).Single(qd => qd.Name == _larsSettings.StandardDescriptorName);
-            var result = this.RunQuery(queryDescriptorStandard, standardId);
+            var queryDescriptorStandard = GetQueryDescriptors(_larsSettings.DatasetName).Single(qd => qd.Name == _larsSettings.StandardDescriptorName);
+            var result = RunQuery(queryDescriptorStandard, standardId);
 
-            return this.GetNotationLevelFromResponse(result[1]);
+            return GetNotationLevelFromResponse(result[1]);
         }
 
         private QueryDescriptor[] GetQueryDescriptors(string dataSetName)
@@ -37,11 +38,11 @@ namespace Sfa.Deds.Services
 
         private IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
         {
-            var queryFilterValues = this.QueryFilterValuesFromConsole(qds, larsCode);
+            var queryFilterValues = QueryFilterValuesFromConsole(qds, larsCode);
 
-            var queryExecution = this.GetQueryExecution(queryFilterValues, null, null);
+            var queryExecution = GetQueryExecution(queryFilterValues, null, null);
 
-            return this.ExecuteQuery(qds, queryExecution);
+            return ExecuteQuery(qds, queryExecution);
         }
 
         private Dictionary<string, string> QueryFilterValuesFromConsole(QueryDescriptor queryDescriptor, int larsCode)
@@ -53,17 +54,15 @@ namespace Sfa.Deds.Services
         {
             var filterValues = new List<FilterValue>();
 
-            filterValues.AddRange(queryFilterValues.Select(queryFilterValue => new FilterValue
-            {
-                FieldName = queryFilterValue.Key,
-                FieldValue = queryFilterValue.Value
-            }));
+            filterValues.AddRange(
+                queryFilterValues.Select(
+                    queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value }));
 
             var queryExecution = new QueryExecution
-            {
-                FilterValues = filterValues.Where(x => !string.IsNullOrEmpty(x.FieldValue)).ToArray(),
-                SortValues = new SortValue[0]
-            };
+                                     {
+                                         FilterValues = filterValues.Where(x => !string.IsNullOrEmpty(x.FieldValue)).ToArray(),
+                                         SortValues = new SortValue[0]
+                                     };
 
             if (page.HasValue && itemsPerPage.HasValue)
             {

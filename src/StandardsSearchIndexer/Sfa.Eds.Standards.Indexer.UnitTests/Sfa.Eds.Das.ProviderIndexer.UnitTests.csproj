@@ -122,7 +122,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ProviderIndexerServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -133,17 +132,13 @@
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Deds.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Infrastructure.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Deds</Name>
+      <Name>Sfa.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Das.ProviderIndexer.csproj">
-      <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
-      <Name>Sfa.Eds.Das.ProviderIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj">
       <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
@@ -157,9 +152,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Consumers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

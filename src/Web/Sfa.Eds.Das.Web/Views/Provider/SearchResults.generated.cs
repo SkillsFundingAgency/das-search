@@ -165,11 +165,68 @@ WriteLiteral(">\r\n                                    <span>");
             
             #line default
             #line hidden
-WriteLiteral(" miles</span>\r\n                                </dd>\r\n                           " +
-" </dl>\r\n                        </div>\r\n                    </li>\r\n");
+WriteLiteral(" miles away</span>\r\n                                </dd>\r\n                      " +
+"      </dl>\r\n                            <dl>\r\n                                <" +
+"dt");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">Website:</dt>\r\n                                <dd");
+
+WriteLiteral(" class=\"website\"");
+
+WriteLiteral(">\r\n                                <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1624), Tuple.Create("\"", 1690)
+            
+            #line 43 "..\..\Views\Provider\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create("", 1631), Tuple.Create<System.Object, System.Int32>(item.Website
+            
+            #line default
+            #line hidden
+, 1631), false)
+, Tuple.Create(Tuple.Create(" ", 1644), Tuple.Create("http://www.trainingassociation.co.uk/provider", 1645), true)
+);
+
+WriteLiteral("> ");
 
             
-            #line 42 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 43 "..\..\Views\Provider\SearchResults.cshtml"
+                                                                                                  Write(item.Website);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" www.trainingassociation.co.uk/provider</a>\r\n                                </dd" +
+">\r\n                            </dl>\r\n                            <dl>\r\n        " +
+"                        <dt");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">Employer satisfaction:</dt>\r\n                                <dd");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">\r\n                                    <span>83%</span>\r\n                        " +
+"            ");
+
+WriteLiteral("\r\n                                </dd>\r\n                            </dl>\r\n     " +
+"                       <dl>\r\n                                <dt");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">Learner satisfaction:</dt>\r\n                                <dd");
+
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">\r\n                                    <span>75 %</span>\r\n                       " +
+"             ");
+
+WriteLiteral("\r\n                                </dd>\r\n                            </dl>\r\n     " +
+"                   </div>\r\n                    </li>\r\n");
+
+            
+            #line 62 "..\..\Views\Provider\SearchResults.cshtml"
                 }
 
             
@@ -217,7 +274,7 @@ WriteLiteral(" class=\"return-to-top\"");
 WriteLiteral(" href=\"#content\"");
 
 WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n                </aside>\r\n     " +
-"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
+"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>");
 
         }
     }

@@ -1,0 +1,29 @@
+@import "govuk-templates";
+// @import "govuk-elements";
+@import "_elements";
+@import "_fonts";
+
+@import "partials/_footer";
+@import "partials/_header";
+@import "partials/_phases";
+@import "partials/_results";
+@import "partials/_details";
+@import "partials/_headings";
+@import "partials/_related";
+
+
+main {
+  min-height:450px;
+}
+
+.small-btm-margin {
+  margin-bottom: 5px;
+}
+
+aside h2:first-child {
+  margin-top: 15px;
+}
+
+p.strong {
+    font-weight: bold;
+}
