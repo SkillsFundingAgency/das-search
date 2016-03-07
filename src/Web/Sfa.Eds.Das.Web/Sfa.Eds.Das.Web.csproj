@@ -305,6 +305,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\dist\css\screen.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\dist\images\gov.uk_logotype_crown.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\dist\images\govuk-crest.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
     <Content Include="Content\src\images\govuk-crest.svg" />
     <Content Include="favicon.ico" />
