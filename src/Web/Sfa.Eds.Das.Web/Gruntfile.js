@@ -1,4 +1,4 @@
-/// <binding ProjectOpened='build' />
+/// <binding />
 'use strict';
 
 module.exports = function (grunt) {
