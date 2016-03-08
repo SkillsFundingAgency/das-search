@@ -178,14 +178,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4561), Tuple.Create("\"", 4575)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4596), Tuple.Create("\"", 4610)
 
 #line 119 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4568), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 4603), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4568), false)
+, 4603), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -361,7 +361,16 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                            <div");
 
-WriteLiteral(" class=\"form-group\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 1399), Tuple.Create("\"", 1452)
+, Tuple.Create(Tuple.Create("", 1407), Tuple.Create("form-group", 1407), true)
+            
+            #line 39 "..\..\Views\Standard\Detail.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1417), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            
+            #line default
+            #line hidden
+, 1418), false)
+);
 
 WriteLiteral(">\r\n                                <label");
 
@@ -398,14 +407,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1993), Tuple.Create("\"", 2018)
+WriteAttribute("value", Tuple.Create(" value=\"", 2028), Tuple.Create("\"", 2053)
             
             #line 48 "..\..\Views\Standard\Detail.cshtml"
-                                            , Tuple.Create(Tuple.Create("", 2001), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                                            , Tuple.Create(Tuple.Create("", 2036), Tuple.Create<System.Object, System.Int32>(Model.StandardId
             
             #line default
             #line hidden
-, 2001), false)
+, 2036), false)
 );
 
 WriteLiteral(">\r\n                                <input");
