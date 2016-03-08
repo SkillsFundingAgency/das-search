@@ -20,9 +20,25 @@
         public async Task<IEnumerable<Provider>> GetProviders()
         {
             var incoming = _importer.GetProviders();
-            return MapEach(incoming.Result);
-        }
 
+            var result = incoming.Result.Select(providerImport => new Provider
+            {
+                UkPrn = providerImport.Ukprn.ToString(),
+                Email = providerImport.Email,
+                EmployerSatisfaction = providerImport.EmployerSatisfaction,
+                LearnerSatisfaction = providerImport.LearnerSatisfaction,
+                MarketingInfo = providerImport.MarketingInfo,
+                Name = providerImport.Name,
+                Phone = providerImport.Phone,
+                Website = providerImport.Website,
+                Locations = providerImport.Locations,
+                Frameworks = providerImport.Frameworks,
+                Standards = providerImport.Standards
+            }).ToList();
+
+            return result;// MapEach(incoming.Result);
+        }
+        /*
         private IEnumerable<Provider> MapEach(IEnumerable<ProviderImport> incoming)
         {
             foreach (var provider in incoming)
@@ -67,6 +83,6 @@
                 }
 
             }
-        }
+        }*/
     }
 }

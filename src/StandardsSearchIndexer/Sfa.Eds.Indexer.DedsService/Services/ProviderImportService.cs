@@ -117,16 +117,16 @@ namespace Sfa.Infrastructure.Services
                 {
                     ID = location.ID,
                     Name = location.Name,
+                    Email = location.Email,
+                    Phone = location.Phone,
+                    Website = location.Website,
                     Address = new Eds.Das.Indexer.Core.Models.ProviderImport.Address
                     {
-                        Phone = location.Address.Phone,
-                        Email = location.Address.Email,
                         Address1 = location.Address.Address1,
                         Address2 = location.Address.Address2,
-                        Country = location.Address.Country,
+                        County = location.Address.County,
                         Postcode = location.Address.Postcode,
                         Town = location.Address.Postcode,
-                        Website = location.Address.Website,
                         Lat = location.Address.Lat,
                         Long = location.Address.Long
                     }
@@ -156,7 +156,6 @@ namespace Sfa.Infrastructure.Services
 
             return providerImport;
         }
-
 
         private static IMapper CreateMapper()
         {

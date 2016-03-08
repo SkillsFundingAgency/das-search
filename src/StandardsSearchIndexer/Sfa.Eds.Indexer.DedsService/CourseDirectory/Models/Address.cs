@@ -20,7 +20,7 @@ namespace Sfa.Infrastructure.Models
         /// <summary>
         ///     Optional.
         /// </summary>
-        public string Country { get; set; }
+        public string County { get; set; }
 
         /// <summary>
         ///     Optional.
@@ -74,10 +74,10 @@ namespace Sfa.Infrastructure.Models
                 {
                     Address2 = (string)address2Value;
                 }
-                var countryValue = inputObject["country"];
+                var countryValue = inputObject["county"];
                 if (countryValue != null && countryValue.Type != JTokenType.Null)
                 {
-                    Country = (string)countryValue;
+                    County = (string)countryValue;
                 }
                 var emailValue = inputObject["email"];
                 if (emailValue != null && emailValue.Type != JTokenType.Null)
