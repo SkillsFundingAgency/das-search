@@ -93,6 +93,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
         }
 
+        [Then(@"I should see matching Standard '(.*)' standards on result page")]
+        public void ThenIShouldSeeMatchingStandardStandardsOnResultPage(string p0)
+        {
+            srchPage.verifySearchedStandardFoundinResultPage(p0);
+        }
+
+
         [Then(@"I should see standards count on result page")]
         public void ThenIShouldSeeStandardsCountOnResultPage()
         {
