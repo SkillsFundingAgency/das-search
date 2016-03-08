@@ -36,7 +36,7 @@
 
                         <h2 class="heading-medium">Find training providers</h2>
                         <form action="/g-cloud/search" method="get" class="search-box">
-                            <div class="form-group">
+                            <div class="form-group @(@Model.HasError ? " error" : "")">
                                 <label class="form-label" for="postcode">
                                     Enter postcode@* or partial postcode *@
                                     <p>
