@@ -12,6 +12,7 @@
     <AssemblyName>Sfa.Das.CloudService.Web</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>Sfa.Das.CloudService.Web</Name>
+    <UseWebProjectPorts>True</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

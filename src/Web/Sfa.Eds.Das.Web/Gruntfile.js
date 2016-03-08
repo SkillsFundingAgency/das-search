@@ -1,3 +1,4 @@
+/// <binding ProjectOpened='build' />
 'use strict';
 
 module.exports = function (grunt) {
@@ -18,9 +19,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'src/styles/',
+                    cwd: 'Content/src/styles/',
                     src: '*.scss',
-                    dest: 'dist/css/',
+                    dest: 'Content/dist/css/',
                     ext: '.min.css'
                 }]
             }
@@ -35,9 +36,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'dist/css/',
+                    cwd: 'Content/dist/css/',
                     src: '{,*/}*.css',
-                    dest: 'dist/css/'
+                    dest: 'Content/dist/css/'
                 }]
             }
         },
@@ -46,9 +47,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'src/images/',
+                    cwd: 'Content/src/images/',
                     src: '{,*/}*.svg',
-                    dest: 'dist/images/'
+                    dest: 'Content/dist/images/'
                 }]
             }
         },
@@ -56,16 +57,18 @@ module.exports = function (grunt) {
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             styles: {
-                    files: ['src/styles/{,*/}*.scss'],
+                    files: ['Content/src/styles/{,*/}*.scss'],
                     tasks: ['sass', 'autoprefixer']
             },
 
             svg: {
-                    files: ['src/images/{,*/}*.svg'],
+                    files: ['Content/src/images/{,*/}*.svg'],
                     tasks: ['svgmin']
             }
         }
     });
+
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     grunt.registerTask('build', [
       'sass',

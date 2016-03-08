@@ -10,8 +10,11 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="" />
     </ConfigurationSettings>
+<<<<<<< HEAD
     <Certificates>
       <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="" thumbprintAlgorithm="sha1" />
     </Certificates>
+=======
+>>>>>>> 0799d81c6449a266306cadd01f10e11fa3a95c2c
   </Role>
 </ServiceConfiguration>

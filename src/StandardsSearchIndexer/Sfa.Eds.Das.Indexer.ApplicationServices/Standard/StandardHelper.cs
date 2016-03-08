@@ -134,21 +134,23 @@
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var dateTime = scheduledRefreshDateTime.AddDays(-2);
+            var indices = _client.IndicesStats().Indices;
 
-            for (var i = 0; i < 23; i++)
+            var standardIndexToday = string.Concat("cistandardindexesalias-", scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd"));
+            var standardIndexOneDayAgo = string.Concat("cistandardindexesalias-", scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd"));
+            var standardIndexTwoDaysAgo = string.Concat("cistandardindexesalias-", scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd"));
+            var providerIndex = "provider";
+            var logIndex = "log";
+            var kibanaIndex = "kibana";
+
+            foreach (var index in indices.Where(index => !index.Key.Contains(standardIndexToday)
+                                                         && !index.Key.Contains(standardIndexOneDayAgo)
+                                                         && !index.Key.Contains(standardIndexTwoDaysAgo)
+                                                         && !index.Key.Contains(providerIndex)
+                                                         && !index.Key.Contains(logIndex)
+                                                         && !index.Key.Contains(kibanaIndex)))
             {
-                var timeSpan = new TimeSpan(i, 0, 0);
-                var dateTimeTmp = dateTime.Date + timeSpan;
-
-                var indexName = GetIndexNameAndDateExtension(dateTimeTmp);
-
-                var indexExistsResponse = _client.IndexExists(indexName);
-
-                if (indexExistsResponse.Exists)
-                {
-                    _client.DeleteIndex(indexName);
-                }
+                _client.DeleteIndex(index.Key);
             }
         }
 

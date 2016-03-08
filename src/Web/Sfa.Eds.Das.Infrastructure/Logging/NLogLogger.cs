@@ -1,7 +1,8 @@
 ﻿using System;
-using Sfa.Eds.Das.Core.Logging;
+using Microsoft.ApplicationInsights.NLogTarget;
 using NLog;
 using NLog.Targets.ElasticSearch;
+using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Eds.Das.Infrastructure.Logging
 {
@@ -9,6 +10,7 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
     {
         private readonly ILogger _logger;
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
+        private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
 
         public NLogLogger(Type loggerType)
         {

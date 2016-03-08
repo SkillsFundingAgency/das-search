@@ -18,7 +18,6 @@ namespace Sfa.Infrastructure.DependencyResolution
         {
             For<IGetStandardLevel>().Use<LarsClient>();
             For<ILarsSettings>().Use<LarsSettings>();
-            For<ILog>().Use<NLogService>();
             For<IGetActiveProviders>().Use<FcsActiveProvidersClient>();
             For<IConvertFromCsv>().Use<CsvService>();
             For<IVstsClient>().Use<VstsClient>();
@@ -26,7 +25,8 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IHttpGet>().Use<HttpService>();
             For<IHttpPost>().Use<HttpService>();
             For<IInfrastructureSettings>().Use<InfrastructureSettings>();
-            For<ILog>().Use<NLogService>();
+            //For<ILog>().Use<NLogService>();
+            For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
         }
     }

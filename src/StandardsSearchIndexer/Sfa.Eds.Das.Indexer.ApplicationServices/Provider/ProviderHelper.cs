@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
+﻿using Sfa.Eds.Das.Indexer.Core.Models;
+
+namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
     using System;
     using System.Collections.Generic;
@@ -19,9 +21,9 @@
     {
         private readonly IGetActiveProviders _activeProviderClient;
 
-        private readonly IElasticClient _client;
-
         private readonly IGetProviders _courseDirectoryClient;
+
+        private readonly IElasticClient _client;
 
         private readonly IIndexSettings<Provider> _settings;
 
@@ -53,6 +55,7 @@
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
+            // TODO: replace this method with CreateIndexForBulkData when Course directory data is available
             var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
 
             var indexExistsResponse = _client.IndexExists(indexName);
@@ -120,6 +123,122 @@
             return exists;
         }
 
+        public bool CreateIndexForBulkData(DateTime scheduledRefreshDateTime)
+        {
+            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+
+            var indexExistsResponse = _client.IndexExists(indexName);
+
+            // If it already exists and is empty, let's delete it.
+            if (indexExistsResponse.Exists)
+            {
+                Log.Warn("Index already exists, deleting and creating a new one");
+
+                _client.DeleteIndex(indexName);
+            }
+
+            // create index
+            var json = @"
+                {
+                    ""mappings"": 
+                    {
+                        ""provider"": 
+                        { 
+                            ""properties"": 
+                            {
+                                ""ukprn"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""name"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardCode"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""venueName"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""marketingInfo"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardInfoUrl"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""deliveryModes"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""website"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""phone"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""email"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""contactUsUrl"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardsId"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""locationPoint"":
+                                {
+                                    ""type"": ""geo_point""
+                                },
+                                ""location"": 
+                                {
+                                    ""type"": ""geo_shape""
+                                },
+                                ""address"": 
+                                {
+                                    ""type"": ""nested"",
+                                    ""properties"": 
+                                    {
+                                        ""address1"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""address2"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },  
+                                        ""town"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""county"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""postcode"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }";
+            _client.Raw.IndicesCreatePost(indexName, json);
+
+            var exists = _client.IndexExists(indexName).Exists;
+            return exists;
+        }
+
         public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Provider> entries)
         {
             try
@@ -170,21 +289,23 @@
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var dateTime = scheduledRefreshDateTime.AddDays(-2);
+            var indices = _client.IndicesStats().Indices;
 
-            for (var i = 0; i < 23; i++)
+            var providerIndexToday = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd")}";
+            var providerIndexOneDayAgo = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd")}";
+            var providerIndexTwoDaysAgo = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd")}";
+            var standardIndex = "standard";
+            var logIndex = "log";
+            var kibanaIndex = "kibana";
+
+            foreach (var index in indices.Where(index => !index.Key.Contains(providerIndexToday)
+                                                         && !index.Key.Contains(providerIndexOneDayAgo)
+                                                         && !index.Key.Contains(providerIndexTwoDaysAgo)
+                                                         && !index.Key.Contains(standardIndex)
+                                                         && !index.Key.Contains(logIndex)
+                                                         && !index.Key.Contains(kibanaIndex)))
             {
-                var timeSpan = new TimeSpan(i, 0, 0);
-                var dateTimeTmp = dateTime.Date + timeSpan;
-
-                var indexName = GetIndexNameAndDateExtension(dateTimeTmp);
-
-                var indexExistsResponse = _client.IndexExists(indexName);
-
-                if (indexExistsResponse.Exists)
-                {
-                    _client.DeleteIndex(indexName);
-                }
+                _client.DeleteIndex(index.Key);
             }
         }
 
@@ -238,6 +359,74 @@
                 provider.Radius,
                 @"mi"" }}");
             return rawProvider;
+        }
+
+        public List<string> CreateListRawFormat(ProviderBulk provider, StandardProvider standard)
+        {
+            var list = new List<string>();
+
+            foreach (var standardLocation in standard.Locations)
+            {
+                var location = provider.Locations.FirstOrDefault(x => x.Id == standardLocation.Id);
+
+                var i = 0;
+                var deliveryModes = new StringBuilder();
+                foreach (var deliveryMode in standardLocation.DeliveryModes)
+                {
+                    deliveryModes.Append(i == 0 ? string.Concat(@"""", deliveryMode, @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
+
+                    i++;
+                }
+
+                var rawProvider = string.Concat(
+                @"{ ""ukprn"": """,
+                provider.UkPrn,
+                @""", ""name"": """,
+                provider.Name ?? "Unspecified",
+                @""", ""standardcode"": ",
+                standard.StandardCode,
+                @", ""locationName"": """,
+                location.Name ?? "Unspecified",
+                @""", ""marketingInfo"": """,
+                standard.MarketingInfo ?? "Unspecified",
+                @""", ""phone"": """,
+                standard.Contact.Phone ?? "Unspecified",
+                @""", ""email"": """,
+                standard.Contact.Email ?? "Unspecified",
+                @""", ""contactUsUrl"": """,
+                standard.Contact.ContactUsUrl ?? "Unspecified",
+                @""", ""standardInfoUrl"": """,
+                standard.StandardInfoUrl ?? "Unspecified",
+                @""", ""deliveryModes"": [",
+                deliveryModes,
+                @"], ""website"": """,
+                location.Website ?? "Unspecified",
+                @""", ""address"": {""address1"":""",
+                location.Address.Address1 ?? "Unspecified",
+                @""", ""address2"": """,
+                location.Address.Address2 ?? "Unspecified",
+                @""", ""town"": """,
+                location.Address.Town ?? "Unspecified",
+                @""", ""county"": """,
+                location.Address.County ?? "Unspecified",
+                @""", ""postcode"": """,
+                location.Address.Postcode ?? "Unspecified",
+                @"""}, ""locationPoint"": [",
+                location.Address.Long,
+                ", ",
+                location.Address.Lat,
+                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
+                location.Address.Long,
+                ", ",
+                location.Address.Lat,
+                @"], ""radius"": """,
+                standardLocation.Radius,
+                @"mi"" }}");
+
+                list.Add(rawProvider);
+            }
+
+            return list;
         }
 
         private Task IndexProviders(string indexName, IEnumerable<Provider> providers)

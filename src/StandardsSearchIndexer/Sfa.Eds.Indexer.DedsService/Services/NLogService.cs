@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sfa.Deds.Services
+﻿namespace Sfa.Infrastructure.Services
 {
+    using System;
+
+    using Microsoft.ApplicationInsights.NLogTarget;
+
     using NLog;
+    using NLog.Targets.ElasticSearch;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    
     public class NLogService : ILog
     {
+        private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
+        private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
+
         private Logger logger;
-        public NLogService()
+        public NLogService(Type loggerType)
         {
-            logger = LogManager.GetLogger("");
+            logger = LogManager.GetLogger(loggerType?.ToString() ?? "NullIndexLogger");
         }
 
         public void Debug(object message)

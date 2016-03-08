@@ -1,6 +1,7 @@
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
     using System;
+    using System.Configuration;
     using System.Net;
     using System.Threading;
 
@@ -47,6 +48,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
         {
             // Set the maximum number of concurrent connections
             ServicePointManager.DefaultConnectionLimit = 12;
+            SetupApplicationInsights();
             _container = IoC.Initialize();
             Log = _container.GetInstance<ILog>();
             _commonSettings = _container.GetInstance<IWorkerRoleSettings>();
@@ -69,6 +71,11 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
             base.OnStop();
 
             Log.Info("Stopped...");
+        }
+
+        private void SetupApplicationInsights()
+        {
+            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["iKey"];
         }
     }
 }
