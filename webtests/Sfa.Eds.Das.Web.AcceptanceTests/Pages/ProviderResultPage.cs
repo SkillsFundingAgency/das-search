@@ -57,6 +57,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Assert.True(isElementPresent(providerlist1, p0));
         }
 
+        public void verifyProviderLocationinSearchResults(String p0)
+        {
+            Assert.True(isElementPresent(providerlist1, p0));
+        }
+
         public void verifyProviderNotinSearchResults(String p0)
         {
             Assert.True(isElementNotPresent(providerlist1, p0));

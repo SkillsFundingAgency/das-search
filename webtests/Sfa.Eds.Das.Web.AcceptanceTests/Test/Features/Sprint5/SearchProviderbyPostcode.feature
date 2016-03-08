@@ -45,30 +45,29 @@ Scenario Outline:Search Provider by postcode falling inside more than one provid
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should see provider "skills team ltd" in provider results page.
-And I should see provider "aspire achieve advance limited" in provider results page.
+Then I should see provider "aspire achieve advance limited" in provider results page.
 Examples:
 | Postcode | id |
 | NW66AY   | 25 |
 | B9 5NA   | 25 |
 
-Scenario Outline:Same Provider suppoerting two different standards operating from same location but with different radiuses-1
+Scenario Outline:Same Provider supporting two different standards operating from same location but with different radiuses-1
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
-When I Search for provider
-Then I should not see provider "SOUTH & CITY COLLEGE BIRMINGHAM" in result page
+When I search Search for provider
+Then I should not see provider "SOUTH & CITY COLLEGE BIRMINGHAM" in provider results page.
 Examples:
 | id | Postcode |
 | 25 | CV7 8ED  |
 
 
 
-Scenario Outline: Same Provider suppoerting two different standards operating from same location but with different radiuses-2
+Scenario Outline: Same Provider supporting two different standards operating from same location but with different radiuses-2
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
-When I Search for provider
-Then I should see provider "SOUTH & CITY COLLEGE BIRMINGHAM" in result page
-And I should see location venue of provider "Bordesley Green Campus"
+When I search Search for provider
+Then I should see provider "south & city college birmingham" in provider results page.
+#And I should see location venue of provider "bordesley green campus."
 Examples:
 | id | Postcode |
 | 25 | B46 3DJ  |
