@@ -304,7 +304,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             }
             Log.Debug("Deletion completed...");
         }
-
+        /*
         private string CreateProviderRawFormat(Provider provider)
         {
             var i = 0;
@@ -349,14 +349,14 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 @"mi"" }}");
             return rawProvider;
         }
-
-        public List<string> CreateListRawFormat(ProviderBulk provider, StandardProvider standard)
+        */
+        public List<string> CreateListRawFormat(Provider provider, Core.Models.ProviderImport.Standard standard)
         {
             var list = new List<string>();
 
             foreach (var standardLocation in standard.Locations)
             {
-                var location = provider.Locations.FirstOrDefault(x => x.Id == standardLocation.Id);
+                var location = provider.Locations.FirstOrDefault(x => x.ID == standardLocation.ID);
 
                 var i = 0;
                 var deliveryModes = new StringBuilder();
@@ -427,9 +427,17 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             {
                 try
                 {
-                    provider.ProviderId = id;
-                    _client.Raw.Index(indexName, "provider", CreateProviderRawFormat(provider));
-                    id++;
+                    foreach (var standard in provider.Standards)
+                    {
+                        var queryList = CreateListRawFormat(provider, standard);
+                        //provider.ProviderId = id;
+                        foreach (var query in queryList)
+                        {
+                            _client.Raw.Index(indexName, "provider", query);
+                        }
+                        id++;
+                    }
+                    
                 }
                 catch (Exception e)
                 {
