@@ -257,10 +257,12 @@ namespace Sfa.Infrastructure
                 {
                     responseDoc = JToken.Parse(responseContent);
                 }
+
                 if (responseDoc != null)
                 {
                     resultModel = ProviderCollection.DeserializeJson(responseDoc);
                 }
+
                 result.Body = resultModel;
             }
 

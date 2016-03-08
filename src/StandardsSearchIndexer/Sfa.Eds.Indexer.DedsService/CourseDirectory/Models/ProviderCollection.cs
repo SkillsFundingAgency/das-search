@@ -16,13 +16,14 @@ namespace Sfa.Infrastructure.Models
         {
             IList<Provider> deserializedObject = new List<Provider>();
             // HACK: fix for the api implementation being wrong
-            //foreach (var iListValue in ((JArray)inputObject))
-            foreach (var iListValue in (JArray)((JObject)inputObject).Property("providers").Value)
+            //foreach (var iListValue in (JArray)((JObject)inputObject).Property("providers").Value)
+            foreach (var iListValue in (JArray)inputObject)
             {
                 var provider = new Provider();
                 provider.DeserializeJson(iListValue);
                 deserializedObject.Add(provider);
             }
+
             return deserializedObject;
         }
     }
