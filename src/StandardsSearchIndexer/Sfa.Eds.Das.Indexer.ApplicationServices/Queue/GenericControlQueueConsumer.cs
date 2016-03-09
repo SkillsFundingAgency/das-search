@@ -46,15 +46,12 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
                         try
                         {
                             var queuename = _appServiceSettings.QueueName(typeof(T));
-                            var times = _cloudQueueService.GetInsertionTimes(queuename);
+                            var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
 
                             if (times.Any())
                             {
                                 var time = times.FirstOrDefault();
-                                if (time != null)
-                                {
-                                    await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
-                                }
+                                await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
                             }
 
                             _clearQueue.ClearQueue(queuename);

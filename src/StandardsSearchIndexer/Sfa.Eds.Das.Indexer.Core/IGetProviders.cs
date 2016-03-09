@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     public interface IGetProviders
     {

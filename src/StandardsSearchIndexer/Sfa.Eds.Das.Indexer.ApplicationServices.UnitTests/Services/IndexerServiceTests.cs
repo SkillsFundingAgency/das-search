@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Indexer.Common.UnitTests.Services
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Services
 {
     using System;
     using System.Collections.Generic;
@@ -8,12 +8,11 @@
 
     using NUnit.Framework;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Infrastructure;
+    using ApplicationServices.Services.Interfaces;
+    using Settings;
+    using Core;
+    using Core.Models;
 
     [TestFixture]
     public class IndexerServiceTests

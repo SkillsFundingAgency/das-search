@@ -5,7 +5,7 @@
 
     using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     public class StubCourseDirectoryClient : IGetProviders
     {

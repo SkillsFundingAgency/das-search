@@ -3,7 +3,7 @@
     using System.Configuration;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     public class ProviderIndexSettings : IIndexSettings<Provider>
     {

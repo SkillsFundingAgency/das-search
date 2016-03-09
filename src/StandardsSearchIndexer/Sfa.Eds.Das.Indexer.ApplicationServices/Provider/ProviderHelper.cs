@@ -4,7 +4,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -12,14 +11,18 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
     using Nest;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+
+    using Provider = Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
     public class ProviderHelper : IGenericIndexerHelper<Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
+
+        private readonly IIndexMaintenanceService _indexMaintenanceService;
 
         private readonly IGetProviders _courseDirectoryClient;
 
@@ -34,11 +37,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             IElasticsearchClientFactory elasticsearchClientFactory,
             IGetProviders courseDirectoryClient,
             IGetActiveProviders activeProviderClient,
+            IIndexMaintenanceService indexMaintenanceService,
             ILog log)
         {
             _settings = settings;
             _courseDirectoryClient = courseDirectoryClient;
             _activeProviderClient = activeProviderClient;
+            _indexMaintenanceService = indexMaintenanceService;
 
             _client = elasticsearchClientFactory.GetElasticClient();
             Log = log;
@@ -56,7 +61,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
             // TODO: replace this method with CreateIndexForBulkData when Course directory data is available
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             var indexExistsResponse = _client.IndexExists(indexName);
 
@@ -125,7 +130,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool CreateIndexForBulkData(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             var indexExistsResponse = _client.IndexExists(indexName);
 
@@ -245,7 +250,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             {
                 Log.Debug("Indexing " + entries.Count + " providers");
 
-                var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+                var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
                 await IndexProviders(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -256,7 +261,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             var a = _client.Search<Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
             return a.Any();
@@ -265,7 +270,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = _settings.IndexesAlias;
-            var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var newIndexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             if (!CheckIfAliasExists(indexAlias))
             {
@@ -289,31 +294,15 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var indices = _client.IndicesStats().Indices;
+            var indicesToBeDelete = _indexMaintenanceService.GetOldIndices(_settings.IndexesAlias, scheduledRefreshDateTime, _client.IndicesStats().Indices);
 
-            var providerIndexToday = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd")}";
-            var providerIndexOneDayAgo = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd")}";
-            var providerIndexTwoDaysAgo = $"{_settings.IndexesAlias}-{scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd")}";
-            var standardIndex = "standard";
-            var logIndex = "log";
-            var kibanaIndex = "kibana";
-
-            foreach (var index in indices.Where(index => !index.Key.Contains(providerIndexToday)
-                                                         && !index.Key.Contains(providerIndexOneDayAgo)
-                                                         && !index.Key.Contains(providerIndexTwoDaysAgo)
-                                                         && !index.Key.Contains(standardIndex)
-                                                         && !index.Key.Contains(logIndex)
-                                                         && !index.Key.Contains(kibanaIndex)))
+            Log.Debug($"Deleting {indicesToBeDelete.Count()} old provider indexes...");
+            foreach (var index in indicesToBeDelete)
             {
-                _client.DeleteIndex(index.Key);
+                Log.Debug($"Deleting {index}");
+                _client.DeleteIndex(index);
             }
-        }
-
-        public string GetIndexNameAndDateExtension(DateTime dateTime)
-        {
-            return
-                string.Format("{0}-{1}", _settings.IndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH"))
-                    .ToLower(CultureInfo.InvariantCulture);
+            Log.Debug("Deletion completed...");
         }
 
         private string CreateProviderRawFormat(Provider provider)

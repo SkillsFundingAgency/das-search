@@ -4,6 +4,8 @@ using StructureMap;
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
 {
     using ApplicationServices.Queue;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;

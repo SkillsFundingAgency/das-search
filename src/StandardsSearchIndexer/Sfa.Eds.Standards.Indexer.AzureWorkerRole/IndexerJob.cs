@@ -5,7 +5,6 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
     using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
 
     public class IndexerJob : IIndexerJob
     {

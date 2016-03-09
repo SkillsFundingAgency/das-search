@@ -7,12 +7,12 @@
     using LINQtoCSV;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.Common.Extensions;
 
     public class CsvService : IConvertFromCsv
     {
-        public ICollection<T> CsvTo<T>(string result) where T : class, new()
+        public ICollection<T> CsvTo<T>(string result)
+            where T : class, new()
         {
             var cc = new CsvContext();
             var stream = result.GenerateStreamFromString();

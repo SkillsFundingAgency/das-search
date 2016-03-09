@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
     using Nest;
 

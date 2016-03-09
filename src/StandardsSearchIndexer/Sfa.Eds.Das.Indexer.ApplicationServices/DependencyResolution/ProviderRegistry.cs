@@ -6,7 +6,7 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Common.Settings;
     using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     using StructureMap;
 
@@ -18,6 +18,7 @@
             For<IGetProviders>().Use<StubCourseDirectoryClient>();
             For<IGenericIndexerHelper<Provider>>().Use<ProviderHelper>();
             For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
+            For<IIndexMaintenanceService>().Use<IndexMaintenanceService>();
         }
     }
 }

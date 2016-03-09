@@ -19,7 +19,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         private readonly ManualResetEvent _runCompleteEvent = new ManualResetEvent(false);
 
-        private ILog Log;
+        private ILog _logger;
 
         private IWorkerRoleSettings _commonSettings;
 
@@ -27,7 +27,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public override void Run()
         {
-            Log.Info("Starting indexer... ");
+            _logger.Info("Starting indexer... ");
 
             while (true)
             {
@@ -37,7 +37,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
                 }
                 catch (Exception ex)
                 {
-                    Log.Fatal("Exception from  " + ex);
+                    _logger.Fatal("Exception from  " + ex);
                 }
 
                 Thread.Sleep(TimeSpan.FromMinutes(double.Parse(_commonSettings.WorkerRolePauseTime ?? "10")));
@@ -50,27 +50,27 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
             ServicePointManager.DefaultConnectionLimit = 12;
             SetupApplicationInsights();
             _container = IoC.Initialize();
-            Log = _container.GetInstance<ILog>();
+            _logger = _container.GetInstance<ILog>();
             _commonSettings = _container.GetInstance<IWorkerRoleSettings>();
 
             // For information on handling configuration changes see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
             var result = base.OnStart();
 
-            Log.Info("Started...");
+            _logger.Info("Started...");
 
             return result;
         }
 
         public override void OnStop()
         {
-            Log.Info("Stopping...");
+            _logger.Info("Stopping...");
 
             _cancellationTokenSource.Cancel();
             _runCompleteEvent.WaitOne();
 
             base.OnStop();
 
-            Log.Info("Stopped...");
+            _logger.Info("Stopped...");
         }
 
         private void SetupApplicationInsights()

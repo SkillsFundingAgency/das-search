@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,11 +9,10 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Models;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
-    using Sfa.Eds.Das.Indexer.Common.Extensions;
     using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.StandardIndexer.Settings;
 
     public class StandardHelper : IGenericIndexerHelper<MetaDataItem>
     {
@@ -24,27 +22,26 @@
 
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
-        private readonly IGetStandardLevel _getStandardLevel;
-
         private readonly IMetaDataHelper _metaDataHelper;
+
+        private readonly IIndexMaintenanceService _indexMaintenanceService;
 
         private readonly IStandardIndexSettings _settings;
 
         private readonly ILog Log;
 
-        public StandardHelper(
-            IGetStandardLevel getStandardLevel,
-            IBlobStorageHelper blobStorageHelper,
+        public StandardHelper(IBlobStorageHelper blobStorageHelper,
             IStandardIndexSettings settings,
             IElasticsearchClientFactory elasticsearchClientFactory,
             IMetaDataHelper metaDataHelper,
+            IIndexMaintenanceService indexMaintenanceService,
             ILog log)
         {
-            _getStandardLevel = getStandardLevel;
             _blobStorageHelper = blobStorageHelper;
             _settings = settings;
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _metaDataHelper = metaDataHelper;
+            _indexMaintenanceService = indexMaintenanceService;
             Log = log;
 
             _client = _elasticsearchClientFactory.GetElasticClient();
@@ -52,15 +49,13 @@
 
         public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<MetaDataItem> entries)
         {
-            //Log.Debug("Uploading " + entries.Count() + " standard's PDF to Azure");
 
             try
             {
-                //await entries.ForEachAsync(UploadStandardPdf).ConfigureAwait(false);
 
                 Log.Debug("Indexing " + entries.Count() + " standards");
 
-                var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+                var indexNameAndDateExtension = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
                 await IndexStandards(indexNameAndDateExtension, entries).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -78,7 +73,7 @@
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
             var indexExistsResponse = _client.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -102,7 +97,7 @@
 
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
 
             return _client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents.Any();
         }
@@ -110,7 +105,7 @@
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = _settings.StandardIndexesAlias;
-            var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime);
+            var newIndexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
 
             if (!CheckIfAliasExists(indexAlias))
             {
@@ -134,31 +129,15 @@
 
         public void DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var indices = _client.IndicesStats().Indices;
+            var indicesToBeDelete = _indexMaintenanceService.GetOldIndices(_settings.StandardIndexesAlias, scheduledRefreshDateTime, _client.IndicesStats().Indices);
 
-            var standardIndexToday = string.Concat("cistandardindexesalias-", scheduledRefreshDateTime.ToUniversalTime().ToString("yyyy-MM-dd"));
-            var standardIndexOneDayAgo = string.Concat("cistandardindexesalias-", scheduledRefreshDateTime.AddDays(-1).ToUniversalTime().ToString("yyyy-MM-dd"));
-            var standardIndexTwoDaysAgo = string.Concat("cistandardindexesalias-", scheduledRefreshDateTime.AddDays(-2).ToUniversalTime().ToString("yyyy-MM-dd"));
-            var providerIndex = "provider";
-            var logIndex = "log";
-            var kibanaIndex = "kibana";
-
-            foreach (var index in indices.Where(index => !index.Key.Contains(standardIndexToday)
-                                                         && !index.Key.Contains(standardIndexOneDayAgo)
-                                                         && !index.Key.Contains(standardIndexTwoDaysAgo)
-                                                         && !index.Key.Contains(providerIndex)
-                                                         && !index.Key.Contains(logIndex)
-                                                         && !index.Key.Contains(kibanaIndex)))
+            Log.Debug($"Deleting {indicesToBeDelete.Count} old standard indexes...");
+            foreach (var index in indicesToBeDelete)
             {
-                _client.DeleteIndex(index.Key);
+                Log.Debug($"Deleting {index}");
+                _client.DeleteIndex(index);
             }
-        }
-
-        public string GetIndexNameAndDateExtension(DateTime dateTime)
-        {
-            return
-                string.Format("{0}-{1}", _settings.StandardIndexesAlias, dateTime.ToUniversalTime().ToString("yyyy-MM-dd-HH"))
-                    .ToLower(CultureInfo.InvariantCulture);
+            Log.Debug("Deletion completed...");
         }
 
         public void UpdateMetadataRepositoryWithNewStandards()

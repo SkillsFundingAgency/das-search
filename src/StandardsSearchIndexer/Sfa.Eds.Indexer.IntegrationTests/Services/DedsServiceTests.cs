@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-using Sfa.Eds.Das.StandardIndexer.Settings;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 {
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
     using Sfa.Eds.Das.Indexer.Core;
 
     [TestFixture]

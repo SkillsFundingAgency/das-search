@@ -1,10 +1,8 @@
-﻿using System.Configuration;
-
-namespace Sfa.Eds.Das.StandardIndexer.Settings
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
 {
+    using System.Configuration;
+
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Common.Models;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
     public class StandardIndexSettings : IStandardIndexSettings, IIndexSettings<MetaDataItem>

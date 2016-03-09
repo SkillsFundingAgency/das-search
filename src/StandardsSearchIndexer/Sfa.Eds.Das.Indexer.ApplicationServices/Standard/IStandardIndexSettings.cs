@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.StandardIndexer.Settings
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
 {
     public interface IStandardIndexSettings
     {

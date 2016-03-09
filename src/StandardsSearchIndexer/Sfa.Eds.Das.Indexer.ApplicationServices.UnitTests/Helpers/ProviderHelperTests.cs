@@ -10,10 +10,11 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     [TestFixture]
     public class ProviderHelperTests
@@ -26,8 +27,8 @@
             var mockElasticSearchClient = new Mock<IElasticsearchClientFactory>();
             var mockCourseDirectoryClient = new Mock<IGetProviders>();
             var mockActiveProviderClient = new Mock<IGetActiveProviders>();
-
-            var sut = new ProviderHelper(settings, mockElasticSearchClient.Object, mockCourseDirectoryClient.Object, mockActiveProviderClient.Object, Mock.Of<ILog>());
+            var indexServiceMock = new Mock<IIndexMaintenanceService>();
+            var sut = new ProviderHelper(settings, mockElasticSearchClient.Object, mockCourseDirectoryClient.Object, mockActiveProviderClient.Object, indexServiceMock.Object, Mock.Of<ILog>());
 
             mockCourseDirectoryClient.Setup(x => x.GetProviders()).Returns(TwoProvidersTask());
             mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new List<string>() { "123" });

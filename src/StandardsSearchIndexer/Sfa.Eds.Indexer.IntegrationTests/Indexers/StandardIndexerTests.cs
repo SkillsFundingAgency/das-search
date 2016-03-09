@@ -5,13 +5,9 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
     using FluentAssertions;
-
     using Nest;
-
     using NUnit.Framework;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
@@ -25,28 +21,26 @@
     [TestFixture]
     public class StandardIndexerTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-            _ioc = IoC.Initialize();
-            _standardSettings = _ioc.GetInstance<IIndexSettings<MetaDataItem>>();
-            _standardHelper = _ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
-
-            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
-            _elasticClient = elasticClientFactory.GetElasticClient();
-
-            _sut = _ioc.GetInstance<IIndexerService<MetaDataItem>>();
-        }
-
-        private IContainer _ioc;
-
         private IIndexSettings<MetaDataItem> _standardSettings;
 
         private IGenericIndexerHelper<MetaDataItem> _standardHelper;
 
-        private IIndexerService<MetaDataItem> _sut;
-
         private IElasticClient _elasticClient;
+
+        private IIndexMaintenanceService _indexMaintenanceService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            var ioc = IoC.Initialize();
+            _standardSettings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
+            _standardHelper = ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
+
+            var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
+            _elasticClient = elasticClientFactory.GetElasticClient();
+
+            _indexMaintenanceService = new IndexMaintenanceService();
+        }
 
         private void DeleteIndexIfExists(string indexName)
         {
@@ -94,7 +88,7 @@
         public void ShouldCreateScheduledIndexAndMapping()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _standardHelper.GetIndexNameAndDateExtension(scheduledDate);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _standardSettings.IndexesAlias);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
@@ -113,7 +107,7 @@
         public async Task ShouldRetrieveStandardSearchingForTitle()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _standardHelper.GetIndexNameAndDateExtension(scheduledDate);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _standardSettings.IndexesAlias);
 
             var standardsTest = GetStandardsTest().ToList();
             var expectedStandardResult = new MetaDataItem

@@ -1,15 +1,12 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
 
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.GovLearn;

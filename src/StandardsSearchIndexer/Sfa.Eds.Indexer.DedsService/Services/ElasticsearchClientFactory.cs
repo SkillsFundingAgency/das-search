@@ -4,7 +4,7 @@
 
     using Nest;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Infrastructure.Settings;
 
     public class ElasticsearchClientFactory : IElasticsearchClientFactory

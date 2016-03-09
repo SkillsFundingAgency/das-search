@@ -1,14 +1,11 @@
 ﻿namespace Sfa.Infrastructure.Services
 {
     using System;
-
     using Microsoft.ApplicationInsights.NLogTarget;
-
     using NLog;
     using NLog.Targets.ElasticSearch;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    
+
     public class NLogService : ILog
     {
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.

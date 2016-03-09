@@ -25,7 +25,6 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IHttpGet>().Use<HttpService>();
             For<IHttpPost>().Use<HttpService>();
             For<IInfrastructureSettings>().Use<InfrastructureSettings>();
-            //For<ILog>().Use<NLogService>();
             For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
         }

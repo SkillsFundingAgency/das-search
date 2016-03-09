@@ -4,10 +4,9 @@
 
     using NUnit.Framework;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
-    using Sfa.Eds.Das.Indexer.AzureWorkerRole;
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using ApplicationServices.Queue;
+    using AzureWorkerRole;
+    using Core.Models;
 
     [TestFixture]
     public class IndexerJobTests

@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.ProviderIndexer.Models
+﻿namespace Sfa.Eds.Das.Indexer.Core.Models
 {
     using System.Collections.Generic;
 

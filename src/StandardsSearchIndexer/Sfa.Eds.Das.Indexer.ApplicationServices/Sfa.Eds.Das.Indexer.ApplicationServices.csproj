@@ -72,6 +72,8 @@
     <Compile Include="Infrastructure\IUnzipStream.cs" />
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
+    <Compile Include="Services\IIndexService.cs" />
+    <Compile Include="Services\IndexMaintenanceService.cs" />
     <Compile Include="Standard\IMetaDataHelper.cs" />
     <Compile Include="Standard\MetaDataHelper.cs" />
     <Compile Include="Provider\ProviderHelper.cs" />
