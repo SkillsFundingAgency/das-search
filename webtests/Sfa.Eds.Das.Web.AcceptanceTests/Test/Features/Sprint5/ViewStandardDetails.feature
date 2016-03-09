@@ -19,16 +19,19 @@ Examples:
 | Qualifications              |
 | Professional registration   |
 
-@Feature-Standard_details
 @regression
-Scenario: Validate Standard detail page which has no bespoke contents
-Given I am on standard search result page
-When I click the standard title which has no bespoke content. 
-Then I should see standard detail 
-And I see only Standard title displayed
+Scenario Outline: Validate Standard detail page which has no bespoke contents
+Given I am on Search landing page
+And I enter keyword '<JOBROLE>' in search box
+And I click on search button
+When I choose any of the standard from search result page
+Then I see only Standard title displayed
 And I see level is displayed.
+Examples:
+| JOBROLE      |
+| Actuary      |
+| Dental Nurse |
 
-@Feature-Standard_details
 @regression
 Scenario: Validate typical length units is months only.
 Given I am on standard search result page
@@ -36,7 +39,7 @@ When I click on the Standard title
 Then is should see Standard page
 And I should see typical length is displayed in months only.
 
-@Feature-Standard_details
+
 @regression
 Scenario: Validate professional registration shown when it has data
 Given I have choosen a standard which has no progressional registration data populated

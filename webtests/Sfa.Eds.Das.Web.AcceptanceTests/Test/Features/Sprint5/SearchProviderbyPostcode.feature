@@ -22,7 +22,6 @@ Examples:
 | Postcode| id |
 | LN76HN  | 25 |
 
-
 @regression
 ## Provider not found , but other provider closer one found
 Scenario Outline: Search Provider by postcode outside  Provider radius 60 miles
