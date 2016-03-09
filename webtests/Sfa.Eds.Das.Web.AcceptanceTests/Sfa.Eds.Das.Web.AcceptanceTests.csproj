@@ -101,6 +101,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProviderbyPostcode.feature</DependentUpon>
     </Compile>
+    <Compile Include="Test\Features\Sprint5\ViewStandardDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewStandardDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint5\ViewTypicalLength.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewTypicalLength.feature</DependentUpon>
+    </Compile>
     <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +137,14 @@
     <None Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchProviderbyPostcode.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint5\ViewStandardDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewStandardDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint5\ViewTypicalLength.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewTypicalLength.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
