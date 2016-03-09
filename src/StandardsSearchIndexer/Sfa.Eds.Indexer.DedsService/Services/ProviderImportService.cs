@@ -42,105 +42,52 @@ namespace Sfa.Infrastructure.Services
 
         public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef> GetLocationRefFromIList(IList<Models.LocationRef> locations)
         {
-            List<Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef> result = new List<Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef>();
-            foreach (var location in locations)
+            return locations.Select(location => new Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef
             {
-                var locRef = new Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef
-                {
-                    ID = location.ID,
-                    MarketingInfo = location.MarketingInfo,
-                    Radius = int.Parse(location.Radius.ToString()),
-                    StandardInfoUrl = location.StandardInfoUrl,
-                    DeliveryModes = GetDeliveryModesFromIList(location.DeliveryModes)
-                };
-                result.Add(locRef);
-            }
-
-            return result;
+                ID = location.ID, MarketingInfo = location.MarketingInfo, Radius = int.Parse(location.Radius.ToString()), StandardInfoUrl = location.StandardInfoUrl, DeliveryModes = GetDeliveryModesFromIList(location.DeliveryModes)
+            }).ToList();
         }
 
         public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Standard> GetStandardsFromIList(IList<Models.Standard> standards)
         {
-            List<Eds.Das.Indexer.Core.Models.ProviderImport.Standard> result = new List<Eds.Das.Indexer.Core.Models.ProviderImport.Standard>();
-            foreach (var standard in standards)
+            return standards.Select(standard => new Eds.Das.Indexer.Core.Models.ProviderImport.Standard
             {
-                var stan = new Eds.Das.Indexer.Core.Models.ProviderImport.Standard
+                Contact = new Eds.Das.Indexer.Core.Models.ProviderImport.Contact
                 {
-                    Contact = new Eds.Das.Indexer.Core.Models.ProviderImport.Contact
-                    {
-                        Email = standard.Contact.Email,
-                        Phone = standard.Contact.Phone,
-                        ContactUsUrl = standard.Contact.ContactUsUrl
-                    },
-                    MarketingInfo = standard.MarketingInfo,
-                    StandardCode = standard.StandardCode,
-                    StandardInfoUrl = standard.StandardInfoUrl,
-                    Locations = GetLocationRefFromIList(standard.Locations)
-                };
-                result.Add(stan);
-            }
-
-            return result;
+                    Email = standard.Contact.Email, Phone = standard.Contact.Phone, ContactUsUrl = standard.Contact.ContactUsUrl
+                },
+                MarketingInfo = standard.MarketingInfo, StandardCode = standard.StandardCode, StandardInfoUrl = standard.StandardInfoUrl, Locations = GetLocationRefFromIList(standard.Locations)
+            }).ToList();
         }
 
         public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Framework> GetFrameworksFromIList(IList<Models.Framework> frameworks)
         {
-            List<Eds.Das.Indexer.Core.Models.ProviderImport.Framework> result = new List<Eds.Das.Indexer.Core.Models.ProviderImport.Framework>();
-            foreach (var framework in frameworks)
+            return frameworks.Select(framework => new Eds.Das.Indexer.Core.Models.ProviderImport.Framework
             {
-                var framew = new Eds.Das.Indexer.Core.Models.ProviderImport.Framework
+                Contact = new Eds.Das.Indexer.Core.Models.ProviderImport.Contact
                 {
-                    Contact = new Eds.Das.Indexer.Core.Models.ProviderImport.Contact
-                    {
-                        Email = framework.Contact.Email,
-                        Phone = framework.Contact.Phone,
-                        ContactUsUrl = framework.Contact.ContactUsUrl
-                    },
-                    Level = framework.Level,
-                    FrameworkCode = framework.FrameworkCode,
-                    PathwayCode = framework.PathwayCode,
-                    Locations = GetLocationRefFromIList(framework.Locations)
-                };
-                result.Add(framew);
-            }
-
-            return result;
+                    Email = framework.Contact.Email, Phone = framework.Contact.Phone, ContactUsUrl = framework.Contact.ContactUsUrl
+                },
+                Level = framework.Level, FrameworkCode = framework.FrameworkCode, PathwayCode = framework.PathwayCode, Locations = GetLocationRefFromIList(framework.Locations)
+            }).ToList();
         }
 
         public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Location> GetLocationFromIList(IList<Models.Location> locations)
         {
-            List<Eds.Das.Indexer.Core.Models.ProviderImport.Location> result = new List<Eds.Das.Indexer.Core.Models.ProviderImport.Location>();
-
-            foreach (var location in locations)
+            return locations.Select(location => new Eds.Das.Indexer.Core.Models.ProviderImport.Location
             {
-                var loc = new Eds.Das.Indexer.Core.Models.ProviderImport.Location
+                ID = location.ID, Name = location.Name, Email = location.Email, Phone = location.Phone, Website = location.Website, Address = new Eds.Das.Indexer.Core.Models.ProviderImport.Address
                 {
-                    ID = location.ID,
-                    Name = location.Name,
-                    Email = location.Email,
-                    Phone = location.Phone,
-                    Website = location.Website,
-                    Address = new Eds.Das.Indexer.Core.Models.ProviderImport.Address
-                    {
-                        Address1 = location.Address.Address1,
-                        Address2 = location.Address.Address2,
-                        County = location.Address.County,
-                        Postcode = location.Address.Postcode,
-                        Town = location.Address.Postcode,
-                        Lat = location.Address.Lat,
-                        Long = location.Address.Long
-                    }
-                };
-                result.Add(loc);
-            }
-
-            return result;
+                    Address1 = location.Address.Address1, Address2 = location.Address.Address2, County = location.Address.County, Postcode = location.Address.Postcode, Town = location.Address.Postcode, Lat = location.Address.Lat, Long = location.Address.Long
+                }
+            }).ToList();
         }
 
         public ProviderImport MapFromProviderToProviderImport(Provider provider)
         {
             var providerImport = new ProviderImport
             {
+                Id = provider.Id,
                 Email = provider.Email,
                 EmployerSatisfaction = provider.EmployerSatisfaction,
                 LearnerSatisfaction = provider.LearnerSatisfaction,

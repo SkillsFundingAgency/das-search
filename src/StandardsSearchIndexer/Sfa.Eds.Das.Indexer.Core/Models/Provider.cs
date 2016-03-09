@@ -8,6 +8,7 @@ namespace Sfa.Eds.Das.Indexer.Core.Models
 
     public class Provider : IIndexEntry
     {
+        public int Id { get; set;}
         public string Email { get; set; }
         public double? EmployerSatisfaction { get; set; }
         public IEnumerable<Framework> Frameworks { get; set; }

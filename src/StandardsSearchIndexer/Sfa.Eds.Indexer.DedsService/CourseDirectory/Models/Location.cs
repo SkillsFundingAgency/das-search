@@ -63,7 +63,7 @@ namespace Sfa.Infrastructure.Models
                 {
                     Name = (string)nameValue;
                 }
-                
+
                 var emailValue = inputObject["email"];
                 if (emailValue != null && emailValue.Type != JTokenType.Null)
                 {

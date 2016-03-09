@@ -7,6 +7,7 @@ namespace Sfa.Eds.Das.Indexer.Core.Models.ProviderImport
 
     public class ProviderImport
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public double? EmployerSatisfaction { get; set; }
         public IEnumerable<Framework> Frameworks { get; set; }

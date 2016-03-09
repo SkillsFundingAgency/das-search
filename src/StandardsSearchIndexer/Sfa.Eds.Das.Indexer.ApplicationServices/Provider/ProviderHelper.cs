@@ -58,7 +58,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return providers.Result.Where(x => activeProviders.Contains(x.UkPrn)).ToList();
         }
 
-        public bool CreateIndex(DateTime scheduledRefreshDateTime)
+        public bool CreateIndexOld(DateTime scheduledRefreshDateTime)
         {
             // TODO: replace this method with CreateIndexForBulkData when Course directory data is available
             var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
@@ -128,7 +128,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return exists;
         }
 
-        public bool CreateIndexForBulkData(DateTime scheduledRefreshDateTime)
+        public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
             var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
@@ -155,6 +155,10 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                                 {
                                     ""type"": ""long""
                                 },
+                                ""id"":
+                                {
+                                    ""type"": ""long""
+                                },
                                 ""name"":
                                 {
                                     ""type"": ""string""
@@ -163,7 +167,11 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                                 {
                                     ""type"": ""long""
                                 },
-                                ""venueName"":
+                                ""locationId"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""locationName"":
                                 {
                                     ""type"": ""string""
                                 },
@@ -370,10 +378,14 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 var rawProvider = string.Concat(
                 @"{ ""ukprn"": """,
                 provider.UkPrn,
+                @""", ""id"": """,
+                provider.Id,
                 @""", ""name"": """,
                 provider.Name ?? "Unspecified",
                 @""", ""standardcode"": ",
                 standard.StandardCode,
+                @", ""locationId"": ",
+                location.ID,
                 @", ""locationName"": """,
                 location.Name ?? "Unspecified",
                 @""", ""marketingInfo"": """,

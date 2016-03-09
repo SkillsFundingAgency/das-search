@@ -23,6 +23,7 @@
 
             var result = incoming.Result.Select(providerImport => new Provider
             {
+                Id = providerImport.Id,
                 UkPrn = providerImport.Ukprn.ToString(),
                 Email = providerImport.Email,
                 EmployerSatisfaction = providerImport.EmployerSatisfaction,

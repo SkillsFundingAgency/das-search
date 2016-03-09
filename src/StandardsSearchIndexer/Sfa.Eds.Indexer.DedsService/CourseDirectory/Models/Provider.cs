@@ -34,6 +34,11 @@ namespace Sfa.Infrastructure.Models
         /// <summary>
         ///     Optional.
         /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        ///     Optional.
+        /// </summary>
         public string Email { get; set; }
 
         /// <summary>
@@ -93,16 +98,24 @@ namespace Sfa.Infrastructure.Models
         {
             if (inputObject != null && inputObject.Type != JTokenType.Null)
             {
+                var idValue = inputObject["id"];
+                if (idValue != null && idValue.Type != JTokenType.Null)
+                {
+                    Id = int.Parse((string)idValue);
+                }
+
                 var emailValue = inputObject["email"];
                 if (emailValue != null && emailValue.Type != JTokenType.Null)
                 {
                     Email = (string)emailValue;
                 }
+
                 var employerSatisfactionValue = inputObject["employerSatisfaction"];
                 if (employerSatisfactionValue != null && employerSatisfactionValue.Type != JTokenType.Null)
                 {
                     EmployerSatisfaction = (double)employerSatisfactionValue;
                 }
+
                 var frameworksSequence = inputObject["frameworks"];
                 if (frameworksSequence != null && frameworksSequence.Type != JTokenType.Null)
                 {
@@ -113,11 +126,13 @@ namespace Sfa.Infrastructure.Models
                         Frameworks.Add(framework);
                     }
                 }
+
                 var learnerSatisfactionValue = inputObject["learnerSatisfaction"];
                 if (learnerSatisfactionValue != null && learnerSatisfactionValue.Type != JTokenType.Null)
                 {
                     LearnerSatisfaction = (double)learnerSatisfactionValue;
                 }
+
                 var locationsSequence = inputObject["locations"];
                 if (locationsSequence != null && locationsSequence.Type != JTokenType.Null)
                 {
@@ -128,21 +143,25 @@ namespace Sfa.Infrastructure.Models
                         Locations.Add(location);
                     }
                 }
+
                 var marketingInfoValue = inputObject["marketingInfo"];
                 if (marketingInfoValue != null && marketingInfoValue.Type != JTokenType.Null)
                 {
                     MarketingInfo = (string)marketingInfoValue;
                 }
+
                 var nameValue = inputObject["name"];
                 if (nameValue != null && nameValue.Type != JTokenType.Null)
                 {
                     Name = (string)nameValue;
                 }
+
                 var phoneValue = inputObject["phone"];
                 if (phoneValue != null && phoneValue.Type != JTokenType.Null)
                 {
                     Phone = (string)phoneValue;
                 }
+
                 var standardsSequence = inputObject["standards"];
                 if (standardsSequence != null && standardsSequence.Type != JTokenType.Null)
                 {
@@ -153,11 +172,13 @@ namespace Sfa.Infrastructure.Models
                         Standards.Add(standard);
                     }
                 }
+
                 var ukprnValue = inputObject["ukprn"];
                 if (ukprnValue != null && ukprnValue.Type != JTokenType.Null)
                 {
                     Ukprn = (int)ukprnValue;
                 }
+
                 var websiteValue = inputObject["website"];
                 if (websiteValue != null && websiteValue.Type != JTokenType.Null)
                 {
