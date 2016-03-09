@@ -56,6 +56,7 @@
     <Compile Include="IProviderSearchService.cs" />
     <Compile Include="IStandardSearchService.cs" />
     <Compile Include="ISearchProvider.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\CodeTypes.cs" />
     <Compile Include="Models\DeliveryMode.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />

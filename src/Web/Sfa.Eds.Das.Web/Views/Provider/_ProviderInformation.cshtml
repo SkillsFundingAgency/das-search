@@ -8,9 +8,9 @@
         <li class="result">
             <div class="column details">
                 <h2 class="heading-medium">
-                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new {@id = item.Id}, null)
+                    @Html.ActionLink(item.Name, "Detail", "Provider", new {@id = item.Id}, null)
                 </h2>
-                @if (item.DeliveryModes.Count == 1 && item.DeliveryModes.First() == DeliveryMode.HundredPercentEmployer)
+                @if (item.DeliveryModes.Count == 1 && item.DeliveryModes.First() == "100PercentEmployer")
                 {
                     @RenderEmployersLocationProviderDetails(item)
                 }
@@ -69,13 +69,15 @@
     <dl>
         <dt class="distance">Trainer location name:</dt>
         <dd class="distance">
-            <span>@item.TrainingLocationName a</span>
+            <span>@item.LocationName a</span>
         </dd>
     </dl>
     <dl>
         <dt class="distance">Trainer location address:</dt>
         <dd class="distance">
-            <span>@item.TrainingLocationAddress a</span>
+            <span>@item.Address.Address1</span>
+            <span>@item.Address.Address2</span>
+            <span>@item.Address.County</span>
         </dd>
     </dl>
 }

@@ -73,12 +73,13 @@
         public void ShouldHaveAllFieldsInSearchResult()
         {
             var page = new ProviderInformation();
-            var item = new ProviderResultItemViewModel { ProviderName = "Provider 1", DeliveryModes = new List<DeliveryMode> { DeliveryMode.HundredPercentEmployer }, Website = "http://www.trainingprovider.co.uk" };
+            var item = new ProviderResultItemViewModel { Name = "Provider 1", DeliveryModes = new List<string> { "100PercentEmployer" }, Website = "http://www.trainingprovider.co.uk", Address = new Address()};
             var item2 = new ProviderResultItemViewModel
             {
-                ProviderName = "Provider 2",
-                DeliveryModes = new List<DeliveryMode> { DeliveryMode.BlockRelease },
-                Distance = 1.2
+                Name = "Provider 2",
+                DeliveryModes = new List<string> { "BlockRelease" },
+                Distance = 1.2,
+                Address = new Address()
             };
 
             var model = new ProviderSearchResultViewModel
@@ -101,7 +102,6 @@
             var secondResult = GetHtmlElement(html, ".result", 2);
 
             GetPartial(secondResult, "dl dd").Should().Be("1.2 miles away");
-
         }
     }
 }
