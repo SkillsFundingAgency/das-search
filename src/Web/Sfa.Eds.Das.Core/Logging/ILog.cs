@@ -13,5 +13,7 @@ namespace Sfa.Eds.Das.Core.Logging
         void Error(string msg);
 
         void Error(Exception ex, string msg);
+
+        void Fatal(string msg);
     }
 }

@@ -10,7 +10,7 @@ When I am on Search landing page
 Then I should be able to see home page with title as "Home Page - Employer Apprenticeship Search"
 
 
-
+@regression
 Scenario Outline: Search Standard by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
@@ -18,17 +18,44 @@ Scenario Outline: Search Standard by keyword
 	Then I should see matching '<JOBROLE>' standards on result page
 Examples:
 | JOBROLE                |
-| Actuarial technician   |
+| Actuarial Technician   |
 | Financial Adviser      |
-| software engineer      |
+| Software Engineer      |
 | manufacturing engineer |
 | Legal Services         |
 | Designer               |
 | dental nurse           |
 | Electrician            |
-| car mechanic           |
-| Manager                |
+| Car Mechanic           |
+| manager                |
 | Actuarial              |
+
+@regression
+Scenario Outline: Search Standard by keyword Actuarial
+	Given I am on Search landing page
+	And I enter keyword '<Keyword>' in search box
+	When I click on search button
+	Then I should see matching Standard 'actuarial technician' standards on result page
+Examples:
+| Keyword       |
+| Actuarial     |
+| Actuary       |
+| mathematician |
+
+@regression
+Scenario Outline: Search Standard by keyword Aeorospace
+	Given I am on Search landing page
+	And I enter keyword '<Keyword>' in search box
+	When I click on search button
+	Then I should see matching Standard 'aerospace manufacturing fitter' standards on result page
+	And I should see matching Standard 'aerospace engineer' standards on result page
+	And I should see matching Standard 'aerospace software development engineer' standards on result page	
+Examples:
+| Keyword                        |
+| aircraft mechanic              |
+| Aerospace Manufacturing Fitter |
+| aircraft manufacture mechanic  |
+
 
 @ignore
 Scenario Outline: Verify invalid search
@@ -65,13 +92,6 @@ Examples:
 | keyword             |
 | Mechanical Engineer |
 | Software Engineer   |
-
-
-
-
-
-
-
 
 
 

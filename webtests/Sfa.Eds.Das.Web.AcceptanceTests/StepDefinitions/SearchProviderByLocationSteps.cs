@@ -90,7 +90,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
             prvdrPage.verifyProviderinSearchResults(p0);
         }
-        
+
+        [Then(@"I should see location venue of provider ""(.*)""")]
+        public void ThenIShouldSeeLocationVenueOfProvider(string p0)
+        {
+            prvdrPage.verifyProviderLocationinSearchResults(p0);
+        }
+
+
         [Then(@"I should not see provider ""(.*)"" in provider results page\.")]
         public void ThenIShouldNotSeeProviderInProviderResultsPage_(string p0)
         {

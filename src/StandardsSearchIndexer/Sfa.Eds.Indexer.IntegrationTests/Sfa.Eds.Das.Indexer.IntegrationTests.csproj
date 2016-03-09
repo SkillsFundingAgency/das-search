@@ -97,25 +97,25 @@
     <None Include="Sfa.Eds.Das.Indexer.IntegrationTests.ruleset" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.ApplicationServices\Sfa.Eds.Das.Indexer.ApplicationServices.csproj">
+      <Project>{473307D1-67C9-411E-AD71-CF3C6FE892F4}</Project>
+      <Name>Sfa.Eds.Das.Indexer.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Core\Sfa.Eds.Das.Indexer.Core.csproj">
+      <Project>{0C0E390C-C57C-44E4-978E-B9D2F53196AA}</Project>
+      <Name>Sfa.Eds.Das.Indexer.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj">
       <Project>{D838757D-63EC-4FE6-B565-470D5BF424A3}</Project>
       <Name>Sfa.Eds.Das.Tools.MetaDataCreationTool</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Deds.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Infrastructure.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
-      <Name>Sfa.Deds</Name>
+      <Name>Sfa.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.ProviderIndexer\Sfa.Eds.Das.ProviderIndexer.csproj">
-      <Project>{DB90F92F-8A86-4239-8F7D-F99161E4282D}</Project>
-      <Name>Sfa.Eds.Das.ProviderIndexer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.StandardIndexer\Sfa.Eds.Das.StandardIndexer.csproj">
-      <Project>{CD403DBC-FA8A-4004-8494-63BE9766C57F}</Project>
-      <Name>Sfa.Eds.Das.StandardIndexer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
       <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>

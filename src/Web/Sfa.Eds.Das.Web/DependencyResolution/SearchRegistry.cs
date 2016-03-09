@@ -1,15 +1,5 @@
 namespace Sfa.Eds.Das.Web.DependencyResolution
 {
-    using ApplicationServices;
-    using Infrastructure.PostCodeIo;
-    using log4net;
-
-    using Sfa.Das.ApplicationServices;
-    using Sfa.Eds.Das.Core.Configuration;
-    using Sfa.Eds.Das.Core.Domain.Services;
-    using Sfa.Eds.Das.Infrastructure.Configuration;
-    using Sfa.Eds.Das.Infrastructure.ElasticSearch;
-    using Sfa.Eds.Das.Infrastructure.Logging;
     using Sfa.Eds.Das.Web.Services;
 
     using StructureMap.Configuration.DSL;
@@ -18,21 +8,7 @@ namespace Sfa.Eds.Das.Web.DependencyResolution
     {
         public SearchRegistry()
         {
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<IMappingService>().Use<MappingService>();
-            For<log4net.ILog>().Use(LogManager.GetLogger(Log4NetSettings.LoggerName));
-            For<Core.Logging.ILog>().Use<Log4NetLogger>();
-
-            // New infrastructure
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<ILookupLocations>().Use<PostCodesIOLocator>();
-
-            For<IStandardSearchService>().Use<StandardSearchService>();
-            For<IStandardRepository>().Use<StandardRepository>();
-            For<ISearchProvider>().Use<ElasticsearchProvider>();
-
-            For<IProviderSearchService>().Use<ProviderSearchService>();
         }
     }
 }

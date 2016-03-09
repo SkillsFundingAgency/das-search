@@ -6,6 +6,12 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
     using MetaDataCreationTool.Services.Interfaces;
     using NUnit.Framework;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+
     [TestFixture]    
     public class MetaDataTest
     {
@@ -21,8 +27,8 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
 
             var larsDataService = container.GetInstance<ILarsDataService>();
             var vstsDataService = container.GetInstance<IVstsService>();
-            var settings = container.GetInstance<ISettings>();
-            var logger = container.GetInstance<ILog4NetLogger>();
+            var settings = container.GetInstance<IAppServiceSettings>();
+            var logger = container.GetInstance<ILog>();
 
             // Set GitUserName/GitPassword in app.config to run this
             MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, logger);

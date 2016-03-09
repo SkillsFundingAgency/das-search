@@ -106,7 +106,7 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
             #line hidden
 WriteLiteral("\r\n            </p>\r\n            <ol");
 
-WriteLiteral(" class=\"frameworkResults\"");
+WriteLiteral(" class=\"providerResults\"");
 
 WriteLiteral(">\r\n");
 

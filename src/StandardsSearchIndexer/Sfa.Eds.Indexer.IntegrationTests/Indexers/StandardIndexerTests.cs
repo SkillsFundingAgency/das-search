@@ -1,103 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Nest;
-using NUnit.Framework;
-using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-using Sfa.Eds.Das.Indexer.Common.Configuration;
-using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.StandardIndexer.Helpers;
-using Sfa.Eds.Das.StandardIndexer.Settings;
-using StructureMap;
-
-namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
+﻿namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
-    using Sfa.Eds.Das.Indexer.Common.Services;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using FluentAssertions;
+    using Nest;
+    using NUnit.Framework;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
+    using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
+    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Models;
+
+    using StructureMap;
 
     [TestFixture]
     public class StandardIndexerTests
     {
-        private IContainer _ioc;
-        private IStandardIndexSettings _standardSettings;
-        private IStandardHelper _standardHelper;
-        private IIndexerService<MetaDataItem> _sut;
+        private IIndexSettings<MetaDataItem> _standardSettings;
+
+        private IGenericIndexerHelper<MetaDataItem> _standardHelper;
+
         private IElasticClient _elasticClient;
+
+        private IIndexMaintenanceService _indexMaintenanceService;
 
         [SetUp]
         public void SetUp()
         {
-            _ioc = IoC.Initialize();
-            _standardSettings = _ioc.GetInstance<IStandardIndexSettings>();
-            _standardHelper = _ioc.GetInstance<IStandardHelper>();
+            var ioc = IoC.Initialize();
+            _standardSettings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
+            _standardHelper = ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
 
-            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
+            var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
-            _sut = _ioc.GetInstance<IIndexerService<MetaDataItem>>();
-        }
-
-        [Test]
-        [Category("Integration")]
-        public void ShouldCreateScheduledIndexAndMapping()
-        {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _standardHelper.GetIndexNameAndDateExtension(scheduledDate);
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _standardHelper.CreateIndex(scheduledDate);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            var mapping = _elasticClient.GetMapping<StandardDocument>(i => i.Index(indexName));
-            mapping.Should().NotBeNull();
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-        }
-
-        [Test]
-        [Category("Integration")]
-        public async Task ShouldRetrieveStandardSearchingForTitle()
-        {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _standardHelper.GetIndexNameAndDateExtension(scheduledDate);
-
-            var standardsTest = GetStandardsTest();
-            var expectedStandardResult = new StandardDocument()
-            {
-                StandardId = 61,
-                Title = "Dental Nurse",
-                NotionalEndLevel = 3,
-                PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                StandardPdf = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
-                File = null
-            };
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _standardHelper.CreateIndex(scheduledDate);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            await _standardHelper.IndexStandards(scheduledDate, standardsTest);
-
-            Thread.Sleep(2000);
-
-            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p
-                .Index(indexName)
-                .QueryString(expectedStandardResult.Title));
-            var amountRetrieved = retrievedResult.Documents.Count();
-            var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-
-            Assert.AreEqual(1, amountRetrieved);
-            Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
-            Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
-            Assert.AreEqual(expectedStandardResult.StandardId, retrievedStandard.StandardId);
+            _indexMaintenanceService = new IndexMaintenanceService();
         }
 
         private void DeleteIndexIfExists(string indexName)
@@ -112,30 +54,92 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
         private IEnumerable<MetaDataItem> GetStandardsTest()
         {
             return new List<MetaDataItem>
-            {
-                new MetaDataItem
-                {
-                    Id = 1,
-                    Title = "Network Engineer",
-                    PdfFileName = "1-Apprenticeship standard for a network engineer",
-                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
-                },
-                new MetaDataItem
-                {
-                    Id = 2,
-                    Title = "Software Developer",
-                    PdfFileName = "2-Apprenticeship standard for a software developer",
-                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
-                },
-                new MetaDataItem
-                {
-                    Id = 61,
-                    Title = "Dental Nurse",
-                    NotionalEndLevel = 3,
-                    PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
-                }
-            };
+                       {
+                           new MetaDataItem
+                               {
+                                   Id = 1,
+                                   Title = "Network Engineer",
+                                   PdfFileName = "1-Apprenticeship standard for a network engineer",
+                                   StandardPdfUrl =
+                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
+                               },
+                           new MetaDataItem
+                               {
+                                   Id = 2,
+                                   Title = "Software Developer",
+                                   PdfFileName = "2-Apprenticeship standard for a software developer",
+                                   StandardPdfUrl =
+                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
+                               },
+                           new MetaDataItem
+                               {
+                                   Id = 61,
+                                   Title = "Dental Nurse",
+                                   NotionalEndLevel = 3,
+                                   PdfFileName = "61-Apprenticeship standard for a dental nurse",
+                                   StandardPdfUrl =
+                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                               }
+                       };
+        }
+
+        [Test]
+        [Category("Integration")]
+        public void ShouldCreateScheduledIndexAndMapping()
+        {
+            var scheduledDate = new DateTime(2000, 1, 1);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _standardSettings.IndexesAlias);
+
+            DeleteIndexIfExists(indexName);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _standardHelper.CreateIndex(scheduledDate);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+
+            var mapping = _elasticClient.GetMapping<MetaDataItem>(i => i.Index(indexName));
+            mapping.Should().NotBeNull();
+
+            _elasticClient.DeleteIndex(i => i.Index(indexName));
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+        }
+
+        [Test]
+        [Category("Integration")]
+        public async Task ShouldRetrieveStandardSearchingForTitle()
+        {
+            var scheduledDate = new DateTime(2000, 1, 1);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _standardSettings.IndexesAlias);
+
+            var standardsTest = GetStandardsTest().ToList();
+            var expectedStandardResult = new MetaDataItem
+                                             {
+                                                 Id = 61,
+                                                 Title = "Dental Nurse",
+                                                 NotionalEndLevel = 3,
+                                                 PdfFileName = "61-Apprenticeship standard for a dental nurse",
+                                                 StandardPdfUrl =
+                                                     "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                                             };
+
+            DeleteIndexIfExists(indexName);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _standardHelper.CreateIndex(scheduledDate);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+
+            await _standardHelper.IndexEntries(scheduledDate, standardsTest);
+
+            Thread.Sleep(2000);
+
+            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p.Index(indexName).QueryString(expectedStandardResult.Title));
+            var amountRetrieved = retrievedResult.Documents.Count();
+            var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
+
+            _elasticClient.DeleteIndex(i => i.Index(indexName));
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
+            Assert.AreEqual(1, amountRetrieved);
+            Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
+            Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
+            Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.StandardId);
         }
     }
 }

@@ -74,14 +74,21 @@
     <Compile Include="MetaDataTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseSettingsTests.cs" />
-    <Compile Include="Services\VstsClientTests.cs" />
     <Compile Include="VstsTest.cs" />
     <Compile Include="Services\GitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.ApplicationServices\Sfa.Eds.Das.Indexer.ApplicationServices.csproj">
+      <Project>{473307D1-67C9-411E-AD71-CF3C6FE892F4}</Project>
+      <Name>Sfa.Eds.Das.Indexer.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj">
       <Project>{D838757D-63EC-4FE6-B565-470D5BF424A3}</Project>
       <Name>Sfa.Eds.Das.Tools.MetaDataCreationTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
+      <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
+      <Name>Sfa.Eds.Das.Indexer.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

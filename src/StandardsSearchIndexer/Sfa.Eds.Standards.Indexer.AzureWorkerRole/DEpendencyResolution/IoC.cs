@@ -16,26 +16,24 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Sfa.Deds.DependencyResolution;
-using Sfa.Eds.Das.Indexer.Common.DependencyResolution;
-using Sfa.Eds.Das.ProviderIndexer.DependencyResolution;
-using Sfa.Eds.Das.StandardIndexer.DependencyResolution;
 using Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
 {
+    using Sfa.Eds.Das.Indexer.ApplicationServices.DependencyResolution;
+    using Sfa.Infrastructure.DependencyResolution;
+
     public static class IoC
     {
         public static IContainer Initialize()
         {
             return new Container(c =>
             {
-                c.AddRegistry<CommonRegistry>();
                 c.AddRegistry<IndexerRegistry>();
                 c.AddRegistry<StandardRegistry>();
                 c.AddRegistry<ProviderRegistry>();
-                c.AddRegistry<DedsRegistry>();
+                c.AddRegistry<InfrastructureRegistry>();
                 c.AddRegistry<MetaDataCreationRegistry>();
             });
         }

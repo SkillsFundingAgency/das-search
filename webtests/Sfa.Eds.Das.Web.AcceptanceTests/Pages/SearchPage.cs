@@ -30,8 +30,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.XPath("//input[@type='submit']");
         public String title = "Google";
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
-        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]");
+        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/ol/li/div/h2/a");
         By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
+        By typicallength = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/dd[2]");
+
         By selectStaandard = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/h2/a");
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
 
@@ -98,7 +100,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
           //  Console.WriteLine(getText(searchkeywordresult));
             //Console.WriteLine(keyword);
             //Assert.True(getText(searchkeywordresult).Contains(keyword));
-            Assert.True(isDisplayed(searchresult));
+           Assert.True(isDisplayed(searchresult));
+           // Assert.True(isElementPresent(searchkeywordresult, keyword));
+        }
+
+        public void verifySearchedStandardFoundinResultPage(String keyword)
+        {
+            Thread.Sleep(4000);
+             Assert.True(isElementPresent(searchkeywordresult, keyword));
         }
 
 
@@ -108,12 +117,20 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Assert.True(getText(searchResultcount).Contains("Total results found:"));
         }
 
+        public void Verifylength()
+        {
+
+            Assert.True(getText(typicallength).Contains("24 to 36 months"));
+        }
+
 
         public void VerifyresultCount_invalidSearch()
         {
 
             Assert.True(getText(searchResultcount).Contains("Total results found: 0"));
         }
+
+
 
 
 
