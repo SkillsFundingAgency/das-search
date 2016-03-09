@@ -14,7 +14,7 @@ namespace Sfa.Infrastructure
 
     using Newtonsoft.Json.Linq;
 
-    using Sfa.Infrastructure.Models;
+    using Models;
 
     public class CourseDirectoryProviderDataService : ServiceClient<CourseDirectoryProviderDataService>, ICourseDirectoryProviderDataService
     {

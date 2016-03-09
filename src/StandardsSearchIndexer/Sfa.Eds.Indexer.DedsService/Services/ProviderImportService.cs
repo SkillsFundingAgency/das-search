@@ -1,18 +1,20 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Sfa.Eds.Das.Indexer.Core.Models.ProviderImport;
+using Sfa.Eds.Das.Indexer.Core.Services;
+using Sfa.Infrastructure.Models;
+using Sfa.Infrastructure.Settings;
+using Address = Sfa.Eds.Das.Indexer.Core.Models.ProviderImport.Address;
+using Contact = Sfa.Eds.Das.Indexer.Core.Models.ProviderImport.Contact;
+using Framework = Sfa.Eds.Das.Indexer.Core.Models.ProviderImport.Framework;
+using Location = Sfa.Eds.Das.Indexer.Core.Models.ProviderImport.Location;
+using LocationRef = Sfa.Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef;
+using Standard = Sfa.Eds.Das.Indexer.Core.Models.ProviderImport.Standard;
 
 namespace Sfa.Infrastructure.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
-    using AutoMapper;
-
-    using Sfa.Eds.Das.Indexer.Core.Models.ProviderImport;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Models;
-    using Sfa.Infrastructure.Settings;
-
     public class ProviderImportService : IImportProviders
     {
         private readonly ICourseDirectoryProviderDataService _courseDirectoryProvider;
@@ -40,19 +42,19 @@ namespace Sfa.Infrastructure.Services
             return deliveryModes.ToList();
         }
 
-        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef> GetLocationRefFromIList(IList<Models.LocationRef> locations)
+        private IEnumerable<LocationRef> GetLocationRefFromIList(IList<Models.LocationRef> locations)
         {
-            return locations.Select(location => new Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef
+            return locations.Select(location => new LocationRef
             {
                 ID = location.ID, MarketingInfo = location.MarketingInfo, Radius = int.Parse(location.Radius.ToString()), StandardInfoUrl = location.StandardInfoUrl, DeliveryModes = GetDeliveryModesFromIList(location.DeliveryModes)
             }).ToList();
         }
 
-        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Standard> GetStandardsFromIList(IList<Models.Standard> standards)
+        private IEnumerable<Standard> GetStandardsFromIList(IList<Models.Standard> standards)
         {
-            return standards.Select(standard => new Eds.Das.Indexer.Core.Models.ProviderImport.Standard
+            return standards.Select(standard => new Standard
             {
-                Contact = new Eds.Das.Indexer.Core.Models.ProviderImport.Contact
+                Contact = new Contact
                 {
                     Email = standard.Contact.Email, Phone = standard.Contact.Phone, ContactUsUrl = standard.Contact.ContactUsUrl
                 },
@@ -60,11 +62,11 @@ namespace Sfa.Infrastructure.Services
             }).ToList();
         }
 
-        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Framework> GetFrameworksFromIList(IList<Models.Framework> frameworks)
+        private IEnumerable<Framework> GetFrameworksFromIList(IList<Models.Framework> frameworks)
         {
-            return frameworks.Select(framework => new Eds.Das.Indexer.Core.Models.ProviderImport.Framework
+            return frameworks.Select(framework => new Framework
             {
-                Contact = new Eds.Das.Indexer.Core.Models.ProviderImport.Contact
+                Contact = new Contact
                 {
                     Email = framework.Contact.Email, Phone = framework.Contact.Phone, ContactUsUrl = framework.Contact.ContactUsUrl
                 },
@@ -72,11 +74,11 @@ namespace Sfa.Infrastructure.Services
             }).ToList();
         }
 
-        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Location> GetLocationFromIList(IList<Models.Location> locations)
+        private IEnumerable<Location> GetLocationFromIList(IList<Models.Location> locations)
         {
-            return locations.Select(location => new Eds.Das.Indexer.Core.Models.ProviderImport.Location
+            return locations.Select(location => new Location
             {
-                ID = location.ID, Name = location.Name, Email = location.Email, Phone = location.Phone, Website = location.Website, Address = new Eds.Das.Indexer.Core.Models.ProviderImport.Address
+                ID = location.ID, Name = location.Name, Email = location.Email, Phone = location.Phone, Website = location.Website, Address = new Address
                 {
                     Address1 = location.Address.Address1, Address2 = location.Address.Address2, County = location.Address.County, Postcode = location.Address.Postcode, Town = location.Address.Postcode, Lat = location.Address.Lat, Long = location.Address.Long
                 }

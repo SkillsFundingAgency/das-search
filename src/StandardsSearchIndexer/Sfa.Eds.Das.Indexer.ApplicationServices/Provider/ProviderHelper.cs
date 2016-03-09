@@ -1,24 +1,20 @@
-﻿using Sfa.Eds.Das.Indexer.Core.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Nest;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.Core;
+    using Provider = Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    using Nest;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
-
-    using Provider = Sfa.Eds.Das.Indexer.Core.Models.Provider;
-
-    public class ProviderHelper : IGenericIndexerHelper<Provider>
+    public class ProviderHelper : IGenericIndexerHelper<ProviderIndexer.Models.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
 
@@ -28,12 +24,12 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         private readonly IElasticClient _client;
 
-        private readonly IIndexSettings<Provider> _settings;
+        private readonly IIndexSettings<ProviderIndexer.Models.Provider> _settings;
 
         private readonly ILog Log;
 
         public ProviderHelper(
-            IIndexSettings<Provider> settings,
+            IIndexSettings<ProviderIndexer.Models.Provider> settings,
             IElasticsearchClientFactory elasticsearchClientFactory,
             IGetProviders courseDirectoryClient,
             IGetActiveProviders activeProviderClient,
@@ -49,7 +45,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             Log = log;
         }
 
-        public ICollection<Provider> LoadEntries()
+        public ICollection<ProviderIndexer.Models.Provider> LoadEntries()
         {
             var providers = _courseDirectoryClient.GetProviders();
             var activeProviders = _activeProviderClient.GetActiveProviders();
@@ -252,7 +248,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return exists;
         }
 
-        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Provider> entries)
+        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<ProviderIndexer.Models.Provider> entries)
         {
             try
             {
@@ -271,7 +267,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         {
             var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
-            var a = _client.Search<Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
+            var a = _client.Search<ProviderIndexer.Models.Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
             return a.Any();
         }
 
@@ -358,7 +354,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return rawProvider;
         }
         */
-        public List<string> CreateListRawFormat(Provider provider, Core.Models.ProviderImport.Standard standard)
+        public List<string> CreateListRawFormat(ProviderIndexer.Models.Provider provider, Core.Models.ProviderImport.Standard standard)
         {
             var list = new List<string>();
 
@@ -430,7 +426,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return list;
         }
 
-        private Task IndexProviders(string indexName, IEnumerable<Provider> providers)
+        private Task IndexProviders(string indexName, IEnumerable<ProviderIndexer.Models.Provider> providers)
         {
             // index the items
             foreach (var provider in providers)

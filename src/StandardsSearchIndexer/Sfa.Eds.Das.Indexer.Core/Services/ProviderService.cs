@@ -3,10 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Sfa.Eds.Das.Indexer.Common.Models;
-    using Sfa.Eds.Das.Indexer.Core.Models.ProviderImport;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using ProviderIndexer.Models;
 
     public class ProviderService : IGetProviders
     {

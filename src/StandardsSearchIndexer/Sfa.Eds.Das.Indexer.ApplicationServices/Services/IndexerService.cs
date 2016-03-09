@@ -1,16 +1,13 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
-{
-    using System;
+﻿using System;
     using System.Diagnostics;
-    using System.Threading;
-    using System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.Core;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
-
+namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
+{
     public class IndexerService<T> : IIndexerService<T>
     {
         private readonly IGenericIndexerHelper<T> _indexerHelper;
