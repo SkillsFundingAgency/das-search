@@ -8,13 +8,13 @@
   </Role>
   <NetworkConfiguration>
     <!-- Name of the target Virtual Network -->
-    <VirtualNetworkSite name="DAS-CI" />
+    <VirtualNetworkSite name="#{azure.vnet.name}" />
 
     <!-- Associating a Role to a Specific Subnet by name -->
     <AddressAssignments>
       <InstanceAddress roleName="Sfa.Eds.Das.Web">
         <Subnets>
-          <Subnet name="default" />
+          <Subnet name="#{azure.vnet.subnet.name}" />
         </Subnets>
       </InstanceAddress>
     </AddressAssignments>
