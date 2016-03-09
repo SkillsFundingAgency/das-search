@@ -3,6 +3,7 @@
 	As an employer 
 	I want to be able to Search by title
 
+
 @smoke
 Scenario Outline:Search By title1
 	Given I am on Search landing page
@@ -12,6 +13,7 @@ Scenario Outline:Search By title1
 	Examples: 
 	| title                  |
 	| Actuarial Technician   |
+
 
 @regression
 Scenario Outline:Search By title

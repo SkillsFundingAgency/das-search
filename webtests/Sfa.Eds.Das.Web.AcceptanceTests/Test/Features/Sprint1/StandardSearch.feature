@@ -10,7 +10,7 @@ When I am on Search landing page
 Then I should be able to see home page with title as "Home Page - Employer Apprenticeship Search"
 
 
-
+@regression
 Scenario Outline: Search Standard by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
@@ -30,7 +30,7 @@ Examples:
 | manager                |
 | Actuarial              |
 
-
+@regression
 Scenario Outline: Search Standard by keyword Actuarial
 	Given I am on Search landing page
 	And I enter keyword '<Keyword>' in search box
@@ -42,6 +42,7 @@ Examples:
 | Actuary       |
 | mathematician |
 
+@regression
 Scenario Outline: Search Standard by keyword Aeorospace
 	Given I am on Search landing page
 	And I enter keyword '<Keyword>' in search box
@@ -54,8 +55,6 @@ Examples:
 | aircraft mechanic              |
 | Aerospace Manufacturing Fitter |
 | aircraft manufacture mechanic  |
-
-
 
 
 @ignore
@@ -93,13 +92,6 @@ Examples:
 | keyword             |
 | Mechanical Engineer |
 | Software Engineer   |
-
-
-
-
-
-
-
 
 
 

@@ -67,13 +67,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Show available providers for given standard -End to End Test")]
-        [NUnit.Framework.CategoryAttribute("regression")]
+        [NUnit.Framework.CategoryAttribute("smoke")]
         [NUnit.Framework.TestCaseAttribute("Product Design and Development Engineer", "CV1 2wt", null)]
         [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", "CV6 1PT", null)]
         public virtual void ShowAvailableProvidersForGivenStandard_EndToEndTest(string jOBROLE, string postcode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "regression"};
+                    "smoke"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

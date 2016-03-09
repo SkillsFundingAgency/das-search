@@ -3,7 +3,7 @@
 	As an employer
 	I want to be able to search all providers for a given standard
 
-@regression
+@smoke
 Scenario Outline:Show available providers for given standard -End to End Test
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
