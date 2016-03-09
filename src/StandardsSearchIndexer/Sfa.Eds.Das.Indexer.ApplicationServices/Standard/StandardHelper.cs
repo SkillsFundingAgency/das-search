@@ -172,7 +172,7 @@
                         string.Format(standard.Id.ToString(), ".pdf"),
                         standard.StandardPdfUrl).ConfigureAwait(false);
             }
-        }
+        } 
 
         private async Task IndexStandards(string indexName, IEnumerable<MetaDataItem> standards)
         {

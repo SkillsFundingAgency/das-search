@@ -128,45 +128,7 @@ WriteLiteral("\r\n            </ol>\r\n\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
-WriteLiteral(">\r\n\r\n            <div");
-
-WriteLiteral(" class=\"related-container\"");
-
-WriteLiteral(">\r\n                <aside");
-
-WriteLiteral(" class=\"related\"");
-
-WriteLiteral(" id=\"related\"");
-
-WriteLiteral(">\r\n                    <div");
-
-WriteLiteral(" class=\"inner group related-subsection\"");
-
-WriteLiteral(">\r\n\r\n                        <h2");
-
-WriteLiteral(" id=\"parent-subsection\"");
-
-WriteLiteral(">Help</h2>\r\n\r\n                        <ul");
-
-WriteLiteral(" class=\"link-list\"");
-
-WriteLiteral(">\r\n                            <li>\r\n                                <a");
-
-WriteLiteral(" href=\"help_standards.html\"");
-
-WriteLiteral(">What is a standard</a>\r\n                            </li>\r\n                     " +
-"   </ul>\r\n\r\n                    </div>\r\n                    <div");
-
-WriteLiteral(" class=\"inner group\"");
-
-WriteLiteral(">\r\n                        <a");
-
-WriteLiteral(" class=\"return-to-top\"");
-
-WriteLiteral(" href=\"#content\"");
-
-WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n                </aside>\r\n     " +
-"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>");
 
         }
     }

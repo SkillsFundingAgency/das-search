@@ -99,7 +99,7 @@ WriteLiteralTo(__razor_helper_writer, "> ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " INSERT DATA HERE</a>\r\n        </dd>\r\n    </dl>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</a>\r\n        </dd>\r\n    </dl>\r\n");
 
 
 #line 53 "..\..\Views\Provider\_ProviderInformation.cshtml"
@@ -156,14 +156,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2148), Tuple.Create("\"", 2168)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2131), Tuple.Create("\"", 2151)
 
 #line 66 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 2155), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 2138), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 2155), false)
+, 2138), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -175,7 +175,7 @@ WriteLiteralTo(__razor_helper_writer, "> ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " INSERT DATA HERE</a>\r\n        </dd>\r\n    </dl>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</a>\r\n        </dd>\r\n    </dl>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
 

@@ -129,7 +129,7 @@
     <Compile Include="Services\ForMappingStandardSearchResultsToViewModel.cs" />
     <Compile Include="ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
     <Compile Include="Services\ForMappingStandardToViewModel.cs" />
-    <Compile Include="Views\ProviderSearchResultPage.cs" />
+    <Compile Include="Views\Provider\ProviderSearchResultPage.cs" />
     <Compile Include="Views\StandardDetailPageTest.cs" />
     <Compile Include="Views\StandardSearchResultPage.cs" />
     <Compile Include="Views\ForStandardSearchResultPage.cs" />
