@@ -432,8 +432,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         private Task IndexProviders(string indexName, IEnumerable<Provider> providers)
         {
-            var id = 1;
-
             // index the items
             foreach (var provider in providers)
             {
@@ -442,12 +440,10 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                     foreach (var standard in provider.Standards)
                     {
                         var queryList = CreateListRawFormat(provider, standard);
-                        //provider.ProviderId = id;
                         foreach (var query in queryList)
                         {
                             _client.Raw.Index(indexName, "provider", query);
                         }
-                        id++;
                     }
                     
                 }

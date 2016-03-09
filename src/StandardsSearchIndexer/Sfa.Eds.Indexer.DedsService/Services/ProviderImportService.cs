@@ -32,15 +32,15 @@ namespace Sfa.Infrastructure.Services
 
             var providers = responseAsync.Result.Body;
 
-            return providers.Select(provider => MapFromProviderToProviderImport(provider)).ToList();
+            return providers.Select(MapFromProviderToProviderImport).ToList();
         }
 
-        public IEnumerable<string> GetDeliveryModesFromIList(IList<string> deliveryModes)
+        private IEnumerable<string> GetDeliveryModesFromIList(IList<string> deliveryModes)
         {
             return deliveryModes.ToList();
         }
 
-        public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef> GetLocationRefFromIList(IList<Models.LocationRef> locations)
+        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef> GetLocationRefFromIList(IList<Models.LocationRef> locations)
         {
             return locations.Select(location => new Eds.Das.Indexer.Core.Models.ProviderImport.LocationRef
             {
@@ -48,7 +48,7 @@ namespace Sfa.Infrastructure.Services
             }).ToList();
         }
 
-        public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Standard> GetStandardsFromIList(IList<Models.Standard> standards)
+        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Standard> GetStandardsFromIList(IList<Models.Standard> standards)
         {
             return standards.Select(standard => new Eds.Das.Indexer.Core.Models.ProviderImport.Standard
             {
@@ -60,7 +60,7 @@ namespace Sfa.Infrastructure.Services
             }).ToList();
         }
 
-        public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Framework> GetFrameworksFromIList(IList<Models.Framework> frameworks)
+        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Framework> GetFrameworksFromIList(IList<Models.Framework> frameworks)
         {
             return frameworks.Select(framework => new Eds.Das.Indexer.Core.Models.ProviderImport.Framework
             {
@@ -72,7 +72,7 @@ namespace Sfa.Infrastructure.Services
             }).ToList();
         }
 
-        public IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Location> GetLocationFromIList(IList<Models.Location> locations)
+        private IEnumerable<Eds.Das.Indexer.Core.Models.ProviderImport.Location> GetLocationFromIList(IList<Models.Location> locations)
         {
             return locations.Select(location => new Eds.Das.Indexer.Core.Models.ProviderImport.Location
             {
@@ -83,7 +83,7 @@ namespace Sfa.Infrastructure.Services
             }).ToList();
         }
 
-        public ProviderImport MapFromProviderToProviderImport(Provider provider)
+        private ProviderImport MapFromProviderToProviderImport(Provider provider)
         {
             var providerImport = new ProviderImport
             {
@@ -102,17 +102,6 @@ namespace Sfa.Infrastructure.Services
             };
 
             return providerImport;
-        }
-
-        private static IMapper CreateMapper()
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<IEnumerable<Provider>, IEnumerable<ProviderImport>>();
-                cfg.CreateMap<Eds.Das.Indexer.Core.Models.ProviderImport.Address, Models.Address>();
-                cfg.CreateMap<Eds.Das.Indexer.Core.Models.ProviderImport.Contact, Models.Contact>();
-            });
-            return config.CreateMapper();
         }
     }
 }
