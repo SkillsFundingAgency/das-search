@@ -6,4 +6,17 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=dascistorageaccount;AccountKey=Z5axlH8kiIWSmGre7XksLpVVx8higtap2Ug2YrCcaVDkccZp6xARRdkUvfP7m1/kUukoYp0YLCua5sYlVzcA4Q==" />
     </ConfigurationSettings>
   </Role>
+  <NetworkConfiguration>
+    <!-- Name of the target Virtual Network -->
+    <VirtualNetworkSite name="#{azure.vnet.name}" />
+
+    <!-- Associating a Role to a Specific Subnet by name -->
+    <AddressAssignments>
+      <InstanceAddress roleName="Sfa.Eds.Das.Web">
+        <Subnets>
+          <Subnet name="#{azure.vnet.subnet.name}" />
+        </Subnets>
+      </InstanceAddress>
+    </AddressAssignments>
+  </NetworkConfiguration>
 </ServiceConfiguration>

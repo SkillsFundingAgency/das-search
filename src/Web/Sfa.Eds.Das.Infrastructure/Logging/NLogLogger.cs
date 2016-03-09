@@ -9,8 +9,10 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
     public class NLogLogger : ILog
     {
         private readonly ILogger _logger;
+#pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
+#pragma warning restore S1144 // Unused private types or members should be removed
 
         public NLogLogger(Type loggerType)
         {
