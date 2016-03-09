@@ -139,6 +139,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInsightsInitializer.cs" />
     <Compile Include="Services\CloudBlobClientFactory.cs" />
     <Compile Include="Services\CloudQueueService.cs" />
     <Compile Include="Services\ICloudBlobClientFactory.cs" />
