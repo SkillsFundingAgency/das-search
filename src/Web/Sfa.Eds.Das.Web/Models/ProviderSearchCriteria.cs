@@ -5,5 +5,7 @@
         public string PostCode { get; set; }
 
         public int StandardId { get; set; }
+
+        public string Id { get; set; }
     }
 }

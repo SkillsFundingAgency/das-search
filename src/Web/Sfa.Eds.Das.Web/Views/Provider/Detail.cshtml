@@ -4,5 +4,100 @@
     ViewBag.Title = "Detail";
 }
 
-<h2>Detail</h2>
+<main id="content">
 
+    @*<p class="small-btm-margin">
+        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
+    </p>*@
+
+    <div class="grid-row">
+
+        <div class="column-two-thirds">
+            <div class="hgroup">
+                <h1 class="heading-xlarge">
+                    <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
+                    @Model.ProviderName
+                </h1>
+                @GetStandardProperty("Website", "www.website.com")
+                
+            </div>
+        </div>
+
+        <div class="column-third">
+            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            {
+                <div class="related-container">
+                    <aside class="related">
+                        <h2 class="heading-medium">Provider quality assassment</h2>
+                    </aside>
+                </div>
+            }
+        </div>
+    </div>
+
+    <section>
+        <header>
+            <span>Apprenticeship details</span>
+            <h2 class="heading-large">
+                @Model.ProviderName
+            </h2>
+        </header>
+        <dl class="data-list">
+            @GetStandardProperty("Training location", Model.LocationName)
+            @GetStandardProperty("Distance", @Model.Distance.ToString())
+            @GetStandardProperty("Training details", @Model.Website)
+            @GetStandardProperty("Phone", Model.Phone)
+            @GetStandardProperty("Email", Model.Email)
+            @GetStandardProperty("Training structure", Model.DeliveryModes)
+        </dl>
+    </section>
+
+</main>
+
+
+@helper GetStandardDetailItem(string title, string item, string unit = "")
+{
+if (!string.IsNullOrEmpty(item))
+{
+        <dt class="minLength">@title</dt>
+            <dd class="minLength">@item @unit</dd>
+}
+}
+
+
+@helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+
+        <dt>@title</dt>
+        <dd>@Html.Raw(item)</dd>
+
+}
+}
+
+@helper GetStandardProperty(string title, List<string> items, bool hideIfEmpty = false)
+{
+    if (items != null)
+    {
+        foreach (var item in items)
+        {
+                <span>@Html.Raw(item)</span>
+        }
+    }
+}
+
+@helper GetDocumentItem(string pdfUrl, string title)
+{
+if (!string.IsNullOrEmpty(title))
+{
+        <li>
+            <a href="@pdfUrl">
+                @title
+            </a>
+            <p>
+                PDF, 268KB, 2 pages
+            </p>
+        </li>
+}
+}

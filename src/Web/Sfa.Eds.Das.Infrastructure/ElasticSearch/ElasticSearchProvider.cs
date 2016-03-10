@@ -71,11 +71,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
             {
                 Id = hit.Source.Id,
-                ProviderName = hit.Source.ProviderName,
-                PostCode = hit.Source.PostCode,
+                Name = hit.Source.Name,
                 UkPrn = hit.Source.UkPrn,
-                VenueName = hit.Source.VenueName,
-                StandardsId = hit.Source.StandardsId,
+                LocationName = hit.Source.LocationName,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).ToList();
 

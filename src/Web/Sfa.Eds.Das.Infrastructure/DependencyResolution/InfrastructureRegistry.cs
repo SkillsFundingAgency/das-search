@@ -11,6 +11,8 @@ using StructureMap.Configuration.DSL;
 
 namespace Sfa.Eds.Das.Infrastructure.DependencyResolution
 {
+    using Sfa.Eds.Das.Infrastructure.Elasticsearch;
+
     public sealed class InfrastructureRegistry : Registry
     {
         public InfrastructureRegistry()
@@ -23,6 +25,7 @@ namespace Sfa.Eds.Das.Infrastructure.DependencyResolution
             For<IStandardRepository>().Use<StandardRepository>();
             For<ISearchProvider>().Use<ElasticsearchProvider>();
             For<IRetryWebRequests>().Use<WebRequestRetryService>();
+            For<IProviderRepository>().Use<ProviderRepository>();
         }
     }
 }
