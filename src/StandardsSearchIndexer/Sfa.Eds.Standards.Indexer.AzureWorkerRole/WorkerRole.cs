@@ -4,11 +4,10 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     using System.Configuration;
     using System.Net;
     using System.Threading;
-
+    using Core.Services;
     using Microsoft.ApplicationInsights.Extensibility;
     using Microsoft.WindowsAzure.ServiceRuntime;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
 

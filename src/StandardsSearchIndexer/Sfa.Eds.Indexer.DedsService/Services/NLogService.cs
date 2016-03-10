@@ -1,15 +1,17 @@
 ﻿namespace Sfa.Infrastructure.Services
 {
     using System;
+    using Eds.Das.Indexer.Core.Services;
     using Microsoft.ApplicationInsights.NLogTarget;
     using NLog;
     using NLog.Targets.ElasticSearch;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
 
     public class NLogService : ILog
     {
+#pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
+#pragma warning restore S1144 // Unused private types or members should be removed
 
         private Logger logger;
         public NLogService(Type loggerType)

@@ -11,10 +11,14 @@
     using ApplicationServices.Services.Interfaces;
     using Settings;
     using Core;
-
+    using Core.Services;
     [TestFixture]
     public class IndexerServiceTests
     {
+        private Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>> _mockHelper;
+        private IIndexSettings<Core.Models.Provider.Provider> _mockSettings;
+        private IndexerService<Core.Models.Provider.Provider> _sut;
+
         [SetUp]
         public void Setup()
         {
@@ -25,12 +29,6 @@
 
             _sut = new IndexerService<Core.Models.Provider.Provider>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
         }
-
-        private Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>> _mockHelper;
-
-        private IIndexSettings<Core.Models.Provider.Provider> _mockSettings;
-
-        private IndexerService<Core.Models.Provider.Provider> _sut;
 
         [Test]
         public async Task ShouldIndexProvidersIfThatIndexHasBeenCreatedProperly()

@@ -3,6 +3,7 @@
 namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
 {
     using DependencyResolution;
+    using Indexer.Core.Services;
     using MetaDataCreationTool.Services.Interfaces;
     using NUnit.Framework;
 

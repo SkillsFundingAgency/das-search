@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
 {
     using System.Collections.Generic;
-
+    using Indexer.Core.Services;
     using Moq;
 
     using NUnit.Framework;

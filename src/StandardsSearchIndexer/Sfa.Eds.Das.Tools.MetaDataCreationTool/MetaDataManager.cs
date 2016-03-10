@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
+    using Indexer.Core.Services;
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;

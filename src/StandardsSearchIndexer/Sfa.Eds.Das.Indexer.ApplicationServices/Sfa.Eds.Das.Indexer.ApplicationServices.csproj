@@ -94,7 +94,6 @@
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\IHttpGetFile.cs" />
     <Compile Include="Services\IIndexerService.cs" />
-    <Compile Include="Infrastructure\ILog.cs" />
     <Compile Include="Services\IndexerService.cs" />
     <Compile Include="Infrastructure\IUnzipFiles.cs" />
     <Compile Include="MetaData\IVstsClient.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IGetApprenticeshipProviders.cs" />
+    <Compile Include="Services\ILog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

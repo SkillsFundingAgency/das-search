@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
 {
     using System.Collections.Generic;
-
+    using Core.Services;
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;

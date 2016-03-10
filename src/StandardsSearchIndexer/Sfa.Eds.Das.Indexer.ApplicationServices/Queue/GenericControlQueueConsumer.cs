@@ -3,7 +3,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Core.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;

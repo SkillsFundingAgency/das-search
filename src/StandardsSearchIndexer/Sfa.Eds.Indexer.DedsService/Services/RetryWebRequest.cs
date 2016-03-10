@@ -2,12 +2,10 @@
 {
     using System;
     using System.Net;
-
+    using Eds.Das.Indexer.Core.Services;
     using Polly;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
 
     public class RetryService : IRetryWebRequest
     {

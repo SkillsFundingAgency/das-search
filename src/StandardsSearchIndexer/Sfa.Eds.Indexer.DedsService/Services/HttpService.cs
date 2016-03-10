@@ -6,7 +6,7 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-
+    using Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
