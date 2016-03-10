@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using Eds.Das.Core.Domain.Model;
-
     public sealed class ProviderSearchResultsItem
     {
         public int Id { get; set; }
