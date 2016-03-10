@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Standard
+    public class ProviderStandardInfo
     {
         public Contact Contact { get; set; }
         public IEnumerable<LocationRef> Locations { get; set; }

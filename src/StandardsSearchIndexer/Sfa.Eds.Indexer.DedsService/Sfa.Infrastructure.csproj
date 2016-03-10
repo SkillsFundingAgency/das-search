@@ -123,7 +123,7 @@
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\LarsClient.cs" />
     <Compile Include="Services\NLogService.cs" />
-    <Compile Include="Services\ProviderImportService.cs" />
+    <Compile Include="CourseDirectory\CourseDirectoryClient.cs" />
     <Compile Include="Services\RetryWebRequest.cs" />
     <Compile Include="Services\VstsClient.cs" />
     <Compile Include="Services\ZipFileExtractor.cs" />

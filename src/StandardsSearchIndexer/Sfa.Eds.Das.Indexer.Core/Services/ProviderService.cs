@@ -3,22 +3,21 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using ProviderIndexer.Models;
-
+    using Models;
     public class ProviderService : IGetProviders
     {
-        private readonly IImportProviders _importer;
+        private readonly IGetApprenticeshipProviders _importer;
 
-        public ProviderService(IImportProviders importer)
+        public ProviderService(IGetApprenticeshipProviders importer)
         {
             _importer = importer;
         }
 
-        public async Task<IEnumerable<Provider>> GetProviders()
+        public async Task<IEnumerable<ProviderOld>> GetProviders()
         {
-            var incoming = _importer.GetProviders();
+            var incoming = _importer.GetApprenticeshipProviders();
 
-            var result = incoming.Result.Select(providerImport => new Provider
+            var result = incoming.Result.Select(providerImport => new ProviderOld
             {
                 Id = providerImport.Id,
                 UkPrn = providerImport.Ukprn.ToString(),

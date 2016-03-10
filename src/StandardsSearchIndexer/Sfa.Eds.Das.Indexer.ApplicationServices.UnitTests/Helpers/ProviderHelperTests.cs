@@ -23,7 +23,7 @@
         public void ShouldLoadEntriesFromCourseDirectoryAndFilterOutTheInactiveOnes()
         {
             // Arrange
-            var settings = Mock.Of<IIndexSettings<Provider>>();
+            var settings = Mock.Of<IIndexSettings<ProviderOld>>();
             var mockElasticSearchClient = new Mock<IElasticsearchClientFactory>();
             var mockCourseDirectoryClient = new Mock<IGetProviders>();
             var mockActiveProviderClient = new Mock<IGetActiveProviders>();
@@ -43,15 +43,15 @@
             mockActiveProviderClient.VerifyAll();
         }
 
-        private async Task<IEnumerable<Provider>> TwoProvidersTask()
+        private async Task<IEnumerable<ProviderOld>> TwoProvidersTask()
         {
             return TwoProviders();
         }
 
-        private IEnumerable<Provider> TwoProviders()
+        private IEnumerable<ProviderOld> TwoProviders()
         {
-            yield return new Provider() { UkPrn = "123" };
-            yield return new Provider() { UkPrn = "456" };
+            yield return new ProviderOld() { UkPrn = "123" };
+            yield return new ProviderOld() { UkPrn = "456" };
         } 
     }
 }

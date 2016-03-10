@@ -7,6 +7,6 @@
 
     public interface IGetProviders
     {
-        Task<IEnumerable<Provider>> GetProviders();
+        Task<IEnumerable<ProviderOld>> GetProviders();
     }
 }

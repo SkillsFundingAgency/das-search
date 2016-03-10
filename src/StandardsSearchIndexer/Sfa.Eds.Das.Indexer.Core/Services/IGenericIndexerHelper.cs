@@ -8,7 +8,7 @@
     {
         Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<T> entries);
 
-        ICollection<T> LoadEntries();
+        Task<ICollection<T>> LoadEntries();
 
         void DeleteOldIndexes(DateTime scheduledRefreshDateTime);
 

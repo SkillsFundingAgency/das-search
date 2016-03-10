@@ -40,35 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Provider\Provider.cs" />
     <Compile Include="Services\IGenericIndexerHelper.cs" />
     <Compile Include="Services\IGetActiveProviders.cs" />
-    <Compile Include="Services\IGetProviders.cs" />
     <Compile Include="Services\IGetStandardLevel.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\FrameworkProvider.cs" />
     <Compile Include="Models\IIndexEntry.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\LocationBasic.cs" />
     <Compile Include="Models\MetaDataItem.cs" />
-    <Compile Include="Models\ProviderImport\Address.cs" />
-    <Compile Include="Models\ProviderImport\Contact.cs" />
-    <Compile Include="Models\ProviderImport\Framework.cs" />
-    <Compile Include="Models\ProviderImport\Location.cs" />
-    <Compile Include="Models\ProviderImport\LocationRef.cs" />
-    <Compile Include="Models\ProviderImport\ProviderImport.cs" />
-    <Compile Include="Models\ProviderImport\Standard.cs" />
-    <Compile Include="Models\Provider.cs" />
-    <Compile Include="Models\ProviderBulk.cs" />
-    <Compile Include="Models\StandardProvider.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IImportProviders.cs" />
-    <Compile Include="Services\ProviderService.cs" />
+    <Compile Include="Services\IGetApprenticeshipProviders.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\ProviderImport\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

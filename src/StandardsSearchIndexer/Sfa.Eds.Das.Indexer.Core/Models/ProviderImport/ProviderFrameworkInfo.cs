@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Framework
+    public class ProviderFrameworkInfo
     {
         public Contact Contact { get; set; }
 

@@ -1,43 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 using Sfa.Eds.Das.Indexer.Core;
-    using Provider = Sfa.Eds.Das.Indexer.Core.Models.Provider;
+using Sfa.Eds.Das.Indexer.Core.Services;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    public class ProviderHelper : IGenericIndexerHelper<ProviderIndexer.Models.Provider>
+    public class ProviderHelper : IGenericIndexerHelper<Core.Models.Provider.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
-
         private readonly IIndexMaintenanceService _indexMaintenanceService;
-
-        private readonly IGetProviders _courseDirectoryClient;
-
+        private readonly IGetApprenticeshipProviders _providerRepository;
         private readonly IElasticClient _client;
-
-        private readonly IIndexSettings<ProviderIndexer.Models.Provider> _settings;
-
+        private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
         private readonly ILog Log;
 
         public ProviderHelper(
-            IIndexSettings<ProviderIndexer.Models.Provider> settings,
+            IIndexSettings<Core.Models.Provider.Provider> settings,
             IElasticsearchClientFactory elasticsearchClientFactory,
-            IGetProviders courseDirectoryClient,
+            IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             IIndexMaintenanceService indexMaintenanceService,
             ILog log)
         {
             _settings = settings;
-            _courseDirectoryClient = courseDirectoryClient;
+            _providerRepository = providerRepository;
             _activeProviderClient = activeProviderClient;
             _indexMaintenanceService = indexMaintenanceService;
 
@@ -45,83 +38,12 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             Log = log;
         }
 
-        public ICollection<ProviderIndexer.Models.Provider> LoadEntries()
+        public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
         {
-            var providers = _courseDirectoryClient.GetProviders();
-            var activeProviders = _activeProviderClient.GetActiveProviders();
-            Task.WaitAll();
+            var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
+            var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
 
-            return providers.Result.Where(x => activeProviders.Contains(x.UkPrn)).ToList();
-        }
-
-        public bool CreateIndexOld(DateTime scheduledRefreshDateTime)
-        {
-            // TODO: replace this method with CreateIndexForBulkData when Course directory data is available
-            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-
-            var indexExistsResponse = _client.IndexExists(indexName);
-
-            // If it already exists and is empty, let's delete it.
-            if (indexExistsResponse.Exists)
-            {
-                Log.Warn("Index already exists, deleting and creating a new one");
-
-                _client.DeleteIndex(indexName);
-            }
-
-            // create index
-            var json = @"
-                {
-                    ""mappings"": 
-                    {
-                        ""provider"": 
-                        { 
-                            ""properties"": 
-                            {
-                                ""id"":
-                                {
-                                    ""type"": ""long""
-                                },
-                                ""providerName"":
-                                {
-                                    ""type"": ""string""
-                                },
-                                ""postCode"":
-                                {
-                                    ""type"": ""string""
-                                },
-                                ""radius"":
-                                {
-                                    ""type"": ""long""
-                                },
-                                ""ukPrn"":
-                                {
-                                    ""type"": ""string""
-                                },
-                                ""venueName"":
-                                {
-                                    ""type"": ""string""
-                                },
-                                ""standardsId"":
-                                {
-                                    ""type"": ""long""
-                                },
-                                ""locationPoint"":
-                                {
-                                    ""type"": ""geo_point""
-                                },
-                                ""location"": 
-                                {
-                                    ""type"": ""geo_shape""
-                                }
-                            }
-                        }
-                    }
-                }";
-            _client.Raw.IndicesCreatePost(indexName, json);
-
-            var exists = _client.IndexExists(indexName).Exists;
-            return exists;
+            return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
@@ -242,13 +164,15 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                         }
                     }
                 }";
+
             _client.Raw.IndicesCreatePost(indexName, json);
 
             var exists = _client.IndexExists(indexName).Exists;
+
             return exists;
         }
 
-        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<ProviderIndexer.Models.Provider> entries)
+        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Core.Models.Provider.Provider> entries)
         {
             try
             {
@@ -267,7 +191,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         {
             var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
-            var a = _client.Search<ProviderIndexer.Models.Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
+            var a = _client.Search<Core.Models.Provider.Provider>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
             return a.Any();
         }
 
@@ -308,64 +232,23 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             }
             Log.Debug("Deletion completed...");
         }
-        /*
-        private string CreateProviderRawFormat(Provider provider)
-        {
-            var i = 0;
-            var standardsId = new StringBuilder();
-            foreach (var standardId in provider.StandardsId)
-            {
-                if (i == 0)
-                {
-                    standardsId.Append(standardId);
-                }
-                else
-                {
-                    standardsId.Append(string.Concat(", ", standardId));
-                }
-
-                i++;
-            }
-
-            var rawProvider = string.Concat(
-                @"{ ""id"": """,
-                provider.ProviderId,
-                @""", ""providerName"": """,
-                provider.ProviderName,
-                @""", ""postCode"": """,
-                provider.PostCode,
-                @""", ""standardsId"": [",
-                standardsId,
-                @"], ""venueName"": """,
-                provider.VenueName,
-                @""", ""ukPrn"": """,
-                provider.UkPrn,
-                @""", ""locationPoint"": [",
-                provider.Coordinate.Lon,
-                ", ",
-                provider.Coordinate.Lat,
-                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
-                provider.Coordinate.Lon,
-                ", ",
-                provider.Coordinate.Lat,
-                @"], ""radius"": """,
-                provider.Radius,
-                @"mi"" }}");
-            return rawProvider;
-        }
-        */
-        public List<string> CreateListRawFormat(ProviderIndexer.Models.Provider provider, Core.Models.ProviderImport.Standard standard)
+        
+        // TODO: LWA - I think this should probably live in Infrastructure
+        public List<string> CreateListRawFormat(Core.Models.Provider.Provider provider, Core.Models.Provider.StandardInformation standard)
         {
             var list = new List<string>();
 
-            foreach (var standardLocation in standard.Locations)
+            foreach (var standardLocation in standard.DeliveryLocations)
             {
-                var location = provider.Locations.FirstOrDefault(x => x.ID == standardLocation.ID);
+                // var location = provider.Locations.FirstOrDefault(x => x.ID == standardLocation.ID);
+
+                var location = standardLocation.DeliveryLocation;
 
                 var i = 0;
                 var deliveryModes = new StringBuilder();
                 foreach (var deliveryMode in standardLocation.DeliveryModes)
                 {
+                    // TODO: LWA Need to put textual verion in array???
                     deliveryModes.Append(i == 0 ? string.Concat(@"""", deliveryMode, @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
 
                     i++;
@@ -373,7 +256,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
                 var rawProvider = string.Concat(
                 @"{ ""ukprn"": """,
-                provider.UkPrn,
+                provider.Ukprn,
                 @""", ""id"": """,
                 provider.Id,
                 @""", ""name"": """,
@@ -381,23 +264,23 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 @""", ""standardcode"": ",
                 standard.StandardCode,
                 @", ""locationId"": ",
-                location.ID,
+                location.Id,
                 @", ""locationName"": """,
                 location.Name ?? "Unspecified",
                 @""", ""marketingInfo"": """,
                 standard.MarketingInfo ?? "Unspecified",
                 @""", ""phone"": """,
-                standard.Contact.Phone ?? "Unspecified",
+                standard.StandardContact.Phone ?? "Unspecified",
                 @""", ""email"": """,
-                standard.Contact.Email ?? "Unspecified",
+                standard.StandardContact.Email ?? "Unspecified",
                 @""", ""contactUsUrl"": """,
-                standard.Contact.ContactUsUrl ?? "Unspecified",
+                standard.StandardContact.Website ?? "Unspecified",
                 @""", ""standardInfoUrl"": """,
                 standard.StandardInfoUrl ?? "Unspecified",
                 @""", ""deliveryModes"": [",
                 deliveryModes,
                 @"], ""website"": """,
-                location.Website ?? "Unspecified",
+                location.Contact.Website ?? "Unspecified",
                 @""", ""address"": {""address1"":""",
                 location.Address.Address1 ?? "Unspecified",
                 @""", ""address2"": """,
@@ -409,13 +292,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 @""", ""postcode"": """,
                 location.Address.Postcode ?? "Unspecified",
                 @"""}, ""locationPoint"": [",
-                location.Address.Long,
+                location.Address.GeoPoint.Lon,
                 ", ",
-                location.Address.Lat,
+                location.Address.GeoPoint.Lat,
                 @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
-                location.Address.Long,
+                location.Address.GeoPoint.Lon,
                 ", ",
-                location.Address.Lat,
+                location.Address.GeoPoint.Lat,
                 @"], ""radius"": """,
                 standardLocation.Radius,
                 @"mi"" }}");
@@ -426,7 +309,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return list;
         }
 
-        private Task IndexProviders(string indexName, IEnumerable<ProviderIndexer.Models.Provider> providers)
+        private Task IndexProviders(string indexName, IEnumerable<Core.Models.Provider.Provider> providers)
         {
             // index the items
             foreach (var provider in providers)

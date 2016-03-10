@@ -64,11 +64,12 @@
             }
         }
 
-        public ICollection<MetaDataItem> LoadEntries()
+        public Task<ICollection<MetaDataItem>> LoadEntries()
         {
             UpdateMetadataRepositoryWithNewStandards();
             Log.Info("Indexing standard PDFs...");
-            return GetStandardsMetaDataFromGit().ToList();
+
+            return Task.FromResult<ICollection<MetaDataItem>>(GetStandardsMetaDataFromGit().ToList());
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)

@@ -32,9 +32,11 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
                 async () =>
                     {
                         Log.Info($"Creating new scheduled {_name} index at " + DateTime.Now);
+
                         try
                         {
                             var indexProperlyCreated = _indexerHelper.CreateIndex(scheduledRefreshDateTime);
+
                             if (!indexProperlyCreated)
                             {
                                 Log.Error($"{_name} index not created properly, exiting...");
@@ -42,7 +44,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
                             }
 
                             Log.Info($"Indexing {_name}s...");
-                            var entries = _indexerHelper.LoadEntries();
+                            var entries = await _indexerHelper.LoadEntries();
                             await _indexerHelper.IndexEntries(scheduledRefreshDateTime, entries);
 
                             PauseWhileIndexingIsBeingRun();
@@ -54,7 +56,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
                                 Log.Debug("Swap completed...");
 
                                 _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
-
                             }
                         }
                         catch (Exception ex)

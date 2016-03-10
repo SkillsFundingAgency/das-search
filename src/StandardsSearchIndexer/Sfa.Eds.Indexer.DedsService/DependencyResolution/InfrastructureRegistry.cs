@@ -1,5 +1,6 @@
 namespace Sfa.Infrastructure.DependencyResolution
 {
+    using CourseDirectory;
     using Sfa.Deds.Services;
     using Sfa.Deds.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
@@ -28,7 +29,7 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IInfrastructureSettings>().Use<InfrastructureSettings>();
             For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
-            For<IImportProviders>().Use<ProviderImportService>();
+            For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
         }
     }
 }

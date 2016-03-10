@@ -29,30 +29,30 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
     {
         private IContainer _ioc;
 
-        private IGenericIndexerHelper<Provider> _providerHelper;
+        private IGenericIndexerHelper<ProviderOld> _providerHelper;
 
-        private IIndexerService<Provider> _sut;
+        private IIndexerService<ProviderOld> _sut;
 
         private IElasticClient _elasticClient;
 
         private IIndexMaintenanceService _indexMaintenanceService;
 
-        private IIndexSettings<Provider> _providerSettings;
+        private IIndexSettings<ProviderOld> _providerSettings;
 
         [SetUp]
         public void SetUp()
         {
             _ioc = IoC.Initialize();
-            _ioc.GetInstance<IIndexSettings<Provider>>();
-            _providerHelper = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
-            _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
+            _ioc.GetInstance<IIndexSettings<ProviderOld>>();
+            _providerHelper = _ioc.GetInstance<IGenericIndexerHelper<ProviderOld>>();
+            _providerSettings = _ioc.GetInstance<IIndexSettings<ProviderOld>>();
 
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
             _indexMaintenanceService = new IndexMaintenanceService();
 
-            _sut = _ioc.GetInstance<IIndexerService<Provider>>();
+            _sut = _ioc.GetInstance<IIndexerService<ProviderOld>>();
         }
 
         private void DeleteIndexIfExists(string indexName)
@@ -64,11 +64,11 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             }
         }
 
-        private List<Provider> GetProvidersTest()
+        private List<ProviderOld> GetProvidersTest()
         {
-            return new List<Provider>
+            return new List<ProviderOld>
             {
-                new Provider
+                new ProviderOld
                 {
                     Id = 304107,
                     UkPrn = "10002387",
@@ -79,9 +79,9 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                     Phone = "01449 770911",
                     LearnerSatisfaction = null,
                     EmployerSatisfaction = null,
-                    Standards = new List<Standard>
+                    Standards = new List<ProviderStandardInfo>
                     {
-                        new Standard
+                        new ProviderStandardInfo
                         {
                             StandardCode = 17,
                             MarketingInfo = "Provider 304107 marketing into for standard code 17",
@@ -105,7 +105,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                                 }
                             }
                         },
-                        new Standard
+                        new ProviderStandardInfo
                         {
                             StandardCode = 45,
                             MarketingInfo = "Provider 304107 marketing into for standard code 45",
@@ -130,7 +130,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                             }
                         }
                     },
-                    Frameworks = new List<Framework>(),
+                    Frameworks = new List<ProviderFrameworkInfo>(),
                     Locations = new List<Location>
                     {
                         new Location
@@ -181,7 +181,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             await _sut.CreateScheduledIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
+            var mapping = _elasticClient.GetMapping<ProviderOld>(i => i.Index(indexName));
             mapping.Should().NotBeNull();
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
@@ -196,7 +196,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
 
             var providersTest = GetProvidersTest();
-            var expectedProviderResult = new Provider
+            var expectedProviderResult = new ProviderOld
             {
                 UkPrn = "10002387",
                 Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
@@ -216,7 +216,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             Thread.Sleep(2000);
 
-            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).QueryString("MK40 2SG"));
+            var retrievedResult = _elasticClient.Search<ProviderOld>(p => p.Index(indexName).QueryString("MK40 2SG"));
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
@@ -251,21 +251,21 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                 Field = "standardcode",
                 Value = 17
             };
-            var providersCase1 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query1));
+            var providersCase1 = _elasticClient.Search<ProviderOld>(s => s.Index(indexName).Query(query1));
 
             QueryContainer query2 = new TermQuery
             {
                 Field = "standardcode",
                 Value = 45
             };
-            var providersCase2 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query2));
+            var providersCase2 = _elasticClient.Search<ProviderOld>(s => s.Index(indexName).Query(query2));
 
             QueryContainer query3 = new TermQuery
             {
                 Field = "standardcode",
                 Value = 1234567890
             };
-            var providersCase3 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query3));
+            var providersCase3 = _elasticClient.Search<ProviderOld>(s => s.Index(indexName).Query(query3));
 
             Assert.AreEqual(1, providersCase1.Documents.Count());
             Assert.AreEqual(1, providersCase2.Documents.Count());

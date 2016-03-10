@@ -24,7 +24,7 @@
             _convertFromCsv = convertFromCsv;
         }
 
-        public IEnumerable<string> GetActiveProviders()
+        public IEnumerable<int> GetActiveProviders()
         {
             Func<string> func = LoadProvidersFromVsts;
             //var result = func.RetryWebRequest();
