@@ -5,6 +5,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     using System.Net;
     using System.Threading;
 
+    using Microsoft.ApplicationInsights.Extensibility;
     using Microsoft.WindowsAzure.ServiceRuntime;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
@@ -75,7 +76,9 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         private void SetupApplicationInsights()
         {
-            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["iKey"];
+            TelemetryConfiguration.Active.InstrumentationKey = ConfigurationManager.AppSettings["iKey"];
+
+            TelemetryConfiguration.Active.ContextInitializers.Add(new ApplicationInsightsInitializer());
         }
     }
 }

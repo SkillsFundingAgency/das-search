@@ -19,9 +19,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'Content/src/styles/',
+                    cwd: 'src/styles/',
                     src: '*.scss',
-                    dest: 'Content/dist/css/',
+                    dest: 'dist/css/',
                     ext: '.min.css'
                 }]
             }
@@ -36,9 +36,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'Content/dist/css/',
+                    cwd: 'dist/css/',
                     src: '{,*/}*.css',
-                    dest: 'Content/dist/css/'
+                    dest: 'dist/css/'
                 }]
             }
         },
@@ -47,9 +47,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'Content/src/images/',
+                    cwd: 'src/images/',
                     src: '{,*/}*.svg',
-                    dest: 'Content/dist/images/'
+                    dest: 'dist/images/'
                 }]
             }
         },
@@ -57,12 +57,12 @@ module.exports = function (grunt) {
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             styles: {
-                    files: ['Content/src/styles/{,*/}*.scss'],
+                    files: ['src/styles/{,*/}*.scss'],
                     tasks: ['sass', 'autoprefixer']
             },
 
             svg: {
-                    files: ['Content/src/images/{,*/}*.svg'],
+                    files: ['src/images/{,*/}*.svg'],
                     tasks: ['svgmin']
             }
         }
