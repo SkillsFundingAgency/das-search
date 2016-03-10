@@ -50,7 +50,6 @@ namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
 
         public string FrameworkInfoUrl { get; set; }
 
-
         public ContactInformation FrameworkContact { get; set; }
 
         public string MarketingInfo { get; set; }
@@ -60,7 +59,6 @@ namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
 
     public sealed class DeliveryInformation
     {
-        public string Id { get; set; } // This is the combination of Ukprn + Standard/Framework Id + LocationId
 
         public Location DeliveryLocation { get; set; }
 

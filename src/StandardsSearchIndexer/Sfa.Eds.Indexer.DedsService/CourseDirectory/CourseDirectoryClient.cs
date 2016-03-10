@@ -9,7 +9,7 @@ using Sfa.Infrastructure.Settings;
 
 namespace Sfa.Infrastructure.CourseDirectory
 {
-    public class CourseDirectoryClient : IGetApprenticeshipProviders
+    public sealed class CourseDirectoryClient : IGetApprenticeshipProviders
     {
         private readonly ICourseDirectoryProviderDataService _courseDirectoryProvider;
 
@@ -69,7 +69,6 @@ namespace Sfa.Infrastructure.CourseDirectory
                 // TODO: LWA populate the location id & sort radius types out.
                 deliveryLocations.Add(new DeliveryInformation
                 {
-                    Id = string.Empty,
                     DeliveryLocation = matchingLocation,
                     DeliveryModes = MapToDeliveryModes(apprenticeshipLocation.DeliveryModes),
                     Radius = (int)apprenticeshipLocation.Radius.Value
