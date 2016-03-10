@@ -8,6 +8,7 @@ using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 using Sfa.Eds.Das.Indexer.Core;
+using Sfa.Eds.Das.Indexer.Core.Models.Provider;
 using Sfa.Eds.Das.Indexer.Core.Services;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
@@ -181,9 +182,9 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
                 await IndexProviders(indexName, entries).ConfigureAwait(false);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Log.Error("Error indexing providerss: " + e.Message);
+                Log.Error("Error indexing providerss: " + ex.Message, ex);
             }
         }
 
@@ -240,16 +241,14 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
             foreach (var standardLocation in standard.DeliveryLocations)
             {
-                // var location = provider.Locations.FirstOrDefault(x => x.ID == standardLocation.ID);
-
                 var location = standardLocation.DeliveryLocation;
 
                 var i = 0;
                 var deliveryModes = new StringBuilder();
+
                 foreach (var deliveryMode in standardLocation.DeliveryModes)
                 {
-                    // TODO: LWA Need to put textual verion in array???
-                    deliveryModes.Append(i == 0 ? string.Concat(@"""", deliveryMode, @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
+                    deliveryModes.Append(i == 0 ? string.Concat(@"""", EnumHelper.GetDescription(deliveryMode), @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
 
                     i++;
                 }
@@ -292,13 +291,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 @""", ""postcode"": """,
                 location.Address.Postcode ?? "Unspecified",
                 @"""}, ""locationPoint"": [",
-                location.Address.GeoPoint.Lon,
+                location.Address.GeoPoint.Longitude,
                 ", ",
-                location.Address.GeoPoint.Lat,
+                location.Address.GeoPoint.Latitude,
                 @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
-                location.Address.GeoPoint.Lon,
+                location.Address.GeoPoint.Longitude,
                 ", ",
-                location.Address.GeoPoint.Lat,
+                location.Address.GeoPoint.Latitude,
                 @"], ""radius"": """,
                 standardLocation.Radius,
                 @"mi"" }}");
@@ -326,9 +325,9 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                     }
                     
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Log.Error("Error indexing provider: " + e.Message);
+                    Log.Error("Error indexing provider: " + ex.Message, ex);
                     throw;
                 }
             }

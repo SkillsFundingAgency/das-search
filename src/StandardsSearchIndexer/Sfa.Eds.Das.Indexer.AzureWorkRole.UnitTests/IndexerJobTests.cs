@@ -23,7 +23,7 @@
 
             // Assert
             mockConsumer.Verify(x => x.CheckMessage<MetaDataItem>());
-            mockConsumer.Verify(x => x.CheckMessage<ProviderOld>());
+            mockConsumer.Verify(x => x.CheckMessage<Core.Models.Provider.Provider>());
         }
     }
 }

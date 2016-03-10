@@ -51,9 +51,9 @@ namespace Sfa.Infrastructure.CourseDirectory
                 FrameworkCode = framework.FrameworkCode,
                 Level = framework.Level,
                 PathwayCode = framework.PathwayCode,
-                FrameworkInfoUrl = string.Empty, //TODO: LWA -  framework.FrameworkInfoUrl missing
+                FrameworkInfoUrl = framework.FrameworkInfoUrl,
                 FrameworkContact = new ContactInformation { Email = framework.Contact.Email, Phone = framework.Contact.Phone, Website = framework.Contact.ContactUsUrl },
-                MarketingInfo = string.Empty, // TODO: LWA marketing info is missing from the Infrastucture Model -- framework.MarketingInfo,
+                MarketingInfo = framework.MarketingInfo,
                 DeliveryLocations = GetDeliveryLocations(framework.Locations, providerLocations)
             }).ToList();
         }
@@ -66,12 +66,11 @@ namespace Sfa.Infrastructure.CourseDirectory
             {
                 var matchingLocation = providerLocations.Single(x => x.Id == apprenticeshipLocation.ID);
 
-                // TODO: LWA populate the location id & sort radius types out.
                 deliveryLocations.Add(new DeliveryInformation
                 {
                     DeliveryLocation = matchingLocation,
                     DeliveryModes = MapToDeliveryModes(apprenticeshipLocation.DeliveryModes),
-                    Radius = (int)apprenticeshipLocation.Radius.Value
+                    Radius = apprenticeshipLocation.Radius
                 });
             }
 
@@ -80,24 +79,26 @@ namespace Sfa.Infrastructure.CourseDirectory
 
         private IEnumerable<ModesOfDelivery> MapToDeliveryModes(IList<string> deliveryModes)
         {
-            // TODO: LWA handle when delivery modes is null
-            var modes = new List<ModesOfDelivery>(deliveryModes.Count);
+            var modes = new List<ModesOfDelivery>(deliveryModes?.Count ?? 0);
 
-            foreach (var mode in deliveryModes)
+            if (deliveryModes != null)
             {
-                switch (mode)
+                foreach (var mode in deliveryModes)
                 {
-                    case "100PercentEmployer":
-                        modes.Add(ModesOfDelivery.OneHundredPercentEmployer);
-                        break;
-                    case "BlockRelease":
-                        modes.Add(ModesOfDelivery.BlockRelease);
-                        break;
-                    case "DayRelease":
-                        modes.Add(ModesOfDelivery.DayRelease);
-                        break;
-                    default:
-                        break;
+                    switch (mode)
+                    {
+                        case "100PercentEmployer":
+                            modes.Add(ModesOfDelivery.OneHundredPercentEmployer);
+                            break;
+                        case "BlockRelease":
+                            modes.Add(ModesOfDelivery.BlockRelease);
+                            break;
+                        case "DayRelease":
+                            modes.Add(ModesOfDelivery.DayRelease);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
@@ -118,12 +119,22 @@ namespace Sfa.Infrastructure.CourseDirectory
                     Town = matchingLocation.Address.Town,
                     County = matchingLocation.Address.County,
                     Postcode = matchingLocation.Address.Postcode,
-                    GeoPoint = new Eds.Das.Indexer.Common.Models.Coordinate
-                    {
-                        Lat = matchingLocation.Address.Lat.Value, // TODO: LWA - Need to handle when null is being passed.
-                        Lon = matchingLocation.Address.Long.Value
-                    }
+                    GeoPoint = SetGeoPoint(matchingLocation)
                 }
+            };
+        }
+
+        private static Eds.Das.Indexer.Common.Models.Coordinate SetGeoPoint(Models.Location matchingLocation)
+        {
+            if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
+            {
+                return null;
+            }
+
+            return new Eds.Das.Indexer.Common.Models.Coordinate
+            {
+                Latitude = matchingLocation.Address.Latitude.Value,
+                Longitude = matchingLocation.Address.Longitude.Value
             };
         }
 

@@ -56,6 +56,10 @@ namespace Sfa.Infrastructure.Models
         /// </summary>
         public int PathwayCode { get; set; }
 
+        public string FrameworkInfoUrl { get; set; }
+
+        public string MarketingInfo { get; set; }
+
         /// <summary>
         ///     Deserialize the object
         /// </summary>

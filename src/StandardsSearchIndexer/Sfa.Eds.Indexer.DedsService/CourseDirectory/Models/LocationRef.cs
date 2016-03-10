@@ -47,7 +47,7 @@ namespace Sfa.Infrastructure.Models
         /// <summary>
         ///     Optional.
         /// </summary>
-        public long? Radius { get; set; }
+        public int Radius { get; set; }
 
         /// <summary>
         ///     Optional.
@@ -69,21 +69,25 @@ namespace Sfa.Infrastructure.Models
                         DeliveryModes.Add((string)deliveryModesValue);
                     }
                 }
+
                 var idValue = inputObject["id"];
                 if (idValue != null && idValue.Type != JTokenType.Null)
                 {
                     ID = (int)idValue;
                 }
+
                 var marketingInfoValue = inputObject["marketingInfo"];
                 if (marketingInfoValue != null && marketingInfoValue.Type != JTokenType.Null)
                 {
                     MarketingInfo = (string)marketingInfoValue;
                 }
+
                 var radiusValue = inputObject["radius"];
                 if (radiusValue != null && radiusValue.Type != JTokenType.Null)
                 {
-                    Radius = (long)radiusValue;
+                    Radius = (int)radiusValue;
                 }
+
                 var standardInfoUrlValue = inputObject["standardInfoUrl"];
                 if (standardInfoUrlValue != null && standardInfoUrlValue.Type != JTokenType.Null)
                 {

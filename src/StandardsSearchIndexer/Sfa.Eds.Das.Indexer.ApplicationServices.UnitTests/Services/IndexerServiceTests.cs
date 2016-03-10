@@ -5,14 +5,12 @@
     using System.Threading.Tasks;
 
     using Moq;
-
     using NUnit.Framework;
 
     using Infrastructure;
     using ApplicationServices.Services.Interfaces;
     using Settings;
     using Core;
-    using Core.Models;
 
     [TestFixture]
     public class IndexerServiceTests
@@ -20,19 +18,19 @@
         [SetUp]
         public void Setup()
         {
-            _mockHelper = new Mock<IGenericIndexerHelper<ProviderOld>>();
+            _mockHelper = new Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>>();
             _mockSettings =
-                Mock.Of<IIndexSettings<ProviderOld>>(
+                Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>( // TODO: LWA - This url shouldn't be hardcoded here.
                     x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.IndexesAlias == "ciproviderindexesalias");
 
-            _sut = new IndexerService<ProviderOld>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
+            _sut = new IndexerService<Core.Models.Provider.Provider>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
         }
 
-        private Mock<IGenericIndexerHelper<ProviderOld>> _mockHelper;
+        private Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>> _mockHelper;
 
-        private IIndexSettings<ProviderOld> _mockSettings;
+        private IIndexSettings<Core.Models.Provider.Provider> _mockSettings;
 
-        private IndexerService<ProviderOld> _sut;
+        private IndexerService<Core.Models.Provider.Provider> _sut;
 
         [Test]
         public async Task ShouldIndexProvidersIfThatIndexHasBeenCreatedProperly()
@@ -44,7 +42,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<ProviderOld>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
@@ -60,7 +58,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<ProviderOld>>()), Times.Never);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -75,7 +73,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<ProviderOld>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Never);
             _mockHelper.VerifyAll();
@@ -92,7 +90,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<ProviderOld>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Once);
             _mockHelper.VerifyAll();

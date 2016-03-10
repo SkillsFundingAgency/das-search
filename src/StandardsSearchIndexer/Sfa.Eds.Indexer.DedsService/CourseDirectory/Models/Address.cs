@@ -30,12 +30,12 @@ namespace Sfa.Infrastructure.Models
         /// <summary>
         ///     Optional.
         /// </summary>
-        public double? Lat { get; set; }
+        public double? Latitude { get; set; }
 
         /// <summary>
         ///     Optional.
         /// </summary>
-        public double? Long { get; set; }
+        public double? Longitude { get; set; }
 
         /// <summary>
         ///     Optional.
@@ -87,12 +87,12 @@ namespace Sfa.Infrastructure.Models
                 var latValue = inputObject["lat"];
                 if (latValue != null && latValue.Type != JTokenType.Null)
                 {
-                    Lat = (double)latValue;
+                    Latitude = (double)latValue;
                 }
                 var longValue = inputObject["long"];
                 if (longValue != null && longValue.Type != JTokenType.Null)
                 {
-                    Long = (double)longValue;
+                    Longitude = (double)longValue;
                 }
                 var phoneValue = inputObject["phone"];
                 if (phoneValue != null && phoneValue.Type != JTokenType.Null)
