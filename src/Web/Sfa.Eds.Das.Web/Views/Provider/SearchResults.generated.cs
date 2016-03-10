@@ -106,7 +106,7 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
             #line hidden
 WriteLiteral("\r\n            </p>\r\n            <ol");
 
-WriteLiteral(" class=\"frameworkResults\"");
+WriteLiteral(" class=\"providerResults\"");
 
 WriteLiteral(">\r\n");
 
@@ -118,174 +118,17 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 27 "..\..\Views\Provider\SearchResults.cshtml"
-                 foreach (var item in Model.Hits)
-                {
-
+                  
+                    Html.RenderPartial("_ProviderInformation");
+                
             
             #line default
             #line hidden
-WriteLiteral("                    <li");
-
-WriteLiteral(" class=\"result\"");
-
-WriteLiteral(">\r\n                        <div");
-
-WriteLiteral(" class=\"column details\"");
-
-WriteLiteral(">\r\n                            <h2");
-
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                ");
-
-            
-            #line 32 "..\..\Views\Provider\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.Id }, null));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                            </h2>\r\n                            <dl>\r\n          " +
-"                      <dt");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">Distance:</dt>\r\n                                <dd");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">\r\n                                    <span>");
-
-            
-            #line 37 "..\..\Views\Provider\SearchResults.cshtml"
-                                     Write(item.Distance);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" miles away</span>\r\n                                </dd>\r\n                      " +
-"      </dl>\r\n                            <dl>\r\n                                <" +
-"dt");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">Website:</dt>\r\n                                <dd");
-
-WriteLiteral(" class=\"website\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 1628), Tuple.Create("\"", 1648)
-            
-            #line 43 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 1635), Tuple.Create<System.Object, System.Int32>(item.Website
-            
-            #line default
-            #line hidden
-, 1635), false)
-);
-
-WriteLiteral("> ");
-
-            
-            #line 43 "..\..\Views\Provider\SearchResults.cshtml"
-                                                        Write(item.Website);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" INSERT DATA HERE</a>\r\n                                </dd>\r\n                   " +
-"         </dl>\r\n                            <dl>\r\n                              " +
-"  <dt");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">Employer satisfaction:</dt>\r\n                                <dd");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">\r\n                                    <span>");
-
-            
-            #line 49 "..\..\Views\Provider\SearchResults.cshtml"
-                                     Write(item.EmployerSatisfaction);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" %</span>\r\n                                </dd>\r\n                            </d" +
-"l>\r\n                            <dl>\r\n                                <dt");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">Learner satisfaction:</dt>\r\n                                <dd");
-
-WriteLiteral(" class=\"distance\"");
-
-WriteLiteral(">\r\n                                    <span>");
-
-            
-            #line 55 "..\..\Views\Provider\SearchResults.cshtml"
-                                     Write(item.LearnerSatisfaction);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" %</span>\r\n                                </dd>\r\n                            </d" +
-"l>\r\n                        </div>\r\n                    </li>\r\n");
-
-            
-            #line 60 "..\..\Views\Provider\SearchResults.cshtml"
-                }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("            </ol>\r\n\r\n        </div>\r\n\r\n        <div");
+WriteLiteral("\r\n            </ol>\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
-WriteLiteral(">\r\n\r\n            <div");
-
-WriteLiteral(" class=\"related-container\"");
-
-WriteLiteral(">\r\n                <aside");
-
-WriteLiteral(" class=\"related\"");
-
-WriteLiteral(" id=\"related\"");
-
-WriteLiteral(">\r\n                    <div");
-
-WriteLiteral(" class=\"inner group related-subsection\"");
-
-WriteLiteral(">\r\n\r\n                        <h2");
-
-WriteLiteral(" id=\"parent-subsection\"");
-
-WriteLiteral(">Help</h2>\r\n\r\n                        <ul");
-
-WriteLiteral(" class=\"link-list\"");
-
-WriteLiteral(">\r\n                            <li>\r\n                                <a");
-
-WriteLiteral(" href=\"help_standards.html\"");
-
-WriteLiteral(">What is a standard</a>\r\n                            </li>\r\n                     " +
-"   </ul>\r\n\r\n                    </div>\r\n                    <div");
-
-WriteLiteral(" class=\"inner group\"");
-
-WriteLiteral(">\r\n                        <a");
-
-WriteLiteral(" class=\"return-to-top\"");
-
-WriteLiteral(" href=\"#content\"");
-
-WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n                </aside>\r\n     " +
-"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>");
 
         }
     }

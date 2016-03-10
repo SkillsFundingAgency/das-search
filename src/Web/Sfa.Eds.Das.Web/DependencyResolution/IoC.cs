@@ -18,13 +18,20 @@
 
 namespace Sfa.Eds.Das.Web.DependencyResolution
 {
+    using Infrastructure.DependencyResolution;
+    using Sfa.Das.ApplicationServices.DependencyResolution;
     using StructureMap;
 
     public static class IoC
     {
         public static IContainer Initialize()
         {
-            return new Container(c => { c.AddRegistry<DefaultRegistry>(); c.AddRegistry<SearchRegistry>(); });
+            return new Container(c => {
+                c.AddRegistry<DefaultRegistry>();
+                c.AddRegistry<SearchRegistry>();
+                c.AddRegistry<InfrastructureRegistry>();
+                c.AddRegistry<ApplicationServicesRegistry>();
+            });
         }
     }
 }

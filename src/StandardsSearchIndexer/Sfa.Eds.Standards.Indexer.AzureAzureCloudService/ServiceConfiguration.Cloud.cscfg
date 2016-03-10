@@ -7,4 +7,17 @@
     <Certificates>
     </Certificates>
   </Role>
+  <NetworkConfiguration>
+    <!-- Name of the target Virtual Network -->
+    <VirtualNetworkSite name="#{azure.vnet.name}" />
+
+    <!-- Associating a Role to a Specific Subnet by name -->
+    <AddressAssignments>
+      <InstanceAddress roleName="Sfa.Eds.Das.Indexer.AzureWorkerRole">
+        <Subnets>
+          <Subnet name="#{azure.vnet.subnet.name}" />
+        </Subnets>
+      </InstanceAddress>
+    </AddressAssignments>
+  </NetworkConfiguration>
 </ServiceConfiguration>

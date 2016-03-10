@@ -50,10 +50,6 @@
       <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -84,39 +80,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\MetaDataCreationRegistry.cs" />
-    <Compile Include="Helper\IHttpHelper.cs" />
-    <Compile Include="IGetStandardMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
     <Compile Include="Models\GovLearn\GovLearnResponse.cs" />
-    <Compile Include="Helper\FileHelper.cs" />
-    <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Models\TypicalLength.cs" />
-    <Compile Include="Services\BaseSettings.cs" />
     <Compile Include="Services\Interfaces\IAngleSharpService.cs" />
-    <Compile Include="Services\Interfaces\IGenerateStandardMetaData.cs" />
     <Compile Include="Services\Interfaces\ILarsDataService.cs" />
-    <Compile Include="Services\Interfaces\ILog4NetLogger.cs" />
-    <Compile Include="Services\Interfaces\IUnzipFiles.cs" />
-    <Compile Include="Services\Interfaces\IVstsClient.cs" />
-    <Compile Include="Services\VstsClient.cs" />
-    <Compile Include="Services\Log4NetLogger.cs" />
     <Compile Include="Services\VstsService.cs" />
-    <Compile Include="Models\StandardObject.cs" />
     <Compile Include="Services\GitDynamicModelGenerator.cs" />
     <Compile Include="MetaDataManager.cs" />
     <Compile Include="Models\Git\GitTree.cs" />
     <Compile Include="Models\Git\Entity.cs" />
-    <Compile Include="Services\Interfaces\IVstsService.cs" />
     <Compile Include="Services\LarsDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AngleSharpService.cs" />
     <Compile Include="Services\CsvService.cs" />
     <Compile Include="Services\Interfaces\IReadStandardsFromCsv.cs" />
     <Compile Include="Models\Standard.cs" />
-    <Compile Include="Services\Settings.cs" />
-    <Compile Include="Services\Interfaces\ISettings.cs" />
     <Compile Include="Services\Interfaces\IGitDynamicModelGenerator.cs" />
-    <Compile Include="Services\ZipFileExtractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -127,6 +107,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.ApplicationServices\Sfa.Eds.Das.Indexer.ApplicationServices.csproj">
+      <Project>{473307D1-67C9-411E-AD71-CF3C6FE892F4}</Project>
+      <Name>Sfa.Eds.Das.Indexer.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
@@ -139,7 +123,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

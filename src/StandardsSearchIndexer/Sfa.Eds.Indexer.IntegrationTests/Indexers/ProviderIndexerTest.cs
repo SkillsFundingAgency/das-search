@@ -12,33 +12,19 @@
 
     using NUnit.Framework;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Common.Configuration;
-    using Sfa.Eds.Das.Indexer.Common.Helpers;
     using Sfa.Eds.Das.Indexer.Common.Models;
-    using Sfa.Eds.Das.Indexer.Common.Services;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
-    using Sfa.Eds.Das.ProviderIndexer.Helpers;
-    using Sfa.Eds.Das.ProviderIndexer.Models;
+    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     using StructureMap;
 
     [TestFixture]
     public class ProviderIndexerTest
     {
-        [SetUp]
-        public void SetUp()
-        {
-            _ioc = IoC.Initialize();
-            _ioc.GetInstance<IIndexSettings<Provider>>();
-            _providerHelper = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
-
-            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
-            _elasticClient = elasticClientFactory.GetElasticClient();
-
-            _sut = _ioc.GetInstance<IIndexerService<Provider>>();
-        }
-
         private IContainer _ioc;
 
         private IGenericIndexerHelper<Provider> _providerHelper;
@@ -46,6 +32,26 @@
         private IIndexerService<Provider> _sut;
 
         private IElasticClient _elasticClient;
+
+        private IIndexMaintenanceService _indexMaintenanceService;
+
+        private IIndexSettings<Provider> _providerSettings;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _ioc = IoC.Initialize();
+            _ioc.GetInstance<IIndexSettings<Provider>>();
+            _providerHelper = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
+            _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
+
+            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
+            _elasticClient = elasticClientFactory.GetElasticClient();
+
+            _indexMaintenanceService = new IndexMaintenanceService();
+
+            _sut = _ioc.GetInstance<IIndexerService<Provider>>();
+        }
 
         private void DeleteIndexIfExists(string indexName)
         {
@@ -218,7 +224,7 @@
         public async Task ShouldCreateScheduledIndexAndMapping()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
@@ -237,7 +243,7 @@
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
 
             var providersTest = GetProvidersTest();
             var expectedProviderResult = new Provider
@@ -276,7 +282,7 @@
         public void ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _providerHelper.GetIndexNameAndDateExtension(scheduledDate);
+            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
 
             var providersTest = GetProvidersTest();
 

@@ -1,11 +1,14 @@
-﻿using System.Threading.Tasks;
-
+﻿
 namespace Sfa.Eds.Das.Web.Controllers
 {
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.ApplicationServices;
+    using Sfa.Eds.Das.Core.Domain.Model;
+    using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Web.Models;
     using Sfa.Eds.Das.Web.Services;
@@ -17,11 +20,17 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        public ProviderController(IProviderSearchService providerSearchService, ILog logger, IMappingService mappingService)
+        private IProviderRepository _providerRepository;
+
+        private readonly ILookupLocations _postcodeLookup;
+
+        public ProviderController(IProviderSearchService providerSearchService, ILog logger, IMappingService mappingService, IProviderRepository providerRepository, ILookupLocations postcodeLookup)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
+            _providerRepository = providerRepository;
+            _postcodeLookup = postcodeLookup;
         }
 
         [HttpGet]
@@ -40,9 +49,23 @@ namespace Sfa.Eds.Das.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detail(string id)
+        public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            return View();
+            var model = this._providerRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
+
+            if (model == null)
+            {
+                var message = $"Cannot find provider: {criteria.ProviderId}";
+                _logger.Warn($"404 - {message}");
+
+                return new HttpNotFoundResult(message);
+            }
+
+            var viewModel = this._mappingService.Map<Provider, ProviderViewModel>(model);
+
+            viewModel.LocationName = model.VenueName;
+
+            return View(viewModel);
         }
     }
 }

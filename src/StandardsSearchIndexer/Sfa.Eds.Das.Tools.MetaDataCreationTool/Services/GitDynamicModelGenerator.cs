@@ -2,12 +2,14 @@
 {
     using System.Collections.Generic;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class GitDynamicModelGenerator : IGitDynamicModelGenerator
     {
-        public string GenerateCommitBody(string branchPath, string oldObjectId, List<StandardObject> items)
+        public string GenerateCommitBody(string branchPath, string oldObjectId, List<FileContents> items)
         {
             var str = new
             {
@@ -24,7 +26,7 @@
             return Newtonsoft.Json.JsonConvert.SerializeObject(str);
         }
 
-        private dynamic[] Changes(IEnumerable<StandardObject> items)
+        private dynamic[] Changes(IEnumerable<FileContents> items)
         {
             var returnList = new List<dynamic>();
             foreach (var item in items)

@@ -1,25 +1,23 @@
 ﻿namespace Sfa.Eds.Das.Web
 {
     using System;
-    using System.Configuration;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Http;
-    using log4net;
-
-    using Sfa.Eds.Das.Infrastructure.Logging;
-
+    using Core.Logging;
+    using System.Web.Configuration;
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static readonly ILog Log = LogManager.GetLogger("MainLogger");
+        private ILog _logger;
 
         protected void Application_Start()
         {
-            var logserver = ConfigurationManager.AppSettings["ElasticServerIp"];
-            Log4NetSettings.Initialise(logserver);
+            _logger = DependencyResolver.Current.GetService<ILog>();
 
-            Log.Info("Starting web applications...");
+            _logger.Info("Starting web applications...");
+
+            SetupApplicationInsights();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -27,14 +25,18 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Log.Info("Web applications started...");
+            _logger.Info("Web applications started...");
         }
-
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
 
-            Log.Error("App_Error", ex);
+            _logger.Error(ex, "App_Error");
+        }
+
+        private void SetupApplicationInsights()
+        {
+            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
         }
     }
 }

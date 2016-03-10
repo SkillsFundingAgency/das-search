@@ -1,33 +1,45 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.IO.Compression;
     using System.Linq;
 
     using Newtonsoft.Json;
 
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Helper;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.GovLearn;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public sealed class LarsDataService : ILarsDataService
     {
-        private readonly ISettings _settings;
         private readonly IReadStandardsFromCsv _csvService;
-        private readonly IHttpHelper _httpHelper;
-        private readonly IUnzipFiles _fileExtractor;
-        private readonly ILog4NetLogger _logger;
 
-        public LarsDataService(ISettings settings, IReadStandardsFromCsv csvService, IHttpHelper httpHelper, IUnzipFiles fileExtractor, ILog4NetLogger logger)
+        private readonly IUnzipStream _fileExtractor;
+
+        private readonly IHttpGet _httpGet;
+
+        private readonly IHttpGetFile _httpGetFile;
+
+        private readonly ILog _logger;
+
+        private readonly IAppServiceSettings _appServiceSettings;
+
+        public LarsDataService(
+            IAppServiceSettings appServiceSettings,
+            IReadStandardsFromCsv csvService,
+            IHttpGetFile httpGetFile,
+            IUnzipStream fileExtractor,
+            ILog logger,
+            IHttpGet httpGet)
         {
-            _settings = settings;
+            _appServiceSettings = appServiceSettings;
             _csvService = csvService;
-            _httpHelper = httpHelper;
+            _httpGetFile = httpGetFile;
             _fileExtractor = fileExtractor;
             _logger = logger;
+            _httpGet = httpGet;
         }
 
         public IEnumerable<Standard> GetListOfCurrentStandards()
@@ -35,22 +47,13 @@
             var zipFilePath = GetZipFilePath();
             _logger.Debug($"Zip file path: {zipFilePath}");
 
-            var zipFile = _httpHelper.DownloadFile(zipFilePath, _settings.WorkingFolder);
+            var zipStream = _httpGetFile.GetFile(zipFilePath);
             _logger.Debug($"Zip file downloaded");
 
-            var extractedPath = _fileExtractor.ExtractFileFromZip(zipFile, _settings.CsvFileName);
-            _logger.Debug($"Path to csv file: {extractedPath}");
+            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileName);
+            _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
 
-            var csvFile = Path.Combine(extractedPath, _settings.CsvFileName);
-
-            if (!File.Exists(csvFile))
-            {
-                _logger.Warn($"Can't find file {csvFile}");
-
-                return new List<Standard>();
-            }
-
-            var standards = _csvService.ReadStandardsFromFile(csvFile);
+            var standards = _csvService.ReadStandardsFromStream(fileContent);
             _logger.Debug($"Read: {standards.Count} standards from file.");
 
             return standards;
@@ -58,7 +61,7 @@
 
         private string GetZipFilePath()
         {
-            var json = _httpHelper.DownloadString(_settings.GovLearningUrl, null, null);
+            var json = _httpGet.Get(_appServiceSettings.GovLearningUrl, null, null);
             var govLearnResponse = JsonConvert.DeserializeObject<GovLearnResponse>(json);
 
             if (govLearnResponse == null)

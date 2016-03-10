@@ -5,6 +5,9 @@
     using NUnit.Framework;
     using MetaDataCreationTool.Services;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Common.Settings;
+
     [TestFixture]
     public class BaseSettingsTests
     {
@@ -27,14 +30,14 @@
         [ExpectedException(typeof(ConfigurationErrorsException), ExpectedMessage = "Setting with key FailToGetSetting is missing")]
         public void TryGetMissingSetting()
         {
-            var settings = new Settings();
+            var settings = new AppServiceSettings();
             settings.GetSetting("FailToGetSetting");
         }
 
         [Test]
         public void GettingSetting()
         {
-            var settings = new Settings();
+            var settings = new AppServiceSettings();
             var setting = settings.GetSetting("intAsString");
             Assert.AreEqual("five", setting);
         }

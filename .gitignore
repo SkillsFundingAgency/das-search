@@ -27,6 +27,7 @@ Package.**.nupkg
 # bower components
 **/wwwroot/lib/
 node_modules/
+npm-debug*
 
 
 # MSTest test Results

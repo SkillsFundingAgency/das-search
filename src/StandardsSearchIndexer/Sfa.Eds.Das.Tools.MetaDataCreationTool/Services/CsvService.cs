@@ -5,24 +5,25 @@
     using System.IO;
     using System.Linq;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class CsvService : IReadStandardsFromCsv
     {
         private readonly IAngleSharpService angelService;
-        private readonly ISettings settings;
+        private readonly IAppServiceSettings appServiceSettings;
 
-        public CsvService(IAngleSharpService angelService, ISettings settings)
+        public CsvService(IAngleSharpService angelService, IAppServiceSettings appServiceSettings)
         {
             this.angelService = angelService;
-            this.settings = settings;
+            this.appServiceSettings = appServiceSettings;
         }
 
-        public List<Standard> ReadStandardsFromFile(string csvFile)
+        public List<Standard> ReadStandardsFromFile(string csvFilePath)
         {
             List<Standard> standards;
-            using (var reader = new StreamReader(File.OpenRead(csvFile)))
+            using (var reader = new StreamReader(File.OpenRead(csvFilePath)))
             {
                 reader.ReadLine();
                 standards = new List<Standard>();
@@ -35,6 +36,22 @@
                     {
                         standards.Add(standard);
                     }
+                }
+            }
+
+            return standards;
+        }
+
+        public List<Standard> ReadStandardsFromStream(string csvFile)
+        {
+            var standards = new List<Standard>();
+            foreach (var line in csvFile.Split('\n'))
+            {
+                var values = line?.Split(',');
+                Standard standard;
+                if (CreateStandard(values, out standard))
+                {
+                    standards.Add(standard);
                 }
             }
 
