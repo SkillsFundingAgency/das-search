@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nest;
@@ -87,7 +88,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 StandardInfoUrl = hit.Source.StandardInfoUrl,
                 Website = hit.Source.Website,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
-            }).ToList();
+            }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
 
             if (results?.ConnectionStatus?.HttpStatusCode != 200)
             {
