@@ -1,9 +1,8 @@
-﻿namespace Sfa.Das.ApplicationServices.Models
+﻿using System.Collections.Generic;
+using Sfa.Eds.Das.Core.Domain.Model;
+
+namespace Sfa.Das.ApplicationServices.Models
 {
-    using System.Collections.Generic;
-
-    using Sfa.Eds.Das.Core.Domain.Model;
-
     public sealed class StandardSearchResultsItem
     {
         public int StandardId { get; set; }

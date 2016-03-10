@@ -1,6 +1,6 @@
-﻿namespace Sfa.Das.ApplicationServices.Models
+namespace Sfa.Das.ApplicationServices.Models
 {
-    public sealed class Address
+    public class Address
     {
         public string Address1 { get; set; }
 

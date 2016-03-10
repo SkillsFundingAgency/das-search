@@ -1,8 +1,7 @@
-﻿using System.Threading.Tasks;
-
+﻿
 namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Sfa.Das.ApplicationServices;
