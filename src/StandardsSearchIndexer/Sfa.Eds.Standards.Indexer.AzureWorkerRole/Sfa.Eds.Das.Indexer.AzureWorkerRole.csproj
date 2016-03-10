@@ -195,7 +195,9 @@
     </None>
     <None Include="Sfa.Eds.Standards.Indexer.AzureWorkerRole.ruleset" />
     <None Include="stylecop.json" />
-    <None Include="Transform.Nlog.config" />
+    <None Include="Transform.Nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
