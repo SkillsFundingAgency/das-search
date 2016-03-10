@@ -32,6 +32,10 @@
     <CodeAnalysisRuleSet>..\Sfa.Eds.Standards.Indexer.UnitTests\Sfa.Eds.Das.ProviderIndexer.UnitTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Elasticsearch.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
       <HintPath>..\packages\Elasticsearch.Net.1.7.1\lib\net45\Elasticsearch.Net.dll</HintPath>
       <Private>True</Private>
@@ -42,6 +46,10 @@
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.1.2.3\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=0.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.0.9.6\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights.NLogTarget, Version=1.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -90,6 +98,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseDirectory\CourseDirectoryProviderDataService.cs" />
+    <Compile Include="CourseDirectory\CourseDirectoryProviderDataServiceExtensions.cs" />
+    <Compile Include="CourseDirectory\ICourseDirectoryProviderDataService.cs" />
+    <Compile Include="CourseDirectory\Models\Address.cs" />
+    <Compile Include="CourseDirectory\Models\Contact.cs" />
+    <Compile Include="CourseDirectory\Models\Error.cs" />
+    <Compile Include="CourseDirectory\Models\Framework.cs" />
+    <Compile Include="CourseDirectory\Models\Location.cs" />
+    <Compile Include="CourseDirectory\Models\LocationRef.cs" />
+    <Compile Include="CourseDirectory\Models\Provider.cs" />
+    <Compile Include="CourseDirectory\Models\ProviderCollection.cs" />
+    <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
@@ -103,6 +123,7 @@
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\LarsClient.cs" />
     <Compile Include="Services\NLogService.cs" />
+    <Compile Include="CourseDirectory\CourseDirectoryClient.cs" />
     <Compile Include="Services\RetryWebRequest.cs" />
     <Compile Include="Services\VstsClient.cs" />
     <Compile Include="Services\ZipFileExtractor.cs" />

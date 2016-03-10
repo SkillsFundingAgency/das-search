@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Core.Services;
     using Moq;
 
     using NUnit.Framework;
@@ -11,47 +11,45 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.Indexer.Core.Models;
 
     [TestFixture]
     public class ProviderHelperTests
     {
         [Test]
-        public void ShouldLoadEntriesFromCourseDirectoryAndFilterOutTheInactiveOnes()
+        public async Task ShouldLoadEntriesFromCourseDirectoryAndFilterOutTheInactiveOnes()
         {
             // Arrange
-            var settings = Mock.Of<IIndexSettings<Provider>>();
+            var settings = Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>();
             var mockElasticSearchClient = new Mock<IElasticsearchClientFactory>();
-            var mockCourseDirectoryClient = new Mock<IGetProviders>();
+            var mockApprenticeshipProviderRepository = new Mock<IGetApprenticeshipProviders>();
             var mockActiveProviderClient = new Mock<IGetActiveProviders>();
             var indexServiceMock = new Mock<IIndexMaintenanceService>();
-            var sut = new ProviderHelper(settings, mockElasticSearchClient.Object, mockCourseDirectoryClient.Object, mockActiveProviderClient.Object, indexServiceMock.Object, Mock.Of<ILog>());
+            var sut = new ProviderHelper(settings, mockElasticSearchClient.Object, mockApprenticeshipProviderRepository.Object, mockActiveProviderClient.Object, indexServiceMock.Object, Mock.Of<ILog>());
 
-            mockCourseDirectoryClient.Setup(x => x.GetProviders()).Returns(TwoProvidersTask());
-            mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new List<string>() { "123" });
+            mockApprenticeshipProviderRepository.Setup(x => x.GetApprenticeshipProvidersAsync()).Returns(Task.FromResult(TwoProvidersTask()));
+            mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new List<int>() { 123 });
 
             // Act
-            var entries = sut.LoadEntries();
+            var entries = await sut.LoadEntries();
 
-            Assert.AreEqual("123", entries.First().UkPrn);
+            Assert.AreEqual(123, entries.First().Ukprn);
             Assert.AreEqual(1, entries.Count);
 
-            mockCourseDirectoryClient.VerifyAll();
+            mockApprenticeshipProviderRepository.VerifyAll();
             mockActiveProviderClient.VerifyAll();
         }
 
-        private async Task<IEnumerable<Provider>> TwoProvidersTask()
+        private IEnumerable<Core.Models.Provider.Provider> TwoProvidersTask()
         {
             return TwoProviders();
         }
 
-        private IEnumerable<Provider> TwoProviders()
+        private IEnumerable<Core.Models.Provider.Provider> TwoProviders()
         {
-            yield return new Provider() { UkPrn = "123" };
-            yield return new Provider() { UkPrn = "456" };
+            yield return new Core.Models.Provider.Provider() { Ukprn = 123 };
+            yield return new Core.Models.Provider.Provider() { Ukprn = 456 };
         } 
     }
 }

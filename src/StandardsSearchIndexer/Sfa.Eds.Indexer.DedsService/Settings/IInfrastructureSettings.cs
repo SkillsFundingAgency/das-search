@@ -1,5 +1,7 @@
 ﻿namespace Sfa.Infrastructure.Settings
 {
+    using System;
+
     public interface IInfrastructureSettings
     {
         string SearchHost { get; }
@@ -13,5 +15,6 @@
         string StandardJsonContainer { get; }
         string StandardPdfContainer { get; }
         string StandardContentType { get; }
+        string CourseDirectoryUri { get; }
     }
 }

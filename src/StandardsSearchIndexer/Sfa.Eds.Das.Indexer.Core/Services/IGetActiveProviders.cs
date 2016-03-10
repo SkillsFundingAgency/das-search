@@ -4,6 +4,6 @@
 
     public interface IGetActiveProviders
     {
-        IEnumerable<string> GetActiveProviders();
+        IEnumerable<int> GetActiveProviders();
     }
 }

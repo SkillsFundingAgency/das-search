@@ -58,17 +58,18 @@
                 var indexNameAndDateExtension = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
                 await IndexStandards(indexNameAndDateExtension, entries).ConfigureAwait(false);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Log.Error("Error indexing PDFs", e);
+                Log.Error("Error indexing PDFs", ex);
             }
         }
 
-        public ICollection<MetaDataItem> LoadEntries()
+        public Task<ICollection<MetaDataItem>> LoadEntries()
         {
             UpdateMetadataRepositoryWithNewStandards();
             Log.Info("Indexing standard PDFs...");
-            return GetStandardsMetaDataFromGit().ToList();
+
+            return Task.FromResult<ICollection<MetaDataItem>>(GetStandardsMetaDataFromGit().ToList());
         }
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
@@ -185,9 +186,9 @@
 
                     _client.Index(doc, i => i.Index(indexName).Id(doc.StandardId));
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Log.Error("Error indexing standard PDF", e);
+                    Log.Error("Error indexing standard PDF", ex);
                     throw;
                 }
             }
@@ -229,9 +230,9 @@
 
                 return doc;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Log.Error("Error creating document", e);
+                Log.Error("Error creating document", ex);
 
                 throw;
             }

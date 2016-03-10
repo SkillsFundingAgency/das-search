@@ -5,6 +5,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
     public class ActiveProviderCsvRecord
     {
         [CsvColumn(Name = "UKPRN", FieldIndex = 1)]
-        public string UkPrn { get; set; }
+        public int UkPrn { get; set; }
     }
 }

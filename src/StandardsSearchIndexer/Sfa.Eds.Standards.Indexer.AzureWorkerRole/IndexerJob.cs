@@ -2,7 +2,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
