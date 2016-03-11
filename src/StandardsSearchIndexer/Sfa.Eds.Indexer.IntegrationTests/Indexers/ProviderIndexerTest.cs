@@ -246,7 +246,7 @@
             var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
 
             var providersTest = GetProvidersTest();
-            var expectedProviderResult = new Provider
+            var expectedProviderResult = new Provider 
                                              {
                                                  UkPrn = "10031241",
                                                  PostCode = "B4 7LR",
