@@ -49,25 +49,28 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var id = 1;
 
-            foreach (var providerResultItemViewModel in viewModel.Hits)
+            if (viewModel.Hits != null)
             {
-                providerResultItemViewModel.Name = "Test";
-                providerResultItemViewModel.Address = new Address
+                foreach (var providerResultItemViewModel in viewModel.Hits)
                 {
-                    Address1 = "Address 1",
-                    Address2 = "Address 2",
-                    Postcode = "PostCodeTest",
-                    County = "CountyTest",
-                    Town = "MyTown",
-                    Lat = 12345,
-                    Long = 54321
-                };
-                if (id == 1)
-                {
-                    providerResultItemViewModel.DeliveryModes = new List<string> { "100PercentEmployer", "patata" };
-                }
+                    providerResultItemViewModel.Name = "Test";
+                    providerResultItemViewModel.Address = new Address
+                    {
+                        Address1 = "Address 1",
+                        Address2 = "Address 2",
+                        Postcode = "PostCodeTest",
+                        County = "CountyTest",
+                        Town = "MyTown",
+                        Lat = 12345,
+                        Long = 54321
+                    };
+                    if (id == 1)
+                    {
+                        providerResultItemViewModel.DeliveryModes = new List<string> { "100PercentEmployer", "patata" };
+                    }
 
-                id++;
+                    id++;
+                }
             }
 
             return View(viewModel);
