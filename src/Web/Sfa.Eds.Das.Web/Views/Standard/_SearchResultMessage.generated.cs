@@ -31,7 +31,7 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Standard/_SearchResultMessage.cshtml")]
-    public partial class SearchResultMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel>
+    public partial class SearchResultMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel>
     {
 
 #line 27 "..\..\Views\Standard\_SearchResultMessage.cshtml"

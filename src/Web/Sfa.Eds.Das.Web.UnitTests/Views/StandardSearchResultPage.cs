@@ -16,11 +16,11 @@
         public void When_SearchResultHasErrors()
         {
             var detail = new SearchResultMessage();
-            var model = new StandardSearchResultViewModel
+            var model = new ApprenticeshipSearchResultViewModel
             {
                 TotalResults = 0,
                 SearchTerm = string.Empty,
-                Results = new List<StandardSearchResultItemViewModel>(),
+                Results = new List<ApprenticeshipSearchResultItemViewModel>(),
                 HasError = true
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -32,11 +32,11 @@
         public void When_SearchResultIsZero()
         {
             var detail = new SearchResultMessage();
-            var model = new StandardSearchResultViewModel
+            var model = new ApprenticeshipSearchResultViewModel
             {
                 TotalResults = 0,
                 SearchTerm = "SearchTerm",
-                Results = new List<StandardSearchResultItemViewModel>(),
+                Results = new List<ApprenticeshipSearchResultItemViewModel>(),
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -47,13 +47,13 @@
         public void When_SearchResultReturnsAll()
         {
             var detail = new SearchResultMessage();
-            var model = new StandardSearchResultViewModel
+            var model = new ApprenticeshipSearchResultViewModel
             {
                 TotalResults = 68,
                 SearchTerm = string.Empty,
-                Results = new List<StandardSearchResultItemViewModel>
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
                               {
-                                  new StandardSearchResultItemViewModel()
+                                  new ApprenticeshipSearchResultItemViewModel()
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -66,13 +66,13 @@
         public void When_SearchResultReturnsOneResult()
         {
             var detail = new SearchResultMessage();
-            var model = new StandardSearchResultViewModel
+            var model = new ApprenticeshipSearchResultViewModel
             {
                 TotalResults = 1,
                 SearchTerm = "SearchTerm",
-                Results = new List<StandardSearchResultItemViewModel>
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
                               {
-                                  new StandardSearchResultItemViewModel()
+                                  new ApprenticeshipSearchResultItemViewModel()
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -88,13 +88,13 @@
         public void When_SearchResultReturnsMoreThanOne()
         {
             var detail = new SearchResultMessage();
-            var model = new StandardSearchResultViewModel
+            var model = new ApprenticeshipSearchResultViewModel
             {
                 TotalResults = 2,
                 SearchTerm = "SearchTerm",
-                Results = new List<StandardSearchResultItemViewModel>
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
                               {
-                                  new StandardSearchResultItemViewModel()
+                                  new ApprenticeshipSearchResultItemViewModel()
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();

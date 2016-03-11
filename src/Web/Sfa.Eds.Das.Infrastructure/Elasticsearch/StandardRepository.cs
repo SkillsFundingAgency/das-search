@@ -25,6 +25,7 @@
             var results =
                 client.Search<StandardSearchResultsItem>(
                     s => s
+                    .Types("standarddocument")
                     .From(0)
                     .Size(1)
                     .Query(q =>

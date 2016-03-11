@@ -25,12 +25,12 @@
             // Arrange
             var mockSearchService = new Mock<IStandardSearchService>();
             var mockLogger = new Mock<ILog>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new StandardSearchResults());
+            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new ApprenticeshipSearchResults());
 
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
-                x => x.Map<StandardSearchResults, StandardSearchResultViewModel>(It.IsAny<StandardSearchResults>()))
-                .Returns(new StandardSearchResultViewModel());
+                x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultItemViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
+                .Returns(new ApprenticeshipSearchResultItemViewModel());
 
             StandardController controller = new StandardController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
 
@@ -51,8 +51,8 @@
 
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
-                x => x.Map<StandardSearchResults, StandardSearchResultViewModel>(It.IsAny<StandardSearchResults>()))
-                .Returns(new StandardSearchResultViewModel());
+                x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
+                .Returns(new ApprenticeshipSearchResultViewModel());
 
             StandardController controller = new StandardController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
 
@@ -61,7 +61,7 @@
 
             // Assert
             Assert.NotNull(result);
-            Assert.AreEqual(null, ((StandardSearchResultViewModel)result.Model).SearchTerm);
+            Assert.AreEqual(null, ((ApprenticeshipSearchResultViewModel)result.Model).SearchTerm);
             Assert.IsNotNull(result);
         }
 

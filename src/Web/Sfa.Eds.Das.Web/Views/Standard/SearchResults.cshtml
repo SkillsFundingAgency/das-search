@@ -1,4 +1,4 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+﻿@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
 @{
     ViewBag.Title = "Search Results";
 }
@@ -27,14 +27,15 @@
                     <li class="result">
                         <div class="column details">
                             <h2 class="heading-medium">
-                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                @if (item.StandardId != 0)
+                                {
+                                    @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.Id }, null)
+                                }
                             </h2>
-                            @*<dl>
-                                <dt class="endLevel">Level</dt>
-                                <dd class="endLevel">
-                                    <span>@item.NotionalEndLevel</span>
-                                </dd>
-                            </dl>*@
                             @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
                             @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
                         </div>

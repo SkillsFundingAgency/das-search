@@ -31,17 +31,17 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Standard/SearchResults.cshtml")]
-    public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel>
+    public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel>
     {
 
-#line 72 "..\..\Views\Standard\SearchResults.cshtml"
+#line 73 "..\..\Views\Standard\SearchResults.cshtml"
 public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string item, string unit = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 73 "..\..\Views\Standard\SearchResults.cshtml"
+#line 74 "..\..\Views\Standard\SearchResults.cshtml"
  
     if (!string.IsNullOrEmpty(item))
     {
@@ -56,7 +56,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 76 "..\..\Views\Standard\SearchResults.cshtml"
+#line 77 "..\..\Views\Standard\SearchResults.cshtml"
     WriteTo(__razor_helper_writer, title);
 
 
@@ -71,7 +71,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 77 "..\..\Views\Standard\SearchResults.cshtml"
+#line 78 "..\..\Views\Standard\SearchResults.cshtml"
         WriteTo(__razor_helper_writer, item);
 
 
@@ -80,7 +80,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 77 "..\..\Views\Standard\SearchResults.cshtml"
+#line 78 "..\..\Views\Standard\SearchResults.cshtml"
               WriteTo(__razor_helper_writer, unit);
 
 
@@ -89,7 +89,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 78 "..\..\Views\Standard\SearchResults.cshtml"
+#line 79 "..\..\Views\Standard\SearchResults.cshtml"
     }
 
 
@@ -97,7 +97,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 79 "..\..\Views\Standard\SearchResults.cshtml"
+#line 80 "..\..\Views\Standard\SearchResults.cshtml"
 }
 #line default
 #line hidden
@@ -201,23 +201,58 @@ WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                                ");
-
             
             #line 30 "..\..\Views\Standard\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
+                                
+            
+            #line default
+            #line hidden
+            
+            #line 30 "..\..\Views\Standard\SearchResults.cshtml"
+                                 if (item.StandardId != 0)
+                                {
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 32 "..\..\Views\Standard\SearchResults.cshtml"
+                               Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                            </h2>\r\n                            ");
+            
+            #line 32 "..\..\Views\Standard\SearchResults.cshtml"
+                                                                                                                           
+                                }
+                                else
+                                {
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 36 "..\..\Views\Standard\SearchResults.cshtml"
+                               Write(Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.Id }, null));
 
-WriteLiteral("\r\n");
+            
+            #line default
+            #line hidden
+            
+            #line 36 "..\..\Views\Standard\SearchResults.cshtml"
+                                                                                                                            
+                                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            </h2>\r\n");
 
 WriteLiteral("                            ");
 
             
-            #line 38 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 39 "..\..\Views\Standard\SearchResults.cshtml"
                        Write(GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString()));
 
             
@@ -228,7 +263,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                            ");
 
             
-            #line 39 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 40 "..\..\Views\Standard\SearchResults.cshtml"
                        Write(GetStandardDetailItem("Typical length:", item.TypicalLengthMessage));
 
             
@@ -237,7 +272,7 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n                        </div>\r\n                    </li>\r\n");
 
             
-            #line 42 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 43 "..\..\Views\Standard\SearchResults.cshtml"
                 }
 
             

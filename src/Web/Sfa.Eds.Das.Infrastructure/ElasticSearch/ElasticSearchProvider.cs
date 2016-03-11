@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
+
 using Nest;
 using Sfa.Das.ApplicationServices;
 using Sfa.Das.ApplicationServices.Models;
@@ -27,22 +27,23 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             _applicationSettings = applicationSettings;
         }
 
-        public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             keywords = QueryHelper.FormatQuery(keywords);
 
             var client = this._elasticsearchClientFactory.Create();
-            var results = client.Search<StandardSearchResultsItem>(s => s
+            var results = client.Search<ApprenticeshipSearchResultsItem>(s => s
+                .Types("standarddocument", "frameworkdocument")
                 .Skip(skip)
                 .Take(take)
                 .Query(q => q
                     .QueryString(qs => qs
-                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords)
+                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkTitle)
                         .Query(keywords)
                     ))
                 );
 
-            return new StandardSearchResults
+            return new ApprenticeshipSearchResults
             {
                 TotalResults = results.Total,
                 SearchTerm = keywords,
