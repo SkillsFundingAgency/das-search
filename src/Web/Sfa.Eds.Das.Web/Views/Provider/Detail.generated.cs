@@ -434,7 +434,7 @@ WriteLiteral("                    ");
 
             
             #line 54 "..\..\Views\Provider\Detail.cshtml"
-               Write(Model.Address.Address2);
+               Write(Model.Address.Address1);
 
             
             #line default
