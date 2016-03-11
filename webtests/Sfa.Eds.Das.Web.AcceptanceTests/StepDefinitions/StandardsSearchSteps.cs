@@ -93,6 +93,15 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
         }
 
+        //Typical length on standard search result page
+
+        [Then(@"I should see typical length on result page\.")]
+        public void ThenIShouldSeeTypicalLengthOnResultPage_()
+        {
+            srchPage.Verifylength();
+        }
+
+
         [Then(@"I should see matching Standard '(.*)' standards on result page")]
         public void ThenIShouldSeeMatchingStandardStandardsOnResultPage(string p0)
         {

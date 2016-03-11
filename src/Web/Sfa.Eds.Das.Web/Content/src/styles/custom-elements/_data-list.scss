@@ -13,6 +13,12 @@ $module: 'data-list';
     dt, dd {
         float: left;
         box-sizing: border-box;
+
+        //Force empty elements to follow document flow
+        &:empty::after {
+            content: '.';
+            visibility: hidden;
+        }
     }
 
     dt {

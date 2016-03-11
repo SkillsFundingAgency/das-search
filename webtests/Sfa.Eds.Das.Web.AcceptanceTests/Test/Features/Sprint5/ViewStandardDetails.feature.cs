@@ -67,18 +67,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint5
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate Standard details and bespoke content on standard detail page")]
-        [NUnit.Framework.CategoryAttribute("Feature-Standard_details")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Introductory text", null)]
-        [NUnit.Framework.TestCaseAttribute("Typical length", null)]
-        [NUnit.Framework.TestCaseAttribute("Entry requirements", null)]
-        [NUnit.Framework.TestCaseAttribute("What apprentices will learn", null)]
-        [NUnit.Framework.TestCaseAttribute("Qualifications", null)]
-        [NUnit.Framework.TestCaseAttribute("Professional registration", null)]
-        public virtual void ValidateStandardDetailsAndBespokeContentOnStandardDetailPage(string bespoke, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Product Design and Development Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", null)]
+        [NUnit.Framework.TestCaseAttribute("Actuary", null)]
+        public virtual void ValidateStandardDetailsAndBespokeContentOnStandardDetailPage(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Feature-Standard_details",
                     "regression"};
             if ((exampleTags != null))
             {
@@ -88,13 +83,27 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint5
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 9
-testRunner.Given("I am on standard search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
-testRunner.When("I click on any standard link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
-testRunner.Then("I should be able to navigate to Standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
-testRunner.And(string.Format("I should see following \'{0}\' content", bespoke), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("I choose any of the standard from search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 13
+testRunner.Then("I see Standard title displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+testRunner.And("I should see \"Introductory text\" on standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+testRunner.And("I should see \"Overview of Role\" on standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
+testRunner.And("I should see \"Typical length\" on standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 17
+testRunner.And("I should see \"What Apprentice will learn\" on standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+testRunner.And("I should see \"Qualification\" on standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+testRunner.And("I should see \"Professional registration\" on standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -102,8 +111,8 @@ testRunner.And(string.Format("I should see following \'{0}\' content", bespoke),
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate Standard detail page which has no bespoke contents")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Actuary", null)]
         [NUnit.Framework.TestCaseAttribute("Dental Nurse", null)]
+        [NUnit.Framework.TestCaseAttribute("Property Maintenance Operative", null)]
         public virtual void ValidateStandardDetailPageWhichHasNoBespokeContents(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -113,19 +122,19 @@ testRunner.And(string.Format("I should see following \'{0}\' content", bespoke),
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate Standard detail page which has no bespoke contents", @__tags);
-#line 23
-this.ScenarioSetup(scenarioInfo);
-#line 24
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
-testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
-testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
-testRunner.When("I choose any of the standard from search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 28
-testRunner.Then("I see only Standard title displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
+testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 30
+testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+testRunner.When("I choose any of the standard from search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
+testRunner.Then("I see Standard title displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 33
 testRunner.And("I see level is displayed.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -133,20 +142,22 @@ testRunner.And("I see level is displayed.", ((string)(null)), ((TechTalk.SpecFlo
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate typical length units is months only.")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.CategoryAttribute("regression")]
         public virtual void ValidateTypicalLengthUnitsIsMonthsOnly_()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate typical length units is months only.", new string[] {
+                        "ignore",
                         "regression"});
-#line 36
+#line 41
 this.ScenarioSetup(scenarioInfo);
-#line 37
+#line 42
 testRunner.Given("I am on standard search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
+#line 43
 testRunner.When("I click on the Standard title", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
+#line 44
 testRunner.Then("is should see Standard page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 45
 testRunner.And("I should see typical length is displayed in months only.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -154,20 +165,22 @@ testRunner.And("I should see typical length is displayed in months only.", ((str
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate professional registration shown when it has data")]
+        [NUnit.Framework.IgnoreAttribute()]
         [NUnit.Framework.CategoryAttribute("regression")]
         public virtual void ValidateProfessionalRegistrationShownWhenItHasData()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate professional registration shown when it has data", new string[] {
+                        "ignore",
                         "regression"});
-#line 44
+#line 49
 this.ScenarioSetup(scenarioInfo);
-#line 45
+#line 50
 testRunner.Given("I have choosen a standard which has no progressional registration data populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 51
 testRunner.When("I click on the standard title", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 47
+#line 52
 testRunner.Then("I should see standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 48
+#line 53
 testRunner.And("I should not see professional registration field on detail page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
