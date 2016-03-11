@@ -2,25 +2,22 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Common.Models;
     using Core.Models.Provider;
     using FluentAssertions;
-
+    using Infrastructure.Services;
     using Nest;
-
     using NUnit.Framework;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
     using Sfa.Eds.Das.Indexer.Core;
-
     using StructureMap;
-    using Infrastructure.Services;
-    using System.Globalization;
+
     [TestFixture]
     public class ProviderIndexerTest
     {

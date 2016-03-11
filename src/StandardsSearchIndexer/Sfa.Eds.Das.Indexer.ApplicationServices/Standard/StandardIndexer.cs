@@ -10,7 +10,7 @@
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Services;
 
-    public class StandardHelper : IGenericIndexerHelper<MetaDataItem>
+    public class StandardIndexer : IGenericIndexerHelper<MetaDataItem>
     {
         private readonly IBlobStorageHelper _blobStorageHelper;
         private readonly IMetaDataHelper _metaDataHelper;
@@ -18,7 +18,7 @@
         private readonly IStandardIndexSettings _settings;
         private readonly ILog _log;
 
-        public StandardHelper(IBlobStorageHelper blobStorageHelper,
+        public StandardIndexer(IBlobStorageHelper blobStorageHelper,
             IStandardIndexSettings settings,
             IMetaDataHelper metaDataHelper,
             IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer,
@@ -37,7 +37,7 @@
             {
                 _log.Debug("Indexing " + entries.Count() + " standards");
 
-                var indexNameAndDateExtension = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
+                var indexNameAndDateExtension = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
                 await _searchIndexMaintainer.IndexEntries(indexNameAndDateExtension, entries);
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
+            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
             var indexExistsResponse = _searchIndexMaintainer.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -75,7 +75,7 @@
 
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
+            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
 
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
@@ -83,7 +83,7 @@
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = _settings.StandardIndexesAlias;
-            var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
+            var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.StandardIndexesAlias);
 
             if (!CheckIfAliasExists(indexAlias))
             {
@@ -97,8 +97,8 @@
 
         public bool DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var oneDayAgo2 = GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-1), _settings.StandardIndexesAlias, "yyyy-MM-dd");
-            var twoDaysAgo2 = GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.StandardIndexesAlias, "yyyy-MM-dd");
+            var oneDayAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-1), _settings.StandardIndexesAlias, "yyyy-MM-dd");
+            var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.StandardIndexesAlias, "yyyy-MM-dd");
 
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
         }
@@ -121,12 +121,6 @@
         private bool CheckIfAliasExists(string aliasName)
         {
             return _searchIndexMaintainer.AliasExists(aliasName);
-        }
-
-        // TODO: LWA this could be shared between the helpers
-        private string GetIndexNameAndDateExtension(DateTime dateTime, string indexName, string dateFormat = "yyyy-MM-dd-HH")
-        {
-            return $"{indexName}-{dateTime.ToUniversalTime().ToString(dateFormat)}".ToLower();
         }
     }
 }

@@ -65,14 +65,15 @@
     <Compile Include="DependencyResolution\StandardRegistry.cs" />
     <Compile Include="Http\IHttpPost.cs" />
     <Compile Include="Http\IRetryWebRequest.cs" />
+    <Compile Include="IndexerHelper.cs" />
     <Compile Include="Infrastructure\IUnzipStream.cs" />
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Standard\IMetaDataHelper.cs" />
     <Compile Include="Standard\MetaDataHelper.cs" />
-    <Compile Include="Provider\ProviderHelper.cs" />
-    <Compile Include="Standard\StandardHelper.cs" />
+    <Compile Include="Provider\ProviderIndexer.cs" />
+    <Compile Include="Standard\StandardIndexer.cs" />
     <Compile Include="Provider\ActiveProviderCsvRecord.cs" />
     <Compile Include="MetaData\FileContents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,7 +9,7 @@ using Sfa.Eds.Das.Indexer.Core.Services;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    public class ProviderHelper : IGenericIndexerHelper<Core.Models.Provider.Provider>
+    public class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
         private readonly IGetApprenticeshipProviders _providerRepository;
@@ -17,7 +17,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
         private readonly ILog _log;
 
-        public ProviderHelper(
+        public ProviderIndexer(
             IIndexSettings<Core.Models.Provider.Provider> settings,
             IMaintainSearchIndexes<Core.Models.Provider.Provider> searchIndexMaintainer,
             IGetApprenticeshipProviders providerRepository,
@@ -41,7 +41,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool CreateIndex(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
+            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             var indexExists = _searchIndexMaintainer.IndexExists(indexName);
 
@@ -66,7 +66,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             {
                 _log.Debug("Indexing " + entries.Count + " providers");
 
-                var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
+                var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
                 await _searchIndexMaintainer.IndexEntries(indexName, entries);
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
         {
-            var indexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
+            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
@@ -85,7 +85,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = _settings.IndexesAlias;
-            var newIndexName = GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
+            var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
 
             if (!CheckIfAliasExists(indexAlias))
             {
@@ -99,16 +99,10 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var oneDayAgo2 = GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-1), _settings.IndexesAlias, "yyyy-MM-dd");
-            var twoDaysAgo2 = GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
+            var oneDayAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-1), _settings.IndexesAlias, "yyyy-MM-dd");
+            var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
 
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
-        }
-
-        // TODO: LWA this could be shared between the helpers
-        private string GetIndexNameAndDateExtension(DateTime dateTime, string indexName, string dateFormat = "yyyy-MM-dd-HH")
-        {
-            return $"{indexName}-{dateTime.ToUniversalTime().ToString(dateFormat)}".ToLower();
         }
 
         private bool CheckIfAliasExists(string aliasName)

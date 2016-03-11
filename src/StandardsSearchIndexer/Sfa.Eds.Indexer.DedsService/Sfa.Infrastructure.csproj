@@ -112,7 +112,12 @@
     <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\Attachment.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchStandardIndexMaintainer.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
+    <Compile Include="Elasticsearch\IGenerateIndexDefinitions.cs" />
+    <Compile Include="Elasticsearch\ProviderIndexGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -121,13 +126,12 @@
     </Compile>
     <Compile Include="Services\CsvService.cs" />
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchIndexMaintainer.cs" />
     <Compile Include="Services\FileHelper.cs" />
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\LarsClient.cs" />
     <Compile Include="Services\NLogService.cs" />
     <Compile Include="CourseDirectory\CourseDirectoryClient.cs" />
-    <Compile Include="Services\RetryWebRequest.cs" />
+    <Compile Include="Services\RetryService.cs" />
     <Compile Include="Services\VstsClient.cs" />
     <Compile Include="Services\ZipFileExtractor.cs" />
     <Compile Include="Settings\InfrastructureSettings.cs" />

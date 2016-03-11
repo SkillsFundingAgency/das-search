@@ -50,6 +50,5 @@ namespace Sfa.Eds.Das.Indexer.Common.Settings
 
             return uri;
         }
-
     }
 }

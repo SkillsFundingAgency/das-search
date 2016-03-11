@@ -23,7 +23,7 @@
             var mockApprenticeshipProviderRepository = new Mock<IGetApprenticeshipProviders>();
             var mockActiveProviderClient = new Mock<IGetActiveProviders>();
             var mockLogger = Mock.Of<ILog>();
-            var sut = new ProviderHelper(mockSettings, mockProviderIndexMaintainer, mockApprenticeshipProviderRepository.Object, mockActiveProviderClient.Object, mockLogger);
+            var sut = new ProviderIndexer(mockSettings, mockProviderIndexMaintainer, mockApprenticeshipProviderRepository.Object, mockActiveProviderClient.Object, mockLogger);
 
             mockApprenticeshipProviderRepository.Setup(x => x.GetApprenticeshipProvidersAsync()).Returns(Task.FromResult(TwoProvidersTask()));
             mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new List<int>() { 123 });

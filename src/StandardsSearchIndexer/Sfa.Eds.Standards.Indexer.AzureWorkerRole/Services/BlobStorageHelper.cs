@@ -8,7 +8,6 @@
     using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
 
@@ -17,7 +16,6 @@
         private readonly CloudBlobClient _client;
 
         private readonly ILog _log;
-
 
         public BlobStorageHelper(ILog log, IWorkerRoleSettings settings)
         {

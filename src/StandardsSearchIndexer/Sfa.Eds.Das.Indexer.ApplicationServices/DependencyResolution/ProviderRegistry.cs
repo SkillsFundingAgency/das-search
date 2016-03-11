@@ -15,7 +15,7 @@
         public ProviderRegistry()
         {
             For<IIndexSettings<Provider>>().Use<ProviderIndexSettings>();
-            For<IGenericIndexerHelper<Provider>>().Use<ProviderHelper>();
+            For<IGenericIndexerHelper<Provider>>().Use<ProviderIndexer>();
             For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
         }
     }

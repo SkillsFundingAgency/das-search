@@ -8,12 +8,14 @@
 
     public class NLogService : ILog
     {
+        private readonly Logger logger;
+#pragma warning disable CS0169
 #pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
 #pragma warning restore S1144 // Unused private types or members should be removed
+#pragma warning disable CS0169
 
-        private Logger logger;
         public NLogService(Type loggerType)
         {
             logger = LogManager.GetLogger(loggerType?.ToString() ?? "NullIndexLogger");

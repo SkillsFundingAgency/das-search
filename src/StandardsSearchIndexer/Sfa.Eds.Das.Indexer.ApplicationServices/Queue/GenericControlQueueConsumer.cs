@@ -37,31 +37,28 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
             Log = log;
         }
 
-        public Task CheckMessage<T>() where T : IIndexEntry
+        public async Task CheckMessage<T>() where T : IIndexEntry
         {
             var indexerService = _container.GetInstance<IIndexerService<T>>();
-            return Task.Run(
-                async () =>
-                    {
-                        try
-                        {
-                            var queuename = _appServiceSettings.QueueName(typeof(T));
-                            var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
 
-                            if (times.Any())
-                            {
-                                var time = times.FirstOrDefault();
-                                await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
-                            }
+            try
+            {
+                var queuename = _appServiceSettings.QueueName(typeof(T));
+                var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
 
-                            _clearQueue.ClearQueue(queuename);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Fatal("Something failed creating index: " + ex);
-                            throw;
-                        }
-                    });
+                if (times.Any())
+                {
+                    var time = times.FirstOrDefault();
+                    await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
+                }
+
+                _clearQueue.ClearQueue(queuename);
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal("Something failed creating index: " + ex);
+                throw;
+            }
         }
     }
 }

@@ -7,11 +7,11 @@
     using Moq;
     using NUnit.Framework;
 
-    using Infrastructure;
     using ApplicationServices.Services.Interfaces;
     using Settings;
     using Core;
     using Core.Services;
+
     [TestFixture]
     public class IndexerServiceTests
     {
@@ -24,8 +24,8 @@
         {
             _mockHelper = new Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>>();
             _mockSettings =
-                Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>( // TODO: LWA - This url shouldn't be hardcoded here.
-                    x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.IndexesAlias == "ciproviderindexesalias");
+                Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>(
+                    x => x.PauseTime == "10" && x.SearchHost == "http://123.456.789:9200" && x.IndexesAlias == "testproviderindexesalias");
 
             _sut = new IndexerService<Core.Models.Provider.Provider>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
         }

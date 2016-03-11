@@ -28,8 +28,21 @@ namespace Sfa.Infrastructure.CourseDirectory
 
             var providers = responseAsync.Body;
 
-            // TODO: LWA Extract mapping logic out of this class.
             return providers.Select(MapFromProviderToProviderImport).ToList();
+        }
+
+        private static Eds.Das.Indexer.Common.Models.Coordinate SetGeoPoint(Models.Location matchingLocation)
+        {
+            if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
+            {
+                return null;
+            }
+
+            return new Eds.Das.Indexer.Common.Models.Coordinate
+            {
+                Latitude = matchingLocation.Address.Latitude.Value,
+                Longitude = matchingLocation.Address.Longitude.Value
+            };
         }
 
         private IEnumerable<StandardInformation> GetStandardsFromIList(IList<Models.Standard> standards, IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Location> providerLocations)
@@ -121,20 +134,6 @@ namespace Sfa.Infrastructure.CourseDirectory
                     Postcode = matchingLocation.Address.Postcode,
                     GeoPoint = SetGeoPoint(matchingLocation)
                 }
-            };
-        }
-
-        private static Eds.Das.Indexer.Common.Models.Coordinate SetGeoPoint(Models.Location matchingLocation)
-        {
-            if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
-            {
-                return null;
-            }
-
-            return new Eds.Das.Indexer.Common.Models.Coordinate
-            {
-                Latitude = matchingLocation.Address.Latitude.Value,
-                Longitude = matchingLocation.Address.Longitude.Value
             };
         }
 

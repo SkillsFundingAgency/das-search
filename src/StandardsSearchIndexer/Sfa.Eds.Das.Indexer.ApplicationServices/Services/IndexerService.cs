@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 using Sfa.Eds.Das.Indexer.Core;
 using Sfa.Eds.Das.Indexer.Core.Services;

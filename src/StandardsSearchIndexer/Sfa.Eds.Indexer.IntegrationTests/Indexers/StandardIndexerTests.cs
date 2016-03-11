@@ -6,8 +6,8 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
     using FluentAssertions;
+    using Infrastructure.Elasticsearch;
     using Infrastructure.Services;
     using Nest;
     using NUnit.Framework;
@@ -15,7 +15,7 @@
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
     using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
-    using Infrastructure.Elasticsearch;
+
     [TestFixture]
     public class StandardIndexerTests
     {
@@ -34,7 +34,6 @@
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
-
         }
 
         [Test]
