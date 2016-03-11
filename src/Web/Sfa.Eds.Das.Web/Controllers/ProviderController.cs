@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
@@ -54,6 +55,7 @@ namespace Sfa.Eds.Das.Web.Controllers
                 foreach (var providerResultItemViewModel in viewModel.Hits)
                 {
                     providerResultItemViewModel.Name = "Test";
+                    providerResultItemViewModel.LocationName = "LocationTest";
                     providerResultItemViewModel.Address = new Address
                     {
                         Address1 = "Address 1",
@@ -67,6 +69,10 @@ namespace Sfa.Eds.Das.Web.Controllers
                     if (id == 1)
                     {
                         providerResultItemViewModel.DeliveryModes = new List<string> { "100PercentEmployer", "patata" };
+                    }
+                    if (id == 2)
+                    {
+                        providerResultItemViewModel.DeliveryModes = new List<string> { "100PercentEmployer" };
                     }
 
                     id++;

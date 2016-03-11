@@ -275,9 +275,9 @@
       <DependentUpon>SearchResults.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_ProviderInformation.generated.cs">
-      <DependentUpon>_ProviderInformation.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>_ProviderInformation.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>

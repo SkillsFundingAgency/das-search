@@ -10,9 +10,13 @@
                 <h2 class="heading-medium">
                     @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
                 </h2>
-                @if (item.DeliveryModes?.FirstOrDefault() == "100PercentEmployer")
+                @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
                 {
                     @RenderEmployersLocationProviderDetails(item)
+                }
+                else if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count != 1)
+                {
+                    @RenderEmployersLocationProviderDetailsPlusTrainerLocation(item)
                 }
                 else
                 {
@@ -20,13 +24,13 @@
                 }
                 
                 <dl>
-                    <dt class="distance">Employer satisfaction:</dt>
+                    <dt class="distance" style="font-weight:bold">Employer satisfaction:</dt>
                     <dd class="distance">
                         <span>@item.EmployerSatisfaction %</span>
                     </dd>
                 </dl>
                 <dl>
-                    <dt class="distance">Learner satisfaction:</dt>
+                    <dt class="distance" style="font-weight:bold">Learner satisfaction:</dt>
                     <dd class="distance">
                         <span>@item.LearnerSatisfaction %</span>
                     </dd>
@@ -39,13 +43,38 @@
 @helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
 {
     <dl>
-        <dt class="distance">Distance:</dt>
+        <dt class="distance" style="font-weight: bold">
+            Distance:
+        </dt>
         <dd class="distance">
             <span>Training will take place at the employer's location.</span>
         </dd>
     </dl>
     <dl>
-        <dt class="distance">Website:</dt>
+        <dt class="website" style="font-weight:bold">Website:</dt>
+        <dd class="website">
+            <a href="@item.Website"> @item.Website</a>
+        </dd>
+    </dl>
+}
+
+@helper  RenderEmployersLocationProviderDetailsPlusTrainerLocation(ProviderResultItemViewModel item)
+{
+    <dl>
+        <dt style="font-weight: bold">
+            Distance:
+        </dt>
+        <dd class="distance">
+            <span>Training will take place at the employer's location.</span>
+        </dd>
+    </dl>
+    <dl>
+        <dd class="location">
+            <span>@item.LocationName</span> <span>@item.Address.Address1</span> <span>@item.Address.Address2</span> <span>@item.Address.County</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="website" style="font-weight:bold">Website:</dt>
         <dd class="website">
             <a href="@item.Website"> @item.Website</a>
         </dd>
@@ -55,29 +84,22 @@
 @helper  RenderProviderDetails(ProviderResultItemViewModel item)
 {
     <dl>
-        <dt class="distance">Distance:</dt>
+        <dt class="distance" style="font-weight: bold">
+            Distance:
+        </dt>
         <dd class="distance">
             <span>@item.Distance miles away</span>
         </dd>
     </dl>
     <dl>
-        <dt class="distance">Website:</dt>
+        <dd class="location">
+            <span>@item.LocationName</span> <span>@item.Address.Address1</span> <span>@item.Address.Address2</span> <span>@item.Address.County</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="website" style="font-weight:bold">Website:</dt>
         <dd class="website">
             <a href="@item.Website"> @item.Website</a>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="distance">Trainer location name:</dt>
-        <dd class="distance">
-            <span>@item.LocationName a</span>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="distance">Trainer location address:</dt>
-        <dd class="distance">
-            <span>@item.Address.Address1</span>
-            <span>@item.Address.Address2</span>
-            <span>@item.Address.County</span>
         </dd>
     </dl>
 }
