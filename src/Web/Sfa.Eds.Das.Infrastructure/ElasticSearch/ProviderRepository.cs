@@ -34,7 +34,7 @@
                    .Query(q => q
                        .Term(t => t.Id, providerid)
                         && q.Term(t => t.LocationId, locationId)
-                        && q.Term("standardcode", standardCode) // t.StandardCode is generated as standardCode and the JSON property is all lowercase (standardcode) -> Fix it or D..
+                        && q.Term(t => t.StandardCode, standardCode) // t.StandardCode is generated as standardCode and the JSON property is all lowercase (standardcode) -> Fix it or D..
                        ));
 
             if (results.ConnectionStatus.HttpStatusCode != 200)
