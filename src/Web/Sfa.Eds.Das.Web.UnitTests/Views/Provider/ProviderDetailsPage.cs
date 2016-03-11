@@ -36,7 +36,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.VenueName);
+            GetPartial(html, "header h2").Should().Contain(model.ProviderName);
 
             GetPartial(html, "dl dd div").Should().NotContain(model.VenueName);
             GetPartial(html, "dl dd div", 2).Should().NotContain(model.Address.Address1);
