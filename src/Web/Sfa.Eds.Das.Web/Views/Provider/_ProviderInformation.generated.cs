@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1704), Tuple.Create("\"", 1724)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1681), Tuple.Create("\"", 1701)
 
 #line 50 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1711), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 1688), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1711), false)
+, 1688), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -156,14 +156,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2108), Tuple.Create("\"", 2128)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2085), Tuple.Create("\"", 2105)
 
 #line 66 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 2115), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 2092), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 2115), false)
+, 2092), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -300,7 +300,7 @@ WriteLiteral("\r\n                </h2>\r\n");
             #line hidden
             
             #line 13 "..\..\Views\Provider\_ProviderInformation.cshtml"
-                 if (item.DeliveryModes.Count == 1 && item.DeliveryModes.First() == "100PercentEmployer")
+                 if (item.DeliveryModes?.FirstOrDefault() == "100PercentEmployer")
                 {
                     
             
