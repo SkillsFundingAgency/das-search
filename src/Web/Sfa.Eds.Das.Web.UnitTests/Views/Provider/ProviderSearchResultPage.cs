@@ -73,7 +73,13 @@
         public void ShouldHaveAllFieldsInSearchResult()
         {
             var page = new ProviderInformation();
-            var item = new ProviderResultItemViewModel { Name = "Provider 1", DeliveryModes = new List<string> { "100PercentEmployer" }, Website = "http://www.trainingprovider.co.uk", Address = new Address()};
+            var item = new ProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                Website = "http://www.trainingprovider.co.uk",
+                Address = new Address()
+            };
             var item2 = new ProviderResultItemViewModel
             {
                 Name = "Provider 2",
@@ -94,7 +100,7 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training will take place at the employer's location.");
+            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
             GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
@@ -102,6 +108,93 @@
             var secondResult = GetHtmlElement(html, ".result", 2);
 
             GetPartial(secondResult, "dl dd").Should().Be("1.2 miles away");
+        }
+
+        [Test]
+        public void ShouldShowJustDistanceIfDeliveryModeIsNotEmployerLocation()
+        {
+            var page = new ProviderInformation();
+            var item = new ProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "BlockRelease" },
+                Distance = 1.2,
+                Address = new Address()
+            };
+
+            var model = new ProviderSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test name",
+                Hits = new List<ProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result dl dt").Should().Be("Distance:");
+            GetPartial(html, ".result dl dd").Should().Be("1.2 miles away");
+        }
+
+        [Test]
+        public void ShouldShowJustEmployerLocationIfDeliveryModeContainsEmployerLocation()
+        {
+            var page = new ProviderInformation();
+            var item = new ProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
+                Website = "http://www.trainingprovider.co.uk",
+                Address = new Address()
+            };
+
+            var model = new ProviderSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test name",
+                Hits = new List<ProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result dl dt").Should().Be("Distance:");
+            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+
+            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
+            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
+        }
+
+        [Test]
+        public void ShouldShowJustEmployerLocationIfDeliveryModeOnlyHasEmployerLocation()
+        {
+            var page = new ProviderInformation();
+            var item = new ProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                Website = "http://www.trainingprovider.co.uk",
+                Address = new Address()
+            };
+
+            var model = new ProviderSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test name",
+                Hits = new List<ProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result dl dt").Should().Be("Distance:");
+            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+
+            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
+            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
         }
     }
 }

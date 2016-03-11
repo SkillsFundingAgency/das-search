@@ -10,13 +10,9 @@
                 <h2 class="heading-medium">
                     @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
                 </h2>
-                @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
+                @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     @RenderEmployersLocationProviderDetails(item)
-                }
-                else if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count != 1)
-                {
-                    @RenderEmployersLocationProviderDetailsPlusTrainerLocation(item)
                 }
                 else
                 {
@@ -47,7 +43,7 @@
             Distance:
         </dt>
         <dd class="distance">
-            <span>Training will take place at the employer's location.</span>
+            <span>Training can take place at your location.</span>
         </dd>
     </dl>
     <dl>
@@ -57,30 +53,7 @@
         </dd>
     </dl>
 }
-
-@helper  RenderEmployersLocationProviderDetailsPlusTrainerLocation(ProviderResultItemViewModel item)
-{
-    <dl>
-        <dt style="font-weight: bold">
-            Distance:
-        </dt>
-        <dd class="distance">
-            <span>Training will take place at the employer's location.</span>
-        </dd>
-    </dl>
-    <dl>
-        <dd class="location">
-            <span>@item.LocationName</span> <span>@item.Address.Address1</span> <span>@item.Address.Address2</span> <span>@item.Address.County</span>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="website" style="font-weight:bold">Website:</dt>
-        <dd class="website">
-            <a href="@item.Website"> @item.Website</a>
-        </dd>
-    </dl>
-}
-
+s
 @helper  RenderProviderDetails(ProviderResultItemViewModel item)
 {
     <dl>
