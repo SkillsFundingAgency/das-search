@@ -41,10 +41,12 @@
             GetPartial(html, "dl dd div").Should().NotContain(model.VenueName);
             GetPartial(html, "dl dd div", 2).Should().NotContain(model.Address.Address1);
             GetPartial(html, "dl dd div", 3).Should().NotContain(model.Address.Address2);
+            GetPartial(html, "dl dd div").Should().Contain("Training will take place at your location");
+
         }
 
         [Test]
-        public void ShouldShowProviderLocationWhenMoreDeliveryModesThan100PercentEmployerLocation()
+        public void ShouldShowProviderLocationWhenMoreDeliveryModesAppartFrom100PercentEmployerLocation()
         {
             var detail = new Detail();
             var model = new ProviderViewModel
