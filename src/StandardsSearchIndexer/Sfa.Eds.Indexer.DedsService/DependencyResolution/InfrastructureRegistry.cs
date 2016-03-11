@@ -1,6 +1,10 @@
 namespace Sfa.Infrastructure.DependencyResolution
 {
     using CourseDirectory;
+    using Eds.Das.Indexer.ApplicationServices.Services;
+    using Eds.Das.Indexer.Core.Models;
+    using Eds.Das.Indexer.Core.Models.Provider;
+    using Elasticsearch;
     using Sfa.Deds.Services;
     using Sfa.Deds.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
@@ -30,6 +34,9 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
             For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
+            For<IMaintainSearchIndexes<MetaDataItem>>().Use<ElasticsearchStandardIndexMaintainer>();
+            For<IMaintainSearchIndexes<Provider>>().Use<ElasticsearchProviderIndexMaintainer>();
+            For<IGenerateIndexDefinitions<Provider>>().Use<ProviderIndexGenerator>();
         }
     }
 }

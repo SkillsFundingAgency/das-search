@@ -18,7 +18,6 @@
             For<IIndexSettings<MetaDataItem>>().Use<StandardIndexSettings>();
             For<IIndexerService<MetaDataItem>>().Use<IndexerService<MetaDataItem>>();
             For<IGenericIndexerHelper<MetaDataItem>>().Use<StandardHelper>();
-            For<IIndexMaintenanceService>().Use<IndexMaintenanceService>();
         }
     }
 }

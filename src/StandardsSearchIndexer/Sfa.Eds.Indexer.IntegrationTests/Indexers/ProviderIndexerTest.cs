@@ -19,7 +19,8 @@
     using Sfa.Eds.Das.Indexer.Core;
 
     using StructureMap;
-
+    using Infrastructure.Services;
+    using System.Globalization;
     [TestFixture]
     public class ProviderIndexerTest
     {
@@ -27,7 +28,6 @@
         private IGenericIndexerHelper<Provider> _providerHelper;
         private IIndexerService<Provider> _sut;
         private IElasticClient _elasticClient;
-        private IIndexMaintenanceService _indexMaintenanceService;
         private IIndexSettings<Provider> _providerSettings;
 
         [SetUp]
@@ -41,8 +41,6 @@
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
-            _indexMaintenanceService = new IndexMaintenanceService();
-
             _sut = _ioc.GetInstance<IIndexerService<Provider>>();
         }
 
@@ -51,7 +49,7 @@
         public async Task ShouldCreateScheduledIndexAndMapping()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
@@ -70,7 +68,7 @@
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             var providersTest = GetProvidersTest();
             var expectedProviderResult = new Provider
@@ -112,7 +110,7 @@
         public void ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = _indexMaintenanceService.GetIndexNameAndDateExtension(scheduledDate, _providerSettings.IndexesAlias);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             var providersTest = GetProvidersTest();
 

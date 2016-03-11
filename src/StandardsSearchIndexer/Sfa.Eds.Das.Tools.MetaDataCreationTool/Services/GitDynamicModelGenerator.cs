@@ -3,8 +3,6 @@
     using System.Collections.Generic;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Models;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class GitDynamicModelGenerator : IGitDynamicModelGenerator

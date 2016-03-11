@@ -5,14 +5,11 @@
     using System.Threading.Tasks;
     using Core.Services;
     using Moq;
-
     using NUnit.Framework;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
+    using ApplicationServices.Services;
 
     [TestFixture]
     public class ProviderHelperTests
@@ -21,12 +18,12 @@
         public async Task ShouldLoadEntriesFromCourseDirectoryAndFilterOutTheInactiveOnes()
         {
             // Arrange
-            var settings = Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>();
-            var mockElasticSearchClient = new Mock<IElasticsearchClientFactory>();
+            var mockSettings = Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>();
+            var mockProviderIndexMaintainer = Mock.Of<IMaintainSearchIndexes<Core.Models.Provider.Provider>>();
             var mockApprenticeshipProviderRepository = new Mock<IGetApprenticeshipProviders>();
             var mockActiveProviderClient = new Mock<IGetActiveProviders>();
-            var indexServiceMock = new Mock<IIndexMaintenanceService>();
-            var sut = new ProviderHelper(settings, mockElasticSearchClient.Object, mockApprenticeshipProviderRepository.Object, mockActiveProviderClient.Object, indexServiceMock.Object, Mock.Of<ILog>());
+            var mockLogger = Mock.Of<ILog>();
+            var sut = new ProviderHelper(mockSettings, mockProviderIndexMaintainer, mockApprenticeshipProviderRepository.Object, mockActiveProviderClient.Object, mockLogger);
 
             mockApprenticeshipProviderRepository.Setup(x => x.GetApprenticeshipProvidersAsync()).Returns(Task.FromResult(TwoProvidersTask()));
             mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new List<int>() { 123 });

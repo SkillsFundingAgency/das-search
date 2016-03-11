@@ -111,6 +111,8 @@
     <Compile Include="CourseDirectory\Models\ProviderCollection.cs" />
     <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\Attachment.cs" />
+    <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -118,7 +120,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\CsvService.cs" />
-    <Compile Include="Services\ElasticsearchClientFactory.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchIndexMaintainer.cs" />
     <Compile Include="Services\FileHelper.cs" />
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\LarsClient.cs" />
@@ -131,6 +134,7 @@
     <Compile Include="Settings\IInfrastructureSettings.cs" />
     <Compile Include="Settings\LarsSettings.cs" />
     <Compile Include="Settings\ILarsSettings.cs" />
+    <Compile Include="Elasticsearch\StandardDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -209,7 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Eds.Das.Indexer.ApplicationServices\Sfa.Eds.Das.Indexer.ApplicationServices.csproj">
-      <Project>{473307D1-67C9-411E-AD71-CF3C6FE892F4}</Project>
+      <Project>{473307d1-67c9-411e-ad71-cf3c6fe892f4}</Project>
       <Name>Sfa.Eds.Das.Indexer.ApplicationServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Core\Sfa.Eds.Das.Indexer.Core.csproj">

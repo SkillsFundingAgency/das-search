@@ -1,10 +1,9 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
     using System.Collections.Generic;
 
     using Nest;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Models;
     using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Indexer.Core.Models;
 

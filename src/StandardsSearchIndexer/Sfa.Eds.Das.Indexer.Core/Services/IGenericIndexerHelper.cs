@@ -10,7 +10,7 @@
 
         Task<ICollection<T>> LoadEntries();
 
-        void DeleteOldIndexes(DateTime scheduledRefreshDateTime);
+        bool DeleteOldIndexes(DateTime scheduledRefreshDateTime);
 
         bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime);
 
