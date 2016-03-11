@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Sfa.Das.ApplicationServices.Models;
+
     public sealed class Provider
     {
         public int Id { get; set; }
@@ -18,6 +20,8 @@
 
         public int Radius { get; set; }
 
+        public Address Address { get; set; }
+
         public double Distance { get; set; }
 
         public List<int> StandardsId { get; set; }
@@ -32,5 +36,12 @@
 
         public double LearnerSatisfaction { get; set; }
 
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
+
+        public List<string> DeliveryModes { get; set; }
+
+        public string StandardInfoUrl { get; set; }
     }
 }

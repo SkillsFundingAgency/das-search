@@ -16,7 +16,7 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
         public int LocationId { get; set; }
 
-        public string LocationName { get; set; }
+        public string VenueName { get; set; }
 
         public string MarketingName { get; set; }
 

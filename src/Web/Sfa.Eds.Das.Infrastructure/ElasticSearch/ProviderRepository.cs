@@ -34,14 +34,13 @@
                    .Query(q => q
                        .Term(t => t.Id, providerid)
                         && q.Term(t => t.LocationId, locationId)
-                        && q.Term(t => t.StandardCode, standardCode) // t.StandardCode is generated as standardCode and the JSON property is all lowercase (standardcode) -> Fix it or D..
-                       ));
+                        && q.Term(t => t.StandardCode, standardCode)));
 
             if (results.ConnectionStatus.HttpStatusCode != 200)
             {
-                _applicationLogger.Error($"Trying to get standard with id {providerid}");
+                _applicationLogger.Error($"Trying to get standard with provider id {providerid}, standard code {standardCode} and location id {locationId}");
 
-                throw new ApplicationException($"Failed query standard with id {providerid}");
+                throw new ApplicationException($"Failed query standard with provider {providerid}");
             }
 
             var document = results.Documents.Any() ? results.Documents.First() : null;
@@ -56,7 +55,15 @@
                 Id = document.Id,
                 ProviderName = document.Name,
                 VenueName = document.LocationName,
-                UkPrn = document.UkPrn
+                UkPrn = document.UkPrn,
+                Phone = document.Phone,
+                Email = document.Email,
+                Website = document.Website,
+                LearnerSatisfaction = document.LearnerSatisfaction,
+                EmployerSatisfaction = document.EmployerSatisfaction,
+                DeliveryModes = document.DeliveryModes,
+                Address = document.Address,
+                StandardInfoUrl = document.StandardInfoUrl
             };
         }
     }

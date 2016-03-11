@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
+    <Compile Include="Domain\Model\Address.cs" />
     <Compile Include="Domain\Model\Provider.cs" />
     <Compile Include="Domain\Model\TypicalLength.cs" />
     <Compile Include="Domain\Services\IProviderRepository.cs" />
