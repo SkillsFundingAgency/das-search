@@ -18,7 +18,7 @@
                     <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
                     @Model.ProviderName
                 </h1>
-                @GetStandardProperty("Website", "www.website.com")
+                @GetStandardProperty("Website", @Model.Website)
                 
             </div>
         </div>
@@ -29,6 +29,8 @@
                 <div class="related-container">
                     <aside class="related">
                         <h2 class="heading-medium">Provider quality assassment</h2>
+                        <h3>Learner satisfaction: @Model.LearnerSatisfaction %</h3>
+                        <h3>Employersatisfaction: @Model.EmployerSatisfaction %</h3>
                     </aside>
                 </div>
             }
@@ -43,9 +45,20 @@
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardProperty("Training location", Model.LocationName)
-            @GetStandardProperty("Distance", @Model.Distance.ToString())
-            @GetStandardProperty("Training details", @Model.Website)
+            <dt>Training location</dt>
+            <dd>
+                <div>
+                    @Model.VenueName
+                </div>
+                <div>
+                    @Model.Address.Address2
+                </div>
+                <div>
+                    @Model.Address.Address2
+                </div>
+            </dd>
+            @*@GetStandardProperty("Training location", Model.LocationName)*@
+            @GetStandardProperty("Training details", @Model.StandardInfoUrl)
             @GetStandardProperty("Phone", Model.Phone)
             @GetStandardProperty("Email", Model.Email)
             @GetStandardProperty("Training structure", Model.DeliveryModes)
@@ -75,11 +88,13 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
 @helper GetStandardProperty(string title, List<string> items, bool hideIfEmpty = false)
 {
-    if (items != null)
+if (items != null)
+{
+        <dt>@title</dt>
+    foreach (var item in items)
     {
-        foreach (var item in items)
-        {
-                <span>@Html.Raw(item)</span>
+
+                <div>@Html.Raw(item)</div>
         }
     }
 }

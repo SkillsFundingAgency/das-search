@@ -87,9 +87,7 @@ namespace Sfa.Eds.Das.Web.Controllers
             }
 
             var viewModel = this._mappingService.Map<Provider, ProviderViewModel>(model);
-
-            viewModel.LocationName = model.VenueName;
-
+            
             return View(viewModel);
         }
     }
