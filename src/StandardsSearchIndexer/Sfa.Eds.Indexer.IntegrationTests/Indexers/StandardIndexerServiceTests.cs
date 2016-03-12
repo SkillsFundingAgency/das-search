@@ -17,11 +17,11 @@
     using Sfa.Eds.Das.Indexer.Core.Models;
 
     [TestFixture]
-    public class StandardIndexerTests
+    public class StandardIndexerServiceTests
     {
         private IIndexSettings<MetaDataItem> _standardSettings;
 
-        private IGenericIndexerHelper<MetaDataItem> _standardHelper;
+        private IGenericIndexerHelper<MetaDataItem> _indexerService;
 
         private IElasticClient _elasticClient;
 
@@ -30,7 +30,7 @@
         {
             var ioc = IoC.Initialize();
             _standardSettings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
-            _standardHelper = ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
+            _indexerService = ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -45,7 +45,7 @@
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _standardHelper.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
             var mapping = _elasticClient.GetMapping<MetaDataItem>(i => i.Index(indexName));
@@ -75,10 +75,10 @@
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _standardHelper.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            await _standardHelper.IndexEntries(scheduledDate, standardsTest);
+            await _indexerService.IndexEntries(scheduledDate, standardsTest);
 
             Thread.Sleep(2000);
 

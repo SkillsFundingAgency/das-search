@@ -9,7 +9,7 @@ using Sfa.Eds.Das.Indexer.Core.Services;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    public class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
+    public sealed class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
         private readonly IGetApprenticeshipProviders _providerRepository;
@@ -82,6 +82,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
+        // TODO: LWA - The argusment seems a little strange to this method.
         public void SwapIndexes(DateTime scheduledRefreshDateTime)
         {
             var indexAlias = _settings.IndexesAlias;
@@ -112,7 +113,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         private void CreateAlias(string indexName)
         {
-            _searchIndexMaintainer.CreateIndexAlias(indexName, _settings.IndexesAlias);
+            _searchIndexMaintainer.CreateIndexAlias(_settings.IndexesAlias, indexName);
         }
     }
 }

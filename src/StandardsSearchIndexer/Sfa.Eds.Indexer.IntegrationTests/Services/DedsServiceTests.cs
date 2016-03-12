@@ -5,21 +5,23 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 {
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
+    using ApplicationServices.Settings;
+    using Core.Models;
+
     using Sfa.Eds.Das.Indexer.Core;
 
     [TestFixture]
     public class DedsServiceTests
     {
         private IContainer _ioc;
-        private IStandardIndexSettings _standardSettings;
+        private IIndexSettings<MetaDataItem> _standardSettings;
         private IGetStandardLevel _sut;
 
         [SetUp]
         public void Setup()
         {
             _ioc = IoC.Initialize();
-            _standardSettings = _ioc.GetInstance<IStandardIndexSettings>();
+            _standardSettings = _ioc.GetInstance<IIndexSettings<MetaDataItem>>();
 
             _sut = _ioc.GetInstance<IGetStandardLevel>();
         }

@@ -5,7 +5,7 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
-    public class StandardIndexSettings : IStandardIndexSettings, IIndexSettings<MetaDataItem>
+    public class StandardIndexSettings : IIndexSettings<MetaDataItem>
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
@@ -23,14 +23,8 @@
 
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
-        public string StandardJsonContainer => ConfigurationManager.AppSettings["Standard.JsonContainer"];
+        private string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
-        public string StandardPdfContainer => ConfigurationManager.AppSettings["Standard.PdfContainer"];
-
-        public string StandardContentType => ConfigurationManager.AppSettings["Standard.ContentType"];
-
-        public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
-
-        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
+        private string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
     }
 }

@@ -19,10 +19,10 @@
     using StructureMap;
 
     [TestFixture]
-    public class ProviderIndexerTest
+    public class ProviderIndexerServiceTest
     {
         private IContainer _ioc;
-        private IGenericIndexerHelper<Provider> _providerHelper;
+        private IGenericIndexerHelper<Provider> _indexerService;
         private IIndexerService<Provider> _sut;
         private IElasticClient _elasticClient;
         private IIndexSettings<Provider> _providerSettings;
@@ -32,7 +32,7 @@
         {
             _ioc = IoC.Initialize();
             _ioc.GetInstance<IIndexSettings<Provider>>();
-            _providerHelper = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
+            _indexerService = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
             _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
 
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
@@ -84,10 +84,10 @@
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            _providerHelper.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _providerHelper.IndexEntries(scheduledDate, providersTest);
+            _indexerService.IndexEntries(scheduledDate, providersTest);
 
             Thread.Sleep(2000);
 
@@ -114,10 +114,10 @@
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            _providerHelper.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(scheduledDate);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _providerHelper.IndexEntries(scheduledDate, providersTest);
+            _indexerService.IndexEntries(scheduledDate, providersTest);
 
             Thread.Sleep(2000);
 

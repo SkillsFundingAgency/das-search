@@ -93,7 +93,6 @@
     <Compile Include="MetaData\IVstsService.cs" />
     <Compile Include="Settings\IIndexSettings.cs" />
     <Compile Include="Settings\IAppServiceSettings.cs" />
-    <Compile Include="Standard\IStandardIndexSettings.cs" />
     <Compile Include="Provider\ProviderIndexSettings.cs" />
     <Compile Include="Settings\AppServiceAppServiceSettings.cs" />
     <Compile Include="Standard\StandardIndexSettings.cs" />

@@ -61,8 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MetaDataHelperTests.cs" />
-    <Compile Include="Helpers\ProviderHelperTests.cs" />
-    <Compile Include="Helpers\StandardHelperTests.cs" />
+    <Compile Include="Services\ProviderIndexerTests.cs" />
+    <Compile Include="Services\StandardIndexerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IndexerServiceTests.cs" />
   </ItemGroup>
