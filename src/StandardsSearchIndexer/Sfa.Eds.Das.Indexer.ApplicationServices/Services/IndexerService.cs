@@ -53,6 +53,8 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
 
                     _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
                 }
+
+                Log.Info($"{_name} Indexing complete.");
             }
             catch (Exception ex)
             {

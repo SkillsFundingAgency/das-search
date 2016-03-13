@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
@@ -34,6 +35,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
         {
             var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
+
             var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
 
             return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
@@ -72,6 +74,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             catch (Exception ex)
             {
                 _log.Error("Error indexing providers: " + ex.Message, ex);
+                throw;
             }
         }
 

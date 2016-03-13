@@ -27,6 +27,8 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public override async Task IndexEntries(string indexName, ICollection<Provider> providers)
         {
+            var documentCount = 0;
+
             foreach (var provider in providers)
             {
                 try
@@ -34,9 +36,11 @@ namespace Sfa.Infrastructure.Elasticsearch
                     foreach (var standard in provider.Standards)
                     {
                         var queryList = CreateListRawFormat(provider, standard);
+
                         foreach (var query in queryList)
                         {
                             await Client.Raw.IndexAsync(indexName, "provider", query);
+                            documentCount++;
                         }
                     }
                 }
@@ -46,6 +50,8 @@ namespace Sfa.Infrastructure.Elasticsearch
                     throw;
                 }
             }
+
+            Log.Debug($"Indexed a total of {documentCount} Provider documents");
         }
 
         private List<string> CreateListRawFormat(Provider provider, StandardInformation standard)
@@ -54,8 +60,6 @@ namespace Sfa.Infrastructure.Elasticsearch
 
             foreach (var standardLocation in standard.DeliveryLocations)
             {
-                var location = standardLocation.DeliveryLocation;
-
                 var i = 0;
                 var deliveryModes = new StringBuilder();
 
@@ -66,19 +70,24 @@ namespace Sfa.Infrastructure.Elasticsearch
                     i++;
                 }
 
+                if (standard == null || standardLocation == null || standardLocation.DeliveryLocation == null)
+                {
+                    throw new Exception("Test");
+                }
+
                 var rawProvider = string.Concat(
                 @"{ ""ukprn"": """,
                 provider.Ukprn,
                 @""", ""id"": """,
-                provider.Id,
+                $"{provider.Ukprn}{standard.StandardCode}{standardLocation.DeliveryLocation.Id}" ,
                 @""", ""name"": """,
                 provider.Name ?? "Unspecified",
                 @""", ""standardcode"": ",
                 standard.StandardCode,
                 @", ""locationId"": ",
-                location.Id,
+                standardLocation.DeliveryLocation.Id,
                 @", ""locationName"": """,
-                location.Name ?? "Unspecified",
+                standardLocation.DeliveryLocation.Name ?? "Unspecified",
                 @""", ""marketingInfo"": """,
                 standard.MarketingInfo ?? "Unspecified",
                 @""", ""phone"": """,
@@ -92,25 +101,25 @@ namespace Sfa.Infrastructure.Elasticsearch
                 @""", ""deliveryModes"": [",
                 deliveryModes,
                 @"], ""website"": """,
-                location.Contact.Website ?? "Unspecified",
+                standardLocation.DeliveryLocation.Contact.Website ?? "Unspecified",
                 @""", ""address"": {""address1"":""",
-                location.Address.Address1 ?? "Unspecified",
+                standardLocation.DeliveryLocation.Address.Address1 ?? "Unspecified",
                 @""", ""address2"": """,
-                location.Address.Address2 ?? "Unspecified",
+                standardLocation.DeliveryLocation.Address.Address2 ?? "Unspecified",
                 @""", ""town"": """,
-                location.Address.Town ?? "Unspecified",
+                standardLocation.DeliveryLocation.Address.Town ?? "Unspecified",
                 @""", ""county"": """,
-                location.Address.County ?? "Unspecified",
+                standardLocation.DeliveryLocation.Address.County ?? "Unspecified",
                 @""", ""postcode"": """,
-                location.Address.Postcode ?? "Unspecified",
+                standardLocation.DeliveryLocation.Address.Postcode ?? "Unspecified",
                 @"""}, ""locationPoint"": [",
-                location.Address.GeoPoint.Longitude,
+                standardLocation.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0, // TODO: LWA This needs to be handled better
                 ", ",
-                location.Address.GeoPoint.Latitude,
+                standardLocation.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
                 @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
-                location.Address.GeoPoint.Longitude,
+                standardLocation.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
                 ", ",
-                location.Address.GeoPoint.Latitude,
+                standardLocation.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
                 @"], ""radius"": """,
                 standardLocation.Radius,
                 @"mi"" }}");

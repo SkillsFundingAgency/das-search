@@ -168,10 +168,6 @@
     <None Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="log.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetDescriptor.datasource" />
     <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource" />

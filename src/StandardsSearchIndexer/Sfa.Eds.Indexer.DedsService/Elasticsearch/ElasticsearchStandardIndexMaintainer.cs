@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Nest;
 using Sfa.Eds.Das.Indexer.ApplicationServices;
@@ -37,6 +38,13 @@ namespace Sfa.Infrastructure.Elasticsearch
                     throw;
                 }
             }
+        }
+
+        public override bool IndexContainsDocuments(string indexName)
+        {
+            var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
+
+            return a.Any();
         }
 
         private StandardDocument CreateDocument(MetaDataItem standard)

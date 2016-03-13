@@ -5,7 +5,7 @@ namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
 {
     public sealed class Provider : IIndexEntry
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public int Ukprn { get; set; }
 
