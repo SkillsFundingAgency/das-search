@@ -75,7 +75,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 PostCode = hit.Source.PostCode,
                 UkPrn = hit.Source.UkPrn,
                 VenueName = hit.Source.VenueName,
-                StandardsId = hit.Source.StandardsId,
+                Standardscode = hit.Source.Standardscode,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).ToList();
 
@@ -90,7 +90,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private string CreateRawQuery(string standardId, Coordinate location)
         {
             return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """,
+                @"{""filtered"": { ""query"": { ""match"": { ""standardcode"": """,
                 standardId,
                 @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
                 location.Lon,

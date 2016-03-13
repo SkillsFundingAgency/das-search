@@ -6,7 +6,7 @@
 
     public sealed class ProviderSearchResultsItem
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string UkPrn { get; set; }
 
@@ -22,7 +22,7 @@
 
         public double Distance { get; set; }
 
-        public List<int> StandardsId { get; set; }
+        public int Standardscode { get; set; }
 
         public string Website { get; set; }
 
