@@ -142,7 +142,7 @@ WriteLiteral("                                ");
 
             
             #line 32 "..\..\Views\Provider\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @id = item.Id }, null));
+                           Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @id = item.Id }, null));
 
             
             #line default
@@ -177,15 +177,15 @@ WriteLiteral(" class=\"website\"");
 
 WriteLiteral(">\r\n                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1624), Tuple.Create("\"", 1690)
+WriteAttribute("href", Tuple.Create(" href=\"", 1616), Tuple.Create("\"", 1682)
             
             #line 43 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 1631), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 1623), Tuple.Create<System.Object, System.Int32>(item.Website
             
             #line default
             #line hidden
-, 1631), false)
-, Tuple.Create(Tuple.Create(" ", 1644), Tuple.Create("http://www.trainingassociation.co.uk/provider", 1645), true)
+, 1623), false)
+, Tuple.Create(Tuple.Create(" ", 1636), Tuple.Create("http://www.trainingassociation.co.uk/provider", 1637), true)
 );
 
 WriteLiteral("> ");

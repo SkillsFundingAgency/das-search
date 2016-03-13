@@ -10,9 +10,9 @@
 
         public string UkPrn { get; set; }
 
-        public string ProviderName { get; set; }
+        public string Name { get; set; }
 
-        public string VenueName { get; set; }
+        public string LocationName { get; set; }
 
         public string PostCode { get; set; }
 
