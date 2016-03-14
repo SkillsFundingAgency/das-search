@@ -67,7 +67,8 @@
 
         public ActionResult FrameworkDetail(int id)
         {
-            throw new System.NotImplementedException();
+            var resultUrl = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
+            return Redirect(resultUrl.Url);
         }
     }
 }

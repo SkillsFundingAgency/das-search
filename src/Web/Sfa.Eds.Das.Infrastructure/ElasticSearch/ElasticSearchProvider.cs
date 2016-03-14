@@ -5,7 +5,6 @@ using Nest;
 using Sfa.Das.ApplicationServices;
 using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Model;
-using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
@@ -16,14 +15,13 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _logger;
-        private readonly IStandardRepository _standardRepository;
+
         private readonly IConfigurationSettings _applicationSettings;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
-            _standardRepository = standardRepository;
             _applicationSettings = applicationSettings;
         }
 
