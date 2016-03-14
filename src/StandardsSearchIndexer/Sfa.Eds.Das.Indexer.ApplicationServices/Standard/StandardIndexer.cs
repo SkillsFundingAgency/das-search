@@ -40,7 +40,7 @@
             }
             catch (Exception ex)
             {
-                _log.Error("Error indexing PDFs", ex);
+                _log.Error("Error indexing Standards", ex);
             }
         }
 
