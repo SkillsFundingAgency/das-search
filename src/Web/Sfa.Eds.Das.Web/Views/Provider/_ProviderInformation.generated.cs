@@ -63,16 +63,20 @@ WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Distance:</dt>\r\n        <dd");
+WriteLiteralTo(__razor_helper_writer, " style=\"font-weight: bold\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n            Distance:\r\n        </dt>\r\n        <dd");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <span>Training will take place at the employer\'s location.</span>\r" +
-"\n        </dd>\r\n    </dl>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n            <span>Training can take place at your location.</span>\r\n        </" +
+"dd>\r\n    </dl>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
+
+WriteLiteralTo(__razor_helper_writer, " style=\"font-weight:bold\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Website:</dt>\r\n        <dd");
 
@@ -80,20 +84,20 @@ WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1681), Tuple.Create("\"", 1701)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1887), Tuple.Create("\"", 1907)
 
-#line 50 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1688), Tuple.Create<System.Object, System.Int32>(item.Website
+#line 52 "..\..\Views\Provider\_ProviderInformation.cshtml"
+, Tuple.Create(Tuple.Create("", 1894), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1688), false)
+, 1894), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
 
 
-#line 50 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 52 "..\..\Views\Provider\_ProviderInformation.cshtml"
        WriteTo(__razor_helper_writer, item.Website);
 
 
@@ -102,26 +106,26 @@ WriteLiteralTo(__razor_helper_writer, "> ");
 WriteLiteralTo(__razor_helper_writer, "</a>\r\n        </dd>\r\n    </dl>\r\n");
 
 
-#line 53 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 55 "..\..\Views\Provider\_ProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 53 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 55 "..\..\Views\Provider\_ProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 55 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 57 "..\..\Views\Provider\_ProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult  RenderProviderDetails(ProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 56 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 58 "..\..\Views\Provider\_ProviderInformation.cshtml"
  
 
 
@@ -131,14 +135,16 @@ WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Distance:</dt>\r\n        <dd");
+WriteLiteralTo(__razor_helper_writer, " style=\"font-weight: bold\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n            Distance:\r\n        </dt>\r\n        <dd");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <span>");
 
 
-#line 60 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 64 "..\..\Views\Provider\_ProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.Distance);
 
 
@@ -146,9 +152,53 @@ WriteTo(__razor_helper_writer, item.Distance);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, " miles away</span>\r\n        </dd>\r\n    </dl>\r\n");
 
+WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dd");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"location\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n            <span>");
+
+
+#line 69 "..\..\Views\Provider\_ProviderInformation.cshtml"
+WriteTo(__razor_helper_writer, item.LocationName);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</span> <span>");
+
+
+#line 69 "..\..\Views\Provider\_ProviderInformation.cshtml"
+                    WriteTo(__razor_helper_writer, item.Address.Address1);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</span> <span>");
+
+
+#line 69 "..\..\Views\Provider\_ProviderInformation.cshtml"
+                                                        WriteTo(__razor_helper_writer, item.Address.Address2);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</span> <span>");
+
+
+#line 69 "..\..\Views\Provider\_ProviderInformation.cshtml"
+                                                                                            WriteTo(__razor_helper_writer, item.Address.County);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </dd>\r\n    </dl>\r\n");
+
 WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
+
+WriteLiteralTo(__razor_helper_writer, " style=\"font-weight:bold\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Website:</dt>\r\n        <dd");
 
@@ -156,20 +206,20 @@ WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2085), Tuple.Create("\"", 2105)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2584), Tuple.Create("\"", 2604)
 
-#line 66 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 2092), Tuple.Create<System.Object, System.Int32>(item.Website
+#line 75 "..\..\Views\Provider\_ProviderInformation.cshtml"
+, Tuple.Create(Tuple.Create("", 2591), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 2092), false)
+, 2591), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
 
 
-#line 66 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 75 "..\..\Views\Provider\_ProviderInformation.cshtml"
        WriteTo(__razor_helper_writer, item.Website);
 
 
@@ -177,71 +227,15 @@ WriteLiteralTo(__razor_helper_writer, "> ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</a>\r\n        </dd>\r\n    </dl>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
-
-WriteLiteralTo(__razor_helper_writer, ">Trainer location name:</dt>\r\n        <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <span>");
-
-
-#line 72 "..\..\Views\Provider\_ProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.LocationName);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " a</span>\r\n        </dd>\r\n    </dl>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "    <dl>\r\n        <dt");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
-
-WriteLiteralTo(__razor_helper_writer, ">Trainer location address:</dt>\r\n        <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <span>");
-
 
 #line 78 "..\..\Views\Provider\_ProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.Address.Address1);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</span>\r\n            <span>");
-
-
-#line 79 "..\..\Views\Provider\_ProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.Address.Address2);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</span>\r\n            <span>");
-
-
-#line 80 "..\..\Views\Provider\_ProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.Address.County);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </dd>\r\n    </dl>\r\n");
-
-
-#line 83 "..\..\Views\Provider\_ProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 83 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 78 "..\..\Views\Provider\_ProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -285,7 +279,7 @@ WriteLiteral("                    ");
 
             
             #line 11 "..\..\Views\Provider\_ProviderInformation.cshtml"
-               Write(Html.ActionLink(item.Name, "Detail", "Provider", new {@id = item.Id}, null));
+               Write(Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null));
 
             
             #line default
@@ -300,7 +294,7 @@ WriteLiteral("\r\n                </h2>\r\n");
             #line hidden
             
             #line 13 "..\..\Views\Provider\_ProviderInformation.cshtml"
-                 if (item.DeliveryModes?.FirstOrDefault() == "100PercentEmployer")
+                 if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     
             
@@ -342,6 +336,8 @@ WriteLiteral("                \r\n                <dl>\r\n                    <d
 
 WriteLiteral(" class=\"distance\"");
 
+WriteLiteral(" style=\"font-weight:bold\"");
+
 WriteLiteral(">Employer satisfaction:</dt>\r\n                    <dd");
 
 WriteLiteral(" class=\"distance\"");
@@ -359,6 +355,8 @@ WriteLiteral(" %</span>\r\n                    </dd>\r\n                </dl>\r\
 "\r\n                    <dt");
 
 WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(" style=\"font-weight:bold\"");
 
 WriteLiteral(">Learner satisfaction:</dt>\r\n                    <dd");
 
@@ -385,7 +383,7 @@ WriteLiteral(" %</span>\r\n                    </dd>\r\n                </dl>\r\
             #line hidden
 WriteLiteral("</div>\r\n\r\n");
 
-WriteLiteral("\r\n");
+WriteLiteral("s\r\n");
 
         }
     }
