@@ -6,10 +6,11 @@
     @foreach (var item in Model.Hits)
     {
         <li class="result">
-            <div class="column details">
-                <h2 class="heading-medium">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
-                </h2>
+            <h2 class="result-title">
+                @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
+            </h2>
+
+            <dl class="reult-data-list">
                 @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     @RenderEmployersLocationProviderDetails(item)
@@ -23,7 +24,7 @@
                 <dd>@item.EmployerSatisfaction %</dd>
                 <dt>Learner satisfaction:</dt>
                 <dd>@item.LearnerSatisfaction %</dd>
-            </div>
+            </dl>
         </li>
     }
 </div>
