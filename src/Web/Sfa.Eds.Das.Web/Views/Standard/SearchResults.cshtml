@@ -21,13 +21,14 @@
                     Html.RenderPartial("_SearchResultMessage");
                 }
             </p>
-            <ol class="frameworkResults">
                 @foreach (var item in Model.Results)
                 {
-                    <li class="result">
+                    <article class="result">
+                        <header>
                             <h2 class="result-title">
                                 @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
                             </h2>
+                        </header>
                             @*<dl>
                                 <dt class="endLevel">Level</dt>
                                 <dd class="endLevel">
@@ -38,9 +39,8 @@
                                 @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
                                 @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
                             </dl>
-                    </li>
+                    </article>
                 }
-            </ol>
 
         </div>
 

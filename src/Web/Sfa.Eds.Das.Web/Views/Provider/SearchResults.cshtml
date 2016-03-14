@@ -23,11 +23,9 @@
                     Html.RenderPartial("_SearchResultMessage");
                 }
             </p>
-            <ol class="providerResults">
-                @{
-                    Html.RenderPartial("_ProviderInformation");
-                }
-            </ol>
+            @{
+                Html.RenderPartial("_ProviderInformation");
+            }
         </div>
 
         <div class="column-third">

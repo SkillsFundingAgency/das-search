@@ -104,27 +104,23 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </p>\r\n            <ol");
-
-WriteLiteral(" class=\"providerResults\"");
-
-WriteLiteral(">\r\n");
+WriteLiteral("\r\n            </p>\r\n");
 
             
-            #line 27 "..\..\Views\Provider\SearchResults.cshtml"
-                
+            #line 26 "..\..\Views\Provider\SearchResults.cshtml"
+            
             
             #line default
             #line hidden
             
-            #line 27 "..\..\Views\Provider\SearchResults.cshtml"
-                  
-                    Html.RenderPartial("_ProviderInformation");
-                
+            #line 26 "..\..\Views\Provider\SearchResults.cshtml"
+              
+                Html.RenderPartial("_ProviderInformation");
+            
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </ol>\r\n        </div>\r\n\r\n        <div");
+WriteLiteral("\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
