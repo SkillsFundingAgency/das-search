@@ -28,12 +28,17 @@
     [TestFixture]
     public class ProviderIndexerServiceTest
     {
+        private IGenericIndexerHelper<Provider> _indexerService;
+        private IIndexerService<Provider> _sut;
+        private IElasticClient _elasticClient;
+        private IIndexSettings<Provider> _providerSettings;
+        private IContainer _ioc;
+
         [SetUp]
         public void SetUp()
         {
             _ioc = IoC.Initialize();
             _ioc.Configure(x => x.For<IGetApprenticeshipProviders>().Use<StubCourseDirectoryClient>());
-            var test = _ioc.GetInstance<IGetApprenticeshipProviders>();
             _ioc.GetInstance<IIndexSettings<Provider>>();
             _indexerService = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
             _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
@@ -44,15 +49,110 @@
             _sut = _ioc.GetInstance<IIndexerService<Provider>>();
         }
 
-        private IContainer _ioc;
+        [Test]
+        [Category("Integration")]
+        public async Task ShouldCreateScheduledIndexAndMappingForProviders()
+        {
+            var scheduledDate = new DateTime(2000, 1, 1);
+            var indexName =
+                $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
-        private IGenericIndexerHelper<Provider> _indexerService;
+            DeleteIndexIfExists(indexName);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            await _sut.CreateScheduledIndex(scheduledDate);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-        private IIndexerService<Provider> _sut;
+            var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
+            mapping.Should().NotBeNull();
 
-        private IElasticClient _elasticClient;
+            _elasticClient.DeleteIndex(i => i.Index(indexName));
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+        }
 
-        private IIndexSettings<Provider> _providerSettings;
+        [Test]
+        [Category("Integration")]
+        [Category("Problematic")]
+        [Ignore]
+        public void ShouldRetrieveProvidersSearchingForPostCode()
+        {
+            var scheduledDate = new DateTime(2000, 1, 1);
+            var indexName =
+                $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+
+            var providersTest = GetProvidersTest();
+            var expectedProviderResult = new Provider
+                                             {
+                                                 Ukprn = 10002387,
+                                                 Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
+                                                 MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
+                                                 ContactDetails =
+                                                     new ContactInformation
+                                                         {
+                                                             Email = "test1@example.com",
+                                                             Website = "http://www.f1training.org.uk",
+                                                             Phone = "01449 770911"
+                                                         }
+                                             };
+
+            DeleteIndexIfExists(indexName);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
+            _indexerService.CreateIndex(scheduledDate);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+
+            _indexerService.IndexEntries(scheduledDate, providersTest);
+
+            Thread.Sleep(2000);
+
+            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).QueryString("MK40 2SG"));
+            var amountRetrieved = retrievedResult.Documents.Count();
+            var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
+
+            _elasticClient.DeleteIndex(i => i.Index(indexName));
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
+            Assert.AreEqual(1, amountRetrieved);
+            Assert.AreEqual(expectedProviderResult.Name, retrievedProvider.Name);
+        }
+
+        [Test]
+        [Category("Integration")]
+        [Category("Problematic")]
+        [Ignore]
+        public void ShouldRetrieveProvidersSearchingForStandardId()
+        {
+            var scheduledDate = new DateTime(2000, 1, 1);
+            var indexName =
+                $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+
+            var providersTest = GetProvidersTest();
+
+            DeleteIndexIfExists(indexName);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+
+            _indexerService.CreateIndex(scheduledDate);
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+
+            _indexerService.IndexEntries(scheduledDate, providersTest);
+
+            Thread.Sleep(2000);
+
+            QueryContainer query1 = new TermQuery { Field = "standardcode", Value = 17 };
+            var providersCase1 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query1));
+
+            QueryContainer query2 = new TermQuery { Field = "standardcode", Value = 45 };
+            var providersCase2 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query2));
+
+            QueryContainer query3 = new TermQuery { Field = "standardcode", Value = 1234567890 };
+            var providersCase3 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query3));
+
+            Assert.AreEqual(1, providersCase1.Documents.Count());
+            Assert.AreEqual(1, providersCase2.Documents.Count());
+            Assert.AreEqual(0, providersCase3.Documents.Count());
+
+            _elasticClient.DeleteIndex(i => i.Index(indexName));
+            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+        }
 
         private void DeleteIndexIfExists(string indexName)
         {
@@ -172,8 +272,7 @@
                                                                            DeliveryLocation
                                                                                =
                                                                                providerLocations
-                                                                               .Single
-                                                                               (
+                                                                               .Single(
                                                                                    x
                                                                                    =>
                                                                                    x
@@ -222,8 +321,7 @@
                                                                            DeliveryLocation
                                                                                =
                                                                                providerLocations
-                                                                               .Single
-                                                                               (
+                                                                               .Single(
                                                                                    x
                                                                                    =>
                                                                                    x
@@ -248,111 +346,6 @@
                                    Locations = providerLocations
                                }
                        };
-        }
-
-        [Test]
-        [Category("Integration")]
-        public async Task ShouldCreateScheduledIndexAndMappingForProviders()
-        {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName =
-                $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            await _sut.CreateScheduledIndex(scheduledDate);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
-            mapping.Should().NotBeNull();
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-        }
-
-        [Test]
-        [Category("Integration")]
-        [Category("Problematic")]
-        [Ignore]
-        public void ShouldRetrieveProvidersSearchingForPostCode()
-        {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName =
-                $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-
-            var providersTest = GetProvidersTest();
-            var expectedProviderResult = new Provider
-                                             {
-                                                 Ukprn = 10002387,
-                                                 Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
-                                                 MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
-                                                 ContactDetails =
-                                                     new ContactInformation
-                                                         {
-                                                             Email = "test1@example.com",
-                                                             Website = "http://www.f1training.org.uk",
-                                                             Phone = "01449 770911"
-                                                         }
-                                             };
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-
-            _indexerService.CreateIndex(scheduledDate);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            _indexerService.IndexEntries(scheduledDate, providersTest);
-
-            Thread.Sleep(2000);
-
-            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).QueryString("MK40 2SG"));
-            var amountRetrieved = retrievedResult.Documents.Count();
-            var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-
-            Assert.AreEqual(1, amountRetrieved);
-            Assert.AreEqual(expectedProviderResult.Name, retrievedProvider.Name);
-        }
-
-        [Test]
-        [Category("Integration")]
-        [Category("Problematic")]
-        [Ignore]
-        public void ShouldRetrieveProvidersSearchingForStandardId()
-        {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName =
-                $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-
-            var providersTest = GetProvidersTest();
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-
-            _indexerService.CreateIndex(scheduledDate);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            _indexerService.IndexEntries(scheduledDate, providersTest);
-
-            Thread.Sleep(2000);
-
-            QueryContainer query1 = new TermQuery { Field = "standardcode", Value = 17 };
-            var providersCase1 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query1));
-
-            QueryContainer query2 = new TermQuery { Field = "standardcode", Value = 45 };
-            var providersCase2 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query2));
-
-            QueryContainer query3 = new TermQuery { Field = "standardcode", Value = 1234567890 };
-            var providersCase3 = _elasticClient.Search<Provider>(s => s.Index(indexName).Query(query3));
-
-            Assert.AreEqual(1, providersCase1.Documents.Count());
-            Assert.AreEqual(1, providersCase2.Documents.Count());
-            Assert.AreEqual(0, providersCase3.Documents.Count());
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
         }
     }
 }
