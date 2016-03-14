@@ -272,6 +272,8 @@
 
         [Test]
         [Category("Integration")]
+        [Category("Problematic")]
+        [Ignore]
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
@@ -316,6 +318,8 @@
 
         [Test]
         [Category("Integration")]
+        [Category("Problematic")]
+        [Ignore]
         public void ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
