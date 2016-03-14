@@ -1,12 +1,10 @@
 ﻿namespace Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests
 {
-    using Moq;
-
-    using NUnit.Framework;
-
     using ApplicationServices.Queue;
     using AzureWorkerRole;
     using Core.Models;
+    using Moq;
+    using NUnit.Framework;
 
     [TestFixture]
     public class IndexerJobTests
@@ -17,8 +15,8 @@
             // Arrange
             var mockConsumer = new Mock<IGenericControlQueueConsumer>();
             var sut = new IndexerJob(mockConsumer.Object);
-            // Act
 
+            // Act
             sut.Run();
 
             // Assert

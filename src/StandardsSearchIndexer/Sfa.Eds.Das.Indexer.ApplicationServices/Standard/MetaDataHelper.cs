@@ -15,13 +15,13 @@
 
         private readonly IGenerateStandardMetaData _metaDataWriter;
 
-        private readonly ILog Log;
+        private readonly ILog _log;
 
         public MetaDataHelper(IGetStandardMetaData metaDataReader, IGenerateStandardMetaData metaDataGenerator, ILog log)
         {
             _metaDataReader = metaDataReader;
             _metaDataWriter = metaDataGenerator;
-            Log = log;
+            _log = log;
         }
 
         public List<MetaDataItem> GetAllStandardsMetaData()
@@ -37,7 +37,7 @@
                 }
                 catch (JsonReaderException ex)
                 {
-                    Log.Warn($"Couldn't deserialise meta data for: {item.Key}", ex);
+                    _log.Warn($"Couldn't deserialise meta data for: {item.Key}", ex);
                 }
             }
 

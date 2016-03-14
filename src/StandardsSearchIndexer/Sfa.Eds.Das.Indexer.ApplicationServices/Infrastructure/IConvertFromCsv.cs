@@ -4,6 +4,7 @@
 
     public interface IConvertFromCsv
     {
-        ICollection<T> CsvTo<T>(string result) where T : class, new();
+        ICollection<T> CsvTo<T>(string result)
+            where T : class, new();
     }
 }

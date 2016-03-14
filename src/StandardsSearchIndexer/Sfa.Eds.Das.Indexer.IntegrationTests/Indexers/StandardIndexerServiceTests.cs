@@ -23,6 +23,12 @@
     [TestFixture]
     public class StandardIndexerServiceTests
     {
+        private IIndexSettings<MetaDataItem> _standardSettings;
+
+        private IGenericIndexerHelper<MetaDataItem> _indexerService;
+
+        private IElasticClient _elasticClient;
+
         [SetUp]
         public void SetUp()
         {
@@ -32,53 +38,6 @@
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
-        }
-
-        private IIndexSettings<MetaDataItem> _standardSettings;
-
-        private IGenericIndexerHelper<MetaDataItem> _indexerService;
-
-        private IElasticClient _elasticClient;
-
-        private void DeleteIndexIfExists(string indexName)
-        {
-            var exists = _elasticClient.IndexExists(i => i.Index(indexName));
-            if (exists.Exists)
-            {
-                _elasticClient.DeleteIndex(i => i.Index(indexName));
-            }
-        }
-
-        private IEnumerable<MetaDataItem> GetStandardsTest()
-        {
-            return new List<MetaDataItem>
-                       {
-                           new MetaDataItem
-                               {
-                                   Id = 1,
-                                   Title = "Network Engineer",
-                                   PdfFileName = "1-Apprenticeship standard for a network engineer",
-                                   StandardPdfUrl =
-                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
-                               },
-                           new MetaDataItem
-                               {
-                                   Id = 2,
-                                   Title = "Software Developer",
-                                   PdfFileName = "2-Apprenticeship standard for a software developer",
-                                   StandardPdfUrl =
-                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
-                               },
-                           new MetaDataItem
-                               {
-                                   Id = 61,
-                                   Title = "Dental Nurse",
-                                   NotionalEndLevel = 3,
-                                   PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                                   StandardPdfUrl =
-                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
-                               }
-                       };
         }
 
         [Test]
@@ -140,6 +99,47 @@
             Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
             Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
             Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.StandardId);
+        }
+
+        private void DeleteIndexIfExists(string indexName)
+        {
+            var exists = _elasticClient.IndexExists(i => i.Index(indexName));
+            if (exists.Exists)
+            {
+                _elasticClient.DeleteIndex(i => i.Index(indexName));
+            }
+        }
+
+        private IEnumerable<MetaDataItem> GetStandardsTest()
+        {
+            return new List<MetaDataItem>
+                       {
+                           new MetaDataItem
+                               {
+                                   Id = 1,
+                                   Title = "Network Engineer",
+                                   PdfFileName = "1-Apprenticeship standard for a network engineer",
+                                   StandardPdfUrl =
+                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
+                               },
+                           new MetaDataItem
+                               {
+                                   Id = 2,
+                                   Title = "Software Developer",
+                                   PdfFileName = "2-Apprenticeship standard for a software developer",
+                                   StandardPdfUrl =
+                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
+                               },
+                           new MetaDataItem
+                               {
+                                   Id = 61,
+                                   Title = "Dental Nurse",
+                                   NotionalEndLevel = 3,
+                                   PdfFileName = "61-Apprenticeship standard for a dental nurse",
+                                   StandardPdfUrl =
+                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                               }
+                       };
         }
     }
 }

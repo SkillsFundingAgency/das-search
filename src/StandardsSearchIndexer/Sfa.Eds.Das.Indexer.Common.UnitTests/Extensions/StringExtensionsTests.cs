@@ -36,7 +36,7 @@
         [Test]
         public void ShouldReturnEmptyEnumerableIfCsvDoesntContainAnything()
         {
-            var csv = "";
+            var csv = string.Empty;
             var sut = new CsvService();
 
             var models = sut.CsvTo<CsvTestModel>(csv);

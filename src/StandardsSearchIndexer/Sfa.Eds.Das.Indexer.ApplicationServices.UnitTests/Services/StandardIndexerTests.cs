@@ -29,7 +29,6 @@
             var mockLogger = Mock.Of<ILog>();
 
             _sut = new StandardIndexer(_mockSettings.Object, _mockMetaDataHelper.Object, _mockIndexMaintainer.Object, mockLogger);
-
         }
 
         [Test]
@@ -39,7 +38,7 @@
             _mockMetaDataHelper.Setup(x => x.GetAllStandardsMetaData()).Returns(new List<MetaDataItem>());
 
             // Act
-            var entries = await _sut.LoadEntries();
+            await _sut.LoadEntries();
 
             _mockMetaDataHelper.Verify(x => x.GetAllStandardsMetaData(), Times.Once);
         }
@@ -116,17 +115,6 @@
             Assert.That(match1, Is.True);
             Assert.That(match2, Is.True);
             Assert.That(match3, Is.False);
-        }
-
-        private IEnumerable<Core.Models.Provider.Provider> TwoProvidersTask()
-        {
-            return TwoProviders();
-        }
-
-        private IEnumerable<Core.Models.Provider.Provider> TwoProviders()
-        {
-            yield return new Core.Models.Provider.Provider() { Ukprn = 123 };
-            yield return new Core.Models.Provider.Provider() { Ukprn = 456 };
         }
     }
 }

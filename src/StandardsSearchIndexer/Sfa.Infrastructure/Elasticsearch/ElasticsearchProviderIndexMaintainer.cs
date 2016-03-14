@@ -79,7 +79,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 @"{ ""ukprn"": """,
                 provider.Ukprn,
                 @""", ""id"": """,
-                $"{provider.Ukprn}{standard.StandardCode}{standardLocation.DeliveryLocation.Id}" ,
+                $"{provider.Ukprn}{standard.StandardCode}{standardLocation.DeliveryLocation.Id}",
                 @""", ""name"": """,
                 provider.Name ?? "Unspecified",
                 @""", ""standardcode"": ",

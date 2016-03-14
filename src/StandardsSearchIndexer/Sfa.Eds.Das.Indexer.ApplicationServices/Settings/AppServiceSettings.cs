@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
 {
     using System;
     using System.Configuration;
@@ -8,9 +8,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
 
     public class AppServiceSettings : BaseSettings, IAppServiceSettings
     {
-        // Private appServiceSettings
-        private string VstsGitBaseUrl => GetSetting("VstsGitBaseUrl");
-
         public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
 
         public string StorageAccountKey => ConfigurationManager.AppSettings["StorageAccountKey"];
@@ -40,6 +37,9 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
         public string GitBranch => GetSetting("GitBranch");
 
         public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
+
+        // Private appServiceSettings
+        private string VstsGitBaseUrl => GetSetting("VstsGitBaseUrl");
 
         public string QueueName(Type type)
         {

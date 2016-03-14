@@ -7,7 +7,6 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
-
     using StructureMap;
 
     public class ProviderRegistry : Registry

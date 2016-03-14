@@ -3,14 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using Moq;
-    using NUnit.Framework;
-
     using ApplicationServices.Services.Interfaces;
-    using Settings;
     using Core;
     using Core.Services;
+    using Moq;
+    using NUnit.Framework;
+    using Settings;
 
     [TestFixture]
     public class IndexerServiceTests

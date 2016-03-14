@@ -10,16 +10,6 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 
     public class StubCourseDirectoryClient : IGetApprenticeshipProviders
     {
-        public async Task<IEnumerable<Provider>> GetApprenticeshipProvidersAsync()
-        {
-            return Retrieve();
-        }
-
-        private IEnumerable<Provider> Retrieve()
-        {
-            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(Json);
-        }
-
         private const string Json = @"[
   {
     ""ukprn"": -98154690,
@@ -131,5 +121,15 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
     ""marketingInfo"": ""et voluptas qui quia""
   }
 ]";
+
+        public Task<IEnumerable<Provider>> GetApprenticeshipProvidersAsync()
+        {
+            return Task.FromResult(Retrieve());
+        }
+
+        private IEnumerable<Provider> Retrieve()
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(Json);
+        }
     }
 }

@@ -51,7 +51,7 @@
     <Compile Include="Models\Provider\ModelOfDelivery.cs" />
     <Compile Include="Models\Provider\Provider.cs" />
     <Compile Include="Models\Provider\StandardInformation.cs" />
-    <Compile Include="Services\IGenericIndexer.cs" />
+    <Compile Include="Services\IGenericIndexerHelper{T}.cs" />
     <Compile Include="Services\IGetActiveProviders.cs" />
     <Compile Include="Services\IGetStandardLevel.cs" />
     <Compile Include="Models\Coordinate.cs" />

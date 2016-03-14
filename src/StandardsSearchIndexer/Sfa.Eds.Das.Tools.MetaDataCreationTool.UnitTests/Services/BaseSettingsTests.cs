@@ -3,7 +3,6 @@
     using System.Configuration;
 
     using NUnit.Framework;
-    using MetaDataCreationTool.Services;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Common.Settings;
@@ -11,6 +10,11 @@
     [TestFixture]
     public class BaseSettingsTests
     {
+        // Helper
+        private string VstsGitFolderPath => new BaseSettings().GetSetting();
+
+        private string VstsGitFolderPathFail => new BaseSettings().GetSetting();
+
         [Test]
         public void GetNameFromCallerMethod()
         {
@@ -41,11 +45,5 @@
             var setting = settings.GetSetting("intAsString");
             Assert.AreEqual("five", setting);
         }
-
-        // Helper
-        private string VstsGitFolderPath => new BaseSettings().GetSetting();
-
-        private string VstsGitFolderPathFail => new BaseSettings().GetSetting();
-
     }
 }

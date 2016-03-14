@@ -69,7 +69,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
                 _log.Debug("Indexing " + entries.Count + " providers");
 
                 var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-                await _searchIndexMaintainer.IndexEntries(indexName, entries);
+                await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

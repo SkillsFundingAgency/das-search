@@ -17,7 +17,8 @@
         private readonly IIndexSettings<MetaDataItem> _settings;
         private readonly ILog _log;
 
-        public StandardIndexer(IIndexSettings<MetaDataItem> settings,
+        public StandardIndexer(
+            IIndexSettings<MetaDataItem> settings,
             IMetaDataHelper metaDataHelper,
             IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer,
             ILog log)
@@ -32,10 +33,10 @@
         {
             try
             {
-                _log.Debug("Indexing " + entries.Count() + " standards");
+                _log.Debug("Indexing " + entries.Count + " standards");
 
                 var indexNameAndDateExtension = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-                await _searchIndexMaintainer.IndexEntries(indexNameAndDateExtension, entries);
+                await _searchIndexMaintainer.IndexEntries(indexNameAndDateExtension, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

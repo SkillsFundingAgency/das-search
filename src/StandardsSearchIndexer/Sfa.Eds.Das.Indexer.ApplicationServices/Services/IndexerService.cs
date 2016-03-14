@@ -11,7 +11,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
     {
         private readonly IGenericIndexerHelper<T> _indexerHelper;
 
-        private readonly ILog Log;
+        private readonly ILog _log;
 
         private readonly IIndexSettings<T> _indexSettings;
 
@@ -21,13 +21,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
         {
             _indexSettings = indexSettings;
             _indexerHelper = indexerHelper;
-            Log = log;
+            _log = log;
             _name = typeof(T).Name;
         }
 
         public async Task CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            Log.Info($"Creating new scheduled {_name} index at " + DateTime.Now);
+            _log.Info($"Creating new scheduled {_name} index at " + DateTime.Now);
 
             try
             {
@@ -35,13 +35,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
 
                 if (!indexProperlyCreated)
                 {
-                    Log.Error($"{_name} index not created properly, exiting...");
+                    _log.Error($"{_name} index not created properly, exiting...");
                     return;
                 }
 
-                Log.Info($"Indexing {_name}s...");
+                _log.Info($"Indexing {_name}s...");
                 var entries = await _indexerHelper.LoadEntries();
-                await _indexerHelper.IndexEntries(scheduledRefreshDateTime, entries);
+                await _indexerHelper.IndexEntries(scheduledRefreshDateTime, entries).ConfigureAwait(false);
 
                 PauseWhileIndexingIsBeingRun();
 
@@ -49,16 +49,16 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
                 {
                     _indexerHelper.SwapIndexes(scheduledRefreshDateTime);
 
-                    Log.Debug("Swap completed...");
+                    _log.Debug("Swap completed...");
 
                     _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
                 }
 
-                Log.Info($"{_name} Indexing complete.");
+                _log.Info($"{_name} Indexing complete.");
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                _log.Error(ex);
                 throw;
             }
         }

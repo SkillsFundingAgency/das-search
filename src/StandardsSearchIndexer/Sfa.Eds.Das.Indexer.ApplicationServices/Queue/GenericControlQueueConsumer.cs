@@ -21,7 +21,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 
         private readonly IContainer _container;
 
-        private readonly ILog Log;
+        private readonly ILog _log;
 
         public GenericControlQueueConsumer(
             IAppServiceSettings appServiceSettings,
@@ -34,10 +34,11 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
             _cloudQueueService = cloudQueueService;
             _clearQueue = clearQueue;
             _container = container;
-            Log = log;
+            this._log = log;
         }
 
-        public async Task CheckMessage<T>() where T : IIndexEntry
+        public async Task CheckMessage<T>()
+            where T : IIndexEntry
         {
             var indexerService = _container.GetInstance<IIndexerService<T>>();
 
@@ -56,7 +57,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
             }
             catch (Exception ex)
             {
-                Log.Fatal("Something failed creating index: " + ex);
+                _log.Fatal("Something failed creating index: " + ex);
                 throw;
             }
         }

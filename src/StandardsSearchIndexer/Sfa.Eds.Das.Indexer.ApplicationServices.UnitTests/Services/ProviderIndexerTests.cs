@@ -31,7 +31,6 @@
             var mockLogger = Mock.Of<ILog>();
 
             _sut = new ProviderIndexer(_mockSettings.Object, _mockIndexMaintainer.Object, _mockProviderRepository.Object, _mockActiveProviderClient.Object, mockLogger);
-
         }
 
         [Test]
@@ -134,6 +133,6 @@
         {
             yield return new Core.Models.Provider.Provider() { Ukprn = 123 };
             yield return new Core.Models.Provider.Provider() { Ukprn = 456 };
-        } 
+        }
     }
 }

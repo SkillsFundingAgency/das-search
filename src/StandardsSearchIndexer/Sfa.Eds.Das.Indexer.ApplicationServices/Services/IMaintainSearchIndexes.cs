@@ -23,7 +23,5 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
         bool AliasExists(string aliasName);
 
         void SwapAliasIndex(string aliasName, string newIndexName);
-
-
     }
 }
