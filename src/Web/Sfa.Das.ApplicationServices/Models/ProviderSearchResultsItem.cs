@@ -4,7 +4,7 @@
 
     public sealed class ProviderSearchResultsItem
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string UkPrn { get; set; }
 

@@ -56,6 +56,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             ISearchResponse<ProviderSearchResultsItem> results = client
                 .Search<ProviderSearchResultsItem>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
+                .From(0)
+                .Size(1000)
                 .QueryRaw(qryStr)
                 .SortGeoDistance(g =>
                 {
@@ -66,7 +68,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
             {
-                Id = hit.Source.Id,
+                Id = hit.Source.Id.ToString(),
                 UkPrn = hit.Source.UkPrn,
                 Address = hit.Source.Address,
                 ContactUsUrl = hit.Source.ContactUsUrl,
@@ -96,7 +98,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private string CreateRawQuery(string standardId, Coordinate location)
         {
             return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ""standardCode"": """,
+                @"{""filtered"": { ""query"": { ""match"": { ""standardcode"": """,
                 standardId,
                 @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
                 location.Lon,
