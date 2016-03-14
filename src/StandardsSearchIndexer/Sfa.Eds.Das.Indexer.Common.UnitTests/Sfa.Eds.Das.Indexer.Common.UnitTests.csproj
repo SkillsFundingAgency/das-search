@@ -115,7 +115,7 @@
       <Project>{0C0E390C-C57C-44E4-978E-B9D2F53196AA}</Project>
       <Name>Sfa.Eds.Das.Indexer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.DedsService\Sfa.Infrastructure.csproj">
+    <ProjectReference Include="..\Sfa.Infrastructure\Sfa.Infrastructure.csproj">
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.Infrastructure</Name>
     </ProjectReference>
