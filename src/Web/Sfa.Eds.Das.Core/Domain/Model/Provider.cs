@@ -6,7 +6,7 @@
 
     public sealed class Provider
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string UkPrn { get; set; }
 

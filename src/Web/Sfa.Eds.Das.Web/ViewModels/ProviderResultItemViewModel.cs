@@ -9,7 +9,7 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
     public class ProviderResultItemViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string UkPrn { get; set; }
 
