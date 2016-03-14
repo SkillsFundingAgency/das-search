@@ -82,7 +82,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 $"{provider.Ukprn}{standard.StandardCode}{standardLocation.DeliveryLocation.Id}",
                 @""", ""name"": """,
                 provider.Name ?? "Unspecified",
-                @""", ""standardcode"": ",
+                @""", ""standardCode"": ",
                 standard.StandardCode,
                 @", ""locationId"": ",
                 standardLocation.DeliveryLocation.Id,
