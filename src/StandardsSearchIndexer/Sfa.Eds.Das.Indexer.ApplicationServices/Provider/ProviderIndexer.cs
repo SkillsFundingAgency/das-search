@@ -97,8 +97,10 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
                 CreateAlias(newIndexName);
             }
-
-            _searchIndexMaintainer.SwapAliasIndex(indexAlias, newIndexName);
+            else
+            {
+                _searchIndexMaintainer.SwapAliasIndex(indexAlias, newIndexName);
+            }
         }
 
         public bool DeleteOldIndexes(DateTime scheduledRefreshDateTime)
