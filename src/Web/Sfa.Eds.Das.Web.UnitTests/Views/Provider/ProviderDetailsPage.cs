@@ -98,5 +98,34 @@
             GetPartial(html, "dl dd div", 2).Should().Contain(model.Address.Address1);
             GetPartial(html, "dl dd div", 3).Should().Contain(model.Address.Address2);
         }
+
+        [Test]
+        public void ShouldShowDeliveryModesWithCorrectText()
+        {
+            var detail = new Detail();
+            var model = new ProviderViewModel
+            {
+                ProviderName = "Test name",
+                VenueName = "Test venue name",
+                DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
+                Address = new Address
+                {
+                    Address1 = "Address1",
+                    Address2 = "Address2",
+                    County = "County",
+                    Postcode = "Postcode",
+                    Town = "Town"
+                }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, "header h2").Should().Contain(model.ProviderName);
+
+            var a = GetPartial(html, "dl div");
+
+            GetPartial(html, "dl div").Should().Contain("at your location");
+            GetPartial(html, "dl div", 2).Should().Contain("day release");
+            GetPartial(html, "dl div", 3).Should().Contain("block release");
+        }
     }
 }

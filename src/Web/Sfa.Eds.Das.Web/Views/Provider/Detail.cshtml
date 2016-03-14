@@ -1,4 +1,5 @@
 ﻿@using Sfa.Eds.Das.Web.Extensions
+@using Sfa.Eds.Das.Web.ViewModels
 @model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
@@ -45,6 +46,32 @@
             </h2>
         </header>
         <dl class="data-list">
+            @*@GetStandardProperty("Training location", Model.LocationName)*@
+            @GetStandardProperty("Training details", @Model.StandardInfoUrl)
+            @GetStandardProperty("Phone", Model.Phone)
+            @GetStandardProperty("Email", Model.Email)
+            @GetStandardProperty("Training structure", Model.DeliveryModes)
+            @ShowTrainingLocation()
+        </dl>
+    </section>
+</main>
+
+
+@helper ShowTrainingLocation()
+{
+    if (@Model != null)
+    {
+        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+        {
+            <dt>Training location</dt>
+            <dd>
+                <div>
+                    Training will take place at your location
+                </div>
+            </dd>
+        }
+        else
+        {
             <dt>Training location</dt>
             <dd>
                 <div>
@@ -57,52 +84,59 @@
                     @Model.Address.Address2
                 </div>
             </dd>
-            @*@GetStandardProperty("Training location", Model.LocationName)*@
-            @GetStandardProperty("Training details", @Model.StandardInfoUrl)
-            @GetStandardProperty("Phone", Model.Phone)
-            @GetStandardProperty("Email", Model.Email)
-            @GetStandardProperty("Training structure", Model.DeliveryModes)
-        </dl>
-    </section>
-</main>
+        }
+    }
+}
 
 
 @helper GetStandardDetailItem(string title, string item, string unit = "")
 {
-if (!string.IsNullOrEmpty(item))
-{
+    if (!string.IsNullOrEmpty(item))
+    {
         <dt class="minLength">@title</dt>
-            <dd class="minLength">@item @unit</dd>
-}
+        <dd class="minLength">@item @unit</dd>
+    }
 }
 
 
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
         <dt>@title</dt>
         <dd>@Html.Raw(item)</dd>
-}
+    }
 }
 
 @helper GetStandardProperty(string title, List<string> items, bool hideIfEmpty = false)
 {
-if (items != null)
-{
-        <dt>@title</dt>
-    foreach (var item in items)
+    if (items != null)
     {
-
-                <div>@Html.Raw(item)</div>
+        <dt>@title</dt>
+        foreach (var item in items)
+        {
+            switch (item)
+            {
+                case "100PercentEmployer":
+                        <div>@Html.Raw("at your location")</div>
+                        break;
+                    case "blockRelease":
+                        <div>@Html.Raw("block release")</div>
+                        break;
+                    case "dayRelease":
+                        <div>@Html.Raw("day release")</div>
+                        break;
+                    default:
+                        break;
+            }
         }
     }
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)
 {
-if (!string.IsNullOrEmpty(title))
-{
+    if (!string.IsNullOrEmpty(title))
+    {
         <li>
             <a href="@pdfUrl">
                 @title
@@ -111,5 +145,5 @@ if (!string.IsNullOrEmpty(title))
                 PDF, 268KB, 2 pages
             </p>
         </li>
-}
+    }
 }
