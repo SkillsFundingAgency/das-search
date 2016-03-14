@@ -3,16 +3,39 @@
 
 $module: 'data-list';
 
-@mixin data-list($titleWidth: 30%) {
+//Data list mixin options
 
-    //Give 'cells' explicit width to facilitate floating kvp's
-    $dataWidth: 100% - $titleWidth;
+//$titleWidth: (int) default: 50
+//  Sets the width(%) of the title field (dt) where the remaining space is given to the data field (dd)
+//  Options: 'auto' (default) or unitless integar (%)
+
+//$flatten: (bool) default: false
+//  If true, it removes bottom spacing from each row
+
+//$flexiWidth: (bool) default: false
+//  If true, it changes the explicit widths to max widths allowing for flexible columns
+
+
+@mixin data-list($titleWidth: 50, $flatten: false, $flexiWidth: false) {
+
+    $widthType: 'max-' !default;
+    $bottomSpacing: ($gutter * 2) !default;
+    $dataWidth: 100% - $titleWidth !default;
+
+    @if($flexiWidth == false) {
+        $widthType: '';
+    }
+
+    @if($flatten) {
+        $bottomSpacing: 0;
+    }
 
     @extend %contain-floats;
 
     dt, dd {
         float: left;
         box-sizing: border-box;
+        padding-bottom: $bottomSpacing;
 
         //Force empty elements to follow document flow
         &:empty::after {
@@ -23,15 +46,20 @@ $module: 'data-list';
 
     dt {
         font-weight: bold;
-        width: $titleWidth;
-        padding: 0 $gutter-one-quarter ($gutter * 2) 0;
+        #{$widthType}width: $titleWidth * 1%; //force % value
+        padding-right: $gutter-one-quarter;
+        clear: left;
     }
 
     dd {
-        width: $dataWidth;
-        padding: 0 0 ($gutter * 2) $gutter-one-quarter;
+        #{$widthType}width: $dataWidth;
 
-        //In the cases where child elements have additional bottom spacing we remove it for consitency
+        //In the cases where child elements have additional bottom spacing we remove it for consistency
+        & >:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
+        //In the cases where child elements have additional top spacing we remove it for consistency
         & >:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
@@ -44,18 +72,22 @@ $module: 'data-list';
         dt, dd {
             float: none;
             width: 100%;
+            max-width: none;
             padding: 0;
         }
-        dd {
-            padding-bottom: $gutter-two-thirds;
+
+        @if($flatten == false) {
+            dd {
+                padding-bottom: $gutter-two-thirds;
+            }
         }
     }
 
 }
 
 //Apply styles to '.data-list'
-.#{$module} {
-    @include data-list();
+.data-list {
+    @include data-list(30);
 
     ul {
         //TODO: apply '.list-bullet' directly to desired lists in case numbered list may be required interchangably

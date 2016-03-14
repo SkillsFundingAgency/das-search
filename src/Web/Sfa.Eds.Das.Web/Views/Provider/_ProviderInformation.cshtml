@@ -6,10 +6,11 @@
     @foreach (var item in Model.Hits)
     {
         <li class="result">
-            <div class="column details">
-                <h2 class="heading-medium">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
-                </h2>
+            <h2 class="result-title">
+                @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
+            </h2>
+
+            <dl class="reult-data-list">
                 @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     @RenderEmployersLocationProviderDetails(item)
@@ -19,60 +20,28 @@
                     @RenderProviderDetails(item)
                 }
                 
-                <dl>
-                    <dt class="distance" style="font-weight:bold">Employer satisfaction:</dt>
-                    <dd class="distance">
-                        <span>@item.EmployerSatisfaction %</span>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt class="distance" style="font-weight:bold">Learner satisfaction:</dt>
-                    <dd class="distance">
-                        <span>@item.LearnerSatisfaction %</span>
-                    </dd>
-                </dl>
-            </div>
+                <dt>Employer satisfaction:</dt>
+                <dd>@item.EmployerSatisfaction %</dd>
+                <dt>Learner satisfaction:</dt>
+                <dd>@item.LearnerSatisfaction %</dd>
+            </dl>
         </li>
     }
 </div>
 
 @helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
 {
-    <dl>
-        <dt class="distance" style="font-weight: bold">
-            Distance:
-        </dt>
-        <dd class="distance">
-            <span>Training can take place at your location.</span>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="website" style="font-weight:bold">Website:</dt>
-        <dd class="website">
-            <a href="@item.Website"> @item.Website</a>
-        </dd>
-    </dl>
+    <dt>Distance:</dt>
+    <dd>Training can take place at your location.</dd>
+    <dt>Website:</dt>
+    <dd><a class="link" href="@item.Website"> @item.Website</a></dd>
 }
-s
+
 @helper  RenderProviderDetails(ProviderResultItemViewModel item)
 {
-    <dl>
-        <dt class="distance" style="font-weight: bold">
-            Distance:
-        </dt>
-        <dd class="distance">
-            <span>@item.Distance miles away</span>
-        </dd>
-    </dl>
-    <dl>
-        <dd class="location">
-            <span>@item.LocationName</span> <span>@item.Address.Address1</span> <span>@item.Address.Address2</span> <span>@item.Address.County</span>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="website" style="font-weight:bold">Website:</dt>
-        <dd class="website">
-            <a href="@item.Website"> @item.Website</a>
-        </dd>
-    </dl>
+    <dt>Distance:</dt>
+    <dd>@item.Distance miles away</dd>
+    <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County</dd>
+    <dt>Website:</dt>
+    <dd><a href="@item.Website"> @item.Website</a></dd>
 }

@@ -366,7 +366,6 @@
     <Content Include="Content\src\styles\partials\_headings.scss" />
     <Content Include="Content\src\styles\partials\_phases.scss" />
     <Content Include="Content\src\styles\partials\_related.scss" />
-    <Content Include="Content\src\styles\partials\_results.scss" />
     <Content Include="Content\src\styles\screen.scss" />
     <Content Include="Content\src\styles\_elements.scss" />
     <Content Include="Content\src\styles\_govuk-elements.scss" />
@@ -375,6 +374,7 @@
     <Content Include="Content\src\styles\_fonts.scss" />
     <Content Include="Content\README.md" />
     <Content Include="Content\src\styles\custom-elements\_data-list.scss" />
+    <Content Include="Content\src\styles\custom-elements\_address.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
