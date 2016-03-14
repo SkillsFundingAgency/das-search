@@ -31,7 +31,7 @@
                     <aside class="related">
                         <h2 class="heading-medium">Provider quality assassment</h2>
                         <h3>Learner satisfaction: @Model.LearnerSatisfaction %</h3>
-                        <h3>Employersatisfaction: @Model.EmployerSatisfaction %</h3>
+                        <h3>Employer satisfaction: @Model.EmployerSatisfaction %</h3>
                     </aside>
                 </div>
             }
@@ -64,26 +64,12 @@
         if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
         {
             <dt>Training location</dt>
-            <dd>
-                <div>
-                    Training will take place at your location
-                </div>
-            </dd>
+            <dd>Training will take place at your location</dd>
         }
         else
         {
             <dt>Training location</dt>
-            <dd>
-                <div>
-                    @Model.VenueName
-                </div>
-                <div>
-                    @Model.Address.Address1
-                </div>
-                <div>
-                    @Model.Address.Address2
-                </div>
-            </dd>
+            <dd>@Model.VenueName @Model.Address.Address1 @Model.Address.Address2 </dd>
         }
     }
 }
@@ -93,8 +79,8 @@
 {
     if (!string.IsNullOrEmpty(item))
     {
-        <dt class="minLength">@title</dt>
-        <dd class="minLength">@item @unit</dd>
+        <dt>@title</dt>
+        <dd>@item @unit</dd>
     }
 }
 
@@ -113,23 +99,25 @@
     if (items != null)
     {
         <dt>@title</dt>
-        foreach (var item in items)
+        <dd>
+        @foreach (var item in items)
         {
             switch (item)
             {
                 case "100PercentEmployer":
-                        <div>@Html.Raw("at your location")</div>
+                        @Html.Raw("at your location")
                         break;
                     case "blockRelease":
-                        <div>@Html.Raw("block release")</div>
+                        @Html.Raw("block release")
                         break;
                     case "dayRelease":
-                        <div>@Html.Raw("day release")</div>
+                        @Html.Raw("day release")
                         break;
                     default:
                         break;
             }
         }
+        </dd>
     }
 }
 
