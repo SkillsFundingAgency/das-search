@@ -88,6 +88,7 @@
     <Compile Include="Indexers\StandardIndexerServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DedsServiceTests.cs" />
+    <Compile Include="Services\StubCourseDirectoryClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
