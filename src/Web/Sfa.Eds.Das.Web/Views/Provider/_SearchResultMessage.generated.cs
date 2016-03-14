@@ -89,25 +89,25 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Training providers\r\n    </h2>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are currently no providers for the apprenticeship standard" +
-": \'");
+": \'<b>");
 
 
 #line 39 "..\..\Views\Provider\_SearchResultMessage.cshtml"
-                                             WriteTo(__razor_helper_writer, Model.StandardName);
+                                                WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\' in \'");
+WriteLiteralTo(__razor_helper_writer, "</b>\' in \'<b>");
 
 
 #line 39 "..\..\Views\Provider\_SearchResultMessage.cshtml"
-                                                                      WriteTo(__razor_helper_writer, Model.PostCode);
+                                                                                WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'\r\n    </p>\r\n");
 
 
 #line 41 "..\..\Views\Provider\_SearchResultMessage.cshtml"
@@ -141,7 +141,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Training providers\r\n    </h2>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There is ");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There is <b>");
 
 
 #line 49 "..\..\Views\Provider\_SearchResultMessage.cshtml"
@@ -150,27 +150,27 @@ WriteTo(__razor_helper_writer, Model.TotalResults);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " training provider for the apprenticeship standard: \'");
+WriteLiteralTo(__razor_helper_writer, "</b> training provider for the apprenticeship standard: \'<b>");
 
 
 #line 49 "..\..\Views\Provider\_SearchResultMessage.cshtml"
-                                                           WriteTo(__razor_helper_writer, Model.StandardName);
+                                                                     WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b>");
 
 
 #line 52 "..\..\Views\Provider\_SearchResultMessage.cshtml"
-                WriteTo(__razor_helper_writer, Model.PostCode);
+                   WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'\r\n    </p>\r\n");
 
 
 #line 54 "..\..\Views\Provider\_SearchResultMessage.cshtml"
@@ -204,7 +204,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Training providers\r\n    </h2>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are ");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are <b>");
 
 
 #line 63 "..\..\Views\Provider\_SearchResultMessage.cshtml"
@@ -213,27 +213,27 @@ WriteTo(__razor_helper_writer, Model.TotalResults);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " training providers for the apprenticeship standard: \'");
+WriteLiteralTo(__razor_helper_writer, "</b> training providers for the apprenticeship standard: \'<b>");
 
 
 #line 63 "..\..\Views\Provider\_SearchResultMessage.cshtml"
-                                                             WriteTo(__razor_helper_writer, Model.StandardName);
+                                                                       WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b>");
 
 
 #line 66 "..\..\Views\Provider\_SearchResultMessage.cshtml"
-                WriteTo(__razor_helper_writer, Model.PostCode);
+                   WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'\r\n    </p>\r\n");
 
 
 #line 68 "..\..\Views\Provider\_SearchResultMessage.cshtml"

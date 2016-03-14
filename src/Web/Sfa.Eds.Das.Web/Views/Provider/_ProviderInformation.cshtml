@@ -19,18 +19,10 @@
                     @RenderProviderDetails(item)
                 }
                 
-                <dl>
-                    <dt class="distance" style="font-weight:bold">Employer satisfaction:</dt>
-                    <dd class="distance">
-                        <span>@item.EmployerSatisfaction %</span>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt class="distance" style="font-weight:bold">Learner satisfaction:</dt>
-                    <dd class="distance">
-                        <span>@item.LearnerSatisfaction %</span>
-                    </dd>
-                </dl>
+                <dt>Employer satisfaction:</dt>
+                <dd>@item.EmployerSatisfaction %</dd>
+                <dt>Learner satisfaction:</dt>
+                <dd>@item.LearnerSatisfaction %</dd>
             </div>
         </li>
     }
@@ -38,41 +30,17 @@
 
 @helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
 {
-    <dl>
-        <dt class="distance" style="font-weight: bold">
-            Distance:
-        </dt>
-        <dd class="distance">
-            <span>Training can take place at your location.</span>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="website" style="font-weight:bold">Website:</dt>
-        <dd class="website">
-            <a href="@item.Website"> @item.Website</a>
-        </dd>
-    </dl>
+    <dt>Distance:</dt>
+    <dd>Training can take place at your location.</dd>
+    <dt>Website:</dt>
+    <dd><a class="link" href="@item.Website"> @item.Website</a></dd>
 }
-s
+
 @helper  RenderProviderDetails(ProviderResultItemViewModel item)
 {
-    <dl>
-        <dt class="distance" style="font-weight: bold">
-            Distance:
-        </dt>
-        <dd class="distance">
-            <span>@item.Distance miles away</span>
-        </dd>
-    </dl>
-    <dl>
-        <dd class="location">
-            <span>@item.LocationName</span> <span>@item.Address.Address1</span> <span>@item.Address.Address2</span> <span>@item.Address.County</span>
-        </dd>
-    </dl>
-    <dl>
-        <dt class="website" style="font-weight:bold">Website:</dt>
-        <dd class="website">
-            <a href="@item.Website"> @item.Website</a>
-        </dd>
-    </dl>
+    <dt>Distance:</dt>
+    <dd>@item.Distance miles away</dd>
+    <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County</dd>
+    <dt>Website:</dt>
+    <dd><a href="@item.Website"> @item.Website</a></dd>
 }

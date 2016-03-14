@@ -1,0 +1,19 @@
+﻿.result {
+    border-bottom: 1px solid $border-colour;
+    padding-bottom: $gutter-two-thirds;
+    margin-bottom: $gutter-two-thirds;
+}
+
+.result-title {
+    @extend .heading-medium;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.result-data-list {
+    @include data-list(50, true, true);
+}
