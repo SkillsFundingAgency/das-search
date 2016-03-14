@@ -243,7 +243,7 @@
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Common\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
     </ProjectReference>

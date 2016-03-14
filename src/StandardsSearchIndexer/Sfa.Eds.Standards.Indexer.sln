@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Eds.Das.Indexer.AzureCloudService", "Sfa.Eds.Standards.Indexer.AzureAzureCloudService\Sfa.Eds.Das.Indexer.AzureCloudService.ccproj", "{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Eds.Das.Indexer.AzureCloudService", "Sfa.Eds.Das.Indexer.AzureCloudService\Sfa.Eds.Das.Indexer.AzureCloudService.ccproj", "{B5BE3174-E253-4F5E-B05C-7FD2E65A66A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.AzureWorkerRole", "Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj", "{6163C031-06EA-4929-BC84-AB67ED0E93DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.AzureWorkerRole", "Sfa.Eds.Das.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj", "{6163C031-06EA-4929-BC84-AB67ED0E93DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Common", "Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.Common", "Sfa.Eds.Das.Indexer.Common\Sfa.Eds.Das.Indexer.Common.csproj", "{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Infrastructure", "Sfa.Eds.Indexer.DedsService\Sfa.Infrastructure.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Infrastructure", "Sfa.Infrastructure\Sfa.Infrastructure.csproj", "{4E8DA796-33BA-43ED-A931-4841E108A7E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.IntegrationTests", "Sfa.Eds.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.csproj", "{23C1681A-12B5-44B5-BF4C-FDE64DEACC2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Indexer.IntegrationTests", "Sfa.Eds.Das.Indexer.IntegrationTests\Sfa.Eds.Das.Indexer.IntegrationTests.csproj", "{23C1681A-12B5-44B5-BF4C-FDE64DEACC2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Tools.MetaDataCreationTool", "Sfa.Eds.Das.Tools.MetaDataCreationTool\Sfa.Eds.Das.Tools.MetaDataCreationTool.csproj", "{D838757D-63EC-4FE6-B565-470D5BF424A3}"
 EndProject

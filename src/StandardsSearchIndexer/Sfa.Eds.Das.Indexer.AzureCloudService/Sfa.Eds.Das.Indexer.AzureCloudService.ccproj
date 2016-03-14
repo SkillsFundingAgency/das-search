@@ -5,13 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>2.8</ProductVersion>
-    <ProjectGuid>38a03bc2-d47f-4175-94aa-6b07f0698aa8</ProjectGuid>
+    <ProjectGuid>b5be3174-e253-4f5e-b05c-7fd2e65a66a2</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IndexerCloudService</RootNamespace>
-    <AssemblyName>IndexerCloudService</AssemblyName>
+    <RootNamespace>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</RootNamespace>
+    <AssemblyName>Sfa.Eds.Standards.Indexer.AzureAzureCloudService</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>IndexerCloudService</Name>
+    <Name>Sfa.Eds.Das.Indexer.AzureCloudService</Name>
+    <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,20 +38,20 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StandardIndexerWorkerRole\StandardIndexerWorkerRole.csproj">
-      <Name>StandardIndexerWorkerRole</Name>
-      <Project>{c4d4e28a-a6b6-472f-b558-3539d554a6c7}</Project>
+    <Folder Include="Profiles" />
+    <Folder Include="Sfa.Eds.Das.Indexer.AzureWorkerRoleContent" />
+  </ItemGroup>
+  <ItemGroup>
+    <DiagnosticsConfiguration Include="Sfa.Eds.Das.Indexer.AzureWorkerRoleContent\diagnostics.wadcfgx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
+      <Name>Sfa.Eds.Das.Indexer.AzureWorkerRole</Name>
+      <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>
       <Private>True</Private>
       <RoleType>Worker</RoleType>
-      <RoleName>StandardIndexerWorkerRole</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+      <RoleName>Sfa.Eds.Das.Indexer.AzureWorkerRole</RoleName>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StandardIndexerWorkerRoleContent\" />
-  </ItemGroup>
-  <ItemGroup>
-    <DiagnosticsConfiguration Include="StandardIndexerWorkerRoleContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

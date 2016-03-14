@@ -70,11 +70,11 @@
       <Project>{0C0E390C-C57C-44E4-978E-B9D2F53196AA}</Project>
       <Name>Sfa.Eds.Das.Indexer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Common\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Standards.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
       <Project>{6163C031-06EA-4929-BC84-AB67ED0E93DA}</Project>
       <Name>Sfa.Eds.Das.Indexer.AzureWorkerRole</Name>
     </ProjectReference>

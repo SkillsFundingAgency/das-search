@@ -105,7 +105,7 @@
       <Project>{0C0E390C-C57C-44E4-978E-B9D2F53196AA}</Project>
       <Name>Sfa.Eds.Das.Indexer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Common\Sfa.Eds.Das.Indexer.Common.csproj">
       <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
       <Name>Sfa.Eds.Das.Indexer.Common</Name>
     </ProjectReference>
