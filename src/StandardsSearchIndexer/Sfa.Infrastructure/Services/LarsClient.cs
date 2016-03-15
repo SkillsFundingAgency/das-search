@@ -17,8 +17,19 @@
             _larsSettings = larsSettings;
         }
 
+        public int GetFrameworks(int frameworkId)
+        {
+            var queryGetFrameworkHeaderInfo = GetQueryDescriptors(_larsSettings.DatasetName).Single(qd => qd.Name == "GetFrameworkHeaderInfo");
+
+            var sss = QueryFilterValuesFromConsole(queryGetFrameworkHeaderInfo, frameworkId);
+            var qqq = GetQueryExecution(sss, null, null);
+            var xxx =  ExecuteQuery(queryGetFrameworkHeaderInfo, qqq);
+            return 1;
+        }
+
         public int GetNotationLevel(int standardId)
         {
+            var nqueryDescriptorStandard = GetQueryDescriptors(_larsSettings.DatasetName);
             var queryDescriptorStandard = GetQueryDescriptors(_larsSettings.DatasetName).Single(qd => qd.Name == _larsSettings.StandardDescriptorName);
             var result = RunQuery(queryDescriptorStandard, standardId);
 
@@ -35,6 +46,17 @@
                 return queryDescriptors;
             }
         }
+
+        //private IList<QueryResults> RunQueryAll(QueryDescriptor qds, int larsCode)
+        //{
+        //    var queryExecution = new QueryExecution
+        //    {
+        //        FilterValues = filterValues.Where(x => !string.IsNullOrEmpty(x.FieldValue)).ToArray(),
+        //        SortValues = new SortValue[0]
+        //    };
+
+        //    return ExecuteQuery(qds, queryExecution);
+        //}
 
         private IList<QueryResults> RunQuery(QueryDescriptor qds, int larsCode)
         {
@@ -56,7 +78,7 @@
 
             filterValues.AddRange(
                 queryFilterValues.Select(
-                    queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value }));
+                    queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value}));
 
             var queryExecution = new QueryExecution
                                      {

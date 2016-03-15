@@ -15,7 +15,6 @@
         {
             For<IIndexSettings<MetaDataItem>>().Use<StandardIndexSettings>();
             For<IMetaDataHelper>().Use<MetaDataHelper>();
-            For<IIndexSettings<MetaDataItem>>().Use<StandardIndexSettings>();
             For<IIndexerService<MetaDataItem>>().Use<IndexerService<MetaDataItem>>();
             For<IGenericIndexerHelper<MetaDataItem>>().Use<StandardIndexer>();
         }

@@ -115,7 +115,9 @@
     <Compile Include="Elasticsearch\Attachment.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchFrameworkIndexMaintainer.cs" />
     <Compile Include="Elasticsearch\ElasticsearchStandardIndexMaintainer.cs" />
+    <Compile Include="Elasticsearch\FrameworkDocument.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IGenerateIndexDefinitions.cs" />
     <Compile Include="Elasticsearch\ProviderIndexGenerator.cs" />

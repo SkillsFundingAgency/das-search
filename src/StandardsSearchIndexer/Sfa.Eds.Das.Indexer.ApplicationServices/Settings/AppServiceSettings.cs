@@ -43,7 +43,7 @@
 
         public string QueueName(Type type)
         {
-            var name = type.Name.Replace("MetaDataItem", "Standard") + ".QueueName";
+            var name = type.Name.Replace("MetaDataItem", "Standard").Replace("FrameworkMetaData", "Framework") + ".QueueName";
             var setting = ConfigurationManager.AppSettings[name];
             if (setting != null)
             {

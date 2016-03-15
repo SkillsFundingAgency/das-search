@@ -12,6 +12,7 @@ namespace Sfa.Infrastructure.DependencyResolution
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Services;
     using Sfa.Infrastructure.Settings;
@@ -36,6 +37,7 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
             For<IMaintainSearchIndexes<MetaDataItem>>().Use<ElasticsearchStandardIndexMaintainer>();
             For<IMaintainSearchIndexes<Provider>>().Use<ElasticsearchProviderIndexMaintainer>();
+            For<IMaintainSearchIndexes<FrameworkMetaData>>().Use<ElasticsearchFrameworkIndexMaintainer>();
             For<IGenerateIndexDefinitions<Provider>>().Use<ProviderIndexGenerator>();
         }
     }
