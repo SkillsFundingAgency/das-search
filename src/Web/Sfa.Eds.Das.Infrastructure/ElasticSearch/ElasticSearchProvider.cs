@@ -98,7 +98,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private string CreateRawQuery(string standardId, Coordinate location)
         {
             return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ""standardcode"": """,
+                @"{""filtered"": { ""query"": { ""match"": { ""standardCode"": """,
                 standardId,
                 @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
                 location.Lon,
