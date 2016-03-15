@@ -28,7 +28,8 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly ILookupLocations _postcodeLookup;
         private readonly IStandardRepository _standardRepository;
 
-        public ProviderController(IProviderSearchService providerSearchService, ILog logger, 
+        public ProviderController(IProviderSearchService providerSearchService, 
+            ILog logger, 
             IMappingService mappingService, 
             IProviderRepository providerRepository, 
             ILookupLocations postcodeLookup,

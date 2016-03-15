@@ -22,9 +22,10 @@
             var detail = new Detail();
             var model = new ProviderViewModel
             {
-                ProviderName = "Test name",
-                VenueName = "Test venue name",
+                Name = "Test name",
+                LocationName = "Test venue name",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
+                StandardNameWithLevel = "Demo standard level 2",
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -36,12 +37,14 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.ProviderName);
+            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            GetPartial(html, "dl dd div").Should().NotContain(model.VenueName);
-            GetPartial(html, "dl dd div", 2).Should().NotContain(model.Address.Address1);
-            GetPartial(html, "dl dd div", 3).Should().NotContain(model.Address.Address2);
-            GetPartial(html, "dl dd div").Should().Contain("Training will take place at your location");
+            var locationText = GetPartial(html, "dl dd", 5);
+
+            locationText.Should().NotContain(model.LocationName);
+            locationText.Should().NotContain(model.Address.Address1);
+            locationText.Should().NotContain(model.Address.Address2);
+            locationText.Should().Contain("Training will take place at your location");
 
         }
 
@@ -51,9 +54,10 @@
             var detail = new Detail();
             var model = new ProviderViewModel
             {
-                ProviderName = "Test name",
-                VenueName = "Test venue name",
+                Name = "Test name",
+                LocationName = "Test venue name",
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
+                StandardNameWithLevel = "Demo standard level 2",
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -65,11 +69,13 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.ProviderName);
+            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            GetPartial(html, "dl dd div").Should().Contain(model.VenueName);
-            GetPartial(html, "dl dd div", 2).Should().Contain(model.Address.Address1);
-            GetPartial(html, "dl dd div", 3).Should().Contain(model.Address.Address2);
+            var locationText = GetPartial(html, "dl dd", 5);
+
+            locationText.Should().Contain(model.LocationName);
+            locationText.Should().Contain(model.Address.Address1);
+            locationText.Should().Contain(model.Address.Address2);
         }
 
         [Test]
@@ -78,9 +84,10 @@
             var detail = new Detail();
             var model = new ProviderViewModel
             {
-                ProviderName = "Test name",
-                VenueName = "Test venue name",
+                Name = "Test name",
+                LocationName = "Test venue name",
                 DeliveryModes = new List<string> { "blockRelease" },
+                StandardNameWithLevel = "Demo standard level 2",
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -92,11 +99,13 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.ProviderName);
+            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            GetPartial(html, "dl dd div").Should().Contain(model.VenueName);
-            GetPartial(html, "dl dd div", 2).Should().Contain(model.Address.Address1);
-            GetPartial(html, "dl dd div", 3).Should().Contain(model.Address.Address2);
+            var locationText = GetPartial(html, "dl dd", 5);
+
+            locationText.Should().Contain(model.LocationName);
+            locationText.Should().Contain(model.Address.Address1);
+            locationText.Should().Contain(model.Address.Address2);
         }
 
         [Test]
@@ -105,9 +114,10 @@
             var detail = new Detail();
             var model = new ProviderViewModel
             {
-                ProviderName = "Test name",
-                VenueName = "Test venue name",
+                Name = "Test name",
+                LocationName = "Test venue name",
                 DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
+                StandardNameWithLevel = "Demo standard level 2",
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -119,13 +129,9 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.ProviderName);
+            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            var a = GetPartial(html, "dl div");
-
-            GetPartial(html, "dl div").Should().Contain("at your location");
-            GetPartial(html, "dl div", 2).Should().Contain("day release");
-            GetPartial(html, "dl div", 3).Should().Contain("block release");
+            GetPartial(html, "ul li").Should().Contain("at your location");
         }
     }
 }

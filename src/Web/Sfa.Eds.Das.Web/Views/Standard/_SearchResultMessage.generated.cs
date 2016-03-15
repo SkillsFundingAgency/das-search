@@ -97,7 +97,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are no standards
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " </b>\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
 #line 41 "..\..\Views\Standard\_SearchResultMessage.cshtml"
@@ -183,7 +183,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> standard matching your search for \'
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " </b>\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
 #line 59 "..\..\Views\Standard\_SearchResultMessage.cshtml"
@@ -235,7 +235,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> standards matching your search for \
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " </b>\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
 #line 69 "..\..\Views\Standard\_SearchResultMessage.cshtml"

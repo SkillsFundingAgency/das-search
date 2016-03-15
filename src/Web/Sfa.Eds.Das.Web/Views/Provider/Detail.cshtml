@@ -99,25 +99,25 @@
         <dt>@title</dt>
         <dd>
             <div>
-                <dl>
+                <ul>
                     @foreach (var item in items)
                     {
                         switch (item)
                         {
                             case "100PercentEmployer":
-                                <dd>@Html.Raw("at your location")</dd>
+                                <li>@Html.Raw("at your location")</li>
                                 break;
                             case "BlockRelease":
-                                <dd>@Html.Raw("block release")</dd>
+                                <li>@Html.Raw("block release")</li>
                                 break;
                             case "DayRelease":
-                                <dd>@Html.Raw("day release")</dd>
+                                <li>@Html.Raw("day release")</li>
                                 break;
                             default:
                                 break;
                         }
                     }
-                </dl>
+                </ul>
             </div>
         </dd>
     }

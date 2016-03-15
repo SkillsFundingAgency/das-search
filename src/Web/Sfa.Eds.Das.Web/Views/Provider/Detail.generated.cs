@@ -259,7 +259,7 @@ WriteTo(__razor_helper_writer, title);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <div>\r\n                <dl>\r\n");
+WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <div>\r\n                <ul>\r\n");
 
 
 #line 103 "..\..\Views\Provider\Detail.cshtml"
@@ -278,7 +278,7 @@ WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <div>\r\n    
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                                <dd>");
+WriteLiteralTo(__razor_helper_writer, "                                <li>");
 
 
 #line 108 "..\..\Views\Provider\Detail.cshtml"
@@ -287,7 +287,7 @@ WriteLiteralTo(__razor_helper_writer, "                                <dd>");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
 #line 109 "..\..\Views\Provider\Detail.cshtml"
@@ -297,7 +297,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                                <dd>");
+WriteLiteralTo(__razor_helper_writer, "                                <li>");
 
 
 #line 111 "..\..\Views\Provider\Detail.cshtml"
@@ -306,7 +306,7 @@ WriteLiteralTo(__razor_helper_writer, "                                <dd>");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
 #line 112 "..\..\Views\Provider\Detail.cshtml"
@@ -316,7 +316,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                                <dd>");
+WriteLiteralTo(__razor_helper_writer, "                                <li>");
 
 
 #line 114 "..\..\Views\Provider\Detail.cshtml"
@@ -325,7 +325,7 @@ WriteLiteralTo(__razor_helper_writer, "                                <dd>");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
 #line 115 "..\..\Views\Provider\Detail.cshtml"
@@ -338,7 +338,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                </dl>\r\n            </div>\r\n        </dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                </ul>\r\n            </div>\r\n        </dd>\r\n");
 
 
 #line 123 "..\..\Views\Provider\Detail.cshtml"

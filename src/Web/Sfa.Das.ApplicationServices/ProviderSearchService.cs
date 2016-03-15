@@ -34,22 +34,37 @@ namespace Sfa.Das.ApplicationServices
 
             try
             {
-                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
-
-                var searchResults = _searchProvider.SearchByLocation(standardId, coordinates);
-
                 standardName = _standardRepository.GetById(standardId)?.Title;
 
-                var result = new ProviderSearchResults
-                {
-                    TotalResults = searchResults.Total,
-                    StandardId = standardId,
-                    StandardName = standardName,
-                    PostCode = postCode,
-                    Hits = searchResults.Hits
-                };
+                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
-                return result;
+                if (coordinates == null)
+                {
+                    return new ProviderSearchResults
+                    {
+                        TotalResults = 0,
+                        StandardId = standardId,
+                        StandardName = standardName,
+                        PostCode = postCode,
+                        Hits = new ProviderSearchResultsItem[0],
+                        HasError = false
+                    };
+                }
+                else
+                {
+                    var searchResults = _searchProvider.SearchByLocation(standardId, coordinates);
+
+                    var result = new ProviderSearchResults
+                    {
+                        TotalResults = searchResults.Total,
+                        StandardId = standardId,
+                        StandardName = standardName,
+                        PostCode = postCode,
+                        Hits = searchResults.Hits
+                    };
+
+                    return result;
+                }
             }
             catch (SearchException ex)
             {

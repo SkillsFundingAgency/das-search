@@ -40,6 +40,12 @@ namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
                         var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
                         coordinates.Lat = result.Result.Latitude;
                         coordinates.Lon = result.Result.Longitude;
+
+                        return coordinates;
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
             }
@@ -49,8 +55,6 @@ namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
 
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
-
-            return coordinates;
         }
 
         private async Task<HttpResponseMessage> MakeRequestAsync(string url)
