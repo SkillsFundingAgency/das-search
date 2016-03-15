@@ -26,14 +26,20 @@ namespace Sfa.Eds.Das.Web.Controllers
         private IProviderRepository _providerRepository;
 
         private readonly ILookupLocations _postcodeLookup;
+        private readonly IStandardRepository _standardRepository;
 
-        public ProviderController(IProviderSearchService providerSearchService, ILog logger, IMappingService mappingService, IProviderRepository providerRepository, ILookupLocations postcodeLookup)
+        public ProviderController(IProviderSearchService providerSearchService, ILog logger, 
+            IMappingService mappingService, 
+            IProviderRepository providerRepository, 
+            ILookupLocations postcodeLookup,
+            IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
             _providerRepository = providerRepository;
             _postcodeLookup = postcodeLookup;
+            _standardRepository = standardRepository;
         }
 
         [HttpGet]
@@ -47,8 +53,6 @@ namespace Sfa.Eds.Das.Web.Controllers
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
-
-            var id = 1;
 
             return View(viewModel);
         }
@@ -67,7 +71,11 @@ namespace Sfa.Eds.Das.Web.Controllers
             }
 
             var viewModel = this._mappingService.Map<Provider, ProviderViewModel>(model);
-            
+
+            var standardData = _standardRepository.GetById(model.StandardCode);
+
+            viewModel.StandardNameWithLevel = string.Concat(standardData.Title, " level ", standardData.NotionalEndLevel);
+
             return View(viewModel);
         }
     }

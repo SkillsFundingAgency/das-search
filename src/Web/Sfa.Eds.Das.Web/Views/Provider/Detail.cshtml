@@ -3,7 +3,7 @@
 @model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
-    ViewBag.Title = "Provider - " + @Model.ProviderName;
+    ViewBag.Title = "Provider - " + @Model.Name;
 }
 <main id="content">
 
@@ -17,9 +17,8 @@
             <div class="hgroup">
                 <h1 class="heading-xlarge">
                     <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
-                    @Model.ProviderName
+                    @Model.Name
                 </h1>
-                @GetStandardProperty("Website", @Model.Website)
                 
             </div>
         </div>
@@ -40,9 +39,8 @@
 
     <section>
         <header>
-            <span>Apprenticeship details</span>
             <h2 class="heading-large">
-                @Model.ProviderName
+                @Model.StandardNameWithLevel
             </h2>
         </header>
         <dl class="data-list">
@@ -50,7 +48,7 @@
             @GetStandardProperty("Training details", @Model.StandardInfoUrl)
             @GetStandardProperty("Phone", Model.Phone)
             @GetStandardProperty("Email", Model.Email)
-            @GetStandardProperty("Training structure", Model.DeliveryModes)
+            @GetStandardProperty("Training options", Model.DeliveryModes)
             @ShowTrainingLocation()
         </dl>
     </section>
@@ -69,7 +67,7 @@
         else
         {
             <dt>Training location</dt>
-            <dd>@Model.VenueName @Model.Address.Address1 @Model.Address.Address2 </dd>
+            <dd>@Model.LocationName @Model.Address.Address1 @Model.Address.Address2 </dd>
         }
     }
 }
@@ -100,23 +98,27 @@
     {
         <dt>@title</dt>
         <dd>
-        @foreach (var item in items)
-        {
-            switch (item)
-            {
-                case "100PercentEmployer":
-                        @Html.Raw("at your location")
-                        break;
-                    case "blockRelease":
-                        @Html.Raw("block release")
-                        break;
-                    case "dayRelease":
-                        @Html.Raw("day release")
-                        break;
-                    default:
-                        break;
-            }
-        }
+            <div>
+                <dl>
+                    @foreach (var item in items)
+                    {
+                        switch (item)
+                        {
+                            case "100PercentEmployer":
+                                <dd>@Html.Raw("at your location")</dd>
+                                break;
+                            case "BlockRelease":
+                                <dd>@Html.Raw("block release")</dd>
+                                break;
+                            case "DayRelease":
+                                <dd>@Html.Raw("day release")</dd>
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                </dl>
+            </div>
         </dd>
     }
 }

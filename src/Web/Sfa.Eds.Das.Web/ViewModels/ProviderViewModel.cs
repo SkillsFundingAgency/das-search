@@ -10,13 +10,13 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
         public string UkPrn { get; set; }
 
-        public string ProviderName { get; set; }
+        public string Name { get; set; }
 
         public int StandardCode { get; set; }
 
         public int LocationId { get; set; }
 
-        public string VenueName { get; set; }
+        public string LocationName { get; set; }
 
         public string MarketingName { get; set; }
 
@@ -39,5 +39,7 @@ namespace Sfa.Eds.Das.Web.ViewModels
         public double EmployerSatisfaction { get; set; }
 
         public double LearnerSatisfaction { get; set; }
+
+        public string StandardNameWithLevel { get; set; }
     }
 }

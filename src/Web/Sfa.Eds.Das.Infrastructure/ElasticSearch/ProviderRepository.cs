@@ -56,17 +56,22 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
             return new Provider
             {
                 Id = document.Id,
-                ProviderName = document.Name,
-                VenueName = document.LocationName,
+                Address = document.Address,
+                DeliveryModes = document.DeliveryModes,
                 UkPrn = document.UkPrn,
                 Phone = document.Phone,
                 Email = document.Email,
                 Website = document.Website,
-                LearnerSatisfaction = document.LearnerSatisfaction,
-                EmployerSatisfaction = document.EmployerSatisfaction,
-                DeliveryModes = document.DeliveryModes,
-                Address = document.Address,
-                StandardInfoUrl = document.StandardInfoUrl
+                LearnerSatisfaction = document.LearnerSatisfaction * 10,
+                EmployerSatisfaction = document.EmployerSatisfaction * 10,
+                StandardInfoUrl = document.StandardInfoUrl,
+                LocationName = document.LocationName,
+                Name = document.Name,
+                ContactUsUrl = document.ContactUsUrl,
+                LocationId = document.LocationId,
+                StandardCode = document.StandardCode,
+                MarketingName = document.MarketingName,
+                Distance = document.Distance
             };
         }
     }
