@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DedsServiceTests.cs" />
     <Compile Include="Services\StubCourseDirectoryClient.cs" />
+    <Compile Include="Services\StubCourseDirectoryData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -114,18 +115,14 @@
       <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
       <Name>Sfa.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Common\Sfa.Eds.Das.Indexer.Common.csproj">
-      <Project>{6ac2dc1c-4b13-4590-a774-cf3c80c18d6f}</Project>
-      <Name>Sfa.Eds.Das.Indexer.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
       <Project>{6163c031-06ea-4929-bc84-ab67ed0e93da}</Project>
       <Name>Sfa.Eds.Das.Indexer.AzureWorkerRole</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\SonarLint.1.9.0\analyzers\SonarLint.CSharp.dll" />
-    <Analyzer Include="..\packages\SonarLint.1.9.0\analyzers\SonarLint.dll" />
+    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />

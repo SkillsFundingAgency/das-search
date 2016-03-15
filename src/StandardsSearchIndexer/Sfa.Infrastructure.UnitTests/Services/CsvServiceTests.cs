@@ -1,15 +1,14 @@
-﻿namespace Sfa.Eds.Das.Indexer.Common.UnitTests.Extensions
+﻿namespace Sfa.Infrastructure.UnitTests.Services
 {
     using System.IO;
     using System.Linq;
 
     using NUnit.Framework;
 
-    using Sfa.Eds.Das.Indexer.Common.Extensions;
     using Sfa.Infrastructure.Services;
 
     [TestFixture]
-    public class StringExtensionsTests
+    public class CsvServiceTests
     {
         [Test]
         public void ShouldFindTheValueOfACellInACSV()
@@ -42,16 +41,6 @@
             var models = sut.CsvTo<CsvTestModel>(csv);
 
             Assert.AreEqual(0, models.Count);
-        }
-
-        [Test]
-        public void ShouldConvertAStringToAStream()
-        {
-            var input = "test";
-            var stream = input.GenerateStreamFromString();
-            var result = new StreamReader(stream).ReadToEnd();
-
-            Assert.AreEqual(input, result);
         }
     }
 }

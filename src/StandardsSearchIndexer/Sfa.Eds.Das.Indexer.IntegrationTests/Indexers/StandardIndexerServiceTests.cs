@@ -45,8 +45,7 @@
         public void ShouldCreateScheduledIndexAndMappingForStandards()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName =
-                $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
@@ -65,8 +64,7 @@
         public async Task ShouldRetrieveStandardSearchingForTitle()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName =
-                $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             var standardsTest = GetStandardsTest().ToList();
             var expectedStandardResult = new MetaDataItem
@@ -75,8 +73,7 @@
                                                  Title = "Dental Nurse",
                                                  NotionalEndLevel = 3,
                                                  PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                                                 StandardPdfUrl =
-                                                     "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                                                 StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
                                              };
 
             DeleteIndexIfExists(indexName);
@@ -136,8 +133,7 @@
                                    Title = "Dental Nurse",
                                    NotionalEndLevel = 3,
                                    PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                                   StandardPdfUrl =
-                                       "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                                   StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
                                }
                        };
         }

@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Indexer.Common.Extensions
+namespace Sfa.Eds.Das.Indexer.Core.Extensions
 {
     using System.IO;
 

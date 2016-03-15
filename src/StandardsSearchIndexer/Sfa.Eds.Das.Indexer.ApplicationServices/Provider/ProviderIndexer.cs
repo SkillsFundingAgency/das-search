@@ -1,26 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-using Sfa.Eds.Das.Indexer.Core;
-using Sfa.Eds.Das.Indexer.Core.Services;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    public sealed class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+
+    public sealed class ProviderIndexer : IGenericIndexerHelper<Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
-        private readonly IGetApprenticeshipProviders _providerRepository;
-        private readonly IMaintainSearchIndexes<Core.Models.Provider.Provider> _searchIndexMaintainer;
-        private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
+
         private readonly ILog _log;
 
+        private readonly IGetApprenticeshipProviders _providerRepository;
+
+        private readonly IMaintainSearchIndexes<Provider> _searchIndexMaintainer;
+
+        private readonly IIndexSettings<Provider> _settings;
+
         public ProviderIndexer(
-            IIndexSettings<Core.Models.Provider.Provider> settings,
-            IMaintainSearchIndexes<Core.Models.Provider.Provider> searchIndexMaintainer,
+            IIndexSettings<Provider> settings,
+            IMaintainSearchIndexes<Provider> searchIndexMaintainer,
             IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             ILog log)
@@ -32,7 +37,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             _log = log;
         }
 
-        public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
+        public async Task<ICollection<Provider>> LoadEntries()
         {
             var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
 
@@ -62,7 +67,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return exists;
         }
 
-        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Core.Models.Provider.Provider> entries)
+        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Provider> entries)
         {
             try
             {

@@ -1,9 +1,7 @@
-namespace Sfa.Deds.Services
+namespace Sfa.Infrastructure.Services
 {
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
     public class VstsClient : IVstsClient

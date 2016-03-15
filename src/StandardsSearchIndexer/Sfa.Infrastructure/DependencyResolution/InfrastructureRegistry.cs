@@ -5,7 +5,7 @@ namespace Sfa.Infrastructure.DependencyResolution
     using Eds.Das.Indexer.Core.Models;
     using Eds.Das.Indexer.Core.Models.Provider;
     using Elasticsearch;
-    using Sfa.Deds.Services;
+
     using Sfa.Deds.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;

@@ -7,6 +7,12 @@
 
     public class ProviderIndexSettings : IIndexSettings<Provider>
     {
+        public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
+
+        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
+
+        public string ActiveProvidersPath => ConfigurationManager.AppSettings["VstsProvidersFolderPath"];
+
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
         public string IndexesAlias => ConfigurationManager.AppSettings["ProviderIndexesAlias"];
@@ -20,11 +26,5 @@
         public string QueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
 
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
-
-        public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
-
-        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
-
-        public string ActiveProvidersPath => ConfigurationManager.AppSettings["VstsProvidersFolderPath"];
     }
 }

@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace Sfa.Eds.Das.Indexer.Core
 {
-    public static class EnumHelper
+    public static class EnumExtensions
     {
-        public static string GetDescription(Enum en)
+        public static string GetDescription(this Enum en)
         {
             Type type = en.GetType();
 

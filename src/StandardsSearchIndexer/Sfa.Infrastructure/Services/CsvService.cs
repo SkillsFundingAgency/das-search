@@ -7,7 +7,7 @@
     using LINQtoCSV;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.Common.Extensions;
+    using Sfa.Eds.Das.Indexer.Core.Extensions;
 
     public class CsvService : IConvertFromCsv
     {

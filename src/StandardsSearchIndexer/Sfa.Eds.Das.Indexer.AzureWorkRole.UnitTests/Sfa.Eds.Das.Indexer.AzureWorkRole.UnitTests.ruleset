@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests" Description="Code analysis rules for Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests.csproj." ToolsVersion="14.0">
+<RuleSet Name="Rules for Sfa.Eds.Standards.Indexer.AzureWorkerRole" Description="Code analysis rules for Sfa.Eds.Standards.Indexer.AzureWorkerRole.csproj." ToolsVersion="14.0">
   <Include Path="..\..\sfa.eds.das.ruleset" Action="Default" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Warning" />

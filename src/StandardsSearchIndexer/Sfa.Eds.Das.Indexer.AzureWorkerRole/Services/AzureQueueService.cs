@@ -5,10 +5,8 @@
     using System.Linq;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Common.Extensions;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Extensions;
 
     public class AzureQueueService : IGetMessageTimes, IClearQueue
     {

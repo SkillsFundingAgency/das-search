@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sfa.Eds.Indexer.Indexers")]
+[assembly: AssemblyTitle("Sfa.Eds.Das.Indexer.Core.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sfa.Eds.Indexer.Indexers")]
+[assembly: AssemblyProduct("Sfa.Eds.Das.Indexer.Core.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6ac2dc1c-4b13-4590-a774-cf3c80c18d6f")]
+[assembly: Guid("b0a055a7-62d9-4717-ba41-130b250d43f0")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -3,11 +3,11 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
+
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     using StructureMap;
 
@@ -23,12 +23,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 
         private readonly ILog _log;
 
-        public GenericControlQueueConsumer(
-            IAppServiceSettings appServiceSettings,
-            IGetMessageTimes cloudQueueService,
-            IClearQueue clearQueue,
-            IContainer container,
-            ILog log)
+        public GenericControlQueueConsumer(IAppServiceSettings appServiceSettings, IGetMessageTimes cloudQueueService, IClearQueue clearQueue, IContainer container, ILog log)
         {
             _appServiceSettings = appServiceSettings;
             _cloudQueueService = cloudQueueService;

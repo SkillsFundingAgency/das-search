@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Indexer.Common.UnitTests.Extensions
+﻿namespace Sfa.Infrastructure.UnitTests.Services
 {
     using LINQtoCSV;
 
