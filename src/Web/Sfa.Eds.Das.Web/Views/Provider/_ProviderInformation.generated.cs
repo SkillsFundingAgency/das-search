@@ -69,14 +69,14 @@ WriteLiteralTo(__razor_helper_writer, "    <dd><a");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"link\"");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1302), Tuple.Create("\"", 1322)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1357), Tuple.Create("\"", 1377)
 
 #line 37 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1309), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 1364), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1309), false)
+, 1364), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -175,14 +175,14 @@ WriteLiteralTo(__razor_helper_writer, "    <dt>Website:</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1636), Tuple.Create("\"", 1656)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1691), Tuple.Create("\"", 1711)
 
 #line 46 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1643), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 1698), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1643), false)
+, 1698), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -214,55 +214,49 @@ WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
         }
         public override void Execute()
         {
-WriteLiteral("<div>\r\n");
+WriteLiteral("    ");
 
             
-            #line 6 "..\..\Views\Provider\_ProviderInformation.cshtml"
-    
-            
-            #line default
-            #line hidden
-            
-            #line 6 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 5 "..\..\Views\Provider\_ProviderInformation.cshtml"
      foreach (var item in Model.Hits)
     {
 
             
             #line default
             #line hidden
-WriteLiteral("        <li");
+WriteLiteral("        <article");
 
 WriteLiteral(" class=\"result\"");
 
-WriteLiteral(">\r\n            <h2");
+WriteLiteral(">\r\n            <header>\r\n                <h2");
 
 WriteLiteral(" class=\"result-title\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
             #line 10 "..\..\Views\Provider\_ProviderInformation.cshtml"
-           Write(Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null));
+               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </h2>\r\n\r\n            <dl");
+WriteLiteral("\r\n                </h2>\r\n            </header>\r\n\r\n            <dl");
 
-WriteLiteral(" class=\"reult-data-list\"");
+WriteLiteral(" class=\"result-data-list\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 14 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 15 "..\..\Views\Provider\_ProviderInformation.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 14 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 15 "..\..\Views\Provider\_ProviderInformation.cshtml"
                  if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     
@@ -270,14 +264,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 16 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 17 "..\..\Views\Provider\_ProviderInformation.cshtml"
                Write(RenderEmployersLocationProviderDetails(item));
 
             
             #line default
             #line hidden
             
-            #line 16 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 17 "..\..\Views\Provider\_ProviderInformation.cshtml"
                                                                  
                 }
                 else
@@ -287,14 +281,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 20 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 21 "..\..\Views\Provider\_ProviderInformation.cshtml"
                Write(RenderProviderDetails(item));
 
             
             #line default
             #line hidden
             
-            #line 20 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 21 "..\..\Views\Provider\_ProviderInformation.cshtml"
                                                 
                 }
 
@@ -305,7 +299,7 @@ WriteLiteral("                \r\n                <dt>Employer satisfaction:</dt
 "  <dd>");
 
             
-            #line 24 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 25 "..\..\Views\Provider\_ProviderInformation.cshtml"
                Write(item.EmployerSatisfaction);
 
             
@@ -314,22 +308,22 @@ WriteLiteral("                \r\n                <dt>Employer satisfaction:</dt
 WriteLiteral(" %</dd>\r\n                <dt>Learner satisfaction:</dt>\r\n                <dd>");
 
             
-            #line 26 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 27 "..\..\Views\Provider\_ProviderInformation.cshtml"
                Write(item.LearnerSatisfaction);
 
             
             #line default
             #line hidden
-WriteLiteral(" %</dd>\r\n            </dl>\r\n        </li>\r\n");
+WriteLiteral(" %</dd>\r\n            </dl>\r\n        </article>\r\n");
 
             
-            #line 29 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 30 "..\..\Views\Provider\_ProviderInformation.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n\r\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 

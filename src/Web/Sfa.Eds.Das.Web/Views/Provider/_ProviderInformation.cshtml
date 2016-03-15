@@ -2,15 +2,16 @@
 @using Sfa.Eds.Das.Web.ViewModels
 @model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
 
-<div>
     @foreach (var item in Model.Hits)
     {
-        <li class="result">
-            <h2 class="result-title">
-                @Html.ActionLink(item.Name, "Detail", "Provider", new {@providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode}, null)
-            </h2>
+        <article class="result">
+            <header>
+                <h2 class="result-title">
+                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode }, null)
+                </h2>
+            </header>
 
-            <dl class="reult-data-list">
+            <dl class="result-data-list">
                 @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     @RenderEmployersLocationProviderDetails(item)
@@ -25,9 +26,8 @@
                 <dt>Learner satisfaction:</dt>
                 <dd>@item.LearnerSatisfaction %</dd>
             </dl>
-        </li>
+        </article>
     }
-</div>
 
 @helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
 {
