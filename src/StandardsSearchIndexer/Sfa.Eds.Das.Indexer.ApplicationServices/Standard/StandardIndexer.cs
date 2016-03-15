@@ -19,8 +19,8 @@
 
         public StandardIndexer(
             IIndexSettings<MetaDataItem> settings,
-            IMetaDataHelper metaDataHelper,
             IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer,
+            IMetaDataHelper metaDataHelper,
             ILog log)
         {
             _settings = settings;

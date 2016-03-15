@@ -86,6 +86,7 @@
             var testDate = new DateTime(2016, 5, 10, 14, 33, 30, DateTimeKind.Utc);
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
+            _mockIndexMaintainer.Setup(x => x.AliasExists(It.IsAny<string>())).Returns(true);
             _sut.SwapIndexes(testDate);
 
             _mockIndexMaintainer.Verify(x => x.SwapAliasIndex(It.Is<string>(y => y == "TestAlias"), It.Is<string>(z => z == "testalias-2016-05-10-14")), Times.Once);

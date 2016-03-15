@@ -28,7 +28,7 @@
             _mockMetaDataHelper = new Mock<IMetaDataHelper>();
             var mockLogger = Mock.Of<ILog>();
 
-            _sut = new StandardIndexer(_mockSettings.Object, _mockMetaDataHelper.Object, _mockIndexMaintainer.Object, mockLogger);
+            _sut = new StandardIndexer(_mockSettings.Object, _mockIndexMaintainer.Object, _mockMetaDataHelper.Object, mockLogger);
         }
 
         [Test]
