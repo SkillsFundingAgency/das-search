@@ -94,10 +94,10 @@
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            _indexerService.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _indexerService.IndexEntries(scheduledDate, providersTest);
+            _indexerService.IndexEntries(indexName, providersTest);
 
             Thread.Sleep(2000);
 
@@ -126,10 +126,10 @@
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
-            _indexerService.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _indexerService.IndexEntries(scheduledDate, providersTest);
+            _indexerService.IndexEntries(indexName, providersTest);
 
             Thread.Sleep(2000);
 

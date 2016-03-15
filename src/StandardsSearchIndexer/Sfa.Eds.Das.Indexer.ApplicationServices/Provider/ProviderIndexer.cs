@@ -1,31 +1,26 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.Core;
+using Sfa.Eds.Das.Indexer.Core.Services;
+
+namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-
-    public sealed class ProviderIndexer : IGenericIndexerHelper<Provider>
+    public sealed class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
-
+        private readonly IGetApprenticeshipProviders _providerRepository;
+        private readonly IMaintainSearchIndexes<Core.Models.Provider.Provider> _searchIndexMaintainer;
+        private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
         private readonly ILog _log;
 
-        private readonly IGetApprenticeshipProviders _providerRepository;
-
-        private readonly IMaintainSearchIndexes<Provider> _searchIndexMaintainer;
-
-        private readonly IIndexSettings<Provider> _settings;
-
         public ProviderIndexer(
-            IIndexSettings<Provider> settings,
-            IMaintainSearchIndexes<Provider> searchIndexMaintainer,
+            IIndexSettings<Core.Models.Provider.Provider> settings,
+            IMaintainSearchIndexes<Core.Models.Provider.Provider> searchIndexMaintainer,
             IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             ILog log)
@@ -37,7 +32,7 @@
             _log = log;
         }
 
-        public async Task<ICollection<Provider>> LoadEntries()
+        public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
         {
             var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
 
@@ -46,10 +41,8 @@
             return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
         }
 
-        public bool CreateIndex(DateTime scheduledRefreshDateTime)
+        public bool CreateIndex(string indexName)
         {
-            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-
             var indexExists = _searchIndexMaintainer.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -67,13 +60,12 @@
             return exists;
         }
 
-        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<Provider> entries)
+        public async Task IndexEntries(string indexName, ICollection<Core.Models.Provider.Provider> entries)
         {
             try
             {
                 _log.Debug("Indexing " + entries.Count + " providers");
 
-                var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
                 await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -83,28 +75,23 @@
             }
         }
 
-        public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
+        public bool IsIndexCorrectlyCreated(string indexName)
         {
-            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
         // TODO: LWA - The argusment seems a little strange to this method.
-        public void SwapIndexes(DateTime scheduledRefreshDateTime)
+        public void SwapIndexes(string newIndexName)
         {
-            var indexAlias = _settings.IndexesAlias;
-            var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-
-            if (!CheckIfAliasExists(indexAlias))
+            if(!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
             {
                 _log.Warn("Alias doesn't exists, creating a new one...");
 
-                CreateAlias(newIndexName);
+                _searchIndexMaintainer.CreateIndexAlias(_settings.IndexesAlias, newIndexName);
             }
             else
             {
-                _searchIndexMaintainer.SwapAliasIndex(indexAlias, newIndexName);
+                _searchIndexMaintainer.SwapAliasIndex(_settings.IndexesAlias, newIndexName);
             }
         }
 
@@ -114,16 +101,6 @@
             var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
 
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
-        }
-
-        private bool CheckIfAliasExists(string aliasName)
-        {
-            return _searchIndexMaintainer.AliasExists(aliasName);
-        }
-
-        private void CreateAlias(string indexName)
-        {
-            _searchIndexMaintainer.CreateIndexAlias(_settings.IndexesAlias, indexName);
         }
     }
 }

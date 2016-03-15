@@ -49,7 +49,7 @@
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _indexerService.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
             var mapping = _elasticClient.GetMapping<MetaDataItem>(i => i.Index(indexName));
@@ -78,10 +78,10 @@
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _indexerService.CreateIndex(scheduledDate);
+            _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            await _indexerService.IndexEntries(scheduledDate, standardsTest);
+            await _indexerService.IndexEntries(indexName, standardsTest);
 
             Thread.Sleep(2000);
 

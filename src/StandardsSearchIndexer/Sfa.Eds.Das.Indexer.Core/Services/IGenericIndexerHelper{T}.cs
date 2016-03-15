@@ -6,16 +6,16 @@
 
     public interface IGenericIndexerHelper<T>
     {
-        Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<T> entries);
+        Task IndexEntries(string indexName, ICollection<T> entries);
 
         Task<ICollection<T>> LoadEntries();
 
         bool DeleteOldIndexes(DateTime scheduledRefreshDateTime);
 
-        bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime);
+        bool IsIndexCorrectlyCreated(string indexName);
 
-        bool CreateIndex(DateTime scheduledRefreshDateTime);
+        bool CreateIndex(string indexName);
 
-        void SwapIndexes(DateTime scheduledRefreshDateTime);
+        void SwapIndexes(string newIndexName);
     }
 }
