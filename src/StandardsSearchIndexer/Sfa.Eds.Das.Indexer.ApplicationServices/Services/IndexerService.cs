@@ -31,7 +31,8 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
 
             try
             {
-                var indexProperlyCreated = _indexerHelper.CreateIndex(scheduledRefreshDateTime);
+                var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _indexSettings.IndexesAlias);
+                var indexProperlyCreated = _indexerHelper.CreateIndex(newIndexName);
 
                 if (!indexProperlyCreated)
                 {
@@ -41,13 +42,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
 
                 _log.Info($"Indexing {_name}s...");
                 var entries = await _indexerHelper.LoadEntries();
-                await _indexerHelper.IndexEntries(scheduledRefreshDateTime, entries).ConfigureAwait(false);
+                await _indexerHelper.IndexEntries(newIndexName, entries).ConfigureAwait(false);
 
                 PauseWhileIndexingIsBeingRun();
 
-                if (_indexerHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
+                if (_indexerHelper.IsIndexCorrectlyCreated(newIndexName))
                 {
-                    _indexerHelper.SwapIndexes(scheduledRefreshDateTime);
+                    _indexerHelper.SwapIndexes(newIndexName);
 
                     _log.Debug("Swap completed...");
 

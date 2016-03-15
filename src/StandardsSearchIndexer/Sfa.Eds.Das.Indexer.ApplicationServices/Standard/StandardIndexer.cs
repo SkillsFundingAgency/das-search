@@ -29,14 +29,13 @@
             _log = log;
         }
 
-        public async Task IndexEntries(DateTime scheduledRefreshDateTime, ICollection<MetaDataItem> entries)
+        public async Task IndexEntries(string indexName, ICollection<MetaDataItem> entries)
         {
             try
             {
                 _log.Debug("Indexing " + entries.Count + " standards");
 
-                var indexNameAndDateExtension = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-                await _searchIndexMaintainer.IndexEntries(indexNameAndDateExtension, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -46,15 +45,15 @@
 
         public Task<ICollection<MetaDataItem>> LoadEntries()
         {
-            UpdateMetadataRepositoryWithNewStandards();
+            _metaDataHelper.UpdateMetadataRepository();
             _log.Info("Indexing standard PDFs...");
 
-            return Task.FromResult<ICollection<MetaDataItem>>(GetStandardsMetaDataFromGit().ToList());
+            var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
+            return Task.FromResult<ICollection<MetaDataItem>>(standardsMetaData.ToList());
         }
 
-        public bool CreateIndex(DateTime scheduledRefreshDateTime)
+        public bool CreateIndex(string indexName)
         {
-            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
             var indexExistsResponse = _searchIndexMaintainer.IndexExists(indexName);
 
             // If it already exists and is empty, let's delete it.
@@ -71,26 +70,21 @@
             return _searchIndexMaintainer.IndexExists(indexName);
         }
 
-        public bool IsIndexCorrectlyCreated(DateTime scheduledRefreshDateTime)
+        public bool IsIndexCorrectlyCreated(string indexName)
         {
-            var indexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
-        public void SwapIndexes(DateTime scheduledRefreshDateTime)
+        public void SwapIndexes(string newIndexName)
         {
-            var indexAlias = _settings.IndexesAlias;
-            var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias);
-
-            if (!CheckIfAliasExists(indexAlias))
+            if(!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
             {
                 _log.Warn("Alias doesn't exists, creating a new one...");
 
-                CreateAlias(newIndexName);
+                _searchIndexMaintainer.CreateIndexAlias(_settings.IndexesAlias, newIndexName);
             }
 
-            _searchIndexMaintainer.SwapAliasIndex(indexAlias, newIndexName);
+            _searchIndexMaintainer.SwapAliasIndex(_settings.IndexesAlias, newIndexName);
         }
 
         public bool DeleteOldIndexes(DateTime scheduledRefreshDateTime)
@@ -99,26 +93,6 @@
             var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
 
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
-        }
-
-        private void UpdateMetadataRepositoryWithNewStandards()
-        {
-            _metaDataHelper.UpdateMetadataRepository();
-        }
-
-        private IEnumerable<MetaDataItem> GetStandardsMetaDataFromGit()
-        {
-            return _metaDataHelper.GetAllStandardsMetaData();
-        }
-
-        private void CreateAlias(string indexName)
-        {
-            _searchIndexMaintainer.CreateIndexAlias(_settings.IndexesAlias, indexName);
-        }
-
-        private bool CheckIfAliasExists(string aliasName)
-        {
-            return _searchIndexMaintainer.AliasExists(aliasName);
         }
     }
 }

@@ -46,8 +46,7 @@
         [Test]
         public void ShouldCreateIndexIfOneDoesNotAlreadyExist()
         {
-            var testDate = new DateTime(2016, 5, 10);
-            _sut.CreateIndex(testDate);
+            _sut.CreateIndex("tetsindex");
 
             _mockIndexMaintainer.Verify(x => x.CreateIndex(It.IsAny<string>()), Times.Once);
         }
@@ -58,7 +57,7 @@
             var testDate = new DateTime(2016, 5, 10, 14, 33, 30, DateTimeKind.Utc);
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
-            _sut.CreateIndex(testDate);
+            _sut.CreateIndex("testalias-2016-05-10-14");
 
             _mockIndexMaintainer.Verify(x => x.CreateIndex(It.Is<string>(y => y == $"testalias-2016-05-10-14")), Times.Once);
         }
@@ -66,9 +65,8 @@
         [Test]
         public void CreatIndexShouldDeleteAnyExistingIndexWithTheSameName()
         {
-            var testDate = new DateTime(2016, 5, 10);
             _mockIndexMaintainer.Setup(x => x.IndexExists(It.IsAny<string>())).Returns(true);
-            _sut.CreateIndex(testDate);
+            _sut.CreateIndex("testindex");
 
             _mockIndexMaintainer.Verify(x => x.DeleteIndex(It.IsAny<string>()), Times.Once);
         }
@@ -79,7 +77,7 @@
             var testDate = new DateTime(2016, 5, 10, 14, 33, 30, DateTimeKind.Utc);
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
-            _sut.SwapIndexes(testDate);
+            _sut.SwapIndexes("testalias-2016-05-10-14");
 
             _mockIndexMaintainer.Verify(x => x.SwapAliasIndex(It.Is<string>(y => y == "TestAlias"), It.Is<string>(z => z == "testalias-2016-05-10-14")), Times.Once);
         }
@@ -91,7 +89,7 @@
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
             _mockIndexMaintainer.Setup(x => x.AliasExists(It.IsAny<string>())).Returns(false);
-            _sut.SwapIndexes(testDate);
+            _sut.SwapIndexes("testalias-2016-05-10-14");
 
             _mockIndexMaintainer.Verify(x => x.CreateIndexAlias(It.Is<string>(z => z == "TestAlias"), It.Is<string>(y => y == "testalias-2016-05-10-14")), Times.Once);
         }
