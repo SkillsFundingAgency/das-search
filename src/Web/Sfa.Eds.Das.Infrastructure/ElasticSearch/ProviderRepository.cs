@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
+﻿using Sfa.Eds.Das.Core.Configuration;
+
+namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
 {
     using System;
     using System.Linq;
@@ -14,11 +16,13 @@
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
         private readonly ILog _applicationLogger;
+        private readonly IConfigurationSettings _applicationSettings;
 
-        public ProviderRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger)
+        public ProviderRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _applicationLogger = applicationLogger;
+            _applicationSettings = applicationSettings;
         }
 
         public Provider GetById(string providerid, string locationId, string standardCode)
@@ -26,9 +30,8 @@
             var client = _elasticsearchClientFactory.Create();
 
             var results =
-               client.Search<ProviderSearchResultsItem>(
-                   s => s
-                   .Index("integrationproviderindexesalias-2000-01-01-00")
+               client.Search<ProviderSearchResultsItem>(s => s
+                   .Index(_applicationSettings.ProviderIndexAlias)
                    .From(0)
                    .Size(1)
                    .Query(q => q
