@@ -6,11 +6,10 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-
+    using Indexer.Core.Services;
     using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.Git;

@@ -22,7 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Das.Tools.MetaDataCreationTool.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +33,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Das.Tools.MetaDataCreationTool.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -111,20 +113,17 @@
       <Project>{473307D1-67C9-411E-AD71-CF3C6FE892F4}</Project>
       <Name>Sfa.Eds.Das.Indexer.ApplicationServices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sfa.Eds.Indexer.Indexers\Sfa.Eds.Das.Indexer.Common.csproj">
-      <Project>{6AC2DC1C-4B13-4590-A774-CF3C80C18D6F}</Project>
-      <Name>Sfa.Eds.Das.Indexer.Common</Name>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Core\Sfa.Eds.Das.Indexer.Core.csproj">
+      <Project>{0c0e390c-c57c-44e4-978e-b9d2f53196aa}</Project>
+      <Name>Sfa.Eds.Das.Indexer.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />
-    <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.dll" />
+    <Analyzer Include="..\packages\SonarLint.1.9.0\analyzers\SonarLint.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarLint.1.9.0\analyzers\SonarLint.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

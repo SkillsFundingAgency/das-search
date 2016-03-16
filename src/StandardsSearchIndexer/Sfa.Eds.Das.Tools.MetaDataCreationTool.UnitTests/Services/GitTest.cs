@@ -5,8 +5,6 @@
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Models;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
 
     [TestFixture]
@@ -27,30 +25,11 @@
         public void GeneratePush2NewJson()
         {
             var git = new GitDynamicModelGenerator();
-            var list = new List<FileContents> { new FileContents("file1.json", "{hej}"), new FileContents("file2.json", "{varlden}")};
+            var list = new List<FileContents> { new FileContents("file1.json", "{hej}"), new FileContents("file2.json", "{varlden}") };
             var generated = git.GenerateCommitBody("branch/path/master", "1121q-33-asd2-55-s-d-f-g", list);
             var s = generated;
 
             Assert.AreEqual(GitTestResults.GeneratePush2NewJson, s);
-        }
-    }
-
-    public static class GitTestResults
-    {
-        public static string GeneratePushJson {
-            get
-            {
-                return
-                    "{\"refUpdates\":[{\"name\":\"branch/path/master\",\"oldObjectId\":\"1122-33-4-55-s-d-f-g\"}],\"commits\":[{\"comment\":\"1 files created\",\"changes\":[{\"changeType\":\"add\",\"item\":{\"path\":\"file1.json\"},\"newContent\":{\"content\":\"{hej}\",\"contentType\":\"rawtext\"}}]}]}";
-            }
-        }
-        public static string GeneratePush2NewJson
-        {
-            get
-            {
-                return
-                    "{\"refUpdates\":[{\"name\":\"branch/path/master\",\"oldObjectId\":\"1121q-33-asd2-55-s-d-f-g\"}],\"commits\":[{\"comment\":\"2 files created\",\"changes\":[{\"changeType\":\"add\",\"item\":{\"path\":\"file1.json\"},\"newContent\":{\"content\":\"{hej}\",\"contentType\":\"rawtext\"}},{\"changeType\":\"add\",\"item\":{\"path\":\"file2.json\"},\"newContent\":{\"content\":\"{varlden}\",\"contentType\":\"rawtext\"}}]}]}";
-            }
         }
     }
 }

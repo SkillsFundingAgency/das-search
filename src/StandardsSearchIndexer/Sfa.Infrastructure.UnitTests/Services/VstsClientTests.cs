@@ -4,10 +4,9 @@
 
     using NUnit.Framework;
 
-    using Sfa.Deds.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Infrastructure.Services;
 
     [TestFixture]
     public class VstsClientTests

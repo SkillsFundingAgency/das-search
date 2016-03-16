@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Helpers
 {
     using System.Collections.Generic;
-
+    using Core.Services;
     using Moq;
 
     using NUnit.Framework;

@@ -6,6 +6,7 @@
 
     public interface IGenericControlQueueConsumer
     {
-        Task CheckMessage<T>() where T : IIndexEntry;
+        Task CheckMessage<T>()
+            where T : IIndexEntry;
     }
 }

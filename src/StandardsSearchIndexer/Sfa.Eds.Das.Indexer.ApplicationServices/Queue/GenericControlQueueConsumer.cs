@@ -4,10 +4,10 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     using StructureMap;
 
@@ -21,47 +21,40 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 
         private readonly IContainer _container;
 
-        private readonly ILog Log;
+        private readonly ILog _log;
 
-        public GenericControlQueueConsumer(
-            IAppServiceSettings appServiceSettings,
-            IGetMessageTimes cloudQueueService,
-            IClearQueue clearQueue,
-            IContainer container,
-            ILog log)
+        public GenericControlQueueConsumer(IAppServiceSettings appServiceSettings, IGetMessageTimes cloudQueueService, IClearQueue clearQueue, IContainer container, ILog log)
         {
             _appServiceSettings = appServiceSettings;
             _cloudQueueService = cloudQueueService;
             _clearQueue = clearQueue;
             _container = container;
-            Log = log;
+            this._log = log;
         }
 
-        public Task CheckMessage<T>() where T : IIndexEntry
+        public async Task CheckMessage<T>()
+            where T : IIndexEntry
         {
             var indexerService = _container.GetInstance<IIndexerService<T>>();
-            return Task.Run(
-                async () =>
-                    {
-                        try
-                        {
-                            var queuename = _appServiceSettings.QueueName(typeof(T));
-                            var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
 
-                            if (times.Any())
-                            {
-                                var time = times.FirstOrDefault();
-                                await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
-                            }
+            try
+            {
+                var queuename = _appServiceSettings.QueueName(typeof(T));
+                var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
 
-                            _clearQueue.ClearQueue(queuename);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Fatal("Something failed creating index: " + ex);
-                            throw;
-                        }
-                    });
+                if (times.Any())
+                {
+                    var time = times.FirstOrDefault();
+                    await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
+                }
+
+                _clearQueue.ClearQueue(queuename);
+            }
+            catch (Exception ex)
+            {
+                _log.Fatal("Something failed creating index: " + ex);
+                throw;
+            }
         }
     }
 }

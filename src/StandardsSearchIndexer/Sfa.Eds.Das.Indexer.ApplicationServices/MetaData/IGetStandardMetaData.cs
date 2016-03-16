@@ -4,10 +4,6 @@
 
     public interface IGetStandardMetaData
     {
-        /// <summary>
-        /// Returns all standards
-        /// </summary>
-        /// <returns>List of jsonstings</returns>
         IDictionary<string, string> GetAllAsJson();
     }
 }

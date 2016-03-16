@@ -3,50 +3,44 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using Moq;
-
-    using NUnit.Framework;
-
-    using Infrastructure;
     using ApplicationServices.Services.Interfaces;
-    using Settings;
     using Core;
-    using Core.Models;
+    using Core.Services;
+    using Moq;
+    using NUnit.Framework;
+    using Settings;
 
     [TestFixture]
     public class IndexerServiceTests
     {
+        private Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>> _mockHelper;
+        private IIndexSettings<Core.Models.Provider.Provider> _mockSettings;
+        private IndexerService<Core.Models.Provider.Provider> _sut;
+
         [SetUp]
         public void Setup()
         {
-            _mockHelper = new Mock<IGenericIndexerHelper<Provider>>();
+            _mockHelper = new Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>>();
             _mockSettings =
-                Mock.Of<IIndexSettings<Provider>>(
-                    x => x.PauseTime == "10" && x.SearchHost == "http://104.45.94.2:9200" && x.IndexesAlias == "ciproviderindexesalias");
+                Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>(
+                    x => x.PauseTime == "10" && x.SearchHost == "http://123.456.789:9200" && x.IndexesAlias == "testproviderindexesalias");
 
-            _sut = new IndexerService<Provider>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
+            _sut = new IndexerService<Core.Models.Provider.Provider>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
         }
-
-        private Mock<IGenericIndexerHelper<Provider>> _mockHelper;
-
-        private IIndexSettings<Provider> _mockSettings;
-
-        private IndexerService<Provider> _sut;
 
         [Test]
         public async Task ShouldIndexProvidersIfThatIndexHasBeenCreatedProperly()
         {
             // Arrange
-            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<DateTime>())).Returns(true);
+            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<string>())).Returns(true);
 
             // Act
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Provider>>()), Times.Once);
-            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
-            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.AtMostOnce);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
+            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
+            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
         }
 
@@ -54,13 +48,13 @@
         public async Task ShouldNotIndexProvidersIfThatIndexHasNotBeenCreatedProperly()
         {
             // Arrange
-            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<DateTime>())).Returns(false);
+            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<string>())).Returns(false);
 
             // Act
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Provider>>()), Times.Never);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -68,16 +62,16 @@
         public async Task ShouldNotSwapIdexesIfNewOneHasNotBeenCreatedProperly()
         {
             // Arrange
-            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<DateTime>())).Returns(true);
-            _mockHelper.Setup(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>())).Returns(false);
+            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<string>())).Returns(true);
+            _mockHelper.Setup(x => x.IsIndexCorrectlyCreated(It.IsAny<string>())).Returns(false);
 
             // Act
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Provider>>()), Times.Once);
-            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
-            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Never);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
+            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
+            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -85,16 +79,16 @@
         public async Task ShouldSwapIdexesIfNewOneHasBeenCreatedProperly()
         {
             // Arrange
-            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<DateTime>())).Returns(true);
-            _mockHelper.Setup(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>())).Returns(true);
+            _mockHelper.Setup(x => x.CreateIndex(It.IsAny<string>())).Returns(true);
+            _mockHelper.Setup(x => x.IsIndexCorrectlyCreated(It.IsAny<string>())).Returns(true);
 
             // Act
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<DateTime>(), It.IsAny<ICollection<Provider>>()), Times.Once);
-            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<DateTime>()), Times.Once);
-            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<DateTime>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
+            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
+            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.Once);
             _mockHelper.VerifyAll();
         }
     }
