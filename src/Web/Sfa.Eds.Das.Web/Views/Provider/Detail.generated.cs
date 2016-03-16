@@ -259,89 +259,89 @@ WriteTo(__razor_helper_writer, title);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <div>\r\n                <ul>\r\n");
+WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <ul>\r\n");
 
 
-#line 103 "..\..\Views\Provider\Detail.cshtml"
-                    
+#line 102 "..\..\Views\Provider\Detail.cshtml"
+                
 
 #line default
 #line hidden
 
-#line 103 "..\..\Views\Provider\Detail.cshtml"
-                     foreach (var item in items)
+#line 102 "..\..\Views\Provider\Detail.cshtml"
+                 foreach (var item in items)
+                {
+                    switch (item)
                     {
-                        switch (item)
-                        {
-                            case "100PercentEmployer":
+                        case "100PercentEmployer":
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                                <li>");
+WriteLiteralTo(__razor_helper_writer, "                            <li>");
+
+
+#line 107 "..\..\Views\Provider\Detail.cshtml"
+  WriteTo(__razor_helper_writer, Html.Raw("at your location"));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
 #line 108 "..\..\Views\Provider\Detail.cshtml"
-      WriteTo(__razor_helper_writer, Html.Raw("at your location"));
+                            break;
+                        case "BlockRelease":
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "                            <li>");
+
+
+#line 110 "..\..\Views\Provider\Detail.cshtml"
+  WriteTo(__razor_helper_writer, Html.Raw("block release"));
 
 
 #line default
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
-
-
-#line 109 "..\..\Views\Provider\Detail.cshtml"
-                                break;
-                            case "BlockRelease":
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "                                <li>");
 
 
 #line 111 "..\..\Views\Provider\Detail.cshtml"
-      WriteTo(__razor_helper_writer, Html.Raw("block release"));
+                            break;
+                        case "DayRelease":
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "                            <li>");
+
+
+#line 113 "..\..\Views\Provider\Detail.cshtml"
+  WriteTo(__razor_helper_writer, Html.Raw("day release"));
 
 
 #line default
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
-
-
-#line 112 "..\..\Views\Provider\Detail.cshtml"
-                                break;
-                            case "DayRelease":
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "                                <li>");
 
 
 #line 114 "..\..\Views\Provider\Detail.cshtml"
-      WriteTo(__razor_helper_writer, Html.Raw("day release"));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
-
-
-#line 115 "..\..\Views\Provider\Detail.cshtml"
-                                break;
-                            default:
-                                break;
-                        }
+                            break;
+                        default:
+                            break;
                     }
+                }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                </ul>\r\n            </div>\r\n        </dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "            </ul>\r\n        </dd>\r\n");
 
 
-#line 123 "..\..\Views\Provider\Detail.cshtml"
+#line 121 "..\..\Views\Provider\Detail.cshtml"
     }
 
 
@@ -349,19 +349,19 @@ WriteLiteralTo(__razor_helper_writer, "                </ul>\r\n            </di
 #line hidden
 });
 
-#line 124 "..\..\Views\Provider\Detail.cshtml"
+#line 122 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 126 "..\..\Views\Provider\Detail.cshtml"
+#line 124 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 127 "..\..\Views\Provider\Detail.cshtml"
+#line 125 "..\..\Views\Provider\Detail.cshtml"
  
     if (!string.IsNullOrEmpty(title))
     {
@@ -371,14 +371,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3993), Tuple.Create("\"", 4007)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3878), Tuple.Create("\"", 3892)
 
-#line 131 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4000), Tuple.Create<System.Object, System.Int32>(pdfUrl
+#line 129 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 3885), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4000), false)
+, 3885), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -386,7 +386,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 132 "..\..\Views\Provider\Detail.cshtml"
+#line 130 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -396,7 +396,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n            <p>\r
 "     </p>\r\n        </li>\r\n");
 
 
-#line 138 "..\..\Views\Provider\Detail.cshtml"
+#line 136 "..\..\Views\Provider\Detail.cshtml"
     }
 
 
@@ -404,7 +404,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n            <p>\r
 #line hidden
 });
 
-#line 139 "..\..\Views\Provider\Detail.cshtml"
+#line 137 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden

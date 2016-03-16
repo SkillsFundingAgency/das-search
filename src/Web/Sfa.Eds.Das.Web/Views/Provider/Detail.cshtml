@@ -98,27 +98,25 @@
     {
         <dt>@title</dt>
         <dd>
-            <div>
-                <ul>
-                    @foreach (var item in items)
+            <ul>
+                @foreach (var item in items)
+                {
+                    switch (item)
                     {
-                        switch (item)
-                        {
-                            case "100PercentEmployer":
-                                <li>@Html.Raw("at your location")</li>
-                                break;
-                            case "BlockRelease":
-                                <li>@Html.Raw("block release")</li>
-                                break;
-                            case "DayRelease":
-                                <li>@Html.Raw("day release")</li>
-                                break;
-                            default:
-                                break;
-                        }
+                        case "100PercentEmployer":
+                            <li>@Html.Raw("at your location")</li>
+                            break;
+                        case "BlockRelease":
+                            <li>@Html.Raw("block release")</li>
+                            break;
+                        case "DayRelease":
+                            <li>@Html.Raw("day release")</li>
+                            break;
+                        default:
+                            break;
                     }
-                </ul>
-            </div>
+                }
+            </ul>
         </dd>
     }
 }
