@@ -72,8 +72,9 @@
       <HintPath>..\packages\NLog.Targets.ElasticSearch.1.0.19.0\lib\net40\NLog.Targets.ElasticSearch.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Polly">
-      <HintPath>..\packages\Polly.4.0.0\lib\net45\Polly.dll</HintPath>
+    <Reference Include="Polly, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.4.1.1\lib\net45\Polly.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
