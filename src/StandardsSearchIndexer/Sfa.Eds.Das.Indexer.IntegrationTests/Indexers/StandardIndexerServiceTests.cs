@@ -9,14 +9,19 @@
 
     using FluentAssertions;
 
+    using Moq;
+
     using Nest;
 
     using NUnit.Framework;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
     using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Elasticsearch;
     using Sfa.Infrastructure.Services;
 
@@ -35,6 +40,18 @@
             var ioc = IoC.Initialize();
             _standardSettings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
             _indexerService = ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
+
+            var settings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
+
+            var maintanSearchIndex = ioc.GetInstance<IMaintainSearchIndexes<MetaDataItem>>();
+
+            var moqMetaDataHelper = new Mock<IMetaDataHelper>();
+            moqMetaDataHelper.Setup(m => m.UpdateMetadataRepository());
+            moqMetaDataHelper.Setup(m => m.GetAllStandardsMetaData()).Returns(GetStandardsTest().ToList());
+
+            var moqLog = new Mock<ILog>();
+
+            _indexerService = new StandardIndexer(settings, maintanSearchIndex, moqMetaDataHelper.Object, moqLog.Object);
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -81,7 +98,7 @@
             _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            await _indexerService.IndexEntries(indexName, standardsTest);
+            await _indexerService.IndexEntries(indexName);
 
             Thread.Sleep(2000);
 

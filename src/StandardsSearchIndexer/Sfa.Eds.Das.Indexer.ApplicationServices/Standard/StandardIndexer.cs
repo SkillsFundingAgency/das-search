@@ -29,8 +29,9 @@
             _log = log;
         }
 
-        public async Task IndexEntries(string indexName, ICollection<MetaDataItem> entries)
+        public async Task IndexEntries(string indexName)
         {
+            var entries = await LoadEntries();
             try
             {
                 _log.Debug("Indexing " + entries.Count + " standards");
@@ -41,15 +42,6 @@
             {
                 _log.Error("Error indexing Standards", ex);
             }
-        }
-
-        public Task<ICollection<MetaDataItem>> LoadEntries()
-        {
-            _metaDataHelper.UpdateMetadataRepository();
-            _log.Info("Indexing standard PDFs...");
-
-            var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
-            return Task.FromResult<ICollection<MetaDataItem>>(standardsMetaData.ToList());
         }
 
         public bool CreateIndex(string indexName)
@@ -93,6 +85,15 @@
             var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
 
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
+        }
+
+        private Task<ICollection<MetaDataItem>> LoadEntries()
+        {
+            _metaDataHelper.UpdateMetadataRepository();
+            _log.Info("Indexing standard PDFs...");
+
+            var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
+            return Task.FromResult<ICollection<MetaDataItem>>(standardsMetaData.ToList());
         }
     }
 }

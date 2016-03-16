@@ -6,9 +6,7 @@
 
     public interface IGenericIndexerHelper<T>
     {
-        Task IndexEntries(string indexName, ICollection<T> entries);
-
-        Task<ICollection<T>> LoadEntries();
+        Task IndexEntries(string indexName);
 
         bool DeleteOldIndexes(DateTime scheduledRefreshDateTime);
 

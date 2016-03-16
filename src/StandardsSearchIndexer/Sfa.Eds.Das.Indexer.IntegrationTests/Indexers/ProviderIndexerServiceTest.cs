@@ -9,10 +9,13 @@
 
     using FluentAssertions;
 
+    using Moq;
+
     using Nest;
 
     using NUnit.Framework;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
@@ -43,10 +46,18 @@
         {
             _ioc = IoC.Initialize();
             _ioc.Configure(x => x.For<IGetApprenticeshipProviders>().Use<StubCourseDirectoryClient>());
+
             _ioc.GetInstance<IGetApprenticeshipProviders>();
             _ioc.GetInstance<IIndexSettings<Provider>>();
             _indexerService = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
+
             _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
+            var maintainSearchIndexer = _ioc.GetInstance<IMaintainSearchIndexes<Provider>>();
+            var providerRepository = new Mock<IGetApprenticeshipProviders>();
+            var activeProviderRepository = new Mock<IGetActiveProviders>();
+
+            providerRepository.Setup(m => m.GetApprenticeshipProvidersAsync()).ReturnsAsync(GetProvidersTest());
+            _indexerService = new ProviderIndexer(_providerSettings, maintainSearchIndexer, providerRepository.Object, activeProviderRepository.Object, null);
 
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -97,7 +108,7 @@
             _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _indexerService.IndexEntries(indexName, providersTest);
+            _indexerService.IndexEntries(indexName);
 
             Thread.Sleep(2000);
 
@@ -129,7 +140,7 @@
             _indexerService.CreateIndex(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
 
-            _indexerService.IndexEntries(indexName, providersTest);
+            _indexerService.IndexEntries(indexName);
 
             Thread.Sleep(2000);
 

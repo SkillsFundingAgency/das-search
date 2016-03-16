@@ -32,15 +32,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             _log = log;
         }
 
-        public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
-        {
-            var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
-
-            var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
-
-            return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
-        }
-
         public bool CreateIndex(string indexName)
         {
             var indexExists = _searchIndexMaintainer.IndexExists(indexName);
@@ -60,8 +51,9 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return exists;
         }
 
-        public async Task IndexEntries(string indexName, ICollection<Core.Models.Provider.Provider> entries)
+        public async Task IndexEntries(string indexName)
         {
+            var entries = await LoadEntries();
             try
             {
                 _log.Debug("Indexing " + entries.Count + " providers");
@@ -101,6 +93,15 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
 
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
+        }
+
+        private async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
+        {
+            var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
+
+            var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
+
+            return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
         }
     }
 }

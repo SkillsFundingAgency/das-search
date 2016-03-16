@@ -32,18 +32,6 @@
         }
 
         [Test]
-        public async Task LoadEntriesShouldGetStandardsFromRepository()
-        {
-            // Arrange
-            _mockMetaDataHelper.Setup(x => x.GetAllStandardsMetaData()).Returns(new List<MetaDataItem>());
-
-            // Act
-            await _sut.LoadEntries();
-
-            _mockMetaDataHelper.Verify(x => x.GetAllStandardsMetaData(), Times.Once);
-        }
-
-        [Test]
         public void ShouldCreateIndexIfOneDoesNotAlreadyExist()
         {
             _sut.CreateIndex("tetsindex");

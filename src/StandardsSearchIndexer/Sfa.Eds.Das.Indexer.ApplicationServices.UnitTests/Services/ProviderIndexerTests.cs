@@ -34,23 +34,6 @@
         }
 
         [Test]
-        public async Task ShouldLoadEntriesFromCourseDirectoryAndFilterOutTheInactiveOnes()
-        {
-            // Arrange
-            _mockProviderRepository.Setup(x => x.GetApprenticeshipProvidersAsync()).Returns(Task.FromResult(TwoProvidersTask()));
-            _mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new List<int>() { 123 });
-
-            // Act
-            var entries = await _sut.LoadEntries();
-
-            Assert.AreEqual(123, entries.First().Ukprn);
-            Assert.AreEqual(1, entries.Count);
-
-            _mockProviderRepository.VerifyAll();
-            _mockActiveProviderClient.VerifyAll();
-        }
-
-        [Test]
         public void ShouldCreateIndexIfOneDoesNotAlreadyExist()
         {
             _sut.CreateIndex("testindex");

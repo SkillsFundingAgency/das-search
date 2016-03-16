@@ -38,7 +38,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
@@ -54,7 +54,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Never);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -69,7 +69,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.Never);
             _mockHelper.VerifyAll();
@@ -86,7 +86,7 @@
             await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
 
             // Assert
-            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>(), It.IsAny<ICollection<Core.Models.Provider.Provider>>()), Times.Once);
+            _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.Once);
             _mockHelper.VerifyAll();
