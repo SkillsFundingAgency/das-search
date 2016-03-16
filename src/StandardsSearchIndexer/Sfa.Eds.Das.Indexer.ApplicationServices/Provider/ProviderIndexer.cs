@@ -83,7 +83,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
         // TODO: LWA - The argusment seems a little strange to this method.
         public void SwapIndexes(string newIndexName)
         {
-            if(!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
+            if (!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
             {
                 _log.Warn("Alias doesn't exists, creating a new one...");
 

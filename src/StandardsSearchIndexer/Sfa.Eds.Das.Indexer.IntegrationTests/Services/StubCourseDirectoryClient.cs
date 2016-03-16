@@ -10,9 +10,9 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 
     public class StubCourseDirectoryClient : IGetApprenticeshipProviders
     {
-        public async Task<IEnumerable<Provider>> GetApprenticeshipProvidersAsync()
+        public Task<IEnumerable<Provider>> GetApprenticeshipProvidersAsync()
         {
-            return Retrieve();
+            return Task.FromResult(Retrieve());
         }
 
         private IEnumerable<Provider> Retrieve()

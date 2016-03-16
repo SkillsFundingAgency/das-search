@@ -54,7 +54,6 @@
         [Test]
         public void ShouldCreateIndexWithTheCorrectName()
         {
-            var testDate = new DateTime(2016, 5, 10, 14, 33, 30, DateTimeKind.Utc);
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
             _sut.CreateIndex("testalias-2016-05-10-14");
@@ -74,7 +73,6 @@
         [Test]
         public void SwapIndexesShouldSwapTheIndexUsedToTheProvidedOne()
         {
-            var testDate = new DateTime(2016, 5, 10, 14, 33, 30, DateTimeKind.Utc);
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
             _sut.SwapIndexes("testalias-2016-05-10-14");
@@ -85,7 +83,6 @@
         [Test]
         public void SwapIndexesShouldCreateAliasIfItDoesNotExist()
         {
-            var testDate = new DateTime(2016, 5, 10, 14, 33, 30, DateTimeKind.Utc);
             const string testAliasName = "TestAlias";
             _mockSettings.SetupGet(x => x.IndexesAlias).Returns(testAliasName);
             _mockIndexMaintainer.Setup(x => x.AliasExists(It.IsAny<string>())).Returns(false);
