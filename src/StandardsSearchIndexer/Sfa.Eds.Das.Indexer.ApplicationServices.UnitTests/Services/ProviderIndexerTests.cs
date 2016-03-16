@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using ApplicationServices.Services;
     using Core.Services;
     using Moq;
     using NUnit.Framework;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
-    using ApplicationServices.Services;
 
     [TestFixture]
     public sealed class ProviderIndexerTests

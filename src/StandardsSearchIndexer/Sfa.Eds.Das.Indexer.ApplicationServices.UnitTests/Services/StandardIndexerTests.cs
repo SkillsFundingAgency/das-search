@@ -2,15 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+    using ApplicationServices.Services;
+    using Core.Models;
     using Core.Services;
     using Moq;
     using NUnit.Framework;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using ApplicationServices.Services;
     using Standard;
-    using Core.Models;
 
     [TestFixture]
     public sealed class StandardIndexerTests

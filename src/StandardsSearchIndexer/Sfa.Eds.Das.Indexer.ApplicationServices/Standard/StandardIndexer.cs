@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Services;
-    using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.Indexer.Core.Models;
     using Services;
     using Settings;
+    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     public sealed class StandardIndexer : IGenericIndexerHelper<MetaDataItem>
     {
