@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Nest;
 using Sfa.Das.ApplicationServices;
 using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Model;
-using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
@@ -16,14 +14,12 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _logger;
-        private readonly IStandardRepository _standardRepository;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IStandardRepository standardRepository, IConfigurationSettings applicationSettings)
+        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
-            _standardRepository = standardRepository;
             _applicationSettings = applicationSettings;
         }
 
@@ -60,6 +56,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             ISearchResponse<ProviderSearchResultsItem> results = client
                 .Search<ProviderSearchResultsItem>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
+                .From(0)
+                .Size(1000)
                 .QueryRaw(qryStr)
                 .SortGeoDistance(g =>
                 {
@@ -70,14 +68,24 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
             {
-                Id = hit.Source.Id,
-                Name = hit.Source.Name,
-                PostCode = hit.Source.PostCode,
+                Id = hit.Source.Id.ToString(),
                 UkPrn = hit.Source.UkPrn,
+                Address = hit.Source.Address,
+                ContactUsUrl = hit.Source.ContactUsUrl,
+                DeliveryModes = hit.Source.DeliveryModes,
+                Email = hit.Source.Email,
+                EmployerSatisfaction = hit.Source.EmployerSatisfaction,
+                LearnerSatisfaction = hit.Source.LearnerSatisfaction,
+                LocationId = hit.Source.LocationId,
                 LocationName = hit.Source.LocationName,
-                Standardscode = hit.Source.Standardscode,
+                MarketingName = hit.Source.MarketingName,
+                Name = hit.Source.Name,
+                Phone = hit.Source.Phone,
+                StandardCode = hit.Source.StandardCode,
+                StandardInfoUrl = hit.Source.StandardInfoUrl,
+                Website = hit.Source.Website,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
-            }).ToList();
+            }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
 
             if (results?.ConnectionStatus?.HttpStatusCode != 200)
             {

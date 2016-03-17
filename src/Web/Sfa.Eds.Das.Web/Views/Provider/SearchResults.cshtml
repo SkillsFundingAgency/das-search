@@ -23,68 +23,12 @@
                     Html.RenderPartial("_SearchResultMessage");
                 }
             </p>
-            <ol class="frameworkResults">
-                @foreach (var item in Model.Hits)
-                {
-                    <li class="result">
-                        <div class="column details">
-                            <h2 class="heading-medium">
-                                @Html.ActionLink(item.Name, "Detail", "Provider", new { @id = item.Id }, null)
-                            </h2>
-                            <dl>
-                                <dt class="distance">Distance:</dt>
-                                <dd class="distance">
-                                    <span>@item.Distance miles away</span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt class="distance">Website:</dt>
-                                <dd class="website">
-                                <a href="@item.Website http://www.trainingassociation.co.uk/provider"> @item.Website www.trainingassociation.co.uk/provider</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt class="distance">Employer satisfaction:</dt>
-                                <dd class="distance">
-                                    <span>83%</span>
-                                    @*<span>6 @item.EmployerSatisfaction %</span>*@
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt class="distance">Learner satisfaction:</dt>
-                                <dd class="distance">
-                                    <span>75 %</span>
-                                    @*<span>7 @item.LearnerSatisfaction %</span>*@
-                                </dd>
-                            </dl>
-                        </div>
-                    </li>
-                }
-            </ol>
-
+            @{
+                Html.RenderPartial("_ProviderInformation");
+            }
         </div>
 
         <div class="column-third">
-
-            <div class="related-container">
-                <aside class="related" id="related">
-                    <div class="inner group related-subsection">
-
-                        <h2 id="parent-subsection">Help</h2>
-
-                        <ul class="link-list">
-                            <li>
-                                <a href="help_standards.html">What is a standard</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                    <div class="inner group">
-                        <a class="return-to-top" href="#content">Return to top ↑</a>
-                    </div>
-                </aside>
-            </div>
-
         </div>
     </div>
 </main>

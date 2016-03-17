@@ -229,6 +229,7 @@
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="Models\ProviderLocationSearchCriteria.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Models\StandardSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
@@ -272,6 +273,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\_ProviderInformation.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ProviderInformation.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
@@ -360,7 +366,6 @@
     <Content Include="Content\src\styles\partials\_headings.scss" />
     <Content Include="Content\src\styles\partials\_phases.scss" />
     <Content Include="Content\src\styles\partials\_related.scss" />
-    <Content Include="Content\src\styles\partials\_results.scss" />
     <Content Include="Content\src\styles\screen.scss" />
     <Content Include="Content\src\styles\_elements.scss" />
     <Content Include="Content\src\styles\_govuk-elements.scss" />
@@ -369,6 +374,8 @@
     <Content Include="Content\src\styles\_fonts.scss" />
     <Content Include="Content\README.md" />
     <Content Include="Content\src\styles\custom-elements\_data-list.scss" />
+    <Content Include="Content\src\styles\custom-elements\_address.scss" />
+    <Content Include="Content\src\styles\custom-elements\_results.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
@@ -424,6 +431,10 @@
     <Content Include="Views\Standard\_BlankFieldErrorMessage.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_ProviderInformation.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ProviderInformation.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
   </ItemGroup>

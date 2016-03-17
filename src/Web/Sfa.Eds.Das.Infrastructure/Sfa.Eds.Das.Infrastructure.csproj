@@ -90,10 +90,13 @@
     <Compile Include="Elasticsearch\ElasticsearchProvider.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
+    <Compile Include="Elasticsearch\ProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
     <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
+    <Compile Include="Mapping\IProviderMapping.cs" />
+    <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="PostCodeIo\PostCodesIOLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRequestRetryService.cs" />

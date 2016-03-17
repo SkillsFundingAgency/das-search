@@ -9,9 +9,7 @@ namespace Sfa.Eds.Das.Web.UnitTests.ExtensionHelpers
         public static AngleSharp.Dom.Html.IHtmlDocument ToAngleSharp(this HtmlDocument document)
         {
             var html = document?.DocumentNode?.OuterHtml;
-            var ss = new HtmlParser().Parse(html ?? string.Empty);
-
-            return ss;
+            return new HtmlParser().Parse(html ?? string.Empty);
         }
     }
 }
