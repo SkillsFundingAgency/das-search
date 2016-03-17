@@ -1,4 +1,5 @@
 ﻿using Sfa.Eds.Das.Core.Configuration;
+using Sfa.Eds.Das.Infrastructure.Mapping;
 
 namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
 {
@@ -17,12 +18,18 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
 
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
+        private readonly IProviderMapping _providerMapping;
 
-        public ProviderRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
+        public ProviderRepository(
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ILog applicationLogger,
+            IConfigurationSettings applicationSettings,
+            IProviderMapping providerMapping)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
+            _providerMapping = providerMapping;
         }
 
         public Provider GetById(string providerid, string locationId, string standardCode)
@@ -53,26 +60,7 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
                 return null;
             }
 
-            return new Provider
-            {
-                Id = document.Id,
-                Address = document.Address,
-                DeliveryModes = document.DeliveryModes,
-                UkPrn = document.UkPrn,
-                Phone = document.Phone,
-                Email = document.Email,
-                Website = document.Website,
-                LearnerSatisfaction = document.LearnerSatisfaction * 10,
-                EmployerSatisfaction = document.EmployerSatisfaction * 10,
-                StandardInfoUrl = document.StandardInfoUrl,
-                LocationName = document.LocationName,
-                Name = document.Name,
-                ContactUsUrl = document.ContactUsUrl,
-                LocationId = document.LocationId,
-                StandardCode = document.StandardCode,
-                MarketingName = document.MarketingName,
-                Distance = document.Distance
-            };
+            return _providerMapping.MapToProvider(document);
         }
     }
 }
