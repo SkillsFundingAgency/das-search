@@ -22,7 +22,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
         By providerlist = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
         By providersearchbox = By.XPath(".//*[@id='postcode']");
-        By providerlist1 = By.XPath(".//*[@id='results']/div[1]/ol/li/div/h2");
+        By providerlist1 = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
         By postCodeValidation = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/div/label/div/p");
         By SearchProvidermsg = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
         
