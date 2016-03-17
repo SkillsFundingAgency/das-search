@@ -1,6 +1,4 @@
-﻿@using Sfa.Eds.Das.Web.Extensions
-@using Sfa.Eds.Das.Web.ViewModels
-@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
+﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
@@ -44,29 +42,28 @@
             </h2>
         </header>
         <dl class="data-list">
-            @*@GetStandardProperty("Training location", Model.LocationName)*@
             @GetStandardProperty("Training details", @Model.StandardInfoUrl)
             @GetStandardProperty("Phone", Model.Phone)
             @GetStandardProperty("Email", Model.Email)
             @GetStandardProperty("Training options", Model.DeliveryModes)
-            @ShowTrainingLocation()
+            @ShowTrainingLocation("Training location")
         </dl>
     </section>
 </main>
 
 
-@helper ShowTrainingLocation()
+@helper ShowTrainingLocation(string title)
 {
     if (@Model != null)
     {
         if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
         {
-            <dt>Training location</dt>
+            <dt>@title</dt>
             <dd>Training will take place at your location</dd>
         }
         else
         {
-            <dt>Training location</dt>
+            <dt>@title</dt>
             <dd>@Model.LocationName @Model.Address.Address1 @Model.Address.Address2 </dd>
         }
     }
