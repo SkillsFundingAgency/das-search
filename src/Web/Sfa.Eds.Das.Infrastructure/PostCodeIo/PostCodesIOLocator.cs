@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Sfa.Das.ApplicationServices.Exceptions;
 using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.ApplicationServices;
 using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
 {
+    using Sfa.Das.ApplicationServices;
+
     public class PostCodesIOLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;

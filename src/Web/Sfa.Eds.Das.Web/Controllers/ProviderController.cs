@@ -1,15 +1,10 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Eds.Das.Web.Controllers
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.ApplicationServices;
     using Sfa.Eds.Das.Core.Domain.Model;
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;

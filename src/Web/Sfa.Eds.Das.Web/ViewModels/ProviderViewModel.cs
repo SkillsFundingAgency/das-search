@@ -3,6 +3,7 @@
 namespace Sfa.Eds.Das.Web.ViewModels
 {
     using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.Core.Domain.Model;
 
     public class ProviderViewModel
     {

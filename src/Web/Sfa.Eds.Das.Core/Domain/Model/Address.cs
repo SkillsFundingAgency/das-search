@@ -1,4 +1,4 @@
-namespace Sfa.Das.ApplicationServices.Models
+namespace Sfa.Eds.Das.Core.Domain.Model
 {
     public class Address
     {

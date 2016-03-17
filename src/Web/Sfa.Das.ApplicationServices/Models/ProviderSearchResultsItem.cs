@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Sfa.Eds.Das.Core.Domain.Model;
+
     public sealed class ProviderSearchResultsItem
     {
         public string Id { get; set; }
