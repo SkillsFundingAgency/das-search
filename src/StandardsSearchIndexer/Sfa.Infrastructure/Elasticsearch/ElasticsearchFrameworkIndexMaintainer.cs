@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nest;
 using Sfa.Eds.Das.Indexer.ApplicationServices;
-using Sfa.Eds.Das.Indexer.Core.Models;
 using Sfa.Eds.Das.Indexer.Core.Services;
 using Sfa.Infrastructure.Services;
 
 namespace Sfa.Infrastructure.Elasticsearch
 {
+    using NLog;
+
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     public sealed class ElasticsearchFrameworkIndexMaintainer : ElasticsearchIndexMaintainerBase<FrameworkMetaData>
     {
+        private readonly ILog _logger;
+
         public ElasticsearchFrameworkIndexMaintainer(IElasticsearchClientFactory factory, ILog logger)
             : base(factory, logger, "Framework")
         {
+            _logger = logger;
         }
 
         public override void CreateIndex(string indexName)
         {
-            Client.Raw.IndicesCreatePost(indexName, GenerateMapping());
-            //Client.CreateIndex(indexName, c => c.AddMapping<FrameworkMetaData>(m => m.MapFromAttributes()));
+            _logger.Warn("CreateIndex in ElasticsearchFrameworkIndexMaintainer should not be used");
         }
 
         public override bool IndexContainsDocuments(string indexName)
@@ -58,7 +60,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 {
                     Title = CreateFrameworkTitle(frameworkMetaData.IssuingAuthorityTitle, frameworkMetaData.PathwayName),
                     FrameworkCode = frameworkMetaData.FworkCode,
-                    FrameworkName = frameworkMetaData.IssuingAuthorityTitle,
+                    FrameworkName = frameworkMetaData.NASTitle,
                     PathwayCode = frameworkMetaData.PwayCode,
                     PathwayName = frameworkMetaData.PathwayName
                 };
@@ -82,35 +84,5 @@ namespace Sfa.Infrastructure.Elasticsearch
 
             return $"{framworkname}: {pathwayName}";
         }
-
-        // Move to generator class if using thi way.
-
-        private string GenerateMapping()
-        {
-            var mapping = new
-            {
-                framework = new
-                {
-                    properties = new
-                    {
-                        fworkCode = new
-                        {
-                            type = "int",
-                        },
-                        progType = new
-                        {
-                            type = "string"
-                        },
-                        PwayCode = new
-                        {
-                            type = "int"
-                        }
-                    }
-                }
-            };
-            return ToJson(mapping);
-        }
-
-        private static readonly Func<dynamic, string> ToJson = d => Newtonsoft.Json.JsonConvert.SerializeObject(d);
     }
 }

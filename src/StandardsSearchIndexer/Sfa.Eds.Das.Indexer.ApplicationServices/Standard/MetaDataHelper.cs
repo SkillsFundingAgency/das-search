@@ -4,10 +4,9 @@
     using Core.Services;
     using Newtonsoft.Json;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
 
     public class MetaDataHelper : IMetaDataHelper
     {
@@ -48,5 +47,42 @@
         {
             _metaDataWriter.GenerateStandardMetadataFiles();
         }
+
+        // Frameworks
+        public List<FrameworkMetaData> GetAllFrameworkMetaData()
+        {
+            // ToDo: Missing implementation -> Get data from LARS
+            return new List<FrameworkMetaData>
+                       {
+                           new FrameworkMetaData
+                               {
+                                   FworkCode = "403",
+                                   ProgType = "0",
+                                   PwayCode = "2",
+                                   PathwayName = "Baking Industry Skills",
+                                   NASTitle = "Food and Drink",
+                                   IssuingAuthorityTitle = "Food and Drink - Advanced Level Apprenticeship"
+                               },
+                           new FrameworkMetaData
+                               {
+                                   FworkCode = "403",
+                                   ProgType = "3",
+                                   PwayCode = "7",
+                                   PathwayName = "Brewing Industry Skills",
+                                   NASTitle = "Food and Drink",
+                                   IssuingAuthorityTitle = "Food and Drink - Intermediate Level Apprenticeship"
+                               },
+                           new FrameworkMetaData
+                               {
+                                   FworkCode = "423",
+                                   ProgType = "2",
+                                   PwayCode = "4",
+                                   PathwayName = "Footwear",
+                                   NASTitle = "Fashion and Textiles",
+                                   IssuingAuthorityTitle = "Fashion and Textiles - Advanced Level Apprenticeship"
+                               }
+                       };
+        }
+
     }
 }

@@ -5,7 +5,6 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     using Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
     using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
 
     public class IndexerJob : IIndexerJob
     {
@@ -18,7 +17,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public void Run()
         {
-            var tasks = new List<Task> { _controlQueueConsumer.CheckMessage<MetaDataItem>(), _controlQueueConsumer.CheckMessage<Provider>(), _controlQueueConsumer.CheckMessage<FrameworkMetaData>()};
+            var tasks = new List<Task> { _controlQueueConsumer.CheckMessage<MetaDataItem>(), _controlQueueConsumer.CheckMessage<Provider>()};
 
             Task.WaitAll(tasks.ToArray());
         }

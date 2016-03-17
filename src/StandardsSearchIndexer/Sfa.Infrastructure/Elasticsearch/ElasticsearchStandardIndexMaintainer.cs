@@ -19,7 +19,9 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public override void CreateIndex(string indexName)
         {
-            Client.CreateIndex(indexName, c => c.AddMapping<StandardDocument>(m => m.MapFromAttributes()));
+            Client.CreateIndex(indexName, c => c
+                .AddMapping<StandardDocument>(m => m.MapFromAttributes())
+                .AddMapping<FrameworkDocument>(m => m.MapFromAttributes()));
         }
 
         public override async Task IndexEntries(string indexName, ICollection<MetaDataItem> entries)
@@ -42,7 +44,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public override bool IndexContainsDocuments(string indexName)
         {
-            var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
+            var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;
 
             return a.Any();
         }
