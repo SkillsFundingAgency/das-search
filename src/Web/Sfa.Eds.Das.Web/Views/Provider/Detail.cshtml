@@ -1,8 +1,105 @@
 ﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Provider - " + @Model.Name;
+}
+<main id="content">
+
+    <div class="grid-row">
+
+        <div class="column-two-thirds">
+            <div class="hgroup">
+                <h1 class="heading-xlarge">
+                    <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
+                    @Model.Name
+                </h1>
+                
+            </div>
+        </div>
+
+        <div class="column-third">
+            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            {
+                <div class="related-container">
+                    <aside class="related">
+                        <h2 class="heading-medium">Provider quality assassment</h2>
+                        <h3>Learner satisfaction: @Model.LearnerSatisfaction %</h3>
+                        <h3>Employer satisfaction: @Model.EmployerSatisfaction %</h3>
+                    </aside>
+                </div>
+            }
+        </div>
+    </div>
+
+    <section>
+        <header>
+            <h2 class="heading-large">
+                @Model.StandardNameWithLevel
+            </h2>
+        </header>
+        <dl class="data-list">
+            @GetStandardProperty("Training details", @Model.StandardInfoUrl)
+            @GetStandardProperty("Phone", Model.Phone)
+            @GetStandardProperty("Email", Model.Email)
+            @GetStandardProperty("Training options", Model.DeliveryModes)
+            @ShowTrainingLocation("Training location")
+        </dl>
+    </section>
+</main>
+
+
+@helper ShowTrainingLocation(string title)
+{
+    if (@Model != null)
+    {
+        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+        {
+            <dt>@title</dt>
+            <dd>Training will take place at your location</dd>
+        }
+        else
+        {
+            <dt>@title</dt>
+            <dd>@Model.LocationName @Model.Address.Address1 @Model.Address.Address2 </dd>
+        }
+    }
 }
 
-<h2>Detail</h2>
 
+@helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd>@Html.Raw(item)</dd>
+    }
+}
+
+@helper GetStandardProperty(string title, List<string> items, bool hideIfEmpty = false)
+{
+    if (items != null)
+    {
+        <dt>@title</dt>
+        <dd>
+            <ul>
+                @foreach (var item in items)
+                {
+                    switch (item)
+                    {
+                        case "100PercentEmployer":
+                            <li>@Html.Raw("at your location")</li>
+                            break;
+                        case "BlockRelease":
+                            <li>@Html.Raw("block release")</li>
+                            break;
+                        case "DayRelease":
+                            <li>@Html.Raw("day release")</li>
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            </ul>
+        </dd>
+    }
+}

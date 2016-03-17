@@ -49,30 +49,22 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <dt");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 
 #line 76 "..\..\Views\Standard\SearchResults.cshtml"
-    WriteTo(__razor_helper_writer, title);
+WriteTo(__razor_helper_writer, title);
 
 
 #line default
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "                <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, "            <dd>");
 
 
 #line 77 "..\..\Views\Standard\SearchResults.cshtml"
-        WriteTo(__razor_helper_writer, item);
+WriteTo(__razor_helper_writer, item);
 
 
 #line default
@@ -81,7 +73,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 77 "..\..\Views\Standard\SearchResults.cshtml"
-              WriteTo(__razor_helper_writer, unit);
+WriteTo(__razor_helper_writer, unit);
 
 
 #line default
@@ -167,83 +159,80 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </p>\r\n            <ol");
-
-WriteLiteral(" class=\"frameworkResults\"");
-
-WriteLiteral(">\r\n");
+WriteLiteral("\r\n            </p>\r\n");
 
             
-            #line 25 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 24 "..\..\Views\Standard\SearchResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 25 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 24 "..\..\Views\Standard\SearchResults.cshtml"
                  foreach (var item in Model.Results)
                 {
 
             
             #line default
             #line hidden
-WriteLiteral("                    <li");
+WriteLiteral("                    <article");
 
 WriteLiteral(" class=\"result\"");
 
-WriteLiteral(">\r\n                        <div");
+WriteLiteral(">\r\n                        <header>\r\n                            <h2");
 
-WriteLiteral(" class=\"column details\"");
-
-WriteLiteral(">\r\n                            <h2");
-
-WriteLiteral(" class=\"heading-medium\"");
+WriteLiteral(" class=\"result-title\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                                ");
 
             
-            #line 30 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 29 "..\..\Views\Standard\SearchResults.cshtml"
                            Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                            </h2>\r\n                            ");
+WriteLiteral("\r\n                            </h2>\r\n                        </header>\r\n         " +
+"                   ");
 
-WriteLiteral("\r\n");
+WriteLiteral("\r\n                            <dl");
 
-WriteLiteral("                            ");
+WriteLiteral(" class=\"result-data-list\"");
 
-            
-            #line 38 "..\..\Views\Standard\SearchResults.cshtml"
-                       Write(GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString()));
+WriteLiteral(">\r\n");
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                            ");
+WriteLiteral("                                ");
 
             
             #line 39 "..\..\Views\Standard\SearchResults.cshtml"
-                       Write(GetStandardDetailItem("Typical length:", item.TypicalLengthMessage));
+                           Write(GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString()));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                        </div>\r\n                    </li>\r\n");
+WriteLiteral("\r\n");
+
+WriteLiteral("                                ");
 
             
-            #line 42 "..\..\Views\Standard\SearchResults.cshtml"
+            #line 40 "..\..\Views\Standard\SearchResults.cshtml"
+                           Write(GetStandardDetailItem("Typical length:", item.TypicalLengthMessage));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            </dl>\r\n                    </article>\r\n");
+
+            
+            #line 43 "..\..\Views\Standard\SearchResults.cshtml"
                 }
 
             
             #line default
             #line hidden
-WriteLiteral("            </ol>\r\n\r\n        </div>\r\n\r\n        <div");
+WriteLiteral("\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 

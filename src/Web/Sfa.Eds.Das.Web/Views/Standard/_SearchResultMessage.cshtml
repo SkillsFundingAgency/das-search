@@ -1,7 +1,5 @@
 ﻿@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
-
 <div>
-
     @if (Model.HasError)
     {
         @RenderErrorMessage()
@@ -23,7 +21,6 @@
         @RenderMessage()
     }
 </div>
-
 @helper  RenderErrorMessage()
 {
     <h2 class="heading-large">
@@ -33,17 +30,15 @@
         There was a problem performing a search. Try again later.
     </p>
 }
-
 @helper RenderZeroResult()
 {
     <h2 class="heading-large">
         Apprenticeship standards
     </h2>
     <p>
-        There are no standards matching your search for '@Model.SearchTerm'
+        There are no standards matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
-
 @helper  RenderAllResult()
 {
     <h2 class="heading-large">
@@ -53,17 +48,15 @@
         All apprenticeship standards.
     </p>
 }
-
 @helper  RenderMessageOneResult()
 {
     <h2 class="heading-large">
         Apprenticeship standards
     </h2>
     <p>
-        There is @Model.TotalResults standard matching your search for '@Model.SearchTerm'.
+        There is <b>@Model.TotalResults</b> standard matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
-
 
 @helper  RenderMessage()
 {
@@ -71,7 +64,6 @@
         Apprenticeship standards
     </h2>
     <p>
-        There are @Model.TotalResults standards matching your search for '@Model.SearchTerm'.
+        There are <b>@Model.TotalResults</b> standards matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
-

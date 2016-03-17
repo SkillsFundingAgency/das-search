@@ -55,30 +55,22 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <dt");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 
 #line 97 "..\..\Views\Standard\Detail.cshtml"
-    WriteTo(__razor_helper_writer, title);
+WriteTo(__razor_helper_writer, title);
 
 
 #line default
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "            <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, "            <dd>");
 
 
 #line 98 "..\..\Views\Standard\Detail.cshtml"
-    WriteTo(__razor_helper_writer, item);
+WriteTo(__razor_helper_writer, item);
 
 
 #line default
@@ -87,7 +79,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 98 "..\..\Views\Standard\Detail.cshtml"
-          WriteTo(__razor_helper_writer, unit);
+WriteTo(__razor_helper_writer, unit);
 
 
 #line default
@@ -178,14 +170,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4596), Tuple.Create("\"", 4610)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4560), Tuple.Create("\"", 4574)
 
 #line 119 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4603), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 4567), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4603), false)
+, 4567), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");

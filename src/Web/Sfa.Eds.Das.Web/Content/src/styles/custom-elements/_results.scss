@@ -1,0 +1,17 @@
+﻿.result {
+    border-bottom: 1px solid $border-colour;
+    padding-bottom: $gutter-two-thirds;
+    margin-bottom: $gutter-two-thirds;
+}
+
+.result-title {
+    @extend .heading-medium;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.result-data-list {
+    @include data-list(40, true, true);
+
+    .address { max-width: none; }
+}

@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Eds.Das.Web.ViewModels
+﻿namespace Sfa.Eds.Das.Core.Domain.Model
 {
-    using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Domain.Model;
+    using System.Collections.Generic;
 
-    public class ProviderViewModel
+    public sealed class Provider
     {
         public string Id { get; set; }
 
@@ -40,7 +37,5 @@ namespace Sfa.Eds.Das.Web.ViewModels
         public double EmployerSatisfaction { get; set; }
 
         public double LearnerSatisfaction { get; set; }
-
-        public string StandardNameWithLevel { get; set; }
     }
 }

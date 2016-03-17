@@ -21,26 +21,26 @@
                     Html.RenderPartial("_SearchResultMessage");
                 }
             </p>
-            <ol class="frameworkResults">
                 @foreach (var item in Model.Results)
                 {
-                    <li class="result">
-                        <div class="column details">
-                            <h2 class="heading-medium">
+                    <article class="result">
+                        <header>
+                            <h2 class="result-title">
                                 @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
                             </h2>
+                        </header>
                             @*<dl>
                                 <dt class="endLevel">Level</dt>
                                 <dd class="endLevel">
                                     <span>@item.NotionalEndLevel</span>
                                 </dd>
                             </dl>*@
-                            @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
-                            @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
-                        </div>
-                    </li>
+                            <dl class="result-data-list">
+                                @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
+                                @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
+                            </dl>
+                    </article>
                 }
-            </ol>
 
         </div>
 
@@ -73,7 +73,7 @@
 {
     if (!string.IsNullOrEmpty(item))
     {
-            <dt class="minLength">@title</dt>
-                <dd class="minLength">@item @unit</dd>
+            <dt>@title</dt>
+            <dd>@item @unit</dd>
     }
 }
