@@ -5,10 +5,6 @@
 }
 <main id="content">
 
-    @*<p class="small-btm-margin">
-        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
-    </p>*@
-
     <div class="grid-row">
 
         <div class="column-two-thirds">
@@ -70,16 +66,6 @@
 }
 
 
-@helper GetStandardDetailItem(string title, string item, string unit = "")
-{
-    if (!string.IsNullOrEmpty(item))
-    {
-        <dt>@title</dt>
-        <dd>@item @unit</dd>
-    }
-}
-
-
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
@@ -115,20 +101,5 @@
                 }
             </ul>
         </dd>
-    }
-}
-
-@helper GetDocumentItem(string pdfUrl, string title)
-{
-    if (!string.IsNullOrEmpty(title))
-    {
-        <li>
-            <a href="@pdfUrl">
-                @title
-            </a>
-            <p>
-                PDF, 268KB, 2 pages
-            </p>
-        </li>
     }
 }
