@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D6916AC5-37E3-46D5-AB05-2F32E6EF5D0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Resources", "Sfa.Eds.Das.Resources\Sfa.Eds.Das.Resources.csproj", "{88F7CFD8-69A0-49A9-83F5-D729DEF4AFCA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
