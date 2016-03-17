@@ -35,5 +35,25 @@
 
             GetPartial(html, "p").Should().BeEmpty();
         }
+
+        [Test]
+        public void ShouldShowEquivalentLevel()
+        {
+            var detail = new BlankFieldErrorMessage();
+            var model = new StandardViewModel
+            {
+                NotionalEndLevel = 6,
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, "dl dt dd");
+            var b = GetPartial(html, "dl dt dd");
+            var c = GetPartial(html, "dl dt dd");
+            var d = GetPartial(html, "dl dt dd");
+            var e = GetPartial(html, "dl dt dd");
+
+            GetPartial(html, "dl dt dd").Should().BeEmpty();
+        }
     }
 }
