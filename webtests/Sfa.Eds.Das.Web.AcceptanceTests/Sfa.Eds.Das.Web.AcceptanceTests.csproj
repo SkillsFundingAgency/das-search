@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\ProviderDetailPage.cs" />
     <Compile Include="Pages\ProviderResultPage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Pages\StandardDetailsPage.cs" />
@@ -113,6 +114,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewTypicalLength.feature</DependentUpon>
     </Compile>
+    <Compile Include="Test\Features\Sprint6\ProviderDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint6\Providerlistdetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Providerlistdetails.feature</DependentUpon>
+    </Compile>
     <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +158,14 @@
     <None Include="Test\Features\Sprint5\ViewTypicalLength.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ViewTypicalLength.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint6\ProviderDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProviderDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint6\Providerlistdetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Providerlistdetails.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

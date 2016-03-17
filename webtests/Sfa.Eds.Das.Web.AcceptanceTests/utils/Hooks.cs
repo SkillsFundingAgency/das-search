@@ -45,6 +45,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         static string saucelabsAccountKey = ConfigurationManager.AppSettings["sauce_labs_account_key"];
         static String browserStackKey = ConfigurationManager.AppSettings["browserstack_key"];
         static String browserStacUser = ConfigurationManager.AppSettings["browserstack_user"];
+        static String mDevice= ConfigurationManager.AppSettings["mobile_device"];
 
 
         //public static CustomRemoteDriver driver { get; private set; }
@@ -90,13 +91,29 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             else if (host == "browserstack")
             {
                 DesiredCapabilities desiredCap = new DesiredCapabilities();
-                desiredCap.SetCapability("platform", "android");// these values will be moved to app config.
-                desiredCap.SetCapability("browserName", "Android");
-                desiredCap.SetCapability("device", "Samsung Galaxy Tab 4 10.1");
-                desiredCap.SetCapability("browserVersion", "4.4");
                 desiredCap.SetCapability("browserstack.key", browserStackKey);
                 desiredCap.SetCapability("browserstack.user", browserStacUser);
                 desiredCap.SetCapability("browserstack.debug", "true");
+
+                switch (mDevice)
+                {
+                    case "Iphone":
+                        desiredCap.SetCapability("platform", "MAC");// these values will be moved to app config.
+                        desiredCap.SetCapability("browserName", "iPhone");
+                        desiredCap.SetCapability("device", "iPhone 6S Plus");
+                        desiredCap.SetCapability("browserVersion", "8");
+                        break;
+
+                    case "Samsung":
+                        desiredCap.SetCapability("platform", "Android");// these values will be moved to app config.
+                        desiredCap.SetCapability("browserName", "Android");
+                        desiredCap.SetCapability("device", "Google Nexus 5");
+                        desiredCap.SetCapability("browserVersion", "5.0");
+                        break;
+                }
+
+                
+               
                 driver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), desiredCap);
                 FeatureContext.Current["driver"] = driver;
 
