@@ -20,21 +20,18 @@
 
         private IProviderRepository _providerRepository;
 
-        private readonly ILookupLocations _postcodeLookup;
         private readonly IStandardRepository _standardRepository;
 
         public ProviderController(IProviderSearchService providerSearchService, 
             ILog logger, 
             IMappingService mappingService, 
             IProviderRepository providerRepository, 
-            ILookupLocations postcodeLookup,
             IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
             _providerRepository = providerRepository;
-            _postcodeLookup = postcodeLookup;
             _standardRepository = standardRepository;
         }
 

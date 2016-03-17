@@ -34,7 +34,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
             mockMappingService.Setup(x => x.Map<ProviderSearchResults, ProviderSearchResultViewModel>(It.IsAny<ProviderSearchResults>())).Returns(stubViewModel);
 
-            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, null, null, mockStandardRepository.Object);
+            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, null, mockStandardRepository.Object);
 
             var result = await controller.SearchResults(searchCriteria);
 
@@ -50,7 +50,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
         {
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123 };
 
-            var controller = new ProviderController(null, null, null, null, null, null);
+            var controller = new ProviderController(null, null, null, null, null);
 
             var result = await controller.SearchResults(searchCriteria);
 
