@@ -43,7 +43,6 @@
             var settings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
 
             var maintanSearchIndex = ioc.GetInstance<IMaintainSearchIndexes<MetaDataItem>>();
-            var maintanSearchIndexFrameworks = ioc.GetInstance<IMaintainSearchIndexes<FrameworkMetaData>>();
 
             var moqMetaDataHelper = new Mock<IMetaDataHelper>();
             moqMetaDataHelper.Setup(m => m.UpdateMetadataRepository());
@@ -52,7 +51,7 @@
 
             var moqLog = new Mock<ILog>();
 
-            _indexerService = new StandardIndexer(settings, maintanSearchIndex, maintanSearchIndexFrameworks, moqMetaDataHelper.Object, moqLog.Object);
+            _indexerService = new StandardIndexer(settings, maintanSearchIndex, moqMetaDataHelper.Object, moqLog.Object);
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -126,7 +125,7 @@
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-            
+
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
             _indexerService.CreateIndex(indexName);

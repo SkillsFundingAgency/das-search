@@ -14,8 +14,8 @@ namespace Sfa.Infrastructure.Elasticsearch
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, ILog log)
-            : base(factory, log, "Provider")
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, ILog log)
+            : base(factory, elasticsearchMapper, log, "Provider")
         {
             _indexDefinitionGenerator = indexDefinitionGenerator;
         }
@@ -25,14 +25,15 @@ namespace Sfa.Infrastructure.Elasticsearch
             Client.Raw.IndicesCreatePost(indexName, _indexDefinitionGenerator.Generate());
         }
 
-        public override async Task IndexEntries(string indexName, ICollection<Provider> providers)
+        public override async Task IndexEntries<T>(string indexName, ICollection<T> indexEntries)
         {
             var documentCount = 0;
 
-            foreach (var provider in providers)
+            foreach (var entrie in indexEntries)
             {
                 try
                 {
+                    var provider = entrie as Provider;
                     foreach (var standard in provider.Standards)
                     {
                         foreach (var location in standard.DeliveryLocations)

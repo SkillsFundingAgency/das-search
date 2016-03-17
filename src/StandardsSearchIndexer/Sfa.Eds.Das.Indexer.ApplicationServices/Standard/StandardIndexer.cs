@@ -17,20 +17,17 @@
     {
         private readonly IIndexSettings<MetaDataItem> _settings;
         private readonly IMaintainSearchIndexes<MetaDataItem> _searchIndexMaintainer;
-        private readonly IMaintainSearchIndexes<FrameworkMetaData> _searchIndexMaintainerFrameworks;
         private readonly IMetaDataHelper _metaDataHelper;
         private readonly ILog _log;
 
         public StandardIndexer(
             IIndexSettings<MetaDataItem> settings,
             IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer,
-            IMaintainSearchIndexes<FrameworkMetaData> searchIndexMaintainerFrameworks,
             IMetaDataHelper metaDataHelper,
             ILog log)
         {
             _settings = settings;
             _searchIndexMaintainer = searchIndexMaintainer;
-            _searchIndexMaintainerFrameworks = searchIndexMaintainerFrameworks;
             _metaDataHelper = metaDataHelper;
             _log = log;
         }
@@ -89,7 +86,7 @@
             {
                 _log.Debug("Indexing " + entries.Count + " standards");
 
-                await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexEntries<MetaDataItem>(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -104,7 +101,7 @@
             {
                 _log.Debug("Indexing " + entries.Count + " frameworks");
 
-                await _searchIndexMaintainerFrameworks.IndexEntries(indexName, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexEntries<FrameworkMetaData>(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

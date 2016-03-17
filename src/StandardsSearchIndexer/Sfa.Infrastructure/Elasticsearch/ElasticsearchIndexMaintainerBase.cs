@@ -10,21 +10,26 @@ using Sfa.Infrastructure.Services;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices
 {
+    using Sfa.Infrastructure.Elasticsearch;
+
     public abstract class ElasticsearchIndexMaintainerBase<T> : IMaintainSearchIndexes<T>
         where T : class, IIndexEntry
     {
         private readonly string _typeOfIndex;
 
-        public ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, ILog log, string typeOfIndex)
+        public ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
         {
             Client = factory.GetElasticClient();
             Log = log;
+            ElasticsearchMapper = elasticsearchMapper;
             _typeOfIndex = typeOfIndex;
         }
 
         protected IElasticClient Client { get; }
 
         protected ILog Log { get; }
+
+        protected IElasticsearchMapper ElasticsearchMapper { get; }
 
         public virtual bool AliasExists(string aliasName)
         {
@@ -71,7 +76,8 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices
             return a.Any();
         }
 
-        public abstract Task IndexEntries(string indexName, System.Collections.Generic.ICollection<T> entries);
+        public abstract Task IndexEntries<T>(string indexName, ICollection<T> entries)
+            where T : IIndexEntry;
 
         public virtual bool IndexExists(string indexName)
         {

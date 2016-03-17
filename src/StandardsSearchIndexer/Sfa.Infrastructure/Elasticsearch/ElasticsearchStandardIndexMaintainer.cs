@@ -10,10 +10,14 @@ using Sfa.Infrastructure.Services;
 
 namespace Sfa.Infrastructure.Elasticsearch
 {
+    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
+
+    // ToDo: Rename to more generic Apprenticeship*
     public sealed class ElasticsearchStandardIndexMaintainer : ElasticsearchIndexMaintainerBase<MetaDataItem>
     {
-        public ElasticsearchStandardIndexMaintainer(IElasticsearchClientFactory factory, ILog logger)
-            : base(factory, logger, "Standard")
+        public ElasticsearchStandardIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
+            : base(factory, elasticsearchMapper, logger, "Standard")
         {
         }
 
@@ -24,13 +28,32 @@ namespace Sfa.Infrastructure.Elasticsearch
                 .AddMapping<FrameworkDocument>(m => m.MapFromAttributes()));
         }
 
-        public override async Task IndexEntries(string indexName, ICollection<MetaDataItem> entries)
+        public override async Task IndexEntries<T>(string indexName, ICollection<T> entries)
+        {
+            if (typeof(T) == typeof(MetaDataItem))
+            {
+                await IndexMetaDataDocuments(indexName, entries).ConfigureAwait(true);
+            }
+            else if (typeof(T) == typeof(FrameworkMetaData))
+            {
+                await IndexFrameworkDocuments(indexName, entries).ConfigureAwait(true);
+            }
+        }
+
+        public override bool IndexContainsDocuments(string indexName)
+        {
+            var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;
+            return a.Any();
+        }
+
+         private async Task IndexMetaDataDocuments<T>(string indexName, ICollection<T> entries)
+            where T : IIndexEntry
         {
             foreach (var standard in entries)
             {
                 try
                 {
-                    var doc = CreateDocument(standard);
+                    var doc = ElasticsearchMapper.CreateStandardDocument(standard as MetaDataItem);
 
                     await Client.IndexAsync(doc, i => i.Index(indexName).Id(doc.StandardId));
                 }
@@ -42,42 +65,22 @@ namespace Sfa.Infrastructure.Elasticsearch
             }
         }
 
-        public override bool IndexContainsDocuments(string indexName)
+        private async Task IndexFrameworkDocuments<T>(string indexName, ICollection<T> entries)
+            where T : IIndexEntry
         {
-            var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;
-
-            return a.Any();
-        }
-
-        private StandardDocument CreateDocument(MetaDataItem standard)
-        {
-            try
+            foreach (var standard in entries)
             {
-                var doc = new StandardDocument
+                try
                 {
-                    StandardId = standard.Id,
-                    Title = standard.Title,
-                    JobRoles = standard.JobRoles,
-                    NotionalEndLevel = standard.NotionalEndLevel,
-                    PdfFileName = standard.PdfFileName,
-                    StandardPdf = standard.StandardPdfUrl,
-                    AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
-                    TypicalLength = standard.TypicalLength,
-                    IntroductoryText = standard.IntroductoryText,
-                    OverviewOfRole = standard.OverviewOfRole,
-                    EntryRequirements = standard.EntryRequirements,
-                    WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
-                    Qualifications = standard.Qualifications,
-                    ProfessionalRegistration = standard.ProfessionalRegistration,
-                };
+                    var doc = ElasticsearchMapper.CreateFrameworkDocument(standard as FrameworkMetaData);
 
-                return doc;
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error creating document", ex);
-
-                throw;
+                    await Client.IndexAsync(doc, i => i.Index(indexName));
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Error indexing framework", ex);
+                    throw;
+                }
             }
         }
     }

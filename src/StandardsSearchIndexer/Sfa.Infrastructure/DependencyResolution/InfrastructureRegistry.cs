@@ -1,22 +1,19 @@
 namespace Sfa.Infrastructure.DependencyResolution
 {
     using CourseDirectory;
+    using Deds.Settings;
+    using Eds.Das.Indexer.ApplicationServices.Http;
+    using Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Eds.Das.Indexer.ApplicationServices.MetaData;
+    using Eds.Das.Indexer.ApplicationServices.Provider;
     using Eds.Das.Indexer.ApplicationServices.Services;
+    using Eds.Das.Indexer.Core;
     using Eds.Das.Indexer.Core.Models;
     using Eds.Das.Indexer.Core.Models.Provider;
+    using Eds.Das.Indexer.Core.Services;
     using Elasticsearch;
-
-    using Sfa.Deds.Settings;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
-    using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Services;
-    using Sfa.Infrastructure.Settings;
-
+    using Services;
+    using Settings;
     using StructureMap;
 
     public class InfrastructureRegistry : Registry
@@ -37,8 +34,8 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
             For<IMaintainSearchIndexes<MetaDataItem>>().Use<ElasticsearchStandardIndexMaintainer>();
             For<IMaintainSearchIndexes<Provider>>().Use<ElasticsearchProviderIndexMaintainer>();
-            For<IMaintainSearchIndexes<FrameworkMetaData>>().Use<ElasticsearchFrameworkIndexMaintainer>();
             For<IGenerateIndexDefinitions<Provider>>().Use<ProviderIndexGenerator>();
+            For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
         }
     }
 }

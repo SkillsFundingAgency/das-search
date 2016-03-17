@@ -10,6 +10,8 @@ using Sfa.Eds.Das.Indexer.Core.Services;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
+    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+
     public sealed class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
@@ -58,7 +60,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             {
                 _log.Debug("Indexing " + entries.Count + " providers");
 
-                await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexEntries<Provider>(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

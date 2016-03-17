@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
+    using Sfa.Eds.Das.Indexer.Common.Models;
+
     public interface IMaintainSearchIndexes<T>
     {
-        Task IndexEntries(string indexName, ICollection<T> entries);
+        Task IndexEntries<T>(string indexName, ICollection<T> entries)
+            where T : IIndexEntry;
 
         bool IndexExists(string indexName);
 
