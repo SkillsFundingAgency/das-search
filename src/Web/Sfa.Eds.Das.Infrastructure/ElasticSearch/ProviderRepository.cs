@@ -49,6 +49,7 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
             if (results.ConnectionStatus.HttpStatusCode != 200)
             {
                 _applicationLogger.Error($"Trying to get standard with provider id {providerid}, standard code {standardCode} and location id {locationId}");
+
                 throw new ApplicationException($"Failed query standard with provider {providerid}");
             }
 
