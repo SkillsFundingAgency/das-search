@@ -368,8 +368,6 @@
     <Content Include="Content\package.json" />
     <Content Include="Content\src\styles\_fonts.scss" />
     <Content Include="Content\README.md" />
-    <Content Include="Gruntfile.js" />
-    <Content Include="package.json" />
     <Content Include="Content\src\styles\custom-elements\_data-list.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />

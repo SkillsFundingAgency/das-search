@@ -4,9 +4,8 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
     using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
     using StructureMap;
 
@@ -15,10 +14,8 @@
         public ProviderRegistry()
         {
             For<IIndexSettings<Provider>>().Use<ProviderIndexSettings>();
-            For<IGetProviders>().Use<StubCourseDirectoryClient>();
-            For<IGenericIndexerHelper<Provider>>().Use<ProviderHelper>();
+            For<IGenericIndexerHelper<Provider>>().Use<ProviderIndexer>();
             For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
-            For<IIndexMaintenanceService>().Use<IndexMaintenanceService>();
         }
     }
 }

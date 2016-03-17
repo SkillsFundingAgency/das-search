@@ -2,9 +2,9 @@
 {
     public class ProviderResultItemViewModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        public string ProviderName { get; set; }
+        public string Name { get; set; }
 
         public string PostCode { get; set; }
 

@@ -71,11 +71,11 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
             {
                 Id = hit.Source.Id,
-                ProviderName = hit.Source.ProviderName,
+                Name = hit.Source.Name,
                 PostCode = hit.Source.PostCode,
                 UkPrn = hit.Source.UkPrn,
-                VenueName = hit.Source.VenueName,
-                StandardsId = hit.Source.StandardsId,
+                LocationName = hit.Source.LocationName,
+                Standardscode = hit.Source.Standardscode,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).ToList();
 
@@ -90,7 +90,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private string CreateRawQuery(string standardId, Coordinate location)
         {
             return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ""standardsId"": """,
+                @"{""filtered"": { ""query"": { ""match"": { ""standardCode"": """,
                 standardId,
                 @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
                 location.Lon,

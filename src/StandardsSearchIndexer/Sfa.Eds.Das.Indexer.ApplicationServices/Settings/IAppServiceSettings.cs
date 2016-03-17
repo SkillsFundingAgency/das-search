@@ -31,6 +31,5 @@
         string ConnectionString { get; }
 
         string QueueName(Type type);
-
     }
 }

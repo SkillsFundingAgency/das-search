@@ -8,8 +8,8 @@
             Json = json;
         }
 
-        public string FileName { get; set; }
+        public string FileName { get; }
 
-        public string Json { get; set; }
+        public string Json { get; }
     }
 }

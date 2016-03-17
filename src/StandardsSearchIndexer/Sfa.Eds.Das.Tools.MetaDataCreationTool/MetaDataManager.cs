@@ -6,9 +6,9 @@
 
     using Newtonsoft.Json;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
@@ -30,11 +30,6 @@
             _logger = logger;
         }
 
-        /// <summary>
-        ///     Will
-        ///     - download zip file from course directory and unzip standard.csv file.
-        ///     - Creates metadata json for new standards and then push them to git repository
-        /// </summary>
         public void GenerateStandardMetadataFiles()
         {
             var currentStandards = _larsDataService.GetListOfCurrentStandards();
@@ -62,9 +57,7 @@
             foreach (var standard in currentStandards.Where(m => !currentMetaDataIds.Contains($"{m.Id}")))
             {
                 var json = JsonConvert.SerializeObject(standard, Formatting.Indented);
-                var standardTitle = Path.GetInvalidFileNameChars()
-                    .Aggregate(standard.Title, (current, c) => current.Replace(c, '_'))
-                    .Replace(" ", string.Empty);
+                var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standard.Title, (current, c) => current.Replace(c, '_')).Replace(" ", string.Empty);
                 var gitFilePath = $"{_appServiceSettings.VstsGitFolderPath}/{standard.Id}-{standardTitle}.json";
                 missingStandards.Add(new FileContents(gitFilePath, json));
             }

@@ -1,21 +1,17 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.Core;
+using Sfa.Eds.Das.Indexer.Core.Services;
+
+namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
 {
-    using System;
-    using System.Diagnostics;
-    using System.Threading;
-    using System.Threading.Tasks;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
-
     public class IndexerService<T> : IIndexerService<T>
     {
         private readonly IGenericIndexerHelper<T> _indexerHelper;
 
-        private readonly ILog Log;
+        private readonly ILog _log;
 
         private readonly IIndexSettings<T> _indexSettings;
 
@@ -25,47 +21,47 @@
         {
             _indexSettings = indexSettings;
             _indexerHelper = indexerHelper;
-            Log = log;
+            _log = log;
             _name = typeof(T).Name;
         }
 
         public async Task CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            await Task.Run(
-                async () =>
-                    {
-                        Log.Info($"Creating new scheduled {_name} index at " + DateTime.Now);
-                        try
-                        {
-                            var indexProperlyCreated = _indexerHelper.CreateIndex(scheduledRefreshDateTime);
-                            if (!indexProperlyCreated)
-                            {
-                                Log.Error($"{_name} index not created properly, exiting...");
-                                return;
-                            }
+            _log.Info($"Creating new scheduled {_name} index at " + DateTime.Now);
 
-                            Log.Info($"Indexing {_name}s...");
-                            var entries = _indexerHelper.LoadEntries();
-                            await _indexerHelper.IndexEntries(scheduledRefreshDateTime, entries);
+            try
+            {
+                var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _indexSettings.IndexesAlias);
+                var indexProperlyCreated = _indexerHelper.CreateIndex(newIndexName);
 
-                            PauseWhileIndexingIsBeingRun();
+                if (!indexProperlyCreated)
+                {
+                    _log.Error($"{_name} index not created properly, exiting...");
+                    return;
+                }
 
-                            if (_indexerHelper.IsIndexCorrectlyCreated(scheduledRefreshDateTime))
-                            {
-                                _indexerHelper.SwapIndexes(scheduledRefreshDateTime);
+                _log.Info($"Indexing {_name}s...");
+                
+                await _indexerHelper.IndexEntries(newIndexName).ConfigureAwait(false);
 
-                                Log.Debug("Swap completed...");
+                PauseWhileIndexingIsBeingRun();
 
-                                _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
+                if (_indexerHelper.IsIndexCorrectlyCreated(newIndexName))
+                {
+                    _indexerHelper.SwapIndexes(newIndexName);
 
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(ex);
-                            throw;
-                        }
-                    }).ConfigureAwait(false);
+                    _log.Debug("Swap completed...");
+
+                    _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
+                }
+
+                _log.Info($"{_name} Indexing complete.");
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
         }
 
         private void PauseWhileIndexingIsBeingRun()

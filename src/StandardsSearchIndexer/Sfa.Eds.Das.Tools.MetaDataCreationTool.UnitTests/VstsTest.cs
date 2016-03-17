@@ -2,15 +2,12 @@
 {
     using System.Diagnostics;
     using System.Linq;
-
+    using Indexer.Core.Services;
     using Moq;
 
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
 
