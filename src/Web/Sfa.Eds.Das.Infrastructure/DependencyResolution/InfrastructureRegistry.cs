@@ -1,5 +1,4 @@
 ﻿using Sfa.Das.ApplicationServices;
-using Sfa.Eds.Das.ApplicationServices;
 using Sfa.Eds.Das.Core.Configuration;
 using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;

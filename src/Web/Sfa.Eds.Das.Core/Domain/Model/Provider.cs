@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using Sfa.Das.ApplicationServices.Models;
-
     public sealed class Provider
     {
         public string Id { get; set; }

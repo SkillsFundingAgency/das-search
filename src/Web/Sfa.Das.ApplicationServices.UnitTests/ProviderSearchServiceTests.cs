@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.Core.Domain.Model;
-using Sfa.Eds.Das.Core.Domain.Services;
-using Sfa.Eds.Das.ApplicationServices;
-using Sfa.Das.ApplicationServices.Exceptions;
-using Sfa.Eds.Das.Core.Logging;
-
-namespace Sfa.Das.ApplicationServices.Tests
+﻿namespace Sfa.Das.ApplicationServices.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Sfa.Das.ApplicationServices.Exceptions;
+    using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.Core.Domain.Model;
+    using Sfa.Eds.Das.Core.Domain.Services;
+    using Sfa.Eds.Das.Core.Logging;
+
     [TestFixture]
     public class ProviderSearchServiceTests
     {

@@ -1,10 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.ApplicationServices;
 using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
 using Sfa.Das.ApplicationServices.Exceptions;
-using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Das.ApplicationServices
 {

@@ -9,6 +9,7 @@
     using RazorGenerator.Testing;
 
     using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.Core.Domain.Model;
 
     using ViewModels;
     using Web.Views.Provider;
