@@ -1,36 +1,45 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Helpers
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Services
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using ApplicationServices.Services;
-    using Core.Services;
+
     using Moq;
+
     using NUnit.Framework;
+
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     [TestFixture]
     public sealed class ProviderIndexerTests
     {
         private ProviderIndexer _sut;
+
         private Mock<IIndexSettings<Core.Models.Provider.Provider>> _mockSettings;
+
         private Mock<IMaintainSearchIndexes<Core.Models.Provider.Provider>> _mockIndexMaintainer;
+
         private Mock<IGetApprenticeshipProviders> _mockProviderRepository;
+
         private Mock<IGetActiveProviders> _mockActiveProviderClient;
+
+        private Mock<IProviderFeatures> _mockFeatures;
 
         [SetUp]
         public void Setup()
         {
             _mockSettings = new Mock<IIndexSettings<Core.Models.Provider.Provider>>();
+            _mockFeatures = new Mock<IProviderFeatures>();
             _mockIndexMaintainer = new Mock<IMaintainSearchIndexes<Core.Models.Provider.Provider>>();
             _mockProviderRepository = new Mock<IGetApprenticeshipProviders>();
             _mockActiveProviderClient = new Mock<IGetActiveProviders>();
             var mockLogger = Mock.Of<ILog>();
 
-            _sut = new ProviderIndexer(_mockSettings.Object, _mockIndexMaintainer.Object, _mockProviderRepository.Object, _mockActiveProviderClient.Object, mockLogger);
+            _sut = new ProviderIndexer(_mockSettings.Object, _mockFeatures.Object, _mockIndexMaintainer.Object, _mockProviderRepository.Object, _mockActiveProviderClient.Object, mockLogger);
         }
 
         [Test]
@@ -103,7 +112,35 @@
             Assert.That(match3, Is.False);
         }
 
-        private IEnumerable<Core.Models.Provider.Provider> TwoProvidersTask()
+        [Test]
+        public void ShouldFilterProvidersIfTheFeatureIsEnabled()
+        {
+            _mockFeatures.Setup(x => x.FilterInactiveProviders).Returns(true);
+            _mockActiveProviderClient.Setup(x => x.GetActiveProviders()).Returns(new[] { 123 });
+            _mockProviderRepository.Setup(x => x.GetApprenticeshipProvidersAsync()).Returns(TwoProvidersTask());
+
+            var result = _sut.LoadEntries().Result;
+
+            Assert.AreEqual(1, result.Count);
+
+            _mockActiveProviderClient.VerifyAll();
+            _mockProviderRepository.VerifyAll();
+        }
+
+        [Test]
+        public void ShouldntFilterProvidersIfTheFeatureIsDisabled()
+        {
+            _mockFeatures.Setup(x => x.FilterInactiveProviders).Returns(false);
+            _mockProviderRepository.Setup(x => x.GetApprenticeshipProvidersAsync()).Returns(TwoProvidersTask());
+
+            var result = _sut.LoadEntries().Result;
+
+            Assert.AreEqual(2, result.Count);
+
+            _mockProviderRepository.VerifyAll();
+        }
+
+        private async Task<IEnumerable<Core.Models.Provider.Provider>> TwoProvidersTask()
         {
             return TwoProviders();
         }

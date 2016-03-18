@@ -16,6 +16,7 @@
             For<IIndexSettings<Provider>>().Use<ProviderIndexSettings>();
             For<IGenericIndexerHelper<Provider>>().Use<ProviderIndexer>();
             For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
+            For<IProviderFeatures>().Use<ProviderIndexSettings>();
         }
     }
 }

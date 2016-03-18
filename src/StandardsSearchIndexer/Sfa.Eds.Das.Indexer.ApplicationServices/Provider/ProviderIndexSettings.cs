@@ -5,7 +5,7 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
-    public class ProviderIndexSettings : IIndexSettings<Provider>
+    public class ProviderIndexSettings : IIndexSettings<Provider>, IProviderFeatures
     {
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
@@ -26,5 +26,7 @@
         public string QueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
 
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
+
+        public bool FilterInactiveProviders => bool.Parse(ConfigurationManager.AppSettings["Feature.FilterInactiveProviders"] ?? "false");
     }
 }
