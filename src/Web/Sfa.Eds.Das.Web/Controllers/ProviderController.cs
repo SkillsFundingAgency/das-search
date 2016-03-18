@@ -1,17 +1,16 @@
-﻿namespace Sfa.Eds.Das.Web.Controllers
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using Sfa.Das.ApplicationServices;
+using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Domain.Model;
+using Sfa.Eds.Das.Core.Domain.Services;
+using Sfa.Eds.Das.Core.Logging;
+using Sfa.Eds.Das.Web.Models;
+using Sfa.Eds.Das.Web.Services;
+using Sfa.Eds.Das.Web.ViewModels;
+
+namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using Sfa.Das.ApplicationServices;
-    using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Domain.Model;
-    using Sfa.Eds.Das.Core.Domain.Services;
-    using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Web.Models;
-    using Sfa.Eds.Das.Web.Services;
-    using Sfa.Eds.Das.Web.ViewModels;
-
     public sealed class ProviderController : Controller
     {
         private readonly IProviderSearchService _providerSearchService;
@@ -53,7 +52,7 @@
         [HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            var model = this._providerRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
+            var model = _providerRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
 
             if (model == null)
             {
@@ -63,7 +62,7 @@
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = this._mappingService.Map<Provider, ProviderViewModel>(model);
+            var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
 
             var standardData = _standardRepository.GetById(model.StandardCode);
 
