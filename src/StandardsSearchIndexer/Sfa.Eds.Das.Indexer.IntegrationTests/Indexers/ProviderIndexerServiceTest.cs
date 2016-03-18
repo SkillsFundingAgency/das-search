@@ -70,6 +70,7 @@
         }
 
         [Test]
+        [Ignore]
         [Category("Integration")]
         public async Task ShouldCreateScheduledIndexAndMappingForProviders()
         {
