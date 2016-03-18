@@ -31,11 +31,14 @@
 
                 try
                 {
+                    client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
+
                     return client.DownloadString(url);
                 }
                 catch (WebException exception)
                 {
-                    logger.Warn($"Can download string from {url} - Error: {exception.Message}", exception);
+                    logger.Warn($"Cannot download string from {url} - Error: {exception.Message}", exception);
+                    throw;
                 }
 
                 return string.Empty;
