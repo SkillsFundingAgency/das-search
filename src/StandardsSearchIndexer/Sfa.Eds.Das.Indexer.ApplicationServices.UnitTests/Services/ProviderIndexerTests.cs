@@ -17,7 +17,7 @@
     {
         private ProviderIndexer _sut;
         private Mock<IIndexSettings<Core.Models.Provider.Provider>> _mockSettings;
-        private Mock<IMaintainSearchIndexes<Core.Models.Provider.Provider>> _mockIndexMaintainer;
+        private Mock<IMaintanProviderIndex> _mockIndexMaintainer;
         private Mock<IGetApprenticeshipProviders> _mockProviderRepository;
         private Mock<IGetActiveProviders> _mockActiveProviderClient;
 
@@ -25,7 +25,7 @@
         public void Setup()
         {
             _mockSettings = new Mock<IIndexSettings<Core.Models.Provider.Provider>>();
-            _mockIndexMaintainer = new Mock<IMaintainSearchIndexes<Core.Models.Provider.Provider>>();
+            _mockIndexMaintainer = new Mock<IMaintanProviderIndex>();
             _mockProviderRepository = new Mock<IGetApprenticeshipProviders>();
             _mockActiveProviderClient = new Mock<IGetActiveProviders>();
             var mockLogger = Mock.Of<ILog>();

@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Nest;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Core.Services;
-using Sfa.Infrastructure.Services;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
-    using Sfa.Infrastructure.Elasticsearch;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public abstract class ElasticsearchIndexMaintainerBase<T> : IMaintainSearchIndexes<T>
-        where T : class, IIndexEntry
+    using Nest;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Services;
+
+    public abstract class ElasticsearchIndexMaintainerBase : IMaintainSearchIndexes
     {
         private readonly string _typeOfIndex;
 
-        public ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
+        protected ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
         {
             Client = factory.GetElasticClient();
             Log = log;
@@ -69,15 +67,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices
             return result;
         }
 
-        public virtual bool IndexContainsDocuments(string indexName)
+        public virtual bool IndexContainsDocuments<T>(string indexName)
+            where T : class, IIndexEntry
         {
-            var a = Client.Search<T>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
+            var a = Client.Search<T>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;// ToDo: Make method generic
 
             return a.Any();
         }
-
-        public abstract Task IndexEntries<T>(string indexName, ICollection<T> entries)
-            where T : IIndexEntry;
 
         public virtual bool IndexExists(string indexName)
         {

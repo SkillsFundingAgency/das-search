@@ -18,14 +18,14 @@
     {
         private StandardIndexer _sut;
         private Mock<IIndexSettings<MetaDataItem>> _mockSettings;
-        private Mock<IMaintainSearchIndexes<MetaDataItem>> _mockIndexMaintainer;
+        private Mock<IMaintanStandardIndex> _mockIndexMaintainer;
         private Mock<IMetaDataHelper> _mockMetaDataHelper;
 
         [SetUp]
         public void Setup()
         {
             _mockSettings = new Mock<IIndexSettings<MetaDataItem>>();
-            _mockIndexMaintainer = new Mock<IMaintainSearchIndexes<MetaDataItem>>();
+            _mockIndexMaintainer = new Mock<IMaintanStandardIndex>();
             _mockMetaDataHelper = new Mock<IMetaDataHelper>();
             var mockLogger = Mock.Of<ILog>();
 

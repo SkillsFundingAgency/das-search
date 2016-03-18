@@ -16,13 +16,13 @@
         // ToDo: Rename to ApprenticeshipIndexer
     {
         private readonly IIndexSettings<MetaDataItem> _settings;
-        private readonly IMaintainSearchIndexes<MetaDataItem> _searchIndexMaintainer;
+        private readonly IMaintanStandardIndex _searchIndexMaintainer;
         private readonly IMetaDataHelper _metaDataHelper;
         private readonly ILog _log;
 
         public StandardIndexer(
             IIndexSettings<MetaDataItem> settings,
-            IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer,
+            IMaintanStandardIndex searchIndexMaintainer,
             IMetaDataHelper metaDataHelper,
             ILog log)
         {
@@ -56,7 +56,7 @@
 
         public bool IsIndexCorrectlyCreated(string indexName)
         {
-            return _searchIndexMaintainer.IndexContainsDocuments(indexName);
+            return _searchIndexMaintainer.IndexContainsDocuments<MetaDataItem>(indexName);
         }
 
         public void SwapIndexes(string newIndexName)
@@ -86,7 +86,7 @@
             {
                 _log.Debug("Indexing " + entries.Count + " standards");
 
-                await _searchIndexMaintainer.IndexEntries<MetaDataItem>(indexName, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexStandards(indexName, entries);
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@
             {
                 _log.Debug("Indexing " + entries.Count + " frameworks");
 
-                await _searchIndexMaintainer.IndexEntries<FrameworkMetaData>(indexName, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexFrameworks(indexName , entries);
             }
             catch (Exception ex)
             {

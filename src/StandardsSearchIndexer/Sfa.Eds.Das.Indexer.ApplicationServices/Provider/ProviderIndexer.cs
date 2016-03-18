@@ -16,13 +16,13 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
     {
         private readonly IGetActiveProviders _activeProviderClient;
         private readonly IGetApprenticeshipProviders _providerRepository;
-        private readonly IMaintainSearchIndexes<Core.Models.Provider.Provider> _searchIndexMaintainer;
+        private readonly IMaintanProviderIndex _searchIndexMaintainer;
         private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
         private readonly ILog _log;
 
         public ProviderIndexer(
             IIndexSettings<Core.Models.Provider.Provider> settings,
-            IMaintainSearchIndexes<Core.Models.Provider.Provider> searchIndexMaintainer,
+            IMaintanProviderIndex searchIndexMaintainer,
             IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             ILog log)
@@ -60,7 +60,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             {
                 _log.Debug("Indexing " + entries.Count + " providers");
 
-                await _searchIndexMaintainer.IndexEntries<Provider>(indexName, entries).ConfigureAwait(false);
+                await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool IsIndexCorrectlyCreated(string indexName)
         {
-            return _searchIndexMaintainer.IndexContainsDocuments(indexName);
+            return _searchIndexMaintainer.IndexContainsDocuments<Provider>(indexName);
         }
 
         // TODO: LWA - The argusment seems a little strange to this method.

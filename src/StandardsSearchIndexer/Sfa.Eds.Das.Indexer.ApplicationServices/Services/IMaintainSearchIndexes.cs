@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
+    using System;
     using Sfa.Eds.Das.Indexer.Common.Models;
 
-    public interface IMaintainSearchIndexes<T>
+    public interface IMaintainSearchIndexes
     {
-        Task IndexEntries<T>(string indexName, ICollection<T> entries)
-            where T : IIndexEntry;
-
         bool IndexExists(string indexName);
 
         bool DeleteIndex(string indexName);
@@ -19,7 +13,8 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 
         void CreateIndex(string indexName);
 
-        bool IndexContainsDocuments(string indexName);
+        bool IndexContainsDocuments<T>(string indexName)
+            where T : class, IIndexEntry;
 
         void CreateIndexAlias(string aliasName, string indexName);
 

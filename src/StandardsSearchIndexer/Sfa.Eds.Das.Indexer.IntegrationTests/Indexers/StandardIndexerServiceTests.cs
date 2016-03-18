@@ -42,7 +42,7 @@
 
             var settings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
 
-            var maintanSearchIndex = ioc.GetInstance<IMaintainSearchIndexes<MetaDataItem>>();
+            var maintanSearchIndex = ioc.GetInstance<IMaintanStandardIndex>();
 
             var moqMetaDataHelper = new Mock<IMetaDataHelper>();
             moqMetaDataHelper.Setup(m => m.UpdateMetadataRepository());

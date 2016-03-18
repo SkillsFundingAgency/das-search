@@ -10,7 +10,8 @@ using Sfa.Infrastructure.Services;
 
 namespace Sfa.Infrastructure.Elasticsearch
 {
-    public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase<Provider>
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintanProviderIndex
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
 
@@ -25,7 +26,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             Client.Raw.IndicesCreatePost(indexName, _indexDefinitionGenerator.Generate());
         }
 
-        public override async Task IndexEntries<T>(string indexName, ICollection<T> indexEntries)
+        public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)
         {
             var documentCount = 0;
 

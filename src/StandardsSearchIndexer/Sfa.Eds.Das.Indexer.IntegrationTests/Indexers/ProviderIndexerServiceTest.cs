@@ -52,7 +52,7 @@
             _indexerService = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
 
             _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
-            var maintainSearchIndexer = _ioc.GetInstance<IMaintainSearchIndexes<Provider>>();
+            var maintainSearchIndexer = _ioc.GetInstance<IMaintanProviderIndex>();
             var providerRepository = new Mock<IGetApprenticeshipProviders>();
             var activeProviderRepository = new Mock<IGetActiveProviders>();
 
