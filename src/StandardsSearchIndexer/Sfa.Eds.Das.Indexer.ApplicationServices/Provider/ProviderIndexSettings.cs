@@ -28,5 +28,9 @@
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
         public bool FilterInactiveProviders => bool.Parse(ConfigurationManager.AppSettings["Feature.FilterInactiveProviders"] ?? "false");
+        
+        public string StandardProviderDocumentType => ConfigurationManager.AppSettings["StandardProviderDocumentType"];
+
+        public string FrameworkProviderDocumentType => ConfigurationManager.AppSettings["FrameworkProviderDocumentType"];
     }
 }

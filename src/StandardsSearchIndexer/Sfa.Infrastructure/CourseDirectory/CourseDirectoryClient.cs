@@ -49,9 +49,9 @@
                     standard =>
                     new StandardInformation
                         {
-                            StandardCode = standard.StandardCode,
-                            StandardInfoUrl = standard.StandardInfoUrl,
-                            StandardContact = new ContactInformation { Email = standard.Contact.Email, Phone = standard.Contact.Phone, Website = standard.Contact.ContactUsUrl },
+                            Code = standard.StandardCode,
+                            InfoUrl = standard.StandardInfoUrl,
+                            ContactInformation = new ContactInformation { Email = standard.Contact.Email, Phone = standard.Contact.Phone, Website = standard.Contact.ContactUsUrl },
                             MarketingInfo = standard.MarketingInfo,
                             DeliveryLocations = GetDeliveryLocations(standard.Locations, providerLocations)
                         }).ToList();
@@ -64,11 +64,11 @@
                     framework =>
                     new FrameworkInformation
                         {
-                            FrameworkCode = framework.FrameworkCode,
+                            Code = framework.FrameworkCode,
                             Level = framework.Level,
                             PathwayCode = framework.PathwayCode,
-                            FrameworkInfoUrl = framework.FrameworkInfoUrl,
-                            FrameworkContact = new ContactInformation { Email = framework.Contact.Email, Phone = framework.Contact.Phone, Website = framework.Contact.ContactUsUrl },
+                            InfoUrl = framework.FrameworkInfoUrl,
+                            ContactInformation = new ContactInformation { Email = framework.Contact.Email, Phone = framework.Contact.Phone, Website = framework.Contact.ContactUsUrl },
                             MarketingInfo = framework.MarketingInfo,
                             DeliveryLocations = GetDeliveryLocations(framework.Locations, providerLocations)
                         }).ToList();

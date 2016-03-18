@@ -41,7 +41,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces
                 }
 
                 _log.Info($"Indexing {_name}s...");
-                
+
                 await _indexerHelper.IndexEntries(newIndexName).ConfigureAwait(false);
 
                 PauseWhileIndexingIsBeingRun();
