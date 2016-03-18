@@ -30,7 +30,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.XPath("//input[@type='submit']");
         public String title = "Google";
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
-        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/ol/li/div/h2/a");
+        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
         By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
         By typicallength = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/dd[2]");
 
