@@ -125,7 +125,6 @@
   </data>
   <data name="FirstLevel" xml:space="preserve">
     <value>GCSEs at grades D to G</value>
-    <comment>dascx</comment>
   </data>
   <data name="FourthLevel" xml:space="preserve">
     <value>Certificate of higher education</value>

@@ -46,14 +46,14 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     public partial class Detail : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardViewModel>
     {
 
-#line 94 "..\..\Views\Standard\Detail.cshtml"
-public System.Web.WebPages.HelperResult GetStandardLevel(string item)
+#line 93 "..\..\Views\Standard\Detail.cshtml"
+public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string item, string unit = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 95 "..\..\Views\Standard\Detail.cshtml"
+#line 94 "..\..\Views\Standard\Detail.cshtml"
  
     if (!string.IsNullOrEmpty(item))
     {
@@ -64,7 +64,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 
-#line 98 "..\..\Views\Standard\Detail.cshtml"
+#line 97 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -72,10 +72,10 @@ WriteTo(__razor_helper_writer, title);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "            <dd>");
+WriteLiteralTo(__razor_helper_writer, "                <dd>");
 
 
-#line 99 "..\..\Views\Standard\Detail.cshtml"
+#line 98 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -84,7 +84,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 99 "..\..\Views\Standard\Detail.cshtml"
+#line 98 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, unit);
 
 
@@ -93,7 +93,43 @@ WriteTo(__razor_helper_writer, unit);
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
+#line 99 "..\..\Views\Standard\Detail.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
+
 #line 100 "..\..\Views\Standard\Detail.cshtml"
+}
+#line default
+#line hidden
+
+#line 102 "..\..\Views\Standard\Detail.cshtml"
+public System.Web.WebPages.HelperResult GetStandardLevel(string item)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 103 "..\..\Views\Standard\Detail.cshtml"
+ 
+    if (!string.IsNullOrEmpty(item))
+    {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        <dt");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
+
+WriteLiteralTo(__razor_helper_writer, ">Level</dt>\r\n");
+
+
+#line 107 "..\..\Views\Standard\Detail.cshtml"
+        var equivalence = string.Empty;
         switch (int.Parse(@item))
         {
             case 1:
@@ -119,24 +155,24 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
                 break;
             case 8:
                 equivalence = @Resources.EighthLevel;
-            break;
-        default:
-            break;
+                break;
+            default:
+                break;
 
         }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <dd");
+WriteLiteralTo(__razor_helper_writer, "            <dd");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"minLength\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 130 "..\..\Views\Standard\Detail.cshtml"
-WriteTo(__razor_helper_writer, item);
+#line 138 "..\..\Views\Standard\Detail.cshtml"
+    WriteTo(__razor_helper_writer, item);
 
 
 #line default
@@ -144,8 +180,8 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 
 
-#line 130 "..\..\Views\Standard\Detail.cshtml"
-                     WriteTo(__razor_helper_writer, equivalence);
+#line 138 "..\..\Views\Standard\Detail.cshtml"
+                         WriteTo(__razor_helper_writer, equivalence);
 
 
 #line default
@@ -153,8 +189,7 @@ WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 WriteLiteralTo(__razor_helper_writer, ")</dd>\r\n");
 
 
-#line 131 "..\..\Views\Standard\Detail.cshtml"
-
+#line 139 "..\..\Views\Standard\Detail.cshtml"
     }
 
 
@@ -162,19 +197,19 @@ WriteLiteralTo(__razor_helper_writer, ")</dd>\r\n");
 #line hidden
 });
 
-#line 133 "..\..\Views\Standard\Detail.cshtml"
+#line 140 "..\..\Views\Standard\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 136 "..\..\Views\Standard\Detail.cshtml"
+#line 142 "..\..\Views\Standard\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 137 "..\..\Views\Standard\Detail.cshtml"
+#line 143 "..\..\Views\Standard\Detail.cshtml"
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
@@ -186,7 +221,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 141 "..\..\Views\Standard\Detail.cshtml"
+#line 147 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -197,7 +232,7 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 WriteLiteralTo(__razor_helper_writer, "        <dd>");
 
 
-#line 142 "..\..\Views\Standard\Detail.cshtml"
+#line 148 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.Raw(item));
 
 
@@ -206,7 +241,7 @@ WriteTo(__razor_helper_writer, Html.Raw(item));
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 143 "..\..\Views\Standard\Detail.cshtml"
+#line 149 "..\..\Views\Standard\Detail.cshtml"
 
     }
 
@@ -215,19 +250,19 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 145 "..\..\Views\Standard\Detail.cshtml"
+#line 151 "..\..\Views\Standard\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 147 "..\..\Views\Standard\Detail.cshtml"
+#line 153 "..\..\Views\Standard\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 148 "..\..\Views\Standard\Detail.cshtml"
+#line 154 "..\..\Views\Standard\Detail.cshtml"
  
     if (!string.IsNullOrEmpty(title))
     {
@@ -237,14 +272,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5534), Tuple.Create("\"", 5548)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5767), Tuple.Create("\"", 5781)
 
-#line 152 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5541), Tuple.Create<System.Object, System.Int32>(pdfUrl
+#line 158 "..\..\Views\Standard\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5774), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5541), false)
+, 5774), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -252,7 +287,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                    ");
 
 
-#line 153 "..\..\Views\Standard\Detail.cshtml"
+#line 159 "..\..\Views\Standard\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -262,7 +297,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                </a>\r\n             
 "ges\r\n                </p>\r\n            </li>\r\n");
 
 
-#line 159 "..\..\Views\Standard\Detail.cshtml"
+#line 165 "..\..\Views\Standard\Detail.cshtml"
     }
 
 
@@ -270,7 +305,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                </a>\r\n             
 #line hidden
 });
 
-#line 160 "..\..\Views\Standard\Detail.cshtml"
+#line 166 "..\..\Views\Standard\Detail.cshtml"
 }
 #line default
 #line hidden
@@ -653,9 +688,11 @@ WriteLiteral("\r\n                    </ul>\r\n                </div>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("        </section>\r\n\r\n</main>\r\n\r\n\r\n");
+WriteLiteral("        </section>\r\n\r\n</main>\r\n\r\n");
 
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\r\n");
+
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 

@@ -8,7 +8,7 @@
     using Web.Views.Standard;
 
     [TestFixture]
-    public sealed class StandardDetailPageTest : ViewTestBase
+    public sealed class StandardDetailPageTests : ViewTestBase
     {
         [Test]
         public void ShouldShowRequiredFieldWhenErrorIsReceived()

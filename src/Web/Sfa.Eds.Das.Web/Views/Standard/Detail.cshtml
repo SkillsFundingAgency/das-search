@@ -90,13 +90,21 @@
 
 </main>
 
+@helper GetStandardDetailItem(string title, string item, string unit = "")
+{
+    if (!string.IsNullOrEmpty(item))
+    {
+            <dt>@title</dt>
+                <dd>@item @unit</dd>
+    }
+}
 
 @helper GetStandardLevel(string item)
 {
     if (!string.IsNullOrEmpty(item))
     {
-            <dt>@title</dt>
-            <dd>@item @unit</dd>
+        <dt class="minLength">Level</dt>
+        var equivalence = string.Empty;
         switch (int.Parse(@item))
         {
             case 1:
@@ -122,16 +130,14 @@
                 break;
             case 8:
                 equivalence = @Resources.EighthLevel;
-            break;
-        default:
-            break;
+                break;
+            default:
+                break;
 
         }
-        <dd class="minLength">@item (equivalent to @equivalence)</dd>
-
+            <dd class="minLength">@item (equivalent to @equivalence)</dd>
     }
 }
-
 
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
