@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="Extensions\EnumWithDescription.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
