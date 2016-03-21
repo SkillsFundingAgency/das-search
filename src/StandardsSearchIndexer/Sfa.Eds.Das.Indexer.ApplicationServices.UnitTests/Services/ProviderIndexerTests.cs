@@ -140,9 +140,9 @@
             _mockProviderRepository.VerifyAll();
         }
 
-        private async Task<IEnumerable<Core.Models.Provider.Provider>> TwoProvidersTask()
+        private Task<IEnumerable<Core.Models.Provider.Provider>> TwoProvidersTask()
         {
-            return TwoProviders();
+            return Task.FromResult(TwoProviders());
         }
 
         private IEnumerable<Core.Models.Provider.Provider> TwoProviders()

@@ -41,7 +41,7 @@
                 }
 
                 _log.Info($"Indexing {_name}s...");
-                
+
                 await _indexerHelper.IndexEntries(newIndexName).ConfigureAwait(false);
 
                 PauseWhileIndexingIsBeingRun();

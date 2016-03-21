@@ -9,5 +9,9 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
         string ConnectionString { get; }
         string QueueName { get; }
         string PauseTime { get; }
+
+        string StandardProviderDocumentType { get; }
+
+        string FrameworkProviderDocumentType { get; }
     }
 }
