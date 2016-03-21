@@ -60,11 +60,11 @@
             var providerRepository = new Mock<IGetApprenticeshipProviders>();
             var activeProviderRepository = new Mock<IGetActiveProviders>();
             var logger = new Mock<ILog>();
-            
+
             providerRepository.Setup(m => m.GetApprenticeshipProvidersAsync()).ReturnsAsync(GetProvidersTest());
             activeProviderRepository.Setup(m => m.GetActiveProviders()).Returns(new List<int> { 10002387 });
 
-            _indexerService = new ProviderIndexer(_providerSettings, maintainSearchIndexer, providerRepository.Object, activeProviderRepository.Object, logger.Object);
+            _indexerService = new ProviderIndexer(_providerSettings, _features.Object, maintainSearchIndexer, providerRepository.Object, activeProviderRepository.Object, logger.Object);
 
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -73,7 +73,6 @@
         }
 
         [Test]
-        [Ignore]
         [Category("Integration")]
         [Ignore]
         public async Task ShouldCreateScheduledIndexAndMappingForProviders()
