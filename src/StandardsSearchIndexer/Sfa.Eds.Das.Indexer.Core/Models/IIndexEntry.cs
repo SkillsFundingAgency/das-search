@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Indexer.Common.Models
+﻿namespace Sfa.Eds.Das.Indexer.Core.Models
 {
     public interface IIndexEntry
     {

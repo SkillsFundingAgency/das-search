@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Nest;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-using Sfa.Eds.Das.Indexer.Common.Models;
-using Sfa.Eds.Das.Indexer.Core.Services;
-using Sfa.Infrastructure.Services;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Nest;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Services;
+
     public abstract class ElasticsearchIndexMaintainerBase<T> : IMaintainSearchIndexes<T>
         where T : class, IIndexEntry
     {
@@ -85,8 +87,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(
-                    new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = aliasName, Index = existingIndexOnAlias } });
+                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = aliasName, Index = existingIndexOnAlias } });
             }
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = aliasName, Index = newIndexName } });

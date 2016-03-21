@@ -4,24 +4,23 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Services;
-    using Services;
-    using Settings;
-    using Sfa.Eds.Das.Indexer.Core;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     public sealed class StandardIndexer : IGenericIndexerHelper<MetaDataItem>
     {
         private readonly IMetaDataHelper _metaDataHelper;
+
         private readonly IMaintainSearchIndexes<MetaDataItem> _searchIndexMaintainer;
+
         private readonly IIndexSettings<MetaDataItem> _settings;
+
         private readonly ILog _log;
 
-        public StandardIndexer(
-            IIndexSettings<MetaDataItem> settings,
-            IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer,
-            IMetaDataHelper metaDataHelper,
-            ILog log)
+        public StandardIndexer(IIndexSettings<MetaDataItem> settings, IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer, IMetaDataHelper metaDataHelper, ILog log)
         {
             _settings = settings;
             _metaDataHelper = metaDataHelper;

@@ -1,8 +1,9 @@
-﻿namespace Sfa.Eds.Das.Indexer.Common.Models
+﻿namespace Sfa.Eds.Das.Indexer.Core.Models
 {
     public class Coordinate
     {
         public double Latitude { get; set; }
+
         public double Longitude { get; set; }
     }
 }

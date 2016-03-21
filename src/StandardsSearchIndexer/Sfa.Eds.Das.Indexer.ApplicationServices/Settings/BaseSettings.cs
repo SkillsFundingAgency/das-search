@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Indexer.Common.Settings
+namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
 {
     using System;
     using System.Configuration;

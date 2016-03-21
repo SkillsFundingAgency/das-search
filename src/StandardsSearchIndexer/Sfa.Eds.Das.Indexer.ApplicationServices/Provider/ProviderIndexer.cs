@@ -54,9 +54,7 @@
 
             _searchIndexMaintainer.CreateIndex(indexName);
 
-            var exists = _searchIndexMaintainer.IndexExists(indexName);
-
-            return exists;
+            return _searchIndexMaintainer.IndexExists(indexName);
         }
 
         public async Task IndexEntries(string indexName)
