@@ -117,7 +117,16 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " </dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, " ");
+
+
+#line 68 "..\..\Views\Provider\Detail.cshtml"
+                                                      WriteTo(__razor_helper_writer, Model.Address.Postcode);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
 #line 69 "..\..\Views\Provider\Detail.cshtml"
