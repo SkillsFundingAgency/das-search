@@ -19,11 +19,12 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Common.Models;
     using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Indexer.IntegrationTests.Services;
+    using Sfa.Infrastructure.Elasticsearch;
     using Sfa.Infrastructure.Services;
 
     using StructureMap;

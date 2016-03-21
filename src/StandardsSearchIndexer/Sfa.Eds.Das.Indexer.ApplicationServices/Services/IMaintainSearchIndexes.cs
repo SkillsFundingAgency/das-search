@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IMaintainSearchIndexes<T>
     {
         Task IndexEntries(string indexName, ICollection<T> entries);

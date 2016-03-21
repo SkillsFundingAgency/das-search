@@ -1,15 +1,16 @@
-﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Helpers
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using ApplicationServices.Services;
-    using Core.Models;
-    using Core.Services;
+
     using Moq;
+
     using NUnit.Framework;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Standard;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
+    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     [TestFixture]
     public sealed class StandardIndexerTests

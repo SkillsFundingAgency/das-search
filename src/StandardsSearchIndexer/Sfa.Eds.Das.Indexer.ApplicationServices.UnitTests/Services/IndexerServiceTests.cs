@@ -1,14 +1,14 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using ApplicationServices.Services.Interfaces;
-    using Core;
+
     using Core.Services;
     using Moq;
     using NUnit.Framework;
     using Settings;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
 
     [TestFixture]
     public class IndexerServiceTests

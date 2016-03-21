@@ -1,14 +1,14 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Helpers
 {
     using System.Collections.Generic;
-    using Core.Services;
+
     using Moq;
 
     using NUnit.Framework;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     [TestFixture]
     public class MetaDataHelperTests

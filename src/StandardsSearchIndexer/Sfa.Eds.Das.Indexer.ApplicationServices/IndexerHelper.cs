@@ -1,8 +1,8 @@
-﻿using System;
-using System.Globalization;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices
 {
+    using System;
+    using System.Globalization;
+
     internal static class IndexerHelper
     {
         public static string GetIndexNameAndDateExtension(DateTime dateTime, string indexName, string dateFormat = "yyyy-MM-dd-HH")

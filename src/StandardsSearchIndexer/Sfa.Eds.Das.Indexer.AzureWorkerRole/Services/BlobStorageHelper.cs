@@ -8,7 +8,7 @@
     using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
 
     public class BlobStorageHelper : IBlobStorageHelper

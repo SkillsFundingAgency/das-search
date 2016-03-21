@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Sfa.Eds.Das.Indexer.ApplicationServices;
-using Sfa.Eds.Das.Indexer.Core;
-using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-using Sfa.Eds.Das.Indexer.Core.Services;
-using Sfa.Infrastructure.Services;
-
-namespace Sfa.Infrastructure.Elasticsearch
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Sfa.Eds.Das.Indexer.Core.Extensions;
+    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Services;
+
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase<Provider>
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
@@ -74,57 +74,58 @@ namespace Sfa.Infrastructure.Elasticsearch
             }
 
             var rawProvider = string.Concat(
-            @"{ ""ukprn"": """,
-            provider.Ukprn,
-            @""", ""id"": """,
-            $"{provider.Ukprn}{standard.StandardCode}{location.DeliveryLocation.Id}",
-            @""", ""name"": """,
-            provider.Name,
-            @""", ""standardCode"": ",
-            standard.StandardCode,
-            @", ""locationId"": ",
-            location.DeliveryLocation.Id,
-            @", ""locationName"": """,
-            location.DeliveryLocation.Name,
-            @""", ""marketingInfo"": """,
-            EscapeSpecialCharacters(standard.MarketingInfo),
-            @""", ""phone"": """,
-            standard.StandardContact.Phone,
-            @""", ""email"": """,
-            standard.StandardContact.Email,
-            @""", ""contactUsUrl"": """,
-            standard.StandardContact.Website,
-            @""", ""standardInfoUrl"": """,
-            standard.StandardInfoUrl,
-            @""", ""learnerSatisfaction"": ",
-            provider.LearnerSatisfaction ?? 0,
-            @", ""employerSatisfaction"": ",
-            provider.EmployerSatisfaction ?? 0,
-            @", ""deliveryModes"": [",
-            deliveryModes,
-            @"], ""website"": """,
-            location.DeliveryLocation.Contact.Website,
-            @""", ""address"": {""address1"":""",
-            EscapeSpecialCharacters(location.DeliveryLocation.Address.Address1),
-            @""", ""address2"": """,
-            EscapeSpecialCharacters(location.DeliveryLocation.Address.Address2),
-            @""", ""town"": """,
-            EscapeSpecialCharacters(location.DeliveryLocation.Address.Town),
-            @""", ""county"": """,
-            EscapeSpecialCharacters(location.DeliveryLocation.Address.County),
-            @""", ""postcode"": """,
-            location.DeliveryLocation.Address.Postcode,
-            @"""}, ""locationPoint"": [",
-            location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0, // TODO: LWA This needs to be handled better
-            ", ",
-            location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
-            @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
-            location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
-            ", ",
-            location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
-            @"], ""radius"": """,
-            location.Radius,
-            @"mi"" }}");
+                @"{ ""ukprn"": """,
+                provider.Ukprn,
+                @""", ""id"": """,
+                $"{provider.Ukprn}{standard.StandardCode}{location.DeliveryLocation.Id}",
+                @""", ""name"": """,
+                provider.Name,
+                @""", ""standardCode"": ",
+                standard.StandardCode,
+                @", ""locationId"": ",
+                location.DeliveryLocation.Id,
+                @", ""locationName"": """,
+                location.DeliveryLocation.Name,
+                @""", ""marketingInfo"": """,
+                EscapeSpecialCharacters(standard.MarketingInfo),
+                @""", ""phone"": """,
+                standard.StandardContact.Phone,
+                @""", ""email"": """,
+                standard.StandardContact.Email,
+                @""", ""contactUsUrl"": """,
+                standard.StandardContact.Website,
+                @""", ""standardInfoUrl"": """,
+                standard.StandardInfoUrl,
+                @""", ""learnerSatisfaction"": ",
+                provider.LearnerSatisfaction ?? 0,
+                @", ""employerSatisfaction"": ",
+                provider.EmployerSatisfaction ?? 0,
+                @", ""deliveryModes"": [",
+                deliveryModes,
+                @"], ""website"": """,
+                location.DeliveryLocation.Contact.Website,
+                @""", ""address"": {""address1"":""",
+                EscapeSpecialCharacters(location.DeliveryLocation.Address.Address1),
+                @""", ""address2"": """,
+                EscapeSpecialCharacters(location.DeliveryLocation.Address.Address2),
+                @""", ""town"": """,
+                EscapeSpecialCharacters(location.DeliveryLocation.Address.Town),
+                @""", ""county"": """,
+                EscapeSpecialCharacters(location.DeliveryLocation.Address.County),
+                @""", ""postcode"": """,
+                location.DeliveryLocation.Address.Postcode,
+                @"""}, ""locationPoint"": [",
+                location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
+                // TODO: LWA This needs to be handled better
+                ", ",
+                location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
+                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
+                location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
+                ", ",
+                location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
+                @"], ""radius"": """,
+                location.Radius,
+                @"mi"" }}");
 
             return rawProvider;
         }
@@ -136,9 +137,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 return null;
             }
 
-            return marketingInfo.Replace(Environment.NewLine, "\\r\\n")
-                .Replace("\n", "\\n")
-                .Replace("\"", "\\\"");
+            return marketingInfo.Replace(Environment.NewLine, "\\r\\n").Replace("\n", "\\n").Replace("\"", "\\\"");
         }
     }
 }

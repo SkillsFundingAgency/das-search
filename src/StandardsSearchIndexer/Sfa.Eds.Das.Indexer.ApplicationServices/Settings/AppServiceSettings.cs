@@ -4,8 +4,6 @@
     using System.Configuration;
     using System.IO;
 
-    using Sfa.Eds.Das.Indexer.Common.Settings;
-
     public class AppServiceSettings : BaseSettings, IAppServiceSettings
     {
         public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
