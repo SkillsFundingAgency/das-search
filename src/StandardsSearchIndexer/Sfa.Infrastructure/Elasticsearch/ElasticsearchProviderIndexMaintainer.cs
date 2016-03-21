@@ -9,15 +9,19 @@
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase<Provider>
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, ILog log)
+        private readonly IIndexSettings<Provider> _settings;
+
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<Provider> settings, ILog log)
             : base(factory, log, "Provider")
         {
             _indexDefinitionGenerator = indexDefinitionGenerator;
+            _settings = settings;
         }
 
         public override void CreateIndex(string indexName)
@@ -33,23 +37,8 @@
             {
                 try
                 {
-                    foreach (var standard in provider.Standards)
-                    {
-                        foreach (var location in standard.DeliveryLocations)
-                        {
-                            var query = CreateListRawFormat(provider, standard, location);
-                            var response = await Client.Raw.IndexAsync(indexName, "provider", query);
-
-                            if (!response.Success)
-                            {
-                                Log.Warn($"Unable to index provider document - UKPRN:{provider.Ukprn}, StandardCode:{standard.StandardCode}, LocationId:{location.DeliveryLocation.Id}");
-                            }
-                            else
-                            {
-                                documentCount++;
-                            }
-                        }
-                    }
+                    documentCount += await IndexAll(indexName, provider.Standards, provider).ConfigureAwait(false);
+                    documentCount += await IndexAll(indexName, provider.Frameworks, provider).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +50,72 @@
             Log.Debug($"Indexed a total of {documentCount} Provider documents");
         }
 
-        private string CreateListRawFormat(Provider provider, StandardInformation standard, DeliveryInformation location)
+        private async Task<int> IndexAll(string indexName, IEnumerable<IApprenticeshipInformation> apprenticeships, Provider provider)
+        {
+            var documentCount = 0;
+            foreach (var apprenticeship in apprenticeships)
+            {
+                documentCount += await Index(indexName, apprenticeship, provider).ConfigureAwait(false);
+            }
+
+            return documentCount;
+        }
+
+        private async Task<int> Index(string indexName, IApprenticeshipInformation apprenticeship, Provider provider)
+        {
+            int documentCount = 0;
+            foreach (var location in apprenticeship.DeliveryLocations)
+            {
+                string apprenticeshipJson;
+                string typeName;
+                if (apprenticeship is StandardInformation)
+                {
+                    apprenticeshipJson = CreateStandardJson(apprenticeship as StandardInformation);
+                    typeName = _settings.StandardProviderDocumentType;
+                }
+                else
+                {
+                    apprenticeshipJson = CreateFrameworkJson(apprenticeship as FrameworkInformation);
+                    typeName = _settings.FrameworkProviderDocumentType;
+                }
+
+                var query = CreateRawFormat(provider, apprenticeship, location, apprenticeshipJson);
+                var response = await Client.Raw.IndexAsync(indexName, typeName, query);
+
+                if (!response.Success)
+                {
+                    Log.Warn($"Unable to index provider document - UKPRN:{provider.Ukprn}, Code:{apprenticeship.Code}, LocationId:{location.DeliveryLocation.Id}");
+                }
+                else
+                {
+                    documentCount++;
+                }
+            }
+
+            return documentCount;
+        }
+
+        private string CreateStandardJson(StandardInformation standard)
+        {
+            var raw = string.Concat(
+                @""", ""standardCode"": ",
+                standard.Code);
+            return raw;
+        }
+
+        private string CreateFrameworkJson(FrameworkInformation framework)
+        {
+            var raw = string.Concat(
+                @""", ""frameworkCode"": ",
+                framework.Code,
+                @", ""pathwayCode"": ",
+                framework.PathwayCode,
+                @", ""level"": ",
+                framework.Level);
+            return raw;
+        }
+
+        private string CreateRawFormat(Provider provider, IApprenticeshipInformation apprenticeship, DeliveryInformation location, string typeSpecificJson)
         {
             var i = 0;
             var deliveryModes = new StringBuilder();
@@ -74,58 +128,56 @@
             }
 
             var rawProvider = string.Concat(
-                @"{ ""ukprn"": """,
-                provider.Ukprn,
-                @""", ""id"": """,
-                $"{provider.Ukprn}{standard.StandardCode}{location.DeliveryLocation.Id}",
-                @""", ""name"": """,
-                provider.Name,
-                @""", ""standardCode"": ",
-                standard.StandardCode,
-                @", ""locationId"": ",
-                location.DeliveryLocation.Id,
-                @", ""locationName"": """,
-                location.DeliveryLocation.Name,
-                @""", ""marketingInfo"": """,
-                EscapeSpecialCharacters(standard.MarketingInfo),
-                @""", ""phone"": """,
-                standard.StandardContact.Phone,
-                @""", ""email"": """,
-                standard.StandardContact.Email,
-                @""", ""contactUsUrl"": """,
-                standard.StandardContact.Website,
-                @""", ""standardInfoUrl"": """,
-                standard.StandardInfoUrl,
-                @""", ""learnerSatisfaction"": ",
-                provider.LearnerSatisfaction ?? 0,
-                @", ""employerSatisfaction"": ",
-                provider.EmployerSatisfaction ?? 0,
-                @", ""deliveryModes"": [",
-                deliveryModes,
-                @"], ""website"": """,
-                location.DeliveryLocation.Contact.Website,
-                @""", ""address"": {""address1"":""",
-                EscapeSpecialCharacters(location.DeliveryLocation.Address.Address1),
-                @""", ""address2"": """,
-                EscapeSpecialCharacters(location.DeliveryLocation.Address.Address2),
-                @""", ""town"": """,
-                EscapeSpecialCharacters(location.DeliveryLocation.Address.Town),
-                @""", ""county"": """,
-                EscapeSpecialCharacters(location.DeliveryLocation.Address.County),
-                @""", ""postcode"": """,
-                location.DeliveryLocation.Address.Postcode,
-                @"""}, ""locationPoint"": [",
-                location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
-                // TODO: LWA This needs to be handled better
-                ", ",
-                location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
-                @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
-                location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
-                ", ",
-                location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
-                @"], ""radius"": """,
-                location.Radius,
-                @"mi"" }}");
+            @"{ ""ukprn"": """,
+            provider.Ukprn,
+            @""", ""name"": """,
+            provider.Name,
+            @""", ""id"": """,
+            $"{provider.Ukprn}{apprenticeship.Code}{location.DeliveryLocation.Id}",
+            typeSpecificJson,
+            @", ""locationId"": ",
+            location.DeliveryLocation.Id,
+            @", ""locationName"": """,
+            location.DeliveryLocation.Name,
+            @""", ""marketingInfo"": """,
+            EscapeSpecialCharacters(apprenticeship.MarketingInfo),
+            @""", ""phone"": """,
+            apprenticeship.ContactInformation.Phone,
+            @""", ""email"": """,
+            apprenticeship.ContactInformation.Email,
+            @""", ""contactUsUrl"": """,
+            apprenticeship.ContactInformation.Website,
+            @""", ""standardInfoUrl"": """,
+            apprenticeship.InfoUrl,
+            @""", ""learnerSatisfaction"": ",
+            provider.LearnerSatisfaction ?? 0,
+            @", ""employerSatisfaction"": ",
+            provider.EmployerSatisfaction ?? 0,
+            @", ""deliveryModes"": [",
+            deliveryModes,
+            @"], ""website"": """,
+            location.DeliveryLocation.Contact.Website,
+            @""", ""address"": {""address1"":""",
+            EscapeSpecialCharacters(location.DeliveryLocation.Address.Address1),
+            @""", ""address2"": """,
+            EscapeSpecialCharacters(location.DeliveryLocation.Address.Address2),
+            @""", ""town"": """,
+            EscapeSpecialCharacters(location.DeliveryLocation.Address.Town),
+            @""", ""county"": """,
+            EscapeSpecialCharacters(location.DeliveryLocation.Address.County),
+            @""", ""postcode"": """,
+            location.DeliveryLocation.Address.Postcode,
+            @"""}, ""locationPoint"": [",
+            location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0, // TODO: LWA This needs to be handled better
+            ", ",
+            location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
+            @"],""location"": { ""type"": ""circle"", ""coordinates"": [",
+            location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0,
+            ", ",
+            location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
+            @"], ""radius"": """,
+            location.Radius,
+            @"mi"" }}");
 
             return rawProvider;
         }

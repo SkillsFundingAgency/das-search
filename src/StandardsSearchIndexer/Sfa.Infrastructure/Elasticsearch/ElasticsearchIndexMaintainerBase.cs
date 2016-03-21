@@ -68,9 +68,7 @@
 
         public virtual bool IndexContainsDocuments(string indexName)
         {
-            var a = Client.Search<T>(s => s.Index(indexName).From(0).Size(1000).MatchAll()).Documents;
-
-            return a.Any();
+            return Client.Search<dynamic>(s => s.Index(indexName).AllTypes().From(0).Size(1000).MatchAll()).Documents.Any();
         }
 
         public abstract Task IndexEntries(string indexName, System.Collections.Generic.ICollection<T> entries);

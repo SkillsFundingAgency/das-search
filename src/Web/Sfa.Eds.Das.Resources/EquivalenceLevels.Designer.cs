@@ -61,7 +61,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doctorate.
+        ///   Looks up a localized string similar to bachelor’s or master’s degree.
         /// </summary>
         public static string EighthLevel {
             get {
@@ -70,7 +70,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Foundation degree.
+        ///   Looks up a localized string similar to foundation degree and above.
         /// </summary>
         public static string FifthLevel {
             get {
@@ -88,7 +88,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate of higher education.
+        ///   Looks up a localized string similar to foundation degree and above.
         /// </summary>
         public static string FourthLevel {
             get {
@@ -97,7 +97,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GCSEs at grades A* to C.
+        ///   Looks up a localized string similar to 5 GCSE passes at grades A* to C.
         /// </summary>
         public static string SecondLevel {
             get {
@@ -106,7 +106,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Master&apos;s degree.
+        ///   Looks up a localized string similar to bachelor’s or master’s degree.
         /// </summary>
         public static string SeventhLevel {
             get {
@@ -115,7 +115,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Honours degree.
+        ///   Looks up a localized string similar to foundation degree and above.
         /// </summary>
         public static string SixthLevel {
             get {
@@ -124,7 +124,7 @@ namespace Sfa.Eds.Das.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A levels at grades A to E.
+        ///   Looks up a localized string similar to 2 A level passes.
         /// </summary>
         public static string ThirdLevel {
             get {

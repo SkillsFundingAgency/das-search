@@ -10,7 +10,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 {
                     ""mappings"": 
                     {
-                        ""provider"": 
+                        ""standardprovider"": 
                         { 
                             ""properties"": 
                             {
@@ -80,7 +80,104 @@ namespace Sfa.Infrastructure.Elasticsearch
                                 },
                                 ""address"": 
                                 {
-                                    ""type"": ""nested"",
+                                    ""type"": ""object"",
+                                    ""properties"": 
+                                    {
+                                        ""address1"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""address2"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },  
+                                        ""town"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""county"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        },
+                                        ""postcode"":       
+                                        { 
+                                            ""type"": ""string""  
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        ""frameworkprovider"": 
+                        { 
+                            ""properties"": 
+                            {
+                                ""ukprn"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""id"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""name"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""frameworkCode"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""locationId"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""locationName"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""marketingInfo"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardInfoUrl"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""deliveryModes"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""website"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""phone"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""email"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""contactUsUrl"":
+                                {
+                                    ""type"": ""string""
+                                },
+                                ""standardsId"":
+                                {
+                                    ""type"": ""long""
+                                },
+                                ""locationPoint"":
+                                {
+                                    ""type"": ""geo_point""
+                                },
+                                ""location"": 
+                                {
+                                    ""type"": ""geo_shape""
+                                },
+                                ""address"": 
+                                {
+                                    ""type"": ""object"",
                                     ""properties"": 
                                     {
                                         ""address1"":       
