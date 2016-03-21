@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Web.Controllers
+﻿using Sfa.Eds.Das.Web.Extensions;
+
+namespace Sfa.Eds.Das.Web.Controllers
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -68,6 +70,8 @@
             var standardData = _standardRepository.GetById(model.StandardCode);
 
             viewModel.StandardNameWithLevel = string.Concat(standardData.Title, " level ", standardData.NotionalEndLevel);
+
+            viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("SearchResults", "Provider"));
 
             return View(viewModel);
         }
