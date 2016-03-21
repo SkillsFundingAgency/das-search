@@ -15,10 +15,9 @@
             where T : class, new()
         {
             var cc = new CsvContext();
-
             using (var stream = result.GenerateStreamFromString())
+            using (var reader = new StreamReader(stream))
             {
-                var reader = new StreamReader(stream);
                 return cc.Read<T>(reader).ToList();
             }
         }
