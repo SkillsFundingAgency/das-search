@@ -13,24 +13,24 @@
 
     public sealed class CourseDirectoryClient : IGetApprenticeshipProviders
     {
-        private readonly ICourseDirectoryProviderDataService _courseDirectoryProvider;
-
         private readonly IInfrastructureSettings _settings;
 
         public CourseDirectoryClient(IInfrastructureSettings settings)
         {
-            _courseDirectoryProvider = new CourseDirectoryProviderDataService();
             _settings = settings;
         }
 
         public async Task<IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
         {
-            _courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
-            var responseAsync = await _courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
+            using (var courseDirectoryProvider = new CourseDirectoryProviderDataService())
+            {
+                courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
+                var responseAsync = await courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
 
-            var providers = responseAsync.Body;
+                var providers = responseAsync.Body;
 
-            return providers.Select(MapFromProviderToProviderImport).ToList();
+                return providers.Select(MapFromProviderToProviderImport).ToList();
+            }
         }
 
         private static Coordinate SetGeoPoint(Models.Location matchingLocation)
@@ -141,7 +141,7 @@
 
         private IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Location> GetLocationFromIList(IList<Models.Location> locations)
         {
-            return locations.Select(location => MapToLocationEntity(location)).ToList();
+            return locations.Select(MapToLocationEntity).ToList();
         }
 
         private Eds.Das.Indexer.Core.Models.Provider.Provider MapFromProviderToProviderImport(Models.Provider provider)
