@@ -75,6 +75,7 @@
     <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Pages\StandardDetailsPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepDefinitions\ProviderDetailsSteps.cs" />
     <Compile Include="StepDefinitions\SearchProviderByLocationSteps.cs" />
     <Compile Include="StepDefinitions\SearchProviderSteps.cs" />
     <Compile Include="StepDefinitions\StandardsSearchSteps.cs" />

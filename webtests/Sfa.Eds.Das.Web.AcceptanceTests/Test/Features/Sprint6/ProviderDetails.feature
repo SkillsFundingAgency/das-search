@@ -15,20 +15,28 @@ Given I have provider with full training at employer location
 When I choose this provider from result page
 Then I should see provider detail page with no veunue details
 
-@ignore
-Scenario: Verify provider detail page
-Given I am on provider result page for a choosen standard
-When I select any of the provider from the list
-Then I should see  provider detail page 
-And I should see "Provider name"
+
+Scenario Outline: Verify provider detail page
+Given I am on Standard '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+And  I select any of the provider from the list
+Then I should see "Provider name"
 And I should see "Employer satisfaction"
-And I should see "learner satisfaction"
-And I should see "standard name"
-And I should see "delivery mode"
-And I should see training "venue" name
-And I should see training location name
-And I should see training contact number
-And I should see training contact email
+And I should see "Learner satisfaction"
+And I should see "Website course page"
+And I should see "Website contact page"
+And I should see "Standard name"
+And I should see "Training structure"
+And I should see "Training location"
+And I should see "phone"
+And I should see "email"
+Examples:
+| id | Postcode |
+| 25 | B46 3DJ  |
+| 12 | CV7 8ED  |
+| 17 | cv1 2WT  |
+
 
 @ignore
 Scenario: Verify training options

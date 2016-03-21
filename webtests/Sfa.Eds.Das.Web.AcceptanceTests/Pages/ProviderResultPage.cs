@@ -23,6 +23,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerlist = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
         By providersearchbox = By.XPath(".//*[@id='postcode']");
         By providerlist1 = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
+        By selectprovider = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By postCodeValidation = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/div/label/div/p");
         By SearchProvidermsg = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
         By providerwebsite = By.XPath(".//*[@id='results']/div[1]/article[1]/dl/dt[2]");
@@ -60,6 +61,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
             Thread.Sleep(4000);
             Assert.True(isDisplayed(providerlist));
+        }
+
+        public void chooseProvider()
+        {
+            click(selectprovider);
+            Thread.Sleep(3000);
         }
 
         public void enterlocation(String location)
