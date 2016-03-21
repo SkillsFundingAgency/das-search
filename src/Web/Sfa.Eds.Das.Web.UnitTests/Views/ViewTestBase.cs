@@ -1,3 +1,5 @@
+using AngleSharp.Dom;
+
 namespace Sfa.Eds.Das.Web.UnitTests.Views
 {
     using System.Linq;

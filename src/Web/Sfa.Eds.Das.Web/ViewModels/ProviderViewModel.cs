@@ -40,5 +40,7 @@ namespace Sfa.Eds.Das.Web.ViewModels
         public double LearnerSatisfaction { get; set; }
 
         public string StandardNameWithLevel { get; set; }
+
+        public LinkViewModel SearchResultLink { get; set; }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Infrastructure\IUnzipStream.cs" />
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
+    <Compile Include="Provider\IProviderFeatures.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Settings\AppServiceSettings.cs" />
     <Compile Include="Settings\BaseSettings.cs" />

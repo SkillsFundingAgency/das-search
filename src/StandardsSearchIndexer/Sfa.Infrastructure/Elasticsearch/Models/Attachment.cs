@@ -1,4 +1,4 @@
-﻿namespace Sfa.Infrastructure.Elasticsearch
+﻿namespace Sfa.Infrastructure.Elasticsearch.Models
 {
     using Nest;
 

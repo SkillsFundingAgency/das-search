@@ -8,6 +8,7 @@ using Sfa.Eds.Das.Core.Logging;
 using Sfa.Eds.Das.Web.Models;
 using Sfa.Eds.Das.Web.Services;
 using Sfa.Eds.Das.Web.ViewModels;
+﻿using Sfa.Eds.Das.Web.Extensions;
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
@@ -67,6 +68,8 @@ namespace Sfa.Eds.Das.Web.Controllers
             var standardData = _standardRepository.GetById(model.StandardCode);
 
             viewModel.StandardNameWithLevel = string.Concat(standardData.Title, " level ", standardData.NotionalEndLevel);
+
+            viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("SearchResults", "Provider"));
 
             return View(viewModel);
         }

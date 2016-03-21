@@ -23,6 +23,7 @@
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Elasticsearch;
+    using Sfa.Infrastructure.Elasticsearch.Models;
     using Sfa.Infrastructure.Services;
 
     [TestFixture]
@@ -83,7 +84,6 @@
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
-            var standardsTest = GetStandardsTest().ToList();
             var expectedStandardResult = new MetaDataItem
                                              {
                                                  Id = 61,

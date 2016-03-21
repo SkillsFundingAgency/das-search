@@ -12,11 +12,11 @@
 
     public class HttpService : IHttpGet, IHttpGetFile, IHttpPost
     {
-        private readonly ILog logger;
+        private readonly ILog _logger;
 
         public HttpService(ILog logger)
         {
-            this.logger = logger;
+            this._logger = logger;
         }
 
         public string Get(string url, string username, string pwd)
@@ -31,14 +31,15 @@
 
                 try
                 {
+                    client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
+
                     return client.DownloadString(url);
                 }
                 catch (WebException exception)
                 {
-                    logger.Warn($"Can download string from {url} - Error: {exception.Message}", exception);
+                    _logger.Warn($"Cannot download string from {url} - Error: {exception.Message}", exception);
+                    throw;
                 }
-
-                return string.Empty;
             }
         }
 
@@ -57,8 +58,10 @@
             {
                 var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{password}"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                HttpContent content = new StringContent(body, Encoding.UTF8, "application/json");
-                client.PostAsync(url, content).Wait();
+                using (var content = new StringContent(body, Encoding.UTF8, "application/json"))
+                {
+                    client.PostAsync(url, content).Wait();
+                }
             }
         }
     }

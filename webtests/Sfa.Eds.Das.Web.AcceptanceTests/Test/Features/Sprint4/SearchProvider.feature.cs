@@ -94,7 +94,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 13
     testRunner.And("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
- testRunner.Then("I should all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 15
  testRunner.And("I should see all providers listed in Alphabetical order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

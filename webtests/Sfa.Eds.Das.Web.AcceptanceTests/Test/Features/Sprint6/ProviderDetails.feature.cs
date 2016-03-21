@@ -176,13 +176,13 @@ testRunner.And("I should see location name.", ((string)(null)), ((TechTalk.SpecF
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify end to end provider detail page", new string[] {
                         "ginore"});
-#line 44
+#line 43
 this.ScenarioSetup(scenarioInfo);
-#line 45
+#line 44
 testRunner.Given("I have a provider with updated info in course directory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 45
 testRunner.When("I open provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 47
+#line 46
 testRunner.Then("I should see updated provider info in provider detail page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -195,13 +195,13 @@ testRunner.Then("I should see updated provider info in provider detail page.", (
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to navigate back to provider result page from detail page.", new string[] {
                         "ignore"});
-#line 50
+#line 49
 this.ScenarioSetup(scenarioInfo);
-#line 51
+#line 50
 testRunner.Given("I am on provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 51
 testRunner.When("I click on back link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 53
+#line 52
 testRunner.Then("I shoudl be able to return back to provider list page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -218,7 +218,7 @@ testRunner.Then("I shoudl be able to return back to provider list page.", ((stri
                     " when provider is still active.( FCS file to have provider inactive and test boo" +
                     "kmarked link)", new string[] {
                         "ignore"});
-#line 57
+#line 56
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();

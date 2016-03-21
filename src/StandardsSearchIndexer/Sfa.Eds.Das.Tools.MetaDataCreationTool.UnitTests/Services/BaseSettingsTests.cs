@@ -5,7 +5,6 @@
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Common.Settings;
 
     [TestFixture]
     public class BaseSettingsTests

@@ -2,10 +2,9 @@
 {
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     using StructureMap;
 
@@ -16,6 +15,7 @@
             For<IIndexSettings<Provider>>().Use<ProviderIndexSettings>();
             For<IGenericIndexerHelper<Provider>>().Use<ProviderIndexer>();
             For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
+            For<IProviderFeatures>().Use<ProviderIndexSettings>();
         }
     }
 }

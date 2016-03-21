@@ -11,7 +11,7 @@ Scenario Outline:Show available providers for given standard -End to End Test
 	When I choose any of the standard from search result page
 	And I enter '<Postcode>' in provider search box
     And I search Search for provider
-	Then I should all providers in result page
+	Then I should see all providers in result page
 	And I should see all providers listed in Alphabetical order 
 Examples:
 | JOBROLE                                     | Postcode |

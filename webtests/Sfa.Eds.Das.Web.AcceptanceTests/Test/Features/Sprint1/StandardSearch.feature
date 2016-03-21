@@ -35,7 +35,7 @@ Scenario Outline: Search Standard by keyword Actuarial
 	Given I am on Search landing page
 	And I enter keyword '<Keyword>' in search box
 	When I click on search button
-	Then I should see matching Standard 'actuarial technician' standards on result page
+	Then I should see matching Standard 'Actuarial Technician' standards on result page
 Examples:
 | Keyword       |
 | Actuarial     |
@@ -47,9 +47,9 @@ Scenario Outline: Search Standard by keyword Aeorospace
 	Given I am on Search landing page
 	And I enter keyword '<Keyword>' in search box
 	When I click on search button
-	Then I should see matching Standard 'aerospace manufacturing fitter' standards on result page
-	And I should see matching Standard 'aerospace engineer' standards on result page
-	And I should see matching Standard 'aerospace software development engineer' standards on result page	
+	Then I should see matching Standard 'Aerospace Manufacturing Fitter' standards on result page
+	And I should see matching Standard 'Aerospace Engineer' standards on result page
+	And I should see matching Standard 'Aerospace Software Development Engineer' standards on result page	
 Examples:
 | Keyword                        |
 | aircraft mechanic              |

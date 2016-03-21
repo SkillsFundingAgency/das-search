@@ -437,6 +437,7 @@
       <LastGenOutput>_ProviderInformation.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\razorgenerator.directives" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -467,6 +468,10 @@
     <ProjectReference Include="..\Sfa.Eds.Das.Infrastructure\Sfa.Eds.Das.Infrastructure.csproj">
       <Project>{3f5631ab-7190-4203-96db-af5664c72100}</Project>
       <Name>Sfa.Eds.Das.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Das.Resources\Sfa.Eds.Das.Resources.csproj">
+      <Project>{88f7cfd8-69a0-49a9-83f5-d729def4afca}</Project>
+      <Name>Sfa.Eds.Das.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

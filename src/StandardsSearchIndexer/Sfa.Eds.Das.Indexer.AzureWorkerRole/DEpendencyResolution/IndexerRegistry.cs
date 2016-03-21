@@ -3,9 +3,10 @@
     using Nest;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
+    using Sfa.Infrastructure.Elasticsearch;
     using Sfa.Infrastructure.Services;
 
     using StructureMap;

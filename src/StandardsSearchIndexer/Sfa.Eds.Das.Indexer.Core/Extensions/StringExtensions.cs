@@ -11,6 +11,7 @@ namespace Sfa.Eds.Das.Indexer.Core.Extensions
             writer.Write(s);
             writer.Flush();
             stream.Position = 0;
+
             return stream;
         }
     }

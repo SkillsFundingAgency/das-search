@@ -117,8 +117,10 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
             {
                 var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{pwd}"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                HttpContent content = new StringContent(body, Encoding.UTF8, "application/json");
-                client.PostAsync(streamUrl, content).Wait();
+                using (var content = new StringContent(body, Encoding.UTF8, "application/json"))
+                {
+                    client.PostAsync(streamUrl, content).Wait();
+                }
             }
         }
 

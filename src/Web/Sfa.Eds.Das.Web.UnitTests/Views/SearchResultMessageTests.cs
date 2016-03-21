@@ -10,10 +10,10 @@
     using Web.Views.Standard;
 
     [TestFixture]
-    public sealed class StandardSearchResultPage : ViewTestBase
+    public sealed class SearchResultMessageTests : ViewTestBase
     {
         [Test]
-        public void When_SearchResultHasErrors()
+        public void WhenSearchResultHasErrors()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -29,7 +29,7 @@
         }
 
         [Test]
-        public void When_SearchResultIsZero()
+        public void WhenSearchResultIsZero()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -44,7 +44,7 @@
         }
 
         [Test]
-        public void When_SearchResultReturnsAll()
+        public void WhenSearchResultReturnsAll()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -63,7 +63,7 @@
         }
 
         [Test]
-        public void When_SearchResultReturnsOneResult()
+        public void WhenSearchResultReturnsOneResult()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel
@@ -85,7 +85,7 @@
         }
 
         [Test]
-        public void When_SearchResultReturnsMoreThanOne()
+        public void WhenSearchResultReturnsMoreThanOne()
         {
             var detail = new SearchResultMessage();
             var model = new StandardSearchResultViewModel

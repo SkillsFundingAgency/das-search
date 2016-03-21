@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using Sfa.Eds.Das.Indexer.Common.Models;
-
     public class MetaDataItem : IIndexEntry
     {
         public int Id { get; set; }

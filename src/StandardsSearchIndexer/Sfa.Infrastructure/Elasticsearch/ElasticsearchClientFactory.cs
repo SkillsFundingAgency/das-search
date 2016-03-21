@@ -1,10 +1,10 @@
-﻿namespace Sfa.Infrastructure.Services
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
     using System;
 
     using Nest;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Infrastructure.Services;
     using Sfa.Infrastructure.Settings;
 
     public class ElasticsearchClientFactory : IElasticsearchClientFactory

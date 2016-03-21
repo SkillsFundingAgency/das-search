@@ -9,19 +9,20 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
     using Core.Models;
 
     using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     [TestFixture]
     public class DedsServiceTests
     {
         private IContainer _ioc;
-        private IIndexSettings<MetaDataItem> _standardSettings;
+
         private IGetStandardLevel _sut;
 
         [SetUp]
         public void Setup()
         {
             _ioc = IoC.Initialize();
-            _standardSettings = _ioc.GetInstance<IIndexSettings<MetaDataItem>>();
+            _ioc.GetInstance<IIndexSettings<MetaDataItem>>();
 
             _sut = _ioc.GetInstance<IGetStandardLevel>();
         }

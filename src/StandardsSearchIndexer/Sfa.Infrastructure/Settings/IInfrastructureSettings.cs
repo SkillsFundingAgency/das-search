@@ -1,7 +1,5 @@
 ﻿namespace Sfa.Infrastructure.Settings
 {
-    using System;
-
     public interface IInfrastructureSettings
     {
         string SearchHost { get; }

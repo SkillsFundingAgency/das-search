@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Infrastructure.UnitTests.Services
 {
-    using System.IO;
     using System.Linq;
 
     using NUnit.Framework;

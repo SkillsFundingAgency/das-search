@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     public interface IGenericControlQueueConsumer
     {
