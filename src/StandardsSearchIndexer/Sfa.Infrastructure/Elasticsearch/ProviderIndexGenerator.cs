@@ -38,6 +38,10 @@ namespace Sfa.Infrastructure.Elasticsearch
                                 {
                                     ""type"": ""string""
                                 },
+                                ""providerMarketingInfo"":
+                                {
+                                    ""type"": ""string""
+                                },
                                 ""marketingInfo"":
                                 {
                                     ""type"": ""string""

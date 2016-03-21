@@ -17,7 +17,8 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
         public string LocationName { get; set; }
 
-        public string MarketingName { get; set; }
+        public string ProviderMarketingInfo { get; set; }
+        public string MarketingInfo { get; set; }
 
         public string Phone { get; set; }
 

@@ -45,6 +45,12 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
+            foreach (var providerSearchResult in searchResults.Hits)
+            {
+                providerSearchResult.EmployerSatisfaction = providerSearchResult.EmployerSatisfaction*10;
+                providerSearchResult.LearnerSatisfaction = providerSearchResult.LearnerSatisfaction*10;
+            }
+
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
             return View(viewModel);

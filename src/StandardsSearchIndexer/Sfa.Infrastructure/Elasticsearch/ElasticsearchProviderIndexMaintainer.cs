@@ -1,16 +1,14 @@
-﻿namespace Sfa.Infrastructure.Elasticsearch
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.Core.Extensions;
+using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+using Sfa.Eds.Das.Indexer.Core.Services;
+
+namespace Sfa.Infrastructure.Elasticsearch
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    using Sfa.Eds.Das.Indexer.Core.Extensions;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase<Provider>
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
@@ -122,7 +120,7 @@
 
             foreach (var deliveryMode in location.DeliveryModes)
             {
-                deliveryModes.Append(i == 0 ? string.Concat(@"""", EnumExtensions.GetDescription(deliveryMode), @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
+                deliveryModes.Append(i == 0 ? string.Concat(@"""", deliveryMode.GetDescription(), @"""") : string.Concat(", ", @"""", deliveryMode, @""""));
 
                 i++;
             }
@@ -139,6 +137,8 @@
             location.DeliveryLocation.Id,
             @", ""locationName"": """,
             location.DeliveryLocation.Name,
+            @""", ""providerMarketingInfo"": """,
+            EscapeSpecialCharacters(provider.MarketingInfo),
             @""", ""marketingInfo"": """,
             EscapeSpecialCharacters(apprenticeship.MarketingInfo),
             @""", ""phone"": """,

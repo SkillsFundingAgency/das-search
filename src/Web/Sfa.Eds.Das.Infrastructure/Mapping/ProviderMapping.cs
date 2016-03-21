@@ -29,6 +29,7 @@ namespace Sfa.Eds.Das.Infrastructure.Mapping
                 ContactUsUrl = item.ContactUsUrl,
                 LocationId = item.LocationId,
                 StandardCode = item.StandardCode,
+                ProviderMarketingInfo = item.ProviderMarketingInfo,
                 MarketingInfo = item.MarketingInfo,
                 Distance = item.Distance
             };
