@@ -171,11 +171,11 @@ testRunner.And("I should see location name.", ((string)(null)), ((TechTalk.SpecF
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify end to end provider detail page")]
-        [NUnit.Framework.CategoryAttribute("ginore")]
+        [NUnit.Framework.IgnoreAttribute()]
         public virtual void VerifyEndToEndProviderDetailPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify end to end provider detail page", new string[] {
-                        "ginore"});
+                        "ignore"});
 #line 43
 this.ScenarioSetup(scenarioInfo);
 #line 44
