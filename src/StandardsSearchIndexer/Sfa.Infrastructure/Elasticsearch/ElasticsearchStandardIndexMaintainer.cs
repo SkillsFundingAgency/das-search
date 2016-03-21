@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Nest;
-using Sfa.Eds.Das.Indexer.ApplicationServices;
-using Sfa.Eds.Das.Indexer.Core.Models;
-using Sfa.Eds.Das.Indexer.Core.Services;
-using Sfa.Infrastructure.Services;
-
-namespace Sfa.Infrastructure.Elasticsearch
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Nest;
+
+    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Elasticsearch.Models;
+    using Sfa.Infrastructure.Services;
+
     public sealed class ElasticsearchStandardIndexMaintainer : ElasticsearchIndexMaintainerBase<MetaDataItem>
     {
         public ElasticsearchStandardIndexMaintainer(IElasticsearchClientFactory factory, ILog logger)
@@ -52,22 +54,22 @@ namespace Sfa.Infrastructure.Elasticsearch
             try
             {
                 var doc = new StandardDocument
-                {
-                    StandardId = standard.Id,
-                    Title = standard.Title,
-                    JobRoles = standard.JobRoles,
-                    NotionalEndLevel = standard.NotionalEndLevel,
-                    PdfFileName = standard.PdfFileName,
-                    StandardPdf = standard.StandardPdfUrl,
-                    AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
-                    TypicalLength = standard.TypicalLength,
-                    IntroductoryText = standard.IntroductoryText,
-                    OverviewOfRole = standard.OverviewOfRole,
-                    EntryRequirements = standard.EntryRequirements,
-                    WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
-                    Qualifications = standard.Qualifications,
-                    ProfessionalRegistration = standard.ProfessionalRegistration,
-                };
+                              {
+                                  StandardId = standard.Id,
+                                  Title = standard.Title,
+                                  JobRoles = standard.JobRoles,
+                                  NotionalEndLevel = standard.NotionalEndLevel,
+                                  PdfFileName = standard.PdfFileName,
+                                  StandardPdf = standard.StandardPdfUrl,
+                                  AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
+                                  TypicalLength = standard.TypicalLength,
+                                  IntroductoryText = standard.IntroductoryText,
+                                  OverviewOfRole = standard.OverviewOfRole,
+                                  EntryRequirements = standard.EntryRequirements,
+                                  WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
+                                  Qualifications = standard.Qualifications,
+                                  ProfessionalRegistration = standard.ProfessionalRegistration,
+                              };
 
                 return doc;
             }

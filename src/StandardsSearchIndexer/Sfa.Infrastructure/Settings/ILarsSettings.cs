@@ -1,4 +1,4 @@
-﻿namespace Sfa.Deds.Settings
+﻿namespace Sfa.Infrastructure.Settings
 {
     public interface ILarsSettings
     {

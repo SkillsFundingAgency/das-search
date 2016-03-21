@@ -1,9 +1,8 @@
 ﻿namespace Sfa.Infrastructure.Settings
 {
-    using System;
     using System.Configuration;
 
-    using Sfa.Eds.Das.Indexer.Common.Settings;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
     public class InfrastructureSettings : BaseSettings, IInfrastructureSettings
     {

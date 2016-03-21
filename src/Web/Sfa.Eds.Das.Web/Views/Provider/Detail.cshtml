@@ -1,9 +1,14 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
+﻿@using Sfa.Eds.Das.Web.Extensions
+@model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
 }
 <main id="content">
+
+    <p class="small-btm-margin">
+        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
+    </p>
 
     <div class="grid-row">
 
@@ -13,7 +18,7 @@
                     <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
                     @Model.Name
                 </h1>
-                
+
             </div>
         </div>
 
@@ -50,35 +55,35 @@
 
 @helper ShowTrainingLocation(string title)
 {
-    if (@Model != null)
+if (@Model != null)
+{
+    if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
-        {
             <dt>@title</dt>
             <dd>Training will take place at your location</dd>
-        }
-        else
-        {
-            <dt>@title</dt>
-            <dd>@Model.LocationName @Model.Address.Address1 @Model.Address.Address2 </dd>
-        }
     }
+    else
+    {
+            <dt>@title</dt>
+            <dd>@Model.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+    }
+}
 }
 
 
 @helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
         <dt>@title</dt>
         <dd>@Html.Raw(item)</dd>
-    }
+}
 }
 
 @helper GetStandardProperty(string title, List<string> items, bool hideIfEmpty = false)
 {
-    if (items != null)
-    {
+if (items != null)
+{
         <dt>@title</dt>
         <dd>
             <ul>
@@ -101,5 +106,5 @@
                 }
             </ul>
         </dd>
-    }
+}
 }

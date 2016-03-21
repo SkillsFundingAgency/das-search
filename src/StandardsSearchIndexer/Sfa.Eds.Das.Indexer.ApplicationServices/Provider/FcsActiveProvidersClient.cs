@@ -8,6 +8,7 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     public class FcsActiveProvidersClient : IGetActiveProviders
     {

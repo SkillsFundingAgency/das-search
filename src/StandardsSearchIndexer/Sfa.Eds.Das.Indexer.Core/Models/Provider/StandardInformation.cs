@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
+﻿namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
 {
+    using System.Collections.Generic;
+
     public sealed class StandardInformation
     {
         public int StandardCode { get; set; }

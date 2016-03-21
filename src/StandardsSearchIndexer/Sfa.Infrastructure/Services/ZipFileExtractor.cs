@@ -51,8 +51,10 @@
                 {
                     if (entry.FullName.EndsWith(fileToExtract, StringComparison.OrdinalIgnoreCase))
                     {
-                        var reader = new StreamReader(entry.Open());
-                        return reader.ReadToEnd();
+                        using (var reader = new StreamReader(entry.Open()))
+                        {
+                            return reader.ReadToEnd();
+                        }
                     }
                 }
             }

@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Sfa.Deds.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.DedsService;
+    using Sfa.Infrastructure.Settings;
 
     public class LarsClient : IGetStandardLevel
     {
@@ -54,15 +54,9 @@
         {
             var filterValues = new List<FilterValue>();
 
-            filterValues.AddRange(
-                queryFilterValues.Select(
-                    queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value }));
+            filterValues.AddRange(queryFilterValues.Select(queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value }));
 
-            var queryExecution = new QueryExecution
-                                     {
-                                         FilterValues = filterValues.Where(x => !string.IsNullOrEmpty(x.FieldValue)).ToArray(),
-                                         SortValues = new SortValue[0]
-                                     };
+            var queryExecution = new QueryExecution { FilterValues = filterValues.Where(x => !string.IsNullOrEmpty(x.FieldValue)).ToArray(), SortValues = new SortValue[0] };
 
             if (page.HasValue && itemsPerPage.HasValue)
             {

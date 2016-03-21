@@ -5,19 +5,16 @@
     using System.IO;
     using System.Linq;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class CsvService : IReadStandardsFromCsv
     {
-        private readonly IAngleSharpService angelService;
-        private readonly IAppServiceSettings appServiceSettings;
+        private readonly IAngleSharpService _angelService;
 
-        public CsvService(IAngleSharpService angelService, IAppServiceSettings appServiceSettings)
+        public CsvService(IAngleSharpService angelService)
         {
-            this.angelService = angelService;
-            this.appServiceSettings = appServiceSettings;
+            this._angelService = angelService;
         }
 
         public List<Standard> ReadStandardsFromFile(string csvFilePath)
@@ -99,7 +96,7 @@
 
         private string GetPdfUri(string s)
         {
-            var url = angelService.GetLinks(s.Replace("\"", string.Empty), ".attachment-details h2 a", "Assessment").FirstOrDefault();
+            var url = _angelService.GetLinks(s.Replace("\"", string.Empty), ".attachment-details h2 a", "Assessment").FirstOrDefault();
             if (url != null)
             {
                 return new Uri($"https://www.gov.uk/{url}").ToString();

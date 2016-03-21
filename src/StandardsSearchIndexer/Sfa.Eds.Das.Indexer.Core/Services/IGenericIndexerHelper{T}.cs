@@ -1,7 +1,6 @@
-﻿namespace Sfa.Eds.Das.Indexer.Core
+﻿namespace Sfa.Eds.Das.Indexer.Core.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IGenericIndexerHelper<T>

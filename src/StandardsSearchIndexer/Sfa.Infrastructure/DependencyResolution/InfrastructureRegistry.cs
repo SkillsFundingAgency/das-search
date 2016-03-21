@@ -1,18 +1,15 @@
 namespace Sfa.Infrastructure.DependencyResolution
 {
-    using CourseDirectory;
-    using Eds.Das.Indexer.ApplicationServices.Services;
-    using Eds.Das.Indexer.Core.Models;
-    using Eds.Das.Indexer.Core.Models.Provider;
-    using Elasticsearch;
-
-    using Sfa.Deds.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
-    using Sfa.Eds.Das.Indexer.Core;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.CourseDirectory;
+    using Sfa.Infrastructure.Elasticsearch;
     using Sfa.Infrastructure.Services;
     using Sfa.Infrastructure.Settings;
 

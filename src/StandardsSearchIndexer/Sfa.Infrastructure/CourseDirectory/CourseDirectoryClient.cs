@@ -5,41 +5,42 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Models;
+    using Sfa.Infrastructure.CourseDirectory.Models;
     using Sfa.Infrastructure.Settings;
 
     public sealed class CourseDirectoryClient : IGetApprenticeshipProviders
     {
-        private readonly ICourseDirectoryProviderDataService _courseDirectoryProvider;
-
         private readonly IInfrastructureSettings _settings;
 
         public CourseDirectoryClient(IInfrastructureSettings settings)
         {
-            _courseDirectoryProvider = new CourseDirectoryProviderDataService();
             _settings = settings;
         }
 
         public async Task<IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
         {
-            _courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
-            var responseAsync = await _courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
+            using (var courseDirectoryProvider = new CourseDirectoryProviderDataService())
+            {
+                courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
+                var responseAsync = await courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
 
-            var providers = responseAsync.Body;
+                var providers = responseAsync.Body;
 
-            return providers.Select(MapFromProviderToProviderImport).ToList();
+                return providers.Select(MapFromProviderToProviderImport).ToList();
+            }
         }
 
-        private static Eds.Das.Indexer.Common.Models.Coordinate SetGeoPoint(Models.Location matchingLocation)
+        private static Coordinate SetGeoPoint(Models.Location matchingLocation)
         {
             if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
             {
                 return null;
             }
 
-            return new Eds.Das.Indexer.Common.Models.Coordinate { Latitude = matchingLocation.Address.Latitude.Value, Longitude = matchingLocation.Address.Longitude.Value };
+            return new Coordinate { Latitude = matchingLocation.Address.Latitude.Value, Longitude = matchingLocation.Address.Longitude.Value };
         }
 
         private IEnumerable<StandardInformation> GetStandardsFromIList(IList<Models.Standard> standards, IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Location> providerLocations)
@@ -140,7 +141,7 @@
 
         private IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Location> GetLocationFromIList(IList<Models.Location> locations)
         {
-            return locations.Select(location => MapToLocationEntity(location)).ToList();
+            return locations.Select(MapToLocationEntity).ToList();
         }
 
         private Eds.Das.Indexer.Core.Models.Provider.Provider MapFromProviderToProviderImport(Models.Provider provider)
