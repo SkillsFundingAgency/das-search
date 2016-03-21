@@ -40,7 +40,7 @@
 
             GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            var locationText = GetPartial(html, "dl dd", 5);
+            var locationText = GetPartial(html, "dl dd", 6);
 
             locationText.Should().NotContain(model.LocationName);
             locationText.Should().NotContain(model.Address.Address1);
@@ -72,7 +72,7 @@
 
             GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            var locationText = GetPartial(html, "dl dd", 5);
+            var locationText = GetPartial(html, "dl dd", 6);
 
             locationText.Should().Contain(model.LocationName);
             locationText.Should().Contain(model.Address.Address1);
@@ -102,7 +102,7 @@
 
             GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
 
-            var locationText = GetPartial(html, "dl dd", 5);
+            var locationText = GetPartial(html, "dl dd", 6);
 
             locationText.Should().Contain(model.LocationName);
             locationText.Should().Contain(model.Address.Address1);
