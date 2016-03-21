@@ -47,7 +47,6 @@
         public void SetUp()
         {
             _ioc = IoC.Initialize();
-            //_ioc.Configure(x => x.For<IGetApprenticeshipProviders>().Use<StubCourseDirectoryClient>());
 
             _ioc.GetInstance<IGetApprenticeshipProviders>();
             _ioc.GetInstance<IIndexSettings<Provider>>();
@@ -101,7 +100,6 @@
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
-            var providersTest = GetProvidersTest();
             var expectedProviderResult = new Provider
                                              {
                                                  Ukprn = 10002387,
@@ -332,7 +330,7 @@
                                                                    new DeliveryInformation
                                                                     {
                                                                         DeliveryLocation = providerLocations.Single(x => x.Id == 115641),
-                                                                        DeliveryModes = new[] 
+                                                                        DeliveryModes = new[]
                                                                         {
                                                                             ModesOfDelivery.OneHundredPercentEmployer
                                                                         },

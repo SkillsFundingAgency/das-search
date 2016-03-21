@@ -18,7 +18,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         private readonly IIndexSettings<Provider> _settings;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<Provider> settings , ILog log)
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<Provider> settings, ILog log)
             : base(factory, log, "Provider")
         {
             _indexDefinitionGenerator = indexDefinitionGenerator;
@@ -92,6 +92,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                     documentCount++;
                 }
             }
+
             return documentCount;
         }
 

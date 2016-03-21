@@ -83,7 +83,6 @@
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
-            var standardsTest = GetStandardsTest().ToList();
             var expectedStandardResult = new MetaDataItem
                                              {
                                                  Id = 61,

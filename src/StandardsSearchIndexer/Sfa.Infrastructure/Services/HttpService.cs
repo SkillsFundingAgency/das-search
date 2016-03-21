@@ -40,8 +40,6 @@
                     logger.Warn($"Cannot download string from {url} - Error: {exception.Message}", exception);
                     throw;
                 }
-
-                return string.Empty;
             }
         }
 
