@@ -258,6 +258,8 @@ testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.Spe
 #line 78
 testRunner.Then("I should see provider \"SOUTH & CITY COLLEGE BIRMINGHAM\" in provider results page." +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 79
+testRunner.And("I should see location venue of provider \"Bordesley Green Campus.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

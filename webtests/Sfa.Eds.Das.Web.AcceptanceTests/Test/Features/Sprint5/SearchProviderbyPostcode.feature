@@ -76,7 +76,7 @@ Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
 Then I should see provider "SOUTH & CITY COLLEGE BIRMINGHAM" in provider results page.
-#And I should see location venue of provider "bordesley green campus."
+And I should see location venue of provider "Bordesley Green Campus."
 Examples:
 | id | Postcode |
 | 25 | B46 3DJ  |

@@ -28,6 +28,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerwebsite = By.XPath(".//*[@id='results']/div[1]/article[1]/dl/dt[2]");
         By providereSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[3]");
         By providerlSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[4]");
+        By providerLocation = By.XPath(".//*[@id='results']/div[1]/article[3]/dl/dd[2]");
 
 
 
@@ -86,7 +87,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyProviderLocationinSearchResults(String p0)
         {
-            Assert.True(isElementPresent(providerlist1, p0));
+            verifyTextMessage(providerLocation, p0);
         }
 
         public void verifyProviderNotinSearchResults(String p0)
