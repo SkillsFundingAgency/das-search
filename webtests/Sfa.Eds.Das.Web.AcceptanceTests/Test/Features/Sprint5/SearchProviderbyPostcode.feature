@@ -57,7 +57,6 @@ When I search Search for provider
 Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
 Examples:
 | Postcode | id |
-| NW66AY   | 25 |
 | B9 5NA   | 25 |
 
 

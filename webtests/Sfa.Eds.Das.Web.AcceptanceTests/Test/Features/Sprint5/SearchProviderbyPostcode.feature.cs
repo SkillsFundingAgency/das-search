@@ -177,7 +177,6 @@ testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" 
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Provider by postcode falling inside more than one provider radius.")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("NW66AY", "25", null)]
         [NUnit.Framework.TestCaseAttribute("B9 5NA", "25", null)]
         public virtual void SearchProviderByPostcodeFallingInsideMoreThanOneProviderRadius_(string postcode, string id, string[] exampleTags)
         {
@@ -217,15 +216,15 @@ testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in pro
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Same Provider supporting two different standards operating from same location but" +
                     " with different radiuses-1", @__tags);
-#line 65
+#line 64
 this.ScenarioSetup(scenarioInfo);
-#line 66
+#line 65
 testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 66
 testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 67
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 69
+#line 68
 testRunner.Then("I should not see provider \"SOUTH & CITY COLLEGE BIRMINGHAM\" in provider results p" +
                     "age.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -248,15 +247,15 @@ testRunner.Then("I should not see provider \"SOUTH & CITY COLLEGE BIRMINGHAM\" i
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Same Provider supporting two different standards operating from same location but" +
                     " with different radiuses-2", @__tags);
-#line 75
+#line 74
 this.ScenarioSetup(scenarioInfo);
-#line 76
+#line 75
 testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 77
+#line 76
 testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 77
 testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 79
+#line 78
 testRunner.Then("I should see provider \"SOUTH & CITY COLLEGE BIRMINGHAM\" in provider results page." +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -270,15 +269,15 @@ testRunner.Then("I should see provider \"SOUTH & CITY COLLEGE BIRMINGHAM\" in pr
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by invalid postcode1", new string[] {
                         "regression"});
-#line 88
+#line 87
 this.ScenarioSetup(scenarioInfo);
-#line 89
+#line 88
 testRunner.Given("I am on Standard \'25\' detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 89
 testRunner.When("I enter \'test\' in provider search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 91
+#line 90
 testRunner.And("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 91
 testRunner.Then("I should see message searchresult \"There are currently no providers for the appre" +
                     "nticeship standard: \'Digital & Technology Solutions Professional\' in \'test\'\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
