@@ -49,7 +49,7 @@
             {
                 foreach (var entry in zip.Entries)
                 {
-                    if (entry.FullName.EndsWith(fileToExtract, StringComparison.OrdinalIgnoreCase))
+                    if (entry.FullName.EndsWith($"CSV/{fileToExtract}", StringComparison.OrdinalIgnoreCase))
                     {
                         var reader = new StreamReader(entry.Open());
                         return reader.ReadToEnd();

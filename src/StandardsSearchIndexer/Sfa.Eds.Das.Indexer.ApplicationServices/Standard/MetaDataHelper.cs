@@ -14,13 +14,16 @@
 
         private readonly IGenerateStandardMetaData _metaDataWriter;
 
+        private readonly IGetFrameworkMetaData _metaDataFrameworkReader;
+
         private readonly ILog _log;
 
-        public MetaDataHelper(IGetStandardMetaData metaDataReader, IGenerateStandardMetaData metaDataGenerator, ILog log)
+        public MetaDataHelper(IGetStandardMetaData metaDataReader, IGenerateStandardMetaData metaDataGenerator, ILog log, IGetFrameworkMetaData metaDataFrameworkReader)
         {
             _metaDataReader = metaDataReader;
             _metaDataWriter = metaDataGenerator;
             _log = log;
+            _metaDataFrameworkReader = metaDataFrameworkReader;
         }
 
         public List<MetaDataItem> GetAllStandardsMetaData()
@@ -47,42 +50,10 @@
         {
             _metaDataWriter.GenerateStandardMetadataFiles();
         }
-
-        // Frameworks
+        
         public List<FrameworkMetaData> GetAllFrameworkMetaData()
         {
-            // ToDo: Missing implementation -> Get data from LARS
-            return new List<FrameworkMetaData>
-                       {
-                           new FrameworkMetaData
-                               {
-                                   FworkCode = "403",
-                                   ProgType = "0",
-                                   PwayCode = "2",
-                                   PathwayName = "Baking Industry Skills",
-                                   NASTitle = "Food and Drink",
-                                   IssuingAuthorityTitle = "Food and Drink - Advanced Level Apprenticeship"
-                               },
-                           new FrameworkMetaData
-                               {
-                                   FworkCode = "403",
-                                   ProgType = "3",
-                                   PwayCode = "7",
-                                   PathwayName = "Brewing Industry Skills",
-                                   NASTitle = "Food and Drink",
-                                   IssuingAuthorityTitle = "Food and Drink - Intermediate Level Apprenticeship"
-                               },
-                           new FrameworkMetaData
-                               {
-                                   FworkCode = "423",
-                                   ProgType = "2",
-                                   PwayCode = "4",
-                                   PathwayName = "Footwear",
-                                   NASTitle = "Fashion and Textiles",
-                                   IssuingAuthorityTitle = "Fashion and Textiles - Advanced Level Apprenticeship"
-                               }
-                       };
+            return _metaDataFrameworkReader.GetAllFrameworks();
         }
-
     }
 }

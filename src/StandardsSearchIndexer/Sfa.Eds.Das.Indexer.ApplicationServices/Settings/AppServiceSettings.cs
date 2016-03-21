@@ -38,6 +38,10 @@
 
         public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
 
+        public string ImServiceBaseUrl => GetSetting("ImServiceBaseUrl");
+
+        public string ImServiceUrl => GetSetting("ImServiceUrl");
+
         // Private appServiceSettings
         private string VstsGitBaseUrl => GetSetting("VstsGitBaseUrl");
 

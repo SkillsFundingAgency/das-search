@@ -6,6 +6,7 @@
     using System.Linq;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
@@ -56,6 +57,42 @@
             }
 
             return standards;
+        }
+
+        public List<FrameworkMetaData> ReadFrameworksFromStream(string csvFile)
+        {
+            var frameworks = new List<FrameworkMetaData>();
+            foreach (var line in csvFile.Split('\n'))
+            {
+                var values = line?.Split(',');
+                FrameworkMetaData framework;
+                if (CreateFramework(values, out framework))
+                {
+                    frameworks.Add(framework);
+                }
+            }
+
+            return frameworks;
+        }
+
+        private bool CreateFramework(string[] values, out FrameworkMetaData framework)
+        {
+            framework = null;
+            if (values.Length > 11)
+            {
+                framework = new FrameworkMetaData
+                                {
+                                    FworkCode = values[0],
+                                    ProgType = values[1],
+                                    PwayCode = values[2],
+                                    PathwayName = values[3],
+                                    IssuingAuthorityTitle = values[11],
+                                    NASTitle = values[9]
+                                };
+                return true;
+            }
+
+            return false;
         }
 
         private bool CreateStandard(string[] values, out Standard standard)

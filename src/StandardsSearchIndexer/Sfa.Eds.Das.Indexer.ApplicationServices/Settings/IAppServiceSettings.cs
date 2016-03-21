@@ -30,6 +30,10 @@
 
         string ConnectionString { get; }
 
+        string ImServiceBaseUrl { get; }
+
+        string ImServiceUrl { get; }
+
         string QueueName(Type type);
     }
 }

@@ -64,14 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\ProviderRegistry.cs" />
-    <Compile Include="DependencyResolution\FrameworkRegistry.cs" />
     <Compile Include="DependencyResolution\StandardRegistry.cs" />
-    <Compile Include="Framework\FrameworkIndexer.cs" />
     <Compile Include="Http\IHttpPost.cs" />
     <Compile Include="Http\IRetryWebRequest.cs" />
     <Compile Include="IndexerHelper.cs" />
     <Compile Include="Infrastructure\IUnzipStream.cs" />
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
+    <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Services\IMaintanProviderIndex.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="Settings\IIndexSettings.cs" />
     <Compile Include="Settings\IAppServiceSettings.cs" />
     <Compile Include="Provider\ProviderIndexSettings.cs" />
-    <Compile Include="Framework\FrameworkIndexSettings.cs" />
     <Compile Include="Standard\StandardIndexSettings.cs" />
   </ItemGroup>
   <ItemGroup>

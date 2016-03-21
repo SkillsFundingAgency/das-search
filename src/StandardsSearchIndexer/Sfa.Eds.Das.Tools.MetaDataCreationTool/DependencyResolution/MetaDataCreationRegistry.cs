@@ -1,9 +1,9 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution
 {
-    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
+    using Indexer.ApplicationServices.MetaData;
+    using Indexer.ApplicationServices.Settings;
+    using Services;
+    using Services.Interfaces;
 
     using StructureMap;
 
@@ -19,6 +19,7 @@
             For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
             For<IGetStandardMetaData>().Use<MetaDataManager>();
             For<IGenerateStandardMetaData>().Use<MetaDataManager>();
+            For<IGetFrameworkMetaData>().Use<MetaDataManager>();
         }
     }
 }

@@ -8,11 +8,12 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
-    public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData
+    public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData, IGetFrameworkMetaData
     {
         private readonly IAppServiceSettings _appServiceSettings;
 
@@ -48,6 +49,11 @@
         public IDictionary<string, string> GetAllAsJson()
         {
             return _vstsService.GetStandards();
+        }
+
+        public List<FrameworkMetaData> GetAllFrameworks()
+        {
+            return _larsDataService.GetListOfCurrentFrameworks();
         }
 
         private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)

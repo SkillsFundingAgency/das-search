@@ -94,6 +94,10 @@
       <Project>{D838757D-63EC-4FE6-B565-470D5BF424A3}</Project>
       <Name>Sfa.Eds.Das.Tools.MetaDataCreationTool</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sfa.Infrastructure\Sfa.Infrastructure.csproj">
+      <Project>{4E8DA796-33BA-43ED-A931-4841E108A7E0}</Project>
+      <Name>Sfa.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

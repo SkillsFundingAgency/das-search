@@ -33,7 +33,6 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
                 c.AddRegistry<IndexerRegistry>();
                 c.AddRegistry<StandardRegistry>();
                 c.AddRegistry<ProviderRegistry>();
-                c.AddRegistry<FrameworkRegistry>();
                 c.AddRegistry<InfrastructureRegistry>();
                 c.AddRegistry<MetaDataCreationRegistry>();
             });

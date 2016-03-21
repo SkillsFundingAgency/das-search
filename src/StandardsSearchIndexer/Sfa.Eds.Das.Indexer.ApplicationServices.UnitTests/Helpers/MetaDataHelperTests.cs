@@ -23,10 +23,11 @@
 
             var metaDataReader = new Mock<IGetStandardMetaData>();
             var metaDataGenerator = new Mock<IGenerateStandardMetaData>();
+            var metaDataReaderFramework = new Mock<IGetFrameworkMetaData>();
             var logger = Mock.Of<ILog>();
             metaDataReader.Setup(x => x.GetAllAsJson()).Returns(stubMetaData);
 
-            var helper = new MetaDataHelper(metaDataReader.Object, metaDataGenerator.Object, logger);
+            var helper = new MetaDataHelper(metaDataReader.Object, metaDataGenerator.Object, logger, metaDataReaderFramework.Object);
 
             var metaDataList = helper.GetAllStandardsMetaData();
 
