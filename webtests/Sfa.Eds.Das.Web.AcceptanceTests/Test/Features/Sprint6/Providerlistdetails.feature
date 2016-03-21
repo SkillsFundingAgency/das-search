@@ -41,16 +41,21 @@ When I search for provider by postcode
 Then I should see provider name in result page
 And I should not see location name field
 
-@ignore
-Scenario: Verify Provider with additional information on the result page
-Given I have chosen a Standard
-When I search for provider by postcode
-Then I should see matched provider list in the result page
-And under each provider I should see provider "website"
+
+Scenario Outline: Verify Provider with additional information on the result page
+Given I am on Standard '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+Then I should all providers in result page
+And   under each provider I should see provider "website"
 And I should see provider "location name"
 And I should see provider "location address"
-And I should see "Employer satisfaction"
-And I should see "Learner satisfaction"
+And I should see provider "Employer satisfaction"
+And I should see provider "Learner satisfaction"
+Examples:
+| id | Postcode |
+| 25 | CV7 8ED  |
+| 12 | cv1 2wt  |
 
 @ignore
 Scenario: Verify provider with no employer or learner satisfaction data

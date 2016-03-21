@@ -40,7 +40,6 @@ And I  should see "at your location"
 And I should see location name.
 
 @ginore
-#manual end to end Test.
 Scenario: Verify end to end provider detail page
 Given I have a provider with updated info in course directory
 When I open provider detail page 

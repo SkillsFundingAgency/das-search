@@ -62,11 +62,36 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             prvdrPage = new ProviderResultPage();
             prvdrPage.verifyProviderResultsPage();
         }
-        
+
+        [Then(@"I should see all providers in result page")]
+        public void ThenIShouldSeeAllProvidersInResultPage()
+        {
+            prvdrPage = new ProviderResultPage();
+            prvdrPage.verifyProviderResultsPage();
+        }
+
+
+
+
         [Then(@"I should see all providers listed in Alphabetical order")]
         public void ThenIShouldSeeAllProvidersListedInAlphabeticalOrder()
         {
            // ScenarioContext.Current.Pending();
         }
+
+
+        [Then(@"under each provider I should see provider ""(.*)""")]
+        public void ThenUnderEachProviderIShouldSeeProvider(string p0)
+        {
+            prvdrPage.verifyProvidersearchResultsInfo(p0);
+        }
+
+        [Then(@"I should see provider ""(.*)""")]
+        public void ThenIShouldSeeProvider(string p0)
+        {
+            prvdrPage.verifyProvidersearchResultsInfo(p0);
+        }
+
+
     }
 }

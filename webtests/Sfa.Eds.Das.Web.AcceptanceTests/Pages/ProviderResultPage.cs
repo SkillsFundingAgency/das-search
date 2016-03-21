@@ -25,10 +25,37 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerlist1 = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
         By postCodeValidation = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/div/label/div/p");
         By SearchProvidermsg = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
-        
+        By providerwebsite = By.XPath(".//*[@id='results']/div[1]/article[1]/dl/dt[2]");
+        By providereSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[3]");
+        By providerlSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[4]");
+
+
 
         public void verifyProviderResultsPage()
         {
+
+            Thread.Sleep(4000);
+            Assert.True(isDisplayed(providerlist));
+        }
+
+        public void verifyProvidersearchResultsInfo(String info)
+        {
+
+            switch(info)
+            {
+                case "website":
+                    Assert.True(isDisplayed(providerwebsite));
+                    break;
+
+                case "Employer satisfaction":
+                    Assert.True(isDisplayed(providereSatisfaction));
+                    break;
+                case "Learner satisfaction":
+                    Assert.True(isDisplayed(providerlSatisfaction));
+                    break;
+
+
+            }
 
             Thread.Sleep(4000);
             Assert.True(isDisplayed(providerlist));

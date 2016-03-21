@@ -194,29 +194,31 @@ testRunner.And("I should not see location name field", ((string)(null)), ((TechT
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify Provider with additional information on the result page")]
-        [NUnit.Framework.IgnoreAttribute()]
-        public virtual void VerifyProviderWithAdditionalInformationOnTheResultPage()
+        [NUnit.Framework.TestCaseAttribute("25", "CV7 8ED", null)]
+        [NUnit.Framework.TestCaseAttribute("12", "cv1 2wt", null)]
+        public virtual void VerifyProviderWithAdditionalInformationOnTheResultPage(string id, string postcode, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Provider with additional information on the result page", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Provider with additional information on the result page", exampleTags);
 #line 45
 this.ScenarioSetup(scenarioInfo);
 #line 46
-testRunner.Given("I have chosen a Standard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 47
-testRunner.When("I search for provider by postcode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 48
-testRunner.Then("I should see matched provider list in the result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 49
-testRunner.And("under each provider I should see provider \"website\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 50
-testRunner.And("I should see provider \"location name\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("under each provider I should see provider \"website\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-testRunner.And("I should see provider \"location address\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see provider \"location name\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
-testRunner.And("I should see \"Employer satisfaction\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see provider \"location address\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
-testRunner.And("I should see \"Learner satisfaction\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see provider \"Employer satisfaction\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+testRunner.And("I should see provider \"Learner satisfaction\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -228,15 +230,15 @@ testRunner.And("I should see \"Learner satisfaction\"", ((string)(null)), ((Tech
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify provider with no employer or learner satisfaction data", new string[] {
                         "ignore"});
-#line 56
+#line 61
 this.ScenarioSetup(scenarioInfo);
-#line 57
+#line 62
 testRunner.Given("I provider with no employer satisfaction data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 58
+#line 63
 testRunner.When("I search for a provider which doesn\'t have employer satisfaction data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
+#line 64
 testRunner.And("I see matched provider list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
+#line 65
 testRunner.Then("I see should provider with employer satisfaction field empty.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -249,15 +251,15 @@ testRunner.Then("I see should provider with employer satisfaction field empty.",
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify provider list page to show only active providers for a standard", new string[] {
                         "ignore"});
-#line 64
+#line 69
 this.ScenarioSetup(scenarioInfo);
-#line 65
+#line 70
 testRunner.Given("I am on provider  list page page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 66
+#line 71
 testRunner.And("I have bookmarked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 72
 testRunner.When("I open the link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 68
+#line 73
 testRunner.Then("I should see only active providers in provider list page who currently provides t" +
                     "raining.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
