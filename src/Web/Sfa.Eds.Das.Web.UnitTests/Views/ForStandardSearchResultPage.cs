@@ -104,7 +104,7 @@
         }
 
         [Test]
-        public void When_Bla()
+        public void When_SearchResultContainLevel()
         {
             var searchPage = new SearchResults();
             var model = new ApprenticeshipSearchResultViewModel
@@ -120,19 +120,22 @@
                                       },
                                   new ApprenticeshipSearchResultItemViewModel
                                       {
-                                        Title = "Test title 2"
+                                        Title = "Test title 2",
+                                        Level = "3 (equivalent to 2 A level passes)"
                                       }
                               }
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
             // First result
-            GetPartialWhere(html, ".details", "Test title").Should().Contain("72 months");
-            GetPartialWhere(html, ".details", "Test title").Should().Contain("Typical length:");
+            GetPartialWhere(html, ".result", "Test title 1").Should().Contain("72 months");
+            GetPartialWhere(html, ".result", "Test title 1").Should().Contain("Typical length:");
 
             // Second result
-            GetPartialWhere(html, ".details", "Test title 2").Should().NotContain("72 months");
-            GetPartialWhere(html, ".details", "Test title 2").Should().NotContain("Typical length:");
+            GetPartialWhere(html, ".result", "Test title 2").Should().NotContain("72 months");
+            GetPartialWhere(html, ".result", "Test title 2").Should().NotContain("Typical length:");
+            GetPartialWhere(html, ".result", "Test title 2").Should().Contain("Level");
+            GetPartialWhere(html, ".result", "Test title 2").Should().Contain("3 (equivalent to 2 A level passes)");
         }
     }
 }

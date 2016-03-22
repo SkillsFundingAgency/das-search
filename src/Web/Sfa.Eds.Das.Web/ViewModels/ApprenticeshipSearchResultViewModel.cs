@@ -11,6 +11,5 @@
         public IEnumerable<ApprenticeshipSearchResultItemViewModel> Results { get; set; }
 
         public bool HasError { get; set; }
-
     }
 }

@@ -29,6 +29,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             var results =
                 client.Search<StandardSearchResultsItem>(s => s
                     .Index(_applicationSettings.StandardIndexesAlias)
+                    .Types("standarddocument")
                     .From(0)
                     .Size(1)
                     .Query(q =>
