@@ -17,21 +17,20 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly IProviderSearchService _providerSearchService;
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
-
-        private IProviderRepository _providerRepository;
+        private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
 
         private readonly IStandardRepository _standardRepository;
 
         public ProviderController(IProviderSearchService providerSearchService, 
             ILog logger, 
-            IMappingService mappingService, 
-            IProviderRepository providerRepository, 
+            IMappingService mappingService,
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository, 
             IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
-            _providerRepository = providerRepository;
+            _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
             _standardRepository = standardRepository;
         }
 
@@ -59,7 +58,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         [HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            var model = _providerRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
+            var model = _apprenticeshipProviderRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
 
             if (model == null)
             {

@@ -90,7 +90,7 @@
     <Compile Include="Elasticsearch\ElasticsearchProvider.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
-    <Compile Include="Elasticsearch\ProviderRepository.cs" />
+    <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
     <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="IRetryWebRequests.cs" />

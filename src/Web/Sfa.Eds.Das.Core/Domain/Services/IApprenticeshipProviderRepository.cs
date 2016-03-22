@@ -2,7 +2,7 @@
 {
     using Sfa.Eds.Das.Core.Domain.Model;
 
-    public interface IProviderRepository
+    public interface IApprenticeshipProviderRepository
     {
         Provider GetById(string providerid, string locationId, string standardCode);
     }
