@@ -42,7 +42,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                                 {
                                     ""type"": ""string""
                                 },
-                                ""marketingInfo"":
+                                ""apprenticeshipMarketingInfo"":
                                 {
                                     ""type"": ""string""
                                 },
@@ -139,7 +139,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                                 {
                                     ""type"": ""string""
                                 },
-                                ""marketingInfo"":
+                                ""apprenticeshipMarketingInfo"":
                                 {
                                     ""type"": ""string""
                                 },

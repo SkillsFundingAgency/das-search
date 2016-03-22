@@ -139,7 +139,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             location.DeliveryLocation.Name,
             @""", ""providerMarketingInfo"": """,
             EscapeSpecialCharacters(provider.MarketingInfo),
-            @""", ""marketingInfo"": """,
+            @""", ""apprenticeshipMarketingInfo"": """,
             EscapeSpecialCharacters(apprenticeship.MarketingInfo),
             @""", ""phone"": """,
             apprenticeship.ContactInformation.Phone,

@@ -19,7 +19,7 @@
         public string LocationName { get; set; }
 
         public string ProviderMarketingInfo { get; set; }
-        public string MarketingInfo { get; set; }
+        public string ApprenticeshipMarketingInfo { get; set; }
 
         public string Phone { get; set; }
 
