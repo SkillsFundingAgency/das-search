@@ -222,14 +222,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                <dd><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 2942), Tuple.Create("\"", 2953)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3008), Tuple.Create("\"", 3019)
 
 #line 89 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 2949), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 3015), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 2949), false)
+, 3015), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -537,7 +537,7 @@ WriteLiteral("            ");
 
             
             #line 47 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyAsLinkHtml("Website course page", @Model.StandardInfoUrl));
+       Write(GetStandardPropertyAsLinkHtml("Website course page", @Model.Standard.StandardInfoUrl));
 
             
             #line default
@@ -548,7 +548,7 @@ WriteLiteral("            ");
 
             
             #line 48 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactUsUrl));
+       Write(GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactInformation.ContactUsUrl));
 
             
             #line default
@@ -559,7 +559,7 @@ WriteLiteral("            ");
 
             
             #line 49 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyHtml("Phone", Model.Phone));
+       Write(GetStandardPropertyHtml("Phone", Model.ContactInformation.Phone));
 
             
             #line default
@@ -570,7 +570,7 @@ WriteLiteral("            ");
 
             
             #line 50 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyHtml("Email", Model.Email));
+       Write(GetStandardPropertyHtml("Email", Model.ContactInformation.Email));
 
             
             #line default

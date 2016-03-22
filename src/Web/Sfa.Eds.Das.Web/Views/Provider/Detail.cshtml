@@ -44,10 +44,10 @@
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", @Model.StandardInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactUsUrl)
-            @GetStandardPropertyHtml("Phone", Model.Phone)
-            @GetStandardPropertyHtml("Email", Model.Email)
+            @GetStandardPropertyAsLinkHtml("Website course page", @Model.Standard.StandardInfoUrl)
+            @GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactInformation.ContactUsUrl)
+            @GetStandardPropertyHtml("Phone", Model.ContactInformation.Phone)
+            @GetStandardPropertyHtml("Email", Model.ContactInformation.Email)
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>

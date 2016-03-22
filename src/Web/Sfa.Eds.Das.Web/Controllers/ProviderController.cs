@@ -71,7 +71,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
 
-            var standardData = _standardRepository.GetById(model.StandardCode);
+            var standardData = _standardRepository.GetById(model.Standard.StandardCode);
 
             viewModel.StandardNameWithLevel = string.Concat(standardData.Title, " level ", standardData.NotionalEndLevel);
 
