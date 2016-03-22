@@ -1,11 +1,11 @@
 ﻿namespace Sfa.Eds.Das.Web
 {
+    using Core.Logging;
     using System;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Http;
-    using Core.Logging;
     using System.Web.Configuration;
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -27,6 +27,7 @@
 
             _logger.Info("Web applications started...");
         }
+
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();

@@ -32,8 +32,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                     .From(0)
                     .Size(1)
                     .Query(q =>
-                        q.QueryString(qs =>
-                            qs.OnFields(e => e.StandardId)
+                        q.QueryString(qs => qs
+                        .OnFields(e => e.StandardId)
                             .Query(id.ToString()))));
 
             if (results.ConnectionStatus.HttpStatusCode != 200)

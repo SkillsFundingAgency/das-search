@@ -49,7 +49,6 @@
             locationText.Should().NotContain(model.Address.Address1);
             locationText.Should().NotContain(model.Address.Address2);
             locationText.Should().Contain("Training will take place at your location");
-
         }
 
         [Test]

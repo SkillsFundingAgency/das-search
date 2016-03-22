@@ -259,7 +259,7 @@
     <Compile Include="Services\MappingActions\StandardViewModelMappingAction.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
-    <Compile Include="ViewModels\StandardResultItemViewModel.cs" />
+    <Compile Include="ViewModels\StandardSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />

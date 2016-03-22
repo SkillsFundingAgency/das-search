@@ -34,9 +34,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 .Query(q => q
                     .QueryString(qs => qs
                         .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords)
-                        .Query(keywords)
-                    ))
-                );
+                        .Query(keywords))));
 
             return new StandardSearchResults
             {

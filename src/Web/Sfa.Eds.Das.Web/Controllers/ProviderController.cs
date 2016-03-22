@@ -21,10 +21,11 @@ namespace Sfa.Eds.Das.Web.Controllers
 
         private readonly IStandardRepository _standardRepository;
 
-        public ProviderController(IProviderSearchService providerSearchService, 
-            ILog logger, 
+        public ProviderController(
+            IProviderSearchService providerSearchService,
+            ILog logger,
             IMappingService mappingService,
-            IApprenticeshipProviderRepository apprenticeshipProviderRepository, 
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
             IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;
@@ -46,8 +47,8 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             foreach (var providerSearchResult in searchResults.Hits)
             {
-                providerSearchResult.EmployerSatisfaction = providerSearchResult.EmployerSatisfaction*10;
-                providerSearchResult.LearnerSatisfaction = providerSearchResult.LearnerSatisfaction*10;
+                providerSearchResult.EmployerSatisfaction = providerSearchResult.EmployerSatisfaction * 10;
+                providerSearchResult.LearnerSatisfaction = providerSearchResult.LearnerSatisfaction * 10;
             }
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
