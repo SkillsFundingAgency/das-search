@@ -10,17 +10,17 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
-    public sealed class StandardIndexer : IGenericIndexerHelper<MetaDataItem>
+    public sealed class StandardIndexer : IGenericIndexerHelper<IMaintainStandardIndex>
         // ToDo: Rename to ApprenticeshipIndexer
     {
-        private readonly IIndexSettings<MetaDataItem> _settings;
-        private readonly IMaintanStandardIndex _searchIndexMaintainer;
+        private readonly IIndexSettings<IMaintainStandardIndex> _settings;
+        private readonly IMaintainStandardIndex _searchIndexMaintainer;
         private readonly IMetaDataHelper _metaDataHelper;
         private readonly ILog _log;
 
         public StandardIndexer(
-            IIndexSettings<MetaDataItem> settings,
-            IMaintanStandardIndex searchIndexMaintainer,
+            IIndexSettings<IMaintainStandardIndex> settings,
+            IMaintainStandardIndex searchIndexMaintainer,
             IMetaDataHelper metaDataHelper,
             ILog log)
         {

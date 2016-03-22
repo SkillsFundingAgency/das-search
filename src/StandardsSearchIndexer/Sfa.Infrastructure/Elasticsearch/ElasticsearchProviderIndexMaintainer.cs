@@ -11,13 +11,13 @@
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
-    public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintanProviderIndex
+    public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
 
-        private readonly IIndexSettings<Provider> _settings;
+        private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<Provider> settings, ILog log)
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<IMaintainProviderIndex> settings, ILog log)
             : base(factory, elasticsearchMapper, log, "Provider")
         {
             _indexDefinitionGenerator = indexDefinitionGenerator;

@@ -14,7 +14,7 @@ namespace Sfa.Infrastructure.Elasticsearch
     using Sfa.Infrastructure.Elasticsearch.Models;
 
     // ToDo: Rename to more generic Apprenticeship*
-    public sealed class ElasticsearchStandardIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintanStandardIndex
+    public sealed class ElasticsearchStandardIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainStandardIndex
     {
         public ElasticsearchStandardIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
             : base(factory, elasticsearchMapper, logger, "Standard")

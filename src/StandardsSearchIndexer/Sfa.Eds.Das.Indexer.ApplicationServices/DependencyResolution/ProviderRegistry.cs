@@ -12,9 +12,9 @@
     {
         public ProviderRegistry()
         {
-            For<IIndexSettings<Provider>>().Use<ProviderIndexSettings>();
-            For<IGenericIndexerHelper<Provider>>().Use<ProviderIndexer>();
-            For<IIndexerService<Provider>>().Use<IndexerService<Provider>>();
+            For<IIndexSettings<IMaintainProviderIndex>>().Use<ProviderIndexSettings>();
+            For<IGenericIndexerHelper<IMaintainProviderIndex>>().Use<ProviderIndexer>();
+            For<IIndexerService<IMaintainProviderIndex>>().Use<IndexerService<IMaintainProviderIndex>>();
             For<IProviderFeatures>().Use<ProviderIndexSettings>();
         }
     }

@@ -28,9 +28,9 @@
     [TestFixture]
     public class StandardIndexerServiceTests
     {
-        private IIndexSettings<MetaDataItem> _standardSettings;
+        private IIndexSettings<IMaintainStandardIndex> _standardSettings;
 
-        private IGenericIndexerHelper<MetaDataItem> _indexerService;
+        private IGenericIndexerHelper<IMaintainStandardIndex> _indexerService;
 
         private IElasticClient _elasticClient;
 
@@ -38,12 +38,12 @@
         public void SetUp()
         {
             var ioc = IoC.Initialize();
-            _standardSettings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
-            _indexerService = ioc.GetInstance<IGenericIndexerHelper<MetaDataItem>>();
+            _standardSettings = ioc.GetInstance<IIndexSettings<IMaintainStandardIndex>>();
+            _indexerService = ioc.GetInstance<IGenericIndexerHelper<IMaintainStandardIndex>>();
 
-            var settings = ioc.GetInstance<IIndexSettings<MetaDataItem>>();
+            var settings = ioc.GetInstance<IIndexSettings<IMaintainStandardIndex>>();
 
-            var maintanSearchIndex = ioc.GetInstance<IMaintanStandardIndex>();
+            var maintanSearchIndex = ioc.GetInstance<IMaintainStandardIndex>();
 
             var moqMetaDataHelper = new Mock<IMetaDataHelper>();
             moqMetaDataHelper.Setup(m => m.UpdateMetadataRepository());

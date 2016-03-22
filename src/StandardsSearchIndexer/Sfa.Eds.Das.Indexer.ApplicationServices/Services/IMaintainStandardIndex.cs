@@ -7,7 +7,7 @@
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
 
     // ToDo: Rename Apprentiecship
-    public interface IMaintanStandardIndex : IMaintainSearchIndexes
+    public interface IMaintainStandardIndex : IMaintainSearchIndexes
     {
         Task IndexStandards(string indexName, ICollection<MetaDataItem> entries);
 

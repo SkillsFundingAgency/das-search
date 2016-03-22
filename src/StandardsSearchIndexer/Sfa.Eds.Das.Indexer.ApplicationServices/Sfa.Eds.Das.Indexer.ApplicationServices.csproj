@@ -74,8 +74,8 @@
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
     <Compile Include="Provider\IProviderFeatures.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
-    <Compile Include="Services\IMaintanProviderIndex.cs" />
-    <Compile Include="Services\IMaintanStandardIndex.cs" />
+    <Compile Include="Services\IMaintainProviderIndex.cs" />
+    <Compile Include="Services\IMaintainStandardIndex.cs" />
     <Compile Include="Settings\AppServiceSettings.cs" />
     <Compile Include="Settings\BaseSettings.cs" />
     <Compile Include="Standard\IMetaDataHelper.cs" />

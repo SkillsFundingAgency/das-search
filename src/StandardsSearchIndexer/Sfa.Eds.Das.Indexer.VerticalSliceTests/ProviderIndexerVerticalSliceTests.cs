@@ -26,7 +26,7 @@
 
         private Mock<IGetMessageTimes> _mockCloudQueue;
 
-        private Mock<IMaintanProviderIndex> _mockSearchIndex;
+        private Mock<IMaintainProviderIndex> _mockSearchIndex;
 
         private Mock<IGetApprenticeshipProviders> _mockCourseDirectoryClient;
 
@@ -36,12 +36,12 @@
             _container = IoC.Initialize();
             _mockActiveProviders = new Mock<IGetActiveProviders>();
             _mockCloudQueue = new Mock<IGetMessageTimes>();
-            _mockSearchIndex = new Mock<IMaintanProviderIndex>();
+            _mockSearchIndex = new Mock<IMaintainProviderIndex>();
             _mockCourseDirectoryClient = new Mock<IGetApprenticeshipProviders>();
 
             _container.Configure(x => x.For<IGetActiveProviders>().Use(_mockActiveProviders.Object));
             _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue.Object));
-            _container.Configure(x => x.For<IMaintanProviderIndex>().Use(_mockSearchIndex.Object));
+            _container.Configure(x => x.For<IMaintainProviderIndex>().Use(_mockSearchIndex.Object));
             _container.Configure(x => x.For<IGetApprenticeshipProviders>().Use(_mockCourseDirectoryClient.Object));
 
             var queue = ConfigurationManager.AppSettings["Provider.QueueName"];
@@ -56,7 +56,7 @@
             var sut = _container.GetInstance<IGenericControlQueueConsumer>();
 
             // Act
-            sut.CheckMessage<Provider>();
+            sut.CheckMessage<IMaintainProviderIndex>();
         }
 
         [Test]

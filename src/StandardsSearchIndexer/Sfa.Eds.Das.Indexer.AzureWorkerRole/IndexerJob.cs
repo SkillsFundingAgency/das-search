@@ -2,6 +2,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using ApplicationServices.Services;
     using Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
     using Sfa.Eds.Das.Indexer.Core.Models;
@@ -17,7 +18,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public void Run()
         {
-            var tasks = new List<Task> { _controlQueueConsumer.CheckMessage<MetaDataItem>(), _controlQueueConsumer.CheckMessage<Provider>()};
+            var tasks = new List<Task> { _controlQueueConsumer.CheckMessage<IMaintainStandardIndex>(), _controlQueueConsumer.CheckMessage<IMaintainProviderIndex>() };
 
             Task.WaitAll(tasks.ToArray());
         }

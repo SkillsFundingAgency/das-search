@@ -12,10 +12,10 @@
     {
         public StandardRegistry()
         {
-            For<IIndexSettings<MetaDataItem>>().Use<StandardIndexSettings>();
+            For<IIndexSettings<IMaintainStandardIndex>>().Use<StandardIndexSettings>();
             For<IMetaDataHelper>().Use<MetaDataHelper>();
-            For<IIndexerService<MetaDataItem>>().Use<IndexerService<MetaDataItem>>();
-            For<IGenericIndexerHelper<MetaDataItem>>().Use<StandardIndexer>();
+            For<IIndexerService<IMaintainStandardIndex>>().Use<IndexerService<IMaintainStandardIndex>>();
+            For<IGenericIndexerHelper<IMaintainStandardIndex>>().Use<StandardIndexer>();
         }
     }
 }

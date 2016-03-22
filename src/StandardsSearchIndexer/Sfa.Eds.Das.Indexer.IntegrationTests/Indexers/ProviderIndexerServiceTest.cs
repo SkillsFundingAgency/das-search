@@ -27,13 +27,13 @@
     {
         private IContainer _ioc;
 
-        private IGenericIndexerHelper<Provider> _indexerService;
+        private IGenericIndexerHelper<IMaintainProviderIndex> _indexerService;
 
-        private IIndexerService<Provider> _sut;
+        private IIndexerService<IMaintainProviderIndex> _sut;
 
         private IElasticClient _elasticClient;
 
-        private IIndexSettings<Provider> _providerSettings;
+        private IIndexSettings<IMaintainProviderIndex> _providerSettings;
 
         private Mock<IProviderFeatures> _features;
 
@@ -43,11 +43,11 @@
             _ioc = IoC.Initialize();
 
             _ioc.GetInstance<IGetApprenticeshipProviders>();
-            _ioc.GetInstance<IIndexSettings<Provider>>();
-            _indexerService = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
+            _ioc.GetInstance<IIndexSettings<IMaintainProviderIndex>>();
+            _indexerService = _ioc.GetInstance<IGenericIndexerHelper<IMaintainProviderIndex>>();
 
-            _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
-            var maintainSearchIndexer = _ioc.GetInstance<IMaintanProviderIndex>();
+            _providerSettings = _ioc.GetInstance<IIndexSettings<IMaintainProviderIndex>>();
+            var maintainSearchIndexer = _ioc.GetInstance<IMaintainProviderIndex>();
             _features = new Mock<IProviderFeatures>();
             var providerRepository = new Mock<IGetApprenticeshipProviders>();
             var activeProviderRepository = new Mock<IGetActiveProviders>();
@@ -61,7 +61,7 @@
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
-            _sut = _ioc.GetInstance<IIndexerService<Provider>>();
+            _sut = _ioc.GetInstance<IIndexerService<IMaintainProviderIndex>>();
         }
 
         [Test]

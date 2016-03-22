@@ -5,6 +5,7 @@ using StructureMap;
 
 namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 {
+    using ApplicationServices.Services;
     using ApplicationServices.Settings;
     using Core.Models;
 
@@ -22,7 +23,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
         public void Setup()
         {
             _ioc = IoC.Initialize();
-            _ioc.GetInstance<IIndexSettings<MetaDataItem>>();
+            _ioc.GetInstance<IIndexSettings<IMaintainStandardIndex>>();
 
             _sut = _ioc.GetInstance<IGetStandardLevel>();
         }

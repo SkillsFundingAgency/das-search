@@ -29,8 +29,8 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
             For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
-            For<IMaintanStandardIndex>().Use<ElasticsearchStandardIndexMaintainer>();
-            For<IMaintanProviderIndex>().Use<ElasticsearchProviderIndexMaintainer>();
+            For<IMaintainStandardIndex>().Use<ElasticsearchStandardIndexMaintainer>();
+            For<IMaintainProviderIndex>().Use<ElasticsearchProviderIndexMaintainer>();
             For<IGenerateIndexDefinitions<Provider>>().Use<ProviderIndexGenerator>();
             For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
         }

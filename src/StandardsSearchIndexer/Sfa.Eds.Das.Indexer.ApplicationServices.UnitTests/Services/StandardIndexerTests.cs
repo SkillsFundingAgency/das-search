@@ -18,15 +18,15 @@
     public sealed class StandardIndexerTests
     {
         private StandardIndexer _sut;
-        private Mock<IIndexSettings<MetaDataItem>> _mockSettings;
-        private Mock<IMaintanStandardIndex> _mockIndexMaintainer;
+        private Mock<IIndexSettings<IMaintainStandardIndex>> _mockSettings;
+        private Mock<IMaintainStandardIndex> _mockIndexMaintainer;
         private Mock<IMetaDataHelper> _mockMetaDataHelper;
 
         [SetUp]
         public void Setup()
         {
-            _mockSettings = new Mock<IIndexSettings<MetaDataItem>>();
-            _mockIndexMaintainer = new Mock<IMaintanStandardIndex>();
+            _mockSettings = new Mock<IIndexSettings<IMaintainStandardIndex>>();
+            _mockIndexMaintainer = new Mock<IMaintainStandardIndex>();
             _mockMetaDataHelper = new Mock<IMetaDataHelper>();
             var mockLogger = Mock.Of<ILog>();
 

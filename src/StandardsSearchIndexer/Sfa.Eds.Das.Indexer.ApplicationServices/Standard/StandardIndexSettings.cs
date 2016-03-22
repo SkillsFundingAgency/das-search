@@ -1,11 +1,11 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
 {
     using System.Configuration;
-
+    using Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
-    public class StandardIndexSettings : IIndexSettings<MetaDataItem>
+    public class StandardIndexSettings : IIndexSettings<IMaintainStandardIndex>
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 

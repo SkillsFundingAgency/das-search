@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Indexer.AzureWorkRole.UnitTests
 {
     using ApplicationServices.Queue;
+    using ApplicationServices.Services;
     using AzureWorkerRole;
     using Core.Models;
     using Moq;
@@ -20,8 +21,8 @@
             sut.Run();
 
             // Assert
-            mockConsumer.Verify(x => x.CheckMessage<MetaDataItem>());
-            mockConsumer.Verify(x => x.CheckMessage<Core.Models.Provider.Provider>());
+            mockConsumer.Verify(x => x.CheckMessage<IMaintainStandardIndex>());
+            mockConsumer.Verify(x => x.CheckMessage<IMaintainProviderIndex>());
         }
     }
 }
