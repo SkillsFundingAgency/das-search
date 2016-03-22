@@ -47,14 +47,13 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        public SearchResult<ProviderSearchResultsItem> SearchByLocation(int standardId, Coordinate geoPoint)
+        public SearchResult<StandardProviderSearchResultsItem> SearchByLocation(int code, Coordinate geoPoint)
         {
             var client = _elasticsearchClientFactory.Create();
+            var qryStr = CreateStandardProviderRawQuery(code.ToString(), geoPoint);
 
-            var qryStr = CreateRawQuery(standardId.ToString(), geoPoint);
-
-            ISearchResponse<ProviderSearchResultsItem> results = client
-                .Search<ProviderSearchResultsItem>(s => s
+            var results = client
+                .Search<StandardProviderSearchResultsItem>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
                 .From(0)
                 .Size(1000)
@@ -66,16 +65,16 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                     return g;
                 }));
 
-            var documents = results.Hits.Select(hit => new ProviderSearchResultsItem
+            var documents = results.Hits.Select(hit => new StandardProviderSearchResultsItem
             {
-                Id = hit.Source.Id.ToString(),
+                Id = hit.Source.Id,
                 UkPrn = hit.Source.UkPrn,
                 Address = hit.Source.Address,
                 ContactUsUrl = hit.Source.ContactUsUrl,
                 DeliveryModes = hit.Source.DeliveryModes,
                 Email = hit.Source.Email,
-                EmployerSatisfaction = hit.Source.EmployerSatisfaction,
-                LearnerSatisfaction = hit.Source.LearnerSatisfaction,
+                EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
+                LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
                 LocationId = hit.Source.LocationId,
                 LocationName = hit.Source.LocationName,
                 MarketingName = hit.Source.MarketingName,
@@ -92,14 +91,26 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 throw new SearchException($"Search returned a status code of {results?.ConnectionStatus?.HttpStatusCode}");
             }
 
-            return new SearchResult<ProviderSearchResultsItem> { Hits = documents, Total = results.Total };
+            return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total };
         }
 
-        private string CreateRawQuery(string standardId, Coordinate location)
+        private string CreateStandardProviderRawQuery(string code, Coordinate location)
         {
             return string.Concat(
                 @"{""filtered"": { ""query"": { ""match"": { ""standardCode"": """,
-                standardId,
+                code,
+                @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
+                location.Lon,
+                ", ",
+                location.Lat,
+                "] }}}}}}");
+        }
+
+        private string CreateFrameworkProviderRawQuery(string code, Coordinate location)
+        {
+            return string.Concat(
+                @"{""filtered"": { ""query"": { ""match"": { ""frameworkCode"": """,
+                code,
                 @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
                 location.Lon,
                 ", ",

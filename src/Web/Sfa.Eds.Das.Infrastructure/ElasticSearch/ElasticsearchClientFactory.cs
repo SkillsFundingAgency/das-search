@@ -23,7 +23,8 @@
             var settings = new ConnectionSettings(node, defaultIndex: _applicationSettings.StandardIndexesAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
-            settings.MapDefaultTypeNames(d => d.Add(typeof(ProviderSearchResultsItem), "provider"));
+            settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));
+            settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkProviderSearchResultsItem), "frameworkprovider"));
 
             return new ElasticClient(settings);
         }

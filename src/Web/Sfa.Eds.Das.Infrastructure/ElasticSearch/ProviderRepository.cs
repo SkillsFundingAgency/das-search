@@ -37,7 +37,7 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
             var client = _elasticsearchClientFactory.Create();
 
             var results =
-               client.Search<ProviderSearchResultsItem>(s => s
+               client.Search<StandardProviderSearchResultsItem>(s => s
                    .Index(_applicationSettings.ProviderIndexAlias)
                    .From(0)
                    .Size(1)

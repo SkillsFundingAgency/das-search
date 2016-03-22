@@ -5,6 +5,6 @@ namespace Sfa.Eds.Das.Infrastructure.Mapping
 {
     public interface IProviderMapping
     {
-        Provider MapToProvider(ProviderSearchResultsItem item);
+        Provider MapToProvider(StandardProviderSearchResultsItem item);
     }
 }

@@ -10,7 +10,7 @@ namespace Sfa.Eds.Das.Infrastructure.Mapping
 {
     public class ProviderMapping : IProviderMapping
     {
-        public Provider MapToProvider(ProviderSearchResultsItem item)
+        public Provider MapToProvider(StandardProviderSearchResultsItem item)
         {
             return new Provider
             {

@@ -49,7 +49,7 @@
             const int testStandardId = 123;
             const string testPostCode = "AS3 4AA";
             var testCoordinates = new Coordinate { Lat = 52.1234, Lon = 1.3445 };
-            var stubSearchResults = new List<ProviderSearchResultsItem> { new ProviderSearchResultsItem(), new ProviderSearchResultsItem() };
+            var stubSearchResults = new List<StandardProviderSearchResultsItem> { new StandardProviderSearchResultsItem(), new StandardProviderSearchResultsItem() };
             var mockSearchProvider = CreateMockSearchProvider(stubSearchResults);
             var mockStandardRepository = CreateMockStandardRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
@@ -115,9 +115,9 @@
             Assert.That(result.HasError, Is.True);
         }
 
-        private static Mock<ISearchProvider> CreateMockSearchProvider(List<ProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
+        private static Mock<ISearchProvider> CreateMockSearchProvider(List<StandardProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
         {
-            var searchResults = new SearchResult<ProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
+            var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
 
             var mockSearchProvider = new Mock<ISearchProvider>();
             mockSearchProvider.Setup(x => x.SearchByLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Returns(searchResults);

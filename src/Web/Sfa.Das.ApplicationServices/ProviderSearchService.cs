@@ -44,7 +44,7 @@ namespace Sfa.Das.ApplicationServices
                         StandardId = standardId,
                         StandardName = standardName,
                         PostCode = postCode,
-                        Hits = new ProviderSearchResultsItem[0],
+                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
                         HasError = false
                     };
                 }
@@ -74,7 +74,7 @@ namespace Sfa.Das.ApplicationServices
                     StandardId = standardId,
                     StandardName = standardName,
                     PostCode = postCode,
-                    Hits = new ProviderSearchResultsItem[0],
+                    Hits = new IApprenticeshipProviderSearchResultsItem[0],
                     HasError = true
                 };
             }

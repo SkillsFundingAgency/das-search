@@ -7,6 +7,6 @@ namespace Sfa.Das.ApplicationServices
     {
         StandardSearchResults SearchByKeyword(string keywords, int skip, int take);
 
-        SearchResult<ProviderSearchResultsItem> SearchByLocation(int standardId, Coordinate testCoordinates);
+        SearchResult<StandardProviderSearchResultsItem> SearchByLocation(int standardId, Coordinate testCoordinates);
     }
 }

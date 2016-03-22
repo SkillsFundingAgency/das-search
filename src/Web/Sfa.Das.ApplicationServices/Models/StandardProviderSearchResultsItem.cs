@@ -4,7 +4,7 @@
 
     using Sfa.Eds.Das.Core.Domain.Model;
 
-    public sealed class ProviderSearchResultsItem
+    public sealed class StandardProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
     {
         public string Id { get; set; }
 
