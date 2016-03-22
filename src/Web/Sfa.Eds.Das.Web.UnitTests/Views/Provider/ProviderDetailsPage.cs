@@ -30,6 +30,11 @@
                 },
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -64,6 +69,11 @@
                 },
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
                 ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -97,6 +107,11 @@
                 },
                 DeliveryModes = new List<string> { "blockRelease" },
                 ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -130,6 +145,11 @@
                 },
                 DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
                 ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -141,6 +161,44 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
+            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
+
+            GetPartial(html, "ul li").Should().Contain("at your location");
+        }
+
+        [Test]
+        public void ShouldShowProviderMarketingInfo()
+        {
+            var detail = new Detail();
+            var model = new ProviderViewModel
+            {
+                Name = "Test name",
+                Location = new Location
+                {
+                    LocationName = "Test venue name"
+                },
+                DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
+                ProviderMarketingInfo = "Provider test marketing info",
+                ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address1",
+                    Address2 = "Address2",
+                    County = "County",
+                    Postcode = "Postcode",
+                    Town = "Town"
+                }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var providerMArketingInfoHtml = GetPartial(html, "div div div p");
+
+            providerMArketingInfoHtml.Should().Contain(model.ProviderMarketingInfo);
             GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
 
             GetPartial(html, "ul li").Should().Contain("at your location");
