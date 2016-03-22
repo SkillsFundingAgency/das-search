@@ -17,7 +17,7 @@ Scenario Outline: Search ASPIRE ACHIEVE ADVANCE LIMITED Provider by postcode fal
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should see provider "aspire archive advance limited" in provider results page.
+Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
 Examples:
 | Postcode| id |
 | LN76HN  | 25 |
@@ -28,8 +28,8 @@ Scenario Outline: Search Provider by postcode outside  Provider radius 60 miles
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should not see provider "aspire archive advance limited" in provider results page.
-And I should see provider "millbrook management services limited" in provider results page.
+Then I should not see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
+And  I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
 Examples:
 | Postcode | id |
 | LN76HJ   | 25 |
@@ -42,8 +42,8 @@ Scenario Outline:Search Provider by postcode falling inside Provider radius
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should see provider "aspire archive advance limited" in provider results page.
-And I should see provider "millbrook management services limited" in provider results page.
+Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
+And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
 Examples:
 | Postcode| id |
 | DN209NH | 25 |
@@ -54,10 +54,9 @@ Scenario Outline:Search Provider by postcode falling inside more than one provid
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should see provider "aspire achieve advance limited" in provider results page.
+Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
 Examples:
 | Postcode | id |
-| NW66AY   | 25 |
 | B9 5NA   | 25 |
 
 
@@ -76,8 +75,8 @@ Scenario Outline: Same Provider supporting two different standards operating fro
 Given I am on Standard '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should see provider "south & city college birmingham" in provider results page.
-#And I should see location venue of provider "bordesley green campus."
+Then I should see provider "SOUTH & CITY COLLEGE BIRMINGHAM" in provider results page.
+And I should see location venue of provider "Bordesley Green Campus."
 Examples:
 | id | Postcode |
 | 25 | B46 3DJ  |
@@ -89,4 +88,4 @@ Scenario: Search Provider by invalid postcode1
 Given I am on Standard '25' detail page
 When I enter 'test' in provider search box
 And I search Search for provider
-Then I should see message searchresult "There are currently no providers for the apprenticeship standard: Digital & Technology Solutions Professional in test"
+Then I should see message searchresult "There are currently no providers for the apprenticeship standard: 'Digital & Technology Solutions Professional' in 'test'"

@@ -72,6 +72,7 @@
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
     <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
+    <Compile Include="Provider\IProviderFeatures.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Services\IMaintanProviderIndex.cs" />
     <Compile Include="Services\IMaintanStandardIndex.cs" />

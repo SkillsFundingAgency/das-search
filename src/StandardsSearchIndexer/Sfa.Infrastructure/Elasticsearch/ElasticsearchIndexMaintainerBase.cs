@@ -3,14 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Nest;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.Common.Models;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;   
     using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Services;
-
+    
     public abstract class ElasticsearchIndexMaintainerBase : IMaintainSearchIndexes
     {
         private readonly string _typeOfIndex;
@@ -86,8 +82,7 @@
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {
-                aliasRequest.Actions.Add(
-                    new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = aliasName, Index = existingIndexOnAlias } });
+                aliasRequest.Actions.Add(new AliasRemoveAction { Remove = new AliasRemoveOperation { Alias = aliasName, Index = existingIndexOnAlias } });
             }
 
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = aliasName, Index = newIndexName } });

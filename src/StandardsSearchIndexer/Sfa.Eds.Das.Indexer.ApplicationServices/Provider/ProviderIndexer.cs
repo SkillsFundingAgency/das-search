@@ -1,33 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-using Sfa.Eds.Das.Indexer.Core;
-using Sfa.Eds.Das.Indexer.Core.Services;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
+﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     public sealed class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
     {
         private readonly IGetActiveProviders _activeProviderClient;
+
         private readonly IGetApprenticeshipProviders _providerRepository;
         private readonly IMaintanProviderIndex _searchIndexMaintainer;
         private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
+
+        private readonly IProviderFeatures _features;
+
         private readonly ILog _log;
 
         public ProviderIndexer(
             IIndexSettings<Core.Models.Provider.Provider> settings,
             IMaintanProviderIndex searchIndexMaintainer,
+            IProviderFeatures features,
             IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             ILog log)
         {
             _settings = settings;
+            _features = features;
             _providerRepository = providerRepository;
             _activeProviderClient = activeProviderClient;
             _searchIndexMaintainer = searchIndexMaintainer;
@@ -48,9 +51,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
             _searchIndexMaintainer.CreateIndex(indexName);
 
-            var exists = _searchIndexMaintainer.IndexExists(indexName);
-
-            return exists;
+            return _searchIndexMaintainer.IndexExists(indexName);
         }
 
         public async Task IndexEntries(string indexName)
@@ -97,13 +98,17 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
         }
 
-        private async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
+        public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
         {
             var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
+            if (_features.FilterInactiveProviders)
+            {
+                var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
 
-            var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
+                return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
+            }
 
-            return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
+            return providers.ToList();
         }
     }
 }

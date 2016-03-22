@@ -2,8 +2,6 @@
 {
     using System;
 
-    using Common.Models;
-
     public class FrameworkMetaData : IIndexEntry
     {
         public int FworkCode { get; set; }

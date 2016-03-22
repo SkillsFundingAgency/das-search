@@ -8,6 +8,7 @@ using Sfa.Eds.Das.Web.Services;
 using Sfa.Eds.Das.Web.ViewModels;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Sfa.Eds.Das.Core.Domain.Services;
 
 namespace Sfa.Eds.Das.Web.Controllers.Tests
 {
@@ -15,6 +16,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
     public class ProviderControllerTests
     {
         private Mock<ILog> mockLogger;
+        private Mock<IStandardRepository> mockStandardRepository;
         private Mock<IMappingService> mockMappingService;
         private Mock<IProviderSearchService> mockProviderSearchService;
 
@@ -24,6 +26,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockLogger = new Mock<ILog>();
             mockMappingService = new Mock<IMappingService>();
             mockProviderSearchService = new Mock<IProviderSearchService>();
+            mockStandardRepository = new Mock<IStandardRepository>();
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123, PostCode = "AB3 1SD" };
             var searchResults = new ProviderSearchResults();
             var stubViewModel = new ProviderSearchResultViewModel();
@@ -31,7 +34,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
             mockMappingService.Setup(x => x.Map<ProviderSearchResults, ProviderSearchResultViewModel>(It.IsAny<ProviderSearchResults>())).Returns(stubViewModel);
 
-            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object);
+            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, null, mockStandardRepository.Object);
 
             var result = await controller.SearchResults(searchCriteria);
 
@@ -47,7 +50,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
         {
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123 };
 
-            var controller = new ProviderController(null, null, null);
+            var controller = new ProviderController(null, null, null, null, null);
 
             var result = await controller.SearchResults(searchCriteria);
 

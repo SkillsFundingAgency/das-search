@@ -1,7 +1,7 @@
-using System.Configuration;
-
-namespace Sfa.Deds.Settings
+namespace Sfa.Infrastructure.Settings
 {
+    using System.Configuration;
+
     public class LarsSettings : ILarsSettings
     {
         public string SearchEndpointConfigurationName => ConfigurationManager.AppSettings["SearchEndpointConfigurationName"];

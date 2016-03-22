@@ -59,11 +59,12 @@
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\CodeTypes.cs" />
+    <Compile Include="Models\DeliveryMode.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultsItem.cs" />
     <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\SearchResult{T}.cs" />
     <Compile Include="Models\StandardSearchResults.cs" />
     <Compile Include="Models\StandardSearchResultsItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -144,7 +144,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 37
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 38
- testRunner.Then("I should see matching Standard \'actuarial technician\' standards on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see matching Standard \'Actuarial Technician\' standards on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -173,12 +173,12 @@ this.ScenarioSetup(scenarioInfo);
 #line 49
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 50
- testRunner.Then("I should see matching Standard \'aerospace manufacturing fitter\' standards on resu" +
+ testRunner.Then("I should see matching Standard \'Aerospace Manufacturing Fitter\' standards on resu" +
                     "lt page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 51
- testRunner.And("I should see matching Standard \'aerospace engineer\' standards on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I should see matching Standard \'Aerospace Engineer\' standards on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
- testRunner.And("I should see matching Standard \'aerospace software development engineer\' standard" +
+ testRunner.And("I should see matching Standard \'Aerospace Software Development Engineer\' standard" +
                     "s on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

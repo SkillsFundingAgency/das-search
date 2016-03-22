@@ -5,12 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Services;
-    using Sfa.Eds.Das.Indexer.Core;
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Services;
-    using Settings;
 
-    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Models;
 
     public sealed class StandardIndexer : IGenericIndexerHelper<MetaDataItem>
         // ToDo: Rename to ApprenticeshipIndexer

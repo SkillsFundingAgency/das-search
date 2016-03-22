@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
+﻿using Sfa.Eds.Das.Core.Configuration;
+
+namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
     using System;
     using System.Linq;
@@ -12,20 +14,21 @@
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _applicationLogger;
+        private readonly IConfigurationSettings _applicationSettings;
 
-        public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger)
+        public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _applicationLogger = applicationLogger;
+            _applicationSettings = applicationSettings;
         }
 
         public Standard GetById(int id)
         {
             var client = this._elasticsearchClientFactory.Create();
             var results =
-                client.Search<StandardSearchResultsItem>(
-                    s => s
-                    .Types("standarddocument")
+                client.Search<StandardSearchResultsItem>(s => s
+                    .Index(_applicationSettings.StandardIndexesAlias)
                     .From(0)
                     .Size(1)
                     .Query(q =>

@@ -5,6 +5,7 @@
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Elasticsearch.Models;
 
     public class ElasticsearchMapper : IElasticsearchMapper
     {

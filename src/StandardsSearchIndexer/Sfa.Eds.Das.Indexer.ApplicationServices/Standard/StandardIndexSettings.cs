@@ -23,6 +23,10 @@
 
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
+        public string StandardProviderDocumentType => ConfigurationManager.AppSettings["StandardProviderDocumentType"];
+
+        public string FrameworkProviderDocumentType => ConfigurationManager.AppSettings["FrameworkProviderDocumentType"];
+
         private string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 
         private string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];

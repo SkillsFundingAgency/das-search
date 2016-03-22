@@ -2,17 +2,17 @@
 
 namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
 {
-    public sealed class FrameworkInformation
+    public sealed class FrameworkInformation : IApprenticeshipInformation
     {
-        public int FrameworkCode { get; set; }
+        public int Code { get; set; }
 
         public int Level { get; set; }
 
         public int PathwayCode { get; set; }
 
-        public string FrameworkInfoUrl { get; set; }
+        public string InfoUrl { get; set; }
 
-        public ContactInformation FrameworkContact { get; set; }
+        public ContactInformation ContactInformation { get; set; }
 
         public string MarketingInfo { get; set; }
 

@@ -75,7 +75,6 @@
     <Compile Include="MetaDataManagerTests.cs" />
     <Compile Include="Services\CsvServiceTest.cs" />
     <Compile Include="Services\GitTestResults.cs" />
-    <Compile Include="Services\LarsServiceTest.cs" />
     <Compile Include="MetaDataTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseSettingsTests.cs" />

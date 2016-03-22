@@ -1,11 +1,10 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.DependencyResolution
 {
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services.Interfaces;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Services;
 
     using StructureMap;
 

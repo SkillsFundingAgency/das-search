@@ -1,7 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
     using System;
-    using Sfa.Eds.Das.Indexer.Common.Models;
 
     public interface IMaintainSearchIndexes
     {

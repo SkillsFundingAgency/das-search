@@ -2,16 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using Core.Services;
+    using Core.Models.Framework;
+    using MetaData;
     using Moq;
-
     using NUnit.Framework;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
-    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
+    using Core.Services;
+    using Standard;
+    using Tools.MetaDataCreationTool;
+    using Tools.MetaDataCreationTool.Services.Interfaces;
 
     [TestFixture]
     public class MetaDataHelperTests

@@ -22,6 +22,7 @@
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Elasticsearch;
+    using Sfa.Infrastructure.Elasticsearch.Models;
     using Sfa.Infrastructure.Services;
 
     [TestFixture]

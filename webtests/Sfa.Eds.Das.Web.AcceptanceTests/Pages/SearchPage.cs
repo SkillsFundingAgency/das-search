@@ -30,11 +30,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.XPath("//input[@type='submit']");
         public String title = "Google";
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
-        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/ol/li/div/h2/a");
+        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
         By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
-        By typicallength = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/dd[2]");
+        By typicallength = By.XPath(".//*[@id='results']/div[1]/article/dl/dd[2]");
 
-        By selectStaandard = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/h2/a");
+        By selectStaandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
 
         public void launchLandingPage()
@@ -83,6 +83,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Thread.Sleep(3000);
         }
 
+        
 
 
 

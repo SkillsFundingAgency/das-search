@@ -34,14 +34,14 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     public partial class SearchResultMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel>
     {
 
-#line 27 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 25 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderErrorMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 28 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 26 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -57,26 +57,26 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There was a problem pe
 "/p>\r\n");
 
 
-#line 35 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 33 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 35 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 33 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 37 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 34 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult RenderZeroResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 38 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 35 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -88,38 +88,38 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n    </h2>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are no standards matching your search for \'");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are no standards matching your search for \'<b>");
 
 
-#line 43 "..\..\Views\Standard\_SearchResultMessage.cshtml"
-                           WriteTo(__razor_helper_writer, Model.SearchTerm);
+#line 40 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+                              WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 45 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 42 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 45 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 42 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 47 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 43 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderAllResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 48 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 44 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -134,26 +134,26 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        All apprenticeship standards.\r\n    </p>\r\n");
 
 
-#line 55 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 51 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 55 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 51 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 57 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 52 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessageOneResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 58 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 53 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -165,47 +165,47 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n    </h2>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There is ");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There is <b>");
 
 
-#line 63 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 58 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " standard matching your search for \'");
+WriteLiteralTo(__razor_helper_writer, "</b> standard matching your search for \'<b>");
 
 
-#line 63 "..\..\Views\Standard\_SearchResultMessage.cshtml"
-                                          WriteTo(__razor_helper_writer, Model.SearchTerm);
+#line 58 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+                                                    WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 65 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 60 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 65 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 60 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 68 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 62 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 69 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 63 "..\..\Views\Standard\_SearchResultMessage.cshtml"
  
 
 
@@ -217,35 +217,35 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeship standards\r\n    </h2>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are ");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are <b>");
 
 
-#line 74 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 68 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " standards matching your search for \'");
+WriteLiteralTo(__razor_helper_writer, "</b> standards matching your search for \'<b>");
 
 
-#line 74 "..\..\Views\Standard\_SearchResultMessage.cshtml"
-                                            WriteTo(__razor_helper_writer, Model.SearchTerm);
+#line 68 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+                                                      WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 76 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 70 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 76 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+#line 70 "..\..\Views\Standard\_SearchResultMessage.cshtml"
 }
 #line default
 #line hidden
@@ -255,16 +255,16 @@ WriteLiteralTo(__razor_helper_writer, "\'.\r\n    </p>\r\n");
         }
         public override void Execute()
         {
-WriteLiteral("<div>\r\n\r\n");
+WriteLiteral("<div>\r\n");
 
             
-            #line 5 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 4 "..\..\Views\Standard\_SearchResultMessage.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 5 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 4 "..\..\Views\Standard\_SearchResultMessage.cshtml"
      if (Model.HasError)
     {
         
@@ -272,14 +272,14 @@ WriteLiteral("<div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 7 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 6 "..\..\Views\Standard\_SearchResultMessage.cshtml"
    Write(RenderErrorMessage());
 
             
             #line default
             #line hidden
             
-            #line 7 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 6 "..\..\Views\Standard\_SearchResultMessage.cshtml"
                              
     }
     else if (Model.TotalResults == 0)
@@ -289,14 +289,14 @@ WriteLiteral("<div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 10 "..\..\Views\Standard\_SearchResultMessage.cshtml"
    Write(RenderZeroResult());
 
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 10 "..\..\Views\Standard\_SearchResultMessage.cshtml"
                            ;
     }
     else if (string.IsNullOrEmpty(Model.SearchTerm) || Model.SearchTerm == "*")
@@ -306,14 +306,14 @@ WriteLiteral("<div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 15 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 14 "..\..\Views\Standard\_SearchResultMessage.cshtml"
    Write(RenderAllResult());
 
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 14 "..\..\Views\Standard\_SearchResultMessage.cshtml"
                           
     }
     else if (Model.TotalResults == 1)
@@ -323,14 +323,14 @@ WriteLiteral("<div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 19 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 18 "..\..\Views\Standard\_SearchResultMessage.cshtml"
    Write(RenderMessageOneResult());
 
             
             #line default
             #line hidden
             
-            #line 19 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 18 "..\..\Views\Standard\_SearchResultMessage.cshtml"
                                  
     }
     else
@@ -340,29 +340,21 @@ WriteLiteral("<div>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 23 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 22 "..\..\Views\Standard\_SearchResultMessage.cshtml"
    Write(RenderMessage());
 
             
             #line default
             #line hidden
             
-            #line 23 "..\..\Views\Standard\_SearchResultMessage.cshtml"
+            #line 22 "..\..\Views\Standard\_SearchResultMessage.cshtml"
                         
     }
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n\r\n");
-
-WriteLiteral("\r\n");
-
-WriteLiteral("\r\n");
-
-WriteLiteral("\r\n");
-
-WriteLiteral("\r\n\r\n");
+WriteLiteral("</div>\r\n");
 
 WriteLiteral("\r\n");
 

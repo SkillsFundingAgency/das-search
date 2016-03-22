@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Indexer.Core
+﻿namespace Sfa.Eds.Das.Indexer.Core.Services
 {
     using System.Data;
 

@@ -1,11 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using Sfa.Eds.Das.Web.Extensions;
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.Core.Domain.Model;
+    using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Web.Models;
     using Sfa.Eds.Das.Web.Services;
@@ -17,11 +20,21 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        public ProviderController(IProviderSearchService providerSearchService, ILog logger, IMappingService mappingService)
+        private IProviderRepository _providerRepository;
+
+        private readonly IStandardRepository _standardRepository;
+
+        public ProviderController(IProviderSearchService providerSearchService, 
+            ILog logger, 
+            IMappingService mappingService, 
+            IProviderRepository providerRepository, 
+            IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
+            _providerRepository = providerRepository;
+            _standardRepository = standardRepository;
         }
 
         [HttpGet]
@@ -40,9 +53,27 @@ namespace Sfa.Eds.Das.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detail(string id)
+        public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            return View();
+            var model = this._providerRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
+
+            if (model == null)
+            {
+                var message = $"Cannot find provider: {criteria.ProviderId}";
+                _logger.Warn($"404 - {message}");
+
+                return new HttpNotFoundResult(message);
+            }
+
+            var viewModel = this._mappingService.Map<Provider, ProviderViewModel>(model);
+
+            var standardData = _standardRepository.GetById(model.StandardCode);
+
+            viewModel.StandardNameWithLevel = string.Concat(standardData.Title, " level ", standardData.NotionalEndLevel);
+
+            viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("SearchResults", "Provider"));
+
+            return View(viewModel);
         }
     }
 }

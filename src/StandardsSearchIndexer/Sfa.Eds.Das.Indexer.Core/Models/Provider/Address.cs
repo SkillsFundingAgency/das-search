@@ -1,6 +1,4 @@
-﻿using Sfa.Eds.Das.Indexer.Common.Models;
-
-namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
+﻿namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
 {
     public sealed class Address
     {

@@ -112,7 +112,7 @@
     <Compile Include="CourseDirectory\Models\ProviderCollection.cs" />
     <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
-    <Compile Include="Elasticsearch\Attachment.cs" />
+    <Compile Include="Elasticsearch\Models\Attachment.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
     <Compile Include="Elasticsearch\ElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
@@ -142,7 +142,7 @@
     <Compile Include="Settings\IInfrastructureSettings.cs" />
     <Compile Include="Settings\LarsSettings.cs" />
     <Compile Include="Settings\ILarsSettings.cs" />
-    <Compile Include="Elasticsearch\StandardDocument.cs" />
+    <Compile Include="Elasticsearch\Models\StandardDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

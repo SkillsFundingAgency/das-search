@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Sfa.Das.ApplicationServices.Exceptions;
 using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.ApplicationServices;
 using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
 {
+    using Sfa.Das.ApplicationServices;
+
     public class PostCodesIOLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
@@ -24,15 +25,11 @@ namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
         public async Task<Coordinate> GetLatLongFromPostCode(string postcode)
         {
             var coordinates = new Coordinate();
-            var sURL = "http://api.postcodes.io/postcodes/" + postcode.Replace(" ", string.Empty);
+            var sUrl = "http://api.postcodes.io/postcodes/" + postcode.Replace(" ", string.Empty);
 
             try
             {
-                using (var client = new HttpClient())
-                {
-                    HttpResponseMessage response = await _retryService.RetryWeb(
-                        () => { return MakeRequestAsync(sURL); },
-                        (ex) => _logger.Warn("Couldn't connect to postcode service, retrying..."));
+                    var response = await _retryService.RetryWeb(() => MakeRequestAsync(sUrl), CouldntConnect);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -40,30 +37,33 @@ namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
                         var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
                         coordinates.Lat = result.Result.Latitude;
                         coordinates.Lon = result.Result.Longitude;
+
+                        return coordinates;
                     }
-                }
+
+                    return null;
             }
             catch (Exception ex)
             {
-                _logger.Error($"Unable to connect to Post Code Lookup service: {sURL}");
+                _logger.Error($"Unable to connect to Post Code Lookup service: {sUrl}");
 
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
+        }
 
-            return coordinates;
+        private void CouldntConnect(Exception ex)
+        {
+            _logger.Warn("Couldn't connect to postcode service, retrying...");
         }
 
         private async Task<HttpResponseMessage> MakeRequestAsync(string url)
         {
             using (var client = new HttpClient())
             {
-                HttpRequestMessage request = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    url);
-
-                HttpResponseMessage response = await client.SendAsync(request);
-
-                return response;
+                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url))
+                {
+                    return await client.SendAsync(request);
+                }
             }
         }
     }
