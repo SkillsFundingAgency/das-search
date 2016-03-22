@@ -45,14 +45,8 @@
 
         public string QueueName(Type type)
         {
-            var name = type.Name.Replace("IMaintainStandardIndex", "Standard").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
-            var setting = ConfigurationManager.AppSettings[name];
-            if (setting != null)
-            {
-                return setting;
-            }
-
-            throw new ArgumentException("setting '" + name + "' not found");
+            var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Standard").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
+            return GetSetting(name);
         }
     }
 }
