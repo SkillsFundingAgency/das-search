@@ -36,7 +36,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 .Take(take)
                 .Query(q => q
                     .QueryString(qs => qs
-                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkTitle)
+                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkName, p => p.PathwayName )
                         .Query(keywords)
                     ))
                 );

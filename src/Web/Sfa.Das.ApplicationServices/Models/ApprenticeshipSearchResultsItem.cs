@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Das.ApplicationServices.Models
 {
     using System.Collections.Generic;
+    using System.Runtime.Remoting.Activation;
 
     using Sfa.Eds.Das.Core.Domain.Model;
 
@@ -20,8 +21,14 @@
         public TypicalLength TypicalLength { get; set; }
 
         // Frameworks
-        public int Id { get; set; }
+        public int FrameworkId { get; set; }
 
-        public string FrameworkTitle { get; set; }
+        public string FrameworkName { get; set; }
+
+        public string PathwayName { get; set; }
+
+        public string Level { get; set; }
+
+
     }
 }

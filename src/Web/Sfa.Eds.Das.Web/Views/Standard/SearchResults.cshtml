@@ -33,10 +33,18 @@
                                 }
                                 else
                                 {
-                                    @Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.Id }, null)
+                                    @Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.FrameworkId }, null)
                                 }
                             </h2>
-                            @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
+                            @if (item.StandardId != 0)
+                            {
+                                @GetStandardDetailItem("Level:", item.NotionalEndLevel.ToString())
+                            }
+                            else
+                            {
+                                @GetStandardDetailItem("Level:", item.Level)
+                            }
+                            
                             @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
                         </div>
                     </li>
