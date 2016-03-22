@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -53,7 +54,8 @@
 
         public List<FrameworkMetaData> GetAllFrameworks()
         {
-            return _larsDataService.GetListOfCurrentFrameworks();
+            return FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
+
         }
 
         private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)
@@ -77,6 +79,18 @@
             {
                 _vstsService.PushCommit(standards);
             }
+        }
+
+        private List<FrameworkMetaData> FilterFrameworks(List<FrameworkMetaData> frameworks)
+        {
+            var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
+
+            return frameworks.Where(s => s.FworkCode > 399)
+                .Where(s => s.PwayCode > 0)
+                .Where(s => !s.EffectiveFrom.Equals(DateTime.MinValue))
+                .Where(s => s.EffectiveTo.Equals(DateTime.MinValue) || s.EffectiveTo > DateTime.Now)
+                .Where(s => progTypeList.Contains(s.ProgType))
+                .ToList();
         }
     }
 }

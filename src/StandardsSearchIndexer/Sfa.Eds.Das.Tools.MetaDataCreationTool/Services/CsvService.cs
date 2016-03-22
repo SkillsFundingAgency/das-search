@@ -5,7 +5,7 @@
     using System.IO;
     using System.Linq;
 
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Extensions;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
@@ -13,12 +13,10 @@
     public class CsvService : IReadStandardsFromCsv
     {
         private readonly IAngleSharpService angelService;
-        private readonly IAppServiceSettings appServiceSettings;
 
-        public CsvService(IAngleSharpService angelService, IAppServiceSettings appServiceSettings)
+        public CsvService(IAngleSharpService angelService)
         {
             this.angelService = angelService;
-            this.appServiceSettings = appServiceSettings;
         }
 
         public List<Standard> ReadStandardsFromFile(string csvFilePath)
@@ -82,14 +80,16 @@
             {
                 framework = new FrameworkMetaData
                                 {
-                                    FworkCode = values[0],
-                                    ProgType = values[1],
-                                    PwayCode = values[2],
-                                    PathwayName = values[3],
-                                    IssuingAuthorityTitle = values[11],
-                                    NASTitle = values[9]
-                                };
-                return true;
+                                    FworkCode = TryParse(values[0]),
+                                    ProgType = TryParse(values[1]),
+                                    PwayCode = TryParse(values[2]),
+                                    PathwayName = values[3].RemoveQuotationMark(),
+                                    EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()),
+                                    EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
+                                    IssuingAuthorityTitle = values[11].RemoveQuotationMark(),
+                                    NASTitle = values[9].RemoveQuotationMark()
+                };
+                return framework.FworkCode > 0;
             }
 
             return false;
@@ -104,7 +104,7 @@
                 standard = new Standard()
                 {
                     Id = standardid,
-                    Title = values[2].Replace("\"", string.Empty),
+                    Title = values[2].RemoveQuotationMark(),
                     NotionalEndLevel = TryParse(values[4]),
                     StandardPdfUrl = GetPdfUri(values[8]),
                     AssessmentPlanPdfUrl = GetPdfUri(values[8]),
@@ -136,7 +136,7 @@
 
         private string GetPdfUri(string s)
         {
-            var url = angelService.GetLinks(s.Replace("\"", string.Empty), ".attachment-details h2 a", "Assessment").FirstOrDefault();
+            var url = angelService.GetLinks(s.RemoveQuotationMark(), ".attachment-details h2 a", "Assessment").FirstOrDefault();
             if (url != null)
             {
                 return new Uri($"https://www.gov.uk/{url}").ToString();
@@ -148,12 +148,23 @@
         private int TryParse(string s)
         {
             int i;
-            if (int.TryParse(s.Replace("\"", string.Empty), out i))
+            if (int.TryParse(s.RemoveQuotationMark(), out i))
             {
                 return i;
             }
 
             return -1;
+        }
+
+        private DateTime TryGetDate(string dateString)
+        {
+            DateTime dateTime;
+            if (DateTime.TryParse(dateString, out dateTime))
+            {
+                return dateTime;
+            }
+
+            return DateTime.MinValue;
         }
     }
 }

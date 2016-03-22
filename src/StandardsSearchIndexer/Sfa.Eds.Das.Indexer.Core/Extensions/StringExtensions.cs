@@ -13,5 +13,10 @@ namespace Sfa.Eds.Das.Indexer.Core.Extensions
             stream.Position = 0;
             return stream;
         }
+
+        public static string RemoveQuotationMark(this string self)
+        {
+            return self.Replace("\"", string.Empty);
+        }
     }
 }

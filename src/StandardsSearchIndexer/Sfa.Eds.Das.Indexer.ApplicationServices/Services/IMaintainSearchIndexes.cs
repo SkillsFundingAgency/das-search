@@ -13,8 +13,7 @@
 
         void CreateIndex(string indexName);
 
-        bool IndexContainsDocuments<T>(string indexName)
-            where T : class, IIndexEntry;
+        bool IndexContainsDocuments(string indexName);
 
         void CreateIndexAlias(string aliasName, string indexName);
 

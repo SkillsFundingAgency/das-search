@@ -1,20 +1,15 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Web;
 
     using Indexer.Core.Services;
-    using Newtonsoft.Json;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models.GovLearn;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public sealed class LarsDataService : ILarsDataService

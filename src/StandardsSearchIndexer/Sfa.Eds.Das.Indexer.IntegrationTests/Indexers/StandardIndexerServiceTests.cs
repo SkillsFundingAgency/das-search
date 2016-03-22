@@ -139,7 +139,7 @@
             var retrievedResultFrameworks = _elasticClient.Search<FrameworkDocument>(p => p.Index(indexName).QueryString("*"));
 
             var frameworkDocuments = retrievedResultFrameworks.Documents.Count();
-            var frameworkDocument = retrievedResultFrameworks.Documents.Single(m => m.FrameworkCode.Equals("423"));
+            var frameworkDocument = retrievedResultFrameworks.Documents.Single(m => m.FrameworkCode.Equals(423));
 
             _elasticClient.DeleteIndex(i => i.Index(indexName));
             _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
@@ -147,7 +147,7 @@
             Assert.AreEqual(3, frameworkDocuments);
             Assert.AreEqual("Fashion and Textiles", frameworkDocument.FrameworkName);
             Assert.AreEqual("Footwear", frameworkDocument.PathwayName);
-            Assert.AreEqual("4", frameworkDocument.PathwayCode);
+            Assert.AreEqual(4, frameworkDocument.PathwayCode);
         }
 
         private void DeleteIndexIfExists(string indexName)
@@ -196,27 +196,27 @@
                        {
                            new FrameworkMetaData
                                {
-                                   FworkCode = "403",
-                                   ProgType = "0",
-                                   PwayCode = "2",
+                                   FworkCode = 403,
+                                   ProgType = 0,
+                                   PwayCode = 2,
                                    PathwayName = "Baking Industry Skills",
                                    NASTitle = "Food and Drink",
                                    IssuingAuthorityTitle = "Food and Drink - Advanced Level Apprenticeship"
                                },
                            new FrameworkMetaData
                                {
-                                   FworkCode = "403",
-                                   ProgType = "3",
-                                   PwayCode = "7",
+                                   FworkCode = 403,
+                                   ProgType = 3,
+                                   PwayCode = 7,
                                    PathwayName = "Brewing Industry Skills",
                                    NASTitle = "Food and Drink",
                                    IssuingAuthorityTitle = "Food and Drink - Intermediate Level Apprenticeship"
                                },
                            new FrameworkMetaData
                                {
-                                   FworkCode = "423",
-                                   ProgType = "2",
-                                   PwayCode = "4",
+                                   FworkCode = 423,
+                                   ProgType = 2,
+                                   PwayCode = 4,
                                    PathwayName = "Footwear",
                                    NASTitle = "Fashion and Textiles",
                                    IssuingAuthorityTitle = "Fashion and Textiles - Advanced Level Apprenticeship"

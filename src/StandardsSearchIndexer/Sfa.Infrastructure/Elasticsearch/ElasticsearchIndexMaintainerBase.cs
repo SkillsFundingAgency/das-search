@@ -67,10 +67,9 @@
             return result;
         }
 
-        public virtual bool IndexContainsDocuments<T>(string indexName)
-            where T : class, IIndexEntry
+        public virtual bool IndexContainsDocuments(string indexName)
         {
-            var a = Client.Search<T>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;// ToDo: Make method generic
+            var a = Client.Search<dynamic>(s => s.Index(indexName).AllTypes().From(0).Size(10).MatchAll()).Documents;
 
             return a.Any();
         }

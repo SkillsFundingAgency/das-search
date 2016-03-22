@@ -71,7 +71,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 
         public bool IsIndexCorrectlyCreated(string indexName)
         {
-            return _searchIndexMaintainer.IndexContainsDocuments<Provider>(indexName);
+            return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
         // TODO: LWA - The argusment seems a little strange to this method.

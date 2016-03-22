@@ -54,11 +54,14 @@
             {
                 var doc = new FrameworkDocument
                 {
-                    Title = CreateFrameworkTitle(frameworkMetaData.IssuingAuthorityTitle, frameworkMetaData.PathwayName),
+                    FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
+                    Title = CreateFrameworkTitle(frameworkMetaData.NASTitle, frameworkMetaData.PathwayName),
                     FrameworkCode = frameworkMetaData.FworkCode,
                     FrameworkName = frameworkMetaData.NASTitle,
                     PathwayCode = frameworkMetaData.PwayCode,
-                    PathwayName = frameworkMetaData.PathwayName
+                    PathwayName = frameworkMetaData.PathwayName,
+                    IssuingAuthorityTitle = frameworkMetaData.IssuingAuthorityTitle,
+                    Level = MapLevel(frameworkMetaData.ProgType)
                 };
 
                 return doc;
@@ -73,12 +76,33 @@
 
         private string CreateFrameworkTitle(string framworkname, string pathwayName)
         {
-            if (framworkname.Equals(pathwayName))
+            if (framworkname.Equals(pathwayName) || string.IsNullOrWhiteSpace(pathwayName))
             {
                 return framworkname;
             }
 
-            return $"{framworkname}: {pathwayName}";
+            return $"{framworkname} : {pathwayName}";
+        }
+
+        private int MapLevel(int level)
+        {
+            switch (level)
+            {
+                case 3:
+                    return 2;
+                case 2:
+                    return 3;
+                case 20:
+                    return 4;
+                case 21:
+                    return 5;
+                case 22:
+                    return 6;
+                case 23:
+                    return 7;
+            }
+
+            return -1;
         }
     }
 }

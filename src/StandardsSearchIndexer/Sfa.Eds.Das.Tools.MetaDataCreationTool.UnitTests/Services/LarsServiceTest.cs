@@ -17,7 +17,7 @@
         public void TestGetFrameworksFromZipFile()
         {
             var zipFIleExtractor = new ZipFileExtractor();
-            var csvService = new CsvService(null, null);
+            var csvService = new CsvService(null);
             var applicationSettings = new AppServiceSettings();
             LarsDataService larsDataService = new LarsDataService(applicationSettings, csvService, new HttpService(null), zipFIleExtractor, new AngleSharpService(), null, new HttpService(null));
             var path = larsDataService.GetListOfCurrentFrameworks();

@@ -56,7 +56,7 @@
 
         public bool IsIndexCorrectlyCreated(string indexName)
         {
-            return _searchIndexMaintainer.IndexContainsDocuments<MetaDataItem>(indexName);
+            return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
         public void SwapIndexes(string newIndexName)
