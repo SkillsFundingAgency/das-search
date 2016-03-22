@@ -7,7 +7,7 @@ namespace Sfa.Eds.Das.Web.ViewModels
     {
         public string Name { get; set; }
 
-        public string LocationName { get; set; }
+        public Location Location { get; set; }
 
         public string ProviderMarketingInfo { get; set; }
 
@@ -21,9 +21,9 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
         public double LearnerSatisfaction { get; set; }
 
-        public StandardBasic Standard { get; set; }
+        public ApprenticeshipBasic Apprenticeship { get; set; }
 
-        public string StandardNameWithLevel { get; set; }
+        public string ApprenticeshipNameWithLevel { get; set; }
 
         public LinkViewModel SearchResultLink { get; set; }
     }

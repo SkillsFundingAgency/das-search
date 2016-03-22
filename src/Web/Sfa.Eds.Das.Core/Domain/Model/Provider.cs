@@ -10,9 +10,7 @@
 
         public string Name { get; set; }
 
-        public int LocationId { get; set; }
-
-        public string LocationName { get; set; }
+        public Location Location { get; set; }
 
         public string ProviderMarketingInfo { get; set; }
 
@@ -28,6 +26,6 @@
 
         public double LearnerSatisfaction { get; set; }
 
-        public StandardBasic Standard { get; set; }
+        public ApprenticeshipBasic Apprenticeship { get; set; }
     }
 }

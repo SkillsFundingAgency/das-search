@@ -94,7 +94,7 @@ WriteLiteralTo(__razor_helper_writer, "                <dd>");
 
 
 #line 70 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Model.LocationName);
+WriteTo(__razor_helper_writer, Model.Location.LocationName);
 
 
 #line default
@@ -103,7 +103,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 70 "..\..\Views\Provider\Detail.cshtml"
-          WriteTo(__razor_helper_writer, Model.Address.Address1);
+                   WriteTo(__razor_helper_writer, Model.Address.Address1);
 
 
 #line default
@@ -112,7 +112,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 70 "..\..\Views\Provider\Detail.cshtml"
-                                  WriteTo(__razor_helper_writer, Model.Address.Address2);
+                                           WriteTo(__razor_helper_writer, Model.Address.Address2);
 
 
 #line default
@@ -121,7 +121,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 70 "..\..\Views\Provider\Detail.cshtml"
-                                                          WriteTo(__razor_helper_writer, Model.Address.Postcode);
+                                                                   WriteTo(__razor_helper_writer, Model.Address.Postcode);
 
 
 #line default
@@ -222,14 +222,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                <dd><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3008), Tuple.Create("\"", 3019)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3035), Tuple.Create("\"", 3046)
 
 #line 89 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3015), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 3042), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 3015), false)
+, 3042), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -522,7 +522,7 @@ WriteLiteral("                ");
 
             
             #line 43 "..\..\Views\Provider\Detail.cshtml"
-           Write(Model.StandardNameWithLevel);
+           Write(Model.ApprenticeshipNameWithLevel);
 
             
             #line default
@@ -537,7 +537,7 @@ WriteLiteral("            ");
 
             
             #line 47 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyAsLinkHtml("Website course page", @Model.Standard.StandardInfoUrl));
+       Write(GetStandardPropertyAsLinkHtml("Website course page", @Model.Apprenticeship.ApprenticeshipInfoUrl));
 
             
             #line default

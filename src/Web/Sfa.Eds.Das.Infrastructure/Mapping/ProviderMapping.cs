@@ -25,17 +25,20 @@ namespace Sfa.Eds.Das.Infrastructure.Mapping
                     Website = item.Website,
                     ContactUsUrl = item.ContactUsUrl,
                 },
-                Standard = new StandardBasic
+                Apprenticeship = new ApprenticeshipBasic
                 {
-                    StandardInfoUrl = item.StandardInfoUrl,
-                    StandardCode = item.StandardCode,
+                    ApprenticeshipInfoUrl = item.StandardInfoUrl,
+                    Code = item.StandardCode,
                     ApprenticeshipMarketingInfo = item.ApprenticeshipMarketingInfo,
                 },
                 LearnerSatisfaction = item.LearnerSatisfaction * 10,
                 EmployerSatisfaction = item.EmployerSatisfaction * 10,
-                LocationName = item.LocationName,
+                Location = new Location
+                {
+                    LocationName = item.LocationName,
+                    LocationId = item.LocationId,
+                },
                 Name = item.Name,
-                LocationId = item.LocationId,
                 ProviderMarketingInfo = item.ProviderMarketingInfo,
                 Distance = item.Distance
             };
