@@ -3,7 +3,6 @@
     using ApplicationServices.Queue;
     using ApplicationServices.Services;
     using AzureWorkerRole;
-    using Core.Models;
     using Moq;
     using NUnit.Framework;
 
@@ -21,7 +20,7 @@
             sut.Run();
 
             // Assert
-            mockConsumer.Verify(x => x.CheckMessage<IMaintainStandardIndex>());
+            mockConsumer.Verify(x => x.CheckMessage<IMaintainApprenticeshipIndex>());
             mockConsumer.Verify(x => x.CheckMessage<IMaintainProviderIndex>());
         }
     }

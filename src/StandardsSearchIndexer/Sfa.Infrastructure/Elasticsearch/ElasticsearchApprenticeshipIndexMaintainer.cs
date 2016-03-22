@@ -13,10 +13,9 @@ namespace Sfa.Infrastructure.Elasticsearch
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Infrastructure.Elasticsearch.Models;
 
-    // ToDo: Rename to more generic Apprenticeship*
-    public sealed class ElasticsearchStandardIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainStandardIndex
+    public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
-        public ElasticsearchStandardIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
+        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
             : base(factory, elasticsearchMapper, logger, "Standard")
         {
         }
@@ -28,7 +27,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 .AddMapping<FrameworkDocument>(m => m.MapFromAttributes()));
         }
 
-        public async Task IndexStandards(string indexName, ICollection<MetaDataItem> entries)
+        public async Task IndexStandards(string indexName, ICollection<StandardMetaData> entries)
         {
             foreach (var standard in entries)
             {

@@ -6,7 +6,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public interface IElasticsearchMapper
     {
-        StandardDocument CreateStandardDocument(MetaDataItem standard);
+        StandardDocument CreateStandardDocument(StandardMetaData standard);
 
         FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData);
     }

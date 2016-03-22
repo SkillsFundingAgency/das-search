@@ -75,13 +75,13 @@
     <Compile Include="Provider\IProviderFeatures.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Services\IMaintainProviderIndex.cs" />
-    <Compile Include="Services\IMaintainStandardIndex.cs" />
+    <Compile Include="Services\IMaintainApprenticeshipIndex.cs" />
     <Compile Include="Settings\AppServiceSettings.cs" />
     <Compile Include="Settings\BaseSettings.cs" />
     <Compile Include="Standard\IMetaDataHelper.cs" />
     <Compile Include="Standard\MetaDataHelper.cs" />
     <Compile Include="Provider\ProviderIndexer.cs" />
-    <Compile Include="Standard\StandardIndexer.cs" />
+    <Compile Include="Standard\ApprenticeshipIndexer.cs" />
     <Compile Include="Provider\ActiveProviderCsvRecord.cs" />
     <Compile Include="MetaData\FileContents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

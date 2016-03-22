@@ -1,36 +1,30 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Services
 {
     using System;
-
     using Moq;
-
     using NUnit.Framework;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
-    using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
-    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
-
     [TestFixture]
-    public sealed class StandardIndexerTests
+    public sealed class ApprenticeshipIndexerTests
     {
-        private StandardIndexer _sut;
-        private Mock<IIndexSettings<IMaintainStandardIndex>> _mockSettings;
-        private Mock<IMaintainStandardIndex> _mockIndexMaintainer;
+        private ApprenticeshipIndexer _sut;
+        private Mock<IIndexSettings<IMaintainApprenticeshipIndex>> _mockSettings;
+        private Mock<IMaintainApprenticeshipIndex> _mockIndexMaintainer;
         private Mock<IMetaDataHelper> _mockMetaDataHelper;
 
         [SetUp]
         public void Setup()
         {
-            _mockSettings = new Mock<IIndexSettings<IMaintainStandardIndex>>();
-            _mockIndexMaintainer = new Mock<IMaintainStandardIndex>();
+            _mockSettings = new Mock<IIndexSettings<IMaintainApprenticeshipIndex>>();
+            _mockIndexMaintainer = new Mock<IMaintainApprenticeshipIndex>();
             _mockMetaDataHelper = new Mock<IMetaDataHelper>();
             var mockLogger = Mock.Of<ILog>();
 
-            _sut = new StandardIndexer(_mockSettings.Object, _mockIndexMaintainer.Object, _mockMetaDataHelper.Object, mockLogger);
+            _sut = new ApprenticeshipIndexer(_mockSettings.Object, _mockIndexMaintainer.Object, _mockMetaDataHelper.Object, mockLogger);
         }
 
         [Test]

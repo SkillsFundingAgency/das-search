@@ -17,7 +17,6 @@
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 123,
                 PwayCode = 1,
-                IssuingAuthorityTitle = "Sustainable Resource Operations and Management - Higher Apprenticeship (Level 4)",
                 NASTitle = "Sustainable Resource Operations and Management",
                 PathwayName = "Higher Apprenticeship in Sustainable Resource Operations and Management",
                 ProgType = 20
@@ -41,7 +40,6 @@
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                IssuingAuthorityTitle = "Trade Business Services - Intermediate Level Apprenticeship",
                 NASTitle = "Trade Business Services",
                 PathwayName = "Trade Business Services",
                 ProgType = 3
@@ -65,7 +63,6 @@
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                IssuingAuthorityTitle = "Trade Business Services - Intermediate Level Apprenticeship",
                 NASTitle = "Trade Business Services",
                 PathwayName = " ",
                 ProgType = 23

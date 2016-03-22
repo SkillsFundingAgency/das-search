@@ -23,7 +23,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
         public void Setup()
         {
             _ioc = IoC.Initialize();
-            _ioc.GetInstance<IIndexSettings<IMaintainStandardIndex>>();
+            _ioc.GetInstance<IIndexSettings<IMaintainApprenticeshipIndex>>();
 
             _sut = _ioc.GetInstance<IGetStandardLevel>();
         }

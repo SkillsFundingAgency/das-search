@@ -26,16 +26,16 @@
             _metaDataFrameworkReader = metaDataFrameworkReader;
         }
 
-        public List<MetaDataItem> GetAllStandardsMetaData()
+        public List<StandardMetaData> GetAllStandardsMetaData()
         {
             var standardsMetaDataJson = _metaDataReader.GetAllAsJson();
-            var standardsMetaData = new List<MetaDataItem>();
+            var standardsMetaData = new List<StandardMetaData>();
 
             foreach (var item in standardsMetaDataJson)
             {
                 try
                 {
-                    standardsMetaData.Add(JsonConvert.DeserializeObject<MetaDataItem>(item.Value));
+                    standardsMetaData.Add(JsonConvert.DeserializeObject<StandardMetaData>(item.Value));
                 }
                 catch (JsonReaderException ex)
                 {

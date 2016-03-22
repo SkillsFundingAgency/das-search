@@ -86,7 +86,6 @@
                                     PathwayName = values[3].RemoveQuotationMark(),
                                     EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()),
                                     EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
-                                    IssuingAuthorityTitle = values[11].RemoveQuotationMark(),
                                     NASTitle = values[9].RemoveQuotationMark()
                 };
                 return framework.FworkCode > 0;

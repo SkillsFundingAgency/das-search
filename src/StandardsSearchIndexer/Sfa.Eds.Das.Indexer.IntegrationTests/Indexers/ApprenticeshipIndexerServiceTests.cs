@@ -17,20 +17,18 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Elasticsearch;
     using Sfa.Infrastructure.Elasticsearch.Models;
-    using Sfa.Infrastructure.Services;
 
     [TestFixture]
-    public class StandardIndexerServiceTests
+    public class ApprenticeshipIndexerServiceTests
     {
-        private IIndexSettings<IMaintainStandardIndex> _standardSettings;
+        private IIndexSettings<IMaintainApprenticeshipIndex> _standardSettings;
 
-        private IGenericIndexerHelper<IMaintainStandardIndex> _indexerService;
+        private IGenericIndexerHelper<IMaintainApprenticeshipIndex> _indexerService;
 
         private IElasticClient _elasticClient;
 
@@ -38,12 +36,12 @@
         public void SetUp()
         {
             var ioc = IoC.Initialize();
-            _standardSettings = ioc.GetInstance<IIndexSettings<IMaintainStandardIndex>>();
-            _indexerService = ioc.GetInstance<IGenericIndexerHelper<IMaintainStandardIndex>>();
+            _standardSettings = ioc.GetInstance<IIndexSettings<IMaintainApprenticeshipIndex>>();
+            _indexerService = ioc.GetInstance<IGenericIndexerHelper<IMaintainApprenticeshipIndex>>();
 
-            var settings = ioc.GetInstance<IIndexSettings<IMaintainStandardIndex>>();
+            var settings = ioc.GetInstance<IIndexSettings<IMaintainApprenticeshipIndex>>();
 
-            var maintanSearchIndex = ioc.GetInstance<IMaintainStandardIndex>();
+            var maintanSearchIndex = ioc.GetInstance<IMaintainApprenticeshipIndex>();
 
             var moqMetaDataHelper = new Mock<IMetaDataHelper>();
             moqMetaDataHelper.Setup(m => m.UpdateMetadataRepository());
@@ -52,7 +50,7 @@
 
             var moqLog = new Mock<ILog>();
 
-            _indexerService = new StandardIndexer(settings, maintanSearchIndex, moqMetaDataHelper.Object, moqLog.Object);
+            _indexerService = new ApprenticeshipIndexer(settings, maintanSearchIndex, moqMetaDataHelper.Object, moqLog.Object);
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
@@ -87,7 +85,7 @@
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
-            var expectedStandardResult = new MetaDataItem
+            var expectedStandardResult = new StandardMetaData
                                              {
                                                  Id = 61,
                                                  Title = "Dental Nurse",
@@ -160,11 +158,11 @@
             }
         }
 
-        private IEnumerable<MetaDataItem> GetStandardsTest()
+        private IEnumerable<StandardMetaData> GetStandardsTest()
         {
-            return new List<MetaDataItem>
+            return new List<StandardMetaData>
                        {
-                           new MetaDataItem
+                           new StandardMetaData
                                {
                                    Id = 1,
                                    Title = "Network Engineer",
@@ -172,7 +170,7 @@
                                    StandardPdfUrl =
                                        "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
                                },
-                           new MetaDataItem
+                           new StandardMetaData
                                {
                                    Id = 2,
                                    Title = "Software Developer",
@@ -180,7 +178,7 @@
                                    StandardPdfUrl =
                                        "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
                                },
-                           new MetaDataItem
+                           new StandardMetaData
                                {
                                    Id = 61,
                                    Title = "Dental Nurse",
@@ -201,8 +199,7 @@
                                    ProgType = 0,
                                    PwayCode = 2,
                                    PathwayName = "Baking Industry Skills",
-                                   NASTitle = "Food and Drink",
-                                   IssuingAuthorityTitle = "Food and Drink - Advanced Level Apprenticeship"
+                                   NASTitle = "Food and Drink"
                                },
                            new FrameworkMetaData
                                {
@@ -210,8 +207,7 @@
                                    ProgType = 3,
                                    PwayCode = 7,
                                    PathwayName = "Brewing Industry Skills",
-                                   NASTitle = "Food and Drink",
-                                   IssuingAuthorityTitle = "Food and Drink - Intermediate Level Apprenticeship"
+                                   NASTitle = "Food and Drink"
                                },
                            new FrameworkMetaData
                                {
@@ -219,8 +215,7 @@
                                    ProgType = 2,
                                    PwayCode = 4,
                                    PathwayName = "Footwear",
-                                   NASTitle = "Fashion and Textiles",
-                                   IssuingAuthorityTitle = "Fashion and Textiles - Advanced Level Apprenticeship"
+                                   NASTitle = "Fashion and Textiles"
                                }
                        };
         }

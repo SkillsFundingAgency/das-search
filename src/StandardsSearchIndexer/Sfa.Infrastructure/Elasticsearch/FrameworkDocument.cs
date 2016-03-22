@@ -14,8 +14,6 @@
 
         public int PathwayCode { get; set; }
 
-        public string IssuingAuthorityTitle { get; set; }
-
         public int Level { get; set; }
     }
 }

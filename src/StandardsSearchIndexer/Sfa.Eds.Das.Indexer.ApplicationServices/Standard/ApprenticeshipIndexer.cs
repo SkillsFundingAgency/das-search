@@ -10,17 +10,16 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
-    // ToDo: Rename to ApprenticeshipIndexer
-    public sealed class StandardIndexer : IGenericIndexerHelper<IMaintainStandardIndex>
+    public sealed class ApprenticeshipIndexer : IGenericIndexerHelper<IMaintainApprenticeshipIndex>
     {
-        private readonly IIndexSettings<IMaintainStandardIndex> _settings;
-        private readonly IMaintainStandardIndex _searchIndexMaintainer;
+        private readonly IIndexSettings<IMaintainApprenticeshipIndex> _settings;
+        private readonly IMaintainApprenticeshipIndex _searchIndexMaintainer;
         private readonly IMetaDataHelper _metaDataHelper;
         private readonly ILog _log;
 
-        public StandardIndexer(
-            IIndexSettings<IMaintainStandardIndex> settings,
-            IMaintainStandardIndex searchIndexMaintainer,
+        public ApprenticeshipIndexer(
+            IIndexSettings<IMaintainApprenticeshipIndex> settings,
+            IMaintainApprenticeshipIndex searchIndexMaintainer,
             IMetaDataHelper metaDataHelper,
             ILog log)
         {
@@ -107,13 +106,13 @@
             }
         }
 
-        private Task<ICollection<MetaDataItem>> LoadStandardMetaData()
+        private Task<ICollection<StandardMetaData>> LoadStandardMetaData()
         {
             _metaDataHelper.UpdateMetadataRepository();
             _log.Info("Indexing standard PDFs...");
 
             var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
-            return Task.FromResult<ICollection<MetaDataItem>>(standardsMetaData.ToList());
+            return Task.FromResult<ICollection<StandardMetaData>>(standardsMetaData.ToList());
         }
     }
 }

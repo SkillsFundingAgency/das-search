@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class MetaDataItem : IIndexEntry
+    public class StandardMetaData : IIndexEntry
     {
         public int Id { get; set; }
 

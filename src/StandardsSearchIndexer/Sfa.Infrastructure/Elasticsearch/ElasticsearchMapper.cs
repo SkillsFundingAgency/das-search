@@ -16,7 +16,7 @@
             _logger = logger;
         }
 
-        public StandardDocument CreateStandardDocument(MetaDataItem standard)
+        public StandardDocument CreateStandardDocument(StandardMetaData standard)
         {
             try
             {
@@ -60,7 +60,6 @@
                     FrameworkName = frameworkMetaData.NASTitle,
                     PathwayCode = frameworkMetaData.PwayCode,
                     PathwayName = frameworkMetaData.PathwayName,
-                    IssuingAuthorityTitle = frameworkMetaData.IssuingAuthorityTitle,
                     Level = MapLevel(frameworkMetaData.ProgType)
                 };
 

@@ -14,8 +14,6 @@
 
         public string NASTitle { get; set; }
 
-        public string IssuingAuthorityTitle { get; set; }
-
         public DateTime EffectiveFrom { get; set; }
 
         public DateTime EffectiveTo { get; set; }

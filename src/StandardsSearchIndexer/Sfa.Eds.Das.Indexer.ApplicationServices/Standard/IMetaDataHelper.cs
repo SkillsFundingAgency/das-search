@@ -7,7 +7,7 @@
 
     public interface IMetaDataHelper
     {
-        List<MetaDataItem> GetAllStandardsMetaData();
+        List<StandardMetaData> GetAllStandardsMetaData();
 
         void UpdateMetadataRepository();
 
