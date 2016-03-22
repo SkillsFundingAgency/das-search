@@ -1,16 +1,11 @@
 ﻿namespace Sfa.Eds.Das.Web.UnitTests.Views.Provider
 {
     using System.Collections.Generic;
-    using System.Linq;
-
     using ExtensionHelpers;
     using FluentAssertions;
     using NUnit.Framework;
     using RazorGenerator.Testing;
-
-    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Model;
-
     using ViewModels;
     using Web.Views.Provider;
 
@@ -46,7 +41,6 @@
             locationText.Should().NotContain(model.Address.Address1);
             locationText.Should().NotContain(model.Address.Address2);
             locationText.Should().Contain("Training will take place at your location");
-
         }
 
         [Test]

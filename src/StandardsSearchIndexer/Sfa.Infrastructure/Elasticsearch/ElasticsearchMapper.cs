@@ -50,7 +50,6 @@
 
         public FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData)
         {
-
             try
             {
                 var doc = new FrameworkDocument

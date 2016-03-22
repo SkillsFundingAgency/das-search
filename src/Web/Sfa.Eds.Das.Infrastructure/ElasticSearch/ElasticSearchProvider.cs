@@ -34,10 +34,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 .Take(take)
                 .Query(q => q
                     .QueryString(qs => qs
-                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkName, p => p.PathwayName )
-                        .Query(keywords)
-                    ))
-                );
+                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkName, p => p.PathwayName)
+                        .Query(keywords))));
 
             return new ApprenticeshipSearchResults
             {
@@ -88,9 +86,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
 
-            if (results?.ConnectionStatus?.HttpStatusCode != 200)
+            if (results.ConnectionStatus?.HttpStatusCode != 200)
             {
-                throw new SearchException($"Search returned a status code of {results?.ConnectionStatus?.HttpStatusCode}");
+                throw new SearchException($"Search returned a status code of {results.ConnectionStatus?.HttpStatusCode}");
             }
 
             return new SearchResult<ProviderSearchResultsItem> { Hits = documents, Total = results.Total };

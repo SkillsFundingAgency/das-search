@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using Nest;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;   
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.Core.Services;
-    
+
     public abstract class ElasticsearchIndexMaintainerBase : IMaintainSearchIndexes
     {
         private readonly string _typeOfIndex;

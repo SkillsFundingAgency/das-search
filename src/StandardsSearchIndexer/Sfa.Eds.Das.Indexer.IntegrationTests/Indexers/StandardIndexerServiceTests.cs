@@ -136,7 +136,7 @@
 
             Thread.Sleep(2000);
 
-            //Assert
+            // Assert
             var retrievedResultFrameworks = _elasticClient.Search<FrameworkDocument>(p => p.Index(indexName).QueryString("*"));
 
             var frameworkDocuments = retrievedResultFrameworks.Documents.Count();

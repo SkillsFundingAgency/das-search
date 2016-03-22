@@ -4,7 +4,6 @@
 
     public interface IGetStandardLevel
     {
-        int GetFrameworks(int frameworkId);
         int GetNotationLevel(int standardId);
     }
 }

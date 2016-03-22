@@ -10,8 +10,8 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
 
+    // ToDo: Rename to ApprenticeshipIndexer
     public sealed class StandardIndexer : IGenericIndexerHelper<IMaintainStandardIndex>
-        // ToDo: Rename to ApprenticeshipIndexer
     {
         private readonly IIndexSettings<IMaintainStandardIndex> _settings;
         private readonly IMaintainStandardIndex _searchIndexMaintainer;
@@ -84,7 +84,7 @@
             {
                 _log.Debug("Indexing " + entries.Count + " standards");
 
-                await _searchIndexMaintainer.IndexStandards(indexName, entries);
+                await _searchIndexMaintainer.IndexStandards(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@
             {
                 _log.Debug("Indexing " + entries.Count + " frameworks");
 
-                await _searchIndexMaintainer.IndexFrameworks(indexName , entries);
+                await _searchIndexMaintainer.IndexFrameworks(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -115,38 +115,5 @@
             var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
             return Task.FromResult<ICollection<MetaDataItem>>(standardsMetaData.ToList());
         }
-
-        private string GenerateFrameworkMapping()
-        {
-            var mapping = new
-            {
-                properties = new
-                {
-                    frameworkCode = new
-                    {
-                        type = "string",
-                    },
-                    frameworkName = new
-                    {
-                        type = "string"
-                    },
-                    pathwayCode = new
-                    {
-                        type = "string"
-                    },
-                    pathwayName = new
-                    {
-                        type = "string"
-                    },
-                    title = new
-                    {
-                        type = "string"
-                    }
-                }
-              };
-            return ToJson(mapping);
-        }
-
-        private static readonly Func<object, string> ToJson = d => Newtonsoft.Json.JsonConvert.SerializeObject(d);
     }
 }

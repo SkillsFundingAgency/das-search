@@ -50,7 +50,7 @@
         {
             _metaDataWriter.GenerateStandardMetadataFiles();
         }
-        
+
         public List<FrameworkMetaData> GetAllFrameworkMetaData()
         {
             return _metaDataFrameworkReader.GetAllFrameworks();

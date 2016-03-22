@@ -55,7 +55,6 @@
         public List<FrameworkMetaData> GetAllFrameworks()
         {
             return FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
-
         }
 
         private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)

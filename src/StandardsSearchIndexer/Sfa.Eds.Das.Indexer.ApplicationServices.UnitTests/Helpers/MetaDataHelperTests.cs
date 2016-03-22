@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
     using Core.Models.Framework;
+    using Core.Services;
     using MetaData;
     using Moq;
     using NUnit.Framework;
-    using Core.Services;
     using Standard;
     using Tools.MetaDataCreationTool;
     using Tools.MetaDataCreationTool.Services.Interfaces;
@@ -61,7 +61,8 @@
         public void EffectiveToDateValid()
         {
             var mockLarsDataService = new Mock<ILarsDataService>();
-            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData> {
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData>
+            {
                 new FrameworkMetaData
                                {
                                    EffectiveFrom = DateTime.Parse("2015-01-01"),
@@ -82,7 +83,8 @@
         public void GetFrameworkWithAllValidData()
         {
             var mockLarsDataService = new Mock<ILarsDataService>();
-            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData> {
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData>
+            {
                 new FrameworkMetaData
                                {
                                    EffectiveFrom = DateTime.Parse("2015-01-01"),
@@ -103,7 +105,8 @@
         public void FrameworkCodeMustBeOverValue(int value)
         {
             var mockLarsDataService = new Mock<ILarsDataService>();
-            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData> {
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData>
+            {
                 new FrameworkMetaData
                                {
                                    EffectiveFrom = DateTime.Parse("2015-01-01"),
@@ -124,7 +127,8 @@
         public void PathwayCodeMustBeOver0()
         {
             var mockLarsDataService = new Mock<ILarsDataService>();
-            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData> {
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData>
+            {
                 new FrameworkMetaData
                                {
                                    EffectiveFrom = DateTime.Parse("2015-01-01"),
@@ -145,7 +149,8 @@
         public void FrameworkanOnlyHaveCertainValues()
         {
             var mockLarsDataService = new Mock<ILarsDataService>();
-            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData> {
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData>
+            {
                 new FrameworkMetaData
                                {
                                    EffectiveFrom = DateTime.Parse("2015-01-01"),
@@ -166,7 +171,8 @@
         public void FrameworkanEffectiveFromCantBeNull()
         {
             var mockLarsDataService = new Mock<ILarsDataService>();
-            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData> {
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks()).Returns(new List<FrameworkMetaData>
+            {
                 new FrameworkMetaData
                                {
                                    EffectiveFrom = DateTime.MinValue, // Not valid

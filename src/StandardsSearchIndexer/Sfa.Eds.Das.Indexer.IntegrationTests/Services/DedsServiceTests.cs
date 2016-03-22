@@ -28,18 +28,6 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
             _sut = _ioc.GetInstance<IGetStandardLevel>();
         }
 
-        //[Test] // ToDo: Move test to new class
-        //[Category("Integration")]
-        //public void Test1()
-        //{
-        //    var expectedNotationLevel = 1;
-
-        //    var notationLevel = _sut.GetFrameworks(405);
-
-        //    notationLevel.Should().NotBe(null);
-        //    notationLevel.Should().Be(expectedNotationLevel);
-        //}
-
         [Test]
         [Category("Integration")]
         public void ShouldReturnNotationLevelWhenStandardIdExists()

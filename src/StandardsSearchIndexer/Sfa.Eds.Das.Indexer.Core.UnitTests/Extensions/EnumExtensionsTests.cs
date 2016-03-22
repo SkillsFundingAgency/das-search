@@ -8,7 +8,7 @@
     public class EnumExtensionsTests
     {
         [Test]
-        public void ShouldFindTheEnumValueDescriptionFromTheAttrbute()  
+        public void ShouldFindTheEnumValueDescriptionFromTheAttrbute()
         {
             var mode = EnumWithDescription.Test;
             var result = mode.GetDescription();

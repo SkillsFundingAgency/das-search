@@ -64,7 +64,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             }
         }
 
-        public bool IndexContainsDocuments(string indexName)
+        public override bool IndexContainsDocuments(string indexName)
         {
             var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;
             return a.Any();

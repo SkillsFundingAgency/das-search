@@ -1,8 +1,6 @@
 ﻿namespace Sfa.Das.ApplicationServices.Models
 {
     using System.Collections.Generic;
-    using System.Runtime.Remoting.Activation;
-
     using Sfa.Eds.Das.Core.Domain.Model;
 
     public class ApprenticeshipSearchResultsItem
@@ -28,7 +26,5 @@
         public string PathwayName { get; set; }
 
         public string Level { get; set; }
-
-
     }
 }
