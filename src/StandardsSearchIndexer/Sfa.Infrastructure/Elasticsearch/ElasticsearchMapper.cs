@@ -82,7 +82,7 @@
                 return framworkname;
             }
 
-            return $"{framworkname} : {pathwayName}";
+            return $"{framworkname}: {pathwayName}";
         }
 
         private int MapLevel(int level)

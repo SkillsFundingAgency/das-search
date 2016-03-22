@@ -29,7 +29,7 @@
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            Assert.AreEqual("Sustainable Resource Operations and Management : Higher Apprenticeship in Sustainable Resource Operations and Management", framework.Title);
+            Assert.AreEqual("Sustainable Resource Operations and Management: Higher Apprenticeship in Sustainable Resource Operations and Management", framework.Title);
             Assert.AreEqual(4, framework.Level,"Should have level");
             Assert.AreEqual("123201", framework.FrameworkId, "Should have id from fwcode, progtype and pwcode");
         }
