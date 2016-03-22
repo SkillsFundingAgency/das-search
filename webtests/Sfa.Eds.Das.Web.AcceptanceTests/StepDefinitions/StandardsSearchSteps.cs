@@ -84,6 +84,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
 
 
+        [Then(@"I should see  best match '(.*)' is on top of the search list")]
+        public void ThenIShouldSeeBestMatchIsOnTopOfTheSearchList(string p0)
+        {
+            srchPage.verifyStandardinTopofList(p0);
+        }
+
+
+
         [Then(@"I should see matching '(.*)' standards on result page")]
         public void ThenIShouldSeeMatchingStandardsOnResultPage(string p0)
         {
@@ -123,7 +131,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see message ""(.*)""")]
         public void ThenIShouldSeeMessage(string p0)
         {
-            srchPage.VerifyresultCount_invalidSearch();
+            srchPage.verifySearchresultMessage(p0);
+           
         }
 
 

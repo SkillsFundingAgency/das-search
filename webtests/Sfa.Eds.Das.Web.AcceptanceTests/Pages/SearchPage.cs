@@ -31,11 +31,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public String title = "Google";
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
         By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
+        By firstStandardinresult = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
         By typicallength = By.XPath(".//*[@id='results']/div[1]/article/dl/dd[2]");
 
         By selectStaandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
+        By Invalidsearchmessage = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
 
         public void launchLandingPage()
         {
@@ -110,7 +112,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Thread.Sleep(4000);
              Assert.True(isElementPresent(searchkeywordresult, keyword));
         }
-
+        public void verifyStandardinTopofList(String keyword)
+        {
+            Thread.Sleep(4000);
+            Assert.True(isElementPresent(firstStandardinresult, keyword));
+        }
 
         public void VerifyresultCount()
         {
@@ -131,6 +137,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Assert.True(getText(searchResultcount).Contains("Total results found: 0"));
         }
 
+        public void verifySearchresultMessage(String msg)
+        {
+            Assert.True(getText(Invalidsearchmessage).Contains(msg));
+        }
 
 
 

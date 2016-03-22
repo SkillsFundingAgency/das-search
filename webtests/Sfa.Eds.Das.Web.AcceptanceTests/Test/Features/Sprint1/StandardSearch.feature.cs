@@ -186,13 +186,13 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify invalid search")]
-        [NUnit.Framework.IgnoreAttribute()]
+        [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("kdjfdkfjdfk", null)]
         [NUnit.Framework.TestCaseAttribute("1232322", null)]
         public virtual void VerifyInvalidSearch(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ignore"};
+                    "regression"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -207,7 +207,7 @@ testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), 
 #line 64
 testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 65
-testRunner.Then("I should see message \"Total results found: 0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(string.Format("I should see message \"There are no standards matching your search for \'{0}\'\"", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -243,13 +243,14 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search result Page to have best match")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.TestCaseAttribute("Mechanical Engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("Software Engineer", null)]
-        public virtual void SearchResultPageToHaveBestMatch(string keyword, string[] exampleTags)
+        [NUnit.Framework.CategoryAttribute("regression")]
+        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
+        [NUnit.Framework.TestCaseAttribute("Software Developer", null)]
+        [NUnit.Framework.TestCaseAttribute("Aerospace Engineer", null)]
+        public virtual void SearchResultPageToHaveBestMatch(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ignore"};
+                    "regression"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -260,13 +261,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 86
 testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 87
-testRunner.When(string.Format("I enter keyword \'{0}\'", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 88
 testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 89
-testRunner.Then("I should result search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 90
-testRunner.And(string.Format("it should list most best match \'{0}\' on top of the search list", keyword), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then(string.Format("I should see  best match \'{0}\' is on top of the search list", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -57,12 +57,12 @@ Examples:
 | aircraft manufacture mechanic  |
 
 
-@ignore
+@regression
 Scenario Outline: Verify invalid search
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 When I click on search button 
-Then I should see message "Total results found: 0"
+Then I should see message "There are no standards matching your search for '<JOBROLE>'"
 Examples: 
 | JOBROLE     |
 | kdjfdkfjdfk |
@@ -81,17 +81,17 @@ Examples:
 | software engineer    | 
 
 
-@ignore
+@regression
 Scenario Outline: Search result Page to have best match 
 Given I am on Search landing page
-When I enter keyword '<keyword>'
+And I enter keyword '<JOBROLE>' in search box
 And I click on search button
-Then I should result search page
-And it should list most best match '<keyword>' on top of the search list
+Then I should see  best match '<JOBROLE>' is on top of the search list
 Examples:
-| keyword             |
-| Mechanical Engineer |
-| Software Engineer   |
+| JOBROLE             |
+| Actuarial Technician |
+| Software Developer   |
+| Aerospace Engineer   |
 
 
 
