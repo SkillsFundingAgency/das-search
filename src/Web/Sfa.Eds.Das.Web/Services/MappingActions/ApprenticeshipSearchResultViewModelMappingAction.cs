@@ -14,7 +14,7 @@
         public void Process(ApprenticeshipSearchResultsItem source, ApprenticeshipSearchResultItemViewModel destination)
         {
             destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
-            destination.Level = source.StandardId > 0 ? GetLevelText(source.NotionalEndLevel) : source.Level;
+            destination.Level = source.StandardId > 0 ? GetLevelText(source.NotionalEndLevel) : GetLevelText(string.IsNullOrEmpty(source.Level) ? 0 : int.Parse(source.Level));
         }
 
         private string GetLevelText(int item)
@@ -45,6 +45,9 @@
                     break;
                 case 8:
                     equivalence = Resources.EighthLevel;
+                    break;
+                default:
+                    equivalence = string.Empty;
                     break;
             }
 
