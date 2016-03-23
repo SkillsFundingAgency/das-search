@@ -17,6 +17,7 @@
                 <h1 class="heading-xlarge">
                     @Model.Name
                 </h1>
+                <p>@Model.ProviderMarketingInfo</p>
 
             </div>
         </div>
@@ -38,14 +39,14 @@
     <section>
         <header>
             <h2 class="heading-large">
-                @Model.StandardNameWithLevel
+                @Model.ApprenticeshipNameWithLevel
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", @Model.StandardInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactUsUrl)
-            @GetStandardPropertyHtml("Phone", Model.Phone)
-            @GetStandardPropertyHtml("Email", Model.Email)
+            @GetStandardPropertyAsLinkHtml("Website course page", @Model.Apprenticeship.ApprenticeshipInfoUrl)
+            @GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactInformation.ContactUsUrl)
+            @GetStandardPropertyHtml("Phone", Model.ContactInformation.Phone)
+            @GetStandardPropertyHtml("Email", Model.ContactInformation.Email)
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>
@@ -65,7 +66,7 @@
         else
         {
                 <dt>@title</dt>
-                <dd>@Model.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+                <dd>@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
         }
     }
 }

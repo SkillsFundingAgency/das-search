@@ -12,7 +12,7 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
     using ElasticSearch;
     using Sfa.Das.ApplicationServices.Models;
 
-    public sealed class ProviderRepository : IProviderRepository
+    public sealed class ApprenticeshipProviderRepository : IApprenticeshipProviderRepository
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
@@ -20,7 +20,7 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IProviderMapping _providerMapping;
 
-        public ProviderRepository(
+        public ApprenticeshipProviderRepository(
             IElasticsearchClientFactory elasticsearchClientFactory,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,

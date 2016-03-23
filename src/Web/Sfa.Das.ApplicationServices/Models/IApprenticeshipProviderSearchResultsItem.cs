@@ -16,6 +16,8 @@ namespace Sfa.Das.ApplicationServices.Models
         int LocationId { get; set; }
         string LocationName { get; set; }
         string MarketingName { get; set; }
+        string ProviderMarketingInfo { get; set; }
+        string ApprenticeshipMarketingInfo { get; set; }
         string Name { get; set; }
         string Phone { get; set; }
         string StandardInfoUrl { get; set; }

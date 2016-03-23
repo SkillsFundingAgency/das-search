@@ -20,6 +20,10 @@
 
         public string MarketingName { get; set; }
 
+        public string ProviderMarketingInfo { get; set; }
+
+        public string ApprenticeshipMarketingInfo { get; set; }
+
         public string Phone { get; set; }
 
         public string Email { get; set; }

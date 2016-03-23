@@ -25,7 +25,7 @@ namespace Sfa.Eds.Das.Infrastructure.DependencyResolution
             For<IStandardRepository>().Use<StandardRepository>();
             For<ISearchProvider>().Use<ElasticsearchProvider>();
             For<IRetryWebRequests>().Use<WebRequestRetryService>();
-            For<IProviderRepository>().Use<ProviderRepository>();
+            For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderRepository>();
             For<IProviderMapping>().Use<ProviderMapping>();
         }
     }

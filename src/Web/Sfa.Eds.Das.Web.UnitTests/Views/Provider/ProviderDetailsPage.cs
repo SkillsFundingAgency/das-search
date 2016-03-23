@@ -19,9 +19,17 @@
             var model = new ProviderViewModel
             {
                 Name = "Test name",
-                LocationName = "Test venue name",
+                Location = new Location
+                {
+                    LocationName = "Test venue name"
+                },
                 DeliveryModes = new List<string> { "100PercentEmployer" },
-                StandardNameWithLevel = "Demo standard level 2",
+                ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -33,11 +41,11 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
+            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
 
             var locationText = GetPartial(html, "dl dd", 6);
 
-            locationText.Should().NotContain(model.LocationName);
+            locationText.Should().NotContain(model.Location.LocationName);
             locationText.Should().NotContain(model.Address.Address1);
             locationText.Should().NotContain(model.Address.Address2);
             locationText.Should().Contain("Training will take place at your location");
@@ -50,9 +58,17 @@
             var model = new ProviderViewModel
             {
                 Name = "Test name",
-                LocationName = "Test venue name",
+                Location = new Location
+                {
+                    LocationName = "Test venue name"
+                },
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
-                StandardNameWithLevel = "Demo standard level 2",
+                ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -64,11 +80,11 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
+            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
 
             var locationText = GetPartial(html, "dl dd", 6);
 
-            locationText.Should().Contain(model.LocationName);
+            locationText.Should().Contain(model.Location.LocationName);
             locationText.Should().Contain(model.Address.Address1);
             locationText.Should().Contain(model.Address.Address2);
         }
@@ -80,9 +96,17 @@
             var model = new ProviderViewModel
             {
                 Name = "Test name",
-                LocationName = "Test venue name",
+                Location = new Location
+                {
+                    LocationName = "Test venue name"
+                },
                 DeliveryModes = new List<string> { "blockRelease" },
-                StandardNameWithLevel = "Demo standard level 2",
+                ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -94,11 +118,11 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
+            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
 
             var locationText = GetPartial(html, "dl dd", 6);
 
-            locationText.Should().Contain(model.LocationName);
+            locationText.Should().Contain(model.Location.LocationName);
             locationText.Should().Contain(model.Address.Address1);
             locationText.Should().Contain(model.Address.Address2);
         }
@@ -110,9 +134,17 @@
             var model = new ProviderViewModel
             {
                 Name = "Test name",
-                LocationName = "Test venue name",
+                Location = new Location
+                {
+                    LocationName = "Test venue name"
+                },
                 DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
-                StandardNameWithLevel = "Demo standard level 2",
+                ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
                 Address = new Address
                 {
                     Address1 = "Address1",
@@ -124,7 +156,45 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.StandardNameWithLevel);
+            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
+
+            GetPartial(html, "ul li").Should().Contain("at your location");
+        }
+
+        [Test]
+        public void ShouldShowProviderMarketingInfo()
+        {
+            var detail = new Detail();
+            var model = new ProviderViewModel
+            {
+                Name = "Test name",
+                Location = new Location
+                {
+                    LocationName = "Test venue name"
+                },
+                DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
+                ProviderMarketingInfo = "Provider test marketing info",
+                ApprenticeshipNameWithLevel = "Demo standard level 2",
+                ContactInformation = new ContactInformation(),
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address1",
+                    Address2 = "Address2",
+                    County = "County",
+                    Postcode = "Postcode",
+                    Town = "Town"
+                }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var providerMArketingInfoHtml = GetPartial(html, "div div div p");
+
+            providerMArketingInfoHtml.Should().Contain(model.ProviderMarketingInfo);
+            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
 
             GetPartial(html, "ul li").Should().Contain("at your location");
         }

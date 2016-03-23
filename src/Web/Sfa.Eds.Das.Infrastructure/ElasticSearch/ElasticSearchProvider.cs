@@ -76,7 +76,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
                 LocationId = hit.Source.LocationId,
                 LocationName = hit.Source.LocationName,
-                MarketingName = hit.Source.MarketingName,
+                ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
                 Name = hit.Source.Name,
                 Phone = hit.Source.Phone,
                 StandardCode = hit.Source.StandardCode,

@@ -1,26 +1,23 @@
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using Sfa.Das.ApplicationServices;
+using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Domain.Model;
+using Sfa.Eds.Das.Core.Domain.Services;
+using Sfa.Eds.Das.Core.Logging;
+using Sfa.Eds.Das.Web.Models;
+using Sfa.Eds.Das.Web.Services;
+using Sfa.Eds.Das.Web.ViewModels;
 ﻿using Sfa.Eds.Das.Web.Extensions;
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
-    using Sfa.Das.ApplicationServices;
-    using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Domain.Model;
-    using Sfa.Eds.Das.Core.Domain.Services;
-    using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Web.Models;
-    using Sfa.Eds.Das.Web.Services;
-    using Sfa.Eds.Das.Web.ViewModels;
-
     public sealed class ProviderController : Controller
     {
         private readonly IProviderSearchService _providerSearchService;
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
-
-        private readonly IProviderRepository _providerRepository;
+        private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
 
         private readonly IStandardRepository _standardRepository;
 
@@ -28,13 +25,13 @@ namespace Sfa.Eds.Das.Web.Controllers
             IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
-            IProviderRepository providerRepository,
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
             IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
-            _providerRepository = providerRepository;
+            _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
             _standardRepository = standardRepository;
         }
 
@@ -48,6 +45,12 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
+            foreach (var providerSearchResult in searchResults.Hits)
+            {
+                providerSearchResult.EmployerSatisfaction = providerSearchResult.EmployerSatisfaction * 10;
+                providerSearchResult.LearnerSatisfaction = providerSearchResult.LearnerSatisfaction * 10;
+            }
+
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
             return View(viewModel);
@@ -56,7 +59,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         [HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            var model = this._providerRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
+            var model = _apprenticeshipProviderRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
 
             if (model == null)
             {
@@ -66,11 +69,11 @@ namespace Sfa.Eds.Das.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = this._mappingService.Map<Provider, ProviderViewModel>(model);
+            var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
 
-            var standardData = _standardRepository.GetById(model.StandardCode);
+            var apprenticeshipData = _standardRepository.GetById(model.Apprenticeship.Code);
 
-            viewModel.StandardNameWithLevel = string.Concat(standardData.Title, " level ", standardData.NotionalEndLevel);
+            viewModel.ApprenticeshipNameWithLevel = string.Concat(apprenticeshipData.Title, " level ", apprenticeshipData.NotionalEndLevel);
 
             viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("SearchResults", "Provider"));
 

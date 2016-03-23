@@ -18,18 +18,28 @@ namespace Sfa.Eds.Das.Infrastructure.Mapping
                 Address = item.Address,
                 DeliveryModes = item.DeliveryModes,
                 UkPrn = item.UkPrn,
-                Phone = item.Phone,
-                Email = item.Email,
-                Website = item.Website,
+                ContactInformation = new ContactInformation
+                {
+                    Phone = item.Phone,
+                    Email = item.Email,
+                    Website = item.Website,
+                    ContactUsUrl = item.ContactUsUrl,
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = item.StandardInfoUrl,
+                    Code = item.StandardCode,
+                    ApprenticeshipMarketingInfo = item.ApprenticeshipMarketingInfo,
+                },
                 LearnerSatisfaction = item.LearnerSatisfaction * 10,
                 EmployerSatisfaction = item.EmployerSatisfaction * 10,
-                StandardInfoUrl = item.StandardInfoUrl,
-                LocationName = item.LocationName,
+                Location = new Location
+                {
+                    LocationName = item.LocationName,
+                    LocationId = item.LocationId,
+                },
                 Name = item.Name,
-                ContactUsUrl = item.ContactUsUrl,
-                LocationId = item.LocationId,
-                StandardCode = item.StandardCode,
-                MarketingName = item.MarketingName,
+                ProviderMarketingInfo = item.ProviderMarketingInfo,
                 Distance = item.Distance
             };
         }
