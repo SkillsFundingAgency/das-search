@@ -17,7 +17,6 @@
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
-                    <span class="heading-secondary">Apprenticeship standard and assessment plan</span>
                     @Model.Title
                 </h1>
                 @if (!string.IsNullOrEmpty(@Model.IntroductoryTextHtml))
@@ -103,7 +102,7 @@
 {
     if (!string.IsNullOrEmpty(item))
     {
-        <dt class="minLength">Level</dt>
+        <dt>Level:</dt>
         var equivalence = string.Empty;
         switch (int.Parse(@item))
         {
@@ -135,7 +134,7 @@
                 break;
 
         }
-            <dd class="minLength">@item (equivalent to @equivalence)</dd>
+            <dd>@item (equivalent to @equivalence)</dd>
     }
 }
 
