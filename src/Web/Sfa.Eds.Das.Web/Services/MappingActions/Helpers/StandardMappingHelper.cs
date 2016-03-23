@@ -11,16 +11,16 @@
                 return string.Empty;
             }
 
-            if (GetSingelValue(typicalLength.From, typicalLength.To) != 0)
+            if (GetSingleValue(typicalLength.From, typicalLength.To) != 0)
             {
-                var value = GetSingelValue(typicalLength.From, typicalLength.To);
+                var value = GetSingleValue(typicalLength.From, typicalLength.To);
                 return $"{value} {GetUnit(typicalLength.Unit)}";
             }
 
             return $"{typicalLength.From} to {typicalLength.To} {GetUnit(typicalLength.Unit)}";
         }
 
-        private static int GetSingelValue(int from, int to)
+        private static int GetSingleValue(int from, int to)
         {
             if (from == to)
             {

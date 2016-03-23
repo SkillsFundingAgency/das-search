@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.ApplicationServices.Models;
-
-namespace Sfa.Eds.Das.Web.ViewModels
+﻿namespace Sfa.Eds.Das.Web.ViewModels
 {
     using System.Collections.Generic;
 
-    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Model;
 
     public class ProviderResultItemViewModel

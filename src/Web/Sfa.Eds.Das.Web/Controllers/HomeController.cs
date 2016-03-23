@@ -4,10 +4,6 @@
 
     public sealed class HomeController : Controller
     {
-        public HomeController()
-        {
-        }
-
         public ActionResult Index()
         {
             return View();
