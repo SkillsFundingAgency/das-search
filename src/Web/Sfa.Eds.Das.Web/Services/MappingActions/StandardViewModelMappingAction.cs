@@ -8,7 +8,7 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
     using Sfa.Eds.Das.Web.Services.MappingActions.Helpers;
     using Sfa.Eds.Das.Web.ViewModels;
 
-    internal class StandardViewModelMappingAction : IMappingAction<Standard, StandardViewModel>
+    public class StandardViewModelMappingAction : IMappingAction<Standard, StandardViewModel>
     {
         public void Process(Standard source, StandardViewModel destination)
         {

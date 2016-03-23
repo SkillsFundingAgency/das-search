@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Sfa.Das.Web.UITests</id>
+        <version>0.0.1</version>
+        <authors>SFA DAS</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Package for UI Tests for the Web project.</description>
+        <copyright>Copyright 2016</copyright>
+        <dependencies>
+            <dependency id="SampleDependency" version="1.0" />
+        </dependencies>
+    </metadata>
+     <files>
+        <file src="\..\webtests\Web\Sfa.Eds.Das.Web.AcceptanceTests\bin\Release\*.*" target="" />
+     </files>
+</package>

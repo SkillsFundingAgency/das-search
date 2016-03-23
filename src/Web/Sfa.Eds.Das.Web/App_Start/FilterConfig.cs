@@ -1,8 +1,7 @@
-﻿using System.Web;
-using System.Web.Mvc;
-
-namespace Sfa.Eds.Das.Web
+﻿namespace Sfa.Eds.Das.Web
 {
+    using System.Web.Mvc;
+
     public static class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

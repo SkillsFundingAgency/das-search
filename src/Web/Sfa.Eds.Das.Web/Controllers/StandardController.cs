@@ -1,26 +1,32 @@
-﻿using System.Web.Mvc;
-using Sfa.Das.ApplicationServices;
-using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.Core.Domain.Model;
-using Sfa.Eds.Das.Core.Domain.Services;
-using Sfa.Eds.Das.Core.Logging;
-using Sfa.Eds.Das.Web.Extensions;
-using Sfa.Eds.Das.Web.Models;
-using Sfa.Eds.Das.Web.Services;
-using Sfa.Eds.Das.Web.ViewModels;
-
-namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Eds.Das.Web.Controllers
 {
+    using System.Web.Mvc;
+
+    using Sfa.Das.ApplicationServices;
+    using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Eds.Das.Core.Domain.Model;
+    using Sfa.Eds.Das.Core.Domain.Services;
+    using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Web.Extensions;
+    using Sfa.Eds.Das.Web.Models;
+    using Sfa.Eds.Das.Web.Services;
+    using Sfa.Eds.Das.Web.ViewModels;
+
     public sealed class StandardController : Controller
     {
+        private readonly ILog _logger;
+
+        private readonly IMappingService _mappingService;
+
         private readonly IStandardSearchService _searchService;
 
         private readonly IStandardRepository _standardRepository;
 
-        private readonly ILog _logger;
-        private readonly IMappingService _mappingService;
-
-        public StandardController(IStandardSearchService searchService, IStandardRepository standardRepository, ILog logger, IMappingService mappingService)
+        public StandardController(
+            IStandardSearchService searchService,
+            IStandardRepository standardRepository,
+            ILog logger,
+            IMappingService mappingService)
         {
             _searchService = searchService;
             _standardRepository = standardRepository;

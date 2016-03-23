@@ -7,7 +7,7 @@
 
     using ViewModels;
 
-    internal class StandardSearchResultViewModelMappingAction :
+    public class StandardSearchResultViewModelMappingAction :
         IMappingAction<StandardSearchResultsItem, StandardSearchResultItemViewModel>
     {
         public void Process(StandardSearchResultsItem source, StandardSearchResultItemViewModel destination)
