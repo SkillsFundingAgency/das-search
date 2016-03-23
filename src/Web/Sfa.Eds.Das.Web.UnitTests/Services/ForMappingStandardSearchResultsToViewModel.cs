@@ -15,15 +15,15 @@
         public void WhenTypicalLengthIsEmpty()
         {
             MappingService mappingService = new MappingService(null);
-            var sri = new StandardSearchResultsItem
+            var sri = new ApprenticeshipSearchResultsItem
             {
                 StandardId = 101,
                 Title = "Standard 1"
             };
-            var resultList = new List<StandardSearchResultsItem> { sri };
-            var model = new StandardSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
+            var resultList = new List<ApprenticeshipSearchResultsItem> { sri };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
 
-            var mappedResult = mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(model);
+            var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
             Assert.AreEqual(model.TotalResults, mappedResult.TotalResults);
             Assert.AreEqual(model.Results.First().Title, mappedResult.Results.First().Title);
@@ -34,7 +34,7 @@
         public void WhenTypicalLengthIsRange()
         {
             MappingService mappingService = new MappingService(null);
-            var sri = new StandardSearchResultsItem
+            var sri = new ApprenticeshipSearchResultsItem
             {
                 StandardId = 101,
                 Title = "Standard 1",
@@ -45,10 +45,10 @@
                                         Unit = "m"
                                     }
             };
-            var resultList = new List<StandardSearchResultsItem> { sri };
-            var model = new StandardSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
+            var resultList = new List<ApprenticeshipSearchResultsItem> { sri };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
 
-            var mappedResult = mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(model);
+            var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
             Assert.AreEqual(model.TotalResults, mappedResult.TotalResults);
             Assert.AreEqual(model.Results.First().Title, mappedResult.Results.First().Title);
@@ -59,7 +59,7 @@
         public void WhenTypicalLengthIsFixed()
         {
             MappingService mappingService = new MappingService(null);
-            var sri = new StandardSearchResultsItem
+            var sri = new ApprenticeshipSearchResultsItem
             {
                 StandardId = 101,
                 Title = "Standard 1",
@@ -71,7 +71,7 @@
                 }
             };
 
-            var sri2 = new StandardSearchResultsItem
+            var sri2 = new ApprenticeshipSearchResultsItem
             {
                 StandardId = 102,
                 Title = "Standard 2",
@@ -83,7 +83,7 @@
                 }
             };
 
-            var sri3 = new StandardSearchResultsItem
+            var sri3 = new ApprenticeshipSearchResultsItem
             {
                 StandardId = 103,
                 Title = "Standard 3",
@@ -95,10 +95,10 @@
                 }
             };
 
-            var resultList = new List<StandardSearchResultsItem> { sri, sri2, sri3 };
-            var model = new StandardSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
+            var resultList = new List<ApprenticeshipSearchResultsItem> { sri, sri2, sri3 };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
 
-            var mappedResult = mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(model);
+            var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
             Assert.AreEqual(model.TotalResults, mappedResult.TotalResults);
             Assert.AreEqual(model.Results.First().Title, mappedResult.Results.First().Title);
@@ -113,7 +113,7 @@
         public void WhenTypicalLengthIsInvalid()
         {
             MappingService mappingService = new MappingService(null);
-            var searchResultItem1 = new StandardSearchResultsItem
+            var searchResultItem1 = new ApprenticeshipSearchResultsItem
             {
                 StandardId = 101,
                 Title = "Standard 1",
@@ -125,10 +125,10 @@
                 }
             };
 
-            var resultList = new List<StandardSearchResultsItem> { searchResultItem1 };
-            var model = new StandardSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
+            var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
 
-            var mappedResult = mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(model);
+            var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
             Assert.AreEqual(string.Empty, mappedResult.Results.First().TypicalLengthMessage);
         }

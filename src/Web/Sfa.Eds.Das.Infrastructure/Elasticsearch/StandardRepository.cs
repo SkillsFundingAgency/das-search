@@ -29,11 +29,12 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             var results =
                 client.Search<StandardSearchResultsItem>(s => s
                     .Index(_applicationSettings.StandardIndexesAlias)
+                    .Types("standarddocument")
                     .From(0)
                     .Size(1)
                     .Query(q =>
                         q.QueryString(qs =>
-                            qs.OnFields(e => e.StandardId)
+                            qs.OnFields(e => e.StandardId, null)
                             .Query(id.ToString()))));
 
             if (results.ConnectionStatus.HttpStatusCode != 200)

@@ -33,7 +33,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
         }
 
         public async Task CheckMessage<T>()
-            where T : IIndexEntry
+            where T : IMaintainSearchIndexes
         {
             var indexerService = _container.GetInstance<IIndexerService<T>>();
 

@@ -233,6 +233,7 @@
     <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Models\StandardSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
+    <Compile Include="Services\MappingActions\ApprenticeshipSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\Helpers\StandardMappingHelper.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -257,6 +258,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Services\MappingActions\StandardSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\StandardViewModelMappingAction.cs" />
+    <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
+    <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\StandardResultItemViewModel.cs" />

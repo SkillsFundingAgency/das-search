@@ -28,7 +28,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
             return defaultValue;
         }
 
-        public string GetSetting(string settingKey)
+        public virtual string GetSetting(string settingKey)
         {
             var setting = ConfigurationManager.AppSettings[settingKey];
             if (string.IsNullOrEmpty(setting))

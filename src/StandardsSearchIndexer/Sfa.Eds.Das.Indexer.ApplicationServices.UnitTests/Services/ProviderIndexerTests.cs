@@ -11,7 +11,6 @@
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
     [TestFixture]
@@ -19,10 +18,8 @@
     {
         private ProviderIndexer _sut;
 
-        private Mock<IIndexSettings<Core.Models.Provider.Provider>> _mockSettings;
-
-        private Mock<IMaintainSearchIndexes<Core.Models.Provider.Provider>> _mockIndexMaintainer;
-
+        private Mock<IIndexSettings<IMaintainProviderIndex>> _mockSettings;
+        private Mock<IMaintainProviderIndex> _mockIndexMaintainer;
         private Mock<IGetApprenticeshipProviders> _mockProviderRepository;
 
         private Mock<IGetActiveProviders> _mockActiveProviderClient;
@@ -32,14 +29,14 @@
         [SetUp]
         public void Setup()
         {
-            _mockSettings = new Mock<IIndexSettings<Core.Models.Provider.Provider>>();
-            _mockFeatures = new Mock<IProviderFeatures>();
-            _mockIndexMaintainer = new Mock<IMaintainSearchIndexes<Core.Models.Provider.Provider>>();
+            _mockSettings = new Mock<IIndexSettings<IMaintainProviderIndex>>();
+            _mockIndexMaintainer = new Mock<IMaintainProviderIndex>();
             _mockProviderRepository = new Mock<IGetApprenticeshipProviders>();
             _mockActiveProviderClient = new Mock<IGetActiveProviders>();
+            _mockFeatures = new Mock<IProviderFeatures>();
             var mockLogger = Mock.Of<ILog>();
 
-            _sut = new ProviderIndexer(_mockSettings.Object, _mockFeatures.Object, _mockIndexMaintainer.Object, _mockProviderRepository.Object, _mockActiveProviderClient.Object, mockLogger);
+            _sut = new ProviderIndexer(_mockSettings.Object, _mockIndexMaintainer.Object, _mockFeatures.Object, _mockProviderRepository.Object, _mockActiveProviderClient.Object, mockLogger);
         }
 
         [Test]

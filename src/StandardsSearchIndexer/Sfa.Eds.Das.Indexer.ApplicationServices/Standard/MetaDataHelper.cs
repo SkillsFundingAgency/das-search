@@ -6,6 +6,7 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
 
     public class MetaDataHelper : IMetaDataHelper
     {
@@ -13,25 +14,28 @@
 
         private readonly IGenerateStandardMetaData _metaDataWriter;
 
+        private readonly IGetFrameworkMetaData _metaDataFrameworkReader;
+
         private readonly ILog _log;
 
-        public MetaDataHelper(IGetStandardMetaData metaDataReader, IGenerateStandardMetaData metaDataGenerator, ILog log)
+        public MetaDataHelper(IGetStandardMetaData metaDataReader, IGenerateStandardMetaData metaDataGenerator, ILog log, IGetFrameworkMetaData metaDataFrameworkReader)
         {
             _metaDataReader = metaDataReader;
             _metaDataWriter = metaDataGenerator;
             _log = log;
+            _metaDataFrameworkReader = metaDataFrameworkReader;
         }
 
-        public List<MetaDataItem> GetAllStandardsMetaData()
+        public List<StandardMetaData> GetAllStandardsMetaData()
         {
             var standardsMetaDataJson = _metaDataReader.GetAllAsJson();
-            var standardsMetaData = new List<MetaDataItem>();
+            var standardsMetaData = new List<StandardMetaData>();
 
             foreach (var item in standardsMetaDataJson)
             {
                 try
                 {
-                    standardsMetaData.Add(JsonConvert.DeserializeObject<MetaDataItem>(item.Value));
+                    standardsMetaData.Add(JsonConvert.DeserializeObject<StandardMetaData>(item.Value));
                 }
                 catch (JsonReaderException ex)
                 {
@@ -45,6 +49,11 @@
         public void UpdateMetadataRepository()
         {
             _metaDataWriter.GenerateStandardMetadataFiles();
+        }
+
+        public List<FrameworkMetaData> GetAllFrameworkMetaData()
+        {
+            return _metaDataFrameworkReader.GetAllFrameworks();
         }
     }
 }

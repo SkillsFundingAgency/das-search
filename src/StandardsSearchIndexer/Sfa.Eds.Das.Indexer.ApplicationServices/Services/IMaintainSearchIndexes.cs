@@ -1,13 +1,9 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
 
-    public interface IMaintainSearchIndexes<T>
+    public interface IMaintainSearchIndexes
     {
-        Task IndexEntries(string indexName, ICollection<T> entries);
-
         bool IndexExists(string indexName);
 
         bool DeleteIndex(string indexName);

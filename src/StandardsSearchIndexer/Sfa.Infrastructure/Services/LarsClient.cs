@@ -54,7 +54,9 @@
         {
             var filterValues = new List<FilterValue>();
 
-            filterValues.AddRange(queryFilterValues.Select(queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value }));
+            filterValues.AddRange(
+                queryFilterValues.Select(
+                    queryFilterValue => new FilterValue { FieldName = queryFilterValue.Key, FieldValue = queryFilterValue.Value }));
 
             var queryExecution = new QueryExecution { FilterValues = filterValues.Where(x => !string.IsNullOrEmpty(x.FieldValue)).ToArray(), SortValues = new SortValue[0] };
 

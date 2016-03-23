@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -8,11 +9,12 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 
-    public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData
+    public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData, IGetFrameworkMetaData
     {
         private readonly IAppServiceSettings _appServiceSettings;
 
@@ -50,6 +52,11 @@
             return _vstsService.GetStandards();
         }
 
+        public List<FrameworkMetaData> GetAllFrameworks()
+        {
+            return FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
+        }
+
         private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)
         {
             var missingStandards = new List<FileContents>();
@@ -71,6 +78,18 @@
             {
                 _vstsService.PushCommit(standards);
             }
+        }
+
+        private List<FrameworkMetaData> FilterFrameworks(List<FrameworkMetaData> frameworks)
+        {
+            var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
+
+            return frameworks.Where(s => s.FworkCode > 399)
+                .Where(s => s.PwayCode > 0)
+                .Where(s => !s.EffectiveFrom.Equals(DateTime.MinValue))
+                .Where(s => s.EffectiveTo.Equals(DateTime.MinValue) || s.EffectiveTo > DateTime.Now)
+                .Where(s => progTypeList.Contains(s.ProgType))
+                .ToList();
         }
     }
 }

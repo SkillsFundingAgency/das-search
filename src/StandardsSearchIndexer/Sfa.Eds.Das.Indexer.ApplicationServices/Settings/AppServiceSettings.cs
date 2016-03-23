@@ -36,19 +36,17 @@
 
         public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
 
+        public string ImServiceBaseUrl => GetSetting("ImServiceBaseUrl");
+
+        public string ImServiceUrl => GetSetting("ImServiceUrl");
+
         // Private appServiceSettings
         private string VstsGitBaseUrl => GetSetting("VstsGitBaseUrl");
 
         public string QueueName(Type type)
         {
-            var name = type.Name.Replace("MetaDataItem", "Standard") + ".QueueName";
-            var setting = ConfigurationManager.AppSettings[name];
-            if (setting != null)
-            {
-                return setting;
-            }
-
-            throw new ArgumentException("setting '" + name + "' not found");
+            var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Standard").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
+            return GetSetting(name);
         }
     }
 }

@@ -3,30 +3,27 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-
     using Nest;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Services;
 
-    public abstract class ElasticsearchIndexMaintainerBase<T> : IMaintainSearchIndexes<T>
-        where T : class, IIndexEntry
+    public abstract class ElasticsearchIndexMaintainerBase : IMaintainSearchIndexes
     {
         private readonly string _typeOfIndex;
 
-        public ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, ILog log, string typeOfIndex)
+        protected ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
         {
             Client = factory.GetElasticClient();
             Log = log;
+            ElasticsearchMapper = elasticsearchMapper;
             _typeOfIndex = typeOfIndex;
         }
 
         protected IElasticClient Client { get; }
 
         protected ILog Log { get; }
+
+        protected IElasticsearchMapper ElasticsearchMapper { get; }
 
         public virtual bool AliasExists(string aliasName)
         {
@@ -68,10 +65,10 @@
 
         public virtual bool IndexContainsDocuments(string indexName)
         {
-            return Client.Search<dynamic>(s => s.Index(indexName).AllTypes().From(0).Size(1000).MatchAll()).Documents.Any();
-        }
+            var a = Client.Search<dynamic>(s => s.Index(indexName).AllTypes().From(0).Size(10).MatchAll()).Documents;
 
-        public abstract Task IndexEntries(string indexName, System.Collections.Generic.ICollection<T> entries);
+            return a.Any();
+        }
 
         public virtual bool IndexExists(string indexName)
         {

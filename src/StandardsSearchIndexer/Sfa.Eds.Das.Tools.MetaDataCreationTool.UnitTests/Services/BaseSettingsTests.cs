@@ -1,9 +1,13 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.Services
 {
+    using System;
     using System.Configuration;
+
+    using Moq;
 
     using NUnit.Framework;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
     [TestFixture]
@@ -43,6 +47,17 @@
             var settings = new AppServiceSettings();
             var setting = settings.GetSetting("intAsString");
             Assert.AreEqual("five", setting);
+        }
+
+        [TestCase(typeof(IMaintainApprenticeshipIndex), "Standard.QueueName")]
+        [TestCase(typeof(IMaintainProviderIndex), "Provider.QueueName")]
+        public void CreateQueueNameFromType(Type type, string queueName)
+        {
+            var settings = new Mock<AppServiceSettings>();
+            settings.Setup(m => m.GetSetting(It.IsAny<string>())).Returns(string.Empty);
+            settings.Object.QueueName(type);
+
+            settings.Verify(m => m.GetSetting(queueName), Times.Once);
         }
     }
 }

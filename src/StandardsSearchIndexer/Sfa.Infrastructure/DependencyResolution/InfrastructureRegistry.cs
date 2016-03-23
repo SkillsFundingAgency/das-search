@@ -1,18 +1,16 @@
 namespace Sfa.Infrastructure.DependencyResolution
 {
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Infrastructure;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.CourseDirectory;
-    using Sfa.Infrastructure.Elasticsearch;
-    using Sfa.Infrastructure.Services;
-    using Sfa.Infrastructure.Settings;
-
+    using CourseDirectory;
+    using Eds.Das.Indexer.ApplicationServices.Http;
+    using Eds.Das.Indexer.ApplicationServices.Infrastructure;
+    using Eds.Das.Indexer.ApplicationServices.MetaData;
+    using Eds.Das.Indexer.ApplicationServices.Provider;
+    using Eds.Das.Indexer.ApplicationServices.Services;
+    using Eds.Das.Indexer.Core.Models.Provider;
+    using Eds.Das.Indexer.Core.Services;
+    using Elasticsearch;
+    using Services;
+    using Settings;
     using StructureMap;
 
     public class InfrastructureRegistry : Registry
@@ -31,9 +29,10 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<ILog>().Use(x => new NLogService(x.ParentType)).AlwaysUnique();
             For<IUnzipStream>().Use<ZipFileExtractor>();
             For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
-            For<IMaintainSearchIndexes<MetaDataItem>>().Use<ElasticsearchStandardIndexMaintainer>();
-            For<IMaintainSearchIndexes<Provider>>().Use<ElasticsearchProviderIndexMaintainer>();
+            For<IMaintainApprenticeshipIndex>().Use<ElasticsearchApprenticeshipIndexMaintainer>();
+            For<IMaintainProviderIndex>().Use<ElasticsearchProviderIndexMaintainer>();
             For<IGenerateIndexDefinitions<Provider>>().Use<ProviderIndexGenerator>();
+            For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
         }
     }
 }

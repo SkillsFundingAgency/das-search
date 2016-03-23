@@ -3,11 +3,14 @@
     using System.Collections.Generic;
 
     using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
 
     public interface IMetaDataHelper
     {
-        List<MetaDataItem> GetAllStandardsMetaData();
+        List<StandardMetaData> GetAllStandardsMetaData();
 
         void UpdateMetadataRepository();
+
+        List<FrameworkMetaData> GetAllFrameworkMetaData();
     }
 }

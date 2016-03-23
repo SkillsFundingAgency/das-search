@@ -1,11 +1,11 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Provider
 {
     using System.Configuration;
-
+    using Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
-    public class ProviderIndexSettings : IIndexSettings<Provider>, IProviderFeatures
+    public class ProviderIndexSettings : IIndexSettings<IMaintainProviderIndex>, IProviderFeatures
     {
         public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
 

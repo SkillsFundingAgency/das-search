@@ -27,6 +27,7 @@
 
             _logger.Info("Web applications started...");
         }
+
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();

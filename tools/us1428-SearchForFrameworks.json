@@ -1,0 +1,76 @@
+
+PUT cistandardindexesalias-2016-03-09-14/frameworkdocument/1
+{
+  "id": 1,
+  "notionalEndLevel": 4,
+  "title": "Data Analytics",
+  "frameworkTitle": "Data Analytics",
+  "pathwayTitle": "Data Analytics"
+}
+
+PUT cistandardindexesalias-2016-03-09-14/frameworkdocument/2
+{
+  "id": 2,
+  "notionalEndLevel": 3,
+  "title": "Tax:HMRC",
+  "frameworkTitle": "Tax",
+  "pathwayTitle": "HMRC"
+}
+
+PUT cistandardindexesalias-2016-03-09-14/frameworkdocument/3
+{
+  "id": 3,
+  "notionalEndLevel": 5,
+  "title": "Software:Developer",
+  "frameworkTitle": "Software",
+  "pathwayTitle": "Developer"
+}
+
+// End dof PUT
+
+
+GET cistandardindexesalias/_search
+{
+  "query": {
+    "query_string": {
+      "query": "Actuarial+Tax"
+    }
+  }
+}
+
+GET cistandardindexesalias/_search
+{
+  "query": {
+    "query_string": {
+      "query": "data",
+      "fields": [
+        "title",
+        "jobRoles",
+        "keywords"
+      ]
+    }
+  }
+}
+
+
+
+GET cistandardindexesalias/_search 
+{
+  "from": 0,
+  "size": 1000,
+  "query": {
+    "query_string": {
+      "query": "tax",
+      "fields": [
+        "title",
+        "jobRoles",
+        "keywords",
+        "frameworkTitle"
+      ]
+    }
+  }
+}
+
+
+
+

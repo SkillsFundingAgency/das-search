@@ -20,14 +20,15 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
 
-        private IProviderRepository _providerRepository;
+        private readonly IProviderRepository _providerRepository;
 
         private readonly IStandardRepository _standardRepository;
 
-        public ProviderController(IProviderSearchService providerSearchService, 
-            ILog logger, 
-            IMappingService mappingService, 
-            IProviderRepository providerRepository, 
+        public ProviderController(
+            IProviderSearchService providerSearchService,
+            ILog logger,
+            IMappingService mappingService,
+            IProviderRepository providerRepository,
             IStandardRepository standardRepository)
         {
             _providerSearchService = providerSearchService;

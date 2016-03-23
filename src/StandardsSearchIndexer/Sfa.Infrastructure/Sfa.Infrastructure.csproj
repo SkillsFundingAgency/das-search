@@ -114,9 +114,12 @@
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\Models\Attachment.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchStandardIndexMaintainer.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchApprenticeshipIndexMaintainer.cs" />
+    <Compile Include="Elasticsearch\FrameworkDocument.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
+    <Compile Include="Elasticsearch\IElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\IGenerateIndexDefinitions.cs" />
     <Compile Include="Elasticsearch\ProviderIndexGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,7 +11,7 @@
             _searchProvider = searchProvider;
         }
 
-        public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             take = take == 0 ? 1000 : take;
             var results = _searchProvider.SearchByKeyword(keywords, skip, take);

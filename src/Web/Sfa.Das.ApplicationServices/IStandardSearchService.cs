@@ -4,6 +4,6 @@
 
     public interface IStandardSearchService
     {
-        StandardSearchResults SearchByKeyword(string keywords, int skip, int take);
+        ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take);
     }
 }

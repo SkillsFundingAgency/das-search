@@ -1,5 +1,5 @@
-﻿@using Resources = Sfa.Eds.Das.Resources.EquivalenceLevels
-@model Sfa.Eds.Das.Web.ViewModels.StandardSearchResultViewModel
+﻿@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
+﻿
 @{
     ViewBag.Title = "Search Results";
 }
@@ -27,11 +27,18 @@
                     <article class="result">
                         <header>
                             <h2 class="result-title">
-                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                @if (item.StandardId != 0)
+                                {
+                                    @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.FrameworkId }, null)
+                                }
                             </h2>
                         </header>
                             <dl class="result-data-list">
-                                @GetStandardLevel(item.NotionalEndLevel.ToString())
+                                @GetStandardDetailItem("Level", item.Level)
                                 @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
                             </dl>
                     </article>
@@ -70,45 +77,5 @@
     {
             <dt>@title</dt>
             <dd>@item @unit</dd>
-    }
-}
-
-@helper GetStandardLevel(string item)
-{
-if (!string.IsNullOrEmpty(item))
-{
-    var equivalence = string.Empty;
-    switch (int.Parse(@item))
-    {
-        case 1:
-            equivalence = @Resources.FirstLevel;
-            break;
-        case 2:
-            equivalence = @Resources.SecondLevel;
-            break;
-        case 3:
-            equivalence = @Resources.ThirdLevel;
-            break;
-        case 4:
-            equivalence = @Resources.FourthLevel;
-            break;
-        case 5:
-            equivalence = @Resources.FifthLevel;
-            break;
-        case 6:
-            equivalence = @Resources.SixthLevel;
-            break;
-        case 7:
-            equivalence = @Resources.SeventhLevel;
-            break;
-        case 8:
-            equivalence = @Resources.EighthLevel;
-            break;
-        default:
-            break;
-
-    }
-        <dt class="minLength">Level:</dt>
-        <dd class="minLength">@item (equivalent to @equivalence)</dd>
     }
 }

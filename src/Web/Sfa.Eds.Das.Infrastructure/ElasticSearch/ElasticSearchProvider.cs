@@ -23,22 +23,21 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             _applicationSettings = applicationSettings;
         }
 
-        public StandardSearchResults SearchByKeyword(string keywords, int skip, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             keywords = QueryHelper.FormatQuery(keywords);
 
             var client = this._elasticsearchClientFactory.Create();
-            var results = client.Search<StandardSearchResultsItem>(s => s
+            var results = client.Search<ApprenticeshipSearchResultsItem>(s => s
+                .Types("standarddocument", "frameworkdocument")
                 .Skip(skip)
                 .Take(take)
                 .Query(q => q
                     .QueryString(qs => qs
-                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords)
-                        .Query(keywords)
-                    ))
-                );
+                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkName, p => p.PathwayName)
+                        .Query(keywords))));
 
-            return new StandardSearchResults
+            return new ApprenticeshipSearchResults
             {
                 TotalResults = results.Total,
                 SearchTerm = keywords,
@@ -86,9 +85,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
 
-            if (results?.ConnectionStatus?.HttpStatusCode != 200)
+            if (results.ConnectionStatus?.HttpStatusCode != 200)
             {
-                throw new SearchException($"Search returned a status code of {results?.ConnectionStatus?.HttpStatusCode}");
+                throw new SearchException($"Search returned a status code of {results.ConnectionStatus?.HttpStatusCode}");
             }
 
             return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total };

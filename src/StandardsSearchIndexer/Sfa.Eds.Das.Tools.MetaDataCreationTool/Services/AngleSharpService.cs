@@ -13,7 +13,8 @@
             var config = Configuration.Default.WithDefaultLoader();
             var document = BrowsingContext.New(config).OpenAsync(fromUrl);
 
-            var all = document.Result.QuerySelectorAll(selector);
+            var result = document.Result;
+            var all = result.QuerySelectorAll(selector);
 
             return all.Where(x => x.InnerHtml.Contains(textInTitle)).Select(x => x.GetAttribute("href").ToString()).ToList();
         }

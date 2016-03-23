@@ -7,27 +7,24 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
-    public class ProviderIndexer : IGenericIndexerHelper<Core.Models.Provider.Provider>
+    public sealed class ProviderIndexer : IGenericIndexerHelper<IMaintainProviderIndex>
     {
         private readonly IGetActiveProviders _activeProviderClient;
 
         private readonly IGetApprenticeshipProviders _providerRepository;
-
-        private readonly IMaintainSearchIndexes<Core.Models.Provider.Provider> _searchIndexMaintainer;
-
-        private readonly IIndexSettings<Core.Models.Provider.Provider> _settings;
+        private readonly IMaintainProviderIndex _searchIndexMaintainer;
+        private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
         private readonly IProviderFeatures _features;
 
         private readonly ILog _log;
 
         public ProviderIndexer(
-            IIndexSettings<Core.Models.Provider.Provider> settings,
+            IIndexSettings<IMaintainProviderIndex> settings,
+            IMaintainProviderIndex searchIndexMaintainer,
             IProviderFeatures features,
-            IMaintainSearchIndexes<Core.Models.Provider.Provider> searchIndexMaintainer,
             IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             ILog log)

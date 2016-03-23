@@ -6,26 +6,19 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
     using FluentAssertions;
-
     using Moq;
-
     using Nest;
-
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Eds.Das.Indexer.IntegrationTests.Services;
     using Sfa.Infrastructure.Elasticsearch;
-    using Sfa.Infrastructure.Services;
 
     using StructureMap;
 
@@ -34,13 +27,13 @@
     {
         private IContainer _ioc;
 
-        private IGenericIndexerHelper<Provider> _indexerService;
+        private IGenericIndexerHelper<IMaintainProviderIndex> _indexerService;
 
-        private IIndexerService<Provider> _sut;
+        private IIndexerService<IMaintainProviderIndex> _sut;
 
         private IElasticClient _elasticClient;
 
-        private IIndexSettings<Provider> _providerSettings;
+        private IIndexSettings<IMaintainProviderIndex> _providerSettings;
 
         private Mock<IProviderFeatures> _features;
 
@@ -50,13 +43,12 @@
             _ioc = IoC.Initialize();
 
             _ioc.GetInstance<IGetApprenticeshipProviders>();
-            _ioc.GetInstance<IIndexSettings<Provider>>();
-            _indexerService = _ioc.GetInstance<IGenericIndexerHelper<Provider>>();
+            _ioc.GetInstance<IIndexSettings<IMaintainProviderIndex>>();
+            _indexerService = _ioc.GetInstance<IGenericIndexerHelper<IMaintainProviderIndex>>();
 
-            _providerSettings = _ioc.GetInstance<IIndexSettings<Provider>>();
+            _providerSettings = _ioc.GetInstance<IIndexSettings<IMaintainProviderIndex>>();
+            var maintainSearchIndexer = _ioc.GetInstance<IMaintainProviderIndex>();
             _features = new Mock<IProviderFeatures>();
-
-            var maintainSearchIndexer = _ioc.GetInstance<IMaintainSearchIndexes<Provider>>();
             var providerRepository = new Mock<IGetApprenticeshipProviders>();
             var activeProviderRepository = new Mock<IGetActiveProviders>();
             var logger = new Mock<ILog>();
@@ -64,12 +56,12 @@
             providerRepository.Setup(m => m.GetApprenticeshipProvidersAsync()).ReturnsAsync(GetProvidersTest());
             activeProviderRepository.Setup(m => m.GetActiveProviders()).Returns(new List<int> { 10002387 });
 
-            _indexerService = new ProviderIndexer(_providerSettings, _features.Object, maintainSearchIndexer, providerRepository.Object, activeProviderRepository.Object, logger.Object);
+            _indexerService = new ProviderIndexer(_providerSettings, maintainSearchIndexer, _features.Object, providerRepository.Object, activeProviderRepository.Object, logger.Object);
 
             var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
 
-            _sut = _ioc.GetInstance<IIndexerService<Provider>>();
+            _sut = _ioc.GetInstance<IIndexerService<IMaintainProviderIndex>>();
         }
 
         [Test]

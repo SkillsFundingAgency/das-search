@@ -4,51 +4,41 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Services;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Services;
 
-    public sealed class StandardIndexer : IGenericIndexerHelper<MetaDataItem>
+    public sealed class ApprenticeshipIndexer : IGenericIndexerHelper<IMaintainApprenticeshipIndex>
     {
+        private readonly IIndexSettings<IMaintainApprenticeshipIndex> _settings;
+        private readonly IMaintainApprenticeshipIndex _searchIndexMaintainer;
         private readonly IMetaDataHelper _metaDataHelper;
-
-        private readonly IMaintainSearchIndexes<MetaDataItem> _searchIndexMaintainer;
-
-        private readonly IIndexSettings<MetaDataItem> _settings;
-
         private readonly ILog _log;
 
-        public StandardIndexer(IIndexSettings<MetaDataItem> settings, IMaintainSearchIndexes<MetaDataItem> searchIndexMaintainer, IMetaDataHelper metaDataHelper, ILog log)
+        public ApprenticeshipIndexer(
+            IIndexSettings<IMaintainApprenticeshipIndex> settings,
+            IMaintainApprenticeshipIndex searchIndexMaintainer,
+            IMetaDataHelper metaDataHelper,
+            ILog log)
         {
             _settings = settings;
-            _metaDataHelper = metaDataHelper;
             _searchIndexMaintainer = searchIndexMaintainer;
+            _metaDataHelper = metaDataHelper;
             _log = log;
         }
 
         public async Task IndexEntries(string indexName)
         {
-            var entries = await LoadEntries();
-            try
-            {
-                _log.Debug("Indexing " + entries.Count + " standards");
-
-                await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                _log.Error("Error indexing Standards", ex);
-            }
+            await IndexStandards(indexName).ConfigureAwait(false);
+            await IndexFrameworks(indexName).ConfigureAwait(false);
         }
 
         public bool CreateIndex(string indexName)
         {
-            var indexExistsResponse = _searchIndexMaintainer.IndexExists(indexName);
-
             // If it already exists and is empty, let's delete it.
-            if (indexExistsResponse)
+            if (_searchIndexMaintainer.IndexExists(indexName))
             {
                 _log.Warn("Index already exists, deleting and creating a new one");
 
@@ -86,13 +76,43 @@
             return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
         }
 
-        private Task<ICollection<MetaDataItem>> LoadEntries()
+        private async Task IndexStandards(string indexName)
+        {
+            var entries = await LoadStandardMetaData();
+            try
+            {
+                _log.Debug("Indexing " + entries.Count + " standards");
+
+                await _searchIndexMaintainer.IndexStandards(indexName, entries).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error indexing Standards", ex);
+            }
+        }
+
+        private async Task IndexFrameworks(string indexName)
+        {
+            var entries = _metaDataHelper.GetAllFrameworkMetaData();
+            try
+            {
+                _log.Debug("Indexing " + entries.Count + " frameworks");
+
+                await _searchIndexMaintainer.IndexFrameworks(indexName, entries).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error indexing Frameworks", ex);
+            }
+        }
+
+        private Task<ICollection<StandardMetaData>> LoadStandardMetaData()
         {
             _metaDataHelper.UpdateMetadataRepository();
             _log.Info("Indexing standard PDFs...");
 
             var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
-            return Task.FromResult<ICollection<MetaDataItem>>(standardsMetaData.ToList());
+            return Task.FromResult<ICollection<StandardMetaData>>(standardsMetaData.ToList());
         }
     }
 }

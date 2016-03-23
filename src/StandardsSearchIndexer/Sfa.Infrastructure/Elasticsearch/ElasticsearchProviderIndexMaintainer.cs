@@ -5,20 +5,20 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Extensions;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
-    public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase<Provider>
+    public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
         private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
 
-        private readonly IIndexSettings<Provider> _settings;
+        private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<Provider> settings, ILog log)
-            : base(factory, log, "Provider")
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<IMaintainProviderIndex> settings, ILog log)
+            : base(factory, elasticsearchMapper, log, "Provider")
         {
             _indexDefinitionGenerator = indexDefinitionGenerator;
             _settings = settings;
@@ -29,11 +29,11 @@
             Client.Raw.IndicesCreatePost(indexName, _indexDefinitionGenerator.Generate());
         }
 
-        public override async Task IndexEntries(string indexName, ICollection<Provider> providers)
+        public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)
         {
             var documentCount = 0;
 
-            foreach (var provider in providers)
+            foreach (var provider in indexEntries)
             {
                 try
                 {

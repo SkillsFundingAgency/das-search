@@ -38,7 +38,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
-            var viewModel = _mappingService.Map<StandardSearchResults, StandardSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }
@@ -62,6 +62,12 @@ namespace Sfa.Eds.Das.Web.Controllers
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
 
             return View(viewModel);
+        }
+
+        public ActionResult FrameworkDetail(int id)
+        {
+            var resultUrl = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
+            return Redirect(resultUrl.Url);
         }
     }
 }
