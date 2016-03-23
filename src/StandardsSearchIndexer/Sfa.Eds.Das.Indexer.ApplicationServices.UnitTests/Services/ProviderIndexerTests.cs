@@ -58,7 +58,6 @@
         }
 
         [Test]
-        [Ignore]
         public void CreatIndexShouldDeleteAnyExistingIndexWithTheSameName()
         {
             _mockIndexMaintainer.Setup(x => x.IndexExists(It.IsAny<string>())).Returns(true);

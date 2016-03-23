@@ -42,8 +42,7 @@
             {
                 _log.Warn("Index already exists, deleting and creating a new one");
 
-                // _searchIndexMaintainer.DeleteIndex(indexName);
-                return false;
+                _searchIndexMaintainer.DeleteIndex(indexName);
             }
 
             // create index
