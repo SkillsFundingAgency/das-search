@@ -1,10 +1,10 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.Services
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests.Services
 {
     using System.Linq;
     using Moq;
     using NUnit.Framework;
-    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Http;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
 
     [TestFixture]
     public class AngleSharpServiceTests

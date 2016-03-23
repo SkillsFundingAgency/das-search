@@ -1,11 +1,10 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.Services
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests.Services
 {
     using System.Collections.Generic;
-
     using NUnit.Framework;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.Services;
 
     [TestFixture]
     public class GitTest

@@ -1,13 +1,12 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests
 {
     using System.Collections.Generic;
-    using Indexer.Core.Services;
     using Moq;
-
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Models;
     using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
 

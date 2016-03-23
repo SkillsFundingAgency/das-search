@@ -6,8 +6,8 @@
     <ProjectGuid>{FBAD8B14-DB66-4F5F-AE1C-8FCEC854CE94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Eds.Das.Tools.MetaDataCreationTool.Test</RootNamespace>
-    <AssemblyName>Sfa.Eds.Das.Tools.MetaDataCreationTool.Test</AssemblyName>
+    <RootNamespace>Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests</RootNamespace>
+    <AssemblyName>Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

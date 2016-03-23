@@ -1,14 +1,14 @@
-﻿using StructureMap;
-
-namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests
 {
-    using DependencyResolution;
-    using Indexer.Core.Services;
-    using MetaDataCreationTool.Services.Interfaces;
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution;
+    using Sfa.Eds.Das.Tools.MetaDataCreationTool.Services.Interfaces;
+
+    using StructureMap;
 
     [TestFixture]
     public class MetaDataTest

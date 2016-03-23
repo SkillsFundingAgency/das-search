@@ -1,4 +1,4 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.Services
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests.Services
 {
     public static class GitTestResults
     {

@@ -1,12 +1,9 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Test.Services
+﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests.Services
 {
     using System;
     using System.Configuration;
-
     using Moq;
-
     using NUnit.Framework;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
