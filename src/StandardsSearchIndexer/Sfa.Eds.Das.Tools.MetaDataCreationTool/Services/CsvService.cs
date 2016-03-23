@@ -100,7 +100,7 @@
             var standardid = GetStandardId(values);
             if (standardid >= 0)
             {
-                standard = new Standard()
+                standard = new Standard
                 {
                     Id = standardid,
                     Title = values[2].RemoveQuotationMark(),
