@@ -32,7 +32,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
             mockStandardRepository = new Mock<IStandardRepository>();
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123, PostCode = "AB3 1SD" };
-            var searchResults = new ProviderSearchResults {HasError = false, Hits = new List<StandardProviderSearchResultsItem>()};
+            var searchResults = new ProviderSearchResults { HasError = false, Hits = new List<StandardProviderSearchResultsItem>() };
             var stubViewModel = new ProviderSearchResultViewModel();
 
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));

@@ -24,47 +24,32 @@
 </div>
 @helper  RenderErrorMessage()
 {
-    <h2 class="heading-large">
-        Apprenticeship standards
-    </h2>
     <p>
         There was a problem performing a search. Try again later.
     </p>
 }
 @helper RenderZeroResult()
 {
-    <h2 class="heading-large">
-        Apprenticeship standards
-    </h2>
     <p>
-        There are no standards matching your search for '<b>@Model.SearchTerm</b>'.
+        There are no apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
 @helper  RenderAllResult()
 {
-    <h2 class="heading-large">
-        Apprenticeship standards
-    </h2>
     <p>
-        All apprenticeship standards.
+        All apprenticeships.
     </p>
 }
 @helper  RenderMessageOneResult()
 {
-    <h2 class="heading-large">
-        Apprenticeship standards
-    </h2>
     <p>
-        There is <b>@Model.TotalResults</b> standard matching your search for '<b>@Model.SearchTerm</b>'.
+        There is <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
 
 @helper  RenderMessage()
 {
-    <h2 class="heading-large">
-        Apprenticeship standards
-    </h2>
     <p>
-        There are <b>@Model.TotalResults</b> standards matching your search for '<b>@Model.SearchTerm</b>'.
+        There are <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }

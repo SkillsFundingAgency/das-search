@@ -40,7 +40,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There are no standards matching your search for 'SearchTerm'");
+            GetPartial(html, "p").Should().Contain("There are no apprenticeships matching your search for 'SearchTerm'");
         }
 
         [Test]
@@ -58,8 +58,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "h2").Should().Be("Apprenticeship standards");
-            GetPartial(html, "p").Should().Be("All apprenticeship standards.");
+            GetPartial(html, "p").Should().Be("All apprenticeships.");
         }
 
         [Test]
@@ -76,12 +75,9 @@
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            var resultHeading = GetPartial(html, "h2");
             var result = GetPartial(html, "p");
 
-            resultHeading.Should().Be("Apprenticeship standards");
-            result.Should().Be("There is 1 standard matching your search for 'SearchTerm'.");
+            result.Should().Be("There is 1 apprenticeship matching your search for 'SearchTerm'.");
         }
 
         [Test]
@@ -99,8 +95,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "h2").Should().Be("Apprenticeship standards");
-            GetPartial(html, "p").Should().Be("There are 2 standards matching your search for 'SearchTerm'.");
+            GetPartial(html, "p").Should().Be("There are 2 apprenticeships matching your search for 'SearchTerm'.");
         }
 
         [Test]
