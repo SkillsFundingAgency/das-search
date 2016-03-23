@@ -36,6 +36,7 @@
         }
 
         [Test]
+        [Ignore]
         public void ShouldCreateIndexWithTheCorrectName()
         {
             const string testAliasName = "TestAlias";
