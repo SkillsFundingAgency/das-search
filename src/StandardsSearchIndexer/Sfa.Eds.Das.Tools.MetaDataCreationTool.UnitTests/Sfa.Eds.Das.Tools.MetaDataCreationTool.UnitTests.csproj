@@ -37,6 +37,10 @@
     <CodeAnalysisRuleSet>Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.9.4.42449, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AngleSharp.0.9.4\lib\net45\AngleSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
@@ -73,6 +77,7 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MetaDataManagerTests.cs" />
+    <Compile Include="Services\AngleSharpServiceTests.cs" />
     <Compile Include="Services\CsvServiceTest.cs" />
     <Compile Include="Services\GitTestResults.cs" />
     <Compile Include="MetaDataTest.cs" />

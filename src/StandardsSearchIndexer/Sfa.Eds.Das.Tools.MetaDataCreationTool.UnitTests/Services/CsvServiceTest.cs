@@ -13,7 +13,7 @@
         [Test]
         public void CreateFrameworksFromCsv()
         {
-            CsvService csvService = new CsvService(new AngleSharpService());
+            CsvService csvService = new CsvService(null);
             var frameworks = csvService.ReadFrameworksFromStream(_testCsvData);
 
             Assert.AreEqual(10, frameworks.Count);

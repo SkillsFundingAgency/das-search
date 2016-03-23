@@ -1,5 +1,7 @@
 ﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.DependencyResolution
 {
+    using AngleSharp;
+
     using Indexer.ApplicationServices.MetaData;
     using Indexer.ApplicationServices.Settings;
     using Services;
