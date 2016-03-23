@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
+﻿using System;
+
+namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -17,12 +19,25 @@
 
         public IList<string> GetLinks(string fromUrl, string selector, string textInTitle)
         {
-            var data = _httpGet.Get(fromUrl, null, null);
-            var parser = new HtmlParser();
-            var result = parser.Parse(data);
-            var all = result.QuerySelectorAll(selector);
+            if (string.IsNullOrEmpty(fromUrl))
+            {
+                return new List<string>();
+            }
 
-            return all.Where(x => x.InnerHtml.Contains(textInTitle)).Select(x => x.GetAttribute("href")).ToList();
+            try
+            {
+                var data = _httpGet.Get(fromUrl, null, null);
+                var parser = new HtmlParser();
+                var result = parser.Parse(data);
+                var all = result.QuerySelectorAll(selector);
+
+                return all.Where(x => x.InnerHtml.Contains(textInTitle)).Select(x => x.GetAttribute("href")).ToList();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                return null;
+            }
         }
     }
 }
