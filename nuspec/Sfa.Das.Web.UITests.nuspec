@@ -12,6 +12,6 @@
         </dependencies>
     </metadata>
      <files>
-        <file src="\..\webtests\Web\Sfa.Eds.Das.Web.AcceptanceTests\bin\Debug\*.*" target="" />
+        <file src="\..\webtests\Web\Sfa.Eds.Das.Web.AcceptanceTests\bin\Release\*.*" target="" />
      </files>
 </package>
