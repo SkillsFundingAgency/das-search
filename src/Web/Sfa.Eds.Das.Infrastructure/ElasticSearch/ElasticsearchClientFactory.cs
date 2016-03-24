@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
-    using System;
+    using global::Elasticsearch.Net.ConnectionPool;
 
     using Nest;
 
@@ -18,9 +18,8 @@
 
         public IElasticClient Create()
         {
-            var node = new Uri(_applicationSettings.SearchHost);
-
-            var settings = new ConnectionSettings(node, defaultIndex: _applicationSettings.ApprenticeshipIndexAlias);
+            var pool = new SniffingConnectionPool(_applicationSettings.ElasticServerIps);
+            var settings = new ConnectionSettings(pool);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));

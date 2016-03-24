@@ -29,6 +29,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             var client = this._elasticsearchClientFactory.Create();
             var results = client.Search<ApprenticeshipSearchResultsItem>(s => s
+                .Indices(_applicationSettings.ApprenticeshipIndexAlias)
                 .Types("standarddocument", "frameworkdocument")
                 .Skip(skip)
                 .Take(take)

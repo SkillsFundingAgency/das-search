@@ -1,5 +1,8 @@
 namespace Sfa.Eds.Das.Core.Configuration
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface IConfigurationSettings
     {
         string SearchHost { get; }
@@ -11,5 +14,7 @@ namespace Sfa.Eds.Das.Core.Configuration
         string ElasticServerIp { get; }
 
         string BuildId { get; }
+
+        IEnumerable<Uri> ElasticServerIps { get; }
     }
 }

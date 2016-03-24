@@ -1,10 +1,7 @@
 ﻿namespace Sfa.Infrastructure.Elasticsearch
 {
     using System;
-
     using Nest;
-
-    using Sfa.Infrastructure.Services;
     using Sfa.Infrastructure.Settings;
 
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
