@@ -264,14 +264,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5628), Tuple.Create("\"", 5642)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5622), Tuple.Create("\"", 5636)
 
 #line 157 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5635), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 5629), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5635), false)
+, 5629), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -651,7 +651,7 @@ WriteLiteral("                        ");
 
             
             #line 83 "..\..\Views\Standard\Detail.cshtml"
-                   Write(GetDocumentItem(@Model.StandardPdfUrl, @Model.StandardPdfUrlTitle));
+                   Write(GetDocumentItem(@Model.StandardPdf, @Model.StandardPdfUrlTitle));
 
             
             #line default
@@ -662,7 +662,7 @@ WriteLiteral("                        ");
 
             
             #line 84 "..\..\Views\Standard\Detail.cshtml"
-                   Write(GetDocumentItem(@Model.AssessmentPlanPdfUrl, @Model.AssessmentPlanPdfUrlTitle));
+                   Write(GetDocumentItem(@Model.AssessmentPlanPdf, @Model.AssessmentPlanPdfUrlTitle));
 
             
             #line default

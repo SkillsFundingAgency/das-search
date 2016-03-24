@@ -10,9 +10,9 @@
 
         public int NotionalEndLevel { get; set; }
 
-        public string StandardPdfUrl { get; set; }
+        public string StandardPdf { get; set; }
 
-        public string AssessmentPlanPdfUrl { get; set; }
+        public string AssessmentPlanPdf { get; set; }
 
         public List<string> JobRoles { get; set; }
 

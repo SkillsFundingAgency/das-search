@@ -20,8 +20,8 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
             destination.ProfessionalRegistrationHtml = MarkdownToHtml(source.ProfessionalRegistration);
             destination.OverviewOfRoleHtml = MarkdownToHtml(source.OverviewOfRole);
 
-            destination.StandardPdfUrlTitle = ExtractPdfTitle(source.StandardPdfUrl);
-            destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdfUrl);
+            destination.StandardPdfUrlTitle = ExtractPdfTitle(source.StandardPdf);
+            destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdf);
         }
 
         private string ExtractPdfTitle(string pdfUrl)

@@ -52,8 +52,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                            {
                                StandardId = document.StandardId,
                                Title = document.Title,
-                               StandardPdfUrl = document.StandardPdfUrl,
-                               AssessmentPlanPdfUrl = document.AssessmentPlanPdfUrl,
+                               StandardPdf = document.StandardPdf,
+                               AssessmentPlanPdf = document.AssessmentPlanPdf,
                                NotionalEndLevel = document.NotionalEndLevel,
                                JobRoles = document.JobRoles,
                                Keywords = document.Keywords,
