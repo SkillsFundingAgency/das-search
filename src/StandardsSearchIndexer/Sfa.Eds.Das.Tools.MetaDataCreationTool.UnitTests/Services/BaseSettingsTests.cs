@@ -46,7 +46,7 @@
             Assert.AreEqual("five", setting);
         }
 
-        [TestCase(typeof(IMaintainApprenticeshipIndex), "Standard.QueueName")]
+        [TestCase(typeof(IMaintainApprenticeshipIndex), "Apprenticeship.QueueName")]
         [TestCase(typeof(IMaintainProviderIndex), "Provider.QueueName")]
         public void CreateQueueNameFromType(Type type, string queueName)
         {
