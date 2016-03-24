@@ -12,7 +12,7 @@
         </dependencies>
     </metadata>
      <files>
-        <file src="\..\webtests\Sfa.Eds.Das.Web.AcceptanceTests\bin\Release\*.*" target="" />
+        <file src="\..\webtests\Sfa.Eds.Das.Web.AcceptanceTests\bin\Release\**\*.*" target="" />
 		<file src="\..\webtests\packages\NUnit.Runners.2.6.4\**\*.*" target="NUnit.Runners" />
 		<file src="\..\webtests\packages\Pickles.CommandLine.2.5.0\**\*.*" target="Pickles.CommandLine" />
      </files>
