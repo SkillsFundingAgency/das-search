@@ -45,7 +45,7 @@
 
         public string QueueName(Type type)
         {
-            var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Standard").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
+            var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Apprenticeship").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
             return GetSetting(name);
         }
     }

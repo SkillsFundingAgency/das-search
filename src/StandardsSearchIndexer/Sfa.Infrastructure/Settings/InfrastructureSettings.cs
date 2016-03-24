@@ -18,8 +18,6 @@
 
         public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
 
-        public string QueueName => ConfigurationManager.AppSettings["QueueName"];
-
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
         public string StandardJsonContainer => ConfigurationManager.AppSettings["Standard.JsonContainer"];

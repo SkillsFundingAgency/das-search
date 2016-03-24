@@ -16,15 +16,7 @@
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
         public string IndexesAlias => ConfigurationManager.AppSettings["ProviderIndexesAlias"];
-
-        public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
-
-        public string StorageAccountKey => ConfigurationManager.AppSettings["StorageAccountKey"];
-
-        public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
-
-        public string QueueName => ConfigurationManager.AppSettings["ProviderQueueName"];
-
+        
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
         public bool FilterInactiveProviders => bool.Parse(ConfigurationManager.AppSettings["Feature.FilterInactiveProviders"] ?? "false");

@@ -10,14 +10,6 @@
 
         public string IndexesAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
 
-        public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
-
-        public string StorageAccountKey => ConfigurationManager.AppSettings["StorageAccountKey"];
-
-        public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
-
-        public string QueueName => ConfigurationManager.AppSettings["QueueName"];
-
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
         public string StandardProviderDocumentType => ConfigurationManager.AppSettings["StandardProviderDocumentType"];
