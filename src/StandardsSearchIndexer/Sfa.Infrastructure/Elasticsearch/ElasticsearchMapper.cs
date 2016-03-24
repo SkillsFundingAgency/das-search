@@ -99,9 +99,9 @@
                     return 6;
                 case 23:
                     return 7;
+                default:
+                    return -1;
             }
-
-            return -1;
         }
     }
 }
