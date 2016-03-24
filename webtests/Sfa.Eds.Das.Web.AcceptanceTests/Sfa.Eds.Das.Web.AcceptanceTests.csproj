@@ -69,6 +69,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="E2E\Search\SearchProvider.feature.cs">
+      <DependentUpon>SearchProvider.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\ProviderDetailPage.cs" />
     <Compile Include="Pages\ProviderResultPage.cs" />
@@ -84,55 +90,46 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchStandardByTitle.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint1\StandardSearch.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardSearch.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint4\SearchProvider.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProvider.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint4\SearchProviderByLocation.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProviderByLocation.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchProviderbyPostcode.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint5\ViewStandardDetails.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewStandardDetails.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint5\ViewTypicalLength.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewTypicalLength.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint6\ProviderDetails.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProviderDetails.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Test\Features\Sprint6\Providerlistdetails.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Providerlistdetails.feature</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
@@ -140,51 +137,47 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="E2E\Search\SearchProvider.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Test\Features\Sprint1\SearchStandardByTitle.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchStandardByTitle.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint1\StandardSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>StandardSearch.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Test\Features\Sprint4\SearchProvider.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint4\SearchProviderByLocation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchProviderByLocation.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchProviderbyPostcode.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint5\ViewStandardDetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ViewStandardDetails.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint5\ViewTypicalLength.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ViewTypicalLength.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint6\ProviderDetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProviderDetails.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint6\Providerlistdetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Providerlistdetails.feature.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
