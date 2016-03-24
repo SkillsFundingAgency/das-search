@@ -8,7 +8,7 @@ namespace Sfa.Eds.Das.Infrastructure.Configuration
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
-        public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
+        public string ApprenticeshipIndexAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
 
         public string ProviderIndexAlias => ConfigurationManager.AppSettings["ProviderIndexAlias"];
 
