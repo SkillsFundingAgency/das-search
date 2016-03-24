@@ -25,7 +25,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
-            keywords = QueryHelper.FormatQuery(keywords);
+            var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
             var client = this._elasticsearchClientFactory.Create();
             var results = client.Search<ApprenticeshipSearchResultsItem>(s => s
@@ -35,12 +35,12 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 .Query(q => q
                     .QueryString(qs => qs
                         .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkName, p => p.PathwayName)
-                        .Query(keywords))));
+                        .Query(formattedKeywords))));
 
             return new ApprenticeshipSearchResults
             {
                 TotalResults = results.Total,
-                SearchTerm = keywords,
+                SearchTerm = formattedKeywords,
                 Results = results.Documents,
                 HasError = results.ConnectionStatus.HttpStatusCode != 200
             };

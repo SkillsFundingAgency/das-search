@@ -53,7 +53,7 @@ namespace Sfa.Eds.Das.Infrastructure.PostCodeIo
 
         private void CouldntConnect(Exception ex)
         {
-            _logger.Warn("Couldn't connect to postcode service, retrying...");
+            _logger.Warn(string.Concat("Couldn't connect to postcode service, retrying...", ex.Message));
         }
 
         private async Task<HttpResponseMessage> MakeRequestAsync(string url)

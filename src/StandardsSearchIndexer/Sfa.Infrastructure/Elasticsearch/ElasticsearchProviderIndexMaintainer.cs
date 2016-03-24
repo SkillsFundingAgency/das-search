@@ -72,19 +72,21 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         private async Task<int> Index(string indexName, IApprenticeshipInformation apprenticeship, Provider provider)
         {
-            int documentCount = 0;
+            var documentCount = 0;
             foreach (var location in apprenticeship.DeliveryLocations)
             {
                 string apprenticeshipJson;
                 string typeName;
-                if (apprenticeship is StandardInformation)
+
+                var standard = apprenticeship as StandardInformation;
+                if (standard != null)
                 {
-                    apprenticeshipJson = CreateStandardJson(apprenticeship as StandardInformation);
+                    apprenticeshipJson = CreateStandardJson(standard);
                     typeName = _settings.StandardProviderDocumentType;
                 }
                 else
                 {
-                    apprenticeshipJson = CreateFrameworkJson(apprenticeship as FrameworkInformation);
+                    apprenticeshipJson = CreateFrameworkJson((FrameworkInformation) apprenticeship);
                     typeName = _settings.FrameworkProviderDocumentType;
                 }
 

@@ -13,8 +13,8 @@
 
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
-            take = take == 0 ? 1000 : take;
-            var results = _searchProvider.SearchByKeyword(keywords, skip, take);
+            var takeElements = take == 0 ? 1000 : take;
+            var results = _searchProvider.SearchByKeyword(keywords, skip, takeElements);
 
             return results;
         }

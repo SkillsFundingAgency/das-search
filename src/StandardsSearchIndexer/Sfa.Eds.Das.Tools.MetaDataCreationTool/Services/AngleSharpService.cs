@@ -33,9 +33,8 @@ namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.Services
 
                 return all.Where(x => x.InnerHtml.Contains(textInTitle)).Select(x => x.GetAttribute("href")).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var error = ex.Message;
                 return null;
             }
         }
