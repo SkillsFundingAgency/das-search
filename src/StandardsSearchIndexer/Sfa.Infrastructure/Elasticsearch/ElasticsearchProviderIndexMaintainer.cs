@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-using Sfa.Eds.Das.Indexer.Core.Extensions;
-using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-using Sfa.Eds.Das.Indexer.Core.Services;
-
-namespace Sfa.Infrastructure.Elasticsearch
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
@@ -22,20 +13,20 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
-        private readonly IGenerateIndexDefinitions<Provider> _indexDefinitionGenerator;
+        private readonly IGenerateProviderIndexDefinitions _providerIndexDefinitionGenerator;
 
         private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IGenerateIndexDefinitions<Provider> indexDefinitionGenerator, IIndexSettings<IMaintainProviderIndex> settings, ILog log)
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IGenerateProviderIndexDefinitions providerIndexDefinitionGenerator, IIndexSettings<IMaintainProviderIndex> settings, ILog log)
             : base(factory, elasticsearchMapper, log, "Provider")
         {
-            _indexDefinitionGenerator = indexDefinitionGenerator;
+            _providerIndexDefinitionGenerator = providerIndexDefinitionGenerator;
             _settings = settings;
         }
 
         public override void CreateIndex(string indexName)
         {
-            Client.Raw.IndicesCreatePost(indexName, _indexDefinitionGenerator.Generate());
+            Client.Raw.IndicesCreatePost(indexName, _providerIndexDefinitionGenerator.Generate());
         }
 
         public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)

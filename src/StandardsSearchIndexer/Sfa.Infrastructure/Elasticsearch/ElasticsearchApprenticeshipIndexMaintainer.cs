@@ -15,16 +15,17 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
-        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
+        private readonly IApprenticeshipIndexDefinitions _apprenticeshipIndexDefinitions;
+
+        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IApprenticeshipIndexDefinitions apprenticeshipIndexDefinitions, ILog logger)
             : base(factory, elasticsearchMapper, logger, "Standard")
         {
+            _apprenticeshipIndexDefinitions = apprenticeshipIndexDefinitions;
         }
 
         public override void CreateIndex(string indexName)
         {
-            Client.CreateIndex(indexName, c => c
-                .AddMapping<StandardDocument>(m => m.MapFromAttributes())
-                .AddMapping<FrameworkDocument>(m => m.MapFromAttributes()));
+            Client.Raw.IndicesCreatePost(indexName, _apprenticeshipIndexDefinitions.Generate());
         }
 
         public async Task IndexStandards(string indexName, ICollection<StandardMetaData> entries)
