@@ -107,8 +107,8 @@
             var standardResult = new Standard
             {
                 Title = "item 1",
-                StandardPdfUrl = null,
-                AssessmentPlanPdfUrl = null
+                StandardPdf = null,
+                AssessmentPlanPdf = null
             };
 
             var viewModel = mappingService.Map<Standard, StandardViewModel>(standardResult);
@@ -125,8 +125,8 @@
             var standardResult = new Standard
             {
                 Title = "item 1",
-                StandardPdfUrl = "httt://www.sfatest.co.uk/path/to/file_standard_sep_14.pdf",
-                AssessmentPlanPdfUrl = null
+                StandardPdf = "httt://www.sfatest.co.uk/path/to/file_standard_sep_14.pdf",
+                AssessmentPlanPdf = null
             };
 
             var viewModel = mappingService.Map<Standard, StandardViewModel>(standardResult);
