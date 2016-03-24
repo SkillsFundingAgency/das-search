@@ -8,9 +8,9 @@
     {
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
-        public string IndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
+        public string IndexesAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
 
-        public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
+        public string ApprenticeshipIndexAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
 
         public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
 

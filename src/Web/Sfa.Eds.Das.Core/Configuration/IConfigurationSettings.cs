@@ -4,7 +4,7 @@ namespace Sfa.Eds.Das.Core.Configuration
     {
         string SearchHost { get; }
 
-        string StandardIndexesAlias { get; }
+        string ApprenticeshipIndexAlias { get; }
 
         string ProviderIndexAlias { get; }
 

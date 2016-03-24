@@ -10,7 +10,7 @@
 
         public string WorkerRolePauseTime => ConfigurationManager.AppSettings["WorkerRolePauseTime"];
 
-        public string StandardIndexesAlias => ConfigurationManager.AppSettings["StandardIndexesAlias"];
+        public string ApprenticeshipIndexAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
 
         public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
 

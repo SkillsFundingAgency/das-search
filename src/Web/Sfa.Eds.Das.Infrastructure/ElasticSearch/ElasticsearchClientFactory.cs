@@ -20,7 +20,7 @@
         {
             var node = new Uri(_applicationSettings.SearchHost);
 
-            var settings = new ConnectionSettings(node, defaultIndex: _applicationSettings.StandardIndexesAlias);
+            var settings = new ConnectionSettings(node, defaultIndex: _applicationSettings.ApprenticeshipIndexAlias);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));

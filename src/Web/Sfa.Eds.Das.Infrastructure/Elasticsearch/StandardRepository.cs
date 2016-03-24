@@ -28,7 +28,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             var client = this._elasticsearchClientFactory.Create();
             var results =
                 client.Search<StandardSearchResultsItem>(s => s
-                    .Index(_applicationSettings.StandardIndexesAlias)
+                    .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Types("standarddocument")
                     .From(0)
                     .Size(1)

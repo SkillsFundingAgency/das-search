@@ -4,7 +4,7 @@
     {
         string SearchHost { get; }
         string WorkerRolePauseTime { get; }
-        string StandardIndexesAlias { get; }
+        string ApprenticeshipIndexAlias { get; }
         string StorageAccountName { get; }
         string StorageAccountKey { get; }
         string ConnectionString { get; }
