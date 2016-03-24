@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
 
     using FluentAssertions;
@@ -32,8 +31,10 @@
 
         private IElasticClient _elasticClient;
 
-        [SetUp]
-        public void SetUp()
+        private string _indexName;
+
+        [TestFixtureSetUp]
+        public void BeforeAnyTest()
         {
             var ioc = IoC.Initialize();
             _standardSettings = ioc.GetInstance<IIndexSettings<IMaintainApprenticeshipIndex>>();
@@ -54,99 +55,132 @@
 
             var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
             _elasticClient = elasticClientFactory.GetElasticClient();
+
+            _indexName = $"{_standardSettings.IndexesAlias}-{new DateTime(2000, 1, 1).ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+
+            DeleteIndexIfExists(_indexName);
+        }
+
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            if (!_elasticClient.IndexExists(i => i.Index(_indexName)).Exists)
+            {
+                _indexerService.CreateIndex(_indexName);
+                var indexTask = _indexerService.IndexEntries(_indexName);
+                Task.WaitAll(indexTask);
+            }
+        }
+
+        [TestFixtureTearDown]
+        public void AfterAllTestAreRun()
+        {
+            _elasticClient.DeleteIndex(i => i.Index(_indexName));
+            _elasticClient.IndexExists(i => i.Index(_indexName)).Exists.Should().BeFalse();
         }
 
         [Test]
         [Category("Integration")]
         public void ShouldCreateScheduledIndexAndMappingForStandardsAndFrameworks()
         {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _indexerService.CreateIndex(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            var mappingStandards = _elasticClient.GetMapping<StandardDocument>(i => i.Index(indexName));
+            var mappingStandards = _elasticClient.GetMapping<StandardDocument>(i => i.Index(_indexName));
             mappingStandards.Mappings.Count.Should().NotBe(0);
 
-            var mappingFrameworks = _elasticClient.GetMapping<FrameworkDocument>(i => i.Index(indexName));
+            var mappingFrameworks = _elasticClient.GetMapping<FrameworkDocument>(i => i.Index(_indexName));
             mappingFrameworks.Mappings.Count.Should().NotBe(0);
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
         }
 
         [Test]
         [Category("Integration")]
-        public async Task ShouldRetrieveStandardSearchingForTitle()
+        public void ShouldRetrieveStandardSearchingForTitle()
         {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-
             var expectedStandardResult = new StandardMetaData
-                                             {
-                                                 Id = 61,
-                                                 Title = "Dental Nurse",
-                                                 NotionalEndLevel = 3,
-                                                 PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                                                 StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
-                                             };
+            {
+                Id = 61,
+                Title = "Dental Nurse",
+                NotionalEndLevel = 3,
+                PdfFileName = "61-Apprenticeship standard for a dental nurse",
+                StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+            };
 
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _indexerService.CreateIndex(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            await _indexerService.IndexEntries(indexName);
-
-            Thread.Sleep(2000);
-
-            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p.Index(indexName).QueryString(expectedStandardResult.Title));
+            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p.Index(_indexName).QueryString(expectedStandardResult.Title));
 
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
             Assert.AreEqual(1, amountRetrieved);
             Debug.Assert(retrievedStandard != null, "retrievedStandard != null");
             Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
             Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
             Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.StandardId);
+            Assert.AreEqual(12, retrievedStandard.TypicalLength.From);
         }
 
         [Test]
         [Category("Integration")]
-        public async Task ShouldRetrieveFrameworksSearchingForAll()
+        public void ShouldRetrieveFrameworksSearchingForAll()
         {
-            var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_standardSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
-
-            DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
-            _indexerService.CreateIndex(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
-
-            await _indexerService.IndexEntries(indexName);
-
-            Thread.Sleep(2000);
-
             // Assert
-            var retrievedResultFrameworks = _elasticClient.Search<FrameworkDocument>(p => p.Index(indexName).QueryString("*"));
+            var retrievedResultFrameworks = _elasticClient.Search<FrameworkDocument>(p => p.Index(_indexName).QueryString("*"));
 
             var frameworkDocuments = retrievedResultFrameworks.Documents.Count();
             var frameworkDocument = retrievedResultFrameworks.Documents.Single(m => m.FrameworkCode.Equals(423));
-
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
 
             Assert.AreEqual(3, frameworkDocuments);
             Assert.AreEqual("Fashion and Textiles", frameworkDocument.FrameworkName);
             Assert.AreEqual("Footwear", frameworkDocument.PathwayName);
             Assert.AreEqual(4, frameworkDocument.PathwayCode);
+        }
+
+        [Test]
+        [Category("Integration")]
+        public void ShouldRetrieveStandardsWhenSearchingOnWordRootForm()
+        {
+            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p
+                .Index(_indexName)
+                .Query(q => q
+                    .QueryString(qs => qs
+                            .OnFields(fi => fi.Title, fi => fi.JobRoles)
+                            .Query("develop"))));
+
+            var amountRetrieved = retrievedResult.Documents.Count();
+            var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
+
+            Assert.AreEqual(1, amountRetrieved);
+            Debug.Assert(retrievedStandard != null, "retrievedStandard != null");
+            Assert.AreEqual("Software Developer", retrievedStandard.Title);
+            Assert.AreEqual(0, retrievedStandard.NotionalEndLevel);
+            Assert.AreEqual(2, retrievedStandard.StandardId);
+        }
+
+        [TestCase("textile", 1, "Fashion and Textiles")]
+        [TestCase("brew", 1, "Food and Drink")]
+        [Category("Integration")]
+        public void ShouldRetrieveFrameworksWhenSearchingWithRootForm(string query, int expectedResultCount, string exectedFrameworkTitle)
+        {
+            var retrievedResultTextile = _elasticClient.Search<FrameworkDocument>(p => p
+                .Index(_indexName)
+                .Query(q => q
+                    .QueryString(qs => qs
+                            .OnFields(fi => fi.FrameworkName, fi => fi.PathwayName)
+                            .Query(query))));
+
+            Assert.AreEqual(expectedResultCount, retrievedResultTextile.Documents.Count());
+            Assert.AreEqual(exectedFrameworkTitle, retrievedResultTextile.Documents.FirstOrDefault()?.FrameworkName);
+        }
+
+        [TestCase("and", 0)]
+        [Category("Integration")]
+        public void ShouldNotRetrieveFrameworksWhenSearchingOnStopWords(string query, int expectedResultCount)
+        {
+            var retrievedResultTextile = _elasticClient.Search<FrameworkDocument>(p => p
+                .Index(_indexName)
+                .Query(q => q
+                    .QueryString(qs => qs
+                            .OnFields(fi => fi.FrameworkName, fi => fi.PathwayName)
+                            .Query(query))));
+
+            Assert.AreEqual(expectedResultCount, retrievedResultTextile.Documents.Count());
         }
 
         private void DeleteIndexIfExists(string indexName)
@@ -184,7 +218,13 @@
                                    Title = "Dental Nurse",
                                    NotionalEndLevel = 3,
                                    PdfFileName = "61-Apprenticeship standard for a dental nurse",
-                                   StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
+                                   StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
+                                   TypicalLength = new TypicalLength
+                                                       {
+                                                           From = 12,
+                                                           To = 24,
+                                                           Unit = "m"
+                                                       }
                                }
                        };
         }

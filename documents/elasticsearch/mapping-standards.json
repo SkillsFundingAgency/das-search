@@ -2,7 +2,7 @@
     "settings": {
         "analysis": {
             "filter": {
-                "my_stemmer": {
+                "custom_stemmer": {
                     "type": "stemmer",
                     "name": "english"
                 }
@@ -12,7 +12,7 @@
                     "tokenizer": "standard",
                     "filter": [
                         "lowercase",
-                        "my_stemmer"
+                        "custom_stemmer"
                     ]
                 }
             }
@@ -48,6 +48,18 @@
                             "type": "string"
                         }
                     }
+                }
+            }
+        },
+        "frameworkdocument": {
+            "properties": {
+                "frameworkName": {
+                    "type": "string",
+                    "analyzer": "custom_lowercase_stemmed"
+                },
+                "pathwayName": {
+                    "type": "string",
+                    "analyzer": "custom_lowercase_stemmed"
                 }
             }
         }

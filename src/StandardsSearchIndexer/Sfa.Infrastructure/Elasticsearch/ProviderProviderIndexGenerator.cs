@@ -1,8 +1,6 @@
-﻿using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-
-namespace Sfa.Infrastructure.Elasticsearch
+﻿namespace Sfa.Infrastructure.Elasticsearch
 {
-    public sealed class ProviderIndexGenerator : IGenerateIndexDefinitions<Provider>
+    public sealed class ProviderProviderIndexGenerator : IGenerateProviderIndexDefinitions
     {
         public string Generate()
         {

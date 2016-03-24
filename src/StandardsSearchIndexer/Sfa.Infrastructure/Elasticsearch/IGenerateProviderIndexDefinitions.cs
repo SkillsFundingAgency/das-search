@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Infrastructure.Elasticsearch
 {
-    public interface IGenerateIndexDefinitions<T>
+    public interface IGenerateProviderIndexDefinitions
     {
         string Generate();
     }
