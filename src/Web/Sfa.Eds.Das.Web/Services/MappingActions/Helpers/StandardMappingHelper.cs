@@ -6,8 +6,8 @@
     {
         public static string GetTypicalLengthMessage(TypicalLength typicalLength)
         {
-            var fromBiggerThanTo = typicalLength.From > typicalLength.To && typicalLength.To > 0;
-            var lengthIsZero = typicalLength.From == 0 && typicalLength.To == 0;
+            var fromBiggerThanTo = typicalLength?.From > typicalLength?.To && typicalLength?.To > 0;
+            var lengthIsZero = typicalLength?.From == 0 && typicalLength?.To == 0;
             if (typicalLength == null || fromBiggerThanTo || lengthIsZero)
             {
                 return string.Empty;
