@@ -1,0 +1,55 @@
+{
+    "settings": {
+        "analysis": {
+            "filter": {
+                "my_stemmer": {
+                    "type": "stemmer",
+                    "name": "english"
+                }
+            },
+            "analyzer": {
+                "custom_lowercase_stemmed": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "my_stemmer"
+                    ]
+                }
+            }
+        }
+    },
+    "mappings": {
+        "standarddocument": {
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "analyzer": "custom_lowercase_stemmed"
+                },
+                "jobRoles": {
+                    "type": "string",
+                    "analyzer": "custom_lowercase_stemmed"
+                },
+                "assessmentPlanPdf": {
+                    "type": "string"
+                },
+                "entryRequirements": {
+                    "type": "string"
+                },
+                "typicalLength": {
+                    "type": "object",
+                    "properties": {
+                        "from": {
+                            "type": "integer"
+                        },
+                        "to": {
+                            "type": "integer"
+                        },
+                        "unit": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
