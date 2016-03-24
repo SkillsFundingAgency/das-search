@@ -131,6 +131,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Providerlistdetails.feature</DependentUpon>
     </Compile>
+    <Compile Include="Test\Features\Sprint7\FrameworkSearch.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrameworkSearch.feature</DependentUpon>
+    </Compile>
     <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +183,10 @@
     <None Include="Test\Features\Sprint6\Providerlistdetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Providerlistdetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint7\FrameworkSearch.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FrameworkSearch.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

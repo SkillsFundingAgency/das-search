@@ -54,6 +54,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         }
 
 
+
+        /// <summary>
+        /// Standard search
+        /// </summary>
+        /// <param name="p0"></param>
         [Given(@"I enter keyword '(.*)' in search box")]
         public void GivenIEnterKeywordInSearchBox(string p0)
         {
@@ -62,6 +67,17 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             srchPage.SearchKeyword(p0);
 
         }
+
+        /// <summary>
+        /// Framework search 
+        /// </summary>
+        /// <param name="p0"></param>
+        [Given(@"I enter framework '(.*)' in search box")]
+        public void GivenIEnterFrameworkInSearchBox(string p0)
+        {
+            srchPage.SearchKeyword(p0);
+        }
+
 
         [Given(@"I click on search button")]
         public void GivenIClickOnSearchButton()
@@ -98,8 +114,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
             srchPage.verifyresultsPages();
             srchPage.verifyStandardFoundinResultPage(p0);
-
+            srchPage.verifySearchedStandardFoundinResultPage(p0);
         }
+
+        [Then(@"I should see matching '(.*)' frameworks on result page")]
+        public void ThenIShouldSeeMatchingFrameworksOnResultPage(string p0)
+        {
+            srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
+            srchPage.verifyresultsPages();
+            srchPage.verifyStandardFoundinResultPage(p0);
+            srchPage.verifySearchedStandardFoundinResultPage(p0);
+        }
+
 
         //Typical length on standard search result page
 

@@ -86,18 +86,18 @@ testRunner.Then("I should be able to see home page with title as \"Home Page - E
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Standard by keyword")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
-        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
-        [NUnit.Framework.TestCaseAttribute("Software Engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("Legal Services", null)]
-        [NUnit.Framework.TestCaseAttribute("Designer", null)]
-        [NUnit.Framework.TestCaseAttribute("dental nurse", null)]
-        [NUnit.Framework.TestCaseAttribute("Electrician", null)]
-        [NUnit.Framework.TestCaseAttribute("Car Mechanic", null)]
-        [NUnit.Framework.TestCaseAttribute("manager", null)]
-        [NUnit.Framework.TestCaseAttribute("Actuarial", null)]
-        public virtual void SearchStandardByKeyword(string jOBROLE, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", "Actuarial Technician", null)]
+        [NUnit.Framework.TestCaseAttribute("Financial Adviser", "Financial Services Customer Adviser", null)]
+        [NUnit.Framework.TestCaseAttribute("Software Engineer", "Aerospace Software Development Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", "Manufacturing Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("Legal Services", "Legal Services: Debt Recovery and Insolvency", null)]
+        [NUnit.Framework.TestCaseAttribute("Designer", "Product Design and Development Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("dental nurse", "Dental Nurse", null)]
+        [NUnit.Framework.TestCaseAttribute("Electrician", "Installation Electrician/Maintenance Electrician", null)]
+        [NUnit.Framework.TestCaseAttribute("Car Mechanic", "Motor Vehicle Service and Maintenance Technician [light vehicle]", null)]
+        [NUnit.Framework.TestCaseAttribute("manager", "Express Logistics: Operational Manager", null)]
+        [NUnit.Framework.TestCaseAttribute("Actuarial", "Actuarial Technician", null)]
+        public virtual void SearchStandardByKeyword(string jOBROLE, string expectedResult, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -115,7 +115,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 17
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 18
- testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", expectedResult), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -207,7 +207,8 @@ testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), 
 #line 64
 testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 65
-testRunner.Then(string.Format("I should see message \"There are no standards matching your search for \'{0}\'\"", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then(string.Format("I should see message \"There are no apprenticeships matching your search for \'{0}\'" +
+                        "\"", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -37,7 +37,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
         By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
         By firstStandardinresult = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
-        By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
+        By searchResultcount = By.CssSelector(".column-two-thirds>div>p>b");
         By typicallength = By.XPath(".//*[@id='results']/div[1]/article/dl/dd[2]");
 
         By selectStandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
@@ -106,20 +106,20 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
        
         public void verifyStandardFoundinResultPage(String keyword)
         {
+            
             Thread.Sleep(4000);
-           // Console.WriteLine(getText(searchresult));
-          //  Console.WriteLine(getText(searchkeywordresult));
-            //Console.WriteLine(keyword);
-            //Assert.True(getText(searchkeywordresult).Contains(keyword));
-           Assert.True(isDisplayed(searchresult));
-           // Assert.True(isElementPresent(searchkeywordresult, keyword));
+            //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
+            verifyTextMessage(searchresult, "There are" + " " + getText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
+
+
         }
 
-        public void verifySearchedStandardFoundinResultPage(String keyword)
+        public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
             Thread.Sleep(4000);
-             Assert.True(isElementPresent(searchkeywordresult, keyword));
+             Assert.True(isElementPresent(searchkeywordresult, expected_result));
         }
+
         public void verifyStandardinTopofList(String keyword)
         {
             Thread.Sleep(4000);

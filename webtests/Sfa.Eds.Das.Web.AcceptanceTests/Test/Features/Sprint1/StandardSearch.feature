@@ -15,20 +15,20 @@ Scenario Outline: Search Standard by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	When I click on search button
-	Then I should see matching '<JOBROLE>' standards on result page
+	Then I should see matching '<ExpectedResult>' standards on result page
 Examples:
-| JOBROLE                |
-| Actuarial Technician   |
-| Financial Adviser      |
-| Software Engineer      |
-| manufacturing engineer |
-| Legal Services         |
-| Designer               |
-| dental nurse           |
-| Electrician            |
-| Car Mechanic           |
-| manager                |
-| Actuarial              |
+| JOBROLE                | ExpectedResult                                                   |
+| Actuarial Technician   | Actuarial Technician                                             |
+| Financial Adviser      | Financial Services Customer Adviser                              |
+| Software Engineer      | Aerospace Software Development Engineer                          |
+| manufacturing engineer | Manufacturing Engineer                                           |
+| Legal Services         | Legal Services: Debt Recovery and Insolvency                     |
+| Designer               | Product Design and Development Engineer                          |
+| dental nurse           | Dental Nurse                                                     |
+| Electrician            | Installation Electrician/Maintenance Electrician                 |
+| Car Mechanic           | Motor Vehicle Service and Maintenance Technician [light vehicle] |
+| manager                | Express Logistics: Operational Manager                           |  
+| Actuarial              | Actuarial Technician                                             |
 
 @regression
 Scenario Outline: Search Standard by keyword Actuarial
@@ -62,7 +62,7 @@ Scenario Outline: Verify invalid search
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 When I click on search button 
-Then I should see message "There are no standards matching your search for '<JOBROLE>'"
+Then I should see message "There are no apprenticeships matching your search for '<JOBROLE>'"
 Examples: 
 | JOBROLE     |
 | kdjfdkfjdfk |
