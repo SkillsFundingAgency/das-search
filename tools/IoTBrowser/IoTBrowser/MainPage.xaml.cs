@@ -32,7 +32,7 @@ namespace IoTBrowser
 
             _pageList = GeneratePageList();
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 5);
+            _timer.Interval = new TimeSpan(0, 0, 10);
             _timer.Tick += _timer_Tick;
             webView.NavigationCompleted += WebView_NavigationCompleted;
             DoWebNavigate(Pages.Status);
