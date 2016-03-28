@@ -70,8 +70,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
             base.OnStop();
 
-            _cancellationTokenSource.Dispose();
-            _runCompleteEvent.Dispose();
+            Dispose();
 
             _logger.Info("Stopped...");
         }
