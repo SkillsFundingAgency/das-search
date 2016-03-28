@@ -16,7 +16,7 @@
         {
             MappingService mappingService = new MappingService(null);
 
-            var standardResult = new Standard { Title = "item 1" } ;
+            var standardResult = new Standard { Title = "item 1" };
 
             var viewModel = mappingService.Map<Standard, StandardViewModel>(standardResult);
 

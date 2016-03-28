@@ -57,7 +57,6 @@
                 cfg.CreateMap<ProviderSearchResults, ProviderSearchResultViewModel>();
 
                 // Standard search listing // Old
-                //cfg.CreateMap<StandardSearchResults, StandardSearchResultViewModel>();
                 cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
 
                 // Apprenticeship search listing  -> mix of standard and framework

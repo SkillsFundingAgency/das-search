@@ -75,7 +75,6 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            var resultHeading = GetPartial(html, "h2");
             var result = GetPartial(html, "p");
 
             result.Should().Be("There is 1 apprenticeship matching your search for 'SearchTerm'.");

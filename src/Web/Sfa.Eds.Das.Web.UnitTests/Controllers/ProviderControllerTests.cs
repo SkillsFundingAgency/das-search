@@ -37,22 +37,15 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
 
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
             mockMappingService.Setup(x => x.Map<ProviderSearchResults, ProviderSearchResultViewModel>(It.IsAny<ProviderSearchResults>())).Returns(stubViewModel);
-            try
-            {
-                var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object);
 
-                var result = await controller.SearchResults(searchCriteria);
+            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object);
 
-                Assert.That(result, Is.InstanceOf<ViewResult>());
+            var result = await controller.SearchResults(searchCriteria);
 
-                var viewResult = (ViewResult)result;
-                Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
-            }
-            catch (Exception ex)
-            {
-                var error = ex.Message;
-                throw;
-            }
+            Assert.That(result, Is.InstanceOf<ViewResult>());
+
+            var viewResult = (ViewResult)result;
+            Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
         }
 
         [TestCase(null)]

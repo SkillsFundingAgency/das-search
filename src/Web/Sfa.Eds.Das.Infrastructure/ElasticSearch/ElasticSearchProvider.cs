@@ -104,17 +104,5 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 location.Lat,
                 "] }}}}}}");
         }
-
-        private string CreateFrameworkProviderRawQuery(string code, Coordinate location)
-        {
-            return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ""frameworkCode"": """,
-                code,
-                @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
-                location.Lon,
-                ", ",
-                location.Lat,
-                "] }}}}}}");
-        }
     }
 }

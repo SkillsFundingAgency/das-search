@@ -5,10 +5,10 @@ using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Model;
 using Sfa.Eds.Das.Core.Domain.Services;
 using Sfa.Eds.Das.Core.Logging;
+﻿using Sfa.Eds.Das.Web.Extensions;
 using Sfa.Eds.Das.Web.Models;
 using Sfa.Eds.Das.Web.Services;
 using Sfa.Eds.Das.Web.ViewModels;
-﻿using Sfa.Eds.Das.Web.Extensions;
 
 namespace Sfa.Eds.Das.Web.Controllers
 {
