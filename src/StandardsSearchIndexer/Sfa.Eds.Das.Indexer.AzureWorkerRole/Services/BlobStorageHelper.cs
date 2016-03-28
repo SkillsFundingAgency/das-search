@@ -66,12 +66,12 @@
 
                 var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(fileName);
 
-                cloudBlockBlob.StartCopy(new Uri(url), null, null, null);
+                cloudBlockBlob.StartCopy(new Uri(url));
 
                 var continueLoop = true;
                 while (continueLoop)
                 {
-                    var blobsList = cloudBlobContainer.ListBlobs(null, true, BlobListingDetails.Copy);
+                    var blobsList = cloudBlobContainer.ListBlobs(useFlatBlobListing: true, blobListingDetails: BlobListingDetails.Copy);
                     foreach (var blob in blobsList)
                     {
                         var tempBlockBlob = (CloudBlob)blob;
