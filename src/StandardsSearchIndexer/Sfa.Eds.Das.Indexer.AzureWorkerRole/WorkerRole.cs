@@ -13,7 +13,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
     using StructureMap;
 
-    public class WorkerRole : RoleEntryPoint
+    public class WorkerRole : RoleEntryPoint, IDisposable
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -74,6 +74,12 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
             _runCompleteEvent.Dispose();
 
             _logger.Info("Stopped...");
+        }
+
+        public void Dispose()
+        {
+            _cancellationTokenSource.Dispose();
+            _runCompleteEvent.Dispose();
         }
 
         private void SetupApplicationInsights()
