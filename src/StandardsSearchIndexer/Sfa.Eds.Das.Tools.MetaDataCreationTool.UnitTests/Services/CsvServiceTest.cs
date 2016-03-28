@@ -41,7 +41,7 @@
         {
             var mockAngleService = new Mock<IAngleSharpService>();
 
-            mockAngleService.Setup(m => m.GetLinks(It.IsAny<string>(), ".attachment-details h2 a", "Assessment")).Returns(new List<string> { "/path/to/document.pdf" } );
+            mockAngleService.Setup(m => m.GetLinks(It.IsAny<string>(), ".attachment-details h2 a", "Assessment")).Returns(new List<string> { "/path/to/document.pdf" });
 
             CsvService csvService = new CsvService(mockAngleService.Object);
             var standards = csvService.ReadStandardsFromStream(_testStandardCsvData);

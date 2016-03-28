@@ -27,7 +27,9 @@
         public void GetNameFromCallerFail()
         {
             // ReSharper disable once UnusedVariable
+#pragma warning disable S1481, S1854
             var vstsfolder = VstsGitFolderPathFail;
+#pragma warning restore S1481, S1854
         }
 
         [Test]

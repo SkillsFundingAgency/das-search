@@ -4,13 +4,11 @@ namespace Sfa.Infrastructure.Elasticsearch
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using Nest;
-
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
+    using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Elasticsearch.Models;
 
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex

@@ -86,7 +86,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 }
                 else
                 {
-                    apprenticeshipJson = CreateFrameworkJson((FrameworkInformation) apprenticeship);
+                    apprenticeshipJson = CreateFrameworkJson((FrameworkInformation)apprenticeship);
                     typeName = _settings.FrameworkProviderDocumentType;
                 }
 

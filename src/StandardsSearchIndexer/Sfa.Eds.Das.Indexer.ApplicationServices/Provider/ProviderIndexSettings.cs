@@ -16,7 +16,7 @@
         public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
 
         public string IndexesAlias => ConfigurationManager.AppSettings["ProviderIndexAlias"];
-        
+
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];
 
         public bool FilterInactiveProviders => bool.Parse(ConfigurationManager.AppSettings["Feature.FilterInactiveProviders"] ?? "false");
