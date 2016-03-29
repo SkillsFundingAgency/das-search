@@ -37,7 +37,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Given(@"I click Search button")]
         public void GivenIClickSearchButton()
         {
-           
+           ScenarioContext.Current.Pending();
         }
 
 
@@ -76,7 +76,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see all providers listed in Alphabetical order")]
         public void ThenIShouldSeeAllProvidersListedInAlphabeticalOrder()
         {
-           // ScenarioContext.Current.Pending();
+           ScenarioContext.Current.Pending();
         }
 
 

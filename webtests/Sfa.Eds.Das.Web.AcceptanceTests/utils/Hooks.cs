@@ -36,7 +36,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         static RemoteWebDriver driver; // used to run test on saucelabs or browserstack tool.
         //load from app.config
         static string host = ConfigurationManager.AppSettings["host"];
-        static string baseurl = ConfigurationManager.AppSettings["baseUrl"];
         static string browser = ConfigurationManager.AppSettings["browser"];
         static string testExecution = ConfigurationManager.AppSettings["testExecutionType"];
         static string platform = ConfigurationManager.AppSettings["platform"];
@@ -58,26 +57,22 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         {
             if (host == "localhost")
             {
-                Console.Write("#####################  Feature Run- Started  ######################");
-                Console.Write("Feature : " + FeatureContext.Current.FeatureInfo.Title);
+                Console.WriteLine("#####################  Feature Run- Started  ######################");
+                Console.WriteLine("Feature : " + FeatureContext.Current.FeatureInfo.Title);
                
                 if (testExecution == "headless") // headlessrun is performed on deployment server.
                 {
-                    localDriver = new PhantomJSDriver();
-                    FeatureContext.Current["driver"] = localDriver;
+                    var driverService = PhantomJSDriverService.CreateDefaultService();
+                    driverService.HideCommandPromptWindow = true;
+                    localDriver = new PhantomJSDriver(driverService);
                 }
                 else
                 {
-
-                                       
                     localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
-                    FeatureContext.Current["driver"] = localDriver;
                     localDriver.Manage().Window.Maximize();
-
-                    
                 }
 
-
+                FeatureContext.Current["driver"] = localDriver;
             }
 
             /*
@@ -152,19 +147,19 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             {
 
                 ScenarioContext.Current["driver"] = localDriver;
-                Console.Write("Test Scenario ##### : " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
             }
             else if (host == "saucelabs")
             {
 
                ScenarioContext.Current["driver"] = driver;
-                Console.Write("Test Scenario ######: " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
             }
 
             else if ( host == "browserstack")
             {
                 ScenarioContext.Current["driver"] = driver;
-                Console.Write("Test Scenario ###### : " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
 
             }
         }
@@ -177,8 +172,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
                 if (ScenarioContext.Current.TestError != null)
                 {
-                    // IWebDriver driver = null;
-                    // TakeScreenshot(driver); // this is throwing some warning , need to fix.
+                    TakeScreenshot(localDriver);
                 }
                 // localDriver.Quit(); //no need to kill driver after each scenario
             }
@@ -186,15 +180,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
         }
 
-        [AfterFeature()]
+        [AfterFeature]
         public static void AfterFeatureRun()
         {
 
             if (host == "localhost")
             {
 
-                Console.Write("###################### Feature Run-Ended #######################");
-
+                Console.WriteLine("###################### Feature Run-Ended #######################");
                 localDriver.Quit(); // kill driver after feature run.
 
             }
@@ -218,8 +211,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             try
             {
                 string fileNameBase = string.Format("error_{0}_{1}_{2}",
-                    FeatureContext.Current.FeatureInfo.Title,
-                    ScenarioContext.Current.ScenarioInfo.Title,
+                    FeatureContext.Current.FeatureInfo.Title.Replace(" ","_"),
+                    ScenarioContext.Current.ScenarioInfo.Title.Replace(" ", "_"),
                     DateTime.Now.ToString("yyyyMMdd_HHmmss"));
 
                 var artifactDirectory = Path.Combine(Directory.GetCurrentDirectory(), "testresults");

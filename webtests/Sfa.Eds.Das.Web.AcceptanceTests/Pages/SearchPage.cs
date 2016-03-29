@@ -47,13 +47,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void launchLandingPage()
         {
             Launch("Home Page - Employer Apprenticeship Search");
-            Thread.Sleep(3000);
+            Sleep(3000);
         }
 
         public void OpenStandarDetails(String standard)
         {
             Open(standard);
-            Thread.Sleep(3000);
+            Sleep(3000);
         }
 
         public void SearchKeyword(String keyword)
@@ -65,20 +65,20 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
  
         public void ValidateTitle()
         {
-            Thread.Sleep(2000);
+            Sleep(2000);
             verifyPage(title);
         }
 
         public void clickSearchBox()
         {
            click(searchButton);
-            Thread.Sleep(3000);
+            Sleep(3000);
         }
 
         public void clickProviderSearch()
         {
             click(searchProviderbutton);
-            Thread.Sleep(3000);
+            Sleep(3000);
         }
 
         
@@ -87,10 +87,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void chooseStandard()
         {
             var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
-            //firstResultLink.Click();
+            firstResultLink.Click();
 
-            click(selectStandard);
-            Thread.Sleep(3000);
+            Sleep(3000);
         }
 
         
@@ -100,14 +99,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyresultsPages()
         {
 
-            Thread.Sleep(4000);
+            Sleep(4000);
             Assert.True(isDisplayed(searchresult));
         }
        
         public void verifyStandardFoundinResultPage(String keyword)
         {
             
-            Thread.Sleep(4000);
+            Sleep(4000);
             //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
             verifyTextMessage(searchresult, "There are" + " " + getText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
 
@@ -116,13 +115,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
-            Thread.Sleep(4000);
+            Sleep(4000);
              Assert.True(isElementPresent(searchkeywordresult, expected_result));
         }
 
         public void verifyStandardinTopofList(String keyword)
         {
-            Thread.Sleep(4000);
+            Sleep(4000);
             Assert.True(isElementPresent(firstStandardinresult, keyword));
         }
 
@@ -150,7 +149,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Assert.True(getText(Invalidsearchmessage).Contains(msg));
         }
 
+        public void Open(string standard)
+        {
+            driver.Navigate().GoToUrl(baseUrl + "Standard/Detail/" + standard);
 
+        }
 
 
         public static string AssemblyDirectory

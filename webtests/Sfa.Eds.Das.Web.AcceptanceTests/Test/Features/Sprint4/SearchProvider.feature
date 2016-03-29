@@ -12,7 +12,7 @@ Scenario Outline:Show available providers for given standard -End to End Test
 	And I enter '<Postcode>' in provider search box
     And I search Search for provider
 	Then I should see all providers in result page
-	And I should see all providers listed in Alphabetical order 
+	#And I should see all providers listed in Alphabetical order 
 Examples:
 | JOBROLE                                     | Postcode |
 | Product Design and Development Engineer     | CV1 2wt  |

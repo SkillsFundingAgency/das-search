@@ -66,10 +66,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.E2E.Search
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Show available providers for given standard -End to End Test")]
+        [NUnit.Framework.DescriptionAttribute("Show available providers for given standard")]
         [NUnit.Framework.CategoryAttribute("e2e")]
         [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", "CV6 1PT", null)]
-        public virtual void ShowAvailableProvidersForGivenStandard_EndToEndTest(string jOBROLE, string postcode, string[] exampleTags)
+        public virtual void ShowAvailableProvidersForGivenStandard(string jOBROLE, string postcode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "e2e"};
@@ -77,7 +77,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.E2E.Search
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show available providers for given standard -End to End Test", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show available providers for given standard", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -94,8 +94,6 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.And("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
  testRunner.Then("I should see all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 15
- testRunner.And("I should see all providers listed in Alphabetical order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
