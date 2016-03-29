@@ -21,7 +21,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By selectStaandard = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/h2/a");
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
         By providerlist = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
-        By providersearchbox = By.XPath(".//*[@id='postcode']");
+        By resultItems = By.CssSelector("#results .result");
+        By providersearchbox = By.Id("postcode");
         By providerlist1 = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
         By selectprovider = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By postCodeValidation = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/div/label/div/p");
@@ -36,8 +37,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyProviderResultsPage()
         {
 
-            Assert.True(isDisplayed(providerlist));
             Sleep(4000);
+
+            Assert.True(FindElements(resultItems).Any(ElementIsDisplayed));
+            //Assert.True(isDisplayed(providerlist));
         }
 
         public void verifyProvidersearchResultsInfo(String info)

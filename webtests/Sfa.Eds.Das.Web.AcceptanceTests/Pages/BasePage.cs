@@ -147,7 +147,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             try
             {
                 IWebElement element = find(locator);
-                return element.Displayed && element.Enabled;
+                return ElementIsDisplayed(element);
             }
             catch (NoSuchElementException)
             {
@@ -162,5 +162,9 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Thread.Sleep(milliseconds);
         }
 
+        public static bool ElementIsDisplayed(IWebElement element)
+        {
+            return element.Displayed && element.Enabled;
+        }
     }
 }

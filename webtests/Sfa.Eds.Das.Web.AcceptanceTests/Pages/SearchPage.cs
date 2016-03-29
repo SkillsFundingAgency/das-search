@@ -87,9 +87,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void chooseStandard()
         {
             var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
-            //firstResultLink.Click();
+            firstResultLink.Click();
 
-            click(selectStandard);
             Sleep(3000);
         }
 
