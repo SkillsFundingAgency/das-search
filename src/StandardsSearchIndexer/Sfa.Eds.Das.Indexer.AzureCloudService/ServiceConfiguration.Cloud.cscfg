@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="Sfa.Eds.Standards.Indexer.AzureAzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
   <Role name="Sfa.Eds.Das.Indexer.AzureWorkerRole">
-    <Instances count="#{CloudService.InstanceCount}" />
+    <Instances count="1" />
     <ConfigurationSettings>
     </ConfigurationSettings>
     <Certificates>
