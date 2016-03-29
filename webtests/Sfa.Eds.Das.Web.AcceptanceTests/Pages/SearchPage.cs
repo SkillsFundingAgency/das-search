@@ -91,7 +91,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void clickSearchBox()
         {
            click(searchButton);
-            Sleep(3000);
         }
 
         public void clickProviderSearch()
@@ -107,8 +106,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
             firstResultLink.Click();
-
-            Sleep(3000);
         }
 
         

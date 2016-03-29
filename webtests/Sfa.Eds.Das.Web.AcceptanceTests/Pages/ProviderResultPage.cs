@@ -43,11 +43,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyProviderResultsPage()
         {
-
-            Sleep(4000);
-
             Assert.True(FindElements(resultItems).Any(ElementIsDisplayed));
-            //Assert.True(isDisplayed(providerlist));
         }
 
         public void verifyProvidersearchResultsInfo(String info)
