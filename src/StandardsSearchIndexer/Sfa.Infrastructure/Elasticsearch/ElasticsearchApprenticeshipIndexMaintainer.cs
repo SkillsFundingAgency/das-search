@@ -16,7 +16,7 @@ namespace Sfa.Infrastructure.Elasticsearch
         private readonly IApprenticeshipIndexDefinitions _apprenticeshipIndexDefinitions;
 
         public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IApprenticeshipIndexDefinitions apprenticeshipIndexDefinitions, ILog logger)
-            : base(factory, elasticsearchMapper, logger, "Standard")
+            : base(factory, elasticsearchMapper, logger, "Apprenticeship")
         {
             _apprenticeshipIndexDefinitions = apprenticeshipIndexDefinitions;
         }
