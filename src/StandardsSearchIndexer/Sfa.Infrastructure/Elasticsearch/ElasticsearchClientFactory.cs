@@ -1,19 +1,18 @@
 ﻿namespace Sfa.Infrastructure.Elasticsearch
 {
-    using System;
+    using global::Elasticsearch.Net.ConnectionPool;
+
     using Nest;
     using Sfa.Infrastructure.Settings;
 
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
-        private readonly IInfrastructureSettings _infrastructureSettings;
-
         private readonly ConnectionSettings _connectionSettings;
 
         public ElasticsearchClientFactory(IInfrastructureSettings infrastructureSettings)
         {
-            _infrastructureSettings = infrastructureSettings;
-            _connectionSettings = new ConnectionSettings(new Uri(_infrastructureSettings.SearchHost));
+            var pool = new SniffingConnectionPool(infrastructureSettings.ElasticServerUrls);
+            _connectionSettings = new ConnectionSettings(pool);
         }
 
         public IElasticClient GetElasticClient()

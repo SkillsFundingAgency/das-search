@@ -23,7 +23,7 @@
             _mockHelper = new Mock<IGenericIndexerHelper<Core.Models.Provider.Provider>>();
             _mockSettings =
                 Mock.Of<IIndexSettings<Core.Models.Provider.Provider>>(
-                    x => x.PauseTime == "10" && x.SearchHost == "http://123.456.789:9200" && x.IndexesAlias == "testproviderindexesalias");
+                    x => x.PauseTime == "10" && x.IndexesAlias == "testproviderindexesalias");
 
             _sut = new IndexerService<Core.Models.Provider.Provider>(_mockSettings, _mockHelper.Object, Mock.Of<ILog>());
         }

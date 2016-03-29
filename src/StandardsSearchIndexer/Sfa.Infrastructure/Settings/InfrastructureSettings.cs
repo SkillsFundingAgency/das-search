@@ -1,13 +1,13 @@
 ﻿namespace Sfa.Infrastructure.Settings
 {
+    using System;
+    using System.Collections.Generic;
     using System.Configuration;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
 
     public class InfrastructureSettings : BaseSettings, IInfrastructureSettings
     {
-        public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
-
         public string WorkerRolePauseTime => ConfigurationManager.AppSettings["WorkerRolePauseTime"];
 
         public string ApprenticeshipIndexAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
@@ -28,8 +28,6 @@
 
         public string CourseDirectoryUri => ConfigurationManager.AppSettings["CourseDirectoryUri"];
 
-        public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
-
-        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
+        public IEnumerable<Uri> ElasticServerUrls => GetElasticIPs("ElasticServerUrls");
     }
 }

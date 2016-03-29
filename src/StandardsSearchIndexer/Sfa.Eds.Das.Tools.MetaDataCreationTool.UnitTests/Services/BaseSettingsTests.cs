@@ -2,6 +2,8 @@
 {
     using System;
     using System.Configuration;
+    using System.Linq;
+
     using Moq;
     using NUnit.Framework;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
@@ -57,6 +59,18 @@
             settings.Object.QueueName(type);
 
             settings.Verify(m => m.GetSetting(queueName), Times.Once);
+        }
+
+        [TestCase("http://40.2.2.20:9200,http://world.com", 2, "http://40.2.2.20:9200/")]
+        public void GetElasticIPsTest(string settingsResturn, int count, string first)
+        {
+            var moqBaseSettings = new Mock<BaseSettings>();
+            moqBaseSettings.Setup(m => m.GetSetting("ElasticServerUrls")).Returns(settingsResturn);
+            var urls = moqBaseSettings.Object.GetElasticIPs("ElasticServerUrls");
+
+            Assert.NotNull(urls);
+            Assert.AreEqual(count, urls.Count());
+            Assert.AreEqual(first, urls.First().AbsoluteUri);
         }
     }
 }

@@ -3,18 +3,9 @@
     using System.Configuration;
     using Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
 
     public class ProviderIndexSettings : IIndexSettings<IMaintainProviderIndex>, IProviderFeatures
     {
-        public string ElasticServerIp => ConfigurationManager.AppSettings["ElasticServerIp"];
-
-        public string ElasticsearchPort => ConfigurationManager.AppSettings["ElasticsearchPort"];
-
-        public string ActiveProvidersPath => ConfigurationManager.AppSettings["VstsProvidersFolderPath"];
-
-        public string SearchHost => $"http://{ElasticServerIp}:{ElasticsearchPort}";
-
         public string IndexesAlias => ConfigurationManager.AppSettings["ProviderIndexAlias"];
 
         public string PauseTime => ConfigurationManager.AppSettings["PauseTime"];

@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using FluentAssertions;
@@ -69,6 +70,7 @@
                 _indexerService.CreateIndex(_indexName);
                 var indexTask = _indexerService.IndexEntries(_indexName);
                 Task.WaitAll(indexTask);
+                Thread.Sleep(500);
             }
         }
 

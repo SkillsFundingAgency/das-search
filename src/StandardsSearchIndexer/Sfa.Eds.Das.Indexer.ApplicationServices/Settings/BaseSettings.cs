@@ -1,8 +1,10 @@
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
 {
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics;
+    using System.Linq;
 
     public class BaseSettings
     {
@@ -49,6 +51,12 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
             }
 
             return uri;
+        }
+
+        public IEnumerable<Uri> GetElasticIPs(string appSetting)
+        {
+            var urlsString = GetSetting(appSetting).Split(',');
+            return urlsString.Select(url => new Uri(url));
         }
     }
 }
