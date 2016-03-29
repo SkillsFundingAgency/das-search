@@ -36,8 +36,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyProviderResultsPage()
         {
 
-            Thread.Sleep(4000);
             Assert.True(isDisplayed(providerlist));
+            Sleep(4000);
         }
 
         public void verifyProvidersearchResultsInfo(String info)
@@ -59,14 +59,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
             }
 
-            Thread.Sleep(4000);
+            Sleep(4000);
             Assert.True(isDisplayed(providerlist));
         }
 
         public void chooseProvider()
         {
             click(selectprovider);
-            Thread.Sleep(3000);
+            Sleep(3000);
         }
 
         public void enterlocation(String location)

@@ -158,6 +158,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         }
 
+        public void Sleep(int milliseconds)
+        {
+            Console.WriteLine("-> Sleep for " + milliseconds + "ms");
+            Thread.Sleep(milliseconds);
+        }
 
     }
 }
