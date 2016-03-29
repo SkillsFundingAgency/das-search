@@ -150,7 +150,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Assert.True(getText(Invalidsearchmessage).Contains(msg));
         }
 
+        public void Open(string standard)
+        {
+            driver.Navigate().GoToUrl(baseUrl + "Standard/Detail/" + standard);
 
+        }
 
 
         public static string AssemblyDirectory

@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
+    using System.Linq;
+    using System.Threading;
+
     class BasePage // :  Base
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         /// 
         /// </summary>
         public IWebDriver driver;
-        private static string baseUrl;
+        public static string baseUrl;
 
         //public object ConfigurationManager { get; private set; }
 
@@ -66,11 +69,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         }
 
 
-        public void Open(String standard)
-        {
-            driver.Navigate().GoToUrl(baseUrl + "Standard/Detail/" + standard);
-
-        }
         public void click(By locator)
         {
             find(locator).Click();
