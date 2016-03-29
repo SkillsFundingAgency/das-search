@@ -63,21 +63,17 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                
                 if (testExecution == "headless") // headlessrun is performed on deployment server.
                 {
-                    localDriver = new PhantomJSDriver();
-                    FeatureContext.Current["driver"] = localDriver;
+                    var driverService = PhantomJSDriverService.CreateDefaultService();
+                    driverService.HideCommandPromptWindow = true;
+                    localDriver = new PhantomJSDriver(driverService);
                 }
                 else
                 {
-
-                                       
                     localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
-                    FeatureContext.Current["driver"] = localDriver;
                     localDriver.Manage().Window.Maximize();
-
-                    
                 }
 
-
+                FeatureContext.Current["driver"] = localDriver;
             }
 
             /*
