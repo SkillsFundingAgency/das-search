@@ -37,14 +37,16 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public IWebElement find(By locator)
         {
+            validateSelector(locator);
 
-         //   WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
+            //   WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
             //wait.Until(ExpectedConditions.ElementIsVisible(locator));
             return driver.FindElement(locator);
         }
 
         public IList<IWebElement> FindElements(By locator)
         {
+            validateSelector(locator);
             return driver.FindElements(locator);
         }
 
@@ -83,8 +85,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public bool isElementPresent(By locator, string provider)
         {
-            
-            IList<IWebElement> subelements = driver.FindElements(locator);
+            IList<IWebElement> subelements = FindElements(locator);
             for (int i = 0; i < subelements.Count; i++)
             {
                 
@@ -115,8 +116,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public bool isElementNotPresent(By locator, string provider)
         {
-
-            IList<IWebElement> subelements = driver.FindElements(locator);
+            IList<IWebElement> subelements = FindElements(locator);
             for (int i = 0; i < subelements.Count; i++)
             {
 
@@ -135,12 +135,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             return false;
         }
 
-
-
-
-
-
-
+        private void validateSelector(By locator)
+        {
+            var value = locator.ToString();
+            if (value.Contains("XPath"))
+            {
+                Console.WriteLine("****** TODO remove " + value);
+            }
+        }
 
         public bool isDisplayed(By locator)
         {
