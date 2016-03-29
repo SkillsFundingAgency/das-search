@@ -18,7 +18,7 @@
 
         public IElasticClient Create()
         {
-            var pool = new SniffingConnectionPool(_applicationSettings.ElasticServerIps);
+            var pool = new SniffingConnectionPool(_applicationSettings.ElasticServerUrls);
             var settings = new ConnectionSettings(pool);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
