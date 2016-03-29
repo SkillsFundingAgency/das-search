@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
+    using Sfa.Das.WebTest.Infrastructure;
+
     class ProviderDetailPage : BasePage
     {
         By providerDetailName = By.XPath(".//*[@id='content']/div/div[1]/div/h1");

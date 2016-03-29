@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
+    using Sfa.Das.WebTest.Infrastructure;
+
     class ProviderResultPage : BasePage
     {
         /// <summary>
@@ -32,7 +34,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerlSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[4]");
         By providerLocation = By.XPath(".//*[@id='results']/div[1]/article[3]/dl/dd[2]");
 
+        private By resultsContainer = By.Id("results");
 
+        public void WaitToLoad()
+        {
+            base.WaitFor(resultsContainer);
+        }
 
         public void verifyProviderResultsPage()
         {

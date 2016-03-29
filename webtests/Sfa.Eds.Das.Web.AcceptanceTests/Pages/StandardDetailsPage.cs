@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
+    using Sfa.Das.WebTest.Infrastructure;
+
     class StandardDetailsPage : BasePage
     {
         By standardDetailTitle = By.XPath(".//*[@id='content']/div/div[1]/div/h1");
@@ -20,7 +22,16 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By standardDetailProfReg = By.XPath(".//*[@id='content']/section/dl/dd[7]/p");
         By standardDetailOverviewRole = By.XPath(".//*[@id='content']/section/dl/dd[1]/p");
 
-       public void verifyStandardtitle()
+        private By postCodeTextBox = By.Id("postcode");
+
+        private By searchButton = By.Id("submit-keywords");
+
+        public void WaitToLoad()
+        {
+            base.WaitFor(searchButton);
+        }
+
+        public void verifyStandardtitle()
         {
             Assert.True(isDisplayed(standardDetailTitle));
 

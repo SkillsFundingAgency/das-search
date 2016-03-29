@@ -14,7 +14,9 @@ using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
-    class SearchPage : BasePage
+    using Sfa.Das.WebTest.Infrastructure;
+
+    public class SearchPage : BasePage
              
 
     {
@@ -30,6 +32,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.Id("submit-keywords");
 
         // Search Results Page
+        private By resultsContainer = By.Id("results");
         private By searchResultItem = By.CssSelector("#results article.result");
         private By itemLink = By.CssSelector(".result-title > a");
 
@@ -43,6 +46,22 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By selectStandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
         By Invalidsearchmessage = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
+
+        public void Navigate()
+        {
+            base.Navigate();
+            WaitForSearchPage();
+        }
+
+        public void WaitForSearchPage()
+        {
+            WaitFor(searchButton);
+        }
+
+        public void WaitForResultsPage()
+        {
+            WaitFor(resultsContainer);
+        }
 
         public void launchLandingPage()
         {
@@ -66,7 +85,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void ValidateTitle()
         {
             Sleep(2000);
-            verifyPage(title);
+            base.VerifyTitle(title);
         }
 
         public void clickSearchBox()
@@ -108,7 +127,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             
             Sleep(4000);
             //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
-            verifyTextMessage(searchresult, "There are" + " " + getText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
+            verifyTextMessage(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
 
 
         }
@@ -128,25 +147,25 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void VerifyresultCount()
         {
 
-            Assert.True(getText(searchResultcount).Contains("Total results found:"));
+            Assert.True(GetText(searchResultcount).Contains("Total results found:"));
         }
 
         public void Verifylength()
         {
 
-            Assert.True(getText(typicallength).Contains("24 to 36 months"));
+            Assert.True(GetText(typicallength).Contains("24 to 36 months"));
         }
 
 
         public void VerifyresultCount_invalidSearch()
         {
 
-            Assert.True(getText(searchResultcount).Contains("Total results found: 0"));
+            Assert.True(GetText(searchResultcount).Contains("Total results found: 0"));
         }
 
         public void verifySearchresultMessage(String msg)
         {
-            Assert.True(getText(Invalidsearchmessage).Contains(msg));
+            Assert.True(GetText(Invalidsearchmessage).Contains(msg));
         }
 
         public void Open(string standard)

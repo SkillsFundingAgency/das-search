@@ -1,26 +1,24 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Remote;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium.Chrome;
-using TechTalk.SpecFlow;
-using OpenQA.Selenium.PhantomJS;
-/*
+﻿/*
 Purpose of this class is to 
 -Define actions to perform before and after feature/Scenario
 -Define local and remote test execution, sauce lab settings and local host browser setting are defined
 
 */
-namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
+namespace Sfa.Das.WebTest.Infrastructure
 {
+    using System;
+    using System.Configuration;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using System.Text;
+
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.PhantomJS;
+    using OpenQA.Selenium.Remote;
+
+    using TechTalk.SpecFlow;
+
     [Binding]
     public sealed class Hooks
     {
@@ -68,7 +66,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
                 }
                 else
                 {
-                    localDriver = new ChromeDriver(@"C:\\Users\\dasqa\\Source\\Repos\\Digital Apprenticeship Service\\webtests\\Sfa.Eds.Das.Web.AcceptanceTests\\Test\\Resources");
+                    var dir = Directory.GetCurrentDirectory();
+                    localDriver = new ChromeDriver(Path.Combine(dir, @"..\\..\\utils"));
                     localDriver.Manage().Window.Maximize();
                 }
 

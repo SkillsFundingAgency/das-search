@@ -1,18 +1,17 @@
-﻿using OpenQA.Selenium;
-using System;
-using TechTalk.SpecFlow;
-using OpenQA.Selenium.Chrome;
-using System.Configuration;
-using System.Diagnostics.Eventing;
-using Sfa.Eds.Das.Web.AcceptanceTests.utils;
-using System.Collections.Generic;
-
-namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
+﻿namespace Sfa.Das.WebTest.Infrastructure
 {
-    using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
     using System.Threading;
 
-    class BasePage // :  Base
+    using OpenQA.Selenium;
+
+    using Sfa.Das.WebTest.Infrastructure.Extensions;
+
+    using TechTalk.SpecFlow;
+
+    public abstract class BasePage
     {
         /// <summary>
         /// Puprose of this Base class is to
@@ -20,40 +19,33 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         /// 
         /// </summary>
         public IWebDriver driver;
-        public static string baseUrl;
 
-        //public object ConfigurationManager { get; private set; }
+        public string baseUrl;
 
-        public BasePage()
+        protected BasePage()
         {
-
             driver = (IWebDriver)FeatureContext.Current["driver"];
             baseUrl = ConfigurationManager.AppSettings["service.url"];
-
         }
-
 
         public void type(string inputText, By locator)
         {
-            find(locator).SendKeys(inputText);
+            Find(locator).SendKeys(inputText);
         }
 
-        public IWebElement find(By locator)
+        public IWebElement Find(By locator)
         {
-            validateSelector(locator);
-
-            //   WebDriverWait wait = new (WebDriverWait(driver, TimeSpan.FromSeconds(15)));
-            //wait.Until(ExpectedConditions.ElementIsVisible(locator));
+            ValidateSelector(locator);
             return driver.FindElement(locator);
         }
 
         public IList<IWebElement> FindElements(By locator)
         {
-            validateSelector(locator);
+            ValidateSelector(locator);
             return driver.FindElements(locator);
         }
 
-        public void verifyPage(string pageTitle)
+        public void VerifyTitle(string pageTitle)
         {
             if (!pageTitle.Equals(driver.Title))
             {
@@ -61,79 +53,76 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             }
         }
 
+        public void Navigate(string url = "")
+        {
+            driver.Navigate().GoToUrl(baseUrl + url);
+        }
 
         public void Launch(string pageTitle)
         {
             driver.Navigate().GoToUrl(baseUrl);
-            verifyPage(pageTitle);
+            VerifyTitle(pageTitle);
         }
-
 
         public void click(By locator)
         {
-            find(locator).Click();
+            Find(locator).Click();
         }
 
-
-        public string getText(By locator)
+        public string GetText(By locator)
         {
-            return find(locator).Text;
-
+            return Find(locator).Text;
         }
 
-        public bool isElementPresent(By locator, string provider)
+        public bool isElementPresent(By locator, string match)
         {
-            IList<IWebElement> subelements = FindElements(locator);
-            for (int i = 0; i < subelements.Count; i++)
+            var subelements = FindElements(locator);
+            for (var i = 0; i < subelements.Count; i++)
             {
-                
-               // Console.Write(subelements[i].Text);
-
-                if (subelements[i].Text == provider)
+                if (subelements[i].Text == match)
                 {
-                    Console.Write("Provider Found " + subelements[i].Text);
+                    Console.Write("Found " + subelements[i].Text);
                     return true;
-
                 }
-               
-                
-
             }
             return false;
         }
 
-        public bool verifyTextMessage(By locator,String text)
+        public void WaitFor(By locator)
         {
-            if (find(locator).Text.Contains(text))
-                return true;
-            else 
-                return false;
+            ValidateSelector(locator);
+            driver.WaitFor(locator);
         }
 
-
+        public bool verifyTextMessage(By locator, String text)
+        {
+            if (Find(locator).Text.Contains(text))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool isElementNotPresent(By locator, string provider)
         {
-            IList<IWebElement> subelements = FindElements(locator);
-            for (int i = 0; i < subelements.Count; i++)
+            var subelements = FindElements(locator);
+            for (var i = 0; i < subelements.Count; i++)
             {
-
                 //Console.Write(subelements[i].Text);
 
-                while(subelements[i].Text != provider)
+                while (subelements[i].Text != provider)
                 {
                     Console.Write("Provider not Found " + provider);
                     return true;
-
                 }
-
-
-
             }
             return false;
         }
 
-        private void validateSelector(By locator)
+        private static void ValidateSelector(By locator)
         {
             var value = locator.ToString();
             if (value.Contains("XPath"))
@@ -146,19 +135,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             try
             {
-                IWebElement element = find(locator);
+                var element = Find(locator);
                 return ElementIsDisplayed(element);
             }
             catch (NoSuchElementException)
             {
                 return false;
             }
-
         }
 
         public void Sleep(int milliseconds)
         {
-            Console.WriteLine("-> Sleep for " + milliseconds + "ms");
+            Console.WriteLine("****** TODO wait for an element instead -> Slept for " + milliseconds + "ms");
             Thread.Sleep(milliseconds);
         }
 

@@ -75,7 +75,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\ProviderDetailPage.cs" />
     <Compile Include="Pages\ProviderResultPage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
@@ -136,7 +135,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="utils\Hooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -204,6 +202,12 @@
     <Content Include="phantomjs-license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sfa.Das.WebTest.Infrastructure\Sfa.Das.WebTest.Infrastructure.csproj">
+      <Project>{A2C6F9A6-B0E7-4CFF-902C-9B0EE3B11AC1}</Project>
+      <Name>Sfa.Das.WebTest.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

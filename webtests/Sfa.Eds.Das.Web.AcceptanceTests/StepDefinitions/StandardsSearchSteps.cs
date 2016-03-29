@@ -30,28 +30,19 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
 
         [Given(@"I am on Search landing page")]
+        [When(@"I am on Search landing page")]
         public void GivenIAmOnSearchLandingPage()
         {
-
-
-           // srchPage = new SearchPage();
-
-           srchPage.launchLandingPage();
-
-
-
-
-
-            // ScenarioContext.Current.Pending();
+            srchPage.Navigate();
+            srchPage.WaitForSearchPage();
         }
 
-        [When(@"I am on Search landing page")]
-        public void WhenIAmOnSearchLandingPage()
+        [Then(@"I am on the Search results page")]
+        public void ThenIAmOnTheSearchResultsPage()
         {
-           // srchPage = new SearchPage();
-
-           srchPage.launchLandingPage();
+            srchPage.WaitForResultsPage();
         }
+
 
 
 
@@ -60,12 +51,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         /// </summary>
         /// <param name="p0"></param>
         [Given(@"I enter keyword '(.*)' in search box")]
+        [When(@"I enter keyword '(.*)' in search box")]
         public void GivenIEnterKeywordInSearchBox(string p0)
         {
-
-
             srchPage.SearchKeyword(p0);
-
         }
 
         /// <summary>
@@ -95,7 +84,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should be able to see home page with title as ""(.*)""")]
         public void ThenIShouldBeAbleToSeeHomePageWithTitleAs(string p0)
         {
-            srchPage.verifyPage("Home Page - Employer Apprenticeship Search");
+            srchPage.VerifyTitle("Home Page - Employer Apprenticeship Search");
         }
 
 
@@ -111,7 +100,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see matching '(.*)' standards on result page")]
         public void ThenIShouldSeeMatchingStandardsOnResultPage(string p0)
         {
-            srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
+            srchPage.VerifyTitle("Search Results - Employer Apprenticeship Search");
             srchPage.verifyresultsPages();
             srchPage.verifyStandardFoundinResultPage(p0);
             srchPage.verifySearchedStandardFoundinResultPage(p0);
@@ -120,7 +109,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see matching '(.*)' frameworks on result page")]
         public void ThenIShouldSeeMatchingFrameworksOnResultPage(string p0)
         {
-            srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
+            srchPage.VerifyTitle("Search Results - Employer Apprenticeship Search");
             srchPage.verifyresultsPages();
             srchPage.verifyStandardFoundinResultPage(p0);
             srchPage.verifySearchedStandardFoundinResultPage(p0);
@@ -146,7 +135,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see standards count on result page")]
         public void ThenIShouldSeeStandardsCountOnResultPage()
         {
-            srchPage.verifyPage("Search Results - Employer Apprenticeship Search");
+            srchPage.VerifyTitle("Search Results - Employer Apprenticeship Search");
             srchPage.verifyresultsPages();
             srchPage.VerifyresultCount();
 
