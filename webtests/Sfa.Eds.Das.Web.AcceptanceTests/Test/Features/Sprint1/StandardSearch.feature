@@ -15,6 +15,7 @@ Scenario Outline: Search Standard by keyword
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	When I click on search button
+	Then I am on the Search results page
 	Then I should see matching '<ExpectedResult>' standards on result page
 Examples:
 | JOBROLE                | ExpectedResult                                                   |
@@ -35,6 +36,7 @@ Scenario Outline: Search Standard by keyword Actuarial
 	Given I am on Search landing page
 	And I enter keyword '<Keyword>' in search box
 	When I click on search button
+	Then I am on the Search results page
 	Then I should see matching Standard 'Actuarial Technician' standards on result page
 Examples:
 | Keyword       |
@@ -47,6 +49,7 @@ Scenario Outline: Search Standard by keyword Aeorospace
 	Given I am on Search landing page
 	And I enter keyword '<Keyword>' in search box
 	When I click on search button
+	Then I am on the Search results page
 	Then I should see matching Standard 'Aerospace Manufacturing Fitter' standards on result page
 	And I should see matching Standard 'Aerospace Engineer' standards on result page
 	And I should see matching Standard 'Aerospace Software Development Engineer' standards on result page	
@@ -62,7 +65,8 @@ Scenario Outline: Verify invalid search
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 When I click on search button 
-Then I should see message "There are no apprenticeships matching your search for '<JOBROLE>'"
+Then I am on the Search results page
+And I should see message "There are no apprenticeships matching your search for '<JOBROLE>'"
 Examples: 
 | JOBROLE     |
 | kdjfdkfjdfk |
@@ -73,7 +77,8 @@ Scenario Outline: Validate result count
 	Given I am on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	When I click on search button
-	Then I should see standards count on result page
+	Then I am on the Search results page
+	And I should see standards count on result page
 Examples:
 | JOBROLE              |
 | Actuarial Technician | 
@@ -86,7 +91,8 @@ Scenario Outline: Search result Page to have best match
 Given I am on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 And I click on search button
-Then I should see  best match '<JOBROLE>' is on top of the search list
+Then I am on the Search results page
+And I should see  best match '<JOBROLE>' is on top of the search list
 Examples:
 | JOBROLE             |
 | Actuarial Technician |
