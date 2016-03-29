@@ -199,7 +199,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
             }
 
-            if (host== "browserstack")
+            if (host== "browserstack1")
             {
                 driver.Quit();
             }
