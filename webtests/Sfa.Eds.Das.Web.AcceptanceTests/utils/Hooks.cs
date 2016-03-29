@@ -36,7 +36,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         static RemoteWebDriver driver; // used to run test on saucelabs or browserstack tool.
         //load from app.config
         static string host = ConfigurationManager.AppSettings["host"];
-        static string baseurl = ConfigurationManager.AppSettings["baseUrl"];
         static string browser = ConfigurationManager.AppSettings["browser"];
         static string testExecution = ConfigurationManager.AppSettings["testExecutionType"];
         static string platform = ConfigurationManager.AppSettings["platform"];
@@ -58,8 +57,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
         {
             if (host == "localhost")
             {
-                Console.Write("#####################  Feature Run- Started  ######################");
-                Console.Write("Feature : " + FeatureContext.Current.FeatureInfo.Title);
+                Console.WriteLine("#####################  Feature Run- Started  ######################");
+                Console.WriteLine("Feature : " + FeatureContext.Current.FeatureInfo.Title);
                
                 if (testExecution == "headless") // headlessrun is performed on deployment server.
                 {
@@ -148,19 +147,19 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             {
 
                 ScenarioContext.Current["driver"] = localDriver;
-                Console.Write("Test Scenario ##### : " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
             }
             else if (host == "saucelabs")
             {
 
                ScenarioContext.Current["driver"] = driver;
-                Console.Write("Test Scenario ######: " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
             }
 
             else if ( host == "browserstack")
             {
                 ScenarioContext.Current["driver"] = driver;
-                Console.Write("Test Scenario ###### : " + ScenarioContext.Current.ScenarioInfo.Title);
+                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
 
             }
         }
@@ -181,15 +180,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
         }
 
-        [AfterFeature()]
+        [AfterFeature]
         public static void AfterFeatureRun()
         {
 
             if (host == "localhost")
             {
 
-                Console.Write("###################### Feature Run-Ended #######################");
-
+                Console.WriteLine("###################### Feature Run-Ended #######################");
                 localDriver.Quit(); // kill driver after feature run.
 
             }
