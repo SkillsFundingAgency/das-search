@@ -32,8 +32,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint5
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ViewStandardDetails", "In order to chose a standard\nAs an employer\nI want to be able to open standard de" +
-                    "tails page.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ViewStandardDetails", "In order to chose a standard\r\nAs an employer\r\nI want to be able to open standard " +
+                    "details page.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

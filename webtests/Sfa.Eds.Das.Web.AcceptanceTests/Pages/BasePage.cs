@@ -43,6 +43,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             return driver.FindElement(locator);
         }
 
+        public IList<IWebElement> FindElements(By locator)
+        {
+            return driver.FindElements(locator);
+        }
+
         public void verifyPage(string pageTitle)
         {
             if (!pageTitle.Equals(driver.Title))

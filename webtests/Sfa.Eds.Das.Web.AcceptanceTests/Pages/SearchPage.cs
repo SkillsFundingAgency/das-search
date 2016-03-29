@@ -27,7 +27,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         // private IWebDriver driver;
         By searchBox = By.Id("keywords");
-        By searchButton = By.XPath("//input[@type='submit']");
+        By searchButton = By.Id("submit-keywords");
+
+        // Search Results Page
+        private By searchResultItem = By.CssSelector("#results article.result");
+        private By itemLink = By.CssSelector(".result-title > a");
+
         public String title = "Google";
         By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
         By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
@@ -35,7 +40,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchResultcount = By.XPath(".//*[@id='results']/div[1]/p");
         By typicallength = By.XPath(".//*[@id='results']/div[1]/article/dl/dd[2]");
 
-        By selectStaandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
+        By selectStandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
         By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
         By Invalidsearchmessage = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
 
@@ -81,7 +86,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void chooseStandard()
         {
-            click(selectStaandard);
+            var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
+            //firstResultLink.Click();
+
+            click(selectStandard);
             Thread.Sleep(3000);
         }
 

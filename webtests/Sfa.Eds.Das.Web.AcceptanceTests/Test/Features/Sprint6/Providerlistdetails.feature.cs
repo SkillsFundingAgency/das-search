@@ -32,8 +32,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint6
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Providerlistdetails", "In order to chose a provider from list\nAs an employer \nI should be able to see li" +
-                    "st of providers for a standard training", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Providerlistdetails", "In order to chose a provider from list\r\nAs an employer \r\nI should be able to see " +
+                    "list of providers for a standard training", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
