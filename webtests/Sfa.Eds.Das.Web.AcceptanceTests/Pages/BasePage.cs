@@ -25,7 +25,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
 
             driver = (IWebDriver)FeatureContext.Current["driver"];
-            baseUrl = ConfigurationManager.AppSettings["baseUrl"];
+            baseUrl = ConfigurationManager.AppSettings["service.url"];
 
         }
 
