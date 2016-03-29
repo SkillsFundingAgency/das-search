@@ -62,6 +62,7 @@
         {
             var mockAngleService = new Mock<IAngleSharpService>();
 
+            mockAngleService.Setup(m => m.GetLinks(It.IsAny<string>(), ".attachment-details h2 a", "Apprenticeship")).Returns(new List<string>());
             mockAngleService.Setup(m => m.GetLinks(It.IsAny<string>(), ".attachment-details h2 a", "Assessment")).Returns(new List<string>());
 
             CsvService csvService = new CsvService(mockAngleService.Object);
