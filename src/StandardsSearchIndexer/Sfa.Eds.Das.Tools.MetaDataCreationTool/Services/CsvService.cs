@@ -106,7 +106,7 @@
                     Title = values[2].RemoveQuotationMark(),
                     NotionalEndLevel = TryParse(values[4]),
                     StandardPdfUrl = GetPdfUri(values[8]),
-                    AssessmentPlanPdfUrl = GetPdfUri(values[8]),
+                    AssessmentPlanPdfUrl = GetAssessmentPdfUri(values[8]),
                     JobRoles = new List<string>(),
                     Keywords = new List<string>(1),
                     TypicalLength = new TypicalLength { Unit = "m" },
@@ -134,6 +134,17 @@
         }
 
         private string GetPdfUri(string s)
+        {
+            var url = angelService.GetLinks(s.RemoveQuotationMark(), ".attachment-details h2 a", "Apprenticeship").FirstOrDefault();
+            if (url != null)
+            {
+                return new Uri($"https://www.gov.uk/{url}").ToString();
+            }
+
+            return string.Empty;
+        }
+
+        private string GetAssessmentPdfUri(string s)
         {
             var url = angelService.GetLinks(s.RemoveQuotationMark(), ".attachment-details h2 a", "Assessment").FirstOrDefault();
             if (url != null)
