@@ -173,8 +173,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
 
                 if (ScenarioContext.Current.TestError != null)
                 {
-                    // IWebDriver driver = null;
-                    // TakeScreenshot(driver); // this is throwing some warning , need to fix.
+                    TakeScreenshot(localDriver);
                 }
                 // localDriver.Quit(); //no need to kill driver after each scenario
             }
@@ -214,8 +213,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.utils
             try
             {
                 string fileNameBase = string.Format("error_{0}_{1}_{2}",
-                    FeatureContext.Current.FeatureInfo.Title,
-                    ScenarioContext.Current.ScenarioInfo.Title,
+                    FeatureContext.Current.FeatureInfo.Title.Replace(" ","_"),
+                    ScenarioContext.Current.ScenarioInfo.Title.Replace(" ", "_"),
                     DateTime.Now.ToString("yyyyMMdd_HHmmss"));
 
                 var artifactDirectory = Path.Combine(Directory.GetCurrentDirectory(), "testresults");
