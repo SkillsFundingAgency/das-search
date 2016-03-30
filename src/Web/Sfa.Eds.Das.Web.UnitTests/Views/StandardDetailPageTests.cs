@@ -24,7 +24,6 @@
         }
 
         [Test]
-        [Ignore("TODO: LWA Determine why this is now failing.")]
         public void ShouldNotShowRequiredFieldWhenErrorIsMissing()
         {
             var detail = new BlankFieldErrorMessage();
