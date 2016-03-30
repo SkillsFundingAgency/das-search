@@ -16,6 +16,7 @@ Scenario Outline:Show available providers for given standard
 	When I enter '<Postcode>' in provider search box
     And I search Search for provider
 	Then I am on the provider results page 
+	And Fall over
 	And I should see all providers in result page
 Examples:
 | JOBROLE                                     | Postcode |
