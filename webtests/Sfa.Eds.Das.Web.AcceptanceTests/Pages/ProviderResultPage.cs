@@ -65,14 +65,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
             }
 
-            Sleep(4000);
+            //Sleep(4000); added conditional wait and taken out this hard sleep. (to reduce the test exuection time)
             Assert.True(isDisplayed(providerlist));
         }
 
         public void chooseProvider()
         {
             click(selectprovider);
-            Sleep(3000);
+            //Sleep(3000);
         }
 
         public void enterlocation(String location)

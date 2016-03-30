@@ -72,7 +72,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void OpenStandarDetails(String standard)
         {
             Open(standard);
-            Sleep(3000);
+           // Sleep(3000);
         }
 
         public void SearchKeyword(String keyword)
@@ -84,7 +84,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
  
         public void ValidateTitle()
         {
-            Sleep(2000);
+           // Sleep(2000);
             base.VerifyTitle(title);
         }
 
@@ -96,7 +96,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void clickProviderSearch()
         {
             click(searchProviderbutton);
-            Sleep(3000);
+           // Sleep(3000);
         }
 
         
@@ -115,14 +115,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyresultsPages()
         {
 
-            Sleep(4000);
+           // Sleep(4000);
             Assert.True(isDisplayed(searchresult));
         }
        
         public void verifyStandardFoundinResultPage(String keyword)
         {
             
-            Sleep(4000);
+           // Sleep(4000);
             //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
             verifyTextMessage(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
 
@@ -131,13 +131,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
-            Sleep(4000);
+           // Sleep(4000);
              Assert.True(isElementPresent(searchkeywordresult, expected_result));
         }
 
         public void verifyStandardinTopofList(String keyword)
         {
-            Sleep(4000);
+            //Sleep(4000);
             Assert.True(isElementPresent(firstStandardinresult, keyword));
         }
 

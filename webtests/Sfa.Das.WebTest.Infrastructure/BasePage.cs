@@ -10,7 +10,7 @@
     using Sfa.Das.WebTest.Infrastructure.Extensions;
 
     using TechTalk.SpecFlow;
-
+    using OpenQA.Selenium.Support.UI;
     public abstract class BasePage
     {
         /// <summary>
@@ -35,7 +35,10 @@
 
         public IWebElement Find(By locator)
         {
-            ValidateSelector(locator);
+            //ValidateSelector(locator); will update css selectors, however not to cause any extra delays by checking this programmatically.
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementIsVisible(locator));
             return driver.FindElement(locator);
         }
 
@@ -144,7 +147,7 @@
             }
         }
 
-        public void Sleep(int milliseconds)
+        public void Sleep(int milliseconds) /// conditional wait is now added at WebElement level
         {
             Console.WriteLine("****** TODO wait for an element instead -> Slept for " + milliseconds + "ms");
             Thread.Sleep(milliseconds);
