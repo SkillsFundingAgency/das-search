@@ -43,12 +43,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             srchPage.chooseStandard();
         }
         
-        [When(@"I click on search under provider search section")]
-        public void WhenIClickOnSearchUnderProviderSearchSection()
-        {
-            srchPage.clickProviderSearch(); 
-        }
-        
         [Then(@"I should all providers in result page")]
         public void ThenIShouldAllProvidersInResultPage()
         {
