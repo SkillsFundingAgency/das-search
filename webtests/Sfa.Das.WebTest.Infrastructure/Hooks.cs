@@ -8,9 +8,13 @@ namespace Sfa.Das.WebTest.Infrastructure
 {
     using System;
     using System.Configuration;
+    using System.Data;
     using System.Drawing.Imaging;
     using System.IO;
+    using System.Net;
     using System.Text;
+
+    using NUnit.Framework;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
@@ -30,48 +34,119 @@ namespace Sfa.Das.WebTest.Infrastructure
         /// </summary>
 
 
-        static IWebDriver localDriver;
-        static RemoteWebDriver driver; // used to run test on saucelabs or browserstack tool.
+        static IWebDriver driver;
         //load from app.config
         static string host = ConfigurationManager.AppSettings["host"];
-        static string browser = ConfigurationManager.AppSettings["browser"];
+        static string url = ConfigurationManager.AppSettings["service.url"];
         static string testExecution = ConfigurationManager.AppSettings["testExecutionType"];
-        static string platform = ConfigurationManager.AppSettings["platform"];
-        static string browserVersion = ConfigurationManager.AppSettings["browserVersion"];
         static string saucelabsAccountName = ConfigurationManager.AppSettings["sauce_labs_account_name"];
         static string saucelabsAccountKey = ConfigurationManager.AppSettings["sauce_labs_account_key"];
         static String browserStackKey = ConfigurationManager.AppSettings["browserstack_key"];
         static String browserStacUser = ConfigurationManager.AppSettings["browserstack_user"];
         static String mDevice= ConfigurationManager.AppSettings["mobile_device"];
+        static string applicationVersion = ConfigurationManager.AppSettings["application.version"];
+
 
 
         //public static CustomRemoteDriver driver { get; private set; }
 
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
 
+        [BeforeTestRun]
+        public static void BeforeTestRun()
+        {
+            WaitForDeployment();
+        }
 
         [BeforeFeature]
-        public static void BeforeFeatureRun()
+        public static void BeforeFeature()
+        {
+            Console.WriteLine("#####################  Feature Run- Started  ######################");
+            Console.WriteLine("Feature : " + FeatureContext.Current.FeatureInfo.Title);
+            CreateDriver();
+        }
+
+        [BeforeScenario]
+
+        public static void BeforeWebScenario()
+        {
+            Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
+        }
+
+
+        [AfterScenario]
+        public static void AfterWebScenario()
         {
             if (host == "localhost")
             {
-                Console.WriteLine("#####################  Feature Run- Started  ######################");
-                Console.WriteLine("Feature : " + FeatureContext.Current.FeatureInfo.Title);
-               
+
+                if (ScenarioContext.Current.TestError != null)
+                {
+                    TakeScreenshot(driver);
+                }
+            }
+        }
+
+        [AfterFeature]
+        public static void AfterFeatureRun()
+        {
+            Console.WriteLine("###################### Feature Run-Ended #######################");
+            if (host == "localhost")
+            {
+                driver.Quit(); // kill driver after feature run.
+            }
+
+            if (host == "browserstack" || host == "saucelabs")
+            {
+                driver.Quit();
+            }
+        }
+
+        [AfterTestRun]
+        public static void AfterTestRun()
+        {
+        }
+
+        private static void WaitForDeployment()
+        {
+            if (!string.IsNullOrEmpty(applicationVersion))
+            {
+                var client = new WebClient();
+
+                var version = client.DownloadString(url + "/api/version").Replace("\"", "");
+
+                if (version != applicationVersion)
+                {
+                    if (!Retry.DoUntil(() => client.DownloadString(url + "/api/version").Replace("\"", "") == applicationVersion, TimeSpan.FromSeconds(3)))
+                    {
+                        if (version != applicationVersion)
+                        {
+                            throw new VersionNotFoundException($"site was version {version} but we expected {applicationVersion}");
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void CreateDriver()
+        {
+            if (host == "localhost")
+            {
                 if (testExecution == "headless") // headlessrun is performed on deployment server.
                 {
                     var driverService = PhantomJSDriverService.CreateDefaultService();
                     driverService.HideCommandPromptWindow = true;
-                    localDriver = new PhantomJSDriver(driverService);
+                    driver = new PhantomJSDriver(driverService);
                 }
                 else
                 {
                     var dir = Directory.GetCurrentDirectory();
-                    localDriver = new ChromeDriver(Path.Combine(dir, @"..\\..\\utils"));
-                    localDriver.Manage().Window.Maximize();
+                    driver = new ChromeDriver(Path.Combine(dir, @"..\\..\\Test\\Resources"));
+                    driver.Manage().Window.Maximize();
                 }
 
-                FeatureContext.Current["driver"] = localDriver;
+                
+                FeatureContext.Current["driver"] = driver;
             }
 
             /*
@@ -92,25 +167,22 @@ namespace Sfa.Das.WebTest.Infrastructure
                 switch (mDevice)
                 {
                     case "Iphone":
-                        desiredCap.SetCapability("platform", "MAC");// these values will be moved to app config.
+                        desiredCap.SetCapability("platform", "MAC"); // these values will be moved to app config.
                         desiredCap.SetCapability("browserName", "iPhone");
                         desiredCap.SetCapability("device", "iPhone 6S Plus");
                         desiredCap.SetCapability("browserVersion", "8");
                         break;
 
                     case "Samsung":
-                        desiredCap.SetCapability("platform", "Android");// these values will be moved to app config.
+                        desiredCap.SetCapability("platform", "Android"); // these values will be moved to app config.
                         desiredCap.SetCapability("browserName", "Android");
                         desiredCap.SetCapability("device", "Google Nexus 5");
                         desiredCap.SetCapability("browserVersion", "5.0");
                         break;
                 }
 
-                
-               
                 driver = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), desiredCap);
                 FeatureContext.Current["driver"] = driver;
-
             }
 
             /* TestS can be run on below devices available in sauce labs tool
@@ -131,80 +203,10 @@ namespace Sfa.Das.WebTest.Infrastructure
                 //desiredCap.SetCapability("browserstack.debug", "true");
                 driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub/"), desiredCap, TimeSpan.FromSeconds(600));
                 FeatureContext.Current["driver"] = driver;
-
-            }
-
-          
-
-        }
-
-        [BeforeScenario]
-
-        public static void BeforeWebScenario()
-        {
-            if (host == "localhost")
-            {
-
-                ScenarioContext.Current["driver"] = localDriver;
-                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
-            }
-            else if (host == "saucelabs")
-            {
-
-               ScenarioContext.Current["driver"] = driver;
-                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
-            }
-
-            else if ( host == "browserstack")
-            {
-                ScenarioContext.Current["driver"] = driver;
-                Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
-
             }
         }
 
-        [AfterScenario]
-        public static void AfterWebScenario()
-        {
-            if (host == "localhost")
-            {
 
-                if (ScenarioContext.Current.TestError != null)
-                {
-                    TakeScreenshot(localDriver);
-                }
-                // localDriver.Quit(); //no need to kill driver after each scenario
-            }
-
-
-        }
-
-        [AfterFeature]
-        public static void AfterFeatureRun()
-        {
-
-            if (host == "localhost")
-            {
-
-                Console.WriteLine("###################### Feature Run-Ended #######################");
-                localDriver.Quit(); // kill driver after feature run.
-
-            }
-
-            if (host== "browserstack")
-            {
-                driver.Quit();
-            }
-
-            else if (host == "saucelabs")
-            {
-                
-                driver.Quit();
-            }
-
-        }
-
-        
         private static void TakeScreenshot(IWebDriver driver)
         {
             try

@@ -32,8 +32,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.E2E.Search
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Search Provider", "In order to choose from provider list\nAs an employer\nI want to be able to search " +
-                    "all providers for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Search Provider", "In order to choose from provider list\r\nAs an employer\r\nI want to be able to searc" +
+                    "h all providers for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

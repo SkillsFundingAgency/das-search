@@ -30,7 +30,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             prvdrPage.WaitToLoad();
         }
 
-
         [Given(@"I enter ""(.*)""  in provider search box")]
         public void GivenIEnterInProviderSearchBox(string p0)
         {
