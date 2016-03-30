@@ -30,14 +30,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             prvdrPage.WaitToLoad();
         }
 
-        [Then(@"Fall over")]
-        public void ThenFallOver()
-        {
-            throw new Exception();
-        }
-
-
-
         [Given(@"I enter ""(.*)""  in provider search box")]
         public void GivenIEnterInProviderSearchBox(string p0)
         {

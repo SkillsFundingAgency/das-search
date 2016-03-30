@@ -99,8 +99,6 @@ this.ScenarioSetup(scenarioInfo);
 #line 18
  testRunner.Then("I am on the provider results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
- testRunner.And("Fall over", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
  testRunner.And("I should see all providers in result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
