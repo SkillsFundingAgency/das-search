@@ -95,17 +95,17 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search By title")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("actuarial technician", null)]
-        [NUnit.Framework.TestCaseAttribute("financial adviser", null)]
-        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("car mechanic", null)]
-        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", null)]
-        [NUnit.Framework.TestCaseAttribute("manager", null)]
-        [NUnit.Framework.TestCaseAttribute("legal services", null)]
-        [NUnit.Framework.TestCaseAttribute("designer", null)]
-        [NUnit.Framework.TestCaseAttribute("dental nurse", null)]
-        [NUnit.Framework.TestCaseAttribute("electrician", null)]
-        public virtual void SearchByTitle(string title, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("actuarial technician", "Actuarial Technician", null)]
+        [NUnit.Framework.TestCaseAttribute("financial adviser", "Financial Services Customer Adviser", null)]
+        [NUnit.Framework.TestCaseAttribute("software engineer", "Aerospace Software Development Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("car mechanic", "Motor Vehicle Service and Maintenance Technician [light vehicle]", null)]
+        [NUnit.Framework.TestCaseAttribute("manufacturing engineer", "Aerospace Engineer", null)]
+        [NUnit.Framework.TestCaseAttribute("manager", "Senior Housing Property Management", null)]
+        [NUnit.Framework.TestCaseAttribute("legal services", "Legal Services: Criminal Prosecution", null)]
+        [NUnit.Framework.TestCaseAttribute("designer", "Design: Design", null)]
+        [NUnit.Framework.TestCaseAttribute("dental nurse", "Dental Nurse", null)]
+        [NUnit.Framework.TestCaseAttribute("electrician", "Installation Electrician/Maintenance Electrician", null)]
+        public virtual void SearchByTitle(string title, string expected, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -123,7 +123,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 22
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
- testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", expected), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -82,6 +82,7 @@
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
+               // Console.Write( subelements[i].Text);
                 if (subelements[i].Text == match)
                 {
                     Console.Write("Found " + subelements[i].Text);
