@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Das.Web.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.Das.Web.UnitTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Sfa.Eds.Das.Web.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Sfa.Eds.Das.Web.UnitTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.4.42449, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -141,7 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Sfa.Eds.Das.Web.Tests.ruleset" />
+    <None Include="Sfa.Eds.Das.Web.UnitTests.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
