@@ -24,7 +24,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         private By postCodeTextBox = By.Id("postcode");
 
-        private By searchButton = By.Id("submit-keywords");
+        private By searchButton = By.Id("submit-postcode");
 
         public void WaitToLoad()
         {
