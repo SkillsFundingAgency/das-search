@@ -68,12 +68,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint7
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Framework by keyword")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Agriculture", null)]
-        [NUnit.Framework.TestCaseAttribute("Animal Technology", null)]
-        [NUnit.Framework.TestCaseAttribute("Signmaker/Technician", null)]
-        [NUnit.Framework.TestCaseAttribute("Signmaker/Installer", null)]
-        [NUnit.Framework.TestCaseAttribute("Beauty Therapy General", null)]
-        public virtual void SearchFrameworkByKeyword(string title, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Agriculture", "Agriculture", null)]
+        [NUnit.Framework.TestCaseAttribute("Animal Technology", "Animal Technology", null)]
+        [NUnit.Framework.TestCaseAttribute("Signmaker/Technician", "Signmaking: Signmaker/Technician", null)]
+        [NUnit.Framework.TestCaseAttribute("Signmaker/Installer", "Signmaking: Signmaker/Installer", null)]
+        [NUnit.Framework.TestCaseAttribute("Beauty Therapy General", "Beauty Therapy: Beauty Therapy General", null)]
+        public virtual void SearchFrameworkByKeyword(string title, string expected, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -91,7 +91,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 13
- testRunner.Then(string.Format("I should see matching \'{0}\' frameworks on result page", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should see matching \'{0}\' frameworks on result page", expected), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

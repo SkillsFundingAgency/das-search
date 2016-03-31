@@ -8,9 +8,9 @@ Scenario Outline: View typical lengh info on search result page.
     Given I am on Search landing page
 	And I enter keyword '<title>' in search box
 	When I click on search button
-	Then I should see matching '<title>' standards on result page
+	Then I should see matching '<expected>' standards on result page
 	And I should see typical length on result page.
 	Examples: 
-	| title                |
-	| actuarial technician |
+	| title                | expected             |
+	| actuarial technician | Actuarial Technician |
 	

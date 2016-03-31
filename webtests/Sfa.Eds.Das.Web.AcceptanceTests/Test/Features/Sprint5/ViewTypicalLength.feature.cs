@@ -68,8 +68,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint5
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("View typical lengh info on search result page.")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("actuarial technician", null)]
-        public virtual void ViewTypicalLenghInfoOnSearchResultPage_(string title, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("actuarial technician", "Actuarial Technician", null)]
+        public virtual void ViewTypicalLenghInfoOnSearchResultPage_(string title, string expected, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -87,7 +87,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 10
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
- testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", expected), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 12
  testRunner.And("I should see typical length on result page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

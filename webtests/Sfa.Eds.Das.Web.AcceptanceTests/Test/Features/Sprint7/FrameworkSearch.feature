@@ -10,14 +10,14 @@ Scenario Outline: Search Framework by keyword
 	Given I am on Search landing page
 	And I enter framework '<Title>' in search box
 	When I click on search button
-	Then I should see matching '<Title>' frameworks on result page
+	Then I should see matching '<Expected>' frameworks on result page
 Examples:
-| Title                |
-| Agriculture          |
-| Animal Technology    |
-| Signmaker/Technician |
-| Signmaker/Installer   |
-| Beauty Therapy General |
+| Title                  | Expected                               |
+| Agriculture            | Agriculture                            |
+| Animal Technology      | Animal Technology                      |
+| Signmaker/Technician   | Signmaking: Signmaker/Technician       |
+| Signmaker/Installer    | Signmaking: Signmaker/Installer        |
+| Beauty Therapy General | Beauty Therapy: Beauty Therapy General |
 
 
 @regression
