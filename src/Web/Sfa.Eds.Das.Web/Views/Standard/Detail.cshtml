@@ -48,7 +48,7 @@
                                 <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
-                            <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
+                            <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
                         </form>
 
                     </aside>
@@ -65,13 +65,13 @@
                 </h2>
             </header>
             <dl class="data-list">
-                @GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml)
+                @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRoleHtml)
                 @GetStandardLevel(@Model.NotionalEndLevel.ToString())
-                @GetStandardProperty("Typical length", @Model.TypicalLengthMessage)
-                @GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml)
-                @GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml)
-                @GetStandardProperty("Qualifications", Model.QualificationsHtml)
-                @GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true)
+                @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
+                @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirementsHtml)
+                @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearnHtml)
+                @GetStandardProperty("Qualifications", "qualifications", Model.QualificationsHtml)
+                @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistrationHtml, true)
             </dl>
             @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
             {
@@ -134,17 +134,17 @@
                 break;
 
         }
-            <dd>@item (equivalent to @equivalence)</dd>
+            <dd id="level">@item (equivalent to @equivalence)</dd>
     }
 }
 
-@helper GetStandardProperty(string title, string item, bool hideIfEmpty = false)
+@helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
 
         <dt>@title</dt>
-        <dd>@Html.Raw(item)</dd>
+        <dd id="@id">@Html.Raw(item)</dd>
 
     }
 }

@@ -38,7 +38,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> SearchResults(ProviderSearchCriteria criteria)
         {
-            if (string.IsNullOrEmpty(criteria?.PostCode))
+			if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 return RedirectToAction("Detail", "Standard", new { id = criteria.StandardId, HasError = true });
             }

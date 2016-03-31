@@ -24,7 +24,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         private By postCodeTextBox = By.Id("postcode");
 
-        private By searchButton = By.Id("submit-keywords");
+        private By searchButton = By.Id("submit-postcode");
 
         public void WaitToLoad()
         {
@@ -52,20 +52,24 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
                     break;
 
                 case "Typical length":
-                    Assert.True(isDisplayed(standardDetailIntrotext));
+                    Assert.True(isDisplayed(standardDetaillength));
                     break;
                 case "What apprentices will learn":
-                    Assert.True(isDisplayed(standardDetailIntrotext));
+                    Assert.True(isDisplayed(standardDetailApplearn));
                     break;
                 case "Entry requirements":
-                    Assert.True(isDisplayed(standardDetailIntrotext));
+                    Assert.True(isDisplayed(standardDetailEntryReq));
                     break;
                 case "Qualifications":
-                    Assert.True(isDisplayed(standardDetailIntrotext));
+                    Assert.True(isDisplayed(standardDetailQualification));
+                    break;
+
+                case "Overview of Role":
+                    Assert.True(isDisplayed(standardDetailOverviewRole));
                     break;
 
                 case "Professional registration":
-                    Assert.True(isDisplayed(standardDetailIntrotext));
+                    Assert.True(isDisplayed(standardDetailProfReg));
                     break;
 
                 default:

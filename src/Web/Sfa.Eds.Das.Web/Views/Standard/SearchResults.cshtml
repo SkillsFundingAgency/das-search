@@ -6,7 +6,7 @@
 
 <main id="content" role="main">
     @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
-    <div id="results" class="grid-row">
+    <div id="standard-results" class="grid-row">
 
         <div class="column-two-thirds">
 
@@ -38,8 +38,8 @@
                             </h2>
                         </header>
                             <dl class="result-data-list">
-                                @GetStandardDetailItem("Level", item.Level)
-                                @GetStandardDetailItem("Typical length:", item.TypicalLengthMessage)
+                                @GetStandardDetailItem("Level", "level", item.Level)
+                                @GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage)
                             </dl>
                     </article>
                 }
@@ -71,11 +71,11 @@
     </div>
 </main>
 
-@helper GetStandardDetailItem(string title, string item, string unit = "")
+@helper GetStandardDetailItem(string title, string id, string item, string unit = "")
 {
     if (!string.IsNullOrEmpty(item))
     {
             <dt>@title</dt>
-            <dd>@item @unit</dd>
+            <dd class="@id">@item @unit</dd>
     }
 }

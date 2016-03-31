@@ -32,20 +32,17 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.Id("submit-keywords");
 
         // Search Results Page
-        private By resultsContainer = By.Id("results");
-        private By searchResultItem = By.CssSelector("#results article.result");
+        private By resultsContainer = By.Id("standard-results");
+        private By searchResultItem = By.CssSelector("#standard-results article.result");
         private By itemLink = By.CssSelector(".result-title > a");
 
-        public String title = "Google";
-        By searchresult = By.XPath(".//*[@id='results']/div[1]/p");
-        By searchkeywordresult = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
-        By firstStandardinresult = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
+        By searchresult = By.XPath(".//*[@id='standard-results']/div[1]/p");
+        By searchkeywordresult = By.XPath(".//*[@id='standard-results']/div[1]/article/header/h2/a");
+        By firstStandardinresult = By.XPath(".//*[@id='standard-results']/div[1]/article[1]/header/h2/a");
         By searchResultcount = By.CssSelector(".column-two-thirds>div>p>b");
-        By typicallength = By.XPath(".//*[@id='results']/div[1]/article/dl/dd[2]");
+        By typicallength = By.XPath(".//*[@id='standard-results']/div[1]/article/dl/dd[2]");
 
-        By selectStandard = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
-        By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
-        By Invalidsearchmessage = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
+        By Invalidsearchmessage = By.XPath(".//*[@id='standard-results']/div[1]/div[2]/p");
 
         public void Navigate()
         {
@@ -72,7 +69,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void OpenStandarDetails(String standard)
         {
             Open(standard);
-            Sleep(3000);
+           // Sleep(3000);
         }
 
         public void SearchKeyword(String keyword)
@@ -81,27 +78,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         }
 
- 
-        public void ValidateTitle()
-        {
-            Sleep(2000);
-            base.VerifyTitle(title);
-        }
-
         public void clickSearchBox()
         {
            click(searchButton);
         }
-
-        public void clickProviderSearch()
-        {
-            click(searchProviderbutton);
-            Sleep(3000);
-        }
-
-        
-
-
+     
         public void chooseStandard()
         {
             var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
@@ -115,14 +96,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyresultsPages()
         {
 
-            Sleep(4000);
+           // Sleep(4000);
             Assert.True(isDisplayed(searchresult));
         }
        
         public void verifyStandardFoundinResultPage(String keyword)
         {
             
-            Sleep(4000);
+           // Sleep(4000);
             //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
             verifyTextMessage(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
 
@@ -131,13 +112,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
-            Sleep(4000);
+           // Sleep(4000);
              Assert.True(isElementPresent(searchkeywordresult, expected_result));
         }
 
         public void verifyStandardinTopofList(String keyword)
         {
-            Sleep(4000);
+            //Sleep(4000);
             Assert.True(isElementPresent(firstStandardinresult, keyword));
         }
 

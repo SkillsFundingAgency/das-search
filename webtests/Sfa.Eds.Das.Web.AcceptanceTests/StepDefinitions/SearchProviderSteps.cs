@@ -30,7 +30,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             prvdrPage.WaitToLoad();
         }
 
-
         [Given(@"I enter ""(.*)""  in provider search box")]
         public void GivenIEnterInProviderSearchBox(string p0)
         {
@@ -42,12 +41,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         public void WhenIChooseAnyOfTheStandardFromSearchResultPage()
         {
             srchPage.chooseStandard();
-        }
-        
-        [When(@"I click on search under provider search section")]
-        public void WhenIClickOnSearchUnderProviderSearchSection()
-        {
-            srchPage.clickProviderSearch(); 
         }
         
         [Then(@"I should all providers in result page")]

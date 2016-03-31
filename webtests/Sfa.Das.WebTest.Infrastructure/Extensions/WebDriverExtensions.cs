@@ -7,6 +7,7 @@
 
     public static class WebDriverExtensions
     {
+        [Obsolete("Unless you're waiting on a javascript render you should just wait for the page to load")]
         public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds)
         {
             if (timeoutInSeconds > 0)
@@ -22,7 +23,7 @@
             if (timeoutInSeconds > 0)
             {
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                wait.Until(drv => drv.FindElement(by));
+                wait.Until(ExpectedConditions.ElementIsVisible(by));
             }
         }
 

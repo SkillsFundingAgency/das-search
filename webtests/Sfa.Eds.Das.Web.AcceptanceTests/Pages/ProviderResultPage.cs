@@ -20,21 +20,19 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         /// </summary>
         SearchPage srchPage;
 
-        By selectStaandard = By.XPath(".//*[@id='results']/div[1]/ol/li[1]/div/h2/a");
-        By searchProviderbutton = By.XPath(".//*[@id='submit-keywords']");
-        By providerlist = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
-        By resultItems = By.CssSelector("#results .result");
-        By providersearchbox = By.Id("postcode");
-        By providerlist1 = By.XPath(".//*[@id='results']/div[1]/article/header/h2/a");
-        By selectprovider = By.XPath(".//*[@id='results']/div[1]/article[1]/header/h2/a");
+        By providerlist = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
+        By providerlist1 = By.XPath(".//*[@id='provider-results']/div[1]/article/header/h2/a");
+        By selectprovider = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/header/h2/a");
         By postCodeValidation = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/div/label/div/p");
-        By SearchProvidermsg = By.XPath(".//*[@id='results']/div[1]/div[2]/p");
-        By providerwebsite = By.XPath(".//*[@id='results']/div[1]/article[1]/dl/dt[2]");
-        By providereSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[3]");
-        By providerlSatisfaction = By.XPath(".//*[@id='results']/div[1]/article[8]/dl/dt[4]");
-        By providerLocation = By.XPath(".//*[@id='results']/div[1]/article[3]/dl/dd[2]");
+        By SearchProvidermsg = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
+        By providerwebsite = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/dl/dt[2]");
+        By providereSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[3]");
+        By providerlSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[4]");
+        By providerLocation = By.XPath(".//*[@id='provider-results']/div[1]/article[3]/dl/dd[2]");
 
-        private By resultsContainer = By.Id("results");
+        By resultItems = By.CssSelector("#provider-results .result");
+        By providersearchbox = By.Id("postcode");
+        private By resultsContainer = By.Id("provider-results");
 
         public void WaitToLoad()
         {
@@ -65,14 +63,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
             }
 
-            Sleep(4000);
+            //Sleep(4000); added conditional wait and taken out this hard sleep. (to reduce the test exuection time)
             Assert.True(isDisplayed(providerlist));
         }
 
         public void chooseProvider()
         {
             click(selectprovider);
-            Sleep(3000);
+            //Sleep(3000);
         }
 
         public void enterlocation(String location)
