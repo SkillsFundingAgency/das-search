@@ -274,6 +274,8 @@ WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5622), 
 , 5629), false)
 );
 
+WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
+
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                    ");
