@@ -10,6 +10,7 @@
         private By resultsContainer = By.Id("standard-results");
         private By searchResultItem = By.CssSelector("#standard-results article.result");
         private By itemLink = By.CssSelector(".result-title > a");
+        By searchkeywordresult = By.XPath(".//*[@id='standard-results']/div[1]/article/header/h2/a");
 
 
         public void WaitForLoad()
@@ -21,6 +22,15 @@
         {
             var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
             firstResultLink.Click();
+
+             }
+
+        public void searchChooseStandard(string keyword)
+        {
+            searchNSelect(searchkeywordresult, keyword);
         }
+
+
+
     }
 }

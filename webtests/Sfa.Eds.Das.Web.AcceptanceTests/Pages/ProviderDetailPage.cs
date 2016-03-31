@@ -14,14 +14,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
     {
         By providerDetailName = By.XPath(".//*[@id='content']/div/div[1]/div/h1");
         By providerDetailStandardtitle = By.XPath(".//*[@id='content']/section/header/h2");
-        By providerDetailLsatisfaction = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/h3[1]");
-        By providerDetailEsatisfaction = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/h3[2]");
-        By websiteCoursepage = By.XPath(".//*[@id='content']/section/dl/dd[3]");
-        By websitecontactpage = By.XPath(".//*[@id='content']/section/dl/dd[4]");
-        By trainingStructure = By.XPath(".//*[@id='content']/section/dl/dt[5]");
-        By trainingLocation = By.XPath(".//*[@id='content']/section/dl/dt[6]");
-        By standardDetailProfReg = By.XPath(".//*[@id='content']/section/dl/dd[7]/p");
-        By standardDetailOverviewRole = By.XPath(".//*[@id='content']/section/dl/dd[1]/p");
+        By providerDetailLsatisfaction = By.CssSelector("#learner-satisfaction");
+        By providerDetailEsatisfaction = By.CssSelector("#employer-satisfaction");
+        By websiteCoursepage = By.Id("course-link");
+        By websitecontactpage = By.Id("contact-link");
+        By trainingStructure = By.Id("delivery-modes");
+        By trainingLocation = By.Id("training-location");
+        
 
         SearchPage srchPage;
 

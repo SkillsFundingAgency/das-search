@@ -92,6 +92,22 @@
             return false;
         }
 
+        public void  searchNSelect(By locator, string match)
+        {
+            var subelements = FindElements(locator);
+            for (var i = 0; i < subelements.Count; i++)
+            {
+                // Console.Write( subelements[i].Text);
+                if (subelements[i].Text == match)
+                {
+                    subelements[i].Click();
+                    break;
+                }
+            }
+           
+        }
+
+
         public void WaitFor(By locator)
         {
             ValidateSelector(locator);

@@ -8,10 +8,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
     public class ViewStandardDetailsSteps
     {
         StandardDetailsPage standardDetailsPage;
+        SearchResultsPage srchresultPage;
+
 
         public ViewStandardDetailsSteps()
         {
             standardDetailsPage = new StandardDetailsPage();
+            srchresultPage = new SearchResultsPage();
         }
 
         [Then(@"I am on a Standard details page")]
@@ -43,6 +46,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         {
             standardDetailsPage.ClickButton();
         }
+
+        [When(@"I choose '(.*)' from search result page")]
+        public void WhenIChooseFromSearchResultPage(string p0)
+        {
+            srchresultPage.searchChooseStandard(p0);
+        }
+
 
         [When(@"I enter '(.*)' in provider search box")]
         [Given(@"I enter ""(.*)""  in provider search box")]
