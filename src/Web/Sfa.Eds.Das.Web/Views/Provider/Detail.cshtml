@@ -17,7 +17,7 @@
                 <h1 class="heading-xlarge">
                     @Model.Name
                 </h1>
-                <p>@Model.ProviderMarketingInfo</p>
+                <p id="marketing">@Model.ProviderMarketingInfo</p>
 
             </div>
         </div>
@@ -31,12 +31,12 @@
                         <p>
                             <b>Learner satisfaction:</b>
                             <br />
-                            <span class="heading-large">@Model.LearnerSatisfaction%</span>
+                            <span id="learner-satisfaction" class="heading-large">@Model.LearnerSatisfaction%</span>
                         </p>
                         <p>
                             <b>Employer satisfaction:</b>
                             <br/>
-                            <span class="heading-large">@Model.EmployerSatisfaction%</span>
+                            <span id="employer-satisfaction" class="heading-large">@Model.EmployerSatisfaction%</span>
                         </p>
                     </aside>
                 </div>
@@ -51,10 +51,10 @@
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", @Model.Apprenticeship.ApprenticeshipInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", @Model.ContactInformation.ContactUsUrl)
-            @GetStandardPropertyHtml("Phone", Model.ContactInformation.Phone)
-            @GetStandardPropertyHtml("Email", Model.ContactInformation.Email)
+            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl)
+            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", @Model.ContactInformation.ContactUsUrl)
+            @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
+            @GetStandardPropertyHtml("Email", "email", Model.ContactInformation.Email)
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>
@@ -64,36 +64,36 @@
 
 @helper ShowTrainingLocation(string title)
 {
-if (@Model != null)
-{
-    if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+    if (@Model != null)
     {
-            <dt>@title</dt>
-                <dd>Training will take place at your location</dd>
+        <dt>@title</dt>
+
+        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+        {
+                <dd id="training-location">Training will take place at your location</dd>
+        }
+        else
+        {
+                <dd id="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+        }
     }
-    else
-    {
-            <dt>@title</dt>
-                <dd>@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
-    }
-}
 }
 
-@helper GetStandardPropertyHtml(string title, string item, bool hideIfEmpty = false)
+@helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
         <dt>@title</dt>
-            <dd>@Html.Raw(item)</dd>
+<dd id="@id">@Html.Raw(item)</dd>
 }
 }
 
-@helper GetStandardPropertyAsLinkHtml(string title, string url, bool hideIfEmpty = false)
+@helper GetStandardPropertyAsLinkHtml(string title, string id, string url, bool hideIfEmpty = false)
 {
 if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
 {
         <dt>@title</dt>
-            <dd><a href="@url" target="_blank">@url</a></dd>
+        <dd id="@id"><a href="@url" target="_blank">@url</a></dd>
 }
 }
 
@@ -102,26 +102,26 @@ if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
 if (items != null)
 {
         <dt>@title</dt>
-            <dd>
-                <ul>
-                    @foreach (var item in items)
+        <dd id="delivery-modes">
+            <ul>
+                @foreach (var item in items)
+                {
+                    switch (item)
                     {
-                        switch (item)
-                        {
-                            case "100PercentEmployer":
-                                <li>@Html.Raw("at your location")</li>
-                                break;
-                            case "BlockRelease":
-                                <li>@Html.Raw("block release")</li>
-                                break;
-                            case "DayRelease":
-                                <li>@Html.Raw("day release")</li>
-                                break;
-                            default:
-                                break;
-                        }
+                        case "100PercentEmployer":
+                            <li class="100-percent-employer">@Html.Raw("at your location")</li>
+                            break;
+                        case "BlockRelease":
+                            <li class="block-release">@Html.Raw("block release")</li>
+                            break;
+                        case "DayRelease":
+                            <li class="day-release">@Html.Raw("day release")</li>
+                            break;
+                        default:
+                            break;
                     }
-                </ul>
-            </dd>
+                }
+            </ul>
+        </dd>
 }
 }
