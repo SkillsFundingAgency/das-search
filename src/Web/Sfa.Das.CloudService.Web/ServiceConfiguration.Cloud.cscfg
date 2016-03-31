@@ -17,6 +17,9 @@
           <Subnet name="#{azure.vnet.subnet.name}" />
         </Subnets>
       </InstanceAddress>
+      <ReservedIPs>
+        <ReservedIP name="#{AzureCloudService.ReservedIpName}"/>
+      </ReservedIPs>
     </AddressAssignments>
   </NetworkConfiguration>
 </ServiceConfiguration>
