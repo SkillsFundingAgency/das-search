@@ -254,6 +254,7 @@
     <Compile Include="ViewModels\ProviderSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
+    <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
     <Compile Include="Views\Provider\Detail.generated.cs">
       <AutoGen>True</AutoGen>
@@ -274,6 +275,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Standard\FrameworkDetail.generated.cs">
+      <DependentUpon>FrameworkDetail.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Standard\Detail.generated.cs">
       <AutoGen>True</AutoGen>
@@ -381,7 +387,9 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -429,6 +437,10 @@
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\razorgenerator.directives" />
+    <Content Include="Views\Standard\FrameworkDetail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FrameworkDetail.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -107,6 +107,7 @@
     <Compile Include="Domain\Model\Location.cs" />
     <Compile Include="Domain\Model\Provider.cs" />
     <Compile Include="Domain\Model\ApprenticeshipBasic.cs" />
+    <Compile Include="Domain\Model\Framework.cs" />
     <Compile Include="Domain\Model\TypicalLength.cs" />
     <Compile Include="Domain\Services\IApprenticeshipProviderRepository.cs" />
     <Compile Include="Domain\Services\IStandardRepository.cs" />

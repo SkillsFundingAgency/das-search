@@ -5,5 +5,7 @@
     public interface IStandardRepository
     {
         Standard GetById(int id);
+
+        Framework GetFrameworkById(int id);
     }
 }

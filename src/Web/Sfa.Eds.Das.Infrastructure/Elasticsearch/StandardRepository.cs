@@ -49,21 +49,61 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             if (document != null)
             {
                 return new Standard
-                           {
-                               StandardId = document.StandardId,
-                               Title = document.Title,
-                               StandardPdf = document.StandardPdf,
-                               AssessmentPlanPdf = document.AssessmentPlanPdf,
-                               NotionalEndLevel = document.NotionalEndLevel,
-                               JobRoles = document.JobRoles,
-                               Keywords = document.Keywords,
-                               TypicalLength = document.TypicalLength,
-                               IntroductoryText = document.IntroductoryText,
-                               EntryRequirements = document.EntryRequirements,
-                               WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
-                               Qualifications = document.Qualifications,
-                               ProfessionalRegistration = document.ProfessionalRegistration,
-                               OverviewOfRole = document.OverviewOfRole
+                {
+                    StandardId = document.StandardId,
+                    Title = document.Title,
+                    StandardPdf = document.StandardPdf,
+                    AssessmentPlanPdf = document.AssessmentPlanPdf,
+                    NotionalEndLevel = document.NotionalEndLevel,
+                    JobRoles = document.JobRoles,
+                    Keywords = document.Keywords,
+                    TypicalLength = document.TypicalLength,
+                    IntroductoryText = document.IntroductoryText,
+                    EntryRequirements = document.EntryRequirements,
+                    WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
+                    Qualifications = document.Qualifications,
+                    ProfessionalRegistration = document.ProfessionalRegistration,
+                    OverviewOfRole = document.OverviewOfRole
+                };
+            }
+
+            return null;
+        }
+
+        public Framework GetFrameworkById(int id)
+        {
+            var client = this._elasticsearchClientFactory.Create();
+            var results =
+                client.Search<FrameworkSearchResultsItem>(s => s
+                    .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                    .Types("frameworkdocument")
+                    .From(0)
+                    .Size(1)
+                    .Query(q =>
+                        q.QueryString(qs => qs
+                        .OnFields(e => e.FrameworkId)
+                            .Query(id.ToString()))));
+
+            if (results.ConnectionStatus.HttpStatusCode != 200)
+            {
+                _applicationLogger.Error($"Trying to get provider with id {id}");
+
+                throw new ApplicationException($"Failed query provider with id {id}");
+            }
+
+            var document = results.Documents.Any() ? results.Documents.First() : null;
+
+            if (document != null)
+            {
+                return new Framework
+                {
+                    Title = document.Title,
+                    Level = document.Level,
+                    FrameworkCode = document.FrameworkCode,
+                    FrameworkId = document.FrameworkId,
+                    FrameworkName = document.FrameworkName,
+                    PathwayCode = document.PathwayCode,
+                    PathwayName = document.PathwayName
                 };
             }
 

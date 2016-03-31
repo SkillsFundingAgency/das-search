@@ -70,10 +70,24 @@
             return View(viewModel);
         }
 
-        public ActionResult FrameworkDetail(int id)
+        public ActionResult FrameworkDetail(int id, string hasError)
         {
-            var resultUrl = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
-            return Redirect(resultUrl.Url);
+            var frameworkResult = _standardRepository.GetFrameworkById(id);
+
+            if (frameworkResult == null)
+            {
+                var message = $"Cannot find framework: {id}";
+                _logger.Warn($"404 - {message}");
+
+                return new HttpNotFoundResult(message);
+            }
+
+            var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
+
+            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
+
+            return View(viewModel);
         }
     }
 }
