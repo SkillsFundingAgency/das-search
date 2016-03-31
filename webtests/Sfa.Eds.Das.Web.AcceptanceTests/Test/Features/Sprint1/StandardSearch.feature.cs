@@ -257,7 +257,6 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
         [NUnit.Framework.TestCaseAttribute("Software Developer", null)]
-        [NUnit.Framework.TestCaseAttribute("Aerospace Engineer", null)]
         public virtual void SearchResultPageToHaveBestMatch(string jOBROLE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
