@@ -43,6 +43,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         }
 
 
+
         public void verifyBespokeContentfields(String metadata)
         {
             switch (metadata)
@@ -78,9 +79,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
             }
 
-        }          
+        }
+
+        public void ClickButton()
+        {
+            click(searchButton);
+        }
+
+        public void enterlocation(String location)
+        {
+            type(location, postCodeTextBox);
 
 
-
+        }
     }
 }

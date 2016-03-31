@@ -14,25 +14,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         {
             srchPage = new SearchPage();
             prvdrPage = new ProviderResultPage();
-
         }
         [Given(@"I am on Standard '(.*)' detail page")]
         public void GivenIAmOnStandardDetailPage(string p0)
         {
-            srchPage = new SearchPage();
             srchPage.launchLandingPage();
             srchPage.OpenStandarDetails(p0);
             
-        }
-
-
-        
-        
-        [Given(@"I enter '(.*)' in provider search box")]
-        public void GivenIEnterInProviderSearchBox(string p0)
-        {
-            prvdrPage = new ProviderResultPage();
-            prvdrPage.enterlocation(p0);
         }
         
         [Given(@"I have entered '(.*)' with provider radius (.*) miles")]
@@ -65,19 +53,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             ScenarioContext.Current.Pending();
         }
 
-        [When(@"I enter '(.*)' in provider search box")]
-        public void WhenIEnterInProviderSearchBox(string p0)
-        {
-            prvdrPage.enterlocation(p0);
-        }
-
-
-        [When(@"I search Search for provider")]
-        public void WhenISearchSearchForProvider()
-        {
-            srchPage.clickSearchBox();
-        }
-        
+       
         [Then(@"I should list of providers on provider search result page\.")]
         public void ThenIShouldListOfProvidersOnProviderSearchResultPage_()
         {

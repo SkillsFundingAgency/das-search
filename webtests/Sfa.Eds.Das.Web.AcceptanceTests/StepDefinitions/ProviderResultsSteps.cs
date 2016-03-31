@@ -12,59 +12,44 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
     /// </summary>
 
     [Binding]
-    public class SearchProviderSteps
+    public class ProviderResultsSteps
     {
+        ProviderResultPage providerResultPage;
 
-        SearchPage srchPage;
-        ProviderResultPage prvdrPage;
-
-        public SearchProviderSteps()
+        public ProviderResultsSteps()
         {
-            srchPage = new SearchPage();
-            prvdrPage = new ProviderResultPage();
+            providerResultPage = new ProviderResultPage();
         }
 
         [Then(@"I am on the provider results page")]
         public void ThenIAmOnTheProviderResultsPage()
         {
-            prvdrPage.WaitToLoad();
+            providerResultPage.WaitToLoad();
         }
 
-        [Given(@"I enter ""(.*)""  in provider search box")]
-        public void GivenIEnterInProviderSearchBox(string p0)
-        {
-            prvdrPage.enterlocation(p0);
-        }
-
-
-        [When(@"I choose any of the standard from search result page")]
-        public void WhenIChooseAnyOfTheStandardFromSearchResultPage()
-        {
-            srchPage.chooseStandard();
-        }
         
         [Then(@"I should all providers in result page")]
         public void ThenIShouldAllProvidersInResultPage()
         {
-            prvdrPage.verifyProviderResultsPage();
+            providerResultPage.verifyProviderResultsPage();
         }
 
         [Then(@"I should see all providers in result page")]
         public void ThenIShouldSeeAllProvidersInResultPage()
         {
-            prvdrPage.verifyProviderResultsPage();
+            providerResultPage.verifyProviderResultsPage();
         }
 
         [Then(@"under each provider I should see provider ""(.*)""")]
         public void ThenUnderEachProviderIShouldSeeProvider(string p0)
         {
-            prvdrPage.verifyProvidersearchResultsInfo(p0);
+            providerResultPage.verifyProvidersearchResultsInfo(p0);
         }
 
         [Then(@"I should see provider ""(.*)""")]
         public void ThenIShouldSeeProvider(string p0)
         {
-            prvdrPage.verifyProvidersearchResultsInfo(p0);
+            providerResultPage.verifyProvidersearchResultsInfo(p0);
         }
     }
 }

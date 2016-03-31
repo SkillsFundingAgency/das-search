@@ -32,10 +32,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By searchButton = By.Id("submit-keywords");
 
         // Search Results Page
-        private By resultsContainer = By.Id("standard-results");
-        private By searchResultItem = By.CssSelector("#standard-results article.result");
-        private By itemLink = By.CssSelector(".result-title > a");
-
         By searchresult = By.XPath(".//*[@id='standard-results']/div[1]/p");
         By searchkeywordresult = By.XPath(".//*[@id='standard-results']/div[1]/article/header/h2/a");
         By firstStandardinresult = By.XPath(".//*[@id='standard-results']/div[1]/article[1]/header/h2/a");
@@ -53,11 +49,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void WaitForSearchPage()
         {
             WaitFor(searchButton);
-        }
-
-        public void WaitForResultsPage()
-        {
-            WaitFor(resultsContainer);
         }
 
         public void launchLandingPage()
@@ -82,12 +73,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
            click(searchButton);
         }
-     
-        public void chooseStandard()
-        {
-            var firstResultLink = FindElements(searchResultItem).First().FindElement(itemLink);
-            firstResultLink.Click();
-        }
+    
 
         
 

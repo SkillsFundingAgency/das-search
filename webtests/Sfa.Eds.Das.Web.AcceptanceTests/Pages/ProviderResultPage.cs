@@ -31,7 +31,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerLocation = By.XPath(".//*[@id='provider-results']/div[1]/article[3]/dl/dd[2]");
 
         By resultItems = By.CssSelector("#provider-results .result");
-        By providersearchbox = By.Id("postcode");
         private By resultsContainer = By.Id("provider-results");
 
         public void WaitToLoad()
@@ -73,13 +72,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             //Sleep(3000);
         }
 
-        public void enterlocation(String location)
-        {
-            type(location, providersearchbox);
-           
-
-        }
-
 
         public void validateErrorMessage_postcodefield(String errmsg)
         {
@@ -105,8 +97,5 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             Assert.True(isElementNotPresent(providerlist1, p0));
         }
-
-
-
     }
 }

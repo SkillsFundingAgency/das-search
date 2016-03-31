@@ -37,12 +37,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             srchPage.WaitForSearchPage();
         }
 
-        [Then(@"I am on the Search results page")]
-        public void ThenIAmOnTheSearchResultsPage()
-        {
-            srchPage.WaitForResultsPage();
-        }
-
 
 
 
