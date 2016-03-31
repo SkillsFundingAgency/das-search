@@ -12,14 +12,7 @@
 
     <!-- Associating a Role to a Specific Subnet by name -->
     <AddressAssignments>
-      <InstanceAddress roleName="Sfa.Eds.Das.Web">
-        <Subnets>
-          <Subnet name="#{azure.vnet.subnet.name}" />
-        </Subnets>
-      </InstanceAddress>
-      <ReservedIPs>
-        <ReservedIP name="#{AzureCloudService.ReservedIpName}"/>
-      </ReservedIPs>
+      <!-- See Transform.ServiceConfiguration.Cloud.config -->
     </AddressAssignments>
   </NetworkConfiguration>
 </ServiceConfiguration>
