@@ -40,10 +40,10 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
 			if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction("Detail", "Standard", new { id = criteria.StandardId, HasError = true });
+                return RedirectToAction("Detail", "Standard", new { id = criteria.StandardId.Value, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
+            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId.Value, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
