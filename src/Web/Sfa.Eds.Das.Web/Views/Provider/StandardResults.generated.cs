@@ -29,23 +29,23 @@ namespace Sfa.Eds.Das.Web.Views.Provider
     using System.Web.WebPages;
     using Sfa.Eds.Das.Web;
     
-    #line 1 "..\..\Views\Provider\SearchResults.cshtml"
+    #line 1 "..\..\Views\Provider\StandardResults.cshtml"
     using Sfa.Eds.Das.Web.Extensions;
     
     #line default
     #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/SearchResults.cshtml")]
-    public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/StandardResults.cshtml")]
+    public partial class StandardResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel>
     {
-        public SearchResults()
+        public StandardResults()
         {
         }
         public override void Execute()
         {
             
-            #line 4 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 4 "..\..\Views\Provider\StandardResults.cshtml"
   
     ViewBag.Title = "Provider Search Results";
 
@@ -63,15 +63,15 @@ WriteLiteral(">\r\n");
 WriteLiteral("    ");
 
             
-            #line 9 "..\..\Views\Provider\SearchResults.cshtml"
-Write(Html.ActionLink("Back to Standard", "Detail", "Standard", new {@id = @Model.StandardId} , new { @class = "link-back" } ));
+            #line 9 "..\..\Views\Provider\StandardResults.cshtml"
+Write(Html.ActionLink("Back to Standard", "Standard", "Apprenticeship", new {@id = @Model.StandardId} , new { @class = "link-back" } ));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n    <div");
 
-WriteLiteral(" id=\"results\"");
+WriteLiteral(" id=\"provider-results\"");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -91,13 +91,13 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
 ">\r\n            <p>\r\n");
 
             
-            #line 22 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 22 "..\..\Views\Provider\StandardResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 22 "..\..\Views\Provider\StandardResults.cshtml"
                   
                     Html.RenderPartial("_SearchResultMessage");
                 
@@ -107,13 +107,13 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
 WriteLiteral("\r\n            </p>\r\n");
 
             
-            #line 26 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 26 "..\..\Views\Provider\StandardResults.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Views\Provider\SearchResults.cshtml"
+            #line 26 "..\..\Views\Provider\StandardResults.cshtml"
               
                 Html.RenderPartial("_ProviderInformation");
             

@@ -38,14 +38,13 @@ namespace Sfa.Eds.Das.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> SearchResults(ProviderSearchCriteria criteria)
+        public async Task<ActionResult> StandardResults(ProviderSearchCriteria criteria)
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 return RedirectToAction("Standard", "Apprenticeship", new { id = criteria.StandardId, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId.Value, criteria.PostCode);
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);

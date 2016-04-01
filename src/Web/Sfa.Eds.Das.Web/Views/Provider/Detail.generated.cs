@@ -175,14 +175,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3256), Tuple.Create("\"", 3264)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3258), Tuple.Create("\"", 3266)
 
 #line 87 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3261), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3263), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3261), false)
+, 3263), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -238,28 +238,28 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3501), Tuple.Create("\"", 3509)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3503), Tuple.Create("\"", 3511)
 
 #line 96 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3506), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3508), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3506), false)
+, 3508), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"pdf-url-link\"");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3548), Tuple.Create("\"", 3559)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3550), Tuple.Create("\"", 3561)
 
 #line 97 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3555), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 3557), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 3555), false)
+, 3557), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -525,7 +525,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 26 "..\..\Views\Provider\Detail.cshtml"
-             using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+             using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
             

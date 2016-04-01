@@ -261,10 +261,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Detail.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Provider\SearchResults.generated.cs">
+    <Compile Include="Views\Provider\StandardResults.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SearchResults.cshtml</DependentUpon>
+      <DependentUpon>StandardResults.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_ProviderInformation.generated.cs">
       <AutoGen>True</AutoGen>
@@ -415,9 +415,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Provider\SearchResults.cshtml">
+    <Content Include="Views\Provider\StandardResults.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>SearchResults.generated.cs</LastGenOutput>
+      <LastGenOutput>StandardResults.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Provider\Detail.cshtml">
       <Generator>RazorGenerator</Generator>

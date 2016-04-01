@@ -227,14 +227,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5573), Tuple.Create("\"", 5581)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5574), Tuple.Create("\"", 5582)
 
 #line 147 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5578), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5579), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5578), false)
+, 5579), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -280,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5758), Tuple.Create("\"", 5772)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5759), Tuple.Create("\"", 5773)
 
 #line 157 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5765), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 5766), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5765), false)
+, 5766), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -433,7 +433,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 32 "..\..\Views\Apprenticeship\Standard.cshtml"
-             using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+             using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
             
@@ -461,15 +461,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1355), Tuple.Create("\"", 1408)
-, Tuple.Create(Tuple.Create("", 1363), Tuple.Create("form-group", 1363), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1357), Tuple.Create("\"", 1410)
+, Tuple.Create(Tuple.Create("", 1365), Tuple.Create("form-group", 1365), true)
             
             #line 39 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1373), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+, Tuple.Create(Tuple.Create(" ", 1375), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1374), false)
+, 1376), false)
 );
 
 WriteLiteral(">\r\n                                <label");
@@ -507,14 +507,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1984), Tuple.Create("\"", 2009)
+WriteAttribute("value", Tuple.Create(" value=\"", 1986), Tuple.Create("\"", 2011)
             
             #line 48 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                            , Tuple.Create(Tuple.Create("", 1992), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                                            , Tuple.Create(Tuple.Create("", 1994), Tuple.Create<System.Object, System.Int32>(Model.StandardId
             
             #line default
             #line hidden
-, 1992), false)
+, 1994), false)
 );
 
 WriteLiteral(">\r\n                                <input");
@@ -588,7 +588,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-           #line 70 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 70 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage));
 
             

@@ -40,7 +40,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
 
             var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object, mockFrameworkRepository.Object);
 
-            var result = await controller.SearchResults(searchCriteria);
+            var result = await controller.StandardResults(searchCriteria);
 
             Assert.That(result, Is.InstanceOf<ViewResult>());
 
@@ -56,7 +56,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
 
             var controller = new ProviderController(null, null, null, null, null, null);
 
-            var result = await controller.SearchResults(searchCriteria);
+            var result = await controller.StandardResults(searchCriteria);
 
             Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
 
