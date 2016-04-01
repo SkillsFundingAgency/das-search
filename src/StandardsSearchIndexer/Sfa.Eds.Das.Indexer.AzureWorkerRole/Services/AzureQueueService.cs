@@ -29,9 +29,11 @@
 
         public IEnumerable<DateTime> GetInsertionTimes(string queuename)
         {
-            _logger.Debug($"ConnectionString: {_appServiceSettings.ConnectionString}, QueueName:{queuename}");
+            _logger.Trace($"ConnectionString: {_appServiceSettings.ConnectionString}, QueueName:{queuename}");
+
             var queue = _cloudQueueService.GetQueueReference(_appServiceSettings.ConnectionString, queuename);
             var cloudQueueMessages = queue.GetMessages(10);
+
             return cloudQueueMessages.OrderByDescending(x => x.InsertionTime).Select(x => x.InsertionTime?.DateTime ?? DateTime.Now);
         }
     }

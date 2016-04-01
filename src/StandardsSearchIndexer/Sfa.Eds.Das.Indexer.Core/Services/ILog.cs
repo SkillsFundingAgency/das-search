@@ -4,6 +4,8 @@
 
     public interface ILog
     {
+        void Trace(object message);
+
         void Debug(object message);
 
         void Debug(object message, Exception exception);

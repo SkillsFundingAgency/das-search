@@ -29,7 +29,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
             _cloudQueueService = cloudQueueService;
             _clearQueue = clearQueue;
             _container = container;
-            this._log = log;
+            _log = log;
         }
 
         public async Task CheckMessage<T>()
@@ -40,8 +40,12 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
             try
             {
                 var queuename = _appServiceSettings.QueueName(typeof(T));
-                var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
 
+#if DEBUG
+                var times = new DateTime[] { DateTime.UtcNow };
+#else
+                var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
+#endif
                 if (times.Any())
                 {
                     var time = times.FirstOrDefault();

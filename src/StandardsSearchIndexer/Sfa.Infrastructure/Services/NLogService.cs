@@ -21,6 +21,11 @@
             _logger = LogManager.GetLogger(loggerType?.ToString() ?? "NullIndexLogger");
         }
 
+        public void Trace(object message)
+        {
+            _logger.Trace(message);
+        }
+
         public void Debug(object message)
         {
             _logger.Debug(message);
