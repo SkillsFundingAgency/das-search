@@ -41,11 +41,8 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
             {
                 var queuename = _appServiceSettings.QueueName(typeof(T));
 
-#if DEBUG
-                var times = new DateTime[] { DateTime.UtcNow };
-#else
                 var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
-#endif
+
                 if (times.Any())
                 {
                     var time = times.FirstOrDefault();
