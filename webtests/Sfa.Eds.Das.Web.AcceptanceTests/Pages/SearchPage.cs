@@ -134,7 +134,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void Open(string standard)
         {
-            driver.Navigate().GoToUrl(baseUrl + "Standard/Detail/" + standard);
+            driver.Navigate().GoToUrl(baseUrl + "Apprenticeship/Standard/" + standard);
 
         }
 
