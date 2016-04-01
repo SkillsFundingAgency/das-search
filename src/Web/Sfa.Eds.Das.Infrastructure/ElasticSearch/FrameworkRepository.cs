@@ -1,4 +1,5 @@
 ﻿using Sfa.Eds.Das.Core.Configuration;
+using Sfa.Eds.Das.Infrastructure.Mapping;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
@@ -15,12 +16,18 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
+        private readonly IFrameworkMapping _frameworkMapping;
 
-        public FrameworkRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
+        public FrameworkRepository(
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ILog applicationLogger,
+            IConfigurationSettings applicationSettings,
+            IFrameworkMapping frameworkMapping)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
+            _frameworkMapping = frameworkMapping;
         }
 
         public Framework GetFrameworkById(int id)
@@ -46,21 +53,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             var document = results.Documents.Any() ? results.Documents.First() : null;
 
-            if (document != null)
-            {
-                return new Framework
-                {
-                    Title = document.Title,
-                    Level = document.Level,
-                    FrameworkCode = document.FrameworkCode,
-                    FrameworkId = document.FrameworkId,
-                    FrameworkName = document.FrameworkName,
-                    PathwayCode = document.PathwayCode,
-                    PathwayName = document.PathwayName
-                };
-            }
-
-            return null;
+            return document != null ? _frameworkMapping.MapToFramework(document) : null;
         }
     }
 }

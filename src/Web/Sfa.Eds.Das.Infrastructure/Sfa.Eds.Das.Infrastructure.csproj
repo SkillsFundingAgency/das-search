@@ -96,7 +96,11 @@
     <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
+    <Compile Include="Mapping\IFrameworkMapping.cs" />
     <Compile Include="Mapping\IProviderMapping.cs" />
+    <Compile Include="Mapping\IStandardMapping.cs" />
+    <Compile Include="Mapping\FrameworkMapping.cs" />
+    <Compile Include="Mapping\StandardMapping.cs" />
     <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="PostCodeIo\PostCodesIOLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
