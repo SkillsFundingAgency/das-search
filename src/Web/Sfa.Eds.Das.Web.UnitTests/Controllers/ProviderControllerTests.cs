@@ -18,7 +18,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
     public class ProviderControllerTests
     {
         private Mock<ILog> mockLogger;
-        private Mock<IStandardRepository> mockStandardRepository;
+        private Mock<IApprenticeshipRepository> mockapprenticeshipRepository;
         private Mock<IMappingService> mockMappingService;
         private Mock<IProviderSearchService> mockProviderSearchService;
         private Mock<IApprenticeshipProviderRepository> mockApprenticeshipProviderRepository;
@@ -30,7 +30,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockMappingService = new Mock<IMappingService>();
             mockProviderSearchService = new Mock<IProviderSearchService>();
             mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
-            mockStandardRepository = new Mock<IStandardRepository>();
+            mockapprenticeshipRepository = new Mock<IApprenticeshipRepository>();
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123, PostCode = "AB3 1SD" };
             var searchResults = new ProviderSearchResults { HasError = false, Hits = new List<StandardProviderSearchResultsItem>() };
             var stubViewModel = new ProviderSearchResultViewModel();
@@ -38,7 +38,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
             mockMappingService.Setup(x => x.Map<ProviderSearchResults, ProviderSearchResultViewModel>(It.IsAny<ProviderSearchResults>())).Returns(stubViewModel);
 
-            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object);
+            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockapprenticeshipRepository.Object);
 
             var result = await controller.SearchResults(searchCriteria);
 

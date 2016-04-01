@@ -33,10 +33,10 @@
         {
             const int testStandardId = 123;
             var mockSearchProvider = CreateMockSearchProvider();
-            var mockStandardRepository = CreateMockStandardRepository();
+            var mockapprenticeshipRepository = CreateMockapprenticeshipRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
+            var service = new ProviderSearchService(mockSearchProvider.Object, mockapprenticeshipRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByPostCode(testStandardId, postcode);
 
@@ -51,12 +51,12 @@
             var testCoordinates = new Coordinate { Lat = 52.1234, Lon = 1.3445 };
             var stubSearchResults = new List<StandardProviderSearchResultsItem> { new StandardProviderSearchResultsItem(), new StandardProviderSearchResultsItem() };
             var mockSearchProvider = CreateMockSearchProvider(stubSearchResults);
-            var mockStandardRepository = CreateMockStandardRepository();
+            var mockapprenticeshipRepository = CreateMockapprenticeshipRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult(testCoordinates));
 
             var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
+            var service = new ProviderSearchService(mockSearchProvider.Object, mockapprenticeshipRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByPostCode(testStandardId, testPostCode);
 
@@ -71,11 +71,11 @@
         {
             const long testTotalResults = 5;
             var mockSearchProvider = CreateMockSearchProvider(null, testTotalResults);
-            var mockStandardRepository = CreateMockStandardRepository();
+            var mockapprenticeshipRepository = CreateMockapprenticeshipRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
             var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
+            var service = new ProviderSearchService(mockSearchProvider.Object, mockapprenticeshipRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByPostCode(123, "AS2 3SS");
 
@@ -87,12 +87,12 @@
         {
             const string testTitle = "Test Title";
             var mockSearchProvider = CreateMockSearchProvider();
-            var mockStandardRepository = new Mock<IStandardRepository>();
-            mockStandardRepository.Setup(x => x.GetById(It.IsAny<int>())).Returns(new Standard { Title = testTitle });
+            var mockapprenticeshipRepository = new Mock<IApprenticeshipRepository>();
+            mockapprenticeshipRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard { Title = testTitle });
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
             var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
+            var service = new ProviderSearchService(mockSearchProvider.Object, mockapprenticeshipRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByPostCode(123, "AS3 4AS");
 
@@ -104,11 +104,11 @@
         {
             var mockSearchProvider = CreateMockSearchProvider();
             mockSearchProvider.Setup(x => x.SearchByLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Throws<SearchException>();
-            var mockStandardRepository = new Mock<IStandardRepository>();
+            var mockapprenticeshipRepository = new Mock<IApprenticeshipRepository>();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
             var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
+            var service = new ProviderSearchService(mockSearchProvider.Object, mockapprenticeshipRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByPostCode(123, "AS3 4AS");
 
@@ -130,11 +130,11 @@
             return CreateMockSearchProvider(null);
         }
 
-        private static Mock<IStandardRepository> CreateMockStandardRepository()
+        private static Mock<IApprenticeshipRepository> CreateMockapprenticeshipRepository()
         {
-            var mockStandardRepository = new Mock<IStandardRepository>();
+            var mockapprenticeshipRepository = new Mock<IApprenticeshipRepository>();
 
-            return mockStandardRepository;
+            return mockapprenticeshipRepository;
         }
 
         private static Mock<ILookupLocations> CreateMockPostCodeLookup()

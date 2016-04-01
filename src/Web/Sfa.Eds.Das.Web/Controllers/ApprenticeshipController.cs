@@ -12,7 +12,7 @@
     using Sfa.Eds.Das.Web.Services;
     using Sfa.Eds.Das.Web.ViewModels;
 
-    public sealed class StandardController : Controller
+    public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
 
@@ -20,16 +20,16 @@
 
         private readonly IStandardSearchService _searchService;
 
-        private readonly IStandardRepository _standardRepository;
+        private readonly IApprenticeshipRepository _apprenticeshipRepository;
 
-        public StandardController(
+        public ApprenticeshipController(
             IStandardSearchService searchService,
-            IStandardRepository standardRepository,
+            IApprenticeshipRepository apprenticeshipRepository,
             ILog logger,
             IMappingService mappingService)
         {
             _searchService = searchService;
-            _standardRepository = standardRepository;
+            _apprenticeshipRepository = apprenticeshipRepository;
             _logger = logger;
             _mappingService = mappingService;
         }
@@ -50,9 +50,9 @@
         }
 
         // GET: Standard
-        public ActionResult Detail(int id, string hasError)
+        public ActionResult StandardDetail(int id, string hasError)
         {
-            var standardResult = _standardRepository.GetById(id);
+            var standardResult = _apprenticeshipRepository.GetStandardById(id);
 
             if (standardResult == null)
             {
@@ -65,14 +65,14 @@
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
+            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
         }
 
         public ActionResult FrameworkDetail(int id, string hasError)
         {
-            var frameworkResult = _standardRepository.GetFrameworkById(id);
+            var frameworkResult = _apprenticeshipRepository.GetFrameworkById(id);
 
             if (frameworkResult == null)
             {
@@ -85,7 +85,7 @@
             var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
+            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
         }

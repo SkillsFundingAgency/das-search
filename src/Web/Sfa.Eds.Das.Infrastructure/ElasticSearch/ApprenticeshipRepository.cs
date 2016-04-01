@@ -10,20 +10,20 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
 
-    public sealed class StandardRepository : IStandardRepository
+    public sealed class ApprenticeshipRepository : IApprenticeshipRepository
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
+        public ApprenticeshipRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
         }
 
-        public Standard GetById(int id)
+        public Standard GetStandardById(int id)
         {
             var client = this._elasticsearchClientFactory.Create();
             var results =

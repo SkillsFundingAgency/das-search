@@ -17,7 +17,7 @@
     using Web.Services;
 
     [TestFixture]
-    public sealed class StandardControllerTest
+    public sealed class ApprenticeshipControllerTest
     {
         [Test]
         public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()
@@ -32,7 +32,7 @@
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultItemViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultItemViewModel());
 
-            StandardController controller = new StandardController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
 
             // Act
             ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -54,7 +54,7 @@
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultViewModel());
 
-            StandardController controller = new StandardController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, mockLogger.Object, mockMappingServices.Object);
 
             // Act
             ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -69,10 +69,10 @@
         [TestCase("false", false, Description = "No error")]
         public void DetailPageWithErrorParameter(string hasErrorParmeter, bool expected)
         {
-            var mockSearchRepository = new Mock<IStandardRepository>();
+            var mockSearchRepository = new Mock<IApprenticeshipRepository>();
 
             var standard = new Standard { Title = "Hello", };
-            mockSearchRepository.Setup(x => x.GetById(It.IsAny<int>())).Returns(standard);
+            mockSearchRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(standard);
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
                 x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
@@ -84,14 +84,14 @@
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
-            StandardController controller = new StandardController(null, mockSearchRepository.Object, null, mockMappingServices.Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockSearchRepository.Object, null, mockMappingServices.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
-            var result = controller.Detail(1, hasErrorParmeter) as ViewResult;
+            var result = controller.StandardDetail(1, hasErrorParmeter) as ViewResult;
 
             Assert.NotNull(result);
             var actual = ((StandardViewModel)result.Model).HasError;

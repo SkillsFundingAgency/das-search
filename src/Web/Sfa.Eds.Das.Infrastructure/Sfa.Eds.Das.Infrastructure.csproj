@@ -92,7 +92,7 @@
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
-    <Compile Include="Elasticsearch\StandardRepository.cs" />
+    <Compile Include="Elasticsearch\ApprenticeshipRepository.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
     <Compile Include="Mapping\IProviderMapping.cs" />

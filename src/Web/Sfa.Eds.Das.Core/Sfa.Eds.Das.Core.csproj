@@ -110,7 +110,7 @@
     <Compile Include="Domain\Model\Framework.cs" />
     <Compile Include="Domain\Model\TypicalLength.cs" />
     <Compile Include="Domain\Services\IApprenticeshipProviderRepository.cs" />
-    <Compile Include="Domain\Services\IStandardRepository.cs" />
+    <Compile Include="Domain\Services\IApprenticeshipRepository.cs" />
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Domain\Model\Coordinate.cs" />
     <Compile Include="Domain\Model\Standard.cs" />

@@ -19,20 +19,20 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly IMappingService _mappingService;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
 
-        private readonly IStandardRepository _standardRepository;
+        private readonly IApprenticeshipRepository _apprenticeshipRepository;
 
         public ProviderController(
             IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
             IApprenticeshipProviderRepository apprenticeshipProviderRepository,
-            IStandardRepository standardRepository)
+            IApprenticeshipRepository apprenticeshipRepository)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
-            _standardRepository = standardRepository;
+            _apprenticeshipRepository = apprenticeshipRepository;
         }
 
         [HttpGet]
@@ -65,7 +65,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
 
-            var apprenticeshipData = _standardRepository.GetById(model.Apprenticeship.Code);
+            var apprenticeshipData = _apprenticeshipRepository.GetStandardById(model.Apprenticeship.Code);
 
             viewModel.ApprenticeshipNameWithLevel = string.Concat(apprenticeshipData.Title, " level ", apprenticeshipData.NotionalEndLevel);
 

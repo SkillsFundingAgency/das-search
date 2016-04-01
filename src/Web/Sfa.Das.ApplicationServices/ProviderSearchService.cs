@@ -8,15 +8,15 @@ namespace Sfa.Das.ApplicationServices
 {
     public sealed class ProviderSearchService : IProviderSearchService
     {
-        private readonly IStandardRepository _standardRepository;
+        private readonly IApprenticeshipRepository _apprenticeshipRepository;
         private readonly ISearchProvider _searchProvider;
         private readonly ILookupLocations _postCodeLookup;
         private readonly ILog _logger;
 
-        public ProviderSearchService(ISearchProvider searchProvider, IStandardRepository standardRepository, ILookupLocations postcodeLookup, ILog logger)
+        public ProviderSearchService(ISearchProvider searchProvider, IApprenticeshipRepository apprenticeshipRepository, ILookupLocations postcodeLookup, ILog logger)
         {
             _searchProvider = searchProvider;
-            _standardRepository = standardRepository;
+            _apprenticeshipRepository = apprenticeshipRepository;
             _postCodeLookup = postcodeLookup;
             _logger = logger;
         }
@@ -32,7 +32,7 @@ namespace Sfa.Das.ApplicationServices
 
             try
             {
-                standardName = _standardRepository.GetById(standardId)?.Title;
+                standardName = _apprenticeshipRepository.GetStandardById(standardId)?.Title;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 

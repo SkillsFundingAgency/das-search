@@ -5,7 +5,7 @@
     using NUnit.Framework;
     using RazorGenerator.Testing;
     using ViewModels;
-    using Web.Views.Standard;
+    using Web.Views.Apprenticeship;
 
     [TestFixture]
     public sealed class StandardDetailPageTests : ViewTestBase
@@ -39,7 +39,7 @@
         [Test]
         public void ShouldShowEquivalentLevel()
         {
-            var detail = new Detail();
+            var detail = new StandardDetail();
             var model = new StandardViewModel
             {
                 NotionalEndLevel = 6,
