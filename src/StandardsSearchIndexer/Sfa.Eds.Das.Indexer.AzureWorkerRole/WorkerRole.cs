@@ -40,7 +40,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
                     _logger.Fatal("Exception from  " + ex);
                 }
 
-                Thread.Sleep(TimeSpan.FromMinutes(double.Parse(_commonSettings.WorkerRolePauseTime ?? "10")));
+                Thread.Sleep(TimeSpan.FromSeconds(double.Parse(_commonSettings.WorkerRolePauseTime ?? "60")));
             }
         }
 

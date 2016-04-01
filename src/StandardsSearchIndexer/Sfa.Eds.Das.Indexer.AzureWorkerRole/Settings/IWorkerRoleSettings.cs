@@ -2,8 +2,7 @@
 {
     public interface IWorkerRoleSettings
     {
-        string StorageAccountName { get; }
-        string StorageAccountKey { get; }
+        string StorageConnectionString { get; }
         string WorkerRolePauseTime { get; }
     }
 }
