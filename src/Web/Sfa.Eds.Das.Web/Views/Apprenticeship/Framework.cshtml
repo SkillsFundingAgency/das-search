@@ -17,7 +17,7 @@
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
-                    @Model.Title
+                    @Model.FrameworkName
                 </h1>
             </div>
         </div>
@@ -56,7 +56,7 @@
         <section>
             <header>
                 <h2 class="heading-large">
-                    Contains an apprenticeship training programme for @Model.PathwayName, level @Model.Level
+                    Contains an apprenticeship training programme for @Model.PathwayName, level @GetFrameworkLevel(@Model.Level.ToString())
                 </h2>
             </header>
             <p>
@@ -77,20 +77,10 @@
     </p>
 }
 
-@helper GetStandardDetailItem(string title, string item, string unit = "")
+@helper GetFrameworkLevel(string item)
 {
     if (!string.IsNullOrEmpty(item))
     {
-            <dt>@title</dt>
-                <dd>@item @unit</dd>
-    }
-}
-
-@helper GetStandardLevel(string item)
-{
-    if (!string.IsNullOrEmpty(item))
-    {
-        <dt>Level:</dt>
         var equivalence = string.Empty;
         switch (int.Parse(@item))
         {
@@ -122,32 +112,6 @@
                 break;
 
         }
-            <dd id="level">@item (equivalent to @equivalence)</dd>
-    }
-}
-
-@helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
-{
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
-
-        <dt>@title</dt>
-        <dd id="@id">@Html.Raw(item)</dd>
-
-    }
-}
-
-@helper GetDocumentItem(string pdfUrl, string title)
-{
-    if (!string.IsNullOrEmpty(title))
-    {
-            <li>
-                <a href="@pdfUrl" target="_blank">
-                    @title
-                </a>
-                <p>
-                    PDF, 268KB, 2 pages
-                </p>
-            </li>
+            <span>@item (equivalent to @equivalence)</span>
     }
 }
