@@ -7,7 +7,7 @@
     using NUnit.Framework;
     using RazorGenerator.Testing;
     using ViewModels;
-    using Web.Views.Standard;
+    using Web.Views.Apprenticeship;
 
     [TestFixture]
     public sealed class ForStandardSearchResultPage : ViewTestBase

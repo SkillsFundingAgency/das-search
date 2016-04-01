@@ -1,4 +1,5 @@
 ﻿using Sfa.Eds.Das.Core.Configuration;
+using Sfa.Eds.Das.Infrastructure.Mapping;
 
 namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
@@ -10,20 +11,26 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
 
-    public sealed class StandardRepository : IStandardRepository
+    public sealed class StandardRepository : IGetStandards
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
+        private readonly IStandardMapping _standardMapping;
 
-        public StandardRepository(IElasticsearchClientFactory elasticsearchClientFactory, ILog applicationLogger, IConfigurationSettings applicationSettings)
+        public StandardRepository(
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ILog applicationLogger,
+            IConfigurationSettings applicationSettings,
+            IStandardMapping standardMapping)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
+            _standardMapping = standardMapping;
         }
 
-        public Standard GetById(int id)
+        public Standard GetStandardById(int id)
         {
             var client = this._elasticsearchClientFactory.Create();
             var results =
@@ -46,28 +53,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             var document = results.Documents.Any() ? results.Documents.First() : null;
 
-            if (document != null)
-            {
-                return new Standard
-                           {
-                               StandardId = document.StandardId,
-                               Title = document.Title,
-                               StandardPdf = document.StandardPdf,
-                               AssessmentPlanPdf = document.AssessmentPlanPdf,
-                               NotionalEndLevel = document.NotionalEndLevel,
-                               JobRoles = document.JobRoles,
-                               Keywords = document.Keywords,
-                               TypicalLength = document.TypicalLength,
-                               IntroductoryText = document.IntroductoryText,
-                               EntryRequirements = document.EntryRequirements,
-                               WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
-                               Qualifications = document.Qualifications,
-                               ProfessionalRegistration = document.ProfessionalRegistration,
-                               OverviewOfRole = document.OverviewOfRole
-                };
-            }
-
-            return null;
+            return document != null ? _standardMapping.MapToStandard(document) : null;
         }
     }
 }

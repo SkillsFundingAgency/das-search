@@ -22,6 +22,7 @@
                     Html.RenderPartial("_SearchResultMessage");
                 }
             </p>
+
             @foreach (var item in Model.Results)
             {
                 <article class="result">
@@ -29,23 +30,21 @@
                         <h2 class="result-title">
                             @if (item.StandardId != 0)
                             {
-                                @Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null)
+                                @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null)
                             }
                             else
                             {
-                                @Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.FrameworkId }, null)
+                                @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null)
                             }
                         </h2>
                     </header>
-                    <dl class="result-data-list">
-                        @GetStandardDetailItem("Level", "level", item.Level)
-                        @GetStandardDetailItem("Typical length:", "length", item.TypicalLengthMessage)
-                    </dl>
+                        <dl class="result-data-list">
+                            @GetStandardDetailItem("Level", "level", item.Level)
+                            @GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage)
+                        </dl>
                 </article>
             }
-
         </div>
-
     </div>
 </main>
 

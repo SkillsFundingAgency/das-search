@@ -68,6 +68,7 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SearchResult{T}.cs" />
     <Compile Include="Models\StandardSearchResults.cs" />
+    <Compile Include="Models\FrameworkSearchResultsItem.cs" />
     <Compile Include="Models\StandardSearchResultsItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderSearchService.cs" />

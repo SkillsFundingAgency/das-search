@@ -230,7 +230,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StandardController.cs" />
+    <Compile Include="Controllers\ApprenticeshipController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -254,6 +254,7 @@
     <Compile Include="ViewModels\ProviderSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
+    <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
     <Compile Include="Views\Provider\Detail.generated.cs">
       <AutoGen>True</AutoGen>
@@ -275,27 +276,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Standard\Detail.generated.cs">
+    <Compile Include="Views\Apprenticeship\Framework.generated.cs">
+      <DependentUpon>Framework.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Detail.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Standard\Search.generated.cs">
+    <Compile Include="Views\Apprenticeship\Standard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Apprenticeship\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Search.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Standard\SearchResults.generated.cs">
+    <Compile Include="Views\Apprenticeship\SearchResults.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Standard\_BlankFieldErrorMessage.generated.cs">
+    <Compile Include="Views\Apprenticeship\_BlankFieldErrorMessage.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_BlankFieldErrorMessage.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Standard\_SearchResultMessage.generated.cs">
+    <Compile Include="Views\Apprenticeship\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
@@ -381,15 +387,17 @@
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Standard\Search.cshtml">
+    <Content Include="Views\Apprenticeship\Search.cshtml">
       <LastGenOutput>Search.generated.cs</LastGenOutput>
       <Generator>RazorGenerator</Generator>
     </Content>
-    <Content Include="Views\Standard\SearchResults.cshtml">
+    <Content Include="Views\Apprenticeship\SearchResults.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>SearchResults.generated.cs</LastGenOutput>
     </Content>
@@ -399,11 +407,11 @@
     <Content Include="Sfa.Eds.Das.Web.ruleset" />
     <Content Include="Views\Error\_Error404.cshtml" />
     <Content Include="Views\Error\_Error500.cshtml" />
-    <Content Include="Views\Standard\Detail.cshtml">
+    <Content Include="Views\Apprenticeship\Standard.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Detail.generated.cs</LastGenOutput>
+      <LastGenOutput>Standard.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Standard\_SearchResultMessage.cshtml">
+    <Content Include="Views\Apprenticeship\_SearchResultMessage.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
@@ -419,7 +427,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Standard\_BlankFieldErrorMessage.cshtml">
+    <Content Include="Views\Apprenticeship\_BlankFieldErrorMessage.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
     </Content>
@@ -433,6 +441,10 @@
     <None Include="Transform.ServiceConfiguration.Cloud.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Views\Apprenticeship\Framework.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Framework.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

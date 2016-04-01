@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sfa.Eds.Das.Web.Views.Standard
+namespace Sfa.Eds.Das.Web.Views.Apprenticeship
 {
     using System;
     using System.Collections.Generic;
@@ -30,18 +30,18 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     using Sfa.Eds.Das.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Standard/_BlankFieldErrorMessage.cshtml")]
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/_BlankFieldErrorMessage.cshtml")]
     public partial class BlankFieldErrorMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardViewModel>
     {
 
-#line 10 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+#line 10 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderErrorMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 11 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+#line 11 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
  
 
 
@@ -50,14 +50,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        This field can\'t be blank\r\n    </p>\r\n");
 
 
-#line 15 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+#line 15 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 15 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+#line 15 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
 }
 #line default
 #line hidden
@@ -70,13 +70,13 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        This field can\'t be b
 WriteLiteral("<div>\r\n");
 
             
-            #line 4 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+            #line 4 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 4 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+            #line 4 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
      if (Model.HasError)
     {
         
@@ -84,14 +84,14 @@ WriteLiteral("<div>\r\n");
             #line default
             #line hidden
             
-            #line 6 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+            #line 6 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
    Write(RenderErrorMessage());
 
             
             #line default
             #line hidden
             
-            #line 6 "..\..\Views\Standard\_BlankFieldErrorMessage.cshtml"
+            #line 6 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
                              
     }
 

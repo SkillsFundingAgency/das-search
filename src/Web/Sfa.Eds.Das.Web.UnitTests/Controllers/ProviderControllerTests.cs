@@ -18,7 +18,6 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
     public class ProviderControllerTests
     {
         private Mock<ILog> mockLogger;
-        private Mock<IStandardRepository> mockStandardRepository;
         private Mock<IMappingService> mockMappingService;
         private Mock<IProviderSearchService> mockProviderSearchService;
         private Mock<IApprenticeshipProviderRepository> mockApprenticeshipProviderRepository;
@@ -30,7 +29,8 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockMappingService = new Mock<IMappingService>();
             mockProviderSearchService = new Mock<IProviderSearchService>();
             mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
-            mockStandardRepository = new Mock<IStandardRepository>();
+            var mockStandardRepository = CreateMockStandardRepository();
+            var mockFrameworkRepository = CreateMockFrameworkRepository();
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123, PostCode = "AB3 1SD" };
             var searchResults = new ProviderSearchResults { HasError = false, Hits = new List<StandardProviderSearchResultsItem>() };
             var stubViewModel = new ProviderSearchResultViewModel();
@@ -38,7 +38,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
             mockMappingService.Setup(x => x.Map<ProviderSearchResults, ProviderSearchResultViewModel>(It.IsAny<ProviderSearchResults>())).Returns(stubViewModel);
 
-            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object);
+            var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object, mockFrameworkRepository.Object);
 
             var result = await controller.SearchResults(searchCriteria);
 
@@ -54,7 +54,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
         {
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123 };
 
-            var controller = new ProviderController(null, null, null, null, null);
+            var controller = new ProviderController(null, null, null, null, null, null);
 
             var result = await controller.SearchResults(searchCriteria);
 
@@ -63,8 +63,22 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             var redirectResult = (RedirectToRouteResult)result;
             Assert.That(redirectResult?.RouteValues["id"], Is.EqualTo(123));
             Assert.That(redirectResult?.RouteValues["HasError"], Is.EqualTo(true));
-            Assert.That(redirectResult?.RouteValues["controller"], Is.EqualTo("Standard"));
-            Assert.That(redirectResult?.RouteValues["action"], Is.EqualTo("Detail"));
+            Assert.That(redirectResult?.RouteValues["controller"], Is.EqualTo("Apprenticeship"));
+            Assert.That(redirectResult?.RouteValues["action"], Is.EqualTo("Standard"));
+        }
+
+        private static Mock<IGetStandards> CreateMockStandardRepository()
+        {
+            var mockStandardsRepository = new Mock<IGetStandards>();
+
+            return mockStandardsRepository;
+        }
+
+        private static Mock<IGetFrameworks> CreateMockFrameworkRepository()
+        {
+            var mockFrameworkRepository = new Mock<IGetFrameworks>();
+
+            return mockFrameworkRepository;
         }
     }
 }

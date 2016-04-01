@@ -18,7 +18,7 @@
                     @Model.Name
                 </h1>
                 <p id="marketing">@Model.ProviderMarketingInfo</p>
-                <p>@Model.Apprenticeship.ApprenticeshipMarketingInfo</p>
+                <p class="apprenticeship-marketing-info">@Model.Apprenticeship.ApprenticeshipMarketingInfo</p>
             </div>
         </div>
 
@@ -94,7 +94,7 @@
     {
         <dt>@title</dt>
         <dd id="@id">
-            <a href="@url" target="_blank">@url</a>
+            <a class="pdf-url-link" href="@url" target="_blank">@url</a>
         </dd>
     }
 }

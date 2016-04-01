@@ -2,8 +2,8 @@
 {
     using Model;
 
-    public interface IStandardRepository
+    public interface IGetFrameworks
     {
-        Standard GetById(int id);
+        Framework GetFrameworkById(int id);
     }
 }

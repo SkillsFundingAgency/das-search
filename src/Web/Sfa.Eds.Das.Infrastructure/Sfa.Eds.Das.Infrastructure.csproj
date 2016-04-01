@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\FrameworkRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\ElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProvider.cs" />
@@ -95,7 +96,11 @@
     <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
+    <Compile Include="Mapping\IFrameworkMapping.cs" />
     <Compile Include="Mapping\IProviderMapping.cs" />
+    <Compile Include="Mapping\IStandardMapping.cs" />
+    <Compile Include="Mapping\FrameworkMapping.cs" />
+    <Compile Include="Mapping\StandardMapping.cs" />
     <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="PostCodeIo\PostCodesIOLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

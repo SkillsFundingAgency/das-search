@@ -1,0 +1,153 @@
+﻿@using Resources = Sfa.Eds.Das.Resources.EquivalenceLevels
+@using Sfa.Eds.Das.Web.Extensions
+@model Sfa.Eds.Das.Web.ViewModels.FrameworkViewModel
+
+@{
+    ViewBag.Title = "Framework - " + @Model.Title;
+}
+
+<main id="content">
+
+    <p class="small-btm-margin">
+        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
+    </p>
+
+    <div class="grid-row">
+
+        <div class="column-two-thirds">
+            <div class="hgroup">
+                <h1 class="heading-xlarge">
+                    @Model.Title
+                </h1>
+            </div>
+        </div>
+
+        <div class="column-third">
+            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            {
+                <div class="related-container">
+                    <aside class="related">
+
+                        <h2 class="heading-medium">Find training providers</h2>
+                        <form action="/g-cloud/search" method="get" class="search-box">
+                            <div class="form-group @(@Model.HasError ? " error" : "")">
+                                <label class="form-label" for="postcode">
+                                    Enter postcode@* or partial postcode *@
+                                    <p>
+                                        @if (Model.HasError)
+                                        {
+                                            @RenderErrorMessage()
+                                        }
+                                    </p>
+                                </label>
+                                <input type="hidden" id="frameworkid" name="standardid" class="text-box form-control" value="@Model.FrameworkId">
+                                <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
+                            </div>
+                            <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
+                        </form>
+
+                    </aside>
+                </div>
+             }
+
+            </div>
+        </div>
+
+        <section>
+            <header>
+                <h2 class="heading-large">
+                    Contains an apprenticeship training programme for @Model.PathwayName, level @Model.Level
+                </h2>
+            </header>
+            <p>
+                Contact a provider
+            </p>
+            <p>
+                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
+            </p>
+            
+        </section>
+
+</main>
+
+@helper  RenderErrorMessage()
+{
+    <p>
+        This field can't be blank
+    </p>
+}
+
+@helper GetStandardDetailItem(string title, string item, string unit = "")
+{
+    if (!string.IsNullOrEmpty(item))
+    {
+            <dt>@title</dt>
+                <dd>@item @unit</dd>
+    }
+}
+
+@helper GetStandardLevel(string item)
+{
+    if (!string.IsNullOrEmpty(item))
+    {
+        <dt>Level:</dt>
+        var equivalence = string.Empty;
+        switch (int.Parse(@item))
+        {
+            case 1:
+                equivalence = @Resources.FirstLevel;
+                break;
+            case 2:
+                equivalence = @Resources.SecondLevel;
+                break;
+            case 3:
+                equivalence = @Resources.ThirdLevel;
+                break;
+            case 4:
+                equivalence = @Resources.FourthLevel;
+                break;
+            case 5:
+                equivalence = @Resources.FifthLevel;
+                break;
+            case 6:
+                equivalence = @Resources.SixthLevel;
+                break;
+            case 7:
+                equivalence = @Resources.SeventhLevel;
+                break;
+            case 8:
+                equivalence = @Resources.EighthLevel;
+                break;
+            default:
+                break;
+
+        }
+            <dd id="level">@item (equivalent to @equivalence)</dd>
+    }
+}
+
+@helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+
+        <dt>@title</dt>
+        <dd id="@id">@Html.Raw(item)</dd>
+
+    }
+}
+
+@helper GetDocumentItem(string pdfUrl, string title)
+{
+    if (!string.IsNullOrEmpty(title))
+    {
+            <li>
+                <a href="@pdfUrl" target="_blank">
+                    @title
+                </a>
+                <p>
+                    PDF, 268KB, 2 pages
+                </p>
+            </li>
+    }
+}
