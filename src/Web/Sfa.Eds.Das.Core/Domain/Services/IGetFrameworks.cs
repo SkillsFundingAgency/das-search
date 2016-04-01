@@ -2,10 +2,8 @@
 {
     using Model;
 
-    public interface IApprenticeshipRepository
+    public interface IGetFrameworks
     {
-        Standard GetStandardById(int id);
-
         Framework GetFrameworkById(int id);
     }
 }

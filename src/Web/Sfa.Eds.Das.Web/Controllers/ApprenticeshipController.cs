@@ -19,17 +19,20 @@
         private readonly IMappingService _mappingService;
 
         private readonly IStandardSearchService _searchService;
+        private readonly IGetStandards _getStandards;
+        private readonly IGetFrameworks _getFrameworks;
 
-        private readonly IApprenticeshipRepository _apprenticeshipRepository;
 
         public ApprenticeshipController(
             IStandardSearchService searchService,
-            IApprenticeshipRepository apprenticeshipRepository,
+            IGetStandards getStandards,
+            IGetFrameworks getFrameworks,
             ILog logger,
             IMappingService mappingService)
         {
             _searchService = searchService;
-            _apprenticeshipRepository = apprenticeshipRepository;
+            _getStandards = getStandards;
+            _getFrameworks = getFrameworks;
             _logger = logger;
             _mappingService = mappingService;
         }
@@ -52,7 +55,7 @@
         // GET: Standard
         public ActionResult StandardDetail(int id, string hasError)
         {
-            var standardResult = _apprenticeshipRepository.GetStandardById(id);
+            var standardResult = _getStandards.GetStandardById(id);
 
             if (standardResult == null)
             {
@@ -72,7 +75,7 @@
 
         public ActionResult FrameworkDetail(int id, string hasError)
         {
-            var frameworkResult = _apprenticeshipRepository.GetFrameworkById(id);
+            var frameworkResult = _getFrameworks.GetFrameworkById(id);
 
             if (frameworkResult == null)
             {

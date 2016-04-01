@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\FrameworkRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\ElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProvider.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
-    <Compile Include="Elasticsearch\ApprenticeshipRepository.cs" />
+    <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
     <Compile Include="Mapping\IProviderMapping.cs" />

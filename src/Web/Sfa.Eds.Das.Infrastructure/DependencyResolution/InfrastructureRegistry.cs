@@ -22,7 +22,8 @@ namespace Sfa.Eds.Das.Infrastructure.DependencyResolution
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILookupLocations>().Use<PostCodesIOLocator>();
-            For<IApprenticeshipRepository>().Use<ApprenticeshipRepository>();
+            For<IGetStandards>().Use<StandardRepository>();
+            For<IGetFrameworks>().Use<FrameworkRepository>();
             For<ISearchProvider>().Use<ElasticsearchProvider>();
             For<IRetryWebRequests>().Use<WebRequestRetryService>();
             For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderRepository>();
