@@ -121,7 +121,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <dt>Level:</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "        <dt>Level</dt>\r\n");
 
 
 #line 106 "..\..\Views\Standard\Detail.cshtml"
@@ -160,7 +160,11 @@ WriteLiteralTo(__razor_helper_writer, "        <dt>Level:</dt>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <dd>");
+WriteLiteralTo(__razor_helper_writer, "            <dd");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"level\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 137 "..\..\Views\Standard\Detail.cshtml"
@@ -173,7 +177,7 @@ WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 
 
 #line 137 "..\..\Views\Standard\Detail.cshtml"
-       WriteTo(__razor_helper_writer, equivalence);
+                  WriteTo(__razor_helper_writer, equivalence);
 
 
 #line default
@@ -195,7 +199,7 @@ WriteLiteralTo(__razor_helper_writer, ")</dd>\r\n");
 #line hidden
 
 #line 141 "..\..\Views\Standard\Detail.cshtml"
-public System.Web.WebPages.HelperResult GetStandardProperty(string title, string item, bool hideIfEmpty = false)
+public System.Web.WebPages.HelperResult GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
@@ -221,7 +225,19 @@ WriteTo(__razor_helper_writer, title);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        <dd>");
+WriteLiteralTo(__razor_helper_writer, "        <dd");
+
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5572), Tuple.Create("\"", 5580)
+
+#line 147 "..\..\Views\Standard\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5577), Tuple.Create<System.Object, System.Int32>(id
+
+#line default
+#line hidden
+, 5577), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 147 "..\..\Views\Standard\Detail.cshtml"
@@ -264,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5622), Tuple.Create("\"", 5636)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5757), Tuple.Create("\"", 5771)
 
 #line 157 "..\..\Views\Standard\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5629), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 5764), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5629), false)
+, 5764), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -519,7 +535,7 @@ WriteLiteral(">\r\n                            </div>\r\n                       
 
 WriteLiteral(" class=\"button margin-top-x2\"");
 
-WriteLiteral(" id=\"submit-keywords\"");
+WriteLiteral(" id=\"submit-postcode\"");
 
 WriteLiteral(" type=\"submit\"");
 
@@ -551,7 +567,7 @@ WriteLiteral("                ");
 
             
             #line 68 "..\..\Views\Standard\Detail.cshtml"
-           Write(GetStandardProperty("Overview of role", Model.OverviewOfRoleHtml));
+           Write(GetStandardProperty("Overview of role", "overview", Model.OverviewOfRoleHtml));
 
             
             #line default
@@ -573,7 +589,7 @@ WriteLiteral("                ");
 
             
             #line 70 "..\..\Views\Standard\Detail.cshtml"
-           Write(GetStandardProperty("Typical length", @Model.TypicalLengthMessage));
+           Write(GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage));
 
             
             #line default
@@ -584,7 +600,7 @@ WriteLiteral("                ");
 
             
             #line 71 "..\..\Views\Standard\Detail.cshtml"
-           Write(GetStandardProperty("Entry requirements", Model.EntryRequirementsHtml));
+           Write(GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirementsHtml));
 
             
             #line default
@@ -595,7 +611,7 @@ WriteLiteral("                ");
 
             
             #line 72 "..\..\Views\Standard\Detail.cshtml"
-           Write(GetStandardProperty("What apprentices will learn", Model.WhatApprenticesWillLearnHtml));
+           Write(GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearnHtml));
 
             
             #line default
@@ -606,7 +622,7 @@ WriteLiteral("                ");
 
             
             #line 73 "..\..\Views\Standard\Detail.cshtml"
-           Write(GetStandardProperty("Qualifications", Model.QualificationsHtml));
+           Write(GetStandardProperty("Qualifications", "qualifications", Model.QualificationsHtml));
 
             
             #line default
@@ -617,7 +633,7 @@ WriteLiteral("                ");
 
             
             #line 74 "..\..\Views\Standard\Detail.cshtml"
-           Write(GetStandardProperty("Professional registration", Model.ProfessionalRegistrationHtml, true));
+           Write(GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistrationHtml, true));
 
             
             #line default
