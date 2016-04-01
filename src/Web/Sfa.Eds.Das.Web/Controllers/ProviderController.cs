@@ -45,7 +45,7 @@ namespace Sfa.Eds.Das.Web.Controllers
                 return RedirectToAction("Standard", "Apprenticeship", new { id = criteria.StandardId, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
+            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId.Value, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
