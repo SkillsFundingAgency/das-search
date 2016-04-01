@@ -6,14 +6,6 @@
 
     public class AppServiceSettings : BaseSettings, IAppServiceSettings
     {
-        public string StorageAccountName => ConfigurationManager.AppSettings["StorageAccountName"];
-
-        public string StorageAccountKey => ConfigurationManager.AppSettings["StorageAccountKey"];
-
-        public string WorkingFolder => Path.Combine(Path.GetTempPath(), "WorkingSpace");
-
-        public string GovLearningUrl => GetSetting("GovLearningUrl");
-
         public string CsvFileName => GetSetting("CsvFileName");
 
         public string VstsGitFolderPath => GetSetting("VstsGitFolderPath");
@@ -34,7 +26,7 @@
 
         public string GitBranch => GetSetting("GitBranch");
 
-        public string ConnectionString => $"DefaultEndpointsProtocol=https;AccountName={StorageAccountName};AccountKey={StorageAccountKey}";
+        public string ConnectionString => GetSetting("StorageConnectionString");
 
         public string ImServiceBaseUrl => GetSetting("ImServiceBaseUrl");
 

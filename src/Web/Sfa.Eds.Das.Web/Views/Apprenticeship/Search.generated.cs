@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sfa.Eds.Das.Web.Views.Standard
+namespace Sfa.Eds.Das.Web.Views.Apprenticeship
 {
     using System;
     using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     using Sfa.Eds.Das.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Standard/Search.cshtml")]
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/Search.cshtml")]
     public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.Models.StandardSearchCriteria>
     {
         public Search()
@@ -39,7 +39,7 @@ namespace Sfa.Eds.Das.Web.Views.Standard
         public override void Execute()
         {
             
-            #line 2 "..\..\Views\Standard\Search.cshtml"
+            #line 2 "..\..\Views\Apprenticeship\Search.cshtml"
   
     ViewBag.Title = "Home Page";
 
@@ -70,17 +70,17 @@ WriteLiteral(">\r\n\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                Find an apprenticeship standard\r\n            </h1>\r\n\r\n");
+WriteLiteral(">\r\n                Find an apprenticeship\r\n            </h1>\r\n\r\n");
 
             
-            #line 15 "..\..\Views\Standard\Search.cshtml"
+            #line 15 "..\..\Views\Apprenticeship\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Views\Standard\Search.cshtml"
-             using (Html.BeginForm("SearchResults", "Standard", FormMethod.Get, new {@class = "search-box" }))
+            #line 15 "..\..\Views\Apprenticeship\Search.cshtml"
+             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box" }))
             {
 
             
@@ -135,7 +135,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 30 "..\..\Views\Standard\Search.cshtml"
+            #line 30 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             

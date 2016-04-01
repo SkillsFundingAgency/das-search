@@ -19,7 +19,6 @@
             For<IElasticClient>().Use<ElasticClient>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IWorkerRoleSettings>().Use<WorkRoleSettings>();
-            For<IBlobStorageHelper>().Use<BlobStorageHelper>();
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
             For<IGetMessageTimes>().Use<AzureQueueService>();
             For<IClearQueue>().Use<AzureQueueService>();

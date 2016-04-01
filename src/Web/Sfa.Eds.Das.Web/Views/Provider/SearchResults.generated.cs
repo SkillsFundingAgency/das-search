@@ -64,14 +64,14 @@ WriteLiteral("    ");
 
             
             #line 9 "..\..\Views\Provider\SearchResults.cshtml"
-Write(Html.ActionLink("Back to Standard", "Detail", "Standard", new {@id = @Model.StandardId} , new { @class = "link-back" } ));
+Write(Html.ActionLink("Back to Standard", "Standard", "Apprenticeship", new {@id = @Model.StandardId} , new { @class = "link-back" } ));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n    <div");
 
-WriteLiteral(" id=\"results\"");
+WriteLiteral(" id=\"provider-results\"");
 
 WriteLiteral(" class=\"grid-row\"");
 

@@ -4,10 +4,6 @@
 
     public interface IAppServiceSettings
     {
-        string WorkingFolder { get; }
-
-        string GovLearningUrl { get; }
-
         string CsvFileName { get; }
 
         string GitUsername { get; }

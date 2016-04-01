@@ -144,7 +144,6 @@
     <Compile Include="Services\CloudQueueService.cs" />
     <Compile Include="Services\ICloudBlobClientFactory.cs" />
     <Compile Include="Services\ICloudQueueService.cs" />
-    <Compile Include="Services\BlobStorageHelper.cs" />
     <Compile Include="DependencyResolution\IndexerRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="IIndexerJob.cs" />

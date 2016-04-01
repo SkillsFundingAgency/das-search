@@ -1,7 +1,6 @@
 namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.Services
 {
     using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
 
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
@@ -12,8 +11,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.Services
 
         public CloudBlobClientFactory(IWorkerRoleSettings workerRoleSettings)
         {
-            var storageCredentials = new StorageCredentials(workerRoleSettings.StorageAccountName, workerRoleSettings.StorageAccountKey);
-            var storageAccount = new CloudStorageAccount(storageCredentials, true);
+            var storageAccount = CloudStorageAccount.Parse(workerRoleSettings.StorageConnectionString);
 
             _cloudBlobClient = storageAccount.CreateCloudBlobClient();
         }

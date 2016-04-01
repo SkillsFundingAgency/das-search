@@ -87,7 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\FcsActiveProvidersClient.cs" />
     <Compile Include="Queue\GenericControlQueueConsumer.cs" />
-    <Compile Include="Services\IBlobStorageHelper.cs" />
     <Compile Include="Queue\IClearQueue.cs" />
     <Compile Include="Queue\IGetMessageTimes.cs" />
     <Compile Include="Infrastructure\IConvertFromCsv.cs" />

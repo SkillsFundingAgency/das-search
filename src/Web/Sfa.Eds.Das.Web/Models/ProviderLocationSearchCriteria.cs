@@ -7,5 +7,7 @@
         public string LocationId { get; set; }
 
         public string StandardCode { get; set; }
+
+        public string FrameworkId { get; set; }
     }
 }

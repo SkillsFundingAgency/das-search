@@ -11,7 +11,7 @@
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Standard", action = "Search", id = UrlParameter.Optional });
+                defaults: new { controller = "Apprenticeship", action = "Search", id = UrlParameter.Optional });
         }
     }
 }

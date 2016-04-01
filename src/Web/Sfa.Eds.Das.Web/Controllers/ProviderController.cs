@@ -18,29 +18,31 @@ namespace Sfa.Eds.Das.Web.Controllers
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
-
-        private readonly IStandardRepository _standardRepository;
+        private readonly IGetStandards _getStandards;
+        private readonly IGetFrameworks _getFrameworks;
 
         public ProviderController(
             IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
             IApprenticeshipProviderRepository apprenticeshipProviderRepository,
-            IStandardRepository standardRepository)
+            IGetStandards getStandards,
+            IGetFrameworks getFrameworks)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
-            _standardRepository = standardRepository;
+            _getStandards = getStandards;
+            _getFrameworks = getFrameworks;
         }
 
         [HttpGet]
         public async Task<ActionResult> SearchResults(ProviderSearchCriteria criteria)
         {
-			if (string.IsNullOrEmpty(criteria?.PostCode))
+            if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction("Detail", "Standard", new { id = criteria.StandardId, HasError = true });
+                return RedirectToAction("Standard", "Apprenticeship", new { id = criteria.StandardId, HasError = true });
             }
 
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
@@ -65,7 +67,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
 
-            var apprenticeshipData = _standardRepository.GetById(model.Apprenticeship.Code);
+            var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
 
             viewModel.ApprenticeshipNameWithLevel = string.Concat(apprenticeshipData.Title, " level ", apprenticeshipData.NotionalEndLevel);
 

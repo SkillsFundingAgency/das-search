@@ -12,24 +12,27 @@
     using Sfa.Eds.Das.Web.Services;
     using Sfa.Eds.Das.Web.ViewModels;
 
-    public sealed class StandardController : Controller
+    public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
 
         private readonly IMappingService _mappingService;
 
         private readonly IStandardSearchService _searchService;
+        private readonly IGetStandards _getStandards;
+        private readonly IGetFrameworks _getFrameworks;
 
-        private readonly IStandardRepository _standardRepository;
 
-        public StandardController(
+        public ApprenticeshipController(
             IStandardSearchService searchService,
-            IStandardRepository standardRepository,
+            IGetStandards getStandards,
+            IGetFrameworks getFrameworks,
             ILog logger,
             IMappingService mappingService)
         {
             _searchService = searchService;
-            _standardRepository = standardRepository;
+            _getStandards = getStandards;
+            _getFrameworks = getFrameworks;
             _logger = logger;
             _mappingService = mappingService;
         }
@@ -50,9 +53,9 @@
         }
 
         // GET: Standard
-        public ActionResult Detail(int id, string hasError)
+        public ActionResult Standard(int id, string hasError)
         {
-            var standardResult = _standardRepository.GetById(id);
+            var standardResult = _getStandards.GetStandardById(id);
 
             if (standardResult == null)
             {
@@ -65,15 +68,29 @@
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
+            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
         }
 
-        public ActionResult FrameworkDetail(int id)
+        public ActionResult Framework(int id, string hasError)
         {
-            var resultUrl = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Standard"));
-            return Redirect(resultUrl.Url);
+            var frameworkResult = _getFrameworks.GetFrameworkById(id);
+
+            if (frameworkResult == null)
+            {
+                var message = $"Cannot find framework: {id}";
+                _logger.Warn($"404 - {message}");
+
+                return new HttpNotFoundResult(message);
+            }
+
+            var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
+
+            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
+
+            return View(viewModel);
         }
     }
 }

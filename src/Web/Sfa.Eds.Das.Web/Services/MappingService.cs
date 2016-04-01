@@ -66,6 +66,9 @@
                 // Standard detail page
                 cfg.CreateMap<Standard, StandardViewModel>().AfterMap<StandardViewModelMappingAction>();
 
+                // Frzmework detail page
+                cfg.CreateMap<Framework, FrameworkViewModel>();
+
                 // Provider detail page
                 cfg.CreateMap<Provider, ProviderViewModel>();
             });

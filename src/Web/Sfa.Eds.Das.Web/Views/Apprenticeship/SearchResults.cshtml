@@ -1,0 +1,58 @@
+﻿@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
+﻿
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<main id="content" role="main">
+    @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
+    <div id="standard-results" class="grid-row">
+
+        <div class="column-two-thirds">
+
+            <div class="hgroup">
+
+                <h1 class="heading-xlarge">
+                    Search results
+                </h1>
+
+            </div>
+            <p>
+                @{
+                    Html.RenderPartial("_SearchResultMessage");
+                }
+            </p>
+
+            @foreach (var item in Model.Results)
+            {
+                <article class="result">
+                    <header>
+                        <h2 class="result-title">
+                            @if (item.StandardId != 0)
+                            {
+                                @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null)
+                            }
+                            else
+                            {
+                                @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null)
+                            }
+                        </h2>
+                    </header>
+                        <dl class="result-data-list">
+                            @GetStandardDetailItem("Level", "level", item.Level)
+                            @GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage)
+                        </dl>
+                </article>
+            }
+        </div>
+    </div>
+</main>
+
+@helper GetStandardDetailItem(string title, string id, string item, string unit = "")
+{
+if (!string.IsNullOrEmpty(item))
+{
+        <dt>@title</dt>
+            <dd class="@id">@item @unit</dd>
+}
+}
