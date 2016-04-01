@@ -383,12 +383,13 @@ WriteLiteral(", level ");
             
             #line default
             #line hidden
-WriteLiteral(@"
-                </h2>
-            </header>
-            <p>
+WriteLiteral("\r\n                </h2>\r\n            </header>\r\n            <h3");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(@">
                 Contact a provider
-            </p>
+            </h3>
             <p>
                 If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
             </p>
