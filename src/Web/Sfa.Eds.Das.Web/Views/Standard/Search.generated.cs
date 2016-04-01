@@ -70,7 +70,7 @@ WriteLiteral(">\r\n\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                Find an apprenticeship standard\r\n            </h1>\r\n\r\n");
+WriteLiteral(">\r\n                Find an apprenticeship\r\n            </h1>\r\n\r\n");
 
             
             #line 15 "..\..\Views\Standard\Search.cshtml"
