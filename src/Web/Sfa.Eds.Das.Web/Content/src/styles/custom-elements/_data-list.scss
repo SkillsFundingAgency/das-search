@@ -85,6 +85,7 @@ $module: 'data-list';
 //Apply styles to '.data-list'
 .data-list {
     @include data-list(30);
+    margin-bottom: $gutter;
 
     ul {
         //TODO: apply '.list-bullet' directly to desired lists in case numbered list may be required interchangably
