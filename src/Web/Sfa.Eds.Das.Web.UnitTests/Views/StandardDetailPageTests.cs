@@ -39,7 +39,7 @@
         [Test]
         public void ShouldShowEquivalentLevel()
         {
-            var detail = new StandardDetail();
+            var detail = new Standard();
             var model = new StandardViewModel
             {
                 NotionalEndLevel = 6,

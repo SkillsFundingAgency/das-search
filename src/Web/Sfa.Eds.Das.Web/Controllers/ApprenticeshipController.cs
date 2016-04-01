@@ -53,7 +53,7 @@
         }
 
         // GET: Standard
-        public ActionResult StandardDetail(int id, string hasError)
+        public ActionResult Standard(int id, string hasError)
         {
             var standardResult = _getStandards.GetStandardById(id);
 
@@ -73,7 +73,7 @@
             return View(viewModel);
         }
 
-        public ActionResult FrameworkDetail(int id, string hasError)
+        public ActionResult Framework(int id, string hasError)
         {
             var frameworkResult = _getFrameworks.GetFrameworkById(id);
 

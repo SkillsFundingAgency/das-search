@@ -276,15 +276,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Apprenticeship\FrameworkDetail.generated.cs">
-      <DependentUpon>FrameworkDetail.cshtml</DependentUpon>
+    <Compile Include="Views\Apprenticeship\Framework.generated.cs">
+      <DependentUpon>Framework.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Views\Apprenticeship\StandardDetail.generated.cs">
+    <Compile Include="Views\Apprenticeship\Standard.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StandardDetail.cshtml</DependentUpon>
+      <DependentUpon>Standard.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Apprenticeship\Search.generated.cs">
       <AutoGen>True</AutoGen>
@@ -407,9 +407,9 @@
     <Content Include="Sfa.Eds.Das.Web.ruleset" />
     <Content Include="Views\Error\_Error404.cshtml" />
     <Content Include="Views\Error\_Error500.cshtml" />
-    <Content Include="Views\Apprenticeship\StandardDetail.cshtml">
+    <Content Include="Views\Apprenticeship\Standard.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>StandardDetail.generated.cs</LastGenOutput>
+      <LastGenOutput>Standard.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Apprenticeship\_SearchResultMessage.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -437,9 +437,9 @@
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\razorgenerator.directives" />
-    <Content Include="Views\Apprenticeship\FrameworkDetail.cshtml">
+    <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>FrameworkDetail.generated.cs</LastGenOutput>
+      <LastGenOutput>Framework.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

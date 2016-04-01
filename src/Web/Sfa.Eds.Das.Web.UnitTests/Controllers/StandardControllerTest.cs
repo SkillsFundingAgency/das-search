@@ -91,7 +91,7 @@
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
-            var result = controller.StandardDetail(1, hasErrorParmeter) as ViewResult;
+            var result = controller.Standard(1, hasErrorParmeter) as ViewResult;
 
             Assert.NotNull(result);
             var actual = ((StandardViewModel)result.Model).HasError;

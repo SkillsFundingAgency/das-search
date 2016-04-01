@@ -62,14 +62,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2747), Tuple.Create("\"", 2758)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2735), Tuple.Create("\"", 2746)
 
 #line 79 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2755), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2743), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2755), false)
+, 2743), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -215,14 +215,14 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 32 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                               Write(Html.ActionLink(item.Title, "StandardDetail", "Apprenticeship", new { @id = item.StandardId }, null));
+                               Write(Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null));
 
             
             #line default
             #line hidden
             
             #line 32 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                                                                                                         
+                                                                                                                                   
                                 }
                                 else
                                 {
@@ -232,14 +232,14 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 36 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                               Write(Html.ActionLink(item.Title, "FrameworkDetail", "Apprenticeship", new { @id = item.FrameworkId }, null));
+                               Write(Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null));
 
             
             #line default
             #line hidden
             
             #line 36 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                                                                                                           
+                                                                                                                                     
                                 }
 
             

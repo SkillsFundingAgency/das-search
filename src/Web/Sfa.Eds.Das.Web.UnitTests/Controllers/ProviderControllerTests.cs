@@ -64,7 +64,7 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             Assert.That(redirectResult?.RouteValues["id"], Is.EqualTo(123));
             Assert.That(redirectResult?.RouteValues["HasError"], Is.EqualTo(true));
             Assert.That(redirectResult?.RouteValues["controller"], Is.EqualTo("Apprenticeship"));
-            Assert.That(redirectResult?.RouteValues["action"], Is.EqualTo("StandardDetail"));
+            Assert.That(redirectResult?.RouteValues["action"], Is.EqualTo("Standard"));
         }
 
         private static Mock<IGetStandards> CreateMockStandardRepository()
