@@ -46,6 +46,7 @@ namespace Sfa.Eds.Das.Web.Controllers
             }
 
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId.Value, criteria.PostCode);
+            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
 
