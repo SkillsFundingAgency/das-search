@@ -34,25 +34,25 @@ namespace Sfa.Eds.Das.Web.Views.Standard
     public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel>
     {
 
-#line 74 "..\..\Views\Standard\SearchResults.cshtml"
-public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string item, string unit = "")
+#line 52 "..\..\Views\Standard\SearchResults.cshtml"
+public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string id, string item, string unit = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 75 "..\..\Views\Standard\SearchResults.cshtml"
+#line 53 "..\..\Views\Standard\SearchResults.cshtml"
  
-    if (!string.IsNullOrEmpty(item))
-    {
+if (!string.IsNullOrEmpty(item))
+{
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <dt>");
+WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 78 "..\..\Views\Standard\SearchResults.cshtml"
+#line 56 "..\..\Views\Standard\SearchResults.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -60,10 +60,22 @@ WriteTo(__razor_helper_writer, title);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "            <dd>");
+WriteLiteralTo(__razor_helper_writer, "            <dd");
+
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 1858), Tuple.Create("\"", 1869)
+
+#line 57 "..\..\Views\Standard\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create("", 1866), Tuple.Create<System.Object, System.Int32>(id
+
+#line default
+#line hidden
+, 1866), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 79 "..\..\Views\Standard\SearchResults.cshtml"
+#line 57 "..\..\Views\Standard\SearchResults.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -72,8 +84,8 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 79 "..\..\Views\Standard\SearchResults.cshtml"
-WriteTo(__razor_helper_writer, unit);
+#line 57 "..\..\Views\Standard\SearchResults.cshtml"
+    WriteTo(__razor_helper_writer, unit);
 
 
 #line default
@@ -81,15 +93,15 @@ WriteTo(__razor_helper_writer, unit);
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 80 "..\..\Views\Standard\SearchResults.cshtml"
-    }
+#line 58 "..\..\Views\Standard\SearchResults.cshtml"
+}
 
 
 #line default
 #line hidden
 });
 
-#line 81 "..\..\Views\Standard\SearchResults.cshtml"
+#line 59 "..\..\Views\Standard\SearchResults.cshtml"
 }
 #line default
 #line hidden
@@ -128,7 +140,7 @@ Write(Html.ActionLink("Search", "Search", null, new { @class = "link-back" }));
             #line hidden
 WriteLiteral("\r\n    <div");
 
-WriteLiteral(" id=\"results\"");
+WriteLiteral(" id=\"standard-results\"");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -165,23 +177,23 @@ WriteLiteral("\r\n            </p>\r\n");
 
             
             #line 25 "..\..\Views\Standard\SearchResults.cshtml"
-                
+            
             
             #line default
             #line hidden
             
             #line 25 "..\..\Views\Standard\SearchResults.cshtml"
-                 foreach (var item in Model.Results)
-                {
+             foreach (var item in Model.Results)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("                    <article");
+WriteLiteral("                <article");
 
 WriteLiteral(" class=\"result\"");
 
-WriteLiteral(">\r\n                        <header>\r\n                            <h2");
+WriteLiteral(">\r\n                    <header>\r\n                        <h2");
 
 WriteLiteral(" class=\"result-title\"");
 
@@ -189,129 +201,87 @@ WriteLiteral(">\r\n");
 
             
             #line 30 "..\..\Views\Standard\SearchResults.cshtml"
-                                
+                            
             
             #line default
             #line hidden
             
             #line 30 "..\..\Views\Standard\SearchResults.cshtml"
-                                 if (item.StandardId != 0)
-                                {
-                                    
+                             if (item.StandardId != 0)
+                            {
+                                
             
             #line default
             #line hidden
             
             #line 32 "..\..\Views\Standard\SearchResults.cshtml"
-                               Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
+                           Write(Html.ActionLink(item.Title, "Detail", "Standard", new { @id = item.StandardId }, null));
 
             
             #line default
             #line hidden
             
             #line 32 "..\..\Views\Standard\SearchResults.cshtml"
-                                                                                                                           
-                                }
-                                else
-                                {
-                                    
+                                                                                                                       
+                            }
+                            else
+                            {
+                                
             
             #line default
             #line hidden
             
             #line 36 "..\..\Views\Standard\SearchResults.cshtml"
-                               Write(Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.FrameworkId }, null));
+                           Write(Html.ActionLink(item.Title, "FrameworkDetail", "Standard", new { @id = item.FrameworkId }, null));
 
             
             #line default
             #line hidden
             
             #line 36 "..\..\Views\Standard\SearchResults.cshtml"
-                                                                                                                                     
-                                }
+                                                                                                                                 
+                            }
 
             
             #line default
             #line hidden
-WriteLiteral("                            </h2>\r\n                        </header>\r\n           " +
-"                 <dl");
+WriteLiteral("                        </h2>\r\n                    </header>\r\n                   " +
+" <dl");
 
 WriteLiteral(" class=\"result-data-list\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                                ");
+WriteLiteral("                        ");
 
             
             #line 41 "..\..\Views\Standard\SearchResults.cshtml"
-                           Write(GetStandardDetailItem("Level", item.Level));
+                   Write(GetStandardDetailItem("Level", "level", item.Level));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("                                ");
+WriteLiteral("                        ");
 
             
             #line 42 "..\..\Views\Standard\SearchResults.cshtml"
-                           Write(GetStandardDetailItem("Typical length:", item.TypicalLengthMessage));
+                   Write(GetStandardDetailItem("Typical length:", "length", item.TypicalLengthMessage));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                            </dl>\r\n                    </article>\r\n");
+WriteLiteral("\r\n                    </dl>\r\n                </article>\r\n");
 
             
             #line 45 "..\..\Views\Standard\SearchResults.cshtml"
-                }
+            }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>\r\n\r\n        <div");
-
-WriteLiteral(" class=\"column-third\"");
-
-WriteLiteral(">\r\n\r\n            <div");
-
-WriteLiteral(" class=\"related-container\"");
-
-WriteLiteral(">\r\n                <aside");
-
-WriteLiteral(" class=\"related\"");
-
-WriteLiteral(" id=\"related\"");
-
-WriteLiteral(">\r\n                    <div");
-
-WriteLiteral(" class=\"inner group related-subsection\"");
-
-WriteLiteral(">\r\n\r\n                        <h2");
-
-WriteLiteral(" id=\"parent-subsection\"");
-
-WriteLiteral(">Help</h2>\r\n\r\n                        <ul");
-
-WriteLiteral(" class=\"link-list\"");
-
-WriteLiteral(">\r\n                            <li>\r\n                                <a");
-
-WriteLiteral(" href=\"help_standards.html\"");
-
-WriteLiteral(">What is a standard</a>\r\n                            </li>\r\n                     " +
-"   </ul>\r\n\r\n                    </div>\r\n                    <div");
-
-WriteLiteral(" class=\"inner group\"");
-
-WriteLiteral(">\r\n                        <a");
-
-WriteLiteral(" class=\"return-to-top\"");
-
-WriteLiteral(" href=\"#content\"");
-
-WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n                </aside>\r\n     " +
-"       </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
+WriteLiteral("\r\n        </div>\r\n\r\n    </div>\r\n</main>\r\n\r\n");
 
         }
     }
