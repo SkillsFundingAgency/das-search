@@ -2,13 +2,15 @@
 {
     using System.Collections.Generic;
 
-    public sealed class ProviderSearchResults
+    public sealed class ProviderFrameworkSearchResults
     {
         public long TotalResults { get; set; }
 
-        public int StandardId { get; set; }
+        public int FrameworkId { get; set; }
 
-        public string StandardName { get; set; }
+        public string FrameworkName { get; set; }
+
+        public string PathwayName { get; set; }
 
         public string PostCode { get; set; }
 

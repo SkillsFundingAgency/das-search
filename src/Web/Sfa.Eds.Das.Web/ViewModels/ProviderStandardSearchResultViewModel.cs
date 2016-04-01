@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class ProviderSearchResultViewModel
+    public class ProviderStandardSearchResultViewModel
     {
         public long TotalResults { get; set; }
 

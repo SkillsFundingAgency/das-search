@@ -227,7 +227,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 26 "..\..\Views\Apprenticeship\Framework.cshtml"
-             using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+             using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
             
@@ -255,15 +255,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1104), Tuple.Create("\"", 1157)
-, Tuple.Create(Tuple.Create("", 1112), Tuple.Create("form-group", 1112), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1105), Tuple.Create("\"", 1158)
+, Tuple.Create(Tuple.Create("", 1113), Tuple.Create("form-group", 1113), true)
             
             #line 33 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1122), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+, Tuple.Create(Tuple.Create(" ", 1123), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1123), false)
+, 1124), false)
 );
 
 WriteLiteral(">\r\n                                <label");
@@ -316,14 +316,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1770), Tuple.Create("\"", 1796)
+WriteAttribute("value", Tuple.Create(" value=\"", 1771), Tuple.Create("\"", 1797)
             
             #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                             , Tuple.Create(Tuple.Create("", 1778), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+                                             , Tuple.Create(Tuple.Create("", 1779), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 1778), false)
+, 1779), false)
 );
 
 WriteLiteral(">\r\n                                <input");

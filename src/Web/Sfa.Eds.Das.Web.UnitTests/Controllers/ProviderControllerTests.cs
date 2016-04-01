@@ -32,11 +32,11 @@ namespace Sfa.Eds.Das.Web.Controllers.Tests
             var mockStandardRepository = CreateMockStandardRepository();
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var searchCriteria = new ProviderSearchCriteria { StandardId = 123, PostCode = "AB3 1SD" };
-            var searchResults = new ProviderSearchResults { HasError = false, Hits = new List<StandardProviderSearchResultsItem>() };
-            var stubViewModel = new ProviderSearchResultViewModel();
+            var searchResults = new ProviderStandardSearchResults { HasError = false, Hits = new List<StandardProviderSearchResultsItem>() };
+            var stubViewModel = new ProviderStandardSearchResultViewModel();
 
             mockProviderSearchService.Setup(x => x.SearchByPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
-            mockMappingService.Setup(x => x.Map<ProviderSearchResults, ProviderSearchResultViewModel>(It.IsAny<ProviderSearchResults>())).Returns(stubViewModel);
+            mockMappingService.Setup(x => x.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(It.IsAny<ProviderStandardSearchResults>())).Returns(stubViewModel);
 
             var controller = new ProviderController(mockProviderSearchService.Object, mockLogger.Object, mockMappingService.Object, mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object, mockFrameworkRepository.Object);
 

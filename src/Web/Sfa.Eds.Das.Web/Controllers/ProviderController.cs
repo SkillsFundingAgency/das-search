@@ -47,7 +47,22 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
 
-            var viewModel = _mappingService.Map<ProviderSearchResults, ProviderSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> FrameworkResults(ProviderSearchCriteria criteria)
+        {
+            if (string.IsNullOrEmpty(criteria?.PostCode))
+            {
+                return RedirectToAction("Framework", "Apprenticeship", new { id = criteria.StandardId, HasError = true });
+            }
+
+            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
+
+            var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }
@@ -71,7 +86,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             viewModel.ApprenticeshipNameWithLevel = string.Concat(apprenticeshipData.Title, " level ", apprenticeshipData.NotionalEndLevel);
 
-            viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("SearchResults", "Provider"));
+            viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("StandardResults", "Provider"));
 
             return View(viewModel);
         }

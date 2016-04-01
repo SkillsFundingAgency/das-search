@@ -21,7 +21,7 @@
         public void ShouldShowAnErrorWhenSomethingIsWrong()
         {
             var detail = new SearchResultMessage();
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
@@ -38,7 +38,7 @@
         public void ShouldShowIndividualMessageWhenJustOneResultIsReturned()
         {
             var detail = new SearchResultMessage();
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
@@ -56,7 +56,7 @@
         public void ShouldShowGeneralMessageWhenSeveralResultsAreReturned()
         {
             var detail = new SearchResultMessage();
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 7,
                 PostCodeMissing = false,
@@ -89,7 +89,7 @@
                 Address = new Address()
             };
 
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
@@ -123,7 +123,7 @@
                 Address = new Address()
             };
 
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
@@ -150,7 +150,7 @@
                 Address = new Address()
             };
 
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
@@ -180,7 +180,7 @@
                 Address = new Address()
             };
 
-            var model = new ProviderSearchResultViewModel
+            var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,

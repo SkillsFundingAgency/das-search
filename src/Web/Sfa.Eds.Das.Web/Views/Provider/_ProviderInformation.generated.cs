@@ -43,7 +43,7 @@ namespace Sfa.Eds.Das.Web.Views.Provider
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/_ProviderInformation.cshtml")]
-    public partial class ProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel>
+    public partial class ProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderStandardSearchResultViewModel>
     {
 
 #line 32 "..\..\Views\Provider\_ProviderInformation.cshtml"

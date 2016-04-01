@@ -251,7 +251,7 @@
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultItemViewModel.cs" />
-    <Compile Include="ViewModels\ProviderSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ProviderStandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
@@ -260,6 +260,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\FrameworkResults.generated.cs">
+      <DependentUpon>FrameworkResults.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Provider\StandardResults.generated.cs">
       <AutoGen>True</AutoGen>
@@ -444,6 +449,10 @@
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\FrameworkResults.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FrameworkResults.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

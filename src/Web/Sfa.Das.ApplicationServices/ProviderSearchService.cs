@@ -23,11 +23,11 @@ namespace Sfa.Das.ApplicationServices
             _logger = logger;
         }
 
-        public async Task<ProviderSearchResults> SearchByPostCode(int standardId, string postCode)
+        public async Task<ProviderStandardSearchResults> SearchByPostCode(int standardId, string postCode)
         {
             if (string.IsNullOrEmpty(postCode))
             {
-                return new ProviderSearchResults { StandardId = standardId, PostCodeMissing = true };
+                return new ProviderStandardSearchResults { StandardId = standardId, PostCodeMissing = true };
             }
 
             string standardName = string.Empty;
@@ -40,7 +40,7 @@ namespace Sfa.Das.ApplicationServices
 
                 if (coordinates == null)
                 {
-                    return new ProviderSearchResults
+                    return new ProviderStandardSearchResults
                     {
                         TotalResults = 0,
                         StandardId = standardId,
@@ -54,7 +54,7 @@ namespace Sfa.Das.ApplicationServices
                 {
                     var searchResults = _searchProvider.SearchByLocation(standardId, coordinates);
 
-                    var result = new ProviderSearchResults
+                    var result = new ProviderStandardSearchResults
                     {
                         TotalResults = searchResults.Total,
                         StandardId = standardId,
@@ -70,7 +70,7 @@ namespace Sfa.Das.ApplicationServices
             {
                 _logger.Error(ex, "Search for Provider failed.");
 
-                return new ProviderSearchResults
+                return new ProviderStandardSearchResults
                 {
                     TotalResults = 0,
                     StandardId = standardId,
