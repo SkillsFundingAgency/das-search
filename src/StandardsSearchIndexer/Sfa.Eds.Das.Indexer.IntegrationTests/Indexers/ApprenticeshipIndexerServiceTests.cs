@@ -65,7 +65,7 @@
         [SetUp]
         public void BeforeEachTest()
         {
-            if (!_elasticClient.IndexExists(i => i.Index(_indexName)).Exists)
+            if (!_elasticClient.IndexExists(Indices.Index(_indexName)).Exists)
             {
                 _indexerService.CreateIndex(_indexName);
                 var indexTask = _indexerService.IndexEntries(_indexName);
@@ -77,8 +77,8 @@
         [TestFixtureTearDown]
         public void AfterAllTestAreRun()
         {
-            _elasticClient.DeleteIndex(i => i.Index(_indexName));
-            _elasticClient.IndexExists(i => i.Index(_indexName)).Exists.Should().BeFalse();
+            _elasticClient.DeleteIndex(Indices.Index(_indexName));
+            _elasticClient.IndexExists(Indices.Index(_indexName)).Exists.Should().BeFalse();
         }
 
         [Test]
@@ -105,7 +105,7 @@
                 StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
             };
 
-            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p.Index(_indexName).QueryString(expectedStandardResult.Title));
+            var retrievedResult = _elasticClient.Search<StandardDocument>(p => p.Index(_indexName).Query(q => q.QueryString(qs => qs.Query(expectedStandardResult.Title))));
 
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedStandard = retrievedResult.Documents.FirstOrDefault();
@@ -123,7 +123,7 @@
         public void ShouldRetrieveFrameworksSearchingForAll()
         {
             // Assert
-            var retrievedResultFrameworks = _elasticClient.Search<FrameworkDocument>(p => p.Index(_indexName).QueryString("*"));
+            var retrievedResultFrameworks = _elasticClient.Search<FrameworkDocument>(p => p.Index(_indexName).Query(q => q.QueryString(qs => qs.Query("*"))));
 
             var frameworkDocuments = retrievedResultFrameworks.Documents.Count();
             var frameworkDocument = retrievedResultFrameworks.Documents.Single(m => m.FrameworkCode.Equals(423));
@@ -142,7 +142,9 @@
                 .Index(_indexName)
                 .Query(q => q
                     .QueryString(qs => qs
-                            .OnFields(fi => fi.Title, fi => fi.JobRoles)
+                            .Fields(fs => fs
+                                .Field(fi => fi.Title)
+                                .Field(fi => fi.JobRoles))
                             .Query("develop"))));
 
             var amountRetrieved = retrievedResult.Documents.Count();
@@ -164,7 +166,9 @@
                 .Index(_indexName)
                 .Query(q => q
                     .QueryString(qs => qs
-                            .OnFields(fi => fi.FrameworkName, fi => fi.PathwayName)
+                            .Fields(fs => fs
+                                .Field(fi => fi.FrameworkName)
+                                .Field(fi => fi.PathwayName))
                             .Query(query))));
 
             Assert.AreEqual(expectedResultCount, retrievedResultTextile.Documents.Count());
@@ -179,7 +183,9 @@
                 .Index(_indexName)
                 .Query(q => q
                     .QueryString(qs => qs
-                            .OnFields(fi => fi.FrameworkName, fi => fi.PathwayName)
+                            .Fields(fs => fs
+                                .Field(fi => fi.FrameworkName)
+                                .Field(fi => fi.PathwayName))
                             .Query(query))));
 
             Assert.AreEqual(expectedResultCount, retrievedResultTextile.Documents.Count());
@@ -187,10 +193,10 @@
 
         private void DeleteIndexIfExists(string indexName)
         {
-            var exists = _elasticClient.IndexExists(i => i.Index(indexName));
+            var exists = _elasticClient.IndexExists(Indices.Index(indexName));
             if (exists.Exists)
             {
-                _elasticClient.DeleteIndex(i => i.Index(indexName));
+                _elasticClient.DeleteIndex(Indices.Index(indexName));
             }
         }
 

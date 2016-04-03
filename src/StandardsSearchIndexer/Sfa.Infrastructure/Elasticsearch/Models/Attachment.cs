@@ -1,16 +1,16 @@
-﻿namespace Sfa.Infrastructure.Elasticsearch.Models
-{
-    using Nest;
+﻿using Nest;
 
+namespace Sfa.Infrastructure.Elasticsearch.Models
+{
     public class Attachment
     {
-        [ElasticProperty(Name = "_content")]
+        [String(Name="_content")]
         public string Content { get; set; }
 
-        [ElasticProperty(Name = "_content_type")]
+        [String(Name= "_content_type")]
         public string ContentType { get; set; }
 
-        [ElasticProperty(Name = "_name")]
+        [String(Name= "_name")]
         public string Name { get; set; }
     }
 }

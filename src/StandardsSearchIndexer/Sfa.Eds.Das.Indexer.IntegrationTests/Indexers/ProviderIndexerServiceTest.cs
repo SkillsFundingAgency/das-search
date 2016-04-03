@@ -73,15 +73,15 @@
             var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
             await _sut.CreateScheduledIndex(scheduledDate);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
             var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
             mapping.Should().NotBeNull();
 
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.DeleteIndex(Indices.Index(indexName));
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
         }
 
         [Test]
@@ -102,21 +102,21 @@
                                              };
 
             DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
 
             _indexerService.CreateIndex(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
             _indexerService.IndexEntries(indexName);
 
             Thread.Sleep(2000);
 
-            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).QueryString("MK40 2SG"));
+            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).Query(q => q.QueryString(qs => qs.Query("MK40 2SG"))));
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.DeleteIndex(Indices.Index(indexName));
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
 
             Assert.AreEqual(1, amountRetrieved);
             Assert.AreEqual(expectedProviderResult.Name, retrievedProvider.Name);
@@ -131,26 +131,38 @@
             var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
 
             _indexerService.CreateIndex(indexName);
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeTrue();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
             await _indexerService.IndexEntries(indexName);
 
             Thread.Sleep(2000);
 
-            QueryContainer query1 = new TermQuery { Field = "standardCode", Value = 17 };
-            var providersCase1 = _elasticClient.Search<Provider>(s => s.Index(indexName).Type(_providerSettings.StandardProviderDocumentType).Query(query1));
+            var providersCase1 = _elasticClient.Search<Provider>(s => s
+                .Index(indexName)
+                .Type(_providerSettings.StandardProviderDocumentType)
+                .Query(q => q
+                    .Term("standardCode", 17)));
 
-            QueryContainer query2 = new TermQuery { Field = "standardCode", Value = 45 };
-            var providersCase2 = _elasticClient.Search<Provider>(s => s.Index(indexName).Type(_providerSettings.StandardProviderDocumentType).Query(query2));
+            var providersCase2 = _elasticClient.Search<Provider>(s => s
+                .Index(indexName)
+                .Type(_providerSettings.StandardProviderDocumentType)
+                .Query(q => q
+                    .Term("standardCode", 45)));
 
-            QueryContainer query3 = new TermQuery { Field = "standardCode", Value = 1234567890 };
-            var providersCase3 = _elasticClient.Search<Provider>(s => s.Index(indexName).Type(_providerSettings.StandardProviderDocumentType).Query(query3));
+            var providersCase3 = _elasticClient.Search<Provider>(s => s
+                .Index(indexName)
+                .Type(_providerSettings.StandardProviderDocumentType)
+                .Query(q => q
+                    .Term("standardCode", 1234567890)));
 
-            QueryContainer query4 = new TermQuery { Field = "frameworkCode", Value = 45 };
-            var providersCase4 = _elasticClient.Search<Provider>(s => s.Index(indexName).Type(_providerSettings.FrameworkProviderDocumentType).Query(query4));
+            var providersCase4 = _elasticClient.Search<Provider>(s => s
+                .Index(indexName)
+                .Type(_providerSettings.FrameworkProviderDocumentType)
+                .Query(q => q
+                    .Term("standardCode", 45)));
 
             Assert.AreEqual(1, providersCase1.Documents.Count());
             Assert.AreEqual(1, providersCase2.Documents.Count());
@@ -159,16 +171,16 @@
 
             Assert.AreEqual(1000238745115641, providersCase4.Documents.First().Id);
 
-            _elasticClient.DeleteIndex(i => i.Index(indexName));
-            _elasticClient.IndexExists(i => i.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.DeleteIndex(Indices.Index(indexName));
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
         }
 
         private void DeleteIndexIfExists(string indexName)
         {
-            var exists = _elasticClient.IndexExists(i => i.Index(indexName));
+            var exists = _elasticClient.IndexExists(Indices.Index(indexName));
             if (exists.Exists)
             {
-                _elasticClient.DeleteIndex(i => i.Index(indexName));
+                _elasticClient.DeleteIndex(Indices.Index(indexName));
             }
         }
 
