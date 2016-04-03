@@ -138,7 +138,7 @@
 
             await _indexerService.IndexEntries(indexName);
 
-            Thread.Sleep(2000);
+            _elasticClient.Refresh(Indices.Index(indexName));
 
             var providersCase1 = _elasticClient.Search<Provider>(s => s
                 .Index(indexName)
@@ -162,7 +162,7 @@
                 .Index(indexName)
                 .Type(_providerSettings.FrameworkProviderDocumentType)
                 .Query(q => q
-                    .Term("standardCode", 45)));
+                    .Term("frameworkCode", 45)));
 
             Assert.AreEqual(1, providersCase1.Documents.Count());
             Assert.AreEqual(1, providersCase2.Documents.Count());
