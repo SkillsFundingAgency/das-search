@@ -75,6 +75,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Pages\FrameworkDetailPage.cs" />
     <Compile Include="Pages\ProviderDetailPage.cs" />
     <Compile Include="Pages\ProviderResultPage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="StepDefinitions\ProviderResultsSteps.cs" />
     <Compile Include="StepDefinitions\StandardSearchResultSteps.cs" />
     <Compile Include="StepDefinitions\StandardsSearchSteps.cs" />
+    <Compile Include="StepDefinitions\ViewFrameworkDetailsSteps.cs" />
     <Compile Include="StepDefinitions\ViewStandardDetailsSteps.cs" />
     <Compile Include="Test\Features\Sprint1\SearchStandardByTitle.feature.cs">
       <AutoGen>True</AutoGen>
@@ -137,6 +139,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkSearch.feature</DependentUpon>
     </Compile>
+    <Compile Include="Test\Features\Sprint8\ViewFrameworkDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewFrameworkDetails.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -187,6 +194,10 @@
     <None Include="Test\Features\Sprint7\FrameworkSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FrameworkSearch.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint8\ViewFrameworkDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewFrameworkDetails.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
