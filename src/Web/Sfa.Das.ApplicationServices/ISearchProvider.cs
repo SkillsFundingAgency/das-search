@@ -7,6 +7,7 @@ namespace Sfa.Das.ApplicationServices
     {
         ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take);
 
-        SearchResult<StandardProviderSearchResultsItem> SearchByLocation(int standardId, Coordinate testCoordinates);
+        SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates);
+        SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates);
     }
 }

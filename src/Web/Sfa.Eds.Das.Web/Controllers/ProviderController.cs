@@ -45,7 +45,7 @@ namespace Sfa.Eds.Das.Web.Controllers
                 return RedirectToAction("Standard", "Apprenticeship", new { id = criteria.StandardId, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
+            var searchResults = await _providerSearchService.SearchByStandardPostCode(criteria.StandardId, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 
@@ -60,7 +60,7 @@ namespace Sfa.Eds.Das.Web.Controllers
                 return RedirectToAction("Framework", "Apprenticeship", new { id = criteria.StandardId, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByPostCode(criteria.StandardId, criteria.PostCode);
+            var searchResults = await _providerSearchService.SearchByStandardPostCode(criteria.StandardId, criteria.PostCode);
 
             var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 

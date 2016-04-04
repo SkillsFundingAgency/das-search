@@ -47,7 +47,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByLocation(int code, Coordinate geoPoint)
+        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint)
         {
             var client = _elasticsearchClientFactory.Create();
             var qryStr = CreateStandardProviderRawQuery(code.ToString(), geoPoint);
@@ -94,10 +94,71 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total };
         }
 
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint)
+        {
+            var client = _elasticsearchClientFactory.Create();
+            var qryStr = CreateFrameworkProviderRawQuery(code.ToString(), geoPoint);
+
+            var results = client
+                .Search<FrameworkProviderSearchResultsItem>(s => s
+                .Index(_applicationSettings.ProviderIndexAlias)
+                .From(0)
+                .Size(1000)
+                .QueryRaw(qryStr)
+                .SortGeoDistance(g =>
+                {
+                    g.PinTo(geoPoint.Lat, geoPoint.Lon)
+                        .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
+                    return g;
+                }));
+
+            var documents = results.Hits.Select(hit => new FrameworkProviderSearchResultsItem
+            {
+                Id = hit.Source.Id,
+                UkPrn = hit.Source.UkPrn,
+                Address = hit.Source.Address,
+                ContactUsUrl = hit.Source.ContactUsUrl,
+                DeliveryModes = hit.Source.DeliveryModes,
+                Email = hit.Source.Email,
+                EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
+                LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
+                LocationId = hit.Source.LocationId,
+                LocationName = hit.Source.LocationName,
+                ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
+                Name = hit.Source.Name,
+                Phone = hit.Source.Phone,
+                FrameworkCode = hit.Source.FrameworkCode,
+                PathwayCode = hit.Source.PathwayCode,
+                StandardInfoUrl = hit.Source.StandardInfoUrl,
+                Level = hit.Source.Level,
+                Website = hit.Source.Website,
+                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
+            }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
+
+            if (results.ConnectionStatus?.HttpStatusCode != 200)
+            {
+                throw new SearchException($"Search returned a status code of {results.ConnectionStatus?.HttpStatusCode}");
+            }
+
+            return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total };
+        }
+
         private string CreateStandardProviderRawQuery(string code, Coordinate location)
         {
+            return CreateFullQuery("standardCode", code, location);
+        }
+
+        private string CreateFrameworkProviderRawQuery(string code, Coordinate location)
+        {
+            return CreateFullQuery("frameworkCode", code, location);
+        }
+
+        private string CreateFullQuery(string specificPart, string code, Coordinate location)
+        {
             return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ""standardCode"": """,
+                @"{""filtered"": { ""query"": { ""match"": { ", 
+                specificPart,
+                @""": """,
                 code,
                 @""" }}, ""filter"": { ""geo_shape"": { ""location"": { ""shape"": { ""type"": ""point"", ""coordinates"": [",
                 location.Lon,

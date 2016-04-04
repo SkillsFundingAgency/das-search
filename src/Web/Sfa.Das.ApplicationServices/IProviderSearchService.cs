@@ -5,6 +5,7 @@ namespace Sfa.Das.ApplicationServices
 {
     public interface IProviderSearchService
     {
-        Task<ProviderStandardSearchResults> SearchByPostCode(int standardId, string postCode);
+        Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode);
+        Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode);
     }
 }
