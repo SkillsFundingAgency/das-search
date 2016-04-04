@@ -16,7 +16,7 @@
         public IndexerRegistry()
         {
             For<IIndexerJob>().Use<IndexerJob>();
-            For<IElasticClient>().Use<ElasticClient>();
+            For<IElasticClient>().Use<ElasticClient>(); // TODO: LWA - We shouldn't have a referenece to nest. Remove Nest package.
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IWorkerRoleSettings>().Use<WorkRoleSettings>();
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();

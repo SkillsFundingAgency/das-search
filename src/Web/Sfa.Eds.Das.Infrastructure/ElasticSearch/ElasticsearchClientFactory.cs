@@ -1,12 +1,10 @@
-﻿namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
+﻿using Elasticsearch.Net;
+using Nest;
+using Sfa.Das.ApplicationServices.Models;
+using Sfa.Eds.Das.Core.Configuration;
+
+namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
-    using global::Elasticsearch.Net.ConnectionPool;
-
-    using Nest;
-
-    using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Configuration;
-
     public sealed class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
         private readonly IConfigurationSettings _applicationSettings;
@@ -18,7 +16,7 @@
 
         public IElasticClient Create()
         {
-            var pool = new SniffingConnectionPool(_applicationSettings.ElasticServerUrls);
+            var pool = new StaticConnectionPool(_applicationSettings.ElasticServerUrls);
             var settings = new ConnectionSettings(pool);
 
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));

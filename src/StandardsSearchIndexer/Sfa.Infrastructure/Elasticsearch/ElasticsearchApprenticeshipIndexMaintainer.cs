@@ -23,7 +23,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public override void CreateIndex(string indexName)
         {
-            Client.Raw.IndicesCreatePost(indexName, _apprenticeshipIndexDefinitions.Generate());
+            Client.LowLevel.IndicesCreatePost<string>(indexName, _apprenticeshipIndexDefinitions.Generate());
         }
 
         public async Task IndexStandards(string indexName, ICollection<StandardMetaData> entries)

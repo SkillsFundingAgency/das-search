@@ -26,7 +26,7 @@
 
         public override void CreateIndex(string indexName)
         {
-            Client.Raw.IndicesCreatePost(indexName, _providerIndexDefinitionGenerator.Generate());
+            Client.LowLevel.IndicesCreatePost<string>(indexName, _providerIndexDefinitionGenerator.Generate());
         }
 
         public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)
@@ -82,7 +82,7 @@
                 }
 
                 var query = CreateRawFormat(provider, apprenticeship, location, apprenticeshipJson);
-                var response = await Client.Raw.IndexAsync(indexName, typeName, query);
+                var response = await Client.LowLevel.IndexAsync<string>(indexName, typeName, query);
 
                 if (!response.Success)
                 {

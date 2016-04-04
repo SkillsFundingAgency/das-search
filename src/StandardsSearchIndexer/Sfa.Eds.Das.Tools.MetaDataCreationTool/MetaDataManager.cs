@@ -4,9 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
     using Newtonsoft.Json;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.MetaData;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;

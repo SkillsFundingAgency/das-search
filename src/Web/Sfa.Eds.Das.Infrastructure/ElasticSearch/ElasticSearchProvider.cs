@@ -27,15 +27,20 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
-            var client = this._elasticsearchClientFactory.Create();
+            var client = _elasticsearchClientFactory.Create();
             var results = client.Search<ApprenticeshipSearchResultsItem>(s => s
-                .Indices(_applicationSettings.ApprenticeshipIndexAlias)
-                .Types("standarddocument", "frameworkdocument")
+                .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                .Type(Types.Parse("standarddocument,frameworkdocument"))
                 .Skip(skip)
                 .Take(take)
                 .Query(q => q
                     .QueryString(qs => qs
-                        .OnFields(f => f.Title, p => p.JobRoles, p => p.Keywords, p => p.FrameworkName, p => p.PathwayName)
+                        .Fields(fs => fs
+                            .Field(f => f.Title)
+                            .Field(p => p.JobRoles)
+                            .Field(p => p.Keywords)
+                            .Field(p => p.FrameworkName)
+                            .Field(p => p.PathwayName))
                         .Query(formattedKeywords))));
 
             return new ApprenticeshipSearchResults
@@ -43,7 +48,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 TotalResults = results.Total,
                 SearchTerm = formattedKeywords,
                 Results = results.Documents,
-                HasError = results.ConnectionStatus.HttpStatusCode != 200
+                HasError = results.ApiCall.HttpStatusCode != 200
             };
         }
 
@@ -57,13 +62,14 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 .Index(_applicationSettings.ProviderIndexAlias)
                 .From(0)
                 .Size(1000)
-                .QueryRaw(qryStr)
-                .SortGeoDistance(g =>
-                {
-                    g.PinTo(geoPoint.Lat, geoPoint.Lon)
-                        .Unit(GeoUnit.Miles).OnField("locationPoint").Ascending();
-                    return g;
-                }));
+                .Query(q => q
+                    .Raw(qryStr))
+                .Sort(ss => ss
+                    .GeoDistance(g => g
+                        .Field("locationPoint")
+                        .PinTo(new GeoLocation(geoPoint.Lat, geoPoint.Lon))
+                        .Unit(DistanceUnit.Miles)
+                        .Ascending())));
 
             var documents = results.Hits.Select(hit => new StandardProviderSearchResultsItem
             {
@@ -86,9 +92,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
 
-            if (results.ConnectionStatus?.HttpStatusCode != 200)
+            if (results.ApiCall?.HttpStatusCode != 200)
             {
-                throw new SearchException($"Search returned a status code of {results.ConnectionStatus?.HttpStatusCode}");
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
             }
 
             return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total };
