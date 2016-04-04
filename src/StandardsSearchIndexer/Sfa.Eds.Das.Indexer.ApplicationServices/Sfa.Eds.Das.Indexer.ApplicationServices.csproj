@@ -59,11 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyResolution\ProviderRegistry.cs" />
-    <Compile Include="DependencyResolution\StandardRegistry.cs" />
+    <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Http\IHttpPost.cs" />
     <Compile Include="Http\IRetryWebRequest.cs" />
     <Compile Include="IndexerHelper.cs" />
+    <Compile Include="Infrastructure\IServerEnvironment.cs" />
     <Compile Include="Infrastructure\IUnzipStream.cs" />
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
     <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Services\IMaintainProviderIndex.cs" />
     <Compile Include="Services\IMaintainApprenticeshipIndex.cs" />
     <Compile Include="Settings\AppServiceSettings.cs" />
-    <Compile Include="Settings\BaseSettings.cs" />
+    <Compile Include="Settings\AppConfigSettingsProvider.cs" />
     <Compile Include="Standard\IMetaDataHelper.cs" />
     <Compile Include="Standard\MetaDataHelper.cs" />
     <Compile Include="Provider\ProviderIndexer.cs" />

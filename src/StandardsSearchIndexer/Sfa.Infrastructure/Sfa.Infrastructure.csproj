@@ -145,6 +145,7 @@
     <Compile Include="Settings\LarsSettings.cs" />
     <Compile Include="Settings\ILarsSettings.cs" />
     <Compile Include="Elasticsearch\Models\StandardDocument.cs" />
+    <Compile Include="Settings\MachineSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

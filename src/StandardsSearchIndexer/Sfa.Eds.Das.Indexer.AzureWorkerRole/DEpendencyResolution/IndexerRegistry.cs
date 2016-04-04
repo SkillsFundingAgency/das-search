@@ -1,13 +1,14 @@
 ﻿namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
 {
+    using ApplicationServices.Settings;
+    using Core.Services;
+    using Infrastructure.Settings;
     using Nest;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.Settings;
     using Sfa.Infrastructure.Elasticsearch;
-    using Sfa.Infrastructure.Services;
 
     using StructureMap;
 
@@ -22,6 +23,7 @@
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
             For<IGetMessageTimes>().Use<AzureQueueService>();
             For<IClearQueue>().Use<AzureQueueService>();
+            For<IProvideSettings>().Use(c => new AppConfigSettingsProvider(new MachineSettings()));
         }
     }
 }

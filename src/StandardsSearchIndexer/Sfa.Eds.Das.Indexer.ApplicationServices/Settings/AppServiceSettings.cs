@@ -1,16 +1,21 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
 {
     using System;
-    using System.Configuration;
-    using System.IO;
-
-    public class AppServiceSettings : BaseSettings, IAppServiceSettings
+    using Core.Services;
+    public class AppServiceSettings : IAppServiceSettings
     {
-        public string CsvFileName => GetSetting("CsvFileName");
+        private readonly IProvideSettings _settings;
 
-        public string VstsGitFolderPath => GetSetting("VstsGitFolderPath");
+        public AppServiceSettings(IProvideSettings settingsProvider)
+        {
+            _settings = settingsProvider;
+        }
 
-        public string EnvironmentName => GetSetting("EnvironmentName");
+        public string CsvFileName => _settings.GetSetting("CsvFileName");
+
+        public string VstsGitFolderPath => _settings.GetSetting("VstsGitFolderPath");
+
+        public string EnvironmentName => _settings.GetSetting("EnvironmentName");
 
         public string VstsGitGetFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitFolderPath}&recursionLevel=Full&api-version=2.0";
 
@@ -20,25 +25,25 @@
 
         public string VstsGitPushUrl => $"{VstsGitBaseUrl}/pushes?api-version=2.0-preview";
 
-        public string GitUsername => GetSetting("GitUsername");
+        public string GitUsername => _settings.GetSetting("GitUsername");
 
-        public string GitPassword => GetSetting("GitPassword");
+        public string GitPassword => _settings.GetSetting("GitPassword");
 
-        public string GitBranch => GetSetting("GitBranch");
+        public string GitBranch => _settings.GetSetting("GitBranch");
 
-        public string ConnectionString => GetSetting("StorageConnectionString");
+        public string ConnectionString => _settings.GetSetting("StorageConnectionString");
 
-        public string ImServiceBaseUrl => GetSetting("ImServiceBaseUrl");
+        public string ImServiceBaseUrl => _settings.GetSetting("ImServiceBaseUrl");
 
-        public string ImServiceUrl => GetSetting("ImServiceUrl");
+        public string ImServiceUrl => _settings.GetSetting("ImServiceUrl");
 
         // Private appServiceSettings
-        private string VstsGitBaseUrl => GetSetting("VstsGitBaseUrl");
+        private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
 
         public string QueueName(Type type)
         {
             var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Apprenticeship").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
-            return GetSetting(name);
+            return _settings.GetSetting(name);
         }
     }
 }

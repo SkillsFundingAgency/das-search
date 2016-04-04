@@ -82,7 +82,6 @@
     <Compile Include="Services\GitTestResults.cs" />
     <Compile Include="MetaDataTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BaseSettingsTests.cs" />
     <Compile Include="VstsTest.cs" />
     <Compile Include="Services\GitTest.cs" />
   </ItemGroup>
