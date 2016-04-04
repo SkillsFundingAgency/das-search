@@ -150,13 +150,13 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         private string CreateFrameworkProviderRawQuery(string code, Coordinate location)
         {
-            return CreateFullQuery("frameworkCode", code, location);
+            return CreateFullQuery("frameworkId", code, location);
         }
 
         private string CreateFullQuery(string specificPart, string code, Coordinate location)
         {
             return string.Concat(
-                @"{""filtered"": { ""query"": { ""match"": { ", 
+                @"{""filtered"": { ""query"": { ""match"": { """,
                 specificPart,
                 @""": """,
                 code,
