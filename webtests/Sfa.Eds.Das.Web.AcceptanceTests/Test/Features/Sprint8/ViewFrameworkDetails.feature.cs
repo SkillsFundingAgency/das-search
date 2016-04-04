@@ -66,12 +66,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint8
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search framework by title and pathway together")]
+        [NUnit.Framework.DescriptionAttribute("Verify Framework detail page")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("Food and Drink: Meat and Poultry Industry Skills", "Food and Drink", "Meat and Poultry Industry Skills", null)]
         [NUnit.Framework.TestCaseAttribute("Food and Drink: Baking Industry Skills", "Food and Drink", "Baking Industry Skills", null)]
         [NUnit.Framework.TestCaseAttribute("Food and Drink: Fish and Shellfish Industry Skills", "Food and Drink", "Fish and Shellfish Industry Skills", null)]
-        public virtual void SearchFrameworkByTitleAndPathwayTogether(string titlePathway, string frameworkTitle, string pathwayTitle, string[] exampleTags)
+        public virtual void VerifyFrameworkDetailPage(string titlePathway, string frameworkTitle, string pathwayTitle, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -79,7 +79,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint8
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search framework by title and pathway together", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Framework detail page", @__tags);
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 9

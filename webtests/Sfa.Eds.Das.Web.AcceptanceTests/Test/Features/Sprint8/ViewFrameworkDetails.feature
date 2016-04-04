@@ -5,7 +5,7 @@
 
 
 @regression
-Scenario Outline: Search framework by title and pathway together
+Scenario Outline: Verify Framework detail page
 Given I am on Search landing page
 And I enter framework '<TitlePathway>' in search box
 When I click on search button
