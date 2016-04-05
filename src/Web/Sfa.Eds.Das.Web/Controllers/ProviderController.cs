@@ -42,7 +42,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction("Standard", "Apprenticeship", new { id = criteria.ApprenticeshipId, HasError = true });
+                return RedirectToAction("Standard", "Apprenticeship", new { id = criteria?.ApprenticeshipId, HasError = true });
             }
 
             var searchResults = await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode);
@@ -57,7 +57,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction("Framework", "Apprenticeship", new { id = criteria.ApprenticeshipId, HasError = true });
+                return RedirectToAction("Framework", "Apprenticeship", new { id = criteria?.ApprenticeshipId, HasError = true });
             }
 
             var searchResults = await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode);
