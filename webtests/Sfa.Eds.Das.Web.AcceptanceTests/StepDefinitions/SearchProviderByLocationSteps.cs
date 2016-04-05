@@ -22,7 +22,15 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             srchPage.OpenStandarDetails(p0);
             
         }
-        
+
+        [Given(@"I am on Framework '(.*)' detail page")]
+        public void GivenIAmOnFrameworkDetailPage(string p0)
+        {
+            srchPage.launchLandingPage();
+            srchPage.OpenFrameworkDetails(p0);
+        }
+
+
         [Given(@"I have entered '(.*)' with provider radius (.*) miles")]
         public void GivenIHaveEnteredWithProviderRadiusMiles(string p0, int p1)
         {

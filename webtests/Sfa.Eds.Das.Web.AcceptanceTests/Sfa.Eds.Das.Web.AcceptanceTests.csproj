@@ -139,6 +139,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkSearch.feature</DependentUpon>
     </Compile>
+    <Compile Include="Test\Features\Sprint8\SearchProviderforFramework.feature.cs">
+      <DependentUpon>SearchProviderforFramework.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Test\Features\Sprint8\ViewFrameworkDetails.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -194,6 +199,10 @@
     <None Include="Test\Features\Sprint7\FrameworkSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FrameworkSearch.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint8\SearchProviderforFramework.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProviderforFramework.feature.cs</LastGenOutput>
     </None>
     <None Include="Test\Features\Sprint8\ViewFrameworkDetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

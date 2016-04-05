@@ -63,6 +63,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
            // Sleep(3000);
         }
 
+        public void OpenFrameworkDetails(String framework)
+        {
+            OpenFramework(framework);
+            // Sleep(3000);
+        }
+
         public void SearchKeyword(String keyword)
         {
             type(keyword,searchBox);
@@ -135,6 +141,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void Open(string standard)
         {
             driver.Navigate().GoToUrl(baseUrl + "Apprenticeship/Standard/" + standard);
+
+        }
+
+        public void OpenFramework(string framework)
+        {
+            driver.Navigate().GoToUrl(baseUrl + "Apprenticeship/Framework/" + framework);
 
         }
 
