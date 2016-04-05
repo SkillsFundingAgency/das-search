@@ -12,6 +12,6 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData);
 
-        int MapRevertLevel(int level);
+        int MapLevelProgType(int level);
     }
 }

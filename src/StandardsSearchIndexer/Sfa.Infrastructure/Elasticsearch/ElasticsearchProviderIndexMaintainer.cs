@@ -113,7 +113,7 @@
                 @", ""pathwayCode"": ",
                 framework.PathwayCode,
                 @", ""frameworkId"": ",
-                string.Concat(framework.Code, ElasticsearchMapper.MapRevertLevel(framework.Level), framework.PathwayCode),
+                string.Concat(framework.Code, ElasticsearchMapper.MapLevelProgType(framework.Level), framework.PathwayCode),
                 @", ""level"": ",
                 framework.Level);
             return raw;
