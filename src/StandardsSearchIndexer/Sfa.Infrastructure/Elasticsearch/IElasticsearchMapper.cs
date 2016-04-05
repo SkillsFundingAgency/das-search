@@ -1,3 +1,5 @@
+using System;
+
 namespace Sfa.Infrastructure.Elasticsearch
 {
     using Sfa.Eds.Das.Indexer.Core.Models;
@@ -9,5 +11,7 @@ namespace Sfa.Infrastructure.Elasticsearch
         StandardDocument CreateStandardDocument(StandardMetaData standard);
 
         FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData);
+
+        int MapLevelProgType(int level);
     }
 }

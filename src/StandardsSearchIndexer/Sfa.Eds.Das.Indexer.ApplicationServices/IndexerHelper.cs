@@ -7,7 +7,7 @@
     {
         public static string GetIndexNameAndDateExtension(DateTime dateTime, string indexName, string dateFormat = "yyyy-MM-dd-HH-mm")
         {
-            return $"{indexName}-{dateTime.ToUniversalTime().ToString(dateFormat)}".ToLower(CultureInfo.InvariantCulture);
+            return $"{indexName}-{dateTime.ToString(dateFormat)}".ToLower(CultureInfo.InvariantCulture);
         }
     }
 }

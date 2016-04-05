@@ -31,6 +31,8 @@
 
         public async Task IndexEntries(string indexName)
         {
+            _metaDataHelper.UpdateMetadataRepository();
+
             await IndexStandards(indexName).ConfigureAwait(false);
             await IndexFrameworks(indexName).ConfigureAwait(false);
         }
@@ -56,7 +58,7 @@
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
-        public void SwapIndexes(string newIndexName)
+        public void ChangeUnderlyingIndexForAlias(string newIndexName)
         {
             if (!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
             {
@@ -108,7 +110,6 @@
 
         private Task<ICollection<StandardMetaData>> LoadStandardMetaData()
         {
-            _metaDataHelper.UpdateMetadataRepository();
             _log.Info("Indexing standard PDFs...");
 
             var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();

@@ -97,5 +97,23 @@
             var actual = ((StandardViewModel)result.Model).HasError;
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void StandardDetailPageStandardIsNull()
+        {
+            var mockStandardRepository = new Mock<IGetStandards>();
+
+            var mockRequest = new Mock<HttpRequestBase>();
+            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
+            var moqLogger = new Mock<ILog>();
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null);
+
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false");
+
+            Assert.NotNull(result);
+            Assert.AreEqual(404, result.StatusCode);
+            Assert.AreEqual("Cannot find standard: 1", result.StatusDescription);
+            moqLogger.Verify(m => m.Warn("404 - Cannot find standard: 1"));
+        }
     }
 }

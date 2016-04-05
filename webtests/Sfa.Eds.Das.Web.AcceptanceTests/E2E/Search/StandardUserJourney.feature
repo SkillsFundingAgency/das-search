@@ -1,10 +1,10 @@
-﻿Feature: Search Provider
-	In order to choose from provider list
+﻿Feature: Standard User Journey
 	As an employer
-	I want to be able to search all providers for a given standard
+	I want to be able to search for training options
+	and find a provider for a given standard
 
 @e2e
-Scenario Outline:Show available providers for given standard
+Scenario Outline:Should find a standard and provider
 	Given I am on Search landing page
 	When I enter keyword '<JOBROLE>' in search box
 	And I click on search button

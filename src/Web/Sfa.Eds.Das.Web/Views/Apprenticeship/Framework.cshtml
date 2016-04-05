@@ -15,15 +15,25 @@
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <div class="hgroup">
+            <header class="hgroup">
                 <h1 class="heading-xlarge">
                     @Model.FrameworkName
                 </h1>
-            </div>
+            </header>
+
+            <p>Contains an apprenticeship training programme for @Model.PathwayName, level @GetFrameworkLevel(@Model.Level.ToString())</p>
+
+            <h3 class="heading-medium">
+                Contact a provider
+            </h3>
+            <p>
+                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
+            </p>
+
         </div>
 
         <div class="column-third">
-            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            @using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
                 <div class="related-container">
                     <aside class="related">
@@ -40,7 +50,8 @@
                                         }
                                     </p>
                                 </label>
-                                <input type="hidden" id="frameworkid" name="standardid" class="text-box form-control" value="@Model.FrameworkId">
+                                <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.FrameworkId">
+                                <input type="hidden" id="callermethod" name="callermethod" class="text-box form-control" value="Framework">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
                             <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
@@ -52,22 +63,6 @@
 
             </div>
         </div>
-
-        <section>
-            <header>
-                <h2 class="heading-large">
-                    Contains an apprenticeship training programme for @Model.PathwayName, level @GetFrameworkLevel(@Model.Level.ToString())
-                </h2>
-            </header>
-            <h3 class="heading-medium">
-                Contact a provider
-            </h3>
-            <p>
-                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
-            </p>
-            
-        </section>
-
 </main>
 
 @helper  RenderErrorMessage()

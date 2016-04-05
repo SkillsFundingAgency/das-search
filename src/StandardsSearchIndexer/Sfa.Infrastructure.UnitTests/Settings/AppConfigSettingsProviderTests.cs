@@ -1,11 +1,14 @@
-﻿using System.Configuration;
-using Moq;
-using NUnit.Framework;
-using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-using Sfa.Eds.Das.Indexer.Core.Services;
-
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Settings
+﻿namespace Sfa.Infrastructure.UnitTests.Settings
 {
+    using System.Configuration;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Settings;
+
     [TestFixture]
     public sealed class AppConfigSettingsProviderTests
     {

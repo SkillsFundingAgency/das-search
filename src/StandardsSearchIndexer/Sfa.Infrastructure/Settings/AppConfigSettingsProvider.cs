@@ -1,9 +1,9 @@
-namespace Sfa.Eds.Das.Indexer.ApplicationServices.Settings
+namespace Sfa.Infrastructure.Settings
 {
     using System.Configuration;
-    using Core.Services;
 
-    // TODO: LWA - Does this belong in this project?
+    using Sfa.Eds.Das.Indexer.Core.Services;
+
     public class AppConfigSettingsProvider : IProvideSettings
     {
         private readonly IProvideSettings _baseSettings;

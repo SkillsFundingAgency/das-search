@@ -140,6 +140,7 @@
     <Compile Include="Services\RetryService.cs" />
     <Compile Include="Services\VstsClient.cs" />
     <Compile Include="Services\ZipFileExtractor.cs" />
+    <Compile Include="Settings\AppConfigSettingsProvider.cs" />
     <Compile Include="Settings\InfrastructureSettings.cs" />
     <Compile Include="Settings\IInfrastructureSettings.cs" />
     <Compile Include="Settings\LarsSettings.cs" />

@@ -1,12 +1,12 @@
 ﻿@using Sfa.Eds.Das.Web.Extensions
-@model Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel
+@model Sfa.Eds.Das.Web.ViewModels.ProviderFrameworkSearchResultViewModel
 
 @{
     ViewBag.Title = "Provider Search Results";
 }
 
 <main id="content" role="main">
-    @Html.ActionLink("Back to Standard", "Standard", "Apprenticeship", new {@id = @Model.StandardId} , new { @class = "link-back" } )
+    @Html.ActionLink("Back to Framework", "Framework", "Apprenticeship", new {@id = @Model.FrameworkId} , new { @class = "link-back" } )
     <div id="provider-results" class="grid-row">
 
         <div class="column-two-thirds">
@@ -20,11 +20,11 @@
             </div>
             <p>
                 @{
-                    Html.RenderPartial("_SearchResultMessage");
+                    Html.RenderPartial("_FrameworkSearchResultMessage");
                 }
             </p>
             @{
-                Html.RenderPartial("_ProviderInformation");
+                Html.RenderPartial("_FrameworkProviderInformation");
             }
         </div>
 

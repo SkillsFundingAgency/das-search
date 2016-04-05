@@ -28,32 +28,32 @@ namespace Sfa.Eds.Das.Web.Views.Provider
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 1 "..\..\Views\Provider\_ProviderInformation.cshtml"
+    #line 1 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     using Sfa.Das.ApplicationServices.Models;
     
     #line default
     #line hidden
     using Sfa.Eds.Das.Web;
     
-    #line 2 "..\..\Views\Provider\_ProviderInformation.cshtml"
+    #line 2 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     using Sfa.Eds.Das.Web.ViewModels;
     
     #line default
     #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/_ProviderInformation.cshtml")]
-    public partial class ProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderSearchResultViewModel>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/_FrameworkProviderInformation.cshtml")]
+    public partial class FrameworkProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderFrameworkSearchResultViewModel>
     {
 
-#line 32 "..\..\Views\Provider\_ProviderInformation.cshtml"
-public System.Web.WebPages.HelperResult  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
+#line 32 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+public System.Web.WebPages.HelperResult  RenderEmployersLocationProviderDetails(FrameworkProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 33 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 33 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
 
 
@@ -61,29 +61,37 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <dt>Distance:</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd>Training can take place at your location.</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dd");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
+
+WriteLiteralTo(__razor_helper_writer, ">Training can take place at your location.</dd>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dt>Website:</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd><a");
+WriteLiteralTo(__razor_helper_writer, "    <dd");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
+
+WriteLiteralTo(__razor_helper_writer, "><a");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"link\"");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1357), Tuple.Create("\"", 1377)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1466), Tuple.Create("\"", 1486)
 
-#line 37 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1364), Tuple.Create<System.Object, System.Int32>(item.Website
+#line 37 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+, Tuple.Create(Tuple.Create("", 1473), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1364), false)
+, 1473), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
 
 
-#line 37 "..\..\Views\Provider\_ProviderInformation.cshtml"
-                WriteTo(__razor_helper_writer, item.Website);
+#line 37 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                WriteTo(__razor_helper_writer, item.Website);
 
 
 #line default
@@ -91,26 +99,26 @@ WriteLiteralTo(__razor_helper_writer, "> ");
 WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 
 
-#line 38 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 38 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 40 "..\..\Views\Provider\_ProviderInformation.cshtml"
-public System.Web.WebPages.HelperResult  RenderProviderDetails(ProviderResultItemViewModel item)
+#line 40 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+public System.Web.WebPages.HelperResult  RenderProviderDetails(FrameworkProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 41 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
 
 
@@ -118,10 +126,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <dt>Distance:</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd>");
+WriteLiteralTo(__razor_helper_writer, "    <dd");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 43 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 43 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.Distance);
 
 
@@ -136,7 +148,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 44 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.LocationName);
 
 
@@ -145,7 +157,7 @@ WriteTo(__razor_helper_writer, item.LocationName);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 44 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
              WriteTo(__razor_helper_writer, item.Address.Address1);
 
 
@@ -154,7 +166,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 44 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                     WriteTo(__razor_helper_writer, item.Address.Address2);
 
 
@@ -163,7 +175,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 44 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                            WriteTo(__razor_helper_writer, item.Address.County);
 
 
@@ -172,7 +184,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 44 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                                                 WriteTo(__razor_helper_writer, item.Address.Postcode);
 
 
@@ -182,23 +194,27 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dt>Website:</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd><a");
+WriteLiteralTo(__razor_helper_writer, "    <dd");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1714), Tuple.Create("\"", 1734)
+WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
-#line 46 "..\..\Views\Provider\_ProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1721), Tuple.Create<System.Object, System.Int32>(item.Website
+WriteLiteralTo(__razor_helper_writer, "><a");
+
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1865), Tuple.Create("\"", 1885)
+
+#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+, Tuple.Create(Tuple.Create("", 1872), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1721), false)
+, 1872), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
 
 
-#line 46 "..\..\Views\Provider\_ProviderInformation.cshtml"
-   WriteTo(__razor_helper_writer, item.Website);
+#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                   WriteTo(__razor_helper_writer, item.Website);
 
 
 #line default
@@ -206,19 +222,19 @@ WriteLiteralTo(__razor_helper_writer, "> ");
 WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 
 
-#line 47 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 47 "..\..\Views\Provider\_ProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-        public ProviderInformation()
+        public FrameworkProviderInformation()
         {
         }
         public override void Execute()
@@ -226,7 +242,7 @@ WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 WriteLiteral("    ");
 
             
-            #line 5 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 5 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
      foreach (var item in Model.Hits)
     {
 
@@ -246,8 +262,8 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 10 "..\..\Views\Provider\_ProviderInformation.cshtml"
-               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
+            #line 10 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.PathwayCode }, null));
 
             
             #line default
@@ -259,13 +275,13 @@ WriteLiteral(" class=\"result-data-list\"");
 WriteLiteral(">\r\n");
 
             
-            #line 15 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 15 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 15 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                  if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
                 {
                     
@@ -273,14 +289,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 17 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(RenderEmployersLocationProviderDetails(item));
 
             
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 17 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                                  
                 }
                 else
@@ -290,14 +306,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 21 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(RenderProviderDetails(item));
 
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 21 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                 
                 }
 
@@ -305,20 +321,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
 WriteLiteral("                \r\n                <dt>Employer satisfaction:</dt>\r\n              " +
-"  <dd>");
+"  <dd");
+
+WriteLiteral(" class=\"employer-satisfaction\"");
+
+WriteLiteral(">");
 
             
-            #line 25 "..\..\Views\Provider\_ProviderInformation.cshtml"
-               Write(item.EmployerSatisfaction);
+            #line 25 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                             Write(item.EmployerSatisfaction);
 
             
             #line default
             #line hidden
-WriteLiteral(" %</dd>\r\n                <dt>Learner satisfaction:</dt>\r\n                <dd>");
+WriteLiteral(" %</dd>\r\n                <dt>Learner satisfaction:</dt>\r\n                <dd");
+
+WriteLiteral(" class=\"learner-satisfaction\"");
+
+WriteLiteral(">");
 
             
-            #line 27 "..\..\Views\Provider\_ProviderInformation.cshtml"
-               Write(item.LearnerSatisfaction);
+            #line 27 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                            Write(item.LearnerSatisfaction);
 
             
             #line default
@@ -326,7 +350,7 @@ WriteLiteral(" %</dd>\r\n                <dt>Learner satisfaction:</dt>\r\n     
 WriteLiteral(" %</dd>\r\n            </dl>\r\n        </article>\r\n");
 
             
-            #line 30 "..\..\Views\Provider\_ProviderInformation.cshtml"
+            #line 30 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     }
 
             

@@ -60,7 +60,9 @@
 
         public void Navigate(string url = "")
         {
-            driver.Navigate().GoToUrl(baseUrl + url);
+            var fullUrl = baseUrl + url;
+            Console.WriteLine($"-> Navigating to {fullUrl}");
+            driver.Navigate().GoToUrl(fullUrl);
         }
 
         public void Launch(string pageTitle)

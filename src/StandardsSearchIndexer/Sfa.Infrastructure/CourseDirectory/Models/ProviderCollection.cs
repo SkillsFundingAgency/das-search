@@ -16,8 +16,6 @@ namespace Sfa.Infrastructure.CourseDirectory.Models
         public static IList<Provider> DeserializeJson(JToken inputObject)
         {
             IList<Provider> deserializedObject = new List<Provider>();
-            // HACK: fix for the api implementation being wrong
-            //foreach (var iListValue in (JArray)((JObject)inputObject).Property("providers").Value)
             foreach (var iListValue in (JArray)inputObject)
             {
                 var provider = new Provider();
