@@ -4,14 +4,13 @@
     using System.Collections.Generic;
     using System.Configuration;
 
-    using Moq;
+    using NSubstitute;
 
     using NUnit.Framework;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Core;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
@@ -22,96 +21,86 @@
     {
         private IContainer _container;
 
-        private Mock<IGetActiveProviders> _mockActiveProviders;
+        private IGetActiveProviders _mockActiveProviders;
 
-        private Mock<IGetMessageTimes> _mockCloudQueue;
+        private IGetMessageTimes _mockCloudQueue;
 
-        private Mock<IMaintainProviderIndex> _mockSearchIndex;
+        private IMaintainProviderIndex _mockSearchIndex;
 
-        private Mock<IGetApprenticeshipProviders> _mockCourseDirectoryClient;
+        private IGetApprenticeshipProviders _mockCourseDirectoryClient;
 
-        [TestFixtureSetUp]
+        private IClearQueue _mockClearQueue;
+
+        [SetUp]
         public void Setup()
         {
             _container = IoC.Initialize();
-            _mockActiveProviders = new Mock<IGetActiveProviders>();
-            _mockCloudQueue = new Mock<IGetMessageTimes>();
-            _mockSearchIndex = new Mock<IMaintainProviderIndex>();
-            _mockCourseDirectoryClient = new Mock<IGetApprenticeshipProviders>();
 
-            _container.Configure(x => x.For<IGetActiveProviders>().Use(_mockActiveProviders.Object));
-            _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue.Object));
-            _container.Configure(x => x.For<IMaintainProviderIndex>().Use(_mockSearchIndex.Object));
-            _container.Configure(x => x.For<IGetApprenticeshipProviders>().Use(_mockCourseDirectoryClient.Object));
+            _mockActiveProviders = Substitute.For<IGetActiveProviders>();
+            _mockCloudQueue = Substitute.For<IGetMessageTimes>();
+            _mockClearQueue = Substitute.For<IClearQueue>();
+            _mockSearchIndex = Substitute.For<IMaintainProviderIndex>();
+            _mockCourseDirectoryClient = Substitute.For<IGetApprenticeshipProviders>();
 
+            _container.Configure(x => x.For<IGetActiveProviders>().Use(_mockActiveProviders));
+            _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue));
+            _container.Configure(x => x.For<IMaintainProviderIndex>().Use(_mockSearchIndex));
+            _container.Configure(x => x.For<IGetApprenticeshipProviders>().Use(_mockCourseDirectoryClient));
+        }
+
+        [Test]
+        public void ShouldIndexProviders()
+        {
             var queue = ConfigurationManager.AppSettings["Provider.QueueName"];
 
-            _mockCloudQueue.Setup(x => x.GetInsertionTimes(queue)).Returns(new List<DateTime> { DateTime.Now });
-            _mockSearchIndex.Setup(x => x.IndexExists(It.IsAny<string>())).Returns(true);
-            _mockCourseDirectoryClient.Setup(x => x.GetApprenticeshipProvidersAsync()).ReturnsAsync(new List<Provider> {new Provider { Ukprn = 123 }, new Provider { Ukprn = 456 } });
-            _mockActiveProviders.Setup(x => x.GetActiveProviders()).Returns(new List<int> { 123 });
-            _mockSearchIndex.Setup(x => x.AliasExists(It.IsAny<string>())).Returns(true);
-            _mockSearchIndex.Setup(x => x.IndexContainsDocuments(It.IsAny<string>())).Returns(true);
+            _container.Configure(x => x.For<IGetActiveProviders>().Use(_mockActiveProviders));
+            _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue));
+            _container.Configure(x => x.For<IMaintainProviderIndex>().Use(_mockSearchIndex));
+            _container.Configure(x => x.For<IGetApprenticeshipProviders>().Use(_mockCourseDirectoryClient));
+            _container.Configure(x => x.For<IClearQueue>().Use(_mockClearQueue));
+
+            _mockCloudQueue.GetInsertionTimes(queue).Returns(new List<DateTime> { DateTime.Now });
+            _mockSearchIndex.IndexExists(Arg.Any<string>()).Returns(true);
+            _mockCourseDirectoryClient.GetApprenticeshipProvidersAsync().Returns(new List<Provider> { new Provider { Ukprn = 123 }, new Provider { Ukprn = 456 } });
+            _mockActiveProviders.GetActiveProviders().Returns(new List<int> { 123 });
+            _mockSearchIndex.AliasExists(Arg.Any<string>()).Returns(true);
+            _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>()).Returns(true);
 
             var sut = _container.GetInstance<IGenericControlQueueConsumer>();
 
             // Act
             sut.CheckMessage<IMaintainProviderIndex>();
-        }
 
-        [Test]
-        public void ShouldCheckIfIndexExistsBeforeAndAfterWeCreateTheIndex()
-        {
-            _mockSearchIndex.Verify(x => x.IndexExists(It.IsAny<string>()), Times.Exactly(2));
-        }
+            // Assert
+            Received.InOrder(() =>
+                {
+                    _mockCloudQueue.GetInsertionTimes(queue);
 
-        [Test]
-        public void ShouldDeleteIndexIfItExists()
-        {
-            _mockSearchIndex.Verify(x => x.DeleteIndex(It.IsAny<string>()), Times.Once);
-        }
+                    // If index exists, delete and recreate it
+                    _mockSearchIndex.IndexExists(Arg.Any<string>());
+                    _mockSearchIndex.DeleteIndex(Arg.Any<string>());
+                    _mockSearchIndex.CreateIndex(Arg.Any<string>());
+                    _mockSearchIndex.IndexExists(Arg.Any<string>());
 
-        [Test]
-        public void ShouldCreateIndex()
-        {
-            _mockSearchIndex.Verify(x => x.CreateIndex(It.IsAny<string>()), Times.Once);
-        }
+                    // Load providers
+                    _mockCourseDirectoryClient.GetApprenticeshipProvidersAsync();
+                    _mockActiveProviders.GetActiveProviders();
 
-        [Test]
-        public void ShouldRetrieveAListOfProvidersFromCourseDirectory()
-        {
-            _mockCourseDirectoryClient.Verify(x => x.GetApprenticeshipProvidersAsync(), Times.Once);
-        }
+                    // Index the providers
+                    _mockSearchIndex.IndexEntries(Arg.Any<string>(), Arg.Any<ICollection<Provider>>());
+                    _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>());
 
-        [Test]
-        public void ShouldRetreiveAListOfActiveProviders()
-        {
-            _mockActiveProviders.Verify(x => x.GetActiveProviders(), Times.Once);
-        }
+                    // Swap the alias with the new index name
+                    _mockSearchIndex.AliasExists(Arg.Any<string>());
+                    _mockSearchIndex.SwapAliasIndex(Arg.Any<string>(), Arg.Any<string>());
 
-        [Test]
-        public void ShouldIndexOnlyOneProvider()
-        {
-            _mockSearchIndex.Verify(x => x.IndexEntries(It.IsAny<string>(), It.Is<ICollection<Provider>>(y => y.Count == 1)), Times.Once);
-        }
+                    // Delete the old indices
+                    _mockSearchIndex.DeleteIndexes(Arg.Any<Func<string, bool>>());
 
-        [Test]
-        public void ShouldValidateTheIndexWasCreated()
-        {
-            _mockSearchIndex.Verify(x => x.IndexContainsDocuments(It.IsAny<string>()), Times.Once);
-        }
+                    // Clear messages from the queue used to trigger the indexer
+                    _mockClearQueue.ClearQueue(queue);
+            });
 
-        [Test]
-        public void ShouldSwapTheIndexAlias()
-        {
-            _mockSearchIndex.Verify(x => x.AliasExists(It.IsAny<string>()), Times.Once);
-            _mockSearchIndex.Verify(x => x.SwapAliasIndex(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
-        }
-
-        [Test]
-        public void ShouldDeleteOldIndex()
-        {
-            _mockSearchIndex.Verify(x => x.DeleteIndexes(It.IsAny<Func<string, bool>>()));
         }
     }
 }
