@@ -310,20 +310,20 @@ WriteLiteral("                                    </p>\r\n                      
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteLiteral(" id=\"frameworkid\"");
+WriteLiteral(" id=\"apprenticeshipid\"");
 
-WriteLiteral(" name=\"standardid\"");
+WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1771), Tuple.Create("\"", 1797)
+WriteAttribute("value", Tuple.Create(" value=\"", 1782), Tuple.Create("\"", 1808)
             
             #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                             , Tuple.Create(Tuple.Create("", 1779), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+                                                        , Tuple.Create(Tuple.Create("", 1790), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 1779), false)
+, 1790), false)
 );
 
 WriteLiteral(">\r\n                                <input");
