@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution
 {
-    using ApplicationServices.Settings;
     using Core.Services;
     using Infrastructure.Settings;
     using Nest;
