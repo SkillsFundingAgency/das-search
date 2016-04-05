@@ -31,6 +31,8 @@
 
         public async Task IndexEntries(string indexName)
         {
+            _metaDataHelper.UpdateMetadataRepository();
+
             await IndexStandards(indexName).ConfigureAwait(false);
             await IndexFrameworks(indexName).ConfigureAwait(false);
         }
@@ -108,7 +110,6 @@
 
         private Task<ICollection<StandardMetaData>> LoadStandardMetaData()
         {
-            _metaDataHelper.UpdateMetadataRepository();
             _log.Info("Indexing standard PDFs...");
 
             var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();

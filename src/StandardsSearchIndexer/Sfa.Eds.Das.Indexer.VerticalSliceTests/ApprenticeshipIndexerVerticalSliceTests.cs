@@ -10,62 +10,60 @@
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+    using Sfa.Eds.Das.Indexer.ApplicationServices.Standard;
     using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
 
     using StructureMap;
 
     [TestFixture]
-    public class ProviderIndexerVerticalSliceTests
+    public class ApprenticeshipIndexerVerticalSliceTests
     {
         private IContainer _container;
 
-        private IGetActiveProviders _mockActiveProviders;
-
         private IGetMessageTimes _mockCloudQueue;
 
-        private IMaintainProviderIndex _mockSearchIndex;
-
-        private IGetApprenticeshipProviders _mockCourseDirectoryClient;
+        private IMaintainApprenticeshipIndex _mockSearchIndex;
 
         private IClearQueue _mockClearQueue;
 
-        private readonly string _queue = ConfigurationManager.AppSettings["Provider.QueueName"];
+        private readonly string _queue = ConfigurationManager.AppSettings["Apprenticeship.QueueName"];
+
+        private IMetaDataHelper _mockMetaDataHelper;
 
         [SetUp]
         public void Setup()
         {
             _container = IoC.Initialize();
 
-            _mockActiveProviders = Substitute.For<IGetActiveProviders>();
             _mockCloudQueue = Substitute.For<IGetMessageTimes>();
             _mockClearQueue = Substitute.For<IClearQueue>();
-            _mockSearchIndex = Substitute.For<IMaintainProviderIndex>();
-            _mockCourseDirectoryClient = Substitute.For<IGetApprenticeshipProviders>();
+            _mockSearchIndex = Substitute.For<IMaintainApprenticeshipIndex>();
+            _mockMetaDataHelper = Substitute.For<IMetaDataHelper>();
 
-            _container.Configure(x => x.For<IGetActiveProviders>().Use(_mockActiveProviders));
             _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue));
-            _container.Configure(x => x.For<IMaintainProviderIndex>().Use(_mockSearchIndex));
-            _container.Configure(x => x.For<IGetApprenticeshipProviders>().Use(_mockCourseDirectoryClient));
+            _container.Configure(x => x.For<IMaintainApprenticeshipIndex>().Use(_mockSearchIndex));
             _container.Configure(x => x.For<IClearQueue>().Use(_mockClearQueue));
+            _container.Configure(x => x.For<IMetaDataHelper>().Use(_mockMetaDataHelper));
         }
 
         [Test]
-        public void ShouldIndexProviders()
+        public void ShouldIndexApprenticeships()
         {
             _mockCloudQueue.GetInsertionTimes(_queue).Returns(new List<DateTime> { DateTime.Now });
             _mockSearchIndex.IndexExists(Arg.Any<string>()).Returns(true);
 
-            _mockCourseDirectoryClient.GetApprenticeshipProvidersAsync().Returns(new List<Provider> { new Provider { Ukprn = 123 }, new Provider { Ukprn = 456 } });
-            _mockActiveProviders.GetActiveProviders().Returns(new List<int> { 123 });
+            _mockMetaDataHelper.GetAllFrameworkMetaData().Returns(new List<FrameworkMetaData> { new FrameworkMetaData() });
+            _mockMetaDataHelper.GetAllStandardsMetaData().Returns(new List<StandardMetaData> { new StandardMetaData() });
+
             _mockSearchIndex.AliasExists(Arg.Any<string>()).Returns(true);
             _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>()).Returns(true);
 
             var sut = _container.GetInstance<IGenericControlQueueConsumer>();
 
             // Act
-            sut.CheckMessage<IMaintainProviderIndex>();
+            sut.CheckMessage<IMaintainApprenticeshipIndex>();
 
             // Assert
             Received.InOrder(
@@ -80,15 +78,19 @@
                         _mockSearchIndex.CreateIndex(Arg.Any<string>());
                         _mockSearchIndex.IndexExists(Arg.Any<string>());
 
-                        // Load providers
-                        _mockCourseDirectoryClient.GetApprenticeshipProvidersAsync();
-                        _mockActiveProviders.GetActiveProviders();
+                        // Create meta data for new standards
+                        _mockMetaDataHelper.UpdateMetadataRepository();
 
-                        // Index the providers
-                        _mockSearchIndex.IndexEntries(Arg.Any<string>(), Arg.Any<ICollection<Provider>>());
-                        _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>());
+                        // Index standards
+                        _mockMetaDataHelper.GetAllStandardsMetaData();
+                        _mockSearchIndex.IndexStandards(Arg.Any<string>(), Arg.Any<ICollection<StandardMetaData>>());
+
+                        // Index frameworks
+                        _mockMetaDataHelper.GetAllFrameworkMetaData();
+                        _mockSearchIndex.IndexFrameworks(Arg.Any<string>(), Arg.Any<ICollection<FrameworkMetaData>>());
 
                         // Swap the alias with the new index name
+                        _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>());
                         _mockSearchIndex.AliasExists(Arg.Any<string>());
                         _mockSearchIndex.SwapAliasIndex(Arg.Any<string>(), Arg.Any<string>());
 
