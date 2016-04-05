@@ -227,14 +227,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5586), Tuple.Create("\"", 5594)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5569), Tuple.Create("\"", 5577)
 
 #line 147 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5591), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5574), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5591), false)
+, 5574), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -280,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5771), Tuple.Create("\"", 5785)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5754), Tuple.Create("\"", 5768)
 
 #line 157 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5778), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 5761), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5778), false)
+, 5761), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -501,21 +501,13 @@ WriteLiteral("\r\n                                    </p>\r\n                  
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteLiteral(" id=\"apprenticeshipid\"");
+WriteLiteral(" id=\"callermethod\"");
 
-WriteLiteral(" name=\"apprenticeshipid\"");
+WriteLiteral(" name=\"callermethod\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1998), Tuple.Create("\"", 2023)
-            
-            #line 48 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                        , Tuple.Create(Tuple.Create("", 2006), Tuple.Create<System.Object, System.Int32>(Model.StandardId
-            
-            #line default
-            #line hidden
-, 2006), false)
-);
+WriteLiteral(" value=\"Standard\"");
 
 WriteLiteral(">\r\n                                <input");
 

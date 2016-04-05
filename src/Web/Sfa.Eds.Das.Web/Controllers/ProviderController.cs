@@ -42,7 +42,7 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction("Standard", "Apprenticeship", new { id = criteria?.ApprenticeshipId, HasError = true });
+                return RedirectToAction(criteria?.CallerMethod, "Apprenticeship", new { id = criteria?.ApprenticeshipId, HasError = true });
             }
 
             var searchResults = await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode);
