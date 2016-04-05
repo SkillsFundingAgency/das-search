@@ -6,6 +6,7 @@ namespace Sfa.Infrastructure.Elasticsearch.Models
     {
         public int FrameworkCode { get; set; }
         public int PathwayCode { get; set; }
+        public string FrameworkId { get; set; }
         public int Level { get; set; }
         public int StandardsId { get; set; }
         public int Ukprn { get; set; }

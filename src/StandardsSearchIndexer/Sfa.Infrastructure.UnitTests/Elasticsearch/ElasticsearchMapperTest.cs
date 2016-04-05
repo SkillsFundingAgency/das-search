@@ -117,6 +117,7 @@
 
             Assert.That(document.FrameworkCode, Is.EqualTo(99));
             Assert.That(document.PathwayCode, Is.EqualTo(1122));
+            Assert.That(document.FrameworkId, Is.EqualTo("99201122"));
             Assert.That(document.Level, Is.EqualTo(4));
 
             Assert.That(document.Ukprn, Is.EqualTo(4556));

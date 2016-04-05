@@ -14,7 +14,7 @@ namespace Sfa.Infrastructure.Elasticsearch
         FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData);
 
         int MapLevelProgType(int level);
-        
+
         StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation);
 
         FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation standardInformation, DeliveryInformation deliveryInformation);

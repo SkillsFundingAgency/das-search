@@ -80,6 +80,12 @@ namespace Sfa.Infrastructure.Elasticsearch
             }
         }
 
+        public int MapLevelProgType(int level)
+        {
+            var em = new ElasticMapper();
+            return em.MapLevel(level);
+        }
+
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)
         {
             try
@@ -107,6 +113,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 {
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
+                    FrameworkId = string.Concat(frameworkInformation.Code, MapLevelProgType(frameworkInformation.Level), frameworkInformation.PathwayCode),
                     Level = frameworkInformation.Level
                 };
 
@@ -162,12 +169,6 @@ namespace Sfa.Infrastructure.Elasticsearch
             }
 
             return marketingInfo.Replace(Environment.NewLine, "\\r\\n").Replace("\n", "\\n").Replace("\"", "\\\"");
-        }
-
-        public int MapLevelProgType(int level)
-        {
-            var em = new ElasticMapper();
-            return em.MapLevel(level);
         }
 
         private string CreateFrameworkTitle(string framworkname, string pathwayName)

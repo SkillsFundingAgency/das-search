@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Sfa.Eds.Das.Indexer.Core.Elasticsearch
 {
     public class ElasticMapper
     {
-        readonly Dictionary<int, int> _dictionary;
+        private readonly Dictionary<int, int> _dictionary;
         public ElasticMapper()
         {
             _dictionary = new Dictionary<int, int>
