@@ -15,7 +15,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         By frameworkDetailTitle = By.CssSelector(".heading-xlarge");
         By frameworkDetailLevel = By.XPath(".//*[@id='content']/section/dl/dd[2]");
-        By frameworkDetailPathway = By.CssSelector(".heading-large");
+        By frameworkDetailPathway = By.CssSelector(".column-two-thirds>p");
         By frameworkDetailContent = By.XPath(".//*[@id='content']/section/dl/dd[3]");
         By standardDetailEntryReq = By.XPath(".//*[@id='content']/section/dl/dd[4]");
 
