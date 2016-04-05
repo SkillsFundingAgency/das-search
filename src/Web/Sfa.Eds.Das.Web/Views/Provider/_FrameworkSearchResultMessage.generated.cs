@@ -88,8 +88,8 @@ WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Training providers\r\n    </h2>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are currently no providers for the apprenticeship framewor" +
-"k: \'<b");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are currently no providers for the apprenticeship course: " +
+"\'<b");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"standard-name\"");
 
@@ -97,7 +97,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 39 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                    WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                 WriteTo(__razor_helper_writer, Model.FrameworkName);
 
 
 #line default
@@ -110,7 +110,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 39 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                                                     WriteTo(__razor_helper_writer, Model.PostCode);
+                                                                                                                  WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
@@ -162,7 +162,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> training provider for the apprenticeship framework: \'<b");
+WriteLiteralTo(__razor_helper_writer, "</b> training provider for the apprenticeship course: \'<b");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"standard-name\"");
 
@@ -170,7 +170,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 49 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                                            WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                                                         WriteTo(__razor_helper_writer, Model.FrameworkName);
 
 
 #line default
@@ -237,11 +237,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> training providers for the apprenticeship framework: \'<b>");
+WriteLiteralTo(__razor_helper_writer, "</b> training providers for the apprenticeship course: \'<b>");
 
 
 #line 63 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                           WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                                        WriteTo(__razor_helper_writer, Model.FrameworkName);
 
 
 #line default
