@@ -5,9 +5,9 @@ using Sfa.Infrastructure.Settings;
 namespace Sfa.Infrastructure.Elasticsearch
 {
     using System;
-    public class ElasticsearchClientFactory : IElasticsearchClientFactory, IDisposable
+    public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
-        private ConnectionSettings _connectionSettings;
+        private readonly ConnectionSettings _connectionSettings;
 
         public ElasticsearchClientFactory(IInfrastructureSettings infrastructureSettings)
         {
@@ -18,11 +18,6 @@ namespace Sfa.Infrastructure.Elasticsearch
         {
             var client = new ElasticClient(_connectionSettings);
             return client;
-        }
-
-        public void Dispose()
-        {
-            _connectionSettings = null;
         }
     }
 }
