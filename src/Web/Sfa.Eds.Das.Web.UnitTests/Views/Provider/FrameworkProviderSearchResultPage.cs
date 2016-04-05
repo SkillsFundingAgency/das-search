@@ -15,18 +15,19 @@
     using Web.Views.Provider;
 
     [TestFixture]
-    public sealed class ProviderSearchResultPage : ViewTestBase
+    public sealed class FrameworkProviderSearchResultPage : ViewTestBase
     {
         [Test]
         public void ShouldShowAnErrorWhenSomethingIsWrong()
         {
-            var detail = new StandardSearchResultMessage();
-            var model = new ProviderStandardSearchResultViewModel
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
-                Hits = new List<ProviderResultItemViewModel>(),
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = true
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -37,14 +38,15 @@
         [Test]
         public void ShouldShowIndividualMessageWhenJustOneResultIsReturned()
         {
-            var detail = new StandardSearchResultMessage();
-            var model = new ProviderStandardSearchResultViewModel
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
-                StandardName = "Test name",
-                Hits = new List<ProviderResultItemViewModel>(),
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -55,14 +57,15 @@
         [Test]
         public void ShouldShowGeneralMessageWhenSeveralResultsAreReturned()
         {
-            var detail = new StandardSearchResultMessage();
-            var model = new ProviderStandardSearchResultViewModel
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 7,
                 PostCodeMissing = false,
-                StandardId = 1,
-                StandardName = "Test name",
-                Hits = new List<ProviderResultItemViewModel>(),
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -73,15 +76,15 @@
         [Test]
         public void ShouldHaveAllFieldsInSearchResult()
         {
-            var page = new StandardProviderInformation();
-            var item = new ProviderResultItemViewModel
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Website = "http://www.trainingprovider.co.uk",
                 Address = new Address()
             };
-            var item2 = new ProviderResultItemViewModel
+            var item2 = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 2",
                 DeliveryModes = new List<string> { "BlockRelease" },
@@ -89,18 +92,21 @@
                 Address = new Address()
             };
 
-            var model = new ProviderStandardSearchResultViewModel
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
-                StandardName = "Test name",
-                Hits = new List<ProviderResultItemViewModel> { item, item2 },
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item, item2 },
                 HasError = false
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
+            var a = GetPartial(html, ".result dl dt");
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
+            var b = GetPartial(html, ".result dl dd");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
@@ -114,8 +120,8 @@
         [Test]
         public void ShouldShowJustDistanceIfDeliveryModeIsNotEmployerLocation()
         {
-            var page = new StandardProviderInformation();
-            var item = new ProviderResultItemViewModel
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
@@ -123,13 +129,14 @@
                 Address = new Address()
             };
 
-            var model = new ProviderStandardSearchResultViewModel
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
-                StandardName = "Test name",
-                Hits = new List<ProviderResultItemViewModel> { item },
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
                 HasError = false
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
@@ -141,8 +148,8 @@
         [Test]
         public void ShouldShowJustEmployerLocationIfDeliveryModeContainsEmployerLocation()
         {
-            var page = new StandardProviderInformation();
-            var item = new ProviderResultItemViewModel
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
@@ -150,13 +157,14 @@
                 Address = new Address()
             };
 
-            var model = new ProviderStandardSearchResultViewModel
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
-                StandardName = "Test name",
-                Hits = new List<ProviderResultItemViewModel> { item },
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
                 HasError = false
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
@@ -171,8 +179,8 @@
         [Test]
         public void ShouldShowJustEmployerLocationIfDeliveryModeOnlyHasEmployerLocation()
         {
-            var page = new StandardProviderInformation();
-            var item = new ProviderResultItemViewModel
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
@@ -180,13 +188,14 @@
                 Address = new Address()
             };
 
-            var model = new ProviderStandardSearchResultViewModel
+            var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
-                StandardName = "Test name",
-                Hits = new List<ProviderResultItemViewModel> { item },
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
                 HasError = false
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
