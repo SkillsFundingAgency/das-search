@@ -6,7 +6,6 @@
     using Core.Services;
     using Moq;
     using NUnit.Framework;
-    using Settings;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
 
@@ -40,7 +39,7 @@
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
-            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.AtMostOnce);
+            _mockHelper.Verify(x => x.ChangeUnderlyingIndexForAlias(It.IsAny<string>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
         }
 
@@ -71,7 +70,7 @@
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
-            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.Never);
+            _mockHelper.Verify(x => x.ChangeUnderlyingIndexForAlias(It.IsAny<string>()), Times.Never);
             _mockHelper.VerifyAll();
         }
 
@@ -88,7 +87,7 @@
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
-            _mockHelper.Verify(x => x.SwapIndexes(It.IsAny<string>()), Times.Once);
+            _mockHelper.Verify(x => x.ChangeUnderlyingIndexForAlias(It.IsAny<string>()), Times.Once);
             _mockHelper.VerifyAll();
         }
     }

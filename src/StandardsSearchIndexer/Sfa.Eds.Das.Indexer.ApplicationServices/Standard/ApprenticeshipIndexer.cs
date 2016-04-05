@@ -58,7 +58,7 @@
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
-        public void SwapIndexes(string newIndexName)
+        public void ChangeUnderlyingIndexForAlias(string newIndexName)
         {
             if (!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
             {

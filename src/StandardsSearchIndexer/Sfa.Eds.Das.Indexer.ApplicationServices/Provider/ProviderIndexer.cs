@@ -75,8 +75,8 @@
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
-        // TODO: LWA - The argusment seems a little strange to this method.
-        public void SwapIndexes(string newIndexName)
+        // TODO: LWA - The argument seems a little strange to this method.
+        public void ChangeUnderlyingIndexForAlias(string newIndexName)
         {
             if (!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))
             {

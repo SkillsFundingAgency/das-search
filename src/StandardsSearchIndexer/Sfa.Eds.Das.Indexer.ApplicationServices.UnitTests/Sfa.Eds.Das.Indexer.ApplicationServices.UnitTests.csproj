@@ -57,7 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IndexerServiceTests.cs" />
     <Compile Include="Settings\AppServiceSettingsTests.cs" />
-    <Compile Include="Settings\AppConfigSettingsProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

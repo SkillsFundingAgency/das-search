@@ -13,6 +13,6 @@
 
         bool CreateIndex(string indexName);
 
-        void SwapIndexes(string newIndexName);
+        void ChangeUnderlyingIndexForAlias(string newIndexName);
     }
 }
