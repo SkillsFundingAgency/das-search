@@ -16,8 +16,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public IElasticClient Create()
         {
-            var pool = new StaticConnectionPool(_applicationSettings.ElasticServerUrls);
-            using (var settings = new ConnectionSettings(pool))
+            using (var settings = new ConnectionSettings(new StaticConnectionPool(_applicationSettings.ElasticServerUrls)))
             {
                 settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
                 settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));

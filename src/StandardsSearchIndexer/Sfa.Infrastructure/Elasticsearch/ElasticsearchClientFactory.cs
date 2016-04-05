@@ -4,14 +4,14 @@ using Sfa.Infrastructure.Settings;
 
 namespace Sfa.Infrastructure.Elasticsearch
 {
+    using System;
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
         private readonly ConnectionSettings _connectionSettings;
 
         public ElasticsearchClientFactory(IInfrastructureSettings infrastructureSettings)
         {
-            var pool = new StaticConnectionPool(infrastructureSettings.ElasticServerUrls);
-            _connectionSettings = new ConnectionSettings(pool);
+            _connectionSettings = new ConnectionSettings(new StaticConnectionPool(infrastructureSettings.ElasticServerUrls));
         }
 
         public IElasticClient GetElasticClient()
