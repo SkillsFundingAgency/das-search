@@ -6,7 +6,7 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
     using Sfa.Eds.Das.Web.Services.MappingActions.Helpers;
     using Sfa.Eds.Das.Web.ViewModels;
 
-    internal class ProviderResultItemViewModelMappingAction : IMappingAction<StandardProviderSearchResultsItem, ProviderResultItemViewModel>
+    internal class StandardProviderResultItemViewModelMappingAction : IMappingAction<StandardProviderSearchResultsItem, ProviderResultItemViewModel>
     {
         public void Process(StandardProviderSearchResultsItem source, ProviderResultItemViewModel destination)
         {

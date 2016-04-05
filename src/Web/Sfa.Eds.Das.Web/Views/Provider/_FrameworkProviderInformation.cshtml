@@ -1,5 +1,5 @@
 ﻿@using Sfa.Eds.Das.Web.ViewModels
-@model Sfa.Eds.Das.Web.ViewModels.ProviderFrameworkSearchResultViewModel
+@model ProviderFrameworkSearchResultViewModel
 
     @foreach (var item in Model.Hits)
     {
@@ -21,9 +21,13 @@
                 }
                 
                 <dt>Employer satisfaction:</dt>
-                <dd class="employer-satisfaction">@item.EmployerSatisfaction %</dd>
+                <dd class="employer-satisfaction">
+                    @item.EmployerSatisfactionMessage
+                </dd>
                 <dt>Learner satisfaction:</dt>
-                <dd class="learner-satisfaction">@item.LearnerSatisfaction %</dd>
+                <dd class="learner-satisfaction">
+                    @item.LearnerSatisfactionMessage
+                </dd>
             </dl>
         </article>
     }
