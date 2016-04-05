@@ -32,5 +32,38 @@
             resultUrl.ShouldBeEquivalentTo("http://www.sfatest.co.uk/path/to/page?keywords=hello+world");
             resultTitle.ShouldBeEquivalentTo("Results");
         }
+
+        [Test]
+        public void WhenPreviousProviderSearchIsKnown()
+        {
+            var uri = new Uri("http://www.sfatest.co.uk/path/to/page?standardid=8&postcode=CV212BB");
+            var resultUrl = uri.GetProviderSearchResultUrl("action/url").Url;
+            var resultTitle = uri.GetProviderSearchResultUrl("action/url").Title;
+
+            resultUrl.ShouldBeEquivalentTo("http://www.sfatest.co.uk/path/to/page?standardid=8&postcode=CV212BB");
+            resultTitle.ShouldBeEquivalentTo("Results");
+        }
+
+        [Test]
+        public void WhenPreviousStandardIdIsUnknown()
+        {
+            var uri = new Uri("http://www.sfatest.co.uk/path/to/page?postcode=CV212BB");
+            var resultUrl = uri.GetProviderSearchResultUrl("action/url").Url;
+            var resultTitle = uri.GetProviderSearchResultUrl("action/url").Title;
+
+            resultUrl.ShouldBeEquivalentTo("action/url");
+            resultTitle.ShouldBeEquivalentTo("Back to search page");
+        }
+
+        [Test]
+        public void WhenPreviousPostcodeIsUnknown()
+        {
+            var uri = new Uri("http://www.sfatest.co.uk/path/to/page?standardid=8");
+            var resultUrl = uri.GetProviderSearchResultUrl("action/url").Url;
+            var resultTitle = uri.GetProviderSearchResultUrl("action/url").Title;
+
+            resultUrl.ShouldBeEquivalentTo("action/url");
+            resultTitle.ShouldBeEquivalentTo("Back to search page");
+        }
     }
 }
