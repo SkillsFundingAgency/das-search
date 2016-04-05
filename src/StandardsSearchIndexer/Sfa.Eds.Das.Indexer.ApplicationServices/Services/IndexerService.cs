@@ -48,7 +48,7 @@
 
                 if (_indexerHelper.IsIndexCorrectlyCreated(newIndexName))
                 {
-                    _indexerHelper.SwapIndexes(newIndexName);
+                    _indexerHelper.ChangeUnderlyingIndexForAlias(newIndexName);
 
                     _log.Debug("Swap completed...");
 
