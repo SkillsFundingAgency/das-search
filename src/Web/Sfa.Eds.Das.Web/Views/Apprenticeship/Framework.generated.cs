@@ -46,14 +46,14 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     public partial class Framework : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.FrameworkViewModel>
     {
 
-#line 67 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 68 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult  RenderErrorMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 68 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 69 "..\..\Views\Apprenticeship\Framework.cshtml"
  
 
 
@@ -62,26 +62,26 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        This field can\'t be blank\r\n    </p>\r\n");
 
 
-#line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 73 "..\..\Views\Apprenticeship\Framework.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 73 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
 
-#line 74 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 75 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetFrameworkLevel(string item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 75 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 76 "..\..\Views\Apprenticeship\Framework.cshtml"
  
     if (!string.IsNullOrEmpty(item))
     {
@@ -123,7 +123,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "            <span>");
 
 
-#line 109 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -132,7 +132,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 
 
-#line 109 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
          WriteTo(__razor_helper_writer, equivalence);
 
 
@@ -141,7 +141,7 @@ WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 WriteLiteralTo(__razor_helper_writer, ")</span>\r\n");
 
 
-#line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 111 "..\..\Views\Apprenticeship\Framework.cshtml"
     }
 
 
@@ -149,7 +149,7 @@ WriteLiteralTo(__razor_helper_writer, ")</span>\r\n");
 #line hidden
 });
 
-#line 111 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 112 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
@@ -342,6 +342,26 @@ WriteLiteral("                                    </p>\r\n                      
 
 WriteLiteral(" type=\"hidden\"");
 
+WriteLiteral(" id=\"apprenticeshipid\"");
+
+WriteLiteral(" name=\"apprenticeshipid\"");
+
+WriteLiteral(" class=\"text-box form-control\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 2243), Tuple.Create("\"", 2269)
+            
+            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                        , Tuple.Create(Tuple.Create("", 2251), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+            
+            #line default
+            #line hidden
+, 2251), false)
+);
+
+WriteLiteral(">\r\n                                <input");
+
+WriteLiteral(" type=\"hidden\"");
+
 WriteLiteral(" id=\"callermethod\"");
 
 WriteLiteral(" name=\"callermethod\"");
@@ -378,7 +398,7 @@ WriteLiteral(" />\r\n                        </form>\r\n\r\n                    
 "     </div>\r\n");
 
             
-            #line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 62 "..\..\Views\Apprenticeship\Framework.cshtml"
              }
 
             
