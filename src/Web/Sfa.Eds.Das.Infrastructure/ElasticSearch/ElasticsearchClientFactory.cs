@@ -17,13 +17,14 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         public IElasticClient Create()
         {
             var pool = new StaticConnectionPool(_applicationSettings.ElasticServerUrls);
-            var settings = new ConnectionSettings(pool);
+            using (var settings = new ConnectionSettings(pool))
+            {
+                settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
+                settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));
+                settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkProviderSearchResultsItem), "frameworkprovider"));
 
-            settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
-            settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));
-            settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkProviderSearchResultsItem), "frameworkprovider"));
-
-            return new ElasticClient(settings);
+                return new ElasticClient(settings);
+            }
         }
     }
 }
