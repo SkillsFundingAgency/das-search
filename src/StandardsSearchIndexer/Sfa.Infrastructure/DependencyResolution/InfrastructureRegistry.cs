@@ -8,6 +8,9 @@ namespace Sfa.Infrastructure.DependencyResolution
     using Eds.Das.Indexer.ApplicationServices.Services;
     using Eds.Das.Indexer.Core.Services;
     using Elasticsearch;
+
+    using Nest;
+
     using Services;
     using Settings;
     using StructureMap;
@@ -33,6 +36,7 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IGenerateProviderIndexDefinitions>().Use<ProviderProviderIndexGenerator>();
             For<IApprenticeshipIndexDefinitions>().Use<ApprenticeshipIndexDefinitions>();
             For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
+            For<IElasticClient>().Use<ElasticClient>();
         }
     }
 }
