@@ -81,8 +81,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="E2E\Search\SearchProvider.feature.cs">
-      <DependentUpon>SearchProvider.feature</DependentUpon>
+    <Compile Include="E2E\Search\StandardUserJourney.feature.cs">
+      <DependentUpon>StandardUserJourney.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
@@ -161,7 +161,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="E2E\Search\SearchProvider.feature">
     <None Include="App.Systest.config">
       <DependentUpon>App.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -178,8 +177,9 @@
       <DependentUpon>App.config</DependentUpon>
       <SubType>Designer</SubType>
     </None>
+    <None Include="E2E\Search\StandardUserJourney.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
+      <LastGenOutput>StandardUserJourney.feature.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test\Features\Sprint1\SearchStandardByTitle.feature">

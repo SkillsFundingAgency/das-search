@@ -19,21 +19,21 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.E2E.Search
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Search Provider")]
-    public partial class SearchProviderFeature
+    [NUnit.Framework.DescriptionAttribute("Standard User Journey")]
+    public partial class StandardUserJourneyFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SearchProvider.feature"
+#line 1 "StandardUserJourney.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Search Provider", "In order to choose from provider list\r\nAs an employer\r\nI want to be able to searc" +
-                    "h all providers for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Standard User Journey", "As an employer\r\nI want to be able to search for training options\r\nand find a prov" +
+                    "ider for a given standard", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,10 +66,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.E2E.Search
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Show available providers for given standard")]
+        [NUnit.Framework.DescriptionAttribute("Should find a standard and provider")]
         [NUnit.Framework.CategoryAttribute("e2e")]
         [NUnit.Framework.TestCaseAttribute("Digital & technology solutions professional", "CV6 1PT", null)]
-        public virtual void ShowAvailableProvidersForGivenStandard(string jOBROLE, string postcode, string[] exampleTags)
+        public virtual void ShouldFindAStandardAndProvider(string jOBROLE, string postcode, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "e2e"};
@@ -77,7 +77,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.E2E.Search
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show available providers for given standard", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
