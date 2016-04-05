@@ -15,11 +15,21 @@
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <div class="hgroup">
+            <header class="hgroup">
                 <h1 class="heading-xlarge">
                     @Model.FrameworkName
                 </h1>
-            </div>
+            </header>
+
+            <p>Contains an apprenticeship training programme for @Model.PathwayName, level @GetFrameworkLevel(@Model.Level.ToString())</p>
+
+            <h3 class="heading-medium">
+                Contact a provider
+            </h3>
+            <p>
+                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
+            </p>
+
         </div>
 
         <div class="column-third">
@@ -52,22 +62,6 @@
 
             </div>
         </div>
-
-        <section>
-            <header>
-                <h2 class="heading-large">
-                    Contains an apprenticeship training programme for @Model.PathwayName, level @GetFrameworkLevel(@Model.Level.ToString())
-                </h2>
-            </header>
-            <h3 class="heading-medium">
-                Contact a provider
-            </h3>
-            <p>
-                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
-            </p>
-            
-        </section>
-
 </main>
 
 @helper  RenderErrorMessage()

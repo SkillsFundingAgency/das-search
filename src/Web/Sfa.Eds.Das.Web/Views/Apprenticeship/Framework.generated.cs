@@ -46,14 +46,14 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     public partial class Framework : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.FrameworkViewModel>
     {
 
-#line 73 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 67 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult  RenderErrorMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 74 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 68 "..\..\Views\Apprenticeship\Framework.cshtml"
  
 
 
@@ -62,26 +62,26 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        This field can\'t be blank\r\n    </p>\r\n");
 
 
-#line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
 
-#line 80 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 74 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetFrameworkLevel(string item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 81 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 75 "..\..\Views\Apprenticeship\Framework.cshtml"
  
     if (!string.IsNullOrEmpty(item))
     {
@@ -123,7 +123,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "            <span>");
 
 
-#line 115 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 109 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -132,7 +132,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 
 
-#line 115 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 109 "..\..\Views\Apprenticeship\Framework.cshtml"
          WriteTo(__razor_helper_writer, equivalence);
 
 
@@ -141,7 +141,7 @@ WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 WriteLiteralTo(__razor_helper_writer, ")</span>\r\n");
 
 
-#line 116 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
     }
 
 
@@ -149,7 +149,7 @@ WriteLiteralTo(__razor_helper_writer, ")</span>\r\n");
 #line hidden
 });
 
-#line 117 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 111 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
@@ -194,7 +194,7 @@ WriteLiteral(">\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n            <header");
 
 WriteLiteral(" class=\"hgroup\"");
 
@@ -213,20 +213,52 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </h1>\r\n            </div>\r\n        </div>\r\n\r\n        <div");
+WriteLiteral("\r\n                </h1>\r\n            </header>\r\n\r\n            <p>Contains an appr" +
+"enticeship training programme for ");
+
+            
+            #line 24 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                            Write(Model.PathwayName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(", level ");
+
+            
+            #line 24 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                                                      Write(GetFrameworkLevel(@Model.Level.ToString()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n\r\n            <h3");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(@">
+                Contact a provider
+            </h3>
+            <p>
+                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
+            </p>
+
+        </div>
+
+        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 26 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
              using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
@@ -255,15 +287,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1102), Tuple.Create("\"", 1155)
-, Tuple.Create(Tuple.Create("", 1110), Tuple.Create("form-group", 1110), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1563), Tuple.Create("\"", 1616)
+, Tuple.Create(Tuple.Create("", 1571), Tuple.Create("form-group", 1571), true)
             
-            #line 33 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1120), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1581), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1121), false)
+, 1582), false)
 );
 
 WriteLiteral(">\r\n                                <label");
@@ -277,13 +309,13 @@ WriteLiteral(">\r\n                                    Enter postcode");
 WriteLiteral("\r\n                                    <p>\r\n");
 
             
-            #line 37 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 47 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 47 "..\..\Views\Apprenticeship\Framework.cshtml"
                                          if (Model.HasError)
                                         {
                                             
@@ -291,14 +323,14 @@ WriteLiteral("\r\n                                    <p>\r\n");
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 49 "..\..\Views\Apprenticeship\Framework.cshtml"
                                        Write(RenderErrorMessage());
 
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 49 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                  
                                         }
 
@@ -316,14 +348,14 @@ WriteLiteral(" name=\"standardid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1768), Tuple.Create("\"", 1794)
+WriteAttribute("value", Tuple.Create(" value=\"", 2229), Tuple.Create("\"", 2255)
             
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                             , Tuple.Create(Tuple.Create("", 1776), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                             , Tuple.Create(Tuple.Create("", 2237), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 1776), false)
+, 2237), false)
 );
 
 WriteLiteral(">\r\n                                <input");
@@ -354,51 +386,13 @@ WriteLiteral(" />\r\n                        </form>\r\n\r\n                    
 "     </div>\r\n");
 
             
-            #line 51 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
              }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n\r\n        <section>\r\n            <header>\r\n" +
-"                <h2");
-
-WriteLiteral(" class=\"heading-large\"");
-
-WriteLiteral(">\r\n                    Contains an apprenticeship training programme for ");
-
-            
-            #line 59 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                 Write(Model.PathwayName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(", level ");
-
-            
-            #line 59 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                                           Write(GetFrameworkLevel(@Model.Level.ToString()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </h2>\r\n            </header>\r\n            <h3");
-
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(@">
-                Contact a provider
-            </h3>
-            <p>
-                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
-            </p>
-            
-        </section>
-
-</main>
-
-");
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n</main>\r\n\r\n");
 
 WriteLiteral("\r\n");
 
