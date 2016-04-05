@@ -249,6 +249,7 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
+    <Compile Include="ViewModels\FrameworkProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderFrameworkSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultItemViewModel.cs" />
@@ -272,15 +273,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardResults.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Provider\_ProviderInformation.generated.cs">
+    <Compile Include="Views\Provider\_FrameworkProviderInformation.generated.cs">
+      <DependentUpon>_FrameworkProviderInformation.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>_ProviderInformation.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Provider\_SearchResultMessage.generated.cs">
+    <Compile Include="Views\Provider\_StandardProviderInformation.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
+      <DependentUpon>_StandardProviderInformation.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\_FrameworkSearchResultMessage.generated.cs">
+      <DependentUpon>_FrameworkSearchResultMessage.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Provider\_StandardSearchResultMessage.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_StandardSearchResultMessage.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Apprenticeship\Framework.generated.cs">
       <DependentUpon>Framework.cshtml</DependentUpon>
@@ -429,17 +440,17 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Detail.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Provider\_SearchResultMessage.cshtml">
+    <Content Include="Views\Provider\_StandardSearchResultMessage.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_SearchResultMessage.generated.cs</LastGenOutput>
+      <LastGenOutput>_StandardSearchResultMessage.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Apprenticeship\_BlankFieldErrorMessage.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Provider\_ProviderInformation.cshtml">
+    <Content Include="Views\Provider\_StandardProviderInformation.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_ProviderInformation.generated.cs</LastGenOutput>
+      <LastGenOutput>_StandardProviderInformation.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\razorgenerator.directives" />
@@ -454,6 +465,14 @@
     <Content Include="Views\Provider\FrameworkResults.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>FrameworkResults.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_FrameworkSearchResultMessage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_FrameworkSearchResultMessage.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_FrameworkProviderInformation.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_FrameworkProviderInformation.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

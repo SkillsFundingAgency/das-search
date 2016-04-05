@@ -65,7 +65,7 @@
             Assert.That(result.Hits, Is.EqualTo(stubSearchResults));
 
             mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            mockSearchProvider.Verify(x => x.SearchByLocation(testStandardId, testCoordinates), Times.Once);
+            mockSearchProvider.Verify(x => x.SearchByStandardLocation(testStandardId, testCoordinates), Times.Once);
         }
 
         [Test]
@@ -107,7 +107,7 @@
         public async Task SearchByPostCodeShouldIndicateThereWasAnErrorIfSearchThrowsAnException()
         {
             var mockSearchProvider = CreateMockSearchProvider();
-            mockSearchProvider.Setup(x => x.SearchByLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Throws<SearchException>();
+            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Throws<SearchException>();
             var mockStandardRepository = CreateMockStandardRepository();
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
@@ -125,7 +125,7 @@
             var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
 
             var mockSearchProvider = new Mock<ISearchProvider>();
-            mockSearchProvider.Setup(x => x.SearchByLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Returns(searchResults);
+            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Returns(searchResults);
 
             return mockSearchProvider;
         }

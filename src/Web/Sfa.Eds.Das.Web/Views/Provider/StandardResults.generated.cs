@@ -99,7 +99,7 @@ WriteLiteral(">\r\n                    Search results\r\n                </h1>\r
             
             #line 22 "..\..\Views\Provider\StandardResults.cshtml"
                   
-                    Html.RenderPartial("_SearchResultMessage");
+                    Html.RenderPartial("_StandardSearchResultMessage");
                 
             
             #line default
@@ -115,7 +115,7 @@ WriteLiteral("\r\n            </p>\r\n");
             
             #line 26 "..\..\Views\Provider\StandardResults.cshtml"
               
-                Html.RenderPartial("_ProviderInformation");
+                Html.RenderPartial("_StandardProviderInformation");
             
             
             #line default

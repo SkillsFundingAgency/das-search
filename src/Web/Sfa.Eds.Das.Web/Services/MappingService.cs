@@ -54,6 +54,7 @@
             return new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>();
+                cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>();
                 cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
                 cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>();
 

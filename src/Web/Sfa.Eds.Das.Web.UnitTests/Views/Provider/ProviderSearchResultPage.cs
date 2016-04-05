@@ -20,7 +20,7 @@
         [Test]
         public void ShouldShowAnErrorWhenSomethingIsWrong()
         {
-            var detail = new SearchResultMessage();
+            var detail = new StandardSearchResultMessage();
             var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 0,
@@ -37,7 +37,7 @@
         [Test]
         public void ShouldShowIndividualMessageWhenJustOneResultIsReturned()
         {
-            var detail = new SearchResultMessage();
+            var detail = new StandardSearchResultMessage();
             var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
@@ -55,7 +55,7 @@
         [Test]
         public void ShouldShowGeneralMessageWhenSeveralResultsAreReturned()
         {
-            var detail = new SearchResultMessage();
+            var detail = new StandardSearchResultMessage();
             var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 7,
@@ -73,7 +73,7 @@
         [Test]
         public void ShouldHaveAllFieldsInSearchResult()
         {
-            var page = new ProviderInformation();
+            var page = new StandardProviderInformation();
             var item = new ProviderResultItemViewModel
             {
                 Name = "Provider 1",
@@ -114,7 +114,7 @@
         [Test]
         public void ShouldShowJustDistanceIfDeliveryModeIsNotEmployerLocation()
         {
-            var page = new ProviderInformation();
+            var page = new StandardProviderInformation();
             var item = new ProviderResultItemViewModel
             {
                 Name = "Provider 1",
@@ -141,7 +141,7 @@
         [Test]
         public void ShouldShowJustEmployerLocationIfDeliveryModeContainsEmployerLocation()
         {
-            var page = new ProviderInformation();
+            var page = new StandardProviderInformation();
             var item = new ProviderResultItemViewModel
             {
                 Name = "Provider 1",
@@ -171,7 +171,7 @@
         [Test]
         public void ShouldShowJustEmployerLocationIfDeliveryModeOnlyHasEmployerLocation()
         {
-            var page = new ProviderInformation();
+            var page = new StandardProviderInformation();
             var item = new ProviderResultItemViewModel
             {
                 Name = "Provider 1",
