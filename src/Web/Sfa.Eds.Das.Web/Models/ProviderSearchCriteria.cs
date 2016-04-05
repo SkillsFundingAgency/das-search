@@ -6,6 +6,6 @@
 
         public int ApprenticeshipId { get; set; }
 
-        public string Id { get; set; }
+        public string CallerMethod { get; set; }
     }
 }

@@ -258,7 +258,7 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 26 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
              using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
@@ -287,15 +287,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1105), Tuple.Create("\"", 1158)
-, Tuple.Create(Tuple.Create("", 1113), Tuple.Create("form-group", 1113), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1566), Tuple.Create("\"", 1619)
+, Tuple.Create(Tuple.Create("", 1574), Tuple.Create("form-group", 1574), true)
             
-            #line 33 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1123), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1584), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1124), false)
+, 1585), false)
 );
 
 WriteLiteral(">\r\n                                <label");
@@ -342,21 +342,13 @@ WriteLiteral("                                    </p>\r\n                      
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteLiteral(" id=\"apprenticeshipid\"");
+WriteLiteral(" id=\"callermethod\"");
 
-WriteLiteral(" name=\"apprenticeshipid\"");
+WriteLiteral(" name=\"callermethod\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1782), Tuple.Create("\"", 1808)
-            
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                        , Tuple.Create(Tuple.Create("", 1790), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
-            
-            #line default
-            #line hidden
-, 1790), false)
-);
+WriteLiteral(" value=\"Framework\"");
 
 WriteLiteral(">\r\n                                <input");
 
