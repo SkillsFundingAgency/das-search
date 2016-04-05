@@ -73,17 +73,7 @@
             }
         }
 
-        private string CreateFrameworkTitle(string framworkname, string pathwayName)
-        {
-            if (framworkname.Equals(pathwayName) || string.IsNullOrWhiteSpace(pathwayName))
-            {
-                return framworkname;
-            }
-
-            return $"{framworkname}: {pathwayName}";
-        }
-
-        private int MapLevel(int level)
+        public int MapRevertLevel(int level)
         {
             switch (level)
             {
@@ -102,6 +92,37 @@
                 default:
                     return -1;
             }
+        }
+
+        private int MapLevel(int level)
+        {
+            switch (level)
+            {
+                case 3:
+                    return 2;
+                case 2:
+                    return 3;
+                case 4:
+                    return 20;
+                case 5:
+                    return 21;
+                case 6:
+                    return 22;
+                case 7:
+                    return 23;
+                default:
+                    return -1;
+            }
+        }
+
+        private string CreateFrameworkTitle(string framworkname, string pathwayName)
+        {
+            if (framworkname.Equals(pathwayName) || string.IsNullOrWhiteSpace(pathwayName))
+            {
+                return framworkname;
+            }
+
+            return $"{framworkname}: {pathwayName}";
         }
     }
 }

@@ -106,6 +106,7 @@ namespace Sfa.Das.ApplicationServices
                     {
                         TotalResults = 0,
                         FrameworkId = frameworkId,
+                        FrameworkCode = framework.FrameworkCode,
                         FrameworkName = framework?.FrameworkName,
                         PathwayName = framework?.PathwayName,
                         PostCode = postCode,
@@ -121,6 +122,7 @@ namespace Sfa.Das.ApplicationServices
                     {
                         TotalResults = searchResults.Total,
                         FrameworkId = frameworkId,
+                        FrameworkCode = framework.FrameworkCode,
                         FrameworkName = framework?.FrameworkName,
                         PathwayName = framework?.PathwayName,
                         PostCode = postCode,

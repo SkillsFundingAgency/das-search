@@ -250,6 +250,7 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
+    <Compile Include="ViewModels\ProviderFrameworkSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderStandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />

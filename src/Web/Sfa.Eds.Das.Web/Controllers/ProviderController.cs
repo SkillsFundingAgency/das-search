@@ -62,7 +62,7 @@ namespace Sfa.Eds.Das.Web.Controllers
 
             var searchResults = await _providerSearchService.SearchByFrameworkPostCode(criteria.StandardId, criteria.PostCode);
 
-            var viewModel = _mappingService.Map<ProviderFrameworkSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }

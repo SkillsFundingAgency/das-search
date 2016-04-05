@@ -37,7 +37,7 @@ namespace Sfa.Eds.Das.Web.Views.Provider
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/FrameworkResults.cshtml")]
-    public partial class FrameworkResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderStandardSearchResultViewModel>
+    public partial class FrameworkResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderFrameworkSearchResultViewModel>
     {
         public FrameworkResults()
         {
@@ -64,7 +64,7 @@ WriteLiteral("    ");
 
             
             #line 9 "..\..\Views\Provider\FrameworkResults.cshtml"
-Write(Html.ActionLink("Back to Standard", "Standard", "Apprenticeship", new {@id = @Model.StandardId} , new { @class = "link-back" } ));
+Write(Html.ActionLink("Back to Framework", "Framework", "Apprenticeship", new {@id = @Model.FrameworkId} , new { @class = "link-back" } ));
 
             
             #line default
