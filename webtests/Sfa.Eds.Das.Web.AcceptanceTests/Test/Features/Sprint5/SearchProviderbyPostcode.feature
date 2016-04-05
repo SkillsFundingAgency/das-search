@@ -88,4 +88,4 @@ Scenario: Search Provider by invalid postcode1
 Given I am on Standard '25' detail page
 When I enter 'test' in provider search box
 And I search Search for provider
-Then I should see message searchresult "There are currently no providers for the apprenticeship standard: 'Digital & Technology Solutions Professional' in 'test'"
+Then I should see message searchresult "There are currently no providers for the apprenticeship course: 'Digital & Technology Solutions Professional' in 'test'"

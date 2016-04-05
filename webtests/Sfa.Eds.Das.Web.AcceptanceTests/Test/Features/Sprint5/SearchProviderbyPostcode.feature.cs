@@ -281,7 +281,7 @@ testRunner.When("I enter \'test\' in provider search box", ((string)(null)), ((T
 testRunner.And("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 91
 testRunner.Then("I should see message searchresult \"There are currently no providers for the appre" +
-                    "nticeship standard: \'Digital & Technology Solutions Professional\' in \'test\'\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                    "nticeship course: \'Digital & Technology Solutions Professional\' in \'test\'\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

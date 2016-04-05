@@ -23,8 +23,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerlist = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
         By providerlist1 = By.XPath(".//*[@id='provider-results']/div[1]/article/header/h2/a");
         By selectprovider = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/header/h2/a");
-        By postCodeValidation = By.XPath(".//*[@id='content']/div/div[2]/form/div/aside/div/label/div/p");
-        By SearchProvidermsg = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
+        By postCodeValidation = By.CssSelector(".form-label>div>p");
+        By SearchProvidermsg = By.CssSelector(".column-two-thirds>div>p");
         By providerwebsite = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/dl/dt[2]");
         By providereSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[3]");
         By providerlSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[4]");
