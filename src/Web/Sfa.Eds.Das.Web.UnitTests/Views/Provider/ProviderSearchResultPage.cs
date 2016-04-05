@@ -49,7 +49,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship standard: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Test name'.");
         }
 
         [Test]
@@ -67,7 +67,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship standard: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Test name'.");
         }
 
         [Test]
