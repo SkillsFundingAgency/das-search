@@ -7,8 +7,6 @@
 
     public interface IReadStandardsFromCsv
     {
-        List<Standard> ReadStandardsFromFile(string csvFilePath);
-
         List<Standard> ReadStandardsFromStream(string csvFile);
 
         List<FrameworkMetaData> ReadFrameworksFromStream(string csvFile);

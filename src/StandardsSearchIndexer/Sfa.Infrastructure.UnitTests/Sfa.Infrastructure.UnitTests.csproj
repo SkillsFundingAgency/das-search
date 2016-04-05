@@ -59,6 +59,8 @@
     <Compile Include="Services\CsvTestModel.cs" />
     <Compile Include="Services\CsvServiceTests.cs" />
     <Compile Include="Services\VstsClientTests.cs" />
+    <Compile Include="Settings\InfrastructureSettingsTests.cs" />
+    <Compile Include="Settings\MachineSettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

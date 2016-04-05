@@ -7,6 +7,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     using System.Linq;
 
     using Core.Domain.Model;
+    using Nest;
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
@@ -36,15 +37,16 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             var results =
                 client.Search<FrameworkSearchResultsItem>(s => s
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
-                    .Types("frameworkdocument")
+                    .Type(Types.Parse("frameworkdocument"))
                     .From(0)
                     .Size(1)
                     .Query(q =>
                         q.QueryString(qs => qs
-                        .OnFields(e => e.FrameworkId)
+                        .Fields(fs => fs
+                            .Field(e => e.FrameworkId))
                             .Query(id.ToString()))));
 
-            if (results.ConnectionStatus.HttpStatusCode != 200)
+            if (results.ApiCall.HttpStatusCode != 200)
             {
                 _applicationLogger.Error($"Trying to get provider with id {id}");
 

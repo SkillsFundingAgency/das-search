@@ -27,7 +27,7 @@
 
         public virtual bool AliasExists(string aliasName)
         {
-            var aliasExistsResponse = Client.AliasExists(aliasName);
+            var aliasExistsResponse = Client.AliasExists(a => a.Name(aliasName));
 
             return aliasExistsResponse.Exists;
         }
@@ -48,7 +48,7 @@
         {
             var result = true;
 
-            var indicesToBeDelete = Client.IndicesStats().Indices.Select(x => x.Key).Where(indexNameMatch);
+            var indicesToBeDelete = Client.IndicesStats(Indices.All).Indices.Select(x => x.Key).Where(indexNameMatch);
 
             Log.Debug($"Deleting {indicesToBeDelete.Count()} old {_typeOfIndex} indexes...");
 
@@ -78,7 +78,7 @@
         public virtual void SwapAliasIndex(string aliasName, string newIndexName)
         {
             var existingIndexesOnAlias = Client.GetIndicesPointingToAlias(aliasName);
-            var aliasRequest = new AliasRequest { Actions = new List<IAliasAction>() };
+            var aliasRequest = new BulkAliasRequest { Actions = new List<IAliasAction>() };
 
             foreach (var existingIndexOnAlias in existingIndexesOnAlias)
             {

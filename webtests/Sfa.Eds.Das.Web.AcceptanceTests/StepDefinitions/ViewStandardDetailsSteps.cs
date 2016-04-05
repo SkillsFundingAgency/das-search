@@ -47,11 +47,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             standardDetailsPage.ClickButton();
         }
 
+
         [When(@"I choose '(.*)' from search result page")]
         public void WhenIChooseFromSearchResultPage(string p0)
         {
             srchresultPage.searchChooseStandard(p0);
         }
+
+
 
 
         [When(@"I enter '(.*)' in provider search box")]

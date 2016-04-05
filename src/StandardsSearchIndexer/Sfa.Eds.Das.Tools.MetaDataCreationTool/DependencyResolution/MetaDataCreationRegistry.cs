@@ -4,6 +4,7 @@
 
     using Indexer.ApplicationServices.MetaData;
     using Indexer.ApplicationServices.Settings;
+    using Indexer.Core.Services;
     using Services;
     using Services.Interfaces;
 
@@ -13,7 +14,6 @@
     {
         public MetaDataCreationRegistry()
         {
-            For<IAppServiceSettings>().Use<AppServiceSettings>();
             For<ILarsDataService>().Use<LarsDataService>();
             For<IReadStandardsFromCsv>().Use<CsvService>();
             For<IAngleSharpService>().Use<AngleSharpService>();

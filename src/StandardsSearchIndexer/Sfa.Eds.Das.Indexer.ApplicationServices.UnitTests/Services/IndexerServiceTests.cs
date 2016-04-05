@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using ApplicationServices.Settings;
     using Core.Services;
     using Moq;
     using NUnit.Framework;
