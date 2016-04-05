@@ -14,7 +14,12 @@ namespace Sfa.Das.ApplicationServices
         private readonly ILookupLocations _postCodeLookup;
         private readonly ILog _logger;
 
-        public ProviderSearchService(ISearchProvider searchProvider, IGetStandards getStandards, IGetFrameworks getFrameworks, ILookupLocations postcodeLookup, ILog logger)
+        public ProviderSearchService(
+            ISearchProvider searchProvider,
+            IGetStandards getStandards,
+            IGetFrameworks getFrameworks,
+            ILookupLocations postcodeLookup,
+            ILog logger)
         {
             _searchProvider = searchProvider;
             _getStandards = getStandards;
@@ -23,11 +28,11 @@ namespace Sfa.Das.ApplicationServices
             _logger = logger;
         }
 
-        public async Task<ProviderSearchResults> SearchByPostCode(int standardId, string postCode)
+        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode)
         {
             if (string.IsNullOrEmpty(postCode))
             {
-                return new ProviderSearchResults { StandardId = standardId, PostCodeMissing = true };
+                return new ProviderStandardSearchResults { StandardId = standardId, PostCodeMissing = true };
             }
 
             string standardName = string.Empty;
@@ -40,7 +45,7 @@ namespace Sfa.Das.ApplicationServices
 
                 if (coordinates == null)
                 {
-                    return new ProviderSearchResults
+                    return new ProviderStandardSearchResults
                     {
                         TotalResults = 0,
                         StandardId = standardId,
@@ -52,9 +57,9 @@ namespace Sfa.Das.ApplicationServices
                 }
                 else
                 {
-                    var searchResults = _searchProvider.SearchByLocation(standardId, coordinates);
+                    var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates);
 
-                    var result = new ProviderSearchResults
+                    var result = new ProviderStandardSearchResults
                     {
                         TotalResults = searchResults.Total,
                         StandardId = standardId,
@@ -70,11 +75,73 @@ namespace Sfa.Das.ApplicationServices
             {
                 _logger.Error(ex, "Search for Provider failed.");
 
-                return new ProviderSearchResults
+                return new ProviderStandardSearchResults
                 {
                     TotalResults = 0,
                     StandardId = standardId,
                     StandardName = standardName,
+                    PostCode = postCode,
+                    Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                    HasError = true
+                };
+            }
+        }
+
+        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode)
+        {
+            if (string.IsNullOrEmpty(postCode))
+            {
+                return new ProviderFrameworkSearchResults { FrameworkId = frameworkId, PostCodeMissing = true };
+            }
+
+            try
+            {
+                var framework = _getFrameworks.GetFrameworkById(frameworkId);
+
+                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+
+                if (coordinates == null)
+                {
+                    return new ProviderFrameworkSearchResults
+                    {
+                        TotalResults = 0,
+                        FrameworkId = frameworkId,
+                        FrameworkCode = framework.FrameworkCode,
+                        FrameworkName = framework?.FrameworkName,
+                        PathwayName = framework?.PathwayName,
+                        PostCode = postCode,
+                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                        HasError = false
+                    };
+                }
+                else
+                {
+                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates);
+
+                    var result = new ProviderFrameworkSearchResults
+                    {
+                        TotalResults = searchResults.Total,
+                        FrameworkId = frameworkId,
+                        FrameworkCode = framework.FrameworkCode,
+                        FrameworkName = framework?.FrameworkName,
+                        PathwayName = framework?.PathwayName,
+                        PostCode = postCode,
+                        Hits = searchResults.Hits
+                    };
+
+                    return result;
+                }
+            }
+            catch (SearchException ex)
+            {
+                _logger.Error(ex, "Search for Provider failed.");
+
+                return new ProviderFrameworkSearchResults
+                {
+                    TotalResults = 0,
+                    FrameworkId = frameworkId,
+                    FrameworkName = string.Empty,
+                    PathwayName = string.Empty,
                     PostCode = postCode,
                     Hits = new IApprenticeshipProviderSearchResultsItem[0],
                     HasError = true

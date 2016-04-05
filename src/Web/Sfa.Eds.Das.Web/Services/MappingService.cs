@@ -54,7 +54,9 @@
             return new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>();
-                cfg.CreateMap<ProviderSearchResults, ProviderSearchResultViewModel>();
+                cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>();
+                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
+                cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>();
 
                 // Standard search listing // Old
                 cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
@@ -66,7 +68,7 @@
                 // Standard detail page
                 cfg.CreateMap<Standard, StandardViewModel>().AfterMap<StandardViewModelMappingAction>();
 
-                // Frzmework detail page
+                // Framework detail page
                 cfg.CreateMap<Framework, FrameworkViewModel>();
 
                 // Provider detail page

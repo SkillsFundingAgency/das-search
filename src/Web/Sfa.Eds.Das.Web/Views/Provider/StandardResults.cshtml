@@ -1,0 +1,34 @@
+﻿@using Sfa.Eds.Das.Web.Extensions
+@model Sfa.Eds.Das.Web.ViewModels.ProviderStandardSearchResultViewModel
+
+@{
+    ViewBag.Title = "Provider Search Results";
+}
+
+<main id="content" role="main">
+    @Html.ActionLink("Back to Standard", "Standard", "Apprenticeship", new {@id = @Model.StandardId} , new { @class = "link-back" } )
+    <div id="provider-results" class="grid-row">
+
+        <div class="column-two-thirds">
+
+            <div class="hgroup">
+
+                <h1 class="heading-xlarge">
+                    Search results
+                </h1>
+
+            </div>
+            <p>
+                @{
+                    Html.RenderPartial("_StandardSearchResultMessage");
+                }
+            </p>
+            @{
+                Html.RenderPartial("_StandardProviderInformation");
+            }
+        </div>
+
+        <div class="column-third">
+        </div>
+    </div>
+</main>

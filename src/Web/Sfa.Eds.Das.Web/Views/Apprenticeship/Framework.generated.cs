@@ -258,8 +258,8 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
-             using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            #line 26 "..\..\Views\Apprenticeship\Framework.cshtml"
+             using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
             
@@ -287,15 +287,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1563), Tuple.Create("\"", 1616)
-, Tuple.Create(Tuple.Create("", 1571), Tuple.Create("form-group", 1571), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1105), Tuple.Create("\"", 1158)
+, Tuple.Create(Tuple.Create("", 1113), Tuple.Create("form-group", 1113), true)
             
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1581), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            #line 33 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1123), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1582), false)
+, 1124), false)
 );
 
 WriteLiteral(">\r\n                                <label");
@@ -342,20 +342,20 @@ WriteLiteral("                                    </p>\r\n                      
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteLiteral(" id=\"frameworkid\"");
+WriteLiteral(" id=\"apprenticeshipid\"");
 
-WriteLiteral(" name=\"standardid\"");
+WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2229), Tuple.Create("\"", 2255)
+WriteAttribute("value", Tuple.Create(" value=\"", 1782), Tuple.Create("\"", 1808)
             
-            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                             , Tuple.Create(Tuple.Create("", 2237), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                        , Tuple.Create(Tuple.Create("", 1790), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 2237), false)
+, 1790), false)
 );
 
 WriteLiteral(">\r\n                                <input");

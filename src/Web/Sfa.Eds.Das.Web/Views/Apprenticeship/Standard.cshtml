@@ -29,7 +29,7 @@
         </div>
 
         <div class="column-third">
-            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
                 <div class="related-container">
                     <aside class="related">
@@ -45,7 +45,7 @@
                                         }
                                     </p>
                                 </label>
-                                <input type="hidden" id="standardid" name="standardid" class="text-box form-control" value="@Model.StandardId">
+                                <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
                             <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
