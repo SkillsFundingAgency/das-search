@@ -5,7 +5,5 @@
         public string PostCode { get; set; }
 
         public int ApprenticeshipId { get; set; }
-
-        public string CallerMethod { get; set; }
     }
 }
