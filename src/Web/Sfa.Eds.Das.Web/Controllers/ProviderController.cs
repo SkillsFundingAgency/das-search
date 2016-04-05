@@ -83,9 +83,7 @@ namespace Sfa.Eds.Das.Web.Controllers
             var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
 
             var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
-
             viewModel.ApprenticeshipNameWithLevel = string.Concat(apprenticeshipData.Title, " level ", apprenticeshipData.NotionalEndLevel);
-
             viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("StandardResults", "Provider"));
 
             return View(viewModel);

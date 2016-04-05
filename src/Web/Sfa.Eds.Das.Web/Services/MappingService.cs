@@ -53,13 +53,11 @@
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>();
-                cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>();
-                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
                 cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>();
 
                 // Standard search listing // Old
-                cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
+                //cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
+
 
                 // Apprenticeship search listing  -> mix of standard and framework
                 cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>();
@@ -71,8 +69,13 @@
                 // Framework detail page
                 cfg.CreateMap<Framework, FrameworkViewModel>();
 
+                // Provider search
+                cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>();
+                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
+                cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>().AfterMap<ProviderResultItemViewModelMappingAction>();
+
                 // Provider detail page
-                cfg.CreateMap<Provider, ProviderViewModel>();
+                cfg.CreateMap<Provider, ProviderViewModel>().AfterMap<ProviderViewModelMappingAction>();
             });
         }
     }
