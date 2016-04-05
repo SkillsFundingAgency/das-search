@@ -3,11 +3,16 @@
 namespace Sfa.Infrastructure.Elasticsearch
 {
     using System;
-
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
+    using Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
     using Sfa.Infrastructure.Elasticsearch.Models;
+    using Nest;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Eds.Das.Indexer.Core.Extensions;
+    using Eds.Das.Indexer.Core.Exceptions;
 
     public class ElasticsearchMapper : IElasticsearchMapper
     {
@@ -73,6 +78,90 @@ namespace Sfa.Infrastructure.Elasticsearch
 
                 throw;
             }
+        }
+
+        public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)
+        {
+            try
+            {
+                var standardProvider = new StandardProvider
+                {
+                    StandardCode = standardInformation.Code
+                };
+
+                PopulateDocumentSharedProperties(standardProvider, provider, standardInformation, deliveryInformation);
+
+                return standardProvider;
+            }
+            catch (Exception ex) when (ex is ArgumentNullException || ex is NullReferenceException)
+            {
+                throw new MappingException("Unable to map to Standard Provider Document", ex);
+            }
+        }
+
+        public FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation frameworkInformation, DeliveryInformation deliveryInformation)
+        {
+            try
+            {
+                var frameworkProvider = new FrameworkProvider
+                {
+                    FrameworkCode = frameworkInformation.Code,
+                    PathwayCode = frameworkInformation.PathwayCode,
+                    Level = frameworkInformation.Level
+                };
+
+                PopulateDocumentSharedProperties(frameworkProvider, provider, frameworkInformation, deliveryInformation);
+
+                return frameworkProvider;
+            }
+            catch (Exception ex) when (ex is ArgumentNullException || ex is NullReferenceException)
+            {
+                throw new MappingException("Unable to map to Framework Provider Document", ex);
+            }
+        }
+
+        private void PopulateDocumentSharedProperties(IProviderAppreticeshipDocument documentToPopulate, Provider provider, IApprenticeshipInformation apprenticeshipInformation, DeliveryInformation deliveryInformation)
+        {
+            documentToPopulate.Ukprn = provider.Ukprn;
+            documentToPopulate.Name = provider.Name;
+            documentToPopulate.Id = $"{provider.Ukprn}{apprenticeshipInformation.Code}{deliveryInformation.DeliveryLocation.Id}";
+            documentToPopulate.LocationId = deliveryInformation.DeliveryLocation.Id;
+            documentToPopulate.LocationName = deliveryInformation.DeliveryLocation.Name;
+            documentToPopulate.ProviderMarketingInfo = EscapeSpecialCharacters(provider.MarketingInfo);
+            documentToPopulate.ApprenticeshipMarketingInfo = EscapeSpecialCharacters(apprenticeshipInformation.MarketingInfo);
+            documentToPopulate.Phone = apprenticeshipInformation.ContactInformation.Phone;
+            documentToPopulate.Email = apprenticeshipInformation.ContactInformation.Email;
+            documentToPopulate.ContactUsUrl = apprenticeshipInformation.ContactInformation.Website;
+            documentToPopulate.StandardInfoUrl = apprenticeshipInformation.InfoUrl;
+            documentToPopulate.LearnerSatisfaction = provider.LearnerSatisfaction ?? 0;
+            documentToPopulate.EmployerSatisfaction = provider.EmployerSatisfaction ?? 0;
+            documentToPopulate.DeliveryModes = GenerateListOfDeliveryModes(deliveryInformation.DeliveryModes);
+            documentToPopulate.Website = deliveryInformation.DeliveryLocation.Contact.Website;
+            documentToPopulate.Address = new Models.Address
+            {
+                Address1 = EscapeSpecialCharacters(deliveryInformation.DeliveryLocation.Address.Address1),
+                Address2 = EscapeSpecialCharacters(deliveryInformation.DeliveryLocation.Address.Address2),
+                Town = EscapeSpecialCharacters(deliveryInformation.DeliveryLocation.Address.Town),
+                County = EscapeSpecialCharacters(deliveryInformation.DeliveryLocation.Address.County),
+                PostCode = deliveryInformation.DeliveryLocation.Address.Postcode,
+            };
+            documentToPopulate.LocationPoint = new GeoCoordinate(deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0, deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0);
+            documentToPopulate.Location = new CircleGeoShape { Coordinates = new GeoCoordinate(deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0, deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0), Radius = $"{deliveryInformation.Radius}mi" };
+        }
+
+        private string[] GenerateListOfDeliveryModes(IEnumerable<ModesOfDelivery> deliveryModes)
+        {
+            return deliveryModes.Select(x => x.GetDescription()).ToArray();
+        }
+
+        private string EscapeSpecialCharacters(string marketingInfo)
+        {
+            if (marketingInfo == null)
+            {
+                return null;
+            }
+
+            return marketingInfo.Replace(Environment.NewLine, "\\r\\n").Replace("\n", "\\n").Replace("\"", "\\\"");
         }
 
         public int MapLevelProgType(int level)

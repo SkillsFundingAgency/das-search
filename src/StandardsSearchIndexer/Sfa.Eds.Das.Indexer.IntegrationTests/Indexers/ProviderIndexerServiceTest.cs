@@ -193,7 +193,7 @@
                                                     Id = 115641,
                                                     Name = "F1 TRAINING LTD - BEDFORD LEARNING CENTRE",
                                                     Address =
-                                                        new Address
+                                                        new Core.Models.Provider.Address
                                                             {
                                                                 Address1 = "Enterprise House",
                                                                 Address2 = "2-6 Union Street",
@@ -209,7 +209,7 @@
                                                     Id = 115643,
                                                     Name = "F1 TRAINING LTD - GT YARMOUTH LEARNING CENTRE",
                                                     Address =
-                                                        new Address
+                                                        new Core.Models.Provider.Address
                                                             {
                                                                 Address1 = "Catalyst - Business Acceleration Centre",
                                                                 Address2 = "The Conge",

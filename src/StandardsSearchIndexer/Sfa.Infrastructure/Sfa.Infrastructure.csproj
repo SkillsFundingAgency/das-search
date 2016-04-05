@@ -114,7 +114,6 @@
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\ApprenticeshipIndexDefinitions.cs" />
     <Compile Include="Elasticsearch\IApprenticeshipIndexDefinitions.cs" />
-    <Compile Include="Elasticsearch\Models\Attachment.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
     <Compile Include="Elasticsearch\ElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
@@ -123,7 +122,10 @@
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\IGenerateProviderIndexDefinitions.cs" />
-    <Compile Include="Elasticsearch\ProviderProviderIndexGenerator.cs" />
+    <Compile Include="Elasticsearch\Models\Address.cs" />
+    <Compile Include="Elasticsearch\Models\FrameworkProvider.cs" />
+    <Compile Include="Elasticsearch\Models\IProviderAppreticeshipDocument.cs" />
+    <Compile Include="Elasticsearch\Models\StandardProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DedsService\Reference.cs">
       <AutoGen>True</AutoGen>
