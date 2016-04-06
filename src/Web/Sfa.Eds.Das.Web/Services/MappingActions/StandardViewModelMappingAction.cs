@@ -13,12 +13,6 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
         public void Process(Standard source, StandardViewModel destination)
         {
             destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
-            destination.IntroductoryTextHtml = MarkdownToHtml(source.IntroductoryText);
-            destination.EntryRequirementsHtml = MarkdownToHtml(source.EntryRequirements);
-            destination.WhatApprenticesWillLearnHtml = MarkdownToHtml(source.WhatApprenticesWillLearn);
-            destination.QualificationsHtml = MarkdownToHtml(source.Qualifications);
-            destination.ProfessionalRegistrationHtml = MarkdownToHtml(source.ProfessionalRegistration);
-            destination.OverviewOfRoleHtml = MarkdownToHtml(source.OverviewOfRole);
 
             destination.StandardPdfUrlTitle = ExtractPdfTitle(source.StandardPdf);
             destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdf);
@@ -40,16 +34,6 @@ namespace Sfa.Eds.Das.Web.Services.MappingActions
             }
 
             return pdfName.Replace("_", " ").Replace(".pdf", string.Empty);
-        }
-
-        private string MarkdownToHtml(string markdownText)
-        {
-            if (!string.IsNullOrEmpty(markdownText))
-            {
-                return CommonMark.CommonMarkConverter.Convert(markdownText);
-            }
-
-            return string.Empty;
         }
     }
 }

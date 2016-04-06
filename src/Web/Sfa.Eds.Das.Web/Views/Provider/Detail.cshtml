@@ -17,8 +17,12 @@
                 <h1 class="heading-xlarge">
                     @Model.Name
                 </h1>
-                <p id="marketing">@Model.ProviderMarketingInfo</p>
-                <p class="apprenticeship-marketing-info">@Model.Apprenticeship.ApprenticeshipMarketingInfo</p>
+                <div id="marketing">
+                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
+                </div>
+                <div class="apprenticeship-marketing-info">
+                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
+                </div>
             </div>
         </div>
 
