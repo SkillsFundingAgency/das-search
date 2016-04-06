@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public class StandardViewModel
+    public class StandardViewModel : IHasError
     {
         public int StandardId { get; set; }
 
@@ -14,17 +14,17 @@
 
         public string TypicalLengthMessage { get; set; }
 
-        public string IntroductoryTextHtml { get; set; }
+        public string IntroductoryText { get; set; }
 
-        public string EntryRequirementsHtml { get; set; }
+        public string EntryRequirements { get; set; }
 
-        public string WhatApprenticesWillLearnHtml { get; set; }
+        public string WhatApprenticesWillLearn { get; set; }
 
-        public string QualificationsHtml { get; set; }
+        public string Qualifications { get; set; }
 
-        public string ProfessionalRegistrationHtml { get; set; }
+        public string ProfessionalRegistration { get; set; }
 
-        public string OverviewOfRoleHtml { get; set; }
+        public string OverviewOfRole { get; set; }
 
         // Page specific
         public bool HasError { get; set; }

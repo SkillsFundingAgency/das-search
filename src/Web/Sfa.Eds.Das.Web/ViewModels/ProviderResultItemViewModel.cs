@@ -36,8 +36,8 @@
 
         public double Distance { get; set; }
 
-        public double EmployerSatisfaction { get; set; }
+        public string EmployerSatisfactionMessage { get; set; }
 
-        public double LearnerSatisfaction { get; set; }
+        public string LearnerSatisfactionMessage { get; set; }
     }
 }

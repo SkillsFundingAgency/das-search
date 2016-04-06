@@ -53,13 +53,6 @@
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>();
-                cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>();
-                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
-                cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>();
-
-                // Standard search listing // Old
-                cfg.CreateMap<StandardSearchResultsItem, StandardSearchResultItemViewModel>().AfterMap<StandardSearchResultViewModelMappingAction>();
 
                 // Apprenticeship search listing  -> mix of standard and framework
                 cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>();
@@ -71,8 +64,14 @@
                 // Framework detail page
                 cfg.CreateMap<Framework, FrameworkViewModel>();
 
+                // Provider search
+                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
+                cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>();
+                cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>().AfterMap<FrameworkProviderResultItemViewModelMappingAction>();
+                cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>().AfterMap<StandardProviderResultItemViewModelMappingAction>();
+
                 // Provider detail page
-                cfg.CreateMap<Provider, ProviderViewModel>();
+                cfg.CreateMap<Provider, ProviderViewModel>().AfterMap<ProviderViewModelMappingAction>();
             });
         }
     }

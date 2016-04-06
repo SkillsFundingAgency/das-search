@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
-}
+} 
 <main id="content">
 
     <p class="small-btm-margin">
@@ -15,10 +15,14 @@
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
-                    @Model.Name
+                    @Model.Name 
                 </h1>
-                <p id="marketing">@Model.ProviderMarketingInfo</p>
-                <p class="apprenticeship-marketing-info">@Model.Apprenticeship.ApprenticeshipMarketingInfo</p>
+                <div id="marketing">
+                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
+                </div>
+                <div class="apprenticeship-marketing-info">
+                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
+                </div>
             </div>
         </div>
 
@@ -31,12 +35,16 @@
                         <p>
                             <b>Learner satisfaction:</b>
                             <br />
-                            <span id="learner-satisfaction" class="heading-large">@Model.LearnerSatisfaction%</span>
+                            <span id="learner-satisfaction" class="heading-large">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
                         </p>
                         <p>
                             <b>Employer satisfaction:</b>
                             <br/>
-                            <span id="employer-satisfaction" class="heading-large">@Model.EmployerSatisfaction%</span>
+                            <span id="employer-satisfaction" class="heading-large">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
                         </p>
                     </aside>
                 </div>
@@ -60,7 +68,6 @@
         </dl>
     </section>
 </main>
-
 
 @helper ShowTrainingLocation(string title)
 {
@@ -95,7 +102,7 @@
         <dt>@title</dt>
         <dd id="@id">
             <a class="pdf-url-link" href="@url" target="_blank">@url</a>
-        </dd>
+        </dd> 
     }
 }
 

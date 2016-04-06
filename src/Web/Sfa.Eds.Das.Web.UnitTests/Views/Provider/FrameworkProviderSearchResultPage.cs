@@ -46,12 +46,13 @@
                 FrameworkId = 1,
                 FrameworkCode = 2,
                 FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
         }
 
         [Test]
@@ -65,12 +66,13 @@
                 FrameworkId = 1,
                 FrameworkCode = 2,
                 FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name'.");
         }
 
         [Test]

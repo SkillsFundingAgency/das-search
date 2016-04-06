@@ -210,9 +210,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInsightsInitializer.cs" />
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="App_Start\CustomHeaderModule.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
@@ -220,9 +222,12 @@
     <Compile Include="Models\ProviderLocationSearchCriteria.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Models\StandardSearchCriteria.cs" />
+    <Compile Include="Services\MappingActions\FrameworkProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingActions\ApprenticeshipSearchResultViewModelMappingAction.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
     <Compile Include="Services\MappingActions\Helpers\StandardMappingHelper.cs" />
+    <Compile Include="Services\MappingActions\ProviderViewModelMappingAction.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -244,21 +249,20 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Services\MappingActions\StandardSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\StandardViewModelMappingAction.cs" />
+    <Compile Include="Services\MappingActions\StandardProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\IHasError.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\FrameworkProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderFrameworkSearchResultViewModel.cs" />
-    <Compile Include="ViewModels\StandardSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderStandardSearchResultViewModel.cs" />
-    <Compile Include="ViewModels\StandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderViewModel.cs" />
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
-    <Compile Include="Views\Provider\Detail.generated.cs">
+    <Compile Include="Views\Provider\Detail1.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Detail.cshtml</DependentUpon>
@@ -438,7 +442,7 @@
     </Content>
     <Content Include="Views\Provider\Detail.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Detail.generated.cs</LastGenOutput>
+      <LastGenOutput>Detail1.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Provider\_StandardSearchResultMessage.cshtml">
       <Generator>RazorGenerator</Generator>
