@@ -105,22 +105,5 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         {
             ScenarioContext.Current.Pending();
         }
-
-
-        [Then(@"I should see error message ""(.*)""")]
-        public void ThenIShouldSeeErrorMessage(string p0)
-        {
-            prvdrPage.validateErrorMessage_postcodefield(p0);
-        }
-
-
-        [Then(@"I should see message searchresult ""(.*)""")]
-        public void ThenIShouldSeeMessageSearchresult(string p0)
-        {
-            prvdrPage.validateProviderSrchResultMsg(p0);
-        }
-
-
-
     }
 }

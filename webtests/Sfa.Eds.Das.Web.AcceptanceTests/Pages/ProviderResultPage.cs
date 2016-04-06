@@ -23,8 +23,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By providerlist = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
         By providerlist1 = By.XPath(".//*[@id='provider-results']/div[1]/article/header/h2/a");
         By selectprovider = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/header/h2/a");
-        By postCodeValidation = By.CssSelector(".form-label>div>p");
-        By SearchProvidermsg = By.CssSelector(".column-two-thirds>div>p");
         By providerwebsite = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/dl/dt[2]");
         By providereSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[3]");
         By providerlSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[4]");
@@ -73,16 +71,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         }
 
 
-        public void validateErrorMessage_postcodefield(String errmsg)
-        {
-            Assert.True(verifyTextMessage(postCodeValidation, errmsg));
-        }
-        public void validateProviderSrchResultMsg(String msg)
-        {
-            Assert.True(verifyTextMessage(SearchProvidermsg, msg));
-        }
-
-
         public void verifyProviderinSearchResults(String p0)
         {
             Assert.True(isElementPresent(providerlist1, p0));
@@ -90,7 +78,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyProviderLocationinSearchResults(String p0)
         {
-            verifyTextMessage(providerLocation, p0);
+            Assert.AreEqual(p0, FindText(providerLocation));
         }
 
         public void verifyProviderNotinSearchResults(String p0)

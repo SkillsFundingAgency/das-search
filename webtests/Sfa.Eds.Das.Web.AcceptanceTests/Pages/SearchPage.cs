@@ -94,12 +94,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
        
         public void verifyStandardFoundinResultPage(String keyword)
         {
-            
-           // Sleep(4000);
+            // Sleep(4000);
             //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
-            verifyTextMessage(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
-
-
+            var text = "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".";
+            Assert.AreEqual(text, FindText(searchresult));
         }
 
         public void verifySearchedStandardFoundinResultPage(String expected_result)
