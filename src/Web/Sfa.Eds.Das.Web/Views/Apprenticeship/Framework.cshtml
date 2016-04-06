@@ -44,9 +44,8 @@
                                 <label class="form-label" for="postcode">
                                     Enter postcode@* or partial postcode *@
                                     <p>
-                                        @if (Model.HasError)
-                                        {
-                                            @RenderErrorMessage()
+                                        @{
+                                            Html.RenderPartial("_BlankFieldErrorMessage");
                                         }
                                     </p>
                                 </label>
@@ -63,13 +62,6 @@
             </div>
         </div>
 </main>
-
-@helper  RenderErrorMessage()
-{
-    <p>
-        This field can't be blank
-    </p>
-}
 
 @helper GetFrameworkLevel(string item)
 {

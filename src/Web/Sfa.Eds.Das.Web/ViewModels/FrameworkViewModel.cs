@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public class FrameworkViewModel
+    public class FrameworkViewModel : IHasError
     {
         public int FrameworkId { get; set; }
 

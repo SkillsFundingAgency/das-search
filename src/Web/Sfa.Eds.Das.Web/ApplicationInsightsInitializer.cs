@@ -1,4 +1,4 @@
-namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
+namespace Sfa.Eds.Das.Web
 {
     using Microsoft.ApplicationInsights.DataContracts;
 
@@ -6,7 +6,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     {
         public void Initialize(TelemetryContext context)
         {
-            context.Properties["Application"] = "Sfa.Das.Indexer";
+            context.Properties["Application"] = "Sfa.Das.Web";
         }
     }
 }
