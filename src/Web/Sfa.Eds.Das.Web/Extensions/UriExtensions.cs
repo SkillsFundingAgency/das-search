@@ -18,7 +18,7 @@
 
         public static LinkViewModel GetProviderSearchResultUrl(this Uri urlReferrer, string action)
         {
-            if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?standardid") && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("&postcode"))
+            if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?apprenticeshipid") && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("&postcode"))
             {
                 return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
             }
