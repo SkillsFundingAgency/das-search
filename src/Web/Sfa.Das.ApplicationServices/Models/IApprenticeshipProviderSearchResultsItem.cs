@@ -10,9 +10,9 @@ namespace Sfa.Das.ApplicationServices.Models
         List<string> DeliveryModes { get; set; }
         double Distance { get; set; }
         string Email { get; set; }
-        double EmployerSatisfaction { get; set; }
+        double? EmployerSatisfaction { get; set; }
         string Id { get; set; }
-        double LearnerSatisfaction { get; set; }
+        double? LearnerSatisfaction { get; set; }
         int LocationId { get; set; }
         string LocationName { get; set; }
         string MarketingName { get; set; }

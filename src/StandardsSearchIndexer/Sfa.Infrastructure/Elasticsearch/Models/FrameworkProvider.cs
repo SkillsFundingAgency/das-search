@@ -2,6 +2,8 @@
 
 namespace Sfa.Infrastructure.Elasticsearch.Models
 {
+    using Newtonsoft.Json;
+
     public sealed class FrameworkProvider : IProviderAppreticeshipDocument
     {
         public int FrameworkCode { get; set; }
@@ -20,8 +22,12 @@ namespace Sfa.Infrastructure.Elasticsearch.Models
         public string Email { get; set; }
         public string ContactUsUrl { get; set; }
         public string StandardInfoUrl { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
         public double? LearnerSatisfaction { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
         public double? EmployerSatisfaction { get; set; }
+
         public string[] DeliveryModes { get; set; }
         public string Website { get; set; }
         public Address Address { get; set; }

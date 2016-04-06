@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sfa.Das.ApplicationServices.Models;
+﻿using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Model;
 
 namespace Sfa.Eds.Das.Infrastructure.Mapping

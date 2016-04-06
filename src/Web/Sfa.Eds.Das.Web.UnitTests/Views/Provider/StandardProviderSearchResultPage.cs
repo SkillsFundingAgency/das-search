@@ -1,14 +1,12 @@
 ﻿namespace Sfa.Eds.Das.Web.UnitTests.Views.Provider
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using ExtensionHelpers;
     using FluentAssertions;
     using NUnit.Framework;
     using RazorGenerator.Testing;
 
-    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Model;
 
     using ViewModels;
@@ -196,6 +194,35 @@
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
             GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
+        }
+
+        [Test]
+        public void ShouldShowPercentageForSatisfactionResultWhenprovided()
+        {
+            var page = new StandardProviderInformation();
+            var item = new ProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                Website = "http://www.trainingprovider.co.uk",
+                Address = new Address(),
+                EmployerSatisfactionMessage = "87%",
+                LearnerSatisfactionMessage = "99.9%"
+            };
+
+            var model = new ProviderStandardSearchResultViewModel()
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test name",
+                Hits = new List<ProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result-data-list dd", 3).Should().Be("87%");
+            GetPartial(html, ".result-data-list dd", 4).Should().Be("99.9%");
         }
     }
 }
