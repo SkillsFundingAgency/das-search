@@ -52,7 +52,7 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
         [TestCase("")]
         public async Task SearchResultsShouldRedirectToStandardDetailsIfNoPostCodeIsNotSet(string postCode)
         {
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, CallerMethod = "Standard"};
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123 };
 
             var controller = new ProviderController(null, null, null, null, null, null);
 
