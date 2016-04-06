@@ -1,4 +1,6 @@
-﻿namespace Sfa.Infrastructure.Elasticsearch
+﻿using System.Linq;
+
+namespace Sfa.Infrastructure.Elasticsearch
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -62,7 +64,13 @@
                         if (HaveReachedBatchLimit(count))
                         {
                             // Execute batch
-                            tasks.Add(Client.BulkAsync(bulkDescriptor));
+                            var result = Client.BulkAsync(bulkDescriptor).Result;
+                            if (result.Errors)
+                            {
+                                ReportErrors(result);
+                            }
+
+                            //tasks.Add(Client.BulkAsync(bulkDescriptor));
 
                             // New descriptor
                             bulkDescriptor = CreateBulkDescriptor(indexName);
@@ -82,6 +90,14 @@
             Log.Debug($"Sent a total of {totalCount} Framework Provider documents to be indexed");
 
             return tasks;
+        }
+
+        private void ReportErrors(IBulkResponse result)
+        {
+            foreach (var message in result.ItemsWithErrors.Select(itemsWithError => string.Concat("Error indexing entry ", itemsWithError.Id, " at ", itemsWithError.Index)))
+            {
+                Log.Warn(message);
+            }
         }
 
         private List<Task<IBulkResponse>> IndexStandards(string indexName, IEnumerable<Provider> indexEntries)
