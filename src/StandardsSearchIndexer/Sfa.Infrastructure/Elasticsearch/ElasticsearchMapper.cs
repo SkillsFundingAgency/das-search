@@ -140,8 +140,8 @@ namespace Sfa.Infrastructure.Elasticsearch
             documentToPopulate.Email = apprenticeshipInformation.ContactInformation.Email;
             documentToPopulate.ContactUsUrl = apprenticeshipInformation.ContactInformation.Website;
             documentToPopulate.StandardInfoUrl = apprenticeshipInformation.InfoUrl;
-            documentToPopulate.LearnerSatisfaction = provider.LearnerSatisfaction ?? 0;
-            documentToPopulate.EmployerSatisfaction = provider.EmployerSatisfaction ?? 0;
+            documentToPopulate.LearnerSatisfaction = provider.LearnerSatisfaction;
+            documentToPopulate.EmployerSatisfaction = provider.EmployerSatisfaction;
             documentToPopulate.DeliveryModes = GenerateListOfDeliveryModes(deliveryInformation.DeliveryModes);
             documentToPopulate.Website = deliveryInformation.DeliveryLocation.Contact.Website;
             documentToPopulate.Address = new Models.Address

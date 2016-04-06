@@ -44,8 +44,8 @@
 
         public double Distance { get; set; }
 
-        public double EmployerSatisfaction { get; set; }
+        public double? EmployerSatisfaction { get; set; }
 
-        public double LearnerSatisfaction { get; set; }
+        public double? LearnerSatisfaction { get; set; }
     }
 }
