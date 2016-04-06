@@ -227,14 +227,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5586), Tuple.Create("\"", 5594)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5555), Tuple.Create("\"", 5563)
 
 #line 147 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5591), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5560), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5591), false)
+, 5560), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -280,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5771), Tuple.Create("\"", 5785)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5740), Tuple.Create("\"", 5754)
 
 #line 157 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5778), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 5747), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5778), false)
+, 5747), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -669,7 +669,7 @@ WriteLiteral("                        ");
 
             
             #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
-                   Write(GetDocumentItem(@Model.StandardPdf, @Model.StandardPdfUrlTitle));
+                   Write(GetDocumentItem(@Model.StandardPdf, "Standard"));
 
             
             #line default
@@ -680,7 +680,7 @@ WriteLiteral("                        ");
 
             
             #line 84 "..\..\Views\Apprenticeship\Standard.cshtml"
-                   Write(GetDocumentItem(@Model.AssessmentPlanPdf, @Model.AssessmentPlanPdfUrlTitle));
+                   Write(GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan"));
 
             
             #line default
