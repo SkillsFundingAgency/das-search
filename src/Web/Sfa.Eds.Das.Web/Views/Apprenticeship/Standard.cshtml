@@ -39,11 +39,11 @@
                             <div class="form-group @(@Model.HasError ? " error" : "")">
                                 <label class="form-label" for="postcode">
                                     Enter postcode@* or partial postcode *@
-                                    <p>
                                         @{
-                                            Html.RenderPartial("_BlankFieldErrorMessage");
+                                            <p id="postcode-error">
+                                                Html.RenderPartial("_BlankFieldErrorMessage");
+                                            </p>
                                         }
-                                    </p>
                                 </label>
                                 <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
