@@ -13,6 +13,7 @@
 
         protected void Application_Start()
         {
+            MvcHandler.DisableMvcResponseHeader = true;
             _logger = DependencyResolver.Current.GetService<ILog>();
 
             _logger.Info("Starting web applications...");
