@@ -210,6 +210,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInsightsInitializer.cs" />
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Controllers\ProviderController.cs" />

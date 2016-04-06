@@ -7,6 +7,9 @@
     using System.Web.Routing;
     using System.Web.Http;
     using System.Web.Configuration;
+
+    using Microsoft.ApplicationInsights.Extensibility;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         private ILog _logger;
@@ -38,7 +41,9 @@
 
         private void SetupApplicationInsights()
         {
-            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
+            TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
+
+            TelemetryConfiguration.Active.ContextInitializers.Add(new ApplicationInsightsInitializer());
         }
     }
 }
