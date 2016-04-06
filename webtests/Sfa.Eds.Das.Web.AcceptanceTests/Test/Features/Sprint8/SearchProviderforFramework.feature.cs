@@ -67,76 +67,61 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint8
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Validate post code field mandatory on framework detail page")]
-        [NUnit.Framework.IgnoreAttribute()]
         public virtual void ValidatePostCodeFieldMandatoryOnFrameworkDetailPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate post code field mandatory on framework detail page", new string[] {
-                        "ignore"});
-#line 9
-this.ScenarioSetup(scenarioInfo);
-#line 10
-testRunner.Given("I am on Framework \'40322\' detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 11
-testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate post code field mandatory on framework detail page", ((string[])(null)));
 #line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+testRunner.Given("I am on Framework \'40322\' detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 14
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 15
 testRunner.Then("I should see error message \"This field can\'t be blank\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search Aardvark Training LIMITED Provider by postcode falling on Provider radius")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.TestCaseAttribute("NG24 4SU", "40322", null)]
-        public virtual void SearchAardvarkTrainingLIMITEDProviderByPostcodeFallingOnProviderRadius(string postcode, string id, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Search DUDLEY METROPOLITAN BOROUGH COUNCIL Provider by postcode falling on Provid" +
+            "er radius")]
+        [NUnit.Framework.TestCaseAttribute("BL1 1RU", "40335", null)]
+        public virtual void SearchDUDLEYMETROPOLITANBOROUGHCOUNCILProviderByPostcodeFallingOnProviderRadius(string postcode, string id, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "ignore"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Aardvark Training LIMITED Provider by postcode falling on Provider radius", @__tags);
-#line 16
-this.ScenarioSetup(scenarioInfo);
-#line 17
-testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
-testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search DUDLEY METROPOLITAN BOROUGH COUNCIL Provider by postcode falling on Provid" +
+                    "er radius", exampleTags);
 #line 19
-testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 20
-testRunner.Then("I should see provider \"Aardvark Training\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 23
+testRunner.Then("I should see provider \"DUDLEY METROPOLITAN BOROUGH COUNCIL\" in provider results p" +
+                    "age.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search Provider by postcode outside  Provider radius 60 miles")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.TestCaseAttribute("HP18 9QU", "40322", null)]
-        public virtual void SearchProviderByPostcodeOutsideProviderRadius60Miles(string postcode, string id, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Search Provider by postcode outside  Provider radius 80 miles")]
+        [NUnit.Framework.TestCaseAttribute("LS21 3JS", "40335", null)]
+        public virtual void SearchProviderByPostcodeOutsideProviderRadius80Miles(string postcode, string id, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "ignore"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode outside  Provider radius 60 miles", @__tags);
-#line 27
-this.ScenarioSetup(scenarioInfo);
-#line 28
-testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
-testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode outside  Provider radius 80 miles", exampleTags);
 #line 30
-testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 31
-testRunner.Then("I should not see provider \"Aardvark Training\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 32
-testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" in provider results" +
-                    " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+testRunner.Then("I should not see provider \"DUDLEY METROPOLITAN BOROUGH COUNCIL\" in provider resul" +
+                    "ts page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -154,17 +139,17 @@ testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" 
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode falling inside Provider radius", @__tags);
-#line 41
-this.ScenarioSetup(scenarioInfo);
-#line 42
-testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
-testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
-testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 45
-testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 46
+testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 47
+testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
+testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 49
+testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 50
 testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" in provider results" +
                     " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
