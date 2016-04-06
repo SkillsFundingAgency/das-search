@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ProviderControllerTests.cs" />
+    <Compile Include="Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
     <Compile Include="Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
     <Compile Include="Extensions\ForUriExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
