@@ -3,7 +3,9 @@
 namespace Sfa.Infrastructure.Elasticsearch
 {
     using System.Collections.Generic;
+    using System.Net;
     using System.Threading.Tasks;
+    using Eds.Das.Indexer.Core.Exceptions;
     using Models;
     using Nest;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
@@ -23,16 +25,24 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public override void CreateIndex(string indexName)
         {
-            Client.CreateIndex(indexName, i => i
+            var response = Client.CreateIndex(indexName, i => i
                 .Mappings(ms => ms
                     .Map<StandardProvider>(m => m.AutoMap())
                     .Map<FrameworkProvider>(m => m.AutoMap())));
+
+            if (response.ServerError.Status != (int)HttpStatusCode.OK)
+            {
+                throw new ConnectionException($"Received non-200 response when trying to create the Apprenticeship Provider Index, Status Code:{response.ServerError.Status}");
+            }
         }
 
         public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)
         {
-            await Task.WhenAll(IndexStandards(indexName, indexEntries));
-            await Task.WhenAll(IndexFrameworks(indexName, indexEntries));
+            var bulkTasks = new List<Task<IBulkResponse>>();
+            bulkTasks.AddRange(IndexStandards(indexName, indexEntries));
+            bulkTasks.AddRange(IndexFrameworks(indexName, indexEntries));
+            
+            await Task.WhenAll(bulkTasks);
         }
 
         private static BulkDescriptor CreateBulkDescriptor(string indexName)

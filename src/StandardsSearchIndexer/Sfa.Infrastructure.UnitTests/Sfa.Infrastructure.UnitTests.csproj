@@ -67,7 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elasticsearch\BaseElasticIndexMaintainerTests.cs" />
     <Compile Include="Elasticsearch\ElasticsearchMapperTest.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchApprenticeshipIndexMaintainerTests.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CsvTestModel.cs" />
     <Compile Include="Services\CsvServiceTests.cs" />

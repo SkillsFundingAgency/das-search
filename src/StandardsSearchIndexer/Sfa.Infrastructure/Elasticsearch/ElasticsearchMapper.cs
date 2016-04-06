@@ -3,16 +3,16 @@
 namespace Sfa.Infrastructure.Elasticsearch
 {
     using System;
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
-    using Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Elasticsearch.Models;
-    using Nest;
     using System.Collections.Generic;
     using System.Linq;
-    using Eds.Das.Indexer.Core.Extensions;
     using Eds.Das.Indexer.Core.Exceptions;
+    using Eds.Das.Indexer.Core.Extensions;
+    using Eds.Das.Indexer.Core.Models.Provider;
+    using Nest;
+    using Sfa.Eds.Das.Indexer.Core.Models;
+    using Sfa.Eds.Das.Indexer.Core.Models.Framework;
+    using Sfa.Eds.Das.Indexer.Core.Services;
+    using Sfa.Infrastructure.Elasticsearch.Models;
 
     public class ElasticsearchMapper : IElasticsearchMapper
     {
@@ -32,7 +32,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                     StandardId = standard.Id,
                     Title = standard.Title,
                     JobRoles = standard.JobRoles,
-                    NotionalEndLevel = standard.NotionalEndLevel,
+                    Level = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
                     StandardPdf = standard.StandardPdfUrl,
                     AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
