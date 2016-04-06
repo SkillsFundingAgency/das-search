@@ -6,7 +6,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
     {
         public void Initialize(TelemetryContext context)
         {
-            context.Properties["Application"] = "Sfa.Indexer";
+            context.Properties["Application"] = "Sfa.Das.Indexer";
         }
     }
 }
