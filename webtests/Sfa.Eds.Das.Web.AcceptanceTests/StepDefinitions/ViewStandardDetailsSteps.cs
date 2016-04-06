@@ -1,15 +1,15 @@
-﻿using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
-using System;
-using TechTalk.SpecFlow;
-
-namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
+﻿namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 {
+    using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
+
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class ViewStandardDetailsSteps
     {
         StandardDetailsPage standardDetailsPage;
-        SearchResultsPage srchresultPage;
 
+        SearchResultsPage srchresultPage;
 
         public ViewStandardDetailsSteps()
         {
@@ -47,15 +47,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             standardDetailsPage.ClickButton();
         }
 
-
         [When(@"I choose '(.*)' from search result page")]
         public void WhenIChooseFromSearchResultPage(string p0)
         {
             srchresultPage.searchChooseStandard(p0);
         }
-
-
-
 
         [When(@"I enter '(.*)' in provider search box")]
         [Given(@"I enter ""(.*)""  in provider search box")]
@@ -63,6 +59,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         public void WhenIEnterInProviderSearchBox(string p0)
         {
             standardDetailsPage.enterlocation(p0);
+        }
+
+        [Then(@"I should see error message ""(.*)""")]
+        public void ThenIShouldSeeErrorMessage(string p0)
+        {
+            standardDetailsPage.validateErrorMessage_postcodefield(p0);
+        }
+
+        [Then(@"I should see message searchresult ""(.*)""")]
+        public void ThenIShouldSeeMessageSearchresult(string p0)
+        {
+            standardDetailsPage.validateProviderSrchResultMsg(p0);
         }
     }
 }

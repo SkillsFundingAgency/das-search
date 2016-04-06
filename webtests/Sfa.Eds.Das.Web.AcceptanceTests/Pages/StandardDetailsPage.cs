@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
@@ -22,6 +18,10 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         By standardDetailProfReg = By.XPath(".//*[@id='content']/section/dl/dd[7]/p");
         By standardDetailOverviewRole = By.XPath(".//*[@id='content']/section/dl/dd[1]/p");
 
+        By postCodeValidation = By.Id("postcode-error");
+        By SearchProvidermsg = By.Id("standard-provider-search-message");
+
+
         private By postCodeTextBox = By.Id("postcode");
 
         private By searchButton = By.Id("submit-postcode");
@@ -34,7 +34,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifyStandardtitle()
         {
             Assert.True(isDisplayed(standardDetailTitle));
-
         }
 
         public void verifyStandardlevel()
@@ -42,7 +41,14 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             Assert.True(isDisplayed(standardDetailLevel));
         }
 
-
+        public void validateErrorMessage_postcodefield(string errmsg)
+        {
+            Assert.AreEqual(errmsg, FindText(postCodeValidation));
+        }
+        public void validateProviderSrchResultMsg(string msg)
+        {
+            Assert.AreEqual(msg, FindText(SearchProvidermsg));
+        }
 
         public void verifyBespokeContentfields(String metadata)
         {
