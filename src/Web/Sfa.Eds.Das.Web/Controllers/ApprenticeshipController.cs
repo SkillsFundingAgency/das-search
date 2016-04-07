@@ -22,7 +22,6 @@
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
 
-
         public ApprenticeshipController(
             IStandardSearchService searchService,
             IGetStandards getStandards,

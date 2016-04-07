@@ -53,7 +53,6 @@
         {
             return new MapperConfiguration(cfg =>
             {
-
                 // Apprenticeship search listing  -> mix of standard and framework
                 cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>();
                 cfg.CreateMap<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>().AfterMap<ApprenticeshipSearchResultViewModelMappingAction>();
