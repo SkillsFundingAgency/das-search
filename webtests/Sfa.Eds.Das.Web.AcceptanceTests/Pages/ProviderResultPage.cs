@@ -78,7 +78,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyProviderLocationinSearchResults(String p0)
         {
-            Assert.AreEqual(p0, FindText(providerLocation));
+            verifyTextMessage(providerLocation, p0);
         }
 
         public void verifyProviderNotinSearchResults(String p0)

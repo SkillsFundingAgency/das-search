@@ -21,12 +21,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyFrameworkTitle(String title)
         {
-            Assert.AreEqual(title, FindText(frameworkDetailTitle));
+            Assert.True(verifyTextMessage(frameworkDetailTitle,title));
         }
 
         public void verifyFrameworkPathway(String pathway)
         {
-            Assert.AreEqual(pathway, FindText(frameworkDetailPathway));
+            Assert.True(verifyTextMessage(frameworkDetailPathway, pathway));
         }
 
 
