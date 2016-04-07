@@ -34,7 +34,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public Framework GetFrameworkById(int id)
         {
-            var results =_elasticsearchCustomClient
+            var results = _elasticsearchCustomClient
                     .Search<FrameworkSearchResultsItem>(s => s
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("frameworkdocument"))

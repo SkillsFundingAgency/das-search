@@ -1,13 +1,12 @@
 ﻿namespace Sfa.Eds.Das.Web
 {
-    using Core.Logging;
     using System;
+    using System.Web.Configuration;
+    using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using System.Web.Http;
-    using System.Web.Configuration;
-
+    using Core.Logging;
     using Microsoft.ApplicationInsights.Extensibility;
 
     public class MvcApplication : System.Web.HttpApplication

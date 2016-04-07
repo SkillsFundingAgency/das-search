@@ -8,7 +8,7 @@ namespace Sfa.Eds.Das.Core.Logging
     {
         void Info(string msg);
 
-        void Info(string msg, Dictionary<string, string> properties);
+        void Info(string msg, Dictionary<string, object> properties);
 
         void Debug(string msg);
 
