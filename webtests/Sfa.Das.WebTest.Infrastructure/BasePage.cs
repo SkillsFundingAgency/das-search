@@ -118,9 +118,16 @@
             driver.WaitFor(locator);
         }
 
-        public string FindText(By locator)
+        public bool verifyTextMessage(By locator, String text)
         {
-            return Find(locator).Text;
+            if (Find(locator).Text.Contains(text))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool isElementNotPresent(By locator, string provider)
