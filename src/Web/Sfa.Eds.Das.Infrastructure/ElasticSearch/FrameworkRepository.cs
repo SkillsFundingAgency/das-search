@@ -11,21 +11,22 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Infrastructure.Elasticsearch;
 
     public sealed class FrameworkRepository : IGetFrameworks
     {
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
 
         public FrameworkRepository(
-            IElasticsearchClientFactory elasticsearchClientFactory,
+            IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IFrameworkMapping frameworkMapping)
         {
-            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
@@ -33,9 +34,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public Framework GetFrameworkById(int id)
         {
-            var client = this._elasticsearchClientFactory.Create();
-            var results =
-                client.Search<FrameworkSearchResultsItem>(s => s
+            var results =_elasticsearchCustomClient
+                    .Search<FrameworkSearchResultsItem>(s => s
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("frameworkdocument"))
                     .From(0)

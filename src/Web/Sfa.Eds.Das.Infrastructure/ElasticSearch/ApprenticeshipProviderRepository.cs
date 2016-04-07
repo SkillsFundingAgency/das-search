@@ -9,24 +9,23 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
     using Core.Domain.Model;
     using Core.Domain.Services;
     using Core.Logging;
-    using ElasticSearch;
     using Sfa.Das.ApplicationServices.Models;
 
     public sealed class ApprenticeshipProviderRepository : IApprenticeshipProviderRepository
     {
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
 
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IProviderMapping _providerMapping;
 
         public ApprenticeshipProviderRepository(
-            IElasticsearchClientFactory elasticsearchClientFactory,
+            IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IProviderMapping providerMapping)
         {
-            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _providerMapping = providerMapping;
@@ -34,10 +33,8 @@ namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
 
         public Provider GetById(string providerid, string locationId, string standardCode)
         {
-            var client = _elasticsearchClientFactory.Create();
-
             var results =
-               client.Search<StandardProviderSearchResultsItem>(s => s
+               _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(s => s
                    .Index(_applicationSettings.ProviderIndexAlias)
                    .From(0)
                    .Size(1)

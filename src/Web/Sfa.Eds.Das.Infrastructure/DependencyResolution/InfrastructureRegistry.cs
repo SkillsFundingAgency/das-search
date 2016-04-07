@@ -30,6 +30,7 @@ namespace Sfa.Eds.Das.Infrastructure.DependencyResolution
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
+            For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
         }
     }
 }
