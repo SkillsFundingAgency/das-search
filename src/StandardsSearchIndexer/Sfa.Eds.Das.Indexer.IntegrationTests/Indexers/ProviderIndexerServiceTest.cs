@@ -66,11 +66,10 @@
 
         [Test]
         [Category("Integration")]
-        [Ignore]
         public async Task ShouldCreateScheduledIndexAndMappingForProviders()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
@@ -91,13 +90,13 @@
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             var expectedProviderResult = new Provider
                                              {
                                                  Ukprn = 10002387,
-                                                 Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
-                                                 MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
+                                                 Name = "OAKLANDS COLLEGE",
+                                                 MarketingInfo = "Provider 300779 marketing into for standard code 60",
                                                  ContactDetails = new ContactInformation { Email = "test1@example.com", Website = "http://www.f1training.org.uk", Phone = "01449 770911" }
                                              };
 
@@ -128,7 +127,7 @@
         public async Task ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
