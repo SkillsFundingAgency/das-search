@@ -33,7 +33,6 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IGetApprenticeshipProviders>().Use<CourseDirectoryClient>();
             For<IMaintainApprenticeshipIndex>().Use<ElasticsearchApprenticeshipIndexMaintainer>();
             For<IMaintainProviderIndex>().Use<ElasticsearchProviderIndexMaintainer>();
-            For<IApprenticeshipIndexDefinitions>().Use<ApprenticeshipIndexDefinitions>();
             For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
             For<IElasticClient>().Use<ElasticClient>();
         }

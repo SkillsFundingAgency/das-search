@@ -10,9 +10,11 @@ namespace Sfa.Eds.Das.Web
             context.PreSendRequestHeaders += OnPreSendRequestHeaders;
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+        }
 
-        void OnPreSendRequestHeaders(object sender, EventArgs e)
+        private void OnPreSendRequestHeaders(object sender, EventArgs e)
         {
             HttpContext.Current.Response.Headers.Remove("Server");
         }

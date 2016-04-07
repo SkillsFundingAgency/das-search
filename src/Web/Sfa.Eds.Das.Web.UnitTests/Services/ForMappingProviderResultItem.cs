@@ -16,7 +16,7 @@
         {
             MappingService mappingService = new MappingService(null);
 
-            var providerResult = new StandardProviderSearchResultsItem{ EmployerSatisfaction = null, LearnerSatisfaction = 83.9 };
+            var providerResult = new StandardProviderSearchResultsItem { EmployerSatisfaction = null, LearnerSatisfaction = 83.9 };
 
             var viewModel = mappingService.Map<StandardProviderSearchResultsItem, ProviderResultItemViewModel>(providerResult);
 

@@ -28,6 +28,5 @@ namespace Sfa.Eds.Das.Web.UnitTests.Extensions.For_HtmlExtensions
 
             Assert.AreEqual(string.Empty, htmlText.ToHtmlString());
         }
-
     }
 }

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elasticsearch\ElasticMapper.cs" />
+    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\MappingException.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />

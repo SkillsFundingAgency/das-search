@@ -15,7 +15,7 @@
         public int PathwayCode { get; set; }
 
         public int Level { get; set; }
-        
+
         // Page specific
         public bool HasError { get; set; }
 

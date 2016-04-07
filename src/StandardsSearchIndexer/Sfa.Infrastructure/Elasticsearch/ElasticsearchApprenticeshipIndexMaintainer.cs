@@ -3,7 +3,9 @@ namespace Sfa.Infrastructure.Elasticsearch
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
+    using Eds.Das.Indexer.Core.Exceptions;
     using Nest;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.Core.Models;
@@ -13,17 +15,22 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
-        private readonly IApprenticeshipIndexDefinitions _apprenticeshipIndexDefinitions;
-
-        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IApprenticeshipIndexDefinitions apprenticeshipIndexDefinitions, ILog logger)
+        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
             : base(factory, elasticsearchMapper, logger, "Apprenticeship")
         {
-            _apprenticeshipIndexDefinitions = apprenticeshipIndexDefinitions;
         }
 
         public override void CreateIndex(string indexName)
         {
-            Client.LowLevel.IndicesCreatePost<string>(indexName, _apprenticeshipIndexDefinitions.Generate());
+            var response = Client.CreateIndex(indexName, i => i
+                .Mappings(ms => ms
+                    .Map<StandardDocument>(m => m.AutoMap())
+                    .Map<FrameworkDocument>(m => m.AutoMap())));
+
+            if (response.ApiCall.HttpStatusCode != (int)HttpStatusCode.OK)
+            {
+                throw new ConnectionException($"Received non-200 response when trying to create the Apprenticeship Index, Status Code:{response.ApiCall.HttpStatusCode}");
+            }
         }
 
         public async Task IndexStandards(string indexName, ICollection<StandardMetaData> entries)

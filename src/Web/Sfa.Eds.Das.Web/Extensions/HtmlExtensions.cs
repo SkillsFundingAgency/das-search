@@ -21,7 +21,6 @@
         {
             if (!string.IsNullOrEmpty(markdownText))
             {
-
                 return new HtmlString(CommonMark.CommonMarkConverter.Convert(markdownText.Replace("\\r", "\r").Replace("\\n", "\n")));
             }
 

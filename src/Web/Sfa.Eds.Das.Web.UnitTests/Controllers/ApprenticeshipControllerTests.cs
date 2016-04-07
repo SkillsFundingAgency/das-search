@@ -17,7 +17,7 @@
     using Web.Services;
 
     [TestFixture]
-    public sealed class ApprenticeshipControllerTest
+    public sealed class ApprenticeshipControllerTests
     {
         [Test]
         public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()

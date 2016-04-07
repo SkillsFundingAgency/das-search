@@ -106,9 +106,7 @@
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
-            var a = GetPartial(html, ".result dl dt");
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            var b = GetPartial(html, ".result dl dd");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");

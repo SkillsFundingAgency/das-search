@@ -113,7 +113,7 @@
             Assert.AreEqual(1, amountRetrieved);
             Debug.Assert(retrievedStandard != null, "retrievedStandard != null");
             Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
-            Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
+            Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.Level);
             Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.StandardId);
             Assert.AreEqual(12, retrievedStandard.TypicalLength.From);
         }
@@ -153,7 +153,7 @@
             Assert.AreEqual(1, amountRetrieved);
             Debug.Assert(retrievedStandard != null, "retrievedStandard != null");
             Assert.AreEqual("Software Developer", retrievedStandard.Title);
-            Assert.AreEqual(0, retrievedStandard.NotionalEndLevel);
+            Assert.AreEqual(0, retrievedStandard.Level);
             Assert.AreEqual(2, retrievedStandard.StandardId);
         }
 
