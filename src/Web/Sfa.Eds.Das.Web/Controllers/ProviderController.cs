@@ -107,7 +107,7 @@
 
             if (!string.IsNullOrEmpty(criteria.StandardCode))
             {
-                var model = _apprenticeshipProviderRepository.GetById(
+                var model = _apprenticeshipProviderRepository.GetByStandardCode(
                     criteria.ProviderId,
                     criteria.LocationId,
                     criteria.StandardCode);

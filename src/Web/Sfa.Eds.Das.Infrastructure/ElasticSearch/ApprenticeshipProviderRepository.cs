@@ -35,7 +35,7 @@
             _providerMapping = providerMapping;
         }
 
-        public Provider GetById(string providerid, string locationId, string standardCode)
+        public Provider GetByStandardCode(string providerid, string locationId, string standardCode)
         {
             try
             {
