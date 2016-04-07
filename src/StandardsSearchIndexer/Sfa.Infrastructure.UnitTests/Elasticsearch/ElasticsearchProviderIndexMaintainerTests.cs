@@ -25,9 +25,9 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
         {
             var response = new StubResponse(400);
 
-            _mockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>())).Returns(response);
+            MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>())).Returns(response);
 
-            var indexMaintainer = new ElasticsearchProviderIndexMaintainer(_mockElasticClientFactory.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<IIndexSettings<IMaintainProviderIndex>>(), Mock.Of<ILog>());
+            var indexMaintainer = new ElasticsearchProviderIndexMaintainer(MockElasticClientFactory.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<IIndexSettings<IMaintainProviderIndex>>(), Mock.Of<ILog>());
 
             indexMaintainer.CreateIndex("testindex");
         }

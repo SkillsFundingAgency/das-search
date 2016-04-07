@@ -30,9 +30,9 @@ namespace Sfa.Infrastructure.Elasticsearch
                     .Map<StandardProvider>(m => m.AutoMap())
                     .Map<FrameworkProvider>(m => m.AutoMap())));
 
-            if (response.ServerError.Status != (int)HttpStatusCode.OK)
+            if (response.ApiCall.HttpStatusCode != (int)HttpStatusCode.OK)
             {
-                throw new ConnectionException($"Received non-200 response when trying to create the Apprenticeship Provider Index, Status Code:{response.ServerError.Status}");
+                throw new ConnectionException($"Received non-200 response when trying to create the Apprenticeship Provider Index, Status Code:{response.ApiCall.HttpStatusCode}");
             }
         }
 
@@ -41,7 +41,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             var bulkTasks = new List<Task<IBulkResponse>>();
             bulkTasks.AddRange(IndexStandards(indexName, indexEntries));
             bulkTasks.AddRange(IndexFrameworks(indexName, indexEntries));
-            
+
             await Task.WhenAll(bulkTasks);
         }
 

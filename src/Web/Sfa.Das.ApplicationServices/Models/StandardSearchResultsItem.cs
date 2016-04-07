@@ -9,7 +9,7 @@ namespace Sfa.Das.ApplicationServices.Models
 
         public string Title { get; set; }
 
-        public int NotionalEndLevel { get; set; }
+        public int Level { get; set; }
 
         public string StandardPdf { get; set; }
 

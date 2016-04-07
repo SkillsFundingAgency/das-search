@@ -9,25 +9,26 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
 {
     public class BaseElasticIndexMaintainerTests
     {
-        protected Mock<IElasticsearchClientFactory> _mockElasticClientFactory;
-        protected Mock<IElasticClient> _mockElasticClient;
+        protected Mock<IElasticsearchClientFactory> MockElasticClientFactory { get; private set; }
+        protected Mock<IElasticClient> MockElasticClient { get; private set; }
 
         [SetUp]
         public virtual void Setup()
         {
-            _mockElasticClient = new Mock<IElasticClient>();
-            _mockElasticClientFactory = new Mock<IElasticsearchClientFactory>();
-            _mockElasticClientFactory.Setup(x => x.GetElasticClient()).Returns(_mockElasticClient.Object);
+            MockElasticClient = new Mock<IElasticClient>();
+            MockElasticClientFactory = new Mock<IElasticsearchClientFactory>();
+            MockElasticClientFactory.Setup(x => x.GetElasticClient()).Returns(MockElasticClient.Object);
         }
 
         internal class StubResponse : ICreateIndexResponse
         {
-            private readonly ServerError _serverError;
+            private readonly IApiCallDetails _apiCallDetails;
 
             public StubResponse(int statusCode = 200)
             {
-                _serverError = new ServerError();
-                _serverError.Status = statusCode;
+                var mockApiCallDetails = new Mock<IApiCallDetails>();
+                mockApiCallDetails.SetupGet(x => x.HttpStatusCode).Returns(statusCode);
+                _apiCallDetails = mockApiCallDetails.Object;
             }
 
             public bool Acknowledged
@@ -42,7 +43,7 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
             {
                 get
                 {
-                    throw new NotImplementedException();
+                    return _apiCallDetails;
                 }
             }
 
@@ -87,7 +88,7 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
             {
                 get
                 {
-                    return _serverError;
+                    throw new NotImplementedException();
                 }
             }
         }

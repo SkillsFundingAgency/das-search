@@ -22,9 +22,9 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
         public void ShouldThrowAnExceptionIfCantCreateAnIndex()
         {
             var response = new StubResponse(400);
-            _mockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>())).Returns(response);
+            MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>())).Returns(response);
 
-            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(_mockElasticClientFactory.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>());
+            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClientFactory.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>());
 
             indexMaintainer.CreateIndex("testindex");
         }

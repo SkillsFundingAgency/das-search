@@ -27,9 +27,9 @@ namespace Sfa.Infrastructure.Elasticsearch
                     .Map<StandardDocument>(m => m.AutoMap())
                     .Map<FrameworkDocument>(m => m.AutoMap())));
 
-            if (response.ServerError.Status != (int)HttpStatusCode.OK)
+            if (response.ApiCall.HttpStatusCode != (int)HttpStatusCode.OK)
             {
-                throw new ConnectionException($"Received non-200 response when trying to create the Apprenticeship Index, Status Code:{response.ServerError.Status}");
+                throw new ConnectionException($"Received non-200 response when trying to create the Apprenticeship Index, Status Code:{response.ApiCall.HttpStatusCode}");
             }
         }
 
