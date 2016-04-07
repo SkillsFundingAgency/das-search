@@ -4,6 +4,7 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Infrastructure.ElasticSearch;
@@ -20,12 +21,12 @@
             _logger = logger;
         }
 
-        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector)
+        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "")
             where T : class
         {
             var client = _elasticsearchClientFactory.Create();
             var result = client.Search(selector);
-            SendLog(result, "Elasticsearch.Search");
+            SendLog(result, $"Elasticsearch.Search.{callerName}");
             return result;
         }
 
@@ -43,9 +44,9 @@
                                      { "Identifier", identifier },
                                      {
                                          "HttpStatusCode",
-                                         result.ApiCall?.HttpStatusCode?.ToString()
+                                         result.ApiCall?.HttpStatusCode
                                      },
-                                     { "ResponseTime", result.Took.ToString() },
+                                     { "ResponseTime", result.Took },
                                      { "Uri", result.ApiCall?.Uri?.AbsoluteUri },
                                      { "RequestBody", body }
                                  };
