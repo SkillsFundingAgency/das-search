@@ -31,8 +31,16 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)
         {
-            await Task.WhenAll(IndexStandards(indexName, indexEntries));
-            await Task.WhenAll(IndexFrameworks(indexName, indexEntries));
+            LogResponse(await Task.WhenAll(IndexStandards(indexName, indexEntries)));
+            LogResponse(await Task.WhenAll(IndexFrameworks(indexName, indexEntries)));
+        }
+
+        private void LogResponse(IBulkResponse[] elementIndexResult)
+        {
+            foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
+            {
+                ReportErrors(bulkResponse);
+            }
         }
 
         private static BulkDescriptor CreateBulkDescriptor(string indexName)
@@ -64,13 +72,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                         if (HaveReachedBatchLimit(count))
                         {
                             // Execute batch
-                            var result = Client.BulkAsync(bulkDescriptor).Result;
-                            if (result.Errors)
-                            {
-                                ReportErrors(result);
-                            }
-
-                            //tasks.Add(Client.BulkAsync(bulkDescriptor));
+                            tasks.Add(Client.BulkAsync(bulkDescriptor));
 
                             // New descriptor
                             bulkDescriptor = CreateBulkDescriptor(indexName);
