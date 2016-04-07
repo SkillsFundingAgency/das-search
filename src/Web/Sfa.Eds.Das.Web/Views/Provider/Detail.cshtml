@@ -62,7 +62,7 @@
             @GetStandardPropertyAsLinkHtml("Website course page", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl)
             @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", @Model.ContactInformation.ContactUsUrl)
             @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
-            @GetStandardPropertyHtml("Email", "email", Model.ContactInformation.Email)
+            @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>
@@ -93,6 +93,15 @@
         <dt>@title</dt>
         <dd id="@id">@Html.Raw(item)</dd>
     }
+}
+
+@helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+        <dt>@title</dt>
+        <dd id="@id"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+}
 }
 
 @helper GetStandardPropertyAsLinkHtml(string title, string id, string url, bool hideIfEmpty = false)

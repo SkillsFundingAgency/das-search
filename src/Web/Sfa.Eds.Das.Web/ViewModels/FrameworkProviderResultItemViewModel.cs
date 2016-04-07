@@ -12,8 +12,6 @@
 
         public string Name { get; set; }
 
-        public string FrameworkId { get; set; }
-
         public int FrameworkCode { get; set; }
 
         public int PathwayCode { get; set; }
@@ -49,5 +47,7 @@
         public string EmployerSatisfactionMessage { get; set; }
 
         public string LearnerSatisfactionMessage { get; set; }
+
+        public string FrameworkId { get; set; }
     }
 }
