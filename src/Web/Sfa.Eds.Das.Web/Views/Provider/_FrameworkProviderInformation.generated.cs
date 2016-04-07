@@ -71,14 +71,14 @@ WriteLiteralTo(__razor_helper_writer, "><a");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"link\"");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1486), Tuple.Create("\"", 1506)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1489), Tuple.Create("\"", 1509)
 
 #line 40 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1493), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 1496), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1493), false)
+, 1496), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -194,14 +194,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
 
 WriteLiteralTo(__razor_helper_writer, "><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1885), Tuple.Create("\"", 1905)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1888), Tuple.Create("\"", 1908)
 
 #line 49 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1892), Tuple.Create<System.Object, System.Int32>(item.Website
+, Tuple.Create(Tuple.Create("", 1895), Tuple.Create<System.Object, System.Int32>(item.Website
 
 #line default
 #line hidden
-, 1892), false)
+, 1895), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "> ");
@@ -257,7 +257,7 @@ WriteLiteral("                    ");
 
             
             #line 9 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.PathwayCode }, null));
+               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @frameworkCode = item.FrameworkCode }, null));
 
             
             #line default
