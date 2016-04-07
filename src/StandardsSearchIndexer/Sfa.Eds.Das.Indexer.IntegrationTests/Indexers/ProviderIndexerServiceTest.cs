@@ -1,27 +1,27 @@
-﻿namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Moq;
+using Nest;
+using NUnit.Framework;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Das.Indexer.Core.Models;
+using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+using Sfa.Eds.Das.Indexer.Core.Services;
+using Sfa.Infrastructure.Elasticsearch;
+using Sfa.Infrastructure.Elasticsearch.Models;
+using StructureMap;
+using Address = Sfa.Eds.Das.Indexer.Core.Models.Provider.Address;
+
+namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using FluentAssertions;
-    using Moq;
-    using Nest;
-    using NUnit.Framework;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Elasticsearch;
-
-    using StructureMap;
-
     [TestFixture]
     public class ProviderIndexerServiceTest
     {
@@ -86,7 +86,6 @@
         [Test]
         [Category("Integration")]
         [Category("Problematic")]
-        [Ignore]
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
@@ -95,8 +94,8 @@
             var expectedProviderResult = new Provider
                                              {
                                                  Ukprn = 10002387,
-                                                 Name = "OAKLANDS COLLEGE",
-                                                 MarketingInfo = "Provider 300779 marketing into for standard code 60",
+                                                 Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
+                                                 MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
                                                  ContactDetails = new ContactInformation { Email = "test1@example.com", Website = "http://www.f1training.org.uk", Phone = "01449 770911" }
                                              };
 
@@ -110,7 +109,7 @@
 
             Thread.Sleep(2000);
 
-            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).Query(q => q.QueryString(qs => qs.Query("MK40 2SG"))));
+            var retrievedResult = _elasticClient.Search<FrameworkProvider>(p => p.Index(indexName).Query(q => q.QueryString(qs => qs.Query("MK40 2SG"))));
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
@@ -192,7 +191,7 @@
                                                     Id = 115641,
                                                     Name = "F1 TRAINING LTD - BEDFORD LEARNING CENTRE",
                                                     Address =
-                                                        new Core.Models.Provider.Address
+                                                        new Address
                                                             {
                                                                 Address1 = "Enterprise House",
                                                                 Address2 = "2-6 Union Street",
@@ -208,7 +207,7 @@
                                                     Id = 115643,
                                                     Name = "F1 TRAINING LTD - GT YARMOUTH LEARNING CENTRE",
                                                     Address =
-                                                        new Core.Models.Provider.Address
+                                                        new Address
                                                             {
                                                                 Address1 = "Catalyst - Business Acceleration Centre",
                                                                 Address2 = "The Conge",
