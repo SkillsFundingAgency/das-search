@@ -134,6 +134,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
                 Name = hit.Source.Name,
                 Phone = hit.Source.Phone,
+                FrameworkId = hit.Source.FrameworkId,
                 FrameworkCode = hit.Source.FrameworkCode,
                 PathwayCode = hit.Source.PathwayCode,
                 StandardInfoUrl = hit.Source.StandardInfoUrl,
