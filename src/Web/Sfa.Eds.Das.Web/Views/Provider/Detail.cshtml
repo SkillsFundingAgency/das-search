@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
-} 
+}
 <main id="content">
 
     <p class="small-btm-margin">
@@ -15,7 +15,7 @@
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
-                    @Model.Name 
+                    @Model.Name
                 </h1>
                 <div id="marketing">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
@@ -32,20 +32,7 @@
                 <div class="related-container">
                     <aside class="related">
                         <h2 class="heading-medium">Training provider quality assessment</h2>
-                        <p>
-                            <b>Learner satisfaction:</b>
-                            <br />
-                            <span id="learner-satisfaction" class="heading-large">
-                                @Model.LearnerSatisfactionMessage
-                            </span>
-                        </p>
-                        <p>
-                            <b>Employer satisfaction:</b>
-                            <br/>
-                            <span id="employer-satisfaction" class="heading-large">
-                                @Model.EmployerSatisfactionMessage
-                            </span>
-                        </p>
+                        @GetSatisfactionsHtml()
                     </aside>
                 </div>
             }
@@ -71,19 +58,19 @@
 
 @helper ShowTrainingLocation(string title)
 {
-    if (@Model != null)
-    {
+if (@Model != null)
+{
         <dt>@title</dt>
 
-        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
-        {
-                <dd id="training-location">Training will take place at your location</dd>
-        }
-        else
-        {
-                <dd id="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
-        }
+    if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+    {
+            <dd id="training-location">Training will take place at your location</dd>
     }
+    else
+    {
+            <dd id="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+    }
+}
 }
 
 @helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
@@ -102,8 +89,44 @@
         <dt>@title</dt>
         <dd id="@id">
             <a class="pdf-url-link" href="@url" target="_blank">@url</a>
-        </dd> 
+        </dd>
     }
+}
+@helper GetSatisfactionsHtml()
+{
+    <p>
+        <b>Learner satisfaction:</b>
+        <br/>
+        @if (@Model.LearnerSatisfactionMessage != "No data available")
+        {
+            <span id="learner-satisfaction" class="heading-large">
+                @Model.LearnerSatisfactionMessage
+            </span>
+        }
+        else
+        {
+            <span id="learner-satisfaction">
+                @Model.LearnerSatisfactionMessage
+            </span>
+        }
+    </p>
+
+    <p>
+        <b>Employer satisfaction:</b>
+        <br/>
+        @if (@Model.EmployerSatisfactionMessage != "No data available")
+        {
+            <span id="employer-satisfaction" class="heading-large">
+                @Model.EmployerSatisfactionMessage
+            </span>
+        }
+        else
+        {
+            <span id="employer-satisfaction">
+                @Model.EmployerSatisfactionMessage
+            </span>
+        }
+    </p>
 }
 
 @helper GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)
