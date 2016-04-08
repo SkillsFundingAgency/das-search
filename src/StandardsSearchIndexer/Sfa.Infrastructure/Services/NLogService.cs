@@ -20,7 +20,6 @@
 
         public NLogService(Type loggerType)
         {
-            //_logger = LogManager.GetLogger(loggerType?.ToString() ?? "NullIndexLogger");
             _loggerType = loggerType?.ToString() ?? "DefaultIndexLogger";
         }
 
