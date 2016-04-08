@@ -45,20 +45,20 @@ namespace Sfa.Infrastructure.Elasticsearch
             LogResponse(await Task.WhenAll(bulkTasks));
         }
 
-        private void LogResponse(IBulkResponse[] elementIndexResult)
-        {
-            foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
-            {
-                ReportErrors(bulkResponse);
-            }
-        }
-
         private static BulkDescriptor CreateBulkDescriptor(string indexName)
         {
             var bulkDescriptor = new BulkDescriptor();
             bulkDescriptor.Index(indexName);
 
             return bulkDescriptor;
+        }
+
+        private void LogResponse(IBulkResponse[] elementIndexResult)
+        {
+            foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
+            {
+                ReportErrors(bulkResponse);
+            }
         }
 
         private List<Task<IBulkResponse>> IndexFrameworks(string indexName, ICollection<Provider> indexEntries)
