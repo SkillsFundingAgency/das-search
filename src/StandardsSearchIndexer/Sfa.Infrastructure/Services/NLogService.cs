@@ -1,6 +1,8 @@
 ﻿namespace Sfa.Infrastructure.Services
 {
     using System;
+    using System.Collections.Generic;
+
     using Eds.Das.Indexer.Core.Services;
     using Microsoft.ApplicationInsights.NLogTarget;
     using NLog;
@@ -8,7 +10,7 @@
 
     public class NLogService : ILog
     {
-        private readonly Logger _logger;
+        private readonly string _loggerType;
 #pragma warning disable CS0169
 #pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget _dummy; // Reference so assembly is copied to Primary output.
@@ -18,87 +20,88 @@
 
         public NLogService(Type loggerType)
         {
-            _logger = LogManager.GetLogger(loggerType?.ToString() ?? "NullIndexLogger");
+            //_logger = LogManager.GetLogger(loggerType?.ToString() ?? "NullIndexLogger");
+            _loggerType = loggerType?.ToString() ?? "DefaultIndexLogger";
         }
 
-        public void Trace(object message)
+        public void Trace(object message) // ToDo: Do we need trace?
         {
-            _logger.Trace(message);
+            SendLog(message, LogLevel.Trace);
         }
 
         public void Debug(object message)
         {
-            _logger.Debug(message);
+            SendLog(message, LogLevel.Debug);
         }
 
         public void Debug(object message, Exception exception)
         {
-            _logger.Debug(exception, message.ToString());
-        }
-
-        public void DebugFormat(string format, params object[] args)
-        {
-            _logger.Debug(format, args);
+            SendLog(message, LogLevel.Debug, null, exception);
         }
 
         public void Info(object message)
         {
-            _logger.Info(message);
+            SendLog(message, LogLevel.Info);
+        }
+
+        public void Info(string message, Dictionary<string, object> properties)
+        {
+            SendLog(message, LogLevel.Info, properties);
         }
 
         public void Info(object message, Exception exception)
         {
-            _logger.Info(exception, message.ToString());
-        }
-
-        public void InfoFormat(string format, params object[] args)
-        {
-            _logger.Info(format, args);
+            SendLog(message, LogLevel.Info, null, exception);
         }
 
         public void Warn(object message)
         {
-            _logger.Warn(message);
+            SendLog(message, LogLevel.Warn);
         }
 
         public void Warn(object message, Exception exception)
         {
-            _logger.Warn(exception, message.ToString());
-        }
-
-        public void WarnFormat(string format, params object[] args)
-        {
-            _logger.Warn(format, args);
+            SendLog(message, LogLevel.Warn, null, exception);
         }
 
         public void Error(object message)
         {
-            _logger.Error(message);
+            SendLog(message, LogLevel.Error);
         }
 
         public void Error(object message, Exception exception)
         {
-            _logger.Error(exception, message.ToString());
-        }
-
-        public void ErrorFormat(string format, params object[] args)
-        {
-            _logger.Error(format, args);
+            SendLog(message, LogLevel.Error, null, exception);
         }
 
         public void Fatal(object message)
         {
-            _logger.Fatal(message);
+            SendLog(message, LogLevel.Fatal);
         }
 
         public void Fatal(object message, Exception exception)
         {
-            _logger.Fatal(exception, message.ToString());
+            SendLog(message, LogLevel.Fatal, null, exception);
         }
 
-        public void FatalFormat(string format, params object[] args)
+        private void SendLog(object message, LogLevel level, Dictionary<string, object> properties = null, Exception exception = null)
         {
-            _logger.Fatal(format, args);
+            if (properties == null)
+            {
+                properties = new Dictionary<string, object>();
+            }
+
+            properties.Add("Application", "Sfa.Das.Indexer");
+
+            var logEvent = new LogEventInfo(level, _loggerType, message.ToString()) { Exception = exception };
+
+            foreach (var property in properties)
+            {
+                logEvent.Properties[property.Key] = property.Value;
+            }
+
+            ILogger log = LogManager.GetCurrentClassLogger();
+            log.Log(logEvent);
         }
     }
 }
