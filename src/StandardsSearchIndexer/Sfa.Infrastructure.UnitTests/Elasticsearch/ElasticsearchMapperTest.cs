@@ -199,7 +199,7 @@
                     {
                         Code = 99,
                         PathwayCode = 1122,
-                        Level = 4,
+                        ProgType = 20,
                         MarketingInfo = "Framework Apprenticeship Marketing",
                         InfoUrl = "http://standard-info.com",
                         ContactInformation = new ContactInformation

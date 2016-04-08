@@ -315,7 +315,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                                                    {
                                                        Code = 45,
                                                        PathwayCode = 7,
-                                                       Level = 5,
+                                                       ProgType = 5,
                                                        MarketingInfo = "Provider 304107 marketing into for standard code 45",
                                                        InfoUrl = "www.Provider304107Standard45StandardInfoURL.com",
                                                        ContactInformation =

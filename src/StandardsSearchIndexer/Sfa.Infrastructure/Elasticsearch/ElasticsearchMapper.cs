@@ -113,8 +113,8 @@ namespace Sfa.Infrastructure.Elasticsearch
                 {
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
-                    FrameworkId = string.Concat(frameworkInformation.Code, MapLevelProgType(frameworkInformation.Level), frameworkInformation.PathwayCode),
-                    Level = frameworkInformation.Level
+                    FrameworkId = string.Concat(frameworkInformation.Code, frameworkInformation.ProgType, frameworkInformation.PathwayCode),
+                    Level = MapLevelProgType(frameworkInformation.ProgType)
                 };
 
                 PopulateDocumentSharedProperties(frameworkProvider, provider, frameworkInformation, deliveryInformation);

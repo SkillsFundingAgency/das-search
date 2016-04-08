@@ -66,7 +66,7 @@
                     new FrameworkInformation
                         {
                             Code = framework.FrameworkCode,
-                            Level = framework.Level,
+                            ProgType = framework.Level,
                             PathwayCode = framework.PathwayCode,
                             InfoUrl = framework.FrameworkInfoUrl,
                             ContactInformation = new ContactInformation { Email = framework.Contact.Email, Phone = framework.Contact.Phone, Website = framework.Contact.ContactUsUrl },

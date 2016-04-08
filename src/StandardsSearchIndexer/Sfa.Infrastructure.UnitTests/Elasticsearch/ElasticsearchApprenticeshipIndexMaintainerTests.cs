@@ -11,12 +11,6 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
     [TestFixture]
     public sealed class ElasticsearchApprenticeshipIndexMaintainerTests : BaseElasticIndexMaintainerTests
     {
-        [SetUp]
-        public override void Setup()
-        {
-            base.Setup();
-        }
-
         [Test]
         [ExpectedException(typeof(ConnectionException))]
         public void ShouldThrowAnExceptionIfCantCreateAnIndex()
