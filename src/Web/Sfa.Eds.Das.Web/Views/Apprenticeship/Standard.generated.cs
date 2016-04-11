@@ -160,7 +160,7 @@ WriteLiteralTo(__razor_helper_writer, "        <dt>Level</dt>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <dd");
+WriteLiteralTo(__razor_helper_writer, "        <dd");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"level\"");
 
@@ -177,7 +177,7 @@ WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
 
 
 #line 137 "..\..\Views\Apprenticeship\Standard.cshtml"
-                  WriteTo(__razor_helper_writer, equivalence);
+              WriteTo(__razor_helper_writer, equivalence);
 
 
 #line default
@@ -227,14 +227,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5537), Tuple.Create("\"", 5545)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5533), Tuple.Create("\"", 5541)
 
 #line 147 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5542), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5538), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5542), false)
+, 5538), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -280,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5733), Tuple.Create("\"", 5747)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5729), Tuple.Create("\"", 5743)
 
 #line 157 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5740), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 5736), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 5740), false)
+, 5736), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
