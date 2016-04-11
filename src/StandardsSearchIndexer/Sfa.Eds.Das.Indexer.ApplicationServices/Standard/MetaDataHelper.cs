@@ -1,6 +1,8 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Standard
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
+
     using Core.Services;
     using Newtonsoft.Json;
 
@@ -28,7 +30,11 @@
 
         public List<StandardMetaData> GetAllStandardsMetaData()
         {
+            var stopwatch = new Stopwatch();
             var standardsMetaDataJson = _metaDataReader.GetAllAsJson();
+            stopwatch.Stop();
+            _log.Info("MetaDataHelper.GetAllStandardsMetaData", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds } });
+
             var standardsMetaData = new List<StandardMetaData>();
 
             foreach (var item in standardsMetaDataJson)
@@ -48,12 +54,19 @@
 
         public void UpdateMetadataRepository()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             _metaDataWriter.GenerateStandardMetadataFiles();
+            stopwatch.Stop();
+            _log.Info("MetaDataHelper.UpdateMetadataRepository", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds } });
         }
 
         public List<FrameworkMetaData> GetAllFrameworkMetaData()
         {
-            return _metaDataFrameworkReader.GetAllFrameworks();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            var frameworks = _metaDataFrameworkReader.GetAllFrameworks();
+            stopwatch.Stop();
+            _log.Info("MetaDataHelper.GetAllFrameworkMetaData", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds } });
+            return frameworks;
         }
     }
 }
