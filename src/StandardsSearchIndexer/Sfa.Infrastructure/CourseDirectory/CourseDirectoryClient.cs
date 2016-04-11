@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -15,21 +16,30 @@
     {
         private readonly IInfrastructureSettings _settings;
 
-        public CourseDirectoryClient(IInfrastructureSettings settings)
+        private readonly ILog _logger;
+
+        public CourseDirectoryClient(IInfrastructureSettings settings, ILog logger)
         {
             _settings = settings;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Eds.Das.Indexer.Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
         {
             using (var courseDirectoryProvider = new CourseDirectoryProviderDataService())
             {
+                Stopwatch stopwatch = Stopwatch.StartNew();
                 courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
                 var responseAsync = await courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
 
                 var providers = responseAsync.Body;
 
-                return providers.Select(MapFromProviderToProviderImport).ToList();
+                var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
+
+                stopwatch.Stop();
+                _logger.Info("CourseDirectory.GetApprenticeshipProvidersAsync", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
+
+                return selectedProviders;
             }
         }
 

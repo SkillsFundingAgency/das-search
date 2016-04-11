@@ -6,7 +6,9 @@ namespace Sfa.Infrastructure.Elasticsearch
     using System.Net;
     using System.Threading.Tasks;
     using Eds.Das.Indexer.Core.Exceptions;
+
     using Nest;
+
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
@@ -15,8 +17,8 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
-        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
-            : base(factory, elasticsearchMapper, logger, "Apprenticeship")
+        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog logger)
+            : base(elasticsearchClient, elasticsearchMapper, logger, "Apprenticeship")
         {
         }
 
@@ -35,13 +37,30 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public async Task IndexStandards(string indexName, ICollection<StandardMetaData> entries)
         {
+            var tasks = new List<Task<IBulkResponse>>();
+            int count = 0;
+            int totalCount = 0;
+            var bulkDescriptor = CreateBulkDescriptor(indexName);
+
             foreach (var standard in entries)
             {
                 try
                 {
                     var doc = ElasticsearchMapper.CreateStandardDocument(standard);
+                    bulkDescriptor.Create<StandardDocument>(c => c.Document(doc));
+                    count++;
 
-                    await Client.IndexAsync(doc, i => i.Index(indexName).Id(doc.StandardId));
+                    if (HaveReachedBatchLimit(count))
+                    {
+                        // Execute batch
+                        tasks.Add(Client.BulkAsync(bulkDescriptor));
+
+                        // New descriptor
+                        bulkDescriptor = CreateBulkDescriptor(indexName);
+
+                        totalCount += count;
+                        count = 0;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -49,17 +68,47 @@ namespace Sfa.Infrastructure.Elasticsearch
                     throw;
                 }
             }
+
+            if (count > 0)
+            {
+                tasks.Add(Client.BulkAsync(bulkDescriptor));
+                totalCount += count;
+            }
+
+            var bulkTasks = new List<Task<IBulkResponse>>();
+            bulkTasks.AddRange(tasks);
+            LogResponse(await Task.WhenAll(bulkTasks));
+
+            Log.Debug($"Sent a total of {totalCount} Standard documents to be indexed");
         }
 
         public async Task IndexFrameworks(string indexName, ICollection<FrameworkMetaData> entries)
         {
+            var tasks = new List<Task<IBulkResponse>>();
+            int count = 0;
+            int totalCount = 0;
+            var bulkDescriptor = CreateBulkDescriptor(indexName);
+
             foreach (var standard in entries)
             {
                 try
                 {
                     var doc = ElasticsearchMapper.CreateFrameworkDocument(standard);
 
-                    await Client.IndexAsync(doc, i => i.Index(indexName));
+                    bulkDescriptor.Create<FrameworkDocument>(c => c.Document(doc));
+                    count++;
+
+                    if (HaveReachedBatchLimit(count))
+                    {
+                        // Execute batch
+                        tasks.Add(Client.BulkAsync(bulkDescriptor));
+
+                        // New descriptor
+                        bulkDescriptor = CreateBulkDescriptor(indexName);
+
+                        totalCount += count;
+                        count = 0;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -67,12 +116,18 @@ namespace Sfa.Infrastructure.Elasticsearch
                     throw;
                 }
             }
-        }
 
-        public override bool IndexContainsDocuments(string indexName)
-        {
-            var a = Client.Search<StandardDocument>(s => s.Index(indexName).From(0).Size(10).MatchAll()).Documents;
-            return a.Any();
+            if (count > 0)
+            {
+                tasks.Add(Client.BulkAsync(bulkDescriptor));
+                totalCount += count;
+            }
+
+            var bulkTasks = new List<Task<IBulkResponse>>();
+            bulkTasks.AddRange(tasks);
+            LogResponse(await Task.WhenAll(bulkTasks));
+
+            Log.Debug($"Sent a total of {totalCount} Framework documents to be indexed");
         }
     }
 }
