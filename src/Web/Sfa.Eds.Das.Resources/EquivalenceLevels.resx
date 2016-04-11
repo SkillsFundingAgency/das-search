@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EighthLevel" xml:space="preserve">
-    <value>bachelor’s or master’s degree</value>
+    <value>doctorate</value>
   </data>
   <data name="FifthLevel" xml:space="preserve">
-    <value>foundation degree and above</value>
+    <value>foundation degree</value>
   </data>
   <data name="FirstLevel" xml:space="preserve">
     <value>GCSEs at grades D to G</value>
   </data>
   <data name="FourthLevel" xml:space="preserve">
-    <value>foundation degree and above</value>
+    <value>certificate of higher education</value>
   </data>
   <data name="SecondLevel" xml:space="preserve">
-    <value>5 GCSE passes at grades A* to C</value>
+    <value>GCSEs at grades A* to C</value>
   </data>
   <data name="SeventhLevel" xml:space="preserve">
-    <value>bachelor’s or master’s degree</value>
+    <value>master’s degree</value>
   </data>
   <data name="SixthLevel" xml:space="preserve">
-    <value>foundation degree and above</value>
+    <value>bachelor's degree</value>
   </data>
   <data name="ThirdLevel" xml:space="preserve">
-    <value>2 A level passes</value>
+    <value>A levels at grades A to E</value>
   </data>
 </root>
