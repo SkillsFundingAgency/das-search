@@ -35,6 +35,7 @@ namespace Sfa.Infrastructure.DependencyResolution
             For<IMaintainProviderIndex>().Use<ElasticsearchProviderIndexMaintainer>();
             For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
             For<IElasticClient>().Use<ElasticClient>();
+            For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
         }
     }
 }

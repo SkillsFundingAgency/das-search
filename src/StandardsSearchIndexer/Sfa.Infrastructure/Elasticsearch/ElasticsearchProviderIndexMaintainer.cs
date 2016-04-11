@@ -9,18 +9,15 @@ namespace Sfa.Infrastructure.Elasticsearch
     using Models;
     using Nest;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Models.Provider;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
-        private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, IIndexSettings<IMaintainProviderIndex> settings, ILog log)
-            : base(factory, elasticsearchMapper, log, "Provider")
+        public ElasticsearchProviderIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog log)
+            : base(elasticsearchClient, elasticsearchMapper, log, "Provider")
         {
-            _settings = settings;
         }
 
         public override void CreateIndex(string indexName)

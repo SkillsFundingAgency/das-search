@@ -11,15 +11,15 @@
     {
         private readonly string _typeOfIndex;
 
-        protected ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
+        protected ElasticsearchIndexMaintainerBase(IElasticsearchCustomClient elasticsearchCustomClient, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
         {
-            Client = factory.GetElasticClient();
+            Client = elasticsearchCustomClient;
             Log = log;
             ElasticsearchMapper = elasticsearchMapper;
             _typeOfIndex = typeOfIndex;
         }
 
-        protected IElasticClient Client { get; }
+        protected IElasticsearchCustomClient Client { get; }
 
         protected ILog Log { get; }
 

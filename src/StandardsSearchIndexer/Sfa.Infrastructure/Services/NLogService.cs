@@ -23,7 +23,7 @@
             _loggerType = loggerType?.ToString() ?? "DefaultIndexLogger";
         }
 
-        public void Trace(object message) // ToDo: Do we need trace?
+        public void Trace(object message) // ToDo:Hi Lee, Do we need trace?
         {
             SendLog(message, LogLevel.Trace);
         }

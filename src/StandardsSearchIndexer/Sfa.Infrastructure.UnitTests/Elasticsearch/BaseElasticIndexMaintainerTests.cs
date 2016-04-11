@@ -9,15 +9,13 @@ namespace Sfa.Infrastructure.UnitTests.Elasticsearch
 {
     public class BaseElasticIndexMaintainerTests
     {
-        protected Mock<IElasticsearchClientFactory> MockElasticClientFactory { get; private set; }
+        protected Mock<IElasticsearchCustomClient> MockElasticClientFactory { get; private set; }
         protected Mock<IElasticClient> MockElasticClient { get; private set; }
 
         [SetUp]
         public virtual void Setup()
         {
-            MockElasticClient = new Mock<IElasticClient>();
-            MockElasticClientFactory = new Mock<IElasticsearchClientFactory>();
-            MockElasticClientFactory.Setup(x => x.GetElasticClient()).Returns(MockElasticClient.Object);
+            MockElasticClientFactory = new Mock<IElasticsearchCustomClient>();
         }
 
         internal class StubResponse : ICreateIndexResponse

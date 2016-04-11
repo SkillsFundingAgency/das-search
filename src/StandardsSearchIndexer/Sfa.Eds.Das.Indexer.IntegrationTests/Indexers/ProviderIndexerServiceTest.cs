@@ -31,7 +31,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
         private IIndexerService<IMaintainProviderIndex> _sut;
 
-        private IElasticClient _elasticClient;
+        private IElasticsearchCustomClient _elasticClient;
 
         private IIndexSettings<IMaintainProviderIndex> _providerSettings;
 
@@ -58,8 +58,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             _indexerService = new ProviderIndexer(_providerSettings, maintainSearchIndexer, _features.Object, providerRepository.Object, activeProviderRepository.Object, logger.Object);
 
-            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
-            _elasticClient = elasticClientFactory.GetElasticClient();
+            _elasticClient = _ioc.GetInstance<IElasticsearchCustomClient>();
 
             _sut = _ioc.GetInstance<IIndexerService<IMaintainProviderIndex>>();
         }

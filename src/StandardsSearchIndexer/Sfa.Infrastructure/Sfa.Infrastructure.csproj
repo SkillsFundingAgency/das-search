@@ -112,10 +112,12 @@
     <Compile Include="CourseDirectory\Models\ProviderCollection.cs" />
     <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
     <Compile Include="Elasticsearch\ElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
     <Compile Include="Elasticsearch\ElasticsearchApprenticeshipIndexMaintainer.cs" />
+    <Compile Include="Elasticsearch\IElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\Models\FrameworkDocument.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchMapper.cs" />
