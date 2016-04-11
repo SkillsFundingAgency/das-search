@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Eds.Das.Web.AcceptanceTests.Test.Features.Sprint4
+namespace Sfa.Das.WebTest.AcceptanceTests.Test.Features.Sprint4
 {
     using TechTalk.SpecFlow;
     
