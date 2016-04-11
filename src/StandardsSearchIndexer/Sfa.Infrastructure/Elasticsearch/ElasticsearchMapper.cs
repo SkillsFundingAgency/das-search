@@ -92,6 +92,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             {
                 var standardProvider = new StandardProvider
                 {
+                    Id = $"{provider.Ukprn}-{standardInformation.Code}-{deliveryInformation.DeliveryLocation.Id}",
                     StandardCode = standardInformation.Code
                 };
 
@@ -111,6 +112,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             {
                 var frameworkProvider = new FrameworkProvider
                 {
+                    Id = $"{provider.Ukprn}-{frameworkInformation.Code}{MapLevelProgType(frameworkInformation.ProgType)}{frameworkInformation.PathwayCode}-{deliveryInformation.DeliveryLocation.Id}",
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
                     FrameworkId = string.Concat(frameworkInformation.Code, frameworkInformation.ProgType, frameworkInformation.PathwayCode),
@@ -131,7 +133,6 @@ namespace Sfa.Infrastructure.Elasticsearch
         {
             documentToPopulate.Ukprn = provider.Ukprn;
             documentToPopulate.Name = provider.Name;
-            documentToPopulate.Id = $"{provider.Ukprn}{apprenticeshipInformation.Code}{deliveryInformation.DeliveryLocation.Id}";
             documentToPopulate.LocationId = deliveryInformation.DeliveryLocation.Id;
             documentToPopulate.LocationName = deliveryInformation.DeliveryLocation.Name;
             documentToPopulate.ProviderMarketingInfo = EscapeSpecialCharacters(provider.MarketingInfo);
