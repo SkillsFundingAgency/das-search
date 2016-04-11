@@ -145,7 +145,7 @@
 
             Assert.That(document.Ukprn, Is.EqualTo(4556));
             Assert.That(document.Name, Is.EqualTo("Test Provider"));
-            Assert.That(document.Id, Is.EqualTo("45569977"));
+            Assert.That(document.Id, Is.EqualTo("4556-9941122-77"));
             Assert.That(document.LocationId, Is.EqualTo(77));
             Assert.That(document.LocationName, Is.EqualTo("Framework Test Location"));
             Assert.That(document.ProviderMarketingInfo, Is.EqualTo("Provider Marketing"));
