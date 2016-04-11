@@ -59,6 +59,29 @@
         }
 
         [Test]
+        public void WhenCreatingFrameworkDocumentAndPathwaySameAsTitleButWithTrailingSpace()
+        {
+            var frameworkMetaData = new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("10-Feb-14"),
+                EffectiveTo = DateTime.MinValue,
+                FworkCode = 616,
+                PwayCode = 1,
+                NASTitle = "Accounting",
+                PathwayName = "Accounting ",
+                ProgType = 3
+            };
+
+            var mapper = new ElasticsearchMapper(null);
+
+            var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
+
+            Assert.AreEqual("Accounting", framework.Title);
+            Assert.AreEqual(2, framework.Level, "Should have level");
+            Assert.AreEqual("61631", framework.FrameworkId, "Should have id from fwcode, progtype and pwcode");
+        }
+
+        [Test]
         public void WhenCreatingFrameworkDocumentAndPathwayIsMissing()
         {
             var frameworkMetaData = new FrameworkMetaData
@@ -182,6 +205,49 @@
             Assert.That(document.Location.Coordinates.Longitude, Is.EqualTo(-52.123));
             Assert.That(document.Location.Radius, Is.EqualTo("30mi"));
         }
+        
+        [Test]
+        public void WhenCreatingFrameworkDocumentShouldTrimTitleWhiteSpaces()
+        {
+            var frameworkMetaData = new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("10-Feb-14"),
+                EffectiveTo = DateTime.MinValue,
+                FworkCode = 616,
+                PwayCode = 1,
+                NASTitle = " Accounting ",
+                PathwayName = "Accounting",
+                ProgType = 3
+            };
+
+            var mapper = new ElasticsearchMapper(null);
+
+            var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
+
+            Assert.AreEqual("Accounting", framework.Title);
+        }
+
+        [Test]
+        public void WhenCreatingFrameworkDocumentShouldTrimPathwayWhiteSpaces()
+        {
+            var frameworkMetaData = new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("10-Feb-14"),
+                EffectiveTo = DateTime.MinValue,
+                FworkCode = 616,
+                PwayCode = 1,
+                NASTitle = "Accounting",
+                PathwayName = " Accounting ",
+                ProgType = 3
+            };
+
+            var mapper = new ElasticsearchMapper(null);
+
+            var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
+
+            Assert.AreEqual("Accounting", framework.PathwayName);
+        }
+
 
         private Provider GenerateTestProvider()
         {

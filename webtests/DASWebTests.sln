@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Web.AcceptanceTests", "Sfa.Eds.Das.Web.AcceptanceTests\Sfa.Eds.Das.Web.AcceptanceTests.csproj", "{BC130919-122A-45E1-A081-13348BD37E0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.AcceptanceTests", "Sfa.Das.WebTest.AcceptanceTests\Sfa.Das.WebTest.AcceptanceTests.csproj", "{BC130919-122A-45E1-A081-13348BD37E0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.Infrastructure", "Sfa.Das.WebTest.Infrastructure\Sfa.Das.WebTest.Infrastructure.csproj", "{A2C6F9A6-B0E7-4CFF-902C-9B0EE3B11AC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Web.LoadTests", "Sfa.Das.Web.LoadTests\Sfa.Das.Web.LoadTests.csproj", "{ABB81253-D2AE-4089-AD6E-AB91B7A5A929}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.LoadTests", "Sfa.Das.WebTest.LoadTests\Sfa.Das.WebTest.LoadTests.csproj", "{ABB81253-D2AE-4089-AD6E-AB91B7A5A929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.E2E", "Sfa.Das.WebTest.E2ETests\Sfa.Das.WebTest.E2E.csproj", "{749977EA-1B1C-4FCF-A8E8-22BF73445742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.Pages", "Sfa.Das.WebTest.Pages\Sfa.Das.WebTest.Pages.csproj", "{B6D9B569-6B18-438E-B479-99EEEEB75B28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,30 @@ Global
 		{ABB81253-D2AE-4089-AD6E-AB91B7A5A929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ABB81253-D2AE-4089-AD6E-AB91B7A5A929}.Systest|Any CPU.ActiveCfg = Release|Any CPU
 		{ABB81253-D2AE-4089-AD6E-AB91B7A5A929}.Systest|Any CPU.Build.0 = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Demo|Any CPU.ActiveCfg = Debug|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Demo|Any CPU.Build.0 = Debug|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.PreProd|Any CPU.ActiveCfg = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.PreProd|Any CPU.Build.0 = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Systest|Any CPU.ActiveCfg = Release|Any CPU
+		{749977EA-1B1C-4FCF-A8E8-22BF73445742}.Systest|Any CPU.Build.0 = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Demo|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Demo|Any CPU.Build.0 = Debug|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.PreProd|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.PreProd|Any CPU.Build.0 = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Systest|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D9B569-6B18-438E-B479-99EEEEB75B28}.Systest|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

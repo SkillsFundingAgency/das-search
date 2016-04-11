@@ -59,7 +59,11 @@ namespace Sfa.Infrastructure.Elasticsearch
         {
             try
             {
-                var doc = new FrameworkDocument
+                // Trim off any whitespaces in the title or the Pathway Name
+                frameworkMetaData.NASTitle = frameworkMetaData.NASTitle?.Trim();
+                frameworkMetaData.PathwayName = frameworkMetaData.PathwayName?.Trim();
+
+               var doc = new FrameworkDocument
                 {
                     FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
                     Title = CreateFrameworkTitle(frameworkMetaData.NASTitle, frameworkMetaData.PathwayName),
@@ -174,7 +178,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         private string CreateFrameworkTitle(string framworkname, string pathwayName)
         {
-            if (framworkname.Equals(pathwayName) || string.IsNullOrWhiteSpace(pathwayName))
+            if (string.IsNullOrWhiteSpace(pathwayName) || framworkname.Equals(pathwayName))
             {
                 return framworkname;
             }
