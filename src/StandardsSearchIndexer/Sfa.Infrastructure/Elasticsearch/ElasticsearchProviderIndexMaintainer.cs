@@ -14,7 +14,6 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
-
         public ElasticsearchProviderIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog log)
             : base(elasticsearchClient, elasticsearchMapper, log, "Provider")
         {

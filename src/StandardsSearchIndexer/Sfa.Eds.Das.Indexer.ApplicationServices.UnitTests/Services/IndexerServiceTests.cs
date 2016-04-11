@@ -38,7 +38,7 @@
 
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
-            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Exactly(2));
+            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.ChangeUnderlyingIndexForAlias(It.IsAny<string>()), Times.AtMostOnce);
             _mockHelper.VerifyAll();
         }
@@ -69,7 +69,7 @@
 
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
-            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Exactly(2));
+            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.ChangeUnderlyingIndexForAlias(It.IsAny<string>()), Times.Never);
             _mockHelper.VerifyAll();
         }
@@ -86,7 +86,7 @@
 
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Once);
-            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Exactly(2));
+            _mockHelper.Verify(x => x.IsIndexCorrectlyCreated(It.IsAny<string>()), Times.Once);
             _mockHelper.Verify(x => x.ChangeUnderlyingIndexForAlias(It.IsAny<string>()), Times.Once);
             _mockHelper.VerifyAll();
         }

@@ -35,8 +35,10 @@
                 var providers = responseAsync.Body;
 
                 var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
+
                 stopwatch.Stop();
-                _logger.Info("CourseDirectory.GetApprenticeshipProvidersAsync", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds} });
+                _logger.Info("CourseDirectory.GetApprenticeshipProvidersAsync", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
+
                 return selectedProviders;
             }
         }

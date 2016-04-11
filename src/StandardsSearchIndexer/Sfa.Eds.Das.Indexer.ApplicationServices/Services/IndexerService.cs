@@ -49,7 +49,9 @@
 
                 PauseWhileIndexingIsBeingRun();
 
-                if (_indexerHelper.IsIndexCorrectlyCreated(newIndexName))
+                var indexHasBeenCreated = _indexerHelper.IsIndexCorrectlyCreated(newIndexName);
+
+                if (indexHasBeenCreated)
                 {
                     _indexerHelper.ChangeUnderlyingIndexForAlias(newIndexName);
 
@@ -59,7 +61,7 @@
                 }
 
                 stopwatch.Stop();
-                var properties = new Dictionary<string, object>() { { "Alias", _indexSettings.IndexesAlias }, { "ExicutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", _indexerHelper.IsIndexCorrectlyCreated(newIndexName) } };
+                var properties = new Dictionary<string, object>() { { "Alias", _indexSettings.IndexesAlias }, { "ExicutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
                 _log.Info("Elasticsearch.CreateScheduledIndex", properties);
                 _log.Info($"{_name} Indexing complete.");
             }
