@@ -95,6 +95,8 @@
                         // Delete the old indices
                         _mockSearchIndex.DeleteIndexes(Arg.Any<Func<string, bool>>());
 
+                        _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>());
+
                         // Clear messages from the queue used to trigger the indexer
                         _mockClearQueue.ClearQueue(_queue);
                     });

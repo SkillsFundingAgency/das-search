@@ -6,7 +6,9 @@ namespace Sfa.Infrastructure.Elasticsearch
     using System.Net;
     using System.Threading.Tasks;
     using Eds.Das.Indexer.Core.Exceptions;
+
     using Nest;
+
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
@@ -15,8 +17,8 @@ namespace Sfa.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
-        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog logger)
-            : base(factory, elasticsearchMapper, logger, "Apprenticeship")
+        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog logger)
+            : base(elasticsearchClient, elasticsearchMapper, logger, "Apprenticeship")
         {
         }
 
