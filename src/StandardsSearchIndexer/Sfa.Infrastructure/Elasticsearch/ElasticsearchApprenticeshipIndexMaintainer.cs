@@ -7,6 +7,8 @@ namespace Sfa.Infrastructure.Elasticsearch
     using System.Threading.Tasks;
     using Eds.Das.Indexer.Core.Exceptions;
 
+    using Nest;
+
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Models.Framework;
