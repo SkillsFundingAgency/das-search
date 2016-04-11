@@ -89,5 +89,36 @@
 
             Client.Alias(aliasRequest);
         }
+
+        protected static BulkDescriptor CreateBulkDescriptor(string indexName)
+        {
+            var bulkDescriptor = new BulkDescriptor();
+            bulkDescriptor.Index(indexName);
+
+            return bulkDescriptor;
+        }
+
+        protected void LogResponse(IBulkResponse[] elementIndexResult)
+        {
+            foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
+            {
+                ReportErrors(bulkResponse);
+            }
+        }
+
+        protected static bool HaveReachedBatchLimit(int count)
+        {
+            const int batchSize = 4000;
+
+            return count >= batchSize;
+        }
+
+        private void ReportErrors(IBulkResponse result)
+        {
+            foreach (var message in result.ItemsWithErrors.Select(itemsWithError => string.Concat("Error indexing entry ", itemsWithError.Id, " at ", itemsWithError.Index)))
+            {
+                Log.Warn(message);
+            }
+        }
     }
 }

@@ -45,22 +45,6 @@ namespace Sfa.Infrastructure.Elasticsearch
             LogResponse(await Task.WhenAll(bulkTasks));
         }
 
-        private static BulkDescriptor CreateBulkDescriptor(string indexName)
-        {
-            var bulkDescriptor = new BulkDescriptor();
-            bulkDescriptor.Index(indexName);
-
-            return bulkDescriptor;
-        }
-
-        private void LogResponse(IBulkResponse[] elementIndexResult)
-        {
-            foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
-            {
-                ReportErrors(bulkResponse);
-            }
-        }
-
         private List<Task<IBulkResponse>> IndexFrameworks(string indexName, ICollection<Provider> indexEntries)
         {
             var tasks = new List<Task<IBulkResponse>>();
@@ -97,19 +81,12 @@ namespace Sfa.Infrastructure.Elasticsearch
             if (count > 0)
             {
                 tasks.Add(Client.BulkAsync(bulkDescriptor));
+                totalCount += count;
             }
 
             Log.Debug($"Sent a total of {totalCount} Framework Provider documents to be indexed");
 
             return tasks;
-        }
-
-        private void ReportErrors(IBulkResponse result)
-        {
-            foreach (var message in result.ItemsWithErrors.Select(itemsWithError => string.Concat("Error indexing entry ", itemsWithError.Id, " at ", itemsWithError.Index)))
-            {
-                Log.Warn(message);
-            }
         }
 
         private List<Task<IBulkResponse>> IndexStandards(string indexName, IEnumerable<Provider> indexEntries)
@@ -148,18 +125,12 @@ namespace Sfa.Infrastructure.Elasticsearch
             if (count > 0)
             {
                 tasks.Add(Client.BulkAsync(bulkDescriptor));
+                totalCount += count;
             }
 
             Log.Debug($"Sent a total of {totalCount} Standard Provider documents to be indexed");
 
             return tasks;
-        }
-
-        private bool HaveReachedBatchLimit(int count)
-        {
-            int batchSize = 4000;
-
-            return count >= batchSize;
         }
     }
 }
