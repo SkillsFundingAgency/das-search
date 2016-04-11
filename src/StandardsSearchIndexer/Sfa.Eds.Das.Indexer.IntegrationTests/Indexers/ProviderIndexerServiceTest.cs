@@ -75,7 +75,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             await _sut.CreateScheduledIndex(scheduledDate);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
-            var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllIndices());
+            var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllTypes());
             mapping.Should().NotBeNull();
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
