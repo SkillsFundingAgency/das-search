@@ -187,7 +187,7 @@
         {
             var provider = new Provider
             {
-                Id = 1234,
+                Id = "1234",
                 Ukprn = 4556,
                 Name = "Test Provider",
                 MarketingInfo = "Provider Marketing",

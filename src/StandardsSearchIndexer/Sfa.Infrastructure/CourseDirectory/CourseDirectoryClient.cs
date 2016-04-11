@@ -160,7 +160,7 @@
 
             var providerImport = new Eds.Das.Indexer.Core.Models.Provider.Provider
                                      {
-                                         Id = provider.Id,
+                                         Id = provider.Id.ToString(),
                                          Ukprn = provider.Ukprn,
                                          Name = provider.Name,
                                          ContactDetails =

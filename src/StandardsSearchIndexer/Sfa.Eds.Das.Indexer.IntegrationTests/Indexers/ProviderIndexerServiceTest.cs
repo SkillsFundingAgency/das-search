@@ -75,7 +75,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             await _sut.CreateScheduledIndex(scheduledDate);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
-            var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
+            var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllIndices());
             mapping.Should().NotBeNull();
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
@@ -166,7 +166,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             Assert.AreEqual(0, providersCase3.Documents.Count());
             Assert.AreEqual(1, providersCase4.Documents.Count());
 
-            Assert.AreEqual(1000238745115641, providersCase4.Documents.First().Id);
+            Assert.AreEqual("10002387-45217-115641", providersCase4.Documents.First().Id);
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
@@ -223,7 +223,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                        {
                            new Provider
                                {
-                                   Id = 304107,
+                                   Id = "304107",
                                    Ukprn = 10002387,
                                    Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
                                    MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
