@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC130919-122A-45E1-A081-13348BD37E0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sfa.Eds.Das.Web.AcceptanceTests</RootNamespace>
+    <AssemblyName>Sfa.Eds.Das.Web.AcceptanceTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PreProd|AnyCPU'">
+    <OutputPath>bin\PreProd\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
+    <OutputPath>bin\Prod\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Systest|AnyCPU'">
+    <OutputPath>bin\Systest\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo|AnyCPU'">
+    <OutputPath>bin\Demo\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft35.Json.7.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.8.60717.93, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuGet.Core.2.8.6\lib\net40-Client\NuGet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TechTalk.SpecFlow, Version=1.9.0.77, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebDriver, Version=2.48.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.2.48.2\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pages\FrameworkDetailPage.cs" />
+    <Compile Include="Pages\ProviderDetailPage.cs" />
+    <Compile Include="Pages\ProviderResultPage.cs" />
+    <Compile Include="Pages\SearchPage.cs" />
+    <Compile Include="Pages\SearchResultsPage.cs" />
+    <Compile Include="Pages\StandardDetailsPage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepDefinitions\ProviderDetailsSteps.cs" />
+    <Compile Include="StepDefinitions\SearchProviderByLocationSteps.cs" />
+    <Compile Include="StepDefinitions\ProviderResultsSteps.cs" />
+    <Compile Include="StepDefinitions\StandardSearchResultSteps.cs" />
+    <Compile Include="StepDefinitions\StandardsSearchSteps.cs" />
+    <Compile Include="StepDefinitions\ViewFrameworkDetailsSteps.cs" />
+    <Compile Include="StepDefinitions\ViewStandardDetailsSteps.cs" />
+    <Compile Include="Test\Features\Sprint1\SearchStandardByTitle.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchStandardByTitle.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint1\StandardSearch.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandardSearch.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint4\SearchProvider.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchProvider.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint4\SearchProviderByLocation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchProviderByLocation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchProviderbyPostcode.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint5\ViewStandardDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewStandardDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint5\ViewTypicalLength.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewTypicalLength.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint6\ProviderDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint6\Providerlistdetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Providerlistdetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint7\FrameworkSearch.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrameworkSearch.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Features\Sprint8\SearchProviderforFramework.feature.cs">
+      <DependentUpon>SearchProviderforFramework.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Test\Features\Sprint8\ViewFrameworkDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewFrameworkDetails.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Systest.config">
+      <DependentUpon>App.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Demo.config">
+      <DependentUpon>App.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Preprod.config">
+      <DependentUpon>App.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Prod.config">
+      <DependentUpon>App.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Test\Features\Sprint1\SearchStandardByTitle.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchStandardByTitle.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint1\StandardSearch.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StandardSearch.feature.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Test\Features\Sprint4\SearchProvider.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProvider.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint4\SearchProviderByLocation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProviderByLocation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint5\SearchProviderbyPostcode.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProviderbyPostcode.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint5\ViewStandardDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewStandardDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint5\ViewTypicalLength.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewTypicalLength.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint6\ProviderDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProviderDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint6\Providerlistdetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Providerlistdetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint7\FrameworkSearch.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FrameworkSearch.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint8\SearchProviderforFramework.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchProviderforFramework.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Features\Sprint8\ViewFrameworkDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewFrameworkDetails.feature.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test\Resources\" />
+    <Folder Include="Test\TestResults\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\PhantomJS.2.0.0\tools\phantomjs\phantomjs.exe">
+      <Link>phantomjs.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="phantomjs-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sfa.Das.WebTest.Infrastructure\Sfa.Das.WebTest.Infrastructure.csproj">
+      <Project>{A2C6F9A6-B0E7-4CFF-902C-9B0EE3B11AC1}</Project>
+      <Name>Sfa.Das.WebTest.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
