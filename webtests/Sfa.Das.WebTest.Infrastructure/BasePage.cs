@@ -3,15 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Security.Policy;
     using System.Threading;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
 
-    using Sfa.Das.WebTest.Infrastructure.Extensions;
+    using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     using TechTalk.SpecFlow;
-    using OpenQA.Selenium.Support.UI;
+
     public abstract class BasePage
     {
         /// <summary>
@@ -37,12 +37,11 @@
         public IWebElement Find(By locator)
         {
             //ValidateSelector(locator); will update css selectors, however not to cause any extra delays by checking this programmatically.
-            
-                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-                wait.Until(ExpectedConditions.ElementIsVisible(locator));
-                 
-            return driver.FindElement(locator);
 
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementIsVisible(locator));
+
+            return driver.FindElement(locator);
         }
 
         public IList<IWebElement> FindElements(By locator)
@@ -87,7 +86,7 @@
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-               // Console.Write( subelements[i].Text);
+                // Console.Write( subelements[i].Text);
                 if (subelements[i].Text == match)
                 {
                     Console.Write("Found " + subelements[i].Text);
@@ -97,7 +96,7 @@
             return false;
         }
 
-        public void  searchNSelect(By locator, string match)
+        public void searchNSelect(By locator, string match)
         {
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
@@ -110,7 +109,6 @@
                 }
             }
         }
-
 
         public void WaitFor(By locator)
         {
