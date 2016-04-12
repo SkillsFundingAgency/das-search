@@ -10,15 +10,16 @@
     using Sfa.Eds.Das.Core.Domain.Model;
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
-    using Sfa.Eds.Das.Infrastructure.ElasticSearch;
     using Sfa.Eds.Das.Infrastructure.Mapping;
 
     public sealed class ApprenticeshipProviderRepository : IApprenticeshipProviderRepository
     {
+        private readonly ILog _applicationLogger;
+
+        private readonly IConfigurationSettings _applicationSettings;
+
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
 
-        private readonly ILog _applicationLogger;
-        private readonly IConfigurationSettings _applicationSettings;
         private readonly IProviderMapping _providerMapping;
 
         public ApprenticeshipProviderRepository(
@@ -75,10 +76,9 @@
 
         private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query) where T : class
         {
-            var client = _elasticsearchClientFactory.Create();
-
             var results =
-                client.Search<T>(s => s.Index(_applicationSettings.ProviderIndexAlias).From(0).Size(1).Query(query));
+                _elasticsearchCustomClient.Search<T>(
+                    s => s.Index(_applicationSettings.ProviderIndexAlias).From(0).Size(1).Query(query));
 
             if (results.ApiCall.HttpStatusCode != 200)
             {
