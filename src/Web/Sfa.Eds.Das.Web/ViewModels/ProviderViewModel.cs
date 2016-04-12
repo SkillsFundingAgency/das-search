@@ -26,5 +26,7 @@ namespace Sfa.Eds.Das.Web.ViewModels
         public string ApprenticeshipNameWithLevel { get; set; }
 
         public LinkViewModel SearchResultLink { get; set; }
+
+        public TrainingEnum Training { get; set; }
     }
 }

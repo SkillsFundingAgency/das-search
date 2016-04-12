@@ -6,7 +6,7 @@
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
+                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
                 </h2>
             </header>
 

@@ -1,52 +1,32 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.ApplicationServices;
-using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.Core.Domain.Services;
-using Sfa.Eds.Das.Core.Logging;
-using Sfa.Eds.Das.Web.Controllers;
-using Sfa.Eds.Das.Web.Models;
-using Sfa.Eds.Das.Web.Services;
-using Sfa.Eds.Das.Web.ViewModels;
-
-namespace Sfa.Eds.Das.Web.UnitTests.Controllers
+﻿namespace Sfa.Eds.Das.Web.UnitTests.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
+    using Moq;
+
+    using NUnit.Framework;
+
+    using Sfa.Das.ApplicationServices;
+    using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Das.Web.Controllers;
+    using Sfa.Das.Web.Services;
+    using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Web.Models;
+    using Sfa.Eds.Das.Web.Services;
+    using Sfa.Eds.Das.Web.ViewModels;
+
     [TestFixture]
     public class ProviderControllerTests
     {
         private Mock<ILog> _mockLogger;
+
         private Mock<IMappingService> _mockMappingService;
+
         private Mock<IProviderSearchService> _mockProviderSearchService;
-        private Mock<IApprenticeshipProviderRepository> _mockApprenticeshipProviderRepository;
 
-        [Test]
-        public async Task SearchResultsShouldReturnViewResultWhenSearchIsSuccessful()
-        {
-            _mockLogger = new Mock<ILog>();
-            _mockMappingService = new Mock<IMappingService>();
-            _mockProviderSearchService = new Mock<IProviderSearchService>();
-            _mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = "AB3 1SD" };
-            var searchResults = new ProviderStandardSearchResults { HasError = false, Hits = new List<StandardProviderSearchResultsItem>() };
-            var stubViewModel = new ProviderStandardSearchResultViewModel();
-
-            _mockProviderSearchService.Setup(x => x.SearchByStandardPostCode(It.IsAny<int>(), It.IsAny<string>())).Returns(Task.FromResult(searchResults));
-            _mockMappingService.Setup(x => x.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(It.IsAny<ProviderStandardSearchResults>())).Returns(stubViewModel);
-
-            var controller = new ProviderController(_mockProviderSearchService.Object, _mockLogger.Object, _mockMappingService.Object, _mockApprenticeshipProviderRepository.Object, mockStandardRepository.Object, mockFrameworkRepository.Object);
-
-            var result = await controller.StandardResults(searchCriteria);
-
-            Assert.That(result, Is.InstanceOf<ViewResult>());
-
-            var viewResult = (ViewResult)result;
-            Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
-        }
+        private Mock<IProviderViewModelFactory> _mockViewModelFactory;
 
         [TestCase(null)]
         [TestCase("")]
@@ -54,7 +34,7 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
         {
             var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123 };
 
-            var controller = new ProviderController(null, null, null, null, null, null);
+            var controller = new ProviderController(null, null, null, null);
 
             var result = await controller.StandardResults(searchCriteria);
 
@@ -67,18 +47,78 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
             Assert.That(redirectResult?.RouteValues["action"], Is.EqualTo("Standard"));
         }
 
-        private static Mock<IGetStandards> CreateMockStandardRepository()
+        [Test]
+        public async Task SearchResultsShouldReturnViewResultWhenSearchIsSuccessful()
         {
-            var mockStandardsRepository = new Mock<IGetStandards>();
+            _mockLogger = new Mock<ILog>();
+            _mockMappingService = new Mock<IMappingService>();
+            _mockProviderSearchService = new Mock<IProviderSearchService>();
+            _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
 
-            return mockStandardsRepository;
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = "AB3 1SD" };
+            var searchResults = new ProviderStandardSearchResults
+                                    {
+                                        HasError = false,
+                                        Hits = new List<StandardProviderSearchResultsItem>()
+                                    };
+            var stubViewModel = new ProviderStandardSearchResultViewModel();
+
+            _mockProviderSearchService.Setup(x => x.SearchByStandardPostCode(It.IsAny<int>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(searchResults));
+            _mockMappingService.Setup(
+                x =>
+                x.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(
+                    It.IsAny<ProviderStandardSearchResults>())).Returns(stubViewModel);
+
+            var controller = new ProviderController(
+                _mockProviderSearchService.Object,
+                _mockLogger.Object,
+                _mockMappingService.Object,
+                _mockViewModelFactory.Object);
+
+            var result = await controller.StandardResults(searchCriteria);
+
+            Assert.That(result, Is.InstanceOf<ViewResult>());
+
+            var viewResult = (ViewResult)result;
+            Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
         }
 
-        private static Mock<IGetFrameworks> CreateMockFrameworkRepository()
+        [Test]
+        [Ignore("problem with the Request being used in the controller")]
+        public void ShouldFindTheDetailsPageForAProviderAndFramework()
         {
-            var mockFrameworkRepository = new Mock<IGetFrameworks>();
+            // Arrange
+            _mockLogger = new Mock<ILog>();
+            _mockMappingService = new Mock<IMappingService>();
+            _mockProviderSearchService = new Mock<IProviderSearchService>();
+            _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
 
-            return mockFrameworkRepository;
+            var searchCriteria = new ProviderLocationSearchCriteria
+                                     {
+                                         FrameworkId = "123",
+                                         LocationId = "123",
+                                         ProviderId = "123"
+                                     };
+            var stubViewModel = new ProviderViewModel();
+
+            _mockViewModelFactory.Setup(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()))
+                .Returns(new ProviderViewModel { Training = TrainingEnum.Framework });
+
+            var controller = new ProviderController(
+                _mockProviderSearchService.Object,
+                _mockLogger.Object,
+                _mockMappingService.Object,
+                _mockViewModelFactory.Object);
+
+            // Act
+            var result = controller.Detail(searchCriteria);
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<ViewResult>());
+
+            var viewResult = (ViewResult)result;
+            Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
         }
     }
 }
