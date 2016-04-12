@@ -33,7 +33,7 @@
             var stopwatch = new Stopwatch();
             var standardsMetaDataJson = _metaDataReader.GetAllAsJson();
             stopwatch.Stop();
-            _log.Info("MetaDataHelper.GetAllStandardsMetaData", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds } });
+            _log.Info("MetaDataHelper.GetAllStandardsMetaData", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
 
             var standardsMetaData = new List<StandardMetaData>();
 
@@ -57,7 +57,7 @@
             Stopwatch stopwatch = Stopwatch.StartNew();
             _metaDataWriter.GenerateStandardMetadataFiles();
             stopwatch.Stop();
-            _log.Info("MetaDataHelper.UpdateMetadataRepository", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds } });
+            _log.Info("MetaDataHelper.UpdateMetadataRepository", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
         }
 
         public List<FrameworkMetaData> GetAllFrameworkMetaData()
@@ -65,7 +65,7 @@
             Stopwatch stopwatch = Stopwatch.StartNew();
             var frameworks = _metaDataFrameworkReader.GetAllFrameworks();
             stopwatch.Stop();
-            _log.Info("MetaDataHelper.GetAllFrameworkMetaData", new Dictionary<string, object> { { "ExicutionTime", stopwatch.ElapsedMilliseconds } });
+            _log.Info("MetaDataHelper.GetAllFrameworkMetaData", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
             return frameworks;
         }
     }

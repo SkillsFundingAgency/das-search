@@ -61,7 +61,7 @@
                 }
 
                 stopwatch.Stop();
-                var properties = new Dictionary<string, object>() { { "Alias", _indexSettings.IndexesAlias }, { "ExicutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
+                var properties = new Dictionary<string, object>() { { "Alias", _indexSettings.IndexesAlias }, { "ExecutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
                 _log.Info("Elasticsearch.CreateScheduledIndex", properties);
                 _log.Info($"{_name} Indexing complete.");
             }
