@@ -39,18 +39,35 @@
 
         private IWebDriver CreateDriver()
         {
-            switch (_settings.Browser.ToLower())
+            if (!string.IsNullOrEmpty(_settings.RemoteUrl))
             {
-                case "phantomjs":
-                    return CreatePhantomJsDriver();
-                case "chrome":
-                    return CreateChromeDriver();
-                case "firefox":
-                    return CreateFireFoxDriver();
-                case "browserstack":
-                    return CreateBrowserStackDriver();
-                case "saucelabs":
-                    return CreateSauceLabs();
+                if (!string.IsNullOrEmpty(_settings.BrowserStackUser))
+                {
+                    var capabilities = FindBrowserCapability();
+                    capabilities.SetCapability("os", _settings.OS);
+                    capabilities.SetCapability("os_version", _settings.OSVersion);
+                    capabilities.SetCapability("browser_version", _settings.Version);
+                    capabilities.SetCapability("browserstack.debug", "true");
+                    capabilities.SetCapability("browserstack.user", _settings.BrowserStackUser);
+                    capabilities.SetCapability("browserstack.key", _settings.BrowserStackKey);
+                    //capabilities.SetCapability("browserstack.selenium_version", "2.53.0");
+
+                    return new RemoteWebDriver(new Uri(_settings.RemoteUrl), capabilities);
+                }
+            }
+            else
+            {
+                switch (_settings.Browser.ToLower())
+                {
+                    case "phantomjs":
+                        return CreatePhantomJsDriver();
+                    case "chrome":
+                        return CreateChromeDriver();
+                    case "firefox":
+                        return CreateFireFoxDriver();
+                    case "remote":
+                        return CreateRemoteDriver();
+                }
             }
 
             if (host == "localhost")
@@ -85,6 +102,36 @@
             }
 
             return null;
+        }
+
+        private DesiredCapabilities FindBrowserCapability()
+        {
+            switch (_settings.Browser.ToLower())
+            {
+                case "ie":
+                    return DesiredCapabilities.InternetExplorer();
+                case "chrome":
+                    return DesiredCapabilities.Chrome();
+                case "firefox":
+                    return DesiredCapabilities.Firefox();
+                case "android":
+                    return DesiredCapabilities.Android();
+                case "edge":
+                    return DesiredCapabilities.Edge();
+                case "safari":
+                    return DesiredCapabilities.Safari();
+                case "iphone":
+                    return DesiredCapabilities.IPhone();
+                case "ipad":
+                    return DesiredCapabilities.IPad();
+            }
+
+            throw new WebDriverException($"Browser Type '{_settings.Browser}' is not supported as a remote driver.");
+        }
+
+        private IWebDriver CreateRemoteDriver()
+        {
+            throw new NotImplementedException();
         }
 
         private IWebDriver CreateFireFoxDriver()
