@@ -86,6 +86,7 @@
     <Compile Include="Steps\EnteringDataSteps.cs" />
     <Compile Include="Steps\NavigationSteps.cs" />
     <Compile Include="Steps\ValidatingSteps.cs" />
+    <Compile Include="Steps\VerifyingSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -24,6 +24,9 @@ Scenario Outline:Should find a framework and provider
 
 	When I choose First Provider Link
 	Then I am on the Provider Details page
+	And I see
+		| Field         | Rule   | Value |
+		| Provider Name | Exists | true  |
 
 Examples:
 | JOBROLE                       | Postcode |
