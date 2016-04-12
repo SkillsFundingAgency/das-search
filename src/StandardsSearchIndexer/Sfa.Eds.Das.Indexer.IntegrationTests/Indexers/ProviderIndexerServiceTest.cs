@@ -76,6 +76,8 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             await _sut.CreateScheduledIndex(scheduledDate);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue($"Expected the index {indexName} to exist");
 
+            _elasticClient.Refresh(Indices.Index(indexName));
+
             var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllTypes());
             mapping.Should().NotBeNull("mapping was null");
 
@@ -106,6 +108,8 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
             _indexerService.IndexEntries(indexName);
+
+            _elasticClient.Refresh(Indices.Index(indexName));
 
             Thread.Sleep(2000);
 
