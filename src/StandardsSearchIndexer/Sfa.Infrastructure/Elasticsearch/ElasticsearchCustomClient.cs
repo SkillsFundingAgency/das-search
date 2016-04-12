@@ -132,7 +132,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                 body = System.Text.Encoding.Default.GetString(apiCallDetails.RequestBodyInBytes);
             }
 
-            var properties = new Dictionary<string, object>()
+            var properties = new Dictionary<string, object>
                                  {
                                      { "Identifier", identifier },
                                      {

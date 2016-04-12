@@ -24,6 +24,8 @@
                         return EquivalenceLevels.SeventhLevel;
                     case 8:
                         return EquivalenceLevels.EighthLevel;
+                    default: 
+                        return string.Empty;
                 }
             }
 

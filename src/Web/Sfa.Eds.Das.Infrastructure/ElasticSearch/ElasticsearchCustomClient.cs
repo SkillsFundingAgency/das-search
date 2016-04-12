@@ -39,7 +39,7 @@
                 body = System.Text.Encoding.Default.GetString(result.ApiCall.RequestBodyInBytes);
             }
 
-            var properties = new Dictionary<string, object>()
+            var properties = new Dictionary<string, object>
                                  {
                                      { "Identifier", identifier },
                                      {
