@@ -85,6 +85,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
         [Test]
         [Category("Integration")]
         [Category("Problematic")]
+        [Explicit]
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
