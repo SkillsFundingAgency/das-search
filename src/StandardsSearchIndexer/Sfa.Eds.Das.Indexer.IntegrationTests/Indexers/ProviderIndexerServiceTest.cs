@@ -65,21 +65,23 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
+        [Category("Problematic")]
+        [Explicit]
         public async Task ShouldCreateScheduledIndexAndMappingForProviders()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
             var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse($"Expected the index {indexName} to not exist");
             await _sut.CreateScheduledIndex(scheduledDate);
-            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue($"Expected the index {indexName} to exist");
 
             var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllTypes());
-            mapping.Should().NotBeNull();
+            mapping.Should().NotBeNull("mapping was null");
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
-            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse($"Expected the index {indexName} to not exist");
         }
 
         [Test]
