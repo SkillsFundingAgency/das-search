@@ -85,7 +85,7 @@
         }
 
         [Test]
-        [Ignore]
+        [Ignore("problem with the Request being used in the controller")]
         public void ShouldFindTheDetailsPageForAProviderAndFramework()
         {
             // Arrange
