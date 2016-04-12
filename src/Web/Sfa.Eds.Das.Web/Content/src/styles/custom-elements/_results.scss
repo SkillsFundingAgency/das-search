@@ -11,7 +11,7 @@
 }
 
 .result-data-list {
-    @include data-list(30, true, true);
-
+    @include data-list(20, true, true);
+    dt { max-width: none; }
     .address { max-width: none; width: 100%; }
 }

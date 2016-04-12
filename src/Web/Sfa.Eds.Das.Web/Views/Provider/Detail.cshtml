@@ -14,7 +14,7 @@
 
         <div class="column-two-thirds">
             <div class="hgroup">
-                <h1 class="heading-xlarge">
+                <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
                 <div id="marketing">
@@ -52,10 +52,14 @@
             @ShowTrainingLocation("Training location")
         </dl>
 
-        <p><b>Apprecticeship training information</b></p>
-        <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
     </section>
 
+    <section>
+        <header>
+            <h1 class="heading-medium">Apprenticeship training information</h1>
+        </header>
+        <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
+    </section>
 </main>
 
 @helper ShowTrainingLocation(string title)

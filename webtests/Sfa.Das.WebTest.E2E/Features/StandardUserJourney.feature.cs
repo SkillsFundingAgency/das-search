@@ -112,6 +112,17 @@ this.ScenarioSetup(scenarioInfo);
 #line 25
  testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Rule",
+                        "Value"});
+            table3.AddRow(new string[] {
+                        "Provider Name",
+                        "Exists",
+                        "true"});
+#line 26
+ testRunner.And("I see", ((string)(null)), table3, "And ");
+#line hidden
             this.ScenarioCleanup();
         }
     }
