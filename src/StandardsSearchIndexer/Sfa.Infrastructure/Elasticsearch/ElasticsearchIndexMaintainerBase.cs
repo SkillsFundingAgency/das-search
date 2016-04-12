@@ -11,15 +11,15 @@
     {
         private readonly string _typeOfIndex;
 
-        protected ElasticsearchIndexMaintainerBase(IElasticsearchClientFactory factory, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
+        protected ElasticsearchIndexMaintainerBase(IElasticsearchCustomClient elasticsearchCustomClient, IElasticsearchMapper elasticsearchMapper, ILog log, string typeOfIndex)
         {
-            Client = factory.GetElasticClient();
+            Client = elasticsearchCustomClient;
             Log = log;
             ElasticsearchMapper = elasticsearchMapper;
             _typeOfIndex = typeOfIndex;
         }
 
-        protected IElasticClient Client { get; }
+        protected IElasticsearchCustomClient Client { get; }
 
         protected ILog Log { get; }
 
@@ -88,6 +88,37 @@
             aliasRequest.Actions.Add(new AliasAddAction { Add = new AliasAddOperation { Alias = aliasName, Index = newIndexName } });
 
             Client.Alias(aliasRequest);
+        }
+
+        protected static BulkDescriptor CreateBulkDescriptor(string indexName)
+        {
+            var bulkDescriptor = new BulkDescriptor();
+            bulkDescriptor.Index(indexName);
+
+            return bulkDescriptor;
+        }
+
+        protected void LogResponse(IBulkResponse[] elementIndexResult)
+        {
+            foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
+            {
+                ReportErrors(bulkResponse);
+            }
+        }
+
+        protected static bool HaveReachedBatchLimit(int count)
+        {
+            const int batchSize = 4000;
+
+            return count >= batchSize;
+        }
+
+        private void ReportErrors(IBulkResponse result)
+        {
+            foreach (var message in result.ItemsWithErrors.Select(itemsWithError => string.Concat("Error indexing entry ", itemsWithError.Id, " at ", itemsWithError.Index)))
+            {
+                Log.Warn(message);
+            }
         }
     }
 }

@@ -59,7 +59,11 @@ namespace Sfa.Infrastructure.Elasticsearch
         {
             try
             {
-                var doc = new FrameworkDocument
+                // Trim off any whitespaces in the title or the Pathway Name
+                frameworkMetaData.NASTitle = frameworkMetaData.NASTitle?.Trim();
+                frameworkMetaData.PathwayName = frameworkMetaData.PathwayName?.Trim();
+
+               var doc = new FrameworkDocument
                 {
                     FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
                     Title = CreateFrameworkTitle(frameworkMetaData.NASTitle, frameworkMetaData.PathwayName),
@@ -92,6 +96,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             {
                 var standardProvider = new StandardProvider
                 {
+                    Id = $"{provider.Ukprn}-{standardInformation.Code}-{deliveryInformation.DeliveryLocation.Id}",
                     StandardCode = standardInformation.Code
                 };
 
@@ -111,10 +116,11 @@ namespace Sfa.Infrastructure.Elasticsearch
             {
                 var frameworkProvider = new FrameworkProvider
                 {
+                    Id = $"{provider.Ukprn}-{frameworkInformation.Code}{MapLevelProgType(frameworkInformation.ProgType)}{frameworkInformation.PathwayCode}-{deliveryInformation.DeliveryLocation.Id}",
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
-                    FrameworkId = string.Concat(frameworkInformation.Code, MapLevelProgType(frameworkInformation.Level), frameworkInformation.PathwayCode),
-                    Level = frameworkInformation.Level
+                    FrameworkId = string.Concat(frameworkInformation.Code, frameworkInformation.ProgType, frameworkInformation.PathwayCode),
+                    Level = MapLevelProgType(frameworkInformation.ProgType)
                 };
 
                 PopulateDocumentSharedProperties(frameworkProvider, provider, frameworkInformation, deliveryInformation);
@@ -131,7 +137,6 @@ namespace Sfa.Infrastructure.Elasticsearch
         {
             documentToPopulate.Ukprn = provider.Ukprn;
             documentToPopulate.Name = provider.Name;
-            documentToPopulate.Id = $"{provider.Ukprn}{apprenticeshipInformation.Code}{deliveryInformation.DeliveryLocation.Id}";
             documentToPopulate.LocationId = deliveryInformation.DeliveryLocation.Id;
             documentToPopulate.LocationName = deliveryInformation.DeliveryLocation.Name;
             documentToPopulate.ProviderMarketingInfo = EscapeSpecialCharacters(provider.MarketingInfo);
@@ -173,7 +178,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         private string CreateFrameworkTitle(string framworkname, string pathwayName)
         {
-            if (framworkname.Equals(pathwayName) || string.IsNullOrWhiteSpace(pathwayName))
+            if (string.IsNullOrWhiteSpace(pathwayName) || framworkname.Equals(pathwayName))
             {
                 return framworkname;
             }

@@ -395,6 +395,7 @@
     <Content Include="Content\src\styles\custom-elements\_address.scss" />
     <Content Include="Content\src\styles\custom-elements\_results.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
+    <Content Include="robots.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Web.config">

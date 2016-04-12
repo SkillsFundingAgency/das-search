@@ -4,7 +4,6 @@ using Sfa.Infrastructure.Settings;
 
 namespace Sfa.Infrastructure.Elasticsearch
 {
-    using System;
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
         private readonly ConnectionSettings _connectionSettings;

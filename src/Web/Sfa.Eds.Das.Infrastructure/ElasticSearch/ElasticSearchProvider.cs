@@ -10,15 +10,17 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 {
     using Core.Configuration;
     using Sfa.Das.ApplicationServices.Exceptions;
+    using Sfa.Eds.Das.Infrastructure.Elasticsearch;
+
     public sealed class ElasticsearchProvider : ISearchProvider
     {
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public ElasticsearchProvider(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IConfigurationSettings applicationSettings)
+        public ElasticsearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings)
         {
-            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
         }
@@ -27,8 +29,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
-            var client = _elasticsearchClientFactory.Create();
-            var results = client.Search<ApprenticeshipSearchResultsItem>(s => s
+            var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => s
                 .Index(_applicationSettings.ApprenticeshipIndexAlias)
                 .Type(Types.Parse("standarddocument,frameworkdocument"))
                 .Skip(skip)
@@ -54,10 +55,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint)
         {
-            var client = _elasticsearchClientFactory.Create();
             var qryStr = CreateStandardProviderRawQuery(code.ToString(), geoPoint);
 
-            var results = client
+            var results = _elasticsearchCustomClient
                 .Search<StandardProviderSearchResultsItem>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
                 .From(0)
@@ -102,10 +102,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint)
         {
-            var client = _elasticsearchClientFactory.Create();
             var qryStr = CreateFrameworkProviderRawQuery(code.ToString(), geoPoint);
 
-            var results = client
+            var results = _elasticsearchCustomClient
                 .Search<FrameworkProviderSearchResultsItem>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
                 .From(0)

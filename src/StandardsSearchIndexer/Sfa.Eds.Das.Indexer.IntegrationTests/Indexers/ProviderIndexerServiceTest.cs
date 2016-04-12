@@ -31,7 +31,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
         private IIndexerService<IMaintainProviderIndex> _sut;
 
-        private IElasticClient _elasticClient;
+        private IElasticsearchCustomClient _elasticClient;
 
         private IIndexSettings<IMaintainProviderIndex> _providerSettings;
 
@@ -58,8 +58,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 
             _indexerService = new ProviderIndexer(_providerSettings, maintainSearchIndexer, _features.Object, providerRepository.Object, activeProviderRepository.Object, logger.Object);
 
-            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
-            _elasticClient = elasticClientFactory.GetElasticClient();
+            _elasticClient = _ioc.GetInstance<IElasticsearchCustomClient>();
 
             _sut = _ioc.GetInstance<IIndexerService<IMaintainProviderIndex>>();
         }
@@ -76,7 +75,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             await _sut.CreateScheduledIndex(scheduledDate);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
 
-            var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
+            var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllTypes());
             mapping.Should().NotBeNull();
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
@@ -167,7 +166,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
             Assert.AreEqual(0, providersCase3.Documents.Count());
             Assert.AreEqual(1, providersCase4.Documents.Count());
 
-            Assert.AreEqual(1000238745115641, providersCase4.Documents.First().Id);
+            Assert.AreEqual("10002387-45217-115641", providersCase4.Documents.First().Id);
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
@@ -224,7 +223,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                        {
                            new Provider
                                {
-                                   Id = 304107,
+                                   Id = "304107",
                                    Ukprn = 10002387,
                                    Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
                                    MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
@@ -315,7 +314,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
                                                    {
                                                        Code = 45,
                                                        PathwayCode = 7,
-                                                       Level = 5,
+                                                       ProgType = 5,
                                                        MarketingInfo = "Provider 304107 marketing into for standard code 45",
                                                        InfoUrl = "www.Provider304107Standard45StandardInfoURL.com",
                                                        ContactInformation =

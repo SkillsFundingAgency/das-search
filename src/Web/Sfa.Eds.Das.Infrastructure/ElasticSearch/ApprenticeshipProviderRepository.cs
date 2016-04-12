@@ -15,21 +15,19 @@
 
     public sealed class ApprenticeshipProviderRepository : IApprenticeshipProviderRepository
     {
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
+
         private readonly ILog _applicationLogger;
-
         private readonly IConfigurationSettings _applicationSettings;
-
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
-
         private readonly IProviderMapping _providerMapping;
 
         public ApprenticeshipProviderRepository(
-            IElasticsearchClientFactory elasticsearchClientFactory,
+            IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IProviderMapping providerMapping)
         {
-            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _providerMapping = providerMapping;

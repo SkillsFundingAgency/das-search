@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Security.Policy;
     using System.Threading;
 
     using OpenQA.Selenium;
@@ -108,7 +109,6 @@
                     break;
                 }
             }
-           
         }
 
 
