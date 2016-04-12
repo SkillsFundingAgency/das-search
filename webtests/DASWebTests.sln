@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.LoadTests", "Sfa.Das.WebTest.LoadTests\Sfa.Das.WebTest.LoadTests.csproj", "{ABB81253-D2AE-4089-AD6E-AB91B7A5A929}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.E2E", "Sfa.Das.WebTest.E2ETests\Sfa.Das.WebTest.E2E.csproj", "{749977EA-1B1C-4FCF-A8E8-22BF73445742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.E2E", "Sfa.Das.WebTest.E2E\Sfa.Das.WebTest.E2E.csproj", "{749977EA-1B1C-4FCF-A8E8-22BF73445742}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.Pages", "Sfa.Das.WebTest.Pages\Sfa.Das.WebTest.Pages.csproj", "{B6D9B569-6B18-438E-B479-99EEEEB75B28}"
 EndProject
