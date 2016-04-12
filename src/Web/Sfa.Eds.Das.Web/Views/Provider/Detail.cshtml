@@ -20,9 +20,7 @@
                 <div id="marketing">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
-                <div class="apprenticeship-marketing-info">
-                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
-                </div>
+                
             </div>
         </div>
 
@@ -53,7 +51,11 @@
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>
+
+        <p><b>Apprecticeship training information</b></p>
+        <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
     </section>
+
 </main>
 
 @helper ShowTrainingLocation(string title)

@@ -1,13 +1,11 @@
-﻿namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Das.Web.Controllers
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Sfa.Das.ApplicationServices;
     using Sfa.Das.ApplicationServices.Models;
-    using Sfa.Eds.Das.Core.Domain.Model;
-    using Sfa.Eds.Das.Core.Domain.Services;
+    using Sfa.Das.Web.Services;
     using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Web.Extensions;
     using Sfa.Eds.Das.Web.Models;
@@ -16,11 +14,7 @@
 
     public sealed class ProviderController : Controller
     {
-        private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
-
-        private readonly IGetFrameworks _getFrameworks;
-
-        private readonly IGetStandards _getStandards;
+        private readonly IProviderViewModelFactory _viewModelFactory;
 
         private readonly ILog _logger;
 
@@ -32,16 +26,12 @@
             IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
-            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
-            IGetStandards getStandards,
-            IGetFrameworks getFrameworks)
+            IProviderViewModelFactory viewModelFactory)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
-            _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
-            _getStandards = getStandards;
-            _getFrameworks = getFrameworks;
+            _viewModelFactory = viewModelFactory;
         }
 
         [HttpGet]
@@ -88,7 +78,7 @@
         [HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            var viewModel = GenerateDetailsViewModel(criteria);
+            var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);
 
             if (viewModel == null)
             {
@@ -98,54 +88,19 @@
                 return new HttpNotFoundResult(message);
             }
 
-            return View(viewModel);
-        }
-
-        private ProviderViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria)
-        {
-            ProviderViewModel viewModel = null;
-
-            if (!string.IsNullOrEmpty(criteria.StandardCode))
+            if (viewModel.Training == TrainingEnum.Standard)
             {
-                var model = _apprenticeshipProviderRepository.GetByStandardCode(
-                    criteria.ProviderId,
-                    criteria.LocationId,
-                    criteria.StandardCode);
-                if (model != null)
-                {
-                    viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
-
-                    var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
-                    viewModel.ApprenticeshipNameWithLevel = string.Concat(
-                        apprenticeshipData.Title,
-                        " level ",
-                        apprenticeshipData.NotionalEndLevel);
                     viewModel.SearchResultLink =
                         Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("StandardResults", "Provider"));
-                }
             }
 
-            if (!string.IsNullOrEmpty(criteria.FrameworkId))
+            if (viewModel.Training == TrainingEnum.Framework)
             {
-                var model = _apprenticeshipProviderRepository.GetByFrameworkId(
-                    criteria.ProviderId,
-                    criteria.LocationId,
-                    criteria.FrameworkId);
-
-                if (model != null)
-                {
-                    viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
-                    var frameworkId = Convert.ToInt32(criteria.FrameworkId);
-
-                    var apprenticeshipData = _getFrameworks.GetFrameworkById(frameworkId);
-                    viewModel.ApprenticeshipNameWithLevel =
-                        $"{apprenticeshipData.FrameworkName} - {apprenticeshipData.PathwayName} level {apprenticeshipData.Level}";
-                    viewModel.SearchResultLink =
+                viewModel.SearchResultLink =
                         Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("FrameworkResults", "Provider"));
-                }
             }
 
-            return viewModel;
+            return View(viewModel);
         }
     }
 }
