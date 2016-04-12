@@ -887,7 +887,7 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </dl>\r\n\r\n        <p><b>Apprecticeship training information</b></p>\r\n   " +
+WriteLiteral("\r\n        </dl>\r\n\r\n        <p><b>Apprenticeship training information</b></p>\r\n   " +
 "     <p");
 
 WriteLiteral(" class=\"apprenticeship-marketing-info\"");
