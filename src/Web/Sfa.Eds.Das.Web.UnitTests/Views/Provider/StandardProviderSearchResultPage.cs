@@ -76,6 +76,7 @@
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
+                Distance = 1,
                 Website = "http://www.trainingprovider.co.uk",
                 Address = new Address()
             };
@@ -99,10 +100,12 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd").Should().Be("1 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
+            GetPartial(html, ".result dl dd", 3).Should().Be("http://www.trainingprovider.co.uk");
 
             var secondResult = GetHtmlElement(html, ".result", 2);
 
@@ -160,22 +163,32 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd").Should().Be("0 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
+            GetPartial(html, ".result dl dd", 3).Should().Be("http://www.trainingprovider.co.uk");
         }
 
         [Test]
-        public void ShouldShowJustEmployerLocationIfDeliveryModeOnlyHasEmployerLocation()
+        public void ShouldShowProviderLocationIfDeliveryModeDoesNotContainHundredEmployerLocation()
         {
             var page = new StandardProviderInformation();
             var item = new ProviderResultItemViewModel
             {
                 Name = "Provider 1",
-                DeliveryModes = new List<string> { "100PercentEmployer" },
+                DeliveryModes = new List<string> { "BlockRelease" },
+                Distance = 3,
                 Website = "http://www.trainingprovider.co.uk",
-                Address = new Address()
+                Address = new Address
+                {
+                    Address1 = "Address 1", 
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                }
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -190,10 +203,12 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd").Should().Be("3 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 County PostCode");
 
             GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
+            GetPartial(html, ".result dl dd", 3).Should().Be("http://www.trainingprovider.co.uk");
         }
 
         [Test]
@@ -221,8 +236,8 @@
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-data-list dd", 3).Should().Be("87%");
-            GetPartial(html, ".result-data-list dd", 4).Should().Be("99.9%");
+            GetPartial(html, ".result-data-list dd", 4).Should().Be("87%");
+            GetPartial(html, ".result-data-list dd", 5).Should().Be("99.9%");
         }
     }
 }
