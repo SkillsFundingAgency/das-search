@@ -16,7 +16,6 @@
 
     public class SeleniumContext
     {
-        static IWebDriver driver;
         private BrowserSettings _settings;
 
         static string host = ConfigurationManager.AppSettings["host"];
@@ -34,7 +33,7 @@
             _settings = new BrowserSettings();
 
             WebDriver = CreateDriver();
-            FeatureContext.Current["driver"] = driver;
+            FeatureContext.Current["driver"] = WebDriver;
         }
 
         private IWebDriver CreateDriver()
@@ -136,7 +135,7 @@
 
         private IWebDriver CreateFireFoxDriver()
         {
-            driver = new FirefoxDriver();
+            var driver = new FirefoxDriver();
             driver.Manage().Window.Maximize();
             return driver;
         }
@@ -184,7 +183,7 @@
         private static IWebDriver CreateChromeDriver()
         {
             var dir = Directory.GetCurrentDirectory();
-            driver = new ChromeDriver(Path.Combine(dir, @"..\\..\\Test\\Resources"));
+            var driver = new ChromeDriver(Path.Combine(dir, @"..\\..\\Test\\Resources"));
             driver.Manage().Window.Maximize();
             return driver;
         }
