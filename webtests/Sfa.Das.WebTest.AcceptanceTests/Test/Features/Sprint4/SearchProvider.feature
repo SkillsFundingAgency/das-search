@@ -5,7 +5,7 @@
 
 @smoke
 Scenario Outline:Show available providers for given standard -End to End Test
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	And I click on search button
 	When I pick any of the standard from search result page

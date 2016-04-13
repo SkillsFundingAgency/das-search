@@ -37,13 +37,14 @@
         {
             Console.WriteLine("#####################  Feature Run- Started  ######################");
             Console.WriteLine("Feature : " + FeatureContext.Current.FeatureInfo.Title);
-            seleniumContext = new SeleniumContext();
         }
 
         [BeforeScenario]
         public void BeforeScenario()
         {
+            seleniumContext = new SeleniumContext();
             _objectContainer.RegisterInstanceAs<IWebDriver>(seleniumContext.WebDriver);
+            
             Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
         }
 
@@ -54,14 +55,14 @@
             {
                 seleniumContext.WebDriver.TakeScreenshot();
             }
+
+            seleniumContext.Dispose();
         }
 
         [AfterFeature]
-        public static void AfterFeatureRun()
+        public static void AfterFeature()
         {
             Console.WriteLine("###################### Feature Run-Ended #######################");
-
-            seleniumContext.WebDriver.Quit();
         }
     }
 }

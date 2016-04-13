@@ -105,13 +105,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
            // Sleep(4000);
-             Assert.True(isElementPresent(searchkeywordresult, expected_result));
+             Assert.True(isElementPresent(searchkeywordresult, expected_result), $"Couldn't find the text '{expected_result}' with the selector '{searchkeywordresult}'");
         }
 
         public void verifyStandardinTopofList(String keyword)
         {
             //Sleep(4000);
-            Assert.True(isElementPresent(firstStandardinresult, keyword));
+            Assert.True(isElementPresent(firstStandardinresult, keyword), $"Couldn't find the text '{keyword}' with the selector '{firstStandardinresult}'");
         }
 
         public void VerifyresultCount()
@@ -140,13 +140,13 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void Open(string standard)
         {
-            driver.Navigate().GoToUrl(baseUrl + "Apprenticeship/Standard/" + standard);
+            driver.Navigate().GoToUrl(baseUrl + "/Apprenticeship/Standard/" + standard);
 
         }
 
         public void OpenFramework(string framework)
         {
-            driver.Navigate().GoToUrl(baseUrl + "Apprenticeship/Framework/" + framework);
+            driver.Navigate().GoToUrl(baseUrl + "/Apprenticeship/Framework/" + framework);
 
         }
 

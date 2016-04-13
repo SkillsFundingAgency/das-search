@@ -29,8 +29,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         
 
 
-        [Given(@"I am on Search landing page")]
-        [When(@"I am on Search landing page")]
+        [Given(@"I'm on Search landing page")]
+        [When(@"I'm on Search landing page")]
         public void GivenIAmOnSearchLandingPage()
         {
             srchPage.Navigate();
