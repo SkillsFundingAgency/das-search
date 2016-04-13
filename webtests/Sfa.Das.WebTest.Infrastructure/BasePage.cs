@@ -58,7 +58,7 @@
             }
         }
 
-        public void Navigate(string url = "")
+        public void Navigate(string url = "/")
         {
             var fullUrl = baseUrl + url;
             Console.WriteLine($"-> Navigating to {fullUrl}");

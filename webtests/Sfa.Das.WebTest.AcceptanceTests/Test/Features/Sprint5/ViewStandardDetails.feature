@@ -6,7 +6,7 @@
 
 @regression
 Scenario Outline: Validate Standard details and bespoke content on standard detail page
-Given I am on Search landing page
+Given I'm on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 And I click on search button
 When I pick any of the standard from search result page
@@ -25,7 +25,7 @@ Examples:
 
 @regression
 Scenario Outline: Validate Standard detail page which has no bespoke contents
-Given I am on Search landing page
+Given I'm on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 And I click on search button
 When I choose '<JOBROLE>' from search result page
@@ -39,7 +39,7 @@ Examples:
 @ignore
 @regression
 Scenario: Validate typical length units is months only.
-Given I am on standard search result page
+Given I'm on standard search result page
 When I click on the Standard title
 Then is should see Standard page
 And I should see typical length is displayed in months only.

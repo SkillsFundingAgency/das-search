@@ -7,7 +7,7 @@
 
 @regression
 Scenario Outline: Search Framework by keyword
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter framework '<Title>' in search box
 	When I click on search button
 	Then I should see matching '<Expected>' frameworks on result page
@@ -22,7 +22,7 @@ Examples:
 
 @regression
 Scenario Outline: Search framework by title and pathway together
-Given I am on Search landing page
+Given I'm on Search landing page
 And I enter framework '<TitlePathway>' in search box
 When I click on search button
 Then I should see matching '<TitlePathway>' frameworks on result page

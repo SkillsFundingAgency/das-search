@@ -83,7 +83,7 @@ namespace Sfa.Das.WebTest.AcceptanceTests.Test.Features.Sprint5
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 9
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
 testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
@@ -125,7 +125,7 @@ testRunner.And("I should see \"Professional registration\" on standard detail pa
 #line 27
 this.ScenarioSetup(scenarioInfo);
 #line 28
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
 testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
@@ -152,7 +152,7 @@ testRunner.And("I see level is displayed.", ((string)(null)), ((TechTalk.SpecFlo
 #line 41
 this.ScenarioSetup(scenarioInfo);
 #line 42
-testRunner.Given("I am on standard search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I\'m on standard search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 43
 testRunner.When("I click on the Standard title", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 44

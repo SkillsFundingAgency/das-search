@@ -6,7 +6,7 @@
 
 @smoke
 Scenario Outline:Search By title1
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<title>' in search box
 	When I click on search button
 	Then I should see matching '<title>' standards on result page
@@ -17,7 +17,7 @@ Scenario Outline:Search By title1
 
 @regression
 Scenario Outline:Search By title
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<title>' in search box
 	When I click on search button
 	Then I should see matching '<expected>' standards on result page
@@ -36,7 +36,7 @@ Scenario Outline:Search By title
 
 @ignore
 Scenario: Standards searched to display level informaiton
-Given I am on Search landing page
+Given I'm on Search landing page
 And I enter keyword '{p0}' in search box
 When I click on search button
 Then I should see level information againts again standards found

@@ -5,7 +5,7 @@
 
 @regression
 Scenario Outline: View typical lengh info on search result page.
-    Given I am on Search landing page
+    Given I'm on Search landing page
 	And I enter keyword '<title>' in search box
 	When I click on search button
 	Then I should see matching '<expected>' standards on result page

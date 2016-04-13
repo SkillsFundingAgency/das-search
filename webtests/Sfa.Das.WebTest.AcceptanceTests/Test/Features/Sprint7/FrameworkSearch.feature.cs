@@ -85,7 +85,7 @@ namespace Sfa.Das.WebTest.AcceptanceTests.Test.Features.Sprint7
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
- testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 11
  testRunner.And(string.Format("I enter framework \'{0}\' in search box", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
@@ -114,7 +114,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 25
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 26
 testRunner.And(string.Format("I enter framework \'{0}\' in search box", titlePathway), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27

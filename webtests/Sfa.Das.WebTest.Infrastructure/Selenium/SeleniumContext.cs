@@ -14,7 +14,7 @@
 
     using TechTalk.SpecFlow;
 
-    public class SeleniumContext
+    public class SeleniumContext : IDisposable
     {
         private BrowserSettings _settings;
 
@@ -193,6 +193,11 @@
             var driverService = PhantomJSDriverService.CreateDefaultService();
             driverService.HideCommandPromptWindow = true;
             return new PhantomJSDriver(driverService);
+        }
+
+        public void Dispose()
+        {
+            WebDriver?.Quit();
         }
     }
 }

@@ -6,16 +6,16 @@
 
 @smoke
 Scenario: Verify landing page
-When I am on Search landing page
+When I'm on Search landing page
 Then I should be able to see home page with title as "Home Page - Employer Apprenticeship Search"
 
 
 @regression
 Scenario Outline: Search Standard by keyword
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	When I click on search button
-	Then I am on the Search results page
+	Then I'm on the Search results page
 	Then I should see matching '<ExpectedResult>' standards on result page
 Examples:
 | JOBROLE                | ExpectedResult                                                   |
@@ -33,10 +33,10 @@ Examples:
 
 @regression
 Scenario Outline: Search Standard by keyword Actuarial
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<Keyword>' in search box
 	When I click on search button
-	Then I am on the Search results page
+	Then I'm on the Search results page
 	Then I should see matching Standard 'Actuarial Technician' standards on result page
 Examples:
 | Keyword       |
@@ -46,10 +46,10 @@ Examples:
 
 @regression
 Scenario Outline: Search Standard by keyword Aeorospace
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<Keyword>' in search box
 	When I click on search button
-	Then I am on the Search results page
+	Then I'm on the Search results page
 	Then I should see matching Standard 'Aerospace Manufacturing Fitter' standards on result page
 	And I should see matching Standard 'Aerospace Engineer' standards on result page
 	And I should see matching Standard 'Aerospace Software Development Engineer' standards on result page	
@@ -62,7 +62,7 @@ Examples:
 
 @regression
 Scenario Outline: Verify invalid search
-Given I am on Search landing page
+Given I'm on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 When I click on search button 
 Then I'm on the Search results page
@@ -74,7 +74,7 @@ Examples:
 
 @ignore
 Scenario Outline: Validate result count
-	Given I am on Search landing page
+	Given I'm on Search landing page
 	And I enter keyword '<JOBROLE>' in search box
 	When I click on search button
 	Then I'm on the Search results page
@@ -88,7 +88,7 @@ Examples:
 
 @regression
 Scenario Outline: Search result Page to have best match 
-Given I am on Search landing page
+Given I'm on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 And I click on search button
 Then I'm on the Search results page
