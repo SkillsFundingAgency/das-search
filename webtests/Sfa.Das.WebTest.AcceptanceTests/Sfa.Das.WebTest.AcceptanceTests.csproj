@@ -65,6 +65,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -246,6 +247,10 @@
     <ProjectReference Include="..\Sfa.Das.WebTest.Infrastructure\Sfa.Das.WebTest.Infrastructure.csproj">
       <Project>{A2C6F9A6-B0E7-4CFF-902C-9B0EE3B11AC1}</Project>
       <Name>Sfa.Das.WebTest.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.WebTest.Pages\Sfa.Das.WebTest.Pages.csproj">
+      <Project>{b6d9b569-6b18-438e-b479-99eeeeb75b28}</Project>
+      <Name>Sfa.Das.WebTest.Pages</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
