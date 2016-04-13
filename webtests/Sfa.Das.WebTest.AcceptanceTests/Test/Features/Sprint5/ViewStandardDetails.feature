@@ -28,7 +28,7 @@ Scenario Outline: Validate Standard detail page which has no bespoke contents
 Given I'm on Search landing page
 And I enter keyword '<JOBROLE>' in search box
 And I click on search button
-When I choose '<JOBROLE>' from search result page
+When I pick '<JOBROLE>' from search result page
 Then I see Standard title displayed
 And I see level is displayed.
 Examples:

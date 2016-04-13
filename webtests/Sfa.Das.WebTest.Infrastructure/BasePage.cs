@@ -86,10 +86,9 @@
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-                // Console.Write( subelements[i].Text);
                 if (subelements[i].Text == match)
                 {
-                    Console.Write("Found " + subelements[i].Text);
+                    Console.WriteLine("Found " + subelements[i].Text);
                     return true;
                 }
             }
@@ -101,7 +100,6 @@
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-                // Console.Write( subelements[i].Text);
                 if (subelements[i].Text == match)
                 {
                     subelements[i].Click();
@@ -133,11 +131,9 @@
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-                //Console.Write(subelements[i].Text);
-
                 while (subelements[i].Text != provider)
                 {
-                    Console.Write("Provider not Found " + provider);
+                    Console.WriteLine("Provider not Found " + provider);
                     return true;
                 }
             }

@@ -47,7 +47,7 @@
             standardDetailsPage.ClickButton();
         }
 
-        [When(@"I choose '(.*)' from search result page")]
+        [When(@"I pick '(.*)' from search result page")]
         public void WhenIChooseFromSearchResultPage(string p0)
         {
             srchresultPage.searchChooseStandard(p0);

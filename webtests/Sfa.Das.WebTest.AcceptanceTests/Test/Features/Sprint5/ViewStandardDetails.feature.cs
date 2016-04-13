@@ -131,7 +131,7 @@ testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), 
 #line 30
 testRunner.And("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
-testRunner.When(string.Format("I choose \'{0}\' from search result page", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When(string.Format("I pick \'{0}\' from search result page", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 32
 testRunner.Then("I see Standard title displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 33
