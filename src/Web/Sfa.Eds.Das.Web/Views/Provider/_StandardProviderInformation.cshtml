@@ -11,14 +11,7 @@
             </header>
 
             <dl class="result-data-list">
-                @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
-                {
-                    @RenderEmployersLocationProviderDetails(item)
-                }
-                else
-                {
-                    @RenderProviderDetails(item)
-                }
+                @RenderProviderDetails(item)
                 
                 <dt>Employer satisfaction:</dt>
                 <dd class="employer-satisfaction">
@@ -32,19 +25,20 @@
         </article>
     }
 
-@helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
-{
-    <dt>Distance:</dt>
-    <dd class="distance">Training can take place at your location.</dd>
-    <dt>Website:</dt>
-    <dd class="website"><a class="link" href="@item.Website"> @item.Website</a></dd>
-}
-
 @helper  RenderProviderDetails(ProviderResultItemViewModel item)
 {
     <dt>Distance:</dt>
     <dd class="distance">@item.Distance miles away</dd>
-    <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County @item.Address.Postcode</dd>
+
+    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
+    {
+        <dd class="address">Training can take place at your location.</dd>
+    }
+    else
+    {
+        <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County @item.Address.Postcode</dd>
+    }
+
     <dt>Website:</dt>
     <dd class="website"><a href="@item.Website"> @item.Website</a></dd>
 }

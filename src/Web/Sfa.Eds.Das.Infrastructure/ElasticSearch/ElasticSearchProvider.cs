@@ -90,7 +90,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 StandardInfoUrl = hit.Source.StandardInfoUrl,
                 Website = hit.Source.Website,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
-            }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
+            }).ToList();
 
             if (results.ApiCall?.HttpStatusCode != 200)
             {
@@ -140,7 +140,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 Level = hit.Source.Level,
                 Website = hit.Source.Website,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
-            }).OrderByDescending(x => x.DeliveryModes?.Contains("100PercentEmployer")).ToList();
+            }).ToList();
 
             if (results.ApiCall?.HttpStatusCode != 200)
             {
