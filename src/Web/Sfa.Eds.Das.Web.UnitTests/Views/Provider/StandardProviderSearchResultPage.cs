@@ -100,10 +100,7 @@
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
-
-            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
-
+            
             var secondResult = GetHtmlElement(html, ".result", 2);
 
             GetPartial(secondResult, "dl dd").Should().Be("1.2 miles away");
@@ -161,9 +158,6 @@
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
-
-            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
         }
 
         [Test]
@@ -191,9 +185,6 @@
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
-
-            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
         }
 
         [Test]
@@ -221,8 +212,8 @@
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-data-list dd", 3).Should().Be("87%");
-            GetPartial(html, ".result-data-list dd", 4).Should().Be("99.9%");
+            GetPartial(html, ".result-data-list dd", 2).Should().Be("87%");
+            GetPartial(html, ".result-data-list dd", 3).Should().Be("99.9%");
         }
     }
 }

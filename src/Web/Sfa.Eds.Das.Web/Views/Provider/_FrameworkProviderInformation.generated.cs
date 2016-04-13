@@ -61,58 +61,27 @@ WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Training can take place at your location.</dd>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dt>Website:</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
-
-WriteLiteralTo(__razor_helper_writer, "><a");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"link\"");
-
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1488), Tuple.Create("\"", 1508)
-
-#line 40 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1495), Tuple.Create<System.Object, System.Int32>(item.Website
-
-#line default
-#line hidden
-, 1495), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, "> ");
-
-
-#line 40 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                WriteTo(__razor_helper_writer, item.Website);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
-
-
-#line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 39 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 39 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 43 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult  RenderProviderDetails(FrameworkProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 42 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
 
 
@@ -127,7 +96,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.Distance);
 
 
@@ -142,7 +111,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.LocationName);
 
 
@@ -151,7 +120,7 @@ WriteTo(__razor_helper_writer, item.LocationName);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
              WriteTo(__razor_helper_writer, item.Address.Address1);
 
 
@@ -160,7 +129,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                     WriteTo(__razor_helper_writer, item.Address.Address2);
 
 
@@ -169,7 +138,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                            WriteTo(__razor_helper_writer, item.Address.County);
 
 
@@ -178,7 +147,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                                                 WriteTo(__razor_helper_writer, item.Address.Postcode);
 
 
@@ -186,44 +155,15 @@ WriteLiteralTo(__razor_helper_writer, " ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dt>Website:</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
-
-WriteLiteralTo(__razor_helper_writer, "><a");
-
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1887), Tuple.Create("\"", 1907)
-
-#line 49 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1894), Tuple.Create<System.Object, System.Int32>(item.Website
-
-#line default
-#line hidden
-, 1894), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, "> ");
-
-
-#line 49 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                   WriteTo(__razor_helper_writer, item.Website);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
-
-
-#line 50 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 50 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
