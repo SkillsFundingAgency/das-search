@@ -5,6 +5,8 @@
     using System.Configuration;
     using System.Threading;
 
+    using NUnit.Framework;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
@@ -81,6 +83,17 @@
             return Find(locator).Text;
         }
 
+        public void AssertIsElementPresent(By locator, string match)
+        {
+            Assert.True(isElementPresent(locator, match), $"Couldn't find the text '{match}' with the selector '{locator}'");
+        }
+
+        public void AssertContainsText(By locator, string match)
+        {
+            var text = GetText(locator);
+            Assert.True(text.Contains(match), $"Expected to contain '{match}' but was '{text}'");
+        }
+
         public bool isElementPresent(By locator, string match)
         {
             var subelements = FindElements(locator);
@@ -114,7 +127,7 @@
             driver.WaitFor(locator);
         }
 
-        public bool verifyTextMessage(By locator, String text)
+        private bool verifyTextMessage(By locator, String text)
         {
             if (Find(locator).Text.Contains(text))
             {
@@ -147,6 +160,11 @@
             {
                 Console.WriteLine("****** TODO remove " + value);
             }
+        }
+
+        public void AssertIsDisplayed(By locator)
+        {
+            Assert.IsTrue(isDisplayed(locator), $"Couldn't find the element {locator}");
         }
 
         public bool isDisplayed(By locator)

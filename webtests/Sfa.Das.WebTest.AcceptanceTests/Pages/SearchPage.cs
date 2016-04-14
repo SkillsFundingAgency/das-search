@@ -1,26 +1,18 @@
-﻿
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
+﻿namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
+    using System;
+    using System.IO;
+    using System.Reflection;
+
+    using NUnit.Framework;
+
+    using OpenQA.Selenium;
+
     using Sfa.Das.WebTest.Infrastructure;
 
     public class SearchPage : BasePage
-             
 
     {
-
         /// <summary>
         /// Purpose of this class is to 
         /// Create and maintain all Search Page objects and methods.
@@ -29,13 +21,18 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         // private IWebDriver driver;
         By searchBox = By.Id("keywords");
+
         By searchButton = By.Id("submit-keywords");
 
         // Search Results Page
         By searchresult = By.XPath(".//*[@id='standard-results']/div[1]/p");
+
         By searchkeywordresult = By.XPath(".//*[@id='standard-results']/div[1]/article/header/h2/a");
+
         By firstStandardinresult = By.XPath(".//*[@id='standard-results']/div[1]/article[1]/header/h2/a");
+
         By searchResultcount = By.CssSelector(".column-two-thirds>div>p>b");
+
         By typicallength = By.XPath(".//*[@id='standard-results']/div[1]/article/dl/dd[2]");
 
         By Invalidsearchmessage = By.XPath(".//*[@id='standard-results']/div[1]/div[2]/p");
@@ -60,7 +57,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void OpenStandarDetails(String standard)
         {
             Open(standard);
-           // Sleep(3000);
+            // Sleep(3000);
         }
 
         public void OpenFrameworkDetails(String framework)
@@ -71,66 +68,47 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void SearchKeyword(String keyword)
         {
-            type(keyword,searchBox);
-
+            type(keyword, searchBox);
         }
 
         public void clickSearchBox()
         {
-           click(searchButton);
+            click(searchButton);
         }
-    
-
-        
-
-
 
         public void verifyresultsPages()
         {
-
-           // Sleep(4000);
-            Assert.True(isDisplayed(searchresult));
+            AssertIsDisplayed(searchresult);
         }
-       
+
         public void verifyStandardFoundinResultPage(String keyword)
         {
-            
-           // Sleep(4000);
-            //Console.WriteLine("There are" + " " + getText(searchResultcount) +" "+  "apprenticeships matching your search for" +" " +  "'"+keyword.ToLower()+"'" + ".");
-            verifyTextMessage(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
-
-
+            AssertContainsText(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
         }
 
         public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
-           // Sleep(4000);
-             Assert.True(isElementPresent(searchkeywordresult, expected_result), $"Couldn't find the text '{expected_result}' with the selector '{searchkeywordresult}'");
+            AssertIsElementPresent(searchkeywordresult, expected_result);
         }
 
         public void verifyStandardinTopofList(String keyword)
         {
-            //Sleep(4000);
-            Assert.True(isElementPresent(firstStandardinresult, keyword), $"Couldn't find the text '{keyword}' with the selector '{firstStandardinresult}'");
+            AssertIsElementPresent(firstStandardinresult, keyword);
         }
 
         public void VerifyresultCount()
         {
-
             Assert.True(GetText(searchResultcount).Contains("Total results found:"));
         }
 
         public void Verifylength()
         {
-
-            Assert.True(GetText(typicallength).Contains("24 to 36 months"));
+            AssertContainsText(typicallength, "24 to 36 months");
         }
-
 
         public void VerifyresultCount_invalidSearch()
         {
-
-            Assert.True(GetText(searchResultcount).Contains("Total results found: 0"));
+            AssertContainsText(searchResultcount, "Total results found: 0");
         }
 
         public void verifySearchresultMessage(String msg)
@@ -141,31 +119,22 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         public void Open(string standard)
         {
             driver.Navigate().GoToUrl(baseUrl + "/Apprenticeship/Standard/" + standard);
-
         }
 
         public void OpenFramework(string framework)
         {
             driver.Navigate().GoToUrl(baseUrl + "/Apprenticeship/Framework/" + framework);
-
         }
-
 
         public static string AssemblyDirectory
         {
             get
             {
-                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
+                var codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                var uri = new UriBuilder(codeBase);
+                var path = Uri.UnescapeDataString(uri.Path);
                 return Path.GetDirectoryName(path);
             }
         }
-
-       
-
-        
     }
-
-    
 }

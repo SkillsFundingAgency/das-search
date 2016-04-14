@@ -60,25 +60,23 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
             }
 
-            //Sleep(4000); added conditional wait and taken out this hard sleep. (to reduce the test exuection time)
-            Assert.True(isDisplayed(providerlist));
+            AssertIsDisplayed(providerlist);
         }
 
         public void chooseProvider()
         {
             click(selectprovider);
-            //Sleep(3000);
         }
 
 
-        public void verifyProviderinSearchResults(String p0)
+        public void verifyProviderinSearchResults(string p0)
         {
-            Assert.True(isElementPresent(providerlist1, p0), $"Couldn't find the text '{p0}' with the selector '{providerlist1}'");
+            AssertIsElementPresent(providerlist1, p0);
         }
 
         public void verifyProviderLocationinSearchResults(String p0)
         {
-            verifyTextMessage(providerLocation, p0);
+            AssertContainsText(providerLocation, p0);
         }
 
         public void verifyProviderNotinSearchResults(String p0)

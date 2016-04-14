@@ -32,27 +32,27 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
             switch (info)
             {
                 case "Provider name":
-                    Assert.True(isDisplayed(providerDetailName));
+                    AssertIsDisplayed(providerDetailName);
                     break;
 
                 case "Standard name":
-                    Assert.True(isDisplayed(providerDetailStandardtitle));
+                    AssertIsDisplayed(providerDetailStandardtitle);
                     break;
                 case "Learner satisfaction":
-                    Assert.True(isDisplayed(providerDetailLsatisfaction));
+                    AssertIsDisplayed(providerDetailLsatisfaction);
                     break;
 
                 case "Employer satisfaction":
-                    Assert.True(isDisplayed(providerDetailLsatisfaction));
+                    AssertIsDisplayed(providerDetailLsatisfaction);
                     break;
 
                 case "Website course page":
-                    Assert.True(isDisplayed(websiteCoursepage));
+                    AssertIsDisplayed(websiteCoursepage);
                     break;
 
 
                 case "Website contact page":
-                    Assert.True(isDisplayed(websitecontactpage));
+                    AssertIsDisplayed(websitecontactpage);
                     break;
 
 
