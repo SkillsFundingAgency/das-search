@@ -213,6 +213,7 @@
     <Compile Include="ApplicationInsightsInitializer.cs" />
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
+    <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Services\IProviderViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
@@ -265,6 +266,11 @@
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
     <Compile Include="ViewModels\TrainingEnum.cs" />
+    <Compile Include="Views\Start\Start.generated.cs">
+      <DependentUpon>Start.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Provider\Detail1.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -481,6 +487,10 @@
     <Content Include="Views\Provider\_FrameworkProviderInformation.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_FrameworkProviderInformation.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Start\Start.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Start.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
