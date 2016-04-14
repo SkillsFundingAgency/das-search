@@ -52,5 +52,21 @@
 
             Assert.AreEqual(new MvcHtmlString(string.Empty).ToHtmlString(), result.ToHtmlString());
         }
+
+        [Test]
+        public void ItShouldAddHttpIfMissing()
+        {
+            var result = helper.RenderAIfExists("hello", "www.localhost:8888", null);
+
+            Assert.AreEqual(new MvcHtmlString("<a href=\"http://www.localhost:8888\" target=\"_self\" class=\"\">hello</a>").ToHtmlString(), result.ToHtmlString());
+        }
+
+        [Test]
+        public void ItShouldAddTarget()
+        {
+            var result = helper.RenderAIfExists("hello", "www.localhost:8888", null, "_blank");
+
+            Assert.AreEqual(new MvcHtmlString("<a href=\"http://www.localhost:8888\" target=\"_blank\" class=\"\">hello</a>").ToHtmlString(), result.ToHtmlString());
+        }
     }
 }

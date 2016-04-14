@@ -175,14 +175,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2982), Tuple.Create("\"", 2990)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3013), Tuple.Create("\"", 3021)
 
 #line 87 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 2987), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3018), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2987), false)
+, 3018), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -238,27 +238,27 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3212), Tuple.Create("\"", 3220)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3243), Tuple.Create("\"", 3251)
 
 #line 96 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3217), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3248), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3217), false)
+, 3248), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3224), Tuple.Create("\"", 3253)
-, Tuple.Create(Tuple.Create("", 3231), Tuple.Create("mailto:", 3231), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3255), Tuple.Create("\"", 3284)
+, Tuple.Create(Tuple.Create("", 3262), Tuple.Create("mailto:", 3262), true)
 
 #line 96 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3238), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
+, Tuple.Create(Tuple.Create("", 3269), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
 
 #line default
 #line hidden
-, 3238), false)
+, 3269), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -287,7 +287,7 @@ WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 #line hidden
 
 #line 100 "..\..\Views\Provider\Detail.cshtml"
-public System.Web.WebPages.HelperResult GetStandardPropertyAsLinkHtml(string title, string id, string url, bool hideIfEmpty = false)
+public System.Web.WebPages.HelperResult GetStandardPropertyAsLinkHtml(string title, string cssClass, string id, string url, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
@@ -314,42 +314,28 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3490), Tuple.Create("\"", 3498)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3538), Tuple.Create("\"", 3546)
 
 #line 105 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3495), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3543), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3495), false)
+, 3543), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <a");
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"pdf-url-link\"");
-
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3537), Tuple.Create("\"", 3548)
-
-#line 106 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3544), Tuple.Create<System.Object, System.Int32>(url
-
-#line default
-#line hidden
-, 3544), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, "            ");
 
 
 #line 106 "..\..\Views\Provider\Detail.cshtml"
-                                  WriteTo(__razor_helper_writer, url);
+WriteTo(__razor_helper_writer, Html.RenderAIfExists(@url, @url, $"pdf-url-link {@cssClass}", "_blank"));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</a>\r\n        </dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "            \r\n        </dd>\r\n");
 
 
 #line 108 "..\..\Views\Provider\Detail.cshtml"
@@ -829,7 +815,7 @@ WriteLiteral("            ");
 
             
             #line 47 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyAsLinkHtml("Website course page", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl));
+       Write(GetStandardPropertyAsLinkHtml("Website course page", "course-link", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl));
 
             
             #line default
@@ -840,7 +826,7 @@ WriteLiteral("            ");
 
             
             #line 48 "..\..\Views\Provider\Detail.cshtml"
-       Write(GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", @Model.ContactInformation.ContactUsUrl));
+       Write(GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", "contact-link", @Model.ContactInformation.ContactUsUrl));
 
             
             #line default
