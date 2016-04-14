@@ -83,13 +83,13 @@ namespace Sfa.Das.WebTest.AcceptanceTests.Test.Features.Sprint8
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 9
-testRunner.Given("I am on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
 testRunner.And(string.Format("I enter framework \'{0}\' in search box", titlePathway), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
 testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
-testRunner.And(string.Format("I choose  framework \'{0}\' from search result page", titlePathway), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(string.Format("I pick  framework \'{0}\' from search result page", titlePathway), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
 testRunner.Then(string.Format("I should see Framework \'{0}\' on framework detail page", frameworkTitle), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 14

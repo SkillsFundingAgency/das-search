@@ -15,7 +15,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             fwdetailPage = new FrameworkDetailPage();
         }
 
-        [When(@"I choose  framework '(.*)' from search result page")]
+        [When(@"I pick framework '(.*)' from search result page")]
         public void WhenIChooseFrameworkFromSearchResultPage(string p0)
         {
             srchresultPage.searchChooseStandard(p0);

@@ -73,7 +73,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyProviderinSearchResults(String p0)
         {
-            Assert.True(isElementPresent(providerlist1, p0));
+            Assert.True(isElementPresent(providerlist1, p0), $"Couldn't find the text '{p0}' with the selector '{providerlist1}'");
         }
 
         public void verifyProviderLocationinSearchResults(String p0)
