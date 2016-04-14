@@ -1,0 +1,1 @@
+set /a patch=%patch% + 1

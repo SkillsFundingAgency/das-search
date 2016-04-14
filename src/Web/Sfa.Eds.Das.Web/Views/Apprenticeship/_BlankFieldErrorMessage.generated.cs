@@ -31,7 +31,7 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/_BlankFieldErrorMessage.cshtml")]
-    public partial class BlankFieldErrorMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.StandardViewModel>
+    public partial class BlankFieldErrorMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.IHasError>
     {
 
 #line 10 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
@@ -41,13 +41,23 @@ public System.Web.WebPages.HelperResult  RenderErrorMessage()
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+#line 10 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
+    
+
+#line default
+#line hidden
+
 #line 11 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
  
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        This field can\'t be blank\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"postcode-error\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        This field can\'t be blank\r\n    </p>\r\n");
 
 
 #line 15 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
@@ -71,29 +81,29 @@ WriteLiteral("<div>\r\n");
 
             
             #line 4 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-    
-            
-            #line default
-            #line hidden
-            
-            #line 4 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-     if (Model.HasError)
-    {
         
             
             #line default
             #line hidden
             
+            #line 4 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
+         if (Model.HasError)
+        {
+            
+            
+            #line default
+            #line hidden
+            
             #line 6 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-   Write(RenderErrorMessage());
+       Write(RenderErrorMessage());
 
             
             #line default
             #line hidden
             
             #line 6 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-                             
-    }
+                                 
+        }
 
             
             #line default
