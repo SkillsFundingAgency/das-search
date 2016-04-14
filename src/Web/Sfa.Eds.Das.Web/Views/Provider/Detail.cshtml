@@ -102,8 +102,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
     {
         <dt>@title</dt>
-        <dd id="@id">
-            @Html.RenderAIfExists(@url, @url, $"pdf-url-link {@cssClass}", "_blank")            
+        <dd id="@id" class="@cssClass">
+            @url
         </dd>
     }
 }
