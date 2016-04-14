@@ -109,7 +109,8 @@ testRunner.Then("I should see provider detail page with no veunue details", ((st
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify provider detail page")]
-        [NUnit.Framework.TestCaseAttribute("25", "B46 3DJ", null)]
+        [NUnit.Framework.TestCaseAttribute("40327", "SO14 1PB", null)]
+        [NUnit.Framework.TestCaseAttribute("40325", "SO14 1PB", null)]
         [NUnit.Framework.TestCaseAttribute("12", "CV7 8ED", null)]
         [NUnit.Framework.TestCaseAttribute("17", "cv1 2WT", null)]
         public virtual void VerifyProviderDetailPage(string id, string postcode, string[] exampleTags)
@@ -118,7 +119,7 @@ testRunner.Then("I should see provider detail page with no veunue details", ((st
 #line 19
 this.ScenarioSetup(scenarioInfo);
 #line 20
-testRunner.Given(string.Format("I am on Standard \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
 testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
@@ -136,7 +137,7 @@ testRunner.And("I should see \"Website course page\"", ((string)(null)), ((TechT
 #line 28
 testRunner.And("I should see \"Website contact page\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
-testRunner.And("I should see \"Standard name\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I should see \"Frameworkname\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
 testRunner.And("I should see \"Training structure\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
@@ -156,19 +157,19 @@ testRunner.And("I should see \"email\"", ((string)(null)), ((TechTalk.SpecFlow.T
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify training options", new string[] {
                         "ignore"});
-#line 42
-this.ScenarioSetup(scenarioInfo);
-#line 43
-testRunner.Given("I have provider \'<providername>\' with all of traning modes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
-testRunner.When("I open provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 45
-testRunner.Then("under training modes I should see \"block release\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Given("I have provider \'<providername>\' with all of traning modes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
-testRunner.And("I should see \"day release\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.When("I open provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 47
-testRunner.And("I  should see \"at your location\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("under training modes I should see \"block release\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 48
+testRunner.And("I should see \"day release\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
+testRunner.And("I  should see \"at your location\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
 testRunner.And("I should see location name.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -181,13 +182,13 @@ testRunner.And("I should see location name.", ((string)(null)), ((TechTalk.SpecF
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify end to end provider detail page", new string[] {
                         "ignore"});
-#line 51
-this.ScenarioSetup(scenarioInfo);
-#line 52
-testRunner.Given("I have a provider with updated info in course directory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 53
-testRunner.When("I open provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 54
+testRunner.Given("I have a provider with updated info in course directory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 55
+testRunner.When("I open provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 56
 testRunner.Then("I should see updated provider info in provider detail page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -200,13 +201,13 @@ testRunner.Then("I should see updated provider info in provider detail page.", (
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to navigate back to provider result page from detail page.", new string[] {
                         "ignore"});
-#line 57
-this.ScenarioSetup(scenarioInfo);
-#line 58
-testRunner.Given("I am on provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 59
-testRunner.When("I click on back link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 60
+testRunner.Given("I am on provider detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 61
+testRunner.When("I click on back link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 62
 testRunner.Then("I shoudl be able to return back to provider list page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -223,7 +224,7 @@ testRunner.Then("I shoudl be able to return back to provider list page.", ((stri
                     " when provider is still active.( FCS file to have provider inactive and test boo" +
                     "kmarked link)", new string[] {
                         "ignore"});
-#line 64
+#line 66
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();

@@ -20,10 +20,12 @@ Scenario Outline: Search DUDLEY METROPOLITAN BOROUGH COUNCIL Provider by postcod
 Given I am on Framework '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
-Then I should see provider "DUDLEY METROPOLITAN BOROUGH COUNCIL" in provider results page.
+Then I should see provider "DAS Test Provider - Nasir Khan" in provider results page.
 Examples:
-| Postcode | id |
-| BL1 1RU | 40335 |
+Examples:
+| id    | Postcode |
+| 40327 | SO14 1PB |
+| 40325 | SO14 1PB |
 
 
 ## Provider not found , but other provider closer one found

@@ -17,7 +17,7 @@ Then I should see provider detail page with no veunue details
 
 
 Scenario Outline: Verify provider detail page
-Given I am on Standard '<id>' detail page
+Given I am on Framework '<id>' detail page
 And I enter '<Postcode>' in provider search box
 When I search Search for provider
 And  I select any of the provider from the list
@@ -26,14 +26,16 @@ And I should see "Employer satisfaction"
 And I should see "Learner satisfaction"
 And I should see "Website course page"
 And I should see "Website contact page"
-And I should see "Standard name"
+And I should see "Frameworkname"
 And I should see "Training structure"
 And I should see "Training location"
 And I should see "phone"
 And I should see "email"
 Examples:
-| id | Postcode |
-| 25 | B46 3DJ  |
+| id    | Postcode |
+| 40327 | SO14 1PB |
+| 40325 | SO14 1PB |
+
 | 12 | CV7 8ED  |
 | 17 | cv1 2WT  |
 
