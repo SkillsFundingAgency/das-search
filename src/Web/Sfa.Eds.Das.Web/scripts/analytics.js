@@ -11,6 +11,10 @@
 
     analytics.init = function () {
 
+        $("#start-button").on("click", function () {
+            analytics.pushEvent("button", "start");
+        });
+
         $("data-list a[href^=mailto], .data-list a.course-link, .data-list a.contact-link").on("click", function () {
             analytics.pushEvent("contact", "Provider page");
         });
