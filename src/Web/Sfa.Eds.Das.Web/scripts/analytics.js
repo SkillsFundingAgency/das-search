@@ -1,6 +1,15 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (analytics) {
 
+    analytics.pushEventValue = function (category, text, value) {
+        ga("send", "event", {
+            "eventCategory": category,
+            "eventAction": "Click",
+            "eventLabel": text,
+            "eventValue": value
+        });
+    },
+
     analytics.pushEvent = function (category, text) {
         ga("send", "event", {
             "eventCategory": category,
