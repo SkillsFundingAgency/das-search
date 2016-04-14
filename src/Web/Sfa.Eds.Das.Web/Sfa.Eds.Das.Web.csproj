@@ -407,6 +407,7 @@
     <Content Include="robots.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\analytics.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -492,6 +493,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Start.generated.cs</LastGenOutput>
     </Content>
+    <None Include="Views\Shared\_ScriptsFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
