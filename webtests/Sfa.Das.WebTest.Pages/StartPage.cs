@@ -5,10 +5,8 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/")]
-    public class LandingPage
+    public class StartPage
     {
-        public By SearchBox => By.Id("keywords");
-
-        public By SearchButton => By.Id("submit-keywords");
+        public By StartButton => By.Id("start-button");
     }
 }

@@ -4,7 +4,10 @@
 	and find a provider for a given standard
 
 Scenario Outline:Should find a standard and provider
-	Given I navigated to the Landing page
+	Given I navigated to the Start page
+	When I choose Start Button
+	Then I am on the Search page
+
 	When I enter data
 		| Field      | Value     |
 		| Search Box | <JOBROLE> |

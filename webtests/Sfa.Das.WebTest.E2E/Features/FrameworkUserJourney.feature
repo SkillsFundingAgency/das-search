@@ -3,9 +3,11 @@
 	I want to be able to search for training options
 	and find a provider for a given framework
 
-@explicit
 Scenario Outline:Should find a framework and provider
-	Given I navigated to the Landing page
+	Given I navigated to the Start page
+	When I choose Start Button
+	Then I am on the Search page
+
 	When I enter data
 		| Field      | Value     |
 		| Search Box | <JOBROLE> |
