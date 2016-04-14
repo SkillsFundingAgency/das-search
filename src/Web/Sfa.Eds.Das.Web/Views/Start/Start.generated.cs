@@ -98,7 +98,7 @@ WriteLiteral("                <input");
 
 WriteLiteral(" class=\"button margin-top-x2\"");
 
-WriteLiteral(" id=\"submit-keywords\"");
+WriteLiteral(" id=\"start-button\"");
 
 WriteLiteral(" type=\"submit\"");
 
