@@ -6,6 +6,7 @@
 @import "custom-elements/_data-list";
 @import "custom-elements/_address";
 @import "custom-elements/_results";
+@import "custom-elements/_mq-classes";
 
 @import "partials/_footer";
 @import "partials/_header";
@@ -14,7 +15,7 @@
 @import "partials/_headings";
 @import "partials/_related";
 
-//Give the following rogue styles a logical home
+//TODO: Give the following rogue styles a logical home
 main {
   min-height:450px;
 }
