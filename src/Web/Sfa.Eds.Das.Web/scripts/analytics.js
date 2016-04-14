@@ -20,6 +20,14 @@
 
     analytics.init = function () {
 
+        $("#standard-results .result a:lt(3)").on("click", function () {
+            analytics.pushEvent("Apprenticeship Search", "top3");
+        });
+
+        $("#standard-results .result a:gt(2)").on("click", function () {
+            analytics.pushEvent("Apprenticeship Search", "result");
+        });
+
         $("#start-button").on("click", function () {
             analytics.pushEvent("button", "start");
         });
