@@ -73,7 +73,7 @@ WriteLiteralTo(__razor_helper_writer, " miles away</dd>\r\n");
 
 #line 32 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
-    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
+    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
     {
 
 

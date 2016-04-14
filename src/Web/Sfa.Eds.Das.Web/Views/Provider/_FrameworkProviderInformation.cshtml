@@ -29,8 +29,8 @@
 {
     <dt>Distance:</dt>
     <dd class="distance">@item.Distance miles away</dd>
-    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
-    {
+if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
+{
         <dd class="address">Training can take place at your location.</dd>
     }
     else
