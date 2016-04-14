@@ -35,8 +35,7 @@
         [BeforeFeature]
         public static void BeforeFeature()
         {
-            Console.WriteLine("#####################  Feature Run- Started  ######################");
-            Console.WriteLine("Feature : " + FeatureContext.Current.FeatureInfo.Title);
+            Console.WriteLine($"#####################  Feature: {FeatureContext.Current.FeatureInfo.Title}  ######################");
         }
 
         [BeforeScenario]
@@ -45,7 +44,7 @@
             seleniumContext = new SeleniumContext();
             _objectContainer.RegisterInstanceAs<IWebDriver>(seleniumContext.WebDriver);
             
-            Console.WriteLine("##### Test Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
+            Console.WriteLine("##### Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
         }
 
         [AfterScenario]
@@ -62,7 +61,6 @@
         [AfterFeature]
         public static void AfterFeature()
         {
-            Console.WriteLine("###################### Feature Run-Ended #######################");
         }
     }
 }

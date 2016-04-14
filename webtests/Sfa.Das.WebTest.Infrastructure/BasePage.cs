@@ -5,6 +5,8 @@
     using System.Configuration;
     using System.Threading;
 
+    using NUnit.Framework;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
@@ -81,6 +83,17 @@
             return Find(locator).Text;
         }
 
+        public void AssertIsElementPresent(By locator, string match)
+        {
+            Assert.True(isElementPresent(locator, match), $"Couldn't find the text '{match}' with the selector '{locator}'\n{driver.Url}");
+        }
+
+        public void AssertContainsText(By locator, string match)
+        {
+            var text = GetText(locator);
+            Assert.True(text.Contains(match), $"Expected to contain '{match}' but was '{text}'\n{driver.Url}");
+        }
+
         public bool isElementPresent(By locator, string match)
         {
             var subelements = FindElements(locator);
@@ -114,19 +127,12 @@
             driver.WaitFor(locator);
         }
 
-        public bool verifyTextMessage(By locator, String text)
+        public void AssertIsElementNotPresent(By locator, string provider)
         {
-            if (Find(locator).Text.Contains(text))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Assert.IsTrue(isElementNotPresent(locator, provider), $"found text matching '{provider}' in any of the subelements of {locator}\n{driver.Url}");
         }
 
-        public bool isElementNotPresent(By locator, string provider)
+        private bool isElementNotPresent(By locator, string provider)
         {
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
@@ -147,6 +153,11 @@
             {
                 Console.WriteLine("****** TODO remove " + value);
             }
+        }
+
+        public void AssertIsDisplayed(By locator)
+        {
+            Assert.IsTrue(isDisplayed(locator), $"Couldn't find the element {locator}");
         }
 
         public bool isDisplayed(By locator)

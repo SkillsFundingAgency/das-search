@@ -43,11 +43,11 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void validateErrorMessage_postcodefield(string errmsg)
         {
-            Assert.True(verifyTextMessage(postCodeValidation, errmsg));
+            AssertContainsText(postCodeValidation, errmsg);
         }
         public void validateProviderSrchResultMsg(string msg)
         {
-            Assert.True(verifyTextMessage(SearchProvidermsg, msg));
+            AssertContainsText(SearchProvidermsg, msg);
         }
 
         public void verifyBespokeContentfields(String metadata)
