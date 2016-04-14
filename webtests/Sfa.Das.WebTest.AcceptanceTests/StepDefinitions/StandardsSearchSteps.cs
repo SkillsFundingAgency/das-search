@@ -5,6 +5,9 @@ using TechTalk.SpecFlow;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 {
+    using System.Linq;
+
+    using NUnit.Framework;
 
     /// <summary>
     /// Purpose of this Step definition class is to 
@@ -91,24 +94,12 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 
 
 
+        [Then(@"I should see matching '(.*)' frameworks on result page")]
         [Then(@"I should see matching '(.*)' standards on result page")]
         public void ThenIShouldSeeMatchingStandardsOnResultPage(string p0)
         {
-            srchPage.VerifyTitle("Search Results - Employer Apprenticeship Search");
-            srchPage.verifyresultsPages();
-            srchPage.verifyStandardFoundinResultPage(p0);
-            srchPage.verifySearchedStandardFoundinResultPage(p0);
+            Assert.Contains(p0, srchPage.FindSearchResultTitles().ToList());
         }
-
-        [Then(@"I should see matching '(.*)' frameworks on result page")]
-        public void ThenIShouldSeeMatchingFrameworksOnResultPage(string p0)
-        {
-            srchPage.VerifyTitle("Search Results - Employer Apprenticeship Search");
-            srchPage.verifyresultsPages();
-            srchPage.verifyStandardFoundinResultPage(p0);
-            srchPage.verifySearchedStandardFoundinResultPage(p0);
-        }
-
 
         //Typical length on standard search result page
 

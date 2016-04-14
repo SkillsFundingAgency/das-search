@@ -1,7 +1,9 @@
 ﻿namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
 
     using NUnit.Framework;
@@ -36,6 +38,8 @@
         By typicallength = By.XPath(".//*[@id='standard-results']/div[1]/article/dl/dd[2]");
 
         By Invalidsearchmessage = By.XPath(".//*[@id='standard-results']/div[1]/div[2]/p");
+
+        private By SearchResultTitles = By.CssSelector("#standard-results .result .result-title");
 
         public void Navigate()
         {
@@ -135,6 +139,11 @@
                 var path = Uri.UnescapeDataString(uri.Path);
                 return Path.GetDirectoryName(path);
             }
+        }
+
+        public IEnumerable<string> FindSearchResultTitles()
+        {
+            return FindElements(SearchResultTitles).Select(x => x.Text);
         }
     }
 }
