@@ -4,15 +4,15 @@
 	I want to be able to Search by title
 
 
-@smoke
-Scenario Outline:Search By title1
-	Given I'm on Search landing page
-	And I enter keyword '<title>' in search box
-	When I click on search button
-	Then I should see matching '<title>' standards on result page
-	Examples: 
-	| title                  |
-	| Actuarial Technician   |
+#@smoke
+#Scenario Outline:Search By title1
+#	Given I'm on Search landing page
+#	And I enter keyword '<title>' in search box
+#	When I click on search button
+#	Then I should see matching '<title>' standards on result page
+#	Examples: 
+#	| title                  |
+#	| Actuarial Technician   |
 
 
 @regression
@@ -34,11 +34,11 @@ Scenario Outline:Search By title
 	| dental nurse           | Dental Nurse                                                     |
 	| electrician            |Installation Electrician/Maintenance Electrician                                                |
 
-@ignore
-Scenario: Standards searched to display level informaiton
-Given I'm on Search landing page
-And I enter keyword '{p0}' in search box
-When I click on search button
-Then I should see level information againts again standards found
+#@ignore
+#Scenario: Standards searched to display level informaiton
+#Given I'm on Search landing page
+#And I enter keyword '{p0}' in search box
+#When I click on search button
+#Then I should see level information againts again standards found
 
 

@@ -4,7 +4,7 @@
 
     using Sfa.Das.WebTest.Infrastructure;
 
-    [PageNavigation("/Search")]
+    [PageNavigation("/Apprenticeship/Search")]
     public class SearchPage
     {
         public By SearchBox => By.Id("keywords");

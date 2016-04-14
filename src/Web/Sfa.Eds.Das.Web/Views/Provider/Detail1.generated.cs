@@ -324,18 +324,28 @@ WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3538), Tupl
 , 3543), false)
 );
 
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3547), Tuple.Create("\"", 3564)
+
+#line 105 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 3555), Tuple.Create<System.Object, System.Int32>(cssClass
+
+#line default
+#line hidden
+, 3555), false)
+);
+
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
 #line 106 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Html.RenderAIfExists(@url, @url, $"pdf-url-link {@cssClass}", "_blank"));
+WriteTo(__razor_helper_writer, url);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            \r\n        </dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 
 
 #line 108 "..\..\Views\Provider\Detail.cshtml"

@@ -40,15 +40,15 @@ Examples:
 
 
 
-
-@ignore
-Scenario Outline:Search Provider by postcode falling inside Provider radius
-Given I am on Framework '<id>' detail page
-And I enter '<Postcode>' in provider search box
-When I search Search for provider
-Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
-And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
-Examples:
-| Postcode| id |
-| DE73 8EN | 40322 |
+#
+#@ignore
+#Scenario Outline:Search Provider by postcode falling inside Provider radius
+#Given I am on Framework '<id>' detail page
+#And I enter '<Postcode>' in provider search box
+#When I search Search for provider
+#Then I should see provider "ASPIRE ACHIEVE ADVANCE LIMITED" in provider results page.
+#And I should see provider "MILLBROOK MANAGEMENT SERVICES LIMITED" in provider results page.
+#Examples:
+#| Postcode| id |
+#| DE73 8EN | 40322 |
 

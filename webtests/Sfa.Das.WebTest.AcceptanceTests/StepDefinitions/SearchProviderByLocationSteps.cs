@@ -30,38 +30,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
             srchPage.OpenFrameworkDetails(p0);
         }
 
-
-        [Given(@"I have entered '(.*)' with provider radius (.*) miles")]
-        public void GivenIHaveEnteredWithProviderRadiusMiles(string p0, int p1)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I have entered '(.*)' which is on boundary of provider radius\.")]
-        public void GivenIHaveEnteredWhichIsOnBoundaryOfProviderRadius_(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I have entered '(.*)' which is inside radius of provider\.")]
-        public void GivenIHaveEnteredWhichIsInsideRadiusOfProvider_(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I have entered '(.*)' which is inside radius of two providers\.")]
-        public void GivenIHaveEnteredWhichIsInsideRadiusOfTwoProviders_(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I have entered '(.*)' which is intersecting between two providers radius")]
-        public void GivenIHaveEnteredWhichIsIntersectingBetweenTwoProvidersRadius(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-
-       
         [Then(@"I should list of providers on provider search result page\.")]
         public void ThenIShouldListOfProvidersOnProviderSearchResultPage_()
         {
@@ -92,18 +60,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         public void ThenIShouldSeeProviderListedInTopAsNearestTrainingProvider_(string p0)
         {
             prvdrPage.verifyProviderinSearchResults(p0);
-        }
-        
-        [Then(@"I should see total of ""(.*)"" providers found\.")]
-        public void ThenIShouldSeeTotalOfProvidersFound_(int p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Then(@"I should see provider ""(.*)"" in provider result page\.")]
-        public void ThenIShouldSeeProviderInProviderResultPage_(string p0)
-        {
-            ScenarioContext.Current.Pending();
         }
     }
 }
