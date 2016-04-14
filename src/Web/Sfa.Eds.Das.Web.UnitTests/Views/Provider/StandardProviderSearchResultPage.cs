@@ -176,7 +176,7 @@
                 Distance = 3,
                 Address = new Address
                 {
-                    Address1 = "Address 1", 
+                    Address1 = "Address 1",
                     Address2 = "Address 2",
                     County = "County",
                     Postcode = "PostCode",

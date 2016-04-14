@@ -83,6 +83,7 @@
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
+                Distance = 0.3,
                 Website = "http://www.trainingprovider.co.uk",
                 Address = new Address()
             };
@@ -107,7 +108,7 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd").Should().Be("0.3 miles away");
 
             var secondResult = GetHtmlElement(html, ".result", 2);
 
@@ -150,6 +151,7 @@
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
+                Distance = 3,
                 Website = "http://www.trainingprovider.co.uk",
                 Address = new Address()
             };
@@ -167,19 +169,29 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd").Should().Be("3 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
         }
 
         [Test]
-        public void ShouldShowJustEmployerLocationIfDeliveryModeOnlyHasEmployerLocation()
+        public void ShouldShowTrainingLocationIfDeliveryModeHasLocationDifferentToEmployerLocation()
         {
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 1",
-                DeliveryModes = new List<string> { "100PercentEmployer" },
+                DeliveryModes = new List<string> { "BlockRelease" },
+                Distance = 1,
                 Website = "http://www.trainingprovider.co.uk",
-                Address = new Address()
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                }
             };
 
             var model = new ProviderFrameworkSearchResultViewModel
@@ -195,7 +207,9 @@
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd").Should().Be("1 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 County PostCode");
         }
     }
 }
