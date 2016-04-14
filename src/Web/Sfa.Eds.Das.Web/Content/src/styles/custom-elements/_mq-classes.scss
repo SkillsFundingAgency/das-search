@@ -1,0 +1,24 @@
+﻿@mixin hide() {
+    display: none;
+    visibility: hidden;
+}
+
+@mixin show() {
+    display: inherit;
+    visibility: visible;
+}
+
+@include media(desktop) {
+    .hidden-for-mobile { @include show(); }
+    .hidden-for-mobile-tablet { @include show(); }
+}
+
+@include media(tablet) {
+    .hidden-for-mobile { @include show(); }
+    .hidden-for-mobile-tablet { @include hide(); }
+}
+
+@include media(mobile) {
+    .hidden-for-mobile { @include hide(); }
+    .hidden-for-mobile-tablet { @include hide(); }
+}
