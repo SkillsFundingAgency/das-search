@@ -83,7 +83,7 @@
 
         public void verifyStandardFoundinResultPage(String keyword)
         {
-            AssertContainsText(searchresult, "There are" + " " + GetText(searchResultcount) + " " + "apprenticeships matching your search for" + " " + "'" + keyword.ToLower() + "'" + ".");
+            AssertContainsText(searchresult, keyword);
         }
 
         public void verifySearchedStandardFoundinResultPage(String expected_result)

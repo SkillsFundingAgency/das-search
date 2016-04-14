@@ -9,7 +9,7 @@ Scenario Outline: Verify Framework detail page
 Given I'm on Search landing page
 And I enter framework '<TitlePathway>' in search box
 When I click on search button
-And I pick  framework '<TitlePathway>' from search result page 
+And I pick framework '<TitlePathway>' from search result page 
 Then I should see Framework '<FrameworkTitle>' on framework detail page
 And I should see Framework pathway '<PathwayTitle>' on framework detail page
 Examples:

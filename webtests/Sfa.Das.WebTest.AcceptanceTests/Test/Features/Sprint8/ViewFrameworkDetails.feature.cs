@@ -89,7 +89,7 @@ testRunner.And(string.Format("I enter framework \'{0}\' in search box", titlePat
 #line 11
 testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
-testRunner.And(string.Format("I pick  framework \'{0}\' from search result page", titlePathway), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(string.Format("I pick framework \'{0}\' from search result page", titlePathway), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
 testRunner.Then(string.Format("I should see Framework \'{0}\' on framework detail page", frameworkTitle), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 14
