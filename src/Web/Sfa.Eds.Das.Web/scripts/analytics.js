@@ -1,16 +1,6 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (analytics) {
 
-    var url = window.location.href.toString().split(window.location.host)[1];
-
-    var $t = function () {
-        return {
-            exists: function (s) {
-                return ($(s).length > 0) ? true : false;
-            }
-        };
-    }();
-
     analytics.pushEvent = function (category, text) {
         ga("send", "event", {
             "eventCategory": category,
@@ -21,7 +11,11 @@
 
     analytics.init = function () {
 
-        $("a[href^=mailto]").on("click", function () {
+        $("data-list a[href^=mailto], .data-list a.course-link, .data-list a.contact-link").on("click", function () {
+            analytics.pushEvent("contact", "Provider page");
+        });
+
+        $(".data-list a[href^=mailto]").on("click", function () {
             analytics.pushEvent("email", "");
         });
 
@@ -37,7 +31,3 @@
     analytics.init();
 
 }(SearchAndShortlist.analytics = {}));
-
-(function () {
-
-}).call(this);
