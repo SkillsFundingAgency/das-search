@@ -8,17 +8,16 @@
     visibility: visible;
 }
 
-@include media(desktop) {
-    .hidden-for-mobile { @include show(); }
-    .hidden-for-mobile-tablet { @include show(); }
+@include media($min-width: 960px) {
+    .hidden-for-desktop { @include hide(); }
 }
 
-@include media(tablet) {
-    .hidden-for-mobile { @include show(); }
+@include media($max-width: 1024px) {
+    .hidden-for-tablet { @include hide(); }
     .hidden-for-mobile-tablet { @include hide(); }
 }
 
 @include media(mobile) {
+    .hidden-for-tablet { @include show(); }
     .hidden-for-mobile { @include hide(); }
-    .hidden-for-mobile-tablet { @include hide(); }
 }
