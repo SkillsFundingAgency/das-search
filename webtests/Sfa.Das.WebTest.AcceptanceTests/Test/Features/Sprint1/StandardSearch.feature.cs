@@ -222,37 +222,6 @@ testRunner.And(string.Format("I should see message \"There are no apprenticeship
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Validate result count")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
-        [NUnit.Framework.TestCaseAttribute("Financial Adviser", null)]
-        [NUnit.Framework.TestCaseAttribute("software engineer", null)]
-        public virtual void ValidateResultCount(string jOBROLE, string[] exampleTags)
-        {
-            string[] @__tags = new string[] {
-                    "ignore"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate result count", @__tags);
-#line 76
-this.ScenarioSetup(scenarioInfo);
-#line 77
- testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
- testRunner.And(string.Format("I enter keyword \'{0}\' in search box", jOBROLE), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
- testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 80
- testRunner.Then("I\'m on the Search results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 81
- testRunner.And("I should see standards count on result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search result Page to have best match")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]

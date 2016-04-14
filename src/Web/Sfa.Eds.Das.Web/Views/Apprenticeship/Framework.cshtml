@@ -30,35 +30,27 @@
                 If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
             </p>
 
-        </div>
+            <hr />
 
-        <div class="column-third">
             @using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
-                <div class="related-container">
-                    <aside class="related">
-
-                        <h2 class="heading-medium">Find training providers</h2>
-                        <form action="/g-cloud/search" method="get" class="search-box">
-                            <div class="form-group @(@Model.HasError ? " error" : "")">
-                                <label class="form-label" for="postcode">
-                                    Enter postcode@* or partial postcode *@
-                                    <p>
-                                        @{
-                                            Html.RenderPartial("_BlankFieldErrorMessage");
-                                        }
-                                    </p>
-                                </label>
-                                <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.FrameworkId">
-                                <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
-                            </div>
-                            <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
-                        </form>
-
-                    </aside>
-                </div>
-             }
-
-            </div>
+                <h2 class="heading-medium">Find training providers</h2>
+                <form action="/g-cloud/search" method="get" class="search-box">
+                    <div class="form-group @(@Model.HasError ? " error" : "")">
+                        <label class="form-label" for="postcode">
+                            Enter postcode@* or partial postcode *@
+                            <p>
+                                @{
+                                    Html.RenderPartial("_BlankFieldErrorMessage");
+                                }
+                            </p>
+                        </label>
+                        <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.FrameworkId">
+                        <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
+                    </div>
+                    <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
+                </form>
+            }
         </div>
+     </div>
 </main>

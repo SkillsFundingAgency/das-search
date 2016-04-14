@@ -72,18 +72,18 @@ Examples:
 | kdjfdkfjdfk |
 | 1232322     |
 
-@ignore
-Scenario Outline: Validate result count
-	Given I'm on Search landing page
-	And I enter keyword '<JOBROLE>' in search box
-	When I click on search button
-	Then I'm on the Search results page
-	And I should see standards count on result page
-Examples:
-| JOBROLE              |
-| Actuarial Technician | 
-| Financial Adviser    | 
-| software engineer    | 
+#@ignore
+#Scenario Outline: Validate result count
+#	Given I'm on Search landing page
+#	And I enter keyword '<JOBROLE>' in search box
+#	When I click on search button
+#	Then I'm on the Search results page
+#	And I should see standards count on result page
+#Examples:
+#| JOBROLE              |
+#| Actuarial Technician | 
+#| Financial Adviser    | 
+#| software engineer    | 
 
 
 @regression

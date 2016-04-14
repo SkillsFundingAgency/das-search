@@ -18,7 +18,7 @@
         {
             var result = helper.RenderAIfExists("hello", "http://localhost:8888", null);
 
-            Assert.AreEqual(new MvcHtmlString("<a href=\"http://localhost:8888\" class=\"\">hello</a>").ToHtmlString(), result.ToHtmlString());
+            Assert.AreEqual(new MvcHtmlString("<a href=\"http://localhost:8888\" target=\"_self\" class=\"\">hello</a>").ToHtmlString(), result.ToHtmlString());
         }
 
         [Test]

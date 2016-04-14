@@ -29,7 +29,7 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     using System.Web.WebPages;
     
     #line 1 "..\..\Views\Apprenticeship\Framework.cshtml"
-    using Resources = Sfa.Eds.Das.Resources.EquivalenceLevels;
+    using Sfa.Eds.Das.Resources;
     
     #line default
     #line hidden
@@ -45,115 +45,6 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/Framework.cshtml")]
     public partial class Framework : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.FrameworkViewModel>
     {
-
-#line 67 "..\..\Views\Apprenticeship\Framework.cshtml"
-public System.Web.WebPages.HelperResult  RenderErrorMessage()
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 68 "..\..\Views\Apprenticeship\Framework.cshtml"
- 
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        This field can\'t be blank\r\n    </p>\r\n");
-
-
-#line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
-
-
-#line default
-#line hidden
-});
-
-#line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
-}
-#line default
-#line hidden
-
-#line 74 "..\..\Views\Apprenticeship\Framework.cshtml"
-public System.Web.WebPages.HelperResult GetFrameworkLevel(string item)
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 75 "..\..\Views\Apprenticeship\Framework.cshtml"
- 
-    if (!string.IsNullOrEmpty(item))
-    {
-        var equivalence = string.Empty;
-        switch (int.Parse(@item))
-        {
-            case 1:
-                equivalence = @Resources.FirstLevel;
-                break;
-            case 2:
-                equivalence = @Resources.SecondLevel;
-                break;
-            case 3:
-                equivalence = @Resources.ThirdLevel;
-                break;
-            case 4:
-                equivalence = @Resources.FourthLevel;
-                break;
-            case 5:
-                equivalence = @Resources.FifthLevel;
-                break;
-            case 6:
-                equivalence = @Resources.SixthLevel;
-                break;
-            case 7:
-                equivalence = @Resources.SeventhLevel;
-                break;
-            case 8:
-                equivalence = @Resources.EighthLevel;
-                break;
-            default:
-                break;
-
-        }
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "            <span>");
-
-
-#line 109 "..\..\Views\Apprenticeship\Framework.cshtml"
-WriteTo(__razor_helper_writer, item);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " (equivalent to ");
-
-
-#line 109 "..\..\Views\Apprenticeship\Framework.cshtml"
-         WriteTo(__razor_helper_writer, equivalence);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, ")</span>\r\n");
-
-
-#line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
-    }
-
-
-#line default
-#line hidden
-});
-
-#line 111 "..\..\Views\Apprenticeship\Framework.cshtml"
-}
-#line default
-#line hidden
-
         public Framework()
         {
         }
@@ -227,7 +118,7 @@ WriteLiteral(", level ");
 
             
             #line 24 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                                      Write(GetFrameworkLevel(@Model.Level.ToString()));
+                                                                                      Write(EquivalenveLevelService.GetFrameworkLevel(@Model.Level.ToString()));
 
             
             #line default
@@ -243,41 +134,31 @@ WriteLiteral(@">
                 If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
             </p>
 
-        </div>
+            <hr />
 
-        <div");
-
-WriteLiteral(" class=\"column-third\"");
-
-WriteLiteral(">\r\n");
+");
 
             
-            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 35 "..\..\Views\Apprenticeship\Framework.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 35 "..\..\Views\Apprenticeship\Framework.cshtml"
              using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
             
             #line default
             #line hidden
-WriteLiteral("                <div");
-
-WriteLiteral(" class=\"related-container\"");
-
-WriteLiteral(">\r\n                    <aside");
-
-WriteLiteral(" class=\"related\"");
-
-WriteLiteral(">\r\n\r\n                        <h2");
+WriteLiteral("                <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">Find training providers</h2>\r\n                        <form");
+WriteLiteral(">Find training providers</h2>\r\n");
+
+WriteLiteral("                <form");
 
 WriteLiteral(" action=\"/g-cloud/search\"");
 
@@ -285,60 +166,45 @@ WriteLiteral(" method=\"get\"");
 
 WriteLiteral(" class=\"search-box\"");
 
-WriteLiteral(">\r\n                            <div");
+WriteLiteral(">\r\n                    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1566), Tuple.Create("\"", 1619)
-, Tuple.Create(Tuple.Create("", 1574), Tuple.Create("form-group", 1574), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1408), Tuple.Create("\"", 1461)
+, Tuple.Create(Tuple.Create("", 1416), Tuple.Create("form-group", 1416), true)
             
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1584), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1426), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1585), false)
+, 1427), false)
 );
 
-WriteLiteral(">\r\n                                <label");
+WriteLiteral(">\r\n                        <label");
 
 WriteLiteral(" class=\"form-label\"");
 
 WriteLiteral(" for=\"postcode\"");
 
-WriteLiteral(">\r\n                                    Enter postcode");
+WriteLiteral(">\r\n                            Enter postcode");
 
-WriteLiteral("\r\n                                    <p>\r\n");
+WriteLiteral("\r\n                            <p>\r\n");
 
             
-            #line 47 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                        
+            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                         if (Model.HasError)
-                                        {
-                                            
+            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                  
+                                    Html.RenderPartial("_BlankFieldErrorMessage");
+                                
             
             #line default
             #line hidden
-            
-            #line 49 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                       Write(RenderErrorMessage());
-
-            
-            #line default
-            #line hidden
-            
-            #line 49 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                 
-                                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                    </p>\r\n                                </label" +
-">\r\n                                <input");
+WriteLiteral("\r\n                            </p>\r\n                        </label>\r\n           " +
+"             <input");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -348,17 +214,17 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2243), Tuple.Create("\"", 2269)
+WriteAttribute("value", Tuple.Create(" value=\"", 1977), Tuple.Create("\"", 2003)
             
-            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                        , Tuple.Create(Tuple.Create("", 2251), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+            #line 48 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                , Tuple.Create(Tuple.Create("", 1985), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 2251), false)
+, 1985), false)
 );
 
-WriteLiteral(">\r\n                                <input");
+WriteLiteral(">\r\n                        <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -372,7 +238,7 @@ WriteLiteral(" maxlength=\"200\"");
 
 WriteLiteral(" placeholder=\"\"");
 
-WriteLiteral(">\r\n                            </div>\r\n                            <input");
+WriteLiteral(">\r\n                    </div>\r\n                    <input");
 
 WriteLiteral(" class=\"button margin-top-x2\"");
 
@@ -382,19 +248,16 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Search\"");
 
-WriteLiteral(" />\r\n                        </form>\r\n\r\n                    </aside>\r\n           " +
-"     </div>\r\n");
+WriteLiteral(" />\r\n                </form>\r\n");
 
             
-            #line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
-             }
+            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
+            }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n</main>\r\n\r\n");
-
-WriteLiteral("\r\n");
+WriteLiteral("        </div>\r\n     </div>\r\n</main>");
 
         }
     }

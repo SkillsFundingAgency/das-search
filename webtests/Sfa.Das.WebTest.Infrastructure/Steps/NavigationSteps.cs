@@ -63,7 +63,9 @@
             var objectType = FindPageType(page);
             PageNavigationAttribute attribute =
                 (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
-            Assert.IsTrue(_driver.Url.ToLower().Contains(attribute.Url.ToLower()), $"Expected {attribute.Url} but was {_driver.Url}");
+            string path = _driver.Url?.Split('?')[0].ToLower();
+            var url = _browserSettings.BaseUrl + attribute.Url.ToLower();
+            Assert.True(path.StartsWith(url),$"Expected to start with {url} but was {path}");
             _pageContext.CurrentPage = _objectContainer.Resolve(objectType);
         }
 

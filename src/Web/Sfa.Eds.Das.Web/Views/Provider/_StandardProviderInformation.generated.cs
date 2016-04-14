@@ -73,7 +73,7 @@ WriteLiteralTo(__razor_helper_writer, " miles away</dd>\r\n");
 
 #line 32 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
-    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
+    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
     {
 
 
@@ -150,47 +150,11 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
     }
 
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Website:</dt>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "    <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"website\"");
-
-WriteLiteralTo(__razor_helper_writer, "><a");
-
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1513), Tuple.Create("\"", 1533)
-
-#line 43 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-, Tuple.Create(Tuple.Create("", 1520), Tuple.Create<System.Object, System.Int32>(item.Website
-
-#line default
-#line hidden
-, 1520), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, "> ");
-
-
-#line 43 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                   WriteTo(__razor_helper_writer, item.Website);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
-
-
-#line 44 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-
-
 #line default
 #line hidden
 });
 
-#line 44 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden

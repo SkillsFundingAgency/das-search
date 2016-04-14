@@ -66,33 +66,6 @@ namespace Sfa.Das.WebTest.AcceptanceTests.Test.Features.Sprint1
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search By title1")]
-        [NUnit.Framework.CategoryAttribute("smoke")]
-        [NUnit.Framework.TestCaseAttribute("Actuarial Technician", null)]
-        public virtual void SearchByTitle1(string title, string[] exampleTags)
-        {
-            string[] @__tags = new string[] {
-                    "smoke"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search By title1", @__tags);
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 9
- testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
- testRunner.And(string.Format("I enter keyword \'{0}\' in search box", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
- testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
- testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search By title")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("actuarial technician", "Actuarial Technician", null)]
@@ -124,27 +97,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
  testRunner.Then(string.Format("I should see matching \'{0}\' standards on result page", expected), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Standards searched to display level informaiton")]
-        [NUnit.Framework.IgnoreAttribute()]
-        public virtual void StandardsSearchedToDisplayLevelInformaiton()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Standards searched to display level informaiton", new string[] {
-                        "ignore"});
-#line 38
-this.ScenarioSetup(scenarioInfo);
-#line 39
-testRunner.Given("I\'m on Search landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 40
-testRunner.And("I enter keyword \'{p0}\' in search box", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
-testRunner.When("I click on search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
-testRunner.Then("I should see level information againts again standards found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
