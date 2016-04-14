@@ -39,7 +39,7 @@
 
         By Invalidsearchmessage = By.XPath(".//*[@id='standard-results']/div[1]/div[2]/p");
 
-        private By SearchResultTitles = By.CssSelector("#standard-results .result .result-title");
+        private readonly By _searchResultTitles = By.CssSelector("#standard-results .result .result-title");
 
         public void Navigate()
         {
@@ -85,11 +85,6 @@
             AssertIsDisplayed(searchresult);
         }
 
-        public void verifyStandardFoundinResultPage(String keyword)
-        {
-            AssertContainsText(searchresult, keyword);
-        }
-
         public void verifySearchedStandardFoundinResultPage(String expected_result)
         {
             AssertIsElementPresent(searchkeywordresult, expected_result);
@@ -110,11 +105,6 @@
             AssertContainsText(typicallength, "24 to 36 months");
         }
 
-        public void VerifyresultCount_invalidSearch()
-        {
-            AssertContainsText(searchResultcount, "Total results found: 0");
-        }
-
         public void verifySearchresultMessage(String msg)
         {
             Assert.True(GetText(Invalidsearchmessage).Contains(msg));
@@ -130,20 +120,9 @@
             driver.Navigate().GoToUrl(baseUrl + "/Apprenticeship/Framework/" + framework);
         }
 
-        public static string AssemblyDirectory
-        {
-            get
-            {
-                var codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                var uri = new UriBuilder(codeBase);
-                var path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
-            }
-        }
-
         public IEnumerable<string> FindSearchResultTitles()
         {
-            return FindElements(SearchResultTitles).Select(x => x.Text);
+            return FindElements(_searchResultTitles).Select(x => x.Text);
         }
     }
 }
