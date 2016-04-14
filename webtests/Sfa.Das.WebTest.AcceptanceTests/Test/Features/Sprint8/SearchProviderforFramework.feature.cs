@@ -125,36 +125,6 @@ testRunner.Then("I should not see provider \"DUDLEY METROPOLITAN BOROUGH COUNCIL
 #line hidden
             this.ScenarioCleanup();
         }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search Provider by postcode falling inside Provider radius")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.TestCaseAttribute("DE73 8EN", "40322", null)]
-        public virtual void SearchProviderByPostcodeFallingInsideProviderRadius(string postcode, string id, string[] exampleTags)
-        {
-            string[] @__tags = new string[] {
-                    "ignore"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Provider by postcode falling inside Provider radius", @__tags);
-#line 45
-this.ScenarioSetup(scenarioInfo);
-#line 46
-testRunner.Given(string.Format("I am on Framework \'{0}\' detail page", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 47
-testRunner.And(string.Format("I enter \'{0}\' in provider search box", postcode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
-testRunner.When("I search Search for provider", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 49
-testRunner.Then("I should see provider \"ASPIRE ACHIEVE ADVANCE LIMITED\" in provider results page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
-testRunner.And("I should see provider \"MILLBROOK MANAGEMENT SERVICES LIMITED\" in provider results" +
-                    " page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
     }
 }
 #pragma warning restore

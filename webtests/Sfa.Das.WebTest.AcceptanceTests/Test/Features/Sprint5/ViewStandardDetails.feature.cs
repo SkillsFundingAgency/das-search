@@ -139,52 +139,6 @@ testRunner.And("I see level is displayed.", ((string)(null)), ((TechTalk.SpecFlo
 #line hidden
             this.ScenarioCleanup();
         }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Validate typical length units is months only.")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.CategoryAttribute("regression")]
-        public virtual void ValidateTypicalLengthUnitsIsMonthsOnly_()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate typical length units is months only.", new string[] {
-                        "ignore",
-                        "regression"});
-#line 41
-this.ScenarioSetup(scenarioInfo);
-#line 42
-testRunner.Given("I\'m on standard search result page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
-testRunner.When("I click on the Standard title", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 44
-testRunner.Then("is should see Standard page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 45
-testRunner.And("I should see typical length is displayed in months only.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Validate professional registration shown when it has data")]
-        [NUnit.Framework.IgnoreAttribute()]
-        [NUnit.Framework.CategoryAttribute("regression")]
-        public virtual void ValidateProfessionalRegistrationShownWhenItHasData()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate professional registration shown when it has data", new string[] {
-                        "ignore",
-                        "regression"});
-#line 49
-this.ScenarioSetup(scenarioInfo);
-#line 50
-testRunner.Given("I have choosen a standard which has no progressional registration data populated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
-testRunner.When("I click on the standard title", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 52
-testRunner.Then("I should see standard detail page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
-testRunner.And("I should not see professional registration field on detail page.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
     }
 }
 #pragma warning restore
