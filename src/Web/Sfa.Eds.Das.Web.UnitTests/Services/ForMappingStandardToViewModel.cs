@@ -82,24 +82,6 @@
         }
 
         [Test]
-        public void WhenIntroductionFieldsContainAList()
-        {
-            MappingService mappingService = new MappingService(null);
-
-            var standardResult = new Standard
-            {
-                Title = "item 1",
-                IntroductoryText = "- item 1\n- item 2  \n\nSome text"
-            };
-
-            var viewModel = mappingService.Map<Standard, StandardViewModel>(standardResult);
-
-            var textFormated = viewModel.IntroductoryTextHtml.Replace("\r", string.Empty).Replace("\n", string.Empty);
-
-            textFormated.ShouldBeEquivalentTo("<ul><li>item 1</li><li>item 2</li></ul><p>Some text</p>");
-        }
-
-        [Test]
         public void WhenPdfLinkIsMissing()
         {
             MappingService mappingService = new MappingService(null);

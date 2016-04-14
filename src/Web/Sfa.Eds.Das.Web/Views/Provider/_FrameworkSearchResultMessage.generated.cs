@@ -97,7 +97,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 39 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                 WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                 WriteTo(__razor_helper_writer, Model.PathwayName);
 
 
 #line default
@@ -110,7 +110,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 39 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                                                  WriteTo(__razor_helper_writer, Model.PostCode);
+                                                                                                                WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
@@ -170,7 +170,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 49 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                                         WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                                                         WriteTo(__razor_helper_writer, Model.PathwayName);
 
 
 #line default
@@ -241,7 +241,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> training providers for the apprentic
 
 
 #line 63 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                        WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                                        WriteTo(__razor_helper_writer, Model.PathwayName);
 
 
 #line default

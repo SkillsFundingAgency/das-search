@@ -4,6 +4,7 @@
 
     public interface IApprenticeshipProviderRepository
     {
-        Provider GetById(string providerid, string locationId, string standardCode);
+        Provider GetByStandardCode(string providerid, string locationId, string standardCode);
+        Provider GetByFrameworkId(string providerid, string locationId, string frameworkId);
     }
 }

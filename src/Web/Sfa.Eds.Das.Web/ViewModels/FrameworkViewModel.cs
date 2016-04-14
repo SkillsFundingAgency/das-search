@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public class FrameworkViewModel
+    public class FrameworkViewModel : IHasError
     {
         public int FrameworkId { get; set; }
 
@@ -15,7 +15,7 @@
         public int PathwayCode { get; set; }
 
         public int Level { get; set; }
-        
+
         // Page specific
         public bool HasError { get; set; }
 

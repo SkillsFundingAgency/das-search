@@ -14,11 +14,13 @@
 
         <div class="column-two-thirds">
             <div class="hgroup">
-                <h1 class="heading-xlarge">
+                <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
-                <p id="marketing">@Model.ProviderMarketingInfo</p>
-                <p class="apprenticeship-marketing-info">@Model.Apprenticeship.ApprenticeshipMarketingInfo</p>
+                <div id="marketing">
+                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
+                </div>
+                
             </div>
         </div>
 
@@ -28,16 +30,7 @@
                 <div class="related-container">
                     <aside class="related">
                         <h2 class="heading-medium">Training provider quality assessment</h2>
-                        <p>
-                            <b>Learner satisfaction:</b>
-                            <br />
-                            <span id="learner-satisfaction" class="heading-large">@Model.LearnerSatisfaction%</span>
-                        </p>
-                        <p>
-                            <b>Employer satisfaction:</b>
-                            <br/>
-                            <span id="employer-satisfaction" class="heading-large">@Model.EmployerSatisfaction%</span>
-                        </p>
+                        @GetSatisfactionsHtml()
                     </aside>
                 </div>
             }
@@ -51,32 +44,39 @@
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", @Model.ContactInformation.ContactUsUrl)
+            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl)
+            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", "contact-link", @Model.ContactInformation.ContactUsUrl)
             @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
-            @GetStandardPropertyHtml("Email", "email", Model.ContactInformation.Email)
+            @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>
+
+    </section>
+
+    <section>
+        <header>
+            <h1 class="heading-medium">Apprenticeship training information</h1>
+        </header>
+        <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
     </section>
 </main>
 
-
 @helper ShowTrainingLocation(string title)
 {
-    if (@Model != null)
-    {
+if (@Model != null)
+{
         <dt>@title</dt>
 
-        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
-        {
-                <dd id="training-location">Training will take place at your location</dd>
-        }
-        else
-        {
-                <dd id="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
-        }
+    if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+    {
+            <dd id="training-location">Training will take place at your location</dd>
     }
+    else
+    {
+            <dd id="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+    }
+}
 }
 
 @helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
@@ -88,15 +88,60 @@
     }
 }
 
-@helper GetStandardPropertyAsLinkHtml(string title, string id, string url, bool hideIfEmpty = false)
+@helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+        <dt>@title</dt>
+        <dd id="@id"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+}
+}
+
+@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string id, string url, bool hideIfEmpty = false)
 {
     if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
     {
         <dt>@title</dt>
         <dd id="@id">
-            <a class="pdf-url-link" href="@url" target="_blank">@url</a>
+            @Html.RenderAIfExists(@url, @url, $"pdf-url-link {@cssClass}", "_blank")            
         </dd>
     }
+}
+@helper GetSatisfactionsHtml()
+{
+    <p>
+        <b>Learner satisfaction:</b>
+        <br/>
+        @if (@Model.LearnerSatisfactionMessage != "No data available")
+        {
+            <span id="learner-satisfaction" class="heading-large">
+                @Model.LearnerSatisfactionMessage
+            </span>
+        }
+        else
+        {
+            <span id="learner-satisfaction">
+                @Model.LearnerSatisfactionMessage
+            </span>
+        }
+    </p>
+
+    <p>
+        <b>Employer satisfaction:</b>
+        <br/>
+        @if (@Model.EmployerSatisfactionMessage != "No data available")
+        {
+            <span id="employer-satisfaction" class="heading-large">
+                @Model.EmployerSatisfactionMessage
+            </span>
+        }
+        else
+        {
+            <span id="employer-satisfaction">
+                @Model.EmployerSatisfactionMessage
+            </span>
+        }
+    </p>
 }
 
 @helper GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)

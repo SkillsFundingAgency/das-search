@@ -1,13 +1,12 @@
-﻿@using Sfa.Das.ApplicationServices.Models
-@using Sfa.Eds.Das.Web.ViewModels
-@model Sfa.Eds.Das.Web.ViewModels.ProviderFrameworkSearchResultViewModel
+﻿@using Sfa.Eds.Das.Web.ViewModels
+@model ProviderFrameworkSearchResultViewModel
 
     @foreach (var item in Model.Hits)
     {
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.PathwayCode }, null)
+                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
                 </h2>
             </header>
 
@@ -22,9 +21,13 @@
                 }
                 
                 <dt>Employer satisfaction:</dt>
-                <dd class="employer-satisfaction">@item.EmployerSatisfaction %</dd>
+                <dd class="employer-satisfaction">
+                    @item.EmployerSatisfactionMessage
+                </dd>
                 <dt>Learner satisfaction:</dt>
-                <dd class="learner-satisfaction">@item.LearnerSatisfaction %</dd>
+                <dd class="learner-satisfaction">
+                    @item.LearnerSatisfactionMessage
+                </dd>
             </dl>
         </article>
     }
@@ -33,8 +36,6 @@
 {
     <dt>Distance:</dt>
     <dd class="distance">Training can take place at your location.</dd>
-    <dt>Website:</dt>
-    <dd class="website"><a class="link" href="@item.Website"> @item.Website</a></dd>
 }
 
 @helper  RenderProviderDetails(FrameworkProviderResultItemViewModel item)
@@ -42,6 +43,4 @@
     <dt>Distance:</dt>
     <dd class="distance">@item.Distance miles away</dd>
     <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County @item.Address.Postcode</dd>
-    <dt>Website:</dt>
-    <dd class="website"><a href="@item.Website"> @item.Website</a></dd>
 }

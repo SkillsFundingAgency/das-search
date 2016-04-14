@@ -5,12 +5,15 @@
     using System.Configuration;
     using System.Threading;
 
-    using OpenQA.Selenium;
+    using NUnit.Framework;
 
-    using Sfa.Das.WebTest.Infrastructure.Extensions;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+
+    using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     using TechTalk.SpecFlow;
-    using OpenQA.Selenium.Support.UI;
+
     public abstract class BasePage
     {
         /// <summary>
@@ -36,12 +39,11 @@
         public IWebElement Find(By locator)
         {
             //ValidateSelector(locator); will update css selectors, however not to cause any extra delays by checking this programmatically.
-            
-                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-                wait.Until(ExpectedConditions.ElementIsVisible(locator));
-                 
-            return driver.FindElement(locator);
 
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementIsVisible(locator));
+
+            return driver.FindElement(locator);
         }
 
         public IList<IWebElement> FindElements(By locator)
@@ -58,7 +60,7 @@
             }
         }
 
-        public void Navigate(string url = "")
+        public void Navigate(string url = "/")
         {
             var fullUrl = baseUrl + url;
             Console.WriteLine($"-> Navigating to {fullUrl}");
@@ -81,36 +83,43 @@
             return Find(locator).Text;
         }
 
+        public void AssertIsElementPresent(By locator, string match)
+        {
+            Assert.True(isElementPresent(locator, match), $"Couldn't find the text '{match}' with the selector '{locator}'\n{driver.Url}");
+        }
+
+        public void AssertContainsText(By locator, string match)
+        {
+            var text = GetText(locator);
+            Assert.True(text.Contains(match), $"Expected to contain '{match}' but was '{text}'\n{driver.Url}");
+        }
+
         public bool isElementPresent(By locator, string match)
         {
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-               // Console.Write( subelements[i].Text);
                 if (subelements[i].Text == match)
                 {
-                    Console.Write("Found " + subelements[i].Text);
+                    Console.WriteLine("Found " + subelements[i].Text);
                     return true;
                 }
             }
             return false;
         }
 
-        public void  searchNSelect(By locator, string match)
+        public void searchNSelect(By locator, string match)
         {
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-                // Console.Write( subelements[i].Text);
                 if (subelements[i].Text == match)
                 {
                     subelements[i].Click();
                     break;
                 }
             }
-           
         }
-
 
         public void WaitFor(By locator)
         {
@@ -118,28 +127,19 @@
             driver.WaitFor(locator);
         }
 
-        public bool verifyTextMessage(By locator, String text)
+        public void AssertIsElementNotPresent(By locator, string provider)
         {
-            if (Find(locator).Text.Contains(text))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Assert.IsTrue(isElementNotPresent(locator, provider), $"found text matching '{provider}' in any of the subelements of {locator}\n{driver.Url}");
         }
 
-        public bool isElementNotPresent(By locator, string provider)
+        private bool isElementNotPresent(By locator, string provider)
         {
             var subelements = FindElements(locator);
             for (var i = 0; i < subelements.Count; i++)
             {
-                //Console.Write(subelements[i].Text);
-
                 while (subelements[i].Text != provider)
                 {
-                    Console.Write("Provider not Found " + provider);
+                    Console.WriteLine("Provider not Found " + provider);
                     return true;
                 }
             }
@@ -153,6 +153,11 @@
             {
                 Console.WriteLine("****** TODO remove " + value);
             }
+        }
+
+        public void AssertIsDisplayed(By locator)
+        {
+            Assert.IsTrue(isDisplayed(locator), $"Couldn't find the element {locator}");
         }
 
         public bool isDisplayed(By locator)

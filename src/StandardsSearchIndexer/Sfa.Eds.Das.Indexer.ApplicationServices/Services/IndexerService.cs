@@ -1,6 +1,8 @@
 ﻿namespace Sfa.Eds.Das.Indexer.ApplicationServices.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -31,6 +33,7 @@
 
             try
             {
+                Stopwatch stopwatch = Stopwatch.StartNew();
                 var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _indexSettings.IndexesAlias);
                 var indexProperlyCreated = _indexerHelper.CreateIndex(newIndexName);
 
@@ -46,7 +49,9 @@
 
                 PauseWhileIndexingIsBeingRun();
 
-                if (_indexerHelper.IsIndexCorrectlyCreated(newIndexName))
+                var indexHasBeenCreated = _indexerHelper.IsIndexCorrectlyCreated(newIndexName);
+
+                if (indexHasBeenCreated)
                 {
                     _indexerHelper.ChangeUnderlyingIndexForAlias(newIndexName);
 
@@ -55,6 +60,9 @@
                     _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
                 }
 
+                stopwatch.Stop();
+                var properties = new Dictionary<string, object> { { "Alias", _indexSettings.IndexesAlias }, { "ExecutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
+                _log.Info("Elasticsearch.CreateScheduledIndex", properties);
                 _log.Info($"{_name} Indexing complete.");
             }
             catch (Exception ex)

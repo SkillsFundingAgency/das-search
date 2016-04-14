@@ -6,7 +6,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.Core.Models;
     using Sfa.Eds.Das.Indexer.Core.Services;
 
     using StructureMap;

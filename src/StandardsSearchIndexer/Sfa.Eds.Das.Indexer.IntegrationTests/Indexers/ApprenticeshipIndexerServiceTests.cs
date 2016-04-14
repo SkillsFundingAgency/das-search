@@ -30,7 +30,7 @@
 
         private IGenericIndexerHelper<IMaintainApprenticeshipIndex> _indexerService;
 
-        private IElasticClient _elasticClient;
+        private IElasticsearchCustomClient _elasticClient;
 
         private string _indexName;
 
@@ -54,8 +54,8 @@
 
             _indexerService = new ApprenticeshipIndexer(settings, maintanSearchIndex, moqMetaDataHelper.Object, moqLog.Object);
 
-            var elasticClientFactory = ioc.GetInstance<IElasticsearchClientFactory>();
-            _elasticClient = elasticClientFactory.GetElasticClient();
+            var elasticCustomClient = ioc.GetInstance<IElasticsearchCustomClient>();
+            _elasticClient = elasticCustomClient;
 
             _indexName = $"{_standardSettings.IndexesAlias}-{new DateTime(2000, 1, 1).ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
@@ -113,7 +113,7 @@
             Assert.AreEqual(1, amountRetrieved);
             Debug.Assert(retrievedStandard != null, "retrievedStandard != null");
             Assert.AreEqual(expectedStandardResult.Title, retrievedStandard.Title);
-            Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.NotionalEndLevel);
+            Assert.AreEqual(expectedStandardResult.NotionalEndLevel, retrievedStandard.Level);
             Assert.AreEqual(expectedStandardResult.Id, retrievedStandard.StandardId);
             Assert.AreEqual(12, retrievedStandard.TypicalLength.From);
         }
@@ -153,7 +153,7 @@
             Assert.AreEqual(1, amountRetrieved);
             Debug.Assert(retrievedStandard != null, "retrievedStandard != null");
             Assert.AreEqual("Software Developer", retrievedStandard.Title);
-            Assert.AreEqual(0, retrievedStandard.NotionalEndLevel);
+            Assert.AreEqual(0, retrievedStandard.Level);
             Assert.AreEqual(2, retrievedStandard.StandardId);
         }
 

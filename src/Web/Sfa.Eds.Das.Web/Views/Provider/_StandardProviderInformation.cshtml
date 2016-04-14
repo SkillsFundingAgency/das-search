@@ -1,47 +1,44 @@
-﻿@using Sfa.Das.ApplicationServices.Models
 @using Sfa.Eds.Das.Web.ViewModels
-@model Sfa.Eds.Das.Web.ViewModels.ProviderStandardSearchResultViewModel
+@model ProviderStandardSearchResultViewModel
 
     @foreach (var item in Model.Hits)
     {
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.Id, @locationId = item.LocationId, @standardCode = item.StandardCode }, null)
+                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null)
                 </h2>
             </header>
 
             <dl class="result-data-list">
-                @if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
-                {
-                    @RenderEmployersLocationProviderDetails(item)
-                }
-                else
-                {
-                    @RenderProviderDetails(item)
-                }
+                @RenderProviderDetails(item)
                 
                 <dt>Employer satisfaction:</dt>
-                <dd class="employer-satisfaction">@item.EmployerSatisfaction %</dd>
+                <dd class="employer-satisfaction">
+                    @item.EmployerSatisfactionMessage
+                </dd>
                 <dt>Learner satisfaction:</dt>
-                <dd class="learner-satisfaction">@item.LearnerSatisfaction %</dd>
+                <dd class="learner-satisfaction">
+                    @item.LearnerSatisfactionMessage
+                </dd>
             </dl>
         </article>
     }
-
-@helper  RenderEmployersLocationProviderDetails(ProviderResultItemViewModel item)
-{
-    <dt>Distance:</dt>
-    <dd class="distance">Training can take place at your location.</dd>
-    <dt>Website:</dt>
-    <dd class="website"><a class="link" href="@item.Website"> @item.Website</a></dd>
-}
 
 @helper  RenderProviderDetails(ProviderResultItemViewModel item)
 {
     <dt>Distance:</dt>
     <dd class="distance">@item.Distance miles away</dd>
-    <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County @item.Address.Postcode</dd>
+
+    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer"))
+    {
+        <dd class="address">Training can take place at your location.</dd>
+    }
+    else
+    {
+        <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.County @item.Address.Postcode</dd>
+    }
+
     <dt>Website:</dt>
     <dd class="website"><a href="@item.Website"> @item.Website</a></dd>
 }

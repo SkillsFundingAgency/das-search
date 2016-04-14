@@ -7,8 +7,6 @@
     {
         public string Title { get; set; }
 
-        public int NotionalEndLevel { get; set; }
-
         // Standards
         public int StandardId { get; set; }
 
@@ -25,6 +23,6 @@
 
         public string PathwayName { get; set; }
 
-        public string Level { get; set; }
+        public int Level { get; set; }
     }
 }

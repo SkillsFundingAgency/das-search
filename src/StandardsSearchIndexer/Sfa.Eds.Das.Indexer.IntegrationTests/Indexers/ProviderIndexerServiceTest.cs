@@ -1,27 +1,27 @@
-﻿namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Moq;
+using Nest;
+using NUnit.Framework;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
+using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
+using Sfa.Eds.Das.Indexer.Core.Models;
+using Sfa.Eds.Das.Indexer.Core.Models.Provider;
+using Sfa.Eds.Das.Indexer.Core.Services;
+using Sfa.Infrastructure.Elasticsearch;
+using Sfa.Infrastructure.Elasticsearch.Models;
+using StructureMap;
+using Address = Sfa.Eds.Das.Indexer.Core.Models.Provider.Address;
+
+namespace Sfa.Eds.Das.Indexer.IntegrationTests.Indexers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using FluentAssertions;
-    using Moq;
-    using Nest;
-    using NUnit.Framework;
-
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
-    using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
-    using Sfa.Eds.Das.Indexer.AzureWorkerRole.DependencyResolution;
-    using Sfa.Eds.Das.Indexer.Core.Models;
-    using Sfa.Eds.Das.Indexer.Core.Models.Provider;
-    using Sfa.Eds.Das.Indexer.Core.Services;
-    using Sfa.Infrastructure.Elasticsearch;
-
-    using StructureMap;
-
     [TestFixture]
     public class ProviderIndexerServiceTest
     {
@@ -31,7 +31,7 @@
 
         private IIndexerService<IMaintainProviderIndex> _sut;
 
-        private IElasticClient _elasticClient;
+        private IElasticsearchCustomClient _elasticClient;
 
         private IIndexSettings<IMaintainProviderIndex> _providerSettings;
 
@@ -58,40 +58,40 @@
 
             _indexerService = new ProviderIndexer(_providerSettings, maintainSearchIndexer, _features.Object, providerRepository.Object, activeProviderRepository.Object, logger.Object);
 
-            var elasticClientFactory = _ioc.GetInstance<IElasticsearchClientFactory>();
-            _elasticClient = elasticClientFactory.GetElasticClient();
+            _elasticClient = _ioc.GetInstance<IElasticsearchCustomClient>();
 
             _sut = _ioc.GetInstance<IIndexerService<IMaintainProviderIndex>>();
         }
 
         [Test]
         [Category("Integration")]
-        [Ignore]
+        [Category("Problematic")]
         public async Task ShouldCreateScheduledIndexAndMappingForProviders()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
-            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse($"Expected the index {indexName} to not exist");
             await _sut.CreateScheduledIndex(scheduledDate);
-            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeTrue($"Expected the index {indexName} to exist");
 
-            var mapping = _elasticClient.GetMapping<Provider>(i => i.Index(indexName));
-            mapping.Should().NotBeNull();
+            _elasticClient.Refresh(Indices.Index(indexName));
+
+            var mapping = _elasticClient.GetMapping<dynamic>(i => i.Index(indexName).AllTypes());
+            mapping.Should().NotBeNull("mapping was null");
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
-            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
+            _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse($"Expected the index {indexName} to not exist");
         }
 
         [Test]
         [Category("Integration")]
         [Category("Problematic")]
-        [Ignore]
         public void ShouldRetrieveProvidersSearchingForPostCode()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             var expectedProviderResult = new Provider
                                              {
@@ -109,9 +109,11 @@
 
             _indexerService.IndexEntries(indexName);
 
+            _elasticClient.Refresh(Indices.Index(indexName));
+
             Thread.Sleep(2000);
 
-            var retrievedResult = _elasticClient.Search<Provider>(p => p.Index(indexName).Query(q => q.QueryString(qs => qs.Query("MK40 2SG"))));
+            var retrievedResult = _elasticClient.Search<FrameworkProvider>(p => p.Index(indexName).Query(q => q.QueryString(qs => qs.Query("MK40 2SG"))));
             var amountRetrieved = retrievedResult.Documents.Count();
             var retrievedProvider = retrievedResult.Documents.FirstOrDefault();
 
@@ -128,7 +130,7 @@
         public async Task ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
-            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
+            var indexName = $"{_providerSettings.IndexesAlias}-{scheduledDate.ToUniversalTime().ToString("yyyy-MM-dd-HH-mm")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(indexName);
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
@@ -169,7 +171,7 @@
             Assert.AreEqual(0, providersCase3.Documents.Count());
             Assert.AreEqual(1, providersCase4.Documents.Count());
 
-            Assert.AreEqual(1000238745115641, providersCase4.Documents.First().Id);
+            Assert.AreEqual("10002387-45217-115641", providersCase4.Documents.First().Id);
 
             _elasticClient.DeleteIndex(Indices.Index(indexName));
             _elasticClient.IndexExists(Indices.Index(indexName)).Exists.Should().BeFalse();
@@ -226,7 +228,7 @@
                        {
                            new Provider
                                {
-                                   Id = 304107,
+                                   Id = "304107",
                                    Ukprn = 10002387,
                                    Name = "F1 COMPUTER SERVICES & TRAINING LIMITED",
                                    MarketingInfo = "Provider Marketing Information for F1 COMPUTER SERVICES & TRAINING LIMITED",
@@ -317,7 +319,7 @@
                                                    {
                                                        Code = 45,
                                                        PathwayCode = 7,
-                                                       Level = 5,
+                                                       ProgType = 5,
                                                        MarketingInfo = "Provider 304107 marketing into for standard code 45",
                                                        InfoUrl = "www.Provider304107Standard45StandardInfoURL.com",
                                                        ContactInformation =

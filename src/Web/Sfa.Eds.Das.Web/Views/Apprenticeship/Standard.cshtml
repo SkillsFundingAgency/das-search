@@ -19,10 +19,10 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                @if (!string.IsNullOrEmpty(@Model.IntroductoryTextHtml))
+                @if (!string.IsNullOrEmpty(@Model.IntroductoryText))
                 {
                     <div class="standard-result-summary">
-                        @Html.Raw(@Model.IntroductoryTextHtml)
+                        @Html.MarkdownToHtml(Model.IntroductoryText)
                     </div>
                 }
             </div>
@@ -46,7 +46,6 @@
                                     </p>
                                 </label>
                                 <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
-                                <input type="hidden" id="callermethod" name="callermethod" class="text-box form-control" value="Standard">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
                             <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
@@ -66,13 +65,13 @@
                 </h2>
             </header>
             <dl class="data-list">
-                @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRoleHtml)
+                @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
                 @GetStandardLevel(@Model.NotionalEndLevel.ToString())
                 @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
-                @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirementsHtml)
-                @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearnHtml)
-                @GetStandardProperty("Qualifications", "qualifications", Model.QualificationsHtml)
-                @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistrationHtml, true)
+                @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
+                @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
+                @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
+                @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
             </dl>
             @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
             {
@@ -81,8 +80,8 @@
                         Documents
                     </h2>
                     <ul>
-                        @GetDocumentItem(@Model.StandardPdf, @Model.StandardPdfUrlTitle)
-                        @GetDocumentItem(@Model.AssessmentPlanPdf, @Model.AssessmentPlanPdfUrlTitle)
+                        @GetDocumentItem(@Model.StandardPdf, "Standard")
+                        @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
                     </ul>
                 </div>
             }
@@ -135,7 +134,7 @@
                 break;
 
         }
-            <dd id="level">@item (equivalent to @equivalence)</dd>
+        <dd id="level">@item (equivalent to @equivalence)</dd>
     }
 }
 
@@ -145,7 +144,7 @@
     {
 
         <dt>@title</dt>
-        <dd id="@id">@Html.Raw(item)</dd>
+        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
 
     }
 }

@@ -45,6 +45,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EquivalenceLevels.resx</DependentUpon>
     </Compile>
+    <Compile Include="EquivalenveLevelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

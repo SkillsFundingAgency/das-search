@@ -17,14 +17,16 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
         public Address Address { get; set; }
 
-        public double EmployerSatisfaction { get; set; }
+        public string EmployerSatisfactionMessage { get; set; }
 
-        public double LearnerSatisfaction { get; set; }
+        public string LearnerSatisfactionMessage { get; set; }
 
         public ApprenticeshipBasic Apprenticeship { get; set; }
 
         public string ApprenticeshipNameWithLevel { get; set; }
 
         public LinkViewModel SearchResultLink { get; set; }
+
+        public TrainingEnum Training { get; set; }
     }
 }

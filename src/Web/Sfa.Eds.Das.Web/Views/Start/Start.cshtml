@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<main id="content" role="main">
+    <a href="appBrowseSearch.html" class="link-back">Back</a>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                Digital Apprenticeship Service
+            </h1>
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lorem ac urna varius, nec maximus enim elementum. Suspendisse et tellus dolor. Aenean ut elit congue, congue leo sit amet, volutpat nunc. Etiam accumsan lorem et enim malesuada dignissim. Vestibulum feugiat massa ut sem mollis, et pretium eros bibendum. Sed vel accumsan metus. Vestibulum nec nulla non elit venenatis maximus vitae vitae tellus. Maecenas molestie, turpis fermentum tincidunt sodales, justo nunc tristique turpis, et pretium lectus diam dictum tortor. Cras faucibus sem ut elit pretium, in faucibus dolor semper. Quisque vitae tempus felis, sit amet pellentesque est. Quisque tincidunt lorem ex, vitae fermentum nisl volutpat nec. Pellentesque dolor diam, malesuada sed tellus nec, convallis volutpat odio. Nullam sed neque eu lacus tincidunt fringilla. Quisque vel justo malesuada, tincidunt dolor vitae, tristique justo. Maecenas ipsum lorem, molestie in congue eget, dictum eget quam. Mauris venenatis tincidunt nisi in porta.
+            </p>
+
+            @using (Html.BeginForm("Search", "Apprenticeship"))
+            {
+                <input class="button margin-top-x2" id="start-button" type="submit" value="Start" />
+            }
+
+        </div>
+    </div>
+
+</main>

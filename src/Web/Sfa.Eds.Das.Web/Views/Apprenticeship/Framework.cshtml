@@ -1,4 +1,4 @@
-﻿@using Resources = Sfa.Eds.Das.Resources.EquivalenceLevels
+﻿@using Sfa.Eds.Das.Resources
 @using Sfa.Eds.Das.Web.Extensions
 @model Sfa.Eds.Das.Web.ViewModels.FrameworkViewModel
 
@@ -21,7 +21,7 @@
                 </h1>
             </header>
 
-            <p>Contains an apprenticeship training programme for @Model.PathwayName, level @GetFrameworkLevel(@Model.Level.ToString())</p>
+            <p>Contains an apprenticeship training programme for @Model.PathwayName, level @EquivalenveLevelService.GetFrameworkLevel(@Model.Level.ToString())</p>
 
             <h3 class="heading-medium">
                 Contact a provider
@@ -44,14 +44,12 @@
                                 <label class="form-label" for="postcode">
                                     Enter postcode@* or partial postcode *@
                                     <p>
-                                        @if (Model.HasError)
-                                        {
-                                            @RenderErrorMessage()
+                                        @{
+                                            Html.RenderPartial("_BlankFieldErrorMessage");
                                         }
                                     </p>
                                 </label>
                                 <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.FrameworkId">
-                                <input type="hidden" id="callermethod" name="callermethod" class="text-box form-control" value="Framework">
                                 <input type="search" id="postcode" name="PostCode" class="text-box form-control" maxlength="200" placeholder="">
                             </div>
                             <input class="button margin-top-x2" id="submit-postcode" type="submit" value="Search" />
@@ -64,49 +62,3 @@
             </div>
         </div>
 </main>
-
-@helper  RenderErrorMessage()
-{
-    <p>
-        This field can't be blank
-    </p>
-}
-
-@helper GetFrameworkLevel(string item)
-{
-    if (!string.IsNullOrEmpty(item))
-    {
-        var equivalence = string.Empty;
-        switch (int.Parse(@item))
-        {
-            case 1:
-                equivalence = @Resources.FirstLevel;
-                break;
-            case 2:
-                equivalence = @Resources.SecondLevel;
-                break;
-            case 3:
-                equivalence = @Resources.ThirdLevel;
-                break;
-            case 4:
-                equivalence = @Resources.FourthLevel;
-                break;
-            case 5:
-                equivalence = @Resources.FifthLevel;
-                break;
-            case 6:
-                equivalence = @Resources.SixthLevel;
-                break;
-            case 7:
-                equivalence = @Resources.SeventhLevel;
-                break;
-            case 8:
-                equivalence = @Resources.EighthLevel;
-                break;
-            default:
-                break;
-
-        }
-            <span>@item (equivalent to @equivalence)</span>
-    }
-}

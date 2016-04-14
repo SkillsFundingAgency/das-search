@@ -11,21 +11,23 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
     using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Services;
     using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Infrastructure.Elasticsearch;
 
     public sealed class StandardRepository : IGetStandards
     {
-        private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
+
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
 
         public StandardRepository(
-            IElasticsearchClientFactory elasticsearchClientFactory,
+            IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IStandardMapping standardMapping)
         {
-            _elasticsearchClientFactory = elasticsearchClientFactory;
+            _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
@@ -33,9 +35,8 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
         public Standard GetStandardById(int id)
         {
-            var client = this._elasticsearchClientFactory.Create();
-            var results =
-                client.Search<StandardSearchResultsItem>(s => s
+            var results = _elasticsearchCustomClient
+                    .Search<StandardSearchResultsItem>(s => s
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("standarddocument"))
                     .From(0)

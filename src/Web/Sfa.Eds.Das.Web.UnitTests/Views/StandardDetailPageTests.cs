@@ -54,13 +54,13 @@
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "dd", 2).Should().Contain("foundation degree and above");
+            GetPartial(html, "dd", 2).Should().Contain("bachelor's degree");
 
             html = detail.RenderAsHtml(model2).ToAngleSharp();
-            GetPartial(html, "dd", 2).Should().Contain("foundation degree and above");
+            GetPartial(html, "dd", 2).Should().Contain("certificate of higher education");
 
             html = detail.RenderAsHtml(model3).ToAngleSharp();
-            GetPartial(html, "dd", 2).Should().Contain("bachelor’s or master’s degree");
+            GetPartial(html, "dd", 2).Should().Contain("doctorate");
         }
     }
 }

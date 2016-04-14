@@ -1,15 +1,15 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.StandardViewModel
+﻿@model Sfa.Eds.Das.Web.ViewModels.IHasError
 
 <div>
-    @if (Model.HasError)
-    {
-        @RenderErrorMessage()
-    }
+        @if (Model.HasError)
+        {
+            @RenderErrorMessage()
+        }
 </div>
 
-@helper  RenderErrorMessage()
+    @helper  RenderErrorMessage()
 {
-    <p>
+    <p id="postcode-error">
         This field can't be blank
     </p>
 }

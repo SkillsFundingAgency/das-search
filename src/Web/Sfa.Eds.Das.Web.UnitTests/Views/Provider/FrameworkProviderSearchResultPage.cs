@@ -46,12 +46,13 @@
                 FrameworkId = 1,
                 FrameworkCode = 2,
                 FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
         }
 
         [Test]
@@ -65,12 +66,13 @@
                 FrameworkId = 1,
                 FrameworkCode = 2,
                 FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name'.");
         }
 
         [Test]
@@ -104,13 +106,8 @@
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
-            var a = GetPartial(html, ".result dl dt");
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            var b = GetPartial(html, ".result dl dd");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
-
-            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
 
             var secondResult = GetHtmlElement(html, ".result", 2);
 
@@ -171,9 +168,6 @@
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
-
-            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
         }
 
         [Test]
@@ -202,9 +196,6 @@
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("Training can take place at your location.");
-
-            GetPartial(html, ".result dl dt", 2).Should().Be("Website:");
-            GetPartial(html, ".result dl dd", 2).Should().Be("http://www.trainingprovider.co.uk");
         }
     }
 }

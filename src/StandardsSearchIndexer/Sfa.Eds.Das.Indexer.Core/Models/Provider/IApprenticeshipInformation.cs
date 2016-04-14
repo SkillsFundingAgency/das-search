@@ -12,6 +12,6 @@
 
         IEnumerable<DeliveryInformation> DeliveryLocations { get; set; }
 
-        int Code { get; set; }
+        int Code { get; set; } // TODO: LWA - This shouldn't live here
     }
 }

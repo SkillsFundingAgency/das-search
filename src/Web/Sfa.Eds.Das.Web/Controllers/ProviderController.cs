@@ -1,40 +1,37 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
-using Sfa.Das.ApplicationServices;
-using Sfa.Das.ApplicationServices.Models;
-using Sfa.Eds.Das.Core.Domain.Model;
-using Sfa.Eds.Das.Core.Domain.Services;
-using Sfa.Eds.Das.Core.Logging;
-﻿using Sfa.Eds.Das.Web.Extensions;
-using Sfa.Eds.Das.Web.Models;
-using Sfa.Eds.Das.Web.Services;
-using Sfa.Eds.Das.Web.ViewModels;
-
-namespace Sfa.Eds.Das.Web.Controllers
+﻿namespace Sfa.Das.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
+    using Sfa.Das.ApplicationServices;
+    using Sfa.Das.ApplicationServices.Models;
+    using Sfa.Das.Web.Services;
+    using Sfa.Eds.Das.Core.Logging;
+    using Sfa.Eds.Das.Web.Extensions;
+    using Sfa.Eds.Das.Web.Models;
+    using Sfa.Eds.Das.Web.Services;
+    using Sfa.Eds.Das.Web.ViewModels;
+
     public sealed class ProviderController : Controller
     {
-        private readonly IProviderSearchService _providerSearchService;
+        private readonly IProviderViewModelFactory _viewModelFactory;
+
         private readonly ILog _logger;
+
         private readonly IMappingService _mappingService;
-        private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
-        private readonly IGetStandards _getStandards;
-        private readonly IGetFrameworks _getFrameworks;
+
+        private readonly IProviderSearchService _providerSearchService;
 
         public ProviderController(
             IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
-            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
-            IGetStandards getStandards,
-            IGetFrameworks getFrameworks)
+            IProviderViewModelFactory viewModelFactory)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
-            _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
-            _getStandards = getStandards;
-            _getFrameworks = getFrameworks;
+            _viewModelFactory = viewModelFactory;
         }
 
         [HttpGet]
@@ -42,12 +39,17 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction(criteria?.CallerMethod, "Apprenticeship", new { id = criteria?.ApprenticeshipId, HasError = true });
+                return RedirectToAction(
+                    "Standard",
+                    "Apprenticeship",
+                    new { id = criteria?.ApprenticeshipId, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode);
+            var searchResults =
+                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode);
 
-            var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+            var viewModel =
+                _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }
@@ -57,12 +59,18 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction("Framework", "Apprenticeship", new { id = criteria?.ApprenticeshipId, HasError = true });
+                return RedirectToAction(
+                    "Framework",
+                    "Apprenticeship",
+                    new { id = criteria?.ApprenticeshipId, HasError = true });
             }
 
-            var searchResults = await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode);
+            var searchResults =
+                await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode);
 
-            var viewModel = _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+            var viewModel =
+                _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(
+                    searchResults);
 
             return View(viewModel);
         }
@@ -70,9 +78,9 @@ namespace Sfa.Eds.Das.Web.Controllers
         [HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
-            var model = _apprenticeshipProviderRepository.GetById(criteria.ProviderId, criteria.LocationId, criteria.StandardCode);
+            var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);
 
-            if (model == null)
+            if (viewModel == null)
             {
                 var message = $"Cannot find provider: {criteria.ProviderId}";
                 _logger.Warn($"404 - {message}");
@@ -80,13 +88,17 @@ namespace Sfa.Eds.Das.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
+            if (viewModel.Training == TrainingEnum.Standard)
+            {
+                    viewModel.SearchResultLink =
+                        Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("StandardResults", "Provider"));
+            }
 
-            var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
-
-            viewModel.ApprenticeshipNameWithLevel = string.Concat(apprenticeshipData.Title, " level ", apprenticeshipData.NotionalEndLevel);
-
-            viewModel.SearchResultLink = Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("StandardResults", "Provider"));
+            if (viewModel.Training == TrainingEnum.Framework)
+            {
+                viewModel.SearchResultLink =
+                        Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("FrameworkResults", "Provider"));
+            }
 
             return View(viewModel);
         }

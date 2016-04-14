@@ -6,7 +6,11 @@ namespace Sfa.Eds.Das.Indexer.Core.Models.Provider
     {
         public int Code { get; set; }
 
-        public int Level { get; set; }
+        /// <summary>
+        /// Gets or sets the ProgType.
+        /// </summary>
+        /// <remarks>The level can be mapped from this value.</remarks>
+        public int ProgType { get; set; }
 
         public int PathwayCode { get; set; }
 
