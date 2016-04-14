@@ -30,7 +30,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
         [Then(@"I should see ""(.*)""")]
         public void ThenIShouldSee(string p0)
         {
-            pdetailPage.verifyProviderDetailPage(p0);
+            pdetailPage.verifyProviderDetailPageFields(p0);
         }
     }
 }

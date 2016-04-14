@@ -60,7 +60,7 @@
             }
         }
 
-        public void Navigate(string url = "/")
+        public void Navigate(string url = "/Apprenticeship/Search")
         {
             var fullUrl = baseUrl + url;
             Console.WriteLine($"-> Navigating to {fullUrl}");

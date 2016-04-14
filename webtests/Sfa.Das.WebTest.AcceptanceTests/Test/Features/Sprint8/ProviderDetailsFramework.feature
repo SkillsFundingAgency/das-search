@@ -36,8 +36,30 @@ Examples:
 | 40327 | SO14 1PB |
 | 40325 | SO14 1PB |
 
-| 12 | CV7 8ED  |
-| 17 | cv1 2WT  |
+
+@ignore #wip
+Scenario Outline: Verify provider detail page info
+Given I am on Framework '<id>' detail page
+And I enter '<Postcode>' in provider search box
+When I search Search for provider
+And  I select any of the provider from the list
+Then I should see provider name "DAS Test Provider - Nasir Khan"
+And I should see framework and pathway "Food and Drink - Fresh Produce Industry Skills level 3"
+And I should see websitecontactpage "http://google.co.uk"
+And I should see phone "079989990988"
+And I should see email "me@me.com"
+And I should see training location "Southampton Training Services1 London road SO14 1PB"
+And I should see trainingStructure "at your location day release"
+Examples:
+| id    | Postcode |
+| 40325 | SO14 1PB |
+
+
+
+
+
+
+
 
 
 @ignore
