@@ -5,14 +5,19 @@
 
     public static class HtmlExtensions
     {
-        public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes)
+        public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes, string target = "_self")
         {
             if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(title))
             {
                 return new MvcHtmlString(string.Empty);
             }
 
-            var html = $"<a href=\"{source}\" class=\"{classes}\">{title}</a>";
+            if (!source.Contains("http://"))
+            {
+                source = $"http://{source}";
+            }
+
+            var html = $"<a href=\"{source}\" target=\"{target}\" class=\"{classes}\">{title}</a>";
 
             return new MvcHtmlString(html);
         }
