@@ -47,8 +47,13 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There was a problem performing a search. Try again later.\r\n    <" +
-"/p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"results-error\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        There was a problem performing a search. Try again later.\r\n    </p>\r\n");
 
 
 #line 30 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -76,7 +81,13 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are no apprenticeships matching your search for \'<b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"results-empty\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        There are no apprenticeships matching your search for \'<b>");
 
 
 #line 34 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -113,7 +124,11 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        All apprenticeships.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        All apprenticeships.\r\n    </p>\r\n");
 
 
 #line 42 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -141,7 +156,13 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There is <b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"results-one\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        There is <b>");
 
 
 #line 46 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -187,7 +208,11 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        There are <b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        There are <b>");
 
 
 #line 53 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"

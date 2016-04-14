@@ -24,32 +24,32 @@
 </div>
 @helper  RenderErrorMessage()
 {
-    <p>
+    <p id="result-summary" class="results-error">
         There was a problem performing a search. Try again later.
     </p>
 }
 @helper RenderZeroResult()
 {
-    <p>
+    <p id="result-summary" class="results-empty">
         There are no apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
 @helper  RenderAllResult()
 {
-    <p>
+    <p id="result-summary">
         All apprenticeships.
     </p>
 }
 @helper  RenderMessageOneResult()
 {
-    <p>
+    <p id="result-summary" class="results-one">
         There is <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
 
 @helper  RenderMessage()
 {
-    <p>
+    <p id="result-summary">
         There are <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
 }
