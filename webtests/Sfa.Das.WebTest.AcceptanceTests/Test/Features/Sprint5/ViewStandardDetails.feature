@@ -36,18 +36,18 @@ Examples:
 | Dental Nurse                   |
 | Property Maintenance Operative |
 
-@ignore
-@regression
-Scenario: Validate typical length units is months only.
-Given I'm on standard search result page
-When I click on the Standard title
-Then is should see Standard page
-And I should see typical length is displayed in months only.
-
-@ignore
-@regression
-Scenario: Validate professional registration shown when it has data
-Given I have choosen a standard which has no progressional registration data populated
-When I click on the standard title
-Then I should see standard detail page
-And I should not see professional registration field on detail page.
+#@ignore
+#@regression
+#Scenario: Validate typical length units is months only.
+#Given I'm on standard search result page
+#When I click on the Standard title
+#Then is should see Standard page
+#And I should see typical length is displayed in months only.
+#
+#@ignore
+#@regression
+#Scenario: Validate professional registration shown when it has data
+#Given I have choosen a standard which has no progressional registration data populated
+#When I click on the standard title
+#Then I should see standard detail page
+#And I should not see professional registration field on detail page.
