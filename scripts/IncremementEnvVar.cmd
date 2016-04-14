@@ -1,0 +1,1 @@
+set /a version.patch=%version.patch% + 1
