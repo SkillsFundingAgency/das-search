@@ -43,7 +43,7 @@
 
         public void Navigate()
         {
-            base.Navigate("/apprenticeship/search");
+            base.Navigate("apprenticeship/search");
             WaitForSearchPage();
         }
 
