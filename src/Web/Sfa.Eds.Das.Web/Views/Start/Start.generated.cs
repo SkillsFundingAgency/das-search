@@ -41,7 +41,7 @@ namespace Sfa.Eds.Das.Web.Views.Start
             
             #line 1 "..\..\Views\Start\Start.cshtml"
   
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Digital Apprenticeship Service - Start";
 
             
             #line default
@@ -52,13 +52,7 @@ WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\r\n    <a");
-
-WriteLiteral(" href=\"appBrowseSearch.html\"");
-
-WriteLiteral(" class=\"link-back\"");
-
-WriteLiteral(">Back</a>\r\n\r\n    <div");
+WriteLiteral(">\r\n\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -81,13 +75,13 @@ WriteLiteral(@">
 ");
 
             
-            #line 18 "..\..\Views\Start\Start.cshtml"
+            #line 17 "..\..\Views\Start\Start.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 18 "..\..\Views\Start\Start.cshtml"
+            #line 17 "..\..\Views\Start\Start.cshtml"
              using (Html.BeginForm("Search", "Apprenticeship"))
             {
 
@@ -107,7 +101,7 @@ WriteLiteral(" value=\"Start\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 21 "..\..\Views\Start\Start.cshtml"
+            #line 20 "..\..\Views\Start\Start.cshtml"
             }
 
             
