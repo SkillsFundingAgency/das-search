@@ -64,7 +64,7 @@ WriteLiteral("    ");
 
             
             #line 9 "..\..\Views\Provider\FrameworkResults.cshtml"
-Write(Html.ActionLink("Back to Framework", "Framework", "Apprenticeship", new {@id = @Model.FrameworkId} , new { @class = "link-back" } ));
+Write(Html.ActionLink("Back to Framework", "Framework", "Apprenticeship", new { @id = @Model.FrameworkId }, new { @class = "link-back" }));
 
             
             #line default
@@ -124,7 +124,18 @@ WriteLiteral("\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
-WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n<script>\r\n    window.onload = function(" +
+") {\r\n        SearchAndShortlist.analytics.pushEventValue(\"Search\", \"Provider sea" +
+"rch\", ");
+
+            
+            #line 38 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                                            Write(Model.TotalResults);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(");\r\n    }\r\n</script> ");
 
         }
     }
