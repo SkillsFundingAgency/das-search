@@ -227,14 +227,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6791), Tuple.Create("\"", 6799)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6792), Tuple.Create("\"", 6800)
 
 #line 169 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6796), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 6797), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6796), false)
+, 6797), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -280,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6987), Tuple.Create("\"", 7001)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6988), Tuple.Create("\"", 7002)
 
 #line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6994), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 6995), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 6994), false)
+, 6995), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -800,7 +800,7 @@ WriteLiteral(">\r\n                    </div>\r\n                    <input");
 
 WriteLiteral(" class=\"button margin-top-x2\"");
 
-WriteLiteral(" id=\"submit-postcode\"");
+WriteLiteral(" id=\"submit-postcode2\"");
 
 WriteLiteral(" type=\"submit\"");
 
