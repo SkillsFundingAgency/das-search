@@ -493,7 +493,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Start.generated.cs</LastGenOutput>
     </Content>
-    <None Include="Views\Shared\_ScriptsFooter.cshtml" />
+    <Content Include="Views\Shared\_ScriptsFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
