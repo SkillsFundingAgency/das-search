@@ -37,7 +37,7 @@ Examples:
 | 40325 | SO14 1PB |
 
 
-@ignore #wip
+@ignore
 Scenario Outline: Verify provider detail page info
 Given I am on Framework '<id>' detail page
 And I enter '<Postcode>' in provider search box

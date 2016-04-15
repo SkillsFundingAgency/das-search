@@ -75,7 +75,7 @@ namespace Sfa.Das.WebTest.AcceptanceTests.Test.Features.Sprint1
         [NUnit.Framework.TestCaseAttribute("manufacturing engineer", "Aerospace Engineer", null)]
         [NUnit.Framework.TestCaseAttribute("manager", "Senior Housing Property Management", null)]
         [NUnit.Framework.TestCaseAttribute("legal services", "Legal Services: Criminal Prosecution", null)]
-        [NUnit.Framework.TestCaseAttribute("designer", "Design: Design", null)]
+        [NUnit.Framework.TestCaseAttribute("designer", "Design: Design Support", null)]
         [NUnit.Framework.TestCaseAttribute("dental nurse", "Dental Nurse", null)]
         [NUnit.Framework.TestCaseAttribute("electrician", "Installation Electrician/Maintenance Electrician", null)]
         public virtual void SearchByTitle(string title, string expected, string[] exampleTags)

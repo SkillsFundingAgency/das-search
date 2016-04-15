@@ -30,7 +30,7 @@ Scenario Outline:Search By title
 	| manufacturing engineer | Aerospace Engineer                                               |
 	| manager                | Senior Housing Property Management                               |
 	| legal services         | Legal Services: Criminal Prosecution                             |
-	| designer               | Design: Design                                                   |
+	| designer               | Design: Design Support                                                   |
 	| dental nurse           | Dental Nurse                                                     |
 	| electrician            |Installation Electrician/Maintenance Electrician                                                |
 
