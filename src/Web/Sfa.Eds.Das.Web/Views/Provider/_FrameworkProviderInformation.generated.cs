@@ -39,125 +39,6 @@ namespace Sfa.Eds.Das.Web.Views.Provider
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/_FrameworkProviderInformation.cshtml")]
     public partial class FrameworkProviderInformation : System.Web.Mvc.WebViewPage<ProviderFrameworkSearchResultViewModel>
     {
-
-#line 28 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-public System.Web.WebPages.HelperResult  RenderProviderDetails(FrameworkProviderResultItemViewModel item)
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 29 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
- 
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Distance:</dt>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "    <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
-
-
-#line 31 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.Distance);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " miles away</dd>\r\n");
-
-
-#line 32 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
-{
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "        <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
-
-WriteLiteralTo(__razor_helper_writer, ">Training can take place at your location.</dd>\r\n");
-
-
-#line 35 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-    }
-    else
-    {
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "        <dd");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
-
-
-#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.LocationName);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                 WriteTo(__razor_helper_writer, item.Address.Address1);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                        WriteTo(__razor_helper_writer, item.Address.Address2);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                               WriteTo(__razor_helper_writer, item.Address.County);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                    WriteTo(__razor_helper_writer, item.Address.Postcode);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
-
-
-#line 39 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-    }
-
-
-#line default
-#line hidden
-});
-
-#line 40 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-}
-#line default
-#line hidden
-
         public FrameworkProviderInformation()
         {
         }
@@ -196,19 +77,109 @@ WriteLiteral("\r\n                </h2>\r\n            </header>\r\n\r\n        
 
 WriteLiteral(" class=\"result-data-list\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\r\n                <dt>Distance:</dt>\r\n                <dd");
 
-WriteLiteral("                ");
+WriteLiteral(" class=\"distance\"");
+
+WriteLiteral(">");
 
             
-            #line 14 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-           Write(RenderProviderDetails(item));
+            #line 15 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                Write(item.Distance);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                \r\n                <dt>Employer satisfaction:</dt>\r\n            " +
-"    <dd");
+WriteLiteral(" miles away</dd>\r\n");
+
+            
+            #line 16 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                
+            
+            #line default
+            #line hidden
+            
+            #line 16 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                 if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
+                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <dd");
+
+WriteLiteral(" class=\"address\"");
+
+WriteLiteral(">Training can take place at your location.</dd>\r\n");
+
+            
+            #line 19 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                }
+                else
+                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <dd");
+
+WriteLiteral(" class=\"address\"");
+
+WriteLiteral(">");
+
+            
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                   Write(item.LocationName);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                      Write(item.Address.Address1);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                             Write(item.Address.Address2);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                                    Write(item.Address.County);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                                                         Write(item.Address.Postcode);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</dd>\r\n");
+
+            
+            #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                <dt>Employer satisfaction:</dt>\r\n                <dd");
 
 WriteLiteral(" class=\"employer-satisfaction\"");
 
@@ -217,7 +188,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 18 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 27 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(item.EmployerSatisfactionMessage);
 
             
@@ -233,7 +204,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 31 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(item.LearnerSatisfactionMessage);
 
             
@@ -242,14 +213,11 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n        </article>\r\n");
 
             
-            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 35 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     }
-
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
         }
     }
 }
