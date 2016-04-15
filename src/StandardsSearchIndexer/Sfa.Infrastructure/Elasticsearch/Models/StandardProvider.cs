@@ -18,7 +18,7 @@ namespace Sfa.Infrastructure.Elasticsearch.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string ContactUsUrl { get; set; }
-        public string StandardInfoUrl { get; set; }
+        public string ApprenticeshipInfoUrl { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Include)]
         public double? LearnerSatisfaction { get; set; }

@@ -153,7 +153,7 @@
             Assert.That(document.Phone, Is.EqualTo("12324-5678"));
             Assert.That(document.Email, Is.EqualTo("test@test.com"));
             Assert.That(document.ContactUsUrl, Is.EqualTo("http://contact-us.com"));
-            Assert.That(document.StandardInfoUrl, Is.EqualTo("http://standard-info.com")); // TODO: LWA This property is badly named.
+            Assert.That(document.ApprenticeshipInfoUrl, Is.EqualTo("http://standard-info.com")); // TODO: LWA This property is badly named.
             Assert.That(document.LearnerSatisfaction, Is.EqualTo(8.2));
             Assert.That(document.EmployerSatisfaction, Is.EqualTo(9.2));
             Assert.That(document.DeliveryModes, Is.EquivalentTo(new string[] { "BlockRelease", "DayRelease" }));
@@ -189,7 +189,7 @@
             Assert.That(document.Phone, Is.EqualTo("5555-5678"));
             Assert.That(document.Email, Is.EqualTo("test@test.com"));
             Assert.That(document.ContactUsUrl, Is.EqualTo("http://contact-us.com"));
-            Assert.That(document.StandardInfoUrl, Is.EqualTo("http://standard-info.com")); // TODO: LWA This property is badly named.
+            Assert.That(document.ApprenticeshipInfoUrl, Is.EqualTo("http://standard-info.com")); // TODO: LWA This property is badly named.
             Assert.That(document.LearnerSatisfaction, Is.EqualTo(8.2));
             Assert.That(document.EmployerSatisfaction, Is.EqualTo(9.2));
             Assert.That(document.DeliveryModes, Is.EquivalentTo(new string[] { "BlockRelease", "DayRelease" }));

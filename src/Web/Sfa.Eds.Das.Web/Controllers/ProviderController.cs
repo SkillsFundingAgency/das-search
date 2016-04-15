@@ -91,13 +91,13 @@
             if (viewModel.Training == TrainingEnum.Standard)
             {
                     viewModel.SearchResultLink =
-                        Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("StandardResults", "Provider"));
+                        Request.UrlReferrer.GetProviderApprenticeshipDetailBackUrl(Url.Action("StandardResults", "Provider"));
             }
 
             if (viewModel.Training == TrainingEnum.Framework)
             {
                 viewModel.SearchResultLink =
-                        Request.UrlReferrer.GetProviderSearchResultUrl(Url.Action("FrameworkResults", "Provider"));
+                        Request.UrlReferrer.GetProviderApprenticeshipDetailBackUrl(Url.Action("FrameworkResults", "Provider"));
             }
 
             return View(viewModel);

@@ -41,7 +41,7 @@ namespace Sfa.Eds.Das.Infrastructure.Mapping
                            Apprenticeship =
                                new ApprenticeshipBasic
                                    {
-                                       ApprenticeshipInfoUrl = item.StandardInfoUrl,
+                                       ApprenticeshipInfoUrl = item.ApprenticeshipInfoUrl,
                                        ApprenticeshipMarketingInfo =
                                            item.ApprenticeshipMarketingInfo
                                    },
