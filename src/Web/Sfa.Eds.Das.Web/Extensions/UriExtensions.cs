@@ -25,15 +25,5 @@
 
             return new LinkViewModel { Title = "Back to search page", Url = action };
         }
-
-        public static LinkViewModel GetProviderApprenticeshipDetailBackUrl(this Uri urlReferrer, string action)
-        {
-            if (urlReferrer != null && (urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?apprenticeshipid") || urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?frameworkid")))
-            {
-                return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
-            }
-
-            return new LinkViewModel { Title = "Back to search page", Url = action };
-        }
     }
 }
