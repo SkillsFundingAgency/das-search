@@ -137,14 +137,57 @@
         }
 
         [Test]
-        public void ShouldShowJustEmployerLocationIfDeliveryModeContainsEmployerLocation()
+        public void ShouldShowTrainingLocationIfDeliveryModeContainsEmployerLocationButItIsNotTheOnlyOne()
         {
             var page = new StandardProviderInformation();
             var item = new ProviderResultItemViewModel
             {
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
-                Address = new Address()
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                }
+            };
+
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test name",
+                Hits = new List<ProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result dl dt").Should().Be("Distance:");
+
+            GetPartial(html, ".result dl dd").Should().Be("0 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 County PostCode");
+        }
+
+        [Test]
+        public void ShouldShowTrainingLocationIfDeliveryModeContainsEmployerLocationAndItIsTheOnlyOne()
+        {
+            var page = new StandardProviderInformation();
+            var item = new ProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                }
             };
 
             var model = new ProviderStandardSearchResultViewModel

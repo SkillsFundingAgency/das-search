@@ -91,6 +91,7 @@
             }
 
             properties.Add("Application", "Sfa.Das.Indexer");
+            properties.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, message.ToString()) { Exception = exception };
 

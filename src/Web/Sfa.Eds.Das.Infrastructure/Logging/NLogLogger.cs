@@ -69,6 +69,7 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
             }
 
             properties.Add("Application", "Sfa.Das.Web");
+            properties.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, msg) { Exception = exception };
 

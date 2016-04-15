@@ -103,7 +103,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt>@title</dt>
         <dd id="@id" class="@cssClass">
-            @url
+            @Html.RenderAIfExists(@url, @url, $"{@cssClass}", "_blank")
         </dd>
     }
 }
