@@ -144,7 +144,7 @@
         }
 
         [Test]
-        public void ShouldShowJustEmployerLocationIfDeliveryModeContainsEmployerLocation()
+        public void ShouldShowTrainingAddressIfDeliveryModeContainsEmployerLocationButIsNotTheOnlOne()
         {
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
@@ -153,7 +153,52 @@
                 DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
                 Distance = 3,
                 Website = "http://www.trainingprovider.co.uk",
-                Address = new Address()
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                }
+            };
+
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result dl dt").Should().Be("Distance:");
+            GetPartial(html, ".result dl dd").Should().Be("3 miles away");
+
+            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 County PostCode");
+        }
+
+        [Test]
+        public void ShouldShowEmployerLocationIfDeliveryModeContainsEmployerLocationAndIsTheOnlyOne()
+        {
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                Distance = 3,
+                Website = "http://www.trainingprovider.co.uk",
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                }
             };
 
             var model = new ProviderFrameworkSearchResultViewModel
