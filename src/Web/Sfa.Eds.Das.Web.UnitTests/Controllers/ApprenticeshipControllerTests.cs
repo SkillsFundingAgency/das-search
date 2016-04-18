@@ -23,7 +23,7 @@
         public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()
         {
             // Arrange
-            var mockSearchService = new Mock<IStandardSearchService>();
+            var mockSearchService = new Mock<IApprenticeshipSearchService>();
             var mockLogger = new Mock<ILog>();
             mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new ApprenticeshipSearchResults());
 
@@ -45,7 +45,7 @@
         public void Search_WhenSearchResponseReturnsANull_ModelShouldContainTheSearchKeyword()
         {
             // Arrange
-            var mockSearchService = new Mock<IStandardSearchService>();
+            var mockSearchService = new Mock<IApprenticeshipSearchService>();
             var mockLogger = new Mock<ILog>();
             mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(value: null);
 

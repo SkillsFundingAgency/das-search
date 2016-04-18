@@ -13,7 +13,7 @@
             var search = new Mock<ISearchProvider>();
             search.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
 
-            var standardSearchProvider = new StandardSearchService(search.Object);
+            var standardSearchProvider = new ApprenticeshipSearchService(search.Object);
 
             standardSearchProvider.SearchByKeyword("test", 1, 2);
 
@@ -26,7 +26,7 @@
             var search = new Mock<ISearchProvider>();
             search.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
 
-            var standardSearchProvider = new StandardSearchService(search.Object);
+            var standardSearchProvider = new ApprenticeshipSearchService(search.Object);
 
             standardSearchProvider.SearchByKeyword("test", 0, 0);
 

@@ -2,11 +2,11 @@
 {
     using Sfa.Das.ApplicationServices.Models;
 
-    public sealed class StandardSearchService : IStandardSearchService
+    public sealed class ApprenticeshipSearchService : IApprenticeshipSearchService
     {
         private readonly ISearchProvider _searchProvider;
 
-        public StandardSearchService(ISearchProvider searchProvider)
+        public ApprenticeshipSearchService(ISearchProvider searchProvider)
         {
             _searchProvider = searchProvider;
         }

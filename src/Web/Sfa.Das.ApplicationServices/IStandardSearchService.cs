@@ -2,7 +2,7 @@
 {
     using Sfa.Das.ApplicationServices.Models;
 
-    public interface IStandardSearchService
+    public interface IApprenticeshipSearchService
     {
         ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take);
     }
