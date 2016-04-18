@@ -34,14 +34,14 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel>
     {
 
-#line 51 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 60 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string id, string item, string unit = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 52 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 61 "..\..\Views\Apprenticeship\SearchResults.cshtml"
  
 if (!string.IsNullOrEmpty(item))
 {
@@ -52,7 +52,7 @@ if (!string.IsNullOrEmpty(item))
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 55 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 64 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -62,20 +62,20 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 1879), Tuple.Create("\"", 1890)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2093), Tuple.Create("\"", 2104)
 
-#line 56 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 1887), Tuple.Create<System.Object, System.Int32>(id
+#line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create("", 2101), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 1887), false)
+, 2101), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 56 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -84,7 +84,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 56 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
     WriteTo(__razor_helper_writer, unit);
 
 
@@ -93,7 +93,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 57 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 66 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 }
 
 
@@ -101,7 +101,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 67 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 }
 #line default
 #line hidden
@@ -282,6 +282,27 @@ WriteLiteral("\r\n                        </dl>\r\n                </article>\r\
             #line default
             #line hidden
 WriteLiteral("        </div>\r\n    </div>\r\n</main>\r\n\r\n");
+
+            
+            #line 51 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+ if (Model.TotalResults == 0)
+{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <script>\r\n        window.onload = function() {\r\n            SearchAndShortlis" +
+"t.analytics.pushEventValue(\"Apprenticeship Search\", \"No results\");\r\n        }\r\n " +
+"   </script>\r\n");
+
+            
+            #line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+}
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
 
         }
     }
