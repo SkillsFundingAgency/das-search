@@ -87,7 +87,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 Name = hit.Source.Name,
                 Phone = hit.Source.Phone,
                 StandardCode = hit.Source.StandardCode,
-                StandardInfoUrl = hit.Source.StandardInfoUrl,
+                ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
                 Website = hit.Source.Website,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
             }).ToList();
@@ -136,7 +136,7 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
                 FrameworkId = hit.Source.FrameworkId,
                 FrameworkCode = hit.Source.FrameworkCode,
                 PathwayCode = hit.Source.PathwayCode,
-                StandardInfoUrl = hit.Source.StandardInfoUrl,
+                ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
                 Level = hit.Source.Level,
                 Website = hit.Source.Website,
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0

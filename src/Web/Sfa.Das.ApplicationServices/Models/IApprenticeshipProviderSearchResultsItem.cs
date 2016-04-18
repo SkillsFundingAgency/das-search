@@ -20,7 +20,7 @@ namespace Sfa.Das.ApplicationServices.Models
         string ApprenticeshipMarketingInfo { get; set; }
         string Name { get; set; }
         string Phone { get; set; }
-        string StandardInfoUrl { get; set; }
+        string ApprenticeshipInfoUrl { get; set; }
         string UkPrn { get; set; }
         string Website { get; set; }
     }

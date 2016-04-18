@@ -13,80 +13,208 @@
     public sealed class ProviderDetailsPage : ViewTestBase
     {
         [Test]
-        public void ShouldNotShowProviderLocationWhenOnly100PercentEmployerLocation()
+        public void ShouldShowAllFieldsWhenEverythingIsOk()
         {
             var detail = new Detail();
+
             var model = new ProviderViewModel
             {
                 Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
                 Location = new Location
                 {
-                    LocationName = "Test venue name"
-                },
-                DeliveryModes = new List<string> { "100PercentEmployer" },
-                ApprenticeshipNameWithLevel = "Demo standard level 2",
-                ContactInformation = new ContactInformation(),
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                    LocationId = 1,
+                    LocationName = "Test location name"
                 },
                 Address = new Address
                 {
-                    Address1 = "Address1",
-                    Address2 = "Address2",
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
                     County = "County",
-                    Postcode = "Postcode",
+                    Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                DeliveryModes = new List<string> { "BlockRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
+            this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website course page");
+            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("Test apprenticeship info url");
+            this.GetPartial(html, ".providerContactTitle").Should().Contain("Website contact page");
+            this.GetPartial(html, ".providerContact").Should().Contain("Test contact url");
+            this.GetPartial(html, ".phone-title").Should().Contain("Phone");
+            this.GetPartial(html, ".phone").Should().Contain("Test phone");
+            this.GetPartial(html, ".email-title").Should().Contain("Email");
+            this.GetPartial(html, ".email").Should().Contain("Test email");
+            this.GetPartial(html, ".training-structure").Should().Contain("Training structure");
+            this.GetPartial(html, ".block-release").Should().Contain("block release");
+            this.GetPartial(html, ".training-location-title").Should().Contain("Training location");
+            this.GetPartial(html, ".training-location").Should().Contain("Test location name Address 1 Address 2 PostCode");
+        }
 
-            var locationText = GetPartial(html, "dl dd", 6);
+        [Test]
+        public void ShouldShowAllDeliveryModesProperly()
+        {
+            var detail = new Detail();
+
+            var model = new ProviderViewModel
+            {
+                Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, ".training-structure").Should().Contain("Training structure");
+            this.GetPartial(html, ".block-release").Should().Contain("block release");
+            this.GetPartial(html, ".hundred-percent-employer").Should().Contain("at your location");
+            this.GetPartial(html, ".day-release").Should().Contain("day release");
+        }
+
+        [Test]
+        public void ShouldShowAddressIfThereAreMoreDeliveryModesAppartFromEmployerLocation()
+        {
+            var detail = new Detail();
+
+            var model = new ProviderViewModel
+            {
+                Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, "dl dt", 6).Should().Contain("Training location");
+            var locationText = GetPartial(html, ".training-location");
+
+            locationText.Should().Contain(model.Location.LocationName);
+            locationText.Should().Contain(model.Address.Address1);
+            locationText.Should().Contain(model.Address.Address2);
+        }
+
+        [Test]
+        public void ShouldShowMessageIfEmployerLocationIsTheOnlyDeliveryMode()
+        {
+            var detail = new Detail();
+
+            var model = new ProviderViewModel
+            {
+                Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, "dl dt", 6).Should().Contain("Training location");
+            var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().NotContain(model.Location.LocationName);
             locationText.Should().NotContain(model.Address.Address1);
             locationText.Should().NotContain(model.Address.Address2);
             locationText.Should().Contain("Training will take place at your location");
-        }
-
-        [Test]
-        public void ShouldShowProviderLocationWhenMoreDeliveryModesAppartFrom100PercentEmployerLocation()
-        {
-            var detail = new Detail();
-            var model = new ProviderViewModel
-            {
-                Name = "Test name",
-                Location = new Location
-                {
-                    LocationName = "Test venue name"
-                },
-                DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
-                ApprenticeshipNameWithLevel = "Demo standard level 2",
-                ContactInformation = new ContactInformation(),
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
-                },
-                Address = new Address
-                {
-                    Address1 = "Address1",
-                    Address2 = "Address2",
-                    County = "County",
-                    Postcode = "Postcode",
-                    Town = "Town"
-                }
-            };
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
-
-            var locationText = GetPartial(html, "dl dd", 6);
-
-            locationText.Should().Contain(model.Location.LocationName);
-            locationText.Should().Contain(model.Address.Address1);
-            locationText.Should().Contain(model.Address.Address2);
         }
 
         [Test]
@@ -96,69 +224,47 @@
             var model = new ProviderViewModel
             {
                 Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
                 Location = new Location
                 {
-                    LocationName = "Test venue name"
-                },
-                DeliveryModes = new List<string> { "blockRelease" },
-                ApprenticeshipNameWithLevel = "Demo standard level 2",
-                ContactInformation = new ContactInformation(),
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                    LocationId = 1,
+                    LocationName = "Test location name"
                 },
                 Address = new Address
                 {
-                    Address1 = "Address1",
-                    Address2 = "Address2",
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
                     County = "County",
-                    Postcode = "Postcode",
+                    Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                DeliveryModes = new List<string> { "BlockRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
+            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipNameWithLevel);
 
-            var locationText = GetPartial(html, "dl dd", 6);
+            var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().Contain(model.Location.LocationName);
             locationText.Should().Contain(model.Address.Address1);
             locationText.Should().Contain(model.Address.Address2);
-        }
-
-        [Test]
-        public void ShouldShowDeliveryModesWithCorrectText()
-        {
-            var detail = new Detail();
-            var model = new ProviderViewModel
-            {
-                Name = "Test name",
-                Location = new Location
-                {
-                    LocationName = "Test venue name"
-                },
-                DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
-                ApprenticeshipNameWithLevel = "Demo standard level 2",
-                ContactInformation = new ContactInformation(),
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
-                },
-                Address = new Address
-                {
-                    Address1 = "Address1",
-                    Address2 = "Address2",
-                    County = "County",
-                    Postcode = "Postcode",
-                    Town = "Town"
-                }
-            };
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
-
-            GetPartial(html, "ul li").Should().Contain("at your location");
         }
 
         [Test]
@@ -168,35 +274,87 @@
             var model = new ProviderViewModel
             {
                 Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
                 Location = new Location
                 {
-                    LocationName = "Test venue name"
-                },
-                DeliveryModes = new List<string> { "100PercentEmployer", "dayRelease", "blockRelease" },
-                ProviderMarketingInfo = "Provider test marketing info",
-                ApprenticeshipNameWithLevel = "Demo standard level 2",
-                ContactInformation = new ContactInformation(),
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Apprenticeship info url test"
+                    LocationId = 1,
+                    LocationName = "Test location name"
                 },
                 Address = new Address
                 {
-                    Address1 = "Address1",
-                    Address2 = "Address2",
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
                     County = "County",
-                    Postcode = "Postcode",
+                    Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            var providerMArketingInfoHtml = GetPartial(html, "div div div p");
+            var providerMarketingInfoHtml = GetPartial(html, ".provider-marketing-info");
 
-            providerMArketingInfoHtml.Should().Contain(model.ProviderMarketingInfo);
-            GetPartial(html, "header h2").Should().Contain(model.ApprenticeshipNameWithLevel);
+            providerMarketingInfoHtml.Should().Contain(model.ProviderMarketingInfo);
+        }
 
-            GetPartial(html, "ul li").Should().Contain("at your location");
+        [Test]
+        public void ShouldShowApprenticeshipNameWithLevel()
+        {
+            var detail = new Detail();
+            var model = new ProviderViewModel
+            {
+                Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipNameWithLevel);
         }
     }
 }

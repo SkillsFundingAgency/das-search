@@ -104,6 +104,18 @@ namespace Sfa.Infrastructure.CourseDirectory.Models
                 {
                     PathwayCode = (int)pathwayCodeValue;
                 }
+
+                var frameworkInfoUrlValue = inputObject["frameworkInfoUrl"];
+                if (pathwayCodeValue != null && pathwayCodeValue.Type != JTokenType.Null)
+                {
+                    FrameworkInfoUrl = frameworkInfoUrlValue.ToString();
+                }
+
+                var marketingInfoValue = inputObject["marketingInfo"];
+                if (pathwayCodeValue != null && pathwayCodeValue.Type != JTokenType.Null)
+                {
+                    MarketingInfo = marketingInfoValue.ToString();
+                }
             }
         }
     }

@@ -144,7 +144,7 @@ namespace Sfa.Infrastructure.Elasticsearch
             documentToPopulate.Phone = apprenticeshipInformation.ContactInformation.Phone;
             documentToPopulate.Email = apprenticeshipInformation.ContactInformation.Email;
             documentToPopulate.ContactUsUrl = apprenticeshipInformation.ContactInformation.Website;
-            documentToPopulate.StandardInfoUrl = apprenticeshipInformation.InfoUrl;
+            documentToPopulate.ApprenticeshipInfoUrl = apprenticeshipInformation.InfoUrl;
             documentToPopulate.LearnerSatisfaction = provider.LearnerSatisfaction;
             documentToPopulate.EmployerSatisfaction = provider.EmployerSatisfaction;
             documentToPopulate.DeliveryModes = GenerateListOfDeliveryModes(deliveryInformation.DeliveryModes);

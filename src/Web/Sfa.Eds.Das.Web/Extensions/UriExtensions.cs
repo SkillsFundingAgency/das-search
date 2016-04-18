@@ -16,7 +16,7 @@
             return new LinkViewModel { Title = "Back to search page", Url = action };
         }
 
-        public static LinkViewModel GetProviderSearchResultUrl(this Uri urlReferrer, string action)
+        public static LinkViewModel GetProviderSearchResultBackUrl(this Uri urlReferrer, string action)
         {
             if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?apprenticeshipid") && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("&postcode"))
             {

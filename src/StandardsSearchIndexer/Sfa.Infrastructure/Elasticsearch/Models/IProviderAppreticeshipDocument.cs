@@ -14,7 +14,7 @@ namespace Sfa.Infrastructure.Elasticsearch.Models
         string Phone { get; set; }
         string Email { get; set; }
         string ContactUsUrl { get; set; }
-        string StandardInfoUrl { get; set; }
+        string ApprenticeshipInfoUrl { get; set; }
         double? LearnerSatisfaction { get; set; }
         double? EmployerSatisfaction { get; set; }
         string[] DeliveryModes { get; set; }
