@@ -5,8 +5,7 @@ namespace Sfa.Das.ApplicationServices
 {
     public interface ISearchProvider
     {
-        ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take);
-
+        ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take, ApprenticeshipSearchSortBy sortBy);
         SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates);
         SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates);
     }
