@@ -30,7 +30,10 @@
                         <h2 class="result-title">
                             @if (item.StandardId != 0)
                             {
-                                @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null)
+                                <span>
+                                    @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null)
+                                    NEW
+                                </span>
                             }
                             else
                             {

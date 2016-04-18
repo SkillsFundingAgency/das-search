@@ -7,7 +7,8 @@
     }
     else if (Model.TotalResults == 0)
     {
-        @RenderZeroResult();
+        @RenderZeroResult()
+        ;
     }
     else if (string.IsNullOrEmpty(Model.SearchTerm) || Model.SearchTerm == "*")
     {
@@ -22,6 +23,7 @@
         @RenderMessage()
     }
 </div>
+
 @helper  RenderErrorMessage()
 {
     <p id="result-summary" class="results-error">
@@ -39,12 +41,14 @@
     <p id="result-summary">
         All apprenticeships.
     </p>
+    @RenderStandardMessage()
 }
 @helper  RenderMessageOneResult()
 {
     <p id="result-summary" class="results-one">
         There is <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
+    @RenderStandardMessage()
 }
 
 @helper  RenderMessage()
@@ -52,4 +56,13 @@
     <p id="result-summary">
         There are <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
+    @RenderStandardMessage()
 }
+
+@helper RenderStandardMessage()
+{
+    <p>
+        Apprenticeships labelled <strong>new</strong> are job specific standards, developed by groups of employers.
+    </p>
+}
+

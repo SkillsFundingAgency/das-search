@@ -34,14 +34,14 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     public partial class SearchResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel>
     {
 
-#line 60 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 63 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string id, string item, string unit = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 61 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 64 "..\..\Views\Apprenticeship\SearchResults.cshtml"
  
 if (!string.IsNullOrEmpty(item))
 {
@@ -52,7 +52,7 @@ if (!string.IsNullOrEmpty(item))
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 64 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 67 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -62,20 +62,20 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2098), Tuple.Create("\"", 2109)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2224), Tuple.Create("\"", 2235)
 
-#line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2106), Tuple.Create<System.Object, System.Int32>(id
+#line 68 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create("", 2232), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2106), false)
+, 2232), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 68 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -84,7 +84,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 68 "..\..\Views\Apprenticeship\SearchResults.cshtml"
     WriteTo(__razor_helper_writer, unit);
 
 
@@ -93,7 +93,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 66 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 69 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 }
 
 
@@ -101,7 +101,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 67 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 70 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 }
 #line default
 #line hidden
@@ -209,20 +209,26 @@ WriteLiteral(">\r\n");
             #line 31 "..\..\Views\Apprenticeship\SearchResults.cshtml"
                              if (item.StandardId != 0)
                             {
-                                
-            
-            #line default
-            #line hidden
-            
-            #line 33 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                           Write(Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null));
 
             
             #line default
             #line hidden
+WriteLiteral("                                <span>\r\n");
+
+WriteLiteral("                                    ");
+
             
-            #line 33 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                                                                                               
+            #line 34 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+                               Write(Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    NEW\r\n                                </span" +
+">\r\n");
+
+            
+            #line 37 "..\..\Views\Apprenticeship\SearchResults.cshtml"
                             }
                             else
                             {
@@ -231,14 +237,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 40 "..\..\Views\Apprenticeship\SearchResults.cshtml"
                            Write(Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null));
 
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 40 "..\..\Views\Apprenticeship\SearchResults.cshtml"
                                                                                                                                  
                             }
 
@@ -255,7 +261,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 42 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 45 "..\..\Views\Apprenticeship\SearchResults.cshtml"
                        Write(GetStandardDetailItem("Level", "level", item.Level));
 
             
@@ -266,7 +272,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                            ");
 
             
-            #line 43 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 46 "..\..\Views\Apprenticeship\SearchResults.cshtml"
                        Write(GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage));
 
             
@@ -275,7 +281,7 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n                        </dl>\r\n                </article>\r\n");
 
             
-            #line 46 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 49 "..\..\Views\Apprenticeship\SearchResults.cshtml"
             }
 
             
@@ -284,7 +290,7 @@ WriteLiteral("\r\n                        </dl>\r\n                </article>\r\
 WriteLiteral("        </div>\r\n    </div>\r\n</main>\r\n\r\n");
 
             
-            #line 51 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 54 "..\..\Views\Apprenticeship\SearchResults.cshtml"
  if (Model.TotalResults == 0)
 {
 
@@ -296,7 +302,7 @@ WriteLiteral("    <script>\r\n        window.onload = function() {\r\n          
 " }\r\n    </script>\r\n");
 
             
-            #line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 61 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 }
 
             
