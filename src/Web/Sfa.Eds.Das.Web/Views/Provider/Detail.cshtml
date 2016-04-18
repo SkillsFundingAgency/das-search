@@ -17,7 +17,7 @@
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
-                <div id="marketing">
+                <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
                 
@@ -39,13 +39,13 @@
 
     <section>
         <header>
-            <h2 class="heading-large">
+            <h2 class="heading-large apprenticeship-name-level">
                 @Model.ApprenticeshipNameWithLevel
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", "course-link", @Model.Apprenticeship.ApprenticeshipInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", "contact-link", @Model.ContactInformation.ContactUsUrl)
+            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl)
+            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl)
             @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
             @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
             @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
@@ -66,15 +66,15 @@
 {
 if (@Model != null)
 {
-        <dt>@title</dt>
+        <dt class="training-location-title">@title</dt>
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-            <dd id="training-location">Training will take place at your location</dd>
+            <dd id="training-location" class="training-location">Training will take place at your location</dd>
     }
     else
     {
-            <dd id="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+        <dd id="training-location" class="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
     }
 }
 }
@@ -83,8 +83,8 @@ if (@Model != null)
 {
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
-        <dt>@title</dt>
-        <dd id="@id">@Html.Raw(item)</dd>
+        <dt class="phone-title">@title</dt>
+        <dd id="@id" class="phone">@Html.Raw(item)</dd>
     }
 }
 
@@ -92,17 +92,17 @@ if (@Model != null)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-        <dt>@title</dt>
-        <dd id="@id"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+        <dt class="email-title">@title</dt>
+        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
 }
 }
 
-@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string id, string url, bool hideIfEmpty = false)
+@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string idTitle, string id, string url, bool hideIfEmpty = false)
 {
     if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
     {
-        <dt>@title</dt>
-        <dd id="@id" class="@cssClass">
+        <dt class="@idTitle">@title</dt>
+        <dd class="@cssClass @id">
             @url
         </dd>
     }
@@ -148,7 +148,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
     if (items != null)
     {
-        <dt>@title</dt>
+        <dt class="training-structure">@title</dt>
         <dd id="delivery-modes">
             <ul>
                 @foreach (var item in items)
@@ -156,7 +156,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     switch (item)
                     {
                         case "100PercentEmployer":
-                            <li class="100-percent-employer">@Html.Raw("at your location")</li>
+                            <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
                             break;
                         case "BlockRelease":
                             <li class="block-release">@Html.Raw("block release")</li>
