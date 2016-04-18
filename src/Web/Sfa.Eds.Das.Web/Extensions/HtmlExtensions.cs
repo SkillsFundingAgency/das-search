@@ -12,11 +12,6 @@
                 return new MvcHtmlString(string.Empty);
             }
 
-            if (!source.Contains("http://"))
-            {
-                source = $"http://{source}";
-            }
-
             var html = $"<a href=\"{source}\" target=\"{target}\" class=\"{classes}\">{title}</a>";
 
             return new MvcHtmlString(html);

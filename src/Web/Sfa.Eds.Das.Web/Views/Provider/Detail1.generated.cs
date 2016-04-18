@@ -350,7 +350,7 @@ WriteLiteralTo(__razor_helper_writer, "            ");
 
 
 #line 109 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Html.RenderAIfExists(@url, @url, $"{cssClass} {classIdentifier}", "_blank"));
+WriteTo(__razor_helper_writer, Html.RenderAIfExists(@url, $"http://{url}", $"{cssClass} {classIdentifier}", "_blank"));
 
 
 #line default

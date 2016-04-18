@@ -106,7 +106,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt class="@classTitle">@title</dt>
         <dd>
-            @Html.RenderAIfExists(@url, @url, $"{cssClass} {classIdentifier}", "_blank")
+            @Html.RenderAIfExists(@url, $"http://{url}", $"{cssClass} {classIdentifier}", "_blank")
         </dd>
     }
 }
