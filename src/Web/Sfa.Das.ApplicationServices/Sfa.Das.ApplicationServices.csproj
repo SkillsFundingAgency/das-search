@@ -54,7 +54,7 @@
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProviderSearchService.cs" />
-    <Compile Include="IStandardSearchService.cs" />
+    <Compile Include="IApprenticeshipSearchService.cs" />
     <Compile Include="ISearchProvider.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />

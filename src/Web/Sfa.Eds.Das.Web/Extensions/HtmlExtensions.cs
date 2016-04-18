@@ -5,7 +5,12 @@
 
     public static class HtmlExtensions
     {
-        public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes, string target = "_self")
+        public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes)
+        {
+            return RenderAIfExists(htmlHelper, title, source, classes, "_self");
+        }
+
+        public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes, string target)
         {
             if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(title))
             {

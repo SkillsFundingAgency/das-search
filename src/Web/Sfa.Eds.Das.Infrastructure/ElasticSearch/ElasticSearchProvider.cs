@@ -46,24 +46,6 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             };
         }
 
-        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int skip, int take, string formattedKeywords)
-        {
-            return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
-                    .Index(_applicationSettings.ApprenticeshipIndexAlias)
-                    .Type(Types.Parse("standarddocument,frameworkdocument"))
-                    .Skip(skip)
-                    .Take(take)
-                    .Query(q => q
-                        .QueryString(qs => qs
-                            .Fields(fs => fs
-                                .Field(f => f.Title)
-                                .Field(p => p.JobRoles)
-                                .Field(p => p.Keywords)
-                                .Field(p => p.FrameworkName)
-                                .Field(p => p.PathwayName))
-                            .Query(formattedKeywords)));
-        }
-
         public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint)
         {
             var qryStr = CreateStandardProviderRawQuery(code.ToString(), geoPoint);
@@ -159,6 +141,24 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             }
 
             return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total };
+        }
+
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int skip, int take, string formattedKeywords)
+        {
+            return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
+                    .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                    .Type(Types.Parse("standarddocument,frameworkdocument"))
+                    .Skip(skip)
+                    .Take(take)
+                    .Query(q => q
+                        .QueryString(qs => qs
+                            .Fields(fs => fs
+                                .Field(f => f.Title)
+                                .Field(p => p.JobRoles)
+                                .Field(p => p.Keywords)
+                                .Field(p => p.FrameworkName)
+                                .Field(p => p.PathwayName))
+                            .Query(formattedKeywords)));
         }
 
         private string CreateStandardProviderRawQuery(string code, Coordinate location)

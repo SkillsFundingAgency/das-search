@@ -96,6 +96,7 @@
     <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
     <Compile Include="Elasticsearch\StandardRepository.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
     <Compile Include="Mapping\IFrameworkMapping.cs" />
