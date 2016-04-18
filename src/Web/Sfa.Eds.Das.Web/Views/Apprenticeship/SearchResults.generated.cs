@@ -62,14 +62,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2093), Tuple.Create("\"", 2104)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2098), Tuple.Create("\"", 2109)
 
 #line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2101), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2106), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2101), false)
+, 2106), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -292,8 +292,8 @@ WriteLiteral("        </div>\r\n    </div>\r\n</main>\r\n\r\n");
             #line default
             #line hidden
 WriteLiteral("    <script>\r\n        window.onload = function() {\r\n            SearchAndShortlis" +
-"t.analytics.pushEventValue(\"Apprenticeship Search\", \"No results\");\r\n        }\r\n " +
-"   </script>\r\n");
+"t.analytics.pushEvent(\"Apprenticeship Search\", \"No results\", \"Search\");\r\n       " +
+" }\r\n    </script>\r\n");
 
             
             #line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"

@@ -128,17 +128,18 @@ WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
 
             
             #line 36 "..\..\Views\Provider\StandardResults.cshtml"
- if (Model.TotalResults == 0){
+ if (Model.TotalResults == 0)
+{
 
             
             #line default
             #line hidden
 WriteLiteral("    <script>\r\n        window.onload = function() {    \r\n            SearchAndShor" +
-"tlist.analytics.pushEventValue(\"Provider Search\", \"No results\");\r\n        }\r\n   " +
-" </script> \r\n");
+"tlist.analytics.pushEvent(\"Provider Search\", \"No results\", \"Search\");\r\n        }" +
+"\r\n    </script> \r\n");
 
             
-            #line 42 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 43 "..\..\Views\Provider\StandardResults.cshtml"
 }
 
             
