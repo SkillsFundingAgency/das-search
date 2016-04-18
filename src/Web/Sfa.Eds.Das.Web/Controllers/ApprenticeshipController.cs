@@ -72,7 +72,7 @@
             return View(viewModel);
         }
 
-        public ActionResult Framework(int id, string hasError)
+        public ActionResult Framework(int id, bool? hasError)
         {
             var frameworkResult = _getFrameworks.GetFrameworkById(id);
 
@@ -86,7 +86,7 @@
 
             var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
 
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.HasError = hasError.HasValue ? hasError.Value : false;
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
