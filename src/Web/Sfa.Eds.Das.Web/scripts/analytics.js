@@ -1,10 +1,10 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (analytics) {
 
-    analytics.pushEvent = function (category, text) {
+    analytics.pushEvent = function (category, text, action) {
         ga("send", "event", {
             "eventCategory": category,
-            "eventAction": "Click",
+            "eventAction": action || "Click",
             "eventLabel": text
         });
     },
@@ -23,19 +23,19 @@
             analytics.pushEvent("Start page", "Start button");
         });
 
-        $("data-list a[href^=mailto], .data-list a.course-link, .data-list a.contact-link").on("click", function () {
+        $(".provider-detail .data-list a[href^=mailto], .provider-detail .data-list a.course-link, .provider-detail .data-list a.contact-link").on("click", function () {
             analytics.pushEvent("Provider Details", "Contact link");
         });
 
-        $(".data-list a[href^=mailto]").on("click", function () {
+        $(".provider-detail .data-list a[href^=mailto]").on("click", function () {
             analytics.pushEvent("Provider Details", "Email");
         });
 
-        $("a.course-link").on("click", function () {
+        $(".provider-detail a.course-link").on("click", function () {
             analytics.pushEvent("Provider Details", "Website");
         });
 
-        $("a.contact-link").on("click", function () {
+        $(".provider-detail a.contact-link").on("click", function () {
             analytics.pushEvent("Provider Details", "Contact page");
         });
     };

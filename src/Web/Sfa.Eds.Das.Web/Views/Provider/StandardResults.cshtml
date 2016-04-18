@@ -33,10 +33,11 @@
     </div>
 </main>
 
-@if (Model.TotalResults == 0){
+@if (Model.TotalResults == 0)
+{
     <script>
         window.onload = function() {    
-            SearchAndShortlist.analytics.pushEventValue("Provider Search", "No results");
+            SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
         }
     </script> 
 }
