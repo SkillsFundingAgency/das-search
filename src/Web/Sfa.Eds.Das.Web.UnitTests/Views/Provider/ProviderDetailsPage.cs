@@ -55,17 +55,19 @@
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website course page");
-            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("Test apprenticeship info url");
+            this.GetPartial(html, ".apprenticeshipContact").Should().Contain(model.Apprenticeship.ApprenticeshipInfoUrl);
             this.GetPartial(html, ".providerContactTitle").Should().Contain("Website contact page");
-            this.GetPartial(html, ".providerContact").Should().Contain("Test contact url");
+            this.GetPartial(html, ".providerContact").Should().Contain(model.ContactInformation.ContactUsUrl);
             this.GetPartial(html, ".phone-title").Should().Contain("Phone");
-            this.GetPartial(html, ".phone").Should().Contain("Test phone");
+            this.GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
             this.GetPartial(html, ".email-title").Should().Contain("Email");
-            this.GetPartial(html, ".email").Should().Contain("Test email");
+            this.GetPartial(html, ".email").Should().Contain(model.ContactInformation.Email);
             this.GetPartial(html, ".training-structure").Should().Contain("Training structure");
             this.GetPartial(html, ".block-release").Should().Contain("block release");
             this.GetPartial(html, ".training-location-title").Should().Contain("Training location");
             this.GetPartial(html, ".training-location").Should().Contain("Test location name Address 1 Address 2 PostCode");
+            this.GetPartial(html, ".disclaimer").Should().Contain("Posted by");
+            this.GetPartial(html, ".disclaimer").Should().Contain(model.Name);
         }
 
         [Test]
