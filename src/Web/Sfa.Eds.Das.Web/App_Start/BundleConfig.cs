@@ -10,8 +10,7 @@
                       "~/Content/dist/css/screen.min.css"));
 
             bundles.Add(new ScriptBundle("~/static_js_footer").Include(
-                    "~/scripts/analytics.js"
-                ));
+                    "~/scripts/analytics.js"));
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Sfa.Eds.Das.Web.ViewModels
 {
-    public enum TrainingEnum
+    public enum ApprenticeshipTrainingType
     {
         Framework,
         Standard

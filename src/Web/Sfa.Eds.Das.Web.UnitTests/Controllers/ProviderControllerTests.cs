@@ -103,7 +103,7 @@
             var stubViewModel = new ProviderViewModel();
 
             _mockViewModelFactory.Setup(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()))
-                .Returns(new ProviderViewModel { Training = TrainingEnum.Framework });
+                .Returns(new ProviderViewModel { Training = ApprenticeshipTrainingType.Framework });
 
             var controller = new ProviderController(
                 _mockProviderSearchService.Object,

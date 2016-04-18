@@ -27,6 +27,6 @@ namespace Sfa.Eds.Das.Web.ViewModels
 
         public LinkViewModel SearchResultLink { get; set; }
 
-        public TrainingEnum Training { get; set; }
+        public ApprenticeshipTrainingType Training { get; set; }
     }
 }

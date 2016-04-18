@@ -4,7 +4,6 @@
 
     public sealed class StartController : Controller
     {
-
         public ActionResult Start()
         {
             return View();

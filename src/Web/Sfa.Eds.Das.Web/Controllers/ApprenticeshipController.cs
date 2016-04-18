@@ -18,12 +18,12 @@
 
         private readonly IMappingService _mappingService;
 
-        private readonly IStandardSearchService _searchService;
+        private readonly IApprenticeshipSearchService _searchService;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
 
         public ApprenticeshipController(
-            IStandardSearchService searchService,
+            IApprenticeshipSearchService searchService,
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
             ILog logger,

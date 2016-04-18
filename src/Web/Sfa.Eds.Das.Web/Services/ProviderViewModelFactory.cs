@@ -43,7 +43,7 @@ namespace Sfa.Das.Web.Services
                 if (model != null)
                 {
                     viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
-                    viewModel.Training = TrainingEnum.Standard;
+                    viewModel.Training = ApprenticeshipTrainingType.Standard;
 
                     var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
                     viewModel.ApprenticeshipNameWithLevel = string.Concat(
@@ -63,7 +63,7 @@ namespace Sfa.Das.Web.Services
                 if (model != null)
                 {
                     viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
-                    viewModel.Training = TrainingEnum.Framework;
+                    viewModel.Training = ApprenticeshipTrainingType.Framework;
                     var frameworkId = Convert.ToInt32(criteria.FrameworkId);
 
                     var apprenticeshipData = _getFrameworks.GetFrameworkById(frameworkId);
