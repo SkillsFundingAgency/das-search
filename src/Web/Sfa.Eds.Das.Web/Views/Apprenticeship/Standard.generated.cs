@@ -227,14 +227,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6792), Tuple.Create("\"", 6800)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6878), Tuple.Create("\"", 6886)
 
 #line 169 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6797), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 6883), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6797), false)
+, 6883), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -280,14 +280,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6988), Tuple.Create("\"", 7002)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7074), Tuple.Create("\"", 7088)
 
 #line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6995), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 7081), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 6995), false)
+, 7081), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -525,7 +525,7 @@ WriteLiteral(" id=\"postcode\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteLiteral(" class=\"text-box form-control\"");
+WriteLiteral(" class=\"text-box form-control postcode-search-box\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
@@ -533,7 +533,7 @@ WriteLiteral(" placeholder=\"\"");
 
 WriteLiteral(">\r\n                            </div>\r\n                            <input");
 
-WriteLiteral(" class=\"button margin-top-x2\"");
+WriteLiteral(" class=\"button margin-top-x2 postcode-search-button\"");
 
 WriteLiteral(" id=\"submit-postcode\"");
 
@@ -726,15 +726,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4314), Tuple.Create("\"", 4367)
-, Tuple.Create(Tuple.Create("", 4322), Tuple.Create("form-group", 4322), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 4357), Tuple.Create("\"", 4410)
+, Tuple.Create(Tuple.Create("", 4365), Tuple.Create("form-group", 4365), true)
             
             #line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create(" ", 4332), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+, Tuple.Create(Tuple.Create(" ", 4375), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 4333), false)
+, 4376), false)
 );
 
 WriteLiteral(">\r\n                        <label");
@@ -772,14 +772,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4884), Tuple.Create("\"", 4909)
+WriteAttribute("value", Tuple.Create(" value=\"", 4927), Tuple.Create("\"", 4952)
             
             #line 104 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                 , Tuple.Create(Tuple.Create("", 4892), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                                                 , Tuple.Create(Tuple.Create("", 4935), Tuple.Create<System.Object, System.Int32>(Model.StandardId
             
             #line default
             #line hidden
-, 4892), false)
+, 4935), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -790,7 +790,7 @@ WriteLiteral(" id=\"postcode2\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteLiteral(" class=\"text-box form-control\"");
+WriteLiteral(" class=\"text-box form-control postcode-search-box\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
@@ -798,7 +798,7 @@ WriteLiteral(" placeholder=\"\"");
 
 WriteLiteral(">\r\n                    </div>\r\n                    <input");
 
-WriteLiteral(" class=\"button margin-top-x2\"");
+WriteLiteral(" class=\"button margin-top-x2 postcode-search-button\"");
 
 WriteLiteral(" id=\"submit-postcode2\"");
 
