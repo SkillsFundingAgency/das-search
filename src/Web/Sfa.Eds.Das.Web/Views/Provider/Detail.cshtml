@@ -19,6 +19,9 @@
                 </h1>
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
+                    <p class="disclaimer">
+                        <i>Posted by @Model.Name</i>
+                    </p>
                 </div>
                 
             </div>
