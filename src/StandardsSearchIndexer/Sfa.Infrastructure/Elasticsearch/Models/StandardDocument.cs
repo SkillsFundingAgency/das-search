@@ -15,6 +15,10 @@
         public string IntroductoryText { get; set; }
         [String(Analyzer = "english")]
         public IEnumerable<string> JobRoles { get; set; }
+
+        [String(Analyzer = "english")]
+        public IEnumerable<string> Keywords { get; set; }
+
         public string OverviewOfRole { get; set; }
         public string ProfessionalRegistration { get; set; }
         public string Qualifications { get; set; }

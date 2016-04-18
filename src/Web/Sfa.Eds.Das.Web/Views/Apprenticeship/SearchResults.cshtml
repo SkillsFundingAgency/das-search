@@ -48,6 +48,15 @@
     </div>
 </main>
 
+@if (Model.TotalResults == 0)
+{
+    <script>
+        window.onload = function() {
+            SearchAndShortlist.analytics.pushEvent("Apprenticeship Search", "No results", "Search");
+        }
+    </script>
+}
+
 @helper GetStandardDetailItem(string title, string id, string item, string unit = "")
 {
 if (!string.IsNullOrEmpty(item))
