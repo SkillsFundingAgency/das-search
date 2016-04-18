@@ -32,6 +32,7 @@ namespace Sfa.Infrastructure.Elasticsearch
                     StandardId = standard.Id,
                     Title = standard.Title,
                     JobRoles = standard.JobRoles,
+                    Keywords = standard.Keywords,
                     Level = standard.NotionalEndLevel,
                     PdfFileName = standard.PdfFileName,
                     StandardPdf = standard.StandardPdfUrl,
