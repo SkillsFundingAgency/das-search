@@ -205,7 +205,7 @@
             Assert.That(document.Location.Coordinates.Longitude, Is.EqualTo(-52.123));
             Assert.That(document.Location.Radius, Is.EqualTo("30mi"));
         }
-        
+
         [Test]
         public void WhenCreatingFrameworkDocumentShouldTrimTitleWhiteSpaces()
         {
@@ -247,7 +247,6 @@
 
             Assert.AreEqual("Accounting", framework.PathwayName);
         }
-
 
         private Provider GenerateTestProvider()
         {
