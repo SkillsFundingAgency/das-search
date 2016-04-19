@@ -30,27 +30,25 @@
 
 
         <div class="column-third">
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box hidden-for-mobile" }))
+            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box hidden-for-mobile postcode-form-top" }))
             {
                 <div class="related-container">
                     <aside class="related">
 
                         <h2 class="heading-medium">Find training providers</h2>
-                        <form action="/g-cloud/search" method="get" class="search-box">
-                            <div class="form-group @(@Model.HasError ? " error" : "")">
-                                <label class="form-label" for="postcode">
-                                    Enter postcode@* or partial postcode *@
-                                    <p>
-                                        @{
-                                            Html.RenderPartial("_BlankFieldErrorMessage");
-                                        }
-                                    </p>
-                                </label>
-                                <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
-                                <input type="search" id="postcode" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
-                            </div>
-                            <input class="button margin-top-x2 postcode-search-button" id="submit-postcode" type="submit" value="Search"/>
-                        </form>
+                        <div class="form-group @(@Model.HasError ? " error" : "")">
+                            <label class="form-label" for="postcode">
+                                Enter postcode@* or partial postcode *@
+                                <p>
+                                    @{
+                                        Html.RenderPartial("_BlankFieldErrorMessage");
+                                    }
+                                </p>
+                            </label>
+                            <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
+                            <input type="search" id="postcode" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                        </div>
+                        <input class="button margin-top-x2 postcode-search-button" id="submit-postcode" type="submit" value="Search"/>
                     </aside>
                 </div>
             }
@@ -88,24 +86,22 @@
 
             <hr />
 
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box postcode-form-bottom" }))
             {
                 <h2 class="heading-large">Find training providers</h2>
-                <form action="/g-cloud/search" method="get" class="search-box">
-                    <div class="form-group @(@Model.HasError ? " error" : "")">
-                        <label class="form-label" for="postcode">
-                            Enter postcode@* or partial postcode *@
-                            <p>
-                                @{
-                                    Html.RenderPartial("_BlankFieldErrorMessage");
-                                }
-                            </p>
-                        </label>
-                        <input type="hidden" id="apprenticeshipid2" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
-                        <input type="search" id="postcode2" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
-                    </div>
-                    <input class="button margin-top-x2 postcode-search-button" id="submit-postcode2" type="submit" value="Search" />
-                </form>
+                <div class="form-group @(@Model.HasError ? " error" : "")">
+                    <label class="form-label" for="postcode">
+                        Enter postcode@* or partial postcode *@
+                        <p>
+                            @{
+                                Html.RenderPartial("_BlankFieldErrorMessage");
+                            }
+                        </p>
+                    </label>
+                    <input type="hidden" id="apprenticeshipid2" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
+                    <input type="search" id="postcode2" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                </div>
+                <input class="button margin-top-x2 postcode-search-button" id="submit-postcode2" type="submit" value="Search" />
             }
         </section>
 

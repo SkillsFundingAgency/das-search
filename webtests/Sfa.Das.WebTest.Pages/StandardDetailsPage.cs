@@ -7,8 +7,8 @@
     [PageNavigation("/apprenticeship/standard")]
     public class StandardDetailsPage : BasePage
     {
-        public By PostcodeSearchBox => By.Id("postcode");
+        public By PostcodeSearchBox => By.CssSelector(".postcode-form-bottom .postcode-search-box");
 
-        public By SearchButton => By.Id("submit-postcode");
+        public By SearchButton => By.CssSelector(".postcode-form-bottom .postcode-search-button");
     }
 }
