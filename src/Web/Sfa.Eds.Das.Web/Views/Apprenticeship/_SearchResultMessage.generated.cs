@@ -300,8 +300,12 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Apprenticeships labelled <strong>new</strong> are job specific s" +
-"tandards, developed by groups of employers.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"labelmessage\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeships labelled <strong>new</strong> are job specific standar" +
+"ds, developed by groups of employers.\r\n    </p>\r\n");
 
 
 #line 67 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"

@@ -10,7 +10,7 @@
     using Web.Views.Apprenticeship;
 
     [TestFixture]
-    public sealed class ForStandardSearchResultPage : ViewTestBase
+    public sealed class ForApprenticeshipSearchResultPage : ViewTestBase
     {
         [Test]
         public void WhenSearchResultHasErrors()
@@ -96,6 +96,42 @@
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, "p").Should().Be("There are 2 apprenticeships matching your search for 'SearchTerm'.");
+        }
+
+        [Test]
+        public void WhenSearchResultReturnsSomethingShouldShowLabelMessage()
+        {
+            var detail = new SearchResultMessage();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 2,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel()
+                              }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".labelmessage").Should().Be("Apprenticeships labelled new are job specific standards, developed by groups of employers.");
+        }
+
+        [Test]
+        public void WhenSearchResultDoesntReturnsResultsShouldntShowLabelMessage()
+        {
+            var detail = new SearchResultMessage();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 0,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel()
+                              }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".labelmessage").Should().BeEmpty();
         }
 
         [Test]
