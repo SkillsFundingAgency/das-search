@@ -21,12 +21,8 @@
     public class ApprenticeshipIndexerVerticalSliceTests
     {
         private IContainer _container;
-
-        private IGetMessageTimes _mockCloudQueue;
-
         private IMaintainApprenticeshipIndex _mockSearchIndex;
-
-        private IClearQueue _mockClearQueue;
+        private IMessageQueueService _mockCloudQueueService;
 
         private readonly string _queue = ConfigurationManager.AppSettings["Apprenticeship.QueueName"];
 
@@ -36,22 +32,25 @@
         public void Setup()
         {
             _container = IoC.Initialize();
-
-            _mockCloudQueue = Substitute.For<IGetMessageTimes>();
-            _mockClearQueue = Substitute.For<IClearQueue>();
+           
+            _mockCloudQueueService = Substitute.For<IMessageQueueService>();
             _mockSearchIndex = Substitute.For<IMaintainApprenticeshipIndex>();
             _mockMetaDataHelper = Substitute.For<IMetaDataHelper>();
-
-            _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue));
+         
             _container.Configure(x => x.For<IMaintainApprenticeshipIndex>().Use(_mockSearchIndex));
-            _container.Configure(x => x.For<IClearQueue>().Use(_mockClearQueue));
             _container.Configure(x => x.For<IMetaDataHelper>().Use(_mockMetaDataHelper));
+            _container.Configure(x => x.For<IMessageQueueService>().Use(_mockCloudQueueService));
         }
 
         [Test]
         public void ShouldIndexApprenticeships()
         {
-            _mockCloudQueue.GetInsertionTimes(_queue).Returns(new List<DateTime> { DateTime.Now });
+            _mockCloudQueueService.GetQueueMessageCount(Arg.Any<string>()).Returns(1);
+            _mockCloudQueueService.GetQueueMessages(_queue, Arg.Any<int>()).Returns(new List<IQueueMessage>()
+            {
+                Substitute.For<IQueueMessage>()
+            });
+
             _mockSearchIndex.IndexExists(Arg.Any<string>()).Returns(true);
 
             _mockMetaDataHelper.GetAllFrameworkMetaData().Returns(new List<FrameworkMetaData> { new FrameworkMetaData() });
@@ -64,13 +63,13 @@
 
             // Act
             sut.CheckMessage<IMaintainApprenticeshipIndex>();
-
+            
             // Assert
             Received.InOrder(
                 () =>
                     {
                         // Check for a trigger message on the queue
-                        _mockCloudQueue.GetInsertionTimes(_queue);
+                        _mockCloudQueueService.GetQueueMessages(_queue, Arg.Any<int>());
 
                         // If index exists, delete and recreate it
                         _mockSearchIndex.IndexExists(Arg.Any<string>());
@@ -96,10 +95,6 @@
 
                         // Delete the old indices
                         _mockSearchIndex.DeleteIndexes(Arg.Any<Func<string, bool>>());
-
-                        _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>());
-                        // Clear messages from the queue used to trigger the indexer
-                        _mockClearQueue.ClearQueue(_queue);
                     });
         }
     }

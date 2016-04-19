@@ -20,16 +20,10 @@
     public class ProviderIndexerVerticalSliceTests
     {
         private IContainer _container;
-
         private IGetActiveProviders _mockActiveProviders;
-
-        private IGetMessageTimes _mockCloudQueue;
-
         private IMaintainProviderIndex _mockSearchIndex;
-
         private IGetApprenticeshipProviders _mockCourseDirectoryClient;
-
-        private IClearQueue _mockClearQueue;
+        private IMessageQueueService _mockCloudQueueService;
 
         private readonly string _queue = ConfigurationManager.AppSettings["Provider.QueueName"];
 
@@ -39,22 +33,26 @@
             _container = IoC.Initialize();
 
             _mockActiveProviders = Substitute.For<IGetActiveProviders>();
-            _mockCloudQueue = Substitute.For<IGetMessageTimes>();
-            _mockClearQueue = Substitute.For<IClearQueue>();
+           
+            _mockCloudQueueService = Substitute.For<IMessageQueueService>();
             _mockSearchIndex = Substitute.For<IMaintainProviderIndex>();
             _mockCourseDirectoryClient = Substitute.For<IGetApprenticeshipProviders>();
 
             _container.Configure(x => x.For<IGetActiveProviders>().Use(_mockActiveProviders));
-            _container.Configure(x => x.For<IGetMessageTimes>().Use(_mockCloudQueue));
             _container.Configure(x => x.For<IMaintainProviderIndex>().Use(_mockSearchIndex));
             _container.Configure(x => x.For<IGetApprenticeshipProviders>().Use(_mockCourseDirectoryClient));
-            _container.Configure(x => x.For<IClearQueue>().Use(_mockClearQueue));
+            _container.Configure(x => x.For<IMessageQueueService>().Use(_mockCloudQueueService));
         }
 
         [Test]
         public void ShouldIndexProviders()
         {
-            _mockCloudQueue.GetInsertionTimes(_queue).Returns(new List<DateTime> { DateTime.Now });
+            _mockCloudQueueService.GetQueueMessageCount(Arg.Any<string>()).Returns(1);
+            _mockCloudQueueService.GetQueueMessages(_queue, Arg.Any<int>()).Returns(new List<IQueueMessage>()
+            {
+                Substitute.For<IQueueMessage>()
+            });
+
             _mockSearchIndex.IndexExists(Arg.Any<string>()).Returns(true);
 
             _mockCourseDirectoryClient.GetApprenticeshipProvidersAsync().Returns(new List<Provider> { new Provider { Ukprn = 123 }, new Provider { Ukprn = 456 } });
@@ -72,7 +70,7 @@
                 () =>
                     {
                         // Check for a trigger message on the queue
-                        _mockCloudQueue.GetInsertionTimes(_queue);
+                        _mockCloudQueueService.GetQueueMessages(_queue, Arg.Any<int>());
 
                         // If index exists, delete and recreate it
                         _mockSearchIndex.IndexExists(Arg.Any<string>());
@@ -94,11 +92,6 @@
 
                         // Delete the old indices
                         _mockSearchIndex.DeleteIndexes(Arg.Any<Func<string, bool>>());
-
-                        _mockSearchIndex.IndexContainsDocuments(Arg.Any<string>());
-
-                        // Clear messages from the queue used to trigger the indexer
-                        _mockClearQueue.ClearQueue(_queue);
                     });
         }
     }

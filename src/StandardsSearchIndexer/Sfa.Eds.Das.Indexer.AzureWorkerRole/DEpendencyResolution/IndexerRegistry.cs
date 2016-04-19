@@ -18,8 +18,7 @@
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IWorkerRoleSettings>().Use<WorkRoleSettings>();
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
-            For<IGetMessageTimes>().Use<AzureQueueService>();
-            For<IClearQueue>().Use<AzureQueueService>();
+            For<IMessageQueueService>().Use<AzureCloudQueueService>();
             For<IProvideSettings>().Use(c => new AppConfigSettingsProvider(new MachineSettings()));
         }
     }

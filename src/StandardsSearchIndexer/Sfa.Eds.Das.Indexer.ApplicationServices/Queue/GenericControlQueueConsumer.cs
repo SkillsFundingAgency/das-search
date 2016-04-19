@@ -1,7 +1,8 @@
+using System.Linq;
+
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
@@ -13,20 +14,14 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
     public class GenericControlQueueConsumer : IGenericControlQueueConsumer
     {
         private readonly IAppServiceSettings _appServiceSettings;
-
-        private readonly IClearQueue _clearQueue;
-
-        private readonly IGetMessageTimes _cloudQueueService;
-
+        private readonly IMessageQueueService _cloudQueueService;
         private readonly IContainer _container;
-
         private readonly ILog _log;
 
-        public GenericControlQueueConsumer(IAppServiceSettings appServiceSettings, IGetMessageTimes cloudQueueService, IClearQueue clearQueue, IContainer container, ILog log)
+        public GenericControlQueueConsumer(IAppServiceSettings appServiceSettings, IMessageQueueService cloudQueueService, IContainer container, ILog log)
         {
             _appServiceSettings = appServiceSettings;
             _cloudQueueService = cloudQueueService;
-            _clearQueue = clearQueue;
             _container = container;
             _log = log;
         }
@@ -38,17 +33,37 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 
             try
             {
-                var queuename = _appServiceSettings.QueueName(typeof(T));
+                var queueName = _appServiceSettings.QueueName(typeof(T));
 
-                var times = _cloudQueueService.GetInsertionTimes(queuename).ToList();
-
-                if (times.Any())
+                if (string.IsNullOrEmpty(queueName))
                 {
-                    var time = times.FirstOrDefault();
-                    await indexerService.CreateScheduledIndex(time).ConfigureAwait(false);
+                    return;
                 }
 
-                _clearQueue.ClearQueue(queuename);
+                var messageCount = _cloudQueueService.GetQueueMessageCount(queueName);
+
+                if (messageCount == 0)
+                {
+                    return;
+                }
+
+                var messages = _cloudQueueService.GetQueueMessages(queueName, messageCount)?.ToArray();
+
+                if (messages != null && messages.Any())
+                {
+                    var latestMessage = messages.First();
+
+                    var extraMessages = messages.Where(m => m != latestMessage).ToList();
+
+                    // Delete all the messages except the first as they are not needed
+                    _cloudQueueService.DeleteQueueMessages(queueName, extraMessages);
+
+                    var indexTime = latestMessage.InsertionTime ?? DateTime.Now;
+
+                    await indexerService.CreateScheduledIndex(indexTime).ConfigureAwait(false);
+
+                    _cloudQueueService.DeleteQueueMessage(queueName, latestMessage);
+                }
             }
             catch (Exception ex)
             {

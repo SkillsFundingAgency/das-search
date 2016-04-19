@@ -40,6 +40,10 @@
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StructureMap, Version=4.0.1.318, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -52,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MetaDataHelperTests.cs" />
+    <Compile Include="Queue\GenericControlQueueConsumerTest.cs" />
     <Compile Include="Services\ProviderIndexerTests.cs" />
     <Compile Include="Services\ApprenticeshipIndexerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +75,10 @@
     <ProjectReference Include="..\Sfa.Eds.Das.Indexer.ApplicationServices\Sfa.Eds.Das.Indexer.ApplicationServices.csproj">
       <Project>{473307D1-67C9-411E-AD71-CF3C6FE892F4}</Project>
       <Name>Sfa.Eds.Das.Indexer.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Eds.Das.Indexer.AzureWorkerRole\Sfa.Eds.Das.Indexer.AzureWorkerRole.csproj">
+      <Project>{6163C031-06EA-4929-BC84-AB67ED0E93DA}</Project>
+      <Name>Sfa.Eds.Das.Indexer.AzureWorkerRole</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Eds.Das.Indexer.Core\Sfa.Eds.Das.Indexer.Core.csproj">
       <Project>{0C0E390C-C57C-44E4-978E-B9D2F53196AA}</Project>

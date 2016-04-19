@@ -69,6 +69,8 @@
     <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
     <Compile Include="Provider\IProviderFeatures.cs" />
+    <Compile Include="Queue\IQueueMessage.cs" />
+    <Compile Include="Queue\IMessageQueueService.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Services\IMaintainProviderIndex.cs" />
     <Compile Include="Services\IMaintainApprenticeshipIndex.cs" />
@@ -82,8 +84,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\FcsActiveProvidersClient.cs" />
     <Compile Include="Queue\GenericControlQueueConsumer.cs" />
-    <Compile Include="Queue\IClearQueue.cs" />
-    <Compile Include="Queue\IGetMessageTimes.cs" />
     <Compile Include="Infrastructure\IConvertFromCsv.cs" />
     <Compile Include="Queue\IGenericControlQueueConsumer.cs" />
     <Compile Include="Http\IHttpGet.cs" />
