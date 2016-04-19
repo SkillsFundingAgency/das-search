@@ -197,7 +197,7 @@
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
             // First result
-            GetPartial(html, ".result-title").Should().Be("Test title 1 NEW");
+            GetPartial(html, ".result-title").Should().Be("Test title 1 new");
 
             // Second result
             GetPartial(html, ".result-title", 2).Should().Be("Test title 2");
