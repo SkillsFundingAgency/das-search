@@ -47,8 +47,7 @@
         [Test]
         public void ShouldIndexProviders()
         {
-            _mockCloudQueueService.GetQueueMessageCount(Arg.Any<string>()).Returns(1);
-            _mockCloudQueueService.GetQueueMessages(_queue, Arg.Any<int>()).Returns(new List<IQueueMessage>()
+            _mockCloudQueueService.GetQueueMessages(_queue).Returns(new List<IQueueMessage>()
             {
                 Substitute.For<IQueueMessage>()
             });
@@ -70,7 +69,7 @@
                 () =>
                     {
                         // Check for a trigger message on the queue
-                        _mockCloudQueueService.GetQueueMessages(_queue, Arg.Any<int>());
+                        _mockCloudQueueService.GetQueueMessages(_queue);
 
                         // If index exists, delete and recreate it
                         _mockSearchIndex.IndexExists(Arg.Any<string>());

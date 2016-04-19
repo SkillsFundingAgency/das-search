@@ -14,6 +14,7 @@
     {
         private readonly IAppServiceSettings _appServiceSettings;
         private readonly ILog _logger;
+        private readonly TimeSpan _messageVisibilityTimeout = TimeSpan.FromMinutes(30);
 
         public AzureCloudQueueService(IAppServiceSettings appServiceSettings, ILog logger)
         {
@@ -33,7 +34,7 @@
             _logger.Debug("Getting " + DefaultMessageCount + " messages from queue [" + queueName + "]");
             var queue = GetQueueReference(queueName);
 
-            return queue?.GetMessages(DefaultMessageCount).Select(x => new AzureQueueMessage(x));
+            return queue?.GetMessages(DefaultMessageCount, _messageVisibilityTimeout).Select(x => new AzureQueueMessage(x));
         }
 
         /// <summary>
@@ -60,7 +61,7 @@
         {
             _logger.Debug("Getting " + messageCount + " messages from queue [" + queueName + "]");
             var queue = GetQueueReference(queueName);
-            return queue?.GetMessages(messageCount, TimeSpan.FromSeconds(30)).Select(x => new AzureQueueMessage(x));
+            return queue?.GetMessages(messageCount, _messageVisibilityTimeout).Select(x => new AzureQueueMessage(x));
         }
 
         /// <summary>

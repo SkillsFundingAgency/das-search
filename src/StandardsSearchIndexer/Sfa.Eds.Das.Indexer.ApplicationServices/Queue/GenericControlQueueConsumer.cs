@@ -1,35 +1,40 @@
-using System.Linq;
-
 namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
-
     using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
     using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
     using Sfa.Eds.Das.Indexer.Core.Services;
-
-    using StructureMap;
 
     public class GenericControlQueueConsumer : IGenericControlQueueConsumer
     {
         private readonly IAppServiceSettings _appServiceSettings;
         private readonly IMessageQueueService _cloudQueueService;
-        private readonly IContainer _container;
+        private readonly IIndexerServiceFactory _indexerServiceFactory;
         private readonly ILog _log;
 
-        public GenericControlQueueConsumer(IAppServiceSettings appServiceSettings, IMessageQueueService cloudQueueService, IContainer container, ILog log)
+        public GenericControlQueueConsumer(
+            IAppServiceSettings appServiceSettings,
+            IMessageQueueService cloudQueueService,
+            IIndexerServiceFactory indexerServiceFactory,
+            ILog log)
         {
             _appServiceSettings = appServiceSettings;
             _cloudQueueService = cloudQueueService;
-            _container = container;
+            _indexerServiceFactory = indexerServiceFactory;
             _log = log;
         }
 
         public async Task CheckMessage<T>()
             where T : IMaintainSearchIndexes
         {
-            var indexerService = _container.GetInstance<IIndexerService<T>>();
+            var indexerService = _indexerServiceFactory.GetIndexerService<T>();
+
+            if (indexerService == null)
+            {
+                return;
+            }
 
             try
             {
@@ -40,14 +45,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
                     return;
                 }
 
-                var messageCount = _cloudQueueService.GetQueueMessageCount(queueName);
-
-                if (messageCount == 0)
-                {
-                    return;
-                }
-
-                var messages = _cloudQueueService.GetQueueMessages(queueName, messageCount)?.ToArray();
+                var messages = _cloudQueueService.GetQueueMessages(queueName)?.ToArray();
 
                 if (messages != null && messages.Any())
                 {

@@ -71,9 +71,11 @@
     <Compile Include="Provider\IProviderFeatures.cs" />
     <Compile Include="Queue\IQueueMessage.cs" />
     <Compile Include="Queue\IMessageQueueService.cs" />
+    <Compile Include="Services\IIndexerServiceFactory.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Services\IMaintainProviderIndex.cs" />
     <Compile Include="Services\IMaintainApprenticeshipIndex.cs" />
+    <Compile Include="Services\IndexerServiceFactory.cs" />
     <Compile Include="Settings\AppServiceSettings.cs" />
     <Compile Include="Standard\IMetaDataHelper.cs" />
     <Compile Include="Standard\MetaDataHelper.cs" />

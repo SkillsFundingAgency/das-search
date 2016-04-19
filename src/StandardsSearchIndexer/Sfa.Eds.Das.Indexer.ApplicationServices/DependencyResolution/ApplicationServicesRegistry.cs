@@ -13,6 +13,7 @@
         public ApplicationServicesRegistry()
         {
             For<IAppServiceSettings>().Use<AppServiceSettings>();
+            For<IIndexerServiceFactory>().Use<IndexerServiceFactory>();
 
             // Providers
             For<IIndexSettings<IMaintainProviderIndex>>().Use<ProviderIndexSettings>();
