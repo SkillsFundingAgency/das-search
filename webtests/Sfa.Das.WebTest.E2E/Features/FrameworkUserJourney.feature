@@ -14,7 +14,7 @@ Scenario Outline:Should find a framework and provider
 	And I choose Search Button
 	Then I am on the Search Results page
 
-	When I choose First Result Item
+	When I choose First Framework Result
 	Then I am on the Framework Details page
 
 	When I enter data

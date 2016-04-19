@@ -7,5 +7,6 @@
         object CurrentPage { get; set; }
 
         By FindSelector(string propertyName);
+        IWebElement FindElement(string propertyName);
     }
 }
