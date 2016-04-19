@@ -21,10 +21,20 @@
 
         [Given("I choose (.*)")]
         [When("I choose (.*)")]
-        public void Ichoose(string element)
+        public void Ichoose(string propertyName)
         {
-            var selector = _pageContext.FindSelector(element);
-            _driver.FindElement(selector).Click();
+            IWebElement element;
+            var selector = _pageContext.FindSelector(propertyName);
+            if (selector != null)
+            {
+                element = _driver.FindElement(selector);
+            }
+            else
+            {
+                element = _pageContext.FindElement(propertyName);
+            }
+
+            element.Click();
         }
     }
 }
