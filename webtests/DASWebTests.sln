@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.AcceptanceTests", "Sfa.Das.WebTest.AcceptanceTests\Sfa.Das.WebTest.AcceptanceTests.csproj", "{BC130919-122A-45E1-A081-13348BD37E0D}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.E2E", "Sfa.Das.WebTest.E2E\Sfa.Das.WebTest.E2E.csproj", "{749977EA-1B1C-4FCF-A8E8-22BF73445742}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.Pages", "Sfa.Das.WebTest.Pages\Sfa.Das.WebTest.Pages.csproj", "{B6D9B569-6B18-438E-B479-99EEEEB75B28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{5BFE6E0E-0388-40F0-8A3C-4E94D4B725A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,5 +88,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC130919-122A-45E1-A081-13348BD37E0D} = {5BFE6E0E-0388-40F0-8A3C-4E94D4B725A7}
 	EndGlobalSection
 EndGlobal
