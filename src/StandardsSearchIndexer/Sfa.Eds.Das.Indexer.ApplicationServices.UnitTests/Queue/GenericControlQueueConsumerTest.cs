@@ -22,37 +22,35 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
         private GenericControlQueueConsumer _sut;
         private Mock<IAppServiceSettings> _mockServiceSettings;
         private Mock<IMessageQueueService> _mockQueueService;
-        private IContainer _container;
+        private Mock<IIndexerServiceFactory> _mockIndexerServiceFactory; 
         private Mock<IIndexerService<IMaintainProviderIndex>> _mockIndexerService;
         private Mock<ILog> _mockLogger;
-        private Mock<IQueueMessage> _mockMessage; 
+        private Mock<IQueueMessage> _mockMessage;
         private List<IQueueMessage> _messages;
-        
-        
+
         [SetUp]
         public void Setup()
         {
             _mockServiceSettings = new Mock<IAppServiceSettings>();
             _mockQueueService = new Mock<IMessageQueueService>();
+            _mockIndexerServiceFactory = new Mock<IIndexerServiceFactory>();
             _mockIndexerService = new Mock<IIndexerService<IMaintainProviderIndex>>();
             _mockLogger = new Mock<ILog>();
             _mockMessage = new Mock<IQueueMessage>();
-            
+
             _messages = new List<IQueueMessage>
             {
                 _mockMessage.Object
             };
 
-            _container = IoC.Initialize();
-            _container.Configure(x => x.For<IIndexerService<IMaintainProviderIndex>>().Use(_mockIndexerService.Object));
+            _mockIndexerServiceFactory.Setup(x => x.GetIndexerService<IMaintainProviderIndex>()).Returns(_mockIndexerService.Object);
 
             _mockServiceSettings.Setup(x => x.QueueName(typeof(IMaintainProviderIndex))).Returns(QueueName);
-            _mockQueueService.Setup(x => x.GetQueueMessageCount(It.IsAny<string>())).Returns(_messages.Count);
 
             _sut = new GenericControlQueueConsumer(
                 _mockServiceSettings.Object,
                 _mockQueueService.Object,
-                _container,
+                _mockIndexerServiceFactory.Object,
                 _mockLogger.Object);
         }
 
@@ -62,7 +60,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             //Assign
             var insertionTime = DateTime.Now;
             _mockMessage.Setup(x => x.InsertionTime).Returns(insertionTime);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>())).Returns(_messages);
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Returns(_messages);
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(insertionTime)).Returns(Task.Factory.StartNew(() => { }));
 
             //Act
@@ -70,7 +68,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             task.Wait(1000);
 
             //Assert
-            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()),Times.Once);
+            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>()),Times.Once);
             _mockIndexerService.Verify(x => x.CreateScheduledIndex(insertionTime), Times.Once());
         }
 
@@ -78,7 +76,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
         public void ShouldNotRunIndexerIfNoMessagesArePresent()
         {
             //Assign
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>())).Returns(new List<IQueueMessage>());
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Returns(new List<IQueueMessage>());
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>()));
 
             //Act
@@ -86,7 +84,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             task.Wait(1000);
 
             //Assert
-            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()), Times.Once);
+            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>()), Times.Once);
             _mockIndexerService.Verify(x => x.CreateScheduledIndex(It.IsAny<DateTime>()), Times.Never);
         }
 
@@ -94,7 +92,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
         public void ShouldNotRunIndexerIfReturnedMessagesAreNull()
         {
             //Assign
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()));
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>()));
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>()));
 
             //Act
@@ -102,7 +100,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             task.Wait(1000);
 
             //Assert
-            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()), Times.Once);
+            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>()), Times.Once);
             _mockIndexerService.Verify(x => x.CreateScheduledIndex(It.IsAny<DateTime>()), Times.Never);
         }
 
@@ -111,7 +109,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
         {
             //Assign
             _mockMessage.Setup(x => x.InsertionTime).Returns(DateTime.Now);
-            _mockQueueService.Setup(x => x.GetQueueMessages(QueueName, It.IsAny<int>())).Returns(_messages);
+            _mockQueueService.Setup(x => x.GetQueueMessages(QueueName)).Returns(_messages);
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>())).Returns(Task.Factory.StartNew(() => { }));
 
             //Act
@@ -119,7 +117,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             task.Wait(1000);
 
             //Assert
-            _mockQueueService.Verify(x => x.GetQueueMessages(QueueName, It.IsAny<int>()), Times.Once);
+            _mockQueueService.Verify(x => x.GetQueueMessages(QueueName), Times.Once);
         }
 
         [Test]
@@ -128,7 +126,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             //Assign
             _mockServiceSettings.Setup(x => x.QueueName(typeof(IMaintainProviderIndex)));
             _mockMessage.Setup(x => x.InsertionTime).Returns(DateTime.Now);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>())).Returns(_messages);
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Returns(_messages);
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>())).Returns(Task.Factory.StartNew(() => { }));
 
             //Act
@@ -136,7 +134,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             task.Wait(1000);
 
             //Assert
-            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()), Times.Never);
+            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>()), Times.Never);
         }
 
         [Test]
@@ -146,7 +144,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             var extraMessage = new Mock<IQueueMessage>().Object;
             _messages.Add(extraMessage);
             _mockMessage.Setup(x => x.InsertionTime).Returns(DateTime.Now);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>())).Returns(_messages);
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Returns(_messages);
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>())).Returns(Task.Factory.StartNew(() => { }));
             _mockQueueService.Setup(x => x.DeleteQueueMessages(
                 QueueName,
@@ -175,7 +173,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
             var extraMessage = new Mock<IQueueMessage>().Object;
             _messages.Add(extraMessage);
             _mockMessage.Setup(x => x.InsertionTime).Returns(DateTime.Now);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>())).Returns(_messages);
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Returns(_messages);
             _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>())).Returns(Task.Factory.StartNew(() => { }));
             _mockQueueService.Setup(x => x.DeleteQueueMessage(QueueName, _mockMessage.Object));
 
@@ -185,48 +183,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
 
             // Assert
             _mockQueueService.Verify(x => x.DeleteQueueMessage(QueueName, _mockMessage.Object));
-        }
-
-        [Test]
-        public void ShouldGetAllAvailableMessages()
-        {
-            // Assign
-            var messageCount = 100;
-
-            for (var index = 0; index < messageCount; index++)
-            {
-                _messages.Add(new Mock<IQueueMessage>().Object);
-            }
-
-            _mockMessage.Setup(x => x.InsertionTime).Returns(DateTime.Now);
-            _mockQueueService.Setup(x => x.GetQueueMessageCount(QueueName)).Returns(_messages.Count);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), messageCount + 1)).Returns(_messages);
-            _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>())).Returns(Task.Factory.StartNew(() => { }));
-            _mockQueueService.Setup(x => x.DeleteQueueMessages(QueueName, It.Is<IEnumerable<IQueueMessage>>(m => m.Count() == messageCount)));
-
-            // Act
-            var task = _sut.CheckMessage<IMaintainProviderIndex>();
-            task.Wait(1000);
-
-            // Assert
-            _mockQueueService.Verify(x => x.GetQueueMessageCount(QueueName), Times.Once);
-            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>(), messageCount + 1), Times.Once);
-        }
-
-        [Test]
-        public void ShouldNotTryToGetMessagesIfThereArentAny()
-        {
-            // Assign
-            _mockQueueService.Setup(x => x.GetQueueMessageCount(It.IsAny<string>())).Returns(0);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()));
-            
-            // Act
-            var task = _sut.CheckMessage<IMaintainProviderIndex>();
-            task.Wait(1000);
-
-            // Assert
-            _mockQueueService.Verify(x => x.GetQueueMessageCount(It.IsAny<string>()), Times.Once);
-            _mockQueueService.Verify(x => x.GetQueueMessages(It.IsAny<string>(), It.IsAny<int>()), Times.Never);
         }
     }
 }
