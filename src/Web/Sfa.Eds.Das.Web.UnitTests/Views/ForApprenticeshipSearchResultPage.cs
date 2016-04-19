@@ -10,7 +10,7 @@
     using Web.Views.Apprenticeship;
 
     [TestFixture]
-    public sealed class ForStandardSearchResultPage : ViewTestBase
+    public sealed class ForApprenticeshipSearchResultPage : ViewTestBase
     {
         [Test]
         public void WhenSearchResultHasErrors()
@@ -25,7 +25,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There was a problem performing a search. Try again later.");
+            GetPartial(html, ".results-error").Should().Contain("There was a problem performing a search. Try again later.");
         }
 
         [Test]
@@ -40,7 +40,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There are no apprenticeships matching your search for 'SearchTerm'");
+            GetPartial(html, ".results-empty").Should().Contain("There are no apprenticeships matching your search for 'SearchTerm'");
         }
 
         [Test]
@@ -58,7 +58,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Be("All apprenticeships.");
+            GetPartial(html, ".results-all").Should().Be("All apprenticeships.");
         }
 
         [Test]
@@ -75,7 +75,7 @@
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            var result = GetPartial(html, "p");
+            var result = GetPartial(html, ".results-one");
 
             result.Should().Be("There is 1 apprenticeship matching your search for 'SearchTerm'.");
         }
@@ -95,7 +95,43 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Be("There are 2 apprenticeships matching your search for 'SearchTerm'.");
+            GetPartial(html, ".results-several").Should().Be("There are 2 apprenticeships matching your search for 'SearchTerm'.");
+        }
+
+        [Test]
+        public void WhenSearchResultReturnsSomethingShouldShowLabelMessage()
+        {
+            var detail = new SearchResultMessage();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 2,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel()
+                              }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".labelmessage").Should().Be("Apprenticeships labelled new are job specific standards, developed by groups of employers.");
+        }
+
+        [Test]
+        public void WhenSearchResultDoesntReturnsResultsShouldntShowLabelMessage()
+        {
+            var detail = new SearchResultMessage();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 0,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel()
+                              }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".labelmessage").Should().BeEmpty();
         }
 
         [Test]
@@ -132,6 +168,40 @@
             GetPartialWhere(html, ".result", "Test title 2").Should().NotContain("Typical length:");
             GetPartialWhere(html, ".result", "Test title 2").Should().Contain("Level");
             GetPartialWhere(html, ".result", "Test title 2").Should().Contain("3 (equivalent to 2 A level passes)");
+        }
+
+        [Test]
+        public void WhenSearchResultReturnsAnStandardShouldNewLabelMessage()
+        {
+            var searchPage = new SearchResults();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 2,
+                SearchTerm = "test",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                                  new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 2",
+                                        Level = "3 (equivalent to 2 A level passes)",
+                                        FrameworkId = 3
+                                      }
+                              }
+            };
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            // First result
+            GetPartial(html, ".result-title").Should().Be("Test title 1 NEW");
+
+            // Second result
+            GetPartial(html, ".result-title", 2).Should().Be("Test title 2");
+
         }
     }
 }
