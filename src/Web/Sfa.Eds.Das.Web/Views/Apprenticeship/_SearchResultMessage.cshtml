@@ -38,7 +38,7 @@
 }
 @helper  RenderAllResult()
 {
-    <p id="result-summary">
+    <p id="result-summary" class="results-all">
         All apprenticeships.
     </p>
     @RenderStandardMessage()
@@ -53,7 +53,7 @@
 
 @helper  RenderMessage()
 {
-    <p id="result-summary">
+    <p id="result-summary" class="results-several">
         There are <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()

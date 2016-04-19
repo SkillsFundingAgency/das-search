@@ -128,6 +128,8 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
+WriteLiteralTo(__razor_helper_writer, " class=\"results-all\"");
+
 WriteLiteralTo(__razor_helper_writer, ">\r\n        All apprenticeships.\r\n    </p>\r\n");
 
 
@@ -239,6 +241,8 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"results-several\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        There are <b>");
 

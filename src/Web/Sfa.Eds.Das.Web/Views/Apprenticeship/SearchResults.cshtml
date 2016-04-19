@@ -31,8 +31,7 @@
                             @if (item.StandardId != 0)
                             {
                                 <span>
-                                    @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null)
-                                    NEW
+                                    @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) NEW
                                 </span>
                             }
                             else
