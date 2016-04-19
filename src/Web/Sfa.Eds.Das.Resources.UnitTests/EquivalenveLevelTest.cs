@@ -7,7 +7,7 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 namespace Sfa.Eds.Das.Resources.UnitTests
 {
     [TestFixture]
-    public class EquivalenceLevelTest
+    public class EquivalenveLevelTest
     {
         [TestCase("1", "GCSEs at grades D to G")]
         [TestCase("2", "GCSEs at grades A* to C")]
