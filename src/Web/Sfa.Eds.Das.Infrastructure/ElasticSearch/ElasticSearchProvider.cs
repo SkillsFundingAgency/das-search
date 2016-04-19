@@ -32,7 +32,9 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
 
             if (sortBy == ApprenticeshipSearchSortBy.StandardsFirst)
             {
-                searchDescriptor = searchDescriptor.Sort(r => r.Descending(new Field { Name = "_type" }));
+                searchDescriptor = searchDescriptor.Sort(r => r
+                            .Descending(new Field { Name = "_type" })
+                            .Descending(SortSpecialField.Score));
             }
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
