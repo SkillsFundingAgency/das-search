@@ -5,7 +5,7 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/apprenticeship/standard")]
-    public class StandardDetailsPage : BasePage
+    public class StandardDetailsPage
     {
         public By PostcodeSearchBox => By.CssSelector(".postcode-form-bottom .postcode-search-box");
 
