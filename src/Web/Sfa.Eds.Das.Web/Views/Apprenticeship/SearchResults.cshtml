@@ -25,7 +25,7 @@
 
             @foreach (var item in Model.Results)
             {
-                <article class="result @(item.ApprenticeshipType)-result">
+                <article class="result" id="@(item.ApprenticeshipType)-@(item.StandardId!=0?item.StandardId:item.FrameworkId)">
                     <header>
                         <h2 class="result-title">
                             @if (item.StandardId != 0)
