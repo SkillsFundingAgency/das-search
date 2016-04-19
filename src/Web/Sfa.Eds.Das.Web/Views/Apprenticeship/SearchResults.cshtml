@@ -6,7 +6,7 @@
 
 <main id="content" role="main">
     @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
-    <div id="standard-results" class="grid-row">
+    <div id="apprenticeship-results" class="grid-row">
 
         <div class="column-two-thirds">
 
@@ -25,7 +25,7 @@
 
             @foreach (var item in Model.Results)
             {
-                <article class="result">
+                <article class="result @(item.ApprenticeshipType)-result">
                     <header>
                         <h2 class="result-title">
                             @if (item.StandardId != 0)

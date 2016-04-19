@@ -16,5 +16,7 @@
         public string PathwayName { get; set; }
 
         public string Level { get; set; }
+
+        public string ApprenticeshipType { get; set; }
     }
 }

@@ -11,11 +11,11 @@
 
     analytics.init = function () {
 
-        $("#standard-results .result a:lt(3)").on("click", function () {
+        $("#apprenticeship-results .result a:lt(3)").on("click", function () {
             analytics.pushEvent("Apprenticeship Search Results", "top3");
         });
 
-        $("#standard-results .result a:gt(2)").on("click", function () {
+        $("#apprenticeship-results .result a:gt(2)").on("click", function () {
             analytics.pushEvent("Apprenticeship Search Results", "results");
         });
 

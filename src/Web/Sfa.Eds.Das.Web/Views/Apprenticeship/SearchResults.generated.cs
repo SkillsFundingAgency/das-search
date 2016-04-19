@@ -62,14 +62,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2098), Tuple.Create("\"", 2109)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2138), Tuple.Create("\"", 2149)
 
 #line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2106), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2146), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2106), false)
+, 2146), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -140,7 +140,7 @@ Write(Html.ActionLink("Search", "Search", null, new { @class = "link-back" }));
             #line hidden
 WriteLiteral("\r\n    <div");
 
-WriteLiteral(" id=\"standard-results\"");
+WriteLiteral(" id=\"apprenticeship-results\"");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -191,7 +191,17 @@ WriteLiteral("\r\n            </p>\r\n\r\n");
             #line hidden
 WriteLiteral("                <article");
 
-WriteLiteral(" class=\"result\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 726), Tuple.Create("\"", 774)
+, Tuple.Create(Tuple.Create("", 734), Tuple.Create("result", 734), true)
+            
+            #line 28 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create(" ", 740), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
+            
+            #line default
+            #line hidden
+, 741), false)
+, Tuple.Create(Tuple.Create("", 767), Tuple.Create("-result", 767), true)
+);
 
 WriteLiteral(">\r\n                    <header>\r\n                        <h2");
 
