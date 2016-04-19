@@ -99,6 +99,7 @@
         }
 
         [Test]
+        [Ignore]
         public void When_SearchResultContainLevel()
         {
             var searchPage = new SearchResults();
