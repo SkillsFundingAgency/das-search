@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.WebTest.Infrastructure
+﻿namespace Sfa.Das.WebTest.AcceptanceTests
 {
     using System;
     using System.Collections.Generic;

@@ -1,9 +1,10 @@
-﻿using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
-using System;
+﻿using System;
 using TechTalk.SpecFlow;
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 {
+    using Sfa.Das.WebTest.AcceptanceTests.Pages;
+
     /// <summary>
     /// Purpose of this Step definition class is to 
     /// Create and maintain all step definitions related provider search functionality.

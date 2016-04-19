@@ -1,9 +1,10 @@
-﻿using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
-using System;
+﻿using System;
 using TechTalk.SpecFlow;
 
 namespace Sfa.Das.WebTest.AcceptanceTests.StepDefinitions
 {
+    using Sfa.Das.WebTest.AcceptanceTests.Pages;
+
     [Binding]
     public class ProviderDetailsforFrameworksSteps
     {
