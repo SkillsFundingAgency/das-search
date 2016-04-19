@@ -67,7 +67,7 @@
 
         [TestCase("true", true, Description = "Has error")]
         [TestCase("false", false, Description = "No error")]
-        public void DetailPageWithErrorParameter(string hasErrorParmeter, bool expected)
+        public void StandardDetailPageWithErrorParameter(string hasErrorParmeter, bool expected)
         {
             var mockStandardRepository = new Mock<IGetStandards>();
 
@@ -98,6 +98,39 @@
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase("true", true, Description = "Has error")]
+        [TestCase("false", false, Description = "No error")]
+        public void FrameworkDetailPageWithErrorParameter(string hasErrorParmeter, bool expected)
+        {
+            var mockFrameworkRepository = new Mock<IGetFrameworks>();
+
+            var framework = new Framework { Title = "Hello", };
+            mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(framework);
+            var mockMappingServices = new Mock<IMappingService>();
+            mockMappingServices.Setup(
+                x => x.Map<Framework, FrameworkViewModel>(It.IsAny<Framework>()))
+                .Returns(new FrameworkViewModel());
+
+            var mockRequest = new Mock<HttpRequestBase>();
+            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
+
+            var context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(mockRequest.Object);
+
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object, null, mockMappingServices.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            controller.Url = new UrlHelper(
+                new RequestContext(context.Object, new RouteData()),
+                new RouteCollection());
+
+            var result = controller.Framework(1, hasErrorParmeter) as ViewResult;
+
+            Assert.NotNull(result);
+            var actual = ((FrameworkViewModel)result.Model).HasError;
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test]
         public void StandardDetailPageStandardIsNull()
         {
@@ -114,6 +147,24 @@
             Assert.AreEqual(404, result.StatusCode);
             Assert.AreEqual("Cannot find standard: 1", result.StatusDescription);
             moqLogger.Verify(m => m.Warn("404 - Cannot find standard: 1"));
+        }
+
+        [Test]
+        public void FrameworkDetailPageStandardIsNull()
+        {
+            var mockFrameworkRepository = new Mock<IGetFrameworks>();
+
+            var mockRequest = new Mock<HttpRequestBase>();
+            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
+            var moqLogger = new Mock<ILog>();
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null);
+
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1, "false");
+
+            Assert.NotNull(result);
+            Assert.AreEqual(404, result.StatusCode);
+            Assert.AreEqual("Cannot find framework: 1", result.StatusDescription);
+            moqLogger.Verify(m => m.Warn("404 - Cannot find framework: 1"));
         }
     }
 }
