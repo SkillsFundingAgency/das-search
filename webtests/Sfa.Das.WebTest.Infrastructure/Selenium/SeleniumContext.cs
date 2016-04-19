@@ -51,6 +51,7 @@
                     capabilities.SetCapability("browserstack.key", _settings.BrowserStackKey);
                     //capabilities.SetCapability("browserstack.selenium_version", "2.53.0");
 
+                    Console.WriteLine($"##### Driver: Browserstack - {_settings.OS} {_settings.OSVersion} - {_settings.Browser} {_settings.Version}");
                     return new RemoteWebDriver(new Uri(_settings.RemoteUrl), capabilities);
                 }
             }
@@ -107,7 +108,7 @@
         {
             switch (_settings.Browser.ToLower())
             {
-                case "ie":
+                case "internet explorer":
                     return DesiredCapabilities.InternetExplorer();
                 case "chrome":
                     return DesiredCapabilities.Chrome();
@@ -192,6 +193,7 @@
         {
             var driverService = PhantomJSDriverService.CreateDefaultService();
             driverService.HideCommandPromptWindow = true;
+            Console.WriteLine($"##### Driver: PhantomJs");
             return new PhantomJSDriver(driverService);
         }
 
