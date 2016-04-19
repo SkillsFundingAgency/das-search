@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
 {
-    using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
+    using Sfa.Das.WebTest.AcceptanceTests.Pages;
 
     using TechTalk.SpecFlow;
 

@@ -1,15 +1,13 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
+﻿namespace Sfa.Das.WebTest.AcceptanceTests.Pages
 {
-    using Sfa.Das.WebTest.Infrastructure;
+    using System;
+    using System.Linq;
+
+    using NUnit.Framework;
+
+    using OpenQA.Selenium;
+
+    using Sfa.Das.WebTest.AcceptanceTests;
 
     class ProviderResultPage : BasePage
     {
@@ -21,14 +19,21 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         SearchPage srchPage;
 
         By providerlist = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
+
         By providerlist1 = By.XPath(".//*[@id='provider-results']/div[1]/article/header/h2/a");
+
         By selectprovider = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/header/h2/a");
+
         By providerwebsite = By.XPath(".//*[@id='provider-results']/div[1]/article[1]/dl/dt[2]");
+
         By providereSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[3]");
+
         By providerlSatisfaction = By.XPath(".//*[@id='provider-results']/div[1]/article[8]/dl/dt[4]");
+
         By providerLocation = By.XPath(".//*[@id='provider-results']/div[1]/article[3]/dl/dd[2]");
 
         By resultItems = By.CssSelector("#provider-results .result");
+
         private By resultsContainer = By.Id("provider-results");
 
         public void WaitToLoad()
@@ -43,8 +48,7 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
 
         public void verifyProvidersearchResultsInfo(String info)
         {
-
-            switch(info)
+            switch (info)
             {
                 case "website":
                     Assert.True(isDisplayed(providerwebsite));
@@ -56,8 +60,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
                 case "Learner satisfaction":
                     Assert.True(isDisplayed(providerlSatisfaction));
                     break;
-
-
             }
 
             AssertIsDisplayed(providerlist);
@@ -67,7 +69,6 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
         {
             click(selectprovider);
         }
-
 
         public void verifyProviderinSearchResults(string p0)
         {
