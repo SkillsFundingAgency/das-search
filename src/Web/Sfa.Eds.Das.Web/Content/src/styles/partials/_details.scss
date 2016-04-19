@@ -37,3 +37,12 @@
 .framework_detail .hgroup dt:after {
     content: ":";
 }
+
+.progress-container {
+    background-color: #DEE0E2;
+}
+
+.progress-container .progressbar {
+    height: 1.4em;
+    background-color: #238BC6;
+}

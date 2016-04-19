@@ -120,6 +120,9 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
             <span id="learner-satisfaction" class="heading-large">
                 @Model.LearnerSatisfactionMessage
             </span>
+            <div class="progress-container">
+                <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
+            </div><br>
         }
         else
         {
@@ -137,6 +140,9 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
             <span id="employer-satisfaction" class="heading-large">
                 @Model.EmployerSatisfactionMessage
             </span>
+            <div class="progress-container">
+                <div class="progressbar" style="width:@Model.EmployerSatisfaction%"></div>
+            </div><br>
         }
         else
         {
