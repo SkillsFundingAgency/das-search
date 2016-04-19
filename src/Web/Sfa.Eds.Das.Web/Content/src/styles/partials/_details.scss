@@ -1,26 +1,26 @@
 
 //
-// #standard-results .result, #framework-results .result {
+// #apprenticeship-results .result, #framework-results .result {
 //     border-bottom: 1px solid #bfc1c3;
 //     padding: 15px 0;
 // }
 //
-// #standard-results .result:first-child, #framework-results .result:first-child {
+// #apprenticeship-results .result:first-child, #framework-results .result:first-child {
 //     padding-top: 0;
 // }
-// #standard-results .result .actions, #framework-results .result .actions {
+// #apprenticeship-results .result .actions, #framework-results .result .actions {
 //     text-align: center;
 // }
-// #standard-results .result .actions i, #framework-results .result .actions i {
+// #apprenticeship-results .result .actions i, #framework-results .result .actions i {
 //     display: block;
 // }
-// #standard-results .result .actions a, #framework-results .result .actions a {
+// #apprenticeship-results .result .actions a, #framework-results .result .actions a {
 //     display: block;
 //     text-decoration: none;
 // }
 
 
-.standard-results .result dt,
+.apprenticeship-results .result dt,
 .standard_detail .hgroup dt,
 .framework-results .result dt,
 .standard_detail .hgroup dt,
@@ -31,9 +31,18 @@
 }
 
 
-.standard-results .result dt:after,
+.apprenticeship-results .result dt:after,
 .standard_detail .hgroup dt:after,
 .framework-results .result dt:after,
 .framework_detail .hgroup dt:after {
     content: ":";
+}
+
+.progress-container {
+    background-color: #DEE0E2;
+}
+
+.progress-container .progressbar {
+    height: 1.4em;
+    background-color: #238BC6;
 }

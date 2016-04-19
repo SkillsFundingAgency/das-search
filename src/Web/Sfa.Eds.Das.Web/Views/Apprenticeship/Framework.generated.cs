@@ -232,7 +232,7 @@ WriteLiteral(" id=\"postcode\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteLiteral(" class=\"text-box form-control\"");
+WriteLiteral(" class=\"text-box form-control postcode-search-box\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
@@ -240,7 +240,7 @@ WriteLiteral(" placeholder=\"\"");
 
 WriteLiteral(">\r\n                    </div>\r\n                    <input");
 
-WriteLiteral(" class=\"button margin-top-x2\"");
+WriteLiteral(" class=\"button margin-top-x2 postcode-search-button\"");
 
 WriteLiteral(" id=\"submit-postcode\"");
 

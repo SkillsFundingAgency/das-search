@@ -8,7 +8,7 @@ namespace Sfa.Das.ApplicationServices.DependencyResolution
     {
         public ApplicationServicesRegistry()
         {
-            For<IStandardSearchService>().Use<StandardSearchService>();
+            For<IApprenticeshipSearchService>().Use<ApprenticeshipSearchService>();
             For<IProviderSearchService>().Use<ProviderSearchService>();
         }
     }

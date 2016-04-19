@@ -1,13 +1,9 @@
 ﻿namespace Sfa.Eds.Das.Web.UnitTests.Views.Start
 {
-    using NUnit.Framework;
-
-    using RazorGenerator.Testing;
-
     using ExtensionHelpers;
-
     using FluentAssertions;
-
+    using NUnit.Framework;
+    using RazorGenerator.Testing;
     using Web.Views.Start;
 
     [TestFixture]
@@ -23,7 +19,6 @@
             var button = GetHtmlElement(html, "#start-button");
 
             button.OuterHtml.Should().Contain(" id=\"start-button\"");
-
         }
     }
 }

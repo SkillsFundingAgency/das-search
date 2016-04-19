@@ -98,19 +98,19 @@
             return bulkDescriptor;
         }
 
+        protected static bool HaveReachedBatchLimit(int count)
+        {
+            const int batchSize = 4000;
+
+            return count >= batchSize;
+        }
+
         protected void LogResponse(IBulkResponse[] elementIndexResult)
         {
             foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
             {
                 ReportErrors(bulkResponse);
             }
-        }
-
-        protected static bool HaveReachedBatchLimit(int count)
-        {
-            const int batchSize = 4000;
-
-            return count >= batchSize;
         }
 
         private void ReportErrors(IBulkResponse result)

@@ -1,6 +1,4 @@
-﻿
-using Sfa.Eds.Das.Web.AcceptanceTests.Pages;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 
 
 namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
@@ -8,6 +6,8 @@ namespace Sfa.Eds.Das.Web.AcceptanceTests.StepDefinitions
     using System.Linq;
 
     using NUnit.Framework;
+
+    using Sfa.Das.WebTest.AcceptanceTests.Pages;
 
     /// <summary>
     /// Purpose of this Step definition class is to 

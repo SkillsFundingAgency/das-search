@@ -70,7 +70,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasePage.cs" />
     <Compile Include="Hooks\DeploymentValidator.cs" />
     <Compile Include="Hooks\Hooks.cs" />
     <Compile Include="PageNavigationAttribute.cs" />

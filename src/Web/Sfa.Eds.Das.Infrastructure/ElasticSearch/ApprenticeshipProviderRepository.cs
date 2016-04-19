@@ -74,7 +74,8 @@
             }
         }
 
-        private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query) where T : class
+        private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query)
+            where T : class
         {
             var results =
                 _elasticsearchCustomClient.Search<T>(

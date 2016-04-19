@@ -1,45 +1,42 @@
-﻿namespace Sfa.Eds.Das.Web.AcceptanceTests.Pages
+﻿namespace Sfa.Das.WebTest.AcceptanceTests.Pages
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
 
     using NUnit.Framework;
 
     using OpenQA.Selenium;
 
-    using Sfa.Das.WebTest.Infrastructure;
+    using Sfa.Das.WebTest.AcceptanceTests;
 
     public class SearchPage : BasePage
 
     {
+        private readonly By _searchResultTitles = By.CssSelector("#apprenticeship-results .result .result-title");
+
+        private readonly By firstStandardinresult = By.XPath(".//*[@id='apprenticeship-results']/div[1]/article[1]/header/h2/a");
+
+        private readonly By Invalidsearchmessage = By.XPath(".//*[@id='apprenticeship-results']/div[1]/div[2]/p");
+
         /// <summary>
-        /// Purpose of this class is to 
-        /// Create and maintain all Search Page objects and methods.
-        /// Any changes to search functionality can be maintained under this page.
+        ///     Purpose of this class is to
+        ///     Create and maintain all Search Page objects and methods.
+        ///     Any changes to search functionality can be maintained under this page.
         /// </summary>
 
         // private IWebDriver driver;
-        By searchBox = By.Id("keywords");
+        private readonly By searchBox = By.Id("keywords");
 
-        By searchButton = By.Id("submit-keywords");
+        private readonly By searchButton = By.Id("submit-keywords");
+
+        private readonly By searchkeywordresult = By.XPath(".//*[@id='apprenticeship-results']/div[1]/article/header/h2/a");
 
         // Search Results Page
-        By searchresult = By.XPath(".//*[@id='standard-results']/div[1]/p");
+        private readonly By searchresult = By.XPath(".//*[@id='apprenticeship-results']/div[1]/p");
 
-        By searchkeywordresult = By.XPath(".//*[@id='standard-results']/div[1]/article/header/h2/a");
+        private readonly By searchResultcount = By.CssSelector(".column-two-thirds>div>p>b");
 
-        By firstStandardinresult = By.XPath(".//*[@id='standard-results']/div[1]/article[1]/header/h2/a");
-
-        By searchResultcount = By.CssSelector(".column-two-thirds>div>p>b");
-
-        By typicallength = By.XPath(".//*[@id='standard-results']/div[1]/article/dl/dd[2]");
-
-        By Invalidsearchmessage = By.XPath(".//*[@id='standard-results']/div[1]/div[2]/p");
-
-        private readonly By _searchResultTitles = By.CssSelector("#standard-results .result .result-title");
+        private readonly By typicallength = By.XPath(".//*[@id='apprenticeship-results']/div[1]/article/dl/dd[2]");
 
         public void Navigate()
         {
@@ -58,19 +55,19 @@
             Sleep(3000);
         }
 
-        public void OpenStandarDetails(String standard)
+        public void OpenStandarDetails(string standard)
         {
             Open(standard);
             // Sleep(3000);
         }
 
-        public void OpenFrameworkDetails(String framework)
+        public void OpenFrameworkDetails(string framework)
         {
             OpenFramework(framework);
             // Sleep(3000);
         }
 
-        public void SearchKeyword(String keyword)
+        public void SearchKeyword(string keyword)
         {
             type(keyword, searchBox);
         }
@@ -85,12 +82,12 @@
             AssertIsDisplayed(searchresult);
         }
 
-        public void verifySearchedStandardFoundinResultPage(String expected_result)
+        public void verifySearchedStandardFoundinResultPage(string expected_result)
         {
             AssertIsElementPresent(searchkeywordresult, expected_result);
         }
 
-        public void verifyStandardinTopofList(String keyword)
+        public void verifyStandardinTopofList(string keyword)
         {
             AssertIsElementPresent(firstStandardinresult, keyword);
         }
@@ -105,7 +102,7 @@
             AssertContainsText(typicallength, "24 to 36 months");
         }
 
-        public void verifySearchresultMessage(String msg)
+        public void verifySearchresultMessage(string msg)
         {
             Assert.True(GetText(Invalidsearchmessage).Contains(msg));
         }

@@ -10,6 +10,8 @@
 
         public IEnumerable<string> JobRoles { get; set; }
 
+        public IEnumerable<string> Keywords { get; set; }
+
         public int NotionalEndLevel { get; set; }
 
         public string PdfFileName { get; set; }

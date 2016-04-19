@@ -15,6 +15,7 @@
         {
             destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
             destination.Level = GetLevelText(source.Level);
+            destination.ApprenticeshipType = destination.StandardId != 0 ? "standard" : "framework";
         }
 
         private string GetLevelText(int item)

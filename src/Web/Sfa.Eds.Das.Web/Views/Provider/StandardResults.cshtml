@@ -33,8 +33,11 @@
     </div>
 </main>
 
-<script>
-    window.onload = function() {
-        SearchAndShortlist.analytics.pushEventValue("Search", "Provider search", @Model.TotalResults);
-    }
-</script> 
+@if (Model.TotalResults == 0)
+{
+    <script>
+        window.onload = function() {    
+            SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
+        }
+    </script> 
+}

@@ -88,16 +88,16 @@
                 return new HttpNotFoundResult(message);
             }
 
-            if (viewModel.Training == TrainingEnum.Standard)
+            if (viewModel.Training == ApprenticeshipTrainingType.Standard)
             {
                     viewModel.SearchResultLink =
-                        Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("StandardResults", "Provider"));
+                        Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("Search", "Apprenticeship"));
             }
 
-            if (viewModel.Training == TrainingEnum.Framework)
+            if (viewModel.Training == ApprenticeshipTrainingType.Framework)
             {
                 viewModel.SearchResultLink =
-                        Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("FrameworkResults", "Provider"));
+                        Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("Search", "Apprenticeship"));
             }
 
             return View(viewModel);

@@ -1,11 +1,9 @@
 ﻿namespace Sfa.Eds.Das.Infrastructure.Elasticsearch
 {
-    using Nest;
-
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-
+    using Nest;
     using Sfa.Eds.Das.Core.Logging;
     using Sfa.Eds.Das.Infrastructure.ElasticSearch;
 

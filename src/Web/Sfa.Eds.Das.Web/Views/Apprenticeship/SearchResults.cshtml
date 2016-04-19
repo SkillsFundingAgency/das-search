@@ -1,4 +1,5 @@
-﻿@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
+﻿@using Sfa.Eds.Das.Web.ViewModels
+@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
 ﻿
 @{
     ViewBag.Title = "Search Results";
@@ -6,7 +7,7 @@
 
 <main id="content" role="main">
     @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
-    <div id="standard-results" class="grid-row">
+    <div id="apprenticeship-results" class="grid-row">
 
         <div class="column-two-thirds">
 
@@ -25,34 +26,55 @@
 
             @foreach (var item in Model.Results)
             {
-                <article class="result">
+                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId!=0?item.StandardId:item.FrameworkId)">
                     <header>
-                        <h2 class="result-title">
-                            @if (item.StandardId != 0)
-                            {
-                                @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null)
-                            }
-                            else
-                            {
-                                @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null)
-                            }
-                        </h2>
+                        @if (item.StandardId != 0)
+                        {
+                            @GetStandardTitle(item)
+                        }
+                        else
+                        {
+                            @GetFrameworkTitle(item)
+                        }
                     </header>
-                        <dl class="result-data-list">
-                            @GetStandardDetailItem("Level", "level", item.Level)
-                            @GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage)
-                        </dl>
+                    <dl class="result-data-list">
+                        @GetStandardDetailItem("Level", "level", item.Level)
+                        @GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage)
+                    </dl>
                 </article>
             }
         </div>
     </div>
 </main>
 
+@if (Model.TotalResults == 0)
+{
+    <script>
+        window.onload = function() {
+            SearchAndShortlist.analytics.pushEvent("Apprenticeship Search", "No results", "Search");
+        }
+    </script>
+}
+
+@helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
+{
+    <h2 class="result-title">
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) <span style="color:gray">new</span>
+    </h2>    
+}
+
+@helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item)
+{
+    <h2 class="result-title">
+        @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null)
+    </h2>
+}
+
 @helper GetStandardDetailItem(string title, string id, string item, string unit = "")
 {
-if (!string.IsNullOrEmpty(item))
-{
+    if (!string.IsNullOrEmpty(item))
+    {
         <dt>@title</dt>
-            <dd class="@id">@item @unit</dd>
-}
+        <dd class="@id">@item @unit</dd>
+    }
 }

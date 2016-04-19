@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Web", "Sfa.Eds.Das.Web\Sfa.Eds.Das.Web.csproj", "{E288C11D-B65E-4FD4-9C8D-7D734A7E947D}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D6916AC5-37E3-46D5-AB05-2F32E6EF5D0C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Resources", "Sfa.Eds.Das.Resources\Sfa.Eds.Das.Resources.csproj", "{88F7CFD8-69A0-49A9-83F5-D729DEF4AFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Eds.Das.Resources.UnitTests", "Sfa.Eds.Das.Resources.UnitTests\Sfa.Eds.Das.Resources.UnitTests.csproj", "{DDB611EB-BE45-473C-A29C-C59D973607DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,22 @@ Global
 		{88F7CFD8-69A0-49A9-83F5-D729DEF4AFCA}.Release|x64.Build.0 = Release|Any CPU
 		{88F7CFD8-69A0-49A9-83F5-D729DEF4AFCA}.Release|x86.ActiveCfg = Release|Any CPU
 		{88F7CFD8-69A0-49A9-83F5-D729DEF4AFCA}.Release|x86.Build.0 = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|x64.Build.0 = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|ARM.Build.0 = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|x64.ActiveCfg = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|x64.Build.0 = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{DDB611EB-BE45-473C-A29C-C59D973607DD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,5 +196,6 @@ Global
 		{F8946F39-EDEC-457A-857B-5A76D4151082} = {9E8F2B17-F53B-41D2-AFDD-34F6DC332DC6}
 		{9861240D-A2BB-46C5-990A-792F1E2AEB83} = {9E8F2B17-F53B-41D2-AFDD-34F6DC332DC6}
 		{88F7CFD8-69A0-49A9-83F5-D729DEF4AFCA} = {D6916AC5-37E3-46D5-AB05-2F32E6EF5D0C}
+		{DDB611EB-BE45-473C-A29C-C59D973607DD} = {D6916AC5-37E3-46D5-AB05-2F32E6EF5D0C}
 	EndGlobalSection
 EndGlobal
