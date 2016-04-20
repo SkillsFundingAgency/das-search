@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -141,25 +144,17 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
         }
 
         [Test]
-        [Ignore("problem with the Request being used in the controller")]
-        public void ShouldFindTheDetailsPageForAProviderAndFramework()
+        public void DetailShouldReturnNotFoundResultIfViewModelFromCriteriaIsNull()
         {
-            // Arrange
             _mockLogger = new Mock<ILog>();
             _mockMappingService = new Mock<IMappingService>();
             _mockProviderSearchService = new Mock<IProviderSearchService>();
             _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
 
-            var searchCriteria = new ProviderLocationSearchCriteria
-                                     {
-                                         FrameworkId = "123",
-                                         LocationId = "123",
-                                         ProviderId = "123"
-                                     };
-            var stubViewModel = new ProviderViewModel();
+            var searchCriteria = new ProviderLocationSearchCriteria();
 
             _mockViewModelFactory.Setup(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()))
-                .Returns(new ProviderViewModel { Training = ApprenticeshipTrainingType.Framework });
+                .Returns((ProviderViewModel)null);
 
             var controller = new ProviderController(
                 _mockProviderSearchService.Object,
@@ -167,14 +162,110 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
                 _mockMappingService.Object,
                 _mockViewModelFactory.Object);
 
-            // Act
             var result = controller.Detail(searchCriteria);
 
-            // Assert
-            Assert.That(result, Is.InstanceOf<ViewResult>());
+            result.Should().BeOfType<HttpNotFoundResult>();
+
+            var responseResult = (HttpNotFoundResult)result;
+
+            responseResult.StatusCode.Should().Be(404);
+            responseResult.StatusDescription.Should().StartWith("Cannot find provider:");
+        }
+
+        [Test]
+        public void DetailShouldReturnViewResultWhenStandardSearchIsSuccessful()
+        {
+            _mockLogger = new Mock<ILog>();
+            _mockMappingService = new Mock<IMappingService>();
+            _mockProviderSearchService = new Mock<IProviderSearchService>();
+            _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
+
+            var searchCriteria = new ProviderLocationSearchCriteria();
+
+            var stubProviderViewModel = new ProviderViewModel
+            {
+                SearchResultLink = new LinkViewModel
+                {
+                    Title = "Back to search page",
+                    Url = string.Empty
+                },
+                Training = ApprenticeshipTrainingType.Standard
+            };
+
+            _mockViewModelFactory.Setup(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()))
+                .Returns(stubProviderViewModel);
+
+            var controller = new ProviderController(
+                _mockProviderSearchService.Object,
+                _mockLogger.Object,
+                _mockMappingService.Object,
+                _mockViewModelFactory.Object);
+
+            Mock<HttpContextBase> httpContextMock = new Mock<HttpContextBase>();
+            Mock<HttpRequestBase> httpRequestMock = new Mock<HttpRequestBase>();
+            httpRequestMock.Setup(m => m.UrlReferrer).Returns(new Uri("http://www.helloworld.com"));
+            httpContextMock.SetupGet(c => c.Request).Returns(httpRequestMock.Object);
+
+            var urlHelperMock = new Mock<UrlHelper>();
+            urlHelperMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
+            controller.Url = urlHelperMock.Object;
+            controller.ControllerContext = new ControllerContext(httpContextMock.Object, new RouteData(), controller);
+
+            var result = controller.Detail(searchCriteria);
+
+            result.Should().BeOfType<ViewResult>();
 
             var viewResult = (ViewResult)result;
-            Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
+
+            viewResult.Model.Should().Be(stubProviderViewModel);
+        }
+
+        [Test]
+        public void DetailShouldReturnViewResultWhenFrameworkSearchIsSuccessful()
+        {
+            _mockLogger = new Mock<ILog>();
+            _mockMappingService = new Mock<IMappingService>();
+            _mockProviderSearchService = new Mock<IProviderSearchService>();
+            _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
+
+            var searchCriteria = new ProviderLocationSearchCriteria();
+
+            var stubProviderViewModel = new ProviderViewModel
+            {
+                SearchResultLink = new LinkViewModel
+                {
+                    Title = "Back to search page",
+                    Url = string.Empty
+                },
+                Training = ApprenticeshipTrainingType.Framework
+            };
+
+            _mockViewModelFactory.Setup(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()))
+                .Returns(stubProviderViewModel);
+
+            var controller = new ProviderController(
+                _mockProviderSearchService.Object,
+                _mockLogger.Object,
+                _mockMappingService.Object,
+                _mockViewModelFactory.Object);
+
+            Mock<HttpContextBase> httpContextMock = new Mock<HttpContextBase>();
+            Mock<HttpRequestBase> httpRequestMock = new Mock<HttpRequestBase>();
+            httpRequestMock.Setup(m => m.UrlReferrer).Returns(new Uri("http://www.helloworld.com"));
+            httpContextMock.SetupGet(c => c.Request).Returns(httpRequestMock.Object);
+
+            var urlHelperMock = new Mock<UrlHelper>();
+            urlHelperMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
+            controller.Url = urlHelperMock.Object;
+            controller.ControllerContext = new ControllerContext(httpContextMock.Object, new RouteData(), controller);
+
+            var result = controller.Detail(searchCriteria);
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult)result;
+
+            viewResult.Model.Should().Be(stubProviderViewModel);
         }
     }
 }
