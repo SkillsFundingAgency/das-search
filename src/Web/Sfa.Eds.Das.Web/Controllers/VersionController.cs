@@ -1,7 +1,10 @@
 ﻿namespace Sfa.Eds.Das.Web.Controllers
 {
+    using System.Reflection;
     using System.Web.Http;
-    using Core.Configuration;
+
+    using Sfa.Eds.Das.Core.Configuration;
+    using Sfa.Eds.Das.Web.ViewModels;
 
     public sealed class VersionController : ApiController
     {
@@ -13,9 +16,15 @@
         }
 
         // GET: api/Version
-        public string Get()
+        public VersionInformation Get()
         {
-            return _configurationSetttings.BuildId;
+            var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            return new VersionInformation
+                       {
+                           BuildId = _configurationSetttings.BuildId,
+                           Version = version.Remove(version.Length - 2),
+                           AssemblyVersion = version
+                       };
         }
     }
 }

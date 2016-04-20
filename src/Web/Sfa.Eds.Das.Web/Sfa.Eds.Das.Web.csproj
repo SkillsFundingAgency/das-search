@@ -267,6 +267,7 @@
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipTrainingType.cs" />
+    <Compile Include="ViewModels\VersionInformation.cs" />
     <Compile Include="Views\Start\Start.generated.cs">
       <DependentUpon>Start.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>

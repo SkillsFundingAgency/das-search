@@ -29,7 +29,8 @@
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            DeploymentValidator.WaitForDeployment();
+            // TODO readd this code in sprint 10
+            //DeploymentValidator.WaitForDeployment();
         }
 
         [BeforeFeature]
