@@ -22,7 +22,7 @@
             _logger = logger;
         }
 
-        public int DefaultMessageCount { get; set; } = 100;
+        public int DefaultMessageCount { get; set; } = 10;
 
         /// <summary>
         /// Gets a default number of messages for the given queue
