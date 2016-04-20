@@ -5,6 +5,7 @@
     using BoDi;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Remote;
 
     using Sfa.Das.WebTest.Infrastructure.Selenium;
     using Sfa.Das.WebTest.Infrastructure.Settings;
@@ -24,6 +25,7 @@
 
             _objectContainer.RegisterTypeAs<BrowserSettings, IBrowserSettings>();
             _objectContainer.RegisterTypeAs<PageContext, IPageContext>();
+            _objectContainer.RegisterTypeAs<BrowserStackApi, IBrowserStackApi>();
         }
 
         [BeforeTestRun]
@@ -54,6 +56,10 @@
             if (ScenarioContext.Current.TestError != null)
             {
                 seleniumContext.WebDriver.TakeScreenshot();
+                if(seleniumContext.WebDriver is RemoteWebDriver)
+                {
+                    _objectContainer.Resolve<IBrowserStackApi>().FailTestSession(ScenarioContext.Current.TestError);
+                }
             }
 
             seleniumContext.Dispose();
