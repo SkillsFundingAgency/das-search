@@ -35,8 +35,8 @@ And I enter '<Postcode>' in provider search box
 When I search Search for provider
 Then I should not see provider "DUDLEY METROPOLITAN BOROUGH COUNCIL" in provider results page.
 Examples:
-| Postcode | id |
-| LS21 3JS   | 40335 |
+| Postcode | id    |
+| LS21 3JS | 40335 |
 
 ## More than on provider found.
 
