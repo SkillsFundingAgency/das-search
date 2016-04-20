@@ -113,41 +113,41 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 @helper GetSatisfactionsHtml()
 {
     <p>
-        <b>Learner satisfaction:</b>
-        <br/>
-        @if (@Model.LearnerSatisfactionMessage != "No data available")
+        <b>Employer satisfaction:</b>
+        @if (@Model.EmployerSatisfactionMessage != "No data available")
         {
-            <span id="learner-satisfaction" class="heading-large">
-                @Model.LearnerSatisfactionMessage
+            <span id="employer-satisfaction">
+                @Model.EmployerSatisfactionMessage
             </span>
             <div class="progress-container">
-                <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
-            </div><br>
+                <div class="progressbar" style="width: @Model.EmployerSatisfaction%"></div>
+            </div>
         }
         else
         {
-            <span id="learner-satisfaction">
-                @Model.LearnerSatisfactionMessage
+            <br/>
+            <span id="employer-satisfaction">
+                @Model.EmployerSatisfactionMessage
             </span>
         }
     </p>
 
     <p>
-        <b>Employer satisfaction:</b>
-        <br/>
-        @if (@Model.EmployerSatisfactionMessage != "No data available")
+        <b>Learner satisfaction:</b>
+        @if (@Model.LearnerSatisfactionMessage != "No data available")
         {
-            <span id="employer-satisfaction" class="heading-large">
-                @Model.EmployerSatisfactionMessage
+            <span id="learner-satisfaction">
+                @Model.LearnerSatisfactionMessage
             </span>
             <div class="progress-container">
-                <div class="progressbar" style="width:@Model.EmployerSatisfaction%"></div>
-            </div><br>
+                <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
+            </div>
         }
         else
         {
-            <span id="employer-satisfaction">
-                @Model.EmployerSatisfactionMessage
+            <br />
+            <span id="learner-satisfaction">
+                @Model.LearnerSatisfactionMessage
             </span>
         }
     </p>

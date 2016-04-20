@@ -384,17 +384,17 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>Learner satisfaction:</b>\r\n        <br/>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>Employer satisfaction:</b>\r\n");
 
 
-#line 118 "..\..\Views\Provider\Detail.cshtml"
+#line 117 "..\..\Views\Provider\Detail.cshtml"
         
 
 #line default
 #line hidden
 
-#line 118 "..\..\Views\Provider\Detail.cshtml"
-         if (@Model.LearnerSatisfactionMessage != "No data available")
+#line 117 "..\..\Views\Provider\Detail.cshtml"
+         if (@Model.EmployerSatisfactionMessage != "No data available")
         {
 
 
@@ -402,17 +402,15 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>Learner satisfactio
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <span");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"learner-satisfaction\"");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"employer-satisfaction\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 121 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
+#line 120 "..\..\Views\Provider\Detail.cshtml"
+WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
 
 
 #line default
@@ -427,24 +425,22 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 4546), Tuple.Create("\"", 4587)
-, Tuple.Create(Tuple.Create("", 4554), Tuple.Create("width:", 4554), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 4513), Tuple.Create("\"", 4556)
+, Tuple.Create(Tuple.Create("", 4521), Tuple.Create("width:", 4521), true)
 
-#line 124 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4560), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
+#line 123 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create(" ", 4527), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
 
 #line default
 #line hidden
-, 4560), false)
-, Tuple.Create(Tuple.Create("", 4586), Tuple.Create("%", 4586), true)
+, 4528), false)
+, Tuple.Create(Tuple.Create("", 4555), Tuple.Create("%", 4555), true)
 );
 
-WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>");
-
-WriteLiteralTo(__razor_helper_writer, "<br>\r\n");
+WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
 
 
-#line 126 "..\..\Views\Provider\Detail.cshtml"
+#line 125 "..\..\Views\Provider\Detail.cshtml"
         }
         else
         {
@@ -452,9 +448,11 @@ WriteLiteralTo(__razor_helper_writer, "<br>\r\n");
 
 #line default
 #line hidden
+WriteLiteralTo(__razor_helper_writer, "            <br/>\r\n");
+
 WriteLiteralTo(__razor_helper_writer, "            <span");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"learner-satisfaction\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"employer-satisfaction\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
@@ -462,7 +460,7 @@ WriteLiteralTo(__razor_helper_writer, "                ");
 
 
 #line 130 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
+WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
 
 
 #line default
@@ -485,17 +483,17 @@ WriteLiteralTo(__razor_helper_writer, "    </p>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>Employer satisfaction:</b>\r\n        <br/>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>Learner satisfaction:</b>\r\n");
 
 
-#line 138 "..\..\Views\Provider\Detail.cshtml"
+#line 137 "..\..\Views\Provider\Detail.cshtml"
         
 
 #line default
 #line hidden
 
-#line 138 "..\..\Views\Provider\Detail.cshtml"
-         if (@Model.EmployerSatisfactionMessage != "No data available")
+#line 137 "..\..\Views\Provider\Detail.cshtml"
+         if (@Model.LearnerSatisfactionMessage != "No data available")
         {
 
 
@@ -503,17 +501,15 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>Employer satisfacti
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <span");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"employer-satisfaction\"");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"heading-large\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"learner-satisfaction\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 141 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
+#line 140 "..\..\Views\Provider\Detail.cshtml"
+WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
 
 
 #line default
@@ -528,24 +524,22 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 5173), Tuple.Create("\"", 5215)
-, Tuple.Create(Tuple.Create("", 5181), Tuple.Create("width:", 5181), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 5118), Tuple.Create("\"", 5159)
+, Tuple.Create(Tuple.Create("", 5126), Tuple.Create("width:", 5126), true)
 
-#line 144 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5187), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
+#line 143 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5132), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
 
 #line default
 #line hidden
-, 5187), false)
-, Tuple.Create(Tuple.Create("", 5214), Tuple.Create("%", 5214), true)
+, 5132), false)
+, Tuple.Create(Tuple.Create("", 5158), Tuple.Create("%", 5158), true)
 );
 
-WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>");
-
-WriteLiteralTo(__razor_helper_writer, "<br>\r\n");
+WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
 
 
-#line 146 "..\..\Views\Provider\Detail.cshtml"
+#line 145 "..\..\Views\Provider\Detail.cshtml"
         }
         else
         {
@@ -553,9 +547,11 @@ WriteLiteralTo(__razor_helper_writer, "<br>\r\n");
 
 #line default
 #line hidden
+WriteLiteralTo(__razor_helper_writer, "            <br />\r\n");
+
 WriteLiteralTo(__razor_helper_writer, "            <span");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"employer-satisfaction\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"learner-satisfaction\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
@@ -563,7 +559,7 @@ WriteLiteralTo(__razor_helper_writer, "                ");
 
 
 #line 150 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
+WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
 
 
 #line default
