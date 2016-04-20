@@ -96,7 +96,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name Level 3'.");
+            GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name Level 3'.");
         }
 
         [Test]
@@ -116,7 +116,9 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
+            GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
+
+            GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship: 'Pathway test name'.");
         }
 
         [Test]
@@ -157,7 +159,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name'.");
+            GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship: 'Pathway test name'.");
         }
 
         [Test]

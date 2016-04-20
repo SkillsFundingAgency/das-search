@@ -339,6 +339,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\dist\css\external-links\external-link.png" />
     <Content Include="Content\dist\css\screen.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -348,8 +349,10 @@
     <Content Include="Content\dist\images\govuk-crest.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\icons\icon-pointer.png" />
     <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
     <Content Include="Content\src\images\govuk-crest.svg" />
+    <Content Include="Content\src\images\icons\icon-pointer.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">

@@ -10,7 +10,7 @@
         {
             if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?keywords"))
             {
-                return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
+                return new LinkViewModel { Title = "Back", Url = urlReferrer.OriginalString };
             }
 
             return new LinkViewModel { Title = "Back to search page", Url = action };
@@ -20,7 +20,7 @@
         {
             if (urlReferrer != null && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("?apprenticeshipid") && urlReferrer.OriginalString.ToLower(CultureInfo.CurrentCulture).Contains("&postcode"))
             {
-                return new LinkViewModel { Title = "Results", Url = urlReferrer.OriginalString };
+                return new LinkViewModel { Title = "Back", Url = urlReferrer.OriginalString };
             }
 
             return new LinkViewModel { Title = "Back to search page", Url = action };

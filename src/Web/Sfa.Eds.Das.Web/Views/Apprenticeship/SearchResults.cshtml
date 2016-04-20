@@ -1,12 +1,12 @@
 ﻿@using Sfa.Eds.Das.Web.ViewModels
-@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
+@model ApprenticeshipSearchResultViewModel
 ﻿
 @{
     ViewBag.Title = "Search Results";
 }
 
 <main id="content" role="main">
-    @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
+    @Html.ActionLink("Back", "Search", null, new { @class = "link-back" })
     <div id="apprenticeship-results" class="grid-row">
 
         <div class="column-two-thirds">
@@ -59,7 +59,8 @@
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) <span style="color:gray">new</span>
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) 
+        <span>new</span>
     </h2>    
 }
 

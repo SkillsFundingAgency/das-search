@@ -1,4 +1,5 @@
-﻿@using Sfa.Eds.Das.Web.Extensions
+﻿@using Sfa.Eds.Das.Resources
+@using Sfa.Eds.Das.Web.Extensions
 @model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
@@ -19,9 +20,6 @@
                 </h1>
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
-                    <p class="disclaimer">
-                        <i>Posted by @Model.Name</i>
-                    </p>
                 </div>
                 
             </div>
@@ -32,7 +30,9 @@
             {
                 <div class="related-container">
                     <aside class="related">
-                        <h2 class="heading-medium">Training provider quality assessment</h2>
+                        <h2 class="heading-medium">
+                            Training provider quality assessment
+                        </h2>
                         @GetSatisfactionsHtml()
                     </aside>
                 </div>
@@ -41,17 +41,21 @@
     </div>
 
     <section>
-        <header>
+        <header class="hgroup">
             <h2 class="heading-large apprenticeship-name-level">
                 @Model.ApprenticeshipNameWithLevel
             </h2>
+            <b>Level:</b>
+            <span>
+                @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel) )
+            </span>
         </header>
         <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl)
+            @GetStandardPropertyAsLinkHtml("Website", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl)
             @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
             @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
-            @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
+            @GetStandardPropertyAsLinkHtml("Contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl)
+            @GetDeliveryModesHtml("Training options", Model.DeliveryModes)
             @ShowTrainingLocation("Training location")
         </dl>
 
@@ -63,6 +67,12 @@
         </header>
         <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
     </section>
+
+    <section>
+        <p class="disclaimer">
+            <i>Content maintained by @Model.Name</i>
+        </p>
+    </section>
 </main>
 
 @helper ShowTrainingLocation(string title)
@@ -73,11 +83,15 @@ if (@Model != null)
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-            <dd id="training-location" class="training-location">Training will take place at your location</dd>
+        <dd id="training-location" class="training-location">
+            Training will take place at your location
+        </dd>
     }
     else
     {
-        <dd id="training-location" class="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+        <dd id="training-location" class="training-location">
+            @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode
+        </dd>
     }
 }
 }
@@ -100,13 +114,13 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 }
 }
 
-@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, bool hideIfEmpty = false)
+@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url)
 {
-    if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
+    if (!string.IsNullOrEmpty(url))
     {
         <dt class="@classTitle">@title</dt>
         <dd>
-            @Html.RenderAIfExists(@url, $"http://{url}", $"{cssClass} {classIdentifier}", "_blank")
+            <a href="http://@url" rel="external" target="_blank" class="@cssClass @classIdentifier">@url</a>
         </dd>
     }
 }
@@ -178,6 +192,14 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     }
                 }
             </ul>
+                <p class="no-list-item">
+                    <details>
+                        <summary>Explain training options</summary>
+                        <p>Day release: eg one day a week at the training provider's location.</p>
+                        <p>Block release: eg 3-4 weeks at the training provider's location.</p>
+                        <p>At your location: the provider comes to your workplace.</p>
+                    </details>
+                </p>
         </dd>
     }
 }

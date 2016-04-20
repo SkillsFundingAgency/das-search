@@ -46,10 +46,8 @@ namespace Sfa.Das.Web.Services
                     viewModel.Training = ApprenticeshipTrainingType.Standard;
 
                     var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
-                    viewModel.ApprenticeshipNameWithLevel = string.Concat(
-                        apprenticeshipData.Title,
-                        " level ",
-                        apprenticeshipData.NotionalEndLevel);
+                    viewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
+                    viewModel.ApprenticeshipLevel = apprenticeshipData.NotionalEndLevel.ToString();
                 }
             }
 
@@ -68,7 +66,8 @@ namespace Sfa.Das.Web.Services
 
                     var apprenticeshipData = _getFrameworks.GetFrameworkById(frameworkId);
                     viewModel.ApprenticeshipNameWithLevel =
-                        $"{apprenticeshipData.FrameworkName} - {apprenticeshipData.PathwayName} level {apprenticeshipData.Level}";
+                        $"{apprenticeshipData.FrameworkName} - {apprenticeshipData.PathwayName}";
+                    viewModel.ApprenticeshipLevel = apprenticeshipData.Level.ToString();
                 }
             }
 

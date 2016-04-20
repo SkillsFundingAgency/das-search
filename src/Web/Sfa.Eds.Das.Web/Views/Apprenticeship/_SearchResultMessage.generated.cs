@@ -308,8 +308,12 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"labelmessage\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        Apprenticeships labelled <strong>new</strong> are job specific standar" +
-"ds, developed by groups of employers.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Results labelled <strong");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"new\"");
+
+WriteLiteralTo(__razor_helper_writer, ">new</strong> are apprenticeship standards developed by employer groups.\r\n    </p" +
+">\r\n");
 
 
 #line 67 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"

@@ -64,7 +64,7 @@ WriteLiteral("    ");
 
             
             #line 9 "..\..\Views\Provider\FrameworkResults.cshtml"
-Write(Html.ActionLink("Back to Framework", "Framework", "Apprenticeship", new { @id = @Model.FrameworkId }, new { @class = "link-back" }));
+Write(Html.ActionLink("Back", "Framework", "Apprenticeship", new { @id = @Model.FrameworkId }, new { @class = "link-back" }));
 
             
             #line default

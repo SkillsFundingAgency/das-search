@@ -19,12 +19,9 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                @if (!string.IsNullOrEmpty(@Model.IntroductoryText))
-                {
                     <div class="standard-result-summary">
-                        @Html.MarkdownToHtml(Model.IntroductoryText)
+                        This is an apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
                     </div>
-                }
             </div>
         </div>
 
@@ -35,10 +32,10 @@
                 <div class="related-container">
                     <aside class="related">
 
-                        <h2 class="heading-medium">Find training providers</h2>
+                        <h2 class="heading-medium">Find training providers for this apprenticeship</h2>
                         <div class="form-group @(@Model.HasError ? " error" : "")">
                             <label class="form-label" for="postcode">
-                                Enter postcode@* or partial postcode *@
+                                Enter a full postcode.
                                 <p>
                                     @{
                                         Html.RenderPartial("_BlankFieldErrorMessage");
@@ -59,7 +56,7 @@
         <section>
             <header>
                 <h2 class="heading-large">
-                    Summary of apprenticeship standard
+                    Summary of this apprenticeship standard
                 </h2>
             </header>
             <dl class="data-list">
@@ -175,9 +172,6 @@
                 <a href="@pdfUrl" target="_blank">
                     @title
                 </a>
-                <p>
-                    PDF, 268KB, 2 pages
-                </p>
             </li>
     }
 }

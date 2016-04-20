@@ -28,6 +28,11 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-p.strong {
-    font-weight: bold;
+.breadcrumb{
+    border-bottom: 1px solid #bfc1c3;
+    margin: 0;
+}
+
+.no-list-item{
+    list-style-type: none;
 }

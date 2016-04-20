@@ -47,7 +47,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship: 'Test name'.");
         }
 
         [Test]
@@ -65,7 +65,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Test name'.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship: 'Test name'.");
         }
 
         [Test]
@@ -102,7 +102,7 @@
 
             GetPartial(html, ".result dl dd").Should().Be("1 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training takes place at your location.");
 
             var secondResult = GetHtmlElement(html, ".result", 2);
 
@@ -205,7 +205,7 @@
 
             GetPartial(html, ".result dl dd").Should().Be("0 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training takes place at your location.");
         }
 
         [Test]

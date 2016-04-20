@@ -83,10 +83,10 @@ WriteLiteralTo(__razor_helper_writer, "        <dd");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Training can take place at your location.</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n            Training takes place at your location.\r\n        </dd>\r\n");
 
 
-#line 36 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 38 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     }
     else
     {
@@ -101,7 +101,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.LocationName);
 
 
@@ -110,7 +110,7 @@ WriteTo(__razor_helper_writer, item.LocationName);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                  WriteTo(__razor_helper_writer, item.Address.Address1);
 
 
@@ -119,7 +119,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                         WriteTo(__razor_helper_writer, item.Address.Address2);
 
 
@@ -128,7 +128,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                                                WriteTo(__razor_helper_writer, item.Address.County);
 
 
@@ -137,7 +137,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                                                                     WriteTo(__razor_helper_writer, item.Address.Postcode);
 
 
@@ -146,7 +146,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 40 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     }
 
 
@@ -154,7 +154,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 43 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden
