@@ -17,6 +17,9 @@ namespace Sfa.Eds.Das.Resources.UnitTests
         [TestCase("6", "bachelor's degree")]
         [TestCase("7", "master’s degree")]
         [TestCase("8", "doctorate")]
+        [TestCase("999", "", Description = "Wrong level")]
+        [TestCase(null, "", Description = "Null input")]
+        [TestCase("", "", Description = "Empty input")]
         public void ShouldReturnEquivalenceTextForLevel(string level, string expected)
         {
             var actual = EquivalenveLevelService.GetFrameworkLevel(level);
