@@ -5,5 +5,6 @@
     /// </summary>
     public class hotfixTest
     {
+        // some new text
     }
 }
