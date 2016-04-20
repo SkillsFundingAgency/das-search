@@ -107,6 +107,7 @@ namespace Sfa.Das.ApplicationServices
                         TotalResults = 0,
                         FrameworkId = frameworkId,
                         FrameworkCode = framework?.FrameworkCode ?? 0,
+                        Level = framework?.Level ?? 0,
                         FrameworkName = framework?.FrameworkName,
                         PathwayName = framework?.PathwayName,
                         PostCode = postCode,
@@ -114,23 +115,22 @@ namespace Sfa.Das.ApplicationServices
                         HasError = false
                     };
                 }
-                else
+
+                var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates);
+
+                var result = new ProviderFrameworkSearchResults
                 {
-                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates);
+                    TotalResults = searchResults.Total,
+                    FrameworkId = frameworkId,
+                    FrameworkCode = framework?.FrameworkCode ?? 0,
+                    Level = framework?.Level ?? 0,
+                    FrameworkName = framework?.FrameworkName,
+                    PathwayName = framework?.PathwayName,
+                    PostCode = postCode,
+                    Hits = searchResults.Hits
+                };
 
-                    var result = new ProviderFrameworkSearchResults
-                    {
-                        TotalResults = searchResults.Total,
-                        FrameworkId = frameworkId,
-                        FrameworkCode = framework?.FrameworkCode ?? 0,
-                        FrameworkName = framework?.FrameworkName,
-                        PathwayName = framework?.PathwayName,
-                        PostCode = postCode,
-                        Hits = searchResults.Hits
-                    };
-
-                    return result;
-                }
+                return result;
             }
             catch (SearchException ex)
             {
