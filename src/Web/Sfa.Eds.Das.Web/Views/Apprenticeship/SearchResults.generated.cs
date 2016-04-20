@@ -131,7 +131,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n    </h2>\r\n");
 #line hidden
 
 #line 73 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-public System.Web.WebPages.HelperResult GetStandardDetailItem(string title, string id, string item, string unit = "")
+public System.Web.WebPages.HelperResult GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
 {
 #line default
 #line hidden
@@ -158,14 +158,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2486), Tuple.Create("\"", 2497)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2504), Tuple.Create("\"", 2515)
 
 #line 78 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2494), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2512), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2494), false)
+, 2512), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -375,7 +375,7 @@ WriteLiteral("                        ");
 
             
             #line 41 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                   Write(GetStandardDetailItem("Level", "level", item.Level));
+                   Write(GetApprenticeshipDetailItem("Level", "level", item.Level));
 
             
             #line default
@@ -386,7 +386,7 @@ WriteLiteral("                        ");
 
             
             #line 42 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                   Write(GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage));
+                   Write(GetApprenticeshipDetailItem("Typical length:","length", item.TypicalLengthMessage));
 
             
             #line default

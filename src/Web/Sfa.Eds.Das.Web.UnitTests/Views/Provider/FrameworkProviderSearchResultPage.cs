@@ -225,6 +225,17 @@
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
+                Id = "1",
+                FrameworkCode = 123,
+                PathwayCode = 321,
+                Level = 4,
+                MarketingName = "Marketing name test",
+                ProviderMarketingInfo = "Provider marketing info test",
+                ApprenticeshipMarketingInfo = "Apprenticeship marketing info test",
+                Phone = "123456789",
+                Email = "test@test.com",
+                ContactUsUrl = "www.contactus.com",
+                ApprenticeshipInfoUrl = "www.apprenticeshipinfourl.com",
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1,

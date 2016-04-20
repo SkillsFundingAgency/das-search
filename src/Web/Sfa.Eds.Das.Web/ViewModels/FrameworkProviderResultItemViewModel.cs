@@ -34,7 +34,7 @@
 
         public string ContactUsUrl { get; set; }
 
-        public string StandardInfoUrl { get; set; }
+        public string ApprenticeshipInfoUrl { get; set; }
 
         public List<string> DeliveryModes { get; set; }
 

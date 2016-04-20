@@ -135,7 +135,6 @@
         }
 
         [Test]
-        [Ignore]
         public void When_SearchResultContainLevel()
         {
             var searchPage = new SearchResults();
@@ -160,14 +159,12 @@
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
             // First result
-            GetPartialWhere(html, ".result", "Test title 1").Should().Contain("72 months");
-            GetPartialWhere(html, ".result", "Test title 1").Should().Contain("Typical length:");
+            GetPartial(html, ".result-title").Should().Be("Test title 1");
+            GetPartial(html, ".length").Should().Be("72 months");
 
             // Second result
-            GetPartialWhere(html, ".result", "Test title 2").Should().NotContain("72 months");
-            GetPartialWhere(html, ".result", "Test title 2").Should().NotContain("Typical length:");
-            GetPartialWhere(html, ".result", "Test title 2").Should().Contain("Level");
-            GetPartialWhere(html, ".result", "Test title 2").Should().Contain("3 (equivalent to 2 A level passes)");
+            GetPartial(html, ".result-title", 2).Should().Be("Test title 2");
+            GetPartial(html, ".level").Should().Be("3 (equivalent to 2 A level passes)");
         }
 
         [Test]

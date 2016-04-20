@@ -117,12 +117,23 @@
         {
             var mockFrameworkRepository = new Mock<IGetFrameworks>();
 
+            var stubFrameworkViewModel = new FrameworkViewModel
+            {
+                FrameworkId = 123,
+                Title = "Title test",
+                FrameworkName = "Framework name test",
+                FrameworkCode = 321,
+                Level = 3,
+                PathwayName = "Pathway name test",
+                PathwayCode = 4
+            };
+
             var framework = new Framework { Title = "Hello", };
             mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(framework);
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
                 x => x.Map<Framework, FrameworkViewModel>(It.IsAny<Framework>()))
-                .Returns(new FrameworkViewModel());
+                .Returns(stubFrameworkViewModel);
 
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));

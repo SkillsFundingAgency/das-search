@@ -38,8 +38,8 @@
                         }
                     </header>
                     <dl class="result-data-list">
-                        @GetStandardDetailItem("Level", "level", item.Level)
-                        @GetStandardDetailItem("Typical length:","length", item.TypicalLengthMessage)
+                        @GetApprenticeshipDetailItem("Level", "level", item.Level)
+                        @GetApprenticeshipDetailItem("Typical length:","length", item.TypicalLengthMessage)
                     </dl>
                 </article>
             }
@@ -70,7 +70,7 @@
     </h2>
 }
 
-@helper GetStandardDetailItem(string title, string id, string item, string unit = "")
+@helper GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
 {
     if (!string.IsNullOrEmpty(item))
     {
