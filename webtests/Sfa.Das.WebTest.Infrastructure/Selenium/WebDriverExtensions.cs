@@ -32,6 +32,11 @@
             }
         }
 
+        public static string CleanUrl(this IWebDriver driver)
+        {
+            return driver.Url?.Split('?')[0].ToLower();
+        }
+
         public static void TakeScreenshot(this IWebDriver driver)
         {
             try
@@ -66,6 +71,15 @@
             catch (Exception ex)
             {
                 Console.WriteLine("Error while taking screenshot: {0}", ex);
+            }
+        }
+
+        public static void WaitFor(this IWebDriver driver, Func<object, bool> func, int timeoutInSeconds = 10)
+        {
+            if (timeoutInSeconds > 0)
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                wait.Until(func);
             }
         }
     }
