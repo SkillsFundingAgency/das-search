@@ -216,7 +216,7 @@
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("3 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training takes place at your location.");
         }
 
         [Test]
