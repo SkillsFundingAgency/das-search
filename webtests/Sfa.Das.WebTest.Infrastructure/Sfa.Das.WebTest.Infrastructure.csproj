@@ -80,6 +80,10 @@
     <Compile Include="PageNavigationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Retry.cs" />
+    <Compile Include="Selenium\BrowserStackApi.cs" />
+    <Compile Include="Selenium\DesiredCapabilitiesExtensions.cs" />
+    <Compile Include="Selenium\ExceptionExtensions.cs" />
+    <Compile Include="Selenium\IBrowserStackApi.cs" />
     <Compile Include="Selenium\IPageContext.cs" />
     <Compile Include="Selenium\PageContext.cs" />
     <Compile Include="Selenium\SeleniumContext.cs" />
