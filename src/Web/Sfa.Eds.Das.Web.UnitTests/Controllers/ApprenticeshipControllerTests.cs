@@ -20,6 +20,19 @@
     public sealed class ApprenticeshipControllerTests
     {
         [Test]
+        public void Search_WhenNavigateTo_ShouldReturnAViewResult()
+        {
+            // Arrange
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null);
+
+            // Act
+            ViewResult result = controller.Search() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()
         {
             // Arrange

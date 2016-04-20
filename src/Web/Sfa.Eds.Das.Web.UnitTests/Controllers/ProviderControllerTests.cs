@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Web.UnitTests.Controllers
+﻿using FluentAssertions;
+
+namespace Sfa.Eds.Das.Web.UnitTests.Controllers
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -30,21 +32,22 @@
 
         [TestCase(null)]
         [TestCase("")]
-        public async Task SearchResultsShouldRedirectToStandardDetailsIfNoPostCodeIsNotSet(string postCode)
+        public async Task SearchResultsShouldRedirectToStandardDetailsIfPostCodeIsNotSet(string postCode)
         {
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123 };
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode };
 
             var controller = new ProviderController(null, null, null, null);
 
             var result = await controller.StandardResults(searchCriteria);
 
-            Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
+            result.Should().BeOfType<RedirectToRouteResult>();
 
             var redirectResult = (RedirectToRouteResult)result;
-            Assert.That(redirectResult?.RouteValues["id"], Is.EqualTo(123));
-            Assert.That(redirectResult?.RouteValues["HasError"], Is.EqualTo(true));
-            Assert.That(redirectResult?.RouteValues["controller"], Is.EqualTo("Apprenticeship"));
-            Assert.That(redirectResult?.RouteValues["action"], Is.EqualTo("Standard"));
+
+            redirectResult?.RouteValues["id"].Should().Be(123);
+            redirectResult?.RouteValues["HasError"].Should().Be(true);
+            redirectResult?.RouteValues["controller"].Should().Be("Apprenticeship");
+            redirectResult?.RouteValues["action"].Should().Be("Standard");
         }
 
         [Test]
@@ -78,10 +81,10 @@
 
             var result = await controller.StandardResults(searchCriteria);
 
-            Assert.That(result, Is.InstanceOf<ViewResult>());
+            result.Should().BeOfType<ViewResult>();
 
             var viewResult = (ViewResult)result;
-            Assert.That(viewResult.Model, Is.EqualTo(stubViewModel));
+            viewResult.Model.Should().Be(stubViewModel);
         }
 
         [Test]

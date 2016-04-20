@@ -26,8 +26,6 @@
 
         public string ContactUsUrl { get; set; }
 
-        public string StandardInfoUrl { get; set; }
-
         public List<string> DeliveryModes { get; set; }
 
         public string Website { get; set; }
