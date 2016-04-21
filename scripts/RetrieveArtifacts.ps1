@@ -39,6 +39,6 @@ Unzip $zipFile $buildFolder
 
 Get-ChildItem -Path ".\" -Filter *.dll -Recurse
 
-ls ".\build\test"
+ls ".\build"
 
 Write-Host "Retrive artifact done"
