@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Sfa.Das.ApplicationServices.Exceptions;
 using Sfa.Das.ApplicationServices.Models;
 using Sfa.Eds.Das.Core.Domain.Services;
@@ -59,6 +60,8 @@ namespace Sfa.Das.ApplicationServices
                 }
                 else
                 {
+                    _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
+
                     var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates);
 
                     var result = new ProviderStandardSearchResults
