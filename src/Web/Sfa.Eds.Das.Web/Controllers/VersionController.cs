@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Web.Controllers
+﻿using System.Configuration;
+
+namespace Sfa.Eds.Das.Web.Controllers
 {
     using System.Reflection;
     using System.Web.Http;
@@ -19,12 +21,13 @@
         public VersionInformation Get()
         {
             var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var buildVersion = ConfigurationManager.AppSettings["BuildVersion"];
             return new VersionInformation
-                       {
-                           BuildId = _configurationSetttings.BuildId,
-                           Version = version.Remove(version.Length - 2),
-                           AssemblyVersion = version
-                       };
+            {
+                BuildId = _configurationSetttings.BuildId,
+                Version = buildVersion,
+                AssemblyVersion = version
+            };
         }
     }
 }
