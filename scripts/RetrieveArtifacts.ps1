@@ -4,7 +4,7 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 function Unzip($zipfile, $outpath)
 {
-    $testdir = "$outpath\test"
+    $testdir = "$outpath\e2e"
     if(Test-Path $testdir){
         Write-Host "OK"
         Remove-Item -Recurse -Force $testdir
