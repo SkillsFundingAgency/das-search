@@ -33,16 +33,15 @@
         public void GenerateStandardMetadataFiles()
         {
             var currentStandards = _larsDataService.GetListOfCurrentStandards();
-            _logger.Info($"Got {currentStandards.Count()} current live standards from LARS data.");
+            _logger.Info($"Got {currentStandards.Count()} 'Ready for delivery' standards from LARS data.");
 
             var currentMetaDataIds = _vstsService.GetExistingStandardIds();
-            _logger.Info($"Got {currentMetaDataIds.Count()} current meta data files from vsts.");
+            _logger.Info($"Got {currentMetaDataIds.Count()} current meta data files Git Repository.");
 
             var missingStandards = DetermineMissingMetaData(currentStandards, currentMetaDataIds);
-            _logger.Info($"There are {missingStandards.Count} meta data files that need to be created.");
 
             PushStandardsToGit(missingStandards);
-            _logger.Info($"Pushed new meta files to Git Repository.");
+            _logger.Info($"Pushed {missingStandards.Count} new meta files to Git Repository.");
         }
 
         public IDictionary<string, string> GetAllAsJson()

@@ -24,12 +24,12 @@
             _indexSettings = indexSettings;
             _indexerHelper = indexerHelper;
             _log = log;
-            _name = typeof(T).Name;
+            _name = typeof(T) == typeof(IMaintainProviderIndex) ? "Provider Index" : "Apprenticeship Index";
         }
 
         public async Task CreateScheduledIndex(DateTime scheduledRefreshDateTime)
         {
-            _log.Info($"Creating new scheduled {_name} index at " + DateTime.Now);
+            _log.Info($"Creating new scheduled {_name}");
 
             try
             {
@@ -43,7 +43,7 @@
                     return;
                 }
 
-                _log.Info($"Indexing {_name}s...");
+                _log.Info($"Indexing documents for {_name}.");
 
                 await _indexerHelper.IndexEntries(newIndexName).ConfigureAwait(false);
 
@@ -62,8 +62,8 @@
 
                 stopwatch.Stop();
                 var properties = new Dictionary<string, object> { { "Alias", _indexSettings.IndexesAlias }, { "ExecutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
-                _log.Info("Elasticsearch.CreateScheduledIndex", properties);
-                _log.Info($"{_name} Indexing complete.");
+                _log.Debug($"Created {_name}", properties);
+                _log.Info($"{_name}ing complete.");
             }
             catch (Exception ex)
             {

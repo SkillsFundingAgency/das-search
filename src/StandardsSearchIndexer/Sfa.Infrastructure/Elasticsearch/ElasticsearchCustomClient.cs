@@ -143,7 +143,8 @@ namespace Sfa.Infrastructure.Elasticsearch
                                      { "Uri", apiCallDetails?.Uri?.AbsoluteUri },
                                      { "RequestBody", body }
                                  };
-            _logger.Info(identifier, properties);
+
+            _logger.Debug($"ElasticsearchQuery: {identifier}", properties);
         }
     }
 }
