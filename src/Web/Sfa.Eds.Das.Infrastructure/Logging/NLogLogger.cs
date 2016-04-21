@@ -42,6 +42,11 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
             SendLog(msg, LogLevel.Debug);
         }
 
+        public void Debug(string msg, Dictionary<string, object> properties)
+        {
+            SendLog(msg, LogLevel.Debug, properties);
+        }
+
         public void Error(string msg)
         {
             SendLog(msg, LogLevel.Error);
