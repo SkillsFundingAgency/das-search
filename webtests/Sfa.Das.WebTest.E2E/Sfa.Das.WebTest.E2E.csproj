@@ -220,6 +220,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
       <TransformOnBuild>true</TransformOnBuild>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.Debug.config">
       <DependentUpon>App.config</DependentUpon>
