@@ -6,17 +6,19 @@ namespace Sfa.Infrastructure.Elasticsearch
 {
     public class ElasticsearchClientFactory : IElasticsearchClientFactory
     {
-        private readonly ConnectionSettings _connectionSettings;
+        private readonly IInfrastructureSettings _infrastructureSettings;
 
         public ElasticsearchClientFactory(IInfrastructureSettings infrastructureSettings)
         {
-            _connectionSettings = new ConnectionSettings(new StaticConnectionPool(infrastructureSettings.ElasticServerUrls));
+            _infrastructureSettings = infrastructureSettings;
         }
 
         public IElasticClient GetElasticClient()
         {
-            var client = new ElasticClient(_connectionSettings);
-            return client;
+            using (var settings = new ConnectionSettings(new StaticConnectionPool(_infrastructureSettings.ElasticServerUrls)))
+            {
+                return new ElasticClient(settings);
+            }
         }
     }
 }

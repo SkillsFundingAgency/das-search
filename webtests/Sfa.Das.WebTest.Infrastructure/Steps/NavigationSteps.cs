@@ -8,6 +8,7 @@
     using NUnit.Framework;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
 
     using Sfa.Das.WebTest.Infrastructure.Selenium;
     using Sfa.Das.WebTest.Infrastructure.Settings;
@@ -63,11 +64,12 @@
             var objectType = FindPageType(page);
             PageNavigationAttribute attribute =
                 (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
-            string path = _driver.Url?.Split('?')[0].ToLower();
             var url = _browserSettings.BaseUrl + attribute.Url.ToLower();
-            Assert.True(path.StartsWith(url),$"Expected to start with {url} but was {path}");
+            _driver.WaitFor(x => _driver.CleanUrl().StartsWith(url));
+            Assert.True(_driver.CleanUrl().StartsWith(url),$"Expected to start with {url} but was {_driver.CleanUrl()}");
             _pageContext.CurrentPage = _objectContainer.Resolve(objectType);
         }
+
 
         private static Type FindPageType(string page)
         {

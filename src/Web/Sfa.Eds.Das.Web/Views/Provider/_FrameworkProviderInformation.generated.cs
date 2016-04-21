@@ -110,7 +110,7 @@ WriteLiteral("                    <dd");
 
 WriteLiteral(" class=\"address\"");
 
-WriteLiteral(">Training can take place at your location.</dd>\r\n");
+WriteLiteral(">Training takes place at your location.</dd>\r\n");
 
             
             #line 19 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"

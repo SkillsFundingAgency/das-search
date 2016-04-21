@@ -71,7 +71,7 @@
         /// <param name="message">The message to delete off the queue</param>
         public void DeleteQueueMessage(string queueName, IQueueMessage message)
         {
-            var azureQueueMessage = message as AzureQueueMessage;
+            var azureQueueMessage = (AzureQueueMessage)message;
 
             if (azureQueueMessage == null)
             {

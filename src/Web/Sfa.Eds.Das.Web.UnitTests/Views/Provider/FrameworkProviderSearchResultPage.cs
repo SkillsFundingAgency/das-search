@@ -32,11 +32,75 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There was a problem performing a search. Try again later.");
+            this.GetPartial(html, ".result-message").Should().Contain("There was a problem performing a search. Try again later.");
+        }
+
+        [Test]
+        public void ShouldShowZeroResultsMessageWhenThereAreNoResults()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                PostCode = "Test postcode",
+                Level = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship course: 'Pathway test name Level 3' in 'Test postcode'");
+        }
+
+        [Test]
+        public void ShouldShowZeroResultsMessageWhenThereAreNoResultsAndThereIsNoLevel()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                PostCode = "Test postcode",
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship course: 'Pathway test name' in 'Test postcode'");
         }
 
         [Test]
         public void ShouldShowIndividualMessageWhenJustOneResultIsReturned()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                Level = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name Level 3'.");
+        }
+
+        [Test]
+        public void ShouldShowIndividualMessageWhenJustOneResultIsReturnedAndThereIsNoLevel()
         {
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
@@ -52,11 +116,32 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
+            this.GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
         }
 
         [Test]
         public void ShouldShowGeneralMessageWhenSeveralResultsAreReturned()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 7,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                Level = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            this.GetPartial(html, ".result-message").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name Level 3'.");
+        }
+
+        [Test]
+        public void ShouldShowGeneralMessageWhenSeveralResultsAreReturnedAndThereIsNoLevel()
         {
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
@@ -72,7 +157,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name'.");
+            this.GetPartial(html, ".result-message").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name'.");
         }
 
         [Test]
@@ -216,7 +301,7 @@
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("3 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Training can take place at your location.");
+            GetPartial(html, ".result dl dd", 2).Should().Be("Training takes place at your location.");
         }
 
         [Test]

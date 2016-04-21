@@ -5,15 +5,16 @@
     using OpenQA.Selenium;
 
     using Sfa.Das.WebTest.Infrastructure;
+    using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     [PageNavigation("/apprenticeship/searchresults")]
     public class SearchResultsPage
     {
         private readonly IWebDriver _driver;
 
-        private readonly By _firstFrameworkSelector = By.CssSelector("#apprenticeship-results article[id^=framework] a");
+        private readonly By _firstFrameworkSelector = By.CssSelector("#apprenticeship-results .framework-result a");
 
-        private readonly By _firstStandardSelector = By.CssSelector("#apprenticeship-results article[id^=standard] a");
+        private readonly By _firstStandardSelector = By.CssSelector("#apprenticeship-results .standard-result a");
 
         public SearchResultsPage(IWebDriver driver)
         {
