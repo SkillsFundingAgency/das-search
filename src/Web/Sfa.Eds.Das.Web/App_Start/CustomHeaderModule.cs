@@ -12,6 +12,7 @@ namespace Sfa.Eds.Das.Web
 
         public void Dispose()
         {
+            // No custom implementation
         }
 
         private void OnPreSendRequestHeaders(object sender, EventArgs e)
