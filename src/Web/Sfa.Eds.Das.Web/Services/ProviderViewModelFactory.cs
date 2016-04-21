@@ -65,8 +65,7 @@ namespace Sfa.Das.Web.Services
                     var frameworkId = Convert.ToInt32(criteria.FrameworkId);
 
                     var apprenticeshipData = _getFrameworks.GetFrameworkById(frameworkId);
-                    viewModel.ApprenticeshipNameWithLevel =
-                        $"{apprenticeshipData.FrameworkName} - {apprenticeshipData.PathwayName}";
+                    viewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
                     viewModel.ApprenticeshipLevel = apprenticeshipData.Level.ToString();
                 }
             }
