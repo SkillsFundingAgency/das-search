@@ -63,17 +63,18 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
 
         private void SendLog(string msg, LogLevel level, Dictionary<string, object> properties = null, Exception exception = null)
         {
-            if (properties == null)
+            var propertiesLocal = new Dictionary<string, object>();
+            if (properties != null)
             {
-                properties = new Dictionary<string, object>();
+                propertiesLocal = properties;
             }
 
-            properties.Add("Application", "Sfa.Das.Web");
-            properties.Add("LoggerType", _loggerType);
+            propertiesLocal.Add("Application", "Sfa.Das.Web");
+            propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, msg) { Exception = exception };
 
-            foreach (var property in properties)
+            foreach (var property in propertiesLocal)
             {
                 logEvent.Properties[property.Key] = property.Value;
             }
