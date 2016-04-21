@@ -14,6 +14,7 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
     {
         private readonly string _loggerType;
 
+        private readonly Dictionary<string, object> defaultProperties = new Dictionary<string, object>(); 
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
@@ -48,7 +49,7 @@ namespace Sfa.Eds.Das.Infrastructure.Logging
 
         public void Error(Exception ex, string msg)
         {
-            SendLog(msg, LogLevel.Error, null, ex);
+            SendLog(msg, LogLevel.Error, defaultProperties, ex);
         }
 
         public void Warn(string msg)
