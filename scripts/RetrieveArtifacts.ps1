@@ -16,7 +16,8 @@ function Unzip($zipfile, $outpath)
 }
 
 $webClient = new-object System.Net.WebClient
-$buildId = $webClient.DownloadString($url + "/api/version") -replace '"', ''
+$data = $webClient.DownloadString($url + "/api/version")
+$buildId = ($data | ConvertFrom-Json).BuildId
 Write-Host $buildId
 $url2 = "https://sfa-gov-uk.visualstudio.com/DefaultCollection/Digital%20Apprenticeship%20Service/_apis/build/builds/$buildId/artifacts?api-version=2.0"
 Write-Host $url2
