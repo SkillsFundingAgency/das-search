@@ -11,6 +11,7 @@
     public class NLogService : ILog
     {
         private readonly string _loggerType;
+        private readonly Dictionary<string, object> _defaultProperties = new Dictionary<string, object>();
 #pragma warning disable CS0169
 #pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget _dummy; // Reference so assembly is copied to Primary output.
@@ -35,7 +36,7 @@
 
         public void Debug(object message, Exception exception)
         {
-            SendLog(message, LogLevel.Debug, null, exception);
+            SendLog(message, LogLevel.Debug, _defaultProperties, exception);
         }
 
         public void Info(object message)
@@ -50,7 +51,7 @@
 
         public void Info(object message, Exception exception)
         {
-            SendLog(message, LogLevel.Info, null, exception);
+            SendLog(message, LogLevel.Info, _defaultProperties, exception);
         }
 
         public void Warn(object message)
@@ -60,7 +61,7 @@
 
         public void Warn(object message, Exception exception)
         {
-            SendLog(message, LogLevel.Warn, null, exception);
+            SendLog(message, LogLevel.Warn, _defaultProperties, exception);
         }
 
         public void Error(object message)
@@ -70,7 +71,7 @@
 
         public void Error(object message, Exception exception)
         {
-            SendLog(message, LogLevel.Error, null, exception);
+            SendLog(message, LogLevel.Error, _defaultProperties, exception);
         }
 
         public void Fatal(object message)
@@ -80,7 +81,7 @@
 
         public void Fatal(object message, Exception exception)
         {
-            SendLog(message, LogLevel.Fatal, null, exception);
+            SendLog(message, LogLevel.Fatal, _defaultProperties, exception);
         }
 
         private void SendLog(object message, LogLevel level, Dictionary<string, object> properties = null, Exception exception = null)
