@@ -279,7 +279,11 @@ WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
         }
         public override void Execute()
         {
-WriteLiteral("<div>\r\n\r\n");
+WriteLiteral("<div");
+
+WriteLiteral(" class=\"result-message\"");
+
+WriteLiteral(">\r\n\r\n");
 
             
             #line 5 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
