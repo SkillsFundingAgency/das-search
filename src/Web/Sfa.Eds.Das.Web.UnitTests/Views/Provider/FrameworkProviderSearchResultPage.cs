@@ -1,14 +1,12 @@
 ﻿namespace Sfa.Eds.Das.Web.UnitTests.Views.Provider
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using ExtensionHelpers;
     using FluentAssertions;
     using NUnit.Framework;
     using RazorGenerator.Testing;
 
-    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Model;
 
     using ViewModels;
@@ -84,6 +82,7 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 1,
                 PostCodeMissing = false,
                 FrameworkId = 1,
@@ -119,6 +118,8 @@
             GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
 
             GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship: 'Pathway test name'.");
+
+            GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship: Test name: Pathway test name level 0.");
         }
 
         [Test]
@@ -127,10 +128,12 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 7,
                 PostCodeMissing = false,
                 FrameworkId = 1,
                 FrameworkCode = 2,
+                FrameworkLevel = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
                 Level = 3,
@@ -159,7 +162,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship: 'Pathway test name'.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship: Test name: Pathway test name level 2.");
         }
 
         [Test]

@@ -85,11 +85,7 @@ WriteLiteral(">\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <header");
-
-WriteLiteral(" class=\"hgroup\"");
-
-WriteLiteral(">\r\n                <h1");
+WriteLiteral(">\r\n            <header>\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
@@ -99,7 +95,7 @@ WriteLiteral("                    ");
 
             
             #line 20 "..\..\Views\Apprenticeship\Framework.cshtml"
-               Write(Model.FrameworkName);
+               Write(Model.Title);
 
             
             #line default
@@ -169,15 +165,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1634), Tuple.Create("\"", 1687)
-, Tuple.Create(Tuple.Create("", 1642), Tuple.Create("form-group", 1642), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1611), Tuple.Create("\"", 1664)
+, Tuple.Create(Tuple.Create("", 1619), Tuple.Create("form-group", 1619), true)
             
             #line 44 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1652), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+, Tuple.Create(Tuple.Create(" ", 1629), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1653), false)
+, 1630), false)
 );
 
 WriteLiteral(">\r\n                        <label");
@@ -214,14 +210,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2186), Tuple.Create("\"", 2212)
+WriteAttribute("value", Tuple.Create(" value=\"", 2163), Tuple.Create("\"", 2189)
             
             #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 2194), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+                                                , Tuple.Create(Tuple.Create("", 2171), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 2194), false)
+, 2171), false)
 );
 
 WriteLiteral(">\r\n                        <input");

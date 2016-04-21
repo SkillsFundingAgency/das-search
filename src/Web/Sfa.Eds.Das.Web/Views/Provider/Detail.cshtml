@@ -14,16 +14,55 @@
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <div class="hgroup">
+            <div>
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
-                
+
             </div>
+
+
+            <section>
+                <header class="hgroup">
+                    <h2 class="heading-large apprenticeship-name-level">
+                        @Model.ApprenticeshipNameWithLevel
+                    </h2>
+                    <b>Level:</b>
+                    <span>
+                        @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel) )
+                    </span>
+                </header>
+                <dl class="data-list">
+                    @GetStandardPropertyAsLinkHtml("Website", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
+                    @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
+                    @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
+                    @GetStandardPropertyAsLinkHtml("Contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @GetDeliveryModesHtml("Training options", Model.DeliveryModes)
+                    @ShowTrainingLocation("Training location")
+                </dl>
+
+            </section>
+
+            <section>
+                <header>
+                    <h2 class="heading-large">Apprenticeship training information</h2>
+                </header>
+                <article class="apprenticeship-marketing-info">
+                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
+                </article>
+            </section>
+
+            <section>
+                <p class="disclaimer">
+                    <i>Content maintained by @Model.Name</i>
+                </p>
+            </section>
+
         </div>
+
 
         <div class="column-third">
             @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
@@ -40,39 +79,6 @@
         </div>
     </div>
 
-    <section>
-        <header class="hgroup">
-            <h2 class="heading-large apprenticeship-name-level">
-                @Model.ApprenticeshipNameWithLevel
-            </h2>
-            <b>Level:</b>
-            <span>
-                @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel) )
-            </span>
-        </header>
-        <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl)
-            @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
-            @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
-            @GetStandardPropertyAsLinkHtml("Contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl)
-            @GetDeliveryModesHtml("Training options", Model.DeliveryModes)
-            @ShowTrainingLocation("Training location")
-        </dl>
-
-    </section>
-
-    <section>
-        <header>
-            <h1 class="heading-medium">Apprenticeship training information</h1>
-        </header>
-        <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
-    </section>
-
-    <section>
-        <p class="disclaimer">
-            <i>Content maintained by @Model.Name</i>
-        </p>
-    </section>
 </main>
 
 @helper ShowTrainingLocation(string title)
@@ -114,13 +120,22 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 }
 }
 
-@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url)
+@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
     if (!string.IsNullOrEmpty(url))
     {
         <dt class="@classTitle">@title</dt>
         <dd>
-            <a href="http://@url" rel="external" target="_blank" class="@cssClass @classIdentifier">@url</a>
+            <a href="http://@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+                @if (string.IsNullOrEmpty(urlTitle))
+                {
+                    @url
+                }
+                else
+                {
+                    @urlTitle
+                }
+            </a>
         </dd>
     }
 }
@@ -128,42 +143,29 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
     <p>
         <b>Employer satisfaction:</b>
+        <span id="employer-satisfaction">
+            @Model.EmployerSatisfactionMessage
+        </span>
         @if (@Model.EmployerSatisfactionMessage != "No data available")
         {
-            <span id="employer-satisfaction">
-                @Model.EmployerSatisfactionMessage
-            </span>
             <div class="progress-container">
                 <div class="progressbar" style="width: @Model.EmployerSatisfaction%"></div>
             </div>
-        }
-        else
-        {
-            <br/>
-            <span id="employer-satisfaction">
-                @Model.EmployerSatisfactionMessage
-            </span>
         }
     </p>
 
     <p>
         <b>Learner satisfaction:</b>
+        <span id="learner-satisfaction">
+            @Model.LearnerSatisfactionMessage
+        </span>
         @if (@Model.LearnerSatisfactionMessage != "No data available")
         {
-            <span id="learner-satisfaction">
-                @Model.LearnerSatisfactionMessage
-            </span>
             <div class="progress-container">
                 <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
             </div>
         }
-        else
-        {
-            <br />
-            <span id="learner-satisfaction">
-                @Model.LearnerSatisfactionMessage
-            </span>
-        }
+
     </p>
 }
 
@@ -192,14 +194,20 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     }
                 }
             </ul>
-                <p class="no-list-item">
                     <details>
                         <summary>Explain training options</summary>
-                        <p>Day release: eg one day a week at the training provider's location.</p>
-                        <p>Block release: eg 3-4 weeks at the training provider's location.</p>
-                        <p>At your location: the provider comes to your workplace.</p>
-                    </details>
-                </p>
+                        <div class="panel panel-border-narrow">   
+                            <p>
+                                <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
+                            </p>
+                            <p>
+                                <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
+                            </p>
+                            <p>
+                                <span class="bold-small">At your location:</span> the provider comes to your workplace.
+                            </p>
+                        </div>
+                    </details>                
         </dd>
     }
 }

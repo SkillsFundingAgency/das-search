@@ -28,11 +28,12 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-.breadcrumb{
-    border-bottom: 1px solid #bfc1c3;
-    margin: 0;
+input[name="PostCode"]{
+    max-width: 150px;
 }
 
-.no-list-item{
-    list-style-type: none;
+.phase-banner-beta .phase-tag {
+    display: block;
+    width: auto;
+    float: left;
 }

@@ -30,14 +30,14 @@
 @helper RenderZeroResult()
 {
     <p>
-        There are currently no providers for the apprenticeship: '<b id="standard-name">@Model.PathwayName</b>' covering postcode '<b id="postalcode">@Model.PostCode</b>'.
+        There are currently no providers for the apprenticeship: <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> covering postcode '<b id="postalcode">@Model.PostCode</b>'.
     </p>
 }
 
 @helper  RenderMessageOneResult()
 {
     <p>
-        There is <b id="total-results">@Model.TotalResults</b> training provider for the apprenticeship: '<b id="standard-name">@Model.PathwayName</b>'.
+        There is <b id="total-results">@Model.TotalResults</b> training provider for the apprenticeship: <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b>.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -48,7 +48,7 @@
 @helper  RenderMessage()
 {
     <p>
-        There are <b id="total-results">@Model.TotalResults</b> training providers for the apprenticeship: '<b>@Model.PathwayName</b>'.
+        There are <b id="total-results">@Model.TotalResults</b> training providers for the apprenticeship: <b>@Model.Title level @Model.FrameworkLevel</b>.
     </p>
     <p>
         Results are ordered by distance from '<b>@Model.PostCode</b>'.

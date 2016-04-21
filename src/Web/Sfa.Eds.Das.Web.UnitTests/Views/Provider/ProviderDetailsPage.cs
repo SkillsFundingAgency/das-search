@@ -55,9 +55,9 @@
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
-            this.GetPartial(html, ".apprenticeshipContact").Should().Contain(model.Apprenticeship.ApprenticeshipInfoUrl);
+            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("training provider website");
             this.GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
-            this.GetPartial(html, ".providerContact").Should().Contain(model.ContactInformation.ContactUsUrl);
+            this.GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
             this.GetPartial(html, ".phone-title").Should().Contain("Phone");
             this.GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
             this.GetPartial(html, ".email-title").Should().Contain("Email");

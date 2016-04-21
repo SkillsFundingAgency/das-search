@@ -4,6 +4,8 @@
 
     public sealed class ProviderFrameworkSearchResults
     {
+        public string Title { get; set; }
+
         public long TotalResults { get; set; }
 
         public int FrameworkId { get; set; }
@@ -23,5 +25,7 @@
         public bool HasError { get; set; }
 
         public bool PostCodeMissing { get; set; }
+
+        public int FrameworkLevel { get; set; }
     }
 }

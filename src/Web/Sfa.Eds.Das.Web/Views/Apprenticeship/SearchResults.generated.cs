@@ -154,14 +154,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2466), Tuple.Create("\"", 2477)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2518), Tuple.Create("\"", 2529)
 
 #line 79 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2474), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2526), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2474), false)
+, 2526), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -203,53 +203,51 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
         }
         public override void Execute()
         {
-WriteLiteral("﻿\r\n");
-
             
-            #line 4 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+            #line 3 "..\..\Views\Apprenticeship\SearchResults.cshtml"
   
     ViewBag.Title = "Search Results";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<main");
+WriteLiteral("\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
+WriteLiteral(">\r\n    <p");
+
+WriteLiteral(" class=\"small-btm-margin\"");
+
 WriteLiteral(">\r\n");
 
-WriteLiteral("    ");
+WriteLiteral("        ");
 
             
-            #line 9 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-Write(Html.ActionLink("Back", "Search", null, new { @class = "link-back" }));
+            #line 8 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+   Write(Html.ActionLink("Back", "Search", null, new { @class = "link-back" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    <div");
+WriteLiteral("\r\n    </p>\r\n        <div");
 
 WriteLiteral(" id=\"apprenticeship-results\"");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\r\n\r\n        <div");
+WriteLiteral(">\r\n\r\n            <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n\r\n            <div");
-
-WriteLiteral(" class=\"hgroup\"");
-
-WriteLiteral(">\r\n\r\n                <h1");
+WriteLiteral(">\r\n\r\n                <div>\r\n\r\n                    <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n\r\n            </div" +
-">\r\n            <p>\r\n");
+WriteLiteral(">\r\n                        Search results\r\n                    </h1>\r\n\r\n         " +
+"       </div>\r\n<p>\r\n");
 
             
             #line 22 "..\..\Views\Apprenticeship\SearchResults.cshtml"
@@ -283,34 +281,34 @@ WriteLiteral("\r\n            </p>\r\n\r\n");
             #line hidden
 WriteLiteral("                <article");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 732), Tuple.Create("\"", 780)
-, Tuple.Create(Tuple.Create("", 740), Tuple.Create("result", 740), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 776), Tuple.Create("\"", 824)
+, Tuple.Create(Tuple.Create("", 784), Tuple.Create("result", 784), true)
             
             #line 29 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 746), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
+, Tuple.Create(Tuple.Create(" ", 790), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
             
             #line default
             #line hidden
-, 747), false)
-, Tuple.Create(Tuple.Create("", 773), Tuple.Create("-result", 773), true)
+, 791), false)
+, Tuple.Create(Tuple.Create("", 817), Tuple.Create("-result", 817), true)
 );
 
-WriteAttribute("id", Tuple.Create(" id=\"", 781), Tuple.Create("\"", 867)
+WriteAttribute("id", Tuple.Create(" id=\"", 825), Tuple.Create("\"", 917)
             
             #line 29 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 786), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
+, Tuple.Create(Tuple.Create("", 830), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
             
             #line default
             #line hidden
-, 786), false)
-, Tuple.Create(Tuple.Create("", 812), Tuple.Create("-", 812), true)
+, 830), false)
+, Tuple.Create(Tuple.Create("", 856), Tuple.Create("-", 856), true)
             
             #line 29 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                           , Tuple.Create(Tuple.Create("", 813), Tuple.Create<System.Object, System.Int32>(item.StandardId!=0?item.StandardId:item.FrameworkId
+                           , Tuple.Create(Tuple.Create("", 857), Tuple.Create<System.Object, System.Int32>(item.StandardId != 0 ? item.StandardId : item.FrameworkId
             
             #line default
             #line hidden
-, 813), false)
+, 857), false)
 );
 
 WriteLiteral(">\r\n                    <header>\r\n");
@@ -371,7 +369,7 @@ WriteLiteral("                        ");
 
             
             #line 41 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                   Write(GetApprenticeshipDetailItem("Level", "level", item.Level));
+                   Write(GetApprenticeshipDetailItem("Level:", "level", item.Level));
 
             
             #line default
@@ -382,7 +380,7 @@ WriteLiteral("                        ");
 
             
             #line 42 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                   Write(GetApprenticeshipDetailItem("Typical length:","length", item.TypicalLengthMessage));
+                   Write(GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage));
 
             
             #line default

@@ -6,6 +6,8 @@ using Sfa.Eds.Das.Core.Logging;
 
 namespace Sfa.Das.ApplicationServices
 {
+    using System.Collections.Generic;
+
     public sealed class ProviderSearchService : IProviderSearchService
     {
         private readonly ISearchProvider _searchProvider;
@@ -100,37 +102,33 @@ namespace Sfa.Das.ApplicationServices
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
-                if (coordinates == null)
+                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
+                var total = 0L;
+
+                if (coordinates != null)
                 {
-                    return new ProviderFrameworkSearchResults
-                    {
-                        TotalResults = 0,
-                        FrameworkId = frameworkId,
-                        FrameworkCode = framework?.FrameworkCode ?? 0,
-                        Level = framework?.Level ?? 0,
-                        FrameworkName = framework?.FrameworkName,
-                        PathwayName = framework?.PathwayName,
-                        PostCode = postCode,
-                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                        HasError = false
-                    };
+                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates);
+                    hits = searchResults.Hits;
+                    total = searchResults.Total;
+                }
+                else
+                {
+                    hits = new IApprenticeshipProviderSearchResultsItem[0];
                 }
 
-                var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates);
-
-                var result = new ProviderFrameworkSearchResults
+                return new ProviderFrameworkSearchResults
                 {
-                    TotalResults = searchResults.Total,
+                    Title = framework?.Title,
+                    TotalResults = total,
                     FrameworkId = frameworkId,
                     FrameworkCode = framework?.FrameworkCode ?? 0,
-                    Level = framework?.Level ?? 0,
                     FrameworkName = framework?.FrameworkName,
                     PathwayName = framework?.PathwayName,
+                    FrameworkLevel = framework?.Level ?? 0,
                     PostCode = postCode,
-                    Hits = searchResults.Hits
+                    Hits = hits
                 };
 
-                return result;
             }
             catch (SearchException ex)
             {

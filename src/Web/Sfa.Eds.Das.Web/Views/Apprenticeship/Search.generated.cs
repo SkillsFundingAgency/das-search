@@ -52,17 +52,7 @@ WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\r\n    <div");
-
-WriteLiteral(" class=\"grid-row breadcrumb\"");
-
-WriteLiteral(">\r\n        <a");
-
-WriteLiteral(" href=\"appBrowseSearch.html\"");
-
-WriteLiteral(" class=\"link-back\"");
-
-WriteLiteral(">Back</a>\r\n    </div>\r\n\r\n        <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -77,13 +67,13 @@ WriteLiteral(" class=\"heading-xlarge\"");
 WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n\r\n");
 
             
-            #line 17 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
                  using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
             {
 
@@ -139,7 +129,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 32 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
                 }
 
             

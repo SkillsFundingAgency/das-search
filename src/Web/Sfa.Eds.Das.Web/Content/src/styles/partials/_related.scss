@@ -3,10 +3,10 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    margin-top: 60px;
     float: left;
     width: 100%;
 }
+
 .related {
     border-top: 10px solid #005ea5;
     padding-top: 5px
@@ -26,10 +26,18 @@
     margin-bottom: 0.5em;
     position: relative
 }
+
+.related span{
+  display: inline-block;
+}
+
 @media (min-width: 641px) {
     .related h2 {
         font-size: 24px;
         line-height: 1.25
+    }
+    .related-container{
+        margin-top: 60px;
     }
 }
 @media (max-width: 640px) {
