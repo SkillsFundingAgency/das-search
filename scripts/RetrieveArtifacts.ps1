@@ -1,4 +1,4 @@
-Param($url, $authToken)
+Param($url, $authToken, $zipFile)
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
@@ -22,7 +22,7 @@ $url2 = "https://sfa-gov-uk.visualstudio.com/DefaultCollection/Digital%20Apprent
 Write-Host $url2
 
 $buildFolder = (Get-Item -Path ".\build" -Verbose).FullName
-$zipFile = $buildFolder + "\tests.zip"
+$zipFile = $buildFolder + "\" + $zipFile
 Write-Host $zipFile
 
 $headers = @{Authorization=("Bearer {0}" -f $authToken)}
