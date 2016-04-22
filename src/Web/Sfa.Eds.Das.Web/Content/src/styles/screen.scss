@@ -28,6 +28,12 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-p.strong {
-    font-weight: bold;
+input[name="PostCode"]{
+    max-width: 150px;
+}
+
+.phase-banner-beta .phase-tag {
+    display: block;
+    width: auto;
+    float: left;
 }

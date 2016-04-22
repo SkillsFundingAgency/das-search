@@ -110,10 +110,11 @@ WriteLiteral("                    <dd");
 
 WriteLiteral(" class=\"address\"");
 
-WriteLiteral(">Training takes place at your location.</dd>\r\n");
+WriteLiteral(">\r\n                        Training takes place at your location.\r\n              " +
+"      </dd>\r\n");
 
             
-            #line 19 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 21 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                 }
                 else
                 {
@@ -128,7 +129,7 @@ WriteLiteral(" class=\"address\"");
 WriteLiteral(">");
 
             
-            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                    Write(item.LocationName);
 
             
@@ -137,7 +138,7 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                       Write(item.Address.Address1);
 
             
@@ -146,7 +147,7 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                                              Write(item.Address.Address2);
 
             
@@ -155,7 +156,7 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                                                                     Write(item.Address.County);
 
             
@@ -164,7 +165,7 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                                                                                                                          Write(item.Address.Postcode);
 
             
@@ -173,7 +174,7 @@ WriteLiteral(" ");
 WriteLiteral("</dd>\r\n");
 
             
-            #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 25 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                 }
 
             
@@ -188,7 +189,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 27 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 29 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(item.EmployerSatisfactionMessage);
 
             
@@ -204,7 +205,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 31 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 33 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(item.LearnerSatisfactionMessage);
 
             
@@ -213,7 +214,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n        </article>\r\n");
 
             
-            #line 35 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 37 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     }
             
             #line default

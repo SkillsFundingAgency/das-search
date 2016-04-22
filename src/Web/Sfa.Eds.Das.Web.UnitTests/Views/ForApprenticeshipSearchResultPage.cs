@@ -113,7 +113,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".labelmessage").Should().Be("Apprenticeships labelled new are job specific standards, developed by groups of employers.");
+            GetPartial(html, ".labelmessage").Should().Be("Results labelled new are apprenticeship standards developed by employer groups.");
         }
 
         [Test]
@@ -194,7 +194,7 @@
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
             // First result
-            GetPartial(html, ".result-title").Should().Be("Test title 1 new");
+            GetPartial(html, ".result-title").Should().StartWith("Test title 1");
 
             // Second result
             GetPartial(html, ".result-title", 2).Should().Be("Test title 2");

@@ -1,15 +1,6 @@
 ﻿@model Sfa.Eds.Das.Web.ViewModels.ProviderFrameworkSearchResultViewModel
 
-@functions {
-    private string GetNameToDisplay()
-    {
-        var nameToDisplay = string.Empty;
-        nameToDisplay = Model.Level != 0 ? string.Concat(Model.PathwayName, " Level ", Model.Level) : Model.PathwayName;
-        return nameToDisplay;
-    }
-}
-
-<div>
+<div class="result-message">
 
     @if (Model.HasError)
     {
@@ -31,54 +22,36 @@
 
 @helper  RenderErrorMessage()
 {
-    <h2 class="heading-large">
-        Training standards
-    </h2>
-    <p class="result-message">
+    <p>
         There was a problem performing a search. Try again later.
     </p>
 }
 
 @helper RenderZeroResult()
 {
-    var nameToDisplay = GetNameToDisplay();
-
-    <h2 class="heading-large">
-        Training providers
-    </h2>
-    <p class="result-message">
-        There are currently no providers for the apprenticeship course: '<b id="apprenticeship-name-level">@nameToDisplay</b>' in '<b id="postalcode">@Model.PostCode</b>'
+    <p>
+        There are currently no providers for the apprenticeship: <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> covering postcode '<b id="postalcode">@Model.PostCode</b>'.
     </p>
 }
 
 @helper  RenderMessageOneResult()
 {
-    var nameToDisplay = GetNameToDisplay();
-
-    <h2 class="heading-large">
-        Training providers
-    </h2>
-    <p class="result-message">
-        There is <b id="total-results">@Model.TotalResults</b> training provider for the apprenticeship course: '<b id="apprenticeship-name-level">@nameToDisplay</b>'.
+    <p>
+        There is <b id="total-results">@Model.TotalResults</b> training provider for the apprenticeship: <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b>.
     </p>
     <p>
-        Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'
+        Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
     </p>
 }
 
 
 @helper  RenderMessage()
 {
-    var nameToDisplay = GetNameToDisplay();
-
-    <h2 class="heading-large">
-        Training providers
-    </h2>
-    <p class="result-message">
-        There are <b id="total-results">@Model.TotalResults</b> training providers for the apprenticeship course: '<b id="apprenticeship-name-level">@nameToDisplay</b>'.
+    <p>
+        There are <b id="total-results">@Model.TotalResults</b> training providers for the apprenticeship: <b>@Model.Title level @Model.FrameworkLevel</b>.
     </p>
     <p>
-        Results are ordered by distance from '<b>@Model.PostCode</b>'
+        Results are ordered by distance from '<b>@Model.PostCode</b>'.
     </p>
 }
 

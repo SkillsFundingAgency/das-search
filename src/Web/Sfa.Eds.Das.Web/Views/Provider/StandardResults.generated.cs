@@ -29,12 +29,6 @@ namespace Sfa.Eds.Das.Web.Views.Provider
     using System.Web.WebPages;
     using Sfa.Eds.Das.Web;
     
-    #line 1 "..\..\Views\Provider\StandardResults.cshtml"
-    using Sfa.Eds.Das.Web.Extensions;
-    
-    #line default
-    #line hidden
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/StandardResults.cshtml")]
     public partial class StandardResults : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.ProviderStandardSearchResultViewModel>
@@ -44,6 +38,8 @@ namespace Sfa.Eds.Das.Web.Views.Provider
         }
         public override void Execute()
         {
+WriteLiteral("\r\n");
+
             
             #line 4 "..\..\Views\Provider\StandardResults.cshtml"
   
@@ -64,7 +60,7 @@ WriteLiteral("    ");
 
             
             #line 9 "..\..\Views\Provider\StandardResults.cshtml"
-Write(Html.ActionLink("Back to Standard", "Standard", "Apprenticeship", new { @id = @Model.StandardId }, new { @class = "link-back" }));
+Write(Html.ActionLink("Back", "Standard", "Apprenticeship", new { @id = @Model.StandardId }, new { @class = "link-back" }));
 
             
             #line default

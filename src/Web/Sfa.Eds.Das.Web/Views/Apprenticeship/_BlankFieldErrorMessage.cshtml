@@ -3,14 +3,8 @@
 <div>
         @if (Model.HasError)
         {
-            @RenderErrorMessage()
+            <p class="error-message">
+                This field can't be blank
+            </p>
         }
 </div>
-
-    @helper  RenderErrorMessage()
-{
-    <p id="postcode-error">
-        This field can't be blank
-    </p>
-}
-

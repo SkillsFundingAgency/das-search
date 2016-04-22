@@ -85,11 +85,7 @@ WriteLiteral(">\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <header");
-
-WriteLiteral(" class=\"hgroup\"");
-
-WriteLiteral(">\r\n                <h1");
+WriteLiteral(">\r\n            <header>\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
@@ -99,53 +95,54 @@ WriteLiteral("                    ");
 
             
             #line 20 "..\..\Views\Apprenticeship\Framework.cshtml"
-               Write(Model.FrameworkName);
+               Write(Model.Title);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </h1>\r\n            </header>\r\n\r\n            <p>Contains an appr" +
-"enticeship training programme for ");
+WriteLiteral("\r\n                </h1>\r\n                <p>\r\n                    <b>Level:</b> <" +
+"span>");
 
             
-            #line 24 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                            Write(Model.PathwayName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(", level ");
-
-            
-            #line 24 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                                      Write(EquivalenveLevelService.GetFrameworkLevel(@Model.Level.ToString()));
+            #line 23 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                   Write(Model.Level);
 
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n\r\n            <h3");
-
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(@">
-                Contact a provider
-            </h3>
-            <p>
-                If you're an employer, you can speak about this framework to a training provider who can help you apply the framework to an apprenticeship in your organisation.
-            </p>
-
-            <hr />
-
-");
+WriteLiteral(" (equivalent to ");
 
             
-            #line 35 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 23 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                               Write(EquivalenveLevelService.GetFrameworkLevel(Model.Level.ToString()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@" )</span>
+                </p>
+            </header>
+
+            <p>This is an apprenticeship framework. Frameworks set out training requirements for apprentices in a specific work sector.</p>
+
+            <p>If you are an employer, an apprenticeship training provider can give you more details about this framework, including: </p>
+
+            <ul");
+
+WriteLiteral(" class=\"list list-bullet\"");
+
+WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n                <li>entry requireme" +
+"nts</li>\r\n                <li>duration</li>\r\n                <li>career paths</l" +
+"i>\r\n\r\n            </ul>\r\n\r\n");
+
+            
+            #line 40 "..\..\Views\Apprenticeship\Framework.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 40 "..\..\Views\Apprenticeship\Framework.cshtml"
              using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
 
@@ -156,7 +153,7 @@ WriteLiteral("                <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">Find training providers</h2>\r\n");
+WriteLiteral(">Find training providers for this apprenticeship</h2>\r\n");
 
 WriteLiteral("                <form");
 
@@ -168,15 +165,15 @@ WriteLiteral(" class=\"search-box\"");
 
 WriteLiteral(">\r\n                    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1408), Tuple.Create("\"", 1461)
-, Tuple.Create(Tuple.Create("", 1416), Tuple.Create("form-group", 1416), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1611), Tuple.Create("\"", 1664)
+, Tuple.Create(Tuple.Create("", 1619), Tuple.Create("form-group", 1619), true)
             
-            #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1426), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            #line 44 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1629), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1427), false)
+, 1630), false)
 );
 
 WriteLiteral(">\r\n                        <label");
@@ -185,18 +182,17 @@ WriteLiteral(" class=\"form-label\"");
 
 WriteLiteral(" for=\"postcode\"");
 
-WriteLiteral(">\r\n                            Enter postcode");
-
-WriteLiteral("\r\n                            <p>\r\n");
+WriteLiteral(">\r\n                            Enter a full postcode.\r\n                          " +
+"  <p>\r\n");
 
             
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 48 "..\..\Views\Apprenticeship\Framework.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 48 "..\..\Views\Apprenticeship\Framework.cshtml"
                                   
                                     Html.RenderPartial("_BlankFieldErrorMessage");
                                 
@@ -214,14 +210,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1977), Tuple.Create("\"", 2003)
+WriteAttribute("value", Tuple.Create(" value=\"", 2163), Tuple.Create("\"", 2189)
             
-            #line 48 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 1985), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                , Tuple.Create(Tuple.Create("", 2171), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 1985), false)
+, 2171), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -251,7 +247,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral(" />\r\n                </form>\r\n");
 
             
-            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 58 "..\..\Views\Apprenticeship\Framework.cshtml"
             }
 
             

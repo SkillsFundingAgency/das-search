@@ -52,59 +52,53 @@ WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\r\n    <a");
-
-WriteLiteral(" href=\"appBrowseSearch.html\"");
-
-WriteLiteral(" class=\"link-back\"");
-
-WriteLiteral(">Back</a>\r\n\r\n    <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n\r\n            <h1");
+WriteLiteral(">\r\n\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                Find an apprenticeship\r\n            </h1>\r\n\r\n");
+WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n\r\n");
 
             
-            #line 15 "..\..\Views\Apprenticeship\Search.cshtml"
-            
+            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
+                
             
             #line default
             #line hidden
             
-            #line 15 "..\..\Views\Apprenticeship\Search.cshtml"
-             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box" }))
+            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
+                 using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
             {
 
             
             #line default
             #line hidden
-WriteLiteral("                <div");
+WriteLiteral("                    <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n                    <legend>\r\n                        <label");
+WriteLiteral(">\r\n                        <legend>\r\n                            <label");
 
 WriteLiteral(" for=\"input-keywords\"");
 
-WriteLiteral(">\r\n                            <span");
+WriteLiteral(">\r\n                                <span");
 
 WriteLiteral(" class=\"form-hint\"");
 
-WriteLiteral(">\r\n                            Enter a job role or keyword (eg \'accountant\' or \'e" +
-"ngineering\')\r\n                        </span>\r\n                        </label>\r" +
-"\n\r\n                        <span");
+WriteLiteral(">\r\n                                    Enter a job role or keyword (eg \'accountan" +
+"t\' or \'engineering\')\r\n                                </span>\r\n                 " +
+"           </label>\r\n\r\n                            <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral("></span>\r\n                    </legend>\r\n                    <input");
+WriteLiteral("></span>\r\n                        </legend>\r\n                        <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -116,13 +110,13 @@ WriteLiteral(" class=\"text-box form-control\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
-WriteLiteral(" style=\"width: 100%;\"");
+WriteLiteral(" style=\"width: 50%;\"");
 
 WriteLiteral(" placeholder=\"\"");
 
-WriteLiteral(">\r\n                </div>                       \r\n");
+WriteLiteral(">\r\n                    </div>\r\n");
 
-WriteLiteral("                <input");
+WriteLiteral("                    <input");
 
 WriteLiteral(" class=\"button margin-top-x2\"");
 
@@ -135,58 +129,13 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 30 "..\..\Views\Apprenticeship\Search.cshtml"
-            }
+            #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
+                }
 
             
             #line default
             #line hidden
-WriteLiteral("           \r\n        </div>\r\n\r\n        <div");
-
-WriteLiteral(" class=\"column-third\"");
-
-WriteLiteral(">\r\n            <div");
-
-WriteLiteral(" class=\"related-container\"");
-
-WriteLiteral(">\r\n                <aside");
-
-WriteLiteral(" class=\"related\"");
-
-WriteLiteral(" id=\"related\"");
-
-WriteLiteral(">\r\n                    <div");
-
-WriteLiteral(" class=\"inner group related-subsection\"");
-
-WriteLiteral(">\r\n                        <h2");
-
-WriteLiteral(" id=\"parent-subsection\"");
-
-WriteLiteral(">Employers</h2>\r\n                        <nav");
-
-WriteLiteral(" role=\"navigation\"");
-
-WriteLiteral(" aria-labelledby=\"parent-subsection\"");
-
-WriteLiteral(">\r\n                            <a");
-
-WriteLiteral(" href=\"\"");
-
-WriteLiteral(">\r\n                                Employ an apprentice\r\n                        " +
-"    </a>\r\n                        </nav>\r\n                    </div>\r\n\r\n        " +
-"            <div");
-
-WriteLiteral(" class=\"inner group\"");
-
-WriteLiteral(">\r\n                        <a");
-
-WriteLiteral(" class=\"return-to-top\"");
-
-WriteLiteral(" href=\"#content\"");
-
-WriteLiteral(">Return to top ↑</a>\r\n                    </div>\r\n\r\n                </aside>\r\n   " +
-"         </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</main>");
+WriteLiteral("\r\n            </div>\r\n\r\n        </div>\r\n\r\n</main>");
 
         }
     }

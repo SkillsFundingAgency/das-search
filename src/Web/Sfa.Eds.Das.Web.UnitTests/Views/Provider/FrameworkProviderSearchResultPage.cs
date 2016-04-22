@@ -1,14 +1,12 @@
 ﻿namespace Sfa.Eds.Das.Web.UnitTests.Views.Provider
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using ExtensionHelpers;
     using FluentAssertions;
     using NUnit.Framework;
     using RazorGenerator.Testing;
 
-    using Sfa.Das.ApplicationServices.Models;
     using Sfa.Eds.Das.Core.Domain.Model;
 
     using ViewModels;
@@ -32,7 +30,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There was a problem performing a search. Try again later.");
+            this.GetPartial(html, ".result-message p").Should().Contain("There was a problem performing a search. Try again later.");
         }
 
         [Test]
@@ -41,6 +39,7 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 0,
                 PostCodeMissing = false,
                 FrameworkId = 1,
@@ -48,13 +47,13 @@
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
                 PostCode = "Test postcode",
-                Level = 3,
+                FrameworkLevel = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship course: 'Pathway test name Level 3' in 'Test postcode'");
+            this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship: Test name: Pathway test name level 3 covering postcode 'Test postcode'");
         }
 
         [Test]
@@ -63,6 +62,7 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 0,
                 PostCodeMissing = false,
                 FrameworkId = 1,
@@ -75,7 +75,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship course: 'Pathway test name' in 'Test postcode'");
+            this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship: Test name: Pathway test name level 0 covering postcode 'Test postcode'");
         }
 
         [Test]
@@ -84,19 +84,20 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 1,
                 PostCodeMissing = false,
                 FrameworkId = 1,
                 FrameworkCode = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
-                Level = 3,
+                FrameworkLevel = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name Level 3'.");
+            GetPartial(html, ".result-message p").Should().Contain("There is 1 training provider for the apprenticeship: Test name: Pathway test name level 3.");
         }
 
         [Test]
@@ -105,6 +106,7 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 1,
                 PostCodeMissing = false,
                 FrameworkId = 1,
@@ -116,7 +118,9 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There is 1 training provider for the apprenticeship course: 'Pathway test name'.");
+            GetPartial(html, ".result-message p").Should().Contain("There is 1 training provider for the apprenticeship: Test name: Pathway test name level 0.");
+
+            GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship: Test name: Pathway test name level 0.");
         }
 
         [Test]
@@ -125,10 +129,12 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 7,
                 PostCodeMissing = false,
                 FrameworkId = 1,
                 FrameworkCode = 2,
+                FrameworkLevel = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
                 Level = 3,
@@ -137,7 +143,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name Level 3'.");
+            this.GetPartial(html, ".result-message p").Should().Contain("There are 7 training providers for the apprenticeship: Test name: Pathway test name level 2.");
         }
 
         [Test]
@@ -146,6 +152,7 @@
             var detail = new FrameworkSearchResultMessage();
             var model = new ProviderFrameworkSearchResultViewModel
             {
+                Title = "Test name: Pathway test name",
                 TotalResults = 7,
                 PostCodeMissing = false,
                 FrameworkId = 1,
@@ -157,7 +164,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message").Should().Contain("There are 7 training providers for the apprenticeship course: 'Pathway test name'.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship: Test name: Pathway test name level 0.");
         }
 
         [Test]

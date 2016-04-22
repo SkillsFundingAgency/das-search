@@ -54,19 +54,19 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website course page");
-            this.GetPartial(html, ".apprenticeshipContact").Should().Contain(model.Apprenticeship.ApprenticeshipInfoUrl);
-            this.GetPartial(html, ".providerContactTitle").Should().Contain("Website contact page");
-            this.GetPartial(html, ".providerContact").Should().Contain(model.ContactInformation.ContactUsUrl);
+            this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
+            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("training provider website");
+            this.GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
+            this.GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
             this.GetPartial(html, ".phone-title").Should().Contain("Phone");
             this.GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
             this.GetPartial(html, ".email-title").Should().Contain("Email");
             this.GetPartial(html, ".email").Should().Contain(model.ContactInformation.Email);
-            this.GetPartial(html, ".training-structure").Should().Contain("Training structure");
+            this.GetPartial(html, ".training-structure").Should().Contain("Training options");
             this.GetPartial(html, ".block-release").Should().Contain("block release");
             this.GetPartial(html, ".training-location-title").Should().Contain("Training location");
             this.GetPartial(html, ".training-location").Should().Contain("Test location name Address 1 Address 2 PostCode");
-            this.GetPartial(html, ".disclaimer").Should().Contain("Posted by");
+            this.GetPartial(html, ".disclaimer").Should().StartWith("Content maintained by");
             this.GetPartial(html, ".disclaimer").Should().Contain(model.Name);
         }
 
@@ -112,7 +112,7 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".training-structure").Should().Contain("Training structure");
+            this.GetPartial(html, ".training-structure").Should().Contain("Training options");
             this.GetPartial(html, ".block-release").Should().Contain("block release");
             this.GetPartial(html, ".hundred-percent-employer").Should().Contain("at your location");
             this.GetPartial(html, ".day-release").Should().Contain("day release");
@@ -216,7 +216,7 @@
             locationText.Should().NotContain(model.Location.LocationName);
             locationText.Should().NotContain(model.Address.Address1);
             locationText.Should().NotContain(model.Address.Address2);
-            locationText.Should().Contain("Training will take place at your location");
+            locationText.Should().Contain("Training takes place at your location");
         }
 
         [Test]

@@ -92,3 +92,7 @@ $module: 'data-list';
         @extend .list-bullet;
     }
 }
+
+.provider-detail .data-list ul {
+    margin-bottom: 0;
+}

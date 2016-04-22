@@ -1,24 +1,24 @@
 ﻿@using Sfa.Eds.Das.Web.ViewModels
-@model Sfa.Eds.Das.Web.ViewModels.ApprenticeshipSearchResultViewModel
-﻿
+@model ApprenticeshipSearchResultViewModel
 @{
     ViewBag.Title = "Search Results";
 }
-
 <main id="content" role="main">
-    @Html.ActionLink("Search", "Search", null, new { @class = "link-back" })
-    <div id="apprenticeship-results" class="grid-row">
+    <p class="small-btm-margin">
+        @Html.ActionLink("Back", "Search", null, new { @class = "link-back" })
+    </p>
+        <div id="apprenticeship-results" class="grid-row">
 
-        <div class="column-two-thirds">
+            <div class="column-two-thirds">
 
-            <div class="hgroup">
+                <div>
 
-                <h1 class="heading-xlarge">
-                    Search results
-                </h1>
+                    <h1 class="heading-xlarge">
+                        Search results
+                    </h1>
 
-            </div>
-            <p>
+                </div>
+<p>
                 @{
                     Html.RenderPartial("_SearchResultMessage");
                 }
@@ -26,7 +26,7 @@
 
             @foreach (var item in Model.Results)
             {
-                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId!=0?item.StandardId:item.FrameworkId)">
+                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
                     <header>
                         @if (item.StandardId != 0)
                         {
@@ -38,8 +38,8 @@
                         }
                     </header>
                     <dl class="result-data-list">
-                        @GetApprenticeshipDetailItem("Level", "level", item.Level)
-                        @GetApprenticeshipDetailItem("Typical length:","length", item.TypicalLengthMessage)
+                        @GetApprenticeshipDetailItem("Level:", "level", item.Level)
+                        @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
                     </dl>
                 </article>
             }
@@ -59,7 +59,8 @@
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) <span style="color:gray">new</span>
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) 
+        <span>new</span>
     </h2>    
 }
 

@@ -3,54 +3,32 @@
     ViewBag.Title = "Home Page";
 }
 <main id="content" role="main">
-    <a href="appBrowseSearch.html" class="link-back">Back</a>
+        <div class="grid-row">
+            <div class="column-two-thirds">
 
-    <div class="grid-row">
-        <div class="column-two-thirds">
+                <h1 class="heading-xlarge">
+                    Find apprenticeship training
+                </h1>
 
-            <h1 class="heading-xlarge">
-                Find an apprenticeship
-            </h1>
-
-            @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box" }))
+                @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
             {
-                <div class="form-group">
-                    <legend>
-                        <label for="input-keywords">
-                            <span class="form-hint">
-                            Enter a job role or keyword (eg 'accountant' or 'engineering')
-                        </span>
-                        </label>
+                    <div class="form-group">
+                        <legend>
+                            <label for="input-keywords">
+                                <span class="form-hint">
+                                    Enter a job role or keyword (eg 'accountant' or 'engineering')
+                                </span>
+                            </label>
 
-                        <span class="error-message"></span>
-                    </legend>
-                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200" style="width: 100%;" placeholder="">
-                </div>                       
-                <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
-            }
-           
-        </div>
-
-        <div class="column-third">
-            <div class="related-container">
-                <aside class="related" id="related">
-                    <div class="inner group related-subsection">
-                        <h2 id="parent-subsection">Employers</h2>
-                        <nav role="navigation" aria-labelledby="parent-subsection">
-                            <a href="">
-                                Employ an apprentice
-                            </a>
-                        </nav>
+                            <span class="error-message"></span>
+                        </legend>
+                        <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200" style="width: 50%;" placeholder="">
                     </div>
+                    <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search" />
+                }
 
-                    <div class="inner group">
-                        <a class="return-to-top" href="#content">Return to top ↑</a>
-                    </div>
-
-                </aside>
             </div>
-        </div>
 
-    </div>
+        </div>
 
 </main>

@@ -64,24 +64,43 @@ WriteLiteral(">\r\n\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(@">
-                Digital Apprenticeship Service
-            </h1>
+WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n\r\n           " +
+" <p>If you are considering employing an apprentice,&nbsp;use this service to fin" +
+"d:</p>\r\n\r\n            <ul");
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lorem ac urna varius, nec maximus enim elementum. Suspendisse et tellus dolor. Aenean ut elit congue, congue leo sit amet, volutpat nunc. Etiam accumsan lorem et enim malesuada dignissim. Vestibulum feugiat massa ut sem mollis, et pretium eros bibendum. Sed vel accumsan metus. Vestibulum nec nulla non elit venenatis maximus vitae vitae tellus. Maecenas molestie, turpis fermentum tincidunt sodales, justo nunc tristique turpis, et pretium lectus diam dictum tortor. Cras faucibus sem ut elit pretium, in faucibus dolor semper. Quisque vitae tempus felis, sit amet pellentesque est. Quisque tincidunt lorem ex, vitae fermentum nisl volutpat nec. Pellentesque dolor diam, malesuada sed tellus nec, convallis volutpat odio. Nullam sed neque eu lacus tincidunt fringilla. Quisque vel justo malesuada, tincidunt dolor vitae, tristique justo. Maecenas ipsum lorem, molestie in congue eget, dictum eget quam. Mauris venenatis tincidunt nisi in porta.
-            </p>
+WriteLiteral(" class=\"list list-number\"");
+
+WriteLiteral(">\r\n                <li>an apprenticeship that sets out the skills, knowledge and " +
+"behaviours needed for the role</li>\r\n                <li>an organisation to prov" +
+"ide training for your apprentice</li>\r\n            </ul>\r\n\r\n            <h2");
+
+WriteLiteral(" class=\"heading-large\"");
+
+WriteLiteral(">Your responsibilities</h2>\r\n\r\n            <p>Apprentices must be aged 16 or over" +
+" and combine working with learning. They can be new or current employees.</p>\r\n " +
+"           \r\n            <p>If you hire an apprentice you must:</p>\r\n\r\n         " +
+"   <ul");
+
+WriteLiteral(" class=\"list list-bullet\"");
+
+WriteLiteral(@">
+                <li>employ them for at least 30 hours a week</li>
+                <li>pay them at least the minimum wage for apprentices</li>
+                <li>offer them the same conditions and benefits as other employees working at a similar level</li>
+                <li>provide experience and opportunities to help with future job progression</li>
+                <li>allow them to attend training and assessment during their working hours</li>
+            </ul>
 
 ");
 
             
-            #line 17 "..\..\Views\Start\Start.cshtml"
+            #line 34 "..\..\Views\Start\Start.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Start\Start.cshtml"
+            #line 34 "..\..\Views\Start\Start.cshtml"
              using (Html.BeginForm("Search", "Apprenticeship"))
             {
 
@@ -90,7 +109,7 @@ WriteLiteral(@">
             #line hidden
 WriteLiteral("                <input");
 
-WriteLiteral(" class=\"button margin-top-x2\"");
+WriteLiteral(" class=\"button margin-top-x2 button-start\"");
 
 WriteLiteral(" id=\"start-button\"");
 
@@ -101,7 +120,7 @@ WriteLiteral(" value=\"Start\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 20 "..\..\Views\Start\Start.cshtml"
+            #line 37 "..\..\Views\Start\Start.cshtml"
             }
 
             

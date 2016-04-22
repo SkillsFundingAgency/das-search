@@ -30,7 +30,7 @@
             var resultTitle = uri.GetSearchResultUrl("action/url").Title;
 
             resultUrl.ShouldBeEquivalentTo("http://www.sfatest.co.uk/path/to/page?keywords=hello+world");
-            resultTitle.ShouldBeEquivalentTo("Results");
+            resultTitle.ShouldBeEquivalentTo("Back");
         }
 
         [Test]
@@ -41,7 +41,7 @@
             var resultTitle = uri.GetProviderSearchResultBackUrl("action/url").Title;
 
             resultUrl.ShouldBeEquivalentTo("http://www.sfatest.co.uk/path/to/page?apprenticeshipid=8&postcode=CV212BB");
-            resultTitle.ShouldBeEquivalentTo("Results");
+            resultTitle.ShouldBeEquivalentTo("Back");
         }
 
         [Test]

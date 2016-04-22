@@ -10,8 +10,36 @@
     margin-bottom: 0;
 }
 
+.result-title span, .labelmessage strong.new{
+    background-color: #808080;
+    color: white;
+    padding: 0 0.4em;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.result.standard-result h2 {
+    text-transform: lowercase;
+    &:first-letter{
+        text-transform: uppercase;
+    }
+}
+
 .result-data-list {
     @include data-list(20, true, true);
+    @include media(mobile) {
+        dt {
+            float: left;
+            clear: both;
+            display: inline-block;
+            width: auto;
+            margin-right: .5rem;
+        }
+        dd {
+            width: auto;
+        }
+    }
     dt { max-width: none; }
     .address { max-width: none; width: 100%; }
 }

@@ -1,4 +1,5 @@
-﻿@using Sfa.Eds.Das.Web.Extensions
+﻿@using Sfa.Eds.Das.Resources
+@using Sfa.Eds.Das.Web.Extensions
 @model Sfa.Eds.Das.Web.ViewModels.ProviderViewModel
 
 @{
@@ -13,26 +14,64 @@
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <div class="hgroup">
+            <div>
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
-                    <p class="disclaimer">
-                        <i>Posted by @Model.Name</i>
-                    </p>
                 </div>
-                
+
             </div>
+
+
+            <section>
+                <header class="hgroup">
+                    <h2 class="heading-large apprenticeship-name-level">
+                        @Model.ApprenticeshipNameWithLevel
+                    </h2>
+                    <b>Level:</b>
+                    <span>
+                        @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel) )
+                    </span>
+                </header>
+                <dl class="data-list">
+                    @GetStandardPropertyAsLinkHtml("Website", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
+                    @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
+                    @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
+                    @GetStandardPropertyAsLinkHtml("Contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @GetDeliveryModesHtml("Training options", Model.DeliveryModes)
+                    @ShowTrainingLocation("Training location")
+                </dl>
+
+            </section>
+
+            <section>
+                <header>
+                    <h2 class="heading-large">Apprenticeship training information</h2>
+                </header>
+                <article class="apprenticeship-marketing-info">
+                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
+                </article>
+            </section>
+
+            <section>
+                <p class="disclaimer">
+                    <i>Content maintained by @Model.Name</i>
+                </p>
+            </section>
+
         </div>
+
 
         <div class="column-third">
             @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
                 <div class="related-container">
                     <aside class="related">
-                        <h2 class="heading-medium">Training provider quality assessment</h2>
+                        <h2 class="heading-medium">
+                            Training provider quality assessment
+                        </h2>
                         @GetSatisfactionsHtml()
                     </aside>
                 </div>
@@ -40,29 +79,6 @@
         </div>
     </div>
 
-    <section>
-        <header>
-            <h2 class="heading-large apprenticeship-name-level">
-                @Model.ApprenticeshipNameWithLevel
-            </h2>
-        </header>
-        <dl class="data-list">
-            @GetStandardPropertyAsLinkHtml("Website course page", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl)
-            @GetStandardPropertyAsLinkHtml("Website contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl)
-            @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
-            @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
-            @GetDeliveryModesHtml("Training structure", Model.DeliveryModes)
-            @ShowTrainingLocation("Training location")
-        </dl>
-
-    </section>
-
-    <section>
-        <header>
-            <h1 class="heading-medium">Apprenticeship training information</h1>
-        </header>
-        <p class="apprenticeship-marketing-info">@Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)</p>
-    </section>
 </main>
 
 @helper ShowTrainingLocation(string title)
@@ -73,11 +89,15 @@ if (@Model != null)
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-            <dd id="training-location" class="training-location">Training will take place at your location</dd>
+        <dd id="training-location" class="training-location">
+            Training takes place at your location
+        </dd>
     }
     else
     {
-        <dd id="training-location" class="training-location">@Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode</dd>
+        <dd id="training-location" class="training-location">
+            @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode
+        </dd>
     }
 }
 }
@@ -100,13 +120,22 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 }
 }
 
-@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, bool hideIfEmpty = false)
+@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
-    if (!string.IsNullOrEmpty(url) || !hideIfEmpty)
+    if (!string.IsNullOrEmpty(url))
     {
         <dt class="@classTitle">@title</dt>
         <dd>
-            @Html.RenderAIfExists(@url, $"http://{url}", $"{cssClass} {classIdentifier}", "_blank")
+            <a href="http://@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+                @if (string.IsNullOrEmpty(urlTitle))
+                {
+                    @url
+                }
+                else
+                {
+                    @urlTitle
+                }
+            </a>
         </dd>
     }
 }
@@ -114,42 +143,29 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
     <p>
         <b>Employer satisfaction:</b>
+        <span id="employer-satisfaction">
+            @Model.EmployerSatisfactionMessage
+        </span>
         @if (@Model.EmployerSatisfactionMessage != "No data available")
         {
-            <span id="employer-satisfaction">
-                @Model.EmployerSatisfactionMessage
-            </span>
             <div class="progress-container">
                 <div class="progressbar" style="width: @Model.EmployerSatisfaction%"></div>
             </div>
-        }
-        else
-        {
-            <br/>
-            <span id="employer-satisfaction">
-                @Model.EmployerSatisfactionMessage
-            </span>
         }
     </p>
 
     <p>
         <b>Learner satisfaction:</b>
+        <span id="learner-satisfaction">
+            @Model.LearnerSatisfactionMessage
+        </span>
         @if (@Model.LearnerSatisfactionMessage != "No data available")
         {
-            <span id="learner-satisfaction">
-                @Model.LearnerSatisfactionMessage
-            </span>
             <div class="progress-container">
                 <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
             </div>
         }
-        else
-        {
-            <br />
-            <span id="learner-satisfaction">
-                @Model.LearnerSatisfactionMessage
-            </span>
-        }
+
     </p>
 }
 
@@ -178,6 +194,20 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     }
                 }
             </ul>
+                    <details>
+                        <summary>Explain training options</summary>
+                        <div class="panel panel-border-narrow">   
+                            <p>
+                                <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
+                            </p>
+                            <p>
+                                <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
+                            </p>
+                            <p>
+                                <span class="bold-small">At your location:</span> the provider comes to your workplace.
+                            </p>
+                        </div>
+                    </details>                
         </dd>
     }
 }

@@ -15,30 +15,26 @@
     <div class="grid-row">
 
         <div class="column-two-thirds">
-            <div class="hgroup">
+            <div>
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                @if (!string.IsNullOrEmpty(@Model.IntroductoryText))
-                {
                     <div class="standard-result-summary">
-                        @Html.MarkdownToHtml(Model.IntroductoryText)
+                        This is an apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
                     </div>
-                }
             </div>
         </div>
 
 
         <div class="column-third">
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box hidden-for-mobile postcode-form-top" }))
-            {
-                <div class="related-container">
-                    <aside class="related">
-
-                        <h2 class="heading-medium">Find training providers</h2>
+            <div class="related-container">
+                <aside class="related">
+                    @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box hidden-for-mobile postcode-form-top" }))
+                    {
+                        <h2 class="heading-medium">Find training providers for this apprenticeship</h2>
                         <div class="form-group @(@Model.HasError ? " error" : "")">
                             <label class="form-label" for="postcode">
-                                Enter postcode@* or partial postcode *@
+                                Enter a full postcode.
                                 <p>
                                     @{
                                         Html.RenderPartial("_BlankFieldErrorMessage");
@@ -48,18 +44,19 @@
                             <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
                             <input type="search" id="postcode" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
                         </div>
-                        <input class="button margin-top-x2 postcode-search-button" id="submit-postcode" type="submit" value="Search"/>
-                    </aside>
-                </div>
-            }
+                        <input class="button margin-top-x2 postcode-search-button" id="submit-postcode" type="submit" value="Search" />
+                    }
 
-        </div>
+                    </aside>
+                 </div>
+
+            </div>
         </div>
 
         <section>
             <header>
                 <h2 class="heading-large">
-                    Summary of apprenticeship standard
+                    Summary of this apprenticeship standard
                 </h2>
             </header>
             <dl class="data-list">
@@ -71,6 +68,7 @@
                 @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
                 @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
             </dl>
+
             @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
             {
                 <div class="panel-indent panel-indent-info">
@@ -86,26 +84,32 @@
 
             <hr />
 
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box postcode-form-bottom" }))
-            {
-                <h2 class="heading-large">Find training providers</h2>
+            @CreateSearchForm("postcode-form-bottom")
+
+        </section>
+
+</main>
+
+@helper CreateSearchForm(string cssClasses)
+{
+    using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = $"search-box {cssClasses}" }))
+    {
+        <h2 class="heading-medium">Find training providers for this apprenticeship</h2>
                 <div class="form-group @(@Model.HasError ? " error" : "")">
                     <label class="form-label" for="postcode">
-                        Enter postcode@* or partial postcode *@
+                        Enter a full postcode.
                         <p>
                             @{
                                 Html.RenderPartial("_BlankFieldErrorMessage");
                             }
                         </p>
                     </label>
-                    <input type="hidden" id="apprenticeshipid2" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
-                    <input type="search" id="postcode2" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                    <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
+                    <input type="search" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
                 </div>
                 <input class="button margin-top-x2 postcode-search-button" id="submit-postcode2" type="submit" value="Search" />
-            }
-        </section>
-
-</main>
+    }
+}
 
 @helper GetStandardDetailItem(string title, string item, string unit = "")
 {
@@ -175,9 +179,6 @@
                 <a href="@pdfUrl" target="_blank">
                     @title
                 </a>
-                <p>
-                    PDF, 268KB, 2 pages
-                </p>
             </li>
     }
 }

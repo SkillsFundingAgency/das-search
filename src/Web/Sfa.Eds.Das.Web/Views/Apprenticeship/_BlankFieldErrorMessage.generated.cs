@@ -33,45 +33,6 @@ namespace Sfa.Eds.Das.Web.Views.Apprenticeship
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/_BlankFieldErrorMessage.cshtml")]
     public partial class BlankFieldErrorMessage : System.Web.Mvc.WebViewPage<Sfa.Eds.Das.Web.ViewModels.IHasError>
     {
-
-#line 10 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-public System.Web.WebPages.HelperResult  RenderErrorMessage()
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 10 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-    
-
-#line default
-#line hidden
-
-#line 11 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
- 
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p");
-
-WriteLiteralTo(__razor_helper_writer, " id=\"postcode-error\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n        This field can\'t be blank\r\n    </p>\r\n");
-
-
-#line 15 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-
-
-#line default
-#line hidden
-});
-
-#line 15 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-}
-#line default
-#line hidden
-
         public BlankFieldErrorMessage()
         {
         }
@@ -89,28 +50,24 @@ WriteLiteral("<div>\r\n");
             #line 4 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
          if (Model.HasError)
         {
-            
-            
-            #line default
-            #line hidden
-            
-            #line 6 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-       Write(RenderErrorMessage());
 
             
             #line default
             #line hidden
+WriteLiteral("            <p");
+
+WriteLiteral(" class=\"error-message\"");
+
+WriteLiteral(">\r\n                This field can\'t be blank\r\n            </p>\r\n");
+
             
-            #line 6 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
-                                 
+            #line 9 "..\..\Views\Apprenticeship\_BlankFieldErrorMessage.cshtml"
         }
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n\r\n");
-
-WriteLiteral("\r\n");
+WriteLiteral("</div>\r\n");
 
         }
     }
