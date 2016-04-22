@@ -71,7 +71,7 @@
         /// <param name="message">The message to delete off the queue</param>
         public void DeleteQueueMessage(string queueName, IQueueMessage message)
         {
-            var azureQueueMessage = (AzureQueueMessage)message;
+            var azureQueueMessage = message?.RawMessage as CloudQueueMessage;
 
             if (azureQueueMessage == null)
             {
@@ -79,7 +79,7 @@
             }
 
             var queue = GetQueueReference(queueName);
-            queue.DeleteMessage(azureQueueMessage.AzureMessage);
+            queue.DeleteMessage(azureQueueMessage);
         }
 
         /// <summary>
@@ -99,11 +99,11 @@
                 return;
             }
 
-            var azureCloudMessages = messages.OfType<AzureQueueMessage>();
+            var azureCloudMessages = messages.Select(x => x.RawMessage).OfType<CloudQueueMessage>();
 
             foreach (var message in azureCloudMessages)
             {
-                queue.DeleteMessage(message.AzureMessage);
+                queue.DeleteMessage(message);
             }
         }
 

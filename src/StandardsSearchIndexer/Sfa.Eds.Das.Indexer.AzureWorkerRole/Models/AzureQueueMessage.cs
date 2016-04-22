@@ -8,22 +8,24 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole.Models
     {
         public AzureQueueMessage(CloudQueueMessage message)
         {
-            AzureMessage = message;
+            RawMessage = message;
+            Message = message?.AsString;
+            InsertionTime = message?.InsertionTime?.DateTime;
         }
-
-        /// <summary>
-        /// The azure queue message that has come from he azure queue itself
-        /// </summary>
-        public CloudQueueMessage AzureMessage { get; }
 
         /// <summary>
         /// Gets message of the queue message
         /// </summary>
-        public string Message => AzureMessage.AsString;
+        public string Message { get; }
 
         /// <summary>
         /// Gets the time the message was added to the message queue
         /// </summary>
-        public DateTime? InsertionTime => AzureMessage?.InsertionTime?.DateTime;
+        public DateTime? InsertionTime { get; }
+
+        /// <summary>
+        /// Gets the raw message object that is specific to the queue itself (i.e. Azure's CloudQueueMessage)
+        /// </summary>
+        public object RawMessage { get; }
     }
 }

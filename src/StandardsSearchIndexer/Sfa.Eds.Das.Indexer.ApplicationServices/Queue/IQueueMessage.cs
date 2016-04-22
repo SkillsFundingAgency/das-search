@@ -16,5 +16,7 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
         /// Gets the time the message was added to the message queue
         /// </summary>
         DateTime? InsertionTime { get; }
+
+        object RawMessage { get; }
     }
 }
