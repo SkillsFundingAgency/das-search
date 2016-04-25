@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using Sfa.Eds.Das.Indexer.ApplicationServices.Provider;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Queue;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Services;
 using Sfa.Eds.Das.Indexer.ApplicationServices.Settings;
@@ -147,19 +148,30 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.Queue
         }
 
         [Test]
-        public void ShouldDeleteFirstMessagesIfIndexingIsSuccessful()
+        public void ShouldDoNothingIfIndexerServiceIsNull()
         {
-            var extraMessage = new Mock<IQueueMessage>().Object;
-            _messages.Add(extraMessage);
-            _mockMessage.Setup(x => x.InsertionTime).Returns(DateTime.Now);
-            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Returns(_messages);
-            _mockIndexerService.Setup(x => x.CreateScheduledIndex(It.IsAny<DateTime>())).Returns(Task.Factory.StartNew(() => { }));
-            _mockQueueService.Setup(x => x.DeleteQueueMessage(QueueName, _mockMessage.Object));
+            _mockIndexerServiceFactory.Setup(x => x.GetIndexerService<IMaintainProviderIndex>()).Returns((IIndexerService<IMaintainProviderIndex>)null);
 
             var task = _sut.CheckMessage<IMaintainProviderIndex>();
             task.Wait(1000);
 
-            _mockQueueService.Verify(x => x.DeleteQueueMessage(QueueName, _mockMessage.Object));
+            _mockServiceSettings.Verify(x => x.QueueName(It.IsAny<Type>()), Times.Never);
+        }
+
+        [Test]
+        public void ShouldLogErrorWhenSomethingFails()
+        {
+            _mockQueueService.Setup(x => x.GetQueueMessages(It.IsAny<string>())).Throws(new Exception());
+
+            try
+            {
+                var task = _sut.CheckMessage<IMaintainProviderIndex>();
+                task.Wait(1000);
+            }
+            catch (Exception)
+            {
+                _mockLogger.Verify(x => x.Fatal(It.IsAny<object>()), Times.Once());
+            }
         }
     }
 }
