@@ -65,7 +65,6 @@ namespace Sfa.Infrastructure.Elasticsearch
                 catch (Exception ex)
                 {
                     Log.Error("Error indexing standard PDF", ex);
-                    throw;
                 }
             }
 

@@ -97,7 +97,7 @@
                 propertiesLocal = properties;
             }
 
-            propertiesLocal.Add("Application", "Sfa.Das.Web");
+            propertiesLocal.Add("Application", "Sfa.Das.Indexer");
             propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, message.ToString()) { Exception = exception };
