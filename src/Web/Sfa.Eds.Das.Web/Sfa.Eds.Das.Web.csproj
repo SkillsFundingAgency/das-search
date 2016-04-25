@@ -407,6 +407,9 @@
     <Content Include="Content\src\styles\custom-elements\_data-list.scss" />
     <Content Include="Content\src\styles\custom-elements\_address.scss" />
     <Content Include="Content\src\styles\custom-elements\_results.scss" />
+    <Content Include="Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
