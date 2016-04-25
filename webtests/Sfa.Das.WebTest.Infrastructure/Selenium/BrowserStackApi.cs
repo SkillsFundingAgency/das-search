@@ -26,7 +26,7 @@
         {
             try
             {
-                var reqString = "{\"status\":\"error\", \"reason\":\"" + reason + "\"}";
+                var reqString = "{\"status\":\"error\", \"reason\":\"\"}";
 
                 var requestData = Encoding.UTF8.GetBytes(reqString);
                 var myUri = new Uri($"https://www.browserstack.com/automate/sessions/{FindSessionId()}.json");
@@ -62,9 +62,6 @@
         public string FindSessionId()
         {
             var sessionId = (_driver as RemoteWebDriver)?.SessionId;
-            //var sessionIdProperty = typeof(RemoteWebDriver).GetProperty("SessionId", BindingFlags.Instance | BindingFlags.NonPublic);
-            //var sessionId = sessionIdProperty.GetValue(_driver, null) as SessionId;
-            Console.WriteLine("##### Session: " + sessionId);
 
             return sessionId?.ToString();
         }
