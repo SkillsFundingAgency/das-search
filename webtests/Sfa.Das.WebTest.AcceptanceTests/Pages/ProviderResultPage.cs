@@ -16,7 +16,7 @@
         /// Create and maintain all Provider Page objects 
         /// Create and maintain business methods  associated to this page.
         /// </summary>
-        SearchPage srchPage;
+      
 
         By providerlist = By.XPath(".//*[@id='provider-results']/div[1]/div[2]/p");
 

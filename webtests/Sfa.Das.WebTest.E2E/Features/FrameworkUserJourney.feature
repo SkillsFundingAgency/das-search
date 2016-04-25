@@ -3,14 +3,15 @@
 	I want to be able to search for training options
 	and find a provider for a given framework
 
-Scenario Outline:Should find a framework and provider
-	Given I navigated to the Start page
+Scenario:Should find a framework and provider
+	Given I have data for a framework
+	And I navigated to the Start page
 	When I choose Start Button
 	Then I am on the Search page
 
 	When I enter data
 		| Field      | Value     |
-		| Search Box | <JOBROLE> |
+		| Search Box | {JOBROLE} |
 	And I choose Search Button
 	Then I am on the Search Results page
 
@@ -19,7 +20,7 @@ Scenario Outline:Should find a framework and provider
 
 	When I enter data
 		| Field               | Value      |
-		| Postcode Search Box | <Postcode> |
+		| Postcode Search Box | {Postcode} |
 	When I choose Search Button
 	Then I am on the Framework Provider Results page
 	And I see Provider Results list contains at least 1 items
@@ -30,8 +31,5 @@ Scenario Outline:Should find a framework and provider
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
-Examples:
-| JOBROLE                       | Postcode |
-| Community Arts Administration | KT13 8TT  |
 
 

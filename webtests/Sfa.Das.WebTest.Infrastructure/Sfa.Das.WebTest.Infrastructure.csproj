@@ -79,6 +79,7 @@
     <Compile Include="Settings\BrowserSettings.cs" />
     <Compile Include="Settings\IBrowserSettings.cs" />
     <Compile Include="Steps\ClickingSteps.cs" />
+    <Compile Include="Steps\DataSteps.cs" />
     <Compile Include="Steps\EnteringDataSteps.cs" />
     <Compile Include="Steps\NavigationSteps.cs" />
     <Compile Include="Steps\ValidatingSteps.cs" />

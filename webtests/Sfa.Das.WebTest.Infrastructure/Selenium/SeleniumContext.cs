@@ -3,6 +3,7 @@
     using System;
     using System.Configuration;
     using System.IO;
+    using System.Linq;
     using System.Text.RegularExpressions;
 
     using NUnit.Framework;
@@ -77,7 +78,12 @@
         private string GenerateTestName()
         {
             var arr = TestContext.CurrentContext.Test.Name.Replace(")", "").Replace(",null", "").Split('(');
-            return FeatureContext.Current.FeatureInfo.Title + " - " + SplitCamelCase(arr[0]) + " " + arr[1];
+            if (arr.Length > 1)
+            {
+                return FeatureContext.Current.FeatureInfo.Title + " - " + SplitCamelCase(arr[0]) + " " + arr[1];
+            }
+
+            return FeatureContext.Current.FeatureInfo.Title + " - " + string.Join(" ", arr.Select(SplitCamelCase));
         }
 
         private string SplitCamelCase(string input)
