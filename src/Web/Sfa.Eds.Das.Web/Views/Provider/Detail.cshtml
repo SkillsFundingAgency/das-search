@@ -32,7 +32,7 @@
                     </h2>
                     <b>Level:</b>
                     <span>
-                        @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel) )
+                        @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel))
                     </span>
                 </header>
                 <dl class="data-list">
@@ -176,22 +176,17 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
         <dt class="training-structure">@title</dt>
         <dd id="delivery-modes">
             <ul>
-                @foreach (var item in items)
+                @if (items.Exists(m => m.Equals("DayRelease")))
                 {
-                    switch (item)
-                    {
-                        case "100PercentEmployer":
-                            <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
-                            break;
-                        case "BlockRelease":
-                            <li class="block-release">@Html.Raw("block release")</li>
-                            break;
-                        case "DayRelease":
-                            <li class="day-release">@Html.Raw("day release")</li>
-                            break;
-                        default:
-                            break;
-                    }
+                    <li class="day-release">@Html.Raw("day release")</li>
+                }
+                @if (items.Exists(m => m.Equals("BlockRelease")))
+                {
+                    <li class="block-release">@Html.Raw("block release")</li>
+                }
+                @if (items.Exists(m => m.Equals("100PercentEmployer")))
+                {
+                    <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
                 }
             </ul>
                     <details>
