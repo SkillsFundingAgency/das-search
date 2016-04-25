@@ -44,7 +44,7 @@
 
         By providerpagetrainingLoc = By.CssSelector("#training-location");
 
-        SearchPage srchPage;
+        
 
         public void verifyProviderDetailPageFields(String info)
         {
