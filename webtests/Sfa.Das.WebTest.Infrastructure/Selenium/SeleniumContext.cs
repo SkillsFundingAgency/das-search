@@ -53,14 +53,10 @@
                         .SafeSet("browserstack.key", _settings.BrowserStackKey)
                         .SafeSet("project", _settings.Project)
                         .SafeSet("device", _settings.Device)
-                        .SafeSet("resolution", _settings.Resolution);
+                        .SafeSet("resolution", _settings.Resolution)
+                        .SafeSet("build", _settings.Build);
 
-                if (_settings.AssemblyVersion != "0.0.0.0")
-                {
-                    capabilities.SetCapability("build", _settings.AssemblyVersion);
-                }
                 capabilities.SetCapability("name", GenerateTestName());
-                //capabilities.SetCapability("browserstack.selenium_version", "2.53.0");
 
                 Console.WriteLine($"##### Driver: Browserstack - {_settings.OS} {_settings.OSVersion} - {_settings.Device ?? _settings.Browser} {_settings.BrowserVersion}");
                 var remoteWebDriver = new RemoteWebDriver(new Uri(_settings.RemoteUrl), capabilities);
