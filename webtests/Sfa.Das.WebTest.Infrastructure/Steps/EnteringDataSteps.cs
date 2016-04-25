@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     using OpenQA.Selenium;
 
@@ -30,7 +31,14 @@
             foreach (var row in dataTable.Rows)
             {
                 var selector = _pageContext.FindSelector(row[0]);
-                _driver.FindElement(selector).SendKeys(row[1]);
+                var input = row[1];
+                foreach (var match in Regex.Matches(input, "(?<={).*(?=})"))
+                {
+                    input = input.Replace("{" + match + "}", ScenarioContext.Current[match.ToString()].ToString());
+                }
+
+                Console.WriteLine("-> Entering \"" +  input + "\" into " + row[0]);
+                _driver.FindElement(selector).SendKeys(input);
             }
         }
     }
