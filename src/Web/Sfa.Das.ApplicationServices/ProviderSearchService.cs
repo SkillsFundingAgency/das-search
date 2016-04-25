@@ -131,7 +131,6 @@ namespace Sfa.Das.ApplicationServices
                     PostCode = postCode,
                     Hits = hits
                 };
-
             }
             catch (SearchException ex)
             {
