@@ -25,17 +25,10 @@ namespace Sfa.Eds.Das.Infrastructure.ElasticSearch
             _applicationSettings = applicationSettings;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take, ApprenticeshipSearchSortBy sortBy)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
             var searchDescriptor = GetKeywordSearchDescriptor(skip, take, formattedKeywords);
-
-            if (sortBy == ApprenticeshipSearchSortBy.StandardsFirst)
-            {
-                searchDescriptor = searchDescriptor.Sort(r => r
-                            .Descending(new Field { Name = "_type" })
-                            .Descending(SortSpecialField.Score));
-            }
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 

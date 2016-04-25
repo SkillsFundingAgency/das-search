@@ -65,7 +65,6 @@
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
-    <Compile Include="Models\ApprenticeshipSearchSortBy.cs" />
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SearchResult{T}.cs" />

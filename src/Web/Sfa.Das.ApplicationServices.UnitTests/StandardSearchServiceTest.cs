@@ -1,7 +1,6 @@
 ﻿namespace Sfa.Das.ApplicationServices.UnitTests
 {
     using Eds.Das.Core.Logging;
-    using Models;
     using Moq;
 
     using NUnit.Framework;
@@ -22,34 +21,23 @@
         [Test]
         public void ShouldCallWithProvidedParameters()
         {
-            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ApprenticeshipSearchSortBy>()));
+            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
             var standardSearchProvider = new ApprenticeshipSearchService(_mockSearchProvider.Object, _mockLogger.Object);
 
             standardSearchProvider.SearchByKeyword("test", 1, 2);
 
-            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 1, 2, It.IsAny<ApprenticeshipSearchSortBy>()));
-        }
-
-        [Test]
-        public void ShouldRequestThatSearchIsOrderedByStandardsFirst()
-        {
-            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), ApprenticeshipSearchSortBy.StandardsFirst));
-            var standardSearchProvider = new ApprenticeshipSearchService(_mockSearchProvider.Object, _mockLogger.Object);
-
-            standardSearchProvider.SearchByKeyword("test", 1, 2);
-
-            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 1, 2, ApprenticeshipSearchSortBy.StandardsFirst));
+            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 1, 2));
         }
 
         [Test]
         public void ShouldDefaultTakeTo1000When0()
         {
-            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ApprenticeshipSearchSortBy>()));
+            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
             var standardSearchProvider = new ApprenticeshipSearchService(_mockSearchProvider.Object, _mockLogger.Object);
 
             standardSearchProvider.SearchByKeyword("test", 0, 0);
 
-            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 0, 1000, It.IsAny<ApprenticeshipSearchSortBy>()));
+            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 0, 1000));
         }
     }
 }
