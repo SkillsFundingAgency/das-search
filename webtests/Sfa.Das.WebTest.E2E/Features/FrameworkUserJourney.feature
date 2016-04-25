@@ -3,6 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given framework
 
+@preprod
 Scenario:Should find a framework and provider
 	Given I have data for a framework
 	And I navigated to the Start page
