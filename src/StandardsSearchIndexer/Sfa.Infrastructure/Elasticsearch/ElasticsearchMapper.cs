@@ -1,4 +1,4 @@
-﻿using Sfa.Eds.Das.Indexer.Core.Elasticsearch;
+﻿using Sfa.Infrastructure.Elasticsearch.Helpers;
 
 namespace Sfa.Infrastructure.Elasticsearch
 {
@@ -87,8 +87,7 @@ namespace Sfa.Infrastructure.Elasticsearch
 
         public int MapLevelProgType(int level)
         {
-            var em = new ElasticMapper();
-            return em.MapLevel(level);
+            return ElasticLevelHelper.MapLevel(level);
         }
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)

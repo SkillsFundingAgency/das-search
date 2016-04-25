@@ -112,6 +112,7 @@
     <Compile Include="CourseDirectory\Models\ProviderCollection.cs" />
     <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\Helpers\ElasticLevelHelper.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
     <Compile Include="Elasticsearch\ElasticsearchMapper.cs" />
