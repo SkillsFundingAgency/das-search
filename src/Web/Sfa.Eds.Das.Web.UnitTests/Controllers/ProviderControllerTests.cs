@@ -180,7 +180,12 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
             _mockProviderSearchService = new Mock<IProviderSearchService>();
             _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
 
-            var searchCriteria = new ProviderLocationSearchCriteria();
+            var searchCriteria = new ProviderLocationSearchCriteria
+            {
+                StandardCode = "1",
+                LocationId = "2",
+                ProviderId = "3"
+            };
 
             var stubProviderViewModel = new ProviderViewModel
             {
@@ -228,7 +233,12 @@ namespace Sfa.Eds.Das.Web.UnitTests.Controllers
             _mockProviderSearchService = new Mock<IProviderSearchService>();
             _mockViewModelFactory = new Mock<IProviderViewModelFactory>();
 
-            var searchCriteria = new ProviderLocationSearchCriteria();
+            var searchCriteria = new ProviderLocationSearchCriteria
+            {
+                FrameworkId = "1",
+                LocationId = "2",
+                ProviderId = "3"
+            };
 
             var stubProviderViewModel = new ProviderViewModel
             {
