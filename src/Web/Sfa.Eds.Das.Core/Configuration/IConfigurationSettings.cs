@@ -12,5 +12,7 @@ namespace Sfa.Eds.Das.Core.Configuration
         string BuildId { get; }
 
         IEnumerable<Uri> ElasticServerUrls { get; }
+
+        Uri SurveyUrl { get; }
     }
 }

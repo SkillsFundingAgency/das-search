@@ -49,6 +49,10 @@
       <HintPath>..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentAssertions.Mvc5, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.Mvc5.0.6.0.0\lib\net45\FluentAssertions.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
@@ -122,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ErrorControllerTests.cs" />
+    <Compile Include="Controllers\SharedControllerTests.cs" />
     <Compile Include="Controllers\StartControllerTests.cs" />
     <Compile Include="Controllers\ProviderControllerTests.cs" />
     <Compile Include="Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />

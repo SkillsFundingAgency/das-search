@@ -51,7 +51,8 @@
         @RenderBody()
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    @Html.Partial("_Footer")
+    @*@Html.Partial("_Footer")*@
+    @Html.Action("Footer", "Shared")
     @Html.Partial("_ScriptsFooter")
 
 </body>
