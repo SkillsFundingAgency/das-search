@@ -9,9 +9,11 @@
 
         void Debug(object message);
 
-        void Info(string message, Dictionary<string, object> properties);
-
         void Debug(object message, Exception exception);
+
+        void Debug(string message, Dictionary<string, object> properties);
+
+        void Info(string message, Dictionary<string, object> properties);
 
         void Info(object message);
 

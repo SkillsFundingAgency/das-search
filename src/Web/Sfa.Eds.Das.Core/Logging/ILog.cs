@@ -12,6 +12,8 @@ namespace Sfa.Eds.Das.Core.Logging
 
         void Debug(string msg);
 
+        void Debug(string msg, Dictionary<string, object> properties);
+
         void Warn(string msg);
 
         void Error(string msg);

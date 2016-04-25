@@ -24,7 +24,7 @@
             _loggerType = loggerType?.ToString() ?? "DefaultIndexLogger";
         }
 
-        public void Trace(object message) // ToDo:Hi Lee, Do we need trace?
+        public void Trace(object message)
         {
             SendLog(message, LogLevel.Trace);
         }
@@ -37,6 +37,11 @@
         public void Debug(object message, Exception exception)
         {
             SendLog(message, LogLevel.Debug, _defaultProperties, exception);
+        }
+
+        public void Debug(string message, Dictionary<string, object> properties)
+        {
+            SendLog(message, LogLevel.Debug, properties);
         }
 
         public void Info(object message)
@@ -92,7 +97,7 @@
                 propertiesLocal = properties;
             }
 
-            propertiesLocal.Add("Application", "Sfa.Das.Web");
+            propertiesLocal.Add("Application", "Sfa.Das.Indexer");
             propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, message.ToString()) { Exception = exception };

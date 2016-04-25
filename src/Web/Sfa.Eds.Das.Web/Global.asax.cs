@@ -16,7 +16,7 @@
             MvcHandler.DisableMvcResponseHeader = true;
             var logger = DependencyResolver.Current.GetService<ILog>();
 
-            logger.Info("Starting web applications...");
+            logger.Info("Starting Web Role");
 
             SetupApplicationInsights();
 
@@ -26,7 +26,7 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            logger.Info("Web applications started...");
+            logger.Info("Web Role started");
         }
 
         protected void Application_Error(object sender, EventArgs e)

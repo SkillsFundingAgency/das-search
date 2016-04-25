@@ -13,5 +13,5 @@ get-childitem $folder -include App.*.config -recurse | foreach ($_) {
 	.\tools\ConfigTransformTool\ConfigTransformTool.exe $sourceConfig $transform $targetConfig
 }
 
-remove-item $testdll 
-remove-item ($testdll + ".config")
+remove-item ($folder + "\" + $testdll) 
+remove-item ($folder + "\" + $testdll + ".config")

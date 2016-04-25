@@ -19,14 +19,6 @@ namespace Sfa.Eds.Das.Indexer.ApplicationServices.Queue
         IEnumerable<IQueueMessage> GetQueueMessages(string queueName);
 
         /// <summary>
-        /// Get messages from a queue
-        /// </summary>
-        /// <param name="queueName">Queue name to get messages from</param>
-        /// <param name="messageCount">The maximum number of messages to collect.</param>
-        /// <returns>[message count] number of messages or all messages (whichever is less) from the queue</returns>
-        IEnumerable<IQueueMessage> GetQueueMessages(string queueName, int messageCount);
-
-        /// <summary>
         /// Deletes a single message from the given queue
         /// </summary>
         /// <param name="queueName">Queue name to delete the message from</param>

@@ -27,7 +27,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
 
         public override void Run()
         {
-            _logger.Info("Starting indexer... ");
+            _logger.Info("Starting indexer processing loop. ");
 
             while (true)
             {
@@ -56,7 +56,7 @@ namespace Sfa.Eds.Das.Indexer.AzureWorkerRole
             // For information on handling configuration changes see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
             var result = base.OnStart();
 
-            _logger.Info("Started...");
+            _logger.Info("Indexer worker role started.");
 
             return result;
         }

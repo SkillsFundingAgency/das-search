@@ -27,5 +27,7 @@
         public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public string Resolution => ConfigurationManager.AppSettings["resolution"];
+
+        public string Build => ConfigurationManager.AppSettings["build"];
     }
 }

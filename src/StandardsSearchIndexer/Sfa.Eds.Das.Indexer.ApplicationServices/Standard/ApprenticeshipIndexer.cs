@@ -110,8 +110,6 @@
 
         private Task<ICollection<StandardMetaData>> LoadStandardMetaData()
         {
-            _log.Info("Loading standard meta data ...");
-
             var standardsMetaData = _metaDataHelper.GetAllStandardsMetaData();
             return Task.FromResult<ICollection<StandardMetaData>>(standardsMetaData.ToList());
         }

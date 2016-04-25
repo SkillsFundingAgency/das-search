@@ -31,7 +31,7 @@
         /// <returns>A default number of messages from the named queue</returns>
         public IEnumerable<IQueueMessage> GetQueueMessages(string queueName)
         {
-            _logger.Debug("Getting " + DefaultMessageCount + " messages from queue [" + queueName + "]");
+            _logger.Debug("Trying to pop " + DefaultMessageCount + " messages from queue [" + queueName + "]");
             var queue = GetQueueReference(queueName);
 
             return queue?.GetMessages(DefaultMessageCount, _messageVisibilityTimeout).Select(x => new AzureQueueMessage(x));
@@ -49,19 +49,6 @@
             queue?.FetchAttributes();
 
             return queue?.ApproximateMessageCount ?? 0;
-        }
-
-        /// <summary>
-        /// Get messages from a queue
-        /// </summary>
-        /// <param name="queueName">Queue name to get messages from</param>
-        /// <param name="messageCount">The maximum number of messages to collect.</param>
-        /// <returns>[message count] number of messages or all messages (whichever is less) from the queue</returns>
-        public IEnumerable<IQueueMessage> GetQueueMessages(string queueName, int messageCount)
-        {
-            _logger.Debug("Getting " + messageCount + " messages from queue [" + queueName + "]");
-            var queue = GetQueueReference(queueName);
-            return queue?.GetMessages(messageCount, _messageVisibilityTimeout).Select(x => new AzureQueueMessage(x));
         }
 
         /// <summary>

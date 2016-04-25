@@ -198,7 +198,6 @@
 
             // Second result
             GetPartial(html, ".result-title", 2).Should().Be("Test title 2");
-
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldReturnNotationLevelWhenStandardIdExists()
         {
             var expectedNotationLevel = 4;
@@ -42,6 +43,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldReturnZeroWhenStandardIdDoesntExists()
         {
             var expectedNotationLevel = 0;
@@ -54,6 +56,7 @@ namespace Sfa.Eds.Das.Indexer.IntegrationTests.Services
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldReturnZeroWhenStandardIdIsNegative()
         {
             var expectedNotationLevel = 0;

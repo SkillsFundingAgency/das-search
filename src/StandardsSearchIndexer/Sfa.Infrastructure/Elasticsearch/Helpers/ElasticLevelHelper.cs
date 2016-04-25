@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Sfa.Eds.Das.Indexer.Core.Elasticsearch
+namespace Sfa.Infrastructure.Elasticsearch.Helpers
 {
-    public class ElasticMapper
+    public static class ElasticLevelHelper
     {
-        private readonly Dictionary<int, int> _dictionary;
-        public ElasticMapper()
-        {
-            _dictionary = new Dictionary<int, int>
+        private static Dictionary<int, int> Dictionary => new Dictionary<int, int>
             {
                 { 2, 3 },
                 { 3, 2 },
@@ -20,11 +17,10 @@ namespace Sfa.Eds.Das.Indexer.Core.Elasticsearch
                 { 22, 6 },
                 { 23, 7 }
             };
-        }
 
-        public int MapLevel(int level)
+        public static int MapLevel(int level)
         {
-            return _dictionary.ContainsKey(level) ? _dictionary[level] : 0;
+            return Dictionary.ContainsKey(level) ? Dictionary[level] : 0;
         }
     }
 }
