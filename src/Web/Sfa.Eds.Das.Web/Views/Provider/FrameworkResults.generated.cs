@@ -124,19 +124,26 @@ WriteLiteral("\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
-WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n<script>\r\n    window.onload = function(" +
-") {\r\n        SearchAndShortlist.analytics.pushEventValue(\"Search\", \"Provider sea" +
-"rch\", ");
+WriteLiteral(">\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
 
             
-            #line 38 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                                            Write(Model.TotalResults);
+            #line 36 "..\..\Views\Provider\FrameworkResults.cshtml"
+ if (Model.TotalResults == 0)
+{
 
             
             #line default
             #line hidden
-WriteLiteral(");\r\n    }\r\n</script> ");
+WriteLiteral("    <script>\r\n        window.onload = function() {\r\n            SearchAndShortlis" +
+"t.analytics.pushEvent(\"Provider Search\", \"No results\", \"Search\");\r\n        }\r\n  " +
+"  </script> \r\n");
 
+            
+            #line 43 "..\..\Views\Provider\FrameworkResults.cshtml"
+}
+            
+            #line default
+            #line hidden
         }
     }
 }

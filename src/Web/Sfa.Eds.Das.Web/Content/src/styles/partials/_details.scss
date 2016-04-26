@@ -1,41 +1,7 @@
-
-//
-// #apprenticeship-results .result, #framework-results .result {
-//     border-bottom: 1px solid #bfc1c3;
-//     padding: 15px 0;
-// }
-//
-// #apprenticeship-results .result:first-child, #framework-results .result:first-child {
-//     padding-top: 0;
-// }
-// #apprenticeship-results .result .actions, #framework-results .result .actions {
-//     text-align: center;
-// }
-// #apprenticeship-results .result .actions i, #framework-results .result .actions i {
-//     display: block;
-// }
-// #apprenticeship-results .result .actions a, #framework-results .result .actions a {
-//     display: block;
-//     text-decoration: none;
-// }
-
-
-.apprenticeship-results .result dt,
-.standard_detail .hgroup dt,
-.framework-results .result dt,
-.standard_detail .hgroup dt,
 .standard-result-summary dt  {
     font-weight: 900;
     float: left;
     padding-right: 5px;
-}
-
-
-.apprenticeship-results .result dt:after,
-.standard_detail .hgroup dt:after,
-.framework-results .result dt:after,
-.framework_detail .hgroup dt:after {
-    content: ":";
 }
 
 .progress-container {
@@ -66,5 +32,14 @@
                 margin: 0;
             }
         }
+    }
+}
+
+.standard-detail {
+    .data-list dd, .data-list dt{
+        margin-bottom: 10px;
+    }
+    p{
+        margin-bottom: 5px;
     }
 }

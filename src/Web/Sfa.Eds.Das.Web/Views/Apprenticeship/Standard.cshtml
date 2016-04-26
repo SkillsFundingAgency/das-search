@@ -6,7 +6,7 @@
     ViewBag.Title = "Standard - " + @Model.Title;
 }
 
-<main id="content">
+<main id="content" class="standard-detail">
 
     <p class="small-btm-margin">
         @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")

@@ -1,12 +1,17 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (analytics) {
+
     analytics.pushEvent = function (category, text, action) {
+        if (typeof ga === "undefined") {
+            return;
+        }
+
         ga("send", "event", {
             "eventCategory": category,
             "eventAction": action || "Click",
             "eventLabel": text
         });
-    },
+    };
 
     analytics.init = function () {
 
