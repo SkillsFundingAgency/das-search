@@ -17,6 +17,8 @@ namespace Sfa.Eds.Das.Infrastructure.Configuration
 
         public IEnumerable<Uri> ElasticServerUrls => GetElasticSearchIps();
 
+        public Uri SurveyUrl => new Uri(ConfigurationManager.AppSettings["SurveyUrl"]);
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = ConfigurationManager.AppSettings["ElasticServerUrls"].Split(',');
