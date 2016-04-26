@@ -1,6 +1,5 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (analytics) {
-
     analytics.pushEvent = function (category, text, action) {
         ga("send", "event", {
             "eventCategory": category,
@@ -40,6 +39,8 @@
         });
     };
 
-    analytics.init();
+    if (typeof ga != "undefined"){
+        analytics.init();
+    }
 
 }(SearchAndShortlist.analytics = {}));
