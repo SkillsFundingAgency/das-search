@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Das.WebTest.Infrastructure.Selenium
 {
     using System;
+    using System.Configuration;
     using System.Drawing.Imaging;
     using System.IO;
     using System.Text;
@@ -12,22 +13,24 @@
 
     public static class WebDriverExtensions
     {
+        private static readonly int TimeoutInSeconds = Convert.ToInt32(ConfigurationManager.AppSettings["webdriver.timeout"] ?? "10");
+
         [Obsolete("Unless you're waiting on a javascript render you should just wait for the page to load")]
-        public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds)
+        public static IWebElement FindElement(this IWebDriver driver, By by)
         {
-            if (timeoutInSeconds > 0)
+            if (TimeoutInSeconds > 0)
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeoutInSeconds));
                 return wait.Until(drv => drv.FindElement(by));
             }
             return driver.FindElement(by);
         }
 
-        public static void WaitFor(this IWebDriver driver, By by, int timeoutInSeconds = 10)
+        public static void WaitFor(this IWebDriver driver, By by)
         {
-            if (timeoutInSeconds > 0)
+            if (TimeoutInSeconds > 0)
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeoutInSeconds));
                 wait.Until(ExpectedConditions.ElementIsVisible(by));
             }
         }
@@ -74,11 +77,11 @@
             }
         }
 
-        public static void WaitFor(this IWebDriver driver, Func<object, bool> func, int timeoutInSeconds = 10)
+        public static void WaitFor(this IWebDriver driver, Func<object, bool> func)
         {
-            if (timeoutInSeconds > 0)
+            if (TimeoutInSeconds > 0)
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeoutInSeconds));
                 wait.Until(func);
             }
         }
