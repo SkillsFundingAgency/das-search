@@ -1,0 +1,10 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.IHasError
+
+<div>
+        @if (Model.HasError)
+        {
+            <p class="error-message">
+                This field can't be blank
+            </p>
+        }
+</div>
