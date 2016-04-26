@@ -39,7 +39,7 @@
         });
     };
 
-    if (typeof ga != "undefined"){
+    if (typeof ga !== "undefined"){
         analytics.init();
     }
 
