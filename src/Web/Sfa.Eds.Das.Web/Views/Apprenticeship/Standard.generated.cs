@@ -69,15 +69,15 @@ WriteLiteralTo(__razor_helper_writer, ">Find training providers for this apprent
 
 WriteLiteralTo(__razor_helper_writer, "                <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 4287), Tuple.Create("\"", 4340)
-, Tuple.Create(Tuple.Create("", 4295), Tuple.Create("form-group", 4295), true)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 4311), Tuple.Create("\"", 4364)
+, Tuple.Create(Tuple.Create("", 4319), Tuple.Create("form-group", 4319), true)
 
 #line 98 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create(" ", 4305), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+, Tuple.Create(Tuple.Create(" ", 4329), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
 
 #line default
 #line hidden
-, 4306), false)
+, 4330), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <label");
@@ -111,14 +111,14 @@ WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"text-box form-control\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 4781), Tuple.Create("\"", 4806)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 4805), Tuple.Create("\"", 4830)
 
 #line 107 "..\..\Views\Apprenticeship\Standard.cshtml"
-                      , Tuple.Create(Tuple.Create("", 4789), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                      , Tuple.Create(Tuple.Create("", 4813), Tuple.Create<System.Object, System.Int32>(Model.StandardId
 
 #line default
 #line hidden
-, 4789), false)
+, 4813), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <input");
@@ -342,14 +342,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6644), Tuple.Create("\"", 6652)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6668), Tuple.Create("\"", 6676)
 
 #line 169 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6649), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 6673), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6649), false)
+, 6673), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -395,14 +395,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6840), Tuple.Create("\"", 6854)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6864), Tuple.Create("\"", 6878)
 
 #line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6847), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 6871), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 6847), false)
+, 6871), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -450,6 +450,8 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                </a>\r\n            <
 WriteLiteral("\r\n\r\n<main");
 
 WriteLiteral(" id=\"content\"");
+
+WriteLiteral(" class=\"standard-detail\"");
 
 WriteLiteral(">\r\n\r\n    <p");
 
@@ -536,15 +538,15 @@ WriteLiteral(">Find training providers for this apprenticeship</h2>\r\n");
 
 WriteLiteral("                        <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1316), Tuple.Create("\"", 1369)
-, Tuple.Create(Tuple.Create("", 1324), Tuple.Create("form-group", 1324), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1340), Tuple.Create("\"", 1393)
+, Tuple.Create(Tuple.Create("", 1348), Tuple.Create("form-group", 1348), true)
             
             #line 35 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1334), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+, Tuple.Create(Tuple.Create(" ", 1358), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1335), false)
+, 1359), false)
 );
 
 WriteLiteral(">\r\n                            <label");
@@ -581,14 +583,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1904), Tuple.Create("\"", 1929)
+WriteAttribute("value", Tuple.Create(" value=\"", 1928), Tuple.Create("\"", 1953)
             
             #line 44 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                    , Tuple.Create(Tuple.Create("", 1912), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                                                    , Tuple.Create(Tuple.Create("", 1936), Tuple.Create<System.Object, System.Int32>(Model.StandardId
             
             #line default
             #line hidden
-, 1912), false)
+, 1936), false)
 );
 
 WriteLiteral(">\r\n                            <input");
