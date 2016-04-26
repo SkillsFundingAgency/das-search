@@ -1,4 +1,6 @@
-﻿namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests
+﻿using System.Collections.Generic;
+
+namespace Sfa.Eds.Das.Tools.MetaDataCreationTool.UnitTests
 {
     using System.Diagnostics;
     using System.Linq;
@@ -56,6 +58,21 @@
             Assert.AreEqual(5, ids.Count());
             Assert.IsTrue(ids.Contains("13"));
             Assert.IsFalse(ids.Contains("14"));
+        }
+
+        [Test]
+        public void ShouldReturnNewDictionaryIfBlobsAreNull()
+        {
+            var httpHelperMock = new Mock<IHttpGet>();
+            var mockLogger = new Mock<ILog>(MockBehavior.Loose);
+
+            httpHelperMock.Setup(m => m.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(AllIdsResponse);
+            var vsts = new VstsService(_appServiceSettings, new GitDynamicModelGenerator(), httpHelperMock.Object, mockLogger.Object);
+
+            httpHelperMock.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
+            var ids = vsts.GetAllFileContents();
+
+            Assert.AreEqual(ids, new Dictionary<string, string>());
         }
     }
 }
