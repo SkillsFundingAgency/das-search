@@ -369,6 +369,7 @@
     <Content Include="Content\favicons\apple-touch-icon-72x72.png" />
     <Content Include="Content\favicons\apple-touch-icon-76x76.png" />
     <Content Include="Content\favicons\browserconfig.xml" />
+    <Content Include="Content\favicons\favicon-16x16.png" />
     <Content Include="Content\favicons\favicon-32x32.png" />
     <Content Include="Content\favicons\favicon-96x96.png" />
     <Content Include="Content\favicons\favicon.ico" />
