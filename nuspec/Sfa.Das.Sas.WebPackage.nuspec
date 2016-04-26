@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Sfa.Eds.Das.WebPackage</id>
+        <id>Sfa.Das.Sas.WebPackage</id>
         <version>0.0.1</version>
         <authors>SFA DAS</authors>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,6 +12,6 @@
         </dependencies>
     </metadata>
      <files>
-        <file src="\..\src\Web\Sfa.Das.CloudService.Web\bin\Release\app.publish\*.*" target="" />
+        <file src="\..\src\Web\Sfa.Das.Sas.Web.CloudService\bin\Release\app.publish\*.*" target="" />
      </files>
 </package>
