@@ -16,5 +16,10 @@ namespace Sfa.Eds.Das.Web.Controllers
         {
             return PartialView("_footer", _surveyUrl);
         }
+
+        public PartialViewResult Header()
+        {
+            return PartialView("_Header", _surveyUrl);
+        }
     }
 }
