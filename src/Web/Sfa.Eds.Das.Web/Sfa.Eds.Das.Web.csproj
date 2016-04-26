@@ -339,6 +339,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\dist\css\external-links\external-link-24x24.png" />
     <Content Include="Content\dist\css\external-links\external-link.png" />
     <Content Include="Content\dist\css\screen.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -349,6 +350,7 @@
     <Content Include="Content\dist\images\govuk-crest.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\icons\icon-pointer-2x.png" />
     <Content Include="Content\dist\images\icons\icon-pointer.png" />
     <Content Include="Content\favicons\android-chrome-144x144.png" />
     <Content Include="Content\favicons\android-chrome-192x192.png" />
