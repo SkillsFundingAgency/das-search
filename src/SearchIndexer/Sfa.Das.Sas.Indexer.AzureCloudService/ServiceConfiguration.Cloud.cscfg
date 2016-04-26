@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Sfa.Das.Sas.Indexer.AzureAzureCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="Sfa.Das.Sas.Indexer.AzureWorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+  <NetworkConfiguration>
+    <!-- Name of the target Virtual Network -->
+    <VirtualNetworkSite name="#{azure.vnet.name}" />
+    <!-- Associating a Role to a Specific Subnet by name -->
+    <AddressAssignments>
+      <InstanceAddress roleName="Sfa.Das.Sas.Indexer.AzureWorkerRole">
+        <Subnets>
+          <Subnet name="#{azure.vnet.subnet.name}" />
+        </Subnets>
+      </InstanceAddress>
+    </AddressAssignments>
+  </NetworkConfiguration>
+</ServiceConfiguration>
