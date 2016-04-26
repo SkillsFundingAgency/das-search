@@ -67,10 +67,18 @@ namespace Sfa.Das.WebTest.E2E.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a framework and provider")]
+        [NUnit.Framework.CategoryAttribute("ci")]
+        [NUnit.Framework.CategoryAttribute("systemtest")]
+        [NUnit.Framework.CategoryAttribute("demo")]
+        [NUnit.Framework.CategoryAttribute("preprod")]
         [NUnit.Framework.CategoryAttribute("prod")]
         public virtual void ShouldFindAFrameworkAndProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a framework and provider", new string[] {
+                        "ci",
+                        "systemtest",
+                        "demo",
+                        "preprod",
                         "prod"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
