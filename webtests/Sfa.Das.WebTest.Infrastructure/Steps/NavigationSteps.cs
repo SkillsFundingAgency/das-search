@@ -8,7 +8,6 @@
     using NUnit.Framework;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.UI;
 
     using Sfa.Das.WebTest.Infrastructure.Selenium;
     using Sfa.Das.WebTest.Infrastructure.Settings;
@@ -40,9 +39,8 @@
         public void NavigateToPage(string page)
         {
             var objectType = FindPageType(page);
-            PageNavigationAttribute attribute =
-                (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
-            string url = _browserSettings.BaseUrl + attribute.Url;
+            var attribute = (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
+            var url = _browserSettings.BaseUrl + attribute.Url;
             Console.WriteLine("-> Navigating to " + url);
             _driver.Navigate().GoToUrl(url);
             _pageContext.CurrentPage = _objectContainer.Resolve(objectType);
@@ -62,18 +60,18 @@
         public void IamOnThePage(string page)
         {
             var objectType = FindPageType(page);
-            PageNavigationAttribute attribute =
-                (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
+            var attribute = (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
             var url = _browserSettings.BaseUrl + attribute.Url.ToLower();
-            _driver.WaitFor(x => _driver.CleanUrl().StartsWith(url));
-            Assert.True(_driver.CleanUrl().StartsWith(url),$"Expected to start with {url} but was {_driver.CleanUrl()}");
+            _pageContext.WaitForPageLoad();
+            var cleanUrl = _driver.CleanUrl();
+            Assert.True(cleanUrl.StartsWith(url), $"Expected to start with {url} but was {cleanUrl}");
             _pageContext.CurrentPage = _objectContainer.Resolve(objectType);
         }
 
-
         private static Type FindPageType(string page)
         {
-            var types = (from asm in AppDomain.CurrentDomain.GetAssemblies() from type in asm.GetTypes() where type.IsClass && type.Name == page.Replace(" ", string.Empty) + "Page" select type).ToList();
+            var types =
+                (from asm in AppDomain.CurrentDomain.GetAssemblies() from type in asm.GetTypes() where type.IsClass && type.Name == page.Replace(" ", string.Empty) + "Page" select type).ToList();
             if (!types.Any())
             {
                 throw new ApplicationException($"couldn't find a class for the page '{page.Replace(" ", string.Empty)}Page.cs'");

@@ -5,10 +5,35 @@
     using System.Linq;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
 
     public class PageContext : IPageContext
     {
-        public object CurrentPage { get; set; }
+        private readonly IWebDriver _driver;
+
+        private static readonly int TimeoutInSeconds = Convert.ToInt32(ConfigurationManager.AppSettings["webdriver.timeout"] ?? "10");
+
+        public PageContext(IWebDriver driver)
+        {
+            _driver = driver;
+        }
+
+        private object _currentPage;
+
+        private IWebElement _htmlElement;
+
+        public object CurrentPage
+        {
+            get
+            {
+                return _currentPage;
+            }
+            set
+            {
+                _currentPage = value;
+                _htmlElement = _driver.FindElement(By.TagName("html"));
+            }
+        }
 
         public By FindSelector(string propertyName)
         {
@@ -44,6 +69,24 @@
 
 
             return getter.Invoke(CurrentPage, null) as IWebElement;
+        }
+
+        public void WaitForPageLoad()
+        {
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(TimeoutInSeconds)).Until(OldPageHasGoneStale);
+        }
+
+        private bool OldPageHasGoneStale(IWebDriver driver)
+        {
+            try
+            {
+                _htmlElement.FindElements(By.TagName("waiting-for-page-to-finish-loading"));
+                return false;
+            }
+            catch (StaleElementReferenceException)
+            {
+                return true;
+            }
         }
     }
 }

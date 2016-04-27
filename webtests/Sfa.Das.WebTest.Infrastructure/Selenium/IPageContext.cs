@@ -8,5 +8,7 @@
 
         By FindSelector(string propertyName);
         IWebElement FindElement(string propertyName);
+
+        void WaitForPageLoad();
     }
 }
