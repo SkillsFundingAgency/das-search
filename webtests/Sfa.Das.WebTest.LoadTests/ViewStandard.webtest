@@ -3,14 +3,14 @@
   <Items>
     <TransactionTimer Name="View a Standard Page">
       <Items>
-        <Request Method="GET" Guid="837f57cc-2dc3-4d2c-9bf4-465754a5cc21" Version="1.1" Url="{{DataSource1.DemoStandardPages#csv.PageAddress}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="3" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="StandardsPage" IgnoreHttpStatusCode="False" />
+        <Request Method="GET" Guid="837f57cc-2dc3-4d2c-9bf4-465754a5cc21" Version="1.1" Url="{{DataSource1.PreProdStandard#csv.PageAddress}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="3" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="StandardsPage" IgnoreHttpStatusCode="False" />
       </Items>
     </TransactionTimer>
   </Items>
   <DataSources>
-    <DataSource Name="DataSource1" Provider="Microsoft.VisualStudio.TestTools.DataSource.CSV" Connection="|DataDirectory|\DemoStandardPages.csv">
+    <DataSource Name="DataSource1" Provider="Microsoft.VisualStudio.TestTools.DataSource.CSV" Connection="|DataDirectory|\PreProdStandard.csv">
       <Tables>
-        <DataSourceTable Name="DemoStandardPages#csv" SelectColumns="SelectOnlyBoundColumns" AccessMethod="Sequential" />
+        <DataSourceTable Name="PreProdStandard#csv" SelectColumns="SelectOnlyBoundColumns" AccessMethod="Sequential" />
       </Tables>
     </DataSource>
   </DataSources>
