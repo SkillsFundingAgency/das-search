@@ -73,20 +73,8 @@
 
         public void WaitForPageLoad()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(TimeoutInSeconds)).Until(OldPageHasGoneStale);
-        }
-
-        private bool OldPageHasGoneStale(IWebDriver driver)
-        {
-            try
-            {
-                _htmlElement.FindElements(By.TagName("waiting-for-page-to-finish-loading"));
-                return false;
-            }
-            catch (StaleElementReferenceException)
-            {
-                return true;
-            }
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(TimeoutInSeconds))
+                .Until(ExpectedConditions.StalenessOf(_htmlElement));
         }
     }
 }
