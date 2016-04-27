@@ -49,14 +49,14 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Queue
 
                 if (messages != null && messages.Any())
                 {
-                    var latestMessage = messages.First();
+                    var latestMessage = messages?.FirstOrDefault();
 
-                    var extraMessages = messages.Where(m => m != latestMessage).ToList();
+                    var extraMessages = messages?.Where(m => m != latestMessage).ToList();
 
                     // Delete all the messages except the first as they are not needed
                     _cloudQueueService.DeleteQueueMessages(queueName, extraMessages);
 
-                    var indexTime = latestMessage.InsertionTime ?? DateTime.Now;
+                    var indexTime = latestMessage?.InsertionTime ?? DateTime.Now;
 
                     await indexerService.CreateScheduledIndex(indexTime).ConfigureAwait(false);
 
