@@ -102,7 +102,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         public ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null, string callerName = "")
         {
             var result = _client.CreateIndex(index, selector);
-            SendLog(result.ApiCall, null, $"Elasticsearch.CreateIndex(.{callerName}");
+            SendLog(result.ApiCall, null, $"Elasticsearch.CreateIndex.{callerName}");
             return result;
         }
 
