@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockStandardRepository = CreateMockStandardRepository();
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByStandardPostCode(testStandardId, postcode);
@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult(testCoordinates));
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByStandardPostCode(testStandardId, testPostCode);
@@ -78,7 +78,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult((Coordinate)null));
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByStandardPostCode(testStandardId, testPostCode);
@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByStandardPostCode(123, "AS2 3SS");
@@ -116,7 +116,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard { Title = testTitle });
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByStandardPostCode(123, "AS3 4AS");
@@ -133,7 +133,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByStandardPostCode(123, "AS3 4AS");
@@ -161,7 +161,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockStandardRepository = CreateMockStandardRepository();
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByFrameworkPostCode(testFrameworkId, postcode);
@@ -182,7 +182,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult(testCoordinates));
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode);
@@ -205,7 +205,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult((Coordinate)null));
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode);
@@ -225,7 +225,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByFrameworkPostCode(123, "AS2 3SS");
@@ -243,7 +243,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(new Framework { FrameworkName = frameworkName });
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS");
@@ -260,7 +260,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
 
-            var mockLogger = new Mock<ILog>() { DefaultValue = DefaultValue.Mock };
+            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
             var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS");

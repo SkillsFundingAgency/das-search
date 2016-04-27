@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Sfa.Das.Sas.Indexer.Core.Exceptions
+﻿namespace Sfa.Das.Sas.Indexer.Core.Exceptions
 {
+    using System;
+    using System.Runtime.Serialization;
+
     [Serializable]
     public class ConnectionException : Exception
     {
