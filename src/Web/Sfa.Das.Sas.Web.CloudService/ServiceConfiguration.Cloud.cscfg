@@ -13,5 +13,14 @@
     <AddressAssignments>
       <!-- See Transform.ServiceConfiguration.Cloud.config -->
     </AddressAssignments>
+    <AccessControls>
+      <AccessControl name="RoleAccess">
+        <Rule action="permit" description="AllowedAccess" order="100" remoteSubnet="0.0.0.0/0" />
+        <Rule action="deny" description="DenyAccess" order="200" remoteSubnet="0.0.0.0/0" />
+      </AccessControl>
+    </AccessControls>
+    <EndpointAcls>
+      <EndpointAcl role="Sfa.Das.Sas.Web" endPoint="Endpoint1" accessControl="RoleAccess" />
+    </EndpointAcls>
   </NetworkConfiguration>
 </ServiceConfiguration>
