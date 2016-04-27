@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Hooks\DeploymentValidator.cs" />
     <Compile Include="Hooks\Hooks.cs" />
+    <Compile Include="Hooks\IoC.cs" />
     <Compile Include="Hooks\VersionInformation.cs" />
     <Compile Include="PageNavigationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,8 +77,11 @@
     <Compile Include="Selenium\PageContext.cs" />
     <Compile Include="Selenium\SeleniumContext.cs" />
     <Compile Include="Selenium\WebDriverExtensions.cs" />
+    <Compile Include="Settings\AppConfigSettingsProvider.cs" />
     <Compile Include="Settings\BrowserSettings.cs" />
     <Compile Include="Settings\IBrowserSettings.cs" />
+    <Compile Include="Settings\IProvideSettings.cs" />
+    <Compile Include="Settings\MachineSettings.cs" />
     <Compile Include="Steps\ClickingSteps.cs" />
     <Compile Include="Steps\DataSteps.cs" />
     <Compile Include="Steps\EnteringDataSteps.cs" />

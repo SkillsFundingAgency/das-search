@@ -5,6 +5,13 @@
 
     public class BrowserSettings : IBrowserSettings
     {
+        private readonly IProvideSettings _settings;
+
+        public BrowserSettings(IProvideSettings settings)
+        {
+            _settings = settings;
+        }
+
         public string BaseUrl => ConfigurationManager.AppSettings["service.url"];
 
         public string Browser => ConfigurationManager.AppSettings["browser"];
@@ -12,9 +19,9 @@
         public string Device => ConfigurationManager.AppSettings["device"];
         public string RemoteUrl => ConfigurationManager.AppSettings["RemoteUrl"];
 
-        public string BrowserStackUser => ConfigurationManager.AppSettings["browserstack.user"];
+        public string BrowserStackUser => _settings.GetSetting("browserstack.user");
 
-        public string BrowserStackKey => ConfigurationManager.AppSettings["browserstack.key"];
+        public string BrowserStackKey => _settings.GetSetting("browserstack.key");
 
         public string OS => ConfigurationManager.AppSettings["os"];
 

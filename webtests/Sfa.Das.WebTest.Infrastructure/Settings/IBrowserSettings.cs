@@ -23,5 +23,9 @@
         string AssemblyVersion { get; }
 
         string Device { get; }
+
+        string Resolution { get; }
+
+        string Build { get; }
     }
 }

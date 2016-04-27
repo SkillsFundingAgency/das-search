@@ -1,16 +1,12 @@
 ﻿namespace Sfa.Das.WebTest.Infrastructure.Selenium
 {
     using System;
-    using System.Configuration;
-    using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
 
     using NUnit.Framework;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
-    using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.PhantomJS;
     using OpenQA.Selenium.Remote;
 
@@ -20,21 +16,13 @@
 
     public class SeleniumContext : IDisposable
     {
-        private BrowserSettings _settings;
-
-        static string host = ConfigurationManager.AppSettings["host"];
-        static string testExecution = ConfigurationManager.AppSettings["testExecutionType"];
-        static string saucelabsAccountName = ConfigurationManager.AppSettings["sauce_labs_account_name"];
-        static string saucelabsAccountKey = ConfigurationManager.AppSettings["sauce_labs_account_key"];
-        static String browserStackKey = ConfigurationManager.AppSettings["browserstack_key"];
-        static String browserStacUser = ConfigurationManager.AppSettings["browserstack_user"];
-        static String mDevice = ConfigurationManager.AppSettings["mobile_device"];
+        private readonly IBrowserSettings _settings;
 
         public IWebDriver WebDriver { get; private set; }
 
-        public SeleniumContext()
+        public SeleniumContext(IBrowserSettings settings)
         {
-            _settings = new BrowserSettings();
+            _settings = settings;
 
             WebDriver = CreateDriver();
             FeatureContext.Current["driver"] = WebDriver;
@@ -60,16 +48,12 @@
                 capabilities.SetCapability("name", GenerateTestName());
 
                 Console.WriteLine($"##### Driver: Browserstack - {_settings.OS} {_settings.OSVersion} - {_settings.Device ?? _settings.Browser} {_settings.BrowserVersion}");
-                var remoteWebDriver = new RemoteWebDriver(new Uri(_settings.RemoteUrl), capabilities);
-                return remoteWebDriver;
+                return new RemoteWebDriver(new Uri(_settings.RemoteUrl), capabilities);
             }
-            else
+
+            if (_settings.Browser.ToLower() == "phantomjs")
             {
-                switch (_settings.Browser.ToLower())
-                {
-                    case "phantomjs":
-                        return CreatePhantomJsDriver();
-                }
+                    return CreatePhantomJsDriver();
             }
 
             return null;

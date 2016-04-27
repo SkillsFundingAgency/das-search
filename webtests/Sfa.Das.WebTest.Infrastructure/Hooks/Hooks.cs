@@ -21,11 +21,7 @@
 
         public Hooks(IObjectContainer objectContainer)
         {
-            this._objectContainer = objectContainer;
-
-            _objectContainer.RegisterTypeAs<BrowserSettings, IBrowserSettings>();
-            _objectContainer.RegisterTypeAs<PageContext, IPageContext>();
-            _objectContainer.RegisterTypeAs<BrowserStackApi, IBrowserStackApi>();
+            this._objectContainer = IoC.Initialise(objectContainer);
         }
 
         [BeforeTestRun]
@@ -44,7 +40,8 @@
         [BeforeScenario]
         public void BeforeScenario()
         {
-            seleniumContext = new SeleniumContext();
+            var settings = _objectContainer.Resolve<IBrowserSettings>();
+            seleniumContext = new SeleniumContext(settings);
             _objectContainer.RegisterInstanceAs<IWebDriver>(seleniumContext.WebDriver);
             
             Console.WriteLine("##### Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
