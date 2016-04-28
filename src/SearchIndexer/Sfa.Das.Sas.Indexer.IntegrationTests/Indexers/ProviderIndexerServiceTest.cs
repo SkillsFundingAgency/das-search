@@ -128,6 +128,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         [Test]
         [Category("Integration")]
         [Category("Problematic")]
+        [Ignore]
         public async Task ShouldRetrieveProvidersSearchingForStandardId()
         {
             var scheduledDate = new DateTime(2000, 1, 1);
