@@ -51,6 +51,14 @@ input[name="PostCode"]{
         @include heading-24;
         font-weight: bold;
     }
+    h5 {
+        @include heading-19;
+        font-weight: bold;
+    }
+    h6 {
+        @include heading-16;
+        font-weight: bold;
+    }
     ul {
         list-style-type: disc;
     }
