@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Das.Sas.Indexer.Core.Exceptions;
 using Sfa.Das.Sas.Indexer.Core.Models;
@@ -31,9 +32,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            Assert.AreEqual("Sustainable Resource Operations and Management: Higher Apprenticeship in Sustainable Resource Operations and Management", framework.Title);
-            Assert.AreEqual(4, framework.Level, "Should have level");
-            Assert.AreEqual("123201", framework.FrameworkId, "Should have id from fwcode, progtype and pwcode");
+            framework.Title.Should().Be("Sustainable Resource Operations and Management: Higher Apprenticeship in Sustainable Resource Operations and Management");
+            framework.Level.Should().Be(4);
+            framework.FrameworkId.Should().Be("12341");
         }
 
         [Test]
@@ -54,9 +55,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            Assert.AreEqual("Trade Business Services", framework.Title);
-            Assert.AreEqual(2, framework.Level, "Should have level");
-            Assert.AreEqual("61631", framework.FrameworkId, "Should have id from fwcode, progtype and pwcode");
+            framework.Title.Should().Be("Trade Business Services");
+            framework.Level.Should().Be(2);
+            framework.FrameworkId.Should().Be("61621");
         }
 
         [Test]
@@ -77,9 +78,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            Assert.AreEqual("Accounting", framework.Title);
-            Assert.AreEqual(2, framework.Level, "Should have level");
-            Assert.AreEqual("61631", framework.FrameworkId, "Should have id from fwcode, progtype and pwcode");
+            framework.Title.Should().Be("Accounting");
+            framework.Level.Should().Be(2);
+            framework.FrameworkId.Should().Be("61621");
         }
 
         [Test]
@@ -100,9 +101,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            Assert.AreEqual("Trade Business Services", framework.Title);
-            Assert.AreEqual(7, framework.Level, "Should have level");
-            Assert.AreEqual("616231", framework.FrameworkId, "Should have id from fwcode, progtype and pwcode");
+            framework.Title.Should().Be("Trade Business Services");
+            framework.Level.Should().Be(7);
+            framework.FrameworkId.Should().Be("61671");
         }
 
         [Test]
@@ -139,36 +140,36 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var document = mapper.CreateFrameworkProviderDocument(testProvider, testProvider.Frameworks.First(), testProvider.Frameworks.First().DeliveryLocations.First());
 
-            Assert.That(document.FrameworkCode, Is.EqualTo(99));
-            Assert.That(document.PathwayCode, Is.EqualTo(1122));
-            Assert.That(document.FrameworkId, Is.EqualTo("99201122"));
-            Assert.That(document.Level, Is.EqualTo(4));
+            document.FrameworkCode.Should().Be(99);
+            document.PathwayCode.Should().Be(1122);
+            document.FrameworkId.Should().Be("9941122");
+            document.Level.Should().Be(4);
 
-            Assert.That(document.Ukprn, Is.EqualTo(4556));
-            Assert.That(document.Name, Is.EqualTo("Test Provider"));
-            Assert.That(document.Id, Is.EqualTo("4556-9941122-77"));
-            Assert.That(document.LocationId, Is.EqualTo(77));
-            Assert.That(document.LocationName, Is.EqualTo("Framework Test Location"));
-            Assert.That(document.ProviderMarketingInfo, Is.EqualTo("Provider Marketing"));
-            Assert.That(document.ApprenticeshipMarketingInfo, Is.EqualTo("Framework Apprenticeship Marketing"));
-            Assert.That(document.Phone, Is.EqualTo("12324-5678"));
-            Assert.That(document.Email, Is.EqualTo("test@test.com"));
-            Assert.That(document.ContactUsUrl, Is.EqualTo("http://contact-us.com"));
-            Assert.That(document.ApprenticeshipInfoUrl, Is.EqualTo("http://standard-info.com"));
-            Assert.That(document.LearnerSatisfaction, Is.EqualTo(8.2));
-            Assert.That(document.EmployerSatisfaction, Is.EqualTo(9.2));
-            Assert.That(document.DeliveryModes, Is.EquivalentTo(new string[] { "BlockRelease", "DayRelease" }));
-            Assert.That(document.Website, Is.EqualTo("http://location-site"));
-            Assert.That(document.Address.Address1, Is.EqualTo("Framework Test Address1"));
-            Assert.That(document.Address.Address2, Is.EqualTo("Framework Test Address2"));
-            Assert.That(document.Address.Town, Is.EqualTo("Framework Test Town"));
-            Assert.That(document.Address.County, Is.EqualTo("Framework Test County"));
-            Assert.That(document.Address.PostCode, Is.EqualTo("TE3 5ES"));
-            Assert.That(document.LocationPoint.Latitude, Is.EqualTo(53.213));
-            Assert.That(document.LocationPoint.Longitude, Is.EqualTo(-50.123));
-            Assert.That(document.Location.Coordinates.Latitude, Is.EqualTo(53.213));
-            Assert.That(document.Location.Coordinates.Longitude, Is.EqualTo(-50.123));
-            Assert.That(document.Location.Radius, Is.EqualTo("25mi"));
+            document.Ukprn.Should().Be(4556);
+            document.Name.Should().Be("Test Provider");
+            document.Id.Should().Be("4556-9941122-77");
+            document.LocationId.Should().Be(77);
+            document.LocationName.Should().Be("Framework Test Location");
+            document.ProviderMarketingInfo.Should().Be("Provider Marketing");
+            document.ApprenticeshipMarketingInfo.Should().Be("Framework Apprenticeship Marketing");
+            document.Phone.Should().Be("12324-5678");
+            document.Email.Should().Be("test@test.com");
+            document.ContactUsUrl.Should().Be("http://contact-us.com");
+            document.ApprenticeshipInfoUrl.Should().Be("http://standard-info.com");
+            document.LearnerSatisfaction.Should().Be(8.2);
+            document.EmployerSatisfaction.Should().Be(9.2);
+            document.DeliveryModes.Should().BeEquivalentTo(new string[] { "BlockRelease", "DayRelease" });
+            document.Website.Should().Be("http://location-site");
+            document.Address.Address1.Should().Be("Framework Test Address1");
+            document.Address.Address2.Should().Be("Framework Test Address2");
+            document.Address.Town.Should().Be("Framework Test Town");
+            document.Address.County.Should().Be("Framework Test County");
+            document.Address.PostCode.Should().Be("TE3 5ES");
+            document.LocationPoint.Latitude.Should().Be(53.213);
+            document.LocationPoint.Longitude.Should().Be(-50.123);
+            document.Location.Coordinates.Latitude.Should().Be(53.213);
+            document.Location.Coordinates.Longitude.Should().Be(-50.123);
+            document.Location.Radius.Should().Be("25mi");
         }
 
         [Test]
@@ -179,32 +180,32 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var document = mapper.CreateStandardProviderDocument(testProvider, testProvider.Standards.First(), testProvider.Standards.First().DeliveryLocations.First());
 
-            Assert.That(document.StandardCode, Is.EqualTo(101));
-            Assert.That(document.Ukprn, Is.EqualTo(4556));
-            Assert.That(document.Name, Is.EqualTo("Test Provider"));
-            Assert.That(document.Id, Is.EqualTo("4556-101-98"));
-            Assert.That(document.LocationId, Is.EqualTo(98));
-            Assert.That(document.LocationName, Is.EqualTo("Standard Test Location"));
-            Assert.That(document.ProviderMarketingInfo, Is.EqualTo("Provider Marketing"));
-            Assert.That(document.ApprenticeshipMarketingInfo, Is.EqualTo("Standard Apprenticeship Marketing"));
-            Assert.That(document.Phone, Is.EqualTo("5555-5678"));
-            Assert.That(document.Email, Is.EqualTo("test@test.com"));
-            Assert.That(document.ContactUsUrl, Is.EqualTo("http://contact-us.com"));
-            Assert.That(document.ApprenticeshipInfoUrl, Is.EqualTo("http://standard-info.com"));
-            Assert.That(document.LearnerSatisfaction, Is.EqualTo(8.2));
-            Assert.That(document.EmployerSatisfaction, Is.EqualTo(9.2));
-            Assert.That(document.DeliveryModes, Is.EquivalentTo(new string[] { "BlockRelease", "DayRelease" }));
-            Assert.That(document.Website, Is.EqualTo("http://location-site"));
-            Assert.That(document.Address.Address1, Is.EqualTo("Standard Test Address1"));
-            Assert.That(document.Address.Address2, Is.EqualTo("Standard Test Address2"));
-            Assert.That(document.Address.Town, Is.EqualTo("Standard Test Town"));
-            Assert.That(document.Address.County, Is.EqualTo("Standard Test County"));
-            Assert.That(document.Address.PostCode, Is.EqualTo("TE4 5ES"));
-            Assert.That(document.LocationPoint.Latitude, Is.EqualTo(54.213));
-            Assert.That(document.LocationPoint.Longitude, Is.EqualTo(-52.123));
-            Assert.That(document.Location.Coordinates.Latitude, Is.EqualTo(54.213));
-            Assert.That(document.Location.Coordinates.Longitude, Is.EqualTo(-52.123));
-            Assert.That(document.Location.Radius, Is.EqualTo("30mi"));
+            document.StandardCode.Should().Be(101);
+            document.Ukprn.Should().Be(4556);
+            document.Name.Should().Be("Test Provider");
+            document.Id.Should().Be("4556-101-98");
+            document.LocationId.Should().Be(98);
+            document.LocationName.Should().Be("Standard Test Location");
+            document.ProviderMarketingInfo.Should().Be("Provider Marketing");
+            document.ApprenticeshipMarketingInfo.Should().Be("Standard Apprenticeship Marketing");
+            document.Phone.Should().Be("5555-5678");
+            document.Email.Should().Be("test@test.com");
+            document.ContactUsUrl.Should().Be("http://contact-us.com");
+            document.ApprenticeshipInfoUrl.Should().Be("http://standard-info.com");
+            document.LearnerSatisfaction.Should().Be(8.2);
+            document.EmployerSatisfaction.Should().Be(9.2);
+            document.DeliveryModes.Should().BeEquivalentTo(new string[] { "BlockRelease", "DayRelease" });
+            document.Website.Should().Be("http://location-site");
+            document.Address.Address1.Should().Be("Standard Test Address1");
+            document.Address.Address2.Should().Be("Standard Test Address2");
+            document.Address.Town.Should().Be("Standard Test Town");
+            document.Address.County.Should().Be("Standard Test County");
+            document.Address.PostCode.Should().Be("TE4 5ES");
+            document.LocationPoint.Latitude.Should().Be(54.213);
+            document.LocationPoint.Longitude.Should().Be(-52.123);
+            document.Location.Coordinates.Latitude.Should().Be(54.213);
+            document.Location.Coordinates.Longitude.Should().Be(-52.123);
+            document.Location.Radius.Should().Be("30mi");
         }
 
         [Test]
@@ -225,7 +226,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            Assert.AreEqual("Accounting", framework.Title);
+            framework.Title.Should().Be("Accounting");
         }
 
         [Test]
