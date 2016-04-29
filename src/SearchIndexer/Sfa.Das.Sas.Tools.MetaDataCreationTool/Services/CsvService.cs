@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             var standards = new List<Standard>();
             foreach (var line in csvFile.Split('\n'))
             {
-                var values = line?.Split(',');
+                var values = line?.Split(new[] { "\",\"" }, StringSplitOptions.None);
                 Standard standard;
                 if (CreateStandard(values, out standard))
                 {
@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             var frameworks = new List<FrameworkMetaData>();
             foreach (var line in csvFile.Split('\n'))
             {
-                var values = line?.Split(',');
+                var values = line?.Split(new[] { "\",\"" }, StringSplitOptions.None);
                 FrameworkMetaData framework;
                 if (CreateFramework(values, out framework))
                 {
