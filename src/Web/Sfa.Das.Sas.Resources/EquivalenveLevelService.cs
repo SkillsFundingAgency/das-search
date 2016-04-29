@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Resources
             };
         }
 
-        public static string GetFrameworkLevel(string item)
+        public static string GetApprenticeshipLevel(string item)
         {
             if (string.IsNullOrEmpty(item)) return string.Empty;
             return _dictionary.ContainsKey(int.Parse(item)) ? _dictionary[int.Parse(item)] : string.Empty;

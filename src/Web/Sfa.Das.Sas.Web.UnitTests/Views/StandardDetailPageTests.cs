@@ -11,32 +11,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
     public sealed class StandardDetailPageTests : ViewTestBase
     {
         [Test]
-        public void ShouldShowRequiredFieldWhenErrorIsReceived()
-        {
-            var detail = new BlankFieldErrorMessage();
-            var model = new StandardViewModel
-            {
-                HasError = true
-            };
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, "p").Should().Be("This field can't be blank");
-        }
-
-        [Test]
-        public void ShouldNotShowRequiredFieldWhenErrorIsMissing()
-        {
-            var detail = new BlankFieldErrorMessage();
-            var model = new StandardViewModel
-            {
-                HasError = false
-            };
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, "p").Should().BeEmpty();
-        }
-
-        [Test]
         public void ShouldShowEquivalentLevel()
         {
             var detail = new Standard();

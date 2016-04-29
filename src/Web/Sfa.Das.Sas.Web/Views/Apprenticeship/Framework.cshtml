@@ -20,7 +20,7 @@
                     @Model.Title
                 </h1>
                 <p>
-                    <b>Level:</b> <span>@Model.Level (equivalent to @EquivalenveLevelService.GetFrameworkLevel(Model.Level.ToString()) )</span>
+                    <b>Level:</b> <span>@Model.Level (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )</span>
                 </p>
             </header>
 
@@ -37,24 +37,21 @@
 
             </ul>
 
-            @using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            @using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "postcode-form search-box", @id = "postcode-form-bottom" }))
             {
                 <h2 class="heading-medium">Find training providers for this apprenticeship</h2>
-                <form action="/g-cloud/search" method="get" class="search-box">
                     <div class="form-group @(@Model.HasError ? " error" : "")">
                         <label class="form-label" for="postcode">
                             Enter a full postcode.
-                            <p>
-                                @{
-                                    Html.RenderPartial("_BlankFieldErrorMessage");
-                                }
-                            </p>
+                            <span class="error-message">
+                                This field can't be blank
+                            </span>
                         </label>
                         <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.FrameworkId">
+                        <input type="hidden" name="Inputid" value="postcode-form-bottom" />
                         <input type="search" id="postcode" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
                     </div>
                     <input class="button margin-top-x2 postcode-search-button" id="submit-postcode" type="submit" value="Search" />
-                </form>
             }
         </div>
      </div>

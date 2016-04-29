@@ -19,7 +19,7 @@ namespace Sfa.Das.Sas.Resources.UnitTests
         [TestCase("", "", Description = "Empty input")]
         public void ShouldReturnEquivalenceTextForLevel(string level, string expected)
         {
-            var actual = EquivalenveLevelService.GetFrameworkLevel(level);
+            var actual = EquivalenveLevelService.GetApprenticeshipLevel(level);
 
             actual.Should().Be(expected);
         }

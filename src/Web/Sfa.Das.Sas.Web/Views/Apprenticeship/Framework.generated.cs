@@ -114,7 +114,7 @@ WriteLiteral(" (equivalent to ");
 
             
             #line 23 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                               Write(EquivalenveLevelService.GetFrameworkLevel(Model.Level.ToString()));
+                                                               Write(EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()));
 
             
             #line default
@@ -143,7 +143,7 @@ WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n              
             #line hidden
             
             #line 40 "..\..\Views\Apprenticeship\Framework.cshtml"
-             using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+             using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "postcode-form search-box", @id = "postcode-form-bottom" }))
             {
 
             
@@ -155,25 +155,17 @@ WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(">Find training providers for this apprenticeship</h2>\r\n");
 
-WriteLiteral("                <form");
+WriteLiteral("                    <div");
 
-WriteLiteral(" action=\"/g-cloud/search\"");
-
-WriteLiteral(" method=\"get\"");
-
-WriteLiteral(" class=\"search-box\"");
-
-WriteLiteral(">\r\n                    <div");
-
-WriteAttribute("class", Tuple.Create(" class=\"", 1611), Tuple.Create("\"", 1664)
-, Tuple.Create(Tuple.Create("", 1619), Tuple.Create("form-group", 1619), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1579), Tuple.Create("\"", 1632)
+, Tuple.Create(Tuple.Create("", 1587), Tuple.Create("form-group", 1587), true)
             
-            #line 44 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1629), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
+            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1597), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
             
             #line default
             #line hidden
-, 1630), false)
+, 1598), false)
 );
 
 WriteLiteral(">\r\n                        <label");
@@ -183,24 +175,13 @@ WriteLiteral(" class=\"form-label\"");
 WriteLiteral(" for=\"postcode\"");
 
 WriteLiteral(">\r\n                            Enter a full postcode.\r\n                          " +
-"  <p>\r\n");
+"  <span");
 
-            
-            #line 48 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                
-            
-            #line default
-            #line hidden
-            
-            #line 48 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                  
-                                    Html.RenderPartial("_BlankFieldErrorMessage");
-                                
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                            </p>\r\n                        </label>\r\n           " +
-"             <input");
+WriteLiteral(" class=\"error-message\"");
+
+WriteLiteral(">\r\n                                This field can\'t be blank\r\n                   " +
+"         </span>\r\n                        </label>\r\n                        <inp" +
+"ut");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -210,17 +191,25 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2163), Tuple.Create("\"", 2189)
+WriteAttribute("value", Tuple.Create(" value=\"", 2063), Tuple.Create("\"", 2089)
             
-            #line 53 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 2171), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+            #line 50 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                , Tuple.Create(Tuple.Create("", 2071), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 2171), false)
+, 2071), false)
 );
 
 WriteLiteral(">\r\n                        <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"Inputid\"");
+
+WriteLiteral(" value=\"postcode-form-bottom\"");
+
+WriteLiteral(" />\r\n                        <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -234,7 +223,9 @@ WriteLiteral(" maxlength=\"200\"");
 
 WriteLiteral(" placeholder=\"\"");
 
-WriteLiteral(">\r\n                    </div>\r\n                    <input");
+WriteLiteral(">\r\n                    </div>\r\n");
+
+WriteLiteral("                    <input");
 
 WriteLiteral(" class=\"button margin-top-x2 postcode-search-button\"");
 
@@ -244,10 +235,10 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Search\"");
 
-WriteLiteral(" />\r\n                </form>\r\n");
+WriteLiteral(" />\r\n");
 
             
-            #line 58 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 55 "..\..\Views\Apprenticeship\Framework.cshtml"
             }
 
             
