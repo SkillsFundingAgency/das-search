@@ -34,82 +34,46 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public async Task IndexStandards(string indexName, ICollection<StandardMetaData> entries)
         {
-            var tasks = new List<Task<IBulkResponse>>();
-            int count = 0;
-            int totalCount = 0;
-            var bulkDescriptor = CreateBulkDescriptor(indexName);
-
-            foreach (var standard in entries)
-            {
-                try
-                {
-                    var doc = ElasticsearchMapper.CreateStandardDocument(standard);
-                    bulkDescriptor.Create<StandardDocument>(c => c.Document(doc));
-                    count++;
-
-                    if (HaveReachedBatchLimit(count))
-                    {
-                        // Execute batch
-                        tasks.Add(Client.BulkAsync(bulkDescriptor));
-
-                        // New descriptor
-                        bulkDescriptor = CreateBulkDescriptor(indexName);
-
-                        totalCount += count;
-                        count = 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Error indexing standard PDF", ex);
-                }
-            }
-
-            if (count > 0)
-            {
-                tasks.Add(Client.BulkAsync(bulkDescriptor));
-                totalCount += count;
-            }
-
-            var bulkTasks = new List<Task<IBulkResponse>>();
-            bulkTasks.AddRange(tasks);
-            LogResponse(await Task.WhenAll(bulkTasks));
-
-            Log.Debug($"Sent a total of {totalCount} Standard documents to be indexed");
+            await IndexApprenticeships(indexName, entries, ElasticsearchMapper.CreateStandardDocument).ConfigureAwait(true);
         }
 
         public async Task IndexFrameworks(string indexName, ICollection<FrameworkMetaData> entries)
+        {
+            await IndexApprenticeships(indexName, entries, ElasticsearchMapper.CreateFrameworkDocument).ConfigureAwait(true);
+        }
+
+        private async Task IndexApprenticeships<T1, T2>(string indexName, ICollection<T1> entries, Func<T1, T2> method)
+            where T1 : class
+            where T2 : class
         {
             var tasks = new List<Task<IBulkResponse>>();
             int count = 0;
             int totalCount = 0;
             var bulkDescriptor = CreateBulkDescriptor(indexName);
 
-            foreach (var standard in entries)
+            foreach (var entry in entries)
             {
                 try
                 {
-                    var doc = ElasticsearchMapper.CreateFrameworkDocument(standard);
+                    var doc = method(entry);
 
-                    bulkDescriptor.Create<FrameworkDocument>(c => c.Document(doc));
+                    bulkDescriptor.Create<T2>(c => c.Document(doc));
                     count++;
 
                     if (HaveReachedBatchLimit(count))
                     {
                         // Execute batch
                         tasks.Add(Client.BulkAsync(bulkDescriptor));
-
-                        // New descriptor
-                        bulkDescriptor = CreateBulkDescriptor(indexName);
-
                         totalCount += count;
+
+                        // Reset state - New descriptor
+                        bulkDescriptor = CreateBulkDescriptor(indexName);
                         count = 0;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Error indexing framework", ex);
-                    throw;
+                    Log.Error(ex, $"Error indexing {typeof(T1)}");
                 }
             }
 
@@ -123,7 +87,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             bulkTasks.AddRange(tasks);
             LogResponse(await Task.WhenAll(bulkTasks));
 
-            Log.Debug($"Sent a total of {totalCount} Framework documents to be indexed");
+            Log.Debug($"Sent a total of {totalCount} {typeof(T1)} documents to be indexed");
         }
     }
 }

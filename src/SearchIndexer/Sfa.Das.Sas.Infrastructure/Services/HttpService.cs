@@ -34,9 +34,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
                     return client.DownloadString(url);
                 }
-                catch (WebException exception)
+                catch (WebException ex)
                 {
-                    _logger.Warn($"Cannot download string from {url} - Error: {exception.Message}", exception);
+                    _logger.Warn(ex, $"Cannot download string from {url}");
                     throw;
                 }
             }

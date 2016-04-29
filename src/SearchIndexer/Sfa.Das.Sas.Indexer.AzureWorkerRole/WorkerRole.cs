@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Indexer.AzureWorkerRole
                 }
                 catch (Exception ex)
                 {
-                    _logger.Fatal("Exception from  " + ex);
+                    _logger.Error(ex, "Exception worker role");
                 }
 
                 Thread.Sleep(TimeSpan.FromSeconds(double.Parse(_commonSettings.WorkerRolePauseTime ?? "60")));

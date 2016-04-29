@@ -46,8 +46,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             if (results.ApiCall.HttpStatusCode != 200)
             {
-                _applicationLogger.Error($"Trying to get standard with id {id}");
-
                 throw new ApplicationException($"Failed query standard with id {id}");
             }
 

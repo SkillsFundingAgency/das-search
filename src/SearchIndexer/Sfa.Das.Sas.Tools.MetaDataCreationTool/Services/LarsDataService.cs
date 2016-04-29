@@ -10,6 +10,8 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
+    using System;
+
     public sealed class LarsDataService : ILarsDataService
     {
         private readonly IReadStandardsFromCsv _csvService;
@@ -50,7 +52,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             _logger.Debug($"Zip file path: {zipFilePath}");
 
             var zipStream = _httpGetFile.GetFile(zipFilePath);
-            _logger.Debug($"Zip file downloaded");
+            _logger.Debug("Zip file downloaded");
 
             string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileName);
             _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
@@ -84,7 +86,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
             if (string.IsNullOrEmpty(fullLink))
             {
-                _logger.Error($"Can not find LARS zip file. Url: {url}");
+                throw new Exception($"Can not find LARS zip file. Url: {url}");
             }
 
             return fullLink;

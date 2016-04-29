@@ -11,14 +11,12 @@ namespace Sfa.Das.Sas.Core.Logging
 
         void Debug(string msg);
 
-        void Debug(string msg, Dictionary<string, object> properties);
-
         void Warn(string msg);
 
-        void Error(string msg);
+        void Debug(string msg, Dictionary<string, object> properties);
 
         void Error(Exception ex, string msg);
 
-        void Fatal(string msg);
+        void Fatal(Exception ex, string msg);
     }
 }

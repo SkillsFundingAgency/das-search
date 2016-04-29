@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web
         {
             Exception ex = Server.GetLastError().GetBaseException();
             var logger = DependencyResolver.Current.GetService<ILog>();
-            logger.Error($"App_Error: {ex.ToString()}");
+            logger.Error(ex, "App_Error");
         }
 
         private void SetupApplicationInsights()

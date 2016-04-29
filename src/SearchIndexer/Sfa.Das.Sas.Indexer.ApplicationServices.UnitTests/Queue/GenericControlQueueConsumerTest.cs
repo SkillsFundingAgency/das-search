@@ -166,7 +166,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.UnitTests.Queue
             }
             catch (Exception)
             {
-                _mockLogger.Verify(x => x.Fatal(It.IsAny<object>()), Times.Once());
+                _mockLogger.Verify(x => x.Error(It.IsAny<Exception>(), It.IsAny<object>()), Times.Once());
             }
         }
     }
