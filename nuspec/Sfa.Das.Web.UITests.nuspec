@@ -13,7 +13,7 @@
     </metadata>
      <files>
         <file src="\..\webtests\Sfa.Das.WebTest.E2E\bin\Release\**\*.*" target="" />
-		<file src="\..\webtests\packages\NUnit.Runners.2.6.4\**\*.*" target="NUnit.Runners" />
-		<file src="\..\webtests\packages\Pickles.CommandLine.2.5.0\**\*.*" target="Pickles.CommandLine" />
+		<file src="\..\webtests\packages\NUnit.Runners.*\**\*.*" target="NUnit.Runners" />
+		<file src="\..\webtests\packages\Pickles.CommandLine.*\**\*.*" target="Pickles.CommandLine" />
      </files>
 </package>
