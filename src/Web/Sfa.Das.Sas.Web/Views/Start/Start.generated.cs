@@ -60,7 +60,24 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n\r\n            <h1");
+WriteLiteral(">\r\n\r\n            <div");
+
+WriteLiteral(" class=\"survey-panel survey-panel-top\"");
+
+WriteLiteral(">\r\n                <h2");
+
+WriteLiteral(" class=\"bold-large\"");
+
+WriteLiteral(@">
+                    Give us your feedback
+                </h2>
+                <p>
+                    This is a new service and your feedback will help us improve it.<br />
+                    Take our short survey using the link at the top of every page.
+                </p>
+            </div>
+
+            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
@@ -94,13 +111,13 @@ WriteLiteral(@">
 ");
 
             
-            #line 34 "..\..\Views\Start\Start.cshtml"
+            #line 44 "..\..\Views\Start\Start.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 34 "..\..\Views\Start\Start.cshtml"
+            #line 44 "..\..\Views\Start\Start.cshtml"
              using (Html.BeginForm("Search", "Apprenticeship"))
             {
 
@@ -120,7 +137,7 @@ WriteLiteral(" value=\"Start\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 37 "..\..\Views\Start\Start.cshtml"
+            #line 47 "..\..\Views\Start\Start.cshtml"
             }
 
             

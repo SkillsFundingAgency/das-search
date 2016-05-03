@@ -2322,3 +2322,25 @@ details .arrow {
     margin-bottom: 20px;
     border: 1px solid $grey-3;
 }
+
+.survey-panel {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: $grey-3;
+    position: relative;
+    &.survey-panel-top {
+        &:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            bottom: 100%;
+            left: 1em;
+            width: 0;   
+            height: 0;
+            border-style: solid;
+            border-width: 0 10px 17.3px 10px;
+            border-color: transparent transparent $grey-3 transparent;
+        }
+    }
+}
