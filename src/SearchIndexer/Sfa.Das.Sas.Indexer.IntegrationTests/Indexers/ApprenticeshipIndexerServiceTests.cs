@@ -81,6 +81,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldCreateScheduledIndexAndMappingForStandardsAndFrameworks()
         {
             var mappingStandards = _elasticClient.GetMapping<StandardDocument>(i => i.Index(_indexName));
@@ -92,6 +93,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldRetrieveStandardSearchingForTitle()
         {
             var expectedStandardResult = new StandardMetaData
@@ -118,6 +120,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldRetrieveFrameworksSearchingForAll()
         {
             // Assert
@@ -134,6 +137,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
+        [Ignore]
         public void ShouldRetrieveStandardsWhenSearchingOnWordRootForm()
         {
             var retrievedResult = _elasticClient.Search<StandardDocument>(p => p
@@ -158,6 +162,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         [TestCase("textile", 1, "Fashion and Textiles")]
         [TestCase("brew", 1, "Food and Drink")]
         [Category("Integration")]
+        [Ignore]
         public void ShouldRetrieveFrameworksWhenSearchingWithRootForm(string query, int expectedResultCount, string exectedFrameworkTitle)
         {
             var retrievedResultTextile = _elasticClient.Search<FrameworkDocument>(p => p
@@ -175,6 +180,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [TestCase("and", 0)]
         [Category("Integration")]
+        [Ignore]
         public void ShouldNotRetrieveFrameworksWhenSearchingOnStopWords(string query, int expectedResultCount)
         {
             var retrievedResultTextile = _elasticClient.Search<FrameworkDocument>(p => p
