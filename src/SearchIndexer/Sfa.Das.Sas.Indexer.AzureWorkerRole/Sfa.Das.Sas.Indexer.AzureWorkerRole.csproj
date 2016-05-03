@@ -98,6 +98,10 @@
       <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -181,6 +185,10 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Indexer.Infrastructure.csproj">
       <Project>{4e8da796-33ba-43ed-a931-4841e108a7e0}</Project>
       <Name>Sfa.Das.Sas.Indexer.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Nlog.CustomLayouts\Sfa.Das.Sas.Nlog.CustomLayouts.csproj">
+      <Project>{1fa76f42-5ce8-47f5-94ee-1e6e35742aca}</Project>
+      <Name>Sfa.Das.Sas.Nlog.CustomLayouts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Tools.MetaDataCreationTool\Sfa.Das.Sas.Tools.MetaDataCreationTool.csproj">
       <Project>{d838757d-63ec-4fe6-b565-470d5bf424a3}</Project>
