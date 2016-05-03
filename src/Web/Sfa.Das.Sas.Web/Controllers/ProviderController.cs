@@ -37,10 +37,12 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction(
+                var url = Url.Action(
                     "Standard",
                     "Apprenticeship",
                     new { id = criteria?.ApprenticeshipId, HasError = true });
+                var anchor = string.IsNullOrEmpty(criteria?.InputId) ? string.Empty : $"#{criteria.InputId}";
+                return new RedirectResult($"{url}{anchor}");
             }
 
             var searchResults =
@@ -57,18 +59,19 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
-                return RedirectToAction(
+                var url = Url.Action(
                     "Framework",
                     "Apprenticeship",
                     new { id = criteria?.ApprenticeshipId, HasError = true });
+                var anchor = string.IsNullOrEmpty(criteria?.InputId) ? string.Empty : $"#{criteria.InputId}";
+                return new RedirectResult($"{url}{anchor}");
             }
 
             var searchResults =
-                await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode);
+                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode);
 
             var viewModel =
-                _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(
-                    searchResults);
+                _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
 
             return View(viewModel);
         }

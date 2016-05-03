@@ -28,8 +28,16 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-input[name="PostCode"]{
+.postcode-form input[type="search"]{
     max-width: 150px;
+}
+
+.postcode-form .error-message{
+    display: none;
+}
+
+.postcode-form .error .error-message{
+    display: block;
 }
 
 .phase-banner-beta .phase-tag {

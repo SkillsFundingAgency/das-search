@@ -894,7 +894,7 @@ WriteLiteral(" (equivalent to ");
 
             
             #line 35 "..\..\Views\Provider\Detail.cshtml"
-                                                             Write(EquivalenveLevelService.GetFrameworkLevel(@Model.ApprenticeshipLevel));
+                                                             Write(EquivalenveLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel));
 
             
             #line default
