@@ -288,11 +288,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Standard.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Apprenticeship\_BlankFieldErrorMessage.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_BlankFieldErrorMessage.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Apprenticeship\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -442,6 +437,7 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\analytics.js" />
+    <Content Include="scripts\validation.js" />
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
@@ -457,10 +453,6 @@
     <Content Include="Views\Apprenticeship\Standard.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Standard.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Apprenticeship\_BlankFieldErrorMessage.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_BlankFieldErrorMessage.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Apprenticeship\_SearchResultMessage.cshtml">
       <Generator>RazorGenerator</Generator>

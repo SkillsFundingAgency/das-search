@@ -45,8 +45,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             if (results.ApiCall.HttpStatusCode != 200)
             {
-                _applicationLogger.Error($"Trying to get provider with id {id}");
-
                 throw new ApplicationException($"Failed query provider with id {id}");
             }
 

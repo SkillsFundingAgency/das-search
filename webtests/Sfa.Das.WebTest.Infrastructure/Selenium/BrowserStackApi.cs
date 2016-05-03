@@ -8,6 +8,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
+    using Sfa.Das.WebTest.Infrastructure.Services;
     using Sfa.Das.WebTest.Infrastructure.Settings;
 
     public class BrowserStackApi : IBrowserStackApi
@@ -16,13 +17,19 @@
 
         private readonly IWebDriver _driver;
 
-        public BrowserStackApi(IBrowserSettings settings, IWebDriver driver)
+        private readonly IRetryWebRequests _retryService;
+
+        private readonly ILog _logger;
+
+        public BrowserStackApi(IBrowserSettings settings, IWebDriver driver, IRetryWebRequests retryService, ILog logger)
         {
             _settings = settings;
             _driver = driver;
+            _retryService = retryService;
+            _logger = logger;
         }
 
-        public void FailTestSession(string reason)
+        public void FailTestSession(Exception testError)
         {
             try
             {
@@ -46,17 +53,14 @@
                 myHttpWebRequest.PreAuthenticate = true;
                 myHttpWebRequest.Credentials = myCredentialCache;
 
-                myWebRequest.GetResponse().Close();
+
+                _retryService.RetryWeb(() => myWebRequest.GetResponse().Close(), x => _logger.Error(string.Empty, x));
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToNiceString());
+                _logger.Error("Failed to connect to browser stack api", ex);
             }
-        }
-
-        public void FailTestSession(Exception testError)
-        {
-            FailTestSession(testError.Message);
         }
 
         public string FindSessionId()

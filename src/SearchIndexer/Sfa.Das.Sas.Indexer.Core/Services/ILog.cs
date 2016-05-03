@@ -5,11 +5,7 @@ namespace Sfa.Das.Sas.Indexer.Core.Services
 {
     public interface ILog
     {
-        void Trace(object message);
-
         void Debug(object message);
-
-        void Debug(object message, Exception exception);
 
         void Debug(string message, Dictionary<string, object> properties);
 
@@ -17,18 +13,12 @@ namespace Sfa.Das.Sas.Indexer.Core.Services
 
         void Info(object message);
 
-        void Info(object message, Exception exception);
-
         void Warn(object message);
 
-        void Warn(object message, Exception exception);
+        void Warn(Exception exception, object message);
 
-        void Error(object message);
+        void Error(Exception exception, object message);
 
-        void Error(object message, Exception exception);
-
-        void Fatal(object message);
-
-        void Fatal(object message, Exception exception);
+        void Fatal(Exception exception, object message);
     }
 }

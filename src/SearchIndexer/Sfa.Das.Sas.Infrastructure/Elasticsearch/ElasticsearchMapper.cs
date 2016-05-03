@@ -24,64 +24,46 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public StandardDocument CreateStandardDocument(StandardMetaData standard)
         {
-            try
+            var doc = new StandardDocument
             {
-                var doc = new StandardDocument
-                {
-                    StandardId = standard.Id,
-                    Title = standard.Title,
-                    JobRoles = standard.JobRoles,
-                    Keywords = standard.Keywords,
-                    Level = standard.NotionalEndLevel,
-                    PdfFileName = standard.PdfFileName,
-                    StandardPdf = standard.StandardPdfUrl,
-                    AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
-                    TypicalLength = standard.TypicalLength,
-                    IntroductoryText = standard.IntroductoryText,
-                    OverviewOfRole = standard.OverviewOfRole,
-                    EntryRequirements = standard.EntryRequirements,
-                    WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
-                    Qualifications = standard.Qualifications,
-                    ProfessionalRegistration = standard.ProfessionalRegistration,
-                };
+                StandardId = standard.Id,
+                Title = standard.Title,
+                JobRoles = standard.JobRoles,
+                Keywords = standard.Keywords,
+                Level = standard.NotionalEndLevel,
+                PdfFileName = standard.PdfFileName,
+                StandardPdf = standard.StandardPdfUrl,
+                AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
+                TypicalLength = standard.TypicalLength,
+                IntroductoryText = standard.IntroductoryText,
+                OverviewOfRole = standard.OverviewOfRole,
+                EntryRequirements = standard.EntryRequirements,
+                WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
+                Qualifications = standard.Qualifications,
+                ProfessionalRegistration = standard.ProfessionalRegistration,
+            };
 
-                return doc;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("Error creating document", ex);
-
-                throw;
-            }
+            return doc;
         }
 
         public FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData)
         {
-            try
+            // Trim off any whitespaces in the title or the Pathway Name
+            frameworkMetaData.NASTitle = frameworkMetaData.NASTitle?.Trim();
+            frameworkMetaData.PathwayName = frameworkMetaData.PathwayName?.Trim();
+
+            var doc = new FrameworkDocument
             {
-                // Trim off any whitespaces in the title or the Pathway Name
-                frameworkMetaData.NASTitle = frameworkMetaData.NASTitle?.Trim();
-                frameworkMetaData.PathwayName = frameworkMetaData.PathwayName?.Trim();
+                FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
+                Title = CreateFrameworkTitle(frameworkMetaData.NASTitle, frameworkMetaData.PathwayName),
+                FrameworkCode = frameworkMetaData.FworkCode,
+                FrameworkName = frameworkMetaData.NASTitle,
+                PathwayCode = frameworkMetaData.PwayCode,
+                PathwayName = frameworkMetaData.PathwayName,
+                Level = MapLevelProgType(frameworkMetaData.ProgType)
+            };
 
-               var doc = new FrameworkDocument
-                {
-                    FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
-                    Title = CreateFrameworkTitle(frameworkMetaData.NASTitle, frameworkMetaData.PathwayName),
-                    FrameworkCode = frameworkMetaData.FworkCode,
-                    FrameworkName = frameworkMetaData.NASTitle,
-                    PathwayCode = frameworkMetaData.PwayCode,
-                    PathwayName = frameworkMetaData.PathwayName,
-                    Level = MapLevelProgType(frameworkMetaData.ProgType)
-                };
-
-                return doc;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error("Error creating document", ex);
-
-                throw;
-            }
+            return doc;
         }
 
         public int MapLevelProgType(int level)

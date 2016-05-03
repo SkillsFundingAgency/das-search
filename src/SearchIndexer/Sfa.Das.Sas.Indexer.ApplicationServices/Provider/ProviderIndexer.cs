@@ -64,7 +64,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             }
             catch (Exception ex)
             {
-                _log.Error("Error indexing providers: " + ex.Message, ex);
+                _log.Error(ex, "Error indexing provider");
                 throw;
             }
         }

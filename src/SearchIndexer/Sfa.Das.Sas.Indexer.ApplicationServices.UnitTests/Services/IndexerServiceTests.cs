@@ -43,13 +43,13 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.UnitTests.Services
         }
 
         [Test]
-        public async Task ShouldNotIndexProvidersIfThatIndexHasNotBeenCreatedProperly()
+        public void ShouldNotIndexProvidersIfThatIndexHasNotBeenCreatedProperly()
         {
             // Arrange
             _mockHelper.Setup(x => x.CreateIndex(It.IsAny<string>())).Returns(false);
 
             // Act
-            await _sut.CreateScheduledIndex(It.IsAny<DateTime>());
+            Assert.Throws<Exception>(async () => await _sut.CreateScheduledIndex(It.IsAny<DateTime>()));
 
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Never);

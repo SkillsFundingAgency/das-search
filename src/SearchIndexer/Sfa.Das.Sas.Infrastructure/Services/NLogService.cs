@@ -23,19 +23,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             _loggerType = loggerType?.ToString() ?? "DefaultIndexLogger";
         }
 
-        public void Trace(object message)
-        {
-            SendLog(message, LogLevel.Trace);
-        }
-
         public void Debug(object message)
         {
             SendLog(message, LogLevel.Debug);
-        }
-
-        public void Debug(object message, Exception exception)
-        {
-            SendLog(message, LogLevel.Debug, _defaultProperties, exception);
         }
 
         public void Debug(string message, Dictionary<string, object> properties)
@@ -53,37 +43,22 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             SendLog(message, LogLevel.Info, properties);
         }
 
-        public void Info(object message, Exception exception)
-        {
-            SendLog(message, LogLevel.Info, _defaultProperties, exception);
-        }
-
         public void Warn(object message)
         {
             SendLog(message, LogLevel.Warn);
         }
 
-        public void Warn(object message, Exception exception)
+        public void Warn(Exception exception, object message)
         {
             SendLog(message, LogLevel.Warn, _defaultProperties, exception);
         }
 
-        public void Error(object message)
-        {
-            SendLog(message, LogLevel.Error);
-        }
-
-        public void Error(object message, Exception exception)
+        public void Error(Exception exception, object message)
         {
             SendLog(message, LogLevel.Error, _defaultProperties, exception);
         }
 
-        public void Fatal(object message)
-        {
-            SendLog(message, LogLevel.Fatal);
-        }
-
-        public void Fatal(object message, Exception exception)
+        public void Fatal(Exception exception, object message)
         {
             SendLog(message, LogLevel.Fatal, _defaultProperties, exception);
         }

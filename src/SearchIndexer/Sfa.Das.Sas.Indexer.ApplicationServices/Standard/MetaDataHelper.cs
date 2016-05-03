@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Standard
                 }
                 catch (JsonReaderException ex)
                 {
-                    _log.Warn($"Couldn't deserialise meta data for: {item.Key}", ex);
+                    _log.Warn(ex, $"Couldn't deserialise meta data for: {item.Key}");
                 }
             }
 

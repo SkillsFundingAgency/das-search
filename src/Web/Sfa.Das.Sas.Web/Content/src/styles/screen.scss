@@ -28,8 +28,16 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-input[name="PostCode"]{
+.postcode-form input[type="search"]{
     max-width: 150px;
+}
+
+.postcode-form .error-message{
+    display: none;
+}
+
+.postcode-form .error .error-message{
+    display: block;
 }
 
 .phase-banner-beta .phase-tag {
@@ -51,6 +59,9 @@ input[name="PostCode"]{
         @include heading-24;
         font-weight: bold;
     }
+    h5 {
+        font-weight: bold;
+    }
     ul {
         list-style-type: disc;
     }
@@ -65,5 +76,21 @@ input[name="PostCode"]{
             padding-left: 0;
         }
         margin-bottom: 1rem;
+    }
+    blockquote {
+        clear: both;
+        display: block;
+        border-left: 5px solid #bfc1c3;
+        padding: 0.7894736842em;
+        margin-bottom: 0.7894736842em;
+        :first-child {
+            margin-top: 0;
+        }
+
+        :only-child,
+        :last-child {
+            margin-bottom: 0;
+        }
+
     }
 }

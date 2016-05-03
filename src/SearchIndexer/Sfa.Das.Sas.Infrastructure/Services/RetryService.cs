@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
                 .WaitAndRetry(
                     2,
                     retrytime => TimeSpan.FromSeconds(Math.Pow(2, retrytime)),
-                    (exception, timespan) => { _log.Error("Failed to connect to site", exception); });
+                    (exception, timespan) => { _log.Error(exception, "Failed to connect to site"); });
             return policy.Execute(action);
         }
     }

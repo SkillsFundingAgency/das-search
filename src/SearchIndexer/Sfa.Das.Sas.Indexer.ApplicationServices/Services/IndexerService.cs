@@ -30,45 +30,36 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Services
         {
             _log.Info($"Creating new scheduled {_name}");
 
-            try
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _indexSettings.IndexesAlias);
+            var indexProperlyCreated = _indexerHelper.CreateIndex(newIndexName);
+
+            if (!indexProperlyCreated)
             {
-                Stopwatch stopwatch = Stopwatch.StartNew();
-                var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _indexSettings.IndexesAlias);
-                var indexProperlyCreated = _indexerHelper.CreateIndex(newIndexName);
-
-                if (!indexProperlyCreated)
-                {
-                    _log.Error($"{_name} index not created properly, exiting...");
-                    return;
-                }
-
-                _log.Info($"Indexing documents for {_name}.");
-
-                await _indexerHelper.IndexEntries(newIndexName).ConfigureAwait(false);
-
-                PauseWhileIndexingIsBeingRun();
-
-                var indexHasBeenCreated = _indexerHelper.IsIndexCorrectlyCreated(newIndexName);
-
-                if (indexHasBeenCreated)
-                {
-                    _indexerHelper.ChangeUnderlyingIndexForAlias(newIndexName);
-
-                    _log.Debug("Swap completed...");
-
-                    _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
-                }
-
-                stopwatch.Stop();
-                var properties = new Dictionary<string, object> { { "Alias", _indexSettings.IndexesAlias }, { "ExecutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
-                _log.Debug($"Created {_name}", properties);
-                _log.Info($"{_name}ing complete.");
+                throw new Exception($"{_name} index not created properly, exiting...");
             }
-            catch (Exception ex)
+
+            _log.Info($"Indexing documents for {_name}.");
+
+            await _indexerHelper.IndexEntries(newIndexName).ConfigureAwait(false);
+
+            PauseWhileIndexingIsBeingRun();
+
+            var indexHasBeenCreated = _indexerHelper.IsIndexCorrectlyCreated(newIndexName);
+
+            if (indexHasBeenCreated)
             {
-                _log.Error(ex);
-                throw;
+                _indexerHelper.ChangeUnderlyingIndexForAlias(newIndexName);
+
+                _log.Debug("Swap completed...");
+
+                _indexerHelper.DeleteOldIndexes(scheduledRefreshDateTime);
             }
+
+            stopwatch.Stop();
+            var properties = new Dictionary<string, object> { { "Alias", _indexSettings.IndexesAlias }, { "ExecutionTime", stopwatch.ElapsedMilliseconds }, { "IndexCorrectlyCreated", indexHasBeenCreated } };
+            _log.Debug($"Created {_name}", properties);
+            _log.Info($"{_name}ing complete.");
         }
 
         private void PauseWhileIndexingIsBeingRun()

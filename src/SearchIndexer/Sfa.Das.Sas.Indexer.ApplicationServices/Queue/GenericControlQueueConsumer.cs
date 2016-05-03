@@ -65,8 +65,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Queue
             }
             catch (Exception ex)
             {
-                _log.Fatal("Something failed creating index: " + ex);
-                throw;
+                _log.Error(ex, $"Something failed creating index: {typeof(T)}");
             }
         }
     }

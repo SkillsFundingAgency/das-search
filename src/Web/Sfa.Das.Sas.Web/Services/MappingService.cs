@@ -39,9 +39,9 @@ namespace Sfa.Das.Sas.Web.Services
             {
                 tempDest = Mapper.Map<TSource, TDest>(source);
             }
-            catch (Exception exp)
+            catch (Exception ex)
             {
-                _logger.Error($"Error mapping objects: {exp.Message}");
+                _logger.Error(ex, "Error mapping objects");
             }
 
             return tempDest;

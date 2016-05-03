@@ -79,31 +79,33 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Standard
 
         private async Task IndexStandards(string indexName)
         {
-            var entries = await LoadStandardMetaData();
             try
             {
+                var entries = await LoadStandardMetaData();
+
                 _log.Debug("Indexing " + entries.Count + " standards");
 
                 await _searchIndexMaintainer.IndexStandards(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                _log.Error("Error indexing Standards", ex);
+                _log.Error(ex, "Error indexing Standards");
             }
         }
 
         private async Task IndexFrameworks(string indexName)
         {
-            var entries = _metaDataHelper.GetAllFrameworkMetaData();
             try
             {
+                var entries = _metaDataHelper.GetAllFrameworkMetaData();
+
                 _log.Debug("Indexing " + entries.Count + " frameworks");
 
                 await _searchIndexMaintainer.IndexFrameworks(indexName, entries).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                _log.Error("Error indexing Frameworks", ex);
+                _log.Error(ex, "Error indexing Frameworks");
             }
         }
 

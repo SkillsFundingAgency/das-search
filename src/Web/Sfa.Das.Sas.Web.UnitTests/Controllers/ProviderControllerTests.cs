@@ -28,24 +28,25 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
         private Mock<IProviderViewModelFactory> _mockViewModelFactory;
 
-        [TestCase(null)]
-        [TestCase("")]
-        public async Task SearchResultsShouldRedirectToStandardDetailsIfPostCodeIsNotSet(string postCode)
+        [TestCase(null, "null-id")]
+        [TestCase("", "empty-id")]
+        public async Task SearchResultsShouldRedirectToStandardDetailsIfPostCodeIsNotSet(string postCode, string inputId)
         {
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode };
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode, InputId = inputId };
 
             var controller = new ProviderController(null, null, null, null);
 
+            var moqUrlHelper = new Mock<UrlHelper>();
+            moqUrlHelper.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>())).Returns("http://url.co.uk");
+            controller.Url = moqUrlHelper.Object;
+
             var result = await controller.StandardResults(searchCriteria);
 
-            result.Should().BeOfType<RedirectToRouteResult>();
+            result.Should().BeOfType<RedirectResult>();
 
-            var redirectResult = (RedirectToRouteResult)result;
+            var redirectResult = (RedirectResult)result;
 
-            redirectResult?.RouteValues["id"].Should().Be(123);
-            redirectResult?.RouteValues["HasError"].Should().Be(true);
-            redirectResult?.RouteValues["controller"].Should().Be("Apprenticeship");
-            redirectResult?.RouteValues["action"].Should().Be("Standard");
+            redirectResult?.Url.Should().Be($"http://url.co.uk#{inputId}");
         }
 
         [Test]
@@ -85,24 +86,25 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             viewResult.Model.Should().Be(stubViewModel);
         }
 
-        [TestCase(null)]
-        [TestCase("")]
-        public async Task SearchResultsShouldRedirectToFrameworkDetailsIfPostCodeIsNotSet(string postCode)
+        [TestCase(null, "null-id")]
+        [TestCase("", "empty-id")]
+        public async Task SearchResultsShouldRedirectToFrameworkDetailsIfPostCodeIsNotSet(string postCode, string inputId)
         {
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode };
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode, InputId = inputId };
 
             var controller = new ProviderController(null, null, null, null);
 
+            var moqUrlHelper = new Mock<UrlHelper>();
+            moqUrlHelper.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>())).Returns("http://url.co.uk");
+            controller.Url = moqUrlHelper.Object;
+
             var result = await controller.FrameworkResults(searchCriteria);
 
-            result.Should().BeOfType<RedirectToRouteResult>();
+            result.Should().BeOfType<RedirectResult>();
 
-            var redirectResult = (RedirectToRouteResult)result;
+            var redirectResult = (RedirectResult)result;
 
-            redirectResult?.RouteValues["id"].Should().Be(123);
-            redirectResult?.RouteValues["HasError"].Should().Be(true);
-            redirectResult?.RouteValues["controller"].Should().Be("Apprenticeship");
-            redirectResult?.RouteValues["action"].Should().Be("Framework");
+            redirectResult?.Url.Should().Be($"http://url.co.uk#{inputId}");
         }
 
         [Test]

@@ -44,8 +44,6 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
             }
             catch (Exception ex)
             {
-                _logger.Error($"Unable to connect to Post Code Lookup service: {sUrl}");
-
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
         }

@@ -45,9 +45,9 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             SendLog(msg, LogLevel.Debug, properties);
         }
 
-        public void Error(string msg)
+        public void Warn(string msg)
         {
-            SendLog(msg, LogLevel.Error);
+            SendLog(msg, LogLevel.Warn);
         }
 
         public void Error(Exception ex, string msg)
@@ -55,14 +55,9 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             SendLog(msg, LogLevel.Error, defaultProperties, ex);
         }
 
-        public void Warn(string msg)
+        public void Fatal(Exception ex, string msg)
         {
-            SendLog(msg, LogLevel.Warn);
-        }
-
-        public void Fatal(string msg)
-        {
-            SendLog(msg, LogLevel.Fatal);
+            SendLog(msg, LogLevel.Fatal, defaultProperties, ex);
         }
 
         private void SendLog(string msg, LogLevel level, Dictionary<string, object> properties = null, Exception exception = null)

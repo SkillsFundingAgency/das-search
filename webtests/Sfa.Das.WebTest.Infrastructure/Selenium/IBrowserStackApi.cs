@@ -4,8 +4,6 @@ namespace Sfa.Das.WebTest.Infrastructure.Selenium
 
     public interface IBrowserStackApi
     {
-        void FailTestSession(string reason);
-
         void FailTestSession(Exception testError);
     }
 }
