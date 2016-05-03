@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Extensions.For_HtmlExtensions
         {
             var htmlText = helper.MarkdownToHtml("**Hello World**");
 
-            Assert.AreEqual("<p><strong>Hello World</strong></p>", htmlText.ToHtmlString().TrimEnd());
+            Assert.AreEqual("<div class=\"markdown\"><p><strong>Hello World</strong></p>\r\n\r\n</div>", htmlText.ToHtmlString().TrimEnd());
         }
 
         [Test]

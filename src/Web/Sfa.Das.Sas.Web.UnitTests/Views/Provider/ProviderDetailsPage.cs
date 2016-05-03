@@ -66,8 +66,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             this.GetPartial(html, ".block-release").Should().Contain("block release");
             this.GetPartial(html, ".training-location-title").Should().Contain("Training location");
             this.GetPartial(html, ".training-location").Should().Contain("Test location name Address 1 Address 2 PostCode");
-            this.GetPartial(html, ".disclaimer").Should().StartWith("Content maintained by");
-            this.GetPartial(html, ".disclaimer").Should().Contain(model.Name);
         }
 
         [Test]
