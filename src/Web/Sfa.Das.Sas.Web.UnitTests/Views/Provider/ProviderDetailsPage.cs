@@ -38,14 +38,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease" },
                 ContactInformation = new ContactInformation
                 {
-                    ContactUsUrl = "Test contact url",
+                    ContactUsUrl = "http://www.testcontact.url",
                     Email = "Test email",
                     Website = "Test website",
                     Phone = "Test phone"
                 },
                 Apprenticeship = new ApprenticeshipBasic
                 {
-                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipInfoUrl = "www.test-apprenticeship.info.url",
                     ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
                     Code = 1
                 },
@@ -56,8 +56,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
 
             this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
             this.GetPartial(html, ".apprenticeshipContact").Should().Contain("training provider website");
+            this.GetAttribute(html, ".apprenticeshipContact", "href").Should().Be("http://www.test-apprenticeship.info.url", "because http be added if missing");
             this.GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
             this.GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
+            this.GetAttribute(html, ".providerContact", "href").Should().Be("http://www.testcontact.url", "http should only be added once");
             this.GetPartial(html, ".phone-title").Should().Contain("Phone");
             this.GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
             this.GetPartial(html, ".email-title").Should().Contain("Email");

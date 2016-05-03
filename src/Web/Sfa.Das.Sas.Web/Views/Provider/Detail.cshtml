@@ -136,9 +136,10 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
     if (!string.IsNullOrEmpty(url))
     {
+        var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
         <dt class="@classTitle">@title</dt>
         <dd>
-            <a href="http://@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+            <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
                 @if (string.IsNullOrEmpty(urlTitle))
                 {
                     @url

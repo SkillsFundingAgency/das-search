@@ -18,6 +18,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
                    ?? string.Empty;
         }
 
+        protected string GetAttribute(IHtmlDocument html, string selector, string attribute, int index = 1)
+        {
+            return html?.QuerySelectorAll(selector)[index - 1]?.GetAttribute(attribute);
+        }
+
         protected IElement GetHtmlElement(IHtmlDocument html, string selector, int index = 1)
         {
             return html?.QuerySelectorAll(selector)[index - 1];
