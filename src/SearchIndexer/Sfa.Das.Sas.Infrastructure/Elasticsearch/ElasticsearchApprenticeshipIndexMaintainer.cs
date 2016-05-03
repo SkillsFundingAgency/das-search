@@ -86,8 +86,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             var bulkTasks = new List<Task<IBulkResponse>>();
             bulkTasks.AddRange(tasks);
             LogResponse(await Task.WhenAll(bulkTasks));
-
-            Log.Debug($"Sent a total of {totalCount} {typeof(T1)} documents to be indexed");
+            var properties = new Dictionary<string, object> { { "DocumentType", typeof(T1).Name.ToLower() }, { "TotalCount", totalCount}, { "Identifier", "DocumentCount"} };
+            Log.Info($"Sent a total of {totalCount} {typeof(T1)} documents to be indexed", properties);
         }
     }
 }

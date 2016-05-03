@@ -78,8 +78,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 totalCount += count;
             }
 
-            Log.Debug($"Sent a total of {totalCount} Framework Provider documents to be indexed");
-
+            var properties = new Dictionary<string, object> { { "DocumentType", "FrameworkProvider" }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" } };
+            Log.Info($"Sent a total of {totalCount} Framework Provider documents to be indexed", properties);
             return tasks;
         }
 
@@ -122,8 +122,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 totalCount += count;
             }
 
-            Log.Debug($"Sent a total of {totalCount} Standard Provider documents to be indexed");
-
+            var properties = new Dictionary<string, object> { { "DocumentType", "StandardProvider" }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" } };
+            Log.Info($"Sent a total of {totalCount} Standard Provider documents to be indexed", properties);
             return tasks;
         }
     }

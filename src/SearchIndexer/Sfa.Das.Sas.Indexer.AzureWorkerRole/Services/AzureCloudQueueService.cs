@@ -31,7 +31,6 @@ namespace Sfa.Das.Sas.Indexer.AzureWorkerRole.Services
         /// <returns>A default number of messages from the named queue</returns>
         public IEnumerable<IQueueMessage> GetQueueMessages(string queueName)
         {
-            _logger.Debug("Trying to pop " + DefaultMessageCount + " messages from queue [" + queueName + "]");
             var queue = GetQueueReference(queueName);
 
             return queue?.GetMessages(DefaultMessageCount, _messageVisibilityTimeout).Select(x => new AzureQueueMessage(x));

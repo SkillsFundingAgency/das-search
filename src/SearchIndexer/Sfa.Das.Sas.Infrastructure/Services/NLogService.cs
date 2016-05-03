@@ -78,7 +78,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
             foreach (var property in propertiesLocal)
             {
-                logEvent.Properties[property.Key] = property.Value;
+                logEvent.Properties[property.Key] = property.Value?.ToString();
             }
 
             ILogger log = LogManager.GetCurrentClassLogger();
