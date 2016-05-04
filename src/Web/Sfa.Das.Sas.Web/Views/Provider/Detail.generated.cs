@@ -195,14 +195,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4819), Tuple.Create("\"", 4827)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4858), Tuple.Create("\"", 4866)
 
 #line 122 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4824), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 4863), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4824), false)
+, 4863), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"phone\"");
@@ -264,29 +264,29 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5083), Tuple.Create("\"", 5091)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5122), Tuple.Create("\"", 5130)
 
 #line 131 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5088), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5127), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5088), false)
+, 5127), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"email\"");
 
 WriteLiteralTo(__razor_helper_writer, "><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5109), Tuple.Create("\"", 5138)
-, Tuple.Create(Tuple.Create("", 5116), Tuple.Create("mailto:", 5116), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5148), Tuple.Create("\"", 5177)
+, Tuple.Create(Tuple.Create("", 5155), Tuple.Create("mailto:", 5155), true)
 
 #line 131 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5123), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
+, Tuple.Create(Tuple.Create("", 5162), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
 
 #line default
 #line hidden
-, 5123), false)
+, 5162), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -331,14 +331,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <dt");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5379), Tuple.Create("\"", 5398)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5418), Tuple.Create("\"", 5437)
 
 #line 139 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5387), Tuple.Create<System.Object, System.Int32>(classTitle
+, Tuple.Create(Tuple.Create("", 5426), Tuple.Create<System.Object, System.Int32>(classTitle
 
 #line default
 #line hidden
-, 5387), false)
+, 5426), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -354,36 +354,36 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5441), Tuple.Create("\"", 5459)
-, Tuple.Create(Tuple.Create("", 5448), Tuple.Create("http://", 5448), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5480), Tuple.Create("\"", 5498)
+, Tuple.Create(Tuple.Create("", 5487), Tuple.Create("http://", 5487), true)
 
 #line 141 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5455), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 5494), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 5455), false)
+, 5494), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5491), Tuple.Create("\"", 5525)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5530), Tuple.Create("\"", 5564)
 
 #line 141 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5499), Tuple.Create<System.Object, System.Int32>(cssClass
+, Tuple.Create(Tuple.Create("", 5538), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 5499), false)
+, 5538), false)
 
 #line 141 "..\..\Views\Provider\Detail.cshtml"
- , Tuple.Create(Tuple.Create(" ", 5508), Tuple.Create<System.Object, System.Int32>(classIdentifier
+ , Tuple.Create(Tuple.Create(" ", 5547), Tuple.Create<System.Object, System.Int32>(classIdentifier
 
 #line default
 #line hidden
-, 5509), false)
+, 5548), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -502,16 +502,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6142), Tuple.Create("\"", 6185)
-, Tuple.Create(Tuple.Create("", 6150), Tuple.Create("width:", 6150), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6181), Tuple.Create("\"", 6224)
+, Tuple.Create(Tuple.Create("", 6189), Tuple.Create("width:", 6189), true)
 
 #line 164 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 6156), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
+, Tuple.Create(Tuple.Create(" ", 6195), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
 
 #line default
 #line hidden
-, 6157), false)
-, Tuple.Create(Tuple.Create("", 6184), Tuple.Create("%", 6184), true)
+, 6196), false)
+, Tuple.Create(Tuple.Create("", 6223), Tuple.Create("%", 6223), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
@@ -571,16 +571,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6560), Tuple.Create("\"", 6601)
-, Tuple.Create(Tuple.Create("", 6568), Tuple.Create("width:", 6568), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6599), Tuple.Create("\"", 6640)
+, Tuple.Create(Tuple.Create("", 6607), Tuple.Create("width:", 6607), true)
 
 #line 177 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 6574), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
+, Tuple.Create(Tuple.Create("", 6613), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
 
 #line default
 #line hidden
-, 6574), false)
-, Tuple.Create(Tuple.Create("", 6600), Tuple.Create("%", 6600), true)
+, 6613), false)
+, Tuple.Create(Tuple.Create("", 6639), Tuple.Create("%", 6639), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
@@ -990,21 +990,7 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </article>\r\n            </section>\r\n\r\n            <aside");
-
-WriteLiteral(" class=\"disclaimer\"");
-
-WriteLiteral(">\r\n                <h4");
-
-WriteLiteral(" class=\"heading-small\"");
-
-WriteLiteral(@">Content disclaimer</h4>
-                <p>
-                    Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. The Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
-                </p>
-            </aside>
-
-            <div");
+WriteLiteral("\r\n                </article>\r\n            </section>\r\n\r\n            <div");
 
 WriteLiteral(" class=\"survey-panel\"");
 
@@ -1021,11 +1007,28 @@ WriteLiteral(@">
                 </p>
                 <a");
 
-WriteLiteral(" href=\"#\"");
+WriteLiteral(" href=\"https://www.surveymonkey.co.uk/r/F3LCBG6\"");
 
 WriteLiteral(" class=\"button\"");
 
-WriteLiteral(">Take the survey</a>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <div");
+WriteLiteral(">Take the survey</a>\r\n            </div>\r\n\r\n            <aside");
+
+WriteLiteral(" class=\"disclaimer\"");
+
+WriteLiteral(">\r\n                <h4");
+
+WriteLiteral(" class=\"heading-small\"");
+
+WriteLiteral(@">Content disclaimer</h4>
+                <p>
+                    Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. The Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
+                </p>
+            </aside>
+
+        </div>
+
+
+        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
