@@ -23,10 +23,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _applicationSettings = applicationSettings;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
-            var searchDescriptor = GetKeywordSearchDescriptor(skip, take, formattedKeywords);
+            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords);
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
@@ -136,13 +136,13 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total };
         }
 
-        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int skip, int take, string formattedKeywords)
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords)
         {
-            var skipLocal = skip * take;
+            var skip = page * take;
             return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("standarddocument,frameworkdocument"))
-                    .Skip(skipLocal)
+                    .Skip(skip)
                     .Take(take)
                     .Query(q => q
                         .QueryString(qs => qs

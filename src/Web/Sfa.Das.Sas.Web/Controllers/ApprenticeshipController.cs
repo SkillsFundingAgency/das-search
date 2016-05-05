@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchResults(StandardSearchCriteria criteria)
+        public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
         {
             var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
 
