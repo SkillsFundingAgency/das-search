@@ -17,6 +17,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 {
+    using Sfa.Das.Sas.Core.Configuration;
+
     [TestFixture]
     public class ProviderControllerTests
     {
@@ -28,13 +30,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
         private Mock<IProviderViewModelFactory> _mockViewModelFactory;
 
+        private readonly IConfigurationSettings _configurationSettings = Mock.Of<IConfigurationSettings>(x => x.SurveyUrl == new Uri("http://test.com"));
+
         [TestCase(null, "null-id")]
         [TestCase("", "empty-id")]
         public async Task SearchResultsShouldRedirectToStandardDetailsIfPostCodeIsNotSet(string postCode, string inputId)
         {
             var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode, InputId = inputId };
 
-            var controller = new ProviderController(null, null, null, null);
+            var controller = new ProviderController(null, null, null, null, _configurationSettings);
 
             var moqUrlHelper = new Mock<UrlHelper>();
             moqUrlHelper.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>())).Returns("http://url.co.uk");
@@ -76,7 +80,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 _mockProviderSearchService.Object,
                 _mockLogger.Object,
                 _mockMappingService.Object,
-                _mockViewModelFactory.Object);
+                _mockViewModelFactory.Object,
+                _configurationSettings);
 
             var result = await controller.StandardResults(searchCriteria);
 
@@ -92,7 +97,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode, InputId = inputId };
 
-            var controller = new ProviderController(null, null, null, null);
+            var controller = new ProviderController(null, null, null, null, _configurationSettings);
 
             var moqUrlHelper = new Mock<UrlHelper>();
             moqUrlHelper.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>())).Returns("http://url.co.uk");
@@ -134,7 +139,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 _mockProviderSearchService.Object,
                 _mockLogger.Object,
                 _mockMappingService.Object,
-                _mockViewModelFactory.Object);
+                _mockViewModelFactory.Object,
+                _configurationSettings);
 
             var result = await controller.FrameworkResults(searchCriteria);
 
@@ -161,7 +167,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 _mockProviderSearchService.Object,
                 _mockLogger.Object,
                 _mockMappingService.Object,
-                _mockViewModelFactory.Object);
+                _mockViewModelFactory.Object,
+                _configurationSettings);
 
             var result = controller.Detail(searchCriteria);
 
@@ -205,7 +212,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 _mockProviderSearchService.Object,
                 _mockLogger.Object,
                 _mockMappingService.Object,
-                _mockViewModelFactory.Object);
+                _mockViewModelFactory.Object,
+                _configurationSettings);
 
             Mock<HttpContextBase> httpContextMock = new Mock<HttpContextBase>();
             Mock<HttpRequestBase> httpRequestMock = new Mock<HttpRequestBase>();
@@ -258,7 +266,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 _mockProviderSearchService.Object,
                 _mockLogger.Object,
                 _mockMappingService.Object,
-                _mockViewModelFactory.Object);
+                _mockViewModelFactory.Object,
+                _configurationSettings);
 
             Mock<HttpContextBase> httpContextMock = new Mock<HttpContextBase>();
             Mock<HttpRequestBase> httpRequestMock = new Mock<HttpRequestBase>();
