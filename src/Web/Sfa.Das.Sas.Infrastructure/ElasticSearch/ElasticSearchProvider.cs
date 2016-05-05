@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             return new ApprenticeshipSearchResults
             {
-                TotalResults = results.Total,
+                TotalResults = results.HitsMetaData.Total,
                 SearchTerm = formattedKeywords,
                 Results = results.Documents,
                 HasError = results.ApiCall.HttpStatusCode != 200
@@ -138,10 +138,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int skip, int take, string formattedKeywords)
         {
+            var skipLocal = skip * take;
             return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("standarddocument,frameworkdocument"))
-                    .Skip(skip)
+                    .Skip(skipLocal)
                     .Take(take)
                     .Query(q => q
                         .QueryString(qs => qs

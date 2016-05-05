@@ -19,7 +19,7 @@ namespace Sfa.Das.Sas.ApplicationServices
         {
             _logger.Info($"Apprenticeship Keyword Search: {keywords}", new Dictionary<string, object> { { "keywords", keywords?.Split(' ') ?? new string[] { "[empty]" } } });
 
-            var takeElements = take == 0 ? 1000 : take;
+            var takeElements = take == 0 ? 100 : take;
             var results = _searchProvider.SearchByKeyword(keywords, skip, takeElements);
 
             return results;
