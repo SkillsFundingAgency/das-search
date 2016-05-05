@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
         {
-            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
 
