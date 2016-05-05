@@ -34,5 +34,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public LinkViewModel SearchResultLink { get; set; }
 
         public ApprenticeshipTrainingType Training { get; set; }
+
+        public string SurveyUrl { get; set; }
     }
 }
