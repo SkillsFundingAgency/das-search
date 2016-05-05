@@ -53,6 +53,7 @@
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="ILookupLocations.cs" />
+    <Compile Include="IProfileAStep.cs" />
     <Compile Include="IProviderSearchService.cs" />
     <Compile Include="IApprenticeshipSearchService.cs" />
     <Compile Include="ISearchProvider.cs" />

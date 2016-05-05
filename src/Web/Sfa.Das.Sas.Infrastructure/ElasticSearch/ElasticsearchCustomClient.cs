@@ -6,25 +6,33 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
+    using Sfa.Das.Sas.ApplicationServices;
+
     public class ElasticsearchCustomClient : IElasticsearchCustomClient
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
         private readonly ILog _logger;
 
-        public ElasticsearchCustomClient(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger)
+        private readonly IProfileAStep _profiler;
+
+        public ElasticsearchCustomClient(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IProfileAStep profiler)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
+            _profiler = profiler;
         }
 
-        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "")
-            where T : class
+        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "") where T : class
         {
             var client = _elasticsearchClientFactory.Create();
-            var result = client.Search(selector);
-            SendLog(result, $"Elasticsearch.Search.{callerName}");
-            return result;
+            using (_profiler.CreateStep($"Elasticsearch.Search.{callerName}"))
+            {
+                var result = client.Search(selector);
+
+                SendLog(result, $"Elasticsearch.Search.{callerName}");
+                return result;
+            }
         }
 
         private void SendLog<T>(ISearchResponse<T> result, string identifier)

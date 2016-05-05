@@ -9,6 +9,13 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Web
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+
+    using StackExchange.Profiling;
+    using StackExchange.Profiling.Mvc;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -18,7 +25,9 @@ namespace Sfa.Das.Sas.Web
 
             logger.Info("Starting Web Role");
 
+            MiniProfiler.Settings.Results_Authorize = IsUserAllowedToSeeMiniProfilerUI;
             SetupApplicationInsights();
+            ProfileViewEngines();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -36,11 +45,40 @@ namespace Sfa.Das.Sas.Web
             logger.Error(ex, "App_Error");
         }
 
+        protected void Application_BeginRequest()
+        {
+            MiniProfiler.Start();
+        }
+
+        protected void Application_EndRequest()
+        {
+            MiniProfiler.Stop();
+        }
+
         private void SetupApplicationInsights()
         {
             TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
 
             TelemetryConfiguration.Active.ContextInitializers.Add(new ApplicationInsightsInitializer());
+        }
+
+        private void ProfileViewEngines()
+        {
+            var copy = ViewEngines.Engines.ToList();
+            ViewEngines.Engines.Clear();
+            foreach (var item in copy)
+            {
+                ViewEngines.Engines.Add(new ProfilingViewEngine(item));
+            }
+        }
+
+        private bool IsUserAllowedToSeeMiniProfilerUI(HttpRequest httpRequest)
+        {
+            // Implement your own logic for who 
+            // should be able to access ~/mini-profiler-resources/results
+            // var principal = httpRequest.RequestContext.HttpContext.User;
+            // return principal.IsInRole("Developer");
+            return httpRequest.Headers["profile"] != null;
         }
     }
 }
