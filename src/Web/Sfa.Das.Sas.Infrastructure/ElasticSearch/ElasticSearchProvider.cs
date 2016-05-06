@@ -139,7 +139,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords)
         {
-            var skip = page * take;
+            var skip = (page - 1) * take;
             return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("standarddocument,frameworkdocument"))

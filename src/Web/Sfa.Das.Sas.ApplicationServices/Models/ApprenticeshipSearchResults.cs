@@ -4,7 +4,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public sealed class ApprenticeshipSearchResults
     {
-        public long TotalResults { get; set; }
+        public double TotalResults { get; set; }
 
         public int ResultsToTake { get; set; }
 

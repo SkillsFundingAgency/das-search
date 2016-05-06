@@ -60,11 +60,11 @@
 
 @helper GetPaginationBackLink()
 {
-    if (Model.ActualPage != 0)
+    if (Model.ActualPage != 1)
     {
         var previousPage = @Model.ActualPage - 1;
         var title = $"Previous page {@previousPage} of {@Model.LastPage}";
-        <p>
+        <p class="pagination-back-link">
             @Html.ActionLink(title, "SearchResults", "Apprenticeship", new { @keywords = Model.SearchTerm, page = previousPage }, null)
         </p>
     }
@@ -77,10 +77,11 @@
     {
         var nextPage = @Model.ActualPage + 1;
         var title = $"Next page {@nextPage} of {@Model.LastPage}";
-        <p>
+
+        <p class="pagination-next-link">
             @Html.ActionLink(title, "SearchResults", "Apprenticeship", new { @keywords = Model.SearchTerm, page = nextPage }, null)
         </p>
-}
+    }
 }
 
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)

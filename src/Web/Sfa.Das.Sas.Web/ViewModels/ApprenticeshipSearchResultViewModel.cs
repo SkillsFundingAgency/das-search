@@ -4,7 +4,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public sealed class ApprenticeshipSearchResultViewModel
     {
-        public long TotalResults { get; set; }
+        public double TotalResults { get; set; }
 
         public int ResultsToTake { get; set; }
 

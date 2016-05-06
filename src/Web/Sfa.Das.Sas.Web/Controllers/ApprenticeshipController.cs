@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -44,13 +45,19 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
         {
+            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
+
             var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
 
-            var lastPage = (int)viewModel.TotalResults / viewModel.ResultsToTake;
+            double lastPage = 0;
+            if (viewModel.ResultsToTake != 0)
+            {
+                lastPage = Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+            }
 
-            if (!viewModel.Results.Any() && viewModel.TotalResults != 0)
+            if (viewModel.TotalResults != 0 && !viewModel.Results.Any())
             {
                 var url = Url.Action(
                     "SearchResults",
@@ -61,7 +68,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.ActualPage = criteria.Page;
 
-            viewModel.LastPage = lastPage;
+            viewModel.LastPage = (int)lastPage;
 
             return View(viewModel);
         }
