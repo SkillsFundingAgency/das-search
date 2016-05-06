@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DashboardControllerTests.cs" />
     <Compile Include="Controllers\ErrorControllerTests.cs" />
     <Compile Include="Controllers\SharedControllerTests.cs" />
     <Compile Include="Controllers\StartControllerTests.cs" />

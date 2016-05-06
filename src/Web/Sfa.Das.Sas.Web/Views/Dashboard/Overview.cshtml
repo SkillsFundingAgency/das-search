@@ -1,0 +1,27 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "My Dashboard";
+}
+
+<main id="content" class="standard-detail">
+    <p class="small-btm-margin">
+        @Html.ActionLink("Back", "Start", "Start", null, new { @class = "link-back" })
+    </p>
+
+    <h1 class="heading-xlarge">
+        @Model.Title
+    </h1>
+
+    @foreach (var standard in Model.Standards)
+    {
+        <section>
+            <header>
+                <h2 class="heading-medium">
+                    @standard.Title
+                </h2>
+                @Html.ActionLink("view apprenticeship", "Standard", "Apprenticeship", new { id = standard.Id }, null)
+            </header>
+        </section>
+    }
+</main>
