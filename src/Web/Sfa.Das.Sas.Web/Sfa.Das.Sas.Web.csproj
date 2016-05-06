@@ -221,6 +221,7 @@
     <Compile Include="ApplicationInsightsInitializer.cs" />
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Collections\CookieListCollection.cs" />
@@ -266,6 +267,8 @@
     <Compile Include="Services\MappingActions\StandardProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\IHasError.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\FrameworkProviderResultItemViewModel.cs" />
@@ -291,6 +294,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboard\Overview.generated.cs">
+      <DependentUpon>Overview.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Apprenticeship\Standard.generated.cs">
       <AutoGen>True</AutoGen>
@@ -529,6 +537,10 @@
       <LastGenOutput>Start.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Shared\_ScriptsFooter.cshtml" />
+    <Content Include="Views\Dashboard\Overview.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Overview.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
