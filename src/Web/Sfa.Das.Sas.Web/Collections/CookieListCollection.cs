@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Sfa.Das.Sas.Web.Repositories;
+using Sfa.Das.Sas.Core.Collections;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
-    public class CookieWebStore : IWebStore<int>
+    public class CookieListCollection : IListCollection<int>
     {
-        public ICollection<int> FindAllItems(string listName)
+        public ICollection<int> GetAllItems(string listName)
         {
             var listCookie = GetListCookie(listName);
             return GetListItems(listCookie);
@@ -38,20 +38,18 @@ namespace Sfa.Das.Sas.Web.Collections
 
             var listItems = GetListItems(listCookie);
 
-            listItems.RemoveAll(x => x.Equals(item));
+            listItems.Remove(item);
+
+            if (!listItems.Any())
+            {
+                RemoveList(listName);
+                return;
+            }
 
             listItems.Sort();
 
             var listString = CovertItemListToString(listItems);
-
-            if (string.IsNullOrEmpty(listString))
-            {
-                RemoveList(listName);
-            }
-            else
-            {
-                AddListToResponse(listName, listString);
-            }
+            AddListToResponse(listName, listString);
         }
 
         public void RemoveList(string listName)
@@ -111,16 +109,16 @@ namespace Sfa.Das.Sas.Web.Collections
             return listCookie;
         }
 
-        private static string CovertItemListToString(IEnumerable<int> listItems)
+        private static string CovertItemListToString(List<int> listItems)
         {
-            var items = listItems as int[] ?? listItems.ToArray();
-            if (!items.Any())
+            if (!listItems.Any())
             {
                 return string.Empty;
             }
 
-            var listString = items.Select(x => x.ToString())
+            var listString = listItems.Select(x => x.ToString())
                 .Aggregate((x1, x2) => x1 + "," + x2);
+
             return listString;
         }
     }

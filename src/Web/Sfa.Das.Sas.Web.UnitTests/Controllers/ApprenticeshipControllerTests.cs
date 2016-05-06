@@ -7,12 +7,13 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Models;
-using Sfa.Das.Sas.Web.Repositories;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
@@ -99,7 +100,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
             
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IWebStore<int>>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IListCollection<int>>().Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
@@ -204,7 +205,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
                                             .Returns(new StandardViewModel());
 
-            var mockCookieRepository = new Mock<IWebStore<int>>();
+            var mockCookieRepository = new Mock<IListCollection<int>>();
             var controller = new ApprenticeshipController(
                 null,
                 mockStandardRepository.Object,
@@ -236,7 +237,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
                                             .Returns(new StandardViewModel());
 
-            var mockCookieRepository = new Mock<IWebStore<int>>();
+            var mockCookieRepository = new Mock<IListCollection<int>>();
             var controller = new ApprenticeshipController(
                 null,
                 mockStandardRepository.Object,
@@ -264,7 +265,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockStandardRepository = new Mock<IGetStandards>();
             mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>()));
             
-            var mockCookieRepository = new Mock<IWebStore<int>>();
+            var mockCookieRepository = new Mock<IListCollection<int>>();
             var controller = new ApprenticeshipController(
                 null,
                 mockStandardRepository.Object,
@@ -301,7 +302,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
                                             .Returns(new StandardViewModel());
 
-            var mockCookieRepository = new Mock<IWebStore<int>>();
+            var mockCookieRepository = new Mock<IListCollection<int>>();
             var controller = new ApprenticeshipController(
                 null,
                 mockStandardRepository.Object,
@@ -313,7 +314,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             AddUrlMocking(controller, "http://www.abba.co.uk");
 
-            mockCookieRepository.Setup(x => x.FindAllItems(ApprenticeshipController.StandardsShortListCookieName))
+            mockCookieRepository.Setup(x => x.GetAllItems(ApprenticeshipController.StandardsShortListCookieName))
                                 .Returns(new List<int>(shortListItems));
 
             // Act
@@ -322,10 +323,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(viewModel);
-            mockCookieRepository.Verify(x => x.FindAllItems(ApprenticeshipController.StandardsShortListCookieName));
-            Assert.AreEqual(expectedResult, viewModel.IsShortListed);
+            mockCookieRepository.Verify(x => x.GetAllItems(ApprenticeshipController.StandardsShortListCookieName));
+            Assert.AreEqual(expectedResult, viewModel.IsShortlisted);
         }
-
+        
         private static void AddUrlMocking(ApprenticeshipController controller, string url)
         {
             var mockRequest = new Mock<HttpRequestBase>();

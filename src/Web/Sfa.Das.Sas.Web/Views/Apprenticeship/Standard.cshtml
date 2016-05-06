@@ -92,7 +92,7 @@
                 </div>
                 <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search" />
     }
-    @GetShortListLink(@Model.StandardId, @Model.IsShortListed)
+    @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
 }
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
@@ -116,7 +116,7 @@
     }
 }
 
-@helper GetShortListLink(int id, bool isShortlisted)
+@helper GetShortlistLink(int id, bool isShortlisted)
 {
     if (isShortlisted)
     {

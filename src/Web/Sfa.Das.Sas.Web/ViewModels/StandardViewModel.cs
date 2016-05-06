@@ -35,6 +35,6 @@
 
         public string AssessmentPlanPdfUrlTitle { get; set; }
 
-        public bool IsShortListed { get; set; }
+        public bool IsShortlisted { get; set; }
     }
 }
