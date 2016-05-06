@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -35,8 +33,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             IGetFrameworks getFrameworks,
             ILog logger,
             IMappingService mappingService,
-            IProfileAStep profiler)
-            IMappingService mappingService, 
+            IProfileAStep profiler,
             IWebStore<int> webStore)
         {
             _searchService = searchService;
@@ -86,10 +83,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var shortListStandards = _webStore.FindAllItems(StandardsShortListCookieName);
-            
+
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
-            viewModel.IsShortListed = shortListStandards.Contains(id);
+            viewModel.IsShortListed = shortListStandards?.Contains(id) ?? false;
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 

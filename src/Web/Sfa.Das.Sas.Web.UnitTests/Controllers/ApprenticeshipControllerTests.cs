@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         public void Search_WhenNavigateTo_ShouldReturnAViewResult()
         {
             // Arrange
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null, new Mock<IProfileAStep>().Object, null);
 
             // Act
             ViewResult result = controller.Search() as ViewResult;
@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultItemViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultItemViewModel());
 
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
 
             // Act
             ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultViewModel());
 
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
 
             // Act
             ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -98,8 +98,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
-
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, null);
+            
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IWebStore<int>>().Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
@@ -143,7 +143,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object, null, mockMappingServices.Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
@@ -165,7 +165,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
             var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
 
             HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false");
 
@@ -183,7 +183,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
             var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
 
             HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1, "false");
 
@@ -211,6 +211,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 null,
                 null,
                 mockMappingServices.Object,
+                new Mock<IProfileAStep>().Object,
                 mockCookieRepository.Object);
 
             const int standardId = 5;
@@ -242,6 +243,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 null,
                 null,
                 mockMappingServices.Object,
+                new Mock<IProfileAStep>().Object,
                 mockCookieRepository.Object);
 
             const int standardId = 5;
@@ -269,6 +271,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 null,
                 null,
                 null,
+                new Mock<IProfileAStep>().Object,
                 mockCookieRepository.Object);
 
             const int standardId = 5;
@@ -305,6 +308,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 null,
                 null,
                 mockMappingServices.Object,
+                new Mock<IProfileAStep>().Object,
                 mockCookieRepository.Object);
 
             AddUrlMocking(controller, "http://www.abba.co.uk");
