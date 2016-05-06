@@ -176,29 +176,42 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n");
 
 #line 94 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
+    
+
+#line default
+#line hidden
+
+#line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
+WriteTo(__razor_helper_writer, GetShortListLink(@Model.StandardId, @Model.IsShortListed));
+
+
+#line default
+#line hidden
+
+#line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                              
 
 
 #line default
 #line hidden
 });
 
-#line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 96 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 97 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 98 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 98 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 99 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
-
 
 
 #line default
@@ -216,14 +229,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4388), Tuple.Create("\"", 4396)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4450), Tuple.Create("\"", 4458)
 
 #line 103 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4393), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 4455), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4393), false)
+, 4455), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -239,7 +252,6 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
 #line 104 "..\..\Views\Apprenticeship\Standard.cshtml"
-
     }
 
 
@@ -247,19 +259,19 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 106 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 105 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 108 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 107 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 109 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 108 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(title))
     {
@@ -267,35 +279,35 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <li>\r\n                <a");
+WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4584), Tuple.Create("\"", 4598)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4636), Tuple.Create("\"", 4650)
 
-#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4591), Tuple.Create<System.Object, System.Int32>(pdfUrl
+#line 112 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 4643), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4591), false)
+, 4643), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "                    ");
+WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 114 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n                </a>\r\n            </li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n");
 
 
-#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 116 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
 
 
@@ -303,7 +315,61 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                </a>\r\n            <
 #line hidden
 });
 
-#line 118 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
+}
+#line default
+#line hidden
+
+#line 119 "..\..\Views\Apprenticeship\Standard.cshtml"
+public System.Web.WebPages.HelperResult GetShortListLink(int id, bool isShortlisted)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 120 "..\..\Views\Apprenticeship\Standard.cshtml"
+ 
+    if (isShortlisted)
+    {
+        
+
+#line default
+#line hidden
+
+#line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "StandardShortList", new {id=@id, listAction="remove"}, new {@class="link"}));
+
+
+#line default
+#line hidden
+
+#line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                                                              
+    }
+    else
+    {
+        
+
+#line default
+#line hidden
+
+#line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "StandardShortList", new { id=@id, listAction = "save" }, new { @class = "link" }));
+
+
+#line default
+#line hidden
+
+#line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                                                                       
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 129 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
@@ -554,6 +620,8 @@ WriteLiteral("            ");
             #line default
             #line hidden
 WriteLiteral("\r\n\r\n        </section>\r\n\r\n</main>\r\n\r\n");
+
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 

@@ -215,6 +215,8 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StartController.cs" />
+    <Compile Include="Collections\CookieWebStore.cs" />
+    <Compile Include="Collections\IWebStore.cs" />
     <Compile Include="Services\IProviderViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
