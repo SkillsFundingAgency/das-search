@@ -15,10 +15,13 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
 
-        public PostCodesIOLocator(IRetryWebRequests retryService, ILog logger)
+        private readonly IProfileAStep _profiler;
+
+        public PostCodesIOLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler)
         {
             _retryService = retryService;
             _logger = logger;
+            _profiler = profiler;
         }
 
         public async Task<Coordinate> GetLatLongFromPostCode(string postcode)
@@ -28,6 +31,8 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
             try
             {
+                using (_profiler.CreateStep("Postcode.IO lookup"))
+                {
                     var response = await _retryService.RetryWeb(() => MakeRequestAsync(sUrl), CouldntConnect);
 
                     if (response.IsSuccessStatusCode)
@@ -41,6 +46,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                     }
 
                     return null;
+                }
             }
             catch (Exception ex)
             {

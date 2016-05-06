@@ -10,9 +10,13 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using Sfa.Das.Sas.Core.Configuration;
+
     public sealed class ProviderController : Controller
     {
         private readonly IProviderViewModelFactory _viewModelFactory;
+
+        private readonly IConfigurationSettings _settings;
 
         private readonly ILog _logger;
 
@@ -24,12 +28,14 @@ namespace Sfa.Das.Sas.Web.Controllers
             IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
-            IProviderViewModelFactory viewModelFactory)
+            IProviderViewModelFactory viewModelFactory,
+            IConfigurationSettings settings)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
             _viewModelFactory = viewModelFactory;
+            _settings = settings;
         }
 
         [HttpGet]
@@ -88,6 +94,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 return new HttpNotFoundResult(message);
             }
+
+            viewModel.SurveyUrl = _settings.SurveyUrl.ToString();
 
             if (viewModel.Training == ApprenticeshipTrainingType.Standard)
             {

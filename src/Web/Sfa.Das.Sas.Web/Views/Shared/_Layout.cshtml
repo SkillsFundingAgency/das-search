@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using StackExchange.Profiling
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,16 +45,17 @@
         @Html.Partial("_Analytics")
     </head>
 
-    <body>
-    @Html.Action("Header", "Shared")
+<body>
+@*@MiniProfiler.RenderIncludes()*@
+@Html.Action("Header", "Shared")
 
-    <div class="container body-content">
-            @RenderBody()
-        </div>
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<div class="container body-content">
+    @RenderBody()
+</div>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-    @Html.Action("Footer", "Shared")
+@Html.Action("Footer", "Shared")
 
-    @Html.Partial("_ScriptsFooter")
-    </body>
+@Html.Partial("_ScriptsFooter")
+</body>
 </html>

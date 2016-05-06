@@ -24,6 +24,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IMappingService _mappingService;
         private readonly IWebStore<int> _webStore;
 
+        private readonly IProfileAStep _profiler;
+
         private readonly IApprenticeshipSearchService _searchService;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
@@ -32,6 +34,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
             ILog logger,
+            IMappingService mappingService,
+            IProfileAStep profiler)
             IMappingService mappingService, 
             IWebStore<int> webStore)
         {
@@ -40,6 +44,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             _getFrameworks = getFrameworks;
             _logger = logger;
             _mappingService = mappingService;
+            _profiler = profiler;
             _webStore = webStore;
         }
 
@@ -51,9 +56,18 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(StandardSearchCriteria criteria)
         {
-            var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+            ApprenticeshipSearchResults searchResults;
+            ApprenticeshipSearchResultViewModel viewModel;
 
-            var viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
+            using (_profiler.CreateStep("Search by keyword"))
+            {
+                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+            }
+
+            using (_profiler.CreateStep("Map to view model"))
+            {
+                viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
+            }
 
             return View(viewModel);
         }
