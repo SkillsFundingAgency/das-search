@@ -18,6 +18,10 @@ namespace Sfa.Das.Sas.Infrastructure.Configuration
 
         public Uri SurveyUrl => new Uri(ConfigurationManager.AppSettings["SurveyUrl"]);
 
+        // Will set the use secure cookies to true if no valid false value is found (secure by default) 
+        public bool UseSecureCookies => !ConfigurationManager.AppSettings["SecureCookies"]
+                                                             .Equals("false", StringComparison.InvariantCultureIgnoreCase);
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = ConfigurationManager.AppSettings["ElasticServerUrls"].Split(',');

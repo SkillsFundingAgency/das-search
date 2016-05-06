@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Sfa.Das.Sas.Core.Collections;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
     public class CookieListCollection : IListCollection<int>
     {
+        private readonly IConfigurationSettings _settings;
+
+        public CookieListCollection(IConfigurationSettings settings)
+        {
+            _settings = settings;
+        }
+
         public ICollection<int> GetAllItems(string listName)
         {
             var listCookie = GetListCookie(listName);
@@ -91,11 +99,13 @@ namespace Sfa.Das.Sas.Web.Collections
             return listItems;
         }
 
-        private static void AddListToResponse(string listName, string listString)
+        private void AddListToResponse(string listName, string listString)
         {
             var responseCookie = new HttpCookie(listName)
             {
-                Value = listString
+                Value = listString,
+                HttpOnly = true,
+                Secure = _settings.UseSecureCookies
             };
 
             HttpContext.Current.Response.Cookies.Add(responseCookie);
