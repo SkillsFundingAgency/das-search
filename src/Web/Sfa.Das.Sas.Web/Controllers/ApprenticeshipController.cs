@@ -51,13 +51,18 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
 
+            if (viewModel == null)
+            {
+                return View((ApprenticeshipSearchResultViewModel)null);
+            }
+
             double lastPage = 0;
             if (viewModel.ResultsToTake != 0)
             {
                 lastPage = Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
             }
 
-            if (viewModel.TotalResults != 0 && !viewModel.Results.Any())
+            if (viewModel?.TotalResults != 0 && !viewModel.Results.Any())
             {
                 var url = Url.Action(
                     "SearchResults",
