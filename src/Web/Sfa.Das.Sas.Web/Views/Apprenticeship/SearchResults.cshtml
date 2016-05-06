@@ -43,6 +43,8 @@
                     </dl>
                 </article>
             }
+                @GetPaginationBackLink()
+                @GetPaginationNextLink()
         </div>
     </div>
 </main>
@@ -54,6 +56,31 @@
             SearchAndShortlist.analytics.pushEvent("Apprenticeship Search", "No results", "Search");
         }
     </script>
+}
+
+@helper GetPaginationBackLink()
+{
+    if (Model.ActualPage != 0)
+    {
+        var previousPage = @Model.ActualPage - 1;
+        var title = $"Previous page {@previousPage} of {@Model.LastPage}";
+        <p>
+            @Html.ActionLink(title, "SearchResults", "Apprenticeship", new { @keywords = Model.SearchTerm, page = previousPage }, null)
+        </p>
+    }
+}
+
+
+@helper GetPaginationNextLink()
+{
+    if (Model.ActualPage != Model.LastPage)
+    {
+        var nextPage = @Model.ActualPage + 1;
+        var title = $"Next page {@nextPage} of {@Model.LastPage}";
+        <p>
+            @Html.ActionLink(title, "SearchResults", "Apprenticeship", new { @keywords = Model.SearchTerm, page = nextPage }, null)
+        </p>
+}
 }
 
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)

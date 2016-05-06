@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
@@ -46,6 +47,21 @@ namespace Sfa.Das.Sas.Web.Controllers
             var searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
+
+            var lastPage = (int)viewModel.TotalResults / viewModel.ResultsToTake;
+
+            if (!viewModel.Results.Any() && viewModel.TotalResults != 0)
+            {
+                var url = Url.Action(
+                    "SearchResults",
+                    "Apprenticeship",
+                    new { keywords = criteria?.Keywords, page = lastPage });
+                return new RedirectResult(url);
+            }
+
+            viewModel.ActualPage = criteria.Page;
+
+            viewModel.LastPage = lastPage;
 
             return View(viewModel);
         }

@@ -29,14 +29,14 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
         }
 
         [Test]
-        public void ShouldDefaultTakeTo100When0()
+        public void ShouldDefaultTakeTo10When0()
         {
             _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
             var standardSearchProvider = new ApprenticeshipSearchService(_mockSearchProvider.Object, _mockLogger.Object);
 
             standardSearchProvider.SearchByKeyword("test", 0, 0);
 
-            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 0, 100));
+            _mockSearchProvider.Verify(x => x.SearchByKeyword("test", 0, 10));
         }
     }
 }

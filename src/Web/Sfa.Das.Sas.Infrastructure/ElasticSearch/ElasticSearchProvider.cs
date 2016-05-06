@@ -33,6 +33,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return new ApprenticeshipSearchResults
             {
                 TotalResults = results.HitsMetaData.Total,
+                ResultsToTake = take,
                 SearchTerm = formattedKeywords,
                 Results = results.Documents,
                 HasError = results.ApiCall.HttpStatusCode != 200
