@@ -16,5 +16,7 @@ namespace Sfa.Das.Sas.Core.Configuration
         Uri SurveyUrl { get; }
 
         bool UseSecureCookies { get; }
+
+        string CookieDomain { get; }
     }
 }

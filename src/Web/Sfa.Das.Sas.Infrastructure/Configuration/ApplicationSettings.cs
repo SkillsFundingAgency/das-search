@@ -22,6 +22,8 @@ namespace Sfa.Das.Sas.Infrastructure.Configuration
         public bool UseSecureCookies => !ConfigurationManager.AppSettings["SecureCookies"]
                                                              .Equals("false", StringComparison.InvariantCultureIgnoreCase);
 
+        public string CookieDomain => ConfigurationManager.AppSettings["CookieDomain"];
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = ConfigurationManager.AppSettings["ElasticServerUrls"].Split(',');

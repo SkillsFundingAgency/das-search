@@ -15,7 +15,6 @@ namespace Sfa.Das.Sas.Web.Collections
         {
             _settings = settings;
         }
-
         public ICollection<int> GetAllItems(string listName)
         {
             var listCookie = GetListCookie(listName);
@@ -105,7 +104,8 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 Value = listString,
                 HttpOnly = true,
-                Secure = _settings.UseSecureCookies
+                Secure = _settings.UseSecureCookies,
+                Domain = _settings.CookieDomain
             };
 
             HttpContext.Current.Response.Cookies.Add(responseCookie);
