@@ -12,10 +12,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System.Collections.Generic;
 
-    using global::Elasticsearch.Net;
-
-    using NLog.Filters;
-
     public sealed class ElasticsearchProvider : ISearchProvider
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
@@ -97,7 +93,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 var trainingOptionsAggregation = GetTraingOptionsAggregation<StandardProviderSearchResultsItem>(documents.Any(), qryStrAggregation);
 
                 return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
-
             }
         }
 
@@ -213,14 +208,14 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             var dm = deliveryModes == null || !deliveryModes.Any() ? "*" : string.Join(" ", deliveryModes);
 
             return ToJson(new
-                          {
-                            constant_score = new
-                            {
-                                filter = new
-                                {
-                                    bool_field = new
-                                        {
-                                           must = new[]
+            {
+                constant_score = new
+                {
+                    filter = new
+                    {
+                        bool_field = new
+                        {
+                            must = new[]
                                            {
                                             new
                                             {
@@ -231,24 +226,24 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                                     query_string = new { default_field = specificPart, query = code, default_operator = "and" }
                                                 }
                                            },
-                                           filter = new
-                                           {
-                                               geo_shape = new
-                                               {
-                                                   location = new
-                                                    {
-                                                       shape = new
-                                                        {
-                                                          type = "point",
-                                                          coordinates = new[] { location.Lon, location.Lat }
-                                                       }
-                                                    }
-                                               }
-                                           }
+                            filter = new
+                            {
+                                geo_shape = new
+                                {
+                                    location = new
+                                    {
+                                        shape = new
+                                        {
+                                            type = "point",
+                                            coordinates = new[] { location.Lon, location.Lat }
                                         }
+                                    }
                                 }
                             }
-                          }).Replace("bool_field", "bool");
+                        }
+                    }
+                }
+            }).Replace("bool_field", "bool");
         }
 
         private static readonly Func<dynamic, string> ToJson = d => Newtonsoft.Json.JsonConvert.SerializeObject(d);
