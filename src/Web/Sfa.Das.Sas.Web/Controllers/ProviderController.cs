@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var searchResults =
-                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode);
+                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.DeliveryModes);
 
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var searchResults =
-                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode);
+                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.DeliveryModes);
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);

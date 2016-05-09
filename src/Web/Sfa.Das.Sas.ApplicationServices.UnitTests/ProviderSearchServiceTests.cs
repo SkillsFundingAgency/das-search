@@ -20,7 +20,7 @@
         {
             var service = new ProviderSearchService(null, null, null, null, null);
 
-            var result = await service.SearchByStandardPostCode(123, postcode);
+            var result = await service.SearchByStandardPostCode(123, postcode, null);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -37,7 +37,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByStandardPostCode(testStandardId, postcode);
+            var result = await service.SearchByStandardPostCode(testStandardId, postcode, null);
 
             Assert.That(result.StandardId, Is.EqualTo(testStandardId));
         }
@@ -58,12 +58,12 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode);
+            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, null);
 
             Assert.That(result.Hits, Is.EqualTo(stubSearchResults));
 
             mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            mockSearchProvider.Verify(x => x.SearchByStandardLocation(testStandardId, testCoordinates), Times.Once);
+            mockSearchProvider.Verify(x => x.SearchByStandardLocation(testStandardId, testCoordinates, null), Times.Once);
         }
 
         [Test]
@@ -81,7 +81,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode);
+            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, null);
 
             result.TotalResults.Should().Be(0);
             result.StandardId.Should().Be(123);
@@ -101,7 +101,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByStandardPostCode(123, "AS2 3SS");
+            var result = await service.SearchByStandardPostCode(123, "AS2 3SS", null);
 
             Assert.That(result.TotalResults, Is.EqualTo(testTotalResults));
         }
@@ -119,7 +119,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByStandardPostCode(123, "AS3 4AS");
+            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", null);
 
             Assert.That(result.StandardName, Is.EqualTo(testTitle));
         }
@@ -128,7 +128,7 @@
         public async Task SearchByStandardPostCodeShouldIndicateThereWasAnErrorIfSearchThrowsAnException()
         {
             var mockSearchProvider = CreateMockStandardSearchProvider();
-            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Throws<SearchException>();
+            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<IEnumerable<string>>())).Throws<SearchException>();
             var mockStandardRepository = CreateMockStandardRepository();
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
@@ -136,7 +136,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByStandardPostCode(123, "AS3 4AS");
+            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", null);
 
             Assert.That(result.HasError, Is.True);
         }
@@ -147,7 +147,7 @@
         {
             var service = new ProviderSearchService(null, null, null, null, null);
 
-            var result = await service.SearchByFrameworkPostCode(123, postcode);
+            var result = await service.SearchByFrameworkPostCode(123, postcode, null);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -164,7 +164,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, postcode);
+            var result = await service.SearchByFrameworkPostCode(testFrameworkId, postcode, null);
 
             result.FrameworkId.Should().Be(testFrameworkId);
         }
@@ -185,12 +185,12 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode);
+            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, null);
 
             result.Hits.Should().BeSameAs(stubSearchResults);
 
             mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            mockSearchProvider.Verify(x => x.SearchByFrameworkLocation(testFrameworkId, testCoordinates), Times.Once);
+            mockSearchProvider.Verify(x => x.SearchByFrameworkLocation(testFrameworkId, testCoordinates, null), Times.Once);
         }
 
         [Test]
@@ -208,7 +208,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode);
+            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, null);
 
             result.TotalResults.Should().Be(0);
             result.FrameworkId.Should().Be(123);
@@ -228,7 +228,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS2 3SS");
+            var result = await service.SearchByFrameworkPostCode(123, "AS2 3SS", null);
 
             result.TotalResults.Should().Be(testTotalResults);
         }
@@ -246,7 +246,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS");
+            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", null);
 
             result.FrameworkName.Should().Be(frameworkName);
         }
@@ -255,7 +255,7 @@
         public async Task SearchByFrameworkPostCodeShouldIndicateThereWasAnErrorIfSearchThrowsAnException()
         {
             var mockSearchProvider = CreateMockFrameworkSearchProvider();
-            mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Throws<SearchException>();
+            mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), null)).Throws<SearchException>();
             var mockStandardRepository = CreateMockStandardRepository();
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
@@ -263,7 +263,7 @@
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object);
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS");
+            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", null);
 
             Assert.That(result.HasError, Is.True);
         }
@@ -273,7 +273,7 @@
             var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
 
             var mockSearchProvider = new Mock<ISearchProvider>();
-            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Returns(searchResults);
+            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<IEnumerable<string>>())).Returns(searchResults);
 
             return mockSearchProvider;
         }
@@ -288,7 +288,7 @@
             var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
 
             var mockSearchProvider = new Mock<ISearchProvider>();
-            mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>())).Returns(searchResults);
+            mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<IEnumerable<string>>())).Returns(searchResults);
 
             return mockSearchProvider;
         }

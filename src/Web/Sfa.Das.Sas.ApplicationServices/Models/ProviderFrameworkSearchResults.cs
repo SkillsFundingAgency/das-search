@@ -27,5 +27,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public bool PostCodeMissing { get; set; }
 
         public int FrameworkLevel { get; set; }
+
+        public IEnumerable<string> SelectedTrainingOptions { get; set; }
+
+        public Dictionary<string, long?> TrainingOptionsAggregation { get; set; }
     }
 }

@@ -62,8 +62,8 @@ namespace Sfa.Das.Sas.Web.Services
                 cfg.CreateMap<Framework, FrameworkViewModel>();
 
                 // Provider search
-                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>();
-                cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>();
+                cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>().AfterMap<ProviderStandardSearchResultViewModelMappingAction>();
+                cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>().AfterMap<ProviderFrameworkSearchResultViewModelMappingAction>();
                 cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>().AfterMap<FrameworkProviderResultItemViewModelMappingAction>();
                 cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>().AfterMap<StandardProviderResultItemViewModelMappingAction>();
 

@@ -1,4 +1,5 @@
 ﻿
+@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.ProviderStandardSearchResultViewModel
 
 @{
@@ -27,8 +28,19 @@
                 Html.RenderPartial("_StandardProviderInformation");
             }
         </div>
-
+        
         <div class="column-third">
+            @if (!Model.DeliveryModes.IsNullOrEmpty())
+            {
+                <form method="get" action="@Request.Url.AbsolutePath">
+                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId"/>
+                    @{
+                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                    }
+                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
+                </form>
+            }
         </div>
     </div>
 </main>

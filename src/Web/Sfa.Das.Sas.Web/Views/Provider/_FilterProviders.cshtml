@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Sfa.Das.Sas.Web.ViewModels.DeliveryModeViewModel>
+
+<fieldset>
+    <legend>Training options</legend>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <label>
+                    <input value="@item.Value" name="DeliveryModes" type="checkbox" @Html.Raw(item.Checked ? "checked" : "")/>
+                    @item.Title (@item.Count)
+                </label>
+            </li>
+        }
+    </ul>
+    <details>
+        <summary>Explain training options</summary>
+        <div class="panel panel-border-narrow">
+            <p>
+                <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
+            </p>
+            <p>
+                <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
+            </p>
+            <p>
+                <span class="bold-small">At your location:</span> the provider comes to your workplace.
+            </p>
+        </div>
+    </details>
+</fieldset>

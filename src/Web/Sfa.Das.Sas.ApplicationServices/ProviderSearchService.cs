@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             _logger = logger;
         }
 
-        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode)
+        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -56,23 +56,22 @@ namespace Sfa.Das.Sas.ApplicationServices
                         HasError = false
                     };
                 }
-                else
+                _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
+
+                var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, deliveryModes);
+
+                var result = new ProviderStandardSearchResults
                 {
-                    _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
+                    TotalResults = searchResults.Total,
+                    StandardId = standardId,
+                    StandardName = standardName,
+                    PostCode = postCode,
+                    Hits = searchResults.Hits,
+                    TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
+                    SelectedTrainingOptions = deliveryModes
+                };
 
-                    var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates);
-
-                    var result = new ProviderStandardSearchResults
-                    {
-                        TotalResults = searchResults.Total,
-                        StandardId = standardId,
-                        StandardName = standardName,
-                        PostCode = postCode,
-                        Hits = searchResults.Hits
-                    };
-
-                    return result;
-                }
+                return result;
             }
             catch (SearchException ex)
             {
@@ -90,7 +89,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
-        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode)
+        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -105,16 +104,19 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
                 var total = 0L;
+                Dictionary<string, long?> trainingOptionsAggregation;
 
                 if (coordinates != null)
                 {
-                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates);
+                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, deliveryModes);
                     hits = searchResults.Hits;
                     total = searchResults.Total;
+                    trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
                 }
                 else
                 {
                     hits = new IApprenticeshipProviderSearchResultsItem[0];
+                    trainingOptionsAggregation = new Dictionary<string, long?>();
                 }
 
                 return new ProviderFrameworkSearchResults
@@ -127,7 +129,9 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PathwayName = framework?.PathwayName,
                     FrameworkLevel = framework?.Level ?? 0,
                     PostCode = postCode,
-                    Hits = hits
+                    Hits = hits,
+                    TrainingOptionsAggregation = trainingOptionsAggregation,
+                    SelectedTrainingOptions = deliveryModes
                 };
             }
             catch (SearchException ex)

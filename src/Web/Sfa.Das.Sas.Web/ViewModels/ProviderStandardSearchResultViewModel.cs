@@ -2,6 +2,8 @@
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
+    using System.Collections;
+
     public class ProviderStandardSearchResultViewModel
     {
         public long TotalResults { get; set; }
@@ -17,5 +19,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool HasError { get; set; }
 
         public bool PostCodeMissing { get; set; }
+
+        public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
     }
 }

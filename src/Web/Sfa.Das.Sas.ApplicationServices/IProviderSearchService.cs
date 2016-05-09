@@ -3,9 +3,12 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices
 {
+    using System.Collections;
+    using System.Collections.Generic;
+
     public interface IProviderSearchService
     {
-        Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode);
-        Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode);
+        Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, IEnumerable<string> deliveryModes);
+        Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, IEnumerable<string> deliveryModes);
     }
 }
