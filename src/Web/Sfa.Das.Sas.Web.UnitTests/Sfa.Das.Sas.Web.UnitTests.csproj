@@ -145,6 +145,7 @@
     <Compile Include="Services\ForMappingStandardToViewModel.cs" />
     <Compile Include="Services\ForProviderSearchMappingHelper.cs" />
     <Compile Include="Views\ForApprenticeshipSearchResultPage.cs" />
+    <Compile Include="Views\Provider\FilterProviderPageTest.cs" />
     <Compile Include="Views\Provider\FrameworkProviderSearchResultPage.cs" />
     <Compile Include="Views\Provider\StandardProviderSearchResultPage.cs" />
     <Compile Include="Views\Provider\ProviderDetailsPage.cs" />
