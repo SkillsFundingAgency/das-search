@@ -49,7 +49,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 62 "..\..\Views\Apprenticeship\SearchResults.cshtml"
  
-    if (Model.ActualPage != 1)
+    if (Model.ActualPage > 1)
     {
         var previousPage = @Model.ActualPage - 1;
         var title = $"Previous page {@previousPage} of {@Model.LastPage}";
@@ -97,7 +97,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 75 "..\..\Views\Apprenticeship\SearchResults.cshtml"
  
-    if (Model.ActualPage != Model.LastPage)
+    if (Model.ActualPage < Model.LastPage)
     {
         var nextPage = @Model.ActualPage + 1;
         var title = $"Next page {@nextPage} of {@Model.LastPage}";
@@ -251,14 +251,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3417), Tuple.Create("\"", 3428)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 3415), Tuple.Create("\"", 3426)
 
 #line 107 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 3425), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3423), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3425), false)
+, 3423), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");

@@ -60,7 +60,7 @@
 
 @helper GetPaginationBackLink()
 {
-    if (Model.ActualPage != 1)
+    if (Model.ActualPage > 1)
     {
         var previousPage = @Model.ActualPage - 1;
         var title = $"Previous page {@previousPage} of {@Model.LastPage}";
@@ -73,7 +73,7 @@
 
 @helper GetPaginationNextLink()
 {
-    if (Model.ActualPage != Model.LastPage)
+    if (Model.ActualPage < Model.LastPage)
     {
         var nextPage = @Model.ActualPage + 1;
         var title = $"Next page {@nextPage} of {@Model.LastPage}";

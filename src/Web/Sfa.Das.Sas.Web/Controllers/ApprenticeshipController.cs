@@ -61,7 +61,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
             }
 
-            if (viewModel?.TotalResults != 0 && !viewModel.Results.Any())
+            if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())
             {
                 var url = Url.Action(
                     "SearchResults",
