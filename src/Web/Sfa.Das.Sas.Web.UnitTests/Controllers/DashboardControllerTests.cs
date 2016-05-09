@@ -48,5 +48,26 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockGetStandards.Verify(x => x.GetStandardById(standardId));
             Assert.AreEqual(standardId, viewModel.Standards.First().Id);
         }
+
+        [Test]
+        public void ShouldNotShowStandardsThatCannotBeFound()
+        {
+            //Assign
+            var standardId = 3;
+            _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
+                                .Returns(new[] { 45, standardId, 83 });
+            _mockGetStandards.Setup(x => x.GetStandardById(standardId))
+                             .Returns(new Standard() { StandardId = standardId });
+            _mockGetStandards.Setup(x => x.GetStandardById(45));
+            _mockGetStandards.Setup(x => x.GetStandardById(83));
+
+            //Act
+            var result = _sut.Overview() as ViewResult;
+            var viewModel = result?.Model as DashboardViewModel;
+
+            //Assert
+            Assert.AreEqual(1, viewModel.Standards.Count());
+            Assert.AreEqual(standardId, viewModel.Standards.First().Id);
+        }
     }
 }

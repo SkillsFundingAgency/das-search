@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.UnitTests.Extensions;
@@ -27,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             _controller = new ShortlistController(
                 _mockStandardRepository.Object,
-                null,
+                new Mock<ILog>().Object,
                 _mockCookieRepository.Object);
 
            _controller.SetRequestUrl(RequestUrl);
@@ -61,21 +62,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
             _mockCookieRepository.Verify(x => x.RemoveItem(Constants.StandardsShortListCookieName, StandardId), Times.Once());
-        }
-
-        [Test]
-        public void ShouldNotAddStandardToShortListIfStandardCannotBeFound()
-        {
-            // Arrange
-            _mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>()));
-            _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListCookieName, StandardId));
-
-            // Act
-            var result = _controller.AddStandard(StandardId);
-
-            // Assert
-            NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.AddItem(Constants.StandardsShortListCookieName, StandardId), Times.Never);
         }
     }
 }

@@ -21,17 +21,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             _logger = logger;
             _listCollection = listCollection;
         }
-       
+
         public ActionResult AddStandard(int id)
         {
-            var standardResult = _getStandards.GetStandardById(id);
-
-            // We only add standards that can currently be found
-            if (standardResult == null)
-            {
-                return GetReturnRedirectFromStandardShortlistAction(id);
-            }
-
+            _logger.Debug($"Adding standard {id} to shortlist cookie");
             _listCollection.AddItem(Constants.StandardsShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
@@ -39,6 +32,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult RemoveStandard(int id)
         {
+            _logger.Debug($"Removing standard {id} from shortlist cookie");
             _listCollection.RemoveItem(Constants.StandardsShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);

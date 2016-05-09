@@ -22,8 +22,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult Overview()
         {
             var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
-            var standards = shortListStandards.Select(x => _getStandards.GetStandardById(x));
-
+            var standards = shortListStandards.Select(x => _getStandards.GetStandardById(x))
+                                              .Where(s => s != null);
+            
             var shortlistStandardViewModels = standards.Select(x => new ShortlistStandardViewModel
             {
                 Id = x.StandardId,
