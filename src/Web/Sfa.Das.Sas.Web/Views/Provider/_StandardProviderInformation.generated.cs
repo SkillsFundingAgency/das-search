@@ -129,7 +129,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                                                               WriteTo(__razor_helper_writer, item.Address.County);
+                                                               WriteTo(__razor_helper_writer, item.Address.Town);
 
 
 #line default
@@ -138,7 +138,16 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                                                                                    WriteTo(__razor_helper_writer, item.Address.Postcode);
+                                                                                  WriteTo(__razor_helper_writer, item.Address.County);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " ");
+
+
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+                                                                                                       WriteTo(__razor_helper_writer, item.Address.Postcode);
 
 
 #line default

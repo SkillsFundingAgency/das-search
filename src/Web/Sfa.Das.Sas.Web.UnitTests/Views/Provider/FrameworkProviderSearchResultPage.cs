@@ -267,7 +267,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("3 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 County PostCode");
+            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 Town County PostCode");
         }
 
         [Test]
@@ -354,7 +354,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("1 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 County PostCode");
+            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 Town County PostCode");
         }
     }
 }

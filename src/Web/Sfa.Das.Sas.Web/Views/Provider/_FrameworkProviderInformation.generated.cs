@@ -151,7 +151,7 @@ WriteLiteral(" ");
 
             
             #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                    Write(item.Address.County);
+                                                                                                    Write(item.Address.Town);
 
             
             #line default
@@ -160,7 +160,16 @@ WriteLiteral(" ");
 
             
             #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                                         Write(item.Address.Postcode);
+                                                                                                                       Write(item.Address.County);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                                                                            Write(item.Address.Postcode);
 
             
             #line default

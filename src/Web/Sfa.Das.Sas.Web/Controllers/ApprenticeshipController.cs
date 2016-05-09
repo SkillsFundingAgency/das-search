@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -50,20 +51,42 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchResults(StandardSearchCriteria criteria)
+        public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
         {
             ApprenticeshipSearchResults searchResults;
             ApprenticeshipSearchResultViewModel viewModel;
+            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
 
             using (_profiler.CreateStep("Search by keyword"))
             {
-                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Skip, criteria.Take);
+                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take);
             }
 
             using (_profiler.CreateStep("Map to view model"))
             {
                 viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
             }
+
+            if (viewModel == null)
+            {
+                return View((ApprenticeshipSearchResultViewModel)null);
+            }
+
+            if (viewModel.ResultsToTake != 0)
+            {
+                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+            }
+
+            if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())
+            {
+                var url = Url.Action(
+                    "SearchResults",
+                    "Apprenticeship",
+                    new { keywords = criteria?.Keywords, page = viewModel.LastPage });
+                return new RedirectResult(url);
+            }
+
+            viewModel.ActualPage = criteria.Page;
 
             return View(viewModel);
         }

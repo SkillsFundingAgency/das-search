@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/Search.cshtml")]
-    public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.Models.StandardSearchCriteria>
+    public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.Models.ApprenticeshipSearchCriteria>
     {
         public Search()
         {

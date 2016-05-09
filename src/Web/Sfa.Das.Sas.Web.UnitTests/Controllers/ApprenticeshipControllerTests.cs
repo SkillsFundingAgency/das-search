@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
 
             // Act
-            ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
+            ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test" }) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
 
             // Act
-            ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
+            ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test" }) as ViewResult;
 
             // Assert
             Assert.NotNull(result);

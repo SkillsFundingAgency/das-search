@@ -26,16 +26,17 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _profiler = profiler;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int skip, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
-            var searchDescriptor = GetKeywordSearchDescriptor(skip, take, formattedKeywords);
+            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords);
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
             return new ApprenticeshipSearchResults
             {
-                TotalResults = results.Total,
+                TotalResults = results.HitsMetaData.Total,
+                ResultsToTake = take,
                 SearchTerm = formattedKeywords,
                 Results = results.Documents,
                 HasError = results.ApiCall.HttpStatusCode != 200
@@ -140,8 +141,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int skip, int take, string formattedKeywords)
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords)
         {
+            var skip = (page - 1) * take;
             return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("standarddocument,frameworkdocument"))

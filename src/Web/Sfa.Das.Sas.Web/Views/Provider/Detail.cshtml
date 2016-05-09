@@ -65,7 +65,7 @@
                     This is a new service and your feedback will help us improve it.<br />
                     Use the link below to take part in a short survey.
                 </p>
-                <a href="@Model.SurveyUrl" target="_blank" class="button">Take the survey</a>
+                <a href="https://www.surveymonkey.co.uk/r/F3LCBG6" target="_blank" class="button">Take the survey</a>
             </div>
             <aside class="disclaimer">
                 <h4 class="heading-small">Content disclaimer</h4>
@@ -109,7 +109,7 @@ if (@Model != null)
     else
     {
         <dd id="training-location" class="training-location">
-            @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Postcode
+            @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Town @Model.Address.Postcode
         </dd>
     }
 }

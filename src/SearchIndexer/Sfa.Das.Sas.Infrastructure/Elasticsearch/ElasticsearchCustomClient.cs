@@ -131,7 +131,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
             var properties = new Dictionary<string, object>
                                  {
-                                     { "Identifier", identifier },
                                      {
                                          "HttpStatusCode",
                                          apiCallDetails?.HttpStatusCode
