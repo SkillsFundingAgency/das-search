@@ -56,10 +56,9 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return View((ApprenticeshipSearchResultViewModel)null);
             }
 
-            double lastPage = 0;
             if (viewModel.ResultsToTake != 0)
             {
-                lastPage = Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
             }
 
             if (viewModel?.TotalResults != 0 && !viewModel.Results.Any())
@@ -67,13 +66,11 @@ namespace Sfa.Das.Sas.Web.Controllers
                 var url = Url.Action(
                     "SearchResults",
                     "Apprenticeship",
-                    new { keywords = criteria?.Keywords, page = lastPage });
+                    new { keywords = criteria?.Keywords, page = viewModel.LastPage });
                 return new RedirectResult(url);
             }
 
             viewModel.ActualPage = criteria.Page;
-
-            viewModel.LastPage = (int)lastPage;
 
             return View(viewModel);
         }
