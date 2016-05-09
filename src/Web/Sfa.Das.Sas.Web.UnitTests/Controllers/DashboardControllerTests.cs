@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 using Assert = NUnit.Framework.Assert;
 
@@ -34,7 +33,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             //Assign
             var standardId = 3;
-            _mockListCollection.Setup(x => x.GetAllItems(DashboardController.StandardsShortListCookieName))
+            _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
                                 .Returns(new[] { standardId });
             _mockGetStandards.Setup(x => x.GetStandardById(standardId))
                              .Returns(new Standard() { StandardId = standardId });
@@ -45,12 +44,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             //Assert
             Assert.AreEqual(1, viewModel.Standards.Count());
-            _mockListCollection.Verify(x => x.GetAllItems(DashboardController.StandardsShortListCookieName));
+            _mockListCollection.Verify(x => x.GetAllItems(Constants.StandardsShortListCookieName));
             _mockGetStandards.Verify(x => x.GetStandardById(standardId));
             Assert.AreEqual(standardId, viewModel.Standards.First().Id);
         }
-        
-        // TODO: Need to add more tests around error handling
-
     }
 }

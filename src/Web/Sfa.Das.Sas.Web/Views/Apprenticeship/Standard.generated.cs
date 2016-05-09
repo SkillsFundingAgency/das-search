@@ -337,14 +337,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 
 #line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "StandardShortList", new {id=@id, listAction="remove"}, new {@class="link"}));
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id=@id }, new {@class="link"}));
 
 
 #line default
 #line hidden
 
 #line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                              
+                                                                                                                     
     }
     else
     {
@@ -354,14 +354,14 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "Standar
 #line hidden
 
 #line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "StandardShortList", new { id=@id, listAction = "save" }, new { @class = "link" }));
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id=@id }, new { @class = "link" }));
 
 
 #line default
 #line hidden
 
 #line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                                       
+                                                                                                                         
     }
 
 

@@ -130,6 +130,8 @@
     <Compile Include="Controllers\SharedControllerTests.cs" />
     <Compile Include="Controllers\StartControllerTests.cs" />
     <Compile Include="Controllers\ProviderControllerTests.cs" />
+    <Compile Include="Controllers\ShortlistControllerTest.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
     <Compile Include="Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
     <Compile Include="Extensions\ForUriExtension.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Views\Provider\FrameworkProviderSearchResultPage.cs" />
     <Compile Include="Views\Provider\StandardProviderSearchResultPage.cs" />
     <Compile Include="Views\Provider\ProviderDetailsPage.cs" />
+    <Compile Include="Views\Dashboard\OverviewTest.cs" />
     <Compile Include="Views\StandardDetailPageTests.cs" />
     <Compile Include="Views\SearchResultMessageTests.cs" />
     <Compile Include="Views\Start\StartPageTest.cs" />

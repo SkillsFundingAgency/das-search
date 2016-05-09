@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -7,6 +6,7 @@ using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
@@ -16,8 +16,6 @@ namespace Sfa.Das.Sas.Web.Controllers
 {
     public sealed class ApprenticeshipController : Controller
     {
-        public const string StandardsShortListCookieName = "standards_shortlist";
-
         private readonly ILog _logger;
 
         private readonly IMappingService _mappingService;
@@ -83,7 +81,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortListStandards = _listCollection.GetAllItems(StandardsShortListCookieName);
+            var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
@@ -112,27 +110,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
-        }
-
-        public ActionResult StandardShortList(int id, string listAction)
-        {
-            var standardResult = _getStandards.GetStandardById(id);
-
-            if (standardResult == null || string.IsNullOrEmpty(listAction))
-            {
-                return RedirectToAction("Standard", new { id = id });
-            }
-
-            if (listAction.Equals("save", StringComparison.CurrentCultureIgnoreCase))
-            {
-                _listCollection.AddItem(StandardsShortListCookieName, id);
-            }
-            else if (listAction.Equals("remove", StringComparison.CurrentCultureIgnoreCase))
-            {
-                _listCollection.RemoveItem(StandardsShortListCookieName, id);
-            }
-
-            return RedirectToAction("Standard", new { id=id });
         }
     }
 }

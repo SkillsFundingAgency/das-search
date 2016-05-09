@@ -2,15 +2,13 @@
 using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
     public class DashboardController : Controller
     {
-        // TODO: Move this to s common class as its used in the Apprenticeship Controller as well
-        public const string StandardsShortListCookieName = "standards_shortlist";
-
         private readonly IGetStandards _getStandards;
         private readonly IListCollection<int> _listCollection;
 
@@ -23,18 +21,19 @@ namespace Sfa.Das.Sas.Web.Controllers
         // GET: Dashboard
         public ActionResult Overview()
         {
-            var shortListStandards = _listCollection.GetAllItems(StandardsShortListCookieName);
+            var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
             var standards = shortListStandards.Select(x => _getStandards.GetStandardById(x));
 
             var shortlistStandardViewModels = standards.Select(x => new ShortlistStandardViewModel
             {
                 Id = x.StandardId,
                 Title = x.Title,
+                Level = x.NotionalEndLevel
             });
 
             var viewModel = new DashboardViewModel
             {
-                Title = "Your shortlisted apprenticeship training and training providers",
+                Title = "Your apprenticeship shortlist",
                 Standards = shortlistStandardViewModels
             };
 
