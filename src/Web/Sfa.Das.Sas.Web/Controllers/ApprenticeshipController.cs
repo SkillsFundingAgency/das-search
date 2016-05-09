@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
@@ -13,23 +16,26 @@ namespace Sfa.Das.Sas.Web.Controllers
 {
     public sealed class ApprenticeshipController : Controller
     {
+        public const string StandardsShortListCookieName = "standards_shortlist";
+
         private readonly ILog _logger;
 
         private readonly IMappingService _mappingService;
+        private readonly IListCollection<int> _listCollection;
 
         private readonly IProfileAStep _profiler;
 
         private readonly IApprenticeshipSearchService _searchService;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
-
         public ApprenticeshipController(
             IApprenticeshipSearchService searchService,
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
             ILog logger,
             IMappingService mappingService,
-            IProfileAStep profiler)
+            IProfileAStep profiler,
+            IListCollection<int> listCollection)
         {
             _searchService = searchService;
             _getStandards = getStandards;
@@ -37,6 +43,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             _logger = logger;
             _mappingService = mappingService;
             _profiler = profiler;
+            _listCollection = listCollection;
         }
 
         public ActionResult Search()
@@ -76,8 +83,11 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
+            var shortListStandards = _listCollection.GetAllItems(StandardsShortListCookieName);
+
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
+            viewModel.IsShortlisted = shortListStandards?.Contains(id) ?? false;
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
@@ -102,6 +112,27 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
+        }
+
+        public ActionResult StandardShortList(int id, string listAction)
+        {
+            var standardResult = _getStandards.GetStandardById(id);
+
+            if (standardResult == null || string.IsNullOrEmpty(listAction))
+            {
+                return RedirectToAction("Standard", new { id = id });
+            }
+
+            if (listAction.Equals("save", StringComparison.CurrentCultureIgnoreCase))
+            {
+                _listCollection.AddItem(StandardsShortListCookieName, id);
+            }
+            else if (listAction.Equals("remove", StringComparison.CurrentCultureIgnoreCase))
+            {
+                _listCollection.RemoveItem(StandardsShortListCookieName, id);
+            }
+
+            return RedirectToAction("Standard", new { id=id });
         }
     }
 }

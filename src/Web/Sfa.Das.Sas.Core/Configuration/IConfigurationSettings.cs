@@ -14,5 +14,9 @@ namespace Sfa.Das.Sas.Core.Configuration
         IEnumerable<Uri> ElasticServerUrls { get; }
 
         Uri SurveyUrl { get; }
+
+        bool UseSecureCookies { get; }
+
+        string CookieDomain { get; }
     }
 }

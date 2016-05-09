@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -6,9 +7,11 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
@@ -23,7 +26,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         public void Search_WhenNavigateTo_ShouldReturnAViewResult()
         {
             // Arrange
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null, new Mock<IProfileAStep>().Object, null);
 
             // Act
             ViewResult result = controller.Search() as ViewResult;
@@ -45,7 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultItemViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultItemViewModel());
 
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
 
             // Act
             ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -67,7 +70,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultViewModel());
 
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
 
             // Act
             ViewResult result = controller.SearchResults(new StandardSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -96,8 +99,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
-
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object);
+            
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IListCollection<int>>().Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
@@ -141,7 +144,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
@@ -163,7 +166,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
             var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
 
             HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false");
 
@@ -181,7 +184,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
             var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, new Mock<IProfileAStep>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
 
             HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1, "false");
 
@@ -189,6 +192,154 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             Assert.AreEqual(404, result.StatusCode);
             Assert.AreEqual("Cannot find framework: 1", result.StatusDescription);
             moqLogger.Verify(m => m.Warn("404 - Cannot find framework: 1"));
+        }
+
+        [Test]
+        public void ShouldAddStandardToShortListIfRequested()
+        {
+            // Arrange
+            var mockStandardRepository = new Mock<IGetStandards>();
+            mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
+
+            var mockMappingServices = new Mock<IMappingService>();
+            mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
+                                            .Returns(new StandardViewModel());
+
+            var mockCookieRepository = new Mock<IListCollection<int>>();
+            var controller = new ApprenticeshipController(
+                null,
+                mockStandardRepository.Object,
+                null,
+                null,
+                mockMappingServices.Object,
+                new Mock<IProfileAStep>().Object,
+                mockCookieRepository.Object);
+
+            const int standardId = 5;
+            mockCookieRepository.Setup(x => x.AddItem(ApprenticeshipController.StandardsShortListCookieName, standardId));
+
+            // Act
+            var result = controller.StandardShortList(standardId, "save");
+
+            // Assert
+            Assert.IsNotNull(result);
+            mockCookieRepository.Verify(x => x.AddItem(ApprenticeshipController.StandardsShortListCookieName, standardId), Times.Once());
+        }
+        
+        [Test]
+        public void ShouldRemoveStandardFromShortListIfRequested()
+        {
+            // Arrange
+            var mockStandardRepository = new Mock<IGetStandards>();
+            mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
+
+            var mockMappingServices = new Mock<IMappingService>();
+            mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
+                                            .Returns(new StandardViewModel());
+
+            var mockCookieRepository = new Mock<IListCollection<int>>();
+            var controller = new ApprenticeshipController(
+                null,
+                mockStandardRepository.Object,
+                null,
+                null,
+                mockMappingServices.Object,
+                new Mock<IProfileAStep>().Object,
+                mockCookieRepository.Object);
+
+            const int standardId = 5;
+            mockCookieRepository.Setup(x => x.RemoveItem(ApprenticeshipController.StandardsShortListCookieName, standardId));
+
+            // Act
+            var result = controller.StandardShortList(standardId, "remove");
+
+            // Assert
+            Assert.IsNotNull(result);
+            mockCookieRepository.Verify(x => x.RemoveItem(ApprenticeshipController.StandardsShortListCookieName, standardId), Times.Once());
+        }
+
+        [Test]
+        public void ShouldNotAddStandardToShortListIfStandardCannotBeFound()
+        {
+            // Arrange
+            var mockStandardRepository = new Mock<IGetStandards>();
+            mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>()));
+            
+            var mockCookieRepository = new Mock<IListCollection<int>>();
+            var controller = new ApprenticeshipController(
+                null,
+                mockStandardRepository.Object,
+                null,
+                null,
+                null,
+                new Mock<IProfileAStep>().Object,
+                mockCookieRepository.Object);
+
+            const int standardId = 5;
+            mockCookieRepository.Setup(x => x.AddItem(ApprenticeshipController.StandardsShortListCookieName, standardId));
+
+            // Act
+            var result = controller.StandardShortList(standardId, "save");
+
+            // Assert
+            Assert.IsNotNull(result);
+            mockCookieRepository.Verify(x => x.AddItem(ApprenticeshipController.StandardsShortListCookieName, standardId), Times.Never);
+        }
+
+        [Test]
+        [TestCase(new[] { 1, 2, 3 }, 2, true, Description = "Shortlisted")]
+        [TestCase(new[] { 1, 3 }, 2, false, Description = "Not Shortlisted")]
+        public void ShouldSetViewModelShortListValueToTrueIfStandardIsInShortList(
+            IEnumerable<int> shortListItems,
+            int standardId,
+            bool expectedResult)
+        {
+            // Arrange
+            var mockStandardRepository = new Mock<IGetStandards>();
+            mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
+
+            var mockMappingServices = new Mock<IMappingService>();
+            mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
+                                            .Returns(new StandardViewModel());
+
+            var mockCookieRepository = new Mock<IListCollection<int>>();
+            var controller = new ApprenticeshipController(
+                null,
+                mockStandardRepository.Object,
+                null,
+                null,
+                mockMappingServices.Object,
+                new Mock<IProfileAStep>().Object,
+                mockCookieRepository.Object);
+
+            AddUrlMocking(controller, "http://www.abba.co.uk");
+
+            mockCookieRepository.Setup(x => x.GetAllItems(ApprenticeshipController.StandardsShortListCookieName))
+                                .Returns(new List<int>(shortListItems));
+
+            // Act
+            var result = controller.Standard(standardId, string.Empty) as ViewResult;
+            var viewModel = result?.Model as StandardViewModel;
+
+            // Assert
+            Assert.IsNotNull(viewModel);
+            mockCookieRepository.Verify(x => x.GetAllItems(ApprenticeshipController.StandardsShortListCookieName));
+            Assert.AreEqual(expectedResult, viewModel.IsShortlisted);
+        }
+        
+        private static void AddUrlMocking(ApprenticeshipController controller, string url)
+        {
+            var mockRequest = new Mock<HttpRequestBase>();
+            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri(url));
+
+            var context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(mockRequest.Object);
+
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            controller.Url = new UrlHelper(
+                new RequestContext(context.Object, new RouteData()),
+                new RouteCollection());
         }
     }
 }

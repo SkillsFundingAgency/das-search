@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\IListCollection.cs" />
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="Domain\Model\Address.cs" />
     <Compile Include="Domain\Model\ContactInformation.cs" />

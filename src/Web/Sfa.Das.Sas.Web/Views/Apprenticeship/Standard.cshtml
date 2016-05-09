@@ -92,16 +92,15 @@
                 </div>
                 <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search" />
     }
+    @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
 }
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
-
         <dt>@title</dt>
         <dd id="@id">@Html.MarkdownToHtml(item)</dd>
-
     }
 }
 
@@ -109,10 +108,22 @@
 {
     if (!string.IsNullOrEmpty(title))
     {
-            <li>
-                <a href="@pdfUrl" target="_blank">
-                    @title
-                </a>
-            </li>
+        <li>
+            <a href="@pdfUrl" target="_blank">
+                @title
+            </a>
+        </li>
+    }
+}
+
+@helper GetShortlistLink(int id, bool isShortlisted)
+{
+    if (isShortlisted)
+    {
+        @Html.ActionLink("Remove from shortlist", "StandardShortList", new {id=@id, listAction="remove"}, new {@class="link"})
+    }
+    else
+    {
+        @Html.ActionLink("Shortlist apprenticeship", "StandardShortList", new { id=@id, listAction = "save" }, new { @class = "link" })
     }
 }
