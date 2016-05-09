@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
 
             var html = view.RenderAsHtml(viewModel).ToAngleSharp();
 
-            var messageElement = GetPartial(html, "#emptyShortlistMessage");
+            var messageElement = GetPartial(html, "#empty-shortlist-message");
             messageElement.Should().Contain("You have no apprenticeship training shortlisted.");
         }
 
@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
 
             var html = view.RenderAsHtml(viewModel).ToAngleSharp();
 
-            var messageElement = GetPartial(html, "#standardsShortlist");
+            var messageElement = GetHtmlElement(html, "#standards-shortlist");
             messageElement.Should().BeNull();
         }
 
@@ -79,14 +79,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
 
             var html = view.RenderAsHtml(viewModel).ToAngleSharp();
 
-            var messageElement = GetHtmlElement(html, "#standardsShortlist");
+            var messageElement = GetHtmlElement(html, "#standards-shortlist");
             messageElement.ClassList.Should().NotContain("hidden");
 
-            var firstStandard = GetPartial(html, "#standardsShortlist tr td", 1); // element 2 is a delete link
-            var secondStandard = GetPartial(html, "#standardsShortlist tr td", 3); // element 4 is a delete link
+            var firstStandard = GetPartial(html, "#standards-shortlist tr td", 1); // element 2 is a delete link
+            var secondStandard = GetPartial(html, "#standards-shortlist tr td", 3); // element 4 is a delete link
 
-            var expectedStandardAText = string.Format("{0} (level {1})", standardA.Title, standardA.Level);
-            var expectedStandardBText = string.Format("{0} (level {1})", standardB.Title, standardB.Level);
+            var expectedStandardAText = $"{standardA.Title} (level {standardA.Level})";
+            var expectedStandardBText = $"{standardB.Title} (level {standardB.Level})";
 
             firstStandard.Should().Contain(expectedStandardAText);
             secondStandard.Should().Contain(expectedStandardBText);

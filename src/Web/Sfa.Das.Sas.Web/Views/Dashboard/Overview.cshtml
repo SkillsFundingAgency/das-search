@@ -1,5 +1,5 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
-@model Sfa.Das.Sas.Web.ViewModels.DashboardViewModel
+@model DashboardViewModel
 
 @{
     ViewBag.Title = "My Dashboard";
@@ -16,9 +16,7 @@
 
     @DisplayEmptyShortlistMessage(Model)
 
-
     @DisplayStandardsShortListTable(Model.Standards)
-
 </main>
 
 @helper DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
@@ -28,8 +26,8 @@
         return;
     }
 
-    <p id="emptyShortlistMessage" class="notice">
-        You have no apprenticeship training shortlisted.
+    <p id="empty-shortlist-message" class="notice">
+        You have no apprenticeship training shortlisted.&nbsp;
         @Html.ActionLink("Search for apprenticeship training", "Search", "Apprenticeship")
     </p>
 }
@@ -43,7 +41,7 @@
         return;
     }
 
-    <table id="standardsShortlist">
+    <table id="standards-shortlist">
         <thead>
         <tr>
             <th>Apprenticeship training</th>
@@ -58,14 +56,13 @@
 
 @helper GetShortlistItemRows(IEnumerable<ShortlistStandardViewModel> standards)
 {
-foreach (var standard in standards)
-{
-    var standardName = string.Format("{0} (level {1})", standard.Title, standard.Level);
+    foreach (var standard in standards)
+    {
+        var standardName = $"{standard.Title} (level {standard.Level})";
 
-    <tr>
-        <td>@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null)</td>
-        <td>@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, null)</td>
-    </tr>
-
-}
+        <tr>
+            <td>@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, new {rel="nofollow"})</td>
+            <td>@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" })</td>
+        </tr>
+    }
 }

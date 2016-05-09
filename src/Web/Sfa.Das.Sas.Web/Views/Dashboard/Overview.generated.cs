@@ -37,17 +37,17 @@ namespace Sfa.Das.Sas.Web.Views.Dashboard
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Dashboard/Overview.cshtml")]
-    public partial class Overview : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.DashboardViewModel>
+    public partial class Overview : System.Web.Mvc.WebViewPage<DashboardViewModel>
     {
 
-#line 24 "..\..\Views\Dashboard\Overview.cshtml"
+#line 22 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 25 "..\..\Views\Dashboard\Overview.cshtml"
+#line 23 "..\..\Views\Dashboard\Overview.cshtml"
  
     if (viewModel.Standards.Any())
     {
@@ -60,16 +60,16 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <p");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"emptyShortlistMessage\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"empty-shortlist-message\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"notice\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        You have no apprenticeship training shortlisted.\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        You have no apprenticeship training shortlisted.&nbsp;\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 33 "..\..\Views\Dashboard\Overview.cshtml"
+#line 31 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Search for apprenticeship training", "Search", "Apprenticeship"));
 
 
@@ -78,26 +78,26 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Search for apprenticeship traini
 WriteLiteralTo(__razor_helper_writer, "\r\n    </p>\r\n");
 
 
-#line 35 "..\..\Views\Dashboard\Overview.cshtml"
+#line 33 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 35 "..\..\Views\Dashboard\Overview.cshtml"
+#line 33 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 37 "..\..\Views\Dashboard\Overview.cshtml"
+#line 35 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult DisplayStandardsShortListTable(IEnumerable<ShortlistStandardViewModel> standards)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 38 "..\..\Views\Dashboard\Overview.cshtml"
+#line 36 "..\..\Views\Dashboard\Overview.cshtml"
  
     var standardViewModels = standards as ShortlistStandardViewModel[] ?? standards.ToArray();
 
@@ -112,7 +112,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <table");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"standardsShortlist\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"standards-shortlist\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <thead>\r\n        <tr>\r\n            <th>Apprenticeship training</th>\r\n " +
 "           <th>Delete</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n");
@@ -120,7 +120,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        <thead>\r\n        <tr>\r\n 
 WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 54 "..\..\Views\Dashboard\Overview.cshtml"
+#line 52 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, GetShortlistItemRows(standardViewModels));
 
 
@@ -129,66 +129,65 @@ WriteTo(__razor_helper_writer, GetShortlistItemRows(standardViewModels));
 WriteLiteralTo(__razor_helper_writer, "\r\n        </tbody>\r\n    </table>\r\n");
 
 
-#line 57 "..\..\Views\Dashboard\Overview.cshtml"
+#line 55 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 57 "..\..\Views\Dashboard\Overview.cshtml"
+#line 55 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 59 "..\..\Views\Dashboard\Overview.cshtml"
+#line 57 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistItemRows(IEnumerable<ShortlistStandardViewModel> standards)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 60 "..\..\Views\Dashboard\Overview.cshtml"
+#line 58 "..\..\Views\Dashboard\Overview.cshtml"
  
-foreach (var standard in standards)
-{
-    var standardName = string.Format("{0} (level {1})", standard.Title, standard.Level);
+    foreach (var standard in standards)
+    {
+        var standardName = $"{standard.Title} (level {standard.Level})";
 
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <tr>\r\n        <td>");
+WriteLiteralTo(__razor_helper_writer, "        <tr>\r\n            <td>");
 
 
-#line 66 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null));
+#line 64 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, new {rel="nofollow"}));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</td>\r\n        <td>");
+WriteLiteralTo(__razor_helper_writer, "</td>\r\n            <td>");
+
+
+#line 65 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" }));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</td>\r\n        </tr>\r\n");
 
 
 #line 67 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, null));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</td>\r\n    </tr>\r\n");
-
-
-#line 69 "..\..\Views\Dashboard\Overview.cshtml"
-
-}
+    }
 
 
 #line default
 #line hidden
 });
 
-#line 71 "..\..\Views\Dashboard\Overview.cshtml"
+#line 68 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
@@ -253,18 +252,18 @@ Write(DisplayEmptyShortlistMessage(Model));
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n\r\n");
+WriteLiteral("\r\n\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 20 "..\..\Views\Dashboard\Overview.cshtml"
+            #line 19 "..\..\Views\Dashboard\Overview.cshtml"
 Write(DisplayStandardsShortListTable(Model.Standards));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n</main>\r\n\r\n");
+WriteLiteral("\r\n</main>\r\n\r\n");
 
 WriteLiteral("\r\n");
 
