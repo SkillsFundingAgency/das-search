@@ -198,5 +198,251 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
             // Second result
             GetPartial(html, ".result-title", 2).Should().Be("Test title 2");
         }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsTheFirstPageShouldShowOnlyNextPageLink()
+        {
+            var detail = new SearchResults();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 20,
+                SearchTerm = "*",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                {
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      }
+                },
+                ActualPage = 1,
+                LastPage = 2,
+                ResultsToTake = 10,
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".pagination-back-link").Should().BeEmpty();
+            GetPartial(html, ".pagination-next-link").Should().Be("Next page 2 of 2");
+        }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsAPageInTheMiddleShouldShowBackAndNextPageLink()
+        {
+            var detail = new SearchResults();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 30,
+                SearchTerm = "*",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                {
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      }
+                },
+                ActualPage = 2,
+                LastPage = 3,
+                ResultsToTake = 10,
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".pagination-back-link").Should().Be("Previous page 1 of 3");
+            GetPartial(html, ".pagination-next-link").Should().Be("Next page 3 of 3");
+        }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsTheLastPageShouldShowOnlyBackPageLink()
+        {
+            var detail = new SearchResults();
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 30,
+                SearchTerm = "*",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                {
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      },
+                    new ApprenticeshipSearchResultItemViewModel
+                                      {
+                                        Title = "Test title 1",
+                                        TypicalLengthMessage = "72 months",
+                                        StandardId = 3
+                                      }
+                },
+                ActualPage = 3,
+                LastPage = 3,
+                ResultsToTake = 10,
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".pagination-back-link").Should().Be("Previous page 2 of 3");
+            GetPartial(html, ".pagination-next-link").Should().BeEmpty();
+        }
     }
 }
