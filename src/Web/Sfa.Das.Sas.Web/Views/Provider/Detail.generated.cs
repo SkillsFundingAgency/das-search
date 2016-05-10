@@ -150,7 +150,16 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 
 #line 112 "..\..\Views\Provider\Detail.cshtml"
-                                                                               WriteTo(__razor_helper_writer, Model.Address.Postcode);
+                                                                               WriteTo(__razor_helper_writer, Model.Address.County);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " ");
+
+
+#line 112 "..\..\Views\Provider\Detail.cshtml"
+                                                                                                     WriteTo(__razor_helper_writer, Model.Address.Postcode);
 
 
 #line default
@@ -204,14 +213,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4896), Tuple.Create("\"", 4904)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4918), Tuple.Create("\"", 4926)
 
 #line 123 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 4901), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 4923), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4901), false)
+, 4923), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"phone\"");
@@ -273,29 +282,29 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5160), Tuple.Create("\"", 5168)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5182), Tuple.Create("\"", 5190)
 
 #line 132 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5165), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5187), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5165), false)
+, 5187), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"email\"");
 
 WriteLiteralTo(__razor_helper_writer, "><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5186), Tuple.Create("\"", 5215)
-, Tuple.Create(Tuple.Create("", 5193), Tuple.Create("mailto:", 5193), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5208), Tuple.Create("\"", 5237)
+, Tuple.Create(Tuple.Create("", 5215), Tuple.Create("mailto:", 5215), true)
 
 #line 132 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5200), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
+, Tuple.Create(Tuple.Create("", 5222), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
 
 #line default
 #line hidden
-, 5200), false)
+, 5222), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -341,14 +350,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <dt");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5535), Tuple.Create("\"", 5554)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5557), Tuple.Create("\"", 5576)
 
 #line 141 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5543), Tuple.Create<System.Object, System.Int32>(classTitle
+, Tuple.Create(Tuple.Create("", 5565), Tuple.Create<System.Object, System.Int32>(classTitle
 
 #line default
 #line hidden
-, 5543), false)
+, 5565), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -364,42 +373,42 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5597), Tuple.Create("\"", 5621)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5619), Tuple.Create("\"", 5643)
 
 #line 143 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5604), Tuple.Create<System.Object, System.Int32>(linkProtocol
+, Tuple.Create(Tuple.Create("", 5626), Tuple.Create<System.Object, System.Int32>(linkProtocol
 
 #line default
 #line hidden
-, 5604), false)
+, 5626), false)
 
 #line 143 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5617), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 5639), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 5617), false)
+, 5639), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5653), Tuple.Create("\"", 5687)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5675), Tuple.Create("\"", 5709)
 
 #line 143 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 5661), Tuple.Create<System.Object, System.Int32>(cssClass
+, Tuple.Create(Tuple.Create("", 5683), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 5661), false)
+, 5683), false)
 
 #line 143 "..\..\Views\Provider\Detail.cshtml"
-       , Tuple.Create(Tuple.Create(" ", 5670), Tuple.Create<System.Object, System.Int32>(classIdentifier
+       , Tuple.Create(Tuple.Create(" ", 5692), Tuple.Create<System.Object, System.Int32>(classIdentifier
 
 #line default
 #line hidden
-, 5671), false)
+, 5693), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -518,16 +527,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6304), Tuple.Create("\"", 6347)
-, Tuple.Create(Tuple.Create("", 6312), Tuple.Create("width:", 6312), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6326), Tuple.Create("\"", 6369)
+, Tuple.Create(Tuple.Create("", 6334), Tuple.Create("width:", 6334), true)
 
 #line 166 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 6318), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
+, Tuple.Create(Tuple.Create(" ", 6340), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
 
 #line default
 #line hidden
-, 6319), false)
-, Tuple.Create(Tuple.Create("", 6346), Tuple.Create("%", 6346), true)
+, 6341), false)
+, Tuple.Create(Tuple.Create("", 6368), Tuple.Create("%", 6368), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
@@ -587,16 +596,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6722), Tuple.Create("\"", 6763)
-, Tuple.Create(Tuple.Create("", 6730), Tuple.Create("width:", 6730), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6744), Tuple.Create("\"", 6785)
+, Tuple.Create(Tuple.Create("", 6752), Tuple.Create("width:", 6752), true)
 
 #line 179 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 6736), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
+, Tuple.Create(Tuple.Create("", 6758), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
 
 #line default
 #line hidden
-, 6736), false)
-, Tuple.Create(Tuple.Create("", 6762), Tuple.Create("%", 6762), true)
+, 6758), false)
+, Tuple.Create(Tuple.Create("", 6784), Tuple.Create("%", 6784), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
