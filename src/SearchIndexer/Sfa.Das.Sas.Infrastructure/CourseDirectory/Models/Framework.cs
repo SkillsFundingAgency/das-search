@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models
         {
             FrameworkCode = frameworkCode;
             PathwayCode = pathwayCode;
-            Level = level;
+            ProgType = level;
         }
 
         /// <summary>
@@ -43,7 +43,14 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models
         /// <summary>
         ///     Required.
         /// </summary>
-        public int Level { get; set; }
+        public int? ProgType { get; set; }
+
+        /// <summary>
+        ///     Required.
+        /// </summary>
+        public int? Level { get; set; }
+
+        public int GetProgType => (ProgType ?? Level) ?? 0;
 
         /// <summary>
         ///     Optional.
@@ -78,6 +85,12 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models
                 if (frameworkCodeValue != null && frameworkCodeValue.Type != JTokenType.Null)
                 {
                     FrameworkCode = (int)frameworkCodeValue;
+                }
+
+                var progTypeValue = inputObject["progType"];
+                if (progTypeValue != null && progTypeValue.Type != JTokenType.Null)
+                {
+                    ProgType = (int)progTypeValue;
                 }
 
                 var levelValue = inputObject["level"];

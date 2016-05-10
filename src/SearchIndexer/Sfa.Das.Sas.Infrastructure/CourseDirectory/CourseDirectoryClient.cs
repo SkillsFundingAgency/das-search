@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                     new FrameworkInformation
                         {
                             Code = framework.FrameworkCode,
-                            ProgType = framework.Level,
+                            ProgType = framework.GetProgType,
                             PathwayCode = framework.PathwayCode,
                             InfoUrl = framework.FrameworkInfoUrl,
                             ContactInformation = new ContactInformation { Email = framework.Contact.Email, Phone = framework.Contact.Phone, Website = framework.Contact.ContactUsUrl },
