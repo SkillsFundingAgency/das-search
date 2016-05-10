@@ -18,7 +18,20 @@
     </div>
 
     <div class="phase-banner-tools">
-        <a href="#">Dashboard</a>
+       @RenderDashboardLink()
     </div>
 
 </div>
+
+@helper RenderDashboardLink()
+{
+    var currentUrl = Request.Url?.AbsolutePath ?? string.Empty;
+    var dashboardUrl = Url.Action("Overview", "Dashboard");
+
+    if (currentUrl.Equals(dashboardUrl))
+    {
+        return;
+    }
+
+    @Html.ActionLink("My Dashboard", "Overview", "Dashboard")
+}
