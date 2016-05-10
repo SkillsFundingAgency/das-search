@@ -8,11 +8,13 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Infrastructure.Logging
 {
+    using System.Dynamic;
+
+    using Newtonsoft.Json;
+
     public class NLogLogger : ILog
     {
         private readonly string _loggerType;
-
-        private readonly Dictionary<string, object> defaultProperties = new Dictionary<string, object>();
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
@@ -52,26 +54,36 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         public void Error(Exception ex, string msg)
         {
-            SendLog(msg, LogLevel.Error, defaultProperties, ex);
+            SendLog(msg, LogLevel.Error, ex);
         }
 
         public void Fatal(Exception ex, string msg)
         {
-            SendLog(msg, LogLevel.Fatal, defaultProperties, ex);
+            SendLog(msg, LogLevel.Fatal, ex);
         }
 
-        private void SendLog(string msg, LogLevel level, Dictionary<string, object> properties = null, Exception exception = null)
+        private void SendLog(object message, LogLevel level, Exception exception = null)
+        {
+            SendLog(message, level, new Dictionary<string, object>(), exception);
+        }
+
+        private void SendLog(object msg, LogLevel level, Dictionary<string, object> properties, Exception exception = null)
         {
             var propertiesLocal = new Dictionary<string, object>();
             if (properties != null)
             {
-                propertiesLocal = properties;
+                propertiesLocal = new Dictionary<string, object>(properties);
             }
 
             propertiesLocal.Add("Application", "Sfa.Das.Web");
             propertiesLocal.Add("LoggerType", _loggerType);
 
-            var logEvent = new LogEventInfo(level, _loggerType, msg) { Exception = exception };
+            var logEvent = new LogEventInfo(level, _loggerType, msg.ToString());
+
+            if (exception != null)
+            {
+                propertiesLocal.Add("application_exception", JsonConvert.DeserializeObject<ExpandoObject>(JsonConvert.SerializeObject(exception)));
+            }
 
             foreach (var property in propertiesLocal)
             {

@@ -7,10 +7,13 @@ using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 {
+    using System.Dynamic;
+
+    using Newtonsoft.Json;
+
     public class NLogService : ILog
     {
         private readonly string _loggerType;
-        private readonly Dictionary<string, object> _defaultProperties = new Dictionary<string, object>();
 #pragma warning disable CS0169
 #pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget _dummy; // Reference so assembly is copied to Primary output.
@@ -50,35 +53,45 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
         public void Warn(Exception exception, object message)
         {
-            SendLog(message, LogLevel.Warn, _defaultProperties, exception);
+            SendLog(message, LogLevel.Warn, exception);
         }
 
         public void Error(Exception exception, object message)
         {
-            SendLog(message, LogLevel.Error, _defaultProperties, exception);
+            SendLog(message, LogLevel.Error, exception);
         }
 
         public void Fatal(Exception exception, object message)
         {
-            SendLog(message, LogLevel.Fatal, _defaultProperties, exception);
+            SendLog(message, LogLevel.Fatal, exception);
         }
 
-        private void SendLog(object message, LogLevel level, Dictionary<string, object> properties = null, Exception exception = null)
+        private void SendLog(object message, LogLevel level, Exception exception = null)
+        {
+            SendLog(message, level, new Dictionary<string, object>(), exception);
+        }
+
+        private void SendLog(object message, LogLevel level, Dictionary<string, object> properties, Exception exception = null)
         {
             var propertiesLocal = new Dictionary<string, object>();
             if (properties != null)
             {
-                propertiesLocal = properties;
+                propertiesLocal = new Dictionary<string, object>(properties);
             }
 
             propertiesLocal.Add("Application", "Sfa.Das.Indexer");
             propertiesLocal.Add("LoggerType", _loggerType);
 
-            var logEvent = new LogEventInfo(level, _loggerType, message.ToString()) { Exception = exception };
+            var logEvent = new LogEventInfo(level, _loggerType, message.ToString());
+
+            if (exception != null)
+            {
+                propertiesLocal.Add("application_exception", JsonConvert.DeserializeObject<ExpandoObject>(JsonConvert.SerializeObject(exception)));
+            }
 
             foreach (var property in propertiesLocal)
             {
-                logEvent.Properties[property.Key] = property.Value?.ToString();
+                logEvent.Properties[property.Key] = property.Value;
             }
 
             ILogger log = LogManager.GetCurrentClassLogger();
