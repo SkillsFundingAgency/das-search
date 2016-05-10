@@ -43,9 +43,10 @@
                     </dl>
                 </article>
             }
-                @GetPaginationBackLink()
-                @GetPaginationNextLink()
-        </div>
+                <div class="page-navigation">
+                    @GetPaginationBackLink()
+                    @GetPaginationNextLink()
+                </div>
     </div>
 </main>
 
@@ -58,31 +59,39 @@
     </script>
 }
 
-@helper GetPaginationBackLink()
-{
-    if (Model.ActualPage > 1)
+
+    @helper GetPaginationBackLink()
     {
-        var previousPage = @Model.ActualPage - 1;
-        var title = $"Previous page {@previousPage} of {@Model.LastPage}";
-        <p class="pagination-back-link">
-            @Html.ActionLink(title, "SearchResults", "Apprenticeship", new { @keywords = Model.SearchTerm, page = previousPage }, null)
-        </p>
+        if (Model.ActualPage > 1)
+        {
+            var previousPage = @Model.ActualPage - 1;
+            var title = $"Previous page {@previousPage} of {@Model.LastPage}";
+            var url = $"Apprenticeship/SearchResults/keywords={Model.SearchTerm}&page={previousPage}";
+                <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
+                    <i class="arrow-button fa fa-angle-left"></i>
+                    <span class="description">Next <span class="hide-mob">page</span></span>
+                    <span class="counter">@previousPage of @Model.LastPage</span>
+                </a>
+        }
     }
-}
 
 
-@helper GetPaginationNextLink()
-{
-    if (Model.ActualPage < Model.LastPage)
+    @helper GetPaginationNextLink()
     {
-        var nextPage = @Model.ActualPage + 1;
-        var title = $"Next page {@nextPage} of {@Model.LastPage}";
+        if (Model.ActualPage < Model.LastPage)
+        {
+            var nextPage = @Model.ActualPage + 1;
+            var title = $"Next page {@nextPage} of {@Model.LastPage}";
 
-        <p class="pagination-next-link">
-            @Html.ActionLink(title, "SearchResults", "Apprenticeship", new { @keywords = Model.SearchTerm, page = nextPage }, null)
-        </p>
+            var url = $"Apprenticeship/SearchResults/keywords={Model.SearchTerm}&page={nextPage}";
+                <a href="@url" style="visibility: visible" class="page-navigation__btn next">
+                    <i class="arrow-button fa fa-angle-right"></i>
+                    <span class="description">Next <span class="hide-mob">page</span></span>
+                    <span class="counter">@nextPage of @Model.LastPage</span>
+                </a>
+        }
     }
-}
+
 
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
 {
