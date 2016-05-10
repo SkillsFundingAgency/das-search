@@ -4,7 +4,7 @@
 }
 <main id="content" role="main">
     <p class="small-btm-margin">
-        @Html.ActionLink("Back", "Start", "Start", null, new { @class = "link-back" })
+        @GenerateBackLink()
     </p>
     <div class="grid-row">
         <div class="column-two-thirds">
@@ -13,7 +13,7 @@
                 Find apprenticeship training
             </h1>
 
-            @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
+            @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
             {
                 <div class="form-group">
                     <legend>
@@ -35,3 +35,15 @@
     </div>
 
 </main>
+
+@helper GenerateBackLink()
+{
+    if (!string.IsNullOrEmpty(Request.UrlReferrer?.OriginalString))
+    {
+        <a href="@Request.UrlReferrer.OriginalString" class="link-back">Back</a>
+    }
+    else
+    {
+        @Html.ActionLink("Back", "Start", "Start", null, new { @class = "link-back" })
+    }
+}
