@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -35,8 +36,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var standardId = 3;
             _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
                                 .Returns(new[] { standardId });
-            _mockGetStandards.Setup(x => x.GetStandardById(standardId))
-                             .Returns(new Standard() { StandardId = standardId });
+            _mockGetStandards.Setup(x => x.GetStandardsByIds(It.IsAny<IEnumerable<int>>()))
+                             .Returns(new List<Standard>() { new Standard() { StandardId = standardId } });
 
             //Act
             var result = _sut.Overview() as ViewResult;
@@ -45,7 +46,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             //Assert
             Assert.AreEqual(1, viewModel.Standards.Count());
             _mockListCollection.Verify(x => x.GetAllItems(Constants.StandardsShortListCookieName));
-            _mockGetStandards.Verify(x => x.GetStandardById(standardId));
+            _mockGetStandards.Verify(x => x.GetStandardsByIds(It.IsAny<IEnumerable<int>>()));
             Assert.AreEqual(standardId, viewModel.Standards.First().Id);
         }
 
@@ -56,8 +57,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var standardId = 3;
             _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
                                 .Returns(new[] { 45, standardId, 83 });
-            _mockGetStandards.Setup(x => x.GetStandardById(standardId))
-                             .Returns(new Standard() { StandardId = standardId });
+
+            _mockGetStandards.Setup(x => x.GetStandardsByIds(It.IsAny<IEnumerable<int>>()))
+                             .Returns(new List<Standard>() { new Standard() { StandardId = standardId } });
+
             _mockGetStandards.Setup(x => x.GetStandardById(45));
             _mockGetStandards.Setup(x => x.GetStandardById(83));
 

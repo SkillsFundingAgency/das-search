@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿using System.Collections.Generic;
+
+namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Linq;
@@ -61,6 +63,34 @@
 
                 return document != null ? _standardMapping.MapToStandard(document) : null;
             }
+        }
+        // TODO: Review this for performance againt using filters instead
+        public IEnumerable<Standard> GetStandardsByIds(IEnumerable<int> ids)
+        {
+            var standardIds = ids as IList<int> ?? ids.ToList();
+
+            if (!standardIds.Any())
+            {
+                 return new List<Standard>();
+            }
+
+            var queryString = standardIds.Select(x => x.ToString()).Aggregate((x1, x2) => x1 + " OR " + x2);
+
+            var results =
+                   _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ApprenticeshipIndexAlias)
+                           .Type(Types.Parse("standarddocument"))
+                           .From(0)
+                           .Query(q => q.QueryString(qs => qs.Fields(fs => fs.Field(e => e.StandardId)).Query(queryString))));
+
+            if (!results.Documents.Any())
+            {
+                return new List<Standard>();
+            }
+
+            return results.Documents.Select(x => _standardMapping.MapToStandard(x))
+                                    .Where(p => p != null);
         }
     }
 }
