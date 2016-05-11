@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -58,6 +60,28 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+
+
+            if (viewModel == null)
+            {
+                return View((ProviderStandardSearchResultViewModel)null);
+            }
+
+            if (viewModel.ResultsToTake != 0)
+            {
+                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+            }
+
+            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
+            {
+                var url = Url.Action(
+                    "StandardResults",
+                    "Provider",
+                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                return new RedirectResult(url);
+            }
+
+            viewModel.ActualPage = criteria.Page;
 
             return View(viewModel);
         }
