@@ -5,8 +5,7 @@
 	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_LIMIT/@EntryValue">200</s:Int64>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateInstanceFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="_" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=307FACEA750E6A41B15710F1DE6BE67F/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=307FACEA750E6A41B15710F1DE6BE67F/AbsolutePath/@EntryValue">C:\code\DAS\src\SearchIndexer\Sfa.Das.Sas.Indexer.sln.DotSettings</s:String>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=307FACEA750E6A41B15710F1DE6BE67F/RelativePath/@EntryValue"></s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=307FACEA750E6A41B15710F1DE6BE67F/RelativePath/@EntryValue">Sfa.Das.Sas.Indexer.sln.DotSettings</s:String>
 	
 	
 	
