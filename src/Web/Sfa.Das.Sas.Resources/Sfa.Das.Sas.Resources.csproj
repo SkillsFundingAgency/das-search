@@ -47,11 +47,22 @@
     </Compile>
     <Compile Include="EquivalenveLevelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrainingOptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrainingOptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingOptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EquivalenceLevels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EquivalenceLevels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainingOptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingOptions.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
     using System.Collections.Generic;
     using System.Linq;
 
+    using Sfa.Das.Sas.Resources;
     using Sfa.Das.Sas.Web.Extensions;
     using Sfa.Das.Sas.Web.ViewModels;
 
@@ -37,11 +38,11 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             switch (deliveryModeKey)
             {
                 case "dayrelease":
-                    return "day release";
+                    return TrainingOptionService.GetApprenticeshipLevel("dayrelease");
                 case "blockrelease":
-                    return "block release";
+                    return TrainingOptionService.GetApprenticeshipLevel("blockrelease");
                 case "100percentemployer":
-                    return "at your location";
+                    return TrainingOptionService.GetApprenticeshipLevel("100percentemployer");
             }
 
             return string.Empty;
