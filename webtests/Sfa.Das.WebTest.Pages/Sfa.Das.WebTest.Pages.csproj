@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="FrameworkDetailPage.cs" />
     <Compile Include="FrameworkProviderResultPage.cs" />
+    <Compile Include="DashboardOverviewPage.cs" />
     <Compile Include="SearchPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderDetailPage.cs" />
