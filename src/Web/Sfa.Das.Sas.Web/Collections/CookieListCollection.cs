@@ -68,7 +68,8 @@ namespace Sfa.Das.Sas.Web.Collections
 
             var cookie = new HttpCookie(listName)
             {
-                Expires = DateTime.Now.AddDays(-1)
+                Expires = DateTime.Now.AddDays(-1),
+                Domain = _settings.CookieDomain
             };
 
             HttpContext.Current.Response.Cookies.Add(cookie);
