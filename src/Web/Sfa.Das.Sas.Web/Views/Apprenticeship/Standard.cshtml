@@ -120,10 +120,10 @@
 {
     if (isShortlisted)
     {
-        @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id=@id }, new {@class="link", rel="nofollow"})
+        @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id=@id }, new {@class="link", rel="nofollow", id = "shortlist-link" })
     }
     else
     {
-        @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id=@id }, new { @class = "link", rel="nofollow" })
+        @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id=@id }, new { @class = "link", rel="nofollow", id = "shortlist-link"})
     }
 }
