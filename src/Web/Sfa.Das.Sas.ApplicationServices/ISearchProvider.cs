@@ -10,8 +10,8 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take);
 
-        SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates, IEnumerable<string> deliveryModes);
+        SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
 
-        SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates, IEnumerable<string> deliveryModes);
+        SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
     }
 }

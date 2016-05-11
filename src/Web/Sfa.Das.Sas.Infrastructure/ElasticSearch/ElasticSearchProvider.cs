@@ -45,20 +45,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             };
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint, IEnumerable<string> deliveryModes)
+        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
             var qryStr = CreateStandardProviderRawQuery(code.ToString(), geoPoint, deliveryModes);
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
+                var skip = (page - 1) * take;
+
                 var results =
                     _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(
                         s =>
                         s.Index(_applicationSettings.ProviderIndexAlias)
-                            .From(0)
-                            .Size(1000)
-                            .Query(q => q.Raw(qryStr))
-                            .Sort(ss => ss.GeoDistance(g => g.Field("locationPoint").PinTo(new GeoLocation(geoPoint.Lat, geoPoint.Lon)).Unit(DistanceUnit.Miles).Ascending())));
+                        .Skip(skip)
+                        .Take(take)
+                        .Query(q => q.Raw(qryStr))
+                        .Sort(ss => ss.GeoDistance(g => g.Field("locationPoint").PinTo(new GeoLocation(geoPoint.Lat, geoPoint.Lon)).Unit(DistanceUnit.Miles).Ascending())));
 
                 var documents =
                     results.Hits.Select(
@@ -96,58 +98,61 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint, IEnumerable<string> deliveryModes)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
-            using (_profiler.CreateStep("Search for providers for framework")) { 
-            var qryStr = CreateFrameworkProviderRawQuery(code.ToString(), geoPoint, deliveryModes);
-
-            var results = _elasticsearchCustomClient
-                .Search<FrameworkProviderSearchResultsItem>(s => s
-                .Index(_applicationSettings.ProviderIndexAlias)
-                .From(0)
-                .Size(1000)
-                .Query(q => q
-                    .Raw(qryStr))
-                .Sort(ss => ss
-                    .GeoDistance(g => g
-                        .Field("locationPoint")
-                        .PinTo(new GeoLocation(geoPoint.Lat, geoPoint.Lon))
-                        .Unit(DistanceUnit.Miles)
-                        .Ascending())));
-
-            var documents = results.Hits.Select(hit => new FrameworkProviderSearchResultsItem
+            using (_profiler.CreateStep("Search for providers for framework"))
             {
-                Id = hit.Source.Id,
-                UkPrn = hit.Source.UkPrn,
-                Address = hit.Source.Address,
-                ContactUsUrl = hit.Source.ContactUsUrl,
-                DeliveryModes = hit.Source.DeliveryModes,
-                Email = hit.Source.Email,
-                EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
-                LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
-                LocationId = hit.Source.LocationId,
-                LocationName = hit.Source.LocationName,
-                ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
-                Name = hit.Source.Name,
-                Phone = hit.Source.Phone,
-                FrameworkId = hit.Source.FrameworkId,
-                FrameworkCode = hit.Source.FrameworkCode,
-                PathwayCode = hit.Source.PathwayCode,
-                ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
-                Level = hit.Source.Level,
-                Website = hit.Source.Website,
-                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
-            }).ToList();
+                var qryStr = CreateFrameworkProviderRawQuery(code.ToString(), geoPoint, deliveryModes);
 
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
+                var skip = (page - 1) * take;
 
-            var qryStrAggregation = CreateFrameworkProviderRawQuery(code.ToString(), geoPoint, new List<string>());
-            var trainingOptionsAggregation = GetTraingOptionsAggregation<FrameworkProviderSearchResultsItem>(documents.Any(), qryStrAggregation);
+                var results = _elasticsearchCustomClient
+                    .Search<FrameworkProviderSearchResultsItem>(s => s
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .Skip(skip)
+                    .Take(take)
+                    .Query(q => q
+                        .Raw(qryStr))
+                    .Sort(ss => ss
+                        .GeoDistance(g => g
+                            .Field("locationPoint")
+                            .PinTo(new GeoLocation(geoPoint.Lat, geoPoint.Lon))
+                            .Unit(DistanceUnit.Miles)
+                            .Ascending())));
 
-            return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+                var documents = results.Hits.Select(hit => new FrameworkProviderSearchResultsItem
+                {
+                    Id = hit.Source.Id,
+                    UkPrn = hit.Source.UkPrn,
+                    Address = hit.Source.Address,
+                    ContactUsUrl = hit.Source.ContactUsUrl,
+                    DeliveryModes = hit.Source.DeliveryModes,
+                    Email = hit.Source.Email,
+                    EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
+                    LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
+                    LocationId = hit.Source.LocationId,
+                    LocationName = hit.Source.LocationName,
+                    ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
+                    Name = hit.Source.Name,
+                    Phone = hit.Source.Phone,
+                    FrameworkId = hit.Source.FrameworkId,
+                    FrameworkCode = hit.Source.FrameworkCode,
+                    PathwayCode = hit.Source.PathwayCode,
+                    ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
+                    Level = hit.Source.Level,
+                    Website = hit.Source.Website,
+                    Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
+                }).ToList();
+
+                if (results.ApiCall?.HttpStatusCode != 200)
+                {
+                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
+                }
+
+                var qryStrAggregation = CreateFrameworkProviderRawQuery(code.ToString(), geoPoint, new List<string>());
+                var trainingOptionsAggregation = GetTraingOptionsAggregation<FrameworkProviderSearchResultsItem>(documents.Any(), qryStrAggregation);
+
+                return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
             }
         }
 
