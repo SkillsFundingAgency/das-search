@@ -5,6 +5,7 @@
     using BoDi;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.PhantomJS;
     using OpenQA.Selenium.Remote;
 
     using Sfa.Das.WebTest.Infrastructure.Selenium;
@@ -53,7 +54,7 @@
             if (ScenarioContext.Current.TestError != null)
             {
                 seleniumContext.WebDriver.TakeScreenshot();
-                if(seleniumContext.WebDriver is RemoteWebDriver)
+                if(seleniumContext.WebDriver is RemoteWebDriver && !(seleniumContext.WebDriver is PhantomJSDriver))
                 {
                     _objectContainer.Resolve<IBrowserStackApi>().FailTestSession(ScenarioContext.Current.TestError);
                 }
