@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Sfa.Das.Sas.ApplicationServices.Exceptions;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
 
@@ -14,22 +15,25 @@ namespace Sfa.Das.Sas.ApplicationServices
         private readonly IGetFrameworks _getFrameworks;
         private readonly ILookupLocations _postCodeLookup;
         private readonly ILog _logger;
+        private readonly IPaginationSettings _paginationSettings;
 
         public ProviderSearchService(
             ISearchProvider searchProvider,
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
             ILookupLocations postcodeLookup,
-            ILog logger)
+            ILog logger,
+            IPaginationSettings paginationSettings)
         {
             _searchProvider = searchProvider;
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
             _postCodeLookup = postcodeLookup;
             _logger = logger;
+            _paginationSettings = paginationSettings;
         }
 
-        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, IEnumerable<string> deliveryModes)
+        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, int page, int take, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -61,9 +65,11 @@ namespace Sfa.Das.Sas.ApplicationServices
                     };
                 }
 
+                var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
+
                 _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
 
-                var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, deliveryModes);
+                var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, page, takeElements, deliveryModes);
 
                 var result = new ProviderStandardSearchResults
                 {
@@ -95,7 +101,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
-        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, IEnumerable<string> deliveryModes)
+        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, int page, int take, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -121,7 +127,9 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 if (coordinates != null)
                 {
-                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, deliveryModes);
+                    var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
+
+                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, page, takeElements, deliveryModes);
                     hits = searchResults.Hits;
                     total = searchResults.Total;
                     trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;

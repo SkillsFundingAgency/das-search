@@ -59,8 +59,10 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult($"{url}{anchor}");
             }
 
+            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
+
             var searchResults =
-                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.DeliveryModes);
+                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.Page, criteria.Take, criteria.DeliveryModes);
 
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
@@ -91,8 +93,10 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult($"{url}{anchor}");
             }
 
+            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
+
             var searchResults =
-                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.DeliveryModes);
+                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.Page, criteria.Take, criteria.DeliveryModes);
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
