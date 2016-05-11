@@ -36,6 +36,10 @@
                     case "exists":
                         Assert.IsNotNull(element, "Couldn't find element " + row[0]);
                         break;
+                    case "has text":
+                        Assert.IsNotNull(element, "Couldn't find element " + row[0]);
+                        Assert.AreEqual(element.Text, row[2], $"{row[0]} element text is {element.Text} and not {row[2]}");
+                        break;
                 }
             }
         }

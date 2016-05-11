@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.WebTest.Infrastructure.Steps
+﻿using System.Text;
+
+namespace Sfa.Das.WebTest.Infrastructure.Steps
 {
     using System;
     using System.Linq;
@@ -51,7 +53,20 @@
         [Then(@"I navigate to the (.*) page with parameters")]
         public void NavigateToPageWithParameters(string page, Table parameters)
         {
-            ScenarioContext.Current.Pending();
+            var objectType = FindPageType(page);
+            var attribute = (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
+            
+            var urlParameters = "?" + parameters.Rows.Select(row => row[0] + "=" + row[1])
+                .Aggregate((row1, row2) => row1 + "&" + row2);
+            
+            var url = _browserSettings.BaseUrl + attribute.Url + urlParameters;
+
+            Console.WriteLine("-> Navigating to " + url);
+
+            _driver.Navigate().GoToUrl(url);
+            _pageContext.CurrentPage = _objectContainer.Resolve(objectType);
+            
+            //ScenarioContext.Current.Pending();
         }
 
         [Given(@"I was on the (.*) page")]

@@ -32,4 +32,24 @@ Scenario:Should find a standard and provider
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
+@CI @SystemTest @Demo
+Scenario: Should be able to search for and add a standard to my shortlist
+	Given I have data for a standard
+	And I navigated to the Start page
+	When I choose Start Button
+	Then I am on the Search page
 
+	When I enter data
+		| Field      | Value     |
+		| Search Box | {JOBROLE} |
+	And I choose Search Button
+	Then I am on the Search Results page
+
+	When I choose First Standard Result
+	Then I am on the Standard Details page	
+	
+	When I choose Shortlist Link
+	Then I am on the Standard Details page
+	And I see
+         | Field          | Rule     | Value                 |
+         | Shortlist Link | has text | Remove from shortlist |
