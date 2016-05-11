@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel == null)
             {
-                return View((ApprenticeshipSearchResultViewModel)null);
+                return View(default(ApprenticeshipSearchResultViewModel));
             }
 
             if (viewModel.ResultsToTake != 0)
