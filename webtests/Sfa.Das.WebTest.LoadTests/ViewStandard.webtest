@@ -8,7 +8,7 @@
     </TransactionTimer>
   </Items>
   <DataSources>
-    <DataSource Name="DataSource1" Provider="Microsoft.VisualStudio.TestTools.DataSource.CSV" Connection="|DataDirectory|\..\Data\PreProdStandard.csv">
+    <DataSource Name="DataSource1" Provider="Microsoft.VisualStudio.TestTools.DataSource.CSV" Connection="|DataDirectory|\PreProdStandard.csv">
       <Tables>
         <DataSourceTable Name="PreProdStandard#csv" SelectColumns="SelectOnlyBoundColumns" AccessMethod="Sequential" />
       </Tables>
