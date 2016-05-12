@@ -2,9 +2,10 @@ using System;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Models;
+using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
-namespace Sfa.Das.Sas.Web.Services
+namespace Sfa.Das.Sas.Web.Factories
 {
     public class ProviderViewModelFactory : IProviderViewModelFactory
     {
