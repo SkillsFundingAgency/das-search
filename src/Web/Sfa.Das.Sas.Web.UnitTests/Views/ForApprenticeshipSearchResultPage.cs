@@ -459,7 +459,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
             var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel {Checked = true, Count = 500, Value = "2"} };
             var model = new ApprenticeshipSearchResultViewModel
             {
-                TotalResults = 0,
+                TotalResults = 1,
                 SearchTerm = "SearchTerm",
                 Results = new List<ApprenticeshipSearchResultItemViewModel>
                               {
