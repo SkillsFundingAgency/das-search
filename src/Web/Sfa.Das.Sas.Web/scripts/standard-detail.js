@@ -35,7 +35,7 @@
 
 
     standard.init = function () {
-        $('.shortlist-link').on('click', function (e) {
+        $('.shortlist-linkREMOVE').on('click', function (e) {
             e.stopPropagation();
             var value = standard.getCookie(standard.CookieName);
             console.log(value);
