@@ -136,7 +136,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                            Contact =
                                new ContactInformation { Email = matchingLocation.Email, Phone = matchingLocation.Phone, Website = matchingLocation.Website },
                            Address =
-                               new Das.Sas.Indexer.Core.Models.Provider.Address
+                               new Core.Models.Provider.Address
                                    {
                                        Address1 = matchingLocation.Address.Address1,
                                        Address2 = matchingLocation.Address.Address2,
@@ -148,16 +148,16 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                        };
         }
 
-        private IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Location> GetLocationFromIList(IList<Models.Location> locations)
+        private IEnumerable<Core.Models.Provider.Location> GetLocationFromIList(IList<Models.Location> locations)
         {
             return locations.Select(MapToLocationEntity).ToList();
         }
 
-        private Das.Sas.Indexer.Core.Models.Provider.Provider MapFromProviderToProviderImport(Models.Provider provider)
+        private Core.Models.Provider.Provider MapFromProviderToProviderImport(Models.Provider provider)
         {
             var providerLocations = GetLocationFromIList(provider.Locations);
 
-            var providerImport = new Das.Sas.Indexer.Core.Models.Provider.Provider
+            var providerImport = new Core.Models.Provider.Provider
                                      {
                                          Id = provider.Id.ToString(),
                                          Ukprn = provider.Ukprn,
