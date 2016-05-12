@@ -29,12 +29,14 @@
             @{
                 Html.RenderPartial("_StandardProviderInformation");
             }
+
+            <div class="page-navigation">
+                @GetPaginationBackLink()
+                @GetPaginationNextLink()
+            </div>
         </div>
 
-        <div class="page-navigation">
-            @GetPaginationBackLink()
-            @GetPaginationNextLink()
-        </div>
+        
 
         <div class="column-third">
             @if (!Model.DeliveryModes.IsNullOrEmpty())
