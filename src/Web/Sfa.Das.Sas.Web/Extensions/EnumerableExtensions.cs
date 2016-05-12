@@ -9,5 +9,10 @@
         {
             return enumerable == null || !enumerable.Any();
         }
+
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable)
+        {
+            return enumerable.Where(x => x != null);
+        }
     }
 }

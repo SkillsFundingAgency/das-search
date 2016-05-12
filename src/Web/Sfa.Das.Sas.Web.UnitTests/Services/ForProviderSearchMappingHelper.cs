@@ -66,5 +66,34 @@
             third.Title.Should().Be("at your location");
             third.Count.Should().Be(1);
         }
+
+        [Test]
+        public void ShouldIgnoreMissingTrainingOptions()
+        {
+            var trainingOptions = new Dictionary<string, long?>
+                                      {
+                                          { "blockrelease", 35 },
+                                          { "100percentemployer", 1 }
+                                      };
+
+            var selectedTrainingOptions = new[] { "100percentemployer", "dayrelease" };
+            var result = ProviderSearchMappingHelper.CreateDeliveryModes(trainingOptions, selectedTrainingOptions);
+
+            result.Count().Should().Be(2);
+
+            var first = result.FirstOrDefault(m => m.Value.Equals("dayrelease"));
+            var second = result.FirstOrDefault(m => m.Value.Equals("blockrelease"));
+            var third = result.FirstOrDefault(m => m.Value.Equals("100percentemployer"));
+
+            first.Should().BeNull();
+
+            second.Checked.Should().BeFalse();
+            second.Title.Should().Be("block release");
+            second.Count.Should().Be(35);
+
+            third.Checked.Should().BeTrue();
+            third.Title.Should().Be("at your location");
+            third.Count.Should().Be(1);
+        }
     }
 }
