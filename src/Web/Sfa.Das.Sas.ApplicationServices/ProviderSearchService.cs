@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 return new ProviderStandardSearchResults { StandardId = standardId, PostCodeMissing = true };
             }
 
-            var standardName = string.Empty;
+            string standardName = string.Empty;
 
             try
             {
@@ -110,28 +110,23 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
+                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
                 var total = 0L;
+                Dictionary<string, long?> trainingOptionsAggregation;
                 var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
 
-                if (coordinates == null)
+                if (coordinates != null)
                 {
-                    return new ProviderFrameworkSearchResults
-                    {
-                        TotalResults = 0,
-                        FrameworkId = frameworkId,
-                        FrameworkName = framework.FrameworkName,
-                        PathwayName = string.Empty,
-                        PostCode = postCode,
-                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                        HasError = false,
-                        TrainingOptionsAggregation = new Dictionary<string, long?>()
-                    };
+                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, page, takeElements, deliveryModes);
+                    hits = searchResults.Hits;
+                    total = searchResults.Total;
+                    trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
                 }
-
-                var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, page, takeElements, deliveryModes);
-                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits = searchResults.Hits;
-                total = searchResults.Total;
-                var trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
+                else
+                {
+                    hits = new IApprenticeshipProviderSearchResultsItem[0];
+                    trainingOptionsAggregation = new Dictionary<string, long?>();
+                }
 
                 return new ProviderFrameworkSearchResults
                 {
