@@ -48,7 +48,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
         }
 
         [Test]
-        [Ignore]
         public void ShouldShowAllStandardsInShortlist()
         {
             var standardA = new ShortlistStandardViewModel
@@ -83,8 +82,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var messageElement = GetHtmlElement(html, "#standards-shortlist");
             messageElement.ClassList.Should().NotContain("hidden");
 
-            var firstStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title"); // element 2 is a delete link
-            var secondStandard = GetPartial(html, "#standards-shortlist.standard-item .standard-title", 2); // element 4 is a delete link
+            var firstStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title"); 
+            var secondStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title", 2); 
 
             var expectedStandardAText = $"{standardA.Title} (level {standardA.Level})";
             var expectedStandardBText = $"{standardB.Title} (level {standardB.Level})";
