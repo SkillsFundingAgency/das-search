@@ -83,7 +83,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             messageElement.ClassList.Should().NotContain("hidden");
 
             var firstStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title"); // element 2 is a delete link
-            var secondStandard = GetPartial(html, "#standards-shortlist.standard-item .standard-delete-link"); // element 4 is a delete link
+            var secondStandard = GetPartial(html, "#standards-shortlist.standard-item .standard-title", 2); // element 4 is a delete link
 
             var expectedStandardAText = $"{standardA.Title} (level {standardA.Level})";
             var expectedStandardBText = $"{standardB.Title} (level {standardB.Level})";
