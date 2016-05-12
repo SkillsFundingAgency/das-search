@@ -1,5 +1,7 @@
 ﻿
+@using Sfa.Das.Sas.ApplicationServices.Models
 @using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.Web.ViewModels
 @model Sfa.Das.Sas.Web.ViewModels.ProviderStandardSearchResultViewModel
 
 @{
@@ -39,7 +41,8 @@
             {
                 <form method="get" action="@Request.Url.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId"/>
+                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
+                    <input type="hidden" name="page" value="@Model.ActualPage"/>
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }
@@ -61,16 +64,17 @@
 
 @helper GetPaginationBackLink()
 {
-if (Model.ActualPage > 1)
-{
-    var previousPage = @Model.ActualPage - 1;
-    var url = $"StandardResults?apprenticeshipId={Model.StandardId}&PostCode={Model.PostCode}&page={previousPage}";
+    if (Model.ActualPage > 1)
+    {
+        var previousPage = @Model.ActualPage - 1;
+        var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
+
         <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
             <i class="arrow-button fa fa-angle-left"></i>
             <span class="description">Previous <span class="hide-mob">page</span></span>
             <span class="counter">@previousPage of @Model.LastPage</span>
         </a>
-}
+    }
 }
 
 
@@ -80,11 +84,27 @@ if (Model.ActualPage > 1)
     {
         var nextPage = @Model.ActualPage + 1;
 
-        var url = $"StandardResults?apprenticeshipId={Model.StandardId}&PostCode={Model.PostCode}&page={nextPage}";
+        var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
         <a href="@url" style="visibility: visible" class="page-navigation__btn next">
             <i class="arrow-button fa fa-angle-right"></i>
             <span class="description">Next <span class="hide-mob">page</span></span>
             <span class="counter">@nextPage of @Model.LastPage</span>
         </a>
+    }
+}
+
+@functions
+{
+    RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
+    {
+
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode }, { "page", page } };
+        int i = 0;
+        foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
+        {
+            rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
+            i++;
+        }
+        return rv;
     }
 }
