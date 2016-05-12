@@ -74,6 +74,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var result = new ProviderStandardSearchResults
                 {
                     TotalResults = searchResults.Total,
+                    ResultsToTake = takeElements,
                     StandardId = standardId,
                     StandardName = standardName,
                     PostCode = postCode,
@@ -124,11 +125,10 @@ namespace Sfa.Das.Sas.ApplicationServices
                 IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
                 var total = 0L;
                 Dictionary<string, long?> trainingOptionsAggregation;
+                var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
 
                 if (coordinates != null)
                 {
-                    var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
-
                     var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, page, takeElements, deliveryModes);
                     hits = searchResults.Hits;
                     total = searchResults.Total;
@@ -144,6 +144,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 {
                     Title = framework?.Title,
                     TotalResults = total,
+                    ResultsToTake = takeElements,
                     FrameworkId = frameworkId,
                     FrameworkCode = framework?.FrameworkCode ?? 0,
                     FrameworkName = framework?.FrameworkName,

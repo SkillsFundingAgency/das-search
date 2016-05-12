@@ -28,7 +28,12 @@
                 Html.RenderPartial("_StandardProviderInformation");
             }
         </div>
-        
+
+        <div class="page-navigation">
+            @GetPaginationBackLink()
+            @GetPaginationNextLink()
+        </div>
+
         <div class="column-third">
             @if (!Model.DeliveryModes.IsNullOrEmpty())
             {
@@ -52,4 +57,34 @@
             SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
         }
     </script> 
+}
+
+@helper GetPaginationBackLink()
+{
+if (Model.ActualPage > 1)
+{
+    var previousPage = @Model.ActualPage - 1;
+    var url = $"StandardResults?apprenticeshipId={Model.StandardId}&PostCode={Model.PostCode}&page={previousPage}";
+        <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
+            <i class="arrow-button fa fa-angle-left"></i>
+            <span class="description">Previous <span class="hide-mob">page</span></span>
+            <span class="counter">@previousPage of @Model.LastPage</span>
+        </a>
+}
+}
+
+
+@helper GetPaginationNextLink()
+{
+    if (Model.ActualPage < Model.LastPage)
+    {
+        var nextPage = @Model.ActualPage + 1;
+
+        var url = $"StandardResults?apprenticeshipId={Model.StandardId}&PostCode={Model.PostCode}&page={nextPage}";
+        <a href="@url" style="visibility: visible" class="page-navigation__btn next">
+            <i class="arrow-button fa fa-angle-right"></i>
+            <span class="description">Next <span class="hide-mob">page</span></span>
+            <span class="counter">@nextPage of @Model.LastPage</span>
+        </a>
+    }
 }

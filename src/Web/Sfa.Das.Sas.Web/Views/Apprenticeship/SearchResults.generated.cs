@@ -66,14 +66,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4591), Tuple.Create("\"", 4602)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4784), Tuple.Create("\"", 4795)
 
 #line 111 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4598), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 4791), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4598), false)
+, 4791), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -152,14 +152,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5427), Tuple.Create("\"", 5438)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5620), Tuple.Create("\"", 5631)
 
 #line 129 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5434), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 5627), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 5434), false)
+, 5627), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -348,14 +348,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6908), Tuple.Create("\"", 6919)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 7101), Tuple.Create("\"", 7112)
 
 #line 175 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6916), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 7109), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6916), false)
+, 7109), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -660,50 +660,60 @@ WriteAttribute("value", Tuple.Create(" value=\"", 2173), Tuple.Create("\"", 2198
 , 2181), false)
 );
 
-WriteLiteral("/>\r\n\r\n                            <fieldset>\r\n                                <le" +
-"gend>Apprenticeship Level</legend>\r\n                                <ul");
+WriteLiteral("/>\r\n\r\n                            <fieldset");
+
+WriteLiteral(" class=\"filters filters-accordion\"");
+
+WriteLiteral(">\r\n                                <h3");
+
+WriteLiteral(" class=\"toggler heading-small\"");
+
+WriteLiteral(">Apprenticeship Level</h3>\r\n                                <div");
+
+WriteLiteral(" class=\"toggled-content\"");
+
+WriteLiteral(">\r\n                                    <ul");
 
 WriteLiteral(" name=\"alist22\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 61 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                    
+            #line 62 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+                                        
             
             #line default
             #line hidden
             
-            #line 61 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                     foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
-                                    {
+            #line 62 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+                                         foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
+                                        {
 
             
             #line default
             #line hidden
-WriteLiteral("                                        <li>\r\n                                   " +
-"         <label");
+WriteLiteral("                                            <li>\r\n                               " +
+"                 <input");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2609), Tuple.Create("\"", 2661)
-            
-            #line 64 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2617), Tuple.Create<System.Object, System.Int32>(Html.Raw(item.Count == 0 ? "disabled" : "")
-            
-            #line default
-            #line hidden
-, 2617), false)
-);
-
-WriteLiteral(">\r\n                                                <input");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 2719), Tuple.Create("\"", 2738)
+WriteAttribute("value", Tuple.Create(" value=\"", 2748), Tuple.Create("\"", 2767)
             
             #line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2727), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 2756), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 2727), false)
+, 2756), false)
+);
+
+WriteAttribute("id", Tuple.Create(" id=\"", 2768), Tuple.Create("\"", 2799)
+, Tuple.Create(Tuple.Create("", 2773), Tuple.Create("SelectedLevels_", 2773), true)
+            
+            #line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+              , Tuple.Create(Tuple.Create("", 2788), Tuple.Create<System.Object, System.Int32>(item.Value
+            
+            #line default
+            #line hidden
+, 2788), false)
 );
 
 WriteLiteral(" name=\"SelectedLevels\"");
@@ -714,7 +724,7 @@ WriteLiteral(" ");
 
             
             #line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                                                                            Write(Html.Raw(item.Checked ? "checked" : ""));
+                                                                                                                                            Write(Html.Raw(item.Checked ? "checked" : ""));
 
             
             #line default
@@ -723,16 +733,39 @@ WriteLiteral(" ");
 
             
             #line 65 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                                                                                                                     Write(Html.Raw(item.Count == 0 ? "disabled" : ""));
+                                                                                                                                                                                     Write(Html.Raw(item.Count == 0 ? "disabled" : ""));
 
             
             #line default
             #line hidden
-WriteLiteral("/>\r\n                                                Level ");
+WriteLiteral(" />\r\n                                                <label");
+
+WriteAttribute("for", Tuple.Create(" for=\"", 2983), Tuple.Create("\"", 3015)
+, Tuple.Create(Tuple.Create("", 2989), Tuple.Create("SelectedLevels_", 2989), true)
+            
+            #line 66 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3004), Tuple.Create<System.Object, System.Int32>(item.Value
+            
+            #line default
+            #line hidden
+, 3004), false)
+);
+
+WriteAttribute("class", Tuple.Create(" class=\"", 3016), Tuple.Create("\"", 3068)
+            
+            #line 66 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+               , Tuple.Create(Tuple.Create("", 3024), Tuple.Create<System.Object, System.Int32>(Html.Raw(item.Count == 0 ? "disabled" : "")
+            
+            #line default
+            #line hidden
+, 3024), false)
+);
+
+WriteLiteral(">Level ");
 
             
             #line 66 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                 Write(item.Value);
+                                                                                                                                              Write(item.Value);
 
             
             #line default
@@ -741,33 +774,33 @@ WriteLiteral(" (");
 
             
             #line 66 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                                              Write(item.Count);
+                                                                                                                                                           Write(item.Count);
 
             
             #line default
             #line hidden
-WriteLiteral(")\r\n                                            </label>\r\n                        " +
-"                </li>\r\n");
+WriteLiteral(")</label>\r\n                                            </li>\r\n");
 
             
-            #line 69 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                                    }
+            #line 68 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+                                        }
 
             
             #line default
             #line hidden
-WriteLiteral("                                </ul>\r\n\r\n                                <details" +
-">\r\n                                    <summary>Help with levels</summary>\r\n    " +
-"                                <div");
+WriteLiteral("                                    </ul>\r\n\r\n                                    " +
+"<details>\r\n                                        <summary>Help with levels</su" +
+"mmary>\r\n                                        <div");
 
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
 WriteLiteral(@">
-                                        <p>
-                                            What is here?
-                                        </p>
-                                    </div>
-                                </details>
+                                            <p>
+                                                What is here?
+                                            </p>
+                                        </div>
+                                    </details>
+                                </div>
                             </fieldset>
                             <input");
 

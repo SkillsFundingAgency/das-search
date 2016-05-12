@@ -69,7 +69,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 
-
             if (viewModel == null)
             {
                 return View((ProviderStandardSearchResultViewModel)null);
@@ -124,6 +123,27 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+
+            if (viewModel == null)
+            {
+                return View((ProviderFrameworkSearchResultViewModel)null);
+            }
+
+            if (viewModel.ResultsToTake != 0)
+            {
+                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+            }
+
+            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
+            {
+                var url = Url.Action(
+                    "StandardResults",
+                    "Provider",
+                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                return new RedirectResult(url);
+            }
+
+            viewModel.ActualPage = criteria.Page;
 
             if (viewModel.FrameworkIsMissing)
             {
