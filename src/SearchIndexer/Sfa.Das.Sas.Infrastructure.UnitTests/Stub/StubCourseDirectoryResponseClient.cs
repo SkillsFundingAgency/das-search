@@ -1,22 +1,22 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
+﻿namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Stub
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
+    using System.Threading.Tasks;
 
     using Microsoft.Rest;
 
+    using Newtonsoft.Json;
     using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory;
     using Infrastructure.CourseDirectory.Models;
 
-    public class StubCourseDirectoryClient : ICourseDirectoryProviderDataService, IDisposable // TBD ToDo: Delete
+    public class StubCourseDirectoryResponseClient : ICourseDirectoryProviderDataService
     {
+
         private IEnumerable<Provider> Retrieve()
         {
-            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryData.Json);
+            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryResponse.Json);
         }
 
         public void Dispose()
@@ -30,6 +30,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
         Task<HttpOperationResponse<IList<Provider>>> ICourseDirectoryProviderDataService.BulkprovidersWithOperationResponseAsync(int? version, CancellationToken cancellationToken)
         {
             var response = new HttpOperationResponse<IList<Provider>>();
+            response.Body = new List<Provider>();
             var l = Retrieve();
             foreach (var provider in l)
             {

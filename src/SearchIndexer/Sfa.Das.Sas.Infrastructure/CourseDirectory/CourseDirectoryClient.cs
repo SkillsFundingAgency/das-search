@@ -15,31 +15,31 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
     {
         private readonly IInfrastructureSettings _settings;
 
+        private readonly ICourseDirectoryProviderDataService _courseDirectoryProviderDataService;
+
         private readonly ILog _logger;
 
-        public CourseDirectoryClient(IInfrastructureSettings settings, ILog logger)
+        public CourseDirectoryClient(IInfrastructureSettings settings, ICourseDirectoryProviderDataService courseDirectoryProviderDataService, ILog logger)
         {
             _settings = settings;
+            _courseDirectoryProviderDataService = courseDirectoryProviderDataService;
             _logger = logger;
         }
 
         public async Task<IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
         {
-            using (var courseDirectoryProvider = new CourseDirectoryProviderDataService())
-            {
-                Stopwatch stopwatch = Stopwatch.StartNew();
-                courseDirectoryProvider.BaseUri = new Uri(_settings.CourseDirectoryUri);
-                var responseAsync = await courseDirectoryProvider.BulkprovidersWithOperationResponseAsync();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            _courseDirectoryProviderDataService.BaseUri = new Uri(_settings.CourseDirectoryUri);
+            var responseAsync = await _courseDirectoryProviderDataService.BulkprovidersWithOperationResponseAsync();
 
-                var providers = responseAsync.Body;
+            var providers = responseAsync.Body;
 
-                var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
+            var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
 
-                stopwatch.Stop();
-                _logger.Debug("CourseDirectory.GetApprenticeshipProvidersAsync", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
-
-                return selectedProviders;
-            }
+            stopwatch.Stop();
+            _logger.Debug("CourseDirectory.GetApprenticeshipProvidersAsync", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
+            _courseDirectoryProviderDataService.Dispose();
+            return selectedProviders;
         }
 
         private static Coordinate SetGeoPoint(Models.Location matchingLocation)

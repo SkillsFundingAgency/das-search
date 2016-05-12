@@ -47,6 +47,10 @@
       <HintPath>..\packages\LINQtoCSV.1.5.0.0\lib\net35\LINQtoCSV.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=0.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.0.9.6\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -74,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseDirectory\CourseDirectoryClientTest.cs" />
     <Compile Include="Elasticsearch\BaseElasticIndexMaintainerTests.cs" />
     <Compile Include="Elasticsearch\ElasticsearchMapperTest.cs" />
     <Compile Include="Elasticsearch\ElasticsearchApprenticeshipIndexMaintainerTests.cs" />
@@ -87,6 +92,8 @@
     <Compile Include="Settings\InfrastructureSettingsTests.cs" />
     <Compile Include="Settings\LarsSettingsTests.cs" />
     <Compile Include="Settings\MachineSettingsTests.cs" />
+    <Compile Include="Stub\StubCourseDirectoryResponseClient.cs" />
+    <Compile Include="Stub\StubCourseDirectoryResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
