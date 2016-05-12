@@ -48,6 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
         }
 
         [Test]
+        [Ignore]
         public void ShouldShowAllStandardsInShortlist()
         {
             var standardA = new ShortlistStandardViewModel
