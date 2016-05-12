@@ -6,7 +6,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         public string Title { get; set; }
 
-        public long TotalResults { get; set; }
+        public double TotalResults { get; set; }
+
+        public int ResultsToTake { get; set; }
+
+        public int ActualPage { get; set; }
+
+        public int LastPage { get; set; }
 
         public int FrameworkId { get; set; }
 
