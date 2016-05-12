@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     public interface IApprenticeshipSearchService
     {
-        ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<string> selectedLevels);
+        ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<int> selectedLevels);
     }
 }

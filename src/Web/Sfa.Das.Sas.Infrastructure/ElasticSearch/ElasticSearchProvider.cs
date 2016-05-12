@@ -28,19 +28,23 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _profiler = profiler;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<string> selectedLevels)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<int> selectedLevels)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
             var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords, selectedLevels?.ToList());
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
-            Dictionary<string, long?> levelAggregation = new Dictionary<string, long?>();
+            var levelAggregation = new Dictionary<int, long?>();
             if (results.Aggs.Terms("level") != null)
             {
                 foreach (var item in results.Aggs.Terms("level").Buckets)
                 {
-                    levelAggregation.Add(item.Key, item.DocCount);
+                    int iKey;
+                    if (int.TryParse(item.Key, out iKey))
+                    {
+                        levelAggregation.Add(iKey, item.DocCount);
+                    }
                 }
             }
 
@@ -162,7 +166,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, List<string> selectedLevels)
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, List<int> selectedLevels)
         {
             var levelQuery = selectedLevels != null && selectedLevels.Any() ? string.Join(" ", selectedLevels) : "*";
 
@@ -187,7 +191,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                 .QueryString( qs => qs
                                     .DefaultField(df => df.Level)
                                     .Query(levelQuery)))))
-                    .Aggregations(agg => agg.Terms("level", t => t.Field(f => f.Level)));
+                    .Aggregations(agg => agg.Terms("level", t => t.Field(f => f.Level).MinimumDocumentCount(0)));
         }
 
         private string CreateStandardProviderRawQuery(string code, Coordinate location, IEnumerable<string> deliveryModes)

@@ -47,39 +47,41 @@
             </div>
 
             <div class="column-one-third">
-                <div>
-                    <form method="get">
-                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                        <input type="hidden" name="Page" value="@Model.ActualPage" />
-                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                @if (Model.TotalResults > 0)
+                {
+                    <div>
+                        <form method="get">
+                            <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
+                            <input type="hidden" name="Page" value="@Model.ActualPage"/>
+                            <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
 
-                        <fieldset>
-                            <legend>Apprenticeship Level</legend>
-                            <ul name="alist22">
-                                @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
-                                {
-                                    <li>
-                                        <label>
-                                            <input value="@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                                            Level @item.Value (@item.Count)
-                                        </label>
-                                    </li>
-                                }
-                            </ul>
+                            <fieldset>
+                                <legend>Apprenticeship Level</legend>
+                                <ul name="alist22">
+                                    @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
+                                    {
+                                        <li>
+                                            <label class="@Html.Raw(item.Count == 0 ? "disabled" : "")">
+                                                <input value="@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
+                                                Level @item.Value (@item.Count)
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
 
-                            <details>
-                                <summary>Help with levels</summary>
-                                <div class="panel panel-border-narrow">
-                                    <p>
-                                        What is here?
-                                    </p>
-                                </div>
-                            </details>
-                        </fieldset>
-                        <input type="submit" value="Update results" />
-                    </form>
-                </div>
-
+                                <details>
+                                    <summary>Help with levels</summary>
+                                    <div class="panel panel-border-narrow">
+                                        <p>
+                                            What is here?
+                                        </p>
+                                    </div>
+                                </details>
+                            </fieldset>
+                            <input type="submit" class="button" value="Update results"/>
+                        </form>
+                    </div>
+                }
             </div>
 
             <div class="page-navigation">

@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
         [Test]
         public void ShouldCallWithProvidedParameters()
         {
-            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<string>>()));
+            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
             var standardSearchProvider = new ApprenticeshipSearchService(_mockSearchProvider.Object, _mockLogger.Object, _mockPaginationSettings.Object);
 
             standardSearchProvider.SearchByKeyword("test", 1, 2, null);
@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
         [Test]
         public void ShouldDefaultTakeTo10When0()
         {
-            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<string>>()));
+            _mockSearchProvider.Setup(m => m.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
             _mockPaginationSettings.Setup(x => x.DefaultResultsAmount).Returns(10);
             var standardSearchProvider = new ApprenticeshipSearchService(_mockSearchProvider.Object, _mockLogger.Object, _mockPaginationSettings.Object);
 

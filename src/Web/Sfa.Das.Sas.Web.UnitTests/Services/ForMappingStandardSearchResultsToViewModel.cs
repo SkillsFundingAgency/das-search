@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
                 Title = "Standard 1"
             };
             var resultList = new List<ApprenticeshipSearchResultsItem> { sri };
-            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = new Dictionary<string, long?>()};
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = new Dictionary<int, long?>()};
 
             var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
@@ -153,8 +153,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
             };
 
             var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };
-            var levels = new Dictionary<string, long?> { { "2", 3L }, { "3", 38L }, { "4", 380L } };
-            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = levels, SelectedLevels = new List<string> { "2"} };
+            var levels = new Dictionary<int, long?> { { 2, 3L }, { 3, 38L }, { 4, 380L } };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = levels, SelectedLevels = new List<int> { 2 } };
 
             var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
@@ -183,7 +183,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
             };
 
             var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };
-            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = null, SelectedLevels = new List<string> { "2" } };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = null, SelectedLevels = new List<int> { 2 } };
 
             var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 

@@ -10,6 +10,6 @@
 
         public int Take { get; set; }
 
-        public List<string> SelectedLevels { get; set; }
+        public List<int> SelectedLevels { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             destination.AggregationLevel = CreateLevelAggregation(source.LevelAggregation, source.SelectedLevels?.ToList());
         }
 
-        private IEnumerable<LevelAggregationViewModel> CreateLevelAggregation(Dictionary<string, long?> levelAggregation, List<string> selectedList)
+        private IEnumerable<LevelAggregationViewModel> CreateLevelAggregation(Dictionary<int, long?> levelAggregation, List<int> selectedList)
         {
             if (levelAggregation == null)
             {
@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
 
             return levelAggregation.Select(
                 item => new LevelAggregationViewModel
-                { Value = item.Key, Count = item.Value ?? 0L, Checked = selectedList != null && selectedList.Contains(item.Key) });
+                { Value = item.Key.ToString(), Count = item.Value ?? 0L, Checked = selectedList != null && selectedList.Contains(item.Key) });
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             _paginationSettings = paginationSettings;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<string> selectedLevels)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<int> selectedLevels)
         {
             _logger.Info($"Apprenticeship Keyword Search: {keywords}", new Dictionary<string, object> { { "keywords", keywords?.Split(' ') ?? new string[] { "[empty]" } } });
 

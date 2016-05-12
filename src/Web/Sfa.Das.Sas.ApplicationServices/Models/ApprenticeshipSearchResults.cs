@@ -18,8 +18,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public bool HasError { get; set; }
 
-        public Dictionary<string, long?> LevelAggregation { get; set; }
+        public Dictionary<int, long?> LevelAggregation { get; set; }
 
-        public IEnumerable<string> SelectedLevels { get; set; }
+        public IEnumerable<int> SelectedLevels { get; set; }
     }
 }
