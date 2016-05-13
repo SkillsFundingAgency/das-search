@@ -70,6 +70,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -88,6 +89,7 @@
     <Compile Include="Services\CsvTestModel.cs" />
     <Compile Include="Services\CsvServiceTests.cs" />
     <Compile Include="Services\VstsClientTests.cs" />
+    <Compile Include="Services\ZipFileExtractorTest.cs" />
     <Compile Include="Settings\AppConfigSettingsProviderTests.cs" />
     <Compile Include="Settings\InfrastructureSettingsTests.cs" />
     <Compile Include="Settings\LarsSettingsTests.cs" />

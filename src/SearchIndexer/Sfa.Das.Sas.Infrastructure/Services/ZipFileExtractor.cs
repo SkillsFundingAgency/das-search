@@ -1,59 +1,22 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Infrastructure;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 {
-    public class ZipFileExtractor : IUnzipFiles, IUnzipStream
+    using System.Linq;
+
+    public class ZipFileExtractor : IUnzipStream
     {
-        public string ExtractFileFromZip(string pathToZipFile, string fileToExtract)
-        {
-            if (string.IsNullOrEmpty(pathToZipFile))
-            {
-                return string.Empty;
-            }
-
-            var workingDir = Path.GetDirectoryName(pathToZipFile);
-
-            if (string.IsNullOrEmpty(workingDir))
-            {
-                return string.Empty;
-            }
-
-            var extractedPath = Path.Combine(workingDir, "extracted");
-
-            FileHelper.DeleteRecursive(extractedPath);
-            FileHelper.EnsureDir(extractedPath);
-
-            using (var zip = ZipFile.OpenRead(pathToZipFile))
-            {
-                foreach (var entry in zip.Entries)
-                {
-                    if (entry.FullName.EndsWith(fileToExtract, StringComparison.OrdinalIgnoreCase))
-                    {
-                        entry.ExtractToFile(Path.Combine(extractedPath, fileToExtract));
-                    }
-                }
-            }
-
-            FileHelper.DeleteFile(pathToZipFile);
-
-            return extractedPath;
-        }
-
         public string ExtractFileFromStream(Stream stream, string fileToExtract)
         {
             using (var zip = new ZipArchive(stream))
             {
-                foreach (var entry in zip.Entries)
+                foreach (var entry in zip.Entries.Where(m => m.FullName.EndsWith($"CSV/{fileToExtract}")))
                 {
-                    if (entry.FullName.EndsWith($"CSV/{fileToExtract}", StringComparison.OrdinalIgnoreCase))
+                    using (var reader = new StreamReader(entry.Open()))
                     {
-                        using (var reader = new StreamReader(entry.Open()))
-                        {
-                            return reader.ReadToEnd();
-                        }
+                        return reader.ReadToEnd();
                     }
                 }
             }

@@ -92,7 +92,6 @@
     <Compile Include="Http\IHttpGetFile.cs" />
     <Compile Include="Services\IIndexerService.cs" />
     <Compile Include="Services\IndexerService.cs" />
-    <Compile Include="Infrastructure\IUnzipFiles.cs" />
     <Compile Include="MetaData\IVstsClient.cs" />
     <Compile Include="MetaData\IVstsService.cs" />
     <Compile Include="Settings\IIndexSettings.cs" />
