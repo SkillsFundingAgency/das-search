@@ -28,20 +28,35 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _profiler = profiler;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<int> selectedLevels)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
-            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords);
+            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords, selectedLevels?.ToList());
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
+            var levelAggregation = new Dictionary<int, long?>();
+            if (results.Aggs.Terms("level") != null)
+            {
+                foreach (var item in results.Aggs.Terms("level").Buckets)
+                {
+                    int iKey;
+                    if (int.TryParse(item.Key, out iKey))
+                    {
+                        levelAggregation.Add(iKey, item.DocCount);
+                    }
+                }
+            }
+
             return new ApprenticeshipSearchResults
             {
-                TotalResults = results.HitsMetaData.Total,
+                TotalResults = results.HitsMetaData?.Total ?? 0,
                 ResultsToTake = take,
                 SearchTerm = formattedKeywords,
                 Results = results.Documents,
-                HasError = results.ApiCall.HttpStatusCode != 200
+                HasError = results.ApiCall.HttpStatusCode != 200,
+                LevelAggregation = levelAggregation,
+                SelectedLevels = selectedLevels
             };
         }
 
@@ -151,8 +166,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords)
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, List<int> selectedLevels)
         {
+            var levelQuery = selectedLevels != null && selectedLevels.Any() ? string.Join(" ", selectedLevels) : "*";
+
             var skip = (page - 1) * take;
             return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
@@ -167,7 +184,14 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                 .Field(p => p.Keywords)
                                 .Field(p => p.FrameworkName)
                                 .Field(p => p.PathwayName))
-                            .Query(formattedKeywords)));
+                            .Query(formattedKeywords)))
+                     .PostFilter(m => m
+                        .Bool(b => b
+                            .Must(mu => mu
+                                .QueryString( qs => qs
+                                    .DefaultField(df => df.Level)
+                                    .Query(levelQuery)))))
+                    .Aggregations(agg => agg.Terms("level", t => t.Field(f => f.Level).MinimumDocumentCount(0)));
         }
 
         private string CreateStandardProviderRawQuery(string code, Coordinate location, IEnumerable<string> deliveryModes)
@@ -247,5 +271,28 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         }
 
         private static readonly Func<dynamic, string> ToJson = d => Newtonsoft.Json.JsonConvert.SerializeObject(d);
+
+        //private Dictionary<string, long?> GetTraingOptionsAggregation<T>(bool documents, string qryStrAggregation)
+        //   where T : ApprenticeshipSearchResultsItem
+        //{
+        //    var trainingOptionsAggregation = new Dictionary<string, long?>();
+        //    if (documents)
+        //    {
+        //        var resultsAggregation =
+        //            _elasticsearchCustomClient.Search<T>(
+        //                s => s.Index(_applicationSettings.ProviderIndexAlias)
+        //                .Size(0)
+        //                .Query(q => q
+        //                    .Raw(qryStrAggregation))
+        //               .Aggregations(aggs => aggs.Terms("level", tt => tt.Field(fi => fi.Level))));
+
+        //        foreach (var item in resultsAggregation.Aggs.Terms("level").Buckets)
+        //        {
+        //            trainingOptionsAggregation.Add(item.Key, item.DocCount);
+        //        }
+        //    }
+
+        //    return trainingOptionsAggregation;
+        //}
     }
 }

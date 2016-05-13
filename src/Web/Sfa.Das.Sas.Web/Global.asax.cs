@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web
         {
             TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
 
-            TelemetryConfiguration.Active.ContextInitializers.Add(new ApplicationInsightsInitializer());
+            TelemetryConfiguration.Active.TelemetryInitializers.Add(new ApplicationInsightsInitializer());
         }
 
         private void ProfileViewEngines()

@@ -1,57 +1,29 @@
 ﻿using AutoMapper;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
-    using Resources = Resources.EquivalenceLevels;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    internal class ApprenticeshipSearchResultViewModelMappingAction :
-        IMappingAction<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>
+    public class ApprenticeshipSearchResultViewModelMappingAction : IMappingAction<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>
     {
-        public void Process(ApprenticeshipSearchResultsItem source, ApprenticeshipSearchResultItemViewModel destination)
+        public void Process(ApprenticeshipSearchResults source, ApprenticeshipSearchResultViewModel destination)
         {
-            destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
-            destination.Level = GetLevelText(source.Level);
-            destination.ApprenticeshipType = destination.StandardId != 0 ? "standard" : "framework";
+            destination.AggregationLevel = CreateLevelAggregation(source.LevelAggregation, source.SelectedLevels?.ToList());
         }
 
-        private string GetLevelText(int item)
+        private IEnumerable<LevelAggregationViewModel> CreateLevelAggregation(Dictionary<int, long?> levelAggregation, List<int> selectedList)
         {
-            var equivalence = string.Empty;
-            switch (item)
+            if (levelAggregation == null)
             {
-                case 1:
-                    equivalence = Resources.FirstLevel;
-                    break;
-                case 2:
-                    equivalence = Resources.SecondLevel;
-                    break;
-                case 3:
-                    equivalence = Resources.ThirdLevel;
-                    break;
-                case 4:
-                    equivalence = Resources.FourthLevel;
-                    break;
-                case 5:
-                    equivalence = Resources.FifthLevel;
-                    break;
-                case 6:
-                    equivalence = Resources.SixthLevel;
-                    break;
-                case 7:
-                    equivalence = Resources.SeventhLevel;
-                    break;
-                case 8:
-                    equivalence = Resources.EighthLevel;
-                    break;
-                default:
-                    equivalence = string.Empty;
-                    break;
+                return new List<LevelAggregationViewModel>();
             }
 
-            return !string.IsNullOrEmpty(equivalence) ? $"{item} (equivalent to {equivalence})" : string.Empty;
+            return levelAggregation.Select(
+                item => new LevelAggregationViewModel
+                { Value = item.Key.ToString(), Count = item.Value ?? 0L, Checked = selectedList != null && selectedList.Contains(item.Key) });
         }
     }
 }

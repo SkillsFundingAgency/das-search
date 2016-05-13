@@ -1,12 +1,12 @@
-using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Channel;
 
 namespace Sfa.Das.Sas.Web
 {
-    public class ApplicationInsightsInitializer : Microsoft.ApplicationInsights.Extensibility.IContextInitializer
+    public sealed class ApplicationInsightsInitializer : Microsoft.ApplicationInsights.Extensibility.ITelemetryInitializer
     {
-        public void Initialize(TelemetryContext context)
+        public void Initialize(ITelemetry telemetry)
         {
-            context.Properties["Application"] = "Sfa.Das.Web";
+            telemetry.Context.Properties["Application"] = "Sfa.Das.Web";
         }
     }
 }

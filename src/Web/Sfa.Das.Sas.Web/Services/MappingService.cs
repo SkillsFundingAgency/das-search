@@ -52,8 +52,8 @@ namespace Sfa.Das.Sas.Web.Services
             return new MapperConfiguration(cfg =>
             {
                 // Apprenticeship search listing  -> mix of standard and framework
-                cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>();
-                cfg.CreateMap<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>().AfterMap<ApprenticeshipSearchResultViewModelMappingAction>();
+                cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>().AfterMap<ApprenticeshipSearchResultViewModelMappingAction>();
+                cfg.CreateMap<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>().AfterMap<ApprenticeshipSearchResultItemViewModelMappingAction>();
 
                 // Standard detail page
                 cfg.CreateMap<Standard, StandardViewModel>().AfterMap<StandardViewModelMappingAction>();
