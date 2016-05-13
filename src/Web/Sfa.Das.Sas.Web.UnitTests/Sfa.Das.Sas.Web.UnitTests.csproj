@@ -157,9 +157,6 @@
     <Compile Include="Views\ViewTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <None Include="Sfa.Das.Sas.Web.UnitTests.ruleset" />
     <None Include="stylecop.json" />
