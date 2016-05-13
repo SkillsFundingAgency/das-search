@@ -2344,3 +2344,56 @@ details .arrow {
         }
     }
 }
+
+
+
+.filters {
+    display: block;
+    margin: 0 0 20px 0;
+    border: 1px solid $grey-3;
+    overflow: hidden;
+    .toggler {
+        clear: both;
+        background: $grey-3;
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        padding: 5px 30px 5px 10px;
+        margin: 0;
+        top: 0;
+        float: none;
+        position: relative;
+        cursor: pointer;
+        &:after {
+            position: absolute;
+            display: block;
+            height: 100%;
+            top: 5px;
+            right: 10px;
+            text-align: center;
+            vertical-align: middle;
+            content: "\02228";
+        }
+    }
+    li {
+        margin-bottom: .5em;
+    }
+    .toggler + .toggled-content {
+        padding: 20px;
+    }
+    @at-root  {
+        .js .filters .toggled-content {
+            display: none;
+        }
+        .js .filters.unfolded {
+            .toggler {
+                &:after {
+                    content: "\02227";
+                }
+            }
+            .toggled-content {
+                display: block;
+            }
+        } 
+    }
+}

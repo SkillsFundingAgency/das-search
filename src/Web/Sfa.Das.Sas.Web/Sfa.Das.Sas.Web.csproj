@@ -344,6 +344,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_FilterProviders.cshtml</DependentUpon>
+      <Generator>RazorGenerator</Generator>
     </Compile>
     <Compile Include="Views\Provider\_FrameworkProviderInformation.generated.cs">
       <AutoGen>True</AutoGen>
@@ -476,7 +477,10 @@
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\analytics.js" />
     <Content Include="scripts\standard-detail.js" />
+    <Content Include="scripts\ui.js" />
     <Content Include="scripts\validation.js" />
+    <Content Include="scripts\vendor\jquery.js" />
+    <Content Include="scripts\vendor\modernizr.js" />
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
