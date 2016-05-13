@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -39,9 +41,14 @@ namespace Sfa.Das.Sas.Web.Controllers
             _settings = settings;
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public async Task<ActionResult> StandardResults(ProviderSearchCriteria criteria)
         {
+            if (criteria.ApprenticeshipId < 1)
+            {
+                Response.StatusCode = 400;
+            }
+
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 var url = Url.Action(
@@ -61,9 +68,14 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public async Task<ActionResult> FrameworkResults(ProviderSearchCriteria criteria)
         {
+            if (criteria.ApprenticeshipId < 1)
+            {
+                Response.StatusCode = 400;
+            }
+
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 var url = Url.Action(
@@ -83,7 +95,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
             var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);
