@@ -42,7 +42,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             // Arrange
             var mockSearchService = new Mock<IApprenticeshipSearchService>();
             var mockLogger = new Mock<ILog>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(new ApprenticeshipSearchResults());
+            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10, null)).Returns(new ApprenticeshipSearchResults());
 
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(
@@ -64,7 +64,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             // Arrange
             var mockSearchService = new Mock<IApprenticeshipSearchService>();
             var mockLogger = new Mock<ILog>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10)).Returns(value: null);
+            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10, null)).Returns(value: null);
 
             var mockMappingServices = new Mock<IMappingService>();
             mockMappingServices.Setup(

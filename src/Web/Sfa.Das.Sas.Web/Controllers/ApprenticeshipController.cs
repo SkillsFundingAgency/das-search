@@ -18,6 +18,10 @@ using RedirectResult = System.Web.Mvc.RedirectResult;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Web.Routing;
+
+    using WebGrease.Css.Extensions;
+
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
@@ -62,7 +66,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             using (_profiler.CreateStep("Search by keyword"))
             {
-                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take);
+                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.SelectedLevels);
             }
 
             using (_profiler.CreateStep("Map to view model"))
@@ -82,10 +86,18 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())
             {
+                var rv = new RouteValueDictionary { { "keywords", criteria.Keywords }, { "page", viewModel.LastPage } };
+                int i = 0;
+                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+                {
+                    rv.Add("SelectedLevels[" + i + "]", level.Value);
+                    i++;
+                }
+
                 var url = Url.Action(
                     "SearchResults",
                     "Apprenticeship",
-                    new { keywords = criteria?.Keywords, page = viewModel.LastPage });
+                    rv);
                 return new RedirectResult(url);
             }
 

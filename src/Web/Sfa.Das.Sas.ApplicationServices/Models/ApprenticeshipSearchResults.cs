@@ -17,5 +17,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public IEnumerable<ApprenticeshipSearchResultsItem> Results { get; set; }
 
         public bool HasError { get; set; }
+
+        public Dictionary<int, long?> LevelAggregation { get; set; }
+
+        public IEnumerable<int> SelectedLevels { get; set; }
     }
 }
