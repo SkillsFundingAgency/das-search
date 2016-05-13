@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -12,6 +14,7 @@ using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
+using RedirectResult = System.Web.Mvc.RedirectResult;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -50,7 +53,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View();
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
         {
             ApprenticeshipSearchResults searchResults;
@@ -94,6 +97,11 @@ namespace Sfa.Das.Sas.Web.Controllers
         // GET: Standard
         public ActionResult Standard(int id, string hasError)
         {
+            if (id < 0)
+            {
+                Response.StatusCode = 400;
+            }
+
             var standardResult = _getStandards.GetStandardById(id);
 
             if (standardResult == null)
@@ -117,6 +125,11 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult Framework(int id, string hasError)
         {
+            if (id < 0)
+            {
+                Response.StatusCode = 400;
+            }
+
             var frameworkResult = _getFrameworks.GetFrameworkById(id);
 
             if (frameworkResult == null)

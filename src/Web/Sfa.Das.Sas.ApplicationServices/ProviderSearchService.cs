@@ -40,12 +40,10 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
-                if (standardId < 0)
-                {
-                    throw new SearchException("StandardId can't be negative");
-                }
+                var standard = _getStandards.GetStandardById(standardId);
+                standardName = standard?.Title;
 
-                standardName = _getStandards.GetStandardById(standardId)?.Title;
+                var standardMissing = false || standard == null;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
@@ -57,10 +55,12 @@ namespace Sfa.Das.Sas.ApplicationServices
                         StandardId = standardId,
                         StandardName = standardName,
                         PostCode = postCode,
+                        StandardNotFound = standardMissing,
                         Hits = new IApprenticeshipProviderSearchResultsItem[0],
                         HasError = false
                     };
                 }
+
                 _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
 
                 var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, deliveryModes);
@@ -71,6 +71,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardId = standardId,
                     StandardName = standardName,
                     PostCode = postCode,
+                    StandardNotFound = standardMissing,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
                     SelectedTrainingOptions = deliveryModes
@@ -103,12 +104,12 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
+                var framework = _getFrameworks.GetFrameworkById(frameworkId);
+
                 if (frameworkId < 0)
                 {
                     throw new SearchException("FrameworkId can't be negative");
                 }
-
-                var framework = _getFrameworks.GetFrameworkById(frameworkId);
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 

@@ -65,6 +65,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 
+            if (viewModel.StandardNotFound)
+            {
+                Response.StatusCode = 404;
+            }
+
             return View(viewModel);
         }
 
@@ -91,6 +96,11 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+
+            if (viewModel.FrameworkCode == 0)
+            {
+                Response.StatusCode = 404;
+            }
 
             return View(viewModel);
         }
