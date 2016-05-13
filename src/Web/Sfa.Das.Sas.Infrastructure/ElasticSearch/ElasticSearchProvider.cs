@@ -192,7 +192,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                         .Size(0)
                         .Query(q => q
                             .Raw(qryStrAggregation))
-                       .Aggregations(aggs => aggs.Terms("training_type", tt => tt.Field(fi => fi.DeliveryModes))));
+                       .Aggregations(aggs => aggs.Terms("training_type", tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))));
 
                 foreach (var item in resultsAggregation.Aggs.Terms("training_type").Buckets)
                 {

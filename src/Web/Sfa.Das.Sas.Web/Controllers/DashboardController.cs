@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Common;
-using Sfa.Das.Sas.Web.ViewModels;
+using Sfa.Das.Sas.Web.Factories;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -12,34 +11,35 @@ namespace Sfa.Das.Sas.Web.Controllers
     {
         private readonly IGetStandards _getStandards;
         private readonly IListCollection<int> _listCollection;
+        private readonly IDashboardViewModelFactory _dashboardViewModelFactory;
+        private readonly IShortlistStandardViewModelFactory _shortlistStandardViewModelFactory;
 
-        public DashboardController(IGetStandards getStandards, IListCollection<int> listCollection)
+        public DashboardController(
+            IGetStandards getStandards,
+            IListCollection<int> listCollection,
+            IDashboardViewModelFactory dashboardViewModelFactory,
+            IShortlistStandardViewModelFactory shortlistStandardViewModelFactory)
         {
             _getStandards = getStandards;
             _listCollection = listCollection;
+            _dashboardViewModelFactory = dashboardViewModelFactory;
+            _shortlistStandardViewModelFactory = shortlistStandardViewModelFactory;
         }
 
         // GET: Dashboard
         public ActionResult Overview()
         {
             var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
-            //var standards = shortListStandards.Select(x => _getStandards.GetStandardById(x))
-            //                                  .Where(s => s != null);
 
             var standards = _getStandards.GetStandardsByIds(shortListStandards);
 
-            var shortlistStandardViewModels = standards.Select(x => new ShortlistStandardViewModel
-            {
-                Id = x.StandardId,
-                Title = x.Title,
-                Level = x.NotionalEndLevel
-            });
+            var shortlistStandardViewModels = standards.Select(
+                x => _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(
+                    x.StandardId,
+                    x.Title,
+                    x.NotionalEndLevel));
 
-            var viewModel = new DashboardViewModel
-            {
-                Title = "Your apprenticeship shortlist",
-                Standards = shortlistStandardViewModels
-            };
+            var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(shortlistStandardViewModels.ToList());
 
             return View(viewModel);
         }

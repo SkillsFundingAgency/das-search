@@ -337,14 +337,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 
 #line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id=@id }, new {@class="link", rel="nofollow", id = "shortlist-link" }));
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id }, new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" }));
 
 
 #line default
 #line hidden
 
 #line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                                                             
+                                                                                                                                                                                              
     }
     else
     {
@@ -354,14 +354,14 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveS
 #line hidden
 
 #line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id=@id }, new { @class = "link", rel="nofollow", id = "shortlist-link"}));
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id }, new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" }));
 
 
 #line default
 #line hidden
 
 #line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                                                               
+                                                                                                                                                                                             
     }
 
 

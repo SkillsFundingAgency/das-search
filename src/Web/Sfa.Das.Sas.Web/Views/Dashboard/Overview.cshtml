@@ -16,7 +16,7 @@
 
     @DisplayEmptyShortlistMessage(Model)
 
-    @DisplayStandardsShortListTable(Model.Standards)
+    @DisplayStandardsShortListTable(Model.Standards.ToList())
 </main>
 
 @helper DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
@@ -32,11 +32,9 @@
     </p>
 }
 
-@helper DisplayStandardsShortListTable(IEnumerable<ShortlistStandardViewModel> standards)
+@helper DisplayStandardsShortListTable(ICollection<ShortlistStandardViewModel> standards)
 {
-    var standardViewModels = standards as ShortlistStandardViewModel[] ?? standards.ToArray();
-
-    if (!standardViewModels.Any())
+    if (!standards.Any())
     {
         return;
     }
@@ -49,7 +47,7 @@
         </tr>
         </thead>
         <tbody>
-        @GetShortlistItemRows(standardViewModels)
+        @GetShortlistItemRows(standards)
         </tbody>
     </table>
 }
@@ -60,9 +58,9 @@
     {
         var standardName = $"{standard.Title} (level {standard.Level})";
 
-        <tr>
-            <td>@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, new {rel="nofollow"})</td>
-            <td>@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" })</td>
+        <tr class="standard-item">
+            <td class="standard-title">@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null)</td>
+            <td class="standard-delete-link">@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" })</td>
         </tr>
     }
 }

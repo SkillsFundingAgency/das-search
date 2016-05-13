@@ -91,7 +91,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n    </p>\r\n");
 #line hidden
 
 #line 35 "..\..\Views\Dashboard\Overview.cshtml"
-public System.Web.WebPages.HelperResult DisplayStandardsShortListTable(IEnumerable<ShortlistStandardViewModel> standards)
+public System.Web.WebPages.HelperResult DisplayStandardsShortListTable(ICollection<ShortlistStandardViewModel> standards)
 {
 #line default
 #line hidden
@@ -99,9 +99,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 36 "..\..\Views\Dashboard\Overview.cshtml"
  
-    var standardViewModels = standards as ShortlistStandardViewModel[] ?? standards.ToArray();
-
-    if (!standardViewModels.Any())
+    if (!standards.Any())
     {
         return;
     }
@@ -120,8 +118,8 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        <thead>\r\n        <tr>\r\n 
 WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 52 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, GetShortlistItemRows(standardViewModels));
+#line 50 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, GetShortlistItemRows(standards));
 
 
 #line default
@@ -129,26 +127,26 @@ WriteTo(__razor_helper_writer, GetShortlistItemRows(standardViewModels));
 WriteLiteralTo(__razor_helper_writer, "\r\n        </tbody>\r\n    </table>\r\n");
 
 
-#line 55 "..\..\Views\Dashboard\Overview.cshtml"
+#line 53 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 55 "..\..\Views\Dashboard\Overview.cshtml"
+#line 53 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 57 "..\..\Views\Dashboard\Overview.cshtml"
+#line 55 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistItemRows(IEnumerable<ShortlistStandardViewModel> standards)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 58 "..\..\Views\Dashboard\Overview.cshtml"
+#line 56 "..\..\Views\Dashboard\Overview.cshtml"
  
     foreach (var standard in standards)
     {
@@ -158,20 +156,32 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <tr>\r\n            <td>");
+WriteLiteralTo(__razor_helper_writer, "        <tr");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"standard-item\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n            <td");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"standard-title\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 64 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, new {rel="nofollow"}));
+#line 62 "..\..\Views\Dashboard\Overview.cshtml"
+         WriteTo(__razor_helper_writer, Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</td>\r\n            <td>");
+WriteLiteralTo(__razor_helper_writer, "</td>\r\n            <td");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"standard-delete-link\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 65 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" }));
+#line 63 "..\..\Views\Dashboard\Overview.cshtml"
+               WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" }));
 
 
 #line default
@@ -179,7 +189,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "Shor
 WriteLiteralTo(__razor_helper_writer, "</td>\r\n        </tr>\r\n");
 
 
-#line 67 "..\..\Views\Dashboard\Overview.cshtml"
+#line 65 "..\..\Views\Dashboard\Overview.cshtml"
     }
 
 
@@ -187,7 +197,7 @@ WriteLiteralTo(__razor_helper_writer, "</td>\r\n        </tr>\r\n");
 #line hidden
 });
 
-#line 68 "..\..\Views\Dashboard\Overview.cshtml"
+#line 66 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
@@ -258,7 +268,7 @@ WriteLiteral("    ");
 
             
             #line 19 "..\..\Views\Dashboard\Overview.cshtml"
-Write(DisplayStandardsShortListTable(Model.Standards));
+Write(DisplayStandardsShortListTable(Model.Standards.ToList()));
 
             
             #line default
