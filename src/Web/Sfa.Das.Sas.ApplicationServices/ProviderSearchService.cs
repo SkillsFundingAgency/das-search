@@ -106,6 +106,8 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
 
+                var frameworkMissing = false || framework == null;
+
                 if (frameworkId < 0)
                 {
                     throw new SearchException("FrameworkId can't be negative");
@@ -142,7 +144,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    FrameworkIsMissing = frameworkMissing
                 };
             }
             catch (SearchException ex)

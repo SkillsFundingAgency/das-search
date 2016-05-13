@@ -97,7 +97,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
 
-            if (viewModel.FrameworkCode == 0)
+            if (viewModel.FrameworkIsMissing)
             {
                 Response.StatusCode = 404;
             }

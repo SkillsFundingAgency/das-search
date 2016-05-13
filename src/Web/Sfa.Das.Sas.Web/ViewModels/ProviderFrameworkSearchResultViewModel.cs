@@ -28,6 +28,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public bool PostCodeMissing { get; set; }
 
+        public bool FrameworkIsMissing { get; set; }
+
         public int FrameworkLevel { get; set; }
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
