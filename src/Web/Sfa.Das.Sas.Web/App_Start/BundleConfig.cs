@@ -16,7 +16,10 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/analytics.js", 
                 "~/scripts/validation.js",
                 "~/scripts/ui.js"
+<<<<<<< 35d1dd2843aad5b4b6e711af3422233e05ccc250
                 "~/scripts/standard-detail.js",
+=======
+>>>>>>> Filter css and markup
                 ));
         }
     }
