@@ -40,6 +40,11 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
+                if (standardId < 0)
+                {
+                    throw new SearchException("StandardId can't be negative");
+                }
+
                 standardName = _getStandards.GetStandardById(standardId)?.Title;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
@@ -98,6 +103,11 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
+                if (frameworkId < 0)
+                {
+                    throw new SearchException("FrameworkId can't be negative");
+                }
+
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
