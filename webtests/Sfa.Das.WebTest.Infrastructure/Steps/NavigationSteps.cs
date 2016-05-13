@@ -57,7 +57,7 @@ namespace Sfa.Das.WebTest.Infrastructure.Steps
             var attribute = (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
             
             var urlParameters = "?" + parameters.Rows.Select(row => row[0] + "=" + row[1])
-                .Aggregate((row1, row2) => row1 + "&" + row2);
+                                                     .Aggregate((row1, row2) => row1 + "&" + row2);
             
             var url = _browserSettings.BaseUrl + attribute.Url + urlParameters;
 
@@ -65,8 +65,6 @@ namespace Sfa.Das.WebTest.Infrastructure.Steps
 
             _driver.Navigate().GoToUrl(url);
             _pageContext.CurrentPage = _objectContainer.Resolve(objectType);
-            
-            //ScenarioContext.Current.Pending();
         }
 
         [Given(@"I was on the (.*) page")]
