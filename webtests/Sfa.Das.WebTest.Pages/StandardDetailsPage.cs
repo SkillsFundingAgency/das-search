@@ -11,6 +11,6 @@
 
         public By SearchButton => By.CssSelector("#postcode-form-bottom .postcode-search-button");
 
-        public By ShortlistLink => By.Id("shortlist-link");
+        public By ShortlistLink => By.ClassName("shortlist-link");
     }
 }
