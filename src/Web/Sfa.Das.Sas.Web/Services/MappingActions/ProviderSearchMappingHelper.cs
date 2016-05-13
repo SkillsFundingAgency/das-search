@@ -43,9 +43,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
                     return TrainingOptionService.GetApprenticeshipLevel("blockrelease");
                 case "100percentemployer":
                     return TrainingOptionService.GetApprenticeshipLevel("100percentemployer");
+                default:
+                    return string.Empty;
             }
-
-            return string.Empty;
         }
 
     }
