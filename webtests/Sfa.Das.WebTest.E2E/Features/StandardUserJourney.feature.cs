@@ -66,15 +66,9 @@ namespace Sfa.Das.WebTest.E2E.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a standard and provider")]
-        [NUnit.Framework.CategoryAttribute("CI")]
-        [NUnit.Framework.CategoryAttribute("SystemTest")]
-        [NUnit.Framework.CategoryAttribute("Demo")]
         public virtual void ShouldFindAStandardAndProvider()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider", new string[] {
-                        "CI",
-                        "SystemTest",
-                        "Demo"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider", ((string[])(null)));
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8

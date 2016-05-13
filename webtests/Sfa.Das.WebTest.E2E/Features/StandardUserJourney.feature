@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@CI @SystemTest @Demo
+#@CI @SystemTest @Demo
 Scenario:Should find a standard and provider
 	Given I have data for a standard
 	And I navigated to the Start page
