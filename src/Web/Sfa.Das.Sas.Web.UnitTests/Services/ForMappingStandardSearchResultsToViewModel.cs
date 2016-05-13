@@ -8,6 +8,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Services
 {
+    using FluentAssertions;
+
     [TestFixture]
     public sealed class ForMappingStandardSearchResultsToViewModel
     {
@@ -21,7 +23,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
                 Title = "Standard 1"
             };
             var resultList = new List<ApprenticeshipSearchResultsItem> { sri };
-            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = new Dictionary<string, long?>()};
 
             var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
@@ -131,6 +133,61 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
             var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
             Assert.AreEqual(string.Empty, mappedResult.Results.First().TypicalLengthMessage);
+        }
+
+        [Test]
+        public void WhenMappingLevelAggregation()
+        {
+            MappingService mappingService = new MappingService(null);
+            var searchResultItem1 = new ApprenticeshipSearchResultsItem
+            {
+                StandardId = 101,
+                Title = "Standard 1",
+                TypicalLength = new TypicalLength
+                {
+                    From = 24,
+                    To = 12,
+                    Unit = "m"
+                },
+
+            };
+
+            var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };
+            var levels = new Dictionary<string, long?> { { "2", 3L }, { "3", 38L }, { "4", 380L } };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = levels, SelectedLevels = new List<string> { "2"} };
+
+            var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
+
+            mappedResult.AggregationLevel.Count().Should().Be(3);
+            mappedResult.AggregationLevel.FirstOrDefault(m => m.Value == "2")?.Checked.Should().BeTrue();
+            mappedResult.AggregationLevel.FirstOrDefault(m => m.Value == "3")?.Checked.Should().BeFalse();
+
+            mappedResult.AggregationLevel.FirstOrDefault(m => m.Value == "4")?.Count.Should().Be(380);
+        }
+
+        [Test]
+        public void WhenMappingLevelAggregationIsNull()
+        {
+            MappingService mappingService = new MappingService(null);
+            var searchResultItem1 = new ApprenticeshipSearchResultsItem
+            {
+                StandardId = 101,
+                Title = "Standard 1",
+                TypicalLength = new TypicalLength
+                {
+                    From = 24,
+                    To = 12,
+                    Unit = "m"
+                },
+
+            };
+
+            var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = null, SelectedLevels = new List<string> { "2" } };
+
+            var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
+
+            mappedResult.AggregationLevel.Count().Should().Be(0);
         }
     }
 }

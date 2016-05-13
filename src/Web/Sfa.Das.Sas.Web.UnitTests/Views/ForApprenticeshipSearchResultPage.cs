@@ -153,7 +153,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
                                         Title = "Test title 2",
                                         Level = "3 (equivalent to 2 A level passes)"
                                       }
-                              }
+                              },
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
@@ -188,7 +189,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
                                         Level = "3 (equivalent to 2 A level passes)",
                                         FrameworkId = 3
                                       }
-                              }
+                              },
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
@@ -273,7 +275,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
                 ActualPage = 1,
                 LastPage = 2,
                 ResultsToTake = 10,
-                HasError = false
+                HasError = false,
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -355,7 +358,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
                 ActualPage = 2,
                 LastPage = 3,
                 ResultsToTake = 10,
-                HasError = false
+                HasError = false,
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -439,12 +443,37 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
                 ActualPage = 3,
                 LastPage = 3,
                 ResultsToTake = 10,
-                HasError = false
+                HasError = false,
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("2 of 3");
             GetPartial(html, ".page-navigation__btn.next").Should().BeEmpty();
+        }
+
+        [Test]
+        public void WhenLevelAggregationValuesAreSelected()
+        {
+            var searchPage= new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel {Checked = true, Count = 500, Value = "2"} };
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 0,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel { Title = "Test" }
+                              },
+                AggregationLevel = aggList
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetAttribute(html, ".column-one-third form ul li input", "type").Should().Be("checkbox");
+            GetAttribute(html, ".column-one-third form ul li input", "checked").Should().BeNull();
+            GetAttribute(html, ".column-one-third form ul li input", "checked", 2).Should().Be(string.Empty);
+            GetPartial(html, ".column-one-third form ul li label", 2).Should().Be("Level 2 (500)");
         }
     }
 }

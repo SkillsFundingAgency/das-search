@@ -240,7 +240,8 @@
     <Compile Include="Services\MappingActions\ProviderFrameworkSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\ProviderSearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ProviderStandardSearchResultViewModelMappingAction.cs" />
-    <Compile Include="Factories\ProviderViewModelFactory.cs" />
+    <Compile Include="Services\MappingActions\ApprenticeshipSearchResultViewModelMappingAction.cs" />
+    <Compile Include="Services\ProviderViewModelFactory.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
@@ -250,7 +251,7 @@
     <Compile Include="Models\ApprenticeshipSearchCriteria.cs" />
     <Compile Include="Services\MappingActions\FrameworkProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\IMappingService.cs" />
-    <Compile Include="Services\MappingActions\ApprenticeshipSearchResultViewModelMappingAction.cs" />
+    <Compile Include="Services\MappingActions\ApprenticeshipSearchResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
     <Compile Include="Services\MappingActions\Helpers\StandardMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ProviderViewModelMappingAction.cs" />
@@ -279,6 +280,7 @@
     <Compile Include="Services\MappingActions\StandardProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
     <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryModeViewModel.cs" />

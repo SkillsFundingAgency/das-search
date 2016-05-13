@@ -18,13 +18,13 @@ namespace Sfa.Das.Sas.ApplicationServices
             _paginationSettings = paginationSettings;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<string> selectedLevels)
         {
             _logger.Info($"Apprenticeship Keyword Search: {keywords}", new Dictionary<string, object> { { "keywords", keywords?.Split(' ') ?? new string[] { "[empty]" } } });
 
             var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
 
-            var results = _searchProvider.SearchByKeyword(keywords, page, takeElements);
+            var results = _searchProvider.SearchByKeyword(keywords, page, takeElements, selectedLevels);
 
             return results;
         }
