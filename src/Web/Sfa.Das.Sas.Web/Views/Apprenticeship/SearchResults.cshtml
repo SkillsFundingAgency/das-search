@@ -55,28 +55,28 @@
                             <input type="hidden" name="Page" value="@Model.ActualPage"/>
                             <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
 
-                            <fieldset>
-                                <legend>Apprenticeship Level</legend>
-                                <ul name="alist22">
-                                    @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
-                                    {
-                                        <li>
-                                            <label class="@Html.Raw(item.Count == 0 ? "disabled" : "")">
-                                                <input value="@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
-                                                Level @item.Value (@item.Count)
-                                            </label>
-                                        </li>
-                                    }
-                                </ul>
+                            <fieldset class="filters filters-accordion">
+                                <h3 class="toggler heading-small">Apprenticeship Level</h3>
+                                <div class="toggled-content">
+                                    <ul name="alist22">
+                                        @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
+                                        {
+                                            <li>
+                                                <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                                                <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
+                                            </li>
+                                        }
+                                    </ul>
 
-                                <details>
-                                    <summary>Help with levels</summary>
-                                    <div class="panel panel-border-narrow">
-                                        <p>
-                                            What is here?
-                                        </p>
-                                    </div>
-                                </details>
+                                    <details>
+                                        <summary>Help with levels</summary>
+                                        <div class="panel panel-border-narrow">
+                                            <p>
+                                                What is here?
+                                            </p>
+                                        </div>
+                                    </details>
+                                </div>
                             </fieldset>
                             <input type="submit" class="button" value="Update results"/>
                         </form>
