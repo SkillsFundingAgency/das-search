@@ -32,6 +32,14 @@
     <CodeAnalysisRuleSet>Sfa.Eds.Das.Indexer.ApplicationServices.UnitTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -56,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MetaDataHelperTests.cs" />
+    <Compile Include="Provider\FcsActiveProvidersClientTest.cs" />
     <Compile Include="Queue\GenericControlQueueConsumerTest.cs" />
     <Compile Include="Services\ProviderIndexerTests.cs" />
     <Compile Include="Services\ApprenticeshipIndexerTests.cs" />

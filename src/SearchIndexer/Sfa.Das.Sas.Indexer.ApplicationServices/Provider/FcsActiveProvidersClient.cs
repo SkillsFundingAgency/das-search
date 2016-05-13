@@ -25,9 +25,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 
         public IEnumerable<int> GetActiveProviders()
         {
-            Func<string> func = LoadProvidersFromVsts;
-            var result = func.Invoke();
-            var records = _convertFromCsv.CsvTo<ActiveProviderCsvRecord>(result);
+            var records = _convertFromCsv.CsvTo<ActiveProviderCsvRecord>(LoadProvidersFromVsts());
             return records.Select(x => x.UkPrn);
         }
 
