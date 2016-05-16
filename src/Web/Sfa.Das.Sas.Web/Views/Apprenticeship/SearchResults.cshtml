@@ -24,6 +24,8 @@
                 }
             </p>
 
+            @FilterForm("filter-mobile")
+
             @foreach (var item in Model.Results)
             {
                 <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
@@ -47,52 +49,15 @@
         </div>
 
         <div class="column-one-third">
-            @if (Model.TotalResults > 0)
-            {
-                <div>
-                    <form method="get">
-                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                        <input type="hidden" name="Page" value="@Model.ActualPage" />
-                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-
-                        <fieldset class="filters filters-accordion">
-                            <h3 class="toggler heading-small">Apprenticeship Level</h3>
-                            <div class="toggled-content">
-                                <ul name="alist22">
-                                    @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
-                                    {
-                                        <li>
-                                            <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                                            <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
-                                        </li>
-                                    }
-                                </ul>
-
-                                <details>
-                                    <summary>Help with levels</summary>
-                                    <div class="panel panel-border-narrow">
-                                        <p>
-                                            What is here?
-                                        </p>
-                                    </div>
-                                </details>
-                            </div>
-                        </fieldset>
-                        <input type="submit" class="button" value="Update results" />
-                    </form>
-                </div>
-            }
+            @FilterForm("filter-desktop")
         </div>
 
         <div class="page-navigation">
             @GetPaginationBackLink()
             @GetPaginationNextLink()
-        </div>
+        </div> 
     </div>
-
 </main>
-
-
 
 @if (Model.TotalResults == 0)
 {
@@ -103,20 +68,20 @@
     </script>
 }
 
-    @helper GetPaginationBackLink()
+@helper GetPaginationBackLink()
+{
+    if (Model.ActualPage > 1)
     {
-        if (Model.ActualPage > 1)
-        {
-            var previousPage = @Model.ActualPage - 1;
-            var title = $"Previous page {@previousPage} of {@Model.LastPage}";
-            var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(Model.SearchTerm, @previousPage, Model.AggregationLevel), null);
-                <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
-                    <i class="arrow-button fa fa-angle-left"></i>
-                    <span class="description">Previous <span class="hide-mob">page</span></span>
-                    <span class="counter">@previousPage of @Model.LastPage</span>
-                </a>
-        }
+        var previousPage = @Model.ActualPage - 1;
+        var title = $"Previous page {@previousPage} of {@Model.LastPage}";
+        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(Model.SearchTerm, @previousPage, Model.AggregationLevel), null);
+            <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
+                <i class="arrow-button fa fa-angle-left"></i>
+                <span class="description">Previous <span class="hide-mob">page</span></span>
+                <span class="counter">@previousPage of @Model.LastPage</span>
+            </a>
     }
+}
 
 
 @helper GetPaginationNextLink()
@@ -178,3 +143,41 @@
     }
 }
 
+@helper FilterForm(string className)
+{
+    if (Model.TotalResults > 0)
+    {
+        <div class="@className">
+            <form method="get" autocomplete="off">
+                <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                <input type="hidden" name="Page" value="@Model.ActualPage" />
+                <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+
+                <fieldset class="filters filters-accordion">
+                    <h3 class="toggler heading-small">Apprenticeship Level</h3>
+                    <div class="toggled-content">
+                        <ul name="alist22">
+                            @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
+                            {
+                                <li>
+                                    <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                                    <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
+                                </li>
+                            }
+                        </ul>
+
+                        <details>
+                            <summary>Help with levels</summary>
+                            <div class="panel panel-border-narrow">
+                                <p>
+                                    What is here?
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+                </fieldset>
+                <input type="submit" class="button" value="Update results" />
+            </form>
+        </div>
+    }
+}

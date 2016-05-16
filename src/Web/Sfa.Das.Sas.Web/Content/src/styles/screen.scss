@@ -92,6 +92,22 @@ aside h2:first-child {
         :last-child {
             margin-bottom: 0;
         }
-
     }
 }
+
+
+.filter-mobile {
+    margin-bottom: 30px;
+}
+
+@media (min-width: 641px) {
+    .filter-mobile{
+        display: none;
+    } 
+}
+
+@media (max-width: 641px) {
+    .filter-desktop{
+        display: none;
+    } 
+} 

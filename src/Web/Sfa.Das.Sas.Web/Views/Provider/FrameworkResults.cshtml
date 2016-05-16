@@ -24,6 +24,8 @@
                     Html.RenderPartial("_FrameworkSearchResultMessage");
                 }
             </p>
+            @FilterForm("filter-mobile")
+
             @{
                 Html.RenderPartial("_FrameworkProviderInformation");
             }
@@ -35,17 +37,7 @@
         </div>
 
         <div class="column-third">
-            @if (!Model.DeliveryModes.IsNullOrEmpty())
-            {
-                <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
-                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                    <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId"/>
-                    @{
-                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                    }
-                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
-                </form>
-            }
+           @FilterForm("filter-desktop")
         </div>
     </div>
 </main>
@@ -91,6 +83,22 @@
     }
 }
 
+@helper FilterForm(string cssClass)
+{
+    if (!Model.DeliveryModes.IsNullOrEmpty())
+    {
+        <div class="@cssClass">
+            <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
+                <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
+                @{
+                    Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                }
+                <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
+            </form>
+        </div>
+    }
+}
 @functions
 {
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)

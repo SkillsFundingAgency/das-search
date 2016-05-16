@@ -38,54 +38,88 @@ namespace Sfa.Das.Sas.Web.Views.Provider
         }
         public override void Execute()
         {
-WriteLiteral("<fieldset>\r\n    <legend>Training options</legend>\r\n    <ul>\r\n");
+WriteLiteral("<fieldset");
+
+WriteLiteral(" class=\"filters filters-accordion\"");
+
+WriteLiteral(">\r\n    <h3");
+
+WriteLiteral(" class=\"toggler heading-small\"");
+
+WriteLiteral(">Training options</h3>\r\n    <div");
+
+WriteLiteral(" class=\"toggled-content\"");
+
+WriteLiteral("> \r\n        <ul>\r\n");
 
             
-            #line 6 "..\..\Views\Provider\_FilterProviders.cshtml"
-        
+            #line 7 "..\..\Views\Provider\_FilterProviders.cshtml"
+            
             
             #line default
             #line hidden
             
-            #line 6 "..\..\Views\Provider\_FilterProviders.cshtml"
-         foreach (var item in Model)
-        {
+            #line 7 "..\..\Views\Provider\_FilterProviders.cshtml"
+             foreach (var item in Model)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("            <li>\r\n                <label>\r\n                    <input");
+WriteLiteral("                <li>\r\n\r\n                    <input");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 251), Tuple.Create("\"", 270)
+WriteAttribute("value", Tuple.Create(" value=\"", 336), Tuple.Create("\"", 355)
             
-            #line 10 "..\..\Views\Provider\_FilterProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 259), Tuple.Create<System.Object, System.Int32>(item.Value
+            #line 11 "..\..\Views\Provider\_FilterProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 344), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 259), false)
+, 344), false)
 );
 
 WriteLiteral(" name=\"DeliveryModes\"");
+
+WriteAttribute("id", Tuple.Create("  id=\"", 377), Tuple.Create("\"", 408)
+, Tuple.Create(Tuple.Create("", 383), Tuple.Create("DeliveryModes_", 383), true)
+            
+            #line 11 "..\..\Views\Provider\_FilterProviders.cshtml"
+        , Tuple.Create(Tuple.Create("", 397), Tuple.Create<System.Object, System.Int32>(item.Value
+            
+            #line default
+            #line hidden
+, 397), false)
+);
 
 WriteLiteral(" type=\"checkbox\"");
 
 WriteLiteral(" ");
 
             
-            #line 10 "..\..\Views\Provider\_FilterProviders.cshtml"
-                                                                               Write(Html.Raw(item.Checked ? "checked" : ""));
+            #line 11 "..\..\Views\Provider\_FilterProviders.cshtml"
+                                                                                                               Write(Html.Raw(item.Checked ? "checked" : ""));
 
             
             #line default
             #line hidden
-WriteLiteral("/>\r\n");
+WriteLiteral(" />\r\n                    <label");
 
-WriteLiteral("                    ");
+WriteAttribute("for", Tuple.Create(" for=\"", 497), Tuple.Create("\"", 528)
+, Tuple.Create(Tuple.Create("", 503), Tuple.Create("DeliveryModes_", 503), true)
+            
+            #line 12 "..\..\Views\Provider\_FilterProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 517), Tuple.Create<System.Object, System.Int32>(item.Value
+            
+            #line default
+            #line hidden
+, 517), false)
+);
+
+WriteLiteral(">");
 
             
-            #line 11 "..\..\Views\Provider\_FilterProviders.cshtml"
-               Write(item.Title);
+            #line 12 "..\..\Views\Provider\_FilterProviders.cshtml"
+                                                      Write(item.Title);
 
             
             #line default
@@ -93,42 +127,42 @@ WriteLiteral("                    ");
 WriteLiteral(" (");
 
             
-            #line 11 "..\..\Views\Provider\_FilterProviders.cshtml"
-                            Write(item.Count);
+            #line 12 "..\..\Views\Provider\_FilterProviders.cshtml"
+                                                                   Write(item.Count);
 
             
             #line default
             #line hidden
-WriteLiteral(")\r\n                </label>\r\n            </li>\r\n");
+WriteLiteral(")</label>\r\n                </li>\r\n");
 
             
             #line 14 "..\..\Views\Provider\_FilterProviders.cshtml"
-        }
+            }
 
             
             #line default
             #line hidden
-WriteLiteral("    </ul>\r\n    <details>\r\n        <summary>Explain training options</summary>\r\n  " +
-"      <div");
+WriteLiteral("        </ul>\r\n        <details>\r\n            <summary>Explain training options</" +
+"summary>\r\n            <div");
 
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
-WriteLiteral(">\r\n            <p>\r\n                <span");
+WriteLiteral(">\r\n                <p>\r\n                    <span");
 
 WriteLiteral(" class=\"bold-small\"");
 
 WriteLiteral(">Day release:</span> eg one day a week at the training provider\'s location.\r\n    " +
-"        </p>\r\n            <p>\r\n                <span");
+"            </p>\r\n                <p>\r\n                    <span");
 
 WriteLiteral(" class=\"bold-small\"");
 
 WriteLiteral(">Block release:</span> eg 3-4 weeks at the training provider\'s location.\r\n       " +
-"     </p>\r\n            <p>\r\n                <span");
+"         </p>\r\n                <p>\r\n                    <span");
 
 WriteLiteral(" class=\"bold-small\"");
 
-WriteLiteral(">At your location:</span> the provider comes to your workplace.\r\n            </p>" +
-"\r\n        </div>\r\n    </details>\r\n</fieldset>");
+WriteLiteral(">At your location:</span> the provider comes to your workplace.\r\n                " +
+"</p>\r\n            </div>\r\n        </details>\r\n    </div>\r\n</fieldset>");
 
         }
     }

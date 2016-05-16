@@ -26,6 +26,8 @@
                     Html.RenderPartial("_StandardSearchResultMessage");
                 }
             </p>
+            @FilterForm("filter-mobile")
+
             @{
                 Html.RenderPartial("_StandardProviderInformation");
             }
@@ -39,18 +41,7 @@
         
 
         <div class="column-third">
-            @if (!Model.DeliveryModes.IsNullOrEmpty())
-            {
-                <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
-                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
-                    <input type="hidden" name="page" value="@Model.ActualPage"/>
-                    @{
-                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                    }
-                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
-                </form>
-            }
+            @FilterForm("filter-desktop")
         </div>
     </div>
 </main>
@@ -93,6 +84,23 @@
             <span class="counter">@nextPage of @Model.LastPage</span>
         </a>
     }
+}
+
+@helper FilterForm(string cssClass)
+{
+if (!Model.DeliveryModes.IsNullOrEmpty())
+{
+        <div class="@cssClass">
+            <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
+                <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
+                @{
+                    Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                }
+                <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
+            </form>
+        </div>
+                    }
 }
 
 @functions
