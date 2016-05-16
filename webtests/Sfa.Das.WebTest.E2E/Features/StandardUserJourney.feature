@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@CI @SystemTest @Demo
+@Happy-Path		@CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a standard and provider
 	Given I have data for a standard
 	And I navigated to the Start page
@@ -19,6 +19,11 @@ Scenario:Should find a standard and provider
 	When I choose First Standard Result
 	Then I am on the Standard Details page
 
+	When I choose Shortlist Link
+	Then I see
+         | Field          | Rule     | Value                 |
+         | Shortlist Link | contains | Remove from shortlist |
+
 	When I enter data
 		| Field               | Value      |
 		| Postcode Search Box | {Postcode} |
@@ -31,6 +36,11 @@ Scenario:Should find a standard and provider
 	And I see
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
+
+	When I choose Dashboard Link
+	Then I am on the Dashboard Overview page
+	And I see Standards Shortlist list contains at least 1 items
+
 
 @ignore
 Scenario: Should be able to search for and add a standard to my shortlist
@@ -54,7 +64,7 @@ Scenario: Should be able to search for and add a standard to my shortlist
          | Field          | Rule     | Value                 |
          | Shortlist Link | has text | Remove from shortlist |
 
-@ignore
+@Sad-Path @ignore
 Scenario: ShouldBeAbleToDeleteAStandardFromMyDashboard
 	Given I navigated to the Standard Details page with parameters
 		| Parameter | Value |

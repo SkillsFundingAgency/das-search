@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderDetailPage.cs" />
     <Compile Include="SearchResultsPage.cs" />
+    <Compile Include="SharedTemplatePage.cs" />
     <Compile Include="StandardDetailsPage.cs" />
     <Compile Include="StandardProviderResultsPage.cs" />
     <Compile Include="StartPage.cs" />

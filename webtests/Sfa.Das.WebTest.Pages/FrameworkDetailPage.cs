@@ -5,7 +5,7 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/apprenticeship/framework")]
-    public class FrameworkDetailsPage
+    public class FrameworkDetailsPage : SharedTemplatePage
     {
         public By PostcodeSearchBox => By.Id("postcode");
 

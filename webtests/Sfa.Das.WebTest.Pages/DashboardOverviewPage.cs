@@ -5,7 +5,7 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/Dashboard/Overview")]
-    public class DashboardOverviewPage
+    public class DashboardOverviewPage : SharedTemplatePage
     {
         public By StandardsShortlist => By.Id("standards-shortlist");
 

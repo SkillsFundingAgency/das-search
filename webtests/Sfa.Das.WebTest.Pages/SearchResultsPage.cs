@@ -8,7 +8,7 @@
     using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     [PageNavigation("/apprenticeship/searchresults")]
-    public class SearchResultsPage
+    public class SearchResultsPage : SharedTemplatePage
     {
         private readonly IWebDriver _driver;
 

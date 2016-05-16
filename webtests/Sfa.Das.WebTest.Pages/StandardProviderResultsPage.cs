@@ -5,7 +5,7 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/provider/standardresults")]
-    public class StandardProviderResultsPage
+    public class StandardProviderResultsPage : SharedTemplatePage
     {
         public By ProviderResults => By.CssSelector("#provider-results article.result");
 

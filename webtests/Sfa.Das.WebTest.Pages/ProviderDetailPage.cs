@@ -5,7 +5,7 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/provider/detail")]
-    public class ProviderDetailsPage
+    public class ProviderDetailsPage : SharedTemplatePage
     {
         public By ProviderName => By.Id("provider-name");
     }

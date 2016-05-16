@@ -5,7 +5,7 @@
     using Sfa.Das.WebTest.Infrastructure;
 
     [PageNavigation("/")]
-    public class StartPage
+    public class StartPage : SharedTemplatePage
     {
         public By StartButton => By.Id("start-button");
     }

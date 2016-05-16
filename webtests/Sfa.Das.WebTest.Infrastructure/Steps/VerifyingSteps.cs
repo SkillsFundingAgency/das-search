@@ -36,12 +36,33 @@
                     case "exists":
                         Assert.IsNotNull(element, "Couldn't find element " + row[0]);
                         break;
-                    case "has text":
+                    case "contains":
                         Assert.IsNotNull(element, "Couldn't find element " + row[0]);
                         Assert.AreEqual(element.Text, row[2], $"{row[0]} element text is {element.Text} and not {row[2]}");
                         break;
                 }
             }
         }
+
+        [When(@"I wait to see")]
+        public void ThenIWaitToSee(Table table)
+        {
+            foreach (var row in table.Rows)
+            {
+                var selector = _pageContext.FindSelector(row[0]);
+                var element = _driver.FindElements(selector).FirstOrDefault();
+                switch (row[1].ToLower())
+                {
+                    case "exists":
+                        Assert.IsNotNull(element, "Couldn't find element " + row[0]);
+                        break;
+                    case "contains":
+                        Assert.IsNotNull(element, "Couldn't find element " + row[0]);
+                        Assert.AreEqual(element.Text, row[2], $"{row[0]} element text is {element.Text} and not {row[2]}");
+                        break;
+                }
+            }
+        }
+
     }
 }
