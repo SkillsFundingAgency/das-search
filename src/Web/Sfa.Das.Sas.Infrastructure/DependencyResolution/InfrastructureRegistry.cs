@@ -2,7 +2,6 @@
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Infrastructure.Configuration;
 using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Logging;
 using Sfa.Das.Sas.Infrastructure.Mapping;
@@ -11,7 +10,9 @@ using StructureMap.Configuration.DSL;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
+    using Sfa.Das.Sas.ApplicationServices.Settings;
     using Sfa.Das.Sas.Infrastructure.MiniProfiler;
+    using Sfa.Das.Sas.Infrastructure.Settings;
 
     public sealed class InfrastructureRegistry : Registry
     {
@@ -19,6 +20,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
         {
             For<ILog>().Use(x => new NLogLogger(x.ParentType)).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
+            For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILookupLocations>().Use<PostCodesIOLocator>();

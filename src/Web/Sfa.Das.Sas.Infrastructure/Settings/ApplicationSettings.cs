@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using Sfa.Das.Sas.Core.Configuration;
-
-namespace Sfa.Das.Sas.Infrastructure.Configuration
+namespace Sfa.Das.Sas.Infrastructure.Settings
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Linq;
+
+    using Sfa.Das.Sas.Core.Configuration;
+
     public sealed class ApplicationSettings : IConfigurationSettings
     {
         public string ApprenticeshipIndexAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
@@ -17,12 +18,6 @@ namespace Sfa.Das.Sas.Infrastructure.Configuration
         public IEnumerable<Uri> ElasticServerUrls => GetElasticSearchIps();
 
         public Uri SurveyUrl => new Uri(ConfigurationManager.AppSettings["SurveyUrl"]);
-
-        // Will set the use secure cookies to true if no valid false value is found (secure by default)
-        public bool UseSecureCookies => !ConfigurationManager.AppSettings["SecureCookies"]
-                                                             .Equals("false", StringComparison.InvariantCultureIgnoreCase);
-
-        public string CookieDomain => ConfigurationManager.AppSettings["CookieDomain"];
 
         private IEnumerable<Uri> GetElasticSearchIps()
         {
