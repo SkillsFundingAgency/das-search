@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -19,8 +17,6 @@ using RedirectResult = System.Web.Mvc.RedirectResult;
 namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Web.Routing;
-
-    using WebGrease.Css.Extensions;
 
     public sealed class ApprenticeshipController : Controller
     {

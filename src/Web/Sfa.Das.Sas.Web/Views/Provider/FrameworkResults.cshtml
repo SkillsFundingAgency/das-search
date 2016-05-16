@@ -31,7 +31,7 @@
         <div class="column-third">
             @if (!Model.DeliveryModes.IsNullOrEmpty())
             {
-                <form method="get" action="@Request.Url.AbsolutePath">
+                <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId"/>
                     @{

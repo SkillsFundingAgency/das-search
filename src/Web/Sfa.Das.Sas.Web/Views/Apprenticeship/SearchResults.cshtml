@@ -50,7 +50,7 @@
                 @if (Model.TotalResults > 0)
                 {
                     <div>
-                        <form method="get">
+                        <form method="get" autocomplete="off">
                             <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
                             <input type="hidden" name="Page" value="@Model.ActualPage"/>
                             <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
