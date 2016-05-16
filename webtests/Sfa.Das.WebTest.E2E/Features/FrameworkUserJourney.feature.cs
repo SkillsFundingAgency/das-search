@@ -66,7 +66,7 @@ namespace Sfa.Das.WebTest.E2E.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a framework and provider")]
-        [NUnit.Framework.CategoryAttribute("Happy-Path")]
+        [NUnit.Framework.CategoryAttribute("HappyPath")]
         [NUnit.Framework.CategoryAttribute("CI")]
         [NUnit.Framework.CategoryAttribute("SystemTest")]
         [NUnit.Framework.CategoryAttribute("Demo")]
@@ -75,7 +75,7 @@ namespace Sfa.Das.WebTest.E2E.Features
         public virtual void ShouldFindAFrameworkAndProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a framework and provider", new string[] {
-                        "Happy-Path",
+                        "HappyPath",
                         "CI",
                         "SystemTest",
                         "Demo",

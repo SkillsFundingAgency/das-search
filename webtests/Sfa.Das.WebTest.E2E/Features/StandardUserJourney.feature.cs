@@ -66,7 +66,7 @@ namespace Sfa.Das.WebTest.E2E.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a standard and provider")]
-        [NUnit.Framework.CategoryAttribute("Happy-Path")]
+        [NUnit.Framework.CategoryAttribute("HappyPath")]
         [NUnit.Framework.CategoryAttribute("CI")]
         [NUnit.Framework.CategoryAttribute("SystemTest")]
         [NUnit.Framework.CategoryAttribute("Demo")]
@@ -75,7 +75,7 @@ namespace Sfa.Das.WebTest.E2E.Features
         public virtual void ShouldFindAStandardAndProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider", new string[] {
-                        "Happy-Path",
+                        "HappyPath",
                         "CI",
                         "SystemTest",
                         "Demo",
@@ -217,11 +217,11 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("ShouldBeAbleToDeleteAStandardFromMyDashboard")]
         [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
-        [NUnit.Framework.CategoryAttribute("Sad-Path")]
+        [NUnit.Framework.CategoryAttribute("SadPath")]
         public virtual void ShouldBeAbleToDeleteAStandardFromMyDashboard()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ShouldBeAbleToDeleteAStandardFromMyDashboard", new string[] {
-                        "Sad-Path",
+                        "SadPath",
                         "ignore"});
 #line 68
 this.ScenarioSetup(scenarioInfo);

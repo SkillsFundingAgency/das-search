@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@Happy-Path		@CI @SystemTest @Demo @PreProd @Prod
+@HappyPath		@CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a standard and provider
 	Given I have data for a standard
 	And I navigated to the Start page
@@ -64,7 +64,7 @@ Scenario: Should be able to search for and add a standard to my shortlist
          | Field          | Rule     | Value                 |
          | Shortlist Link | has text | Remove from shortlist |
 
-@Sad-Path @ignore
+@SadPath @ignore
 Scenario: ShouldBeAbleToDeleteAStandardFromMyDashboard
 	Given I navigated to the Standard Details page with parameters
 		| Parameter | Value |
