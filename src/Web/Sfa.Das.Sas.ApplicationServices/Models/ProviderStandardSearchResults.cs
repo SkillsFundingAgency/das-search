@@ -22,6 +22,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public bool HasError { get; set; }
 
+        public bool StandardNotFound { get; set; }
+
         public bool PostCodeMissing { get; set; }
 
         public Dictionary<string, long?> TrainingOptionsAggregation { get; set; }

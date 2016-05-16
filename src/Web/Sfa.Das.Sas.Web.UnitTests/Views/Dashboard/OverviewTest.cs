@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
         [Test]
         public void ShouldShowEmptyShortlistMessage()
         {
-            var viewModel = new DashboardViewModel()
+            var viewModel = new DashboardViewModel
             {
                 HasError = false,
                 Standards = new List<ShortlistStandardViewModel>(),
@@ -26,13 +26,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var html = view.RenderAsHtml(viewModel).ToAngleSharp();
 
             var messageElement = GetPartial(html, "#empty-shortlist-message");
-            messageElement.Should().Contain("You have no apprenticeship training shortlisted.");
+            messageElement.Should().NotBeNullOrEmpty();
         }
 
         [Test]
         public void ShouldNotShowAnEmptyShortlist()
         {
-            var viewModel = new DashboardViewModel()
+            var viewModel = new DashboardViewModel
             {
                 HasError = false,
                 Standards = new List<ShortlistStandardViewModel>(),
@@ -64,10 +64,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
                 Title = "Network Engineering"
             };
 
-            var viewModel = new DashboardViewModel()
+            var viewModel = new DashboardViewModel
             {
                 HasError = false,
-                Standards = new List<ShortlistStandardViewModel>()
+                Standards = new List<ShortlistStandardViewModel>
                 {
                     standardA,
                     standardB
@@ -82,8 +82,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var messageElement = GetHtmlElement(html, "#standards-shortlist");
             messageElement.ClassList.Should().NotContain("hidden");
 
-            var firstStandard = GetPartial(html, "#standards-shortlist tr td", 1); // element 2 is a delete link
-            var secondStandard = GetPartial(html, "#standards-shortlist tr td", 3); // element 4 is a delete link
+            var firstStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title"); 
+            var secondStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title", 2); 
 
             var expectedStandardAText = $"{standardA.Title} (level {standardA.Level})";
             var expectedStandardBText = $"{standardB.Title} (level {standardB.Level})";

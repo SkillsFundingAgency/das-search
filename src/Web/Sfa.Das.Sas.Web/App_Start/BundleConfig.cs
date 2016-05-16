@@ -11,7 +11,13 @@ namespace Sfa.Das.Sas.Web
                       "~/Content/dist/css/screen.min.css"));
 
             bundles.Add(new ScriptBundle("~/static_js_footer").Include(
-                    "~/scripts/analytics.js", "~/scripts/validation.js"));
+                "~/scripts/vendor/modernizr.js",
+                "~/scripts/vendor/jquery.js",
+                "~/scripts/analytics.js", 
+                "~/scripts/validation.js",
+                "~/scripts/ui.js",
+                "~/scripts/standard-detail.js"
+                ));
         }
     }
 }

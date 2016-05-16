@@ -24,6 +24,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public bool HasError { get; set; }
 
+        public bool StandardNotFound { get; set; }
+
         public bool PostCodeMissing { get; set; }
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }

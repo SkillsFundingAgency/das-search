@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             }
 
             var orderList = new List<string> { "dayrelease", "blockrelease", "100percentemployer" };
-            return orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i));
+            return orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i)).WhereNotNull();
         }
 
         private static string GetName(string deliveryModeKey)

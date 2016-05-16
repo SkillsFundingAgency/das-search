@@ -44,7 +44,10 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
-                standardName = _getStandards.GetStandardById(standardId)?.Title;
+                var standard = _getStandards.GetStandardById(standardId);
+                standardName = standard?.Title;
+
+                var standardMissing = false || standard == null;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
@@ -56,6 +59,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                         StandardId = standardId,
                         StandardName = standardName,
                         PostCode = postCode,
+                        StandardNotFound = standardMissing,
                         Hits = new IApprenticeshipProviderSearchResultsItem[0],
                         HasError = false
                     };
@@ -74,6 +78,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardId = standardId,
                     StandardName = standardName,
                     PostCode = postCode,
+                    StandardNotFound = standardMissing,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
                     SelectedTrainingOptions = deliveryModes
@@ -108,6 +113,13 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
 
+                var frameworkMissing = false || framework == null;
+
+                if (frameworkId < 0)
+                {
+                    throw new SearchException("FrameworkId can't be negative");
+                }
+
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
                 IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
@@ -141,7 +153,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    FrameworkIsMissing = frameworkMissing
                 };
             }
             catch (SearchException ex)

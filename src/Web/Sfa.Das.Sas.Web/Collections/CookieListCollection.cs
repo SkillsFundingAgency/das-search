@@ -1,20 +1,25 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Web.Factories;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
     public class CookieListCollection : IListCollection<int>
     {
         private readonly IConfigurationSettings _settings;
+        private readonly IHttpCookieFactory _cookieFactory;
 
-        public CookieListCollection(IConfigurationSettings settings)
+        public CookieListCollection(IConfigurationSettings settings, IHttpCookieFactory cookieFactory)
         {
             _settings = settings;
+            _cookieFactory = cookieFactory;
         }
+
         public ICollection<int> GetAllItems(string listName)
         {
             var listCookie = GetListCookie(listName);
@@ -61,7 +66,9 @@ namespace Sfa.Das.Sas.Web.Collections
 
         public void RemoveList(string listName)
         {
-            if (HttpContext.Current.Request.Cookies[listName] == null)
+            var requestCookies = _cookieFactory.GetRequestCookies();
+
+            if (requestCookies[listName] == null)
             {
                 return;
             }
@@ -72,7 +79,9 @@ namespace Sfa.Das.Sas.Web.Collections
                 Domain = _settings.CookieDomain
             };
 
-            HttpContext.Current.Response.Cookies.Add(cookie);
+            var responseCookies = _cookieFactory.GetResponseCookies();
+
+            responseCookies.Add(cookie);
         }
 
         private static List<int> GetListItems(HttpCookie cookie)
@@ -99,27 +108,6 @@ namespace Sfa.Das.Sas.Web.Collections
             return listItems;
         }
 
-        private void AddListToResponse(string listName, string listString)
-        {
-            var responseCookie = new HttpCookie(listName)
-            {
-                Value = listString,
-                HttpOnly = true,
-                Secure = _settings.UseSecureCookies,
-                Domain = _settings.CookieDomain
-            };
-
-            HttpContext.Current.Response.Cookies.Add(responseCookie);
-        }
-
-        private static HttpCookie GetListCookie(string listName)
-        {
-            var cookies = HttpContext.Current.Request.Cookies;
-
-            var listCookie = cookies[listName] ?? new HttpCookie(listName);
-            return listCookie;
-        }
-
         private static string CovertItemListToString(List<int> listItems)
         {
             if (!listItems.Any())
@@ -131,6 +119,29 @@ namespace Sfa.Das.Sas.Web.Collections
                 .Aggregate((x1, x2) => x1 + "," + x2);
 
             return listString;
+        }
+
+        private void AddListToResponse(string listName, string listString)
+        {
+            var responseCookie = new HttpCookie(listName)
+            {
+                Value = listString,
+                HttpOnly = true,
+                Secure = _settings.UseSecureCookies,
+                Domain = _settings.CookieDomain
+            };
+
+            var responseCookies = _cookieFactory.GetResponseCookies();
+
+            responseCookies.Add(responseCookie);
+        }
+
+        private HttpCookie GetListCookie(string listName)
+        {
+            var requestCookies = _cookieFactory.GetRequestCookies();
+
+            var listCookie = requestCookies[listName] ?? new HttpCookie(listName);
+            return listCookie;
         }
     }
 }

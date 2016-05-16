@@ -6,6 +6,7 @@ using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Extensions;
+using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
@@ -43,6 +44,11 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> StandardResults(ProviderSearchCriteria criteria)
         {
+            if (criteria.ApprenticeshipId < 1)
+            {
+                Response.StatusCode = 400;
+            }
+
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 var url = Url.Action(
@@ -82,12 +88,22 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.ActualPage = criteria.Page;
 
+            if (viewModel.StandardNotFound)
+            {
+                Response.StatusCode = 404;
+            }
+
             return View(viewModel);
         }
 
         [HttpGet]
         public async Task<ActionResult> FrameworkResults(ProviderSearchCriteria criteria)
         {
+            if (criteria.ApprenticeshipId < 1)
+            {
+                Response.StatusCode = 400;
+            }
+
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 var url = Url.Action(
@@ -126,6 +142,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             viewModel.ActualPage = criteria.Page;
+
+            if (viewModel.FrameworkIsMissing)
+            {
+                Response.StatusCode = 404;
+            }
 
             return View(viewModel);
         }

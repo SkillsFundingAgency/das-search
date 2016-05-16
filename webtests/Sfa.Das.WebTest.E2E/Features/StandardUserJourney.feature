@@ -32,4 +32,46 @@ Scenario:Should find a standard and provider
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
+@CI @SystemTest @Demo
+Scenario: Should be able to search for and add a standard to my shortlist
+	Given I have data for a standard
+	And I navigated to the Start page
+	When I choose Start Button
+	Then I am on the Search page
+
+	When I enter data
+		| Field      | Value     |
+		| Search Box | {JOBROLE} |
+	And I choose Search Button
+	Then I am on the Search Results page
+
+	When I choose First Standard Result
+	Then I am on the Standard Details page	
+	
+	When I choose Shortlist Link
+	Then I am on the Standard Details page
+	And I see
+         | Field          | Rule     | Value                 |
+         | Shortlist Link | has text | Remove from shortlist |
+
+
+Scenario: ShouldBeAbleToDeleteAStandardFromMyDashboard
+	Given I navigated to the Standard Details page with parameters
+		| Parameter | Value |
+		| id        | 1     |	   
+		   
+	When I choose Shortlist Link
+	Then I am on the Standard Details page
+	And I see
+		| Field          | Rule     | Value                 |
+		| Shortlist Link | has text | Remove from shortlist |
+  
+	When I choose Dashboard Link
+	Then I am on the Dashboard Overview page
+	And I see StandardsShortlist list contains at least 1 items
+	When I choose Delete Link
+	Then I am on the Dashboard Overview page
+	And I see
+         | Field                   | Rule   | Value |
+         | Empty Shortlist Message | exists | true  |
 
