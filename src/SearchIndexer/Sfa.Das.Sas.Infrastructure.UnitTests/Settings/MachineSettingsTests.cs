@@ -21,6 +21,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.UnitTests.Settings
         }
 
         [Test]
+        [Category("Problematic")]
         public void ShouldGetSettingFromEnvironmentVariable()
         {
             CreateEnvironmentVariable("TestSetting");
