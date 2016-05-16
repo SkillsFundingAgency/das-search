@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
-            var qryStr = CreateProviderQuery("standardCode", code.ToString(), geoPoint, deliveryModes);
+            var qryStr = CreateProviderQuery<StandardProviderSearchResultsItem>("standardCode", code.ToString(), geoPoint, deliveryModes);
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
@@ -115,7 +115,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             {
                 var skip = (page - 1) * take;
 
-                var qryStr = CreateProviderQuery("frameworkId", code.ToString(), geoPoint, deliveryModes);
+                var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>("frameworkId", code.ToString(), geoPoint, deliveryModes);
 
                 var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
@@ -187,18 +187,19 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     .Aggregations(agg => agg.Terms("level", t => t.Field(f => f.Level).MinimumDocumentCount(0)));
         }
 
-        private SearchDescriptor<StandardProviderSearchResultsItem> CreateProviderQuery(string apprenticeshipField, string code, Coordinate location, IEnumerable<string> deliveryModes)
+        private SearchDescriptor<T> CreateProviderQuery<T>(string apprenticeshipField, string code, Coordinate location, IEnumerable<string> deliveryModes)
+            where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var dm = deliveryModes == null || !deliveryModes.Any() ? "*" : string.Join(" ", deliveryModes);
             var boold =
-                new BoolQueryDescriptor<StandardProviderSearchResultsItem>().Must(
+                new BoolQueryDescriptor<T>().Must(
                     must => must
                         .QueryString(qs => qs
                             .DefaultField(apprenticeshipField).Query(code)), null)
                     .Filter(f => f.GeoShapePoint(gp => gp.Coordinates(new GeoCoordinate(location.Lat, location.Lon))), null);
 
             var des =
-                new SearchDescriptor<StandardProviderSearchResultsItem>()
+                new SearchDescriptor<T>()
                     .Index(_applicationSettings.ProviderIndexAlias)
                     .Size(1000)
                     .Query(
