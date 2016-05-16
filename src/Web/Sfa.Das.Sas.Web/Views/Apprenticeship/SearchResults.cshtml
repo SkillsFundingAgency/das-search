@@ -22,9 +22,13 @@
                 <form method="GET" id="search-results-order">
                     <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
-                    <input type="hidden" name="take" value="@Model.ResultsToTake"/>
+                    <input type="hidden" name="take" value="@Model.ResultsToTake" />
+                    @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
+                    {
+                        <input type="hidden" name="SelectedLevels" value="@level.Value" />
+                    }
                     <div class="form-block">
-                        Sort by 
+                        Sort by
                         <select name="order" class="form-control form-control-1-3">
                             <option selected="@(Model.SortOrder=="1")" value="1">Best match</option>
                             <option selected="@(Model.SortOrder=="2")" value="2">Level (high to low)</option>
@@ -170,8 +174,8 @@
         <div class="@className">
             <form method="get" autocomplete="off">
                 <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                <input type="hidden" name="Page" value="@Model.ActualPage" />
-                <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                <input type="hidden" name="Page" value="@Model.ActualPage"/>
+                <input type="hidden" name="order" value="@Model.SortOrder" />
 
                 <fieldset class="filters filters-accordion">
                     <h3 class="toggler heading-small">Apprenticeship Level</h3>
