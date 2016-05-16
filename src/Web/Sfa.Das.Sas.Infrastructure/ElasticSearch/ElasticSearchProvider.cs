@@ -165,7 +165,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             if (order == 0 || order == 1)
             {
-                searchDescriptor.Sort(s => s.Ascending(SortSpecialField.Score));
+                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score));
             }
 
             if (order == 2)
