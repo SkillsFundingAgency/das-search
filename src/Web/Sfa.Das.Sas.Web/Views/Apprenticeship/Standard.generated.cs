@@ -337,14 +337,16 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 
 #line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id }, new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" }));
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", 
+            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
+            new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" }));
 
 
 #line default
 #line hidden
 
-#line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                                                                                              
+#line 125 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                                             
     }
     else
     {
@@ -353,15 +355,17 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveS
 #line default
 #line hidden
 
-#line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id }, new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" }));
+#line 129 "..\..\Views\Apprenticeship\Standard.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", 
+            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
+            new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" }));
 
 
 #line default
 #line hidden
 
-#line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                                                                                             
+#line 131 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                                            
     }
 
 
@@ -369,7 +373,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddS
 #line hidden
 });
 
-#line 129 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 133 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
@@ -403,7 +407,7 @@ WriteLiteral("        ");
 
             
             #line 13 "..\..\Views\Apprenticeship\Standard.cshtml"
-   Write(Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back"));
+   Write(Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back"));
 
             
             #line default

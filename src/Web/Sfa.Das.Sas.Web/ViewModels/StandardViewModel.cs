@@ -29,7 +29,7 @@
         // Page specific
         public bool HasError { get; set; }
 
-        public LinkViewModel SearchResultLink { get; set; }
+        public LinkViewModel PreviousPageLink { get; set; }
 
         public string StandardPdfUrlTitle { get; set; }
 

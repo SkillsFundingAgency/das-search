@@ -83,11 +83,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())
             {
                 var rv = new RouteValueDictionary { { "keywords", criteria.Keywords }, { "page", viewModel.LastPage } };
-                int i = 0;
+                var index = 0;
                 foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
                 {
-                    rv.Add("SelectedLevels[" + i + "]", level.Value);
-                    i++;
+                    rv.Add("SelectedLevels[" + index + "]", level.Value);
+                    index++;
                 }
 
                 var url = Url.Action(
@@ -105,6 +105,12 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         // GET: Standard
         public ActionResult Standard(int id, string hasError)
+        {
+            return Standard(id, hasError, null);
+        }
+        
+        // GET: Standard
+        public ActionResult Standard(int id, string hasError, string linkUrl)
         {
             if (id < 0)
             {
@@ -127,7 +133,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.IsShortlisted = shortListStandards?.Contains(id) ?? false;
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
+            viewModel.PreviousPageLink = GetPreviousPageLinkViewModel(linkUrl);
 
             return View(viewModel);
         }
@@ -155,6 +161,33 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
+        }
+
+        private LinkViewModel GetPreviousPageLinkViewModel(string linkUrl)
+        {
+            if (linkUrl != null)
+            {
+                return new LinkViewModel
+                {
+                    Title = "Back",
+                    Url = linkUrl
+                };
+            }
+
+            if (!string.IsNullOrWhiteSpace(Request?.UrlReferrer?.OriginalString))
+            {
+                return new LinkViewModel
+                {
+                    Title = "Back",
+                    Url = Request.UrlReferrer.OriginalString
+                };
+            }
+
+            return new LinkViewModel
+            {
+                Title = "Back to search page",
+                Url = Url.Action("Search", "Apprenticeship")
+            };
         }
     }
 }

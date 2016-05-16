@@ -27,7 +27,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockCookieRepository = new Mock<IListCollection<int>>();
 
             _controller = new ShortlistController(
-                _mockStandardRepository.Object,
                 new Mock<ILog>().Object,
                 _mockCookieRepository.Object);
 
@@ -42,7 +41,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListCookieName, StandardId));
 
             // Act
-            var result = _controller.AddStandard(StandardId);
+            var result = _controller.AddStandard(StandardId, string.Empty);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
@@ -57,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockCookieRepository.Setup(x => x.RemoveItem(Constants.StandardsShortListCookieName, StandardId));
 
             // Act
-            var result = _controller.RemoveStandard(StandardId);
+            var result = _controller.RemoveStandard(StandardId, string.Empty);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);

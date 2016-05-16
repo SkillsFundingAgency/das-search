@@ -10,7 +10,7 @@
 <main id="content" class="standard-detail">
 
     <p class="small-btm-margin">
-        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
+        @Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back")
     </p>
 
     <div class="grid-row">
@@ -120,10 +120,14 @@
 {
     if (isShortlisted)
     {
-        @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", new { id }, new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" })
+        @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", 
+            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
+            new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" })
     }
     else
     {
-        @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", new { id }, new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" })
+        @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", 
+            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
+            new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" })
     }
 }
