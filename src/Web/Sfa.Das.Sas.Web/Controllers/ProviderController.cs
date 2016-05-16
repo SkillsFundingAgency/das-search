@@ -1,6 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             _settings = settings;
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public async Task<ActionResult> StandardResults(ProviderSearchCriteria criteria)
         {
             if (criteria.ApprenticeshipId < 1)
@@ -59,11 +59,34 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult($"{url}{anchor}");
             }
 
+            criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
+
             var searchResults =
-                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.DeliveryModes);
+                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes);
 
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+
+            if (viewModel == null)
+            {
+                return View((ProviderStandardSearchResultViewModel)null);
+            }
+
+            if (viewModel.ResultsToTake != 0)
+            {
+                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
+            }
+
+            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
+            {
+                var url = Url.Action(
+                    "StandardResults",
+                    "Provider",
+                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                return new RedirectResult(url);
+            }
+
+            viewModel.ActualPage = criteria.Page;
 
             if (viewModel.StandardNotFound)
             {
@@ -73,7 +96,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public async Task<ActionResult> FrameworkResults(ProviderSearchCriteria criteria)
         {
             if (criteria.ApprenticeshipId < 1)
@@ -91,11 +114,34 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult($"{url}{anchor}");
             }
 
+            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
+
             var searchResults =
-                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.DeliveryModes);
+                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes);
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+
+            if (viewModel == null)
+            {
+                return View((ProviderFrameworkSearchResultViewModel)null);
+            }
+
+            if (viewModel.ResultsToTake != 0)
+            {
+                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
+            }
+
+            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
+            {
+                var url = Url.Action(
+                    "StandardResults",
+                    "Provider",
+                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                return new RedirectResult(url);
+            }
+
+            viewModel.ActualPage = criteria.Page;
 
             if (viewModel.FrameworkIsMissing)
             {
@@ -105,7 +151,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
             var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);

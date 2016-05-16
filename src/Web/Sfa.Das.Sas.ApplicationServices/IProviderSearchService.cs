@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.ApplicationServices
 
     public interface IProviderSearchService
     {
-        Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, IEnumerable<string> deliveryModes);
-        Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, IEnumerable<string> deliveryModes);
+        Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes);
+        Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes);
     }
 }

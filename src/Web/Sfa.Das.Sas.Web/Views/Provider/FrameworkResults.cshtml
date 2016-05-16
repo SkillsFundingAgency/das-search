@@ -1,4 +1,5 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.Web.ViewModels
 @model Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel
 
 @{
@@ -28,6 +29,11 @@
             }
         </div>
 
+        <div class="page-navigation">
+            @GetPaginationBackLink()
+            @GetPaginationNextLink()
+        </div>
+
         <div class="column-third">
             @if (!Model.DeliveryModes.IsNullOrEmpty())
             {
@@ -51,4 +57,52 @@
             SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
         }
     </script> 
+}
+
+@helper GetPaginationBackLink()
+{
+    if (Model.ActualPage > 1)
+    {
+        var previousPage = @Model.ActualPage - 1;
+        var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
+
+        <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
+            <i class="arrow-button fa fa-angle-left"></i>
+            <span class="description">Previous <span class="hide-mob">page</span></span>
+            <span class="counter">@previousPage of @Model.LastPage</span>
+        </a>
+    }
+}
+
+
+@helper GetPaginationNextLink()
+{
+    if (Model.ActualPage < Model.LastPage)
+    {
+        var nextPage = @Model.ActualPage + 1;
+
+        var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
+
+        <a href="@url" style="visibility: visible" class="page-navigation__btn next">
+            <i class="arrow-button fa fa-angle-right"></i>
+            <span class="description">Next <span class="hide-mob">page</span></span>
+            <span class="counter">@nextPage of @Model.LastPage</span>
+        </a>
+    }
+}
+
+@functions
+{
+    RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
+    {
+
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page } };
+        int i = 0;
+        foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
+        {
+            rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
+            i++;
+        }
+        return rv;
+    }
 }

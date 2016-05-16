@@ -356,5 +356,134 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
 
             GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 Town County PostCode");
         }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsTheFirstPageShouldShowOnlyNextPageLink()
+        {
+            var detail = new FrameworkResults();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                Title = "Test name: Pathway test name",
+                TotalResults = 20,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkLevel = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                Level = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>
+                {
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel()
+                },
+                ActualPage = 1,
+                LastPage = 2,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, ".page-navigation__btn.prev");
+
+            GetPartial(html, ".page-navigation__btn.prev").Should().BeEmpty();
+            GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("2 of 2");
+        }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsAPageInTheMiddleShouldShowBackAndNextPageLink()
+        {
+            var detail = new FrameworkResults();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                Title = "Test name: Pathway test name",
+                TotalResults = 30,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkLevel = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                Level = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>
+                {
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel()
+                },
+                ActualPage = 2,
+                LastPage = 3,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, ".page-navigation__btn.prev");
+
+            GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("1 of 3");
+            GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("3 of 3");
+        }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsTheLastPageShouldShowOnlyBackPageLink()
+        {
+            var detail = new FrameworkResults();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                Title = "Test name: Pathway test name",
+                TotalResults = 30,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkLevel = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                Level = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>
+                {
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel(),
+                    new FrameworkProviderResultItemViewModel()
+                },
+                ActualPage = 3,
+                LastPage = 3,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, ".page-navigation__btn.prev");
+
+            GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("2 of 3");
+            GetPartial(html, ".page-navigation__btn.next").Should().BeEmpty();
+        }
     }
 }

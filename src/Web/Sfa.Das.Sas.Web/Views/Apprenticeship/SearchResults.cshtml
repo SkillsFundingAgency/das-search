@@ -7,90 +7,92 @@
     <p class="small-btm-margin">
         @Html.ActionLink("Back", "Search", null, new { @class = "link-back" })
     </p>
-        <div id="apprenticeship-results" class="grid-row column-two-third">
+    <div id="apprenticeship-results" class="grid-row column-two-third">
 
-            <div class="column-two-thirds">
+        <div class="column-two-thirds">
 
-                <div>
+            <div>
 
-                    <h1 class="heading-xlarge">
-                        Search results
-                    </h1>
+                <h1 class="heading-xlarge">
+                    Search results
+                </h1>
 
-                </div>
-                <p>
-                    @{
-                        Html.RenderPartial("_SearchResultMessage");
-                    }
-                </p>
-
-                @foreach (var item in Model.Results)
-                {
-                    <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
-                        <header>
-                            @if (item.StandardId != 0)
-                            {
-                                @GetStandardTitle(item)
-                            }
-                            else
-                            {
-                                @GetFrameworkTitle(item)
-                            }
-                        </header>
-                        <dl class="result-data-list">
-                            @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
-                        </dl>
-                    </article>
+            </div>
+            <p>
+                @{
+                    Html.RenderPartial("_SearchResultMessage");
                 }
+            </p>
 
-            </div>
+            @foreach (var item in Model.Results)
+            {
+                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
+                    <header>
+                        @if (item.StandardId != 0)
+                        {
+                            @GetStandardTitle(item)
+                        }
+                        else
+                        {
+                            @GetFrameworkTitle(item)
+                        }
+                    </header>
+                    <dl class="result-data-list">
+                        @GetApprenticeshipDetailItem("Level:", "level", item.Level)
+                        @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                    </dl>
+                </article>
+            }
 
-            <div class="column-one-third">
-                @if (Model.TotalResults > 0)
-                {
-                    <div>
-                        <form method="get" autocomplete="off">
-                            <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
-                            <input type="hidden" name="Page" value="@Model.ActualPage"/>
-                            <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
-
-                            <fieldset class="filters filters-accordion">
-                                <h3 class="toggler heading-small">Apprenticeship Level</h3>
-                                <div class="toggled-content">
-                                    <ul name="alist22">
-                                        @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
-                                        {
-                                            <li>
-                                                <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                                                <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
-                                            </li>
-                                        }
-                                    </ul>
-
-                                    <details>
-                                        <summary>Help with levels</summary>
-                                        <div class="panel panel-border-narrow">
-                                            <p>
-                                                What is here?
-                                            </p>
-                                        </div>
-                                    </details>
-                                </div>
-                            </fieldset>
-                            <input type="submit" class="button" value="Update results"/>
-                        </form>
-                    </div>
-                }
-            </div>
-
-            <div class="page-navigation">
-                @GetPaginationBackLink()
-                @GetPaginationNextLink()
-            </div>
         </div>
 
+        <div class="column-one-third">
+            @if (Model.TotalResults > 0)
+            {
+                <div>
+                    <form method="get">
+                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                        <input type="hidden" name="Page" value="@Model.ActualPage" />
+                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+
+                        <fieldset class="filters filters-accordion">
+                            <h3 class="toggler heading-small">Apprenticeship Level</h3>
+                            <div class="toggled-content">
+                                <ul name="alist22">
+                                    @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
+                                    {
+                                        <li>
+                                            <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                                            <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
+                                        </li>
+                                    }
+                                </ul>
+
+                                <details>
+                                    <summary>Help with levels</summary>
+                                    <div class="panel panel-border-narrow">
+                                        <p>
+                                            What is here?
+                                        </p>
+                                    </div>
+                                </details>
+                            </div>
+                        </fieldset>
+                        <input type="submit" class="button" value="Update results" />
+                    </form>
+                </div>
+            }
+        </div>
+
+        <div class="page-navigation">
+            @GetPaginationBackLink()
+            @GetPaginationNextLink()
+        </div>
+    </div>
+
 </main>
+
+
 
 @if (Model.TotalResults == 0)
 {

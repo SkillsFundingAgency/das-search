@@ -60,13 +60,14 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             };
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint, IEnumerable<string> deliveryModes)
+        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
             var qryStr = CreateProviderQuery("standardCode", code.ToString(), geoPoint, deliveryModes);
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
-                var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr);
+                var skip = (page - 1) * take;
+                var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
                 var documents =
                     results.Hits.Select(
@@ -108,13 +109,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint, IEnumerable<string> deliveryModes)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
             using (_profiler.CreateStep("Search for providers for framework"))
             {
+                var skip = (page - 1) * take;
+
                 var qryStr = CreateProviderQuery("frameworkId", code.ToString(), geoPoint, deliveryModes);
 
-                var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr);
+                var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
                 var documents = results.Hits.Select(hit => new FrameworkProviderSearchResultsItem
                 {

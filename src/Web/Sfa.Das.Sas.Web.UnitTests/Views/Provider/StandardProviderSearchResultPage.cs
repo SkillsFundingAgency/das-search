@@ -269,5 +269,119 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             GetPartial(html, ".result-data-list dd", 3).Should().Be("87%");
             GetPartial(html, ".result-data-list dd", 4).Should().Be("99.9%");
         }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsTheFirstPageShouldShowOnlyNextPageLink()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 20,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>
+                {
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel()
+                },
+                ActualPage = 1,
+                LastPage = 2,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, ".page-navigation__btn.prev");
+
+            GetPartial(html, ".page-navigation__btn.prev").Should().BeEmpty();
+            GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("2 of 2");
+        }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsAPageInTheMiddleShouldShowBackAndNextPageLink()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 20,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>
+                {
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel()
+                },
+                ActualPage = 2,
+                LastPage = 3,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, ".page-navigation__btn.prev");
+
+            GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("1 of 3");
+            GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("3 of 3");
+        }
+
+        [Test]
+        public void WhenSearchResultHasPaginationAndIsTheLastPageShouldShowOnlyBackPageLink()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 20,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>
+                {
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel(),
+                    new ProviderResultItemViewModel()
+                },
+                ActualPage = 3,
+                LastPage = 3,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            var a = GetPartial(html, ".page-navigation__btn.prev");
+
+            GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("2 of 3");
+            GetPartial(html, ".page-navigation__btn.next").Should().BeEmpty();
+        }
     }
 }
