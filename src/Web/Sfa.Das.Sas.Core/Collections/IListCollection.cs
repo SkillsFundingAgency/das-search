@@ -7,6 +7,5 @@ namespace Sfa.Das.Sas.Core.Collections
         ICollection<T> GetAllItems(string listName);
         void AddItem(string listName, T item);
         void RemoveItem(string listName, T item);
-        void RemoveList(string listName);
     }
 }
