@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             _paginationSettings = paginationSettings;
         }
 
-        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, int page, int take, IEnumerable<string> deliveryModes)
+        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -65,11 +65,11 @@ namespace Sfa.Das.Sas.ApplicationServices
                     };
                 }
 
-                var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
+                var takeElements = pagination.Take == 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
 
                 _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
 
-                var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, page, takeElements, deliveryModes);
+                var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, pagination.Page, takeElements, deliveryModes);
 
                 var result = new ProviderStandardSearchResults
                 {
@@ -102,7 +102,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
-        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, int page, int take, IEnumerable<string> deliveryModes)
+        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -125,11 +125,11 @@ namespace Sfa.Das.Sas.ApplicationServices
                 IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
                 var total = 0L;
                 Dictionary<string, long?> trainingOptionsAggregation;
-                var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
+                var takeElements = pagination.Take <= 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
 
                 if (coordinates != null)
                 {
-                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, page, takeElements, deliveryModes);
+                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
                     hits = searchResults.Hits;
                     total = searchResults.Total;
                     trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;

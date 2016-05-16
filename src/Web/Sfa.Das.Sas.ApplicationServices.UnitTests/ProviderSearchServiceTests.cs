@@ -22,7 +22,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
         {
             var service = new ProviderSearchService(null, null, null, null, null, null);
 
-            var result = await service.SearchByStandardPostCode(123, postcode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(123, postcode, pagination, null);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -41,7 +47,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByStandardPostCode(testStandardId, postcode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(testStandardId, postcode, pagination, null);
 
             Assert.That(result.StandardId, Is.EqualTo(testStandardId));
         }
@@ -64,7 +76,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, pagination, null);
 
             Assert.That(result.Hits, Is.EqualTo(stubSearchResults));
 
@@ -89,7 +107,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, pagination, null);
 
             result.TotalResults.Should().Be(0);
             result.StandardId.Should().Be(123);
@@ -106,11 +130,17 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockFrameworkRepository = CreateMockFrameworkRepository();
             var mockPostCodeLookup = CreateMockPostCodeLookup();
             var mockPaginationSettings = new Mock<IPaginationSettings>();
-            
+
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByStandardPostCode(123, "AS2 3SS", 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(123, "AS2 3SS", pagination, null);
 
             Assert.That(result.TotalResults, Is.EqualTo(testTotalResults));
         }
@@ -129,7 +159,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", pagination, null);
 
             Assert.That(result.StandardName, Is.EqualTo(testTitle));
         }
@@ -147,7 +183,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", pagination, null);
 
             Assert.That(result.HasError, Is.True);
         }
@@ -158,7 +200,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
         {
             var service = new ProviderSearchService(null, null, null, null, null, null);
 
-            var result = await service.SearchByFrameworkPostCode(123, postcode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(123, postcode, pagination, null);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -177,7 +225,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
 
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, postcode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(testFrameworkId, postcode, pagination, null);
 
             result.FrameworkId.Should().Be(testFrameworkId);
         }
@@ -200,7 +254,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, pagination, null);
 
             result.Hits.Should().BeSameAs(stubSearchResults);
 
@@ -225,7 +285,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, pagination, null);
 
             result.TotalResults.Should().Be(0);
             result.FrameworkId.Should().Be(123);
@@ -246,7 +312,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS2 3SS", 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(123, "AS2 3SS", pagination, null);
 
             result.TotalResults.Should().Be(testTotalResults);
         }
@@ -265,7 +337,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", pagination, null);
 
             result.FrameworkName.Should().Be(frameworkName);
         }
@@ -283,7 +361,13 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
             var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", 0, 10, null);
+            var pagination = new Pagination
+            {
+                Page = 0,
+                Take = 10
+            };
+
+            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", pagination, null);
 
             Assert.That(result.HasError, Is.True);
         }
