@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             using (_profiler.CreateStep("Search by keyword"))
             {
-                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.SelectedLevels);
+                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.Order, criteria.SelectedLevels);
             }
 
             using (_profiler.CreateStep("Map to view model"))
@@ -97,6 +97,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult(url);
             }
 
+            viewModel.SortOrder = criteria.Order == 0 ? "1" : criteria.Order.ToString();
             viewModel.ActualPage = criteria.Page;
 
             return View(viewModel);

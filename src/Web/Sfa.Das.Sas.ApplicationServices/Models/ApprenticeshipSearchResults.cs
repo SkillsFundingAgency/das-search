@@ -14,6 +14,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public string SearchTerm { get; set; }
 
+        public string SortOrder { get; set; }
+
         public IEnumerable<ApprenticeshipSearchResultsItem> Results { get; set; }
 
         public bool HasError { get; set; }
