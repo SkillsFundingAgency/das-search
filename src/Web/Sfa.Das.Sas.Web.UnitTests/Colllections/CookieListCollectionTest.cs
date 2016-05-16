@@ -8,12 +8,14 @@ using Sfa.Das.Sas.Web.Factories;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Colllections
 {
+    using Sfa.Das.Sas.ApplicationServices.Settings;
+
     [TestFixture]
     public class CookieListCollectionTest
     {
         private const string ListName = "test_list";
 
-        private Mock<IConfigurationSettings> _mockConfigurationSettings;
+        private Mock<ICookieSettings> _mockConfigurationSettings;
         private Mock<IHttpCookieFactory> _mockCookieFactory;
         private HttpCookieCollection _requestCookieCollection;
         private HttpCookieCollection _responseCookieCollection;
@@ -23,7 +25,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
         [SetUp]
         public void Init()
         {
-            _mockConfigurationSettings = new Mock<IConfigurationSettings>();
+            _mockConfigurationSettings = new Mock<ICookieSettings>();
             _mockCookieFactory = new Mock<IHttpCookieFactory>();
             _requestCookieCollection = new HttpCookieCollection();
             _responseCookieCollection = new HttpCookieCollection();
