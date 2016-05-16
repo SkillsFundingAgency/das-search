@@ -3,31 +3,17 @@
 
     standard.CookieName = 'standards_shortlist';
 
-    standard.getCookie = function(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-        if (parts.length == 2)
-            return parts.pop().split(";").shift();
-    };
-
-    standard.setCookie = function(name, value, exdays) {
-        var exdate = new Date();
-        exdate.setDate(exdate.getDate() + exdays);
-        var cValue = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
-        document.cookie = name + "=" + cValue;
-    };
-
     standard.Add = function(id) {
         var value = Cookies.get(standard.CookieName);
         if (!value || value.length === 0) {
-            Cookies.set(standard.CookieName, ''+id);
+            Cookies.set(standard.CookieName, '' + id, { expires: 365, HttpOnly: true, path: '/' });
         } else {
             var array = value.split(',');
             var index = array.indexOf(id);
             if (index < 0) {
                 array.push(id);
             }
-            Cookies.set(standard.CookieName, array.join(','));
+            Cookies.set(standard.CookieName, array.join(','), { expires: 365, HttpOnly: true, path: '/' });
         }
     };
 
@@ -38,14 +24,14 @@
         if (index >= 0) {
             array.splice(index, 1);
         }
-        Cookies.set(standard.CookieName, array.join(','));
+        Cookies.set(standard.CookieName, array.join(','), { expires: 365, HttpOnly: true, path: '/' });
     }
 
 
     standard.init = function () {
         $('.shortlist-link').on('click', function (e) {
             $this = $(this);
-            var value = standard.getCookie(standard.CookieName);
+            var value = Cookies.get(standard.CookieName);
             if ($this.attr('data-action') === 'add') {
                 standard.Add($(this).attr('data-standard'));
                 $('.shortlist-link').attr('data-action', 'remove');
