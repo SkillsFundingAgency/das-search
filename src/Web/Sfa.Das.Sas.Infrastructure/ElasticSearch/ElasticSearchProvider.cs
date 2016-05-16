@@ -191,8 +191,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 new BoolQueryDescriptor<StandardProviderSearchResultsItem>().Must(
                     must => must
                         .QueryString(qs => qs
-                            .DefaultField("deliveryModes").Query(dm)) && must
-                        .QueryString(qs => qs
                             .DefaultField(apprenticeshipField).Query(code)), null)
                     .Filter(f => f.GeoShapePoint(gp => gp.Coordinates(new GeoCoordinate(location.Lat, location.Lon))), null);
 
@@ -207,7 +205,12 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                 .Filter(filter => filter
                                     .Bool(_ => boold))))
                      .Sort(ss => ss.GeoDistance(g => g.Field("locationPoint").PinTo(new GeoLocation(location.Lat, location.Lon)).Unit(DistanceUnit.Miles).Ascending()))
-                     .Aggregations(aggs => aggs.Terms("training_type", tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)));
+                     .Aggregations(aggs => aggs.Terms("training_type", tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
+                     .PostFilter(pf => pf
+                       .Bool(b => b
+                         .Must(m => m
+                           .QueryString(qs => qs
+                            .DefaultField("deliveryModes").Query(dm)))));
 
             return des;
         }
