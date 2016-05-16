@@ -2397,3 +2397,28 @@ details .arrow {
         } 
     }
 }
+
+
+
+
+
+.shortlist-link {
+    display: block;
+    margin: 1em 0;
+    text-decoration: none;
+    &:before {
+        display: inline-block;
+        margin: 0 .5em 0 0;
+        font-family: FontAwesome;
+    }
+    &[data-action='add'] {
+        &:before {
+            content: '\f097';
+        }
+    }
+    &[data-action='remove'] {
+        &:before {
+            content: '\f02e';
+        }
+    }
+}

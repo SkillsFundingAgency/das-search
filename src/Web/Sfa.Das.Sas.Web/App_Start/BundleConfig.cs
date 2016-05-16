@@ -13,6 +13,7 @@ namespace Sfa.Das.Sas.Web
             bundles.Add(new ScriptBundle("~/static_js_footer").Include(
                 "~/scripts/vendor/modernizr.js",
                 "~/scripts/vendor/jquery.js",
+                "~/scripts/vendor/jquery-cookie.js",
                 "~/scripts/analytics.js", 
                 "~/scripts/validation.js",
                 "~/scripts/ui.js",

@@ -18,39 +18,44 @@
     };
 
     standard.Add = function(id) {
-        console.log('Adding standard ' + id);
-        var value = standard.getCookie(standard.CookieName);
+        var value = Cookies.get(standard.CookieName);
         if (!value || value.length === 0) {
-            // create a cookie
+            Cookies.set(standard.CookieName, ''+id);
         } else {
-            // add id to cookie
             var array = value.split(',');
-            console.log(array);
+            var index = array.indexOf(id);
+            if (index < 0) {
+                array.push(id);
+            }
+            Cookies.set(standard.CookieName, array.join(','));
         }
     };
 
     standard.Remove = function (id) {
-        console.log('Removing standard ' + id);
+        var value = Cookies.get(standard.CookieName);
+        var array = value.split(',');
+        var index = array.indexOf(id);
+        if (index >= 0) {
+            array.splice(index, 1);
+        }
+        Cookies.set(standard.CookieName, array.join(','));
     }
 
 
     standard.init = function () {
-        $('.shortlist-linkREMOVE').on('click', function (e) {
-            e.stopPropagation();
+        $('.shortlist-link').on('click', function (e) {
+            $this = $(this);
             var value = standard.getCookie(standard.CookieName);
-            console.log(value);
-            if ($(this).attr('data-action') === 'add') {
+            if ($this.attr('data-action') === 'add') {
                 standard.Add($(this).attr('data-standard'));
-            } 
-            if ($(this).attr('data-action') === 'remove') {
+                $('.shortlist-link').attr('data-action', 'remove');
+                $('.shortlist-link').html('Remove from shortlist');
+            } else if ($this.attr('data-action') === 'remove') {
                 standard.Remove($(this).attr('data-standard'));
-            }
-
-            return 0;
-            if ($(this).find('.postcode-search-box').val().trim() === "") {
-                $('.form-group').addClass("error");
-                e.preventDefault();
-            }
+                $('.shortlist-link').attr('data-action', 'add');
+                $('.shortlist-link').html('Shortlist apprenticeship');
+            };
+            e.preventDefault();
         });
     };
 

@@ -479,6 +479,7 @@
     <Content Include="scripts\standard-detail.js" />
     <Content Include="scripts\ui.js" />
     <Content Include="scripts\validation.js" />
+    <Content Include="scripts\vendor\jquery-cookie.js" />
     <Content Include="scripts\vendor\jquery.js" />
     <Content Include="scripts\vendor\modernizr.js" />
     <Content Include="Views\Apprenticeship\Framework.cshtml">
