@@ -32,7 +32,7 @@ Scenario:Should find a standard and provider
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
-@CI @SystemTest @Demo
+@ignore
 Scenario: Should be able to search for and add a standard to my shortlist
 	Given I have data for a standard
 	And I navigated to the Start page
@@ -54,7 +54,7 @@ Scenario: Should be able to search for and add a standard to my shortlist
          | Field          | Rule     | Value                 |
          | Shortlist Link | has text | Remove from shortlist |
 
-
+@ignore
 Scenario: ShouldBeAbleToDeleteAStandardFromMyDashboard
 	Given I navigated to the Standard Details page with parameters
 		| Parameter | Value |

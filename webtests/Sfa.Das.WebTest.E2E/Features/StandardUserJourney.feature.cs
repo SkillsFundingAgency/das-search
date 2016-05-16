@@ -138,15 +138,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should be able to search for and add a standard to my shortlist")]
-        [NUnit.Framework.CategoryAttribute("CI")]
-        [NUnit.Framework.CategoryAttribute("SystemTest")]
-        [NUnit.Framework.CategoryAttribute("Demo")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void ShouldBeAbleToSearchForAndAddAStandardToMyShortlist()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to search for and add a standard to my shortlist", new string[] {
-                        "CI",
-                        "SystemTest",
-                        "Demo"});
+                        "ignore"});
 #line 36
 this.ScenarioSetup(scenarioInfo);
 #line 37
@@ -195,9 +191,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("ShouldBeAbleToDeleteAStandardFromMyDashboard")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void ShouldBeAbleToDeleteAStandardFromMyDashboard()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ShouldBeAbleToDeleteAStandardFromMyDashboard", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ShouldBeAbleToDeleteAStandardFromMyDashboard", new string[] {
+                        "ignore"});
 #line 58
 this.ScenarioSetup(scenarioInfo);
 #line hidden
