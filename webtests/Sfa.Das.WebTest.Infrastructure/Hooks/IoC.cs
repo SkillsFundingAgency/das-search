@@ -16,6 +16,7 @@
             objectContainer.RegisterInstanceAs<IProvideSettings>(new AppConfigSettingsProvider(new MachineSettings()));
             objectContainer.RegisterTypeAs<WebRequestRetryService, IRetryWebRequests>();
             objectContainer.RegisterTypeAs<ConsoleLogger, ILog>();
+            objectContainer.RegisterTypeAs<WebDriverFactory, IWebDriverFactory>();
 
             return objectContainer;
         }

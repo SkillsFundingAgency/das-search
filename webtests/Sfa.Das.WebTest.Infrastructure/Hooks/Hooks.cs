@@ -41,8 +41,7 @@
         [BeforeScenario]
         public void BeforeScenario()
         {
-            var settings = _objectContainer.Resolve<IBrowserSettings>();
-            seleniumContext = new SeleniumContext(settings);
+            seleniumContext = _objectContainer.Resolve<SeleniumContext>().InitialiseDriver();
             _objectContainer.RegisterInstanceAs<IWebDriver>(seleniumContext.WebDriver);
             
             Console.WriteLine("##### Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
