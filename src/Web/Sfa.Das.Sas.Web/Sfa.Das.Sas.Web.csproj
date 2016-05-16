@@ -544,6 +544,7 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\razorgenerator.directives" />
     <Content Include="Views\Shared\_Analytics.cshtml" />
+    <Content Include="scripts\appSettings.json" />
     <None Include="Transform.ServiceConfiguration.Cloud.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
