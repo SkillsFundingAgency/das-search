@@ -363,8 +363,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            var a = GetPartial(html, ".page-navigation__btn.prev");
-
             GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("1 of 3");
             GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("3 of 3");
         }
@@ -455,8 +453,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views
         [Test]
         public void WhenLevelAggregationValuesAreSelected()
         {
-            var searchPage= new SearchResults();
-            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel {Checked = true, Count = 500, Value = "2"} };
+            var searchPage = new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
             var model = new ApprenticeshipSearchResultViewModel
             {
                 TotalResults = 1,

@@ -78,7 +78,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query) where T : class
+        private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query)
+            where T : class
         {
             using (_profiler.CreateStep("Get Provider"))
             {

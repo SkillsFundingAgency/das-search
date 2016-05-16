@@ -31,11 +31,13 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<int> selectedLevels)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
+
             var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords, selectedLevels?.ToList());
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
             var levelAggregation = new Dictionary<int, long?>();
+
             if (results.Aggs.Terms("level") != null)
             {
                 foreach (var item in results.Aggs.Terms("level").Buckets)
@@ -181,7 +183,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                      .PostFilter(m => m
                         .Bool(b => b
                             .Must(mu => mu
-                                .QueryString( qs => qs
+                                .QueryString(qs => qs
                                     .DefaultField(df => df.Level)
                                     .Query(levelQuery)))))
                     .Aggregations(agg => agg.Terms("level", t => t.Field(f => f.Level).MinimumDocumentCount(0)));

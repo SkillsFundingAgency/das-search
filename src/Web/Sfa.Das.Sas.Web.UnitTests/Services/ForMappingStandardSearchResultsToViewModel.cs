@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
                 Title = "Standard 1"
             };
             var resultList = new List<ApprenticeshipSearchResultsItem> { sri };
-            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = new Dictionary<int, long?>()};
+            var model = new ApprenticeshipSearchResults { TotalResults = 1234L, SearchTerm = "apprenticeship", Results = resultList, LevelAggregation = new Dictionary<int, long?>() };
 
             var mappedResult = mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(model);
 
@@ -149,7 +149,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
                     To = 12,
                     Unit = "m"
                 },
-
             };
 
             var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };
@@ -179,7 +178,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
                     To = 12,
                     Unit = "m"
                 },
-
             };
 
             var resultList = new List<ApprenticeshipSearchResultsItem> { searchResultItem1 };

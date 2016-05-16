@@ -100,7 +100,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
-            
+
             ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IListCollection<int>>().Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 

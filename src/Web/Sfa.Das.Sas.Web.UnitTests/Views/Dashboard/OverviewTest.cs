@@ -82,8 +82,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var messageElement = GetHtmlElement(html, "#standards-shortlist");
             messageElement.ClassList.Should().NotContain("hidden");
 
-            var firstStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title"); 
-            var secondStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title", 2); 
+            var firstStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title");
+            var secondStandard = GetPartial(html, "#standards-shortlist .standard-item .standard-title", 2);
 
             var expectedStandardAText = $"{standardA.Title} (level {standardA.Level})";
             var expectedStandardBText = $"{standardB.Title} (level {standardB.Level})";

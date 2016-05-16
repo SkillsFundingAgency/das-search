@@ -64,6 +64,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 return document != null ? _standardMapping.MapToStandard(document) : null;
             }
         }
+
         // TODO: Review this for performance againt using filters instead
         public IEnumerable<Standard> GetStandardsByIds(IEnumerable<int> ids)
         {

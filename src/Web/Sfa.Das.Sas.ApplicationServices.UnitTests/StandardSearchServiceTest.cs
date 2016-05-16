@@ -12,7 +12,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
     {
         private Mock<ILog> _mockLogger;
         private Mock<ISearchProvider> _mockSearchProvider;
-        Mock<IPaginationSettings> _mockPaginationSettings;
+        private Mock<IPaginationSettings> _mockPaginationSettings;
 
         [SetUp]
         public void Setup()

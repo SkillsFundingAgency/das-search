@@ -97,8 +97,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockGetStandards.Setup(x => x.GetStandardById(83));
 
             // Act
-            var result = _sut.Overview() as ViewResult;
-            var viewModel = result?.Model as DashboardViewModel;
+            _sut.Overview();
 
             // Assert
             _mockShortlistStandardViewModelFactory.Verify(

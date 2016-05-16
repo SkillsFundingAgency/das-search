@@ -23,6 +23,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
     [TestFixture]
     public class ProviderControllerTests
     {
+        private readonly IConfigurationSettings _configurationSettings = Mock.Of<IConfigurationSettings>(x => x.SurveyUrl == new Uri("http://test.com"));
+
         private Mock<ILog> _mockLogger;
 
         private Mock<IMappingService> _mockMappingService;
@@ -30,8 +32,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         private Mock<IProviderSearchService> _mockProviderSearchService;
 
         private Mock<IProviderViewModelFactory> _mockViewModelFactory;
-
-        private readonly IConfigurationSettings _configurationSettings = Mock.Of<IConfigurationSettings>(x => x.SurveyUrl == new Uri("http://test.com"));
 
         [TestCase(null, "null-id")]
         [TestCase("", "empty-id")]

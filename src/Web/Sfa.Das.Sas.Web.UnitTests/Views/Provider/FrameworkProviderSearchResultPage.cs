@@ -394,8 +394,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            var a = GetPartial(html, ".page-navigation__btn.prev");
-
             GetPartial(html, ".page-navigation__btn.prev").Should().BeEmpty();
             GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("2 of 2");
         }
@@ -437,8 +435,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            var a = GetPartial(html, ".page-navigation__btn.prev");
-
             GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("1 of 3");
             GetPartial(html, ".page-navigation__btn.next").Should().Contain("Next page").And.Contain("3 of 3");
         }
@@ -479,8 +475,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            var a = GetPartial(html, ".page-navigation__btn.prev");
 
             GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("2 of 3");
             GetPartial(html, ".page-navigation__btn.next").Should().BeEmpty();

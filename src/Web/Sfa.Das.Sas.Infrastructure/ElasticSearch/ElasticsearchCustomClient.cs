@@ -23,7 +23,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _profiler = profiler;
         }
 
-        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "") where T : class
+        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "")
+            where T : class
         {
             var client = _elasticsearchClientFactory.Create();
             using (_profiler.CreateStep($"Elasticsearch.Search.{callerName}"))

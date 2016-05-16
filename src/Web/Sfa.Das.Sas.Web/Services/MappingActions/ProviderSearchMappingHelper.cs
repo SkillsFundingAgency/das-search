@@ -47,6 +47,5 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
                     return string.Empty;
             }
         }
-
     }
 }

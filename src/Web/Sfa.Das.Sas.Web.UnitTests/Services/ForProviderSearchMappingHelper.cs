@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Services
+﻿using System;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Services
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -50,9 +52,9 @@
 
             result.Count().Should().Be(3);
 
-            var first = result.FirstOrDefault(m => m.Value.Equals("dayrelease"));
-            var second = result.FirstOrDefault(m => m.Value.Equals("blockrelease"));
-            var third = result.FirstOrDefault(m => m.Value.Equals("100percentemployer"));
+            var first = result.FirstOrDefault(m => m.Value.Equals("dayrelease", StringComparison.InvariantCulture));
+            var second = result.FirstOrDefault(m => m.Value.Equals("blockrelease", StringComparison.InvariantCulture));
+            var third = result.FirstOrDefault(m => m.Value.Equals("100percentemployer", StringComparison.InvariantCulture));
 
             first.Checked.Should().BeTrue();
             first.Title.Should().Be("day release");
@@ -81,9 +83,9 @@
 
             result.Count().Should().Be(2);
 
-            var first = result.FirstOrDefault(m => m.Value.Equals("dayrelease"));
-            var second = result.FirstOrDefault(m => m.Value.Equals("blockrelease"));
-            var third = result.FirstOrDefault(m => m.Value.Equals("100percentemployer"));
+            var first = result.FirstOrDefault(m => m.Value.Equals("dayrelease", StringComparison.InvariantCulture));
+            var second = result.FirstOrDefault(m => m.Value.Equals("blockrelease", StringComparison.InvariantCulture));
+            var third = result.FirstOrDefault(m => m.Value.Equals("100percentemployer", StringComparison.InvariantCulture));
 
             first.Should().BeNull();
 

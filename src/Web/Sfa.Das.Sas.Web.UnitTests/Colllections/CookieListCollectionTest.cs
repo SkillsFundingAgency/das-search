@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
             // Assert
             Assert.IsNotNull(items);
             Assert.IsNotEmpty(items);
-            Assert.AreEqual(new[] {1, 2, 3, 4}, items);
+            Assert.AreEqual(new[] { 1, 2, 3, 4 }, items);
         }
 
         [Test]

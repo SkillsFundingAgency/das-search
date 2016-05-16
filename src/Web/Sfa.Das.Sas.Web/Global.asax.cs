@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web
 
         private bool IsUserAllowedToSeeMiniProfilerUI(HttpRequest httpRequest)
         {
-            // Implement your own logic for who 
+            // Implement your own logic for who
             // should be able to access ~/mini-profiler-resources/results
             // var principal = httpRequest.RequestContext.HttpContext.User;
             // return principal.IsInRole("Developer");
