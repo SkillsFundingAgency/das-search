@@ -24,10 +24,16 @@
                 }
             </p>
 
-            @FilterForm("filter-mobile")
+        </div>
 
+        <div class="column-one-third">
+            @FilterForm("filter-box")
+        </div>
+
+        <div class="column-two-thirds">
+            
             @foreach (var item in Model.Results)
-            {
+                {
                 <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
                     <header>
                         @if (item.StandardId != 0)
@@ -48,9 +54,7 @@
 
         </div>
 
-        <div class="column-one-third">
-            @FilterForm("filter-desktop")
-        </div>
+
 
         <div class="page-navigation">
             @GetPaginationBackLink()

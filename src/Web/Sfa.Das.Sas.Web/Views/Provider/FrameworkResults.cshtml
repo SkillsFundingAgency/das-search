@@ -24,8 +24,14 @@
                     Html.RenderPartial("_FrameworkSearchResultMessage");
                 }
             </p>
-            @FilterForm("filter-mobile")
 
+        </div>
+
+        <div class="column-third">
+            @FilterForm("filter-box")
+        </div>
+
+        <div class="column-two-thirds">
             @{
                 Html.RenderPartial("_FrameworkProviderInformation");
             }
@@ -35,10 +41,7 @@
             @GetPaginationBackLink()
             @GetPaginationNextLink()
         </div>
-
-        <div class="column-third">
-           @FilterForm("filter-desktop")
-        </div>
+        
     </div>
 </main>
 

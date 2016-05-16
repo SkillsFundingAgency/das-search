@@ -26,30 +26,31 @@
                     Html.RenderPartial("_StandardSearchResultMessage");
                 }
             </p>
-            @FilterForm("filter-mobile")
 
+        </div>
+
+        <div class="column-third">
+            @FilterForm("filter-box")
+        </div>
+
+        <div class="column-two-thirds">
             @{
                 Html.RenderPartial("_StandardProviderInformation");
             }
-
-            <div class="page-navigation">
-                @GetPaginationBackLink()
-                @GetPaginationNextLink()
-            </div>
         </div>
 
-        
-
-        <div class="column-third">
-            @FilterForm("filter-desktop")
+        <div class="page-navigation">
+            @GetPaginationBackLink()
+            @GetPaginationNextLink()
         </div>
+
     </div>
 </main>
 
 @if (Model.TotalResults == 0)
 {
     <script>
-        window.onload = function() {    
+        window.onload = function() {
             SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
         }
     </script> 

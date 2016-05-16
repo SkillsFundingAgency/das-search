@@ -95,19 +95,6 @@ aside h2:first-child {
     }
 }
 
-
-.filter-mobile {
+.filter-box {
     margin-bottom: 30px;
 }
-
-@media (min-width: 641px) {
-    .filter-mobile{
-        display: none;
-    } 
-}
-
-@media (max-width: 641px) {
-    .filter-desktop{
-        display: none;
-    } 
-} 
