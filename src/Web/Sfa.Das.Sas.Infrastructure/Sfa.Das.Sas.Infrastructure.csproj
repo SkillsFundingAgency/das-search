@@ -87,7 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ApplicationSettings.cs" />
+    <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\FrameworkRepository.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="MiniProfiler\MiniProfilerWrapper.cs" />
     <Compile Include="PostCodeIo\PostCodesIOLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\CookieSettings.cs" />
     <Compile Include="WebRequestRetryService.cs" />
   </ItemGroup>
   <ItemGroup>

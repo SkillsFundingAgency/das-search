@@ -9,12 +9,14 @@ using Sfa.Das.Sas.Web.Factories;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
+    using Sfa.Das.Sas.ApplicationServices.Settings;
+
     public class CookieListCollection : IListCollection<int>
     {
-        private readonly IConfigurationSettings _settings;
+        private readonly ICookieSettings _settings;
         private readonly IHttpCookieFactory _cookieFactory;
 
-        public CookieListCollection(IConfigurationSettings settings, IHttpCookieFactory cookieFactory)
+        public CookieListCollection(ICookieSettings settings, IHttpCookieFactory cookieFactory)
         {
             _settings = settings;
             _cookieFactory = cookieFactory;

@@ -78,9 +78,11 @@
     <Compile Include="Selenium\ExceptionExtensions.cs" />
     <Compile Include="Selenium\IBrowserStackApi.cs" />
     <Compile Include="Selenium\IPageContext.cs" />
+    <Compile Include="Selenium\IWebDriverFactory.cs" />
     <Compile Include="Selenium\PageContext.cs" />
     <Compile Include="Selenium\SeleniumContext.cs" />
     <Compile Include="Selenium\WebDriverExtensions.cs" />
+    <Compile Include="Selenium\WebDriverFactory.cs" />
     <Compile Include="Services\ConsoleLogger.cs" />
     <Compile Include="Services\ILog.cs" />
     <Compile Include="Services\IRetryWebRequests.cs" />
