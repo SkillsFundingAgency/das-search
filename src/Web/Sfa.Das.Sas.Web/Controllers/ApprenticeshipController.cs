@@ -81,7 +81,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel.ResultsToTake != 0)
             {
-                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
             }
 
             if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())

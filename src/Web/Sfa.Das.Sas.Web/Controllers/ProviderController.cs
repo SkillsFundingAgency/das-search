@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult($"{url}{anchor}");
             }
 
-            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
+            criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
 
             var searchResults =
                 await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, criteria.Page, criteria.Take, criteria.DeliveryModes);
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel.ResultsToTake != 0)
             {
-                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
             }
 
             if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
@@ -129,7 +129,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel.ResultsToTake != 0)
             {
-                viewModel.LastPage = (int)Math.Ceiling(viewModel.TotalResults / viewModel.ResultsToTake);
+                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
             }
 
             if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())

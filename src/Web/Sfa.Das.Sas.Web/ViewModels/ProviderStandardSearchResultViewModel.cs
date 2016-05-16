@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
     public class ProviderStandardSearchResultViewModel
     {
-        public double TotalResults { get; set; }
+        public long TotalResults { get; set; }
 
         public int ResultsToTake { get; set; }
 

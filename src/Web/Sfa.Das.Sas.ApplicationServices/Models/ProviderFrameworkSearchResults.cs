@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         public string Title { get; set; }
 
-        public double TotalResults { get; set; }
+        public long TotalResults { get; set; }
 
         public int ResultsToTake { get; set; }
 
