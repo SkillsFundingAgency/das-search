@@ -31,7 +31,7 @@
                     }
                 }
 
-                var frmeworksString= zipFileExtractor.ExtractFileFromStream(memoryStream, fileName);
+                var frmeworksString = zipFileExtractor.ExtractFileFromStream(memoryStream, fileName);
                 frmeworksString.Should().Equals(result);
             }
         }

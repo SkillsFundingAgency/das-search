@@ -12,20 +12,15 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
     using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory;
     using Infrastructure.CourseDirectory.Models;
 
-    public class StubCourseDirectoryClient : ICourseDirectoryProviderDataService, IDisposable // TBD ToDo: Delete
+    public class StubCourseDirectoryClient : ICourseDirectoryProviderDataService
     {
-        private IEnumerable<Provider> Retrieve()
-        {
-            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryData.Json);
-        }
+        public ServiceClientCredentials Credentials { get; set; }
+
+        public Uri BaseUri { get; set; }
 
         public void Dispose()
         {
         }
-
-        public Uri BaseUri { get; set; }
-
-        public ServiceClientCredentials Credentials { get; set; }
 
         Task<HttpOperationResponse<IList<Provider>>> ICourseDirectoryProviderDataService.BulkprovidersWithOperationResponseAsync(int? version, CancellationToken cancellationToken)
         {
@@ -37,6 +32,11 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
             }
 
             return Task.FromResult(response);
+        }
+
+        private IEnumerable<Provider> Retrieve()
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryData.Json);
         }
     }
 }

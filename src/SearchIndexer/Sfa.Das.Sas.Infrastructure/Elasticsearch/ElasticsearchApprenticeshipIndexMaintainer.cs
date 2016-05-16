@@ -12,6 +12,8 @@ using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 {
+    using System.Globalization;
+
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
         public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog logger)
@@ -86,7 +88,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             var bulkTasks = new List<Task<IBulkResponse>>();
             bulkTasks.AddRange(tasks);
             LogResponse(await Task.WhenAll(bulkTasks));
-            var properties = new Dictionary<string, object> { { "DocumentType", typeof(T1).Name.ToLower() }, { "TotalCount", totalCount}, { "Identifier", "DocumentCount"} };
+            var properties = new Dictionary<string, object> { { "DocumentType", typeof(T1).Name.ToLower(CultureInfo.CurrentCulture) }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" } };
             Log.Info($"Sent a total of {totalCount} {typeof(T1)} documents to be indexed", properties);
         }
     }

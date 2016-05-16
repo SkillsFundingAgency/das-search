@@ -14,7 +14,7 @@
     public class FcsActiveProvidersClientTest
     {
         [Test]
-        public void FcsActiveProvidersClientTestTest()
+        public void ShouldGetFcsActiveProviders()
         {
             var moqVstsClient = new Mock<IVstsClient>();
             var moqIProvideSettings = new Mock<IProvideSettings>();
@@ -22,8 +22,7 @@
             var moqIConvertFromCsv = new Mock<IConvertFromCsv>();
 
             moqVstsClient.Setup(m => m.GetFileContent(It.IsAny<string>())).Returns(string.Empty);
-
-            moqIConvertFromCsv.Setup(m => m.CsvTo<ActiveProviderCsvRecord>(It.IsAny<string>())).Returns(new [] {new ActiveProviderCsvRecord {UkPrn = 26}, new ActiveProviderCsvRecord {UkPrn = 126} });
+            moqIConvertFromCsv.Setup(m => m.CsvTo<ActiveProviderCsvRecord>(It.IsAny<string>())).Returns(new[] { new ActiveProviderCsvRecord { UkPrn = 26 }, new ActiveProviderCsvRecord { UkPrn = 126 } });
 
             var client = new FcsActiveProvidersClient(moqVstsClient.Object, appsettings, moqIConvertFromCsv.Object);
             var result = client.GetActiveProviders();

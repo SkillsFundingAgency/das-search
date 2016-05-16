@@ -13,19 +13,13 @@
 
     public class StubCourseDirectoryResponseClient : ICourseDirectoryProviderDataService
     {
+        public Uri BaseUri { get; set; }
 
-        private IEnumerable<Provider> Retrieve()
-        {
-            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryResponse.Json);
-        }
+        public ServiceClientCredentials Credentials { get; set; }
 
         public void Dispose()
         {
         }
-
-        public Uri BaseUri { get; set; }
-
-        public ServiceClientCredentials Credentials { get; set; }
 
         Task<HttpOperationResponse<IList<Provider>>> ICourseDirectoryProviderDataService.BulkprovidersWithOperationResponseAsync(int? version, CancellationToken cancellationToken)
         {
@@ -38,6 +32,11 @@
             }
 
             return Task.FromResult(response);
+        }
+
+        private IEnumerable<Provider> Retrieve()
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryResponse.Json);
         }
     }
 }

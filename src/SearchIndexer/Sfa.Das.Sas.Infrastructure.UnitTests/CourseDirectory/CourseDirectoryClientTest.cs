@@ -2,19 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using Core.Models.Provider;
     using Core.Services;
-
     using FluentAssertions;
-
     using Infrastructure.CourseDirectory;
     using Infrastructure.Settings;
     using Moq;
     using NUnit.Framework;
-
-    using Core.Models.Provider;
-
-    using Sfa.Das.Sas.Indexer.Core.Extensions;
 
     [TestFixture]
     public class CourseDirectoryClientTest
