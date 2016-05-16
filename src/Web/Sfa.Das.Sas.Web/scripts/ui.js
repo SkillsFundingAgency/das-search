@@ -1,6 +1,6 @@
 ﻿
-var ui = ui || {};
-(function () {
+var SearchAndShortlist = SearchAndShortlist || {};
+(function ( ui ) {
 
     ui.init = function () {
         $('.filters .toggler').on('click', function () {
@@ -16,4 +16,4 @@ var ui = ui || {};
 
     ui.init();
 
-}());
+}(SearchAndShortlist.ui = {}));
