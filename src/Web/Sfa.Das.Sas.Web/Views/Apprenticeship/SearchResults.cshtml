@@ -18,6 +18,19 @@
                 </h1>
 
             </div>
+            <div>
+                <form method="GET">
+                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                    <input type="hidden" name="page" value="@Model.ActualPage" />
+                    <input type="hidden" name="take" value="@Model.ResultsToTake"/>
+                    <select name="order">
+                        <option selected="@(Model.SortOrder=="1")" value="1">Best match</option>
+                        <option selected="@(Model.SortOrder=="2")" value="2">Level (high to low)</option>
+                        <option selected="@(Model.SortOrder=="3")" value="3">Level (low to high)</option>
+                    </select>
+                    <input type="submit" value="Sort" />
+                </form>
+            </div>
             <p>
                 @{
                     Html.RenderPartial("_SearchResultMessage");

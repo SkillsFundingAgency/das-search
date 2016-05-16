@@ -28,11 +28,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _profiler = profiler;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, List<int> selectedLevels)
+        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
-            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords, selectedLevels?.ToList());
+            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords, order, selectedLevels?.ToList());
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
@@ -161,12 +161,30 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, List<int> selectedLevels)
+        private static void GetSortingOrder(SearchDescriptor<ApprenticeshipSearchResultsItem> searchDescriptor, int order)
+        {
+            if (order == 0 || order == 1)
+            {
+                searchDescriptor.Sort(s => s.Ascending(SortSpecialField.Score));
+            }
+
+            if (order == 2)
+            {
+                searchDescriptor.Sort(s => s.Descending(p => p.Level));
+            }
+
+            if (order == 3)
+            {
+                searchDescriptor.Sort(s => s.Ascending(p => p.Level));
+            }
+        }
+
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, int order, List<int> selectedLevels)
         {
             var levelQuery = selectedLevels != null && selectedLevels.Any() ? string.Join(" ", selectedLevels) : "*";
 
             var skip = (page - 1) * take;
-            return new SearchDescriptor<ApprenticeshipSearchResultsItem>()
+            var searchDescriptor = new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .Type(Types.Parse("standarddocument,frameworkdocument"))
                     .Skip(skip)
@@ -187,6 +205,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                     .DefaultField(df => df.Level)
                                     .Query(levelQuery)))))
                     .Aggregations(agg => agg.Terms("level", t => t.Field(f => f.Level).MinimumDocumentCount(0)));
+
+            GetSortingOrder(searchDescriptor, order);
+
+            return searchDescriptor;
+
         }
 
         private SearchDescriptor<T> CreateProviderQuery<T>(string apprenticeshipField, string code, Coordinate location, IEnumerable<string> deliveryModes)

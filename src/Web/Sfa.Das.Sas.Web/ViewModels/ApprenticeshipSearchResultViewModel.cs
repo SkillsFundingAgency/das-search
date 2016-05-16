@@ -14,6 +14,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string SearchTerm { get; set; }
 
+        public string SortOrder { get; set; }
+
         public IEnumerable<ApprenticeshipSearchResultItemViewModel> Results { get; set; }
 
         public bool HasError { get; set; }
