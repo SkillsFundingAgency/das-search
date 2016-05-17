@@ -113,14 +113,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             return result;
         }
 
-        public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null, string callerName = "")
-            where T : class
-        {
-            var result = _client.IndexAsync(@object, selector);
-            SendLog(null, null, $"Elasticsearch.IndexAsync.{callerName}");
-            return result;
-        }
-
         private void SendLog(IApiCallDetails apiCallDetails, long? took, string identifier)
         {
             string body = string.Empty;

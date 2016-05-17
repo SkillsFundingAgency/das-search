@@ -24,40 +24,14 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
             _sut = _ioc.GetInstance<IGetStandardLevel>();
         }
 
-        [Test]
+        [TestCase(4, 1, Description = "Should return notationLevel when standard Id exists")]
+        [TestCase(0, int.MaxValue, Description = "Should return zero when standard Id doesnt exists")]
+        [TestCase(0, -1, Description = "Should return zero when standard Id is negative")]
         [Category("Integration")]
-        [Ignore]
-        public void ShouldReturnNotationLevelWhenStandardIdExists()
+        [Ignore("Lars client is not in use")]
+        public void WhenCallingGetNotationLevel(int expectedNotationLevel, int standardId)
         {
-            var expectedNotationLevel = 4;
-
-            var notationLevel = _sut.GetNotationLevel(1);
-
-            notationLevel.Should().NotBe(null);
-            notationLevel.Should().Be(expectedNotationLevel);
-        }
-
-        [Test]
-        [Category("Integration")]
-        [Ignore]
-        public void ShouldReturnZeroWhenStandardIdDoesntExists()
-        {
-            var expectedNotationLevel = 0;
-
-            var notationLevel = _sut.GetNotationLevel(int.MaxValue);
-
-            notationLevel.Should().NotBe(null);
-            notationLevel.Should().Be(expectedNotationLevel);
-        }
-
-        [Test]
-        [Category("Integration")]
-        [Ignore]
-        public void ShouldReturnZeroWhenStandardIdIsNegative()
-        {
-            var expectedNotationLevel = 0;
-
-            var notationLevel = _sut.GetNotationLevel(int.MinValue);
+            var notationLevel = _sut.GetNotationLevel(standardId);
 
             notationLevel.Should().NotBe(null);
             notationLevel.Should().Be(expectedNotationLevel);

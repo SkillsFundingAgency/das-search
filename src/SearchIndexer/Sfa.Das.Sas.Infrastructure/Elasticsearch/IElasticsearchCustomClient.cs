@@ -35,8 +35,5 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null, [CallerMemberName] string callerName = "");
 
         Task<IBulkResponse> BulkAsync(IBulkRequest request, [CallerMemberName] string callerName = "");
-
-        Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null, [CallerMemberName] string callerName = "")
-            where T : class;
     }
 }
