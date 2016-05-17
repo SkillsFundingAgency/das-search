@@ -22,9 +22,13 @@
                 <form method="GET" id="search-results-order">
                     <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
-                    <input type="hidden" name="take" value="@Model.ResultsToTake"/>
+                    <input type="hidden" name="take" value="@Model.ResultsToTake" />
+                    @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
+                    {
+                        <input type="hidden" name="SelectedLevels" value="@level.Value" />
+                    }
                     <div class="form-block">
-                        Sort by 
+                        Sort by
                         <select name="order" class="form-control form-control-1-3">
                             <option selected="@(Model.SortOrder=="1")" value="1">Best match</option>
                             <option selected="@(Model.SortOrder=="2")" value="2">Level (high to low)</option>
@@ -94,7 +98,7 @@
     {
         var previousPage = @Model.ActualPage - 1;
         var title = $"Previous page {@previousPage} of {@Model.LastPage}";
-        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(Model.SearchTerm, @previousPage, Model.AggregationLevel), null);
+        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(Model.SearchTerm, @previousPage, Model.AggregationLevel, Model.SortOrder), null);
             <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
                 <i class="arrow-button fa fa-angle-left"></i>
                 <span class="description">Previous <span class="hide-mob">page</span></span>
@@ -112,7 +116,7 @@
         var title = $"Next page {@nextPage} of {@Model.LastPage}";
 
         //var url = $"Apprenticeship/SearchResults/keywords={Model.SearchTerm}&page={nextPage}";
-        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(Model.SearchTerm, nextPage, Model.AggregationLevel), null);
+        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(Model.SearchTerm, nextPage, Model.AggregationLevel, Model.SortOrder), null);
             <a href="@url" style="visibility: visible" class="page-navigation__btn next">
                 <i class="arrow-button fa fa-angle-right"></i>
                 <span class="description">Next <span class="hide-mob">page</span></span>
@@ -124,10 +128,10 @@
 
 @functions
 {
-    RouteValueDictionary GetNavigationRouteValues(string keywords, int page, IEnumerable<LevelAggregationViewModel> selectedLevels)
+    RouteValueDictionary GetNavigationRouteValues(string keywords, int page, IEnumerable<LevelAggregationViewModel> selectedLevels, string order)
     {
 
-        var rv = new RouteValueDictionary { { "keywords", Model.SearchTerm }, { "page", page } };
+        var rv = new RouteValueDictionary { { "keywords", Model.SearchTerm }, { "page", page }, { "order", order } };
         int i = 0;
         foreach (var level in selectedLevels.Where(m => m.Checked))
         {
@@ -170,8 +174,8 @@
         <div class="@className">
             <form method="get" autocomplete="off">
                 <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                <input type="hidden" name="Page" value="@Model.ActualPage" />
-                <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                <input type="hidden" name="Page" value="@Model.ActualPage"/>
+                <input type="hidden" name="order" value="@Model.SortOrder" />
 
                 <fieldset class="filters filters-accordion">
                     <h3 class="toggler heading-small">Apprenticeship Level</h3>

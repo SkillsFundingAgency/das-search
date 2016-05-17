@@ -162,42 +162,28 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should be able to search for and add a standard to my shortlist")]
+        [NUnit.Framework.DescriptionAttribute("ShouldBeAbleToDeleteAStandardFromMyDashboard")]
         [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
-        public virtual void ShouldBeAbleToSearchForAndAddAStandardToMyShortlist()
+        [NUnit.Framework.CategoryAttribute("SadPath")]
+        public virtual void ShouldBeAbleToDeleteAStandardFromMyDashboard()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should be able to search for and add a standard to my shortlist", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ShouldBeAbleToDeleteAStandardFromMyDashboard", new string[] {
+                        "SadPath",
                         "ignore"});
-#line 46
+#line 45
 this.ScenarioSetup(scenarioInfo);
-#line 47
- testRunner.Given("I have data for a standard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 48
- testRunner.And("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
- testRunner.When("I choose Start Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 50
- testRunner.Then("I am on the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
+                        "Parameter",
                         "Value"});
             table5.AddRow(new string[] {
-                        "Search Box",
-                        "{JOBROLE}"});
-#line 52
- testRunner.When("I enter data", ((string)(null)), table5, "When ");
-#line 55
- testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
- testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 58
- testRunner.When("I choose First Standard Result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
- testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 61
+                        "id",
+                        "1"});
+#line 46
+ testRunner.Given("I navigated to the Standard Details page with parameters", ((string)(null)), table5, "Given ");
+#line 50
  testRunner.When("I choose Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 62
+#line 51
  testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -208,68 +194,29 @@ this.ScenarioSetup(scenarioInfo);
                         "Shortlist Link",
                         "has text",
                         "Remove from shortlist"});
-#line 63
+#line 52
  testRunner.And("I see", ((string)(null)), table6, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("ShouldBeAbleToDeleteAStandardFromMyDashboard")]
-        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
-        [NUnit.Framework.CategoryAttribute("SadPath")]
-        public virtual void ShouldBeAbleToDeleteAStandardFromMyDashboard()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ShouldBeAbleToDeleteAStandardFromMyDashboard", new string[] {
-                        "SadPath",
-                        "ignore"});
-#line 68
-this.ScenarioSetup(scenarioInfo);
+#line 56
+ testRunner.When("I choose Dashboard Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 57
+ testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 58
+ testRunner.And("I see StandardsShortlist list contains at least 1 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+ testRunner.When("I choose Delete Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 60
+ testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Parameter",
+                        "Field",
+                        "Rule",
                         "Value"});
             table7.AddRow(new string[] {
-                        "id",
-                        "1"});
-#line 69
- testRunner.Given("I navigated to the Standard Details page with parameters", ((string)(null)), table7, "Given ");
-#line 73
- testRunner.When("I choose Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 74
- testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Rule",
-                        "Value"});
-            table8.AddRow(new string[] {
-                        "Shortlist Link",
-                        "has text",
-                        "Remove from shortlist"});
-#line 75
- testRunner.And("I see", ((string)(null)), table8, "And ");
-#line 79
- testRunner.When("I choose Dashboard Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 80
- testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 81
- testRunner.And("I see StandardsShortlist list contains at least 1 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
- testRunner.When("I choose Delete Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 83
- testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Rule",
-                        "Value"});
-            table9.AddRow(new string[] {
                         "Empty Shortlist Message",
                         "exists",
                         "true"});
-#line 84
- testRunner.And("I see", ((string)(null)), table9, "And ");
+#line 61
+ testRunner.And("I see", ((string)(null)), table7, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
