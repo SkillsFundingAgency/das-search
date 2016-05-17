@@ -4,7 +4,7 @@
     standard.CookieName = 'standards_shortlist';
 
     standard.Add = function(id) {
-        var value = Cookies.get(standard.CookieName);
+        var value = Cookies.get(standard.CookieName).replace(/%2C/g, ",");
         if (!value || value.length === 0) {
             Cookies.set(standard.CookieName, '' + id, { expires: 365, domain: SearchAndShortlist.appsettings.cookieDomain, HttpOnly: SearchAndShortlist.appsettings.cookieSecure, path: '/' });
         } else {
@@ -18,7 +18,7 @@
     };
 
     standard.Remove = function (id) {
-        var value = Cookies.get(standard.CookieName);
+        var value = Cookies.get(standard.CookieName).replace(/%2C/g, ",");
         if (value && value.length !== 0) {
             var array = value.split(',');
             var index = array.indexOf(id);
@@ -32,8 +32,7 @@
 
     standard.init = function () {
         $('.shortlist-link').on('click', function (e) {
-            $this = $(this);
-            var value = Cookies.get(standard.CookieName);
+            var $this = $(this);
             if ($this.attr('data-action') === 'add') {
                 standard.Add($(this).attr('data-standard'));
                 $('.shortlist-link').attr('data-action', 'remove');
