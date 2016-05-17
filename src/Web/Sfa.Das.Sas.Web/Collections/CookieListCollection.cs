@@ -95,7 +95,7 @@ namespace Sfa.Das.Sas.Web.Collections
                 return listItems;
             }
 
-            var itemStrings = cookie.Value.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            var itemStrings = cookie.Value.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var stringValue in itemStrings)
             {
@@ -118,7 +118,7 @@ namespace Sfa.Das.Sas.Web.Collections
             }
 
             var listString = listItems.Select(x => x.ToString())
-                .Aggregate((x1, x2) => x1 + "," + x2);
+                .Aggregate((x1, x2) => x1 + "|" + x2);
 
             return listString;
         }
