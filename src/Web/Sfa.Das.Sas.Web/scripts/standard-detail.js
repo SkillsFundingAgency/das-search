@@ -4,7 +4,7 @@
     standard.CookieName = 'das_shortlist_standards';
 
     standard.Add = function(id) {
-        var value = Cookies.get(standard.CookieName).replace(/%2C/g, ",");
+        var value = Cookies.get(standard.CookieName);
         if (!value || value.length === 0) {
             Cookies.set(standard.CookieName, '' + id, { expires: 365, domain: SearchAndShortlist.appsettings.cookieDomain, HttpOnly: SearchAndShortlist.appsettings.cookieSecure, path: '/' });
         } else {
@@ -18,7 +18,7 @@
     };
 
     standard.Remove = function (id) {
-        var value = Cookies.get(standard.CookieName).replace(/%2C/g, ",");
+        var value = Cookies.get(standard.CookieName);
         if (value && value.length !== 0) {
             var array = value.split(',');
             var index = array.indexOf(id);
