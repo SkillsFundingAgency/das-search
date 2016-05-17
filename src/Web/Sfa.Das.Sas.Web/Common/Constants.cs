@@ -2,6 +2,6 @@
 {
     public static class Constants
     {
-        public const string StandardsShortListCookieName = "standards_shortlist";
+        public const string StandardsShortListCookieName = "das_shortlist_standards";
     }
 }

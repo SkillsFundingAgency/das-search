@@ -1,7 +1,7 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (standard) {
 
-    standard.CookieName = 'standards_shortlist';
+    standard.CookieName = 'das_shortlist_standards';
 
     standard.Add = function(id) {
         var value = Cookies.get(standard.CookieName).replace(/%2C/g, ",");
