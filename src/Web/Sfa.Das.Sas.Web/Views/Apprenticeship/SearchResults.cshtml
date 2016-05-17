@@ -11,12 +11,15 @@
 
         <div class="column-two-thirds">
 
-            <div>
-
+            <div class="hgroup">
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
-
+                <p>
+                    @{
+                        Html.RenderPartial("_SearchResultMessage");
+                    }
+                </p>
             </div>
             <div>
                 <form method="GET" id="search-results-order">
@@ -27,9 +30,9 @@
                     {
                         <input type="hidden" name="SelectedLevels" value="@level.Value" />
                     }
-                    <div class="form-block">
-                        Sort by
-                        <select name="order" class="form-control form-control-1-3">
+                    <div>
+                        <label for="sort-results" class="heading-medium inline">Sort results</label>
+                        <select id="sort-results" name="order">
                             <option selected="@(Model.SortOrder=="1")" value="1">Best match</option>
                             <option selected="@(Model.SortOrder=="2")" value="2">Level (high to low)</option>
                             <option selected="@(Model.SortOrder=="3")" value="3">Level (low to high)</option>
@@ -38,11 +41,6 @@
                     </div>
                 </form>
             </div>
-            <p>
-                @{
-                    Html.RenderPartial("_SearchResultMessage");
-                }
-            </p>
 
         </div>
 
@@ -171,7 +169,7 @@
 {
     if (Model.TotalResults > 0)
     {
-        <div class="@className">
+        <div class="filters-block @className">
             <form method="get" autocomplete="off">
                 <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                 <input type="hidden" name="Page" value="@Model.ActualPage"/>
