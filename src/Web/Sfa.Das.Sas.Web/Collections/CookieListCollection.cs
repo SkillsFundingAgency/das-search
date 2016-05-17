@@ -129,6 +129,7 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 Value = listString,
                 HttpOnly = true,
+                Expires = DateTime.Now.AddYears(1),
                 Secure = _settings.UseSecureCookies,
                 Domain = _settings.CookieDomain
             };
