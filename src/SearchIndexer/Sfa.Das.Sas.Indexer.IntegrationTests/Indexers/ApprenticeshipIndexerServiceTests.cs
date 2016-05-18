@@ -58,18 +58,21 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             _indexName = $"{_standardSettings.IndexesAlias}-{new DateTime(2000, 1, 1).ToUniversalTime().ToString("yyyy-MM-dd-HH")}".ToLower(CultureInfo.InvariantCulture);
 
             DeleteIndexIfExists(_indexName);
-        }
 
-        [SetUp]
-        public void BeforeEachTest()
-        {
             if (!_elasticClient.IndexExists(Indices.Index(_indexName)).Exists)
             {
                 _indexerService.CreateIndex(_indexName);
                 var indexTask = _indexerService.IndexEntries(_indexName);
                 Task.WaitAll(indexTask);
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
+                _elasticClient.Refresh(Indices.Index(_indexName));
             }
+        }
+
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            
         }
 
         [TestFixtureTearDown]

@@ -11,12 +11,15 @@
 
         <div class="column-two-thirds">
 
-            <div>
-
+            <div class="hgroup">
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
-
+                <p>
+                    @{
+                        Html.RenderPartial("_SearchResultMessage");
+                    }
+                </p>
             </div>
             @if (!Model.HasError)
             {
@@ -46,7 +49,6 @@
                     Html.RenderPartial("_SearchResultMessage");
                 }
             </p>
-
         </div>
 
         <div class="column-one-third">
@@ -174,7 +176,7 @@
 {
     if (Model.TotalResults > 0)
     {
-        <div class="@className">
+        <div class="filters-block @className">
             <form method="get" autocomplete="off">
                 <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                 <input type="hidden" name="Page" value="@Model.ActualPage"/>
@@ -193,15 +195,6 @@
                                 </li>
                             }
                         </ul>
-
-                        <details>
-                            <summary>Help with levels</summary>
-                            <div class="panel panel-border-narrow">
-                                <p>
-                                    What is here?
-                                </p>
-                            </div>
-                        </details>
                     </div>
                 </fieldset>
                 <input type="submit" class="button" value="Update results" />

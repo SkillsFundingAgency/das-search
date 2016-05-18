@@ -2345,7 +2345,9 @@ details .arrow {
     }
 }
 
+.filters-block {
 
+}
 
 .filters {
     display: block;
@@ -2384,6 +2386,9 @@ details .arrow {
     @at-root  {
         .js .filters .toggled-content {
             display: none;
+            @media (min-width: 641px) {
+                display: block;
+            }
         }
         .js .filters.unfolded {
             .toggler {
@@ -2424,7 +2429,12 @@ details .arrow {
 }
 
 
-
-.js #search-results-order button {
-    display: none;
+#search-results-order {
+    margin-bottom: 20px;
 }
+
+.js #search-results-order {
+    button {
+        display: none;
+    }
+} 
