@@ -42,7 +42,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
             // Assign
             _requestCookieCollection.Add(new HttpCookie(ListName)
             {
-                Value = "1,2,3,4"
+                Value = "1|2|3|4"
             });
 
             // Act
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
             // Assign
             _requestCookieCollection.Add(new HttpCookie(ListName)
             {
-                Value = "1,2,3,4"
+                Value = "1|2|3|4"
             });
 
             // Act
@@ -82,7 +82,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
 
             // Assert
             Assert.IsNotNull(_responseCookieCollection[ListName]);
-            Assert.AreEqual("1,2,4", _responseCookieCollection[ListName].Value);
+            Assert.AreEqual("1|2|4", _responseCookieCollection[ListName].Value);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
             // Assign
             _requestCookieCollection.Add(new HttpCookie(ListName)
             {
-                Value = "1,2,3,4"
+                Value = "1|2|3|4"
             });
 
             // Act
@@ -125,7 +125,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
             // Assign
             _requestCookieCollection.Add(new HttpCookie(ListName)
             {
-                Value = "1,2,4"
+                Value = "1|2|4"
             });
 
             // Act
@@ -133,7 +133,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
 
             // Assert
             Assert.IsNotNull(_responseCookieCollection[ListName]);
-            Assert.AreEqual("1,2,3,4", _responseCookieCollection[ListName].Value);
+            Assert.AreEqual("1|2|3|4", _responseCookieCollection[ListName].Value);
         }
     }
 }
