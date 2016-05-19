@@ -18,7 +18,8 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/validation.js",
                 "~/scripts/ui.js",
                 "~/scripts/standard-detail.js",
-                "~/scripts/appsettings.js"));
+                "~/scripts/appsettings.js",
+                "~/scripts/cookie-banner.js"));
         }
     }
 }
