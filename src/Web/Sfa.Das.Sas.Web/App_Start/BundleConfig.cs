@@ -17,7 +17,6 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/analytics.js",
                 "~/scripts/validation.js",
                 "~/scripts/ui.js",
-                "~/scripts/standard-detail.js",
                 "~/scripts/appsettings.js"));
         }
     }
