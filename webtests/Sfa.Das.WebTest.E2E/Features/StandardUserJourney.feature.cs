@@ -108,28 +108,15 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I choose First Standard Result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 20
  testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 22
- testRunner.When("I choose Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
-                        "Rule",
                         "Value"});
             table2.AddRow(new string[] {
-                        "Shortlist Link",
-                        "contains",
-                        "Remove from shortlist"});
-#line 23
- testRunner.Then("I see", ((string)(null)), table2, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Value"});
-            table3.AddRow(new string[] {
                         "Postcode Search Box",
                         "{Postcode}"});
 #line 27
- testRunner.When("I enter data", ((string)(null)), table3, "When ");
+ testRunner.When("I enter data", ((string)(null)), table2, "When ");
 #line 30
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
@@ -141,22 +128,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 35
  testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Rule",
                         "Value"});
-            table4.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "Provider Name",
                         "Exists",
                         "true"});
 #line 36
- testRunner.And("I see", ((string)(null)), table4, "And ");
-#line 40
- testRunner.When("I choose Dashboard Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
- testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 42
- testRunner.And("I see Standards Shortlist list contains at least 1 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I see", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -173,29 +154,29 @@ this.ScenarioSetup(scenarioInfo);
 #line 45
 this.ScenarioSetup(scenarioInfo);
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Parameter",
                         "Value"});
-            table5.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "id",
                         "1"});
 #line 46
- testRunner.Given("I navigated to the Standard Details page with parameters", ((string)(null)), table5, "Given ");
+ testRunner.Given("I navigated to the Standard Details page with parameters", ((string)(null)), table4, "Given ");
 #line 50
  testRunner.When("I choose Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 51
  testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Rule",
                         "Value"});
-            table6.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Shortlist Link",
                         "has text",
                         "Remove from shortlist"});
 #line 52
- testRunner.And("I see", ((string)(null)), table6, "And ");
+ testRunner.And("I see", ((string)(null)), table5, "And ");
 #line 56
  testRunner.When("I choose Dashboard Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 57
@@ -207,16 +188,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 60
  testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Rule",
                         "Value"});
-            table7.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Empty Shortlist Message",
                         "exists",
                         "true"});
 #line 61
- testRunner.And("I see", ((string)(null)), table7, "And ");
+ testRunner.And("I see", ((string)(null)), table6, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
