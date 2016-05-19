@@ -85,7 +85,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
-        public async Task ShouldCreateScheduledIndexAndMappingForProviders()
+        public void ShouldCreateScheduledIndexAndMappingForProviders()
         {
             var mappingFramework = _elasticClient.GetMapping<FrameworkProvider>(
                 i => i.Index(_indexName));
@@ -120,7 +120,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
-        public async Task ShouldRetrieveProvidersSearchingForStandardId()
+        public void ShouldRetrieveProvidersSearchingForStandardId()
         {
             var providersCase1 = _elasticClient.Search<Provider>(s => s
                 .Index(_indexName)
@@ -330,9 +330,9 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                }
                        };
         }
-    }
 
-    internal class DummyTestClass
-    {
+        internal class DummyTestClass
+        {
+        }
     }
 }

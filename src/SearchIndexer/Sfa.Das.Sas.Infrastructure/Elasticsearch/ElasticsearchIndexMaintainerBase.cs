@@ -129,14 +129,14 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         {
             foreach (var item in result.ItemsWithErrors)
             {
-                var properties = new Dictionary<string, object> { { "DocumentType", documentType }, { "Index", item.Index}, { "Reason", item.Error.Reason }, { "Id", item.Id } };
+                var properties = new Dictionary<string, object> { { "DocumentType", documentType }, { "Index", item.Index }, { "Reason", item.Error.Reason }, { "Id", item.Id } };
                 Log.Warn($"Error indexing entry with id {item.Id}", properties);
             }
         }
 
         private void LogBulk(string documentType, int totalCount, int took, int errorCount)
         {
-            var properties = new Dictionary<string, object> { { "DocumentType", documentType }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" }, { "ExecutionTime", took }, { "ErrorCount", errorCount} };
+            var properties = new Dictionary<string, object> { { "DocumentType", documentType }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" }, { "ExecutionTime", took }, { "ErrorCount", errorCount } };
             Log.Info($"Total of {totalCount - errorCount} / {totalCount} {documentType} documents were indexed successfully", properties);
         }
     }

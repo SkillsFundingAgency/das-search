@@ -72,7 +72,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         [SetUp]
         public void BeforeEachTest()
         {
-            
         }
 
         [TestFixtureTearDown]
