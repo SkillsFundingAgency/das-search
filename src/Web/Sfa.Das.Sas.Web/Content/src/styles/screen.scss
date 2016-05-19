@@ -47,6 +47,22 @@ aside h2:first-child {
     float: left;
 }
 
+.cookie-banner .content-container{
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 0 15px;
+}
+
+.meta-data{
+    .modmodified-date{
+        font-size: 15px;
+    }
+}
+
+.container table{
+    margin: 20px 0 35px;
+}
+
 .markdown {
     h2 {
         @include heading-36;

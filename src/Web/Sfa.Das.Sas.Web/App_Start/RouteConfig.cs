@@ -10,6 +10,11 @@ namespace Sfa.Das.Sas.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Cookies",
+                url: "cookies",
+                defaults: new { controller = "Start", action = "Cookies", id = UrlParameter.Optional });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Start", action = "Start", id = UrlParameter.Optional });

@@ -577,6 +577,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_FilterProviders.generated.cs</LastGenOutput>
     </None>
+    <None Include="Views\Start\Cookies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
