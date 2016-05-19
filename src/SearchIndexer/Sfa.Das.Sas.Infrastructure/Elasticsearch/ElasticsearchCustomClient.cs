@@ -115,7 +115,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         private void SendLog(IApiCallDetails apiCallDetails, long? took, string identifier)
         {
-            string body = string.Empty;
+            string body = string.Empty; 
             if (apiCallDetails?.RequestBodyInBytes != null)
             {
                 body = System.Text.Encoding.Default.GetString(apiCallDetails.RequestBodyInBytes);

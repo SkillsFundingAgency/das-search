@@ -105,20 +105,39 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             return count >= batchSize;
         }
 
-        protected void LogResponse(IBulkResponse[] elementIndexResult)
+        protected void LogResponse(IBulkResponse[] elementIndexResult, string documentType)
         {
+            var totalCount = 0;
+            var took = 0;
+            var errorCount = 0;
+            foreach (var bulkResponse in elementIndexResult)
+            {
+                totalCount += bulkResponse.Items.Count();
+                took += bulkResponse.Took;
+                errorCount += bulkResponse.ItemsWithErrors.Count();
+            }
+
+            LogBulk(documentType, totalCount, took, errorCount);
+
             foreach (var bulkResponse in elementIndexResult.Where(bulkResponse => bulkResponse.Errors))
             {
-                ReportErrors(bulkResponse);
+                ReportErrors(bulkResponse, documentType);
             }
         }
 
-        private void ReportErrors(IBulkResponse result)
+        private void ReportErrors(IBulkResponse result, string documentType)
         {
-            foreach (var message in result.ItemsWithErrors.Select(itemsWithError => string.Concat("Error indexing entry ", itemsWithError.Id, " at ", itemsWithError.Index)))
+            foreach (var item in result.ItemsWithErrors)
             {
-                Log.Warn(message);
+                var properties = new Dictionary<string, object> { { "DocumentType", documentType }, { "Index", item.Index}, { "Reason", item.Error.Reason }, { "Id", item.Id } };
+                Log.Warn($"Error indexing entry with id {item.Id}", properties);
             }
+        }
+
+        private void LogBulk(string documentType, int totalCount, int took, int errorCount)
+        {
+            var properties = new Dictionary<string, object> { { "DocumentType", documentType }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" }, { "ExecutionTime", took }, { "ErrorCount", errorCount} };
+            Log.Info($"Total of {totalCount - errorCount} / {totalCount} {documentType} documents were indexed successfully", properties);
         }
     }
 }

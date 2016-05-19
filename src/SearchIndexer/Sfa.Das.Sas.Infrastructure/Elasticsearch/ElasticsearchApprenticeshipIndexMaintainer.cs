@@ -50,7 +50,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         {
             var tasks = new List<Task<IBulkResponse>>();
             int count = 0;
-            int totalCount = 0;
             var bulkDescriptor = CreateBulkDescriptor(indexName);
 
             foreach (var entry in entries)
@@ -66,7 +65,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                     {
                         // Execute batch
                         tasks.Add(Client.BulkAsync(bulkDescriptor));
-                        totalCount += count;
 
                         // Reset state - New descriptor
                         bulkDescriptor = CreateBulkDescriptor(indexName);
@@ -82,14 +80,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             if (count > 0)
             {
                 tasks.Add(Client.BulkAsync(bulkDescriptor));
-                totalCount += count;
             }
 
             var bulkTasks = new List<Task<IBulkResponse>>();
             bulkTasks.AddRange(tasks);
-            LogResponse(await Task.WhenAll(bulkTasks));
-            var properties = new Dictionary<string, object> { { "DocumentType", typeof(T1).Name.ToLower(CultureInfo.CurrentCulture) }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" } };
-            Log.Info($"Sent a total of {totalCount} {typeof(T1)} documents to be indexed", properties);
+            LogResponse(await Task.WhenAll(bulkTasks), typeof(T1).Name.ToLower(CultureInfo.CurrentCulture));
         }
     }
 }
