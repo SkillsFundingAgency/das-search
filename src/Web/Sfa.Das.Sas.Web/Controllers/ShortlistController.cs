@@ -52,8 +52,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             return url;
         }
 
-        // This method is used to try to redirect back from the page that requested the updating of the 
-        // standards shortlist. If a URL cannot be found in the request then the default is to go back to 
+        // This method is used to try to redirect back from the page that requested the updating of the
+        // standards shortlist. If a URL cannot be found in the request then the default is to go back to
         // the standard details page itself.
         private ActionResult GetReturnRedirectFromStandardShortlistAction(int id, string responseParameters)
         {

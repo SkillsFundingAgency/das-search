@@ -5,10 +5,8 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     using System.Collections.Generic;
 
-    public interface ISearchProvider
+    public interface IProviderLocationSearchProvider
     {
-        ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels);
-
         SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
 
         SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
