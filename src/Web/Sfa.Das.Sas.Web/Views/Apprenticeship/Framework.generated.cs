@@ -133,117 +133,28 @@ WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n                <li>entry requireme" +
 "nts</li>\r\n                <li>duration</li>\r\n                <li>career paths</l" +
-"i>\r\n\r\n            </ul>\r\n\r\n");
+"i>\r\n\r\n            </ul>\r\n\r\n            <div>\r\n                <a");
 
+WriteLiteral(" class=\"button\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1335), Tuple.Create("\"", 1433)
             
-            #line 40 "..\..\Views\Apprenticeship\Framework.cshtml"
-            
+            #line 41 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create("", 1342), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})
             
             #line default
             #line hidden
-            
-            #line 40 "..\..\Views\Apprenticeship\Framework.cshtml"
-             using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "postcode-form search-box", @id = "postcode-form-bottom" }))
-            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <h2");
-
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(">Find training providers for this apprenticeship</h2>\r\n");
-
-WriteLiteral("                    <div");
-
-WriteAttribute("class", Tuple.Create(" class=\"", 1579), Tuple.Create("\"", 1632)
-, Tuple.Create(Tuple.Create("", 1587), Tuple.Create("form-group", 1587), true)
-            
-            #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1597), Tuple.Create<System.Object, System.Int32>(@Model.HasError ? " error" : ""
-            
-            #line default
-            #line hidden
-, 1598), false)
+, 1342), false)
 );
 
-WriteLiteral(">\r\n                        <label");
+WriteLiteral(">\r\n                    <i");
 
-WriteLiteral(" class=\"form-label\"");
+WriteLiteral(" class=\"fa fa-search\"");
 
-WriteLiteral(" for=\"postcode\"");
+WriteLiteral(" aria-hidden=\"true\"");
 
-WriteLiteral(">\r\n                            Enter a full postcode.\r\n                          " +
-"  <span");
-
-WriteLiteral(" class=\"error-message\"");
-
-WriteLiteral(">\r\n                                Invalid postcode\r\n                            " +
-"</span>\r\n                        </label>\r\n                        <input");
-
-WriteLiteral(" type=\"hidden\"");
-
-WriteLiteral(" id=\"apprenticeshipid\"");
-
-WriteLiteral(" name=\"apprenticeshipid\"");
-
-WriteLiteral(" class=\"text-box form-control\"");
-
-WriteAttribute("value", Tuple.Create(" value=\"", 2054), Tuple.Create("\"", 2080)
-            
-            #line 50 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 2062), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
-            
-            #line default
-            #line hidden
-, 2062), false)
-);
-
-WriteLiteral(">\r\n                        <input");
-
-WriteLiteral(" type=\"hidden\"");
-
-WriteLiteral(" name=\"Inputid\"");
-
-WriteLiteral(" value=\"postcode-form-bottom\"");
-
-WriteLiteral(" />\r\n                        <input");
-
-WriteLiteral(" type=\"search\"");
-
-WriteLiteral(" id=\"postcode\"");
-
-WriteLiteral(" name=\"PostCode\"");
-
-WriteLiteral(" class=\"text-box form-control postcode-search-box\"");
-
-WriteLiteral(" maxlength=\"200\"");
-
-WriteLiteral(" placeholder=\"\"");
-
-WriteLiteral(">\r\n                    </div>\r\n");
-
-WriteLiteral("                    <input");
-
-WriteLiteral(" class=\"button margin-top-x2 postcode-search-button\"");
-
-WriteLiteral(" id=\"submit-postcode\"");
-
-WriteLiteral(" type=\"submit\"");
-
-WriteLiteral(" value=\"Search\"");
-
-WriteLiteral(" />\r\n");
-
-            
-            #line 55 "..\..\Views\Apprenticeship\Framework.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        </div>\r\n     </div>\r\n</main>");
+WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n       " +
+"     </div>\r\n        </div>\r\n     </div>\r\n</main>");
 
         }
     }

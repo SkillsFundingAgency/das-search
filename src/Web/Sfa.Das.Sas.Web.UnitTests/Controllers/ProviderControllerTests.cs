@@ -34,29 +34,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
         private Mock<IProviderViewModelFactory> _mockViewModelFactory;
 
-        private Mock<IListCollection<int>> _mockCookie;
-
-        [TestCase(null, "null-id")]
-        [TestCase("", "empty-id")]
-        public async Task SearchResultsShouldRedirectToStandardDetailsIfPostCodeIsNotSet(string postCode, string inputId)
-        {
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode, InputId = inputId };
-
-            var controller = new ProviderController(null, null, null, null, _configurationSettings, null);
-
-            var moqUrlHelper = new Mock<UrlHelper>();
-            moqUrlHelper.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>())).Returns("http://url.co.uk");
-            controller.Url = moqUrlHelper.Object;
-
-            var result = await controller.StandardResults(searchCriteria);
-
-            result.Should().BeOfType<RedirectResult>();
-
-            var redirectResult = (RedirectResult)result;
-
-            redirectResult?.Url.Should().Be($"http://url.co.uk#{inputId}");
-        }
-
         [Test]
         public async Task SearchResultsShouldReturnViewResultWhenStandardSearchIsSuccessful()
         {
@@ -94,27 +71,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             var viewResult = (ViewResult)result;
             viewResult.Model.Should().Be(stubViewModel);
-        }
-
-        [TestCase(null, "null-id")]
-        [TestCase("", "empty-id")]
-        public async Task SearchResultsShouldRedirectToFrameworkDetailsIfPostCodeIsNotSet(string postCode, string inputId)
-        {
-            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = postCode, InputId = inputId };
-
-            var controller = new ProviderController(null, null, null, null, _configurationSettings, null);
-
-            var moqUrlHelper = new Mock<UrlHelper>();
-            moqUrlHelper.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<object>())).Returns("http://url.co.uk");
-            controller.Url = moqUrlHelper.Object;
-
-            var result = await controller.FrameworkResults(searchCriteria);
-
-            result.Should().BeOfType<RedirectResult>();
-
-            var redirectResult = (RedirectResult)result;
-
-            redirectResult?.Url.Should().Be($"http://url.co.uk#{inputId}");
         }
 
         [Test]
