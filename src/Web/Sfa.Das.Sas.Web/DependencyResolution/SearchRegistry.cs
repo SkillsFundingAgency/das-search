@@ -17,6 +17,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
             For<IShortlistStandardViewModelFactory>().Use<ShortlistStandardViewModelFactory>();
             For<IDashboardViewModelFactory>().Use<DashboardViewModelFactory>();
+            For<IApprenticeshipViewModelFactory>().Use<ApprenticeshipViewModelFactory>();
         }
     }
 }
