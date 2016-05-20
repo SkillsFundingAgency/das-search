@@ -51,10 +51,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Colllections
 
             var expectedResult = new List<ShortlistedApprenticeship>
             {
-                new ShortlistedApprenticeship { ApprenticeshipId = 1, ProvidersId = new List<int>() },
-                new ShortlistedApprenticeship { ApprenticeshipId = 2, ProvidersId = new List<int>() },
-                new ShortlistedApprenticeship { ApprenticeshipId = 3, ProvidersId = new List<int>() },
-                new ShortlistedApprenticeship { ApprenticeshipId = 4, ProvidersId = new List<int>() }
+                new ShortlistedApprenticeship { ApprenticeshipId = 1, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                new ShortlistedApprenticeship { ApprenticeshipId = 2, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                new ShortlistedApprenticeship { ApprenticeshipId = 3, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                new ShortlistedApprenticeship { ApprenticeshipId = 4, ProvidersIdAndLocation = new List<ShortlistedProvider>() }
             };
 
             // Act

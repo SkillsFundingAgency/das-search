@@ -9,6 +9,6 @@ namespace Sfa.Das.Sas.Web.Models
     {
         public int ApprenticeshipId { get; set; }
 
-        public List<int> ProvidersId { get; set; }
+        public List<ShortlistedProvider> ProvidersIdAndLocation { get; set; }
     }
 }

@@ -239,6 +239,7 @@
     <Compile Include="Factories\ShortlistStandardViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
+    <Compile Include="Models\ShortlistedProvider.cs" />
     <Compile Include="Models\ShortlistedApprenticeship.cs" />
     <Compile Include="Services\MappingActions\ProviderFrameworkSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\ProviderSearchMappingHelper.cs" />
