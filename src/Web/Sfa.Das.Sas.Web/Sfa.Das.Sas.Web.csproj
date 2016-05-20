@@ -366,6 +366,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_StandardSearchResultMessage.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Start\Cookies.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cookies.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Start\Start.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -578,7 +583,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_FilterProviders.generated.cs</LastGenOutput>
     </None>
-    <None Include="Views\Start\Cookies.cshtml" />
+    <Content Include="Views\Start\Cookies.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Cookies.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
