@@ -37,22 +37,12 @@
 
             </ul>
 
-            @using (Html.BeginForm("FrameworkResults", "Provider", FormMethod.Get, new { @class = "postcode-form search-box", @id = "postcode-form-bottom" }))
-            {
-                <h2 class="heading-medium">Find training providers for this apprenticeship</h2>
-                    <div class="form-group @(@Model.HasError ? " error" : "")">
-                        <label class="form-label" for="postcode">
-                            Enter a full postcode.
-                            <span class="error-message">
-                                This field can't be blank
-                            </span>
-                        </label>
-                        <input type="hidden" id="apprenticeshipid" name="apprenticeshipid" class="text-box form-control" value="@Model.FrameworkId">
-                        <input type="hidden" name="Inputid" value="postcode-form-bottom" />
-                        <input type="search" id="postcode" name="PostCode" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
-                    </div>
-                    <input class="button margin-top-x2 postcode-search-button" id="submit-postcode" type="submit" value="Search" />
-            }
+            <div>
+                <a class="button" href="@Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Find training Providers
+                </a>
+            </div>
         </div>
      </div>
 </main>

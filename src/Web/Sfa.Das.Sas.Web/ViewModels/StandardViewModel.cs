@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class StandardViewModel : IHasError
+    public class StandardViewModel
     {
         public int StandardId { get; set; }
 
@@ -27,7 +27,7 @@
         public string OverviewOfRole { get; set; }
 
         // Page specific
-        public bool HasError { get; set; }
+        //public bool HasError { get; set; }
 
         public LinkViewModel PreviousPageLink { get; set; }
 

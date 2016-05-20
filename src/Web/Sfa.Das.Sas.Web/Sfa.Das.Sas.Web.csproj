@@ -283,6 +283,7 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
+    <Compile Include="ViewModels\ProviderSearchViewModel.cs" />
     <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryModeViewModel.cs" />
@@ -586,6 +587,7 @@
       <LastGenOutput>Overview.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Error\_Error400.cshtml" />
+    <Content Include="Views\Apprenticeship\SearchForProviders.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>

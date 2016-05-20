@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         public void Search_WhenNavigateTo_ShouldReturnAViewResult()
         {
             // Arrange
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null, new Mock<IProfileAStep>().Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null, null, new Mock<IProfileAStep>().Object, null, null);
 
             // Act
             ViewResult result = controller.Search() as ViewResult;
@@ -51,7 +51,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultItemViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultItemViewModel());
 
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null, null);
 
             // Act
             ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResults>()))
                 .Returns(new ApprenticeshipSearchResultViewModel());
 
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null, null);
 
             // Act
             ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test" }) as ViewResult;
@@ -83,7 +83,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             Assert.AreEqual(null, ((ApprenticeshipSearchResultViewModel)result.Model).SearchTerm);
             Assert.IsNotNull(result);
         }
-
+        
         [TestCase(-15)]
         [TestCase(-1)]
         [TestCase(0)]
@@ -189,9 +189,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
             var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null, null);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false", string.Empty);
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, string.Empty);
 
             Assert.NotNull(result);
             Assert.AreEqual(404, result.StatusCode);
@@ -207,9 +207,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
             var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, new Mock<IProfileAStep>().Object, null, null);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1, "false");
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1);
 
             Assert.NotNull(result);
             Assert.AreEqual(404, result.StatusCode);
@@ -241,14 +241,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 null,
                 mockMappingServices.Object,
                 new Mock<IProfileAStep>().Object,
-                mockCookieRepository.Object);
+                mockCookieRepository.Object, null);
 
             controller.SetRequestUrl("http://www.abba.co.uk");
             mockCookieRepository.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
                                 .Returns(new List<int>(shortListItems));
 
             // Act
-            var result = controller.Standard(standardId, string.Empty, string.Empty) as ViewResult;
+            var result = controller.Standard(standardId, string.Empty) as ViewResult;
             var viewModel = result?.Model as StandardViewModel;
 
             // Assert
