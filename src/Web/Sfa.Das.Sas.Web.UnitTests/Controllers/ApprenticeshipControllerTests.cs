@@ -95,8 +95,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
                 .Returns(new StandardViewModel());
 
-            var mockCoockie = new Mock<IListCollection<int>>();
-            mockCoockie.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship> {new ShortlistedApprenticeship {ApprenticeshipId = 1}});
+            var mockCookie = new Mock<IListCollection<int>>();
+            mockCookie.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship> {new ShortlistedApprenticeship {ApprenticeshipId = 1}});
 
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
@@ -104,7 +104,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, mockCoockie.Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, mockCookie.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(

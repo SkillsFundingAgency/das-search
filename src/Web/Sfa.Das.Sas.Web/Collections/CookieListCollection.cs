@@ -50,9 +50,12 @@ namespace Sfa.Das.Sas.Web.Collections
                 {
                     if (shortlistedApprenticeship.ApprenticeshipId.Equals(item.ApprenticeshipId))
                     {
-                        foreach (var providerId in item.ProvidersIdAndLocation.Where(providerId => !shortlistedApprenticeship.ProvidersIdAndLocation.Any(x => x.Equals(providerId))))
+                        foreach (var provider in item.ProvidersIdAndLocation)
                         {
-                            shortlistedApprenticeship.ProvidersIdAndLocation.Add(providerId);
+                            if (!shortlistedApprenticeship.ProvidersIdAndLocation.Any(x => x.ProviderId.Equals(provider.ProviderId) && x.LocationId.Equals(provider.LocationId)))
+                            {
+                                shortlistedApprenticeship.ProvidersIdAndLocation.Add(provider);
+                            }
                         }
                     }
                 }
@@ -138,7 +141,7 @@ namespace Sfa.Das.Sas.Web.Collections
                 return listItems;
             }
 
-            var shortlistedApprenticeships = SplitCoockie(cookie);
+            var shortlistedApprenticeships = SplitCookie(cookie);
 
             foreach (var shortlistedApprenticeship in shortlistedApprenticeships)
             {
@@ -176,7 +179,7 @@ namespace Sfa.Das.Sas.Web.Collections
             return new ShortlistedProvider();
         }
 
-        private static IEnumerable<string> SplitCoockie(HttpCookie cookie)
+        private static IEnumerable<string> SplitCookie(HttpCookie cookie)
         {
             return cookie.Value.Split(new[] { "&" }, StringSplitOptions.RemoveEmptyEntries);
         }
@@ -203,9 +206,9 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 var text = new StringBuilder();
                 var count = 0;
-                foreach (var providerId in shortlistedApprenticeship.ProvidersIdAndLocation)
+                foreach (var formattedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Select(provider => string.Format("{0}-{1}", provider.ProviderId, provider.LocationId)))
                 {
-                    text.Append(count == 0 ? providerId.ToString() : string.Concat("|", providerId.ToString()));
+                    text.Append(count == 0 ? formattedProvider : string.Concat("|", formattedProvider));
                     count++;
                 }
 
