@@ -20,25 +20,33 @@
         public ProviderSearchViewModel GetStandardViewModel(int id, UrlHelper urlHelper)
         {
             var standardResult = _getStandards.GetStandardById(id);
-            var viewModel = CreateVM(standardResult.StandardId, standardResult.NotionalEndLevel, standardResult.Title, "Standard");
+            var viewModel = CreateViewModel(standardResult.StandardId, standardResult.NotionalEndLevel, standardResult.Title);
 
             viewModel.PostUrl = urlHelper.Action("StandardResults", "Provider");
-            viewModel.PreviousPageLink = new LinkViewModel { Title = "Go back to standard", Url = urlHelper.Action("Standard", "Apprenticeship", new { Id = id }) };
+            viewModel.PreviousPageLink = new LinkViewModel
+                                             {
+                                                 Title = "Go back to standard",
+                                                 Url = urlHelper.Action("Standard", "Apprenticeship", new { Id = id })
+                                             };
             return viewModel;
         }
 
         public ProviderSearchViewModel GetFrameworkProvidersViewModel(int id, UrlHelper urlHelper)
         {
             var fwResult = _getFrameworks.GetFrameworkById(id);
-            var viewModel = CreateVM(fwResult.FrameworkId, fwResult.Level, fwResult.Title, "Framework");
+            var viewModel = CreateViewModel(fwResult.FrameworkId, fwResult.Level, fwResult.Title);
 
             viewModel.PostUrl = urlHelper.Action("FrameworkResults", "Provider");
-            viewModel.PreviousPageLink = new LinkViewModel { Title = "Go back to framework", Url = urlHelper.Action("Framework", "Apprenticeship", new { Id = id }) };
+            viewModel.PreviousPageLink = new LinkViewModel
+                                             {
+                                                 Title = "Go back to framework",
+                                                 Url = urlHelper.Action("Framework", "Apprenticeship", new { Id = id })
+                                             };
 
             return viewModel;
         }
 
-        private ProviderSearchViewModel CreateVM(int id, int level, string title, string action)
+        private ProviderSearchViewModel CreateViewModel(int id, int level, string title)
         {
             var viewModel = new ProviderSearchViewModel
             {

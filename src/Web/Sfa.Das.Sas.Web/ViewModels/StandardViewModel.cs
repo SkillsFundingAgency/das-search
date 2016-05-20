@@ -27,7 +27,6 @@
         public string OverviewOfRole { get; set; }
 
         // Page specific
-        //public bool HasError { get; set; }
 
        // public LinkViewModel PreviousPageLink { get; set; }
 

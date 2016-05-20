@@ -15,6 +15,9 @@ using RedirectResult = System.Web.Mvc.RedirectResult;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Web;
     using System.Web.Routing;
 
     using Sfa.Das.Sas.Web.Factories;
@@ -169,7 +172,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
             else
             {
-                Response.StatusCode = 400;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
             }
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
