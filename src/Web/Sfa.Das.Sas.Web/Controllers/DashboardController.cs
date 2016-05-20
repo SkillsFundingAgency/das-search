@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Factories;
 
@@ -31,7 +32,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
-            var standards = _getStandards.GetStandardsByIds(shortListStandards);
+            var listInt = shortListStandards.Select(shortlistedApprenticeship => shortlistedApprenticeship.ApprenticeshipId).ToList();
+            var standards = _getStandards.GetStandardsByIds(listInt);
 
             var shortlistStandardViewModels = standards.Select(
                 x => _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(

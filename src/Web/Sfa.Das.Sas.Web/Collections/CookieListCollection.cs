@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
-using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Web.Factories;
+using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
@@ -22,37 +23,57 @@ namespace Sfa.Das.Sas.Web.Collections
             _cookieFactory = cookieFactory;
         }
 
-        public ICollection<int> GetAllItems(string listName)
+        public ICollection<ShortlistedApprenticeship> GetAllItems(string listName)
         {
             var listCookie = GetListCookie(listName);
             return GetListItems(listCookie);
         }
 
-        public void AddItem(string listName, int item)
+        public void AddItem(string listName, ShortlistedApprenticeship item)
         {
             var listCookie = GetListCookie(listName);
 
             var listItems = GetListItems(listCookie);
 
-            if (!listItems.Any(x => x.Equals(item)))
+            if (item.ProvidersId == null)
+            {
+                item.ProvidersId = new List<int>();
+            }
+
+            if (!listItems.Any(x => x.ApprenticeshipId.Equals(item.ApprenticeshipId)))
             {
                 listItems.Add(item);
             }
-
-            listItems.Sort();
+            else
+            {
+                foreach (var shortlistedApprenticeship in listItems)
+                {
+                    if (shortlistedApprenticeship.ApprenticeshipId.Equals(item.ApprenticeshipId))
+                    {
+                        foreach (var providerId in item.ProvidersId.Where(providerId => !shortlistedApprenticeship.ProvidersId.Any(x => x.Equals(providerId))))
+                        {
+                            shortlistedApprenticeship.ProvidersId.Add(providerId);
+                        }
+                    }
+                }
+            }
 
             var listString = CovertItemListToString(listItems);
 
             AddListToResponse(listName, listString);
         }
 
-        public void RemoveItem(string listName, int item)
+        public void RemoveApprenticeship(string listName, int item)
         {
             var listCookie = GetListCookie(listName);
 
             var listItems = GetListItems(listCookie);
 
-            listItems.Remove(item);
+            foreach (var shortlistedApprenticeship in listItems.Where(shortlistedApprenticeship => shortlistedApprenticeship.ApprenticeshipId.Equals(item)))
+            {
+                listItems.Remove(shortlistedApprenticeship);
+                break;
+            }
 
             if (!listItems.Any())
             {
@@ -60,7 +81,29 @@ namespace Sfa.Das.Sas.Web.Collections
                 return;
             }
 
-            listItems.Sort();
+            var listString = CovertItemListToString(listItems);
+            AddListToResponse(listName, listString);
+        }
+
+        public void RemoveProvider(string listName, int item)
+        {
+            var listCookie = GetListCookie(listName);
+
+            var listItems = GetListItems(listCookie);
+
+            foreach (var shortlistedApprenticeship in listItems)
+            {
+                foreach (var provider in shortlistedApprenticeship.ProvidersId.Where(provider => provider.Equals(item)))
+                {
+                    shortlistedApprenticeship.ProvidersId.Remove(provider);
+                }
+            }
+
+            if (!listItems.Any())
+            {
+                RemoveList(listName);
+                return;
+            }
 
             var listString = CovertItemListToString(listItems);
             AddListToResponse(listName, listString);
@@ -86,39 +129,84 @@ namespace Sfa.Das.Sas.Web.Collections
             responseCookies.Add(cookie);
         }
 
-        private static List<int> GetListItems(HttpCookie cookie)
+        private static List<ShortlistedApprenticeship> GetListItems(HttpCookie cookie)
         {
-            var listItems = new List<int>();
+            var listItems = new List<ShortlistedApprenticeship>();
 
             if (string.IsNullOrEmpty(cookie.Value))
             {
                 return listItems;
             }
 
-            var itemStrings = cookie.Value.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+            var shortlistedApprenticeships = SplitCoockie(cookie);
 
-            foreach (var stringValue in itemStrings)
+            foreach (var shortlistedApprenticeship in shortlistedApprenticeships)
             {
-                int value;
+                var splittedApprenticeships = SplitShortlistedApprenticeship(shortlistedApprenticeship);
 
-                if (int.TryParse(stringValue, out value))
+                var prov = splittedApprenticeships.Count() > 1 ? SplitProviderIds(splittedApprenticeships.ElementAt(1)) : new List<string>();
+
+                var providers = new List<int>();
+                foreach (var p in prov)
                 {
-                    listItems.Add(value);
+                    int value;
+                    if (int.TryParse(p, out value))
+                    {
+                        providers.Add(value);
+                    }
                 }
+
+                int apprenticeshipId;
+                int.TryParse(splittedApprenticeships.ElementAt(0), out apprenticeshipId);
+
+                listItems.Add(new ShortlistedApprenticeship
+                {
+                    ApprenticeshipId = apprenticeshipId,
+                    ProvidersId = providers
+                });
             }
 
             return listItems;
         }
 
-        private static string CovertItemListToString(List<int> listItems)
+        private static IEnumerable<string> SplitCoockie(HttpCookie cookie)
+        {
+            return cookie.Value.Split(new[] { "&" }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private static IEnumerable<string> SplitShortlistedApprenticeship(string shortlistedApprenticeship)
+        {
+            return shortlistedApprenticeship.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private static IEnumerable<string> SplitProviderIds(string s)
+        {
+            return s.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private static string CovertItemListToString(List<ShortlistedApprenticeship> listItems)
         {
             if (!listItems.Any())
             {
                 return string.Empty;
             }
 
-            var listString = listItems.Select(x => x.ToString())
-                .Aggregate((x1, x2) => x1 + "|" + x2);
+            var listShortlistedProviders = new List<string>();
+            foreach (var shortlistedApprenticeship in listItems)
+            {
+                var text = new StringBuilder();
+                var count = 0;
+                foreach (var providerId in shortlistedApprenticeship.ProvidersId)
+                {
+                    text.Append(count == 0 ? providerId.ToString() : string.Concat("|", providerId.ToString()));
+                    count++;
+                }
+
+                listShortlistedProviders.Add(string.Format("{0}={1}", shortlistedApprenticeship.ApprenticeshipId, text));
+            }
+
+            var listString = listShortlistedProviders.Select(x => x)
+                .Aggregate((x1, x2) => x1 + "&" + x2);
 
             return listString;
         }

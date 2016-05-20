@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
+using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.UnitTests.Extensions;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
@@ -15,7 +16,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
     public class ShortlistControllerTest
     {
         private const string RequestUrl = "http://www.google.co.uk";
-        private const int StandardId = 5;
+        private ShortlistedApprenticeship _shorlistedApprenticeship = new ShortlistedApprenticeship { ApprenticeshipId = 5};
         private ShortlistController _controller;
         private Mock<IGetStandards> _mockStandardRepository;
         private Mock<IListCollection<int>> _mockCookieRepository;
@@ -38,14 +39,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             // Arrange
             _mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
-            _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListCookieName, StandardId));
+            _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListCookieName, _shorlistedApprenticeship));
 
             // Act
-            var result = _controller.AddStandard(StandardId, string.Empty);
+            var result = _controller.AddStandard(_shorlistedApprenticeship.ApprenticeshipId, string.Empty);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.AddItem(Constants.StandardsShortListCookieName, StandardId), Times.Once());
+            _mockCookieRepository.Verify(x => x.AddItem(Constants.StandardsShortListCookieName, It.IsAny<ShortlistedApprenticeship>()), Times.Once());
         }
 
         [Test]
@@ -53,14 +54,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             // Arrange
             _mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
-            _mockCookieRepository.Setup(x => x.RemoveItem(Constants.StandardsShortListCookieName, StandardId));
+            _mockCookieRepository.Setup(x => x.RemoveApprenticeship(Constants.StandardsShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId));
 
             // Act
-            var result = _controller.RemoveStandard(StandardId, string.Empty);
+            var result = _controller.RemoveStandard(_shorlistedApprenticeship.ApprenticeshipId, string.Empty);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.RemoveItem(Constants.StandardsShortListCookieName, StandardId), Times.Once());
+            _mockCookieRepository.Verify(x => x.RemoveApprenticeship(Constants.StandardsShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId), Times.Once());
         }
     }
 }

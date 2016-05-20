@@ -1,4 +1,3 @@
-using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Services;

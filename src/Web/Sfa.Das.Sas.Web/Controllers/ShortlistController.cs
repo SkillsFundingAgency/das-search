@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
+using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -20,7 +21,11 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult AddStandard(int id, string responseUrlParameters)
         {
             _logger.Debug($"Adding standard {id} to shortlist cookie");
-            _listCollection.AddItem(Constants.StandardsShortListCookieName, id);
+            var shorlistedApprenticeship = new ShortlistedApprenticeship
+            {
+                ApprenticeshipId = id
+            };
+            _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
 
             return GetReturnRedirectFromStandardShortlistAction(id, responseUrlParameters);
         }
@@ -28,9 +33,17 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult RemoveStandard(int id, string responseUrlParameters)
         {
             _logger.Debug($"Removing standard {id} from shortlist cookie");
-            _listCollection.RemoveItem(Constants.StandardsShortListCookieName, id);
+            _listCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id, responseUrlParameters);
+        }
+
+        public ActionResult RemoveProvider(int id, string responseUrlParameters)
+        {
+            _logger.Debug($"Removing standard {id} from shortlist cookie");
+            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, id);
+
+            return GetReturnRedirectFromProviderShortlistAction();
         }
 
         private static string AppendUrlParametersToUrl(string url, string responseParameters)
@@ -64,7 +77,22 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var url = Request.UrlReferrer.OriginalString;
 
-            url = AppendUrlParametersToUrl(url, responseParameters);
+            //url = AppendUrlParametersToUrl(url, responseParameters);
+
+            return Redirect(url);
+        }
+
+        // This method is used to try to redirect back from the page that requested the updating of the 
+        // provider shortlist. If a URL cannot be found in the request then the default is to go back to 
+        // the apprenticeship search page
+        private ActionResult GetReturnRedirectFromProviderShortlistAction()
+        {
+            if (Request.UrlReferrer == null)
+            {
+                return RedirectToAction("Search", "Apprenticeship");
+            }
+
+            var url = Request.UrlReferrer.OriginalString;
 
             return Redirect(url);
         }

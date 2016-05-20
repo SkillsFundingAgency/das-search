@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Collections;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Models;
@@ -102,7 +103,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return View(viewModel);
         }
-        
+
         // GET: Standard
         public ActionResult Standard(int id, string hasError, string linkUrl)
         {
@@ -121,11 +122,11 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
-            viewModel.IsShortlisted = shortListStandards?.Contains(id) ?? false;
+            viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.PreviousPageLink = GetPreviousPageLinkViewModel(linkUrl);
 
