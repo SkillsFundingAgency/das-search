@@ -182,7 +182,14 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n");
 #line hidden
 
 #line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                  
+WriteTo(__razor_helper_writer, GetShortlistLink(@Model.StandardId, @Model.IsShortlisted));
+
+
+#line default
+#line hidden
+
+#line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                              
 
 
 #line default
@@ -222,14 +229,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4473), Tuple.Create("\"", 4481)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4469), Tuple.Create("\"", 4477)
 
 #line 103 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4478), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 4474), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4478), false)
+, 4474), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -274,14 +281,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4659), Tuple.Create("\"", 4673)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4655), Tuple.Create("\"", 4669)
 
 #line 112 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4666), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 4662), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4666), false)
+, 4662), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
