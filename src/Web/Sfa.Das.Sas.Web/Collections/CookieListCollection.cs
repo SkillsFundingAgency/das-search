@@ -88,7 +88,7 @@ namespace Sfa.Das.Sas.Web.Collections
             AddListToResponse(listName, listString);
         }
 
-        public void RemoveProvider(string listName, int item)
+        public void RemoveProvider(string listName, int apprenticeship, ShortlistedProvider item)
         {
             var listCookie = GetListCookie(listName);
 
@@ -96,9 +96,13 @@ namespace Sfa.Das.Sas.Web.Collections
 
             foreach (var shortlistedApprenticeship in listItems)
             {
-                foreach (var provider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(provider => provider.Equals(item)))
+                if (shortlistedApprenticeship.ApprenticeshipId == apprenticeship)
                 {
-                    shortlistedApprenticeship.ProvidersIdAndLocation.Remove(provider);
+                    foreach (var provider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(provider => provider.ProviderId.Equals(item.ProviderId) && provider.LocationId.Equals(item.LocationId)))
+                    {
+                        shortlistedApprenticeship.ProvidersIdAndLocation.Remove(provider);
+                        break;
+                    }
                 }
             }
 

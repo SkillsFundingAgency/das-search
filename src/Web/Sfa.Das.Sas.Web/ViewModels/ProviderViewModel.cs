@@ -5,6 +5,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderViewModel
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public Location Location { get; set; }
@@ -36,5 +38,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public ApprenticeshipTrainingType Training { get; set; }
 
         public string SurveyUrl { get; set; }
+        public bool IsShortlisted { get; set; }
     }
 }

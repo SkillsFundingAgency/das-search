@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
@@ -27,7 +28,27 @@ namespace Sfa.Das.Sas.Web.Controllers
             };
             _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
 
-            return GetReturnRedirectFromStandardShortlistAction(id, responseUrlParameters);
+            return GetReturnRedirectFromStandardShortlistAction(id);
+        }
+
+        public ActionResult AddProvider(int apprenticeshipId, int providerId, int locationId, string responseUrlParameters)
+        {
+            _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {apprenticeshipId} shortlist cookie");
+            var shorlistedApprenticeship = new ShortlistedApprenticeship
+            {
+                ApprenticeshipId = apprenticeshipId,
+                ProvidersIdAndLocation = new List<ShortlistedProvider>
+                {
+                    new ShortlistedProvider
+                    {
+                        ProviderId = providerId,
+                        LocationId = locationId
+                    }
+                }
+            };
+            _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
+
+            return GetReturnRedirectFromProviderShortlistAction();
         }
 
         public ActionResult RemoveStandard(int id, string responseUrlParameters)
@@ -35,13 +56,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             _logger.Debug($"Removing standard {id} from shortlist cookie");
             _listCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
 
-            return GetReturnRedirectFromStandardShortlistAction(id, responseUrlParameters);
+            return GetReturnRedirectFromStandardShortlistAction(id);
         }
 
-        public ActionResult RemoveProvider(int id, string responseUrlParameters)
+        public ActionResult RemoveProvider(int id, ShortlistedProvider provider, string responseUrlParameters)
         {
-            _logger.Debug($"Removing standard {id} from shortlist cookie");
-            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, id);
+            _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {id} shortlist cookie");
+            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, id, provider);
 
             return GetReturnRedirectFromProviderShortlistAction();
         }
@@ -68,7 +89,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         // This method is used to try to redirect back from the page that requested the updating of the 
         // standards shortlist. If a URL cannot be found in the request then the default is to go back to 
         // the standard details page itself.
-        private ActionResult GetReturnRedirectFromStandardShortlistAction(int id, string responseParameters)
+        private ActionResult GetReturnRedirectFromStandardShortlistAction(int id)
         {
             if (Request.UrlReferrer == null)
             {
@@ -76,8 +97,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var url = Request.UrlReferrer.OriginalString;
-
-            //url = AppendUrlParametersToUrl(url, responseParameters);
 
             return Redirect(url);
         }
