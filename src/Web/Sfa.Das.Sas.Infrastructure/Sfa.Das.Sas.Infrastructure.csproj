@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\Models\ElasticsearchResponse.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchProvider.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchApprenticeshipSearchProvider.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />

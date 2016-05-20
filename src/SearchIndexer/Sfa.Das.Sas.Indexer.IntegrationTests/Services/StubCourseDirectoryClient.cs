@@ -1,16 +1,13 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
 namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
-
-    using Microsoft.Rest;
-
-    using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory;
+    using System.Threading.Tasks;
     using Infrastructure.CourseDirectory.Models;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory;
 
     public class StubCourseDirectoryClient : ICourseDirectoryProviderDataService
     {

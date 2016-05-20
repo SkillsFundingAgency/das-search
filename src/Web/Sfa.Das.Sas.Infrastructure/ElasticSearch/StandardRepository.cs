@@ -83,6 +83,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                        s.Index(_applicationSettings.ApprenticeshipIndexAlias)
                            .Type(Types.Parse("standarddocument"))
                            .From(0)
+                           .Size(standardIds.Count)
                            .Query(q => q.QueryString(qs => qs.Fields(fs => fs.Field(e => e.StandardId)).Query(queryString))));
 
             if (!results.Documents.Any())

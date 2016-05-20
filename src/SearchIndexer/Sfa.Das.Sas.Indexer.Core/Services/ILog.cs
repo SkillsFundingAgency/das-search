@@ -15,6 +15,8 @@ namespace Sfa.Das.Sas.Indexer.Core.Services
 
         void Warn(object message);
 
+        void Warn(string message, Dictionary<string, object> properties);
+
         void Warn(Exception exception, object message);
 
         void Error(Exception exception, object message);

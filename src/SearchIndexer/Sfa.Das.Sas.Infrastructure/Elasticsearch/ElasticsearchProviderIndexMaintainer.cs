@@ -32,18 +32,20 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public async Task IndexEntries(string indexName, ICollection<Provider> indexEntries)
         {
-            var bulkTasks = new List<Task<IBulkResponse>>();
-            bulkTasks.AddRange(IndexStandards(indexName, indexEntries));
-            bulkTasks.AddRange(IndexFrameworks(indexName, indexEntries));
+            var bulkStandardTasks = new List<Task<IBulkResponse>>();
+            var bulkFrameworkTasks = new List<Task<IBulkResponse>>();
 
-            LogResponse(await Task.WhenAll(bulkTasks));
+            bulkStandardTasks.AddRange(IndexStandards(indexName, indexEntries));
+            bulkFrameworkTasks.AddRange(IndexFrameworks(indexName, indexEntries));
+
+            LogResponse(await Task.WhenAll(bulkStandardTasks), "StandardProvider");
+            LogResponse(await Task.WhenAll(bulkFrameworkTasks), "FrameworkProvider");
         }
 
         private List<Task<IBulkResponse>> IndexFrameworks(string indexName, ICollection<Provider> indexEntries)
         {
             var tasks = new List<Task<IBulkResponse>>();
             int count = 0;
-            int totalCount = 0;
             var bulkDescriptor = CreateBulkDescriptor(indexName);
 
             foreach (var provider in indexEntries)
@@ -65,7 +67,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                             // New descriptor
                             bulkDescriptor = CreateBulkDescriptor(indexName);
 
-                            totalCount += count;
                             count = 0;
                         }
                     }
@@ -75,11 +76,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             if (count > 0)
             {
                 tasks.Add(Client.BulkAsync(bulkDescriptor));
-                totalCount += count;
             }
 
-            var properties = new Dictionary<string, object> { { "DocumentType", "FrameworkProvider" }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" } };
-            Log.Info($"Sent a total of {totalCount} Framework Provider documents to be indexed", properties);
             return tasks;
         }
 
@@ -87,7 +85,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         {
             var tasks = new List<Task<IBulkResponse>>();
             int count = 0;
-            int totalCount = 0;
             var bulkDescriptor = CreateBulkDescriptor(indexName);
 
             foreach (var provider in indexEntries)
@@ -109,7 +106,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                             // New descriptor
                             bulkDescriptor = CreateBulkDescriptor(indexName);
 
-                            totalCount += count;
                             count = 0;
                         }
                     }
@@ -119,11 +115,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             if (count > 0)
             {
                 tasks.Add(Client.BulkAsync(bulkDescriptor));
-                totalCount += count;
             }
 
-            var properties = new Dictionary<string, object> { { "DocumentType", "StandardProvider" }, { "TotalCount", totalCount }, { "Identifier", "DocumentCount" } };
-            Log.Info($"Sent a total of {totalCount} Standard Provider documents to be indexed", properties);
             return tasks;
         }
     }

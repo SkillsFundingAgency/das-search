@@ -7,11 +7,11 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     public sealed class ApprenticeshipSearchService : IApprenticeshipSearchService
     {
-        private readonly ISearchProvider _searchProvider;
+        private readonly IApprenticeshipSearchProvider _searchProvider;
         private readonly ILog _logger;
         private readonly IPaginationSettings _paginationSettings;
 
-        public ApprenticeshipSearchService(ISearchProvider searchProvider, ILog logger, IPaginationSettings paginationSettings)
+        public ApprenticeshipSearchService(IApprenticeshipSearchProvider searchProvider, ILog logger, IPaginationSettings paginationSettings)
         {
             _searchProvider = searchProvider;
             _logger = logger;

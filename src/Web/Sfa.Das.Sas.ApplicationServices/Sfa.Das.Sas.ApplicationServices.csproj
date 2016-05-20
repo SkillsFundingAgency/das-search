@@ -53,11 +53,12 @@
   <ItemGroup>
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
+    <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProfileAStep.cs" />
     <Compile Include="IProviderSearchService.cs" />
     <Compile Include="IApprenticeshipSearchService.cs" />
-    <Compile Include="ISearchProvider.cs" />
+    <Compile Include="IApprenticeshipSearchProvider.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\CodeTypes.cs" />

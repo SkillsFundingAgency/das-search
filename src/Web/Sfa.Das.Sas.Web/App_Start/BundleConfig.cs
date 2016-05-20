@@ -19,7 +19,8 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/ui.js",
                 "~/scripts/cookie-helper.js",
                 "~/scripts/standard-detail.js",
-                "~/scripts/appsettings.js"));
+                "~/scripts/appsettings.js",
+                "~/scripts/cookie-banner.js"));
         }
     }
 }

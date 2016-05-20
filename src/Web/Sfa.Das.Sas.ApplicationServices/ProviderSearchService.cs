@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     public sealed class ProviderSearchService : IProviderSearchService
     {
-        private readonly ISearchProvider _searchProvider;
+        private readonly IProviderLocationSearchProvider _searchProvider;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
         private readonly ILookupLocations _postCodeLookup;
@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices
         private readonly IPaginationSettings _paginationSettings;
 
         public ProviderSearchService(
-            ISearchProvider searchProvider,
+            IProviderLocationSearchProvider searchProvider,
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
             ILookupLocations postcodeLookup,
