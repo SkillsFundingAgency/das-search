@@ -19,10 +19,10 @@ Scenario:Should find a standard and provider
 	When I choose First Standard Result
 	Then I am on the Standard Details page
 
-	#When I choose Shortlist Link
-	#Then I see
- #        | Field          | Rule     | Value                 |
- #        | Shortlist Link | contains | Remove from shortlist |
+	When I choose Shortlist Link
+	Then I see
+         | Field          | Rule     | Value                 |
+         | Shortlist Link | contains | Remove from shortlist |
 
 	When I enter data
 		| Field               | Value      |
@@ -37,9 +37,9 @@ Scenario:Should find a standard and provider
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
-	#When I choose Dashboard Link
-	#Then I am on the Dashboard Overview page
-	#And I see Standards Shortlist list contains at least 1 items
+	When I choose Dashboard Link
+	Then I am on the Dashboard Overview page
+	And I see Standards Shortlist list contains at least 1 items
 
 @SadPath @ignore
 Scenario: ShouldBeAbleToDeleteAStandardFromMyDashboard
