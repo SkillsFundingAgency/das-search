@@ -2329,6 +2329,13 @@ details .arrow {
     margin-bottom: 20px;
     background: $grey-3;
     position: relative;
+    .button {
+        text-align: center;
+        @media (min-width: 641px) {
+            text-align: left;
+        }    
+    }
+    
     &.survey-panel-top {
         &:after {
             content: " ";
