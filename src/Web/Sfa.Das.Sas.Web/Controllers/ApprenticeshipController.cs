@@ -58,7 +58,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             ApprenticeshipSearchResults searchResults;
             ApprenticeshipSearchResultViewModel viewModel;
-            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
+            criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
 
             using (_profiler.CreateStep("Search by keyword"))
             {
@@ -72,12 +72,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel == null)
             {
-                return View(default(ApprenticeshipSearchResultViewModel));
-            }
-
-            if (viewModel.ResultsToTake != 0)
-            {
-                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
+                return View(new ApprenticeshipSearchResultViewModel());
             }
 
             if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())
