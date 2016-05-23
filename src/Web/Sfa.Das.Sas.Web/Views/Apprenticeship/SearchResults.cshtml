@@ -21,7 +21,7 @@
                     }
                 </p>
             </div>
-            @if (!Model.HasError)
+            @if (!Model.HasError && Model.TotalResults > 0)
             {
                 <div>
                     <form method="GET" id="search-results-order">
@@ -44,11 +44,6 @@
                     </form>
                 </div>
             }
-            <p>
-                @{
-                    Html.RenderPartial("_SearchResultMessage");
-                }
-            </p>
 
         </div>
 
