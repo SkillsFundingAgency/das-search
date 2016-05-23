@@ -51,6 +51,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             SendLog(message, LogLevel.Warn);
         }
 
+        public void Warn(string message, Dictionary<string, object> properties)
+        {
+            SendLog(message, LogLevel.Warn, properties);
+        }
+
         public void Warn(Exception exception, object message)
         {
             SendLog(message, LogLevel.Warn, exception);

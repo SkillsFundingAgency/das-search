@@ -11,14 +11,14 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
     public sealed class StandardSearchServiceTest
     {
         private Mock<ILog> _mockLogger;
-        private Mock<ISearchProvider> _mockSearchProvider;
+        private Mock<IApprenticeshipSearchProvider> _mockSearchProvider;
         private Mock<IPaginationSettings> _mockPaginationSettings;
 
         [SetUp]
         public void Setup()
         {
             _mockLogger = new Mock<ILog>();
-            _mockSearchProvider = new Mock<ISearchProvider>();
+            _mockSearchProvider = new Mock<IApprenticeshipSearchProvider>();
             _mockPaginationSettings = new Mock<IPaginationSettings>();
         }
 

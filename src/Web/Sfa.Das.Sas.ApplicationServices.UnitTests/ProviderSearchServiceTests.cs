@@ -372,32 +372,32 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
             Assert.That(result.HasError, Is.True);
         }
 
-        private static Mock<ISearchProvider> CreateMockStandardSearchProvider(List<StandardProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
+        private static Mock<IProviderLocationSearchProvider> CreateMockStandardSearchProvider(List<StandardProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
         {
             var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
 
-            var mockSearchProvider = new Mock<ISearchProvider>();
+            var mockSearchProvider = new Mock<IProviderLocationSearchProvider>();
             mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>())).Returns(searchResults);
 
             return mockSearchProvider;
         }
 
-        private static Mock<ISearchProvider> CreateMockStandardSearchProvider()
+        private static Mock<IProviderLocationSearchProvider> CreateMockStandardSearchProvider()
         {
             return CreateMockStandardSearchProvider(null);
         }
 
-        private static Mock<ISearchProvider> CreateMockFrameworkSearchProvider(List<FrameworkProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
+        private static Mock<IProviderLocationSearchProvider> CreateMockFrameworkSearchProvider(List<FrameworkProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
         {
             var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
 
-            var mockSearchProvider = new Mock<ISearchProvider>();
+            var mockSearchProvider = new Mock<IProviderLocationSearchProvider>();
             mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>())).Returns(searchResults);
 
             return mockSearchProvider;
         }
 
-        private static Mock<ISearchProvider> CreateMockFrameworkSearchProvider()
+        private static Mock<IProviderLocationSearchProvider> CreateMockFrameworkSearchProvider()
         {
             return CreateMockFrameworkSearchProvider(null);
         }
