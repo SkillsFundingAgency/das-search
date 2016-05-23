@@ -19,6 +19,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 {
+    using System.Web.Routing;
 
     using Sfa.Das.Sas.Web.DependencyResolution;
     using FluentAssertions;
@@ -97,7 +98,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var mockLogger = new Mock<ILog>();
 
             var mockMappingServices = new Mock<IMappingService>();
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null, null);
 
             // Act
             ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test", Page = input }) as ViewResult;
@@ -126,62 +127,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IListCollection<int>>().Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IListCollection<int>>().Object, null);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
-            var result = controller.Standard(1, hasErrorParmeter, string.Empty) as ViewResult;
+            var result = controller.Standard(1, string.Empty) as ViewResult;
 
             Assert.NotNull(result);
-            var actual = ((StandardViewModel)result.Model).HasError;
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase("true", true, Description = "Has error")]
-        [TestCase("false", false, Description = "No error")]
-        public void FrameworkDetailPageWithErrorParameter(string hasErrorParmeter, bool expected)
-        {
-            var mockFrameworkRepository = new Mock<IGetFrameworks>();
-
-            var stubFrameworkViewModel = new FrameworkViewModel
-            {
-                FrameworkId = 123,
-                Title = "Title test",
-                FrameworkName = "Framework name test",
-                FrameworkCode = 321,
-                Level = 3,
-                PathwayName = "Pathway name test",
-                PathwayCode = 4
-            };
-
-            var framework = new Framework { Title = "Hello", };
-            mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(framework);
-            var mockMappingServices = new Mock<IMappingService>();
-            mockMappingServices.Setup(
-                x => x.Map<Framework, FrameworkViewModel>(It.IsAny<Framework>()))
-                .Returns(stubFrameworkViewModel);
-
-            var mockRequest = new Mock<HttpRequestBase>();
-            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
-
-            var context = new Mock<HttpContextBase>();
-            context.SetupGet(x => x.Request).Returns(mockRequest.Object);
-
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
-            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
-
-            controller.Url = new UrlHelper(
-                new RequestContext(context.Object, new RouteData()),
-                new RouteCollection());
-
-            var result = controller.Framework(1, hasErrorParmeter) as ViewResult;
-
-            Assert.NotNull(result);
-            var actual = ((FrameworkViewModel)result.Model).HasError;
-            Assert.AreEqual(expected, actual);
         }
 
         [Test]
