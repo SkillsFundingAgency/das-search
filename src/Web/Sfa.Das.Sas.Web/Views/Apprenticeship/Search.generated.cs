@@ -51,14 +51,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1427), Tuple.Create("\"", 1469)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1421), Tuple.Create("\"", 1463)
 
 #line 43 "..\..\Views\Apprenticeship\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1434), Tuple.Create<System.Object, System.Int32>(Request.UrlReferrer.OriginalString
+, Tuple.Create(Tuple.Create("", 1428), Tuple.Create<System.Object, System.Int32>(Request.UrlReferrer.OriginalString
 
 #line default
 #line hidden
-, 1434), false)
+, 1428), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"link-back\"");
@@ -164,7 +164,7 @@ WriteLiteral(" class=\"form-group\"");
 
 WriteLiteral(">\r\n                    <legend>\r\n                        <label");
 
-WriteLiteral(" for=\"input-keywords\"");
+WriteLiteral(" for=\"keywords\"");
 
 WriteLiteral(">\r\n                            <span");
 

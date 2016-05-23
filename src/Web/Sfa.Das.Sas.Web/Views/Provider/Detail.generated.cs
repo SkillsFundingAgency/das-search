@@ -1052,11 +1052,11 @@ WriteLiteral(">Take the survey</a>\r\n            </div>\r\n            <aside")
 
 WriteLiteral(" class=\"disclaimer\"");
 
-WriteLiteral(">\r\n                <h4");
+WriteLiteral(">\r\n                <h3");
 
 WriteLiteral(" class=\"heading-small\"");
 
-WriteLiteral(@">Content disclaimer</h4>
+WriteLiteral(@">Content disclaimer</h3>
                 <p>
                     Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
                 </p>

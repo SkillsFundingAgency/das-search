@@ -60,14 +60,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4013), Tuple.Create("\"", 4024)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4065), Tuple.Create("\"", 4076)
 
 #line 103 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4020), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 4072), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4020), false)
+, 4072), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -146,14 +146,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4824), Tuple.Create("\"", 4835)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4876), Tuple.Create("\"", 4887)
 
 #line 121 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4831), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 4883), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4831), false)
+, 4883), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -342,14 +342,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6355), Tuple.Create("\"", 6366)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6407), Tuple.Create("\"", 6418)
 
 #line 167 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6363), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 6415), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6363), false)
+, 6415), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -403,15 +403,15 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6491), Tuple.Create("\"", 6523)
-, Tuple.Create(Tuple.Create("", 6499), Tuple.Create("filters-block", 6499), true)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6543), Tuple.Create("\"", 6575)
+, Tuple.Create(Tuple.Create("", 6551), Tuple.Create("filters-block", 6551), true)
 
 #line 175 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 6512), Tuple.Create<System.Object, System.Int32>(className
+, Tuple.Create(Tuple.Create(" ", 6564), Tuple.Create<System.Object, System.Int32>(className
 
 #line default
 #line hidden
-, 6513), false)
+, 6565), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <form");
@@ -426,14 +426,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"Keywords\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6631), Tuple.Create("\"", 6656)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6683), Tuple.Create("\"", 6708)
 
 #line 177 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6639), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
+, Tuple.Create(Tuple.Create("", 6691), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
 
 #line default
 #line hidden
-, 6639), false)
+, 6691), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                <input");
@@ -442,14 +442,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"Page\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6710), Tuple.Create("\"", 6735)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6762), Tuple.Create("\"", 6787)
 
 #line 178 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6718), Tuple.Create<System.Object, System.Int32>(Model.ActualPage
+, Tuple.Create(Tuple.Create("", 6770), Tuple.Create<System.Object, System.Int32>(Model.ActualPage
 
 #line default
 #line hidden
-, 6718), false)
+, 6770), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "/>\r\n                <input");
@@ -458,14 +458,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"order\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6789), Tuple.Create("\"", 6813)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6841), Tuple.Create("\"", 6865)
 
 #line 179 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6797), Tuple.Create<System.Object, System.Int32>(Model.SortOrder
+, Tuple.Create(Tuple.Create("", 6849), Tuple.Create<System.Object, System.Int32>(Model.SortOrder
 
 #line default
 #line hidden
-, 6797), false)
+, 6849), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                <input");
@@ -474,25 +474,25 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"take\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6867), Tuple.Create("\"", 6895)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6919), Tuple.Create("\"", 6947)
 
 #line 180 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6875), Tuple.Create<System.Object, System.Int32>(Model.ResultsToTake
+, Tuple.Create(Tuple.Create("", 6927), Tuple.Create<System.Object, System.Int32>(Model.ResultsToTake
 
 #line default
 #line hidden
-, 6875), false)
+, 6927), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n\r\n                <fieldset");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"filters filters-accordion\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n                    <h3");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <h2");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"toggler heading-small\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Apprenticeship Level</h3>\r\n                    <div");
+WriteLiteralTo(__razor_helper_writer, ">Apprenticeship Level</h2>\r\n                    <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"toggled-content\"");
 
@@ -518,25 +518,25 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                                <li>\r\n                                    <input");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 7350), Tuple.Create("\"", 7369)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 7402), Tuple.Create("\"", 7421)
 
 #line 189 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 7358), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 7410), Tuple.Create<System.Object, System.Int32>(item.Value
 
 #line default
 #line hidden
-, 7358), false)
+, 7410), false)
 );
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 7370), Tuple.Create("\"", 7401)
-, Tuple.Create(Tuple.Create("", 7375), Tuple.Create("SelectedLevels_", 7375), true)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 7422), Tuple.Create("\"", 7453)
+, Tuple.Create(Tuple.Create("", 7427), Tuple.Create("SelectedLevels_", 7427), true)
 
 #line 189 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-  , Tuple.Create(Tuple.Create("", 7390), Tuple.Create<System.Object, System.Int32>(item.Value
+  , Tuple.Create(Tuple.Create("", 7442), Tuple.Create<System.Object, System.Int32>(item.Value
 
 #line default
 #line hidden
-, 7390), false)
+, 7442), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " name=\"SelectedLevels\"");
@@ -561,27 +561,27 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " />\r\n                                    <label");
+WriteLiteralTo(__razor_helper_writer, "/>\r\n                                    <label");
 
-WriteAttributeTo(__razor_helper_writer, "for", Tuple.Create(" for=\"", 7573), Tuple.Create("\"", 7605)
-, Tuple.Create(Tuple.Create("", 7579), Tuple.Create("SelectedLevels_", 7579), true)
+WriteAttributeTo(__razor_helper_writer, "for", Tuple.Create(" for=\"", 7624), Tuple.Create("\"", 7656)
+, Tuple.Create(Tuple.Create("", 7630), Tuple.Create("SelectedLevels_", 7630), true)
 
 #line 190 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 7594), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 7645), Tuple.Create<System.Object, System.Int32>(item.Value
 
 #line default
 #line hidden
-, 7594), false)
+, 7645), false)
 );
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 7606), Tuple.Create("\"", 7658)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 7657), Tuple.Create("\"", 7709)
 
 #line 190 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-   , Tuple.Create(Tuple.Create("", 7614), Tuple.Create<System.Object, System.Int32>(Html.Raw(item.Count == 0 ? "disabled" : "")
+   , Tuple.Create(Tuple.Create("", 7665), Tuple.Create<System.Object, System.Int32>(Html.Raw(item.Count == 0 ? "disabled" : "")
 
 #line default
 #line hidden
-, 7614), false)
+, 7665), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">Level ");
@@ -820,50 +820,56 @@ WriteLiteral("                        <div");
 
 WriteLiteral(" class=\"form-block\"");
 
-WriteLiteral(">\r\n                            Sort by\r\n                            <select");
+WriteLiteral(">\r\n                            <label");
+
+WriteLiteral(" for=\"select-order\"");
+
+WriteLiteral(">Sort by</label>\r\n                            <select");
 
 WriteLiteral(" name=\"order\"");
+
+WriteLiteral(" id=\"select-order\"");
 
 WriteLiteral(" class=\"form-control form-control-1-3\"");
 
 WriteLiteral(">\r\n                                <option");
 
-WriteAttribute("selected", Tuple.Create(" selected=\"", 1618), Tuple.Create("\"", 1652)
+WriteAttribute("selected", Tuple.Create(" selected=\"", 1670), Tuple.Create("\"", 1704)
             
             #line 38 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 1629), Tuple.Create<System.Object, System.Int32>(Model.SortOrder=="1"
+, Tuple.Create(Tuple.Create("", 1681), Tuple.Create<System.Object, System.Int32>(Model.SortOrder=="1"
             
             #line default
             #line hidden
-, 1629), false)
+, 1681), false)
 );
 
 WriteLiteral(" value=\"1\"");
 
 WriteLiteral(">Best match</option>\r\n                                <option");
 
-WriteAttribute("selected", Tuple.Create(" selected=\"", 1724), Tuple.Create("\"", 1758)
+WriteAttribute("selected", Tuple.Create(" selected=\"", 1776), Tuple.Create("\"", 1810)
             
             #line 39 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 1735), Tuple.Create<System.Object, System.Int32>(Model.SortOrder=="2"
+, Tuple.Create(Tuple.Create("", 1787), Tuple.Create<System.Object, System.Int32>(Model.SortOrder=="2"
             
             #line default
             #line hidden
-, 1735), false)
+, 1787), false)
 );
 
 WriteLiteral(" value=\"2\"");
 
 WriteLiteral(">Level (high to low)</option>\r\n                                <option");
 
-WriteAttribute("selected", Tuple.Create(" selected=\"", 1839), Tuple.Create("\"", 1873)
+WriteAttribute("selected", Tuple.Create(" selected=\"", 1891), Tuple.Create("\"", 1925)
             
             #line 40 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 1850), Tuple.Create<System.Object, System.Int32>(Model.SortOrder=="3"
+, Tuple.Create(Tuple.Create("", 1902), Tuple.Create<System.Object, System.Int32>(Model.SortOrder=="3"
             
             #line default
             #line hidden
-, 1850), false)
+, 1902), false)
 );
 
 WriteLiteral(" value=\"3\"");
@@ -924,34 +930,34 @@ WriteLiteral(">\r\n            \r\n");
             #line hidden
 WriteLiteral("                <article");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2412), Tuple.Create("\"", 2460)
-, Tuple.Create(Tuple.Create("", 2420), Tuple.Create("result", 2420), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2464), Tuple.Create("\"", 2512)
+, Tuple.Create(Tuple.Create("", 2472), Tuple.Create("result", 2472), true)
             
             #line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 2426), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
+, Tuple.Create(Tuple.Create(" ", 2478), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
             
             #line default
             #line hidden
-, 2427), false)
-, Tuple.Create(Tuple.Create("", 2453), Tuple.Create("-result", 2453), true)
+, 2479), false)
+, Tuple.Create(Tuple.Create("", 2505), Tuple.Create("-result", 2505), true)
 );
 
-WriteAttribute("id", Tuple.Create(" id=\"", 2461), Tuple.Create("\"", 2553)
+WriteAttribute("id", Tuple.Create(" id=\"", 2513), Tuple.Create("\"", 2605)
             
             #line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2466), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
+, Tuple.Create(Tuple.Create("", 2518), Tuple.Create<System.Object, System.Int32>(item.ApprenticeshipType
             
             #line default
             #line hidden
-, 2466), false)
-, Tuple.Create(Tuple.Create("", 2492), Tuple.Create("-", 2492), true)
+, 2518), false)
+, Tuple.Create(Tuple.Create("", 2544), Tuple.Create("-", 2544), true)
             
             #line 58 "..\..\Views\Apprenticeship\SearchResults.cshtml"
-                          , Tuple.Create(Tuple.Create("", 2493), Tuple.Create<System.Object, System.Int32>(item.StandardId != 0 ? item.StandardId : item.FrameworkId
+                          , Tuple.Create(Tuple.Create("", 2545), Tuple.Create<System.Object, System.Int32>(item.StandardId != 0 ? item.StandardId : item.FrameworkId
             
             #line default
             #line hidden
-, 2493), false)
+, 2545), false)
 );
 
 WriteLiteral(">\r\n                    <header>\r\n");
