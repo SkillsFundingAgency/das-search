@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _profiler = profiler;
         }
 
-        public Provider GetByStandardCode(string providerid, string locationId, string standardCode)
+        public ProviderCourse GetCourseByStandardCode(string providerid, string locationId, string standardCode)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        public Provider GetByFrameworkId(string providerid, string locationId, string frameworkId)
+        public ProviderCourse GetCourseByFrameworkId(string providerid, string locationId, string frameworkId)
         {
             try
             {

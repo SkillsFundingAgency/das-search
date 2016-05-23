@@ -29,47 +29,47 @@ namespace Sfa.Das.Sas.Web.Factories
             _getFrameworks = getFrameworks;
         }
 
-        public ProviderViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria)
+        public ProviderCourseViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria)
         {
-            ProviderViewModel viewModel = null;
+            ProviderCourseViewModel courseViewModel = null;
 
             if (!string.IsNullOrEmpty(criteria.StandardCode))
             {
-                var model = _apprenticeshipProviderRepository.GetByStandardCode(
+                var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
                     criteria.ProviderId,
                     criteria.LocationId,
                     criteria.StandardCode);
                 if (model != null)
                 {
-                    viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
-                    viewModel.Training = ApprenticeshipTrainingType.Standard;
+                    courseViewModel = _mappingService.Map<ProviderCourse, ProviderCourseViewModel>(model);
+                    courseViewModel.Training = ApprenticeshipTrainingType.Standard;
 
                     var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
-                    viewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
-                    viewModel.ApprenticeshipLevel = apprenticeshipData.NotionalEndLevel.ToString();
+                    courseViewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
+                    courseViewModel.ApprenticeshipLevel = apprenticeshipData.NotionalEndLevel.ToString();
                 }
             }
 
             if (!string.IsNullOrEmpty(criteria.FrameworkId))
             {
-                var model = _apprenticeshipProviderRepository.GetByFrameworkId(
+                var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
                     criteria.ProviderId,
                     criteria.LocationId,
                     criteria.FrameworkId);
 
                 if (model != null)
                 {
-                    viewModel = _mappingService.Map<Provider, ProviderViewModel>(model);
-                    viewModel.Training = ApprenticeshipTrainingType.Framework;
+                    courseViewModel = _mappingService.Map<ProviderCourse, ProviderCourseViewModel>(model);
+                    courseViewModel.Training = ApprenticeshipTrainingType.Framework;
                     var frameworkId = Convert.ToInt32(criteria.FrameworkId);
 
                     var apprenticeshipData = _getFrameworks.GetFrameworkById(frameworkId);
-                    viewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
-                    viewModel.ApprenticeshipLevel = apprenticeshipData.Level.ToString();
+                    courseViewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
+                    courseViewModel.ApprenticeshipLevel = apprenticeshipData.Level.ToString();
                 }
             }
 
-            return viewModel;
+            return courseViewModel;
         }
     }
 }

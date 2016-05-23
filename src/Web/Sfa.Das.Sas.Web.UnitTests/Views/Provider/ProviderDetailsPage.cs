@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         {
             var detail = new Detail();
 
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",
@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         {
             var detail = new Detail();
 
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",
@@ -123,7 +123,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         {
             var detail = new Detail();
 
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",
@@ -173,7 +173,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         {
             var detail = new Detail();
 
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",
@@ -223,7 +223,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         public void ShouldShowProviderLocationWhenDifferentDeliveryModesThan100PercentEmployerLocation()
         {
             var detail = new Detail();
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",
@@ -273,7 +273,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         public void ShouldShowProviderMarketingInfo()
         {
             var detail = new Detail();
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",
@@ -319,7 +319,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
         public void ShouldShowApprenticeshipNameWithLevel()
         {
             var detail = new Detail();
-            var model = new ProviderViewModel
+            var model = new ProviderCourseViewModel
             {
                 Name = "Test name",
                 EmployerSatisfactionMessage = "100%",

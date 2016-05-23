@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
 
@@ -6,14 +7,14 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     public class ProviderMapping : IProviderMapping
     {
-        Provider IProviderMapping.MapToProvider(StandardProviderSearchResultsItem item)
+        ProviderCourse IProviderMapping.MapToProvider(StandardProviderSearchResultsItem item)
         {
             var document = MapFromInterface(item);
             document.Apprenticeship.Code = item.StandardCode;
             return document;
         }
 
-        public Provider MapToProvider(FrameworkProviderSearchResultsItem item)
+        public ProviderCourse MapToProvider(FrameworkProviderSearchResultsItem item)
         {
             var document = MapFromInterface(item);
 
@@ -21,11 +22,14 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             return document;
         }
 
-        private static Provider MapFromInterface(IApprenticeshipProviderSearchResultsItem item)
+        private static ProviderCourse MapFromInterface(IApprenticeshipProviderSearchResultsItem item)
         {
-            return new Provider
+            var providerId = item.Id.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)
+                                    .FirstOrDefault();
+
+            return new ProviderCourse
                        {
-                           Id = item.Id,
+                           ProviderId = providerId,
                            Address = item.Address,
                            DeliveryModes = item.DeliveryModes,
                            UkPrn = item.UkPrn,

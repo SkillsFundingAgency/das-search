@@ -49,17 +49,25 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/Detail.cshtml")]
-    public partial class Detail : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderViewModel>
+    public partial class Detail : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderCourseViewModel>
     {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 101 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 100 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 public System.Web.WebPages.HelperResult ShowTrainingLocation(string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 102 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 101 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
 if (@Model != null)
 {
@@ -74,7 +82,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"training-location-title\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 105 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 104 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
               WriteTo(__razor_helper_writer, title);
 
 
@@ -83,7 +95,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 106 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 105 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
@@ -100,7 +116,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"training-location\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            Training takes place at your location\r\n        </dd>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 112 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 111 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
     }
     else
     {
@@ -119,7 +139,11 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 116 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 115 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 WriteTo(__razor_helper_writer, Model.Location.LocationName);
 
 
@@ -128,7 +152,11 @@ WriteTo(__razor_helper_writer, Model.Location.LocationName);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 116 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 115 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
            WriteTo(__razor_helper_writer, Model.Address.Address1);
 
 
@@ -137,7 +165,11 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 116 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 115 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                                    WriteTo(__razor_helper_writer, Model.Address.Address2);
 
 
@@ -146,7 +178,11 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 116 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 115 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                                                            WriteTo(__razor_helper_writer, Model.Address.Town);
 
 
@@ -155,7 +191,11 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 116 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 115 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                                                                                WriteTo(__razor_helper_writer, Model.Address.County);
 
 
@@ -164,7 +204,11 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 116 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 115 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                                                                                                      WriteTo(__razor_helper_writer, Model.Address.Postcode);
 
 
@@ -173,7 +217,11 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 118 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 117 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
     }
 }
 
@@ -182,19 +230,31 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 #line hidden
 });
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 120 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 119 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 122 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 121 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 public System.Web.WebPages.HelperResult GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 123 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 122 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
@@ -209,7 +269,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"phone-title\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 126 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 125 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
   WriteTo(__razor_helper_writer, title);
 
 
@@ -219,6 +283,7 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5169), Tuple.Create("\"", 5177)
 
 #line 127 "..\..\Views\Provider\Detail.cshtml"
@@ -227,6 +292,16 @@ WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5169), Tupl
 #line default
 #line hidden
 , 5174), false)
+=======
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5152), Tuple.Create("\"", 5160)
+
+#line 126 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5157), Tuple.Create<System.Object, System.Int32>(id
+
+#line default
+#line hidden
+, 5157), false)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"phone\"");
@@ -234,7 +309,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"phone\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 127 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 126 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
      WriteTo(__razor_helper_writer, Html.Raw(item));
 
 
@@ -243,7 +322,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 128 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 127 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
     }
 
 
@@ -251,19 +334,31 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 129 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 128 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 131 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 130 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 public System.Web.WebPages.HelperResult GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 132 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 131 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
@@ -278,7 +373,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"email-title\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 135 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 134 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
   WriteTo(__razor_helper_writer, title);
 
 
@@ -288,6 +387,7 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5433), Tuple.Create("\"", 5441)
 
 #line 136 "..\..\Views\Provider\Detail.cshtml"
@@ -296,12 +396,23 @@ WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5433), Tupl
 #line default
 #line hidden
 , 5438), false)
+=======
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5416), Tuple.Create("\"", 5424)
+
+#line 135 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5421), Tuple.Create<System.Object, System.Int32>(id
+
+#line default
+#line hidden
+, 5421), false)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"email\"");
 
 WriteLiteralTo(__razor_helper_writer, "><a");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5459), Tuple.Create("\"", 5488)
 , Tuple.Create(Tuple.Create("", 5466), Tuple.Create("mailto:", 5466), true)
 
@@ -311,12 +422,27 @@ WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5459), 
 #line default
 #line hidden
 , 5473), false)
+=======
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5442), Tuple.Create("\"", 5471)
+, Tuple.Create(Tuple.Create("", 5449), Tuple.Create("mailto:", 5449), true)
+
+#line 135 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5456), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
+
+#line default
+#line hidden
+, 5456), false)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 136 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 135 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                                       WriteTo(__razor_helper_writer, Html.Raw(item));
 
 
@@ -325,7 +451,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 137 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 136 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 
 
@@ -333,19 +463,31 @@ WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 #line hidden
 });
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 138 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 137 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 140 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 139 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 public System.Web.WebPages.HelperResult GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 141 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 140 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
     if (!string.IsNullOrEmpty(url))
     {
@@ -356,6 +498,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <dt");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5808), Tuple.Create("\"", 5827)
 
 #line 145 "..\..\Views\Provider\Detail.cshtml"
@@ -364,12 +507,26 @@ WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5808)
 #line default
 #line hidden
 , 5816), false)
+=======
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5791), Tuple.Create("\"", 5810)
+
+#line 144 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5799), Tuple.Create<System.Object, System.Int32>(classTitle
+
+#line default
+#line hidden
+, 5799), false)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 145 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 144 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
   WriteTo(__razor_helper_writer, title);
 
 
@@ -379,6 +536,7 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <a");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5870), Tuple.Create("\"", 5894)
 
 #line 147 "..\..\Views\Provider\Detail.cshtml"
@@ -394,12 +552,30 @@ WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5870), 
 #line default
 #line hidden
 , 5890), false)
+=======
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5853), Tuple.Create("\"", 5877)
+
+#line 146 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5860), Tuple.Create<System.Object, System.Int32>(linkProtocol
+
+#line default
+#line hidden
+, 5860), false)
+
+#line 146 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5873), Tuple.Create<System.Object, System.Int32>(url
+
+#line default
+#line hidden
+, 5873), false)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5926), Tuple.Create("\"", 5960)
 
 #line 147 "..\..\Views\Provider\Detail.cshtml"
@@ -415,18 +591,43 @@ WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5926)
 #line default
 #line hidden
 , 5944), false)
+=======
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5909), Tuple.Create("\"", 5943)
+
+#line 146 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 5917), Tuple.Create<System.Object, System.Int32>(cssClass
+
+#line default
+#line hidden
+, 5917), false)
+
+#line 146 "..\..\Views\Provider\Detail.cshtml"
+       , Tuple.Create(Tuple.Create(" ", 5926), Tuple.Create<System.Object, System.Int32>(classIdentifier
+
+#line default
+#line hidden
+, 5927), false)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 148 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 147 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                 
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 148 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 147 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                  if (string.IsNullOrEmpty(urlTitle))
                 {
                     
@@ -434,14 +635,22 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 150 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 149 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 WriteTo(__razor_helper_writer, url);
 
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 150 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 149 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                         
                 }
                 else
@@ -451,14 +660,22 @@ WriteTo(__razor_helper_writer, url);
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 154 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 153 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 WriteTo(__razor_helper_writer, urlTitle);
 
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 154 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 153 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                              
                 }
 
@@ -468,7 +685,11 @@ WriteTo(__razor_helper_writer, urlTitle);
 WriteLiteralTo(__razor_helper_writer, "            </a>\r\n        </dd>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 158 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 157 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
     }
 
 
@@ -476,19 +697,31 @@ WriteLiteralTo(__razor_helper_writer, "            </a>\r\n        </dd>\r\n");
 #line hidden
 });
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 159 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 158 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 160 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 159 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 public System.Web.WebPages.HelperResult GetSatisfactionsHtml()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 161 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 160 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
 
 
@@ -503,7 +736,11 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 165 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 164 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
 
 
@@ -512,13 +749,21 @@ WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
 WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 167 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 166 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
         
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 167 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 166 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
          if (@Model.EmployerSatisfactionMessage != "No data available")
         {
 
@@ -533,6 +778,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6577), Tuple.Create("\"", 6620)
 , Tuple.Create(Tuple.Create("", 6585), Tuple.Create("width:", 6585), true)
 
@@ -543,12 +789,28 @@ WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6577)
 #line hidden
 , 6592), false)
 , Tuple.Create(Tuple.Create("", 6619), Tuple.Create("%", 6619), true)
+=======
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6560), Tuple.Create("\"", 6603)
+, Tuple.Create(Tuple.Create("", 6568), Tuple.Create("width:", 6568), true)
+
+#line 169 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create(" ", 6574), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
+
+#line default
+#line hidden
+, 6575), false)
+, Tuple.Create(Tuple.Create("", 6602), Tuple.Create("%", 6602), true)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 172 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 171 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
         }
 
 
@@ -557,7 +819,11 @@ WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
 WriteLiteralTo(__razor_helper_writer, "    </p>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 174 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 173 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
 
 
@@ -572,7 +838,11 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 178 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 177 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
 
 
@@ -581,13 +851,21 @@ WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
 WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 180 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 179 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
         
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 180 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 179 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
          if (@Model.LearnerSatisfactionMessage != "No data available")
         {
 
@@ -602,6 +880,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6995), Tuple.Create("\"", 7036)
 , Tuple.Create(Tuple.Create("", 7003), Tuple.Create("width:", 7003), true)
 
@@ -612,12 +891,28 @@ WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6995)
 #line hidden
 , 7009), false)
 , Tuple.Create(Tuple.Create("", 7035), Tuple.Create("%", 7035), true)
+=======
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 6978), Tuple.Create("\"", 7019)
+, Tuple.Create(Tuple.Create("", 6986), Tuple.Create("width:", 6986), true)
+
+#line 182 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 6992), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
+
+#line default
+#line hidden
+, 6992), false)
+, Tuple.Create(Tuple.Create("", 7018), Tuple.Create("%", 7018), true)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 185 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 184 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
         }
 
 
@@ -626,26 +921,42 @@ WriteLiteralTo(__razor_helper_writer, "></div>\r\n            </div>\r\n");
 WriteLiteralTo(__razor_helper_writer, "\r\n    </p>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 188 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 187 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
 
 #line default
 #line hidden
 });
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 188 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 187 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 190 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 189 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 public System.Web.WebPages.HelperResult GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 191 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 190 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
     if (items != null)
     {
@@ -660,7 +971,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"training-structure\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 194 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 193 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
          WriteTo(__razor_helper_writer, title);
 
 
@@ -675,13 +990,21 @@ WriteLiteralTo(__razor_helper_writer, " id=\"delivery-modes\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <ul>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 197 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 196 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                 
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 197 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 196 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                  if (items.Exists(m => m.Equals("DayRelease")))
                 {
 
@@ -695,7 +1018,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"day-release\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 199 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 198 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
               WriteTo(__razor_helper_writer, Html.Raw("day release"));
 
 
@@ -704,7 +1031,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 200 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 199 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                 }
 
 
@@ -713,7 +1044,11 @@ WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 201 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 200 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                  if (items.Exists(m => m.Equals("BlockRelease")))
                 {
 
@@ -727,7 +1062,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"block-release\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 203 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 202 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                 WriteTo(__razor_helper_writer, Html.Raw("block release"));
 
 
@@ -736,7 +1075,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 204 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 203 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                 }
 
 
@@ -745,7 +1088,11 @@ WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 205 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 204 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                  if (items.Exists(m => m.Equals("100PercentEmployer")))
                 {
 
@@ -759,7 +1106,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 207 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 206 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                            WriteTo(__razor_helper_writer, Html.Raw("at your location"));
 
 
@@ -768,39 +1119,49 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 208 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 207 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
                 }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            </ul>\r\n                    <details>\r\n                        <summar" +
-"y>Explain training options</summary>\r\n                        <div");
+WriteLiteralTo(__razor_helper_writer, "            </ul>\r\n            <details>\r\n                <summary>Explain traini" +
+"ng options</summary>\r\n                <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"panel panel-border-narrow\"");
 
-WriteLiteralTo(__razor_helper_writer, ">   \r\n                            <p>\r\n                                <span");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <p>\r\n                        <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"bold-small\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Day release:</span> eg one day a week at the training provider\'s location.\r\n    " +
-"                        </p>\r\n                            <p>\r\n                 " +
-"               <span");
+"                </p>\r\n                    <p>\r\n                        <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"bold-small\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Block release:</span> eg 3-4 weeks at the training provider\'s location.\r\n       " +
-"                     </p>\r\n                            <p>\r\n                    " +
-"            <span");
+"             </p>\r\n                    <p>\r\n                        <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"bold-small\"");
 
 WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the provider comes to your workplace.\r\n                " +
-"            </p>\r\n                        </div>\r\n                    </details>" +
-"                \r\n        </dd>\r\n");
+"    </p>\r\n                </div>\r\n            </details>\r\n        </dd>\r\n");
 
+
+#line 224 "..\..\Views\Provider\Detail.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
 
 #line 225 "..\..\Views\Provider\Detail.cshtml"
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
     }
 
 
@@ -809,18 +1170,29 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the provider co
 });
 
 #line 226 "..\..\Views\Provider\Detail.cshtml"
+=======
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 228 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistLink(int apprenticeship, int location, string provider, bool isShortlisted)
+=======
+#line 227 "..\..\Views\Provider\Detail.cshtml"
+public System.Web.WebPages.HelperResult GetShortlistLink(int providerId, int standardId, int locationId, bool isShortlisted)
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 229 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 228 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
  
     if (isShortlisted)
     {
@@ -829,33 +1201,59 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 232 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveProvider", "Shortlist", new { @providerId = provider, @locationId = location, @apprenticeshipId = apprenticeship }, null));
+=======
+#line 231 "..\..\Views\Provider\Detail.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveProvider", "ShortList",
+            new { standardId, providerId, locationId},
+            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow", data_standard = standardId, data_provider = providerId, data_action = "remove"}));
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 232 "..\..\Views\Provider\Detail.cshtml"
                                                                                                                                                                                   
     }
     else
     {
     
+=======
+#line 233 "..\..\Views\Provider\Detail.cshtml"
+                                                                                                                                                                           
+    }
+    else
+    {
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
         
 
 #line default
 #line hidden
 
 #line 237 "..\..\Views\Provider\Detail.cshtml"
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist provider", "AddProvider", "Shortlist", new { @providerId = provider, @locationId = location , @apprenticeshipId = apprenticeship }, null));
+=======
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist provider", "AddProvider", "ShortList",
+            new { standardId, providerId, locationId },
+            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow", data_standard = standardId, data_provider = providerId, data_action = "add"}));
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
 
 #line default
 #line hidden
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 237 "..\..\Views\Provider\Detail.cshtml"
                                                                                                                                                                              
+=======
+#line 239 "..\..\Views\Provider\Detail.cshtml"
+                                                                                                                                                                        
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
     }
 
 
@@ -863,7 +1261,11 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist provider", "AddProvide
 #line hidden
 });
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 #line 239 "..\..\Views\Provider\Detail.cshtml"
+=======
+#line 241 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 }
 #line default
 #line hidden
@@ -1181,10 +1583,25 @@ WriteLiteral("                        ");
             
             #line default
             #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 91 "..\..\Views\Provider\Detail.cshtml"
+                   Write(GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n                    </aside>\r\n                </div>\r\n");
 
             
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
             #line 95 "..\..\Views\Provider\Detail.cshtml"
+=======
+            #line 94 "..\..\Views\Provider\Detail.cshtml"
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
             }
 
             

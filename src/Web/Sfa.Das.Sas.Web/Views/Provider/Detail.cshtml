@@ -1,7 +1,11 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Resources
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 @using Sfa.Das.Sas.Web.Models
 @model Sfa.Das.Sas.Web.ViewModels.ProviderViewModel
+=======
+@model Sfa.Das.Sas.Web.ViewModels.ProviderCourseViewModel
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
@@ -90,6 +94,7 @@
                             Training provider quality assessment
                         </h2>
                         @GetSatisfactionsHtml()
+                        @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
                     </aside>
                 </div>
             }
@@ -207,24 +212,25 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
                 }
             </ul>
-                    <details>
-                        <summary>Explain training options</summary>
-                        <div class="panel panel-border-narrow">   
-                            <p>
-                                <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
-                            </p>
-                            <p>
-                                <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
-                            </p>
-                            <p>
-                                <span class="bold-small">At your location:</span> the provider comes to your workplace.
-                            </p>
-                        </div>
-                    </details>                
+            <details>
+                <summary>Explain training options</summary>
+                <div class="panel panel-border-narrow">
+                    <p>
+                        <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
+                    </p>
+                    <p>
+                        <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
+                    </p>
+                    <p>
+                        <span class="bold-small">At your location:</span> the provider comes to your workplace.
+                    </p>
+                </div>
+            </details>
         </dd>
     }
 }
 
+<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
 @helper GetShortlistLink(int apprenticeship, int location, string provider, bool isShortlisted)
 {
     if (isShortlisted)
@@ -237,3 +243,20 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
         @Html.ActionLink("Shortlist provider", "AddProvider", "Shortlist", new { @providerId = provider, @locationId = location , @apprenticeshipId = apprenticeship }, null)
     }
 }
+=======
+@helper GetShortlistLink(int providerId, int standardId, int locationId, bool isShortlisted)
+{
+    if (isShortlisted)
+    {
+        @Html.ActionLink("Remove from shortlist", "RemoveProvider", "ShortList",
+            new { standardId, providerId, locationId},
+            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow", data_standard = standardId, data_provider = providerId, data_action = "remove"})
+    }
+    else
+    {
+        @Html.ActionLink("Shortlist provider", "AddProvider", "ShortList",
+            new { standardId, providerId, locationId },
+            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow", data_standard = standardId, data_provider = providerId, data_action = "add"})
+    }
+}
+>>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
