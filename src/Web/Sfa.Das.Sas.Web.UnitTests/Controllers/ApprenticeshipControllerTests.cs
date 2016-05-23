@@ -20,6 +20,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 {
+    using Sfa.Das.Sas.Web.DependencyResolution;
+
     [TestFixture]
     public sealed class ApprenticeshipControllerTests
     {
@@ -79,6 +81,26 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             // Assert
             Assert.NotNull(result);
             Assert.AreEqual(null, ((ApprenticeshipSearchResultViewModel)result.Model).SearchTerm);
+            Assert.IsNotNull(result);
+        }
+
+        [TestCase(-15)]
+        [TestCase(-1)]
+        [TestCase(0)]
+        public void Search_WhenCriteriaPage_IsLessOrEqualTo0(int input)
+        {
+            // Arrange
+            var mockSearchService = new Mock<IApprenticeshipSearchService>();
+            var mockLogger = new Mock<ILog>();
+
+            var mockMappingServices = new Mock<IMappingService>();
+            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, null, null, mockLogger.Object, mockMappingServices.Object, new Mock<IProfileAStep>().Object, null);
+
+            // Act
+            ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test", Page = input }) as ViewResult;
+
+            // Assert
+            mockSearchService.Verify(m => m.SearchByKeyword("test", 1, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
             Assert.IsNotNull(result);
         }
 

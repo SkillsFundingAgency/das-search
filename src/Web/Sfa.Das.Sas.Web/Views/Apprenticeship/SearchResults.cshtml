@@ -111,12 +111,11 @@
 
 @helper GetPaginationNextLink()
 {
-    if (Model.ActualPage < Model.LastPage)
+    if (Model.ActualPage < Model.LastPage && Model.ActualPage >= 0)
     {
         var nextPage = @Model.ActualPage + 1;
         var title = $"Next page {@nextPage} of {@Model.LastPage}";
 
-        //var url = $"Apprenticeship/SearchResults/keywords={Model.SearchTerm}&page={nextPage}";
         var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(nextPage, Model.AggregationLevel, Model.SortOrder), null);
             <a href="@url" style="visibility: visible" class="page-navigation__btn next">
                 <i class="arrow-button fa fa-angle-right"></i>
