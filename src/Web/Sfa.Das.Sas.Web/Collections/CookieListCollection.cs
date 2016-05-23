@@ -175,7 +175,7 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 return new ShortlistedProvider
                 {
-                    ProviderId = int.Parse(prov[0]),
+                    ProviderId = prov[0],
                     LocationId = int.Parse(prov[1])
                 };
             }

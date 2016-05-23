@@ -1,5 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Resources
+@using Sfa.Das.Sas.Web.Models
 @model Sfa.Das.Sas.Web.ViewModels.ProviderViewModel
 
 @{
@@ -18,6 +19,7 @@
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
+                @GetShortlistLink(@Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.ProviderId, @Model.IsShortlisted)
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
@@ -220,5 +222,18 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                         </div>
                     </details>                
         </dd>
+    }
+}
+
+@helper GetShortlistLink(int apprenticeship, int location, string provider, bool isShortlisted)
+{
+    if (isShortlisted)
+    {
+        @Html.ActionLink("Remove from shortlist", "RemoveProvider", "Shortlist", new { @providerId = provider, @locationId = location, @apprenticeshipId = apprenticeship }, null)
+    }
+    else
+    {
+    
+        @Html.ActionLink("Shortlist provider", "AddProvider", "Shortlist", new { @providerId = provider, @locationId = location , @apprenticeshipId = apprenticeship }, null)
     }
 }

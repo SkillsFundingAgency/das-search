@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Collections;
+using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Models;
@@ -20,6 +22,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IProviderViewModelFactory _viewModelFactory;
 
         private readonly IConfigurationSettings _settings;
+        private readonly IListCollection<int> _listCollection;
 
         private readonly ILog _logger;
 
@@ -32,13 +35,15 @@ namespace Sfa.Das.Sas.Web.Controllers
             ILog logger,
             IMappingService mappingService,
             IProviderViewModelFactory viewModelFactory,
-            IConfigurationSettings settings)
+            IConfigurationSettings settings,
+            IListCollection<int> listCollection)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
             _viewModelFactory = viewModelFactory;
             _settings = settings;
+            _listCollection = listCollection;
         }
 
         [HttpGet]
@@ -176,6 +181,15 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 viewModel.SearchResultLink =
                         Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("Search", "Apprenticeship"));
+            }
+
+            viewModel.ProviderId = criteria.ProviderId;
+
+            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+
+            foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships from shortlistedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId) select shortlistedApprenticeship)
+            {
+                viewModel.IsShortlisted = true;
             }
 
             return View(viewModel);

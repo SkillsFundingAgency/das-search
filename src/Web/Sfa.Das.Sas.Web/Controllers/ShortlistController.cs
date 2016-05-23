@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
 
-        public ActionResult AddProvider(int apprenticeshipId, int providerId, int locationId, string responseUrlParameters)
+        public ActionResult AddProvider(int apprenticeshipId, string providerId, int locationId)
         {
             _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {apprenticeshipId} shortlist cookie");
             var shorlistedApprenticeship = new ShortlistedApprenticeship
@@ -59,10 +59,15 @@ namespace Sfa.Das.Sas.Web.Controllers
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
 
-        public ActionResult RemoveProvider(int id, ShortlistedProvider provider, string responseUrlParameters)
+        public ActionResult RemoveProvider(int apprenticeshipId, string providerId, int locationId)
         {
-            _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {id} shortlist cookie");
-            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, id, provider);
+            var provider = new ShortlistedProvider
+            {
+                ProviderId = providerId,
+                LocationId = locationId
+            };
+            _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {apprenticeshipId} shortlist cookie");
+            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
 
             return GetReturnRedirectFromProviderShortlistAction();
         }

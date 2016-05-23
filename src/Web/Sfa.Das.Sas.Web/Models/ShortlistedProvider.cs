@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Web.Models
 {
     public class ShortlistedProvider
     {
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         public int LocationId { get; set; }
     }
 }
