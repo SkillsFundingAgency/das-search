@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@HappyPath		@CI @SystemTest @Demo @PreProd @Prod
+@HappyPath @CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a standard and provider
 	Given I have data for a standard
 	And I navigated to the Start page
@@ -24,6 +24,7 @@ Scenario:Should find a standard and provider
          | Field          | Rule     | Value                 |
          | Shortlist Link | contains | Remove from shortlist |
 
+	When I choose Search Page Button
 	When I enter data
 		| Field               | Value      |
 		| Postcode Search Box | {Postcode} |
