@@ -482,6 +482,8 @@
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\analytics.js" />
     <Content Include="scripts\appsettings.js" />
+    <Content Include="scripts\app\sample.js" />
+    <Content Include="scripts\spec\sample.spec.js" />
     <Content Include="scripts\cookie-banner.js" />
     <Content Include="scripts\standard-detail.js" />
     <Content Include="scripts\ui.js" />
@@ -624,6 +626,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
