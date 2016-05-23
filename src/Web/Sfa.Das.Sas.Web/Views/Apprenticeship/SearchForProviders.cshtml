@@ -36,14 +36,16 @@
                     </div>
 
                     <div class="form-elements @(Model.HasError ? " error" : "")">
-                        <label class="form-label" for="search-box-aside">
+                        <label class="form-label" for="search-box">
                             We need <strong>full</strong> postcode to find the closest training providers to you.
                             <span class="error-message">
                                 This field can't be blank
                             </span>
                         </label>
-                        <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
-                        <input type="search" name="PostCode" id="search-box-aside" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                        <div class="form-group">
+                            <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
+                            <input type="search" name="PostCode" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                        </div>
                         <input class="button margin-top-x2 postcode-search-button" type="submit" value="Find">
                     </div>
                 </form>

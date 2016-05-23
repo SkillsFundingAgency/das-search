@@ -19,6 +19,8 @@ Scenario:Should find a framework and provider
 	When I choose First Framework Result
 	Then I am on the Framework Details page
 
+	When I choose Search Page Button
+
 	When I enter data
 		| Field               | Value      |
 		| Postcode Search Box | {Postcode} |

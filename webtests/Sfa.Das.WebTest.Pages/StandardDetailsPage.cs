@@ -7,9 +7,11 @@
     [PageNavigation("/apprenticeship/standard")]
     public class StandardDetailsPage : SharedTemplatePage
     {
-        public By PostcodeSearchBox => By.CssSelector("#search-box-bottom");
+        public By PostcodeSearchBox => By.CssSelector("#search-box");
 
-        public By SearchButton => By.CssSelector("#postcode-form-bottom .postcode-search-button");
+        public By SearchPageButton => By.CssSelector("a.button");
+
+        public By SearchButton => By.CssSelector("input.button");
     
         public By ShortlistLink => By.ClassName("shortlist-link");
     }
