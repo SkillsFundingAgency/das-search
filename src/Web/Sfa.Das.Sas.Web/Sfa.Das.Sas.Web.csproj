@@ -481,6 +481,7 @@
     <Content Include="scripts\analytics.js" />
     <Content Include="scripts\appsettings.js" />
     <Content Include="scripts\cookie-banner.js" />
+    <Content Include="scripts\cookie-helper.js" />
     <Content Include="scripts\standard-detail.js" />
     <Content Include="scripts\ui.js" />
     <Content Include="scripts\validation.js" />
