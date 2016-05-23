@@ -10,16 +10,16 @@ namespace Sfa.Das.Sas.Web
             bundles.Add(new StyleBundle("~/styles/").Include(
                       "~/Content/dist/css/screen.min.css"));
 
+            bundles.Add(new ScriptBundle("~/scripts/app").Include(
+                "~/scripts/app/*.js",
+                "~/scripts/standard-detail.js",
+                "~/scripts/appsettings.js"));
+
             bundles.Add(new ScriptBundle("~/static_js_footer").Include(
                 "~/scripts/vendor/modernizr.js",
                 "~/scripts/vendor/jquery.js",
-                "~/scripts/vendor/jquery-cookie.js",
-                "~/scripts/analytics.js",
-                "~/scripts/validation.js",
-                "~/scripts/ui.js",
-                "~/scripts/standard-detail.js",
-                "~/scripts/appsettings.js",
-                "~/scripts/cookie-banner.js"));
+                "~/scripts/vendor/jquery-cookie.js"
+                ));
         }
     }
 }
