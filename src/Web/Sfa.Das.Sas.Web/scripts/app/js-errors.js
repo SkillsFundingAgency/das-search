@@ -1,0 +1,1 @@
+﻿window.jsErrors = [], window.onerror = function (r) { window.jsErrors[window.jsErrors.length] = r };
