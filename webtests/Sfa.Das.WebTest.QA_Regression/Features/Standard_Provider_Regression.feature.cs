@@ -18,8 +18,8 @@ namespace Sfa.Das.WebTest.QA_Regression.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("STD4_Regression")]
-    public partial class STD4_RegressionFeature
+    [NUnit.Framework.DescriptionAttribute("Standard Details View and Provider Selection Regression Tests")]
+    public partial class StandardDetailsViewAndProviderSelectionRegressionTestsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace Sfa.Das.WebTest.QA_Regression.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "STD4_Regression", @"	Whenever I search for the key word Mechatronics maintenance technician
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Standard Details View and Provider Selection Regression Tests", @"	Whenever I search for the key word Mechatronics maintenance technician
 	I should find the term ""Mechatronics maintenance technician"" as the first item on the list of search results page
 	When I click the link ""Mechatronics maintenance technician""
 	A details page should display with details matching the meta data for Mechatronics maintenance technician
@@ -80,10 +80,6 @@ namespace Sfa.Das.WebTest.QA_Regression.Features
 this.ScenarioSetup(scenarioInfo);
 #line 13
  testRunner.Given("I was on the <Search page>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 14
- testRunner.When("I am on the <Search page> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
- testRunner.Then("I am on the <Search page> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
@@ -91,15 +87,15 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Search Box",
                         "Mechatronics maintenance technician"});
-#line 16
+#line 14
  testRunner.When("I enter <data>", ((string)(null)), table1, "When ");
-#line 19
+#line 17
  testRunner.And("I choose <Search Button>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 18
  testRunner.Then("I am on the <Search Results page> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
+#line 19
  testRunner.When("I choose <First Standard Result>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 20
  testRunner.Then("I am on the <Standard Details page> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -108,17 +104,17 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "Postcode Search Box",
                         "SN2 1DY"});
-#line 23
+#line 21
  testRunner.When("I enter <data>", ((string)(null)), table2, "When ");
-#line 26
+#line 24
  testRunner.And("I choose <Search Button>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 25
  testRunner.Then("I am on the <Standard Provider Results page> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 28
+#line 26
  testRunner.And("I see <Provider Results list> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+#line 28
  testRunner.When("I choose <First Provider Link>", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 31
+#line 29
  testRunner.Then("I am on the <Provider Details page> page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -127,13 +123,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Value"});
             table3.AddRow(new string[] {
                         "Provider Name",
-                        "Exists",
-                        "true"});
-            table3.AddRow(new string[] {
-                        "Provider Name",
                         "has text",
                         "Swindon College"});
-#line 32
+#line 30
  testRunner.And("I see the Text in table", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();

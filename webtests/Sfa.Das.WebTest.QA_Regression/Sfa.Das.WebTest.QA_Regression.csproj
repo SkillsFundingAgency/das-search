@@ -80,7 +80,6 @@
     <Compile Include="Steps\OnPageRegressionSteps.cs" />
     <Compile Include="Steps\EnterRegressionDataSteps.cs" />
     <Compile Include="Steps\VerifyElements_RegressionSteps.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
