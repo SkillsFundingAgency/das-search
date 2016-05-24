@@ -9,6 +9,8 @@
         By FindSelector(string propertyName);
         IWebElement FindElement(string propertyName);
 
-        void WaitForPageLoad();
+        IPageContext WaitForPageLoad();
+
+        IPageContext CheckForJavascriptErrors();
     }
 }
