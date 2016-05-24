@@ -12,11 +12,4 @@
 
     appsettings.cookieSecure = undefinedIfTemplate("#{cookie.secure}") || "false";
 
-
-    appsettings.init = function () {
-
-    };
-
-    appsettings.init();
-
 }(SearchAndShortlist.appsettings = {}));
