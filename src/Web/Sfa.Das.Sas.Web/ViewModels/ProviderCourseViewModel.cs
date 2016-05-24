@@ -5,7 +5,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderCourseViewModel
     {
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
 
         public string Name { get; set; }
 

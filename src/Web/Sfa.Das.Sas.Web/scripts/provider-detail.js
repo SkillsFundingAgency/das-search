@@ -1,38 +1,54 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
-(function (provider) {
-
+(function (provider)
+{
     provider.StandardCookieName = 'das_shortlist_standards';
     provider.FrameworkCookieName = 'das_shortlist_frameworks';
 
-    provider.Add = function (providerId, standardId) {
+    provider.Add = function (providerId, apprenticeshipId, locationId)
+    {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.StandardCookieName);
 
-        if (cookie) {
-            cookie.AddSubKeyValue(standardId, providerId);
+        if (cookie)
+        {
+            cookie.AddSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     };
 
-    provider.Remove = function (providerId, standardId) {
+    provider.Remove = function (providerId, apprenticeshipId, locationId)
+    {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.StandardCookieName);
 
-        if (cookie) {
-            cookie.RemoveSubKeyValue(standardId, providerId);
+        if (cookie)
+        {
+            cookie.RemoveSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     }
 
-
-    provider.init = function () {
-        $('.provider-shortlist-link').on('click', function (e) {
+    provider.init = function()
+    {
+        $('.provider-shortlist-link').on('click', function (e)
+        {
             e.preventDefault();
             var $this = $(this);
-            if ($this.attr('data-action') === 'add') {
-                provider.Add($(this).attr('data-provider'), $(this).attr('data-standard'));
+            if ($this.attr('data-action') === 'add')
+            {
+                provider.Add(
+                    $(this).attr('data-provider'),
+                    $(this).attr('data_apprenticeship'),
+                    $(this).attr('data-location'));
+
                 $('.provider-shortlist-link').attr('data-action', 'remove');
                 $('.provider-shortlist-link').html('Remove from shortlist');
-            } else if ($this.attr('data-action') === 'remove') {
-                provider.Remove($(this).attr('data-provider'), $(this).attr('data-standard'));
+            }
+            else if ($this.attr('data-action') === 'remove')
+            {
+                provider.Remove(
+                    $(this).attr('data-provider'),
+                    $(this).attr('data_apprenticeship'),
+                    $(this).attr('data-location'));
+
                 $('.provider-shortlist-link').attr('data-action', 'add');
                 $('.provider-shortlist-link').html('Shortlist provider');
             };

@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult AddProvider(int apprenticeshipId, string providerId, int locationId)
         {
-            _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {standardId} shortlist cookie");
+            _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {apprenticeshipId} shortlist cookie");
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
                 ApprenticeshipId = apprenticeshipId,

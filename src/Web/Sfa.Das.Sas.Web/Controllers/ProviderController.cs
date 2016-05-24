@@ -186,8 +186,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.ProviderId = criteria.ProviderId;
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
-
-            foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships from shortlistedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId) select shortlistedApprenticeship)
+            
+            foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships
+                                                      from shortlistedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId)
+                                                      select shortlistedApprenticeship)
             {
                 viewModel.IsShortlisted = true;
             }

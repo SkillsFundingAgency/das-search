@@ -1,11 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Resources
-<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
-@using Sfa.Das.Sas.Web.Models
-@model Sfa.Das.Sas.Web.ViewModels.ProviderViewModel
-=======
 @model Sfa.Das.Sas.Web.ViewModels.ProviderCourseViewModel
->>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
@@ -23,7 +18,7 @@
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
-                @GetShortlistLink(@Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.ProviderId, @Model.IsShortlisted)
+                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
@@ -230,33 +225,22 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     }
 }
 
-<<<<<<< 85659ebd1e3a371455fdc155c0d6bd29a9acb4ff
-@helper GetShortlistLink(int apprenticeship, int location, string provider, bool isShortlisted)
-{
-    if (isShortlisted)
-    {
-        @Html.ActionLink("Remove from shortlist", "RemoveProvider", "Shortlist", new { @providerId = provider, @locationId = location, @apprenticeshipId = apprenticeship }, null)
-    }
-    else
-    {
-    
-        @Html.ActionLink("Shortlist provider", "AddProvider", "Shortlist", new { @providerId = provider, @locationId = location , @apprenticeshipId = apprenticeship }, null)
-    }
-}
-=======
-@helper GetShortlistLink(int providerId, int standardId, int locationId, bool isShortlisted)
+@helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
     if (isShortlisted)
     {
         @Html.ActionLink("Remove from shortlist", "RemoveProvider", "ShortList",
-            new { standardId, providerId, locationId},
-            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow", data_standard = standardId, data_provider = providerId, data_action = "remove"})
+            new { apprenticeshipId, providerId, locationId },
+            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
+                data_apprenticeship = apprenticeshipId, data_provider = providerId, data_location = locationId,
+                data_action = "remove"})
     }
     else
     {
         @Html.ActionLink("Shortlist provider", "AddProvider", "ShortList",
-            new { standardId, providerId, locationId },
-            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow", data_standard = standardId, data_provider = providerId, data_action = "add"})
+            new { apprenticeshipId, providerId, locationId },
+            new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
+                data_apprenticeship= apprenticeshipId, data_provider = providerId, data_location = locationId,
+                data_action = "add"})
     }
 }
->>>>>>> US1762: Fixes to the cookie store js code and also have intergrated the bookmark links into the provide page now. Still a few bugs to fix  but it is functionally working. Given the large amount of changes it seems worth checking this code in now and apply a fix in the next check-in as we are on a branch. Some refactoring and checking on code both server side and client side is needed to double check the functionaility is stable for all scenarios.
