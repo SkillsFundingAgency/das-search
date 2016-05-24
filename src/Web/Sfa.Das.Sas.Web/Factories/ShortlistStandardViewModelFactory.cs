@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.Web.ViewModels;
+﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Factories
 {
@@ -10,7 +11,8 @@ namespace Sfa.Das.Sas.Web.Factories
             {
                 Id = standardId,
                 Title = title,
-                Level = level
+                Level = level,
+                Providers = new List<ShortlistProviderViewModel>()
             };
         }
     }

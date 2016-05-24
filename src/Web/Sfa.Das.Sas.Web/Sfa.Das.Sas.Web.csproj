@@ -284,6 +284,7 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
+    <Compile Include="ViewModels\ShortlistProviderViewModel.cs" />
     <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryModeViewModel.cs" />

@@ -8,6 +8,11 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
     {
         Provider IProviderMapping.MapToProvider(StandardProviderSearchResultsItem item)
         {
+            if (item == null)
+            {
+                return null;
+            }
+
             var document = MapFromInterface(item);
             document.Apprenticeship.Code = item.StandardCode;
             return document;

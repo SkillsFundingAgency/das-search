@@ -181,7 +181,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 63 "..\..\Views\Dashboard\Overview.cshtml"
-               WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" }));
+               WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new {id = standard.Id}, new {rel = "nofollow"}));
 
 
 #line default
@@ -190,14 +190,70 @@ WriteLiteralTo(__razor_helper_writer, "</td>\r\n        </tr>\r\n");
 
 
 #line 65 "..\..\Views\Dashboard\Overview.cshtml"
-    }
+        foreach (var provider in standard.Providers)
+        {
+            var providerAddress = $"{provider.Address.Address1} {provider.Address.Address2} {provider.Address.Town} {provider.Address.County} {provider.Address.Postcode}";
+
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "            <tr");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"provider-item\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                <td");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"provider-title\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    Provider -> \r\n");
+
+WriteLiteralTo(__razor_helper_writer, "                    ");
+
+
+#line 72 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink(provider.Name, "Detail", "Provider", new {providerId = provider.Id, locationId = provider.LocationId, standardCode = standard.Id}, null));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "                    ");
+
+
+#line 73 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, providerAddress);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n                </td>\r\n                <td");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"standard-delete-link\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 75 "..\..\Views\Dashboard\Overview.cshtml"
+                   WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" }));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</td>\r\n            </tr>\r\n");
+
+
+#line 77 "..\..\Views\Dashboard\Overview.cshtml"
+        }
+}
 
 
 #line default
 #line hidden
 });
 
-#line 66 "..\..\Views\Dashboard\Overview.cshtml"
+#line 79 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden

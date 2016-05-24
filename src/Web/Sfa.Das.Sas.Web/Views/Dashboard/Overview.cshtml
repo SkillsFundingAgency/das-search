@@ -60,7 +60,20 @@
 
         <tr class="standard-item">
             <td class="standard-title">@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null)</td>
-            <td class="standard-delete-link">@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" })</td>
+            <td class="standard-delete-link">@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new {id = standard.Id}, new {rel = "nofollow"})</td>
         </tr>
-    }
+        foreach (var provider in standard.Providers)
+        {
+            var providerAddress = $"{provider.Address.Address1} {provider.Address.Address2} {provider.Address.Town} {provider.Address.County} {provider.Address.Postcode}";
+
+            <tr class="provider-item">
+                <td class="provider-title">
+                    Provider -> 
+                    @Html.ActionLink(provider.Name, "Detail", "Provider", new {providerId = provider.Id, locationId = provider.LocationId, standardCode = standard.Id}, null)
+                    @providerAddress
+                </td>
+                <td class="standard-delete-link">@Html.ActionLink("Delete", "RemoveStandard", "ShortList", new { id = standard.Id }, new { rel = "nofollow" })</td>
+            </tr>
+        }
+}
 }
