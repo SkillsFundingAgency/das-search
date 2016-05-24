@@ -41,7 +41,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 var standard = _getStandards.GetStandardById(shortlistedStandard.ApprenticeshipId);
                 var shortlistedStandardElement = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(standard.StandardId, standard.Title, standard.NotionalEndLevel);
-                foreach (var jajaja in from provider in shortlistedStandard.ProvidersIdAndLocation select _apprenticeshipProviderRepository.GetByStandardCode(provider.ProviderId, provider.LocationId.ToString(), shortlistedStandard.ApprenticeshipId.ToString()) into p where p != null select new ShortlistProviderViewModel
+
+                foreach (var shortlistedProvider in from provider in shortlistedStandard.ProvidersIdAndLocation select _apprenticeshipProviderRepository.GetCourseByStandardCode(provider.ProviderId, provider.LocationId.ToString(), shortlistedStandard.ApprenticeshipId.ToString()) into p where p != null select new ShortlistProviderViewModel
                 {
                     Id = p.UkPrn,
                     Name = p.Name,
@@ -49,22 +50,11 @@ namespace Sfa.Das.Sas.Web.Controllers
                     Address = p.Address
                 })
                 {
-                    shortlistedStandardElement.Providers.Add(jajaja);
+                    shortlistedStandardElement.Providers.Add(shortlistedProvider);
                 }
 
                 standards.Add(shortlistedStandardElement);
             }
-
-            /*
-            var listInt = shortListStandards.Select(shortlistedApprenticeship => shortlistedApprenticeship.ApprenticeshipId).ToList();
-            var standards = _getStandards.GetStandardsByIds(listInt);
-
-            var shortlistStandardViewModels = standards.Select(
-                x => _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(
-                    x.StandardId,
-                    x.Title,
-                    x.NotionalEndLevel));
-            */
 
             var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(standards.ToList());
 

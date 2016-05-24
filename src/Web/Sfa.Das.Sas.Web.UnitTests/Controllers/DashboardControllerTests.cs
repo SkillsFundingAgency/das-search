@@ -21,6 +21,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         private Mock<IListCollection<int>> _mockListCollection;
         private Mock<IDashboardViewModelFactory> _mockDashboardViewModelFactory;
         private Mock<IShortlistStandardViewModelFactory> _mockShortlistStandardViewModelFactory;
+        private Mock<IApprenticeshipProviderRepository> _mockApprenticeshipProviderRepository;
         private Mock<DashboardViewModel> _mockDashboardViewModel;
         private DashboardController _sut;
 
@@ -31,13 +32,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockListCollection = new Mock<IListCollection<int>>();
             _mockDashboardViewModelFactory = new Mock<IDashboardViewModelFactory>();
             _mockShortlistStandardViewModelFactory = new Mock<IShortlistStandardViewModelFactory>();
+            _mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
             _mockDashboardViewModel = new Mock<DashboardViewModel>();
 
             _sut = new DashboardController(
                 _mockGetStandards.Object,
                 _mockListCollection.Object,
                 _mockDashboardViewModelFactory.Object,
-                _mockShortlistStandardViewModelFactory.Object);
+                _mockShortlistStandardViewModelFactory.Object,
+                _mockApprenticeshipProviderRepository.Object);
 
             _mockShortlistStandardViewModelFactory.Setup(
                 x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))

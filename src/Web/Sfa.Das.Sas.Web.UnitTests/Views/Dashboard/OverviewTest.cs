@@ -54,14 +54,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             {
                 Id = 1,
                 Level = 2,
-                Title = "Chemical Engineering"
+                Title = "Chemical Engineering",
+                Providers = new List<ShortlistProviderViewModel>()
             };
 
             var standardB = new ShortlistStandardViewModel
             {
                 Id = 2,
                 Level = 1,
-                Title = "Network Engineering"
+                Title = "Network Engineering",
+                Providers = new List<ShortlistProviderViewModel>()
             };
 
             var viewModel = new DashboardViewModel
