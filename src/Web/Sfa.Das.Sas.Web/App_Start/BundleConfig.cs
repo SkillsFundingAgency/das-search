@@ -11,9 +11,10 @@ namespace Sfa.Das.Sas.Web
                       "~/Content/dist/css/screen.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/scripts/appsettings.js",
                 "~/scripts/app/*.js",
-                "~/scripts/standard-detail.js",
-                "~/scripts/appsettings.js"));
+                "~/scripts/standard-detail.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
                 "~/scripts/app/js-errors.js",
