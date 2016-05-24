@@ -1,6 +1,8 @@
 ﻿namespace Sfa.Das.WebTest.Infrastructure.Selenium
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Linq;
 
@@ -71,10 +73,23 @@
             return getter.Invoke(CurrentPage, null) as IWebElement;
         }
 
-        public void WaitForPageLoad()
+        public IPageContext WaitForPageLoad()
         {
             new WebDriverWait(_driver, TimeSpan.FromSeconds(TimeoutInSeconds))
                 .Until(ExpectedConditions.StalenessOf(_htmlElement));
+
+            return this;
+        }
+
+        public IPageContext CheckForJavascriptErrors()
+        {
+            var errors = ((IJavaScriptExecutor)_driver).ExecuteScript("return window.jsErrors") as ReadOnlyCollection<object> ?? new ReadOnlyCollection<object>(new List<object>());
+            if (errors.Any())
+            {
+                throw new ApplicationException(string.Join("\n", errors.Select(x => x.ToString())));
+            }
+
+            return this;
         }
     }
 }

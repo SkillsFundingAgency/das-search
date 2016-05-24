@@ -21,7 +21,7 @@
                     }
                 </p>
             </div>
-            @if (!Model.HasError)
+            @if (!Model.HasError && Model.TotalResults > 0)
             {
                 <div>
                     <form method="GET" id="search-results-order">
@@ -33,8 +33,8 @@
                             <input type="hidden" name="SelectedLevels" value="@level.Value" />
                         }
                         <div class="form-block">
-                            Sort by
-                            <select name="order" class="form-control form-control-1-3">
+                            <label for="select-order">Sort by</label>
+                            <select name="order" id="select-order" class="form-control form-control-1-3">
                                 <option selected="@(Model.SortOrder=="1")" value="1">Best match</option>
                                 <option selected="@(Model.SortOrder=="2")" value="2">Level (high to low)</option>
                                 <option selected="@(Model.SortOrder=="3")" value="3">Level (low to high)</option>
@@ -44,11 +44,6 @@
                     </form>
                 </div>
             }
-            <p>
-                @{
-                    Html.RenderPartial("_SearchResultMessage");
-                }
-            </p>
 
         </div>
 
@@ -116,12 +111,11 @@
 
 @helper GetPaginationNextLink()
 {
-    if (Model.ActualPage < Model.LastPage)
+    if (Model.ActualPage < Model.LastPage && Model.ActualPage >= 0)
     {
         var nextPage = @Model.ActualPage + 1;
         var title = $"Next page {@nextPage} of {@Model.LastPage}";
 
-        //var url = $"Apprenticeship/SearchResults/keywords={Model.SearchTerm}&page={nextPage}";
         var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(nextPage, Model.AggregationLevel, Model.SortOrder), null);
             <a href="@url" style="visibility: visible" class="page-navigation__btn next">
                 <i class="arrow-button fa fa-angle-right"></i>
@@ -185,13 +179,13 @@
                 <input type="hidden" name="take" value="@Model.ResultsToTake" />
 
                 <fieldset class="filters filters-accordion">
-                    <h3 class="toggler heading-small">Apprenticeship Level</h3>
+                    <h2 class="toggler heading-small">Apprenticeship Level</h2>
                     <div class="toggled-content">
                         <ul name="alist22">
                             @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
                             {
                                 <li>
-                                    <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                                    <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
                                     <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
                                 </li>
                             }

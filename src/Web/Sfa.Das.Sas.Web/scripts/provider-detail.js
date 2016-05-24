@@ -36,7 +36,7 @@
             {
                 provider.Add(
                     $(this).attr('data-provider'),
-                    $(this).attr('data_apprenticeship'),
+                    $(this).attr('data-apprenticeship'),
                     $(this).attr('data-location'));
 
                 $('.provider-shortlist-link').attr('data-action', 'remove');
@@ -46,7 +46,7 @@
             {
                 provider.Remove(
                     $(this).attr('data-provider'),
-                    $(this).attr('data_apprenticeship'),
+                    $(this).attr('data-apprenticeship'),
                     $(this).attr('data-location'));
 
                 $('.provider-shortlist-link').attr('data-action', 'add');

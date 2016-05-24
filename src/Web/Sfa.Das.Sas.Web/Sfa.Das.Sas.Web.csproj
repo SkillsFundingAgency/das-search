@@ -370,6 +370,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_StandardSearchResultMessage.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Start\Cookies.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cookies.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Start\Start.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -477,19 +482,25 @@
     <Content Include="Content\src\styles\_fontawesome.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
-    <Content Include="scripts\ai.0.15.0-build58334.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="scripts\analytics.js" />
-    <Content Include="scripts\appsettings.js" />
-    <Content Include="scripts\cookie-banner.js" />
-    <Content Include="scripts\cookie-store.js" />
+    <Content Include="scripts\app\cookie-store.js" />
     <Content Include="scripts\provider-detail.js" />
+    <Content Include="scripts\vendor\ai.0.15.0-build58334.js" />
+    <Content Include="scripts\vendor\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\app\analytics.js" />
+    <Content Include="scripts\appsettings.js" />
+    <Content Include="scripts\js-errors.js" />
+    <Content Include="scripts\app\sample.js" />
+    <None Include="scripts\vendor\jquery-1.12.3.intellisense.js" />
+    <Content Include="scripts\vendor\jquery-1.12.3.js" />
+    <Content Include="scripts\vendor\jquery-1.12.3.min.js" />
+    <Content Include="scripts\spec\sample.spec.js" />
+    <Content Include="scripts\app\cookie-banner.js" />
     <Content Include="scripts\standard-detail.js" />
-    <Content Include="scripts\ui.js" />
-    <Content Include="scripts\validation.js" />
-    <Content Include="scripts\vendor\jquery-cookie.js" />
-    <Content Include="scripts\vendor\jquery.js" />
-    <Content Include="scripts\vendor\modernizr.js" />
+    <Content Include="scripts\app\ui.js" />
+    <Content Include="scripts\app\validation.js" />
+    <Content Include="scripts\vendor\js.cookie-2.1.1.js" />
+    <Content Include="scripts\vendor\js.cookie-2.1.1.min.js" />
+    <Content Include="scripts\vendor\modernizr-3.3.1.min.js" />
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
@@ -552,6 +563,8 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\razorgenerator.directives" />
     <Content Include="Views\Shared\_Analytics.cshtml" />
+    <Content Include="scripts\vendor\js.cookie-2.1.1.min.js.map" />
+    <Content Include="scripts\vendor\jquery-1.12.3.min.map" />
     <None Include="Transform.ServiceConfiguration.Cloud.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -582,7 +595,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_FilterProviders.generated.cs</LastGenOutput>
     </None>
-    <None Include="Views\Start\Cookies.cshtml" />
+    <Content Include="Views\Start\Cookies.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Cookies.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -622,6 +638,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

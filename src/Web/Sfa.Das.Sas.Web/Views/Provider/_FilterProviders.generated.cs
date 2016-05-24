@@ -42,11 +42,11 @@ WriteLiteral("<fieldset");
 
 WriteLiteral(" class=\"filters filters-accordion\"");
 
-WriteLiteral(">\r\n    <h3");
+WriteLiteral(">\r\n    <h2");
 
 WriteLiteral(" class=\"toggler heading-small\"");
 
-WriteLiteral(">Training options</h3>\r\n    <div");
+WriteLiteral(">Training options</h2>\r\n    <div");
 
 WriteLiteral(" class=\"toggled-content\"");
 
