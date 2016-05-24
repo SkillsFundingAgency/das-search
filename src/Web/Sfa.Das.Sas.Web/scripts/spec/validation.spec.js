@@ -1,4 +1,5 @@
-﻿/// <reference path="../app/validation.js"/>
+﻿/// <reference path="../vendor/jquery-1.12.3.min.js"/>
+/// <reference path="../app/validation.js"/>
 
 describe("Postcode validation", function () {
     var runValidation = function(postcode) {
