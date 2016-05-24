@@ -69,12 +69,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel == null)
             {
-                return View((ProviderStandardSearchResultViewModel)null);
-            }
-
-            if (viewModel.ResultsToTake != 0)
-            {
-                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
+                _logger.Warn("ViewModel is null, StandardResults, ProviderController ");
+                return View(new ProviderStandardSearchResultViewModel());
             }
 
             if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
@@ -124,12 +120,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel == null)
             {
-                return View((ProviderFrameworkSearchResultViewModel)null);
-            }
-
-            if (viewModel.ResultsToTake != 0)
-            {
-                viewModel.LastPage = (int)Math.Ceiling((double)viewModel.TotalResults / viewModel.ResultsToTake);
+                _logger.Warn("ViewModel is null, FrameworkResults, ProviderController ");
+                return View(new ProviderFrameworkSearchResultViewModel());
             }
 
             if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())

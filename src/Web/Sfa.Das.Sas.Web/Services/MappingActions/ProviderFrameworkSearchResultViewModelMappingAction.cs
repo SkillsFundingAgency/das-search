@@ -11,6 +11,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
         public void Process(ProviderFrameworkSearchResults source, ProviderFrameworkSearchResultViewModel destination)
         {
             destination.DeliveryModes = ProviderSearchMappingHelper.CreateDeliveryModes(source.TrainingOptionsAggregation, source.SelectedTrainingOptions);
+            destination.LastPage = ProviderSearchMappingHelper.CalculateLastPage(source.TotalResults, source.ResultsToTake);
         }
     }
 }

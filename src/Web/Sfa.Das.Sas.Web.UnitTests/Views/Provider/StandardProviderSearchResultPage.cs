@@ -12,6 +12,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
     [TestFixture]
     public sealed class StandardProviderSearchResultPage : ViewTestBase
     {
+
+        [Test]
+        public void ShouldEmptyModel()
+        {
+            var detail = new StandardSearchResultMessage();
+            var model = new ProviderStandardSearchResultViewModel();
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, "p").Should().Contain("There are currently no providers for the apprenticeship:  covering postcode ''.");
+        }
+
         [Test]
         public void ShouldShowAnErrorWhenSomethingIsWrong()
         {

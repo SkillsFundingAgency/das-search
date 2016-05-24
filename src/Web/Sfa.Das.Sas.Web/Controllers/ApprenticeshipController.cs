@@ -72,6 +72,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel == null)
             {
+                _logger.Warn("ViewModel is null, SearchResults, ApprenticeshipController ");
                 return View(new ApprenticeshipSearchResultViewModel());
             }
 
