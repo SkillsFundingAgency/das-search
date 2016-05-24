@@ -482,6 +482,8 @@
     <Content Include="Content\src\styles\_fontawesome.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
+    <Content Include="scripts\app\cookie-store.js" />
+    <Content Include="scripts\provider-detail.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\app\analytics.js" />
