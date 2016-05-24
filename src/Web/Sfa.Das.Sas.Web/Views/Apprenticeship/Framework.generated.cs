@@ -179,9 +179,8 @@ WriteLiteral(">\r\n                            Enter a full postcode.\r\n       
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral(">\r\n                                This field can\'t be blank\r\n                   " +
-"         </span>\r\n                        </label>\r\n                        <inp" +
-"ut");
+WriteLiteral(">\r\n                                Invalid postcode\r\n                            " +
+"</span>\r\n                        </label>\r\n                        <input");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -191,14 +190,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2063), Tuple.Create("\"", 2089)
+WriteAttribute("value", Tuple.Create(" value=\"", 2054), Tuple.Create("\"", 2080)
             
             #line 50 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 2071), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+                                                , Tuple.Create(Tuple.Create("", 2062), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
             
             #line default
             #line hidden
-, 2071), false)
+, 2062), false)
 );
 
 WriteLiteral(">\r\n                        <input");

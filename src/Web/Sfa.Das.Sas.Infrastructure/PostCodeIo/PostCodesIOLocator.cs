@@ -10,6 +10,9 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+
     public class PostCodesIOLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
@@ -44,6 +47,14 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
                         return coordinates;
                     }
+
+                    var dir = new Dictionary<string, object>
+                                  {
+                                      { "Identifier ", "Postcodes.IO-Fail" },
+                                      { "Postcode", postcode },
+                                      { "Url", sUrl }
+                                  };
+                    _logger.Info($"Failed to make a call to {sUrl}", dir);
 
                     return null;
                 }

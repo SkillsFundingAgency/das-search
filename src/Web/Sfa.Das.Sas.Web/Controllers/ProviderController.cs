@@ -15,7 +15,10 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Text.RegularExpressions;
+
     using Sfa.Das.Sas.Core.Configuration;
+    using Sfa.Das.Sas.Web.Common;
 
     public sealed class ProviderController : Controller
     {
@@ -54,7 +57,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Response.StatusCode = 400;
             }
 
-            if (string.IsNullOrEmpty(criteria?.PostCode))
+            if (string.IsNullOrEmpty(criteria?.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
             {
                 var url = Url.Action(
                     "Standard",
@@ -105,7 +108,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Response.StatusCode = 400;
             }
 
-            if (string.IsNullOrEmpty(criteria?.PostCode))
+            if (string.IsNullOrEmpty(criteria?.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
             {
                 var url = Url.Action(
                     "Framework",
