@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Das.Sas.Web.Models
 {
-    using System.Collections;
     using System.Collections.Generic;
 
     public sealed class ProviderSearchCriteria

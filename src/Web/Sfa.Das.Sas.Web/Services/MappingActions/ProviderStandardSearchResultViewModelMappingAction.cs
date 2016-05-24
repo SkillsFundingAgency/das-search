@@ -1,5 +1,7 @@
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
+    using System;
+
     using AutoMapper;
 
     using Sfa.Das.Sas.ApplicationServices.Models;
@@ -11,6 +13,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
         public void Process(ProviderStandardSearchResults source, ProviderStandardSearchResultViewModel destination)
         {
             destination.DeliveryModes = ProviderSearchMappingHelper.CreateDeliveryModes(source.TrainingOptionsAggregation, source.SelectedTrainingOptions);
+            destination.LastPage = ProviderSearchMappingHelper.CalculateLastPage(source.TotalResults, source.ResultsToTake);
         }
     }
 }
