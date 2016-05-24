@@ -1,4 +1,4 @@
-﻿Feature: STD4_Regression
+﻿Feature: Standard Details View and Provider Selection Regression Tests
 	Whenever I search for the key word Mechatronics maintenance technician
 	I should find the term "Mechatronics maintenance technician" as the first item on the list of search results page
 	When I click the link "Mechatronics maintenance technician"
@@ -10,9 +10,7 @@
 
 @ignore
 Scenario: Find Providers for "Mechatronics maintenance technician"
-	Given I was on the <Search page>
-	When I am on the <Search page> page
-	Then I am on the <Search page> page 	
+	Given I was on the <Search page>		
 	When I enter <data>	
 	| Field      | Value     |
 	| Search Box | Mechatronics maintenance technician |
@@ -30,6 +28,5 @@ Scenario: Find Providers for "Mechatronics maintenance technician"
 	When I choose <First Provider Link>	
 	Then I am on the <Provider Details page> page
 	And I see the Text in table
-	| Field         | Rule   | Value |
-	| Provider Name | Exists | true  |
+	| Field         | Rule   | Value |	
 	| Provider Name | has text | Swindon College  |
