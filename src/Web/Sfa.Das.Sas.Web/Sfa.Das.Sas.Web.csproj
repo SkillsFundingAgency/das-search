@@ -482,11 +482,11 @@
     <Content Include="Content\src\styles\_fontawesome.scss" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
-    <Content Include="scripts\ai.0.15.0-build58334.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\vendor\ai.0.15.0-build58334.js" />
+    <Content Include="scripts\vendor\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\app\analytics.js" />
     <Content Include="scripts\appsettings.js" />
-    <Content Include="scripts\app\js-errors.js" />
+    <Content Include="scripts\js-errors.js" />
     <Content Include="scripts\app\sample.js" />
     <None Include="scripts\vendor\jquery-1.12.3.intellisense.js" />
     <Content Include="scripts\vendor\jquery-1.12.3.js" />
