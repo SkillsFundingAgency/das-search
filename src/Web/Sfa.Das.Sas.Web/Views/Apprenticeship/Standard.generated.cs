@@ -104,8 +104,8 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                        Enter a full
 
 WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n                            This field can\'t be blank\r\n                       " +
-" </span>\r\n                    </label>\r\n                    <input");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                            Invalid postcode\r\n                        </span>\r" +
+"\n                    </label>\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
@@ -113,14 +113,14 @@ WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"text-box form-control\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3797), Tuple.Create("\"", 3822)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3788), Tuple.Create("\"", 3813)
 
 #line 89 "..\..\Views\Apprenticeship\Standard.cshtml"
-                      , Tuple.Create(Tuple.Create("", 3805), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+                      , Tuple.Create(Tuple.Create("", 3796), Tuple.Create<System.Object, System.Int32>(Model.StandardId
 
 #line default
 #line hidden
-, 3805), false)
+, 3796), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <input");
@@ -129,14 +129,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"Inputid\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3881), Tuple.Create("\"", 3897)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3872), Tuple.Create("\"", 3888)
 
 #line 90 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3889), Tuple.Create<System.Object, System.Int32>(inputId
+, Tuple.Create(Tuple.Create("", 3880), Tuple.Create<System.Object, System.Int32>(inputId
 
 #line default
 #line hidden
-, 3889), false)
+, 3880), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "/>\r\n                    <input");
@@ -145,14 +145,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"search\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"PostCode\"");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3958), Tuple.Create("\"", 3983)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3949), Tuple.Create("\"", 3974)
 
 #line 91 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3963), Tuple.Create<System.Object, System.Int32>(searchBoxIdentifier
+, Tuple.Create(Tuple.Create("", 3954), Tuple.Create<System.Object, System.Int32>(searchBoxIdentifier
 
 #line default
 #line hidden
-, 3963), false)
+, 3954), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"text-box form-control postcode-search-box\"");
@@ -229,14 +229,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4469), Tuple.Create("\"", 4477)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4460), Tuple.Create("\"", 4468)
 
 #line 103 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4474), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 4465), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4474), false)
+, 4465), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -281,14 +281,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4655), Tuple.Create("\"", 4669)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4646), Tuple.Create("\"", 4660)
 
 #line 112 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4662), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 4653), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 4662), false)
+, 4653), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");

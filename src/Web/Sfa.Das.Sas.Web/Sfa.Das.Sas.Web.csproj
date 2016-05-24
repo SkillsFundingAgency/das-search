@@ -222,6 +222,7 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Validation.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShortlistController.cs" />
@@ -485,6 +486,7 @@
     <Content Include="scripts\js-errors.js" />
     <Content Include="scripts\app\sample.js" />
     <None Include="scripts\vendor\jquery-1.12.3.intellisense.js" />
+    <Content Include="scripts\spec\validation.spec.js" />
     <Content Include="scripts\vendor\jquery-1.12.3.js" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.js" />
     <Content Include="scripts\spec\sample.spec.js" />
