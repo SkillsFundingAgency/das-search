@@ -71,6 +71,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Features\Standard_Provider_Regression.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standard_Provider_Regression.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Regression_ClickingSteps.cs" />
+    <Compile Include="Steps\OnPageRegressionSteps.cs" />
+    <Compile Include="Steps\EnterRegressionDataSteps.cs" />
+    <Compile Include="Steps\VerifyElements_RegressionSteps.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -94,12 +103,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\Standard_Provider_Regression.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Standard_Provider_Regression.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="Steps\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
