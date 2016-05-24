@@ -236,7 +236,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 75 "..\..\Views\Dashboard\Overview.cshtml"
-                   WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveProvider", "ShortList", new { apprenticeshipId = standard.Id, providerId = provider.Id, locationIdid = provider.LocationId }, new { rel = "nofollow" }));
+                   WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveProvider", "ShortList", new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId }, new { rel = "nofollow" }));
 
 
 #line default
