@@ -68,7 +68,7 @@ namespace Sfa.Das.Sas.Web.Services
                 cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>().AfterMap<StandardProviderResultItemViewModelMappingAction>();
 
                 // Provider detail page
-                cfg.CreateMap<Provider, ProviderViewModel>().AfterMap<ProviderViewModelMappingAction>();
+                cfg.CreateMap<ProviderCourse, ProviderCourseViewModel>().AfterMap<ProviderViewModelMappingAction>();
             });
         }
     }

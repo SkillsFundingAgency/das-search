@@ -1,8 +1,8 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
-(function(cookieHelper) {
+(function(cookieStore) {
 
-    cookieHelper.GetCookie = function (name) {
-        var cookie = new cookieHelper.Cookie(name);
+    cookieStore.GetCookie = function (name) {
+        var cookie = new cookieStore.Cookie(name);
 
         var cookieString = Cookies.get(name);
 
@@ -13,7 +13,7 @@
         return cookie;
     };
 
-    cookieHelper.SaveCookie = function(cookie) 
+    cookieStore.SaveCookie = function(cookie) 
     {
         Cookies.set(cookie.Name,
             cookie.ToString(),
@@ -25,7 +25,7 @@
             });
     }
 
-    cookieHelper.Cookie = function (name)
+    cookieStore.Cookie = function (name)
     {
         this.Name = name;
         this.SubKeys = new Array();
@@ -36,10 +36,11 @@
 
             var subKeyStrings = cookieString.split("&");
 
-            for (var i = 0; i < subKeyStrings.length; i++)
+            for (var index = 0; index < subKeyStrings.length; index++)
             {
-                var subkey = new SubKey(subKeyStrings[i]);
-                this.SubKeys.push(subkey);
+                var subKey = new SubKey();
+                subKey.PopulateFromString(subKeyStrings[index]);
+                this.SubKeys.push(subKey);
             }
         };
 
@@ -67,7 +68,7 @@
         {
             var index = this.SubKeys.findIndex(function (element, index, array)
             {
-                return element.Name === keyName;
+                return element.Key === keyName;
             });
 
             if (index > -1) {
@@ -92,8 +93,9 @@
         {
             var subKeyStrings = new Array();
 
-            for (var i = 0; i < this.SubKeys.length; i++) {
-                subKeyStrings.push(this.SubKeys[i].ToString());
+            for (var index = 0; index < this.SubKeys.length; index++)
+            {
+                subKeyStrings.push(this.SubKeys[index].ToString());
             }
 
             return subKeyStrings.join("&");
@@ -143,5 +145,5 @@
         }
     }
 
-}(SearchAndShortlist.CookieHelper = {}));
+}(SearchAndShortlist.CookieStore = {}));
 

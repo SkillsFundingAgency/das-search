@@ -167,7 +167,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var searchCriteria = new ProviderLocationSearchCriteria();
 
             _mockViewModelFactory.Setup(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()))
-                .Returns((ProviderViewModel)null);
+                .Returns((ProviderCourseViewModel)null);
 
             var controller = new ProviderController(
                 _mockProviderSearchService.Object,
@@ -203,7 +203,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 ProviderId = "3"
             };
 
-            var stubProviderViewModel = new ProviderViewModel
+            var stubProviderViewModel = new ProviderCourseViewModel
             {
                 SearchResultLink = new LinkViewModel
                 {
@@ -260,7 +260,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 ProviderId = "3"
             };
 
-            var stubProviderViewModel = new ProviderViewModel
+            var stubProviderViewModel = new ProviderCourseViewModel
             {
                 SearchResultLink = new LinkViewModel
                 {

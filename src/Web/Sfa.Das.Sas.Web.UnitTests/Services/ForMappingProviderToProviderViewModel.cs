@@ -14,9 +14,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Services
         {
             MappingService mappingService = new MappingService(null);
 
-            var providerResult = new Provider { EmployerSatisfaction = 8.3, LearnerSatisfaction = null };
+            var providerResult = new ProviderCourse { EmployerSatisfaction = 8.3, LearnerSatisfaction = null };
 
-            var viewModel = mappingService.Map<Provider, ProviderViewModel>(providerResult);
+            var viewModel = mappingService.Map<ProviderCourse, ProviderCourseViewModel>(providerResult);
 
             viewModel.EmployerSatisfactionMessage.Should().Be("8.3%");
             viewModel.LearnerSatisfactionMessage.Should().Be("No data available");

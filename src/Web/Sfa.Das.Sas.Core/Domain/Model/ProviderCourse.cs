@@ -2,9 +2,9 @@
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {
-    public sealed class Provider
+    public sealed class ProviderCourse
     {
-        public string Id { get; set; }
+        public string ProviderId { get; set; }
 
         public string UkPrn { get; set; }
 

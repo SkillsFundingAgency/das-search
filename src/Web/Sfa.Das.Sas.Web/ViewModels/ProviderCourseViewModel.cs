@@ -3,7 +3,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class ProviderViewModel
+    public class ProviderCourseViewModel
     {
         public string ProviderId { get; set; }
 

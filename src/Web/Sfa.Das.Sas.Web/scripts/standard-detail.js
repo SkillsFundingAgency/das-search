@@ -3,35 +3,28 @@
 
     standard.CookieName = 'das_shortlist_standards';
 
-    standard.Add = function(id) {
-        var value = Cookies.get(standard.CookieName);
-        if (!value || value.length === 0) {
-            Cookies.set(standard.CookieName, '' + id, { expires: 365, domain: SearchAndShortlist.appsettings.cookieDomain, HttpOnly: SearchAndShortlist.appsettings.cookieSecure, path: '/' });
-        } else {
-            var array = value.split('|');
-            var index = array.indexOf(id);
-            if (index < 0) {
-                array.push(id);
-            }
-            Cookies.set(standard.CookieName, array.join('|'), { expires: 365, domain: SearchAndShortlist.appsettings.cookieDomain, HttpOnly: SearchAndShortlist.appsettings.cookieSecure, path: '/' });
+    standard.Add = function (id) {
+        var cookie = SearchAndShortlist.CookieStore.GetCookie(standard.CookieName);
+
+        if (cookie) {
+            cookie.AddSubKey(id);
+            SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     };
 
     standard.Remove = function (id) {
-        var value = Cookies.get(standard.CookieName);
-        if (value && value.length !== 0) {
-            var array = value.split('|');
-            var index = array.indexOf(id);
-            if (index >= 0) {
-                array.splice(index, 1);
-            }
-            Cookies.set(standard.CookieName, array.join('|'), { expires: 365, domain: SearchAndShortlist.appsettings.cookieDomain, HttpOnly: SearchAndShortlist.appsettings.cookieSecure, path: '/' });
+        var cookie = SearchAndShortlist.CookieStore.GetCookie(standard.CookieName);
+
+        if (cookie) {
+            cookie.RemoveSubKey(id);
+            SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     }
 
 
     standard.init = function () {
-        $('.shortlist-link').on('click', function (e) {
+        $('.standard-shortlist-link').on('click', function (e) {
+            e.preventDefault();
             var $this = $(this);
             if ($this.attr('data-action') === 'add') {
                 standard.Add($(this).attr('data-standard'));
@@ -42,7 +35,7 @@
                 $('.shortlist-link').attr('data-action', 'add');
                 $('.shortlist-link').html('Shortlist apprenticeship');
             };
-            e.preventDefault();
+           
         });
     };
 

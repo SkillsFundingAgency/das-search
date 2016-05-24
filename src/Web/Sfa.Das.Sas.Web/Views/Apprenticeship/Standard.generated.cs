@@ -339,14 +339,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line 123 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", 
             new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
-            new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" }));
+            new {@class= "link shortlist-link standard-shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" }));
 
 
 #line default
 #line hidden
 
 #line 125 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                             
+                                                                                                                                     
     }
     else
     {
@@ -358,14 +358,14 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveS
 #line 129 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", 
             new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
-            new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" }));
+            new { @class = "link shortlist-link standard-shortlist-link", rel="nofollow", data_standard = id, data_action = "add" }));
 
 
 #line default
 #line hidden
 
 #line 131 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                            
+                                                                                                                                    
     }
 
 
