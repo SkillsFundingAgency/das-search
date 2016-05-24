@@ -14,6 +14,10 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/app/*.js",
                 "~/scripts/standard-detail.js",
                 "~/scripts/appsettings.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/header").Include(
+                "~/scripts/app/js-errors.js",
+                "~/scripts/vendor/modernizr-*.min.js"));
         }
     }
 }
