@@ -12,7 +12,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
     [TestFixture]
     public sealed class StandardProviderSearchResultPage : ViewTestBase
     {
-
         [Test]
         public void ShouldEmptyModel()
         {
