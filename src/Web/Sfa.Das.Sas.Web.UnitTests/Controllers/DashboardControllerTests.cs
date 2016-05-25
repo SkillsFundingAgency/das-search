@@ -9,6 +9,7 @@ using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Factories;
+using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 using Assert = NUnit.Framework.Assert;
 
@@ -50,27 +51,32 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.GetDashboardViewModel(It.IsAny<ICollection<ShortlistStandardViewModel>>()))
                 .Returns(_mockDashboardViewModel.Object);
         }
-        /*
+
         [Test]
         public void ShouldAddStandardViewModelsToView()
         {
             // Assign
             var standardId = 3;
-
             _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
-                                .Returns(new[] { standardId });
-            _mockGetStandards.Setup(x => x.GetStandardsByIds(It.IsAny<IEnumerable<int>>()))
-                             .Returns(new List<Standard>() { new Standard() { StandardId = standardId } });
-
+                                .Returns(new[]
+                                {
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 45, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = standardId, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersIdAndLocation = new List<ShortlistedProvider>() }
+                                });
+            _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
+                             .Returns(new Standard() { StandardId = standardId });
+            _mockShortlistStandardViewModelFactory.Setup(x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(It.IsAny<ShortlistStandardViewModel>());
             // Act
             var result = _sut.Overview() as ViewResult;
 
             // Assert
             Assert.AreEqual(_mockDashboardViewModel.Object, result?.Model);
             _mockListCollection.Verify(x => x.GetAllItems(Constants.StandardsShortListCookieName));
-            _mockGetStandards.Verify(x => x.GetStandardsByIds(It.IsAny<IEnumerable<int>>()));
+            _mockGetStandards.Verify(x => x.GetStandardById(It.IsAny<int>()));
             _mockShortlistStandardViewModelFactory.Verify(
-                 x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()), Times.Once);
+                 x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()), Times.Exactly(3));
 
             _mockDashboardViewModelFactory.Verify(
                 x => x.GetDashboardViewModel(It.IsAny<ICollection<ShortlistStandardViewModel>>()), Times.Once);
@@ -82,10 +88,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             // Assign
             var standardId = 3;
             _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
-                                .Returns(new[] { 45, standardId, 83 });
+                                .Returns(new[]
+                                {
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 45, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = standardId, ProvidersIdAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersIdAndLocation = new List<ShortlistedProvider>() }
+                                });
 
-            _mockGetStandards.Setup(x => x.GetStandardsByIds(It.IsAny<IEnumerable<int>>()))
-                             .Returns(new List<Standard>() { new Standard() { StandardId = standardId } });
+            _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
+                             .Returns(new Standard() { StandardId = standardId });
 
             _mockShortlistStandardViewModelFactory.Setup(
                 x => x.GetShortlistStandardViewModel(standardId, It.IsAny<string>(), It.IsAny<int>()));
@@ -111,6 +122,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             _mockShortlistStandardViewModelFactory.Verify(
                 x => x.GetShortlistStandardViewModel(83, It.IsAny<string>(), It.IsAny<int>()), Times.Never());
-        }*/
+        }
     }
 }

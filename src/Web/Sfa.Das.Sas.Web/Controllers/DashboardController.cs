@@ -40,20 +40,26 @@ namespace Sfa.Das.Sas.Web.Controllers
             foreach (var shortlistedStandard in shortListStandards)
             {
                 var standard = _getStandards.GetStandardById(shortlistedStandard.ApprenticeshipId);
-                var shortlistedStandardElement = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(standard.StandardId, standard.Title, standard.NotionalEndLevel);
+                if (standard != null)
+                {
+                    var shortlistedStandardElement = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(standard.StandardId, standard.Title, standard.NotionalEndLevel);
 
-                foreach (var shortlistedProvider in from provider in shortlistedStandard.ProvidersIdAndLocation select _apprenticeshipProviderRepository.GetCourseByStandardCode(provider.ProviderId, provider.LocationId.ToString(), shortlistedStandard.ApprenticeshipId.ToString()) into p where p != null select new ShortlistProviderViewModel
-                {
-                    Id = p.UkPrn,
-                    Name = p.Name,
-                    LocationId = p.Location.LocationId,
-                    Address = p.Address
-                })
-                {
-                    shortlistedStandardElement.Providers.Add(shortlistedProvider);
+                    foreach (var shortlistedProvider in from provider in shortlistedStandard.ProvidersIdAndLocation
+                                                        select _apprenticeshipProviderRepository.GetCourseByStandardCode(provider.ProviderId, provider.LocationId.ToString(), shortlistedStandard.ApprenticeshipId.ToString()) into p
+                                                        where p != null
+                                                        select new ShortlistProviderViewModel
+                                                        {
+                                                            Id = p.UkPrn,
+                                                            Name = p.Name,
+                                                            LocationId = p.Location.LocationId,
+                                                            Address = p.Address
+                                                        })
+                    {
+                        shortlistedStandardElement.Providers.Add(shortlistedProvider);
+                    }
+
+                    standards.Add(shortlistedStandardElement);
                 }
-
-                standards.Add(shortlistedStandardElement);
             }
 
             var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(standards.ToList());
