@@ -52,6 +52,11 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             SendLog(msg, LogLevel.Warn);
         }
 
+        public void Error(string msg, Dictionary<string, object> properties)
+        {
+            SendLog(msg, LogLevel.Error, properties);
+        }
+
         public void Error(Exception ex, string msg)
         {
             SendLog(msg, LogLevel.Error, ex);
