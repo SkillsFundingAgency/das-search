@@ -5,9 +5,8 @@
       <ThinkProfile Value="0.2" Pattern="NormalDistribution" />
       <LoadProfile Pattern="Step" InitialUsers="5" MaxUsers="50" StepUsers="5" StepDuration="60" StepRampTime="0" />
       <TestMix>
-        <TestProfile Name="E2E" Path="e2e.webtest" Id="87a51e1c-e804-4c63-bf77-8e9aff205ae1" Percentage="41" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-        <TestProfile Name="ViewStandard" Path="viewstandard.webtest" Id="57cc366f-a430-4773-a954-21cff8957f47" Percentage="40" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-        <TestProfile Name="ShortlistingStandard" Path="shortlistingstandard.webtest" Id="a002d53d-ab59-455e-b3a8-bde514bd730a" Percentage="19" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="E2E" Path="e2e.webtest" Id="87a51e1c-e804-4c63-bf77-8e9aff205ae1" Percentage="69" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="ViewStandard" Path="viewstandard.webtest" Id="57cc366f-a430-4773-a954-21cff8957f47" Percentage="31" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
       </TestMix>
       <BrowserMix>
         <BrowserProfile Percentage="100">

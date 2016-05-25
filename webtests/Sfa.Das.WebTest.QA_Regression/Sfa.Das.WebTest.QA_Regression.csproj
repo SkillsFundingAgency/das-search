@@ -76,7 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Standard_Provider_Regression.feature</DependentUpon>
     </Compile>
-    <Compile Include="Regression_ClickingSteps.cs" />
+    <Compile Include="Steps\Regression_ClickingSteps.cs" />
     <Compile Include="Steps\OnPageRegressionSteps.cs" />
     <Compile Include="Steps\EnterRegressionDataSteps.cs" />
     <Compile Include="Steps\VerifyElements_RegressionSteps.cs" />
