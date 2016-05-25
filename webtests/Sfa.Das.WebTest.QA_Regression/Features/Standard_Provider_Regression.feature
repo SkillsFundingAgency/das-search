@@ -8,7 +8,7 @@
 	The provider details shown on the provider details page should match the API 
 	
 
-@ignore
+@RegressionTests
 Scenario: Find Providers for "Mechatronics maintenance technician"
 	Given I was on the <Search page>		
 	When I enter <data>	
