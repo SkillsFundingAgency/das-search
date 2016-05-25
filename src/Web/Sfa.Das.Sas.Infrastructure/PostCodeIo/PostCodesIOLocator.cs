@@ -12,30 +12,35 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
     using System.Collections.Generic;
 
-    public class PostCodesIoLocator : ILookupLocations
+    using Core.Configuration;
+
+    public class PostCodesIOLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
 
         private readonly IProfileAStep _profiler;
+        private readonly IConfigurationSettings _applicationSettings;
 
-        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler)
+        public PostCodesIOLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler, IConfigurationSettings applicationSettings)
+
         {
             _retryService = retryService;
             _logger = logger;
             _profiler = profiler;
+            _applicationSettings = applicationSettings;
         }
 
         public async Task<Coordinate> GetLatLongFromPostCode(string postcode)
         {
             var coordinates = new Coordinate();
-            var sUrl = "http://api.postcodes.io/postcodes/" + postcode.Replace(" ", string.Empty);
+            var uri = new Uri(_applicationSettings.PostcodeUrl, postcode.Replace(" ", string.Empty));
 
             try
             {
                 using (_profiler.CreateStep("Postcode.IO lookup"))
                 {
-                    var response = await _retryService.RetryWeb(() => MakeRequestAsync(sUrl), CouldntConnect);
+                    var response = await _retryService.RetryWeb(() => MakeRequestAsync(uri.ToString()), CouldntConnect);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -51,10 +56,9 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                                   {
                                       { "Identifier ", "Postcodes.IO-Fail" },
                                       { "Postcode", postcode },
-                                      { "Url", sUrl }
+                                      { "Url", uri.ToString() }
                                   };
-
-                    _logger.Info($"Failed to make a call to {sUrl}", dir);
+                    _logger.Info($"Failed to make a call to {uri}", dir);
 
                     return null;
                 }
