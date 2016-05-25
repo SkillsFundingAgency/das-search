@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<ILookupLocations>().Use<PostCodesIOLocator>();
+            For<ILookupLocations>().Use<PostCodesIoLocator>();
             For<IGetStandards>().Use<StandardRepository>();
             For<IGetFrameworks>().Use<FrameworkRepository>();
             For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();

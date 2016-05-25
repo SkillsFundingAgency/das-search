@@ -11,16 +11,15 @@ using Sfa.Das.Sas.Core.Logging;
 namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
 
-    public class PostCodesIOLocator : ILookupLocations
+    public class PostCodesIoLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
 
         private readonly IProfileAStep _profiler;
 
-        public PostCodesIOLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler)
+        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler)
         {
             _retryService = retryService;
             _logger = logger;
@@ -54,6 +53,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                                       { "Postcode", postcode },
                                       { "Url", sUrl }
                                   };
+
                     _logger.Info($"Failed to make a call to {sUrl}", dir);
 
                     return null;

@@ -111,7 +111,7 @@
     <Compile Include="Mapping\StandardMapping.cs" />
     <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="MiniProfiler\MiniProfilerWrapper.cs" />
-    <Compile Include="PostCodeIo\PostCodesIOLocator.cs" />
+    <Compile Include="PostCodeIo\PostCodesIoLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\CookieSettings.cs" />
     <Compile Include="WebRequestRetryService.cs" />
