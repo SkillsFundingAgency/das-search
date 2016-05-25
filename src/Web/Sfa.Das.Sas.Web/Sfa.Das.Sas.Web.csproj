@@ -238,6 +238,8 @@
     <Compile Include="Factories\ShortlistStandardViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
+    <Compile Include="Services\CookieService.cs" />
+    <Compile Include="Services\ICookieService.cs" />
     <Compile Include="Services\MappingActions\ProviderFrameworkSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\ProviderSearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ProviderStandardSearchResultViewModelMappingAction.cs" />
@@ -280,6 +282,7 @@
     <Compile Include="Services\MappingActions\StandardProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
     <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
@@ -488,7 +491,6 @@
     <Content Include="scripts\vendor\jquery-1.12.3.js" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.js" />
     <Content Include="scripts\spec\sample.spec.js" />
-    <Content Include="scripts\app\cookie-banner.js" />
     <Content Include="scripts\standard-detail.js" />
     <Content Include="scripts\app\ui.js" />
     <Content Include="scripts\app\validation.js" />

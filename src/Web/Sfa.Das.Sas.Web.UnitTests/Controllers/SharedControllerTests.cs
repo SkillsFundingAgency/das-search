@@ -8,6 +8,9 @@ using Sfa.Das.Sas.Web.Controllers;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 {
+    using Sfa.Das.Sas.Web.Services;
+    using Sfa.Das.Sas.Web.ViewModels;
+
     [TestFixture]
     public class SharedControllerTests
     {
@@ -16,8 +19,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             const string SurveyUrl = "http://test.com/";
             var mockSettings = new Mock<IConfigurationSettings>();
+            var mockCookieService = new Mock<ICookieService>();
             mockSettings.SetupGet(x => x.SurveyUrl).Returns(new Uri(SurveyUrl));
-            var controller = new SharedController(mockSettings.Object);
+            var controller = new SharedController(mockSettings.Object, mockCookieService.Object);
 
             var result = controller.Footer();
 
@@ -29,8 +33,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             const string SurveyUrl = "http://test.com/";
             var mockSettings = new Mock<IConfigurationSettings>();
+            var mockCookieService = new Mock<ICookieService>();
             mockSettings.SetupGet(x => x.SurveyUrl).Returns(new Uri(SurveyUrl));
-            var controller = new SharedController(mockSettings.Object);
+            var controller = new SharedController(mockSettings.Object, mockCookieService.Object);
 
             var result = controller.Footer();
 
@@ -42,12 +47,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         {
             const string SurveyUrl = "http://test.com/";
             var mockSettings = new Mock<IConfigurationSettings>();
+            var mockCookieService = new Mock<ICookieService>();
             mockSettings.SetupGet(x => x.SurveyUrl).Returns(new Uri(SurveyUrl));
-            var controller = new SharedController(mockSettings.Object);
+            var controller = new SharedController(mockSettings.Object, mockCookieService.Object);
 
             var result = controller.Header();
 
-            result.Should().BePartialViewResult().Model.Should().Be(SurveyUrl);
+            result.Should().BePartialViewResult();
+            var viewModel = (HeaderViewModel)result.Model;
+            viewModel.SurveyUrl.Should().Be(SurveyUrl);
         }
     }
 }
