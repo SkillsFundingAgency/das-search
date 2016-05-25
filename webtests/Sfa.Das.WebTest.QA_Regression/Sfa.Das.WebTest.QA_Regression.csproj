@@ -83,10 +83,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Das.WebTest.AcceptanceTests\Sfa.Das.WebTest.AcceptanceTests.csproj">
-      <Project>{bc130919-122a-45e1-a081-13348bd37e0d}</Project>
-      <Name>Sfa.Das.WebTest.AcceptanceTests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.WebTest.E2E\Sfa.Das.WebTest.E2E.csproj">
       <Project>{749977ea-1b1c-4fcf-a8e8-22bf73445742}</Project>
       <Name>Sfa.Das.WebTest.E2E</Name>
