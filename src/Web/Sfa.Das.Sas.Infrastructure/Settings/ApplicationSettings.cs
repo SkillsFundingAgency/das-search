@@ -19,6 +19,8 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri SurveyUrl => new Uri(ConfigurationManager.AppSettings["SurveyUrl"]);
 
+        public string CookieInfoBannerCookieName => ConfigurationManager.AppSettings["CookieInfoBannerCookieName"];
+
         public Uri PostcodeUrl => new Uri(ConfigurationManager.AppSettings["PostcodeUrl"]);
 
         private IEnumerable<Uri> GetElasticSearchIps()

@@ -10,6 +10,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
         public SearchRegistry()
         {
             For<IMappingService>().Use<MappingService>();
+            For<ICookieService>().Use<CookieService>();
             For<IProviderViewModelFactory>().Use<ProviderViewModelFactory>();
             For<IListCollection<int>>().Use<CookieListCollection>();
 
