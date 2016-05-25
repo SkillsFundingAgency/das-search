@@ -10,6 +10,6 @@
 
     appsettings.cookieDomain = undefinedIfTemplate("#{cookie.domain}") || "localhost";
 
-    appsettings.cookieSecure = undefinedIfTemplate("#{cookie.secure}") || "false";
+    appsettings.cookieSecure = undefinedIfTemplate("#{cookie.secure}") || false;
 
 }(SearchAndShortlist.appsettings = {}));
