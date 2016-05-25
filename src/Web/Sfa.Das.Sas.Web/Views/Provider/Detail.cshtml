@@ -232,7 +232,7 @@
 {
     if (isShortlisted)
     {
-        @Html.ActionLink("Remove from shortlist", "RemoveProvider", "ShortList",
+        @Html.ActionLink("Remove this training provider", "RemoveProvider", "ShortList",
             new { apprenticeshipId, providerId, locationId },
             new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
                 data_apprenticeship = apprenticeshipId, data_provider = providerId, data_location = locationId,
@@ -240,7 +240,7 @@
     }
     else
     {
-        @Html.ActionLink("Shortlist provider", "AddProvider", "ShortList",
+        @Html.ActionLink("Shortlist this training provider", "AddProvider", "ShortList",
             new { apprenticeshipId, providerId, locationId },
             new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
                 data_apprenticeship= apprenticeshipId, data_provider = providerId, data_location = locationId,
