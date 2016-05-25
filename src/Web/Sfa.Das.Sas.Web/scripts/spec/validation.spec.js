@@ -3,11 +3,11 @@
 
 describe("Postcode validation", function () {
     var runValidation = function(postcode) {
-        expect(SearchAndShortlist.validation.ValidatePostcode(postcode)).toBe(true, "For postcode: " + postcode);
+        expect(SearchAndShortlist.validation.validatePostcode(postcode)).toBe(true, "For postcode: " + postcode);
     }
 
     var runNotValidation = function (postcode) {
-        expect(SearchAndShortlist.validation.ValidatePostcode(postcode)).not.toBe(true, "For postcode: " + postcode);
+        expect(SearchAndShortlist.validation.validatePostcode(postcode)).not.toBe(true, "For postcode: " + postcode);
     }
 
     it("Validates correct postcodes", function () {

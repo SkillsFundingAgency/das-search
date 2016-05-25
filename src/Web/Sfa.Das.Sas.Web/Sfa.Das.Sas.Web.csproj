@@ -483,6 +483,7 @@
     <Content Include="Content\src\styles\custom-elements\_results.scss" />
     <Content Include="Content\favicons\manifest.json" />
     <Content Include="Content\src\styles\_fontawesome.scss" />
+    <Content Include="JSLintNet.json" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
     <Content Include="scripts\app\cookie-store.js" />
