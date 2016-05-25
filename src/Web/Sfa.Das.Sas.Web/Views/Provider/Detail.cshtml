@@ -18,11 +18,9 @@
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
-                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
-
             </div>
 
 
@@ -58,7 +56,9 @@
                 </article>
             </section>
 
-
+            <div>
+                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+            </div>
 
             <div class="survey-panel">
                 <h2 class="bold-large">
@@ -81,7 +81,11 @@
 
 
         <div class="column-third">
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            <div class="hidden-for-mobile">
+                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+            </div>
+
+            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
             {
                 <div class="related-container">
                     <aside class="related">
@@ -89,7 +93,6 @@
                             Training provider quality assessment
                         </h2>
                         @GetSatisfactionsHtml()
-                        @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
                     </aside>
                 </div>
             }
@@ -100,23 +103,23 @@
 
 @helper ShowTrainingLocation(string title)
 {
-if (@Model != null)
-{
-        <dt class="training-location-title">@title</dt>
+    if (@Model != null)
+    {
+            <dt class="training-location-title">@title</dt>
 
-    if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
-    {
-        <dd id="training-location" class="training-location">
-            Training takes place at your location
-        </dd>
+        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+        {
+            <dd id="training-location" class="training-location">
+                Training takes place at your location
+            </dd>
+        }
+        else
+        {
+            <dd id="training-location" class="training-location">
+                @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Town @Model.Address.County @Model.Address.Postcode
+            </dd>
+        }
     }
-    else
-    {
-        <dd id="training-location" class="training-location">
-            @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Town @Model.Address.County @Model.Address.Postcode
-        </dd>
-    }
-}
 }
 
 @helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
@@ -130,11 +133,11 @@ if (@Model != null)
 
 @helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-        <dt class="email-title">@title</dt>
-        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
-}
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+            <dt class="email-title">@title</dt>
+            <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+    }
 }
 
 @helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
