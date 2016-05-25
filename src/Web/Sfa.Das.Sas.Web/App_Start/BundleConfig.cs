@@ -13,8 +13,7 @@ namespace Sfa.Das.Sas.Web
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/scripts/appsettings.js",
                 "~/scripts/app/*.js",
-                "~/scripts/standard-detail.js"
-                ));
+                "~/scripts/standard-detail.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
                 "~/scripts/app/js-errors.js",
