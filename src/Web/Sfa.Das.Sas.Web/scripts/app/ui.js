@@ -1,5 +1,4 @@
-﻿
-var SearchAndShortlist = SearchAndShortlist || {};
+﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function ( ui ) {
 
     ui.init = function () {
