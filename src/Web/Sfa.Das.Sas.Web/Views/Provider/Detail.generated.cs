@@ -821,7 +821,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 
 #line 235 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveProvider", "ShortList",
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove this training provider", "RemoveProvider", "ShortList",
             new { apprenticeshipId, providerId, locationId },
             new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
                 data_apprenticeship = apprenticeshipId, data_provider = providerId, data_location = locationId,
@@ -842,7 +842,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveP
 #line hidden
 
 #line 243 "..\..\Views\Provider\Detail.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist provider", "AddProvider", "ShortList",
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider", "AddProvider", "ShortList",
             new { apprenticeshipId, providerId, locationId },
             new {@class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
                 data_apprenticeship= apprenticeshipId, data_provider = providerId, data_location = locationId,

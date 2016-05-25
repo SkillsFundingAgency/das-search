@@ -40,7 +40,7 @@
                     $(this).attr('data-location'));
 
                 $('.provider-shortlist-link').attr('data-action', 'remove');
-                $('.provider-shortlist-link').html('Remove from shortlist');
+                $('.provider-shortlist-link').html('Remove this training provider');
             }
             else if ($this.attr('data-action') === 'remove')
             {
@@ -50,9 +50,8 @@
                     $(this).attr('data-location'));
 
                 $('.provider-shortlist-link').attr('data-action', 'add');
-                $('.provider-shortlist-link').html('Shortlist provider');
+                $('.provider-shortlist-link').html('Shortlist this training provider');
             };
-            
         });
     };
 
