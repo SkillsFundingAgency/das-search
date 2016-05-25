@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
     using Core.Configuration;
 
-    public class PostCodesIOLocator : ILookupLocations
+    public class PostCodesIoLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
         private readonly IProfileAStep _profiler;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public PostCodesIOLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler, IConfigurationSettings applicationSettings)
+        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler, IConfigurationSettings applicationSettings)
 
         {
             _retryService = retryService;
@@ -58,7 +58,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                                       { "Postcode", postcode },
                                       { "Url", uri.ToString() }
                                   };
-                    _logger.Info($"Failed to make a call to {uri}", dir);
+                    _logger.Error($"Failed to make a call to {uri}", dir);
 
                     return null;
                 }

@@ -17,6 +17,8 @@ namespace Sfa.Das.Sas.Core.Logging
 
         void Error(Exception ex, string msg);
 
+        void Error(string msg, Dictionary<string, object> properties);
+
         void Fatal(Exception ex, string msg);
     }
 }
