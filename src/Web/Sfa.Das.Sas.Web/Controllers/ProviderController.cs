@@ -157,7 +157,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detail(ProviderLocationSearchCriteria criteria)
+        public ActionResult Detail(ProviderLocationSearchCriteria criteria, string linkUrl)
         {
             var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);
 
@@ -171,17 +171,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.SurveyUrl = _settings.SurveyUrl.ToString();
 
-            if (viewModel.Training == ApprenticeshipTrainingType.Standard)
-            {
-                    viewModel.SearchResultLink =
-                        Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("Search", "Apprenticeship"));
-            }
-
-            if (viewModel.Training == ApprenticeshipTrainingType.Framework)
-            {
-                viewModel.SearchResultLink =
-                        Request.UrlReferrer.GetProviderSearchResultBackUrl(Url.Action("Search", "Apprenticeship"));
-            }
+            viewModel.SearchResultLink = GetPreviousPageLinkViewModel(linkUrl);
 
             viewModel.ProviderId = criteria.ProviderId;
 
@@ -195,6 +185,33 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             return View(viewModel);
+        }
+
+        private LinkViewModel GetPreviousPageLinkViewModel(string linkUrl)
+        {
+            if (linkUrl != null)
+            {
+                return new LinkViewModel
+                {
+                    Title = "Back",
+                    Url = linkUrl
+                };
+            }
+
+            if (!string.IsNullOrWhiteSpace(Request?.UrlReferrer?.OriginalString))
+            {
+                return new LinkViewModel
+                {
+                    Title = "Back",
+                    Url = Request.UrlReferrer.OriginalString
+                };
+            }
+
+            return new LinkViewModel
+            {
+                Title = "Back to search page",
+                Url = Url.Action("Search", "Apprenticeship")
+            };
         }
     }
 }

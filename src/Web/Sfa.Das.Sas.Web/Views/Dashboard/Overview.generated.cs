@@ -230,7 +230,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                </td>\r\n            
 
 
 #line 77 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveProvider", "ShortList",
+WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList",
                                                 new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId },
                                                 new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" }));
 

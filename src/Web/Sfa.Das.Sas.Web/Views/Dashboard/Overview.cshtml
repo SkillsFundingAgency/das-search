@@ -74,9 +74,10 @@
                     @Html.ActionLink(provider.Name, "Detail", "Provider", new {providerId = provider.Id, locationId = provider.LocationId, standardCode = standard.Id}, null)
                     @providerAddress
                 </td>
-                <td>@Html.ActionLink("Delete", "RemoveProvider", "ShortList",
-                                                new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId },
-                                                new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" })</td>
+                <td>
+                    @Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList",
+                        new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId },
+                        new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" })</td>
             </tr>
         }
 }

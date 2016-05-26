@@ -177,7 +177,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 _configurationSettings,
                 null);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria, string.Empty);
 
             result.Should().BeOfType<HttpNotFoundResult>();
 
@@ -235,7 +235,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             controller.Url = urlHelperMock.Object;
             controller.ControllerContext = new ControllerContext(httpContextMock.Object, new RouteData(), controller);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria, string.Empty);
 
             result.Should().BeOfType<ViewResult>();
 
@@ -292,7 +292,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             controller.Url = urlHelperMock.Object;
             controller.ControllerContext = new ControllerContext(httpContextMock.Object, new RouteData(), controller);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria, string.Empty);
 
             result.Should().BeOfType<ViewResult>();
 

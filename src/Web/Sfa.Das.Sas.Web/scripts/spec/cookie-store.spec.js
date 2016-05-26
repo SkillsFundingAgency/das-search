@@ -1,5 +1,5 @@
-﻿/// <reference path="../app/cookie-store.js"/>
-
+﻿/// <reference path="../polyfills/Array.js"/>
+/// <reference path="../app/cookie-store.js"/>
 
 describe("Cookie Store Unit tests",
     function () {
@@ -127,8 +127,4 @@ describe("Cookie Store Unit tests",
        //Assert
        expect(cookieString).toBe("2=C");
    });
-
-
-
-
 });

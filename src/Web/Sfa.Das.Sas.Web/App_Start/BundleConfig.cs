@@ -11,6 +11,7 @@ namespace Sfa.Das.Sas.Web
                       "~/Content/dist/css/screen.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/scripts/polyfills/*.js",
                 "~/scripts/appsettings.js",
                 "~/scripts/app/*.js",
                 "~/scripts/pages/*.js"

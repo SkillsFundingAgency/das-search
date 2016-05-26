@@ -19,7 +19,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44391</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -485,6 +485,7 @@
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
     <Content Include="scripts\app\cookie-store.js" />
+    <Content Include="scripts\polyfills\Array.js" />
     <Content Include="scripts\pages\dashboard-overview.js" />
     <Content Include="scripts\pages\provider-detail.js" />
     <Content Include="scripts\spec\cookie-store.spec.js" />
