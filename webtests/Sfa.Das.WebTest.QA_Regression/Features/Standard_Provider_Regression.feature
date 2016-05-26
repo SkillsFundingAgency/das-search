@@ -5,7 +5,7 @@
 	A details page should display with details matching the meta data for Mechatronics maintenance technician
 	A search for providers in "SN2 1DY" should show the appropriate providers based on postcode listed by distance 
 	When I click the "Swindon College" link
-	The provider details shown on the provider details page should match the API 
+	The provider details shown on the provider details page should match the API details for this provider
 	
 
 @RegressionTests
