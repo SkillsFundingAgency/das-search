@@ -17,6 +17,10 @@
 @import "partials/_related";
 
 //TODO: Give the following rogue styles a logical home
+strong {
+  font-weight: bold;
+}
+
 main {
   min-height:450px;
 }
@@ -27,6 +31,20 @@ main {
 
 aside h2:first-child {
   margin-top: 15px;
+}
+
+.postcode-form {
+    background-color: #DEE0E2;
+    padding: 20px;
+    .heading-group{
+        h2{
+            margin: 0;
+        }
+        margin: 0 0 20px;
+    }
+    label {
+        margin: 0 0 20px;
+    }
 }
 
 .postcode-form input[type="search"]{

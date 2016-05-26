@@ -7,9 +7,6 @@
     [PageNavigation("/apprenticeship/framework")]
     public class FrameworkDetailsPage : SharedTemplatePage
     {
-        public By PostcodeSearchBox => By.Id("postcode");
-
-        public By SearchButton => By.Id("submit-postcode");
-
+        public By SearchPageButton => By.CssSelector("a.button");
     }
 }

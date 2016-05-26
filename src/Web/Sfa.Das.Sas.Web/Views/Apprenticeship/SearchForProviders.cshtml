@@ -1,0 +1,54 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel
+@using Sfa.Das.Sas.Web.Extensions
+@{
+    ViewBag.Title = "Search for providers";
+}
+
+
+<main id="content">
+
+    <p class="small-btm-margin">
+        @Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back")
+    </p>
+
+    <div>
+        <h1 class="heading-xlarge">
+            Find an apprenticeship training provider
+        </h1>
+    </div>
+
+    <div class="grid-row">
+        
+            <div class="column-two-thirds">
+                <p class="lede">
+                    Find training providers for apprenticeship: <strong>@Model.Title</strong>
+                </p>
+                <p>
+                    Use this service to find a training provider for where your apprentice will be working.
+                </p>
+
+                <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
+                    <div class="heading-group">
+                        <h2 class="heading-medium">
+                            Enter a postcode
+                        </h2>
+                        <p>eg SW1A 2AA</p>
+                    </div>
+
+                    <div class="form-elements @(Model.HasError ? " error" : "")">
+                        <label class="form-label" for="search-box">
+                            We need <strong>full</strong> postcode to find the closest training providers to you.
+                            <span class="error-message">
+                                This field can't be blank
+                            </span>
+                        </label>
+                        <div class="form-group">
+                            <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
+                            <input type="search" name="PostCode" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                        </div>
+                        <input class="button margin-top-x2 postcode-search-button" type="submit" value="Find">
+                    </div>
+                </form>
+        </div>
+    </div>
+</main>

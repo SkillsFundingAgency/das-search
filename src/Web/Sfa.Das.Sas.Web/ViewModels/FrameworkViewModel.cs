@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class FrameworkViewModel : IHasError
+    public class FrameworkViewModel
     {
         public int FrameworkId { get; set; }
 
@@ -17,7 +17,6 @@
         public int Level { get; set; }
 
         // Page specific
-        public bool HasError { get; set; }
 
         public LinkViewModel SearchResultLink { get; set; }
     }

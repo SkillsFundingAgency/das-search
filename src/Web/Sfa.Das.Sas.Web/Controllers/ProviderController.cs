@@ -52,11 +52,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             if (string.IsNullOrEmpty(criteria?.PostCode))
             {
                 var url = Url.Action(
-                    "Standard",
+                    "SearchForProviders",
                     "Apprenticeship",
-                    new { id = criteria?.ApprenticeshipId, HasError = true });
-                var anchor = string.IsNullOrEmpty(criteria?.InputId) ? string.Empty : $"#{criteria.InputId}";
-                return new RedirectResult($"{url}{anchor}");
+                    new { HasError = true, standardId = criteria?.ApprenticeshipId } );
+                return new RedirectResult(url);
             }
 
             criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
@@ -105,9 +104,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                 var url = Url.Action(
                     "Framework",
                     "Apprenticeship",
-                    new { id = criteria?.ApprenticeshipId, HasError = true });
-                var anchor = string.IsNullOrEmpty(criteria?.InputId) ? string.Empty : $"#{criteria.InputId}";
-                return new RedirectResult($"{url}{anchor}");
+                    new { HasError = true, frameworkId = criteria?.ApprenticeshipId } );
+                return new RedirectResult(url);
             }
 
             criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;

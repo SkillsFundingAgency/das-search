@@ -16,7 +16,12 @@ using RedirectResult = System.Web.Mvc.RedirectResult;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Web;
     using System.Web.Routing;
+
+    using Sfa.Das.Sas.Web.Factories;
 
     public sealed class ApprenticeshipController : Controller
     {
@@ -24,6 +29,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private readonly IMappingService _mappingService;
         private readonly IListCollection<int> _listCollection;
+
+        private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
 
         private readonly IProfileAStep _profiler;
 
@@ -37,7 +44,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             ILog logger,
             IMappingService mappingService,
             IProfileAStep profiler,
-            IListCollection<int> listCollection)
+            IListCollection<int> listCollection,
+            IApprenticeshipViewModelFactory apprenticeshipViewModelFactory)
         {
             _searchService = searchService;
             _getStandards = getStandards;
@@ -46,6 +54,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             _mappingService = mappingService;
             _profiler = profiler;
             _listCollection = listCollection;
+            _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
         }
 
         public ActionResult Search()
@@ -53,7 +62,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View();
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
         {
             ApprenticeshipSearchResults searchResults;
@@ -100,7 +109,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(int id, string hasError, string linkUrl)
+        public ActionResult Standard(int id, string linkUrl)
         {
             if (id < 0)
             {
@@ -122,13 +131,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
             viewModel.IsShortlisted = shortListStandards?.Contains(id) ?? false;
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.PreviousPageLink = GetPreviousPageLinkViewModel(linkUrl);
 
             return View(viewModel);
         }
 
-        public ActionResult Framework(int id, string hasError)
+        public ActionResult Framework(int id)
         {
             if (id < 0)
             {
@@ -147,9 +155,28 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
 
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
+            return View(viewModel);
+        }
+
+        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string hasError)
+        {
+            ProviderSearchViewModel viewModel = new ProviderSearchViewModel();
+            if (standardId != null)
+            {
+                viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(standardId.Value, @Url);
+            }
+            else if (frameworkId != null)
+            {
+                viewModel = _apprenticeshipViewModelFactory.GetFrameworkProvidersViewModel(frameworkId.Value, @Url);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
+            }
+
+            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             return View(viewModel);
         }
 
