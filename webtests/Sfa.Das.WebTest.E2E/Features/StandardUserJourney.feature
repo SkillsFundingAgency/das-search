@@ -25,6 +25,9 @@ Scenario:Should find a standard and provider
          | Shortlist Link | contains | Remove from shortlist |
 
 	When I choose Search Page Button
+
+	Then I am on the Provider Search page
+
 	When I enter data
 		| Field               | Value      |
 		| Postcode Search Box | {Postcode} |
