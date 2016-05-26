@@ -76,8 +76,8 @@ namespace Sfa.Das.WebTest.Infrastructure.Steps
             var attribute = (PageNavigationAttribute)Attribute.GetCustomAttribute(objectType, typeof(PageNavigationAttribute));
             var url = _browserSettings.BaseUrl + attribute.Url.ToLower();
             _pageContext
-                .WaitForPageLoad();
-                //.CheckForJavascriptErrors();
+                .WaitForPageLoad()
+                .CheckForJavascriptErrors();
 
             var cleanUrl = _driver.CleanUrl();
             Assert.True(cleanUrl.StartsWith(url), $"Expected to start with {url} but was {cleanUrl}");

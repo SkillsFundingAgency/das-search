@@ -1,6 +1,5 @@
 ﻿@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.Extensions
-@using StructureMap.Query
 @model Sfa.Das.Sas.Web.ViewModels.StandardViewModel
 
 @{
@@ -20,17 +19,22 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                    <div class="standard-result-summary">
-                        This is an apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
-                    </div>
+                <div class="standard-result-summary">
+                    This is an apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
+                </div>
             </div>
         </div>
 
 
         <div class="column-third">
             <div class="related-container">
-                <aside class="related hidden-for-mobile">
-                    @CreateSearchForm("hidden-for-mobile", "postcode-form-aside", "search-box-aside")
+                <aside class="related hidden-for-tablet">
+
+                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        Find training Providers
+                    </a>
+                    @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
                 </aside>
                  </div>
 
@@ -66,34 +70,19 @@
                 </div>
             }
 
-            <hr />
+            <hr/>
 
-            @CreateSearchForm("", "postcode-form-bottom", "search-box-bottom")
+            <div>
+                <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Find training Providers
+                </a>
+                @*@GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)*@
+            </div>
 
         </section>
 
 </main>
-
-@helper CreateSearchForm(string cssClasses, string inputId, string searchBoxIdentifier)
-{
-    using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = $"postcode-form search-box {cssClasses}", @id = inputId }))
-    {
-        <h2 class="heading-medium">Find training providers for this apprenticeship</h2>
-                <div class="form-group @(@Model.HasError ? " error" : "")">
-                    <label class="form-label" for="@searchBoxIdentifier">
-                        Enter a full postcode.
-                        <span class="error-message">
-                            Invalid postcode
-                        </span>
-                    </label>
-                    <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.StandardId">
-                    <input type="hidden" name="Inputid" value="@inputId"/>
-                    <input type="search" name="PostCode" id="@searchBoxIdentifier" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
-                </div>
-                <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search" />
-    }
-    @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
-}
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
