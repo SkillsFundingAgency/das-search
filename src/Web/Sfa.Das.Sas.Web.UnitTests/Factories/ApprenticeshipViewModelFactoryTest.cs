@@ -56,7 +56,7 @@
             var viewModel = factory.GetFrameworkProvidersViewModel(1254, _mockUrlHelper.Object);
 
             viewModel.PostUrl.Should().Be("/hello/framework");
-            viewModel.PreviousPageLink.Title.Should().Be("Go back to framework");
+            viewModel.PreviousPageLink.Title.Should().Be("Go back to apprenticeship");
             viewModel.PreviousPageLink.Url.Should().Be("/hello/FrameworkPrevLink/id");
 
             viewModel.ApprenticeshipId.Should().Be(1254);

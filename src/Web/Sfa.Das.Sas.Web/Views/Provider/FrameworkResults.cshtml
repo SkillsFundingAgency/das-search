@@ -1,13 +1,13 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Web.ViewModels
-@model Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel
+@model ProviderFrameworkSearchResultViewModel
 
 @{
     ViewBag.Title = "Provider Search Results";
 }
 
 <main id="content" role="main">
-    @Html.ActionLink("Back", "Framework", "Apprenticeship", new { @id = @Model.FrameworkId }, new { @class = "link-back" })
+    @Html.ActionLink("Back", "SearchForProviders", "Apprenticeship", new { @frameworkId = @Model.FrameworkId }, new { @class = "link-back" })
     <div id="provider-results" class="grid-row">
 
         <div class="column-two-thirds">

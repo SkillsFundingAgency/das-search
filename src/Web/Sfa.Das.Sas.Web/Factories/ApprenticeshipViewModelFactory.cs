@@ -25,7 +25,7 @@
             viewModel.PostUrl = urlHelper.Action("StandardResults", "Provider");
             viewModel.PreviousPageLink = new LinkViewModel
                                              {
-                                                 Title = "Go back to standard",
+                                                 Title = "Go back to apprenticeship",
                                                  Url = urlHelper.Action("Standard", "Apprenticeship", new { Id = id })
                                              };
             return viewModel;
@@ -39,7 +39,7 @@
             viewModel.PostUrl = urlHelper.Action("FrameworkResults", "Provider");
             viewModel.PreviousPageLink = new LinkViewModel
                                              {
-                                                 Title = "Go back to framework",
+                                                 Title = "Go back to apprenticeship",
                                                  Url = urlHelper.Action("Framework", "Apprenticeship", new { Id = id })
                                              };
 
