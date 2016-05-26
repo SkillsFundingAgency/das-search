@@ -36,7 +36,7 @@ namespace Sfa.Das.WebTest.QA_Regression.Features
 	A details page should display with details matching the meta data for Mechatronics maintenance technician
 	A search for providers in ""SN2 1DY"" should show the appropriate providers based on postcode listed by distance 
 	When I click the ""Swindon College"" link
-	The provider details shown on the provider details page should match the API ", ProgrammingLanguage.CSharp, ((string[])(null)));
+	The provider details shown on the provider details page should match the API details for this provider", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
