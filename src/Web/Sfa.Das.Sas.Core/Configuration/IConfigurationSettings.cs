@@ -16,5 +16,7 @@ namespace Sfa.Das.Sas.Core.Configuration
         Uri SurveyUrl { get; }
 
         Uri PostcodeUrl { get; }
+
+        string CookieInfoBannerCookieName { get; }
     }
 }

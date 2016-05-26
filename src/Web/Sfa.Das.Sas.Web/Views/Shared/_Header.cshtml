@@ -1,10 +1,13 @@
-﻿@model string
+﻿@model Sfa.Das.Sas.Web.ViewModels.HeaderViewModel
 
-<div id="global-cookie-message" class="cookie-banner">
-    <div class="content-container" role="alert">
-        <span class="copy-16">GOV.UK uses cookies to make the site simpler. <a href="/cookies">Find out more about cookies</a></span>
+@if (@Model.ShowCookieBanner)
+{
+    <div id="global-cookie-message" class="cookie-banner">
+        <div class="content-container" role="alert">
+            <span class="copy-16">GOV.UK uses cookies to make the site simpler. <a href="/cookies">Find out more about cookies</a></span>
+        </div>
     </div>
-</div>
+}
 
 <header role="banner" id="global-header" class="global-header">
     <div class="global-header__wrapper">
@@ -20,7 +23,7 @@
     <div class="phase-banner-info">
         <strong class="phase-tag">BETA</strong>
         <span>
-            This is a new service – your <a href="@Model" target="_blank">feedback</a> will help us to improve it.
+            This is a new service – your <a href="@Model.SurveyUrl" target="_blank">feedback</a> will help us to improve it.
         </span>      
     </div>
 
