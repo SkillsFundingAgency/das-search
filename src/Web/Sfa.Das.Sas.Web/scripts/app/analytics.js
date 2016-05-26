@@ -42,6 +42,30 @@
         $(".provider-detail a.contact-link").on("click", function () {
             analytics.pushEvent("Provider Details", "Contact page");
         });
+
+        // Shortlist
+
+        var trackShortlist = function (action, type)
+        {
+            var label = action + " " + type;
+            analytics.pushEvent("Shortlist", label);
+        }
+        
+        $(".standard-shortlist-link").on('click', function () {
+            trackShortlist($(this).attr('data-action'), "standard");
+        });
+
+        $(".provider-shortlist-link").on('click', function() {
+            trackShortlist($(this).attr('data-action'), "provider");
+        });
+
+        $(".standard-delete-link").on('click', function() {
+            trackShortlist("remove", "standard");
+        });
+
+        $(".provider-delete-link").on('click', function () {
+            trackShortlist("remove", "provider");
+        });
     };
 
     if (typeof ga !== "undefined"){
