@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.Sas.WebTest.RegressionTests.steps
+﻿namespace Sfa.Das.Sas.WebTest.Infrastructure.Steps
 {
     using System;
     using System.Configuration;
