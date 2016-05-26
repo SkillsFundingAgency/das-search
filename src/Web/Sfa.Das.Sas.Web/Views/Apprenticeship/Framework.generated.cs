@@ -135,16 +135,16 @@ WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n              
 "nts</li>\r\n                <li>duration</li>\r\n                <li>career paths</l" +
 "i>\r\n\r\n            </ul>\r\n\r\n            <div>\r\n                <a");
 
-WriteLiteral(" class=\"button\"");
+WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1335), Tuple.Create("\"", 1433)
+WriteAttribute("href", Tuple.Create(" href=\"", 1362), Tuple.Create("\"", 1460)
             
             #line 41 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1342), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})
+, Tuple.Create(Tuple.Create("", 1369), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})
             
             #line default
             #line hidden
-, 1342), false)
+, 1369), false)
 );
 
 WriteLiteral(">\r\n                    <i");

@@ -74,25 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-<<<<<<< 15c245226db19836b4f9ba51dafda893ac3fbfde
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3731), Tuple.Create("\"", 3739)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3775), Tuple.Create("\"", 3783)
 
 #line 92 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3736), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3780), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3736), false)
-=======
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3721), Tuple.Create("\"", 3729)
-
-#line 92 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3726), Tuple.Create<System.Object, System.Int32>(id
-
-#line default
-#line hidden
-, 3726), false)
->>>>>>> US1753 -> Updated UI test
+, 3780), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -137,25 +126,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-<<<<<<< 15c245226db19836b4f9ba51dafda893ac3fbfde
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3917), Tuple.Create("\"", 3931)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3961), Tuple.Create("\"", 3975)
 
 #line 101 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3924), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3968), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3924), false)
-=======
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3907), Tuple.Create("\"", 3921)
-
-#line 101 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3914), Tuple.Create<System.Object, System.Int32>(pdfUrl
-
-#line default
-#line hidden
-, 3914), false)
->>>>>>> US1753 -> Updated UI test
+, 3968), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -270,11 +248,11 @@ WriteLiteral(" class=\"small-btm-margin\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("       ");
+WriteLiteral("        ");
 
             
             #line 12 "..\..\Views\Apprenticeship\Standard.cshtml"
-  Write(Html.ActionLink("Back to search page", "Search", "Apprenticeship", null, new { @class = "link-back" }));
+   Write(Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back"));
 
             
             #line default
@@ -323,16 +301,16 @@ WriteLiteral(" class=\"related hidden-for-tablet\"");
 
 WriteLiteral(">\r\n\r\n                    <a");
 
-WriteLiteral(" class=\"button\"");
+WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1046), Tuple.Create("\"", 1143)
+WriteAttribute("href", Tuple.Create(" href=\"", 1067), Tuple.Create("\"", 1164)
             
             #line 33 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 1053), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })
+, Tuple.Create(Tuple.Create("", 1074), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })
             
             #line default
             #line hidden
-, 1053), false)
+, 1074), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -498,27 +476,16 @@ WriteLiteral("\r\n                    </ul>\r\n                </div>\r\n");
             #line hidden
 WriteLiteral("\r\n            <hr/>\r\n\r\n            <div>\r\n                <a");
 
-WriteLiteral(" class=\"button\"");
+WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-<<<<<<< 15c245226db19836b4f9ba51dafda893ac3fbfde
-WriteAttribute("href", Tuple.Create(" href=\"", 3166), Tuple.Create("\"", 3263)
+WriteAttribute("href", Tuple.Create(" href=\"", 3210), Tuple.Create("\"", 3307)
             
             #line 76 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3173), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })
+, Tuple.Create(Tuple.Create("", 3217), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })
             
             #line default
             #line hidden
-, 3173), false)
-=======
-WriteAttribute("href", Tuple.Create(" href=\"", 3156), Tuple.Create("\"", 3253)
-            
-            #line 76 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3163), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })
-            
-            #line default
-            #line hidden
-, 3163), false)
->>>>>>> US1753 -> Updated UI test
+, 3217), false)
 );
 
 WriteLiteral(">\r\n                    <i");

@@ -7,6 +7,6 @@
     [PageNavigation("/apprenticeship/framework")]
     public class FrameworkDetailsPage : SharedTemplatePage
     {
-        public By SearchPageButton => By.CssSelector("a.button");
+        public By SearchPageButton => By.CssSelector("a.ui-find-training-providers");
     }
 }
