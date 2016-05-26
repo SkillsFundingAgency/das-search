@@ -11,7 +11,7 @@ var SearchAndShortlist = SearchAndShortlist || {};
         $('form.postcode-form').on('submit', function (e) {
             var postCode = $(this).find('.postcode-search-box').val().trim();
             if (!validation.validatePostcode(postCode)) {
-                $('.form-group').addClass("error");
+                $('.form-elements').addClass("error");
                 e.preventDefault();
             }
         });

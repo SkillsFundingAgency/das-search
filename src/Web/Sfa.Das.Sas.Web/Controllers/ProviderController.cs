@@ -110,7 +110,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             if (string.IsNullOrEmpty(criteria?.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
             {
                 var url = Url.Action(
-                    "Framework",
+                    "SearchForProviders",
                     "Apprenticeship",
                     new { HasError = true, frameworkId = criteria?.ApprenticeshipId } );
                 return new RedirectResult(url);
