@@ -36,7 +36,7 @@
             var viewModel = factory.GetStandardViewModel(1, _mockUrlHelper.Object);
 
             viewModel.PostUrl.Should().Be("/hello/standard");
-            viewModel.PreviousPageLink.Title.Should().Be("Go back to standard");
+            viewModel.PreviousPageLink.Title.Should().Be("Go back to apprenticeship");
             viewModel.PreviousPageLink.Url.Should().Be("/hello/StandardPrevLink/id");
 
             viewModel.ApprenticeshipId.Should().Be(1);
