@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var standard = _getStandards.GetStandardById(standardId);
                 standardName = standard?.Title;
 
-                var standardMissing = false || standard == null;
+                var standardMissing = standard == null;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
@@ -113,7 +113,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
 
-                var frameworkMissing = false || framework == null;
+                var frameworkMissing = framework == null;
 
                 if (frameworkId < 0)
                 {
