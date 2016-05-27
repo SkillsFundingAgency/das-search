@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.RegressionTests.Smoke
+namespace Sfa.Das.Sas.WebTest.RegressionTests.Regression.Search
 {
     using TechTalk.SpecFlow;
     
@@ -18,20 +18,20 @@ namespace Sfa.Das.Sas.WebTest.RegressionTests.Smoke
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Apprenticeship Search Smoke Test")]
-    public partial class ApprenticeshipSearchSmokeTestFeature
+    [NUnit.Framework.DescriptionAttribute("Apprenticeship Search")]
+    public partial class ApprenticeshipSearchFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SearchSmoke.feature"
+#line 1 "ApprenticeshipSearch.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Apprenticeship Search Smoke Test", "\tAs an employer\r\n\tI want to be able to search for training options\r\n\tand find a p" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Apprenticeship Search", "\tAs an employer\r\n\tI want to be able to search for training options\r\n\tand find a p" +
                     "rovider for a given framework", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -65,43 +65,50 @@ namespace Sfa.Das.Sas.WebTest.RegressionTests.Smoke
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should find an apprenticeship")]
-        [NUnit.Framework.CategoryAttribute("Smoke")]
-        [NUnit.Framework.CategoryAttribute("CI")]
-        [NUnit.Framework.CategoryAttribute("SystemTest")]
-        [NUnit.Framework.CategoryAttribute("Demo")]
+        [NUnit.Framework.DescriptionAttribute("Should find a apprenticeship by the job role")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
         [NUnit.Framework.CategoryAttribute("PreProd")]
         [NUnit.Framework.CategoryAttribute("Prod")]
-        public virtual void ShouldFindAnApprenticeship()
+        [NUnit.Framework.TestCaseAttribute("railway", "Railway engineering design technician", new string[0])]
+        public virtual void ShouldFindAApprenticeshipByTheJobRole(string searchTerm, string title, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find an apprenticeship", new string[] {
-                        "Smoke",
-                        "CI",
-                        "SystemTest",
-                        "Demo",
-                        "PreProd",
-                        "Prod"});
+            string[] @__tags = new string[] {
+                    "Regression",
+                    "PreProd",
+                    "Prod"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a apprenticeship by the job role", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
-#line 8
-testRunner.Given("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.Given("I have data for a framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
- testRunner.And("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
             table1.AddRow(new string[] {
                         "Search Box",
-                        "{JOBROLE}"});
-#line 12
+                        string.Format("{0}", searchTerm)});
+#line 11
  testRunner.When("I enter data", ((string)(null)), table1, "When ");
-#line 15
+#line 14
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Rule",
+                        "Value"});
+            table2.AddRow(new string[] {
+                        "Title",
+                        "Equals",
+                        string.Format("{0}", title)});
+#line 17
+ testRunner.And("I see Apprenticeship Results list Contains", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

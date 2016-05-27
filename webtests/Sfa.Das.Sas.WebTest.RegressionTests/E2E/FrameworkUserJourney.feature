@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given framework
 
-@HappyPath		@CI @SystemTest @Demo @PreProd @Prod
+@E2E		@CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a framework and provider
 Given I navigated to the Start page
 	Given I have data for a framework
