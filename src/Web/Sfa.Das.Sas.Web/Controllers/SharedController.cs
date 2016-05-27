@@ -9,14 +9,13 @@ namespace Sfa.Das.Sas.Web.Controllers
     public class SharedController : Controller
     {
         private readonly ICookieService _cookieService;
+        private readonly string _surveyUrl;
 
         public SharedController(IConfigurationSettings settings, ICookieService cookieService)
         {
             _surveyUrl = settings.SurveyUrl.ToString();
             _cookieService = cookieService;
         }
-
-        private readonly string _surveyUrl;
 
         public PartialViewResult Footer()
         {

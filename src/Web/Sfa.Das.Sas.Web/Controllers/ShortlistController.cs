@@ -35,21 +35,23 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private static string AppendUrlParametersToUrl(string url, string responseParameters)
         {
+            var urlToFormat = url;
+
             if (string.IsNullOrEmpty(responseParameters))
             {
-                return url;
+                return urlToFormat;
             }
 
-            var startOfParametersIndex = url.IndexOf("?", StringComparison.CurrentCultureIgnoreCase);
+            var startOfParametersIndex = urlToFormat.IndexOf("?", StringComparison.CurrentCultureIgnoreCase);
 
             if (startOfParametersIndex > 0)
             {
-                url = url.Remove(startOfParametersIndex);
+                urlToFormat = urlToFormat.Remove(startOfParametersIndex);
             }
 
-            url += "?" + responseParameters;
+            urlToFormat += "?" + responseParameters;
 
-            return url;
+            return urlToFormat;
         }
 
         // This method is used to try to redirect back from the page that requested the updating of the

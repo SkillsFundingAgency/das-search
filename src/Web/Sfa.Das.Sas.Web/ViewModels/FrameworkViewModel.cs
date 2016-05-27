@@ -17,7 +17,6 @@
         public int Level { get; set; }
 
         // Page specific
-
         public LinkViewModel SearchResultLink { get; set; }
     }
 }

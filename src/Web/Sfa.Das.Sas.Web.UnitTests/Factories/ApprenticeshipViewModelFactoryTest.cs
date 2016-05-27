@@ -49,7 +49,7 @@
         {
             var mockGetFrameworks = new Mock<IGetFrameworks>();
 
-            mockGetFrameworks.Setup(m => m.GetFrameworkById(1254)).Returns(new Framework{ Title = "Framework 1254", FrameworkId = 1254, Level = 6 });
+            mockGetFrameworks.Setup(m => m.GetFrameworkById(1254)).Returns(new Framework { Title = "Framework 1254", FrameworkId = 1254, Level = 6 });
 
             var factory = new ApprenticeshipViewModelFactory(null, mockGetFrameworks.Object);
 

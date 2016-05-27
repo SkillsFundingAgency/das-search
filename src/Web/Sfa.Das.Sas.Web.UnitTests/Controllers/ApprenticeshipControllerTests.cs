@@ -20,10 +20,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 {
     using System.Web.Routing;
-
-    using Sfa.Das.Sas.Web.DependencyResolution;
     using FluentAssertions;
-
     using Sfa.Das.Sas.Web.Factories;
 
     [TestFixture]
@@ -87,7 +84,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             Assert.AreEqual(null, ((ApprenticeshipSearchResultViewModel)result.Model).SearchTerm);
             Assert.IsNotNull(result);
         }
-        
+
         [TestCase(-15)]
         [TestCase(-1)]
         [TestCase(0)]
@@ -199,7 +196,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 null,
                 mockMappingServices.Object,
                 new Mock<IProfileAStep>().Object,
-                mockCookieRepository.Object, null);
+                mockCookieRepository.Object,
+                null);
 
             controller.SetRequestUrl("http://www.abba.co.uk");
             mockCookieRepository.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
@@ -265,7 +263,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             viewModel?.HasError.Should().BeFalse();
         }
 
-        [Test()]
+        [Test]
         public void WhenNoValidValuesAreProvided()
         {
             var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
