@@ -127,7 +127,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
-            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, mockCookie.Object);
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, mockCookie.Object, null);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
@@ -217,7 +217,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             Assert.IsNotNull(viewModel);
             mockCookieRepository.Verify(x => x.GetAllItems(Constants.StandardsShortListCookieName));
             Assert.AreEqual(expectedResult, viewModel.IsShortlisted);
-        }
+        }*/
 
         [Test(Description = "should create vie model for standard when standardid parameter is specified ")]
         public void SearchForProvidersActionWithStandardIdParameter()

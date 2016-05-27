@@ -34,6 +34,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
         private Mock<IProviderViewModelFactory> _mockViewModelFactory;
 
+        private Mock<IListCollection<int>> _mockCookie;
+
         [Test]
         public async Task SearchResultsShouldReturnViewResultWhenStandardSearchIsSuccessful()
         {

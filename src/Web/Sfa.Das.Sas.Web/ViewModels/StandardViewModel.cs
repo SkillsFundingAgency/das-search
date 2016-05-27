@@ -26,9 +26,7 @@
 
         public string OverviewOfRole { get; set; }
 
-        // Page specific
-
-       // public LinkViewModel PreviousPageLink { get; set; }
+        public bool HasError { get; set; }
 
         public string StandardPdfUrlTitle { get; set; }
 
