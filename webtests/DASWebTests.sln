@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.WebTest.QA_Regression", "Sfa.Das.WebTest.QA_Regression\Sfa.Das.WebTest.QA_Regression.csproj", "{30D904AA-F3E9-455C-8C6B-E81FBFD5A71D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.WebTest.RegressionTests", "Sfa.Das.Sas.WebTest.RegressionTests\Sfa.Das.Sas.WebTest.RegressionTests.csproj", "{B8CD6ED6-546C-4788-A8F4-242107D9DDF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.WebTest.AcceptanceTests", "Sfa.Das.Sas.WebTest.AcceptanceTests\Sfa.Das.Sas.WebTest.AcceptanceTests.csproj", "{B8CD6ED6-546C-4788-A8F4-242107D9DDF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.WebTest.Infrastructure", "Sfa.Das.Sas.WebTest.Infrastructure\Sfa.Das.Sas.WebTest.Infrastructure.csproj", "{2D50186E-54B7-4721-8AC1-73CDCF4D473E}"
 EndProject
