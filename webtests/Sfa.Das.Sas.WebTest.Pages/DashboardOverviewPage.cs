@@ -2,7 +2,7 @@
 {
     using OpenQA.Selenium;
 
-    using Sfa.Das.Sas.WebTest.RegressionTests.pages.shared;
+    using Sfa.Das.Sas.WebTest.Pages.Shared;
 
     using SpecBind.Pages;
     using SpecBind.Selenium;

@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.Sas.WebTest.RegressionTests.pages.shared
+﻿namespace Sfa.Das.Sas.WebTest.Pages.Shared
 {
     using OpenQA.Selenium;
 

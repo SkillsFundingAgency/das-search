@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.RegressionTests.User_Journeys
+namespace Sfa.Das.Sas.WebTest.RegressionTests.E2E
 {
     using TechTalk.SpecFlow;
     
@@ -66,7 +66,7 @@ namespace Sfa.Das.Sas.WebTest.RegressionTests.User_Journeys
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a standard and provider")]
-        [NUnit.Framework.CategoryAttribute("HappyPath")]
+        [NUnit.Framework.CategoryAttribute("E2E")]
         [NUnit.Framework.CategoryAttribute("CI")]
         [NUnit.Framework.CategoryAttribute("SystemTest")]
         [NUnit.Framework.CategoryAttribute("Demo")]
@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.WebTest.RegressionTests.User_Journeys
         public virtual void ShouldFindAStandardAndProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider", new string[] {
-                        "HappyPath",
+                        "E2E",
                         "CI",
                         "SystemTest",
                         "Demo",
