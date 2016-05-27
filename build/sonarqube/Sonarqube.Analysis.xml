@@ -20,7 +20,7 @@
   <!--<Property Name="sonar.host.url">http://localhost:9000</Property>-->
 
   <Property Name="sonar.verbose">true</Property>
-  <Property Name="sonar.exclusions">**/[Ss]cripts/*.js,**/StructureMap*.cs,**/Global.asax.cs, **/scripts/ai.0.15.0-build58334.js, **/Application Insights/**, **/stylecop.json, **/scripts/vendor/*.js</Property>
+  <Property Name="sonar.exclusions">**/[Ss]cripts/*.js,**/StructureMap*.cs,**/Global.asax.cs, **/scripts/ai.0.15.0-build58334.js, **/Application Insights/**, **/stylecop.json, **/scripts/vendor/*.js, **/JSLintNet.json</Property>
   <!--
   <Property Name="sonar.login"></Property>
   <Property Name="sonar.password"></Property>
