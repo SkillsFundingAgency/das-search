@@ -15,7 +15,6 @@
     [TestFixture]
     public class ForCookieService
     {
-
         private readonly string _testCookieName = "test_cookie_banner_name";
 
         private CookieService _cookieService;

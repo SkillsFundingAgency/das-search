@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 var url = Url.Action(
                     "SearchForProviders",
                     "Apprenticeship",
-                    new { HasError = true, standardId = criteria?.ApprenticeshipId } );
+                    new { HasError = true, standardId = criteria?.ApprenticeshipId });
                 return new RedirectResult(url);
             }
 
@@ -112,7 +112,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 var url = Url.Action(
                     "SearchForProviders",
                     "Apprenticeship",
-                    new { HasError = true, frameworkId = criteria?.ApprenticeshipId } );
+                    new { HasError = true, frameworkId = criteria?.ApprenticeshipId });
                 return new RedirectResult(url);
             }
 
