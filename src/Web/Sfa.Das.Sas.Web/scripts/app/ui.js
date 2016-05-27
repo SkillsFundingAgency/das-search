@@ -7,7 +7,7 @@
         });
 
 
-        $('html.js #search-results-order select').change(function(e) {
+        $('html.js #search-results-order select').change(function() {
             $('#search-results-order').submit();
         });
 
