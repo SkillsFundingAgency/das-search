@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
+using Microsoft.Ajax.Utilities;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
@@ -19,24 +24,26 @@ namespace Sfa.Das.Sas.Web.Controllers
             _listCollection = listCollection;
         }
 
-        public ActionResult AddStandard(int id, string responseUrlParameters)
+        public ActionResult AddStandard(int id)
         {
             _logger.Debug($"Adding standard {id} to shortlist cookie");
+
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
                 ApprenticeshipId = id
             };
             _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
 
-            return GetReturnRedirectFromStandardShortlistAction(id, responseUrlParameters);
+            return GetReturnRedirectFromStandardShortlistAction(id);
         }
 
-        public ActionResult AddStandardProvider(int standardId, string providerId, int locationId, string responseUrlParameters)
+        public ActionResult AddStandardProvider(int apprenticeshipId, string providerId, int locationId)
         {
-            _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {standardId} shortlist cookie");
+            _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {apprenticeshipId} shortlist cookie");
+            
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
-                ApprenticeshipId = standardId,
+                ApprenticeshipId = apprenticeshipId,
                 ProvidersIdAndLocation = new List<ShortlistedProvider>
                 {
                     new ShortlistedProvider
@@ -49,18 +56,19 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
 
-            return GetReturnRedirectFromStandardProviderShortlistAction(standardId, providerId, locationId, responseUrlParameters);
+            return GetReturnRedirectFromStandardProviderShortlistAction(apprenticeshipId, providerId, locationId);
         }
 
-        public ActionResult RemoveStandard(int id, string responseUrlParameters)
+        public ActionResult RemoveStandard(int id)
         {
             _logger.Debug($"Removing standard {id} from shortlist cookie");
+           
             _listCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
 
-            return GetReturnRedirectFromStandardShortlistAction(id, responseUrlParameters);
+            return GetReturnRedirectFromStandardShortlistAction(id);
         }
 
-        public ActionResult RemoveStandardProvider(int standardId, string providerId, int locationId, string responseUrlParameters)
+        public ActionResult RemoveStandardProvider(int apprenticeshipId, string providerId, int locationId)
         {
             var provider = new ShortlistedProvider
             {
@@ -68,71 +76,44 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {standardId} shortlist cookie");
-            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, standardId, provider);
+            _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {apprenticeshipId} shortlist cookie");
+            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
 
 
-            return GetReturnRedirectFromStandardProviderShortlistAction(standardId, providerId, locationId, responseUrlParameters);
+            return GetReturnRedirectFromStandardProviderShortlistAction(apprenticeshipId, providerId, locationId);
         }
-
-        private static string AppendUrlParametersToUrl(string url, string responseParameters)
-        {
-            if (string.IsNullOrEmpty(responseParameters))
-            {
-                return url;
-            }
-
-            var startOfParametersIndex = url.IndexOf("?", StringComparison.CurrentCultureIgnoreCase);
-
-            if (startOfParametersIndex > 0)
-            {
-                url = url.Remove(startOfParametersIndex);
-            }
-
-            url += "?" + responseParameters;
-
-            return url;
-        }
-
+        
         // This method is used to try to redirect back from the page that requested the updating of the
         // standards shortlist. If a URL cannot be found in the request then the default is to go back to
         // the standard details page itself.
-        private ActionResult GetReturnRedirectFromStandardShortlistAction(int id, string responseParameters)
+        private ActionResult GetReturnRedirectFromStandardShortlistAction(int id)
         {
             if (Request.UrlReferrer == null)
             {
                 return RedirectToAction("Standard", "Apprenticeship", new { id });
             }
 
-            var url = Request.UrlReferrer.OriginalString;
-
-            url = AppendUrlParametersToUrl(url, responseParameters);
-
-            return Redirect(url);
+            return Redirect(Request.UrlReferrer.OriginalString);
         }
 
         // This method is used to try to redirect back from the page that requested the updating of the 
         // provider shortlist. If a URL cannot be found in the request then the default is to go back to 
         // the apprenticeship search page
-        private ActionResult GetReturnRedirectFromStandardProviderShortlistAction(int standardId, string providerId, int locationId, string responseParameters)
+        private ActionResult GetReturnRedirectFromStandardProviderShortlistAction(int standardId, string providerId, int locationId)
         {
-            if (Request.UrlReferrer == null)
+            if (Request.UrlReferrer != null)
             {
-                var providerSearchCriteria = new ProviderLocationSearchCriteria()
-                {
-                    StandardCode = standardId.ToString(),
-                    ProviderId = providerId,
-                    LocationId = locationId.ToString()
-                };
-
-                return RedirectToAction("Detail", "Provider", new { providerSearchCriteria });
+                return Redirect(Request.UrlReferrer.OriginalString);
             }
 
-            var url = Request.UrlReferrer.OriginalString;
+            var providerSearchCriteria = new ProviderLocationSearchCriteria()
+            {
+                StandardCode = standardId.ToString(),
+                ProviderId = providerId,
+                LocationId = locationId.ToString()
+            };
 
-            url = AppendUrlParametersToUrl(url, responseParameters);
-
-            return Redirect(url);
+            return RedirectToAction("Detail", "Provider", new { providerSearchCriteria });
         }
     }
 }

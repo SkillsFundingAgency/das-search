@@ -133,7 +133,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
-            var result = controller.Standard(1, hasErrorParmeter, string.Empty) as ViewResult;
+            var result = controller.Standard(1, hasErrorParmeter) as ViewResult;
 
             Assert.NotNull(result);
             var actual = ((StandardViewModel)result.Model).HasError;
@@ -194,7 +194,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var moqLogger = new Mock<ILog>();
             ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false", string.Empty);
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false");
 
             Assert.NotNull(result);
             Assert.AreEqual(404, result.StatusCode);

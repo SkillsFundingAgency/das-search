@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string ApprenticeshipLevel { get; set; }
 
-        public LinkViewModel SearchResultLink { get; set; }
+      //  public LinkViewModel SearchResultLink { get; set; }
 
         public ApprenticeshipTrainingType Training { get; set; }
 

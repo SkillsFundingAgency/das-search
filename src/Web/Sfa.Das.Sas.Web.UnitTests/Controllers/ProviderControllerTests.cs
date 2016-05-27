@@ -205,11 +205,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             var stubProviderViewModel = new ProviderCourseViewModel
             {
-                SearchResultLink = new LinkViewModel
-                {
-                    Title = "Back to search page",
-                    Url = string.Empty
-                },
                 Training = ApprenticeshipTrainingType.Standard
             };
 
@@ -262,11 +257,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             var stubProviderViewModel = new ProviderCourseViewModel
             {
-                SearchResultLink = new LinkViewModel
-                {
-                    Title = "Back to search page",
-                    Url = string.Empty
-                },
                 Training = ApprenticeshipTrainingType.Framework
             };
 

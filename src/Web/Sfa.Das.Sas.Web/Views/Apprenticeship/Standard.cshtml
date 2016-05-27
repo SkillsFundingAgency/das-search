@@ -1,6 +1,5 @@
 ﻿@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.Extensions
-@using StructureMap.Query
 @model Sfa.Das.Sas.Web.ViewModels.StandardViewModel
 
 @{
@@ -10,7 +9,7 @@
 <main id="content" class="standard-detail">
 
     <p class="small-btm-margin">
-        @Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back")
+        @Html.ActionLink("Back to search page", "Search", "Apprenticeship", null, new {@class="link-back"})
     </p>
 
     <div class="grid-row">
@@ -121,13 +120,13 @@
     if (isShortlisted)
     {
         @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", 
-            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
+            new { id }, 
             new {@class= "link shortlist-link standard-shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" })
     }
     else
     {
         @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", 
-            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
+            new { id }, 
             new { @class = "link shortlist-link standard-shortlist-link", rel="nofollow", data_standard = id, data_action = "add" })
     }
 }

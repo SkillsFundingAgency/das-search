@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
         
         // GET: Standard
-        public ActionResult Standard(int id, string hasError, string linkUrl)
+        public ActionResult Standard(int id, string hasError)
         {
             if (id < 0)
             {
@@ -121,7 +121,6 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.PreviousPageLink = GetPreviousPageLinkViewModel(linkUrl);
 
             return View(viewModel);
         }
@@ -149,33 +148,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);
-        }
-
-        private LinkViewModel GetPreviousPageLinkViewModel(string linkUrl)
-        {
-            if (linkUrl != null)
-            {
-                return new LinkViewModel
-                {
-                    Title = "Back",
-                    Url = linkUrl
-                };
-            }
-
-            if (!string.IsNullOrWhiteSpace(Request?.UrlReferrer?.OriginalString))
-            {
-                return new LinkViewModel
-                {
-                    Title = "Back",
-                    Url = Request.UrlReferrer.OriginalString
-                };
-            }
-
-            return new LinkViewModel
-            {
-                Title = "Back to search page",
-                Url = Url.Action("Search", "Apprenticeship")
-            };
         }
     }
 }

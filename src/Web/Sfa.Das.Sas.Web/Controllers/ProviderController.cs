@@ -171,8 +171,6 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.SurveyUrl = _settings.SurveyUrl.ToString();
 
-            viewModel.SearchResultLink = GetPreviousPageLinkViewModel(linkUrl);
-
             viewModel.ProviderId = criteria.ProviderId;
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
@@ -185,33 +183,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             return View(viewModel);
-        }
-
-        private LinkViewModel GetPreviousPageLinkViewModel(string linkUrl)
-        {
-            if (linkUrl != null)
-            {
-                return new LinkViewModel
-                {
-                    Title = "Back",
-                    Url = linkUrl
-                };
-            }
-
-            if (!string.IsNullOrWhiteSpace(Request?.UrlReferrer?.OriginalString))
-            {
-                return new LinkViewModel
-                {
-                    Title = "Back",
-                    Url = Request.UrlReferrer.OriginalString
-                };
-            }
-
-            return new LinkViewModel
-            {
-                Title = "Back to search page",
-                Url = Url.Action("Search", "Apprenticeship")
-            };
         }
     }
 }

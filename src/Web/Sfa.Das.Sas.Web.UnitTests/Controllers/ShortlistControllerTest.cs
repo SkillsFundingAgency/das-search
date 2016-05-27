@@ -42,7 +42,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListCookieName, _shorlistedApprenticeship));
 
             // Act
-            var result = _controller.AddStandard(_shorlistedApprenticeship.ApprenticeshipId, string.Empty);
+            var result = _controller.AddStandard(_shorlistedApprenticeship.ApprenticeshipId);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
@@ -57,7 +57,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             _mockCookieRepository.Setup(x => x.RemoveApprenticeship(Constants.StandardsShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId));
 
             // Act
-            var result = _controller.RemoveStandard(_shorlistedApprenticeship.ApprenticeshipId, string.Empty);
+            var result = _controller.RemoveStandard(_shorlistedApprenticeship.ApprenticeshipId);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
