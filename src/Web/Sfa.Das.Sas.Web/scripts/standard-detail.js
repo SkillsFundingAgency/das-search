@@ -27,7 +27,7 @@
             }
             Cookies.set(standard.CookieName, array.join('|'), { expires: 365, domain: SearchAndShortlist.appsettings.cookieDomain, HttpOnly: SearchAndShortlist.appsettings.cookieSecure, path: '/' });
         }
-    }
+    };
 
 
     standard.init = function () {

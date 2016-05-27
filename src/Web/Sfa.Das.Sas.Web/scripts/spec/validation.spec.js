@@ -2,13 +2,13 @@
 /// <reference path="../app/validation.js"/>
 
 describe("Postcode validation", function () {
-    var runValidation = function(postcode) {
+    var runValidation = function (postcode) {
         expect(SearchAndShortlist.validation.validatePostcode(postcode)).toBe(true, "For postcode: " + postcode);
-    }
+    };
 
     var runNotValidation = function (postcode) {
         expect(SearchAndShortlist.validation.validatePostcode(postcode)).not.toBe(true, "For postcode: " + postcode);
-    }
+    };
 
     it("Validates correct postcodes", function () {
         runValidation("A9 9AA");
@@ -29,5 +29,4 @@ describe("Postcode validation", function () {
         runNotValidation("A9 9AAAAA");
         runNotValidation("9A9 9AA");
     });
-
 });

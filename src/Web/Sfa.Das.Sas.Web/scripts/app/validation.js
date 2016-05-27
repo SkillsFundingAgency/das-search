@@ -1,5 +1,4 @@
-﻿'use strict';
-var SearchAndShortlist = SearchAndShortlist || {};
+﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (validation) {
     var re = /^[A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][ABD-HJLNP-UW-Z]{2}$/i;
 
