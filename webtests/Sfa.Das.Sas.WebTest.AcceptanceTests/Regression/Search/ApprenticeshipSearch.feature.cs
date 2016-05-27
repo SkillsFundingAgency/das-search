@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.RegressionTests.Regression.Search
+namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.Search
 {
     using TechTalk.SpecFlow;
     

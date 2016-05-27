@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.RegressionTests.Smoke
+namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Smoke
 {
     using TechTalk.SpecFlow;
     

@@ -7,8 +7,8 @@
     <ProjectGuid>{B8CD6ED6-546C-4788-A8F4-242107D9DDF3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Das.Sas.WebTest.RegressionTests</RootNamespace>
-    <AssemblyName>Sfa.Das.Sas.WebTest.RegressionTests</AssemblyName>
+    <RootNamespace>Sfa.Das.Sas.WebTest.AcceptanceTests</RootNamespace>
+    <AssemblyName>Sfa.Das.Sas.WebTest.AcceptanceTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

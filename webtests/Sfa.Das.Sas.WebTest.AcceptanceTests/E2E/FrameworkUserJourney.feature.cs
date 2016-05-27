@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.RegressionTests.E2E
+namespace Sfa.Das.Sas.WebTest.AcceptanceTests.E2E
 {
     using TechTalk.SpecFlow;
     
