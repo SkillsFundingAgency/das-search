@@ -17,8 +17,9 @@
         public IWebElement FirstFrameworkResult { get; set; }
 
         [ElementLocator(Id="apprenticeship-results")]
-        public IElementList<IWebElement, ApprenticeshipResultItem> AppreticshipResults { get; set; }
+        public IElementList<IWebElement, ApprenticeshipResultItem> ApprenticeshipResults { get; set; }
 
+        [ElementLocator(Class = "result")]
         public class ApprenticeshipResultItem : WebElement
         {
             public ApprenticeshipResultItem(ISearchContext searchContext)
@@ -26,8 +27,8 @@
             {
             }
 
-            [ElementLocator(Class = ".result-title a")]
-            public IWebElement TitleLink { get; set; }
+            [ElementLocator(CssSelector = ".result-title a")]
+            public IWebElement Title { get; set; }
         }
     }
 }
