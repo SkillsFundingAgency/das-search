@@ -165,7 +165,9 @@
     <None Include="Transform.Nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Transform.ServiceDefinition.csdef" />
+    <None Include="Transform.ServiceDefinition.csdef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="WadLogging.xml" />
