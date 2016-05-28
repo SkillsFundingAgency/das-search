@@ -31,11 +31,18 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Web view control-->
-        <WebView x:Name="webView" Grid.Row="0"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <WebView x:Name="webViewLeft" Grid.Column="0"/>
+            <WebView x:Name="webViewRight" Grid.Column="1"/>
+        </Grid>
 
         <StackPanel x:Name="MessageStackPanel" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" >
             <TextBlock x:Name="Message" FontSize="30" Text="Display message here"/>
@@ -43,21 +50,14 @@
         </StackPanel>
 
         <!--Favorites buttons-->
-        <ScrollViewer Grid.Row="1" HorizontalAlignment="Center" HorizontalScrollBarVisibility ="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid >
+            <Grid Grid.Row="1"  >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"></ColumnDefinition>
-                    <ColumnDefinition Width="15"></ColumnDefinition>
-                    <ColumnDefinition Width="120"></ColumnDefinition>
-                    <ColumnDefinition Width="15"></ColumnDefinition>
-                    <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="15"></ColumnDefinition>
+                <ColumnDefinition Width="410"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" x:Name="Go_Status" VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" Width="120" Click="Go_Status_Click">
-                    <TextBlock Text="Status" TextWrapping="Wrap"/>
-                </Button>
-                <Button Grid.Column="2" x:Name="Go_Build_Status" Content="Build Status" VerticalAlignment="Center" Height="60" Width="120" Click="Go_BuildStatus_Click"/>
-                <Button Grid.Column="4" x:Name="Go_Sonar" Content="Sonarqube" VerticalAlignment="Center" Height="60" Width="120" Click="Go_Sonarqube_Click"/>
+                <TextBlock Grid.Column="1" x:Name="IpAddress" VerticalAlignment="Center" Height="35" Width="400" HorizontalAlignment="Left"/>
+                <Button Grid.Column="2" x:Name="PauseButton" Height="35" Width="100" Click="PauseButton_Click">Pause</Button>
             </Grid>
-        </ScrollViewer>
     </Grid>
 </Page>

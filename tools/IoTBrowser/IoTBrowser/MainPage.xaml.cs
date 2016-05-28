@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Windows.Networking.Connectivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -9,11 +11,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace IoTBrowser
 {
-    internal enum Pages
+    public enum Side
     {
-        Status = 1, 
-        BuildStatus = 2, 
-        Sonarqube = 3
+        Left,
+        Right
     }
 
     /// <summary>
@@ -21,60 +22,110 @@ namespace IoTBrowser
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private string _webAddress;
+        private IDictionary<Side, IList<string>> _viewPages;
         private DispatcherTimer _timer;
-        private readonly IDictionary<Pages, string> _pageList;
-        private Pages _currentPage;
+        private int _currentPageIndexLeft = 0;
+        private int _currentPageIndexRight = 0;
+        private bool _leftNavigating = false;
+        private bool _rightNavigating = false;
+        private bool _paused = false;
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            _pageList = GeneratePageList();
+            webViewLeft.NavigationCompleted += WebViewLeft_NavigationCompleted;
+            webViewRight.NavigationCompleted += WebViewRight_NavigationCompleted;
+            _viewPages = GeneratePagesList();
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 10);
+            _timer.Interval = new TimeSpan(0, 0, 20);
             _timer.Tick += _timer_Tick;
-            webView.NavigationCompleted += WebView_NavigationCompleted;
-            DoWebNavigate(Pages.Status);
+
+            NavigateViews(0, 0);
+            ShowIpInformation();
+
+            _timer.Start();
         }
 
-        private IDictionary<Pages, string> GeneratePageList()
+        private void NavigateViews(int leftIndex, int rightIndex)
         {
-            var pages = new Dictionary<Pages, string>
+            _leftNavigating = true;
+            _rightNavigating = true;
+            DoWebNavigate(leftIndex, _viewPages[Side.Left], webViewLeft);
+            DoWebNavigate(rightIndex, _viewPages[Side.Right], webViewRight);
+        }
+
+        private void WebViewLeft_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            _leftNavigating = false;
+
+            TryAndStartTimer();
+        }
+
+        private void WebViewRight_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            _rightNavigating = false;
+
+            TryAndStartTimer();
+        }
+
+        private void TryAndStartTimer()
+        {
+            if (_paused == false && _leftNavigating == false && _rightNavigating == false)
             {
-                [Pages.Status] = "http://sfa-das-status.azurewebsites.net/",
-                [Pages.BuildStatus] = "http://sfa-das-status.azurewebsites.net/status/build",
-                [Pages.Sonarqube] = "http://dassonar.westeurope.cloudapp.azure.com:10090/dashboard/index?id=SFA-DAS",
+                _timer.Start();
+            }
+        }
+
+        private void ShowIpInformation()
+        {
+            var hosts = NetworkInformation.GetHostNames();
+            var ipInformation = hosts.Where(x => x.Type == Windows.Networking.HostNameType.Ipv4).Select(i => i.DisplayName).ToArray();
+            var ipToDisplay = string.Join(",", ipInformation);
+
+            IpAddress.Text = $"IP Address: {ipToDisplay}";
+        }
+
+        private IDictionary<Side, IList<string>> GeneratePagesList()
+        {
+            var pagesList = new Dictionary<Side, IList<string>>();
+
+            var leftPages = new List<string>
+            {
+                "http://sfa-das-status.azurewebsites.net/",
+                "http://dassonar.westeurope.cloudapp.azure.com:10090/dashboard/index?id=SFA-DAS",
             };
 
-            return pages;
+            var rightPages = new List<string>
+            {
+                "https://rally1.rallydev.com/#/49818572937d/reports"
+            };
+
+            pagesList.Add(Side.Left, leftPages);
+            pagesList.Add(Side.Right, rightPages);
+
+            return pagesList;
         }
 
         private void _timer_Tick(object sender, object e)
         {
-            var nextPageIndex = ((int)_currentPage % _pageList.Count) + 1;
-
-            DoWebNavigate((Pages)nextPageIndex);
-        }
-
-        private void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            _timer.Start();
-        }
-
-        private void DoWebNavigate(Pages page)
-        {
-            _webAddress = _pageList[page];
-            _currentPage = page;
+            _currentPageIndexLeft = _currentPageIndexLeft < _viewPages[Side.Left].Count - 1 ? _currentPageIndexLeft + 1 : 0;
+            _currentPageIndexRight = _currentPageIndexRight < _viewPages[Side.Right].Count - 1 ? _currentPageIndexRight + 1 : 0;
 
             _timer.Stop();
-            DismissMessage();
+
+            NavigateViews(_currentPageIndexLeft, _currentPageIndexRight);
+        }
+
+        private void DoWebNavigate(int index, IList<string> pages, WebView view)
+        {
+            var webAddress = pages[index];
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_webAddress))
+                if (!string.IsNullOrWhiteSpace(webAddress))
                 {
-                    webView.Navigate(new Uri(_webAddress));
+                    view.Navigate(new Uri(webAddress));
                 }
                 else
                 {
@@ -87,26 +138,11 @@ namespace IoTBrowser
             }
         }
 
-        private void Go_Status_Click(object sender, RoutedEventArgs e)
-        {
-            DoWebNavigate(Pages.Status);
-        }
-
-        private void Go_BuildStatus_Click(object sender, RoutedEventArgs e)
-        {
-            DoWebNavigate(Pages.BuildStatus);
-        }
-
-        private void Go_Sonarqube_Click(object sender, RoutedEventArgs e)
-        {
-            DoWebNavigate(Pages.Sonarqube);
-        }
-
         private void DisplayMessage(String message)
         {
             Message.Text = message;
             MessageStackPanel.Visibility = Visibility.Visible;
-            webView.Visibility = Visibility.Collapsed;
+            webViewLeft.Visibility = Visibility.Collapsed;
 
         }
 
@@ -117,8 +153,24 @@ namespace IoTBrowser
 
         private void DismissMessage()
         {
-            webView.Visibility = Visibility.Visible;
+            webViewLeft.Visibility = Visibility.Visible;
             MessageStackPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_timer.IsEnabled)
+            {
+                _paused = true;
+                _timer.Stop();
+                PauseButton.Content = "Resume";
+            }
+            else
+            {
+                _timer.Start();
+                PauseButton.Content = "Pause";
+                _paused = false;
+            }
         }
     }
 }
