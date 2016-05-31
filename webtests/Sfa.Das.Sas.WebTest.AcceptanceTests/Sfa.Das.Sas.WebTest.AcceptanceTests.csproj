@@ -198,12 +198,10 @@
     <None Include="App.iOS8.3.config">
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.iOS9.1.config">
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.OSXChrome.config">
       <DependentUpon>App.config</DependentUpon>
@@ -218,12 +216,10 @@
     <None Include="App.OSXSafari8.config">
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.OSXSafari9.config">
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.PreProd.config">
       <DependentUpon>App.config</DependentUpon>
