@@ -74,14 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3767), Tuple.Create("\"", 3775)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3763), Tuple.Create("\"", 3771)
 
 #line 92 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3772), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3768), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3772), false)
+, 3768), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -126,14 +126,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3953), Tuple.Create("\"", 3967)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3949), Tuple.Create("\"", 3963)
 
 #line 101 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3960), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3956), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3960), false)
+, 3956), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -494,9 +494,17 @@ WriteLiteral(" class=\"fa fa-search\"");
 
 WriteLiteral(" aria-hidden=\"true\"");
 
-WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n       " +
-"         ");
+WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n");
 
+WriteLiteral("                ");
+
+            
+            #line 80 "..\..\Views\Apprenticeship\Standard.cshtml"
+           Write(GetShortlistLink(@Model.StandardId, @Model.IsShortlisted));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n            </div>\r\n\r\n        </section>\r\n\r\n</main>\r\n\r\n");
 
 WriteLiteral("\r\n");
