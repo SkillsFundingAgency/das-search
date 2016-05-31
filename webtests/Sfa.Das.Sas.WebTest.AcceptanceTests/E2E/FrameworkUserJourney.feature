@@ -6,7 +6,11 @@
 @E2E		@CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a framework and provider
 Given I navigated to the Start page
-	Given I have data for a framework
+	Given I have data in the config
+		| Token    | Key                     |
+		| JOBROLE  | data.framework.JOBROLE  |
+		| Postcode | data.framework.Postcode |
+
 	And I navigated to the Start page
 	When I choose Start Button
 	Then I am on the Search page

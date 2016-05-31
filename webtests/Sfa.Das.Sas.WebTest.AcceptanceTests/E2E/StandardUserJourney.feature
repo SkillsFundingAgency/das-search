@@ -5,7 +5,11 @@
 
 @E2E	 @CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a standard and provider
-	Given I have data for a standard
+	Given I have data in the config
+		| Token    | Key                    |
+		| JOBROLE  | data.standard.JOBROLE  |
+		| Postcode | data.standard.Postcode |
+
 	And I navigated to the Start page
 	When I choose Start Button
 	Then I am on the Search page

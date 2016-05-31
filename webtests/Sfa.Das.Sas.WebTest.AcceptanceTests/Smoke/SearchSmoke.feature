@@ -5,8 +5,12 @@
 
 @Smoke		@CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find an apprenticeship
-Given I navigated to the Start page
-	Given I have data for a framework
+	Given I have data in the config
+		| Token    | Key                     |
+		| JOBROLE  | data.framework.JOBROLE  |
+		| Postcode | data.framework.Postcode |
+	And I navigated to the Start page
+
 	And I navigated to the Search page
 
 	When I enter data
