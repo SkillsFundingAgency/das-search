@@ -167,7 +167,6 @@
     <None Include="App.Android5.0.config">
       <DependentUpon>App.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.config">
       <TransformOnBuild>true</TransformOnBuild>
