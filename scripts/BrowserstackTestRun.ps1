@@ -6,7 +6,7 @@ get-childitem $folder -include App.*.config -recurse | foreach ($_) {
 
 	Copy-Item  ($folder + "\" + $testdll) ($folder + "\" + $newdll)
 	
-	$sourceConfig = ($folder + "\App.config")
+	$sourceConfig = ($folder + "\" + $testdll + ".config")
 	$transform = $_.fullname
 	$targetConfig = ($folder + "\" + $newdll + ".config")
 	
