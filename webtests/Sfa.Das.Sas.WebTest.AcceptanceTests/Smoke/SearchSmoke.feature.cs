@@ -90,14 +90,11 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "JOBROLE",
                         "data.framework.JOBROLE"});
-            table1.AddRow(new string[] {
-                        "Postcode",
-                        "data.framework.Postcode"});
 #line 8
  testRunner.Given("I have data in the config", ((string)(null)), table1, "Given ");
-#line 12
+#line 11
  testRunner.And("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
+#line 13
  testRunner.And("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -106,11 +103,11 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "Search Box",
                         "{JOBROLE}"});
-#line 16
+#line 15
  testRunner.When("I enter data", ((string)(null)), table2, "When ");
-#line 19
+#line 18
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 19
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

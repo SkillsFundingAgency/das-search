@@ -8,7 +8,6 @@ Scenario:Should find an apprenticeship
 	Given I have data in the config
 		| Token    | Key                     |
 		| JOBROLE  | data.framework.JOBROLE  |
-		| Postcode | data.framework.Postcode |
 	And I navigated to the Start page
 
 	And I navigated to the Search page

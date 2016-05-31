@@ -32,6 +32,7 @@
                 {
                     var value = ConfigurationManager.AppSettings[row["Key"]];
                     this._tokenManager.SetToken(row["Token"], value);
+                    _log.Info("{" + row["Token"] + "} = " + value);
                 }
                 catch (Exception ex)
                 {
