@@ -13,8 +13,6 @@
 
     using Sfa.Das.Sas.WebTest.Infrastructure.Selenium;
     using Sfa.Das.Sas.WebTest.Infrastructure.Services;
-    using Sfa.Das.Sas.WebTest.Infrastructure.SpecBindExtensions;
-    using Sfa.Das.WebTest.Infrastructure.Hooks;
 
     using SpecBind.BrowserSupport;
     using SpecBind.Helpers;
