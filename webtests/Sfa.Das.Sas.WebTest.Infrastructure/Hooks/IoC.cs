@@ -4,7 +4,6 @@
 
     using Sfa.Das.Sas.WebTest.Infrastructure.Selenium;
     using Sfa.Das.Sas.WebTest.Infrastructure.Services;
-    using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     public class IoC
     {

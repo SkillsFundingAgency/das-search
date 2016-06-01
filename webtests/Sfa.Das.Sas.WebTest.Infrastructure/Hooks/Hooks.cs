@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using BoDi;
 
@@ -10,10 +12,12 @@
     using OpenQA.Selenium.Remote;
 
     using Sfa.Das.Sas.WebTest.Infrastructure.Selenium;
+    using Sfa.Das.Sas.WebTest.Infrastructure.Services;
+    using Sfa.Das.Sas.WebTest.Infrastructure.SpecBindExtensions;
     using Sfa.Das.WebTest.Infrastructure.Hooks;
-    using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     using SpecBind.BrowserSupport;
+    using SpecBind.Helpers;
 
     using TechTalk.SpecFlow;
 
@@ -42,6 +46,13 @@
         public void BeforeScenario()
         {
             Console.WriteLine("##### Scenario: " + ScenarioContext.Current.ScenarioInfo.Title);
+            
+            var log = _objectContainer.Resolve<ILog>();
+            var settings = SettingHelper.GetConfigurationSection().BrowserFactory.Settings;
+            foreach (var key in settings.AllKeys.Where(x => x != "browserstack.key"))
+            {
+                log.Info($"{key}:\"{settings[key]?.Value}\"");
+            }
         }
 
         [AfterScenario(Order = -10)]
