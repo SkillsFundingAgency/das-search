@@ -47,9 +47,12 @@
             
             var log = _objectContainer.Resolve<ILog>();
             var settings = SettingHelper.GetConfigurationSection().BrowserFactory.Settings;
-            foreach (var key in settings.AllKeys.Where(x => x != "browserstack.key"))
+            foreach (var key in settings.AllKeys.Where(x => !x.StartsWith("browserstack.")))
             {
-                log.Info($"{key}:\"{settings[key]?.Value}\"");
+                if (!string.IsNullOrEmpty(settings[key]?.Value))
+                {
+                    log.Info($"{key}:\"{settings[key]?.Value}\"");
+                }
             }
         }
 
