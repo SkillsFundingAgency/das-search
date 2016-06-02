@@ -32,6 +32,14 @@
     <p id="standard-provider-search-message">
         There are currently no providers for the apprenticeship: <b id="standard-name">@Model.StandardName</b> covering postcode '<b id="postalcode">@Model.PostCode</b>'.
     </p>
+    <div>
+        You can:
+        <ul>
+            <li>view all training providers for @Model.StandardName in England</li>
+            <li>@Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @standardId = @Model.StandardId }, new { @class = "" })</li>
+            <li>@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
+        </ul>
+    </div>
 }
 
 @helper  RenderMessageOneResult()
