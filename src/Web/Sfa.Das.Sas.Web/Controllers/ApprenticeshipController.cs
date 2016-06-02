@@ -178,28 +178,5 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             return View(viewModel);
         }
-
-        private LinkViewModel GetPreviousPageLinkViewModel(string linkUrl)
-        {
-            if (linkUrl != null)
-            {
-                return new LinkViewModel
-                {
-                    Title = "Back",
-                    Url = linkUrl
-                };
-            }
-            else if (frameworkId != null)
-            {
-                viewModel = _apprenticeshipViewModelFactory.GetFrameworkProvidersViewModel(frameworkId.Value, @Url);
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
-            }
-
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            return View(viewModel);
-        }
     }
 }

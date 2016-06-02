@@ -1,6 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Resources
-@model Sfa.Das.Sas.Web.ViewModels.ProviderViewModel
+@model Sfa.Das.Sas.Web.ViewModels.ApprenticeshipDetailsViewModel
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
@@ -8,7 +8,7 @@
 <main id="content" class="provider-detail">
 
     <p class="small-btm-margin">
-        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
+      @Html.ActionLink("Back to search page", "Standard", "Apprenticeship", new {id = @Model.Apprenticeship.Code}, new {@class="link-back"})
     </p>
 
     <div class="grid-row">
@@ -21,8 +21,9 @@
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
-
             </div>
+
+
             <section>
                 <header class="hgroup">
                     <h2 class="heading-large apprenticeship-name-level">
@@ -53,11 +54,38 @@
                     <br />
                     <em>Content maintained by @Model.Name</em>
                 </article>
-            </section>        
+            </section>
+
+            <div>
+                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+            </div>
+
+            <div class="survey-panel">
+                <h2 class="bold-large">
+                    Give us your feedback
+                </h2>
+                <p>
+                    This is a new service and your feedback will help us improve it.<br />
+                    Use the link below to take part in a short survey.
+                </p>
+                <a href="https://www.surveymonkey.co.uk/r/F3LCBG6" target="_blank" class="button">Take the survey</a>
+            </div>
+            <aside class="disclaimer">
+                <h3 class="heading-small">Content disclaimer</h3>
+                <p>
+                    Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
+                </p>
+            </aside>
+
         </div>
 
+
         <div class="column-third">
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            <div class="hidden-for-mobile">
+                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+            </div>
+
+            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
             {
                 <div class="related-container">
                     <aside class="related">
@@ -69,41 +97,8 @@
                 </div>
             }
 
-
         </div>
     </div>
-
-            <div class="grid-row">
-
-                <div class="column-two-thirds">
-
-
-
-
-                    <div class="survey-panel">
-                        <h2 class="bold-large">
-                            Give us your feedback
-                        </h2>
-                        <p>
-                            This is a new service and your feedback will help us improve it.<br />
-                            Use the link below to take part in a short survey.
-                        </p>
-                        <a href="https://www.surveymonkey.co.uk/r/F3LCBG6" target="_blank" class="button">Take the survey</a>
-                    </div>
-                    <aside class="disclaimer">
-                        <h3 class="heading-small">Content disclaimer</h3>
-                        <p>
-                            Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
-                        </p>
-                    </aside>
-
-                </div>
-
-
-                <div class="column-third">
-                </div>
-            </div>
-
 </main>
 
 @helper ShowTrainingLocation(string title)
@@ -164,8 +159,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
             </a>
         </dd>
     }
-}
-@helper GetSatisfactionsHtml()
+
+}@helper GetSatisfactionsHtml()
 {
     <p>
         <b>Employer satisfaction:</b>
@@ -215,20 +210,51 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
                 }
             </ul>
-                    <details>
-                        <summary>Explain training options</summary>
-                        <div class="panel panel-border-narrow">   
-                            <p>
-                                <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
-                            </p>
-                            <p>
-                                <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
-                            </p>
-                            <p>
-                                <span class="bold-small">At your location:</span> the provider comes to your workplace.
-                            </p>
-                        </div>
-                    </details>                
+            <details>
+                <summary>Explain training options</summary>
+                <div class="panel panel-border-narrow">
+                    <p>
+                        <span class="bold-small">Day release:</span> eg one day a week at the training provider's location.
+                    </p>
+                    <p>
+                        <span class="bold-small">Block release:</span> eg 3-4 weeks at the training provider's location.
+                    </p>
+                    <p>
+                        <span class="bold-small">At your location:</span> the provider comes to your workplace.
+                    </p>
+                </div>
+            </details>
         </dd>
     }
 }
+
+@helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
+{
+    if (isShortlisted)
+    {
+        @Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
+            new {apprenticeshipId, providerId, locationId},
+            new
+            {
+                @class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
+                data_apprenticeship = apprenticeshipId, data_provider = providerId, data_location = locationId,
+                data_action = "remove"
+            })
+    }
+    else
+    {
+        @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
+            new {apprenticeshipId, providerId, locationId},
+            new
+            {
+                @class = "link shortlist-link provider-shortlist-link",
+                rel = "nofollow",
+                data_apprenticeship = apprenticeshipId,
+                data_provider = providerId,
+                data_location = locationId,
+                data_action = "add"
+            })
+    }
+}
+
+

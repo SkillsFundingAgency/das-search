@@ -10,11 +10,9 @@ using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
-using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
-using Sfa.Das.Sas.Web.UnitTests.Extensions;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Controllers
@@ -173,111 +171,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             Assert.AreEqual(404, result.StatusCode);
             Assert.AreEqual("Cannot find framework: 1", result.StatusDescription);
             moqLogger.Verify(m => m.Warn("404 - Cannot find framework: 1"));
-        }
-
-        /*[Test]
-        [TestCase(testCase1,
-            2, 
-            true, 
-            Description = "Shortlisted")]
-        [TestCase(new[] { 1, 3 }, 2, false, Description = "Not Shortlisted")]
-        public void ShouldSetViewModelShortListValueToTrueIfStandardIsInShortList(
-            IEnumerable<ShortlistedApprenticeship> shortListItems,
-            int standardId,
-            bool expectedResult)
-        {
-            // Arrange
-            var mockStandardRepository = new Mock<IGetStandards>();
-            mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
-
-            var mockMappingServices = new Mock<IMappingService>();
-            mockMappingServices.Setup(x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
-                                            .Returns(new StandardViewModel());
-
-            var mockCookieRepository = new Mock<IListCollection<int>>();
-            var controller = new ApprenticeshipController(
-                null,
-                mockStandardRepository.Object,
-                null,
-                null,
-                mockMappingServices.Object,
-                new Mock<IProfileAStep>().Object,
-                mockCookieRepository.Object,
-                null);
-
-            controller.SetRequestUrl("http://www.abba.co.uk");
-            mockCookieRepository.Setup(x => x.GetAllItems(Constants.StandardsShortListCookieName))
-                                .Returns(new List<ShortlistedApprenticeship>(shortListItems));
-
-            // Act
-            var result = controller.Standard(standardId, string.Empty) as ViewResult;
-            var viewModel = result?.Model as StandardViewModel;
-
-            // Assert
-            Assert.IsNotNull(viewModel);
-            mockCookieRepository.Verify(x => x.GetAllItems(Constants.StandardsShortListCookieName));
-            Assert.AreEqual(expectedResult, viewModel.IsShortlisted);
-        }*/
-
-        [Test(Description = "should create vie model for standard when standardid parameter is specified ")]
-        public void SearchForProvidersActionWithStandardIdParameter()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            controller.SearchForProviders(1, null, null);
-
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Once);
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Never);
-        }
-
-        [Test(Description = "should create a viewmodel for frameworks when frameworkid parameter is specified ")]
-        public void SearchForProvidersActionWithFrameworIdParameter()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            controller.SearchForProviders(null, 12, null);
-
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Once);
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Never);
-        }
-
-        [Test(Description = "should create a viewmodel with error true ")]
-        public void SearchForProvidersWithErrors()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            var result = controller.SearchForProviders(1, null, "true") as ViewResult;
-            var viewModel = result?.Model as ProviderSearchViewModel;
-            viewModel?.HasError.Should().Be(true);
-        }
-
-        [Test(Description = "should create a viewmodel with error false")]
-        public void SearchForProvidersWithNoErrors()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            var result = controller.SearchForProviders(1, null, null) as ViewResult;
-            var viewModel = result?.Model as ProviderSearchViewModel;
-            viewModel?.HasError.Should().BeFalse();
-        }
-
-        [Test]
-        public void WhenNoValidValuesAreProvided()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            var result = controller.SearchForProviders(null, null, null) as HttpStatusCodeResult;
-            result.StatusCode.Should().Be(400);
         }
 
         [Test(Description = "should create vie model for standard when standardid parameter is specified ")]
