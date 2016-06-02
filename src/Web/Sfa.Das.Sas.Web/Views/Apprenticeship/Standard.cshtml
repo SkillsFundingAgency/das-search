@@ -9,7 +9,7 @@
 <main id="content" class="standard-detail">
 
     <p class="small-btm-margin">
-       @Html.ActionLink("Back to search page", "Search", "Apprenticeship", null, new { @class = "link-back" })
+        @Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back")
     </p>
 
     <div class="grid-row">
@@ -72,12 +72,12 @@
 
             <hr/>
 
-            <div>
+            <div id="bottom-actions">
                 <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     Find training Providers
                 </a>
-                @*@GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)*@
+                @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
             </div>
 
         </section>
@@ -110,13 +110,13 @@
     if (isShortlisted)
     {
         @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", 
-            new { id }, 
+            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
             new {@class= "link shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" })
     }
     else
     {
         @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", 
-            new { id }, 
+            new { id, responseUrlParameters = "LinkUrl=" + @Model.PreviousPageLink?.Url }, 
             new { @class = "link shortlist-link", rel="nofollow", data_standard = id, data_action = "add" })
     }
 }

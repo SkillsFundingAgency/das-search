@@ -4,9 +4,11 @@
     using System.Net;
     using System.Text;
 
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
     using Sfa.Das.Sas.WebTest.Infrastructure.Services;
+    using Sfa.Das.WebTest.Infrastructure.Selenium;
 
     using SpecBind.BrowserSupport;
     using SpecBind.Helpers;

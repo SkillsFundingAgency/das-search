@@ -4,6 +4,8 @@
     using System.Configuration;
     using System.Linq;
 
+    using Sfa.Das.Sas.WebTest.Infrastructure.Services;
+
     using SpecBind.Helpers;
 
     using TechTalk.SpecFlow;
@@ -13,21 +15,29 @@
     {
         private readonly ITokenManager _tokenManager;
 
-        public DataSteps(ITokenManager tokenManager)
+        private readonly ILog _log;
+
+        public DataSteps(ITokenManager tokenManager, ILog log)
         {
             _tokenManager = tokenManager;
+            _log = log;
         }
 
-        [Given(@"I have data for a (.*)")]
-        public void GivenIHaveDataForA(string type)
+        [Given(@"I have data in the config")]
+        public void GivenIHaveDataInTheConfig(Table data)
         {
-            foreach (var key in ConfigurationManager.AppSettings.AllKeys.Where(x => x.StartsWith($"data.{type}.")))
+            foreach (var row in data.Rows)
             {
-                var newKey = key.Replace($"data.{type}.", string.Empty);
-                var value = ConfigurationManager.AppSettings[key];
-                Console.WriteLine("-> {" + newKey + "} = " + value);
-
-                this._tokenManager.SetToken(newKey, value);
+                try
+                {
+                    var value = ConfigurationManager.AppSettings[row["Key"]];
+                    this._tokenManager.SetToken(row["Token"], value);
+                    _log.Info("{" + row["Token"] + "} = " + value);
+                }
+                catch (Exception ex)
+                {
+                    _log.Error("problem loading config", ex);
+                }
             }
         }
 

@@ -2445,3 +2445,10 @@ details .arrow {
         display: none;
     }
 } 
+
+.provider-detail .related-container {
+    @media (max-width: 640px) {
+        margin-top: 2em;
+
+    }
+}

@@ -118,23 +118,34 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 x => x.Map<Standard, StandardViewModel>(It.IsAny<Standard>()))
                 .Returns(new StandardViewModel());
 
+<<<<<<< HEAD
             var mockCookie = new Mock<IListCollection<int>>();
             mockCookie.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship> {new ShortlistedApprenticeship {ApprenticeshipId = 1}});
 
+=======
+>>>>>>> master
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
 
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(mockRequest.Object);
 
+<<<<<<< HEAD
             ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, mockCookie.Object, null);
+=======
+            ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, null, mockMappingServices.Object, new Mock<IProfileAStep>().Object, new Mock<IListCollection<int>>().Object, null);
+>>>>>>> master
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             controller.Url = new UrlHelper(
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
+<<<<<<< HEAD
             var result = controller.Standard(1, hasErrorParmeter) as ViewResult;
+=======
+            var result = controller.Standard(1, string.Empty) as ViewResult;
+>>>>>>> master
 
             Assert.NotNull(result);
         }
@@ -149,7 +160,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var moqLogger = new Mock<ILog>();
             ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null, null);
 
+<<<<<<< HEAD
             HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false");
+=======
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, string.Empty);
+>>>>>>> master
 
             Assert.NotNull(result);
             Assert.AreEqual(404, result.StatusCode);

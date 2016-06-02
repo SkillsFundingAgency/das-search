@@ -6,11 +6,7 @@
 @E2E		@CI @SystemTest @Demo @PreProd @Prod
 Scenario:Should find a framework and provider
 Given I navigated to the Start page
-	Given I have data in the config
-		| Token    | Key                     |
-		| JOBROLE  | data.framework.JOBROLE  |
-		| Postcode | data.framework.Postcode |
-
+	Given I have data for a framework
 	And I navigated to the Start page
 	When I choose Start Button
 	Then I am on the Search page
@@ -25,10 +21,6 @@ Given I navigated to the Start page
 	Then I am on the Framework Details page
 	
 	When I choose Search Page Button
-	Then I am on the Provider Search page
-
-	When I choose Search Page Button
-
 	Then I am on the Provider Search page
 
 	When I enter data

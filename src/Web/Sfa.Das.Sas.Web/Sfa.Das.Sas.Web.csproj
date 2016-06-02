@@ -578,6 +578,10 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js.map" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.map" />
+    <None Include="Transform.ServiceDefinition.csdef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Transform.ServiceConfiguration.Cloud.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

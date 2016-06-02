@@ -133,18 +133,22 @@ WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n                <li>entry requireme" +
 "nts</li>\r\n                <li>duration</li>\r\n                <li>career paths</l" +
-"i>\r\n\r\n            </ul>\r\n\r\n            <div>\r\n                <a");
+"i>\r\n\r\n            </ul>\r\n\r\n            <div");
+
+WriteLiteral(" id=\"bottom-actions\"");
+
+WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1362), Tuple.Create("\"", 1460)
+WriteAttribute("href", Tuple.Create(" href=\"", 1382), Tuple.Create("\"", 1480)
             
             #line 41 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1369), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})
+, Tuple.Create(Tuple.Create("", 1389), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})
             
             #line default
             #line hidden
-, 1369), false)
+, 1389), false)
 );
 
 WriteLiteral(">\r\n                    <i");
