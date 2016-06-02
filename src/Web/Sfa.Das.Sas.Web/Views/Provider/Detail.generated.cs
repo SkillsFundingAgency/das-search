@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/Detail.cshtml")]
-    public partial class Detail : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderCourseViewModel>
+    public partial class Detail : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ApprenticeshipDetailsViewModel>
     {
 
 #line 104 "..\..\Views\Provider\Detail.cshtml"

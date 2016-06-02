@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
@@ -65,10 +67,24 @@ namespace Sfa.Das.Sas.Web.Services
                 cfg.CreateMap<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>().AfterMap<ProviderStandardSearchResultViewModelMappingAction>();
                 cfg.CreateMap<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>().AfterMap<ProviderFrameworkSearchResultViewModelMappingAction>();
                 cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>().AfterMap<FrameworkProviderResultItemViewModelMappingAction>();
+                
+
                 cfg.CreateMap<StandardProviderSearchResultsItem, ProviderResultItemViewModel>().AfterMap<StandardProviderResultItemViewModelMappingAction>();
 
                 // Provider detail page
-                cfg.CreateMap<ProviderCourse, ProviderCourseViewModel>().AfterMap<ProviderViewModelMappingAction>();
+                cfg.CreateMap<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.Location.Address))
+                .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
+                .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.Provider.ContactInformation))
+                .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
+                .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))
+                .ForMember(dest => dest.ProviderId, opt => opt.MapFrom(source => source.Provider.Id))
+                .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.Product.EmployerSatisfaction))
+                .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.Product.LearnerSatisfaction))
+                .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.Product.ProviderMarketingInfo))
+                .ForMember(dest => dest.ProviderId, opt => opt.MapFrom(source => source.Provider.Id))
+                .AfterMap<ProviderViewModelMappingAction>();
             });
         }
     }

@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.Web.Factories
 {
     public interface IProviderViewModelFactory
     {
-        ProviderCourseViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria);
+        ApprenticeshipDetailsViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria);
     }
 }

@@ -3,7 +3,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class ProviderCourseViewModel
+    public class ApprenticeshipDetailsViewModel
     {
         public string ProviderId { get; set; }
 
@@ -32,9 +32,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string ApprenticeshipNameWithLevel { get; set; }
 
         public string ApprenticeshipLevel { get; set; }
-
-      //  public LinkViewModel SearchResultLink { get; set; }
-
+        
         public ApprenticeshipTrainingType Training { get; set; }
 
         public string SurveyUrl { get; set; }

@@ -66,8 +66,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                                 });
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
                              .Returns(new Standard() { StandardId = standardId });
+
             _mockShortlistStandardViewModelFactory.Setup(x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(It.IsAny<ShortlistStandardViewModel>());
+                .Returns(new ShortlistStandardViewModel());
             // Act
             var result = _sut.Overview() as ViewResult;
 
@@ -99,13 +100,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                              .Returns(new Standard() { StandardId = standardId });
 
             _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(standardId, It.IsAny<string>(), It.IsAny<int>()));
+                x => x.GetShortlistStandardViewModel(standardId, It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new ShortlistStandardViewModel());
 
             _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(45, It.IsAny<string>(), It.IsAny<int>()));
+                x => x.GetShortlistStandardViewModel(45, It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new ShortlistStandardViewModel());
 
             _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(83, It.IsAny<string>(), It.IsAny<int>()));
+                x => x.GetShortlistStandardViewModel(83, It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new ShortlistStandardViewModel());
 
             _mockGetStandards.Setup(x => x.GetStandardById(45));
             _mockGetStandards.Setup(x => x.GetStandardById(83));

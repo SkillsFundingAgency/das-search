@@ -95,9 +95,11 @@
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="Domain\Model\Address.cs" />
+    <Compile Include="Domain\Model\ApprenticeshipDetails.cs" />
+    <Compile Include="Domain\Model\ApprenticeshipProduct.cs" />
     <Compile Include="Domain\Model\ContactInformation.cs" />
     <Compile Include="Domain\Model\Location.cs" />
-    <Compile Include="Domain\Model\ProviderCourse.cs" />
+    <Compile Include="Domain\Model\Provider.cs" />
     <Compile Include="Domain\Model\ApprenticeshipBasic.cs" />
     <Compile Include="Domain\Model\Framework.cs" />
     <Compile Include="Domain\Model\TypicalLength.cs" />

@@ -29,9 +29,9 @@ namespace Sfa.Das.Sas.Web.Factories
             _getFrameworks = getFrameworks;
         }
 
-        public ProviderCourseViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria)
+        public ApprenticeshipDetailsViewModel GenerateDetailsViewModel(ProviderLocationSearchCriteria criteria)
         {
-            ProviderCourseViewModel courseViewModel = null;
+            ApprenticeshipDetailsViewModel courseViewModel = null;
 
             if (!string.IsNullOrEmpty(criteria.StandardCode))
             {
@@ -41,10 +41,10 @@ namespace Sfa.Das.Sas.Web.Factories
                     criteria.StandardCode);
                 if (model != null)
                 {
-                    courseViewModel = _mappingService.Map<ProviderCourse, ProviderCourseViewModel>(model);
+                    courseViewModel = _mappingService.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(model);
                     courseViewModel.Training = ApprenticeshipTrainingType.Standard;
 
-                    var apprenticeshipData = _getStandards.GetStandardById(model.Apprenticeship.Code);
+                    var apprenticeshipData = _getStandards.GetStandardById(model.Product.Apprenticeship.Code);
                     courseViewModel.ApprenticeshipNameWithLevel = apprenticeshipData.Title;
                     courseViewModel.ApprenticeshipLevel = apprenticeshipData.NotionalEndLevel.ToString();
                 }
@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.Factories
 
                 if (model != null)
                 {
-                    courseViewModel = _mappingService.Map<ProviderCourse, ProviderCourseViewModel>(model);
+                    courseViewModel = _mappingService.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(model);
                     courseViewModel.Training = ApprenticeshipTrainingType.Framework;
                     var frameworkId = Convert.ToInt32(criteria.FrameworkId);
 

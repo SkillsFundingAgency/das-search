@@ -142,7 +142,7 @@
     <Compile Include="Controllers\ApprenticeshipControllerTests.cs" />
     <Compile Include="Services\ForCookieService.cs" />
     <Compile Include="Services\ForMappingProviderResultItem.cs" />
-    <Compile Include="Services\ForMappingProviderToProviderViewModel.cs" />
+    <Compile Include="Services\ForMappingApprenticeDetailsToProviderViewModel.cs" />
     <Compile Include="Services\ForMappingStandardSearchResultsToViewModel.cs" />
     <Compile Include="ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
     <Compile Include="Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />

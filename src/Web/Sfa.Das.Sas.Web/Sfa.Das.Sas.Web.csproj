@@ -303,7 +303,7 @@
     <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderFrameworkSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderStandardSearchResultViewModel.cs" />
-    <Compile Include="ViewModels\ProviderCourseViewModel.cs" />
+    <Compile Include="ViewModels\ApprenticeshipDetailsViewModel.cs" />
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipTrainingType.cs" />

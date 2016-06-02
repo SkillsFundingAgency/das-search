@@ -44,19 +44,22 @@ namespace Sfa.Das.Sas.Web.Controllers
                 {
                     var shortlistedStandardElement = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(standard.StandardId, standard.Title, standard.NotionalEndLevel);
 
-                    foreach (var shortlistedProvider in from provider in shortlistedStandard.ProvidersIdAndLocation
-                                                        select _apprenticeshipProviderRepository.GetCourseByStandardCode(provider.ProviderId, provider.LocationId.ToString(), shortlistedStandard.ApprenticeshipId.ToString()) into p
-                                                        where p != null
-                                                        select new ShortlistProviderViewModel
-                                                        {
-                                                            Id = p.UkPrn,
-                                                            Name = p.Name,
-                                                            LocationId = p.Location.LocationId,
-                                                            Address = p.Address
-                                                        })
-                    {
-                        shortlistedStandardElement.Providers.Add(shortlistedProvider);
-                    }
+                    var shortListedProviders = shortlistedStandard.ProvidersIdAndLocation
+                                                       .Select(x => _apprenticeshipProviderRepository.GetCourseByStandardCode(
+                                                           x.ProviderId,
+                                                           x.LocationId.ToString(),
+                                                           shortlistedStandard.ApprenticeshipId.ToString()));
+
+                    var providerViewModels = shortListedProviders.Where(x => x != null)
+                                                                 .Select(p => new ShortlistProviderViewModel
+                                                                {
+                                                                     Id = p.Provider.UkPrn,
+                                                                     Name = p.Provider.Name,
+                                                                     LocationId = p.Location.LocationId,
+                                                                     Address = p.Location.Address
+                                                                 });
+
+                    shortlistedStandardElement.Providers.AddRange(providerViewModels);
 
                     standards.Add(shortlistedStandardElement);
                 }
