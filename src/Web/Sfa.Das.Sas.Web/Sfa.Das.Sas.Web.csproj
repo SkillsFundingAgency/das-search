@@ -508,7 +508,6 @@
     <Content Include="scripts\vendor\jquery-1.12.3.js" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.js" />
     <Content Include="scripts\spec\sample.spec.js" />
-    <Content Include="scripts\app\cookie-banner.js" />
     <Content Include="scripts\pages\standard-detail.js" />
     <Content Include="scripts\app\ui.js" />
     <Content Include="scripts\app\validation.js" />
