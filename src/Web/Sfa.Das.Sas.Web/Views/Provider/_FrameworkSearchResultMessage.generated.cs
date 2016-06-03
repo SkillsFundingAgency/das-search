@@ -127,7 +127,7 @@ WriteLiteralTo(__razor_helper_writer, " in England</li>\r\n            <li>");
 
 
 #line 39 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @standardId = @Model.StandardId }, new { @class = "" }));
+WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @standardId = @Model.FrameworkId }, new { @class = "" }));
 
 
 #line default

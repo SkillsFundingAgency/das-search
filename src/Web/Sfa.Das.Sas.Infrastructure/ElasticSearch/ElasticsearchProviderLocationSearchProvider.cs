@@ -191,5 +191,20 @@
 
             return descriptor;
         }
+
+        private SearchDescriptor<T> CreateProviderQueryWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var descriptor =
+                new SearchDescriptor<T>()
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .Size(1000)
+                    .Query(q => q.Bool(b => b.Filter(FilterByApprenticeshipId(selector, code))))
+                    .Sort(ss => SortByDistanceFromGivenLocation(location, ss))
+                    .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
+                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+
+            return descriptor;
+        }
     }
 }
