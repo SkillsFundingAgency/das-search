@@ -21,6 +21,7 @@
                 expires: 365,
                 domain: SearchAndShortlist.appsettings.cookieDomain,
                 secure: SearchAndShortlist.appsettings.cookieSecure,
+                httponly: false,
                 path: '/'
             });
     }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Models;
 
@@ -128,7 +126,9 @@ namespace Sfa.Das.Sas.Web.Collections
             var cookie = new HttpCookie(listName)
             {
                 Expires = DateTime.Now.AddDays(-1),
-                Domain = _settings.CookieDomain
+                Domain = _settings.CookieDomain,
+                HttpOnly = false,
+                Secure = _settings.UseSecureCookies
             };
 
             var responseCookies = _cookieFactory.GetResponseCookies();
@@ -230,7 +230,7 @@ namespace Sfa.Das.Sas.Web.Collections
             var responseCookie = new HttpCookie(listName)
             {
                 Value = listString,
-                HttpOnly = true,
+                HttpOnly = false,
                 Expires = DateTime.Now.AddYears(1),
                 Secure = _settings.UseSecureCookies,
                 Domain = _settings.CookieDomain

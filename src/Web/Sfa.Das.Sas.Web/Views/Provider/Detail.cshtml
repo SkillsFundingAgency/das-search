@@ -8,7 +8,7 @@
 <main id="content" class="provider-detail">
 
     <p class="small-btm-margin">
-      @Html.ActionLink("Back to search page", "Standard", "Apprenticeship", new {id = @Model.Apprenticeship.Code}, new {@class="link-back"})
+      @Html.ActionLink("Back to search page", "SearchForProviders", "Apprenticeship", new { standardId = @Model.Apprenticeship.Code}, new {@class="link-back"})
     </p>
 
     <div class="grid-row">
