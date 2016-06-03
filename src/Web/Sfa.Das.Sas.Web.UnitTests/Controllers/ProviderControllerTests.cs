@@ -51,6 +51,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             _mockProviderSearchService.Setup(x => x.SearchByStandardPostCode(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>()))
                 .Returns(Task.FromResult(searchResults));
+            _mockProviderSearchService.Setup(x => x.SearchByStandard(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>()))
+                .Returns(Task.FromResult(searchResults));
             _mockMappingService.Setup(
                 x =>
                 x.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(
