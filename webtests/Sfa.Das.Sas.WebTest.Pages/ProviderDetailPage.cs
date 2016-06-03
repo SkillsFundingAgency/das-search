@@ -13,6 +13,6 @@
         public IWebElement ProviderName { get; set; }
 
         [ElementLocator(CssSelector = "#bottom-actions .shortlist-link")]
-        public IWebElement ProviderShortlistLink { get; set; }
+        public IWebElement ShortlistLink { get; set; }
     }
 }
