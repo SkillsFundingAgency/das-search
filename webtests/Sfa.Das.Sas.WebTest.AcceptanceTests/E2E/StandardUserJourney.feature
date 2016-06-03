@@ -21,9 +21,11 @@ Scenario:Should find a standard and provider
 	Then I am on the Search Results page
 
 	When I choose First Standard Result
-	Then I am on the Standard Details page
-
+	Then I am on the Standard Details page	
 	When I choose Shortlist Link
+	Then I am on the Standard Details page	
+	When I wait for the view to become active
+	When I wait to see Shortlist Link
 	Then I see
          | Field          | Rule     | Value                 |
          | Shortlist Link | contains | Remove from shortlist |
