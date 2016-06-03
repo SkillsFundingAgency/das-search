@@ -83,20 +83,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Das.WebTest.E2E\Sfa.Das.WebTest.E2E.csproj">
-      <Project>{749977ea-1b1c-4fcf-a8e8-22bf73445742}</Project>
-      <Name>Sfa.Das.WebTest.E2E</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Das.WebTest.Infrastructure\Sfa.Das.WebTest.Infrastructure.csproj">
-      <Project>{a2c6f9a6-b0e7-4cff-902c-9b0ee3b11ac1}</Project>
-      <Name>Sfa.Das.WebTest.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sfa.Das.WebTest.Pages\Sfa.Das.WebTest.Pages.csproj">
-      <Project>{b6d9b569-6b18-438e-b479-99eeeeb75b28}</Project>
-      <Name>Sfa.Das.WebTest.Pages</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\Standard_Provider_Regression.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

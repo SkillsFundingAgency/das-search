@@ -1,11 +1,5 @@
 ﻿namespace Sfa.Das.WebTest.QA_Regression
 {
-    using System;
-
-    using NUnit.Framework;
-
-    using Sfa.Das.WebTest.Infrastructure.Selenium;
-
     using TechTalk.SpecFlow;
 
     [Binding]
