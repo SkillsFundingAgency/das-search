@@ -142,9 +142,9 @@
         }
 
         private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByLocation<T>(Coordinate location)
-            where T : class
+            where T : class, IApprenticeshipProviderSearchResultsItem
         {
-            return f => f.GeoShapePoint(gp => gp.Coordinates(location.Lon, location.Lat));
+            return f => f.GeoShapePoint(gp => gp.Field("location").Coordinates(location.Lon, location.Lat));
         }
 
         private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByApprenticeshipId<T>(Expression<Func<T, object>> selector, string apprenticeshipIdentifier)
