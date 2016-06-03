@@ -84,6 +84,15 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult(url);
             }
 
+            if (viewModel.TotalResults <= 0)
+            {
+                var totalProvidersCountry =
+                    await
+                        _providerSearchService.SearchByStandard(criteria.ApprenticeshipId, criteria.PostCode, new Pagination {Page = criteria.Page, Take = criteria.Take},
+                            criteria.DeliveryModes);
+                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
+            }
+
             viewModel.ActualPage = criteria.Page;
 
             if (viewModel.StandardNotFound)

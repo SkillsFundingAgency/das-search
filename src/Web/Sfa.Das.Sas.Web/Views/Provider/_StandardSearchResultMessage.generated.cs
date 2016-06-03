@@ -111,12 +111,20 @@ WriteLiteralTo(__razor_helper_writer, ">");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <div>\r\n        You can:\r\n        <ul>\r\n            <li>view all training prov" +
-"iders for ");
+WriteLiteralTo(__razor_helper_writer, "    <div>\r\n        You can:\r\n        <ul>\r\n            <li>view all(");
 
 
 #line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                  WriteTo(__razor_helper_writer, Model.StandardName);
+WriteTo(__razor_helper_writer, Model.TotalProvidersCountry);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, ") training providers for ");
+
+
+#line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                                                WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default

@@ -29,6 +29,33 @@
             _profiler = profiler;
         }
 
+        public SearchResult<StandardProviderSearchResultsItem> SearchByStandard(int code, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
+        {
+            var qryStr = CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, code.ToString(), coordinates, deliveryModes);
+
+            using (_profiler.CreateStep("Search for providers for standard"))
+            {
+                var skip = (page - 1) * take;
+                var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+                if (results.ApiCall?.HttpStatusCode != 200)
+                {
+                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
+                }
+
+                var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
+
+                var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+
+                return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+            }
+        }
+
         public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
         {
             var qryStr = CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, code.ToString(), coordinates, deliveryModes);

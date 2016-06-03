@@ -9,6 +9,8 @@ namespace Sfa.Das.Sas.ApplicationServices
     {
         SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
 
+        SearchResult<StandardProviderSearchResultsItem> SearchByStandard(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
+
         SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
     }
 }
