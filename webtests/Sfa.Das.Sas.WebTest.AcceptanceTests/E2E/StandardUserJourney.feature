@@ -3,7 +3,8 @@
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@E2E	 @CI @SystemTest @Demo @PreProd @Prod
+#@E2E	 @CI @SystemTest @Demo @PreProd @Prod
+@ignore
 Scenario:Should find a standard and provider
 	Given I have data in the config
 		| Token    | Key                    |
@@ -22,6 +23,7 @@ Scenario:Should find a standard and provider
 
 	When I choose First Standard Result
 	Then I am on the Standard Details page	
+	When I wait to see Shortlist Link
 	When I choose Shortlist Link
 	Then I am on the Standard Details page	
 	When I wait for the view to become active
@@ -48,6 +50,6 @@ Scenario:Should find a standard and provider
 		| Provider Name | Exists | true  |
 
 	When I choose Dashboard Link
-	Then I am on the Dashboard Overview page
-	And I see Standards Shortlist list contains at least 1 items
+	Then I wait to see Standards Shortlist
+	Then I see Standards Shortlist list contains at least 1 items
 

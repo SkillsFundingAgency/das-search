@@ -20,7 +20,7 @@
             {
                 expires: 365,
                 domain: SearchAndShortlist.appsettings.cookieDomain,
-                secure: SearchAndShortlist.appsettings.cookieSecure,
+                secure: SearchAndShortlist.appsettings.cookieSecure === 'true',
                 httponly: false,
                 path: '/'
             });
