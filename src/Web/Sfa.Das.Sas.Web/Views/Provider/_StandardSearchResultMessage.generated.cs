@@ -127,11 +127,15 @@ WriteLiteralTo(__razor_helper_writer, "    <div>\r\n        You can:\r\n        
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                <li>view all(");
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"total-providers-country\"");
+
+WriteLiteralTo(__razor_helper_writer, ">view all(");
 
 
 #line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Model.TotalProvidersCountry);
+                               WriteTo(__razor_helper_writer, Model.TotalProvidersCountry);
 
 
 #line default
@@ -140,7 +144,7 @@ WriteLiteralTo(__razor_helper_writer, ") training providers for ");
 
 
 #line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                    WriteTo(__razor_helper_writer, Model.StandardName);
+                                                                                    WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default
@@ -154,20 +158,28 @@ WriteLiteralTo(__razor_helper_writer, " in England</li>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <li>");
+WriteLiteralTo(__razor_helper_writer, "            <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"return-search-results\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 42 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new {@standardId = @Model.StandardId}, new {@class = ""}));
+                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new {@standardId = @Model.StandardId}, new {@class = ""}));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n            <li>");
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n            <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"start-again\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("start your keyword search again", "Search", "Apprenticeship"));
+      WriteTo(__razor_helper_writer, Html.ActionLink("start your keyword search again", "Search", "Apprenticeship"));
 
 
 #line default
