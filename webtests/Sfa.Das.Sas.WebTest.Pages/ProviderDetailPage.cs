@@ -11,5 +11,8 @@
     {
         [ElementLocator(Id = "provider-name")]
         public IWebElement ProviderName { get; set; }
+
+        [ElementLocator(CssSelector = "#bottom-actions .shortlist-link")]
+        public IWebElement ProviderShortlistLink { get; set; }
     }
 }
