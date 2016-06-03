@@ -71,16 +71,15 @@
             }
 
             <hr/>
-
-            <div>
+            <div id="bottom-actions">
                 <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     Find training Providers
                 </a>
-                @*@GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)*@
+                @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
             </div>
 
-        </section>
+</section>
 
 </main>
 
