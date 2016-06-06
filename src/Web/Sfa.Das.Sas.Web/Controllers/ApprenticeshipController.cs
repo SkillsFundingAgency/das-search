@@ -154,6 +154,10 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
 
+            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
+            
+            viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
+
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
 
             return View(viewModel);

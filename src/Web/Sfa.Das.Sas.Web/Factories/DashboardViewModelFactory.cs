@@ -5,12 +5,15 @@ namespace Sfa.Das.Sas.Web.Factories
 {
     public class DashboardViewModelFactory : IDashboardViewModelFactory
     {
-        public DashboardViewModel GetDashboardViewModel(ICollection<ShortlistStandardViewModel> standardViewModels)
+        public DashboardViewModel GetDashboardViewModel(
+            ICollection<ShortlistStandardViewModel> standardViewModels,
+            ICollection<ShortlistFrameworkViewModel> frameworkViewModels)
         {
             return new DashboardViewModel
             {
-                Title = "Your apprenticeship shortlist",
-                Standards = standardViewModels
+                Title = "Shortlisted training and providers",
+                Standards = standardViewModels,
+                Frameworks = frameworkViewModels
             };
         }
     }

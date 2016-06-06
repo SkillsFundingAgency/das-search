@@ -239,8 +239,10 @@
     <Compile Include="Factories\IHttpCookieFactory.cs" />
     <Compile Include="Factories\IDashboardViewModelFactory.cs" />
     <Compile Include="Factories\IProviderViewModelFactory.cs" />
+    <Compile Include="Factories\IShortlistFrameworkViewModelFactory.cs" />
     <Compile Include="Factories\IShortlistStandardViewModelFactory.cs" />
     <Compile Include="Factories\ProviderViewModelFactory.cs" />
+    <Compile Include="Factories\ShortlistFrameworkViewModelFactory.cs" />
     <Compile Include="Factories\ShortlistStandardViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
@@ -294,6 +296,7 @@
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
     <Compile Include="ViewModels\ShortlistProviderViewModel.cs" />
     <Compile Include="ViewModels\ProviderSearchViewModel.cs" />
+    <Compile Include="ViewModels\ShortlistFrameworkViewModel.cs" />
     <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryModeViewModel.cs" />

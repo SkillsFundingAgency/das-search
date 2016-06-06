@@ -12,62 +12,130 @@ namespace Sfa.Das.Sas.Web.Controllers
     public class DashboardController : Controller
     {
         private readonly IGetStandards _getStandards;
+        private readonly IGetFrameworks _getFrameworks;
         private readonly IListCollection<int> _listCollection;
         private readonly IDashboardViewModelFactory _dashboardViewModelFactory;
         private readonly IShortlistStandardViewModelFactory _shortlistStandardViewModelFactory;
+        private readonly IShortlistFrameworkViewModelFactory _shortlistFrameworkViewModelFactory;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
 
         public DashboardController(
             IGetStandards getStandards,
+            IGetFrameworks getFrameworks,
             IListCollection<int> listCollection,
             IDashboardViewModelFactory dashboardViewModelFactory,
             IShortlistStandardViewModelFactory shortlistStandardViewModelFactory,
+            IShortlistFrameworkViewModelFactory shortlistFrameworkViewModelFactory,
             IApprenticeshipProviderRepository apprenticeshipProviderRepository)
         {
             _getStandards = getStandards;
+            _getFrameworks = getFrameworks;
             _listCollection = listCollection;
             _dashboardViewModelFactory = dashboardViewModelFactory;
             _shortlistStandardViewModelFactory = shortlistStandardViewModelFactory;
+            _shortlistFrameworkViewModelFactory = shortlistFrameworkViewModelFactory;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
         }
 
         // GET: Dashboard
         public ActionResult Overview()
         {
-            var shortListStandards = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+            var standards = GetShortlistedStandards();
+            var frameworks = GetShortlistedFrameworks();
 
-            var standards = new List<ShortlistStandardViewModel>();
-            foreach (var shortlistedStandard in shortListStandards)
-            {
-                var standard = _getStandards.GetStandardById(shortlistedStandard.ApprenticeshipId);
-                if (standard != null)
-                {
-                    var shortlistedStandardElement = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(standard.StandardId, standard.Title, standard.NotionalEndLevel);
-
-                    var shortListedProviders = shortlistedStandard.ProvidersIdAndLocation
-                                                       .Select(x => _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                                                           x.ProviderId,
-                                                           x.LocationId.ToString(),
-                                                           shortlistedStandard.ApprenticeshipId.ToString()));
-
-                    var providerViewModels = shortListedProviders.Where(x => x != null)
-                                                                 .Select(p => new ShortlistProviderViewModel
-                                                                {
-                                                                     Id = p.Provider.UkPrn,
-                                                                     Name = p.Provider.Name,
-                                                                     LocationId = p.Location.LocationId,
-                                                                     Address = p.Location.Address
-                                                                 });
-
-                    shortlistedStandardElement.Providers.AddRange(providerViewModels);
-
-                    standards.Add(shortlistedStandardElement);
-                }
-            }
-
-            var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(standards.ToList());
+            var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(standards, frameworks);
 
             return View(viewModel);
+        }
+
+        private ICollection<ShortlistStandardViewModel> GetShortlistedStandards()
+        {
+            var standardViewModels = new List<ShortlistStandardViewModel>();
+
+            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+
+            if (shortlistedApprenticeships == null)
+            {
+                return standardViewModels;
+            }
+
+            if (!shortlistedApprenticeships.Any())
+            {
+                return standardViewModels;
+            }
+
+            foreach (var apprenticeship in shortlistedApprenticeships)
+            {
+                var standard = _getStandards.GetStandardById(apprenticeship.ApprenticeshipId);
+
+                if (standard == null)
+                {
+                    continue;
+                }
+
+                var standardViewModel = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(
+                    standard.StandardId,
+                    standard.Title,
+                    standard.NotionalEndLevel);
+
+                var shortListedProviders = apprenticeship.ProvidersIdAndLocation
+                    .Select(x => _apprenticeshipProviderRepository.GetCourseByStandardCode(
+                        x.ProviderId,
+                        x.LocationId.ToString(),
+                        apprenticeship.ApprenticeshipId.ToString()));
+
+                var providerViewModels = shortListedProviders.Where(x => x != null)
+                    .Select(p => new ShortlistProviderViewModel
+                    {
+                        Id = p.Provider.UkPrn,
+                        Name = p.Provider.Name,
+                        LocationId = p.Location.LocationId,
+                        Address = p.Location.Address
+                    });
+
+                standardViewModel.Providers.AddRange(providerViewModels);
+
+                standardViewModels.Add(standardViewModel);
+            }
+
+            return standardViewModels;
+        }
+
+        private ICollection<ShortlistFrameworkViewModel> GetShortlistedFrameworks()
+        {
+            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
+
+            if (shortlistedApprenticeships == null)
+            {
+                return new List<ShortlistFrameworkViewModel>();
+            }
+
+            if (!shortlistedApprenticeships.Any())
+            {
+                return new List<ShortlistFrameworkViewModel>();
+            }
+
+            var frameworkIds = shortlistedApprenticeships.Select(x => x.ApprenticeshipId).ToList();
+
+            if (!frameworkIds.Any())
+            {
+                return new List<ShortlistFrameworkViewModel>();
+            }
+
+            var frameworks = frameworkIds.Select(id => _getFrameworks.GetFrameworkById(id)).ToList();
+            
+            if (!frameworks.Any())
+            {
+                return new List<ShortlistFrameworkViewModel>();
+            }
+
+            var viewModels = frameworks.Select(f =>
+                _shortlistFrameworkViewModelFactory.GetShortlistFrameworkViewModel(
+                    f.FrameworkId,
+                    f.Title,
+                    f.Level));
+
+            return viewModels.Where(vm => vm != null).ToList();
         }
     }
 }

@@ -45,5 +45,5 @@ Scenario:Should find a standard and provider
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 	When I choose Dashboard Link
-	Then I am on the Dashboard Overview page
-	And I see Standards Shortlist list contains at least 1 items
+	Then I am on the Dashboard Overview page	
+	And I see Standard Shortlist list contains at least 1 items

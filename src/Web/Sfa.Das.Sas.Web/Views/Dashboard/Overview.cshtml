@@ -16,12 +16,12 @@
 
     @DisplayEmptyShortlistMessage(Model)
 
-    @DisplayStandardsShortListTable(Model.Standards.ToList())
+    @DisplayShortListTable(Model.Standards?.ToList(), Model.Frameworks?.ToList())
 </main>
 
 @helper DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
 {
-    if (viewModel.Standards.Any())
+    if ((viewModel.Standards?.Any() ?? false) || (viewModel.Frameworks?.Any() ?? false))
     {
         return;
     }
@@ -32,14 +32,16 @@
     </p>
 }
 
-@helper DisplayStandardsShortListTable(ICollection<ShortlistStandardViewModel> standards)
+@helper DisplayShortListTable(
+    ICollection<ShortlistStandardViewModel> standards,
+    ICollection<ShortlistFrameworkViewModel> frameworks)
 {
-    if (!standards.Any())
+    if ((!standards?.Any() ?? false) && (!frameworks?.Any() ?? false))
     {
         return;
     }
 
-    <table id="standards-shortlist">
+    <table id="shortlist">
         <thead>
         <tr>
             <th>Apprenticeship training</th>
@@ -47,19 +49,20 @@
         </tr>
         </thead>
         <tbody>
-        @GetShortlistItemRows(standards)
+            @GetShortlistStandardItemRows(standards)
+            @GetShortlistFrameworkItemRows(frameworks)
         </tbody>
     </table>
 }
 
-@helper GetShortlistItemRows(IEnumerable<ShortlistStandardViewModel> standards)
+@helper GetShortlistStandardItemRows(IEnumerable<ShortlistStandardViewModel> standards)
 {
     foreach (var standard in standards)
     {
         var standardName = $"{standard.Title} (level {standard.Level})";
 
-        <tr class="standard-item">
-            <td class="standard-title">@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null)</td>
+        <tr class="standard-item apprenticeship-item">
+            <td class="standard-title apprenticeship-title">@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null)</td>
             <td>@Html.ActionLink("Delete", "RemoveStandard", "ShortList",
                                             new {id = standard.Id},
                                             new {@class= "standard-delete-link", data_apprenticeship = standard.Id, rel = "nofollow"})</td>
@@ -80,5 +83,22 @@
                         new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" })</td>
             </tr>
         }
+    }
 }
+
+@helper GetShortlistFrameworkItemRows(IEnumerable<ShortlistFrameworkViewModel> frameworks)
+{
+    foreach (var framework in frameworks)
+    {
+        var frameworkName = $"{framework.Title} (level {framework.Level})";
+
+            <tr class="framework-item apprenticeship-item">
+                <td class="framework-title apprenticeship-title">@Html.ActionLink(frameworkName, "Framework", "Apprenticeship", new { id = framework.Id }, null)</td>
+                <td>
+                    @Html.ActionLink("Delete", "RemoveFramework", "ShortList",
+                                                new { id = framework.Id },
+                                                new { @class = "framework-delete-link", data_apprenticeship = framework.Id, rel = "nofollow" })
+            </td>
+        </tr>
+    }
 }

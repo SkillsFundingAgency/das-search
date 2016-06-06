@@ -49,7 +49,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 23 "..\..\Views\Dashboard\Overview.cshtml"
  
-    if (viewModel.Standards.Any())
+    if ((viewModel.Standards?.Any() ?? false) || (viewModel.Frameworks?.Any() ?? false))
     {
         return;
     }
@@ -91,15 +91,17 @@ WriteLiteralTo(__razor_helper_writer, "\r\n    </p>\r\n");
 #line hidden
 
 #line 35 "..\..\Views\Dashboard\Overview.cshtml"
-public System.Web.WebPages.HelperResult DisplayStandardsShortListTable(ICollection<ShortlistStandardViewModel> standards)
+public System.Web.WebPages.HelperResult DisplayShortListTable(
+    ICollection<ShortlistStandardViewModel> standards,
+    ICollection<ShortlistFrameworkViewModel> frameworks)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 36 "..\..\Views\Dashboard\Overview.cshtml"
+#line 38 "..\..\Views\Dashboard\Overview.cshtml"
  
-    if (!standards.Any())
+    if ((!standards?.Any() ?? false) && (!frameworks?.Any() ?? false))
     {
         return;
     }
@@ -110,16 +112,27 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <table");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"standards-shortlist\"");
+WriteLiteralTo(__razor_helper_writer, " id=\"shortlist\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <thead>\r\n        <tr>\r\n            <th>Apprenticeship training</th>\r\n " +
 "           <th>Delete</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        ");
+WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 50 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, GetShortlistItemRows(standards));
+#line 52 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, GetShortlistStandardItemRows(standards));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "            ");
+
+
+#line 53 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, GetShortlistFrameworkItemRows(frameworks));
 
 
 #line default
@@ -127,26 +140,26 @@ WriteTo(__razor_helper_writer, GetShortlistItemRows(standards));
 WriteLiteralTo(__razor_helper_writer, "\r\n        </tbody>\r\n    </table>\r\n");
 
 
-#line 53 "..\..\Views\Dashboard\Overview.cshtml"
+#line 56 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 53 "..\..\Views\Dashboard\Overview.cshtml"
+#line 56 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 55 "..\..\Views\Dashboard\Overview.cshtml"
-public System.Web.WebPages.HelperResult GetShortlistItemRows(IEnumerable<ShortlistStandardViewModel> standards)
+#line 58 "..\..\Views\Dashboard\Overview.cshtml"
+public System.Web.WebPages.HelperResult GetShortlistStandardItemRows(IEnumerable<ShortlistStandardViewModel> standards)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 56 "..\..\Views\Dashboard\Overview.cshtml"
+#line 59 "..\..\Views\Dashboard\Overview.cshtml"
  
     foreach (var standard in standards)
     {
@@ -158,17 +171,17 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <tr");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"standard-item\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"standard-item apprenticeship-item\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            <td");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"standard-title\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"standard-title apprenticeship-title\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 62 "..\..\Views\Dashboard\Overview.cshtml"
-         WriteTo(__razor_helper_writer, Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null));
+#line 65 "..\..\Views\Dashboard\Overview.cshtml"
+                              WriteTo(__razor_helper_writer, Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null));
 
 
 #line default
@@ -176,7 +189,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</td>\r\n            <td>");
 
 
-#line 63 "..\..\Views\Dashboard\Overview.cshtml"
+#line 66 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "ShortList",
                                             new {id = standard.Id},
                                             new {@class= "standard-delete-link", data_apprenticeship = standard.Id, rel = "nofollow"}));
@@ -187,7 +200,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandard", "Shor
 WriteLiteralTo(__razor_helper_writer, "</td>\r\n        </tr>\r\n");
 
 
-#line 67 "..\..\Views\Dashboard\Overview.cshtml"
+#line 70 "..\..\Views\Dashboard\Overview.cshtml"
         foreach (var provider in standard.Providers)
         {
             var providerAddress = $"{provider.Address.Address1} {provider.Address.Address2} {provider.Address.Town} {provider.Address.County} {provider.Address.Postcode}";
@@ -209,7 +222,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                    Provider -> \r\n
 WriteLiteralTo(__razor_helper_writer, "                    ");
 
 
-#line 74 "..\..\Views\Dashboard\Overview.cshtml"
+#line 77 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink(provider.Name, "Detail", "Provider", new {providerId = provider.Id, locationId = provider.LocationId, standardCode = standard.Id}, null));
 
 
@@ -220,19 +233,21 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 WriteLiteralTo(__razor_helper_writer, "                    ");
 
 
-#line 75 "..\..\Views\Dashboard\Overview.cshtml"
+#line 78 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, providerAddress);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n                </td>\r\n                <td>");
+WriteLiteralTo(__razor_helper_writer, "\r\n                </td>\r\n                <td>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "                    ");
 
 
-#line 77 "..\..\Views\Dashboard\Overview.cshtml"
+#line 81 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList",
-                                                new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId },
-                                                new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" }));
+                        new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId },
+                        new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" }));
 
 
 #line default
@@ -240,16 +255,79 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandardProvider
 WriteLiteralTo(__razor_helper_writer, "</td>\r\n            </tr>\r\n");
 
 
-#line 81 "..\..\Views\Dashboard\Overview.cshtml"
+#line 85 "..\..\Views\Dashboard\Overview.cshtml"
         }
-}
+    }
 
 
 #line default
 #line hidden
 });
 
-#line 83 "..\..\Views\Dashboard\Overview.cshtml"
+#line 87 "..\..\Views\Dashboard\Overview.cshtml"
+}
+#line default
+#line hidden
+
+#line 89 "..\..\Views\Dashboard\Overview.cshtml"
+public System.Web.WebPages.HelperResult GetShortlistFrameworkItemRows(IEnumerable<ShortlistFrameworkViewModel> frameworks)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 90 "..\..\Views\Dashboard\Overview.cshtml"
+ 
+    foreach (var framework in frameworks)
+    {
+        var frameworkName = $"{framework.Title} (level {framework.Level})";
+
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "            <tr");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"framework-item apprenticeship-item\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                <td");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"framework-title apprenticeship-title\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 96 "..\..\Views\Dashboard\Overview.cshtml"
+                                   WriteTo(__razor_helper_writer, Html.ActionLink(frameworkName, "Framework", "Apprenticeship", new { id = framework.Id }, null));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</td>\r\n                <td>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "                    ");
+
+
+#line 98 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveFramework", "ShortList",
+                                                new { id = framework.Id },
+                                                new { @class = "framework-delete-link", data_apprenticeship = framework.Id, rel = "nofollow" }));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n            </td>\r\n        </tr>\r\n");
+
+
+#line 103 "..\..\Views\Dashboard\Overview.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 104 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
@@ -320,12 +398,14 @@ WriteLiteral("    ");
 
             
             #line 19 "..\..\Views\Dashboard\Overview.cshtml"
-Write(DisplayStandardsShortListTable(Model.Standards.ToList()));
+Write(DisplayShortListTable(Model.Standards?.ToList(), Model.Frameworks?.ToList()));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n</main>\r\n\r\n");
+
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 

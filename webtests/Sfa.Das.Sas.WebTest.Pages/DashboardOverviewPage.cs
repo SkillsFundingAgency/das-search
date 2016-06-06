@@ -1,25 +1,42 @@
-﻿namespace Sfa.Das.Sas.WebTest.RegressionTests.pages
+﻿using OpenQA.Selenium;
+using Sfa.Das.Sas.WebTest.Pages.Shared;
+using SpecBind.Pages;
+using SpecBind.Selenium;
+
+namespace Sfa.Das.Sas.WebTest.Pages
 {
-    using OpenQA.Selenium;
-
-    using Sfa.Das.Sas.WebTest.Pages.Shared;
-
-    using SpecBind.Pages;
-    using SpecBind.Selenium;
-
     [PageNavigation("/Dashboard/Overview")]
     public class DashboardOverviewPage : SharedTemplatePage
     {
         [ElementLocator(Id = "empty-shortlist-message")]
         public IWebElement EmptyShortlistMessage { get; set; }
 
-        [ElementLocator(Id = "standards-shortlist")]
-        public IElementList<IWebElement, ShortlistItem> StandardsShortlist { get; set; }
+        [ElementLocator(Id = "shortlist")]
+        public IElementList<IWebElement, ApprenticeshipShortlistItem> Shortlist { get; set; }
+
+        [ElementLocator(Id = "shortlist")]
+        public IElementList<IWebElement, StandardShortlistItem> StandardShortlist { get; set; }
+
+        [ElementLocator(Id = "shortlist")]
+        public IElementList<IWebElement, FrameworkShortlistItem> FrameworkShortlist { get; set; }
+        
+
+        [ElementLocator(Class = "apprenticeship-item")]
+        public class ApprenticeshipShortlistItem : WebElement
+        {
+            public ApprenticeshipShortlistItem(ISearchContext searchContext)
+                : base(searchContext)
+            {
+            }
+
+            [ElementLocator(CssSelector = ".apprenticeship-title > a")]
+            public IWebElement Title { get; set; }
+        }
 
         [ElementLocator(Class = "standard-item")]
-        public class ShortlistItem : WebElement
+        public class StandardShortlistItem : WebElement
         {
-            public ShortlistItem(ISearchContext searchContext)
+            public StandardShortlistItem(ISearchContext searchContext)
                 : base(searchContext)
             {
             }
@@ -27,5 +44,18 @@
             [ElementLocator(CssSelector = ".standard-title > a")]
             public IWebElement Title { get; set; }
         }
+
+        [ElementLocator(Class = "framework-item")]
+        public class FrameworkShortlistItem : WebElement
+        {
+            public FrameworkShortlistItem(ISearchContext searchContext)
+                : base(searchContext)
+            {
+            }
+
+            [ElementLocator(CssSelector = ".framework-title > a")]
+            public IWebElement Title { get; set; }
+        }
+
     }
 }

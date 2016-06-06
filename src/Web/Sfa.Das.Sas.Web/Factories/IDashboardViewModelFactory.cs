@@ -5,6 +5,8 @@ namespace Sfa.Das.Sas.Web.Factories
 {
     public interface IDashboardViewModelFactory
     {
-        DashboardViewModel GetDashboardViewModel(ICollection<ShortlistStandardViewModel> standardViewModels);
+        DashboardViewModel GetDashboardViewModel(
+            ICollection<ShortlistStandardViewModel> standardViewModels,
+            ICollection<ShortlistFrameworkViewModel> frameworkViewModels);
     }
 }

@@ -23,11 +23,18 @@ Given I navigated to the Start page
 
 	When I choose First Framework Result
 	Then I am on the Framework Details page
-	
+	When I wait to see Shortlist Link
+	When I choose Shortlist Link
+	Then I am on the Framework Details page	
+	When I wait for the view to become active
+	When I wait to see Shortlist Link
+	Then I see
+         | Field          | Rule     | Value                 |
+         | Shortlist Link | contains | Remove from shortlist |	
 	When I choose Search Page Button
 	Then I am on the Provider Search page
 
-	When I choose Search Page Button
+	When I choose Search Button
 
 	Then I am on the Provider Search page
 
@@ -43,3 +50,6 @@ Given I navigated to the Start page
 	And I see
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
+	When I choose Dashboard Link
+	Then I am on the Dashboard Overview page	
+	And I see Framework Shortlist list contains at least 1 items
