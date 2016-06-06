@@ -72,10 +72,7 @@
     <None Include="Lightload.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="5_1HR.loadtest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="ShortlistingStandard.webtest">
+    <None Include="View_Dashboard.webtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Soak.loadtest">
