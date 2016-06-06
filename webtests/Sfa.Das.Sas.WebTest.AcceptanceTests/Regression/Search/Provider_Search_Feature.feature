@@ -3,7 +3,7 @@
 
 	#Currently extending this section please ignore
 	#@Regression		@PreProd @Prod
-	Scenario Outline:Should find a list of providers for any postcode existing in the CD API for specific Frameworks
+	Scenario Outline:Should find a list of providers for any postcode existing in the CD API for  Frameworks which they offer
 	
 	Given I navigated to the Search page
 	When I enter data
@@ -29,3 +29,15 @@
 		| BS8 1EJ  | EXETER COLLEGE              | Hospitality                               |
 		| TS17 6F  | Stockton Riverside College  | Electrotechnical: Electrical Installation |
 		| EX1 3QS  | EDUCATION + TRAINING SKILLS | Business and Administration               |
+
+	#@Regression		@PreProd @Prod
+	Scenario Outline:If a postcode is invalid a clear message is displayed
+	Given I was on the Provider Search page
+	When I enter data
+         | Field		   | Value    |
+         |    Search Box   |  BSe8 1xJ |
+	And I wait for the Provider Search page	
+	# need to find out if error can be given an ID	class is "form-elements error"
+	Then I see
+         | Field | Rule | Value |
+         |  error     |   contains   | Invalid postcode | 
