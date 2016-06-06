@@ -45,6 +45,65 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/Framework.cshtml")]
     public partial class Framework : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel>
     {
+
+#line 51 "..\..\Views\Apprenticeship\Framework.cshtml"
+public System.Web.WebPages.HelperResult GetShortlistLink(int id, bool isShortlisted)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 52 "..\..\Views\Apprenticeship\Framework.cshtml"
+ 
+if (isShortlisted)
+{
+        
+
+#line default
+#line hidden
+
+#line 55 "..\..\Views\Apprenticeship\Framework.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveFramework", "ShortList",
+            new { id },
+            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" }));
+
+
+#line default
+#line hidden
+
+#line 57 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                                                                                  
+}
+else
+{
+        
+
+#line default
+#line hidden
+
+#line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddFramework", "ShortList",
+            new { id },
+            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" }));
+
+
+#line default
+#line hidden
+
+#line 63 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                                                                               
+}
+
+
+#line default
+#line hidden
+});
+
+#line 65 "..\..\Views\Apprenticeship\Framework.cshtml"
+}
+#line default
+#line hidden
+
         public Framework()
         {
         }
@@ -141,10 +200,10 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1382), Tuple.Create("\"", 1480)
+WriteAttribute("href", Tuple.Create(" href=\"", 1382), Tuple.Create("\"", 1479)
             
             #line 41 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1389), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})
+, Tuple.Create(Tuple.Create("", 1389), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId})
             
             #line default
             #line hidden
@@ -157,8 +216,18 @@ WriteLiteral(" class=\"fa fa-search\"");
 
 WriteLiteral(" aria-hidden=\"true\"");
 
-WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n       " +
-"     </div>\r\n        </div>\r\n     </div>\r\n</main>");
+WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 45 "..\..\Views\Apprenticeship\Framework.cshtml"
+           Write(GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
 
         }
     }

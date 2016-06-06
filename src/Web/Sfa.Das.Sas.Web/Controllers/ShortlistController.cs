@@ -82,6 +82,28 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return GetReturnRedirectFromStandardProviderShortlistAction(apprenticeshipId, providerId, locationId);
         }
+
+        public ActionResult AddFramework(int id)
+        {
+            _logger.Debug($"Adding framework {id} to shortlist cookie");
+
+            var shorlistedApprenticeship = new ShortlistedApprenticeship
+            {
+                ApprenticeshipId = id
+            };
+            _listCollection.AddItem(Constants.FrameworksShortListCookieName, shorlistedApprenticeship);
+
+            return GetReturnRedirectFromFrameworkShortlistAction(id);
+        }
+
+        public ActionResult RemoveFramework(int id)
+        {
+            _logger.Debug($"Removing framework {id} from shortlist cookie");
+
+            _listCollection.RemoveApprenticeship(Constants.FrameworksShortListCookieName, id);
+
+            return GetReturnRedirectFromStandardShortlistAction(id);
+        }
         
         // This method is used to try to redirect back from the page that requested the updating of the
         // standards shortlist. If a URL cannot be found in the request then the default is to go back to
@@ -114,6 +136,16 @@ namespace Sfa.Das.Sas.Web.Controllers
             };
 
             return RedirectToAction("Detail", "Provider", new { providerSearchCriteria });
+        }
+        
+        private ActionResult GetReturnRedirectFromFrameworkShortlistAction(int id)
+        {
+            if (Request.UrlReferrer == null)
+            {
+                return RedirectToAction("Framework", "Apprenticeship", new { id });
+            }
+
+            return Redirect(Request.UrlReferrer.OriginalString);
         }
     }
 }

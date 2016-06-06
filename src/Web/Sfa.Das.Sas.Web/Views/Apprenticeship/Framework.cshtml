@@ -38,11 +38,28 @@
             </ul>
 
             <div id="bottom-actions">
-                <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId})">
+                <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId})">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     Find training Providers
                 </a>
+                @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted)
             </div>
         </div>
-     </div>
+    </div>
 </main>
+
+@helper GetShortlistLink(int id, bool isShortlisted)
+{
+if (isShortlisted)
+{
+        @Html.ActionLink("Remove from shortlist", "RemoveFramework", "ShortList",
+            new { id },
+            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" })
+}
+else
+{
+        @Html.ActionLink("Shortlist apprenticeship", "AddFramework", "ShortList",
+            new { id },
+            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" })
+}
+}
