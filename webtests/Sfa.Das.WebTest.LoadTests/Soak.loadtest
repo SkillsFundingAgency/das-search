@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LoadTest Name="Soak" Description="" Owner="" storage="c:\code\das\webtests\sfa.das.webtest.loadtests\loadscripts\soak.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Run Settings1" Id="c8267f4f-7304-4dc9-988f-2f43a88d0fcd" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<LoadTest Name="Soak" Description="" Owner="" storage="c:\code\das\webtests\sfa.das.webtest.loadtests\soak.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Run Settings1" Id="c8267f4f-7304-4dc9-988f-2f43a88d0fcd" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Scenarios>
     <Scenario Name="Scenario1" DelayBetweenIterations="120" PercentNewUsers="0" IPSwitching="false" TestMixType="PercentageOfTestsStarted" ApplyDistributionToPacingDelay="true" MaxTestIterations="0" DisableDuringWarmup="false" DelayStartTime="0" AllowedAgents="">
       <ThinkProfile Value="0.2" Pattern="NormalDistribution" />
-      <LoadProfile Pattern="Step" InitialUsers="5" MaxUsers="300" StepUsers="5" StepDuration="60" StepRampTime="0" />
+      <LoadProfile Pattern="Step" InitialUsers="5" MaxUsers="25" StepUsers="5" StepDuration="3600" StepRampTime="0" />
       <TestMix>
-        <TestProfile Name="E2E" Path="e2e.webtest" Id="87a51e1c-e804-4c63-bf77-8e9aff205ae1" Percentage="100" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="e2e.webtest" Path="e2e.webtest" Id="87a51e1c-e804-4c63-bf77-8e9aff205ae1" Percentage="100" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
       </TestMix>
       <BrowserMix>
         <BrowserProfile Percentage="100">

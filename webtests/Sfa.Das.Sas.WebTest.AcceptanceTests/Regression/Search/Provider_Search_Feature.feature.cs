@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.Search
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Provider_Search_Feature", "\tAs an employer I want to be able to search for different Providers in different " +
-                    "postcodes", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "postcodes for different frameworks", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,11 +65,15 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.Search
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should find a list of providers by postcode")]
+        [NUnit.Framework.DescriptionAttribute("Should find a list of providers for any postcode existing in the CD API for speci" +
+            "fic Frameworks")]
         [NUnit.Framework.TestCaseAttribute("BS8 1EJ", "EXETER COLLEGE", "Hospitality", new string[0])]
-        public virtual void ShouldFindAListOfProvidersByPostcode(string postcode, string title, string searchTerm, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("TS17 6F", "Stockton Riverside College", "Electrotechnical: Electrical Installation", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("EX1 3QS", "EDUCATION + TRAINING SKILLS", "Business and Administration", new string[0])]
+        public virtual void ShouldFindAListOfProvidersForAnyPostcodeExistingInTheCDAPIForSpecificFrameworks(string postcode, string title, string searchTerm, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a list of providers by postcode", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a list of providers for any postcode existing in the CD API for speci" +
+                    "fic Frameworks", exampleTags);
 #line 6
  this.ScenarioSetup(scenarioInfo);
 #line 8
