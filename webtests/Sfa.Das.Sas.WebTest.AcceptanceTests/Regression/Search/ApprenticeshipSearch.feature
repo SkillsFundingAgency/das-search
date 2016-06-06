@@ -19,5 +19,7 @@ Scenario Outline:Should find a apprenticeship by the job role
 	| Title | Equals | <title> |
 
 Examples: 
-	| search term | title                                 |
-	| railway     | Railway engineering design technician |
+	| search term                    | title                                 |
+	| railway                        | Railway engineering design technician |
+	| Junior management consultant   | Junior management consultant          |
+	| Relationship manager (banking) | Relationship manager (banking)        |

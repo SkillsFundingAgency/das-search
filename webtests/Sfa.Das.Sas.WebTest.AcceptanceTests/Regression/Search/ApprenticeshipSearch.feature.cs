@@ -70,6 +70,8 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.Search
         [NUnit.Framework.CategoryAttribute("PreProd")]
         [NUnit.Framework.CategoryAttribute("Prod")]
         [NUnit.Framework.TestCaseAttribute("railway", "Railway engineering design technician", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Junior management consultant", "Junior management consultant", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Relationship manager (banking)", "Relationship manager (banking)", new string[0])]
         public virtual void ShouldFindAApprenticeshipByTheJobRole(string searchTerm, string title, string[] exampleTags)
         {
             string[] @__tags = new string[] {
