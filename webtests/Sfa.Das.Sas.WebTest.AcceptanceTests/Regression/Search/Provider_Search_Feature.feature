@@ -30,14 +30,4 @@
 		| TS17 6F  | Stockton Riverside College  | Electrotechnical: Electrical Installation |
 		| EX1 3QS  | EDUCATION + TRAINING SKILLS | Business and Administration               |
 
-	#@Regression		@PreProd @Prod
-	Scenario Outline:If a postcode is invalid a clear message is displayed
-	Given I was on the Provider Search page
-	When I enter data
-         | Field		   | Value    |
-         |    Search Box   |  BSe8 1xJ |
-	And I wait for the Provider Search page	
-	# need to find out if error can be given an ID	class is "form-elements error"
-	Then I see
-         | Field | Rule | Value |
-         |  error     |   contains   | Invalid postcode | 
+	

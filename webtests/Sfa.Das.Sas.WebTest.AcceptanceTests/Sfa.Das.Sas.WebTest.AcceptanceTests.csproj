@@ -158,6 +158,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Regression\Search\Invalid_Postcode_Message.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invalid_Postcode_Message.feature</DependentUpon>
+    </Compile>
     <Compile Include="Regression\Search\Provider_Search_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -274,6 +279,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ApprenticeshipSearch.feature.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Regression\Search\Invalid_Postcode_Message.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Invalid_Postcode_Message.feature.cs</LastGenOutput>
     </None>
     <None Include="Regression\Search\Provider_Search_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
