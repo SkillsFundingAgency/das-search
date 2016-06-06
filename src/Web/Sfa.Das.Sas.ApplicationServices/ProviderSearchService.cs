@@ -33,7 +33,19 @@ namespace Sfa.Das.Sas.ApplicationServices
             _paginationSettings = paginationSettings;
         }
 
-        public async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
+        public async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool showAll)
+        {
+            if (!showAll)
+            {
+                return await SearchByStandardPostCode(standardId, postCode, pagination, deliveryModes);
+            }
+            else
+            {
+                return await SearchByStandard(standardId, postCode, pagination, deliveryModes);
+            }
+        }
+
+        private async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -102,7 +114,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
-        public async Task<ProviderStandardSearchResults> SearchByStandard(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
+        private async Task<ProviderStandardSearchResults> SearchByStandard(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {

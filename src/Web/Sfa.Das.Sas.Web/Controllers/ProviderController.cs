@@ -64,7 +64,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
 
             var searchResults =
-                await _providerSearchService.SearchByStandardPostCode(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes);
+                await _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes, criteria.ShowAll);
 
             var viewModel =
                 _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
@@ -88,8 +88,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 var totalProvidersCountry =
                     await
-                        _providerSearchService.SearchByStandard(criteria.ApprenticeshipId, criteria.PostCode, new Pagination {Page = criteria.Page, Take = criteria.Take},
-                            criteria.DeliveryModes);
+                        _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination {Page = criteria.Page, Take = criteria.Take},
+                            criteria.DeliveryModes, true);
                 viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
             }
 

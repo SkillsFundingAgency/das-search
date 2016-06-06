@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(123, postcode, pagination, null);
+            var result = await service.SearchStandardProviders(123, postcode, pagination, null, false);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -53,7 +53,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(testStandardId, postcode, pagination, null);
+            var result = await service.SearchStandardProviders(testStandardId, postcode, pagination, null, false);
 
             Assert.That(result.StandardId, Is.EqualTo(testStandardId));
         }
@@ -82,7 +82,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, pagination, null);
+            var result = await service.SearchStandardProviders(testStandardId, testPostCode, pagination, null, false);
 
             Assert.That(result.Hits, Is.EqualTo(stubSearchResults));
 
@@ -113,7 +113,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(testStandardId, testPostCode, pagination, null);
+            var result = await service.SearchStandardProviders(testStandardId, testPostCode, pagination, null, false);
 
             result.TotalResults.Should().Be(0);
             result.StandardId.Should().Be(123);
@@ -140,7 +140,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(123, "AS2 3SS", pagination, null);
+            var result = await service.SearchStandardProviders(123, "AS2 3SS", pagination, null, false);
 
             Assert.That(result.TotalResults, Is.EqualTo(testTotalResults));
         }
@@ -165,7 +165,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", pagination, null);
+            var result = await service.SearchStandardProviders(123, "AS3 4AS", pagination, null, false);
 
             Assert.That(result.StandardName, Is.EqualTo(testTitle));
         }
@@ -189,7 +189,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByStandardPostCode(123, "AS3 4AS", pagination, null);
+            var result = await service.SearchStandardProviders(123, "AS3 4AS", pagination, null, false);
 
             Assert.That(result.HasError, Is.True);
         }

@@ -131,20 +131,20 @@ WriteLiteralTo(__razor_helper_writer, "                <li");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"total-providers-country\"");
 
-WriteLiteralTo(__razor_helper_writer, ">view all(");
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                               WriteTo(__razor_helper_writer, Model.TotalProvidersCountry);
+                      WriteTo(__razor_helper_writer, Html.ActionLink(string.Format("view all({0}) training providers", @Model.TotalProvidersCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, ") training providers for ");
+WriteLiteralTo(__razor_helper_writer, " for ");
 
 
 #line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                                    WriteTo(__razor_helper_writer, Model.StandardName);
+                                                                                                                                                                                                                                                                            WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default

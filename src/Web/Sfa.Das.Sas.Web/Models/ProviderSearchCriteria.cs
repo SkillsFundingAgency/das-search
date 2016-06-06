@@ -12,6 +12,8 @@
 
         public int Take { get; set; }
 
+        public bool ShowAll { get; set; }
+
         public IEnumerable<string> DeliveryModes { get; set; }
     }
 }
