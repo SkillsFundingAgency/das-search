@@ -3,7 +3,7 @@
 
 	#@Regression		@PreProd @Prod
 	#Scenario Outline:If a postcode is invalid a clear message is displayed
-	#Given I navigated to the Provider Search page#
+	#Given I navigated to the Provider Search page
 	#When I enter data
         # | Field		| Value    |
         # | Search Box   |  BSe8 1xJ|

@@ -5,8 +5,10 @@
       <ThinkProfile Value="0.2" Pattern="NormalDistribution" />
       <LoadProfile Pattern="Step" InitialUsers="5" MaxUsers="50" StepUsers="5" StepDuration="60" StepRampTime="0" />
       <TestMix>
-        <TestProfile Name="E2E" Path="e2e.webtest" Id="87a51e1c-e804-4c63-bf77-8e9aff205ae1" Percentage="69" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-        <TestProfile Name="ViewStandard" Path="viewstandard.webtest" Id="57cc366f-a430-4773-a954-21cff8957f47" Percentage="31" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="ViewStandard" Path="viewstandard.webtest" Id="57cc366f-a430-4773-a954-21cff8957f47" Percentage="25" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="End2End_1" Path="end2end_1.webtest" Id="bf427873-43d0-4a58-8af3-35753a7e2545" Percentage="25" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="View_Dashboard" Path="view_dashboard.webtest" Id="a002d53d-ab59-455e-b3a8-bde514bd730a" Percentage="25" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="Home_Search_Page" Path="home_search_page.webtest" Id="94053f9c-baa1-42c9-bb69-3f16f485893a" Percentage="25" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
       </TestMix>
       <BrowserMix>
         <BrowserProfile Percentage="100">
