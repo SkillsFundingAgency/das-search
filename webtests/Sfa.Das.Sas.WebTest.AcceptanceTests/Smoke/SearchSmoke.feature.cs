@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.RegressionTests.Smoke
+namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Smoke
 {
     using TechTalk.SpecFlow;
     
@@ -83,24 +83,31 @@ namespace Sfa.Das.Sas.WebTest.RegressionTests.Smoke
                         "Prod"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
-#line 8
-testRunner.Given("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
- testRunner.Given("I have data for a framework", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
- testRunner.And("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Token",
+                        "Key"});
+            table1.AddRow(new string[] {
+                        "JOBROLE",
+                        "data.framework.JOBROLE"});
+#line 8
+ testRunner.Given("I have data in the config", ((string)(null)), table1, "Given ");
+#line 11
+ testRunner.And("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
+ testRunner.And("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table1.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Search Box",
                         "{JOBROLE}"});
-#line 12
- testRunner.When("I enter data", ((string)(null)), table1, "When ");
 #line 15
+ testRunner.When("I enter data", ((string)(null)), table2, "When ");
+#line 18
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
+#line 19
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
