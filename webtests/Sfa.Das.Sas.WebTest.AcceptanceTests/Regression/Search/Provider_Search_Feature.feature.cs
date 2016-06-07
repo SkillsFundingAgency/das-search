@@ -18,21 +18,21 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.Search
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Apprenticeship Search")]
-    public partial class ApprenticeshipSearchFeature
+    [NUnit.Framework.DescriptionAttribute("Provider_Search_Feature")]
+    public partial class Provider_Search_FeatureFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "ApprenticeshipSearch.feature"
+#line 1 "Provider_Search_Feature.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Apprenticeship Search", "\tAs an employer\r\n\tI want to be able to search for training options\r\n\tand find a p" +
-                    "rovider for a given framework", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Provider_Search_Feature", "\tAs an employer I want to be able to search for different Providers in different " +
+                    "postcodes for different frameworks", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,27 +65,18 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.Search
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Should find a apprenticeship by the job role")]
-        [NUnit.Framework.CategoryAttribute("Regression")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
-        [NUnit.Framework.CategoryAttribute("Prod")]
-        [NUnit.Framework.TestCaseAttribute("railway", "Railway engineering design technician", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Junior management consultant", "Junior management consultant", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("Relationship manager (banking)", "Relationship manager (banking)", new string[0])]
-        public virtual void ShouldFindAApprenticeshipByTheJobRole(string searchTerm, string title, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Should find a list of providers for any postcode existing in the CD API for  Fram" +
+            "eworks which they offer")]
+        [NUnit.Framework.TestCaseAttribute("BS8 1EJ", "EXETER COLLEGE", "Hospitality", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("TS17 6F", "Stockton Riverside College", "Electrotechnical: Electrical Installation", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("EX1 3QS", "EDUCATION + TRAINING SKILLS", "Business and Administration", new string[0])]
+        public virtual void ShouldFindAListOfProvidersForAnyPostcodeExistingInTheCDAPIForFrameworksWhichTheyOffer(string postcode, string title, string searchTerm, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "Regression",
-                    "PreProd",
-                    "Prod"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a apprenticeship by the job role", @__tags);
-#line 7
-this.ScenarioSetup(scenarioInfo);
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a list of providers for any postcode existing in the CD API for  Fram" +
+                    "eworks which they offer", exampleTags);
+#line 6
+ this.ScenarioSetup(scenarioInfo);
+#line 8
  testRunner.Given("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -94,23 +85,44 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Search Box",
                         string.Format("{0}", searchTerm)});
-#line 11
+#line 9
  testRunner.When("I enter data", ((string)(null)), table1, "When ");
-#line 14
+#line 12
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
+#line 13
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+ testRunner.When("I choose First Framework Result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 15
+ testRunner.Then("I am on the Framework Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 16
+ testRunner.When("I choose {linkName}", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+ testRunner.Then("I am on the Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
-                        "Rule",
                         "Value"});
             table2.AddRow(new string[] {
+                        "Search Box",
+                        string.Format("{0}", postcode)});
+#line 18
+ testRunner.When("I enter data", ((string)(null)), table2, "When ");
+#line 21
+ testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.Then("I am on the Framework Provider Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Rule",
+                        "Value"});
+            table3.AddRow(new string[] {
                         "Title",
                         "Equals",
                         string.Format("{0}", title)});
-#line 17
- testRunner.And("I see Apprenticeship Results list Contains", ((string)(null)), table2, "And ");
+#line 23
+ testRunner.And("I see Provider Results list Contains", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
