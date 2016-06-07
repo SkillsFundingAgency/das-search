@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             };
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
-            _mockProviderSearchService.Setup(x => x.SearchByFrameworkPostCode(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>()))
+            _mockProviderSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(searchResults));
             _mockMappingService.Setup(
                 x =>

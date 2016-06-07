@@ -206,7 +206,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(123, postcode, pagination, null);
+            var result = await service.SearchFrameworkProviders(123, postcode, pagination, null, false);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -231,7 +231,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, postcode, pagination, null);
+            var result = await service.SearchFrameworkProviders(testFrameworkId, postcode, pagination, null, false);
 
             result.FrameworkId.Should().Be(testFrameworkId);
         }
@@ -260,7 +260,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, pagination, null);
+            var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, pagination, null, false);
 
             result.Hits.Should().BeSameAs(stubSearchResults);
 
@@ -291,7 +291,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(testFrameworkId, testPostCode, pagination, null);
+            var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, pagination, null, false);
 
             result.TotalResults.Should().Be(0);
             result.FrameworkId.Should().Be(123);
@@ -318,7 +318,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS2 3SS", pagination, null);
+            var result = await service.SearchFrameworkProviders(123, "AS2 3SS", pagination, null, false);
 
             result.TotalResults.Should().Be(testTotalResults);
         }
@@ -343,7 +343,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", pagination, null);
+            var result = await service.SearchFrameworkProviders(123, "AS3 4AS", pagination, null, false);
 
             result.FrameworkName.Should().Be(frameworkName);
         }
@@ -367,7 +367,7 @@ namespace Sfa.Das.Sas.ApplicationServices.UnitTests
                 Take = 10
             };
 
-            var result = await service.SearchByFrameworkPostCode(123, "AS3 4AS", pagination, null);
+            var result = await service.SearchFrameworkProviders(123, "AS3 4AS", pagination, null, false);
 
             Assert.That(result.HasError, Is.True);
         }

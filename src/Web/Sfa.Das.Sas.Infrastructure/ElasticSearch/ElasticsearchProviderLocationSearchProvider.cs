@@ -83,6 +83,34 @@
             }
         }
 
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
+        {
+            using (_profiler.CreateStep("Search for providers for framework"))
+            {
+                var skip = (page - 1) * take;
+
+                var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, code.ToString(), geoPoint, deliveryModes);
+
+                var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+                if (results.ApiCall?.HttpStatusCode != 200)
+                {
+                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
+                }
+
+                var documents = results.Hits.Select(hit => MapToFrameworkProviderSearhResultsItem(hit)).ToList();
+
+                var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+
+                return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+            }
+        }
+
         public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
             using (_profiler.CreateStep("Search for providers for framework"))

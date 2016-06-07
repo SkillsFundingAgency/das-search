@@ -123,7 +123,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
 
             var searchResults =
-                 await _providerSearchService.SearchByFrameworkPostCode(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes);
+                 await _providerSearchService.SearchFrameworkProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes, criteria.ShowAll);
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
@@ -141,6 +141,15 @@ namespace Sfa.Das.Sas.Web.Controllers
                     "Provider",
                     new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
                 return new RedirectResult(url);
+            }
+
+            if (viewModel.TotalResults <= 0)
+            {
+                var totalProvidersCountry =
+                    await
+                        _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take },
+                            criteria.DeliveryModes, true);
+                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
             }
 
             viewModel.ActualPage = criteria.Page;

@@ -39,10 +39,18 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 return await SearchByStandardPostCode(standardId, postCode, pagination, deliveryModes);
             }
-            else
+
+            return await SearchByStandard(standardId, postCode, pagination, deliveryModes);
+        }
+
+        public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool showAll)
+        {
+            if (!showAll)
             {
-                return await SearchByStandard(standardId, postCode, pagination, deliveryModes);
+                return await SearchByFrameworkPostCode(frameworkId, postCode, pagination, deliveryModes);
             }
+
+            return await SearchByFramework(frameworkId, postCode, pagination, deliveryModes);
         }
 
         private async Task<ProviderStandardSearchResults> SearchByStandardPostCode(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
@@ -121,7 +129,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 return new ProviderStandardSearchResults { StandardId = standardId, PostCodeMissing = true };
             }
 
-            string standardName = string.Empty;
+            var standardName = string.Empty;
 
             try
             {
@@ -183,7 +191,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
-        public async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
+        private async Task<ProviderFrameworkSearchResults> SearchByFrameworkPostCode(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -211,6 +219,78 @@ namespace Sfa.Das.Sas.ApplicationServices
                 if (coordinates != null)
                 {
                     var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
+                    hits = searchResults.Hits;
+                    total = searchResults.Total;
+                    trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
+                }
+                else
+                {
+                    hits = new IApprenticeshipProviderSearchResultsItem[0];
+                    trainingOptionsAggregation = new Dictionary<string, long?>();
+                }
+
+                return new ProviderFrameworkSearchResults
+                {
+                    Title = framework?.Title,
+                    TotalResults = total,
+                    ResultsToTake = takeElements,
+                    FrameworkId = frameworkId,
+                    FrameworkCode = framework?.FrameworkCode ?? 0,
+                    FrameworkName = framework?.FrameworkName,
+                    PathwayName = framework?.PathwayName,
+                    FrameworkLevel = framework?.Level ?? 0,
+                    PostCode = postCode,
+                    Hits = hits,
+                    TrainingOptionsAggregation = trainingOptionsAggregation,
+                    SelectedTrainingOptions = deliveryModes,
+                    FrameworkIsMissing = frameworkMissing
+                };
+            }
+            catch (SearchException ex)
+            {
+                _logger.Error(ex, "Search for Provider failed.");
+
+                return new ProviderFrameworkSearchResults
+                {
+                    TotalResults = 0,
+                    FrameworkId = frameworkId,
+                    FrameworkName = string.Empty,
+                    PathwayName = string.Empty,
+                    PostCode = postCode,
+                    Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                    HasError = true
+                };
+            }
+        }
+
+        private async Task<ProviderFrameworkSearchResults> SearchByFramework(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes)
+        {
+            if (string.IsNullOrEmpty(postCode))
+            {
+                return new ProviderFrameworkSearchResults { FrameworkId = frameworkId, PostCodeMissing = true };
+            }
+
+            try
+            {
+                var framework = _getFrameworks.GetFrameworkById(frameworkId);
+
+                var frameworkMissing = framework == null;
+
+                if (frameworkId < 0)
+                {
+                    throw new SearchException("FrameworkId can't be negative");
+                }
+
+                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+
+                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
+                var total = 0L;
+                Dictionary<string, long?> trainingOptionsAggregation;
+                var takeElements = pagination.Take <= 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
+
+                if (coordinates != null)
+                {
+                    var searchResults = _searchProvider.SearchByFramework(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
                     hits = searchResults.Hits;
                     total = searchResults.Total;
                     trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
