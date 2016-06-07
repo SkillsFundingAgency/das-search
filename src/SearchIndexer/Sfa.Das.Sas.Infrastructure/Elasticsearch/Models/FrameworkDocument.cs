@@ -9,6 +9,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
     {
         [String(Analyzer = "english")]
         public string Title { get; set; }
+
         public int Level { get; set; }
 
         public int FrameworkCode { get; set; }

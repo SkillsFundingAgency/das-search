@@ -13,6 +13,8 @@ using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 {
+    using JobRoleItem = Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models.JobRoleItem;
+
     public class ElasticsearchMapper : IElasticsearchMapper
     {
         private readonly ILog _logger;
@@ -61,7 +63,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 PathwayCode = frameworkMetaData.PwayCode,
                 PathwayName = frameworkMetaData.PathwayName,
                 Level = MapLevelProgType(frameworkMetaData.ProgType),
-                JobRoleItems = frameworkMetaData.JobRoleItems,
+                JobRoleItems = frameworkMetaData.JobRoleItems.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
                 TypicalLength = frameworkMetaData.TypicalLength
             };
             return doc;

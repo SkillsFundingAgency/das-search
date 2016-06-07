@@ -118,9 +118,11 @@
                                 .Field(p => p.JobRoles)
                                 .Field(p => p.Keywords)
                                 .Field(p => p.FrameworkName)
-                                .Field(p => p.PathwayName))
-                            .Query(formattedKeywords)))
-                        .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
+                                .Field(p => p.PathwayName)
+                                .Field(p => p.JobRoleItems.First().Title)
+                                .Field(p => p.JobRoleItems.First().Description))
+                         .Query(formattedKeywords)))
+                    .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
                     .Aggregations(agg => agg
                         .Terms(LevelAggregateName, t => t
                             .Field(f => f.Level).MinimumDocumentCount(0)));

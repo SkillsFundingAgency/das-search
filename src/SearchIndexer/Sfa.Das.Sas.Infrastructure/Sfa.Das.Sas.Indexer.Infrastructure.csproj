@@ -127,6 +127,7 @@
     <Compile Include="Elasticsearch\Models\FrameworkProvider.cs" />
     <Compile Include="Elasticsearch\Models\IApprenticeshipDocument.cs" />
     <Compile Include="Elasticsearch\Models\IProviderAppreticeshipDocument.cs" />
+    <Compile Include="Elasticsearch\Models\JobRoleItem.cs" />
     <Compile Include="Elasticsearch\Models\StandardProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
