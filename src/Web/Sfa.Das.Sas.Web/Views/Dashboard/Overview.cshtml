@@ -21,12 +21,14 @@
 
 @helper DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
 {
+    var emptyMessageClasses = "notice";
+
     if ((viewModel.Standards?.Any() ?? false) || (viewModel.Frameworks?.Any() ?? false))
     {
-        return;
+        emptyMessageClasses += " hidden";
     }
 
-    <p id="empty-shortlist-message" class="notice">
+    <p id="empty-shortlist-message" class=@emptyMessageClasses>
         You have no apprenticeship training shortlisted.&nbsp;
         @Html.ActionLink("Search for apprenticeship training", "Search", "Apprenticeship")
     </p>
