@@ -55,12 +55,12 @@ if (isShortlisted)
 {
         @Html.ActionLink("Remove from shortlist", "RemoveFramework", "ShortList",
             new { id },
-            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" })
+            new { @class = "link shortlist-link framework-shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" })
 }
 else
 {
         @Html.ActionLink("Shortlist apprenticeship", "AddFramework", "ShortList",
             new { id },
-            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" })
+            new { @class = "link shortlist-link framework-shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" })
 }
 }

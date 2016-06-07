@@ -65,14 +65,14 @@ if (isShortlisted)
 #line 56 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveFramework", "ShortList",
             new { id },
-            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" }));
+            new { @class = "link shortlist-link framework-shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" }));
 
 
 #line default
 #line hidden
 
 #line 58 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                                                                  
+                                                                                                                                           
 }
 else
 {
@@ -84,14 +84,14 @@ else
 #line 62 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddFramework", "ShortList",
             new { id },
-            new { @class = "link shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" }));
+            new { @class = "link shortlist-link framework-shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" }));
 
 
 #line default
 #line hidden
 
 #line 64 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                                                               
+                                                                                                                                        
 }
 
 

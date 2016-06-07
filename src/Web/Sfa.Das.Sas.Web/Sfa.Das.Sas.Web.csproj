@@ -496,6 +496,7 @@
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
     <Content Include="scripts\app\cookie-store.js" />
+    <Content Include="scripts\pages\framework-detail.js" />
     <Content Include="scripts\polyfills\Array.js" />
     <Content Include="scripts\pages\dashboard-overview.js" />
     <Content Include="scripts\pages\provider-detail.js" />

@@ -28,12 +28,12 @@
             var $this = $(this);
             if ($this.attr('data-action') === 'add') {
                 standard.Add($(this).attr('data-standard'));
-                $('.shortlist-link').attr('data-action', 'remove');
-                $('.shortlist-link').html('Remove from shortlist');
+                $('.standard-shortlist-link').attr('data-action', 'remove');
+                $('.standard-shortlist-link').html('Remove from shortlist');
             } else if ($this.attr('data-action') === 'remove') {
                 standard.Remove($(this).attr('data-standard'));
-                $('.shortlist-link').attr('data-action', 'add');
-                $('.shortlist-link').html('Shortlist apprenticeship');
+                $('.standard-shortlist-link').attr('data-action', 'add');
+                $('.standard-shortlist-link').html('Shortlist apprenticeship');
             };
            
         });
