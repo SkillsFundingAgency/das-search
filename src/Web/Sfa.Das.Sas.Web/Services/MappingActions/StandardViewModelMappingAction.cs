@@ -6,6 +6,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
+
     public class StandardViewModelMappingAction : IMappingAction<Standard, StandardViewModel>
     {
         public void Process(Standard source, StandardViewModel destination)

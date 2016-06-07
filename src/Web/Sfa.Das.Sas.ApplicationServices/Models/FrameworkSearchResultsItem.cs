@@ -1,5 +1,7 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Models
 {
+    using Sfa.Das.Sas.Core.Domain.Model;
+
     public sealed class FrameworkSearchResultsItem
     {
         public int FrameworkId { get; set; }
@@ -15,5 +17,7 @@
         public int PathwayCode { get; set; }
 
         public int Level { get; set; }
+
+        public TypicalLength TypicalLength { get; set; }
     }
 }

@@ -250,6 +250,7 @@
     <Compile Include="Services\ICookieService.cs" />
     <Compile Include="Models\ShortlistedProvider.cs" />
     <Compile Include="Models\ShortlistedApprenticeship.cs" />
+    <Compile Include="Services\MappingActions\FrameworkViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\ProviderFrameworkSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\ProviderSearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ProviderStandardSearchResultViewModelMappingAction.cs" />

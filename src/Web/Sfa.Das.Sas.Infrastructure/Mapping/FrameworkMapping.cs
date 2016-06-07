@@ -15,7 +15,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 FrameworkId = document.FrameworkId,
                 FrameworkName = document.FrameworkName,
                 PathwayCode = document.PathwayCode,
-                PathwayName = document.PathwayName
+                PathwayName = document.PathwayName,
+                TypicalLength = document.TypicalLength
             };
         }
     }
