@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             var logger = container.GetInstance<ILog>();
 
             // Set GitUserName/GitPassword in app.config to run this
-            MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, logger);
+            MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, null, logger);
 
             metaData.GenerateStandardMetadataFiles();
         }

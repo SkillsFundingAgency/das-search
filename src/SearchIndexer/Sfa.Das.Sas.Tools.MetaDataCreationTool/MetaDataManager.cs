@@ -20,17 +20,20 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
     {
         private readonly IAppServiceSettings _appServiceSettings;
 
+        private readonly IJsonMetaDataConvert _jsonMetaDataConvert;
+
         private readonly ILarsDataService _larsDataService;
 
         private readonly ILog _logger;
 
         private readonly IVstsService _vstsService;
 
-        public MetaDataManager(ILarsDataService larsDataService, IVstsService vstsService, IAppServiceSettings appServiceSettings, ILog logger)
+        public MetaDataManager(ILarsDataService larsDataService, IVstsService vstsService, IAppServiceSettings appServiceSettings, IJsonMetaDataConvert jsonMetaDataConvert, ILog logger)
         {
             _larsDataService = larsDataService;
             _vstsService = vstsService;
             _appServiceSettings = appServiceSettings;
+            _jsonMetaDataConvert = jsonMetaDataConvert;
             _logger = logger;
         }
 
@@ -51,13 +54,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
         public List<StandardMetaData> GetStandardsMetaData()
         {
             var standardsMetaDataJson = _vstsService.GetStandards();
-            var standardsMetaData = new List<StandardMetaData>();
-
-            var _jsonConverter = new JsonMetaDataConvert(null);
-
-            _jsonConverter.DeserializeObject<StandardMetaData>(standardsMetaDataJson);
-
-            return standardsMetaData;
+            return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsMetaDataJson);
         }
 
         public List<FrameworkMetaData> GetAllFrameworks()

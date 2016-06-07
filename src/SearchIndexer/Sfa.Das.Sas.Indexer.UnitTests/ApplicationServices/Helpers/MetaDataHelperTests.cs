@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(1, frameworks.Count);
@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                                 }
                         });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(0, frameworks.Count, "Effective to date can not be in the past");
@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(1, frameworks.Count, "Should find one framework");
@@ -90,7 +90,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 399, PwayCode = 1, ProgType = 3 } });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(0, frameworks.Count, $"Framework code must be over {value}");
@@ -107,7 +107,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 0, ProgType = 20 }
                         });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(0, frameworks.Count, "Pathway codemust be over 0");
@@ -124,7 +124,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 16 }
                         });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(0, frameworks.Count);
@@ -147,7 +147,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             }
                     });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(0, frameworks.Count);
@@ -164,7 +164,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                         });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var framework = metaDataManager.GetAllFrameworks().FirstOrDefault();
 
             framework.Should().NotBeNull();
@@ -187,7 +187,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                         });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var framework = metaDataManager.GetAllFrameworks().FirstOrDefault();
 
             framework.Should().NotBeNull();

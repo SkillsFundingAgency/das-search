@@ -37,7 +37,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             mockVstsService.Setup(x => x.GetExistingStandardIds()).Returns(existingMetaDataIds);
             mockVstsService.Setup(x => x.PushCommit(It.IsAny<List<FileContents>>())).Callback<List<FileContents>>(x => { standardsToAdd = x; });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, mockLogger.Object);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, null, mockLogger.Object);
 
             metaDataManager.GenerateStandardMetadataFiles();
 
@@ -51,13 +51,12 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             var mockLarsDataService = new Mock<ILarsDataService>();
             var mockVstsService = new Mock<IVstsService>();
             var mockSettings = new Mock<IAppServiceSettings>();
+            var mockJsonConverter = new Mock<IJsonMetaDataConvert>();
             var mockLogger = new Mock<ILog>(MockBehavior.Loose);
 
-            var standardsJson = new Dictionary<string, string>();
+            mockJsonConverter.Setup(m => m.DeserializeObject<StandardMetaData>(It.IsAny<Dictionary<string, string>>())).Returns(new List<StandardMetaData>());
 
-            mockVstsService.Setup(x => x.GetStandards()).Returns(standardsJson);
-
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, mockLogger.Object);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, mockJsonConverter.Object, mockLogger.Object);
 
             var standardJson = metaDataManager.GetStandardsMetaData();
 
