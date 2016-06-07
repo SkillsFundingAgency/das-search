@@ -94,6 +94,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             viewModel.ActualPage = criteria.Page;
+            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
 
             if (viewModel.StandardNotFound)
             {
@@ -147,12 +148,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 var totalProvidersCountry =
                     await
-                        _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take },
+                        _providerSearchService.SearchFrameworkProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take },
                             criteria.DeliveryModes, true);
                 viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
             }
 
             viewModel.ActualPage = criteria.Page;
+            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
 
             if (viewModel.FrameworkIsMissing)
             {

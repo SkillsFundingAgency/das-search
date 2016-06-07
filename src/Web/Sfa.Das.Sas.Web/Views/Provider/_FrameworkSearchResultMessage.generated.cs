@@ -160,20 +160,28 @@ WriteLiteralTo(__razor_helper_writer, " in England</li>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <li>");
+WriteLiteralTo(__razor_helper_writer, "            <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"return-search-results\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 42 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @frameworkId = @Model.FrameworkId }, new { @class = "" }));
+                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @frameworkId = @Model.FrameworkId }, new { @class = "" }));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n            <li>");
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n            <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"start-again\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 43 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("start your keyword search again", "Search", "Apprenticeship"));
+      WriteTo(__razor_helper_writer, Html.ActionLink("start your keyword search again", "Search", "Apprenticeship"));
 
 
 #line default

@@ -41,5 +41,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int FrameworkLevel { get; set; }
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
+
+        public string AbsolutePath { get; set; }
     }
 }

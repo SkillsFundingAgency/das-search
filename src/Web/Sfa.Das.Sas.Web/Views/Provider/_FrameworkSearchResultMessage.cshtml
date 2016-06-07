@@ -39,8 +39,8 @@
             {
                 <li class="total-providers-country">@Html.ActionLink(string.Format("view all({0}) training providers", @Model.TotalProvidersCountry), "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.FrameworkName in England</li>
             }
-            <li>@Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @frameworkId = @Model.FrameworkId }, new { @class = "" })</li>
-            <li>@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
+            <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new { @frameworkId = @Model.FrameworkId }, new { @class = "" })</li>
+            <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
         </ul>
     </div>
 }

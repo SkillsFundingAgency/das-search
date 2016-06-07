@@ -91,6 +91,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
 
             _mockProviderSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(searchResults));
+            _mockProviderSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), true))
+                .Returns(Task.FromResult(searchResults));
             _mockMappingService.Setup(
                 x =>
                 x.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(

@@ -257,10 +257,10 @@ WriteLiteralTo(__razor_helper_writer, " method=\"get\"");
 
 WriteLiteralTo(__razor_helper_writer, " autocomplete=\"off\"");
 
-WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 3052), Tuple.Create("\"", 3086)
+WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 3052), Tuple.Create("\"", 3080)
 
 #line 102 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 3061), Tuple.Create<System.Object, System.Int32>(Request.Url.AbsolutePath
+, Tuple.Create(Tuple.Create("", 3061), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
 
 #line default
 #line hidden
@@ -273,14 +273,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"PostCode\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3146), Tuple.Create("\"", 3169)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3140), Tuple.Create("\"", 3163)
 
 #line 103 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 3154), Tuple.Create<System.Object, System.Int32>(Model.PostCode
+, Tuple.Create(Tuple.Create("", 3148), Tuple.Create<System.Object, System.Int32>(Model.PostCode
 
 #line default
 #line hidden
-, 3154), false)
+, 3148), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "/>\r\n                    <input");
@@ -289,14 +289,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3238), Tuple.Create("\"", 3264)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3232), Tuple.Create("\"", 3258)
 
 #line 104 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 3246), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+, Tuple.Create(Tuple.Create("", 3240), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
 
 #line default
 #line hidden
-, 3246), false)
+, 3240), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, "/>\r\n");
