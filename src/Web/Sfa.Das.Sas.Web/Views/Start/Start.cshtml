@@ -41,11 +41,7 @@
                 <li>allow them to attend training and assessment during their working hours</li>
             </ul>
 
-            @using (Html.BeginForm("Search", "Apprenticeship"))
-            {
-                <input class="button margin-top-x2 button-start" id="start-button" type="submit" value="Start" />
-            }
-
+            @Html.ActionLink("Start", "Search", "Apprenticeship", null, new {id = "start-button", @class = "button margin-top-x2 button-start" } )
         </div>
     </div>
 

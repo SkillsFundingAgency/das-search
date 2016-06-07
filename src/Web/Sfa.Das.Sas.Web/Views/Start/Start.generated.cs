@@ -110,35 +110,11 @@ WriteLiteral(@">
 
 ");
 
+WriteLiteral("            ");
+
             
             #line 44 "..\..\Views\Start\Start.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 44 "..\..\Views\Start\Start.cshtml"
-             using (Html.BeginForm("Search", "Apprenticeship"))
-            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <input");
-
-WriteLiteral(" class=\"button margin-top-x2 button-start\"");
-
-WriteLiteral(" id=\"start-button\"");
-
-WriteLiteral(" type=\"submit\"");
-
-WriteLiteral(" value=\"Start\"");
-
-WriteLiteral(" />\r\n");
-
-            
-            #line 47 "..\..\Views\Start\Start.cshtml"
-            }
+       Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new {id = "start-button", @class = "button margin-top-x2 button-start" } ));
 
             
             #line default
