@@ -14,5 +14,8 @@
 
         [ElementLocator(Class = "postcode-search-button")]
         public IWebElement SearchButton { get; set; }
+
+        [ElementLocator(CssSelector = ".postcode-form .error-message")]
+        public IWebElement ErrorMessage { get; set; }
     }
 }

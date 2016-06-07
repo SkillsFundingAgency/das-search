@@ -7,12 +7,10 @@
 Scenario Outline:Should find a apprenticeship by the job role
 	
 	Given I navigated to the Search page
-
 	When I enter data
 		| Field      | Value     |
 		| Search Box | <search term> |
-	And I choose Search Button
-	
+	And I choose Search Button	
 	Then I am on the Search Results page
 	And I see Apprenticeship Results list Contains
 	| Field | Rule   | Value   |
@@ -24,4 +22,19 @@ Examples:
 	| Junior management consultant   | Junior management consultant          |
 	| Relationship manager (banking) | Relationship manager (banking)        |
 
+
+#@Regression		@PreProd @Prod
+Scenario Outline:If job role does not exist friendly message displayed
+	
+	Given I navigated to the Search page
+	When I enter data
+		| Field      | Value|
+		| Search Box | <search term> |
+	And I choose Search Button	
+	Then I am on the Search Results page	
+	And I see Apprenticeship Results list contains exactly 0 items
+	Then I am on the Search page		
+	Examples: 
+	| search term | 
+	| dfs         |
 	

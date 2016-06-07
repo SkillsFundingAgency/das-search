@@ -162,11 +162,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Invalid_Postcode_Message.feature</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Regression\Search\Provider_Search_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Provider_Search_Feature.feature</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Smoke\SearchSmoke.feature.cs">
       <DependentUpon>SearchSmoke.feature</DependentUpon>
@@ -283,10 +285,12 @@
     <None Include="Regression\Search\Invalid_Postcode_Message.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Invalid_Postcode_Message.feature.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Regression\Search\Provider_Search_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Provider_Search_Feature.feature.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Smoke\SearchSmoke.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

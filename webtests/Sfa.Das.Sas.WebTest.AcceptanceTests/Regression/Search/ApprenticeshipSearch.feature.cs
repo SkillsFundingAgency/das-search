@@ -94,11 +94,11 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Search Box",
                         string.Format("{0}", searchTerm)});
-#line 11
+#line 10
  testRunner.When("I enter data", ((string)(null)), table1, "When ");
-#line 14
+#line 13
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
+#line 14
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -109,8 +109,39 @@ this.ScenarioSetup(scenarioInfo);
                         "Title",
                         "Equals",
                         string.Format("{0}", title)});
-#line 17
+#line 15
  testRunner.And("I see Apprenticeship Results list Contains", ((string)(null)), table2, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("If job role does not exist friendly message displayed")]
+        [NUnit.Framework.TestCaseAttribute("dfs", new string[0])]
+        public virtual void IfJobRoleDoesNotExistFriendlyMessageDisplayed(string searchTerm, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("If job role does not exist friendly message displayed", exampleTags);
+#line 27
+this.ScenarioSetup(scenarioInfo);
+#line 29
+ testRunner.Given("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Value"});
+            table3.AddRow(new string[] {
+                        "Search Box",
+                        string.Format("{0}", searchTerm)});
+#line 30
+ testRunner.When("I enter data", ((string)(null)), table3, "When ");
+#line 33
+ testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
+ testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 35
+ testRunner.And("I see Apprenticeship Results list contains exactly 0 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+ testRunner.Then("I am on the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
