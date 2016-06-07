@@ -4,7 +4,13 @@
 
     public sealed class ProviderSearchCriteria
     {
-        public string PostCode { get; set; }
+        private string _postcode;
+
+        public string PostCode
+        {
+            get { return _postcode; }
+            set { _postcode = value?.Trim(); }
+        }
 
         public int ApprenticeshipId { get; set; }
 
