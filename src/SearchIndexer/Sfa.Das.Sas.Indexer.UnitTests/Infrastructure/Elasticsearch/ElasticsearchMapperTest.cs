@@ -25,7 +25,12 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 PwayCode = 1,
                 NASTitle = "Sustainable Resource Operations and Management",
                 PathwayName = "Higher Apprenticeship in Sustainable Resource Operations and Management",
-                ProgType = 20
+                ProgType = 20,
+                JobRoleItems = new List<JobRoleItem>
+                    {
+                        new JobRoleItem { Title = "Title 1", Description = "Description 1" }
+                    },
+                TypicalLength = new TypicalLength { From = 12, To = 24, Unit = "m" }
             };
 
             var mapper = new ElasticsearchMapper(null);
@@ -35,6 +40,9 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             framework.Title.Should().Be("Sustainable Resource Operations and Management: Higher Apprenticeship in Sustainable Resource Operations and Management");
             framework.Level.Should().Be(4);
             framework.FrameworkId.Should().Be("12341");
+            framework.JobRoleItems.Count().Should().Be(1);
+            framework.TypicalLength.From.ShouldBeEquivalentTo(12);
+            framework.TypicalLength.To.ShouldBeEquivalentTo(24);
         }
 
         [Test]

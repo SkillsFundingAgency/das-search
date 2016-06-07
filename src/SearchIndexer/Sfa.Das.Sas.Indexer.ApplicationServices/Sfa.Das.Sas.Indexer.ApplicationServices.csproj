@@ -82,7 +82,6 @@
     <Compile Include="Provider\ProviderIndexer.cs" />
     <Compile Include="Standard\ApprenticeshipIndexer.cs" />
     <Compile Include="Provider\ActiveProviderCsvRecord.cs" />
-    <Compile Include="MetaData\FileContents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\FcsActiveProvidersClient.cs" />
     <Compile Include="Queue\GenericControlQueueConsumer.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Services\IIndexerService.cs" />
     <Compile Include="Services\IndexerService.cs" />
     <Compile Include="MetaData\IVstsClient.cs" />
-    <Compile Include="MetaData\IVstsService.cs" />
     <Compile Include="Settings\IIndexSettings.cs" />
     <Compile Include="Settings\IAppServiceSettings.cs" />
     <Compile Include="Provider\ProviderIndexSettings.cs" />

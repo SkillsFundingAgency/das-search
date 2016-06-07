@@ -16,6 +16,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string VstsGitGetFilesUrl { get; }
 
+        string VstsGitGetFrameworkFilesUrl { get; }
+
         string VstsGitGetFilesUrlFormat { get; }
 
         string VstsGitAllCommitsUrl { get; }

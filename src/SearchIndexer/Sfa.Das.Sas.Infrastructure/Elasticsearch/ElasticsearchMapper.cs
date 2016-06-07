@@ -60,7 +60,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 FrameworkName = frameworkMetaData.NASTitle,
                 PathwayCode = frameworkMetaData.PwayCode,
                 PathwayName = frameworkMetaData.PathwayName,
-                Level = MapLevelProgType(frameworkMetaData.ProgType)
+                Level = MapLevelProgType(frameworkMetaData.ProgType),
+                JobRoleItems = frameworkMetaData.JobRoleItems,
+                TypicalLength = frameworkMetaData.TypicalLength
             };
             return doc;
         }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
@@ -29,23 +28,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Standard
         public List<StandardMetaData> GetAllStandardsMetaData()
         {
             var stopwatch = new Stopwatch();
-            var standardsMetaDataJson = _metaDataReader.GetAllAsJson();
+            var standardsMetaData = _metaDataReader.GetStandardsMetaData();
             stopwatch.Stop();
             _log.Debug("MetaDataHelper.GetAllStandardsMetaData", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
-
-            var standardsMetaData = new List<StandardMetaData>();
-
-            foreach (var item in standardsMetaDataJson)
-            {
-                try
-                {
-                    standardsMetaData.Add(JsonConvert.DeserializeObject<StandardMetaData>(item.Value));
-                }
-                catch (JsonReaderException ex)
-                {
-                    _log.Warn(ex, $"Couldn't deserialise meta data for: {item.Key}");
-                }
-            }
 
             return standardsMetaData;
         }

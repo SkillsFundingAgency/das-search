@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
-using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
@@ -20,6 +19,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
         private readonly IGitDynamicModelGenerator _gitDynamicModelGenerator;
 
+        private readonly IJsonMetaDataConvert _jsonMetaDataConvert;
+
         private readonly IHttpGet _httpHelper;
 
         private readonly ILog _logger;
@@ -27,25 +28,33 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         public VstsService(
             IAppServiceSettings appServiceSettings,
             IGitDynamicModelGenerator gitDynamicModelGenerator,
+            IJsonMetaDataConvert jsonMetaDataConvert,
             IHttpGet httpHelper,
             ILog logger)
         {
             _appServiceSettings = appServiceSettings;
             _gitDynamicModelGenerator = gitDynamicModelGenerator;
+            _jsonMetaDataConvert = jsonMetaDataConvert;
             _httpHelper = httpHelper;
             _logger = logger;
         }
 
         public IEnumerable<string> GetExistingStandardIds()
         {
-            var blobs = GetAllBlobs();
+            var blobs = GetAllBlobs(_appServiceSettings.VstsGitGetFilesUrl);
 
             return blobs?.Select(m => GetIdFromPath(m.Path)) ?? new List<string>();
         }
 
         public IDictionary<string, string> GetStandards()
         {
-            return GetAllFileContents();
+            return GetAllFileContents(_appServiceSettings.VstsGitGetFilesUrl);
+        }
+
+        public IEnumerable<VstsFrameworkMetaData> GetFrameworks()
+        {
+            var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
+            return _jsonMetaDataConvert.DeserializeObject<VstsFrameworkMetaData>(frameworksDir);
         }
 
         public void PushCommit(List<FileContents> items)
@@ -54,9 +63,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             Post(_appServiceSettings.VstsGitPushUrl, _appServiceSettings.GitUsername, _appServiceSettings.GitPassword, body);
         }
 
-        public IDictionary<string, string> GetAllFileContents()
+        public IDictionary<string, string> GetAllFileContents(string vstsBlobUrl)
         {
-            var blobs = GetAllBlobs();
+            var blobs = GetAllBlobs(vstsBlobUrl);
 
             if (blobs == null)
             {
@@ -75,10 +84,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         }
 
         // Helpers
-        private IEnumerable<Entity> GetAllBlobs()
+        private IEnumerable<Entity> GetAllBlobs(string vstsUrl)
         {
             var folderTreeStr = _httpHelper.Get(
-                _appServiceSettings.VstsGitGetFilesUrl,
+                vstsUrl,
                 _appServiceSettings.GitUsername,
                 _appServiceSettings.GitPassword);
             var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);

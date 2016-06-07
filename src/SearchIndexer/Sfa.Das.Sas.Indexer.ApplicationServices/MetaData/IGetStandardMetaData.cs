@@ -2,8 +2,10 @@
 
 namespace Sfa.Das.Sas.Indexer.ApplicationServices.MetaData
 {
+    using Sfa.Das.Sas.Indexer.Core.Models;
+
     public interface IGetStandardMetaData
     {
-        IDictionary<string, string> GetAllAsJson();
+        List<StandardMetaData> GetStandardsMetaData();
     }
 }

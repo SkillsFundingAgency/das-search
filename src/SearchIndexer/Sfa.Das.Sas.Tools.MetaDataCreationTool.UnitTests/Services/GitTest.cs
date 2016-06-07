@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 {
+    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
+
     [TestFixture]
     public class GitTest
     {

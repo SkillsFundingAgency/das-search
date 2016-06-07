@@ -2,6 +2,8 @@
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Models
 {
+    using Sfa.Das.Sas.Indexer.Core.Models;
+
     public sealed class Standard
     {
         public int Id { get; set; }

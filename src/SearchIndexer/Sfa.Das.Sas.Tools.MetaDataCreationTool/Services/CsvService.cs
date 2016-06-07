@@ -8,6 +8,8 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
+    using Sfa.Das.Sas.Indexer.Core.Models;
+
     public class CsvService : IReadStandardsFromCsv
     {
         private readonly IAngleSharpService angelService;

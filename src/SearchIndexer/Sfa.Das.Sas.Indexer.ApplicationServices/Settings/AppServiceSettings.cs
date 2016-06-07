@@ -7,6 +7,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
     {
         private readonly IProvideSettings _settings;
 
+        private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
+
         public AppServiceSettings(IProvideSettings settingsProvider)
         {
             _settings = settingsProvider;
@@ -19,6 +21,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
         public string EnvironmentName => _settings.GetSetting("EnvironmentName");
 
         public string VstsGitGetFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitFolderPath}&recursionLevel=Full&api-version=2.0";
+
+        public string VstsGitGetFrameworkFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitFrameworksFolderPath}&recursionLevel=Full&api-version=2.0";
 
         public string VstsGitGetFilesUrlFormat => VstsGitBaseUrl + "/items?scopePath={0}&recursionLevel=Full&api-version=2.0";
 

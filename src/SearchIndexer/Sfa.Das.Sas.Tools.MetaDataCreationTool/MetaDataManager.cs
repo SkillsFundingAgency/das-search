@@ -12,6 +12,10 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 {
+    using Sfa.Das.Sas.Indexer.Core.Models;
+    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
+    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
+
     public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData, IGetFrameworkMetaData
     {
         private readonly IAppServiceSettings _appServiceSettings;
@@ -44,14 +48,41 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             _logger.Info($"Pushed {missingStandards.Count} new meta files to Git Repository.");
         }
 
-        public IDictionary<string, string> GetAllAsJson()
+        public List<StandardMetaData> GetStandardsMetaData()
         {
-            return _vstsService.GetStandards();
+            var standardsMetaDataJson = _vstsService.GetStandards();
+            var standardsMetaData = new List<StandardMetaData>();
+
+            var _jsonConverter = new JsonMetaDataConvert(null);
+
+            _jsonConverter.DeserializeObject<StandardMetaData>(standardsMetaDataJson);
+
+            return standardsMetaData;
         }
 
         public List<FrameworkMetaData> GetAllFrameworks()
         {
-            return FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
+            var filteredFrameworks = FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
+            UpdateFrameworkInformaion(filteredFrameworks);
+            return filteredFrameworks;
+        }
+
+        private void UpdateFrameworkInformaion(List<FrameworkMetaData> frameworks)
+        {
+            var repositoryFrameworks = _vstsService.GetFrameworks().ToArray();
+            foreach (var f in frameworks)
+            {
+                var repositoryFramework = repositoryFrameworks.FirstOrDefault(m =>
+                    m.FrameworkCode == f.FworkCode &&
+                    m.ProgType == f.ProgType &&
+                    m.PathwayCode == f.PwayCode);
+
+                if (repositoryFramework != null)
+                {
+                    f.JobRoleItems = repositoryFramework.JobRoleItems;
+                    f.TypicalLength = repositoryFramework.TypicalLength;
+                }
+            }
         }
 
         private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)

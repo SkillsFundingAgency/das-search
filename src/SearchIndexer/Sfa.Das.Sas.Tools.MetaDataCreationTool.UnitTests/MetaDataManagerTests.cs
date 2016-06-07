@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models;
@@ -9,6 +9,9 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
 {
+    using Sfa.Das.Sas.Indexer.Core.Models;
+    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
+
     [TestFixture]
     public class MetaDataManagerTests
     {
@@ -56,9 +59,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, mockLogger.Object);
 
-            var standardJson = metaDataManager.GetAllAsJson();
+            var standardJson = metaDataManager.GetStandardsMetaData();
 
-            Assert.That(standardJson, Is.TypeOf<Dictionary<string, string>>());
+            Assert.That(standardJson, Is.TypeOf<List<StandardMetaData>>());
         }
     }
 }

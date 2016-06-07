@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
+    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
+
     public class GitDynamicModelGenerator : IGitDynamicModelGenerator
     {
         public string GenerateCommitBody(string branchPath, string oldObjectId, List<FileContents> items)

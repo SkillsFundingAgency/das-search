@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.Sas.Indexer.ApplicationServices.MetaData
+namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git
 {
     public class FileContents
     {
