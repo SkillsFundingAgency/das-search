@@ -31,7 +31,7 @@
         $('.framework-delete-link').on('click', function (e) {
             e.preventDefault();
 
-            SearchAndShortlist.standard.Remove($(this).attr('data-apprenticeship'));
+            SearchAndShortlist.framework.Remove($(this).attr('data-apprenticeship'));
 
             var standardRow = $(this).closest(".framework-item");
 
