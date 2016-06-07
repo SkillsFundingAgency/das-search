@@ -63,7 +63,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 PathwayCode = frameworkMetaData.PwayCode,
                 PathwayName = frameworkMetaData.PathwayName,
                 Level = MapLevelProgType(frameworkMetaData.ProgType),
-                JobRoleItems = frameworkMetaData.JobRoleItems.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
+                JobRoleItems = frameworkMetaData.JobRoleItems?.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
                 TypicalLength = frameworkMetaData.TypicalLength
             };
             return doc;
