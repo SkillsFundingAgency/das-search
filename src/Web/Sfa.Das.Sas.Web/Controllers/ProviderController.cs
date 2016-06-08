@@ -88,8 +88,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 var totalProvidersCountry =
                     await
-                        _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination {Page = criteria.Page, Take = criteria.Take},
-                            criteria.DeliveryModes, true);
+                        _providerSearchService.SearchStandardProviders(
+                            criteria.ApprenticeshipId,
+                            criteria.PostCode,
+                            new Pagination { Page = criteria.Page, Take = criteria.Take },
+                            criteria.DeliveryModes,
+                            true);
                 viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
             }
 
@@ -124,7 +128,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
 
             var searchResults =
-                 await _providerSearchService.SearchFrameworkProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes, criteria.ShowAll);
+                 await _providerSearchService.SearchFrameworkProviders(
+                     criteria.ApprenticeshipId,
+                     criteria.PostCode,
+                     new Pagination { Page = criteria.Page, Take = criteria.Take },
+                     criteria.DeliveryModes,
+                     criteria.ShowAll);
 
             var viewModel =
                 _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
@@ -148,8 +157,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 var totalProvidersCountry =
                     await
-                        _providerSearchService.SearchFrameworkProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take },
-                            criteria.DeliveryModes, true);
+                        _providerSearchService.SearchFrameworkProviders(
+                            criteria.ApprenticeshipId,
+                            criteria.PostCode,
+                            new Pagination { Page = criteria.Page, Take = criteria.Take },
+                            criteria.DeliveryModes,
+                            true);
                 viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
             }
 

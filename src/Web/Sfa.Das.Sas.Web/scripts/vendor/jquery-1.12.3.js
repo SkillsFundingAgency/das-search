@@ -544,7 +544,7 @@ jQuery.extend( {
 	support: support
 } );
 
-// JSHint would error on this code due to the Symbol not being defined in ES5.
+// JSHint would error on this frameworkId due to the Symbol not being defined in ES5.
 // Defining this global in .jshintrc would create a danger of using the global
 // unguarded in another place, it seems safer to just disable JSHint for these
 // three lines.
@@ -3843,7 +3843,7 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ) {
 		cache = isNode ? jQuery.cache : elem,
 
 		// Only defining an ID for JS objects if its cache already exists allows
-		// the code to shortcut on the same path as a DOM node with no cache
+		// the frameworkId to shortcut on the same path as a DOM node with no cache
 		id = isNode ? elem[ internalKey ] : elem[ internalKey ] && internalKey;
 
 	// Avoid doing any more work than we need to when trying to get data on an
@@ -5615,7 +5615,7 @@ jQuery.Event.prototype = {
 //
 // Support: Safari 7 only
 // Safari sends mouseenter too often; see:
-// https://code.google.com/p/chromium/issues/detail?id=470258
+// https://frameworkId.google.com/p/chromium/issues/detail?id=470258
 // for the description of the bug (it existed in older Chrome versions as well).
 jQuery.each( {
 	mouseenter: "mouseover",
@@ -5776,7 +5776,7 @@ if ( !support.change ) {
 // Support: Chrome, Safari
 // focus(in | out) events fire after focus & blur events,
 // which is spec violation - http://www.w3.org/TR/DOM-Level-3-Events/#events-focusevent-event-order
-// Related ticket - https://code.google.com/p/chromium/issues/detail?id=449857
+// Related ticket - https://frameworkId.google.com/p/chromium/issues/detail?id=449857
 if ( !support.focusin ) {
 	jQuery.each( { focus: "focusin", blur: "focusout" }, function( orig, fix ) {
 
@@ -6229,7 +6229,7 @@ jQuery.extend( {
 
 						// Webkit & Blink performance suffers when deleting properties
 						// from DOM nodes, so set to undefined instead
-						// https://code.google.com/p/chromium/issues/detail?id=378607
+						// https://frameworkId.google.com/p/chromium/issues/detail?id=378607
 						} else {
 							elem[ internalKey ] = undefined;
 						}
@@ -6625,7 +6625,7 @@ var documentElement = document.documentElement;
 		pixelPositionVal = boxSizingReliableVal = reliableMarginLeftVal = false;
 		pixelMarginRightVal = reliableMarginRightVal = true;
 
-		// Check for getComputedStyle so that this code is not run in IE<9.
+		// Check for getComputedStyle so that this frameworkId is not run in IE<9.
 		if ( window.getComputedStyle ) {
 			divStyle = window.getComputedStyle( div );
 			pixelPositionVal = ( divStyle || {} ).top !== "1%";
@@ -7261,7 +7261,7 @@ if ( !support.opacity ) {
 
 				// Setting style.filter to null, "" & " " still leave "filter:" in the cssText
 				// if "filter:" is present at all, clearType is disabled, we want to avoid this
-				// style.removeAttribute is IE Only, but so apparently is this code path...
+				// style.removeAttribute is IE Only, but so apparently is this frameworkId path...
 				style.removeAttribute( "filter" );
 
 				// if there is no filter style applied in a css rule
@@ -10158,7 +10158,7 @@ jQuery.ajaxSettings.xhr = window.ActiveXObject !== undefined ?
 		// is used. In IE 9+ always use the native XHR.
 		// Note: this condition won't catch Edge as it doesn't define
 		// document.documentMode but it also doesn't support ActiveX so it won't
-		// reach this code.
+		// reach this frameworkId.
 		if ( document.documentMode > 8 ) {
 			return createStandardXHR();
 		}

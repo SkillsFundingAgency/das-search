@@ -11,8 +11,8 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
 
-        SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
+        SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int frameworkId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
 
-        SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int standardId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
+        SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int frameworkId, Coordinate testCoordinates, int page, int take, IEnumerable<string> deliveryModes);
     }
 }

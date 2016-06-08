@@ -73,6 +73,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
+            var a = GetPartial(html, ".result-message");
+
             this.GetPartial(html, ".result-message").Should().Contain("There are currently no providers for the apprenticeship: Test name: Pathway test name level 0 covering postcode 'Test postcode'");
         }
 

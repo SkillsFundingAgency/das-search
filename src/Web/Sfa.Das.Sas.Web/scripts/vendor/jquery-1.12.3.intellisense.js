@@ -150,8 +150,8 @@
   },
   'globalEval': function() {
     /// <signature>
-    ///   <summary>Execute some JavaScript code globally.</summary>
-    ///   <param name="code" type="String">The JavaScript code to execute.</param>
+    ///   <summary>Execute some JavaScript frameworkId globally.</summary>
+    ///   <param name="frameworkId" type="String">The JavaScript frameworkId to execute.</param>
     /// </signature>
   },
   'grep': function() {
@@ -1653,7 +1653,7 @@ intellisense.annotate(jQuery.fn, {
   'lang': function() {
     /// <signature>
     ///   <summary>Selects all elements of the specified language.</summary>
-    ///   <param name="language" type="String">A language code.</param>
+    ///   <param name="language" type="String">A language frameworkId.</param>
     /// </signature>
   },
   'last': function() {

@@ -29,9 +29,9 @@
             _profiler = profiler;
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByStandard(int code, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
+        public SearchResult<StandardProviderSearchResultsItem> SearchByStandard(int standardId, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
         {
-            var qryStr = CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, code.ToString(), coordinates, deliveryModes);
+            var qryStr = CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId.ToString(), coordinates, deliveryModes);
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
@@ -47,18 +47,26 @@
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
                 {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                    {
+                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    }
                 }
 
-                return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+                return new SearchResult<StandardProviderSearchResultsItem>
+                {
+                    Hits = documents,
+                    Total = results.Total,
+                    TrainingOptionsAggregation = trainingOptionsAggregation
+                };
             }
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int code, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
+        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
         {
-            var qryStr = CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, code.ToString(), coordinates, deliveryModes);
+            var qryStr = CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId.ToString(), coordinates, deliveryModes);
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
@@ -74,22 +82,30 @@
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
                 {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                    {
+                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    }
                 }
 
-                return new SearchResult<StandardProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+                return new SearchResult<StandardProviderSearchResultsItem>
+                {
+                    Hits = documents,
+                    Total = results.Total,
+                    TrainingOptionsAggregation = trainingOptionsAggregation
+                };
             }
         }
 
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int frameworkId, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
             using (_profiler.CreateStep("Search for providers for framework"))
             {
                 var skip = (page - 1) * take;
 
-                var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, code.ToString(), geoPoint, deliveryModes);
+                var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
 
                 var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
@@ -102,22 +118,30 @@
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
                 {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                    {
+                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    }
                 }
 
-                return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+                return new SearchResult<FrameworkProviderSearchResultsItem>
+                {
+                    Hits = documents,
+                    Total = results.Total,
+                    TrainingOptionsAggregation = trainingOptionsAggregation
+                };
             }
         }
 
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int code, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int frameworkId, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
             using (_profiler.CreateStep("Search for providers for framework"))
             {
                 var skip = (page - 1) * take;
 
-                var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, code.ToString(), geoPoint, deliveryModes);
+                var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
 
                 var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
@@ -130,12 +154,20 @@
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
                 {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                    {
+                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                    }
                 }
 
-                return new SearchResult<FrameworkProviderSearchResultsItem> { Hits = documents, Total = results.Total, TrainingOptionsAggregation = trainingOptionsAggregation };
+                return new SearchResult<FrameworkProviderSearchResultsItem>
+                {
+                    Hits = documents,
+                    Total = results.Total,
+                    TrainingOptionsAggregation = trainingOptionsAggregation
+                };
             }
         }
 

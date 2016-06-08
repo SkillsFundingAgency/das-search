@@ -64,6 +64,11 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
+                if (standardId < 0)
+                {
+                    throw new SearchException("StandardId can't be negative");
+                }
+
                 var standard = _getStandards.GetStandardById(standardId);
                 standardName = standard?.Title;
 
@@ -133,6 +138,11 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
+                if (standardId < 0)
+                {
+                    throw new SearchException("StandardId can't be negative");
+                }
+
                 var standard = _getStandards.GetStandardById(standardId);
                 standardName = standard?.Title;
 
@@ -200,14 +210,14 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
-                var framework = _getFrameworks.GetFrameworkById(frameworkId);
-
-                var frameworkMissing = framework == null;
-
                 if (frameworkId < 0)
                 {
                     throw new SearchException("FrameworkId can't be negative");
                 }
+
+                var framework = _getFrameworks.GetFrameworkById(frameworkId);
+
+                var frameworkMissing = framework == null;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
@@ -272,14 +282,14 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
-                var framework = _getFrameworks.GetFrameworkById(frameworkId);
-
-                var frameworkMissing = framework == null;
-
                 if (frameworkId < 0)
                 {
                     throw new SearchException("FrameworkId can't be negative");
                 }
+
+                var framework = _getFrameworks.GetFrameworkById(frameworkId);
+
+                var frameworkMissing = framework == null;
 
                 var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
 
@@ -308,7 +318,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     ResultsToTake = takeElements,
                     FrameworkId = frameworkId,
                     FrameworkCode = framework?.FrameworkCode ?? 0,
-                    FrameworkName = framework?.FrameworkName,
+                    FrameworkName = framework?.FrameworkName ?? string.Empty,
                     PathwayName = framework?.PathwayName,
                     FrameworkLevel = framework?.Level ?? 0,
                     PostCode = postCode,
