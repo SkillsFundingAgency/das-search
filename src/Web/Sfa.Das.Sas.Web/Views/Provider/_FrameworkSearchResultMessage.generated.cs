@@ -137,7 +137,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 40 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                      WriteTo(__razor_helper_writer, Html.ActionLink(string.Format("view all({0}) training providers", @Model.TotalProvidersCountry), "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }));
+                      WriteTo(__razor_helper_writer, Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalProvidersCountry), "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }));
 
 
 #line default
@@ -146,7 +146,7 @@ WriteLiteralTo(__razor_helper_writer, " for ");
 
 
 #line 40 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
-                                                                                                                                                                                                                                                                              WriteTo(__razor_helper_writer, Model.FrameworkName);
+                                                                                                                                                                                                                                                                               WriteTo(__razor_helper_writer, Model.FrameworkName);
 
 
 #line default

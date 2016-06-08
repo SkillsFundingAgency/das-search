@@ -459,7 +459,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".total-providers-country").Should().NotBeEmpty();
-            var expectedText = string.Format("view all({0}) training providers for Test standard name in England", model.TotalProvidersCountry);
+            var expectedText = string.Format("view all ({0}) training providers for Test standard name in England", model.TotalProvidersCountry);
             GetPartial(html, ".total-providers-country").Should().Be(expectedText);
         }
 
