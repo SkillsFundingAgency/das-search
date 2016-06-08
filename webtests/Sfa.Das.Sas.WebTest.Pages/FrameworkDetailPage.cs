@@ -14,5 +14,8 @@
 
         [ElementLocator(CssSelector = "#bottom-actions .shortlist-link")]
         public IWebElement ShortlistLink { get; set; }
+
+        [ElementLocator(CssSelector = ".column-two-thirds .heading-xlarge")]
+        public IWebElement FrameworkHeading { get; set; }
     }
 }

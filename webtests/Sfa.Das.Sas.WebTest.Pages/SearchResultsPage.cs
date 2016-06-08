@@ -19,6 +19,21 @@
         [ElementLocator(Id="apprenticeship-results")]
         public IElementList<IWebElement, ApprenticeshipResultItem> ApprenticeshipResults { get; set; }
 
+        [ElementLocator(CssSelector = ".filters-block")]
+        public IWebElement FilterBlock { get; set; }
+
+        [ElementLocator(Id = "select-order")]
+        public IWebElement SortingDropdown { get; set; }
+
+        [ElementLocator(Id = "SelectedLevels_2")]
+        public IWebElement Level2 { get; set; }
+
+        [ElementLocator(CssSelector = ".filters-block .button")]
+        public IWebElement UpdateResultsButton { get; set; }
+
+        [ElementLocator(CssSelector = "#apprenticeship-results .standard-result .result-data-list .level")]
+        public IWebElement LevelOfTopResult { get; set; }
+
         [ElementLocator(Class = "result")]
         public class ApprenticeshipResultItem : WebElement
         {
@@ -28,7 +43,9 @@
             }
 
             [ElementLocator(CssSelector = ".result-title a")]
-            public IWebElement Title { get; set; }
+            public IWebElement Title { get; set; }           
+
+            
         }
     }
 }
