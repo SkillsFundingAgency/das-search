@@ -60,11 +60,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
         public List<FrameworkMetaData> GetAllFrameworks()
         {
             var filteredFrameworks = FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
-            UpdateFrameworkInformaion(filteredFrameworks);
+            UpdateFrameworkInformation(filteredFrameworks);
             return filteredFrameworks;
         }
 
-        private void UpdateFrameworkInformaion(List<FrameworkMetaData> frameworks)
+        private void UpdateFrameworkInformation(List<FrameworkMetaData> frameworks)
         {
             var repositoryFrameworks = _vstsService.GetFrameworks().ToArray();
             foreach (var f in frameworks)
@@ -90,7 +90,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             {
                 var json = JsonConvert.SerializeObject(standard, Formatting.Indented);
                 var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standard.Title, (current, c) => current.Replace(c, '_')).Replace(" ", string.Empty);
-                var gitFilePath = $"{_appServiceSettings.VstsGitFolderPath}/{standard.Id}-{standardTitle}.json";
+                var gitFilePath = $"{_appServiceSettings.VstsGitStandardsFolderPath}/{standard.Id}-{standardTitle}.json";
                 missingStandards.Add(new FileContents(gitFilePath, json));
             }
 

@@ -7,20 +7,18 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
     {
         private readonly IProvideSettings _settings;
 
-        private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
-
         public AppServiceSettings(IProvideSettings settingsProvider)
         {
             _settings = settingsProvider;
         }
 
-        public string CsvFileName => _settings.GetSetting("CsvFileName");
+        public string VstsGitStandardsFolderPath => _settings.GetSetting("VstsGitStandardsFolderPath");
 
-        public string VstsGitFolderPath => _settings.GetSetting("VstsGitFolderPath");
+        public string CsvFileName => _settings.GetSetting("CsvFileName");
 
         public string EnvironmentName => _settings.GetSetting("EnvironmentName");
 
-        public string VstsGitGetFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitFolderPath}&recursionLevel=Full&api-version=2.0";
+        public string VstsGitGetFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitStandardsFolderPath}&recursionLevel=Full&api-version=2.0";
 
         public string VstsGitGetFrameworkFilesUrl => $"{VstsGitBaseUrl}/items?scopePath={VstsGitFrameworksFolderPath}&recursionLevel=Full&api-version=2.0";
 
@@ -44,6 +42,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         // Private appServiceSettings
         private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
+        private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
 
         public string QueueName(Type type)
         {

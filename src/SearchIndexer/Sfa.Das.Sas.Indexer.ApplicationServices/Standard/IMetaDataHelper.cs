@@ -6,9 +6,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Standard
 {
     public interface IMetaDataHelper
     {
-        List<StandardMetaData> GetAllStandardsMetaData();
-
         void UpdateMetadataRepository();
+
+        List<StandardMetaData> GetAllStandardsMetaData();
 
         List<FrameworkMetaData> GetAllFrameworkMetaData();
     }

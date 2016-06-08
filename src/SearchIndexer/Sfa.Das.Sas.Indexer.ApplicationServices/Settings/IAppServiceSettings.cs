@@ -12,7 +12,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string GitBranch { get; }
 
-        string VstsGitFolderPath { get; }
+        string VstsGitStandardsFolderPath { get; }
 
         string VstsGitGetFilesUrl { get; }
 

@@ -64,6 +64,7 @@
     <Compile Include="Models\CodeTypes.cs" />
     <Compile Include="Models\DeliveryMode.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
+    <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />

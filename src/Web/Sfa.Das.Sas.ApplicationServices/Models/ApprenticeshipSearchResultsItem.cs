@@ -25,13 +25,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public int Level { get; set; }
 
-        public IEnumerable<JobRoleItem> JobRoleItems { get; set; } 
-    }
-
-    public class JobRoleItem
-    {
-        public string Title { get; set; }
-
-        public string Description { get; set; }
+        public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
     }
 }
