@@ -111,27 +111,102 @@ WriteLiteralTo(__razor_helper_writer, ">");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
+WriteLiteralTo(__razor_helper_writer, "    <div>\r\n        You can:\r\n        <ul>\r\n");
 
-#line 35 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+
+#line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+            
+
+#line default
+#line hidden
+
+#line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+             if (Model.TotalProvidersCountry > 0)
+            {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"total-providers-country\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                      WriteTo(__razor_helper_writer, Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalProvidersCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " for ");
+
+
+#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                                                                                                                                                                                                                                                                             WriteTo(__razor_helper_writer, Model.StandardName);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " in England</li>\r\n");
+
+
+#line 41 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+            }
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "            <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"return-search-results\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 42 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new {@standardId = @Model.StandardId}, new { }));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n            <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"start-again\"");
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+      WriteTo(__razor_helper_writer, Html.ActionLink("start your keyword search again", "Search", "Apprenticeship"));
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</li>\r\n        </ul>\r\n    </div>\r\n");
+
+
+#line 46 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 35 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 46 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 37 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 48 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessageOneResult()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 49 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
  
 
 
@@ -148,7 +223,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"total-results\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 51 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
          WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
@@ -161,7 +236,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"standard-name\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 51 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                                                                                  WriteTo(__razor_helper_writer, Model.StandardName);
 
 
@@ -176,7 +251,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"postalcode\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 54 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                    WriteTo(__razor_helper_writer, Model.PostCode);
 
 
@@ -185,26 +260,26 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 45 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 56 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 45 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 56 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 48 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 59 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 49 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 60 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
  
 
 
@@ -221,7 +296,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"total-results\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 51 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 62 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
           WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
@@ -230,7 +305,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</b> training providers for the apprenticeship: <b>");
 
 
-#line 51 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 62 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                                                                 WriteTo(__razor_helper_writer, Model.StandardName);
 
 
@@ -241,7 +316,7 @@ WriteLiteralTo(__razor_helper_writer, "</b>.\r\n    </p>\r\n");
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b>");
 
 
-#line 54 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 65 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                    WriteTo(__razor_helper_writer, Model.PostCode);
 
 
@@ -250,14 +325,14 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 56 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 67 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 56 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 67 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 }
 #line default
 #line hidden

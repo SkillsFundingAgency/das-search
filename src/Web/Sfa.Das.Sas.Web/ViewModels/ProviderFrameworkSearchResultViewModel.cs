@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public long TotalResults { get; set; }
 
+        public long TotalProvidersCountry { get; set; }
+
         public int ResultsToTake { get; set; }
 
         public int ActualPage { get; set; }
@@ -39,5 +41,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int FrameworkLevel { get; set; }
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
+
+        public string AbsolutePath { get; set; }
     }
 }

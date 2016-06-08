@@ -87,20 +87,30 @@
 
 @helper FilterForm(string cssClass)
 {
-if (!Model.DeliveryModes.IsNullOrEmpty())
-{
-        <div class="@cssClass">
-            <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
-                <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
-                @{
-                    Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                }
-                <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
-            </form>
-        </div>
+    if (!Model.DeliveryModes.IsNullOrEmpty())
+    {
+        var hideMenu = true;
+        foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
+        {
+            hideMenu = false;
+        }
+
+        if (@Model.TotalResults != 0 || !hideMenu)
+        {
+            <div class="@cssClass">
+                <form method="get" autocomplete="off" action="@Model.AbsolutePath">
+                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
+                    @{
+                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }
+                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
+                </form>
+            </div>
+        }
+    }
 }
+
 
 @functions
 {

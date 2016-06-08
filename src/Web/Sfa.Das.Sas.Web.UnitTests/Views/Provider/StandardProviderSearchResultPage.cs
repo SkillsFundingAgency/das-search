@@ -387,5 +387,173 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             GetPartial(html, ".page-navigation__btn.prev").Should().Contain("Previous page").And.Contain("2 of 3");
             GetPartial(html, ".page-navigation__btn.next").Should().BeEmpty();
         }
+
+        [Test]
+        public void WhenSearchResultHasNoResultShouldShowUsefulInformationMessage()
+        {
+            var detail = new StandardSearchResultMessage();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false,
+                TotalProvidersCountry = 0
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".return-search-results").Should().Be("return to your apprenticeship training search results");
+            GetPartial(html, ".start-again").Should().Be("start your keyword search again");
+        }
+
+        [Test]
+        public void WhenSearchResultHasNoResultAndTheraAreNoProvidersInCountryShouldntShowProvidersMessage()
+        {
+            var detail = new StandardSearchResultMessage();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false,
+                TotalProvidersCountry = 0
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".total-providers-country").Should().BeEmpty();
+        }
+
+        [Test]
+        public void WhenSearchResultHasNoResultButThereAreProvidersInCountryShouldShowCountMessage()
+        {
+            var detail = new StandardSearchResultMessage();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                HasError = false,
+                TotalProvidersCountry = 3
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".total-providers-country").Should().NotBeEmpty();
+            var expectedText = string.Format("view all ({0}) training providers for Test standard name in England", model.TotalProvidersCountry);
+            GetPartial(html, ".total-providers-country").Should().Be(expectedText);
+        }
+
+        [Test]
+        public void WhenSearchResultHasResultButNoDeliveryModeHasResultsShouldShowFilterBox()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 10,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel
+                    {
+                        Count = 0
+                    }
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".filter-box").Should().NotBeNull();
+        }
+
+        [Test]
+        public void WhenSearchResultHasNoResultButDeliveryModeHasResultsShouldShowFilterBox()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel
+                    {
+                        Count = 10
+                    }
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".filter-box").Should().NotBeNull();
+        }
+
+        [Test]
+        public void WhenSearchResultHasNoResultAndNoDeliveryModeHasResultsShouldNotShowFilterBox()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel()
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".filter-box").Should().BeNull();
+        }
     }
 }

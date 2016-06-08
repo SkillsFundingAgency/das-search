@@ -90,18 +90,28 @@
 {
     if (!Model.DeliveryModes.IsNullOrEmpty())
     {
-        <div class="filters-block @cssClass">
-            <form method="get" autocomplete="off" action="@Request.Url.AbsolutePath">
-                <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
-                @{
-                    Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                }
-                <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
-            </form>
-        </div>
+        var hideMenu = true;
+        foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
+        {
+            hideMenu = false;
+        }
+
+        if (@Model.TotalResults != 0 || !hideMenu)
+        {
+            <div class="filters-block @cssClass">
+                <form method="get" autocomplete="off" action="@Model.AbsolutePath">
+                    <input type="hidden" name="PostCode" value="@Model.PostCode"/>
+                    <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId"/>
+                    @{
+                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                    }
+                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button"/>
+                </form>
+            </div>
+        }
     }
 }
+
 @functions
 {
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)

@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var stubViewModel = new ProviderStandardSearchResultViewModel();
 
             ProviderController controller = new ProviderControllerBuilder()
-                                .SetupProviderService(x => x.SearchByStandardPostCode(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>()), Task.FromResult(searchResults))
+                                .SetupProviderService(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>()), Task.FromResult(searchResults))
                                 .SetupMappingService(x => x.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(It.IsAny<ProviderStandardSearchResults>()), stubViewModel);
 
             var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = "AB3 1SD" };
@@ -54,7 +54,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
             ProviderController controller = new ProviderControllerBuilder()
-                .SetupProviderService(x => x.SearchByFrameworkPostCode(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>()), Task.FromResult(searchResults))
+                .SetupProviderService(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>()), Task.FromResult(searchResults))
                 .SetupMappingService(x => x.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderFrameworkSearchResults>()), stubViewModel);
 
             var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 123, PostCode = "AB3 1SD" };

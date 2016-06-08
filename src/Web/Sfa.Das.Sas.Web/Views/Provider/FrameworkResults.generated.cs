@@ -226,88 +226,96 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
  
     if (!Model.DeliveryModes.IsNullOrEmpty())
     {
+        var hideMenu = true;
+        foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
+        {
+            hideMenu = false;
+        }
+
+        if (@Model.TotalResults != 0 || !hideMenu)
+        {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <div");
+WriteLiteralTo(__razor_helper_writer, "            <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2706), Tuple.Create("\"", 2737)
-, Tuple.Create(Tuple.Create("", 2714), Tuple.Create("filters-block", 2714), true)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 2964), Tuple.Create("\"", 2995)
+, Tuple.Create(Tuple.Create("", 2972), Tuple.Create("filters-block", 2972), true)
 
-#line 93 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 2727), Tuple.Create<System.Object, System.Int32>(cssClass
+#line 101 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create(" ", 2985), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 2728), false)
+, 2986), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <form");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                <form");
 
 WriteLiteralTo(__razor_helper_writer, " method=\"get\"");
 
 WriteLiteralTo(__razor_helper_writer, " autocomplete=\"off\"");
 
-WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 2790), Tuple.Create("\"", 2824)
+WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 3052), Tuple.Create("\"", 3080)
 
-#line 94 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2799), Tuple.Create<System.Object, System.Int32>(Request.Url.AbsolutePath
+#line 102 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3061), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
 
 #line default
 #line hidden
-, 2799), false)
+, 3061), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n                <input");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"PostCode\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 2880), Tuple.Create("\"", 2903)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3140), Tuple.Create("\"", 3163)
 
-#line 95 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2888), Tuple.Create<System.Object, System.Int32>(Model.PostCode
+#line 103 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3148), Tuple.Create<System.Object, System.Int32>(Model.PostCode
 
 #line default
 #line hidden
-, 2888), false)
+, 3148), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " />\r\n                <input");
+WriteLiteralTo(__razor_helper_writer, "/>\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 2969), Tuple.Create("\"", 2995)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3232), Tuple.Create("\"", 3258)
 
-#line 96 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 2977), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+#line 104 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3240), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
 
 #line default
 #line hidden
-, 2977), false)
+, 3240), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " />\r\n");
+WriteLiteralTo(__razor_helper_writer, "/>\r\n");
 
 
-#line 97 "..\..\Views\Provider\FrameworkResults.cshtml"
-                
-
-#line default
-#line hidden
-
-#line 97 "..\..\Views\Provider\FrameworkResults.cshtml"
-                  
-                    Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                
+#line 105 "..\..\Views\Provider\FrameworkResults.cshtml"
+                    
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n                <input");
+
+#line 105 "..\..\Views\Provider\FrameworkResults.cshtml"
+                      
+                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                    
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
 
@@ -315,10 +323,11 @@ WriteLiteralTo(__razor_helper_writer, " value=\"Update results\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"button margin-top-x2 postcode-search-button\"");
 
-WriteLiteralTo(__razor_helper_writer, " />\r\n            </form>\r\n        </div>\r\n");
+WriteLiteralTo(__razor_helper_writer, "/>\r\n                </form>\r\n            </div>\r\n");
 
 
-#line 103 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 111 "..\..\Views\Provider\FrameworkResults.cshtml"
+        }
     }
 
 
@@ -326,12 +335,12 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n            </form>\r\n        </d
 #line hidden
 });
 
-#line 104 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 113 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 106 "..\..\Views\Provider\FrameworkResults.cshtml"
+        #line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
@@ -499,6 +508,8 @@ WriteLiteral("    <script>\r\n        window.onload = function() {\r\n          
 WriteLiteral("\r\n");
 
 WriteLiteral("\r\n\r\n");
+
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 
