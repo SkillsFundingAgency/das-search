@@ -46,14 +46,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     public partial class Framework : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel>
     {
 
-#line 55 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 56 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistLink(int id, bool isShortlisted)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 56 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 57 "..\..\Views\Apprenticeship\Framework.cshtml"
  
 if (isShortlisted)
 {
@@ -62,7 +62,7 @@ if (isShortlisted)
 #line default
 #line hidden
 
-#line 59 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 60 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveFramework", "ShortList",
             new { id },
             new { @class = "link shortlist-link framework-shortlist-link", rel = "nofollow", data_framework = id, data_action = "remove" }));
@@ -71,7 +71,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveF
 #line default
 #line hidden
 
-#line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 62 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                                                                                            
 }
 else
@@ -81,7 +81,7 @@ else
 #line default
 #line hidden
 
-#line 65 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 66 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddFramework", "ShortList",
             new { id },
             new { @class = "link shortlist-link framework-shortlist-link", rel = "nofollow", data_framework = id, data_action = "add" }));
@@ -90,7 +90,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddF
 #line default
 #line hidden
 
-#line 67 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 68 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                                                                                         
 }
 
@@ -99,7 +99,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddF
 #line hidden
 });
 
-#line 69 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 70 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
@@ -159,12 +159,17 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </h1>\r\n                <p>\r\n                    <b>Level:</b> <" +
-"span>");
+WriteLiteral("\r\n                </h1>\r\n                <dl");
+
+WriteLiteral(" class=\"data-list\"");
+
+WriteLiteral(">\r\n                    <dt>Level:</dt>\r\n                    <dd>\r\n");
+
+WriteLiteral("                        ");
 
             
-            #line 23 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                   Write(Model.Level);
+            #line 25 "..\..\Views\Apprenticeship\Framework.cshtml"
+                   Write(Model.Level);
 
             
             #line default
@@ -172,24 +177,24 @@ WriteLiteral("\r\n                </h1>\r\n                <p>\r\n              
 WriteLiteral(" (equivalent to ");
 
             
-            #line 23 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                               Write(EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()));
+            #line 25 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                               Write(EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()));
 
             
             #line default
             #line hidden
-WriteLiteral(" )</span>\r\n                </p>\r\n                <p>\r\n                    <b>Typi" +
-"cal length:</b> <span>");
+WriteLiteral(" )\r\n                    </dd>\r\n                    <dt>Typical length:</dt>\r\n    " +
+"                <dd>");
 
             
-            #line 26 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                            Write(Model.TypicalLengthMessage);
+            #line 28 "..\..\Views\Apprenticeship\Framework.cshtml"
+                   Write(Model.TypicalLengthMessage);
 
             
             #line default
             #line hidden
-WriteLiteral(@" </span>
-                </p>
+WriteLiteral(@" </dd>
+                </dl>
             </header>
 
             <p>This is an apprenticeship framework. Frameworks set out training requirements for apprentices in a specific work sector.</p>
@@ -201,8 +206,8 @@ WriteLiteral(@" </span>
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n                <li>entry requireme" +
-"nts</li>\r\n                <li>duration</li>\r\n                <li>career paths</l" +
-"i>\r\n\r\n            </ul>\r\n\r\n            <div");
+"nts</li>\r\n                <li>career paths</li>\r\n\r\n            </ul>\r\n\r\n        " +
+"    <div");
 
 WriteLiteral(" id=\"bottom-actions\"");
 
@@ -211,7 +216,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 44 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 45 "..\..\Views\Apprenticeship\Framework.cshtml"
            Write(GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted));
 
             
@@ -221,14 +226,14 @@ WriteLiteral("\r\n\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1590), Tuple.Create("\"", 1687)
+WriteAttribute("href", Tuple.Create(" href=\"", 1618), Tuple.Create("\"", 1715)
             
-            #line 46 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1597), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId})
+            #line 47 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create("", 1625), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId})
             
             #line default
             #line hidden
-, 1597), false)
+, 1625), false)
 );
 
 WriteLiteral(">\r\n                    <i");

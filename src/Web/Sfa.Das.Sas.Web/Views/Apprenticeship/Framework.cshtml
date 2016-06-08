@@ -19,12 +19,14 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                <p>
-                    <b>Level:</b> <span>@Model.Level (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )</span>
-                </p>
-                <p>
-                    <b>Typical length:</b> <span>@Model.TypicalLengthMessage </span>
-                </p>
+                <dl class="data-list">
+                    <dt>Level:</dt>
+                    <dd>
+                        @Model.Level (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )
+                    </dd>
+                    <dt>Typical length:</dt>
+                    <dd>@Model.TypicalLengthMessage </dd>
+                </dl>
             </header>
 
             <p>This is an apprenticeship framework. Frameworks set out training requirements for apprentices in a specific work sector.</p>
@@ -35,7 +37,6 @@
 
                 <li>qualifications</li>
                 <li>entry requirements</li>
-                <li>duration</li>
                 <li>career paths</li>
 
             </ul>
