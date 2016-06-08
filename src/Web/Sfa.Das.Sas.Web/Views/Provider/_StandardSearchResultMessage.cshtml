@@ -37,7 +37,7 @@
         <ul>
             @if (Model.TotalProvidersCountry > 0)
             {
-                <li class="total-providers-country">@Html.ActionLink(string.Format("view all({0}) training providers", @Model.TotalProvidersCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.StandardName in England</li>
+                <li class="total-providers-country">@Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalProvidersCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.StandardName in England</li>
             }
             <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchForProviders", "Apprenticeship", new {@standardId = @Model.StandardId}, new {@class = ""})</li>
             <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>

@@ -60,7 +60,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 return new ProviderStandardSearchResults { StandardId = standardId, PostCodeMissing = true };
             }
 
-            string standardName = string.Empty;
+            var standardName = string.Empty;
 
             try
             {
