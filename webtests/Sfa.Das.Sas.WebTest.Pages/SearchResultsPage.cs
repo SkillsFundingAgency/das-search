@@ -26,7 +26,10 @@
         public IWebElement SortingDropdown { get; set; }
 
         [ElementLocator(Id = "SelectedLevels_2")]
-        public IWebElement Level2 { get; set; }
+        public IWebElement Level2Checkbox { get; set; }
+
+        [ElementLocator(Id = "SelectedLevels_7")]
+        public IWebElement Level7Checkbox { get; set; }
 
         [ElementLocator(CssSelector = ".filters-block .button")]
         public IWebElement UpdateResultsButton { get; set; }
