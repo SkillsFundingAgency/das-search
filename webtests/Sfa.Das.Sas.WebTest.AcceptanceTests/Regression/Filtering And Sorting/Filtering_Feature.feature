@@ -1,10 +1,11 @@
 ﻿Feature: Filtering
+	As an Employer
 	In order to narrow the list of Standards or Framework
 	I need to be able to filter by Apprenticeship Level
 	So I can see only relevant levels listed first
 
-#@Regression @PreProd @Prod
 #Tests filtering by level works
+#@Regression @PreProd @Prod
 Scenario: Filter Apprenticeship Search Results Page 
 	Given I navigated to the Search page
 	When  I choose Search Button
