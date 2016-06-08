@@ -10,9 +10,9 @@
 		| Search Box | <search term> |
 	And  I choose Search Button
 	Then I am on the Search Results page	
-	#And I see Apprenticeship Results list Contains	
-		#| Field       | Rule   | Value         |
-		#| search term | Contains | <search term> |
+	And I see Apprenticeship Results list Contains	
+		| Field       | Rule   | Value         |
+		| search term | Contains | <search term> |
 	When I choose First Framework Result
 	Then I am on the Framework Details page
 	When I choose Search Page Button
