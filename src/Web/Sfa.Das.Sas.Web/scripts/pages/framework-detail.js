@@ -35,7 +35,6 @@
                 $('.framework-shortlist-link').attr('data-action', 'add');
                 $('.framework-shortlist-link').html('Shortlist apprenticeship');
             };
-           
         });
     };
 
