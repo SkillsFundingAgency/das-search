@@ -152,17 +152,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Regression\Filtering And Sorting\Filtering_Feature.feature.cs">
+    <Compile Include="Regression\Filtering_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Filtering_Feature.feature</DependentUpon>
     </Compile>
-    <Compile Include="Regression\Filtering And Sorting\Sorting_Feature.feature.cs">
+    <Compile Include="Regression\PageContent_Feature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageContent_Feature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Regression\Sorting_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Sorting_Feature.feature</DependentUpon>
     </Compile>
-    <Compile Include="Regression\Search\Search_Feature.feature.cs">
+    <Compile Include="Regression\Search_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Search_Feature.feature</DependentUpon>
@@ -275,15 +280,19 @@
       <LastGenOutput>StandardUserJourney.feature.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Regression\Filtering And Sorting\Filtering_Feature.feature">
+    <None Include="Regression\Filtering_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Filtering_Feature.feature.cs</LastGenOutput>
     </None>
-    <None Include="Regression\Filtering And Sorting\Sorting_Feature.feature">
+    <None Include="Regression\PageContent_Feature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PageContent_Feature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Regression\Sorting_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Sorting_Feature.feature.cs</LastGenOutput>
     </None>
-    <None Include="Regression\Search\Search_Feature.feature">
+    <None Include="Regression\Search_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Search_Feature.feature.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

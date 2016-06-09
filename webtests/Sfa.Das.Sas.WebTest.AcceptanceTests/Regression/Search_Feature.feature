@@ -28,7 +28,7 @@ Examples:
 
 #Test that if Job role returns no search a friendly message is displayed
 #@Regression		@PreProd @Prod
-Scenario Outline:If job role does not exist friendly message displayed
+Scenario Outline:If job role does not exist List is Empty
 	Given I navigated to the Start page
 	When I choose Start Button
 	Then I am on the Search page
@@ -42,7 +42,8 @@ Scenario Outline:If job role does not exist friendly message displayed
 	Examples: 
 	| search term | 
 	| dfs         |
-	#@Regression @PreProd @Prod
+
+#@Regression @PreProd @Prod
 #Test that specific providers exist in live service
 	Scenario Outline:Specific providers and frameworks in live data
 	Given I have data in the config
@@ -79,6 +80,7 @@ Scenario Outline:If job role does not exist friendly message displayed
 	Examples: 
 		| Keyword                                                                        |
 		| Children and Young People's Workforce: Children and Young People's Social Care |				  
+
 #@Regression @PreProd @Prod
 #This is a shorter test to find providers but just for standards
 Scenario Outline:Specific providers and standards in live data
@@ -92,12 +94,12 @@ Scenario Outline:Specific providers and standards in live data
 	When I choose First Standard Result
 	Then I am on the Standard Details page
 	Then I see
-         | Field				| Rule | Value |
+         | Field				| Rule	     | Value                         |
          |     Shortlist Link   |   Equals   |   Shortlist apprenticeship    |
 	When I choose Search Page Button
 	Then I am on the Provider Search page
 	When I enter data
-		| Field      | Value	  |
+		| Field				  | Value	   |
 		| Postcode Search Box | <Postcode> |
 	And I choose Search Button
 	Then I am on the Standard Provider Results page
@@ -106,8 +108,8 @@ Scenario Outline:Specific providers and standards in live data
 		| Title | Equals | <title> |
 
 	Examples: 
-		| Postcode | title                                  | Keyword                                 |
-		| NE1 8ST  | UNIVERSITY OF NORTHUMBRIA AT NEWCASTLE | Digital & technology solutions professional |
+		| Postcode | title                                  | Keyword									  |
+		| M15 6BH  | MANCHESTER METROPOLITAN UNIVERSITY		| Digital & technology solutions professional |
 
 #@Regression @PreProd @Prod
 #This scenario checks that an error message is displayed for and invalid postcode
