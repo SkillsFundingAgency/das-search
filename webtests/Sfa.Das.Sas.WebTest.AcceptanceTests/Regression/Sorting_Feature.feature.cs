@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.FilteringAndSorting
+namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
 {
     using TechTalk.SpecFlow;
     
@@ -18,20 +18,20 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.FilteringAndSorting
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Filtering")]
-    public partial class FilteringFeature
+    [NUnit.Framework.DescriptionAttribute("Sorting")]
+    public partial class SortingFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Filtering_Feature.feature"
+#line 1 "Sorting_Feature.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Filtering", "\tAs an Employer\r\n\tIn order to narrow the list of Standards or Framework\r\n\tI need " +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Sorting", "\tAs an Employer\r\n\tIn order to narrow the list of Standards or Framework\r\n\tI need " +
                     "to be able to filter by Apprenticeship Level\r\n\tSo I can see only relevant levels" +
                     " listed first", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
@@ -66,10 +66,10 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression.FilteringAndSorting
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Filter Apprenticeship Search Results Page")]
-        public virtual void FilterApprenticeshipSearchResultsPage()
+        [NUnit.Framework.DescriptionAttribute("Sort Apprenticeship Search Results Page")]
+        public virtual void SortApprenticeshipSearchResultsPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filter Apprenticeship Search Results Page", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort Apprenticeship Search Results Page", ((string[])(null)));
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
@@ -86,42 +86,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Then("I wait to see Sorting Dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 16
  testRunner.Then("I wait to see Filter Block", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 17
- testRunner.When("I choose Level 2 Checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
- testRunner.And("I choose Update Results Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
- testRunner.When("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Rule",
-                        "Value"});
-            table1.AddRow(new string[] {
-                        "Level Of Top Result",
-                        "contains",
-                        "2 (equivalent to GCSEs at grades A* to C)"});
-#line 20
- testRunner.Then("I see", ((string)(null)), table1, "Then ");
-#line 23
- testRunner.Given("I navigated to the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 24
- testRunner.When("I choose Level 7 Checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 25
- testRunner.And("I choose Update Results Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
- testRunner.When("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Rule",
-                        "Value"});
-            table2.AddRow(new string[] {
-                        "Level Of Top Result",
-                        "contains",
-                        "7 (equivalent to master’s degree)"});
-#line 27
- testRunner.Then("I see", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
