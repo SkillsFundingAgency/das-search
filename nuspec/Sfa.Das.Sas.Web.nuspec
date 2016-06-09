@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Sfa.Das.Sas.IndexerPackage</id>
+        <id>Sfa.Das.Sas.Web</id>
         <version>0.0.1</version>
         <authors>SFA DAS</authors>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Package for Indexer. Contains the Service Package file (cspkg) and the Cloud service config (cscfg) </description>
+        <description>Package for Web project. Contains the Service Package file (cspkg) and the Cloud service config (cscfg) </description>
         <copyright>Copyright 2016</copyright>
         <dependencies>
             <dependency id="SampleDependency" version="1.0" />
         </dependencies>
     </metadata>
      <files>
-        <file src="\..\src\SearchIndexer\Sfa.Das.Sas.Indexer.AzureCloudService\bin\Release\app.publish\*.*" target="" />
+        <file src="\..\src\Web\Sfa.Das.Sas.Web.CloudService\bin\Release\app.publish\*.*" target="" />
      </files>
 </package>
