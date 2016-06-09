@@ -132,7 +132,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
                 new RequestContext(context.Object, new RouteData()),
                 new RouteCollection());
 
-            var result = controller.Standard(1, hasErrorParmeter) as ViewResult;
+            var result = controller.Standard(1, string.Empty, hasErrorParmeter) as ViewResult;
 
             Assert.NotNull(result);
         }
@@ -147,7 +147,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var moqLogger = new Mock<ILog>();
             ApprenticeshipController controller = new ApprenticeshipController(null, mockStandardRepository.Object, null, moqLogger.Object, null, new Mock<IProfileAStep>().Object, null, null);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, "false");
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, string.Empty, "false");
 
             Assert.NotNull(result);
             Assert.AreEqual(404, result.StatusCode);
@@ -165,7 +165,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             var moqLogger = new Mock<ILog>();
             ApprenticeshipController controller = new ApprenticeshipController(null, null, mockFrameworkRepository.Object,  moqLogger.Object, null, new Mock<IProfileAStep>().Object, null, null);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1);
+            HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1, string.Empty);
 
             Assert.NotNull(result);
             Assert.AreEqual(404, result.StatusCode);
@@ -180,7 +180,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockApprenticeshipViewModelFactory.Setup(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
             var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
 
-            controller.SearchForProviders(1, null, null);
+            controller.SearchForProviders(1, null, string.Empty, null);
 
             mockApprenticeshipViewModelFactory.Verify(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Once);
             mockApprenticeshipViewModelFactory.Verify(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Never);
@@ -193,7 +193,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockApprenticeshipViewModelFactory.Setup(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
             var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
 
-            controller.SearchForProviders(null, 12, null);
+            controller.SearchForProviders(null, 12, string.Empty, null);
 
             mockApprenticeshipViewModelFactory.Verify(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Once);
             mockApprenticeshipViewModelFactory.Verify(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Never);
@@ -206,7 +206,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockApprenticeshipViewModelFactory.Setup(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
             var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
 
-            var result = controller.SearchForProviders(1, null, "true") as ViewResult;
+            var result = controller.SearchForProviders(1, null, string.Empty, "true") as ViewResult;
             var viewModel = result?.Model as ProviderSearchViewModel;
             viewModel?.HasError.Should().Be(true);
         }
@@ -218,7 +218,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockApprenticeshipViewModelFactory.Setup(m => m.GetStandardViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
             var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
 
-            var result = controller.SearchForProviders(1, null, null) as ViewResult;
+            var result = controller.SearchForProviders(1, null, string.Empty, null) as ViewResult;
             var viewModel = result?.Model as ProviderSearchViewModel;
             viewModel?.HasError.Should().BeFalse();
         }
@@ -230,7 +230,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
             mockApprenticeshipViewModelFactory.Setup(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
             var controller = new ApprenticeshipController(null, null, null, null, null, null, null, mockApprenticeshipViewModelFactory.Object);
 
-            var result = controller.SearchForProviders(null, null, null) as HttpStatusCodeResult;
+            var result = controller.SearchForProviders(null, null, null, null) as HttpStatusCodeResult;
             result.StatusCode.Should().Be(400);
         }
     }

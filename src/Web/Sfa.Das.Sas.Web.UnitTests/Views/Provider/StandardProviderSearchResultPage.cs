@@ -19,7 +19,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Provider
             var model = new ProviderStandardSearchResultViewModel();
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There are currently no providers for the apprenticeship:  covering postcode ''.");
+            GetPartial(html, "p").Should().Contain("Sorry, there are currently no training providers for  for ''.");
         }
 
         [Test]

@@ -106,9 +106,9 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return View(viewModel);
         }
-        
+
         // GET: Standard
-        public ActionResult Standard(int id, string hasError)
+        public ActionResult Standard(int id, string keywords, string hasError)
         {
             if (id < 0)
             {
@@ -131,11 +131,12 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.SearchTerm = keywords;
 
             return View(viewModel);
         }
 
-        public ActionResult Framework(int id)
+        public ActionResult Framework(int id, string keywords)
         {
             if (id < 0)
             {
@@ -159,11 +160,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
 
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
+            viewModel.SearchTerm = keywords;
 
             return View(viewModel);
         }
 
-        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string hasError)
+        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string keywords, string hasError)
         {
             ProviderSearchViewModel viewModel = new ProviderSearchViewModel();
             if (standardId != null)
@@ -180,6 +182,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.SearchTerms = keywords;
+
             return View(viewModel);
         }
     }

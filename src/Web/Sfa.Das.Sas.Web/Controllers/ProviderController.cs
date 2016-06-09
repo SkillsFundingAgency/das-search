@@ -104,6 +104,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.ActualPage = criteria.Page;
             viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
+            viewModel.SearchTerms = criteria.Keywords;
+            viewModel.ShowAll = criteria.ShowAll;
 
             if (viewModel.StandardNotFound)
             {
@@ -173,6 +175,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.ActualPage = criteria.Page;
             viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
+            viewModel.SearchTerms = criteria.Keywords;
+            viewModel.ShowAll = criteria.ShowAll;
 
             if (viewModel.FrameworkIsMissing)
             {

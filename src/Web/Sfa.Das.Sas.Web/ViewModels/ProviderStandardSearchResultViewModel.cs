@@ -32,6 +32,10 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
 
+        public string SearchTerms { get; set; }
+
         public string AbsolutePath { get; set; }
+
+        public bool ShowAll { get; set; }
     }
 }
