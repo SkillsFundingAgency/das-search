@@ -53,8 +53,17 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
         public IEnumerable<VstsFrameworkMetaData> GetFrameworks()
         {
-            var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
-            return _jsonMetaDataConvert.DeserializeObject<VstsFrameworkMetaData>(frameworksDir);
+            try
+            {
+                var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
+                return _jsonMetaDataConvert.DeserializeObject<VstsFrameworkMetaData>(frameworksDir);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error getting framework meta data");
+            }
+
+            return new List<VstsFrameworkMetaData>();
         }
 
         public void PushCommit(List<FileContents> items)
