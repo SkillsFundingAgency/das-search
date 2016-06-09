@@ -54,7 +54,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             if (criteria.ApprenticeshipId < 1)
             {
-                Response.StatusCode = 400;
+                return new HttpStatusCodeResult(400);
             }
 
             if (string.IsNullOrEmpty(criteria?.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))

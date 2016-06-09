@@ -44,6 +44,44 @@ namespace Sfa.Das.Sas.Web.UnitTests.Controllers
         }
 
         [Test]
+        public async Task SearchResultsShouldReturnBadRequestStatusCodeIfApprenticeshipIdIsInvalid()
+        {
+            const int InvalidApprenticeshipId = 0;
+
+            ProviderController controller = new ProviderControllerBuilder();
+
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = InvalidApprenticeshipId, PostCode = "AB3 1SD" };
+
+            var result = await controller.StandardResults(searchCriteria);
+
+            result.Should().BeOfType<HttpStatusCodeResult>();
+
+            var viewResult = (HttpStatusCodeResult)result;
+
+            viewResult.StatusCode.Should().Be(400);
+        }
+
+        [Test]
+        public async Task SearchResultsShouldRedirectToSearchEntryPageIfPostCodeIsNotSet()
+        {
+            var mockUrlHelper = new Mock<UrlHelper>();
+            mockUrlHelper.Setup(x => x.Action("SearchForProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
+
+            ProviderController controller = new ProviderControllerBuilder()
+                .WithUrl(mockUrlHelper.Object);
+
+            var searchCriteria = new ProviderSearchCriteria { ApprenticeshipId = 2, PostCode = string.Empty };
+
+            var result = await controller.StandardResults(searchCriteria);
+
+            result.Should().BeOfType<RedirectResult>();
+
+            var viewResult = (RedirectResult)result;
+
+            viewResult.Url.Should().Be("someurl");
+        }
+
+        [Test]
         public async Task SearchResultsShouldReturnViewResultWhenFrameworkSearchIsSuccessful()
         {
             var searchResults = new ProviderFrameworkSearchResults
