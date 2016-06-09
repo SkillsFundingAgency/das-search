@@ -404,8 +404,8 @@ WriteLiteral(">\r\n\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n\r\n            </div" +
-">\r\n            <p>\r\n");
+WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n            </div>\r" +
+"\n\r\n            <p>\r\n");
 
             
             #line 23 "..\..\Views\Provider\StandardResults.cshtml"

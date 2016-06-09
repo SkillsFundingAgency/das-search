@@ -30,7 +30,7 @@
             <div class="related-container">
                 <aside class="hidden-for-tablet">
 
-                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId })">
+                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                         <i class="fa fa-search" aria-hidden="true"></i>
                         Find training Providers
                     </a>

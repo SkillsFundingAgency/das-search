@@ -1,7 +1,6 @@
 ﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderStandardSearchResultViewModel
 
 <div>
-
     @if (Model.HasError)
     {
         @RenderErrorMessage()
@@ -61,7 +60,7 @@
         Sorry, there are currently no training providers for @Model.StandardName for '<b id="postalcode">@Model.PostCode</b>'.
     </p>
     <div>
-        You can:
+        <p>You can:</p>
         <ul class="list list-bullet">
             @if (Model.TotalProvidersCountry > 0)
             {
