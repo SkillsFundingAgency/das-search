@@ -24,8 +24,11 @@
                     <dd>
                         @Model.Level (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )
                     </dd>
-                    <dt>Typical length:</dt>
-                    <dd>@Model.TypicalLengthMessage </dd>
+                    @if (!string.IsNullOrEmpty(Model.TypicalLengthMessage))
+                    {
+                        <dt>Typical length:</dt>
+                        <dd>@Model.TypicalLengthMessage </dd>
+                    }
                 </dl>
             </header>
 
