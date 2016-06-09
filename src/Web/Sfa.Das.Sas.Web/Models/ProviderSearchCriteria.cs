@@ -15,5 +15,7 @@
         public bool ShowAll { get; set; }
 
         public IEnumerable<string> DeliveryModes { get; set; }
+
+        public string Keywords { get; set; }
     }
 }

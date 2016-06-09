@@ -109,7 +109,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(int id, string linkUrl)
+        public ActionResult Standard(int id, string keywords)
         {
             if (id < 0)
             {
@@ -131,12 +131,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
 
             viewModel.IsShortlisted = shortListStandards?.Contains(id) ?? false;
-            viewModel.PreviousPageLink = GetPreviousPageLinkViewModel(linkUrl);
+            viewModel.PreviousPageLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
+            viewModel.SearchTerm = keywords;
 
             return View(viewModel);
         }
 
-        public ActionResult Framework(int id)
+        public ActionResult Framework(int id, string keywords)
         {
             if (id < 0)
             {
@@ -156,11 +157,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
 
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
+            viewModel.SearchTerm = keywords;
 
             return View(viewModel);
         }
 
-        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string hasError)
+        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string keywords, string hasError)
         {
             ProviderSearchViewModel viewModel = new ProviderSearchViewModel();
             if (standardId != null)
@@ -177,6 +179,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.SearchTerms = keywords;
+
             return View(viewModel);
         }
 

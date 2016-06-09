@@ -18,5 +18,7 @@
 
         // Page specific
         public LinkViewModel SearchResultLink { get; set; }
+
+        public string SearchTerm { get; set; }
     }
 }

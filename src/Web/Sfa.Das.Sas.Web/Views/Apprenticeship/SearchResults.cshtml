@@ -146,7 +146,7 @@
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId }, null) 
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId, @keywords = Model.SearchTerm }, null) 
         <span>new</span>
     </h2>
 }
@@ -154,7 +154,7 @@
 @helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId }, null)
+        @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId, @keywords = Model.SearchTerm }, null)
     </h2>
 }
 

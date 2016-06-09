@@ -11,5 +11,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string PostUrl { get; set; }
 
         public int ApprenticeshipId { get; set; }
+
+        public string SearchTerms { get; set; }
     }
 }
