@@ -34,7 +34,7 @@
     </p>
     <div>
         You can:
-        <ul>
+        <ul class="list list-bullet">
             @if (Model.TotalProvidersCountry > 0)
             {
                 <li class="total-providers-country">@Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalProvidersCountry), "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.FrameworkName in England</li>

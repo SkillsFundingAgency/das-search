@@ -111,7 +111,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <div>\r\n        You can:\r\n        <ul>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <div>\r\n        You can:\r\n        <ul");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"list list-bullet\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
 #line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
