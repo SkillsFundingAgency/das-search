@@ -7,10 +7,11 @@
             element.remove();
         }
 
-        dashboard.RefreshShortListDisplay = function() {
-            if ($('.apprenticeship-items .apprenticeship-item').length === 0) {
-                $('.apprenticeship-items').hide();
-                $('#empty-shortlist-message').show();
+        dashboard.RefreshShortListDisplay = function ()
+        {
+            if ($('.apprenticeship-items .apprenticeship-item').length === 0){
+                $('.shortlist').hide();
+                $('#empty-shortlist-message').removeClass("hidden");
             }
         };
     };

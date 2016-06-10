@@ -17,9 +17,7 @@
 
     @DisplayEmptyShortlistMessage(Model)
 
-    <h2 class="heading-medium">
-        Apprenticeship training
-    </h2>
+    
     @if (!Model.Apprenticeships.IsNullOrEmpty())
     {
         @GetShortlistItem(Model.Apprenticeships.OrderBy(m => m.Title));
@@ -52,40 +50,46 @@
 
 @helper GetShortlistItem(IEnumerable<IShortlistApprenticeshipViewModel> apprenticeships)
 {
-    <ol class="apprenticeship-items">
-        @foreach (var apprenticeship in apprenticeships)
-        {
-            <li class="apprenticeship-item">
-                <span class="apprenticeship-title">
-                    @GetLink(apprenticeship)
-                </span>
-                <span class="action">
-                    @GetDeleteLink(apprenticeship)
-                </span>
-                @if (apprenticeship.Providers.Any())
-                {   
-                    <div class="providers">
+    <div class="shortlist">
+        <h2 class="heading-medium">
+            Apprenticeship training
+        </h2>
 
-                        <h3 class="heading-small">
-                            Training providers
-                        </h3>
-                        @foreach (var provider in apprenticeship.Providers.OrderBy(m => m.Name))
-                        {
-                            <ol>
-                                <li class="provider-item">
-                                    <span class="provider-title">
-                                        @Html.RenderAIfExists(provider.Name, provider.Url, "")
-                                    </span>
-                                    <span class="action">
-                                        @Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new { apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId }, new { @class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow" })
-                                        @* Add to support frameorks *@
-                                    </span>
-                                </li>
-                            </ol>
-                        }
-                    </div>
-                }
-            </li>
-        }
-    </ol>
+        <ol class="apprenticeship-items">
+            @foreach (var apprenticeship in apprenticeships)
+            {
+                <li class="apprenticeship-item">
+                    <span class="apprenticeship-title">
+                        @GetLink(apprenticeship)
+                    </span>
+                    <span class="action">
+                        @GetDeleteLink(apprenticeship)
+                    </span>
+                    @if (apprenticeship.Providers.Any())
+                    {
+                        <div class="providers">
+
+                            <h3 class="heading-small">
+                                Training providers
+                            </h3>
+                            @foreach (var provider in apprenticeship.Providers.OrderBy(m => m.Name))
+                            {
+                                <ol>
+                                    <li class="provider-item">
+                                        <span class="provider-title">
+                                            @Html.RenderAIfExists(provider.Name, provider.Url, "")
+                                        </span>
+                                        <span class="action">
+                                            @Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"})
+                                            @* Add to support frameorks *@
+                                        </span>
+                                    </li>
+                                </ol>
+                            }
+                        </div>
+                    }
+                </li>
+            }
+        </ol>
+    </div>
 }
