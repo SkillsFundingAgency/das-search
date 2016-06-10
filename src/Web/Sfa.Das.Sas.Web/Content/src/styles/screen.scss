@@ -132,3 +132,21 @@ aside h2:first-child {
 .filter-box {
     margin-bottom: 30px;
 }
+
+/* Temp css for Dashboard */
+.apprenticeship-items {
+    border-top: 1px solid gray;
+    li {
+        margin: 5px 0;
+        padding: 5px 0;
+    }
+    .apprenticeship-item {
+        border-bottom: 1px solid gray;
+    }
+    .action {
+        float: right;
+    }
+    .providers {
+        margin-left: 40px;
+    }
+}

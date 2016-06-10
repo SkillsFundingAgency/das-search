@@ -54,12 +54,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
-            if (shortlistedApprenticeships == null)
-            {
-                return standardViewModels;
-            }
-
-            if (!shortlistedApprenticeships.Any())
+            if (shortlistedApprenticeships == null || !shortlistedApprenticeships.Any())
             {
                 return standardViewModels;
             }
@@ -90,7 +85,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                         Id = p.Provider.UkPrn,
                         Name = p.Provider.Name,
                         LocationId = p.Location.LocationId,
-                        Address = p.Location.Address
+                        Address = p.Location.Address,
+                        Url = Url.Action("Detail", "Provider", new { providerId = p.Provider.Id, locationId = p.Location.LocationId, standardCode = standard.StandardId })
                     });
 
                 standardViewModel.Providers.AddRange(providerViewModels);

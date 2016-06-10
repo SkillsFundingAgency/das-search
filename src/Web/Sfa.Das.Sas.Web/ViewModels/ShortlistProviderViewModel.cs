@@ -8,5 +8,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string Name { get; set; }
         public int LocationId { get; set; }
         public Address Address { get; set; }
+
+        public string Url { get; set; }
+
     }
 }

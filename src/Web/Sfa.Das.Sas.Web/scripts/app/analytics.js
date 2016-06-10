@@ -59,8 +59,8 @@
             trackShortlist($(this).attr('data-action'), "provider");
         });
 
-        $(".standard-delete-link").on('click', function() {
-            trackShortlist("remove", "standard");
+        $(".delete-link").on('click', function() {
+            trackShortlist("remove", "apprenticeship");
         });
 
         $(".provider-delete-link").on('click', function () {
