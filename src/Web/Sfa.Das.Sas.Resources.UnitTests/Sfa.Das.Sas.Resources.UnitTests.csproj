@@ -64,7 +64,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="EquivalenveLevelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

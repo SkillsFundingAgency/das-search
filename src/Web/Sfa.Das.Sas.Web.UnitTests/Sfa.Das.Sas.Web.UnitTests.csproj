@@ -125,45 +125,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Colllections\CookieListCollectionTest.cs" />
-    <Compile Include="Common\ValidationTest.cs" />
-    <Compile Include="Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
-    <Compile Include="Controllers\DashboardControllerTests.cs" />
-    <Compile Include="Controllers\ErrorControllerTests.cs" />
-    <Compile Include="Controllers\SharedControllerTests.cs" />
-    <Compile Include="Controllers\StartControllerTests.cs" />
-    <Compile Include="Controllers\ProviderControllerTests.cs" />
-    <Compile Include="Controllers\ShortlistControllerTest.cs" />
-    <Compile Include="Extensions\ControllerExtensions.cs" />
-    <Compile Include="Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
-    <Compile Include="Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
-    <Compile Include="Extensions\ForUriExtension.cs" />
-    <Compile Include="Factories\ApprenticeshipViewModelFactoryTest.cs" />
+    <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
+    <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
+    <Compile Include="Infrastructure\Resources\EquivalenveLevelTest.cs" />
+    <Compile Include="Infrastructure\Web\Colllections\CookieListCollectionTest.cs" />
+    <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\DashboardControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\ErrorControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\SharedControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\StartControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\ProviderControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\ShortlistControllerTest.cs" />
+    <Compile Include="Infrastructure\Web\Extensions\ControllerExtensions.cs" />
+    <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
+    <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
+    <Compile Include="Infrastructure\Web\Extensions\ForUriExtension.cs" />
+    <Compile Include="Infrastructure\Web\Factories\ApprenticeshipViewModelFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\ApprenticeshipControllerTests.cs" />
-    <Compile Include="Services\ForCookieService.cs" />
-    <Compile Include="Services\ForMappingProviderResultItem.cs" />
-    <Compile Include="Services\ForMappingApprenticeDetailsToProviderViewModel.cs" />
-    <Compile Include="Services\ForMappingStandardSearchResultsToViewModel.cs" />
-    <Compile Include="ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
-    <Compile Include="Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />
-    <Compile Include="Services\ForMappingStandardToViewModel.cs" />
-    <Compile Include="Services\ForProviderSearchMappingHelper.cs" />
-    <Compile Include="Views\ForApprenticeshipSearchResultPage.cs" />
-    <Compile Include="Views\Provider\FilterProviderPageTest.cs" />
-    <Compile Include="Views\Provider\FrameworkProviderSearchResultPage.cs" />
-    <Compile Include="Views\Provider\StandardProviderSearchResultPage.cs" />
-    <Compile Include="Views\Provider\ProviderDetailsPage.cs" />
-    <Compile Include="Views\Dashboard\OverviewTest.cs" />
-    <Compile Include="Views\StandardDetailPageTests.cs" />
-    <Compile Include="Views\SearchResultMessageTests.cs" />
-    <Compile Include="Views\Start\StartPageTest.cs" />
-    <Compile Include="Views\ViewTestBase.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\ApprenticeshipControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForCookieService.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingProviderResultItem.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingApprenticeDetailsToProviderViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingStandardSearchResultsToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingStandardToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForProviderSearchMappingHelper.cs" />
+    <Compile Include="Infrastructure\Web\Views\ForApprenticeshipSearchResultPage.cs" />
+    <Compile Include="Infrastructure\Web\Views\Provider\FilterProviderPageTest.cs" />
+    <Compile Include="Infrastructure\Web\Views\Provider\FrameworkProviderSearchResultPage.cs" />
+    <Compile Include="Infrastructure\Web\Views\Provider\StandardProviderSearchResultPage.cs" />
+    <Compile Include="Infrastructure\Web\Views\Provider\ProviderDetailsPage.cs" />
+    <Compile Include="Infrastructure\Web\Views\Dashboard\OverviewTest.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForCookieService.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForMappingApprenticeDetailsToProviderViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForMappingProviderResultItem.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForMappingStandardSearchResultsToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForMappingStandardToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Views\Services\ForProviderSearchMappingHelper.cs" />
+    <Compile Include="Infrastructure\Web\Views\StandardDetailPageTests.cs" />
+    <Compile Include="Infrastructure\Web\Views\SearchResultMessageTests.cs" />
+    <Compile Include="Infrastructure\Web\Views\Start\StartPageTest.cs" />
+    <Compile Include="Infrastructure\Web\Views\ViewTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Application\ApplicationServices\Sfa.Das.Sas.ApplicationServices.UnitTests.ruleset" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -183,12 +194,18 @@
       <Project>{3F5631AB-7190-4203-96DB-AF5664C72100}</Project>
       <Name>Sfa.Das.Sas.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj">
+      <Project>{88f7cfd8-69a0-49a9-83f5-d729def4afca}</Project>
+      <Name>Sfa.Das.Sas.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Web\Sfa.Das.Sas.Web.csproj">
       <Project>{E288C11D-B65E-4FD4-9C8D-7D734A7E947D}</Project>
       <Name>Sfa.Das.Sas.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\Web\Views\Web\" />
+  </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.CSharp.dll" />
     <Analyzer Include="..\packages\SonarLint.1.7.0\analyzers\SonarLint.dll" />
