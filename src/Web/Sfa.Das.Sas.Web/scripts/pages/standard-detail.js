@@ -12,14 +12,14 @@
         }
     };
 
-    standard.Remove = function (id) {
+    standard.Remove = function(id) {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(standard.CookieName);
 
         if (cookie) {
             cookie.RemoveSubKey(id);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
-    }
+    };
 
 
     standard.init = function () {
@@ -35,7 +35,6 @@
                 $('.standard-shortlist-link').attr('data-action', 'add');
                 $('.standard-shortlist-link').html('Shortlist apprenticeship');
             };
-           
         });
     };
 

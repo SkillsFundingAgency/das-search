@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using Sfa.Das.Sas.Web.Factories;
+
 using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
     using Sfa.Das.Sas.ApplicationServices.Settings;
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
 
     public class CookieListCollection : IListCollection<int>
     {

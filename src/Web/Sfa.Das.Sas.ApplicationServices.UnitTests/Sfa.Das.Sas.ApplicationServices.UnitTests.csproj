@@ -67,12 +67,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderSearchServiceTests.cs" />
-    <Compile Include="StandardSearchServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Sfa.Das.Sas.ApplicationServices.UnitTests.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>

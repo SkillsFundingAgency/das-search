@@ -7,6 +7,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Factories
 {
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
+
     public class ProviderViewModelFactory : IProviderViewModelFactory
     {
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;

@@ -12,7 +12,7 @@
                 $('.apprenticeship-items').hide();
                 $('#empty-shortlist-message').show();
             }
-        }
+        };
     };
 
     dashboard.init = function () {
@@ -34,7 +34,7 @@
 
         $('.provider-delete-link').on('click', function (e) {
             e.preventDefault();
-            
+
             SearchAndShortlist.provider.Remove(
                 $(this).attr('data-provider'),
                 $(this).attr('data-apprenticeship'),

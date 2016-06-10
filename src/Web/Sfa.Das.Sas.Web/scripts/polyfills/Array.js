@@ -1,5 +1,4 @@
-﻿
-// Adds Array.find() functionality to browsers and PhantomJS that currently don't support it
+﻿// Adds Array.find() functionality to browsers and PhantomJS that currently don't support it
 if (!Array.prototype.find) {
     Array.prototype.find = function (predicate) {
         if (this === null) {

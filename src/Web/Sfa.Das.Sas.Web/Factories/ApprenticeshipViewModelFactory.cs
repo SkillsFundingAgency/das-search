@@ -5,6 +5,7 @@
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Core.Domain.Services;
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
     using Sfa.Das.Sas.Web.Services;
     using Sfa.Das.Sas.Web.ViewModels;
 
