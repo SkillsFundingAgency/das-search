@@ -174,7 +174,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Application\ApplicationServices\Sfa.Das.Sas.ApplicationServices.UnitTests.ruleset" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
