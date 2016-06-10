@@ -34,14 +34,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.Models.ApprenticeshipSearchCriteria>
     {
 
-#line 39 "..\..\Views\Apprenticeship\Search.cshtml"
+#line 36 "..\..\Views\Apprenticeship\Search.cshtml"
 public System.Web.WebPages.HelperResult GenerateBackLink()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 40 "..\..\Views\Apprenticeship\Search.cshtml"
+#line 37 "..\..\Views\Apprenticeship\Search.cshtml"
  
     if (!string.IsNullOrEmpty(Request.UrlReferrer?.OriginalString))
     {
@@ -51,14 +51,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1421), Tuple.Create("\"", 1463)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 1348), Tuple.Create("\"", 1390)
 
-#line 43 "..\..\Views\Apprenticeship\Search.cshtml"
-, Tuple.Create(Tuple.Create("", 1428), Tuple.Create<System.Object, System.Int32>(Request.UrlReferrer.OriginalString
+#line 40 "..\..\Views\Apprenticeship\Search.cshtml"
+, Tuple.Create(Tuple.Create("", 1355), Tuple.Create<System.Object, System.Int32>(Request.UrlReferrer.OriginalString
 
 #line default
 #line hidden
-, 1428), false)
+, 1355), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"link-back\"");
@@ -66,7 +66,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"link-back\"");
 WriteLiteralTo(__razor_helper_writer, ">Back</a>\r\n");
 
 
-#line 44 "..\..\Views\Apprenticeship\Search.cshtml"
+#line 41 "..\..\Views\Apprenticeship\Search.cshtml"
     }
     else
     {
@@ -75,14 +75,14 @@ WriteLiteralTo(__razor_helper_writer, ">Back</a>\r\n");
 #line default
 #line hidden
 
-#line 47 "..\..\Views\Apprenticeship\Search.cshtml"
+#line 44 "..\..\Views\Apprenticeship\Search.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Back", "Start", "Start", null, new { @class = "link-back" }));
 
 
 #line default
 #line hidden
 
-#line 47 "..\..\Views\Apprenticeship\Search.cshtml"
+#line 44 "..\..\Views\Apprenticeship\Search.cshtml"
                                                                                       
     }
 
@@ -91,7 +91,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Back", "Start", "Start", null, n
 #line hidden
 });
 
-#line 49 "..\..\Views\Apprenticeship\Search.cshtml"
+#line 46 "..\..\Views\Apprenticeship\Search.cshtml"
 }
 #line default
 #line hidden
@@ -115,22 +115,7 @@ WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\r\n    <p");
-
-WriteLiteral(" class=\"small-btm-margin\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("        ");
-
-            
-            #line 7 "..\..\Views\Apprenticeship\Search.cshtml"
-   Write(GenerateBackLink());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n    </p>\r\n    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -145,13 +130,13 @@ WriteLiteral(" class=\"heading-xlarge\"");
 WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n\r\n");
 
             
-            #line 16 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 16 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
              using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
             {
 
@@ -207,7 +192,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral("/>\r\n");
 
             
-            #line 31 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             

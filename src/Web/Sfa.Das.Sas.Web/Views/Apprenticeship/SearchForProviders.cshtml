@@ -1,16 +1,10 @@
 ﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel
-@using Sfa.Das.Sas.Web.Extensions
 @{
     ViewBag.Title = "Search for providers";
 }
 
 
 <main id="content">
-
-    <p class="small-btm-margin">
-        @Html.RenderAIfExists(@Model.PreviousPageLink?.Title, @Model.PreviousPageLink?.Url, "link-back")
-    </p>
-
     <div>
         <h1 class="heading-xlarge">
             Find an apprenticeship training provider

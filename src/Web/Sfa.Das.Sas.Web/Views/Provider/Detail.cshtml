@@ -1,17 +1,12 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.ViewModels
-@model Sfa.Das.Sas.Web.ViewModels.ApprenticeshipDetailsViewModel
+@model ApprenticeshipDetailsViewModel
 
 @{
     ViewBag.Title = "Provider - " + @Model.Name;
 }
 <main id="content" class="provider-detail">
-
-    <p class="small-btm-margin">
-      @Html.ActionLink("Back to search page", "SearchForProviders", "Apprenticeship", new { standardId = @Model.Apprenticeship.Code}, new {@class="link-back"})
-    </p>
-
     <div class="grid-row">
 
         <div class="column-two-thirds">
