@@ -28,19 +28,5 @@
             }
 
         </div>
-
     </div>
-
 </main>
-
-@helper GenerateBackLink()
-{
-    if (!string.IsNullOrEmpty(Request.UrlReferrer?.OriginalString))
-    {
-        <a href="@Request.UrlReferrer.OriginalString" class="link-back">Back</a>
-    }
-    else
-    {
-        @Html.ActionLink("Back", "Start", "Start", null, new { @class = "link-back" })
-    }
-}

@@ -8,22 +8,17 @@
 
 <main id="content" role="main">
     <div id="provider-results" class="grid-row">
-
         <div class="column-two-thirds">
-
             <div class="hgroup">
-
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
             </div>
-
             <p>
                 @{
                     Html.RenderPartial("_StandardSearchResultMessage");
                 }
             </p>
-
         </div>
 
         <div class="column-third">
@@ -39,8 +34,6 @@
                 @GetPaginationNextLink()
             </div>
         </div>
-
-
     </div>
 </main>
 
@@ -68,7 +61,6 @@
     }
 }
 
-
 @helper GetPaginationNextLink()
 {
     if (Model.ActualPage < Model.LastPage)
@@ -88,11 +80,7 @@
 {
     if (!Model.DeliveryModes.IsNullOrEmpty())
     {
-        var hideMenu = true;
-        foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
-        {
-            hideMenu = false;
-        }
+        var hideMenu = Model.DeliveryModes.All(deliveryMode => deliveryMode.Count == 0);
 
         if (@Model.TotalResults != 0 || !hideMenu)
         {
@@ -109,7 +97,6 @@
         }
     }
 }
-
 
 @functions
 {
