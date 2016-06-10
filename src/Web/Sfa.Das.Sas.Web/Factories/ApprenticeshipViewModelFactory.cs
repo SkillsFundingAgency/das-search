@@ -2,7 +2,10 @@
 {
     using System.Web.Mvc;
 
+    using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Core.Domain.Services;
+    using Sfa.Das.Sas.Web.Services;
     using Sfa.Das.Sas.Web.ViewModels;
 
     public class ApprenticeshipViewModelFactory : IApprenticeshipViewModelFactory
@@ -11,13 +14,16 @@
 
         private readonly IGetFrameworks _getFrameworks;
 
-        public ApprenticeshipViewModelFactory(IGetStandards getStandards, IGetFrameworks getFrameworks)
+        private readonly IMappingService _mappingService;
+
+        public ApprenticeshipViewModelFactory(IGetStandards getStandards, IGetFrameworks getFrameworks, IMappingService mappingService)
         {
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
+            _mappingService = mappingService;
         }
 
-        public ProviderSearchViewModel GetStandardViewModel(int id, UrlHelper urlHelper)
+        public ProviderSearchViewModel GetProviderSearchViewModelForStandard(int id, UrlHelper urlHelper)
         {
             var standardResult = _getStandards.GetStandardById(id);
             var viewModel = CreateViewModel(standardResult.StandardId, standardResult.NotionalEndLevel, standardResult.Title);
@@ -44,6 +50,33 @@
                                              };
 
             return viewModel;
+        }
+
+        public StandardViewModel GetStandardViewModel(int id)
+        {
+            var standardResult = _getStandards.GetStandardById(id);
+            if (standardResult == null)
+            {
+                return null;
+            }
+
+            return _mappingService.Map<Standard, StandardViewModel>(standardResult);
+        }
+
+        public FrameworkViewModel GetFrameworkViewModel(int id)
+        {
+            var frameworkResult = _getFrameworks.GetFrameworkById(id);
+            if (frameworkResult == null)
+            {
+                return null;
+            }
+
+            return _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
+        }
+
+        public ApprenticeshipSearchResultViewModel GetSApprenticeshipSearchResultViewModel(ApprenticeshipSearchResults searchResults)
+        {
+            return _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
         }
 
         private ProviderSearchViewModel CreateViewModel(int id, int level, string title)

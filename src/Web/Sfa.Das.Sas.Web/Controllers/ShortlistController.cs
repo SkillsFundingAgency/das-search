@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.SessionState;
-using Microsoft.Ajax.Utilities;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
@@ -40,7 +34,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult AddStandardProvider(int apprenticeshipId, string providerId, int locationId)
         {
             _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {apprenticeshipId} shortlist cookie");
-            
+
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
                 ApprenticeshipId = apprenticeshipId,
@@ -62,7 +56,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult RemoveStandard(int id)
         {
             _logger.Debug($"Removing standard {id} from shortlist cookie");
-           
+
             _listCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
@@ -78,7 +72,6 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {apprenticeshipId} shortlist cookie");
             _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
-
 
             return GetReturnRedirectFromStandardProviderShortlistAction(apprenticeshipId, providerId, locationId);
         }
@@ -104,7 +97,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
-        
+
         // This method is used to try to redirect back from the page that requested the updating of the
         // standards shortlist. If a URL cannot be found in the request then the default is to go back to
         // the standard details page itself.
@@ -128,7 +121,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return Redirect(Request.UrlReferrer.OriginalString);
             }
 
-            var providerSearchCriteria = new ProviderLocationSearchCriteria()
+            var providerSearchCriteria = new ProviderLocationSearchCriteria
             {
                 StandardCode = standardId.ToString(),
                 ProviderId = providerId,
@@ -137,7 +130,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return RedirectToAction("Detail", "Provider", new { providerSearchCriteria });
         }
-        
+
         private ActionResult GetReturnRedirectFromFrameworkShortlistAction(int id)
         {
             if (Request.UrlReferrer == null)
