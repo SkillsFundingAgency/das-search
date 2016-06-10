@@ -9,19 +9,12 @@ using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Factories;
+using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
-<<<<<<< 79c48eaa132ee56e1ca03304a5e441a482f25462:src/Web/Sfa.Das.Sas.Web.UnitTests/Infrastructure/Web/Controllers/ApprenticeshipControllerTests.cs
-=======
-    using FluentAssertions;
-
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
-
->>>>>>> UD00 -> Moved facory interfaces to separate folder:src/Web/Sfa.Das.Sas.Web.UnitTests/Controllers/ApprenticeshipControllerTests.cs
     [TestFixture]
     public sealed class ApprenticeshipControllerTests
     {
