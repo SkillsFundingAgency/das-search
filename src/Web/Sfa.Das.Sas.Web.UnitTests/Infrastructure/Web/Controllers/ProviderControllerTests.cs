@@ -111,7 +111,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             ProviderController controller = new ProviderControllerBuilder()
                 .SetupViewModelFactory(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()), null);
 
-            var result = controller.Detail(searchCriteria, string.Empty);
+            var result = controller.Detail(searchCriteria);
 
             result.Should().BeOfType<HttpNotFoundResult>();
 
@@ -149,7 +149,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .WithControllerHttpContext(httpContextMock.Object)
                 .WithUrl(urlHelperMock.Object);
 
-            var result = controller.Detail(searchCriteria, string.Empty);
+            var result = controller.Detail(searchCriteria);
 
             result.Should().BeOfType<ViewResult>();
 
@@ -187,7 +187,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .WithUrl(urlHelperMock.Object)
                 .WithControllerHttpContext(httpContextMock.Object);
 
-            var result = controller.Detail(searchCriteria, string.Empty);
+            var result = controller.Detail(searchCriteria);
 
             result.Should().BeOfType<ViewResult>();
 

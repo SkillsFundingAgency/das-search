@@ -28,11 +28,11 @@
     cookieStore.Cookie = function (name)
     {
         this.Name = name;
-        this.SubKeys = new Array();
+        this.SubKeys = [];
 
         this.PopulateFromString = function (cookieString)
         {
-            this.SubKeys = new Array();
+            this.SubKeys = [];
 
             var subKeyStrings = cookieString.split("&");
 
@@ -51,7 +51,7 @@
         };
 
         this.AddSubKeyValue = function(key, value) {
-            var subKey = this.SubKeys.find(function(element, index, array) {
+            var subKey = this.SubKeys.find(function(element) {
                 return element.Key === key;
             });
 
@@ -64,7 +64,7 @@
 
         this.RemoveSubKey = function (keyName)
         {
-            var index = this.SubKeys.findIndex(function (element, index, array)
+            var index = this.SubKeys.findIndex(function (element)
             {
                 return element.Key === keyName;
             });
@@ -76,7 +76,7 @@
 
         this.RemoveSubKeyValue = function (key, value)
         {
-            var subKey = this.SubKeys.find(function (element, index, array)
+            var subKey = this.SubKeys.find(function (element)
             {
                 return element.Key === key;
             });
@@ -89,7 +89,7 @@
 
         this.ToString = function ()
         {
-            var subKeyStrings = new Array();
+            var subKeyStrings = [];
 
             for (var index = 0; index < this.SubKeys.length; index++)
             {
@@ -102,7 +102,7 @@
         function SubKey(key)
         {
             this.Key = key;
-            this.Values = new Array();
+            this.Values = [];
 
             this.PopulateFromString = function (keyString)
             {

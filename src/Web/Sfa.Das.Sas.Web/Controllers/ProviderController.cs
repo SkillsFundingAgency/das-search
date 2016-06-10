@@ -182,7 +182,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detail(ProviderLocationSearchCriteria criteria, string linkUrl)
+        public ActionResult Detail(ProviderLocationSearchCriteria criteria)
         {
             var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);
 
