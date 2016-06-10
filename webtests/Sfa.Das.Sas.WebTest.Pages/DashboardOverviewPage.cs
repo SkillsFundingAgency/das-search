@@ -11,13 +11,13 @@ namespace Sfa.Das.Sas.WebTest.Pages
         [ElementLocator(Id = "empty-shortlist-message")]
         public IWebElement EmptyShortlistMessage { get; set; }
 
-        [ElementLocator(Id = "shortlist")]
+        [ElementLocator(Class = "apprenticeship-items")]
         public IElementList<IWebElement, ApprenticeshipShortlistItem> Shortlist { get; set; }
 
-        [ElementLocator(Id = "shortlist")]
+        [ElementLocator(Class = "apprenticeship-items")]
         public IElementList<IWebElement, StandardShortlistItem> StandardShortlist { get; set; }
 
-        [ElementLocator(Id = "shortlist")]
+        [ElementLocator(Class = "apprenticeship-items")]
         public IElementList<IWebElement, FrameworkShortlistItem> FrameworkShortlist { get; set; }
         
 
@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.WebTest.Pages
             public IWebElement Title { get; set; }
         }
 
-        [ElementLocator(Class = "standard-item")]
+        [ElementLocator(Class = "apprenticeship-item")]
         public class StandardShortlistItem : WebElement
         {
             public StandardShortlistItem(ISearchContext searchContext)
@@ -41,11 +41,11 @@ namespace Sfa.Das.Sas.WebTest.Pages
             {
             }
 
-            [ElementLocator(CssSelector = ".standard-title > a")]
+            [ElementLocator(CssSelector = ".apprenticeship-title > a")]
             public IWebElement Title { get; set; }
         }
 
-        [ElementLocator(Class = "framework-item")]
+        [ElementLocator(Class = "apprenticeship-item")]
         public class FrameworkShortlistItem : WebElement
         {
             public FrameworkShortlistItem(ISearchContext searchContext)
@@ -53,7 +53,7 @@ namespace Sfa.Das.Sas.WebTest.Pages
             {
             }
 
-            [ElementLocator(CssSelector = ".framework-title > a")]
+            [ElementLocator(CssSelector = ".apprenticeship-title > a")]
             public IWebElement Title { get; set; }
         }
 

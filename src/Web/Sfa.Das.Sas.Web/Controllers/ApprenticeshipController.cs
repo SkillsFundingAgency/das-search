@@ -2,22 +2,17 @@
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Models;
-using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 using RedirectResult = System.Web.Mvc.RedirectResult;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Net;
-    using System.Net.Http;
-    using System.Web;
     using System.Web.Routing;
 
     using Sfa.Das.Sas.Web.Factories;
@@ -26,7 +21,6 @@ namespace Sfa.Das.Sas.Web.Controllers
     {
         private readonly ILog _logger;
 
-        private readonly IMappingService _mappingService;
         private readonly IListCollection<int> _listCollection;
 
         private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
@@ -34,23 +28,16 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IProfileAStep _profiler;
 
         private readonly IApprenticeshipSearchService _searchService;
-        private readonly IGetStandards _getStandards;
-        private readonly IGetFrameworks _getFrameworks;
+
         public ApprenticeshipController(
             IApprenticeshipSearchService searchService,
-            IGetStandards getStandards,
-            IGetFrameworks getFrameworks,
             ILog logger,
-            IMappingService mappingService,
             IProfileAStep profiler,
             IListCollection<int> listCollection,
             IApprenticeshipViewModelFactory apprenticeshipViewModelFactory)
         {
             _searchService = searchService;
-            _getStandards = getStandards;
-            _getFrameworks = getFrameworks;
             _logger = logger;
-            _mappingService = mappingService;
             _profiler = profiler;
             _listCollection = listCollection;
             _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
@@ -75,7 +62,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             using (_profiler.CreateStep("Map to view model"))
             {
-                viewModel = _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
+                viewModel = _apprenticeshipViewModelFactory.GetSApprenticeshipSearchResultViewModel(searchResults);
             }
 
             if (viewModel == null)
@@ -108,16 +95,15 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(int id, string keywords, string hasError)
+        public ActionResult Standard(int id, string keywords)
         {
             if (id < 0)
             {
                 Response.StatusCode = 400;
             }
 
-            var standardResult = _getStandards.GetStandardById(id);
-
-            if (standardResult == null)
+            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(id);
+            if (viewModel == null)
             {
                 var message = $"Cannot find standard: {id}";
                 _logger.Warn($"404 - {message}");
@@ -126,11 +112,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
-
-            var viewModel = _mappingService.Map<Standard, StandardViewModel>(standardResult);
-
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.SearchTerm = keywords;
 
             return View(viewModel);
@@ -143,9 +125,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Response.StatusCode = 400;
             }
 
-            var frameworkResult = _getFrameworks.GetFrameworkById(id);
-
-            if (frameworkResult == null)
+            var viewModel = _apprenticeshipViewModelFactory.GetFrameworkViewModel(id);
+            if (viewModel == null)
             {
                 var message = $"Cannot find framework: {id}";
                 _logger.Warn($"404 - {message}");
@@ -153,10 +134,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
-
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
-            
+
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
 
             viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
@@ -170,7 +149,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             ProviderSearchViewModel viewModel = new ProviderSearchViewModel();
             if (standardId != null)
             {
-                viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(standardId.Value, @Url);
+                viewModel = _apprenticeshipViewModelFactory.GetProviderSearchViewModelForStandard(standardId.Value, @Url);
             }
             else if (frameworkId != null)
             {

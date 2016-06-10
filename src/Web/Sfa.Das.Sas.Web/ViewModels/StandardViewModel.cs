@@ -26,8 +26,6 @@
 
         public string OverviewOfRole { get; set; }
 
-        public bool HasError { get; set; }
-
         public string StandardPdfUrlTitle { get; set; }
 
         public string AssessmentPlanPdfUrlTitle { get; set; }

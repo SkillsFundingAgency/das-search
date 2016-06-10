@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class ShortlistFrameworkViewModel
+    public class ShortlistFrameworkViewModel : IShortlistApprenticeshipViewModel
     {
         public ShortlistFrameworkViewModel()
         {

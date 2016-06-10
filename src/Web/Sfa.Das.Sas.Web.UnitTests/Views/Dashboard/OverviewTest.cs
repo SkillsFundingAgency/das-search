@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var viewModel = new DashboardViewModel
             {
                 HasError = false,
-                Standards = new List<ShortlistStandardViewModel>(),
+                Apprenticeships = new List<IShortlistApprenticeshipViewModel>(),
                 Title = "Test Title"
             };
 
@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var viewModel = new DashboardViewModel
             {
                 HasError = false,
-                Standards = new List<ShortlistStandardViewModel>(),
+                Apprenticeships = new List<IShortlistApprenticeshipViewModel>(),
                 Title = "Test Title"
             };
 
@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
             var viewModel = new DashboardViewModel
             {
                 HasError = false,
-                Standards = new List<ShortlistStandardViewModel>
+                Apprenticeships = new List<IShortlistApprenticeshipViewModel>
                 {
                     standardA,
                     standardB
@@ -81,14 +81,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Views.Dashboard
 
             var html = view.RenderAsHtml(viewModel).ToAngleSharp();
 
-            var messageElement = GetHtmlElement(html, "#shortlist");
+            var messageElement = GetHtmlElement(html, ".apprenticeship-items");
             messageElement.ClassList.Should().NotContain("hidden");
 
-            var firstStandard = GetPartial(html, "#shortlist .standard-item .standard-title");
-            var secondStandard = GetPartial(html, "#shortlist .standard-item .standard-title", 2);
+            var firstStandard = GetPartial(html, ".apprenticeship-items .apprenticeship-item .apprenticeship-title");
+            var secondStandard = GetPartial(html, ".apprenticeship-items .apprenticeship-item .apprenticeship-title", 2);
 
-            var expectedStandardAText = $"{standardA.Title} (level {standardA.Level})";
-            var expectedStandardBText = $"{standardB.Title} (level {standardB.Level})";
+            var expectedStandardAText = $"{standardA.Title}, level {standardA.Level}";
+            var expectedStandardBText = $"{standardB.Title}, level {standardB.Level}";
 
             firstStandard.Should().Contain(expectedStandardAText);
             secondStandard.Should().Contain(expectedStandardBText);

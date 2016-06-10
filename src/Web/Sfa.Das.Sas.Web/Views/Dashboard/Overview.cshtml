@@ -1,4 +1,5 @@
-﻿@using Sfa.Das.Sas.Web.ViewModels
+﻿@using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.Web.ViewModels
 @model DashboardViewModel
 
 @{
@@ -16,91 +17,75 @@
 
     @DisplayEmptyShortlistMessage(Model)
 
-    @DisplayShortListTable(Model.Standards?.ToList(), Model.Frameworks?.ToList())
+    <h2 class="heading-medium">
+        Apprenticeship training
+    </h2>
+    @if (!Model.Apprenticeships.IsNullOrEmpty())
+    {
+        @GetShortlistItem(Model.Apprenticeships.OrderBy(m => m.Title));
+    }
+
 </main>
 
 @helper DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
 {
-    var emptyMessageClasses = "notice";
+    var emptyMessageClasses = viewModel.Apprenticeships.IsNullOrEmpty() ? string.Empty : "hidden";
 
-    if ((viewModel.Standards?.Any() ?? false) || (viewModel.Frameworks?.Any() ?? false))
-    {
-        emptyMessageClasses += " hidden";
-    }
-
-    <p id="empty-shortlist-message" class=@emptyMessageClasses>
+    <p id="empty-shortlist-message" class="notice @emptyMessageClasses">
         You have no apprenticeship training shortlisted.&nbsp;
         @Html.ActionLink("Search for apprenticeship training", "Search", "Apprenticeship")
     </p>
 }
 
-@helper DisplayShortListTable(
-    ICollection<ShortlistStandardViewModel> standards,
-    ICollection<ShortlistFrameworkViewModel> frameworks)
+@helper GetLink(IShortlistApprenticeshipViewModel model)
 {
-    if ((!standards?.Any() ?? false) && (!frameworks?.Any() ?? false))
-    {
-        return;
-    }
-
-    <table id="shortlist">
-        <thead>
-        <tr>
-            <th>Apprenticeship training</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-            @GetShortlistStandardItemRows(standards)
-            @GetShortlistFrameworkItemRows(frameworks)
-        </tbody>
-    </table>
+    var method = model is ShortlistStandardViewModel ? "Standard" : "Framework";
+    var apprenticeshipName = $"{model.Title}, level {model.Level}";
+    @Html.ActionLink(apprenticeshipName, method, "Apprenticeship", new { id = model.Id }, null)
 }
 
-@helper GetShortlistStandardItemRows(IEnumerable<ShortlistStandardViewModel> standards)
+@helper GetDeleteLink(IShortlistApprenticeshipViewModel model)
 {
-    foreach (var standard in standards)
-    {
-        var standardName = $"{standard.Title} (level {standard.Level})";
+    var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFramework";
+    @Html.ActionLink("Delete", method, "ShortList", new { id = model.Id }, new { @class = "delete-link", data_apprenticeship = model.Id, data_apprenticeship_type = method, rel = "nofollow" })
+}
 
-        <tr class="standard-item apprenticeship-item">
-            <td class="standard-title apprenticeship-title">@Html.ActionLink(standardName, "Standard", "Apprenticeship", new {id = standard.Id}, null)</td>
-            <td>@Html.ActionLink("Delete", "RemoveStandard", "ShortList",
-                                            new {id = standard.Id},
-                                            new {@class= "standard-delete-link", data_apprenticeship = standard.Id, rel = "nofollow"})</td>
-        </tr>
-        foreach (var provider in standard.Providers)
+@helper GetShortlistItem(IEnumerable<IShortlistApprenticeshipViewModel> apprenticeships)
+{
+    <ol class="apprenticeship-items">
+        @foreach (var apprenticeship in apprenticeships)
         {
-            var providerAddress = $"{provider.Address.Address1} {provider.Address.Address2} {provider.Address.Town} {provider.Address.County} {provider.Address.Postcode}";
+            <li class="apprenticeship-item">
+                <span class="apprenticeship-title">
+                    @GetLink(apprenticeship)
+                </span>
+                <span class="action">
+                    @GetDeleteLink(apprenticeship)
+                </span>
+                @if (apprenticeship.Providers.Any())
+                {   
+                    <div class="providers">
 
-            <tr class="provider-item">
-                <td class="provider-title">
-                    Provider -> 
-                    @Html.ActionLink(provider.Name, "Detail", "Provider", new {providerId = provider.Id, locationId = provider.LocationId, standardCode = standard.Id}, null)
-                    @providerAddress
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList",
-                        new { apprenticeshipId = standard.Id, providerId = provider.Id, locationId = provider.LocationId },
-                        new {@class= "provider-delete-link", data_provider = provider.Id, data_apprenticeship = standard.Id, data_location = provider.LocationId, rel = "nofollow" })</td>
-            </tr>
+                        <h3 class="heading-small">
+                            Training providers
+                        </h3>
+                        @foreach (var provider in apprenticeship.Providers.OrderBy(m => m.Name))
+                        {
+                            <ol>
+                                <li class="provider-item">
+                                    <span class="provider-title">
+                                        @Html.RenderAIfExists(provider.Name, provider.Url, "")
+                                    </span>
+                                    <span class="action">
+                                        @Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new { apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId }, new { @class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow" })
+                                        @* Add to support frameorks *@
+                                    </span>
+                                </li>
+                            </ol>
+                        }
+                    </div>
+                }
+            </li>
         }
-    }
-}
-
-@helper GetShortlistFrameworkItemRows(IEnumerable<ShortlistFrameworkViewModel> frameworks)
-{
-    foreach (var framework in frameworks)
-    {
-        var frameworkName = $"{framework.Title} (level {framework.Level})";
-
-            <tr class="framework-item apprenticeship-item">
-                <td class="framework-title apprenticeship-title">@Html.ActionLink(frameworkName, "Framework", "Apprenticeship", new { id = framework.Id }, null)</td>
-                <td>
-                    @Html.ActionLink("Delete", "RemoveFramework", "ShortList",
-                                                new { id = framework.Id },
-                                                new { @class = "framework-delete-link", data_apprenticeship = framework.Id, rel = "nofollow" })
-            </td>
-        </tr>
-    }
+    </ol>
 }

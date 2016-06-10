@@ -6,6 +6,7 @@
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;
+
     using Web.Factories;
 
     [TestFixture]
@@ -31,9 +32,9 @@
             var mockGetStandards = new Mock<IGetStandards>();
             mockGetStandards.Setup(m => m.GetStandardById(1)).Returns(new Standard { Title = "Standard1", StandardId = 1, NotionalEndLevel = 4 });
 
-            var factory = new ApprenticeshipViewModelFactory(mockGetStandards.Object, null);
+            var factory = new ApprenticeshipViewModelFactory(mockGetStandards.Object, null, null);
 
-            var viewModel = factory.GetStandardViewModel(1, _mockUrlHelper.Object);
+            var viewModel = factory.GetProviderSearchViewModelForStandard(1, _mockUrlHelper.Object);
 
             viewModel.PostUrl.Should().Be("/hello/standard");
             viewModel.PreviousPageLink.Title.Should().Be("Go back to apprenticeship");
@@ -51,7 +52,7 @@
 
             mockGetFrameworks.Setup(m => m.GetFrameworkById(1254)).Returns(new Framework { Title = "Framework 1254", FrameworkId = 1254, Level = 6 });
 
-            var factory = new ApprenticeshipViewModelFactory(null, mockGetFrameworks.Object);
+            var factory = new ApprenticeshipViewModelFactory(null, mockGetFrameworks.Object, null);
 
             var viewModel = factory.GetFrameworkProvidersViewModel(1254, _mockUrlHelper.Object);
 
@@ -62,6 +63,26 @@
             viewModel.ApprenticeshipId.Should().Be(1254);
             viewModel.HasError.Should().BeFalse();
             viewModel.Title.Should().Be("Framework 1254, level 6");
+        }
+
+        [Test]
+        public void WhenNoFrameworkIsFound()
+        {
+            var mockGetFrameworks = new Mock<IGetFrameworks>();
+            var factory = new ApprenticeshipViewModelFactory(null, mockGetFrameworks.Object, null);
+
+            var result = factory.GetFrameworkViewModel(1);
+            result.Should().BeNull();
+        }
+
+        [Test]
+        public void WhenNoStandardIsFound()
+        {
+            var mockGetStandards = new Mock<IGetStandards>();
+            var factory = new ApprenticeshipViewModelFactory(mockGetStandards.Object, null, null);
+
+            var result = factory.GetStandardViewModel(1);
+            result.Should().BeNull();
         }
     }
 }
