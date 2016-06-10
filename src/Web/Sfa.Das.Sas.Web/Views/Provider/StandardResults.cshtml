@@ -17,13 +17,14 @@
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
+                <p>
+                    @{
+                        Html.RenderPartial("_StandardSearchResultMessage");
+                    }
+                </p>
             </div>
 
-            <p>
-                @{
-                    Html.RenderPartial("_StandardSearchResultMessage");
-                }
-            </p>
+            
 
         </div>
 
