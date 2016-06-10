@@ -112,16 +112,37 @@
                     .Skip(skip)
                     .Take(take)
                     .Query(q => q
-                        .QueryString(qs => qs
-                            .Fields(fs => fs
-                                .Field(f => f.Title)
-                                .Field(p => p.JobRoles)
-                                .Field(p => p.Keywords)
-                                .Field(p => p.FrameworkName)
-                                .Field(p => p.PathwayName)
-                                .Field(p => p.JobRoleItems.First().Title)
-                                .Field(p => p.JobRoleItems.First().Description))
-                         .Query(formattedKeywords)))
+                        .Bool(b => b
+                            .Should(bs => bs
+                                .Match(m => m
+                                    .Field(f => f.Title)
+                                    .Query(formattedKeywords)),
+                                    bs => bs
+                                    .Bool(bsb => bsb
+                                        .Should(bsbs => bsbs
+                                            .Match(ms => ms
+                                                .Field(msf => msf.JobRoles)
+                                                .Query(formattedKeywords)),
+                                            bsbs => bsbs
+                                            .Match(ms => ms
+                                                .Field(msf => msf.Keywords)
+                                                .Query(formattedKeywords)),
+                                            bsbs => bsbs
+                                            .Match(ms => ms
+                                                .Field(msf => msf.FrameworkName)
+                                                .Query(formattedKeywords)),
+                                            bsbs => bsbs
+                                            .Match(ms => ms
+                                                .Field(msf => msf.PathwayName)
+                                                .Query(formattedKeywords)),
+                                            bsbs => bsbs
+                                            .Match(ms => ms
+                                                .Field(msf => msf.JobRoleItems.First().Title)
+                                                .Query(formattedKeywords)),
+                                            bsbs => bsbs
+                                            .Match(ms => ms
+                                                .Field(msf => msf.JobRoleItems.First().Description)
+                                                .Query(formattedKeywords)))))))
                     .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
                     .Aggregations(agg => agg
                         .Terms(LevelAggregateName, t => t

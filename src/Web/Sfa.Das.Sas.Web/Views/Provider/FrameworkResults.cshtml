@@ -17,13 +17,13 @@
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
-
+                <p>
+                    @{
+                        Html.RenderPartial("_FrameworkSearchResultMessage");
+                    }
+                </p>
             </div>
-            <p>
-                @{
-                    Html.RenderPartial("_FrameworkSearchResultMessage");
-                }
-            </p>
+            
 
         </div>
 
