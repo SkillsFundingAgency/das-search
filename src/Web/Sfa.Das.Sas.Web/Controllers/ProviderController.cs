@@ -1,24 +1,19 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
-using Sfa.Das.Sas.Web.Common;
-using Sfa.Das.Sas.Web.Extensions;
-using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Text.RegularExpressions;
-
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Web.Common;
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
 
     public sealed class ProviderController : Controller
     {

@@ -1,7 +1,7 @@
-﻿using System.Web;
-
-namespace Sfa.Das.Sas.Web.Factories
+﻿namespace Sfa.Das.Sas.Web.Factories.Interfaces
 {
+    using System.Web;
+
     public interface IHttpCookieFactory
     {
         HttpCookieCollection GetRequestCookies();

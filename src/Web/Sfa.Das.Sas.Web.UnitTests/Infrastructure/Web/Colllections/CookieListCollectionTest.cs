@@ -5,13 +5,15 @@ using System.Web;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Settings;
+
 using Sfa.Das.Sas.Web.Collections;
-using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Colllections
 {
+    using ApplicationServices.Settings;
+    using Sas.Web.Factories.Interfaces;
+
     [TestFixture]
     public class CookieListCollectionTest
     {

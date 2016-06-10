@@ -7,13 +7,14 @@ using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 using Assert = NUnit.Framework.Assert;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
+
     [TestFixture]
     public sealed class DashboardControllerTests
     {

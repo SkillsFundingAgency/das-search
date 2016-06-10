@@ -1,10 +1,9 @@
-namespace Sfa.Das.Sas.Web.Factories
+namespace Sfa.Das.Sas.Web.Factories.Interfaces
 {
     using System.Web.Mvc;
 
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using ApplicationServices.Models;
+    using ViewModels;
 
     public interface IApprenticeshipViewModelFactory
     {

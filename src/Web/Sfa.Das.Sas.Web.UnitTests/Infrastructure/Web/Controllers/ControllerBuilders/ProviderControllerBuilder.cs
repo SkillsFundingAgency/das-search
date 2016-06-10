@@ -9,11 +9,12 @@ using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Services;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
 {
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
+
     internal class ProviderControllerBuilder
     {
         private readonly IConfigurationSettings _configurationSettings = Mock.Of<IConfigurationSettings>(x => x.SurveyUrl == new Uri("http://test.com"));

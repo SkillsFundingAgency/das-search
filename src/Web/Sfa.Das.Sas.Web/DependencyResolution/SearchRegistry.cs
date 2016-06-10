@@ -5,6 +5,8 @@ using StructureMap.Configuration.DSL;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
 {
+    using Sfa.Das.Sas.Web.Factories.Interfaces;
+
     public class SearchRegistry : Registry
     {
         public SearchRegistry()
