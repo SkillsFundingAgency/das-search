@@ -29,7 +29,7 @@
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
-            var searchDescriptor = GetKeywordSearchDescriptor(page, take, formattedKeywords, order, selectedLevels?.ToList());
+            var searchDescriptor = GetSearchDescriptor(page, take, formattedKeywords, order, selectedLevels?.ToList());
 
             var results = _elasticsearchCustomClient.Search<ApprenticeshipSearchResultsItem>(s => searchDescriptor);
 
@@ -100,6 +100,41 @@
             {
                 searchDescriptor.Sort(s => s.Ascending(p => p.Level));
             }
+        }
+
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetSearchDescriptor(int page, int take, string formattedKeywords, int order, List<int> selectedLevels)
+        {
+            return formattedKeywords == "*" ? GetAllSearchDescriptor(page, take, formattedKeywords, order, selectedLevels) : GetKeywordSearchDescriptor(page, take, formattedKeywords, order, selectedLevels);
+        }
+
+        private SearchDescriptor<ApprenticeshipSearchResultsItem> GetAllSearchDescriptor(int page, int take, string formattedKeywords, int order, List<int> selectedLevels)
+        {
+            var skip = (page - 1) * take;
+
+            var searchDescriptor = new SearchDescriptor<ApprenticeshipSearchResultsItem>()
+                    .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                    .AllTypes()
+                    .Skip(skip)
+                    .Take(take)
+                    .Query(q => q
+                        .QueryString(qs => qs
+                            .Fields(fs => fs
+                                .Field(f => f.Title)
+                                .Field(p => p.JobRoles)
+                                .Field(p => p.Keywords)
+                                .Field(p => p.FrameworkName)
+                                .Field(p => p.PathwayName)
+                                .Field(p => p.JobRoleItems.First().Title)
+                                .Field(p => p.JobRoleItems.First().Description))
+                         .Query(formattedKeywords)))
+                    .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
+                    .Aggregations(agg => agg
+                        .Terms(LevelAggregateName, t => t
+                            .Field(f => f.Level).MinimumDocumentCount(0)));
+
+            GetSortingOrder(searchDescriptor, order);
+
+            return searchDescriptor;
         }
 
         private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, int order, List<int> selectedLevels)
