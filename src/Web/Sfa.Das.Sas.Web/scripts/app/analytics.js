@@ -13,6 +13,11 @@
         });
     };
 
+    var trackShortlist = function (action, type) {
+        var label = action + " " + type;
+        analytics.pushEvent("Shortlist", label);
+    }
+
     analytics.init = function () {
 
         $("#apprenticeship-results .result a:lt(3)").on("click", function () {
@@ -45,12 +50,6 @@
 
         // Shortlist
 
-        var trackShortlist = function (action, type)
-        {
-            var label = action + " " + type;
-            analytics.pushEvent("Shortlist", label);
-        }
-        
         $(".standard-shortlist-link").on('click', function () {
             trackShortlist($(this).attr('data-action'), "standard");
         });

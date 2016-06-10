@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Web.Factories
     {
         public ShortlistFrameworkViewModel GetShortlistFrameworkViewModel(int frameworkId, string title, int level)
         {
-            return new ShortlistFrameworkViewModel()
+            return new ShortlistFrameworkViewModel
             {
                 Id = frameworkId,
                 Title = title,

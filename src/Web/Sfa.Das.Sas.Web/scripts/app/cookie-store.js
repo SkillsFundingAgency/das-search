@@ -13,8 +13,7 @@
         return cookie;
     };
 
-    cookieStore.SaveCookie = function(cookie) 
-    {
+    cookieStore.SaveCookie = function(cookie) {
         Cookies.set(cookie.Name,
             cookie.ToString(),
             {
@@ -24,7 +23,7 @@
                 httponly: false,
                 path: '/'
             });
-    }
+    };
 
     cookieStore.Cookie = function (name)
     {
@@ -52,9 +51,7 @@
         };
 
         this.AddSubKeyValue = function(key, value) {
-            var subKey = this.SubKeys.find(function (element, index, array)
-            {
-                console.log(element.Key);
+            var subKey = this.SubKeys.find(function(element, index, array) {
                 return element.Key === key;
             });
 
@@ -63,7 +60,7 @@
             }
 
             subKey.AddValue(value);
-        }
+        };
 
         this.RemoveSubKey = function (keyName)
         {

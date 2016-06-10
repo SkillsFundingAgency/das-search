@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Web.Factories
     {
         public ShortlistStandardViewModel GetShortlistStandardViewModel(int standardId, string title, int level)
         {
-            return new ShortlistStandardViewModel()
+            return new ShortlistStandardViewModel
             {
                 Id = standardId,
                 Title = title,

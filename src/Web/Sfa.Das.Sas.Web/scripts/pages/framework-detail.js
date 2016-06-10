@@ -12,14 +12,14 @@
         }
     };
 
-    framework.Remove = function (id) {
+    framework.Remove = function(id) {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(framework.CookieName);
 
         if (cookie) {
             cookie.RemoveSubKey(id);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
-    }
+    };
 
 
     framework.init = function () {

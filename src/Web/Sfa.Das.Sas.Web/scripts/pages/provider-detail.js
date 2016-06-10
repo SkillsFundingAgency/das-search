@@ -15,16 +15,14 @@
         }
     };
 
-    provider.Remove = function (providerId, apprenticeshipId, locationId)
-    {
+    provider.Remove = function(providerId, apprenticeshipId, locationId) {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.StandardCookieName);
 
-        if (cookie)
-        {
+        if (cookie) {
             cookie.RemoveSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
-    }
+    };
 
     provider.init = function()
     {
