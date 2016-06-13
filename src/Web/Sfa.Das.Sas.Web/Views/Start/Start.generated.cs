@@ -81,9 +81,9 @@ WriteLiteral(@">
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n\r\n           " +
-" <p>If you are considering employing an apprentice,&nbsp;use this service to fin" +
-"d:</p>\r\n\r\n            <ul");
+WriteLiteral(">\r\n                Find apprenticeship training - hotfix\r\n            </h1>\r\n\r\n  " +
+"          <p>If you are considering employing an apprentice,&nbsp;use this servi" +
+"ce to find:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-number\"");
 
