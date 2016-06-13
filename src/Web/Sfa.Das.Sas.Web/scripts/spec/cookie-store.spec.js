@@ -1,5 +1,7 @@
 ﻿/// <reference path="../polyfills/Array.js"/>
 /// <reference path="../app/cookie-store.js"/>
+/// <reference path="../app/cookie.js"/>
+/// <reference path="../app/cookie-subkey.js"/>
 
 describe("Cookie Store Unit tests",
     function () {
@@ -7,7 +9,7 @@ describe("Cookie Store Unit tests",
         function () {
         
             // Assign
-            var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+            var cookie = new SearchAndShortlist.Cookie("test");
 
             // Act
             cookie.AddSubKey("1");
@@ -21,7 +23,7 @@ describe("Cookie Store Unit tests",
         function () {
 
             // Assign
-            var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+            var cookie = new SearchAndShortlist.Cookie("test");
 
             // Act
             cookie.AddSubKeyValue("1", "A");
@@ -35,7 +37,7 @@ describe("Cookie Store Unit tests",
         function () {
 
             //Assign
-            var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+            var cookie = new SearchAndShortlist.Cookie("test");
 
             // Act
             cookie.AddSubKeyValue("1", "A");
@@ -51,7 +53,7 @@ describe("Cookie Store Unit tests",
         function() {
 
             // Assign
-            var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+            var cookie = new SearchAndShortlist.Cookie("test");
 
             // Act
             cookie.AddSubKeyValue("1", "A");
@@ -66,7 +68,7 @@ describe("Cookie Store Unit tests",
     it("Should not save duplicate sub keys if sub key is created already",
         function () {
             // Assign
-            var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+            var cookie = new SearchAndShortlist.Cookie("test");
 
             //Act
             cookie.AddSubKey("1");
@@ -80,7 +82,7 @@ describe("Cookie Store Unit tests",
     it("Should remove sub key value",
        function () {
            // Assign
-           var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+           var cookie = new SearchAndShortlist.Cookie("test");
            cookie.AddSubKey("1");
            cookie.AddSubKeyValue("1", "A");
            cookie.AddSubKeyValue("1", "B");
@@ -97,7 +99,7 @@ describe("Cookie Store Unit tests",
     it("Should remove only selected sub key value",
    function () {
        // Assign
-       var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+       var cookie = new SearchAndShortlist.Cookie("test");
        cookie.AddSubKey("1");
        cookie.AddSubKeyValue("1", "A");
        cookie.AddSubKeyValue("1", "B");
@@ -114,7 +116,7 @@ describe("Cookie Store Unit tests",
     it("Should remove sub key and all its values",
    function () {
        // Assign
-       var cookie = new SearchAndShortlist.CookieStore.Cookie("test");
+       var cookie = new SearchAndShortlist.Cookie("test");
        cookie.AddSubKey("1");
        cookie.AddSubKeyValue("1", "A");
        cookie.AddSubKeyValue("1", "B");

@@ -2,7 +2,7 @@
 (function(cookieStore) {
 
     cookieStore.GetCookie = function (name) {
-        var cookie = new cookieStore.Cookie(name);
+        var cookie = new SearchAndShortlist.Cookie(name);
 
         var cookieString = Cookies.get(name);
 
@@ -19,129 +19,11 @@
             {
                 expires: 365,
                 domain: SearchAndShortlist.appsettings.cookieDomain,
-                secure: SearchAndShortlist.appsettings.cookieSecure === 'true',
+                secure: SearchAndShortlist.appsettings.cookieSecure === "true",
                 httponly: false,
-                path: '/'
+                path: "/"
             });
     };
-
-    cookieStore.Cookie = function (name)
-    {
-        this.Name = name;
-        this.SubKeys = [];
-
-        this.PopulateFromString = function (cookieString)
-        {
-            this.SubKeys = [];
-
-            var subKeyStrings = cookieString.split("&");
-
-            for (var index = 0; index < subKeyStrings.length; index++)
-            {
-                var subKey = new SubKey();
-                subKey.PopulateFromString(subKeyStrings[index]);
-                this.SubKeys.push(subKey);
-            }
-        };
-
-        this.AddSubKey = function(keyName) {
-            var key = new SubKey(keyName);
-            this.SubKeys.push(key);
-            return key;
-        };
-
-        this.AddSubKeyValue = function(key, value) {
-            var subKey = this.SubKeys.find(function(element) {
-                return element.Key === key;
-            });
-
-            if (!subKey) {
-                subKey = this.AddSubKey(key);
-            }
-
-            subKey.AddValue(value);
-        };
-
-        this.RemoveSubKey = function (keyName)
-        {
-            var index = this.SubKeys.findIndex(function (element)
-            {
-                return element.Key === keyName;
-            });
-
-            if (index > -1) {
-                this.SubKeys.splice(index, 1);
-            }
-        };
-
-        this.RemoveSubKeyValue = function (key, value)
-        {
-            var subKey = this.SubKeys.find(function (element)
-            {
-                return element.Key === key;
-            });
-
-            if (subKey)
-            {
-                subKey.RemoveValue(value);
-            }
-        }
-
-        this.ToString = function ()
-        {
-            var subKeyStrings = [];
-
-            for (var index = 0; index < this.SubKeys.length; index++)
-            {
-                subKeyStrings.push(this.SubKeys[index].ToString());
-            }
-
-            return subKeyStrings.join("&");
-        }
-
-        function SubKey(key)
-        {
-            this.Key = key;
-            this.Values = [];
-
-            this.PopulateFromString = function (keyString)
-            {
-                if (keyString && keyString.length !== 0) {
-                    var keypair = keyString.split("=");
-
-                    this.Key = keypair[0];
-
-                    if (keypair[1]) {
-                        this.Values = keypair[1].split("|");
-                    }
-                }
-            }
-
-            this.AddValue = function(value) {
-                this.Values.push(value);
-            };
-
-            this.AddValues = function(values) {
-                this.Values.push.apply(this.Values, values);
-            };
-
-            this.RemoveValue = function(value) {
-                var index = this.Values.indexOf(value);
-
-                if (index > -1) {
-                    this.Values.splice(index, 1);
-                }
-            };
-
-            this.ToString = function() {
-                var objString = this.Key ? this.Key + "=" : "";
-
-                objString += this.Values ? this.Values.join("|") : "";
-
-                return objString;
-            }
-        }
-    }
 
 }(SearchAndShortlist.CookieStore = {}));
 
