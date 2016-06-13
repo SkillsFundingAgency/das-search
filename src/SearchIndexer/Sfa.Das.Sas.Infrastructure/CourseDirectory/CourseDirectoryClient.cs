@@ -37,9 +37,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
             var providers = responseAsync.Body;
 
             var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
-            
+
             _logger.Debug(
-                "CourseDirectory.GetApprenticeshipProvidersAsync", 
+                "CourseDirectory.GetApprenticeshipProvidersAsync",
                 new TimingLogEntry { ElaspedMilliseconds = stopwatch.Elapsed.TotalMilliseconds });
 
             _courseDirectoryProviderDataService.Dispose();

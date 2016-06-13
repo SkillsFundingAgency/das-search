@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Services
                         ApprenticeshipInfoUrl = "apprenticeship test url",
                         ApprenticeshipMarketingInfo = "test marketing info"
                     },
-                    DeliveryModes = new List<string>() { "On site", "Day trip"},
+                    DeliveryModes = new List<string>() { "On site", "Day trip" },
                     EmployerSatisfaction = 8.3,
                     LearnerSatisfaction = 2.1,
                     ProviderMarketingInfo = "provider marketing info"

@@ -21,6 +21,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IConfigurationSettings _settings;
         private readonly IListCollection<int> _listCollection;
 
+        private readonly IValidation _validation;
+
         private readonly ILog _logger;
 
         private readonly IMappingService _mappingService;
@@ -33,7 +35,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             IMappingService mappingService,
             IProviderViewModelFactory viewModelFactory,
             IConfigurationSettings settings,
-            IListCollection<int> listCollection)
+            IListCollection<int> listCollection,
+            IValidation validation)
         {
             _providerSearchService = providerSearchService;
             _logger = logger;
@@ -41,6 +44,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             _viewModelFactory = viewModelFactory;
             _settings = settings;
             _listCollection = listCollection;
+            _validation = validation;
         }
 
         [HttpGet]
@@ -51,12 +55,12 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpStatusCodeResult(400);
             }
 
-            if (string.IsNullOrEmpty(criteria.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
+            if (string.IsNullOrEmpty(criteria?.PostCode) || !_validation.ValidatePostcode(criteria.PostCode))
             {
                 var url = Url.Action(
                     "SearchForProviders",
                     "Apprenticeship",
-                    new { HasError = true, standardId = criteria.ApprenticeshipId });
+                    new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
                 return new RedirectResult(url);
             }
 
@@ -75,12 +79,12 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Response.StatusCode = 400;
             }
 
-            if (string.IsNullOrEmpty(criteria?.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
+            if (string.IsNullOrEmpty(criteria?.PostCode) || !_validation.ValidatePostcode(criteria.PostCode))
             {
                 var url = Url.Action(
                     "SearchForProviders",
                     "Apprenticeship",
-                    new { HasError = true, frameworkId = criteria?.ApprenticeshipId });
+                    new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
                 return new RedirectResult(url);
             }
 

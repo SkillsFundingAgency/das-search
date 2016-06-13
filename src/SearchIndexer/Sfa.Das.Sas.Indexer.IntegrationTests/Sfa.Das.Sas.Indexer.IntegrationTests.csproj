@@ -92,6 +92,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Indexers\ProviderIndexerServiceTest.cs" />
     <Compile Include="Indexers\ApprenticeshipIndexerServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

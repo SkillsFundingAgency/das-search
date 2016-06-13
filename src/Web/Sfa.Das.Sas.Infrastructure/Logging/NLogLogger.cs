@@ -12,16 +12,21 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
     using Newtonsoft.Json;
 
+    using Sfa.Das.Sas.Core.Configuration;
+
     public class NLogLogger : ILog
     {
+        private readonly IConfigurationSettings _settings;
+
         private readonly string _loggerType;
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
 #pragma warning restore S1144, 0169 // Unused private types or members should be removed
 
-        public NLogLogger(Type loggerType)
+        public NLogLogger(Type loggerType, IConfigurationSettings settings)
         {
+            _settings = settings;
             _loggerType = loggerType?.ToString() ?? "DefaultWebLogger";
         }
 
@@ -105,7 +110,8 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
                 propertiesLocal = new Dictionary<string, object>(properties);
             }
 
-            propertiesLocal.Add("Application", "Sfa.Das.Web");
+            propertiesLocal.Add("Application", _settings.ApplicationName);
+            propertiesLocal.Add("Environment", _settings.EnvironmentName);
             propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, msg.ToString());

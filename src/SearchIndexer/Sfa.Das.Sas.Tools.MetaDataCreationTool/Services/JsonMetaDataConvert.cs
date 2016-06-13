@@ -4,7 +4,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
-    using Sfa.Das.Sas.Indexer.Core.Services;
     using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
     public class JsonMetaDataConvert : IJsonMetaDataConvert

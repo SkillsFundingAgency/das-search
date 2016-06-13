@@ -81,6 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             _mockShortlistStandardViewModelFactory.Setup(x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(new ShortlistStandardViewModel());
+
             // Act
             var result = _sut.Overview() as ViewResult;
 
@@ -160,7 +161,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                                 });
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<int>()))
                              .Returns(new Framework() { FrameworkId = frameworkId });
-            
+
             // Act
             var result = _sut.Overview() as ViewResult;
 

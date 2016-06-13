@@ -12,8 +12,12 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
     using Newtonsoft.Json;
 
+    using Sfa.Das.Sas.Indexer.Infrastructure.Settings;
+
     public class NLogService : ILog
     {
+        private readonly IInfrastructureSettings _settings;
+
         private readonly string _loggerType;
 #pragma warning disable CS0169
 #pragma warning disable S1144 // Unused private types or members should be removed
@@ -22,8 +26,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 #pragma warning restore S1144 // Unused private types or members should be removed
 #pragma warning disable CS0169
 
-        public NLogService(Type loggerType)
+        public NLogService(Type loggerType, IInfrastructureSettings settings)
         {
+            _settings = settings;
             _loggerType = loggerType?.ToString() ?? "DefaultIndexLogger";
         }
 
@@ -39,7 +44,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
         public void Debug(string message, ILogEntry entry)
         {
-            SendLog(message, LogLevel.Debug, new Dictionary<string, object> { {entry.Name, entry} });
+            SendLog(message, LogLevel.Debug, new Dictionary<string, object> { { entry.Name, entry } });
         }
 
         public void Info(string message, ILogEntry entry)
@@ -110,7 +115,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
                 propertiesLocal = new Dictionary<string, object>(properties);
             }
 
-            propertiesLocal.Add("Application", "Sfa.Das.Indexer");
+            propertiesLocal.Add("Application", _settings.ApplicationName);
+            propertiesLocal.Add("Environment", _settings.EnvironmentName);
             propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, message.ToString());

@@ -225,7 +225,8 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Collections\IListCollection.cs" />
     <Compile Include="Common\Constants.cs" />
-    <Compile Include="Common\Validation.cs" />
+    <Compile Include="Services\IValidation.cs" />
+    <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShortlistController.cs" />

@@ -28,27 +28,31 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
         }
 
         [Test]
-        public void ShouldBulk2TimeWith4001standards()
+        public async Task ShouldBulk2TimeWith4001standards()
         {
             var response = new StubResponse(400);
+            var mockResponse = new Mock<IBulkResponse> { DefaultValue = DefaultValue.Mock };
             MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), It.IsAny<string>())).Returns(response);
+            MockElasticClient.Setup(x => x.BulkAsync(It.IsAny<IBulkRequest>(), It.IsAny<string>())).Returns(Task.FromResult<IBulkResponse>(mockResponse.Object));
 
             var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, new ElasticsearchMapper(Mock.Of<ILog>()), Mock.Of<ILog>());
 
-            indexMaintainer.IndexStandards("testindex", StandardsTestData4001());
+            await indexMaintainer.IndexStandards("testindex", StandardsTestData4001());
 
             MockElasticClient.Verify(x => x.BulkAsync(It.IsAny<IBulkRequest>(), It.IsAny<string>()), Times.Exactly(2));
         }
 
         [Test]
-        public void ShouldFilterOutStandardsThatAreNotValid()
+        public async Task ShouldFilterOutStandardsThatAreNotValid()
         {
             var response = new StubResponse(400);
+            var mockResponse = new Mock<IBulkResponse> { DefaultValue = DefaultValue.Mock };
             MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), It.IsAny<string>())).Returns(response);
+            MockElasticClient.Setup(x => x.BulkAsync(It.IsAny<IBulkRequest>(), It.IsAny<string>())).Returns(Task.FromResult<IBulkResponse>(mockResponse.Object));
 
             var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, new ElasticsearchMapper(Mock.Of<ILog>()), Mock.Of<ILog>());
 
-            indexMaintainer.IndexStandards("testindex", StandardsTestData4001WithOneNull());
+            await indexMaintainer.IndexStandards("testindex", StandardsTestData4001WithOneNull());
 
             MockElasticClient.Verify(x => x.BulkAsync(It.IsAny<IBulkRequest>(), It.IsAny<string>()), Times.Exactly(1));
         }
