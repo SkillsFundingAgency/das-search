@@ -7,13 +7,9 @@
 }
 
 <main id="content" role="main">
-    @Html.ActionLink("Back", "SearchForProviders", "Apprenticeship", new { @frameworkId = @Model.FrameworkId }, new { @class = "link-back" })
     <div id="provider-results" class="grid-row">
-
         <div class="column-two-thirds">
-
             <div class="hgroup">
-
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
@@ -24,7 +20,6 @@
                 </p>
             </div>
             
-
         </div>
 
         <div class="column-third">
@@ -41,7 +36,6 @@
             @GetPaginationBackLink()
             @GetPaginationNextLink()
         </div>
-        
     </div>
 </main>
 

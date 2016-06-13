@@ -7,13 +7,7 @@
 }
 
 <main id="content" class="standard-detail">
-
-    <p class="small-btm-margin">
-       @Html.ActionLink("Back to search page", "Search", "Apprenticeship", null, new { @class = "link-back" })
-    </p>
-
     <div class="grid-row">
-
         <div class="column-two-thirds">
             <div>
                 <h1 class="heading-xlarge">
@@ -24,7 +18,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="column-third">
             <div class="related-container">
@@ -78,9 +71,7 @@
                 </a>
                 @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
             </div>
-
-</section>
-
+    </section>
 </main>
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)

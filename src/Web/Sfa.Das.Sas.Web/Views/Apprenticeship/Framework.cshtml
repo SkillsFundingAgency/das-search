@@ -1,5 +1,4 @@
 ﻿@using Sfa.Das.Sas.Resources
-@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel
 
 @{
@@ -7,13 +6,7 @@
 }
 
 <main id="content">
-
-    <p class="small-btm-margin">
-        @Html.RenderAIfExists(@Model.SearchResultLink?.Title, @Model.SearchResultLink?.Url, "link-back")
-    </p>
-
     <div class="grid-row">
-
         <div class="column-two-thirds">
             <header>
                 <h1 class="heading-xlarge">

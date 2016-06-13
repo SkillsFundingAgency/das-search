@@ -4,8 +4,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
     {
         public string Title { get; set; }
 
-        public LinkViewModel PreviousPageLink { get; set; }
-
         public bool HasError { get; set; }
 
         public string PostUrl { get; set; }

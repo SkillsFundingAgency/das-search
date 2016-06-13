@@ -136,10 +136,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
-
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
-
-            viewModel.SearchResultLink = Request.UrlReferrer.GetSearchResultUrl(Url.Action("Search", "Apprenticeship"));
             viewModel.SearchTerm = keywords;
 
             return View(viewModel);
