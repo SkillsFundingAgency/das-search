@@ -51,12 +51,12 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpStatusCodeResult(400);
             }
 
-            if (string.IsNullOrEmpty(criteria?.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
+            if (string.IsNullOrEmpty(criteria.PostCode) || !Validation.ValidatePostcode(criteria.PostCode))
             {
                 var url = Url.Action(
                     "SearchForProviders",
                     "Apprenticeship",
-                    new { HasError = true, standardId = criteria?.ApprenticeshipId });
+                    new { HasError = true, standardId = criteria.ApprenticeshipId });
                 return new RedirectResult(url);
             }
 
@@ -64,15 +64,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = await GetStandardSearchResultsViewModel(criteria);
 
-            if (viewModel == null)
-            {
-                _logger.Warn("ViewModel is null, StandardResults, ProviderController ");
-                return View(new ProviderStandardSearchResultViewModel());
-            }
-
-            await PopulateStandardSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
-
-            return View(viewModel);
+            return await GetView(criteria, viewModel);
         }
 
         [HttpGet]
@@ -96,15 +88,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = await GetFrameworkSearchResultsViewModel(criteria);
 
-            if (viewModel == null)
-            {
-                _logger.Warn("ViewModel is null, FrameworkResults, ProviderController ");
-                return View(new ProviderFrameworkSearchResultViewModel());
-            }
-
-            await PopulateFrameworkSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
-
-            return View(viewModel);
+            return await GetView(criteria, viewModel);
         }
 
         [HttpGet]
@@ -127,8 +111,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
             foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships
-                                                      from shortlistedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId)
-                                                      select shortlistedApprenticeship)
+                from shortlistedProvider in
+                    shortlistedApprenticeship.ProvidersIdAndLocation.Where(
+                        shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId)
+                select shortlistedApprenticeship)
             {
                 viewModel.IsShortlisted = true;
             }
@@ -141,11 +127,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             if (viewModel.TotalResults <= 0)
             {
                 var totalProvidersCountry = await _providerSearchService.SearchStandardProviders(
-                       criteria.ApprenticeshipId,
-                       criteria.PostCode,
-                       new Pagination { Page = criteria.Page, Take = criteria.Take },
-                       criteria.DeliveryModes,
-                       true);
+                    criteria.ApprenticeshipId,
+                    criteria.PostCode,
+                    new Pagination { Page = criteria.Page, Take = criteria.Take },
+                    criteria.DeliveryModes,
+                    true);
 
                 viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
             }
@@ -198,12 +184,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     criteria.DeliveryModes,
                     criteria.ShowAll);
 
-                if (searchResults.TotalResults <= 0 || searchResults.Hits.Any() || criteria.Page == searchResults.LastPage)
-                {
-                    return _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
-                }
-
-                criteria.Page = searchResults.LastPage;
+                return _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
             }
         }
 
@@ -218,13 +199,56 @@ namespace Sfa.Das.Sas.Web.Controllers
                     criteria.DeliveryModes,
                     criteria.ShowAll);
 
-                if ((searchResults.TotalResults > 0 && !searchResults.Hits.Any()) || criteria.Page == searchResults.LastPage)
-                {
-                    return _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
-                }
-
-                criteria.Page = searchResults.LastPage;
+                return _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
             }
+        }
+
+        private async Task<ActionResult> GetView(ProviderSearchCriteria criteria, ProviderStandardSearchResultViewModel viewModel)
+        {
+            if (viewModel == null)
+            {
+                _logger.Warn("ViewModel is null, StandardResults, ProviderController ");
+                {
+                    return View(new ProviderStandardSearchResultViewModel());
+                }
+            }
+
+            if (viewModel.TotalResults > 0 && !viewModel.Hits.Any())
+            {
+                var url = Url.Action(
+                    "StandardResults",
+                    "Provider",
+                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                {
+                    return new RedirectResult(url);
+                }
+            }
+
+            await PopulateStandardSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
+
+            return View(viewModel);
+        }
+
+        private async Task<ActionResult> GetView(ProviderSearchCriteria criteria, ProviderFrameworkSearchResultViewModel viewModel)
+        {
+            if (viewModel == null)
+            {
+                _logger.Warn("ViewModel is null, FrameworkResults, ProviderController ");
+                return View(new ProviderFrameworkSearchResultViewModel());
+            }
+
+            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
+            {
+                var url = Url.Action(
+                    "FrameworkResults",
+                    "Provider",
+                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                return new RedirectResult(url);
+            }
+
+            await PopulateFrameworkSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
+
+            return View(viewModel);
         }
     }
 }

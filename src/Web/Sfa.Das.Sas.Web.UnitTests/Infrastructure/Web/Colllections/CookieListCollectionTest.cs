@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Colllections
         public void ShouldAddItemToList()
         {
             // Assign
-            ShortlistedApprenticeship item = new ShortlistedApprenticeship { ApprenticeshipId = 10};
+            ShortlistedApprenticeship item = new ShortlistedApprenticeship { ApprenticeshipId = 10 };
 
             // Act
             _sut.AddItem(ListName, item);
