@@ -115,8 +115,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
                 propertiesLocal = new Dictionary<string, object>(properties);
             }
 
-            propertiesLocal.Add("Application", "Sfa.Das.Indexer");
-            propertiesLocal.Add("Environment", _settings.Environment);
+            propertiesLocal.Add("Application", _settings.ApplicationName);
+            propertiesLocal.Add("Environment", _settings.EnvironmentName);
             propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, message.ToString());

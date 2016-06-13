@@ -110,8 +110,8 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
                 propertiesLocal = new Dictionary<string, object>(properties);
             }
 
-            propertiesLocal.Add("Application", "Sfa.Das.Web");
-            propertiesLocal.Add("Environment", _settings.Environment);
+            propertiesLocal.Add("Application", _settings.ApplicationName);
+            propertiesLocal.Add("Environment", _settings.EnvironmentName);
             propertiesLocal.Add("LoggerType", _loggerType);
 
             var logEvent = new LogEventInfo(level, _loggerType, msg.ToString());

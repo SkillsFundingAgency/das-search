@@ -17,7 +17,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
 
         public string CourseDirectoryUri => ConfigurationManager.AppSettings["CourseDirectoryUri"];
 
-        public string Environment => ConfigurationManager.AppSettings["Environment"];
+        public string EnvironmentName => ConfigurationManager.AppSettings["EnvironmentName"];
+
+        public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];
 
         public IEnumerable<Uri> ElasticServerUrls => GetElasticIPs("ElasticServerUrls");
 

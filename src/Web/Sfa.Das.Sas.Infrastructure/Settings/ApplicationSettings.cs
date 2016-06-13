@@ -23,7 +23,9 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri PostcodeUrl => new Uri(ConfigurationManager.AppSettings["PostcodeUrl"]);
 
-        public string Environment => ConfigurationManager.AppSettings["Environment"];
+        public string EnvironmentName => ConfigurationManager.AppSettings["EnvironmentName"];
+
+        public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];
 
         private IEnumerable<Uri> GetElasticSearchIps()
         {
