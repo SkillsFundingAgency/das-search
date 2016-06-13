@@ -5,17 +5,15 @@ using System.Linq;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
+using Sfa.Das.Sas.Indexer.Core.Logging;
+using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
-using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 {
-    using Sfa.Das.Sas.Indexer.Core.Models;
-    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
-    using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
-
     public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData, IGetFrameworkMetaData
     {
         private readonly IAppServiceSettings _appServiceSettings;

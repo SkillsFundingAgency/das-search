@@ -246,6 +246,7 @@
     <Compile Include="Factories\ShortlistStandardViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
+    <Compile Include="Logging\ShortlistLogEntry.cs" />
     <Compile Include="Services\CookieService.cs" />
     <Compile Include="Services\ICookieService.cs" />
     <Compile Include="Models\ShortlistedProvider.cs" />

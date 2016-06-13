@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Nest;
+using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Infrastructure.Logging;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
-    using Sfa.Das.Sas.ApplicationServices;
-
     public class ElasticsearchCustomClient : IElasticsearchCustomClient
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
         private readonly ILog _logger;
-
         private readonly IProfileAStep _profiler;
 
-        public ElasticsearchCustomClient(IElasticsearchClientFactory elasticsearchClientFactory, ILog logger, IProfileAStep profiler)
+        public ElasticsearchCustomClient(
+            IElasticsearchClientFactory elasticsearchClientFactory, 
+            ILog logger, 
+            IProfileAStep profiler)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
@@ -29,14 +32,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             var client = _elasticsearchClientFactory.Create();
             using (_profiler.CreateStep($"Elasticsearch.Search.{callerName}"))
             {
+                var stopwatch = Stopwatch.StartNew();
                 var result = client.Search(selector);
 
-                SendLog(result, $"Elasticsearch.Search.{callerName}");
+                SendLog(result, $"Elasticsearch.Search.{callerName}", stopwatch.Elapsed);
                 return result;
             }
         }
 
-        private void SendLog<T>(ISearchResponse<T> result, string identifier)
+        private void SendLog<T>(ISearchResponse<T> result, string identifier, TimeSpan clientRequestTime)
             where T : class
         {
             string body = string.Empty;
@@ -44,20 +48,21 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             {
                 body = System.Text.Encoding.Default.GetString(result.ApiCall.RequestBodyInBytes);
             }
-
-            var properties = new Dictionary<string, object>
-                                 {
-                                     { "Identifier", identifier },
-                                     {
-                                         "HttpStatusCode",
-                                         result.ApiCall?.HttpStatusCode
-                                     },
-                                     { "ResponseTime", result.Took },
-                                     { "Uri", result.ApiCall?.Uri?.AbsoluteUri },
-                                     { "RequestBody", body }
-                                 };
-
-            _logger.Debug($"ElasticsearchQuery: {identifier}", properties);
+            
+            var logEntry = new ElasticSearchLogEntry
+                {
+                    Identifier = identifier,
+                    ReturnCode = result.ApiCall?.HttpStatusCode,
+                    Successful = result.ApiCall?.Success,
+                    SearchTime = result.Took,
+                    RequestTime = Math.Round(clientRequestTime.TotalMilliseconds, 2),
+                    MaxScore = result.MaxScore,
+                    HitCount = result.Hits?.Count(),
+                    Url = result.ApiCall?.Uri?.AbsoluteUri,
+                    Body = body
+                };
+            
+            _logger.Debug("Elastic Search Requested", logEntry);
         }
     }
 }

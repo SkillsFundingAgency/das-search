@@ -109,6 +109,7 @@
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Domain\Model\Coordinate.cs" />
     <Compile Include="Domain\Model\Standard.cs" />
+    <Compile Include="Logging\ILogEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

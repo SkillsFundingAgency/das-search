@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.Indexer.Core.Logging;
+using Sfa.Das.Sas.Indexer.Core.Logging.Models;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Provider;
 using Sfa.Das.Sas.Indexer.Core.Services;
@@ -28,17 +30,20 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
 
         public async Task<IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            var stopwatch = Stopwatch.StartNew();
             _courseDirectoryProviderDataService.BaseUri = new Uri(_settings.CourseDirectoryUri);
             var responseAsync = await _courseDirectoryProviderDataService.BulkprovidersWithOperationResponseAsync();
 
             var providers = responseAsync.Body;
 
             var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
+            
+            _logger.Debug(
+                "CourseDirectory.GetApprenticeshipProvidersAsync", 
+                new TimingLogEntry { ElaspedMilliseconds = stopwatch.Elapsed.TotalMilliseconds });
 
-            stopwatch.Stop();
-            _logger.Debug("CourseDirectory.GetApprenticeshipProvidersAsync", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
             _courseDirectoryProviderDataService.Dispose();
+
             return selectedProviders;
         }
 

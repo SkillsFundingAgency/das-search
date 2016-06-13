@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Provider;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Services;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
+using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Services

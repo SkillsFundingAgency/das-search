@@ -2,6 +2,7 @@
 using System.Net;
 using Polly;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
+using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Services

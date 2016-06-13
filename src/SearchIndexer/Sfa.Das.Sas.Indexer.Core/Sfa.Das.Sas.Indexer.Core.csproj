@@ -47,6 +47,10 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Logging\Metrics\ExecutionTimer.cs" />
+    <Compile Include="Logging\Models\ElasticSearchLogEntry.cs" />
+    <Compile Include="Logging\Models\ILogEntry.cs" />
+    <Compile Include="Logging\Models\TimingLogEntry.cs" />
     <Compile Include="Models\Framework\FrameworkMetaData.cs" />
     <Compile Include="Models\JobRoleItems.cs" />
     <Compile Include="Models\Provider\Address.cs" />
@@ -67,7 +71,7 @@
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IGetApprenticeshipProviders.cs" />
-    <Compile Include="Services\ILog.cs" />
+    <Compile Include="Logging\ILog.cs" />
     <Compile Include="Services\IProvideSettings.cs" />
   </ItemGroup>
   <ItemGroup>

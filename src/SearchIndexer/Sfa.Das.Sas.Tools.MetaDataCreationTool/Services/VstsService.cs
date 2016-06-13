@@ -7,6 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
+using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;

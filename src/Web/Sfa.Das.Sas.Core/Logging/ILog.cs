@@ -9,16 +9,26 @@ namespace Sfa.Das.Sas.Core.Logging
 
         void Info(string msg, Dictionary<string, object> properties);
 
-        void Debug(string msg);
+        void Info(string msg, ILogEntry logEntry);
 
-        void Warn(string msg);
+        void Debug(string msg);
 
         void Debug(string msg, Dictionary<string, object> properties);
 
+        void Debug(string msg, ILogEntry logEntry);
+
+        void Warn(string msg);
+
+        void Warn(string msg, ILogEntry logEntry);
+        
         void Error(Exception ex, string msg);
 
         void Error(string msg, Dictionary<string, object> properties);
 
+        void Error(string msg, ILogEntry logEntry);
+
         void Fatal(Exception ex, string msg);
+
+        void Fatal(string msg, ILogEntry logEntry);
     }
 }

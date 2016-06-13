@@ -5,6 +5,7 @@ using Moq;
 using Nest;
 using NUnit.Framework;
 using Sfa.Das.Sas.Indexer.Core.Exceptions;
+using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;

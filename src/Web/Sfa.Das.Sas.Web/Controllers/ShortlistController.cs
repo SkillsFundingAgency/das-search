@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
+using Sfa.Das.Sas.Web.Logging;
 using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -20,12 +21,13 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult AddStandard(int id)
         {
-            _logger.Debug($"Adding standard {id} to shortlist cookie");
+            _logger.Debug($"Adding standard {id} to shortlist");
 
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
                 ApprenticeshipId = id
             };
+
             _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
@@ -33,7 +35,14 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult AddStandardProvider(int apprenticeshipId, string providerId, int locationId)
         {
-            _logger.Debug($"Adding sprovider {providerId} with location {locationId} to apprenticeship {apprenticeshipId} shortlist cookie");
+            var logEntry = new ShortlistLogEntry
+            {
+                StandardId = apprenticeshipId,
+                ProviderId = providerId,
+                LocationId = locationId
+            };
+
+            _logger.Debug("Adding standard to shortlist", logEntry);
 
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
@@ -55,7 +64,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult RemoveStandard(int id)
         {
-            _logger.Debug($"Removing standard {id} from shortlist cookie");
+            _logger.Debug("Removing standard from shortlist", new ShortlistLogEntry { StandardId = id });
 
             _listCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
 
@@ -70,7 +79,14 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _logger.Debug($"Removing provider {provider.ProviderId} with location {provider.LocationId} from apprenticeship {apprenticeshipId} shortlist cookie");
+            var logEntry = new ShortlistLogEntry
+            {
+                StandardId = apprenticeshipId,
+                LocationId = provider.LocationId,
+                ProviderId = provider.ProviderId
+            };
+
+            _logger.Debug($"Removing provider from shortlist", logEntry);
             _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
 
             return GetReturnRedirectFromStandardProviderShortlistAction(apprenticeshipId, providerId, locationId);
@@ -78,7 +94,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult AddFramework(int id)
         {
-            _logger.Debug($"Adding framework {id} to shortlist cookie");
+            _logger.Debug($"Adding framework to shortlist", new ShortlistLogEntry { FrameworkId = id });
 
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
@@ -91,7 +107,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult RemoveFramework(int id)
         {
-            _logger.Debug($"Removing framework {id} from shortlist cookie");
+            _logger.Debug($"Removing framework from shortlist", new ShortlistLogEntry { FrameworkId = id });
 
             _listCollection.RemoveApprenticeship(Constants.FrameworksShortListCookieName, id);
 

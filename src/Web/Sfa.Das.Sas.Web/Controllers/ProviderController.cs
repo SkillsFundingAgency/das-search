@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
-
+            
             var searchResults =
                 await _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes, criteria.ShowAll);
 

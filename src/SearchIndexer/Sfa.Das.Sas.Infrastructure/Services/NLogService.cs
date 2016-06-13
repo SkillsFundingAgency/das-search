@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Microsoft.ApplicationInsights.NLogTarget;
 using NLog;
 using NLog.Targets.ElasticSearch;
-using Sfa.Das.Sas.Indexer.Core.Services;
+using Sfa.Das.Sas.Indexer.Core.Logging;
+using Sfa.Das.Sas.Indexer.Core.Logging.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 {
@@ -36,6 +37,16 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             SendLog(message, LogLevel.Debug, properties);
         }
 
+        public void Debug(string message, ILogEntry entry)
+        {
+            SendLog(message, LogLevel.Debug, new Dictionary<string, object> { {entry.Name, entry} });
+        }
+
+        public void Info(string message, ILogEntry entry)
+        {
+            SendLog(message, LogLevel.Info, new Dictionary<string, object> { { entry.Name, entry } });
+        }
+
         public void Info(object message)
         {
             SendLog(message, LogLevel.Info);
@@ -56,6 +67,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             SendLog(message, LogLevel.Warn, properties);
         }
 
+        public void Warn(string message, ILogEntry entry)
+        {
+            SendLog(message, LogLevel.Warn, new Dictionary<string, object> { { entry.Name, entry } });
+        }
+
         public void Warn(Exception exception, object message)
         {
             SendLog(message, LogLevel.Warn, exception);
@@ -66,9 +82,19 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             SendLog(message, LogLevel.Error, exception);
         }
 
+        public void Error(string message, ILogEntry entry)
+        {
+            SendLog(message, LogLevel.Error, new Dictionary<string, object> { { entry.Name, entry } });
+        }
+
         public void Fatal(Exception exception, object message)
         {
             SendLog(message, LogLevel.Fatal, exception);
+        }
+
+        public void Fatal(string message, ILogEntry entry)
+        {
+            SendLog(message, LogLevel.Fatal, new Dictionary<string, object> { { entry.Name, entry } });
         }
 
         private void SendLog(object message, LogLevel level, Exception exception = null)

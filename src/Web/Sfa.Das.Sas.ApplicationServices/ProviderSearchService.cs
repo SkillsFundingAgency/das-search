@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sfa.Das.Sas.ApplicationServices.Exceptions;
+using Sfa.Das.Sas.ApplicationServices.Logging;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Services;
@@ -66,7 +67,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 if (standardId < 0)
                 {
-                    throw new SearchException("StandardId can't be negative");
+                    throw new SearchException("Standard ID cannot be negative");
                 }
 
                 var standard = _getStandards.GetStandardById(standardId);
@@ -91,8 +92,14 @@ namespace Sfa.Das.Sas.ApplicationServices
                 }
 
                 var takeElements = pagination.Take == 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
+                
+                var logEntry = new ApprenticeshipSearchLogEntry
+                {
+                    Postcode = postCode,
+                    Coordinates = new[] { coordinates.Lon, coordinates.Lat }
+                };
 
-                _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
+                _logger.Info("Provider location search", logEntry);
 
                 var searchResults = _searchProvider.SearchByStandardLocation(standardId, coordinates, pagination.Page, takeElements, deliveryModes);
 
@@ -113,7 +120,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
             catch (SearchException ex)
             {
-                _logger.Error(ex, "Search for Provider failed.");
+                _logger.Error(ex, "Search for provider failed.");
 
                 return new ProviderStandardSearchResults
                 {
@@ -140,7 +147,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 if (standardId < 0)
                 {
-                    throw new SearchException("StandardId can't be negative");
+                    throw new SearchException("Standard ID cannot be negative");
                 }
 
                 var standard = _getStandards.GetStandardById(standardId);
@@ -166,7 +173,13 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 var takeElements = pagination.Take == 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
 
-                _logger.Info($"Provider Location Search: {postCode}, {coordinates}", new Dictionary<string, object> { { "postCode", postCode }, { "coordinates", new double[] { coordinates.Lon, coordinates.Lat } } });
+                var logEntry = new ApprenticeshipSearchLogEntry
+                {
+                    Postcode = postCode,
+                    Coordinates = new[] { coordinates.Lon, coordinates.Lat }
+                };
+
+                _logger.Info("Provider Location Search", logEntry);
 
                 var searchResults = _searchProvider.SearchByStandard(standardId, coordinates, pagination.Page, takeElements, deliveryModes);
 
@@ -187,7 +200,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
             catch (SearchException ex)
             {
-                _logger.Error(ex, "Search for Provider failed.");
+                _logger.Error(ex, "Search for provider failed.");
 
                 return new ProviderStandardSearchResults
                 {
@@ -212,7 +225,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 if (frameworkId < 0)
                 {
-                    throw new SearchException("FrameworkId can't be negative");
+                    throw new SearchException("Framework ID cannot be negative");
                 }
 
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
@@ -258,7 +271,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
             catch (SearchException ex)
             {
-                _logger.Error(ex, "Search for Provider failed.");
+                _logger.Error(ex, "Search for provider failed.");
 
                 return new ProviderFrameworkSearchResults
                 {
@@ -284,7 +297,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             {
                 if (frameworkId < 0)
                 {
-                    throw new SearchException("FrameworkId can't be negative");
+                    throw new SearchException("Framework ID cannot be negative");
                 }
 
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
@@ -330,7 +343,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
             catch (SearchException ex)
             {
-                _logger.Error(ex, "Search for Provider failed.");
+                _logger.Error(ex, "Search for provider failed.");
 
                 return new ProviderFrameworkSearchResults
                 {

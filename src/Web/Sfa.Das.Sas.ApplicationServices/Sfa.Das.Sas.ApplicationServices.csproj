@@ -59,6 +59,7 @@
     <Compile Include="IProviderSearchService.cs" />
     <Compile Include="IApprenticeshipSearchService.cs" />
     <Compile Include="IApprenticeshipSearchProvider.cs" />
+    <Compile Include="Logging\ApprenticeshipSearchLogEntry.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\CodeTypes.cs" />

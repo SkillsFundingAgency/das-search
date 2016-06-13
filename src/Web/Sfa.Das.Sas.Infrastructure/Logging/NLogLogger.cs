@@ -37,6 +37,11 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             SendLog(msg, LogLevel.Info, properties);
         }
 
+        public void Info(string msg, ILogEntry logEntry)
+        {
+            SendLog(msg, LogLevel.Info, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+        }
+
         public void Debug(string msg)
         {
             SendLog(msg, LogLevel.Debug);
@@ -47,14 +52,29 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             SendLog(msg, LogLevel.Debug, properties);
         }
 
+        public void Debug(string msg, ILogEntry logEntry)
+        {
+            SendLog(msg, LogLevel.Debug, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+        }
+
         public void Warn(string msg)
         {
             SendLog(msg, LogLevel.Warn);
         }
 
+        public void Warn(string msg, ILogEntry logEntry)
+        {
+            SendLog(msg, LogLevel.Warn, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+        }
+
         public void Error(string msg, Dictionary<string, object> properties)
         {
             SendLog(msg, LogLevel.Error, properties);
+        }
+
+        public void Error(string msg, ILogEntry logEntry)
+        {
+            SendLog(msg, LogLevel.Error, new Dictionary<string, object> { { logEntry.Name, logEntry } });
         }
 
         public void Error(Exception ex, string msg)
@@ -65,6 +85,11 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
         public void Fatal(Exception ex, string msg)
         {
             SendLog(msg, LogLevel.Fatal, ex);
+        }
+
+        public void Fatal(string msg, ILogEntry logEntry)
+        {
+            SendLog(msg, LogLevel.Fatal, new Dictionary<string, object> { { logEntry.Name, logEntry } });
         }
 
         private void SendLog(object message, LogLevel level, Exception exception = null)

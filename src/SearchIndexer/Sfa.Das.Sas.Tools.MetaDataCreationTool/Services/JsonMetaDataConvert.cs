@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
+﻿using Sfa.Das.Sas.Indexer.Core.Logging;
+
+namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;

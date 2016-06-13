@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+using Sfa.Das.Sas.Indexer.Core.Logging;
+using Sfa.Das.Sas.Indexer.Core.Logging.Metrics;
+using Sfa.Das.Sas.Indexer.Core.Logging.Models;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
-using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.ApplicationServices.Standard
 {
@@ -27,30 +28,27 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Standard
 
         public List<StandardMetaData> GetAllStandardsMetaData()
         {
-            var stopwatch = new Stopwatch();
-            var standardsMetaData = _metaDataReader.GetStandardsMetaData();
-            stopwatch.Stop();
-            _log.Debug("MetaDataHelper.GetAllStandardsMetaData", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
+            var timing = ExecutionTimer.GetTiming(() => _metaDataReader.GetStandardsMetaData());
 
-            return standardsMetaData;
+            _log.Debug("MetaDataHelper.GetAllStandardsMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+
+            return timing.Result;
         }
 
         public void UpdateMetadataRepository()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            _metaDataWriter.GenerateStandardMetadataFiles();
-            stopwatch.Stop();
-            _log.Debug("MetaDataHelper.UpdateMetadataRepository", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
+            var timing = ExecutionTimer.GetTiming(() => _metaDataWriter.GenerateStandardMetadataFiles());
+
+            _log.Debug("MetaDataHelper.UpdateMetadataRepository", new TimingLogEntry { ElaspedMilliseconds = timing.TotalMilliseconds });
         }
 
         public List<FrameworkMetaData> GetAllFrameworkMetaData()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            var frameworks = _metaDataFrameworkReader.GetAllFrameworks();
-            stopwatch.Stop();
-            _log.Debug("MetaDataHelper.GetAllFrameworkMetaData", new Dictionary<string, object> { { "ExecutionTime", stopwatch.ElapsedMilliseconds } });
+            var timing = ExecutionTimer.GetTiming(() => _metaDataFrameworkReader.GetAllFrameworks());
 
-            return frameworks;
+            _log.Debug("MetaDataHelper.GetAllFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+
+            return timing.Result;
         }
     }
 }

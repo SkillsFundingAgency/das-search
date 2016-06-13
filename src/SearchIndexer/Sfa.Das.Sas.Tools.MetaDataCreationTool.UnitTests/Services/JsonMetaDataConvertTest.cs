@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
+﻿using Sfa.Das.Sas.Indexer.Core.Logging;
+
+namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 {
     using System;
     using System.Collections.Generic;
