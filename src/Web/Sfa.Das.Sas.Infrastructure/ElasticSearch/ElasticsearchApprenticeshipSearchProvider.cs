@@ -148,13 +148,15 @@
                     .Take(take)
                     .Query(q => q
                         .Bool(b => b
-                            .Should(bs => bs
+                            .Should(
+                            bs => bs
                                 .Match(m => m
                                     .Field(f => f.Title)
                                     .Query(formattedKeywords)),
                                     bs => bs
                                     .Bool(bsb => bsb
-                                        .Should(bsbs => bsbs
+                                        .Should(
+                                        bsbs => bsbs
                                             .Match(ms => ms
                                                 .Field(msf => msf.JobRoles)
                                                 .Query(formattedKeywords)),

@@ -4,12 +4,11 @@ using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
+using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
-
     public class DashboardController : Controller
     {
         private readonly IGetStandards _getStandards;
@@ -120,7 +119,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var frameworks = frameworkIds.Select(id => _getFrameworks.GetFrameworkById(id)).ToList();
-            
+
             if (!frameworks.Any())
             {
                 return new List<ShortlistFrameworkViewModel>();

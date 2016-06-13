@@ -15,6 +15,5 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public string Name { get; set; }
 
         public ContactInformation ContactInformation { get; set; }
-
     }
 }

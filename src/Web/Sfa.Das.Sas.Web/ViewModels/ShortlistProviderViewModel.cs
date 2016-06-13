@@ -10,6 +10,5 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public Address Address { get; set; }
 
         public string Url { get; set; }
-
     }
 }

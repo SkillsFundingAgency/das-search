@@ -19,7 +19,6 @@
         public string TypicalLengthMessage { get; set; }
 
         // Page specific
-
         public bool IsShortlisted { get; set; }
 
         public string SearchTerm { get; set; }

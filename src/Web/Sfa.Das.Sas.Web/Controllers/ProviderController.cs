@@ -3,18 +3,17 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
+using Sfa.Das.Sas.Web.Common;
+using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Web.Common;
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
-
     public sealed class ProviderController : Controller
     {
         private readonly IProviderViewModelFactory _viewModelFactory;
@@ -62,12 +61,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
-            
-            var searchResults =
-                await _providerSearchService.SearchStandardProviders(criteria.ApprenticeshipId, criteria.PostCode, new Pagination { Page = criteria.Page, Take = criteria.Take }, criteria.DeliveryModes, criteria.ShowAll);
 
-            var viewModel =
-                _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+            var viewModel = await GetStandardSearchResultsViewModel(criteria);
 
             if (viewModel == null)
             {
@@ -75,37 +70,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return View(new ProviderStandardSearchResultViewModel());
             }
 
-            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
-            {
-                var url = Url.Action(
-                    "StandardResults",
-                    "Provider",
-                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
-                return new RedirectResult(url);
-            }
-
-            if (viewModel.TotalResults <= 0)
-            {
-                var totalProvidersCountry =
-                    await
-                        _providerSearchService.SearchStandardProviders(
-                            criteria.ApprenticeshipId,
-                            criteria.PostCode,
-                            new Pagination { Page = criteria.Page, Take = criteria.Take },
-                            criteria.DeliveryModes,
-                            true);
-                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
-            }
-
-            viewModel.ActualPage = criteria.Page;
-            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
-            viewModel.SearchTerms = criteria.Keywords;
-            viewModel.ShowAll = criteria.ShowAll;
-
-            if (viewModel.StandardNotFound)
-            {
-                Response.StatusCode = 404;
-            }
+            await PopulateStandardSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
 
             return View(viewModel);
         }
@@ -129,16 +94,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
 
-            var searchResults =
-                 await _providerSearchService.SearchFrameworkProviders(
-                     criteria.ApprenticeshipId,
-                     criteria.PostCode,
-                     new Pagination { Page = criteria.Page, Take = criteria.Take },
-                     criteria.DeliveryModes,
-                     criteria.ShowAll);
-
-            var viewModel =
-                _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+            var viewModel = await GetFrameworkSearchResultsViewModel(criteria);
 
             if (viewModel == null)
             {
@@ -146,37 +102,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return View(new ProviderFrameworkSearchResultViewModel());
             }
 
-            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
-            {
-                var url = Url.Action(
-                    "StandardResults",
-                    "Provider",
-                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
-                return new RedirectResult(url);
-            }
-
-            if (viewModel.TotalResults <= 0)
-            {
-                var totalProvidersCountry =
-                    await
-                        _providerSearchService.SearchFrameworkProviders(
-                            criteria.ApprenticeshipId,
-                            criteria.PostCode,
-                            new Pagination { Page = criteria.Page, Take = criteria.Take },
-                            criteria.DeliveryModes,
-                            true);
-                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
-            }
-
-            viewModel.ActualPage = criteria.Page;
-            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
-            viewModel.SearchTerms = criteria.Keywords;
-            viewModel.ShowAll = criteria.ShowAll;
-
-            if (viewModel.FrameworkIsMissing)
-            {
-                Response.StatusCode = 404;
-            }
+            await PopulateFrameworkSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
 
             return View(viewModel);
         }
@@ -199,7 +125,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.ProviderId = criteria.ProviderId;
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
-            
+
             foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships
                                                       from shortlistedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId)
                                                       select shortlistedApprenticeship)
@@ -208,6 +134,97 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             return View(viewModel);
+        }
+
+        private async Task PopulateStandardSearchResultViewModel(ProviderSearchCriteria criteria, ProviderStandardSearchResultViewModel viewModel)
+        {
+            if (viewModel.TotalResults <= 0)
+            {
+                var totalProvidersCountry = await _providerSearchService.SearchStandardProviders(
+                       criteria.ApprenticeshipId,
+                       criteria.PostCode,
+                       new Pagination { Page = criteria.Page, Take = criteria.Take },
+                       criteria.DeliveryModes,
+                       true);
+
+                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
+            }
+
+            viewModel.ActualPage = criteria.Page;
+            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
+            viewModel.SearchTerms = criteria.Keywords;
+            viewModel.ShowAll = criteria.ShowAll;
+
+            if (viewModel.StandardNotFound)
+            {
+                Response.StatusCode = 404;
+            }
+        }
+
+        private async Task PopulateFrameworkSearchResultViewModel(ProviderSearchCriteria criteria, ProviderFrameworkSearchResultViewModel viewModel)
+        {
+            if (viewModel.TotalResults <= 0)
+            {
+                var totalProvidersCountry =
+                    await
+                        _providerSearchService.SearchFrameworkProviders(
+                            criteria.ApprenticeshipId,
+                            criteria.PostCode,
+                            new Pagination { Page = criteria.Page, Take = criteria.Take },
+                            criteria.DeliveryModes,
+                            true);
+                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
+            }
+
+            viewModel.ActualPage = criteria.Page;
+            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
+            viewModel.SearchTerms = criteria.Keywords;
+            viewModel.ShowAll = criteria.ShowAll;
+
+            if (viewModel.FrameworkIsMissing)
+            {
+                Response.StatusCode = 404;
+            }
+        }
+
+        private async Task<ProviderStandardSearchResultViewModel> GetStandardSearchResultsViewModel(ProviderSearchCriteria criteria)
+        {
+            while (true)
+            {
+                var searchResults = await _providerSearchService.SearchStandardProviders(
+                    criteria.ApprenticeshipId,
+                    criteria.PostCode,
+                    new Pagination { Page = criteria.Page, Take = criteria.Take },
+                    criteria.DeliveryModes,
+                    criteria.ShowAll);
+
+                if (searchResults.TotalResults <= 0 || searchResults.Hits.Any() || criteria.Page == searchResults.LastPage)
+                {
+                    return _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+                }
+
+                criteria.Page = searchResults.LastPage;
+            }
+        }
+
+        private async Task<ProviderFrameworkSearchResultViewModel> GetFrameworkSearchResultsViewModel(ProviderSearchCriteria criteria)
+        {
+            while (true)
+            {
+                var searchResults = await _providerSearchService.SearchFrameworkProviders(
+                    criteria.ApprenticeshipId,
+                    criteria.PostCode,
+                    new Pagination { Page = criteria.Page, Take = criteria.Take },
+                    criteria.DeliveryModes,
+                    criteria.ShowAll);
+
+                if ((searchResults.TotalResults > 0 && !searchResults.Hits.Any()) || criteria.Page == searchResults.LastPage)
+                {
+                    return _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+                }
+
+                criteria.Page = searchResults.LastPage;
+            }
         }
     }
 }

@@ -17,8 +17,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IProfileAStep _profiler;
 
         public ElasticsearchCustomClient(
-            IElasticsearchClientFactory elasticsearchClientFactory, 
-            ILog logger, 
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ILog logger,
             IProfileAStep profiler)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
@@ -43,12 +43,12 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private void SendLog<T>(ISearchResponse<T> result, string identifier, TimeSpan clientRequestTime)
             where T : class
         {
-            string body = string.Empty;
+            var body = string.Empty;
             if (result.ApiCall.RequestBodyInBytes != null)
             {
                 body = System.Text.Encoding.Default.GetString(result.ApiCall.RequestBodyInBytes);
             }
-            
+
             var logEntry = new ElasticSearchLogEntry
                 {
                     Identifier = identifier,
@@ -61,7 +61,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     Url = result.ApiCall?.Uri?.AbsoluteUri,
                     Body = body
                 };
-            
+
             _logger.Debug("Elastic Search Requested", logEntry);
         }
     }

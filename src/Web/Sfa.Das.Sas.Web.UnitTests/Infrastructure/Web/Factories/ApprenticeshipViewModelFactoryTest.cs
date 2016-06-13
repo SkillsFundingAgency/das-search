@@ -22,6 +22,5 @@
             _mockUrlHelper.Setup(m => m.Action("FrameworkResults", "Provider")).Returns("/hello/framework");
             _mockUrlHelper.Setup(m => m.Action("Framework", "Apprenticeship", It.IsAny<object>())).Returns("/hello/FrameworkPrevLink/id");
         }
-
     }
 }

@@ -144,7 +144,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult SearchForProviders(int? standardId, int? frameworkId, string keywords, string hasError)
         {
-            ProviderSearchViewModel viewModel = new ProviderSearchViewModel();
+            ProviderSearchViewModel viewModel;
+
             if (standardId != null)
             {
                 viewModel = _apprenticeshipViewModelFactory.GetProviderSearchViewModelForStandard(standardId.Value, @Url);

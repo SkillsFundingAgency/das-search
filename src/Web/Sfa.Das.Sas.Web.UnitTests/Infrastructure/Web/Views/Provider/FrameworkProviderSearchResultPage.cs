@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            var a = GetPartial(html, ".result-message");
+            GetPartial(html, ".result-message");
             this.GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name level 3 for 'Test postcode'.");
         }
 
@@ -71,8 +71,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            
-            this.GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name level 0 for 'Test postcode'.");
+
+            GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name level 0 for 'Test postcode'.");
         }
 
         [Test]

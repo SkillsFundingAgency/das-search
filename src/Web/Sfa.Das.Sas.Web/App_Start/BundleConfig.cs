@@ -14,8 +14,7 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/polyfills/*.js",
                 "~/scripts/appsettings.js",
                 "~/scripts/app/*.js",
-                "~/scripts/pages/*.js"
-                ));
+                "~/scripts/pages/*.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
                 "~/scripts/js-errors.js",

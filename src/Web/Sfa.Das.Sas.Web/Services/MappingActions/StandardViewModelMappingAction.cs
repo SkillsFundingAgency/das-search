@@ -6,7 +6,6 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
-
     public class StandardViewModelMappingAction : IMappingAction<Standard, StandardViewModel>
     {
         public void Process(Standard source, StandardViewModel destination)
@@ -17,7 +16,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdf);
         }
 
-        private string ExtractPdfTitle(string pdfUrl)
+        private static string ExtractPdfTitle(string pdfUrl)
         {
             if (string.IsNullOrEmpty(pdfUrl))
             {

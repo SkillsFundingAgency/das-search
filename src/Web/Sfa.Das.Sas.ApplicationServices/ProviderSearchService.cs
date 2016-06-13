@@ -92,7 +92,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 }
 
                 var takeElements = pagination.Take == 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
-                
+
                 var logEntry = new ApprenticeshipSearchLogEntry
                 {
                     Postcode = postCode,

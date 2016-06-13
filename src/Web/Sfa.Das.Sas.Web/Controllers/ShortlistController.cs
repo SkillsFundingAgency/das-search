@@ -127,8 +127,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Redirect(Request.UrlReferrer.OriginalString);
         }
 
-        // This method is used to try to redirect back from the page that requested the updating of the 
-        // provider shortlist. If a URL cannot be found in the request then the default is to go back to 
+        // This method is used to try to redirect back from the page that requested the updating of the
+        // provider shortlist. If a URL cannot be found in the request then the default is to go back to
         // the apprenticeship search page
         private ActionResult GetReturnRedirectFromStandardProviderShortlistAction(int standardId, string providerId, int locationId)
         {

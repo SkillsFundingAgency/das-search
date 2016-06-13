@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
         [Test]
         public void ShouldMapAllValauesCorrectly()
         {
-            MappingService mappingService = new MappingService(null);
+            var mappingService = new MappingService(null);
 
             var providerResult = new ApprenticeshipDetails
             {
@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                         ApprenticeshipInfoUrl = "apprenticeship test url",
                         ApprenticeshipMarketingInfo = "test marketing info"
                     },
-                    DeliveryModes = new List<string>() { "On site", "Day trip"},
+                    DeliveryModes = new List<string>() { "On site", "Day trip" },
                     EmployerSatisfaction = 8.3,
                     LearnerSatisfaction = 2.1,
                     ProviderMarketingInfo = "provider marketing info"
@@ -58,8 +58,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                         Website = "www.test.co.uk",
                         ContactUsUrl = "www.contactus.co.uk"
                     }
-
-                } 
+                }
             };
 
             var viewModel = mappingService.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(providerResult);
@@ -68,7 +67,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.Apprenticeship.Should().BeSameAs(providerResult.Product.Apprenticeship);
             viewModel.ContactInformation.Should().BeSameAs(providerResult.Provider.ContactInformation);
             viewModel.DeliveryModes.Should().BeEquivalentTo(providerResult.Product.DeliveryModes);
-           
+
             viewModel.Location.LocationId.Should().Be(providerResult.Location.LocationId);
             viewModel.Location.LocationName.Should().BeSameAs(providerResult.Location.LocationName);
             viewModel.Location.Address.Should().BeSameAs(providerResult.Location.Address);
@@ -77,7 +76,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             viewModel.Name.Should().BeSameAs(providerResult.Provider.Name);
             viewModel.ProviderId.Should().Be(providerResult.Provider.Id.ToString());
-            
+
             viewModel.EmployerSatisfactionMessage.Should().Be("8.3%");
             viewModel.LearnerSatisfactionMessage.Should().Be("2.1%");
         }

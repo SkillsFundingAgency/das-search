@@ -13,6 +13,5 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public string ProviderMarketingInfo { get; set; }
 
         public List<string> DeliveryModes { get; set; }
-
     }
 }

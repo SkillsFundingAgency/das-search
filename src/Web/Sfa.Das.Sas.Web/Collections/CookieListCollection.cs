@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-
+using Sfa.Das.Sas.ApplicationServices.Settings;
+using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
-    using Sfa.Das.Sas.ApplicationServices.Settings;
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
-
     public class CookieListCollection : IListCollection<int>
     {
         private readonly ICookieSettings _settings;
@@ -51,7 +49,9 @@ namespace Sfa.Das.Sas.Web.Collections
                     {
                         foreach (var provider in item.ProvidersIdAndLocation)
                         {
-                            if (!shortlistedApprenticeship.ProvidersIdAndLocation.Any(x => x.ProviderId.Equals(provider.ProviderId) && x.LocationId.Equals(provider.LocationId)))
+                            if (!shortlistedApprenticeship.ProvidersIdAndLocation
+                                .Any(x => x.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal) &&
+                                x.LocationId.Equals(provider.LocationId)))
                             {
                                 shortlistedApprenticeship.ProvidersIdAndLocation.Add(provider);
                             }
@@ -95,13 +95,17 @@ namespace Sfa.Das.Sas.Web.Collections
 
             foreach (var shortlistedApprenticeship in listItems)
             {
-                if (shortlistedApprenticeship.ApprenticeshipId == apprenticeship)
+                if (shortlistedApprenticeship.ApprenticeshipId != apprenticeship)
                 {
-                    foreach (var provider in shortlistedApprenticeship.ProvidersIdAndLocation.Where(provider => provider.ProviderId.Equals(item.ProviderId) && provider.LocationId.Equals(item.LocationId)))
-                    {
-                        shortlistedApprenticeship.ProvidersIdAndLocation.Remove(provider);
-                        break;
-                    }
+                    continue;
+                }
+
+                foreach (var provider in shortlistedApprenticeship.ProvidersIdAndLocation
+                    .Where(provider => provider.ProviderId.Equals(item.ProviderId, StringComparison.Ordinal) &&
+                                       provider.LocationId.Equals(item.LocationId)))
+                {
+                    shortlistedApprenticeship.ProvidersIdAndLocation.Remove(provider);
+                    break;
                 }
             }
 
@@ -150,9 +154,11 @@ namespace Sfa.Das.Sas.Web.Collections
 
             foreach (var shortlistedApprenticeship in shortlistedApprenticeships)
             {
-                var splittedApprenticeships = SplitShortlistedApprenticeship(shortlistedApprenticeship);
+                var splittedApprenticeships = SplitShortlistedApprenticeship(shortlistedApprenticeship).ToList();
 
-                var providers = splittedApprenticeships.Count() > 1 ? SplitProviderIdsAndLocations(splittedApprenticeships.ElementAt(1)) : new List<string>();
+                var providers = splittedApprenticeships.Count > 1 ?
+                    SplitProviderIdsAndLocations(splittedApprenticeships.ElementAt(1)) :
+                    new List<string>();
 
                 var providersList = providers.Select(SplitShortllistedProvider).ToList();
 
@@ -211,13 +217,13 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 var text = new StringBuilder();
                 var count = 0;
-                foreach (var formattedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Select(provider => string.Format("{0}-{1}", provider.ProviderId, provider.LocationId)))
+                foreach (var formattedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Select(provider => $"{provider.ProviderId}-{provider.LocationId}"))
                 {
                     text.Append(count == 0 ? formattedProvider : string.Concat("|", formattedProvider));
                     count++;
                 }
 
-                listShortlistedProviders.Add(string.Format("{0}={1}", shortlistedApprenticeship.ApprenticeshipId, text));
+                listShortlistedProviders.Add($"{shortlistedApprenticeship.ApprenticeshipId}={text}");
             }
 
             var listString = listShortlistedProviders.Select(x => x)

@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Core.Logging
         void Warn(string msg);
 
         void Warn(string msg, ILogEntry logEntry);
-        
+
         void Error(Exception ex, string msg);
 
         void Error(string msg, Dictionary<string, object> properties);

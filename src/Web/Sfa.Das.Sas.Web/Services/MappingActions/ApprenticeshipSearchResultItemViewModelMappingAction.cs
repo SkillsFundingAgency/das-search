@@ -17,9 +17,10 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             destination.ApprenticeshipType = destination.StandardId != 0 ? "standard" : "framework";
         }
 
-        private string GetLevelText(int item)
+        private static string GetLevelText(int item)
         {
-            var equivalence = string.Empty;
+            string equivalence;
+
             switch (item)
             {
                 case 1:
