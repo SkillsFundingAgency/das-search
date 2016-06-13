@@ -7,6 +7,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
     {
         string CourseDirectoryUri { get; }
 
+        string Environment { get; }
+
         IEnumerable<Uri> ElasticServerUrls { get; }
     }
 }

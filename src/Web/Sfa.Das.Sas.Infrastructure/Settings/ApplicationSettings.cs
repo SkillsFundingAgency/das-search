@@ -23,6 +23,8 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri PostcodeUrl => new Uri(ConfigurationManager.AppSettings["PostcodeUrl"]);
 
+        public string Environment => ConfigurationManager.AppSettings["Environment"];
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = ConfigurationManager.AppSettings["ElasticServerUrls"].Split(',');
