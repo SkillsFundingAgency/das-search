@@ -23,11 +23,6 @@
             var viewModel = CreateViewModel(standardResult.StandardId, standardResult.NotionalEndLevel, standardResult.Title);
 
             viewModel.PostUrl = urlHelper.Action("StandardResults", "Provider");
-            viewModel.PreviousPageLink = new LinkViewModel
-                                             {
-                                                 Title = "Go back to apprenticeship",
-                                                 Url = urlHelper.Action("Standard", "Apprenticeship", new { Id = id })
-                                             };
             return viewModel;
         }
 
@@ -37,11 +32,6 @@
             var viewModel = CreateViewModel(fwResult.FrameworkId, fwResult.Level, fwResult.Title);
 
             viewModel.PostUrl = urlHelper.Action("FrameworkResults", "Provider");
-            viewModel.PreviousPageLink = new LinkViewModel
-                                             {
-                                                 Title = "Go back to apprenticeship",
-                                                 Url = urlHelper.Action("Framework", "Apprenticeship", new { Id = id })
-                                             };
 
             return viewModel;
         }

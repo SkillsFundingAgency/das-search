@@ -3,8 +3,6 @@ using System.Web.Mvc;
 
 namespace Sfa.Das.Sas.Web.Extensions
 {
-    using System.Web.UI.HtmlControls;
-
     public static class HtmlExtensions
     {
         public static MvcHtmlString RenderAIfExists(this HtmlHelper htmlHelper, string title, string source, string classes)

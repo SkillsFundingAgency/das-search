@@ -19,7 +19,6 @@
         public string TypicalLengthMessage { get; set; }
 
         // Page specific
-        public LinkViewModel SearchResultLink { get; set; }
 
         public bool IsShortlisted { get; set; }
 

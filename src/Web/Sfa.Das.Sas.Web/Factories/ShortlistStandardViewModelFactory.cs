@@ -3,9 +3,6 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Factories
 {
-    using System.Security.Policy;
-    using System.Web;
-
     public class ShortlistStandardViewModelFactory : IShortlistStandardViewModelFactory
     {
         public ShortlistStandardViewModel GetShortlistStandardViewModel(int standardId, string title, int level)
