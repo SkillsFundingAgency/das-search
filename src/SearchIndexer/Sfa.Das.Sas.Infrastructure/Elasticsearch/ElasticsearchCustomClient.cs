@@ -137,15 +137,17 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             {
                 body = System.Text.Encoding.Default.GetString(apiCallDetails.RequestBodyInBytes);
             }
-            
-            _logger.Debug($"ElasticsearchQuery: {identifier}", new ElasticSearchLogEntry
+
+            var logEntry = new ElasticSearchLogEntry
             {
                 ReturnCode = apiCallDetails?.HttpStatusCode,
                 SearchTime = took,
                 NetworkTime = networkTime,
                 Url = apiCallDetails?.Uri?.AbsoluteUri,
                 Body = body
-            });
+            };
+
+            _logger.Debug($"ElasticsearchQuery: {identifier}", logEntry);
         }
     }
 }

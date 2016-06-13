@@ -4,14 +4,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 {
     using System;
     using System.Collections.Generic;
-
     using FluentAssertions;
-
     using Moq;
-
     using NUnit.Framework;
-
-    using Sfa.Das.Sas.Indexer.Core.Services;
     using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 
     [TestFixture]
@@ -33,6 +28,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             var result = converter.DeserializeObject<TestObject>(stubMetaData);
             mockLogger.Verify(m => m.Warn(It.IsAny<Exception>(), It.IsAny<string>()), Times.Never);
             result.Count.ShouldBeEquivalentTo(3);
+            result[0].Id.Should().Be(1);
         }
 
         [Test]
@@ -53,10 +49,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             mockLogger.Verify(m => m.Warn(It.IsAny<Exception>(), It.IsAny<string>()), Times.Once);
             result.Count.ShouldBeEquivalentTo(2);
         }
-    }
 
-    internal class TestObject
-    {
-        public int Id { get; set; }
+        private class TestObject
+        {
+            public int Id { get; set; }
+        }
     }
 }

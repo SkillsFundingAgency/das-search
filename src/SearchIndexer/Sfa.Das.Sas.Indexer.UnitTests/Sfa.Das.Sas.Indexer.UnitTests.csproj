@@ -141,7 +141,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Sfa.Das.Sas.Indexer.UnitTests.ruleset" />
-    <None Include="Sfa.Das.Sas.Indexer.UnitTests2.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Das.Sas.Indexer.ApplicationServices\Sfa.Das.Sas.Indexer.ApplicationServices.csproj">

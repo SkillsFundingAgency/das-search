@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
         public void Debug(string message, ILogEntry entry)
         {
-            SendLog(message, LogLevel.Debug, new Dictionary<string, object> { {entry.Name, entry} });
+            SendLog(message, LogLevel.Debug, new Dictionary<string, object> { { entry.Name, entry } });
         }
 
         public void Info(string message, ILogEntry entry)

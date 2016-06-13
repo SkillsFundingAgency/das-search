@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Indexer.Core.Logging.Metrics
     {
         public static ExecutionTimerResult<T> GetTiming<T>(Func<T> function)
         {
-            var timerResult = new ExecutionTimerResult<T>();
+            var timerResult = default(ExecutionTimerResult<T>);
 
             var timer = Stopwatch.StartNew();
             timerResult.Result = function.Invoke();
@@ -15,19 +15,12 @@ namespace Sfa.Das.Sas.Indexer.Core.Logging.Metrics
 
             return timerResult;
         }
-        
+
         public static TimeSpan GetTiming(Action action)
         {
             var timer = Stopwatch.StartNew();
             action.Invoke();
             return timer.Elapsed;
         }
-    }
-
-    public struct ExecutionTimerResult<T>
-    {
-        public T Result { get; set; }
-
-        public double ElaspedMilliseconds { get; set; }
     }
 }

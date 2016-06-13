@@ -222,6 +222,5 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             }
                         };
         }
-
     }
 }
