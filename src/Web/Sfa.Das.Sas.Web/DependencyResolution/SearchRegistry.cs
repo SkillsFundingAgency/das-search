@@ -20,6 +20,8 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IShortlistStandardViewModelFactory>().Use<ShortlistStandardViewModelFactory>();
             For<IDashboardViewModelFactory>().Use<DashboardViewModelFactory>();
             For<IApprenticeshipViewModelFactory>().Use<ApprenticeshipViewModelFactory>();
+
+            For<IValidation>().Use<Validation>();
         }
     }
 }

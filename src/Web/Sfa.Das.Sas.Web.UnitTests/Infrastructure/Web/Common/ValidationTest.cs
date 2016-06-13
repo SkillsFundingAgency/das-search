@@ -1,9 +1,12 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Sfa.Das.Sas.Web.Common;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Common
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Common
 {
+    using System.Collections.Generic;
+    using Core.Logging;
+    using FluentAssertions;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.Web.Services;
+
     [TestFixture]
     public class ValidationTest
     {
@@ -17,7 +20,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Common
         [TestCase("B721HE")]
         public void ShouldValidatePostcodes(string postCode)
         {
-            Validation.ValidatePostcode(postCode).Should().BeTrue();
+            var validation = new Validation(null);
+            validation.ValidatePostcode(postCode).Should().BeTrue();
         }
 
         [TestCase("")]
@@ -25,7 +29,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Common
         [TestCase("gfdsdf")]
         public void ShouldNotValidatePostcodes(string postCode)
         {
-            Validation.ValidatePostcode(postCode).Should().BeFalse();
+            var mockLogger = new Mock<ILog>();
+            var validation = new Validation(mockLogger.Object);
+            validation.ValidatePostcode(postCode).Should().BeFalse();
+            mockLogger.Verify(m => m.Info("Postcode not validate", It.IsAny<Dictionary<string, object>>()), Times.Once);
         }
     }
 }
