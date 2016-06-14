@@ -176,10 +176,7 @@
                                             .Match(ms => ms
                                                 .Field(msf => msf.JobRoleItems.First().Title)
                                                 .Query(formattedKeywords)),
-                                            bsbs => bsbs
-                                            .Match(ms => ms
-                                                .Field(msf => msf.JobRoleItems.First().Description)
-                                                .Query(formattedKeywords)))))))
+                                            bsbs => bsbs)))))
                     .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
                     .Aggregations(agg => agg
                         .Terms(LevelAggregateName, t => t
