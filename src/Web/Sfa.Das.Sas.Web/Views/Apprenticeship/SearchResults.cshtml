@@ -4,7 +4,7 @@
     ViewBag.Title = "Search Results";
 }
 <main id="content" role="main">
-    <div id="apprenticeship-results" class="grid-row column-two-third">
+    <div id="apprenticeship-results" class="grid-row">
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
@@ -16,6 +16,21 @@
                     }
                 </p>
             </div>
+        </div>
+
+    </div>
+    <div class="grid-row">
+        <div class="column-one-third">
+            <div class="editSearch">
+                <h2 class="heading-medium"><a href="#EditSearch">Edit search</a></h2>
+                <div id="EditSearch">
+                    @FilterForm("filter-box")
+                </div>
+            </div>
+        </div>
+
+        <div class="column-two-thirds">
+            
             @if (!Model.HasError && Model.TotalResults > 0)
             {
                 <div>
@@ -40,14 +55,6 @@
                 </div>
             }
 
-        </div>
-
-        <div class="column-one-third">
-            @FilterForm("filter-box")
-        </div>
-
-        <div class="column-two-thirds">
-            
             @foreach (var item in Model.Results)
                 {
                 <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">

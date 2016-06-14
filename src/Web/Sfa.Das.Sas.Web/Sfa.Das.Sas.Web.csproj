@@ -324,11 +324,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Search.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Apprenticeship\SearchResults.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SearchResults.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Apprenticeship\Standard.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -353,11 +348,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkResults.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Provider\StandardResults.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StandardResults.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_FilterProviders.generated.cs">
       <AutoGen>True</AutoGen>

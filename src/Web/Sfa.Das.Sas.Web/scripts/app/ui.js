@@ -11,6 +11,19 @@
             $('#search-results-order').submit();
         });
 
+        if ($('html.js').length) {
+            var width = screen.width;
+            console.log( 'screen width: ' + width );
+            if (width < 641) {
+                $('.editSearch').addClass('folded');
+            }
+        }
+
+        $('html.js .editSearch h2 a').on('click', function (e) {
+            $('.editSearch').toggleClass('folded');
+            e.preventDefault();
+        })
+
     };
 
     ui.init();
