@@ -4,7 +4,7 @@
     ViewBag.Title = "Search Results";
 }
 <main id="content" role="main">
-    <div id="apprenticeship-results" class="grid-row">
+    <div class="grid-row">
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="column-two-thirds">
+        <div id="apprenticeship-results"  class="column-two-thirds">
             
             @if (!Model.HasError && Model.TotalResults > 0)
             {
