@@ -95,7 +95,60 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
         [Test]
         public void ShouldGenerateFrameworkDetailsViewModel()
         {
+            // Assert
+            var criteria = new ProviderLocationSearchCriteria
+            {
+                FrameworkId = "123",
+                ProviderId = "345",
+                LocationId = "12234"
+            };
 
+            var apprenticeshipDetails = new ApprenticeshipDetails
+            {
+                Product = new ApprenticeshipProduct
+                {
+                    Apprenticeship = new ApprenticeshipBasic
+                    {
+                        Code = int.Parse(criteria.FrameworkId)
+                    }
+                }
+            };
+
+            var apprenticeDetailsViewModel = new ApprenticeshipDetailsViewModel()
+            {
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    Code = int.Parse(criteria.FrameworkId)
+                }
+            };
+
+            var framework = new Framework
+            {
+                FrameworkId = 123,
+                Level = 2,
+                Title = "framework test title"
+            };
+
+            _mockProviderRepository.Setup(x => x.GetCourseByFrameworkId(
+                criteria.ProviderId,
+                criteria.LocationId,
+                criteria.FrameworkId))
+                .Returns(apprenticeshipDetails);
+
+            _mockMappingService.Setup(x => x.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(apprenticeshipDetails))
+                               .Returns(apprenticeDetailsViewModel);
+
+            _mockGetFrameworks.Setup(x => x.GetFrameworkById(apprenticeshipDetails.Product.Apprenticeship.Code))
+                .Returns(framework);
+
+            // Act
+            var viewModel = _sut.GenerateDetailsViewModel(criteria);
+
+            // Assert
+            Assert.AreEqual(apprenticeshipDetails.Product.Apprenticeship.Code, viewModel.Apprenticeship.Code);
+            Assert.AreEqual(framework.Level.ToString(), viewModel.ApprenticeshipLevel);
+            Assert.AreEqual(framework.Title, viewModel.ApprenticeshipNameWithLevel);
+            Assert.AreEqual(ApprenticeshipTrainingType.Framework, viewModel.Training);
         }
     }
 }

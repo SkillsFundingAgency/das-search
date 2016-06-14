@@ -41,6 +41,7 @@ namespace Sfa.Das.Sas.Web.Factories
                     criteria.ProviderId,
                     criteria.LocationId,
                     criteria.StandardCode);
+
                 if (model != null)
                 {
                     courseViewModel = _mappingService.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(model);
