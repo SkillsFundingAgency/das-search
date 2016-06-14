@@ -7,21 +7,19 @@ describe("Cookie Store Unit tests",
     function () {
     it("Should save sub keys correctly",
         function () {
-        
             // Assign
             var cookie = new SearchAndShortlist.Cookie("test");
 
             // Act
             cookie.AddSubKey("1");
             var cookieString = cookie.ToString();
-        
+
             // Assert
             expect(cookieString).toBe("1=");
         });
 
     it("Should save sub key value correctly",
         function () {
-
             // Assign
             var cookie = new SearchAndShortlist.Cookie("test");
 
@@ -35,7 +33,6 @@ describe("Cookie Store Unit tests",
 
     it("Should save multiple sub key values correctly",
         function () {
-
             //Assign
             var cookie = new SearchAndShortlist.Cookie("test");
 
@@ -51,7 +48,6 @@ describe("Cookie Store Unit tests",
 
     it("Should save multiple sub keys and values correctly",
         function() {
-
             // Assign
             var cookie = new SearchAndShortlist.Cookie("test");
 
