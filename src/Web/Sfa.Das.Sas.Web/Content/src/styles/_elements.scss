@@ -2359,16 +2359,22 @@ details .arrow {
     a[href='#EditSearch'] {
         color: $black;
         text-decoration: none;
+
         &:after {
-            display: inline-block;
-            margin-left: 0.5em;
-            content: "\25Bc";
+            @media (max-width: 640px) {
+                display: inline-block;
+                margin-left: 0.5em;
+                content: "\25Bc";
+            }
         }
     }
     &.folded {
         a[href='#EditSearch'] {
             &:after {
-                content: "\25B6";
+                @media (max-width: 640px) {
+                    content: "\25B6";
+                }
+
             }   
         }
         #EditSearch {

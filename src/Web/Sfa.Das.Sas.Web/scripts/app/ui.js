@@ -20,7 +20,10 @@
         }
 
         $('html.js .editSearch h2 a').on('click', function (e) {
-            $('.editSearch').toggleClass('folded');
+            var width = screen.width;
+            if (width < 641) {
+                $('.editSearch').toggleClass('folded');
+            }
             e.preventDefault();
         })
 
