@@ -379,8 +379,6 @@ WriteLiteral(" role=\"main\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteLiteral(" id=\"provider-results\"");
-
 WriteLiteral(" class=\"grid-row\"");
 
 WriteLiteral(">\r\n        <div");
@@ -429,6 +427,8 @@ WriteLiteral("            ");
             #line default
             #line hidden
 WriteLiteral("\r\n        </div>\r\n\r\n        <div");
+
+WriteLiteral(" id=\"provider-results\"");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
