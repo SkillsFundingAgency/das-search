@@ -2352,6 +2352,31 @@ details .arrow {
     }
 }
 
+.editSearch {
+    h2 {
+        margin-top: 0;
+    }
+    a[href='#EditSearch'] {
+        color: $black;
+        text-decoration: none;
+        &:after {
+            display: inline-block;
+            margin-left: 0.5em;
+            content: "\25Bc";
+        }
+    }
+    &.folded {
+        a[href='#EditSearch'] {
+            &:after {
+                content: "\25B6";
+            }   
+        }
+        #EditSearch {
+            display: none
+        }
+    }
+}
+
 .filters-block {
 
 }
@@ -2373,6 +2398,7 @@ details .arrow {
         float: none;
         position: relative;
         cursor: pointer;
+/*
         &:after {
             position: absolute;
             display: block;
@@ -2383,6 +2409,7 @@ details .arrow {
             vertical-align: middle;
             content: "\02228";
         }
+*/
     }
     li {
         margin-bottom: .5em;
@@ -2392,16 +2419,18 @@ details .arrow {
     }
     @at-root  {
         .js .filters .toggled-content {
-            display: none;
+            //display: none;
             @media (min-width: 641px) {
                 display: block;
             }
         }
         .js .filters.unfolded {
             .toggler {
+/*
                 &:after {
                     content: "\02227";
                 }
+*/
             }
             .toggled-content {
                 display: block;
@@ -2410,7 +2439,11 @@ details .arrow {
     }
 }
 
-
+#search-results-order {
+    @media (min-width: 641px) {
+        text-align: right;
+    }
+}
 
 
 
