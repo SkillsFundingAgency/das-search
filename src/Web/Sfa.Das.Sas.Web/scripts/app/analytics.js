@@ -13,10 +13,10 @@
         });
     };
 
-    var trackShortlist = function (action, type) {
+    var trackShortlist = function(action, type) {
         var label = action + " " + type;
         analytics.pushEvent("Shortlist", label);
-    }
+    };
 
     analytics.init = function () {
 
