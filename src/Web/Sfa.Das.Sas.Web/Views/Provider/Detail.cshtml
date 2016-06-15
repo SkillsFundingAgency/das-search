@@ -50,9 +50,9 @@
                 </article>
             </section>
 
-            <div>
+            @*<div>
                 @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-            </div>
+            </div>*@
 
             <div class="survey-panel">
                 <h2 class="bold-large">
@@ -73,9 +73,9 @@
         </div>
 
         <div class="column-third">
-            <div class="hidden-for-mobile">
+            @*<div class="hidden-for-mobile">
                 @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-            </div>
+            </div>*@
 
             @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
             {

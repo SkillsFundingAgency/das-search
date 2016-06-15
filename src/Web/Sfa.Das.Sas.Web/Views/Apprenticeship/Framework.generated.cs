@@ -215,29 +215,20 @@ WriteLiteral(">\r\n\r\n                <li>qualifications</li>\r\n              
 
 WriteLiteral(" id=\"bottom-actions\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\r\n                ");
 
-WriteLiteral("                ");
-
-            
-            #line 41 "..\..\Views\Apprenticeship\Framework.cshtml"
-           Write(GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted));
-
-            
-            #line default
-            #line hidden
 WriteLiteral("\r\n\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1558), Tuple.Create("\"", 1685)
+WriteAttribute("href", Tuple.Create(" href=\"", 1562), Tuple.Create("\"", 1689)
             
             #line 43 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1565), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+, Tuple.Create(Tuple.Create("", 1569), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 1565), false)
+, 1569), false)
 );
 
 WriteLiteral(">\r\n                    <i");

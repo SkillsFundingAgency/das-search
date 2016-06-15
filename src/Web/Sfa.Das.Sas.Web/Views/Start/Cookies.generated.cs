@@ -267,40 +267,9 @@ WriteLiteral(@">
                 </tbody>
             </table>
 
-            <h3");
+            ");
 
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(@">
-                Our apprenticeship shortlisting
-            </h3>
-
-            <p>If you haven't logged into the site we will store you shortlisted apprenticships and providers in two sets of cookies so that the next time you arrive on the site your shortlistings will still be there.</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Purpose</th>
-                        <th>Expires</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>das_shortlist_standards</td>
-                    <td>Saves the standards (apprenticeships) and their associated providers that you have shortlisted</td>
-                    <td>1 year</td>
-                </tr>
-                    <tr>
-                        <td>das_shortlist_frameworks</td>
-                        <td>Saves the frameworks (apprenticeships) and their associated providers that you have shortlisted</td>
-                        <td>1 year</td>
-                    </tr>
-                </tbody>
-            </table>
-
-
-            <h3");
+WriteLiteral("\r\n\r\n\r\n            <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
