@@ -22,14 +22,14 @@ Scenario:Should find a standard and provider
 
 	When I choose First Standard Result
 	Then I am on the Standard Details page	
-	When I wait to see Shortlist Link
-	When I choose Shortlist Link
-	Then I am on the Standard Details page	
+	#When I wait to see Shortlist Link
+	#When I choose Shortlist Link
+	#Then I am on the Standard Details page	
 	When I wait for the view to become active
-	When I wait to see Shortlist Link
-	Then I see
-         | Field          | Rule     | Value                 |
-         | Shortlist Link | contains | Remove from shortlist |
+	#When I wait to see Shortlist Link
+	#Then I see
+ #        | Field          | Rule     | Value                 |
+ #        | Shortlist Link | contains | Remove from shortlist |
 
 	When I choose Search Page Button
 	Then I am on the Provider Search page
@@ -44,6 +44,6 @@ Scenario:Should find a standard and provider
 	And I see
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
-	When I choose Dashboard Link
-	Then I am on the Dashboard Overview page	
-	And I see Standard Shortlist list contains at least 1 items
+	#When I choose Dashboard Link
+	#Then I am on the Dashboard Overview page	
+	#And I see Standard Shortlist list contains at least 1 items
