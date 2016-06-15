@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public int ApprenticeshipId { get; set; }
 
+        public string PostCode { get; set; }
+
         public string SearchTerms { get; set; }
     }
 }

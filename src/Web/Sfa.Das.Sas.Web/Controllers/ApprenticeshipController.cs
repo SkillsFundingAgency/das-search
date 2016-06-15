@@ -142,7 +142,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string postCode, string hasError)
+        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string postCode, string keywords, string hasError)
         {
             ProviderSearchViewModel viewModel;
 
@@ -160,7 +160,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.SearchTerms = postCode;
+            viewModel.PostCode = postCode;
+            viewModel.SearchTerms = keywords;
 
             return View(viewModel);
         }
