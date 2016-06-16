@@ -20,6 +20,9 @@
 
     </div>
     <div class="grid-row">
+
+@if (!Model.HasError && Model.TotalResults > 0)
+{
         <div class="column-one-third">
             <div class="editSearch">
                 <h2 class="heading-medium"><a href="#EditSearch">Edit search</a></h2>
@@ -30,33 +33,30 @@
         </div>
 
         <div id="apprenticeship-results"  class="column-two-thirds">
-            
-            @if (!Model.HasError && Model.TotalResults > 0)
-            {
-                <div>
-                    <form method="GET" id="search-results-order">
-                        <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                        <input type="hidden" name="page" value="@Model.ActualPage" />
-                        <input type="hidden" name="take" value="@Model.ResultsToTake" />
-                        @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
-                        {
-                            <input type="hidden" name="SelectedLevels" value="@level.Value" />
-                        }
-                        <div class="form-block">
-                            <label for="select-order">Sort by</label>
-                            <select name="order" id="select-order" class="form-control form-control-1-3">
-                                <option selected="@(Model.SortOrder=="1")" value="1">Best match</option>
-                                <option selected="@(Model.SortOrder=="2")" value="2">Level (high to low)</option>
-                                <option selected="@(Model.SortOrder=="3")" value="3">Level (low to high)</option>
-                            </select>
-                            <button type="submit" value="Sort" class="button">Sort</button>
-                        </div>
-                    </form>
-                </div>
-            }
+            <div>
+                <form method="GET" id="search-results-order">
+                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                    <input type="hidden" name="page" value="@Model.ActualPage" />
+                    <input type="hidden" name="take" value="@Model.ResultsToTake" />
+                    @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
+                    {
+                        <input type="hidden" name="SelectedLevels" value="@level.Value" />
+                    }
+                    <div class="form-block">
+                        <label for="select-order">Sort by</label>
+                        <select name="order" id="select-order" class="form-control form-control-1-3">
+                            <option selected="@(Model.SortOrder == "1")" value="1">Best match</option>
+                            <option selected="@(Model.SortOrder == "2")" value="2">Level (high to low)</option>
+                            <option selected="@(Model.SortOrder == "3")" value="3">Level (low to high)</option>
+                        </select>
+                        <button type="submit" value="Sort" class="button">Sort</button>
+                    </div>
+                </form>
+            </div>
+           
 
             @foreach (var item in Model.Results)
-                {
+            {
                 <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
                     <header>
                         @if (item.StandardId != 0)
@@ -80,8 +80,7 @@
                 @GetPaginationNextLink()
             </div>
         </div>
-
-
+}
 
     </div>
 </main>
