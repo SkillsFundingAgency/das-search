@@ -7,14 +7,13 @@ using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
+using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 using Assert = NUnit.Framework.Assert;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
-
     [TestFixture]
     public sealed class DashboardControllerTests
     {
@@ -22,8 +21,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         private Mock<IGetFrameworks> _mockGetFrameworks;
         private Mock<IListCollection<int>> _mockListCollection;
         private Mock<IDashboardViewModelFactory> _mockDashboardViewModelFactory;
-        private Mock<IShortlistStandardViewModelFactory> _mockShortlistStandardViewModelFactory;
-        private Mock<IShortlistFrameworkViewModelFactory> _mockShortlistFrameworkViewModelFactory;
+        private Mock<IShortlistViewModelFactory> _mockShortlistViewModelFactory;
+        private Mock<IShortlistApprenticeshipViewModel> _mockApprenticeshipViewModel;
         private Mock<IApprenticeshipProviderRepository> _mockApprenticeshipProviderRepository;
         private Mock<DashboardViewModel> _mockDashboardViewModel;
         private DashboardController _sut;
@@ -35,8 +34,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockGetFrameworks = new Mock<IGetFrameworks>();
             _mockListCollection = new Mock<IListCollection<int>>();
             _mockDashboardViewModelFactory = new Mock<IDashboardViewModelFactory>();
-            _mockShortlistStandardViewModelFactory = new Mock<IShortlistStandardViewModelFactory>();
-            _mockShortlistFrameworkViewModelFactory = new Mock<IShortlistFrameworkViewModelFactory>();
+            _mockShortlistViewModelFactory = new Mock<IShortlistViewModelFactory>();
+            _mockApprenticeshipViewModel = new Mock<IShortlistApprenticeshipViewModel>();
             _mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
             _mockDashboardViewModel = new Mock<DashboardViewModel>();
 
@@ -45,22 +44,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 _mockGetFrameworks.Object,
                 _mockListCollection.Object,
                 _mockDashboardViewModelFactory.Object,
-                _mockShortlistStandardViewModelFactory.Object,
-                _mockShortlistFrameworkViewModelFactory.Object,
+                _mockShortlistViewModelFactory.Object,
                 _mockApprenticeshipProviderRepository.Object);
 
-            _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(new Mock<ShortlistStandardViewModel>().Object);
+            _mockShortlistViewModelFactory.Setup(
+                x => x.GetShortlistViewModel(It.IsAny<Standard>()))
+                .Returns(_mockApprenticeshipViewModel.Object);
 
-            _mockShortlistFrameworkViewModelFactory.Setup(
-              x => x.GetShortlistFrameworkViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))
-              .Returns(new Mock<ShortlistFrameworkViewModel>().Object);
+            _mockShortlistViewModelFactory.Setup(
+               x => x.GetShortlistViewModel(It.IsAny<Framework>()))
+               .Returns(_mockApprenticeshipViewModel.Object);
+
+            _mockApprenticeshipViewModel.Setup(x => x.Providers).Returns(new List<ShortlistProviderViewModel>());
 
             _mockDashboardViewModelFactory.Setup(
-                x => x.GetDashboardViewModel(
-                    It.IsAny<ICollection<ShortlistStandardViewModel>>(),
-                    It.IsAny<ICollection<ShortlistFrameworkViewModel>>()))
+                x => x.GetDashboardViewModel(It.IsAny<IEnumerable<IShortlistApprenticeshipViewModel>>()))
                 .Returns(_mockDashboardViewModel.Object);
         }
 
@@ -77,10 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                                     new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersIdAndLocation = new List<ShortlistedProvider>() }
                                 });
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
-                             .Returns(new Standard() { StandardId = standardId });
-
-            _mockShortlistStandardViewModelFactory.Setup(x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(new ShortlistStandardViewModel());
+                             .Returns(new Standard { StandardId = standardId });
 
             // Act
             var result = _sut.Overview() as ViewResult;
@@ -89,13 +84,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             Assert.AreEqual(_mockDashboardViewModel.Object, result?.Model);
             _mockListCollection.Verify(x => x.GetAllItems(Constants.StandardsShortListCookieName));
             _mockGetStandards.Verify(x => x.GetStandardById(It.IsAny<int>()));
-            _mockShortlistStandardViewModelFactory.Verify(
-                 x => x.GetShortlistStandardViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()), Times.Exactly(3));
+            _mockShortlistViewModelFactory.Verify(x => x.GetShortlistViewModel(It.IsAny<Standard>()), Times.Exactly(3));
 
             _mockDashboardViewModelFactory.Verify(
-                x => x.GetDashboardViewModel(
-                    It.IsAny<ICollection<ShortlistStandardViewModel>>(),
-                    It.IsAny<ICollection<ShortlistFrameworkViewModel>>()), Times.Once);
+                x => x.GetDashboardViewModel(It.IsAny<IEnumerable<IShortlistApprenticeshipViewModel>>()), Times.Once);
         }
 
         [Test]
@@ -114,17 +106,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
                              .Returns(new Standard() { StandardId = standardId });
 
-            _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(standardId, It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(new ShortlistStandardViewModel());
+            _mockShortlistViewModelFactory.Setup(
+                x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(standardId))))
+                .Returns(new ShortlistFrameworkViewModel());
 
-            _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(45, It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(new ShortlistStandardViewModel());
+            _mockShortlistViewModelFactory.Setup(
+                x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(45))))
+                .Returns(new ShortlistFrameworkViewModel());
 
-            _mockShortlistStandardViewModelFactory.Setup(
-                x => x.GetShortlistStandardViewModel(83, It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(new ShortlistStandardViewModel());
+            _mockShortlistViewModelFactory.Setup(
+                x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(83))))
+                .Returns(new ShortlistFrameworkViewModel());
 
             _mockGetStandards.Setup(x => x.GetStandardById(45));
             _mockGetStandards.Setup(x => x.GetStandardById(83));
@@ -133,14 +125,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _sut.Overview();
 
             // Assert
-            _mockShortlistStandardViewModelFactory.Verify(
-               x => x.GetShortlistStandardViewModel(standardId, It.IsAny<string>(), It.IsAny<int>()), Times.Once);
+            _mockShortlistViewModelFactory.Verify(
+               x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(standardId))), Times.Once);
 
-            _mockShortlistStandardViewModelFactory.Verify(
-                x => x.GetShortlistStandardViewModel(45, It.IsAny<string>(), It.IsAny<int>()), Times.Never());
+            _mockShortlistViewModelFactory.Verify(
+                x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(45))), Times.Never());
 
-            _mockShortlistStandardViewModelFactory.Verify(
-                x => x.GetShortlistStandardViewModel(83, It.IsAny<string>(), It.IsAny<int>()), Times.Never());
+            _mockShortlistViewModelFactory.Verify(
+                x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(83))), Times.Never());
         }
 
         [Test]
@@ -169,13 +161,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             Assert.AreEqual(_mockDashboardViewModel.Object, result?.Model);
             _mockListCollection.Verify(x => x.GetAllItems(Constants.FrameworksShortListCookieName));
             _mockGetFrameworks.Verify(x => x.GetFrameworkById(It.IsAny<int>()));
-            _mockShortlistFrameworkViewModelFactory.Verify(
-                 x => x.GetShortlistFrameworkViewModel(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<int>()), Times.Exactly(3));
+            _mockShortlistViewModelFactory.Verify(x => x.GetShortlistViewModel(It.IsAny<Framework>()), Times.Exactly(3));
 
             _mockDashboardViewModelFactory.Verify(
-                x => x.GetDashboardViewModel(
-                    It.IsAny<ICollection<ShortlistStandardViewModel>>(),
-                    It.IsAny<ICollection<ShortlistFrameworkViewModel>>()), Times.Once);
+                x => x.GetDashboardViewModel(It.IsAny<IEnumerable<IShortlistApprenticeshipViewModel>>()), Times.Once);
         }
     }
 }

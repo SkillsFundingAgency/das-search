@@ -22,13 +22,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
         public void ShouldGetShortlistFrameworkViewModel()
         {
             // Assign
-            var standardViewModel = new ShortlistStandardViewModel();
+            var standardViewModel = new ShortlistFrameworkViewModel();
             var frameworkViewModel = new ShortlistFrameworkViewModel();
-            var standardViewModels = new List<ShortlistStandardViewModel> { standardViewModel };
-            var frameworkViewModels = new List<ShortlistFrameworkViewModel> { frameworkViewModel };
+            var shortlistedViewModels = new List<IShortlistApprenticeshipViewModel> { standardViewModel, frameworkViewModel };
 
             // Act
-            var viewModel = _sut.GetDashboardViewModel(standardViewModels, frameworkViewModels);
+            var viewModel = _sut.GetDashboardViewModel(shortlistedViewModels);
 
             // Assert
             Assert.Contains(standardViewModel, viewModel.Apprenticeships.ToList());

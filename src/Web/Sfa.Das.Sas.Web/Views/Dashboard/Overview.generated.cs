@@ -319,7 +319,7 @@ WriteLiteralTo(__razor_helper_writer, "                                         
 
 
 #line 79 "..\..\Views\Dashboard\Overview.cshtml"
-                WriteTo(__razor_helper_writer, apprenticeship.TrainingType == ApprenticeshipTrainingType.Standard ? 
+                WriteTo(__razor_helper_writer, apprenticeship is ShortlistStandardViewModel ? 
                                                 Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}) : 
                                                 Html.ActionLink("Delete", "RemoveFrameworkProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}));
 

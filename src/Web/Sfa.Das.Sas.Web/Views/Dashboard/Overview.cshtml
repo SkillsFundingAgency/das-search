@@ -76,7 +76,7 @@
                                             @Html.RenderAIfExists(provider.Name, provider.Url, "")
                                         </span>
                                         <span class="action">
-                                             @(apprenticeship.TrainingType == ApprenticeshipTrainingType.Standard ? 
+                                             @(apprenticeship is ShortlistStandardViewModel ? 
                                                 Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}) : 
                                                 Html.ActionLink("Delete", "RemoveFrameworkProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}))
                                         </span>

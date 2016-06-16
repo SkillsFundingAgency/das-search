@@ -15,8 +15,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IGetFrameworks _getFrameworks;
         private readonly IListCollection<int> _listCollection;
         private readonly IDashboardViewModelFactory _dashboardViewModelFactory;
-        private readonly IShortlistStandardViewModelFactory _shortlistStandardViewModelFactory;
-        private readonly IShortlistFrameworkViewModelFactory _shortlistFrameworkViewModelFactory;
+        private readonly IShortlistViewModelFactory _shortlistViewModelFactory;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
 
         public DashboardController(
@@ -24,16 +23,14 @@ namespace Sfa.Das.Sas.Web.Controllers
             IGetFrameworks getFrameworks,
             IListCollection<int> listCollection,
             IDashboardViewModelFactory dashboardViewModelFactory,
-            IShortlistStandardViewModelFactory shortlistStandardViewModelFactory,
-            IShortlistFrameworkViewModelFactory shortlistFrameworkViewModelFactory,
+            IShortlistViewModelFactory shortlistViewModelFactory,
             IApprenticeshipProviderRepository apprenticeshipProviderRepository)
         {
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
             _listCollection = listCollection;
             _dashboardViewModelFactory = dashboardViewModelFactory;
-            _shortlistStandardViewModelFactory = shortlistStandardViewModelFactory;
-            _shortlistFrameworkViewModelFactory = shortlistFrameworkViewModelFactory;
+            _shortlistViewModelFactory = shortlistViewModelFactory;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
         }
 
@@ -42,15 +39,16 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var standards = GetShortlistedStandards();
             var frameworks = GetShortlistedFrameworks();
+            var apprenticeships = standards.Concat(frameworks);
 
-            var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(standards, frameworks);
+            var viewModel = _dashboardViewModelFactory.GetDashboardViewModel(apprenticeships);
 
             return View(viewModel);
         }
 
-        private ICollection<ShortlistStandardViewModel> GetShortlistedStandards()
+        private IEnumerable<IShortlistApprenticeshipViewModel> GetShortlistedStandards()
         {
-            var standardViewModels = new List<ShortlistStandardViewModel>();
+            var standardViewModels = new List<IShortlistApprenticeshipViewModel>();
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
@@ -68,10 +66,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     continue;
                 }
 
-                var standardViewModel = _shortlistStandardViewModelFactory.GetShortlistStandardViewModel(
-                    standard.StandardId,
-                    standard.Title,
-                    standard.NotionalEndLevel);
+                var apprenticeshipViewModel = _shortlistViewModelFactory.GetShortlistViewModel(standard);
 
                 var shortListedProviders = apprenticeship.ProvidersIdAndLocation
                     .Select(x => _apprenticeshipProviderRepository.GetCourseByStandardCode(
@@ -89,29 +84,29 @@ namespace Sfa.Das.Sas.Web.Controllers
                         Url = Url.Action("Detail", "Provider", new { providerId = p.Provider.Id, locationId = p.Location.LocationId, standardCode = standard.StandardId })
                     });
 
-                standardViewModel.Providers.AddRange(providerViewModels);
+                apprenticeshipViewModel.Providers.AddRange(providerViewModels);
 
-                standardViewModels.Add(standardViewModel);
+                standardViewModels.Add(apprenticeshipViewModel);
             }
 
             return standardViewModels;
         }
 
-        private ICollection<ShortlistFrameworkViewModel> GetShortlistedFrameworks()
+        private IEnumerable<IShortlistApprenticeshipViewModel> GetShortlistedFrameworks()
         {
             var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
 
             if (shortlistedApprenticeships == null)
             {
-                return new List<ShortlistFrameworkViewModel>();
+                return new List<IShortlistApprenticeshipViewModel>();
             }
 
             if (!shortlistedApprenticeships.Any())
             {
-                return new List<ShortlistFrameworkViewModel>();
+                return new List<IShortlistApprenticeshipViewModel>();
             }
-            
-            var frameworkViewModels = new List<ShortlistFrameworkViewModel>();
+
+            var frameworkViewModels = new List<IShortlistApprenticeshipViewModel>();
 
             foreach (var apprenticeship in shortlistedApprenticeships)
             {
@@ -122,10 +117,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                    continue;
                 }
 
-                var viewModel = _shortlistFrameworkViewModelFactory.GetShortlistFrameworkViewModel(
-                    framework.FrameworkId,
-                    framework.Title,
-                    framework.Level);
+                var apprenticeshipViewModel = _shortlistViewModelFactory.GetShortlistViewModel(framework);
 
                 var shortListedProviders = apprenticeship.ProvidersIdAndLocation
                     .Select(x => _apprenticeshipProviderRepository.GetCourseByFrameworkId(
@@ -143,9 +135,9 @@ namespace Sfa.Das.Sas.Web.Controllers
                         Url = Url.Action("Detail", "Provider", new { providerId = p.Provider.Id, locationId = p.Location.LocationId, frameworkId = framework.FrameworkId })
                     });
 
-                viewModel.Providers.AddRange(providerViewModels);
+                apprenticeshipViewModel.Providers.AddRange(providerViewModels);
 
-                frameworkViewModels.Add(viewModel);
+                frameworkViewModels.Add(apprenticeshipViewModel);
             }
 
             return frameworkViewModels;
