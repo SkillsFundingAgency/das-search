@@ -334,6 +334,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchResults.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Apprenticeship\Standard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standard.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dashboard\Overview.generated.cs">
       <DependentUpon>Overview.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>

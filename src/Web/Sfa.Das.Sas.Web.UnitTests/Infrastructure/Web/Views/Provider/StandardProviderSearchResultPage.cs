@@ -473,7 +473,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test standard name",
-                Hits = new List<ProviderResultItemViewModel>(),
+                Hits = new List<ProviderResultItemViewModel>() { new ProviderResultItemViewModel() },
                 ActualPage = 1,
                 LastPage = 1,
                 ResultsToTake = 10,
@@ -496,7 +496,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
-        public void WhenSearchResultHasNoResultButDeliveryModeHasResultsShouldShowFilterBox()
+        public void WhenSearchResultHasNoResultButDeliveryModeHasResultsShouldNotShowFilterBox()
         {
             var detail = new StandardResults();
             var model = new ProviderStandardSearchResultViewModel
@@ -524,7 +524,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetHtmlElement(html, ".filter-box").Should().NotBeNull();
+            GetHtmlElement(html, ".filter-box").Should().BeNull();
         }
 
         [Test]
