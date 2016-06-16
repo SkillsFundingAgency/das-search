@@ -110,28 +110,45 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 return new List<ShortlistFrameworkViewModel>();
             }
+            
+            var frameworkViewModels = new List<ShortlistFrameworkViewModel>();
 
-            var frameworkIds = shortlistedApprenticeships.Select(x => x.ApprenticeshipId).ToList();
-
-            if (!frameworkIds.Any())
+            foreach (var apprenticeship in shortlistedApprenticeships)
             {
-                return new List<ShortlistFrameworkViewModel>();
+                var framework = _getFrameworks.GetFrameworkById(apprenticeship.ApprenticeshipId);
+
+                if (framework == null)
+                {
+                   continue;
+                }
+
+                var viewModel = _shortlistFrameworkViewModelFactory.GetShortlistFrameworkViewModel(
+                    framework.FrameworkId,
+                    framework.Title,
+                    framework.Level);
+
+                var shortListedProviders = apprenticeship.ProvidersIdAndLocation
+                    .Select(x => _apprenticeshipProviderRepository.GetCourseByFrameworkId(
+                        x.ProviderId,
+                        x.LocationId.ToString(),
+                        apprenticeship.ApprenticeshipId.ToString()));
+
+                var providerViewModels = shortListedProviders.Where(x => x != null)
+                    .Select(p => new ShortlistProviderViewModel
+                    {
+                        Id = p.Provider.UkPrn,
+                        Name = p.Provider.Name,
+                        LocationId = p.Location.LocationId,
+                        Address = p.Location.Address,
+                        Url = Url.Action("Detail", "Provider", new { providerId = p.Provider.Id, locationId = p.Location.LocationId, frameworkId = framework.FrameworkId })
+                    });
+
+                viewModel.Providers.AddRange(providerViewModels);
+
+                frameworkViewModels.Add(viewModel);
             }
 
-            var frameworks = frameworkIds.Select(id => _getFrameworks.GetFrameworkById(id)).ToList();
-
-            if (!frameworks.Any())
-            {
-                return new List<ShortlistFrameworkViewModel>();
-            }
-
-            var viewModels = frameworks.Select(f =>
-                _shortlistFrameworkViewModelFactory.GetShortlistFrameworkViewModel(
-                    f.FrameworkId,
-                    f.Title,
-                    f.Level));
-
-            return viewModels.Where(vm => vm != null).ToList();
+            return frameworkViewModels;
         }
     }
 }

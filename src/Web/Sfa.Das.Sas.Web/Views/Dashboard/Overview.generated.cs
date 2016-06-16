@@ -315,22 +315,22 @@ WriteLiteralTo(__razor_helper_writer, " class=\"action\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "                                            ");
+WriteLiteralTo(__razor_helper_writer, "                                             ");
 
 
 #line 79 "..\..\Views\Dashboard\Overview.cshtml"
-              WriteTo(__razor_helper_writer, Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}));
+                WriteTo(__razor_helper_writer, apprenticeship.TrainingType == ApprenticeshipTrainingType.Standard ? 
+                                                Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}) : 
+                                                Html.ActionLink("Delete", "RemoveFrameworkProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}));
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n                                            ");
-
 WriteLiteralTo(__razor_helper_writer, "\r\n                                        </span>\r\n                              " +
 "      </li>\r\n                                </ol>\r\n");
 
 
-#line 84 "..\..\Views\Dashboard\Overview.cshtml"
+#line 85 "..\..\Views\Dashboard\Overview.cshtml"
                             }
 
 
@@ -339,7 +339,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                                     
 WriteLiteralTo(__razor_helper_writer, "                        </div>\r\n");
 
 
-#line 86 "..\..\Views\Dashboard\Overview.cshtml"
+#line 87 "..\..\Views\Dashboard\Overview.cshtml"
                     }
 
 
@@ -348,7 +348,7 @@ WriteLiteralTo(__razor_helper_writer, "                        </div>\r\n");
 WriteLiteralTo(__razor_helper_writer, "                </li>\r\n");
 
 
-#line 88 "..\..\Views\Dashboard\Overview.cshtml"
+#line 89 "..\..\Views\Dashboard\Overview.cshtml"
             }
 
 
@@ -357,14 +357,14 @@ WriteLiteralTo(__razor_helper_writer, "                </li>\r\n");
 WriteLiteralTo(__razor_helper_writer, "        </ol>\r\n    </div>\r\n");
 
 
-#line 91 "..\..\Views\Dashboard\Overview.cshtml"
+#line 92 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 91 "..\..\Views\Dashboard\Overview.cshtml"
+#line 92 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden

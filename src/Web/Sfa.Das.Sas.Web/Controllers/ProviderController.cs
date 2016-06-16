@@ -112,7 +112,11 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.ProviderId = criteria.ProviderId;
 
-            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+            var cookieListName = viewModel.Training == ApprenticeshipTrainingType.Framework
+                ? Constants.FrameworksShortListCookieName
+                : Constants.StandardsShortListCookieName;
+
+            var shortlistedApprenticeships = _listCollection.GetAllItems(cookieListName);
 
             foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships
                 from shortlistedProvider in

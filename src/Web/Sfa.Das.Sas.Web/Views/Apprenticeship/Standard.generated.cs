@@ -74,14 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3681), Tuple.Create("\"", 3689)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3673), Tuple.Create("\"", 3681)
 
 #line 82 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3686), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3678), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3686), false)
+, 3678), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -126,14 +126,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3867), Tuple.Create("\"", 3881)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3859), Tuple.Create("\"", 3873)
 
 #line 91 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3874), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3866), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3874), false)
+, 3866), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -305,8 +305,17 @@ WriteLiteral(" class=\"fa fa-search\"");
 WriteLiteral(" aria-hidden=\"true\"");
 
 WriteLiteral("></i>\r\n                        Find training Providers\r\n                    </a>\r" +
-"\n                    ");
+"\n");
 
+WriteLiteral("                    ");
+
+            
+            #line 30 "..\..\Views\Apprenticeship\Standard.cshtml"
+               Write(GetShortlistLink(@Model.StandardId, @Model.IsShortlisted));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n                </aside>\r\n                 </div>\r\n\r\n            </div>\r\n      " +
 "  </div>\r\n\r\n        <section>\r\n            <header>\r\n                <h2");
 
@@ -458,14 +467,14 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3095), Tuple.Create("\"", 3221)
+WriteAttribute("href", Tuple.Create(" href=\"", 3091), Tuple.Create("\"", 3217)
             
             #line 68 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3102), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+, Tuple.Create(Tuple.Create("", 3098), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 3102), false)
+, 3098), false)
 );
 
 WriteLiteral(">\r\n                    <i");
@@ -474,9 +483,17 @@ WriteLiteral(" class=\"fa fa-search\"");
 
 WriteLiteral(" aria-hidden=\"true\"");
 
-WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n       " +
-"         ");
+WriteLiteral("></i>\r\n                    Find training Providers\r\n                </a>\r\n");
 
+WriteLiteral("                ");
+
+            
+            #line 72 "..\..\Views\Apprenticeship\Standard.cshtml"
+           Write(GetShortlistLink(@Model.StandardId, @Model.IsShortlisted));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n            </div>\r\n    </section>\r\n</main>\r\n\r\n");
 
 WriteLiteral("\r\n");

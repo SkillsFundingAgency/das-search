@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Model;
@@ -68,6 +69,35 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         }
 
         [Test]
+        public void ShouldRemoveStandardProvider()
+        {
+            // Assign
+            const int apprenticeshipId = 10;
+
+            var provider = new ShortlistedProvider
+            {
+                ProviderId = "546",
+                LocationId = 387
+            };
+
+            _mockCookieRepository.Setup(x => x.RemoveProvider(
+                Constants.StandardsShortListCookieName,
+                apprenticeshipId,
+                It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))));
+
+            // Act
+            _controller.RemoveStandardProvider(apprenticeshipId, provider.ProviderId, provider.LocationId);
+
+            // Assert
+            _mockCookieRepository.Verify(
+                x => x.RemoveProvider(
+                    Constants.StandardsShortListCookieName,
+                    apprenticeshipId,
+                    It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))),
+                    Times.Once);
+        }
+
+        [Test]
         public void ShouldAddFrameworkToShortListIfRequested()
         {
             // Arrange
@@ -95,6 +125,35 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
             _mockCookieRepository.Verify(x => x.RemoveApprenticeship(Constants.FrameworksShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId), Times.Once());
+        }
+
+        [Test]
+        public void ShouldRemoveFrameworkProvider()
+        {
+            // Assign
+            const int apprenticeshipId = 10;
+
+            var provider = new ShortlistedProvider
+            {
+                ProviderId = "546",
+                LocationId = 387
+            };
+
+            _mockCookieRepository.Setup(x => x.RemoveProvider(
+                Constants.FrameworksShortListCookieName,
+                apprenticeshipId,
+                It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))));
+
+            // Act
+            _controller.RemoveFrameworkProvider(apprenticeshipId, provider.ProviderId, provider.LocationId);
+
+            // Assert
+            _mockCookieRepository.Verify(
+                x => x.RemoveProvider(
+                    Constants.FrameworksShortListCookieName,
+                    apprenticeshipId,
+                    It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))),
+                    Times.Once);
         }
     }
 }

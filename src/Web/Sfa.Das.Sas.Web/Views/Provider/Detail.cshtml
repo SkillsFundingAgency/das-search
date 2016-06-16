@@ -50,9 +50,9 @@
                 </article>
             </section>
 
-            @*<div>
+            <div>
                 @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-            </div>*@
+            </div>
 
             <div class="survey-panel">
                 <h2 class="bold-large">
@@ -73,9 +73,9 @@
         </div>
 
         <div class="column-third">
-            @*<div class="hidden-for-mobile">
+            <div class="hidden-for-mobile">
                 @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-            </div>*@
+            </div>
 
             @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
             {
@@ -224,35 +224,64 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
     if (Model.Training == ApprenticeshipTrainingType.Framework)
     {
-        return;
+        if (isShortlisted)
+        {
+            @Html.ActionLink("Remove this training provider", "RemoveFrameworkProvider", "ShortList",
+                new {apprenticeshipId, providerId, locationId},
+                new
+                {
+                    @class = "link shortlist-link provider-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "remove"
+                })
+        }
+        else
+        {
+            @Html.ActionLink("Shortlist this training provider", "AddFrameworkProvider", "ShortList",
+                new {apprenticeshipId, providerId, locationId},
+                new
+                {
+                    @class = "link shortlist-link provider-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "add"
+                })
+        }
     }
-
-    if (isShortlisted)
+    else if (Model.Training == ApprenticeshipTrainingType.Standard)
     {
+        if (isShortlisted)
+        {
             @Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
-            new {apprenticeshipId, providerId, locationId},
-            new
-            {
-                @class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
-                data_apprenticeship = apprenticeshipId,
-                data_provider = providerId,
-                data_location = locationId,
-                data_action = "remove"
-            })
-    }
-    else
-    {
-        @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
-            new {apprenticeshipId, providerId, locationId},
-            new
-            {
-                @class = "link shortlist-link provider-shortlist-link",
-                rel = "nofollow",
-                data_apprenticeship = apprenticeshipId,
-                data_provider = providerId,
-                data_location = locationId,
-                data_action = "add"
-            })
+                new {apprenticeshipId, providerId, locationId},
+                new
+                {
+                    @class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "remove"
+                })
+        }
+        else
+        {
+            @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
+                new {apprenticeshipId, providerId, locationId},
+                new
+                {
+                    @class = "link shortlist-link provider-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "add"
+                })
+        }
     }
 }
 

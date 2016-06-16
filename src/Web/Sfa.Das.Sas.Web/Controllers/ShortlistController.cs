@@ -105,6 +105,35 @@ namespace Sfa.Das.Sas.Web.Controllers
             return GetReturnRedirectFromFrameworkShortlistAction(id);
         }
 
+        public ActionResult AddFrameworkProvider(int apprenticeshipId, string providerId, int locationId)
+        {
+            var logEntry = new ShortlistLogEntry
+            {
+                FrameworkId = apprenticeshipId,
+                ProviderId = providerId,
+                LocationId = locationId
+            };
+
+            _logger.Debug("Adding standard to shortlist", logEntry);
+
+            var shorlistedApprenticeship = new ShortlistedApprenticeship
+            {
+                ApprenticeshipId = apprenticeshipId,
+                ProvidersIdAndLocation = new List<ShortlistedProvider>
+                {
+                    new ShortlistedProvider
+                    {
+                        ProviderId = providerId,
+                        LocationId = locationId
+                    }
+                }
+            };
+
+            _listCollection.AddItem(Constants.FrameworksShortListCookieName, shorlistedApprenticeship);
+
+            return GetReturnRedirectFromFrameworkProviderShortlistAction(apprenticeshipId, providerId, locationId);
+        }
+
         public ActionResult RemoveFramework(int id)
         {
             _logger.Debug($"Removing framework from shortlist", new ShortlistLogEntry { FrameworkId = id });
@@ -112,6 +141,27 @@ namespace Sfa.Das.Sas.Web.Controllers
             _listCollection.RemoveApprenticeship(Constants.FrameworksShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
+        }
+
+        public ActionResult RemoveFrameworkProvider(int apprenticeshipId, string providerId, int locationId)
+        {
+            var provider = new ShortlistedProvider
+            {
+                ProviderId = providerId,
+                LocationId = locationId
+            };
+
+            var logEntry = new ShortlistLogEntry
+            {
+                FrameworkId = apprenticeshipId,
+                LocationId = provider.LocationId,
+                ProviderId = provider.ProviderId
+            };
+
+            _logger.Debug($"Removing provider from shortlist", logEntry);
+            _listCollection.RemoveProvider(Constants.FrameworksShortListCookieName, apprenticeshipId, provider);
+
+            return GetReturnRedirectFromFrameworkProviderShortlistAction(apprenticeshipId, providerId, locationId);
         }
 
         // This method is used to try to redirect back from the page that requested the updating of the
@@ -155,6 +205,23 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             return Redirect(Request.UrlReferrer.OriginalString);
+        }
+
+        private ActionResult GetReturnRedirectFromFrameworkProviderShortlistAction(int frameworkId, string providerId, int locationId)
+        {
+            if (Request.UrlReferrer != null)
+            {
+                return Redirect(Request.UrlReferrer.OriginalString);
+            }
+
+            var providerSearchCriteria = new ProviderLocationSearchCriteria
+            {
+                FrameworkId = frameworkId.ToString(),
+                ProviderId = providerId,
+                LocationId = locationId.ToString()
+            };
+
+            return RedirectToAction("Detail", "Provider", new { providerSearchCriteria });
         }
     }
 }

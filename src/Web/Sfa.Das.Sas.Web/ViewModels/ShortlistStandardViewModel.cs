@@ -10,6 +10,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         }
 
         public int Id { get; set; }
+        public ApprenticeshipTrainingType TrainingType => ApprenticeshipTrainingType.Standard;
         public string Title { get; set; }
         public int Level { get; set; }
         public List<ShortlistProviderViewModel> Providers { get; set; }
