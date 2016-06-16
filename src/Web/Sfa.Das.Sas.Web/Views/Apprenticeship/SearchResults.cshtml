@@ -33,7 +33,6 @@
         </div>
 
         <div id="apprenticeship-results"  class="column-two-thirds">
-            <div>
                 <form method="GET" id="search-results-order">
                     <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
@@ -52,7 +51,6 @@
                         <button type="submit" value="Sort" class="button">Sort</button>
                     </div>
                 </form>
-            </div>
            
 
             @foreach (var item in Model.Results)
