@@ -1,5 +1,7 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Models
 {
+    using System;
+
     using Sfa.Das.Sas.Core.Domain.Model;
 
     public sealed class FrameworkSearchResultsItem
@@ -19,5 +21,7 @@
         public int Level { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
+
+        public DateTime? ExpiryDate { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Sfa.Das.Sas.Indexer.Core.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 {
+    using System;
     using System.Collections.Generic;
 
     public sealed class FrameworkDocument : IApprenticeshipDocument, IIndexEntry
@@ -27,5 +28,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
+
+        public DateTime? ExpiryDate { get; set; }
     }
 }

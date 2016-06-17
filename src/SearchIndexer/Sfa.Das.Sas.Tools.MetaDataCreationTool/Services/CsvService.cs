@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                                     ProgType = TryParse(values[1]),
                                     PwayCode = TryParse(values[2]),
                                     PathwayName = values[3].RemoveQuotationMark(),
-                                    EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()),
+                                    EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()) ?? DateTime.MinValue,
                                     EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
                                     NASTitle = values[9].RemoveQuotationMark()
                 };
@@ -144,7 +144,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             return -1;
         }
 
-        private DateTime TryGetDate(string dateString)
+        private DateTime? TryGetDate(string dateString)
         {
             DateTime dateTime;
             if (DateTime.TryParse(dateString, out dateTime))
@@ -152,7 +152,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                 return dateTime;
             }
 
-            return DateTime.MinValue;
+            return null;
         }
     }
 }

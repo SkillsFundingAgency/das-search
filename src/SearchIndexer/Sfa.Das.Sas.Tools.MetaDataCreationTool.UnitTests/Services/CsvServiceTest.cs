@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             var tradeBusinessServices = frameworks.Single(m => m.PathwayName.Equals("Trade Business Services"));
 
             Assert.AreEqual(3, tradeBusinessServices.ProgType);
-            Assert.AreEqual("2050-01-18", tradeBusinessServices.EffectiveTo.ToString("yyyy-MM-dd"));
+            Assert.AreEqual("2050-01-18", tradeBusinessServices.EffectiveTo.Value.ToString("yyyy-MM-dd"));
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             var tradeBusinessServices = frameworks.Single(m => m.PathwayName.Equals("Trade Business Services"));
 
             Assert.AreEqual(3, tradeBusinessServices.ProgType);
-            Assert.AreEqual("2050-01-18", tradeBusinessServices.EffectiveTo.ToString("yyyy-MM-dd"));
+            Assert.AreEqual("2050-01-18", tradeBusinessServices.EffectiveTo.Value.ToString("yyyy-MM-dd"));
             Assert.AreNotEqual(DateTime.MinValue, frameworks[3].EffectiveFrom);
         }
 
