@@ -7,6 +7,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders;
@@ -194,6 +195,122 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             var viewResult = (ViewResult)result;
 
             viewResult.Model.Should().Be(stubProviderViewModel);
+        }
+
+        [Test]
+        public void ShouldShowViewModelAsShortlisted()
+        {
+            var searchCriteria = new ProviderLocationSearchCriteria
+            {
+                FrameworkId = "1",
+                LocationId = "2",
+                ProviderId = "3"
+            };
+
+            var stubProviderViewModel = new ApprenticeshipDetailsViewModel
+            {
+                Training = ApprenticeshipTrainingType.Framework,
+            };
+
+            var httpContextMock = new Mock<HttpContextBase>();
+            var httpRequestMock = new Mock<HttpRequestBase>();
+            httpRequestMock.Setup(m => m.UrlReferrer).Returns(new Uri("http://www.helloworld.com"));
+            httpContextMock.SetupGet(c => c.Request).Returns(httpRequestMock.Object);
+
+            var urlHelperMock = new Mock<UrlHelper>();
+            urlHelperMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
+
+            var shortlistedApprenticeships = new List<ShortlistedApprenticeship>
+            {
+                new ShortlistedApprenticeship
+                {
+                    ApprenticeshipId = int.Parse(searchCriteria.FrameworkId),
+                    ProvidersIdAndLocation = new List<ShortlistedProvider>()
+                    {
+                        new ShortlistedProvider()
+                        {
+                            LocationId = int.Parse(searchCriteria.LocationId),
+                            ProviderId = searchCriteria.ProviderId
+                        }
+                    }
+                }
+            };
+
+            ProviderController controller = new ProviderControllerBuilder()
+                .SetupViewModelFactory(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()), stubProviderViewModel)
+                .SetupCookieCollection(x => x.GetAllItems(It.IsAny<string>()), shortlistedApprenticeships)
+                .WithUrl(urlHelperMock.Object)
+                .WithControllerHttpContext(httpContextMock.Object);
+
+            var result = controller.Detail(searchCriteria);
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult)result;
+
+            var viewmodel = viewResult.Model as ApprenticeshipDetailsViewModel;
+
+            viewmodel.IsShortlisted.Should().BeTrue();
+        }
+
+        [Test]
+        public void ShouldShowViewModelAsNotShortlistedIfProviderIsWithDifferentApprenticeship()
+        {
+            var searchCriteria = new ProviderLocationSearchCriteria
+            {
+                FrameworkId = "1",
+                LocationId = "2",
+                ProviderId = "3"
+            };
+
+            var stubProviderViewModel = new ApprenticeshipDetailsViewModel
+            {
+                Training = ApprenticeshipTrainingType.Framework,
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    Code = int.Parse(searchCriteria.FrameworkId)
+                }
+            };
+
+            var httpContextMock = new Mock<HttpContextBase>();
+            var httpRequestMock = new Mock<HttpRequestBase>();
+            httpRequestMock.Setup(m => m.UrlReferrer).Returns(new Uri("http://www.helloworld.com"));
+            httpContextMock.SetupGet(c => c.Request).Returns(httpRequestMock.Object);
+
+            var urlHelperMock = new Mock<UrlHelper>();
+            urlHelperMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
+
+            var shortlistedApprenticeships = new List<ShortlistedApprenticeship>
+            {
+                new ShortlistedApprenticeship
+                {
+                    ApprenticeshipId = 28738,
+                    ProvidersIdAndLocation = new List<ShortlistedProvider>()
+                    {
+                        new ShortlistedProvider()
+                        {
+                            LocationId = int.Parse(searchCriteria.LocationId),
+                            ProviderId = searchCriteria.ProviderId
+                        }
+                    }
+                }
+            };
+
+            ProviderController controller = new ProviderControllerBuilder()
+                .SetupViewModelFactory(x => x.GenerateDetailsViewModel(It.IsAny<ProviderLocationSearchCriteria>()), stubProviderViewModel)
+                .SetupCookieCollection(x => x.GetAllItems(It.IsAny<string>()), shortlistedApprenticeships)
+                .WithUrl(urlHelperMock.Object)
+                .WithControllerHttpContext(httpContextMock.Object);
+
+            var result = controller.Detail(searchCriteria);
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult)result;
+
+            var viewmodel = viewResult.Model as ApprenticeshipDetailsViewModel;
+
+            viewmodel.IsShortlisted.Should().BeFalse();
         }
     }
 }

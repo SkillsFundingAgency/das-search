@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
@@ -118,14 +119,14 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var shortlistedApprenticeships = _listCollection.GetAllItems(cookieListName);
 
-            foreach (var shortlistedApprenticeship in from shortlistedApprenticeship in shortlistedApprenticeships
-                from shortlistedProvider in
-                    shortlistedApprenticeship.ProvidersIdAndLocation.Where(
-                        shortlistedProvider => shortlistedProvider.ProviderId == criteria.ProviderId && shortlistedProvider.LocationId.ToString() == criteria.LocationId)
-                select shortlistedApprenticeship)
-            {
-                viewModel.IsShortlisted = true;
-            }
+            var apprenticeship = shortlistedApprenticeships?.SingleOrDefault(x =>
+                    x.ApprenticeshipId.Equals(viewModel.Apprenticeship.Code));
+
+            var isShortlisted = apprenticeship?.ProvidersIdAndLocation.Any(x =>
+                x.LocationId.ToString().Equals(criteria.LocationId, StringComparison.Ordinal) &&
+                x.ProviderId.Equals(criteria.ProviderId, StringComparison.Ordinal));
+
+            viewModel.IsShortlisted = isShortlisted.HasValue && isShortlisted.Value;
 
             return View(viewModel);
         }
