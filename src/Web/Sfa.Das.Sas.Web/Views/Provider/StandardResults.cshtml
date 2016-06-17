@@ -7,12 +7,19 @@
 }
 
 <main id="content" role="main">
+    @if (Model.Hits.Count() != 0)
+    {
+        <p class="small-btm-margin">
+            @Html.ActionLink("Find providers for a different postcode", "SearchForProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
+        </p>
+    }
     <div class="grid-row">
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
+                
                 <p>
                     @{
                         Html.RenderPartial("_StandardSearchResultMessage");
@@ -27,7 +34,8 @@
             <div class="editSearch">
                 @if (Model.Hits.Count() > 0 && !Model.HasError)
                 {
-                    <h2 class="heading-medium"><a href="#EditSearch">Edit search</a></h2>
+                    <h2 class="heading-medium"><a href="#EditSearch">Edit search</a>
+                    </h2>
                     <div id="EditSearch">
                         @FilterForm("filter-box")
                     </div>
