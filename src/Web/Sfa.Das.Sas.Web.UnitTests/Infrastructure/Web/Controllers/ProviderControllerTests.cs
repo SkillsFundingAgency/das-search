@@ -210,6 +210,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             var stubProviderViewModel = new ApprenticeshipDetailsViewModel
             {
                 Training = ApprenticeshipTrainingType.Framework,
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    Code = int.Parse(searchCriteria.FrameworkId)
+                }
             };
 
             var httpContextMock = new Mock<HttpContextBase>();
