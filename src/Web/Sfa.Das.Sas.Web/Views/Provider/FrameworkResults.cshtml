@@ -7,23 +7,26 @@
 }
 
 <main id="content" role="main">
+    @if (Model.Hits.Count() != 0)
+    {
+        <p class="small-btm-margin">
+            @Html.ActionLink("Find providers for a different postcode", "SearchForProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
+        </p>
+    }
     <div class="grid-row">
         <div class="column-two-thirds">
             <div class="hgroup">
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
-                @if (Model.Hits.Count() != 0)
-                {
-                    @Html.ActionLink("Find providers for a different postcode", "SearchForProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms }, new { @class = "new-postcode-search" })
-                }
+                
                 <p>
                     @{
                         Html.RenderPartial("_FrameworkSearchResultMessage");
                     }
                 </p>
             </div>
-            
+
         </div>
 
         <div class="column-third">
