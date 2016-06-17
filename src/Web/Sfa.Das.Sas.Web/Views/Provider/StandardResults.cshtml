@@ -13,6 +13,10 @@
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
+                @if (Model.Hits.Count() != 0)
+                {
+                    @Html.ActionLink("Find providers for a different postcode", "SearchForProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms }, new { @class = "new-postcode-search"})
+                }
                 <p>
                     @{
                         Html.RenderPartial("_StandardSearchResultMessage");
