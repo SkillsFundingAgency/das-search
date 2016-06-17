@@ -18,7 +18,6 @@
     {
         @GetShortlistItem(Model.Apprenticeships.OrderBy(m => m.Title));
     }
-
 </main>
 
 @helper DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
@@ -41,7 +40,18 @@
 @helper GetDeleteLink(IShortlistApprenticeshipViewModel model)
 {
     var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFramework";
-    @Html.ActionLink("Delete", method, "ShortList", new { id = model.Id }, new { @class = "delete-link", data_apprenticeship = model.Id, data_apprenticeship_type = method, rel = "nofollow" })
+    @Html.ActionLink(
+    "Delete",
+    method,
+    "ShortList",
+    new { id = model.Id },
+    new
+    {
+        @class = "delete-link",
+        data_apprenticeship = model.Id,
+        data_apprenticeship_type = method,
+        rel = "nofollow"
+    })
 }
 
 @helper GetShortlistItem(IEnumerable<IShortlistApprenticeshipViewModel> apprenticeships)
@@ -73,17 +83,53 @@
                                 <ol>
                                     <li class="provider-item">
                                         <span class="provider-title">
-                                            @Html.RenderAIfExists(provider.Name, provider.Url, "")
+                                            @Html.RenderAIfExists(provider.Name, provider.Url, string.Empty)
                                         </span>
                                         <span class="action">
-                                             @(apprenticeship is ShortlistStandardViewModel ? 
-                                                Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}) : 
-                                                Html.ActionLink("Delete", "RemoveFrameworkProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}))
+                                             @(apprenticeship is ShortlistStandardViewModel ?
+                                                Html.ActionLink(
+                                                    "Delete",
+                                                    "RemoveStandardProvider",
+                                                    "ShortList",
+                                                    new
+                                                    {
+                                                        apprenticeshipId = apprenticeship.Id,
+                                                        providerId = provider.Id,
+                                                        locationId = provider.LocationId
+                                                    },
+                                                    new
+                                                    {
+                                                        @class = "provider-delete-link",
+                                                        data_provider = provider.Id,
+                                                        data_apprenticeship = apprenticeship.Id,
+                                                        data_apprenticeship_type = "Standard",
+                                                        data_location = provider.LocationId,
+                                                        rel = "nofollow"
+                                                    }) :
+                                                Html.ActionLink(
+                                                    "Delete",
+                                                    "RemoveFrameworkProvider",
+                                                    "ShortList",
+                                                    new
+                                                    {
+                                                        apprenticeshipId = apprenticeship.Id,
+                                                        providerId = provider.Id,
+                                                        locationId = provider.LocationId
+                                                    },
+                                                    new
+                                                    {
+                                                        @class = "provider-delete-link",
+                                                        data_provider = provider.Id,
+                                                        data_apprenticeship = apprenticeship.Id,
+                                                        data_apprenticeship_type = "Framework",
+                                                        data_location = provider.LocationId,
+                                                        rel = "nofollow"
+                                                    }))
                                         </span>
                                     </li>
                                 </ol>
                             }
-                        </div>
+                        </div> 
                     }
                 </li>
             }

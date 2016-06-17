@@ -9,21 +9,22 @@
 
         dashboard.RefreshShortListDisplay = function ()
         {
-            if ($('.apprenticeship-items .apprenticeship-item').length === 0){
-                $('.shortlist').hide();
-                $('#empty-shortlist-message').removeClass("hidden");
+            if ($(".apprenticeship-items .apprenticeship-item").length === 0){
+                $(".shortlist").hide();
+                $("#empty-shortlist-message").removeClass("hidden");
             }
         };
     };
 
     dashboard.init = function () {
-        $('.delete-link').on('click', function (e) {
+        $(".delete-link").on("click", function (e) {
             e.preventDefault();
 
-            if ($(this).attr('data-apprenticeship-type') === "RemoveStandard") {
-                SearchAndShortlist.standard.Remove($(this).attr('data-apprenticeship'));
-            } else {
-                SearchAndShortlist.framework.Remove($(this).attr('data-apprenticeship'));
+            if ($(this).attr("data-apprenticeship-type") === "RemoveStandard") {
+                SearchAndShortlist.standard.Remove($(this).attr("data-apprenticeship"));
+            }
+            else {
+                SearchAndShortlist.framework.Remove($(this).attr("data-apprenticeship"));
             }
 
             var standardRow = $(this).closest(".apprenticeship-item");
@@ -33,17 +34,31 @@
             dashboard.RefreshShortListDisplay();
         });
 
-        $('.provider-delete-link').on('click', function (e) {
+        $(".provider-delete-link").on("click", function (e) {
             e.preventDefault();
 
-            SearchAndShortlist.provider.Remove(
-                $(this).attr('data-provider'),
-                $(this).attr('data-apprenticeship'),
-                $(this).attr('data-location'));
+            if ($(this).attr("data-apprenticeship-type") === "Standard") {
+                SearchAndShortlist.provider.RemoveStandardProvider(
+                 $(this).attr("data-provider"),
+                 $(this).attr("data-apprenticeship"),
+                 $(this).attr("data-location"));
+            }
+            else {
+                SearchAndShortlist.provider.RemoveFrameworkProvider(
+                 $(this).attr("data-provider"),
+                 $(this).attr("data-apprenticeship"),
+                 $(this).attr("data-location"));
+            }
+
+            var providers = $(this).closest(".providers");
 
             var providerRow = $(this).closest(".provider-item");
 
             dashboard.RemoveElement(providerRow);
+            
+            if (providers.find(".provider-item").length === 0) {
+                providers.hide();
+            }
 
             dashboard.RefreshShortListDisplay();
         });

@@ -839,14 +839,15 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove this training provider", 
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "remove"
+                    data_action = "remove",
+                    data_apprenticeship_type = "Framework"
                 }));
 
 
 #line default
 #line hidden
 
-#line 239 "..\..\Views\Provider\Detail.cshtml"
+#line 240 "..\..\Views\Provider\Detail.cshtml"
                   
         }
         else
@@ -856,7 +857,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove this training provider", 
 #line default
 #line hidden
 
-#line 243 "..\..\Views\Provider\Detail.cshtml"
+#line 244 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider", "AddFrameworkProvider", "ShortList",
                 new {apprenticeshipId, providerId, locationId},
                 new
@@ -866,18 +867,19 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "add"
+                    data_action = "add",
+                    data_apprenticeship_type = "Framework"
                 }));
 
 
 #line default
 #line hidden
 
-#line 253 "..\..\Views\Provider\Detail.cshtml"
+#line 255 "..\..\Views\Provider\Detail.cshtml"
                   
         }
     }
-    else if (Model.Training == ApprenticeshipTrainingType.Standard)
+    else
     {
         if (isShortlisted)
         {
@@ -886,7 +888,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider
 #line default
 #line hidden
 
-#line 260 "..\..\Views\Provider\Detail.cshtml"
+#line 262 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
                 new {apprenticeshipId, providerId, locationId},
                 new
@@ -895,14 +897,15 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove this training provider", 
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "remove"
+                    data_action = "remove",
+                    data_apprenticeship_type = "Standard"
                 }));
 
 
 #line default
 #line hidden
 
-#line 269 "..\..\Views\Provider\Detail.cshtml"
+#line 272 "..\..\Views\Provider\Detail.cshtml"
                   
         }
         else
@@ -912,7 +915,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove this training provider", 
 #line default
 #line hidden
 
-#line 273 "..\..\Views\Provider\Detail.cshtml"
+#line 276 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
                 new {apprenticeshipId, providerId, locationId},
                 new
@@ -922,14 +925,15 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "add"
+                    data_action = "add",
+                    data_apprenticeship_type = "Standard"
                 }));
 
 
 #line default
 #line hidden
 
-#line 283 "..\..\Views\Provider\Detail.cshtml"
+#line 287 "..\..\Views\Provider\Detail.cshtml"
                   
         }
     }
@@ -939,7 +943,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist this training provider
 #line hidden
 });
 
-#line 286 "..\..\Views\Provider\Detail.cshtml"
+#line 290 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden

@@ -235,7 +235,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "remove"
+                    data_action = "remove",
+                    data_apprenticeship_type = "Framework"
                 })
         }
         else
@@ -249,11 +250,12 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "add"
+                    data_action = "add",
+                    data_apprenticeship_type = "Framework"
                 })
         }
     }
-    else if (Model.Training == ApprenticeshipTrainingType.Standard)
+    else
     {
         if (isShortlisted)
         {
@@ -265,7 +267,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "remove"
+                    data_action = "remove",
+                    data_apprenticeship_type = "Standard"
                 })
         }
         else
@@ -279,7 +282,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                     data_apprenticeship = apprenticeshipId,
                     data_provider = providerId,
                     data_location = locationId,
-                    data_action = "add"
+                    data_action = "add",
+                    data_apprenticeship_type = "Standard"
                 })
         }
     }

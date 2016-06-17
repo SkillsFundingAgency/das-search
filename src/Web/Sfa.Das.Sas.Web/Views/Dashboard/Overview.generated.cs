@@ -46,14 +46,14 @@ namespace Sfa.Das.Sas.Web.Views.Dashboard
     public partial class Overview : System.Web.Mvc.WebViewPage<DashboardViewModel>
     {
 
-#line 24 "..\..\Views\Dashboard\Overview.cshtml"
+#line 23 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult DisplayEmptyShortlistMessage(DashboardViewModel viewModel)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 25 "..\..\Views\Dashboard\Overview.cshtml"
+#line 24 "..\..\Views\Dashboard\Overview.cshtml"
  
     var emptyMessageClasses = viewModel.Apprenticeships.IsNullOrEmpty() ? string.Empty : "hidden";
 
@@ -65,15 +65,15 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"empty-shortlist-message\"");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 666), Tuple.Create("\"", 701)
-, Tuple.Create(Tuple.Create("", 674), Tuple.Create("notice", 674), true)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 664), Tuple.Create("\"", 699)
+, Tuple.Create(Tuple.Create("", 672), Tuple.Create("notice", 672), true)
 
-#line 28 "..\..\Views\Dashboard\Overview.cshtml"
-, Tuple.Create(Tuple.Create(" ", 680), Tuple.Create<System.Object, System.Int32>(emptyMessageClasses
+#line 27 "..\..\Views\Dashboard\Overview.cshtml"
+, Tuple.Create(Tuple.Create(" ", 678), Tuple.Create<System.Object, System.Int32>(emptyMessageClasses
 
 #line default
 #line hidden
-, 681), false)
+, 679), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        You have no apprenticeship training shortlisted.&nbsp;\r\n");
@@ -81,7 +81,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        You have no apprenticeship t
 WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 30 "..\..\Views\Dashboard\Overview.cshtml"
+#line 29 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Search for apprenticeship training", "Search", "Apprenticeship"));
 
 
@@ -90,26 +90,26 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Search for apprenticeship traini
 WriteLiteralTo(__razor_helper_writer, "\r\n    </p>\r\n");
 
 
-#line 32 "..\..\Views\Dashboard\Overview.cshtml"
+#line 31 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 32 "..\..\Views\Dashboard\Overview.cshtml"
+#line 31 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 34 "..\..\Views\Dashboard\Overview.cshtml"
+#line 33 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult GetLink(IShortlistApprenticeshipViewModel model)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 35 "..\..\Views\Dashboard\Overview.cshtml"
+#line 34 "..\..\Views\Dashboard\Overview.cshtml"
  
     var method = model is ShortlistStandardViewModel ? "Standard" : "Framework";
     var apprenticeshipName = $"{model.Title}, level {model.Level}";
@@ -118,14 +118,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-#line 38 "..\..\Views\Dashboard\Overview.cshtml"
+#line 37 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink(apprenticeshipName, method, "Apprenticeship", new { id = model.Id }, null));
 
 
 #line default
 #line hidden
 
-#line 38 "..\..\Views\Dashboard\Overview.cshtml"
+#line 37 "..\..\Views\Dashboard\Overview.cshtml"
                                                                                                
 
 
@@ -133,19 +133,19 @@ WriteTo(__razor_helper_writer, Html.ActionLink(apprenticeshipName, method, "Appr
 #line hidden
 });
 
-#line 39 "..\..\Views\Dashboard\Overview.cshtml"
+#line 38 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 41 "..\..\Views\Dashboard\Overview.cshtml"
+#line 40 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult GetDeleteLink(IShortlistApprenticeshipViewModel model)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 42 "..\..\Views\Dashboard\Overview.cshtml"
+#line 41 "..\..\Views\Dashboard\Overview.cshtml"
  
     var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFramework";
     
@@ -153,34 +153,45 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-#line 44 "..\..\Views\Dashboard\Overview.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Delete", method, "ShortList", new { id = model.Id }, new { @class = "delete-link", data_apprenticeship = model.Id, data_apprenticeship_type = method, rel = "nofollow" }));
+#line 43 "..\..\Views\Dashboard\Overview.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink(
+    "Delete",
+    method,
+    "ShortList",
+    new { id = model.Id },
+    new
+    {
+        @class = "delete-link",
+        data_apprenticeship = model.Id,
+        data_apprenticeship_type = method,
+        rel = "nofollow"
+    }));
 
 
 #line default
 #line hidden
 
-#line 44 "..\..\Views\Dashboard\Overview.cshtml"
-                                                                                                                                                                                               
+#line 54 "..\..\Views\Dashboard\Overview.cshtml"
+      
 
 
 #line default
 #line hidden
 });
 
-#line 45 "..\..\Views\Dashboard\Overview.cshtml"
+#line 55 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
 
-#line 47 "..\..\Views\Dashboard\Overview.cshtml"
+#line 57 "..\..\Views\Dashboard\Overview.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistItem(IEnumerable<IShortlistApprenticeshipViewModel> apprenticeships)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 48 "..\..\Views\Dashboard\Overview.cshtml"
+#line 58 "..\..\Views\Dashboard\Overview.cshtml"
  
 
 
@@ -201,13 +212,13 @@ WriteLiteralTo(__razor_helper_writer, " class=\"apprenticeship-items\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
-#line 55 "..\..\Views\Dashboard\Overview.cshtml"
+#line 65 "..\..\Views\Dashboard\Overview.cshtml"
             
 
 #line default
 #line hidden
 
-#line 55 "..\..\Views\Dashboard\Overview.cshtml"
+#line 65 "..\..\Views\Dashboard\Overview.cshtml"
              foreach (var apprenticeship in apprenticeships)
             {
 
@@ -227,7 +238,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                        ");
 
 
-#line 59 "..\..\Views\Dashboard\Overview.cshtml"
+#line 69 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, GetLink(apprenticeship));
 
 
@@ -242,7 +253,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                        ");
 
 
-#line 62 "..\..\Views\Dashboard\Overview.cshtml"
+#line 72 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, GetDeleteLink(apprenticeship));
 
 
@@ -251,13 +262,13 @@ WriteTo(__razor_helper_writer, GetDeleteLink(apprenticeship));
 WriteLiteralTo(__razor_helper_writer, "\r\n                    </span>\r\n");
 
 
-#line 64 "..\..\Views\Dashboard\Overview.cshtml"
+#line 74 "..\..\Views\Dashboard\Overview.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 64 "..\..\Views\Dashboard\Overview.cshtml"
+#line 74 "..\..\Views\Dashboard\Overview.cshtml"
                      if (apprenticeship.Providers.Any())
                     {
 
@@ -276,13 +287,13 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                                Trai
 "  </h3>\r\n");
 
 
-#line 71 "..\..\Views\Dashboard\Overview.cshtml"
+#line 81 "..\..\Views\Dashboard\Overview.cshtml"
                             
 
 #line default
 #line hidden
 
-#line 71 "..\..\Views\Dashboard\Overview.cshtml"
+#line 81 "..\..\Views\Dashboard\Overview.cshtml"
                              foreach (var provider in apprenticeship.Providers.OrderBy(m => m.Name))
                             {
 
@@ -302,8 +313,8 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                                            ");
 
 
-#line 76 "..\..\Views\Dashboard\Overview.cshtml"
-              WriteTo(__razor_helper_writer, Html.RenderAIfExists(provider.Name, provider.Url, ""));
+#line 86 "..\..\Views\Dashboard\Overview.cshtml"
+              WriteTo(__razor_helper_writer, Html.RenderAIfExists(provider.Name, provider.Url, string.Empty));
 
 
 #line default
@@ -318,10 +329,46 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                                             ");
 
 
-#line 79 "..\..\Views\Dashboard\Overview.cshtml"
-                WriteTo(__razor_helper_writer, apprenticeship is ShortlistStandardViewModel ? 
-                                                Html.ActionLink("Delete", "RemoveStandardProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}) : 
-                                                Html.ActionLink("Delete", "RemoveFrameworkProvider", "ShortList", new {apprenticeshipId = apprenticeship.Id, providerId = provider.Id, locationId = provider.LocationId}, new {@class = "provider-delete-link", data_provider = provider.Id, data_apprenticeship = apprenticeship.Id, data_location = provider.LocationId, rel = "nofollow"}));
+#line 89 "..\..\Views\Dashboard\Overview.cshtml"
+                WriteTo(__razor_helper_writer, apprenticeship is ShortlistStandardViewModel ?
+                                                Html.ActionLink(
+                                                    "Delete",
+                                                    "RemoveStandardProvider",
+                                                    "ShortList",
+                                                    new
+                                                    {
+                                                        apprenticeshipId = apprenticeship.Id,
+                                                        providerId = provider.Id,
+                                                        locationId = provider.LocationId
+                                                    },
+                                                    new
+                                                    {
+                                                        @class = "provider-delete-link",
+                                                        data_provider = provider.Id,
+                                                        data_apprenticeship = apprenticeship.Id,
+                                                        data_apprenticeship_type = "Standard",
+                                                        data_location = provider.LocationId,
+                                                        rel = "nofollow"
+                                                    }) :
+                                                Html.ActionLink(
+                                                    "Delete",
+                                                    "RemoveFrameworkProvider",
+                                                    "ShortList",
+                                                    new
+                                                    {
+                                                        apprenticeshipId = apprenticeship.Id,
+                                                        providerId = provider.Id,
+                                                        locationId = provider.LocationId
+                                                    },
+                                                    new
+                                                    {
+                                                        @class = "provider-delete-link",
+                                                        data_provider = provider.Id,
+                                                        data_apprenticeship = apprenticeship.Id,
+                                                        data_apprenticeship_type = "Framework",
+                                                        data_location = provider.LocationId,
+                                                        rel = "nofollow"
+                                                    }));
 
 
 #line default
@@ -330,16 +377,16 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                                     
 "      </li>\r\n                                </ol>\r\n");
 
 
-#line 85 "..\..\Views\Dashboard\Overview.cshtml"
+#line 131 "..\..\Views\Dashboard\Overview.cshtml"
                             }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                        </div>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                        </div> \r\n");
 
 
-#line 87 "..\..\Views\Dashboard\Overview.cshtml"
+#line 133 "..\..\Views\Dashboard\Overview.cshtml"
                     }
 
 
@@ -348,7 +395,7 @@ WriteLiteralTo(__razor_helper_writer, "                        </div>\r\n");
 WriteLiteralTo(__razor_helper_writer, "                </li>\r\n");
 
 
-#line 89 "..\..\Views\Dashboard\Overview.cshtml"
+#line 135 "..\..\Views\Dashboard\Overview.cshtml"
             }
 
 
@@ -357,14 +404,14 @@ WriteLiteralTo(__razor_helper_writer, "                </li>\r\n");
 WriteLiteralTo(__razor_helper_writer, "        </ol>\r\n    </div>\r\n");
 
 
-#line 92 "..\..\Views\Dashboard\Overview.cshtml"
+#line 138 "..\..\Views\Dashboard\Overview.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 92 "..\..\Views\Dashboard\Overview.cshtml"
+#line 138 "..\..\Views\Dashboard\Overview.cshtml"
 }
 #line default
 #line hidden
@@ -445,7 +492,7 @@ WriteLiteral("\r\n\r\n    \r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n</main>\r\n\r\n");
+WriteLiteral("</main>\r\n\r\n");
 
 WriteLiteral("\r\n");
 
