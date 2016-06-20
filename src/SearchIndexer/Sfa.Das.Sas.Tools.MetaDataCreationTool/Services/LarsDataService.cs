@@ -1,32 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Infrastructure;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
-using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
-    using System;
-
     public sealed class LarsDataService : ILarsDataService
     {
         private readonly IReadStandardsFromCsv _csvService;
-
         private readonly IUnzipStream _fileExtractor;
-
         private readonly IAngleSharpService _angleSharpService;
-
         private readonly IHttpGet _httpGet;
-
         private readonly IHttpGetFile _httpGetFile;
-
         private readonly ILog _logger;
-
         private readonly IAppServiceSettings _appServiceSettings;
 
         public LarsDataService(
@@ -55,7 +47,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             var zipStream = _httpGetFile.GetFile(zipFilePath);
             _logger.Debug("Zip file downloaded");
 
-            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileName);
+            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameStandards);
             _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
 
             var standards = _csvService.ReadStandardsFromStream(fileContent);
@@ -70,11 +62,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
             var zipStream = _httpGetFile.GetFile(zipFilePath);
 
-            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, "Framework.csv");
+            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameFrameworks);
 
-            var standards = _csvService.ReadFrameworksFromStream(fileContent);
-
-            return standards;
+            return _csvService.ReadFrameworksFromStream(fileContent);
         }
 
         private string GetZipFilePath()

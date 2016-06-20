@@ -14,7 +14,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         public string VstsGitStandardsFolderPath => _settings.GetSetting("VstsGitStandardsFolderPath");
 
-        public string CsvFileName => _settings.GetSetting("CsvFileName");
+        public string CsvFileNameStandards => _settings.GetSetting("CsvFileNameStandards");
+
+        public string CsvFileNameFrameworks => _settings.GetSetting("CsvFileNameFrameworks");
 
         public string EnvironmentName => _settings.GetSetting("EnvironmentName");
 

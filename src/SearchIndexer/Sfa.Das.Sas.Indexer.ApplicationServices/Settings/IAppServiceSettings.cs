@@ -4,7 +4,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 {
     public interface IAppServiceSettings
     {
-        string CsvFileName { get; }
+        string CsvFileNameStandards { get; }
+
+        string CsvFileNameFrameworks { get; }
 
         string GitUsername { get; }
 

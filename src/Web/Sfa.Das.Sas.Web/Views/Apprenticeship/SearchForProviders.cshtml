@@ -37,7 +37,8 @@
                         </label>
                         <div class="form-group">
                             <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
-                            <input type="search" name="PostCode" value="@Model.SearchTerms" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                            <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
+                            <input type="search" name="PostCode" value="@Model.PostCode" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
                         </div>
                         <input class="button margin-top-x2 postcode-search-button" type="submit" value="Find">
                     </div>

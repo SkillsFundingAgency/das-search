@@ -650,5 +650,68 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetHtmlElement(html, ".filter-box").Should().BeNull();
         }
+
+        [Test]
+        public void WhenSearchResultHasResultsShouldShowNewSearchLink()
+        {
+            var detail = new FrameworkResults();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkName = "Test framework name",
+                Hits = new List<FrameworkProviderResultItemViewModel>()
+                {
+                    new FrameworkProviderResultItemViewModel()
+                },
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel()
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".new-postcode-search").Should().NotBeNull();
+            GetPartial(html, ".new-postcode-search").Should().Be("Find providers for a different postcode");
+        }
+
+        [Test]
+        public void WhenSearchResultHasNoResultsShouldNotShowNewSearchLink()
+        {
+            var detail = new FrameworkResults();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkName = "Test framework name",
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel()
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".new-postcode-search").Should().BeNull();
+            GetPartial(html, ".new-postcode-search").Should().BeEmpty();
+        }
     }
 }

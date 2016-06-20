@@ -21,11 +21,11 @@
 
         <div class="column-third">
             <div class="related-container">
-                <aside class="hidden-for-tablet">
+                <aside class="hidden-for-mobile-tablet">
 
                     <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                         <i class="fa fa-search" aria-hidden="true"></i>
-                        Find training Providers
+                        Find training providers
                     </a>
                     @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
                 </aside>
@@ -67,7 +67,7 @@
             <div id="bottom-actions">
                 <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                    Find training Providers
+                    Find training providers
                 </a>
                 @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
             </div>

@@ -65,7 +65,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 PathwayName = frameworkMetaData.PathwayName,
                 Level = MapLevelProgType(frameworkMetaData.ProgType),
                 JobRoleItems = frameworkMetaData.JobRoleItems?.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
-                TypicalLength = frameworkMetaData.TypicalLength
+                TypicalLength = frameworkMetaData.TypicalLength,
+                ExpiryDate = frameworkMetaData.EffectiveTo
             };
             return doc;
         }

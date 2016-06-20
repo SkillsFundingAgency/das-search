@@ -473,7 +473,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test standard name",
-                Hits = new List<ProviderResultItemViewModel>(),
+                Hits = new List<ProviderResultItemViewModel>() { new ProviderResultItemViewModel() },
                 ActualPage = 1,
                 LastPage = 1,
                 ResultsToTake = 10,
@@ -496,7 +496,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
-        public void WhenSearchResultHasNoResultButDeliveryModeHasResultsShouldShowFilterBox()
+        public void WhenSearchResultHasNoResultButDeliveryModeHasResultsShouldNotShowFilterBox()
         {
             var detail = new StandardResults();
             var model = new ProviderStandardSearchResultViewModel
@@ -524,7 +524,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetHtmlElement(html, ".filter-box").Should().NotBeNull();
+            GetHtmlElement(html, ".filter-box").Should().BeNull();
         }
 
         [Test]
@@ -554,6 +554,69 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetHtmlElement(html, ".filter-box").Should().BeNull();
+        }
+
+        [Test]
+        public void WhenSearchResultHasResultsShouldShowNewSearchLink()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>()
+                {
+                    new ProviderResultItemViewModel()
+                },
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel()
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".new-postcode-search").Should().NotBeNull();
+            GetPartial(html, ".new-postcode-search").Should().Be("Find providers for a different postcode");
+        }
+
+        [Test]
+        public void WhenSearchResultHasNoResultsShouldNotShowNewSearchLink()
+        {
+            var detail = new StandardResults();
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 0,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test standard name",
+                Hits = new List<ProviderResultItemViewModel>(),
+                ActualPage = 1,
+                LastPage = 1,
+                ResultsToTake = 10,
+                PostCode = "Test postcode",
+                DeliveryModes = new List<DeliveryModeViewModel>
+                {
+                    new DeliveryModeViewModel()
+                },
+                HasError = false,
+                TotalProvidersCountry = 3,
+                AbsolutePath = "www.abba.co.uk"
+            };
+
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".new-postcode-search").Should().BeNull();
+            GetPartial(html, ".new-postcode-search").Should().BeEmpty();
         }
     }
 }

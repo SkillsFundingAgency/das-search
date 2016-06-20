@@ -1,5 +1,7 @@
 ﻿namespace Sfa.Das.Sas.Core.Domain.Model
 {
+    using System;
+
     public sealed class Framework
     {
         public int FrameworkId { get; set; }
@@ -17,5 +19,7 @@
         public int Level { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
+
+        public DateTime? ExpiryDate { get; set; }
     }
 }

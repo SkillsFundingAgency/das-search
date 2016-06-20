@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             var mockLarsDataService = new Mock<ILarsDataService>();
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
-                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
+                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             var mockLarsDataService = new Mock<ILarsDataService>();
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
-                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
+                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
@@ -88,7 +88,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             var mockLarsDataService = new Mock<ILarsDataService>();
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
-                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 399, PwayCode = 1, ProgType = 3 } });
+                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 399, PwayCode = 1, ProgType = 3 } });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
@@ -104,7 +104,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData>
                         {
-                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 0, ProgType = 20 }
+                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 0, ProgType = 20 }
                         });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
@@ -121,7 +121,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData>
                         {
-                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 16 }
+                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 16 }
                         });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
@@ -140,7 +140,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                         new FrameworkMetaData
                             {
                                 EffectiveFrom = DateTime.MinValue, // Not valid
-                                EffectiveTo = DateTime.MinValue,
+                                EffectiveTo = null,
                                 FworkCode = 500,
                                 PwayCode = 1,
                                 ProgType = 21
@@ -161,7 +161,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData>
                         {
-                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 21 }
+                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                         });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
@@ -184,7 +184,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData>
                         {
-                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = DateTime.MinValue, FworkCode = 500, PwayCode = 1, ProgType = 21 }
+                            new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                         });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);

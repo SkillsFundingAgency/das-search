@@ -150,3 +150,29 @@ aside h2:first-child {
         margin-left: 40px;
     }
 }
+
+.expire-date{
+    padding: 10px 0;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+    > div i, span{
+        vertical-align: middle;
+    }
+    > div{
+        display: inline;
+    }
+    i{
+        font-size: 40px;
+        padding: 5px 12px 5px 0;
+    }
+    span.icon{
+        margin: auto auto;
+        font-family: serif;
+        font-size: 1.7em;
+        font-weight: bold;
+        line-height: 25px;
+        padding: 0 8px;
+    }
+}

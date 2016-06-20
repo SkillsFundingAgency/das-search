@@ -13,7 +13,6 @@
 
         if ($('html.js').length) {
             var width = screen.width;
-            console.log( 'screen width: ' + width );
             if (width < 641) {
                 $('.editSearch').addClass('folded');
             }
@@ -25,7 +24,7 @@
                 $('.editSearch').toggleClass('folded');
             }
             e.preventDefault();
-        })
+        });
 
     };
 
