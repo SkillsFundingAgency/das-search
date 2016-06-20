@@ -4,6 +4,9 @@
     ViewBag.Title = "Search Results";
 }
 <main id="content" role="main">
+    <p class="small-btm-margin">
+        @Html.ActionLink("Start a new search", "Search", "Apprenticeship", new { }, new { @class = "link-back new-apprenticeship-search" })
+    </p>
     <div class="grid-row">
         <div class="column-two-thirds">
             <div class="hgroup">
@@ -21,25 +24,27 @@
     </div>
     <div class="grid-row">
 
-@if (!Model.HasError && Model.TotalResults > 0)
-{
-        <div class="column-one-third">
-            <div class="editSearch">
-                <h2 class="heading-medium"><a href="#EditSearch">Edit search</a></h2>
-                <div id="EditSearch">
-                    @FilterForm("filter-box")
+        @if (!Model.HasError && Model.TotalResults > 0)
+        {
+            <div class="column-one-third">
+                <div class="editSearch">
+                    <h2 class="heading-medium">
+                        <a href="#EditSearch">Edit search</a>
+                    </h2>
+                    <div id="EditSearch">
+                        @FilterForm("filter-box")
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="apprenticeship-results"  class="column-two-thirds">
+            <div id="apprenticeship-results" class="column-two-thirds">
                 <form method="GET" id="search-results-order">
-                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                    <input type="hidden" name="page" value="@Model.ActualPage" />
-                    <input type="hidden" name="take" value="@Model.ResultsToTake" />
+                    <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
+                    <input type="hidden" name="page" value="@Model.ActualPage"/>
+                    <input type="hidden" name="take" value="@Model.ResultsToTake"/>
                     @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
                     {
-                        <input type="hidden" name="SelectedLevels" value="@level.Value" />
+                        <input type="hidden" name="SelectedLevels" value="@level.Value"/>
                     }
                     <div class="form-block">
                         <label for="select-order">Sort by</label>
@@ -51,34 +56,34 @@
                         <button type="submit" value="Sort" class="button">Sort</button>
                     </div>
                 </form>
-           
 
-            @foreach (var item in Model.Results)
-            {
-                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
-                    <header>
-                        @if (item.StandardId != 0)
-                        {
-                            @GetStandardTitle(item)
-                        }
-                        else
-                        {
-                            @GetFrameworkTitle(item)
-                        }
-                    </header>
-                    <dl class="result-data-list">
-                        @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                        @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
-                    </dl>
-                </article>
-            }
 
-            <div class="page-navigation">
-                @GetPaginationBackLink()
-                @GetPaginationNextLink()
+                @foreach (var item in Model.Results)
+                {
+                    <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
+                        <header>
+                            @if (item.StandardId != 0)
+                            {
+                                @GetStandardTitle(item)
+                            }
+                            else
+                            {
+                                @GetFrameworkTitle(item)
+                            }
+                        </header>
+                        <dl class="result-data-list">
+                            @GetApprenticeshipDetailItem("Level:", "level", item.Level)
+                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                        </dl>
+                    </article>
+                }
+
+                <div class="page-navigation">
+                    @GetPaginationBackLink()
+                    @GetPaginationNextLink()
+                </div>
             </div>
-        </div>
-}
+        }
 
     </div>
 </main>

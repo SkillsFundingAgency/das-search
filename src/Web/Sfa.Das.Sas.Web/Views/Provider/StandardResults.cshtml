@@ -34,7 +34,8 @@
             <div class="editSearch">
                 @if (Model.Hits.Count() > 0 && !Model.HasError)
                 {
-                    <h2 class="heading-medium"><a href="#EditSearch">Edit search</a>
+                    <h2 class="heading-medium">
+                        <a href="#EditSearch">Edit search</a>
                     </h2>
                     <div id="EditSearch">
                         @FilterForm("filter-box")
