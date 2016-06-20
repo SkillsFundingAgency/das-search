@@ -25,10 +25,15 @@
 {
         <div class="column-one-third">
             <div class="editSearch">
-                <h2 class="heading-medium"><a href="#EditSearch">Edit search</a></h2>
-                <div id="EditSearch">
-                    @FilterForm("filter-box")
-                </div>
+                @if (Model.TotalResults > 0)
+                {
+                    <h2 class="heading-medium">
+                        <a href="#EditSearch">Edit search</a>
+                    </h2>
+                    <div id="EditSearch">
+                        @FilterForm("filter-box")
+                    </div>
+                }
             </div>
         </div>
 

@@ -473,5 +473,23 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             GetAttribute(html, ".column-one-third form ul li input", "checked", 2).Should().Be(string.Empty);
             GetPartial(html, ".column-one-third form ul li label", 2).Should().Be("Level 2 (500)");
         }
+
+        [Test]
+        public void WhenTotalResultsAreZeroShouldNotShowFilterBox()
+        {
+            var searchPage = new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 0,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>(),
+                AggregationLevel = aggList
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetHtmlElement(html, ".editSearch").Should().BeNull();
+        }
     }
 }
