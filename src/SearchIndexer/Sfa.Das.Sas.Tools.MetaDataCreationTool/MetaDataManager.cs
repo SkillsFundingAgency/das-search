@@ -14,45 +14,52 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 {
+    using Sfa.Das.Sas.Indexer.Core.Extensions;
+
     public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData, IGetFrameworkMetaData
     {
         private readonly IAppServiceSettings _appServiceSettings;
-
-        private readonly IJsonMetaDataConvert _jsonMetaDataConvert;
 
         private readonly ILarsDataService _larsDataService;
 
         private readonly ILog _logger;
 
+        private readonly IAngleSharpService _angleSharpService;
+
         private readonly IVstsService _vstsService;
 
-        public MetaDataManager(ILarsDataService larsDataService, IVstsService vstsService, IAppServiceSettings appServiceSettings, IJsonMetaDataConvert jsonMetaDataConvert, ILog logger)
+        public MetaDataManager(
+            ILarsDataService larsDataService,
+            IVstsService vstsService,
+            IAppServiceSettings appServiceSettings,
+            IAngleSharpService angleSharpService,
+            ILog logger)
         {
             _larsDataService = larsDataService;
             _vstsService = vstsService;
             _appServiceSettings = appServiceSettings;
-            _jsonMetaDataConvert = jsonMetaDataConvert;
             _logger = logger;
+            _angleSharpService = angleSharpService;
         }
 
         public void GenerateStandardMetadataFiles()
         {
-            var currentStandards = _larsDataService.GetListOfCurrentStandards();
-            _logger.Info($"Got {currentStandards.Count()} 'Ready for delivery' standards from LARS data.");
+            var currentMetaDataIds = _vstsService.GetExistingStandardIds().ToArray();
 
-            var currentMetaDataIds = _vstsService.GetExistingStandardIds();
-            _logger.Info($"Got {currentMetaDataIds.Count()} current meta data files Git Repository.");
+            var standards = _larsDataService
+                .GetListOfCurrentStandards()
+                .Select(MapStandardData)
+                .Where(m => !currentMetaDataIds.Contains($"{m.Id}"))
+                .ToArray();
 
-            var missingStandards = DetermineMissingMetaData(currentStandards, currentMetaDataIds);
-
-            PushStandardsToGit(missingStandards);
-            _logger.Info($"Pushed {missingStandards.Count} new meta files to Git Repository.");
+            PushStandardsToGit(standards.Select(MapToFileContent).ToList());
         }
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var standardsMetaDataJson = _vstsService.GetStandards();
-            return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsMetaDataJson);
+            var standards = _vstsService.GetStandards();
+            UpdateStandardsInformationFromLars(standards);
+            return standards.ToList();
         }
 
         public List<FrameworkMetaData> GetAllFrameworks()
@@ -60,6 +67,14 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             var filteredFrameworks = FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
             UpdateFrameworkInformation(filteredFrameworks);
             return filteredFrameworks;
+        }
+
+        private FileContents MapToFileContent(StandardRepositoryData standardRepositoryData)
+        {
+            var json = JsonConvert.SerializeObject(standardRepositoryData, Formatting.Indented);
+            var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standardRepositoryData.Title, (current, c) => current.Replace(c, '_')).Replace(" ", string.Empty);
+            var gitFilePath = $"{_appServiceSettings.VstsGitStandardsFolderPath}/{standardRepositoryData.Id}-{standardTitle}.json";
+            return new FileContents(gitFilePath, json);
         }
 
         private void UpdateFrameworkInformation(List<FrameworkMetaData> frameworks)
@@ -80,19 +95,54 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             }
         }
 
-        private List<FileContents> DetermineMissingMetaData(IEnumerable<Standard> currentStandards, IEnumerable<string> currentMetaDataIds)
+        private void UpdateStandardsInformationFromLars(IEnumerable<StandardMetaData> standards)
         {
-            var missingStandards = new List<FileContents>();
+            var currentStandards = _larsDataService.GetListOfCurrentStandards().ToArray();
 
-            foreach (var standard in currentStandards.Where(m => !currentMetaDataIds.Contains($"{m.Id}")))
+            foreach (var standard in standards)
             {
-                var json = JsonConvert.SerializeObject(standard, Formatting.Indented);
-                var standardTitle = Path.GetInvalidFileNameChars().Aggregate(standard.Title, (current, c) => current.Replace(c, '_')).Replace(" ", string.Empty);
-                var gitFilePath = $"{_appServiceSettings.VstsGitStandardsFolderPath}/{standard.Id}-{standardTitle}.json";
-                missingStandards.Add(new FileContents(gitFilePath, json));
+                var standardFromLars = currentStandards.SingleOrDefault(m => m.Id.Equals(standard.Id));
+                if (standardFromLars != null)
+                {
+                    standard.NotionalEndLevel = standardFromLars.NotionalEndLevel;
+                    standard.StandardPdfUrl = GetLinkUri(standardFromLars.StandardUrl, "Apprenticeship");
+                    standard.AssessmentPlanPdfUrl = GetLinkUri(standardFromLars.StandardUrl, "Assessment");
+                }
+            }
+        }
+
+        private string GetLinkUri(string link, string linkTitle)
+        {
+            if (string.IsNullOrEmpty(link))
+            {
+                return string.Empty;
             }
 
-            return missingStandards;
+            var uri = _angleSharpService.GetLinks(link.RemoveQuotationMark(), ".attachment-details h2 a", linkTitle)?.FirstOrDefault();
+            if (uri != null)
+            {
+                return new Uri(new Uri("https://www.gov.uk"), uri).ToString();
+            }
+
+            return string.Empty;
+        }
+
+        private StandardRepositoryData MapStandardData(LarsStandard larsStandard)
+        {
+            var standardRepositoryData = new StandardRepositoryData
+            {
+                Id = larsStandard.Id,
+                Title = larsStandard.Title,
+                JobRoles = new List<string>(),
+                Keywords = new List<string>(),
+                TypicalLength = new TypicalLength { Unit = "m" },
+                OverviewOfRole = string.Empty,
+                EntryRequirements = string.Empty,
+                WhatApprenticesWillLearn = string.Empty,
+                Qualifications = string.Empty,
+                ProfessionalRegistration = string.Empty
+            };
+            return standardRepositoryData;
         }
 
         private void PushStandardsToGit(List<FileContents> standards)
@@ -100,6 +150,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             if (standards.Any())
             {
                 _vstsService.PushCommit(standards);
+                _logger.Info($"Pushed {standards.Count} new meta files to Git Repository.");
             }
         }
 

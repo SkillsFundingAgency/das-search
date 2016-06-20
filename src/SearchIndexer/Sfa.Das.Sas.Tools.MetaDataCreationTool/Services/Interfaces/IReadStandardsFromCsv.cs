@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces
 {
     public interface IReadStandardsFromCsv
     {
-        List<Standard> ReadStandardsFromStream(string csvFile);
+        List<LarsStandard> ReadStandardsFromStream(string csvFile);
 
         List<FrameworkMetaData> ReadFrameworksFromStream(string csvFile);
     }

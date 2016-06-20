@@ -17,6 +17,11 @@ namespace Sfa.Das.Sas.Indexer.Core.Extensions
 
         public static string RemoveQuotationMark(this string self)
         {
+            if (self == null)
+            {
+                return string.Empty;
+            }
+
             return self.Replace("\"", string.Empty);
         }
     }

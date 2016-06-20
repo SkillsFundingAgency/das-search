@@ -34,16 +34,14 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 JobRoles = standard.JobRoles,
                 Keywords = standard.Keywords,
                 Level = standard.NotionalEndLevel,
-                PdfFileName = standard.PdfFileName,
                 StandardPdf = standard.StandardPdfUrl,
                 AssessmentPlanPdf = standard.AssessmentPlanPdfUrl,
                 TypicalLength = standard.TypicalLength,
-                IntroductoryText = standard.IntroductoryText,
                 OverviewOfRole = standard.OverviewOfRole,
                 EntryRequirements = standard.EntryRequirements,
                 WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
                 Qualifications = standard.Qualifications,
-                ProfessionalRegistration = standard.ProfessionalRegistration,
+                ProfessionalRegistration = standard.ProfessionalRegistration
             };
 
             return doc;

@@ -102,7 +102,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                 Id = 61,
                 Title = "Dental Nurse",
                 NotionalEndLevel = 3,
-                PdfFileName = "61-Apprenticeship standard for a dental nurse",
                 StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf"
             };
 
@@ -209,7 +208,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                {
                                    Id = 1,
                                    Title = "Network Engineer",
-                                   PdfFileName = "1-Apprenticeship standard for a network engineer",
                                    StandardPdfUrl =
                                        "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/370682/DI_-_Network_engineer_standard.ashx.pdf"
                                },
@@ -217,7 +215,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                {
                                    Id = 2,
                                    Title = "Software Developer",
-                                   PdfFileName = "2-Apprenticeship standard for a software developer",
                                    StandardPdfUrl =
                                        "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/371867/Digital_Industries_-_Software_Developer.pdf"
                                },
@@ -226,7 +223,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                    Id = 61,
                                    Title = "Dental Nurse",
                                    NotionalEndLevel = 3,
-                                   PdfFileName = "61-Apprenticeship standard for a dental nurse",
                                    StandardPdfUrl = "https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/411720/DENTAL_HEALTH_-_Dental_Nurse.pdf",
                                    TypicalLength = new TypicalLength
                                                        {

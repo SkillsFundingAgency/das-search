@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces
 {
     public interface ILarsDataService
     {
-        IEnumerable<Standard> GetListOfCurrentStandards();
+        IEnumerable<LarsStandard> GetListOfCurrentStandards();
 
         List<FrameworkMetaData> GetListOfCurrentFrameworks();
     }

@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
 
             httpHelperMock.Setup(m => m.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(AllIdsResponse);
 
-            var vsts = new VstsService(_appServiceSettings, new GitDynamicModelGenerator(), null, httpHelperMock.Object, mockLogger.Object);
+            var vsts = new VstsService(_appServiceSettings, new GitDynamicModelGenerator(), new JsonMetaDataConvert(null), httpHelperMock.Object, mockLogger.Object);
             var standards = vsts.GetStandards();
             Assert.AreEqual(5, standards.Count());
         }

@@ -39,7 +39,17 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             _httpGet = httpGet;
         }
 
-        public IEnumerable<Standard> GetListOfCurrentStandards()
+        public IEnumerable<LarsStandard> GetListOfCurrentStandards()
+        {
+            var fileContent = ReadStandardCsvFile();
+
+            var standards = _csvService.ReadStandardsFromStream(fileContent);
+            _logger.Debug($"Read: {standards.Count} standards from file.");
+
+            return standards;
+        }
+
+        private string ReadStandardCsvFile()
         {
             var zipFilePath = GetZipFilePath();
             _logger.Debug($"Zip file path: {zipFilePath}");
@@ -50,10 +60,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameStandards);
             _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
 
-            var standards = _csvService.ReadStandardsFromStream(fileContent);
-            _logger.Debug($"Read: {standards.Count} standards from file.");
-
-            return standards;
+            return fileContent;
         }
 
         public List<FrameworkMetaData> GetListOfCurrentFrameworks()

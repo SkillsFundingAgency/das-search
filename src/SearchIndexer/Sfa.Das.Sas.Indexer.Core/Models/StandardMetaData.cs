@@ -14,8 +14,6 @@ namespace Sfa.Das.Sas.Indexer.Core.Models
 
         public int NotionalEndLevel { get; set; }
 
-        public string PdfFileName { get; set; }
-
         public string StandardPdfUrl { get; set; }
 
         public string AssessmentPlanPdfUrl { get; set; }

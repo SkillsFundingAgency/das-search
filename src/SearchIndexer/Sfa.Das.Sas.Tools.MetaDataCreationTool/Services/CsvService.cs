@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sfa.Das.Sas.Indexer.Core.Extensions;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models;
@@ -8,27 +7,18 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
-    using Sfa.Das.Sas.Indexer.Core.Models;
-
     public class CsvService : IReadStandardsFromCsv
     {
-        private readonly IAngleSharpService angelService;
-
-        public CsvService(IAngleSharpService angelService)
+        public List<LarsStandard> ReadStandardsFromStream(string csvFile)
         {
-            this.angelService = angelService;
-        }
-
-        public List<Standard> ReadStandardsFromStream(string csvFile)
-        {
-            var standards = new List<Standard>();
+            var standards = new List<LarsStandard>();
             foreach (var line in csvFile.Split('\n'))
             {
-                var values = line?.Split(new[] { "\",\"" }, StringSplitOptions.None);
-                Standard standard;
-                if (CreateStandard(values, out standard))
+                var values = LineValues(line);
+                LarsStandard larsStandard;
+                if (CreateStandard(values, out larsStandard))
                 {
-                    standards.Add(standard);
+                    standards.Add(larsStandard);
                 }
             }
 
@@ -40,7 +30,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             var frameworks = new List<FrameworkMetaData>();
             foreach (var line in csvFile.Split('\n'))
             {
-                var values = line?.Split(new[] { "\",\"" }, StringSplitOptions.None);
+                var values = LineValues(line);
                 FrameworkMetaData framework;
                 if (CreateFramework(values, out framework))
                 {
@@ -49,6 +39,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             }
 
             return frameworks;
+        }
+
+        private string[] LineValues(string line)
+        {
+            return line?.Split(new[] { "\",\"" }, StringSplitOptions.None);
         }
 
         private bool CreateFramework(string[] values, out FrameworkMetaData framework)
@@ -72,28 +67,18 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             return false;
         }
 
-        private bool CreateStandard(string[] values, out Standard standard)
+        private bool CreateStandard(string[] values, out LarsStandard larsStandard)
         {
-            standard = null;
+            larsStandard = null;
             var standardid = GetStandardId(values);
             if (standardid >= 0)
             {
-                standard = new Standard
+                larsStandard = new LarsStandard
                 {
                     Id = standardid,
                     Title = values[2].RemoveQuotationMark(),
                     NotionalEndLevel = TryParse(values[4]),
-                    StandardPdfUrl = GetPdfUri(values[8]),
-                    AssessmentPlanPdfUrl = GetAssessmentPdfUri(values[8]),
-                    JobRoles = new List<string>(),
-                    Keywords = new List<string>(1),
-                    TypicalLength = new TypicalLength { Unit = "m" },
-                    IntroductoryText = string.Empty,
-                    OverviewOfRole = string.Empty,
-                    EntryRequirements = string.Empty,
-                    WhatApprenticesWillLearn = string.Empty,
-                    Qualifications = string.Empty,
-                    ProfessionalRegistration = string.Empty
+                    StandardUrl = values[8]
                 };
                 return true;
             }
@@ -109,28 +94,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             }
 
             return TryParse(values[0]);
-        }
-
-        private string GetPdfUri(string s)
-        {
-            var url = angelService.GetLinks(s.RemoveQuotationMark(), ".attachment-details h2 a", "Apprenticeship").FirstOrDefault();
-            if (url != null)
-            {
-                return new Uri($"https://www.gov.uk/{url}").ToString();
-            }
-
-            return string.Empty;
-        }
-
-        private string GetAssessmentPdfUri(string s)
-        {
-            var url = angelService.GetLinks(s.RemoveQuotationMark(), ".attachment-details h2 a", "Assessment").FirstOrDefault();
-            if (url != null)
-            {
-                return new Uri($"https://www.gov.uk/{url}").ToString();
-            }
-
-            return string.Empty;
         }
 
         private int TryParse(string s)

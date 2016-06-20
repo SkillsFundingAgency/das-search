@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.Core.Logging;
-using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 using StructureMap;

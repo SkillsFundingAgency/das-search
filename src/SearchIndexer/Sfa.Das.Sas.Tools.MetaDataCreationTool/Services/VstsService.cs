@@ -8,12 +8,13 @@ using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.Core.Logging;
-using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
+    using Sfa.Das.Sas.Indexer.Core.Models;
+
     public class VstsService : IVstsService
     {
         private readonly IAppServiceSettings _appServiceSettings;
@@ -44,12 +45,16 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         {
             var blobs = GetAllBlobs(_appServiceSettings.VstsGitGetFilesUrl);
 
-            return blobs?.Select(m => GetIdFromPath(m.Path)) ?? new List<string>();
+            var result = blobs?.Select(m => GetIdFromPath(m.Path)) ?? new List<string>();
+            _logger.Info($"Got {result.Count()} current meta data files Git Repository.");
+
+            return result;
         }
 
-        public IDictionary<string, string> GetStandards()
+        public IEnumerable<StandardMetaData> GetStandards()
         {
-            return GetAllFileContents(_appServiceSettings.VstsGitGetFilesUrl);
+            var standardsDictionary = GetAllFileContents(_appServiceSettings.VstsGitGetFilesUrl);
+            return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary);
         }
 
         public IEnumerable<VstsFrameworkMetaData> GetFrameworks()

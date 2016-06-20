@@ -10,9 +10,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public string Title { get; set; }
         public int Level { get; set; }
         public string AssessmentPlanPdf { get; set; }
-        public string PdfFileName { get; set; }
+
         public string EntryRequirements { get; set; }
-        public string IntroductoryText { get; set; }
+
         [String(Analyzer = "english")]
         public IEnumerable<string> JobRoles { get; set; }
 

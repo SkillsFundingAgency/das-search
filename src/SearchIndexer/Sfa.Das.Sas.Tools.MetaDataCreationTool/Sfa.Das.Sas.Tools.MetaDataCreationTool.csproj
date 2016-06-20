@@ -84,6 +84,7 @@
     <Compile Include="Models\Git\VstsFrameworkMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
     <Compile Include="Models\GovLearn\GovLearnResponse.cs" />
+    <Compile Include="Models\StandardRepositoryData.cs" />
     <Compile Include="Services\Interfaces\IJsonMetaDataConvert.cs" />
     <Compile Include="Services\Interfaces\IAngleSharpService.cs" />
     <Compile Include="Services\Interfaces\ILarsDataService.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Services\AngleSharpService.cs" />
     <Compile Include="Services\CsvService.cs" />
     <Compile Include="Services\Interfaces\IReadStandardsFromCsv.cs" />
-    <Compile Include="Models\Standard.cs" />
+    <Compile Include="Models\LarsStandard.cs" />
     <Compile Include="Services\Interfaces\IGitDynamicModelGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
