@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult AddStandard(int id)
         {
-            _logger.Debug($"Adding standard {id} to shortlist");
+            _logger.Debug($"Adding standard to shortlist", new ShortlistLogEntry { StandardId = id });
 
             var shorlistedApprenticeship = new ShortlistedApprenticeship
             {
@@ -42,11 +42,11 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _logger.Debug("Adding standard to shortlist", logEntry);
+            _logger.Debug("Adding standard provider to shortlist", logEntry);
 
-            var shorlistedApprenticeship = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
+            var shortlistedApprenticeshipProvider = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
 
-            _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
+            _listCollection.AddItem(Constants.StandardsShortListCookieName, shortlistedApprenticeshipProvider);
 
             var providerSearchCriteria = new ProviderLocationSearchCriteria
             {
@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 ProviderId = providerId
             };
 
-            _logger.Debug($"Removing provider from shortlist", logEntry);
+            _logger.Debug($"Removing standard provider from shortlist", logEntry);
 
             var provider = new ShortlistedProvider
             {
@@ -119,11 +119,11 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _logger.Debug("Adding standard to shortlist", logEntry);
+            _logger.Debug("Adding framework provider to shortlist", logEntry);
 
-            var shorlistedApprenticeship = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
+            var shortListedApprenticeshipProvider = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
 
-            _listCollection.AddItem(Constants.FrameworksShortListCookieName, shorlistedApprenticeship);
+            _listCollection.AddItem(Constants.FrameworksShortListCookieName, shortListedApprenticeshipProvider);
 
             var providerSearchCriteria = new ProviderLocationSearchCriteria
             {
@@ -153,7 +153,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 ProviderId = providerId
             };
 
-            _logger.Debug($"Removing provider from shortlist", logEntry);
+            _logger.Debug($"Removing framework provider from shortlist", logEntry);
 
             var provider = new ShortlistedProvider
             {
