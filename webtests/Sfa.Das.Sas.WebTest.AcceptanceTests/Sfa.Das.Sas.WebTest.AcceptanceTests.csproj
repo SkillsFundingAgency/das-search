@@ -162,6 +162,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PageContent_Feature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Regression\Shortlisting_Feature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shortlisting_Feature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Regression\Sorting_Feature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -287,6 +292,10 @@
     <None Include="Regression\PageContent_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PageContent_Feature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Regression\Shortlisting_Feature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Shortlisting_Feature.feature.cs</LastGenOutput>
     </None>
     <None Include="Regression\Sorting_Feature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
