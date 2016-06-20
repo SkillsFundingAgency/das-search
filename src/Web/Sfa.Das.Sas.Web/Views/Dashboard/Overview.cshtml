@@ -39,7 +39,7 @@
 
 @helper GetDeleteLink(IShortlistApprenticeshipViewModel model)
 {
-    var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFramework";
+var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFramework";
     @Html.ActionLink(
     "Delete",
     method,
@@ -52,6 +52,30 @@
         data_apprenticeship_type = method,
         rel = "nofollow"
     })
+}
+
+@helper GetProvidersLink(IShortlistApprenticeshipViewModel model)
+{
+    var isStandard = model is ShortlistStandardViewModel;
+    if (isStandard)
+    {
+        @Html.ActionLink(
+            "Find training providers",
+            "SearchForProviders",
+            "Apprenticeship",
+            new {@standardId = model.Id},
+            new {})
+    }
+    else
+    {
+        @Html.ActionLink(
+            "Find training providers",
+            "SearchForProviders",
+            "Apprenticeship",
+            new { @frameworkId = model.Id },
+            new { })
+    }
+
 }
 
 @helper GetShortlistItem(IEnumerable<IShortlistApprenticeshipViewModel> apprenticeships)
@@ -70,6 +94,10 @@
                     </span>
                     <span class="action">
                         @GetDeleteLink(apprenticeship)
+                    </span>
+
+                    <span class="action">
+                        @GetProvidersLink(apprenticeship)
                     </span>
                     @if (apprenticeship.Providers.Any())
                     {
