@@ -23,5 +23,9 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Framework
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
+
+        public double SectorSubjectAreaTier1 { get; set; }
+
+        public double SectorSubjectAreaTier2 { get; set; }
     }
 }

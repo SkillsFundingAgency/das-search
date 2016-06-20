@@ -41,7 +41,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 EntryRequirements = standard.EntryRequirements,
                 WhatApprenticesWillLearn = standard.WhatApprenticesWillLearn,
                 Qualifications = standard.Qualifications,
-                ProfessionalRegistration = standard.ProfessionalRegistration
+                ProfessionalRegistration = standard.ProfessionalRegistration,
+                SectorSubjectAreaTier1 = standard.SectorSubjectAreaTier1,
+                SectorSubjectAreaTier2 = standard.SectorSubjectAreaTier2
             };
 
             return doc;
@@ -64,7 +66,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 Level = MapLevelProgType(frameworkMetaData.ProgType),
                 JobRoleItems = frameworkMetaData.JobRoleItems?.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
                 TypicalLength = frameworkMetaData.TypicalLength,
-                ExpiryDate = frameworkMetaData.EffectiveTo
+                ExpiryDate = frameworkMetaData.EffectiveTo,
+                SectorSubjectAreaTier1 = frameworkMetaData.SectorSubjectAreaTier1,
+                SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2
             };
             return doc;
         }

@@ -52,14 +52,16 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             if (values.Length > 11)
             {
                 framework = new FrameworkMetaData
-                                {
-                                    FworkCode = TryParse(values[0]),
-                                    ProgType = TryParse(values[1]),
-                                    PwayCode = TryParse(values[2]),
-                                    PathwayName = values[3].RemoveQuotationMark(),
-                                    EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()) ?? DateTime.MinValue,
-                                    EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
-                                    NASTitle = values[9].RemoveQuotationMark()
+                {
+                    FworkCode = TryParse(values[0]),
+                    ProgType = TryParse(values[1]),
+                    PwayCode = TryParse(values[2]),
+                    PathwayName = values[3].RemoveQuotationMark(),
+                    EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()) ?? DateTime.MinValue,
+                    EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
+                    SectorSubjectAreaTier1 = TryParseDouble(values[6]),
+                    SectorSubjectAreaTier2 = TryParseDouble(values[7]),
+                    NASTitle = values[9].RemoveQuotationMark()
                 };
                 return framework.FworkCode > 0;
             }
@@ -78,7 +80,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                     Id = standardid,
                     Title = values[2].RemoveQuotationMark(),
                     NotionalEndLevel = TryParse(values[4]),
-                    StandardUrl = values[8]
+                    StandardUrl = values[8],
+                    SectorSubjectAreaTier1 = TryParseDouble(values[9]),
+                    SectorSubjectAreaTier2 = TryParseDouble(values[10]),
                 };
                 return true;
             }
@@ -100,6 +104,17 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         {
             int i;
             if (int.TryParse(s.RemoveQuotationMark(), out i))
+            {
+                return i;
+            }
+
+            return -1;
+        }
+
+        private double TryParseDouble(string s)
+        {
+            double i;
+            if (double.TryParse(s.RemoveQuotationMark(), out i))
             {
                 return i;
             }

@@ -20,8 +20,6 @@ namespace Sfa.Das.Sas.Indexer.Core.Models
 
         public TypicalLength TypicalLength { get; set; }
 
-        public string IntroductoryText { get; set; }
-
         public string EntryRequirements { get; set; }
 
         public string WhatApprenticesWillLearn { get; set; }
@@ -31,5 +29,9 @@ namespace Sfa.Das.Sas.Indexer.Core.Models
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }
+
+        public double SectorSubjectAreaTier1 { get; set; }
+
+        public double SectorSubjectAreaTier2 { get; set; }
     }
 }

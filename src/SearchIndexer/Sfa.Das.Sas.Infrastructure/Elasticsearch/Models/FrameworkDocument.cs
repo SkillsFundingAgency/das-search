@@ -30,5 +30,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public TypicalLength TypicalLength { get; set; }
 
         public DateTime? ExpiryDate { get; set; }
+
+        public double SectorSubjectAreaTier1 { get; set; }
+
+        public double SectorSubjectAreaTier2 { get; set; }
     }
 }

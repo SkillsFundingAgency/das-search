@@ -26,5 +26,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public string StandardPdf { get; set; }
         public string WhatApprenticesWillLearn { get; set; }
         public TypicalLength TypicalLength { get; set; }
+
+        public double SectorSubjectAreaTier1 { get; set; }
+
+        public double SectorSubjectAreaTier2 { get; set; }
     }
 }
