@@ -1,59 +1,44 @@
-# Digital Apprenticeship Service
+# DAS - Search and Shortlist
 
 <img alt="Build Status" src="https://sfa-gov-uk.visualstudio.com/DefaultCollection/_apis/public/build/definitions/c39e0c0b-7aff-4606-b160-3566f3bbce23/12/badge" />
 
-<a href="https://scan.coverity.com/projects/skillsfundingagency-daswebsearch">
-  <img alt="Coverity Scan Build Status" src="https://scan.coverity.com/projects/7351/badge.svg"/>
-</a>
+This repository contains the code for a [Skills Funding Agency](https://www.gov.uk/government/organisations/skills-funding-agency) service **Find apprenticeship training** and it includes 2 applicaiton.   
+The [web application](https://www.findapprenticeship.service.gov.uk) provides a web interface to find and shortlist apprenticeships and organisations that training provides.
 
-=================================
-Standards Search API 
-=================================
-
-
-|             |             |
-|-------------|-------------|
-|| Standards restful API for search |
-| Version  |  |
-| Web  |   |
-| Keywords  | elasticsearch, api |
-
-
-=================================
-Standards Search Indexer 
-=================================
-
-|             |             |
-|-------------|-------------|
-|| Indexer for standards search |
-| Version  |  |
-| Web  |   |
-| Keywords  | elasticsearch |
-
-<img alt="Build Status" src="https://sfa-gov-uk.visualstudio.com/DefaultCollection/_apis/public/build/definitions/c39e0c0b-7aff-4606-b160-3566f3bbce23/16/badge" />
 
 =================================
 Digital Apprenticeship Website
 =================================
+*Sfa.Das.Sas.Web*  
+Employer website to search apprenticeship and providers.
 
-|             |             |
-|-------------|-------------|
-|| Employer website to search standards and providers |
-| Version  |  |
-| Web  |   |
-| Keywords  | |
+External dependencies: 
+- [Postcodes.io](http://postcodes.io)
+- Searchable index with apprenticeships and providers (Elasticsearch)
+- GA and survey monkey 
 
+### Tests
+- Unit tests
+- UI (selenium) test in separate solution /webtest/DASWebTests.sln
+- View test using razor generator
 
-<img alt="Build Status" src="https://sfa-gov-uk.visualstudio.com/DefaultCollection/_apis/public/build/definitions/c39e0c0b-7aff-4606-b160-3566f3bbce23/15/badge" />
-
-
+  
+Apprenticeship Search Indexer 
 =================================
-Sitefinity CMS
-=================================
+*Sfa.Das.Sas.Indexer*  
+Is responsible of creating a searchable index for apprenticeship and providers 
 
-|             |             |
-|-------------|-------------|
-|| CMS to store content and manage structured data for standards | 
-| Version  |  |
-| Web  |   |
-| Keywords  | sitefinity |
+External dependencies: 
+- Data
+  - Course Directory for information about providers 
+  - LARS (zip) csv files with all standards and all frameworks
+- Internal data repository, at the moment a git repository that will be move to use a CMS 
+- Elasticsearch to store the data.
+
+## Logging
+
+For logging we are using NLog to log to Elasticsearch. Each log entry should contain at minimum the following properties: 
+- **Environment** (local, CI, SystemTest, Demo, PreProd or Production)
+- **Application** (Sfa.Das.Sas.Web or Sfa.Das.Sas.Indexer)
+- **Message**
+- **Level**
