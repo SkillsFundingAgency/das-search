@@ -337,15 +337,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Standard.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dashboard\Overview.generated.cs">
-      <DependentUpon>Overview.cshtml</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Views\Apprenticeship\_SearchResultMessage.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboard\Overview.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Overview.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\Detail.generated.cs">
       <AutoGen>True</AutoGen>
