@@ -98,6 +98,7 @@
     <Compile Include="Domain\Model\ApprenticeshipDetails.cs" />
     <Compile Include="Domain\Model\ApprenticeshipProduct.cs" />
     <Compile Include="Domain\Model\ContactInformation.cs" />
+    <Compile Include="Domain\Model\JobRoleItem.cs" />
     <Compile Include="Domain\Model\Location.cs" />
     <Compile Include="Domain\Model\Provider.cs" />
     <Compile Include="Domain\Model\ApprenticeshipBasic.cs" />

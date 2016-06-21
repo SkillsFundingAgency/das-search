@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
-    public static class StandardMappingHelper
+    public static class ApprenticeshipMappingHelper
     {
         public static string GetTypicalLengthMessage(TypicalLength typicalLength)
         {

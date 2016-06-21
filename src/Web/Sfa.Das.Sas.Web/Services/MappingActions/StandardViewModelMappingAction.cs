@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
     {
         public void Process(Standard source, StandardViewModel destination)
         {
-            destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
+            destination.TypicalLengthMessage = ApprenticeshipMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
 
             destination.StandardPdfUrlTitle = ExtractPdfTitle(source.StandardPdf);
             destination.AssessmentPlanPdfUrlTitle = ExtractPdfTitle(source.AssessmentPlanPdf);

@@ -7,11 +7,17 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
+
+    using FluentAssertions;
 
     using Moq;
 
     using NUnit.Framework;
+
+    using Sfa.Das.Sas.Core.Logging;
 
     [TestFixture]
     public class ApprenticeshipViewModelFactoryTest

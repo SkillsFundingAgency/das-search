@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     using System;
+    using System.Collections.Generic;
 
     using Sfa.Das.Sas.Core.Domain.Model;
 
@@ -23,5 +24,7 @@
         public TypicalLength TypicalLength { get; set; }
 
         public DateTime? ExpiryDate { get; set; }
+
+        public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
     }
 }

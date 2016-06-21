@@ -33,6 +33,18 @@
                         <dt>Typical length:</dt>
                         <dd>@Model.TypicalLengthMessage </dd>
                     }
+                    <dt>Suitable roles for apprentices</dt>
+                    <dd class="job-roles">
+                        @if (Model.JobRoles != null)
+                        {
+                            <ul>
+                                @foreach (var jobRole in Model.JobRoles)
+                                {
+                                    <li>@jobRole</li>
+                                }
+                            </ul>
+                        }
+                    </dd>
                 </dl>
             </header>
 

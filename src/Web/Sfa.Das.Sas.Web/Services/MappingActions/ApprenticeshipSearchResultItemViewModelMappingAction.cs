@@ -12,7 +12,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
     {
         public void Process(ApprenticeshipSearchResultsItem source, ApprenticeshipSearchResultItemViewModel destination)
         {
-            destination.TypicalLengthMessage = StandardMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
+            destination.TypicalLengthMessage = ApprenticeshipMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
             destination.Level = GetLevelText(source.Level);
             destination.ApprenticeshipType = destination.StandardId != 0 ? "standard" : "framework";
         }

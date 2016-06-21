@@ -1,6 +1,8 @@
 ﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
 
     public class FrameworkViewModel
     {
@@ -18,5 +20,7 @@
         public bool IsShortlisted { get; set; }
 
         public string SearchTerm { get; set; }
+
+        public IEnumerable<string> JobRoles { get; set; }
     }
 }

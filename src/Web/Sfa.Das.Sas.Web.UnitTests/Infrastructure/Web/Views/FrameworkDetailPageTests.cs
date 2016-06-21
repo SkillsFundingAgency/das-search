@@ -32,5 +32,16 @@
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
             GetPartial(html, ".expire-date").Should().BeEmpty();
         }
+
+        [Test]
+        public void ShowJobRoles()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel { Title = "title1", JobRoles = new[] { "SFA master", "DAS master"} };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".job-roles ul li").Should().Be("SFA master");
+            GetPartial(html, ".job-roles ul li", 2).Should().Be("DAS master");
+        }
     }
 }

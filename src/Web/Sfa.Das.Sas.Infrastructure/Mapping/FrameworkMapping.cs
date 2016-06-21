@@ -17,7 +17,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 PathwayCode = document.PathwayCode,
                 PathwayName = document.PathwayName,
                 TypicalLength = document.TypicalLength,
-                ExpiryDate = document.ExpiryDate
+                ExpiryDate = document.ExpiryDate,
+                JobRoleItems = document.JobRoleItems
             };
         }
     }

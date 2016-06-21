@@ -51,9 +51,13 @@ namespace Sfa.Das.Sas.Web.Factories
         public FrameworkViewModel GetFrameworkViewModel(int id)
         {
             var frameworkResult = _getFrameworks.GetFrameworkById(id);
+            if (frameworkResult == null)
+            {
+                return null;
+            }
 
-            return frameworkResult == null ?
-                null : _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
+            var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
+            return viewModel;
         }
 
         public ApprenticeshipSearchResultViewModel GetSApprenticeshipSearchResultViewModel(ApprenticeshipSearchResults searchResults)

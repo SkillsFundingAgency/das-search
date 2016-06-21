@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Models
+﻿namespace Sfa.Das.Sas.Core.Domain.Model
 {
     public class JobRoleItem
     {
