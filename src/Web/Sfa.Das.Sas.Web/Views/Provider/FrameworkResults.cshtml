@@ -19,7 +19,7 @@
                 <h1 class="heading-xlarge">
                     Search results
                 </h1>
-                
+
                 <p>
                     @{
                         Html.RenderPartial("_FrameworkSearchResultMessage");
@@ -28,112 +28,114 @@
             </div>
 
         </div>
-</div>
+    </div>
     <div class="grid-row">
 
         <div class="column-third">
-            <div class="editSearch">
-                <h2 class="heading-medium">
-                    <a href="#EditSearch">Edit search</a>
-                </h2>
-                <div id="EditSearch">
-                    @FilterForm("filter-box")
-                </div>
-            </div>
-        </div>
 
-        <div id="provider-results" class="column-two-thirds">
-            @{
-                Html.RenderPartial("_FrameworkProviderInformation");
-            }
-        </div>
-
-        <div class="page-navigation">
-            @GetPaginationBackLink()
-            @GetPaginationNextLink()
+            @FilterForm("filter-box")
         </div>
     </div>
+
+    <div id="provider-results" class="column-two-thirds">
+        @{
+            Html.RenderPartial("_FrameworkProviderInformation");
+        }
+    </div>
+
+    <div class="page-navigation">
+        @GetPaginationBackLink()
+        @GetPaginationNextLink()
+    </div>
+
 </main>
 
 @if (Model.TotalResults == 0)
 {
     <script>
-        window.onload = function() {
+        window.onload = function () {
             SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
         }
-    </script> 
+    </script>
 }
 
 @helper GetPaginationBackLink()
 {
-    if (Model.ActualPage > 1)
-    {
-        var previousPage = @Model.ActualPage - 1;
-        var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
+if (Model.ActualPage > 1)
+{
+    var previousPage = @Model.ActualPage - 1;
+    var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
 
         <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
             <i class="arrow-button fa fa-angle-left"></i>
             <span class="description">Previous <span class="hide-mob">page</span></span>
             <span class="counter">@previousPage of @Model.LastPage</span>
         </a>
-    }
+}
 }
 
 
 @helper GetPaginationNextLink()
 {
-    if (Model.ActualPage < Model.LastPage)
-    {
-        var nextPage = @Model.ActualPage + 1;
+if (Model.ActualPage < Model.LastPage)
+{
+    var nextPage = @Model.ActualPage + 1;
 
-        var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
+    var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
 
         <a href="@url" style="visibility: visible" class="page-navigation__btn next">
             <i class="arrow-button fa fa-angle-right"></i>
             <span class="description">Next <span class="hide-mob">page</span></span>
             <span class="counter">@nextPage of @Model.LastPage</span>
         </a>
-    }
+}
 }
 
 @helper FilterForm(string cssClass)
 {
-    if (!Model.DeliveryModes.IsNullOrEmpty())
-    {
-        var hideMenu = true;
-        foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
-        {
-            hideMenu = false;
-        }
-
-        if (@Model.TotalResults != 0 || !hideMenu)
-        {
-            <div class="filters-block @cssClass">
-                <form method="get" autocomplete="off" action="@Model.AbsolutePath">
-                    <input type="hidden" name="PostCode" value="@Model.PostCode"/>
-                    <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId"/>
-                    @{
-                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                    }
-                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button"/>
-                </form>
-            </div>
-        }
-    }
-}
-
-@functions
+if (!Model.DeliveryModes.IsNullOrEmpty())
 {
-    RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
+    var hideMenu = true;
+    foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
     {
+        hideMenu = false;
+    }
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page } };
-        int i = 0;
-        foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
-        {
-            rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
-            i++;
-        }
-        return rv;
+    if (@Model.TotalResults != 0 || !hideMenu)
+    {
+            <div class="editSearch">
+                <h2 class="heading-medium">
+                    <a href="#EditSearch">Edit search</a>
+                </h2>
+                <div id="EditSearch">
+                    <div class="filters-block @cssClass">
+                        <form method="get" autocomplete="off" action="@Model.AbsolutePath">
+                            <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                            <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
+                            @{
+                                Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                            }
+                            <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+    }
     }
 }
+
+                    @functions
+{
+                        RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
+                        {
+
+                            var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page } };
+                            int i = 0;
+                            foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
+                            {
+                                rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
+                                i++;
+                            }
+                            return rv;
+                        }
+                    }
