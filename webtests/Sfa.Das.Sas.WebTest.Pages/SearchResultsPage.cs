@@ -44,8 +44,7 @@
         public IWebElement HighToLowOptionSelector { get; set; }
 
         [ElementLocator(CssSelector = "#select-order > option:nth-child(3)")]
-        public IWebElement LowToHighOptionSelector { get; set; }
-
+        public IWebElement LowToHighOptionSelector { get; set; }       
 
         [ElementLocator(Class = "result")]
         public class ApprenticeshipResultItem : WebElement

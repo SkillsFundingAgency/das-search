@@ -12,8 +12,11 @@ Scenario: Sort Apprenticeship Search Results Page
 	When  I choose Search Button
 	Then  I am on the Search Results page
 	When  I wait for the view to become active
-	Then  I wait to see First Standard Result
-	Then  I wait to see Sorting Dropdown
+	Then I see
+	| Field                 | Rule   | Value |
+	| First Standard Result | Exists | True  |
+	| Sorting Dropdown      | Exists | True  |
+	
 	When  I choose High To Low Option Selector	
 	And   I choose Update Results Button	
 	When  I wait for the view to become active

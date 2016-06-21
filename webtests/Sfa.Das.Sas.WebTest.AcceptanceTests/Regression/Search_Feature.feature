@@ -26,23 +26,7 @@ Examples:
 	| Junior management consultant   | Junior management consultant          |
 	| Relationship manager (banking) | Relationship manager (banking)        |
 
-#Test that if Job role returns no search a friendly message is displayed
-#@Regression		@PreProd @Prod
-Scenario Outline:If job role does not exist List is Empty
-	Given I navigated to the Start page
-	When I choose Start Button
-	Then I am on the Search page
-	When I enter data
-		| Field      | Value |
-		| Search Box | <search term>   |
-	And I choose Search Button	
-	Then I am on the Search Results page	
-	And I see Apprenticeship Results list contains exactly 0 items
-	Then I am on the Search page		
-	Examples: 
-	| search term | 
-	| dfs         |
-
+	
 #@Regression @PreProd @Prod
 #Test that specific providers exist in live service
 	Scenario Outline:Specific providers and frameworks in live data
@@ -50,7 +34,7 @@ Scenario Outline:If job role does not exist List is Empty
 		| Token    | Key                    |
 		| JOBROLE  | data.framework.JOBROLE  |
 		| Postcode | data.framework.Postcode |
-	Given I navigated to the Search page
+	And I navigated to the Search page
 	When I enter data
 		| Field      | Value         |
 		| Search Box | {JOBROLE} |
@@ -133,23 +117,3 @@ Scenario:Should display error for invalid postcode
 	| Field         | Rule     | Value            |
 	| error message | contains | Invalid postcode |
 
-@Regression @PreProd @Prod
-#This Scenraio Checks core functionality is not broken
-Scenario:Should not display error for valid postcode
-	Given I navigated to the Search page
-	When I enter data
-         | Field | Value |
-         |    Search Box   |   Digital & technology solutions professional    |
-	And I choose Search Button
-	Then I am on the Search Results page
-	When I choose First Standard Result
-	Then I am on the Standard Details page
-	When I choose Search Page Button
-	Then I am on the Provider Search page
-	When I enter data
-		| Field      | Value   |
-		| Postcode Search Box | NE1 8ST |
-	And I choose Search Button
-	Then I am on the Standard Provider Results page
-	When I choose First Provider Link
-	Then I am on the Provider Details page

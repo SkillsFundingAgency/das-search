@@ -107,11 +107,26 @@ this.ScenarioSetup(scenarioInfo);
 #line 17
  testRunner.Given("I navigated to the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
- testRunner.Then("I wait to see Filter Block", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I waited for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Rule",
+                        "Value"});
+            table2.AddRow(new string[] {
+                        "Filter Block",
+                        "Exists",
+                        "True"});
+            table2.AddRow(new string[] {
+                        "Sorting Dropdown",
+                        "Exists",
+                        "True"});
+            table2.AddRow(new string[] {
+                        "Navigation Element",
+                        "Exists",
+                        "True"});
 #line 19
- testRunner.Then("I wait to see Sorting Dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 20
- testRunner.Then("I wait to see Navigation Element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I see", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

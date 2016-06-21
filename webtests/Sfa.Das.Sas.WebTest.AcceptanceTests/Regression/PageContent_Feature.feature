@@ -15,7 +15,11 @@ Scenario: Search Page Core Content
 #@Regression @Pre-prod @Prod
 Scenario: Search Results Core Content
 	Given I navigated to the Search Results page
-	Then I wait to see Filter Block
-	Then I wait to see Sorting Dropdown
-	Then I wait to see Navigation Element
+	And I waited for the view to become active
+	Then I see
+	| Field              | Rule   | Value |
+	| Filter Block       | Exists | True  |
+	| Sorting Dropdown   | Exists | True  |
+	| Navigation Element | Exists | True  |
+	
 
