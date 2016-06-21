@@ -89,16 +89,15 @@ var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFra
             @foreach (var apprenticeship in apprenticeships)
             {
                 <li class="apprenticeship-item">
-                    <span class="apprenticeship-title">
-                        @GetLink(apprenticeship)
-                    </span>
-                    <span class="action">
-                        @GetDeleteLink(apprenticeship)
-                    </span>
-
-                    <span class="action">
-                        @GetProvidersLink(apprenticeship)
-                    </span>
+                    <div class="apprenticeship-title">
+                        <h3>
+                            @GetLink(apprenticeship)
+                        </h3>
+                    </div>
+                    <ul class="actions">
+                        <li>@GetProvidersLink(apprenticeship)</li>
+                        <li>@GetDeleteLink(apprenticeship)</li>
+                    </ul>
                     @if (apprenticeship.Providers.Any())
                     {
                         <div class="providers">

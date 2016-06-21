@@ -2492,3 +2492,22 @@ details .arrow {
 
     }
 }
+.apprenticeship-item {
+    @extend %grid-row; 
+    .apprenticeship-title {
+        @include grid-column( 1/2 )
+        h3 {
+            @include bold-19;
+        }
+    }
+    .actions {
+        @include grid-column( 1/2 )
+        white-space: nowrap;
+        text-align: right;
+        li {
+            margin: 0 0 0 .5em;
+            padding: 0;
+            display: inline-block;
+        }
+    }
+}
