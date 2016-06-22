@@ -35,13 +35,13 @@
 
             @FilterForm("filter-box")
         </div>
+        <div id="provider-results" class="column-two-thirds">
+            @{
+                Html.RenderPartial("_FrameworkProviderInformation");
+            }
+        </div>
     </div>
 
-    <div id="provider-results" class="column-two-thirds">
-        @{
-            Html.RenderPartial("_FrameworkProviderInformation");
-        }
-    </div>
 
     <div class="page-navigation">
         @GetPaginationBackLink()
