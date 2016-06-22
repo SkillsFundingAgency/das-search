@@ -2474,6 +2474,7 @@ details .arrow {
     &[data-action='add'] {
         &:before {
             content: '\2605';
+
         }
     }
     &[data-action='remove'] {
