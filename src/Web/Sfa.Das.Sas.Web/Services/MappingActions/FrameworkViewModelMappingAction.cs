@@ -13,6 +13,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
         {
             destination.TypicalLengthMessage = ApprenticeshipMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
             destination.JobRoles = source.JobRoleItems?.Select(m => m.Title);
+            destination.ExpiryDateString = source.ExpiryDate?.AddDays(1).ToString("d MMMM yyyy");
         }
     }
 }

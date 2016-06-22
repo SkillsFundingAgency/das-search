@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -35,6 +36,24 @@
 
             resultViewModel.JobRoles.ToArray()[0].ShouldBeEquivalentTo("SFA master");
             resultViewModel.JobRoles.ToArray()[1].ShouldBeEquivalentTo("DAS master");
+        }
+
+        [Test]
+        public void ShouldCreateDateString()
+        {
+            FrameworkViewModelMappingAction sut = new FrameworkViewModelMappingAction();
+
+            var date = DateTime.Now.AddDays(3);
+            var framework = new Framework
+            {
+                FrameworkId = 10,
+                Level = 2,
+                Title = "this is a framework",
+                ExpiryDate = date
+            };
+            var resultViewModel = new FrameworkViewModel();
+            sut.Process(framework, resultViewModel);
+            resultViewModel.ExpiryDateString.Should().BeEquivalentTo($"{DateTime.Now.AddDays(3).AddDays(1).ToString("d MMMM yyyy")}");
         }
     }
 }

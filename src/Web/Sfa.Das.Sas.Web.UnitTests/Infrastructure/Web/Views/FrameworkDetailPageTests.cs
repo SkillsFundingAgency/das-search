@@ -16,18 +16,17 @@
         {
             var detailPage = new Framework();
             var date = default(DateTime).AddYears(1881).AddMonths(8).AddDays(4);
-            var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDate = date };
+            var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDateString = date.ToString("d MMMM yyyy") };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
-            GetPartial(html, ".expire-date").Should().Contain("This apprenticeship is due to expire 5 September 1882");
+            GetPartial(html, ".expire-date").Should().Contain("This apprenticeship is closed to new starters from 5 September 1882");
         }
 
         [Test]
         public void DoNotShowExpireMessage()
         {
             var detailPage = new Framework();
-            DateTime? date = null;
-            var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDate = date };
+            var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDateString = null };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
             GetPartial(html, ".expire-date").Should().BeEmpty();

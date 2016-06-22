@@ -8,14 +8,14 @@
 <main id="content">
     <div class="grid-row">
         <div class="column-two-thirds">
-            @if (Model.ExpiryDate.HasValue)
+            @if (Model.ExpiryDateString != null)
             {
                 <div class="expire-date">
                     <div>
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                     </div>
                     <span>
-                        This apprenticeship is due to expire @Model.ExpiryDate.Value.ToString("d MMMM yyyy")
+                        This apprenticeship is closed to new starters from @Model.ExpiryDateString
                     </span>
                 </div>
             }

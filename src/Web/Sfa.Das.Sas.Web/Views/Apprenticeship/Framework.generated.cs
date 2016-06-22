@@ -133,7 +133,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 11 "..\..\Views\Apprenticeship\Framework.cshtml"
-             if (Model.ExpiryDate.HasValue)
+             if (Model.ExpiryDateString != null)
             {
 
             
@@ -150,11 +150,11 @@ WriteLiteral(" class=\"fa fa-exclamation-circle\"");
 WriteLiteral(" aria-hidden=\"true\"");
 
 WriteLiteral("></i>\r\n                    </div>\r\n                    <span>\r\n                  " +
-"      This apprenticeship is due to expire ");
+"      This apprenticeship is closed to new starters from ");
 
             
             #line 18 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                        Write(Model.ExpiryDate.Value.ToString("d MMMM yyyy"));
+                                                                      Write(Model.ExpiryDateString);
 
             
             #line default
@@ -389,14 +389,14 @@ WriteLiteral("\r\n\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2991), Tuple.Create("\"", 3119)
+WriteAttribute("href", Tuple.Create(" href=\"", 2986), Tuple.Create("\"", 3114)
             
             #line 74 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 2998), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
+, Tuple.Create(Tuple.Create("", 2993), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 2998), false)
+, 2993), false)
 );
 
 WriteLiteral(">\r\n                    <i");

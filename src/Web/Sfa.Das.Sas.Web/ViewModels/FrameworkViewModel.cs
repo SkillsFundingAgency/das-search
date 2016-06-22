@@ -14,7 +14,7 @@
 
         public string TypicalLengthMessage { get; set; }
 
-        public DateTime? ExpiryDate { get; set; }
+        public string ExpiryDateString { get; set; }
 
         // Page specific
         public bool IsShortlisted { get; set; }
