@@ -48,11 +48,11 @@
             if ($this.attr('data-action') === 'add') {
                 apprenticeship.AddStandard($this.attr('data-standard'));
                 $this.attr('data-action', 'remove');
-                $this.html('Remove from shortlist');;
+                $this.html('Remove');;
             } else if ($this.attr('data-action') === 'remove') {
                 apprenticeship.RemoveStandard($(this).attr('data-standard'));
                 $this.attr('data-action', 'add')
-                $this.html('Shortlist apprenticeship');
+                $this.html('Shortlist');
             };
         });
 
@@ -62,11 +62,11 @@
             if ($this.attr('data-action') === 'add') {
                 apprenticeship.AddFramework($this.attr('data-framework'));
                 $this.attr('data-action', 'remove');
-                $this.html('Remove from shortlist');;
+                $this.html('Remove');;
             } else if ($this.attr('data-action') === 'remove') {
                 apprenticeship.RemoveFramework($this.attr('data-framework'));
                 $this.attr('data-action', 'add');
-                $this.html('Shortlist apprenticeship');
+                $this.html('Shortlist');
             };
         });
     };
