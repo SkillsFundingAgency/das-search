@@ -2473,13 +2473,12 @@ details .arrow {
     }
     &[data-action='add'] {
         &:before {
-            content: '\2605';
-
+            content: '\2606';
         }
     }
     &[data-action='remove'] {
         &:before {
-            content: '\2606';
+            content: '\2605';
         }
     }
     &.standard-search-shortlist-link,
