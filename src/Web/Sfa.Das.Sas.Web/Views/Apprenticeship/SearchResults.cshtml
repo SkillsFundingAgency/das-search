@@ -1,8 +1,10 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
 @model ApprenticeshipSearchResultViewModel
+
 @{
     ViewBag.Title = "Search Results";
 }
+
 <main id="content" role="main">
     <p class="small-btm-margin">
         @Html.ActionLink("Start a new search", "Search", "Apprenticeship", new { }, new { @class = "link-back new-apprenticeship-search" })
@@ -58,25 +60,19 @@
                 </form>
 
 
-                @foreach (var item in Model.Results)
-                {
-                    <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
-                        <header>
-                            @if (item.StandardId != 0)
-                            {
-                                @GetStandardTitle(item)
-                            }
-                            else
-                            {
-                                @GetFrameworkTitle(item)
-                            }
-                        </header>
-                        <dl class="result-data-list">
-                            @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
-                        </dl>
-                    </article>
-                }
+            @foreach (var item in Model.Results)
+            {
+                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
+                    <header>
+                        @(item.StandardId > 0 ? GetStandardTitle(item) : GetFrameworkTitle(item))
+                    </header>
+                    <dl class="result-data-list">
+                        @GetApprenticeshipDetailItem("Level:", "level", item.Level)
+                        @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                    </dl>
+                    @(item.StandardId > 0 ? GetStandardShortlistLink(item) : GetFrameworkShortlistLink(item))
+                </article>
+            }
 
                 <div class="page-navigation">
                     @GetPaginationBackLink()
@@ -91,7 +87,7 @@
 @if (Model.TotalResults == 0)
 {
     <script>
-        window.onload = function() {
+        window.onload = function () {
             SearchAndShortlist.analytics.pushEvent("Apprenticeship Search", "No results", "Search");
         }
     </script>
@@ -99,34 +95,36 @@
 
 @helper GetPaginationBackLink()
 {
-    if (Model.ActualPage > 1)
+    if (Model.ActualPage <= 1)
     {
-        var previousPage = @Model.ActualPage - 1;
-        var title = $"Previous page {@previousPage} of {@Model.LastPage}";
-        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(previousPage, Model.AggregationLevel, Model.SortOrder), null);
-            <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
-                <i class="arrow-button fa fa-angle-left"></i>
-                <span class="description">Previous <span class="hide-mob">page</span></span>
-                <span class="counter">@previousPage of @Model.LastPage</span>
-            </a>
+        return;
     }
+
+    var previousPage = @Model.ActualPage - 1;
+    var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(previousPage, Model.AggregationLevel, Model.SortOrder), null);
+    <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
+        <i class="arrow-button fa fa-angle-left"></i>
+        <span class="description">Previous <span class="hide-mob">page</span></span>
+        <span class="counter">@previousPage of @Model.LastPage</span>
+    </a>
 }
 
 
 @helper GetPaginationNextLink()
 {
-    if (Model.ActualPage < Model.LastPage && Model.ActualPage >= 0)
+    if (Model.ActualPage >= Model.LastPage || Model.ActualPage < 0)
     {
-        var nextPage = @Model.ActualPage + 1;
-        var title = $"Next page {@nextPage} of {@Model.LastPage}";
-
-        var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(nextPage, Model.AggregationLevel, Model.SortOrder), null);
-            <a href="@url" style="visibility: visible" class="page-navigation__btn next">
-                <i class="arrow-button fa fa-angle-right"></i>
-                <span class="description">Next <span class="hide-mob">page</span></span>
-                <span class="counter">@nextPage of @Model.LastPage</span>
-            </a>
+        return;
     }
+
+    var nextPage = @Model.ActualPage + 1;
+
+    var url = @Url.Action("SearchResults", "Apprenticeship", GetNavigationRouteValues(nextPage, Model.AggregationLevel, Model.SortOrder), null);
+    <a href="@url" style="visibility: visible" class="page-navigation__btn next">
+        <i class="arrow-button fa fa-angle-right"></i>
+        <span class="description">Next <span class="hide-mob">page</span></span>
+        <span class="counter">@nextPage of @Model.LastPage</span>
+    </a>
 }
 
 
@@ -136,7 +134,7 @@
     {
 
         var rv = new RouteValueDictionary { { "keywords", Model.SearchTerm }, { "page", page }, { "order", order }, { "take", Model.ResultsToTake } };
-        int i = 0;
+        var i = 0;
         foreach (var level in selectedLevels.Where(m => m.Checked))
         {
             rv.Add("SelectedLevels[" + i + "]", level.Value);
@@ -150,10 +148,32 @@
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId, @keywords = Model.SearchTerm }, null) 
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId, @keywords = Model.SearchTerm }, null)
         <span>new</span>
     </h2>
 }
+
+@helper GetStandardShortlistLink(ApprenticeshipSearchResultItemViewModel item)
+{
+if (!Model.ShortlistedStandards.ContainsKey(item.StandardId))
+{
+        @Html.ActionLink("Shortlist",
+                    "AddStandard",
+                    "Shortlist",
+                    new { @id = item.StandardId },
+                    new { @class = "link shortlist-link standard-search-shortlist-link", rel = "nofollow", data_standard = item.StandardId, data_action = "add" })
+}
+else
+{
+        @Html.ActionLink("Remove",
+            "RemoveStandard",
+            "Shortlist",
+            new { @id = item.StandardId },
+            new { @class = "link shortlist-link standard-search-shortlist-link", rel = "nofollow", data_standard = item.StandardId, data_action = "remove" })
+}
+
+}
+
 
 @helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item)
 {
@@ -162,42 +182,65 @@
     </h2>
 }
 
+@helper GetFrameworkShortlistLink(ApprenticeshipSearchResultItemViewModel item)
+{
+if (!Model.ShortlistedFrameworks.ContainsKey(item.FrameworkId))
+{
+        @Html.ActionLink("Shortlist",
+                    "AddFramework",
+                    "Shortlist",
+                    new { @id = item.FrameworkId },
+                    new { @class = "link shortlist-link framework-search-shortlist-link", rel = "nofollow", data_framework = item.FrameworkId, data_action = "add" })
+}
+else
+{
+        @Html.ActionLink("Remove",
+            "RemoveFramework",
+            "Shortlist",
+            new { @id = item.FrameworkId },
+            new { @class = "link shortlist-link framework-search-shortlist-link", rel = "nofollow", data_framework = item.FrameworkId, data_action = "remove" })
+}
+}
+
 @helper GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
 {
-    if (!string.IsNullOrEmpty(item))
+    if (string.IsNullOrEmpty(item))
     {
-        <dt>@title</dt>
-        <dd class="@id">@item @unit</dd>
+        return;
     }
+    <dt>@title</dt>
+    <dd class="@id">@item @unit</dd>
 }
 
 @helper FilterForm(string className)
 {
-    if (Model.TotalResults > 0)
+    if (Model.TotalResults <= 0)
     {
-        <div class="filters-block @className">
-            <form method="get" autocomplete="off">
-                <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-                <input type="hidden" name="Page" value="@Model.ActualPage"/>
-                <input type="hidden" name="order" value="@Model.SortOrder" />
-                <input type="hidden" name="take" value="@Model.ResultsToTake" />
-
-                <fieldset class="filters filters-accordion">
-                    <h2 class="toggler heading-small">Apprenticeship Level</h2>
-                    <div class="toggled-content">
-                        <ul name="alist22">
-                            @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
-                            {
-                                <li>
-                                    <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
-                                    <label for="SelectedLevels_@item.Value" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </fieldset>
-                <input type="submit" class="button" value="Update results" />
-            </form>
-        </div>
+        return;
     }
+
+    <div class="filters-block @className">
+        <form method="get" autocomplete="off">
+            <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+            <input type="hidden" name="Page" value="@Model.ActualPage" />
+            <input type="hidden" name="order" value="@Model.SortOrder" />
+            <input type="hidden" name="take" value="@Model.ResultsToTake" />
+
+            <fieldset class="filters filters-accordion">
+                <h2 class="toggler heading-small">Apprenticeship Level</h2>
+                <div class="toggled-content">
+                    <ul name="alist22">
+                        @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))
+                        {
+                            <li>
+                                <input value="@item.Value" id="SelectedLevels_@(item.Value)" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                                <label for="SelectedLevels_@(item.Value)" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </fieldset>
+            <input type="submit" class="button" value="Update results" />
+        </form>
+    </div>
 }

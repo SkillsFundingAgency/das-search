@@ -2452,7 +2452,15 @@ details .arrow {
     }
 }
 
-
+#apprenticeship-results,
+#provider-results {
+    article {
+        position: relative;
+        padding-right: 5em;
+        header {
+        }
+    }
+}
 
 .shortlist-link {
     display: block;
@@ -2465,12 +2473,35 @@ details .arrow {
     }
     &[data-action='add'] {
         &:before {
-            content: '\f097';
+            content: '\2605';
         }
     }
     &[data-action='remove'] {
         &:before {
-            content: '\f02e';
+            content: '\2606';
+        }
+    }
+    &.standard-search-shortlist-link,
+    &.framework-search-shortlist-link,
+    &.provider-search-shortlist-link {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        width: 4em;
+        text-align: center;
+        &:before {
+            font-size: 2em;
+            line-height: 1;
+            margin: 0;
+        }
+        span {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            @media (max-width: 640px) {
+                display: none;
+            }
         }
     }
 }
@@ -2478,6 +2509,12 @@ details .arrow {
 
 #search-results-order {
     margin-bottom: 20px;
+    &:after {
+        content: " ";
+        display: block;
+        height: 0;
+        clear: both;
+    }
 }
 
 .js #search-results-order {

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -88,6 +89,15 @@ namespace Sfa.Das.Sas.Web.Controllers
                     rv);
                 return new RedirectResult(url);
             }
+
+            var shotListedStandardsCollection = _listCollection.GetAllItems(Constants.StandardsShortListCookieName).Select(standard => standard.ApprenticeshipId).ToList();
+            var shotListedFrameworksCollection = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName).Select(framework => framework.ApprenticeshipId).ToList();
+
+            var shortlistedStandards = shotListedStandardsCollection.ToDictionary(standard => standard, standard => true);
+            var shortlistedFrameworks = shotListedFrameworksCollection.ToDictionary(framework => framework, framework => true);
+
+            viewModel.ShortlistedStandards = shortlistedStandards;
+            viewModel.ShortlistedFrameworks = shortlistedFrameworks;
 
             viewModel.SortOrder = criteria.Order == 0 ? "1" : criteria.Order.ToString();
             viewModel.ActualPage = criteria.Page;

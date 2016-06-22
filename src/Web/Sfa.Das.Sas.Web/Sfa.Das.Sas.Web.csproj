@@ -511,6 +511,7 @@
     <Content Include="scripts\app\cookie-subkey.js" />
     <Content Include="scripts\app\cookie.js" />
     <Content Include="scripts\pages\framework-detail.js" />
+    <Content Include="scripts\pages\apprenticeship-searchResults.js" />
     <Content Include="scripts\polyfills\Array.js" />
     <Content Include="scripts\pages\dashboard-overview.js" />
     <Content Include="scripts\pages\provider-detail.js" />
