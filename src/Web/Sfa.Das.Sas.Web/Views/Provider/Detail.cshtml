@@ -50,9 +50,33 @@
                 </article>
             </section>
 
-            <div>
-                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-            </div>
+            @*<div>
+                    @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+                </div>*@
+
+        </div>
+
+        <div class="column-third">
+            @*<div class="hidden-for-mobile">
+                    @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+                </div>*@
+
+            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+            {
+                <div class="related-container">
+                    <aside class="related">
+                        <h2 class="heading-medium">
+                            Training provider quality assessment
+                        </h2>
+                        @GetSatisfactionsHtml()
+                    </aside>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
 
             <div class="survey-panel">
                 <h2 class="bold-large">
@@ -71,26 +95,8 @@
                 </p>
             </aside>
         </div>
-
-        <div class="column-third">
-            <div class="hidden-for-mobile">
-                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-            </div>
-
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
-            {
-                <div class="related-container">
-                    <aside class="related">
-                        <h2 class="heading-medium">
-                            Training provider quality assessment
-                        </h2>
-                        @GetSatisfactionsHtml()
-                    </aside>
-                </div>
-            }
-
-        </div>
     </div>
+
 </main>
 
 @helper ShowTrainingLocation(string title)
@@ -101,26 +107,26 @@ if (@Model != null)
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-        <dd id="training-location" class="training-location">
-            Training takes place at your location
-        </dd>
+            <dd id="training-location" class="training-location">
+                Training takes place at your location
+            </dd>
     }
     else
     {
-        <dd id="training-location" class="training-location">
-            @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Town @Model.Address.County @Model.Address.Postcode
-        </dd>
+            <dd id="training-location" class="training-location">
+                @Model.Location.LocationName @Model.Address.Address1 @Model.Address.Address2 @Model.Address.Town @Model.Address.County @Model.Address.Postcode
+            </dd>
     }
 }
 }
 
 @helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
         <dt class="phone-title">@title</dt>
         <dd id="@id" class="phone">@Html.Raw(item)</dd>
-    }
+}
 }
 
 @helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
@@ -134,9 +140,9 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
 @helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
-    if (!string.IsNullOrEmpty(url))
-    {
-        var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
+if (!string.IsNullOrEmpty(url))
+{
+    var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
         <dt class="@classTitle">@title</dt>
         <dd>
             <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
@@ -150,7 +156,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                 }
             </a>
         </dd>
-    }
+}
 
 }@helper GetSatisfactionsHtml()
 {
@@ -184,8 +190,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
 @helper GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)
 {
-    if (items != null)
-    {
+if (items != null)
+{
         <dt class="training-structure">@title</dt>
         <dd id="delivery-modes">
             <ul>
@@ -217,76 +223,44 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                 </div>
             </details>
         </dd>
-    }
+}
 }
 
 @helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
-    if (Model.Training == ApprenticeshipTrainingType.Framework)
-    {
-        if (isShortlisted)
-        {
-            @Html.ActionLink("Remove this training provider", "RemoveFrameworkProvider", "ShortList",
-                new {apprenticeshipId, providerId, locationId},
-                new
-                {
-                    @class = "link shortlist-link provider-shortlist-link",
-                    rel = "nofollow",
-                    data_apprenticeship = apprenticeshipId,
-                    data_provider = providerId,
-                    data_location = locationId,
-                    data_action = "remove",
-                    data_apprenticeship_type = "Framework"
-                })
-        }
-        else
-        {
-            @Html.ActionLink("Shortlist this training provider", "AddFrameworkProvider", "ShortList",
-                new {apprenticeshipId, providerId, locationId},
-                new
-                {
-                    @class = "link shortlist-link provider-shortlist-link",
-                    rel = "nofollow",
-                    data_apprenticeship = apprenticeshipId,
-                    data_provider = providerId,
-                    data_location = locationId,
-                    data_action = "add",
-                    data_apprenticeship_type = "Framework"
-                })
-        }
-    }
-    else
-    {
-        if (isShortlisted)
-        {
-            @Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
-                new {apprenticeshipId, providerId, locationId},
-                new
-                {
-                    @class = "link shortlist-link provider-shortlist-link", rel = "nofollow",
-                    data_apprenticeship = apprenticeshipId,
-                    data_provider = providerId,
-                    data_location = locationId,
-                    data_action = "remove",
-                    data_apprenticeship_type = "Standard"
-                })
-        }
-        else
-        {
-            @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
-                new {apprenticeshipId, providerId, locationId},
-                new
-                {
-                    @class = "link shortlist-link provider-shortlist-link",
-                    rel = "nofollow",
-                    data_apprenticeship = apprenticeshipId,
-                    data_provider = providerId,
-                    data_location = locationId,
-                    data_action = "add",
-                    data_apprenticeship_type = "Standard"
-                })
-        }
-    }
+if (Model.Training == ApprenticeshipTrainingType.Framework)
+{
+    return;
+}
+
+if (isShortlisted)
+{
+        @Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
+            new { apprenticeshipId, providerId, locationId },
+            new
+            {
+                @class = "link shortlist-link provider-shortlist-link",
+                rel = "nofollow",
+                data_apprenticeship = apprenticeshipId,
+                data_provider = providerId,
+                data_location = locationId,
+                data_action = "remove"
+            })
+}
+else
+{
+        @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
+            new { apprenticeshipId, providerId, locationId },
+            new
+            {
+                @class = "link shortlist-link provider-shortlist-link",
+                rel = "nofollow",
+                data_apprenticeship = apprenticeshipId,
+                data_provider = providerId,
+                data_location = locationId,
+                data_action = "add"
+            })
+}
 }
 
 
