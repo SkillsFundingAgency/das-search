@@ -38,9 +38,17 @@
                         @if (Model.JobRoles != null)
                         {
                             <ul>
-                                @foreach (var jobRole in Model.JobRoles)
+                                @foreach (var jobRole in Model.JobRoles.Take(5))
                                 {
                                     <li>@jobRole</li>
+                                }
+                                @if (Model.JobRoles.Count() > 5)
+                                {
+                                    foreach (var jobRole in Model.JobRoles.Skip(5))
+                                    {
+                                        <li class="default-hidden">@jobRole</li>
+                                    }
+                                    <a href="#" class="showmore hidden">Show more</a>
                                 }
                             </ul>
                         }

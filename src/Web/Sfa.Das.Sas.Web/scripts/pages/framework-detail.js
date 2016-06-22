@@ -22,8 +22,8 @@
     };
 
 
-    framework.init = function () {
-        $('.framework-shortlist-link').on('click', function (e) {
+    framework.init = function() {
+        $('.framework-shortlist-link').on('click', function(e) {
             e.preventDefault();
             var $this = $(this);
             if ($this.attr('data-action') === 'add') {
@@ -36,8 +36,24 @@
                 $('.framework-shortlist-link').html('Shortlist apprenticeship');
             };
         });
-    };
 
+        $('.showmore').removeClass('hidden');
+        $('.default-hidden').hide();
+
+        $('.showmore').on('click', function (e) {
+            e.preventDefault();
+            if ($('.default-hidden').is(":visible"))
+            {
+                $('.showmore').text("Show more");
+                $('.default-hidden').hide();
+            }
+            else
+            {
+                $('.showmore').text("Show less");
+                $('.default-hidden').show();
+            }
+        });
+    };
     framework.init();
 
 }(SearchAndShortlist.framework = {}));
