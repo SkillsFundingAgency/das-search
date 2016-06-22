@@ -7,7 +7,7 @@
 	
 #Currently extending this section please ignore
 #Test that Search Functionality still works
-#@Regression		@PreProd @Prod
+@Regression		@PreProd @Prod
 Scenario Outline:Should find a apprenticeship by the job role
 	
 	Given I navigated to the Search page
@@ -27,7 +27,7 @@ Examples:
 	| Relationship manager (banking) | Relationship manager (banking)        |
 
 	
-#@Regression @PreProd @Prod
+@Regression @PreProd @Prod
 #Test that specific providers exist in live service
 	Scenario Outline:Specific providers and frameworks in live data
 	Given I have data in the config
@@ -65,7 +65,7 @@ Examples:
 		| Keyword                                                                        |
 		| Children and Young People's Workforce: Children and Young People's Social Care |				  
 
-#@Regression @PreProd @Prod
+@Regression @PreProd @Prod
 #This is a shorter test to find providers but just for standards
 Scenario Outline:Specific providers and standards in live data
 	
@@ -95,7 +95,7 @@ Scenario Outline:Specific providers and standards in live data
 		| Postcode | title                                  | Keyword									  |
 		| M15 6BH  | MANCHESTER METROPOLITAN UNIVERSITY		| Digital & technology solutions professional |
 
-#@Regression @PreProd @Prod
+@Regression @PreProd @Prod
 #This scenario checks that an error message is displayed for and invalid postcode
 Scenario:Should display error for invalid postcode
 	Given I navigated to the Search page

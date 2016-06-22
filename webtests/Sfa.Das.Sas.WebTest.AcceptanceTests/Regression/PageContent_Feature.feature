@@ -3,7 +3,7 @@
 	I want to display structure and content that is consistent
 	So that user experience can be uniform across the service
 
-#@Regression @Pre-prod @Prod
+@Regression @Pre-prod @Prod
 Scenario: Search Page Core Content
 	Given I navigated to the Search page
 	Then I see
@@ -12,7 +12,7 @@ Scenario: Search Page Core Content
          | Search Button | Exists | True  |
 	     | Footer Element| Exists | True  |
 
-#@Regression @Pre-prod @Prod
+@Regression @Pre-prod @Prod
 Scenario: Search Results Core Content
 	Given I navigated to the Search Results page
 	And I waited for the view to become active

@@ -67,9 +67,15 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Page Core Content")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        [NUnit.Framework.CategoryAttribute("Pre-prod")]
+        [NUnit.Framework.CategoryAttribute("Prod")]
         public virtual void SearchPageCoreContent()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Page Core Content", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Page Core Content", new string[] {
+                        "Regression",
+                        "Pre-prod",
+                        "Prod"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -99,9 +105,15 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search Results Core Content")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        [NUnit.Framework.CategoryAttribute("Pre-prod")]
+        [NUnit.Framework.CategoryAttribute("Prod")]
         public virtual void SearchResultsCoreContent()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Results Core Content", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search Results Core Content", new string[] {
+                        "Regression",
+                        "Pre-prod",
+                        "Prod"});
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17

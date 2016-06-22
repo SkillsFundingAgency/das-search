@@ -5,7 +5,7 @@
 	So I can see only relevant levels listed first
 
 #Tests filtering by level works
-#@Regression @PreProd @Prod
+@Regression @PreProd @Prod
 Scenario: Filter Apprenticeship Search Results Page Low to High 
 	Given I navigated to the Search page
 	When  I choose Search Button

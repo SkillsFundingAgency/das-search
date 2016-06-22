@@ -67,9 +67,15 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Sort Apprenticeship Search Results Page")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        [NUnit.Framework.CategoryAttribute("PreProd")]
+        [NUnit.Framework.CategoryAttribute("Prod")]
         public virtual void SortApprenticeshipSearchResultsPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort Apprenticeship Search Results Page", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort Apprenticeship Search Results Page", new string[] {
+                        "Regression",
+                        "PreProd",
+                        "Prod"});
 #line 10
 this.ScenarioSetup(scenarioInfo);
 #line 11
