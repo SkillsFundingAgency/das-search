@@ -41,6 +41,7 @@ Scenario: Standard Details Page
 #Scenario:Framework Details Page
 
 
+
 #@Regression
 Scenario: Provider Details Page	
 	Given I navigated to the Search page
@@ -64,8 +65,5 @@ Scenario: Provider Details Page
 		| Field          | Rule   | Value |
 		| Shortlist Link | Exists | True  |
 
-	
-
-
-	#@Regression
+#@Regression
 #Scenario: Dashboard Page
