@@ -6,7 +6,7 @@
 	So I can see only relevant levels listed first
 #WIP
 #Tests Sorting  works
-@Regression @PreProd @Prod
+#@Regression
 Scenario: Sort Apprenticeship Search Results Page 
 	Given I navigated to the Search page
 	When  I choose Search Button

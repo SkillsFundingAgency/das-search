@@ -67,23 +67,12 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a apprenticeship by the job role")]
-        [NUnit.Framework.CategoryAttribute("Regression")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
-        [NUnit.Framework.CategoryAttribute("Prod")]
         [NUnit.Framework.TestCaseAttribute("railway", "Railway engineering design technician", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Junior management consultant", "Junior management consultant", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Relationship manager (banking)", "Relationship manager (banking)", new string[0])]
         public virtual void ShouldFindAApprenticeshipByTheJobRole(string searchTerm, string title, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "Regression",
-                    "PreProd",
-                    "Prod"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a apprenticeship by the job role", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a apprenticeship by the job role", exampleTags);
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 13
@@ -118,21 +107,10 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Specific providers and frameworks in live data")]
-        [NUnit.Framework.CategoryAttribute("Regression")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
-        [NUnit.Framework.CategoryAttribute("Prod")]
         [NUnit.Framework.TestCaseAttribute("Children and Young People\'s Workforce: Children and Young People\'s Social Care", new string[0])]
         public virtual void SpecificProvidersAndFrameworksInLiveData(string keyword, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "Regression",
-                    "PreProd",
-                    "Prod"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Specific providers and frameworks in live data", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Specific providers and frameworks in live data", exampleTags);
 #line 32
  this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -226,21 +204,10 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Specific providers and standards in live data")]
-        [NUnit.Framework.CategoryAttribute("Regression")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
-        [NUnit.Framework.CategoryAttribute("Prod")]
         [NUnit.Framework.TestCaseAttribute("M15 6BH", "MANCHESTER METROPOLITAN UNIVERSITY", "Digital & technology solutions professional", new string[0])]
         public virtual void SpecificProvidersAndStandardsInLiveData(string postcode, string title, string keyword, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "Regression",
-                    "PreProd",
-                    "Prod"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Specific providers and standards in live data", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Specific providers and standards in live data", exampleTags);
 #line 70
 this.ScenarioSetup(scenarioInfo);
 #line 72
@@ -307,15 +274,9 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should display error for invalid postcode")]
-        [NUnit.Framework.CategoryAttribute("Regression")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
-        [NUnit.Framework.CategoryAttribute("Prod")]
         public virtual void ShouldDisplayErrorForInvalidPostcode()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should display error for invalid postcode", new string[] {
-                        "Regression",
-                        "PreProd",
-                        "Prod"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should display error for invalid postcode", ((string[])(null)));
 #line 100
 this.ScenarioSetup(scenarioInfo);
 #line 101
