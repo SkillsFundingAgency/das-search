@@ -287,7 +287,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Value"});
             table13.AddRow(new string[] {
                         "Search Box",
-                        "Business"});
+                        "Digital"});
 #line 102
  testRunner.When("I enter data", ((string)(null)), table13, "When ");
 #line 105

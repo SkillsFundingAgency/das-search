@@ -101,7 +101,7 @@ Scenario:Should display error for invalid postcode
 	Given I navigated to the Search page
 	When I enter data
          | Field | Value |
-         |    Search Box   |   Business    |
+         |    Search Box   |   Digital    |
 	And I choose Search Button
 	Then I am on the Search Results page
 	When I choose First Standard Result
