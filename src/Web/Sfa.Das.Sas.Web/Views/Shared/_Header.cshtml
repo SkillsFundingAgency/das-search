@@ -37,8 +37,9 @@
 {
     var currentUrl = Request.Url?.AbsolutePath ?? string.Empty;
     var dashboardUrl = Url.Action("Overview", "Dashboard");
+    var informUrl = Url.Action("Start", "Start");
 
-    if (currentUrl.Equals(dashboardUrl))
+    if (currentUrl.Equals(dashboardUrl) || currentUrl.Equals(informUrl))
     {
         return;
     }
