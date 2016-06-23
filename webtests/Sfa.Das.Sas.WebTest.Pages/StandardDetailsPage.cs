@@ -12,7 +12,7 @@
         [ElementLocator(CssSelector = "#bottom-actions .ui-find-training-providers")]
         public IWebElement SearchPageButton { get; set; }
 
-        [ElementLocator(CssSelector = "#bottom-actions .shortlist-link")]
+        [ElementLocator(CssSelector = ".shortlist-link")]
         public IWebElement ShortlistLink { get; set; }
     }
 }

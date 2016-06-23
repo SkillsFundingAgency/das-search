@@ -23,7 +23,21 @@ Scenario: Search Results Core Content
 	| Navigation Element | Exists | True  |
 
 #@Regression
-#Scenario:Standard Details Page
+
+Scenario: Standard Details Page	
+	Given I navigated to the Search page
+	When I enter data
+		| Field      | Value         |
+		| Search Box | Digital & technology solutions professional	 |
+	And  I choose Search Button
+	Then I am on the Search Results page	
+	When I choose First Standard Result
+	Then I am on the Standard Details page
+	And I see
+	| Field          | Rule   | Value |
+	| Shortlist link | Exists | True  |
+
+
 
 #@Regression
 #Scenario:Framework Details Page
