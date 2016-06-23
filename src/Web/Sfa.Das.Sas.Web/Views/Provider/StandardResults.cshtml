@@ -106,7 +106,8 @@
             <div class="@cssClass">
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
+                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId"/>
+                    <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }

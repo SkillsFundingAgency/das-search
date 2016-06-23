@@ -315,16 +315,32 @@ WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3619)
 , 3627), false)
 );
 
+WriteLiteralTo(__razor_helper_writer, "/>\r\n                            <input");
+
+WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
+
+WriteLiteralTo(__razor_helper_writer, " name=\"ShowAll\"");
+
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3713), Tuple.Create("\"", 3746)
+
+#line 115 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3721), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
+
+#line default
+#line hidden
+, 3721), false)
+);
+
 WriteLiteralTo(__razor_helper_writer, " />\r\n");
 
 
-#line 115 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
                             
 
 #line default
 #line hidden
 
-#line 115 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
                               
                                 Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                             
@@ -343,7 +359,7 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\
 " </div>\r\n            </div>\r\n");
 
 
-#line 123 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 124 "..\..\Views\Provider\FrameworkResults.cshtml"
     }
     }
 
@@ -352,12 +368,12 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\
 #line hidden
 });
 
-#line 125 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 126 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 128 "..\..\Views\Provider\FrameworkResults.cshtml"
+        #line 129 "..\..\Views\Provider\FrameworkResults.cshtml"
  
                         RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
                         {
@@ -565,7 +581,7 @@ WriteLiteral("\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 127 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 128 "..\..\Views\Provider\FrameworkResults.cshtml"
                     
             
             #line default
