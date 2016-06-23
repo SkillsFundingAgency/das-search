@@ -61,14 +61,14 @@
             if ($this.attr("data-action") === "add")
             {
                 provider.AddShortlistRequest($(this));
-                $(this).attr("data-action", "remove");
-                $(this).html("Remove this training provider");
+                $(".provider-shortlist-link").attr("data-action", "remove");
+                $(".provider-shortlist-link").html("Remove this training provider");
             }
             else if ($this.attr("data-action") === "remove")
             {
                 provider.RemoveShortlistRequest($(this));
-                $(this).attr("data-action", "add");
-                $(this).html("Shortlist this training provider");
+                $(".provider-shortlist-link").attr("data-action", "add");
+                $(".provider-shortlist-link").html("Shortlist this training provider");
             };
         });
     };

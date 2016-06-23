@@ -1,7 +1,7 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (framework) {
 
-    framework.CookieName = 'das_shortlist_frameworks';
+    framework.CookieName = "das_shortlist_frameworks";
 
     framework.Add = function (id) {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(framework.CookieName);
@@ -23,34 +23,34 @@
 
 
     framework.init = function() {
-        $('.framework-shortlist-link').on('click', function(e) {
+        $(".framework-shortlist-link").on("click", function(e) {
             e.preventDefault();
             var $this = $(this);
-            if ($this.attr('data-action') === 'add') {
-                framework.Add($(this).attr('data-framework'));
-                $('.framework-shortlist-link').attr('data-action', 'remove');
-                $('.framework-shortlist-link').html('Remove from shortlist');
-            } else if ($this.attr('data-action') === 'remove') {
-                framework.Remove($(this).attr('data-framework'));
-                $('.framework-shortlist-link').attr('data-action', 'add');
-                $('.framework-shortlist-link').html('Shortlist apprenticeship');
+            if ($this.attr("data-action") === "add") {
+                framework.Add($(this).attr("data-framework"));
+                $(".framework-shortlist-link").attr("data-action", "remove");
+                $(".framework-shortlist-link").html("Remove from shortlist");
+            } else if ($this.attr("data-action") === "remove") {
+                framework.Remove($(this).attr("data-framework"));
+                $(".framework-shortlist-link").attr("data-action", "add");
+                $(".framework-shortlist-link").html("Shortlist apprenticeship");
             };
         });
 
-        $('.showmore').removeClass('hidden');
-        $('.default-hidden').hide();
+        $(".showmore").removeClass("hidden");
+        $(".default-hidden").hide();
 
-        $('.showmore').on('click', function (e) {
+        $(".showmore").on("click", function (e) {
             e.preventDefault();
-            if ($('.default-hidden').is(":visible"))
+            if ($(".default-hidden").is(":visible"))
             {
-                $('.showmore').text("Show more");
-                $('.default-hidden').hide();
+                $(".showmore").text("Show more");
+                $(".default-hidden").hide();
             }
             else
             {
-                $('.showmore').text("Show less");
-                $('.default-hidden').show();
+                $(".showmore").text("Show less");
+                $(".default-hidden").show();
             }
         });
     };
