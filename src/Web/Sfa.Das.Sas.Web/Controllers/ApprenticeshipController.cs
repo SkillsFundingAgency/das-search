@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
-using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 using RedirectResult = System.Web.Mvc.RedirectResult;
@@ -15,10 +13,9 @@ namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Net;
     using System.Web.Routing;
-
-    using Sfa.Das.Sas.Web.Factories;
     using Sfa.Das.Sas.Web.Factories.Interfaces;
 
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
