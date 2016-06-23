@@ -91,10 +91,12 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Services
             var match1 = matcher.Invoke("testalias-2016-05-09");
             var match2 = matcher.Invoke("testalias-2016-05-08");
             var match3 = matcher.Invoke("testalias-2016-05-07");
+            var match4 = matcher.Invoke("testalias-2016-05-06");
 
-            Assert.That(match1, Is.True);
+            Assert.That(match1, Is.False);
             Assert.That(match2, Is.True);
-            Assert.That(match3, Is.False);
+            Assert.That(match3, Is.True);
+            Assert.That(match4, Is.False);
         }
     }
 }
