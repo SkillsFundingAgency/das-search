@@ -1,55 +1,55 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (provider)
 {
-    provider.AddShortlistRequest = function (shortlistLink)
+    provider.AddShortlistRequest = function(shortlistLink)
     {
         var apprenticeship =
         {
             providerId: shortlistLink.attr("data-provider"),
             apprenticeshipId: shortlistLink.attr("data-apprenticeship"),
             locationId: shortlistLink.attr("data-location"),
-            type : shortlistLink.attr("data-apprenticeship-type")
+            type: shortlistLink.attr("data-apprenticeship-type")
         };
-        
-        if (apprenticeship.type === "Standard") {
+
+        if (apprenticeship.type === "Standard")
+        {
             SearchAndShortlist.shortlist.AddStandardProvider(
                 apprenticeship.providerId,
                 apprenticeship.apprenticeshipId,
                 apprenticeship.locationId);
-        }
-        else
+        } else
         {
             SearchAndShortlist.shortlist.AddFrameworkProvider(
-                 apprenticeship.providerId,
-                apprenticeship.apprenticeshipId,
-                apprenticeship.locationId);
-        }
-    }
-
-    provider.RemoveShortlistRequest = function (shortlistLink)
-    {
-        var apprenticeship =
-       {
-           providerId: shortlistLink.attr("data-provider"),
-           apprenticeshipId: shortlistLink.attr("data-apprenticeship"),
-           locationId: shortlistLink.attr("data-location"),
-           type: shortlistLink.attr("data-apprenticeship-type")
-       };
-
-        if (apprenticeship.type === "Standard") {
-            SearchAndShortlist.shortlist.RemoveStandardProvider(
                 apprenticeship.providerId,
                 apprenticeship.apprenticeshipId,
                 apprenticeship.locationId);
         }
-        else
+    };
+
+    provider.RemoveShortlistRequest = function(shortlistLink)
+    {
+        var apprenticeship =
+        {
+            providerId: shortlistLink.attr("data-provider"),
+            apprenticeshipId: shortlistLink.attr("data-apprenticeship"),
+            locationId: shortlistLink.attr("data-location"),
+            type: shortlistLink.attr("data-apprenticeship-type")
+        };
+
+        if (apprenticeship.type === "Standard")
+        {
+            SearchAndShortlist.shortlist.RemoveStandardProvider(
+                apprenticeship.providerId,
+                apprenticeship.apprenticeshipId,
+                apprenticeship.locationId);
+        } else
         {
             SearchAndShortlist.shortlist.RemoveFrameworkProvider(
                 apprenticeship.providerId,
                 apprenticeship.apprenticeshipId,
                 apprenticeship.locationId);
         }
-    }
+    };
 
     provider.init = function()
     {

@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Web.Factories
                 return null;
             }
 
-            return new ShortlistStandardViewModel()
+            return new ShortlistStandardViewModel
             {
                 Id = standard.StandardId,
                 Title = standard.Title,
@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.Factories
                 return null;
             }
 
-            return new ShortlistFrameworkViewModel()
+            return new ShortlistFrameworkViewModel
             {
                 Id = framework.FrameworkId,
                 Title = framework.Title,

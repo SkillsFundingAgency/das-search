@@ -1,24 +1,27 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
-(function (dashboard) {
-
-    dashboard.RemoveElement = function(element) {
-
-        if (element) {
+(function (dashboard)
+{
+    dashboard.RemoveElement = function (element)
+    {
+        if (element)
+        {
             element.remove();
         }
 
         dashboard.RefreshShortListDisplay = function ()
         {
-            if ($(".apprenticeship-items .apprenticeship-item").length === 0){
+            if ($(".apprenticeship-items .apprenticeship-item").length === 0)
+            {
                 $(".shortlist").hide();
                 $("#empty-shortlist-message").removeClass("hidden");
             }
         };
     };
 
-    dashboard.init = function () {
-        
-        $(".delete-link").on("click", function (e) {
+    dashboard.init = function ()
+    {
+        $(".delete-link").on("click", function (e)
+        {
             e.preventDefault();
             
             if ($(this).attr("data-apprenticeship-type") === "RemoveStandard") {
@@ -31,11 +34,11 @@
             var standardRow = $(this).closest(".apprenticeship-item");
 
             dashboard.RemoveElement(standardRow);
-
             dashboard.RefreshShortListDisplay();
         });
 
-        $(".provider-delete-link").on("click", function (e) {
+        $(".provider-delete-link").on("click", function (e)
+        {
             e.preventDefault();
 
             var apprenticeship =
@@ -46,13 +49,15 @@
                 type: $(this).attr("data-apprenticeship-type")
             };
 
-            if (apprenticeship.type === "Standard") {
+            if (apprenticeship.type === "Standard")
+            {
                 SearchAndShortlist.shortlist.RemoveStandardProvider(
                  apprenticeship.providerId,
                  apprenticeship.apprenticeshipId,
                  apprenticeship.locationId);
             }
-            else {
+            else
+            {
                 SearchAndShortlist.shortlist.RemoveFrameworkProvider(
                   apprenticeship.providerId,
                   apprenticeship.apprenticeshipId,
@@ -60,12 +65,11 @@
             }
 
             var providers = $(this).closest(".providers");
-
             var providerRow = $(this).closest(".provider-item");
-
             dashboard.RemoveElement(providerRow);
-            
-            if (providers.find(".provider-item").length === 0) {
+
+            if (providers.find(".provider-item").length === 0)
+            {
                 providers.hide();
             }
 

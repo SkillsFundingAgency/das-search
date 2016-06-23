@@ -8,11 +8,11 @@
             if ($this.attr("data-action") === "add") {
                 SearchAndShortlist.shortlist.AddStandard($this.attr("data-standard"));
                 $this.attr("data-action", "remove");
-                $this.html('Remove');
+                $this.html("Remove");
             } else if ($this.attr("data-action") === "remove") {
                 SearchAndShortlist.shortlist.RemoveStandard($(this).attr("data-standard"));
-                $this.attr("data-action", "add")
-                $this.html('Shortlist');
+                $this.attr("data-action", "add");
+                $this.html("Shortlist");
             };
         });
 
@@ -22,11 +22,11 @@
             if ($this.attr("data-action") === "add") {
                 SearchAndShortlist.shortlist.AddFramework($this.attr("data-framework"));
                 $this.attr("data-action", "remove");
-                $this.html('Remove');
+                $this.html("Remove");
             } else if ($this.attr("data-action") === "remove") {
                 SearchAndShortlist.shortlist.RemoveFramework($this.attr("data-framework"));
                 $this.attr("data-action", "add");
-                $this.html('Shortlist');
+                $this.html("Shortlist");
             };
         });
     };
