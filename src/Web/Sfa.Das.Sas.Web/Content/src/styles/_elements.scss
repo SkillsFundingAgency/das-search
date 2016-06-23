@@ -2462,6 +2462,10 @@ details .arrow {
     }
 }
 
+#apprenticeship-results .shortlist-link, #provider-results .shortlist-link{
+    text-decoration: underline;
+}
+
 .shortlist-link {
     display: block;
     margin: 1em 0;
