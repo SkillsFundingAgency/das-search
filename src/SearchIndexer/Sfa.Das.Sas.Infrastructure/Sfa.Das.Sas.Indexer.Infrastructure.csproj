@@ -112,6 +112,8 @@
     <Compile Include="CourseDirectory\Models\ProviderCollection.cs" />
     <Compile Include="CourseDirectory\Models\Standard.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\Configuration\ElasticsearchConfiguration.cs" />
+    <Compile Include="Elasticsearch\Configuration\IElasticsearchConfiguration.cs" />
     <Compile Include="Elasticsearch\Helpers\ElasticLevelHelper.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\ElasticsearchIndexMaintainerBase.cs" />
@@ -119,13 +121,13 @@
     <Compile Include="Elasticsearch\ElasticsearchProviderIndexMaintainer.cs" />
     <Compile Include="Elasticsearch\ElasticsearchApprenticeshipIndexMaintainer.cs" />
     <Compile Include="Elasticsearch\IElasticsearchCustomClient.cs" />
+    <Compile Include="Elasticsearch\Models\ApprenticeshipDocument.cs" />
     <Compile Include="Elasticsearch\Models\FrameworkDocument.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchMapper.cs" />
     <Compile Include="Elasticsearch\IGenerateProviderIndexDefinitions.cs" />
     <Compile Include="Elasticsearch\Models\Address.cs" />
     <Compile Include="Elasticsearch\Models\FrameworkProvider.cs" />
-    <Compile Include="Elasticsearch\Models\IApprenticeshipDocument.cs" />
     <Compile Include="Elasticsearch\Models\IProviderAppreticeshipDocument.cs" />
     <Compile Include="Elasticsearch\Models\JobRoleItem.cs" />
     <Compile Include="Elasticsearch\Models\StandardProvider.cs" />
@@ -147,6 +149,8 @@
     <Compile Include="Services\VstsClient.cs" />
     <Compile Include="Services\ZipFileExtractor.cs" />
     <Compile Include="Settings\AppConfigSettingsProvider.cs" />
+    <Compile Include="Settings\ElasticsearchSettings.cs" />
+    <Compile Include="Settings\IElasticsearchSettings.cs" />
     <Compile Include="Settings\InfrastructureSettings.cs" />
     <Compile Include="Settings\IInfrastructureSettings.cs" />
     <Compile Include="Settings\LarsSettings.cs" />

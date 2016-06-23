@@ -59,6 +59,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Queue
 
                     var indexTime = latestMessage?.InsertionTime ?? DateTime.Now;
 
+
                     await indexerService.CreateScheduledIndex(indexTime).ConfigureAwait(false);
 
                     _cloudQueueService.DeleteQueueMessage(queueName, latestMessage);

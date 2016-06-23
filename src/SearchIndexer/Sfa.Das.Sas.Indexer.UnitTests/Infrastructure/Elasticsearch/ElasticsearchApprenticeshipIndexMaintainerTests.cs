@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
@@ -12,6 +12,8 @@ using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;
 
 namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 {
+    using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
+
     [TestFixture]
     public sealed class ElasticsearchApprenticeshipIndexMaintainerTests : BaseElasticIndexMaintainerTests
     {
@@ -22,7 +24,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             var response = new StubResponse(400);
             MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), It.IsAny<string>())).Returns(response);
 
-            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>());
+            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>(), Mock.Of<IElasticsearchConfiguration>());
 
             indexMaintainer.CreateIndex("testindex");
         }
@@ -35,7 +37,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), It.IsAny<string>())).Returns(response);
             MockElasticClient.Setup(x => x.BulkAsync(It.IsAny<IBulkRequest>(), It.IsAny<string>())).Returns(Task.FromResult<IBulkResponse>(mockResponse.Object));
 
-            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, new ElasticsearchMapper(Mock.Of<ILog>()), Mock.Of<ILog>());
+            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, new ElasticsearchMapper(Mock.Of<ILog>()), Mock.Of<ILog>(), Mock.Of<IElasticsearchConfiguration>());
 
             await indexMaintainer.IndexStandards("testindex", StandardsTestData4001());
 
@@ -50,7 +52,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), It.IsAny<string>())).Returns(response);
             MockElasticClient.Setup(x => x.BulkAsync(It.IsAny<IBulkRequest>(), It.IsAny<string>())).Returns(Task.FromResult<IBulkResponse>(mockResponse.Object));
 
-            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, new ElasticsearchMapper(Mock.Of<ILog>()), Mock.Of<ILog>());
+            var indexMaintainer = new ElasticsearchApprenticeshipIndexMaintainer(MockElasticClient.Object, new ElasticsearchMapper(Mock.Of<ILog>()), Mock.Of<ILog>(), Mock.Of<IElasticsearchConfiguration>());
 
             await indexMaintainer.IndexStandards("testindex", StandardsTestData4001WithOneNull());
 

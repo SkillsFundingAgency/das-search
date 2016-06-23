@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
+
     using Nest;
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
@@ -115,7 +117,6 @@
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .AllTypes()
                     .Skip(skip)
-                    .Take(take)
                     .Query(q => q
                         .QueryString(qs => qs
                             .Fields(fs => fs
@@ -140,7 +141,6 @@
         private SearchDescriptor<ApprenticeshipSearchResultsItem> GetKeywordSearchDescriptor(int page, int take, string formattedKeywords, int order, List<int> selectedLevels)
         {
             var skip = (page - 1) * take;
-
             var searchDescriptor = new SearchDescriptor<ApprenticeshipSearchResultsItem>()
                     .Index(_applicationSettings.ApprenticeshipIndexAlias)
                     .AllTypes()
@@ -152,6 +152,8 @@
                             bs => bs
                                 .Match(m => m
                                     .Field(f => f.Title)
+                                    .PrefixLength(1)
+                                    .Fuzziness(Fuzziness.Ratio(1.0))
                                     .Query(formattedKeywords)),
                                     bs => bs
                                     .Bool(bsb => bsb
@@ -166,11 +168,7 @@
                                                 .Query(formattedKeywords)),
                                             bsbs => bsbs
                                             .Match(ms => ms
-                                                .Field(msf => msf.FrameworkName)
-                                                .Query(formattedKeywords)),
-                                            bsbs => bsbs
-                                            .Match(ms => ms
-                                                .Field(msf => msf.PathwayName)
+                                                .Field(msf => msf.JobRoleItems.First().Description)
                                                 .Query(formattedKeywords)),
                                             bsbs => bsbs
                                             .Match(ms => ms

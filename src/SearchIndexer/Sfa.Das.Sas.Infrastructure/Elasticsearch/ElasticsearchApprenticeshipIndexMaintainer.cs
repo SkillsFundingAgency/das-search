@@ -8,23 +8,33 @@ using Sfa.Das.Sas.Indexer.Core.Exceptions;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
-using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 {
     using System.Globalization;
 
+    using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
+
     public sealed class ElasticsearchApprenticeshipIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainApprenticeshipIndex
     {
-        public ElasticsearchApprenticeshipIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog logger)
+        private readonly IElasticsearchConfiguration _elasticsearchConfiguration;
+
+        public ElasticsearchApprenticeshipIndexMaintainer(
+            IElasticsearchCustomClient elasticsearchClient,
+            IElasticsearchMapper elasticsearchMapper,
+            ILog logger,
+            IElasticsearchConfiguration elasticsearchConfiguration)
             : base(elasticsearchClient, elasticsearchMapper, logger, "Apprenticeship")
         {
+            _elasticsearchConfiguration = elasticsearchConfiguration;
         }
 
         public override void CreateIndex(string indexName)
         {
             var response = Client.CreateIndex(indexName, i => i
+                .Settings(settings => settings
+                    .Analysis(a => _elasticsearchConfiguration.ApprenticeshipAnalysisDescriptor()))
                 .Mappings(ms => ms
                     .Map<StandardDocument>(m => m.AutoMap())
                     .Map<FrameworkDocument>(m => m.AutoMap())));

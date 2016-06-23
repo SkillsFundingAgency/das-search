@@ -6,33 +6,24 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
     using System;
     using System.Collections.Generic;
 
-    public sealed class FrameworkDocument : IApprenticeshipDocument, IIndexEntry
-    {
-        [String(Analyzer = "english")]
-        public string Title { get; set; }
+    using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
 
-        public int Level { get; set; }
+    public sealed class FrameworkDocument : ApprenticeshipDocument, IIndexEntry
+    {
+        public string FrameworkId { get; set; }
 
         public int FrameworkCode { get; set; }
 
-        public string FrameworkId { get; set; }
-
-        [String(Analyzer = "english")]
+        [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]
         public string FrameworkName { get; set; }
 
         public int PathwayCode { get; set; }
 
-        [String(Analyzer = "english")]
+        [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]
         public string PathwayName { get; set; }
 
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
-
         public DateTime? ExpiryDate { get; set; }
-
-        public double SectorSubjectAreaTier1 { get; set; }
-
-        public double SectorSubjectAreaTier2 { get; set; }
     }
 }

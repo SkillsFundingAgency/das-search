@@ -11,15 +11,19 @@ using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Indexer.Infrastructure.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Settings;
 using StructureMap;
+using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.DependencyResolution
 {
+
     public class InfrastructureRegistry : Registry
     {
         public InfrastructureRegistry()
         {
             For<IGetStandardLevel>().Use<LarsClient>();
             For<ILarsSettings>().Use<LarsSettings>();
+            For<IElasticsearchConfiguration>().Use<ElasticsearchConfiguration>();
+            For<IElasticsearchSettings>().Use<ElasticsearchSettings>();
             For<IGetActiveProviders>().Use<FcsActiveProvidersClient>();
             For<IConvertFromCsv>().Use<CsvService>();
             For<IVstsClient>().Use<VstsClient>();
