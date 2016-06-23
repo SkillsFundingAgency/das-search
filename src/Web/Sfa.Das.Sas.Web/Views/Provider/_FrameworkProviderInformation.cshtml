@@ -32,5 +32,44 @@
                     @item.LearnerSatisfactionMessage
                 </dd>
             </dl>
+            <div class="shortlist-link">
+                @GetShortlistLink(item.Id, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted)
+            </div>
         </article>
     }
+
+@helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
+{
+    providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+    if (isShortlisted)
+    {
+            @Html.ActionLink("Remove", "RemoveFrameworkProvider", "ShortList",
+                new { apprenticeshipId, providerId, locationId },
+                new
+                {
+                    @class = "link shortlist-link provider-search-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "remove",
+                    data_apprenticeship_type = "Framework"
+                })
+    }
+    else
+    {
+            @Html.ActionLink("Shortlist", "AddFrameworkProvider", "ShortList",
+                new { apprenticeshipId, providerId, locationId },
+                new
+                {
+                    @class = "link shortlist-link provider-search-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "add",
+                    data_apprenticeship_type = "Framework"
+                })
+    }
+}

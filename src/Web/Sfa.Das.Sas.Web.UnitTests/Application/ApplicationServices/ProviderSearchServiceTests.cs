@@ -6,29 +6,23 @@ using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Exceptions;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {
     [TestFixture]
-    public class ProviderSearchServiceTests
+    public sealed class ProviderSearchServiceTests
     {
+        private readonly Pagination _pageZeroWithTenItems = new Pagination { Page = 0, Take = 10 };
+        private readonly Coordinate _testPostCodeCoordinate = new Coordinate { Lat = 52.1234, Lon = 1.3445 };
+
         [TestCase("")]
         [TestCase(null)]
         public async Task SearchByStandardPostCodeShouldIndicateIfANullOrEmptyPostCodeIsPassed(string postcode)
         {
             var service = new ProviderSearchService(null, null, null, null, null, null);
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(123, postcode, pagination, null, false);
+            var result = await service.SearchStandardProviders(123, postcode, _pageZeroWithTenItems, null, false);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -38,22 +32,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         public async Task SearchByStandardPostCodeShouldAlwaysReturnTheStandardId(string postcode)
         {
             const int testStandardId = 123;
-            var mockSearchProvider = CreateMockStandardSearchProvider();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            ProviderSearchService service = new ProviderSearchServiceBuilder();
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
-
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(testStandardId, postcode, pagination, null, false);
+            var result = await service.SearchStandardProviders(testStandardId, postcode, _pageZeroWithTenItems, null, false);
 
             Assert.That(result.StandardId, Is.EqualTo(testStandardId));
         }
@@ -63,31 +44,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         {
             const int testStandardId = 123;
             const string testPostCode = "AS3 4AA";
-            var testCoordinates = new Coordinate { Lat = 52.1234, Lon = 1.3445 };
             var stubSearchResults = new List<StandardProviderSearchResultsItem> { new StandardProviderSearchResultsItem(), new StandardProviderSearchResultsItem() };
-            var mockSearchProvider = CreateMockStandardSearchProvider(stubSearchResults);
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = 0 };
 
-            mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult(testCoordinates));
+            var builder = new ProviderSearchServiceBuilder()
+                .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            var service = builder.Build();
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(testStandardId, testPostCode, pagination, null, false);
+            var result = await service.SearchStandardProviders(testStandardId, testPostCode, _pageZeroWithTenItems, null, false);
 
             Assert.That(result.Hits, Is.EqualTo(stubSearchResults));
 
-            mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            mockSearchProvider.Verify(x => x.SearchByStandardLocation(testStandardId, testCoordinates, 0, 10, null), Times.Once);
+            builder.LocationLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
+            builder.LocationSearchProvider.Verify(x => x.SearchByStandardLocation(testStandardId, _testPostCodeCoordinate, 0, 10, null), Times.Once);
         }
 
         [Test]
@@ -96,51 +67,32 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int testStandardId = 123;
             const string testPostCode = "AS3 4AA";
             var stubSearchResults = new List<StandardProviderSearchResultsItem> { new StandardProviderSearchResultsItem(), new StandardProviderSearchResultsItem() };
-            var mockSearchProvider = CreateMockStandardSearchProvider(stubSearchResults);
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = 0 };
 
-            mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult((Coordinate)null));
+            var builder = new ProviderSearchServiceBuilder()
+                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            var service = builder.Build();
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(testStandardId, testPostCode, pagination, null, false);
+            var result = await service.SearchStandardProviders(testStandardId, testPostCode, _pageZeroWithTenItems, null, false);
 
             result.TotalResults.Should().Be(0);
             result.StandardId.Should().Be(123);
 
-            mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
+            builder.LocationLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
         }
 
         [Test]
         public async Task SearchByStandardPostCodeShouldIncludeCountOfResults()
         {
             const long testTotalResults = 5;
-            var mockSearchProvider = CreateMockStandardSearchProvider(null, testTotalResults);
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = null, Total = 5 };
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults)
+                .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate));
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(123, "AS2 3SS", pagination, null, false);
+            var result = await service.SearchStandardProviders(123, "AS2 3SS", _pageZeroWithTenItems, null, false);
 
             Assert.That(result.TotalResults, Is.EqualTo(testTotalResults));
         }
@@ -149,23 +101,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         public async Task SearchByStandardPostCodeShouldIncludeStandardName()
         {
             const string testTitle = "Test Title";
-            var mockSearchProvider = CreateMockStandardSearchProvider();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard { Title = testTitle });
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = null, Total = 0 };
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+               .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults)
+               .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+               .SetupStandardRepository(x => x.GetStandardById(It.IsAny<int>()), new Standard { Title = testTitle });
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(123, "AS3 4AS", pagination, null, false);
+            var result = await service.SearchStandardProviders(123, "AS3 4AS", _pageZeroWithTenItems, null, false);
 
             Assert.That(result.StandardName, Is.EqualTo(testTitle));
         }
@@ -173,23 +116,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         [Test]
         public async Task SearchByStandardPostCodeShouldIndicateThereWasAnErrorIfSearchThrowsAnException()
         {
-            var mockSearchProvider = CreateMockStandardSearchProvider();
-            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>())).Throws<SearchException>();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+               .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+               .SetupLocationSearchProviderException<SearchException>(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()));
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
-
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchStandardProviders(123, "AS3 4AS", pagination, null, false);
+            var result = await service.SearchStandardProviders(123, "AS3 4AS", _pageZeroWithTenItems, null, false);
 
             Assert.That(result.HasError, Is.True);
         }
@@ -198,15 +129,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         [TestCase(null)]
         public async Task SearchByFrameworkPostCodeShouldIndicateIfANullOrEmptyPostCodeIsPassed(string postcode)
         {
-            var service = new ProviderSearchService(null, null, null, null, null, null);
+            var service = new ProviderSearchServiceBuilder().Build();
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(123, postcode, pagination, null, false);
+            var result = await service.SearchFrameworkProviders(123, postcode, _pageZeroWithTenItems, null, false);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -216,22 +141,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         public async Task SearchByFrameworkPostCodeShouldAlwaysReturnTheFrameworkId(string postcode)
         {
             const int testFrameworkId = 123;
-            var mockSearchProvider = CreateMockFrameworkSearchProvider();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = null, Total = 0 };
 
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+               .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+               .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(testFrameworkId, postcode, pagination, null, false);
+            var result = await service.SearchFrameworkProviders(testFrameworkId, postcode, _pageZeroWithTenItems, null, false);
 
             result.FrameworkId.Should().Be(testFrameworkId);
         }
@@ -241,31 +157,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         {
             const int testFrameworkId = 123;
             const string testPostCode = "AS3 4AA";
-            var testCoordinates = new Coordinate { Lat = 52.1234, Lon = 1.3445 };
             var stubSearchResults = new List<FrameworkProviderSearchResultsItem> { new FrameworkProviderSearchResultsItem(), new FrameworkProviderSearchResultsItem() };
-            var mockSearchProvider = CreateMockFrameworkSearchProvider(stubSearchResults);
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = stubSearchResults, Total = 0 };
 
-            mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult(testCoordinates));
+            ProviderSearchServiceBuilder builder = new ProviderSearchServiceBuilder()
+               .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+               .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            var service = builder.Build();
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, pagination, null, false);
+            var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, _pageZeroWithTenItems, null, false);
 
             result.Hits.Should().BeSameAs(stubSearchResults);
 
-            mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            mockSearchProvider.Verify(x => x.SearchByFrameworkLocation(testFrameworkId, testCoordinates, 0, 10, null), Times.Once);
+            builder.LocationLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
+            builder.LocationSearchProvider.Verify(x => x.SearchByFrameworkLocation(testFrameworkId, _testPostCodeCoordinate, 0, 10, null), Times.Once);
         }
 
         [Test]
@@ -274,51 +180,32 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int testFrameworkId = 123;
             const string testPostCode = "AS3 4AA";
             var stubSearchResults = new List<FrameworkProviderSearchResultsItem> { new FrameworkProviderSearchResultsItem(), new FrameworkProviderSearchResultsItem() };
-            var mockSearchProvider = CreateMockFrameworkSearchProvider(stubSearchResults);
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = stubSearchResults, Total = 0 };
 
-            mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult((Coordinate)null));
+            ProviderSearchServiceBuilder builder = new ProviderSearchServiceBuilder()
+                    .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+                    .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
-
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, pagination, null, false);
+            var service = builder.Build();
+            var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, _pageZeroWithTenItems, null, false);
 
             result.TotalResults.Should().Be(0);
             result.FrameworkId.Should().Be(123);
 
-            mockPostCodeLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
+            builder.LocationLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
         }
 
         [Test]
         public async Task SearchByFrameworkPostCodeShouldIncludeCountOfResults()
         {
             const long testTotalResults = 5;
-            var mockSearchProvider = CreateMockFrameworkSearchProvider(null, testTotalResults);
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = null, Total = testTotalResults };
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+                    .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+                    .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(123, "AS2 3SS", pagination, null, false);
+            var result = await service.SearchFrameworkProviders(123, "AS2 3SS", _pageZeroWithTenItems, null, false);
 
             result.TotalResults.Should().Be(testTotalResults);
         }
@@ -327,23 +214,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         public async Task SearchByFrameworkPostCodeShouldIncludeStandardName()
         {
             const string frameworkName = "Test Title";
-            var mockSearchProvider = CreateMockFrameworkSearchProvider();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(new Framework { FrameworkName = frameworkName });
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = null, Total = 0 };
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+                   .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+                   .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults)
+                   .SetupFrameworkRepository(x => x.GetFrameworkById(It.IsAny<int>()), new Framework { FrameworkName = frameworkName });
 
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(123, "AS3 4AS", pagination, null, false);
+            var result = await service.SearchFrameworkProviders(123, "AS3 4AS", _pageZeroWithTenItems, null, false);
 
             result.FrameworkName.Should().Be(frameworkName);
         }
@@ -351,79 +229,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         [Test]
         public async Task SearchByFrameworkPostCodeShouldIndicateThereWasAnErrorIfSearchThrowsAnException()
         {
-            var mockSearchProvider = CreateMockFrameworkSearchProvider();
-            mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), null)).Throws<SearchException>();
-            var mockStandardRepository = CreateMockStandardRepository();
-            var mockFrameworkRepository = CreateMockFrameworkRepository();
-            var mockPostCodeLookup = CreateMockPostCodeLookup();
-            var mockPaginationSettings = new Mock<IPaginationSettings>();
+            ProviderSearchService service = new ProviderSearchServiceBuilder()
+                   .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
+                   .SetupLocationSearchProviderException<SearchException>(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()));
 
-            var mockLogger = new Mock<ILog> { DefaultValue = DefaultValue.Mock };
-            var service = new ProviderSearchService(mockSearchProvider.Object, mockStandardRepository.Object, mockFrameworkRepository.Object, mockPostCodeLookup.Object, mockLogger.Object, mockPaginationSettings.Object);
-
-            var pagination = new Pagination
-            {
-                Page = 0,
-                Take = 10
-            };
-
-            var result = await service.SearchFrameworkProviders(123, "AS3 4AS", pagination, null, false);
+            var result = await service.SearchFrameworkProviders(123, "AS3 4AS", _pageZeroWithTenItems, null, false);
 
             Assert.That(result.HasError, Is.True);
-        }
-
-        private static Mock<IProviderLocationSearchProvider> CreateMockStandardSearchProvider(List<StandardProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
-        {
-            var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
-
-            var mockSearchProvider = new Mock<IProviderLocationSearchProvider>();
-            mockSearchProvider.Setup(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>())).Returns(searchResults);
-
-            return mockSearchProvider;
-        }
-
-        private static Mock<IProviderLocationSearchProvider> CreateMockStandardSearchProvider()
-        {
-            return CreateMockStandardSearchProvider(null);
-        }
-
-        private static Mock<IProviderLocationSearchProvider> CreateMockFrameworkSearchProvider(List<FrameworkProviderSearchResultsItem> stubSearchResults, long totalHits = 0)
-        {
-            var searchResults = new SearchResult<FrameworkProviderSearchResultsItem> { Hits = stubSearchResults, Total = totalHits };
-
-            var mockSearchProvider = new Mock<IProviderLocationSearchProvider>();
-            mockSearchProvider.Setup(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>())).Returns(searchResults);
-
-            return mockSearchProvider;
-        }
-
-        private static Mock<IProviderLocationSearchProvider> CreateMockFrameworkSearchProvider()
-        {
-            return CreateMockFrameworkSearchProvider(null);
-        }
-
-        private static Mock<IGetStandards> CreateMockStandardRepository()
-        {
-            var mockStandardsRepository = new Mock<IGetStandards>();
-
-            return mockStandardsRepository;
-        }
-
-        private static Mock<IGetFrameworks> CreateMockFrameworkRepository()
-        {
-            var mockFrameworkRepository = new Mock<IGetFrameworks>();
-
-            return mockFrameworkRepository;
-        }
-
-        private static Mock<ILookupLocations> CreateMockPostCodeLookup()
-        {
-            var testCoordinates = new Coordinate { Lat = 52.1234, Lon = 1.3445 };
-
-            var mockPostCodeLookup = new Mock<ILookupLocations>();
-            mockPostCodeLookup.Setup(x => x.GetLatLongFromPostCode(It.IsAny<string>())).Returns(Task.FromResult(testCoordinates));
-
-            return mockPostCodeLookup;
         }
     }
 }

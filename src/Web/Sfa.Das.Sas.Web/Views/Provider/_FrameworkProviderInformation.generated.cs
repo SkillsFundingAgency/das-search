@@ -33,6 +33,85 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/_FrameworkProviderInformation.cshtml")]
     public partial class FrameworkProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel>
     {
+
+#line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+public System.Web.WebPages.HelperResult GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 42 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+ 
+    providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+    if (isShortlisted)
+    {
+            
+
+#line default
+#line hidden
+
+#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvider", "ShortList",
+                new { apprenticeshipId, providerId, locationId },
+                new
+                {
+                    @class = "link shortlist-link provider-search-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "remove",
+                    data_apprenticeship_type = "Framework"
+                }));
+
+
+#line default
+#line hidden
+
+#line 58 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                  
+    }
+    else
+    {
+            
+
+#line default
+#line hidden
+
+#line 62 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvider", "ShortList",
+                new { apprenticeshipId, providerId, locationId },
+                new
+                {
+                    @class = "link shortlist-link provider-search-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "add",
+                    data_apprenticeship_type = "Framework"
+                }));
+
+
+#line default
+#line hidden
+
+#line 73 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                  
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 75 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+}
+#line default
+#line hidden
+
         public FrameworkProviderInformation()
         {
         }
@@ -214,14 +293,32 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n        </article>\r\n");
+WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n            <div");
+
+WriteLiteral(" class=\"shortlist-link\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
 
             
             #line 36 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-    }
+           Write(GetShortlistLink(item.Id, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted));
+
             
             #line default
             #line hidden
+WriteLiteral("\r\n            </div>\r\n        </article>\r\n");
+
+            
+            #line 39 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
         }
     }
 }

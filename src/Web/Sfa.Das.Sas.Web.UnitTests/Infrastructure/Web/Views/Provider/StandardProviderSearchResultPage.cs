@@ -84,14 +84,20 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Distance = 1,
-                Address = new Address()
+                Address = new Address(),
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
             var item2 = new ProviderResultItemViewModel
             {
                 Name = "Provider 2",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
-                Address = new Address()
+                Address = new Address(),
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -125,7 +131,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
-                Address = new Address()
+                Address = new Address(),
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -158,7 +167,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     County = "County",
                     Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -194,7 +206,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     County = "County",
                     Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -231,7 +246,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     County = "County",
                     Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -262,7 +280,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Address = new Address(),
                 EmployerSatisfactionMessage = "87%",
-                LearnerSatisfactionMessage = "99.9%"
+                LearnerSatisfactionMessage = "99.9%",
+                Id = "1",
+                LocationId = 2,
+                StandardCode = 12
             };
 
             var model = new ProviderStandardSearchResultViewModel()

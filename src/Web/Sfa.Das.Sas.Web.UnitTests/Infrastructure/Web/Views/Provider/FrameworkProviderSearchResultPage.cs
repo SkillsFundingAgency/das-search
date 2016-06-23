@@ -174,14 +174,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Distance = 0.3,
                 Website = "http://www.trainingprovider.co.uk",
-                Address = new Address()
+                Address = new Address(),
+                LocationId = 2,
+                Id = "12",
+                FrameworkId = "3"
             };
+
             var item2 = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 2",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
-                Address = new Address()
+                Address = new Address(),
+                LocationId = 2,
+                Id = "12",
+                FrameworkId = "3"
             };
 
             var model = new ProviderFrameworkSearchResultViewModel
@@ -213,7 +220,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Name = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
-                Address = new Address()
+                Address = new Address(),
+                LocationId = 2,
+                Id = "12",
+                FrameworkId = "3"
             };
 
             var model = new ProviderFrameworkSearchResultViewModel
@@ -249,7 +259,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     County = "County",
                     Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                LocationId = 2,
+                Id = "12",
+                FrameworkId = "3"
             };
 
             var model = new ProviderFrameworkSearchResultViewModel
@@ -287,7 +300,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     County = "County",
                     Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                LocationId = 2,
+                Id = "12",
+                FrameworkId = "3"
             };
 
             var model = new ProviderFrameworkSearchResultViewModel
@@ -336,7 +352,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     County = "County",
                     Postcode = "PostCode",
                     Town = "Town"
-                }
+                },
+                LocationId = 2,
+                FrameworkId = "3"
             };
 
             var model = new ProviderFrameworkSearchResultViewModel

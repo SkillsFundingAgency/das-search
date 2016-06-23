@@ -1,86 +1,74 @@
 ﻿var SearchAndShortlist = SearchAndShortlist || {};
 (function (provider)
 {
-    provider.StandardCookieName = 'das_shortlist_standards';
-    provider.FrameworkCookieName = 'das_shortlist_frameworks';
-
-    provider.AddStandardProvider = function (providerId, apprenticeshipId, locationId)
+    provider.AddShortlistRequest = function (shortlistLink)
     {
-        var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.StandardCookieName);
-
-        if (cookie)
+        var apprenticeship =
         {
-            cookie.AddSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
-            SearchAndShortlist.CookieStore.SaveCookie(cookie);
+            providerId: shortlistLink.attr("data-provider"),
+            apprenticeshipId: shortlistLink.attr("data-apprenticeship"),
+            locationId: shortlistLink.attr("data-location"),
+            type : shortlistLink.attr("data-apprenticeship-type")
+        };
+        
+        if (apprenticeship.type === "Standard") {
+            SearchAndShortlist.shortlist.AddStandardProvider(
+                apprenticeship.providerId,
+                apprenticeship.apprenticeshipId,
+                apprenticeship.locationId);
         }
-    };
-
-    provider.AddFrameworkProvider = function (providerId, apprenticeshipId, locationId) {
-        var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.FrameworkCookieName);
-
-        if (cookie) {
-            cookie.AddSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
-            SearchAndShortlist.CookieStore.SaveCookie(cookie);
+        else
+        {
+            SearchAndShortlist.shortlist.AddFrameworkProvider(
+                 apprenticeship.providerId,
+                apprenticeship.apprenticeshipId,
+                apprenticeship.locationId);
         }
-    };
+    }
 
-    provider.RemoveStandardProvider = function(providerId, apprenticeshipId, locationId) {
-        var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.StandardCookieName);
+    provider.RemoveShortlistRequest = function (shortlistLink)
+    {
+        var apprenticeship =
+       {
+           providerId: shortlistLink.attr("data-provider"),
+           apprenticeshipId: shortlistLink.attr("data-apprenticeship"),
+           locationId: shortlistLink.attr("data-location"),
+           type: shortlistLink.attr("data-apprenticeship-type")
+       };
 
-        if (cookie) {
-            cookie.RemoveSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
-            SearchAndShortlist.CookieStore.SaveCookie(cookie);
+        if (apprenticeship.type === "Standard") {
+            SearchAndShortlist.shortlist.RemoveStandardProvider(
+                apprenticeship.providerId,
+                apprenticeship.apprenticeshipId,
+                apprenticeship.locationId);
         }
-    };
-
-    provider.RemoveFrameworkProvider = function (providerId, apprenticeshipId, locationId) {
-        var cookie = SearchAndShortlist.CookieStore.GetCookie(provider.FrameworkCookieName);
-
-        if (cookie) {
-            cookie.RemoveSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
-            SearchAndShortlist.CookieStore.SaveCookie(cookie);
+        else
+        {
+            SearchAndShortlist.shortlist.RemoveFrameworkProvider(
+                apprenticeship.providerId,
+                apprenticeship.apprenticeshipId,
+                apprenticeship.locationId);
         }
-    };
+    }
 
     provider.init = function()
     {
-        $('.provider-shortlist-link').on('click', function (e)
+        $(".provider-shortlist-link").on("click", function (e)
         {
             e.preventDefault();
             var $this = $(this);
-            if ($this.attr('data-action') === 'add')
-            {
-                if ($(this).attr('data-apprenticeship-type') === 'Standard') {
-                    provider.AddStandardProvider(
-                        $(this).attr('data-provider'),
-                        $(this).attr('data-apprenticeship'),
-                        $(this).attr('data-location'));
-                } else {
-                    provider.AddFrameworkProvider(
-                        $(this).attr('data-provider'),
-                        $(this).attr('data-apprenticeship'),
-                        $(this).attr('data-location'));
-                }
 
-                $('.provider-shortlist-link').attr('data-action', 'remove');
-                $('.provider-shortlist-link').html('Remove this training provider');
+            if ($this.attr("data-action") === "add")
+            {
+                provider.AddShortlistRequest($(this));
+                $(this).attr("data-action", "remove");
+                $(this).html("Remove this training provider");
             }
-            else if ($this.attr('data-action') === 'remove')
+            else if ($this.attr("data-action") === "remove")
             {
-                if ($(this).attr('data-apprenticeship-type') === 'Standard') {
-                    provider.RemoveStandardProvider(
-                        $(this).attr('data-provider'),
-                        $(this).attr('data-apprenticeship'),
-                        $(this).attr('data-location'));
-                } else {
-                    provider.RemoveFrameworkProvider(
-                       $(this).attr('data-provider'),
-                       $(this).attr('data-apprenticeship'),
-                       $(this).attr('data-location'));
-                }
-
-                $('.provider-shortlist-link').attr('data-action', 'add');
-                $('.provider-shortlist-link').html('Shortlist this training provider');
+                provider.RemoveShortlistRequest($(this));
+                $(this).attr("data-action", "add");
+                $(this).html("Shortlist this training provider");
             };
         });
     };

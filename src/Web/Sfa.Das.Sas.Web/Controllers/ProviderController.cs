@@ -184,32 +184,66 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private async Task<ProviderStandardSearchResultViewModel> GetStandardSearchResultsViewModel(ProviderSearchCriteria criteria)
         {
-            while (true)
-            {
-                var searchResults = await _providerSearchService.SearchStandardProviders(
-                    criteria.ApprenticeshipId,
-                    criteria.PostCode,
-                    new Pagination { Page = criteria.Page, Take = criteria.Take },
-                    criteria.DeliveryModes,
-                    criteria.ShowAll);
+            var searchResults = await _providerSearchService.SearchStandardProviders(
+                criteria.ApprenticeshipId,
+                criteria.PostCode,
+                new Pagination { Page = criteria.Page, Take = criteria.Take },
+                criteria.DeliveryModes,
+                criteria.ShowAll);
 
-                return _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
+
+            var cookieItems = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+
+            var shortlistedStandard = cookieItems.SingleOrDefault(x => x.ApprenticeshipId.Equals(criteria.ApprenticeshipId));
+
+            if (shortlistedStandard == null)
+            {
+                return viewModel;
             }
+
+            foreach (var itemViewModel in viewModel.Hits)
+            {
+                var providerId = itemViewModel.Id.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+                    itemViewModel.IsShortlisted = shortlistedStandard.ProvidersIdAndLocation.Any(x =>
+                        x.LocationId.Equals(itemViewModel.LocationId) &&
+                        x.ProviderId.Equals(providerId, StringComparison.Ordinal));
+                }
+
+            return viewModel;
         }
 
         private async Task<ProviderFrameworkSearchResultViewModel> GetFrameworkSearchResultsViewModel(ProviderSearchCriteria criteria)
         {
-            while (true)
-            {
-                var searchResults = await _providerSearchService.SearchFrameworkProviders(
-                    criteria.ApprenticeshipId,
-                    criteria.PostCode,
-                    new Pagination { Page = criteria.Page, Take = criteria.Take },
-                    criteria.DeliveryModes,
-                    criteria.ShowAll);
+            var searchResults = await _providerSearchService.SearchFrameworkProviders(
+                criteria.ApprenticeshipId,
+                criteria.PostCode,
+                new Pagination { Page = criteria.Page, Take = criteria.Take },
+                criteria.DeliveryModes,
+                criteria.ShowAll);
 
-                return _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+            var viewModel = _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+
+            var cookieItems = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
+
+            var shortlistedFramework = cookieItems.SingleOrDefault(x => x.ApprenticeshipId.Equals(criteria.ApprenticeshipId));
+
+            if (shortlistedFramework == null)
+            {
+                return viewModel;
             }
+
+            foreach (var itemViewModel in viewModel.Hits)
+            {
+                var providerId = itemViewModel.Id.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+                    itemViewModel.IsShortlisted = shortlistedFramework.ProvidersIdAndLocation.Any(x =>
+                        x.LocationId.Equals(itemViewModel.LocationId) &&
+                        x.ProviderId.Equals(providerId, StringComparison.Ordinal));
+                }
+
+            return viewModel;
         }
 
         private async Task<ActionResult> GetView(ProviderSearchCriteria criteria, ProviderStandardSearchResultViewModel viewModel)

@@ -265,7 +265,7 @@
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingActions\ApprenticeshipSearchResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
-    <Compile Include="Services\MappingActions\Helpers\StandardMappingHelper.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ApprenticeshipMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ProviderViewModelMappingAction.cs" />
     <Compile Include="Services\MappingService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -510,8 +510,10 @@
     <Content Include="scripts\app\cookie-store.js" />
     <Content Include="scripts\app\cookie-subkey.js" />
     <Content Include="scripts\app\cookie.js" />
+    <Content Include="scripts\app\shortlist.js" />
     <Content Include="scripts\pages\framework-detail.js" />
     <Content Include="scripts\pages\apprenticeship-searchResults.js" />
+    <Content Include="scripts\pages\provider-search-results.js" />
     <Content Include="scripts\polyfills\Array.js" />
     <Content Include="scripts\pages\dashboard-overview.js" />
     <Content Include="scripts\pages\provider-detail.js" />

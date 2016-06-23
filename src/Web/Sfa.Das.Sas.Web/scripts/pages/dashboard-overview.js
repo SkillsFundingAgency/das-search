@@ -17,9 +17,10 @@
     };
 
     dashboard.init = function () {
+        
         $(".delete-link").on("click", function (e) {
             e.preventDefault();
-
+            
             if ($(this).attr("data-apprenticeship-type") === "RemoveStandard") {
                 SearchAndShortlist.standard.Remove($(this).attr("data-apprenticeship"));
             }
@@ -37,17 +38,25 @@
         $(".provider-delete-link").on("click", function (e) {
             e.preventDefault();
 
-            if ($(this).attr("data-apprenticeship-type") === "Standard") {
-                SearchAndShortlist.provider.RemoveStandardProvider(
-                 $(this).attr("data-provider"),
-                 $(this).attr("data-apprenticeship"),
-                 $(this).attr("data-location"));
+            var apprenticeship =
+            {
+                providerId: $(this).attr("data-provider"),
+                apprenticeshipId: $(this).attr("data-apprenticeship"),
+                locationId: $(this).attr("data-location"),
+                type: $(this).attr("data-apprenticeship-type")
+            };
+
+            if (apprenticeship.type === "Standard") {
+                SearchAndShortlist.shortlist.RemoveStandardProvider(
+                 apprenticeship.providerId,
+                 apprenticeship.apprenticeshipId,
+                 apprenticeship.locationId);
             }
             else {
-                SearchAndShortlist.provider.RemoveFrameworkProvider(
-                 $(this).attr("data-provider"),
-                 $(this).attr("data-apprenticeship"),
-                 $(this).attr("data-location"));
+                SearchAndShortlist.shortlist.RemoveFrameworkProvider(
+                  apprenticeship.providerId,
+                  apprenticeship.apprenticeshipId,
+                  apprenticeship.locationId);
             }
 
             var providers = $(this).closest(".providers");

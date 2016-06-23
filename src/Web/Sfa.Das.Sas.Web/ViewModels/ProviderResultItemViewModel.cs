@@ -36,5 +36,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string EmployerSatisfactionMessage { get; set; }
 
         public string LearnerSatisfactionMessage { get; set; }
+
+        public bool IsShortlisted { get; set; }
     }
 }

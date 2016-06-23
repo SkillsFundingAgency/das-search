@@ -129,6 +129,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationServices\ProviderSearchServiceBuilder.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
     <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenveLevelTest.cs" />
@@ -166,13 +167,6 @@
     <Compile Include="Infrastructure\Web\Views\Provider\StandardProviderSearchResultPage.cs" />
     <Compile Include="Infrastructure\Web\Views\Provider\ProviderDetailsPage.cs" />
     <Compile Include="Infrastructure\Web\Views\Dashboard\OverviewTest.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForCookieService.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForMappingApprenticeDetailsToProviderViewModel.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForMappingProviderResultItem.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForMappingStandardSearchResultsToViewModel.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForMappingStandardToViewModel.cs" />
-    <Compile Include="Infrastructure\Web\Views\Services\ForProviderSearchMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Views\StandardDetailPageTests.cs" />
     <Compile Include="Infrastructure\Web\Views\SearchResultMessageTests.cs" />
     <Compile Include="Infrastructure\Web\Views\Start\StartPageTest.cs" />

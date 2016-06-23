@@ -12,7 +12,7 @@
 
             <dl class="result-data-list">
                 @RenderProviderDetails(item)
-                
+
                 <dt>Employer satisfaction:</dt>
                 <dd class="employer-satisfaction">
                     @item.EmployerSatisfactionMessage
@@ -22,6 +22,10 @@
                     @item.LearnerSatisfactionMessage
                 </dd>
             </dl>
+
+            <div class="shortlist-link">
+               @GetShortlistLink(item.Id, item.StandardCode, item.LocationId, item.IsShortlisted)
+            </div>
         </article>
     }
 
@@ -39,5 +43,41 @@
     else
     {
         <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.Town @item.Address.County @item.Address.Postcode</dd>
+    }
+}
+
+@helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
+{
+    providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+    if (isShortlisted)
+    {
+            @Html.ActionLink("Remove", "RemoveStandardProvider", "ShortList",
+                new { apprenticeshipId, providerId, locationId },
+                new
+                {
+                    @class = "link shortlist-link provider-search-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "remove",
+                    data_apprenticeship_type = "Standard"
+                })
+    }
+    else
+    {
+            @Html.ActionLink("Shortlist", "AddStandardProvider", "ShortList",
+                new { apprenticeshipId, providerId, locationId },
+                new
+                {
+                    @class = "link shortlist-link provider-search-shortlist-link",
+                    rel = "nofollow",
+                    data_apprenticeship = apprenticeshipId,
+                    data_provider = providerId,
+                    data_location = locationId,
+                    data_action = "add",
+                    data_apprenticeship_type = "Standard"
+                })
     }
 }
