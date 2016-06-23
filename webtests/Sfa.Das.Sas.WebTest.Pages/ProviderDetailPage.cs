@@ -12,7 +12,7 @@
         [ElementLocator(Id = "provider-name")]
         public IWebElement ProviderName { get; set; }
 
-        [ElementLocator(CssSelector = "#bottom-actions .shortlist-link")]
+        [ElementLocator(CssSelector = ".shortlist-link")]
         public IWebElement ShortlistLink { get; set; }
     }
 }
