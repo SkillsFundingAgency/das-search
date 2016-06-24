@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Indexer.Core.Services;
@@ -20,10 +21,10 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Settings
         }
 
         [Test]
-        [ExpectedException(typeof(ConfigurationErrorsException), ExpectedMessage = "Setting with key FailToGetSetting is missing")]
         public void TryGetMissingSetting()
         {
-            _appConfigSettings.GetSetting("FailToGetSetting");
+            Assert.Throws<ConfigurationErrorsException>(() => _appConfigSettings.GetSetting("FailToGetSetting"))
+                  .Message.Should().Be("Setting with key FailToGetSetting is missing");
         }
 
         [Test]

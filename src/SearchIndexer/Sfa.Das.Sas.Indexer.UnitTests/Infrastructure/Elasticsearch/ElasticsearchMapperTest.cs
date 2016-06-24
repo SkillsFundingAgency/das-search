@@ -115,7 +115,6 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
         }
 
         [Test]
-        [ExpectedException(typeof(MappingException))]
         public void ShouldThrowMappingExceptionOnMappingErrorForFrameworkProviderMapping()
         {
             var mapper = new ElasticsearchMapper(null);
@@ -124,11 +123,14 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             // Remove Delivery modes
             testProvider.Frameworks.First().DeliveryLocations.First().DeliveryModes = null;
 
-            mapper.CreateFrameworkProviderDocument(testProvider, testProvider.Frameworks.First(), testProvider.Frameworks.First().DeliveryLocations.First());
+            Assert.Throws<MappingException>(() =>
+                mapper.CreateFrameworkProviderDocument(
+                    testProvider,
+                    testProvider.Frameworks.First(),
+                    testProvider.Frameworks.First().DeliveryLocations.First()));
         }
 
         [Test]
-        [ExpectedException(typeof(MappingException))]
         public void ShouldThrowMappingExceptionOnMappingErrorForStandardProviderMapping()
         {
             var mapper = new ElasticsearchMapper(null);
@@ -137,7 +139,11 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             // Remove Delivery modes
             testProvider.Standards.First().DeliveryLocations.First().DeliveryModes = null;
 
-            mapper.CreateStandardProviderDocument(testProvider, testProvider.Standards.First(), testProvider.Standards.First().DeliveryLocations.First());
+            Assert.Throws<MappingException>(() =>
+                mapper.CreateStandardProviderDocument(
+                    testProvider,
+                    testProvider.Standards.First(),
+                    testProvider.Standards.First().DeliveryLocations.First()));
         }
 
         [Test]
