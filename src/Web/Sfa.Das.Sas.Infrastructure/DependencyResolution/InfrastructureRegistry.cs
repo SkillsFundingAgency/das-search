@@ -6,6 +6,7 @@ using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Logging;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
+using StructureMap;
 using StructureMap.Configuration.DSL;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution

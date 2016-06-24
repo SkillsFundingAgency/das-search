@@ -18,21 +18,27 @@
 
 using System;
 using System.Web.Mvc;
-using StructureMap.Configuration.DSL;
+using AutoMapper.Internal;
+using StructureMap;
 using StructureMap.Graph;
+using StructureMap.Graph.Scanning;
 using StructureMap.Pipeline;
 using StructureMap.TypeRules;
 
-namespace Sfa.Das.Sas.Web.DependencyResolution {
-    public class ControllerConvention : IRegistrationConvention {
-        #region Public Methods and Operators
-
-        public void Process(Type type, Registry registry) {
-            if (type.CanBeCastTo<Controller>() && !type.IsAbstract) {
-                registry.For(type).LifecycleIs(new UniquePerRequestLifecycle());
-            }
+namespace Sfa.Das.Sas.Web.DependencyResolution
+{
+    public class ControllerConvention : IRegistrationConvention
+    {
+        public void ScanTypes(TypeSet types, Registry registry)
+        {
+            // Only work on concrete types
+            types.FindTypes(TypeClassification.Concretes| TypeClassification.Closed).Each(type =>
+            {
+                if (type.CanBeCastTo<Controller>() && !type.IsAbstract)
+                {
+                    registry.For(type).LifecycleIs(new UniquePerRequestLifecycle());
+                }
+            });
         }
-
-        #endregion
     }
 }
