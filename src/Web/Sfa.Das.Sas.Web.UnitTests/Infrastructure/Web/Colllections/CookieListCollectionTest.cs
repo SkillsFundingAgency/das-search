@@ -5,12 +5,11 @@ using System.Web;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-
 using Sfa.Das.Sas.Web.Collections;
-using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Colllections
 {
+    using ApplicationServices.Models;
     using ApplicationServices.Settings;
     using Sas.Web.Factories.Interfaces;
 
@@ -24,7 +23,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Colllections
         private HttpCookieCollection _requestCookieCollection;
         private HttpCookieCollection _responseCookieCollection;
 
-        private CookieListCollection _sut;
+        private CookieShortlistCollection _sut;
 
         [SetUp]
         public void Init()
@@ -37,7 +36,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Colllections
             _mockCookieFactory.Setup(x => x.GetRequestCookies()).Returns(_requestCookieCollection);
             _mockCookieFactory.Setup(x => x.GetResponseCookies()).Returns(_responseCookieCollection);
 
-            _sut = new CookieListCollection(_mockConfigurationSettings.Object, _mockCookieFactory.Object);
+            _sut = new CookieShortlistCollection(_mockConfigurationSettings.Object, _mockCookieFactory.Object);
         }
 
         [Test]

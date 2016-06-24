@@ -1,4 +1,4 @@
-namespace Sfa.Das.Sas.Web.ViewModels
+namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public enum ApprenticeshipTrainingType
     {

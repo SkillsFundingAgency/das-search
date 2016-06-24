@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 Title = document.Title,
                 StandardPdf = document.StandardPdf,
                 AssessmentPlanPdf = document.AssessmentPlanPdf,
-                NotionalEndLevel = document.Level,
+                Level = document.Level,
                 JobRoles = document.JobRoles,
                 Keywords = document.Keywords,
                 TypicalLength = document.TypicalLength,

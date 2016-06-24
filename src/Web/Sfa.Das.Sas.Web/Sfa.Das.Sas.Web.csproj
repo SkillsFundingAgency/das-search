@@ -53,8 +53,8 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CommonMark, Version=0.1.0.0, Culture=neutral, PublicKeyToken=001ef8810438905d, processorArchitecture=MSIL">
@@ -67,6 +67,18 @@
     </Reference>
     <Reference Include="FeatureToggle.Core, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FeatureToggle.Core.3.4.0\lib\portable-net40+sl50+wp81+wpa+win\FeatureToggle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.MVC5.6.2.1.0\lib\Net45\FluentValidation.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.2.0.2\lib\net45\MediatR.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -232,18 +244,22 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
-    <Compile Include="Collections\IListCollection.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Factories\Interfaces\IShortlistViewModelFactory.cs" />
     <Compile Include="Factories\ShortlistViewModelFactory.cs" />
     <Compile Include="SampleFeatureToggles\SampleFeatureToggle.cs" />
     <Compile Include="Services\IValidation.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\EmployerSatisfactionResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShortlistController.cs" />
     <Compile Include="Controllers\StartController.cs" />
-    <Compile Include="Collections\CookieListCollection.cs" />
+    <Compile Include="Collections\CookieShortlistCollection.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Factories\ApprenticeshipViewModelFactory.cs" />
     <Compile Include="Factories\DashboardViewModelFactory.cs" />
@@ -251,27 +267,18 @@
     <Compile Include="Factories\Interfaces\IApprenticeshipViewModelFactory.cs" />
     <Compile Include="Factories\Interfaces\IHttpCookieFactory.cs" />
     <Compile Include="Factories\Interfaces\IDashboardViewModelFactory.cs" />
-    <Compile Include="Factories\Interfaces\IProviderViewModelFactory.cs" />
-    <Compile Include="Factories\ProviderViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
     <Compile Include="Logging\ShortlistLogEntry.cs" />
     <Compile Include="Services\CookieService.cs" />
     <Compile Include="Services\ICookieService.cs" />
-    <Compile Include="Models\ShortlistedProvider.cs" />
-    <Compile Include="Models\ShortlistedApprenticeship.cs" />
-    <Compile Include="Services\MappingActions\FrameworkViewModelMappingAction.cs" />
-    <Compile Include="Services\MappingActions\ProviderFrameworkSearchResultViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\ProviderSearchMappingHelper.cs" />
-    <Compile Include="Services\MappingActions\ProviderStandardSearchResultViewModelMappingAction.cs" />
-    <Compile Include="Services\MappingActions\ApprenticeshipSearchResultViewModelMappingAction.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
-    <Compile Include="Models\ProviderLocationSearchCriteria.cs" />
+    <Compile Include="Models\ApprenticeshipShortlistCriteria.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Models\ApprenticeshipSearchCriteria.cs" />
-    <Compile Include="Services\MappingActions\FrameworkProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingActions\ApprenticeshipSearchResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
@@ -298,8 +305,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Services\MappingActions\StandardViewModelMappingAction.cs" />
-    <Compile Include="Services\MappingActions\StandardProviderResultItemViewModelMappingAction.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
@@ -314,13 +319,12 @@
     <Compile Include="ViewModels\IHasError.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\FrameworkProviderResultItemViewModel.cs" />
-    <Compile Include="ViewModels\ProviderResultItemViewModel.cs" />
+    <Compile Include="ViewModels\StandardProviderResultItemViewModel.cs" />
     <Compile Include="ViewModels\ProviderFrameworkSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ProviderStandardSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipDetailsViewModel.cs" />
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
-    <Compile Include="ViewModels\ApprenticeshipTrainingType.cs" />
     <Compile Include="ViewModels\VersionInformation.cs" />
     <Compile Include="Views\Apprenticeship\Framework.generated.cs">
       <AutoGen>True</AutoGen>

@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Web.Factories
             {
                 Id = standard.StandardId,
                 Title = standard.Title,
-                Level = standard.NotionalEndLevel,
+                Level = standard.Level,
                 Providers = new List<ShortlistProviderViewModel>()
             };
         }

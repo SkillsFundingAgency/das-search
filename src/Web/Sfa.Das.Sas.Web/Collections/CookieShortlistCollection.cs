@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Collections
 {
-    public class CookieListCollection : IListCollection<int>
+    public class CookieShortlistCollection : IShortlistCollection<int>
     {
         private readonly ICookieSettings _settings;
         private readonly IHttpCookieFactory _cookieFactory;
 
-        public CookieListCollection(ICookieSettings settings, IHttpCookieFactory cookieFactory)
+        public CookieShortlistCollection(ICookieSettings settings, IHttpCookieFactory cookieFactory)
         {
             _settings = settings;
             _cookieFactory = cookieFactory;

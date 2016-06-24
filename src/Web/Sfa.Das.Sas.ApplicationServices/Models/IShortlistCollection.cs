@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Web.Models;
 
-namespace Sfa.Das.Sas.Web.Collections
+namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public interface IListCollection<T>
+    public interface IShortlistCollection<T>
     {
         ICollection<ShortlistedApprenticeship> GetAllItems(string listName);
         void AddItem(string listName, ShortlistedApprenticeship item);

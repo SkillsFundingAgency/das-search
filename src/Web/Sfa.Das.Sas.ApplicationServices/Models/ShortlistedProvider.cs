@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Sfa.Das.Sas.Web.Models
+﻿namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public class ShortlistedProvider
     {

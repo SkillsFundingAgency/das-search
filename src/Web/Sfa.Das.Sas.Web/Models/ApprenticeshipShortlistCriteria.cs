@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Web.Models
 {
-    public sealed class ProviderLocationSearchCriteria
+    public sealed class ApprenticeshipShortlistCriteria
     {
         public string ProviderId { get; set; }
 

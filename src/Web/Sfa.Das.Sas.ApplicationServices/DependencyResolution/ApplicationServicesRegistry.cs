@@ -1,5 +1,10 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Settings;
+﻿using FluentValidation;
+using MediatR;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Settings;
+using Sfa.Das.Sas.ApplicationServices.Validators;
 using StructureMap.Configuration.DSL;
+using StructureMap.Graph;
 
 namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
 {
@@ -7,9 +12,21 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
     {
         public ApplicationServicesRegistry()
         {
+            this.Scan(
+                scan =>
+                {
+                    scan.AssemblyContainingType<ApplicationServicesRegistry>();
+                    scan.TheCallingAssembly();
+                    scan.WithDefaultConventions();
+                    scan.AddAllTypesOf(typeof(IRequestHandler<,>));
+                    scan.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
+                });
+
             For<IApprenticeshipSearchService>().Use<ApprenticeshipSearchService>();
             For<IProviderSearchService>().Use<ProviderSearchService>();
             For<IPaginationSettings>().Use<PaginationSettings>();
+            For<AbstractValidator<ProviderSearchQuery>>().Use<ProviderSearchQueryValidator>();
+            For<AbstractValidator<ProviderDetailQuery>>().Use<ProviderDetailQueryValidator>();
         }
     }
 }

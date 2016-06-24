@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Web.Factories
         public ProviderSearchViewModel GetProviderSearchViewModelForStandard(int id, UrlHelper urlHelper)
         {
             var standardResult = _getStandards.GetStandardById(id);
-            var viewModel = CreateViewModel(standardResult.StandardId, standardResult.NotionalEndLevel, standardResult.Title);
+            var viewModel = CreateViewModel(standardResult.StandardId, standardResult.Level, standardResult.Title);
 
             viewModel.PostUrl = urlHelper.Action("StandardResults", "Provider");
             return viewModel;

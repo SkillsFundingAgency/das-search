@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     {
 
 #line 33 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-public System.Web.WebPages.HelperResult  RenderProviderDetails(ProviderResultItemViewModel item)
+public System.Web.WebPages.HelperResult  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
 #line default
 #line hidden

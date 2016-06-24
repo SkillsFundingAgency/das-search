@@ -134,7 +134,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkLevel = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
-                Level = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
                 HasError = false
             };
@@ -389,7 +388,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkLevel = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
-                Level = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>
                 {
                     new FrameworkProviderResultItemViewModel(),
@@ -430,7 +428,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkLevel = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
-                Level = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>
                 {
                     new FrameworkProviderResultItemViewModel(),
@@ -471,7 +468,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkLevel = 2,
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
-                Level = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>
                 {
                     new FrameworkProviderResultItemViewModel(),

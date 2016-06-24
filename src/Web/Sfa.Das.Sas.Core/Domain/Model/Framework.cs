@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public sealed class Framework
+    public sealed class Framework : IApprenticeshipProduct
     {
         public int FrameworkId { get; set; }
 

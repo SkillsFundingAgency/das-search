@@ -43,7 +43,7 @@
             </header>
             <dl class="data-list">
                 @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
-                @GetStandardProperty("Level", "level", $"{@Model.NotionalEndLevel} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.NotionalEndLevel.ToString())})")
+                @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
                 @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
                 @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
                 @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
@@ -51,18 +51,15 @@
                 @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
             </dl>
 
-            @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
-            {
-                <div class="panel-indent panel-indent-info">
-                    <h2 class="heading-large">
-                        Documents
-                    </h2>
-                    <ul>
-                        @GetDocumentItem(@Model.StandardPdf, "Standard")
-                        @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
-                    </ul>
-                </div>
-            }
+            <div class="panel-indent panel-indent-info">
+                <h2 class="heading-large">
+                    Documents
+                </h2>
+                <ul>
+                    @GetDocumentItem(@Model.StandardPdf, "Standard")
+                    @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
+                </ul>
+            </div>
 
             <hr/>
             <div id="bottom-actions">

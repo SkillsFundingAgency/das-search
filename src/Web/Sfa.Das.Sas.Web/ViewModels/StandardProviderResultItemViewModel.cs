@@ -3,7 +3,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class ProviderResultItemViewModel
+    public class StandardProviderResultItemViewModel
     {
         public string Id { get; set; }
 

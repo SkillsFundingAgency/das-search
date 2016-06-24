@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
             {
                 StandardId = 10,
                 Title = "test standard",
-                NotionalEndLevel = 2
+                Level = 2
             };
 
             // Act
@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
             // Assert
             Assert.AreEqual(standard.StandardId, viewModel.Id);
             Assert.AreEqual(standard.Title, viewModel.Title);
-            Assert.AreEqual(standard.NotionalEndLevel, viewModel.Level);
+            Assert.AreEqual(standard.Level, viewModel.Level);
         }
 
         [Test]
