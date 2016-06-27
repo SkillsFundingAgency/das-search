@@ -23,7 +23,6 @@
         $(".delete-link").on("click", function (e)
         {
             e.preventDefault();
-            
             if ($(this).attr("data-apprenticeship-type") === "RemoveStandard") {
                 SearchAndShortlist.standard.Remove($(this).attr("data-apprenticeship"));
             }

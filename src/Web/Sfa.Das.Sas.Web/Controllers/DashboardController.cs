@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Web.Attribute;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
@@ -9,7 +10,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+    [NoCache]
     public class DashboardController : Controller
     {
         private readonly IGetStandards _getStandards;

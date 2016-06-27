@@ -1,21 +1,20 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Attribute;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
+using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
-using RedirectResult = System.Web.Mvc.RedirectResult;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Net;
-    using System.Web.Routing;
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
-
-    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+    [NoCache]
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
@@ -70,7 +69,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return View(new ApprenticeshipSearchResultViewModel());
             }
 
-            if (viewModel?.TotalResults > 0 && !viewModel.Results.Any())
+            if (viewModel.TotalResults > 0 && !viewModel.Results.Any())
             {
                 var rv = new RouteValueDictionary { { "keywords", criteria.Keywords }, { "page", viewModel.LastPage } };
                 var index = 0;
