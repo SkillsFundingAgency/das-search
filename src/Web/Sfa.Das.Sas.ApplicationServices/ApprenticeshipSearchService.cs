@@ -24,13 +24,13 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
-            _logger.Info(
-                "Apprenticeship Keyword Search",
-                new ApprenticeshipSearchLogEntry { Keywords = keywords?.Split(' ') ?? new[] { "[empty]" } });
-
             var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
 
             var results = _searchProvider.SearchByKeyword(keywords, page, takeElements, order, selectedLevels);
+
+            _logger.Info(
+                "Apprenticeship Keyword Search",
+                new ApprenticeshipSearchLogEntry { TotalHits = results.TotalResults, Keywords = keywords?.Split(' ') ?? new[] { "[empty]" } });
 
             return results;
         }
