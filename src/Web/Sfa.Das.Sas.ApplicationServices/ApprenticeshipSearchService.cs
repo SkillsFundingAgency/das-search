@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             _logger.Info(
                 "Apprenticeship Keyword Search",
-                new ApprenticeshipSearchLogEntry { TotalHits = results.TotalResults, Keywords = keywords?.Split(' ') ?? new[] { "[empty]" } });
+                new ApprenticeshipSearchLogEntry { TotalHits = results?.TotalResults ?? -1, Keywords = keywords?.Split(' ') ?? new[] { "[empty]" } });
 
             return results;
         }
