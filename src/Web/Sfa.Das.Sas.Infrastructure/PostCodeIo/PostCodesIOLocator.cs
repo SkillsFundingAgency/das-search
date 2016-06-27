@@ -53,17 +53,20 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
                     var dir = new Dictionary<string, object>
                                   {
-                                      { "Identifier ", "Postcodes.IO-Fail" },
+                                      { "Identifier ", "Postcodes.IO-PostCodeNotFound" },
                                       { "Postcode", postcode },
                                       { "Url", uri.ToString() }
                                   };
-                    _logger.Error($"Failed to make a call to {uri}", dir);
+
+                    _logger.Info($"Unable to find coordinates for postcode: {postcode}. Service url:{uri}", dir);
 
                     return null;
                 }
             }
             catch (Exception ex)
             {
+                _logger.Error(ex, $"Unable to connect to Postcode lookup servce. Url: {uri}");
+
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
         }
