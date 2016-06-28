@@ -11,9 +11,10 @@ using Sfa.Das.Sas.Core.Logging;
 namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
     using System.Collections.Generic;
-
+    using System.Diagnostics;
+    using System.Net;
     using Core.Configuration;
-
+    using Logging;
     public class PostCodesIoLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
@@ -39,7 +40,10 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
             {
                 using (_profiler.CreateStep("Postcode.IO lookup"))
                 {
+                    var stopwatch = Stopwatch.StartNew();
                     var response = await _retryService.RetryWeb(() => MakeRequestAsync(uri.ToString()), CouldntConnect);
+                    stopwatch.Stop();
+                    var responseTime = stopwatch.ElapsedMilliseconds;
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -47,6 +51,8 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                         var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
                         coordinates.Lat = result.Result.Latitude;
                         coordinates.Lon = result.Result.Longitude;
+
+                        SendDependencyLog(response.StatusCode, uri, responseTime);
 
                         return coordinates;
                     }
@@ -59,6 +65,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                                   };
 
                     _logger.Info($"Unable to find coordinates for postcode: {postcode}. Service url:{uri}", dir);
+                    SendDependencyLog(response.StatusCode, uri, responseTime);
 
                     return null;
                 }
@@ -69,6 +76,19 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
+        }
+
+        private void SendDependencyLog(HttpStatusCode statusCode, Uri uri, long responseTime)
+        {
+            var logEntry = new DependencyLogEntry
+            {
+                Identifier = "PostcodeIo Postcode Search",
+                ResponseCode = (int)statusCode,
+                ResponseTime = responseTime,
+                Url = uri.ToString()
+            };
+
+            _logger.Debug("Dependency PostCodeIo", logEntry);
         }
 
         private void CouldntConnect(Exception ex)

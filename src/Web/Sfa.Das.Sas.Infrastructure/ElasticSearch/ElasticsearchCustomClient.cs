@@ -62,7 +62,16 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     Body = body
                 };
 
+            var dependencyLogEntry = new DependencyLogEntry
+            {
+                Identifier = identifier,
+                ResponseCode = result.ApiCall?.HttpStatusCode,
+                ResponseTime = Math.Round(clientRequestTime.TotalMilliseconds, 2),
+                Url = result.ApiCall?.Uri?.AbsoluteUri
+            };
+
             _logger.Debug("Elastic Search Requested", logEntry);
+            _logger.Debug("Dependency Elasticsearch", dependencyLogEntry);
         }
     }
 }
