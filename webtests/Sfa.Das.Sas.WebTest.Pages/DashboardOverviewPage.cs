@@ -56,6 +56,8 @@ namespace Sfa.Das.Sas.WebTest.Pages
             [ElementLocator(CssSelector = ".apprenticeship-title > a")]
             public IWebElement Title { get; set; }
         }
+        [ElementLocator(CssSelector = ".delete-link")]
+        public IWebElement DeleteLink { get; set; }
 
     }
 }
