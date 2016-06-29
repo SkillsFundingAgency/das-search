@@ -1,5 +1,6 @@
 ﻿@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @model Sfa.Das.Sas.Web.ViewModels.StandardViewModel
 
 @{
@@ -97,16 +98,19 @@
 
 @helper GetShortlistLink(int id, bool isShortlisted)
 {
-    if (isShortlisted)
+    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
     {
-        @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList", 
-            new { id }, 
-            new {@class= "link shortlist-link standard-shortlist-link", rel="nofollow", data_standard = id, data_action = "remove" })
-    }
-    else
-    {
-        @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList", 
-            new { id }, 
-            new { @class = "link shortlist-link standard-shortlist-link", rel="nofollow", data_standard = id, data_action = "add" })
+        if (isShortlisted)
+        {
+            @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList",
+                         new { id },
+                         new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "remove" })
+        }
+        else
+        {
+            @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList",
+                         new { id },
+                         new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "add" })
+        }
     }
 }
