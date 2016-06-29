@@ -1,5 +1,6 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model ProviderStandardSearchResultViewModel
 
     @foreach (var item in Model.Hits)
@@ -49,7 +50,7 @@
 
 @helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>()) {
+    if (Is<ShortlistingFeature>.Enabled) {
         providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
 
         if (isShortlisted)

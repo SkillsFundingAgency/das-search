@@ -248,7 +248,6 @@
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Factories\Interfaces\IShortlistViewModelFactory.cs" />
     <Compile Include="Factories\ShortlistViewModelFactory.cs" />
-    <Compile Include="SampleFeatureToggles\SampleFeatureToggle.cs" />
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\EmployerSatisfactionResolver.cs" />

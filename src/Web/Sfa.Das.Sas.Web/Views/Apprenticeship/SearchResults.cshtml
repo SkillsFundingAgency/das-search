@@ -1,5 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model ApprenticeshipSearchResultViewModel
 
 @{
@@ -156,7 +157,7 @@
 
 @helper GetStandardShortlistLink(ApprenticeshipSearchResultItemViewModel item)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (!Model.ShortlistedStandards.ContainsKey(item.StandardId))
         {
@@ -189,7 +190,7 @@
 
 @helper GetFrameworkShortlistLink(ApprenticeshipSearchResultItemViewModel item)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (!Model.ShortlistedFrameworks.ContainsKey(item.FrameworkId))
         {

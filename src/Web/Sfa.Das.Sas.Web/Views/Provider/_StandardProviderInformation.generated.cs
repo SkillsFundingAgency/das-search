@@ -28,6 +28,12 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     using System.Web.UI;
     using System.Web.WebPages;
     
+    #line 3 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+    using FeatureToggle.Core.Fluent;
+    
+    #line default
+    #line hidden
+    
     #line 2 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     
@@ -46,14 +52,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class StandardProviderInformation : System.Web.Mvc.WebViewPage<ProviderStandardSearchResultViewModel>
     {
 
-#line 33 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 34 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 34 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 35 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
  
 
 
@@ -68,7 +74,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 36 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 37 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.Distance);
 
 
@@ -77,7 +83,7 @@ WriteTo(__razor_helper_writer, item.Distance);
 WriteLiteralTo(__razor_helper_writer, " miles away</dd>\r\n");
 
 
-#line 37 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 38 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
     if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
     {
@@ -92,7 +98,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            Training takes place at your location.\r\n        </dd>\r\n");
 
 
-#line 43 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     }
     else
     {
@@ -107,7 +113,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.LocationName);
 
 
@@ -116,7 +122,7 @@ WriteTo(__razor_helper_writer, item.LocationName);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                  WriteTo(__razor_helper_writer, item.Address.Address1);
 
 
@@ -125,7 +131,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                         WriteTo(__razor_helper_writer, item.Address.Address2);
 
 
@@ -134,7 +140,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                                                WriteTo(__razor_helper_writer, item.Address.Town);
 
 
@@ -143,7 +149,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                                                                   WriteTo(__razor_helper_writer, item.Address.County);
 
 
@@ -152,7 +158,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                                                                                        WriteTo(__razor_helper_writer, item.Address.Postcode);
 
 
@@ -161,7 +167,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     }
 
 
@@ -169,21 +175,21 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 48 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 49 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 50 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 51 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 51 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 52 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
  
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>()) {
+    if (Is<ShortlistingFeature>.Enabled) {
         providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
 
         if (isShortlisted)
@@ -193,7 +199,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-#line 57 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 58 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveStandardProvider", "ShortList",
                     new { apprenticeshipId, providerId, locationId },
                     new
@@ -211,7 +217,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveStandardProvider
 #line default
 #line hidden
 
-#line 68 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 69 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                       
         }
         else
@@ -221,7 +227,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveStandardProvider
 #line default
 #line hidden
 
-#line 72 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 73 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider", "ShortList",
                     new { apprenticeshipId, providerId, locationId },
                     new
@@ -239,7 +245,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider
 #line default
 #line hidden
 
-#line 83 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 84 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                       
         }
     }
@@ -249,7 +255,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider
 #line hidden
 });
 
-#line 86 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 87 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -262,7 +268,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider
 WriteLiteral("    ");
 
             
-            #line 5 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 6 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
      foreach (var item in Model.Hits)
     {
 
@@ -282,7 +288,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 10 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 11 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
 
             
@@ -297,7 +303,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 15 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 16 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
            Write(RenderProviderDetails(item));
 
             
@@ -312,7 +318,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 19 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 20 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(item.EmployerSatisfactionMessage);
 
             
@@ -328,7 +334,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 23 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(item.LearnerSatisfactionMessage);
 
             
@@ -343,7 +349,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("               ");
 
             
-            #line 28 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 29 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
           Write(GetShortlistLink(item.Id, item.StandardCode, item.LocationId, item.IsShortlisted));
 
             
@@ -352,7 +358,7 @@ WriteLiteral("               ");
 WriteLiteral("\r\n            </div>\r\n        </article>\r\n");
 
             
-            #line 31 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 32 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     }
 
             

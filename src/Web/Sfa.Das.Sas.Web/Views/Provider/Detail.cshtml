@@ -1,7 +1,8 @@
-﻿@using Sfa.Das.Sas.ApplicationServices.Models
-@using Sfa.Das.Sas.Web.Extensions
+﻿@using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.ViewModels
+@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model ApprenticeshipDetailsViewModel
 
 @{
@@ -52,8 +53,8 @@
             </section>
 
             <div>
-                    @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
-                </div>
+                @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
+            </div>
 
         </div>
 
@@ -229,39 +230,73 @@ if (items != null)
 
 @helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
-if (Model.ApprenticeshipType == ApprenticeshipTrainingType.Framework)
-{
-    return;
-}
-
-if (isShortlisted)
-{
-        @Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
-            new { apprenticeshipId, providerId, locationId },
-            new
+    if (Is<ShortlistingFeature>.Enabled) {
+        if (Model.Training == ApprenticeshipTrainingType.Framework)
+        {
+            if (isShortlisted)
             {
-                @class = "link shortlist-link provider-shortlist-link",
-                rel = "nofollow",
-                data_apprenticeship = apprenticeshipId,
-                data_provider = providerId,
-                data_location = locationId,
-                data_action = "remove"
-            })
-}
-else
-{
-        @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
-            new { apprenticeshipId, providerId, locationId },
-            new
+                @Html.ActionLink("Remove this training provider", "RemoveFrameworkProvider", "ShortList",
+                    new {apprenticeshipId, providerId, locationId},
+                    new
+                    {
+                        @class = "link shortlist-link provider-shortlist-link",
+                        rel = "nofollow",
+                        data_apprenticeship = apprenticeshipId,
+                        data_provider = providerId,
+                        data_location = locationId,
+                        data_action = "remove",
+                        data_apprenticeship_type = "Framework"
+                    })
+            }
+            else
             {
-                @class = "link shortlist-link provider-shortlist-link",
-                rel = "nofollow",
-                data_apprenticeship = apprenticeshipId,
-                data_provider = providerId,
-                data_location = locationId,
-                data_action = "add"
-            })
+                @Html.ActionLink("Shortlist this training provider", "AddFrameworkProvider", "ShortList",
+                    new {apprenticeshipId, providerId, locationId},
+                    new
+                    {
+                        @class = "link shortlist-link provider-shortlist-link",
+                        rel = "nofollow",
+                        data_apprenticeship = apprenticeshipId,
+                        data_provider = providerId,
+                        data_location = locationId,
+                        data_action = "add",
+                        data_apprenticeship_type = "Framework"
+                    })
+            }
+        }
+        else
+        {
+            if (isShortlisted)
+            {
+                @Html.ActionLink("Remove this training provider", "RemoveStandardProvider", "ShortList",
+                    new {apprenticeshipId, providerId, locationId},
+                    new
+                    {
+                        @class = "link shortlist-link provider-shortlist-link",
+                        rel = "nofollow",
+                        data_apprenticeship = apprenticeshipId,
+                        data_provider = providerId,
+                        data_location = locationId,
+                        data_action = "remove",
+                        data_apprenticeship_type = "Standard"
+                    })
+            }
+            else
+            {
+                @Html.ActionLink("Shortlist this training provider", "AddStandardProvider", "ShortList",
+                    new {apprenticeshipId, providerId, locationId},
+                    new
+                    {
+                        @class = "link shortlist-link provider-shortlist-link",
+                        rel = "nofollow",
+                        data_apprenticeship = apprenticeshipId,
+                        data_provider = providerId,
+                        data_location = locationId,
+                        data_action = "add",
+                        data_apprenticeship_type = "Standard"
+                    })
+            }
+        }
+    }
 }
-}
-
 

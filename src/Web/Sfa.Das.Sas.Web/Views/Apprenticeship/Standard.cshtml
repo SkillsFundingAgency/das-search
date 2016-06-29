@@ -1,6 +1,7 @@
 ﻿@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model Sfa.Das.Sas.Web.ViewModels.StandardViewModel
 
 @{
@@ -95,7 +96,7 @@
 
 @helper GetShortlistLink(int id, bool isShortlisted)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (isShortlisted)
         {

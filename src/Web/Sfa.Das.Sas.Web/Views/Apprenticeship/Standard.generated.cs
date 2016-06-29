@@ -28,6 +28,12 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     using System.Web.UI;
     using System.Web.WebPages;
     
+    #line 4 "..\..\Views\Apprenticeship\Standard.cshtml"
+    using FeatureToggle.Core.Fluent;
+    
+    #line default
+    #line hidden
+    
     #line 3 "..\..\Views\Apprenticeship\Standard.cshtml"
     using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     
@@ -52,14 +58,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     public partial class Standard : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.StandardViewModel>
     {
 
-#line 75 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 76 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 76 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 77 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
@@ -70,7 +76,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 79 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 80 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -80,20 +86,20 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3541), Tuple.Create("\"", 3549)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3575), Tuple.Create("\"", 3583)
 
-#line 80 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3546), Tuple.Create<System.Object, System.Int32>(id
+#line 81 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 3580), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3546), false)
+, 3580), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 80 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 81 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, Html.MarkdownToHtml(item));
 
 
@@ -102,7 +108,7 @@ WriteTo(__razor_helper_writer, Html.MarkdownToHtml(item));
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 81 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 82 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
 
 
@@ -110,19 +116,19 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 82 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 84 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 85 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 85 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 86 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(title))
     {
@@ -132,14 +138,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3727), Tuple.Create("\"", 3741)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3761), Tuple.Create("\"", 3775)
 
-#line 89 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3734), Tuple.Create<System.Object, System.Int32>(pdfUrl
+#line 90 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 3768), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3734), false)
+, 3768), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -149,7 +155,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 90 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 91 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -158,7 +164,7 @@ WriteTo(__razor_helper_writer, title);
 WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n");
 
 
-#line 93 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 94 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
 
 
@@ -166,21 +172,21 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n
 #line hidden
 });
 
-#line 94 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 96 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 97 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistLink(int id, bool isShortlisted)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 97 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 98 "..\..\Views\Apprenticeship\Standard.cshtml"
  
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (isShortlisted)
         {
@@ -189,7 +195,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-#line 102 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 103 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList",
                          new { id },
                          new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "remove" }));
@@ -198,7 +204,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveS
 #line default
 #line hidden
 
-#line 104 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 105 "..\..\Views\Apprenticeship\Standard.cshtml"
                                                                                                                                                       
         }
         else
@@ -208,7 +214,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove from shortlist", "RemoveS
 #line default
 #line hidden
 
-#line 108 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 109 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList",
                          new { id },
                          new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "add" }));
@@ -217,7 +223,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddS
 #line default
 #line hidden
 
-#line 110 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 111 "..\..\Views\Apprenticeship\Standard.cshtml"
                                                                                                                                                    
         }
     }
@@ -227,7 +233,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddS
 #line hidden
 });
 
-#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 114 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
@@ -238,7 +244,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddS
         public override void Execute()
         {
             
-            #line 6 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 7 "..\..\Views\Apprenticeship\Standard.cshtml"
   
     ViewBag.Title = "Standard - " + @Model.Title;
 
@@ -268,7 +274,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 15 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 16 "..\..\Views\Apprenticeship\Standard.cshtml"
                Write(Model.Title);
 
             
@@ -297,14 +303,14 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 963), Tuple.Create("\"", 1089)
+WriteAttribute("href", Tuple.Create(" href=\"", 997), Tuple.Create("\"", 1123)
             
-            #line 27 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 970), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+            #line 28 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 1004), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 970), false)
+, 1004), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -319,7 +325,7 @@ WriteLiteral("></i>\r\n                        Find training providers\r\n      
 WriteLiteral("                    ");
 
             
-            #line 31 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 32 "..\..\Views\Apprenticeship\Standard.cshtml"
                Write(GetShortlistLink(@Model.StandardId, @Model.IsShortlisted));
 
             
@@ -340,7 +346,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 45 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 46 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole));
 
             
@@ -351,7 +357,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 46 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 47 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
 
             
@@ -362,7 +368,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 47 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 48 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage));
 
             
@@ -373,7 +379,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 48 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 49 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements));
 
             
@@ -384,7 +390,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 49 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 50 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn));
 
             
@@ -395,7 +401,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 50 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 51 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Qualifications", "qualifications", Model.Qualifications));
 
             
@@ -406,7 +412,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 51 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 52 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true));
 
             
@@ -425,7 +431,7 @@ WriteLiteral(">\r\n                    Documents\r\n                </h2>\r\n   
 WriteLiteral("                    ");
 
             
-            #line 59 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 60 "..\..\Views\Apprenticeship\Standard.cshtml"
                Write(GetDocumentItem(@Model.StandardPdf, "Standard"));
 
             
@@ -436,7 +442,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 60 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 61 "..\..\Views\Apprenticeship\Standard.cshtml"
                Write(GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan"));
 
             
@@ -451,14 +457,14 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2959), Tuple.Create("\"", 3085)
+WriteAttribute("href", Tuple.Create(" href=\"", 2993), Tuple.Create("\"", 3119)
             
-            #line 66 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 2966), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+            #line 67 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 3000), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 2966), false)
+, 3000), false)
 );
 
 WriteLiteral(">\r\n                    <i");
@@ -472,7 +478,7 @@ WriteLiteral("></i>\r\n                    Find training providers\r\n          
 WriteLiteral("                ");
 
             
-            #line 70 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 71 "..\..\Views\Apprenticeship\Standard.cshtml"
            Write(GetShortlistLink(@Model.StandardId, @Model.IsShortlisted));
 
             

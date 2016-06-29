@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
-    <Compile Include="FeatureToggles\FeatureToggleHelper.cs" />
     <Compile Include="FeatureToggles\ShortlistingFeature.cs" />
     <Compile Include="Handlers\DetailProviderHandler.cs" />
     <Compile Include="Handlers\FrameworkProviderSearchHandler.cs" />
