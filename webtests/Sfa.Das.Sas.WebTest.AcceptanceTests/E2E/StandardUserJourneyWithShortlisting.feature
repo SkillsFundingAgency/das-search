@@ -1,9 +1,9 @@
-﻿Feature: Standard User Journey
+﻿Feature: Standard User Journey With Shortlisting
 	As an employer
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@E2E	 @SystemTest @PreProd @Prod
+@E2E	 @CI @Demo
 Scenario:Should find a standard and provider
 	Given I have data in the config
 		| Token    | Key                    |
@@ -22,7 +22,15 @@ Scenario:Should find a standard and provider
 
 	When I choose First Standard Result
 	Then I am on the Standard Details page	
+	When I wait to see Shortlist Link
+	When I choose Shortlist Link
+	Then I am on the Standard Details page	
 	When I wait for the view to become active
+	When I wait to see Shortlist Link
+	Then I see
+        | Field          | Rule     | Value                 |
+        | Shortlist Link | contains | Remove from shortlist |
+
 	When I choose Search Page Button
 	Then I am on the Provider Search page
 	When I enter data
@@ -36,3 +44,6 @@ Scenario:Should find a standard and provider
 	And I see
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
+	When I choose Dashboard Link
+	Then I am on the Dashboard Overview page	
+	And I see Standard Shortlist list contains at least 1 items

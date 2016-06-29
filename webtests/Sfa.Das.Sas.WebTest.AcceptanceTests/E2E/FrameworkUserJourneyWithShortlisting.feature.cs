@@ -18,20 +18,20 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.E2E
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Framework User Journey")]
-    public partial class FrameworkUserJourneyFeature
+    [NUnit.Framework.DescriptionAttribute("Framework User Journey With Shortlisting")]
+    public partial class FrameworkUserJourneyWithShortlistingFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "FrameworkUserJourney.feature"
+#line 1 "FrameworkUserJourneyWithShortlisting.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Framework User Journey", "\tAs an employer\r\n\tI want to be able to search for training options\r\n\tand find a p" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Framework User Journey With Shortlisting", "\tAs an employer\r\n\tI want to be able to search for training options\r\n\tand find a p" +
                     "rovider for a given framework", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -67,16 +67,14 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.E2E
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a framework and provider")]
         [NUnit.Framework.CategoryAttribute("E2E")]
-        [NUnit.Framework.CategoryAttribute("SystemTest")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
-        [NUnit.Framework.CategoryAttribute("Prod")]
+        [NUnit.Framework.CategoryAttribute("CI")]
+        [NUnit.Framework.CategoryAttribute("Demo")]
         public virtual void ShouldFindAFrameworkAndProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a framework and provider", new string[] {
                         "E2E",
-                        "SystemTest",
-                        "PreProd",
-                        "Prod"});
+                        "CI",
+                        "Demo"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -117,45 +115,70 @@ testRunner.Given("I navigated to the Start page", ((string)(null)), ((TechTalk.S
 #line 25
  testRunner.Then("I am on the Framework Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 26
- testRunner.When("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I wait to see Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 27
- testRunner.When("I choose Search Page Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I choose Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 28
- testRunner.Then("I am on the Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I am on the Framework Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
+ testRunner.When("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
- testRunner.When("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
- testRunner.Then("I am on the Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I wait to see Shortlist Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
+                        "Rule",
                         "Value"});
             table3.AddRow(new string[] {
-                        "Postcode Search Box",
-                        "{Postcode}"});
+                        "Shortlist Link",
+                        "contains",
+                        "Remove from shortlist"});
+#line 31
+ testRunner.Then("I see", ((string)(null)), table3, "Then ");
 #line 34
- testRunner.When("I enter data", ((string)(null)), table3, "When ");
+ testRunner.When("I choose Search Page Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 35
+ testRunner.Then("I am on the Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 37
  testRunner.When("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
- testRunner.Then("I am on the Framework Provider Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 39
- testRunner.And("I see Provider Results list contains at least 1 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
- testRunner.When("I choose First Provider Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
- testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I am on the Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
-                        "Rule",
                         "Value"});
             table4.AddRow(new string[] {
+                        "Postcode Search Box",
+                        "{Postcode}"});
+#line 41
+ testRunner.When("I enter data", ((string)(null)), table4, "When ");
+#line 44
+ testRunner.When("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 45
+ testRunner.Then("I am on the Framework Provider Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 46
+ testRunner.And("I see Provider Results list contains at least 1 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
+ testRunner.When("I choose First Provider Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 49
+ testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Rule",
+                        "Value"});
+            table5.AddRow(new string[] {
                         "Provider Name",
                         "Exists",
                         "true"});
-#line 43
- testRunner.And("I see", ((string)(null)), table4, "And ");
+#line 50
+ testRunner.And("I see", ((string)(null)), table5, "And ");
+#line 53
+ testRunner.When("I choose Dashboard Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 54
+ testRunner.Then("I am on the Dashboard Overview page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
+ testRunner.And("I see Framework Shortlist list contains at least 1 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

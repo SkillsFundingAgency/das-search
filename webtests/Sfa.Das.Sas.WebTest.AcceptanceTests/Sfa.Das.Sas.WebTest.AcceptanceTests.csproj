@@ -155,8 +155,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="E2E\FrameworkUserJourneyWithShortlisting.feature.cs">
+      <DependentUpon>FrameworkUserJourneyWithShortlisting.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="E2E\FrameworkUserJourney.feature.cs">
       <DependentUpon>FrameworkUserJourney.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="E2E\StandardUserJourneyWithShortlisting.feature.cs">
+      <DependentUpon>StandardUserJourneyWithShortlisting.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
@@ -290,9 +302,19 @@
       <IsTransformFile>True</IsTransformFile>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="E2E\FrameworkUserJourneyWithShortlisting.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FrameworkUserJourneyWithShortlisting.feature.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="E2E\FrameworkUserJourney.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FrameworkUserJourney.feature.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="E2E\StandardUserJourneyWithShortlisting.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>StandardUserJourneyWithShortlisting.feature.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
