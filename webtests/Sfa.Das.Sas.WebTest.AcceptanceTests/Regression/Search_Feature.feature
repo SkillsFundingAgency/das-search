@@ -46,10 +46,10 @@ Examples:
 	Then I see 	
 		| Field       | Rule   | Value         |
 		| Framework Heading | Contains | <Keyword > |
-	When I wait to see Shortlist Link
-	Then I see 
-	| Field          | Rule     | Value                    |
-	| Shortlist Link | Contains | Shortlist apprenticeship |
+	#When I wait to see Shortlist Link
+	#Then I see 
+	#| Field          | Rule     | Value                    |
+	#| Shortlist Link | Contains | Shortlist apprenticeship |
 	When I choose Search Page Button
 	Then I am on the Provider Search page
 	When I enter data
@@ -77,9 +77,9 @@ Scenario Outline:Specific providers and standards in live data
 	Then I am on the Search Results page	
 	When I choose First Standard Result
 	Then I am on the Standard Details page
-	Then I see
-         | Field				| Rule	     | Value                         |
-         |     Shortlist Link   |   Equals   |   Shortlist apprenticeship    |
+	#Then I see
+        # | Field				| Rule	     | Value                         |
+         #|     Shortlist Link   |   Equals   |   Shortlist apprenticeship    |
 	When I choose Search Page Button
 	Then I am on the Provider Search page
 	When I enter data

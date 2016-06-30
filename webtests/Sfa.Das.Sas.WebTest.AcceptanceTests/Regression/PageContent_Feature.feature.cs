@@ -125,10 +125,6 @@ this.ScenarioSetup(scenarioInfo);
                         "Navigation Element",
                         "Exists",
                         "True"});
-            table2.AddRow(new string[] {
-                        "Shortlist link",
-                        "Exists",
-                        "True"});
 #line 19
  testRunner.Then("I see", ((string)(null)), table2, "Then ");
 #line hidden
@@ -162,17 +158,6 @@ this.ScenarioSetup(scenarioInfo);
 #line 35
  testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Rule",
-                        "Value"});
-            table4.AddRow(new string[] {
-                        "Shortlist link",
-                        "Exists",
-                        "True"});
-#line 36
- testRunner.And("I see", ((string)(null)), table4, "And ");
-#line hidden
             this.ScenarioCleanup();
         }
         
@@ -186,14 +171,14 @@ this.ScenarioSetup(scenarioInfo);
 #line 47
  testRunner.Given("I navigated to the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table5.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Search Box",
                         "Digital & technology solutions professional"});
 #line 48
- testRunner.When("I enter data", ((string)(null)), table5, "When ");
+ testRunner.When("I enter data", ((string)(null)), table4, "When ");
 #line 51
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
@@ -207,14 +192,14 @@ this.ScenarioSetup(scenarioInfo);
 #line 56
  testRunner.Then("I am on the Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table6.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "Postcode Search Box",
                         "M15 6BH"});
 #line 57
- testRunner.When("I enter data", ((string)(null)), table6, "When ");
+ testRunner.When("I enter data", ((string)(null)), table5, "When ");
 #line 60
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
@@ -223,17 +208,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I choose First Provider Link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 63
  testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Rule",
-                        "Value"});
-            table7.AddRow(new string[] {
-                        "Shortlist Link",
-                        "Exists",
-                        "True"});
-#line 64
- testRunner.And("I see", ((string)(null)), table7, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
