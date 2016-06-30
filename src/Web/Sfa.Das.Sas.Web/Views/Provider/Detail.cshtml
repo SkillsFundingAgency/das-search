@@ -3,6 +3,7 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.ApplicationServices.Models
 @model ApprenticeshipDetailsViewModel
 
 @{
@@ -231,7 +232,7 @@ if (items != null)
 @helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
     if (Is<ShortlistingFeature>.Enabled) {
-        if (Model.Training == ApprenticeshipTrainingType.Framework)
+        if (Model.ApprenticeshipType == ApprenticeshipTrainingType.Framework)
         {
             if (isShortlisted)
             {
