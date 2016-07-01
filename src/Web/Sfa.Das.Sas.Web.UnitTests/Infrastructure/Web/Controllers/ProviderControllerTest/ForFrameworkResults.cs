@@ -61,7 +61,6 @@
             viewResult.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
         }
 
-
         [Test]
         public async Task SearchResultsShouldRedirectToSearchEntryPageIfPostCodeIsNotSet()
         {

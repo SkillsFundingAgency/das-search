@@ -2,5 +2,7 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.FeatureToggles
 {
-    public sealed class ShortlistingFeature : SimpleFeatureToggle {}
+    public sealed class ShortlistingFeature : SimpleFeatureToggle
+    {
+    }
 }

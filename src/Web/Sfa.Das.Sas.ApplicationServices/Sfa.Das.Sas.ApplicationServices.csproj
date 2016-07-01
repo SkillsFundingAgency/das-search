@@ -105,7 +105,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
-    <Compile Include="SampleFeatureToggles\SampleFeatureToggle.cs" />
     <Compile Include="Queries\DetailProviderResponse.cs" />
     <Compile Include="Queries\FrameworkProviderSearchQuery.cs" />
     <Compile Include="Queries\FrameworkProviderSearchResponse.cs" />
