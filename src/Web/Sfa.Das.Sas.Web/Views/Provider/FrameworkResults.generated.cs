@@ -375,19 +375,19 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\
 
         #line 129 "..\..\Views\Provider\FrameworkResults.cshtml"
  
-                        RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
-                        {
+    RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
+    {
 
-                            var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page } };
-                            int i = 0;
-                            foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
-                            {
-                                rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
-                                i++;
-                            }
-                            return rv;
-                        }
-                    
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page }, { "showAll", Model.ShowAll } };
+        int i = 0;
+        foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
+        {
+            rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
+            i++;
+        }
+        return rv;
+    }
+
         #line default
         #line hidden
         
@@ -580,12 +580,6 @@ WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 
-            
-            #line 128 "..\..\Views\Provider\FrameworkResults.cshtml"
-                    
-            
-            #line default
-            #line hidden
         }
     }
 }

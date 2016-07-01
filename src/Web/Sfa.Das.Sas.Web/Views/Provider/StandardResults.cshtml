@@ -123,7 +123,7 @@
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode }, { "page", page } };
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model .PostCode }, { "page", page }, { "showAll", Model.ShowAll } };
         int i = 0;
         foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
         {
