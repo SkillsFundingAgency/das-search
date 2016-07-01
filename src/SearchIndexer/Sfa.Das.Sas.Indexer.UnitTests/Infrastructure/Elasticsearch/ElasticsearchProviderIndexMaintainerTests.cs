@@ -13,6 +13,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
     public sealed class ElasticsearchProviderIndexMaintainerTests : BaseElasticIndexMaintainerTests
     {
         [Test]
+        [ExpectedException(typeof(ConnectionException))]
         public void ShouldThrowAnExceptionIfCantCreateAnIndex()
         {
             var response = new StubResponse(400);
@@ -21,7 +22,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var indexMaintainer = new ElasticsearchProviderIndexMaintainer(MockElasticClient.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>());
 
-            Assert.Throws<ConnectionException>(() => indexMaintainer.CreateIndex("testindex"));
+            indexMaintainer.CreateIndex("testindex");
         }
     }
 }

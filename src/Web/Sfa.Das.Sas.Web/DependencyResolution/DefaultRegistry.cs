@@ -17,26 +17,22 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using MediatR;
-using StructureMap;
 using Sfa.Das.Sas.ApplicationServices.DependencyResolution;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Web.Collections;
+using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 
-namespace Sfa.Das.Sas.Web.DependencyResolution
-{
-    public class DefaultRegistry : Registry
-    {
+namespace Sfa.Das.Sas.Web.DependencyResolution {
+    public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 
-        public DefaultRegistry()
-        {
+        public DefaultRegistry() {
             this.Scan(
-                scan =>
-                {
+                scan => {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-                    scan.With(new ControllerConvention());
+					scan.With(new ControllerConvention());
                 });
             this.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
             this.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));

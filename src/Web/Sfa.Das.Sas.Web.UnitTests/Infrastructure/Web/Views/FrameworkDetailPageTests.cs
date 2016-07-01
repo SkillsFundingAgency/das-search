@@ -1,13 +1,13 @@
-﻿using System;
-using FluentAssertions;
-using NUnit.Framework;
-using RazorGenerator.Testing;
-using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
-using Sfa.Das.Sas.Web.ViewModels;
-using Sfa.Das.Sas.Web.Views.Apprenticeship;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
+    using System;
+    using FluentAssertions;
+    using NUnit.Framework;
+    using RazorGenerator.Testing;
+    using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
+    using Sfa.Das.Sas.Web.ViewModels;
+    using Sfa.Das.Sas.Web.Views.Apprenticeship;
+
     [TestFixture]
     public sealed class FrameworkDetailPageTests : ViewTestBase
     {

@@ -3,7 +3,6 @@ using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
-using StructureMap;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 
