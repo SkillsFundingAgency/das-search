@@ -15,6 +15,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Web.Routing;
+
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
@@ -194,6 +196,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
 
+            viewModel.ShowAll = criteria.ShowAll;
+
             var cookieItems = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
 
             var shortlistedStandard = cookieItems.SingleOrDefault(x => x.ApprenticeshipId.Equals(criteria.ApprenticeshipId));
@@ -225,6 +229,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                 criteria.ShowAll);
 
             var viewModel = _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
+
+            viewModel.ShowAll = criteria.ShowAll;
 
             var cookieItems = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
 
@@ -259,10 +265,24 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel.TotalResults > 0 && !viewModel.Hits.Any())
             {
+                var rv = new RouteValueDictionary
+                             {
+                                 { "apprenticeshipId", criteria?.ApprenticeshipId },
+                                 { "postcode", criteria?.PostCode },
+                                 { "page", viewModel.LastPage },
+                                 { "showAll", viewModel.ShowAll }
+                             };
+                int i = 0;
+                foreach (var deliveryMode in viewModel.DeliveryModes.Where(m => m.Checked))
+                {
+                    rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
+                    i++;
+                }
+
                 var url = Url.Action(
                     "StandardResults",
                     "Provider",
-                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                    rv);
                 {
                     return new RedirectResult(url);
                 }
@@ -283,10 +303,24 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
             {
+                var rv = new RouteValueDictionary
+                             {
+                                 { "apprenticeshipId", criteria?.ApprenticeshipId },
+                                 { "postcode", criteria?.PostCode },
+                                 { "page", viewModel.LastPage },
+                                 { "showAll", viewModel.ShowAll }
+                             };
+                int i = 0;
+                foreach (var deliveryMode in viewModel.DeliveryModes.Where(m => m.Checked))
+                {
+                    rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
+                    i++;
+                }
+
                 var url = Url.Action(
                     "FrameworkResults",
                     "Provider",
-                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
+                    rv);
                 return new RedirectResult(url);
             }
 
