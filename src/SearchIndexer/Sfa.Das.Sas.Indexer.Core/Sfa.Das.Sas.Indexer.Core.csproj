@@ -52,7 +52,10 @@
     <Compile Include="Logging\Models\ElasticSearchLogEntry.cs" />
     <Compile Include="Logging\Models\ILogEntry.cs" />
     <Compile Include="Logging\Models\TimingLogEntry.cs" />
+    <Compile Include="Models\Framework\FrameworkAimMetaData.cs" />
+    <Compile Include="Models\Framework\FrameworkComponentTypeMetaData.cs" />
     <Compile Include="Models\Framework\FrameworkMetaData.cs" />
+    <Compile Include="Models\Framework\LearningDeliveryMetaData.cs" />
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\Provider\Address.cs" />
     <Compile Include="Models\Provider\ContactInformation.cs" />

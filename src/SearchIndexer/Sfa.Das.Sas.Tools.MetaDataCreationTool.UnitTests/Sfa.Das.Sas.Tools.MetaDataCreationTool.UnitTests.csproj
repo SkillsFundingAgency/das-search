@@ -93,6 +93,7 @@
     <Compile Include="MetaDataTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\JsonMetaDataConvertTest.cs" />
+    <Compile Include="Services\LarsDataServiceTest.cs" />
     <Compile Include="VstsTest.cs" />
     <Compile Include="Services\GitTest.cs" />
   </ItemGroup>

@@ -64,7 +64,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<FrameworkMetaData> GetAllFrameworks()
         {
-            var filteredFrameworks = FilterFrameworks(_larsDataService.GetListOfCurrentFrameworks());
+            var frameworks = _larsDataService.GetListOfCurrentFrameworks();
+            var filteredFrameworks = FilterFrameworks(frameworks);
             UpdateFrameworkInformation(filteredFrameworks);
             return filteredFrameworks;
         }
@@ -156,7 +157,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             }
         }
 
-        private List<FrameworkMetaData> FilterFrameworks(List<FrameworkMetaData> frameworks)
+        private List<FrameworkMetaData> FilterFrameworks(IEnumerable<FrameworkMetaData> frameworks)
         {
             var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
 

@@ -1,4 +1,5 @@
 ﻿using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 using StructureMap;
@@ -10,7 +11,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
         public MetaDataCreationRegistry()
         {
             For<ILarsDataService>().Use<LarsDataService>();
-            For<IReadStandardsFromCsv>().Use<CsvService>();
+            For<IReadMetaDataFromCsv>().Use<CsvService>();
             For<IAngleSharpService>().Use<AngleSharpService>();
             For<IVstsService>().Use<VstsService>();
             For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
@@ -18,6 +19,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
             For<IGenerateStandardMetaData>().Use<MetaDataManager>();
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
+            For<IMetaDataFactory>().Use<LarsMetaDataFactory>();
         }
     }
 }
