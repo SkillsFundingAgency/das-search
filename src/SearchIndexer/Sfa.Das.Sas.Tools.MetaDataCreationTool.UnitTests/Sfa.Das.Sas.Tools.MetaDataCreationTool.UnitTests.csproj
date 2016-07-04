@@ -85,6 +85,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Factories\LarsMetaDataFactoryTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MetaDataManagerTests.cs" />
     <Compile Include="Services\AngleSharpServiceTests.cs" />

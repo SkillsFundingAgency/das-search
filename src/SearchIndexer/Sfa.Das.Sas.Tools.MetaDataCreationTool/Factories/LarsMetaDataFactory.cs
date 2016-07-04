@@ -12,23 +12,38 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
         public T Create<T>(IEnumerable<string> values)
             where T : class
         {
+            var valuesList = values.ToList();
+
             if (typeof(T) == typeof(FrameworkMetaData))
             {
-                return CreateFrameworkMetaData(values) as T;
+                return CreateFrameworkMetaData(valuesList) as T;
             }
 
             if (typeof(T) == typeof(LarsStandard))
             {
-                return CreateStandard(values) as T;
+                return CreateStandard(valuesList) as T;
+            }
+
+            if (typeof(T) == typeof(FrameworkAimMetaData))
+            {
+                return CreateFrameworkAimMetaData(valuesList) as T;
+            }
+
+            if (typeof(T) == typeof(FrameworkComponentTypeMetaData))
+            {
+                return CreateFrameworkComponentTypeMetaData(valuesList) as T;
+            }
+
+            if (typeof(T) == typeof(LearningDeliveryMetaData))
+            {
+                return CreateLearningDeliveryMetaData(valuesList) as T;
             }
 
             return null;
         }
 
-        private FrameworkMetaData CreateFrameworkMetaData(IEnumerable<string> frameworkValues)
+        private static FrameworkMetaData CreateFrameworkMetaData(IReadOnlyList<string> values)
         {
-            var values = frameworkValues.ToList();
-
             if (values.Count <= 11)
             {
                 return null;
@@ -55,10 +70,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
                 };
         }
 
-        private LarsStandard CreateStandard(IEnumerable<string> standardValues)
+        private static LarsStandard CreateStandard(IReadOnlyList<string> values)
         {
-            var values = standardValues.ToList();
-
             var standardid = GetStandardId(values);
 
             if (standardid < 0)
@@ -77,7 +90,52 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
             };
         }
 
-        private int GetStandardId(IReadOnlyList<string> values)
+        private static FrameworkAimMetaData CreateFrameworkAimMetaData(IReadOnlyList<string> values)
+        {
+            var frameworkCode = TryParse(values[0]);
+
+            if (frameworkCode <= 0)
+            {
+                return null;
+            }
+
+            return new FrameworkAimMetaData
+            {
+                FworkCode = frameworkCode,
+                ProgType = TryParse(values[1]),
+                PwayCode = TryParse(values[2]),
+                LearnAimRef = values[3],
+                EffectiveFrom = TryGetDate(values[4]) ?? DateTime.MinValue,
+                EffectiveTo = TryGetDate(values[5]) ?? DateTime.MinValue,
+                FrameworkComponentType = TryParse(values[6])
+            };
+        }
+
+        private static FrameworkComponentTypeMetaData CreateFrameworkComponentTypeMetaData(IReadOnlyList<string> values)
+        {
+            return new FrameworkComponentTypeMetaData
+            {
+                FrameworkComponentType = TryParse(values[0]),
+                FrameworkComponentTypeDesc = values[1],
+                FrameworkComponentTypeDesc2 = values[2],
+                EffectiveFrom = TryGetDate(values[3]) ?? DateTime.MinValue,
+                EffectiveTo = TryGetDate(values[4]) ?? DateTime.MinValue
+            };
+        }
+
+        private static LearningDeliveryMetaData CreateLearningDeliveryMetaData(IReadOnlyList<string> values)
+        {
+            return new LearningDeliveryMetaData
+            {
+                LearnAimRef = values[0],
+                EffectiveFrom = TryGetDate(values[1]) ?? DateTime.MinValue,
+                EffectiveTo = TryGetDate(values[2]) ?? DateTime.MinValue,
+                LearnAimRefTitle = values[3],
+                LearnAimRefType = TryParse(values[4])
+            };
+        }
+
+        private static int GetStandardId(IReadOnlyList<string> values)
         {
             if (values == null || values.Count < 7)
             {
@@ -87,7 +145,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
             return TryParse(values[0]);
         }
 
-        private int TryParse(string s)
+        private static int TryParse(string s)
         {
             int i;
             if (int.TryParse(s.RemoveQuotationMark(), out i))
@@ -98,7 +156,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
             return -1;
         }
 
-        private double TryParseDouble(string s)
+        private static double TryParseDouble(string s)
         {
             double i;
             if (double.TryParse(s.RemoveQuotationMark(), out i))
@@ -109,7 +167,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
             return -1;
         }
 
-        private DateTime? TryGetDate(string dateString)
+        private static DateTime? TryGetDate(string dateString)
         {
             DateTime dateTime;
             if (DateTime.TryParse(dateString, out dateTime))

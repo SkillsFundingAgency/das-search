@@ -27,5 +27,7 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Framework
         public double SectorSubjectAreaTier1 { get; set; }
 
         public double SectorSubjectAreaTier2 { get; set; }
+
+        public IEnumerable<FrameworkQualification> Qualifications { get; set; }
     }
 }

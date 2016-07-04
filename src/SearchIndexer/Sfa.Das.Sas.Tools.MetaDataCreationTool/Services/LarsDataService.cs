@@ -49,6 +49,53 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             return standards;
         }
 
+        public ICollection<FrameworkMetaData> GetListOfCurrentFrameworks()
+        {
+            var zipFilePath = GetZipFilePath();
+
+            var zipStream = _httpGetFile.GetFile(zipFilePath);
+
+            var filesToExtract = new List<string>
+            {
+                _appServiceSettings.CsvFileNameFrameworks,
+                _appServiceSettings.CsvFileNameFrameworksAim,
+                _appServiceSettings.CsvFileNameFrameworkComponentType,
+                _appServiceSettings.CsvFileNameLearningDelivery
+            };
+
+            var extractedFiles = _fileExtractor.ExtractFilesFromStream(zipStream, filesToExtract);
+
+            // TODO: Need to clean this up and check that these values are present in the extracted files.
+            // Commiting this code in just so that it can be worked on tomorrow on my laptop
+            var frameworksFileContent = extractedFiles[_appServiceSettings.CsvFileNameFrameworks];
+            var frameworkAimFileContent = extractedFiles[_appServiceSettings.CsvFileNameFrameworksAim];
+            var frameworkContentTypeFileContent = extractedFiles[_appServiceSettings.CsvFileNameFrameworkComponentType];
+            var learningDeliveryFileContent = extractedFiles[_appServiceSettings.CsvFileNameLearningDelivery];
+
+            var frameworksMetaData = _csvService.ReadFromString<FrameworkMetaData>(frameworksFileContent);
+            var frameworkAimsMetaData = _csvService.ReadFromString<FrameworkAimMetaData>(frameworkAimFileContent);
+            var frameworkComponentTypesMetaData = _csvService.ReadFromString<FrameworkComponentTypeMetaData>(frameworkContentTypeFileContent);
+            var learningDeliveriesMetaData = _csvService.ReadFromString<LearningDeliveryMetaData>(learningDeliveryFileContent);
+
+            foreach (var framework in frameworksMetaData)
+            {
+                var frameworkAims = frameworkAimsMetaData.Where(x => x.FworkCode.Equals(framework.FworkCode) &&
+                                                                     (x.EffectiveTo >= DateTime.Now || x.EffectiveTo == null));
+
+                framework.Qualifications =
+                    from aim in frameworkAims
+                    join comp in frameworkComponentTypesMetaData on aim.FrameworkComponentType equals comp.FrameworkComponentType
+                    join ld in learningDeliveriesMetaData on aim.LearnAimRef equals ld.LearnAimRef
+                    select new FrameworkQualification
+                    {
+                        Title = ld.LearnAimRefTitle,
+                        CompetenceDescription = comp.FrameworkComponentTypeDesc
+                    };
+            }
+
+            return frameworksMetaData;
+        }
+
         private string ReadStandardCsvFile()
         {
             var zipFilePath = GetZipFilePath();
@@ -61,40 +108,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
 
             return fileContent;
-        }
-
-        public ICollection<FrameworkMetaData> GetListOfCurrentFrameworks()
-        {
-            var zipFilePath = GetZipFilePath();
-
-            var zipStream = _httpGetFile.GetFile(zipFilePath);
-
-            var frameworksFileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameFrameworks);
-            var frameworkAimFileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameFrameworksAim);
-            var frameworkContentTypeFileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameFrameworkComponentType);
-            var learningDeliveryFileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameLearningDelivery);
-
-            var frameworksMetaData = _csvService.ReadFromString<FrameworkMetaData>(frameworksFileContent);
-            var frameworkAimsMetaData = _csvService.ReadFromString<FrameworkAimMetaData>(frameworkAimFileContent);
-            var frameworkComponentTypesMetaData = _csvService.ReadFromString<FrameworkComponentTypeMetaData>(frameworkContentTypeFileContent);
-            var learningDeliveriesMetaData = _csvService.ReadFromString<LearningDeliveryMetaData>(learningDeliveryFileContent);
-
-            //var results = from f in frameworksMetaData
-            //    join faim in frameworkAimsMetaData on f.FworkCode equals faim.FworkCode
-            //    join comp in frameworkComponentTypesMetaData on faim.FrameworkComponentType equals comp.FrameworkComponentType
-            //    join ld in learningDeliveriesMetaData on faim.LearnAimRef equals ld.LearnAimRef
-            //    where faim.EffectiveFrom >= DateTime.Now
-            //    select new
-            //    {
-            //        Framework = f,
-            //        FrameworkAim = faim,
-            //        FrameworkComponentType = comp.FrameworkComponentTypeDesc,
-            //        LearningDelivery = ld.LearnAimRefTitle
-            //    };
-
-          
-
-            return frameworksMetaData;
         }
 
         private string GetZipFilePath()
