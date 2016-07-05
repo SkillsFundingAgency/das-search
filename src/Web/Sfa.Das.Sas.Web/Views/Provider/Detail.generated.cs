@@ -538,7 +538,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n");
 #line hidden
 
 #line 171 "..\..\Views\Provider\Detail.cshtml"
-         if (@Model.EmployerSatisfactionMessage != "No data available")
+         if (@Model.EmployerSatisfactionMessage != "no data available")
         {
 
 
@@ -607,7 +607,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n");
 #line hidden
 
 #line 184 "..\..\Views\Provider\Detail.cshtml"
-         if (@Model.LearnerSatisfactionMessage != "No data available")
+         if (@Model.LearnerSatisfactionMessage != "no data available")
         {
 
 

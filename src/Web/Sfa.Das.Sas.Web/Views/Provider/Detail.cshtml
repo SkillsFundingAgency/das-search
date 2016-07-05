@@ -168,7 +168,7 @@ if (!string.IsNullOrEmpty(url))
         <span id="employer-satisfaction">
             @Model.EmployerSatisfactionMessage
         </span>
-        @if (@Model.EmployerSatisfactionMessage != "No data available")
+        @if (@Model.EmployerSatisfactionMessage != "no data available")
         {
             <div class="progress-container">
                 <div class="progressbar" style="width: @Model.EmployerSatisfaction%"></div>
@@ -181,7 +181,7 @@ if (!string.IsNullOrEmpty(url))
         <span id="learner-satisfaction">
             @Model.LearnerSatisfactionMessage
         </span>
-        @if (@Model.LearnerSatisfactionMessage != "No data available")
+        @if (@Model.LearnerSatisfactionMessage != "no data available")
         {
             <div class="progress-container">
                 <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>

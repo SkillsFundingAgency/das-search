@@ -83,6 +83,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
                 .ForMember(x => x.StandardCode, y => y.Ignore())
                 .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftemap
+                .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
                 ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
@@ -93,6 +94,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.FrameworkId, y => y.Ignore())
                 .ForMember(x => x.FrameworkCode, y => y.Ignore())
                 .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftemap
+                .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
                 ;
 
             cfg.CreateMap<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -100,6 +102,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.IsShortlisted, y => y.Ignore())
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
+                .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
                 ;
 
             cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
@@ -107,6 +110,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.IsShortlisted, y => y.Ignore())
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
+                .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
                 ;
 
             // Provider detail page

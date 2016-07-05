@@ -164,6 +164,99 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
+        public void ShouldShowDeliveryModesWhenThereIsJustOne()
+        {
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "BlockRelease" },
+                Distance = 1.2,
+                Address = new Address(),
+                Id = "1",
+                LocationId = 2,
+                FrameworkId = "3",
+                DeliveryOptionsMessage = "block release"
+            };
+
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".deliveryOptions").Should().Be("block release");
+        }
+
+        [Test]
+        public void ShouldShowDeliveryModesWhenThereAreSeveralOnes()
+        {
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer" },
+                Distance = 1.2,
+                Address = new Address(),
+                Id = "1",
+                LocationId = 2,
+                FrameworkId = "3",
+                DeliveryOptionsMessage = "block release, at your location"
+            };
+
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".deliveryOptions").Should().Be("block release, at your location");
+        }
+
+        [Test]
+        public void ShouldShowDeliveryModesWithCorrectOrder()
+        {
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
+            {
+                Name = "Provider 1",
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                Distance = 1.2,
+                Address = new Address(),
+                Id = "1",
+                LocationId = 2,
+                FrameworkId = "1",
+                DeliveryOptionsMessage = "day release, block release, at your location"
+            };
+
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".deliveryOptions").Should().Be("day release, block release, at your location");
+        }
+
+        [Test]
         public void ShouldHaveAllFieldsInSearchResult()
         {
             var page = new FrameworkProviderInformation();
@@ -248,7 +341,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var item = new FrameworkProviderResultItemViewModel
             {
                 Name = "Provider 1",
-                DeliveryModes = new List<string> { "100PercentEmployer", "blockRelease" },
+                DeliveryModes = new List<string> { "100PercentEmployer", "BlockRelease" },
                 Distance = 3,
                 Website = "http://www.trainingprovider.co.uk",
                 Address = new Address
@@ -279,11 +372,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("3 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 Town County PostCode");
+            GetPartial(html, ".address").Should().Be("Address 1 Address 2 Town County PostCode");
         }
 
         [Test]
-        public void ShouldShowEmployerLocationIfDeliveryModeContainsEmployerLocationAndIsTheOnlyOne()
+        public void ShouldntShowEmployerLocationIfDeliveryModeContainsEmployerLocationAndIsTheOnlyOne()
         {
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
@@ -320,7 +413,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
             GetPartial(html, ".result dl dd").Should().Be("3 miles away");
 
-            GetPartial(html, ".result dl dd", 2).Should().Be("Training takes place at your location.");
+            GetPartial(html, ".address").Should().Be(string.Empty);
         }
 
         [Test]
