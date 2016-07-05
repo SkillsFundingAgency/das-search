@@ -28,10 +28,10 @@
                         .Analyzers(a => a
                             .Custom(AnalyserEnglishCustom, l => l
                                 .Tokenizer("standard")
-                                .Filters("english_possessive_stemmer", "lowercase", "english_stop", "english_custom_synonyms", "english_stemmer"))
+                                .Filters("lowercase", "english_stop", "english_custom_synonyms"))
                             .Custom(AnalyserEnglishCustomText, l => l
                                 .Tokenizer("standard")
-                                .Filters("english_possessive_stemmer", "lowercase", "english_stop_freetext", "english_custom_synonyms", "english_stemmer")));
+                                .Filters("lowercase", "english_stop_freetext", "english_custom_synonyms")));
         }
     }
 }
