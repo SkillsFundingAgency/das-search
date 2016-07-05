@@ -121,7 +121,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddF
             
             #line 6 "..\..\Views\Apprenticeship\Framework.cshtml"
   
-    ViewBag.Title = "Framework - " + @Model.Title;
+    ViewBag.Title = @Model.Title + " - Apprenticeship Framework";   
 
             
             #line default
@@ -422,14 +422,14 @@ WriteLiteral("\r\n\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3119), Tuple.Create("\"", 3247)
+WriteAttribute("href", Tuple.Create(" href=\"", 3137), Tuple.Create("\"", 3265)
             
             #line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 3126), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
+, Tuple.Create(Tuple.Create("", 3144), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 3126), false)
+, 3144), false)
 );
 
 WriteLiteral(">\r\n                    <i");

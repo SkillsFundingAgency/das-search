@@ -86,14 +86,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3575), Tuple.Create("\"", 3583)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3590), Tuple.Create("\"", 3598)
 
 #line 81 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3580), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3595), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3580), false)
+, 3595), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -138,14 +138,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3761), Tuple.Create("\"", 3775)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3776), Tuple.Create("\"", 3790)
 
 #line 90 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3768), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3783), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3768), false)
+, 3783), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -246,7 +246,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist apprenticeship", "AddS
             
             #line 7 "..\..\Views\Apprenticeship\Standard.cshtml"
   
-    ViewBag.Title = "Standard - " + @Model.Title;
+    ViewBag.Title = @Model.Title + " - Apprenticeship Standard";
 
             
             #line default
@@ -303,14 +303,14 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 997), Tuple.Create("\"", 1123)
+WriteAttribute("href", Tuple.Create(" href=\"", 1012), Tuple.Create("\"", 1138)
             
             #line 28 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 1004), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+, Tuple.Create(Tuple.Create("", 1019), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 1004), false)
+, 1019), false)
 );
 
 WriteLiteral(">\r\n                        <i");
@@ -457,14 +457,14 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2993), Tuple.Create("\"", 3119)
+WriteAttribute("href", Tuple.Create(" href=\"", 3008), Tuple.Create("\"", 3134)
             
             #line 67 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3000), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+, Tuple.Create(Tuple.Create("", 3015), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 3000), false)
+, 3015), false)
 );
 
 WriteLiteral(">\r\n                    <i");
