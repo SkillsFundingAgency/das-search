@@ -25,7 +25,7 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                    <a class="button ui-find-training-providers" id="ga-find-provider-top" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                         <i class="fa fa-search" aria-hidden="true"></i>
                         Find training providers
                     </a>
@@ -64,7 +64,7 @@
 
             <hr/>
             <div id="bottom-actions">
-                <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     Find training providers
                 </a>

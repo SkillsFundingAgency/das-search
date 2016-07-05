@@ -422,14 +422,16 @@ WriteLiteral("\r\n\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3119), Tuple.Create("\"", 3247)
+WriteLiteral(" id=\"ga-find-provider-bottom\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 3148), Tuple.Create("\"", 3276)
             
             #line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 3126), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
+                , Tuple.Create(Tuple.Create("", 3155), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 3126), false)
+, 3155), false)
 );
 
 WriteLiteral(">\r\n                    <i");
