@@ -87,6 +87,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
             SendLog(message, LogLevel.Error, exception);
         }
 
+        public void Error(string message)
+        {
+            SendLog(message, LogLevel.Error);
+        }
+
         public void Error(string message, ILogEntry entry)
         {
             SendLog(message, LogLevel.Error, new Dictionary<string, object> { { entry.Name, entry } });
