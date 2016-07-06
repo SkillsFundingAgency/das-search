@@ -152,8 +152,8 @@
                             bs => bs
                                 .Match(m => m
                                     .Field(f => f.Title)
-                                    .PrefixLength(1)
-                                    .Fuzziness(Fuzziness.Ratio(1.0))
+                                    //.PrefixLength(1)
+                                    //.Fuzziness(Fuzziness.Auto)
                                     .Query(formattedKeywords)),
                                     bs => bs
                                     .Bool(bsb => bsb
