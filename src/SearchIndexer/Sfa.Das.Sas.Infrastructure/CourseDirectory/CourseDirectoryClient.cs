@@ -47,10 +47,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
             return selectedProviders;
         }
 
-        private static Coordinate SetGeoPoint(Models.Location matchingLocation)
+        private Coordinate SetGeoPoint(Models.Location matchingLocation)
         {
             if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
             {
+                _logger.Error($"Location {matchingLocation.ID} missing coordinates");
                 return null;
             }
 
