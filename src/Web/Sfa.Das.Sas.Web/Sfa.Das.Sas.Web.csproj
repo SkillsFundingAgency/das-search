@@ -252,6 +252,7 @@
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryOptionResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\FrameworkInformationResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\EmployerSatisfactionResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />

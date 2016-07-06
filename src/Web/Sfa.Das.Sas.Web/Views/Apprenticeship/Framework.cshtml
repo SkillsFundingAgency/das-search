@@ -32,9 +32,12 @@
                     </dd>
                     @if (!string.IsNullOrEmpty(Model.TypicalLengthMessage))
                     {
-                        <dt>Typical length:</dt>
+                        <dt>Typical length</dt>
                         <dd>@Model.TypicalLengthMessage </dd>
                     }
+                    <dt>Entry requirements</dt>
+                    <dd>@Model.EntryRequirements </dd>
+
                     <dt>Suitable roles for apprentices</dt>
                     <dd class="job-roles">
                         @if (Model.JobRoles != null)
@@ -55,6 +58,11 @@
                             </ul>
                         }
                     </dd>
+                    <dt>Qualifications</dt>
+                    <dd>@Model.CompletionQualifications</dd>
+
+                    <dt>Professional registration</dt>
+                    <dd>@Model.ProfessionalRegistration</dd>
                 </dl>
             </header>
 

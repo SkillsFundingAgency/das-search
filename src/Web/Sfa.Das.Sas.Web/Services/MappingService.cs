@@ -168,6 +168,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerm, y => y.Ignore()) // In controller
                 .ForMember(x => x.JobRoles, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTitlesFromJobRoles(z.JobRoleItems)))
                 .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.TypicalLength)))
+                .ForMember(x => x.EntryRequirements, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.EntryRequirements))
+                .ForMember(x => x.CompletionQualifications, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.CompletionQualifications))
+                .ForMember(x => x.ProfessionalRegistration, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.ProfessionalRegistration))
                 ;
         }
 

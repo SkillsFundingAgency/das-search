@@ -15,5 +15,11 @@
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
+
+        public string EntryRequirements { get; set; }
+
+        public string ProfessionalRegistration { get; set; }
+
+        public string CompletionQualifications { get; set; }
     }
 }

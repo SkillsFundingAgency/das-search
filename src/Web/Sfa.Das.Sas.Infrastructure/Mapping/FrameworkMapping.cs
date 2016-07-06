@@ -18,7 +18,10 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 PathwayName = document.PathwayName,
                 TypicalLength = document.TypicalLength,
                 ExpiryDate = document.ExpiryDate,
-                JobRoleItems = document.JobRoleItems
+                JobRoleItems = document.JobRoleItems,
+                CompletionQualifications = document.CompletionQualifications,
+                EntryRequirements = document.EntryRequirements,
+                ProfessionalRegistration = document.ProfessionalRegistration
             };
         }
     }

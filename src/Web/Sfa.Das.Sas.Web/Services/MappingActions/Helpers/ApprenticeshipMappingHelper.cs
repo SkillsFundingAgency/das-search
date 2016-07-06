@@ -48,6 +48,11 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return null;
         }
 
+        public static string GetInformationText(string text)
+        {
+            return text != string.Empty ? text : "None specified";
+        }
+
         private static int GetSingleValue(int from, int to)
         {
             if (from == to)

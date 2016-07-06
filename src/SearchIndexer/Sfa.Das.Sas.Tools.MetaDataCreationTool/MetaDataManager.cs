@@ -91,6 +91,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                 {
                     f.JobRoleItems = repositoryFramework.JobRoleItems;
                     f.TypicalLength = repositoryFramework.TypicalLength;
+                    f.CompletionQualifications = repositoryFramework.CompletionQualifications;
+                    f.EntryRequirements = repositoryFramework.EntryRequirements;
+                    f.ProfessionalRegistration = repositoryFramework.ProfessionalRegistration;
                 }
             }
         }

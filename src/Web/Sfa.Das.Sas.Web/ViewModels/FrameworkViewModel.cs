@@ -21,6 +21,12 @@
 
         public string SearchTerm { get; set; }
 
+        public string CompletionQualifications { get; set; }
+
+        public string EntryRequirements { get; set; }
+
+        public string ProfessionalRegistration { get; set; }
+
         public IEnumerable<string> JobRoles { get; set; }
     }
 }
