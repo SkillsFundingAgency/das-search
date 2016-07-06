@@ -7,9 +7,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
     public class CsvService : IReadMetaDataFromCsv
     {
-        private readonly IMetaDataFactory _metaDataFactory;
+        private readonly IGenericMetaDataFactory _metaDataFactory;
 
-        public CsvService(IMetaDataFactory metaDataFactory)
+        public CsvService(IGenericMetaDataFactory metaDataFactory)
         {
             _metaDataFactory = metaDataFactory;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Infrastructure;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
@@ -28,7 +29,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             IUnzipStream fileExtractor,
             IAngleSharpService angleSharpService,
             ILog logger,
-            IHttpGet httpGet) 
+            IHttpGet httpGet)
         {
             _appServiceSettings = appServiceSettings;
             _csvService = csvService;
@@ -53,24 +54,25 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         {
             var zipFilePath = GetZipFilePath();
 
-            var zipStream = _httpGetFile.GetFile(zipFilePath);
+            string frameworksFileContent;
+            string frameworkAimFileContent;
+            string frameworkContentTypeFileContent;
+            string learningDeliveryFileContent;
 
-            var filesToExtract = new List<string>
+            using (var zipStream = _httpGetFile.GetFile(zipFilePath))
             {
-                _appServiceSettings.CsvFileNameFrameworks,
-                _appServiceSettings.CsvFileNameFrameworksAim,
-                _appServiceSettings.CsvFileNameFrameworkComponentType,
-                _appServiceSettings.CsvFileNameLearningDelivery
-            };
+                frameworksFileContent = _fileExtractor.ExtractFileFromStream(
+                    zipStream, _appServiceSettings.CsvFileNameFrameworks, true);
 
-            var extractedFiles = _fileExtractor.ExtractFilesFromStream(zipStream, filesToExtract);
+                frameworkAimFileContent = _fileExtractor.ExtractFileFromStream(
+                    zipStream, _appServiceSettings.CsvFileNameFrameworksAim, true);
 
-            // TODO: Need to clean this up and check that these values are present in the extracted files.
-            // Commiting this code in just so that it can be worked on tomorrow on my laptop
-            var frameworksFileContent = extractedFiles[_appServiceSettings.CsvFileNameFrameworks];
-            var frameworkAimFileContent = extractedFiles[_appServiceSettings.CsvFileNameFrameworksAim];
-            var frameworkContentTypeFileContent = extractedFiles[_appServiceSettings.CsvFileNameFrameworkComponentType];
-            var learningDeliveryFileContent = extractedFiles[_appServiceSettings.CsvFileNameLearningDelivery];
+                frameworkContentTypeFileContent = _fileExtractor.ExtractFileFromStream(
+                    zipStream, _appServiceSettings.CsvFileNameFrameworkComponentType, true);
+
+                learningDeliveryFileContent = _fileExtractor.ExtractFileFromStream(
+                    zipStream, _appServiceSettings.CsvFileNameLearningDelivery, true);
+            }
 
             var frameworksMetaData = _csvService.ReadFromString<FrameworkMetaData>(frameworksFileContent);
             var frameworkAimsMetaData = _csvService.ReadFromString<FrameworkAimMetaData>(frameworkAimFileContent);
@@ -80,17 +82,27 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             foreach (var framework in frameworksMetaData)
             {
                 var frameworkAims = frameworkAimsMetaData.Where(x => x.FworkCode.Equals(framework.FworkCode) &&
-                                                                     (x.EffectiveTo >= DateTime.Now || x.EffectiveTo == null));
-
-                framework.Qualifications =
+                                                                     (x.EffectiveTo >= DateTime.Now || x.EffectiveTo == null)).ToList();
+                var qualifications =
                     from aim in frameworkAims
                     join comp in frameworkComponentTypesMetaData on aim.FrameworkComponentType equals comp.FrameworkComponentType
                     join ld in learningDeliveriesMetaData on aim.LearnAimRef equals ld.LearnAimRef
-                    select new FrameworkQualification
+                    select new
                     {
                         Title = ld.LearnAimRefTitle,
                         CompetenceDescription = comp.FrameworkComponentTypeDesc
                     };
+
+                if (qualifications.Any())
+                {
+                    var lines = qualifications.Select(x => x.Title + " " + x.CompetenceDescription);
+
+                    framework.Qualifications = lines.Aggregate((x1, x2) => x1 + Environment.NewLine + x2);
+                }
+                else
+                {
+                    framework.Qualifications = "None specified";
+                }
             }
 
             return frameworksMetaData;

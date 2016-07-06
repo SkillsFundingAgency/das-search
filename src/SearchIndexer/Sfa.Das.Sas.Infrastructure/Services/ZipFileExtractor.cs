@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Infrastructure;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 {
-    using System.Linq;
-
     public class ZipFileExtractor : IUnzipStream
     {
         public string ExtractFileFromStream(Stream stream, string filePath)
         {
-            using (var zip = new ZipArchive(stream))
+            return ExtractFileFromStream(stream, filePath, false);
+        }
+
+        public string ExtractFileFromStream(Stream stream, string filePath, bool leaveStreamOpen)
+        {
+            using (var zip = new ZipArchive(stream, ZipArchiveMode.Read, leaveStreamOpen))
             {
                 var entry = zip.Entries.FirstOrDefault(m => m.FullName.EndsWith(filePath));
 
@@ -25,31 +28,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
                     return reader.ReadToEnd();
                 }
             }
-        }
-
-        public Dictionary<string, string> ExtractFilesFromStream(Stream stream, IEnumerable<string> filePaths)
-        {
-            var extractedFiles = new Dictionary<string, string>();
-
-            using (var zip = new ZipArchive(stream))
-            {
-                foreach (var filePath in filePaths)
-                {
-                    var entry = zip.Entries.FirstOrDefault(m => m.FullName.EndsWith(filePath));
-
-                    if (entry == null)
-                    {
-                        continue;
-                    }
-
-                    using (var reader = new StreamReader(entry.Open()))
-                    {
-                        extractedFiles.Add(filePath, reader.ReadToEnd());
-                    }
-                }
-            }
-
-            return extractedFiles;
         }
     }
 }

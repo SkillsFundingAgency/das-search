@@ -9,8 +9,8 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Services
     [TestFixture]
     public class ZipFileExtractorTest
     {
-        [TestCase("CSV/frameworks.csv", "frameworks.csv", "Bar!", "Bar!")]
-        [TestCase("CSVNOT/frameworks.csv", "frameworks.csv", "Bar!", null)]
+        [TestCase("CSV/frameworks.csv", "CSV/frameworks.csv", "Bar!", "Bar!")]
+        [TestCase("CSVNOT/frameworks.csv", "CSV/frameworks.csv", "Bar!", null)]
         public void ShouldUnzipStream(string filePath, string fileName, string content, string result)
         {
             ZipFileExtractor zipFileExtractor = new ZipFileExtractor();
@@ -33,8 +33,8 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Services
             }
         }
 
-        [TestCase("CSV/frameworks.csv", "standards.csv", "Bar!")]
-        [TestCase("CSVNOT/frameworks.csv", "frameworks.csv", "Bar!")]
+        [TestCase("CSV/frameworks.csv", "CSV/standards.csv", "Bar!")]
+        [TestCase("CSVNOT/frameworks.csv", "CSV/frameworks.csv", "Bar!")]
         public void ShouldFailToUnzipStream(string filePath, string fileName, string content)
         {
             ZipFileExtractor zipFileExtractor = new ZipFileExtractor();

@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
 {
-    public interface IMetaDataFactory
+    public interface IGenericMetaDataFactory
     {
         T Create<T>(IEnumerable<string> values)
             where T : class;

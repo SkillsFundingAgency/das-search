@@ -80,8 +80,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\MetaDataCreationRegistry.cs" />
-    <Compile Include="Factories\IMetaDataFactory.cs" />
+    <Compile Include="Factories\IGenericMetaDataFactory.cs" />
     <Compile Include="Factories\LarsMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FrameworkAimMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FrameworkComponentTypeMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FrameworkMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\IMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\LearningDeliveryMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\MetaDataFactoryBase.cs" />
     <Compile Include="Models\Git\FileContents.cs" />
     <Compile Include="Models\Git\VstsFrameworkMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
@@ -129,6 +135,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

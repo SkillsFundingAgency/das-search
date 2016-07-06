@@ -3,40 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using Sfa.Das.Sas.Indexer.Core.Extensions;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
 {
-    public class LarsMetaDataFactory : IMetaDataFactory
+    public class LarsMetaDataFactory : IGenericMetaDataFactory
     {
+        //private readonly Dictionary<Type, IMetaDataFactory> _metaDataFactories;
+
+        //public LarsMetaDataFactory(IEnumerable<IMetaDataFactory> metaDataFactories)
+        //{
+        //    _metaDataFactories = new Dictionary<Type, IMetaDataFactory>();
+
+        //    foreach (var factory in metaDataFactories)
+        //    {
+        //        _metaDataFactories.Add(factory.MetaDataType, factory);
+        //    }
+        //}
+
         public T Create<T>(IEnumerable<string> values)
             where T : class
         {
-            var valuesList = values.ToList();
+            if (values == null)
+            {
+                return null;
+            }
+
+            //if (!_metaDataFactories.ContainsKey(typeof(T)))
+            //{
+            //    return null;
+            //}
+
+            //var factory = _metaDataFactories[typeof(T)];
+
+            //return factory.Create(values.ToList()) as T;
 
             if (typeof(T) == typeof(FrameworkMetaData))
             {
-                return CreateFrameworkMetaData(valuesList) as T;
+                return CreateFrameworkMetaData(values.ToList()) as T;
             }
 
             if (typeof(T) == typeof(LarsStandard))
             {
-                return CreateStandard(valuesList) as T;
+                return CreateStandard(values.ToList()) as T;
             }
 
             if (typeof(T) == typeof(FrameworkAimMetaData))
             {
-                return CreateFrameworkAimMetaData(valuesList) as T;
+                return CreateFrameworkAimMetaData(values.ToList()) as T;
             }
 
             if (typeof(T) == typeof(FrameworkComponentTypeMetaData))
             {
-                return CreateFrameworkComponentTypeMetaData(valuesList) as T;
+                return CreateFrameworkComponentTypeMetaData(values.ToList()) as T;
             }
 
             if (typeof(T) == typeof(LearningDeliveryMetaData))
             {
-                return CreateLearningDeliveryMetaData(valuesList) as T;
+                return CreateLearningDeliveryMetaData(values.ToList()) as T;
             }
 
             return null;
@@ -44,7 +69,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
 
         private static FrameworkMetaData CreateFrameworkMetaData(IReadOnlyList<string> values)
         {
-            if (values.Count <= 11)
+            if (values == null || values.Count <= 11)
             {
                 return null;
             }
@@ -72,6 +97,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
 
         private static LarsStandard CreateStandard(IReadOnlyList<string> values)
         {
+            if (values == null || values.Count < 11)
+            {
+                return null;
+            }
+
             var standardid = GetStandardId(values);
 
             if (standardid < 0)
@@ -92,6 +122,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
 
         private static FrameworkAimMetaData CreateFrameworkAimMetaData(IReadOnlyList<string> values)
         {
+            if (values == null || values.Count < 7)
+            {
+                return null;
+            }
+
             var frameworkCode = TryParse(values[0]);
 
             if (frameworkCode <= 0)
@@ -102,36 +137,46 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
             return new FrameworkAimMetaData
             {
                 FworkCode = frameworkCode,
-                ProgType = TryParse(values[1]),
-                PwayCode = TryParse(values[2]),
-                LearnAimRef = values[3],
+                ProgType = TryParse(values[1].RemoveQuotationMark()),
+                PwayCode = TryParse(values[2].RemoveQuotationMark()),
+                LearnAimRef = values[3].RemoveQuotationMark(),
                 EffectiveFrom = TryGetDate(values[4]) ?? DateTime.MinValue,
-                EffectiveTo = TryGetDate(values[5]) ?? DateTime.MinValue,
+                EffectiveTo = TryGetDate(values[5]),
                 FrameworkComponentType = TryParse(values[6])
             };
         }
 
         private static FrameworkComponentTypeMetaData CreateFrameworkComponentTypeMetaData(IReadOnlyList<string> values)
         {
+            if (values == null || values.Count < 5)
+            {
+                return null;
+            }
+
             return new FrameworkComponentTypeMetaData
             {
                 FrameworkComponentType = TryParse(values[0]),
-                FrameworkComponentTypeDesc = values[1],
-                FrameworkComponentTypeDesc2 = values[2],
+                FrameworkComponentTypeDesc = values[1].RemoveQuotationMark(),
+                FrameworkComponentTypeDesc2 = values[2].RemoveQuotationMark(),
                 EffectiveFrom = TryGetDate(values[3]) ?? DateTime.MinValue,
-                EffectiveTo = TryGetDate(values[4]) ?? DateTime.MinValue
+                EffectiveTo = TryGetDate(values[4])
             };
         }
 
         private static LearningDeliveryMetaData CreateLearningDeliveryMetaData(IReadOnlyList<string> values)
         {
+            if (values == null || values.Count < 5)
+            {
+                return null;
+            }
+
             return new LearningDeliveryMetaData
             {
-                LearnAimRef = values[0],
+                LearnAimRef = values[0].RemoveQuotationMark(),
                 EffectiveFrom = TryGetDate(values[1]) ?? DateTime.MinValue,
-                EffectiveTo = TryGetDate(values[2]) ?? DateTime.MinValue,
-                LearnAimRefTitle = values[3],
-                LearnAimRefType = TryParse(values[4])
+                EffectiveTo = TryGetDate(values[2]),
+                LearnAimRefTitle = values[3].RemoveQuotationMark(),
+                LearnAimRefType = TryParse(values[4].RemoveQuotationMark())
             };
         }
 

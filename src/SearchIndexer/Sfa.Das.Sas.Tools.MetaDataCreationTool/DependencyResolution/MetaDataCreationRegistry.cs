@@ -19,7 +19,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
             For<IGenerateStandardMetaData>().Use<MetaDataManager>();
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
-            For<IMetaDataFactory>().Use<LarsMetaDataFactory>();
+            For<IGenericMetaDataFactory>().Use<LarsMetaDataFactory>();
+            
         }
     }
 }

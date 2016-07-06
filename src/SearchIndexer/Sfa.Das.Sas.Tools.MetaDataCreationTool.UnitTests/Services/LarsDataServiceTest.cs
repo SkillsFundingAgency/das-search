@@ -60,14 +60,14 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             };
             _learningDelivery = new LearningDeliveryMetaData
             {
-                LearnAimRef = "testRef",
+                LearnAimRef = "5001738X",
                 LearnAimRefTitle = "Test Learning Delivery"
             };
             _frameworkAim = new FrameworkAimMetaData
             {
                 FworkCode = _framework.FworkCode,
                 FrameworkComponentType = _frameworkComponentType.FrameworkComponentType,
-                LearnAimRef = _learningDelivery.LearnAimRef
+                LearnAimRef = "5001738X"
             };
 
             _frameworkList = new List<FrameworkMetaData> { _framework };
@@ -102,13 +102,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             frameworks.Count.Should().Be(1);
 
             var framework = frameworks.First();
-
-            framework.Qualifications.Count().Should().Be(1);
-
-            var qualification = framework.Qualifications.First();
-
-            qualification.Title.Should().Be(_learningDelivery.LearnAimRefTitle);
-            qualification.CompetenceDescription.Should().Be(_frameworkComponentType.FrameworkComponentTypeDesc);
+            
+            framework.Qualifications.Should().Be(_learningDelivery.LearnAimRefTitle + " " + _frameworkComponentType.FrameworkComponentTypeDesc);
         }
 
         [Test]
@@ -125,7 +120,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 
             var framework = frameworks.First();
 
-            framework.Qualifications.Should().BeEmpty();
+            framework.Qualifications.Should().Be("None specified");
         }
     }
 }

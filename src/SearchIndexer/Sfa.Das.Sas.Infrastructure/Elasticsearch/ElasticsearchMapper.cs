@@ -68,7 +68,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 TypicalLength = frameworkMetaData.TypicalLength,
                 ExpiryDate = frameworkMetaData.EffectiveTo,
                 SectorSubjectAreaTier1 = frameworkMetaData.SectorSubjectAreaTier1,
-                SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2
+                SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2,
+                Qualifications = frameworkMetaData.Qualifications
             };
             return doc;
         }
