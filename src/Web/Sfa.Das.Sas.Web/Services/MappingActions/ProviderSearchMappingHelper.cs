@@ -9,11 +9,6 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
 
     public static class ProviderSearchMappingHelper
     {
-        public static int CalculateLastPage(long totalResults, int resultsToTake)
-        {
-            return resultsToTake > 0 ? (int)System.Math.Ceiling((double)totalResults / resultsToTake) : 0;
-        }
-
         public static IEnumerable<DeliveryModeViewModel> CreateDeliveryModes(Dictionary<string, long?> trainingOptionsAggregation, IEnumerable<string> selectedTrainingOptions)
         {
             var viewModels = new List<DeliveryModeViewModel>();

@@ -142,7 +142,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
                 .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
                 .ForMember(x => x.ShortlistedStandards, y => y.Ignore()) // In controller
-                .AfterMap((src, dest) => src.LastPage = dest.ResultsToTake != 0 ? (int)Math.Ceiling((double)src.TotalResults / src.ResultsToTake) : src.LastPage)
+                .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)))
                 ;
 
             // Nexzt

@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 
     public class LastPageValueResolver : ValueResolver<BaseProviderSearchResults, int>
     {
@@ -12,7 +13,7 @@
                 return 0;
             }
 
-            return ProviderSearchMappingHelper.CalculateLastPage(source.TotalResults, source.ResultsToTake);
+            return SearchMappingHelper.CalculateLastPage(source.TotalResults, source.ResultsToTake);
         }
     }
 }
