@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -31,7 +32,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         private FrameworkAimMetaData _frameworkAim;
         private FrameworkComponentTypeMetaData _frameworkComponentType;
         private LearningDeliveryMetaData _learningDelivery;
-
         private List<FrameworkMetaData> _frameworkList;
         private List<FrameworkAimMetaData> _frameworkAimList;
         private List<FrameworkComponentTypeMetaData> _frameworkComponentTypeList;
@@ -53,16 +53,19 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             {
                 FworkCode = 2
             };
+
             _frameworkComponentType = new FrameworkComponentTypeMetaData
             {
-                FrameworkComponentType = 5,
+                FrameworkComponentType = 1,
                 FrameworkComponentTypeDesc = "Test framework component type"
             };
+            
             _learningDelivery = new LearningDeliveryMetaData
             {
                 LearnAimRef = "5001738X",
                 LearnAimRefTitle = "Test Learning Delivery"
             };
+
             _frameworkAim = new FrameworkAimMetaData
             {
                 FworkCode = _framework.FworkCode,
@@ -71,8 +74,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             };
 
             _frameworkList = new List<FrameworkMetaData> { _framework };
-            _frameworkAimList = new List<FrameworkAimMetaData> { _frameworkAim };
-            _frameworkComponentTypeList = new List<FrameworkComponentTypeMetaData> { _frameworkComponentType };
+            _frameworkAimList = new List<FrameworkAimMetaData>{ _frameworkAim };
+            _frameworkComponentTypeList = new List<FrameworkComponentTypeMetaData>{ _frameworkComponentType };
             _learningDeliveryList = new List<LearningDeliveryMetaData> { _learningDelivery };
 
             _mockCsvService.Setup(x => x.ReadFromString<FrameworkMetaData>(It.IsAny<string>())).Returns(_frameworkList);
@@ -93,8 +96,19 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         }
 
         [Test]
-        public void ShouldPopulateFrameworkWithQualifications()
+        public void ShouldPopulateFrameworkWithCompetenceQualifications()
         {
+            // Assign
+            var qualificationBuilder = new StringBuilder();
+            qualificationBuilder.AppendLine("<p>");
+            qualificationBuilder.AppendLine("Apprentices will achieve a practical (i.e. 'competence') qualification:");
+            qualificationBuilder.AppendLine("<br />");
+            qualificationBuilder.AppendLine("<ul>");
+            qualificationBuilder.AppendLine($"<li>{_learningDelivery.LearnAimRefTitle}</li>");
+            qualificationBuilder.AppendLine("</ul>");
+            qualificationBuilder.AppendLine("</p>");
+
+
             // Act
             var frameworks = _sut.GetListOfCurrentFrameworks();
 
@@ -102,8 +116,63 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             frameworks.Count.Should().Be(1);
 
             var framework = frameworks.First();
-            
-            framework.Qualifications.Should().Be(_learningDelivery.LearnAimRefTitle + " " + _frameworkComponentType.FrameworkComponentTypeDesc);
+
+            framework.Qualifications.Should().Be(qualificationBuilder.ToString());
+        }
+
+        [Test]
+        public void ShouldPopulateFrameworkWithKnowledgeQualifications()
+        {
+            // Assign
+            _frameworkComponentType.FrameworkComponentType = 2;
+            _frameworkAim.FrameworkComponentType = 2;
+
+            var qualificationBuilder = new StringBuilder();
+            qualificationBuilder.AppendLine("<p>");
+            qualificationBuilder.AppendLine("Apprentices will also achieve a theory-based (i.e. 'knowledge') qualification:");
+            qualificationBuilder.AppendLine("<br />");
+            qualificationBuilder.AppendLine("<ul>");
+            qualificationBuilder.AppendLine($"<li>{_learningDelivery.LearnAimRefTitle}</li>");
+            qualificationBuilder.AppendLine("</ul>");
+            qualificationBuilder.AppendLine("</p>");
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.Qualifications.Should().Be(qualificationBuilder.ToString());
+        }
+
+        [Test]
+        public void ShouldPopulateFrameworkWithCombinedQualifications()
+        {
+            // Assign
+            _frameworkComponentType.FrameworkComponentType = 3;
+            _frameworkAim.FrameworkComponentType = 3;
+
+            var qualificationBuilder = new StringBuilder();
+            qualificationBuilder.AppendLine("<p>");
+            qualificationBuilder.AppendLine("Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:");
+            qualificationBuilder.AppendLine("<br />");
+            qualificationBuilder.AppendLine("<ul>");
+            qualificationBuilder.AppendLine($"<li>{_learningDelivery.LearnAimRefTitle}</li>");
+            qualificationBuilder.AppendLine("</ul>");
+            qualificationBuilder.AppendLine("</p>");
+
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.Qualifications.Should().Be(qualificationBuilder.ToString());
         }
 
         [Test]

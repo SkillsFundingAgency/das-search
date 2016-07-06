@@ -87,17 +87,20 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                     from aim in frameworkAims
                     join comp in frameworkComponentTypesMetaData on aim.FrameworkComponentType equals comp.FrameworkComponentType
                     join ld in learningDeliveriesMetaData on aim.LearnAimRef equals ld.LearnAimRef
-                    select new
+                    select new FrameworkQualification
                     {
                         Title = ld.LearnAimRefTitle,
+                        CompetenceType = comp.FrameworkComponentType,
                         CompetenceDescription = comp.FrameworkComponentTypeDesc
                     };
 
                 if (qualifications.Any())
                 {
-                    var lines = qualifications.Select(x => x.Title + " " + x.CompetenceDescription);
+                    framework.Qualifications = ProcessQualification(qualifications.ToList());
 
-                    framework.Qualifications = lines.Aggregate((x1, x2) => x1 + Environment.NewLine + x2);
+                    //var lines = qualifications.Select(x => x.Title + " " + x.CompetenceDescription);
+
+                    //framework.Qualifications = lines.Aggregate((x1, x2) => x1 + Environment.NewLine + x2);
                 }
                 else
                 {
@@ -107,6 +110,65 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
             return frameworksMetaData;
         }
+
+        private string ProcessQualification(List<FrameworkQualification> qualifications)
+        {
+            var competencyQualifications = qualifications.Where(x => x.CompetenceType == 1).ToList();
+            var knowledgeQualifications = qualifications.Where(x => x.CompetenceType == 2).ToList();
+            var combinedQualifications = qualifications.Where(x => x.CompetenceType == 3).ToList();
+
+            var builder = new StringBuilder();
+
+            if (competencyQualifications.Any())
+            {
+                var line = GenerateQualificationSection(
+                    "Apprentices will achieve a practical (i.e. 'competence') qualification:",
+                    competencyQualifications);
+
+                builder.Append(line);
+            }
+
+            if (knowledgeQualifications.Any())
+            {
+                var line = GenerateQualificationSection(
+                    "Apprentices will also achieve a theory-based (i.e. 'knowledge') qualification:",
+                    knowledgeQualifications);
+
+                builder.Append(line);
+            }
+
+            if (combinedQualifications.Any())
+            {
+                var line = GenerateQualificationSection(
+                   "Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:",
+                   combinedQualifications);
+
+                builder.Append(line);
+            }
+
+            return builder.ToString();
+        }
+
+        private string GenerateQualificationSection(string preListText, List<FrameworkQualification> qualifications)
+        {
+            var builder = new StringBuilder();
+
+            builder.AppendLine("<p>");
+            builder.AppendLine(preListText);
+            builder.AppendLine("<br />");
+            builder.AppendLine("<ul>");
+
+            foreach (var qualification in qualifications)
+            {
+                builder.AppendLine($"<li>{qualification.Title}</li>");
+            }
+
+            builder.AppendLine("</ul>");
+            builder.AppendLine("</p>");
+
+            return builder.ToString();
+        }
+
 
         private string ReadStandardCsvFile()
         {
