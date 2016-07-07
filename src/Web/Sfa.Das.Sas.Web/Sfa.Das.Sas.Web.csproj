@@ -342,6 +342,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchForProviders.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Apprenticeship\SearchResults.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchResults.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Apprenticeship\Standard.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -356,6 +361,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Overview.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\FrameworkResults.generated.cs">
       <AutoGen>True</AutoGen>
