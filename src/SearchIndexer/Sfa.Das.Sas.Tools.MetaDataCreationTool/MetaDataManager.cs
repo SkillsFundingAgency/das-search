@@ -94,6 +94,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                     f.CompletionQualifications = repositoryFramework.CompletionQualifications;
                     f.EntryRequirements = repositoryFramework.EntryRequirements;
                     f.ProfessionalRegistration = repositoryFramework.ProfessionalRegistration;
+                    f.FrameworkOverview = repositoryFramework.FrameworkOverview;
                 }
             }
         }

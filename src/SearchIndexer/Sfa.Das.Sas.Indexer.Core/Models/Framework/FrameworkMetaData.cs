@@ -33,5 +33,7 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Framework
         public string ProfessionalRegistration { get; set; }
 
         public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
     }
 }

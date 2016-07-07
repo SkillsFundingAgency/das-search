@@ -21,5 +21,7 @@
         public string ProfessionalRegistration { get; set; }
 
         public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
     }
 }

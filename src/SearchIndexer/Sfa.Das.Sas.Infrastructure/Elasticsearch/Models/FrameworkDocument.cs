@@ -31,5 +31,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public string ProfessionalRegistration { get; set; }
 
         public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
     }
 }

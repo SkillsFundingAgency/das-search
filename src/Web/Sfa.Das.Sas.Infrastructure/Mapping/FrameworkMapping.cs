@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Models;
+﻿using System;
+using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
@@ -7,7 +8,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
     {
         public Framework MapToFramework(FrameworkSearchResultsItem document)
         {
-            return new Framework
+            var framework = new Framework
             {
                 Title = document.Title,
                 Level = document.Level,
@@ -19,10 +20,19 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 TypicalLength = document.TypicalLength,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = document.JobRoleItems,
+                Qualifications = document.Qualifications,
                 CompletionQualifications = document.CompletionQualifications,
+                FrameworkOverview = document.FrameworkOverview,
                 EntryRequirements = document.EntryRequirements,
                 ProfessionalRegistration = document.ProfessionalRegistration
             };
+
+            if (framework.Qualifications == null)
+            {
+                framework.Qualifications = string.Empty;
+            }
+
+            return framework;
         }
     }
 }

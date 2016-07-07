@@ -71,7 +71,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2,
                 CompletionQualifications = frameworkMetaData.CompletionQualifications,
                 EntryRequirements = frameworkMetaData.EntryRequirements,
-                ProfessionalRegistration = frameworkMetaData.ProfessionalRegistration
+                ProfessionalRegistration = frameworkMetaData.ProfessionalRegistration,
+                FrameworkOverview = frameworkMetaData.FrameworkOverview
             };
             return doc;
         }

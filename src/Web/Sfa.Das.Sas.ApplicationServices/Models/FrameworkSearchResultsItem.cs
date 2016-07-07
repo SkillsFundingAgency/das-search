@@ -21,7 +21,11 @@
 
         public int Level { get; set; }
 
+        public string Qualifications { get; set; }
+
         public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
 
         public string EntryRequirements { get; set; }
 
