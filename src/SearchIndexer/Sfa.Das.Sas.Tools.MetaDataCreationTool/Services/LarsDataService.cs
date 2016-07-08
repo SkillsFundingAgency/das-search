@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Infrastructure;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
@@ -75,100 +74,51 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             }
 
             var frameworksMetaData = _csvService.ReadFromString<FrameworkMetaData>(frameworksFileContent);
+
+            var filteredFrameworkMetaData = FilterFrameworks(frameworksMetaData);
+
             var frameworkAimsMetaData = _csvService.ReadFromString<FrameworkAimMetaData>(frameworkAimFileContent);
             var frameworkComponentTypesMetaData = _csvService.ReadFromString<FrameworkComponentTypeMetaData>(frameworkContentTypeFileContent);
             var learningDeliveriesMetaData = _csvService.ReadFromString<LearningDeliveryMetaData>(learningDeliveryFileContent);
 
-            foreach (var framework in frameworksMetaData)
+            foreach (var framework in filteredFrameworkMetaData)
             {
                 var frameworkAims = frameworkAimsMetaData.Where(x => x.FworkCode.Equals(framework.FworkCode) &&
                                                                      (x.EffectiveTo >= DateTime.Now || x.EffectiveTo == null)).ToList();
                 var qualifications =
-                    from aim in frameworkAims
+                    (from aim in frameworkAims
                     join comp in frameworkComponentTypesMetaData on aim.FrameworkComponentType equals comp.FrameworkComponentType
                     join ld in learningDeliveriesMetaData on aim.LearnAimRef equals ld.LearnAimRef
                     select new FrameworkQualification
                     {
-                        Title = ld.LearnAimRefTitle,
+                        Title = ld.LearnAimRefTitle.Replace("(QCF)", string.Empty).Trim(),
                         CompetenceType = comp.FrameworkComponentType,
                         CompetenceDescription = comp.FrameworkComponentTypeDesc
-                    };
+                    }).ToList();
 
-                if (qualifications.Any())
-                {
-                    framework.Qualifications = ProcessQualification(qualifications.ToList());
+                framework.CombinedQualification = qualifications.Where(x => x.CompetenceType == 3)
+                                                                .Select(x => x.Title)
+                                                                .GroupBy(x => x.ToLower())
+                                                                .Select(group => group.First())
+                                                                .ToList();
 
-                    //var lines = qualifications.Select(x => x.Title + " " + x.CompetenceDescription);
+                framework.CompetencyQualification = qualifications.Where(x => x.CompetenceType == 1)
+                                                                  .Select(x => x.Title)
+                                                                  .GroupBy(x => x.ToLower())
+                                                                  .Select(group => group.First())
+                                                                  .Except(framework.CombinedQualification)
+                                                                  .ToList();
 
-                    //framework.Qualifications = lines.Aggregate((x1, x2) => x1 + Environment.NewLine + x2);
-                }
-                else
-                {
-                    framework.Qualifications = "None specified";
-                }
+                framework.KnowledgeQualification = qualifications.Where(x => x.CompetenceType == 2)
+                                                                 .Select(x => x.Title)
+                                                                 .GroupBy(x => x.ToLower())
+                                                                 .Select(group => group.First())
+                                                                 .Except(framework.CombinedQualification)
+                                                                 .ToList();
             }
 
-            return frameworksMetaData;
+            return filteredFrameworkMetaData;
         }
-
-        private string ProcessQualification(List<FrameworkQualification> qualifications)
-        {
-            var competencyQualifications = qualifications.Where(x => x.CompetenceType == 1).ToList();
-            var knowledgeQualifications = qualifications.Where(x => x.CompetenceType == 2).ToList();
-            var combinedQualifications = qualifications.Where(x => x.CompetenceType == 3).ToList();
-
-            var builder = new StringBuilder();
-
-            if (competencyQualifications.Any())
-            {
-                var line = GenerateQualificationSection(
-                    "Apprentices will achieve a practical (i.e. 'competence') qualification:",
-                    competencyQualifications);
-
-                builder.Append(line);
-            }
-
-            if (knowledgeQualifications.Any())
-            {
-                var line = GenerateQualificationSection(
-                    "Apprentices will also achieve a theory-based (i.e. 'knowledge') qualification:",
-                    knowledgeQualifications);
-
-                builder.Append(line);
-            }
-
-            if (combinedQualifications.Any())
-            {
-                var line = GenerateQualificationSection(
-                   "Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:",
-                   combinedQualifications);
-
-                builder.Append(line);
-            }
-
-            return builder.ToString();
-        }
-
-        private string GenerateQualificationSection(string preListText, List<FrameworkQualification> qualifications)
-        {
-            var builder = new StringBuilder();
-
-            builder.AppendLine("<p>");
-            builder.AppendLine(preListText);
-            builder.AppendLine("<br />");
-            builder.AppendLine("<ul>");
-
-            foreach (var qualification in qualifications)
-            {
-                builder.AppendLine($"<li>{qualification.Title}</li>");
-            }
-
-            builder.AppendLine("</ul>");
-            builder.AppendLine("</p>");
-
-            return builder.ToString();
-        }
-
 
         private string ReadStandardCsvFile()
         {
@@ -198,6 +148,18 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             }
 
             return fullLink;
+        }
+
+        private static List<FrameworkMetaData> FilterFrameworks(IEnumerable<FrameworkMetaData> frameworks)
+        {
+            var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
+
+            return frameworks.Where(s => s.FworkCode > 399)
+                .Where(s => s.PwayCode > 0)
+                .Where(s => !s.EffectiveFrom.Equals(DateTime.MinValue))
+                .Where(s => !s.EffectiveTo.HasValue || s.EffectiveTo > DateTime.Now)
+                .Where(s => progTypeList.Contains(s.ProgType))
+                .ToList();
         }
     }
 }

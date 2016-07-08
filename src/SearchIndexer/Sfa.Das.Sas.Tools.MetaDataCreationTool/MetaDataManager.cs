@@ -64,10 +64,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<FrameworkMetaData> GetAllFrameworks()
         {
-            var frameworks = _larsDataService.GetListOfCurrentFrameworks();
-            var filteredFrameworks = FilterFrameworks(frameworks);
-            UpdateFrameworkInformation(filteredFrameworks);
-            return filteredFrameworks;
+            var frameworks = _larsDataService.GetListOfCurrentFrameworks().ToList();
+            //var filteredFrameworks = FilterFrameworks(frameworks);
+            UpdateFrameworkInformation(frameworks);
+            return frameworks;
         }
 
         private FileContents MapToFileContent(StandardRepositoryData standardRepositoryData)
@@ -157,16 +157,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             }
         }
 
-        private List<FrameworkMetaData> FilterFrameworks(IEnumerable<FrameworkMetaData> frameworks)
-        {
-            var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
-
-            return frameworks.Where(s => s.FworkCode > 399)
-                .Where(s => s.PwayCode > 0)
-                .Where(s => !s.EffectiveFrom.Equals(DateTime.MinValue))
-                .Where(s => !s.EffectiveTo.HasValue || s.EffectiveTo > DateTime.Now)
-                .Where(s => progTypeList.Contains(s.ProgType))
-                .ToList();
-        }
+      
     }
 }

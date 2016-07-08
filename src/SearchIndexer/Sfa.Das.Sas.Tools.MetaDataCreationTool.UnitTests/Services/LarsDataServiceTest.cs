@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -51,15 +50,18 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _linkEndPoints = new List<string> { "endpoint" };
             _framework = new FrameworkMetaData
             {
-                FworkCode = 2
+                FworkCode = 500,
+                PwayCode = 1,
+                ProgType = 2,
+                EffectiveFrom = DateTime.Now.AddDays(-4),
+                EffectiveTo = DateTime.Now.AddDays(4)
             };
 
             _frameworkComponentType = new FrameworkComponentTypeMetaData
             {
                 FrameworkComponentType = 1,
-                FrameworkComponentTypeDesc = "Test framework component type"
             };
-            
+
             _learningDelivery = new LearningDeliveryMetaData
             {
                 LearnAimRef = "5001738X",
@@ -98,17 +100,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         [Test]
         public void ShouldPopulateFrameworkWithCompetenceQualifications()
         {
-            // Assign
-            var qualificationBuilder = new StringBuilder();
-            qualificationBuilder.AppendLine("<p>");
-            qualificationBuilder.AppendLine("Apprentices will achieve a practical (i.e. 'competence') qualification:");
-            qualificationBuilder.AppendLine("<br />");
-            qualificationBuilder.AppendLine("<ul>");
-            qualificationBuilder.AppendLine($"<li>{_learningDelivery.LearnAimRefTitle}</li>");
-            qualificationBuilder.AppendLine("</ul>");
-            qualificationBuilder.AppendLine("</p>");
-
-
             // Act
             var frameworks = _sut.GetListOfCurrentFrameworks();
 
@@ -117,7 +108,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 
             var framework = frameworks.First();
 
-            framework.Qualifications.Should().Be(qualificationBuilder.ToString());
+            framework.CompetencyQualification.Count().Should().Be(1);
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+
+            var qualification = framework.CompetencyQualification.First();
+
+            qualification.Should().Be(_learningDelivery.LearnAimRefTitle);
         }
 
         [Test]
@@ -127,15 +124,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _frameworkComponentType.FrameworkComponentType = 2;
             _frameworkAim.FrameworkComponentType = 2;
 
-            var qualificationBuilder = new StringBuilder();
-            qualificationBuilder.AppendLine("<p>");
-            qualificationBuilder.AppendLine("Apprentices will also achieve a theory-based (i.e. 'knowledge') qualification:");
-            qualificationBuilder.AppendLine("<br />");
-            qualificationBuilder.AppendLine("<ul>");
-            qualificationBuilder.AppendLine($"<li>{_learningDelivery.LearnAimRefTitle}</li>");
-            qualificationBuilder.AppendLine("</ul>");
-            qualificationBuilder.AppendLine("</p>");
-
             // Act
             var frameworks = _sut.GetListOfCurrentFrameworks();
 
@@ -144,7 +132,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 
             var framework = frameworks.First();
 
-            framework.Qualifications.Should().Be(qualificationBuilder.ToString());
+            framework.CompetencyQualification.Should().BeEmpty();
+            framework.KnowledgeQualification.Count().Should().Be(1);
+            framework.CombinedQualification.Should().BeEmpty();
+
+            var qualification = framework.KnowledgeQualification.First();
+
+            qualification.Should().Be(_learningDelivery.LearnAimRefTitle);
         }
 
         [Test]
@@ -154,16 +148,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _frameworkComponentType.FrameworkComponentType = 3;
             _frameworkAim.FrameworkComponentType = 3;
 
-            var qualificationBuilder = new StringBuilder();
-            qualificationBuilder.AppendLine("<p>");
-            qualificationBuilder.AppendLine("Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:");
-            qualificationBuilder.AppendLine("<br />");
-            qualificationBuilder.AppendLine("<ul>");
-            qualificationBuilder.AppendLine($"<li>{_learningDelivery.LearnAimRefTitle}</li>");
-            qualificationBuilder.AppendLine("</ul>");
-            qualificationBuilder.AppendLine("</p>");
-
-
             // Act
             var frameworks = _sut.GetListOfCurrentFrameworks();
 
@@ -172,7 +156,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 
             var framework = frameworks.First();
 
-            framework.Qualifications.Should().Be(qualificationBuilder.ToString());
+            framework.CompetencyQualification.Should().BeEmpty();
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Count().Should().Be(1);
+
+            var qualification = framework.CombinedQualification.First();
+
+            qualification.Should().Be(_learningDelivery.LearnAimRefTitle);
         }
 
         [Test]
@@ -189,7 +179,159 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 
             var framework = frameworks.First();
 
-            framework.Qualifications.Should().Be("None specified");
+            framework.CompetencyQualification.Should().BeEmpty();
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+        }
+
+        [Test]
+        public void ShouldReturnUniqueQualifications()
+        {
+            // Assign
+            var newLearnDelivery = new LearningDeliveryMetaData
+            {
+                LearnAimRef = "new10101",
+                LearnAimRefTitle = _learningDelivery.LearnAimRefTitle
+            };
+
+            _learningDeliveryList.Add(newLearnDelivery);
+
+            var newAim = new FrameworkAimMetaData
+            {
+                FworkCode = _framework.FworkCode,
+                FrameworkComponentType = _frameworkComponentType.FrameworkComponentType,
+                LearnAimRef = newLearnDelivery.LearnAimRef
+            };
+
+            _frameworkAimList.Add(newAim);
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Count().Should().Be(1);
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+
+            framework.CompetencyQualification.First().Should().Be(_learningDelivery.LearnAimRefTitle);
+        }
+
+        [Test]
+        public void ShouldReturnUniqueQualificationsEvenIfCaseIsDifferent()
+        {
+            // Assign
+            var newLearnDelivery = new LearningDeliveryMetaData
+            {
+                LearnAimRef = "new10101",
+                LearnAimRefTitle = _learningDelivery.LearnAimRefTitle.ToUpperInvariant()
+            };
+
+            _learningDeliveryList.Add(newLearnDelivery);
+
+            var newAim = new FrameworkAimMetaData
+            {
+                FworkCode = _framework.FworkCode,
+                FrameworkComponentType = _frameworkComponentType.FrameworkComponentType,
+                LearnAimRef = newLearnDelivery.LearnAimRef
+            };
+
+            _frameworkAimList.Add(newAim);
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Count().Should().Be(1);
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+
+            framework.CompetencyQualification.First().Should().Be(_learningDelivery.LearnAimRefTitle);
+        }
+
+        [Test]
+        public void ShouldNotHaveSameQualificationInCombinedAndOtherComponentType()
+        {
+            // Assign
+            const string learnRef = "new10101";
+            _learningDeliveryList.Add(new LearningDeliveryMetaData
+            {
+                LearnAimRef = learnRef,
+                LearnAimRefTitle = _learningDelivery.LearnAimRefTitle
+            });
+
+            _frameworkAimList.Add(new FrameworkAimMetaData
+            {
+                FworkCode = _framework.FworkCode,
+                FrameworkComponentType = 2,
+                LearnAimRef = learnRef
+            });
+
+            _frameworkAimList.Add(new FrameworkAimMetaData
+            {
+                FworkCode = _framework.FworkCode,
+                FrameworkComponentType = 3, // Combined Component Type (should not be in any other type)
+                LearnAimRef = learnRef
+            });
+
+            _frameworkComponentTypeList.Add(new FrameworkComponentTypeMetaData
+            {
+                FrameworkComponentType = 2
+            });
+
+            _frameworkComponentTypeList.Add(new FrameworkComponentTypeMetaData
+            {
+                FrameworkComponentType = 3
+            });
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Should().BeEmpty();
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Count().Should().Be(1);
+
+            // If a qualification is in the combined component type it should be removed from the other two types
+            framework.CombinedQualification.First().Should().Be(_learningDelivery.LearnAimRefTitle);
+        }
+
+        [Test]
+        // The QCF certification for qualiifications is no longer in use to we need to remove it before we check
+        // for duplicates
+        public void ShouldRemoveOldQCFLabelFromQualificationTitle()
+        {
+            // Act
+            var actualTitle = "This is a (QCFT) test QCF title which should remove from here (QCF)";
+            var expectedTitle = "This is a (QCFT) test QCF title which should remove from here";
+
+            _learningDelivery.LearnAimRefTitle = actualTitle;
+
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Count().Should().Be(1);
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+
+            var qualification = framework.CompetencyQualification.First();
+
+            qualification.Should().Be(expectedTitle);
         }
     }
 }
