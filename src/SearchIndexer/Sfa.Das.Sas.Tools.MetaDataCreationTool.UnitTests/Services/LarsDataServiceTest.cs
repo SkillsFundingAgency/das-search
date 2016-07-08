@@ -307,10 +307,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             framework.CombinedQualification.First().Should().Be(_learningDelivery.LearnAimRefTitle);
         }
 
-        [Test]
         // The QCF certification for qualiifications is no longer in use to we need to remove it before we check
         // for duplicates
-        public void ShouldRemoveOldQCFLabelFromQualificationTitle()
+        [Test]
+        public void ShouldRemoveOldQcfLabelFromQualificationTitle()
         {
             // Act
             var actualTitle = "This is a (QCFT) test QCF title which should remove from here (QCF)";
@@ -332,6 +332,106 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             var qualification = framework.CompetencyQualification.First();
 
             qualification.Should().Be(expectedTitle);
+        }
+
+        [Test]
+        public void ShouldNotProcessFrameworkThatIsOutOfDate()
+        {
+            _frameworkList.Add(new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("2015-01-01"),
+                EffectiveTo = DateTime.Parse("2015-01-02"), // Date in the past
+                FworkCode = 500,
+                PwayCode = 1,
+                ProgType = 22,
+            });
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+            frameworks.First().FworkCode.Should().Be(_framework.FworkCode);
+        }
+
+        [TestCase(399)]
+        public void ShouldNotProcessFrameworkThatHasCodeThatIsOutOfBounds(int value)
+        {
+            _frameworkList.Add(new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("2015-01-01"),
+                EffectiveTo = DateTime.Parse("2017-01-02"), 
+                FworkCode = 399, // we should not process frameworks below 400
+                PwayCode = 1,
+                ProgType = 22,
+            });
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+            frameworks.First().FworkCode.Should().Be(_framework.FworkCode);
+        }
+
+        [Test]
+        public void ShouldNotProcessFrameworkThatHasAPathwayOfZero()
+        {
+            _frameworkList.Add(new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("2015-01-01"),
+                EffectiveTo = DateTime.Parse("2017-01-02"),
+                FworkCode = 450,
+                PwayCode = 0,
+                ProgType = 22,
+            });
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+            frameworks.First().FworkCode.Should().Be(_framework.FworkCode);
+        }
+
+        [Test]
+        public void ShouldNotProcessFrameworkThatHasAUnsupportedPrgType()
+        {
+            _frameworkList.Add(new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.Parse("2015-01-01"),
+                EffectiveTo = DateTime.Parse("2017-01-02"),
+                FworkCode = 450,
+                PwayCode = 1,
+                ProgType = 16,
+            });
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+            frameworks.First().FworkCode.Should().Be(_framework.FworkCode);
+        }
+
+        [Test]
+        public void ShouldNotProcessFrameworkThatHasANotValidEffectiveFromDate()
+        {
+            _frameworkList.Add(new FrameworkMetaData
+            {
+                EffectiveFrom = DateTime.MinValue,
+                EffectiveTo = DateTime.Parse("2017-01-02"),
+                FworkCode = 450,
+                PwayCode = 1,
+                ProgType = 22,
+            });
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+            frameworks.First().FworkCode.Should().Be(_framework.FworkCode);
         }
     }
 }
