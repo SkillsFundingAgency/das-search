@@ -3,6 +3,8 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
     public class ApprenticeshipDetailsViewModel
     {
         public string ProviderId { get; set; }
@@ -33,9 +35,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string ApprenticeshipLevel { get; set; }
 
-        public ApprenticeshipTrainingType Training { get; set; }
-
-        public string SurveyUrl { get; set; }
+        public ApprenticeshipTrainingType ApprenticeshipType { get; set; }
 
         public bool IsShortlisted { get; set; }
     }

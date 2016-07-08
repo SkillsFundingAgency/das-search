@@ -20,28 +20,31 @@
                 Find apprenticeship training
             </h1>
 
-            <p>If you are considering employing an apprentice,&nbsp;use this service to find:</p>
+            <p>For employers looking to take on apprenticeships.</p>
 
-            <ul class="list list-number">
-                <li>an apprenticeship that sets out the skills, knowledge and behaviours needed for the role</li>
-                <li>an organisation to provide training for your apprentice</li>
+            <p>You can:</p>
+
+            <ul class="list list-bullet">
+                <li>search for apprenticeship training by job role or keyword</li>
+                <li>search for training providers by postcode</li>
             </ul>
 
-            <h2 class="heading-large">Your responsibilities</h2>
+            @Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" })
+
+            <h2 class="heading-large">What you need to know</h2>
 
             <p>Apprentices must be aged 16 or over and combine working with learning. They can be new or current employees.</p>
-            
+
             <p>If you hire an apprentice you must:</p>
 
             <ul class="list list-bullet">
-                <li>employ them for at least 30 hours a week</li>
+                <li>usually employ them for at least 30 hours a week</li>
                 <li>pay them at least the minimum wage for apprentices</li>
                 <li>offer them the same conditions and benefits as other employees working at a similar level</li>
                 <li>provide experience and opportunities to help with future job progression</li>
                 <li>allow them to attend training and assessment during their working hours</li>
             </ul>
 
-            @Html.ActionLink("Start", "Search", "Apprenticeship", null, new {id = "start-button", @class = "button margin-top-x2 button-start" } )
         </div>
     </div>
 

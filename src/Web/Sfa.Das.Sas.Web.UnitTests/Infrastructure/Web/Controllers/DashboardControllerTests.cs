@@ -4,22 +4,22 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 using Assert = NUnit.Framework.Assert;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
     [TestFixture]
     public sealed class DashboardControllerTests
     {
         private Mock<IGetStandards> _mockGetStandards;
         private Mock<IGetFrameworks> _mockGetFrameworks;
-        private Mock<IListCollection<int>> _mockListCollection;
+        private Mock<IShortlistCollection<int>> _mockListCollection;
         private Mock<IDashboardViewModelFactory> _mockDashboardViewModelFactory;
         private Mock<IShortlistViewModelFactory> _mockShortlistViewModelFactory;
         private Mock<IShortlistApprenticeshipViewModel> _mockApprenticeshipViewModel;
@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             _mockGetStandards = new Mock<IGetStandards>();
             _mockGetFrameworks = new Mock<IGetFrameworks>();
-            _mockListCollection = new Mock<IListCollection<int>>();
+            _mockListCollection = new Mock<IShortlistCollection<int>>();
             _mockDashboardViewModelFactory = new Mock<IDashboardViewModelFactory>();
             _mockShortlistViewModelFactory = new Mock<IShortlistViewModelFactory>();
             _mockApprenticeshipViewModel = new Mock<IShortlistApprenticeshipViewModel>();

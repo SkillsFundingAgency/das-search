@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
             var standard = new Standard
             {
                 StandardId = 10,
-                NotionalEndLevel = 2,
+                Level = 2,
                 Title = "this is a standard"
             };
             _mockGetStandards.Setup(x => x.GetStandardById(standard.StandardId)).Returns(standard);
@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
             Assert.IsNotNull(viewModel);
             Assert.AreEqual(StandardProviderResultsUrl, viewModel.PostUrl);
             Assert.AreEqual(standard.StandardId, viewModel.ApprenticeshipId);
-            Assert.AreEqual(standard.Title + ", level " + standard.NotionalEndLevel, viewModel.Title);
+            Assert.AreEqual(standard.Title + ", level " + standard.Level, viewModel.Title);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
             var standard = new Standard
             {
                 StandardId = 10,
-                NotionalEndLevel = 2,
+                Level = 2,
                 Title = "this is a standard"
             };
             _mockGetStandards.Setup(x => x.GetStandardById(standard.StandardId)).Returns(standard);

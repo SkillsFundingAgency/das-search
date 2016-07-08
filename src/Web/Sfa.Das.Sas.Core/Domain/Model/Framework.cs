@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public sealed class Framework
+    public sealed class Framework : IApprenticeshipProduct
     {
         public int FrameworkId { get; set; }
 
@@ -22,6 +22,16 @@
         public TypicalLength TypicalLength { get; set; }
 
         public DateTime? ExpiryDate { get; set; }
+
+        public string Qualifications { get; set; }
+
+        public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
+
+        public string EntryRequirements { get; set; }
+
+        public string ProfessionalRegistration { get; set; }
 
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
     }

@@ -1,91 +1,138 @@
 ﻿@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel
 
 @{
-    ViewBag.Title = "Framework - " + @Model.Title;
+    ViewBag.Title = @Model.Title + " - Apprenticeship Framework";   
 }
 
 <main id="content">
     <div class="grid-row">
         <div class="column-two-thirds">
-            @if (Model.ExpiryDateString != null)
-            {
-                <div class="expire-date">
-                    <div>
-                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    </div>
-                    <span>
-                        This apprenticeship is closed to new starters from @Model.ExpiryDateString
-                    </span>
-                </div>
-            }
-            <header>
+            <div>
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                <dl class="data-list">
-                    <dt>Level:</dt>
-                    <dd>
-                        @Model.Level (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )
-                    </dd>
-                    @if (!string.IsNullOrEmpty(Model.TypicalLengthMessage))
-                    {
-                        <dt>Typical length:</dt>
-                        <dd>@Model.TypicalLengthMessage </dd>
-                    }
-                    <dt>Suitable roles for apprentices</dt>
-                    <dd class="job-roles">
-                        @if (Model.JobRoles != null)
-                        {
-                            <ul>
-                                @foreach (var jobRole in Model.JobRoles.Take(5))
-                                {
-                                    <li>@jobRole</li>
-                                }
-                                @if (Model.JobRoles.Count() > 5)
-                                {
-                                    foreach (var jobRole in Model.JobRoles.Skip(5))
-                                    {
-                                        <li class="default-hidden">@jobRole</li>
-                                    }
-                                    <a href="#" class="showmore hidden">Show more</a>
-                                }
-                            </ul>
-                        }
-                    </dd>
-                </dl>
-            </header>
-
-            <p>This is an apprenticeship framework. Frameworks set out training requirements for apprentices in a specific work sector.</p>
-
-            <p>If you are an employer, an apprenticeship training provider can give you more details about this framework, including: </p>
-
-            <ul class="list list-bullet">
-
-                <li>qualifications</li>
-                <li>entry requirements</li>
-                <li>career paths</li>
-
-            </ul>
-
-            <div id="bottom-actions">
-                @{
-                    @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted);
+                <div class="standard-result-summary">
+                    Information taken from an apprenticeship framework. It sets out what qualifications the apprentice can achieve.
+                </div>
+                @if (Model.ExpiryDateString != null)
+                {
+                    <div class="expire-date">
+                        <div>
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        </div>
+                        <span>
+                            This apprenticeship is closed to new starters from @Model.ExpiryDateString
+                        </span>
+                    </div>
                 }
+            </div>
+        </div>
 
-                <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
+        <div class="column-third">
+            <div class="related-container">
+                <aside class="hidden-for-mobile-tablet">
+
+                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        Find training Providers
+                    </a>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+
+    <section>
+        <header>
+            <h2 class="heading-large">
+                Summary of this apprenticeship framework
+            </h2>
+        </header>
+
+        <dl class="data-list">
+            @if (!string.IsNullOrEmpty(Model.FrameworkOverview))
+            {
+                <dt class="overviewTitle">Overview of role</dt>
+                <dd class="overviewText">@Model.FrameworkOverview </dd>
+            }
+            <dt>Level</dt>
+            <dd>
+                @Model.Level (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )
+            </dd>
+            @if (!string.IsNullOrEmpty(Model.TypicalLengthMessage))
+            {
+                <dt>Typical length</dt>
+                <dd>@Model.TypicalLengthMessage </dd>
+            }
+            <dt>Entry requirements</dt>
+            <dd class="entry-requirements">
+                @if (@Model.EntryRequirements != string.Empty)
+                {
+                    <p>@Model.EntryRequirements</p>
+                }
+                <p>Your chosen training provider can advise you about entry requirements for apprentices.</p>
+            </dd>
+
+            <dt>Suitable roles for apprentices</dt>
+            <dd class="job-roles">
+                @if (Model.JobRoles != null)
+                {
+                    <ul>
+                        @foreach (var jobRole in Model.JobRoles.Take(5))
+                        {
+                            <li>@jobRole</li>
+                        }
+                        @if (Model.JobRoles.Count() > 5)
+                        {
+                            foreach (var jobRole in Model.JobRoles.Skip(5))
+                            {
+                                <li class="default-hidden">@jobRole</li>
+                            }
+                            <a href="#" class="showmore hidden">Show more</a>
+                        }
+                    </ul>
+                }
+                    
+                <p>
+                    Your chosen training provider can advise you about the kinds of skills apprentices will learn.    
+                </p>
+            </dd>
+            <dt>Qualifications</dt>
+            <dd>
+                @if (Model.Qualifications != string.Empty)
+                {
+                    <p class="qualifications">@Model.Qualifications</p>
+                }
+                @if (Model.CompletionQualifications != string.Empty)
+                {
+                    <p class="completionQualifications">@Model.CompletionQualifications</p>
+                }
+                <p class="qualificationsStatic">Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.</p>
+            </dd>
+
+            <dt>Professional registration</dt>
+            <dd>@Model.ProfessionalRegistration</dd>
+        </dl>
+
+        <div id="bottom-actions">
+            @{
+                @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted);
+            }
+
+                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     Find training Providers
                 </a>
-            </div>
         </div>
-    </div>
+    </section>
 </main>
 
 @helper GetShortlistLink(int id, bool isShortlisted)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (isShortlisted)
         {

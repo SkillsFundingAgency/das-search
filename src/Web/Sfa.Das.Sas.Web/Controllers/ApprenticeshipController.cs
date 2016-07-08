@@ -6,7 +6,6 @@ using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Attribute;
-using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Models;
@@ -19,7 +18,7 @@ namespace Sfa.Das.Sas.Web.Controllers
     {
         private readonly ILog _logger;
 
-        private readonly IListCollection<int> _listCollection;
+        private readonly IShortlistCollection<int> _shortlistCollection;
 
         private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
 
@@ -31,13 +30,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             IApprenticeshipSearchService searchService,
             ILog logger,
             IProfileAStep profiler,
-            IListCollection<int> listCollection,
+            IShortlistCollection<int> shortlistCollection,
             IApprenticeshipViewModelFactory apprenticeshipViewModelFactory)
         {
             _searchService = searchService;
             _logger = logger;
             _profiler = profiler;
-            _listCollection = listCollection;
+            _shortlistCollection = shortlistCollection;
             _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
         }
 
@@ -86,8 +85,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new RedirectResult(url);
             }
 
-            var shotListedStandardsCollection = _listCollection.GetAllItems(Constants.StandardsShortListCookieName).Select(standard => standard.ApprenticeshipId).ToList();
-            var shotListedFrameworksCollection = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName).Select(framework => framework.ApprenticeshipId).ToList();
+            var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName).Select(standard => standard.ApprenticeshipId).ToList();
+            var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName).Select(framework => framework.ApprenticeshipId).ToList();
 
             var shortlistedStandards = shotListedStandardsCollection.ToDictionary(standard => standard, standard => true);
             var shortlistedFrameworks = shotListedFrameworksCollection.ToDictionary(framework => framework, framework => true);
@@ -118,7 +117,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
+            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName);
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
             viewModel.SearchTerm = keywords;
 
@@ -141,7 +140,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortlistedApprenticeships = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
+            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName);
             viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
             viewModel.SearchTerm = keywords;
 

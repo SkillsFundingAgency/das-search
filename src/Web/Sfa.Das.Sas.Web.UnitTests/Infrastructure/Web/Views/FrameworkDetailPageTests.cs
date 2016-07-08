@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
+﻿using System.Collections.Generic;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
     using System;
     using FluentAssertions;
@@ -41,6 +43,157 @@
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
             GetPartial(html, ".job-roles ul li").Should().Be("SFA master");
             GetPartial(html, ".job-roles ul li", 2).Should().Be("DAS master");
+        }
+
+        [Test]
+        public void ShouldShowEntryRequirementsWhenItsNotEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1",
+                EntryRequirements = "Test entry requirements"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".entry-requirements").Should().Contain("Test entry requirements");
+            GetPartial(html, ".entry-requirements").Should().Contain("Your chosen training provider can advise you about entry requirements for apprentices.");
+        }
+
+        [Test]
+        public void ShouldShowStaticTextWhenEntryRequirementsAreEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".entry-requirements").Should().Be("Your chosen training provider can advise you about entry requirements for apprentices.");
+        }
+
+        [Test]
+        public void ShouldShowOverviewRoleWhenItsNotEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1",
+                FrameworkOverview = "Test framework overview"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".overviewTitle").Should().Be("Overview of role");
+            GetPartial(html, ".overviewText").Should().Be("Test framework overview");
+        }
+
+        [Test]
+        public void ShouldNotShowOverviewRoleWhenItsEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".overviewTitle").Should().BeEmpty();
+            GetPartial(html, ".overviewText").Should().BeEmpty();
+        }
+
+        [Test]
+        public void ShouldShowSuitableRolesWhenItsNotEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1",
+                JobRoles = new List<string> { "jobRole" }
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".job-roles").Should().Contain("jobRole");
+            GetPartial(html, ".job-roles").Should().Contain("Your chosen training provider can advise you about the kinds of skills apprentices will learn.");
+        }
+
+        [Test]
+        public void ShouldShowStaticTextWhenSuitableRolesAreEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".job-roles").Should().Be("Your chosen training provider can advise you about the kinds of skills apprentices will learn.");
+        }
+
+        [Test]
+        public void ShouldShowQualificationWhenItsNotEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1",
+                Qualifications = "Test qualifications",
+                CompletionQualifications = "Test completion qualifications"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".qualifications").Should().Be("Test qualifications");
+            GetPartial(html, ".completionQualifications").Should().Be("Test completion qualifications");
+            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+        }
+
+        [Test]
+        public void ShouldShowQualificationAvoidingCompletionIfItsEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1",
+                Qualifications = "Test qualifications",
+                CompletionQualifications = string.Empty
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".qualifications").Should().Be("Test qualifications");
+            GetPartial(html, ".completionQualifications").Should().BeNullOrEmpty();
+            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+        }
+
+        [Test]
+        public void ShouldShowQualificationAvoidingQualificationIfItsEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1",
+                Qualifications = string.Empty,
+                CompletionQualifications = "Test completion qualifications"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".qualifications").Should().BeNullOrEmpty();
+            GetPartial(html, ".completionQualifications").Should().Be("Test completion qualifications");
+            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+        }
+
+        [Test]
+        public void ShouldShowStaticTextWhenQualificationsAreEmpty()
+        {
+            var detailPage = new Framework();
+            var viewModel = new FrameworkViewModel
+            {
+                Title = "title1"
+            };
+
+            var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
+            GetPartial(html, ".qualifications").Should().BeNullOrEmpty();
+            GetPartial(html, ".completionQualifications").Should().BeNullOrEmpty();
+            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
         }
     }
 }

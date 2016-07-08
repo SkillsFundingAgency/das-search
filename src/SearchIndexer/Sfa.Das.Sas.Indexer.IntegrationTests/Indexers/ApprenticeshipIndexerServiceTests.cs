@@ -136,6 +136,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         [Test]
         [Category("Integration")]
+        [Ignore("Testing without stemming")]
         public void ShouldRetrieveStandardsWhenSearchingOnWordRootForm()
         {
             var retrievedResult = _elasticClient.Search<StandardDocument>(p => p
@@ -160,6 +161,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         [TestCase("textile", 1, "Fashion and Textiles")]
         [TestCase("brew", 1, "Food and Drink")]
         [Category("Integration")]
+        [Ignore("Testing without stemming")]
         public void ShouldRetrieveFrameworksWhenSearchingWithRootForm(string query, int expectedResultCount, string exectedFrameworkTitle)
         {
             var retrievedResultTextile = _elasticClient.Search<FrameworkDocument>(p => p

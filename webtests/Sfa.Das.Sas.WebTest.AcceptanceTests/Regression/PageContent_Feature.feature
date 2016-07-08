@@ -21,7 +21,7 @@ Scenario: Search Results Core Content
 	| Filter Block       | Exists | True  |
 	| Sorting Dropdown   | Exists | True  |
 	| Navigation Element | Exists | True  |
-	| Shortlist link     | Exists | True  |
+	#| Shortlist link     | Exists | True  |
 
 #@Regression
 Scenario: Standard Details Page	
@@ -33,9 +33,9 @@ Scenario: Standard Details Page
 	Then I am on the Search Results page	
 	When I choose First Standard Result
 	Then I am on the Standard Details page
-	And I see
-	| Field          | Rule   | Value |
-	| Shortlist link | Exists | True  |
+	#And I see
+	#| Field          | Rule   | Value |
+	#| Shortlist link | Exists | True  |
 
 #@Regression
 #Scenario:Framework Details Page
@@ -61,9 +61,9 @@ Scenario: Provider Details Page
 	Then I am on the Standard Provider Results page	
 	When I choose First Provider Link
 	Then I am on the Provider Details page
-	And I see 
-		| Field          | Rule   | Value |
-		| Shortlist Link | Exists | True  |
+	#And I see 
+		#| Field          | Rule   | Value |
+		#| Shortlist Link | Exists | True  |
 
 #@Regression
 #Scenario: Dashboard Page

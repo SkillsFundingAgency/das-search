@@ -199,3 +199,6 @@ tools/ContactForms/SFA.Apprenticeships.Infrastructure/Communication/Email/SendGr
 # ---UI---
 _ui/.sass-cache/
 _ui/src/styles/.sass-cache/
+
+# Chutzpah
+spec/_Chutzpah*

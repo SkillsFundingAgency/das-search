@@ -24,6 +24,14 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         public DateTime? ExpiryDate { get; set; }
 
+        public string EntryRequirements { get; set; }
+
+        public string ProfessionalRegistration { get; set; }
+
+        public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
+
         public IEnumerable<string> CompetencyQualification { get; set; }
 
         public IEnumerable<string> KnowledgeQualification { get; set; }

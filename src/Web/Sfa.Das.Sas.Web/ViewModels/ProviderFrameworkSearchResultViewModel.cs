@@ -22,8 +22,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public int FrameworkCode { get; set; }
 
-        public int Level { get; set; }
-
         public string FrameworkName { get; set; }
 
         public string PathwayName { get; set; }
@@ -35,8 +33,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool HasError { get; set; }
 
         public bool PostCodeMissing { get; set; }
-
-        public bool FrameworkIsMissing { get; set; }
 
         public int FrameworkLevel { get; set; }
 

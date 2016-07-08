@@ -2,13 +2,13 @@
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {
-    public sealed class Standard
+    public sealed class Standard : IApprenticeshipProduct
     {
         public int StandardId { get; set; }
 
         public string Title { get; set; }
 
-        public int NotionalEndLevel { get; set; }
+        public int Level { get; set; }
 
         public string StandardPdf { get; set; }
 

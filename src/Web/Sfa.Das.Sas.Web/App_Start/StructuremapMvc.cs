@@ -17,6 +17,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Web.Mvc;
+using FluentValidation.Mvc;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Sfa.Das.Sas.Web;
 using Sfa.Das.Sas.Web.DependencyResolution;

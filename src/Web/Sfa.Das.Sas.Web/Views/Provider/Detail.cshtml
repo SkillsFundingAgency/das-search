@@ -2,10 +2,12 @@
 @using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.ApplicationServices.Models
 @model ApprenticeshipDetailsViewModel
 
 @{
-    ViewBag.Title = "Provider - " + @Model.Name;
+    ViewBag.Title = @Model.Name + " - Apprenticeship Provider";
 }
 <main id="content" class="provider-detail">
     <div class="grid-row">
@@ -70,6 +72,9 @@
                             Training provider quality assessment
                         </h2>
                         @GetSatisfactionsHtml()
+                        <p>
+                        Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers">Skills Funding Agency FE Choices</a>
+                        </p>
                     </aside>
                 </div>
             }
@@ -166,7 +171,7 @@ if (!string.IsNullOrEmpty(url))
         <span id="employer-satisfaction">
             @Model.EmployerSatisfactionMessage
         </span>
-        @if (@Model.EmployerSatisfactionMessage != "No data available")
+        @if (@Model.EmployerSatisfactionMessage != "no data available")
         {
             <div class="progress-container">
                 <div class="progressbar" style="width: @Model.EmployerSatisfaction%"></div>
@@ -179,7 +184,7 @@ if (!string.IsNullOrEmpty(url))
         <span id="learner-satisfaction">
             @Model.LearnerSatisfactionMessage
         </span>
-        @if (@Model.LearnerSatisfactionMessage != "No data available")
+        @if (@Model.LearnerSatisfactionMessage != "no data available")
         {
             <div class="progress-container">
                 <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
@@ -229,8 +234,8 @@ if (items != null)
 
 @helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>()) {
-        if (Model.Training == ApprenticeshipTrainingType.Framework)
+    if (Is<ShortlistingFeature>.Enabled) {
+        if (Model.ApprenticeshipType == ApprenticeshipTrainingType.Framework)
         {
             if (isShortlisted)
             {

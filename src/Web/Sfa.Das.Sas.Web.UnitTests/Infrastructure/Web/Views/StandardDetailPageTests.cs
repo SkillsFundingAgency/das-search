@@ -16,15 +16,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var detail = new Standard();
             var model = new StandardViewModel
             {
-                NotionalEndLevel = 6,
+                Level = 6,
             };
             var model2 = new StandardViewModel
             {
-                NotionalEndLevel = 4,
+                Level = 4,
             };
             var model3 = new StandardViewModel
             {
-                NotionalEndLevel = 8,
+                Level = 8,
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();

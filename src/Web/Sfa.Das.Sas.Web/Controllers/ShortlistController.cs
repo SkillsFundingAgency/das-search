@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Logging;
 using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
     public class ShortlistController : Controller
     {
         private readonly ILog _logger;
-        private readonly IListCollection<int> _listCollection;
+        private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public ShortlistController(ILog logger, IListCollection<int> listCollection)
+        public ShortlistController(ILog logger, IShortlistCollection<int> shortlistCollection)
         {
             _logger = logger;
-            _listCollection = listCollection;
+            _shortlistCollection = shortlistCollection;
         }
 
         public ActionResult AddStandard(int id)
@@ -28,7 +29,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 ApprenticeshipId = id
             };
 
-            _listCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
+            _shortlistCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
@@ -46,9 +47,9 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var shortlistedApprenticeshipProvider = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
 
-            _listCollection.AddItem(Constants.StandardsShortListCookieName, shortlistedApprenticeshipProvider);
+            _shortlistCollection.AddItem(Constants.StandardsShortListCookieName, shortlistedApprenticeshipProvider);
 
-            var providerSearchCriteria = new ProviderLocationSearchCriteria
+            var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
                 StandardCode = apprenticeshipId.ToString(),
                 ProviderId = providerId,
@@ -62,7 +63,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             _logger.Debug("Removing standard from shortlist", new ShortlistLogEntry { StandardId = id });
 
-            _listCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
+            _shortlistCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
@@ -84,9 +85,9 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _listCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
+            _shortlistCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
 
-            var providerSearchCriteria = new ProviderLocationSearchCriteria
+            var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
                 StandardCode = apprenticeshipId.ToString(),
                 ProviderId = providerId,
@@ -105,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 ApprenticeshipId = id
             };
 
-            _listCollection.AddItem(Constants.FrameworksShortListCookieName, shorlistedApprenticeship);
+            _shortlistCollection.AddItem(Constants.FrameworksShortListCookieName, shorlistedApprenticeship);
 
             return GetReturnRedirectFromFrameworkShortlistAction(id);
         }
@@ -123,9 +124,9 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var shortListedApprenticeshipProvider = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
 
-            _listCollection.AddItem(Constants.FrameworksShortListCookieName, shortListedApprenticeshipProvider);
+            _shortlistCollection.AddItem(Constants.FrameworksShortListCookieName, shortListedApprenticeshipProvider);
 
-            var providerSearchCriteria = new ProviderLocationSearchCriteria
+            var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
                 FrameworkId = apprenticeshipId.ToString(),
                 ProviderId = providerId,
@@ -139,7 +140,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             _logger.Debug($"Removing framework from shortlist", new ShortlistLogEntry { FrameworkId = id });
 
-            _listCollection.RemoveApprenticeship(Constants.FrameworksShortListCookieName, id);
+            _shortlistCollection.RemoveApprenticeship(Constants.FrameworksShortListCookieName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
@@ -161,9 +162,9 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _listCollection.RemoveProvider(Constants.FrameworksShortListCookieName, apprenticeshipId, provider);
+            _shortlistCollection.RemoveProvider(Constants.FrameworksShortListCookieName, apprenticeshipId, provider);
 
-            var providerSearchCriteria = new ProviderLocationSearchCriteria
+            var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
                 FrameworkId = apprenticeshipId.ToString(),
                 ProviderId = providerId,
@@ -215,7 +216,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Redirect(Request.UrlReferrer.OriginalString);
         }
 
-        private ActionResult GetReturnRedirectFromProviderShortlistAction(ProviderLocationSearchCriteria criteria)
+        private ActionResult GetReturnRedirectFromProviderShortlistAction(ApprenticeshipShortlistCriteria criteria)
         {
             if (Request.UrlReferrer == null)
             {

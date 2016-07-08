@@ -1,5 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model ApprenticeshipSearchResultViewModel
 
 @{
@@ -156,7 +157,7 @@
 
 @helper GetStandardShortlistLink(ApprenticeshipSearchResultItemViewModel item)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (!Model.ShortlistedStandards.ContainsKey(item.StandardId))
         {
@@ -189,7 +190,7 @@
 
 @helper GetFrameworkShortlistLink(ApprenticeshipSearchResultItemViewModel item)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (!Model.ShortlistedFrameworks.ContainsKey(item.FrameworkId))
         {
@@ -244,6 +245,16 @@
                             </li>
                         }
                     </ul>
+
+                    <details>
+                        <summary>Help with levels</summary>
+                        <div class="panel panel-border-narrow">
+                            <p>Apprenticeships are set a different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 8)</p>
+                            <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview">More about levels</a></p>
+                        </div>
+                    </details>
+                    
+
                 </div>
             </fieldset>
             <input type="submit" class="button" value="Update results" />

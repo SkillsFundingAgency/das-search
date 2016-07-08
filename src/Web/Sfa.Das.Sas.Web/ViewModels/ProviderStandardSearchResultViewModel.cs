@@ -8,8 +8,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
     {
         public long TotalResults { get; set; }
 
-        public long TotalProvidersCountry { get; set; }
-
         public int ResultsToTake { get; set; }
 
         public int ActualPage { get; set; }
@@ -22,13 +20,13 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string PostCode { get; set; }
 
-        public IEnumerable<ProviderResultItemViewModel> Hits { get; set; }
+        public IEnumerable<StandardProviderResultItemViewModel> Hits { get; set; }
 
         public bool HasError { get; set; }
 
-        public bool StandardNotFound { get; set; }
-
         public bool PostCodeMissing { get; set; }
+
+        public long TotalResultsForCountry { get; set; }
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
 

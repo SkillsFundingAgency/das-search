@@ -1,10 +1,11 @@
 ﻿@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model Sfa.Das.Sas.Web.ViewModels.StandardViewModel
 
 @{
-    ViewBag.Title = "Standard - " + @Model.Title;
+    ViewBag.Title = @Model.Title + " - Apprenticeship Standard";
 }
 
 <main id="content" class="standard-detail">
@@ -24,7 +25,7 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                    <a class="button ui-find-training-providers" id="ga-find-provider-top" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                         <i class="fa fa-search" aria-hidden="true"></i>
                         Find training providers
                     </a>
@@ -43,7 +44,7 @@
             </header>
             <dl class="data-list">
                 @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
-                @GetStandardProperty("Level", "level", $"{@Model.NotionalEndLevel} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.NotionalEndLevel.ToString())})")
+                @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
                 @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
                 @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
                 @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
@@ -51,22 +52,19 @@
                 @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
             </dl>
 
-            @if (!string.IsNullOrEmpty($"{Model.AssessmentPlanPdfUrlTitle}{Model.StandardPdfUrlTitle}"))
-            {
-                <div class="panel-indent panel-indent-info">
-                    <h2 class="heading-large">
-                        Documents
-                    </h2>
-                    <ul>
-                        @GetDocumentItem(@Model.StandardPdf, "Standard")
-                        @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
-                    </ul>
-                </div>
-            }
+            <div class="panel-indent panel-indent-info">
+                <h2 class="heading-large">
+                    Documents
+                </h2>
+                <ul>
+                    @GetDocumentItem(@Model.StandardPdf, "Standard")
+                    @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
+                </ul>
+            </div>
 
             <hr/>
             <div id="bottom-actions">
-                <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                     <i class="fa fa-search" aria-hidden="true"></i>
                     Find training providers
                 </a>
@@ -98,7 +96,7 @@
 
 @helper GetShortlistLink(int id, bool isShortlisted)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>())
+    if (Is<ShortlistingFeature>.Enabled)
     {
         if (isShortlisted)
         {

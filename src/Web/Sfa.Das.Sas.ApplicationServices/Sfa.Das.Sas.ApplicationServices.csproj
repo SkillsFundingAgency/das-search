@@ -40,6 +40,14 @@
       <HintPath>..\packages\FeatureToggle.Core.3.4.0\lib\portable-net40+sl50+wp81+wpa+win\FeatureToggle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.2.0.2\lib\net45\MediatR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.3.1.1.134\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -61,8 +69,10 @@
   <ItemGroup>
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
-    <Compile Include="FeatureToggles\FeatureToggleHelper.cs" />
     <Compile Include="FeatureToggles\ShortlistingFeature.cs" />
+    <Compile Include="Handlers\DetailProviderHandler.cs" />
+    <Compile Include="Handlers\FrameworkProviderSearchHandler.cs" />
+    <Compile Include="Handlers\StandardProviderSearchHandler.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProfileAStep.cs" />
@@ -72,14 +82,19 @@
     <Compile Include="Logging\ApprenticeshipSearchLogEntry.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
+    <Compile Include="Models\ApprenticeshipTrainingType.cs" />
+    <Compile Include="Models\BaseProviderSearchResults.cs" />
     <Compile Include="Models\CodeTypes.cs" />
     <Compile Include="Models\DeliveryMode.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
+    <Compile Include="Models\IShortlistCollection.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
+    <Compile Include="Models\ShortlistedApprenticeship.cs" />
+    <Compile Include="Models\ShortlistedProvider.cs" />
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SearchResult{T}.cs" />
@@ -89,10 +104,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
-    <Compile Include="SampleFeatureToggles\SampleFeatureToggle.cs" />
+    <Compile Include="Queries\DetailProviderResponse.cs" />
+    <Compile Include="Queries\FrameworkProviderSearchQuery.cs" />
+    <Compile Include="Queries\FrameworkProviderSearchResponse.cs" />
+    <Compile Include="Queries\ProviderDetailQuery.cs" />
+    <Compile Include="Queries\ProviderSearchQuery.cs" />
+    <Compile Include="Queries\ProviderSearchResponseBase.cs" />
+    <Compile Include="Queries\StandardProviderSearchQuery.cs" />
+    <Compile Include="Queries\StandardProviderSearchResponse.cs" />
+    <Compile Include="Settings\Constants.cs" />
     <Compile Include="Settings\ICookieSettings.cs" />
     <Compile Include="Settings\IPaginationSettings.cs" />
     <Compile Include="Settings\PaginationSettings.cs" />
+    <Compile Include="Validators\IValidation.cs" />
+    <Compile Include="Validators\ProviderDetailQueryValidator.cs" />
+    <Compile Include="Validators\ProviderSearchQueryValidator.cs" />
+    <Compile Include="Validators\Validation.cs" />
+    <Compile Include="Validators\ValidationCodes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj">
@@ -113,7 +141,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

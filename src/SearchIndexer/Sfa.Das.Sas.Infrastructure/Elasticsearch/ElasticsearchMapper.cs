@@ -69,6 +69,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 ExpiryDate = frameworkMetaData.EffectiveTo,
                 SectorSubjectAreaTier1 = frameworkMetaData.SectorSubjectAreaTier1,
                 SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2,
+                CompletionQualifications = frameworkMetaData.CompletionQualifications,
+                EntryRequirements = frameworkMetaData.EntryRequirements,
+                ProfessionalRegistration = frameworkMetaData.ProfessionalRegistration,
+                FrameworkOverview = frameworkMetaData.FrameworkOverview
+                SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2,
                 CompetencyQualification = frameworkMetaData.CompetencyQualification,
                 KnowledgeQualification = frameworkMetaData.KnowledgeQualification,
                 CombinedQualification = frameworkMetaData.CombinedQualification

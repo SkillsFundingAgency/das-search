@@ -82,6 +82,9 @@
     <None Include="End2End_1.webtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="LoadTest1.loadtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="PreProdStandard.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

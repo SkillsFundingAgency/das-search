@@ -1,298 +1,142 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Configuration;
+using MediatR;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Collections;
-using Sfa.Das.Sas.Web.Common;
-using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Net;
+    using System.Web.Routing;
+    using Sfa.Das.Sas.Web.Extensions;
+
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
-        private readonly IProviderViewModelFactory _viewModelFactory;
-
-        private readonly IConfigurationSettings _settings;
-        private readonly IListCollection<int> _listCollection;
-
-        private readonly IValidation _validation;
-
         private readonly ILog _logger;
-
         private readonly IMappingService _mappingService;
-
-        private readonly IProviderSearchService _providerSearchService;
+        private readonly IMediator _mediator;
 
         public ProviderController(
-            IProviderSearchService providerSearchService,
             ILog logger,
             IMappingService mappingService,
-            IProviderViewModelFactory viewModelFactory,
-            IConfigurationSettings settings,
-            IListCollection<int> listCollection,
-            IValidation validation)
+            IMediator mediator)
         {
-            _providerSearchService = providerSearchService;
             _logger = logger;
             _mappingService = mappingService;
-            _viewModelFactory = viewModelFactory;
-            _settings = settings;
-            _listCollection = listCollection;
-            _validation = validation;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult> StandardResults(ProviderSearchCriteria criteria)
+        public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
         {
-            if (criteria.ApprenticeshipId < 1)
+            var response = await _mediator.SendAsync(criteria);
+
+            switch (response.StatusCode)
             {
-                return new HttpStatusCodeResult(400);
-            }
+                case StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            if (string.IsNullOrEmpty(criteria?.PostCode) || !_validation.ValidatePostcode(criteria.PostCode))
-            {
-                var url = Url.Action(
-                    "SearchForProviders",
-                    "Apprenticeship",
-                    new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
-                return new RedirectResult(url);
-            }
+                case StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound:
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-            criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
+                case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
+                    var postCodeUrl = Url.Action(
+                        "SearchForProviders",
+                        "Apprenticeship",
+                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                    return new RedirectResult(postCodeUrl);
 
-            var viewModel = await GetStandardSearchResultsViewModel(criteria);
+                case StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
 
-            return await GetView(criteria, viewModel);
-        }
+                    var url = Url.Action(
+                        "StandardResults",
+                        "Provider",
+                        GenerateStandardProviderResultsRouteValues(criteria, response));
 
-        [HttpGet]
-        public async Task<ActionResult> FrameworkResults(ProviderSearchCriteria criteria)
-        {
-            if (criteria.ApprenticeshipId < 1)
-            {
-                Response.StatusCode = 400;
-            }
-
-            if (string.IsNullOrEmpty(criteria?.PostCode) || !_validation.ValidatePostcode(criteria.PostCode))
-            {
-                var url = Url.Action(
-                    "SearchForProviders",
-                    "Apprenticeship",
-                    new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
-                return new RedirectResult(url);
-            }
-
-            criteria.Page = criteria.Page == 0 ? 1 : criteria.Page;
-
-            var viewModel = await GetFrameworkSearchResultsViewModel(criteria);
-
-            return await GetView(criteria, viewModel);
-        }
-
-        [HttpGet]
-        public ActionResult Detail(ProviderLocationSearchCriteria criteria)
-        {
-            var viewModel = _viewModelFactory.GenerateDetailsViewModel(criteria);
-
-            if (viewModel == null)
-            {
-                var message = $"Cannot find provider: {criteria.ProviderId}";
-                _logger.Warn($"404 - {message}");
-
-                return new HttpNotFoundResult(message);
-            }
-
-            viewModel.SurveyUrl = _settings.SurveyUrl.ToString();
-
-            viewModel.ProviderId = criteria.ProviderId;
-
-            var cookieListName = viewModel.Training == ApprenticeshipTrainingType.Framework
-                ? Constants.FrameworksShortListCookieName
-                : Constants.StandardsShortListCookieName;
-
-            var shortlistedApprenticeships = _listCollection.GetAllItems(cookieListName);
-
-            var apprenticeship = shortlistedApprenticeships?.SingleOrDefault(x =>
-                    x.ApprenticeshipId.Equals(viewModel.Apprenticeship.Code));
-
-            var isShortlisted = apprenticeship?.ProvidersIdAndLocation.Any(x =>
-                x.LocationId.ToString().Equals(criteria.LocationId, StringComparison.Ordinal) &&
-                x.ProviderId.Equals(criteria.ProviderId, StringComparison.Ordinal));
-
-            viewModel.IsShortlisted = isShortlisted.HasValue && isShortlisted.Value;
-
-            return View(viewModel);
-        }
-
-        private async Task PopulateStandardSearchResultViewModel(ProviderSearchCriteria criteria, ProviderStandardSearchResultViewModel viewModel)
-        {
-            if (viewModel.TotalResults <= 0)
-            {
-                var totalProvidersCountry = await _providerSearchService.SearchStandardProviders(
-                    criteria.ApprenticeshipId,
-                    criteria.PostCode,
-                    new Pagination { Page = criteria.Page, Take = criteria.Take },
-                    criteria.DeliveryModes,
-                    true);
-
-                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
-            }
-
-            viewModel.ActualPage = criteria.Page;
-            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
-            viewModel.SearchTerms = criteria.Keywords;
-            viewModel.ShowAll = criteria.ShowAll;
-
-            if (viewModel.StandardNotFound)
-            {
-                Response.StatusCode = 404;
-            }
-        }
-
-        private async Task PopulateFrameworkSearchResultViewModel(ProviderSearchCriteria criteria, ProviderFrameworkSearchResultViewModel viewModel)
-        {
-            if (viewModel.TotalResults <= 0)
-            {
-                var totalProvidersCountry =
-                    await
-                        _providerSearchService.SearchFrameworkProviders(
-                            criteria.ApprenticeshipId,
-                            criteria.PostCode,
-                            new Pagination { Page = criteria.Page, Take = criteria.Take },
-                            criteria.DeliveryModes,
-                            true);
-                viewModel.TotalProvidersCountry = totalProvidersCountry.TotalResults;
-            }
-
-            viewModel.ActualPage = criteria.Page;
-            viewModel.AbsolutePath = Request?.Url?.AbsolutePath;
-            viewModel.SearchTerms = criteria.Keywords;
-            viewModel.ShowAll = criteria.ShowAll;
-
-            if (viewModel.FrameworkIsMissing)
-            {
-                Response.StatusCode = 404;
-            }
-        }
-
-        private async Task<ProviderStandardSearchResultViewModel> GetStandardSearchResultsViewModel(ProviderSearchCriteria criteria)
-        {
-            var searchResults = await _providerSearchService.SearchStandardProviders(
-                criteria.ApprenticeshipId,
-                criteria.PostCode,
-                new Pagination { Page = criteria.Page, Take = criteria.Take },
-                criteria.DeliveryModes,
-                criteria.ShowAll);
-
-            var viewModel = _mappingService.Map<ProviderStandardSearchResults, ProviderStandardSearchResultViewModel>(searchResults);
-
-            var cookieItems = _listCollection.GetAllItems(Constants.StandardsShortListCookieName);
-
-            var shortlistedStandard = cookieItems.SingleOrDefault(x => x.ApprenticeshipId.Equals(criteria.ApprenticeshipId));
-
-            if (shortlistedStandard == null)
-            {
-                return viewModel;
-            }
-
-            foreach (var itemViewModel in viewModel.Hits)
-            {
-                var providerId = itemViewModel.Id.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
-
-                    itemViewModel.IsShortlisted = shortlistedStandard.ProvidersIdAndLocation.Any(x =>
-                        x.LocationId.Equals(itemViewModel.LocationId) &&
-                        x.ProviderId.Equals(providerId, StringComparison.Ordinal));
-                }
-
-            return viewModel;
-        }
-
-        private async Task<ProviderFrameworkSearchResultViewModel> GetFrameworkSearchResultsViewModel(ProviderSearchCriteria criteria)
-        {
-            var searchResults = await _providerSearchService.SearchFrameworkProviders(
-                criteria.ApprenticeshipId,
-                criteria.PostCode,
-                new Pagination { Page = criteria.Page, Take = criteria.Take },
-                criteria.DeliveryModes,
-                criteria.ShowAll);
-
-            var viewModel = _mappingService.Map<ProviderFrameworkSearchResults, ProviderFrameworkSearchResultViewModel>(searchResults);
-
-            var cookieItems = _listCollection.GetAllItems(Constants.FrameworksShortListCookieName);
-
-            var shortlistedFramework = cookieItems.SingleOrDefault(x => x.ApprenticeshipId.Equals(criteria.ApprenticeshipId));
-
-            if (shortlistedFramework == null)
-            {
-                return viewModel;
-            }
-
-            foreach (var itemViewModel in viewModel.Hits)
-            {
-                var providerId = itemViewModel.Id.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
-
-                    itemViewModel.IsShortlisted = shortlistedFramework.ProvidersIdAndLocation.Any(x =>
-                        x.LocationId.Equals(itemViewModel.LocationId) &&
-                        x.ProviderId.Equals(providerId, StringComparison.Ordinal));
-                }
-
-            return viewModel;
-        }
-
-        private async Task<ActionResult> GetView(ProviderSearchCriteria criteria, ProviderStandardSearchResultViewModel viewModel)
-        {
-            if (viewModel == null)
-            {
-                _logger.Warn("ViewModel is null, StandardResults, ProviderController ");
-                {
-                    return View(new ProviderStandardSearchResultViewModel());
-                }
-            }
-
-            if (viewModel.TotalResults > 0 && !viewModel.Hits.Any())
-            {
-                var url = Url.Action(
-                    "StandardResults",
-                    "Provider",
-                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
-                {
                     return new RedirectResult(url);
-                }
             }
 
-            await PopulateStandardSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
+            var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
+                                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
 
             return View(viewModel);
         }
 
-        private async Task<ActionResult> GetView(ProviderSearchCriteria criteria, ProviderFrameworkSearchResultViewModel viewModel)
+        [HttpGet]
+        public async Task<ActionResult> FrameworkResults(FrameworkProviderSearchQuery criteria)
         {
-            if (viewModel == null)
+            var response = await _mediator.SendAsync(criteria);
+
+            switch (response.StatusCode)
             {
-                _logger.Warn("ViewModel is null, FrameworkResults, ProviderController ");
-                return View(new ProviderFrameworkSearchResultViewModel());
+                case FrameworkProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                case FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound:
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+                case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
+                    var urlPostCodeSearch = Url.Action(
+                        "SearchForProviders",
+                        "Apprenticeship",
+                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                    return new RedirectResult(urlPostCodeSearch);
+
+                case FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
+                    var url = Url.Action(
+                        "FrameworkResults",
+                        "Provider",
+                        GenerateFrameworkProviderResultsRouteValues(criteria, response));
+
+                    return new RedirectResult(url);
             }
 
-            if (viewModel?.TotalResults > 0 && !viewModel.Hits.Any())
-            {
-                var url = Url.Action(
-                    "FrameworkResults",
-                    "Provider",
-                    new { apprenticeshipId = criteria?.ApprenticeshipId, postcode = criteria?.PostCode, page = viewModel.LastPage });
-                return new RedirectResult(url);
-            }
-
-            await PopulateFrameworkSearchResultViewModel(criteria, viewModel).ConfigureAwait(false);
+            var viewModel = _mappingService.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(response, opt => opt
+                                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Detail(ProviderDetailQuery criteria)
+        {
+            var response = _mediator.Send(criteria);
+
+            switch (response.StatusCode)
+            {
+                case DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound:
+                    _logger.Warn($"404 - Cannot find provider: {criteria.ProviderId}");
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+                case DetailProviderResponse.ResponseCodes.InvalidInput:
+                    _logger.Warn($"400 - Bad Request: {criteria.ProviderId}");
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var viewModel = _mappingService.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(response);
+
+            return View(viewModel);
+        }
+
+        private static RouteValueDictionary GenerateStandardProviderResultsRouteValues(StandardProviderSearchQuery criteria, StandardProviderSearchResponse response)
+        {
+            return new RouteValueDictionary()
+                        .AddValue("page", response.CurrentPage)
+                        .AddValue("postcode", criteria?.PostCode ?? string.Empty)
+                        .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
+                        .AddList("deliverymodes", criteria?.DeliveryModes);
+        }
+
+        private static RouteValueDictionary GenerateFrameworkProviderResultsRouteValues(FrameworkProviderSearchQuery criteria, FrameworkProviderSearchResponse response)
+        {
+            return new RouteValueDictionary()
+                        .AddValue("page", response.CurrentPage)
+                        .AddValue("postcode", criteria?.PostCode ?? string.Empty)
+                        .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
+                        .AddList("deliverymodes", criteria?.DeliveryModes);
         }
     }
 }

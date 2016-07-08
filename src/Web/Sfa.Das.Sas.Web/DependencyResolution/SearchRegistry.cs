@@ -13,8 +13,6 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
         {
             For<IMappingService>().Use<MappingService>();
             For<ICookieService>().Use<CookieService>();
-            For<IProviderViewModelFactory>().Use<ProviderViewModelFactory>();
-            For<IListCollection<int>>().Use<CookieListCollection>();
 
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
             For<IShortlistViewModelFactory>().Use<ShortlistViewModelFactory>();

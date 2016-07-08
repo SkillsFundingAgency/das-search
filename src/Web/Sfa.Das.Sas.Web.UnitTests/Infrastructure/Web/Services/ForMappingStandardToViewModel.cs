@@ -78,41 +78,5 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel2.TypicalLengthMessage.ShouldBeEquivalentTo("12 ");
             viewModel3.TypicalLengthMessage.Should().BeEmpty();
         }
-
-        [Test]
-        public void WhenPdfLinkIsMissing()
-        {
-            MappingService mappingService = new MappingService(null);
-
-            var standardResult = new Standard
-            {
-                Title = "item 1",
-                StandardPdf = null,
-                AssessmentPlanPdf = null
-            };
-
-            var viewModel = mappingService.Map<Standard, StandardViewModel>(standardResult);
-
-            viewModel.StandardPdfUrlTitle.Should().BeEmpty();
-            viewModel.AssessmentPlanPdfUrlTitle.Should().BeEmpty();
-        }
-
-        [Test]
-        public void PdfLinkShouldHaveTitle()
-        {
-            MappingService mappingService = new MappingService(null);
-
-            var standardResult = new Standard
-            {
-                Title = "item 1",
-                StandardPdf = "httt://www.sfatest.co.uk/path/to/file_standard_sep_14.pdf",
-                AssessmentPlanPdf = null
-            };
-
-            var viewModel = mappingService.Map<Standard, StandardViewModel>(standardResult);
-
-            viewModel.StandardPdfUrlTitle.Should().BeEquivalentTo("file standard sep 14");
-            viewModel.AssessmentPlanPdfUrlTitle.Should().BeEmpty();
-        }
     }
 }

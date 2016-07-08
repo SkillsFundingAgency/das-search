@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             var viewModel = mappingService.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(providerResult);
 
             viewModel.EmployerSatisfactionMessage.Should().Be("8.3%");
-            viewModel.LearnerSatisfactionMessage.Should().Be("No data available");
+            viewModel.LearnerSatisfactionMessage.Should().Be("no data available");
         }
     }
 }

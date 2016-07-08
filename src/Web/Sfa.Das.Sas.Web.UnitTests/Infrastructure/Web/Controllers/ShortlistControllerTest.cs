@@ -5,7 +5,6 @@ using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Models;
@@ -13,6 +12,8 @@ using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Extensions;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
     [TestClass]
     public class ShortlistControllerTest
     {
@@ -21,14 +22,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         private ShortlistController _controller;
         private Mock<IGetStandards> _mockStandardRepository;
         private Mock<IGetFrameworks> _mockFrameworkRepository;
-        private Mock<IListCollection<int>> _mockCookieRepository;
+        private Mock<IShortlistCollection<int>> _mockCookieRepository;
 
         [SetUp]
         public void Init()
         {
             _mockStandardRepository = new Mock<IGetStandards>();
             _mockFrameworkRepository = new Mock<IGetFrameworks>();
-            _mockCookieRepository = new Mock<IListCollection<int>>();
+            _mockCookieRepository = new Mock<IShortlistCollection<int>>();
             _shorlistedApprenticeship = new ShortlistedApprenticeship { ApprenticeshipId = 5 };
 
         _controller = new ShortlistController(

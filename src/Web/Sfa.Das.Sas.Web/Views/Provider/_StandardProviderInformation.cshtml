@@ -1,5 +1,6 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using FeatureToggle.Core.Fluent
 @model ProviderStandardSearchResultViewModel
 
     @foreach (var item in Model.Hits)
@@ -30,26 +31,29 @@
         </article>
     }
 
-@helper  RenderProviderDetails(ProviderResultItemViewModel item)
+@helper  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
     <dt>Distance:</dt>
     <dd class="distance">@item.Distance miles away</dd>
 
-    if (item.DeliveryModes != null && item.DeliveryModes.Contains("100PercentEmployer") && item.DeliveryModes.Count == 1)
-    {
-        <dd class="address">
-            Training takes place at your location.
-        </dd>
-    }
-    else
+    if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
     {
         <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.Town @item.Address.County @item.Address.Postcode</dd>
     }
+
+    @RenderDeliveryOptions(item);
+}
+
+@helper RenderDeliveryOptions(StandardProviderResultItemViewModel item)
+{
+    <dt>Training options:</dt>
+
+    <dd class="deliveryOptions">@item.DeliveryOptionsMessage</dd>
 }
 
 @helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
-    if (FeatureToggleHelper.IsFeatureEnabled<ShortlistingFeature>()) {
+    if (Is<ShortlistingFeature>.Enabled) {
         providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
 
         if (isShortlisted)
