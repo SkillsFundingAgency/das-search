@@ -107,6 +107,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             var mockAngleSharpService = new Mock<IAngleSharpService>();
             var mockLogger = new Mock<ILog>(MockBehavior.Loose);
 
+            mockSettings.Setup(x => x.GovWebsiteUrl).Returns("https://www.gov.uk/");
+
             // Add link
             var larsStandards = new List<LarsStandard> { new LarsStandard { Id = 2, Title = "Title1", NotionalEndLevel = 4, StandardUrl = "StandardUrl" } };
             mockLarsDataService.Setup(m => m.GetListOfCurrentStandards()).Returns(larsStandards);

@@ -40,6 +40,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string ImServiceUrl { get; }
 
+        string GovWebsiteUrl { get; }
+
         string QueueName(Type type);
     }
 }

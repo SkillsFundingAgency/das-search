@@ -45,6 +45,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         public string ImServiceUrl => _settings.GetSetting("ImServiceUrl");
 
+        public string GovWebsiteUrl => _settings.GetSetting("GovWebsiteUrl");
+
         // Private appServiceSettings
         private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
         private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");

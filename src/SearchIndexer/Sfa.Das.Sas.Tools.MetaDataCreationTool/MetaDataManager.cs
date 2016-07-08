@@ -68,6 +68,24 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             return frameworks;
         }
 
+        private static StandardRepositoryData MapStandardData(LarsStandard larsStandard)
+        {
+            var standardRepositoryData = new StandardRepositoryData
+            {
+                Id = larsStandard.Id,
+                Title = larsStandard.Title,
+                JobRoles = new List<string>(),
+                Keywords = new List<string>(),
+                TypicalLength = new TypicalLength { Unit = "m" },
+                OverviewOfRole = string.Empty,
+                EntryRequirements = string.Empty,
+                WhatApprenticesWillLearn = string.Empty,
+                Qualifications = string.Empty,
+                ProfessionalRegistration = string.Empty
+            };
+            return standardRepositoryData;
+        }
+
         private FileContents MapToFileContent(StandardRepositoryData standardRepositoryData)
         {
             var json = JsonConvert.SerializeObject(standardRepositoryData, Formatting.Indented);
@@ -79,24 +97,24 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
         private void UpdateFrameworkInformation(IEnumerable<FrameworkMetaData> frameworks)
         {
             var repositoryFrameworks = _vstsService.GetFrameworks().ToArray();
-            foreach (var f in frameworks)
+            foreach (var framework in frameworks)
             {
                 var repositoryFramework = repositoryFrameworks.FirstOrDefault(m =>
-                    m.FrameworkCode == f.FworkCode &&
-                    m.ProgType == f.ProgType &&
-                    m.PathwayCode == f.PwayCode);
+                    m.FrameworkCode == framework.FworkCode &&
+                    m.ProgType == framework.ProgType &&
+                    m.PathwayCode == framework.PwayCode);
 
                 if (repositoryFramework == null)
                 {
                     continue;
                 }
 
-                f.JobRoleItems = repositoryFramework.JobRoleItems;
-                f.TypicalLength = repositoryFramework.TypicalLength;
-                f.CompletionQualifications = repositoryFramework.CompletionQualifications;
-                f.EntryRequirements = repositoryFramework.EntryRequirements;
-                f.ProfessionalRegistration = repositoryFramework.ProfessionalRegistration;
-                f.FrameworkOverview = repositoryFramework.FrameworkOverview;
+                framework.JobRoleItems = repositoryFramework.JobRoleItems;
+                framework.TypicalLength = repositoryFramework.TypicalLength;
+                framework.CompletionQualifications = repositoryFramework.CompletionQualifications;
+                framework.EntryRequirements = repositoryFramework.EntryRequirements;
+                framework.ProfessionalRegistration = repositoryFramework.ProfessionalRegistration;
+                framework.FrameworkOverview = repositoryFramework.FrameworkOverview;
             }
         }
 
@@ -130,25 +148,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
             var uri = _angleSharpService.GetLinks(link.RemoveQuotationMark(), ".attachment-details h2 a", linkTitle)?.FirstOrDefault();
 
-            return uri != null ? new Uri(new Uri("https://www.gov.uk"), uri).ToString() : string.Empty;
-        }
-
-        private static StandardRepositoryData MapStandardData(LarsStandard larsStandard)
-        {
-            var standardRepositoryData = new StandardRepositoryData
-            {
-                Id = larsStandard.Id,
-                Title = larsStandard.Title,
-                JobRoles = new List<string>(),
-                Keywords = new List<string>(),
-                TypicalLength = new TypicalLength {Unit = "m"},
-                OverviewOfRole = string.Empty,
-                EntryRequirements = string.Empty,
-                WhatApprenticesWillLearn = string.Empty,
-                Qualifications = string.Empty,
-                ProfessionalRegistration = string.Empty
-            };
-            return standardRepositoryData;
+            return uri != null ? new Uri(new Uri(_appServiceSettings.GovWebsiteUrl), uri).ToString() : string.Empty;
         }
 
         private void PushStandardsToGit(List<FileContents> standards)

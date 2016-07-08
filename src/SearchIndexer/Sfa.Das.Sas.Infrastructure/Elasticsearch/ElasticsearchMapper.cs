@@ -72,8 +72,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 CompletionQualifications = frameworkMetaData.CompletionQualifications,
                 EntryRequirements = frameworkMetaData.EntryRequirements,
                 ProfessionalRegistration = frameworkMetaData.ProfessionalRegistration,
-                FrameworkOverview = frameworkMetaData.FrameworkOverview
-                SectorSubjectAreaTier2 = frameworkMetaData.SectorSubjectAreaTier2,
+                FrameworkOverview = frameworkMetaData.FrameworkOverview,
                 CompetencyQualification = frameworkMetaData.CompetencyQualification,
                 KnowledgeQualification = frameworkMetaData.KnowledgeQualification,
                 CombinedQualification = frameworkMetaData.CombinedQualification
