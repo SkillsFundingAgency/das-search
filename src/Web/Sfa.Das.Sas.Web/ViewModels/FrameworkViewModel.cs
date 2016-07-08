@@ -1,7 +1,5 @@
 ﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     public class FrameworkViewModel
@@ -20,9 +18,6 @@
         public bool IsShortlisted { get; set; }
 
         public string SearchTerm { get; set; }
-
-        public string Qualifications { get; set; }
-
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }
@@ -32,5 +27,11 @@
         public string ProfessionalRegistration { get; set; }
 
         public IEnumerable<string> JobRoles { get; set; }
+
+        public IEnumerable<string> CompetencyQualification { get; set; }
+
+        public IEnumerable<string> KnowledgeQualification { get; set; }
+
+        public IEnumerable<string> CombinedQualificiation { get; set; }
     }
 }

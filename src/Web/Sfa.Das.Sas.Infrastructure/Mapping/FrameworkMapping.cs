@@ -20,17 +20,19 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 TypicalLength = document.TypicalLength,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = document.JobRoleItems,
-                Qualifications = document.Qualifications,
                 CompletionQualifications = document.CompletionQualifications,
                 FrameworkOverview = document.FrameworkOverview,
                 EntryRequirements = document.EntryRequirements,
-                ProfessionalRegistration = document.ProfessionalRegistration
+                ProfessionalRegistration = document.ProfessionalRegistration,
+                CompetencyQualification = document.CompetencyQualification,
+                KnowledgeQualification = document.KnowledgeQualification,
+                CombinedQualificiation = document.CombinedQualificiation
             };
 
-            if (framework.Qualifications == null)
-            {
-                framework.Qualifications = string.Empty;
-            }
+            //if (framework.Qualifications == null)
+            //{
+            //    framework.Qualifications = string.Empty;
+            //}
 
             return framework;
         }

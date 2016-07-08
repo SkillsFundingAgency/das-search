@@ -22,13 +22,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
             For<IGenericMetaDataFactory>().Use<LarsMetaDataFactory>();
-            For<IEnumerable<IMetaDataFactory>>().Use(() => new List<IMetaDataFactory>
-            {
-                new FrameworkMetaDataFactory(),
-                new FrameworkAimMetaDataFactory(),
-                new FrameworkComponentTypeMetaDataFactory(),
-                new LearningDeliveryMetaDataFactory()
-            });
+            For<IMetaDataFactory>().Use<FrameworkMetaDataFactory>();
+            For<IMetaDataFactory>().Use<FrameworkAimMetaDataFactory>();
+            For<IMetaDataFactory>().Use<FrameworkComponentTypeMetaDataFactory>();
+            For<IMetaDataFactory>().Use<LearningDeliveryMetaDataFactory>();
 
         }
     }

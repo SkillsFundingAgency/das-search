@@ -102,10 +102,48 @@
             </dd>
             <dt>Qualifications</dt>
             <dd>
-                @if (Model.Qualifications != string.Empty)
+                @if (Model.CompetencyQualification.Any())
                 {
-                    <p class="qualifications">@Model.Qualifications</p>
+                    <p class="qualifications">
+                        Apprentices will achieve a practical (i.e. 'competence') qualification:
+                        <br/>
+                        <ul>
+                            @foreach (var qualification in Model.CompetencyQualification)
+                            {
+                                <li>@qualification</li>
+                            }
+                        </ul>
+                    </p>
                 }
+
+                @if (Model.KnowledgeQualification.Any())
+                {
+                    <p class="qualifications">
+                        Apprentices will also achieve a theory-based (i.e. 'knowledge'') qualification:
+                        <br />
+                        <ul>
+                            @foreach (var qualification in Model.KnowledgeQualification)
+                            {
+                                <li>@qualification</li>
+                            }
+                        </ul>
+                    </p>
+                }
+
+                @if (Model.CombinedQualificiation.Any())
+                {
+                    <p class="qualifications">
+                        Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:
+                        <br />
+                        <ul>
+                            @foreach (var qualification in Model.CombinedQualificiation)
+                            {
+                                <li>@qualification</li>
+                            }
+                        </ul>
+                    </p>
+                }
+
                 @if (Model.CompletionQualifications != string.Empty)
                 {
                     <p class="completionQualifications">@Model.CompletionQualifications</p>
