@@ -21,7 +21,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         private Mock<IReadMetaDataFromCsv> _mockCsvService;
         private Mock<IUnzipStream> _mockFileExtractor;
         private Mock<IAngleSharpService> _mockAngleSharpService;
-        private Mock<IHttpGet> _mockHttpGet;
         private Mock<IHttpGetFile> _mockHttpGetFile;
         private Mock<ILog> _mockLogger;
         private Mock<IAppServiceSettings> _mockAppServiceSettings;
@@ -43,7 +42,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _mockAppServiceSettings = new Mock<IAppServiceSettings>();
             _mockCsvService = new Mock<IReadMetaDataFromCsv>();
             _mockFileExtractor = new Mock<IUnzipStream>();
-            _mockHttpGet = new Mock<IHttpGet>();
             _mockHttpGetFile = new Mock<IHttpGetFile>();
             _mockLogger = new Mock<ILog>();
 
@@ -93,8 +91,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
                 _mockHttpGetFile.Object,
                 _mockFileExtractor.Object,
                 _mockAngleSharpService.Object,
-                _mockLogger.Object,
-                _mockHttpGet.Object);
+                _mockLogger.Object);
         }
 
         [Test]

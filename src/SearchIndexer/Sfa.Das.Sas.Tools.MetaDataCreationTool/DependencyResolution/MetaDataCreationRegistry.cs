@@ -1,5 +1,7 @@
-﻿using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 using StructureMap;
@@ -20,7 +22,14 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
             For<IGenericMetaDataFactory>().Use<LarsMetaDataFactory>();
-            
+            For<IEnumerable<IMetaDataFactory>>().Use(() => new List<IMetaDataFactory>
+            {
+                new FrameworkMetaDataFactory(),
+                new FrameworkAimMetaDataFactory(),
+                new FrameworkComponentTypeMetaDataFactory(),
+                new LearningDeliveryMetaDataFactory()
+            });
+
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
+using Sfa.Das.Sas.Indexer.Core.Extensions;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
@@ -14,8 +15,6 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 {
-    using Sfa.Das.Sas.Indexer.Core.Extensions;
-
     public class MetaDataManager : IGetStandardMetaData, IGenerateStandardMetaData, IGetFrameworkMetaData
     {
         private readonly IAppServiceSettings _appServiceSettings;
@@ -57,15 +56,14 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var standards = _vstsService.GetStandards();
+            var standards = _vstsService.GetStandards()?.ToList();
             UpdateStandardsInformationFromLars(standards);
-            return standards.ToList();
+            return standards;
         }
 
         public List<FrameworkMetaData> GetAllFrameworks()
         {
             var frameworks = _larsDataService.GetListOfCurrentFrameworks().ToList();
-            //var filteredFrameworks = FilterFrameworks(frameworks);
             UpdateFrameworkInformation(frameworks);
             return frameworks;
         }
@@ -78,7 +76,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             return new FileContents(gitFilePath, json);
         }
 
-        private void UpdateFrameworkInformation(List<FrameworkMetaData> frameworks)
+        private void UpdateFrameworkInformation(IEnumerable<FrameworkMetaData> frameworks)
         {
             var repositoryFrameworks = _vstsService.GetFrameworks().ToArray();
             foreach (var f in frameworks)
@@ -88,11 +86,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                     m.ProgType == f.ProgType &&
                     m.PathwayCode == f.PwayCode);
 
-                if (repositoryFramework != null)
+                if (repositoryFramework == null)
                 {
-                    f.JobRoleItems = repositoryFramework.JobRoleItems;
-                    f.TypicalLength = repositoryFramework.TypicalLength;
+                    continue;
                 }
+
+                f.JobRoleItems = repositoryFramework.JobRoleItems;
+                f.TypicalLength = repositoryFramework.TypicalLength;
             }
         }
 
@@ -103,14 +103,17 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             foreach (var standard in standards)
             {
                 var standardFromLars = currentStandards.SingleOrDefault(m => m.Id.Equals(standard.Id));
-                if (standardFromLars != null)
+
+                if (standardFromLars == null)
                 {
-                    standard.NotionalEndLevel = standardFromLars.NotionalEndLevel;
-                    standard.StandardPdfUrl = GetLinkUri(standardFromLars.StandardUrl, "Apprenticeship");
-                    standard.AssessmentPlanPdfUrl = GetLinkUri(standardFromLars.StandardUrl, "Assessment");
-                    standard.SectorSubjectAreaTier1 = standardFromLars.SectorSubjectAreaTier1;
-                    standard.SectorSubjectAreaTier2 = standardFromLars.SectorSubjectAreaTier2;
+                    continue;
                 }
+
+                standard.NotionalEndLevel = standardFromLars.NotionalEndLevel;
+                standard.StandardPdfUrl = GetLinkUri(standardFromLars.StandardUrl, "Apprenticeship");
+                standard.AssessmentPlanPdfUrl = GetLinkUri(standardFromLars.StandardUrl, "Assessment");
+                standard.SectorSubjectAreaTier1 = standardFromLars.SectorSubjectAreaTier1;
+                standard.SectorSubjectAreaTier2 = standardFromLars.SectorSubjectAreaTier2;
             }
         }
 
@@ -122,15 +125,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             }
 
             var uri = _angleSharpService.GetLinks(link.RemoveQuotationMark(), ".attachment-details h2 a", linkTitle)?.FirstOrDefault();
-            if (uri != null)
-            {
-                return new Uri(new Uri("https://www.gov.uk"), uri).ToString();
-            }
 
-            return string.Empty;
+            return uri != null ? new Uri(new Uri("https://www.gov.uk"), uri).ToString() : string.Empty;
         }
 
-        private StandardRepositoryData MapStandardData(LarsStandard larsStandard)
+        private static StandardRepositoryData MapStandardData(LarsStandard larsStandard)
         {
             var standardRepositoryData = new StandardRepositoryData
             {
@@ -138,7 +137,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                 Title = larsStandard.Title,
                 JobRoles = new List<string>(),
                 Keywords = new List<string>(),
-                TypicalLength = new TypicalLength { Unit = "m" },
+                TypicalLength = new TypicalLength {Unit = "m"},
                 OverviewOfRole = string.Empty,
                 EntryRequirements = string.Empty,
                 WhatApprenticesWillLearn = string.Empty,
@@ -150,13 +149,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         private void PushStandardsToGit(List<FileContents> standards)
         {
-            if (standards.Any())
+            if (!standards.Any())
             {
-                _vstsService.PushCommit(standards);
-                _logger.Info($"Pushed {standards.Count} new meta files to Git Repository.");
+                return;
             }
-        }
 
-      
+            _vstsService.PushCommit(standards);
+            _logger.Info($"Pushed {standards.Count} new meta files to Git Repository.");
+        }
     }
 }

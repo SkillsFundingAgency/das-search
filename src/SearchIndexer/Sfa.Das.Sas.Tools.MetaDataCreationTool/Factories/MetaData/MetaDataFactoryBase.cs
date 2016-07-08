@@ -6,6 +6,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
 {
     public class MetaDataFactoryBase
     {
+        protected MetaDataFactoryBase()
+        {
+        }
+
         protected static int TryParse(string s)
         {
             int i;

@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
@@ -22,7 +24,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         [Test]
         public void CreateFrameworksFromCsv()
         {
-            CsvService csvService = new CsvService(new LarsMetaDataFactory());
+            CsvService csvService = new CsvService(new LarsMetaDataFactory(new List<IMetaDataFactory> {new FrameworkMetaDataFactory() }));
             var frameworks = csvService.ReadFromString<FrameworkMetaData>(_testFrameworkCsvData);
 
             Assert.AreEqual(10, frameworks.Count);
@@ -40,7 +42,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         [Test]
         public void CreateFrameworksFromCsvWithComma()
         {
-            CsvService csvService = new CsvService(new LarsMetaDataFactory());
+            CsvService csvService = new CsvService(new LarsMetaDataFactory(new List<IMetaDataFactory> { new FrameworkMetaDataFactory() }));
             var frameworks = csvService.ReadFromString<FrameworkMetaData>(_testFrameworkCsvDataWithComma);
 
             Assert.AreEqual(10, frameworks.Count);

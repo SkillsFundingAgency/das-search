@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
                 EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
                 SectorSubjectAreaTier1 = TryParseDouble(values[6]),
                 SectorSubjectAreaTier2 = TryParseDouble(values[7]),
-                NASTitle = values[9].RemoveQuotationMark()
+                NasTitle = values[9].RemoveQuotationMark()
             };
         }
     }

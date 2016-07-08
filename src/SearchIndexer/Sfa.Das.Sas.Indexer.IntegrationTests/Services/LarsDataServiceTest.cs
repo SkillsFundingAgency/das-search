@@ -24,8 +24,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
         private IHttpGetFile _httpGetFile;
         private IUnzipStream _fileExtractor;
         private IAngleSharpService _angleSharpService;
-        private IHttpGet _httpGet;
-
         private Mock<IAppServiceSettings> _appServiceSettings;
         private Mock<ILog> _mockLogger;
 
@@ -43,11 +41,9 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
                 new LearningDeliveryMetaDataFactory()
             };
 
-            //_readMetaDataFromCsv = new CsvService(new LarsMetaDataFactory(metaDataFactories));
-            _readMetaDataFromCsv = new CsvService(new LarsMetaDataFactory());
-            _httpGet = new HttpService(_mockLogger.Object);
+            _readMetaDataFromCsv = new CsvService(new LarsMetaDataFactory(metaDataFactories));
             _fileExtractor = new ZipFileExtractor();
-            _angleSharpService = new AngleSharpService(_httpGet);
+            _angleSharpService = new AngleSharpService(new HttpService(_mockLogger.Object));
             _httpGetFile = new HttpService(_mockLogger.Object);
 
             _sut = new LarsDataService(
@@ -56,8 +52,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Services
                 _httpGetFile,
                 _fileExtractor,
                 _angleSharpService,
-                _mockLogger.Object, 
-                _httpGet);
+                _mockLogger.Object);
         }
 
         [Test]

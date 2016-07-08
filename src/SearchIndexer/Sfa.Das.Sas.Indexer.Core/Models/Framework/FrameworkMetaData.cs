@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Framework
 
         public string PathwayName { get; set; }
 
-        public string NASTitle { get; set; }
+        public string NasTitle { get; set; }
 
         public DateTime EffectiveFrom { get; set; }
 
