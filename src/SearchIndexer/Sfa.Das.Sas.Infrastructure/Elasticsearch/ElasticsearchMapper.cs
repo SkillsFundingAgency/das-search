@@ -149,8 +149,13 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 County = EscapeSpecialCharacters(deliveryInformation.DeliveryLocation.Address.County),
                 PostCode = deliveryInformation.DeliveryLocation.Address.Postcode,
             };
-            documentToPopulate.LocationPoint = new GeoCoordinate(deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0, deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0);
-            documentToPopulate.Location = new CircleGeoShape { Coordinates = new GeoCoordinate(deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0, deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0), Radius = $"{deliveryInformation.Radius}mi" };
+            var geoCoordinate = deliveryInformation.DeliveryLocation.Address?.GeoPoint == null
+                                    ? null
+                                    : new GeoCoordinate(
+                                          (double)deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Latitude,
+                                          (double)deliveryInformation.DeliveryLocation.Address?.GeoPoint?.Longitude);
+            documentToPopulate.LocationPoint = geoCoordinate;
+            documentToPopulate.Location = new CircleGeoShape { Coordinates = geoCoordinate, Radius = $"{deliveryInformation.Radius}mi" };
         }
 
         private string[] GenerateListOfDeliveryModes(IEnumerable<ModesOfDelivery> deliveryModes)
