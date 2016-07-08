@@ -82,44 +82,46 @@ WriteLiteral(@">
 WriteLiteral(" class=\"heading-xlarge\"");
 
 WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n\r\n           " +
-" <p>If you are considering employing an apprentice,&nbsp;use this service to fin" +
-"d:</p>\r\n\r\n            <ul");
+" <p>For employers looking to take on apprenticeships.</p>\r\n\r\n            <p>You " +
+"can:</p>\r\n\r\n            <ul");
 
-WriteLiteral(" class=\"list list-number\"");
+WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\r\n                <li>an apprenticeship that sets out the skills, knowledge and " +
-"behaviours needed for the role</li>\r\n                <li>an organisation to prov" +
-"ide training for your apprentice</li>\r\n            </ul>\r\n\r\n            <h2");
+WriteLiteral(">\r\n                <li>search for apprenticeship training by job role or keyword<" +
+"/li>\r\n                <li>search for training providers by postcode</li>\r\n      " +
+"      </ul>\r\n\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 32 "..\..\Views\Start\Start.cshtml"
+       Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n            <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">Your responsibilities</h2>\r\n\r\n            <p>Apprentices must be aged 16 or over" +
-" and combine working with learning. They can be new or current employees.</p>\r\n " +
-"           \r\n            <p>If you hire an apprentice you must:</p>\r\n\r\n         " +
-"   <ul");
+WriteLiteral(">What you need to know</h2>\r\n\r\n            <p>Apprentices must be aged 16 or over" +
+" and combine working with learning. They can be new or current employees.</p>\r\n\r" +
+"\n            <p>If you hire an apprentice you must:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(@">
-                <li>employ them for at least 30 hours a week</li>
+                <li>usually employ them for at least 30 hours a week</li>
                 <li>pay them at least the minimum wage for apprentices</li>
                 <li>offer them the same conditions and benefits as other employees working at a similar level</li>
                 <li>provide experience and opportunities to help with future job progression</li>
                 <li>allow them to attend training and assessment during their working hours</li>
             </ul>
 
-");
+        </div>
+    </div>
 
-WriteLiteral("            ");
-
-            
-            #line 44 "..\..\Views\Start\Start.cshtml"
-       Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new {id = "start-button", @class = "button margin-top-x2 button-start" } ));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div>\r\n    </div>\r\n\r\n</main>");
+</main>");
 
         }
     }
