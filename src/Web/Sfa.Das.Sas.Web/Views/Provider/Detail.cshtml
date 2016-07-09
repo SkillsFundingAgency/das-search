@@ -70,9 +70,7 @@
                         Training provider quality assessment
                     </h2>
                     @GetSatisfactionsHtml()
-                    <p>
-                    Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
-                    </p>
+                    @ShowSatisfactionSource()
                 </aside>
             </div>
         </div>
@@ -100,6 +98,16 @@
     </div>
 
 </main>
+
+@helper ShowSatisfactionSource()
+{
+    if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+    {
+        <p class="satisfaction-source">
+            Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
+        </p>
+    }
+}
 
 @helper ShowTrainingLocation(string title)
 {
