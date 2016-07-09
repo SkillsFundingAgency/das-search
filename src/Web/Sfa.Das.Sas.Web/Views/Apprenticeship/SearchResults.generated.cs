@@ -738,6 +738,8 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                            <p>Appre
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/what-different-qualification-levels-mean/overview\"");
 
+WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
+
 WriteLiteralTo(__razor_helper_writer, ">More about levels</a></p>\r\n                        </div>\r\n                    <" +
 "/details>\r\n                    \r\n\r\n                </div>\r\n            </fieldse" +
 "t>\r\n            <input");
