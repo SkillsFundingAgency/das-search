@@ -727,8 +727,20 @@ WriteLiteralTo(__razor_helper_writer, ")</label>\r\n                            
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                    </ul>\r\n                </div>\r\n            </fieldset>\r\n     " +
-"       <input");
+WriteLiteralTo(__razor_helper_writer, "                    </ul>\r\n\r\n                    <details>\r\n                     " +
+"   <summary>Help with levels</summary>\r\n                        <div");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"panel panel-border-narrow\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                            <p>Apprenticeships are set a different levels of d" +
+"ifficulty from the equivalent of GCSE (level 2) up to postgraduate (level 8)</p>" +
+"\r\n                            <p><a");
+
+WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/what-different-qualification-levels-mean/overview\"");
+
+WriteLiteralTo(__razor_helper_writer, ">More about levels</a></p>\r\n                        </div>\r\n                    <" +
+"/details>\r\n                    \r\n\r\n                </div>\r\n            </fieldse" +
+"t>\r\n            <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
 
@@ -739,14 +751,14 @@ WriteLiteralTo(__razor_helper_writer, " value=\"Update results\"");
 WriteLiteralTo(__razor_helper_writer, " />\r\n        </form>\r\n    </div>\r\n");
 
 
-#line 253 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 263 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 253 "..\..\Views\Apprenticeship\SearchResults.cshtml"
+#line 263 "..\..\Views\Apprenticeship\SearchResults.cshtml"
 }
 #line default
 #line hidden

@@ -57,18 +57,22 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                     {
                         // Add standard to descriptor
                         var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, location);
-                        bulkDescriptor.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
-                        count++;
 
-                        if (HaveReachedBatchLimit(count))
+                        if (frameworkProvider.LocationPoint != null)
                         {
-                            // Execute batch
-                            tasks.Add(Client.BulkAsync(bulkDescriptor));
+                            bulkDescriptor.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                            count++;
 
-                            // New descriptor
-                            bulkDescriptor = CreateBulkDescriptor(indexName);
+                            if (HaveReachedBatchLimit(count))
+                            {
+                                // Execute batch
+                                tasks.Add(Client.BulkAsync(bulkDescriptor));
 
-                            count = 0;
+                                // New descriptor
+                                bulkDescriptor = CreateBulkDescriptor(indexName);
+
+                                count = 0;
+                            }
                         }
                     }
                 }
@@ -96,18 +100,22 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                     {
                         // Add standard to descriptor
                         var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, location);
-                        bulkDescriptor.Create<StandardProvider>(c => c.Document(standardProvider));
-                        count++;
 
-                        if (HaveReachedBatchLimit(count))
+                        if (standardProvider.LocationPoint != null)
                         {
-                            // Execute batch
-                            tasks.Add(Client.BulkAsync(bulkDescriptor));
+                            bulkDescriptor.Create<StandardProvider>(c => c.Document(standardProvider));
+                            count++;
 
-                            // New descriptor
-                            bulkDescriptor = CreateBulkDescriptor(indexName);
+                            if (HaveReachedBatchLimit(count))
+                            {
+                                // Execute batch
+                                tasks.Add(Client.BulkAsync(bulkDescriptor));
 
-                            count = 0;
+                                // New descriptor
+                                bulkDescriptor = CreateBulkDescriptor(indexName);
+
+                                count = 0;
+                            }
                         }
                     }
                 }

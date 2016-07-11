@@ -27,5 +27,13 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Framework
         public double SectorSubjectAreaTier1 { get; set; }
 
         public double SectorSubjectAreaTier2 { get; set; }
+
+        public string EntryRequirements { get; set; }
+
+        public string ProfessionalRegistration { get; set; }
+
+        public string CompletionQualifications { get; set; }
+
+        public string FrameworkOverview { get; set; }
     }
 }
