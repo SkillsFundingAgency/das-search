@@ -44,7 +44,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         public void Info(string msg, ILogEntry logEntry)
         {
-            SendLog(msg, LogLevel.Info, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+            SendLog(msg, LogLevel.Info, new Dictionary<string, object> { { GetLogEntryName(logEntry), logEntry } });
         }
 
         public void Debug(string msg)
@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         public void Debug(string msg, ILogEntry logEntry)
         {
-            SendLog(msg, LogLevel.Debug, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+            SendLog(msg, LogLevel.Debug, new Dictionary<string, object> { { GetLogEntryName(logEntry), logEntry } });
         }
 
         public void Warn(string msg)
@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         public void Warn(string msg, ILogEntry logEntry)
         {
-            SendLog(msg, LogLevel.Warn, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+            SendLog(msg, LogLevel.Warn, new Dictionary<string, object> { { GetLogEntryName(logEntry), logEntry } });
         }
 
         public void Error(string msg, Dictionary<string, object> properties)
@@ -79,7 +79,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         public void Error(string msg, ILogEntry logEntry)
         {
-            SendLog(msg, LogLevel.Error, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+            SendLog(msg, LogLevel.Error, new Dictionary<string, object> { { GetLogEntryName(logEntry), logEntry } });
         }
 
         public void Error(Exception ex, string msg)
@@ -94,7 +94,12 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         public void Fatal(string msg, ILogEntry logEntry)
         {
-            SendLog(msg, LogLevel.Fatal, new Dictionary<string, object> { { logEntry.Name, logEntry } });
+            SendLog(msg, LogLevel.Fatal, new Dictionary<string, object> { { GetLogEntryName(logEntry), logEntry } });
+        }
+
+        private static string GetLogEntryName(ILogEntry logEntry)
+        {
+            return logEntry.GetType().Name.Replace("LogEntry", string.Empty);
         }
 
         private void SendLog(object message, LogLevel level, Exception exception = null)
