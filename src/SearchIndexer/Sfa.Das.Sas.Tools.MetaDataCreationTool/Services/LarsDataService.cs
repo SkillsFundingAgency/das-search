@@ -85,31 +85,39 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                         CompetenceDescription = comp.FrameworkComponentTypeDesc
                     };
 
-                AddQualificationToFramework(framework, qualifications.ToList());
+                var categorisedQualifications = GetCategorisedQualifications(qualifications.ToList());
+
+                framework.CompetencyQualification = categorisedQualifications.Competency;
+                framework.KnowledgeQualification = categorisedQualifications.Knowledge;
+                framework.CombinedQualification = categorisedQualifications.Combined;
             }
         }
 
-        private static void AddQualificationToFramework(FrameworkMetaData framework, ICollection<FrameworkQualification> qualifications)
+        private static CategorisedQualifications GetCategorisedQualifications(ICollection<FrameworkQualification> qualifications)
         {
-            framework.CombinedQualification = qualifications.Where(x => x.CompetenceType == 3)
+            var qualificationSet = default(CategorisedQualifications);
+
+            qualificationSet.Combined = qualifications.Where(x => x.CompetenceType == 3)
                 .Select(x => x.Title)
                 .GroupBy(x => x.ToUpperInvariant())
                 .Select(group => @group.First())
                 .ToList();
 
-            framework.CompetencyQualification = qualifications.Where(x => x.CompetenceType == 1)
+            qualificationSet.Competency = qualifications.Where(x => x.CompetenceType == 1)
                 .Select(x => x.Title)
                 .GroupBy(x => x.ToUpperInvariant())
                 .Select(group => @group.First())
-                .Except(framework.CombinedQualification)
+                .Except(qualificationSet.Combined)
                 .ToList();
 
-            framework.KnowledgeQualification = qualifications.Where(x => x.CompetenceType == 2)
+            qualificationSet.Knowledge = qualifications.Where(x => x.CompetenceType == 2)
                 .Select(x => x.Title)
                 .GroupBy(x => x.ToUpperInvariant())
                 .Select(group => @group.First())
-                .Except(framework.CombinedQualification)
+                .Except(qualificationSet.Combined)
                 .ToList();
+
+            return qualificationSet;
         }
 
         private static ICollection<FrameworkMetaData> FilterFrameworks(IEnumerable<FrameworkMetaData> frameworks)
@@ -195,6 +203,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             public ICollection<FrameworkAimMetaData> FrameworkAims { get; set; }
             public ICollection<FrameworkComponentTypeMetaData> FrameworkContentTypes { get; set; }
             public ICollection<LearningDeliveryMetaData> LearningDeliveries { get; set; }
+        }
+
+        private struct CategorisedQualifications
+        {
+            public ICollection<string> Competency { get; set; }
+            public ICollection<string> Knowledge { get; set; }
+            public ICollection<string> Combined { get; set; }
         }
     }
 }
