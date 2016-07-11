@@ -64,21 +64,15 @@
                     @GetShortlistLink(@Model.ProviderId, @Model.Apprenticeship.Code, @Model.Location.LocationId, @Model.IsShortlisted)
                 </div>
 
-            @using (Html.BeginForm("StandardResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
-            {
-                <div class="related-container">
-                    <aside class="related">
-                        <h2 class="heading-medium">
-                            Training provider quality assessment
-                        </h2>
-                        @GetSatisfactionsHtml()
-                        <p>
-                        Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers">Skills Funding Agency FE Choices</a>
-                        </p>
-                    </aside>
-                </div>
-            }
-
+            <div class="related-container">
+                <aside class="related">
+                    <h2 class="heading-medium">
+                        Training provider quality assessment
+                    </h2>
+                    @GetSatisfactionsHtml()
+                    @ShowSatisfactionSource()
+                </aside>
+            </div>
         </div>
     </div>
     <div class="grid-row">
@@ -104,6 +98,16 @@
     </div>
 
 </main>
+
+@helper ShowSatisfactionSource()
+{
+    if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+    {
+        <p class="satisfaction-source">
+            Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
+        </p>
+    }
+}
 
 @helper ShowTrainingLocation(string title)
 {

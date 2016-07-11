@@ -152,8 +152,8 @@
                             bs => bs
                                 .Match(m => m
                                     .Field(f => f.Title)
-                                    //.PrefixLength(1)
-                                    //.Fuzziness(Fuzziness.Auto)
+                                    .PrefixLength(3)
+                                    .Fuzziness(Fuzziness.Auto)
                                     .Query(formattedKeywords)),
                                     bs => bs
                                     .Bool(bsb => bsb
@@ -161,18 +161,26 @@
                                         bsbs => bsbs
                                             .Match(ms => ms
                                                 .Field(msf => msf.JobRoles)
+                                                .PrefixLength(3)
+                                                .Fuzziness(Fuzziness.Auto)
                                                 .Query(formattedKeywords)),
                                             bsbs => bsbs
                                             .Match(ms => ms
                                                 .Field(msf => msf.Keywords)
+                                                .PrefixLength(3)
+                                                .Fuzziness(Fuzziness.Auto)
                                                 .Query(formattedKeywords)),
                                             bsbs => bsbs
                                             .Match(ms => ms
                                                 .Field(msf => msf.JobRoleItems.First().Description)
+                                                .PrefixLength(3)
+                                                .Fuzziness(Fuzziness.Auto)
                                                 .Query(formattedKeywords)),
                                             bsbs => bsbs
                                             .Match(ms => ms
                                                 .Field(msf => msf.JobRoleItems.First().Title)
+                                                .PrefixLength(3)
+                                                .Fuzziness(Fuzziness.Auto)
                                                 .Query(formattedKeywords)),
                                             bsbs => bsbs)))))
                     .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
