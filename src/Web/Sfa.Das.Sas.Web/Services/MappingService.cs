@@ -84,6 +84,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.StandardCode, y => y.Ignore())
                 .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftemap
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
+                .ForMember(x => x.LocationId, y => y.Ignore())
+                .ForMember(x => x.LocationName, y => y.Ignore())
+                .ForMember(x => x.Address, y => y.Ignore())
                 ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
@@ -93,8 +96,11 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Level, y => y.Ignore())
                 .ForMember(x => x.FrameworkId, y => y.Ignore())
                 .ForMember(x => x.FrameworkCode, y => y.Ignore())
-                .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftemap
+                .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftermap
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
+                .ForMember(x => x.LocationId, y => y.Ignore())
+                .ForMember(x => x.LocationName, y => y.Ignore())
+                .ForMember(x => x.Address, y => y.Ignore())
                 ;
 
             cfg.CreateMap<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -103,6 +109,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
+                .ForMember(x => x.LocationId, y => y.MapFrom(z => z.MatchingLocationId))
+                .ForMember(x => x.LocationName, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).LocationName))
+                .ForMember(x => x.Address, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).Address))
                 ;
 
             cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
@@ -111,6 +120,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
+                .ForMember(x => x.LocationId, y => y.MapFrom(z => z.MatchingLocationId))
+                .ForMember(x => x.LocationName, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).LocationName))
+                .ForMember(x => x.Address, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).Address))
                 ;
 
             // Provider detail page

@@ -6,13 +6,18 @@ using Sfa.Das.Sas.Indexer.ApplicationServices.Services;
 using Sfa.Das.Sas.Indexer.Core.Exceptions;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models.Provider;
-using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 {
+    using System;
+    using System.Linq;
+
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
+        private readonly Func<DeliveryInformation, bool> _onlyAtEmployer = x => x.DeliveryModes.All(xx => xx == ModesOfDelivery.OneHundredPercentEmployer);
+        private readonly Func<DeliveryInformation, bool> _anyNotAtEmployer = x => x.DeliveryModes.Any(xx => xx != ModesOfDelivery.OneHundredPercentEmployer);
+
         public ElasticsearchProviderIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog log)
             : base(elasticsearchClient, elasticsearchMapper, log, "Provider")
         {
@@ -20,8 +25,10 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public override void CreateIndex(string indexName)
         {
-            var response = Client.CreateIndex(indexName, i => i
-                .Mappings(ms => ms
+            var response = Client.CreateIndex(
+                indexName,
+                i => i.Mappings(
+                    ms => ms
                     .Map<StandardProvider>(m => m.AutoMap())
                     .Map<FrameworkProvider>(m => m.AutoMap())));
 
@@ -45,80 +52,54 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         private List<Task<IBulkResponse>> IndexFrameworks(string indexName, ICollection<Provider> indexEntries)
         {
-            var tasks = new List<Task<IBulkResponse>>();
-            int count = 0;
-            var bulkDescriptor = CreateBulkDescriptor(indexName);
+            var example = new BulkProviderClient(indexName, Client);
 
             foreach (var provider in indexEntries)
             {
                 foreach (var framework in provider.Frameworks)
                 {
-                    foreach (var location in framework.DeliveryLocations)
+                    var deliveryLocationsOnly100 = framework.DeliveryLocations.Where(_onlyAtEmployer).ToArray();
+                    if (deliveryLocationsOnly100.Any())
                     {
-                        // Add standard to descriptor
+                        var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, deliveryLocationsOnly100);
+                        example.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                    }
+
+                    foreach (var location in framework.DeliveryLocations.Where(_anyNotAtEmployer))
+                    {
                         var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, location);
-                        bulkDescriptor.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
-                        count++;
-
-                        if (HaveReachedBatchLimit(count))
-                        {
-                            // Execute batch
-                            tasks.Add(Client.BulkAsync(bulkDescriptor));
-
-                            // New descriptor
-                            bulkDescriptor = CreateBulkDescriptor(indexName);
-
-                            count = 0;
-                        }
+                        example.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
                     }
                 }
             }
 
-            if (count > 0)
-            {
-                tasks.Add(Client.BulkAsync(bulkDescriptor));
-            }
-
-            return tasks;
+            return example.GetTasks();
         }
 
         private List<Task<IBulkResponse>> IndexStandards(string indexName, IEnumerable<Provider> indexEntries)
         {
-            var tasks = new List<Task<IBulkResponse>>();
-            int count = 0;
-            var bulkDescriptor = CreateBulkDescriptor(indexName);
+            var example = new BulkProviderClient(indexName, Client);
 
             foreach (var provider in indexEntries)
             {
                 foreach (var standard in provider.Standards)
                 {
-                    foreach (var location in standard.DeliveryLocations)
+                    var deliveryLocationsOnly100 = standard.DeliveryLocations.Where(_onlyAtEmployer).ToArray();
+                    if (deliveryLocationsOnly100.Any())
                     {
-                        // Add standard to descriptor
+                        var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, deliveryLocationsOnly100);
+                        example.Create<StandardProvider>(c => c.Document(standardProvider));
+                    }
+
+                    foreach (var location in standard.DeliveryLocations.Where(_anyNotAtEmployer))
+                    {
                         var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, location);
-                        bulkDescriptor.Create<StandardProvider>(c => c.Document(standardProvider));
-                        count++;
-
-                        if (HaveReachedBatchLimit(count))
-                        {
-                            // Execute batch
-                            tasks.Add(Client.BulkAsync(bulkDescriptor));
-
-                            // New descriptor
-                            bulkDescriptor = CreateBulkDescriptor(indexName);
-
-                            count = 0;
-                        }
+                        example.Create<StandardProvider>(c => c.Document(standardProvider));
                     }
                 }
             }
 
-            if (count > 0)
-            {
-                tasks.Add(Client.BulkAsync(bulkDescriptor));
-            }
-
-            return tasks;
+            return example.GetTasks();
         }
     }
 }

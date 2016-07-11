@@ -43,8 +43,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                         Postcode = "AB12 3ED",
                         Lat = 123,
                         Long = 243
-                    },
-                    Distance = 2134
+                    }
                 },
                 Provider = new Provider
                 {
@@ -71,7 +70,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.Location.LocationId.Should().Be(providerResult.Location.LocationId);
             viewModel.Location.LocationName.Should().BeSameAs(providerResult.Location.LocationName);
             viewModel.Location.Address.Should().BeSameAs(providerResult.Location.Address);
-            viewModel.Location.Distance.Should().Be(providerResult.Location.Distance);
             viewModel.Location.Address.Should().BeSameAs(providerResult.Location.Address);
 
             viewModel.Name.Should().BeSameAs(providerResult.Provider.Name);

@@ -7,9 +7,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         public string Id { get; set; }
 
-        public string UkPrn { get; set; }
+        public string Ukprn { get; set; }
 
-        public string Name { get; set; }
+        public string ProviderName { get; set; }
 
         public string FrameworkId { get; set; }
 
@@ -18,10 +18,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public int PathwayCode { get; set; }
 
         public int Level { get; set; }
-
-        public int LocationId { get; set; }
-
-        public string LocationName { get; set; }
 
         public string MarketingName { get; set; }
 
@@ -41,12 +37,14 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public string Website { get; set; }
 
-        public Address Address { get; set; }
+        public IEnumerable<TrainingLocation> TrainingLocations { get; set; }
 
         public double Distance { get; set; }
 
         public double? EmployerSatisfaction { get; set; }
 
         public double? LearnerSatisfaction { get; set; }
+
+        public int? MatchingLocationId { get; set; }
     }
 }

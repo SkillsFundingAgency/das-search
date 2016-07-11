@@ -49,6 +49,17 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             return standards;
         }
 
+        public List<FrameworkMetaData> GetListOfCurrentFrameworks()
+        {
+            var zipFilePath = GetZipFilePath();
+
+            var zipStream = _httpGetFile.GetFile(zipFilePath);
+
+            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameFrameworks);
+
+            return _csvService.ReadFrameworksFromStream(fileContent);
+        }
+
         private string ReadStandardCsvFile()
         {
             var zipFilePath = GetZipFilePath();
@@ -61,17 +72,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             _logger.Debug($"Extracted contrent. Length: {fileContent.Length}");
 
             return fileContent;
-        }
-
-        public List<FrameworkMetaData> GetListOfCurrentFrameworks()
-        {
-            var zipFilePath = GetZipFilePath();
-
-            var zipStream = _httpGetFile.GetFile(zipFilePath);
-
-            string fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameFrameworks);
-
-            return _csvService.ReadFrameworksFromStream(fileContent);
         }
 
         private string GetZipFilePath()

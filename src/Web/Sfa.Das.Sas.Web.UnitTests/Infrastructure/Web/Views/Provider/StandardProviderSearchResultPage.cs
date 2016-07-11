@@ -81,7 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Distance = 1,
                 Address = new Address(),
@@ -91,7 +91,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var item2 = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 2",
+                ProviderName = "Provider 2",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -126,7 +126,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -156,7 +156,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -186,7 +186,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -216,7 +216,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -246,7 +246,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer", "BlockRelease" },
                 Address = new Address
                 {
@@ -285,7 +285,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Address = new Address
                 {
@@ -324,7 +324,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 3,
                 Address = new Address
@@ -364,7 +364,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new StandardProviderInformation();
             var item = new StandardProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Address = new Address(),
                 EmployerSatisfactionMessage = "87%",

@@ -8,7 +8,7 @@
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null)
+                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null)
                 </h2>
             </header>
 

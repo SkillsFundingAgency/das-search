@@ -8,7 +8,7 @@
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
+                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
                 </h2>
             </header>
 
@@ -17,7 +17,10 @@
                 <dd class="distance">@item.Distance miles away</dd>
                 @if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
                 {
-                    <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.Town @item.Address.County @item.Address.Postcode</dd>
+                    if (@item.Address != null)
+                     {
+                        <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.Town @item.Address.County @item.Address.Postcode</dd>
+                     }
                 }
 
                 @RenderDeliveryOptions(item)

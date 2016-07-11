@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string UkPrn { get; set; }
 
-        public string Name { get; set; }
+        public string ProviderName { get; set; }
 
         public int StandardCode { get; set; }
 

@@ -7,35 +7,37 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     public class ProviderMapping : IProviderMapping
     {
-        ApprenticeshipDetails IProviderMapping.MapToProvider(StandardProviderSearchResultsItem item)
+        ApprenticeshipDetails IProviderMapping.MapToProvider(StandardProviderSearchResultsItem item, int locationId)
         {
             if (item == null)
             {
                 return null;
             }
 
-            var details = MapFromInterface(item);
+            var details = MapFromInterface(item, locationId);
             details.Product.Apprenticeship.Code = item.StandardCode;
 
             return details;
         }
 
-        public ApprenticeshipDetails MapToProvider(FrameworkProviderSearchResultsItem item)
+        public ApprenticeshipDetails MapToProvider(FrameworkProviderSearchResultsItem item, int locationId)
         {
-            var details = MapFromInterface(item);
+            var details = MapFromInterface(item, locationId);
 
             details.Product.Apprenticeship.Code = int.Parse(item.FrameworkId);
 
             return details;
         }
 
-        private static ApprenticeshipDetails MapFromInterface(IApprenticeshipProviderSearchResultsItem item)
+        private static ApprenticeshipDetails MapFromInterface(IApprenticeshipProviderSearchResultsItem item, int locationId)
         {
             var providerIdString = item.Id
                                        .Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)
                                        .First();
 
             var providerId = int.Parse(providerIdString);
+
+            var matchingLocation = item.TrainingLocations.Single(x => x.LocationId == locationId);
 
             return new ApprenticeshipDetails
             {
@@ -54,16 +56,15 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 },
                 Location = new Location
                 {
-                    LocationId = item.LocationId,
-                    LocationName = item.LocationName,
-                    Address = item.Address,
-                    Distance = item.Distance
+                    LocationId = matchingLocation.LocationId,
+                    LocationName = matchingLocation.LocationName,
+                    Address = matchingLocation.Address
                 },
                 Provider = new Provider
                 {
                     Id = providerId,
-                    Name = item.Name,
-                    UkPrn = item.UkPrn,
+                    Name = item.ProviderName,
+                    UkPrn = item.Ukprn,
                     ContactInformation = new ContactInformation
                     {
                         Phone = item.Phone,

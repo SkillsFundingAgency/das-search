@@ -52,14 +52,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class FrameworkProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel>
     {
 
-#line 40 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 43 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult RenderDeliveryOptions(FrameworkProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
 
 
@@ -68,7 +68,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <dt>Training options:</dt>\r\n");
 
 
-#line 43 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 
@@ -81,7 +81,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"deliveryOptions\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
   WriteTo(__razor_helper_writer, item.DeliveryOptionsMessage);
 
 
@@ -90,26 +90,26 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 50 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 51 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
     if (Is<ShortlistingFeature>.Enabled)
     {
@@ -122,7 +122,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-#line 55 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 58 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvider", "ShortList",
                     new { apprenticeshipId, providerId, locationId },
                     new
@@ -140,7 +140,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvide
 #line default
 #line hidden
 
-#line 66 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 69 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                       
         }
         else
@@ -150,7 +150,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvide
 #line default
 #line hidden
 
-#line 70 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 73 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvider", "ShortList",
                     new { apprenticeshipId, providerId, locationId },
                     new
@@ -168,7 +168,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvide
 #line default
 #line hidden
 
-#line 81 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 84 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                       
         }
     }
@@ -178,7 +178,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvide
 #line hidden
 });
 
-#line 84 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 87 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -212,7 +212,7 @@ WriteLiteral("                    ");
 
             
             #line 11 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null));
+               Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null));
 
             
             #line default
@@ -246,19 +246,21 @@ WriteLiteral(" miles away</dd>\r\n");
             #line 18 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                  if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
                 {
+                    if (@item.Address != null)
+                     {
 
             
             #line default
             #line hidden
-WriteLiteral("                    <dd");
+WriteLiteral("                        <dd");
 
 WriteLiteral(" class=\"address\"");
 
 WriteLiteral(">");
 
             
-            #line 20 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                   Write(item.LocationName);
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                       Write(item.LocationName);
 
             
             #line default
@@ -266,8 +268,8 @@ WriteLiteral(">");
 WriteLiteral(" ");
 
             
-            #line 20 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                      Write(item.Address.Address1);
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                          Write(item.Address.Address1);
 
             
             #line default
@@ -275,8 +277,8 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 20 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                             Write(item.Address.Address2);
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                 Write(item.Address.Address2);
 
             
             #line default
@@ -284,8 +286,8 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 20 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                    Write(item.Address.Town);
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                                        Write(item.Address.Town);
 
             
             #line default
@@ -293,8 +295,8 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 20 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                                       Write(item.Address.County);
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                                                           Write(item.Address.County);
 
             
             #line default
@@ -302,8 +304,8 @@ WriteLiteral(" ");
 WriteLiteral(" ");
 
             
-            #line 20 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                                                            Write(item.Address.Postcode);
+            #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                                                                                                                Write(item.Address.Postcode);
 
             
             #line default
@@ -311,7 +313,8 @@ WriteLiteral(" ");
 WriteLiteral("</dd>\r\n");
 
             
-            #line 21 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                     }
                 }
 
             
@@ -322,7 +325,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 23 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
            Write(RenderDeliveryOptions(item));
 
             
@@ -337,7 +340,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 27 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 30 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(item.EmployerSatisfactionMessage);
 
             
@@ -353,7 +356,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 31 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 34 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(item.LearnerSatisfactionMessage);
 
             
@@ -368,7 +371,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 35 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
            Write(GetShortlistLink(item.Id, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted));
 
             
@@ -377,7 +380,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </article>\r\n");
 
             
-            #line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     }
 
             

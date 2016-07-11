@@ -169,7 +169,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -200,7 +200,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -231,7 +231,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -262,7 +262,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Distance = 0.3,
                 Website = "http://www.trainingprovider.co.uk",
@@ -274,7 +274,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var item2 = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 2",
+                ProviderName = "Provider 2",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -309,7 +309,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
@@ -340,7 +340,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer", "BlockRelease" },
                 Distance = 3,
                 Website = "http://www.trainingprovider.co.uk",
@@ -381,7 +381,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Distance = 3,
                 Website = "http://www.trainingprovider.co.uk",
@@ -433,7 +433,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Email = "test@test.com",
                 ContactUsUrl = "www.contactus.com",
                 ApprenticeshipInfoUrl = "www.apprenticeshipinfourl.com",
-                Name = "Provider 1",
+                ProviderName = "Provider 1",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1,
                 Website = "http://www.trainingprovider.co.uk",

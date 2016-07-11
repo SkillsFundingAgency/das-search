@@ -141,6 +141,17 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
         }
 
         [Test]
+        public void ShouldCreateFrameworkProviderDocumentWithListOfProviderLocations()
+        {
+            var mapper = new ElasticsearchMapper(null);
+            var testProvider = GenerateTestProvider();
+
+            var document = mapper.CreateFrameworkProviderDocument(testProvider, testProvider.Frameworks.First(), testProvider.Frameworks.First().DeliveryLocations);
+
+            document.Id.Should().Be("4556-9941122-f100PercentEmployer");
+        }
+
+        [Test]
         public void ShouldCreateValidFrameworkProviderDocument()
         {
             var mapper = new ElasticsearchMapper(null);
@@ -154,10 +165,10 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             document.Level.Should().Be(4);
 
             document.Ukprn.Should().Be(4556);
-            document.Name.Should().Be("Test Provider");
+            document.ProviderName.Should().Be("Test Provider");
             document.Id.Should().Be("4556-9941122-77");
-            document.LocationId.Should().Be(77);
-            document.LocationName.Should().Be("Framework Test Location");
+            document.TrainingLocations.First().LocationId.Should().Be(77);
+            document.TrainingLocations.First().LocationName.Should().Be("Framework Test Location");
             document.ProviderMarketingInfo.Should().Be("Provider Marketing");
             document.ApprenticeshipMarketingInfo.Should().Be("Framework Apprenticeship Marketing");
             document.Phone.Should().Be("12324-5678");
@@ -168,16 +179,28 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             document.EmployerSatisfaction.Should().Be(9.2);
             document.DeliveryModes.Should().BeEquivalentTo(new string[] { "BlockRelease", "DayRelease" });
             document.Website.Should().Be("http://location-site");
-            document.Address.Address1.Should().Be("Framework Test Address1");
-            document.Address.Address2.Should().Be("Framework Test Address2");
-            document.Address.Town.Should().Be("Framework Test Town");
-            document.Address.County.Should().Be("Framework Test County");
-            document.Address.PostCode.Should().Be("TE3 5ES");
-            document.LocationPoint.Latitude.Should().Be(53.213);
-            document.LocationPoint.Longitude.Should().Be(-50.123);
-            document.Location.Coordinates.Latitude.Should().Be(53.213);
-            document.Location.Coordinates.Longitude.Should().Be(-50.123);
-            document.Location.Radius.Should().Be("25mi");
+            document.TrainingLocations.First().Address.Address1.Should().Be("Framework Test Address1");
+            document.TrainingLocations.First().Address.Address2.Should().Be("Framework Test Address2");
+            document.TrainingLocations.First().Address.Town.Should().Be("Framework Test Town");
+            document.TrainingLocations.First().Address.County.Should().Be("Framework Test County");
+            document.TrainingLocations.First().Address.PostCode.Should().Be("TE3 5ES");
+
+            document.TrainingLocations.FirstOrDefault()?.LocationPoint.Latitude.Should().Be(53.213);
+            document.TrainingLocations.FirstOrDefault()?.LocationPoint.Longitude.Should().Be(-50.123);
+            document.TrainingLocations.FirstOrDefault()?.Location.Coordinates.Latitude.Should().Be(53.213);
+            document.TrainingLocations.FirstOrDefault()?.Location.Coordinates.Longitude.Should().Be(-50.123);
+            document.TrainingLocations.FirstOrDefault()?.Location.Radius.Should().Be("25mi");
+        }
+
+        [Test]
+        public void ShouldCreateStandardProviderDocumentWithListOfProviderLocations()
+        {
+            var mapper = new ElasticsearchMapper(null);
+            var testProvider = GenerateTestProvider();
+
+            var document = mapper.CreateStandardProviderDocument(testProvider, testProvider.Standards.First(), testProvider.Frameworks.First().DeliveryLocations);
+
+            document.Id.Should().Be("4556-101-s100PercentEmployer");
         }
 
         [Test]
@@ -190,10 +213,10 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             document.StandardCode.Should().Be(101);
             document.Ukprn.Should().Be(4556);
-            document.Name.Should().Be("Test Provider");
+            document.ProviderName.Should().Be("Test Provider");
             document.Id.Should().Be("4556-101-98");
-            document.LocationId.Should().Be(98);
-            document.LocationName.Should().Be("Standard Test Location");
+            document.TrainingLocations.First().LocationId.Should().Be(98);
+            document.TrainingLocations.First().LocationName.Should().Be("Standard Test Location");
             document.ProviderMarketingInfo.Should().Be("Provider Marketing");
             document.ApprenticeshipMarketingInfo.Should().Be("Standard Apprenticeship Marketing");
             document.Phone.Should().Be("5555-5678");
@@ -204,16 +227,17 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             document.EmployerSatisfaction.Should().Be(9.2);
             document.DeliveryModes.Should().BeEquivalentTo(new string[] { "BlockRelease", "DayRelease" });
             document.Website.Should().Be("http://location-site");
-            document.Address.Address1.Should().Be("Standard Test Address1");
-            document.Address.Address2.Should().Be("Standard Test Address2");
-            document.Address.Town.Should().Be("Standard Test Town");
-            document.Address.County.Should().Be("Standard Test County");
-            document.Address.PostCode.Should().Be("TE4 5ES");
-            document.LocationPoint.Latitude.Should().Be(54.213);
-            document.LocationPoint.Longitude.Should().Be(-52.123);
-            document.Location.Coordinates.Latitude.Should().Be(54.213);
-            document.Location.Coordinates.Longitude.Should().Be(-52.123);
-            document.Location.Radius.Should().Be("30mi");
+            document.TrainingLocations.First().Address.Address1.Should().Be("Standard Test Address1");
+            document.TrainingLocations.First().Address.Address2.Should().Be("Standard Test Address2");
+            document.TrainingLocations.First().Address.Town.Should().Be("Standard Test Town");
+            document.TrainingLocations.First().Address.County.Should().Be("Standard Test County");
+            document.TrainingLocations.First().Address.PostCode.Should().Be("TE4 5ES");
+
+            document.TrainingLocations.FirstOrDefault()?.LocationPoint.Latitude.Should().Be(54.213);
+            document.TrainingLocations.FirstOrDefault()?.LocationPoint.Longitude.Should().Be(-52.123);
+            document.TrainingLocations.FirstOrDefault()?.Location.Coordinates.Latitude.Should().Be(54.213);
+            document.TrainingLocations.FirstOrDefault()?.Location.Coordinates.Longitude.Should().Be(-52.123);
+            document.TrainingLocations.FirstOrDefault()?.Location.Radius.Should().Be("30mi");
         }
 
         [Test]

@@ -35,7 +35,8 @@
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
-                var skip = (page - 1) * take;
+                var skip = CalculateSkip(page, take);
+
                 var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
                 if (results.ApiCall?.HttpStatusCode != 200)
@@ -70,7 +71,8 @@
 
             using (_profiler.CreateStep("Search for providers for standard"))
             {
-                var skip = (page - 1) * take;
+                var skip = CalculateSkip(page, take);
+
                 var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
 
                 if (results.ApiCall?.HttpStatusCode != 200)
@@ -78,7 +80,7 @@
                     throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
                 }
 
-                var documents = results.Hits.Select(hit => MapToStandardProviderSearchResultsItem(hit)).ToList();
+                var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
@@ -103,7 +105,7 @@
         {
             using (_profiler.CreateStep("Search for providers for framework"))
             {
-                var skip = (page - 1) * take;
+                var skip = CalculateSkip(page, take);
 
                 var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
 
@@ -114,7 +116,7 @@
                     throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
                 }
 
-                var documents = results.Hits.Select(hit => MapToFrameworkProviderSearhResultsItem(hit)).ToList();
+                var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
@@ -139,7 +141,7 @@
         {
             using (_profiler.CreateStep("Search for providers for framework"))
             {
-                var skip = (page - 1) * take;
+                var skip = CalculateSkip(page, take);
 
                 var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
 
@@ -150,7 +152,7 @@
                     throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
                 }
 
-                var documents = results.Hits.Select(hit => MapToFrameworkProviderSearhResultsItem(hit)).ToList();
+                var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
 
                 var trainingOptionsAggregation = new Dictionary<string, long?>();
 
@@ -176,22 +178,21 @@
             return new StandardProviderSearchResultsItem
             {
                 Id = hit.Source.Id,
-                UkPrn = hit.Source.UkPrn,
-                Address = hit.Source.Address,
+                Ukprn = hit.Source.Ukprn,
                 ContactUsUrl = hit.Source.ContactUsUrl,
                 DeliveryModes = hit.Source.DeliveryModes,
                 Email = hit.Source.Email,
                 EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
                 LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
-                LocationId = hit.Source.LocationId,
-                LocationName = hit.Source.LocationName,
                 ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
-                Name = hit.Source.Name,
+                ProviderName = hit.Source.ProviderName,
                 Phone = hit.Source.Phone,
                 StandardCode = hit.Source.StandardCode,
                 ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
                 Website = hit.Source.Website,
-                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
+                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                TrainingLocations = hit.Source.TrainingLocations,
+                MatchingLocationId = hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId
             };
         }
 
@@ -200,17 +201,14 @@
             return new FrameworkProviderSearchResultsItem
             {
                 Id = hit.Source.Id,
-                UkPrn = hit.Source.UkPrn,
-                Address = hit.Source.Address,
+                Ukprn = hit.Source.Ukprn,
                 ContactUsUrl = hit.Source.ContactUsUrl,
                 DeliveryModes = hit.Source.DeliveryModes,
                 Email = hit.Source.Email,
                 EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
                 LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
-                LocationId = hit.Source.LocationId,
-                LocationName = hit.Source.LocationName,
                 ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
-                Name = hit.Source.Name,
+                ProviderName = hit.Source.ProviderName,
                 Phone = hit.Source.Phone,
                 FrameworkId = hit.Source.FrameworkId,
                 FrameworkCode = hit.Source.FrameworkCode,
@@ -218,20 +216,16 @@
                 ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
                 Level = hit.Source.Level,
                 Website = hit.Source.Website,
-                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0
+                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                TrainingLocations = hit.Source.TrainingLocations,
+                MatchingLocationId = hit?.InnerHits != null ? hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId : (int?)null
             };
-        }
-
-        private static QueryContainer QueryForProvidersOfApprenticeshipCoveringLocation<T>(Expression<Func<T, object>> selector, string apprenticeshipIdentifier, Coordinate location, QueryContainerDescriptor<T> q)
-            where T : class, IApprenticeshipProviderSearchResultsItem
-        {
-            return q.Bool(b => b.Filter(FilterByApprenticeshipId(selector, apprenticeshipIdentifier), FilterByLocation<T>(location)));
         }
 
         private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByLocation<T>(Coordinate location)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
-            return f => f.GeoShapePoint(gp => gp.Field("location").Coordinates(location.Lon, location.Lat));
+            return f => f.GeoShapePoint(gp => gp.Field(fd => fd.TrainingLocations.First().Location).Coordinates(location.Lon, location.Lat));
         }
 
         private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByApprenticeshipId<T>(Expression<Func<T, object>> selector, string apprenticeshipIdentifier)
@@ -254,11 +248,22 @@
                         .Terms(deliveryModes));
         }
 
-        private static SortDescriptor<T> SortByDistanceFromGivenLocation<T>(Coordinate location, SortDescriptor<T> descriptor)
+        private static Func<SortDescriptor<T>, IPromise<IList<ISort>>> NestedSortByDistanceFromGivenLocation<T>(Coordinate location)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
-            return descriptor.GeoDistance(g => g
-                .Field("locationPoint")
+            return f => f.GeoDistance(g => g
+                .Field(fd => fd.TrainingLocations.First().LocationPoint)
+                .PinTo(new GeoLocation(location.Lat, location.Lon))
+                .Unit(DistanceUnit.Miles)
+                .Ascending());
+        }
+
+        private static Func<SortDescriptor<T>, IPromise<IList<ISort>>> SortByDistanceFromGivenLocation<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.GeoDistance(g => g
+                .NestedPath(x => x.TrainingLocations)
+                .Field(fd => fd.TrainingLocations.First().LocationPoint)
                 .PinTo(new GeoLocation(location.Lat, location.Lon))
                 .Unit(DistanceUnit.Miles)
                 .Ascending());
@@ -271,8 +276,11 @@
                 new SearchDescriptor<T>()
                     .Index(_applicationSettings.ProviderIndexAlias)
                     .Size(1000)
-                    .Query(q => QueryForProvidersOfApprenticeshipCoveringLocation(selector, code, location, q))
-                    .Sort(ss => SortByDistanceFromGivenLocation(location, ss))
+                    .Query(q => q
+                        .Bool(ft => ft
+                            .Filter(FilterByApprenticeshipId(selector, code))
+                            .Must(NestedLocationsQuery<T>(location))))
+                    .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -286,12 +294,45 @@
                 new SearchDescriptor<T>()
                     .Index(_applicationSettings.ProviderIndexAlias)
                     .Size(1000)
-                    .Query(q => q.Bool(b => b.Filter(FilterByApprenticeshipId(selector, code))))
-                    .Sort(ss => SortByDistanceFromGivenLocation(location, ss))
+                    .Query(q => q
+                        .Bool(b => b
+                            .Filter(FilterByApprenticeshipId(selector, code))
+                            .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
+                    .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
             return descriptor;
+        }
+
+        private Func<QueryContainerDescriptor<T>, QueryContainer> NestedLocationsQuery<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.Nested(n => n
+                .InnerHits(h => h
+                    .Size(1)
+                    .Sort(NestedSortByDistanceFromGivenLocation<T>(location)))
+                .Path(p => p.TrainingLocations)
+                .Query(q => q
+                    .Bool(b => b
+                        .Filter(FilterByLocation<T>(location)))));
+        }
+
+        private Func<QueryContainerDescriptor<T>, QueryContainer> NestedLocationsQueryWithoutLocationMatch<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.Nested(n => n
+                .InnerHits(h => h
+                    .Size(1)
+                    .Sort(NestedSortByDistanceFromGivenLocation<T>(location)))
+                .Path(p => p.TrainingLocations)
+                .Query(q => q.MatchAll()));
+        }
+
+        private int CalculateSkip(int page, int take)
+        {
+            var skip = (page - 1) * take;
+            return skip < 0 ? 0 : skip;
         }
     }
 }

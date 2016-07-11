@@ -120,6 +120,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Infrastructure\CourseDirectory\CourseDirectoryClientTest.cs" />
     <Compile Include="Infrastructure\Elasticsearch\BaseElasticIndexMaintainerTests.cs" />
+    <Compile Include="Infrastructure\Elasticsearch\BulkProviderClientTests.cs" />
     <Compile Include="Infrastructure\Elasticsearch\ElasticsearchApprenticeshipIndexMaintainerTests.cs" />
     <Compile Include="Infrastructure\Elasticsearch\ElasticsearchMapperTest.cs" />
     <Compile Include="Infrastructure\Elasticsearch\ElasticsearchProviderIndexMaintainerTests.cs" />

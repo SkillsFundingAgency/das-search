@@ -9,6 +9,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {
+    using Sfa.Das.Sas.Core.Domain.Model;
+
     [TestFixture]
     public sealed class ForMappingProviderSearchResponseToViewModel
     {
@@ -16,6 +18,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
         public void ShouldFullyPopulateTheMappedViewModel()
         {
             var mapper = new MappingService(null);
+
+            var trainingLocations = new List<TrainingLocation> { new TrainingLocation { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" } } };
 
             var results = new ProviderStandardSearchResults
             {
@@ -27,9 +31,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 SelectedTrainingOptions = new List<string> { "dayrelease" },
                 Hits = new List<IApprenticeshipProviderSearchResultsItem>
                 {
-                    new StandardProviderSearchResultsItem(),
-                    new StandardProviderSearchResultsItem(),
-                    new StandardProviderSearchResultsItem()
+                    new StandardProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1 },
+                    new StandardProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1 },
+                    new StandardProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1 }
                 },
                 TotalResults = 105,
                 ResultsToTake = 10,
@@ -67,6 +71,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.TotalResultsForCountry.Should().Be(1000);
             viewModel.TotalResults.Should().Be(105);
             viewModel.HasError.Should().BeTrue();
+            viewModel.Hits.First().LocationId.Should().Be(1);
+            viewModel.Hits.First().LocationName.Should().Be("Location1");
+            viewModel.Hits.First().Address.Postcode.Should().Be("N17");
         }
     }
 }

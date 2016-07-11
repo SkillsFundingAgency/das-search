@@ -7,7 +7,5 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public string LocationName { get; set; }
 
         public Address Address { get; set; }
-
-        public double Distance { get; set; }
     }
 }

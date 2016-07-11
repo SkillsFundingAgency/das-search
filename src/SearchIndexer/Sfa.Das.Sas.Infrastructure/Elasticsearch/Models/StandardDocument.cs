@@ -8,7 +8,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
     public sealed class StandardDocument : ApprenticeshipDocument, IIndexEntry
     {
-
         public string AssessmentPlanPdf { get; set; }
 
         public string EntryRequirements { get; set; }
