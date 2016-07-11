@@ -732,9 +732,9 @@ WriteLiteralTo(__razor_helper_writer, "                    </ul>\r\n\r\n        
 
 WriteLiteralTo(__razor_helper_writer, " class=\"panel panel-border-narrow\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n                            <p>Apprenticeships are set a different levels of d" +
-"ifficulty from the equivalent of GCSE (level 2) up to postgraduate (level 8)</p>" +
-"\r\n                            <p><a");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                            <p>Apprenticeships are set at different levels of " +
+"difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 8)</p" +
+">\r\n                            <p><a");
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/what-different-qualification-levels-mean/overview\"");
 
