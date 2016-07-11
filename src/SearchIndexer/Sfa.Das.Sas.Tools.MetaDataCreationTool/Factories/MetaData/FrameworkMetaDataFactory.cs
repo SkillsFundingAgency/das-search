@@ -5,7 +5,7 @@ using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
 {
-    public class FrameworkMetaDataFactory : MetaDataFactoryBase, IMetaDataFactory
+    public class FrameworkMetaDataFactory : IMetaDataFactory
     {
         public Type MetaDataType => typeof(FrameworkMetaData);
 
@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
                 return null;
             }
 
-            var frameworkCode = TryParse(values[0]);
+            var frameworkCode = values[0].RemoveQuotationMark().SafeParseInt();
 
             if (frameworkCode <= 0)
             {
@@ -26,13 +26,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
             return new FrameworkMetaData
             {
                 FworkCode = frameworkCode,
-                ProgType = TryParse(values[1]),
-                PwayCode = TryParse(values[2]),
+                ProgType = values[1].RemoveQuotationMark().SafeParseInt(),
+                PwayCode = values[2].RemoveQuotationMark().SafeParseInt(),
                 PathwayName = values[3].RemoveQuotationMark(),
-                EffectiveFrom = TryGetDate(values[4].RemoveQuotationMark()) ?? DateTime.MinValue,
-                EffectiveTo = TryGetDate(values[5].RemoveQuotationMark()),
-                SectorSubjectAreaTier1 = TryParseDouble(values[6]),
-                SectorSubjectAreaTier2 = TryParseDouble(values[7]),
+                EffectiveFrom = values[4].RemoveQuotationMark().SafeParseDate() ?? DateTime.MinValue,
+                EffectiveTo = values[5].RemoveQuotationMark().SafeParseDate(),
+                SectorSubjectAreaTier1 = values[6].RemoveQuotationMark().SafeParseDouble(),
+                SectorSubjectAreaTier2 = values[7].RemoveQuotationMark().SafeParseDouble(),
                 NasTitle = values[9].RemoveQuotationMark()
             };
         }

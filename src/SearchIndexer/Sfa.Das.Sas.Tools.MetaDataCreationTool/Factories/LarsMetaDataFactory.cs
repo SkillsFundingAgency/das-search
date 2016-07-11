@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories
 
             if (!_metaDataFactories.ContainsKey(typeof(T)))
             {
-                return null;
+                throw new NotSupportedException("Meta data type not supported");
             }
 
             var factory = _metaDataFactories[typeof(T)];

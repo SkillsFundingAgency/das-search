@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -54,6 +55,12 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Factories
 
             // Assert
             metaData.Should().BeNull();
+        }
+
+        [Test]
+        public void ShouldThrowExceptionIfCreatingUpsupportedType()
+        {
+            Assert.Throws<NotSupportedException>(() => _sut.Create<string>(new[] { "test" }));
         }
     }
 }

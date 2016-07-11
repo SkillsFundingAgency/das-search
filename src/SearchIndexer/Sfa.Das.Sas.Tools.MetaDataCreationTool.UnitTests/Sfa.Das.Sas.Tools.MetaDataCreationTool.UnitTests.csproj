@@ -86,6 +86,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Factories\LarsMetaDataFactoryTest.cs" />
+    <Compile Include="Factories\MetaData\StandardMetaDataFactoryTest.cs" />
     <Compile Include="Factories\MetaData\FrameworkAimMetaDataFactoryTest.cs" />
     <Compile Include="Factories\MetaData\FrameworkComponentTypeMetaDataFactoryTest.cs" />
     <Compile Include="Factories\MetaData\FrameworkMetaDataFactoryTest.cs" />

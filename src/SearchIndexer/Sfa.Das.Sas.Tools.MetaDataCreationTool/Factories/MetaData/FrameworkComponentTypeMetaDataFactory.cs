@@ -5,7 +5,7 @@ using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
 {
-    public class FrameworkComponentTypeMetaDataFactory : MetaDataFactoryBase, IMetaDataFactory
+    public class FrameworkComponentTypeMetaDataFactory : IMetaDataFactory
     {
         public Type MetaDataType => typeof(FrameworkComponentTypeMetaData);
 
@@ -18,11 +18,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
 
             return new FrameworkComponentTypeMetaData
             {
-                FrameworkComponentType = TryParse(values[0]),
+                FrameworkComponentType = values[0].RemoveQuotationMark().SafeParseInt(),
                 FrameworkComponentTypeDesc = values[1].RemoveQuotationMark(),
                 FrameworkComponentTypeDesc2 = values[2].RemoveQuotationMark(),
-                EffectiveFrom = TryGetDate(values[3]) ?? DateTime.MinValue,
-                EffectiveTo = TryGetDate(values[4])
+                EffectiveFrom = values[3].SafeParseDate() ?? DateTime.MinValue,
+                EffectiveTo = values[4].SafeParseDate()
             };
         }
     }

@@ -87,7 +87,7 @@
     <Compile Include="Factories\MetaData\FrameworkMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\IMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\LearningDeliveryMetaDataFactory.cs" />
-    <Compile Include="Factories\MetaData\MetaDataFactoryBase.cs" />
+    <Compile Include="Factories\MetaData\StandardMetaDataFactory.cs" />
     <Compile Include="Models\Git\FileContents.cs" />
     <Compile Include="Models\Git\VstsFrameworkMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />

@@ -5,7 +5,7 @@ using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
 {
-    public class LearningDeliveryMetaDataFactory : MetaDataFactoryBase, IMetaDataFactory
+    public class LearningDeliveryMetaDataFactory : IMetaDataFactory
     {
         public Type MetaDataType => typeof(LearningDeliveryMetaData);
 
@@ -19,10 +19,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
             return new LearningDeliveryMetaData
             {
                 LearnAimRef = values[0].RemoveQuotationMark(),
-                EffectiveFrom = TryGetDate(values[1]) ?? DateTime.MinValue,
-                EffectiveTo = TryGetDate(values[2]),
+                EffectiveFrom = values[1].SafeParseDate() ?? DateTime.MinValue,
+                EffectiveTo = values[2].SafeParseDate(),
                 LearnAimRefTitle = values[3].RemoveQuotationMark(),
-                LearnAimRefType = TryParse(values[4].RemoveQuotationMark())
+                LearnAimRefType = values[4].RemoveQuotationMark().SafeParseInt()
             };
         }
     }
