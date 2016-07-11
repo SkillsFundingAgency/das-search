@@ -67,8 +67,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
                     foreach (var location in framework.DeliveryLocations.Where(_anyNotAtEmployer))
                     {
-                        var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, location);
-                        example.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                        if (location != null)
+                        {
+                            var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, location);
+                            example.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                        }
                     }
                 }
             }
@@ -93,8 +96,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
                     foreach (var location in standard.DeliveryLocations.Where(_anyNotAtEmployer))
                     {
-                        var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, location);
-                        example.Create<StandardProvider>(c => c.Document(standardProvider));
+                        if (location != null)
+                        {
+                            var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, location);
+                            example.Create<StandardProvider>(c => c.Document(standardProvider));
+                        }
                     }
                 }
             }

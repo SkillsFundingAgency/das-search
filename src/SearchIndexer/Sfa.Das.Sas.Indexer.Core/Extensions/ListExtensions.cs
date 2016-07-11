@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Indexer.Core.Extensions
 {
+    using System.Linq;
+
     public static class ListExtensions
     {
         public static async Task ForEachAsync<T>(this IEnumerable<T> list, Func<T, Task> action)
