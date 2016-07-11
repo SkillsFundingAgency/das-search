@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+﻿using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
