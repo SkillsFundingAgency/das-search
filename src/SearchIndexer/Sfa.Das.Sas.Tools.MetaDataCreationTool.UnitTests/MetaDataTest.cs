@@ -29,8 +29,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
         [Explicit]
         public void TestGenerationOfFiles()
         {
-            var httpGetMock = new Mock<IHttpGet>();
-            httpGetMock.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns("hello");
             var container = new Container(c =>
             {
                 c.AddRegistry<MetaDataCreationRegistry>();
