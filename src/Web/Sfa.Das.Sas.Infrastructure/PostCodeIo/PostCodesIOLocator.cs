@@ -20,12 +20,14 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
 
+        private readonly IProfileAStep _profiler;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IConfigurationSettings applicationSettings)
+        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IProfileAStep profiler, IConfigurationSettings applicationSettings)
         {
             _retryService = retryService;
             _logger = logger;
+            _profiler = profiler;
             _applicationSettings = applicationSettings;
         }
 
@@ -36,34 +38,37 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
             try
             {
-                var stopwatch = Stopwatch.StartNew();
-                var response = await _retryService.RetryWeb(() => MakeRequestAsync(uri.ToString()), CouldntConnect);
-                stopwatch.Stop();
-                var responseTime = stopwatch.ElapsedMilliseconds;
-
-                if (response.IsSuccessStatusCode)
+                using (_profiler.CreateStep("Postcode.IO lookup"))
                 {
-                    var value = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
-                    coordinates.Lat = result.Result.Latitude;
-                    coordinates.Lon = result.Result.Longitude;
+                    var stopwatch = Stopwatch.StartNew();
+                    var response = await _retryService.RetryWeb(() => MakeRequestAsync(uri.ToString()), CouldntConnect);
+                    stopwatch.Stop();
+                    var responseTime = stopwatch.ElapsedMilliseconds;
 
-                    SendDependencyLog(response.StatusCode, uri, responseTime);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var value = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
+                        coordinates.Lat = result.Result.Latitude;
+                        coordinates.Lon = result.Result.Longitude;
 
-                    return coordinates;
-                }
+                        SendDependencyLog(response.StatusCode, uri, responseTime);
 
-                var dir = new Dictionary<string, object>
+                        return coordinates;
+                    }
+
+                    var dir = new Dictionary<string, object>
                                   {
                                       { "Identifier ", "Postcodes.IO-PostCodeNotFound" },
                                       { "Postcode", postcode },
                                       { "Url", uri.ToString() }
                                   };
 
-                _logger.Info($"Unable to find coordinates for postcode: {postcode}. Service url:{uri}", dir);
-                SendDependencyLog(response.StatusCode, uri, responseTime);
+                    _logger.Info($"Unable to find coordinates for postcode: {postcode}. Service url:{uri}", dir);
+                    SendDependencyLog(response.StatusCode, uri, responseTime);
 
-                return null;
+                    return null;
+                }
             }
             catch (Exception ex)
             {

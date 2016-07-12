@@ -14,24 +14,30 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
         private readonly ILog _logger;
+        private readonly IProfileAStep _profiler;
 
         public ElasticsearchCustomClient(
             IElasticsearchClientFactory elasticsearchClientFactory,
-            ILog logger)
+            ILog logger,
+            IProfileAStep profiler)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
             _logger = logger;
+            _profiler = profiler;
         }
 
         public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "")
             where T : class
         {
             var client = _elasticsearchClientFactory.Create();
-            var stopwatch = Stopwatch.StartNew();
-            var result = client.Search(selector);
+            using (_profiler.CreateStep($"Elasticsearch.Search.{callerName}"))
+            {
+                var stopwatch = Stopwatch.StartNew();
+                var result = client.Search(selector);
 
-            SendLog(result, $"Elasticsearch.Search.{callerName}", stopwatch.Elapsed);
-            return result;
+                SendLog(result, $"Elasticsearch.Search.{callerName}", stopwatch.Elapsed);
+                return result;
+            }
         }
 
         private void SendLog<T>(ISearchResponse<T> result, string identifier, TimeSpan clientRequestTime)

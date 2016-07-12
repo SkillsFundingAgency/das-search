@@ -10,23 +10,32 @@ using Sfa.Das.Sas.Infrastructure.Mapping;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
+    using Sfa.Das.Sas.ApplicationServices;
+
     public sealed class ApprenticeshipProviderRepository : IApprenticeshipProviderRepository
     {
         private readonly ILog _applicationLogger;
+
         private readonly IConfigurationSettings _applicationSettings;
+
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
+
         private readonly IProviderMapping _providerMapping;
+
+        private readonly IProfileAStep _profiler;
 
         public ApprenticeshipProviderRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IProviderMapping providerMapping)
+            IProviderMapping providerMapping,
+            IProfileAStep profiler)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _providerMapping = providerMapping;
+            _profiler = profiler;
         }
 
         public ApprenticeshipDetails GetCourseByStandardCode(string providerid, string locationId, string standardCode)
@@ -78,16 +87,19 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query)
             where T : class
         {
-            var results = _elasticsearchCustomClient.Search<T>(s => s.Index(_applicationSettings.ProviderIndexAlias).From(0).Size(1).Query(query));
-
-            if (results.ApiCall.HttpStatusCode != 200)
+            using (_profiler.CreateStep("Get Provider"))
             {
-                throw new ApplicationException($"Failed query standard with provider");
+                var results = _elasticsearchCustomClient.Search<T>(s => s.Index(_applicationSettings.ProviderIndexAlias).From(0).Size(1).Query(query));
+
+                if (results.ApiCall.HttpStatusCode != 200)
+                {
+                    throw new ApplicationException($"Failed query standard with provider");
+                }
+
+                var document = results.Documents.Any() ? results.Documents.First() : null;
+
+                return document;
             }
-
-            var document = results.Documents.Any() ? results.Documents.First() : null;
-
-            return document;
         }
     }
 }

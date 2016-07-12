@@ -17,18 +17,25 @@ namespace Sfa.Das.Sas.Web.Controllers
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
+
         private readonly IShortlistCollection<int> _shortlistCollection;
+
         private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
+
+        private readonly IProfileAStep _profiler;
+
         private readonly IApprenticeshipSearchService _searchService;
 
         public ApprenticeshipController(
             IApprenticeshipSearchService searchService,
             ILog logger,
+            IProfileAStep profiler,
             IShortlistCollection<int> shortlistCollection,
             IApprenticeshipViewModelFactory apprenticeshipViewModelFactory)
         {
             _searchService = searchService;
             _logger = logger;
+            _profiler = profiler;
             _shortlistCollection = shortlistCollection;
             _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
         }
@@ -45,8 +52,15 @@ namespace Sfa.Das.Sas.Web.Controllers
             ApprenticeshipSearchResultViewModel viewModel;
             criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
 
-            searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.Order, criteria.SelectedLevels);
-            viewModel = _apprenticeshipViewModelFactory.GetSApprenticeshipSearchResultViewModel(searchResults);
+            using (_profiler.CreateStep("Search by keyword"))
+            {
+                searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.Order, criteria.SelectedLevels);
+            }
+
+            using (_profiler.CreateStep("Map to view model"))
+            {
+                viewModel = _apprenticeshipViewModelFactory.GetSApprenticeshipSearchResultViewModel(searchResults);
+            }
 
             if (viewModel == null)
             {

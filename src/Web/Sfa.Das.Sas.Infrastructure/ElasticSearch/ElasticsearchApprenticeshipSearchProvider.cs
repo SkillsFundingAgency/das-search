@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
+
     using Nest;
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
@@ -15,11 +17,14 @@
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
 
-        public ElasticsearchApprenticeshipSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings)
+        private readonly IProfileAStep _profiler;
+
+        public ElasticsearchApprenticeshipSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IProfileAStep profiler)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
+            _profiler = profiler;
         }
 
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
