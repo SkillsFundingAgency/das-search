@@ -51,15 +51,15 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         public FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData)
         {
             // Trim off any whitespaces in the title or the Pathway Name
-            frameworkMetaData.NASTitle = frameworkMetaData.NASTitle?.Trim();
+            frameworkMetaData.NasTitle = frameworkMetaData.NasTitle?.Trim();
             frameworkMetaData.PathwayName = frameworkMetaData.PathwayName?.Trim();
 
             var doc = new FrameworkDocument
             {
                 FrameworkId = $"{frameworkMetaData.FworkCode}{MapLevelProgType(frameworkMetaData.ProgType)}{frameworkMetaData.PwayCode}",
-                Title = CreateFrameworkTitle(frameworkMetaData.NASTitle, frameworkMetaData.PathwayName),
+                Title = CreateFrameworkTitle(frameworkMetaData.NasTitle, frameworkMetaData.PathwayName),
                 FrameworkCode = frameworkMetaData.FworkCode,
-                FrameworkName = frameworkMetaData.NASTitle,
+                FrameworkName = frameworkMetaData.NasTitle,
                 PathwayCode = frameworkMetaData.PwayCode,
                 PathwayName = frameworkMetaData.PathwayName,
                 Level = MapLevelProgType(frameworkMetaData.ProgType),
@@ -71,7 +71,10 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 CompletionQualifications = frameworkMetaData.CompletionQualifications,
                 EntryRequirements = frameworkMetaData.EntryRequirements,
                 ProfessionalRegistration = frameworkMetaData.ProfessionalRegistration,
-                FrameworkOverview = frameworkMetaData.FrameworkOverview
+                FrameworkOverview = frameworkMetaData.FrameworkOverview,
+                CompetencyQualification = frameworkMetaData.CompetencyQualification,
+                KnowledgeQualification = frameworkMetaData.KnowledgeQualification,
+                CombinedQualification = frameworkMetaData.CombinedQualification
             };
             return doc;
         }

@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 123,
                 PwayCode = 1,
-                NASTitle = "Sustainable Resource Operations and Management",
+                NasTitle = "Sustainable Resource Operations and Management",
                 PathwayName = "Higher Apprenticeship in Sustainable Resource Operations and Management",
                 ProgType = 20,
                 JobRoleItems = new List<JobRoleItem>
@@ -54,7 +54,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                NASTitle = "Trade Business Services",
+                NasTitle = "Trade Business Services",
                 PathwayName = "Trade Business Services",
                 ProgType = 3
             };
@@ -77,7 +77,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                NASTitle = "Accounting",
+                NasTitle = "Accounting",
                 PathwayName = "Accounting ",
                 ProgType = 3
             };
@@ -100,7 +100,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                NASTitle = "Trade Business Services",
+                NasTitle = "Trade Business Services",
                 PathwayName = " ",
                 ProgType = 23
             };
@@ -249,7 +249,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                NASTitle = " Accounting ",
+                NasTitle = " Accounting ",
                 PathwayName = "Accounting",
                 ProgType = 3
             };
@@ -270,7 +270,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
                 EffectiveTo = DateTime.MinValue,
                 FworkCode = 616,
                 PwayCode = 1,
-                NASTitle = "Accounting",
+                NasTitle = "Accounting",
                 PathwayName = " Accounting ",
                 ProgType = 3
             };

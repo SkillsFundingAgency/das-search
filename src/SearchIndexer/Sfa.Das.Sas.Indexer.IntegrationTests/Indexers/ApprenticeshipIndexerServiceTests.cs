@@ -244,7 +244,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                    ProgType = 0,
                                    PwayCode = 2,
                                    PathwayName = "Baking Industry Skills",
-                                   NASTitle = "Food and Drink"
+                                   NasTitle = "Food and Drink"
                                },
                            new FrameworkMetaData
                                {
@@ -252,7 +252,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                    ProgType = 3,
                                    PwayCode = 7,
                                    PathwayName = "Brewing Industry Skills",
-                                   NASTitle = "Food and Drink"
+                                   NasTitle = "Food and Drink"
                                },
                            new FrameworkMetaData
                                {
@@ -260,7 +260,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                    ProgType = 2,
                                    PwayCode = 4,
                                    PathwayName = "Footwear",
-                                   NASTitle = "Fashion and Textiles"
+                                   NasTitle = "Fashion and Textiles"
                                }
                        };
         }

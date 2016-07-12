@@ -1,13 +1,11 @@
-﻿using Nest;
+﻿using System;
+using System.Collections.Generic;
+using Nest;
 using Sfa.Das.Sas.Indexer.Core.Models;
+using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
-
     public sealed class FrameworkDocument : ApprenticeshipDocument, IIndexEntry
     {
         public string FrameworkId { get; set; }
@@ -33,5 +31,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }
+
+        public IEnumerable<string> CompetencyQualification { get; set; }
+
+        public IEnumerable<string> KnowledgeQualification { get; set; }
+
+        public IEnumerable<string> CombinedQualification { get; set; }
     }
 }

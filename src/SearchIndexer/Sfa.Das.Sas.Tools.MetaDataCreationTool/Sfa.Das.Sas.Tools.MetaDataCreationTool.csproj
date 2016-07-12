@@ -80,6 +80,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\MetaDataCreationRegistry.cs" />
+    <Compile Include="Factories\IGenericMetaDataFactory.cs" />
+    <Compile Include="Factories\LarsMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FrameworkAimMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FrameworkComponentTypeMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FrameworkMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\IMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\LearningDeliveryMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\StandardMetaDataFactory.cs" />
     <Compile Include="Models\Git\FileContents.cs" />
     <Compile Include="Models\Git\VstsFrameworkMetaData.cs" />
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
@@ -99,7 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AngleSharpService.cs" />
     <Compile Include="Services\CsvService.cs" />
-    <Compile Include="Services\Interfaces\IReadStandardsFromCsv.cs" />
+    <Compile Include="Services\Interfaces\IReadMetaDataFromCsv.cs" />
     <Compile Include="Models\LarsStandard.cs" />
     <Compile Include="Services\Interfaces\IGitDynamicModelGenerator.cs" />
   </ItemGroup>
@@ -128,6 +136,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

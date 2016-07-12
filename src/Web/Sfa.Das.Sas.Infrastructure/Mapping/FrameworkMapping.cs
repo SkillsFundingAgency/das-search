@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
 
@@ -20,17 +20,14 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 TypicalLength = document.TypicalLength,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = document.JobRoleItems,
-                Qualifications = document.Qualifications,
                 CompletionQualifications = document.CompletionQualifications,
                 FrameworkOverview = document.FrameworkOverview,
                 EntryRequirements = document.EntryRequirements,
-                ProfessionalRegistration = document.ProfessionalRegistration
+                ProfessionalRegistration = document.ProfessionalRegistration,
+                CompetencyQualification = document.CompetencyQualification?.OrderBy(x => x),
+                KnowledgeQualification = document.KnowledgeQualification?.OrderBy(x => x),
+                CombinedQualificiation = document.CombinedQualificiation?.OrderBy(x => x)
             };
-
-            if (framework.Qualifications == null)
-            {
-                framework.Qualifications = string.Empty;
-            }
 
             return framework;
         }
