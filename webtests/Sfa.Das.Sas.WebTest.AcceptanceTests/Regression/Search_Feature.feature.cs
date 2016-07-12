@@ -67,12 +67,19 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a apprenticeship by the job role")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
         [NUnit.Framework.TestCaseAttribute("railway", "Railway engineering design technician", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Junior management consultant", "Junior management consultant", new string[0])]
         [NUnit.Framework.TestCaseAttribute("Relationship manager (banking)", "Relationship manager (banking)", new string[0])]
         public virtual void ShouldFindAApprenticeshipByTheJobRole(string searchTerm, string title, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a apprenticeship by the job role", exampleTags);
+            string[] @__tags = new string[] {
+                    "Regression"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a apprenticeship by the job role", @__tags);
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 13
@@ -107,9 +114,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should display error for invalid postcode")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
         public virtual void ShouldDisplayErrorForInvalidPostcode()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should display error for invalid postcode", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should display error for invalid postcode", new string[] {
+                        "Regression"});
 #line 31
 this.ScenarioSetup(scenarioInfo);
 #line 32

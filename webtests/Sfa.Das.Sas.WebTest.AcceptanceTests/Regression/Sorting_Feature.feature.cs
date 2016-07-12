@@ -67,9 +67,11 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Sort Apprenticeship Search Results Page")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
         public virtual void SortApprenticeshipSearchResultsPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort Apprenticeship Search Results Page", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort Apprenticeship Search Results Page", new string[] {
+                        "Regression"});
 #line 10
 this.ScenarioSetup(scenarioInfo);
 #line 11
@@ -100,13 +102,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 21
  testRunner.And("I choose Update Results Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
- testRunner.When("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
  testRunner.When("I choose Low to High Option Selector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 25
- testRunner.When("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I wait for the view to become active", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
  testRunner.When("I choose Update Results Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 27

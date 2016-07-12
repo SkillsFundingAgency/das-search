@@ -67,9 +67,11 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.Regression
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Filter Apprenticeship Search Results Page Low to High")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
         public virtual void FilterApprenticeshipSearchResultsPageLowToHigh()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filter Apprenticeship Search Results Page Low to High", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filter Apprenticeship Search Results Page Low to High", new string[] {
+                        "Regression"});
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
@@ -122,9 +124,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Filter Apprenticeship Search Results Page High to Low")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
         public virtual void FilterApprenticeshipSearchResultsPageHighToLow()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filter Apprenticeship Search Results Page High to Low", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filter Apprenticeship Search Results Page High to Low", new string[] {
+                        "Regression"});
 #line 27
 this.ScenarioSetup(scenarioInfo);
 #line 28

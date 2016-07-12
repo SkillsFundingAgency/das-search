@@ -5,9 +5,9 @@
 	To search for different Providers in different postcodes 	
 	
 	
-#Currently extending this section please ignore
+
 #Test that Search Functionality still works
-#@Regression
+@Regression
 Scenario Outline:Should find a apprenticeship by the job role
 	
 	Given I navigated to the Search page
@@ -26,7 +26,7 @@ Examples:
 	| Junior management consultant   | Junior management consultant          |
 	| Relationship manager (banking) | Relationship manager (banking)        |
 
-#@Regression
+@Regression
 #This scenario checks that an error message is displayed for and invalid postcode
 Scenario:Should display error for invalid postcode
 	Given I navigated to the Search page
