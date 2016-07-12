@@ -6,11 +6,9 @@
 
     public class ElasticsearchConfiguration : IElasticsearchConfiguration
     {
-        private readonly IElasticsearchSettings _elasticsearchSettings;
-
         public const string AnalyserEnglishCustom = "english_custom";
-
         public const string AnalyserEnglishCustomText = "english_custom_text";
+        private readonly IElasticsearchSettings _elasticsearchSettings;
 
         public ElasticsearchConfiguration(IElasticsearchSettings elasticsearchSettings)
         {

@@ -91,21 +91,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             Client.Alias(aliasRequest);
         }
 
-        protected static BulkDescriptor CreateBulkDescriptor(string indexName)
-        {
-            var bulkDescriptor = new BulkDescriptor();
-            bulkDescriptor.Index(indexName);
-
-            return bulkDescriptor;
-        }
-
-        protected static bool HaveReachedBatchLimit(int count)
-        {
-            const int batchSize = 4000;
-
-            return count >= batchSize;
-        }
-
         protected void LogResponse(IBulkResponse[] elementIndexResult, string documentType)
         {
             var totalCount = 0;

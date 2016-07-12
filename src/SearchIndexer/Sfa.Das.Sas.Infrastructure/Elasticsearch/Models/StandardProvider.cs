@@ -3,19 +3,17 @@ using Newtonsoft.Json;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 {
+    using System.Collections.Generic;
+
     public sealed class StandardProvider : IProviderAppreticeshipDocument
     {
         public int StandardCode { get; set; }
 
         public int Ukprn { get; set; }
 
-        public string Name { get; set; }
+        public string ProviderName { get; set; }
 
         public string Id { get; set; }
-
-        public int LocationId { get; set; }
-
-        public string LocationName { get; set; }
 
         public string ProviderMarketingInfo { get; set; }
 
@@ -39,12 +37,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         public string Website { get; set; }
 
-        public Address Address { get; set; }
-
-        [GeoPoint]
-        public GeoCoordinate LocationPoint { get; set; }
-
-        [GeoShape]
-        public CircleGeoShape Location { get; set; }
+        [Nested]
+        public IEnumerable<TrainingLocation> TrainingLocations { get; set; }
     }
 }

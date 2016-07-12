@@ -59,9 +59,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             where T1 : class
             where T2 : class
         {
-            var tasks = new List<Task<IBulkResponse>>();
-            int count = 0;
-            var bulkDescriptor = CreateBulkDescriptor(indexName);
+            var example = new BulkProviderClient(indexName, Client);
 
             foreach (var entry in entries)
             {
@@ -69,18 +67,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 {
                     var doc = method(entry);
 
-                    bulkDescriptor.Create<T2>(c => c.Document(doc));
-                    count++;
-
-                    if (HaveReachedBatchLimit(count))
-                    {
-                        // Execute batch
-                        tasks.Add(Client.BulkAsync(bulkDescriptor));
-
-                        // Reset state - New descriptor
-                        bulkDescriptor = CreateBulkDescriptor(indexName);
-                        count = 0;
-                    }
+                    example.Create<T2>(c => c.Document(doc));
                 }
                 catch (Exception ex)
                 {
@@ -88,13 +75,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 }
             }
 
-            if (count > 0)
-            {
-                tasks.Add(Client.BulkAsync(bulkDescriptor));
-            }
-
             var bulkTasks = new List<Task<IBulkResponse>>();
-            bulkTasks.AddRange(tasks);
+            bulkTasks.AddRange(example.GetTasks());
             LogResponse(await Task.WhenAll(bulkTasks), typeof(T1).Name.ToLower(CultureInfo.CurrentCulture));
         }
     }

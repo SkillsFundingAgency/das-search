@@ -450,6 +450,5 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetPartial(html, ".satisfaction-source").Should().NotContain("Source:");
         }
-
     }
 }

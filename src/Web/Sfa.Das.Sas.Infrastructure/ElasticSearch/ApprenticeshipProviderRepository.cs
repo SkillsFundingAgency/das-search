@@ -45,9 +45,12 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 var document =
                     GetProvider<StandardProviderSearchResultsItem>(
                         q =>
-                        q.Term(t => t.Id, providerid) && q.Term(t => t.LocationId, locationId)
-                        && q.Term(t => t.StandardCode, standardCode));
-                return _providerMapping.MapToProvider(document);
+                        q.Term(t => t.Ukprn, providerid)
+                        && q.Term(t => t.StandardCode, standardCode)
+                        && q.Nested(n => n
+                            .Path(p => p.TrainingLocations)
+                            .Query(nq => nq.Term(nt => nt.TrainingLocations.First().LocationId, locationId))));
+                return _providerMapping.MapToProvider(document, int.Parse(locationId));
             }
             catch (Exception ex)
             {
@@ -65,9 +68,12 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 var document =
                     GetProvider<FrameworkProviderSearchResultsItem>(
                         q =>
-                        q.Term(t => t.Id, providerid) && q.Term(t => t.LocationId, locationId)
-                        && q.Term(t => t.FrameworkId, frameworkId));
-                return _providerMapping.MapToProvider(document);
+                        q.Term(t => t.Ukprn, providerid)
+                        && q.Term(t => t.FrameworkId, frameworkId)
+                        && q.Nested(n => n
+                            .Path(p => p.TrainingLocations)
+                            .Query(nq => nq.Term(nt => nt.TrainingLocations.First().LocationId, locationId))));
+                return _providerMapping.MapToProvider(document, int.Parse(locationId));
             }
             catch (Exception ex)
             {
@@ -91,11 +97,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
 
                 var document = results.Documents.Any() ? results.Documents.First() : null;
-
-                if (document == null)
-                {
-                    return null;
-                }
 
                 return document;
             }

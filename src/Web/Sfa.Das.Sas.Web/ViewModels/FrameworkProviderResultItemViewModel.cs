@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string UkPrn { get; set; }
 
-        public string Name { get; set; }
+        public string ProviderName { get; set; }
 
         public int FrameworkCode { get; set; }
 
@@ -48,7 +48,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string LearnerSatisfactionMessage { get; set; }
 
         public string DeliveryOptionsMessage { get; set; }
-
 
         public string FrameworkId { get; set; }
 

@@ -122,7 +122,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             return result;
         }
 
-        public Task<IBulkResponse> BulkAsync(IBulkRequest request, string callerName = "")
+        public virtual Task<IBulkResponse> BulkAsync(IBulkRequest request, string callerName = "")
         {
             var timer = Stopwatch.StartNew();
             var result = _client.BulkAsync(request);

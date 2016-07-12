@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest;
-using Newtonsoft.Json;
 using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory;
 using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models;
 
 namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Stub
 {
+    using Newtonsoft.Json.Linq;
+
     public class StubCourseDirectoryResponseClient : ICourseDirectoryProviderDataService
     {
         public Uri BaseUri { get; set; }
@@ -34,7 +35,16 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Stub
 
         private IEnumerable<Provider> Retrieve()
         {
-            return JsonConvert.DeserializeObject<IEnumerable<Provider>>(StubCourseDirectoryResponse.Json);
+            var inputObject = JToken.Parse(StubCourseDirectoryResponse.Json);
+            IList<Provider> deserializedObject = new List<Provider>();
+            foreach (var iListValue in (JArray)inputObject)
+            {
+                var provider = new Provider();
+                provider.DeserializeJson(iListValue);
+                deserializedObject.Add(provider);
+            }
+
+            return deserializedObject;
         }
     }
 }

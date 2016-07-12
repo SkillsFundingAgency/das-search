@@ -7,7 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Logging
 
     public class ApprenticeshipSearchLogEntry : ILogEntry
     {
-        public string Name => "ApprenticeshipSearch";
         public IEnumerable<string> Keywords { get; set; }
 
         public long TotalHits { get; set; }

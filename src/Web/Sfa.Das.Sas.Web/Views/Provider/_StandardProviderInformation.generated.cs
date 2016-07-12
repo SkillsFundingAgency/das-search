@@ -339,7 +339,7 @@ WriteLiteral("                    ");
 
             
             #line 11 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-               Write(Html.ActionLink(item.Name, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
+               Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
 
             
             #line default

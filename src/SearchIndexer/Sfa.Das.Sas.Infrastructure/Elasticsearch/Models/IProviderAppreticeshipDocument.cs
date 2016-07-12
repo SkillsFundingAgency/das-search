@@ -2,13 +2,13 @@
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 {
+    using System.Collections.Generic;
+
     public interface IProviderAppreticeshipDocument
     {
         int Ukprn { get; set; }
-        string Name { get; set; }
+        string ProviderName { get; set; }
         string Id { get; set; }
-        int LocationId { get; set; }
-        string LocationName { get; set; }
         string ProviderMarketingInfo { get; set; }
         string ApprenticeshipMarketingInfo { get; set; }
         string Phone { get; set; }
@@ -19,10 +19,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         double? EmployerSatisfaction { get; set; }
         string[] DeliveryModes { get; set; }
         string Website { get; set; }
-        Address Address { get; set; }
-        [GeoPoint]
-        GeoCoordinate LocationPoint { get; set; }
-        [GeoShape]
-        CircleGeoShape Location { get; set; }
+        IEnumerable<TrainingLocation> TrainingLocations { get; set; }
     }
 }

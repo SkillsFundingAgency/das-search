@@ -4,8 +4,6 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 {
     public class ElasticSearchLogEntry : ILogEntry
     {
-        public string Name => "ElasticSearch";
-
         public string Identifier { get; set; }
         public int? ReturnCode { get; set; }
         public bool? Successful { get; set; }
