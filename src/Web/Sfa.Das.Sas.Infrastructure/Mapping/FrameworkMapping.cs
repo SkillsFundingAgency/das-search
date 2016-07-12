@@ -26,7 +26,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 ProfessionalRegistration = document.ProfessionalRegistration,
                 CompetencyQualification = document.CompetencyQualification?.OrderBy(x => x),
                 KnowledgeQualification = document.KnowledgeQualification?.OrderBy(x => x),
-                CombinedQualificiation = document.CombinedQualificiation?.OrderBy(x => x)
+                CombinedQualificiation = document.CombinedQualification?.OrderBy(x => x)
             };
 
             return framework;
