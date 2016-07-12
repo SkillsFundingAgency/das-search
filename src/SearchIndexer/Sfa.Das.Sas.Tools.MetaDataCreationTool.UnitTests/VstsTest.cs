@@ -12,6 +12,8 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
 {
+    using System;
+
     [TestFixture]
     public class VstsTest
     {
@@ -24,7 +26,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
         [SetUp]
         public void Setup()
         {
-            _appServiceSettings = new AppServiceSettings(new AppConfigSettingsProvider(new MachineSettings()));
+            var appConfigSettingsProvider = new Mock<IProvideSettings>();
+            appConfigSettingsProvider.Setup(x => x.GetSetting("GitUsername")).Returns("username");
+            appConfigSettingsProvider.Setup(x => x.GetSetting("GitPassword")).Returns("pasword");
+            _appServiceSettings = new AppServiceSettings(appConfigSettingsProvider.Object);
         }
 
         [Test]
