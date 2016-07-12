@@ -2,7 +2,7 @@
 using Microsoft.WindowsAzure.Storage.Queue;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Queue;
 
-namespace Sfa.Das.Sas.Indexer.AzureWorkerRole.Models
+namespace Sfa.Das.Sas.Indexer.Infrastructure.Azure
 {
     public class AzureQueueMessage : IQueueMessage
     {

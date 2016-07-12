@@ -3,9 +3,11 @@ using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Infrastructure;
 using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Provider;
+using Sfa.Das.Sas.Indexer.ApplicationServices.Queue;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Services;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Services;
+using Sfa.Das.Sas.Indexer.Infrastructure.Azure;
 using Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
@@ -19,6 +21,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DependencyResolution
     {
         public InfrastructureRegistry()
         {
+            For<IMessageQueueService>().Use<AzureCloudQueueService>();
             For<IGetStandardLevel>().Use<LarsClient>();
             For<ILarsSettings>().Use<LarsSettings>();
             For<IElasticsearchConfiguration>().Use<ElasticsearchConfiguration>();

@@ -1,5 +1,4 @@
 ﻿using Sfa.Das.Sas.Indexer.ApplicationServices.Queue;
-using Sfa.Das.Sas.Indexer.AzureWorkerRole.Services;
 using Sfa.Das.Sas.Indexer.AzureWorkerRole.Settings;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;
@@ -16,7 +15,6 @@ namespace Sfa.Das.Sas.Indexer.AzureWorkerRole.DependencyResolution
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IWorkerRoleSettings>().Use<WorkRoleSettings>();
             For<IGenericControlQueueConsumer>().Use<GenericControlQueueConsumer>();
-            For<IMessageQueueService>().Use<AzureCloudQueueService>();
             For<IProvideSettings>().Use(c => new AppConfigSettingsProvider(new MachineSettings()));
         }
     }

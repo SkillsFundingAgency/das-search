@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             var mockLarsDataService = new Mock<ILarsDataService>();
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
-                    new List<FrameworkMetaData> {new FrameworkMetaData {EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2}});
+                    new List<FrameworkMetaData> {new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();

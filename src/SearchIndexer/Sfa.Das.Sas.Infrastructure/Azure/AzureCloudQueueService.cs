@@ -5,11 +5,9 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Queue;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
-using Sfa.Das.Sas.Indexer.AzureWorkerRole.Models;
 using Sfa.Das.Sas.Indexer.Core.Logging;
-using Sfa.Das.Sas.Indexer.Core.Services;
 
-namespace Sfa.Das.Sas.Indexer.AzureWorkerRole.Services
+namespace Sfa.Das.Sas.Indexer.Infrastructure.Azure
 {
     public class AzureCloudQueueService : IMessageQueueService
     {

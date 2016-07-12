@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
                 NotionalEndLevel = values[4].RemoveQuotationMark().SafeParseInt(),
                 StandardUrl = values[8],
                 SectorSubjectAreaTier1 = values[9].RemoveQuotationMark().SafeParseDouble(),
-                SectorSubjectAreaTier2 =values[10].RemoveQuotationMark().SafeParseDouble(),
+                SectorSubjectAreaTier2 = values[10].RemoveQuotationMark().SafeParseDouble(),
             };
         }
 
