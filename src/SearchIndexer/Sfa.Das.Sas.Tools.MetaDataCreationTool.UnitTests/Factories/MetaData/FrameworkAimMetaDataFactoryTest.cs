@@ -30,12 +30,12 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Factories.MetaData
             // Assert
             metaData.GetType().Should().Be(_sut.MetaDataType);
         }
-        
+
         [Test]
         public void ShouldCreateFrameworkAimMetaData()
         {
             // Assign
-            var data = new List<string> {"1", "2", "3", "Test123", "2015-03-01", "2017-06-01", "4"};
+            var data = new List<string> { "1", "2", "3", "Test123", "2015-03-01", "2017-06-01", "4" };
 
             // Act
             var metaData = _sut.Create(data) as FrameworkAimMetaData;

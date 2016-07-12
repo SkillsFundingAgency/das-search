@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         [Test]
         public void CreateFrameworksFromCsv()
         {
-            CsvService csvService = new CsvService(new LarsMetaDataFactory(new List<IMetaDataFactory> {new FrameworkMetaDataFactory() }));
+            CsvService csvService = new CsvService(new LarsMetaDataFactory(new List<IMetaDataFactory> { new FrameworkMetaDataFactory() }));
             var frameworks = csvService.ReadFromString<FrameworkMetaData>(_testFrameworkCsvData);
 
             Assert.AreEqual(10, frameworks.Count);

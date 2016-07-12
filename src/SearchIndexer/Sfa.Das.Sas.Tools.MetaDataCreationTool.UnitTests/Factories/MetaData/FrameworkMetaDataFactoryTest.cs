@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Factories.MetaData
         public void ShouldCreateFrameworkMetaData()
         {
             // Assign
-            var data = new List<string> {"1", "2", "3", "PathName123", "2015-03-01", "2017-06-01", "1.2", "3.2", string.Empty, "NAS Title", string.Empty, string.Empty};
+            var data = new List<string> { "1", "2", "3", "PathName123", "2015-03-01", "2017-06-01", "1.2", "3.2", string.Empty, "NAS Title", string.Empty, string.Empty };
 
             // Act
             var metaData = _sut.Create(data) as FrameworkMetaData;

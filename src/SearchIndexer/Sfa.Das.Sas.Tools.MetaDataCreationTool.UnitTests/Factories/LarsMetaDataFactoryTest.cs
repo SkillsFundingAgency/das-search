@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Factories
             _mockFactory.Setup(x => x.Create(It.IsAny<IReadOnlyList<string>>())).Returns(_metaData);
             _mockFactory.Setup(x => x.MetaDataType).Returns(typeof(FrameworkMetaData));
 
-            _sut = new LarsMetaDataFactory(new List<IMetaDataFactory> {_mockFactory.Object});
+            _sut = new LarsMetaDataFactory(new List<IMetaDataFactory> { _mockFactory.Object });
         }
 
         [Test]

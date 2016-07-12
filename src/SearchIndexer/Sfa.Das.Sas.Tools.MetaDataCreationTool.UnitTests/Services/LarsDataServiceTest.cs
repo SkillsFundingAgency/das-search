@@ -74,8 +74,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             };
 
             _frameworkList = new List<FrameworkMetaData> { _framework };
-            _frameworkAimList = new List<FrameworkAimMetaData>{ _frameworkAim };
-            _frameworkComponentTypeList = new List<FrameworkComponentTypeMetaData>{ _frameworkComponentType };
+            _frameworkAimList = new List<FrameworkAimMetaData> { _frameworkAim };
+            _frameworkComponentTypeList = new List<FrameworkComponentTypeMetaData> { _frameworkComponentType };
             _learningDeliveryList = new List<LearningDeliveryMetaData> { _learningDelivery };
 
             _mockCsvService.Setup(x => x.ReadFromString<FrameworkMetaData>(It.IsAny<string>())).Returns(_frameworkList);
@@ -357,7 +357,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _frameworkList.Add(new FrameworkMetaData
             {
                 EffectiveFrom = DateTime.Parse("2015-01-01"),
-                EffectiveTo = DateTime.Parse("2017-01-02"), 
+                EffectiveTo = DateTime.Parse("2017-01-02"),
                 FworkCode = 399, // we should not process frameworks below 400
                 PwayCode = 1,
                 ProgType = 22,

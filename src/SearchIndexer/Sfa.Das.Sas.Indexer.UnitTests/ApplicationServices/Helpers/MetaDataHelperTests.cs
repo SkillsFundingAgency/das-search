@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             var mockLarsDataService = new Mock<ILarsDataService>();
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
-                    new List<FrameworkMetaData> {new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
+                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
@@ -44,7 +44,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             var mockLarsDataService = new Mock<ILarsDataService>();
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
-                    new List<FrameworkMetaData> {new FrameworkMetaData {EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2}});
+                    new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
             var frameworks = metaDataManager.GetAllFrameworks();
@@ -60,7 +60,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData>
                     {
-                        new FrameworkMetaData {EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21}
+                        new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                     });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
@@ -83,7 +83,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                 .Returns(
                     new List<FrameworkMetaData>
                     {
-                        new FrameworkMetaData {EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21}
+                        new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                     });
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
@@ -103,8 +103,8 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                     FrameworkCode = 500,
                     PathwayCode = 1,
                     ProgType = 20,
-                    JobRoleItems = new List<JobRoleItem> {new JobRoleItem {Title = "Job role 1", Description = "Description 1"}},
-                    TypicalLength = new TypicalLength {From = 18, To = 18, Unit = "m"}
+                    JobRoleItems = new List<JobRoleItem> { new JobRoleItem { Title = "Job role 1", Description = "Description 1" } },
+                    TypicalLength = new TypicalLength { From = 18, To = 18, Unit = "m" }
                 },
                 new VstsFrameworkMetaData
                 {
@@ -114,10 +114,10 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                     JobRoleItems =
                         new List<JobRoleItem>
                         {
-                            new JobRoleItem {Title = "Job role 2", Description = "Description 2"},
-                            new JobRoleItem {Title = "Job role 3", Description = "Description 3"}
+                            new JobRoleItem { Title = "Job role 2", Description = "Description 2" },
+                            new JobRoleItem { Title = "Job role 3", Description = "Description 3" }
                         },
-                    TypicalLength = new TypicalLength {From = 12, To = 24, Unit = "m"}
+                    TypicalLength = new TypicalLength { From = 12, To = 24, Unit = "m" }
                 }
             };
         }

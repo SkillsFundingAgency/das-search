@@ -48,6 +48,5 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Factories.MetaData
             metaData.EffectiveFrom.Should().Be(new DateTime(2015, 3, 1));
             metaData.EffectiveTo.Should().Be(new DateTime(2017, 6, 1));
         }
-
     }
 }

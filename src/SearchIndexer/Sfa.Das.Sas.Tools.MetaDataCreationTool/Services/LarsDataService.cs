@@ -122,7 +122,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
         private static ICollection<FrameworkMetaData> FilterFrameworks(IEnumerable<FrameworkMetaData> frameworks)
         {
-            var progTypeList = new[] {2, 3, 20, 21, 22, 23};
+            var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
 
             return frameworks.Where(s => s.FworkCode > 399)
                 .Where(s => s.PwayCode > 0)
