@@ -20,5 +20,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         string[] DeliveryModes { get; set; }
         string Website { get; set; }
         IEnumerable<TrainingLocation> TrainingLocations { get; set; }
+        IEnumerable<GeoCoordinate> LocationPoints { get; set; }
     }
 }

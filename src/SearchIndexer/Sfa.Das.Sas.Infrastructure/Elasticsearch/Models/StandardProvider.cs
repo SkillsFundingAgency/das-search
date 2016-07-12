@@ -39,5 +39,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         [Nested]
         public IEnumerable<TrainingLocation> TrainingLocations { get; set; }
+
+        [GeoPoint]
+        public IEnumerable<GeoCoordinate> LocationPoints { get; set; }
     }
 }
