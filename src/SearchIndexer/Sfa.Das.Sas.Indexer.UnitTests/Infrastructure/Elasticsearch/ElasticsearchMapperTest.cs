@@ -149,6 +149,18 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             var document = mapper.CreateFrameworkProviderDocument(testProvider, testProvider.Frameworks.First(), testProvider.Frameworks.First().DeliveryLocations);
 
             document.Id.Should().Be("4556-9941122-f100PercentEmployer");
+            document.TrainingLocations.Count().Should().Be(1);
+        }
+
+        [Test]
+        public void ShouldCreateFrameworkProviderDocumentWithListOfLocationPoints()
+        {
+            var mapper = new ElasticsearchMapper(null);
+            var testProvider = GenerateTestProvider();
+
+            var document = mapper.CreateFrameworkProviderDocument(testProvider, testProvider.Frameworks.First(), testProvider.Frameworks.First().DeliveryLocations);
+
+            document.LocationPoints.Count().Should().Be(1);
         }
 
         [Test]
@@ -201,6 +213,18 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             var document = mapper.CreateStandardProviderDocument(testProvider, testProvider.Standards.First(), testProvider.Frameworks.First().DeliveryLocations);
 
             document.Id.Should().Be("4556-101-s100PercentEmployer");
+            document.TrainingLocations.Count().Should().Be(1);
+        }
+
+        [Test]
+        public void ShouldCreateStandardProviderDocumentWithListLocationPoints()
+        {
+            var mapper = new ElasticsearchMapper(null);
+            var testProvider = GenerateTestProvider();
+
+            var document = mapper.CreateStandardProviderDocument(testProvider, testProvider.Standards.First(), testProvider.Frameworks.First().DeliveryLocations);
+
+            document.LocationPoints.Count().Should().Be(1);
         }
 
         [Test]

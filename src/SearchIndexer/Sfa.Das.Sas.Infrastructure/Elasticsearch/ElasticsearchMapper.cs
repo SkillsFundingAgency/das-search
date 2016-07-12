@@ -169,6 +169,21 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             documentToPopulate.DeliveryModes = firstLoc == null ? new List<string>().ToArray() : GenerateListOfDeliveryModes(firstLoc.DeliveryModes);
             documentToPopulate.Website = firstLoc == null ? string.Empty : firstLoc.DeliveryLocation.Contact.Website;
             documentToPopulate.TrainingLocations = locations;
+            documentToPopulate.LocationPoints = GetLocationPoints(deliveryLocations);
+        }
+
+        private IEnumerable<GeoCoordinate> GetLocationPoints(IEnumerable<DeliveryInformation> deliveryLocations)
+        {
+            var points = new List<GeoCoordinate>();
+
+            foreach (var location in deliveryLocations)
+            {
+                points.Add(new GeoCoordinate(
+                                            location.DeliveryLocation.Address?.GeoPoint?.Latitude ?? 0,
+                                            location.DeliveryLocation.Address?.GeoPoint?.Longitude ?? 0));
+            }
+
+            return points;
         }
 
         private List<TrainingLocation> GetTrainingLocations(IEnumerable<DeliveryInformation> deliveryLocations)
