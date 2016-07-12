@@ -99,8 +99,6 @@
     <Compile Include="Indexers\ProviderIndexerServiceTest.cs" />
     <Compile Include="Indexers\ApprenticeshipIndexerServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DedsServiceTests.cs" />
-    <Compile Include="Services\LarsDataServiceTest.cs" />
     <Compile Include="Services\StubCourseDirectoryData.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -150,12 +150,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileData.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryResults.datasource" />
     <None Include="Sfa.Das.Sas.Indexer.AzureWorkerRole.ruleset" />
     <None Include="stylecop.json" />
     <None Include="Transform.Nlog.config">

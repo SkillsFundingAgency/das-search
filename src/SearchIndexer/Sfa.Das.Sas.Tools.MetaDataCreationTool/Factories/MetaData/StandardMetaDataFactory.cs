@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData
                 return -1;
             }
 
-            return values[0].SafeParseInt();
+            return values[0].RemoveQuotationMark().SafeParseInt();
         }
     }
 }

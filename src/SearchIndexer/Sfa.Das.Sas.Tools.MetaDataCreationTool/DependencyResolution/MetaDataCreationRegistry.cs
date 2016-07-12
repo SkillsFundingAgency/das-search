@@ -7,6 +7,8 @@ using StructureMap;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
 {
+    using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
+
     public sealed class MetaDataCreationRegistry : Registry
     {
         public MetaDataCreationRegistry()
@@ -28,6 +30,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
             For<IMetaDataFactory>().Use<FrameworkComponentTypeMetaDataFactory>();
             For<IMetaDataFactory>().Use<LearningDeliveryMetaDataFactory>();
             For<IMetaDataFactory>().Use<StandardMetaDataFactory>();
+
+            For<IAppServiceSettings>().Use<AppServiceSettings>();
         }
     }
 }

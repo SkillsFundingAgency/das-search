@@ -22,7 +22,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DependencyResolution
         public InfrastructureRegistry()
         {
             For<IMessageQueueService>().Use<AzureCloudQueueService>();
-            For<IGetStandardLevel>().Use<LarsClient>();
             For<ILarsSettings>().Use<LarsSettings>();
             For<IElasticsearchConfiguration>().Use<ElasticsearchConfiguration>();
             For<IElasticsearchSettings>().Use<ElasticsearchSettings>();
