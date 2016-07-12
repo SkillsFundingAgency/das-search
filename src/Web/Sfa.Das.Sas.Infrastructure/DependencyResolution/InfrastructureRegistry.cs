@@ -11,7 +11,6 @@ using StructureMap.Configuration.DSL;
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
     using Sfa.Das.Sas.ApplicationServices.Settings;
-    using Sfa.Das.Sas.Infrastructure.MiniProfiler;
     using Sfa.Das.Sas.Infrastructure.Settings;
 
     public sealed class InfrastructureRegistry : Registry
@@ -34,7 +33,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
-            For<IProfileAStep>().Use<MiniProfilerWrapper>();
         }
     }
 }

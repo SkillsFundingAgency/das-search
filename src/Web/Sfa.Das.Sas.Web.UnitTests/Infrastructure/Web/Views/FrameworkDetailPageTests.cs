@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
         {
             var detailPage = new Framework();
             var date = default(DateTime).AddYears(1881).AddMonths(8).AddDays(4);
-            var viewModel = new FrameworkViewModel {Title = "title1", ExpiryDateString = date.ToString("d MMMM yyyy")};
+            var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDateString = date.ToString("d MMMM yyyy") };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
             GetPartial(html, ".expire-date").Should().Contain("This apprenticeship is closed to new starters from 5 September 1882");
@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
         public void DoNotShowExpireMessage()
         {
             var detailPage = new Framework();
-            var viewModel = new FrameworkViewModel {Title = "title1", ExpiryDateString = null};
+            var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDateString = null };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
             GetPartial(html, ".expire-date").Should().BeEmpty();
@@ -37,7 +37,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
         public void ShowJobRoles()
         {
             var detailPage = new Framework();
-            var viewModel = new FrameworkViewModel {Title = "title1", JobRoles = new[] {"SFA master", "DAS master"}};
+            var viewModel = new FrameworkViewModel { Title = "title1", JobRoles = new[] { "SFA master", "DAS master" } };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
             GetPartial(html, ".job-roles ul li").Should().Be("SFA master");
@@ -108,7 +108,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var viewModel = new FrameworkViewModel
             {
                 Title = "title1",
-                JobRoles = new List<string> {"jobRole"}
+                JobRoles = new List<string> { "jobRole" }
             };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
@@ -140,9 +140,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var viewModel = new FrameworkViewModel
             {
                 Title = "title1",
-                CompetencyQualification = new[] {competencyTitle},
-                KnowledgeQualification = new[] {knowledgeTitle},
-                CombinedQualificiation = new[] {combinedTitle},
+                CompetencyQualification = new[] { competencyTitle },
+                KnowledgeQualification = new[] { knowledgeTitle },
+                CombinedQualificiation = new[] { combinedTitle },
                 CompletionQualifications = "Test completion qualifications"
             };
 
@@ -167,9 +167,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var viewModel = new FrameworkViewModel
             {
                 Title = "title1",
-                CompetencyQualification = new[] {competencyTitle},
-                KnowledgeQualification = new[] {knowledgeTitle},
-                CombinedQualificiation = new[] {combinedTitle},
+                CompetencyQualification = new[] { competencyTitle },
+                KnowledgeQualification = new[] { knowledgeTitle },
+                CombinedQualificiation = new[] { combinedTitle },
                 CompletionQualifications = string.Empty
             };
 

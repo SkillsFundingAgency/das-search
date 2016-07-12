@@ -19,158 +19,143 @@
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
 
-        private readonly IProfileAStep _profiler;
-
-        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IProfileAStep profiler)
+        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
-            _profiler = profiler;
         }
 
         public SearchResult<StandardProviderSearchResultsItem> SearchByStandard(int standardId, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
         {
             var qryStr = CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId.ToString(), coordinates, deliveryModes);
 
-            using (_profiler.CreateStep("Search for providers for standard"))
+            var skip = CalculateSkip(page, take);
+
+            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
             {
-                var skip = CalculateSkip(page, take);
-
-                var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-                if (results.ApiCall?.HttpStatusCode != 200)
-                {
-                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-                }
-
-                var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
-
-                var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-                {
-                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                    {
-                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                    }
-                }
-
-                return new SearchResult<StandardProviderSearchResultsItem>
-                {
-                    Hits = documents,
-                    Total = results.Total,
-                    TrainingOptionsAggregation = trainingOptionsAggregation
-                };
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
             }
+
+            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
+
+            var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return new SearchResult<StandardProviderSearchResultsItem>
+            {
+                Hits = documents,
+                Total = results.Total,
+                TrainingOptionsAggregation = trainingOptionsAggregation
+            };
         }
 
         public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
         {
             var qryStr = CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId.ToString(), coordinates, deliveryModes);
 
-            using (_profiler.CreateStep("Search for providers for standard"))
+            var skip = CalculateSkip(page, take);
+
+            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
             {
-                var skip = CalculateSkip(page, take);
-
-                var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-                if (results.ApiCall?.HttpStatusCode != 200)
-                {
-                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-                }
-
-                var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
-
-                var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-                {
-                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                    {
-                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                    }
-                }
-
-                return new SearchResult<StandardProviderSearchResultsItem>
-                {
-                    Hits = documents,
-                    Total = results.Total,
-                    TrainingOptionsAggregation = trainingOptionsAggregation
-                };
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
             }
+
+            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
+
+            var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return new SearchResult<StandardProviderSearchResultsItem>
+            {
+                Hits = documents,
+                Total = results.Total,
+                TrainingOptionsAggregation = trainingOptionsAggregation
+            };
         }
 
         public SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int frameworkId, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
-            using (_profiler.CreateStep("Search for providers for framework"))
+            var skip = CalculateSkip(page, take);
+
+            var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
+
+            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
             {
-                var skip = CalculateSkip(page, take);
-
-                var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
-
-                var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-                if (results.ApiCall?.HttpStatusCode != 200)
-                {
-                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-                }
-
-                var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
-
-                var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-                {
-                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                    {
-                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                    }
-                }
-
-                return new SearchResult<FrameworkProviderSearchResultsItem>
-                {
-                    Hits = documents,
-                    Total = results.Total,
-                    TrainingOptionsAggregation = trainingOptionsAggregation
-                };
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
             }
+
+            var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
+
+            var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return new SearchResult<FrameworkProviderSearchResultsItem>
+            {
+                Hits = documents,
+                Total = results.Total,
+                TrainingOptionsAggregation = trainingOptionsAggregation
+            };
         }
 
         public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int frameworkId, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
         {
-            using (_profiler.CreateStep("Search for providers for framework"))
+            var skip = CalculateSkip(page, take);
+
+            var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
+
+            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
             {
-                var skip = CalculateSkip(page, take);
-
-                var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
-
-                var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-                if (results.ApiCall?.HttpStatusCode != 200)
-                {
-                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-                }
-
-                var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
-
-                var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-                if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-                {
-                    foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                    {
-                        trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                    }
-                }
-
-                return new SearchResult<FrameworkProviderSearchResultsItem>
-                {
-                    Hits = documents,
-                    Total = results.Total,
-                    TrainingOptionsAggregation = trainingOptionsAggregation
-                };
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
             }
+
+            var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
+
+            var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return new SearchResult<FrameworkProviderSearchResultsItem>
+            {
+                Hits = documents,
+                Total = results.Total,
+                TrainingOptionsAggregation = trainingOptionsAggregation
+            };
         }
 
         private static StandardProviderSearchResultsItem MapToStandardProviderSearchResultsItem(IHit<StandardProviderSearchResultsItem> hit)
