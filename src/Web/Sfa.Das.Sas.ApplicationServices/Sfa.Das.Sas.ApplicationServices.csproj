@@ -75,7 +75,6 @@
     <Compile Include="Handlers\StandardProviderSearchHandler.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
-    <Compile Include="IProfileAStep.cs" />
     <Compile Include="IProviderSearchService.cs" />
     <Compile Include="IApprenticeshipSearchService.cs" />
     <Compile Include="IApprenticeshipSearchProvider.cs" />
