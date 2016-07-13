@@ -69,16 +69,16 @@
             }
             <dt>Entry requirements</dt>
             <dd class="entry-requirements">
-                @if (@Model.EntryRequirements != string.Empty)
+                @if (!string.IsNullOrEmpty(@Model.EntryRequirements))
                 {
-                    <p>@Model.EntryRequirements</p>
+                    <div>@Model.EntryRequirements</div>
                 }
-                <p>Your chosen training provider can advise you about entry requirements for apprentices.</p>
+                <div>Your chosen training provider can advise you about entry requirements for apprentices.</div>
             </dd>
 
             <dt>Suitable roles for apprentices</dt>
             <dd class="job-roles">
-                @if (Model.JobRoles != null)
+                @if (Model.JobRoles != null && Model.JobRoles.Any())
                 {
                     <ul>
                         @foreach (var jobRole in Model.JobRoles.Take(5))
@@ -96,16 +96,16 @@
                     </ul>
                 }
                     
-                <p>
+                <div>
                     Your chosen training provider can advise you about the kinds of skills apprentices will learn.    
-                </p>
+                </div>
             </dd>
             <dt>Qualifications</dt>
             <dd>
                 <div class="qualifications">
                     @if (Model.CompetencyQualification!= null && Model.CompetencyQualification.Any())
                     {
-                        <p class="competencyQualifications">
+                        <div class="competencyQualifications">
                             Apprentices will achieve a practical (i.e. 'competence') qualification:
                             <br />
                             <ul>
@@ -123,12 +123,12 @@
                                     <a href="#" class="showmore hidden">Show more</a>
                                 }
                             </ul>
-                        </p>
+                        </div>
                     }
 
                     @if (Model.KnowledgeQualification!= null && Model.KnowledgeQualification.Any())
                     {
-                        <p class="knowledgeQualifications">
+                        <div class="knowledgeQualifications">
                             Apprentices will also achieve a theory-based (i.e. 'knowledge'') qualification:
                             <br />
                             <ul>
@@ -146,12 +146,12 @@
                                     <a href="#" class="showmore hidden">Show more</a>
                                 }
                             </ul>
-                        </p>
+                        </div>
                     }
 
                     @if (Model.CombinedQualificiation != null && Model.CombinedQualificiation.Any())
                     {
-                        <p class="combinedQualification">
+                        <div class="combinedQualification">
                             Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:
                             <br />
                             <ul>
@@ -169,7 +169,7 @@
                                     <a href="#" class="showmore hidden">Show more</a>
                                 }
                             </ul>
-                        </p>
+                        </div>
                     }
                     </div>
 
@@ -179,8 +179,6 @@
                     }
                     <p class="qualificationsStatic">Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.</p>
                 </dd>
-
-
 
             <dt>Professional registration</dt>
             <dd>@Model.ProfessionalRegistration</dd>
