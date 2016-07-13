@@ -45,8 +45,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             var logger = container.GetInstance<ILog>();
             var angleSharpService = container.GetInstance<IAngleSharpService>();
 
-            Assert.IsNotNullOrEmpty(settings.GitUsername);
-            Assert.IsNotNullOrEmpty(settings.GitPassword);
+            Assert.True(string.IsNullOrEmpty(settings.GitUsername));
+            Assert.True(string.IsNullOrEmpty(settings.GitPassword));
 
             MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, angleSharpService, logger);
 
