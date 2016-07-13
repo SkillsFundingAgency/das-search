@@ -378,7 +378,7 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page } };
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page }, { "showall", Model.ShowAll } };
         int i = 0;
         foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
         {
