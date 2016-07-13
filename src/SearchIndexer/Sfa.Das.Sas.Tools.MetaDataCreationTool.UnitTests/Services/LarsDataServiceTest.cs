@@ -69,6 +69,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _frameworkAim = new FrameworkAimMetaData
             {
                 FworkCode = _framework.FworkCode,
+                PwayCode = _framework.PwayCode,
+                ProgType = _framework.ProgType,
                 FrameworkComponentType = _frameworkComponentType.FrameworkComponentType,
                 LearnAimRef = "5001738X"
             };
@@ -267,6 +269,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _frameworkAimList.Add(new FrameworkAimMetaData
             {
                 FworkCode = _framework.FworkCode,
+                PwayCode = _framework.PwayCode,
+                ProgType = _framework.ProgType,
                 FrameworkComponentType = 2,
                 LearnAimRef = learnRef
             });
@@ -274,6 +278,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _frameworkAimList.Add(new FrameworkAimMetaData
             {
                 FworkCode = _framework.FworkCode,
+                PwayCode = _framework.PwayCode,
+                ProgType = _framework.ProgType,
                 FrameworkComponentType = 3, // Combined Component Type (should not be in any other type)
                 LearnAimRef = learnRef
             });

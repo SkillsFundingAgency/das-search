@@ -38,6 +38,6 @@
 
         public IEnumerable<string> KnowledgeQualification { get; set; }
 
-        public IEnumerable<string> CombinedQualificiation { get; set; }
+        public IEnumerable<string> CombinedQualification { get; set; }
     }
 }

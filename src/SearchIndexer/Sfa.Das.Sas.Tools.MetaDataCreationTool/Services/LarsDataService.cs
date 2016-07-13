@@ -72,10 +72,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             foreach (var framework in metaData.Frameworks)
             {
                 var frameworkAims = metaData.FrameworkAims.Where(x => x.FworkCode.Equals(framework.FworkCode) &&
-                                                                      (x.EffectiveTo >= DateTime.Now || x.EffectiveTo == null)).ToList();
+                                                                      x.ProgType.Equals(framework.ProgType) &&
+                                                                      x.PwayCode.Equals(framework.PwayCode)).ToList();
+
+                frameworkAims = frameworkAims.Where(x => x.EffectiveTo >= DateTime.Now || x.EffectiveTo == null).ToList();
 
                 var qualifications =
-                    from aim in frameworkAims
+                    (from aim in frameworkAims
                     join comp in metaData.FrameworkContentTypes on aim.FrameworkComponentType equals comp.FrameworkComponentType
                     join ld in metaData.LearningDeliveries on aim.LearnAimRef equals ld.LearnAimRef
                     select new FrameworkQualification
@@ -83,9 +86,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                         Title = ld.LearnAimRefTitle.Replace("(QCF)", string.Empty).Trim(),
                         CompetenceType = comp.FrameworkComponentType,
                         CompetenceDescription = comp.FrameworkComponentTypeDesc
-                    };
+                    }).ToList();
 
-                var categorisedQualifications = GetCategorisedQualifications(qualifications.ToList());
+                var categorisedQualifications = GetCategorisedQualifications(qualifications);
 
                 framework.CompetencyQualification = categorisedQualifications.Competency;
                 framework.KnowledgeQualification = categorisedQualifications.Knowledge;

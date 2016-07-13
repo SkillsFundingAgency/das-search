@@ -9,12 +9,8 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Web
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web;
-
-    using StackExchange.Profiling;
-    using StackExchange.Profiling.Mvc;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -25,9 +21,7 @@ namespace Sfa.Das.Sas.Web
 
             logger.Info("Starting Web Role");
 
-            MiniProfiler.Settings.Results_Authorize = IsUserAllowedToSeeMiniProfilerUI;
             SetupApplicationInsights();
-            ProfileViewEngines();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -47,12 +41,10 @@ namespace Sfa.Das.Sas.Web
 
         protected void Application_BeginRequest()
         {
-            MiniProfiler.Start();
         }
 
         protected void Application_EndRequest()
         {
-            MiniProfiler.Stop();
         }
 
         private void SetupApplicationInsights()
@@ -60,25 +52,6 @@ namespace Sfa.Das.Sas.Web
             TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
 
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new ApplicationInsightsInitializer());
-        }
-
-        private void ProfileViewEngines()
-        {
-            var copy = ViewEngines.Engines.ToList();
-            ViewEngines.Engines.Clear();
-            foreach (var item in copy)
-            {
-                ViewEngines.Engines.Add(new ProfilingViewEngine(item));
-            }
-        }
-
-        private bool IsUserAllowedToSeeMiniProfilerUI(HttpRequest httpRequest)
-        {
-            // Implement your own logic for who
-            // should be able to access ~/mini-profiler-resources/results
-            // var principal = httpRequest.RequestContext.HttpContext.User;
-            // return principal.IsInRole("Developer");
-            return httpRequest.Headers["profile"] != null;
         }
     }
 }
