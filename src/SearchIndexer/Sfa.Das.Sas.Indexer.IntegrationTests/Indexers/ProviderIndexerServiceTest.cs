@@ -120,6 +120,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         }
 
         [Test]
+        [Category("Integration")]
         public void ShouldNotIndexProvidersWithoutGeoPoint()
         {
             var providersCaseFramework = _elasticClient.Search<Provider>(s => s

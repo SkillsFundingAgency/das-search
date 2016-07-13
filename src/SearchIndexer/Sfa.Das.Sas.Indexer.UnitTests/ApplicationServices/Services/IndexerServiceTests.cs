@@ -50,7 +50,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Services
             _mockHelper.Setup(x => x.CreateIndex(It.IsAny<string>())).Returns(false);
 
             // Act
-            Assert.Throws<Exception>(async () => await _sut.CreateScheduledIndex(It.IsAny<DateTime>()));
+            Assert.ThrowsAsync<Exception>(async () => await _sut.CreateScheduledIndex(It.IsAny<DateTime>()));
 
             // Assert
             _mockHelper.Verify(x => x.IndexEntries(It.IsAny<string>()), Times.Never);

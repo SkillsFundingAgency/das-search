@@ -25,7 +25,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
         protected IElement GetHtmlElement(IHtmlDocument html, string selector, int index = 1)
         {
-            return html?.QuerySelectorAll(selector)[index - 1];
+            var element = html?.QuerySelectorAll(selector);
+
+            if (element == null)
+            {
+                return null;
+            }
+
+            return element.Any() ? element[index - 1] : null;
         }
 
         protected string GetPartialWhere(IHtmlDocument html, string selector, string textContent)
@@ -37,9 +44,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     .Trim() ?? string.Empty;
         }
 
-        private string GetTextContent(IHtmlCollection<IElement> querySelectorAll, int index)
+        private static string GetTextContent(IHtmlCollection<IElement> querySelectorAll, int index)
         {
-            return querySelectorAll?[index - 1]?.TextContent?.Replace("\r", string.Empty).Trim();
+            return !querySelectorAll.Any() ?
+                null :
+                querySelectorAll?[index - 1]?.TextContent?.Replace("\r", string.Empty).Trim();
         }
     }
 }
