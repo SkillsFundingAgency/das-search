@@ -28,6 +28,8 @@ namespace Sfa.Das.Sas.Indexer.Core.Logging
 
         void Error(Exception exception, object message);
 
+        void Error(string message);
+
         void Error(string message, ILogEntry entry);
 
         void Fatal(Exception exception, object message);

@@ -75,7 +75,6 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             return _searchIndexMaintainer.IndexContainsDocuments(indexName);
         }
 
-        // TODO: LWA - The argument seems a little strange to this method.
         public void ChangeUnderlyingIndexForAlias(string newIndexName)
         {
             if (!_searchIndexMaintainer.AliasExists(_settings.IndexesAlias))

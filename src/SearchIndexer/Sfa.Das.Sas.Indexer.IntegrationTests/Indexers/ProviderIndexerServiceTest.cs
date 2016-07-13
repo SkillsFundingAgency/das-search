@@ -120,6 +120,25 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         }
 
         [Test]
+        public void ShouldNotIndexProvidersWithoutGeoPoint()
+        {
+            var providersCaseFramework = _elasticClient.Search<Provider>(s => s
+               .Index(_indexName)
+               .Type(_providerSettings.FrameworkProviderDocumentType)
+               .Query(q => q
+                   .Term("frameworkCode", 45)));
+
+            var providersCaseStandard = _elasticClient.Search<Provider>(s => s
+               .Index(_indexName)
+               .Type(_providerSettings.StandardProviderDocumentType)
+               .Query(q => q
+                   .Term("standardCode", 45)));
+
+            providersCaseFramework.Hits.Count().Should().Be(1);
+            providersCaseStandard.Hits.Count().Should().Be(1);
+        }
+
+        [Test]
         [Category("Integration")]
         public void ShouldRetrieveProvidersSearchingForStandardId()
         {
@@ -171,6 +190,22 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         {
             var providerLocations = new List<Location>
                                         {
+                                            new Location()
+                                                {
+                                                    Id = 115640,
+                                                    Name = "Null GeoPoint",
+                                                    Address =
+                                                        new Address
+                                                        {
+                                                            Address1 = "Enterprise House 2",
+                                                            Address2 = "2-6 Union Street",
+                                                            Town = "Bedford",
+                                                            County = null,
+                                                            Postcode = "MK40 2SG",
+                                                            GeoPoint = null
+                                                        },
+                                                    Contact = new ContactInformation { Website = "http://testsite.com", Email = "test@test.com", Phone = "0111222222" }
+                                                },
                                             new Location
                                                 {
                                                     Id = 115641,
@@ -274,23 +309,32 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                                            new List<DeliveryInformation>
                                                                {
                                                                    new DeliveryInformation
-                                                                       {
-                                                                           DeliveryLocation
-                                                                               =
-                                                                               providerLocations
-                                                                               .Single(
-                                                                                   x =>
-                                                                                   x.Id
-                                                                                   == 115641),
-                                                                           DeliveryModes
-                                                                               =
-                                                                               new[]
-                                                                                   {
-                                                                                       ModesOfDelivery
-                                                                                           .OneHundredPercentEmployer
-                                                                                   },
-                                                                           Radius = 80
-                                                                       }
+                                                                    {
+                                                                        DeliveryLocation
+                                                                            =
+                                                                            providerLocations
+                                                                            .Single(x => x.Id == 115641),
+                                                                        DeliveryModes
+                                                                            =
+                                                                            new[]
+                                                                                {
+                                                                                    ModesOfDelivery
+                                                                                        .OneHundredPercentEmployer
+                                                                                },
+                                                                        Radius = 80
+                                                                    },
+                                                                   new DeliveryInformation
+                                                                    {
+                                                                        DeliveryLocation = providerLocations.Single(x => x.Id == 115640),
+                                                                        DeliveryModes
+                                                                            =
+                                                                            new[]
+                                                                                {
+                                                                                    ModesOfDelivery
+                                                                                        .OneHundredPercentEmployer
+                                                                                },
+                                                                        Radius = 80
+                                                                    }
                                                                }
                                                    }
                                            },
@@ -323,7 +367,13 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                                                             ModesOfDelivery.OneHundredPercentEmployer
                                                                         },
                                                                         Radius = 80
-                                                                    }
+                                                                    },
+                                                                   new DeliveryInformation
+                                                                       {
+                                                                           DeliveryLocation = providerLocations.Single(x => x.Id == 115640),
+                                                                           DeliveryModes = new[] { ModesOfDelivery.BlockRelease },
+                                                                           Radius = 80
+                                                                       }
                                                                }
                                                    }
                                                     },

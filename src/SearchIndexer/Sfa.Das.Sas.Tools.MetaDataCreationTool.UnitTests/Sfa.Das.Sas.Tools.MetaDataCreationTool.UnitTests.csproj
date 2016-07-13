@@ -90,6 +90,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Factories\LarsMetaDataFactoryTest.cs" />
+    <Compile Include="Factories\MetaData\StandardMetaDataFactoryTest.cs" />
+    <Compile Include="Factories\MetaData\FrameworkAimMetaDataFactoryTest.cs" />
+    <Compile Include="Factories\MetaData\FrameworkComponentTypeMetaDataFactoryTest.cs" />
+    <Compile Include="Factories\MetaData\FrameworkMetaDataFactoryTest.cs" />
+    <Compile Include="Factories\MetaData\LearningDeliveryMetaDataFactoryTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MetaDataManagerTests.cs" />
     <Compile Include="Services\AngleSharpServiceTests.cs" />
@@ -98,6 +104,7 @@
     <Compile Include="MetaDataTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\JsonMetaDataConvertTest.cs" />
+    <Compile Include="Services\LarsDataServiceTest.cs" />
     <Compile Include="VstsTest.cs" />
     <Compile Include="Services\GitTest.cs" />
   </ItemGroup>

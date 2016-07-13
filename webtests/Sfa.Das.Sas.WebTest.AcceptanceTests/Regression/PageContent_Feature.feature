@@ -3,7 +3,7 @@
 	I want to display structure and content that is consistent
 	So that user experience can be uniform across the service
 
-#@Regression
+@Regression
 Scenario: Search Page Core Content
 	Given I navigated to the Search page
 	Then I see
@@ -12,7 +12,7 @@ Scenario: Search Page Core Content
          | Search Button | Exists | True  |
 	     | Footer Element| Exists | True  |
 
-#@Regression
+@Regression
 Scenario: Search Results Core Content
 	Given I navigated to the Search Results page
 	And I waited for the view to become active
@@ -23,7 +23,7 @@ Scenario: Search Results Core Content
 	| Navigation Element | Exists | True  |
 	#| Shortlist link     | Exists | True  |
 
-#@Regression
+@Regression
 Scenario: Standard Details Page	
 	Given I navigated to the Search page
 	When I enter data
@@ -42,7 +42,7 @@ Scenario: Standard Details Page
 
 
 
-#@Regression
+@Regression
 Scenario: Provider Details Page	
 	Given I navigated to the Search page
 	When I enter data

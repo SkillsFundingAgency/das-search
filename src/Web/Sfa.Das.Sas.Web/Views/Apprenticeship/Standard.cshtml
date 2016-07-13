@@ -16,7 +16,8 @@
                     @Model.Title
                 </h1>
                 <div class="standard-result-summary">
-                    This is an apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
+                    <span class="tag tag-new">new</span>
+                    An apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
                 </div>
             </div>
         </div>
@@ -31,84 +32,84 @@
                     </a>
                     @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
                 </aside>
-                 </div>
-
             </div>
+
+        </div>
+    </div>
+
+    <section>
+        <header>
+            <h2 class="heading-large">
+                Summary of this apprenticeship standard
+            </h2>
+        </header>
+        <dl class="data-list">
+            @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
+            @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
+            @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
+            @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
+            @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
+            @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
+            @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
+        </dl>
+
+        <div class="panel-indent panel-indent-info">
+            <h2 class="heading-large">
+                Documents
+            </h2>
+            <ul>
+                @GetDocumentItem(@Model.StandardPdf, "Standard")
+                @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
+            </ul>
         </div>
 
-        <section>
-            <header>
-                <h2 class="heading-large">
-                    Summary of this apprenticeship standard
-                </h2>
-            </header>
-            <dl class="data-list">
-                @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
-                @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
-                @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
-                @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
-                @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
-                @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
-                @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
-            </dl>
-
-            <div class="panel-indent panel-indent-info">
-                <h2 class="heading-large">
-                    Documents
-                </h2>
-                <ul>
-                    @GetDocumentItem(@Model.StandardPdf, "Standard")
-                    @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
-                </ul>
-            </div>
-
-            <hr/>
-            <div id="bottom-actions">
-                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                    Find training providers
-                </a>
-                @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
-            </div>
+        <hr />
+        <div id="bottom-actions">
+            <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Find training providers
+            </a>
+            @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
+        </div>
     </section>
 </main>
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
         <dt>@title</dt>
         <dd id="@id">@Html.MarkdownToHtml(item)</dd>
-    }
+}
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)
 {
-    if (!string.IsNullOrEmpty(title))
-    {
+if (!string.IsNullOrEmpty(title))
+{
         <li>
             <a href="@pdfUrl" target="_blank">
                 @title
             </a>
         </li>
-    }
+}
 }
 
 @helper GetShortlistLink(int id, bool isShortlisted)
 {
-    if (Is<ShortlistingFeature>.Enabled)
+if (Is<ShortlistingFeature>.Enabled)
+{
+    if (isShortlisted)
     {
-        if (isShortlisted)
-        {
             @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList",
                          new { id },
                          new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "remove" })
-        }
-        else
-        {
+    }
+    else
+    {
             @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList",
                          new { id },
                          new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "add" })
-        }
     }
+}
 }

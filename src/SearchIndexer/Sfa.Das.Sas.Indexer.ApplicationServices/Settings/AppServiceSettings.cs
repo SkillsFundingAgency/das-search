@@ -17,6 +17,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
         public string CsvFileNameStandards => _settings.GetSetting("CsvFileNameStandards");
 
         public string CsvFileNameFrameworks => _settings.GetSetting("CsvFileNameFrameworks");
+        public string CsvFileNameFrameworksAim => _settings.GetSetting("CsvFileNameFrameworksAim");
+        public string CsvFileNameFrameworkComponentType => _settings.GetSetting("CsvFileNameFrameworkComponentType");
+        public string CsvFileNameLearningDelivery => _settings.GetSetting("CsvFileNameLearningDelivery");
 
         public string EnvironmentName => _settings.GetSetting("EnvironmentName");
 
@@ -41,6 +44,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
         public string ImServiceBaseUrl => _settings.GetSetting("ImServiceBaseUrl");
 
         public string ImServiceUrl => _settings.GetSetting("ImServiceUrl");
+
+        public string GovWebsiteUrl => _settings.GetSetting("GovWebsiteUrl");
 
         // Private appServiceSettings
         private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");

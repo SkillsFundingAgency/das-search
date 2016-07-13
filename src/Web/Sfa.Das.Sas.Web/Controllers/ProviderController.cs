@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Net;
     using System.Web.Routing;
+
+    using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Web.Extensions;
 
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
@@ -54,7 +56,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var url = Url.Action(
                         "StandardResults",
                         "Provider",
-                        GenerateStandardProviderResultsRouteValues(criteria, response));
+                        GenerateProviderResultsRouteValues(criteria, response.CurrentPage));
 
                     return new RedirectResult(url);
             }
@@ -89,7 +91,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var url = Url.Action(
                         "FrameworkResults",
                         "Provider",
-                        GenerateFrameworkProviderResultsRouteValues(criteria, response));
+                        GenerateProviderResultsRouteValues(criteria, response.CurrentPage));
 
                     return new RedirectResult(url);
             }
@@ -121,21 +123,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        private static RouteValueDictionary GenerateStandardProviderResultsRouteValues(StandardProviderSearchQuery criteria, StandardProviderSearchResponse response)
+        private static RouteValueDictionary GenerateProviderResultsRouteValues(ProviderSearchQuery criteria, int currentPage)
         {
             return new RouteValueDictionary()
-                        .AddValue("page", response.CurrentPage)
+                        .AddValue("page", currentPage)
                         .AddValue("postcode", criteria?.PostCode ?? string.Empty)
                         .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
-                        .AddList("deliverymodes", criteria?.DeliveryModes);
-        }
-
-        private static RouteValueDictionary GenerateFrameworkProviderResultsRouteValues(FrameworkProviderSearchQuery criteria, FrameworkProviderSearchResponse response)
-        {
-            return new RouteValueDictionary()
-                        .AddValue("page", response.CurrentPage)
-                        .AddValue("postcode", criteria?.PostCode ?? string.Empty)
-                        .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
+                        .AddValue("showall", criteria?.ShowAll)
                         .AddList("deliverymodes", criteria?.DeliveryModes);
         }
     }

@@ -8,6 +8,12 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string CsvFileNameFrameworks { get; }
 
+        string CsvFileNameFrameworksAim { get; }
+
+        string CsvFileNameFrameworkComponentType { get; }
+
+        string CsvFileNameLearningDelivery { get; }
+
         string GitUsername { get; }
 
         string GitPassword { get; }
@@ -33,6 +39,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
         string ImServiceBaseUrl { get; }
 
         string ImServiceUrl { get; }
+
+        string GovWebsiteUrl { get; }
 
         string QueueName(Type type);
     }

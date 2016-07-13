@@ -56,7 +56,11 @@
     <Compile Include="Logging\Models\ElasticSearchLogEntry.cs" />
     <Compile Include="Logging\Models\ILogEntry.cs" />
     <Compile Include="Logging\Models\TimingLogEntry.cs" />
+    <Compile Include="Models\Framework\FrameworkAimMetaData.cs" />
+    <Compile Include="Models\Framework\FrameworkComponentTypeMetaData.cs" />
     <Compile Include="Models\Framework\FrameworkMetaData.cs" />
+    <Compile Include="Models\Framework\FrameworkQualification.cs" />
+    <Compile Include="Models\Framework\LearningDeliveryMetaData.cs" />
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\Provider\Address.cs" />
     <Compile Include="Models\Provider\ContactInformation.cs" />
@@ -69,7 +73,6 @@
     <Compile Include="Models\Provider\StandardInformation.cs" />
     <Compile Include="Services\IGenericIndexerHelper{T}.cs" />
     <Compile Include="Services\IGetActiveProviders.cs" />
-    <Compile Include="Services\IGetStandardLevel.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\IIndexEntry.cs" />
     <Compile Include="Models\StandardMetaData.cs" />

@@ -13,6 +13,8 @@ using Sfa.Das.Sas.Indexer.Infrastructure.Settings;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
 {
+    using Sfa.Das.Sas.Indexer.Core.Extensions;
+
     public sealed class CourseDirectoryClient : IGetApprenticeshipProviders
     {
         private readonly IInfrastructureSettings _settings;
@@ -28,7 +30,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
             _logger = logger;
         }
 
-        public async Task<IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
+        public async Task<IEnumerable<Core.Models.Provider.Provider>> GetApprenticeshipProvidersAsync()
         {
             var stopwatch = Stopwatch.StartNew();
             _courseDirectoryProviderDataService.BaseUri = new Uri(_settings.CourseDirectoryUri);
@@ -45,16 +47,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
             _courseDirectoryProviderDataService.Dispose();
 
             return selectedProviders;
-        }
-
-        private static Coordinate SetGeoPoint(Models.Location matchingLocation)
-        {
-            if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
-            {
-                return null;
-            }
-
-            return new Coordinate { Latitude = matchingLocation.Address.Latitude.Value, Longitude = matchingLocation.Address.Longitude.Value };
         }
 
         private IEnumerable<StandardInformation> GetStandardsFromIList(IList<Models.Standard> standards, IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Location> providerLocations)
@@ -89,7 +81,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                         }).ToList();
         }
 
-        private IEnumerable<DeliveryInformation> GetDeliveryLocations(IList<LocationRef> apprenticshipLocations, IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Location> providerLocations)
+        private IEnumerable<DeliveryInformation> GetDeliveryLocations(IList<LocationRef> apprenticshipLocations, IEnumerable<Core.Models.Provider.Location> providerLocations)
         {
             var deliveryLocations = new List<DeliveryInformation>(apprenticshipLocations.Count);
 
@@ -132,9 +124,22 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
             return modes;
         }
 
-        private Das.Sas.Indexer.Core.Models.Provider.Location MapToLocationEntity(Models.Location matchingLocation)
+        private Coordinate GetGeoPoint(Models.Location matchingLocation)
         {
-            return new Das.Sas.Indexer.Core.Models.Provider.Location
+            if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
+            {
+                _logger.Warn($"Location {matchingLocation.ID} missing coordinates");
+                return null;
+            }
+
+            return new Coordinate { Latitude = matchingLocation.Address.Latitude.Value, Longitude = matchingLocation.Address.Longitude.Value };
+        }
+
+        private Core.Models.Provider.Location MapToLocationEntity(Models.Location matchingLocation)
+        {
+            var geopoint = GetGeoPoint(matchingLocation);
+
+            return new Core.Models.Provider.Location
                        {
                            Id = matchingLocation.ID.Value,
                            Name = matchingLocation.Name,
@@ -148,19 +153,14 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                                        Town = matchingLocation.Address.Town,
                                        County = matchingLocation.Address.County,
                                        Postcode = matchingLocation.Address.Postcode,
-                                       GeoPoint = SetGeoPoint(matchingLocation)
+                                       GeoPoint = geopoint
                                    }
                        };
         }
 
-        private IEnumerable<Core.Models.Provider.Location> GetLocationFromIList(IList<Models.Location> locations)
-        {
-            return locations.Select(MapToLocationEntity).ToList();
-        }
-
         private Core.Models.Provider.Provider MapFromProviderToProviderImport(Models.Provider provider)
         {
-            var providerLocations = GetLocationFromIList(provider.Locations);
+            var providerLocations = provider.Locations.Select(MapToLocationEntity);
 
             var providerImport = new Core.Models.Provider.Provider
                                      {
@@ -174,8 +174,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                                          MarketingInfo = provider.MarketingInfo,
                                          Standards = GetStandardsFromIList(provider.Standards, providerLocations),
                                          Frameworks = GetFrameworksFromIList(provider.Frameworks, providerLocations),
-                                         Locations = GetLocationFromIList(provider.Locations)
-                                     };
+                                         Locations = providerLocations
+            };
 
             return providerImport;
         }

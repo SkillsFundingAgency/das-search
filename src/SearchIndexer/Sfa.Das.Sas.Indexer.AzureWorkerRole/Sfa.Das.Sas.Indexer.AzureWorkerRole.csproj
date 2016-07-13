@@ -132,10 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationInsightsInitializer.cs" />
-    <Compile Include="Models\AzureQueueMessage.cs" />
-    <Compile Include="Services\CloudBlobClientFactory.cs" />
-    <Compile Include="Services\AzureCloudQueueService.cs" />
-    <Compile Include="Services\ICloudBlobClientFactory.cs" />
     <Compile Include="DependencyResolution\IndexerRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="IIndexerJob.cs" />
@@ -154,12 +150,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.DataSetVersionDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileData.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.FileDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryDescriptor.datasource" />
-    <None Include="Properties\DataSources\Sfa.DedsService.DedsService.QueryResults.datasource" />
     <None Include="Sfa.Das.Sas.Indexer.AzureWorkerRole.ruleset" />
     <None Include="stylecop.json" />
     <None Include="Transform.Nlog.config">
@@ -201,6 +191,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

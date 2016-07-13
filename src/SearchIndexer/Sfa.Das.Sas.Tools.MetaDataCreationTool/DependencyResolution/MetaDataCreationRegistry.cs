@@ -1,16 +1,20 @@
 ﻿using Sfa.Das.Sas.Indexer.ApplicationServices.MetaData;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Factories.MetaData;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 using StructureMap;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
 {
+    using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
+
     public sealed class MetaDataCreationRegistry : Registry
     {
         public MetaDataCreationRegistry()
         {
             For<ILarsDataService>().Use<LarsDataService>();
-            For<IReadStandardsFromCsv>().Use<CsvService>();
+            For<IReadMetaDataFromCsv>().Use<CsvService>();
             For<IAngleSharpService>().Use<AngleSharpService>();
             For<IVstsService>().Use<VstsService>();
             For<IGitDynamicModelGenerator>().Use<GitDynamicModelGenerator>();
@@ -18,6 +22,16 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.DependencyResolution
             For<IGenerateStandardMetaData>().Use<MetaDataManager>();
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
+            For<IGenericMetaDataFactory>().Use<LarsMetaDataFactory>();
+
+            // Meta Data factories
+            For<IMetaDataFactory>().Use<FrameworkMetaDataFactory>();
+            For<IMetaDataFactory>().Use<FrameworkAimMetaDataFactory>();
+            For<IMetaDataFactory>().Use<FrameworkComponentTypeMetaDataFactory>();
+            For<IMetaDataFactory>().Use<LearningDeliveryMetaDataFactory>();
+            For<IMetaDataFactory>().Use<StandardMetaDataFactory>();
+
+            For<IAppServiceSettings>().Use<AppServiceSettings>();
         }
     }
 }

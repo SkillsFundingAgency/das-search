@@ -5,7 +5,7 @@
 	So I can see only relevant levels listed first
 
 #Tests filtering by level works
-#@Regression
+@Regression
 Scenario: Filter Apprenticeship Search Results Page Low to High 
 	Given I navigated to the Search page
 	When  I choose Search Button
@@ -23,7 +23,7 @@ Scenario: Filter Apprenticeship Search Results Page Low to High
 	Then  I see
 	| Field               | Rule     | Value                                     |
 	| Level Of Top Result | contains | 2 (equivalent to GCSEs at grades A* to C) |
-#@Regression 
+@Regression 
 Scenario: Filter Apprenticeship Search Results Page High to Low
 	Given I navigated to the Search Results page
 	When  I choose Level 7 Checkbox

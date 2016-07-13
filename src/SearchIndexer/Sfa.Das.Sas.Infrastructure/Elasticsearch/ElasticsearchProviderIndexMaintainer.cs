@@ -52,54 +52,68 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         private List<Task<IBulkResponse>> IndexFrameworks(string indexName, ICollection<Provider> indexEntries)
         {
-            var example = new BulkProviderClient(indexName, Client);
+            var bulkProviderLocation = new BulkProviderClient(indexName, Client);
 
             foreach (var provider in indexEntries)
             {
                 foreach (var framework in provider.Frameworks)
                 {
-                    var deliveryLocationsOnly100 = framework.DeliveryLocations.Where(_onlyAtEmployer).ToArray();
+                    var deliveryLocationsOnly100 = framework.DeliveryLocations
+                        .Where(_onlyAtEmployer)
+                        .Where(x => x.DeliveryLocation.Address.GeoPoint != null)
+                        .ToArray();
+
                     if (deliveryLocationsOnly100.Any())
                     {
                         var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, deliveryLocationsOnly100);
-                        example.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                        bulkProviderLocation.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
                     }
 
                     foreach (var location in framework.DeliveryLocations.Where(_anyNotAtEmployer))
                     {
-                        var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, location);
-                        example.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                        if (location.DeliveryLocation.Address.GeoPoint != null)
+                        {
+                            var frameworkProvider = ElasticsearchMapper.CreateFrameworkProviderDocument(provider, framework, location);
+                            bulkProviderLocation.Create<FrameworkProvider>(c => c.Document(frameworkProvider));
+                        }
                     }
                 }
             }
 
-            return example.GetTasks();
+            return bulkProviderLocation.GetTasks();
         }
 
         private List<Task<IBulkResponse>> IndexStandards(string indexName, IEnumerable<Provider> indexEntries)
         {
-            var example = new BulkProviderClient(indexName, Client);
+            var bulkProviderLocation = new BulkProviderClient(indexName, Client);
 
             foreach (var provider in indexEntries)
             {
                 foreach (var standard in provider.Standards)
                 {
-                    var deliveryLocationsOnly100 = standard.DeliveryLocations.Where(_onlyAtEmployer).ToArray();
+                    var deliveryLocationsOnly100 = standard.DeliveryLocations
+                        .Where(_onlyAtEmployer)
+                        .Where(x => x.DeliveryLocation.Address.GeoPoint != null)
+                        .ToArray();
+
                     if (deliveryLocationsOnly100.Any())
                     {
                         var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, deliveryLocationsOnly100);
-                        example.Create<StandardProvider>(c => c.Document(standardProvider));
+                        bulkProviderLocation.Create<StandardProvider>(c => c.Document(standardProvider));
                     }
 
                     foreach (var location in standard.DeliveryLocations.Where(_anyNotAtEmployer))
                     {
-                        var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, location);
-                        example.Create<StandardProvider>(c => c.Document(standardProvider));
+                        if (location.DeliveryLocation.Address.GeoPoint != null)
+                        {
+                            var standardProvider = ElasticsearchMapper.CreateStandardProviderDocument(provider, standard, location);
+                            bulkProviderLocation.Create<StandardProvider>(c => c.Document(standardProvider));
+                        }
                     }
                 }
             }
 
-            return example.GetTasks();
+            return bulkProviderLocation.GetTasks();
         }
     }
 }

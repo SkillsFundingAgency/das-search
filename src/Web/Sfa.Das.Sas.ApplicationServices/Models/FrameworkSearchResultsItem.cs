@@ -20,9 +20,6 @@
         public int PathwayCode { get; set; }
 
         public int Level { get; set; }
-
-        public string Qualifications { get; set; }
-
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }
@@ -36,5 +33,11 @@
         public DateTime? ExpiryDate { get; set; }
 
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
+
+        public IEnumerable<string> CompetencyQualification { get; set; }
+
+        public IEnumerable<string> KnowledgeQualification { get; set; }
+
+        public IEnumerable<string> CombinedQualification { get; set; }
     }
 }

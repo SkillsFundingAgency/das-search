@@ -12,6 +12,6 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Provider
 
         IEnumerable<DeliveryInformation> DeliveryLocations { get; set; }
 
-        int Code { get; set; } // TODO: LWA - This shouldn't live here
+        int Code { get; set; }
     }
 }

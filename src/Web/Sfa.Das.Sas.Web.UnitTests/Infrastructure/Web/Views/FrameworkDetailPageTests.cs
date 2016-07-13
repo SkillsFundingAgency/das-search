@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using FluentAssertions;
+using NUnit.Framework;
+using RazorGenerator.Testing;
+using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
+using Sfa.Das.Sas.Web.ViewModels;
+using Sfa.Das.Sas.Web.Views.Apprenticeship;
 
 using System;
 using FluentAssertions;
@@ -131,37 +138,58 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
         }
 
         [Test]
-        public void ShouldShowQualificationWhenItsNotEmpty()
+        public void ShouldShowQualificationsWhenItsNotEmpty()
         {
             var detailPage = new Framework();
+            const string competencyTitle = "Test competency qualification";
+            const string knowledgeTitle = "Test knowledge qualification";
+            const string combinedTitle = "Test combined qualification";
+
             var viewModel = new FrameworkViewModel
             {
                 Title = "title1",
-                Qualifications = "Test qualifications",
+                CompetencyQualification = new[] { competencyTitle },
+                KnowledgeQualification = new[] { knowledgeTitle },
+                CombinedQualificiation = new[] { combinedTitle },
                 CompletionQualifications = "Test completion qualifications"
             };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
-            GetPartial(html, ".qualifications").Should().Be("Test qualifications");
-            GetPartial(html, ".completionQualifications").Should().Be("Test completion qualifications");
-            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+
+            GetPartial(html, "li").Should().Contain(competencyTitle);
+            GetPartial(html, "li", 2).Should().Contain(knowledgeTitle);
+            GetPartial(html, "li", 3).Should().Contain(combinedTitle);
+            GetPartial(html, ".qualificationsStatic")
+                .Should()
+                .Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
         }
 
         [Test]
         public void ShouldShowQualificationAvoidingCompletionIfItsEmpty()
         {
             var detailPage = new Framework();
+            const string competencyTitle = "Test competency qualification";
+            const string knowledgeTitle = "Test knowledge qualification";
+            const string combinedTitle = "Test combined qualification";
+
             var viewModel = new FrameworkViewModel
             {
                 Title = "title1",
-                Qualifications = "Test qualifications",
+                CompetencyQualification = new[] { competencyTitle },
+                KnowledgeQualification = new[] { knowledgeTitle },
+                CombinedQualificiation = new[] { combinedTitle },
                 CompletionQualifications = string.Empty
             };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
-            GetPartial(html, ".qualifications").Should().Be("Test qualifications");
+
+            GetPartial(html, "li").Should().Contain(competencyTitle);
+            GetPartial(html, "li", 2).Should().Contain(knowledgeTitle);
+            GetPartial(html, "li", 3).Should().Contain(combinedTitle);
             GetPartial(html, ".completionQualifications").Should().BeNullOrEmpty();
-            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+            GetPartial(html, ".qualificationsStatic")
+                .Should()
+                .Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
         }
 
         [Test]
@@ -171,14 +199,18 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var viewModel = new FrameworkViewModel
             {
                 Title = "title1",
-                Qualifications = string.Empty,
+                CompetencyQualification = new List<string>(),
+                KnowledgeQualification = new List<string>(),
+                CombinedQualificiation = new List<string>(),
                 CompletionQualifications = "Test completion qualifications"
             };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
-            GetPartial(html, ".qualifications").Should().BeNullOrEmpty();
+            GetPartial(html, ".qualifications").Should().BeEmpty();
             GetPartial(html, ".completionQualifications").Should().Be("Test completion qualifications");
-            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+            GetPartial(html, ".qualificationsStatic")
+                .Should()
+                .Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
         }
 
         [Test]
@@ -191,9 +223,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
-            GetPartial(html, ".qualifications").Should().BeNullOrEmpty();
+            GetPartial(html, ".qualifications").Should().BeEmpty();
             GetPartial(html, ".completionQualifications").Should().BeNullOrEmpty();
-            GetPartial(html, ".qualificationsStatic").Should().Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
+            GetPartial(html, ".qualificationsStatic")
+                .Should()
+                .Be("Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.");
         }
     }
 }

@@ -6,7 +6,7 @@
 	So I can see only relevant levels listed first
 #WIP
 #Tests Sorting  works
-#@Regression
+@Regression
 Scenario: Sort Apprenticeship Search Results Page 
 	Given I navigated to the Search page
 	When  I choose Search Button
@@ -19,10 +19,10 @@ Scenario: Sort Apprenticeship Search Results Page
 	
 	When  I choose High To Low Option Selector	
 	And   I choose Update Results Button	
-	When  I wait for the view to become active
+	And  I wait for the view to become active
 	Then  I am on the Search Results page
 	When  I choose Low to High Option Selector
-	When  I wait for the view to become active	
+	And  I wait for the view to become active	
 	When  I choose Update Results Button	
 	Then  I am on the Search Results page
 	
