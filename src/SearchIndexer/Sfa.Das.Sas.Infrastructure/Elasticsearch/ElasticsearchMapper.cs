@@ -86,7 +86,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)
         {
-            return CreateStandardProviderDocument(provider, standardInformation, new List<DeliveryInformation>() { deliveryInformation }, deliveryInformation.DeliveryLocation.Id.ToString());
+            return CreateStandardProviderDocument(provider, standardInformation, new List<DeliveryInformation> { deliveryInformation }, deliveryInformation.DeliveryLocation.Id.ToString());
         }
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, IEnumerable<DeliveryInformation> deliveryInformation)

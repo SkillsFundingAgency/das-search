@@ -24,7 +24,7 @@
 	  	**/Scripts/*.js, 
 	  	**/scripts/*.js,
 	  	**/scripts/js-cookie/*.js,
-	  	**/scripts/polyfills/*.js
+	  	**/scripts/polyfills/*.js,
 	  	**/StructureMap*.cs,
 	  	**/Global.asax.cs, 
 	  	**/scripts/ai.0.15.0-build58334.js, 

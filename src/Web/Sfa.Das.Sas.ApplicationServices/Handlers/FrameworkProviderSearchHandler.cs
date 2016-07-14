@@ -2,15 +2,14 @@
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Settings;
+using Sfa.Das.Sas.ApplicationServices.Validators;
 using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    using Sfa.Das.Sas.ApplicationServices.Validators;
     public sealed class FrameworkProviderSearchHandler : IAsyncRequestHandler<FrameworkProviderSearchQuery, FrameworkProviderSearchResponse>
     {
         private readonly ILog _logger;
@@ -36,11 +35,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         public async Task<FrameworkProviderSearchResponse> Handle(FrameworkProviderSearchQuery message)
         {
             var result = _validator.Validate(message);
-            FrameworkProviderSearchResponse response;
 
             if (!result.IsValid)
             {
-                response = new FrameworkProviderSearchResponse { Success = false };
+                var response = new FrameworkProviderSearchResponse { Success = false };
 
                 if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
                 {
@@ -67,15 +65,15 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             var searchResults = await _searchService.SearchFrameworkProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
-                new Pagination { Page = pageNumber, Take = message.Take },
+                new Pagination {Page = pageNumber, Take = message.Take},
                 message.DeliveryModes,
                 message.ShowAll);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {
                 var take = message.Take <= 0 ? _paginationSettings.DefaultResultsAmount : 1;
-                var lastPage = take > 0 ? (int)System.Math.Ceiling((double)searchResults.TotalResults / take) : 1;
-                return new FrameworkProviderSearchResponse() { StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
+                var lastPage = take > 0 ? (int) System.Math.Ceiling((double) searchResults.TotalResults/take) : 1;
+                return new FrameworkProviderSearchResponse {StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage};
             }
 
             var shortlistItems = _shortlist.GetAllItems(Constants.FrameworksShortListName)
@@ -94,20 +92,22 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             };
         }
 
-        private async Task<long> GetCountResultForCountry(ProviderFrameworkSearchResults searchResults, FrameworkProviderSearchQuery message)
+        private async Task<long> GetCountResultForCountry(BaseProviderSearchResults searchResults, ProviderSearchQuery message)
         {
             long totalRestultsForCountry = 0;
-            if (searchResults.TotalResults <= 0)
+            if (searchResults.TotalResults > 0)
             {
-                var totalProvidersCountry = await _searchService.SearchFrameworkProviders(
-                    message.ApprenticeshipId,
-                    message.PostCode,
-                    new Pagination(),
-                    message.DeliveryModes,
-                    true);
-
-                totalRestultsForCountry = totalProvidersCountry.TotalResults;
+                return totalRestultsForCountry;
             }
+
+            var totalProvidersCountry = await _searchService.SearchFrameworkProviders(
+                message.ApprenticeshipId,
+                message.PostCode,
+                new Pagination(),
+                message.DeliveryModes,
+                true);
+
+            totalRestultsForCountry = totalProvidersCountry.TotalResults;
 
             return totalRestultsForCountry;
         }

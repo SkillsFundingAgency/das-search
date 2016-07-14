@@ -36,11 +36,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         public async Task<StandardProviderSearchResponse> Handle(StandardProviderSearchQuery message)
         {
             var result = _validator.Validate(message);
-            StandardProviderSearchResponse response;
 
             if (!result.IsValid)
             {
-                response = new StandardProviderSearchResponse { Success = false };
+                var response = new StandardProviderSearchResponse { Success = false };
 
                 if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
                 {
@@ -60,7 +59,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return await PerformSearch(message);
         }
 
-        private async Task<StandardProviderSearchResponse> PerformSearch(StandardProviderSearchQuery message)
+        private async Task<StandardProviderSearchResponse> PerformSearch(ProviderSearchQuery message)
         {
             var pageNumber = message.Page <= 0 ? 1 : message.Page;
 
@@ -75,7 +74,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             {
                 var take = message.Take <= 0 ? _paginationSettings.DefaultResultsAmount : 1;
                 var lastPage = take > 0 ? (int)System.Math.Ceiling((double)searchResults.TotalResults / take) : 1;
-                return new StandardProviderSearchResponse() { StatusCode = StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
+                return new StandardProviderSearchResponse { StatusCode = StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
             }
 
             var shortlistItems = _shortlist.GetAllItems(Constants.StandardsShortListName)
@@ -94,20 +93,23 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             };
         }
 
-        private async Task<long> GetCountResultForCountry(ProviderStandardSearchResults searchResults, StandardProviderSearchQuery message)
+        private async Task<long> GetCountResultForCountry(BaseProviderSearchResults searchResults, ProviderSearchQuery message)
         {
             long totalRestultsForCountry = 0;
-            if (searchResults.TotalResults <= 0)
-            {
-                var totalProvidersCountry = await _searchService.SearchStandardProviders(
-                    message.ApprenticeshipId,
-                    message.PostCode,
-                    new Pagination(),
-                    message.DeliveryModes,
-                    true);
 
-                totalRestultsForCountry = totalProvidersCountry.TotalResults;
+            if (searchResults.TotalResults > 0)
+            {
+                return totalRestultsForCountry;
             }
+
+            var totalProvidersCountry = await _searchService.SearchStandardProviders(
+                message.ApprenticeshipId,
+                message.PostCode,
+                new Pagination(),
+                message.DeliveryModes,
+                true);
+
+            totalRestultsForCountry = totalProvidersCountry.TotalResults;
 
             return totalRestultsForCountry;
         }
