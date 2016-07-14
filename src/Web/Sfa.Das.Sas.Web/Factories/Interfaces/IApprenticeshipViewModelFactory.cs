@@ -1,20 +1,20 @@
+using System.Web.Mvc;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.Sas.Web.ViewModels;
+
 namespace Sfa.Das.Sas.Web.Factories.Interfaces
 {
-    using System.Web.Mvc;
-
-    using ApplicationServices.Models;
-    using ViewModels;
-
     public interface IApprenticeshipViewModelFactory
     {
         ProviderSearchViewModel GetProviderSearchViewModelForStandard(int id, UrlHelper urlHelper);
 
         ProviderSearchViewModel GetFrameworkProvidersViewModel(int id, UrlHelper urlHelper);
 
-        StandardViewModel GetStandardViewModel(int id);
+        StandardViewModel GetStandardViewModel(Standard standard);
 
-        FrameworkViewModel GetFrameworkViewModel(int id);
+        FrameworkViewModel GetFrameworkViewModel(Framework framework);
 
-        ApprenticeshipSearchResultViewModel GetSApprenticeshipSearchResultViewModel(ApprenticeshipSearchResults searchResults);
+        ApprenticeshipSearchResultViewModel GetApprenticeshipSearchResultViewModel(ApprenticeshipSearchResponse response);
     }
 }

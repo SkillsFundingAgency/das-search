@@ -144,9 +144,9 @@
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceBuilder.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
     <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
-    <Compile Include="Application\DetailProviderHandlerTest.cs" />
-    <Compile Include="Application\FrameworkProviderSearchHandlerTests.cs" />
-    <Compile Include="Application\ProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\DetailProviderHandlerTest.cs" />
+    <Compile Include="Application\Handlers\FrameworkProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenveLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Colllections\CookieListCollectionTest.cs" />

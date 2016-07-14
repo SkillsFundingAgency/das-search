@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Logging;
 using Sfa.Das.Sas.Web.Models;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using Sfa.Das.Sas.ApplicationServices.Models;
-
     public class ShortlistController : Controller
     {
         private readonly ILog _logger;
@@ -29,7 +28,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 ApprenticeshipId = id
             };
 
-            _shortlistCollection.AddItem(Constants.StandardsShortListCookieName, shorlistedApprenticeship);
+            _shortlistCollection.AddItem(Constants.StandardsShortListName, shorlistedApprenticeship);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
@@ -47,7 +46,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var shortlistedApprenticeshipProvider = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
 
-            _shortlistCollection.AddItem(Constants.StandardsShortListCookieName, shortlistedApprenticeshipProvider);
+            _shortlistCollection.AddItem(Constants.StandardsShortListName, shortlistedApprenticeshipProvider);
 
             var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
@@ -63,7 +62,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             _logger.Debug("Removing standard from shortlist", new ShortlistLogEntry { StandardId = id });
 
-            _shortlistCollection.RemoveApprenticeship(Constants.StandardsShortListCookieName, id);
+            _shortlistCollection.RemoveApprenticeship(Constants.StandardsShortListName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
@@ -85,7 +84,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _shortlistCollection.RemoveProvider(Constants.StandardsShortListCookieName, apprenticeshipId, provider);
+            _shortlistCollection.RemoveProvider(Constants.StandardsShortListName, apprenticeshipId, provider);
 
             var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
@@ -106,7 +105,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 ApprenticeshipId = id
             };
 
-            _shortlistCollection.AddItem(Constants.FrameworksShortListCookieName, shorlistedApprenticeship);
+            _shortlistCollection.AddItem(Constants.FrameworksShortListName, shorlistedApprenticeship);
 
             return GetReturnRedirectFromFrameworkShortlistAction(id);
         }
@@ -124,7 +123,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var shortListedApprenticeshipProvider = CreateShortlistedApprenticeship(apprenticeshipId, providerId, locationId);
 
-            _shortlistCollection.AddItem(Constants.FrameworksShortListCookieName, shortListedApprenticeshipProvider);
+            _shortlistCollection.AddItem(Constants.FrameworksShortListName, shortListedApprenticeshipProvider);
 
             var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {
@@ -140,7 +139,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             _logger.Debug($"Removing framework from shortlist", new ShortlistLogEntry { FrameworkId = id });
 
-            _shortlistCollection.RemoveApprenticeship(Constants.FrameworksShortListCookieName, id);
+            _shortlistCollection.RemoveApprenticeship(Constants.FrameworksShortListName, id);
 
             return GetReturnRedirectFromStandardShortlistAction(id);
         }
@@ -162,7 +161,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 LocationId = locationId
             };
 
-            _shortlistCollection.RemoveProvider(Constants.FrameworksShortListCookieName, apprenticeshipId, provider);
+            _shortlistCollection.RemoveProvider(Constants.FrameworksShortListName, apprenticeshipId, provider);
 
             var providerSearchCriteria = new ApprenticeshipShortlistCriteria
             {

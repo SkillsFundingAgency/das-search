@@ -59,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,8 +71,11 @@
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ShortlistingFeature.cs" />
+    <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
     <Compile Include="Handlers\DetailProviderHandler.cs" />
     <Compile Include="Handlers\FrameworkProviderSearchHandler.cs" />
+    <Compile Include="Handlers\GetFrameworkHandler.cs" />
+    <Compile Include="Handlers\GetStandardHandler.cs" />
     <Compile Include="Handlers\StandardProviderSearchHandler.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
@@ -104,9 +108,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
+    <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
+    <Compile Include="Queries\ApprenticeshipSearchResponse.cs" />
     <Compile Include="Queries\DetailProviderResponse.cs" />
     <Compile Include="Queries\FrameworkProviderSearchQuery.cs" />
     <Compile Include="Queries\FrameworkProviderSearchResponse.cs" />
+    <Compile Include="Queries\GetFrameworkQuery.cs" />
+    <Compile Include="Queries\GetStandardQuery.cs" />
+    <Compile Include="Queries\GetFrameworkResponse.cs" />
+    <Compile Include="Queries\GetStandardResponse.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderSearchQuery.cs" />
     <Compile Include="Queries\ProviderSearchResponseBase.cs" />

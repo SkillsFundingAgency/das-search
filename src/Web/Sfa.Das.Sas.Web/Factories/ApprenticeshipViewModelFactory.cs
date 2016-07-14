@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
@@ -40,29 +41,19 @@ namespace Sfa.Das.Sas.Web.Factories
             return viewModel;
         }
 
-        public StandardViewModel GetStandardViewModel(int id)
+        public StandardViewModel GetStandardViewModel(Standard standard)
         {
-            var standardResult = _getStandards.GetStandardById(id);
-
-            return standardResult == null ?
-                null : _mappingService.Map<Standard, StandardViewModel>(standardResult);
+            return standard == null ? null : _mappingService.Map<Standard, StandardViewModel>(standard);
         }
 
-        public FrameworkViewModel GetFrameworkViewModel(int id)
+        public FrameworkViewModel GetFrameworkViewModel(Framework framework)
         {
-            var frameworkResult = _getFrameworks.GetFrameworkById(id);
-            if (frameworkResult == null)
-            {
-                return null;
-            }
-
-            var viewModel = _mappingService.Map<Framework, FrameworkViewModel>(frameworkResult);
-            return viewModel;
+            return framework == null ? null : _mappingService.Map<Framework, FrameworkViewModel>(framework);
         }
 
-        public ApprenticeshipSearchResultViewModel GetSApprenticeshipSearchResultViewModel(ApprenticeshipSearchResults searchResults)
+        public ApprenticeshipSearchResultViewModel GetApprenticeshipSearchResultViewModel(ApprenticeshipSearchResponse response)
         {
-            return _mappingService.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults);
+            return _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
         }
 
         private static ProviderSearchViewModel CreateViewModel(int id, int level, string title)

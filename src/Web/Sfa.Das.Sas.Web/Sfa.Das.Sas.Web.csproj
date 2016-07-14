@@ -256,7 +256,6 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
-    <Compile Include="Common\Constants.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Factories\Interfaces\IShortlistViewModelFactory.cs" />
     <Compile Include="Factories\ShortlistViewModelFactory.cs" />
@@ -292,7 +291,6 @@
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Models\ApprenticeshipShortlistCriteria.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
-    <Compile Include="Models\ApprenticeshipSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingActions\ApprenticeshipSearchResultItemViewModelMappingAction.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />

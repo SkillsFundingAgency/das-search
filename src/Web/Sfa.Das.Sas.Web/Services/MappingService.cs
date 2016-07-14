@@ -150,12 +150,17 @@ namespace Sfa.Das.Sas.Web.Services
         private static void CreateApprenticeshipSearchResultsMappings(IMapperConfiguration cfg)
         {
             // Apprenticeship search listing  -> mix of standard and framework
-            cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>()
-                .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
-                .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
-                .ForMember(x => x.ShortlistedStandards, y => y.Ignore()) // In controller
-                .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)))
-                ;
+            //cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>()
+            //    .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
+            //    .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
+            //    .ForMember(x => x.ShortlistedStandards, y => y.Ignore()) // In controller
+            //    .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
+
+            cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
+               .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
+               .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
+               .ForMember(x => x.ShortlistedStandards, y => y.Ignore()) // In controller
+               .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
 
             // Nexzt
             cfg.CreateMap<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>()

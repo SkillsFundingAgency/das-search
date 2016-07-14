@@ -1,4 +1,5 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Factories;
@@ -110,15 +111,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
                 Level = 2,
                 Title = "this is a standard"
             };
-            _mockGetStandards.Setup(x => x.GetStandardById(standard.StandardId)).Returns(standard);
             _mockMapperService.Setup(x => x.Map<Standard, StandardViewModel>(standard))
                          .Returns(new StandardViewModel());
 
             // Act
-            _sut.GetStandardViewModel(standard.StandardId);
+            _sut.GetStandardViewModel(standard);
 
             // Assert
-            _mockGetStandards.Verify(x => x.GetStandardById(standard.StandardId), Times.Once);
             _mockMapperService.Verify(x => x.Map<Standard, StandardViewModel>(standard), Times.Once);
         }
 
@@ -133,15 +132,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
                 Title = "this is a standard"
             };
 
-            _mockGetFrameworks.Setup(x => x.GetFrameworkById(framework.FrameworkId)).Returns(framework);
             _mockMapperService.Setup(x => x.Map<Framework, FrameworkViewModel>(framework))
                               .Returns(new FrameworkViewModel());
 
             // Act
-            _sut.GetFrameworkViewModel(framework.FrameworkId);
+            _sut.GetFrameworkViewModel(framework);
 
             // Assert
-            _mockGetFrameworks.Verify(x => x.GetFrameworkById(framework.FrameworkId), Times.Once);
             _mockMapperService.Verify(x => x.Map<Framework, FrameworkViewModel>(framework), Times.Once);
         }
 
@@ -149,14 +146,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Factories
         public void ShouldGetApprenticeshipSearchResultsViewModel()
         {
             // Assign
-            var searchResults = new ApprenticeshipSearchResults();
-            _mockMapperService.Setup(x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults));
+            var response = new ApprenticeshipSearchResponse();
+            _mockMapperService.Setup(x => x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response));
 
             // Act
-            _sut.GetSApprenticeshipSearchResultViewModel(searchResults);
+            _sut.GetApprenticeshipSearchResultViewModel(response);
 
             // Assert
-            _mockMapperService.Verify(x => x.Map<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>(searchResults), Times.Once);
+            _mockMapperService.Verify(x => x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response), Times.Once);
         }
     }
 }

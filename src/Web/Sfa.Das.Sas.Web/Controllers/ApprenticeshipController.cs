@@ -2,13 +2,13 @@
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MediatR;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Attribute;
-using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -17,20 +17,17 @@ namespace Sfa.Das.Sas.Web.Controllers
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
-        private readonly IShortlistCollection<int> _shortlistCollection;
         private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
-        private readonly IApprenticeshipSearchService _searchService;
+        private readonly IMediator _mediator;
 
         public ApprenticeshipController(
-            IApprenticeshipSearchService searchService,
             ILog logger,
-            IShortlistCollection<int> shortlistCollection,
-            IApprenticeshipViewModelFactory apprenticeshipViewModelFactory)
+            IApprenticeshipViewModelFactory apprenticeshipViewModelFactory,
+            IMediator mediator)
         {
-            _searchService = searchService;
             _logger = logger;
-            _shortlistCollection = shortlistCollection;
             _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
+            _mediator = mediator;
         }
 
         public ActionResult Search()
@@ -39,63 +36,50 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
+        public ActionResult SearchResults(ApprenticeshipSearchQuery query)
         {
-            ApprenticeshipSearchResults searchResults;
-            ApprenticeshipSearchResultViewModel viewModel;
-            criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
+            var response = _mediator.Send(query);
 
-            searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.Order, criteria.SelectedLevels);
-            viewModel = _apprenticeshipViewModelFactory.GetSApprenticeshipSearchResultViewModel(searchResults);
+            var viewModel = _apprenticeshipViewModelFactory.GetApprenticeshipSearchResultViewModel(response);
 
-            if (viewModel == null)
+            if (response.StatusCode == ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
             {
-                _logger.Warn("ViewModel is null, SearchResults, ApprenticeshipController ");
-                return View(new ApprenticeshipSearchResultViewModel());
-            }
-
-            if (viewModel.TotalResults > 0 && !viewModel.Results.Any())
-            {
-                var rv = new RouteValueDictionary { { "keywords", criteria.Keywords }, { "page", viewModel.LastPage } };
+                var rv = new RouteValueDictionary { { "keywords", query.Keywords }, { "page", response.LastPage } };
                 var index = 0;
+
                 foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
                 {
                     rv.Add("SelectedLevels[" + index + "]", level.Value);
                     index++;
                 }
 
-                var url = Url.Action(
-                    "SearchResults",
-                    "Apprenticeship",
-                    rv);
+                var url = Url.Action("SearchResults", "Apprenticeship", rv);
+
                 return new RedirectResult(url);
             }
 
-            var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName).Select(standard => standard.ApprenticeshipId).ToList();
-            var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName).Select(framework => framework.ApprenticeshipId).ToList();
+            if (viewModel != null)
+            {
+                return View(viewModel);
+            }
 
-            var shortlistedStandards = shotListedStandardsCollection.ToDictionary(standard => standard, standard => true);
-            var shortlistedFrameworks = shotListedFrameworksCollection.ToDictionary(framework => framework, framework => true);
+            _logger.Warn("ViewModel is null, SearchResults, ApprenticeshipController ");
 
-            viewModel.ShortlistedStandards = shortlistedStandards;
-            viewModel.ShortlistedFrameworks = shortlistedFrameworks;
-
-            viewModel.SortOrder = criteria.Order == 0 ? "1" : criteria.Order.ToString();
-            viewModel.ActualPage = criteria.Page;
-
-            return View(viewModel);
+            return View(new ApprenticeshipSearchResultViewModel());
         }
 
         // GET: Standard
         public ActionResult Standard(int id, string keywords)
         {
-            if (id < 0)
+            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
+
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
             {
-                Response.StatusCode = 400;
+                _logger.Info("404 - Attempt to get standard with an ID below zero");
+                return HttpNotFound("Cannot find any standards with an ID below zero");
             }
 
-            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(id);
-            if (viewModel == null)
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
             {
                 var message = $"Cannot find standard: {id}";
                 _logger.Warn($"404 - {message}");
@@ -103,22 +87,25 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName);
-            viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
-            viewModel.SearchTerm = keywords;
+            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(response.Standard);
+
+            viewModel.SearchTerm = response.SearchTerms;
+            viewModel.IsShortlisted = response.IsShortlisted;
 
             return View(viewModel);
         }
 
         public ActionResult Framework(int id, string keywords)
         {
-            if (id < 0)
+            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
+
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
             {
-                Response.StatusCode = 400;
+                _logger.Info("404 - Attempt to get standard with an ID below zero");
+                return HttpNotFound("Cannot find any standards with an ID below zero");
             }
 
-            var viewModel = _apprenticeshipViewModelFactory.GetFrameworkViewModel(id);
-            if (viewModel == null)
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
             {
                 var message = $"Cannot find framework: {id}";
                 _logger.Warn($"404 - {message}");
@@ -126,9 +113,10 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName);
-            viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
-            viewModel.SearchTerm = keywords;
+            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(response.Standard);
+
+            viewModel.SearchTerm = response.SearchTerms;
+            viewModel.IsShortlisted = response.IsShortlisted;
 
             return View(viewModel);
         }

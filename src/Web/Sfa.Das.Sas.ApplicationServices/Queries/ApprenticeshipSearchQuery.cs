@@ -1,8 +1,9 @@
-﻿namespace Sfa.Das.Sas.Web.Models
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MediatR;
 
-    public sealed class ApprenticeshipSearchCriteria
+namespace Sfa.Das.Sas.ApplicationServices.Queries
+{
+    public sealed class ApprenticeshipSearchQuery : IRequest<ApprenticeshipSearchResponse>
     {
         public string Keywords { get; set; }
 
