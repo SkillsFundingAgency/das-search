@@ -162,7 +162,6 @@
         {
             return new StandardProviderSearchResultsItem
             {
-                Id = hit.Source.Id,
                 Ukprn = hit.Source.Ukprn,
                 ContactUsUrl = hit.Source.ContactUsUrl,
                 DeliveryModes = hit.Source.DeliveryModes,
@@ -185,7 +184,6 @@
         {
             return new FrameworkProviderSearchResultsItem
             {
-                Id = hit.Source.Id,
                 Ukprn = hit.Source.Ukprn,
                 ContactUsUrl = hit.Source.ContactUsUrl,
                 DeliveryModes = hit.Source.DeliveryModes,

@@ -4,11 +4,10 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ShortlistProviderViewModel
     {
-        public string Id { get; set; }
+        public int Ukprn { get; set; }
         public string Name { get; set; }
         public int LocationId { get; set; }
         public Address Address { get; set; }
-
         public string Url { get; set; }
     }
 }

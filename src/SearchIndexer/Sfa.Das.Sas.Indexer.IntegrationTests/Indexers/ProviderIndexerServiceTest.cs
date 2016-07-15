@@ -172,8 +172,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             Assert.AreEqual(0, providersCase3.Documents.Count());
             Assert.AreEqual(1, providersCase4.Documents.Count());
 
-            Assert.AreEqual("10002387-45217-f100PercentEmployer", providersCase4.Documents.First().Id);
-
             _elasticClient.DeleteIndex(Indices.Index(_indexName));
             _elasticClient.IndexExists(Indices.Index(_indexName)).Exists.Should().BeFalse();
         }

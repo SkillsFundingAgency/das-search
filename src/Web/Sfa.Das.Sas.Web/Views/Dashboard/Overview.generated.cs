@@ -412,13 +412,13 @@ WriteLiteralTo(__razor_helper_writer, "                                         
                                                     new
                                                     {
                                                         apprenticeshipId = apprenticeship.Id,
-                                                        providerId = provider.Id,
+                                                        providerUkprn = provider.Ukprn,
                                                         locationId = provider.LocationId
                                                     },
                                                     new
                                                     {
                                                         @class = "provider-delete-link",
-                                                        data_provider = provider.Id,
+                                                        data_provider = provider.Ukprn,
                                                         data_apprenticeship = apprenticeship.Id,
                                                         data_apprenticeship_type = "Standard",
                                                         data_location = provider.LocationId,
@@ -431,13 +431,13 @@ WriteLiteralTo(__razor_helper_writer, "                                         
                                                     new
                                                     {
                                                         apprenticeshipId = apprenticeship.Id,
-                                                        providerId = provider.Id,
+                                                        providerUkprn = provider.Ukprn,
                                                         locationId = provider.LocationId
                                                     },
                                                     new
                                                     {
                                                         @class = "provider-delete-link",
-                                                        data_provider = provider.Id,
+                                                        data_provider = provider.Ukprn,
                                                         data_apprenticeship = apprenticeship.Id,
                                                         data_apprenticeship_type = "Framework",
                                                         data_location = provider.LocationId,

@@ -5,9 +5,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class StandardProviderResultItemViewModel
     {
-        public string Id { get; set; }
-
-        public string UkPrn { get; set; }
+        public int UkPrn { get; set; }
 
         public string ProviderName { get; set; }
 

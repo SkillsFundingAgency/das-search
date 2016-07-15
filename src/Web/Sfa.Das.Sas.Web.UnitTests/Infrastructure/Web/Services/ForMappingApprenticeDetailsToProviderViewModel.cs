@@ -47,8 +47,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 },
                 Provider = new Provider
                 {
-                    Id = 12345,
-                    UkPrn = "9475987349857",
+                    UkPrn = 947598734,
                     Name = "test provider",
                     ContactInformation = new ContactInformation
                     {
@@ -73,7 +72,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.Location.Address.Should().BeSameAs(providerResult.Location.Address);
 
             viewModel.Name.Should().BeSameAs(providerResult.Provider.Name);
-            viewModel.ProviderId.Should().Be(providerResult.Provider.Id.ToString());
+            viewModel.Ukprn.Should().Be(providerResult.Provider.UkPrn.ToString());
 
             viewModel.EmployerSatisfactionMessage.Should().Be("8.3%");
             viewModel.LearnerSatisfactionMessage.Should().Be("2.1%");

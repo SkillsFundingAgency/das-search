@@ -32,9 +32,9 @@ namespace Sfa.Das.Sas.Web.Collections
 
             var listItems = GetListItems(listCookie);
 
-            if (item.ProvidersIdAndLocation == null)
+            if (item.ProvidersUkrpnAndLocation == null)
             {
-                item.ProvidersIdAndLocation = new List<ShortlistedProvider>();
+                item.ProvidersUkrpnAndLocation = new List<ShortlistedProvider>();
             }
 
             if (!listItems.Any(x => x.ApprenticeshipId.Equals(item.ApprenticeshipId)))
@@ -47,13 +47,12 @@ namespace Sfa.Das.Sas.Web.Collections
                 {
                     if (shortlistedApprenticeship.ApprenticeshipId.Equals(item.ApprenticeshipId))
                     {
-                        foreach (var provider in item.ProvidersIdAndLocation)
+                        foreach (var provider in item.ProvidersUkrpnAndLocation)
                         {
-                            if (!shortlistedApprenticeship.ProvidersIdAndLocation
-                                .Any(x => x.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal) &&
-                                x.LocationId.Equals(provider.LocationId)))
+                            if (!shortlistedApprenticeship.ProvidersUkrpnAndLocation
+                                .Any(x => x.Ukprn == provider.Ukprn && x.LocationId == provider.LocationId))
                             {
-                                shortlistedApprenticeship.ProvidersIdAndLocation.Add(provider);
+                                shortlistedApprenticeship.ProvidersUkrpnAndLocation.Add(provider);
                             }
                         }
                     }
@@ -100,11 +99,11 @@ namespace Sfa.Das.Sas.Web.Collections
                     continue;
                 }
 
-                foreach (var provider in shortlistedApprenticeship.ProvidersIdAndLocation
-                    .Where(provider => provider.ProviderId.Equals(item.ProviderId, StringComparison.Ordinal) &&
-                                       provider.LocationId.Equals(item.LocationId)))
+                foreach (var provider in shortlistedApprenticeship.ProvidersUkrpnAndLocation
+                    .Where(provider => provider.Ukprn == item.Ukprn &&
+                                       provider.LocationId == item.LocationId))
                 {
-                    shortlistedApprenticeship.ProvidersIdAndLocation.Remove(provider);
+                    shortlistedApprenticeship.ProvidersUkrpnAndLocation.Remove(provider);
                     break;
                 }
             }
@@ -157,7 +156,7 @@ namespace Sfa.Das.Sas.Web.Collections
                 var splittedApprenticeships = SplitShortlistedApprenticeship(shortlistedApprenticeship).ToList();
 
                 var providers = splittedApprenticeships.Count > 1 ?
-                    SplitProviderIdsAndLocations(splittedApprenticeships.ElementAt(1)) :
+                    SplitProviderUkprnsAndLocations(splittedApprenticeships.ElementAt(1)) :
                     new List<string>();
 
                 var providersList = providers.Select(SplitShortllistedProvider).ToList();
@@ -168,7 +167,7 @@ namespace Sfa.Das.Sas.Web.Collections
                 listItems.Add(new ShortlistedApprenticeship
                 {
                     ApprenticeshipId = apprenticeshipId,
-                    ProvidersIdAndLocation = providersList
+                    ProvidersUkrpnAndLocation = providersList
                 });
             }
 
@@ -182,7 +181,7 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 return new ShortlistedProvider
                 {
-                    ProviderId = prov[0],
+                    Ukprn = int.Parse(prov[0]),
                     LocationId = int.Parse(prov[1])
                 };
             }
@@ -200,7 +199,7 @@ namespace Sfa.Das.Sas.Web.Collections
             return shortlistedApprenticeship.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        private static IEnumerable<string> SplitProviderIdsAndLocations(string s)
+        private static IEnumerable<string> SplitProviderUkprnsAndLocations(string s)
         {
             return s.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
         }
@@ -217,7 +216,7 @@ namespace Sfa.Das.Sas.Web.Collections
             {
                 var text = new StringBuilder();
                 var count = 0;
-                foreach (var formattedProvider in shortlistedApprenticeship.ProvidersIdAndLocation.Select(provider => $"{provider.ProviderId}-{provider.LocationId}"))
+                foreach (var formattedProvider in shortlistedApprenticeship.ProvidersUkrpnAndLocation.Select(provider => $"{provider.Ukprn}-{provider.LocationId}"))
                 {
                     text.Append(count == 0 ? formattedProvider : string.Concat("|", formattedProvider));
                     count++;

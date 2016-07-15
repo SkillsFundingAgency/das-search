@@ -173,7 +173,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 FrameworkId = "3",
                 DeliveryOptionsMessage = "block release"
@@ -204,7 +204,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 FrameworkId = "3",
                 DeliveryOptionsMessage = "block release, at your location"
@@ -235,7 +235,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 FrameworkId = "1",
                 DeliveryOptionsMessage = "day release, block release, at your location"
@@ -268,7 +268,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Website = "http://www.trainingprovider.co.uk",
                 Address = new Address(),
                 LocationId = 2,
-                Id = "12",
+                UkPrn = 12,
                 FrameworkId = "3"
             };
 
@@ -279,7 +279,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Distance = 1.2,
                 Address = new Address(),
                 LocationId = 2,
-                Id = "12",
+                UkPrn = 12,
                 FrameworkId = "3"
             };
 
@@ -314,7 +314,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Distance = 1.2,
                 Address = new Address(),
                 LocationId = 2,
-                Id = "12",
+                UkPrn = 12,
                 FrameworkId = "3"
             };
 
@@ -353,7 +353,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Town = "Town"
                 },
                 LocationId = 2,
-                Id = "12",
+                UkPrn = 12,
                 FrameworkId = "3"
             };
 
@@ -394,7 +394,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Town = "Town"
                 },
                 LocationId = 2,
-                Id = "12",
+                UkPrn = 12,
                 FrameworkId = "3"
             };
 
@@ -422,7 +422,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var page = new FrameworkProviderInformation();
             var item = new FrameworkProviderResultItemViewModel
             {
-                Id = "1",
+                UkPrn = 1,
                 FrameworkCode = 123,
                 PathwayCode = 321,
                 Level = 4,

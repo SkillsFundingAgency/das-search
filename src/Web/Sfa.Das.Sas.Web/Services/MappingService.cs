@@ -69,11 +69,10 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.DeliveryModes))
                    .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location))
                    .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Name))
-                   .ForMember(dest => dest.ProviderId, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Id))
+                   .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.UkPrn))
                    .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.EmployerSatisfaction))
                    .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.LearnerSatisfaction))
                    .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.ProviderMarketingInfo))
-                   .ForMember(dest => dest.ProviderId, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Id))
                    .ForMember(dest => dest.EmployerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.EmployerSatisfaction))
                    .ForMember(dest => dest.LearnerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.LearnerSatisfaction))
                    ;
@@ -134,7 +133,7 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
             .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))
-            .ForMember(dest => dest.ProviderId, opt => opt.MapFrom(source => source.Provider.Id))
+            .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.Provider.UkPrn))
             .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.Product.EmployerSatisfaction))
             .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.Product.LearnerSatisfaction))
             .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.Product.ProviderMarketingInfo))
@@ -202,9 +201,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
-                                src.Shortlist?.ProvidersIdAndLocation?.Any(x =>
-                                    x.LocationId.Equals(m.LocationId) &&
-                                    x.ProviderId.Equals(m.UkPrn, StringComparison.Ordinal)) ?? false));
+                                src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
+                                    x.LocationId == m.LocationId &&
+                                    x.Ukprn == m.UkPrn) ?? false));
 
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
@@ -227,9 +226,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
-                                src.Shortlist?.ProvidersIdAndLocation?.Any(x =>
-                                    x.LocationId.Equals(m.LocationId) &&
-                                    x.ProviderId.Equals(m.UkPrn, StringComparison.Ordinal)) ?? false));
+                                src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
+                                    x.LocationId == m.LocationId &&
+                                    x.Ukprn == m.UkPrn) ?? false));
         }
 
         private MapperConfiguration Config()

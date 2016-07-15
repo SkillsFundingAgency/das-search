@@ -154,7 +154,6 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var document = mapper.CreateFrameworkProviderDocument(testProvider, testProvider.Frameworks.First(), testProvider.Frameworks.First().DeliveryLocations);
 
-            document.Id.Should().Be("4556-9941122-f100PercentEmployer");
             document.TrainingLocations.Count().Should().Be(1);
         }
 
@@ -184,7 +183,6 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             document.Ukprn.Should().Be(4556);
             document.ProviderName.Should().Be("Test Provider");
-            document.Id.Should().Be("4556-9941122-77");
             document.TrainingLocations.First().LocationId.Should().Be(77);
             document.TrainingLocations.First().LocationName.Should().Be("Framework Test Location");
             document.ProviderMarketingInfo.Should().Be("Provider Marketing");
@@ -218,7 +216,6 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var document = mapper.CreateStandardProviderDocument(testProvider, testProvider.Standards.First(), testProvider.Frameworks.First().DeliveryLocations);
 
-            document.Id.Should().Be("4556-101-s100PercentEmployer");
             document.TrainingLocations.Count().Should().Be(1);
         }
 
@@ -244,7 +241,6 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
             document.StandardCode.Should().Be(101);
             document.Ukprn.Should().Be(4556);
             document.ProviderName.Should().Be("Test Provider");
-            document.Id.Should().Be("4556-101-98");
             document.TrainingLocations.First().LocationId.Should().Be(98);
             document.TrainingLocations.First().LocationName.Should().Be("Standard Test Location");
             document.ProviderMarketingInfo.Should().Be("Provider Marketing");

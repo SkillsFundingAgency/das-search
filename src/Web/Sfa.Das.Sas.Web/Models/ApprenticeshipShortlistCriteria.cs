@@ -2,7 +2,7 @@
 {
     public sealed class ApprenticeshipShortlistCriteria
     {
-        public string ProviderId { get; set; }
+        public int Ukprn { get; set; }
 
         public string LocationId { get; set; }
 

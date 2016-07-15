@@ -4,9 +4,9 @@
 
     public class ProviderDetailQuery : IRequest<DetailProviderResponse>
     {
-        public string ProviderId { get; set; }
+        public int Ukprn { get; set; }
 
-        public string LocationId { get; set; }
+        public int LocationId { get; set; }
 
         public string StandardCode { get; set; }
 

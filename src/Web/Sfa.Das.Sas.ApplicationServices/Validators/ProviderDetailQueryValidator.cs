@@ -8,8 +8,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Validators
     {
         public ProviderDetailQueryValidator(IValidation validation)
         {
-            RuleFor(criteria => criteria.ProviderId).Must(validation.IsPositiveNumber).WithErrorCode(ValidationCodes.InvalidInput);
-            RuleFor(criteria => criteria.LocationId).Must(validation.IsPositiveNumber).WithErrorCode(ValidationCodes.InvalidInput);
+            RuleFor(criteria => criteria.Ukprn).GreaterThan(0).WithErrorCode(ValidationCodes.InvalidInput);
+            RuleFor(criteria => criteria.LocationId).GreaterThan(0).WithErrorCode(ValidationCodes.InvalidInput);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class ShortlistedProvider
     {
-        public string ProviderId { get; set; }
+        public int Ukprn { get; set; }
         public int LocationId { get; set; }
     }
 }

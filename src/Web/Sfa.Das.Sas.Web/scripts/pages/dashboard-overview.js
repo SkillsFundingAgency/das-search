@@ -42,7 +42,7 @@
 
             var apprenticeship =
             {
-                providerId: $(this).attr("data-provider"),
+                providerUkprn: $(this).attr("data-provider"),
                 apprenticeshipId: $(this).attr("data-apprenticeship"),
                 locationId: $(this).attr("data-location"),
                 type: $(this).attr("data-apprenticeship-type")
@@ -51,14 +51,14 @@
             if (apprenticeship.type === "Standard")
             {
                 SearchAndShortlist.shortlist.RemoveStandardProvider(
-                 apprenticeship.providerId,
+                 apprenticeship.providerUkprn,
                  apprenticeship.apprenticeshipId,
                  apprenticeship.locationId);
             }
             else
             {
                 SearchAndShortlist.shortlist.RemoveFrameworkProvider(
-                  apprenticeship.providerId,
+                  apprenticeship.providerUkprn,
                   apprenticeship.apprenticeshipId,
                   apprenticeship.locationId);
             }

@@ -77,24 +77,24 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             var provider = new ShortlistedProvider
             {
-                ProviderId = "546",
+                Ukprn = 546,
                 LocationId = 387
             };
 
             _mockCookieRepository.Setup(x => x.RemoveProvider(
                 Constants.StandardsShortListCookieName,
                 apprenticeshipId,
-                It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))));
+                It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)));
 
             // Act
-            _controller.RemoveStandardProvider(apprenticeshipId, provider.ProviderId, provider.LocationId);
+            _controller.RemoveStandardProvider(apprenticeshipId, provider.Ukprn, provider.LocationId);
 
             // Assert
             _mockCookieRepository.Verify(
                 x => x.RemoveProvider(
                     Constants.StandardsShortListCookieName,
                     apprenticeshipId,
-                    It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))),
+                    It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)),
                     Times.Once);
         }
 
@@ -136,24 +136,24 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             var provider = new ShortlistedProvider
             {
-                ProviderId = "546",
+                Ukprn = 546,
                 LocationId = 387
             };
 
             _mockCookieRepository.Setup(x => x.RemoveProvider(
                 Constants.FrameworksShortListCookieName,
                 apprenticeshipId,
-                It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))));
+                It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)));
 
             // Act
-            _controller.RemoveFrameworkProvider(apprenticeshipId, provider.ProviderId, provider.LocationId);
+            _controller.RemoveFrameworkProvider(apprenticeshipId, provider.Ukprn, provider.LocationId);
 
             // Assert
             _mockCookieRepository.Verify(
                 x => x.RemoveProvider(
                     Constants.FrameworksShortListCookieName,
                     apprenticeshipId,
-                    It.Is<ShortlistedProvider>(p => p.ProviderId.Equals(provider.ProviderId, StringComparison.Ordinal))),
+                    It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)),
                     Times.Once);
         }
     }

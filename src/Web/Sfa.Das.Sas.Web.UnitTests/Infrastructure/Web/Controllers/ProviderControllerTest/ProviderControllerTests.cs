@@ -42,7 +42,7 @@
         [Test]
         public void DetailShouldReturnViewResultWhenStandardSearchIsSuccessful()
         {
-            var searchCriteria = new ProviderDetailQuery { StandardCode = "1", LocationId = "2", ProviderId = "3" };
+            var searchCriteria = new ProviderDetailQuery { StandardCode = "1", LocationId = 2, Ukprn = 3 };
 
             var stubSearchResponse = new DetailProviderResponse { };
 
