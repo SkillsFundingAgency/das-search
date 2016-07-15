@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Attribute;
-using Sfa.Das.Sas.Web.Factories.Interfaces;
+using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -17,16 +15,16 @@ namespace Sfa.Das.Sas.Web.Controllers
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
-        private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
+        private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
 
         public ApprenticeshipController(
             ILog logger,
-            IApprenticeshipViewModelFactory apprenticeshipViewModelFactory,
+            IMappingService mappingService,
             IMediator mediator)
         {
             _logger = logger;
-            _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
+            _mappingService = mappingService;
             _mediator = mediator;
         }
 
@@ -40,17 +38,21 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var response = _mediator.Send(query);
 
-            var viewModel = _apprenticeshipViewModelFactory.GetApprenticeshipSearchResultViewModel(response);
+            var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
 
             if (response.StatusCode == ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
             {
-                var rv = new RouteValueDictionary { { "keywords", query.Keywords }, { "page", response.LastPage } };
+                var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
                 var index = 0;
 
-                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+                if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
                 {
-                    rv.Add("SelectedLevels[" + index + "]", level.Value);
-                    index++;
+
+                    foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+                    {
+                        rv.Add("SelectedLevels[" + index + "]", level.Value);
+                        index++;
+                    }
                 }
 
                 var url = Url.Action("SearchResults", "Apprenticeship", rv);
@@ -87,25 +89,22 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(response.Standard);
-
-            viewModel.SearchTerm = response.SearchTerms;
-            viewModel.IsShortlisted = response.IsShortlisted;
+            var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
 
             return View(viewModel);
         }
 
         public ActionResult Framework(int id, string keywords)
         {
-            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
+            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
-            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
+            if (response.StatusCode == GetFrameworkResponse.ResponseCodes.InvalidFrameworkId)
             {
                 _logger.Info("404 - Attempt to get standard with an ID below zero");
                 return HttpNotFound("Cannot find any standards with an ID below zero");
             }
 
-            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
+            if (response.StatusCode == GetFrameworkResponse.ResponseCodes.FrameworkNotFound)
             {
                 var message = $"Cannot find framework: {id}";
                 _logger.Warn($"404 - {message}");
@@ -113,36 +112,35 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(response.Standard);
-
-            viewModel.SearchTerm = response.SearchTerms;
-            viewModel.IsShortlisted = response.IsShortlisted;
+            var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
 
             return View(viewModel);
         }
 
         public ActionResult SearchForProviders(int? standardId, int? frameworkId, string postCode, string keywords, string hasError)
         {
-            ProviderSearchViewModel viewModel;
+            throw new NotImplementedException();
 
-            if (standardId != null)
-            {
-                viewModel = _apprenticeshipViewModelFactory.GetProviderSearchViewModelForStandard(standardId.Value, @Url);
-            }
-            else if (frameworkId != null)
-            {
-                viewModel = _apprenticeshipViewModelFactory.GetFrameworkProvidersViewModel(frameworkId.Value, @Url);
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
-            }
+            //ProviderSearchViewModel viewModel;
 
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.PostCode = postCode;
-            viewModel.SearchTerms = keywords;
+            //if (standardId != null)
+            //{
+            //    viewModel = _apprenticeshipViewModelFactory.GetProviderSearchViewModelForStandard(standardId.Value, @Url);
+            //}
+            //else if (frameworkId != null)
+            //{
+            //    viewModel = _apprenticeshipViewModelFactory.GetFrameworkProvidersViewModel(frameworkId.Value, @Url);
+            //}
+            //else
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
+            //}
 
-            return View(viewModel);
+            //viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            //viewModel.PostCode = postCode;
+            //viewModel.SearchTerms = keywords;
+
+            //return View(viewModel);
         }
     }
 }

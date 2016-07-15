@@ -11,7 +11,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IApprenticeshipSearchService _searchService;
         private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public ApprenticeshipSearchHandler(IApprenticeshipSearchService searchService, IShortlistCollection<int> shortlistCollection)
+        public ApprenticeshipSearchHandler(
+            IApprenticeshipSearchService searchService, 
+            IShortlistCollection<int> shortlistCollection)
         {
             _searchService = searchService;
             _shortlistCollection = shortlistCollection;
@@ -19,7 +21,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public ApprenticeshipSearchResponse Handle(ApprenticeshipSearchQuery message)
         {
-            var response = new ApprenticeshipSearchResponse();
+            var response = new ApprenticeshipSearchResponse
+            {
+                SortOrder = message.Order == 0 ? "1" : message.Order.ToString(),
+                SearchTerm = message.Keywords
+            };
 
             message.Page = message.Page <= 0 ? 1 : message.Page;
 
@@ -33,14 +39,20 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return response;
             }
 
-            var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListName).Select(standard => standard.ApprenticeshipId).ToList();
-            var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListName).Select(framework => framework.ApprenticeshipId).ToList();
+            response.ActualPage = searchResults.ActualPage;
+            response.AggregationLevel = searchResults.LevelAggregation;
+            response.SearchTerm = message.Keywords;
+            response.Results = searchResults.Results;
+            response.ResultsToTake = searchResults.ResultsToTake;
+            response.SelectedLevels = searchResults.SelectedLevels?.ToList();
+            response.TotalResults = searchResults.TotalResults;
+            response.LastPage = searchResults.LastPage;
 
-            response.ShortlistedStandards = shotListedStandardsCollection.ToDictionary(standard => standard, standard => true);
-            response.ShortlistedFrameworks = shotListedFrameworksCollection.ToDictionary(framework => framework, framework => true);
+            var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListName)?.Select(standard => standard.ApprenticeshipId).ToList();
+            var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListName)?.Select(framework => framework.ApprenticeshipId).ToList();
 
-            response.SortOrder = message.Order == 0 ? "1" : message.Order.ToString();
-            response.ActualPage = message.Page;
+            response.ShortlistedStandards = shotListedStandardsCollection?.ToDictionary(standard => standard, standard => true);
+            response.ShortlistedFrameworks = shotListedFrameworksCollection?.ToDictionary(framework => framework, framework => true);
 
             response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.Success;
 

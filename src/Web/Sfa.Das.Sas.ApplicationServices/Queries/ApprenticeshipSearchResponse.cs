@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
             Success,
             SearchFailed,
             SearchPageLimitExceeded,
-
+            NoSearchResultsFound
         }
 
         public long TotalResults { get; set; }

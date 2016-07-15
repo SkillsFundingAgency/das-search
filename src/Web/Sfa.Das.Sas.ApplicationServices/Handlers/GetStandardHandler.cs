@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             response.Standard = standard;
 
             var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListName);
-            response.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(response.Standard.StandardId));
+            response.IsShortlisted = shortlistedApprenticeships?.Any(x => x.ApprenticeshipId.Equals(response.Standard.StandardId)) ?? false;
             response.SearchTerms = message.Keywords;
 
             return response;

@@ -150,12 +150,6 @@ namespace Sfa.Das.Sas.Web.Services
         private static void CreateApprenticeshipSearchResultsMappings(IMapperConfiguration cfg)
         {
             // Apprenticeship search listing  -> mix of standard and framework
-            //cfg.CreateMap<ApprenticeshipSearchResults, ApprenticeshipSearchResultViewModel>()
-            //    .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
-            //    .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
-            //    .ForMember(x => x.ShortlistedStandards, y => y.Ignore()) // In controller
-            //    .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
-
             cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
                .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
                .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
@@ -172,20 +166,39 @@ namespace Sfa.Das.Sas.Web.Services
         private static void CreateApprenticeshipDetailsMappings(IMapperConfiguration cfg)
         {
             // Standard detail page
-            cfg.CreateMap<Standard, StandardViewModel>()
-                .ForMember(x => x.IsShortlisted, y => y.Ignore()) // In controller
-                .ForMember(x => x.SearchTerm, y => y.Ignore()) // In controller
-                .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.TypicalLength)))
+            cfg.CreateMap<GetStandardResponse, StandardViewModel>()
+                .ForMember(x => x.StandardId, y => y.MapFrom(z => z.Standard.StandardId))
+                .ForMember(x => x.AssessmentPlanPdf, y => y.MapFrom(z => z.Standard.AssessmentPlanPdf))
+                .ForMember(x => x.EntryRequirements, y => y.MapFrom(z => z.Standard.EntryRequirements))
+                .ForMember(x => x.IsShortlisted, y => y.MapFrom(z => z.IsShortlisted))
+                .ForMember(x => x.Level, y => y.MapFrom(z => z.Standard.Level))
+                .ForMember(x => x.OverviewOfRole, y => y.MapFrom(z => z.Standard.OverviewOfRole))
+                .ForMember(x => x.ProfessionalRegistration, y => y.MapFrom(z => z.Standard.ProfessionalRegistration))
+                .ForMember(x => x.Qualifications, y => y.MapFrom(z => z.Standard.Qualifications))
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
+                .ForMember(x => x.StandardPdf, y => y.MapFrom(z => z.Standard.StandardPdf))
+                .ForMember(x => x.Title, y => y.MapFrom(z => z.Standard.Title))
+                .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.Standard.TypicalLength)))
+                .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))
                 ;
 
             // Framework detail page
-            cfg.CreateMap<Framework, FrameworkViewModel>()
-                .ForMember(x => x.ExpiryDateString, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetExpirydateAsString(z.ExpiryDate)))
-                .ForMember(x => x.IsShortlisted, y => y.Ignore()) // In controller
-                .ForMember(x => x.SearchTerm, y => y.Ignore()) // In controller
-                .ForMember(x => x.JobRoles, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTitlesFromJobRoles(z.JobRoleItems)))
-                .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.TypicalLength)))
-                .ForMember(x => x.ProfessionalRegistration, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.ProfessionalRegistration))
+            cfg.CreateMap<GetFrameworkResponse, FrameworkViewModel>()
+                .ForMember(x => x.CombinedQualificiation, y => y.MapFrom(z => z.Framework.CombinedQualificiation))
+                .ForMember(x => x.CompetencyQualification, y => y.MapFrom(z => z.Framework.CompetencyQualification))
+                .ForMember(x => x.CompletionQualifications, y => y.MapFrom(z => z.Framework.CompletionQualifications))
+                .ForMember(x => x.EntryRequirements, y => y.MapFrom(z => z.Framework.EntryRequirements))
+                .ForMember(x => x.ExpiryDateString, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetExpirydateAsString(z.Framework.ExpiryDate)))
+                .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.Framework.FrameworkId))
+                .ForMember(x => x.FrameworkOverview, y => y.MapFrom(z => z.Framework.FrameworkOverview))
+                .ForMember(x => x.IsShortlisted, y => y.MapFrom(z => z.IsShortlisted))
+                .ForMember(x => x.JobRoles, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTitlesFromJobRoles(z.Framework.JobRoleItems)))
+                .ForMember(x => x.KnowledgeQualification, y => y.MapFrom(z => z.Framework.KnowledgeQualification))
+                .ForMember(x => x.Level, y => y.MapFrom(z => z.Framework.Level))
+                .ForMember(x => x.ProfessionalRegistration, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.Framework.ProfessionalRegistration))
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
+                .ForMember(x => x.Title, y => y.MapFrom(z => z.Framework.Title))
+                .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.Framework.TypicalLength)))
                 ;
         }
 

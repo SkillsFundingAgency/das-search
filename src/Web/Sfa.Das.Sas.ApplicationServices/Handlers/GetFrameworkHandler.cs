@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
@@ -41,7 +42,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             response.Framework = framework;
 
             var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListName);
-            response.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(response.Framework.FrameworkId));
+            response.IsShortlisted = shortlistedApprenticeships?.Any(x => x.ApprenticeshipId.Equals(response.Framework.FrameworkId)) ?? false;
             response.SearchTerms = message.Keywords;
 
             return response;
