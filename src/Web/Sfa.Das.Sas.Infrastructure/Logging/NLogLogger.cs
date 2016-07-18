@@ -19,15 +19,17 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
         private readonly IConfigurationSettings _settings;
 
         private readonly string _loggerType;
+        private readonly IRequestContext _context;
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
 #pragma warning restore S1144, 0169 // Unused private types or members should be removed
 
-        public NLogLogger(Type loggerType, IConfigurationSettings settings)
+        public NLogLogger(Type loggerType, IConfigurationSettings settings, IRequestContext context)
         {
             _settings = settings;
             _loggerType = loggerType?.ToString() ?? "DefaultWebLogger";
+            _context = context;
         }
 
         public LoggingConfiguration LoggingConfiguration { get; set; }
@@ -118,6 +120,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             propertiesLocal.Add("Application", _settings.ApplicationName);
             propertiesLocal.Add("Environment", _settings.EnvironmentName);
             propertiesLocal.Add("LoggerType", _loggerType);
+            propertiesLocal.Add("RequestCtx", _context);
 
             var logEvent = new LogEventInfo(level, _loggerType, msg.ToString());
 

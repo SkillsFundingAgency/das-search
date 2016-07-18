@@ -7,7 +7,6 @@ using Sfa.Das.Sas.Infrastructure.Logging;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using StructureMap;
-using StructureMap.Configuration.DSL;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
@@ -18,7 +17,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
     {
         public InfrastructureRegistry()
         {
-            For<ILog>().Use(x => new NLogLogger(x.ParentType, x.GetInstance<IConfigurationSettings>())).AlwaysUnique();
+            For<ILog>().Use(x => new NLogLogger(x.ParentType, x.GetInstance<IConfigurationSettings>(), x.GetInstance<IRequestContext>())).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
