@@ -96,6 +96,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             var totalCount = 0;
             var took = 0;
             var errorCount = 0;
+
             foreach (var bulkResponse in elementIndexResult)
             {
                 totalCount += bulkResponse.Items.Count();
