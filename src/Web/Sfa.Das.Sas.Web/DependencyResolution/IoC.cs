@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
         {
             return new Container(c => {
                 c.AddRegistry<DefaultRegistry>();
-                c.AddRegistry<SearchRegistry>();
+                c.AddRegistry<WebRegistry>();
                 c.AddRegistry<InfrastructureRegistry>();
                 c.AddRegistry<ApplicationServicesRegistry>();
             });

@@ -86,31 +86,30 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)
         {
-            return CreateStandardProviderDocument(provider, standardInformation, new List<DeliveryInformation> { deliveryInformation }, deliveryInformation.DeliveryLocation.Id.ToString());
+            return CreateStandardProviderDocument(provider, standardInformation, new List<DeliveryInformation> { deliveryInformation });
         }
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, IEnumerable<DeliveryInformation> deliveryInformation)
         {
-            return CreateStandardProviderDocument(provider, standardInformation, deliveryInformation.ToList(), "s100PercentEmployer");
+            return CreateStandardProviderDocument(provider, standardInformation, deliveryInformation.ToList());
         }
 
         public FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation frameworkInformation, DeliveryInformation deliveryInformation)
         {
-            return CreateFrameworkProviderDocument(provider, frameworkInformation, new List<DeliveryInformation> { deliveryInformation }, deliveryInformation.DeliveryLocation.Id.ToString());
+            return CreateFrameworkProviderDocument(provider, frameworkInformation, new List<DeliveryInformation> { deliveryInformation });
         }
 
         public FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation frameworkInformation, IEnumerable<DeliveryInformation> deliveryInformation)
         {
-            return CreateFrameworkProviderDocument(provider, frameworkInformation, deliveryInformation.ToList(), "f100PercentEmployer");
+            return CreateFrameworkProviderDocument(provider, frameworkInformation, deliveryInformation.ToList());
         }
 
-        private StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, List<DeliveryInformation> deliveryInformation, string locationId)
+        private StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, List<DeliveryInformation> deliveryInformation)
         {
             try
             {
                 var standardProvider = new StandardProvider
                 {
-                    Id = $"{provider.Ukprn}-{standardInformation.Code}-{locationId}",
                     StandardCode = standardInformation.Code
                 };
 
@@ -124,13 +123,12 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             }
         }
 
-        private FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation frameworkInformation, List<DeliveryInformation> deliveryInformation, string locationId)
+        private FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation frameworkInformation, List<DeliveryInformation> deliveryInformation)
         {
             try
             {
                 var frameworkProvider = new FrameworkProvider
                 {
-                    Id = $"{provider.Ukprn}-{frameworkInformation.Code}{MapLevelProgType(frameworkInformation.ProgType)}{frameworkInformation.PathwayCode}-{locationId}",
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
                     FrameworkId = string.Concat(frameworkInformation.Code, MapLevelProgType(frameworkInformation.ProgType), frameworkInformation.PathwayCode),

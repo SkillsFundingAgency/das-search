@@ -4,43 +4,43 @@
     shortlist.StandardCookieName = "das_shortlist_standards";
     shortlist.FrameworkCookieName = "das_shortlist_frameworks";
 
-    shortlist.AddStandardProvider = function (providerId, apprenticeshipId, locationId)
+    shortlist.AddStandardProvider = function (providerUkprn, apprenticeshipId, locationId)
     {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(shortlist.StandardCookieName);
 
         if (cookie)
         {
-            cookie.AddSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
+            cookie.AddSubKeyValue(apprenticeshipId, providerUkprn + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     };
 
-    shortlist.AddFrameworkProvider = function (providerId, apprenticeshipId, locationId)
+    shortlist.AddFrameworkProvider = function (providerUkprn, apprenticeshipId, locationId)
     {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(shortlist.FrameworkCookieName);
 
         if (cookie) {
-            cookie.AddSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
+            cookie.AddSubKeyValue(apprenticeshipId, providerUkprn + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     };
 
-    shortlist.RemoveStandardProvider = function (providerId, apprenticeshipId, locationId)
+    shortlist.RemoveStandardProvider = function (providerUkprn, apprenticeshipId, locationId)
     {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(shortlist.StandardCookieName);
 
         if (cookie) {
-            cookie.RemoveSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
+            cookie.RemoveSubKeyValue(apprenticeshipId, providerUkprn + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     };
 
-    shortlist.RemoveFrameworkProvider = function (providerId, apprenticeshipId, locationId)
+    shortlist.RemoveFrameworkProvider = function (providerUkprn, apprenticeshipId, locationId)
     {
         var cookie = SearchAndShortlist.CookieStore.GetCookie(shortlist.FrameworkCookieName);
 
         if (cookie) {
-            cookie.RemoveSubKeyValue(apprenticeshipId, providerId + "-" + locationId);
+            cookie.RemoveSubKeyValue(apprenticeshipId, providerUkprn + "-" + locationId);
             SearchAndShortlist.CookieStore.SaveCookie(cookie);
         }
     };

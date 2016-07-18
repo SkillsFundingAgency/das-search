@@ -1,15 +1,26 @@
+using System.Web;
+using MediatR;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
+using Sfa.Das.Sas.Web.Logging;
 using Sfa.Das.Sas.Web.Services;
 using StructureMap;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
 {
-    public class SearchRegistry : Registry
+    public class WebRegistry : Registry
     {
-        public SearchRegistry()
+        public WebRegistry()
         {
+            For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+            For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+            For<IShortlistCollection<int>>().Use<CookieShortlistCollection>();
+            For<IMediator>().Use<Mediator>();
+            For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
+
             For<IMappingService>().Use<MappingService>();
             For<ICookieService>().Use<CookieService>();
 

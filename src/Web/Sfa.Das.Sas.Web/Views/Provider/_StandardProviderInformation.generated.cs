@@ -231,7 +231,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 
 #line 54 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-public System.Web.WebPages.HelperResult GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
+public System.Web.WebPages.HelperResult GetShortlistLink(int ukprn, int apprenticeshipId, int locationId, bool isShortlisted)
 {
 #line default
 #line hidden
@@ -239,25 +239,24 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 55 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
  
-    if (Is<ShortlistingFeature>.Enabled) {
-        providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
+if (Is<ShortlistingFeature>.Enabled) {
 
-        if (isShortlisted)
-        {
+    if (isShortlisted)
+    {
                 
 
 #line default
 #line hidden
 
-#line 61 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 60 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveStandardProvider", "ShortList",
-                    new { apprenticeshipId, providerId, locationId },
+                    new { apprenticeshipId, ukprn, locationId },
                     new
                     {
                         @class = "link shortlist-link provider-search-shortlist-link",
                         rel = "nofollow",
                         data_apprenticeship = apprenticeshipId,
-                        data_provider = providerId,
+                        data_provider = ukprn,
                         data_location = locationId,
                         data_action = "remove",
                         data_apprenticeship_type = "Standard"
@@ -267,7 +266,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveStandardProvider
 #line default
 #line hidden
 
-#line 72 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 71 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                       
         }
         else
@@ -277,15 +276,15 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveStandardProvider
 #line default
 #line hidden
 
-#line 76 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 75 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider", "ShortList",
-                    new { apprenticeshipId, providerId, locationId },
+                    new { apprenticeshipId, ukprn, locationId },
                     new
                     {
                         @class = "link shortlist-link provider-search-shortlist-link",
                         rel = "nofollow",
                         data_apprenticeship = apprenticeshipId,
-                        data_provider = providerId,
+                        data_provider = ukprn,
                         data_location = locationId,
                         data_action = "add",
                         data_apprenticeship_type = "Standard"
@@ -295,7 +294,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider
 #line default
 #line hidden
 
-#line 87 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 86 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                       
         }
     }
@@ -305,7 +304,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddStandardProvider
 #line hidden
 });
 
-#line 90 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 89 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -339,7 +338,7 @@ WriteLiteral("                    ");
 
             
             #line 11 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-               Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
+               Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
 
             
             #line default
@@ -400,7 +399,7 @@ WriteLiteral("               ");
 
             
             #line 29 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-          Write(GetShortlistLink(item.Id, item.StandardCode, item.LocationId, item.IsShortlisted));
+          Write(GetShortlistLink(item.UkPrn, item.StandardCode, item.LocationId, item.IsShortlisted));
 
             
             #line default

@@ -31,12 +31,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 
         private static ApprenticeshipDetails MapFromInterface(IApprenticeshipProviderSearchResultsItem item, int locationId)
         {
-            var providerIdString = item.Id
-                                       .Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)
-                                       .First();
-
-            var providerId = int.Parse(providerIdString);
-
             var matchingLocation = item.TrainingLocations.Single(x => x.LocationId == locationId);
 
             return new ApprenticeshipDetails
@@ -62,7 +56,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 },
                 Provider = new Provider
                 {
-                    Id = providerId,
                     Name = item.ProviderName,
                     UkPrn = item.Ukprn,
                     ContactInformation = new ContactInformation

@@ -29,48 +29,48 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _providerMapping = providerMapping;
         }
 
-        public ApprenticeshipDetails GetCourseByStandardCode(string providerid, string locationId, string standardCode)
+        public ApprenticeshipDetails GetCourseByStandardCode(int ukprn, int locationId, string standardCode)
         {
             try
             {
                 var document =
                     GetProvider<StandardProviderSearchResultsItem>(
                         q =>
-                        q.Term(t => t.Ukprn, providerid)
+                        q.Term(t => t.Ukprn, ukprn)
                         && q.Term(t => t.StandardCode, standardCode)
                         && q.Nested(n => n
                             .Path(p => p.TrainingLocations)
                             .Query(nq => nq.Term(nt => nt.TrainingLocations.First().LocationId, locationId))));
-                return _providerMapping.MapToProvider(document, int.Parse(locationId));
+                return _providerMapping.MapToProvider(document, locationId);
             }
             catch (Exception ex)
             {
                 _applicationLogger.Error(
                     ex,
-                    $"Trying to get standard with provider id {providerid}, standard code {standardCode} and location id {locationId}");
+                    $"Trying to get standard with provider id {ukprn}, standard code {standardCode} and location id {locationId}");
                 throw;
             }
         }
 
-        public ApprenticeshipDetails GetCourseByFrameworkId(string providerid, string locationId, string frameworkId)
+        public ApprenticeshipDetails GetCourseByFrameworkId(int ukprn, int locationId, string frameworkId)
         {
             try
             {
                 var document =
                     GetProvider<FrameworkProviderSearchResultsItem>(
                         q =>
-                        q.Term(t => t.Ukprn, providerid)
+                        q.Term(t => t.Ukprn, ukprn)
                         && q.Term(t => t.FrameworkId, frameworkId)
                         && q.Nested(n => n
                             .Path(p => p.TrainingLocations)
                             .Query(nq => nq.Term(nt => nt.TrainingLocations.First().LocationId, locationId))));
-                return _providerMapping.MapToProvider(document, int.Parse(locationId));
+                return _providerMapping.MapToProvider(document, locationId);
             }
             catch (Exception ex)
             {
                 _applicationLogger.Error(
                     ex,
-                    $"Trying to get standard with provider id {providerid}, framework id {frameworkId} and location id {locationId}");
+                    $"Trying to get standard with provider id {ukprn}, framework id {frameworkId} and location id {locationId}");
                 throw;
             }
         }

@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidInput))
             {
-                return new DetailProviderResponse {StatusCode = DetailProviderResponse.ResponseCodes.InvalidInput};
+                return new DetailProviderResponse { StatusCode = DetailProviderResponse.ResponseCodes.InvalidInput };
             }
 
             if (result.IsValid && !string.IsNullOrEmpty(message.StandardCode))
@@ -68,7 +68,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private DetailProviderResponse GetStandard(ProviderDetailQuery message)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                message.ProviderId,
+                message.Ukprn,
                 message.LocationId,
                 message.StandardCode);
 
@@ -80,7 +80,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private DetailProviderResponse GetFramework(ProviderDetailQuery message)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                message.ProviderId,
+                message.Ukprn,
                 message.LocationId,
                 message.FrameworkId);
 
@@ -108,24 +108,23 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 ApprenticeshipLevel = apprenticeshipProduct.Level.ToString()
             };
 
-            response.IsShortlisted = IsShortlisted(response, model.Location.LocationId, model.Provider.Id);
+                response.IsShortlisted = IsShortlisted(response, model.Location.LocationId, model.Provider.UkPrn);
             return response;
         }
 
-        private bool IsShortlisted(DetailProviderResponse response, int locationId, int providerId)
+        private bool IsShortlisted(DetailProviderResponse response, int locationId, int ukprn)
         {
             var shortlistListName = response.ApprenticeshipType == ApprenticeshipTrainingType.Framework
-                ? Constants.StandardsShortListName
-                : Constants.FrameworksShortListName;
+                ? Constants.FrameworksShortListName
+                : Constants.StandardsShortListName;
 
             var shortlistedApprenticeships = _shortlistCollection.GetAllItems(shortlistListName);
 
             var apprenticeship = shortlistedApprenticeships?.SingleOrDefault(x =>
                 x.ApprenticeshipId.Equals(response.ApprenticeshipDetails.Product.Apprenticeship.Code));
 
-            var isShortlisted = apprenticeship?.ProvidersIdAndLocation.Any(x =>
-                x.LocationId.Equals(locationId) &&
-                x.ProviderId.Equals(providerId.ToString(), StringComparison.CurrentCulture));
+            var isShortlisted = apprenticeship?.ProvidersUkrpnAndLocation.Any(x =>
+                x.LocationId == locationId && x.Ukprn == ukprn);
 
             return isShortlisted.HasValue && isShortlisted.Value;
         }

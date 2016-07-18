@@ -85,7 +85,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "100PercentEmployer" },
                 Distance = 1,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };
@@ -95,7 +95,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };
@@ -130,7 +130,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12,
                 DeliveryOptionsMessage = "block release"
@@ -160,7 +160,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12,
                 DeliveryOptionsMessage = "block release, at your location"
@@ -190,7 +190,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12,
                 DeliveryOptionsMessage = "day release, block release, at your location"
@@ -220,7 +220,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 DeliveryModes = new List<string> { "BlockRelease" },
                 Distance = 1.2,
                 Address = new Address(),
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };
@@ -256,7 +256,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };
@@ -295,7 +295,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };
@@ -335,7 +335,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };
@@ -369,7 +369,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Address = new Address(),
                 EmployerSatisfactionMessage = "87%",
                 LearnerSatisfactionMessage = "99.9%",
-                Id = "1",
+                UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
             };

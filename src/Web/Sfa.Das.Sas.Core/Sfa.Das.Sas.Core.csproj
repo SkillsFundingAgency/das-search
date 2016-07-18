@@ -112,6 +112,7 @@
     <Compile Include="Domain\Model\Coordinate.cs" />
     <Compile Include="Domain\Model\Standard.cs" />
     <Compile Include="Logging\ILogEntry.cs" />
+    <Compile Include="Logging\IRequestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

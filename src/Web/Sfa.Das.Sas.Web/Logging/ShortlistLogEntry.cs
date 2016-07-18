@@ -8,9 +8,7 @@ namespace Sfa.Das.Sas.Web.Logging
 
         public int StandardId { get; set; }
         public int FrameworkId { get; set; }
-
-        public string ProviderId { get; set; }
-
+        public int Ukprn { get; set; }
         public int LocationId { get; set; }
     }
 }

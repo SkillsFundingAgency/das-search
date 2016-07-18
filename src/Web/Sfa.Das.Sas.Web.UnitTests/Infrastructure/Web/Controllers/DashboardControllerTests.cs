@@ -66,12 +66,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             // Assign
             var standardId = 3;
             _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListName))
-                .Returns(new[]
-                {
-                    new ShortlistedApprenticeship {ApprenticeshipId = 45, ProvidersIdAndLocation = new List<ShortlistedProvider>()},
-                    new ShortlistedApprenticeship {ApprenticeshipId = standardId, ProvidersIdAndLocation = new List<ShortlistedProvider>()},
-                    new ShortlistedApprenticeship {ApprenticeshipId = 83, ProvidersIdAndLocation = new List<ShortlistedProvider>()}
-                });
+                                .Returns(new[]
+                                {
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 45, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = standardId, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() }
+                                });
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
                 .Returns(new Standard {StandardId = standardId});
 
@@ -94,12 +94,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             // Assign
             var standardId = 3;
             _mockListCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListName))
-                .Returns(new[]
-                {
-                    new ShortlistedApprenticeship {ApprenticeshipId = 45, ProvidersIdAndLocation = new List<ShortlistedProvider>()},
-                    new ShortlistedApprenticeship {ApprenticeshipId = standardId, ProvidersIdAndLocation = new List<ShortlistedProvider>()},
-                    new ShortlistedApprenticeship {ApprenticeshipId = 83, ProvidersIdAndLocation = new List<ShortlistedProvider>()}
-                });
+                                .Returns(new[]
+                                {
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 45, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = standardId, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() }
+                                });
 
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
                 .Returns(new Standard() {StandardId = standardId});
@@ -143,12 +143,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .Returns(new List<ShortlistedApprenticeship>());
 
             _mockListCollection.Setup(x => x.GetAllItems(Constants.FrameworksShortListName))
-                .Returns(new[]
-                {
-                    new ShortlistedApprenticeship {ApprenticeshipId = 45, ProvidersIdAndLocation = new List<ShortlistedProvider>()},
-                    new ShortlistedApprenticeship {ApprenticeshipId = frameworkId, ProvidersIdAndLocation = new List<ShortlistedProvider>()},
-                    new ShortlistedApprenticeship {ApprenticeshipId = 83, ProvidersIdAndLocation = new List<ShortlistedProvider>()}
-                });
+                                .Returns(new[]
+                                {
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 45, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = frameworkId, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() },
+                                    new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() }
+                                });
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<int>()))
                 .Returns(new Framework() {FrameworkId = frameworkId});
 

@@ -16,11 +16,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using MediatR;
 using StructureMap;
-using Sfa.Das.Sas.ApplicationServices.DependencyResolution;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Web.Collections;
 using StructureMap.Graph;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
@@ -38,10 +34,6 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                 });
-            this.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
-            this.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
-            this.For<IShortlistCollection<int>>().Use<CookieShortlistCollection>();
-            this.For<IMediator>().Use<Mediator>();
         }
 
         #endregion

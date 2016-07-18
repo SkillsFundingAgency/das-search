@@ -8,7 +8,7 @@
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @providerId = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
+                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
                 </h2>
             </header>
 
@@ -35,7 +35,7 @@
                 </dd>
             </dl>
             <div class="shortlist-link">
-                @GetShortlistLink(item.Id, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted)
+                @GetShortlistLink(item.UkPrn, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted)
             </div>
         </article>
     }
@@ -47,22 +47,20 @@
     <dd class="deliveryOptions">@item.DeliveryOptionsMessage</dd>
 }
 
-@helper GetShortlistLink(string providerId, int apprenticeshipId, int locationId, bool isShortlisted)
+@helper GetShortlistLink(int ukprn, int apprenticeshipId, int locationId, bool isShortlisted)
 {
     if (Is<ShortlistingFeature>.Enabled)
     {
-        providerId = providerId.Split(new[] { "-" }, StringSplitOptions.RemoveEmptyEntries)[0];
-
         if (isShortlisted)
         {
                 @Html.ActionLink("Remove", "RemoveFrameworkProvider", "ShortList",
-                    new { apprenticeshipId, providerId, locationId },
+                    new { apprenticeshipId, ukprn, locationId },
                     new
                     {
                         @class = "link shortlist-link provider-search-shortlist-link",
                         rel = "nofollow",
                         data_apprenticeship = apprenticeshipId,
-                        data_provider = providerId,
+                        data_provider = ukprn,
                         data_location = locationId,
                         data_action = "remove",
                         data_apprenticeship_type = "Framework"
@@ -71,13 +69,13 @@
         else
         {
                 @Html.ActionLink("Shortlist", "AddFrameworkProvider", "ShortList",
-                    new { apprenticeshipId, providerId, locationId },
+                    new { apprenticeshipId, ukprn, locationId },
                     new
                     {
                         @class = "link shortlist-link provider-search-shortlist-link",
                         rel = "nofollow",
                         data_apprenticeship = apprenticeshipId,
-                        data_provider = providerId,
+                        data_provider = ukprn,
                         data_location = locationId,
                         data_action = "add",
                         data_apprenticeship_type = "Framework"

@@ -18,10 +18,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
     public sealed class CourseDirectoryClient : IGetApprenticeshipProviders
     {
         private readonly IInfrastructureSettings _settings;
-
         private readonly ICourseDirectoryProviderDataService _courseDirectoryProviderDataService;
-
         private readonly ILog _logger;
+        private readonly HashSet<int> _locationNullErrors = new HashSet<int>();
 
         public CourseDirectoryClient(IInfrastructureSettings settings, ICourseDirectoryProviderDataService courseDirectoryProviderDataService, ILog logger)
         {
@@ -40,6 +39,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
 
             var selectedProviders = providers.Select(MapFromProviderToProviderImport).ToList();
 
+            LogLocationNullErrors();
+
             _logger.Debug(
                 "CourseDirectory.GetApprenticeshipProvidersAsync",
                 new TimingLogEntry { ElaspedMilliseconds = stopwatch.Elapsed.TotalMilliseconds });
@@ -47,6 +48,14 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
             _courseDirectoryProviderDataService.Dispose();
 
             return selectedProviders;
+        }
+
+        private void LogLocationNullErrors()
+        {
+            foreach (var locationId in _locationNullErrors)
+            {
+                _logger.Warn($"Location {locationId} missing coordinates");
+            }
         }
 
         private IEnumerable<StandardInformation> GetStandardsFromIList(IList<Models.Standard> standards, IEnumerable<Das.Sas.Indexer.Core.Models.Provider.Location> providerLocations)
@@ -128,7 +137,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
         {
             if (!matchingLocation.Address.Latitude.HasValue || !matchingLocation.Address.Longitude.HasValue)
             {
-                _logger.Warn($"Location {matchingLocation.ID} missing coordinates");
+                if (matchingLocation.ID.HasValue)
+                {
+                    _locationNullErrors.Add(matchingLocation.ID.Value);
+                }
+
                 return null;
             }
 

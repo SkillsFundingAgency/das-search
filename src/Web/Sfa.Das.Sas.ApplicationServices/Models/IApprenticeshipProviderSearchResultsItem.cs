@@ -9,7 +9,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         double Distance { get; set; }
         string Email { get; set; }
         double? EmployerSatisfaction { get; set; }
-        string Id { get; set; }
         double? LearnerSatisfaction { get; set; }
         string MarketingName { get; set; }
         string ProviderMarketingInfo { get; set; }
@@ -17,7 +16,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string ProviderName { get; set; }
         string Phone { get; set; }
         string ApprenticeshipInfoUrl { get; set; }
-        string Ukprn { get; set; }
+        int Ukprn { get; set; }
         string Website { get; set; }
         IEnumerable<TrainingLocation> TrainingLocations { get; set; }
         int? MatchingLocationId { get; set; }

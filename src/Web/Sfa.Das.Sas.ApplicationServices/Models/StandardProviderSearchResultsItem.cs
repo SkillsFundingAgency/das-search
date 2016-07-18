@@ -4,9 +4,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public sealed class StandardProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
     {
-        public string Id { get; set; }
-
-        public string Ukprn { get; set; }
+        public int Ukprn { get; set; }
 
         public string ProviderName { get; set; }
 

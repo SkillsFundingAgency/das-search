@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public sealed class FrameworkProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
     {
-        public string Id { get; set; }
-
-        public string Ukprn { get; set; }
+        public int Ukprn { get; set; }
 
         public string ProviderName { get; set; }
 

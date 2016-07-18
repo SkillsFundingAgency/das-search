@@ -70,20 +70,20 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 var apprenticeshipViewModel = _shortlistViewModelFactory.GetShortlistViewModel(standard);
 
-                var shortListedProviders = apprenticeship.ProvidersIdAndLocation
+                var shortListedProviders = apprenticeship.ProvidersUkrpnAndLocation
                     .Select(x => _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                        x.ProviderId,
-                        x.LocationId.ToString(),
+                        x.Ukprn,
+                        x.LocationId,
                         apprenticeship.ApprenticeshipId.ToString()));
 
                 var providerViewModels = shortListedProviders.Where(x => x != null)
                     .Select(p => new ShortlistProviderViewModel
                     {
-                        Id = p.Provider.UkPrn,
+                        Ukprn = p.Provider.UkPrn,
                         Name = p.Provider.Name,
                         LocationId = p.Location.LocationId,
                         Address = p.Location.Address,
-                        Url = Url.Action("Detail", "Provider", new {providerId = p.Provider.Id, locationId = p.Location.LocationId, standardCode = standard.StandardId})
+                        Url = Url.Action("Detail", "Provider", new { ukprn = p.Provider.UkPrn, locationId = p.Location.LocationId, standardCode = standard.StandardId })
                     });
 
                 apprenticeshipViewModel.Providers.AddRange(providerViewModels);
@@ -121,20 +121,20 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 var apprenticeshipViewModel = _shortlistViewModelFactory.GetShortlistViewModel(framework);
 
-                var shortListedProviders = apprenticeship.ProvidersIdAndLocation
+                var shortListedProviders = apprenticeship.ProvidersUkrpnAndLocation
                     .Select(x => _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                        x.ProviderId,
-                        x.LocationId.ToString(),
+                        x.Ukprn,
+                        x.LocationId,
                         apprenticeship.ApprenticeshipId.ToString()));
 
                 var providerViewModels = shortListedProviders.Where(x => x != null)
                     .Select(p => new ShortlistProviderViewModel
                     {
-                        Id = p.Provider.UkPrn,
+                        Ukprn = p.Provider.UkPrn,
                         Name = p.Provider.Name,
                         LocationId = p.Location.LocationId,
                         Address = p.Location.Address,
-                        Url = Url.Action("Detail", "Provider", new {providerId = p.Provider.Id, locationId = p.Location.LocationId, frameworkId = framework.FrameworkId})
+                        Url = Url.Action("Detail", "Provider", new { ukprn = p.Provider.UkPrn, locationId = p.Location.LocationId, frameworkId = framework.FrameworkId })
                     });
 
                 apprenticeshipViewModel.Providers.AddRange(providerViewModels);

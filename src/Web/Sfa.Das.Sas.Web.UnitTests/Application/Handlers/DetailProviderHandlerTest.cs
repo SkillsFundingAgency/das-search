@@ -3,14 +3,10 @@
 namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
-
     using FluentAssertions;
-
     using Moq;
-
     using NUnit.Framework;
-
+    using Sas.ApplicationServices.Settings;
     using Sfa.Das.Sas.ApplicationServices.Handlers;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.ApplicationServices.Queries;
@@ -41,7 +37,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             _mockLogger = new Mock<ILog>();
 
             var providerFrameworkSearchResults = new ApprenticeshipDetails();
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(providerFrameworkSearchResults);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(providerFrameworkSearchResults);
 
             _handler = new DetailProviderHandler(
                 new ProviderDetailQueryValidator(new Validation()),
@@ -62,24 +58,23 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.InvalidInput);
         }
 
-        [TestCase("", "")]
-        [TestCase("abba", "1")]
-        [TestCase("1", "abba")]
-        [TestCase("-42", "5")]
-        [TestCase("5", "-42")]
-        public void ShouldNotValidateIfProviderOrLocationIdIsMissing(string providerId, string locationId)
+        [TestCase(-42, 5)]
+        [TestCase(5, -42)]
+        [TestCase(0, 5)]
+        [TestCase(5, 0)]
+        public void ShouldNotValidateIfProviderOrLocationIdIsMissing(int ukprn, int locationId)
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = locationId, ProviderId = providerId };
+            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = locationId, Ukprn = ukprn };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
                 Product = new ApprenticeshipProduct(),
                 Location = new Location { LocationId = 55 },
-                Provider = new Provider { Id = 42 }
+                Provider = new Provider { UkPrn = 42 }
             };
 
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById(1)).Returns(stubStandardProduct);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -91,16 +86,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetStandard()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = "5", ProviderId = "42" };
+            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
                 Product = new ApprenticeshipProduct(),
                 Location = new Location { LocationId = 5 },
-                Provider = new Provider { Id = 42 }
+                Provider = new Provider { UkPrn = 42 }
             };
 
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById(1)).Returns(null as Standard);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -113,10 +108,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetCourceByStandardCode()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = "5", ProviderId = "42" };
+            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
             _mockIGetStandards.Setup(x => x.GetStandardById(1)).Returns(stubStandardProduct);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -129,16 +124,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetFramework()
         {
-            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = "5", ProviderId = "42" };
+            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
                 Product = new ApprenticeshipProduct(),
                 Location = new Location { LocationId = 5 },
-                Provider = new Provider { Id = 42 }
+                Provider = new Provider { UkPrn = 42 }
             };
 
-            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetFrameworks.Setup(x => x.GetFrameworkById(1)).Returns(null as Framework);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -151,10 +146,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetCourceByFrameworkCode()
         {
-            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = "5", ProviderId = "42" };
+            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Framework1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
             _mockIGetStandards.Setup(x => x.GetStandardById(1)).Returns(stubStandardProduct);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -167,16 +162,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAStandard()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = "55", ProviderId = "42" };
+            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
                                          {
                                              Product = new ApprenticeshipProduct(),
                                              Location = new Location { LocationId = 55 },
-                                             Provider = new Provider { Id = 42 }
+                                             Provider = new Provider { UkPrn = 42 }
                                          };
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4,  };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById(1)).Returns(stubStandardProduct);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -191,16 +186,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAFramework()
         {
-            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = "55", ProviderId = "42" };
+            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 55, Ukprn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
                 Product = new ApprenticeshipProduct(),
                 Location = new Location { LocationId = 55 },
-                Provider = new Provider { Id = 42 }
+                Provider = new Provider { UkPrn = 42 }
             };
             var stubStandardProduct = new Framework { Title = "Framework1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetFrameworks.Setup(x => x.GetFrameworkById(1)).Returns(stubStandardProduct);
             _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(new List<ShortlistedApprenticeship>());
 
@@ -210,6 +205,60 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");
             response.ApprenticeshipNameWithLevel.ShouldAllBeEquivalentTo("Framework1");
             response.ApprenticeshipType.ShouldBeEquivalentTo(ApprenticeshipTrainingType.Framework);
+        }
+
+        [Test]
+        public void ShouldMarkAsShortlistedIfItHasBeenForAFramework()
+        {
+            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 55, Ukprn = 42 };
+            var stubApprenticeship = new ApprenticeshipDetails
+            {
+                Product = new ApprenticeshipProduct { Apprenticeship = new ApprenticeshipBasic { Code = 1 } },
+                Location = new Location { LocationId = 55 },
+                Provider = new Provider { UkPrn = 42 }
+            };
+
+            var stubFrameworkProduct = new Framework { Title = "Framework1", Level = 4, };
+            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockIGetFrameworks.Setup(x => x.GetFrameworkById(1)).Returns(stubFrameworkProduct);
+            _mockShortlistCollection.Setup(x => x.GetAllItems(Constants.FrameworksShortListName)).Returns(CreateTestShortlist());
+
+            var response = _handler.Handle(message);
+
+            response.IsShortlisted.Should().BeTrue();
+        }
+
+        [Test]
+        public void ShouldMarkAsShortlistedIfItHasBeenForAStandard()
+        {
+            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
+            var stubApprenticeship = new ApprenticeshipDetails
+            {
+                Product = new ApprenticeshipProduct { Apprenticeship = new ApprenticeshipBasic { Code = 1 } },
+                Location = new Location { LocationId = 55 },
+                Provider = new Provider { UkPrn = 42 }
+            };
+
+            var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockIGetStandards.Setup(x => x.GetStandardById(1)).Returns(stubStandardProduct);
+            _mockShortlistCollection.Setup(x => x.GetAllItems(Constants.StandardsShortListName)).Returns(CreateTestShortlist());
+
+            var response = _handler.Handle(message);
+
+            response.IsShortlisted.Should().BeTrue();
+        }
+
+        private static List<ShortlistedApprenticeship> CreateTestShortlist()
+        {
+            return new List<ShortlistedApprenticeship>()
+            {
+                new ShortlistedApprenticeship
+                {
+                    ApprenticeshipId = 1,
+                    ProvidersUkrpnAndLocation = new List<ShortlistedProvider> { new ShortlistedProvider { Ukprn = 42, LocationId = 55 } }
+                }
+            };
         }
     }
 }
