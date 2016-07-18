@@ -1,20 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Net;
-    using System.Web.Routing;
-
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Web.Extensions;
-
-    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+    [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
         private readonly ILog _logger;
@@ -46,9 +44,9 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
                     var postCodeUrl = Url.Action(
-                        "SearchForProviders",
+                        "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new {HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode});
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
@@ -62,7 +60,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
-                                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
+                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
 
             return View(viewModel);
         }
@@ -82,9 +80,9 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
                     var urlPostCodeSearch = Url.Action(
-                        "SearchForProviders",
+                        "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                        new {HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode});
                     return new RedirectResult(urlPostCodeSearch);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
@@ -97,7 +95,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(response, opt => opt
-                                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
+                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
 
             return View(viewModel);
         }
@@ -126,11 +124,11 @@ namespace Sfa.Das.Sas.Web.Controllers
         private static RouteValueDictionary GenerateProviderResultsRouteValues(ProviderSearchQuery criteria, int currentPage)
         {
             return new RouteValueDictionary()
-                        .AddValue("page", currentPage)
-                        .AddValue("postcode", criteria?.PostCode ?? string.Empty)
-                        .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
-                        .AddValue("showall", criteria?.ShowAll)
-                        .AddList("deliverymodes", criteria?.DeliveryModes);
+                .AddValue("page", currentPage)
+                .AddValue("postcode", criteria?.PostCode ?? string.Empty)
+                .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
+                .AddValue("showall", criteria?.ShowAll)
+                .AddList("deliverymodes", criteria?.DeliveryModes);
         }
     }
 }

@@ -5,6 +5,7 @@ using MediatR;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Services;
@@ -196,7 +197,102 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             result.StatusCode.Should().Be(404);
         }
 
-       
+        [Test]
+        public void ShouldReturnStandardProviders()
+        {
+            var response = new GetStandardProvidersResponse
+            {
+                StatusCode = GetStandardProvidersResponse.ResponseCodes.Success
+            };
 
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardProvidersQuery>())).Returns(response);
+
+            _mockMappingService.Setup(x =>
+                x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response))
+                .Returns(new ProviderSearchViewModel());
+
+            _sut.SearchForStandardProviders(2, "AB12 3CD", "test", string.Empty);
+
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response), Times.Once);
+        }
+
+        [Test]
+        public void ShouldReturnStandardProvidersNotFound()
+        {
+            var response = new GetStandardProvidersResponse
+            {
+                StatusCode = GetStandardProvidersResponse.ResponseCodes.NoStandardFound
+            };
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardProvidersQuery>())).Returns(response);
+
+            _mockMappingService.Setup(x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(
+                It.IsAny<GetStandardProvidersResponse>()));
+
+            var result = _sut.SearchForStandardProviders(2, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
+
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(
+                    It.IsAny<GetStandardProvidersResponse>()), Times.Never);
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnFrameworkProviders()
+        {
+            // Assign
+            var response = new GetFrameworkProvidersResponse
+            {
+                StatusCode = GetFrameworkProvidersResponse.ResponseCodes.Success
+            };
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()))
+                .Returns(response);
+
+            _mockMappingService.Setup(x =>
+                x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response))
+                .Returns(new ProviderSearchViewModel());
+
+            // Act
+            _sut.SearchForFrameworkProviders(2, "AB12 3CD", "test", string.Empty);
+
+            // Assert
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response), Times.Once);
+        }
+
+        [Test]
+        public void ShouldReturnFrameworkProvidersNotFound()
+        {
+            var response = new GetFrameworkProvidersResponse
+            {
+                StatusCode = GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound
+            };
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>())).Returns(response);
+
+            _mockMappingService.Setup(x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(
+                It.IsAny<GetFrameworkProvidersResponse>()));
+
+            var result = _sut.SearchForFrameworkProviders(2, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
+
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(
+                    It.IsAny<GetFrameworkProvidersResponse>()), Times.Never);
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
     }
 }

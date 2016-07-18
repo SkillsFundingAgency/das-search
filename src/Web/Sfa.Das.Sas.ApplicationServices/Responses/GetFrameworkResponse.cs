@@ -1,19 +1,19 @@
 ﻿using Sfa.Das.Sas.Core.Domain.Model;
 
-namespace Sfa.Das.Sas.ApplicationServices.Queries
+namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
-    public class GetStandardResponse
+    public class GetFrameworkResponse
     {
         public enum ResponseCodes
         {
             Success,
-            InvalidStandardId,
-            StandardNotFound
+            InvalidFrameworkId,
+            FrameworkNotFound
         }
 
         public ResponseCodes StatusCode { get; set; }
 
-        public Standard Standard { get; set; }
+        public Framework Framework { get; set; }
 
         public bool IsShortlisted { get; set; }
 

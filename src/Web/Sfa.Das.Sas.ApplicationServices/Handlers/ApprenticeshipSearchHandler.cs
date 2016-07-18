@@ -2,6 +2,7 @@
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -12,7 +13,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IShortlistCollection<int> _shortlistCollection;
 
         public ApprenticeshipSearchHandler(
-            IApprenticeshipSearchService searchService, 
+            IApprenticeshipSearchService searchService,
             IShortlistCollection<int> shortlistCollection)
         {
             _searchService = searchService;

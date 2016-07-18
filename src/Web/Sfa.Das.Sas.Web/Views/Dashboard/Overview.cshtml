@@ -61,7 +61,7 @@ var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFra
     {
         @Html.ActionLink(
             "Find training providers",
-            "SearchForProviders",
+            "SearchForStandardProviders",
             "Apprenticeship",
             new {@standardId = model.Id},
             new {})
@@ -70,7 +70,7 @@ var method = model is ShortlistStandardViewModel ? "RemoveStandard" : "RemoveFra
     {
         @Html.ActionLink(
             "Find training providers",
-            "SearchForProviders",
+            "SearchForFrameworkProviders",
             "Apprenticeship",
             new { @frameworkId = model.Id },
             new { })

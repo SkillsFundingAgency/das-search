@@ -1,8 +1,8 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Queries
-{
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Domain.Model;
+﻿using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Domain.Model;
 
+namespace Sfa.Das.Sas.ApplicationServices.Responses
+{
     public class DetailProviderResponse
     {
         public enum ResponseCodes

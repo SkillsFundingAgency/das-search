@@ -2,6 +2,7 @@
 using AutoMapper;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Services.MappingActions;
@@ -152,8 +153,8 @@ namespace Sfa.Das.Sas.Web.Services
             // Apprenticeship search listing  -> mix of standard and framework
             cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
                .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
-               .ForMember(x => x.ShortlistedFrameworks, y => y.Ignore()) // In controller
-               .ForMember(x => x.ShortlistedStandards, y => y.Ignore()) // In controller
+               .ForMember(x => x.ShortlistedFrameworks, y => y.MapFrom(z => z.ShortlistedFrameworks))
+               .ForMember(x => x.ShortlistedStandards, y => y.MapFrom(z => z.ShortlistedStandards))
                .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
 
             // Nexzt
@@ -204,6 +205,18 @@ namespace Sfa.Das.Sas.Web.Services
 
         private static void CreateProviderSearchMappings(IMapperConfiguration cfg)
         {
+            cfg.CreateMap<GetFrameworkProvidersResponse, ProviderSearchViewModel>()
+                .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.FrameworkId))
+                .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
+                .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
+                .ForMember(x => x.PostUrl, y => y.Ignore());
+
+            cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
+                .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.StandardId))
+                .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
+                .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
+                .ForMember(x => x.PostUrl, y => y.Ignore());
+
             // Provider search
             cfg.CreateMap<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>()
                 .ForMember(x => x.AbsolutePath, y => y.Ignore())

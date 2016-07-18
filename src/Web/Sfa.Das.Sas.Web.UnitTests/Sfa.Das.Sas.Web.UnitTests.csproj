@@ -149,7 +149,9 @@
     <Compile Include="Application\Handlers\FrameworkProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\GetStandardHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetFrameworkHandlerTest.cs" />
+    <Compile Include="Application\Handlers\GetFrameworkProvidersHandlerTest.cs" />
     <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenveLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Colllections\CookieListCollectionTest.cs" />

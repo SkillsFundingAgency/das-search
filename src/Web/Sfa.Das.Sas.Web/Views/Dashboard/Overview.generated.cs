@@ -204,7 +204,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line 62 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink(
             "Find training providers",
-            "SearchForProviders",
+            "SearchForStandardProviders",
             "Apprenticeship",
             new {@standardId = model.Id},
             new {}));
@@ -226,7 +226,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink(
 #line 71 "..\..\Views\Dashboard\Overview.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink(
             "Find training providers",
-            "SearchForProviders",
+            "SearchForFrameworkProviders",
             "Apprenticeship",
             new { @frameworkId = model.Id },
             new { }));

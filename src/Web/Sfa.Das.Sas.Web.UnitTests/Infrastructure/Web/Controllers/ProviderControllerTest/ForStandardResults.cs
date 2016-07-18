@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
@@ -86,7 +87,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         {
             var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat };
             var mockUrlHelper = new Mock<UrlHelper>();
-            mockUrlHelper.Setup(x => x.Action("SearchForProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
+            mockUrlHelper.Setup(x => x.Action("SearchForStandardProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
 
             var stubViewModel = new ProviderStandardSearchResultViewModel();
 

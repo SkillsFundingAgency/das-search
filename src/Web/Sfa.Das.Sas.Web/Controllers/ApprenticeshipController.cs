@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Attribute;
 using Sfa.Das.Sas.Web.Services;
@@ -42,12 +42,11 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (response.StatusCode == ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
             {
-                var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
+                var rv = new RouteValueDictionary {{"keywords", query?.Keywords}, {"page", response.LastPage}};
                 var index = 0;
 
                 if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
                 {
-
                     foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
                     {
                         rv.Add("SelectedLevels[" + index + "]", level.Value);
@@ -73,7 +72,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         // GET: Standard
         public ActionResult Standard(int id, string keywords)
         {
-            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
+            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
 
             if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
             {
@@ -96,7 +95,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult Framework(int id, string keywords)
         {
-            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
+            var response = _mediator.Send(new GetFrameworkQuery {Id = id, Keywords = keywords});
 
             if (response.StatusCode == GetFrameworkResponse.ResponseCodes.InvalidFrameworkId)
             {
@@ -117,30 +116,52 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string postCode, string keywords, string hasError)
+        public ActionResult SearchForStandardProviders(int standardId, string postcode, string keywords, string hasError)
         {
-            throw new NotImplementedException();
+            var query = new GetStandardProvidersQuery
+            {
+                StandardId = standardId,
+                Postcode = postcode,
+                Keywords = keywords,
+                HasErrors = hasError
+            };
 
-            //ProviderSearchViewModel viewModel;
+            var response = _mediator.Send(query);
 
-            //if (standardId != null)
-            //{
-            //    viewModel = _apprenticeshipViewModelFactory.GetProviderSearchViewModelForStandard(standardId.Value, @Url);
-            //}
-            //else if (frameworkId != null)
-            //{
-            //    viewModel = _apprenticeshipViewModelFactory.GetFrameworkProvidersViewModel(frameworkId.Value, @Url);
-            //}
-            //else
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
-            //}
+            if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
+            {
+                return new HttpNotFoundResult();
+            }
 
-            //viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            //viewModel.PostCode = postCode;
-            //viewModel.SearchTerms = keywords;
+            var viewModel = _mappingService.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response);
 
-            //return View(viewModel);
+            viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
+
+            return View("SearchForProviders", viewModel);
+        }
+
+        public ActionResult SearchForFrameworkProviders(int frameworkId, string postcode, string keywords, string hasError)
+        {
+            var query = new GetFrameworkProvidersQuery
+            {
+                FrameworkId = frameworkId,
+                Postcode = postcode,
+                Keywords = keywords,
+                HasErrors = hasError
+            };
+
+            var response = _mediator.Send(query);
+
+            if (response.StatusCode.Equals(GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound))
+            {
+                return new HttpNotFoundResult();
+            }
+
+            var viewModel = _mappingService.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response);
+
+            viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
+
+            return View("SearchForProviders", viewModel);
         }
     }
 }

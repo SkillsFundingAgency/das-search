@@ -195,7 +195,7 @@
   'isEmptyObject': function() {
     /// <signature>
     ///   <summary>Check to see if an object is empty (contains no enumerable properties).</summary>
-    ///   <param name="object" type="Object">The object that will be checked to see if it's empty.</param>
+    ///   <param name="object" type="Object">The getFrameworks that will be checked to see if it's empty.</param>
     ///   <returns type="Boolean" />
     /// </signature>
   },
@@ -215,8 +215,8 @@
   },
   'isPlainObject': function() {
     /// <signature>
-    ///   <summary>Check to see if an object is a plain object (created using "{}" or "new Object").</summary>
-    ///   <param name="object" type="PlainObject">The object that will be checked to see if it's a plain object.</param>
+    ///   <summary>Check to see if an object is a plain getFrameworks (created using "{}" or "new Object").</summary>
+    ///   <param name="object" type="PlainObject">The getFrameworks that will be checked to see if it's a plain getFrameworks.</param>
     ///   <returns type="Boolean" />
     /// </signature>
   },
@@ -251,7 +251,7 @@
     /// <signature>
     ///   <summary>Translate all items in an array or object to new array of items.</summary>
     ///   <param name="arrayOrObject" type="Object">The Array or Object to translate.</param>
-    ///   <param name="callback( value, indexOrKey )" type="Function">The function to process each item against.  The first argument to the function is the value; the second argument is the index or key of the array or object property. The function can return any value to add to the array. A returned array will be flattened into the resulting array. Within the function, this refers to the global (window) object.</param>
+    ///   <param name="callback( value, indexOrKey )" type="Function">The function to process each item against.  The first argument to the function is the value; the second argument is the index or key of the array or object property. The function can return any value to add to the array. A returned array will be flattened into the resulting array. Within the function, this refers to the global (window) getFrameworks.</param>
     ///   <returns type="Array" />
     /// </signature>
   },
@@ -720,7 +720,7 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>Add elements to the set of matched elements.</summary>
-    ///   <param name="jQuery object" type="jQuery object ">An existing jQuery object to add to the set of matched elements.</param>
+    ///   <param name="jQuery object" type="jQuery getFrameworks ">An existing jQuery getFrameworks to add to the set of matched elements.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
@@ -1068,7 +1068,7 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.</summary>
-    ///   <param name="jQuery object" type="jQuery">A jQuery object to match elements against.</param>
+    ///   <param name="jQuery object" type="jQuery">A jQuery getFrameworks to match elements against.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
@@ -1345,7 +1345,7 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>Reduce the set of matched elements to those that match the selector or pass the function's test.</summary>
-    ///   <param name="jQuery object" type="Object">An existing jQuery object to match the current set of elements against.</param>
+    ///   <param name="jQuery object" type="Object">An existing jQuery getFrameworks to match the current set of elements against.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1357,7 +1357,7 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.</summary>
-    ///   <param name="jQuery object" type="Object">A jQuery object to match elements against.</param>
+    ///   <param name="jQuery object" type="Object">A jQuery getFrameworks to match elements against.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
@@ -1551,12 +1551,12 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>Accepts a string containing a CSS selector which is then used to match a set of elements.</summary>
-    ///   <param name="object" type="PlainObject">A plain object to wrap in a jQuery object.</param>
+    ///   <param name="object" type="PlainObject">A plain getFrameworks to wrap in a jQuery getFrameworks.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
     ///   <summary>Accepts a string containing a CSS selector which is then used to match a set of elements.</summary>
-    ///   <param name="jQuery object" type="PlainObject">An existing jQuery object to clone.</param>
+    ///   <param name="jQuery object" type="PlainObject">An existing jQuery getFrameworks to clone.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -1598,7 +1598,7 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.</summary>
-    ///   <param name="jQuery object" type="Object">An existing jQuery object to match the current set of elements against.</param>
+    ///   <param name="jQuery object" type="Object">An existing jQuery getFrameworks to match the current set of elements against.</param>
     ///   <returns type="Boolean" />
     /// </signature>
     /// <signature>
@@ -1874,7 +1874,7 @@ intellisense.annotate(jQuery.fn, {
     /// </signature>
     /// <signature>
     ///   <summary>Remove elements from the set of matched elements.</summary>
-    ///   <param name="jQuery object" type="PlainObject">An existing jQuery object to match the current set of elements against.</param>
+    ///   <param name="jQuery object" type="PlainObject">An existing jQuery getFrameworks to match the current set of elements against.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
@@ -2644,12 +2644,12 @@ intellisense.annotate(window, {
     /// </signature>
     /// <signature>
     ///   <summary>Accepts a string containing a CSS selector which is then used to match a set of elements.</summary>
-    ///   <param name="object" type="PlainObject">A plain object to wrap in a jQuery object.</param>
+    ///   <param name="object" type="PlainObject">A plain getFrameworks to wrap in a jQuery getFrameworks.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
     ///   <summary>Accepts a string containing a CSS selector which is then used to match a set of elements.</summary>
-    ///   <param name="jQuery object" type="PlainObject">An existing jQuery object to clone.</param>
+    ///   <param name="jQuery object" type="PlainObject">An existing jQuery getFrameworks to clone.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
