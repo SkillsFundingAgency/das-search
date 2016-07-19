@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.SqlServer.Server;
 using Sfa.Das.Sas.ApplicationServices.Exceptions;
 using Sfa.Das.Sas.ApplicationServices.Logging;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Settings;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
 
@@ -73,11 +76,12 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var standard = _getStandards.GetStandardById(standardId);
                 standardName = standard?.Title;
 
-                var standardMissing = standard == null;
+                var coordinateResponse = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+                var coordinates = coordinateResponse.Coordinate;
 
-                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+                var responseCode = standard == null ? LocationLookupResponse.ApprenticeshipNotFound : coordinateResponse.ResponseCode;
 
-                if (coordinates == null)
+                if (coordinateResponse.ResponseCode != LocationLookupResponse.Ok)
                 {
                     return new ProviderStandardSearchResults
                     {
@@ -85,9 +89,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                         StandardId = standardId,
                         StandardName = standardName,
                         PostCode = postCode,
-                        StandardNotFound = standardMissing,
-                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                        HasError = false
+                        StandardResponseCode = responseCode,
+                        Hits = new IApprenticeshipProviderSearchResultsItem[0]
                     };
                 }
 
@@ -110,10 +113,10 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardId = standardId,
                     StandardName = standardName,
                     PostCode = postCode,
-                    StandardNotFound = standardMissing,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    StandardResponseCode = responseCode
                 };
 
                 return result;
@@ -129,7 +132,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardName = standardName,
                     PostCode = postCode,
                     Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                    HasError = true
+                    StandardResponseCode = ServerLookupResponse.InternalServerError
                 };
             }
         }
@@ -153,11 +156,12 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var standard = _getStandards.GetStandardById(standardId);
                 standardName = standard?.Title;
 
-                var standardMissing = standard == null;
+                var coordinateResponse = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+                var coordinates = coordinateResponse.Coordinate;
 
-                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+                var responseCode = standard == null ? LocationLookupResponse.ApprenticeshipNotFound : coordinateResponse.ResponseCode;
 
-                if (coordinates == null)
+                if (coordinateResponse.ResponseCode != LocationLookupResponse.Ok)
                 {
                     return new ProviderStandardSearchResults
                     {
@@ -165,9 +169,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                         StandardId = standardId,
                         StandardName = standardName,
                         PostCode = postCode,
-                        StandardNotFound = standardMissing,
-                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                        HasError = false
+                        StandardResponseCode = responseCode,
+                        Hits = new IApprenticeshipProviderSearchResultsItem[0]
                     };
                 }
 
@@ -190,7 +193,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardId = standardId,
                     StandardName = standardName,
                     PostCode = postCode,
-                    StandardNotFound = standardMissing,
+                    StandardResponseCode = responseCode,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
                     SelectedTrainingOptions = deliveryModes
@@ -209,7 +212,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardName = standardName,
                     PostCode = postCode,
                     Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                    HasError = true
+                    StandardResponseCode = ServerLookupResponse.InternalServerError
                 };
             }
         }
@@ -232,25 +235,37 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 var frameworkMissing = framework == null;
 
-                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
-
-                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
-                var total = 0L;
-                Dictionary<string, long?> trainingOptionsAggregation;
                 var takeElements = pagination.Take <= 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
 
-                if (coordinates != null)
+                var coordinateResponse = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+                var coordinates = coordinateResponse.Coordinate;
+
+                var responseCode = frameworkMissing ? LocationLookupResponse.ApprenticeshipNotFound : coordinateResponse.ResponseCode;
+
+                if (coordinateResponse.ResponseCode != LocationLookupResponse.Ok || frameworkMissing)
                 {
-                    var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
-                    hits = searchResults.Hits;
-                    total = searchResults.Total;
-                    trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
+                    return new ProviderFrameworkSearchResults
+                    {
+                        Title = framework?.Title,
+                        TotalResults = 0,
+                        ResultsToTake = takeElements,
+                        FrameworkId = frameworkId,
+                        FrameworkCode = framework?.FrameworkCode ?? 0,
+                        FrameworkName = framework?.FrameworkName,
+                        PathwayName = framework?.PathwayName,
+                        FrameworkLevel = framework?.Level ?? 0,
+                        FrameworkResponseCode = responseCode,
+                        PostCode = postCode,
+                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                        TrainingOptionsAggregation = new Dictionary<string, long?>(),
+                        SelectedTrainingOptions = deliveryModes
+                    };
                 }
-                else
-                {
-                    hits = new IApprenticeshipProviderSearchResultsItem[0];
-                    trainingOptionsAggregation = new Dictionary<string, long?>();
-                }
+
+                var searchResults = _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
+                var hits = searchResults.Hits;
+                var total = searchResults.Total;
+                var trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
 
                 return new ProviderFrameworkSearchResults
                 {
@@ -262,11 +277,11 @@ namespace Sfa.Das.Sas.ApplicationServices
                     FrameworkName = framework?.FrameworkName,
                     PathwayName = framework?.PathwayName,
                     FrameworkLevel = framework?.Level ?? 0,
+                    FrameworkResponseCode = responseCode,
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes,
-                    FrameworkIsMissing = frameworkMissing
+                    SelectedTrainingOptions = deliveryModes
                 };
             }
             catch (SearchException ex)
@@ -281,7 +296,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PathwayName = string.Empty,
                     PostCode = postCode,
                     Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                    HasError = true
+                    FrameworkResponseCode = ServerLookupResponse.InternalServerError
                 };
             }
         }
@@ -304,25 +319,37 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 var frameworkMissing = framework == null;
 
-                var coordinates = await _postCodeLookup.GetLatLongFromPostCode(postCode);
-
-                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits;
-                var total = 0L;
-                Dictionary<string, long?> trainingOptionsAggregation;
                 var takeElements = pagination.Take <= 0 ? _paginationSettings.DefaultResultsAmount : pagination.Take;
 
-                if (coordinates != null)
+                var coordinateResponse = await _postCodeLookup.GetLatLongFromPostCode(postCode);
+                var coordinates = coordinateResponse.Coordinate;
+
+                var responseCode = frameworkMissing ? LocationLookupResponse.ApprenticeshipNotFound : coordinateResponse.ResponseCode;
+
+                if (coordinateResponse.ResponseCode != LocationLookupResponse.Ok || frameworkMissing)
                 {
-                    var searchResults = _searchProvider.SearchByFramework(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
-                    hits = searchResults.Hits;
-                    total = searchResults.Total;
-                    trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
+                    return new ProviderFrameworkSearchResults
+                    {
+                        Title = framework?.Title,
+                        TotalResults = 0,
+                        ResultsToTake = takeElements,
+                        FrameworkId = frameworkId,
+                        FrameworkCode = framework?.FrameworkCode ?? 0,
+                        FrameworkName = framework?.FrameworkName,
+                        PathwayName = framework?.PathwayName,
+                        FrameworkLevel = framework?.Level ?? 0,
+                        FrameworkResponseCode = responseCode,
+                        PostCode = postCode,
+                        Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                        TrainingOptionsAggregation = new Dictionary<string, long?>(),
+                        SelectedTrainingOptions = deliveryModes
+                    };
                 }
-                else
-                {
-                    hits = new IApprenticeshipProviderSearchResultsItem[0];
-                    trainingOptionsAggregation = new Dictionary<string, long?>();
-                }
+
+                var searchResults = _searchProvider.SearchByFramework(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes);
+                IEnumerable<IApprenticeshipProviderSearchResultsItem> hits = searchResults.Hits;
+                var total = searchResults.Total;
+                var trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;
 
                 return new ProviderFrameworkSearchResults
                 {
@@ -334,11 +361,11 @@ namespace Sfa.Das.Sas.ApplicationServices
                     FrameworkName = framework?.FrameworkName ?? string.Empty,
                     PathwayName = framework?.PathwayName,
                     FrameworkLevel = framework?.Level ?? 0,
+                    FrameworkResponseCode = responseCode,
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes,
-                    FrameworkIsMissing = frameworkMissing
+                    SelectedTrainingOptions = deliveryModes
                 };
             }
             catch (SearchException ex)
@@ -353,7 +380,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PathwayName = string.Empty,
                     PostCode = postCode,
                     Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                    HasError = true
+                    FrameworkResponseCode = ServerLookupResponse.InternalServerError
                 };
             }
         }

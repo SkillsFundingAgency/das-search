@@ -14,8 +14,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public string PathwayName { get; set; }
 
-        public bool FrameworkIsMissing { get; set; }
-
         public int FrameworkLevel { get; set; }
+
+        public string FrameworkResponseCode { get; set; }
     }
 }

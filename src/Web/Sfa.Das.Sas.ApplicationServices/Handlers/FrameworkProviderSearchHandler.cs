@@ -6,6 +6,7 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -81,18 +82,35 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             return new FrameworkProviderSearchResponse
             {
-                Success = !(searchResults.HasError || searchResults.FrameworkIsMissing),
+                Success = searchResults.FrameworkResponseCode == LocationLookupResponse.Ok,
                 CurrentPage = pageNumber,
                 Results = searchResults,
                 Shortlist = shortlistItems,
                 TotalResultsForCountry = await GetCountResultForCountry(searchResults, message),
                 SearchTerms = message.Keywords,
                 ShowAllProviders = message.ShowAll,
-                StatusCode = searchResults.FrameworkIsMissing ? FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound : default(FrameworkProviderSearchResponse.ResponseCodes)
+                StatusCode = GetResponseCode(searchResults.FrameworkResponseCode)
             };
         }
 
-        private async Task<long> GetCountResultForCountry(BaseProviderSearchResults searchResults, ProviderSearchQuery message)
+        private ProviderSearchResponseBase<ProviderFrameworkSearchResults>.ResponseCodes GetResponseCode(string standardResponseCode)
+        {
+            switch (standardResponseCode)
+            {
+                case LocationLookupResponse.WrongPostcode:
+                    return FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;
+                case LocationLookupResponse.ServerError:
+                    return FrameworkProviderSearchResponse.ResponseCodes.LocationServiceUnavailable;
+                case LocationLookupResponse.ApprenticeshipNotFound:
+                    return FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound;
+                case ServerLookupResponse.InternalServerError:
+                    return FrameworkProviderSearchResponse.ResponseCodes.ServerError;
+                default:
+                    return default(FrameworkProviderSearchResponse.ResponseCodes);
+            }
+        }
+
+        private async Task<long> GetCountResultForCountry(ProviderFrameworkSearchResults searchResults, FrameworkProviderSearchQuery message)
         {
             long totalRestultsForCountry = 0;
             if (searchResults.TotalResults > 0)

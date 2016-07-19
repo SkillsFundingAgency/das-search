@@ -21,7 +21,7 @@
 
                 <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
 
-                    <div class="form-elements @(Model.HasError ? " error" : "")">
+                    <div class="form-elements @(Model.HasError || Model.WrongPostcode ? " error" : "")">
                         <div class="heading-group">
                             <h2 class="heading-medium">
                                 Enter a postcode
@@ -31,9 +31,19 @@
 
                         <label class="form-label" for="search-box">
                             We need <strong>full</strong> postcode to find the closest training providers to you.
-                            <span class="error-message">
-                                Invalid postcode
-                            </span>
+
+                            @if (@Model.HasError)
+                            {
+                                <span class="error-message">
+                                    Sorry, postcode search not working, please try again later
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="error-message">
+                                    Invalid postcode
+                                </span>
+                            }
                         </label>
                         <div class="form-group">
                             <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">

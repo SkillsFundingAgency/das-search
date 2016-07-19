@@ -6,6 +6,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public bool HasError { get; set; }
 
+        public bool WrongPostcode { get; set; }
+
         public string PostUrl { get; set; }
 
         public int ApprenticeshipId { get; set; }

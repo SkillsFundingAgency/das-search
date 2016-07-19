@@ -14,8 +14,6 @@
 
         public string PostCode { get; set; }
 
-        public bool HasError { get; set; }
-
         public IEnumerable<IApprenticeshipProviderSearchResultsItem> Hits { get; set; }
 
         public bool PostCodeMissing { get; set; }

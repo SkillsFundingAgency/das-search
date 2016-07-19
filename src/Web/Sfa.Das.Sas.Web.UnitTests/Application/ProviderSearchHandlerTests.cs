@@ -8,6 +8,7 @@ using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Validators;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application
@@ -32,7 +33,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             _mockShortlistCollection = new Mock<IShortlistCollection<int>>();
             _mockPaginationSettings = new Mock<IPaginationSettings>();
 
-            var providerStandardSearchResults = new ProviderStandardSearchResults();
+            var providerStandardSearchResults = new ProviderStandardSearchResults
+            {
+                StandardResponseCode = LocationLookupResponse.Ok
+            };
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
 
             _handler = new StandardProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockShortlistCollection.Object, _mockPaginationSettings.Object, _mockLogger.Object);
@@ -106,7 +110,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldSignalFailureWhenApprenticeshipIsNotFound()
         {
-            var providerStandardSearchResults = new ProviderStandardSearchResults { StandardNotFound = true };
+            var providerStandardSearchResults = new ProviderStandardSearchResults { StandardResponseCode = StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound.ToString() };
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
             var message = new StandardProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", Page = 0 };
 

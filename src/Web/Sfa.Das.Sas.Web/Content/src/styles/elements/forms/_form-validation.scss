@@ -12,6 +12,7 @@
   .error-message {
     color: $error-colour;
     font-weight: bold;
+    display: block;
   }
 
   // Form inputs should have a red border
@@ -41,7 +42,7 @@
 .error-message {
   @include core-19;
 
-  display: block;
+  display: none;
   clear: both;
 
   margin: 0;

@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
             _applicationSettings = applicationSettings;
         }
 
-        public async Task<Coordinate> GetLatLongFromPostCode(string postcode)
+        public async Task<CoordinateResponse> GetLatLongFromPostCode(string postcode)
         {
             var coordinates = new Coordinate();
             var uri = new Uri(_applicationSettings.PostcodeUrl, postcode.Replace(" ", string.Empty));
@@ -50,20 +50,33 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
                     SendDependencyLog(response.StatusCode, uri, responseTime);
 
-                    return coordinates;
+                    var coordinateResponse = new CoordinateResponse
+                    {
+                        Coordinate = coordinates,
+                        ResponseCode = LocationLookupResponse.Ok
+                    };
+
+                    return coordinateResponse;
                 }
 
-                var dir = new Dictionary<string, object>
-                                  {
-                                      { "Identifier ", "Postcodes.IO-PostCodeNotFound" },
-                                      { "Postcode", postcode },
-                                      { "Url", uri.ToString() }
-                                  };
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    LogInformation(postcode, uri, response, responseTime, "Postcodes.IO-ServerError", "Server error trying to find postcode");
 
-                _logger.Info($"Unable to find coordinates for postcode: {postcode}. Service url:{uri}", dir);
-                SendDependencyLog(response.StatusCode, uri, responseTime);
+                    return new CoordinateResponse
+                    {
+                        Coordinate = null,
+                        ResponseCode = LocationLookupResponse.ServerError
+                    };
+                }
 
-                return null;
+                LogInformation(postcode, uri, response, responseTime, "Postcodes.IO-PostCodeNotFound", "Unable to find coordinates for postcode");
+
+                return new CoordinateResponse
+                {
+                    Coordinate = null,
+                    ResponseCode = LocationLookupResponse.WrongPostcode
+                };
             }
             catch (Exception ex)
             {
@@ -71,6 +84,19 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
+        }
+
+        private void LogInformation(string postcode, Uri uri, HttpResponseMessage response, long responseTime, string identifier, string message)
+        {
+            var dir = new Dictionary<string, object>
+            {
+                {"Identifier ", identifier},
+                {"Postcode", postcode},
+                {"Url", uri.ToString()}
+            };
+
+            _logger.Info($"{message}: {postcode}. Service url:{uri}", dir);
+            SendDependencyLog(response.StatusCode, uri, responseTime);
         }
 
         private void SendDependencyLog(HttpStatusCode statusCode, Uri uri, long responseTime)

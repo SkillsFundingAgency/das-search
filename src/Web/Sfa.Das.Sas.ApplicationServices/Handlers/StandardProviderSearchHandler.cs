@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -80,17 +80,36 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             var shortlistItems = _shortlist.GetAllItems(Constants.StandardsShortListName)
                 ?.SingleOrDefault(x => x.ApprenticeshipId.Equals(message.ApprenticeshipId));
 
-            return new StandardProviderSearchResponse
+            var standardProviderSearchResponse = new StandardProviderSearchResponse
             {
-                Success = !(searchResults.HasError || searchResults.StandardNotFound),
+                Success = searchResults.StandardResponseCode == LocationLookupResponse.Ok,
                 CurrentPage = pageNumber,
                 Results = searchResults,
                 Shortlist = shortlistItems,
                 TotalResultsForCountry = await GetCountResultForCountry(searchResults, message),
                 SearchTerms = message.Keywords,
                 ShowAllProviders = message.ShowAll,
-                StatusCode = searchResults.StandardNotFound ? StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound : default(StandardProviderSearchResponse.ResponseCodes)
+                StatusCode = GetResponseCode(searchResults.StandardResponseCode)
             };
+
+            return standardProviderSearchResponse;
+        }
+
+        private ProviderSearchResponseBase<ProviderStandardSearchResults>.ResponseCodes GetResponseCode(string standardResponseCode)
+        {
+            switch (standardResponseCode)
+            {
+                case LocationLookupResponse.WrongPostcode:
+                    return StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;
+                case LocationLookupResponse.ServerError:
+                    return StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable;
+                case LocationLookupResponse.ApprenticeshipNotFound:
+                    return StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound;
+                case ServerLookupResponse.InternalServerError:
+                    return StandardProviderSearchResponse.ResponseCodes.ServerError;
+                default:
+                    return default(StandardProviderSearchResponse.ResponseCodes);
+            }
         }
 
         private async Task<long> GetCountResultForCountry(BaseProviderSearchResults searchResults, ProviderSearchQuery message)

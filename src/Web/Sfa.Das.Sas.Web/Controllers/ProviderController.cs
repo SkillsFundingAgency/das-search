@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
@@ -37,8 +38,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
         {
+            string postCodeUrl = string.Empty;
             var response = await _mediator.SendAsync(criteria);
-
+            
             switch (response.StatusCode)
             {
                 case StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
@@ -47,20 +49,28 @@ namespace Sfa.Das.Sas.Web.Controllers
                 case StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound:
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
-                    var postCodeUrl = Url.Action(
+                case StandardProviderSearchResponse.ResponseCodes.ServerError:
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+
+                case StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable:
+                    postCodeUrl = Url.Action(
                         "SearchForProviders",
                         "Apprenticeship",
                         new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
                     return new RedirectResult(postCodeUrl);
 
-                case StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
+                case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
+                    postCodeUrl = Url.Action(
+                        "SearchForProviders",
+                        "Apprenticeship",
+                        new { WrongPostcode = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                    return new RedirectResult(postCodeUrl);
 
+                case StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
                         "StandardResults",
                         "Provider",
                         GenerateProviderResultsRouteValues(criteria, response.CurrentPage));
-
                     return new RedirectResult(url);
             }
 
@@ -73,6 +83,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> FrameworkResults(FrameworkProviderSearchQuery criteria)
         {
+            string url;
+
             var response = await _mediator.SendAsync(criteria);
 
             switch (response.StatusCode)
@@ -83,15 +95,25 @@ namespace Sfa.Das.Sas.Web.Controllers
                 case FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound:
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
-                    var urlPostCodeSearch = Url.Action(
+                case FrameworkProviderSearchResponse.ResponseCodes.ServerError:
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+
+                case FrameworkProviderSearchResponse.ResponseCodes.LocationServiceUnavailable:
+                    url = Url.Action(
                         "SearchForProviders",
                         "Apprenticeship",
-                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
-                    return new RedirectResult(urlPostCodeSearch);
+                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                    return new RedirectResult(url);
+
+                case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
+                    url = Url.Action(
+                        "SearchForProviders",
+                        "Apprenticeship",
+                        new { WrongPostcode = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                    return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
-                    var url = Url.Action(
+                    url = Url.Action(
                         "FrameworkResults",
                         "Provider",
                         GenerateProviderResultsRouteValues(criteria, response.CurrentPage));

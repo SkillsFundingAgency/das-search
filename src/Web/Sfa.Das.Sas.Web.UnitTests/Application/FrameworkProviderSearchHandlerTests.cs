@@ -48,7 +48,7 @@
 
             var response = await _handler.Handle(message);
 
-            response.Success.Should().BeTrue();
+            response.StatusCode.Should().Be(FrameworkProviderSearchResponse.ResponseCodes.Success);
         }
 
         [TestCase(0)]

@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     public interface ILookupLocations
     {
-        Task<Coordinate> GetLatLongFromPostCode(string postcode);
+        Task<CoordinateResponse> GetLatLongFromPostCode(string postcode);
     }
 }

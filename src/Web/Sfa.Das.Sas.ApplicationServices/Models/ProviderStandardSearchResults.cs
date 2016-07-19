@@ -8,6 +8,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public string StandardName { get; set; }
 
-        public bool StandardNotFound { get; set; }
+        public string StandardResponseCode { get; set; }
     }
 }

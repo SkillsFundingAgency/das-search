@@ -10,7 +10,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
             InvalidApprenticeshipId,
             PostCodeInvalidFormat,
             ApprenticeshipNotFound,
-            PageNumberOutOfUpperBound
+            PageNumberOutOfUpperBound,
+            LocationServiceUnavailable,
+            ServerError
         }
 
         public bool Success { get; set; }
