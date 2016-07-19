@@ -13,16 +13,22 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         public string ProviderName { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string ProviderMarketingInfo { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string ApprenticeshipMarketingInfo { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string Phone { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string Email { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string ContactUsUrl { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string ApprenticeshipInfoUrl { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Include)]
@@ -31,8 +37,10 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         [JsonProperty(NullValueHandling = NullValueHandling.Include)]
         public double? EmployerSatisfaction { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string[] DeliveryModes { get; set; }
 
+        [String(Index = FieldIndexOption.NotAnalyzed)]
         public string Website { get; set; }
 
         [Nested]
