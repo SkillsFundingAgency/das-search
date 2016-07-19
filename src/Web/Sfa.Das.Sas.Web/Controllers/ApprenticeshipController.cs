@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
 
-            if (response.StatusCode != ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
+            if (response.StatusCode != ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound)
             {
                 return View(viewModel);
             }
