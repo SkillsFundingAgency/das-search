@@ -42,17 +42,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (response.StatusCode == ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
             {
-                var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
-                var index = 0;
-
-                if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
-                {
-                    foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
-                    {
-                        rv.Add("SelectedLevels[" + index + "]", level.Value);
-                        index++;
-                    }
-                }
+                RouteValueDictionary rv = CreateRouteParameters(query, response, viewModel);
 
                 var url = Url.Action("SearchResults", "Apprenticeship", rv);
 
@@ -67,6 +57,23 @@ namespace Sfa.Das.Sas.Web.Controllers
             _logger.Warn("ViewModel is null, SearchResults, ApprenticeshipController ");
 
             return View(new ApprenticeshipSearchResultViewModel());
+        }
+
+        private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
+        {
+            var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
+            var index = 0;
+
+            if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
+            {
+                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+                {
+                    rv.Add("SelectedLevels[" + index + "]", level.Value);
+                    index++;
+                }
+            }
+
+            return rv;
         }
 
         // GET: Standard
