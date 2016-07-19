@@ -77,7 +77,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 x =>
                 x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()),
                 Times.Once);
-
+            
             result.Model.Should().Be(viewModel);
         }
 
@@ -85,7 +85,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         public void ShouldReturnResultWhenSearching()
         {
             // act
-            ViewResult result = _sut.Search() as ViewResult;
+            var result = _sut.Search() as ViewResult;
 
             // assert
             Assert.IsNotNull(result);
@@ -211,7 +211,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response))
                 .Returns(new ProviderSearchViewModel());
 
-            _sut.SearchForStandardProviders(2, "AB12 3CD", "test", string.Empty);
+            _sut.SearchForStandardProviders(new GetStandardProvidersQuery
+                                            {
+                                                StandardId = 2,
+                                                Postcode = "AB12 3CD",
+                                                Keywords = "test",
+                                                HasErrors = string.Empty
+                                            });
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
 
@@ -232,7 +238,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockMappingService.Setup(x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(
                 It.IsAny<GetStandardProvidersResponse>()));
 
-            var result = _sut.SearchForStandardProviders(2, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
+            var result = _sut.SearchForStandardProviders(
+                new GetStandardProvidersQuery
+                {
+                    StandardId = 2,
+                    Postcode = "AB12 3CD",
+                    Keywords = "test",
+                    HasErrors = string.Empty
+                }) as HttpNotFoundResult;
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MediatR;
@@ -40,23 +41,16 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
 
-            if (response.StatusCode == ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
-            {
-                RouteValueDictionary rv = CreateRouteParameters(query, response, viewModel);
-
-                var url = Url.Action("SearchResults", "Apprenticeship", rv);
-
-                return new RedirectResult(url);
-            }
-
-            if (viewModel != null)
+            if (response.StatusCode != ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
             {
                 return View(viewModel);
             }
 
-            _logger.Warn("ViewModel is null, SearchResults, ApprenticeshipController ");
+            var rv = CreateRouteParameters(query, response, viewModel);
 
-            return View(new ApprenticeshipSearchResultViewModel());
+            var url = Url.Action("SearchResults", "Apprenticeship", rv);
+
+            return new RedirectResult(url);
         }
 
         // GET: Standard
@@ -87,35 +81,32 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
-            if (response.StatusCode == GetFrameworkResponse.ResponseCodes.InvalidFrameworkId)
+            switch (response.StatusCode)
             {
-                _logger.Info("404 - Attempt to get standard with an ID below zero");
-                return HttpNotFound("Cannot find any standards with an ID below zero");
+                case GetFrameworkResponse.ResponseCodes.InvalidFrameworkId:
+                    _logger.Info("404 - Attempt to get standard with an ID below zero");
+
+                    return HttpNotFound("Cannot find any standards with an ID below zero");
+
+                case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
+                    var message = $"Cannot find framework: {id}";
+
+                    _logger.Warn($"404 - {message}");
+
+                    return new HttpNotFoundResult(message);
+
+                case GetFrameworkResponse.ResponseCodes.Success:
+                    var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
+
+                    return View(viewModel);
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
-            if (response.StatusCode == GetFrameworkResponse.ResponseCodes.FrameworkNotFound)
-            {
-                var message = $"Cannot find framework: {id}";
-                _logger.Warn($"404 - {message}");
-
-                return new HttpNotFoundResult(message);
-            }
-
-            var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
-
-            return View(viewModel);
         }
 
-        public ActionResult SearchForStandardProviders(int standardId, string postcode, string keywords, string hasError)
+        public ActionResult SearchForStandardProviders(GetStandardProvidersQuery query)
         {
-            var query = new GetStandardProvidersQuery
-            {
-                StandardId = standardId,
-                Postcode = postcode,
-                Keywords = keywords,
-                HasErrors = hasError
-            };
-
             var response = _mediator.Send(query);
 
             if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
@@ -134,10 +125,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var query = new GetFrameworkProvidersQuery
             {
-                FrameworkId = frameworkId,
-                Postcode = postcode,
-                Keywords = keywords,
-                HasErrors = hasError
+                FrameworkId = frameworkId, Postcode = postcode, Keywords = keywords, HasErrors = hasError
             };
 
             var response = _mediator.Send(query);
@@ -156,16 +144,18 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
         {
-            var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
+            var rv = new RouteValueDictionary {{"keywords", query?.Keywords}, {"page", response.LastPage}};
             var index = 0;
 
-            if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
+            if (viewModel?.AggregationLevel == null || !viewModel.AggregationLevel.Any())
             {
-                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
-                {
-                    rv.Add("SelectedLevels[" + index + "]", level.Value);
-                    index++;
-                }
+                return rv;
+            }
+
+            foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+            {
+                rv.Add("SelectedLevels[" + index + "]", level.Value);
+                index++;
             }
 
             return rv;

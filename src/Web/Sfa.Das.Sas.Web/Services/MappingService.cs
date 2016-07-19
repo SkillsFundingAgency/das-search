@@ -1,22 +1,18 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
+using Microsoft.Ajax.Utilities;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Services.MappingActions;
+using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services
 {
-    using System.Linq;
-
-    using Microsoft.Ajax.Utilities;
-
-    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
-
     public class MappingService : IMappingService
     {
         private readonly ILog _logger;
@@ -33,50 +29,46 @@ namespace Sfa.Das.Sas.Web.Services
 
         public TDest Map<TSource, TDest>(TSource source)
         {
-            TDest tempDest = default(TDest);
             try
             {
-                tempDest = _mapper.Map<TSource, TDest>(source);
+                return _mapper.Map<TSource, TDest>(source);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Error mapping objects");
+                throw;
             }
-
-            return tempDest;
         }
 
         public TDest Map<TSource, TDest>(TSource source, Action<IMappingOperationOptions<TSource, TDest>> opts)
         {
-            TDest tempDest = default(TDest);
             try
             {
-                tempDest = _mapper.Map(source, opts);
+                return _mapper.Map(source, opts);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Error mapping objects");
+                throw;
             }
-
-            return tempDest;
         }
 
         private static void CreateProviderDetailsMappings(IMapperConfiguration cfg)
         {
             cfg.CreateMap<DetailProviderResponse, ApprenticeshipDetailsViewModel>()
-                   .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location.Address))
-                   .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.Apprenticeship))
-                   .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.ContactInformation))
-                   .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.DeliveryModes))
-                   .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location))
-                   .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Name))
-                   .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.UkPrn))
-                   .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.EmployerSatisfaction))
-                   .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.LearnerSatisfaction))
-                   .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.ProviderMarketingInfo))
-                   .ForMember(dest => dest.EmployerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.EmployerSatisfaction))
-                   .ForMember(dest => dest.LearnerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.LearnerSatisfaction))
-                   ;
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location.Address))
+                .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.Apprenticeship))
+                .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.ContactInformation))
+                .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.DeliveryModes))
+                .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Name))
+                .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.UkPrn))
+                .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.EmployerSatisfaction))
+                .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.LearnerSatisfaction))
+                .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.ProviderMarketingInfo))
+                .ForMember(dest => dest.EmployerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.EmployerSatisfaction))
+                .ForMember(dest => dest.LearnerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.LearnerSatisfaction))
+                ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
@@ -127,34 +119,34 @@ namespace Sfa.Das.Sas.Web.Services
 
             // Provider detail page
             cfg.CreateMap<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>()
-            .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.Location.Address))
-            .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
-            .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
-            .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.Provider.ContactInformation))
-            .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
-            .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))
-            .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.Provider.UkPrn))
-            .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.Product.EmployerSatisfaction))
-            .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.Product.LearnerSatisfaction))
-            .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.Product.ProviderMarketingInfo))
-            .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.Product.EmployerSatisfaction))
-            .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.Product.LearnerSatisfaction))
-            .ForMember(x => x.ApprenticeshipNameWithLevel, y => y.Ignore())
-            .ForMember(x => x.ApprenticeshipLevel, y => y.Ignore())
-            .ForMember(x => x.ApprenticeshipType, y => y.Ignore())
-            .ForMember(x => x.IsShortlisted, y => y.Ignore())
-            .AfterMap<ProviderViewModelMappingAction>();
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.Location.Address))
+                .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
+                .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
+                .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.Provider.ContactInformation))
+                .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
+                .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))
+                .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.Provider.UkPrn))
+                .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.Product.EmployerSatisfaction))
+                .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.Product.LearnerSatisfaction))
+                .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.Product.ProviderMarketingInfo))
+                .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.Product.EmployerSatisfaction))
+                .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.Product.LearnerSatisfaction))
+                .ForMember(x => x.ApprenticeshipNameWithLevel, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipLevel, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipType, y => y.Ignore())
+                .ForMember(x => x.IsShortlisted, y => y.Ignore())
+                .AfterMap<ProviderViewModelMappingAction>();
         }
 
         private static void CreateApprenticeshipSearchResultsMappings(IMapperConfiguration cfg)
         {
             // Apprenticeship search listing  -> mix of standard and framework
             cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
-               .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
-               .ForMember(x => x.ShortlistedFrameworks, y => y.MapFrom(z => z.ShortlistedFrameworks))
-               .ForMember(x => x.ShortlistedStandards, y => y.MapFrom(z => z.ShortlistedStandards))
-               .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
+                .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
+                .ForMember(x => x.ShortlistedFrameworks, y => y.MapFrom(z => z.ShortlistedFrameworks))
+                .ForMember(x => x.ShortlistedStandards, y => y.MapFrom(z => z.ShortlistedStandards))
+                .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
 
             // Nexzt
             cfg.CreateMap<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>()
@@ -232,9 +224,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
-                                src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
-                                    x.LocationId == m.LocationId &&
-                                    x.Ukprn == m.UkPrn) ?? false));
+                    src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
+                        x.LocationId == m.LocationId &&
+                        x.Ukprn == m.UkPrn) ?? false));
 
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
@@ -257,12 +249,12 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
-                                src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
-                                    x.LocationId == m.LocationId &&
-                                    x.Ukprn == m.UkPrn) ?? false));
+                    src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
+                        x.LocationId == m.LocationId &&
+                        x.Ukprn == m.UkPrn) ?? false));
         }
 
-        private MapperConfiguration Config()
+        private static MapperConfiguration Config()
         {
             return new MapperConfiguration(cfg =>
             {
