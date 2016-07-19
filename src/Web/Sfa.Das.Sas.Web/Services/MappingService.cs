@@ -201,13 +201,15 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.FrameworkId))
                 .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
-                .ForMember(x => x.PostUrl, y => y.Ignore());
+                .ForMember(x => x.PostUrl, y => y.Ignore())
+                .ForMember(x => x.WrongPostcode, y => y.Ignore());
 
             cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
                 .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.StandardId))
                 .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
-                .ForMember(x => x.PostUrl, y => y.Ignore());
+                .ForMember(x => x.PostUrl, y => y.Ignore())
+                .ForMember(x => x.WrongPostcode, y => y.Ignore());
 
             // Provider search
             cfg.CreateMap<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>()

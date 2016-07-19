@@ -53,14 +53,14 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 case StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable:
                     postCodeUrl = Url.Action(
-                        "SearchForProviders",
+                        "SearchForStandardProviders",
                         "Apprenticeship",
                         new {HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode});
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
                     postCodeUrl = Url.Action(
-                        "SearchForProviders",
+                        "SearchForStandardProviders",
                         "Apprenticeship",
                         new { WrongPostcode = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
                     return new RedirectResult(postCodeUrl);
@@ -99,14 +99,14 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 case FrameworkProviderSearchResponse.ResponseCodes.LocationServiceUnavailable:
                     url = Url.Action(
-                        "SearchForProviders",
+                        "SearchForFrameworkProviders",
                         "Apprenticeship",
                         new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
                     return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
                     url = Url.Action(
-                        "SearchForProviders",
+                        "SearchForFrameworkProviders",
                         "Apprenticeship",
                         new { WrongPostcode = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
                     return new RedirectResult(url);
