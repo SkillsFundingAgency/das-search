@@ -2,12 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
+using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Models;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Extensions;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
@@ -44,14 +43,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             // Arrange
             _mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
-            _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListCookieName, _shorlistedApprenticeship));
+            _mockCookieRepository.Setup(x => x.AddItem(Constants.StandardsShortListName, _shorlistedApprenticeship));
 
             // Act
             var result = _controller.AddStandard(_shorlistedApprenticeship.ApprenticeshipId);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.AddItem(Constants.StandardsShortListCookieName, It.IsAny<ShortlistedApprenticeship>()), Times.Once());
+            _mockCookieRepository.Verify(x => x.AddItem(Constants.StandardsShortListName, It.IsAny<ShortlistedApprenticeship>()), Times.Once());
         }
 
         [Test]
@@ -59,14 +58,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             // Arrange
             _mockStandardRepository.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
-            _mockCookieRepository.Setup(x => x.RemoveApprenticeship(Constants.StandardsShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId));
+            _mockCookieRepository.Setup(x => x.RemoveApprenticeship(Constants.StandardsShortListName, _shorlistedApprenticeship.ApprenticeshipId));
 
             // Act
             var result = _controller.RemoveStandard(_shorlistedApprenticeship.ApprenticeshipId);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.RemoveApprenticeship(Constants.StandardsShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId), Times.Once());
+            _mockCookieRepository.Verify(x => x.RemoveApprenticeship(Constants.StandardsShortListName, _shorlistedApprenticeship.ApprenticeshipId), Times.Once());
         }
 
         [Test]
@@ -82,7 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             };
 
             _mockCookieRepository.Setup(x => x.RemoveProvider(
-                Constants.StandardsShortListCookieName,
+                Constants.StandardsShortListName,
                 apprenticeshipId,
                 It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)));
 
@@ -92,7 +91,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             // Assert
             _mockCookieRepository.Verify(
                 x => x.RemoveProvider(
-                    Constants.StandardsShortListCookieName,
+                    Constants.StandardsShortListName,
                     apprenticeshipId,
                     It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)),
                     Times.Once);
@@ -103,14 +102,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             // Arrange
             _mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(new Framework());
-            _mockCookieRepository.Setup(x => x.AddItem(Constants.FrameworksShortListCookieName, _shorlistedApprenticeship));
+            _mockCookieRepository.Setup(x => x.AddItem(Constants.FrameworksShortListName, _shorlistedApprenticeship));
 
             // Act
             var result = _controller.AddFramework(_shorlistedApprenticeship.ApprenticeshipId);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.AddItem(Constants.FrameworksShortListCookieName, It.IsAny<ShortlistedApprenticeship>()), Times.Once());
+            _mockCookieRepository.Verify(x => x.AddItem(Constants.FrameworksShortListName, It.IsAny<ShortlistedApprenticeship>()), Times.Once());
         }
 
         [Test]
@@ -118,14 +117,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             // Arrange
             _mockFrameworkRepository.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(new Framework());
-            _mockCookieRepository.Setup(x => x.RemoveApprenticeship(Constants.FrameworksShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId));
+            _mockCookieRepository.Setup(x => x.RemoveApprenticeship(Constants.FrameworksShortListName, _shorlistedApprenticeship.ApprenticeshipId));
 
             // Act
             var result = _controller.RemoveFramework(_shorlistedApprenticeship.ApprenticeshipId);
 
             // Assert
             NUnit.Framework.Assert.IsNotNull(result);
-            _mockCookieRepository.Verify(x => x.RemoveApprenticeship(Constants.FrameworksShortListCookieName, _shorlistedApprenticeship.ApprenticeshipId), Times.Once());
+            _mockCookieRepository.Verify(x => x.RemoveApprenticeship(Constants.FrameworksShortListName, _shorlistedApprenticeship.ApprenticeshipId), Times.Once());
         }
 
         [Test]
@@ -141,7 +140,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             };
 
             _mockCookieRepository.Setup(x => x.RemoveProvider(
-                Constants.FrameworksShortListCookieName,
+                Constants.FrameworksShortListName,
                 apprenticeshipId,
                 It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)));
 
@@ -151,7 +150,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             // Assert
             _mockCookieRepository.Verify(
                 x => x.RemoveProvider(
-                    Constants.FrameworksShortListCookieName,
+                    Constants.FrameworksShortListName,
                     apprenticeshipId,
                     It.Is<ShortlistedProvider>(p => p.Ukprn == provider.Ukprn)),
                     Times.Once);

@@ -144,9 +144,14 @@
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceBuilder.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
     <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
-    <Compile Include="Application\DetailProviderHandlerTest.cs" />
-    <Compile Include="Application\FrameworkProviderSearchHandlerTests.cs" />
-    <Compile Include="Application\ProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
+    <Compile Include="Application\Handlers\DetailProviderHandlerTest.cs" />
+    <Compile Include="Application\Handlers\FrameworkProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\GetStandardHandlerTest.cs" />
+    <Compile Include="Application\Handlers\GetFrameworkHandlerTest.cs" />
+    <Compile Include="Application\Handlers\GetFrameworkProvidersHandlerTest.cs" />
+    <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenveLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Colllections\CookieListCollectionTest.cs" />
@@ -163,7 +168,6 @@
     <Compile Include="Infrastructure\Web\Extensions\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
-    <Compile Include="Infrastructure\Web\Factories\ApprenticeshipViewModelFactoryTest.cs" />
     <Compile Include="Infrastructure\Web\Factories\DashboardViewModelFactoryTest.cs" />
     <Compile Include="Infrastructure\Web\Factories\ShortlistViewModelFactoryTest.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderSearchResponseToViewModel.cs" />
@@ -177,7 +181,7 @@
     <Compile Include="Infrastructure\Web\Services\ForMappingStandardSearchResultsToViewModel.cs" />
     <Compile Include="Infrastructure\Web\ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />
-    <Compile Include="Infrastructure\Web\Services\ForMappingStandardToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingGetStandardResponseToViewModel.cs" />
     <Compile Include="Infrastructure\Web\Services\ForProviderSearchMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Views\ForApprenticeshipSearchResultPage.cs" />
     <Compile Include="Infrastructure\Web\Views\Provider\FilterProviderPageTest.cs" />

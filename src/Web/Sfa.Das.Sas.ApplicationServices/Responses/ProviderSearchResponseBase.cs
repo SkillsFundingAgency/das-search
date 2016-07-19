@@ -1,6 +1,6 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Models;
 
-namespace Sfa.Das.Sas.ApplicationServices.Queries
+namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
     public abstract class ProviderSearchResponseBase<T>
     {

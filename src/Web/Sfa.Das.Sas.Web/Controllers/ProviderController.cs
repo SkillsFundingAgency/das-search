@@ -1,20 +1,19 @@
 ﻿using System;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.ApplicationServices.Responses;
+﻿using Sfa.Das.Sas.Core.Configuration;
+﻿using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Net;
-    using System.Web.Routing;
-    using Core.Configuration;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Web.Extensions;
-
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
@@ -56,7 +55,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     postCodeUrl = Url.Action(
                         "SearchForProviders",
                         "Apprenticeship",
-                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new {HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode});
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
@@ -75,7 +74,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
-                                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
+                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
 
             return View(viewModel);
         }
@@ -122,7 +121,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(response, opt => opt
-                                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
+                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
 
             return View(viewModel);
         }
@@ -152,11 +151,11 @@ namespace Sfa.Das.Sas.Web.Controllers
         private static RouteValueDictionary GenerateProviderResultsRouteValues(ProviderSearchQuery criteria, int currentPage)
         {
             return new RouteValueDictionary()
-                        .AddValue("page", currentPage)
-                        .AddValue("postcode", criteria?.PostCode ?? string.Empty)
-                        .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
-                        .AddValue("showall", criteria?.ShowAll)
-                        .AddList("deliverymodes", criteria?.DeliveryModes);
+                .AddValue("page", currentPage)
+                .AddValue("postcode", criteria?.PostCode ?? string.Empty)
+                .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
+                .AddValue("showall", criteria?.ShowAll)
+                .AddList("deliverymodes", criteria?.DeliveryModes);
         }
     }
 }

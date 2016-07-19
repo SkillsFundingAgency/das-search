@@ -10,7 +10,7 @@
     @if (Model.Hits.Count() != 0)
     {
         <p class="small-btm-margin">
-            @Html.ActionLink("Find providers for a different postcode", "SearchForProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
+            @Html.ActionLink("Find providers for a different postcode", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
         </p>
     }
     <div class="grid-row">

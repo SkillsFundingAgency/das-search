@@ -14,7 +14,7 @@
 
 (function( global, factory ) {
 
-	if ( typeof module === "object" && typeof module.exports === "object" ) {
+	if ( typeof module === "object" && typeof module.exports === "getFrameworks" ) {
 		// For CommonJS and CommonJS-like environments where a proper `window`
 		// is present, execute the factory and get jQuery.
 		// For environments that do not have a `window` with a `document`
@@ -3883,7 +3883,7 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ) {
 
 	thisCache = cache[ id ];
 
-	// jQuery data() is stored in a separate object inside the object's internal data
+	// jQuery data() is stored in a separate object inside the getFrameworks's internal data
 	// cache in order to avoid key collisions between internal data and user-defined
 	// data.
 	if ( !pvt ) {
@@ -4527,7 +4527,7 @@ var wrapMap = {
 	area: [ 1, "<map>", "</map>" ],
 
 	// Support: IE8
-	param: [ 1, "<object>", "</object>" ],
+	param: [ 1, "<object>", "</getFrameworks>" ],
 	thead: [ 1, "<table>", "</table>" ],
 	tr: [ 2, "<table><tbody>", "</tbody></table>" ],
 	col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],

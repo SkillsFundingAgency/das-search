@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Web.Attribute;
-using Sfa.Das.Sas.Web.Common;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using Sfa.Das.Sas.ApplicationServices.Models;
-
     [NoCache]
     public class DashboardController : Controller
     {
@@ -53,7 +52,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var standardViewModels = new List<IShortlistApprenticeshipViewModel>();
 
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName);
+            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListName);
 
             if (shortlistedApprenticeships == null || !shortlistedApprenticeships.Any())
             {
@@ -97,7 +96,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private IEnumerable<IShortlistApprenticeshipViewModel> GetShortlistedFrameworks()
         {
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName);
+            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.FrameworksShortListName);
 
             if (shortlistedApprenticeships == null)
             {
@@ -117,7 +116,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 if (framework == null)
                 {
-                   continue;
+                    continue;
                 }
 
                 var apprenticeshipViewModel = _shortlistViewModelFactory.GetShortlistViewModel(framework);

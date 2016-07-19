@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.Routing;
 using FluentAssertions;
+using MediatR;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Models;
+using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
@@ -18,171 +16,296 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
     [TestFixture]
     public sealed class ApprenticeshipControllerTests
     {
-        [Test]
-        public void Search_WhenNavigateTo_ShouldReturnAViewResult()
+        private ApprenticeshipController _sut;
+        private Mock<ILog> _mockLogger;
+        private Mock<IMappingService> _mockMappingService;
+        private Mock<IMediator> _mockMediator;
+
+        [SetUp]
+        public void Init()
         {
-            // Arrange
-            ApprenticeshipController controller = new ApprenticeshipController(null, null, null, null);
+            _mockLogger = new Mock<ILog>();
+            _mockMappingService = new Mock<IMappingService>();
+            _mockMediator = new Mock<IMediator>();
 
-            // Act
-            ViewResult result = controller.Search() as ViewResult;
+            _sut = new ApprenticeshipController(
+                _mockLogger.Object,
+                _mockMappingService.Object,
+                _mockMediator.Object);
+        }
 
-            // Assert
+        [Test]
+        public void ShouldRedirectIfSearchResultsPageTooHigh()
+        {
+            _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()))
+                .Returns(new ApprenticeshipSearchResponse
+                {
+                    StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound
+                });
+
+            var urlHelper = new Mock<UrlHelper>();
+
+            urlHelper.Setup(x => x.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
+                     .Returns("www.google.co.uk");
+
+            _sut.Url = urlHelper.Object;
+
+            var result = _sut.SearchResults(new ApprenticeshipSearchQuery()) as RedirectResult;
+
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void ShouldReturnSearchResults()
+        {
+            var viewModel = new ApprenticeshipSearchResultViewModel();
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()))
+                         .Returns(new ApprenticeshipSearchResponse
+                        {
+                            StatusCode = ApprenticeshipSearchResponse.ResponseCodes.Success
+                        });
+
+            _mockMappingService.Setup(x =>
+                x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()))
+                .Returns(viewModel);
+
+            var result = _sut.SearchResults(new ApprenticeshipSearchQuery()) as ViewResult;
+
+            _mockMediator.Verify(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()));
+            _mockMappingService.Verify(
+                x =>
+                x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()),
+                Times.Once);
+            
+            result.Model.Should().Be(viewModel);
+        }
+
+        [Test]
+        public void ShouldReturnResultWhenSearching()
+        {
+            // act
+            var result = _sut.Search() as ViewResult;
+
+            // assert
             Assert.IsNotNull(result);
         }
 
         [Test]
-        public void Search_WhenPassedAKeyword_ShouldReturnAViewResult()
+        public void ShouldReturnStandardNotFound()
         {
-            // Arrange
-            var mockSearchService = new Mock<IApprenticeshipSearchService>();
-            var mockLogger = new Mock<ILog>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10, 0, null)).Returns(new ApprenticeshipSearchResults());
-            var mockFactory = new Mock<IApprenticeshipViewModelFactory>();
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, mockLogger.Object, null, mockFactory.Object);
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardQuery>()))
+                .Returns(new GetStandardResponse
+                {
+                    StatusCode = GetStandardResponse.ResponseCodes.StandardNotFound
+                });
+
+            var result = _sut.Standard(2, "test") as HttpNotFoundResult;
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnStandard()
+        {
+            // Assign
+            var response = new GetStandardResponse();
+            var viewModel = new StandardViewModel();
+
+            _mockMediator.Setup(m => m.Send(It.IsAny<GetStandardQuery>()))
+                .Returns(response);
+
+            _mockMappingService.Setup(m => m.Map<GetStandardResponse, StandardViewModel>(response))
+                .Returns(viewModel);
 
             // Act
-            ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test" }) as ViewResult;
+            var result = _sut.Standard(1, "test") as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            _mockMediator.Verify(m => m.Send(It.IsAny<GetStandardQuery>()));
+            _mockMappingService.Verify(m => m.Map<GetStandardResponse, StandardViewModel>(response));
+
+            result.Model.Should().Be(viewModel);
         }
 
         [Test]
-        public void Search_WhenSearchResponseReturnsANull_ModelShouldContainTheSearchKeyword()
+        public void ShouldReturnNotFoundIfStandardIdIsBelowZero()
         {
-            // Arrange
-            var mockSearchService = new Mock<IApprenticeshipSearchService>();
-            var mockLogger = new Mock<ILog>();
-            mockSearchService.Setup(x => x.SearchByKeyword(It.IsAny<string>(), 0, 10, 0, null)).Returns(value: null);
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardQuery>()))
+                .Returns(new GetStandardResponse
+                {
+                    StatusCode = GetStandardResponse.ResponseCodes.InvalidStandardId
+                });
 
-            var mockFactory = new Mock<IApprenticeshipViewModelFactory>();
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, mockLogger.Object, null, mockFactory.Object);
+            var result = _sut.Standard(-2, "test") as HttpNotFoundResult;
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnFramework()
+        {
+            // Assign
+            var response = new GetFrameworkResponse();
+            var viewModel = new FrameworkViewModel();
+
+            _mockMediator.Setup(m => m.Send(It.IsAny<GetFrameworkQuery>()))
+                .Returns(response);
+
+            _mockMappingService.Setup(m => m.Map<GetFrameworkResponse, FrameworkViewModel>(response))
+                .Returns(viewModel);
 
             // Act
-            ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test" }) as ViewResult;
+            var result = _sut.Framework(1, "test") as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
-            Assert.AreEqual(null, ((ApprenticeshipSearchResultViewModel)result.Model).SearchTerm);
-            Assert.IsNotNull(result);
+            _mockMediator.Verify(m => m.Send(It.IsAny<GetFrameworkQuery>()));
+            _mockMappingService.Verify(m => m.Map<GetFrameworkResponse, FrameworkViewModel>(response));
+
+            result.Model.Should().Be(viewModel);
         }
 
-        [TestCase(-15)]
-        [TestCase(-1)]
-        [TestCase(0)]
-        public void Search_WhenCriteriaPage_IsLessOrEqualTo0(int input)
+        [Test]
+        public void ShouldReturnFrameworkNotFound()
         {
-            // Arrange
-            var mockSearchService = new Mock<IApprenticeshipSearchService>();
-            var mockLogger = new Mock<ILog>();
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetFrameworkQuery>()))
+                .Returns(new GetFrameworkResponse
+                {
+                    StatusCode = GetFrameworkResponse.ResponseCodes.FrameworkNotFound
+                });
 
-            var mockFactory = new Mock<IApprenticeshipViewModelFactory>();
-            ApprenticeshipController controller = new ApprenticeshipController(mockSearchService.Object, mockLogger.Object, null, mockFactory.Object);
+            var result = _sut.Framework(2, "test") as HttpNotFoundResult;
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnNotFoundIfFrameworkIdBelowZero()
+        {
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetFrameworkQuery>()))
+                .Returns(new GetFrameworkResponse
+                {
+                    StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId
+                });
+
+            var result = _sut.Framework(2, "test") as HttpNotFoundResult;
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnStandardProviders()
+        {
+            var response = new GetStandardProvidersResponse
+            {
+                StatusCode = GetStandardProvidersResponse.ResponseCodes.Success
+            };
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardProvidersQuery>())).Returns(response);
+
+            _mockMappingService.Setup(x =>
+                x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response))
+                .Returns(new ProviderSearchViewModel());
+
+            _sut.SearchForStandardProviders(new GetStandardProvidersQuery
+                                            {
+                                                StandardId = 2,
+                                                Postcode = "AB12 3CD",
+                                                Keywords = "test",
+                                                HasErrors = string.Empty
+                                            });
+
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response), Times.Once);
+        }
+
+        [Test]
+        public void ShouldReturnStandardProvidersNotFound()
+        {
+            var response = new GetStandardProvidersResponse
+            {
+                StatusCode = GetStandardProvidersResponse.ResponseCodes.NoStandardFound
+            };
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardProvidersQuery>())).Returns(response);
+
+            _mockMappingService.Setup(x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(
+                It.IsAny<GetStandardProvidersResponse>()));
+
+            var result = _sut.SearchForStandardProviders(
+                new GetStandardProvidersQuery
+                {
+                    StandardId = 2,
+                    Postcode = "AB12 3CD",
+                    Keywords = "test",
+                    HasErrors = string.Empty
+                }) as HttpNotFoundResult;
+
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(
+                    It.IsAny<GetStandardProvidersResponse>()), Times.Never);
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnFrameworkProviders()
+        {
+            // Assign
+            var response = new GetFrameworkProvidersResponse
+            {
+                StatusCode = GetFrameworkProvidersResponse.ResponseCodes.Success
+            };
+
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()))
+                .Returns(response);
+
+            _mockMappingService.Setup(x =>
+                x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response))
+                .Returns(new ProviderSearchViewModel());
 
             // Act
-            ViewResult result = controller.SearchResults(new ApprenticeshipSearchCriteria { Keywords = "test", Page = input }) as ViewResult;
+            _sut.SearchForFrameworkProviders(2, "AB12 3CD", "test", string.Empty);
 
             // Assert
-            mockSearchService.Verify(m => m.SearchByKeyword("test", 1, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
-            Assert.IsNotNull(result);
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()), Times.Once);
+
+            _mockMappingService.Verify(
+                x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response), Times.Once);
         }
 
         [Test]
-        public void StandardDetailPageStandardIsNull()
+        public void ShouldReturnFrameworkProvidersNotFound()
         {
-            var mockApprenticeshipFactory = new Mock<IApprenticeshipViewModelFactory>();
+            var response = new GetFrameworkProvidersResponse
+            {
+                StatusCode = GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound
+            };
 
-            var mockRequest = new Mock<HttpRequestBase>();
-            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
-            var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, moqLogger.Object, null, mockApprenticeshipFactory.Object);
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>())).Returns(response);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Standard(1, string.Empty);
+            _mockMappingService.Setup(x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(
+                It.IsAny<GetFrameworkProvidersResponse>()));
 
-            Assert.NotNull(result);
-            Assert.AreEqual(404, result.StatusCode);
-            Assert.AreEqual("Cannot find standard: 1", result.StatusDescription);
-            moqLogger.Verify(m => m.Warn("404 - Cannot find standard: 1"));
-        }
+            var result = _sut.SearchForFrameworkProviders(2, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
 
-        [Test]
-        public void FrameworkDetailPageStandardIsNull()
-        {
-            var mockApprenticeshipFactory = new Mock<IApprenticeshipViewModelFactory>();
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()), Times.Once);
 
-            var mockRequest = new Mock<HttpRequestBase>();
-            mockRequest.Setup(x => x.UrlReferrer).Returns(new Uri("http://www.abba.co.uk"));
-            var moqLogger = new Mock<ILog>();
-            ApprenticeshipController controller = new ApprenticeshipController(null, moqLogger.Object, null, mockApprenticeshipFactory.Object);
+            _mockMappingService.Verify(
+                x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(
+                    It.IsAny<GetFrameworkProvidersResponse>()), Times.Never);
 
-            HttpNotFoundResult result = (HttpNotFoundResult)controller.Framework(1, string.Empty);
-
-            Assert.NotNull(result);
-            Assert.AreEqual(404, result.StatusCode);
-            Assert.AreEqual("Cannot find framework: 1", result.StatusDescription);
-            moqLogger.Verify(m => m.Warn("404 - Cannot find framework: 1"));
-        }
-
-        [Test(Description = "should create vie model for standard when standardid parameter is specified ")]
-        public void SearchForProvidersActionWithStandardIdParameter()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetProviderSearchViewModelForStandard(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            controller.SearchForProviders(1, null, string.Empty, string.Empty, null, null);
-
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetProviderSearchViewModelForStandard(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Once);
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Never);
-        }
-
-        [Test(Description = "should create a viewmodel for frameworks when frameworkid parameter is specified ")]
-        public void SearchForProvidersActionWithFrameworIdParameter()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            controller.SearchForProviders(null, 12, string.Empty, string.Empty, null, null);
-
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Once);
-            mockApprenticeshipViewModelFactory.Verify(m => m.GetProviderSearchViewModelForStandard(It.IsAny<int>(), It.IsAny<UrlHelper>()), Times.Never);
-        }
-
-        [Test(Description = "should create a viewmodel with error true ")]
-        public void SearchForProvidersWithErrors()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetProviderSearchViewModelForStandard(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            var result = controller.SearchForProviders(1, null, string.Empty, string.Empty, "true", "false") as ViewResult;
-            var viewModel = result?.Model as ProviderSearchViewModel;
-            viewModel?.HasError.Should().Be(true);
-        }
-
-        [Test(Description = "should create a viewmodel with error false")]
-        public void SearchForProvidersWithNoErrors()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetProviderSearchViewModelForStandard(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            var result = controller.SearchForProviders(1, null, string.Empty, string.Empty, null, null) as ViewResult;
-            var viewModel = result?.Model as ProviderSearchViewModel;
-            viewModel?.HasError.Should().BeFalse();
-        }
-
-        [Test]
-        public void WhenNoValidValuesAreProvided()
-        {
-            var mockApprenticeshipViewModelFactory = new Mock<IApprenticeshipViewModelFactory>();
-            mockApprenticeshipViewModelFactory.Setup(m => m.GetFrameworkProvidersViewModel(It.IsAny<int>(), It.IsAny<UrlHelper>())).Returns(new ProviderSearchViewModel());
-            var controller = new ApprenticeshipController(null, null, null, mockApprenticeshipViewModelFactory.Object);
-
-            var result = controller.SearchForProviders(null, null, null, null, null, null) as HttpStatusCodeResult;
-            result.StatusCode.Should().Be(400);
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
         }
     }
 }

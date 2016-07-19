@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
+﻿using Sfa.Das.Sas.ApplicationServices.Responses;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

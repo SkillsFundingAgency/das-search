@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Queries
+﻿using Sfa.Das.Sas.ApplicationServices.Responses;
+
+namespace Sfa.Das.Sas.ApplicationServices.Queries
 {
     using MediatR;
 

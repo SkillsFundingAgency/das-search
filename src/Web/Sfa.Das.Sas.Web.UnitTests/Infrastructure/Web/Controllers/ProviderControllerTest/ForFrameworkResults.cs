@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
+﻿using Sfa.Das.Sas.ApplicationServices.Responses;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
     using System;
     using System.Net;
@@ -66,7 +68,7 @@
         {
             var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat };
             var mockUrlHelper = new Mock<UrlHelper>();
-            mockUrlHelper.Setup(x => x.Action("SearchForProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
+            mockUrlHelper.Setup(x => x.Action("SearchForFrameworkProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 

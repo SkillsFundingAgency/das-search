@@ -1,14 +1,13 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
+using MediatR;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Attribute;
-using Sfa.Das.Sas.Web.Common;
-using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Models;
+using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -17,20 +16,17 @@ namespace Sfa.Das.Sas.Web.Controllers
     public sealed class ApprenticeshipController : Controller
     {
         private readonly ILog _logger;
-        private readonly IShortlistCollection<int> _shortlistCollection;
-        private readonly IApprenticeshipViewModelFactory _apprenticeshipViewModelFactory;
-        private readonly IApprenticeshipSearchService _searchService;
+        private readonly IMappingService _mappingService;
+        private readonly IMediator _mediator;
 
         public ApprenticeshipController(
-            IApprenticeshipSearchService searchService,
             ILog logger,
-            IShortlistCollection<int> shortlistCollection,
-            IApprenticeshipViewModelFactory apprenticeshipViewModelFactory)
+            IMappingService mappingService,
+            IMediator mediator)
         {
-            _searchService = searchService;
             _logger = logger;
-            _shortlistCollection = shortlistCollection;
-            _apprenticeshipViewModelFactory = apprenticeshipViewModelFactory;
+            _mappingService = mappingService;
+            _mediator = mediator;
         }
 
         public ActionResult Search()
@@ -39,63 +35,36 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchResults(ApprenticeshipSearchCriteria criteria)
+        public ActionResult SearchResults(ApprenticeshipSearchQuery query)
         {
-            ApprenticeshipSearchResults searchResults;
-            ApprenticeshipSearchResultViewModel viewModel;
-            criteria.Page = criteria.Page <= 0 ? 1 : criteria.Page;
+            var response = _mediator.Send(query);
 
-            searchResults = _searchService.SearchByKeyword(criteria.Keywords, criteria.Page, criteria.Take, criteria.Order, criteria.SelectedLevels);
-            viewModel = _apprenticeshipViewModelFactory.GetSApprenticeshipSearchResultViewModel(searchResults);
+            var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
 
-            if (viewModel == null)
+            if (response.StatusCode != ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound)
             {
-                _logger.Warn("ViewModel is null, SearchResults, ApprenticeshipController ");
-                return View(new ApprenticeshipSearchResultViewModel());
+                return View(viewModel);
             }
 
-            if (viewModel.TotalResults > 0 && !viewModel.Results.Any())
-            {
-                var rv = new RouteValueDictionary { { "keywords", criteria.Keywords }, { "page", viewModel.LastPage } };
-                var index = 0;
-                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
-                {
-                    rv.Add("SelectedLevels[" + index + "]", level.Value);
-                    index++;
-                }
+            var rv = CreateRouteParameters(query, response, viewModel);
 
-                var url = Url.Action(
-                    "SearchResults",
-                    "Apprenticeship",
-                    rv);
-                return new RedirectResult(url);
-            }
+            var url = Url.Action("SearchResults", "Apprenticeship", rv);
 
-            var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName).Select(standard => standard.ApprenticeshipId).ToList();
-            var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName).Select(framework => framework.ApprenticeshipId).ToList();
-
-            var shortlistedStandards = shotListedStandardsCollection.ToDictionary(standard => standard, standard => true);
-            var shortlistedFrameworks = shotListedFrameworksCollection.ToDictionary(framework => framework, framework => true);
-
-            viewModel.ShortlistedStandards = shortlistedStandards;
-            viewModel.ShortlistedFrameworks = shortlistedFrameworks;
-
-            viewModel.SortOrder = criteria.Order == 0 ? "1" : criteria.Order.ToString();
-            viewModel.ActualPage = criteria.Page;
-
-            return View(viewModel);
+            return new RedirectResult(url);
         }
 
         // GET: Standard
         public ActionResult Standard(int id, string keywords)
         {
-            if (id < 0)
+            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
+
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
             {
-                Response.StatusCode = 400;
+                _logger.Info("404 - Attempt to get standard with an ID below zero");
+                return HttpNotFound("Cannot find any standards with an ID below zero");
             }
 
-            var viewModel = _apprenticeshipViewModelFactory.GetStandardViewModel(id);
-            if (viewModel == null)
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
             {
                 var message = $"Cannot find standard: {id}";
                 _logger.Warn($"404 - {message}");
@@ -103,59 +72,93 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListCookieName);
-            viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
-            viewModel.SearchTerm = keywords;
+            var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
 
             return View(viewModel);
         }
 
         public ActionResult Framework(int id, string keywords)
         {
-            if (id < 0)
+            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
+
+            switch (response.StatusCode)
             {
-                Response.StatusCode = 400;
+                case GetFrameworkResponse.ResponseCodes.InvalidFrameworkId:
+                    _logger.Info("404 - Attempt to get standard with an ID below zero");
+
+                    return HttpNotFound("Cannot find any standards with an ID below zero");
+
+                case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
+                    var message = $"Cannot find framework: {id}";
+
+                    _logger.Warn($"404 - {message}");
+
+                    return new HttpNotFoundResult(message);
+
+                case GetFrameworkResponse.ResponseCodes.Success:
+                    var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
+
+                    return View(viewModel);
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
-            var viewModel = _apprenticeshipViewModelFactory.GetFrameworkViewModel(id);
-            if (viewModel == null)
-            {
-                var message = $"Cannot find framework: {id}";
-                _logger.Warn($"404 - {message}");
-
-                return new HttpNotFoundResult(message);
-            }
-
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.FrameworksShortListCookieName);
-            viewModel.IsShortlisted = shortlistedApprenticeships.Any(x => x.ApprenticeshipId.Equals(id));
-            viewModel.SearchTerm = keywords;
-
-            return View(viewModel);
         }
 
-        public ActionResult SearchForProviders(int? standardId, int? frameworkId, string postCode, string keywords, string hasError, string wrongPostcode)
+        public ActionResult SearchForStandardProviders(GetStandardProvidersQuery query)
         {
-            ProviderSearchViewModel viewModel;
+            var response = _mediator.Send(query);
 
-            if (standardId != null)
+            if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
             {
-                viewModel = _apprenticeshipViewModelFactory.GetProviderSearchViewModelForStandard(standardId.Value, @Url);
-            }
-            else if (frameworkId != null)
-            {
-                viewModel = _apprenticeshipViewModelFactory.GetFrameworkProvidersViewModel(frameworkId.Value, @Url);
-            }
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
+                return new HttpNotFoundResult();
             }
 
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
-            viewModel.PostCode = postCode;
-            viewModel.SearchTerms = keywords;
+            var viewModel = _mappingService.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response);
 
-            return View(viewModel);
+            viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
+
+            return View("SearchForProviders", viewModel);
+        }
+
+        public ActionResult SearchForFrameworkProviders(int frameworkId, string postcode, string keywords, string hasError)
+        {
+            var query = new GetFrameworkProvidersQuery
+            {
+                FrameworkId = frameworkId, Postcode = postcode, Keywords = keywords, HasErrors = hasError
+            };
+
+            var response = _mediator.Send(query);
+
+            if (response.StatusCode.Equals(GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound))
+            {
+                return new HttpNotFoundResult();
+            }
+
+            var viewModel = _mappingService.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response);
+
+            viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
+
+            return View("SearchForProviders", viewModel);
+        }
+
+        private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
+        {
+            var rv = new RouteValueDictionary {{"keywords", query?.Keywords}, {"page", response.LastPage}};
+            var index = 0;
+
+            if (viewModel?.AggregationLevel == null || !viewModel.AggregationLevel.Any())
+            {
+                return rv;
+            }
+
+            foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+            {
+                rv.Add("SelectedLevels[" + index + "]", level.Value);
+                index++;
+            }
+
+            return rv;
         }
     }
 }
