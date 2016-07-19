@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
-
+    using AutoMapper;
     using FluentAssertions;
 
     using Moq;
@@ -60,7 +60,7 @@
 
             ProviderController controller = new ProviderControllerBuilder()
                 .SetupMediator(x => x.Send(It.IsAny<ProviderDetailQuery>()), stubSearchResponse)
-                .SetupMappingService(x => x.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(It.IsAny<DetailProviderResponse>()), stubProviderViewModel)
+                .SetupMappingService(x => x.Map(It.IsAny<DetailProviderResponse>(), It.IsAny<Action<IMappingOperationOptions<DetailProviderResponse, ApprenticeshipDetailsViewModel>>>()), stubProviderViewModel)
                 .WithUrl(urlHelperMock.Object);
 
             var result = controller.Detail(searchCriteria);

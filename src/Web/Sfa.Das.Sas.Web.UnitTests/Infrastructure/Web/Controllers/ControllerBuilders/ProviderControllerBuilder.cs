@@ -10,14 +10,15 @@ using Sfa.Das.Sas.Web.Services;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
 {
+    using Core.Configuration;
     using MediatR;
-    using Sas.Web.Factories.Interfaces;
 
     internal class ProviderControllerBuilder
     {
         private readonly Mock<ILog> _mockLogger = new Mock<ILog>();
         private readonly Mock<IMappingService> _mockMappingService = new Mock<IMappingService>();
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
+        private readonly Mock<IConfigurationSettings> _mockSettings = new Mock<IConfigurationSettings>();
 
         private UrlHelper _url;
         private HttpContextBase _httpContext;
@@ -29,7 +30,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBui
 
         public ProviderController Build()
         {
-            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object);
+            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object);
 
             if (_url != null)
             {

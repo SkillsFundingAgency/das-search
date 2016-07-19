@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(dest => dest.ProviderId, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Id))
                    .ForMember(dest => dest.EmployerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.EmployerSatisfaction))
                    .ForMember(dest => dest.LearnerSatisfactionMessage, opt => opt.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.ApprenticeshipDetails.Product.LearnerSatisfaction))
-                   ;
+                   .ForMember(dest => dest.SurveyUrl, y => y.Ignore());
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
@@ -144,6 +144,7 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(x => x.ApprenticeshipLevel, y => y.Ignore())
             .ForMember(x => x.ApprenticeshipType, y => y.Ignore())
             .ForMember(x => x.IsShortlisted, y => y.Ignore())
+            .ForMember(x => x.SurveyUrl, y => y.Ignore())
             .AfterMap<ProviderViewModelMappingAction>();
         }
 
