@@ -12,7 +12,7 @@ using Sfa.Das.Sas.Core.Domain.Services;
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     [TestFixture]
-    class GetStandardHandlerTest
+    public sealed class GetStandardHandlerTest
     {
         private GetStandardHandler _sut;
         private Mock<IGetStandards> _mockGetStandards;
@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnFoundStandardInResponse()
         {
             var query = new GetStandardQuery() { Id = 1, Keywords = "Test" };
-            var standard = new Standard {StandardId = query.Id};
+            var standard = new Standard { StandardId = query.Id };
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
 

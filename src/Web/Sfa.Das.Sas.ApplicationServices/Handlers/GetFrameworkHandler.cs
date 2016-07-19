@@ -14,10 +14,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IGetFrameworks _getFrameworks;
         private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public GetFrameworkHandler(IGetFrameworks getFrameworks, IShortlistCollection<int> _shortlistCollection)
+        public GetFrameworkHandler(IGetFrameworks getFrameworks, IShortlistCollection<int> shortlistCollection)
         {
             _getFrameworks = getFrameworks;
-            this._shortlistCollection = _shortlistCollection;
+            _shortlistCollection = shortlistCollection;
         }
 
         public GetFrameworkResponse Handle(GetFrameworkQuery message)

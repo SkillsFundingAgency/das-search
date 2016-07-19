@@ -12,7 +12,7 @@ using Sfa.Das.Sas.Core.Domain.Services;
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     [TestFixture]
-    class GetFrameworkHandlerTest
+    public sealed class GetFrameworkHandlerTest
     {
         private GetFrameworkHandler _sut;
         private Mock<IGetFrameworks> _mockGetFrameworks;
@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnFoundFrameworkInResponse()
         {
             var query = new GetFrameworkQuery() { Id = 1, Keywords = "Test" };
-            var framework = new Framework {FrameworkId = query.Id};
+            var framework = new Framework { FrameworkId = query.Id };
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
 

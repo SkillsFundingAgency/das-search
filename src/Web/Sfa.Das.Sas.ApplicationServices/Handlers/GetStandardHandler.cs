@@ -13,10 +13,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IGetStandards _getStandards;
         private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public GetStandardHandler(IGetStandards getStandards, IShortlistCollection<int> _shortlistCollection)
+        public GetStandardHandler(IGetStandards getStandards, IShortlistCollection<int> shortlistCollection)
         {
             _getStandards = getStandards;
-            this._shortlistCollection = _shortlistCollection;
+            _shortlistCollection = shortlistCollection;
         }
 
         public GetStandardResponse Handle(GetStandardQuery message)

@@ -42,7 +42,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (response.StatusCode == ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded)
             {
-                var rv = new RouteValueDictionary {{"keywords", query?.Keywords}, {"page", response.LastPage}};
+                var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
                 var index = 0;
 
                 if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
@@ -72,7 +72,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         // GET: Standard
         public ActionResult Standard(int id, string keywords)
         {
-            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
+            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
 
             if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
             {
@@ -95,7 +95,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult Framework(int id, string keywords)
         {
-            var response = _mediator.Send(new GetFrameworkQuery {Id = id, Keywords = keywords});
+            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
             if (response.StatusCode == GetFrameworkResponse.ResponseCodes.InvalidFrameworkId)
             {

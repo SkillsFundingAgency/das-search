@@ -11,7 +11,7 @@ using Sfa.Das.Sas.ApplicationServices.Responses;
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     [TestFixture]
-    class ApprenticeshipSearchHandlerTest
+    public sealed class ApprenticeshipSearchHandlerTest
     {
         private ApprenticeshipSearchHandler _sut;
         private Mock<IApprenticeshipSearchService> _mockApprenticeshipSearchService;
