@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = _sut.Handle(new ApprenticeshipSearchQuery());
 
-            response.StatusCode.Should().Be(ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded);
+            response.StatusCode.Should().Be(ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound);
         }
 
         [Test]

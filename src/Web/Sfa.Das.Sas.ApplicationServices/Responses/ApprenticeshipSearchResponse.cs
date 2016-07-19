@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         {
             Success,
             SearchFailed,
-            SearchPageLimitExceeded,
+            PageNumberOutOfUpperBound,
             NoSearchResultsFound
         }
 

@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()))
                 .Returns(new ApprenticeshipSearchResponse
                 {
-                    StatusCode = ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded
+                    StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound
                 });
 
             var urlHelper = new Mock<UrlHelper>();

@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             if (searchResults.TotalResults > 0 && !searchResults.Results.Any())
             {
                 response.LastPage = searchResults.LastPage;
-                response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.SearchPageLimitExceeded;
+                response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound;
 
                 return response;
             }
