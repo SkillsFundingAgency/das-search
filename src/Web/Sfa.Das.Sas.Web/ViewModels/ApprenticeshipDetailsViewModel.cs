@@ -38,5 +38,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public ApprenticeshipTrainingType ApprenticeshipType { get; set; }
 
         public bool IsShortlisted { get; set; }
+
+        public string SurveyUrl { get; set; }
     }
 }

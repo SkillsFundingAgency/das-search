@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Net;
     using System.Web.Routing;
-
+    using Core.Configuration;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Web.Extensions;
 
@@ -20,15 +20,18 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
+        private readonly IConfigurationSettings _settings;
 
         public ProviderController(
             ILog logger,
             IMappingService mappingService,
-            IMediator mediator)
+            IMediator mediator,
+            IConfigurationSettings settings)
         {
             _logger = logger;
             _mappingService = mappingService;
             _mediator = mediator;
+            _settings = settings;
         }
 
         [HttpGet]
@@ -118,7 +121,8 @@ namespace Sfa.Das.Sas.Web.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var viewModel = _mappingService.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(response);
+            var viewModel = _mappingService.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
+                                .AfterMap((src, dest) => dest.SurveyUrl = _settings.SurveyUrl.ToString()));
 
             return View(viewModel);
         }
