@@ -275,10 +275,8 @@
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Collections\CookieShortlistCollection.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Factories\ApprenticeshipViewModelFactory.cs" />
     <Compile Include="Factories\DashboardViewModelFactory.cs" />
     <Compile Include="Factories\HttpCookieFactory.cs" />
-    <Compile Include="Factories\Interfaces\IApprenticeshipViewModelFactory.cs" />
     <Compile Include="Factories\Interfaces\IHttpCookieFactory.cs" />
     <Compile Include="Factories\Interfaces\IDashboardViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />

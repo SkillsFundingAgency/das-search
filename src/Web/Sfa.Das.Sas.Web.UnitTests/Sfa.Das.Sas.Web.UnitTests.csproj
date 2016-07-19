@@ -168,7 +168,6 @@
     <Compile Include="Infrastructure\Web\Extensions\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
-    <Compile Include="Infrastructure\Web\Factories\ApprenticeshipViewModelFactoryTest.cs" />
     <Compile Include="Infrastructure\Web\Factories\DashboardViewModelFactoryTest.cs" />
     <Compile Include="Infrastructure\Web\Factories\ShortlistViewModelFactoryTest.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderSearchResponseToViewModel.cs" />
