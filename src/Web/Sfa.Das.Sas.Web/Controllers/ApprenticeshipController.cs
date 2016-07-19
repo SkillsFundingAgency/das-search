@@ -59,23 +59,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(new ApprenticeshipSearchResultViewModel());
         }
 
-        private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
-        {
-            var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
-            var index = 0;
-
-            if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
-            {
-                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
-                {
-                    rv.Add("SelectedLevels[" + index + "]", level.Value);
-                    index++;
-                }
-            }
-
-            return rv;
-        }
-
         // GET: Standard
         public ActionResult Standard(int id, string keywords)
         {
@@ -169,6 +152,23 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
 
             return View("SearchForProviders", viewModel);
+        }
+
+        private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
+        {
+            var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", response.LastPage } };
+            var index = 0;
+
+            if (viewModel?.AggregationLevel != null && viewModel.AggregationLevel.Any())
+            {
+                foreach (var level in viewModel.AggregationLevel.Where(m => m.Checked))
+                {
+                    rv.Add("SelectedLevels[" + index + "]", level.Value);
+                    index++;
+                }
+            }
+
+            return rv;
         }
     }
 }
