@@ -13,22 +13,14 @@
             @Html.ActionLink("Find providers for a different postcode", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
         </p>
     }
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <div class="hgroup">
-                <h1 class="heading-xlarge">
-                    Search results
-                </h1>
-                
-                <p>
-                    @{
-                        Html.RenderPartial("_StandardSearchResultMessage");
-                    }
-                </p>
-            </div>
-        </div>
-
-    </div>
+    <hgroup class="hgroup">
+        <h1 class="heading-xlarge">
+            Search results
+        </h1>
+        @{
+            Html.RenderPartial("_StandardSearchResultMessage");
+        }
+    </hgroup>
     <div class="grid-row">
         <div class="column-third">
             <div class="editSearch">

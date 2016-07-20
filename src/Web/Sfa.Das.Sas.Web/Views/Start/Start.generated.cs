@@ -60,30 +60,21 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n\r\n            <div");
+WriteLiteral(">\r\n\r\n            <hgroup");
 
-WriteLiteral(" class=\"survey-panel survey-panel-top\"");
+WriteLiteral(" class=\"hgroup\"");
 
-WriteLiteral(">\r\n                <h2");
-
-WriteLiteral(" class=\"bold-large\"");
-
-WriteLiteral(@">
-                    Give us your feedback
-                </h2>
-                <p>
-                    This is a new service and your feedback will help us improve it.<br />
-                    Take our short survey using the link at the top of every page.
-                </p>
-            </div>
-
-            <h1");
+WriteLiteral(">\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n\r\n           " +
-" <p>For employers looking to take on apprenticeships.</p>\r\n\r\n            <p>You " +
-"can:</p>\r\n\r\n            <ul");
+WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n\r\n   " +
+"             <p");
+
+WriteLiteral(" class=\"subtitle\"");
+
+WriteLiteral(">For employers looking to take on apprenticeships.</pclass=\"subtitle\">\r\n         " +
+"   </hgroup>\r\n\r\n            <p>You can:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
@@ -94,7 +85,7 @@ WriteLiteral(">\r\n                <li>search for apprenticeship training by job
 WriteLiteral("            ");
 
             
-            #line 32 "..\..\Views\Start\Start.cshtml"
+            #line 24 "..\..\Views\Start\Start.cshtml"
        Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
 
             

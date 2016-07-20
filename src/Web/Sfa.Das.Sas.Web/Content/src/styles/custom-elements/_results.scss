@@ -36,11 +36,17 @@
             display: inline-block;
             width: auto;
             margin-right: .5rem;
+            font-weight: normal;
         }
         dd {
             width: auto;
         }
     }
-    dt { max-width: none; }
-    .address { max-width: none; width: 100%; }
+    dt { 
+        max-width: none; 
+    }
+    .address { 
+        max-width: none; 
+        width: 100%; 
+    }
 }

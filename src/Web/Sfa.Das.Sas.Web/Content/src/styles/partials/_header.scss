@@ -124,6 +124,8 @@
     @extend %grid-row;
     .phase-banner-info {
         @include grid-column( 2/3 );
+        padding-right: 0;
+        padding-left: 0;
     }
     .phase-banner-tools {
         @include grid-column( 1/3 );

@@ -11,21 +11,14 @@
     <p class="small-btm-margin">
         @Html.ActionLink("Start a new search", "Search", "Apprenticeship", new { }, new { @class = "link-back new-apprenticeship-search" })
     </p>
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <div class="hgroup">
-                <h1 class="heading-xlarge">
-                    Search results
-                </h1>
-                <p>
-                    @{
-                        Html.RenderPartial("_SearchResultMessage");
-                    }
-                </p>
-            </div>
-        </div>
-
-    </div>
+    <hgroup class="hgroup">
+        <h1 class="heading-xlarge">
+            Search results
+        </h1>
+            @{
+                Html.RenderPartial("_SearchResultMessage");
+            }
+    </hgroup>
     <div class="grid-row">
 
         @if (!Model.HasError && Model.TotalResults > 0)
@@ -33,7 +26,7 @@
             <div class="column-one-third">
                 <div class="editSearch">
                     <h2 class="heading-medium">
-                        <a href="#EditSearch">Edit search</a>
+                        <a href="#EditSearch">Filter results</a>
                     </h2>
                     <div id="EditSearch">
                         @FilterForm("filter-box")
@@ -51,7 +44,7 @@
                         <input type="hidden" name="SelectedLevels" value="@level.Value"/>
                     }
                     <div class="form-block">
-                        <label for="select-order">Sort by</label>
+                        <label for="select-order" class="form-label-bold">Sort by</label>
                         <select name="order" id="select-order" class="form-control form-control-1-3">
                             <option selected="@(Model.SortOrder == "1")" value="1">Best match</option>
                             <option selected="@(Model.SortOrder == "2")" value="2">Level (high to low)</option>
@@ -151,7 +144,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId, @keywords = Model.SearchTerm }, null)
-        <span class="tag tag-new">new</span>
+        <span class="tag tag-new">New</span>
     </h2>
 }
 
@@ -234,7 +227,7 @@
             <input type="hidden" name="order" value="@Model.SortOrder" />
 
             <fieldset class="filters filters-accordion">
-                <h2 class="toggler heading-small">Apprenticeship Level</h2>
+                <h2 class="toggler heading-small">Apprenticeship level</h2>
                 <div class="toggled-content">
                     <ul name="alist22">
                         @foreach (var item in Model.AggregationLevel.OrderBy(m => m.Value))

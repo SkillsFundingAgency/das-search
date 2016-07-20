@@ -1,6 +1,5 @@
 ﻿@model Sfa.Das.Sas.Web.ViewModels.ApprenticeshipSearchResultViewModel
 
-<div>
     @if (Model.HasError)
     {
         @RenderErrorMessage()
@@ -22,7 +21,6 @@
     {
         @RenderMessage()
     }
-</div>
 
 @helper  RenderErrorMessage()
 {
@@ -46,7 +44,7 @@
 @helper  RenderMessageOneResult()
 {
     <p id="result-summary" class="results-one">
-        There is <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
+        T<b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()
 }
@@ -54,15 +52,15 @@
 @helper  RenderMessage()
 {
     <p id="result-summary" class="results-several">
-        There are <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
+        <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()
 }
 
 @helper RenderStandardMessage()
 {
-    <p class="labelmessage">
-        Results labelled <strong class="new">new</strong> are apprenticeship standards developed by employer groups.
+    <p class="labelmessage" >
+        Results labelled <strong class="tag tag-new">New</strong> are apprenticeship standards developed by employer groups.
     </p>
 }
 
