@@ -105,8 +105,16 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(GetStandardProvidersQuery query)
+        public ActionResult SearchForStandardProviders(int standardId, string wrongPostcode, string postcode, string keywords, string hasError)
         {
+            var query = new GetStandardProvidersQuery
+            {
+                StandardId = standardId,
+                Postcode = postcode,
+                Keywords = keywords,
+                HasErrors = hasError
+            };
+
             var response = _mediator.Send(query);
 
             if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
@@ -117,11 +125,14 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response);
 
             viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
+            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            
 
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(int frameworkId, string postcode, string keywords, string hasError)
+        public ActionResult SearchForFrameworkProviders(int frameworkId, string wrongPostcode, string postcode, string keywords, string hasError)
         {
             var query = new GetFrameworkProvidersQuery
             {
@@ -138,6 +149,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response);
 
             viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
+            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
+            viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
 
             return View("SearchForProviders", viewModel);
         }
