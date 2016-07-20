@@ -387,11 +387,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardResults.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Provider\_FilterProviders.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_FilterProviders.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Provider\_FrameworkProviderInformation.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
