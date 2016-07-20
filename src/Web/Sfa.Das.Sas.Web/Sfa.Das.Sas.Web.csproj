@@ -391,13 +391,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_FilterProviders.cshtml</DependentUpon>
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>_FilterProviders.generated.generated.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="Views\Provider\_FilterProviders.generated.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_FilterProviders.generated.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_FrameworkProviderInformation.generated.cs">
       <AutoGen>True</AutoGen>
