@@ -211,13 +211,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response))
                 .Returns(new ProviderSearchViewModel());
 
-            _sut.SearchForStandardProviders(new GetStandardProvidersQuery
-                                            {
-                                                StandardId = 2,
-                                                Postcode = "AB12 3CD",
-                                                Keywords = "test",
-                                                HasErrors = string.Empty
-                                            });
+            _sut.SearchForStandardProviders(2, string.Empty, "AB12 3CD", "test", string.Empty);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
 
@@ -238,14 +232,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockMappingService.Setup(x => x.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(
                 It.IsAny<GetStandardProvidersResponse>()));
 
-            var result = _sut.SearchForStandardProviders(
-                new GetStandardProvidersQuery
-                {
-                    StandardId = 2,
-                    Postcode = "AB12 3CD",
-                    Keywords = "test",
-                    HasErrors = string.Empty
-                }) as HttpNotFoundResult;
+            var result = _sut.SearchForStandardProviders(2, string.Empty, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetStandardProvidersQuery>()), Times.Once);
 
@@ -274,7 +261,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .Returns(new ProviderSearchViewModel());
 
             // Act
-            _sut.SearchForFrameworkProviders(2, "AB12 3CD", "test", string.Empty);
+            _sut.SearchForFrameworkProviders(2, string.Empty, "AB12 3CD", "test", string.Empty);
 
             // Assert
             _mockMediator.Verify(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()), Times.Once);
@@ -296,7 +283,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockMappingService.Setup(x => x.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(
                 It.IsAny<GetFrameworkProvidersResponse>()));
 
-            var result = _sut.SearchForFrameworkProviders(2, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
+            var result = _sut.SearchForFrameworkProviders(2, string.Empty, "AB12 3CD", "test", string.Empty) as HttpNotFoundResult;
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetFrameworkProvidersQuery>()), Times.Once);
 
