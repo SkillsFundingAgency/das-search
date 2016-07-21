@@ -53,7 +53,7 @@ Scenario: Provider Details Page
 	When I choose First Standard Result
 	Then I am on the Standard Details page	
 	When I choose Search Page Button
-	Then I am on the Provider Search page
+	Then I am on the Standard Provider Search page
 	When I enter data
 		| Field               | Value   |
 		| Postcode Search Box | M15 6BH |

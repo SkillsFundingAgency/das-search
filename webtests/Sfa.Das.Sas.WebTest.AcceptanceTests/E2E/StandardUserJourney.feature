@@ -24,7 +24,7 @@ Scenario:Should find a standard and provider
 	Then I am on the Standard Details page	
 	When I wait for the view to become active
 	When I choose Search Page Button
-	Then I am on the Provider Search page
+	Then I am on the Standard Provider Search page
 	When I enter data
 		| Field               | Value      |
 		| Postcode Search Box | {Postcode} |

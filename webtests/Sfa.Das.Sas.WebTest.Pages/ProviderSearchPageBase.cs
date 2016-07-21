@@ -6,8 +6,7 @@
 
     using SpecBind.Pages;
 
-    [PageNavigation("/Apprenticeship/SearchForProviders")]
-    public class ProviderSearchPage : SharedTemplatePage
+    public abstract class ProviderSearchPageBase : SharedTemplatePage
     {
         [ElementLocator(Id = "search-box")]
         public IWebElement PostcodeSearchBox { get; set; }

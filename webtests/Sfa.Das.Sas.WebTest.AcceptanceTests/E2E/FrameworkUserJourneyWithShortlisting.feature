@@ -32,11 +32,11 @@ Given I navigated to the Start page
          | Field          | Rule     | Value                 |
          | Shortlist Link | contains | Remove from shortlist |	
 	When I choose Search Page Button
-	Then I am on the Provider Search page
+	Then I am on the Framework Provider Search page
 
 	When I choose Search Button
 
-	Then I am on the Provider Search page
+	Then I am on the Framework Provider Search page
 
 	When I enter data
 		| Field               | Value      |
