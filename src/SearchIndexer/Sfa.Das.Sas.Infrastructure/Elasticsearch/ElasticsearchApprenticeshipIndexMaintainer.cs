@@ -34,6 +34,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         {
             var response = Client.CreateIndex(indexName, i => i
                 .Settings(settings => settings
+                    .NumberOfShards(_elasticsearchConfiguration.ApprenticeshipIndexShards())
+                    .NumberOfReplicas(_elasticsearchConfiguration.ApprenticeshipIndexReplicas())
                     .Analysis(a => _elasticsearchConfiguration.ApprenticeshipAnalysisDescriptor()))
                 .Mappings(ms => ms
                     .Map<StandardDocument>(m => m.AutoMap())

@@ -7,5 +7,13 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
         string[] StopWordsExtended { get; }
 
         string[] Synonyms { get; }
+
+        string ApprenticeshipIndexShards { get; }
+
+        string ApprenticeshipIndexReplicas { get; }
+
+        string ProviderIndexShards { get; }
+
+        string ProviderIndexReplicas { get; }
     }
 }

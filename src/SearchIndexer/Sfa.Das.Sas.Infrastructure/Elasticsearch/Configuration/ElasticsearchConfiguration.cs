@@ -35,5 +35,14 @@
                                 .Tokenizer("standard")
                                 .Filters("english_possessive_stemmer", "lowercase", "english_stop_freetext", "english_custom_synonyms")));
         }
+
+        public int ApprenticeshipIndexShards() => !string.IsNullOrEmpty(_elasticsearchSettings.ApprenticeshipIndexShards) ? int.Parse(_elasticsearchSettings.ApprenticeshipIndexShards) : 1;
+
+
+        public int ApprenticeshipIndexReplicas() => !string.IsNullOrEmpty(_elasticsearchSettings.ApprenticeshipIndexShards) ? int.Parse(_elasticsearchSettings.ApprenticeshipIndexReplicas) : 0;
+
+        public int ProviderIndexShards() => !string.IsNullOrEmpty(_elasticsearchSettings.ApprenticeshipIndexShards) ? int.Parse(_elasticsearchSettings.ProviderIndexShards) : 1;
+
+        public int ProviderIndexReplicas() => !string.IsNullOrEmpty(_elasticsearchSettings.ApprenticeshipIndexShards) ? int.Parse(_elasticsearchSettings.ProviderIndexReplicas) : 0;
     }
 }

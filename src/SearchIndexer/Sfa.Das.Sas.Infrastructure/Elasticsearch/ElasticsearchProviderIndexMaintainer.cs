@@ -6,6 +6,7 @@ using Sfa.Das.Sas.Indexer.ApplicationServices.Services;
 using Sfa.Das.Sas.Indexer.Core.Exceptions;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models.Provider;
+using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
@@ -15,20 +16,29 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
     public sealed class ElasticsearchProviderIndexMaintainer : ElasticsearchIndexMaintainerBase, IMaintainProviderIndex
     {
+        private readonly IElasticsearchConfiguration _elasticsearchConfiguration;
         private readonly Func<DeliveryInformation, bool> _onlyAtEmployer = x => x.DeliveryModes.All(xx => xx == ModesOfDelivery.OneHundredPercentEmployer);
         private readonly Func<DeliveryInformation, bool> _anyNotAtEmployer = x => x.DeliveryModes.Any(xx => xx != ModesOfDelivery.OneHundredPercentEmployer);
 
-        public ElasticsearchProviderIndexMaintainer(IElasticsearchCustomClient elasticsearchClient, IElasticsearchMapper elasticsearchMapper, ILog log)
+        public ElasticsearchProviderIndexMaintainer(
+            IElasticsearchCustomClient elasticsearchClient,
+            IElasticsearchMapper elasticsearchMapper,
+            ILog log,
+            IElasticsearchConfiguration elasticsearchConfiguration)
             : base(elasticsearchClient, elasticsearchMapper, log, "Provider")
         {
+            _elasticsearchConfiguration = elasticsearchConfiguration;
         }
 
         public override void CreateIndex(string indexName)
         {
             var response = Client.CreateIndex(
                 indexName,
-                i => i.Mappings(
-                    ms => ms
+                i => i
+                .Settings(settings => settings
+                    .NumberOfShards(_elasticsearchConfiguration.ProviderIndexShards())
+                    .NumberOfReplicas(_elasticsearchConfiguration.ProviderIndexReplicas()))
+                .Mappings(ms => ms
                     .Map<StandardProvider>(m => m.AutoMap())
                     .Map<FrameworkProvider>(m => m.AutoMap())));
 

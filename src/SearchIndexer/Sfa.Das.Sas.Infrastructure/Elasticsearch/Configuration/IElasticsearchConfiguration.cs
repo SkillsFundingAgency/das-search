@@ -5,5 +5,13 @@
     public interface IElasticsearchConfiguration
     {
         AnalysisDescriptor ApprenticeshipAnalysisDescriptor();
+
+        int ApprenticeshipIndexShards();
+
+        int ApprenticeshipIndexReplicas();
+
+        int ProviderIndexShards();
+
+        int ProviderIndexReplicas();
     }
 }

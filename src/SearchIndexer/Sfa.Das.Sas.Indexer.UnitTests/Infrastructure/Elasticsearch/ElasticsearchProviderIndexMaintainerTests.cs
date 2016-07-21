@@ -6,6 +6,7 @@ using Sfa.Das.Sas.Indexer.Core.Exceptions;
 using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;
+using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Configuration;
 
 namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 {
@@ -19,7 +20,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             MockElasticClient.Setup(x => x.CreateIndex(It.IsAny<IndexName>(), It.IsAny<Func<CreateIndexDescriptor, ICreateIndexRequest>>(), It.IsAny<string>())).Returns(response);
 
-            var indexMaintainer = new ElasticsearchProviderIndexMaintainer(MockElasticClient.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>());
+            var indexMaintainer = new ElasticsearchProviderIndexMaintainer(MockElasticClient.Object, Mock.Of<IElasticsearchMapper>(), Mock.Of<ILog>(), Mock.Of<IElasticsearchConfiguration>());
 
             Assert.Throws<ConnectionException>(() => indexMaintainer.CreateIndex("testindex"));
         }
