@@ -149,51 +149,30 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             var skip = (page - 1) * take;
             var searchDescriptor = new SearchDescriptor<ApprenticeshipSearchResultsItem>()
-                .Index(_applicationSettings.ApprenticeshipIndexAlias)
-                .AllTypes()
-                .Skip(skip)
-                .Take(take)
-                .Query(q => q
-                    .Bool(b => b
-                        .Should(
-                            bs => bs
-                                .Match(m => m
-                                    .Field(f => f.Title)
+                    .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                    .AllTypes()
+                    .Skip(skip)
+                    .Take(take)
+                    .Query(q => q
+                        .Bool(b => b
+                            .Should(
+                                bs => bs
+                                    .MultiMatch(mm => mm
+                                    .Type(TextQueryType.CrossFields)
+                                    .Fields(fi => fi
+                                        .Field(f => f.Title)
+                                        .Field(f => f.Keywords)
+                                        .Field(f => f.JobRoles)
+                                        .Field(f => f.JobRoleItems.First().Title)
+                                        .Field(f => f.JobRoleItems.First().Description))
+                                    .Query(formattedKeywords)
+                                    .MinimumShouldMatch("2<70%")
                                     .PrefixLength(3)
-                                    .Fuzziness(Fuzziness.Auto)
-                                    .Query(formattedKeywords)),
-                            bs => bs
-                                .Bool(bsb => bsb
-                                    .Should(
-                                        bsbs => bsbs
-                                            .Match(ms => ms
-                                                .Field(msf => msf.JobRoles)
-                                                .PrefixLength(3)
-                                                .Fuzziness(Fuzziness.Auto)
-                                                .Query(formattedKeywords)),
-                                        bsbs => bsbs
-                                            .Match(ms => ms
-                                                .Field(msf => msf.Keywords)
-                                                .PrefixLength(3)
-                                                .Fuzziness(Fuzziness.Auto)
-                                                .Query(formattedKeywords)),
-                                        bsbs => bsbs
-                                            .Match(ms => ms
-                                                .Field(msf => msf.JobRoleItems.First().Description)
-                                                .PrefixLength(3)
-                                                .Fuzziness(Fuzziness.Auto)
-                                                .Query(formattedKeywords)),
-                                        bsbs => bsbs
-                                            .Match(ms => ms
-                                                .Field(msf => msf.JobRoleItems.First().Title)
-                                                .PrefixLength(3)
-                                                .Fuzziness(Fuzziness.Auto)
-                                                .Query(formattedKeywords)),
-                                        bsbs => bsbs)))))
-                .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
-                .Aggregations(agg => agg
-                    .Terms(LevelAggregateName, t => t
-                        .Field(f => f.Level).MinimumDocumentCount(0)));
+                                    .Fuzziness(Fuzziness.Auto)), null)))
+                    .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
+                    .Aggregations(agg => agg
+                        .Terms(LevelAggregateName, t => t
+                            .Field(f => f.Level).MinimumDocumentCount(0)));
 
             GetSortingOrder(searchDescriptor, order);
 
