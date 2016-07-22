@@ -199,6 +199,8 @@ if (!string.IsNullOrEmpty(url))
                  <p>Cohort size: @Model.OverallCohort</p>
              }
          </div>
+        @if (Model.AchievementRateMessage != "no data available")
+        {
          <div>
              <b>National rate:</b>
              <span class="national-rate">
@@ -206,6 +208,7 @@ if (!string.IsNullOrEmpty(url))
          </span>
              @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
          </div>
+        }
      </div>
 }
 
