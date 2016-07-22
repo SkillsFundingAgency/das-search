@@ -91,10 +91,13 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 
         public bool DeleteOldIndexes(DateTime scheduledRefreshDateTime)
         {
-            var oneDayAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-2), _settings.IndexesAlias, "yyyy-MM-dd");
-            var twoDaysAgo2 = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-3), _settings.IndexesAlias, "yyyy-MM-dd");
+            var today = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _settings.IndexesAlias, "yyyy-MM-dd");
+            var oneDayAgo = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime.AddDays(-1), _settings.IndexesAlias, "yyyy-MM-dd");
 
-            return _searchIndexMaintainer.DeleteIndexes(x => x.StartsWith(oneDayAgo2) || x.StartsWith(twoDaysAgo2));
+            return _searchIndexMaintainer.DeleteIndexes(x =>
+                !(x.StartsWith(today, StringComparison.InvariantCultureIgnoreCase) ||
+                    x.StartsWith(oneDayAgo, StringComparison.InvariantCultureIgnoreCase)) &&
+                x.StartsWith(_settings.IndexesAlias, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()

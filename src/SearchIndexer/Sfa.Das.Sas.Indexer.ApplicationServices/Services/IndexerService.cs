@@ -32,6 +32,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Services
             _log.Info($"Creating new scheduled {_name}");
 
             Stopwatch stopwatch = Stopwatch.StartNew();
+
             var newIndexName = IndexerHelper.GetIndexNameAndDateExtension(scheduledRefreshDateTime, _indexSettings.IndexesAlias);
             var indexProperlyCreated = _indexerHelper.CreateIndex(newIndexName);
 
