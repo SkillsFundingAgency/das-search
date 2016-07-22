@@ -68,9 +68,12 @@
     <Compile Include="MetaData\IGenerateStandardMetaData.cs" />
     <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
+    <Compile Include="Provider\IProviderDataService.cs" />
     <Compile Include="Provider\IProviderFeatures.cs" />
+    <Compile Include="Provider\ProviderDataService.cs" />
     <Compile Include="Queue\IQueueMessage.cs" />
     <Compile Include="Queue\IMessageQueueService.cs" />
+    <Compile Include="Services\ApprenticeshipLevelMapper.cs" />
     <Compile Include="Services\IIndexerServiceFactory.cs" />
     <Compile Include="Services\IMaintainSearchIndexes.cs" />
     <Compile Include="Services\IMaintainProviderIndex.cs" />

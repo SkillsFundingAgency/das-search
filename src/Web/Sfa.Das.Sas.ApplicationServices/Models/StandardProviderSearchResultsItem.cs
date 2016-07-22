@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public int StandardCode { get; set; }
 
+        public double? OverallAchievementRate { get; set; }
+
         public string MarketingName { get; set; }
 
         public string ProviderMarketingInfo { get; set; }

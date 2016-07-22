@@ -169,6 +169,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             documentToPopulate.Website = firstLoc == null ? string.Empty : firstLoc.DeliveryLocation.Contact.Website;
             documentToPopulate.TrainingLocations = locations;
             documentToPopulate.LocationPoints = GetLocationPoints(deliveryLocations);
+            documentToPopulate.OverallAchievementRate = apprenticeshipInformation.OverallAchievementRate;
+            documentToPopulate.NationalOverallAchievementRate = apprenticeshipInformation.NationalOverallAchievementRate;
+            documentToPopulate.OverallCohort = apprenticeshipInformation.OverallCohort;
         }
 
         private IEnumerable<GeoCoordinate> GetLocationPoints(IEnumerable<DeliveryInformation> deliveryLocations)

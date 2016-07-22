@@ -18,9 +18,12 @@ namespace Sfa.Das.Sas.Indexer.Core.Extensions
 
         public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
         {
-            foreach (var item in list)
+            if (list != null)
             {
-                action(item);
+                foreach (var item in list)
+                {
+                    action(item);
+                }
             }
         }
     }

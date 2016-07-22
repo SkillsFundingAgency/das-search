@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -13,16 +12,20 @@ using Sfa.Das.Sas.Indexer.ApplicationServices.Services;
 using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.AzureWorkerRole.DependencyResolution;
 using Sfa.Das.Sas.Indexer.Core.Logging;
-using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Provider;
 using Sfa.Das.Sas.Indexer.Core.Services;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 using StructureMap;
-using Address = Sfa.Das.Sas.Indexer.Core.Models.Provider.Address;
 
 namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 {
+    using System.Collections.Generic;
+
+    using Sfa.Das.Sas.Indexer.Core.Models;
+
+    using Address = Sfa.Das.Sas.Indexer.Core.Models.Provider.Address;
+
     [TestFixture]
     public class ProviderIndexerServiceTest
     {
@@ -34,11 +37,9 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         private IIndexSettings<IMaintainProviderIndex> _providerSettings;
 
-        private Mock<IProviderFeatures> _features;
-
         private string _indexName;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             _ioc = IoC.Initialize();
@@ -46,14 +47,12 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             _providerIndexerHelper = _ioc.GetInstance<IGenericIndexerHelper<IMaintainProviderIndex>>();
             _providerSettings = _ioc.GetInstance<IIndexSettings<IMaintainProviderIndex>>();
             var maintainSearchIndexer = _ioc.GetInstance<IMaintainProviderIndex>();
-            _features = new Mock<IProviderFeatures>();
-            var providerRepository = new Mock<IGetApprenticeshipProviders>();
-            providerRepository.Setup(m => m.GetApprenticeshipProvidersAsync()).ReturnsAsync(GetProvidersTest());
-            var activeProviderRepository = new Mock<IGetActiveProviders>();
-            activeProviderRepository.Setup(m => m.GetActiveProviders()).Returns(new List<int> { 10002387 });
+
+            var providerDataService = new Mock<IProviderDataService>();
+            providerDataService.Setup(m => m.GetProviders()).Returns(GetProvidersTest());
             var logger = new Mock<ILog>();
 
-            _providerIndexerHelper = new ProviderIndexer(_providerSettings, maintainSearchIndexer, _features.Object, providerRepository.Object, activeProviderRepository.Object, logger.Object);
+            _providerIndexerHelper = new ProviderIndexer(_providerSettings, maintainSearchIndexer, providerDataService.Object, logger.Object);
 
             _elasticClient = _ioc.GetInstance<IElasticsearchCustomClient>();
 
@@ -70,7 +69,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             }
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void AfterAllTestAreRun()
         {
             _elasticClient.DeleteIndex(Indices.Index(_indexName));
@@ -185,7 +184,11 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             }
         }
 
-        private List<Provider> GetProvidersTest()
+        internal class DummyTestClass
+        {
+        }
+
+        private async Task<ICollection<Provider>> GetProvidersTest()
         {
             var providerLocations = new List<Location>
                                         {
@@ -379,10 +382,6 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                    Locations = providerLocations
                                }
                        };
-        }
-
-        internal class DummyTestClass
-        {
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers
     {
         protected override string ResolveCore(double? satisfaction)
         {
-            return ProviderMappingHelper.GetSatisfactionText(satisfaction);
+            return ProviderMappingHelper.GetPercentageText(satisfaction);
         }
     }
 }

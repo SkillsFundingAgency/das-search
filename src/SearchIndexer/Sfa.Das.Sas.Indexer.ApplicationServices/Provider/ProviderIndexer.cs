@@ -9,31 +9,28 @@ using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 {
+    using Sfa.Das.Sas.Indexer.ApplicationServices.Standard;
+    using Sfa.Das.Sas.Indexer.Core.Models.Provider;
+
     public sealed class ProviderIndexer : IGenericIndexerHelper<IMaintainProviderIndex>
     {
-        private readonly IGetActiveProviders _activeProviderClient;
-
-        private readonly IGetApprenticeshipProviders _providerRepository;
         private readonly IMaintainProviderIndex _searchIndexMaintainer;
-        private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
-        private readonly IProviderFeatures _features;
+        private readonly IProviderDataService _providerDataService;
+
+        private readonly IIndexSettings<IMaintainProviderIndex> _settings;
 
         private readonly ILog _log;
 
         public ProviderIndexer(
             IIndexSettings<IMaintainProviderIndex> settings,
             IMaintainProviderIndex searchIndexMaintainer,
-            IProviderFeatures features,
-            IGetApprenticeshipProviders providerRepository,
-            IGetActiveProviders activeProviderClient,
+            IProviderDataService providerDataService,
             ILog log)
         {
             _settings = settings;
-            _features = features;
-            _providerRepository = providerRepository;
-            _activeProviderClient = activeProviderClient;
             _searchIndexMaintainer = searchIndexMaintainer;
+            _providerDataService = providerDataService;
             _log = log;
         }
 
@@ -59,7 +56,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             var entries = await LoadEntries();
             try
             {
-                _log.Debug("Indexing " + entries.Count + " providers");
+                _log.Debug("Indexing " + entries.Count() + " providers");
 
                 await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
             }
@@ -100,17 +97,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                 x.StartsWith(_settings.IndexesAlias, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        public async Task<ICollection<Core.Models.Provider.Provider>> LoadEntries()
+        public async Task<ICollection<Provider>> LoadEntries()
         {
-            var providers = await _providerRepository.GetApprenticeshipProvidersAsync();
-            if (_features.FilterInactiveProviders)
-            {
-                var activeProviders = _activeProviderClient.GetActiveProviders().ToList();
-
-                return providers.Where(x => activeProviders.Contains(x.Ukprn)).ToList();
-            }
-
-            return providers.ToList();
+            return await _providerDataService.GetProviders();
         }
     }
 }

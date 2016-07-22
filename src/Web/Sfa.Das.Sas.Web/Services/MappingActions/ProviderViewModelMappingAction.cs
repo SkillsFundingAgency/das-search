@@ -9,8 +9,8 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
     {
         public void Process(ApprenticeshipDetails source, ApprenticeshipDetailsViewModel destination)
         {
-            destination.EmployerSatisfactionMessage = ProviderMappingHelper.GetSatisfactionText(source.Product.EmployerSatisfaction);
-            destination.LearnerSatisfactionMessage = ProviderMappingHelper.GetSatisfactionText(source.Product.LearnerSatisfaction);
+            destination.EmployerSatisfactionMessage = ProviderMappingHelper.GetPercentageText(source.Product.EmployerSatisfaction);
+            destination.LearnerSatisfactionMessage = ProviderMappingHelper.GetPercentageText(source.Product.LearnerSatisfaction);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string Email { get; set; }
         double? EmployerSatisfaction { get; set; }
         double? LearnerSatisfaction { get; set; }
+        double? OverallAchievementRate { get; set; }
         string MarketingName { get; set; }
         string ProviderMarketingInfo { get; set; }
         string ApprenticeshipMarketingInfo { get; set; }

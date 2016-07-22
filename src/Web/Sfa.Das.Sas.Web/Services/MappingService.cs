@@ -73,6 +73,7 @@ namespace Sfa.Das.Sas.Web.Services
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
+                .ForMember(x => x.AchievementRateMessage, y => y.Ignore())
                 .ForMember(x => x.StandardCode, y => y.Ignore())
                 .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftemap
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
@@ -81,9 +82,11 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Address, y => y.Ignore())
                 ;
 
+            // ToDo: Do we need to specify if mapping is defined in concrete class?
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
+                .ForMember(x => x.AchievementRateMessage, y => y.Ignore())
                 .ForMember(x => x.PathwayCode, y => y.Ignore())
                 .ForMember(x => x.Level, y => y.Ignore())
                 .ForMember(x => x.FrameworkId, y => y.Ignore())
@@ -100,6 +103,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.IsShortlisted, y => y.Ignore())
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
+                .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.OverallAchievementRate)))
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
                 .ForMember(x => x.LocationId, y => y.MapFrom(z => z.MatchingLocationId))
                 .ForMember(x => x.LocationName, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).LocationName))
@@ -111,6 +115,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.IsShortlisted, y => y.Ignore())
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
+                .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.OverallAchievementRate)))
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
                 .ForMember(x => x.LocationId, y => y.MapFrom(z => z.MatchingLocationId))
                 .ForMember(x => x.LocationName, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).LocationName))
