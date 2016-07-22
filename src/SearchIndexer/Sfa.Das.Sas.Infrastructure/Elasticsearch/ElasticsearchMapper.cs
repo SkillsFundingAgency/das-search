@@ -8,11 +8,12 @@ using Sfa.Das.Sas.Indexer.Core.Logging;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 using Sfa.Das.Sas.Indexer.Core.Models.Provider;
-using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Helpers;
 using Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 {
+    using Sfa.Das.Sas.Indexer.ApplicationServices.Services;
+
     using JobRoleItem = Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models.JobRoleItem;
 
     public class ElasticsearchMapper : IElasticsearchMapper
@@ -82,7 +83,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         public int MapLevelProgType(int level)
         {
-            return ElasticLevelHelper.MapLevel(level);
+            return ApprenticeshipLevelMapper.MapLevel(level);
         }
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)

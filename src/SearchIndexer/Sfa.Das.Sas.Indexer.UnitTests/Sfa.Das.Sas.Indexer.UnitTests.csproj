@@ -123,7 +123,7 @@
     <Compile Include="Core\Extensions\StringExtensionsTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Infrastructure\CourseDirectory\CourseDirectoryClientTest.cs" />
-    <Compile Include="Infrastructure\DapperDB\AchievmentRateProviderTest.cs" />
+    <Compile Include="Infrastructure\DapperDB\AchievementRateProviderTest.cs" />
     <Compile Include="Infrastructure\Elasticsearch\BaseElasticIndexMaintainerTests.cs" />
     <Compile Include="Infrastructure\Elasticsearch\BulkProviderClientTests.cs" />
     <Compile Include="Infrastructure\Elasticsearch\ElasticsearchApprenticeshipIndexMaintainerTests.cs" />

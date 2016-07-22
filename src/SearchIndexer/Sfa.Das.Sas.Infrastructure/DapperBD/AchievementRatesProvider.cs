@@ -5,16 +5,16 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
     using Sfa.Das.Sas.Indexer.Core.Models;
     using Sfa.Das.Sas.Indexer.Core.Services;
 
-    public class AchievmentRatesProvider : IAchievmentRatesProvider
+    public class AchievementRatesProvider : IAchievementRatesProvider
     {
         private readonly IDatabaseProvider _databaseProvider;
 
-        public AchievmentRatesProvider(IDatabaseProvider databaseProvider)
+        public AchievementRatesProvider(IDatabaseProvider databaseProvider)
         {
             _databaseProvider = databaseProvider;
         }
 
-        public IEnumerable<AchievmentRateProvider> GetAllByProvider()
+        public IEnumerable<AchievementRateProvider> GetAllByProvider()
         {
             var query = @"SELECT 
                     [UKPRN], 
@@ -23,17 +23,16 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
                     [Overall Cohort] as OverallCohort, 
                     [Overall Achivement Rate %] as OverallAchievementRate,
                     [Sector Subject Area Tier 2] as SectorSubjectAreaTier2,
-                    [SSA1 Code] as SSA1Code,
                     [SSA2 Code] as SSA2Code
                     FROM ar_by_provider
                     WHERE [Age] = 'All Age'
                     AND [Sector Subject Area Tier 2] <> 'All SSA T2'
                     AND [Apprenticeship Level] <> 'All'
                     ";
-            return _databaseProvider.Query<AchievmentRateProvider>(query);
+            return _databaseProvider.Query<AchievementRateProvider>(query);
         }
 
-        public IEnumerable<AchievmentRateNational> GetAllNational()
+        public IEnumerable<AchievementRateNational> GetAllNational()
         {
             var query = @"
                     SELECT 
@@ -44,7 +43,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
                         [Sector Subject Area Tier 2] as SectorSubjectAreaTier2,
                         [Apprenticeship Level] as ApprenticeshipLevel,
                         [Overall Achievement Rate %] as OverallAchievementRate,
-                        [SSA1] as SSA1Code,
                         [SSA2] as SSA2Code
                     FROM ar_national
                     WHERE [Institution Type] = 'All Institution Type'
@@ -52,7 +50,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
                     AND [Sector Subject Area Tier 2] <> 'All SSA T2'
                     AND [Apprenticeship Level] <> 'All'
                     ";
-            return _databaseProvider.Query<AchievmentRateNational>(query);
+            return _databaseProvider.Query<AchievementRateNational>(query);
         }
     }
 }

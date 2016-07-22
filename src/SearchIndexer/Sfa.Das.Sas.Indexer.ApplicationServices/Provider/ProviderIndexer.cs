@@ -9,7 +9,6 @@ using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 {
-    using Sfa.Das.Sas.Indexer.ApplicationServices.Standard;
     using Sfa.Das.Sas.Indexer.Core.Models.Provider;
 
     public sealed class ProviderIndexer : IGenericIndexerHelper<IMaintainProviderIndex>

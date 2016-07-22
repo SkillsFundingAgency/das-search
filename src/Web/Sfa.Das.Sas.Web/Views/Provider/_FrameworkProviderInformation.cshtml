@@ -33,6 +33,10 @@
                 <dd class="learner-satisfaction">
                     @item.LearnerSatisfactionMessage
                 </dd>
+                <dt>Achievement rate:</dt>
+                <dd class="achievement-rate">
+                    @item.AchievementRateMessage
+                </dd>
             </dl>
             <div class="shortlist-link">
                 @GetShortlistLink(item.UkPrn, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted)

@@ -21,5 +21,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string Website { get; set; }
         IEnumerable<TrainingLocation> TrainingLocations { get; set; }
         int? MatchingLocationId { get; set; }
+
+        double? NationalOverallAchievementRate { get; set; }
+
+        string OverallCohort { get; set; }
     }
 }

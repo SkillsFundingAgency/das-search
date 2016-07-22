@@ -33,7 +33,7 @@
 
         private Mock<IMetaDataHelper> _mockMetaDataHelper;
 
-        private Mock<IAchievmentRatesProvider> _achievementProvider;
+        private Mock<IAchievementRatesProvider> _achievementProvider;
 
         [SetUp]
         public void SetUp()
@@ -42,7 +42,7 @@
             _mockProviderRepository = new Mock<IGetApprenticeshipProviders>();
             _mockActiveProviderRepository = new Mock<IGetActiveProviders>();
             _mockMetaDataHelper = new Mock<IMetaDataHelper>();
-            _achievementProvider = new Mock<IAchievmentRatesProvider>();
+            _achievementProvider = new Mock<IAchievementRatesProvider>();
 
             _mockMetaDataHelper.Setup(x => x.GetAllFrameworkMetaData()).Returns(FrameworkResults());
             _mockMetaDataHelper.Setup(x => x.GetAllStandardsMetaData()).Returns(StandardResults());
@@ -98,13 +98,14 @@
 
             Assert.AreEqual(3, result.Count);
             var framework = result.FirstOrDefault()?.Frameworks.FirstOrDefault();
-            var frameworkSecond = result.FirstOrDefault()?.Frameworks.Skip(1).Take(1).SingleOrDefault();
+            var frameworkSecond = result.ElementAt(1)?.Frameworks.ElementAt(0);
             framework?.OverallCohort.Should().Be("68");
             framework?.OverallAchievementRate.Should().Be(67.7);
+            framework?.NationalOverallAchievementRate.Should().Be(77.7);
 
-            frameworkSecond?.OverallCohort.Should().Be("68"); // ToDo: IsNUll! -> fix
-            frameworkSecond?.OverallAchievementRate.Should().Be(67.7);
-            frameworkSecond?.NationalOverallAchievementRate.Should().Be(77.7);
+            frameworkSecond?.OverallCohort.Should().Be("77");
+            frameworkSecond?.OverallAchievementRate.Should().Be(77.9);
+            frameworkSecond?.NationalOverallAchievementRate.Should().Be(77.8);
         }
 
         [Test]
@@ -122,24 +123,29 @@
             standard?.NationalOverallAchievementRate.Should().Be(99.9);
         }
 
-        private IEnumerable<AchievmentRateProvider> GetAchievementData()
+        private IEnumerable<AchievementRateProvider> GetAchievementData()
         {
-            return new List<AchievmentRateProvider>
+            return new List<AchievementRateProvider>
             {
-                new AchievmentRateProvider { Ukprn = 456, ApprenticeshipLevel = "2", Ssa2Code = 22.2, OverallAchievementRate = 57.7, OverallCohort = "58" },
-                new AchievmentRateProvider { Ukprn = 123, ApprenticeshipLevel = "3", Ssa2Code = 2.2, OverallAchievementRate = 67.7, OverallCohort = "68" }
+                new AchievementRateProvider { Ukprn = 456, ApprenticeshipLevel = "2", Ssa2Code = 22.2, OverallAchievementRate = 57.7, OverallCohort = "58" },
+                new AchievementRateProvider { Ukprn = 123, ApprenticeshipLevel = "3", Ssa2Code = 2.2, OverallAchievementRate = 67.7, OverallCohort = "68" },
+                new AchievementRateProvider { Ukprn = 123, ApprenticeshipLevel = "4", Ssa2Code = 43.2, OverallAchievementRate = 77.9, OverallCohort = "77" },
             };
         }
 
-        private IEnumerable<AchievmentRateNational> GetNationalAchievementData()
+        private IEnumerable<AchievementRateNational> GetNationalAchievementData()
         {
-            return new List<AchievmentRateNational>
+            return new List<AchievementRateNational>
             {
-                new AchievmentRateNational { ApprenticeshipLevel = "2", SSA2Code = 22.2, OverallAchievementRate = 88.8, HybridEndYear = "2041/2042" },
-                new AchievmentRateNational { ApprenticeshipLevel = "2", SSA2Code = 22.2, OverallAchievementRate = 99.9, HybridEndYear = "2042/2043" },
+                new AchievementRateNational { ApprenticeshipLevel = "2", Ssa2Code = 22.2, OverallAchievementRate = 88.8, HybridEndYear = "2041/2042" },
+                new AchievementRateNational { ApprenticeshipLevel = "2", Ssa2Code = 22.2, OverallAchievementRate = 99.9, HybridEndYear = "2042/2043" },
 
-                new AchievmentRateNational { ApprenticeshipLevel = "3", SSA2Code = 2.2, OverallAchievementRate = 66.6, HybridEndYear = "1994/1995" },
-                new AchievmentRateNational { ApprenticeshipLevel = "3", SSA2Code = 2.2, OverallAchievementRate = 77.7, HybridEndYear = "1995/1996" }
+                new AchievementRateNational { ApprenticeshipLevel = "3", Ssa2Code = 2.2, OverallAchievementRate = 66.6, HybridEndYear = "1994/1995" },
+                new AchievementRateNational { ApprenticeshipLevel = "3", Ssa2Code = 2.2, OverallAchievementRate = 77.7, HybridEndYear = "1995/1996" },
+
+                new AchievementRateNational { ApprenticeshipLevel = "4", Ssa2Code = 43.2, OverallAchievementRate = 66.6, HybridEndYear = "1994/1995" },
+                new AchievementRateNational { ApprenticeshipLevel = "4", Ssa2Code = 43.2, OverallAchievementRate = 77.8, HybridEndYear = "1995/1996" },
+                new AchievementRateNational { ApprenticeshipLevel = "4", Ssa2Code = 43.2, OverallAchievementRate = 88.7, HybridEndYear = "1993/1994" }
             };
         }
 

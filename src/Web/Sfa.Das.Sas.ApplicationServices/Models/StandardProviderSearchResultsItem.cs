@@ -39,5 +39,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public double? LearnerSatisfaction { get; set; }
 
         public int? MatchingLocationId { get; set; }
+
+        public double? NationalOverallAchievementRate { get; set; }
+
+        public string OverallCohort { get; set; }
     }
 }

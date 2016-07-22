@@ -40,5 +40,15 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool IsShortlisted { get; set; }
 
         public string SurveyUrl { get; set; }
+
+        public string NationalAchievementRateMessage { get; set; }
+
+        public string AchievementRateMessage { get; set; }
+
+        public string OverallCohort { get; set; }
+
+        public int AchievementRate { get; set; }
+
+        public int NationalAchievementRate { get; set; }
     }
 }

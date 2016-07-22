@@ -70,7 +70,6 @@
                         Training provider quality assessment
                     </h2>
                     @GetSatisfactionsHtml()
-                    @ShowSatisfactionSource()
                 </aside>
             </div>
         </div>
@@ -99,15 +98,7 @@
 
 </main>
 
-@helper ShowSatisfactionSource()
-{
-    if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
-    {
-        <p class="satisfaction-source">
-            Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
-        </p>
-    }
-}
+
 
 @helper ShowTrainingLocation(string title)
 {
@@ -169,33 +160,63 @@ if (!string.IsNullOrEmpty(url))
 }
 
 }@helper GetSatisfactionsHtml()
-{
-    <p>
-        <b>Employer satisfaction:</b>
-        <span id="employer-satisfaction">
+ {
+     <div class="rates-list">
+         <div>
+             <b>Employer satisfaction:</b>
+             <span id="employer-satisfaction">
             @Model.EmployerSatisfactionMessage
         </span>
-        @if (@Model.EmployerSatisfactionMessage != "no data available")
-        {
-            <div class="progress-container">
-                <div class="progressbar" style="width: @Model.EmployerSatisfaction%"></div>
-            </div>
-        }
-    </p>
+             @CreateProgressBar(Model.EmployerSatisfactionMessage, Model.EmployerSatisfaction)
+         </div>
 
-    <p>
-        <b>Learner satisfaction:</b>
-        <span id="learner-satisfaction">
+
+         <div>
+             <b>Learner satisfaction:</b>
+             <span id="learner-satisfaction">
             @Model.LearnerSatisfactionMessage
         </span>
-        @if (@Model.LearnerSatisfactionMessage != "no data available")
-        {
-            <div class="progress-container">
-                <div class="progressbar" style="width:@Model.LearnerSatisfaction%"></div>
-            </div>
-        }
+             @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
 
-    </p>
+         </div>
+
+         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+         {
+         <p class="satisfaction-source">
+             Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
+         </p>
+         }
+         <hr/>
+
+         <div>
+             <b>Achievement rate:</b>
+             <span class="national-rate">
+            @Model.AchievementRateMessage
+        </span>
+             @if (Model.AchievementRateMessage != "no data available")
+             {
+                 @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
+                 <p>Cohort size: @Model.OverallCohort</p>
+             }
+         </div>
+         <div>
+             <b>National rate:</b>
+             <span class="national-rate">
+             @Model.NationalAchievementRateMessage
+         </span>
+             @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
+         </div>
+     </div>
+}
+
+@helper CreateProgressBar(string message, int progress)
+{
+    if (message != "no data available")
+    {
+        <div class="progress-container">
+            <div class="progressbar" style="width: @progress%"></div>
+        </div>
+    }
 }
 
 @helper GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)

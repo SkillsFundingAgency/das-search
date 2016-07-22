@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 
         private readonly IMetaDataHelper _metaDataHelper;
 
-        private readonly IAchievmentRatesProvider _achievmentRatesProvider;
+        private readonly IAchievementRatesProvider _achievementRatesProvider;
 
         private readonly ILog _logger;
 
@@ -33,14 +33,14 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             IGetApprenticeshipProviders providerRepository,
             IGetActiveProviders activeProviderClient,
             IMetaDataHelper metaDataHelper,
-            IAchievmentRatesProvider achievmentRatesProvider,
+            IAchievementRatesProvider achievementRatesProvider,
             ILog logger)
         {
             _features = features;
             _providerRepository = providerRepository;
             _activeProviderClient = activeProviderClient;
             _metaDataHelper = metaDataHelper;
-            _achievmentRatesProvider = achievmentRatesProvider;
+            _achievementRatesProvider = achievementRatesProvider;
             _logger = logger;
         }
 
@@ -54,8 +54,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             var standards = Task.Run(() => _metaDataHelper.GetAllStandardsMetaData());
 
             // From database
-            var byProvier = _achievmentRatesProvider.GetAllByProvider();
-            var national = _achievmentRatesProvider.GetAllNational();
+            var byProvier = _achievementRatesProvider.GetAllByProvider();
+            var national = _achievementRatesProvider.GetAllNational();
 
             Task.WaitAll(frameworks, standards, providers);
 
@@ -77,35 +77,35 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             return ps;
         }
 
-        private void UpdateStandard(StandardInformation si, List<StandardMetaData> standards, IEnumerable<AchievmentRateProvider> achievmentRates, IEnumerable<AchievmentRateNational> nationalAchievmentRates)
+        private void UpdateStandard(StandardInformation si, List<StandardMetaData> standards, IEnumerable<AchievementRateProvider> achievementRates, IEnumerable<AchievementRateNational> nationalAchievementRates)
         {
             var metaData = standards.Find(m => m.Id == si.Code);
 
             if (metaData != null)
             {
-                var achievmentRate = achievmentRates.Where(m =>
+                var achievementRate = achievementRates.Where(m =>
                     IsEqual(m.Ssa2Code, metaData.SectorSubjectAreaTier2))
                     .Where(m => TestLevel(m.ApprenticeshipLevel, metaData.NotionalEndLevel))
                     .ToList();
 
-                var nationalAchievmentRate = nationalAchievmentRates.Where(m =>
-                    IsEqual(m.SSA2Code, metaData.SectorSubjectAreaTier2))
+                var nationalAchievementRate = nationalAchievementRates.Where(m =>
+                    IsEqual(m.Ssa2Code, metaData.SectorSubjectAreaTier2))
                     .Where(m => TestLevel(m.ApprenticeshipLevel, metaData.NotionalEndLevel))
                     .ToList();
 
-                var rate = ExtractValues(achievmentRate);
+                var rate = ExtractValues(achievementRate);
                 si.OverallAchievementRate = rate.Item1;
                 si.OverallCohort = rate.Item2;
 
                 si.NationalOverallAchievementRate =
-                    nationalAchievmentRate
+                    nationalAchievementRate
                     .OrderByDescending(m => m.HybridEndYear)
                     .FirstOrDefault()
                     ?.OverallAchievementRate;
             }
         }
 
-        private void UpdateFramework(FrameworkInformation fi, List<FrameworkMetaData> frameworks, IEnumerable<AchievmentRateProvider> achievmentRates, IEnumerable<AchievmentRateNational> nationalAchievmentRates)
+        private void UpdateFramework(FrameworkInformation fi, List<FrameworkMetaData> frameworks, IEnumerable<AchievementRateProvider> achievementRates, IEnumerable<AchievementRateNational> nationalAchievementRates)
         {
             var metaData = frameworks.Find(m =>
                 m.FworkCode == fi.Code &&
@@ -114,13 +114,13 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 
             if (metaData != null)
             {
-                var achievementRate = achievmentRates.Where(m =>
+                var achievementRate = achievementRates.Where(m =>
                     IsEqual(m.Ssa2Code, metaData.SectorSubjectAreaTier2))
                     .Where(m => TestLevel(m.ApprenticeshipLevel, ApprenticeshipLevelMapper.MapLevel(metaData.ProgType)))
                     .ToList();
 
-                var nationalAchievmentRate = nationalAchievmentRates.Where(m =>
-                    IsEqual(m.SSA2Code, metaData.SectorSubjectAreaTier2))
+                var nationalAchievementRate = nationalAchievementRates.Where(m =>
+                    IsEqual(m.Ssa2Code, metaData.SectorSubjectAreaTier2))
                     .Where(m => TestLevel(m.ApprenticeshipLevel, ApprenticeshipLevelMapper.MapLevel(metaData.ProgType)))
                     .ToList();
 
@@ -128,20 +128,24 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                 fi.OverallAchievementRate = rate.Item1;
                 fi.OverallCohort = rate.Item2;
 
-                fi.NationalOverallAchievementRate = nationalAchievmentRate.FirstOrDefault()?.OverallAchievementRate;
+                fi.NationalOverallAchievementRate = 
+                    nationalAchievementRate
+                    .OrderByDescending(m => m.HybridEndYear)
+                    .FirstOrDefault()
+                    ?.OverallAchievementRate;
             }
         }
 
-        private Tuple<double, string> ExtractValues(List<AchievmentRateProvider> achievementRate)
+        private Tuple<double?, string> ExtractValues(List<AchievementRateProvider> achievementRate)
         {
             if (achievementRate.Count > 1)
             {
                 _logger.Warn($"Multiple achievement rates found - UPPRN: {achievementRate.FirstOrDefault()?.Ukprn}");
             }
 
-            var v1 = achievementRate.FirstOrDefault()?.OverallAchievementRate ?? 0;
+            var v1 = achievementRate.FirstOrDefault()?.OverallAchievementRate;
             var v2 = achievementRate.FirstOrDefault()?.OverallCohort;
-            return new Tuple<double, string>(v1, v2);
+            return new Tuple<double?, string>(v1, v2);
         }
 
         private bool IsEqual(double d1, double d2)
@@ -149,9 +153,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             return Math.Abs(d1 - d2) < 0.01;
         }
 
-        private bool TestLevel(string achievmentRateProviderLevel, int level)
+        private bool TestLevel(string achievementRateProviderLevel, int level)
         {
-            return ((achievmentRateProviderLevel == "2" || achievmentRateProviderLevel == "3") && achievmentRateProviderLevel == level.ToString())
+            return ((achievementRateProviderLevel == "2" || achievementRateProviderLevel == "3") && achievementRateProviderLevel == level.ToString())
                    || level > 3;
         }
     }

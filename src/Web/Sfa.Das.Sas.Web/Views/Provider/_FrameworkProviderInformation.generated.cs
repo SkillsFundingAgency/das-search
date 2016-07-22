@@ -52,14 +52,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class FrameworkProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel>
     {
 
-#line 43 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult RenderDeliveryOptions(FrameworkProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 44 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
 
 
@@ -68,7 +68,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <dt>Training options:</dt>\r\n");
 
 
-#line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 50 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 
@@ -81,7 +81,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"deliveryOptions\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 51 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
   WriteTo(__razor_helper_writer, item.DeliveryOptionsMessage);
 
 
@@ -90,26 +90,26 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 52 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 52 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 50 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 54 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult GetShortlistLink(int ukprn, int apprenticeshipId, int locationId, bool isShortlisted)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 51 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 55 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
     if (Is<ShortlistingFeature>.Enabled)
     {
@@ -120,7 +120,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-#line 56 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 60 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvider", "ShortList",
                     new { apprenticeshipId, ukprn, locationId },
                     new
@@ -138,7 +138,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvide
 #line default
 #line hidden
 
-#line 67 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 71 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                       
         }
         else
@@ -148,7 +148,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvide
 #line default
 #line hidden
 
-#line 71 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 75 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvider", "ShortList",
                     new { apprenticeshipId, ukprn, locationId },
                     new
@@ -166,7 +166,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvide
 #line default
 #line hidden
 
-#line 82 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 86 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                       
         }
     }
@@ -176,7 +176,7 @@ WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvide
 #line hidden
 });
 
-#line 85 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 89 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -360,6 +360,22 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
+WriteLiteral("\r\n                </dd>\r\n                <dt>Achievement rate:</dt>\r\n            " +
+"    <dd");
+
+WriteLiteral(" class=\"achievement-rate\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+               Write(item.AchievementRateMessage);
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n            <div");
 
 WriteLiteral(" class=\"shortlist-link\"");
@@ -369,7 +385,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 38 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 42 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
            Write(GetShortlistLink(item.UkPrn, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted));
 
             
@@ -378,7 +394,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </article>\r\n");
 
             
-            #line 41 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     }
 
             

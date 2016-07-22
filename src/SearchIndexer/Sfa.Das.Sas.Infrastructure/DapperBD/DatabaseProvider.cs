@@ -23,13 +23,13 @@
 
         public IEnumerable<T> Query<T>(string query)
         {
-            if (string.IsNullOrEmpty(_infrastructureSettings.AchivementRateDataBaseConnectionString))
+            if (string.IsNullOrEmpty(_infrastructureSettings.AchievementRateDataBaseConnectionString))
             {
-                _logger.Error("Missing connectionstring for achivementrates database");
+                _logger.Error("Missing connectionstring for achievementrates database");
                 return default(IEnumerable<T>);
             }
 
-            IDbConnection dataConnection = new SqlConnection(_infrastructureSettings.AchivementRateDataBaseConnectionString);
+            IDbConnection dataConnection = new SqlConnection(_infrastructureSettings.AchievementRateDataBaseConnectionString);
 
             var data = dataConnection.Query<T>(query);
 

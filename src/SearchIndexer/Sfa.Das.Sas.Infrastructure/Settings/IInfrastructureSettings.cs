@@ -13,6 +13,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
 
         string ApplicationName { get; }
 
-        string AchivementRateDataBaseConnectionString { get; }
+        string AchievementRateDataBaseConnectionString { get; }
     }
 }

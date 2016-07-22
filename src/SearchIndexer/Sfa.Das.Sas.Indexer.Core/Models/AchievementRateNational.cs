@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Indexer.Core.Models
 {
-    public class AchievmentRateNational
+    public class AchievementRateNational
     {
         public string InstitutionType { get; set; }
 
@@ -12,10 +12,8 @@
 
         public string ApprenticeshipLevel { get; set; }
 
-        public double OverallAchievementRate { get; set; }
+        public double? OverallAchievementRate { get; set; }
 
-        public double SSA1Code { get; set; }
-
-        public double SSA2Code { get; set; }
+        public double Ssa2Code { get; set; }
     }
 }

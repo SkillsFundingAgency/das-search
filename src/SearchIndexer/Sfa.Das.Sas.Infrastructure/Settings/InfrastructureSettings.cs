@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
 
         public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];
 
-        public string AchivementRateDataBaseConnectionString => _settingsProvider.GetSetting("AchivementRateDataBaseConnectionString");
+        public string AchievementRateDataBaseConnectionString => _settingsProvider.GetSetting("AchievementRateDataBaseConnectionString");
 
         public IEnumerable<Uri> ElasticServerUrls => GetElasticIPs("ElasticServerUrls");
 
