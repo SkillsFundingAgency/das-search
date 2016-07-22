@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
     {
         private Mock<IVstsService> _mockVstsService;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             _mockVstsService = new Mock<IVstsService>();
@@ -94,6 +94,27 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
             framework.TypicalLength.To.Should().Be(24);
         }
 
+        [Test]
+        public void ShouldMapKeywords()
+        {
+            var mockVstsService = new Mock<IVstsService>();
+            mockVstsService.Setup(m => m.GetFrameworks()).Returns(GetVstsMetaData());
+
+            var mockLarsDataService = new Mock<ILarsDataService>();
+            mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
+                .Returns(
+                    new List<FrameworkMetaData>
+                    {
+                        new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
+                    });
+
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
+            var framework = metaDataManager.GetAllFrameworks().FirstOrDefault();
+
+            framework.Should().NotBeNull();
+            framework.Keywords.Should().Contain(new string[] { "keyword1", "keyword2" });
+        }
+
         private IEnumerable<VstsFrameworkMetaData> GetVstsMetaData()
         {
             return new List<VstsFrameworkMetaData>
@@ -104,7 +125,8 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                     PathwayCode = 1,
                     ProgType = 20,
                     JobRoleItems = new List<JobRoleItem> { new JobRoleItem { Title = "Job role 1", Description = "Description 1" } },
-                    TypicalLength = new TypicalLength { From = 18, To = 18, Unit = "m" }
+                    TypicalLength = new TypicalLength { From = 18, To = 18, Unit = "m" },
+                    Keywords = new string[] { "keyword1", "keyword2" }
                 },
                 new VstsFrameworkMetaData
                 {
@@ -117,7 +139,8 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                             new JobRoleItem { Title = "Job role 2", Description = "Description 2" },
                             new JobRoleItem { Title = "Job role 3", Description = "Description 3" }
                         },
-                    TypicalLength = new TypicalLength { From = 12, To = 24, Unit = "m" }
+                    TypicalLength = new TypicalLength { From = 12, To = 24, Unit = "m" },
+                    Keywords = new string[] { "keyword1", "keyword2" }
                 }
             };
         }

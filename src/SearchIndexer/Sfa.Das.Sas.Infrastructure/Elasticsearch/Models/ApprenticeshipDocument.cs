@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 {
+    using System.Collections.Generic;
     using Nest;
 
     using Sfa.Das.Sas.Indexer.Core.Models;
@@ -17,5 +18,8 @@
         public double SectorSubjectAreaTier2 { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
+
+        [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]
+        public IEnumerable<string> Keywords { get; set; }
     }
 }
