@@ -11,6 +11,8 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="PostcodeUrl" />
+      <Setting name="SurveyUrl" />
+      <Setting name="ElasticServerUrls" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />

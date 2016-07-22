@@ -19,7 +19,7 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public IEnumerable<Uri> ElasticServerUrls => GetElasticSearchIps();
 
-        public Uri SurveyUrl => new Uri(ConfigurationManager.AppSettings["SurveyUrl"]);
+        public Uri SurveyUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyUrl"));
 
         public string CookieInfoBannerCookieName => ConfigurationManager.AppSettings["CookieInfoBannerCookieName"];
 
@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         private IEnumerable<Uri> GetElasticSearchIps()
         {
-            var urlStrings = ConfigurationManager.AppSettings["ElasticServerUrls"].Split(',');
+            var urlStrings = CloudConfigurationManager.GetSetting("ElasticServerUrls").Split(',');
             return urlStrings.Select(url => new Uri(url));
         }
     }
