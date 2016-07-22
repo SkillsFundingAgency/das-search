@@ -1,3 +1,5 @@
+using Microsoft.Azure;
+
 namespace Sfa.Das.Sas.Infrastructure.Settings
 {
     using System;
@@ -21,7 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public string CookieInfoBannerCookieName => ConfigurationManager.AppSettings["CookieInfoBannerCookieName"];
 
-        public Uri PostcodeUrl => new Uri(ConfigurationManager.AppSettings["PostcodeUrl"]);
+        public Uri PostcodeUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeUrl"));
 
         public string EnvironmentName => ConfigurationManager.AppSettings["EnvironmentName"];
 
