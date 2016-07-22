@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace LARSMetaDataToolBox.Web
+namespace LARSMetaDataExplorer.Web
 {
     public class HttpClient : IHttpClient
     {

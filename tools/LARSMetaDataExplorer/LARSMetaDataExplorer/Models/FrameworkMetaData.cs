@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LARSMetaDataToolBox.Models
+namespace LARSMetaDataExplorer.Models
 {
     public class FrameworkMetaData 
     {

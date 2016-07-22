@@ -1,4 +1,4 @@
-﻿namespace LARSMetaDataToolBox.Models
+﻿namespace LARSMetaDataExplorer.Models
 {
     public sealed class LarsStandard
     {

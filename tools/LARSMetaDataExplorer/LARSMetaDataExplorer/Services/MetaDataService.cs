@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using LARSMetaDataToolBox.CSV;
-using LARSMetaDataToolBox.Models;
-using LARSMetaDataToolBox.Serialization;
-using LARSMetaDataToolBox.Settings;
+using LARSMetaDataExplorer.CSV;
+using LARSMetaDataExplorer.Models;
+using LARSMetaDataExplorer.Serialization;
+using LARSMetaDataExplorer.Settings;
 
-namespace LARSMetaDataToolBox.Services
+namespace LARSMetaDataExplorer.Services
 {
     public class MetaDataService : IDisposable
     {

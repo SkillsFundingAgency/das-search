@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using LARSMetaDataToolBox.CSV;
-using LARSMetaDataToolBox.MetaData;
-using LARSMetaDataToolBox.MetaData.MetaDataFactories;
+using LARSMetaDataExplorer.CSV;
+using LARSMetaDataExplorer.MetaData;
+using LARSMetaDataExplorer.MetaData.MetaDataFactories;
 
-namespace LARSMetaDataToolBox.Factories
+namespace LARSMetaDataExplorer.Factories
 {
     public class CsvServiceFactory
     {

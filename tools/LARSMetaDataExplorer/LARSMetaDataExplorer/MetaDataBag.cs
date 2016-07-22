@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LARSMetaDataToolBox.Models;
+﻿using System.Collections.Generic;
+using LARSMetaDataExplorer.Models;
 
-namespace LARSMetaDataToolBox
+namespace LARSMetaDataExplorer
 {
     public class MetaDataBag
     {

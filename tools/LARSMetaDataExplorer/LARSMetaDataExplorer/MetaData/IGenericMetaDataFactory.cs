@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LARSMetaDataToolBox.MetaData
+namespace LARSMetaDataExplorer.MetaData
 {
     public interface IGenericMetaDataFactory
     {

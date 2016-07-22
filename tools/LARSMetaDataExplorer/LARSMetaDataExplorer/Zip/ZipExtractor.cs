@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 
-namespace LARSMetaDataToolBox.Zip
+namespace LARSMetaDataExplorer.Zip
 {
     public class ZipFileExtractor : IUnzipStream
     {

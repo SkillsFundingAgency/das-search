@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace LARSMetaDataToolBox.Web
+namespace LARSMetaDataExplorer.Web
 {
     public interface IHttpClient
     {

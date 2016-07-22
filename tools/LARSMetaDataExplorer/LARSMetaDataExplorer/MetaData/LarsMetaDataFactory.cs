@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LARSMetaDataToolBox.MetaData.MetaDataFactories;
+using LARSMetaDataExplorer.MetaData.MetaDataFactories;
 
-namespace LARSMetaDataToolBox.MetaData
+namespace LARSMetaDataExplorer.MetaData
 {
     public class LarsMetaDataFactory : IGenericMetaDataFactory
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LARSMetaDataToolBox.MetaData.MetaDataFactories
+namespace LARSMetaDataExplorer.MetaData.MetaDataFactories
 {
     public interface IMetaDataFactory
     {

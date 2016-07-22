@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LARSMetaDataToolBox.Web
+namespace LARSMetaDataExplorer.Web
 {
     public interface IAngleSharpService
     {

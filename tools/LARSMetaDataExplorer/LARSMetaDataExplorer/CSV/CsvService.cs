@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using LARSMetaDataToolBox.MetaData;
+using LARSMetaDataExplorer.MetaData;
 
-namespace LARSMetaDataToolBox.CSV
+namespace LARSMetaDataExplorer.CSV
 {
     public class CsvService : ICsvService
     {

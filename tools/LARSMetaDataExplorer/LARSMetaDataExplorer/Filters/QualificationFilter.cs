@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using LARSMetaDataToolBox.Models;
-using LARSMetaDataToolBox.Serialization;
-using LARSMetaDataToolBox.Settings;
+using LARSMetaDataExplorer.Models;
+using LARSMetaDataExplorer.Serialization;
+using LARSMetaDataExplorer.Settings;
 
-namespace LARSMetaDataToolBox.Filters
+namespace LARSMetaDataExplorer.Filters
 {
     public class QualificationFilter
     {
@@ -83,20 +83,5 @@ namespace LARSMetaDataToolBox.Filters
                 .Where(s => progTypeList.Contains(s.ProgType))
                 .ToList();
         }
-
-        //public static ICollection<FrameworkQualification> Filter(MetaDataBag bag)
-        //{
-        //        //var filteredOutQualification = qualifications.Where(q =>
-        //        //    !q.FundingEffectiveTo.HasValue &&
-        //        //    (!q.FundingRateWeight.HasValue || q.FundingRateWeight.Value == 0)).ToList();
-
-        //        //filteredValues.AddRange(filteredOutQualification.Select(x => x.Title));
-        //    }
-
-        //    Console.WriteLine($"Time taken to find qualifications: {timer.Elapsed.ToString("g")}");
-        //    //return filteredValues.Distinct();
-
-        //    return results;
-        //}
     }
 }

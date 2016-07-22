@@ -1,4 +1,4 @@
-﻿namespace LARSMetaDataToolBox.Settings
+﻿namespace LARSMetaDataExplorer.Settings
 {
     public interface IAppSettings
     {

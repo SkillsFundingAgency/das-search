@@ -2,7 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace LARSMetaDataToolBox.Serialization
+namespace LARSMetaDataExplorer.Serialization
 {
     public class FileSerializer
     {

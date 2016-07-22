@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using LARSMetaDataToolBox.Services;
-using LARSMetaDataToolBox.Settings;
-using LARSMetaDataToolBox.Web;
-using LARSMetaDataToolBox.Zip;
+using LARSMetaDataExplorer.Services;
+using LARSMetaDataExplorer.Settings;
+using LARSMetaDataExplorer.Web;
+using LARSMetaDataExplorer.Zip;
 
-namespace LARSMetaDataToolBox.Factories
+namespace LARSMetaDataExplorer.Factories
 {
     public class LarsDataStreamFactory
     {

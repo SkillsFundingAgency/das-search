@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using LARSMetaDataToolBox.Extensions;
-using LARSMetaDataToolBox.Models;
+using LARSMetaDataExplorer.Extensions;
+using LARSMetaDataExplorer.Models;
 
-namespace LARSMetaDataToolBox.MetaData.MetaDataFactories
+namespace LARSMetaDataExplorer.MetaData.MetaDataFactories
 {
     public class LearningDeliveryMetaDataFactory : IMetaDataFactory
     {

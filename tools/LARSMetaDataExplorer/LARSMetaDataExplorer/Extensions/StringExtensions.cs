@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace LARSMetaDataToolBox.Extensions
+namespace LARSMetaDataExplorer.Extensions
 {
     public static class StringExtensions
     {

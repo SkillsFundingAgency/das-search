@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using LARSMetaDataToolBox.Settings;
-using LARSMetaDataToolBox.Web;
-using LARSMetaDataToolBox.Zip;
+using LARSMetaDataExplorer.Settings;
+using LARSMetaDataExplorer.Web;
+using LARSMetaDataExplorer.Zip;
 
-namespace LARSMetaDataToolBox.Services
+namespace LARSMetaDataExplorer.Services
 {
     public class LarsDataService
     {

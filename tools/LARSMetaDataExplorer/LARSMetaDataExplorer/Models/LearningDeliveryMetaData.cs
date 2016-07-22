@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LARSMetaDataToolBox.Models
+namespace LARSMetaDataExplorer.Models
 {
     public class LearningDeliveryMetaData
     {

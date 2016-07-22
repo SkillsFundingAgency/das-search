@@ -1,7 +1,6 @@
-﻿using LARSMetaDataToolBox.MetaData;
-using LARSMetaDataToolBox.Services;
+﻿using LARSMetaDataExplorer.Services;
 
-namespace LARSMetaDataToolBox.Factories
+namespace LARSMetaDataExplorer.Factories
 {
     public class MetaDataServiceFactory
     {

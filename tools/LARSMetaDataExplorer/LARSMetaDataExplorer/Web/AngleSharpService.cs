@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AngleSharp.Parser.Html;
 
-namespace LARSMetaDataToolBox.Web
+namespace LARSMetaDataExplorer.Web
 {
     public class AngleSharpService : IAngleSharpService
     {
