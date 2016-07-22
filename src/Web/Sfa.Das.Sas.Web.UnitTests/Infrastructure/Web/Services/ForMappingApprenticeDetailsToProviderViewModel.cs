@@ -28,7 +28,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                     DeliveryModes = new List<string>() { "On site", "Day trip" },
                     EmployerSatisfaction = 8.3,
                     LearnerSatisfaction = 2.1,
-                    ProviderMarketingInfo = "provider marketing info"
+                    ProviderMarketingInfo = "provider marketing info",
+                    AchievementRate = 1.1,
+                    OverallCohort = "27",
+                    NationalAchievementRate = 2.2
                 },
                 Location = new Location
                 {

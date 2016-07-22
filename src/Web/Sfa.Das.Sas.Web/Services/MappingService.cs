@@ -151,7 +151,7 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.Product.AchievementRate)))
             .ForMember(x => x.AchievementRate, y => y.MapFrom(z => z.Product.AchievementRate))
             .ForMember(x => x.NationalAchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.Product.NationalAchievementRate)))
-            .ForMember(x => x.NationalAchievementRate, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.Product.NationalAchievementRate)))
+            .ForMember(x => x.NationalAchievementRate, y => y.MapFrom(z => z.Product.NationalAchievementRate))
             .ForMember(x => x.OverallCohort, y => y.ResolveUsing<OverallCohortResolver>().FromMember(z => z.Product.OverallCohort))
             .AfterMap<ProviderViewModelMappingAction>();
         }
