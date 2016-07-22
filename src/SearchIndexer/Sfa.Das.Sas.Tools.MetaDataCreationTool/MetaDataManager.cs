@@ -110,6 +110,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                 }
 
                 framework.JobRoleItems = repositoryFramework.JobRoleItems;
+                framework.Keywords = repositoryFramework.Keywords;
                 framework.TypicalLength = repositoryFramework.TypicalLength;
                 framework.CompletionQualifications = repositoryFramework.CompletionQualifications;
                 framework.EntryRequirements = repositoryFramework.EntryRequirements;
