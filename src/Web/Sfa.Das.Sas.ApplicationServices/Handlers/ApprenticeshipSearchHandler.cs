@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return response;
             }
 
-            response.ActualPage = searchResults.ActualPage;
+            response.ActualPage = message.Page;
             response.AggregationLevel = searchResults.LevelAggregation;
             response.SearchTerm = message.Keywords;
             response.Results = searchResults.Results;

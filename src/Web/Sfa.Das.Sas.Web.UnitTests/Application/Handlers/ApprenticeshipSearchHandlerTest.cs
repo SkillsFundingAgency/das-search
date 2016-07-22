@@ -83,7 +83,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.LastPage.Should().Be(searchResults.LastPage);
             response.TotalResults.Should().Be(searchResults.TotalResults);
             response.Results.Should().BeEquivalentTo(searchResults.Results);
-            response.ActualPage.Should().Be(searchResults.ActualPage);
+            response.ActualPage.Should().Be(query.Page);
             response.AggregationLevel.ShouldBeEquivalentTo(searchResults.LevelAggregation);
             response.HasError.Should().Be(searchResults.HasError);
             response.ResultsToTake.Should().Be(searchResults.ResultsToTake);
