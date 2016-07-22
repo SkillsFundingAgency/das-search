@@ -8,6 +8,7 @@ using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Attribute;
 using Sfa.Das.Sas.Web.Services;
+using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -157,7 +158,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
         {
-            var rv = new RouteValueDictionary {{"keywords", query?.Keywords}, {"page", response.LastPage}};
+            var rv = new RouteValueDictionary { { "keywords", query?.Keywords}, { "page", viewModel?.LastPage ?? 1 } };
             var index = 0;
 
             if (viewModel?.AggregationLevel == null || !viewModel.AggregationLevel.Any())

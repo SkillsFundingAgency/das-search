@@ -77,7 +77,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 x =>
                 x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()),
                 Times.Once);
-            
+
             result.Model.Should().Be(viewModel);
         }
 

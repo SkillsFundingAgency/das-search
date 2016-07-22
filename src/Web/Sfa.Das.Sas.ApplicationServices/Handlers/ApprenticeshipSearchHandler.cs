@@ -32,14 +32,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, message.Take, message.Order, message.SelectedLevels);
 
-            if (searchResults.TotalResults > 0 && !searchResults.Results.Any())
-            {
-                response.LastPage = searchResults.LastPage;
-                response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound;
-
-                return response;
-            }
-
             response.ActualPage = message.Page;
             response.AggregationLevel = searchResults.LevelAggregation;
             response.SearchTerm = message.Keywords;
@@ -48,6 +40,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             response.SelectedLevels = searchResults.SelectedLevels?.ToList();
             response.TotalResults = searchResults.TotalResults;
             response.LastPage = searchResults.LastPage;
+
+            if (searchResults.TotalResults > 0 && !searchResults.Results.Any())
+            {
+                response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound;
+                return response;
+            }
 
             var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListName)?.Select(standard => standard.ApprenticeshipId).ToList();
             var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListName)?.Select(framework => framework.ApprenticeshipId).ToList();
