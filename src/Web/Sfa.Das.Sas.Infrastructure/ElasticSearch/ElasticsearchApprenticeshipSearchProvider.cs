@@ -92,7 +92,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             if (order == 0 || order == 1)
             {
-                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.Title));
+                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.Title).Descending(f => f.Level));
             }
 
             if (order == 2)
