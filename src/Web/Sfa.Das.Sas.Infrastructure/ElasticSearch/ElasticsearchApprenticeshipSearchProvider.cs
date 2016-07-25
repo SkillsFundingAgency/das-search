@@ -92,7 +92,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             if (order == 0 || order == 1)
             {
-                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score));
+                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.Title));
             }
 
             if (order == 2)
@@ -156,9 +156,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     .Query(q => q
                         .Bool(b => b
                             .Should(
-                                bs => bs
+                                bs1 => bs1
                                     .MultiMatch(mm => mm
-                                    .Type(TextQueryType.CrossFields)
+                                    .Type(TextQueryType.BestFields)
                                     .Fields(fi => fi
                                         .Field(f => f.Title)
                                         .Field(f => f.Keywords)
@@ -168,7 +168,16 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                     .Query(formattedKeywords)
                                     .MinimumShouldMatch("2<70%")
                                     .PrefixLength(3)
-                                    .Fuzziness(Fuzziness.Auto)), null)))
+                                    .Fuzziness(Fuzziness.Auto)),
+                                bs2 => bs2
+                                    .MultiMatch(mm => mm
+                                    .Type(TextQueryType.CrossFields)
+                                    .Fields(fi => fi
+                                        .Field(f => f.Title, 2)
+                                        .Field(f => f.Keywords))
+                                    .Query(formattedKeywords)
+                                    .PrefixLength(3)
+                                    .Fuzziness(Fuzziness.Auto)))))
                     .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
                     .Aggregations(agg => agg
                         .Terms(LevelAggregateName, t => t
