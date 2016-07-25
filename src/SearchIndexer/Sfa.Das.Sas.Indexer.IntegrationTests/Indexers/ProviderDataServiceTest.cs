@@ -100,12 +100,12 @@
             var framework = result.FirstOrDefault()?.Frameworks.FirstOrDefault();
             var frameworkSecond = result.ElementAt(1)?.Frameworks.ElementAt(0);
             framework?.OverallCohort.Should().Be("68");
-            framework?.OverallAchievementRate.Should().Be(67.7);
-            framework?.NationalOverallAchievementRate.Should().Be(77.7);
+            framework?.OverallAchievementRate.Should().Be(68);
+            framework?.NationalOverallAchievementRate.Should().Be(78);
 
             frameworkSecond?.OverallCohort.Should().Be("77");
-            frameworkSecond?.OverallAchievementRate.Should().Be(77.9);
-            frameworkSecond?.NationalOverallAchievementRate.Should().Be(77.8);
+            frameworkSecond?.OverallAchievementRate.Should().Be(78);
+            frameworkSecond?.NationalOverallAchievementRate.Should().Be(78);
         }
 
         [Test]
@@ -119,8 +119,8 @@
             Assert.AreEqual(3, result.Count);
             var standard = result.SingleOrDefault(m => !m.Standards.IsNullOrEmpty())?.Standards.FirstOrDefault();
             standard?.OverallCohort.Should().Be("58");
-            standard?.OverallAchievementRate.Should().Be(57.7);
-            standard?.NationalOverallAchievementRate.Should().Be(99.9);
+            standard?.OverallAchievementRate.Should().Be(58);
+            standard?.NationalOverallAchievementRate.Should().Be(100);
         }
 
         private IEnumerable<AchievementRateProvider> GetAchievementData()
