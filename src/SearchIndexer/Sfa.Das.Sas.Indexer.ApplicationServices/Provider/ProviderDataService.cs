@@ -98,10 +98,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                 si.OverallCohort = rate.Item2;
 
                 si.NationalOverallAchievementRate =
-                    nationalAchievementRate
-                    .OrderByDescending(m => m.HybridEndYear)
-                    .FirstOrDefault()
-                    ?.OverallAchievementRate;
+                    GetNationalOverallAchievementRate(nationalAchievementRate);
             }
         }
 
@@ -125,15 +122,29 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                     .ToList();
 
                 var rate = ExtractValues(achievementRate);
+
                 fi.OverallAchievementRate = rate.Item1;
+
                 fi.OverallCohort = rate.Item2;
 
-                fi.NationalOverallAchievementRate = 
-                    nationalAchievementRate
-                    .OrderByDescending(m => m.HybridEndYear)
-                    .FirstOrDefault()
-                    ?.OverallAchievementRate;
+                fi.NationalOverallAchievementRate =
+                    GetNationalOverallAchievementRate(nationalAchievementRate);
             }
+        }
+
+        private static double? GetNationalOverallAchievementRate(List<AchievementRateNational> nationalAchievementRate)
+        {
+            var nationalOverallAchievementRate = nationalAchievementRate
+                .OrderByDescending(m => m.HybridEndYear)
+                .FirstOrDefault()?
+                .OverallAchievementRate;
+
+            if (nationalOverallAchievementRate != null)
+            {
+                return Math.Round((double)nationalOverallAchievementRate);
+            }
+
+            return null;
         }
 
         private Tuple<double?, string> ExtractValues(List<AchievementRateProvider> achievementRate)
@@ -143,7 +154,17 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                 _logger.Warn($"Multiple achievement rates found - UPPRN: {achievementRate.FirstOrDefault()?.Ukprn}");
             }
 
-            var v1 = achievementRate.FirstOrDefault()?.OverallAchievementRate;
+            double? v1;
+
+            if (achievementRate.FirstOrDefault()?.OverallAchievementRate != null)
+            {
+                v1 = Math.Round((double)achievementRate.FirstOrDefault()?.OverallAchievementRate);
+            }
+            else
+            {
+                v1 = null;
+            }
+
             var v2 = achievementRate.FirstOrDefault()?.OverallCohort;
             return new Tuple<double?, string>(v1, v2);
         }

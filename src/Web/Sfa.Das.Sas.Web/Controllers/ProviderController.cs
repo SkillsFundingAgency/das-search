@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             string postCodeUrl = string.Empty;
             var response = await _mediator.SendAsync(criteria);
-            
+
             switch (response.StatusCode)
             {
                 case StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
