@@ -46,7 +46,10 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                     DeliveryModes = item.DeliveryModes,
                     ProviderMarketingInfo = item.ProviderMarketingInfo,
                     EmployerSatisfaction = item.EmployerSatisfaction * 10,
-                    LearnerSatisfaction = item.LearnerSatisfaction * 10
+                    LearnerSatisfaction = item.LearnerSatisfaction * 10,
+                    AchievementRate = item.OverallAchievementRate,
+                    NationalAchievementRate = item.NationalOverallAchievementRate,
+                    OverallCohort = item.OverallCohort
                 },
                 Location = new Location
                 {

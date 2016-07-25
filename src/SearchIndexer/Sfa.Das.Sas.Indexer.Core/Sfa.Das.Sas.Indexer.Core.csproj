@@ -56,6 +56,8 @@
     <Compile Include="Logging\Models\ElasticSearchLogEntry.cs" />
     <Compile Include="Logging\Models\ILogEntry.cs" />
     <Compile Include="Logging\Models\TimingLogEntry.cs" />
+    <Compile Include="Models\AchievementRateNational.cs" />
+    <Compile Include="Models\AchievementRateProvider.cs" />
     <Compile Include="Models\Framework\FrameworkAimMetaData.cs" />
     <Compile Include="Models\Framework\FrameworkComponentTypeMetaData.cs" />
     <Compile Include="Models\Framework\FrameworkMetaData.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Models\Provider\ModelOfDelivery.cs" />
     <Compile Include="Models\Provider\Provider.cs" />
     <Compile Include="Models\Provider\StandardInformation.cs" />
+    <Compile Include="Services\IAchievementRatesProvider.cs" />
     <Compile Include="Services\IGenericIndexerHelper{T}.cs" />
     <Compile Include="Services\IGetActiveProviders.cs" />
     <Compile Include="Models\Coordinate.cs" />

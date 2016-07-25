@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Helpers
+﻿namespace Sfa.Das.Sas.Indexer.ApplicationServices.Services
 {
-    public static class ElasticLevelHelper
+    using System.Collections.Generic;
+
+    public static class ApprenticeshipLevelMapper
     {
         private static Dictionary<int, int> Dictionary => new Dictionary<int, int>
             {

@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public int StandardCode { get; set; }
 
+        public double? OverallAchievementRate { get; set; }
+
         public string MarketingName { get; set; }
 
         public string ProviderMarketingInfo { get; set; }
@@ -37,5 +39,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public double? LearnerSatisfaction { get; set; }
 
         public int? MatchingLocationId { get; set; }
+
+        public double? NationalOverallAchievementRate { get; set; }
+
+        public string OverallCohort { get; set; }
     }
 }

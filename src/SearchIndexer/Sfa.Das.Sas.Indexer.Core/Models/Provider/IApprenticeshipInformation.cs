@@ -13,5 +13,11 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Provider
         IEnumerable<DeliveryInformation> DeliveryLocations { get; set; }
 
         int Code { get; set; }
+
+        double? OverallAchievementRate { get; set; }
+
+        double? NationalOverallAchievementRate { get; set; }
+
+        string OverallCohort { get; set; }
     }
 }

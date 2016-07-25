@@ -52,5 +52,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         [GeoPoint]
         public IEnumerable<GeoCoordinate> LocationPoints { get; set; }
+
+        public double? OverallAchievementRate { get; set; }
+
+        public double? NationalOverallAchievementRate { get; set; }
+
+        public string OverallCohort { get; set; }
     }
 }

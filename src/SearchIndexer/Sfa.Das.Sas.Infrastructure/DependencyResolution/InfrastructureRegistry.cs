@@ -17,6 +17,8 @@ using StructureMap;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.DependencyResolution
 {
+    using Sfa.Das.Sas.Indexer.Infrastructure.DapperBD;
+
     public class InfrastructureRegistry : Registry
     {
         public InfrastructureRegistry()
@@ -41,6 +43,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DependencyResolution
             For<IElasticsearchMapper>().Use<ElasticsearchMapper>();
             For<IElasticClient>().Use<ElasticClient>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
+            For<IDatabaseProvider>().Use<DatabaseProvider>();
+            For<IAchievementRatesProvider>().Use<AchievementRatesProvider>();
         }
     }
 }

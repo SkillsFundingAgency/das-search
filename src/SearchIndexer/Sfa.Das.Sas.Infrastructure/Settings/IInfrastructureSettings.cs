@@ -12,5 +12,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
         IEnumerable<Uri> ElasticServerUrls { get; }
 
         string ApplicationName { get; }
+
+        string AchievementRateDataBaseConnectionString { get; }
     }
 }

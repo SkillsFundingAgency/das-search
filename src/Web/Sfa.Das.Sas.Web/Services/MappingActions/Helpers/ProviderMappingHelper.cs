@@ -5,7 +5,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
     internal static class ProviderMappingHelper
     {
-        internal static string GetSatisfactionText(double? level)
+        internal static string GetPercentageText(double? level)
         {
             if (level == null)
             {
