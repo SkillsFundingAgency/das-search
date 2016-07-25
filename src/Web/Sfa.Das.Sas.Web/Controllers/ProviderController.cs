@@ -37,7 +37,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
         {
-            string postCodeUrl = string.Empty;
+            string postCodeUrl;
             var response = await _mediator.SendAsync(criteria);
 
             switch (response.StatusCode)
