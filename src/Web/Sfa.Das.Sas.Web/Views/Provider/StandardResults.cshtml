@@ -13,39 +13,59 @@
             @Html.ActionLink("Find providers for a different postcode", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
         </p>
     }
-    <hgroup class="hgroup">
-        <h1 class="heading-xlarge">
-            Search results
-        </h1>
-        @{
-            Html.RenderPartial("_StandardSearchResultMessage");
-        }
-    </hgroup>
     <div class="grid-row">
-        <div class="column-third">
-            <div class="editSearch">
-                @if (Model.Hits.Any() && !Model.HasError)
-                {
-                    <h2 class="heading-medium">
-                        <a href="#EditSearch">Edit search</a>
-                    </h2>
-                    <div id="EditSearch">
-                        @FilterForm("filter-box")
-                    </div>
+        <div class="column-two-thirds">
+            <hgroup class="hgroup">
+                <h1 class="heading-xlarge">
+                    Search results
+                </h1>
+                @{
+                    Html.RenderPartial("_StandardSearchResultMessage");
                 }
-            </div>
-        </div>
-
-        <div id="provider-results" class="column-two-thirds">
-            @{
-                Html.RenderPartial("_StandardProviderInformation");
-            }
-            <div class="page-navigation">
-                @GetPaginationBackLink()
-                @GetPaginationNextLink()
-            </div>
+            </hgroup>
         </div>
     </div>
+
+            @if (Model.TotalResults == 0)
+            {
+                <div>
+                    <p>You can:</p>
+                    <ul class="list list-bullet">
+                        @if (Model.TotalResultsForCountry > 0)
+                        {
+                            <li class="total-providers-country">@Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalResultsForCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.StandardName in England</li>
+                        }
+                        <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { })</li>
+                        <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
+                    </ul>
+                </div>
+            }
+
+            <div class="grid-row">
+                <div class="column-third">
+                    <div class="editSearch">
+                        @if (Model.Hits.Any() && !Model.HasError)
+                        {
+                            <h2 class="heading-medium">
+                                <a href="#EditSearch">Edit search</a>
+                            </h2>
+                            <div id="EditSearch">
+                                @FilterForm("filter-box")
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div id="provider-results" class="column-two-thirds">
+                    @{
+                        Html.RenderPartial("_StandardProviderInformation");
+                    }
+                    <div class="page-navigation">
+                        @GetPaginationBackLink()
+                        @GetPaginationNextLink()
+                    </div>
+                </div>
+            </div>
 </main>
 
 @if (Model.TotalResults == 0)

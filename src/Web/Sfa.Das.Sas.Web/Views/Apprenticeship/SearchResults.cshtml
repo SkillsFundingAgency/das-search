@@ -19,6 +19,15 @@
                 Html.RenderPartial("_SearchResultMessage");
             }
     </hgroup>
+
+    @if(Model.TotalResults == 0)
+    {
+        <p>You can:</p>
+        <ul>
+            <li>@Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship", new { })</li>
+        </ul>
+    }
+
     <div class="grid-row">
 
         @if (!Model.HasError && Model.TotalResults > 0)
@@ -65,7 +74,6 @@
                         @GetApprenticeshipDetailItem("Level:", "level", item.Level)
                         @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
                     </dl>
-                    @(item.StandardId > 0 ? GetStandardShortlistLink(item) : GetFrameworkShortlistLink(item))
                 </article>
             }
 
@@ -243,7 +251,7 @@
                         <summary>Help with levels</summary>
                         <div class="panel panel-border-narrow">
                             <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
-                            <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank">More about levels</a></p>
+                            <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
                         </div>
                     </details>
                     
