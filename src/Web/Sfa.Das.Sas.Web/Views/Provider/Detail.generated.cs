@@ -687,7 +687,7 @@ WriteLiteralTo(__razor_helper_writer, "         </div>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "         <div>\r\n             <b>National rate:</b>\r\n             <span");
+WriteLiteralTo(__razor_helper_writer, "         <div>\r\n             <b>National achievement:</b>\r\n             <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"national-rate\"");
 
@@ -760,16 +760,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 8375), Tuple.Create("\"", 8400)
-, Tuple.Create(Tuple.Create("", 8383), Tuple.Create("width:", 8383), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 8382), Tuple.Create("\"", 8407)
+, Tuple.Create(Tuple.Create("", 8390), Tuple.Create("width:", 8390), true)
 
 #line 220 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 8389), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 8396), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 8390), false)
-, Tuple.Create(Tuple.Create("", 8399), Tuple.Create("%", 8399), true)
+, 8397), false)
+, Tuple.Create(Tuple.Create("", 8406), Tuple.Create("%", 8406), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
