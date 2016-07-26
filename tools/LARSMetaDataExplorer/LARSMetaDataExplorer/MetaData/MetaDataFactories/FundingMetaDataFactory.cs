@@ -22,6 +22,7 @@ namespace LARSMetaDataExplorer.MetaData.MetaDataFactories
             return new FundingMetaData
             {
                 LearnAimRef = values[0].RemoveQuotationMark(),
+                FundingCategory = values[1],
                 EffectiveFrom = values[2].SafeParseDate(),
                 EffectiveTo = values[3].SafeParseDate(),
                 RateWeighted = rate

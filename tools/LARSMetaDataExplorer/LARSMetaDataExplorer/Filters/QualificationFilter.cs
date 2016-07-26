@@ -19,6 +19,11 @@ namespace LARSMetaDataExplorer.Filters
             {
                 bag.Frameworks = FilterFrameworks(bag.Frameworks);
 
+                bag.Fundings =
+                    bag.Fundings.Where(
+                        x => x.FundingCategory.Equals("app_act_cost", StringComparison.CurrentCultureIgnoreCase))
+                        .ToList();
+
                 bag.LearningDeliveries =
                     bag.LearningDeliveries.Where(x => !x.EffectiveTo.HasValue || x.EffectiveTo.Value > DateTime.Now)
                         .ToList();

@@ -21,7 +21,7 @@ namespace LARSMetaDataExplorer
 
             Console.WriteLine("Getting filtered qualifications...");
             var titles = GetFilteredQualifications();
-
+            
             Console.WriteLine("Outputting filtered qualification titles to file...");
             File.WriteAllLines("Filtered Qualifications.txt", titles);
 
@@ -46,6 +46,18 @@ namespace LARSMetaDataExplorer
             var newFilters = filteredQualifications.Except(expectedQualifications).ToList();
 
             var unseenTitles = expectedQualifications.Except(filteredQualifications).ToList();
+
+            var shownQualifications = File.ReadAllLines("ShownQualifications.txt").ToList();
+
+            shownQualifications = shownQualifications.Select(x => x.ToLower()).ToList();
+
+            unseenTitles = unseenTitles.Select(x => shownQualifications.Contains(x) ? x + "[Shown]" : x).ToList();
+
+            newFilters = newFilters.Select(x => shownQualifications.Contains(x) ? x + "[Shown]" : x).ToList();
+
+            //unseenTitles = unseenTitles.Except(shownQualifications).ToList();
+
+            //newFilters = newFilters.Except(shownQualifications).ToList();
 
             Console.WriteLine("Writing match results to file...");
             File.WriteAllLines("Additional Qualifications.txt", newFilters);
@@ -93,23 +105,46 @@ namespace LARSMetaDataExplorer
 
                 Console.WriteLine("Adding funding to qualifications...");
 
+                var shownQualifications = new List<string>();
+                
                 foreach (var qualification in qualifications)
                 {
                     var qualificationFundings =
                         bag.Fundings.Where(
-                            x => x.LearnAimRef.Equals(qualification.LearnAimRef, StringComparison.OrdinalIgnoreCase))
+                            x => x.LearnAimRef.Equals(qualification.LearnAimRef, StringComparison.OrdinalIgnoreCase) &&
+                            x.FundingCategory.Equals("APP_ACT_COST", StringComparison.CurrentCultureIgnoreCase) &&
+                            ((x.EffectiveTo.HasValue && x.EffectiveTo.Value >= DateTime.Now) || !x.EffectiveTo.HasValue))
                             .ToList();
 
-                    var funding =
-                        (qualificationFundings.FirstOrDefault(x => x.EffectiveTo == null && x.RateWeighted < 1) ??
-                         qualificationFundings.FirstOrDefault(x => x.EffectiveTo == null)) ??
-                        qualificationFundings.OrderByDescending(x => x.EffectiveTo).FirstOrDefault();
+                    if (!qualificationFundings.Any())
+                    {
+                        continue;
+                    }
 
+                    var funds = qualificationFundings.FirstOrDefault(x => x.RateWeighted > 0 &&
+                                                                          ((x.EffectiveTo.HasValue &&
+                                                                            x.EffectiveTo.Value >= DateTime.Now) ||
+                                                                           !x.EffectiveTo.HasValue));
+                    if (funds != null)
+                    {
+                        shownQualifications.Add(qualification.Title);
+                    }
+
+
+                    var funding =
+                    (qualificationFundings.FirstOrDefault(x => x.EffectiveTo == null && x.RateWeighted < 1) ??
+                        qualificationFundings.FirstOrDefault(x => x.EffectiveTo == null)) ??
+                    qualificationFundings.OrderByDescending(x => x.EffectiveTo).FirstOrDefault();
+
+                    // If there are funding entries but there is no zero funding weight then treat as though
+                    // the qualification has no zero funding weights(i.e. it is funded)
                     if (funding == null) continue;
 
                     qualification.FundingRateWeight = funding.RateWeighted;
                     qualification.FundingEffectiveTo = funding.EffectiveTo;
                 }
+
+                File.AppendAllLines("ShownQualifications.txt", shownQualifications);
 
                 Console.WriteLine("Saving qualifications with funding details to file...");
 
@@ -136,6 +171,8 @@ namespace LARSMetaDataExplorer
                     qualifications.Where(x => x.FundingRateWeight < 1).ToList();
 
                 qualifications = qualifications.Where(x => x.ProgType <= 3).ToList();
+
+                
 
                 Console.WriteLine("Returning filtered qualification...");
                 return qualifications.Select(x => x.Title).Distinct().OrderBy(x => x).ToList();
