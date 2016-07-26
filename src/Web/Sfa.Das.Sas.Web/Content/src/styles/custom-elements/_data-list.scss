@@ -46,6 +46,7 @@ $module: 'data-list';
         #{$widthType}width: $titleWidth * 1%; //force % value
         padding-right: $gutter-one-quarter;
         clear: left;
+        margin-bottom: 1em;
     }
 
     dd {
@@ -58,9 +59,10 @@ $module: 'data-list';
         }
         //In the cases where child elements have additional top spacing we remove it for consistency
         & >:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
+//            margin-bottom: 0;
+//            padding-bottom: 0;
         }
+        margin-bottom: 1em;
     }
 
 
@@ -90,6 +92,7 @@ $module: 'data-list';
     ul {
         //TODO: apply '.list-bullet' directly to desired lists in case numbered list may be required interchangably
         @extend .list-bullet;
+        margin-bottom: 0; 
     }
 }
 

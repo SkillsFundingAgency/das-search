@@ -10,33 +10,32 @@
 <main id="content">
     <div class="grid-row">
         <div class="column-two-thirds">
-            <div>
+            <hgroup class="hgroup">
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                <div class="standard-result-summary">
+                <p>
                     Information taken from an apprenticeship framework. It sets out what qualifications the apprentice can achieve.
-                </div>
-                @if (Model.ExpiryDateString != null)
-                {
-                    <div class="expire-date">
-                        <div>
-                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                        </div>
-                        <span>
-                            This apprenticeship is closed to new starters from @Model.ExpiryDateString
-                        </span>
+                </p>
+            </hgroup>
+            @if (Model.ExpiryDateString != null)
+            {
+                <div class="expire-date">
+                    <div>
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                     </div>
-                }
-            </div>
+                    <span>
+                        This apprenticeship is closed to new starters from @Model.ExpiryDateString
+                    </span>
+                </div>
+            }
         </div>
 
         <div class="column-third">
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
                         Find training Providers
                     </a>
                 </aside>
@@ -185,12 +184,7 @@
         </dl>
 
         <div id="bottom-actions">
-            @{
-                @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted)
-            }
-
-                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
                     Find training Providers
                 </a>
         </div>

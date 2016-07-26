@@ -49,17 +49,17 @@
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
             @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
             @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
+            <dt>Documents</dt>
+            <dd>
+                <div class="panel-indent panel-indent-info">
+                    <ul>
+                        @GetDocumentItem(@Model.StandardPdf, "Standard")
+                        @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
+                    </ul>
+                </div>
+            </dd>
         </dl>
 
-        <div class="panel-indent panel-indent-info">
-            <h2 class="heading-large">
-                Documents
-            </h2>
-            <ul>
-                @GetDocumentItem(@Model.StandardPdf, "Standard")
-                @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
-            </ul>
-        </div>
 
         <hr />
         <div id="bottom-actions">
