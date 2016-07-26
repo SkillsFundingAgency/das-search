@@ -1,4 +1,4 @@
-Param($config, $key, $value)
+Param($config, $value)
 
 $doc = New-Object System.Xml.XmlDocument
 $doc.Load($config)
