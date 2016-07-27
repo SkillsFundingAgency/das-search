@@ -128,7 +128,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
             if (exception != null)
             {
-                propertiesLocal.Add("application_exception", JsonConvert.DeserializeObject<ExpandoObject>(JsonConvert.SerializeObject(exception, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All })));
+                propertiesLocal.Add("Exception", new { message = exception.Message, source = exception.Source, innerException = exception.InnerException, stackTrace = exception.StackTrace });
             }
 
             foreach (var property in propertiesLocal)
