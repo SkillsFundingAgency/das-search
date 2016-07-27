@@ -103,9 +103,9 @@
             framework?.OverallAchievementRate.Should().Be(68);
             framework?.NationalOverallAchievementRate.Should().Be(78);
 
-            frameworkSecond?.OverallCohort.Should().Be("77");
-            frameworkSecond?.OverallAchievementRate.Should().Be(78);
-            frameworkSecond?.NationalOverallAchievementRate.Should().Be(78);
+            frameworkSecond?.OverallCohort.Should().BeNull();
+            frameworkSecond?.OverallAchievementRate.Should().Be(null);
+            frameworkSecond?.NationalOverallAchievementRate.Should().Be(null);
         }
 
         [Test]

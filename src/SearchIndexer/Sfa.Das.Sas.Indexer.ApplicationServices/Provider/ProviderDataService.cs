@@ -177,7 +177,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
         private bool TestLevel(string achievementRateProviderLevel, int level)
         {
             return ((achievementRateProviderLevel == "2" || achievementRateProviderLevel == "3") && achievementRateProviderLevel == level.ToString())
-                   || level > 3;
+                   || (achievementRateProviderLevel == "4+" && level > 3);
         }
     }
 }
