@@ -84,15 +84,46 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                     select new FrameworkQualification
                     {
                         Title = ld.LearnAimRefTitle.Replace("(QCF)", string.Empty).Trim(),
+                        LearnAimRef = aim.LearnAimRef,
                         CompetenceType = comp.FrameworkComponentType,
                         CompetenceDescription = comp.FrameworkComponentTypeDesc
                     }).ToList();
+
+                DetermineQualificationFundingStatus(qualifications, metaData.Fundings);
+
+                qualifications = qualifications.Where(x => x.IsFunded).ToList();
 
                 var categorisedQualifications = GetCategorisedQualifications(qualifications);
 
                 framework.CompetencyQualification = categorisedQualifications.Competency;
                 framework.KnowledgeQualification = categorisedQualifications.Knowledge;
                 framework.CombinedQualification = categorisedQualifications.Combined;
+            }
+        }
+
+        private static void DetermineQualificationFundingStatus(IEnumerable<FrameworkQualification> qualifications, ICollection<FundingMetaData> fundings)
+        {
+            foreach (var qualification in qualifications)
+            {
+                // Get fundings associated with a given qualification (Learn Aim Ref)
+                var qualificationFundings = fundings.Where(x => x.LearnAimRef.Equals(qualification.LearnAimRef, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                // Get qualification fundings that are associated with apprenticeship funding
+                var apprenticeshipFundings = qualificationFundings.Where(x => !string.IsNullOrEmpty(x.FundingCategory) &&
+                    x.FundingCategory.Equals("APP_ACT_COST", StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+                // Get apprenticeship fundings that are still ative (not out of date)
+                var activeFundings = apprenticeshipFundings.Where(x => (x.EffectiveTo.HasValue && x.EffectiveTo.Value >= DateTime.Now) || !x.EffectiveTo.HasValue).ToList();
+
+                // If no fundings are found we assume qualification is unfunded
+                if (!activeFundings.Any())
+                {
+                    qualification.IsFunded = false;
+                    continue;
+                }
+
+                // Only if the funding Rate weight is greater than zero do we class the qualification as funded
+                qualification.IsFunded = activeFundings.Any(x => x.RateWeighted > 0);
             }
         }
 
@@ -148,6 +179,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             metaData.FrameworkAims = _csvService.ReadFromString<FrameworkAimMetaData>(larsCsvData.FrameworkAim);
             metaData.FrameworkContentTypes = _csvService.ReadFromString<FrameworkComponentTypeMetaData>(larsCsvData.FrameworkContentType);
             metaData.LearningDeliveries = _csvService.ReadFromString<LearningDeliveryMetaData>(larsCsvData.LearningDelivery);
+            metaData.Fundings = _csvService.ReadFromString<FundingMetaData>(larsCsvData.Funding);
 
             return metaData;
         }
@@ -187,6 +219,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
                 csvData.LearningDelivery = _fileExtractor.ExtractFileFromStream(
                     zipStream, _appServiceSettings.CsvFileNameLearningDelivery, true);
+
+                csvData.Funding = _fileExtractor.ExtractFileFromStream(
+                    zipStream, _appServiceSettings.CsvFileNameFunding, true);
             }
 
             return csvData;
@@ -198,6 +233,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             public string FrameworkAim { get; set; }
             public string FrameworkContentType { get; set; }
             public string LearningDelivery { get; set; }
+            public string Funding { get; set; }
         }
 
         private struct LarsMetaData
@@ -206,6 +242,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             public ICollection<FrameworkAimMetaData> FrameworkAims { get; set; }
             public ICollection<FrameworkComponentTypeMetaData> FrameworkContentTypes { get; set; }
             public ICollection<LearningDeliveryMetaData> LearningDeliveries { get; set; }
+            public ICollection<FundingMetaData> Fundings { get; set; }
         }
 
         private struct CategorisedQualifications

@@ -85,6 +85,7 @@
     <Compile Include="Factories\MetaData\FrameworkAimMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\FrameworkComponentTypeMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\FrameworkMetaDataFactory.cs" />
+    <Compile Include="Factories\MetaData\FundingMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\IMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\LearningDeliveryMetaDataFactory.cs" />
     <Compile Include="Factories\MetaData\StandardMetaDataFactory.cs" />
