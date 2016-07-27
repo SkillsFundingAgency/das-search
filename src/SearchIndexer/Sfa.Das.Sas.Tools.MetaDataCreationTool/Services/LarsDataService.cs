@@ -79,18 +79,20 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
                 var qualifications =
                     (from aim in frameworkAims
-                    join comp in metaData.FrameworkContentTypes on aim.FrameworkComponentType equals comp.FrameworkComponentType
-                    join ld in metaData.LearningDeliveries on aim.LearnAimRef equals ld.LearnAimRef
-                    select new FrameworkQualification
-                    {
-                        Title = ld.LearnAimRefTitle.Replace("(QCF)", string.Empty).Trim(),
-                        LearnAimRef = aim.LearnAimRef,
-                        CompetenceType = comp.FrameworkComponentType,
-                        CompetenceDescription = comp.FrameworkComponentTypeDesc
-                    }).ToList();
+                        join comp in metaData.FrameworkContentTypes on aim.FrameworkComponentType equals comp.FrameworkComponentType
+                        join ld in metaData.LearningDeliveries on aim.LearnAimRef equals ld.LearnAimRef
+                        select new FrameworkQualification
+                        {
+                            Title = ld.LearnAimRefTitle.Replace("(QCF)", string.Empty).Trim(),
+                            LearnAimRef = aim.LearnAimRef,
+                            CompetenceType = comp.FrameworkComponentType,
+                            CompetenceDescription = comp.FrameworkComponentTypeDesc
+                        }).ToList();
 
+                // Determine if the qualifications are funded or not by the apprenticeship scheme
                 DetermineQualificationFundingStatus(qualifications, metaData.Fundings);
 
+                // Only show funded qualifications
                 qualifications = qualifications.Where(x => x.IsFunded).ToList();
 
                 var categorisedQualifications = GetCategorisedQualifications(qualifications);
@@ -110,9 +112,9 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
                 // Get qualification fundings that are associated with apprenticeship funding
                 var apprenticeshipFundings = qualificationFundings.Where(x => !string.IsNullOrEmpty(x.FundingCategory) &&
-                    x.FundingCategory.Equals("APP_ACT_COST", StringComparison.CurrentCultureIgnoreCase)).ToList();
+                                                                              x.FundingCategory.Equals("APP_ACT_COST", StringComparison.CurrentCultureIgnoreCase)).ToList();
 
-                // Get apprenticeship fundings that are still ative (not out of date)
+                // Get apprenticeship fundings that are still active (not out of date)
                 var activeFundings = apprenticeshipFundings.Where(x => (x.EffectiveTo.HasValue && x.EffectiveTo.Value >= DateTime.Now) || !x.EffectiveTo.HasValue).ToList();
 
                 // If no fundings are found we assume qualification is unfunded
@@ -134,20 +136,20 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             qualificationSet.Combined = qualifications.Where(x => x.CompetenceType == 3)
                 .Select(x => x.Title)
                 .GroupBy(x => x.ToUpperInvariant())
-                .Select(group => @group.First())
+                .Select(group => group.First())
                 .ToList();
 
             qualificationSet.Competency = qualifications.Where(x => x.CompetenceType == 1)
                 .Select(x => x.Title)
                 .GroupBy(x => x.ToUpperInvariant())
-                .Select(group => @group.First())
+                .Select(group => group.First())
                 .Except(qualificationSet.Combined)
                 .ToList();
 
             qualificationSet.Knowledge = qualifications.Where(x => x.CompetenceType == 2)
                 .Select(x => x.Title)
                 .GroupBy(x => x.ToUpperInvariant())
-                .Select(group => @group.First())
+                .Select(group => group.First())
                 .Except(qualificationSet.Combined)
                 .ToList();
 
@@ -156,7 +158,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
         private static ICollection<FrameworkMetaData> FilterFrameworks(IEnumerable<FrameworkMetaData> frameworks)
         {
-            var progTypeList = new[] { 2, 3, 20, 21, 22, 23 };
+            var progTypeList = new[] {2, 3, 20, 21, 22, 23};
 
             return frameworks.Where(s => s.FworkCode > 399)
                 .Where(s => s.PwayCode > 0)
