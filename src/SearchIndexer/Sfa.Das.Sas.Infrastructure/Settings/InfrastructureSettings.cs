@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Microsoft.Azure;
 using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
@@ -15,7 +16,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Settings
             _settingsProvider = settingsProvider;
         }
 
-        public string CourseDirectoryUri => ConfigurationManager.AppSettings["CourseDirectoryUri"];
+        public string CourseDirectoryUri => CloudConfigurationManager.GetSetting("CourseDirectoryUri");
 
         public string EnvironmentName => ConfigurationManager.AppSettings["EnvironmentName"];
 
