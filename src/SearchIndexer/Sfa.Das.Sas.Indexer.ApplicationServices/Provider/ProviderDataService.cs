@@ -113,12 +113,12 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             {
                 var achievementRate = achievementRates.Where(m =>
                     IsEqual(m.Ssa2Code, metaData.SectorSubjectAreaTier2))
-                    .Where(m => TestLevel(m.ApprenticeshipLevel, ApprenticeshipLevelMapper.MapLevel(metaData.ProgType)))
+                    .Where(m => TestLevel(m.ApprenticeshipLevel, ApprenticeshipLevelMapper.MapToLevel(metaData.ProgType)))
                     .ToList();
 
                 var nationalAchievementRate = nationalAchievementRates.Where(m =>
                     IsEqual(m.Ssa2Code, metaData.SectorSubjectAreaTier2))
-                    .Where(m => TestLevel(m.ApprenticeshipLevel, ApprenticeshipLevelMapper.MapLevel(metaData.ProgType)))
+                    .Where(m => TestLevel(m.ApprenticeshipLevel, ApprenticeshipLevelMapper.MapToLevel(metaData.ProgType)))
                     .ToList();
 
                 var rate = ExtractValues(achievementRate);
