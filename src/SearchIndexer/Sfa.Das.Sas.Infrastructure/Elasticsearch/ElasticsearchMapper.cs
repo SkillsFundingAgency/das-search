@@ -57,13 +57,13 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
             var doc = new FrameworkDocument
             {
-                FrameworkId = $"{frameworkMetaData.FworkCode}{MapLevelProgType(frameworkMetaData.ProgType)}{frameworkMetaData.PwayCode}",
+                FrameworkId = $"{frameworkMetaData.FworkCode}{MapToLevelFromProgType(frameworkMetaData.ProgType)}{frameworkMetaData.PwayCode}",
                 Title = CreateFrameworkTitle(frameworkMetaData.NasTitle, frameworkMetaData.PathwayName),
                 FrameworkCode = frameworkMetaData.FworkCode,
                 FrameworkName = frameworkMetaData.NasTitle,
                 PathwayCode = frameworkMetaData.PwayCode,
                 PathwayName = frameworkMetaData.PathwayName,
-                Level = MapLevelProgType(frameworkMetaData.ProgType),
+                Level = MapToLevelFromProgType(frameworkMetaData.ProgType),
                 JobRoleItems = frameworkMetaData.JobRoleItems?.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
                 Keywords = frameworkMetaData.Keywords,
                 TypicalLength = frameworkMetaData.TypicalLength,
@@ -81,9 +81,9 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             return doc;
         }
 
-        public int MapLevelProgType(int level)
+        public int MapToLevelFromProgType(int progType)
         {
-            return ApprenticeshipLevelMapper.MapLevel(level);
+            return ApprenticeshipLevelMapper.MapToLevel(progType);
         }
 
         public StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, DeliveryInformation deliveryInformation)
@@ -133,8 +133,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 {
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
-                    FrameworkId = string.Concat(frameworkInformation.Code, MapLevelProgType(frameworkInformation.ProgType), frameworkInformation.PathwayCode),
-                    Level = MapLevelProgType(frameworkInformation.ProgType)
+                    FrameworkId = string.Concat(frameworkInformation.Code, MapToLevelFromProgType(frameworkInformation.ProgType), frameworkInformation.PathwayCode),
+                    Level = MapToLevelFromProgType(frameworkInformation.ProgType)
                 };
 
                 PopulateDocumentSharedProperties(frameworkProvider, provider, frameworkInformation, deliveryInformation);

@@ -18,9 +18,9 @@
                 { 23, 7 }
             };
 
-        public static int MapLevel(int level)
+        public static int MapToLevel(int progType)
         {
-            return Dictionary.ContainsKey(level) ? Dictionary[level] : 0;
+            return Dictionary.ContainsKey(progType) ? Dictionary[progType] : 0;
         }
     }
 }
