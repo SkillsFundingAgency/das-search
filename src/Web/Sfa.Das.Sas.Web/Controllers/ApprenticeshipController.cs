@@ -128,7 +128,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
-            
 
             return View("SearchForProviders", viewModel);
         }
@@ -158,7 +157,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
         {
-            var rv = new RouteValueDictionary { { "keywords", query?.Keywords}, { "page", viewModel?.LastPage ?? 1 } };
+            var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", viewModel?.LastPage ?? 1 } };
             var index = 0;
 
             if (viewModel?.AggregationLevel == null || !viewModel.AggregationLevel.Any())

@@ -33,8 +33,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 Framework = new Framework
                 {
                     ExpiryDate = new DateTime(1882, 09, 04),
-                    TypicalLength = new TypicalLength {From = 12, To = 18, Unit = "m"},
-                    JobRoleItems = new List<JobRoleItem> {new JobRoleItem {Description = "Description 1", Title = "Title1"}}
+                    TypicalLength = new TypicalLength { From = 12, To = 18, Unit = "m" },
+                    JobRoleItems = new List<JobRoleItem> { new JobRoleItem { Description = "Description 1", Title = "Title1" } }
                 }
             };
 

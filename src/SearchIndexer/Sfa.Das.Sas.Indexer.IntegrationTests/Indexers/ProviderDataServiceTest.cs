@@ -56,8 +56,7 @@
                 _mockActiveProviderRepository.Object,
                 _mockMetaDataHelper.Object,
                 _achievementProvider.Object,
-                Mock.Of<ILog>()
-                );
+                Mock.Of<ILog>());
         }
 
         [Test]

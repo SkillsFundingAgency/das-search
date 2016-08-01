@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models
 
         /// <summary>
         ///     Initializes a new instance of the Provider class with required
-        ///     arguments.
+        ///     arguments.  
         /// </summary>
         public Provider(int ukprn)
             : this()
@@ -69,6 +69,11 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models
         ///     Optional.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        ///     Optional.
+        /// </summary>
+        public bool NationalProvider { get; set; }
 
         /// <summary>
         ///     Optional.
@@ -153,6 +158,12 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory.Models
                 if (nameValue != null && nameValue.Type != JTokenType.Null)
                 {
                     Name = (string)nameValue;
+                }
+
+                var nationalProviderValue = inputObject["nationalProvider"];
+                if (nationalProviderValue != null && nationalProviderValue.Type != JTokenType.Null)
+                {
+                    NationalProvider = (bool)nationalProviderValue;
                 }
 
                 var phoneValue = inputObject["phone"];

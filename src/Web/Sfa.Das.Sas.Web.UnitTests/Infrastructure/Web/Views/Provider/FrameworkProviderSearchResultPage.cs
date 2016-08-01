@@ -468,6 +468,55 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
+        public void ShouldIncludeNationalTagIfItsANationalProvider()
+        {
+            var page = new FrameworkProviderInformation();
+            var item = new FrameworkProviderResultItemViewModel
+            {
+                UkPrn = 1,
+                FrameworkCode = 123,
+                PathwayCode = 321,
+                Level = 4,
+                MarketingName = "Marketing name test",
+                ProviderMarketingInfo = "Provider marketing info test",
+                ApprenticeshipMarketingInfo = "Apprenticeship marketing info test",
+                NationalProvider = true,
+                Phone = "123456789",
+                Email = "test@test.com",
+                ContactUsUrl = "www.contactus.com",
+                ApprenticeshipInfoUrl = "www.apprenticeshipinfourl.com",
+                ProviderName = "Provider 1",
+                DeliveryModes = new List<string> { "BlockRelease" },
+                Distance = 1,
+                Website = "http://www.trainingprovider.co.uk",
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                LocationId = 2,
+                FrameworkId = "3"
+            };
+
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                Hits = new List<FrameworkProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result-title").Should().EndWith("National");
+        }
+
+        [Test]
         public void WhenSearchResultHasPaginationAndIsTheFirstPageShouldShowOnlyNextPageLink()
         {
             var detail = new FrameworkResults();

@@ -450,5 +450,98 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetPartial(html, ".satisfaction-source").Should().NotContain("Source:");
         }
+
+        [Test]
+        public void ShouldShowNationalProviderMessageWhenThatProviderIsAvailableAroundTheCountry()
+        {
+            var details = new Detail();
+            var model = new ApprenticeshipDetailsViewModel
+            {
+                Name = "Test name",
+                NationalProvider = true,
+                EmployerSatisfactionMessage = "no data available",
+                LearnerSatisfactionMessage = "no data available",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
+            };
+
+            var html = details.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".national-message").Should().NotBeNullOrEmpty();
+            GetPartial(html, ".national-message").Should().Be("National This training provider is willing to offer apprenticeship training across England");
+        }
+
+        [Test]
+        public void ShouldNotShowNationalProviderMessageWhenThatFieldIsFalse()
+        {
+            var details = new Detail();
+            var model = new ApprenticeshipDetailsViewModel
+            {
+                Name = "Test name",
+                NationalProvider = false,
+                EmployerSatisfactionMessage = "no data available",
+                LearnerSatisfactionMessage = "no data available",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipNameWithLevel = "Test level"
+            };
+
+            var html = details.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".national-message").Should().BeNullOrEmpty();
+        }
     }
 }

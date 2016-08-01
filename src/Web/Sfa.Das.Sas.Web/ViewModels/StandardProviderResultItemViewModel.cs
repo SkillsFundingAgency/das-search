@@ -9,6 +9,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string ProviderName { get; set; }
 
+        public bool NationalProvider { get; set; }
+
         public int StandardCode { get; set; }
 
         public int LocationId { get; set; }

@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new {HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode});
+                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:

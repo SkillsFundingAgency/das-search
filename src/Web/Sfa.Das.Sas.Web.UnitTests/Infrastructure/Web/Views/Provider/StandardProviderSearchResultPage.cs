@@ -422,6 +422,38 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
+        public void ShouldIncludeNationalTagIfItsANationalProvider()
+        {
+            var page = new StandardProviderInformation();
+            var item = new StandardProviderResultItemViewModel
+            {
+                ProviderName = "Provider 1",
+                NationalProvider = true,
+                DeliveryModes = new List<string> { "100PercentEmployer" },
+                Address = new Address(),
+                EmployerSatisfactionMessage = "87%",
+                LearnerSatisfactionMessage = "99.9%",
+                AchievementRateMessage = "42.5%",
+                UkPrn = 1,
+                LocationId = 2,
+                StandardCode = 12
+            };
+
+            var model = new ProviderStandardSearchResultViewModel()
+            {
+                TotalResults = 1,
+                PostCodeMissing = false,
+                StandardId = 1,
+                StandardName = "Test name",
+                Hits = new List<StandardProviderResultItemViewModel> { item },
+                HasError = false
+            };
+            var html = page.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result-title").Should().EndWith("National");
+        }
+
+        [Test]
         public void WhenSearchResultHasPaginationAndIsTheFirstPageShouldShowOnlyNextPageLink()
         {
             var detail = new StandardResults();

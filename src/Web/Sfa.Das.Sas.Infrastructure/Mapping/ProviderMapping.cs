@@ -61,6 +61,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 {
                     Name = item.ProviderName,
                     UkPrn = item.Ukprn,
+                    NationalProvider = item.NationalProvider,
                     ContactInformation = new ContactInformation
                     {
                         Phone = item.Phone,

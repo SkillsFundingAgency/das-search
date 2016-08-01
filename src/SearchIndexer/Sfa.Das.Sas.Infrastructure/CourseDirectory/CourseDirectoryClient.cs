@@ -180,6 +180,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.CourseDirectory
                                          Id = provider.Id.ToString(),
                                          Ukprn = provider.Ukprn,
                                          Name = provider.Name,
+                                         NationalProvider = provider.NationalProvider,
                                          ContactDetails =
                                              new ContactInformation { Email = provider.Email, Phone = provider.Phone, Website = provider.Website },
                                          EmployerSatisfaction = provider.EmployerSatisfaction,

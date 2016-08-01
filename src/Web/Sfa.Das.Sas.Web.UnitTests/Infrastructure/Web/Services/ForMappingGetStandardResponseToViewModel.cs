@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var tl1 = new TypicalLength { From = 12, To = 24, Unit = "m" };
 
-            var standardResultFrom = new GetStandardResponse {Standard = new Standard { Title = "item 1", TypicalLength = tl1 } };
+            var standardResultFrom = new GetStandardResponse { Standard = new Standard { Title = "item 1", TypicalLength = tl1 } };
 
             var viewModel1 = mappingService.Map<GetStandardResponse, StandardViewModel>(standardResultFrom);
 

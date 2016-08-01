@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers
 
             return levelAggregation.Select(
                 item => new LevelAggregationViewModel
-                {Value = item.Key.ToString(), Count = item.Value ?? 0L, Checked = selectedList != null && selectedList.Contains(item.Key)});
+                { Value = item.Key.ToString(), Count = item.Value ?? 0L, Checked = selectedList != null && selectedList.Contains(item.Key) });
         }
     }
 }

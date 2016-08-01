@@ -22,6 +22,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public string Email { get; set; }
 
+        public bool NationalProvider { get; set; }
+
         public string ContactUsUrl { get; set; }
 
         public string ApprenticeshipInfoUrl { get; set; }

@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             var maintainSearchIndexer = _ioc.GetInstance<IMaintainProviderIndex>();
 
             var providerDataService = new Mock<IProviderDataService>();
-            providerDataService.Setup(m => m.GetProviders()).Returns(GetProvidersTest());
+            providerDataService.Setup(m => m.GetProviders()).Returns(Task.FromResult(GetProvidersTest()));
             var logger = new Mock<ILog>();
 
             _providerIndexerHelper = new ProviderIndexer(_providerSettings, maintainSearchIndexer, providerDataService.Object, logger.Object);
@@ -184,11 +184,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
             }
         }
 
-        internal class DummyTestClass
-        {
-        }
-
-        private async Task<ICollection<Provider>> GetProvidersTest()
+        private ICollection<Provider> GetProvidersTest()
         {
             var providerLocations = new List<Location>
                                         {
@@ -382,6 +378,10 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
                                    Locations = providerLocations
                                }
                        };
+        }
+
+        internal class DummyTestClass
+        {
         }
     }
 }

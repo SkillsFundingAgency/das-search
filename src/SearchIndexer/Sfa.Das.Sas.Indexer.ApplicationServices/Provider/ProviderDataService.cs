@@ -57,7 +57,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             var byProvier = _achievementRatesProvider.GetAllByProvider();
             var national = _achievementRatesProvider.GetAllNational();
 
-            Task.WaitAll(frameworks, standards, providers);
+            await Task.WhenAll(frameworks, standards, providers);
 
             var ps = providers.Result.ToArray();
             foreach (var provider in ps)
@@ -75,6 +75,21 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             }
 
             return ps;
+        }
+
+        private static double? GetNationalOverallAchievementRate(List<AchievementRateNational> nationalAchievementRate)
+        {
+            var nationalOverallAchievementRate = nationalAchievementRate
+                .OrderByDescending(m => m.HybridEndYear)
+                .FirstOrDefault()?
+                .OverallAchievementRate;
+
+            if (nationalOverallAchievementRate != null)
+            {
+                return Math.Round((double)nationalOverallAchievementRate);
+            }
+
+            return null;
         }
 
         private void UpdateStandard(StandardInformation si, List<StandardMetaData> standards, IEnumerable<AchievementRateProvider> achievementRates, IEnumerable<AchievementRateNational> nationalAchievementRates)
@@ -130,21 +145,6 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                 fi.NationalOverallAchievementRate =
                     GetNationalOverallAchievementRate(nationalAchievementRate);
             }
-        }
-
-        private static double? GetNationalOverallAchievementRate(List<AchievementRateNational> nationalAchievementRate)
-        {
-            var nationalOverallAchievementRate = nationalAchievementRate
-                .OrderByDescending(m => m.HybridEndYear)
-                .FirstOrDefault()?
-                .OverallAchievementRate;
-
-            if (nationalOverallAchievementRate != null)
-            {
-                return Math.Round((double)nationalOverallAchievementRate);
-            }
-
-            return null;
         }
 
         private Tuple<double?, string> ExtractValues(List<AchievementRateProvider> achievementRate)

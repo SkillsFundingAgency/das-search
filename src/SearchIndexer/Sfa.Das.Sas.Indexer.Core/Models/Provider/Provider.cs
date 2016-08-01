@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Indexer.Core.Models.Provider
 
         public string Name { get; set; }
 
+        public bool NationalProvider { get; set; }
+
         public ContactInformation ContactDetails { get; set; }
 
         public string MarketingInfo { get; set; }

@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
 
         private string _indexName;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void BeforeAnyTest()
         {
             var ioc = IoC.Initialize();
@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Indexer.IntegrationTests.Indexers
         {
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void AfterAllTestAreRun()
         {
             _elasticClient.DeleteIndex(Indices.Index(_indexName));

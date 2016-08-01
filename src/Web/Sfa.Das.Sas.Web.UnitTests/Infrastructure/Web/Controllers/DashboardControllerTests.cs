@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                                     new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() }
                                 });
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
-                .Returns(new Standard {StandardId = standardId});
+                .Returns(new Standard { StandardId = standardId });
 
             // Act
             var result = _sut.Overview() as ViewResult;
@@ -102,7 +102,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                                 });
 
             _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()))
-                .Returns(new Standard() {StandardId = standardId});
+                .Returns(new Standard() { StandardId = standardId });
 
             _mockShortlistViewModelFactory.Setup(
                 x => x.GetShortlistViewModel(It.Is<Standard>(s => s.StandardId.Equals(standardId))))
@@ -150,7 +150,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                                     new ShortlistedApprenticeship { ApprenticeshipId = 83, ProvidersUkrpnAndLocation = new List<ShortlistedProvider>() }
                                 });
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<int>()))
-                .Returns(new Framework() {FrameworkId = frameworkId});
+                .Returns(new Framework() { FrameworkId = frameworkId });
 
             // Act
             var result = _sut.Overview() as ViewResult;

@@ -43,6 +43,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string NationalAchievementRateMessage { get; set; }
 
+        public bool NationalProvider { get; set; }
+
         public string AchievementRateMessage { get; set; }
 
         public string OverallCohort { get; set; }

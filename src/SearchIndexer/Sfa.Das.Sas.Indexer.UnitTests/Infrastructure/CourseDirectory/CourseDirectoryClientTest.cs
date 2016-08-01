@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.CourseDirectory
     {
         private IEnumerable<Provider> _providers;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             var moqSettings = new Mock<IInfrastructureSettings>();

@@ -16,6 +16,12 @@
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
+                @if (Model.NationalProvider)
+                {
+                    <p class="national-message">
+                        <span class="tag tag-new">National</span> This training provider is willing to offer apprenticeship training across England
+                    </p>
+                }
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>

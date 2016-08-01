@@ -158,6 +158,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
             documentToPopulate.Ukprn = provider.Ukprn;
             documentToPopulate.ProviderName = provider.Name;
+            documentToPopulate.NationalProvider = provider.NationalProvider;
             documentToPopulate.ProviderMarketingInfo = EscapeSpecialCharacters(provider.MarketingInfo);
             documentToPopulate.ApprenticeshipMarketingInfo = EscapeSpecialCharacters(apprenticeshipInformation.MarketingInfo);
             documentToPopulate.Phone = apprenticeshipInformation.ContactInformation.Phone;

@@ -90,9 +90,9 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
         {
             var dir = new Dictionary<string, object>
             {
-                {"Identifier ", identifier},
-                {"Postcode", postcode},
-                {"Url", uri.ToString()}
+                { "Identifier ", identifier },
+                { "Postcode", postcode },
+                { "Url", uri.ToString() }
             };
 
             _logger.Info($"{message}: {postcode}. Service url:{uri}", dir);

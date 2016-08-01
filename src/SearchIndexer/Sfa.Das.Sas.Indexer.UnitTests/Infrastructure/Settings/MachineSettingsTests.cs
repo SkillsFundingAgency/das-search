@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Settings
             RemoveTestEnvironmentVariables();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTearDown()
         {
             RemoveTestEnvironmentVariables();

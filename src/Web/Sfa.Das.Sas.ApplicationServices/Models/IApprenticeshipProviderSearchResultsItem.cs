@@ -8,6 +8,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         List<string> DeliveryModes { get; set; }
         double Distance { get; set; }
         string Email { get; set; }
+        bool NationalProvider { get; set; }
         double? EmployerSatisfaction { get; set; }
         double? LearnerSatisfaction { get; set; }
         double? OverallAchievementRate { get; set; }

@@ -20,6 +20,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         public string ProviderName { get; set; }
 
+        public bool NationalProvider { get; set; }
+
         public string ProviderMarketingInfo { get; set; }
 
         public string ApprenticeshipMarketingInfo { get; set; }
