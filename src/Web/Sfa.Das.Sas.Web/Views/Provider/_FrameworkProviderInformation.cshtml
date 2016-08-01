@@ -9,7 +9,7 @@
             <header>
                 <h2 class="result-title">
                     @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
-                    @if (item.NationalProvider)
+                    @if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
                     {
                         <span class="tag tag-new">National</span>
                     }

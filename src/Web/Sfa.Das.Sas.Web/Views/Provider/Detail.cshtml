@@ -4,6 +4,7 @@
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
 @using Sfa.Das.Sas.ApplicationServices.Models
+@using FeatureToggle.Core.Fluent
 @model ApprenticeshipDetailsViewModel
 
 @{
@@ -16,7 +17,7 @@
                 <h1 class="heading-xlarge" id="provider-name">
                     @Model.Name
                 </h1>
-                @if (Model.NationalProvider)
+                @if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
                 {
                     <p class="national-message">
                         <span class="tag tag-new">National</span> This training provider is willing to offer apprenticeship training across England

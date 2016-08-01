@@ -353,7 +353,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 12 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                     if (item.NationalProvider)
+                     if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
                     {
 
             

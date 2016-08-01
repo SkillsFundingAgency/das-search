@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
+    <Compile Include="FeatureToggles\NationalProvidersFeature.cs" />
     <Compile Include="FeatureToggles\ShortlistingFeature.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
     <Compile Include="Handlers\DetailProviderHandler.cs" />
