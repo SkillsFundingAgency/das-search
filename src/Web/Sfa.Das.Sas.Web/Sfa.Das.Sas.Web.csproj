@@ -263,6 +263,7 @@
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\NationalProvidersValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryOptionResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\FrameworkInformationResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\EmployerSatisfactionResolver.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Compile Include="ViewModels\IShortlistApprenticeshipViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />

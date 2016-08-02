@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Provider/_FilterNationalProviders.cshtml")]
-    public partial class FilterNationalProviders : System.Web.Mvc.WebViewPage<IEnumerable<Sfa.Das.Sas.Web.ViewModels.DeliveryModeViewModel>>
+    public partial class FilterNationalProviders : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.NationalProviderViewModel>
     {
         public FilterNationalProviders()
         {
@@ -52,16 +52,64 @@ WriteLiteral(" class=\"toggled-content\"");
 
 WriteLiteral(">\r\n        <ul>\r\n            <li>\r\n                <input");
 
-WriteLiteral(" value=\"\"");
+WriteLiteral(" value=\"true\"");
 
-WriteLiteral(" name=\"DeliveryModes\"");
+WriteLiteral(" name=\"NationalProviders\"");
 
-WriteLiteral(" id=\"NationalProviders\"");
+WriteAttribute("id", Tuple.Create(" id=\"", 299), Tuple.Create("\"", 334)
+, Tuple.Create(Tuple.Create("", 304), Tuple.Create("NationalProviders_", 304), true)
+            
+            #line 8 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+    , Tuple.Create(Tuple.Create("", 322), Tuple.Create<System.Object, System.Int32>(Model.Value
+            
+            #line default
+            #line hidden
+, 322), false)
+);
 
 WriteLiteral(" type=\"checkbox\"");
 
-WriteLiteral("/>\r\n                <label>Show only national providers (contador)</label>    \r\n " +
-"           </li>\r\n        </ul>\r\n    </div>\r\n</fieldset>");
+WriteLiteral(" ");
+
+            
+            #line 8 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+                                                                                                            Write(Html.Raw(Model.Checked ? "checked" : ""));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" />\r\n                <label");
+
+WriteAttribute("for", Tuple.Create(" for=\"", 420), Tuple.Create("\"", 456)
+, Tuple.Create(Tuple.Create("", 426), Tuple.Create("NationalProviders_", 426), true)
+            
+            #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 444), Tuple.Create<System.Object, System.Int32>(Model.Value
+            
+            #line default
+            #line hidden
+, 444), false)
+);
+
+WriteLiteral(">");
+
+            
+            #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+                                                       Write(Model.Title);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" (");
+
+            
+            #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+                                                                     Write(Model.Count);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(")</label>\r\n            </li>   \r\n        </ul>\r\n    </div>\r\n</fieldset>");
 
         }
     }

@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Sfa.Das.Sas.Web.ViewModels.DeliveryModeViewModel>
+﻿@model Sfa.Das.Sas.Web.ViewModels.NationalProviderViewModel
 
 <fieldset class="filters filters-accordion">
     <h2 class="toggler heading-small">National providers</h2>
     <div class="toggled-content">
         <ul>
             <li>
-                <input value="" name="DeliveryModes" id="NationalProviders" type="checkbox"/>
-                <label>Show only national providers (contador)</label>    
-            </li>
+                <input value="true" name="NationalProviders" id="NationalProviders_@Model.Value" type="checkbox" @Html.Raw(Model.Checked ? "checked" : "") />
+                <label for="NationalProviders_@Model.Value">@Model.Title (@Model.Count)</label>
+            </li>   
         </ul>
     </div>
 </fieldset>

@@ -30,6 +30,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public IEnumerable<DeliveryModeViewModel> DeliveryModes { get; set; }
 
+        public NationalProviderViewModel NationalProviders { get; set; }
+
         public string SearchTerms { get; set; }
 
         public string AbsolutePath { get; set; }

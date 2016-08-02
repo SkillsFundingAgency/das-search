@@ -54,11 +54,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<StandardProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -87,11 +98,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<StandardProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -120,11 +142,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<StandardProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -153,11 +186,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<StandardProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -429,7 +473,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .Filter(FilterByApprenticeshipId(selector, code))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
-                    .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
+                    .Aggregations(aggs => aggs
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
             return descriptor;
@@ -467,7 +513,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
-                    .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
+                    .Aggregations(aggs => aggs
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
             return descriptor;

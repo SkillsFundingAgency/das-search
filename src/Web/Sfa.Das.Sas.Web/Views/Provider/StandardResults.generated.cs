@@ -336,7 +336,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 #line 114 "..\..\Views\Provider\StandardResults.cshtml"
                       
-                        Html.RenderPartial("_FilterNationalProviders", Model.DeliveryModes);
+                        Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
                     
 
 #line default

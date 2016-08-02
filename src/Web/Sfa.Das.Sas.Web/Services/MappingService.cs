@@ -245,6 +245,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.Results.TotalResults))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => !z.Success))
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
+                .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
                     src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>

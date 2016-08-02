@@ -154,8 +154,10 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
-                    StandardResponseCode = responseCode
+                    StandardResponseCode = responseCode,
+                    ShowNationalProvidersOnly = false,
                 };
 
                 return result;
@@ -219,7 +221,9 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardResponseCode = responseCode,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    NationalProviders = searchResults.NationalProvidersAggregation,
+                    SelectedTrainingOptions = deliveryModes,
+                    ShowNationalProvidersOnly = false,
                 };
 
                 return result;
@@ -282,7 +286,9 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
+                    ShowNationalProvidersOnly = true,
                     StandardResponseCode = responseCode
                 };
 
@@ -346,8 +352,10 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
-                    StandardResponseCode = responseCode
+                    StandardResponseCode = responseCode,
+                    ShowNationalProvidersOnly = true
                 };
 
                 return result;
@@ -409,7 +417,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    ShowNationalProvidersOnly = false,
                 };
             }
             catch (SearchException ex)
@@ -469,7 +478,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    ShowNationalProvidersOnly = true
                 };
             }
             catch (SearchException ex)
@@ -528,7 +538,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    ShowNationalProvidersOnly = true
                 };
             }
             catch (SearchException ex)
@@ -588,7 +599,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
-                    SelectedTrainingOptions = deliveryModes
+                    SelectedTrainingOptions = deliveryModes,
+                    ShowNationalProvidersOnly = true
                 };
             }
             catch (SearchException ex)
@@ -598,6 +610,5 @@ namespace Sfa.Das.Sas.ApplicationServices
                 return GetProviderFrameworkSearchResultErrorResponse(frameworkId, postCode, ServerLookupResponse.InternalServerError);
             }
         }
-
     }
 }
