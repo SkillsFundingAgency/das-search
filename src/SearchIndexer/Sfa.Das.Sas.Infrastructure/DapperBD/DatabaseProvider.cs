@@ -21,7 +21,7 @@
             _logger = logger;
         }
 
-        public IEnumerable<T> Query<T>(string query)
+        public IEnumerable<T> Query<T>(string query, object param = null)
         {
             if (string.IsNullOrEmpty(_infrastructureSettings.AchievementRateDataBaseConnectionString))
             {
@@ -31,7 +31,24 @@
 
             using (IDbConnection dataConnection = new SqlConnection(_infrastructureSettings.AchievementRateDataBaseConnectionString))
             {
-                var data = dataConnection.Query<T>(query);
+                var data = dataConnection.Query<T>(query, param);
+
+                return data;
+            }
+        }
+
+        public T ExecuteScalar<T>(string query)
+        {
+            if (string.IsNullOrEmpty(_infrastructureSettings.AchievementRateDataBaseConnectionString))
+            {
+                _logger.Error("Missing connectionstring for achievementrates database");
+                return default(T);
+            }
+
+            using (IDbConnection dataConnection = new SqlConnection(_infrastructureSettings.AchievementRateDataBaseConnectionString))
+            {
+                var data = dataConnection.ExecuteScalar<T>(query);
+
                 return data;
             }
         }

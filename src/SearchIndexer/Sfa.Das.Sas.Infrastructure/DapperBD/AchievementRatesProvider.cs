@@ -1,7 +1,8 @@
 namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
 {
     using System.Collections.Generic;
-
+    using System.Linq;
+    using Core.Logging;
     using Sfa.Das.Sas.Indexer.Core.Models;
     using Sfa.Das.Sas.Indexer.Core.Services;
 
@@ -34,6 +35,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
 
         public IEnumerable<AchievementRateNational> GetAllNational()
         {
+            var latestHybridYear = GetLatestNationalHybridEndYear();
+
             var query = @"
                     SELECT 
                         [Institution Type] as InstitutionType,
@@ -49,8 +52,19 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.DapperBD
                     AND [Age] = 'All Age'
                     AND [Sector Subject Area Tier 2] <> 'All SSA T2'
                     AND [Apprenticeship Level] <> 'All'
+                    AND [Hybrid End Year] = @date
                     ";
-            return _databaseProvider.Query<AchievementRateNational>(query);
+
+            var results = _databaseProvider.Query<AchievementRateNational>(query, new { date = latestHybridYear });
+
+            return results;
+        }
+
+        private string GetLatestNationalHybridEndYear()
+        {
+            var query = @"SELECT MAX([Hybrid End Year]) FROM ar_national";
+
+            return _databaseProvider.ExecuteScalar<string>(query);
         }
     }
 }
