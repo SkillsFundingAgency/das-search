@@ -92,6 +92,16 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             return null;
         }
 
+        private static bool IsLevelFourOrHigher(string achievementRateProviderLevel, int level)
+        {
+            return achievementRateProviderLevel == "4+" && level > 3;
+        }
+
+        private static bool IsLevelTwoOrThree(string achievementRateProviderLevel, int level)
+        {
+            return (achievementRateProviderLevel == "2" || achievementRateProviderLevel == "3") && achievementRateProviderLevel == level.ToString();
+        }
+
         private void UpdateStandard(StandardInformation si, List<StandardMetaData> standards, IEnumerable<AchievementRateProvider> achievementRates, IEnumerable<AchievementRateNational> nationalAchievementRates)
         {
             var metaData = standards.Find(m => m.Id == si.Code);
@@ -176,8 +186,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
 
         private bool TestLevel(string achievementRateProviderLevel, int level)
         {
-            return ((achievementRateProviderLevel == "2" || achievementRateProviderLevel == "3") && achievementRateProviderLevel == level.ToString())
-                   || (achievementRateProviderLevel == "4+" && level > 3);
+            return IsLevelTwoOrThree(achievementRateProviderLevel, level) || IsLevelFourOrHigher(achievementRateProviderLevel, level);
         }
     }
 }

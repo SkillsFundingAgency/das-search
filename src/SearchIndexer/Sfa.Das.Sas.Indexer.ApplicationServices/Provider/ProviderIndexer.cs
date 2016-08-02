@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
             var entries = await LoadEntries();
             try
             {
-                _log.Debug("Indexing " + entries.Count() + " providers");
+                _log.Debug("Indexing " + entries.Count + " providers");
 
                 await _searchIndexMaintainer.IndexEntries(indexName, entries).ConfigureAwait(false);
             }

@@ -29,11 +29,11 @@
                 return default(IEnumerable<T>);
             }
 
-            IDbConnection dataConnection = new SqlConnection(_infrastructureSettings.AchievementRateDataBaseConnectionString);
-
-            var data = dataConnection.Query<T>(query);
-
-            return data;
+            using (IDbConnection dataConnection = new SqlConnection(_infrastructureSettings.AchievementRateDataBaseConnectionString))
+            {
+                var data = dataConnection.Query<T>(query);
+                return data;
+            }
         }
     }
 }
