@@ -417,6 +417,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
                     ShowNationalProvidersOnly = false,
                 };
@@ -478,6 +479,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
                     ShowNationalProvidersOnly = true
                 };
@@ -538,6 +540,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
                     ShowNationalProvidersOnly = true
                 };
@@ -599,6 +602,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     PostCode = postCode,
                     Hits = hits,
                     TrainingOptionsAggregation = trainingOptionsAggregation,
+                    NationalProviders = searchResults.NationalProvidersAggregation,
                     SelectedTrainingOptions = deliveryModes,
                     ShowNationalProvidersOnly = true
                 };

@@ -230,11 +230,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<FrameworkProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -263,11 +274,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<FrameworkProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -296,11 +318,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<FrameworkProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
@@ -329,11 +362,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
             return new SearchResult<FrameworkProviderSearchResultsItem>
             {
                 Hits = documents,
                 Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
