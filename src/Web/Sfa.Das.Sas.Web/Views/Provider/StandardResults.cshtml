@@ -111,6 +111,9 @@
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }
+                    @{
+                        Html.RenderPartial("_FilterNationalProviders", Model.DeliveryModes);
+                    }
                     <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
                 </form>
             </div>

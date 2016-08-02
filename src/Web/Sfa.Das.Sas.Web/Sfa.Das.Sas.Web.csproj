@@ -388,6 +388,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardResults.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Provider\_FilterNationalProviders.generated.cs">
+      <DependentUpon>_FilterNationalProviders.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Provider\_FilterProviders.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -676,6 +681,11 @@
     <Content Include="Views\Apprenticeship\SearchForProviders.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>SearchForProviders.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_FilterNationalProviders.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_FilterNationalProviders.generated.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
