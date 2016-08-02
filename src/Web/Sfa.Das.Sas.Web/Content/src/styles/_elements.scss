@@ -2558,4 +2558,23 @@ details .arrow {
 
 .hgroup p {
     margin: 0;
+=======
+
+.provider-data-warning {
+    margin: 2em 0;
+}
+
+.tag {
+    
+}
+
+.tag-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 .5em;
+}
+
+.tag-warning {
+    background: $orange;
 }
