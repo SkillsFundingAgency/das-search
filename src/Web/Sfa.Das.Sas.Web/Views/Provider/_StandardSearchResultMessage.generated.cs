@@ -243,16 +243,16 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"standard-provider-search-message\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        Sorry, there are currently no training providers for ");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Sorry, there are currently no training providers for <b>");
 
 
 #line 66 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                               WriteTo(__razor_helper_writer, Model.StandardName);
+                                  WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " for \'<b");
+WriteLiteralTo(__razor_helper_writer, "</b> for \'<b");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"postalcode\"");
 
@@ -260,7 +260,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 66 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                           WriteTo(__razor_helper_writer, Model.PostCode);
+                                                                                  WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
@@ -326,7 +326,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 75 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new {@keywords = @Model.SearchTerms}, new { }));
+                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { }));
 
 
 #line default
