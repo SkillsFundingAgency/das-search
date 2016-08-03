@@ -43,6 +43,7 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         public async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
         {
+            ProviderStandardSearchResults result;
             if (!showAll && !nationalProviders)
             {
                 return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipLocation);
@@ -55,10 +56,14 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             if (!showAll && nationalProviders)
             {
-                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipLocationAndNationalProvider);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipLocationAndNationalProvider);
+                result.ShowNationalProvidersOnly = true;
+                return result;
             }
 
-            return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipIdAndNationalProvider);
+            result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipIdAndNationalProvider);
+            result.ShowNationalProvidersOnly = true;
+            return result;
         }
 
         public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
