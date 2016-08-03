@@ -105,7 +105,7 @@
                     @if (Model.CompetencyQualification!= null && Model.CompetencyQualification.Any())
                     {
                         <div class="competencyQualifications">
-                            Apprentices will achieve a practical (i.e. 'competence') qualification:
+                            Apprentices will achieve a practical (or 'competence') qualification:
                             <br />
                             <ul>
                                 @foreach (var qualification in Model.CompetencyQualification.Take(3))
@@ -128,7 +128,7 @@
                     @if (Model.KnowledgeQualification!= null && Model.KnowledgeQualification.Any())
                     {
                         <div class="knowledgeQualifications">
-                            Apprentices will also achieve a theory-based (i.e. 'knowledge'') qualification:
+                            Apprentices will also achieve a theory-based (or 'knowledge') qualification:
                             <br />
                             <ul>
                                 @foreach (var qualification in Model.KnowledgeQualification.Take(3))
@@ -151,7 +151,7 @@
                     @if (Model.CombinedQualificiation != null && Model.CombinedQualificiation.Any())
                     {
                         <div class="combinedQualification">
-                            Apprentices will achieve a practical and theory-based (i.e. 'combined') qualification:
+                            Apprentices will achieve a practical and theory-based (or 'combined') qualification:
                             <br />
                             <ul>
                                 @foreach (var qualification in Model.CombinedQualificiation.Take(3))
