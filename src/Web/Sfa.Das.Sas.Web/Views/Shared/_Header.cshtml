@@ -28,21 +28,27 @@
             This is a new service – your <a href="@Model.SurveyUrl" target="_blank">feedback</a> will help us to improve it.
         </span>      
     </div>
+
+    @RenderDashboardLink()
 </div>
 
 @helper RenderDashboardLink()
 {
-    var currentUrl = Request.Url?.AbsolutePath ?? string.Empty;
-    var dashboardUrl = Url.Action("Overview", "Dashboard");
-    var informUrl = Url.Action("Start", "Start");
+        var currentUrl = Request.Url?.AbsolutePath ?? string.Empty;
+        var dashboardUrl = Url.Action("Overview", "Dashboard");
+        var informUrl = Url.Action("Start", "Start");
 
-    if (currentUrl.Equals(dashboardUrl) || currentUrl.Equals(informUrl))
-    {
-        return;
-    }
+        <div class="phase-banner-tools">
 
-    if (Is<ShortlistingFeature>.Enabled)
-    {
-        @Html.ActionLink("My Dashboard", "Overview", "Dashboard", null, new { id = "dashboard-link" })
-    }
+            @if (currentUrl.Equals(dashboardUrl) || currentUrl.Equals(informUrl))
+            {
+                return;
+            }
+
+            @if (Is<ShortlistingFeature>.Enabled)
+            {
+                @Html.ActionLink("My Dashboard", "Overview", "Dashboard", null, new { id = "dashboard-link" })
+            }
+
+        </div>
 }
