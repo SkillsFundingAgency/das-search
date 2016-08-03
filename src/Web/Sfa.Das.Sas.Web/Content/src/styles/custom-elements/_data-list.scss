@@ -53,7 +53,7 @@ $module: 'data-list';
         #{$widthType}width: $dataWidth;
 
         //In the cases where child elements have additional bottom spacing we remove it for consistency
-        & >:first-child {
+        & >:first-child, p:first-child {
             margin-top: 0;
             padding-top: 0;
         }
@@ -73,6 +73,11 @@ $module: 'data-list';
             width: 100%;
             max-width: none;
             padding: 0;
+
+            * > p:first-chiled {
+                margin-top: 0;
+                padding-top: 0;
+            }
         }
 
         @if($flatten == false) {
