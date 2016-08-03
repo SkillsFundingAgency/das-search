@@ -40,11 +40,6 @@
 
         <div class="phase-banner-tools">
 
-            @if (currentUrl.Equals(dashboardUrl) || currentUrl.Equals(informUrl))
-            {
-                return;
-            }
-
             @if (Is<ShortlistingFeature>.Enabled)
             {
                 @Html.ActionLink("My Dashboard", "Overview", "Dashboard", null, new { id = "dashboard-link" })

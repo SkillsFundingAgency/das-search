@@ -73,8 +73,8 @@ WriteLiteral(">\r\n                    Find apprenticeship training\r\n         
 
 WriteLiteral(" class=\"subtitle\"");
 
-WriteLiteral(">For employers looking to take on apprenticeships.</pclass=\"subtitle\">\r\n         " +
-"   </hgroup>\r\n\r\n            <p>You can:</p>\r\n\r\n            <ul");
+WriteLiteral(">For employers looking to take on apprenticeships.</p>\r\n            </hgroup>\r\n\r\n" +
+"            <p>You can:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
