@@ -148,25 +148,26 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
 @helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
-if (!string.IsNullOrEmpty(url))
-{
-    var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
-        <dt class="@classTitle">@title</dt>
-        <dd>
-            <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
-                @if (string.IsNullOrEmpty(urlTitle))
-                {
-                    @url
-                }
-                else
-                {
-                    @urlTitle
-                }
-            </a>
-        </dd>
+    if (!string.IsNullOrEmpty(url))
+    {
+        var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
+            <dt class="@classTitle">@title</dt>
+            <dd>
+                <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+                    @if (string.IsNullOrEmpty(urlTitle))
+                    {
+                        @url
+                    }
+                    else
+                    {
+                        @urlTitle
+                    }
+                </a>
+            </dd>
+    }
 }
 
-}@helper GetSatisfactionsHtml()
+@helper GetSatisfactionsHtml()
  {
      <div class="rates-list">
          <div>
@@ -185,38 +186,50 @@ if (!string.IsNullOrEmpty(url))
         </span>
              @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
 
-         </div>
+        </div>
 
-         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
-         {
-         <p class="satisfaction-source">
-             Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
-         </p>
-         }
-         <hr/>
+        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+        {
+            <p class="satisfaction-source">
+                Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
+            </p>
+        }
+        <hr/>
 
          <div>
              <b>Achievement rate:</b>
              <span class="national-rate">
-            @Model.AchievementRateMessage
-        </span>
+                 @Model.AchievementRateMessage
+             </span>
              @if (Model.AchievementRateMessage != "no data available")
              {
                  @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
-                 <p>Cohort size: @Model.OverallCohort</p>
              }
          </div>
+         @if (Model.AchievementRateMessage != "no data available")
+         {
+             <div>
+                 <b>National average:</b>
+                 <span class="national-rate">
+                     @Model.NationalAchievementRateMessage
+                 </span>
+                 @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
+             </div>
+         }
+
         @if (Model.AchievementRateMessage != "no data available")
         {
-         <div>
-             <b>National average:</b>
-             <span class="national-rate">
-             @Model.NationalAchievementRateMessage
-         </span>
-             @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
-         </div>
+            <details class="more-information">
+                <summary>More information</summary>
+                <div class="panel panel-border-narrow">
+                    <p>Achievement rates based on latest figures for similar apprenticeship training with this training provider.</p>
+                    <p>Training provider sample size: @Model.OverallCohort</p>
+                    <p>Source: <a href="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" target="_blank" rel="external">Skills Funding Agency achievement rates</a></p>
+                </div>
+            </details>
         }
-     </div>
+        
+    </div>
 }
 
 @helper CreateProgressBar(string message, int progress)

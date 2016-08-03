@@ -543,5 +543,87 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetPartial(html, ".national-message").Should().BeNullOrEmpty();
         }
+
+        [Test]
+        public void ShouldShowMoreInformationLinkWhenThereIsProviderAchivementValue()
+        {
+            var details = new Detail();
+            var model = new ApprenticeshipDetailsViewModel
+            {
+                NationalAchievementRate = 83,
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                }
+            };
+
+            var html = details.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".more-information").Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public void ShouldNotShowMoreInformationLinkWhenThereIsNoProviderAchivementValue()
+        {
+            var details = new Detail();
+            var model = new ApprenticeshipDetailsViewModel
+            {
+                AchievementRateMessage = "no data available",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
+                    Code = 1
+                }
+            };
+
+            var html = details.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".more-information").Should().BeNullOrEmpty();
+        }
     }
 }
