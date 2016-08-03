@@ -95,9 +95,9 @@ WriteLiteral("\r\n\r\n            <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">What you need to know</h2>\r\n\r\n            <p>Apprentices must be aged 16 or over" +
-" and combine working with learning. They can be new or current employees.</p>\r\n\r" +
-"\n            <p>If you hire an apprentice you must:</p>\r\n\r\n            <ul");
+WriteLiteral(">What you need to know</h2>\r\n\r\n            <p>Apprentices are aged 16 and over an" +
+"d combine working with learning. They can be new or current employees.</p>\r\n\r\n  " +
+"          <p>If you hire an apprentice you must:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
