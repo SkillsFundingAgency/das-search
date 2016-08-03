@@ -35,9 +35,10 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
                         Find training Providers
                     </a>
+                    @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted)
                 </aside>
             </div>
 
@@ -184,9 +185,10 @@
         </dl>
 
         <div id="bottom-actions">
-                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
+                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
                     Find training Providers
                 </a>
+                @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted)
         </div>
     </section>
 </main>

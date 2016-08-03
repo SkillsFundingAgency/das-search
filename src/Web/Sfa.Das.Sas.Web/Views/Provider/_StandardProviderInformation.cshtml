@@ -32,6 +32,7 @@
                     @item.AchievementRateMessage
                 </dd>
             </dl>
+                @GetShortlistLink(item.UkPrn, item.StandardCode, item.LocationId, item.IsShortlisted)
         </article>
     }
 
@@ -57,10 +58,12 @@
 
 @helper GetShortlistLink(int ukprn, int apprenticeshipId, int locationId, bool isShortlisted)
 {
-if (Is<ShortlistingFeature>.Enabled) {
-
-    if (isShortlisted)
+    if (Is<ShortlistingFeature>.Enabled)
     {
+        <div class="shortlist-link">
+
+            @if (isShortlisted)
+            {
                 @Html.ActionLink("Remove", "RemoveStandardProvider", "ShortList",
                     new { apprenticeshipId, ukprn, locationId },
                     new
@@ -73,10 +76,10 @@ if (Is<ShortlistingFeature>.Enabled) {
                         data_action = "remove",
                         data_apprenticeship_type = "Standard"
                     })
-        }
-        else
-        {
-                @Html.ActionLink("Shortlist", "AddStandardProvider", "ShortList",
+            }
+            else
+            {
+            @Html.ActionLink("Shortlist", "AddStandardProvider", "ShortList",
                     new { apprenticeshipId, ukprn, locationId },
                     new
                     {
@@ -88,6 +91,8 @@ if (Is<ShortlistingFeature>.Enabled) {
                         data_action = "add",
                         data_apprenticeship_type = "Standard"
                     })
-        }
+            }
+
+        </div>
     }
 }
