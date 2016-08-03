@@ -45,5 +45,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string AbsolutePath { get; set; }
 
         public bool ShowAll { get; set; }
+
+        public bool ShowNationalProviders { get; set; }
     }
 }

@@ -90,6 +90,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 Shortlist = shortlistItems,
                 TotalResultsForCountry = await GetCountResultForCountry(searchResults, message),
                 SearchTerms = message.Keywords,
+                ShowNationalProviders = message.NationalProviders,
                 ShowAllProviders = message.ShowAll,
                 StatusCode = GetResponseCode(searchResults.FrameworkResponseCode)
             };
