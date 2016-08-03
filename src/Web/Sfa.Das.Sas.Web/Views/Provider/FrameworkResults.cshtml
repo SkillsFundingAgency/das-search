@@ -111,8 +111,9 @@ if (Model.ActualPage < Model.LastPage)
                         <div class="filters-block @cssClass">
                             <form method="get" autocomplete="off" action="@Model.AbsolutePath">
                                 <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                                <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId"/>
+                                <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
                                 <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()" />
+                                <input type="hidden" name="keywords" value="@Model.SearchTerms" />
                                 @{
                                     Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                                 }

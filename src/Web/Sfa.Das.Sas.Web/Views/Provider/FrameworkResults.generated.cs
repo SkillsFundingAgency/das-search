@@ -315,32 +315,48 @@ WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3700)
 , 3708), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, "/>\r\n                                <input");
+WriteLiteralTo(__razor_helper_writer, " />\r\n                                <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"ShowAll\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3798), Tuple.Create("\"", 3831)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3799), Tuple.Create("\"", 3832)
 
 #line 115 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 3806), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
+, Tuple.Create(Tuple.Create("", 3807), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
 
 #line default
 #line hidden
-, 3806), false)
+, 3807), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, " />\r\n                                <input");
+
+WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
+
+WriteLiteralTo(__razor_helper_writer, " name=\"keywords\"");
+
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3906), Tuple.Create("\"", 3932)
+
+#line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3914), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+
+#line default
+#line hidden
+, 3914), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n");
 
 
-#line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 117 "..\..\Views\Provider\FrameworkResults.cshtml"
                                 
 
 #line default
 #line hidden
 
-#line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 117 "..\..\Views\Provider\FrameworkResults.cshtml"
                                   
                                     Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                                 
@@ -359,7 +375,7 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                            </form
 "             </div>\r\n                </div>\r\n");
 
 
-#line 124 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 125 "..\..\Views\Provider\FrameworkResults.cshtml"
         }
     }
 
@@ -368,12 +384,12 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                            </form
 #line hidden
 });
 
-#line 126 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 127 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 129 "..\..\Views\Provider\FrameworkResults.cshtml"
+        #line 130 "..\..\Views\Provider\FrameworkResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {

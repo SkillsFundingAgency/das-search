@@ -98,7 +98,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 49 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "StandardResults", "Provider", new { @apprenticeshipid = @Model.StandardId, @postcode = @Model.PostCode }, new { }));
+                WriteTo(__razor_helper_writer, Html.ActionLink("return to your apprenticeship training search results", "StandardResults", "Provider", new { @apprenticeshipid = @Model.StandardId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms }, new { }));
 
 
 #line default
