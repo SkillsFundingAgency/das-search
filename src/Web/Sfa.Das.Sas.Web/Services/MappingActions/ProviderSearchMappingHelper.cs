@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
                 {
                     viewModel = new NationalProviderViewModel
                     {
-                        Title = "National training providers",
+                        Title = "only national",
                         Count = item.Value ?? 0L,
                         Checked = selectedNationalProvider,
                         Value = item.Key

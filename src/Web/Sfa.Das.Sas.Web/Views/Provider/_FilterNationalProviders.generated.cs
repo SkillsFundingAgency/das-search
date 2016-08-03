@@ -46,7 +46,7 @@ WriteLiteral(">\r\n    <h2");
 
 WriteLiteral(" class=\"toggler heading-small\"");
 
-WriteLiteral(">National providers</h2>\r\n    <div");
+WriteLiteral(">National training providers</h2>\r\n    <div");
 
 WriteLiteral(" class=\"toggled-content\"");
 
@@ -56,15 +56,15 @@ WriteLiteral(" value=\"true\"");
 
 WriteLiteral(" name=\"NationalProviders\"");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 299), Tuple.Create("\"", 334)
-, Tuple.Create(Tuple.Create("", 304), Tuple.Create("NationalProviders_", 304), true)
+WriteAttribute("id", Tuple.Create(" id=\"", 308), Tuple.Create("\"", 343)
+, Tuple.Create(Tuple.Create("", 313), Tuple.Create("NationalProviders_", 313), true)
             
             #line 8 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-    , Tuple.Create(Tuple.Create("", 322), Tuple.Create<System.Object, System.Int32>(Model.Value
+    , Tuple.Create(Tuple.Create("", 331), Tuple.Create<System.Object, System.Int32>(Model.Value
             
             #line default
             #line hidden
-, 322), false)
+, 331), false)
 );
 
 WriteLiteral(" type=\"checkbox\"");
@@ -80,31 +80,22 @@ WriteLiteral(" ");
             #line hidden
 WriteLiteral(" />\r\n                <label");
 
-WriteAttribute("for", Tuple.Create(" for=\"", 420), Tuple.Create("\"", 456)
-, Tuple.Create(Tuple.Create("", 426), Tuple.Create("NationalProviders_", 426), true)
+WriteAttribute("for", Tuple.Create(" for=\"", 429), Tuple.Create("\"", 465)
+, Tuple.Create(Tuple.Create("", 435), Tuple.Create("NationalProviders_", 435), true)
             
             #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 444), Tuple.Create<System.Object, System.Int32>(Model.Value
+, Tuple.Create(Tuple.Create("", 453), Tuple.Create<System.Object, System.Int32>(Model.Value
             
             #line default
             #line hidden
-, 444), false)
+, 453), false)
 );
 
-WriteLiteral(">");
+WriteLiteral(">only national providers (");
 
             
             #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-                                                       Write(Model.Title);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" (");
-
-            
-            #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-                                                                     Write(Model.Count);
+                                                                                Write(Model.Count);
 
             
             #line default
