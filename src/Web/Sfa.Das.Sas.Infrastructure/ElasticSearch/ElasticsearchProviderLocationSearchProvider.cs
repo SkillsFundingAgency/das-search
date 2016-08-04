@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿using System.Runtime.CompilerServices;
+using Sfa.Das.Sas.Infrastructure.Elasticsearch.Models;
+
+namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +18,7 @@
     public sealed class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
     {
         private const string TrainingTypeAggregateName = "training_type";
+        private const string NationalProviderAggregateName = "national_provider";
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
@@ -26,136 +30,16 @@
             _applicationSettings = applicationSettings;
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByStandard(int standardId, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
+        public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
-            var qryStr = CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId.ToString(), coordinates, deliveryModes);
-
-            var skip = CalculateSkip(page, take);
-
-            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
-
-            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
-
-            var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                }
-            }
-
-            return new SearchResult<StandardProviderSearchResultsItem>
-            {
-                Hits = documents,
-                Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
-            };
+            var qryStr = CreateStandardProviderSearchQuery(standardId.ToString(), coordinates, filter);
+            return PerformStandardProviderSearchWithQuery(page, take, qryStr);
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchByStandardLocation(int standardId, Coordinate coordinates, int page, int take, IEnumerable<string> deliveryModes)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
-            var qryStr = CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId.ToString(), coordinates, deliveryModes);
-
-            var skip = CalculateSkip(page, take);
-
-            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
-
-            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
-
-            var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                }
-            }
-
-            return new SearchResult<StandardProviderSearchResultsItem>
-            {
-                Hits = documents,
-                Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
-            };
-        }
-
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFramework(int frameworkId, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
-        {
-            var skip = CalculateSkip(page, take);
-
-            var qryStr = CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
-
-            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
-
-            var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
-
-            var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                }
-            }
-
-            return new SearchResult<FrameworkProviderSearchResultsItem>
-            {
-                Hits = documents,
-                Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
-            };
-        }
-
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchByFrameworkLocation(int frameworkId, Coordinate geoPoint, int page, int take, IEnumerable<string> deliveryModes)
-        {
-            var skip = CalculateSkip(page, take);
-
-            var qryStr = CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId.ToString(), geoPoint, deliveryModes);
-
-            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
-
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
-
-            var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
-
-            var trainingOptionsAggregation = new Dictionary<string, long?>();
-
-            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                }
-            }
-
-            return new SearchResult<FrameworkProviderSearchResultsItem>
-            {
-                Hits = documents,
-                Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation
-            };
+            var qryStr = CreateFrameworkProviderSearchQuery(frameworkId.ToString(), coordinates, filter);
+            return PerformFrameworkProviderSearchWithQuery(page, take, qryStr);
         }
 
         private static StandardProviderSearchResultsItem MapToStandardProviderSearchResultsItem(IHit<StandardProviderSearchResultsItem> hit)
@@ -221,6 +105,12 @@
             return f => f.Term(t => t.Field(selector).Value(apprenticeshipIdentifier));
         }
 
+        private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByNationalProvider<T>(Expression<Func<T, object>> selector)
+            where T : class
+        {
+            return f => f.Term(t => t.Field(selector).Value(true));
+        }
+
         private static QueryContainer FilterByDeliveryModes<T>(QueryContainerDescriptor<T> descriptor, IEnumerable<string> deliveryModes)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
@@ -256,6 +146,124 @@
                 .Ascending());
         }
 
+        private SearchDescriptor<StandardProviderSearchResultsItem> CreateStandardProviderSearchQuery(string standardId, Coordinate coordinates, ProviderSearchFilter filter)
+        {
+            switch (filter.SearchOption)
+            {
+                case ProviderFilterOptions.ApprenticeshipLocation:
+                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                case ProviderFilterOptions.ApprenticeshipId:
+                    return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
+                    return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
+                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                default:
+                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+            }
+        }
+
+        private SearchDescriptor<FrameworkProviderSearchResultsItem> CreateFrameworkProviderSearchQuery(string standardId, Coordinate coordinates, ProviderSearchFilter filter)
+        {
+            switch (filter.SearchOption)
+            {
+                case ProviderFilterOptions.ApprenticeshipLocation:
+                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
+                case ProviderFilterOptions.ApprenticeshipId:
+                    return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
+                case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
+                    return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
+                case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
+                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
+                default:
+                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
+            }
+        }
+
+        private SearchResult<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(int page, int take, SearchDescriptor<StandardProviderSearchResultsItem> qryStr)
+        {
+            var skip = CalculateSkip(page, take);
+
+            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
+            {
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
+            }
+
+            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
+
+            var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return new SearchResult<StandardProviderSearchResultsItem>
+            {
+                Hits = documents,
+                Total = results.Total,
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
+            };
+        }
+
+        private SearchResult<FrameworkProviderSearchResultsItem> PerformFrameworkProviderSearchWithQuery(int page, int take, SearchDescriptor<FrameworkProviderSearchResultsItem> qryStr)
+        {
+            var skip = CalculateSkip(page, take);
+
+            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
+            {
+                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
+            }
+
+            var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
+
+            var trainingOptionsAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
+                {
+                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            var nationalProvidersAggregation = new Dictionary<string, long?>();
+
+            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
+            {
+                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
+                {
+                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return new SearchResult<FrameworkProviderSearchResultsItem>
+            {
+                Hits = documents,
+                Total = results.Total,
+                TrainingOptionsAggregation = trainingOptionsAggregation,
+                NationalProvidersAggregation = nationalProvidersAggregation
+            };
+        }
+
         private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
@@ -268,7 +276,9 @@
                             .Filter(FilterByApprenticeshipId(selector, code))
                             .Must(NestedLocationsQuery<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
-                    .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
+                    .Aggregations(aggs => aggs
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
             return descriptor;
@@ -286,7 +296,49 @@
                             .Filter(FilterByApprenticeshipId(selector, code))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
-                    .Aggregations(aggs => aggs.Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0)))
+                    .Aggregations(aggs => aggs
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
+                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+
+            return descriptor;
+        }
+
+        private SearchDescriptor<T> CreateProviderQueryWithNationalProvider<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var descriptor =
+                new SearchDescriptor<T>()
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .Size(1000)
+                    .Query(q => q
+                        .Bool(ft => ft
+                            .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
+                            .Must(NestedLocationsQuery<T>(location))))
+                    .Sort(SortByDistanceFromGivenLocation<T>(location))
+                    .Aggregations(aggs => aggs
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
+                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+
+            return descriptor;
+        }
+
+        private SearchDescriptor<T> CreateProviderQueryWithNationalProviderWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var descriptor =
+                new SearchDescriptor<T>()
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .Size(1000)
+                    .Query(q => q
+                        .Bool(b => b
+                            .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
+                            .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
+                    .Sort(SortByDistanceFromGivenLocation<T>(location))
+                    .Aggregations(aggs => aggs
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
             return descriptor;

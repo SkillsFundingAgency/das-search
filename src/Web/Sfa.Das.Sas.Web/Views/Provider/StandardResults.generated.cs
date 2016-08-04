@@ -309,18 +309,50 @@ WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3845)
 , 3853), false)
 );
 
+WriteLiteralTo(__razor_helper_writer, " />\r\n                    <input");
+
+WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
+
+WriteLiteralTo(__razor_helper_writer, " name=\"keywords\"");
+
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 3940), Tuple.Create("\"", 3966)
+
+#line 111 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 3948), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+
+#line default
+#line hidden
+, 3948), false)
+);
+
 WriteLiteralTo(__razor_helper_writer, " />\r\n");
 
 
-#line 111 "..\..\Views\Provider\StandardResults.cshtml"
+#line 112 "..\..\Views\Provider\StandardResults.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 111 "..\..\Views\Provider\StandardResults.cshtml"
+#line 112 "..\..\Views\Provider\StandardResults.cshtml"
                       
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                    
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 115 "..\..\Views\Provider\StandardResults.cshtml"
+                    
+
+#line default
+#line hidden
+
+#line 115 "..\..\Views\Provider\StandardResults.cshtml"
+                      
+                        Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
                     
 
 #line default
@@ -336,7 +368,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"button margin-top-x2 postcode-se
 WriteLiteralTo(__razor_helper_writer, " />\r\n                </form>\r\n            </div>\r\n");
 
 
-#line 117 "..\..\Views\Provider\StandardResults.cshtml"
+#line 121 "..\..\Views\Provider\StandardResults.cshtml"
         }
     }
 
@@ -345,12 +377,12 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                </form>\r\n       
 #line hidden
 });
 
-#line 119 "..\..\Views\Provider\StandardResults.cshtml"
+#line 123 "..\..\Views\Provider\StandardResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 122 "..\..\Views\Provider\StandardResults.cshtml"
+        #line 126 "..\..\Views\Provider\StandardResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {

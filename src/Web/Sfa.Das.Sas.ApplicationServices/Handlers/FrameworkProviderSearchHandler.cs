@@ -69,6 +69,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.PostCode,
                 new Pagination { Page = pageNumber, Take = message.Take },
                 message.DeliveryModes,
+                message.NationalProvidersOnly,
                 message.ShowAll);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
@@ -89,6 +90,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 Shortlist = shortlistItems,
                 TotalResultsForCountry = await GetCountResultForCountry(searchResults, message),
                 SearchTerms = message.Keywords,
+                ShowOnlyNationalProviders = message.NationalProvidersOnly,
                 ShowAllProviders = message.ShowAll,
                 StatusCode = GetResponseCode(searchResults.FrameworkResponseCode)
             };
@@ -124,6 +126,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.PostCode,
                 new Pagination(),
                 message.DeliveryModes,
+                message.NationalProvidersOnly,
                 true);
 
             totalRestultsForCountry = totalProvidersCountry.TotalResults;

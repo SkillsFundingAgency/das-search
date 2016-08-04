@@ -10,5 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public IEnumerable<T> Hits { get; set; }
 
         public Dictionary<string, long?> TrainingOptionsAggregation { get; set; }
+
+        public Dictionary<string, long?> NationalProvidersAggregation { get; set; }
     }
 }

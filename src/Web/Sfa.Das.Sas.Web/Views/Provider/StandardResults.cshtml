@@ -120,8 +120,12 @@
                     <input type="hidden" name="PostCode" value="@Model.PostCode" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.StandardId"/>
                     <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
+                    <input type="hidden" name="keywords" value="@Model.SearchTerms" />
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                    }
+                    @{
+                        Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
                     }
                     <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
                 </form>

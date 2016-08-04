@@ -263,6 +263,7 @@
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\NationalProvidersValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryOptionResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\FrameworkInformationResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\EmployerSatisfactionResolver.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Compile Include="ViewModels\IShortlistApprenticeshipViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
@@ -387,6 +389,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\_FilterNationalProviders.generated.cs">
+      <DependentUpon>_FilterNationalProviders.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Provider\_FilterProviders.generated.cs">
       <AutoGen>True</AutoGen>
@@ -676,6 +683,11 @@
     <Content Include="Views\Apprenticeship\SearchForProviders.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>SearchForProviders.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Provider\_FilterNationalProviders.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_FilterNationalProviders.generated.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

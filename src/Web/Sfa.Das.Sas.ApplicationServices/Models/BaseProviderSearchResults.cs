@@ -21,5 +21,9 @@
         public IEnumerable<string> SelectedTrainingOptions { get; set; }
 
         public Dictionary<string, long?> TrainingOptionsAggregation { get; set; }
+
+        public bool ShowNationalProvidersOnly { get; set; }
+
+        public Dictionary<string, long?> NationalProviders { get; set; }
     }
 }

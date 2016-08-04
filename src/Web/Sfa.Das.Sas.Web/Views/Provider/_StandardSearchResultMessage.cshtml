@@ -5,6 +5,10 @@
     {
         @RenderErrorMessage()
     }
+    else if (Model.ShowNationalProviders && Model.TotalResults == 0)
+    {
+        @RenderZeroNationalProviders()
+    }
     else if (Model.ShowAll && Model.TotalResults == 1)
     {
         @RenderAllOneResults()
@@ -32,6 +36,20 @@
     <p id="standard-provider-search-message">
         There was a problem performing a search. Try again later.
     </p>
+}
+
+@helper  RenderZeroNationalProviders()
+{
+    <p id="standard-provider-search-message">
+        Sorry, there are currently no results for the filters you applied'.
+    </p>
+    <div>
+        <p>You can:</p>
+        <ul class="list list-bullet">
+            <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "StandardResults", "Provider", new { @apprenticeshipid = @Model.StandardId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms }, new { })</li>
+            <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
+        </ul>
+    </div>
 }
 
 @helper  RenderAllOneResults()

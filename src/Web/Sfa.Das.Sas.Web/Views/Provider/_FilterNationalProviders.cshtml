@@ -1,0 +1,13 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.NationalProviderViewModel
+
+<fieldset class="filters filters-accordion">
+    <h2 class="toggler heading-small">National training providers</h2>
+    <div class="toggled-content">
+        <ul>
+            <li>
+                <input value="true" name="NationalProvidersOnly" id="NationalProvidersOnly_@Model.Value" type="checkbox" @Html.Raw(Model.Checked ? "checked" : "") />
+                <label for="NationalProvidersOnly_@Model.Value">national providers (@Model.Count)</label>
+            </li>   
+        </ul>
+    </div>
+</fieldset>

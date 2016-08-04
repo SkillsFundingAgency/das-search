@@ -33,6 +33,32 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             return orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i)).WhereNotNull();
         }
 
+        public static NationalProviderViewModel GetNationalProvidersAmount(Dictionary<string, long?> nationalProvidersAggregation, bool selectedNationalProvider)
+        {
+            var viewModel = new NationalProviderViewModel();
+
+            if (nationalProvidersAggregation.IsNullOrEmpty())
+            {
+                return new NationalProviderViewModel();
+            }
+
+            foreach (var item in nationalProvidersAggregation)
+            {
+                if (item.Key == "1")
+                {
+                    viewModel = new NationalProviderViewModel
+                    {
+                        Title = "only national",
+                        Count = item.Value ?? 0L,
+                        Checked = selectedNationalProvider,
+                        Value = item.Key
+                    };
+                }
+            }
+
+            return viewModel;
+        }
+
         private static string GetName(string deliveryModeKey)
         {
             switch (deliveryModeKey)
