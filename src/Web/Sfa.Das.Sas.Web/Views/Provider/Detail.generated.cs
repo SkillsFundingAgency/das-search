@@ -731,11 +731,11 @@ WriteLiteralTo(__razor_helper_writer, " class=\"panel panel-border-narrow\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <p>Achievement rates based on latest figures for similar a" +
 "pprenticeship training with this training provider.</p>\r\n                    <p>" +
-"Training provider sample size: ");
+"Achievement rate sample size: ");
 
 
 #line 226 "..\..\Views\Provider\Detail.cshtml"
-                        WriteTo(__razor_helper_writer, Model.OverallCohort);
+                       WriteTo(__razor_helper_writer, Model.OverallCohort);
 
 
 #line default
@@ -749,8 +749,8 @@ WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
 WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Skills Funding Agency achievement rates</a></p>\r\n                </div>\r\n       " +
-"     </details>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">Skills Funding Agency apprenticeship achievement rates</a></p>\r\n                " +
+"</div>\r\n            </details>\r\n");
 
 
 #line 230 "..\..\Views\Provider\Detail.cshtml"
@@ -797,16 +797,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9570), Tuple.Create("\"", 9595)
-, Tuple.Create(Tuple.Create("", 9578), Tuple.Create("width:", 9578), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9584), Tuple.Create("\"", 9609)
+, Tuple.Create(Tuple.Create("", 9592), Tuple.Create("width:", 9592), true)
 
 #line 240 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 9584), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 9598), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 9585), false)
-, Tuple.Create(Tuple.Create("", 9594), Tuple.Create("%", 9594), true)
+, 9599), false)
+, Tuple.Create(Tuple.Create("", 9608), Tuple.Create("%", 9608), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
