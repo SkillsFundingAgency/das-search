@@ -50,7 +50,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
         public static string GetInformationText(string text)
         {
-            return string.IsNullOrEmpty(text) ? "None specified" : text;
+            return string.IsNullOrEmpty(text) ? "None specified." : text;
         }
 
         private static int GetSingleValue(int from, int to)
