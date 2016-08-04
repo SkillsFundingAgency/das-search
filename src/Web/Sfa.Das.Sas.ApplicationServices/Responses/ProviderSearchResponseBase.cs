@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         public long TotalResultsForCountry { get; set; }
         public string SearchTerms { get; set; }
         public bool ShowAllProviders { get; set; }
-        public bool ShowNationalProviders { get; set; }
+        public bool ShowOnlyNationalProviders { get; set; }
         public ResponseCodes StatusCode { get; set; }
     }
 }

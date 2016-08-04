@@ -2,10 +2,10 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public class SearchFilter
+    public class ProviderSearchFilter
     {
         public IEnumerable<string> DeliveryModes { get; set; }
 
-        public SearchOption SearchOption { get; set; }
+        public ProviderFilterOptions SearchOption { get; set; }
     }
 }
