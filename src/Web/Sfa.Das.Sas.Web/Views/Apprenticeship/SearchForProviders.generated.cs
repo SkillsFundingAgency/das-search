@@ -242,8 +242,21 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Find\"");
 
-WriteLiteral(">\r\n                    </div>\r\n                </form>\r\n        </div>\r\n    </div" +
-">\r\n</main>");
+WriteLiteral(">\r\n                    </div>\r\n                </form>\r\n            \r\n           " +
+"     <div");
+
+WriteLiteral(" class=\"provider-data-warning\"");
+
+WriteLiteral(">\r\n                    <span");
+
+WriteLiteral(" class=\"glyphicon-tag tag-label tag-warning\"");
+
+WriteLiteral(@">Please Note</span> This is a new service. Training providers are currently entering their information. You will only see information for training providers who have updated their details so far.
+                </div>
+
+        </div>
+    </div>
+</main>");
 
         }
     }
