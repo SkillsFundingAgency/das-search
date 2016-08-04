@@ -483,7 +483,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             GetAttribute(html, ".column-one-third form ul li input", "type").Should().Be("checkbox");
             GetAttribute(html, ".column-one-third form ul li input", "checked").Should().BeNull();
             GetAttribute(html, ".column-one-third form ul li input", "checked", 2).Should().Be(string.Empty);
-            GetPartial(html, ".column-one-third form ul li label", 2).Should().Be("Level 2 (500)");
+            GetPartial(html, ".column-one-third form ul li label", 2).Should().Be("level 2 (500)");
         }
 
         [Test]
