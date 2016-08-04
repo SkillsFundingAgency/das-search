@@ -96,3 +96,22 @@ footer {
 .gov-border {
   border-top: 10px solid #005ea5;
 }
+
+.ir {
+    background-repeat: no-repeat;
+    direction: ltr;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+}
+
+.ogl-logo {
+    background: url(../images/open-government-licence.png) no-repeat;
+    background-size: 41px 17px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: top;    
+    width: 41px;
+    height: 17px;
+}
