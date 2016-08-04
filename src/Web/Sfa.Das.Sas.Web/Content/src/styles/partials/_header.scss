@@ -18,7 +18,9 @@
     .global-header__wrapper {
         padding-left: 30px;
         padding-right: 30px;
-        padding-bottom: 10px
+        padding-bottom: 10px;   
+        display: table;
+        width: 100%;
     }
 }
 .global-header__logo {
@@ -67,27 +69,57 @@
 .govuk-logo:active:hover {
     border-color: #2e8aca
 }
+
+@media (min-width: 641px) {
+    .global-header__title,
+    .global-header__subtitle {
+        width: 50%;
+        display: table-cell;
+        vertical-align: middle;
+        height: 70px;
+    }
+}
+
 .global-header__title {
-    font-size: 16px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1.11111;
     margin: 0;
     margin-bottom: 0;
     padding: 0
 }
+/*
 @media (min-width: 641px) {
     .global-header__title {
         font-size: 24px
     }
 }
-.global-header__title a {
+*/
+.global-header__subtitle {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.11111;
+    margin: 0;
+    margin-bottom: 0;
+    padding: 0;
+    text-align: right;
+}
+@media (min-width: 641px) {
+    .global-header__subtitle {
+        font-size: 24px
+    }
+}
+
+.global-header__title a,
+.global-header__subtitle a {
     border-bottom: 1px solid transparent;
     color: #fff;
     display: inline-block;
     padding: 2px 0;
     text-decoration: none
 }
-.global-header__title a:hover {
+.global-header__title a:hover,
+.global-header__subtitle a:hover {
     border-color: #fff
 }
 .global-header__link {
