@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given standard
 
-@E2E	 @SystemTest @PreProd @Prod
+@E2E	 @CI @Demo @SystemTest @PreProd @Prod
 Scenario:Should find a standard and provider
 	Given I have data in the config
 		| Token    | Key                    |
