@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "p").Should().Contain("There are no apprenticeships matching your search for 'SearchTerm'");
+            GetPartial(html, "p").Should().Contain("Sorry, there is currently no apprenticeship training for 'SearchTerm'");
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
             var result = GetPartial(html, "p");
 
-            result.Should().Be("There is 1 apprenticeship matching your search for 'SearchTerm'.");
+            result.Should().Be("1 apprenticeship matching your search for 'SearchTerm'.");
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                               }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "p").Should().Be("There are 2 apprenticeships matching your search for 'SearchTerm'.");
+            GetPartial(html, "p").Should().Be("2 apprenticeships matching your search for 'SearchTerm'.");
         }
     }
 }

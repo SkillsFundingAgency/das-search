@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".results-empty").Should().Contain("There are no apprenticeships matching your search for 'SearchTerm'");
+            GetPartial(html, ".results-empty").Should().Contain("Sorry, there is currently no apprenticeship training for 'SearchTerm'");
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             var result = GetPartial(html, ".results-one");
 
-            result.Should().Be("There is 1 apprenticeship matching your search for 'SearchTerm'.");
+            result.Should().Be("1 apprenticeship matching your search for 'SearchTerm'.");
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".results-several").Should().Be("There are 2 apprenticeships matching your search for 'SearchTerm'.");
+            GetPartial(html, ".results-several").Should().Be("2 apprenticeships matching your search for 'SearchTerm'.");
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".labelmessage").Should().Be("Results labelled new are apprenticeship standards developed by employer groups.");
+            GetPartial(html, ".labelmessage").Should().Be("Results labelled New are apprenticeship standards developed by employer groups.");
         }
 
         [Test]

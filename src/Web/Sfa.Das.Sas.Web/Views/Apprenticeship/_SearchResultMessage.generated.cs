@@ -87,7 +87,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"results-empty\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        Sorry, there is currently no apprenticeship training for ‘<b>");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Sorry, there is currently no apprenticeship training for \'<b>");
 
 
 #line 34 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -96,7 +96,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        Sorry, there is currently no
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b>’.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
 #line 36 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
