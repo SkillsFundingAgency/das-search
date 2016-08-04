@@ -14,10 +14,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     public sealed class ProviderSearchService : IProviderSearchService
     {
-        private const string ApprenticeshipLocation = "apprenticeshipLocation";
-        private const string ApprenticeshipId = "apprenticeshipId";
-        private const string ApprenticeshipLocationAndNationalProvider = "apprenticeshipLocationAndNationalProvider";
-        private const string ApprenticeshipIdAndNationalProvider = "apprenticeshipIdAndNationalProvider";
         private readonly IProviderLocationSearchProvider _searchProvider;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
@@ -46,23 +42,27 @@ namespace Sfa.Das.Sas.ApplicationServices
             ProviderStandardSearchResults result;
             if (!showAll && !nationalProviders)
             {
-                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocation);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocation);
+                result.ShowNationalProvidersOnly = nationalProviders;
+                return result;
             }
 
             if (showAll && !nationalProviders)
             {
-                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipId);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipId);
+                result.ShowNationalProvidersOnly = nationalProviders;
+                return result;
             }
 
             if (!showAll && nationalProviders)
             {
                 result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocationWithNationalProviderOnly);
-                result.ShowNationalProvidersOnly = true;
+                result.ShowNationalProvidersOnly = nationalProviders;
                 return result;
             }
 
             result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipIdWithNationalProviderOnly);
-            result.ShowNationalProvidersOnly = true;
+            result.ShowNationalProvidersOnly = nationalProviders;
             return result;
         }
 
