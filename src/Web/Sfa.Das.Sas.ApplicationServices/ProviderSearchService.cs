@@ -113,40 +113,6 @@ namespace Sfa.Das.Sas.ApplicationServices
             };
         }
 
-        private SearchResult<StandardProviderSearchResultsItem> GetStandardSearchResults(int standardId, Coordinate coordinates, int page, int takeElements, IEnumerable<string> deliveryModes, string selection)
-        {
-            switch (selection)
-            {
-                case ApprenticeshipLocation:
-                    return _searchProvider.SearchByStandardLocation(standardId, coordinates, page, takeElements, deliveryModes);
-                case ApprenticeshipId:
-                    return _searchProvider.SearchByStandard(standardId, coordinates, page, takeElements, deliveryModes);
-                case ApprenticeshipLocationAndNationalProvider:
-                    return _searchProvider.SearchByStandardLocationAndNationalProvider(standardId, coordinates, page, takeElements, deliveryModes);
-                case ApprenticeshipIdAndNationalProvider:
-                    return _searchProvider.SearchByStandardAndNationalProvider(standardId, coordinates, page, takeElements, deliveryModes);
-                default:
-                    return new SearchResult<StandardProviderSearchResultsItem>();
-            }
-        }
-
-        private SearchResult<FrameworkProviderSearchResultsItem> GetFrameworkSearchResults(int frameworkId, Coordinate coordinates, int page, int takeElements, IEnumerable<string> deliveryModes, string selection)
-        {
-            switch (selection)
-            {
-                case ApprenticeshipLocation:
-                    return _searchProvider.SearchByFrameworkLocation(frameworkId, coordinates, page, takeElements, deliveryModes);
-                case ApprenticeshipId:
-                    return _searchProvider.SearchByFramework(frameworkId, coordinates, page, takeElements, deliveryModes);
-                case ApprenticeshipLocationAndNationalProvider:
-                    return _searchProvider.SearchByFrameworkLocationAndNationalProvider(frameworkId, coordinates, page, takeElements, deliveryModes);
-                case ApprenticeshipIdAndNationalProvider:
-                    return _searchProvider.SearchByFrameworkAndNationalProvider(frameworkId, coordinates, page, takeElements, deliveryModes);
-                default:
-                    return new SearchResult<FrameworkProviderSearchResultsItem>();
-            }
-        }
-
         private async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, string searchSelection)
         {
             if (string.IsNullOrEmpty(postCode))
@@ -186,7 +152,13 @@ namespace Sfa.Das.Sas.ApplicationServices
 
                 _logger.Info("Provider location search", logEntry);
 
-                var searchResults = GetStandardSearchResults(standardId, coordinates, pagination.Page, takeElements, deliveryModes, searchSelection);
+                var filter = new SearchFilter
+                {
+                    DeliveryModes = deliveryModes,
+                    SearchOption = searchSelection
+                };
+
+                var searchResults = _searchProvider.SearchStandardProviders(standardId, coordinates, pagination.Page, takeElements, filter);
 
                 var result = new ProviderStandardSearchResults
                 {
@@ -243,7 +215,14 @@ namespace Sfa.Das.Sas.ApplicationServices
                     return GetProviderFrameworkSearchResultErrorResponse(frameworkId, postCode, responseCode);
                 }
 
-                var searchResults = GetFrameworkSearchResults(frameworkId, coordinates, pagination.Page, takeElements, deliveryModes, searchSelection);
+                var filter = new SearchFilter
+                {
+                    DeliveryModes = deliveryModes,
+                    SearchOption = searchSelection
+                };
+
+                var searchResults = _searchProvider.SearchFrameworkProviders(frameworkId, coordinates, pagination.Page, takeElements, filter);
+
                 var hits = searchResults.Hits;
                 var total = searchResults.Total;
                 var trainingOptionsAggregation = searchResults.TrainingOptionsAggregation;

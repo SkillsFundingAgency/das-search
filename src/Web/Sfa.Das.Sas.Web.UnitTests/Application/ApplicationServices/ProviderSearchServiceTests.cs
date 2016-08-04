@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = stubSearchResults, Total = 0 };
             ProviderSearchService service = new ProviderSearchServiceBuilder()
                 .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+                .SetupLocationSearchProvider(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var result = await service.SearchStandardProviders(testStandardId, postcode, _pageZeroWithTenItems, null, false, false);
 
@@ -53,7 +53,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             var builder = new ProviderSearchServiceBuilder()
                 .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+                .SetupLocationSearchProvider(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var service = builder.Build();
 
@@ -62,7 +62,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             Assert.That(result.Hits, Is.EqualTo(stubSearchResults));
 
             builder.LocationLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            builder.LocationSearchProvider.Verify(x => x.SearchByStandardLocation(testStandardId, _testPostCodeCoordinate.Coordinate, 0, 10, null), Times.Once);
         }
 
         [Test]
@@ -75,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             var builder = new ProviderSearchServiceBuilder()
                 .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+                .SetupLocationSearchProvider(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var service = builder.Build();
 
@@ -94,7 +93,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = null, Total = 5 };
 
             ProviderSearchService service = new ProviderSearchServiceBuilder()
-                .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults)
+                .SetupLocationSearchProvider(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults)
                 .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate));
 
             var result = await service.SearchStandardProviders(123, "AS2 3SS", _pageZeroWithTenItems, null, false, false);
@@ -109,7 +108,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             var searchResults = new SearchResult<StandardProviderSearchResultsItem> { Hits = null, Total = 0 };
 
             ProviderSearchService service = new ProviderSearchServiceBuilder()
-               .SetupLocationSearchProvider(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults)
+               .SetupLocationSearchProvider(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults)
                .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
                .SetupStandardRepository(x => x.GetStandardById(It.IsAny<int>()), new Standard { Title = testTitle });
 
@@ -123,7 +122,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         {
             ProviderSearchService service = new ProviderSearchServiceBuilder()
                .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-               .SetupLocationSearchProviderException<SearchException>(x => x.SearchByStandardLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()));
+               .SetupLocationSearchProviderException<SearchException>(x => x.SearchStandardProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()));
 
             var result = await service.SearchStandardProviders(-1, "AS3 4AS", _pageZeroWithTenItems, null, false, false);
 
@@ -150,7 +149,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             ProviderSearchService service = new ProviderSearchServiceBuilder()
                .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-               .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+               .SetupLocationSearchProvider(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var result = await service.SearchFrameworkProviders(testFrameworkId, postcode, _pageZeroWithTenItems, null, false, false);
 
@@ -174,7 +173,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             ProviderSearchServiceBuilder builder = new ProviderSearchServiceBuilder()
                .SetupFrameworkRepository(x => x.GetFrameworkById(It.IsAny<int>()), framework)
                .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-               .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+               .SetupLocationSearchProvider(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var service = builder.Build();
 
@@ -183,7 +182,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             result.Hits.Should().BeSameAs(stubSearchResults);
 
             builder.LocationLookup.Verify(x => x.GetLatLongFromPostCode(testPostCode), Times.Once);
-            builder.LocationSearchProvider.Verify(x => x.SearchByFrameworkLocation(testFrameworkId, _testPostCodeCoordinate.Coordinate, 0, 10, null), Times.Once);
         }
 
         [Test]
@@ -196,7 +194,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             ProviderSearchServiceBuilder builder = new ProviderSearchServiceBuilder()
                     .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                    .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+                    .SetupLocationSearchProvider(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var service = builder.Build();
             var result = await service.SearchFrameworkProviders(testFrameworkId, testPostCode, _pageZeroWithTenItems, null, false, false);
@@ -221,7 +219,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             ProviderSearchService service = new ProviderSearchServiceBuilder()
                     .SetupFrameworkRepository(x => x.GetFrameworkById(It.IsAny<int>()), framework)
                     .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                    .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults);
+                    .SetupLocationSearchProvider(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults);
 
             var result = await service.SearchFrameworkProviders(123, "AS2 3SS", _pageZeroWithTenItems, null, false, false);
 
@@ -236,7 +234,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             ProviderSearchService service = new ProviderSearchServiceBuilder()
                    .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                   .SetupLocationSearchProvider(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()), searchResults)
+                   .SetupLocationSearchProvider(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()), searchResults)
                    .SetupFrameworkRepository(x => x.GetFrameworkById(It.IsAny<int>()), new Framework { FrameworkName = frameworkName });
 
             var result = await service.SearchFrameworkProviders(123, "AS3 4AS", _pageZeroWithTenItems, null, false, false);
@@ -249,7 +247,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         {
             ProviderSearchService service = new ProviderSearchServiceBuilder()
                    .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                   .SetupLocationSearchProviderException<SearchException>(x => x.SearchByFrameworkLocation(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IEnumerable<string>>()));
+                   .SetupLocationSearchProviderException<SearchException>(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<SearchFilter>()));
 
             var result = await service.SearchFrameworkProviders(-1, "AS3 4AS", _pageZeroWithTenItems, null, false, false);
 
