@@ -156,7 +156,7 @@ WriteLiteral(@">
                 <li>what you click on while you’re visiting the site</li>
             </ul>
 
-            <p>We don’t collect or store your personal information (eg your name or address) so this information can’t be used to identify who you are. </p>
+            <p>We don’t collect or store your personal information (for example your name or address) so this information can’t be used to identify who you are. </p>
 
             <div");
 

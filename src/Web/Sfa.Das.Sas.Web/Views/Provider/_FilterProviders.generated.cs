@@ -151,13 +151,13 @@ WriteLiteral(">\r\n                <p>\r\n                    <span");
 
 WriteLiteral(" class=\"bold-small\"");
 
-WriteLiteral(">Day release:</span> eg one day a week at the training provider\'s location.\r\n    " +
-"            </p>\r\n                <p>\r\n                    <span");
+WriteLiteral(">Day release:</span> for example one day a week at the training provider\'s locati" +
+"on.\r\n                </p>\r\n                <p>\r\n                    <span");
 
 WriteLiteral(" class=\"bold-small\"");
 
-WriteLiteral(">Block release:</span> eg 3-4 weeks at the training provider\'s location.\r\n       " +
-"         </p>\r\n                <p>\r\n                    <span");
+WriteLiteral(">Block release:</span> for example 3-4 weeks at the training provider\'s location." +
+"\r\n                </p>\r\n                <p>\r\n                    <span");
 
 WriteLiteral(" class=\"bold-small\"");
 

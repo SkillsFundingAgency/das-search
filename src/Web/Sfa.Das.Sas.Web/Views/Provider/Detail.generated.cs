@@ -970,13 +970,15 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                    <p>\r\n         
 
 WriteLiteralTo(__razor_helper_writer, " class=\"bold-small\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Day release:</span> eg one day a week at the training provider\'s location.\r\n    " +
-"                </p>\r\n                    <p>\r\n                        <span");
+WriteLiteralTo(__razor_helper_writer, ">Day release:</span> for example one day a week at the training provider\'s locati" +
+"on.\r\n                    </p>\r\n                    <p>\r\n                        " +
+"<span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"bold-small\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Block release:</span> eg 3-4 weeks at the training provider\'s location.\r\n       " +
-"             </p>\r\n                    <p>\r\n                        <span");
+WriteLiteralTo(__razor_helper_writer, ">Block release:</span> for example 3-4 weeks at the training provider\'s location." +
+"\r\n                    </p>\r\n                    <p>\r\n                        <sp" +
+"an");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"bold-small\"");
 
