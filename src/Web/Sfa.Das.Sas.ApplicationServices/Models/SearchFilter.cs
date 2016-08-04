@@ -6,6 +6,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         public IEnumerable<string> DeliveryModes { get; set; }
 
-        public string SearchOption { get; set; }
+        public SearchOption SearchOption { get; set; }
     }
 }

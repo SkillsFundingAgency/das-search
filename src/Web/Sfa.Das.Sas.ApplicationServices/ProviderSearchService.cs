@@ -46,22 +46,22 @@ namespace Sfa.Das.Sas.ApplicationServices
             ProviderStandardSearchResults result;
             if (!showAll && !nationalProviders)
             {
-                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipLocation);
+                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocation);
             }
 
             if (showAll && !nationalProviders)
             {
-                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipId);
+                return await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipId);
             }
 
             if (!showAll && nationalProviders)
             {
-                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipLocationAndNationalProvider);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocationWithNationalProviderOnly);
                 result.ShowNationalProvidersOnly = true;
                 return result;
             }
 
-            result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ApprenticeshipIdAndNationalProvider);
+            result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipIdWithNationalProviderOnly);
             result.ShowNationalProvidersOnly = true;
             return result;
         }
@@ -70,20 +70,20 @@ namespace Sfa.Das.Sas.ApplicationServices
         {
             if (!showAll & !nationalProviders)
             {
-                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ApprenticeshipLocation);
+                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocation);
             }
 
             if (showAll && !nationalProviders)
             {
-                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ApprenticeshipId);
+                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipId);
             }
 
             if (!showAll && nationalProviders)
             {
-                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ApprenticeshipLocationAndNationalProvider);
+                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipLocationWithNationalProviderOnly);
             }
 
-            return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ApprenticeshipIdAndNationalProvider);
+            return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, SearchOption.ApprenticeshipIdWithNationalProviderOnly);
         }
 
         private static ProviderStandardSearchResults GetProviderStandardSearchResultErrorResponse(int standardId, string standardName, string postCode, string responseCode)
@@ -113,7 +113,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             };
         }
 
-        private async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, string searchSelection)
+        private async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, SearchOption searchSelection)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -185,7 +185,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
-        private async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, string searchSelection)
+        private async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, SearchOption searchSelection)
         {
             if (string.IsNullOrEmpty(postCode))
             {

@@ -100,6 +100,7 @@
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
     <Compile Include="Models\SearchFilter.cs" />
+    <Compile Include="Models\SearchOption.cs" />
     <Compile Include="Models\ShortlistedApprenticeship.cs" />
     <Compile Include="Models\ShortlistedProvider.cs" />
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />

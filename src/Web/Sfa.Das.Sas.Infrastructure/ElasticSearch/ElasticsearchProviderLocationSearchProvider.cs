@@ -19,10 +19,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     {
         private const string TrainingTypeAggregateName = "training_type";
         private const string NationalProviderAggregateName = "national_provider";
-        private const string ApprenticeshipLocation = "apprenticeshipLocation";
-        private const string ApprenticeshipId = "apprenticeshipId";
-        private const string ApprenticeshipLocationAndNationalProvider = "apprenticeshipLocationAndNationalProvider";
-        private const string ApprenticeshipIdAndNationalProvider = "apprenticeshipIdAndNationalProvider";
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
@@ -154,13 +150,13 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             switch (filter.SearchOption)
             {
-                case ApprenticeshipLocation:
+                case SearchOption.ApprenticeshipLocation:
                     return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
-                case ApprenticeshipId:
+                case SearchOption.ApprenticeshipId:
                     return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
-                case ApprenticeshipLocationAndNationalProvider:
+                case SearchOption.ApprenticeshipLocationWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
-                case ApprenticeshipIdAndNationalProvider:
+                case SearchOption.ApprenticeshipIdWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
                 default:
                     return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
@@ -171,13 +167,13 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             switch (filter.SearchOption)
             {
-                case ApprenticeshipLocation:
+                case SearchOption.ApprenticeshipLocation:
                     return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
-                case ApprenticeshipId:
+                case SearchOption.ApprenticeshipId:
                     return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
-                case ApprenticeshipLocationAndNationalProvider:
+                case SearchOption.ApprenticeshipLocationWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
-                case ApprenticeshipIdAndNationalProvider:
+                case SearchOption.ApprenticeshipIdWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
                 default:
                     return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
