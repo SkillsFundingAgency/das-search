@@ -71,9 +71,14 @@
 }
 
 @media (min-width: 641px) {
-    .global-header__title,
+    .global-header__title {
+        width: 30%;
+        display: table-cell;
+        vertical-align: middle;
+        height: 70px;
+    }
     .global-header__subtitle {
-        width: 50%;
+        width: 70%;
         display: table-cell;
         vertical-align: middle;
         height: 70px;
@@ -81,20 +86,18 @@
 }
 
 .global-header__title {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.11111;
     margin: 0;
     margin-bottom: 0;
     padding: 0;
 }
-/*
 @media (min-width: 641px) {
     .global-header__title {
-        font-size: 24px
+        font-size: 32px
     }
 }
-*/
 .global-header__subtitle {
     font-size: 16px;
     font-weight: 700;
