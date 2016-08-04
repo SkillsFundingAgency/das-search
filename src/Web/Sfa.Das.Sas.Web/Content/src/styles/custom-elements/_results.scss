@@ -29,6 +29,13 @@
 
 .result-data-list {
     @include data-list(20, true, true);
+    dt {
+        margin-bottom: 0 !important;
+    }
+    dd {
+        margin-bottom: 0 !important;
+    }
+
     @include media(mobile) {
         dt {
             float: left;
@@ -37,16 +44,21 @@
             width: auto;
             margin-right: .5rem;
             font-weight: normal;
+            margin-bottom: 0 !important;
         }
         dd {
             width: auto;
+            margin-bottom: 0 !important;
         }
     }
     dt { 
         max-width: none; 
+        font-weight: normal;
     }
     .address { 
         max-width: none; 
         width: 100%; 
     }
 }
+
+
