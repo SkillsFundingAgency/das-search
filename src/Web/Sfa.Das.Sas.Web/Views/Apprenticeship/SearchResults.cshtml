@@ -242,13 +242,13 @@
                         {
                             <li>
                                 <input value="@item.Value" id="SelectedLevels_@(item.Value)" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                                <label for="SelectedLevels_@(item.Value)" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">Level @item.Value (@item.Count)</label>
+                                <label for="SelectedLevels_@(item.Value)" class="@Html.Raw(item.Count == 0 ? "disabled" : "")">level @item.Value (@item.Count)</label>
                             </li>
                         }
                     </ul>
 
                     <details>
-                        <summary>Help with levels</summary>
+                        <summary>Explain levels</summary>
                         <div class="panel panel-border-narrow">
                             <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
                             <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>

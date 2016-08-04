@@ -288,7 +288,7 @@ WriteLiteral(">\r\n                    <span");
 
 WriteLiteral(" class=\"tag tag-new\"");
 
-WriteLiteral(">new</span>\r\n                    An apprenticeship standard developed by a group " +
+WriteLiteral(">New</span>\r\n                    An apprenticeship standard developed by a group " +
 "of employers. It sets out what the apprentice needs to achieve and how they will" +
 " be assessed.\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n   " +
 "     <div");
