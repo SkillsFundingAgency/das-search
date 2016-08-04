@@ -68,13 +68,13 @@ WriteLiteral(">\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n\r\n   " +
-"             <p");
+WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n     " +
+"           <p");
 
-WriteLiteral(" class=\"subtitle\"");
+WriteLiteral(" class=\"\"");
 
-WriteLiteral(">For employers looking to take on apprenticeships.</p>\r\n            </hgroup>\r\n\r\n" +
-"            <p>You can:</p>\r\n\r\n            <ul");
+WriteLiteral(">For employers looking to take on apprentices.</p>\r\n            </hgroup>\r\n\r\n    " +
+"        <p>You can:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
@@ -85,7 +85,7 @@ WriteLiteral(">\r\n                <li>search for apprenticeship training by job
 WriteLiteral("            ");
 
             
-            #line 24 "..\..\Views\Start\Start.cshtml"
+            #line 23 "..\..\Views\Start\Start.cshtml"
        Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
 
             
