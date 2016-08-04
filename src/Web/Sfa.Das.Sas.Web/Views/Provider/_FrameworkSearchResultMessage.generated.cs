@@ -137,7 +137,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results labelled <span
 WriteLiteralTo(__razor_helper_writer, " class=\"tag tag-new\"");
 
 WriteLiteralTo(__razor_helper_writer, ">National</span> are training providers who are willing to offer apprenticeship t" +
-"raining across England\r\n    </p>\r\n");
+"raining across England.\r\n    </p>\r\n");
 
 
 #line 49 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
@@ -226,7 +226,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results labelled <span
 WriteLiteralTo(__razor_helper_writer, " class=\"tag tag-new\"");
 
 WriteLiteralTo(__razor_helper_writer, ">National</span> are training providers who are willing to offer apprenticeship t" +
-"raining across England\r\n    </p>\r\n");
+"raining across England.\r\n    </p>\r\n");
 
 
 #line 62 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
@@ -449,7 +449,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results labelled <span
 WriteLiteralTo(__razor_helper_writer, " class=\"tag tag-new\"");
 
 WriteLiteralTo(__razor_helper_writer, ">National</span> are training providers who are willing to offer apprenticeship t" +
-"raining across England\r\n    </p>\r\n");
+"raining across England.\r\n    </p>\r\n");
 
 
 #line 93 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
@@ -526,7 +526,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results labelled <span
 WriteLiteralTo(__razor_helper_writer, " class=\"tag tag-new\"");
 
 WriteLiteralTo(__razor_helper_writer, ">National</span> are training providers who are willing to offer apprenticeship t" +
-"raining across England\r\n    </p>\r\n");
+"raining across England.\r\n    </p>\r\n");
 
 
 #line 107 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
