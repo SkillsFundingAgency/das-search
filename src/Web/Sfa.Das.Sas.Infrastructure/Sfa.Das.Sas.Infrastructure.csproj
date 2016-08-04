@@ -44,6 +44,10 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.NLogTarget.2.1.0\lib\net45\Microsoft.ApplicationInsights.NLogTarget.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.ServiceBus.3.3.2\lib\net45-full\Microsoft.ServiceBus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.1\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
@@ -78,6 +82,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
+    <Compile Include="Logging\AzureEventHubTarget.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />

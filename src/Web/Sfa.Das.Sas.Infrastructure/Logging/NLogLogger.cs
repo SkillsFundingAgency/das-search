@@ -120,7 +120,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
             propertiesLocal.Add("Application", _settings.ApplicationName);
             propertiesLocal.Add("Environment", _settings.EnvironmentName);
             propertiesLocal.Add("LoggerType", _loggerType);
-            propertiesLocal.Add("RequestCtx", _context);
+            //propertiesLocal.Add("RequestCtx", _context);
 
             var logEvent = new LogEventInfo(level, _loggerType, msg.ToString());
 
@@ -131,6 +131,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
             foreach (var property in propertiesLocal)
             {
+                logEvent.Fied
                 logEvent.Properties[property.Key] = property.Value;
             }
 
