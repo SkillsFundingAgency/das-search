@@ -39,6 +39,5 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool ShowAll { get; set; }
 
         public bool ShowNationalProviders { get; set; }
-
     }
 }

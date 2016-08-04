@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
 
         public int Take { get; set; }
 
-        public bool NationalProviders { get; set; }
+        public bool NationalProvidersOnly { get; set; }
 
         public bool ShowAll { get; set; }
 

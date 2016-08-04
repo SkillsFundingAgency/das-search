@@ -7,8 +7,8 @@ namespace Sfa.Das.Sas.ApplicationServices
 
     public interface IProviderLocationSearchProvider
     {
-        SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page, int take, SearchFilter filter);
+        SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter);
 
-        SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page, int take, SearchFilter filter);
+        SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter);
     }
 }

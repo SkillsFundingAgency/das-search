@@ -30,13 +30,13 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _applicationSettings = applicationSettings;
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page, int take, SearchFilter filter)
+        public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
             var qryStr = CreateStandardProviderSearchQuery(standardId.ToString(), coordinates, filter);
             return PerformStandardProviderSearchWithQuery(page, take, qryStr);
         }
 
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page, int take, SearchFilter filter)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
             var qryStr = CreateFrameworkProviderSearchQuery(frameworkId.ToString(), coordinates, filter);
             return PerformFrameworkProviderSearchWithQuery(page, take, qryStr);
@@ -146,34 +146,34 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 .Ascending());
         }
 
-        private SearchDescriptor<StandardProviderSearchResultsItem> CreateStandardProviderSearchQuery(string standardId, Coordinate coordinates, SearchFilter filter)
+        private SearchDescriptor<StandardProviderSearchResultsItem> CreateStandardProviderSearchQuery(string standardId, Coordinate coordinates, ProviderSearchFilter filter)
         {
             switch (filter.SearchOption)
             {
-                case SearchOption.ApprenticeshipLocation:
+                case ProviderFilterOptions.ApprenticeshipLocation:
                     return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
-                case SearchOption.ApprenticeshipId:
+                case ProviderFilterOptions.ApprenticeshipId:
                     return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
-                case SearchOption.ApprenticeshipLocationWithNationalProviderOnly:
+                case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
-                case SearchOption.ApprenticeshipIdWithNationalProviderOnly:
+                case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
                 default:
                     return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
             }
         }
 
-        private SearchDescriptor<FrameworkProviderSearchResultsItem> CreateFrameworkProviderSearchQuery(string standardId, Coordinate coordinates, SearchFilter filter)
+        private SearchDescriptor<FrameworkProviderSearchResultsItem> CreateFrameworkProviderSearchQuery(string standardId, Coordinate coordinates, ProviderSearchFilter filter)
         {
             switch (filter.SearchOption)
             {
-                case SearchOption.ApprenticeshipLocation:
+                case ProviderFilterOptions.ApprenticeshipLocation:
                     return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
-                case SearchOption.ApprenticeshipId:
+                case ProviderFilterOptions.ApprenticeshipId:
                     return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
-                case SearchOption.ApprenticeshipLocationWithNationalProviderOnly:
+                case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
-                case SearchOption.ApprenticeshipIdWithNationalProviderOnly:
+                case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
                     return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
                 default:
                     return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);

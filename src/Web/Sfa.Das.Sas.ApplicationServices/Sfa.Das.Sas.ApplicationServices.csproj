@@ -99,8 +99,8 @@
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
-    <Compile Include="Models\SearchFilter.cs" />
-    <Compile Include="Models\SearchOption.cs" />
+    <Compile Include="Models\ProviderSearchFilter.cs" />
+    <Compile Include="Models\ProviderFilterOptions.cs" />
     <Compile Include="Models\ShortlistedApprenticeship.cs" />
     <Compile Include="Models\ShortlistedProvider.cs" />
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />

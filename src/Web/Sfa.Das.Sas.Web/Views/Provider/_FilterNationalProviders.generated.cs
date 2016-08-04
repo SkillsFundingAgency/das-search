@@ -54,17 +54,17 @@ WriteLiteral(">\r\n        <ul>\r\n            <li>\r\n                <input");
 
 WriteLiteral(" value=\"true\"");
 
-WriteLiteral(" name=\"NationalProviders\"");
+WriteLiteral(" name=\"NationalProvidersOnly\"");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 308), Tuple.Create("\"", 343)
-, Tuple.Create(Tuple.Create("", 313), Tuple.Create("NationalProviders_", 313), true)
+WriteAttribute("id", Tuple.Create(" id=\"", 312), Tuple.Create("\"", 351)
+, Tuple.Create(Tuple.Create("", 317), Tuple.Create("NationalProvidersOnly_", 317), true)
             
             #line 8 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-    , Tuple.Create(Tuple.Create("", 331), Tuple.Create<System.Object, System.Int32>(Model.Value
+            , Tuple.Create(Tuple.Create("", 339), Tuple.Create<System.Object, System.Int32>(Model.Value
             
             #line default
             #line hidden
-, 331), false)
+, 339), false)
 );
 
 WriteLiteral(" type=\"checkbox\"");
@@ -73,29 +73,29 @@ WriteLiteral(" ");
 
             
             #line 8 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-                                                                                                            Write(Html.Raw(Model.Checked ? "checked" : ""));
+                                                                                                                    Write(Html.Raw(Model.Checked ? "checked" : ""));
 
             
             #line default
             #line hidden
 WriteLiteral(" />\r\n                <label");
 
-WriteAttribute("for", Tuple.Create(" for=\"", 429), Tuple.Create("\"", 465)
-, Tuple.Create(Tuple.Create("", 435), Tuple.Create("NationalProviders_", 435), true)
+WriteAttribute("for", Tuple.Create(" for=\"", 437), Tuple.Create("\"", 477)
+, Tuple.Create(Tuple.Create("", 443), Tuple.Create("NationalProvidersOnly_", 443), true)
             
             #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 453), Tuple.Create<System.Object, System.Int32>(Model.Value
+, Tuple.Create(Tuple.Create("", 465), Tuple.Create<System.Object, System.Int32>(Model.Value
             
             #line default
             #line hidden
-, 453), false)
+, 465), false)
 );
 
 WriteLiteral(">national providers (");
 
             
             #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-                                                                           Write(Model.Count);
+                                                                               Write(Model.Count);
 
             
             #line default
