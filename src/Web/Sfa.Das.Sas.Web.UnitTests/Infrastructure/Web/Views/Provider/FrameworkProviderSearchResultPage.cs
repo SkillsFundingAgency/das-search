@@ -50,7 +50,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, ".result-message");
-            this.GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name level 3 for 'Test postcode'.");
+            this.GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name, level 3 for 'Test postcode'.");
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name level 0 for 'Test postcode'.");
+            GetPartial(html, ".result-message").Should().Contain("Sorry, there are currently no training providers for Test name: Pathway test name, level 0 for 'Test postcode'.");
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-message p").Should().Contain("1 training provider for the Test name: Pathway test name level 3 apprenticeship.");
+            GetPartial(html, ".result-message p").Should().Contain("1 training provider for the Test name: Pathway test name, level 3 apprenticeship.");
         }
 
         [Test]
@@ -115,9 +115,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-message p").Should().Contain("1 training provider for the Test name: Pathway test name level 0 apprenticeship.");
+            GetPartial(html, ".result-message p").Should().Contain("1 training provider for the Test name: Pathway test name, level 0 apprenticeship.");
 
-            GetPartial(html, "p").Should().Contain("1 training provider for the Test name: Pathway test name level 0 apprenticeship.");
+            GetPartial(html, "p").Should().Contain("1 training provider for the Test name: Pathway test name, level 0 apprenticeship.");
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message p").Should().Contain("7 training providers for the Test name: Pathway test name level 2 apprenticeship.");
+            this.GetPartial(html, ".result-message p").Should().Contain("7 training providers for the Test name: Pathway test name, level 2 apprenticeship.");
         }
 
         [Test]
@@ -160,7 +160,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("7 training providers for the Test name: Pathway test name level 0 apprenticeship.");
+            this.GetPartial(html, "p").Should().Contain("7 training providers for the Test name: Pathway test name, level 0 apprenticeship.");
         }
 
         [Test]
@@ -659,7 +659,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".return-search-results").Should().Be("return to your apprenticeship training search results");
-            GetPartial(html, ".start-again").Should().Be("start your keyword search again");
+            GetPartial(html, ".start-again").Should().Be("start your job role or keyword search again");
         }
 
         [Test]

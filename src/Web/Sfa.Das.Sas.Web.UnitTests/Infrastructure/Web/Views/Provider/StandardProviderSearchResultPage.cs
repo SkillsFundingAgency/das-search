@@ -45,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("1 training provider for the Test name level 2 apprenticeship.");
+            this.GetPartial(html, "p").Should().Contain("1 training provider for the Test name, level 2 apprenticeship.");
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("7 training providers for the Test name level 3 apprenticeship.");
+            this.GetPartial(html, "p").Should().Contain("7 training providers for the Test name, level 3 apprenticeship.");
         }
 
         [Test]
@@ -575,7 +575,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".return-search-results").Should().Be("return to your apprenticeship training search results");
-            GetPartial(html, ".start-again").Should().Be("start your keyword search again");
+            GetPartial(html, ".start-again").Should().Be("start your job role or keyword search again");
         }
 
         [Test]
