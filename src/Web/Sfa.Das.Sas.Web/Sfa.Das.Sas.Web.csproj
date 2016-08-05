@@ -447,6 +447,8 @@
     <Content Include="Content\dist\images\govuk-crest.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\icons\icon-important-2x.png" />
+    <Content Include="Content\dist\images\icons\icon-important.png" />
     <Content Include="Content\dist\images\icons\icon-pointer-2x.png" />
     <Content Include="Content\dist\images\icons\icon-pointer.png" />
     <Content Include="Content\dist\images\open-government-licence.png" />
@@ -478,7 +480,11 @@
     <Content Include="Content\favicons\safari-pinned-tab.svg" />
     <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
     <Content Include="Content\src\images\govuk-crest.svg" />
+    <Content Include="Content\src\images\icons\icon-important-2x.png" />
+    <Content Include="Content\src\images\icons\icon-important.png" />
+    <Content Include="Content\src\images\icons\icon-pointer-2x.png" />
     <Content Include="Content\src\images\icons\icon-pointer.png" />
+    <Content Include="Content\src\images\open-government-licence.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

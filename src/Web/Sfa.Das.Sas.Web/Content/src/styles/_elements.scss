@@ -2361,6 +2361,10 @@ details .arrow {
     }
     a[href='#EditSearch'] {
         text-decoration: none;
+        @media (min-width: 641px) {
+            color: $black;
+            cursor: initial;
+        }
 
         &:after {
             @media (max-width: 640px) {
