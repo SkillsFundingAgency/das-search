@@ -181,7 +181,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
         {
-            <p class="satisfaction-source">
+            <p class="satisfaction-source font-small">
                 Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
             </p>
         }
@@ -215,7 +215,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                 <div class="panel panel-border-narrow">
                     <p>Achievement rates based on latest figures for similar apprenticeship training with this training provider.</p>
                     <p>Achievement rate sample size: @Model.OverallCohort</p>
-                    <p>Source: <a href="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
+                    <p class="font-small">Source: <a href="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
                 </div>
             </details>
         }

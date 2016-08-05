@@ -2553,7 +2553,9 @@ details .arrow {
 }
 
 .postcode-form.search-box {
-    overflow: hidden;
+    > div {
+        overflow: hidden;
+    }
     input[type='submit'] {
         @media (max-width: 640px) {
             display: block;
