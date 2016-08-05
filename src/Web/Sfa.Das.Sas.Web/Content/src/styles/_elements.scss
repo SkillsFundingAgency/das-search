@@ -2385,7 +2385,9 @@ details .arrow {
             }   
         }
         #EditSearch {
-            display: none
+            @media (max-width: 640px) {
+                display: none
+            }
         }
     }
 }
