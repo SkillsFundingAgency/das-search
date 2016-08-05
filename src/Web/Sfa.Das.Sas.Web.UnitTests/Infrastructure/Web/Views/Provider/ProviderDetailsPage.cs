@@ -495,7 +495,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = details.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".national-message").Should().NotBeNullOrEmpty();
-            GetPartial(html, ".national-message").Should().Be("National This training provider is willing to offer apprenticeship training across England");
+            GetPartial(html, ".national-message").Should().Be("National This training provider is willing to offer apprenticeship training across England.");
         }
 
         [Test]

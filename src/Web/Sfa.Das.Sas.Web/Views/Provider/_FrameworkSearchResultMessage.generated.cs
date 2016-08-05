@@ -350,7 +350,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b>\' apprenticeship.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
 #line 79 "..\..\Views\Provider\_FrameworkSearchResultMessage.cshtml"
