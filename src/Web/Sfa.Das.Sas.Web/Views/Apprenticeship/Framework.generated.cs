@@ -230,7 +230,7 @@ WriteAttribute("href", Tuple.Create(" href=\"", 1349), Tuple.Create("\"", 1484)
 , 1356), false)
 );
 
-WriteLiteral(">\r\n                        Find training Providers\r\n                    </a>\r\n");
+WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n");
 
 WriteLiteral("                    ");
 
@@ -948,7 +948,7 @@ WriteAttribute("href", Tuple.Create(" href=\"", 8488), Tuple.Create("\"", 8625)
 , 8495), false)
 );
 
-WriteLiteral(">\r\n                    Find training Providers\r\n                </a>\r\n");
+WriteLiteral(">\r\n                    Find training providers\r\n                </a>\r\n");
 
 WriteLiteral("                ");
 

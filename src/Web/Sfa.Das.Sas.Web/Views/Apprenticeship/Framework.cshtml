@@ -36,7 +36,7 @@
                 <aside class="hidden-for-mobile-tablet">
 
                     <a class="button ui-find-training-providers" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                        Find training Providers
+                        Find training providers
                     </a>
                     @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted)
                 </aside>
@@ -186,7 +186,7 @@
 
         <div id="bottom-actions">
                 <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
-                    Find training Providers
+                    Find training providers
                 </a>
                 @GetShortlistLink(@Model.FrameworkId, @Model.IsShortlisted)
         </div>
