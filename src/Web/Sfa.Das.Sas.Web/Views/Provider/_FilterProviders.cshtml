@@ -7,7 +7,7 @@
             @foreach (var item in Model)
             {
                 <li>
-                    <input value="@item.Value" name="DeliveryModes"  id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") />
+                    <input value="@item.Value" name="DeliveryModes"  id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
                     <label for="DeliveryModes_@item.Value">@item.Title (@item.Count)</label>
                 </li>
             }
