@@ -12,6 +12,7 @@ namespace Sfa.Das.Sas.Web
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/scripts/polyfills/*.js",
+                "~/scripts/pages/*.js",
                 "~/scripts/app/*.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
