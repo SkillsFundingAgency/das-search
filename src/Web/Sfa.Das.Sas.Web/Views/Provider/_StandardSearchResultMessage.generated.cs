@@ -183,7 +183,7 @@ WriteLiteralTo(__razor_helper_writer, ", level ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship in England.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b> in England.\r\n    </p>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b");
 
@@ -272,7 +272,7 @@ WriteLiteralTo(__razor_helper_writer, ", level ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship in England.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b> in England.\r\n    </p>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b");
 
@@ -357,7 +357,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b>\' apprenticeship.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
 #line 78 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
@@ -424,7 +424,7 @@ WriteLiteralTo(__razor_helper_writer, ", level ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>.\r\n    </p>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b");
 
@@ -509,7 +509,7 @@ WriteLiteralTo(__razor_helper_writer, ", level ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship.\r\n    </p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</b>.\r\n    </p>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b>");
 
@@ -527,7 +527,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results labelled <span
 WriteLiteralTo(__razor_helper_writer, " class=\"tag tag-new\"");
 
 WriteLiteralTo(__razor_helper_writer, ">National</span> are training providers who are willing to offer apprenticeship t" +
-"raining across England\r\n    </p>\r\n");
+"raining across England.\r\n    </p>\r\n");
 
 
 #line 105 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
