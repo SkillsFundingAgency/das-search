@@ -49,7 +49,7 @@
                         <ul class="list list-bullet">
                             @if (Model.TotalProvidersCountry > 0)
                             {
-                                <li class="total-providers-country">@Html.ActionLink($"view all ({@Model.TotalProvidersCountry}) training providers", "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.FrameworkName in England</li>
+                                <li class="total-providers-country">@Html.ActionLink($"view all ({@Model.TotalProvidersCountry}) training providers", "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for <b>@Model.FrameworkName</b> in England</li>
                             }
                             <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { })</li>
                             <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
