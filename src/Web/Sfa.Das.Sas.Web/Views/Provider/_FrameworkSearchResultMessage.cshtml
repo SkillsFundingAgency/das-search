@@ -56,7 +56,7 @@
 @helper  RenderAllOneResults()
 {
     <p id="standard-provider-search-message">
-       <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> in England.
+       <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> apprenticeship in England.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -69,7 +69,7 @@
 @helper  RenderAllResults()
 {
     <p id="standard-provider-search-message">
-        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> in England.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> apprenticeship in England.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -82,14 +82,14 @@
 @helper RenderZeroResult()
 {
     <p>
-        Sorry, there are currently no training providers for <b>@Model.Title level @Model.FrameworkLevel</b> for '<b id="postalcode">@Model.PostCode</b>'.
+        Sorry, there are currently no training providers for <b>@Model.Title level @Model.FrameworkLevel</b> for '<b id="postalcode">@Model.PostCode</b>' apprenticeship.
     </p>
 }
 
 @helper  RenderMessageOneResult()
 {
     <p>
-        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b>.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> apprenticeship.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -103,7 +103,7 @@
 @helper  RenderMessage()
 {
     <p>
-        <b id="total-results">@Model.TotalResults</b> training providers for the <b>@Model.Title level @Model.FrameworkLevel</b>.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b>@Model.Title level @Model.FrameworkLevel</b> apprenticeship.
     </p>
     <p>
         Results are ordered by distance from '<b>@Model.PostCode</b>'.
