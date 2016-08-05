@@ -159,6 +159,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     ResultsToTake = takeElements,
                     StandardId = standardId,
                     StandardName = standardName,
+                    StandardLevel = standard.Level,
                     PostCode = postCode,
                     Hits = searchResults.Hits,
                     TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,

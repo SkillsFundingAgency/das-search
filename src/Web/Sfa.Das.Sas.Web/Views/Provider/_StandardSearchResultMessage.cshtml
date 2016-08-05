@@ -47,7 +47,7 @@
 @helper  RenderAllOneResults()
 {
     <p id="standard-provider-search-message">
-         <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.StandardName</b> apprenticeship in England.
+         <b id="total-results">@Model.TotalResults</b> training provider for the <b id="standard-name">@Model.StandardName level @Model.StandardLevel</b> apprenticeship in England.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -60,7 +60,7 @@
 @helper  RenderAllResults()
 {
     <p id="standard-provider-search-message">
-        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.StandardName</b> apprenticeship in England.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.StandardName level @Model.StandardLevel</b> apprenticeship in England.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -73,14 +73,14 @@
 @helper RenderZeroResult()
 {
     <p id="standard-provider-search-message">
-        Sorry, there are currently no training providers for <b>@Model.StandardName</b> for '<b id="postalcode">@Model.PostCode</b>' apprenticeship.
+        Sorry, there are currently no training providers for <b>@Model.StandardName level @Model.StandardLevel</b> for '<b id="postalcode">@Model.PostCode</b>' apprenticeship.
     </p>
 }
 
 @helper  RenderMessageOneResult()
 {
     <p id="standard-provider-search-message">
-        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.StandardName</b> apprenticeship.
+        <b id="total-results">@Model.TotalResults</b> training provider for the <b id="standard-name">@Model.StandardName level @Model.StandardLevel</b> apprenticeship.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -94,7 +94,7 @@
 @helper  RenderMessage()
 {
     <p id="standard-provider-search-message">
-        <b id="total-results">@Model.TotalResults</b> training providers for the <b>@Model.StandardName</b> apprenticeship.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b>@Model.StandardName level @Model.StandardLevel</b> apprenticeship.
     </p>
     <p>
         Results are ordered by distance from '<b>@Model.PostCode</b>'.

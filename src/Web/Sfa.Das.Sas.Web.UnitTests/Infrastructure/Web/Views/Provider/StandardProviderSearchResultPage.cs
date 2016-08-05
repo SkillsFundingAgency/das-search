@@ -39,12 +39,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test name",
+                StandardLevel = 2,
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training provider for the apprenticeship: Test name.");
+            this.GetPartial(html, "p").Should().Contain("1 training provider for the Test name level 2 apprenticeship.");
         }
 
         [Test]
@@ -57,12 +58,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test name",
+                StandardLevel = 3,
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 HasError = false
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training providers for the apprenticeship: Test name.");
+            this.GetPartial(html, "p").Should().Contain("7 training providers for the Test name level 3 apprenticeship.");
         }
 
         [Test]
