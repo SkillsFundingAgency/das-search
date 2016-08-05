@@ -56,7 +56,7 @@
 @helper  RenderAllOneResults()
 {
     <p id="standard-provider-search-message">
-        There is <b id="total-results">@Model.TotalResults</b> training provider for <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> in England.
+       <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> in England.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -69,7 +69,7 @@
 @helper  RenderAllResults()
 {
     <p id="standard-provider-search-message">
-        There are <b id="total-results">@Model.TotalResults</b> training providers for <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> in England.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b> in England.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -89,7 +89,7 @@
 @helper  RenderMessageOneResult()
 {
     <p>
-        There is <b id="total-results">@Model.TotalResults</b> training provider for the apprenticeship: <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b>.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b id="standard-name">@Model.Title level @Model.FrameworkLevel</b>.
     </p>
     <p>
         Results are ordered by distance from '<b id="postalcode">@Model.PostCode</b>'.
@@ -103,7 +103,7 @@
 @helper  RenderMessage()
 {
     <p>
-        There are <b id="total-results">@Model.TotalResults</b> training providers for the apprenticeship: <b>@Model.Title level @Model.FrameworkLevel</b>.
+        <b id="total-results">@Model.TotalResults</b> training providers for the <b>@Model.Title level @Model.FrameworkLevel</b>.
     </p>
     <p>
         Results are ordered by distance from '<b>@Model.PostCode</b>'.
