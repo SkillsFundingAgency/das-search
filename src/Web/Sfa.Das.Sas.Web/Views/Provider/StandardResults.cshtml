@@ -41,6 +41,9 @@
     }
     else if (Model.TotalResults == 0)
     {
+        <p id="standard-provider-search-message">
+            Sorry, there are currently no training providers for <b>@Model.StandardName level @Model.StandardLevel</b> for '<b id="postalcode">@Model.PostCode</b>' apprenticeship.
+        </p>
         <div>
             <p>You can:</p>
             <ul class="list list-bullet">
