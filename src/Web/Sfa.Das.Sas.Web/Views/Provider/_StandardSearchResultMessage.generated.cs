@@ -174,11 +174,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " level ");
+WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
 #line 50 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                                                   WriteTo(__razor_helper_writer, Model.StandardLevel);
+                                                                                                    WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
 #line default
@@ -263,11 +263,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " level ");
+WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
 #line 63 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                                                   WriteTo(__razor_helper_writer, Model.StandardLevel);
+                                                                                                    WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
 #line default
@@ -335,11 +335,11 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        Sorry, there are currently n
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " level ");
+WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
 #line 76 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                            WriteTo(__razor_helper_writer, Model.StandardLevel);
+                                                             WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
 #line default
@@ -352,7 +352,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 76 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                                                             WriteTo(__razor_helper_writer, Model.PostCode);
+                                                                                                              WriteTo(__razor_helper_writer, Model.PostCode);
 
 
 #line default
@@ -415,11 +415,11 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " level ");
+WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
 #line 83 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                                                  WriteTo(__razor_helper_writer, Model.StandardLevel);
+                                                                                                   WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
 #line default
@@ -500,11 +500,11 @@ WriteLiteralTo(__razor_helper_writer, "</b> training providers for the <b>");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " level ");
+WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
 #line 97 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                                WriteTo(__razor_helper_writer, Model.StandardLevel);
+                                                                                 WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
 #line default
