@@ -96,9 +96,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             };
         }
 
-        private ProviderSearchResponseBase<ProviderFrameworkSearchResults>.ResponseCodes GetResponseCode(string standardResponseCode)
+        private ProviderSearchResponseBase<ProviderFrameworkSearchResults>.ResponseCodes GetResponseCode(string frameworkResponseCode)
         {
-            switch (standardResponseCode)
+            switch (frameworkResponseCode)
             {
                 case LocationLookupResponse.WrongPostcode:
                     return FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;

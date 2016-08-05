@@ -6,10 +6,6 @@
     {
         @RenderErrorMessage()
     }
-    else if (Model.ShowNationalProviders && Model.TotalResults == 0)
-    {
-        @RenderZeroNationalProviders()
-    }
     else if (Model.ShowAll && Model.TotalResults == 1)
     {
         @RenderAllOneResults()
@@ -18,15 +14,11 @@
     {
         @RenderAllResults()
     }
-    else if (Model.TotalResults == 0)
-    {
-        @RenderZeroResult();
-    }
     else if (Model.TotalResults == 1)
     {
         @RenderMessageOneResult()
     }
-    else
+    else if(Model.TotalResults != 0)
     {
         @RenderMessage()
     }

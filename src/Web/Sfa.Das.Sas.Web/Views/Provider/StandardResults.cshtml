@@ -26,99 +26,112 @@
         </div>
     </div>
 
-            @if (Model.TotalResults == 0)
-            {
-                <div>
-                    <p>You can:</p>
-                    <ul class="list list-bullet">
-                        @if (Model.TotalResultsForCountry > 0)
-                        {
-                            <li class="total-providers-country">@Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalResultsForCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.StandardName in England</li>
-                        }
-                        <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { })</li>
-                        <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
-                    </ul>
-                </div>
-            }
+    @if (Model.ShowNationalProviders && Model.TotalResults == 0)
+    {
+        <p id="standard-provider-search-message">
+            Sorry, there are currently no results for the filters you applied'.
+        </p>
+        <div>
+            <p>You can:</p>
+            <ul class="list list-bullet">
+                <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "StandardResults", "Provider", new { @apprenticeshipid = @Model.FrameworkId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms }, new { })</li>
+                <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
+            </ul>
+        </div>
+    }
+    else if (Model.TotalResults == 0)
+    {
+        <div>
+            <p>You can:</p>
+            <ul class="list list-bullet">
+                @if (Model.TotalResultsForCountry > 0)
+                {
+                    <li class="total-providers-country">@Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalResultsForCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for @Model.StandardName in England</li>
+                }
+                <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { })</li>
+                <li class="start-again">@Html.ActionLink("start your keyword search again", "Search", "Apprenticeship")</li>
+            </ul>
+        </div>
+    }
 
-            <div class="grid-row">
-                <div class="column-third">
-                    <div class="editSearch">
-                        @if (Model.Hits.Any() && !Model.HasError)
-                        {
-                            <h2 class="heading-medium">
-                                <a href="#EditSearch">Edit search</a>
-                            </h2>
+    <div class="grid-row">
+        <div class="column-third">
+            <div class="editSearch">
+                @if (Model.Hits.Any() && !Model.HasError)
+                {
+                    <h2 class="heading-medium">
+                        <a href="#EditSearch">Edit search</a>
+                    </h2>
                             <div id="EditSearch">
                                 @FilterForm("filter-box")
                             </div>
-                        }
-                    </div>
-                </div>
-
-                <div id="provider-results" class="column-two-thirds">
-                    @{
-                        Html.RenderPartial("_StandardProviderInformation");
-                    }
-                    <div class="page-navigation">
-                        @GetPaginationBackLink()
-                        @GetPaginationNextLink()
-                    </div>
-                </div>
+                }
             </div>
+        </div>
+
+        <div id="provider-results" class="column-two-thirds">
+            @{
+                Html.RenderPartial("_StandardProviderInformation");
+            }
+            <div class="page-navigation">
+                @GetPaginationBackLink()
+                @GetPaginationNextLink()
+            </div>
+        </div>
+    </div>
 </main>
 
 @if (Model.TotalResults == 0)
 {
     <script>
-        window.onload = function() {
+        window.onload = function () {
             SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
         }
-    </script> 
+    </script>
 }
 
 @helper GetPaginationBackLink()
 {
-    if (Model.ActualPage > 1)
-    {
-        var previousPage = @Model.ActualPage - 1;
-        var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
+if (Model.ActualPage > 1)
+{
+    var previousPage = @Model.ActualPage - 1;
+    var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
 
         <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
             <i class="arrow-button fa fa-angle-left"></i>
             <span class="description">Previous <span class="hide-mob">page</span></span>
             <span class="counter">@previousPage of @Model.LastPage</span>
         </a>
-    }
+}
 }
 
 @helper GetPaginationNextLink()
 {
-    if (Model.ActualPage < Model.LastPage)
-    {
-        var nextPage = @Model.ActualPage + 1;
+if (Model.ActualPage < Model.LastPage)
+{
+    var nextPage = @Model.ActualPage + 1;
 
-        var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
+    var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
         <a href="@url" style="visibility: visible" class="page-navigation__btn next">
             <i class="arrow-button fa fa-angle-right"></i>
             <span class="description">Next <span class="hide-mob">page</span></span>
             <span class="counter">@nextPage of @Model.LastPage</span>
         </a>
-    }
+}
 }
 
 @helper FilterForm(string cssClass)
 {
-    if (!Model.DeliveryModes.IsNullOrEmpty())
-    {
-        var hideMenu = Model.DeliveryModes.All(deliveryMode => deliveryMode.Count == 0);
+if (!Model.DeliveryModes.IsNullOrEmpty())
+{
+    var hideMenu = Model.DeliveryModes.All(deliveryMode => deliveryMode.Count == 0);
 
-        if (@Model.TotalResults != 0 || !hideMenu)
-        {
+    if (@Model.TotalResults != 0 || !hideMenu)
+    {
             <div class="@cssClass">
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId"/>
+                    <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
                     <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
                     <input type="hidden" name="keywords" value="@Model.SearchTerms" />
                     @{
@@ -130,8 +143,8 @@
                     <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
                 </form>
             </div>
-        }
-    }
+                            }
+                        }
 }
 
 @functions
@@ -139,7 +152,7 @@
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode }, { "page", page }, { "showall", Model.ShowAll} };
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode }, { "page", page }, { "showall", Model.ShowAll } };
         int i = 0;
         foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
         {
