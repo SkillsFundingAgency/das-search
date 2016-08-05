@@ -553,10 +553,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="robots.txt" />
-    <Content Include="scripts\app\cookie-store.js" />
-    <Content Include="scripts\app\cookie-subkey.js" />
-    <Content Include="scripts\app\cookie.js" />
-    <Content Include="scripts\app\shortlist.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <None Include="scripts\jquery-3.0.0.intellisense.js" />
@@ -570,13 +566,7 @@
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\js-cookie\js.cookie.js" />
-    <Content Include="scripts\pages\framework-detail.js" />
-    <Content Include="scripts\pages\apprenticeship-searchResults.js" />
-    <Content Include="scripts\pages\provider-search-results.js" />
     <Content Include="scripts\polyfills\Array.js" />
-    <Content Include="scripts\pages\dashboard-overview.js" />
-    <Content Include="scripts\pages\provider-detail.js" />
-    <Content Include="scripts\spec\cookie-store.spec.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\app\analytics.js" />
@@ -588,7 +578,6 @@
     <Content Include="scripts\vendor\jquery-1.12.3.js" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.js" />
     <Content Include="scripts\spec\sample.spec.js" />
-    <Content Include="scripts\pages\standard-detail.js" />
     <Content Include="scripts\app\ui.js" />
     <Content Include="scripts\app\validation.js" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.js" />
