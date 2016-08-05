@@ -233,6 +233,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.ShowAll, y => y.MapFrom(z => z.ShowAllProviders))
                 .ForMember(x => x.StandardId, y => y.MapFrom(z => z.Results.StandardId))
                 .ForMember(x => x.StandardName, y => y.MapFrom(z => z.Results.StandardName))
+                .ForMember(x => x.StandardLevel, y => y.MapFrom(z => z.Results.StandardLevel))
                 .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.Results.TotalResults))
                 .ForMember(x => x.ShowNationalProviders, y => y.MapFrom(z => z.ShowOnlyNationalProviders))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => !z.Success))

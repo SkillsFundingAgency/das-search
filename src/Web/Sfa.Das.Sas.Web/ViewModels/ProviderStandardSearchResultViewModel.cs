@@ -2,8 +2,6 @@
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    using System.Collections;
-
     public class ProviderStandardSearchResultViewModel
     {
         public long TotalResults { get; set; }
@@ -17,6 +15,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int StandardId { get; set; }
 
         public string StandardName { get; set; }
+
+        public object StandardLevel { get; set; }
 
         public string PostCode { get; set; }
 
