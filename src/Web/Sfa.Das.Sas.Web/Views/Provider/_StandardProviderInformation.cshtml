@@ -38,7 +38,7 @@
 @helper  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
     <dt>Distance:</dt>
-    <dd class="distance">@item.Distance miles away</dd>
+    <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
 
     if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
     {

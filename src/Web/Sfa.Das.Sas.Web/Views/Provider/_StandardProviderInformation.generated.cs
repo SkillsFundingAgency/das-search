@@ -80,7 +80,16 @@ WriteTo(__razor_helper_writer, item.Distance);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " miles away</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, " ");
+
+
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+           WriteTo(__razor_helper_writer, item.Distance == 1 ? "mile" : "miles");
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " away</dd>\r\n");
 
 
 #line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
