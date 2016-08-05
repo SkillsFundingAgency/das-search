@@ -5,7 +5,7 @@
     <div class="toggled-content">
         <ul>
             <li>
-                <input value="true" name="NationalProvidersOnly" id="NationalProvidersOnly_@Model.Value" type="checkbox" @Html.Raw(Model.Checked ? "checked" : "") />
+                <input value="true" name="NationalProvidersOnly" id="NationalProvidersOnly_@Model.Value" type="checkbox" @Html.Raw(Model.Checked ? "checked" : "")  @Html.Raw(Model.Count == 0 ? "disabled" : "")/>
                 <label for="NationalProvidersOnly_@Model.Value">national providers (@Model.Count)</label>
             </li>   
         </ul>

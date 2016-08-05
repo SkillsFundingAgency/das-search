@@ -78,17 +78,26 @@ WriteLiteral(" ");
             
             #line default
             #line hidden
-WriteLiteral(" />\r\n                <label");
+WriteLiteral("  ");
 
-WriteAttribute("for", Tuple.Create(" for=\"", 437), Tuple.Create("\"", 477)
-, Tuple.Create(Tuple.Create("", 443), Tuple.Create("NationalProvidersOnly_", 443), true)
             
-            #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 465), Tuple.Create<System.Object, System.Int32>(Model.Value
+            #line 8 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+                                                                                                                                                               Write(Html.Raw(Model.Count == 0 ? "disabled" : ""));
+
             
             #line default
             #line hidden
-, 465), false)
+WriteLiteral("/>\r\n                <label");
+
+WriteAttribute("for", Tuple.Create(" for=\"", 483), Tuple.Create("\"", 523)
+, Tuple.Create(Tuple.Create("", 489), Tuple.Create("NationalProvidersOnly_", 489), true)
+            
+            #line 9 "..\..\Views\Provider\_FilterNationalProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 511), Tuple.Create<System.Object, System.Int32>(Model.Value
+            
+            #line default
+            #line hidden
+, 511), false)
 );
 
 WriteLiteral(">national providers (");
