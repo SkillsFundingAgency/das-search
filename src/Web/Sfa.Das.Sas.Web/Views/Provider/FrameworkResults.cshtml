@@ -147,22 +147,11 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
                             @{
                                 Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                             }
+                            @{
+                                Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
+                            }
                             <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
                         </form>
-                        <details>
-                            <summary>Explain training options</summary>
-                            <div class="panel panel-border-narrow">
-                                <p>
-                                    <b>Day release:</b> for example one day a week at the training provider's location.
-                                </p>
-                                <p>
-                                    <b>Block release:</b> for example 3-4 weeks at the training provider's location.
-                                </p>
-                                <p>
-                                    <b>At your location:</b> the training provider comes to your workplace.
-                                </p>
-                            </div>
-                        </details>
                     </div>
                 </div>
             </div>

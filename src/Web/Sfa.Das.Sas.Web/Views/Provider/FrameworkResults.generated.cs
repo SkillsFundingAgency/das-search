@@ -363,6 +363,22 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n");
 
 #line default
 #line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 150 "..\..\Views\Provider\FrameworkResults.cshtml"
+                            
+
+#line default
+#line hidden
+
+#line 150 "..\..\Views\Provider\FrameworkResults.cshtml"
+                              
+                                Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
+                            
+
+#line default
+#line hidden
 WriteLiteralTo(__razor_helper_writer, "\r\n                            <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
@@ -371,31 +387,11 @@ WriteLiteralTo(__razor_helper_writer, " value=\"Update results\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"button margin-top-x2 postcode-search-button\"");
 
-WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\n                        <details>\r\n        " +
-"                    <summary>Explain training options</summary>\r\n               " +
-"             <div");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"panel panel-border-narrow\"");
-
-WriteLiteralTo(__razor_helper_writer, @">
-                                <p>
-                                    <b>Day release:</b> for example one day a week at the training provider's location.
-                                </p>
-                                <p>
-                                    <b>Block release:</b> for example 3-4 weeks at the training provider's location.
-                                </p>
-                                <p>
-                                    <b>At your location:</b> the training provider comes to your workplace.
-                                </p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-");
+WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\n                    </div>\r\n               " +
+" </div>\r\n            </div>\r\n");
 
 
-#line 169 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 158 "..\..\Views\Provider\FrameworkResults.cshtml"
                                     }
                                 }
 
@@ -404,12 +400,12 @@ WriteLiteralTo(__razor_helper_writer, @">
 #line hidden
 });
 
-#line 171 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 160 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 174 "..\..\Views\Provider\FrameworkResults.cshtml"
+        #line 163 "..\..\Views\Provider\FrameworkResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
