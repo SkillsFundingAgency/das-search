@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldShowZeroResultsMessageWhenThereAreNoResults()
         {
-            var detail = new FrameworkSearchResultMessage();
+            var detail = new FrameworkResults();
             var model = new ProviderFrameworkSearchResultViewModel
             {
                 Title = "Test name: Pathway test name",
@@ -56,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldShowZeroResultsMessageWhenThereAreNoResultsAndThereIsNoLevel()
         {
-            var detail = new FrameworkSearchResultMessage();
+            var detail = new FrameworkResults();
             var model = new ProviderFrameworkSearchResultViewModel
             {
                 Title = "Test name: Pathway test name",
@@ -639,7 +639,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void WhenSearchResultHasNoResultShouldShowUsefulInformationMessage()
         {
-            var detail = new FrameworkSearchResultMessage();
+            var detail = new FrameworkResults();
             var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 0,
@@ -690,7 +690,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void WhenSearchResultHasNoResultButThereAreProvidersInCountryShouldShowCountMessage()
         {
-            var detail = new FrameworkSearchResultMessage();
+            var detail = new FrameworkResults();
             var model = new ProviderFrameworkSearchResultViewModel
             {
                 TotalResults = 0,
@@ -709,7 +709,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".total-providers-country").Should().NotBeEmpty();
+            //GetPartial(html, ".total-providers-country").Should().NotBeEmpty();
             var expectedText = string.Format("view all ({0}) training providers for Test framework name in England", model.TotalProvidersCountry);
             GetPartial(html, ".total-providers-country").Should().Be(expectedText);
         }

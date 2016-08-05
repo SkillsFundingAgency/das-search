@@ -13,16 +13,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
     public sealed class StandardProviderSearchResultPage : ViewTestBase
     {
         [Test]
-        public void ShouldEmptyModel()
-        {
-            var detail = new StandardSearchResultMessage();
-            var model = new ProviderStandardSearchResultViewModel();
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, "p").Should().Contain("Sorry, there are currently no training providers for  for ''.");
-        }
-
-        [Test]
         public void ShouldShowAnErrorWhenSomethingIsWrong()
         {
             var detail = new StandardSearchResultMessage();
@@ -564,7 +554,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void WhenSearchResultHasNoResultShouldShowUsefulInformationMessage()
         {
-            var detail = new StandardSearchResultMessage();
+            var detail = new StandardResults();
             var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 0,
@@ -613,7 +603,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void WhenSearchResultHasNoResultButThereAreProvidersInCountryShouldShowCountMessage()
         {
-            var detail = new StandardSearchResultMessage();
+            var detail = new StandardResults();
             var model = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 0,
