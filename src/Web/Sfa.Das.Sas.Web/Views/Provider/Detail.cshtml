@@ -39,12 +39,12 @@
                     </span>
                 </header>
                 <dl class="data-list">
-                    @GetStandardPropertyAsLinkHtml("Website", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
-                    @GetStandardPropertyHtml("Phone", "phone", Model.ContactInformation.Phone)
-                    @GetEmailPropertyHtml("Email", "email", Model.ContactInformation.Email)
-                    @GetStandardPropertyAsLinkHtml("Contact page", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
-                    @GetDeliveryModesHtml("Training options", Model.DeliveryModes)
-                    @ShowTrainingLocation("Training location")
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
+                    @GetStandardPropertyHtml("Phone:", "phone", Model.ContactInformation.Phone)
+                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
+                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
+                    @ShowTrainingLocation("Training location:")
                 </dl>
 
             </section>
