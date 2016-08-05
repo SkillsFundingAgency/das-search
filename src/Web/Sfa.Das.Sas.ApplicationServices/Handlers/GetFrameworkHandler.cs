@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
+﻿using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -12,12 +8,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class GetFrameworkHandler : IRequestHandler<GetFrameworkQuery, GetFrameworkResponse>
     {
         private readonly IGetFrameworks _getFrameworks;
-        private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public GetFrameworkHandler(IGetFrameworks getFrameworks, IShortlistCollection<int> shortlistCollection)
+        public GetFrameworkHandler(IGetFrameworks getFrameworks)
         {
             _getFrameworks = getFrameworks;
-            _shortlistCollection = shortlistCollection;
         }
 
         public GetFrameworkResponse Handle(GetFrameworkQuery message)
@@ -41,9 +35,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
 
             response.Framework = framework;
-
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListName);
-            response.IsShortlisted = shortlistedApprenticeships?.Any(x => x.ApprenticeshipId.Equals(response.Framework.FrameworkId)) ?? false;
             response.SearchTerms = message.Keywords;
 
             return response;

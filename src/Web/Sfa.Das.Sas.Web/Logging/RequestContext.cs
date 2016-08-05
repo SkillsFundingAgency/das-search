@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Web.Logging

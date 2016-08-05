@@ -21,7 +21,5 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool HasError { get; set; }
 
         public IEnumerable<LevelAggregationViewModel> AggregationLevel { get; set; }
-        public Dictionary<int, bool> ShortlistedStandards { get; set; }
-        public Dictionary<int, bool> ShortlistedFrameworks { get; set; }
     }
 }

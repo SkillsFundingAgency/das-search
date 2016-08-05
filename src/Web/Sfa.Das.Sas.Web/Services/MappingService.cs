@@ -83,7 +83,6 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.NationalProvider, y => y.Ignore())
                 .ForMember(x => x.AchievementRateMessage, y => y.Ignore())
                 .ForMember(x => x.StandardCode, y => y.Ignore())
-                .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftemap
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
                 .ForMember(x => x.LocationId, y => y.Ignore())
                 .ForMember(x => x.LocationName, y => y.Ignore())
@@ -100,7 +99,6 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Level, y => y.Ignore())
                 .ForMember(x => x.FrameworkId, y => y.Ignore())
                 .ForMember(x => x.FrameworkCode, y => y.Ignore())
-                .ForMember(x => x.IsShortlisted, y => y.Ignore()) // Done in aftermap
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.Ignore())
                 .ForMember(x => x.LocationId, y => y.Ignore())
                 .ForMember(x => x.LocationName, y => y.Ignore())
@@ -109,7 +107,6 @@ namespace Sfa.Das.Sas.Web.Services
 
             cfg.CreateMap<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>()
                 .ForMember(x => x.StandardCode, y => y.MapFrom(z => z.StandardCode))
-                .ForMember(x => x.IsShortlisted, y => y.Ignore())
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
                 .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.OverallAchievementRate)))
@@ -121,7 +118,6 @@ namespace Sfa.Das.Sas.Web.Services
 
             cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
                 .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.FrameworkId))
-                .ForMember(x => x.IsShortlisted, y => y.Ignore())
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.EmployerSatisfaction))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.LearnerSatisfaction))
                 .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.OverallAchievementRate)))
@@ -150,7 +146,6 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(x => x.ApprenticeshipNameWithLevel, y => y.Ignore())
             .ForMember(x => x.ApprenticeshipLevel, y => y.Ignore())
             .ForMember(x => x.ApprenticeshipType, y => y.Ignore())
-            .ForMember(x => x.IsShortlisted, y => y.Ignore())
             .ForMember(x => x.SurveyUrl, y => y.Ignore())
             .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.Product.AchievementRate)))
             .ForMember(x => x.AchievementRate, y => y.MapFrom(z => z.Product.AchievementRate))
@@ -165,8 +160,6 @@ namespace Sfa.Das.Sas.Web.Services
             // Apprenticeship search listing  -> mix of standard and framework
             cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
                 .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
-                .ForMember(x => x.ShortlistedFrameworks, y => y.MapFrom(z => z.ShortlistedFrameworks))
-                .ForMember(x => x.ShortlistedStandards, y => y.MapFrom(z => z.ShortlistedStandards))
                 .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
 
             // Nexzt
@@ -183,7 +176,6 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.StandardId, y => y.MapFrom(z => z.Standard.StandardId))
                 .ForMember(x => x.AssessmentPlanPdf, y => y.MapFrom(z => z.Standard.AssessmentPlanPdf))
                 .ForMember(x => x.EntryRequirements, y => y.MapFrom(z => z.Standard.EntryRequirements))
-                .ForMember(x => x.IsShortlisted, y => y.MapFrom(z => z.IsShortlisted))
                 .ForMember(x => x.Level, y => y.MapFrom(z => z.Standard.Level))
                 .ForMember(x => x.OverviewOfRole, y => y.MapFrom(z => z.Standard.OverviewOfRole))
                 .ForMember(x => x.ProfessionalRegistration, y => y.MapFrom(z => z.Standard.ProfessionalRegistration))
@@ -204,7 +196,6 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.ExpiryDateString, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetExpirydateAsString(z.Framework.ExpiryDate)))
                 .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.Framework.FrameworkId))
                 .ForMember(x => x.FrameworkOverview, y => y.MapFrom(z => z.Framework.FrameworkOverview))
-                .ForMember(x => x.IsShortlisted, y => y.MapFrom(z => z.IsShortlisted))
                 .ForMember(x => x.JobRoles, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTitlesFromJobRoles(z.Framework.JobRoleItems)))
                 .ForMember(x => x.KnowledgeQualification, y => y.MapFrom(z => z.Framework.KnowledgeQualification))
                 .ForMember(x => x.Level, y => y.MapFrom(z => z.Framework.Level))
@@ -247,11 +238,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.MapFrom(z => !z.Success))
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
-                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
-                .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
-                    src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
-                        x.LocationId == m.LocationId &&
-                        x.Ukprn == m.UkPrn) ?? false));
+                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results));
 
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
@@ -274,11 +261,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.TotalProvidersCountry, y => y.MapFrom(z => z.TotalResultsForCountry))
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
-                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
-                .AfterMap((src, dest) => dest.Hits.ForEach(m => m.IsShortlisted =
-                    src.Shortlist?.ProvidersUkrpnAndLocation?.Any(x =>
-                        x.LocationId == m.LocationId &&
-                        x.Ukprn == m.UkPrn) ?? false));
+                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results));
         }
 
         private static MapperConfiguration Config()

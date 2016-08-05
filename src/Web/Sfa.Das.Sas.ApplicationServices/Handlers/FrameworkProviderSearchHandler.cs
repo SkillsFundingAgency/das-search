@@ -16,20 +16,17 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     {
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
-        private readonly IShortlistCollection<int> _shortlist;
         private readonly IPaginationSettings _paginationSettings;
         private readonly AbstractValidator<ProviderSearchQuery> _validator;
 
         public FrameworkProviderSearchHandler(
             AbstractValidator<ProviderSearchQuery> validator,
             IProviderSearchService searchService,
-            IShortlistCollection<int> shortlist,
             IPaginationSettings paginationSettings,
             ILog logger)
         {
             _validator = validator;
             _searchService = searchService;
-            _shortlist = shortlist;
             _paginationSettings = paginationSettings;
             _logger = logger;
         }
@@ -79,15 +76,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return new FrameworkProviderSearchResponse { StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
             }
 
-            var shortlistItems = _shortlist.GetAllItems(Constants.FrameworksShortListName)
-                ?.SingleOrDefault(x => x.ApprenticeshipId.Equals(message.ApprenticeshipId));
-
             return new FrameworkProviderSearchResponse
             {
                 Success = searchResults.FrameworkResponseCode == LocationLookupResponse.Ok,
                 CurrentPage = pageNumber,
                 Results = searchResults,
-                Shortlist = shortlistItems,
                 TotalResultsForCountry = await GetCountResultForCountry(searchResults, message),
                 SearchTerms = message.Keywords,
                 ShowOnlyNationalProviders = message.NationalProvidersOnly,

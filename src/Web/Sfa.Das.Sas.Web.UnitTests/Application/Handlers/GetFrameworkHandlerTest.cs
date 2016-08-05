@@ -16,15 +16,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private GetFrameworkHandler _sut;
         private Mock<IGetFrameworks> _mockGetFrameworks;
-        private Mock<IShortlistCollection<int>> _mockShortListCollection;
 
         [SetUp]
         public void Init()
         {
             _mockGetFrameworks = new Mock<IGetFrameworks>();
-            _mockShortListCollection = new Mock<IShortlistCollection<int>>();
 
-            _sut = new GetFrameworkHandler(_mockGetFrameworks.Object, _mockShortListCollection.Object);
+            _sut = new GetFrameworkHandler(_mockGetFrameworks.Object);
         }
 
         [Test]
@@ -66,42 +64,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var response = _sut.Handle(query);
 
             response.Framework.Should().Be(framework);
-        }
-
-        [Test]
-        public void ShouldReturnFrameworkIsShortlisted()
-        {
-            var query = new GetFrameworkQuery { Id = 1, Keywords = "Test" };
-            var framework = new Framework { FrameworkId = query.Id };
-
-            _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
-            _mockShortListCollection.Setup(x => x.GetAllItems(It.IsAny<string>()))
-                                    .Returns(new List<ShortlistedApprenticeship>
-                                    {
-                                        new ShortlistedApprenticeship
-                                        {
-                                            ApprenticeshipId = query.Id
-                                        }
-                                    });
-
-            var response = _sut.Handle(query);
-
-            response.IsShortlisted.Should().BeTrue();
-        }
-
-        [Test]
-        public void ShouldReturnFrameworkNotIsShortlisted()
-        {
-            var query = new GetFrameworkQuery { Id = 1, Keywords = "Test" };
-            var framework = new Framework { FrameworkId = query.Id };
-
-            _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
-            _mockShortListCollection.Setup(x => x.GetAllItems(It.IsAny<string>()))
-                                    .Returns(new List<ShortlistedApprenticeship>());
-
-            var response = _sut.Handle(query);
-
-            response.IsShortlisted.Should().BeFalse();
         }
 
         [Test]

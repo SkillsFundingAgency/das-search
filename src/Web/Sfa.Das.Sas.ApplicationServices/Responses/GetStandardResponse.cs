@@ -15,8 +15,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
 
         public Standard Standard { get; set; }
 
-        public bool IsShortlisted { get; set; }
-
         public string SearchTerms { get; set; }
     }
 }

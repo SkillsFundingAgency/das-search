@@ -257,8 +257,6 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
-    <Compile Include="Factories\Interfaces\IShortlistViewModelFactory.cs" />
-    <Compile Include="Factories\ShortlistViewModelFactory.cs" />
     <Compile Include="Logging\RequestContext.cs" />
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
@@ -271,26 +269,19 @@
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
     <Compile Include="Services\Validation.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
-    <Compile Include="Controllers\ShortlistController.cs" />
     <Compile Include="Controllers\StartController.cs" />
-    <Compile Include="Collections\CookieShortlistCollection.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Factories\DashboardViewModelFactory.cs" />
     <Compile Include="Factories\HttpCookieFactory.cs" />
     <Compile Include="Factories\Interfaces\IHttpCookieFactory.cs" />
-    <Compile Include="Factories\Interfaces\IDashboardViewModelFactory.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="App_Start\CustomHeaderModule.cs" />
-    <Compile Include="Logging\ShortlistLogEntry.cs" />
     <Compile Include="Services\CookieService.cs" />
     <Compile Include="Services\ICookieService.cs" />
     <Compile Include="Services\MappingActions\ProviderSearchMappingHelper.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
-    <Compile Include="Models\ApprenticeshipShortlistCriteria.cs" />
     <Compile Include="Models\ProviderSearchCriteria.cs" />
     <Compile Include="Services\IMappingService.cs" />
     <Compile Include="Services\MappingActions\ApprenticeshipSearchResultItemViewModelMappingAction.cs" />
@@ -322,13 +313,8 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
-    <Compile Include="ViewModels\IShortlistApprenticeshipViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
-    <Compile Include="ViewModels\ShortlistProviderViewModel.cs" />
     <Compile Include="ViewModels\ProviderSearchViewModel.cs" />
-    <Compile Include="ViewModels\ShortlistFrameworkViewModel.cs" />
-    <Compile Include="ViewModels\ShortlistStandardViewModel.cs" />
-    <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\DeliveryModeViewModel.cs" />
     <Compile Include="ViewModels\IHasError.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
@@ -369,11 +355,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_SearchResultMessage.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\Overview.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Overview.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\Detail.generated.cs">
       <AutoGen>True</AutoGen>
@@ -570,7 +551,6 @@
     <Content Include="scripts\vendor\ai.0.15.0-build58334.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\app\analytics.js" />
-    <Content Include="scripts\appsettings.js" />
     <Content Include="scripts\js-errors.js" />
     <Content Include="scripts\app\sample.js" />
     <None Include="scripts\vendor\jquery-1.12.3.intellisense.js" />
@@ -671,10 +651,6 @@
       <LastGenOutput>Start.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Shared\_ScriptsFooter.cshtml" />
-    <Content Include="Views\Dashboard\Overview.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Overview.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Error\_Error400.cshtml" />
     <Content Include="Views\Apprenticeship\SearchForProviders.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -698,7 +674,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Shortlist\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -18,7 +18,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         public bool Success { get; set; }
         public int CurrentPage { get; set; }
         public T Results { get; set; }
-        public ShortlistedApprenticeship Shortlist { get; set; }
         public long TotalResultsForCountry { get; set; }
         public string SearchTerms { get; set; }
         public bool ShowAllProviders { get; set; }
