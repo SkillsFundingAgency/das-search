@@ -2458,6 +2458,9 @@ details .arrow {
 #search-results-order {
     @media (min-width: 641px) {
         text-align: right;
+        label {
+            display: inline-block;
+        }
     }
 }
 
