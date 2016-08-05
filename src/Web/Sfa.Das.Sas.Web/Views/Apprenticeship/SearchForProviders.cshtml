@@ -9,7 +9,7 @@
             Find training provider
         </h1>
         <p class="lede">
-            For <strong>@Model.Title</strong>
+            For <strong>@Model.Title</strong>:
         </p>
     </hgroup>
 
@@ -18,7 +18,7 @@
     
                 <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
 
-                    <div class="form-elements @(Model.HasError || Model.WrongPostcode ? " error" : "")">
+                    <div class="form-elements  @(Model.HasError || Model.WrongPostcode ? " error" : "")">
                         <div class="heading-group">
                             <h2 class="heading-medium">
                                 Enter a postcode
@@ -27,7 +27,7 @@
                         </div>
 
                         <label class="form-label" for="search-box">
-                            Enter a <strong>full</strong> postcode to find the closest training providers to you.
+                            Enter the full postcode of your apprentice’s workplace
 
                             @if (@Model.HasError)
                             {
@@ -46,8 +46,8 @@
                             <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                             <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
                             <input type="search" name="PostCode" value="@Model.PostCode" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                            <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
                         </div>
-                        <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
                     </div>
                 </form>
             

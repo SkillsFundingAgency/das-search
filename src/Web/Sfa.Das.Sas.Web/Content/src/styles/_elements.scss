@@ -2551,6 +2551,19 @@ details .arrow {
 
     }
 }
+
+.postcode-form.search-box {
+    overflow: hidden;
+    input[type='submit'] {
+        @media (max-width: 640px) {
+            display: block;
+            margin-top: 1em;
+        }
+    }
+} 
+
+
+
 .apprenticeship-item {
     @extend %grid-row; 
     .apprenticeship-title {
