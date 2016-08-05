@@ -113,7 +113,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
 
-            GetPartial(html, ".result dl dd").Should().Be("1 miles away");
+            GetPartial(html, ".result dl dd").Should().Be("1 mile away");
 
             var secondResult = GetHtmlElement(html, ".result", 2);
 

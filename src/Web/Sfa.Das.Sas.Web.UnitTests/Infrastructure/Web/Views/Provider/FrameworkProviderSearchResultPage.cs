@@ -462,7 +462,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result dl dt").Should().Be("Distance:");
-            GetPartial(html, ".result dl dd").Should().Be("1 miles away");
+            GetPartial(html, ".result dl dd").Should().Be("1 mile away");
 
             GetPartial(html, ".result dl dd", 2).Should().Be("Address 1 Address 2 Town County PostCode");
         }

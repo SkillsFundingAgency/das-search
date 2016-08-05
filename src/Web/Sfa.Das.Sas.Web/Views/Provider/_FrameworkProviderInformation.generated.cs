@@ -182,7 +182,16 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral(" miles away</dd>\r\n");
+WriteLiteral(" ");
+
+            
+            #line 21 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+                                                Write(item.Distance == 1 ? "mile" : "miles");
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" away</dd>\r\n");
 
             
             #line 22 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
