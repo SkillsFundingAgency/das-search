@@ -20,11 +20,9 @@
                     Search results
                 </h1>
 
-                <p>
                     @{
                         Html.RenderPartial("_FrameworkSearchResultMessage");
                     }
-                </p>
             </hgroup>
 
             @if (Model.ShowNationalProviders && Model.TotalResults == 0)
@@ -137,7 +135,7 @@ if (Model.ActualPage < Model.LastPage)
         {
                 <div class="editSearch">
                     <h2 class="heading-medium">
-                        <a href="#EditSearch">Edit search</a>
+                        <a href="#EditSearch">Filter results</a>
                     </h2>
                     <div id="EditSearch">
                         <div class="filters-block @cssClass">
@@ -151,6 +149,20 @@ if (Model.ActualPage < Model.LastPage)
                                 }
                                 <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
                             </form>
+                            <details>
+                                <summary>Explain training options</summary>
+                                <div class="panel panel-border-narrow">
+                                    <p>
+                                        <b>Day release:</b> for example one day a week at the training provider's location.
+                                    </p>
+                                    <p>
+                                        <b>Block release:</b> for example 3-4 weeks at the training provider's location.
+                                    </p>
+                                    <p>
+                                        <b>At your location:</b> the training provider comes to your workplace.
+                                    </p>
+                                </div>
+                            </details>
                         </div>
                     </div>
                 </div>

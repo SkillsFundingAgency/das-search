@@ -52,14 +52,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class FrameworkProviderInformation : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel>
     {
 
-#line 49 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult RenderDeliveryOptions(FrameworkProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 50 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 49 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
  
 
 
@@ -68,7 +68,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <dt>Training options:</dt>\r\n");
 
 
-#line 52 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 51 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 
@@ -81,7 +81,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"deliveryOptions\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 53 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 52 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
   WriteTo(__razor_helper_writer, item.DeliveryOptionsMessage);
 
 
@@ -90,119 +90,14 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 54 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 53 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 54 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-}
-#line default
-#line hidden
-
-#line 56 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-public System.Web.WebPages.HelperResult GetShortlistLink(int ukprn, int apprenticeshipId, int locationId, bool isShortlisted)
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 57 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
- 
-    if (Is<ShortlistingFeature>.Enabled)
-    {
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "        <div");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"shortlist-link\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n\r\n");
-
-
-#line 62 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-            
-
-#line default
-#line hidden
-
-#line 62 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-             if (isShortlisted)
-            {
-            
-
-#line default
-#line hidden
-
-#line 64 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Remove", "RemoveFrameworkProvider", "ShortList",
-                    new { apprenticeshipId, ukprn, locationId },
-                    new
-                    {
-                        @class = "link shortlist-link provider-search-shortlist-link",
-                        rel = "nofollow",
-                        data_apprenticeship = apprenticeshipId,
-                        data_provider = ukprn,
-                        data_location = locationId,
-                        data_action = "remove",
-                        data_apprenticeship_type = "Framework"
-                    }));
-
-
-#line default
-#line hidden
-
-#line 75 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                      
-            }
-            else
-            {
-            
-
-#line default
-#line hidden
-
-#line 79 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, Html.ActionLink("Shortlist", "AddFrameworkProvider", "ShortList",
-                    new { apprenticeshipId, ukprn, locationId },
-                    new
-                    {
-                        @class = "link shortlist-link provider-search-shortlist-link",
-                        rel = "nofollow",
-                        data_apprenticeship = apprenticeshipId,
-                        data_provider = ukprn,
-                        data_location = locationId,
-                        data_action = "add",
-                        data_apprenticeship_type = "Framework"
-                    }));
-
-
-#line default
-#line hidden
-
-#line 90 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                      
-            }
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n        </div>\r\n");
-
-
-#line 94 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-    }
-
-
-#line default
-#line hidden
-});
-
-#line 95 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+#line 53 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -431,28 +326,15 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n");
-
-WriteLiteral("            ");
+WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n        </article>\r\n");
 
             
-            #line 45 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-       Write(GetShortlistLink(item.UkPrn, int.Parse(item.FrameworkId), item.LocationId, item.IsShortlisted));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </article>\r\n");
-
-            
-            #line 47 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
+            #line 46 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
     }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
 WriteLiteral("\r\n");
 
         }

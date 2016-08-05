@@ -10,14 +10,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class ApprenticeshipSearchHandler : IRequestHandler<ApprenticeshipSearchQuery, ApprenticeshipSearchResponse>
     {
         private readonly IApprenticeshipSearchService _searchService;
-        private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public ApprenticeshipSearchHandler(
-            IApprenticeshipSearchService searchService,
-            IShortlistCollection<int> shortlistCollection)
+        public ApprenticeshipSearchHandler(IApprenticeshipSearchService searchService)
         {
             _searchService = searchService;
-            _shortlistCollection = shortlistCollection;
         }
 
         public ApprenticeshipSearchResponse Handle(ApprenticeshipSearchQuery message)
@@ -46,12 +42,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound;
                 return response;
             }
-
-            var shotListedStandardsCollection = _shortlistCollection.GetAllItems(Constants.StandardsShortListName)?.Select(standard => standard.ApprenticeshipId).ToList();
-            var shotListedFrameworksCollection = _shortlistCollection.GetAllItems(Constants.FrameworksShortListName)?.Select(framework => framework.ApprenticeshipId).ToList();
-
-            response.ShortlistedStandards = shotListedStandardsCollection?.ToDictionary(standard => standard, standard => true);
-            response.ShortlistedFrameworks = shotListedFrameworksCollection?.ToDictionary(framework => framework, framework => true);
 
             response.StatusCode = ApprenticeshipSearchResponse.ResponseCodes.Success;
 

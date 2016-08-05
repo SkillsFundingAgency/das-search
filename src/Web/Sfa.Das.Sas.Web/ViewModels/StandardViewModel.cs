@@ -24,8 +24,6 @@
 
         public string OverviewOfRole { get; set; }
 
-        public bool IsShortlisted { get; set; }
-
         public string SearchTerm { get; set; }
     }
 }

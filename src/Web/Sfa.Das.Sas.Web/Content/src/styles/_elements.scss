@@ -2361,6 +2361,10 @@ details .arrow {
     }
     a[href='#EditSearch'] {
         text-decoration: none;
+        @media (min-width: 641px) {
+            color: $black;
+            cursor: initial;
+        }
 
         &:after {
             @media (max-width: 640px) {
@@ -2381,7 +2385,9 @@ details .arrow {
             }   
         }
         #EditSearch {
-            display: none
+            @media (max-width: 640px) {
+                display: none
+            }
         }
     }
 }
@@ -2452,6 +2458,9 @@ details .arrow {
 #search-results-order {
     @media (min-width: 641px) {
         text-align: right;
+        label {
+            display: inline-block;
+        }
     }
 }
 
@@ -2587,4 +2596,46 @@ details .arrow {
 
 .tag-warning {
     background: $orange;
+}
+
+
+.icon {
+    display: inline-block;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+.icon-important {
+    width: 35px;
+    height: 35px;
+    background-image: url("../images/icons/icon-important.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 20/10),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx) {
+    .icon-important {
+        background-image: url("../images/icons/icon-important-2x.png");
+        background-size: 100%;
+    }
+}
+
+.notice {
+    position: relative;
+}
+
+.notice .icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -17px;
+}
+
+.notice strong {
+    display: block;
+    padding-left: 65px;
+    margin-left: -15px;
 }

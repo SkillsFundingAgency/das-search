@@ -21,7 +21,5 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         public string ApprenticeshipNameWithLevel { get; set; }
 
         public string ApprenticeshipLevel { get; set; }
-
-        public bool IsShortlisted { get; set; }
     }
 }

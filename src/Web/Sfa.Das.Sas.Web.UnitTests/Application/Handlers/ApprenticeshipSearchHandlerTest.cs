@@ -15,13 +15,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private ApprenticeshipSearchHandler _sut;
         private Mock<IApprenticeshipSearchService> _mockApprenticeshipSearchService;
-        private Mock<IShortlistCollection<int>> _mockShortlistCollection;
 
         [SetUp]
         public void Init()
         {
             _mockApprenticeshipSearchService = new Mock<IApprenticeshipSearchService>();
-            _mockShortlistCollection = new Mock<IShortlistCollection<int>>();
 
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
@@ -31,7 +29,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                     TotalResults = 20
                 });
 
-            _sut = new ApprenticeshipSearchHandler(_mockApprenticeshipSearchService.Object, _mockShortlistCollection.Object);
+            _sut = new ApprenticeshipSearchHandler(_mockApprenticeshipSearchService.Object);
         }
 
         [Test]
@@ -91,28 +89,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             response.SearchTerm.Should().Be(query.Keywords);
             response.SortOrder.Should().Be(query.Order.ToString());
-        }
-
-        [Test]
-        public void ShouldReturnDefaultShortListOrderIfOrderIsZero()
-        {
-            _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
-               It.IsAny<string>(), 1, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-               .Returns(new ApprenticeshipSearchResults
-               {
-                   Results = new List<ApprenticeshipSearchResultsItem>
-                   {
-                       new ApprenticeshipSearchResultsItem()
-                   },
-                   TotalResults = 20
-               });
-
-            var response = _sut.Handle(new ApprenticeshipSearchQuery
-            {
-                Order = 0
-            });
-
-            response.SortOrder.Should().Be("1");
         }
 
         [Test]

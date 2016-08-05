@@ -29,7 +29,6 @@
                     <a class="button ui-find-training-providers" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                         Find training providers
                     </a>
-                    @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
                 </aside>
             </div>
 
@@ -67,7 +66,6 @@
             <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                 Find training providers
             </a>
-            @GetShortlistLink(@Model.StandardId, @Model.IsShortlisted)
         </div>
     </section>
 </main>
@@ -90,24 +88,5 @@ if (!string.IsNullOrEmpty(title))
                 @title
             </a>
         </li>
-}
-}
-
-@helper GetShortlistLink(int id, bool isShortlisted)
-{
-if (Is<ShortlistingFeature>.Enabled)
-{
-    if (isShortlisted)
-    {
-            @Html.ActionLink("Remove from shortlist", "RemoveStandard", "ShortList",
-                         new { id },
-                         new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "remove" })
-    }
-    else
-    {
-            @Html.ActionLink("Shortlist apprenticeship", "AddStandard", "ShortList",
-                         new { id },
-                         new { @class = "link shortlist-link standard-shortlist-link", rel = "nofollow", data_standard = id, data_action = "add" })
-    }
 }
 }

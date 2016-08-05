@@ -16,15 +16,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private GetStandardHandler _sut;
         private Mock<IGetStandards> _mockGetStandards;
-        private Mock<IShortlistCollection<int>> _mockShortListCollection;
 
         [SetUp]
         public void Init()
         {
             _mockGetStandards = new Mock<IGetStandards>();
-            _mockShortListCollection = new Mock<IShortlistCollection<int>>();
 
-            _sut = new GetStandardHandler(_mockGetStandards.Object, _mockShortListCollection.Object);
+            _sut = new GetStandardHandler(_mockGetStandards.Object);
         }
 
         [Test]
@@ -66,42 +64,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var response = _sut.Handle(query);
 
             response.Standard.Should().Be(standard);
-        }
-
-        [Test]
-        public void ShouldReturnStandardIsShortlisted()
-        {
-            var query = new GetStandardQuery { Id = 1, Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
-
-            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockShortListCollection.Setup(x => x.GetAllItems(It.IsAny<string>()))
-                                    .Returns(new List<ShortlistedApprenticeship>
-                                    {
-                                        new ShortlistedApprenticeship
-                                        {
-                                            ApprenticeshipId = query.Id
-                                        }
-                                    });
-
-            var response = _sut.Handle(query);
-
-            response.IsShortlisted.Should().BeTrue();
-        }
-
-        [Test]
-        public void ShouldReturnStandardNotIsShortlisted()
-        {
-            var query = new GetStandardQuery { Id = 1, Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
-
-            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockShortListCollection.Setup(x => x.GetAllItems(It.IsAny<string>()))
-                                    .Returns(new List<ShortlistedApprenticeship>());
-
-            var response = _sut.Handle(query);
-
-            response.IsShortlisted.Should().BeFalse();
         }
 
         [Test]

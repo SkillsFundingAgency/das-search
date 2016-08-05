@@ -154,9 +154,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                                         Level = "3 (equivalent to 2 A level passes)"
                                       }
                               },
-                AggregationLevel = new List<LevelAggregationViewModel>(),
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
@@ -192,9 +190,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                                         FrameworkId = 3
                                       }
                               },
-                AggregationLevel = new List<LevelAggregationViewModel>(),
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
@@ -280,9 +276,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 LastPage = 2,
                 ResultsToTake = 10,
                 HasError = false,
-                AggregationLevel = new List<LevelAggregationViewModel>(),
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -365,9 +359,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 LastPage = 3,
                 ResultsToTake = 10,
                 HasError = false,
-                AggregationLevel = new List<LevelAggregationViewModel>(),
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -450,9 +442,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 LastPage = 3,
                 ResultsToTake = 10,
                 HasError = false,
-                AggregationLevel = new List<LevelAggregationViewModel>(),
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = new List<LevelAggregationViewModel>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -473,9 +463,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                               {
                                   new ApprenticeshipSearchResultItemViewModel { Title = "Test" }
                               },
-                AggregationLevel = aggList,
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = aggList
             };
 
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
@@ -499,9 +487,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                               {
                                   new ApprenticeshipSearchResultItemViewModel { Title = "Test" }
                               },
-                AggregationLevel = aggList,
-                ShortlistedFrameworks = new Dictionary<int, bool>(),
-                ShortlistedStandards = new Dictionary<int, bool>()
+                AggregationLevel = aggList
             };
 
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();

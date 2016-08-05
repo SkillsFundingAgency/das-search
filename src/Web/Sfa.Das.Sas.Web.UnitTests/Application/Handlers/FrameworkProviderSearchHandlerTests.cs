@@ -24,7 +24,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
     {
         private Mock<IProviderSearchService> _mockSearchService;
         private Mock<ILog> _mockLogger;
-        private Mock<IShortlistCollection<int>> _mockShortlistCollection;
         private Mock<IPaginationSettings> _mockPaginationSettings;
 
         private FrameworkProviderSearchHandler _handler;
@@ -34,13 +33,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         {
             _mockSearchService = new Mock<IProviderSearchService>();
             _mockLogger = new Mock<ILog>();
-            _mockShortlistCollection = new Mock<IShortlistCollection<int>>();
             _mockPaginationSettings = new Mock<IPaginationSettings>();
 
             var providerFrameworkSearchResults = new ProviderFrameworkSearchResults();
             _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerFrameworkSearchResults));
 
-            _handler = new FrameworkProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockShortlistCollection.Object, _mockPaginationSettings.Object, _mockLogger.Object);
+            _handler = new FrameworkProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockPaginationSettings.Object, _mockLogger.Object);
         }
 
         [Test]
@@ -138,24 +136,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var response = await _handler.Handle(message);
 
             response.Results.Should().BeSameAs(providerFrameworkSearchResults);
-        }
-
-        [Test]
-        public async Task ShouldReturnShortlistedProviderLocationsFilterByApprenticeship()
-        {
-            var stubShortlist = new List<ShortlistedApprenticeship>()
-            {
-                new ShortlistedApprenticeship { ApprenticeshipId = 3 },
-                new ShortlistedApprenticeship { ApprenticeshipId = 42 },
-                new ShortlistedApprenticeship { ApprenticeshipId = 1 }
-            };
-
-            _mockShortlistCollection.Setup(x => x.GetAllItems(It.IsAny<string>())).Returns(stubShortlist);
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", Page = 0 };
-
-            var response = await _handler.Handle(message);
-
-            response.Shortlist.ApprenticeshipId.Should().Be(1);
         }
 
         [Test]

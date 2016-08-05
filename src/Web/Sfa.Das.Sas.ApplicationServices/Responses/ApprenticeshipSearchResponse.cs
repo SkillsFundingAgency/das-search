@@ -31,10 +31,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
 
         public Dictionary<int, long?> AggregationLevel { get; set; }
 
-        public Dictionary<int, bool> ShortlistedStandards { get; set; }
-
-        public Dictionary<int, bool> ShortlistedFrameworks { get; set; }
-
         public ResponseCodes StatusCode { get; set; }
         public List<int> SelectedLevels { get; set; }
     }

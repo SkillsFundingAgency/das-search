@@ -279,77 +279,7 @@ WriteLiteral(@">
                 </tbody>
             </table>
 
-");
-
-            
-            #line 160 "..\..\Views\Start\Cookies.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 160 "..\..\Views\Start\Cookies.cshtml"
-             if (Is<ShortlistingFeature>.Enabled)
-            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <h3");
-
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(">\r\n                    Our apprenticeship shortlisting\r\n                </h3>\r\n");
-
-            
-            #line 165 "..\..\Views\Start\Cookies.cshtml"
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <p>If you haven\'t logged into the site we will store you shortlis" +
-"ted apprenticships and providers in two sets of cookies so that the next time yo" +
-"u arrive on the site your shortlistings will still be there.</p>\r\n");
-
-            
-            #line 167 "..\..\Views\Start\Cookies.cshtml"
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral(@"                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Purpose</th>
-                            <th>Expires</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>das_shortlist_standards</td>
-                        <td>Saves the standards (apprenticeships) and their associated providers that you have shortlisted</td>
-                        <td>1 year</td>
-                    </tr>
-                        <tr>
-                            <td>das_shortlist_frameworks</td>
-                            <td>Saves the frameworks (apprenticeships) and their associated providers that you have shortlisted</td>
-                            <td>1 year</td>
-                        </tr>
-                    </tbody>
-                </table>
-");
-
-            
-            #line 189 "..\..\Views\Start\Cookies.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            <h3");
+            <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 

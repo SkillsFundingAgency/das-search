@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
+﻿using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -11,12 +8,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
         private readonly IGetStandards _getStandards;
-        private readonly IShortlistCollection<int> _shortlistCollection;
 
-        public GetStandardHandler(IGetStandards getStandards, IShortlistCollection<int> shortlistCollection)
+        public GetStandardHandler(IGetStandards getStandards)
         {
             _getStandards = getStandards;
-            _shortlistCollection = shortlistCollection;
         }
 
         public GetStandardResponse Handle(GetStandardQuery message)
@@ -40,9 +35,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
 
             response.Standard = standard;
-
-            var shortlistedApprenticeships = _shortlistCollection.GetAllItems(Constants.StandardsShortListName);
-            response.IsShortlisted = shortlistedApprenticeships?.Any(x => x.ApprenticeshipId.Equals(response.Standard.StandardId)) ?? false;
             response.SearchTerms = message.Keywords;
 
             return response;

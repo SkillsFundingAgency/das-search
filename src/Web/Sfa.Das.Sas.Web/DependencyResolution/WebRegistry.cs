@@ -1,8 +1,6 @@
 using System.Web;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Collections;
 using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Logging;
@@ -17,7 +15,6 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
         {
             For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
             For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
-            For<IShortlistCollection<int>>().Use<CookieShortlistCollection>();
             For<IMediator>().Use<Mediator>();
             For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
 
@@ -25,8 +22,6 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<ICookieService>().Use<CookieService>();
 
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
-            For<IShortlistViewModelFactory>().Use<ShortlistViewModelFactory>();
-            For<IDashboardViewModelFactory>().Use<DashboardViewModelFactory>();
 
             For<IValidation>().Use<Validation>();
         }

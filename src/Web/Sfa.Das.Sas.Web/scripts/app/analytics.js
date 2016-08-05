@@ -13,11 +13,6 @@
         });
     };
 
-    var trackShortlist = function(action, type) {
-        var label = action + " " + type;
-        analytics.pushEvent("Shortlist", label);
-    };
-
     analytics.init = function () {
 
         $("#apprenticeship-results .result a:lt(3)").on("click", function () {
@@ -46,24 +41,6 @@
 
         $(".provider-detail a.contact-link").on("click", function () {
             analytics.pushEvent("Provider Details", "Contact page");
-        });
-
-        // Shortlist
-
-        $(".standard-shortlist-link").on('click', function () {
-            trackShortlist($(this).attr('data-action'), "standard");
-        });
-
-        $(".provider-shortlist-link").on('click', function() {
-            trackShortlist($(this).attr('data-action'), "provider");
-        });
-
-        $(".delete-link").on('click', function() {
-            trackShortlist("remove", "apprenticeship");
-        });
-
-        $(".provider-delete-link").on('click', function () {
-            trackShortlist("remove", "provider");
         });
     };
 

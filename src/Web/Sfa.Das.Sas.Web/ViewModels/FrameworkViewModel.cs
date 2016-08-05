@@ -14,9 +14,6 @@
 
         public string ExpiryDateString { get; set; }
 
-        // Page specific
-        public bool IsShortlisted { get; set; }
-
         public string SearchTerm { get; set; }
         public string CompletionQualifications { get; set; }
 

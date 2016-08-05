@@ -4,21 +4,18 @@
 }
 
 <main id="content">
-    <div>
+    <hgroup class="hgroup">
         <h1 class="heading-xlarge">
-            Find an apprenticeship training provider
+            Find training provider
         </h1>
-    </div>
+        <p class="lede">
+            For <strong>@Model.Title</strong>
+        </p>
+    </hgroup>
 
     <div class="grid-row">
             <div class="column-two-thirds">
-                <p class="lede">
-                    Find training providers for apprenticeship: <strong>@Model.Title</strong>
-                </p>
-                <p>
-                    Use this service to find a training provider for where your apprentice will be working.
-                </p>
-
+    
                 <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
 
                     <div class="form-elements @(Model.HasError || Model.WrongPostcode ? " error" : "")">
@@ -26,11 +23,11 @@
                             <h2 class="heading-medium">
                                 Enter a postcode
                             </h2>
-                            <p>for example SW1A 2AA</p>
+                            <p>for example: 'SW1A 2AA'</p>
                         </div>
 
                         <label class="form-label" for="search-box">
-                            We need <strong>full</strong> postcode to find the closest training providers to you.
+                            Enter a <strong>full</strong> postcode to find the closest training providers to you.
 
                             @if (@Model.HasError)
                             {
@@ -41,7 +38,7 @@
                             else
                             {
                                 <span class="error-message">
-                                    Invalid postcode
+                                    You must enter a full postcode
                                 </span>
                             }
                         </label>
@@ -50,12 +47,19 @@
                             <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
                             <input type="search" name="PostCode" value="@Model.PostCode" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
                         </div>
-                        <input class="button margin-top-x2 postcode-search-button" type="submit" value="Find">
+                        <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
                     </div>
                 </form>
             
-                <div class="provider-data-warning">
-                    <span class="glyphicon-tag tag-label tag-warning">Please Note</span> This is a new service. Training providers are currently entering their information. You will only see information for training providers who have updated their details so far.
+                <br />
+
+                <div class="notice">
+                    <i class="icon icon-important">
+                        <span class="visuallyhidden">Warning</span>
+                    </i>
+                    <strong class="bold-small">
+                        Training providers are currently adding their details to this service so some may be missing from your search results.
+                    </strong>
                 </div>
 
         </div>

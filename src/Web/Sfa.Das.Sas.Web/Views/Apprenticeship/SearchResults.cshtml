@@ -156,60 +156,11 @@
     </h2>
 }
 
-@helper GetStandardShortlistLink(ApprenticeshipSearchResultItemViewModel item)
-{
-    if (Is<ShortlistingFeature>.Enabled)
-    {
-        if (!Model.ShortlistedStandards.ContainsKey(item.StandardId))
-        {
-                @Html.ActionLink("Shortlist",
-                            "AddStandard",
-                            "Shortlist",
-                            new { @id = item.StandardId },
-                            new { @class = "link shortlist-link standard-search-shortlist-link", rel = "nofollow", data_standard = item.StandardId, data_action = "add" })
-        }
-        else
-        {
-                @Html.ActionLink("Remove",
-                    "RemoveStandard",
-                    "Shortlist",
-                    new { @id = item.StandardId },
-                    new { @class = "link shortlist-link standard-search-shortlist-link", rel = "nofollow", data_standard = item.StandardId, data_action = "remove" })
-        }
-
-    }
-}
-
-
-
 @helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item)
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId, @keywords = Model.SearchTerm }, null)
     </h2>
-}
-
-@helper GetFrameworkShortlistLink(ApprenticeshipSearchResultItemViewModel item)
-{
-    if (Is<ShortlistingFeature>.Enabled)
-    {
-        if (!Model.ShortlistedFrameworks.ContainsKey(item.FrameworkId))
-        {
-            @Html.ActionLink("Shortlist",
-                                 "AddFramework",
-                                 "Shortlist",
-                                 new { @id = item.FrameworkId },
-                                 new { @class = "link shortlist-link framework-search-shortlist-link", rel = "nofollow", data_framework = item.FrameworkId, data_action = "add" })
-        }
-        else
-        {
-            @Html.ActionLink("Remove",
-                         "RemoveFramework",
-                         "Shortlist",
-                         new { @id = item.FrameworkId },
-                         new { @class = "link shortlist-link framework-search-shortlist-link", rel = "nofollow", data_framework = item.FrameworkId, data_action = "remove" })
-        }
-    }
 }
 
 @helper GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
