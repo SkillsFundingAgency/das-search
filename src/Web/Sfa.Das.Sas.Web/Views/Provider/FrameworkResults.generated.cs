@@ -66,14 +66,14 @@ if (Model.ActualPage > 1)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4172), Tuple.Create("\"", 4183)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4155), Tuple.Create("\"", 4166)
 
 #line 99 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4179), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 4162), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4179), false)
+, 4162), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -151,14 +151,14 @@ if (Model.ActualPage < Model.LastPage)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4756), Tuple.Create("\"", 4767)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4739), Tuple.Create("\"", 4750)
 
 #line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4763), Tuple.Create<System.Object, System.Int32>(url
+, Tuple.Create(Tuple.Create("", 4746), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4763), false)
+, 4746), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -256,15 +256,15 @@ WriteLiteralTo(__razor_helper_writer, " id=\"EditSearch\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5615), Tuple.Create("\"", 5646)
-, Tuple.Create(Tuple.Create("", 5623), Tuple.Create("filters-block", 5623), true)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5598), Tuple.Create("\"", 5629)
+, Tuple.Create(Tuple.Create("", 5606), Tuple.Create("filters-block", 5606), true)
 
 #line 141 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 5636), Tuple.Create<System.Object, System.Int32>(cssClass
+, Tuple.Create(Tuple.Create(" ", 5619), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 5637), false)
+, 5620), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                        <form");
@@ -273,14 +273,14 @@ WriteLiteralTo(__razor_helper_writer, " method=\"get\"");
 
 WriteLiteralTo(__razor_helper_writer, " autocomplete=\"off\"");
 
-WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 5711), Tuple.Create("\"", 5739)
+WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 5694), Tuple.Create("\"", 5722)
 
 #line 142 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5720), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
+, Tuple.Create(Tuple.Create("", 5703), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
 
 #line default
 #line hidden
-, 5720), false)
+, 5703), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                            <input");
@@ -289,14 +289,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"PostCode\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5807), Tuple.Create("\"", 5830)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5790), Tuple.Create("\"", 5813)
 
 #line 143 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5815), Tuple.Create<System.Object, System.Int32>(Model.PostCode
+, Tuple.Create(Tuple.Create("", 5798), Tuple.Create<System.Object, System.Int32>(Model.PostCode
 
 #line default
 #line hidden
-, 5815), false)
+, 5798), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                            <input");
@@ -305,14 +305,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5908), Tuple.Create("\"", 5934)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5891), Tuple.Create("\"", 5917)
 
 #line 144 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5916), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+, Tuple.Create(Tuple.Create("", 5899), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
 
 #line default
 #line hidden
-, 5916), false)
+, 5899), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                            <input");
@@ -321,14 +321,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"ShowAll\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6003), Tuple.Create("\"", 6036)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5986), Tuple.Create("\"", 6019)
 
 #line 145 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6011), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
+, Tuple.Create(Tuple.Create("", 5994), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
 
 #line default
 #line hidden
-, 6011), false)
+, 5994), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                            <input");
@@ -337,14 +337,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"keywords\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6106), Tuple.Create("\"", 6132)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6089), Tuple.Create("\"", 6115)
 
 #line 146 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6114), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+, Tuple.Create(Tuple.Create("", 6097), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
 
 #line default
 #line hidden
-, 6114), false)
+, 6097), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n");
@@ -482,11 +482,7 @@ WriteLiteral("\r\n        </p>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("    <div");
-
-WriteLiteral(" class=\"grid-row\"");
-
-WriteLiteral(">\r\n        <div>\r\n            <hgroup");
+WriteLiteral("    <div>\r\n        <div>\r\n            <hgroup");
 
 WriteLiteral(" class=\"hgroup\"");
 
