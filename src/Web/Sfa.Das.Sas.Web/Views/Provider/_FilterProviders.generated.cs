@@ -170,8 +170,8 @@ WriteLiteral(">Block release:</span> for example 3-4 weeks at the training provi
 
 WriteLiteral(" class=\"bold-small\"");
 
-WriteLiteral(">At your location:</span> the provider comes to your workplace.\r\n                " +
-"</p>\r\n            </div>\r\n        </details>\r\n    </div>\r\n</fieldset>");
+WriteLiteral(">At your location:</span> the training provider comes to your workplace.\r\n       " +
+"         </p>\r\n            </div>\r\n        </details>\r\n    </div>\r\n</fieldset>");
 
         }
     }
