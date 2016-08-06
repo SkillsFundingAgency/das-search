@@ -547,7 +547,7 @@
     <Content Include="scripts\jquery.validate.js" />
     <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\js-cookie\js.cookie.js" />
-    <Content Include="scripts\pages\framework-detail.js" />
+    <Content Include="scripts\pages\apprenticeship-detail.js" />
     <Content Include="scripts\polyfills\Array.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.js" />
     <Content Include="scripts\vendor\ai.0.15.0-build58334.min.js" />
