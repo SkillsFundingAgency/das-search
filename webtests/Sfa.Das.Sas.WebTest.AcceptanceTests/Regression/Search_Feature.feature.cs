@@ -165,7 +165,7 @@ this.ScenarioSetup(scenarioInfo);
             table5.AddRow(new string[] {
                         "error message",
                         "contains",
-                        "Invalid postcode"});
+                        "You must enter a full postcode"});
 #line 47
  testRunner.Then("I see", ((string)(null)), table5, "Then ");
 #line hidden

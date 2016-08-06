@@ -46,5 +46,5 @@ Scenario:Should display error for invalid postcode
 	When I wait for the view to become active	
 	Then I see
 	| Field         | Rule     | Value            |
-	| error message | contains | Invalid postcode |
+	| error message | contains | You must enter a full postcode |
 
