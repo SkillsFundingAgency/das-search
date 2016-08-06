@@ -95,9 +95,9 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </h1>\r\n                <p>\r\n                    Information tak" +
-"en from an apprenticeship framework. It sets out what qualifications the apprent" +
-"ice can achieve.\r\n                </p>\r\n            </hgroup>\r\n");
+WriteLiteral("\r\n                </h1>\r\n                <p>\r\n                    What qualificat" +
+"ions an apprentice can achieve as part of this apprenticeship.\r\n                " +
+"</p>\r\n            </hgroup>\r\n");
 
             
             #line 21 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -158,14 +158,14 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1349), Tuple.Create("\"", 1484)
+WriteAttribute("href", Tuple.Create(" href=\"", 1315), Tuple.Create("\"", 1450)
             
             #line 38 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1356), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+, Tuple.Create(Tuple.Create("", 1322), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 1356), false)
+, 1322), false)
 );
 
 WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n   " +
@@ -866,14 +866,14 @@ WriteLiteral(" class=\"button ui-find-training-providers\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8407), Tuple.Create("\"", 8544)
+WriteAttribute("href", Tuple.Create(" href=\"", 8373), Tuple.Create("\"", 8510)
             
             #line 187 "..\..\Views\Apprenticeship\Framework.cshtml"
-                , Tuple.Create(Tuple.Create("", 8414), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
+                , Tuple.Create(Tuple.Create("", 8380), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 8414), false)
+, 8380), false)
 );
 
 WriteLiteral(">\r\n                    Find training providers\r\n                </a>\r\n        </d" +
