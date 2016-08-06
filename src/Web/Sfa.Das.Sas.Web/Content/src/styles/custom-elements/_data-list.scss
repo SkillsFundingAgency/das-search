@@ -104,3 +104,8 @@ $module: 'data-list';
 .provider-detail .data-list ul {
     margin-bottom: 0;
 }
+
+.standard-detail .data-list .document-list ul {
+    list-style-type: none;
+    padding: 0px;
+}

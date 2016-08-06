@@ -74,14 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3197), Tuple.Create("\"", 3205)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3211), Tuple.Create("\"", 3219)
 
 #line 74 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3202), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3216), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3202), false)
+, 3216), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -126,14 +126,14 @@ if (!string.IsNullOrEmpty(title))
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3371), Tuple.Create("\"", 3385)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3385), Tuple.Create("\"", 3399)
 
 #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3378), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3392), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3378), false)
+, 3392), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -336,7 +336,7 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("\r\n            <dt>Documents</dt>\r\n            <dd>\r\n                <div");
 
-WriteLiteral(" class=\"panel-indent panel-indent-info\"");
+WriteLiteral(" class=\"panel-indent panel-indent-info document-list\"");
 
 WriteLiteral(">\r\n                    <ul>\r\n");
 
@@ -371,14 +371,14 @@ WriteLiteral(" class=\"button ui-find-training-providers\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2772), Tuple.Create("\"", 2906)
+WriteAttribute("href", Tuple.Create(" href=\"", 2786), Tuple.Create("\"", 2920)
             
             #line 62 "..\..\Views\Apprenticeship\Standard.cshtml"
-            , Tuple.Create(Tuple.Create("", 2779), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+            , Tuple.Create(Tuple.Create("", 2793), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 2779), false)
+, 2793), false)
 );
 
 WriteLiteral(">\r\n                Find training providers\r\n            </a>\r\n        </div>\r\n   " +
