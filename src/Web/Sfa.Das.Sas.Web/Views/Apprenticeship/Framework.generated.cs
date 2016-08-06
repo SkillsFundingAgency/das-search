@@ -97,52 +97,52 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                </h1>\r\n                <p>\r\n                    What qualificat" +
 "ions an apprentice can achieve as part of this apprenticeship.\r\n                " +
-"</p>\r\n            </hgroup>\r\n");
+"</p>\r\n");
 
             
-            #line 21 "..\..\Views\Apprenticeship\Framework.cshtml"
-            
+            #line 20 "..\..\Views\Apprenticeship\Framework.cshtml"
+                
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Apprenticeship\Framework.cshtml"
-             if (Model.ExpiryDateString != null)
-            {
+            #line 20 "..\..\Views\Apprenticeship\Framework.cshtml"
+                 if (Model.ExpiryDateString != null)
+                {
 
             
             #line default
             #line hidden
-WriteLiteral("                <div");
+WriteLiteral("                    <div");
 
 WriteLiteral(" class=\"expire-date\"");
 
-WriteLiteral(">\r\n                    <div>\r\n                        <i");
+WriteLiteral(">\r\n                        <div>\r\n                            <i");
 
 WriteLiteral(" class=\"fa fa-exclamation-circle\"");
 
 WriteLiteral(" aria-hidden=\"true\"");
 
-WriteLiteral("></i>\r\n                    </div>\r\n                    <span>\r\n                  " +
-"      This apprenticeship is closed to new starters from ");
+WriteLiteral("></i>\r\n                        </div>\r\n                        <span>\r\n          " +
+"                  This apprenticeship is closed to new starters from ");
 
             
-            #line 28 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                                      Write(Model.ExpiryDateString);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                    </span>\r\n                </div>\r\n");
-
-            
-            #line 31 "..\..\Views\Apprenticeship\Framework.cshtml"
-            }
+            #line 27 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                                          Write(Model.ExpiryDateString);
 
             
             #line default
             #line hidden
-WriteLiteral("        </div>\r\n\r\n        <div");
+WriteLiteral("\r\n                        </span>\r\n                    </div>\r\n");
+
+            
+            #line 30 "..\..\Views\Apprenticeship\Framework.cshtml"
+                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            </hgroup>\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
@@ -158,14 +158,14 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1315), Tuple.Create("\"", 1450)
+WriteAttribute("href", Tuple.Create(" href=\"", 1359), Tuple.Create("\"", 1494)
             
             #line 38 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1322), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+, Tuple.Create(Tuple.Create("", 1366), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 1322), false)
+, 1366), false)
 );
 
 WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n   " +
@@ -866,14 +866,14 @@ WriteLiteral(" class=\"button ui-find-training-providers\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8373), Tuple.Create("\"", 8510)
+WriteAttribute("href", Tuple.Create(" href=\"", 8417), Tuple.Create("\"", 8554)
             
             #line 187 "..\..\Views\Apprenticeship\Framework.cshtml"
-                , Tuple.Create(Tuple.Create("", 8380), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
+                , Tuple.Create(Tuple.Create("", 8424), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 8380), false)
+, 8424), false)
 );
 
 WriteLiteral(">\r\n                    Find training providers\r\n                </a>\r\n        </d" +

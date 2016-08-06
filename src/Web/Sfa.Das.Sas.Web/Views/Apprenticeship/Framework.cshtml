@@ -17,18 +17,18 @@
                 <p>
                     What qualifications an apprentice can achieve as part of this apprenticeship.
                 </p>
-            </hgroup>
-            @if (Model.ExpiryDateString != null)
-            {
-                <div class="expire-date">
-                    <div>
-                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                @if (Model.ExpiryDateString != null)
+                {
+                    <div class="expire-date">
+                        <div>
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        </div>
+                        <span>
+                            This apprenticeship is closed to new starters from @Model.ExpiryDateString
+                        </span>
                     </div>
-                    <span>
-                        This apprenticeship is closed to new starters from @Model.ExpiryDateString
-                    </span>
-                </div>
-            }
+                }
+            </hgroup>
         </div>
 
         <div class="column-third">
