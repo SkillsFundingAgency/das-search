@@ -161,8 +161,8 @@ WriteLiteral("                                <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral(">\r\n                                    You must enter a full postcode\r\n          " +
-"                      </span>\r\n");
+WriteLiteral(">\r\n                                    You must enter a full and valid postcode\r\n" +
+"                                </span>\r\n");
 
             
             #line 43 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
@@ -183,14 +183,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1849), Tuple.Create("\"", 1880)
+WriteAttribute("value", Tuple.Create(" value=\"", 1859), Tuple.Create("\"", 1890)
             
             #line 46 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                              , Tuple.Create(Tuple.Create("", 1857), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
+                              , Tuple.Create(Tuple.Create("", 1867), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
             
             #line default
             #line hidden
-, 1857), false)
+, 1867), false)
 );
 
 WriteLiteral(">\r\n                            <input");
@@ -201,14 +201,14 @@ WriteLiteral(" name=\"keywords\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1978), Tuple.Create("\"", 2004)
+WriteAttribute("value", Tuple.Create(" value=\"", 1988), Tuple.Create("\"", 2014)
             
             #line 47 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                      , Tuple.Create(Tuple.Create("", 1986), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+                      , Tuple.Create(Tuple.Create("", 1996), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
             
             #line default
             #line hidden
-, 1986), false)
+, 1996), false)
 );
 
 WriteLiteral(">\r\n                            <input");
@@ -217,14 +217,14 @@ WriteLiteral(" type=\"search\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2072), Tuple.Create("\"", 2095)
+WriteAttribute("value", Tuple.Create(" value=\"", 2082), Tuple.Create("\"", 2105)
             
             #line 48 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 2080), Tuple.Create<System.Object, System.Int32>(Model.PostCode
+, Tuple.Create(Tuple.Create("", 2090), Tuple.Create<System.Object, System.Int32>(Model.PostCode
             
             #line default
             #line hidden
-, 2080), false)
+, 2090), false)
 );
 
 WriteLiteral(" id=\"search-box\"");
