@@ -117,7 +117,7 @@ WriteLiteral(">\r\n                            <h2");
 WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(">\r\n                                Enter a postcode\r\n                            " +
-"</h2>\r\n                            <p>for example: \'SW1A 2AA\'</p>\r\n             " +
+"</h2>\r\n                            <p>For example: \'SW1A 2AA\'</p>\r\n             " +
 "           </div>\r\n\r\n                        <label");
 
 WriteLiteral(" class=\"form-label\"");
