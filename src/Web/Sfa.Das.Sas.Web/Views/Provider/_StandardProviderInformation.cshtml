@@ -19,15 +19,15 @@
             <dl class="result-data-list">
                 @RenderProviderDetails(item)
 
-                <dt>Employer satisfaction:</dt>
+                <dt><b>Employer satisfaction:</b></dt>
                 <dd class="employer-satisfaction">
                     @item.EmployerSatisfactionMessage
                 </dd>
-                <dt>Learner satisfaction:</dt>
+                <dt><b>Learner satisfaction:</b></dt>
                 <dd class="learner-satisfaction">
                     @item.LearnerSatisfactionMessage
                 </dd>
-                <dt>Achievement rate:</dt>
+                <dt><b>Achievement rate:</b></dt>
                 <dd class="achievement-rate">
                     @item.AchievementRateMessage
                 </dd>
@@ -37,7 +37,7 @@
 
 @helper  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
-    <dt>Distance:</dt>
+    <dt><b>Distance:</b></dt>
     <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
 
     if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
@@ -50,7 +50,7 @@
 
 @helper RenderDeliveryOptions(StandardProviderResultItemViewModel item)
 {
-    <dt>Training options:</dt>
+    <dt><b>Training options:</b></dt>
 
     <dd class="deliveryOptions">@item.DeliveryOptionsMessage</dd>
 }

@@ -65,7 +65,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Distance:</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt><b>Distance:</b></dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
@@ -202,7 +202,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Training options:</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt><b>Training options:</b></dt>\r\n");
 
 
 #line 54 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -317,7 +317,7 @@ WriteLiteral("                ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n                <dt>Employer satisfaction:</dt>\r\n                <dd");
+WriteLiteral("\r\n\r\n                <dt><b>Employer satisfaction:</b></dt>\r\n                <dd");
 
 WriteLiteral(" class=\"employer-satisfaction\"");
 
@@ -332,8 +332,8 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </dd>\r\n                <dt>Learner satisfaction:</dt>\r\n        " +
-"        <dd");
+WriteLiteral("\r\n                </dd>\r\n                <dt><b>Learner satisfaction:</b></dt>\r\n " +
+"               <dd");
 
 WriteLiteral(" class=\"learner-satisfaction\"");
 
@@ -348,8 +348,8 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </dd>\r\n                <dt>Achievement rate:</dt>\r\n            " +
-"    <dd");
+WriteLiteral("\r\n                </dd>\r\n                <dt><b>Achievement rate:</b></dt>\r\n     " +
+"           <dd");
 
 WriteLiteral(" class=\"achievement-rate\"");
 
