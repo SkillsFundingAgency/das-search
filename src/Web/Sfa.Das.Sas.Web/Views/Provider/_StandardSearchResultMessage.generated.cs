@@ -591,7 +591,7 @@ WriteLiteral("<div>\r\n");
             #line 10 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                               
     }
-    else if (Model.ShowAll && Model.TotalResults != 1)
+    else if (Model.ShowAll && Model.TotalResults != 1 && Model.TotalResults != 0)
     {
         
             

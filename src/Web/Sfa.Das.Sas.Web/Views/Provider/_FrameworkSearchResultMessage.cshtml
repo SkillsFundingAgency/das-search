@@ -1,7 +1,6 @@
 ﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel
 
 <div class="result-message">
-
     @if (Model.HasError)
     {
         @RenderErrorMessage()
@@ -10,7 +9,7 @@
     {
         @RenderAllOneResults()
     }
-    else if (Model.ShowAll && Model.TotalResults != 1)
+    else if (Model.ShowAll && Model.TotalResults != 1 && Model.TotalResults != 0)
     {
         @RenderAllResults()
     }

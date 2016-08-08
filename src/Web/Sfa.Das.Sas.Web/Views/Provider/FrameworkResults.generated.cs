@@ -46,14 +46,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class FrameworkResults : System.Web.Mvc.WebViewPage<ProviderFrameworkSearchResultViewModel>
     {
 
-#line 92 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 101 "..\..\Views\Provider\FrameworkResults.cshtml"
 public System.Web.WebPages.HelperResult GetPaginationBackLink()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 93 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 102 "..\..\Views\Provider\FrameworkResults.cshtml"
  
 if (Model.ActualPage > 1)
 {
@@ -66,14 +66,14 @@ if (Model.ActualPage > 1)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4155), Tuple.Create("\"", 4166)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4308), Tuple.Create("\"", 4319)
 
-#line 99 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4162), Tuple.Create<System.Object, System.Int32>(url
+#line 108 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 4315), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4162), false)
+, 4315), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -99,7 +99,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"counter\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 102 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 111 "..\..\Views\Provider\FrameworkResults.cshtml"
     WriteTo(__razor_helper_writer, previousPage);
 
 
@@ -108,7 +108,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, " of ");
 
 
-#line 102 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 111 "..\..\Views\Provider\FrameworkResults.cshtml"
                      WriteTo(__razor_helper_writer, Model.LastPage);
 
 
@@ -117,7 +117,7 @@ WriteLiteralTo(__razor_helper_writer, " of ");
 WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </a>\r\n");
 
 
-#line 104 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 113 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 
 
@@ -125,19 +125,19 @@ WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </a>\r\n");
 #line hidden
 });
 
-#line 105 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 114 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-#line 108 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 117 "..\..\Views\Provider\FrameworkResults.cshtml"
 public System.Web.WebPages.HelperResult GetPaginationNextLink()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 109 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 118 "..\..\Views\Provider\FrameworkResults.cshtml"
  
 if (Model.ActualPage < Model.LastPage)
 {
@@ -151,14 +151,14 @@ if (Model.ActualPage < Model.LastPage)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4739), Tuple.Create("\"", 4750)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4892), Tuple.Create("\"", 4903)
 
-#line 116 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4746), Tuple.Create<System.Object, System.Int32>(url
+#line 125 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 4899), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4746), false)
+, 4899), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
@@ -184,7 +184,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"counter\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 119 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 128 "..\..\Views\Provider\FrameworkResults.cshtml"
     WriteTo(__razor_helper_writer, nextPage);
 
 
@@ -193,7 +193,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, " of ");
 
 
-#line 119 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 128 "..\..\Views\Provider\FrameworkResults.cshtml"
                  WriteTo(__razor_helper_writer, Model.LastPage);
 
 
@@ -202,7 +202,7 @@ WriteLiteralTo(__razor_helper_writer, " of ");
 WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </a>\r\n");
 
 
-#line 121 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 130 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 
 
@@ -210,19 +210,19 @@ WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </a>\r\n");
 #line hidden
 });
 
-#line 122 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 131 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-#line 124 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 133 "..\..\Views\Provider\FrameworkResults.cshtml"
 public System.Web.WebPages.HelperResult FilterForm(string cssClass)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 125 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 134 "..\..\Views\Provider\FrameworkResults.cshtml"
  
 if (!Model.DeliveryModes.IsNullOrEmpty())
 {
@@ -256,15 +256,15 @@ WriteLiteralTo(__razor_helper_writer, " id=\"EditSearch\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5598), Tuple.Create("\"", 5629)
-, Tuple.Create(Tuple.Create("", 5606), Tuple.Create("filters-block", 5606), true)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5751), Tuple.Create("\"", 5782)
+, Tuple.Create(Tuple.Create("", 5759), Tuple.Create("filters-block", 5759), true)
 
-#line 141 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 5619), Tuple.Create<System.Object, System.Int32>(cssClass
+#line 150 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create(" ", 5772), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 5620), false)
+, 5773), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                        <form");
@@ -273,14 +273,14 @@ WriteLiteralTo(__razor_helper_writer, " method=\"get\"");
 
 WriteLiteralTo(__razor_helper_writer, " autocomplete=\"off\"");
 
-WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 5694), Tuple.Create("\"", 5722)
+WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 5847), Tuple.Create("\"", 5875)
 
-#line 142 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5703), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
+#line 151 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 5856), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
 
 #line default
 #line hidden
-, 5703), false)
+, 5856), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                            <input");
@@ -289,14 +289,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"PostCode\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5790), Tuple.Create("\"", 5813)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5943), Tuple.Create("\"", 5966)
 
-#line 143 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5798), Tuple.Create<System.Object, System.Int32>(Model.PostCode
+#line 152 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 5951), Tuple.Create<System.Object, System.Int32>(Model.PostCode
 
 #line default
 #line hidden
-, 5798), false)
+, 5951), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                            <input");
@@ -305,14 +305,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5891), Tuple.Create("\"", 5917)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6044), Tuple.Create("\"", 6070)
 
-#line 144 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5899), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
+#line 153 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6052), Tuple.Create<System.Object, System.Int32>(Model.FrameworkId
 
 #line default
 #line hidden
-, 5899), false)
+, 6052), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                            <input");
@@ -321,14 +321,14 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"ShowAll\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5986), Tuple.Create("\"", 6019)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6139), Tuple.Create("\"", 6172)
 
-#line 145 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5994), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
+#line 154 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6147), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
 
 #line default
 #line hidden
-, 5994), false)
+, 6147), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                            <input");
@@ -337,26 +337,26 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"keywords\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6089), Tuple.Create("\"", 6115)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6242), Tuple.Create("\"", 6268)
 
-#line 146 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6097), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+#line 155 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6250), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
 
 #line default
 #line hidden
-, 6097), false)
+, 6250), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n");
 
 
-#line 147 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 156 "..\..\Views\Provider\FrameworkResults.cshtml"
                             
 
 #line default
 #line hidden
 
-#line 147 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 156 "..\..\Views\Provider\FrameworkResults.cshtml"
                               
                                 Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                             
@@ -366,13 +366,13 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n");
 WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 150 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 159 "..\..\Views\Provider\FrameworkResults.cshtml"
                             
 
 #line default
 #line hidden
 
-#line 150 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 159 "..\..\Views\Provider\FrameworkResults.cshtml"
                               
                                 Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
                             
@@ -391,7 +391,7 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\
 " </div>\r\n            </div>\r\n");
 
 
-#line 158 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 167 "..\..\Views\Provider\FrameworkResults.cshtml"
                                     }
                                 }
 
@@ -400,12 +400,12 @@ WriteLiteralTo(__razor_helper_writer, " />\r\n                        </form>\r\
 #line hidden
 });
 
-#line 160 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 169 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 163 "..\..\Views\Provider\FrameworkResults.cshtml"
+        #line 172 "..\..\Views\Provider\FrameworkResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
@@ -490,97 +490,96 @@ WriteLiteral(">\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n\r\n");
+WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n");
 
             
-            #line 23 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 22 "..\..\Views\Provider\FrameworkResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 23 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 22 "..\..\Views\Provider\FrameworkResults.cshtml"
                   
                     Html.RenderPartial("_FrameworkSearchResultMessage");
                 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </hgroup>\r\n\r\n            <div");
+WriteLiteral("\r\n            </hgroup>\r\n        </div>\r\n    </div>\r\n\r\n    <div");
 
 WriteLiteral(" class=\"result-message\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 29 "..\..\Views\Provider\FrameworkResults.cshtml"
-                
+            #line 30 "..\..\Views\Provider\FrameworkResults.cshtml"
+        
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\Provider\FrameworkResults.cshtml"
-                 if (Model.ShowNationalProviders && Model.TotalResults == 0)
-                {
+            #line 30 "..\..\Views\Provider\FrameworkResults.cshtml"
+         if (Model.ShowNationalProviders && Model.TotalResults == 0)
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("                    <p");
+WriteLiteral("            <p");
 
 WriteLiteral(" id=\"framework-provider-search-message\"");
 
-WriteLiteral(">\r\n                        Sorry, there are currently no results for the filters " +
-"you applied\'.\r\n                    </p>\r\n");
+WriteLiteral(">\r\n                Sorry, there are currently no results for the filters you appl" +
+"ied.\r\n            </p>\r\n");
 
-WriteLiteral("                    <div>\r\n                        <p>You can:</p>\r\n             " +
-"           <ul");
+WriteLiteral("            <div>\r\n                <p>You can:</p>\r\n                <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\r\n                            <li");
+WriteLiteral(">\r\n                    <li");
 
 WriteLiteral(" class=\"return-search-results\"");
 
 WriteLiteral(">");
 
             
-            #line 37 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                         Write(Html.ActionLink("return to your apprenticeship training search results", "FrameworkResults", "Provider", new { @apprenticeshipid = @Model.FrameworkId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms }, new { }));
+            #line 38 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                 Write(Html.ActionLink("return to your apprenticeship training search results", "FrameworkResults", "Provider", new { @apprenticeshipid = @Model.FrameworkId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms }, new { }));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n                            <li");
+WriteLiteral("</li>\r\n                    <li");
 
 WriteLiteral(" class=\"start-again\"");
 
 WriteLiteral(">");
 
             
-            #line 38 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                               Write(Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship"));
+            #line 39 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                       Write(Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship"));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n                        </ul>\r\n                    </div>\r\n");
+WriteLiteral("</li>\r\n                </ul>\r\n            </div>\r\n");
 
             
-            #line 41 "..\..\Views\Provider\FrameworkResults.cshtml"
-                }
-                else if (Model.TotalResults == 0)
-                {
+            #line 42 "..\..\Views\Provider\FrameworkResults.cshtml"
+        }
+        else if (Model.TotalResults == 0)
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("                    <p>\r\n                        Sorry, there are currently no tr" +
-"aining providers for <b>");
+WriteLiteral("            <p>\r\n                Sorry, there are currently no training providers" +
+" for <b>");
 
             
-            #line 45 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                                           Write(Model.Title);
+            #line 46 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                                   Write(Model.Title);
 
             
             #line default
@@ -588,8 +587,8 @@ WriteLiteral("                    <p>\r\n                        Sorry, there ar
 WriteLiteral(", level ");
 
             
-            #line 45 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                                                               Write(Model.FrameworkLevel);
+            #line 46 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                                                       Write(Model.FrameworkLevel);
 
             
             #line default
@@ -601,44 +600,43 @@ WriteLiteral(" id=\"postalcode\"");
 WriteLiteral(">");
 
             
-            #line 45 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                                                                                                                 Write(Model.PostCode);
+            #line 46 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                                                                                                         Write(Model.PostCode);
 
             
             #line default
             #line hidden
-WriteLiteral("</b>\'.\r\n                    </p>\r\n");
+WriteLiteral("</b>\'.\r\n            </p>\r\n");
 
-WriteLiteral("                    <div>\r\n                        You can:\r\n                    " +
-"    <ul");
+WriteLiteral("            <div>\r\n                You can:\r\n                <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 50 "..\..\Views\Provider\FrameworkResults.cshtml"
-                            
+            #line 51 "..\..\Views\Provider\FrameworkResults.cshtml"
+                    
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\Provider\FrameworkResults.cshtml"
-                             if (Model.TotalProvidersCountry > 0)
-                            {
+            #line 51 "..\..\Views\Provider\FrameworkResults.cshtml"
+                     if (Model.TotalProvidersCountry > 0)
+                    {
 
             
             #line default
             #line hidden
-WriteLiteral("                                <li");
+WriteLiteral("                        <li");
 
 WriteLiteral(" class=\"total-providers-country\"");
 
 WriteLiteral(">");
 
             
-            #line 52 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                               Write(Html.ActionLink($"view all ({@Model.TotalProvidersCountry}) training providers", "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }));
+            #line 53 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                       Write(Html.ActionLink($"view all ({@Model.TotalProvidersCountry}) training providers", "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }));
 
             
             #line default
@@ -646,8 +644,8 @@ WriteLiteral(">");
 WriteLiteral(" for <b>");
 
             
-            #line 52 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                                                                                                                                                                                                                                                                          Write(Model.FrameworkName);
+            #line 53 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                                                                                                                                                                                                                                                                  Write(Model.FrameworkName);
 
             
             #line default
@@ -655,8 +653,8 @@ WriteLiteral(" for <b>");
 WriteLiteral(", level ");
 
             
-            #line 52 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                                                                                                                                                                                                                                                                                                      Write(Model.FrameworkLevel);
+            #line 53 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                                                                                                                                                                                                                                                                                              Write(Model.FrameworkLevel);
 
             
             #line default
@@ -664,67 +662,110 @@ WriteLiteral(", level ");
 WriteLiteral("</b> in England</li>\r\n");
 
             
-            #line 53 "..\..\Views\Provider\FrameworkResults.cshtml"
-                            }
+            #line 54 "..\..\Views\Provider\FrameworkResults.cshtml"
+                    }
 
             
             #line default
             #line hidden
-WriteLiteral("                            <li");
+WriteLiteral("                    <li");
 
 WriteLiteral(" class=\"return-search-results\"");
 
 WriteLiteral(">");
 
             
-            #line 54 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                                         Write(Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { }));
+            #line 55 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                                 Write(Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { }));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n                            <li");
+WriteLiteral("</li>\r\n                    <li");
 
 WriteLiteral(" class=\"start-again\"");
 
 WriteLiteral(">");
 
             
-            #line 55 "..\..\Views\Provider\FrameworkResults.cshtml"
-                                               Write(Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship"));
+            #line 56 "..\..\Views\Provider\FrameworkResults.cshtml"
+                                       Write(Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship"));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n                        </ul>\r\n                    </div>\r\n");
+WriteLiteral("</li>\r\n                </ul>\r\n            </div>\r\n");
 
             
-            #line 58 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 59 "..\..\Views\Provider\FrameworkResults.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </div>\r\n\r\n    <div");
+
+WriteLiteral(" class=\"grid-row\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"column-third\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"editSearch\"");
+
+WriteLiteral(">\r\n");
+
+            
+            #line 65 "..\..\Views\Provider\FrameworkResults.cshtml"
+                
+            
+            #line default
+            #line hidden
+            
+            #line 65 "..\..\Views\Provider\FrameworkResults.cshtml"
+                 if (Model.Hits.Any() && !Model.HasError)
+                {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <h2");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">\r\n                        <a");
+
+WriteLiteral(" href=\"#EditSearch\"");
+
+WriteLiteral(">Filter results</a>\r\n                    </h2>\r\n");
+
+WriteLiteral("                    <div");
+
+WriteLiteral(" id=\"EditSearch\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                        ");
+
+            
+            #line 71 "..\..\Views\Provider\FrameworkResults.cshtml"
+                   Write(FilterForm("filter-box"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    </div>\r\n");
+
+            
+            #line 73 "..\..\Views\Provider\FrameworkResults.cshtml"
                 }
 
             
             #line default
             #line hidden
-WriteLiteral("            </div>\r\n        </div>\r\n    </div>\r\n    <div");
-
-WriteLiteral(" class=\"grid-row\"");
-
-WriteLiteral(">\r\n\r\n        <div");
-
-WriteLiteral(" class=\"column-third\"");
-
-WriteLiteral(">\r\n\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 66 "..\..\Views\Provider\FrameworkResults.cshtml"
-       Write(FilterForm("filter-box"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </div>\r\n        <div");
+WriteLiteral("            </div>\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" id=\"provider-results\"");
 
@@ -733,49 +774,49 @@ WriteLiteral(" class=\"column-two-thirds\"");
 WriteLiteral(">\r\n");
 
             
-            #line 69 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 78 "..\..\Views\Provider\FrameworkResults.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 69 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 78 "..\..\Views\Provider\FrameworkResults.cshtml"
               
                 Html.RenderPartial("_FrameworkProviderInformation");
             
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div");
+WriteLiteral("\r\n            <div");
 
 WriteLiteral(" class=\"page-navigation\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("        ");
+WriteLiteral("                ");
 
             
-            #line 77 "..\..\Views\Provider\FrameworkResults.cshtml"
-   Write(GetPaginationBackLink());
+            #line 82 "..\..\Views\Provider\FrameworkResults.cshtml"
+           Write(GetPaginationBackLink());
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("        ");
+WriteLiteral("                ");
 
             
-            #line 78 "..\..\Views\Provider\FrameworkResults.cshtml"
-   Write(GetPaginationNextLink());
+            #line 83 "..\..\Views\Provider\FrameworkResults.cshtml"
+           Write(GetPaginationNextLink());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    </div>\r\n\r\n</main>\r\n\r\n");
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</main>\r\n\r\n\r\n\r\n");
 
             
-            #line 83 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 92 "..\..\Views\Provider\FrameworkResults.cshtml"
  if (Model.TotalResults == 0)
 {
 
@@ -787,7 +828,7 @@ WriteLiteral("    <script>\r\n        window.onload = function () {\r\n         
 "   </script>\r\n");
 
             
-            #line 90 "..\..\Views\Provider\FrameworkResults.cshtml"
+            #line 99 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 
             
