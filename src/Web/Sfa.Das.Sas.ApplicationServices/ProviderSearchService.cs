@@ -67,22 +67,31 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
         {
+            ProviderFrameworkSearchResults result;
             if (!showAll & !nationalProviders)
             {
-                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocation);
+                result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocation);
+                result.ShowNationalProvidersOnly = nationalProviders;
+                return result;
             }
 
             if (showAll && !nationalProviders)
             {
-                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipId);
+                result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipId);
+                result.ShowNationalProvidersOnly = nationalProviders;
+                return result;
             }
 
             if (!showAll && nationalProviders)
             {
-                return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly);
+                result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly);
+                result.ShowNationalProvidersOnly = nationalProviders;
+                return result;
             }
 
-            return await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly);
+            result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly);
+            result.ShowNationalProvidersOnly = nationalProviders;
+            return result;
         }
 
         private static ProviderStandardSearchResults GetProviderStandardSearchResultErrorResponse(int standardId, string standardName, string postCode, string responseCode)
