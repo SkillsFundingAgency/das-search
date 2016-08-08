@@ -150,8 +150,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             switch (filter.SearchOption)
             {
-                case ProviderFilterOptions.ApprenticeshipLocation:
-                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
                 case ProviderFilterOptions.ApprenticeshipId:
                     return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
                 case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
@@ -167,8 +165,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             switch (filter.SearchOption)
             {
-                case ProviderFilterOptions.ApprenticeshipLocation:
-                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
                 case ProviderFilterOptions.ApprenticeshipId:
                     return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, standardId, coordinates, filter.DeliveryModes);
                 case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
