@@ -146,6 +146,21 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 .Ascending());
         }
 
+        private static Dictionary<string, long?> RetrieveAggregationElements(TermsAggregate termsAggregate)
+        {
+            var aggregationResult = new Dictionary<string, long?>();
+
+            if (termsAggregate.Buckets != null)
+            {
+                foreach (var item in termsAggregate.Buckets)
+                {
+                    aggregationResult.Add(item.Key, item.DocCount);
+                }
+            }
+
+            return aggregationResult;
+        }
+
         private SearchDescriptor<StandardProviderSearchResultsItem> CreateStandardProviderSearchQuery(string standardId, Coordinate coordinates, ProviderSearchFilter filter)
         {
             switch (filter.SearchOption)
@@ -189,25 +204,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
 
-            var trainingOptionsAggregation = new Dictionary<string, long?>();
+            var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
 
-            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                }
-            }
-
-            var nationalProvidersAggregation = new Dictionary<string, long?>();
-
-            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
-                {
-                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
-                }
-            }
+            var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
 
             return new SearchResult<StandardProviderSearchResultsItem>
             {
@@ -231,25 +230,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
 
-            var trainingOptionsAggregation = new Dictionary<string, long?>();
+            var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
 
-            if (results.Aggs.Terms(TrainingTypeAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(TrainingTypeAggregateName).Buckets)
-                {
-                    trainingOptionsAggregation.Add(item.Key, item.DocCount);
-                }
-            }
-
-            var nationalProvidersAggregation = new Dictionary<string, long?>();
-
-            if (results.Aggs.Terms(NationalProviderAggregateName).Buckets != null)
-            {
-                foreach (var item in results.Aggs.Terms(NationalProviderAggregateName).Buckets)
-                {
-                    nationalProvidersAggregation.Add(item.Key, item.DocCount);
-                }
-            }
+            var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
 
             return new SearchResult<FrameworkProviderSearchResultsItem>
             {
