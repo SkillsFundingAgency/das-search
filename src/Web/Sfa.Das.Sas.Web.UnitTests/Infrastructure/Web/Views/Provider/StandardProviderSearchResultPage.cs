@@ -612,6 +612,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PostCodeMissing = false,
                 StandardId = 1,
                 StandardName = "Test standard name",
+                StandardLevel = 3,
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 ActualPage = 1,
                 LastPage = 1,
@@ -624,7 +625,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".total-providers-country").Should().NotBeEmpty();
-            var expectedText = string.Format("view all ({0}) training providers for Test standard name in England", model.TotalResultsForCountry);
+            var expectedText = string.Format("view all ({0}) training providers for Test standard name, level 3 in England", model.TotalResultsForCountry);
             GetPartial(html, ".total-providers-country").Should().Be(expectedText);
         }
 
