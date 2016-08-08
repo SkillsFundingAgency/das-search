@@ -132,40 +132,29 @@ if (Model.ActualPage < Model.LastPage)
 
 @helper FilterForm(string cssClass)
 {
-if (!Model.DeliveryModes.IsNullOrEmpty())
-{
-    var hideMenu = true;
-    foreach (var deliveryMode in Model.DeliveryModes.Where(deliveryMode => deliveryMode.Count != 0))
+    if (!Model.DeliveryModes.IsNullOrEmpty())
     {
-        hideMenu = false;
-    }
+        var hideMenu = Model.DeliveryModes.All(deliveryMode => deliveryMode.Count == 0);
 
-    if (@Model.TotalResults != 0 || !hideMenu)
-    {
-            <div class="editSearch">
-                <h2 class="heading-medium">
-                    <a href="#EditSearch">Filter results</a>
-                </h2>
-                <div id="EditSearch">
-                    <div class="filters-block @cssClass">
-                        <form method="get" autocomplete="off" action="@Model.AbsolutePath">
-                            <input type="hidden" name="PostCode" value="@Model.PostCode" />
-                            <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
-                            <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()" />
-                            <input type="hidden" name="keywords" value="@Model.SearchTerms" />
-                            @{
-                                Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
-                            }
-                            @{
-                                Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
-                            }
-                            <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
-                        </form>
-                    </div>
-                </div>
+        if (@Model.TotalResults != 0 || !hideMenu)
+        {
+            <div class="filters-block @cssClass">
+                <form method="get" autocomplete="off" action="@Model.AbsolutePath">
+                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                    <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
+                    <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()" />
+                    <input type="hidden" name="keywords" value="@Model.SearchTerms" />
+                    @{
+                        Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
+                    }
+                    @{
+                        Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
+                    }
+                    <input type="submit" value="Update results" class="button margin-top-x2 postcode-search-button" />
+                </form>
             </div>
-                                    }
-                                }
+        }
+    }
 }
 
 @functions
