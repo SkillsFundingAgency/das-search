@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
             
             #line 1 "..\..\Views\Start\Cookies.cshtml"
   
-    ViewBag.Title = "Digital Apprenticeship Service - Cookies";
+    ViewBag.Title = "Skills Funding Agency (SFA) - Cookies";
 
             
             #line default
