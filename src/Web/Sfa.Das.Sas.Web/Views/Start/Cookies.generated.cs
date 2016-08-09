@@ -27,18 +27,6 @@ namespace Sfa.Das.Sas.Web.Views.Start
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    
-    #line 2 "..\..\Views\Start\Cookies.cshtml"
-    using FeatureToggle.Core.Fluent;
-    
-    #line default
-    #line hidden
-    
-    #line 1 "..\..\Views\Start\Cookies.cshtml"
-    using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
-    
-    #line default
-    #line hidden
     using Sfa.Das.Sas.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -51,7 +39,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Start\Cookies.cshtml"
+            #line 1 "..\..\Views\Start\Cookies.cshtml"
   
     ViewBag.Title = "Digital Apprenticeship Service - Cookies";
 
