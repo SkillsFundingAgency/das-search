@@ -1,7 +1,9 @@
-﻿using Sfa.Das.Sas.Core.Logging;
+﻿using System;
+using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.Infrastructure.Logging
 {
+    [Serializable]
     public class ElasticSearchLogEntry : ILogEntry
     {
         public string Identifier { get; set; }

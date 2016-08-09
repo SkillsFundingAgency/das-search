@@ -1,6 +1,9 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Dynamic;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceBus.Messaging;
+using Newtonsoft.Json;
 using NLog.Config;
 
 namespace NLog.Targets
@@ -38,12 +41,23 @@ namespace NLog.Targets
 
             string logMessage = this.Layout.Render(logEvent);
 
-            using (var eventHubData = new EventData(Encoding.UTF8.GetBytes(logMessage)) { PartitionKey = partitionKey })
+            var log = new ExpandoObject() as IDictionary<string, object>;
+
+            log.Add("app_Name", "FindApprenticeshipTraining");
+
+            foreach (var item in logEvent.Properties)
             {
-                foreach (var key in logEvent.Properties.Keys)
-                {
-                    eventHubData.Properties.Add(key.ToString(), logEvent.Properties[key]);
-                }
+                log.Add((string)item.Key, item.Value);
+            }
+
+            var log2 = JsonConvert.SerializeObject(log);
+
+            using (var eventHubData = new EventData(Encoding.UTF8.GetBytes(log2)) { PartitionKey = partitionKey })
+            {
+                //foreach (var key in logEvent.Properties.Keys)
+                //{
+                //    eventHubData.Properties.Add(key.ToString(), logEvent.Properties[key]);
+                //}
 
                 await _eventHubClient.SendAsync(eventHubData);
                 return true;
