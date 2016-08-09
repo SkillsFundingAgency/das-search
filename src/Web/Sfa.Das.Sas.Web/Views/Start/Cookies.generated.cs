@@ -302,8 +302,8 @@ WriteLiteral(">\r\n                <p");
 
 WriteLiteral(" class=\"modmodified-date\"");
 
-WriteLiteral(">Last updated: 19 May 2016</p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n<" +
-"/main>");
+WriteLiteral(">Last updated: 8 August 2016</p>\r\n            </div>\r\n        </div>\r\n    </div>\r" +
+"\n</main>");
 
         }
     }
