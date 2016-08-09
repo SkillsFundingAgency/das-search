@@ -87,14 +87,15 @@ WriteLiteral(">\r\n                        Cookies\r\n                    </h1>\
 
 WriteLiteral(" class=\"summary\"");
 
-WriteLiteral(">\r\n                <p>GOV.UK puts small files (known as ‘cookies’) onto your comp" +
-"uter to collect information about how you browse the site.</p>\r\n            </di" +
-"v>\r\n\r\n            <p>Cookies are used to: </p>\r\n\r\n            <ul");
+WriteLiteral(">\r\n                <p>The Skills Funding Agency (SFA) puts small files (known as " +
+"‘cookies’) onto your computer to collect information about how you browse our si" +
+"tes.</p>\r\n            </div>\r\n\r\n            <p>Cookies are used to: </p>\r\n\r\n    " +
+"        <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(@">
-                <li>measure how you use the website so it can be updated and improved based on your needs</li>
+                <li>measure how you use our websites so they can be updated and improved based on your needs</li>
                 <li>remember the notifications you’ve seen so that we don’t show them to you again</li>
             </ul>
 
@@ -107,7 +108,7 @@ WriteLiteral(" aria-label=\"Information\"");
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
 WriteLiteral(@">
-                <p>GOV.UK cookies aren’t used to identify you personally.</p>
+                <p>SFA cookies aren’t used to identify you personally.</p>
             </div>
 
             <p>
@@ -127,8 +128,8 @@ WriteLiteral(">how to manage cookies.</a>\r\n            </p>\r\n\r\n           
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">\r\n                How cookies are used on GOV.UK\r\n            </h2>\r\n\r\n         " +
-"   <h3");
+WriteLiteral(">\r\n                How cookies are used by SFA\r\n            </h2>\r\n\r\n            " +
+"<h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
@@ -137,7 +138,7 @@ WriteLiteral(@">
             </h3>
 
             <p>
-                We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements, eg <a");
+                We use Google Analytics software to collect information about how you use SFA sites. We do this to help make sure our sites are meeting the needs of its users and to help us make improvements, eg <a");
 
 WriteLiteral(" rel=\"external\"");
 
@@ -150,10 +151,10 @@ WriteLiteral(">improving site search.</a>\r\n            </p>\r\n\r\n           
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(@">
-                <li>the pages you visit on GOV.UK </li>
-                <li>how long you spend on each GOV.UK page</li>
-                <li>how you got to the site</li>
-                <li>what you click on while you’re visiting the site</li>
+                <li>the pages you visit on SFA sites </li>
+                <li>how long you spend on each SFA page</li>
+                <li>how you got to our sites</li>
+                <li>what you click on while you’re visiting our sites</li>
             </ul>
 
             <p>We don’t collect or store your personal information (for example your name or address) so this information can’t be used to identify who you are. </p>
@@ -187,7 +188,7 @@ WriteLiteral(@">
                 <tbody>
                     <tr>
                         <td>_ga</td>
-                        <td>This helps us count how many people visit GOV.UK by tracking if you’ve visited before</td>
+                        <td>This helps us count how many people visit SFA sites by tracking if you’ve visited before</td>
                         <td>2 years</td>
                     </tr>
                     <tr>
@@ -260,7 +261,7 @@ WriteLiteral(@">
                 Our introductory message
             </h3>
 
-            <p>You may see a pop-up welcome message when you first visit GOV.UK. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
+            <p>You may see a pop-up welcome message when you first visit an SFA site. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
 
             <table>
                 <thead>
