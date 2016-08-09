@@ -147,6 +147,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                                 {
                                     dest.SurveyUrl = _settings.SurveyUrl.ToString();
                                     dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
+                                    dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
                                 }));
 
             return View(viewModel);

@@ -34,5 +34,7 @@ namespace Sfa.Das.Sas.Core.Configuration
         Uri CookieAboutUrl { get; }
 
         Uri SurveyProviderUrl { get; }
+
+        Uri AchievementRateUrl { get; }
     }
 }

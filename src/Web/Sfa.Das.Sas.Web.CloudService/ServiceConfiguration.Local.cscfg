@@ -12,6 +12,7 @@
       <Setting name="CookieImprovementUrl" value="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/" />
       <Setting name="CookieApplicationInsightsUrl" value="https://azure.microsoft.com/en-us/documentation/articles/app-insights-data-retention-privacy/" />
       <Setting name="CookieAboutUrl" value="http://www.aboutcookies.org/" />
+      <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
