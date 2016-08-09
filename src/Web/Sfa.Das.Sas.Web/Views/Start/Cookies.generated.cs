@@ -28,22 +28,28 @@ namespace Sfa.Das.Sas.Web.Views.Start
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 2 "..\..\Views\Start\Cookies.cshtml"
+    #line 3 "..\..\Views\Start\Cookies.cshtml"
     using FeatureToggle.Core.Fluent;
     
     #line default
     #line hidden
     
-    #line 1 "..\..\Views\Start\Cookies.cshtml"
+    #line 2 "..\..\Views\Start\Cookies.cshtml"
     using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     
     #line default
     #line hidden
     using Sfa.Das.Sas.Web;
     
+    #line 1 "..\..\Views\Start\Cookies.cshtml"
+    using Sfa.Das.Sas.Web.ViewModels;
+    
+    #line default
+    #line hidden
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Start/Cookies.cshtml")]
-    public partial class Cookies : System.Web.Mvc.WebViewPage<dynamic>
+    public partial class Cookies : System.Web.Mvc.WebViewPage<CookieViewModel>
     {
         public Cookies()
         {
@@ -51,7 +57,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Start\Cookies.cshtml"
+            #line 6 "..\..\Views\Start\Cookies.cshtml"
   
     ViewBag.Title = "Digital Apprenticeship Service - Cookies";
 
@@ -121,7 +127,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"http://www.aboutcookies.org/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 1500), Tuple.Create("\"", 1522)
+            
+            #line 42 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 1507), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
+            
+            #line default
+            #line hidden
+, 1507), false)
+);
 
 WriteLiteral(">how to manage cookies.</a>\r\n            </p>\r\n\r\n            <h2");
 
@@ -141,8 +155,15 @@ WriteLiteral(@">
 
 WriteLiteral(" rel=\"external\"");
 
-WriteLiteral(" href=\"https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-search" +
-"es/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 2044), Tuple.Create("\"", 2072)
+            
+            #line 54 "..\..\Views\Start\Cookies.cshtml"
+                                                                                                                                                       , Tuple.Create(Tuple.Create("", 2051), Tuple.Create<System.Object, System.Int32>(Model.ImprovementUrl
+            
+            #line default
+            #line hidden
+, 2051), false)
+);
 
 WriteLiteral(">improving site search.</a>\r\n            </p>\r\n\r\n            <p>Google Analytics " +
 "stores information about:</p>\r\n\r\n            <ul");
@@ -205,7 +226,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"https://tools.google.com/dlpage/gaoptout\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 3910), Tuple.Create("\"", 3933)
+            
+            #line 101 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 3917), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
+            
+            #line default
+            #line hidden
+, 3917), false)
+);
 
 WriteLiteral(">opt out of Google Analytics cookies.</a>\r\n            </p>\r\n\r\n\r\n            <h3");
 
@@ -249,8 +278,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"https://azure.microsoft.com/en-us/documentation/articles/app-insights-data" +
-"-retention-privacy/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 5092), Tuple.Create("\"", 5128)
+            
+            #line 137 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 5099), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
+            
+            #line default
+            #line hidden
+, 5099), false)
+);
 
 WriteLiteral(">Application Insights data retention</a>\r\n            </p>\r\n\r\n            <h3");
 
@@ -301,7 +337,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"http://www.surveymonkey.com/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 6597), Tuple.Create("\"", 6628)
+            
+            #line 176 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 6604), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
+            
+            #line default
+            #line hidden
+, 6604), false)
+);
 
 WriteLiteral(">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMon" +
 "key will save extra cookies to your computer to track your progress through it.\r" +

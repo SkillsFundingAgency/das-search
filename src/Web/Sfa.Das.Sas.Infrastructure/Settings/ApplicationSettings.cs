@@ -31,6 +31,16 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri SatisfactionSourceUrl => new Uri(CloudConfigurationManager.GetSetting("SatisfactionSourceUrl"));
 
+        public Uri CookieImprovementUrl => new Uri(CloudConfigurationManager.GetSetting("CookieImprovementUrl"));
+
+        public Uri CookieGoogleUrl => new Uri(CloudConfigurationManager.GetSetting("CookieGoogleUrl"));
+
+        public Uri CookieApplicationInsightsUrl => new Uri(CloudConfigurationManager.GetSetting("CookieApplicationInsightsUrl"));
+
+        public Uri CookieAboutUrl => new Uri(CloudConfigurationManager.GetSetting("CookieAboutUrl"));
+
+        public Uri SurveyProviderUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyProviderUrl"));
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = CloudConfigurationManager.GetSetting("ElasticServerUrls").Split(',');

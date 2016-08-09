@@ -1,5 +1,8 @@
-﻿@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+﻿@using Sfa.Das.Sas.Web.ViewModels
+@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@model CookieViewModel
+
 @{
     ViewBag.Title = "Digital Apprenticeship Service - Cookies";
 }
@@ -36,7 +39,7 @@
             </p>
 
             <p>
-                Find out more about <a rel="external" target="_blank" href="http://www.aboutcookies.org/">how to manage cookies.</a>
+                Find out more about <a rel="external" target="_blank" href="@Model.AboutUrl">how to manage cookies.</a>
             </p>
 
             <h2 class="heading-large">
@@ -48,7 +51,7 @@
             </h3>
 
             <p>
-                We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements, eg <a rel="external" href="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/">improving site search.</a>
+                We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements, eg <a rel="external" href="@Model.ImprovementUrl">improving site search.</a>
             </p>
 
             <p>Google Analytics stores information about:</p>
@@ -95,7 +98,7 @@
             </table>
 
             <p> 
-                You can <a rel="external" target="_blank" href="https://tools.google.com/dlpage/gaoptout">opt out of Google Analytics cookies.</a>
+                You can <a rel="external" target="_blank" href="@Model.GoogleUrl">opt out of Google Analytics cookies.</a>
             </p>
 
 
@@ -131,7 +134,7 @@
             </table>
 
             <p>
-                 Read more about <a rel="external" target="_blank" href="https://azure.microsoft.com/en-us/documentation/articles/app-insights-data-retention-privacy/">Application Insights data retention</a>
+                 Read more about <a rel="external" target="_blank" href="@Model.ApplicationInsightsUrl">Application Insights data retention</a>
             </p>
 
             <h3 class="heading-medium">
@@ -170,7 +173,7 @@
             </h3>
 
             <p>
-                We use <a rel="external" target="_blank" href="http://www.surveymonkey.com/">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMonkey will save extra cookies to your computer to track your progress through it.
+                We use <a rel="external" target="_blank" href="@Model.SurveyProviderUrl">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMonkey will save extra cookies to your computer to track your progress through it.
             </p>
 
             <div class="meta-data group">
