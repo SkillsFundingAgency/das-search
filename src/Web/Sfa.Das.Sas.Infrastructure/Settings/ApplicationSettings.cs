@@ -29,6 +29,8 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];
 
+        public Uri SatisfactionSourceUrl => new Uri(CloudConfigurationManager.GetSetting("SatisfactionSourceUrl"));
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = CloudConfigurationManager.GetSetting("ElasticServerUrls").Split(',');

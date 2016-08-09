@@ -182,7 +182,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
         {
             <p class="satisfaction-source font-small">
-                Source: <a href="https://www.gov.uk/government/collections/fe-choices-information-for-providers" target="_blank">Skills Funding Agency FE Choices</a>
+                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
             </p>
         }
         <hr/>

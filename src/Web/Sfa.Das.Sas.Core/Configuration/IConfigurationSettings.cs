@@ -22,5 +22,7 @@ namespace Sfa.Das.Sas.Core.Configuration
         string EnvironmentName { get; }
 
         string ApplicationName { get; }
+
+        Uri SatisfactionSourceUrl { get; }
     }
 }
