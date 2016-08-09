@@ -14,6 +14,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         [Test]
         public void Start_WhenNavigateTo_ShouldReturnAViewResult()
         {
+            _mockConfiguration = new Mock<IConfigurationSettings>();
             // Arrange
             StartController controller = new StartController(_mockConfiguration.Object);
 
