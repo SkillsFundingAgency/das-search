@@ -126,15 +126,12 @@ WriteLiteral(@">
             </h3>
 
             <p>
-                We use Google Analytics software to collect information about how you use SFA sites. We do this to help make sure our sites are meeting the needs of its users and to help us make improvements, eg <a");
+                We use Google Analytics software to collect information about how you use SFA sites. We do this to help make sure our sites are meeting the needs of its users and to help us make improvements.
+            </p>
 
-WriteLiteral(" rel=\"external\"");
+            <p>Google Analytics stores information about:</p>
 
-WriteLiteral(" href=\"https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-search" +
-"es/\"");
-
-WriteLiteral(">improving site search.</a>\r\n            </p>\r\n\r\n            <p>Google Analytics " +
-"stores information about:</p>\r\n\r\n            <ul");
+            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 

@@ -1,12 +1,10 @@
-﻿@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
-@using FeatureToggle.Core.Fluent
-@model Sfa.Das.Sas.Web.ViewModels.HeaderViewModel
+﻿@model Sfa.Das.Sas.Web.ViewModels.HeaderViewModel
 
 @if (@Model.ShowCookieBanner)
 {
     <div id="global-cookie-message" class="cookie-banner">
         <div class="content-container" role="alert">
-            <span class="copy-16">GOV.UK uses cookies to make the site simpler. <a href="/cookies">Find out more about cookies</a></span>
+            <span class="copy-16">Skills Funding Agency (SFA) uses cookies to make the site simpler. <a href="/cookies">Find out more about cookies</a></span>
         </div>
     </div>
 }
