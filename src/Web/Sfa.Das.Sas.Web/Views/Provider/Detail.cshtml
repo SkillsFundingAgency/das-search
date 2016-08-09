@@ -214,7 +214,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                 <div class="panel panel-border-narrow">
                     <p>Achievement rates based on latest figures for similar apprenticeship training with this training provider.</p>
                     <p>Achievement rate sample size: @Model.OverallCohort</p>
-                    <p class="font-small">Source: <a href="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
+                    <p class="font-small">Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
                 </div>
             </details>
         }

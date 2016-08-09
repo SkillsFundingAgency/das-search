@@ -18,6 +18,7 @@
       <Setting name="CookieImprovementUrl" />
       <Setting name="CookieApplicationInsightsUrl" />
       <Setting name="CookieAboutUrl" />
+      <Setting name="AchievementRateUrl" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />

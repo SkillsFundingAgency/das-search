@@ -52,5 +52,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int NationalAchievementRate { get; set; }
 
         public string SatisfactionSourceUrl { get; set; }
+
+        public string AchievementRateSourceUrl { get; set; }
     }
 }
