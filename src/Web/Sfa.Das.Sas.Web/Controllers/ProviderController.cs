@@ -143,7 +143,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
-                                .AfterMap((src, dest) => dest.SurveyUrl = _settings.SurveyUrl.ToString()));
+                                .AfterMap((src, dest) =>
+                                {
+                                    dest.SurveyUrl = _settings.SurveyUrl.ToString();
+                                    dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
+                                }));
 
             return View(viewModel);
         }

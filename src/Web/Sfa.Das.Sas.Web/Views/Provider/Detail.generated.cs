@@ -592,8 +592,15 @@ WriteLiteralTo(__razor_helper_writer, " class=\"satisfaction-source font-small\"
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                Source: <a");
 
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/collections/fe-choices-information-for-provi" +
-"ders\"");
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7286), Tuple.Create("\"", 7321)
+
+#line 185 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 7293), Tuple.Create<System.Object, System.Int32>(Model.SatisfactionSourceUrl
+
+#line default
+#line hidden
+, 7293), false)
+);
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
@@ -802,16 +809,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9299), Tuple.Create("\"", 9324)
-, Tuple.Create(Tuple.Create("", 9307), Tuple.Create("width:", 9307), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9249), Tuple.Create("\"", 9274)
+, Tuple.Create(Tuple.Create("", 9257), Tuple.Create("width:", 9257), true)
 
 #line 230 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 9313), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 9263), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 9314), false)
-, Tuple.Create(Tuple.Create("", 9323), Tuple.Create("%", 9323), true)
+, 9264), false)
+, Tuple.Create(Tuple.Create("", 9273), Tuple.Create("%", 9273), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
