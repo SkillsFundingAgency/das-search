@@ -29,9 +29,15 @@ namespace Sfa.Das.Sas.Web.Views.Start
     using System.Web.WebPages;
     using Sfa.Das.Sas.Web;
     
+    #line 1 "..\..\Views\Start\Cookies.cshtml"
+    using Sfa.Das.Sas.Web.ViewModels;
+    
+    #line default
+    #line hidden
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Start/Cookies.cshtml")]
-    public partial class Cookies : System.Web.Mvc.WebViewPage<dynamic>
+    public partial class Cookies : System.Web.Mvc.WebViewPage<CookieViewModel>
     {
         public Cookies()
         {
@@ -39,7 +45,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
         public override void Execute()
         {
             
-            #line 1 "..\..\Views\Start\Cookies.cshtml"
+            #line 4 "..\..\Views\Start\Cookies.cshtml"
   
     ViewBag.Title = "Skills Funding Agency (SFA) - Cookies";
 
@@ -110,7 +116,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"http://www.aboutcookies.org/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 1434), Tuple.Create("\"", 1456)
+            
+            #line 40 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 1441), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
+            
+            #line default
+            #line hidden
+, 1441), false)
+);
 
 WriteLiteral(">how to manage cookies.</a>\r\n            </p>\r\n\r\n            <h2");
 
@@ -191,7 +205,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"https://tools.google.com/dlpage/gaoptout\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 3774), Tuple.Create("\"", 3797)
+            
+            #line 99 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 3781), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
+            
+            #line default
+            #line hidden
+, 3781), false)
+);
 
 WriteLiteral(">opt out of Google Analytics cookies.</a>\r\n            </p>\r\n\r\n\r\n            <h3");
 
@@ -235,8 +257,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"https://azure.microsoft.com/en-us/documentation/articles/app-insights-data" +
-"-retention-privacy/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 4956), Tuple.Create("\"", 4992)
+            
+            #line 135 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 4963), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
+            
+            #line default
+            #line hidden
+, 4963), false)
+);
 
 WriteLiteral(">Application Insights data retention</a>\r\n            </p>\r\n\r\n            <h3");
 
@@ -287,7 +316,15 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(" href=\"http://www.surveymonkey.com/\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 6466), Tuple.Create("\"", 6497)
+            
+            #line 174 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 6473), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
+            
+            #line default
+            #line hidden
+, 6473), false)
+);
 
 WriteLiteral(">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMon" +
 "key will save extra cookies to your computer to track your progress through it.\r" +

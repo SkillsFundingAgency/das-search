@@ -14,6 +14,10 @@
       <Setting name="SurveyUrl" />
       <Setting name="ElasticServerUrls" />
       <Setting name="SatisfactionSourceUrl" />
+      <Setting name="CookieGoogleUrl" />
+      <Setting name="CookieImprovementUrl" />
+      <Setting name="CookieApplicationInsightsUrl" />
+      <Setting name="CookieAboutUrl" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
