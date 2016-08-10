@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MetadataTool;
 using MetadataTool.Controllers;
+using MetadataTool.Web.Controllers;
 
 namespace MetadataTool.UnitTests.Controllers
 {
@@ -19,7 +20,6 @@ namespace MetadataTool.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
     }
 }

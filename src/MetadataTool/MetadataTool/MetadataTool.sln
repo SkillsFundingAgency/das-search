@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetadataTool", "MetadataTool\MetadataTool.csproj", "{886FF17E-BC04-4243-81B3-8D161EE5F41E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetadataTool.Web", "MetadataTool\MetadataTool.Web.csproj", "{886FF17E-BC04-4243-81B3-8D161EE5F41E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetadataTool.UnitTests", "MetadataTool.UnitTests\MetadataTool.UnitTests.csproj", "{E7948D2F-5D23-4D8C-884D-B87760965553}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetadataTool.Web.UnitTests", "MetadataTool.UnitTests\MetadataTool.Web.UnitTests.csproj", "{E7948D2F-5D23-4D8C-884D-B87760965553}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

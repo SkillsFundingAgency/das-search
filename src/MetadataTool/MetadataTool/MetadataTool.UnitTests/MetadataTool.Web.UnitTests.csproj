@@ -102,9 +102,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetadataTool\MetadataTool.csproj">
+    <ProjectReference Include="..\MetadataTool\MetadataTool.Web.csproj">
       <Project>{886FF17E-BC04-4243-81B3-8D161EE5F41E}</Project>
-      <Name>MetadataTool</Name>
+      <Name>MetadataTool.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
