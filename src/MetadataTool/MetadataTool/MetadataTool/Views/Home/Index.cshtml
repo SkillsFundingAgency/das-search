@@ -7,12 +7,12 @@
     <div class="row">
         <div class="col-md-4">
             <p>
-                <a href="http://asp.net" class="btn btn-primary btn-lg">List all standards &raquo;</a>
+                @Html.ActionLink("List all standards", "Standards", "Apprenticeship", null, new { @class = "btn btn-primary btn-lg" })
             </p>
         </div>
         <div class="col-md-4">
             <p>
-                <a href="http://asp.net" class="btn btn-primary btn-lg">List all frameworks &raquo;</a>
+                @Html.ActionLink("List all frameworks", "Frameworks", "Apprenticeship", null, new { @class = "btn btn-primary btn-lg" })
             </p>
         </div>
     </div>
