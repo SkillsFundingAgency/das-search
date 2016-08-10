@@ -592,8 +592,15 @@ WriteLiteralTo(__razor_helper_writer, " class=\"satisfaction-source font-small\"
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                Source: <a");
 
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/collections/fe-choices-information-for-provi" +
-"ders\"");
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7286), Tuple.Create("\"", 7321)
+
+#line 185 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 7293), Tuple.Create<System.Object, System.Int32>(Model.SatisfactionSourceUrl
+
+#line default
+#line hidden
+, 7293), false)
+);
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
@@ -747,8 +754,15 @@ WriteLiteralTo(__razor_helper_writer, " class=\"font-small\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Source: <a");
 
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/statistical-data-sets/sfa-national-achieveme" +
-"nt-rates-tables-2014-to-2015\"");
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 8771), Tuple.Create("\"", 8809)
+
+#line 217 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 8778), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
+
+#line default
+#line hidden
+, 8778), false)
+);
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
@@ -802,16 +816,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9299), Tuple.Create("\"", 9324)
-, Tuple.Create(Tuple.Create("", 9307), Tuple.Create("width:", 9307), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9178), Tuple.Create("\"", 9203)
+, Tuple.Create(Tuple.Create("", 9186), Tuple.Create("width:", 9186), true)
 
 #line 230 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 9313), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 9192), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 9314), false)
-, Tuple.Create(Tuple.Create("", 9323), Tuple.Create("%", 9323), true)
+, 9193), false)
+, Tuple.Create(Tuple.Create("", 9202), Tuple.Create("%", 9202), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
