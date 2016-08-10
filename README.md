@@ -2,8 +2,8 @@
 
 <img alt="Build Status" src="https://sfa-gov-uk.visualstudio.com/DefaultCollection/_apis/public/build/definitions/c39e0c0b-7aff-4606-b160-3566f3bbce23/12/badge" />
 
-This repository contains the code for a [Skills Funding Agency](https://www.gov.uk/government/organisations/skills-funding-agency) service **Find apprenticeship training** and it includes 2 applicaiton.   
-The [web application](https://www.findapprenticeship.service.gov.uk) provides a web interface to find and shortlist apprenticeships and organisations that training provides.
+This repository contains the code for the [Skills Funding Agency](https://www.gov.uk/government/organisations/skills-funding-agency) service called **Find apprenticeship training** and includes 2 applications.   
+The [web application](https://www.findapprenticeship.service.gov.uk) provides a web interface to find apprenticeships and organisations that provide training for them.
 
 
 =================================
