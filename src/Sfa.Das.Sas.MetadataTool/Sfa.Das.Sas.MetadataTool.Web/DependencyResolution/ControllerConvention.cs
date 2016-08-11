@@ -15,14 +15,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
-    using System;
-    using System.Web.Mvc;
+using System;
+using System.Web.Mvc;
+using AutoMapper.Internal;
+using StructureMap;
+using StructureMap.Graph;
+using StructureMap.Graph.Scanning;
+using StructureMap.Pipeline;
+using StructureMap.TypeRules;
 
-    using StructureMap.Configuration.DSL;
-    using StructureMap.Graph;
-    using StructureMap.Pipeline;
-    using StructureMap.TypeRules;
+namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
+    
 
     public class ControllerConvention : IRegistrationConvention {
         #region Public Methods and Operators
@@ -34,5 +37,17 @@ namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
         }
 
         #endregion
+
+        public void ScanTypes(TypeSet types, Registry registry)
+        {
+            // Only work on concrete types
+            types.FindTypes(TypeClassification.Concretes | TypeClassification.Closed).Each(type =>
+            {
+                if (type.CanBeCastTo<Controller>() && !type.IsAbstract)
+                {
+                    registry.For(type).LifecycleIs(new UniquePerRequestLifecycle());
+                }
+            });
+        }
     }
 }

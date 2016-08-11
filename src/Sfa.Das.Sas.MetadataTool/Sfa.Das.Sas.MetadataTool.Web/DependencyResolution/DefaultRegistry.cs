@@ -15,9 +15,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using StructureMap;
+using StructureMap.Graph;
+
 namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
-    using StructureMap.Configuration.DSL;
-    using StructureMap.Graph;
 	
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors

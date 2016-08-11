@@ -1,7 +1,16 @@
-﻿
+﻿@model List<Sfa.Das.Sas.Core.Models.StandardMetaData>
 @{
     ViewBag.Title = "Standards";
 }
 
 <h2>Standards</h2>
+
+<div>
+    @foreach (var item in Model)
+    {
+        <p>
+            @item.Id, @item.Title
+        </p>
+    }
+</div>
 

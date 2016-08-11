@@ -16,12 +16,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
+using Sfa.Das.Sas.ApplicationServices.DependencyResolution;
+
 namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
     using StructureMap;
 	
-    public static class IoC {
+    public static class IoC
+    {
         public static IContainer Initialize() {
-            return new Container(c => c.AddRegistry<DefaultRegistry>());
+            return new Container(c => {
+                c.AddRegistry<ApplicationServicesRegistry>();
+                c.AddRegistry<DefaultRegistry>();
+            });
         }
     }
 }

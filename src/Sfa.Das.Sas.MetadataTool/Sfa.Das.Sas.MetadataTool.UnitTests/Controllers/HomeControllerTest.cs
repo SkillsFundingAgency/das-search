@@ -19,7 +19,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
     }
 }

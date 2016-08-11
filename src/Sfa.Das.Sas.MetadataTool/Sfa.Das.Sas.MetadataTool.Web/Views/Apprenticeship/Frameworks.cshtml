@@ -1,7 +1,15 @@
-﻿
+﻿@model List<Sfa.Das.Sas.Core.Models.FrameworkMetaData>
 @{
     ViewBag.Title = "Frameworks";
 }
 
-<h2>Frameworks</h2>
+<h2>Frameworks (@Model.Count results)</h2>
 
+<div>
+    @foreach (var item in Model)
+    {
+        <p>
+            @item.Id, @item.FrameworkName: @item.Pathway
+        </p>
+    }
+</div>
