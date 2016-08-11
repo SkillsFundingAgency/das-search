@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E7948D2F-5D23-4D8C-884D-B87760965553}</ProjectGuid>
+    <ProjectGuid>{8FF9957D-D665-44C9-B006-96CCA6B67F52}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MetadataTool.UnitTests</RootNamespace>
-    <AssemblyName>MetadataTool.UnitTests</AssemblyName>
+    <RootNamespace>Sfa.Das.Sas.MetadataTool.UnitTests</RootNamespace>
+    <AssemblyName>Sfa.Das.Sas.MetadataTool.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -91,7 +91,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ApprenticeshipControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
@@ -103,9 +102,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetadataTool\MetadataTool.Web.csproj">
-      <Project>{886FF17E-BC04-4243-81B3-8D161EE5F41E}</Project>
-      <Name>MetadataTool.Web</Name>
+    <ProjectReference Include="..\Sfa.Das.Sas.MetadataTool.Web\Sfa.Das.Sas.MetadataTool.Web.csproj">
+      <Project>{344564A2-FCE7-4759-9994-EC1D317C3E20}</Project>
+      <Name>Sfa.Das.Sas.MetadataTool.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

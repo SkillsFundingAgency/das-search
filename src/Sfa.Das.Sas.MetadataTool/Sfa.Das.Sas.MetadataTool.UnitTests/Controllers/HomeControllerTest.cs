@@ -2,9 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MetadataTool;
 using MetadataTool.Controllers;
-using MetadataTool.Web.Controllers;
 
-namespace MetadataTool.UnitTests.Controllers
+namespace Sfa.Das.Sas.MetadataTool.UnitTests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
@@ -20,6 +19,7 @@ namespace MetadataTool.UnitTests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+            Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
     }
 }

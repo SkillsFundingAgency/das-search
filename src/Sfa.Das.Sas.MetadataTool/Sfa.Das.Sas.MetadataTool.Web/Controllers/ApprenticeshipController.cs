@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MetadataTool.Web.Controllers
+namespace MetadataTool.Controllers
 {
     public class ApprenticeshipController : Controller
     {

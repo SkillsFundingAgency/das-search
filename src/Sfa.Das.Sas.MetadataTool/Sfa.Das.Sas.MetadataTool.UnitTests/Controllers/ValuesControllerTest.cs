@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MetadataTool;
 using MetadataTool.Controllers;
 
-namespace MetadataTool.UnitTests.Controllers
+namespace Sfa.Das.Sas.MetadataTool.UnitTests.Controllers
 {
     [TestClass]
     public class ValuesControllerTest

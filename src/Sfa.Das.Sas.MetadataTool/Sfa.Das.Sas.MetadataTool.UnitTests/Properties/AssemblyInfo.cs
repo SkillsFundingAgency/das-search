@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MetadataTool.UnitTests")]
+[assembly: AssemblyTitle("Sfa.Das.Sas.MetadataTool.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MetadataTool.UnitTests")]
+[assembly: AssemblyProduct("Sfa.Das.Sas.MetadataTool.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("449b4817-e5aa-46d9-8df7-507d81feb059")]
+[assembly: Guid("466c8eb9-cd4e-43ac-91ea-850b1c7adfcc")]
 
 // Version information for an assembly consists of the following four values:
 //
