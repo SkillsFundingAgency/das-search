@@ -65,6 +65,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorGenerator.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.4.7\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=4.3.0.449, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StructureMap.4.4.0\lib\net45\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -195,6 +199,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
@@ -249,6 +254,31 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Apprenticeship\FrameworkDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrameworkDetails.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Apprenticeship\Frameworks.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Frameworks.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Apprenticeship\StandardDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandardDetails.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Apprenticeship\Standards.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Standards.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -315,13 +345,29 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Apprenticeship\Standards.cshtml" />
-    <Content Include="Views\Apprenticeship\Frameworks.cshtml" />
-    <Content Include="Views\Apprenticeship\StandardDetails.cshtml" />
-    <Content Include="Views\Apprenticeship\FrameworkDetails.cshtml" />
+    <Content Include="Views\Apprenticeship\Standards.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Standards.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Apprenticeship\Frameworks.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Frameworks.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Apprenticeship\StandardDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>StandardDetails.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Apprenticeship\FrameworkDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FrameworkDetails.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\razorgenerator.directives" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
