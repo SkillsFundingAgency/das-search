@@ -36,13 +36,31 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
             return timing.Result.OrderBy(x => x.Id).ToList();
         }
 
-        public List<FrameworkMetaData> GetAllFrameworkMetaData()
+        public StandardMetaData GetStandardMetaData(int id)
+        {
+            var timing = ExecutionTimer.GetTiming(() => _metaDataReader.GetStandardMetaData(id));
+
+            // _log.Debug("MetaDataHelper.GetStandardMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+
+            return timing.Result;
+        }
+
+        public List<FrameworkMetaData> GetAllFrameworksMetaData()
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataFrameworkReader.GetFrameworksMetaData());
 
-            // _log.Debug("MetaDataHelper.GetAllFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+            // _log.Debug("MetaDataHelper.GetAllFrameworksMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
             return timing.Result.OrderBy(x => x.Id).ToList();
+        }
+
+        public FrameworkMetaData GetFrameworkMetaData(int id)
+        {
+            var timing = ExecutionTimer.GetTiming(() => _metaDataFrameworkReader.GetFrameworkMetaData(id));
+
+            // _log.Debug("MetaDataHelper.GetFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+
+            return timing.Result;
         }
     }
 }

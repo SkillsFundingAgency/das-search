@@ -1,0 +1,103 @@
+﻿@using System.Globalization
+@using Sfa.Das.Sas.Core.Extensions
+@using Sfa.Das.Sas.Core.Models
+@model Sfa.Das.Sas.Core.Models.FrameworkMetaData
+
+@{
+    ViewBag.Title = $"{@Model.FrameworkName}: {Model.Pathway} - FrameworkDetails";
+}
+
+<h2>@Model.FrameworkName: @Model.Pathway</h2>
+<div>
+    @GetFrameworkProperty("Id", "id", Model.Id)
+    @GetFrameworkProperty("Framework Name", "frameworkName", Model.FrameworkName)
+    @GetFrameworkProperty("Framework Code", "frameworkCode", Model.FrameworkCode.ToString())
+    @GetFrameworkProperty("Framework Overview", "frameworkOverview", Model.FrameworkOverview)
+    @GetFrameworkTypicalLengthProperty("Typical Length", "typicalLength", Model.TypicalLength)
+    @GetFrameworkProperty("Prog Type", "progType", Model.ProgType.ToString())
+    @GetFrameworkProperty("Pathway Code", "pathwayCode", Model.PathwayCode.ToString())
+    @GetFrameworkProperty("Pathway", "pathway", Model.Pathway)
+    @GetFrameworkProperty("Nas Title", "nasTitle", Model.NasTitle)
+    @GetFrameworkProperty("Effective From", "effectiveFrom", Model.EffectiveFrom.ToString(CultureInfo.CurrentCulture))
+    @GetFrameworkProperty("Effective To", "effectiveTo", Model.EffectiveTo.ToString())
+    @GetFrameworkJobRoleItemsListProperty("Job Role Items", "jobRoleItems", Model.JobRoleItems)
+    @GetFrameworkListProperty("Keywords", "keywords", Model.Keywords)
+    @GetFrameworkProperty("Sector Subject Area Tier 1", "sectorSubjectAreaTier1", Model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture))
+    @GetFrameworkProperty("Sector Subject Area Tier 2", "sectorSubjectAreaTier2", Model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture))
+    @GetFrameworkProperty("Entry Requirements", "entryRequirements", Model.EntryRequirements)
+    @GetFrameworkProperty("Professional Registration", "professionalRegistration", Model.ProfessionalRegistration)
+    @GetFrameworkProperty("Completion Qualifications", "completionQualifications", Model.CompletionQualifications)
+    @GetFrameworkListProperty("Competency Qualification", "competencyQualification", Model.CompetencyQualification)
+    @GetFrameworkListProperty("Knowledge Qualification", "knowledgeQualification", Model.KnowledgeQualification)
+    @GetFrameworkListProperty("Combined Qualification", "combinedQualification", Model.CombinedQualification)
+</div>
+
+@helper GetFrameworkProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @(!string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"))
+        </dd>
+    }
+}
+
+@helper GetFrameworkListProperty(string title, string id, IEnumerable<string> itemList, bool hideIfEmpty = false)
+{
+    if (!hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @(itemList != null && itemList.Any() ? @Html.MarkdownToHtml(String.Join(", ", itemList)) : Html.MarkdownToHtml("none"))
+        </dd>
+    }
+}
+
+@helper GetFrameworkJobRoleItemsListProperty(string title, string id, IEnumerable<JobRoleItem> itemList, bool hideIfEmpty = false)
+{
+    if (itemList != null || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @if (itemList.Any())
+            {
+                <ul>
+                    @foreach (var item in itemList)
+                    {
+                        <li>
+                            <span>
+                                <b>
+                                    @(!string.IsNullOrEmpty(item.Title) ? Html.MarkdownToHtml(item.Title) : Html.MarkdownToHtml("none"))
+                                </b>
+                                @(!string.IsNullOrEmpty(@item.Description) ? Html.MarkdownToHtml(@item.Description) : Html.MarkdownToHtml("none"))
+                            </span>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                @Html.MarkdownToHtml("none")
+            }
+        </dd>
+    }
+}
+
+@helper GetFrameworkTypicalLengthProperty(string title, string id, TypicalLength item, bool hideIfEmpty = false)
+{
+if (!hideIfEmpty)
+{
+        <dt>@title</dt>
+        <dd id="@id">
+            @if (item != null)
+            {
+                <span>From @item.From to @item.To @item.Unit</span>
+            }
+            else
+            {
+                @Html.MarkdownToHtml("none")
+            }
+        </dd>
+}
+}

@@ -10,5 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
     public interface IGetStandardMetaData
     {
         List<StandardMetaData> GetStandardsMetaData();
+
+        StandardMetaData GetStandardMetaData(int id);
     }
 }

@@ -1,0 +1,88 @@
+﻿@using System.Globalization
+@using Sfa.Das.Sas.Core.Extensions
+@using Sfa.Das.Sas.Core.Models
+@model Sfa.Das.Sas.Core.Models.StandardMetaData
+
+@{
+    ViewBag.Title = $"{@Model.Title} - Standard Details";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+    <dl>
+        @GetStandardProperty("Id", "id", Model.Id.ToString())
+        @GetStandardProperty("Title", "title", Model.Title)
+        @GetStandardTypicalLengthProperty("Typical Length", "typicalLength", Model.TypicalLength)
+        @GetStandardProperty("Notional End Level", "notionalEndLevel", Model.NotionalEndLevel.ToString())
+        @GetStandardListProperty("Job Roles", "jobRoles", Model.JobRoles)
+        @GetStandardListProperty("Keywords", "keywords", Model.Keywords)
+        @GetStandardUrlProperty("Standard Pdf Url", "standardPdfUrl", Model.StandardPdfUrl)
+        @GetStandardUrlProperty("Assessment Plan Pdf Url", "assessmentPlanPdfUrl", Model.AssessmentPlanPdfUrl)
+        @GetStandardProperty("Entry Requirements", "entryRequirements", Model.EntryRequirements)
+        @GetStandardProperty("What Apprentices Will Learn", "whatApprenticesWillLearn", Model.WhatApprenticesWillLearn)
+        @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
+        @GetStandardProperty("Professional Registration", "professionalRegistration", Model.ProfessionalRegistration)
+        @GetStandardProperty("Overview Of Role", "overviewOfRole", Model.OverviewOfRole)
+        @GetStandardProperty("Sector Subject Area Tier 1", "sectorSubjectAreaTier1", Model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture))
+        @GetStandardProperty("Sector Subject Area Tier 2", "sectorSubjectAreaTier2", Model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture))
+    </dl>
+</div>
+
+@helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @(!string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"))
+        </dd>
+    }
+}
+
+@helper GetStandardListProperty(string title, string id, IEnumerable<string> itemList, bool hideIfEmpty = false)
+{
+    if (!hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @(itemList != null && itemList.Any() ? @Html.MarkdownToHtml(String.Join(", ", itemList)) : Html.MarkdownToHtml("none"))
+        </dd>
+    }
+}
+
+@helper GetStandardUrlProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @if (!string.IsNullOrEmpty(item))
+            {
+                <a href="@item" target="_blank">@item</a>
+            }
+            else
+            {
+                @Html.MarkdownToHtml("none")
+            }
+        </dd>
+    }
+}
+
+@helper GetStandardTypicalLengthProperty(string title, string id, TypicalLength item, bool hideIfEmpty = false)
+{
+    if (!hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">
+            @if (item != null)
+            {
+                <span>From @item.From to @item.To @item.Unit</span>
+            }
+            else
+            {
+                @Html.MarkdownToHtml("none")
+            }
+        </dd>
+    }
+}

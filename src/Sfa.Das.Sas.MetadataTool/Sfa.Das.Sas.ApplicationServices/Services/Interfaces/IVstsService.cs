@@ -8,6 +8,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
     {
         IEnumerable<StandardMetaData> GetStandards();
 
+        StandardMetaData GetStandard(int id);
+
         IEnumerable<VstsFrameworkMetaData> GetFrameworks();
+
+        VstsFrameworkMetaData GetFramework(int id);
     }
 }

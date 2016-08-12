@@ -9,7 +9,7 @@
     @foreach (var item in Model)
     {
         <p>
-            @item.Id, @item.FrameworkName: @item.Pathway
+            @Html.ActionLink($"{@item.Id}, {@item.FrameworkName}: {@item.Pathway}", "FrameworkDetails", "Apprenticeship", new { @id = item.Id }, null)
         </p>
     }
 </div>

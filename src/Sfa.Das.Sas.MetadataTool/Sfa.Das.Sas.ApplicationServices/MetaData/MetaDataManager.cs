@@ -39,11 +39,25 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
             return standards;
         }
 
+        public StandardMetaData GetStandardMetaData(int id)
+        {
+            var standard = _vstsService.GetStandard(id);
+
+            return standard;
+        }
+
         public List<FrameworkMetaData> GetFrameworksMetaData()
         {
             var frameworks = _vstsService.GetFrameworks()?.ToList();
 
             return _mappingService.Map<List<VstsFrameworkMetaData>, List<FrameworkMetaData>>(frameworks);
+        }
+
+        public FrameworkMetaData GetFrameworkMetaData(int id)
+        {
+            var framework = _vstsService.GetFramework(id);
+
+            return _mappingService.Map<VstsFrameworkMetaData, FrameworkMetaData>(framework);
         }
     }
 }

@@ -42,6 +42,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary);
         }
 
+        public StandardMetaData GetStandard(int id)
+        {
+            var standardsDictionary = GetAllFileContents(_appServiceSettings.VstsGitGetFilesUrl);
+            return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary).FirstOrDefault(x => x.Id == id);
+        }
+
         public IEnumerable<VstsFrameworkMetaData> GetFrameworks()
         {
             try
@@ -55,6 +61,21 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
 
             return new List<VstsFrameworkMetaData>();
+        }
+
+        public VstsFrameworkMetaData GetFramework(int id)
+        {
+            try
+            {
+                var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
+                return _jsonMetaDataConvert.DeserializeObject<VstsFrameworkMetaData>(frameworksDir).FirstOrDefault(x => x.Id == id.ToString());
+            }
+            catch (Exception ex)
+            {
+                //_logger.Error(ex, "Error getting framework meta data");
+            }
+
+            return new VstsFrameworkMetaData();
         }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Sfa.Das.Sas.ApplicationServices.Helpers;
+using Sfa.Das.Sas.Core.Models;
 
 namespace MetadataTool.Controllers
 {
@@ -24,8 +25,20 @@ namespace MetadataTool.Controllers
 
         public ActionResult Frameworks()
         {
-            var frameworks = _metaDataHelper.GetAllFrameworkMetaData();
+            var frameworks = _metaDataHelper.GetAllFrameworksMetaData();
             return View(frameworks);
+        }
+
+        public ActionResult StandardDetails(int id)
+        {
+            var standard = _metaDataHelper.GetStandardMetaData(id);
+            return View(standard);
+        }
+
+        public ActionResult FrameworkDetails(int id)
+        {
+            var framework = _metaDataHelper.GetFrameworkMetaData(id);
+            return View(framework);
         }
     }
 }

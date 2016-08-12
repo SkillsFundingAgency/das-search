@@ -11,6 +11,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
     {
         List<StandardMetaData> GetAllStandardsMetaData();
 
-        List<FrameworkMetaData> GetAllFrameworkMetaData();
+        StandardMetaData GetStandardMetaData(int id);
+
+        List<FrameworkMetaData> GetAllFrameworksMetaData();
+
+        FrameworkMetaData GetFrameworkMetaData(int id);
     }
 }
