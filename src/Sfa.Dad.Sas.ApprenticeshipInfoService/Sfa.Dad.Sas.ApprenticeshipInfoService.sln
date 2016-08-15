@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.ApprenticeshipI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.ApprenticeshipInfoService.UnitTests", "Sfa.Das.Sas.ApprenticeshipInfoService.UnitTests\Sfa.Das.Sas.ApprenticeshipInfoService.UnitTests.csproj", "{1D5ACCA0-C581-40D4-825E-D0A613623CD2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{5F11FF93-1943-45CF-866B-74219AD92BCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7C2E8E1F-F4F9-483B-874E-822C6BA383E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9466EC49-0F74-4272-919E-08E273C1C7E0} = {5F11FF93-1943-45CF-866B-74219AD92BCD}
+		{F9D8D77F-BB06-45BC-893A-922F9CA23C0C} = {5F11FF93-1943-45CF-866B-74219AD92BCD}
+		{1D5ACCA0-C581-40D4-825E-D0A613623CD2} = {7C2E8E1F-F4F9-483B-874E-822C6BA383E6}
 	EndGlobalSection
 EndGlobal
