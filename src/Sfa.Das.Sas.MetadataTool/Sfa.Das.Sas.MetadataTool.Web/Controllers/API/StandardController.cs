@@ -29,20 +29,5 @@ namespace Sfa.Das.Sas.MetadataTool.Web.Controllers.API
         {
             return _metaDataHelper.GetStandardMetaData(id);
         }
-        
-        // POST: api/Standard
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Standard/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Standard/5
-        public void Delete(int id)
-        {
-        }
     }
 }

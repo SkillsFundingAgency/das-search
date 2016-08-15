@@ -29,20 +29,5 @@ namespace Sfa.Das.Sas.MetadataTool.Web.Controllers.API
         {
             return _metaDataHelper.GetFrameworkMetaData(id);
         }
-
-        // POST: api/FrameworkApi
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/FrameworkApi/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/FrameworkApi/5
-        public void Delete(int id)
-        {
-        }
     }
 }
