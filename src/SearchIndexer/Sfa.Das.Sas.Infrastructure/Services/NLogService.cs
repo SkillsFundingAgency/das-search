@@ -13,6 +13,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
     using Newtonsoft.Json;
 
     using Sfa.Das.Sas.Indexer.Infrastructure.Settings;
+    using SFA.DAS.NLog.Targets.AzureEventHub;
 
     public class NLogService : ILog
     {
@@ -23,6 +24,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 #pragma warning disable S1144 // Unused private types or members should be removed
         private ElasticSearchTarget _dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget _dummy2; // Reference so assembly is copied to Primary output.
+        private AzureEventHubTarget _dummy3;
 #pragma warning restore S1144 // Unused private types or members should be removed
 #pragma warning disable CS0169
 
