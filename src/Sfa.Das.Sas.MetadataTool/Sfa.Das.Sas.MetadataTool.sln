@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.ApplicationServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Core", "Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj", "{668EEF13-AD73-4036-9BD5-57B0BBC5C43C}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Das.Sas.MetadataTool.AzureCloudService", "Sfa.Das.Sas.MetadataTool.AzureCloudService\Sfa.Das.Sas.MetadataTool.AzureCloudService.ccproj", "{1BBC536B-DC65-45D1-A0FD-940130AEF508}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{668EEF13-AD73-4036-9BD5-57B0BBC5C43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{668EEF13-AD73-4036-9BD5-57B0BBC5C43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{668EEF13-AD73-4036-9BD5-57B0BBC5C43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BBC536B-DC65-45D1-A0FD-940130AEF508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBC536B-DC65-45D1-A0FD-940130AEF508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BBC536B-DC65-45D1-A0FD-940130AEF508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBC536B-DC65-45D1-A0FD-940130AEF508}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +54,6 @@ Global
 		{8FF9957D-D665-44C9-B006-96CCA6B67F52} = {1D8EB983-9BE4-498B-B172-C57668D3F927}
 		{0369220E-3EE2-4D4E-9D2D-BA2C048DB127} = {8C6DD77F-BC59-4A3C-A6E8-45E9F7E88798}
 		{668EEF13-AD73-4036-9BD5-57B0BBC5C43C} = {30A2A1B7-B9BB-424C-880B-49783C512049}
+		{1BBC536B-DC65-45D1-A0FD-940130AEF508} = {30A2A1B7-B9BB-424C-880B-49783C512049}
 	EndGlobalSection
 EndGlobal
