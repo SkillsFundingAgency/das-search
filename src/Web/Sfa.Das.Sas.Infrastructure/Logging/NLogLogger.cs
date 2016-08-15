@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.ApplicationInsights.NLogTarget;
-using NLog;
-using NLog.Config;
-using NLog.Targets.ElasticSearch;
-using Sfa.Das.Sas.Core.Logging;
-
-namespace Sfa.Das.Sas.Infrastructure.Logging
+﻿namespace Sfa.Das.Sas.Infrastructure.Logging
 {
-    using System.Dynamic;
-
-    using Newtonsoft.Json;
-
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.ApplicationInsights.NLogTarget;
+    using NLog;
+    using NLog.Config;
+    using NLog.Targets.ElasticSearch;
+    using SFA.DAS.NLog.Targets.AzureEventHub;
     using Sfa.Das.Sas.Core.Configuration;
+    using Sfa.Das.Sas.Core.Logging;
 
     public class NLogLogger : ILog
     {
@@ -23,6 +19,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
+        private AzureEventHubTarget dummy3; // Reference so assembly is copied to Primary output.
 #pragma warning restore S1144, 0169 // Unused private types or members should be removed
 
         public NLogLogger(Type loggerType, IConfigurationSettings settings, IRequestContext context)

@@ -1,7 +1,9 @@
-﻿using Sfa.Das.Sas.Core.Logging;
-
-namespace Sfa.Das.Sas.Infrastructure.Logging
+﻿namespace Sfa.Das.Sas.Infrastructure.Logging
 {
+    using Newtonsoft.Json;
+    using SFA.DAS.NLog.Targets.AzureEventHub;
+    using Sfa.Das.Sas.Core.Logging;
+
     public class ElasticSearchLogEntry : ILogEntry
     {
         public string Identifier { get; set; }
@@ -12,6 +14,9 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
         public double MaxScore { get; set; }
         public int? HitCount { get; set; }
         public string Url { get; set; }
+
+        [JsonConverter(typeof(AlreadyJsonFieldConverter))]
         public string Body { get; set; }
+
     }
 }
