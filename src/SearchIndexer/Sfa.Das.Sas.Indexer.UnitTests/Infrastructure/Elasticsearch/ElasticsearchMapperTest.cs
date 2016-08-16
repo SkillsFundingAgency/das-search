@@ -65,7 +65,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            framework.Title.Should().Be("Trade Business Services");
+            framework.Title.Should().Be("Trade Business Services: Trade Business Services");
             framework.Level.Should().Be(2);
             framework.FrameworkId.Should().Be("61621");
         }
@@ -88,7 +88,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            framework.Title.Should().Be("Accounting");
+            framework.Title.Should().Be("Accounting: Accounting");
             framework.Level.Should().Be(2);
             framework.FrameworkId.Should().Be("61621");
         }
@@ -286,7 +286,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            framework.Title.Should().Be("Accounting");
+            framework.Title.Should().Be("Accounting: Accounting");
         }
 
         [Test]
