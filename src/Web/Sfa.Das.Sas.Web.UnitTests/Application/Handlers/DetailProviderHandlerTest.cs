@@ -170,7 +170,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
 
             response.ApprenticeshipDetails.Should().Be(stubApprenticeship);
             response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");
-            response.ApprenticeshipNameWithLevel.ShouldAllBeEquivalentTo("Standard1");
+            response.ApprenticeshipName.ShouldAllBeEquivalentTo("Standard1");
             response.ApprenticeshipType.ShouldBeEquivalentTo(ApprenticeshipTrainingType.Standard);
         }
 
@@ -193,7 +193,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
 
             response.ApprenticeshipDetails.Should().Be(stubApprenticeship);
             response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");
-            response.ApprenticeshipNameWithLevel.ShouldAllBeEquivalentTo("Framework1");
+            response.ApprenticeshipName.ShouldAllBeEquivalentTo("Framework1");
             response.ApprenticeshipType.ShouldBeEquivalentTo(ApprenticeshipTrainingType.Framework);
         }
     }

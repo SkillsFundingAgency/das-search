@@ -255,11 +255,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         private string CreateFrameworkTitle(string framworkname, string pathwayName)
         {
-            if (string.IsNullOrWhiteSpace(pathwayName) || framworkname.Equals(pathwayName))
-            {
-                return framworkname;
-            }
-
             return $"{framworkname}: {pathwayName}";
         }
     }

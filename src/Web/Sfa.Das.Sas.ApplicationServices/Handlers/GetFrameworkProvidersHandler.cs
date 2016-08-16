@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return new GetFrameworkProvidersResponse
             {
                 FrameworkId = framework.FrameworkId,
-                Title = framework.Title + ", level " + framework.Level,
+                Title = framework.Title,
                 Keywords = message.Keywords,
                 Postcode = message.Postcode,
                 Level = framework.Level,

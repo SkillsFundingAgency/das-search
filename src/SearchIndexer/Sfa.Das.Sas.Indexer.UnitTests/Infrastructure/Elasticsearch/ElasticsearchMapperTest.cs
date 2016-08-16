@@ -65,7 +65,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            framework.Title.Should().Be("Trade Business Services");
+            framework.Title.Should().Be("Trade Business Services: Trade Business Services");
             framework.Level.Should().Be(2);
             framework.FrameworkId.Should().Be("61621");
         }
@@ -88,32 +88,9 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            framework.Title.Should().Be("Accounting");
+            framework.Title.Should().Be("Accounting: Accounting");
             framework.Level.Should().Be(2);
             framework.FrameworkId.Should().Be("61621");
-        }
-
-        [Test]
-        public void WhenCreatingFrameworkDocumentAndPathwayIsMissing()
-        {
-            var frameworkMetaData = new FrameworkMetaData
-            {
-                EffectiveFrom = DateTime.Parse("10-Feb-14"),
-                EffectiveTo = DateTime.MinValue,
-                FworkCode = 616,
-                PwayCode = 1,
-                NasTitle = "Trade Business Services",
-                PathwayName = " ",
-                ProgType = 23
-            };
-
-            var mapper = new ElasticsearchMapper(null);
-
-            var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
-
-            framework.Title.Should().Be("Trade Business Services");
-            framework.Level.Should().Be(7);
-            framework.FrameworkId.Should().Be("61671");
         }
 
         [Test]
@@ -286,7 +263,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             var framework = mapper.CreateFrameworkDocument(frameworkMetaData);
 
-            framework.Title.Should().Be("Accounting");
+            framework.Title.Should().Be("Accounting: Accounting");
         }
 
         [Test]

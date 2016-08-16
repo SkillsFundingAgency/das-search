@@ -1,8 +1,8 @@
 ﻿namespace Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers
 {
+    using ApplicationServices.Models;
     using AutoMapper;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+    using Helpers;
 
     public class LastPageValueResolver : ValueResolver<BaseProviderSearchResults, int>
     {

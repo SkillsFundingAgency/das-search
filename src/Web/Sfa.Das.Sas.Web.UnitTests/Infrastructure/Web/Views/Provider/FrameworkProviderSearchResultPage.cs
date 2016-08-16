@@ -710,7 +710,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            //GetPartial(html, ".total-providers-country").Should().NotBeEmpty();
             var expectedText = string.Format("view all ({0}) training providers for Test framework name, level 2 in England", model.TotalProvidersCountry);
             GetPartial(html, ".total-providers-country").Should().Be(expectedText);
         }

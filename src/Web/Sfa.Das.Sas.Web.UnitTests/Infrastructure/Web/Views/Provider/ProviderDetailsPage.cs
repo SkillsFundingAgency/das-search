@@ -50,7 +50,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -108,7 +108,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -156,7 +156,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -206,7 +206,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -256,11 +256,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipNameWithLevel);
+            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipName);
 
             var locationText = GetPartial(html, ".training-location");
 
@@ -306,7 +306,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -352,11 +352,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipNameWithLevel);
+            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipName);
         }
 
         [Test]
@@ -398,7 +398,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
 
             var html = details.RenderAsHtml(model).ToAngleSharp();
@@ -443,7 +443,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
 
             var html = details.RenderAsHtml(model).ToAngleSharp();
@@ -489,7 +489,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
 
             var html = details.RenderAsHtml(model).ToAngleSharp();
@@ -536,7 +536,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Code = 1
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipNameWithLevel = "Test level"
+                ApprenticeshipName = "Test level"
             };
 
             var html = details.RenderAsHtml(model).ToAngleSharp();

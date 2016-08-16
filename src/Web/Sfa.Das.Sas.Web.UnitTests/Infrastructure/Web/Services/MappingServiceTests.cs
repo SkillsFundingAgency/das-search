@@ -4,7 +4,6 @@ using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
@@ -32,6 +31,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             {
                 Framework = new Framework
                 {
+                    Title = "Abba: Abba",
                     ExpiryDate = new DateTime(1882, 09, 04),
                     TypicalLength = new TypicalLength { From = 12, To = 18, Unit = "m" },
                     JobRoleItems = new List<JobRoleItem> { new JobRoleItem { Description = "Description 1", Title = "Title1" } }
@@ -43,6 +43,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.ExpiryDateString.Should().Be("5 September 1882");
             viewModel.TypicalLengthMessage.Should().Be("12 to 18 months");
             viewModel.JobRoles.FirstOrDefault().Should().Be("Title1");
+            viewModel.Title.ShouldBeEquivalentTo("Abba");
         }
 
         [Test]
@@ -82,7 +83,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             viewModel.Should().NotBeNull();
             viewModel.ApprenticeshipId.Should().Be(response.FrameworkId);
-            viewModel.Title.Should().Be(response.Title);
+            viewModel.Title.Should().Be($"{response.Title}, level {response.Level}");
             viewModel.PostCode.Should().Be(response.Postcode);
             viewModel.SearchTerms.Should().Be(response.Keywords);
             viewModel.HasError.Should().Be(response.HasErrors);
