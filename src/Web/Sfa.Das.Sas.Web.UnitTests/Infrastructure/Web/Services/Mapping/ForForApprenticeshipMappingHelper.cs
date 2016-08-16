@@ -9,7 +9,6 @@
     [TestFixture]
     public class ForForApprenticeshipMappingHelper
     {
-
         [TestCase("", "")]
         [TestCase("Abba", "Abba")]
         [TestCase("Abba:Abba", "Abba")]
