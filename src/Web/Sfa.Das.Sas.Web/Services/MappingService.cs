@@ -77,6 +77,7 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(x => x.NationalAchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.ApprenticeshipDetails.Product.NationalAchievementRate)))
                    .ForMember(x => x.NationalAchievementRate, y => y.MapFrom(z => z.ApprenticeshipDetails.Product.NationalAchievementRate))
                    .ForMember(x => x.OverallCohort, y => y.ResolveUsing<OverallCohortResolver>().FromMember(z => z.ApprenticeshipDetails.Product.OverallCohort))
+                   .ForMember(x => x.ApprenticeshipName, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.ApprenticeshipName)))
                    ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -145,7 +146,7 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.Product.ProviderMarketingInfo))
             .ForMember(x => x.EmployerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.Product.EmployerSatisfaction))
             .ForMember(x => x.LearnerSatisfactionMessage, y => y.ResolveUsing<EmployerSatisfactionResolver>().FromMember(z => z.Product.LearnerSatisfaction))
-            .ForMember(x => x.ApprenticeshipNameWithLevel, y => y.Ignore())
+            .ForMember(x => x.ApprenticeshipName, y => y.Ignore())
             .ForMember(x => x.ApprenticeshipLevel, y => y.Ignore())
             .ForMember(x => x.ApprenticeshipType, y => y.Ignore())
             .ForMember(x => x.SatisfactionSourceUrl, y => y.Ignore())
@@ -205,7 +206,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Level, y => y.MapFrom(z => z.Framework.Level))
                 .ForMember(x => x.ProfessionalRegistration, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.Framework.ProfessionalRegistration))
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
-                .ForMember(x => x.Title, y => y.MapFrom(z => z.Framework.Title))
+                .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
                 .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.Framework.TypicalLength)))
                 ;
         }
@@ -213,6 +214,7 @@ namespace Sfa.Das.Sas.Web.Services
         private static void CreateProviderSearchMappings(IMapperConfiguration cfg)
         {
             cfg.CreateMap<GetFrameworkProvidersResponse, ProviderSearchViewModel>()
+                .ForMember(x => x.Title, y => y.ResolveUsing<FrameworkTitleWithLevelResolver>())
                 .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.FrameworkId))
                 .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
@@ -253,7 +255,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.PostCode, y => y.MapFrom(z => z.Results.PostCode))
                 .ForMember(x => x.PostCodeMissing, y => y.MapFrom(z => z.Results.PostCodeMissing))
                 .ForMember(x => x.ResultsToTake, y => y.MapFrom(z => z.Results.ResultsToTake))
-                .ForMember(x => x.Title, y => y.MapFrom(z => z.Results.Title))
+                .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Results.Title)))
                 .ForMember(x => x.FrameworkLevel, y => y.MapFrom(z => z.Results.FrameworkLevel))
                 .ForMember(x => x.ShowAll, y => y.MapFrom(z => z.ShowAllProviders))
                 .ForMember(x => x.FrameworkCode, y => y.MapFrom(z => z.Results.FrameworkCode))

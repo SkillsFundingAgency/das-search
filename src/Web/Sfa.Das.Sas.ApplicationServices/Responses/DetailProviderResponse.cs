@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
 
         public ApprenticeshipTrainingType ApprenticeshipType { get; set; }
 
-        public string ApprenticeshipNameWithLevel { get; set; }
+        public string ApprenticeshipName { get; set; }
 
         public string ApprenticeshipLevel { get; set; }
     }

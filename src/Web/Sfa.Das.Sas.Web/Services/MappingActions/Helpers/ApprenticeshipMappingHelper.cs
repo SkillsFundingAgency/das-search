@@ -28,6 +28,20 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{typicalLength.From} to {typicalLength.To} {GetUnit(typicalLength.Unit)}";
         }
 
+        public static string FrameworkTitle(string currentTitle)
+        {
+            var s = currentTitle.Split(':');
+            var framworkname = s.Length > 0 ? s[0] : string.Empty;
+            var pathwayName = s.Length > 1 ? s[1] : string.Empty;
+
+            if (string.IsNullOrWhiteSpace(pathwayName) || framworkname.Trim().Equals(pathwayName.Trim()))
+            {
+                return framworkname;
+            }
+
+            return currentTitle;
+        }
+
         public static IEnumerable<string> GetTitlesFromJobRoles(IEnumerable<JobRoleItem> jobRoleItems)
         {
             if (!jobRoleItems.IsNullOrEmpty())

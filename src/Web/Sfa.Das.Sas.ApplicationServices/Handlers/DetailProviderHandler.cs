@@ -95,7 +95,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 StatusCode = DetailProviderResponse.ResponseCodes.Success,
                 ApprenticeshipDetails = model,
                 ApprenticeshipType = apprenticeshipProductType,
-                ApprenticeshipNameWithLevel = apprenticeshipProduct.Title,
+                ApprenticeshipName = apprenticeshipProduct.Title,
                 ApprenticeshipLevel = apprenticeshipProduct.Level.ToString()
             };
 

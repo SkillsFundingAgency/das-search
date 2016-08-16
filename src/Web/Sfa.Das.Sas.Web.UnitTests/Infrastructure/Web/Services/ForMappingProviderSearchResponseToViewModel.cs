@@ -88,6 +88,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var results = new ProviderFrameworkSearchResults
             {
+                Title = "Abba: Abba",
                 TrainingOptionsAggregation = new Dictionary<string, long?>
                 {
                     ["dayrelease"] = 10,
@@ -121,6 +122,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var viewModel = mapper.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(source);
 
+            viewModel.Title.Should().Be("Abba");
             viewModel.ActualPage.Should().Be(2);
             viewModel.DeliveryModes.Count().Should().Be(2);
             viewModel.DeliveryModes.Count(x => x.Checked).Should().Be(1);

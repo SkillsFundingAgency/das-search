@@ -261,6 +261,7 @@
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
+    <Compile Include="Services\MappingActions\ValueResolvers\FrameworkTitleWithLevelResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\NationalProvidersValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryOptionResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\FrameworkInformationResolver.cs" />

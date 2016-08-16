@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.FrameworkId.Should().Be(framework.FrameworkId);
             response.Keywords.Should().Be(query.Keywords);
             response.Postcode.Should().Be(query.Postcode);
-            response.Title.Should().Be(framework.Title + ", level " + framework.Level);
+            response.Title.Should().Be(framework.Title);
             response.HasErrors.Should().Be(true);
         }
 

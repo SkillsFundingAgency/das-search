@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public ApprenticeshipBasic Apprenticeship { get; set; }
 
-        public string ApprenticeshipNameWithLevel { get; set; }
+        public string ApprenticeshipName { get; set; }
 
         public string ApprenticeshipLevel { get; set; }
 
