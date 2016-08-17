@@ -90,11 +90,36 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PathwayName = "Pathway test name",
                 FrameworkLevel = 3,
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
-                HasError = false
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel() { Count = 1 }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetPartial(html, ".result-message p").Should().Contain("1 training provider for the Test name: Pathway test name, level 3 apprenticeship.");
+        }
+
+        [Test]
+        public void ShouldShowIndividualMessageWhenJustOneResultIsReturnedInAllCountry()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                Title = "Test name: Pathway test name",
+                TotalResults = 1,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                FrameworkLevel = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel() { Count = 1 },
+                ShowAll = true
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result-message p").Should().Contain("1 training provider for the Test name: Pathway test name, level 3 apprenticeship in England.");
         }
 
         [Test]
@@ -111,7 +136,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
-                HasError = false
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel() { Count = 1 }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
@@ -135,11 +161,83 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
-                HasError = false
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel() { Count = 1 }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             this.GetPartial(html, ".result-message p").Should().Contain("7 training providers for the Test name: Pathway test name, level 2 apprenticeship.");
+        }
+
+        [Test]
+        public void ShouldShowGeneralMessageWhenSeveralResultsAreReturnedInAllCountry()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                Title = "Test name: Pathway test name",
+                TotalResults = 7,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkCode = 2,
+                FrameworkLevel = 2,
+                FrameworkName = "Test name",
+                PathwayName = "Pathway test name",
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel() { Count = 1 },
+                ShowAll = true
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".result-message p").Should().Contain("7 training providers for the Test name: Pathway test name, level 2 apprenticeship in England.");
+        }
+
+        [Test]
+        public void ShouldShowMessageInformingAboutNationalLabel()
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 7,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkName = "Test name",
+                FrameworkLevel = 3,
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel { Count = 1 },
+                ShowAll = true
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, "p", 3).Should().Contain("Results labelled National are training providers who are willing to offer apprenticeship training across England.");
+        }
+
+        [TestCase(7, 0)]
+        [TestCase(0, 7)]
+        [TestCase(0, 0)]
+        public void ShouldNotShowMessageInformingAboutNationalLabel(int totalResults, int nationalProviders)
+        {
+            var detail = new FrameworkSearchResultMessage();
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = totalResults,
+                PostCodeMissing = false,
+                FrameworkId = 1,
+                FrameworkName = "Test name",
+                FrameworkLevel = 3,
+                PostCode = "N17",
+                Hits = new List<FrameworkProviderResultItemViewModel>(),
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel { Count = nationalProviders },
+                ShowAll = true
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, "p", 2).Should().NotStartWith("Results labelled National are training providers");
+            GetPartial(html, "p", 3).Should().NotStartWith("Results labelled National are training providers");
+            GetPartial(html, "p", 3).Should().BeEmpty();
         }
 
         [Test]
@@ -156,7 +254,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 FrameworkName = "Test name",
                 PathwayName = "Pathway test name",
                 Hits = new List<FrameworkProviderResultItemViewModel>(),
-                HasError = false
+                HasError = false,
+                NationalProviders = new NationalProviderViewModel() { Count = 0 }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
