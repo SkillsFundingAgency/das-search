@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5F11FF93-1943-45CF-866B-74219AD92BCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7C2E8E1F-F4F9-483B-874E-822C6BA383E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.Api", "Sfa.Das.ApprenticeshipInfoService.Api\Sfa.Das.ApprenticeshipInfoService.Api.csproj", "{0E7FEF43-441C-4790-A935-C7A171D8C9DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.UnitTests", "Sfa.Das.ApprenticeshipInfoService.UnitTests\Sfa.Das.ApprenticeshipInfoService.UnitTests.csproj", "{5C173D43-2549-4809-A353-2BDB8E11D750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.Infrastructure", "Sfa.Das.ApprenticeshipInfoService.Infrastructure\Sfa.Das.ApprenticeshipInfoService.Infrastructure.csproj", "{3CF1B822-17E6-4F67-B5AB-A031390CB635}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{970BA084-4D3E-419E-9374-5873A9921DE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.Core", "Sfa.Das.ApprenticeshipInfoService.Core\Sfa.Das.ApprenticeshipInfoService.Core.csproj", "{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{40D765D7-14EB-45AB-B93F-4DB89BF21921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.Application", "Sfa.Das.ApprenticeshipInfoService.Application\Sfa.Das.ApprenticeshipInfoService.Application.csproj", "{9216D34B-0325-47F4-9C57-1795D2FCB75B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E7FEF43-441C-4790-A935-C7A171D8C9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E7FEF43-441C-4790-A935-C7A171D8C9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E7FEF43-441C-4790-A935-C7A171D8C9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E7FEF43-441C-4790-A935-C7A171D8C9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C173D43-2549-4809-A353-2BDB8E11D750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C173D43-2549-4809-A353-2BDB8E11D750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C173D43-2549-4809-A353-2BDB8E11D750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C173D43-2549-4809-A353-2BDB8E11D750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF1B822-17E6-4F67-B5AB-A031390CB635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF1B822-17E6-4F67-B5AB-A031390CB635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF1B822-17E6-4F67-B5AB-A031390CB635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF1B822-17E6-4F67-B5AB-A031390CB635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E7FEF43-441C-4790-A935-C7A171D8C9DF} = {5F11FF93-1943-45CF-866B-74219AD92BCD}
+		{5C173D43-2549-4809-A353-2BDB8E11D750} = {7C2E8E1F-F4F9-483B-874E-822C6BA383E6}
+		{3CF1B822-17E6-4F67-B5AB-A031390CB635} = {5F11FF93-1943-45CF-866B-74219AD92BCD}
+		{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509} = {970BA084-4D3E-419E-9374-5873A9921DE6}
+		{9216D34B-0325-47F4-9C57-1795D2FCB75B} = {40D765D7-14EB-45AB-B93F-4DB89BF21921}
+	EndGlobalSection
+EndGlobal
