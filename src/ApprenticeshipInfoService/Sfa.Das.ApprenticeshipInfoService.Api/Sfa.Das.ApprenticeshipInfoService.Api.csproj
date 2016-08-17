@@ -147,6 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sfa.Das.ApprenticeshipInfoService.Api.ruleset" />
+    <None Include="Transform.ServiceConfiguration.Cloud.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Transform.ServiceDefinition.csdef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
