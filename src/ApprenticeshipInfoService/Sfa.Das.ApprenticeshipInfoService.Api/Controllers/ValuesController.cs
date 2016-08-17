@@ -4,16 +4,26 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
 using Swashbuckle.Swagger.Annotations;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     public class ValuesController : ApiController
     {
+        private readonly ILog _logger;
+
+        public ValuesController(ILog logger)
+        {
+            _logger = logger;
+        }
+
         // GET api/values
         [SwaggerOperation("GetAll")]
         public IEnumerable<string> Get()
         {
+            _logger.Debug("Hello there!!");
+
             return new string[] { "value1", "value2" };
         }
 

@@ -1,9 +1,8 @@
-﻿namespace Sfa.Das.Sas.Core.Logging
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Logging
 {
     public interface IRequestContext
     {
         string Url { get; }
-
         string IpAddress { get; }
     }
 }
