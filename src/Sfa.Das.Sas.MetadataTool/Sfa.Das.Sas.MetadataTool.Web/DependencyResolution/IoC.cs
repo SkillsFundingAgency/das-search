@@ -19,6 +19,8 @@
 using Sfa.Das.Sas.ApplicationServices.DependencyResolution;
 
 namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
+    using Sfa.Das.Sas.Infrastructure.DependencyResolution;
+
     using StructureMap;
 	
     public static class IoC
@@ -26,6 +28,7 @@ namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
         public static IContainer Initialize() {
             return new Container(c => {
                 c.AddRegistry<ApplicationServicesRegistry>();
+                c.AddRegistry<InfrastructureRegistry>();
                 c.AddRegistry<DefaultRegistry>();
             });
         }

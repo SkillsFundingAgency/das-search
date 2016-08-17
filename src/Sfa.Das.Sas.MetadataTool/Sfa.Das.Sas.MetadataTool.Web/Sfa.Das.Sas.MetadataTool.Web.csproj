@@ -282,6 +282,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\RequestContext.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -421,6 +422,10 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj">
       <Project>{668EEF13-AD73-4036-9BD5-57B0BBC5C43C}</Project>
       <Name>Sfa.Das.Sas.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj">
+      <Project>{F91E7F40-91F6-4E36-A8C5-AEB15E38C3B4}</Project>
+      <Name>Sfa.Das.Sas.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

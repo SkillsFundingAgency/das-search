@@ -73,9 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Logging\IRequestContext.cs" />
     <Compile Include="Logging\Metrics\ExecutionTimer.cs" />
     <Compile Include="Logging\Metrics\ExecutionTimerResult.cs" />
     <Compile Include="Logging\Models\ILogEntry.cs" />

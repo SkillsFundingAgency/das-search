@@ -19,7 +19,11 @@ using StructureMap;
 using StructureMap.Graph;
 
 namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
-	
+    using System.Web;
+
+    using Sfa.Das.Sas.Core.Logging;
+    using Sfa.Das.Sas.MetadataTool.Web.Logging;
+
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 
@@ -28,9 +32,10 @@ namespace Sfa.Das.Sas.MetadataTool.Web.DependencyResolution {
                 scan => {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-					scan.With(new ControllerConvention());
+                    scan.With(new ControllerConvention());
                 });
-            //For<IExample>().Use<Example>();
+
+            For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
         }
 
         #endregion
