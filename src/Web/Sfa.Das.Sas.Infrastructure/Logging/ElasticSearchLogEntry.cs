@@ -17,6 +17,5 @@
 
         [JsonConverter(typeof(AlreadyJsonFieldConverter))]
         public string Body { get; set; }
-
     }
 }
