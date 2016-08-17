@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.Application", "Sfa.Das.ApprenticeshipInfoService.Application\Sfa.Das.ApprenticeshipInfoService.Application.csproj", "{9216D34B-0325-47F4-9C57-1795D2FCB75B}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Das.ApprenticeshipInfoService.Api.Azure", "Sfa.Das.ApprenticeshipInfoService.Api.Azure\Sfa.Das.ApprenticeshipInfoService.Api.Azure.ccproj", "{0085D190-0555-40B2-ABFF-55459E10636E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9216D34B-0325-47F4-9C57-1795D2FCB75B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0085D190-0555-40B2-ABFF-55459E10636E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0085D190-0555-40B2-ABFF-55459E10636E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0085D190-0555-40B2-ABFF-55459E10636E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0085D190-0555-40B2-ABFF-55459E10636E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +63,6 @@ Global
 		{3CF1B822-17E6-4F67-B5AB-A031390CB635} = {5F11FF93-1943-45CF-866B-74219AD92BCD}
 		{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509} = {970BA084-4D3E-419E-9374-5873A9921DE6}
 		{9216D34B-0325-47F4-9C57-1795D2FCB75B} = {40D765D7-14EB-45AB-B93F-4DB89BF21921}
+		{0085D190-0555-40B2-ABFF-55459E10636E} = {5F11FF93-1943-45CF-866B-74219AD92BCD}
 	EndGlobalSection
 EndGlobal
