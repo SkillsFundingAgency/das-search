@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
-    public class ValuesController : ApiController
+    public class FrameworkController : ApiController
     {
         // GET api/values
         [SwaggerOperation("GetAll")]
