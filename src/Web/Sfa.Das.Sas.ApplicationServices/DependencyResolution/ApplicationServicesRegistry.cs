@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
@@ -23,6 +24,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
                     scan.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
                 });
 
+            For<IHttpGet>().Use<HttpService>();
             For<IApprenticeshipSearchService>().Use<ApprenticeshipSearchService>();
             For<IProviderSearchService>().Use<ProviderSearchService>();
             For<IPaginationSettings>().Use<PaginationSettings>();

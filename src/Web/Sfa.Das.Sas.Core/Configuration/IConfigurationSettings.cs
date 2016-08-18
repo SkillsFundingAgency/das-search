@@ -9,6 +9,8 @@ namespace Sfa.Das.Sas.Core.Configuration
 
         string ProviderIndexAlias { get; }
 
+        string ApprenticeshipApiBaseUrl { get; }
+
         string BuildId { get; }
 
         IEnumerable<Uri> ElasticServerUrls { get; }
