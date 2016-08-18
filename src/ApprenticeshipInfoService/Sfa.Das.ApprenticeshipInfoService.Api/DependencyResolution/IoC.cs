@@ -24,6 +24,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.DependencyResolution {
             {
                 c.AddRegistry<DefaultRegistry>();
                 c.AddRegistry<InfrastructureRegistry>();
+                c.AddRegistry<WebRegistry>();
             });
         }
     }

@@ -12,5 +12,7 @@
         IEnumerable<Uri> ElasticServerUrls { get; }
 
         string EnvironmentName { get; }
+
+        string ApplicationName { get; }
     }
 }

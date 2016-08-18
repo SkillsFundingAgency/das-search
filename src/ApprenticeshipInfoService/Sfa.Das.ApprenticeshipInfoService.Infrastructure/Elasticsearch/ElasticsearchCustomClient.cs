@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Nest;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using Nest;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
+    using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Logging;
+
     public class ElasticsearchCustomClient : IElasticsearchCustomClient
     {
         private readonly IElasticsearchClientFactory _elasticsearchClientFactory;
 
-        //private readonly ILog _logger;
+        private readonly ILog _logger;
 
         public ElasticsearchCustomClient(
-            IElasticsearchClientFactory elasticsearchClientFactory
-            /*ILog logger*/)
+            IElasticsearchClientFactory elasticsearchClientFactory,
+            ILog logger)
         {
             _elasticsearchClientFactory = elasticsearchClientFactory;
-            //_logger = logger;
+            _logger = logger;
         }
 
         public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector, [CallerMemberName] string callerName = "")
@@ -30,11 +29,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             var stopwatch = Stopwatch.StartNew();
             var result = client.Search(selector);
 
-            //SendLog(result, $"Elasticsearch.Search.{callerName}", stopwatch.Elapsed);
+            SendLog(result, $"Elasticsearch.Search.{callerName}", stopwatch.Elapsed);
             return result;
         }
 
-        /*
         private void SendLog<T>(ISearchResponse<T> result, string identifier, TimeSpan clientRequestTime)
             where T : class
         {
@@ -67,6 +65,6 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 
             _logger.Debug("Elastic Search Requested", logEntry);
             _logger.Debug("Dependency Elasticsearch", dependencyLogEntry);
-        }*/
+        }
     }
 }

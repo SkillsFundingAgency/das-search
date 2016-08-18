@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {
@@ -13,18 +14,18 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
     public sealed class FrameworkRepository : IGetFrameworks
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
-        //private readonly ILog _applicationLogger;
+        private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
 
         public FrameworkRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
-            /*ILog applicationLogger,*/
+            ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IFrameworkMapping frameworkMapping)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
-            //_applicationLogger = applicationLogger;
+            _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
         }

@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
+    <Compile Include="Logging\IRequestContext.cs" />
+    <Compile Include="Logging\ILogEntry.cs" />
+    <Compile Include="Logging\ILog.cs" />
     <Compile Include="Models\StandardSearchResultsItem.cs" />
     <Compile Include="Models\Standard.cs" />
     <Compile Include="Models\FrameworkSearchResultsItem.cs" />
