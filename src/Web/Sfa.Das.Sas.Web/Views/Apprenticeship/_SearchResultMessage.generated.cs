@@ -128,7 +128,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"results-all\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"results-all small-btm-margin\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        All apprenticeships.\r\n    </p>\r\n");
 
@@ -176,7 +176,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"results-one\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"results-one small-btm-margin\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <b>");
 
@@ -242,7 +242,7 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"results-several\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"results-several small-btm-margin\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <b>");
 

@@ -36,14 +36,14 @@
 }
 @helper  RenderAllResult()
 {
-    <p id="result-summary" class="results-all">
+    <p id="result-summary" class="results-all small-btm-margin">
         All apprenticeships.
     </p>
     @RenderStandardMessage()
 }
 @helper  RenderMessageOneResult()
 {
-    <p id="result-summary" class="results-one">
+    <p id="result-summary" class="results-one small-btm-margin">
         <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()
@@ -51,7 +51,7 @@
 
 @helper  RenderMessage()
 {
-    <p id="result-summary" class="results-several">
+    <p id="result-summary" class="results-several small-btm-margin">
         <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()
