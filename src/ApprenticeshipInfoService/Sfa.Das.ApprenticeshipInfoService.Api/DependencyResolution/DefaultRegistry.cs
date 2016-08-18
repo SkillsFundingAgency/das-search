@@ -15,6 +15,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using StructureMap;
+
 namespace Sfa.Das.ApprenticeshipInfoService.Api.DependencyResolution {
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
