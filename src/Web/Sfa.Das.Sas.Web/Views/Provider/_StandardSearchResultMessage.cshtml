@@ -22,15 +22,16 @@
             Results labelled <span class="tag tag-national">National</span> are training providers who are willing to offer apprenticeship training across England.
         </p>
     }
+
 </div>
 
 @helper  RenderAllResults()
 {
     var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
-    <p>
+    <p class="small-btm-margin">
         <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.
     </p>
-    <p>
+    <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode</b>'.
     </p>
 }
@@ -38,10 +39,10 @@
 @helper  RenderMessage()
 {
     var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
-    <p>
+    <p class="small-btm-margin">
         <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship.
     </p>
-    <p>
+    <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode</b>'.
     </p>
 }

@@ -10,12 +10,10 @@
     else if (Model.ShowAll && Model.TotalResults > 0)
     {
         @RenderAllResults()
-
     }
     else if (Model.TotalResults > 0)
     {
         @RenderMessage()
-
     }
 
     @if (@Model.TotalResults > 0 && Model.NationalProviders != null && Model.NationalProviders.Count > 0)
@@ -30,10 +28,10 @@
 @helper  RenderAllResults()
 {
     var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
-    <p>
+    <p class="small-btm-margin">
         <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship in England.
     </p>
-    <p>
+    <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode</b>'.
     </p>
 }
@@ -41,10 +39,10 @@
 @helper  RenderMessage()
 {
     var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
-    <p>
+    <p class="small-btm-margin">
         <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship.
     </p>
-    <p>
+    <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode</b>'.
     </p>
 }

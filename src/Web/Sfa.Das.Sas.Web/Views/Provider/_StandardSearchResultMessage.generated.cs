@@ -34,24 +34,28 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class StandardSearchResultMessage : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderStandardSearchResultViewModel>
     {
 
-#line 27 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 28 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderAllResults()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 28 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 29 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
  
     var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"small-btm-margin\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        <b>");
 
 
-#line 31 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 32 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
@@ -60,7 +64,7 @@ WriteTo(__razor_helper_writer, Model.TotalResults);
 WriteLiteralTo(__razor_helper_writer, "</b> training ");
 
 
-#line 31 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 32 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
               WriteTo(__razor_helper_writer, providerLabel);
 
 
@@ -69,7 +73,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> training ");
 WriteLiteralTo(__razor_helper_writer, " for the <b>");
 
 
-#line 31 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 32 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                         WriteTo(__razor_helper_writer, Model.StandardName);
 
 
@@ -78,7 +82,7 @@ WriteLiteralTo(__razor_helper_writer, " for the <b>");
 WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
-#line 31 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 32 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                                                    WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
@@ -86,10 +90,14 @@ WriteLiteralTo(__razor_helper_writer, ", level ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship in England.\r\n    </p>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"small-btm-margin\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Results are ordered by distance from \'<b>");
 
 
-#line 34 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 35 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                    WriteTo(__razor_helper_writer, Model.PostCode);
 
 
@@ -98,36 +106,40 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 36 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 37 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 36 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 37 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 }
 #line default
 #line hidden
 
-#line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 39 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 public System.Web.WebPages.HelperResult  RenderMessage()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 39 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
  
     var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        <b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"small-btm-margin\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        <b>");
 
 
-#line 42 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
@@ -136,7 +148,7 @@ WriteTo(__razor_helper_writer, Model.TotalResults);
 WriteLiteralTo(__razor_helper_writer, "</b> training ");
 
 
-#line 42 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
               WriteTo(__razor_helper_writer, providerLabel);
 
 
@@ -145,7 +157,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> training ");
 WriteLiteralTo(__razor_helper_writer, " for the <b>");
 
 
-#line 42 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                         WriteTo(__razor_helper_writer, Model.StandardName);
 
 
@@ -154,7 +166,7 @@ WriteLiteralTo(__razor_helper_writer, " for the <b>");
 WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
-#line 42 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 43 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                                                                    WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
@@ -162,10 +174,14 @@ WriteLiteralTo(__razor_helper_writer, ", level ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship.\r\n    </p>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by distance from \'<b>");
+WriteLiteralTo(__razor_helper_writer, "    <p");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"small-btm-margin\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Results are ordered by distance from \'<b>");
 
 
-#line 45 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 46 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                    WriteTo(__razor_helper_writer, Model.PostCode);
 
 
@@ -174,14 +190,14 @@ WriteLiteralTo(__razor_helper_writer, "    <p>\r\n        Results are ordered by
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\r\n    </p>\r\n");
 
 
-#line 47 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 48 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 47 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 48 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 }
 #line default
 #line hidden
@@ -281,7 +297,7 @@ WriteLiteral(">National</span> are training providers who are willing to offer a
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n\r\n");
+WriteLiteral("\r\n</div>\r\n\r\n");
 
 WriteLiteral("\r\n");
 
