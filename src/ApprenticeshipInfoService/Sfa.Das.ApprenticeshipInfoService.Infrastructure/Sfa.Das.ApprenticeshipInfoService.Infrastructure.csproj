@@ -68,11 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\IElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\FrameworkRepository.cs" />
+    <Compile Include="Mapping\StandardMapping.cs" />
+    <Compile Include="Mapping\IStandardMapping.cs" />
     <Compile Include="Mapping\FrameworkMapping.cs" />
     <Compile Include="Mapping\IFrameworkMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,9 +14,9 @@
             //For<ILog>().Use(x => new NLogLogger(x.ParentType, x.GetInstance<IConfigurationSettings>(), x.GetInstance<IRequestContext>())).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            //For<IGetStandards>().Use<StandardRepository>();
+            For<IGetStandards>().Use<StandardRepository>();
             For<IGetFrameworks>().Use<FrameworkRepository>();
-            //For<IStandardMapping>().Use<StandardMapping>();
+            For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             //For<IProviderMapping>().Use<ProviderMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
