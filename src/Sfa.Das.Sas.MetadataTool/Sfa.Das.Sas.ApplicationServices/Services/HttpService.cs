@@ -14,11 +14,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public class HttpService : IHttpGet, IHttpGetFile, IHttpPost
     {
-        //private readonly ILog _logger;
+        private readonly ILog _logger;
 
-        public HttpService(/*ILog logger*/)
+        public HttpService(ILog logger)
         {
-            //this._logger = logger;
+            _logger = logger;
         }
 
         public string Get(string url, string username, string pwd)
@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
                 }
                 catch (WebException ex)
                 {
-                    //_logger.Warn(ex, $"Cannot download string from {url}");
+                    _logger.Warn(ex, $"Cannot download string from {url}");
                     throw;
                 }
             }

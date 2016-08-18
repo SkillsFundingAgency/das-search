@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 using Newtonsoft.Json;
 using Sfa.Das.Sas.Core.Logging;
 
@@ -10,11 +7,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public class JsonMetaDataConvert : IJsonMetaDataConvert
     {
-        //private readonly ILog _logger;
+        private readonly ILog _logger;
 
-        public JsonMetaDataConvert(/*ILog logger*/)
+        public JsonMetaDataConvert(ILog logger)
         {
-            //this._logger = logger;
+            _logger = logger;
         }
 
         public List<T> DeserializeObject<T>(IDictionary<string, string> data)
@@ -28,7 +25,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
                 }
                 catch (JsonReaderException ex)
                 {
-                    //_logger.Warn(ex, $"Couldn't deserialise {typeof(T)} meta data for: {item.Key}");
+                    _logger.Warn(ex, $"Couldn't deserialise {typeof(T)} meta data for: {item.Key}");
                 }
             }
 

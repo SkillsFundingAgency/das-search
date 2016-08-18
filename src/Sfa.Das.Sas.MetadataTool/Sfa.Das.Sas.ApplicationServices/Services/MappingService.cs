@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using AutoMapper;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
@@ -12,12 +9,14 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public class MappingService : IMappingService
     {
+        private readonly ILog _logger;
         private readonly IMapper _mapper;
 
-        public MappingService()
+        public MappingService(ILog logger)
         {
             Configuration = Config();
             _mapper = Configuration.CreateMapper();
+            _logger = logger;
         }
 
         public MapperConfiguration Configuration { get; private set; }
@@ -30,6 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
             catch (Exception ex)
             {
+                _logger.Error(ex, "Error mapping objects");
                 throw;
             }
         }
@@ -42,6 +42,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
             catch (Exception ex)
             {
+                _logger.Error(ex, "Error mapping objects");
                 throw;
             }
         }

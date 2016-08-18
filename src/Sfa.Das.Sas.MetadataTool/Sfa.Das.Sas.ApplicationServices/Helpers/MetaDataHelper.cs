@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Sfa.Das.Sas.ApplicationServices.MetaData;
 using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Core.Logging.Metrics;
@@ -18,12 +16,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
 
         private readonly IGetFrameworkMetaData _metaDataFrameworkReader;
 
-        //private readonly ILog _log;
+        private readonly ILog _log;
 
-        public MetaDataHelper(IGetStandardMetaData metaDataReader/*, ILog log*/, IGetFrameworkMetaData metaDataFrameworkReader)
+        public MetaDataHelper(IGetStandardMetaData metaDataReader, ILog log, IGetFrameworkMetaData metaDataFrameworkReader)
         {
             _metaDataReader = metaDataReader;
-            //_log = log;
+            _log = log;
             _metaDataFrameworkReader = metaDataFrameworkReader;
         }
 
@@ -31,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataReader.GetStandardsMetaData());
 
-            // _log.Debug("MetaDataHelper.GetAllStandardsMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+            _log.Debug("MetaDataHelper.GetAllStandardsMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
             return timing.Result.OrderBy(x => x.Id).ToList();
         }
@@ -40,7 +38,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataReader.GetStandardMetaData(id));
 
-            // _log.Debug("MetaDataHelper.GetStandardMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+            _log.Debug("MetaDataHelper.GetStandardMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
             return timing.Result;
         }
@@ -49,7 +47,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataFrameworkReader.GetFrameworksMetaData());
 
-            // _log.Debug("MetaDataHelper.GetAllFrameworksMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+            _log.Debug("MetaDataHelper.GetAllFrameworksMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
             return timing.Result.OrderBy(x => x.Id).ToList();
         }
@@ -58,7 +56,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataFrameworkReader.GetFrameworkMetaData(id));
 
-            // _log.Debug("MetaDataHelper.GetFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
+            _log.Debug("MetaDataHelper.GetFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
             return timing.Result;
         }

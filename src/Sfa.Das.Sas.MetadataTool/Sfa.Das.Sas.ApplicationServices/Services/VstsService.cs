@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Net.Http;
-using System.Net.Http.Headers;
+
 using Newtonsoft.Json;
 using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -22,18 +20,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 
         private readonly IHttpGet _httpHelper;
 
-        //private readonly ILog _logger;
+        private readonly ILog _logger;
 
         public VstsService(
             IAppServiceSettings appServiceSettings,
             IJsonMetaDataConvert jsonMetaDataConvert,
-            IHttpGet httpHelper/*,
-            ILog logger*/)
+            IHttpGet httpHelper,
+            ILog logger)
         {
             _appServiceSettings = appServiceSettings;
             _jsonMetaDataConvert = jsonMetaDataConvert;
             _httpHelper = httpHelper;
-            //_logger = logger;
+            _logger = logger;
         }
 
         public IEnumerable<StandardMetaData> GetStandards()
@@ -57,7 +55,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
             catch (Exception ex)
             {
-                //_logger.Error(ex, "Error getting framework meta data");
+                _logger.Error(ex, "Error getting framework meta data");
             }
 
             return new List<VstsFrameworkMetaData>();
@@ -72,7 +70,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
             catch (Exception ex)
             {
-                //_logger.Error(ex, "Error getting framework meta data");
+                _logger.Error(ex, "Error getting framework meta data");
             }
 
             return new VstsFrameworkMetaData();
