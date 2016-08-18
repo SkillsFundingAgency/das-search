@@ -93,6 +93,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Sfa.Das.ApprenticeshipInfoService.Infrastructure.ruleset" />
+    <None Include="Transform.NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.CSharp.dll" />

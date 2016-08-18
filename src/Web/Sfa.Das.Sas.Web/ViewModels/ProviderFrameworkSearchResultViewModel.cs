@@ -2,8 +2,6 @@
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    using System.Collections;
-
     public class ProviderFrameworkSearchResultViewModel
     {
         public string Title { get; set; }

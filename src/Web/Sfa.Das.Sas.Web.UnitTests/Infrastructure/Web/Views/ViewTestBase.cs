@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
         private static string GetTextContent(IHtmlCollection<IElement> querySelectorAll, int index)
         {
-            return !querySelectorAll.Any() ?
+            return !querySelectorAll.Any() || querySelectorAll.Length < index ?
                 null :
                 querySelectorAll?[index - 1]?.TextContent?.Replace("\r", string.Empty).Trim();
         }

@@ -68,28 +68,42 @@ namespace Sfa.Das.Sas.ApplicationServices
         public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
         {
             ProviderFrameworkSearchResults result;
+            //if (!showAll & !nationalProviders)
+            //{
+            //    result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocation);
+            //    result.ShowNationalProvidersOnly = nationalProviders;
+            //    return result;
+            //}
+
+            //if (showAll && !nationalProviders)
+            //{
+            //    result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipId);
+            //    result.ShowNationalProvidersOnly = nationalProviders;
+            //    return result;
+            //}
+
+            //if (!showAll && nationalProviders)
+            //{
+            //    result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly);
+            //    result.ShowNationalProvidersOnly = nationalProviders;
+            //    return result;
+            //} // ToDo: TBD
+
+            ProviderFilterOptions filterOption = ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly;
             if (!showAll & !nationalProviders)
             {
-                result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocation);
-                result.ShowNationalProvidersOnly = nationalProviders;
-                return result;
+                filterOption = ProviderFilterOptions.ApprenticeshipLocation;
             }
-
-            if (showAll && !nationalProviders)
+            else if (showAll && !nationalProviders)
             {
-                result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipId);
-                result.ShowNationalProvidersOnly = nationalProviders;
-                return result;
+                filterOption = ProviderFilterOptions.ApprenticeshipId;
             }
-
-            if (!showAll && nationalProviders)
+            else if (!showAll && nationalProviders)
             {
-                result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly);
-                result.ShowNationalProvidersOnly = nationalProviders;
-                return result;
+                filterOption = ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly;
             }
 
-            result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly);
+            result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, filterOption);
             result.ShowNationalProvidersOnly = nationalProviders;
             return result;
         }

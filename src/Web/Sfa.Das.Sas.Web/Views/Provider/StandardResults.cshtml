@@ -28,7 +28,7 @@
 
     @if (Model.ShowNationalProviders && Model.TotalResults == 0)
     {
-        <p id="standard-provider-search-message">
+        <p>
             Sorry, there are currently no results for the filters you applied'.
         </p>
         <div>
@@ -41,8 +41,8 @@
     }
     else if (Model.TotalResults == 0)
     {
-        <p id="standard-provider-search-message">
-            Sorry, there are currently no training providers for <b>@Model.StandardName, level @Model.StandardLevel</b> for '<b id="postalcode">@Model.PostCode</b>'.
+        <p>
+            Sorry, there are currently no training providers for <b>@Model.StandardName, level @Model.StandardLevel</b> for '<b>@Model.PostCode</b>'.
         </p>
         <div>
             <p>You can:</p>
