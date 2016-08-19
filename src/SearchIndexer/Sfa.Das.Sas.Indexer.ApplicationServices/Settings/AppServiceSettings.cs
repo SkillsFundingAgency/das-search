@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Azure;
 using Sfa.Das.Sas.Indexer.Core.Services;
 
 namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
@@ -49,7 +50,10 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         // Private appServiceSettings
         private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
+
         private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
+
+        public string MetadataApiUri => CloudConfigurationManager.GetSetting("MetadataApiUri");
 
         public string QueueName(Type type)
         {
