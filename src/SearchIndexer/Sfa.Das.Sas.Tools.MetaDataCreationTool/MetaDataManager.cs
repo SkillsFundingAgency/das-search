@@ -60,7 +60,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var standards = JsonConvert.DeserializeObject<List<StandardMetaData>>(_httpService.Get(string.Concat(_appServiceSettings.MetadataApiUri, "Standard"), null, null));
+            var response = _httpService.Get(string.Concat(_appServiceSettings.MetadataApiUri, "Standard"), string.Empty, string.Empty);
+            var standards = new List<StandardMetaData>();
+            if (response != string.Empty)
+            {
+                standards = JsonConvert.DeserializeObject<List<StandardMetaData>>(response);
+            }
+
             UpdateStandardsInformationFromLars(standards);
             return standards;
         }
@@ -100,7 +106,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         private void UpdateFrameworkInformation(IEnumerable<FrameworkMetaData> frameworks)
         {
-            var repositoryFrameworks = JsonConvert.DeserializeObject<List<VstsFrameworkMetaData>>(_httpService.Get(string.Concat(_appServiceSettings.MetadataApiUri, "Framework"), null, null));
+            var repositoryFrameworks = new List<VstsFrameworkMetaData>();
+            var response = _httpService.Get(string.Concat(_appServiceSettings.MetadataApiUri, "Framework"), string.Empty, string.Empty);
+            if (response != string.Empty)
+            {
+                repositoryFrameworks = JsonConvert.DeserializeObject<List<VstsFrameworkMetaData>>(response);
+            }
+
             foreach (var framework in frameworks)
             {
                 var repositoryFramework = repositoryFrameworks.FirstOrDefault(m =>

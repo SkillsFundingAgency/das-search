@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Moq;
+using Newtonsoft.Json;
 using NUnit.Framework;
+using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
+using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
 using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool;
@@ -27,12 +30,17 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
         [Test]
         public void GetAllFrameworks()
         {
+            var mockSettings = new Mock<IAppServiceSettings>();
             var mockLarsDataService = new Mock<ILarsDataService>();
+            var mockHttp = new Mock<IHttpGet>();
+
+            mockSettings.Setup(x => x.MetadataApiUri).Returns("www.abba.co.uk");
+            mockHttp.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
                     new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, mockSettings.Object, null, mockHttp.Object, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(1, frameworks.Count);
@@ -41,12 +49,17 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
         [Test]
         public void GetFrameworkWithAllValidData()
         {
+            var mockSettings = new Mock<IAppServiceSettings>();
             var mockLarsDataService = new Mock<ILarsDataService>();
+            var mockHttp = new Mock<IHttpGet>();
+
+            mockSettings.Setup(x => x.MetadataApiUri).Returns("www.abba.co.uk");
+            mockHttp.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
                     new List<FrameworkMetaData> { new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 2 } });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, mockSettings.Object, null, mockHttp.Object, null);
             var frameworks = metaDataManager.GetAllFrameworks();
 
             Assert.AreEqual(1, frameworks.Count, "Should find one framework");
@@ -55,7 +68,31 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
         [Test]
         public void ShouldMapJobRoles()
         {
+            var mockSettings = new Mock<IAppServiceSettings>();
+            var mockHttp = new Mock<IHttpGet>();
             var mockLarsDataService = new Mock<ILarsDataService>();
+
+            mockSettings.Setup(x => x.MetadataApiUri).Returns("www.abba.co.uk");
+            var frameworkFromRepo = new List<VstsFrameworkMetaData>
+            {
+                new VstsFrameworkMetaData
+                {
+                    FrameworkCode = 500,
+                    PathwayCode = 1,
+                    ProgType = 21,
+                    JobRoleItems = new List<JobRoleItem>
+                    {
+                        new JobRoleItem
+                        {
+                            Title = "Job role 2",
+                            Description = "Description 2"
+                        },
+                        new JobRoleItem()
+                    }
+                }
+            };
+
+            mockHttp.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(JsonConvert.SerializeObject(frameworkFromRepo));
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
                     new List<FrameworkMetaData>
@@ -63,7 +100,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                         new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                     });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, mockSettings.Object, null, mockHttp.Object, null);
             var framework = metaDataManager.GetAllFrameworks().FirstOrDefault();
 
             framework.Should().NotBeNull();
@@ -75,10 +112,14 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
         [Test]
         public void ShouldMapTypicalLength()
         {
-            var mockVstsService = new Mock<IVstsService>();
-            mockVstsService.Setup(m => m.GetFrameworks()).Returns(GetVstsMetaData());
-
+            var mockSettings = new Mock<IAppServiceSettings>();
+            var mockHttp = new Mock<IHttpGet>();
             var mockLarsDataService = new Mock<ILarsDataService>();
+
+            mockSettings.Setup(x => x.MetadataApiUri).Returns("www.abba.co.uk");
+            var frameworkFromRepo = GetVstsMetaData();
+
+            mockHttp.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(JsonConvert.SerializeObject(frameworkFromRepo));
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
                     new List<FrameworkMetaData>
@@ -86,7 +127,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                         new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                     });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, mockSettings.Object, null, mockHttp.Object, null);
             var framework = metaDataManager.GetAllFrameworks().FirstOrDefault();
 
             framework.Should().NotBeNull();
@@ -97,10 +138,14 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
         [Test]
         public void ShouldMapKeywords()
         {
-            var mockVstsService = new Mock<IVstsService>();
-            mockVstsService.Setup(m => m.GetFrameworks()).Returns(GetVstsMetaData());
-
+            var mockSettings = new Mock<IAppServiceSettings>();
+            var mockHttp = new Mock<IHttpGet>();
             var mockLarsDataService = new Mock<ILarsDataService>();
+
+            mockSettings.Setup(x => x.MetadataApiUri).Returns("www.abba.co.uk");
+            var frameworkFromRepo = GetVstsMetaData();
+
+            mockHttp.Setup(x => x.Get(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(JsonConvert.SerializeObject(frameworkFromRepo));
             mockLarsDataService.Setup(m => m.GetListOfCurrentFrameworks())
                 .Returns(
                     new List<FrameworkMetaData>
@@ -108,7 +153,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.ApplicationServices.Helpers
                         new FrameworkMetaData { EffectiveFrom = DateTime.Parse("2015-01-01"), EffectiveTo = null, FworkCode = 500, PwayCode = 1, ProgType = 21 }
                     });
 
-            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, null, null, null);
+            var metaDataManager = new MetaDataManager(mockLarsDataService.Object, _mockVstsService.Object, mockSettings.Object, null, mockHttp.Object, null);
             var framework = metaDataManager.GetAllFrameworks().FirstOrDefault();
 
             framework.Should().NotBeNull();
