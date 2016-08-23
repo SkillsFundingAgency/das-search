@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Sfa.Das.Sas.Core.Models
+﻿namespace Sfa.Das.Sas.Infrastructure.MongoDb.Models
 {
-    public class FrameworkMetaData
+    using System;
+    using System.Collections.Generic;
+
+    internal class MongoFramework
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string FrameworkName { get; set; }
 
@@ -23,11 +23,11 @@ namespace Sfa.Das.Sas.Core.Models
 
         public DateTime? EffectiveTo { get; set; }
 
-        public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
+        public IEnumerable<MongoJobRoleItem> JobRoleItems { get; set; }
 
         public IEnumerable<string> Keywords { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
+        public MongoTypicalLength TypicalLength { get; set; }
 
         public double SectorSubjectAreaTier1 { get; set; }
 

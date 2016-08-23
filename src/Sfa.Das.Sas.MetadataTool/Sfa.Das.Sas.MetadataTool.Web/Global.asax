@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="MetadataTool.WebApiApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Sfa.Das.Sas.MetadataTool.Web.WebApiApplication" Language="C#" %>

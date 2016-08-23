@@ -11,8 +11,9 @@ using Sfa.Das.Sas.Core.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Services
 {
+    using Interfaces;
 
-    public class VstsService : IVstsService
+    public class MetaDataService : IMetaDataService
     {
         private readonly IAppServiceSettings _appServiceSettings;
 
@@ -22,7 +23,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 
         private readonly ILog _logger;
 
-        public VstsService(
+        public MetaDataService(
             IAppServiceSettings appServiceSettings,
             IJsonMetaDataConvert jsonMetaDataConvert,
             IHttpGet httpHelper,
@@ -46,34 +47,34 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary).FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<VstsFrameworkMetaData> GetFrameworks()
+        public IEnumerable<FrameworkMetaData> GetFrameworks()
         {
             try
             {
                 var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
-                return _jsonMetaDataConvert.DeserializeObject<VstsFrameworkMetaData>(frameworksDir);
+                return _jsonMetaDataConvert.DeserializeObject<FrameworkMetaData>(frameworksDir);
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Error getting framework meta data");
             }
 
-            return new List<VstsFrameworkMetaData>();
+            return new List<FrameworkMetaData>();
         }
 
-        public VstsFrameworkMetaData GetFramework(int id)
+        public FrameworkMetaData GetFramework(int id)
         {
             try
             {
                 var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
-                return _jsonMetaDataConvert.DeserializeObject<VstsFrameworkMetaData>(frameworksDir).FirstOrDefault(x => x.Id == id.ToString());
+                return _jsonMetaDataConvert.DeserializeObject<FrameworkMetaData>(frameworksDir).FirstOrDefault(x => x.Id == id.ToString());
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Error getting framework meta data");
             }
 
-            return new VstsFrameworkMetaData();
+            return new FrameworkMetaData();
         }
 
 

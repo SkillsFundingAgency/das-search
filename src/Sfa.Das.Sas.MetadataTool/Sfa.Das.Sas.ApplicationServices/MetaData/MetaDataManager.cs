@@ -1,53 +1,46 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.ApplicationServices.Services.Interfaces;
 using Sfa.Das.Sas.Core.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.MetaData
 {
     public class MetaDataManager : IGetStandardMetaData, IGetFrameworkMetaData
     {
+        private readonly IMetaDataService _metaDataService;
 
-        private readonly IMappingService _mappingService;
-
-        private readonly IVstsService _vstsService;
-
-        public MetaDataManager(
-            IVstsService vstsService,
-            IMappingService mappingService)
+        public MetaDataManager(IMetaDataService metaDataService)
         {
-            _vstsService = vstsService;
-            _mappingService = mappingService;
+            this._metaDataService = metaDataService;
         }
         
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var standards = _vstsService.GetStandards()?.ToList();
+            var standards = _metaDataService.GetStandards()?.ToList();
             
             return standards;
         }
 
         public StandardMetaData GetStandardMetaData(int id)
         {
-            var standard = _vstsService.GetStandard(id);
+            var standard = _metaDataService.GetStandard(id);
 
             return standard;
         }
 
         public List<FrameworkMetaData> GetFrameworksMetaData()
         {
-            var frameworks = _vstsService.GetFrameworks()?.ToList();
+            var frameworks = _metaDataService.GetFrameworks()?.ToList();
 
-            return _mappingService.Map<List<VstsFrameworkMetaData>, List<FrameworkMetaData>>(frameworks);
+            return frameworks;
         }
 
         public FrameworkMetaData GetFrameworkMetaData(int id)
         {
-            var framework = _vstsService.GetFramework(id);
+            var framework = _metaDataService.GetFramework(id);
 
-            return _mappingService.Map<VstsFrameworkMetaData, FrameworkMetaData>(framework);
+            return framework;
         }
     }
 }

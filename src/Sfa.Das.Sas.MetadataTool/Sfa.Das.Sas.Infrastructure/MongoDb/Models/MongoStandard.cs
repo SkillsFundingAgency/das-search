@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Das.Sas.Core.Models
+﻿namespace Sfa.Das.Sas.Infrastructure.MongoDb.Models
 {
-    public class StandardMetaData
+    using System.Collections.Generic;
+
+    internal class MongoStandard
     {
         public int Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Core.Models
 
         public string AssessmentPlanPdfUrl { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
+        public MongoTypicalLength TypicalLength { get; set; }
 
         public string EntryRequirements { get; set; }
 

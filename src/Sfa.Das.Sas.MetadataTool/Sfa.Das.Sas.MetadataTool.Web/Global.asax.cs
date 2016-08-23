@@ -1,12 +1,14 @@
-﻿using System;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-
-namespace MetadataTool
+﻿namespace Sfa.Das.Sas.MetadataTool.Web
 {
-    using Sfa.Das.Sas.Core.Logging;
+    using System;
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+
+    using global::MetadataTool;
+
+    using Core.Logging;
 
     public class WebApiApplication : System.Web.HttpApplication
     {

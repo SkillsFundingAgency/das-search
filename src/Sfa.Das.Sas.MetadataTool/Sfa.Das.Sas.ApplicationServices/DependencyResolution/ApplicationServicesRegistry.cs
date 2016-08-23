@@ -7,12 +7,12 @@ using Sfa.Das.Sas.Core.Logging;
 using StructureMap;
 
 namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution {
-    
+    using Sfa.Das.Sas.ApplicationServices.Services.Interfaces;
+
     public class ApplicationServicesRegistry : Registry
     {
         public ApplicationServicesRegistry()
         {
-            For<IVstsService>().Use<VstsService>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
 
             For<IAppServiceSettings>().Use<AppServiceSettings>();
@@ -24,7 +24,6 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution {
             For<IHttpGet>().Use<HttpService>();
             For<IHttpPost>().Use<HttpService>();
 
-            For<IVstsService>().Use<VstsService>();
             For<IGetStandardMetaData>().Use<MetaDataManager>();
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();

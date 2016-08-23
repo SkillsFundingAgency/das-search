@@ -2,32 +2,53 @@
 {
     using System.Web.Mvc;
 
-    using Sfa.Das.Sas.ApplicationServices.Helpers;
+    using Newtonsoft.Json;
+
+    using ApplicationServices.Helpers;
+
+    using ApplicationServices.Services.Interfaces;
 
     public class ApprenticeshipController : Controller
     {
         private readonly IMetaDataHelper _metaDataHelper;
 
-        public ApprenticeshipController(IMetaDataHelper metaDataHelper)
+        private readonly IDocumentImporter _documentImporter;
+
+        public ApprenticeshipController(
+            IMetaDataHelper metaDataHelper,
+            IDocumentImporter documentImporter)
         {
-            this._metaDataHelper = metaDataHelper;
+            _metaDataHelper = metaDataHelper;
+            _documentImporter = documentImporter;
         }
 
         public ActionResult Standards()
         {
-            var standards = this._metaDataHelper.GetAllStandardsMetaData();
-            return this.View(standards);
+            var standards = _metaDataHelper.GetAllStandardsMetaData();
+            return View(standards);
         }
 
         public ActionResult Frameworks()
         {
-            var frameworks = this._metaDataHelper.GetAllFrameworksMetaData();
-            return this.View(frameworks);
+            var frameworks = _metaDataHelper.GetAllFrameworksMetaData();
+            return View(frameworks);
+        }
+
+        public string StandardsJson()
+        {
+            var standards = _metaDataHelper.GetAllStandardsMetaData();
+            return JsonConvert.SerializeObject(standards);
+        }
+
+        public string FrameworksJson()
+        {
+            var frameworks = _metaDataHelper.GetAllFrameworksMetaData();
+            return JsonConvert.SerializeObject(frameworks);
         }
 
         public ActionResult StandardDetails(int id)
         {
-            var standard = this._metaDataHelper.GetStandardMetaData(id);
+            var standard = _metaDataHelper.GetStandardMetaData(id);
             return this.View(standard);
         }
 
