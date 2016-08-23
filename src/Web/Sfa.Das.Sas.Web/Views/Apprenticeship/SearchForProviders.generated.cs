@@ -244,7 +244,7 @@ WriteLiteral(" type=\"submit\"");
 WriteLiteral(" value=\"Search\"");
 
 WriteLiteral(">\r\n                        </div>\r\n                    </div>\r\n                </" +
-"form>\r\n            \r\n                <br />\r\n\r\n                <div");
+"form>\r\n            \r\n                <div");
 
 WriteLiteral(" class=\"notice\"");
 
