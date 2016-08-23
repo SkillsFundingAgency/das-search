@@ -2363,7 +2363,7 @@ details .arrow {
         text-decoration: none;
         @media (min-width: 641px) {
             color: $black;
-            cursor: initial;
+            cursor: default;
         }
 
         &:after {
