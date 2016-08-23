@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Nest;
+using Newtonsoft.Json;
+using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Model;
@@ -18,38 +20,34 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
+        private readonly IHttpGet _httpService;
 
         public FrameworkRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IFrameworkMapping frameworkMapping)
+            IFrameworkMapping frameworkMapping,
+            IHttpGet httpService)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
+            _httpService = httpService;
         }
 
         public Framework GetFrameworkById(int id)
         {
-            var results =
-                _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(
-                    s =>
-                    s.Index(_applicationSettings.ApprenticeshipIndexAlias)
-                        .Type(Types.Parse("frameworkdocument"))
-                        .From(0)
-                        .Size(1)
-                        .Query(q => q.QueryString(qs => qs.Fields(fs => fs.Field(e => e.FrameworkId)).Query(id.ToString()))));
+            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Framework/", id);
 
-            if (results.ApiCall.HttpStatusCode != 200)
+            var result = JsonConvert.DeserializeObject<FrameworkSearchResultsItem>(_httpService.Get(url, null, null));
+
+            if (result == null)
             {
-                throw new ApplicationException($"Failed query provider with id {id}");
+                throw new ApplicationException($"Failed to get framework with id {id}");
             }
 
-            var document = results.Documents.Any() ? results.Documents.First() : null;
-
-            return document != null ? _frameworkMapping.MapToFramework(document) : null;
+            return _frameworkMapping.MapToFramework(result);
         }
     }
 }

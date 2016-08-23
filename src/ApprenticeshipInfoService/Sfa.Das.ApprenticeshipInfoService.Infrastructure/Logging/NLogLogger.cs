@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using NLog;
-using NLog.Config;
-using NLog.Targets.ElasticSearch;
-using Sfa.Das.ApprenticeshipInfoService.Core.Configuration;
-using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
-using SFA.DAS.NLog.Targets.AzureEventHub;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Logging
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Logging
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.ApplicationInsights.NLogTarget;
+    using NLog;
+    using NLog.Config;
+    using NLog.Targets.ElasticSearch;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Configuration;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
+    using SFA.DAS.NLog.Targets.AzureEventHub;
+
     public class NLogLogger : ILog
     {
         private readonly IConfigurationSettings _settings;
@@ -17,7 +18,11 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Logging
         private readonly IRequestContext _context;
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
+
         private AzureEventHubTarget dummy3; // Reference so assembly is copied to Primary output.
+
+        private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
+        //private AzureEventHubTarget dummy3; // Reference so assembly is copied to Primary output.
 #pragma warning restore S1144, 0169 // Unused private types or members should be removed
 
         public NLogLogger(Type loggerType, IConfigurationSettings settings, IRequestContext context)

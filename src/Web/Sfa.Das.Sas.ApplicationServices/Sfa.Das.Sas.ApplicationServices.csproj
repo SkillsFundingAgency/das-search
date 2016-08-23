@@ -79,6 +79,8 @@
     <Compile Include="Handlers\GetStandardHandler.cs" />
     <Compile Include="Handlers\GetStandardProvidersHandler.cs" />
     <Compile Include="Handlers\StandardProviderSearchHandler.cs" />
+    <Compile Include="Http\IHttpGet.cs" />
+    <Compile Include="Http\HttpService.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProviderSearchService.cs" />
