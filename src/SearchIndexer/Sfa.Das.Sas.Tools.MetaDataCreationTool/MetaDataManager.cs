@@ -61,7 +61,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var standards = _metadataApiService.GetStandards();
+            //var standards = _metadataApiService.GetStandards();
+            var standards = _vstsService.GetStandards().ToList();
 
             UpdateStandardsInformationFromLars(standards);
             return standards;
@@ -102,7 +103,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         private void UpdateFrameworkInformation(IEnumerable<FrameworkMetaData> frameworks)
         {
-            var repositoryFrameworks = _metadataApiService.GetFrameworks();
+            //var repositoryFrameworks = _metadataApiService.GetFrameworks();
+            var repositoryFrameworks = _vstsService.GetFrameworks();
 
             foreach (var framework in frameworks)
             {
