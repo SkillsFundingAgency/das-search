@@ -130,7 +130,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
 
             var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1" }, new StandardMetaData { Id = 3, Title = "Title2" } };
 
-            mockMetadataApiService.Setup(x => x.GetStandards()).Returns(standardsFromRepo);
+            mockVstsService.Setup(x => x.GetStandards()).Returns(standardsFromRepo);
 
             var metaDataManager = new MetaDataManager(mockLarsDataService.Object, mockVstsService.Object, mockSettings.Object, mockAngleSharpService.Object, mockMetadataApiService.Object, mockLogger.Object);
 
