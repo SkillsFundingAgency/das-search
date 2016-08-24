@@ -12,6 +12,7 @@ using Sfa.Das.Sas.Indexer.Core.Models;
 using Sfa.Das.Sas.Indexer.Core.Models.Framework;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
+using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
@@ -25,7 +26,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
         private readonly ILog _logger;
 
         private readonly IAngleSharpService _angleSharpService;
-        private readonly IHttpGet _httpService;
+        private readonly IMetadataApiService _metadataApiService;
 
         private readonly IVstsService _vstsService;
 
@@ -34,7 +35,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             IVstsService vstsService,
             IAppServiceSettings appServiceSettings,
             IAngleSharpService angleSharpService,
-            IHttpGet httpService,
+            IMetadataApiService metadataApiService,
             ILog logger)
         {
             _larsDataService = larsDataService;
@@ -42,7 +43,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
             _appServiceSettings = appServiceSettings;
             _logger = logger;
             _angleSharpService = angleSharpService;
-            _httpService = httpService;
+            _metadataApiService = metadataApiService;
         }
 
         public void GenerateStandardMetadataFiles()
@@ -60,12 +61,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var response = _httpService.Get(string.Concat(_appServiceSettings.MetadataApiUri, "Standard"), string.Empty, string.Empty);
-            var standards = new List<StandardMetaData>();
-            if (response != string.Empty)
-            {
-                standards = JsonConvert.DeserializeObject<List<StandardMetaData>>(response);
-            }
+            var standards = _metadataApiService.GetStandards();
 
             UpdateStandardsInformationFromLars(standards);
             return standards;
@@ -106,12 +102,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         private void UpdateFrameworkInformation(IEnumerable<FrameworkMetaData> frameworks)
         {
-            var repositoryFrameworks = new List<VstsFrameworkMetaData>();
-            var response = _httpService.Get(string.Concat(_appServiceSettings.MetadataApiUri, "Framework"), string.Empty, string.Empty);
-            if (response != string.Empty)
-            {
-                repositoryFrameworks = JsonConvert.DeserializeObject<List<VstsFrameworkMetaData>>(response);
-            }
+            var repositoryFrameworks = _metadataApiService.GetFrameworks();
 
             foreach (var framework in frameworks)
             {
