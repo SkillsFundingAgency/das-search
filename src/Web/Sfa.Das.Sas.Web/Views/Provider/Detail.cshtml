@@ -38,7 +38,7 @@
                         @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))
                     </span>
                 </header>
-                <dl class="data-list">
+                <dl class="data-list data-list--compact">
                     @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
                     @GetStandardPropertyHtml("Phone:", "phone", Model.ContactInformation.Phone)
                     @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)

@@ -2646,3 +2646,15 @@ only screen and (min-resolution: 2dppx) {
     padding-left: 65px;
     margin-left: -15px;
 }
+
+.qualifications {
+    > div {
+        margin-bottom: 1em;
+        ul, ol {
+            margin-bottom: 1em;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
