@@ -16,14 +16,16 @@
                 </p>
                 @if (Model.ExpiryDateString != null)
                 {
-                    <div class="expire-date">
-                        <div>
-                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                        </div>
-                        <span>
+
+                    <div class="notice">
+                        <i class="icon icon-important">
+                            <span class="visuallyhidden">Warning</span>
+                        </i>
+                        <strong class="bold-small">
                             This apprenticeship is closed to new starters from @Model.ExpiryDateString
-                        </span>
+                        </strong>
                     </div>
+
                 }
         </div>
 
