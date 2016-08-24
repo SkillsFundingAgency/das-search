@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             Assert.True(string.IsNullOrEmpty(settings.GitUsername));
             Assert.True(string.IsNullOrEmpty(settings.GitPassword));
 
-            MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, angleSharpService, logger);
+            MetaDataManager metaData = new MetaDataManager(larsDataService, vstsDataService, settings, angleSharpService, null, logger);
 
             var standardsFromLars = larsDataService.GetListOfCurrentStandards();
 

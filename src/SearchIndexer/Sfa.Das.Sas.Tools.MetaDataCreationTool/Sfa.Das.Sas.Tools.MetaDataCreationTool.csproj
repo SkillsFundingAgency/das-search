@@ -93,11 +93,13 @@
     <Compile Include="Models\GovLearn\GovLearnResource.cs" />
     <Compile Include="Models\GovLearn\GovLearnResponse.cs" />
     <Compile Include="Models\StandardRepositoryData.cs" />
+    <Compile Include="Services\IMetadataApiService.cs" />
     <Compile Include="Services\Interfaces\IJsonMetaDataConvert.cs" />
     <Compile Include="Services\Interfaces\IAngleSharpService.cs" />
     <Compile Include="Services\Interfaces\ILarsDataService.cs" />
     <Compile Include="Services\Interfaces\IVstsService.cs" />
     <Compile Include="Services\JsonMetaDataConvert.cs" />
+    <Compile Include="Services\MetadataApiService.cs" />
     <Compile Include="Services\VstsService.cs" />
     <Compile Include="Services\GitDynamicModelGenerator.cs" />
     <Compile Include="MetaDataManager.cs" />
