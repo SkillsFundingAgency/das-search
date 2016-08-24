@@ -157,7 +157,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             var url = $"{_appServiceSettings.ImServiceBaseUrl}/{_appServiceSettings.ImServiceUrl}";
 
             var link = _angleSharpService.GetLinks(url, "li a", "LARS CSV");
-            var linkEndpoint = link.FirstOrDefault();
+            var linkEndpoint = link?.FirstOrDefault();
             var fullLink = linkEndpoint != null ? $"{_appServiceSettings.ImServiceBaseUrl}/{linkEndpoint}" : string.Empty;
 
             if (string.IsNullOrEmpty(fullLink))
