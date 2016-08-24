@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
             return timing.Result.OrderBy(x => x.Id).ToList();
         }
 
-        public StandardMetaData GetStandardMetaData(int id)
+        public StandardMetaData GetStandardMetaData(string id)
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataReader.GetStandardMetaData(id));
 
@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
             return timing.Result.OrderBy(x => x.Id).ToList();
         }
 
-        public FrameworkMetaData GetFrameworkMetaData(int id)
+        public FrameworkMetaData GetFrameworkMetaData(string id)
         {
             var timing = ExecutionTimer.GetTiming(() => _metaDataFrameworkReader.GetFrameworkMetaData(id));
 

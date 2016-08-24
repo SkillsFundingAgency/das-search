@@ -103,6 +103,7 @@
     <Compile Include="Logging\NLogLogger.cs" />
     <Compile Include="MongoDb\IMongoDataClient.cs" />
     <Compile Include="MongoDb\IMongoSettings.cs" />
+    <Compile Include="MongoDb\Models\Class1.cs" />
     <Compile Include="MongoDb\Models\MongoFramework.cs" />
     <Compile Include="MongoDb\Models\MongoJobRoleItem.cs" />
     <Compile Include="MongoDb\Models\MongoStandard.cs" />

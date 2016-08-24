@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             var detail = new FrameworkDetails();
             var model = new FrameworkMetaData
             {
-                Id = "3",
+                ApprenticeshipId = 3,
                 FrameworkName = "Test framework name",
                 FrameworkCode = 1,
                 FrameworkOverview = "Test framework overview",
@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "#id").Should().Be(model.Id);
+            GetPartial(html, "#apprenticeshipId").Should().Be(model.ApprenticeshipId.ToString());
             GetPartial(html, "#frameworkName").Should().Be(model.FrameworkName);
             GetPartial(html, "#frameworkCode").Should().Be(model.FrameworkCode.ToString());
             GetPartial(html, "#frameworkOverview").Should().Be(model.FrameworkOverview);
@@ -132,7 +132,7 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             var detail = new FrameworkDetails();
             var model = new FrameworkMetaData
             {
-                Id = "3",
+                ApprenticeshipId = 3,
                 FrameworkName = string.Empty,
                 FrameworkCode = 1,
                 FrameworkOverview = string.Empty,
@@ -161,7 +161,7 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "#id").Should().Be(model.Id);
+            GetPartial(html, "#apprenticeshipId").Should().Be(model.ApprenticeshipId.ToString());
             GetPartial(html, "#frameworkName").Should().Be("none");
             GetPartial(html, "#frameworkCode").Should().Be(model.FrameworkCode.ToString());
             GetPartial(html, "#frameworkOverview").Should().Be("none");

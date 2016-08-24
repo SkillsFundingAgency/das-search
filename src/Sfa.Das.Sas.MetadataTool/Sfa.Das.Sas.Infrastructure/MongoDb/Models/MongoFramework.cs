@@ -3,9 +3,13 @@
     using System;
     using System.Collections.Generic;
 
-    internal class MongoFramework
+    internal class MongoFramework : IMongoDataType
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+
+        public string DocumentVersion { get; set; }
+
+        public int ApprenticeshipId { get; set; }
 
         public string FrameworkName { get; set; }
 
@@ -46,5 +50,12 @@
         public IEnumerable<string> KnowledgeQualification { get; set; }
 
         public IEnumerable<string> CombinedQualification { get; set; }
+    }
+
+    internal interface IMongoDataType
+    {
+        Guid Id { get; set; }
+
+        string DocumentVersion { get; set; }
     }
 }

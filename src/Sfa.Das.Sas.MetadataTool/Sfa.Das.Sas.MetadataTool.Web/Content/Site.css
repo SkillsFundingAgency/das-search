@@ -15,3 +15,31 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* .import-data-page */
+.select-type {
+    display: block;
+
+    margin-bottom: 10px;
+    border: 4px solid #337ab7;
+    padding: 5px;
+}
+option {
+    padding: 5px;
+}
+
+.input-text {
+    display: block;
+    width: 100%;
+    min-height: 400px;
+    max-width: 100%;
+}
+
+.message {
+    background: #f6f6f6;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 18px;
+    text-align: center;
+    color: #337ab7;
+}

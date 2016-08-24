@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.MongoDb
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -32,7 +33,7 @@
             return models.Select(_mappingService.MapToCoreModel);
         }
 
-        public StandardMetaData GetStandard(int id)
+        public StandardMetaData GetStandard(string id)
         {
             var model = _mongoDataClient.GetById<MongoStandard>(_mongoSettings.CollectionNameStandards, id);
             return _mappingService.MapToCoreModel(model);
@@ -44,9 +45,9 @@
             return models.Select(_mappingService.MapToCoreModel);
         }
 
-        public FrameworkMetaData GetFramework(int id)
+        public FrameworkMetaData GetFramework(string id)
         {
-            var model = _mongoDataClient.GetById<MongoFramework>(_mongoSettings.CollectionNameFrameworks, id.ToString());
+            var model = _mongoDataClient.GetById<MongoFramework>(_mongoSettings.CollectionNameFrameworks, id);
             return _mappingService.MapToCoreModel(model);
         }
     }

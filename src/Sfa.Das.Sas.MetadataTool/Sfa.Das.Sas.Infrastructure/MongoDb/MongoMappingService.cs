@@ -1,9 +1,12 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.MongoDb
 {
+    using System;
     using System.Linq;
 
     using Core.Models;
     using Models;
+
+    using Sfa.Das.Sas.ApplicationServices.Models;
 
     internal class MongoMappingService
     {
@@ -12,7 +15,8 @@
             return new StandardMetaData
             {
                 Id = arg.Id,
-                Title= arg.Title,
+                ApprenticeshipId = arg.ApprenticeshipId,
+                Title = arg.Title,
                 JobRoles = arg.JobRoles,
                 Keywords = arg.Keywords,
                 NotionalEndLevel = arg.NotionalEndLevel,
@@ -33,7 +37,8 @@
         {
             return new FrameworkMetaData
             {
-                Id = arg.Id.ToString(),
+                Id = arg.Id,
+                ApprenticeshipId = arg.ApprenticeshipId,
                 FrameworkCode = arg.FrameworkCode,
                 FrameworkName = arg.FrameworkName,
                 ProgType = arg.ProgType,
@@ -83,7 +88,7 @@
         {
             return new MongoFramework
             {
-                Id = ToInt(arg.Id),
+                Id = arg.Id,
                 FrameworkCode = arg.FrameworkCode,
                 FrameworkName = arg.FrameworkName,
                 ProgType = arg.ProgType,
@@ -104,6 +109,48 @@
                 CompetencyQualification = arg.CompetencyQualification,
                 KnowledgeQualification = arg.KnowledgeQualification,
                 CombinedQualification = arg.CombinedQualification
+            };
+        }
+
+        internal MongoStandard MapFromVstsModel(VstsStandardMetaData arg)
+        {
+            return new MongoStandard
+            {
+                Id = Guid.NewGuid(),
+                ApprenticeshipId = arg.Id,
+                Title = arg.Title,
+                JobRoles = arg.JobRoles,
+                Keywords = arg.Keywords,
+                NotionalEndLevel = arg.NotionalEndLevel,
+                StandardPdfUrl = arg.StandardPdfUrl,
+                AssessmentPlanPdfUrl = arg.AssessmentPlanPdfUrl,
+                TypicalLength = MapTypicalLength(arg.TypicalLength),
+                EntryRequirements = arg.EntryRequirements,
+                WhatApprenticesWillLearn = arg.WhatApprenticesWillLearn,
+                Qualifications = arg.Qualifications,
+                ProfessionalRegistration = arg.ProfessionalRegistration,
+                OverviewOfRole = arg.OverviewOfRole,
+            };
+        }
+
+        internal MongoFramework MapFromVstsModel(VstsFrameworkMetaData arg)
+        {
+            return new MongoFramework
+            {
+                Id =  new Guid(),
+                ApprenticeshipId = ToInt(arg.Id),
+                FrameworkCode = arg.FrameworkCode,
+                FrameworkName = arg.FrameworkName,
+                ProgType = arg.ProgType,
+                PathwayCode = arg.PathwayCode,
+                Pathway = arg.Pathway,
+                JobRoleItems = arg.JobRoleItems.Select(MapJobRoleItems),
+                Keywords = arg.Keywords,
+                TypicalLength = MapTypicalLength(arg.TypicalLength),
+                EntryRequirements = arg.EntryRequirements,
+                ProfessionalRegistration = arg.ProfessionalRegistration,
+                CompletionQualifications = arg.CompletionQualifications,
+                FrameworkOverview = arg.FrameworkOverview
             };
         }
 

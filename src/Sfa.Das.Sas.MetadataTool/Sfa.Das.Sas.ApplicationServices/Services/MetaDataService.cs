@@ -41,10 +41,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary);
         }
 
-        public StandardMetaData GetStandard(int id)
+        public StandardMetaData GetStandard(string id)
         {
             var standardsDictionary = GetAllFileContents(_appServiceSettings.VstsGitGetFilesUrl);
-            return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary).FirstOrDefault(x => x.Id == id);
+            return _jsonMetaDataConvert.DeserializeObject<StandardMetaData>(standardsDictionary).FirstOrDefault(x => x.ApprenticeshipId.ToString() == id);
         }
 
         public IEnumerable<FrameworkMetaData> GetFrameworks()
@@ -62,12 +62,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             return new List<FrameworkMetaData>();
         }
 
-        public FrameworkMetaData GetFramework(int id)
+        public FrameworkMetaData GetFramework(string id)
         {
             try
             {
                 var frameworksDir = GetAllFileContents(_appServiceSettings.VstsGitGetFrameworkFilesUrl);
-                return _jsonMetaDataConvert.DeserializeObject<FrameworkMetaData>(frameworksDir).FirstOrDefault(x => x.Id == id.ToString());
+                return _jsonMetaDataConvert.DeserializeObject<FrameworkMetaData>(frameworksDir).FirstOrDefault(x => x.ApprenticeshipId.ToString() == id);
             }
             catch (Exception ex)
             {

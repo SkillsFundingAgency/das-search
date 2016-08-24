@@ -2,9 +2,13 @@
 
 namespace Sfa.Das.Sas.Core.Models
 {
+    using System;
+
     public class StandardMetaData
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+
+        public int ApprenticeshipId { get; set; }
 
         public string Title { get; set; }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Sfa.Das.Sas.Core.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.MetaData
@@ -11,6 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
     {
         List<FrameworkMetaData> GetFrameworksMetaData();
 
-        FrameworkMetaData GetFrameworkMetaData(int id);
+        FrameworkMetaData GetFrameworkMetaData(string id);
     }
 }

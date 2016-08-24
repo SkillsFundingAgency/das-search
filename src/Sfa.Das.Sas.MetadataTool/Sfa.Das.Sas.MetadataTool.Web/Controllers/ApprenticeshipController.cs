@@ -46,13 +46,13 @@
             return JsonConvert.SerializeObject(frameworks);
         }
 
-        public ActionResult StandardDetails(int id)
+        public ActionResult StandardDetails(string id)
         {
             var standard = _metaDataHelper.GetStandardMetaData(id);
             return this.View(standard);
         }
 
-        public ActionResult FrameworkDetails(int id)
+        public ActionResult FrameworkDetails(string id)
         {
             var framework = this._metaDataHelper.GetFrameworkMetaData(id);
             return this.View(framework);

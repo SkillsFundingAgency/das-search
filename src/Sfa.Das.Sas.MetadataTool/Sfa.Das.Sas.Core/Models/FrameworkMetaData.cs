@@ -5,7 +5,9 @@ namespace Sfa.Das.Sas.Core.Models
 {
     public class FrameworkMetaData
     {
-        public string Id { get; set; }
+        public int ApprenticeshipId { get; set; }
+
+        public Guid Id { get; set; }
 
         public string FrameworkName { get; set; }
 

@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2585), Tuple.Create("\"", 2593)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2638), Tuple.Create("\"", 2646)
 
 #line 41 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 2590), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2643), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2590), false)
+, 2643), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -145,14 +145,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2910), Tuple.Create("\"", 2918)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2963), Tuple.Create("\"", 2971)
 
 #line 52 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 2915), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2968), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2915), false)
+, 2968), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -210,14 +210,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3303), Tuple.Create("\"", 3311)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3356), Tuple.Create("\"", 3364)
 
 #line 63 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 3308), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3361), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3308), false)
+, 3361), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -354,14 +354,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4314), Tuple.Create("\"", 4322)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4367), Tuple.Create("\"", 4375)
 
 #line 93 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 4319), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 4372), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4319), false)
+, 4372), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -490,7 +490,7 @@ WriteLiteral("    ");
 
             
             #line 13 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Id", "id", Model.Id));
+Write(GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString()));
 
             
             #line default

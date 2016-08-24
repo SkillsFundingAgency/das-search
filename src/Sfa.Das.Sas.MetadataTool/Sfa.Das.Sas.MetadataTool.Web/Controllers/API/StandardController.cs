@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.MetadataTool.Web.Controllers.API
         }
 
         // GET: api/Standard/5
-        public StandardMetaData Get(int id)
+        public StandardMetaData Get(string id)
         {
             return _metaDataHelper.GetStandardMetaData(id);
         }

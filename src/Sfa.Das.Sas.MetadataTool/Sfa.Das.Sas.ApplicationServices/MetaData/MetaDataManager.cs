@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
             return standards;
         }
 
-        public StandardMetaData GetStandardMetaData(int id)
+        public StandardMetaData GetStandardMetaData(string id)
         {
             var standard = _metaDataService.GetStandard(id);
 
@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
             return frameworks;
         }
 
-        public FrameworkMetaData GetFrameworkMetaData(int id)
+        public FrameworkMetaData GetFrameworkMetaData(string id)
         {
             var framework = _metaDataService.GetFramework(id);
 

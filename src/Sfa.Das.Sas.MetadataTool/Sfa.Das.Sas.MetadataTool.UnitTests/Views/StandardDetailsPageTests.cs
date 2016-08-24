@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             var detail = new StandardDetails();
             var model = new StandardMetaData
             {
-                Id = 3,
+                ApprenticeshipId = 3,
                 Title = "Test title",
                 TypicalLength = new TypicalLength
                 {
@@ -88,7 +88,7 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             var detail = new StandardDetails();
             var model = new StandardMetaData
             {
-                Id = 3,
+                ApprenticeshipId = 3,
                 Title = string.Empty,
                 TypicalLength = new TypicalLength
                 {

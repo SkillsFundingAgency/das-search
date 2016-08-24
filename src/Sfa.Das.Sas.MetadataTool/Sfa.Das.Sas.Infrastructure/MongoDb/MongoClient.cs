@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.MongoDb
 {
+    using System;
     using System.Collections.Generic;
 
     using MongoDB.Driver;
@@ -40,7 +41,7 @@
         public T GetById<T>(string collectionName, string id)
         {
             var collection = _database.GetCollection<T>(collectionName);
-            var filter = Builders<T>.Filter.AnyEq("_id", id);
+            var filter = Builders<T>.Filter.AnyEq("_id", Guid.Parse(id));
             var record = collection.Find(filter);
 
             return record.SingleOrDefault();

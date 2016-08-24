@@ -8,10 +8,10 @@
     {
         IEnumerable<StandardMetaData> GetStandards();
 
-        StandardMetaData GetStandard(int id);
+        StandardMetaData GetStandard(string id);
 
         IEnumerable<FrameworkMetaData> GetFrameworks();
 
-        FrameworkMetaData GetFramework(int id);
+        FrameworkMetaData GetFramework(string id);
     }
 }

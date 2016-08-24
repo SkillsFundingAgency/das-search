@@ -68,6 +68,7 @@
     <Compile Include="MetaData\MetaDataManager.cs" />
     <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />
+    <Compile Include="Models\VstsStandardMetaData.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\GitTree.cs" />
     <Compile Include="Models\FileContents.cs" />

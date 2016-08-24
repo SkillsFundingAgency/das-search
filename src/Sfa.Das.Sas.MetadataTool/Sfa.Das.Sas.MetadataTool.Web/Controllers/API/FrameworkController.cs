@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.MetadataTool.Web.Controllers.API
         }
 
         // GET: api/FrameworkApi/5
-        public FrameworkMetaData Get(int id)
+        public FrameworkMetaData Get(string id)
         {
             return _metaDataHelper.GetFrameworkMetaData(id);
         }
