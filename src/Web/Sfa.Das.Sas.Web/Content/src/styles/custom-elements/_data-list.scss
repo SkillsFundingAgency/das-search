@@ -65,6 +65,11 @@ $module: 'data-list';
         margin-bottom: 1em;
     }
 
+    &.data-list--compact {
+        dd, dt {
+            margin-bottom: 0;
+        }
+    }
 
     //Mobile considerations
     @include media(mobile) {

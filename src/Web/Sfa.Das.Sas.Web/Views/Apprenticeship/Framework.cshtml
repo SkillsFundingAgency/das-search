@@ -16,14 +16,16 @@
                 </p>
                 @if (Model.ExpiryDateString != null)
                 {
-                    <div class="expire-date">
-                        <div>
-                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                        </div>
-                        <span>
+
+                    <div class="notice">
+                        <i class="icon icon-important">
+                            <span class="visuallyhidden">Warning</span>
+                        </i>
+                        <strong class="bold-small">
                             This apprenticeship is closed to new starters from @Model.ExpiryDateString
-                        </span>
+                        </strong>
                     </div>
+
                 }
         </div>
 
@@ -101,7 +103,7 @@
                     @if (Model.CompetencyQualification!= null && Model.CompetencyQualification.Any())
                     {
                         <div class="competencyQualifications">
-                            Apprentices will achieve a practical (or 'competence') qualification:
+                            <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
                             <ul>
                                 @foreach (var qualification in Model.CompetencyQualification.Take(3))
                                 {
@@ -123,7 +125,7 @@
                     @if (Model.KnowledgeQualification!= null && Model.KnowledgeQualification.Any())
                     {
                         <div class="knowledgeQualifications">
-                            Apprentices will also achieve a theory-based (or 'knowledge') qualification:
+                            <p>Apprentices will also achieve a theory-based (or 'knowledge') qualification:</p>
                             <ul>
                                 @foreach (var qualification in Model.KnowledgeQualification.Take(3))
                                 {
@@ -145,7 +147,7 @@
                     @if (Model.CombinedQualificiation != null && Model.CombinedQualificiation.Any())
                     {
                         <div class="combinedQualification">
-                            Apprentices will achieve a practical and theory-based (or 'combined') qualification:
+                            <p>Apprentices will achieve a practical and theory-based (or 'combined') qualification:</p>
                             <ul>
                                 @foreach (var qualification in Model.CombinedQualificiation.Take(3))
                                 {

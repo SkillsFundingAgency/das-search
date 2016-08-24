@@ -2363,7 +2363,7 @@ details .arrow {
         text-decoration: none;
         @media (min-width: 641px) {
             color: $black;
-            cursor: initial;
+            cursor: default;
         }
 
         &:after {
@@ -2645,4 +2645,16 @@ only screen and (min-resolution: 2dppx) {
     display: block;
     padding-left: 65px;
     margin-left: -15px;
+}
+
+.qualifications {
+    > div {
+        margin-bottom: 1em;
+        ul, ol {
+            margin-bottom: 1em;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
