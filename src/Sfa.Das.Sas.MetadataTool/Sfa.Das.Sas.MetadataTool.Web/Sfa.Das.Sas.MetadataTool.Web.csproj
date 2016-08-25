@@ -418,8 +418,8 @@
     </Content>
     <Content Include="Views\razorgenerator.directives" />
     <Content Include="Views\Apprenticeship\EditFramework.cshtml" />
-    <None Include="Views\Apprenticeship\EditStandard.cshtml" />
-    <None Include="Views\Import\ImportEntries.cshtml" />
+    <Content Include="Views\Apprenticeship\EditStandard.cshtml" />
+    <Content Include="Views\Import\ImportEntries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
