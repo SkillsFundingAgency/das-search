@@ -2650,6 +2650,10 @@ only screen and (min-resolution: 2dppx) {
 .qualifications {
     > div {
         margin-bottom: 1em;
+        > p + ul, 
+        > p + ol {
+            margin-top: -1em;
+        }
         ul, ol {
             margin-bottom: 1em;
             &:last-child {
