@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.MongoDb.Models
 {
-    internal class MongoJobRoleItem
+    public class MongoJobRoleItem
     {
         public string Title { get; set; }
 

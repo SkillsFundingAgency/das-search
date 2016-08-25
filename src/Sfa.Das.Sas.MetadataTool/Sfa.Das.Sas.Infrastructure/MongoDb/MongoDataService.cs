@@ -9,6 +9,8 @@
 
     using Models;
 
+    using MongoDB.Driver;
+
     public class MongoDataService : IMetaDataService
     {
         private readonly IMongoDataClient _mongoDataClient;
@@ -49,6 +51,40 @@
         {
             var model = _mongoDataClient.GetById<MongoFramework>(_mongoSettings.CollectionNameFrameworks, id);
             return _mappingService.MapToCoreModel(model);
+        }
+
+        public void UpdateFramework(FrameworkMetaData updateModel)
+        {
+            var model = _mongoDataClient.GetById<MongoFramework>(_mongoSettings.CollectionNameFrameworks, updateModel.Id.ToString());
+
+            _mongoDataClient.Save(
+                model,
+                Builders<MongoFramework>.Filter.Eq(x => x.Id, model.Id),
+                Builders<MongoFramework>.Update
+                    .Set(x => x.EffectiveFrom, updateModel.EffectiveFrom)
+                    .Set(x => x.EffectiveTo, updateModel.EffectiveTo)
+                    .Set(x => x.Keywords, updateModel.Keywords)
+                    .Set(x => x.JobRoleItems, updateModel.JobRoleItems.Select(_mappingService.MapJobRoleItems))
+                    .Set(x => x.FrameworkOverview, updateModel.FrameworkOverview)
+                    .Set(x => x.EntryRequirements, updateModel.EntryRequirements)
+                    .Set(x => x.ProfessionalRegistration, updateModel.ProfessionalRegistration)
+                    .Set(x => x.CompletionQualifications, updateModel.CompletionQualifications)
+                    .Set(x => x.CompetencyQualification, updateModel.CompetencyQualification)
+                    .Set(x => x.KnowledgeQualification, updateModel.KnowledgeQualification)
+                    .Set(x => x.CombinedQualification, updateModel.CombinedQualification)
+                    ,
+                _mongoSettings.CollectionNameFrameworks);
+        }
+
+        public void UpdateStandard(StandardMetaData updateModel)
+        {
+            var model = _mongoDataClient.GetById<MongoStandard>(_mongoSettings.CollectionNameFrameworks, updateModel.Id.ToString());
+
+            _mongoDataClient.Save(
+                model,
+                Builders<MongoStandard>.Filter.Eq(x => x.Id, model.Id),
+                Builders<MongoStandard>.Update.Set(x => x.OverviewOfRole, model.OverviewOfRole),
+                _mongoSettings.CollectionNameFrameworks);
         }
     }
 }

@@ -44,7 +44,6 @@
                 ProgType = arg.ProgType,
                 PathwayCode = arg.PathwayCode,
                 Pathway = arg.Pathway,
-                NasTitle = arg.NasTitle,
                 EffectiveFrom = arg.EffectiveFrom,
                 EffectiveTo = arg.EffectiveTo,
                 JobRoleItems = arg.JobRoleItems.Select(MapJobRoleItems),
@@ -94,10 +93,9 @@
                 ProgType = arg.ProgType,
                 PathwayCode = arg.PathwayCode,
                 Pathway = arg.Pathway,
-                NasTitle = arg.NasTitle,
                 EffectiveFrom = arg.EffectiveFrom,
                 EffectiveTo = arg.EffectiveTo,
-                JobRoleItems = arg.JobRoleItems.Select(MapJobRoleItems),
+                JobRoleItems = arg.JobRoleItems?.Select(MapJobRoleItems),
                 Keywords = arg.Keywords,
                 TypicalLength = MapTypicalLength(arg.TypicalLength),
                 SectorSubjectAreaTier1 = arg.SectorSubjectAreaTier1,
@@ -154,6 +152,16 @@
             };
         }
 
+        public JobRoleItem MapJobRoleItems(MongoJobRoleItem arg)
+        {
+            return new JobRoleItem { Title = arg.Title, Description = arg.Description };
+        }
+
+        public MongoJobRoleItem MapJobRoleItems(JobRoleItem arg)
+        {
+            return new MongoJobRoleItem { Title = arg.Title, Description = arg.Description };
+        }
+
         private int ToInt(string str)
         {
             int v;
@@ -163,22 +171,17 @@
 
         private MongoTypicalLength MapTypicalLength(TypicalLength arg)
         {
+            if (arg == null)
+            {
+                return new MongoTypicalLength();
+            }
+
             return new MongoTypicalLength { From = arg.From, To = arg.To, Unit = arg.Unit };
         }
 
         private TypicalLength MapTypicalLength(MongoTypicalLength arg)
         {
             return new TypicalLength { From = arg.From, To = arg.To, Unit = arg.Unit };
-        }
-
-        private JobRoleItem MapJobRoleItems(MongoJobRoleItem arg)
-        {
-            return new JobRoleItem { Title = arg.Title, Description = arg.Description };
-        }
-
-        private MongoJobRoleItem MapJobRoleItems(JobRoleItem arg)
-        {
-            return new MongoJobRoleItem { Title = arg.Title, Description = arg.Description };
         }
     }
 }

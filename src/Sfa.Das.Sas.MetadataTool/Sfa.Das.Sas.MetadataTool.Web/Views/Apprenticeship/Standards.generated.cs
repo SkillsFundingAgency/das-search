@@ -46,7 +46,16 @@ namespace Sfa.Das.Sas.MetadataTool.Web.Views.Apprenticeship
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<h2>Standards</h2>\r\n\r\n<div>\r\n");
+WriteLiteral("\r\n\r\n<h2>Standards (");
+
+            
+            #line 6 "..\..\Views\Apprenticeship\Standards.cshtml"
+          Write(Model.Count);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" results)</h2>\r\n\r\n<div>\r\n");
 
             
             #line 9 "..\..\Views\Apprenticeship\Standards.cshtml"
@@ -68,7 +77,7 @@ WriteLiteral("            ");
 
             
             #line 12 "..\..\Views\Apprenticeship\Standards.cshtml"
-       Write(Html.ActionLink($"{@item.Id}, {@item.Title}", "StandardDetails", "Apprenticeship", new { @id = item.Id }, null));
+       Write(Html.ActionLink($"{@item.ApprenticeshipId}, {@item.Title}", "StandardDetails", "Apprenticeship", new { @id = item.Id }, null));
 
             
             #line default

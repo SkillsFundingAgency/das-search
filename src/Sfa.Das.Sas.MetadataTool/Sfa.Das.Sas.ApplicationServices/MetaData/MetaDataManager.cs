@@ -6,7 +6,7 @@ using Sfa.Das.Sas.Core.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.MetaData
 {
-    public class MetaDataManager : IGetStandardMetaData, IGetFrameworkMetaData
+    public class MetaDataManager : IGetStandardMetaData, IGetFrameworkMetaData, IUpdateMetaData
     {
         private readonly IMetaDataService _metaDataService;
 
@@ -41,6 +41,11 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
             var framework = _metaDataService.GetFramework(id);
 
             return framework;
+        }
+
+        public void GetFrameworkMetaData(FrameworkMetaData model)
+        {
+            _metaDataService.UpdateFramework(model);
         }
     }
 }

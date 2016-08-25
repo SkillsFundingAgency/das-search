@@ -65,6 +65,7 @@
     <Compile Include="Http\IHttpPost.cs" />
     <Compile Include="Http\IHttpGetFile.cs" />
     <Compile Include="Http\IHttpGet.cs" />
+    <Compile Include="MetaData\IUpdateMetaData.cs" />
     <Compile Include="MetaData\MetaDataManager.cs" />
     <Compile Include="MetaData\IGetFrameworkMetaData.cs" />
     <Compile Include="MetaData\IGetStandardMetaData.cs" />

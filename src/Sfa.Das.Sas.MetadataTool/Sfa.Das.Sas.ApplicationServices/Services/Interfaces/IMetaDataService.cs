@@ -13,5 +13,7 @@
         IEnumerable<FrameworkMetaData> GetFrameworks();
 
         FrameworkMetaData GetFramework(string id);
+
+        void UpdateFramework(FrameworkMetaData model);
     }
 }

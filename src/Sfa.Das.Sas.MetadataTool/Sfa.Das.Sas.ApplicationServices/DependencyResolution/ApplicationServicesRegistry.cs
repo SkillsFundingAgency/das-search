@@ -26,6 +26,8 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution {
 
             For<IGetStandardMetaData>().Use<MetaDataManager>();
             For<IGetFrameworkMetaData>().Use<MetaDataManager>();
+            For<IUpdateMetaData>().Use<MetaDataManager>();
+
             For<IJsonMetaDataConvert>().Use<JsonMetaDataConvert>();
 
             For<IAppServiceSettings>().Use<AppServiceSettings>();

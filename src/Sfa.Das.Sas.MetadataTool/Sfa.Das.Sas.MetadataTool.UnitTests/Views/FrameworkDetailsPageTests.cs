@@ -45,7 +45,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
                 },
                 PathwayCode = 1,
                 Pathway = "Test pathway",
-                NasTitle = "Test NAS title",
                 EffectiveFrom = DateTime.Today,
                 EffectiveTo = DateTime.Today.AddDays(1),
                 JobRoleItems = new List<JobRoleItem>
@@ -100,7 +99,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             GetPartial(html, "#progType").Should().Be(model.ProgType.ToString());
             GetPartial(html, "#pathwayCode").Should().Be(model.PathwayCode.ToString());
             GetPartial(html, "#pathway").Should().Be(model.Pathway);
-            GetPartial(html, "#nasTitle").Should().Be(model.NasTitle);
             GetPartial(html, "#effectiveFrom").Should().Be(model.EffectiveFrom.ToString());
             GetPartial(html, "#effectiveTo").Should().Be(model.EffectiveTo.ToString());
             GetPartial(html, "#jobRoleItems").Should().Contain("Test job role title");
@@ -144,7 +142,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
                 },
                 PathwayCode = 1,
                 Pathway = string.Empty,
-                NasTitle = string.Empty,
                 EffectiveFrom = DateTime.Today,
                 EffectiveTo = DateTime.Today.AddDays(1),
                 JobRoleItems = new List<JobRoleItem>(),
@@ -172,7 +169,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             GetPartial(html, "#progType").Should().Be(model.ProgType.ToString());
             GetPartial(html, "#pathwayCode").Should().Be(model.PathwayCode.ToString());
             GetPartial(html, "#pathway").Should().Be("none");
-            GetPartial(html, "#nasTitle").Should().Be("none");
             GetPartial(html, "#effectiveFrom").Should().Be(model.EffectiveFrom.ToString());
             GetPartial(html, "#effectiveTo").Should().Be(model.EffectiveTo.ToString());
             GetPartial(html, "#jobRoleItems").Should().Be("none");

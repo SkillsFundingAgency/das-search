@@ -77,6 +77,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             return new FrameworkMetaData();
         }
 
+        public void UpdateFramework(FrameworkMetaData model)
+        {
+            throw new NotImplementedException();
+        }
 
         private IDictionary<string, string> GetAllFileContents(string vstsBlobUrl)
         {

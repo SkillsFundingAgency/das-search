@@ -77,7 +77,7 @@ WriteLiteral("            ");
 
             
             #line 12 "..\..\Views\Apprenticeship\Frameworks.cshtml"
-       Write(Html.ActionLink($"{@item.Id}, {@item.FrameworkName}: {@item.Pathway}", "FrameworkDetails", "Apprenticeship", new { @id = item.Id }, null));
+       Write(Html.ActionLink($"{@item.ApprenticeshipId}, {@item.FrameworkName}: {@item.Pathway}", "FrameworkDetails", "Apprenticeship", new { @id = item.Id }, null));
 
             
             #line default

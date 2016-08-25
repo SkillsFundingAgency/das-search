@@ -1,5 +1,6 @@
 ﻿namespace Sfa.Das.Sas.MetadataTool.Web.Controllers
 {
+    using System;
     using System.Web.Mvc;
 
     using Newtonsoft.Json;
@@ -7,6 +8,8 @@
     using ApplicationServices.Helpers;
 
     using ApplicationServices.Services.Interfaces;
+
+    using Sfa.Das.Sas.Core.Models;
 
     public class ApprenticeshipController : Controller
     {
@@ -54,8 +57,39 @@
 
         public ActionResult FrameworkDetails(string id)
         {
-            var framework = this._metaDataHelper.GetFrameworkMetaData(id);
-            return this.View(framework);
+            var framework = _metaDataHelper.GetFrameworkMetaData(id);
+            return View(framework);
         }
+
+        public ActionResult EditStandard(string id)
+        {
+            var standard = _metaDataHelper.GetStandardMetaData(id);
+            return View(standard);
+        }
+
+        public ActionResult EditFramework(string id)
+        {
+            var framework = _metaDataHelper.GetFrameworkMetaData(id);
+            return View(framework);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateFramework(FrameworkMetaData model)
+        {
+            _metaDataHelper.UpdateFrameworkMetaData(model);
+            var framework = _metaDataHelper.GetFrameworkMetaData(model.Id.ToString());
+            return View("FrameworkDetails", framework);
+        }
+    }
+
+    public class UpdateFrameworkModel
+    {
+        public Guid Id { get; set; }
+
+        public string FrameworkOverview { get; set; }
+
+        public string EntryRequirements { get; set; }
+
+        public string ProfessionalRegistration { get; set; }
     }
 }

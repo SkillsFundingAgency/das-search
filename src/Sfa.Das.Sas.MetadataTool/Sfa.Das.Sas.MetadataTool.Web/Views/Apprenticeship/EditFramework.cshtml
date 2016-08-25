@@ -1,0 +1,126 @@
+﻿@using MongoDB.Bson
+@using Sfa.Das.Sas.Core.Extensions
+@model Sfa.Das.Sas.Core.Models.FrameworkMetaData
+
+@{
+    ViewBag.Title = "Edit " + Model.FrameworkName  + ": " + Model.Pathway;
+}
+
+<h2>Edit @Model.FrameworkName: @Model.Pathway</h2>
+<span>
+    @Html.ActionLink("Back", "FrameworkDetails", new { Model.Id } )
+</span>
+
+<div class="edit">
+    <form action="/Apprenticeship/UpdateFramework" method="post">
+        <input type="hidden" name="id" value="@Model.Id"/>
+
+        <div class="boxed">
+            @GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
+            <div>
+                <label>EffectiveFrom</label>
+                <input type="date" name="effectivefrom" value="@Model.EffectiveFrom"/>
+            </div>
+            <div>
+                <label>EffectiveTo</label>
+                <input type="date" name="effectiveto" value="@Model.EffectiveTo"/>
+            </div>
+        </div>
+
+        <div class="boxed">
+            <label>Keywords</label>
+            <input type="text" id="keyword-input" placeholder="add new keyword"/>
+            <div id="keywords-container" data-values="@string.Join(",", Model.Keywords)" data-json="@Model.Keywords.ToJson()">
+                
+            </div>
+        </div>
+
+        <div class="boxed">
+            <label>Job Roles</label>
+            <input type="text" id="jobroles-title" placeholder="title"/>
+            <input type="text" id="jobroles-description" placeholder="description"/>
+            <div id="jobrole-container" data-json="@Model.JobRoleItems.ToJson()">
+                @*@foreach (var item in Model.JobRoleItems)
+                {
+                    <div class="entry">
+                        <input type="hidden" name="JobRoleItem[0].Title" value="@item.Title"/>
+                        <input type="hidden" name="JobRoleItem[0].Description" value="@item.Title"/>
+                        <span>@item.Title</span>
+                        <p>@item.Description</p>
+                        <a href="#" class="delete" data-value="@item">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                }*@
+
+            </div>
+        </div>
+
+        <div>
+            <label>FrameworkOverview</label>
+            <textarea name="frameworkoverview">@Model.FrameworkOverview</textarea>
+        </div>
+        <div>
+            <label>EntryRequirements</label>
+            <textarea name="entryrequirements">@Model.EntryRequirements</textarea>
+        </div>
+        <div>
+            <label>ProfessionalRegistration</label>
+            <textarea name="professionalregistration">@Model.ProfessionalRegistration</textarea>
+        </div>
+
+        <div>
+            <label>Completion Qualifications</label>
+            <textarea name="completionqualifications">@Model.CompletionQualifications</textarea>
+        </div>
+
+        <div>
+            <label>Competency Qualification</label>
+            <textarea name="competencyqualification">@Model.CompetencyQualification</textarea>
+        </div>
+
+        <div>
+            <label>Knowledge Qualification</label>
+            <textarea name="knowledgequalification">@Model.KnowledgeQualification</textarea>
+        </div>
+        <div>
+            <label>Combined Qualification</label>
+            <textarea name="combinedqualification">@Model.CombinedQualification</textarea>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="Update"/>
+    </form>
+
+</div>
+
+@helper GetFrameworkProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+            <dt>@title</dt>
+            <dd id="@id">
+                @(!string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"))
+            </dd>
+    }
+}
+
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <input type="hidden" name="keywords" value="{{keyword}}" />
+        <span>{{keyword}}</span>
+        <a href="#" class="delete" data-value="{{keyword}}">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </div>
+</script>
+
+<script id="jobrole-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <input type="hidden" name="JobRoleItems[{{index}}].Title" value="{{title}}" />
+        <input type="hidden" name="JobRoleItems[{{index}}].Description" value="{{description}}" />
+        <span>{{title}}</span>
+        <p>{{description}}</p>
+        <a href="#" class="delete" data-value="{{index}}">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </div>
+</script>

@@ -13,16 +13,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
     {
         private readonly IGetStandardMetaData _metaDataReader;
 
-
         private readonly IGetFrameworkMetaData _metaDataFrameworkReader;
 
         private readonly ILog _log;
 
-        public MetaDataHelper(IGetStandardMetaData metaDataReader, ILog log, IGetFrameworkMetaData metaDataFrameworkReader)
+        private IUpdateMetaData _metaDataUpdate;
+
+        public MetaDataHelper(IGetStandardMetaData metaDataReader, ILog log, IGetFrameworkMetaData metaDataFrameworkReader, IUpdateMetaData metaDataUpdate)
         {
             _metaDataReader = metaDataReader;
             _log = log;
             _metaDataFrameworkReader = metaDataFrameworkReader;
+            _metaDataUpdate = metaDataUpdate;
         }
 
         public List<StandardMetaData> GetAllStandardsMetaData()
@@ -59,6 +61,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
             _log.Debug("MetaDataHelper.GetFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
             return timing.Result;
+        }
+
+        public void UpdateFrameworkMetaData(FrameworkMetaData model)
+        {
+            var timing = ExecutionTimer.GetTiming(() => _metaDataUpdate.GetFrameworkMetaData(model));
+
+            _log.Debug("MetaDataHelper.GetFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.TotalMilliseconds });
         }
     }
 }

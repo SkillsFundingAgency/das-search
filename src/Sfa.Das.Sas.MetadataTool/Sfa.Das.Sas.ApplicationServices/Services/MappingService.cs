@@ -68,7 +68,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
                 .ForMember(dest => dest.EffectiveFrom, opt => opt.Ignore())
                 .ForMember(dest => dest.EffectiveTo, opt => opt.Ignore())
                 .ForMember(dest => dest.KnowledgeQualification, opt => opt.Ignore())
-                .ForMember(dest => dest.NasTitle, opt => opt.Ignore())
                 .ForMember(dest => dest.SectorSubjectAreaTier1, opt => opt.Ignore())
                 .ForMember(dest => dest.SectorSubjectAreaTier2, opt => opt.Ignore())
                 ;

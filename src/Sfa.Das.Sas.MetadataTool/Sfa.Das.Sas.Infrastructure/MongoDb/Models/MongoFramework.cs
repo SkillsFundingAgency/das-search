@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    internal class MongoFramework : IMongoDataType
+    public class MongoFramework : IMongoDataType
     {
         public Guid Id { get; set; }
 
@@ -21,7 +21,7 @@
 
         public string Pathway { get; set; }
 
-        public string NasTitle { get; set; }
+        public string NasTitle { get; set; } // TBD but from DB as well
 
         public DateTime EffectiveFrom { get; set; }
 
@@ -52,7 +52,7 @@
         public IEnumerable<string> CombinedQualification { get; set; }
     }
 
-    internal interface IMongoDataType
+    public interface IMongoDataType
     {
         Guid Id { get; set; }
 

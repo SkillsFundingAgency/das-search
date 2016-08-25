@@ -43,3 +43,20 @@ option {
     text-align: center;
     color: #337ab7;
 }
+
+
+.edit label {
+    display: block;
+}
+
+.edit textarea {
+    width: 500px;
+    max-width: 500px;
+    height: 200px;
+}
+
+.boxed {
+    background-color: #f6f7ff;
+    padding: 15px 6px;
+    margin: 15px 0;
+}

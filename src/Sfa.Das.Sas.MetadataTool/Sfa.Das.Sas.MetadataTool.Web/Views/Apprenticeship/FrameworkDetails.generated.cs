@@ -52,14 +52,14 @@ namespace Sfa.Das.Sas.MetadataTool.Web.Views.Apprenticeship
     public partial class FrameworkDetails : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Core.Models.FrameworkMetaData>
     {
 
-#line 36 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 41 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 public System.Web.WebPages.HelperResult GetFrameworkProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 37 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 42 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
@@ -70,7 +70,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 40 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 45 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2638), Tuple.Create("\"", 2646)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2829), Tuple.Create("\"", 2837)
 
-#line 41 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 2643), Tuple.Create<System.Object, System.Int32>(id
+#line 46 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+, Tuple.Create(Tuple.Create("", 2834), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2643), false)
+, 2834), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -95,7 +95,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 42 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 47 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, !string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"));
 
 
@@ -104,7 +104,7 @@ WriteTo(__razor_helper_writer, !string.IsNullOrEmpty(item) ? Html.MarkdownToHtml
 WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 
 
-#line 44 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 49 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
     }
 
 
@@ -112,19 +112,19 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 #line hidden
 });
 
-#line 45 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 50 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 }
 #line default
 #line hidden
 
-#line 47 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 52 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 public System.Web.WebPages.HelperResult GetFrameworkListProperty(string title, string id, IEnumerable<string> itemList, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 48 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 53 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
  
     if (!hideIfEmpty)
     {
@@ -135,7 +135,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 51 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 56 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -145,14 +145,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2963), Tuple.Create("\"", 2971)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3154), Tuple.Create("\"", 3162)
 
-#line 52 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 2968), Tuple.Create<System.Object, System.Int32>(id
+#line 57 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+, Tuple.Create(Tuple.Create("", 3159), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2968), false)
+, 3159), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -160,7 +160,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 53 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 58 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, itemList != null && itemList.Any() ? @Html.MarkdownToHtml(String.Join(", ", itemList)) : Html.MarkdownToHtml("none"));
 
 
@@ -169,7 +169,7 @@ WriteTo(__razor_helper_writer, itemList != null && itemList.Any() ? @Html.Markdo
 WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 
 
-#line 55 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 60 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
     }
 
 
@@ -177,19 +177,19 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </dd>\r\n");
 #line hidden
 });
 
-#line 56 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 61 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 }
 #line default
 #line hidden
 
-#line 58 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 63 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 public System.Web.WebPages.HelperResult GetFrameworkJobRoleItemsListProperty(string title, string id, IEnumerable<JobRoleItem> itemList, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 59 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 64 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
  
     if (itemList != null && !hideIfEmpty)
     {
@@ -200,7 +200,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 62 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 67 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -210,26 +210,26 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3356), Tuple.Create("\"", 3364)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3547), Tuple.Create("\"", 3555)
 
-#line 63 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 3361), Tuple.Create<System.Object, System.Int32>(id
+#line 68 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+, Tuple.Create(Tuple.Create("", 3552), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3361), false)
+, 3552), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
-#line 64 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 69 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
             
 
 #line default
 #line hidden
 
-#line 64 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 69 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
              if (itemList.Any())
             {
 
@@ -239,13 +239,13 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                <ul>\r\n");
 
 
-#line 67 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 72 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 67 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 72 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
                      foreach (var item in itemList)
                     {
 
@@ -258,7 +258,7 @@ WriteLiteralTo(__razor_helper_writer, "                        <li>\r\n         
 WriteLiteralTo(__razor_helper_writer, "                                    ");
 
 
-#line 72 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 77 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
        WriteTo(__razor_helper_writer, !string.IsNullOrEmpty(item.Title) ? Html.MarkdownToHtml(item.Title) : Html.MarkdownToHtml("none"));
 
 
@@ -269,7 +269,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                                </b>\
 WriteLiteralTo(__razor_helper_writer, "                                ");
 
 
-#line 74 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 79 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
    WriteTo(__razor_helper_writer, !string.IsNullOrEmpty(@item.Description) ? Html.MarkdownToHtml(@item.Description) : Html.MarkdownToHtml("none"));
 
 
@@ -278,7 +278,7 @@ WriteLiteralTo(__razor_helper_writer, "                                ");
 WriteLiteralTo(__razor_helper_writer, "\r\n                            </span>\r\n                        </li>\r\n");
 
 
-#line 77 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 82 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
                     }
 
 
@@ -287,7 +287,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                            </span>\r
 WriteLiteralTo(__razor_helper_writer, "                </ul>\r\n");
 
 
-#line 79 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 84 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
             }
             else
             {
@@ -296,14 +296,14 @@ WriteLiteralTo(__razor_helper_writer, "                </ul>\r\n");
 #line default
 #line hidden
 
-#line 82 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 87 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, Html.MarkdownToHtml("none"));
 
 
 #line default
 #line hidden
 
-#line 82 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 87 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
                                             
             }
 
@@ -313,7 +313,7 @@ WriteTo(__razor_helper_writer, Html.MarkdownToHtml("none"));
 WriteLiteralTo(__razor_helper_writer, "        </dd>\r\n");
 
 
-#line 85 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 90 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
     }
 
 
@@ -321,19 +321,19 @@ WriteLiteralTo(__razor_helper_writer, "        </dd>\r\n");
 #line hidden
 });
 
-#line 86 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 91 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 }
 #line default
 #line hidden
 
-#line 88 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 93 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 public System.Web.WebPages.HelperResult GetFrameworkTypicalLengthProperty(string title, string id, TypicalLength item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 89 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 94 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
  
 if (!hideIfEmpty)
 {
@@ -344,7 +344,7 @@ if (!hideIfEmpty)
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 92 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 97 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -354,26 +354,26 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4367), Tuple.Create("\"", 4375)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 4558), Tuple.Create("\"", 4566)
 
-#line 93 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-, Tuple.Create(Tuple.Create("", 4372), Tuple.Create<System.Object, System.Int32>(id
+#line 98 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+, Tuple.Create(Tuple.Create("", 4563), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 4372), false)
+, 4563), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
-#line 94 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 99 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
             
 
 #line default
 #line hidden
 
-#line 94 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 99 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
              if (item != null)
             {
 
@@ -383,7 +383,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                <span>From ");
 
 
-#line 96 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 101 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, item.From);
 
 
@@ -392,7 +392,7 @@ WriteTo(__razor_helper_writer, item.From);
 WriteLiteralTo(__razor_helper_writer, " to ");
 
 
-#line 96 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 101 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
            WriteTo(__razor_helper_writer, item.To);
 
 
@@ -401,7 +401,7 @@ WriteLiteralTo(__razor_helper_writer, " to ");
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 96 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 101 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
                     WriteTo(__razor_helper_writer, item.Unit);
 
 
@@ -410,7 +410,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, "</span>\r\n");
 
 
-#line 97 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 102 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
             }
             else
             {
@@ -419,14 +419,14 @@ WriteLiteralTo(__razor_helper_writer, "</span>\r\n");
 #line default
 #line hidden
 
-#line 100 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 105 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 WriteTo(__razor_helper_writer, Html.MarkdownToHtml("none"));
 
 
 #line default
 #line hidden
 
-#line 100 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 105 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
                                             
             }
 
@@ -436,7 +436,7 @@ WriteTo(__razor_helper_writer, Html.MarkdownToHtml("none"));
 WriteLiteralTo(__razor_helper_writer, "        </dd>\r\n");
 
 
-#line 103 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 108 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 }
 
 
@@ -444,7 +444,7 @@ WriteLiteralTo(__razor_helper_writer, "        </dd>\r\n");
 #line hidden
 });
 
-#line 104 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+#line 109 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 }
 #line default
 #line hidden
@@ -484,56 +484,45 @@ WriteLiteral(": ");
             
             #line default
             #line hidden
-WriteLiteral("</h2>\r\n\r\n<div>\r\n");
+WriteLiteral("</h2>\r\n<span>\r\n    ");
+
+WriteLiteral("\r\n    <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 395), Tuple.Create("\"", 461)
+            
+            #line 13 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+, Tuple.Create(Tuple.Create("", 402), Tuple.Create<System.Object, System.Int32>(Url.Action("EditFramework", routeValues: new { Model.Id })
+            
+            #line default
+            #line hidden
+, 402), false)
+);
+
+WriteLiteral(">\r\n        Edit\r\n        <i");
+
+WriteLiteral(" class=\"fa fa-pencil-square-o\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></i>\r\n    </a>\r\n</span>\r\n<div>\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 13 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+            #line 19 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 Write(GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString()));
 
             
             #line default
             #line hidden
+WriteLiteral("\r\n    ");
+
 WriteLiteral("\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 14 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Framework Name", "frameworkName", Model.FrameworkName));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 15 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Framework Code", "frameworkCode", Model.FrameworkCode.ToString()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 16 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Framework Overview", "frameworkOverview", Model.FrameworkOverview));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 17 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+            #line 22 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 Write(GetFrameworkTypicalLengthProperty("Typical Length", "typicalLength", Model.TypicalLength));
 
             
@@ -544,63 +533,8 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 18 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Prog Type", "progType", Model.ProgType.ToString()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 19 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Pathway Code", "pathwayCode", Model.PathwayCode.ToString()));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 20 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Pathway", "pathway", Model.Pathway));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 21 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Nas Title", "nasTitle", Model.NasTitle));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 22 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Effective From", "effectiveFrom", Model.EffectiveFrom.ToString(CultureInfo.CurrentCulture)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
             #line 23 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Effective To", "effectiveTo", Model.EffectiveTo.ToString()));
+Write(GetFrameworkProperty("Framework Code", "frameworkCode", Model.FrameworkCode.ToString()));
 
             
             #line default
@@ -611,7 +545,7 @@ WriteLiteral("    ");
 
             
             #line 24 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkJobRoleItemsListProperty("Job Role Items", "jobRoleItems", Model.JobRoleItems));
+Write(GetFrameworkProperty("Prog Type", "progType", Model.ProgType.ToString()));
 
             
             #line default
@@ -622,7 +556,7 @@ WriteLiteral("    ");
 
             
             #line 25 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkListProperty("Keywords", "keywords", Model.Keywords));
+Write(GetFrameworkProperty("Pathway Code", "pathwayCode", Model.PathwayCode.ToString()));
 
             
             #line default
@@ -633,7 +567,7 @@ WriteLiteral("    ");
 
             
             #line 26 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Sector Subject Area Tier 1", "sectorSubjectAreaTier1", Model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture)));
+Write(GetFrameworkProperty("Effective From", "effectiveFrom", Model.EffectiveFrom.ToString(CultureInfo.CurrentCulture)));
 
             
             #line default
@@ -644,7 +578,7 @@ WriteLiteral("    ");
 
             
             #line 27 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Sector Subject Area Tier 2", "sectorSubjectAreaTier2", Model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture)));
+Write(GetFrameworkProperty("Effective To", "effectiveTo", Model.EffectiveTo.ToString()));
 
             
             #line default
@@ -655,7 +589,7 @@ WriteLiteral("    ");
 
             
             #line 28 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Entry Requirements", "entryRequirements", Model.EntryRequirements));
+Write(GetFrameworkJobRoleItemsListProperty("Job Role Items", "jobRoleItems", Model.JobRoleItems));
 
             
             #line default
@@ -666,7 +600,7 @@ WriteLiteral("    ");
 
             
             #line 29 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Professional Registration", "professionalRegistration", Model.ProfessionalRegistration));
+Write(GetFrameworkListProperty("Keywords", "keywords", Model.Keywords));
 
             
             #line default
@@ -677,7 +611,7 @@ WriteLiteral("    ");
 
             
             #line 30 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkProperty("Completion Qualifications", "completionQualifications", Model.CompletionQualifications));
+Write(GetFrameworkProperty("Sector Subject Area Tier 1", "sectorSubjectAreaTier1", Model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture)));
 
             
             #line default
@@ -688,7 +622,7 @@ WriteLiteral("    ");
 
             
             #line 31 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkListProperty("Competency Qualification", "competencyQualification", Model.CompetencyQualification));
+Write(GetFrameworkProperty("Sector Subject Area Tier 2", "sectorSubjectAreaTier2", Model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture)));
 
             
             #line default
@@ -699,7 +633,7 @@ WriteLiteral("    ");
 
             
             #line 32 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
-Write(GetFrameworkListProperty("Knowledge Qualification", "knowledgeQualification", Model.KnowledgeQualification));
+Write(GetFrameworkProperty("Framework Overview", "frameworkOverview", Model.FrameworkOverview));
 
             
             #line default
@@ -710,6 +644,61 @@ WriteLiteral("    ");
 
             
             #line 33 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+Write(GetFrameworkProperty("Entry Requirements", "entryRequirements", Model.EntryRequirements));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 34 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+Write(GetFrameworkProperty("Professional Registration", "professionalRegistration", Model.ProfessionalRegistration));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 35 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+Write(GetFrameworkProperty("Completion Qualifications", "completionQualifications", Model.CompletionQualifications));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 36 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+Write(GetFrameworkListProperty("Competency Qualification", "competencyQualification", Model.CompetencyQualification));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 37 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
+Write(GetFrameworkListProperty("Knowledge Qualification", "knowledgeQualification", Model.KnowledgeQualification));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 38 "..\..\Views\Apprenticeship\FrameworkDetails.cshtml"
 Write(GetFrameworkListProperty("Combined Qualification", "combinedQualification", Model.CombinedQualification));
 
             

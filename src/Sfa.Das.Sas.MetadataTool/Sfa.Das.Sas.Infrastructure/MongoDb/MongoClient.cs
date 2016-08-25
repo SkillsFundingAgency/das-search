@@ -3,7 +3,12 @@
     using System;
     using System.Collections.Generic;
 
+    using MongoDB.Bson;
     using MongoDB.Driver;
+
+    using NLog.LayoutRenderers.Wrappers;
+
+    using Sfa.Das.Sas.Infrastructure.MongoDb.Models;
 
     public class MongoDataClient : IMongoDataClient
     {
@@ -45,6 +50,21 @@
             var record = collection.Find(filter);
 
             return record.SingleOrDefault();
+        }
+
+        public void Save<T>(T model, string collectionName)
+            where T : IMongoDataType
+        {
+            var collection = _database.GetCollection<T>(collectionName);
+            collection.UpdateOne(
+                Builders<T>.Filter.Eq(x => x.Id, model.Id),
+                Builders<T>.Update.Set(x => x, model));
+        }
+
+        public void Save<T>(T model, FilterDefinition<T> filter, UpdateDefinition<T> update, string collectionName)
+        {
+            var collection = _database.GetCollection<T>(collectionName);
+            collection.UpdateOne(filter, update);
         }
     }
 }
