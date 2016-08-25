@@ -418,6 +418,7 @@
     </Content>
     <Content Include="Views\razorgenerator.directives" />
     <Content Include="Views\Apprenticeship\EditFramework.cshtml" />
+    <Content Include="Transform.Nlog.config" />
     <None Include="Views\Apprenticeship\EditStandard.cshtml" />
     <None Include="Views\Import\ImportEntries.cshtml" />
   </ItemGroup>
