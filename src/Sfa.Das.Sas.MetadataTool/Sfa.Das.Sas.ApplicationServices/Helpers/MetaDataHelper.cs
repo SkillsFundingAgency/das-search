@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
 
             _log.Debug("MetaDataHelper.GetAllStandardsMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.ElaspedMilliseconds });
 
-            return timing.Result.OrderBy(x => x.Id).ToList();
+            return timing.Result.OrderBy(x => x.ApprenticeshipId).ToList();
         }
 
         public StandardMetaData GetStandardMetaData(string id)

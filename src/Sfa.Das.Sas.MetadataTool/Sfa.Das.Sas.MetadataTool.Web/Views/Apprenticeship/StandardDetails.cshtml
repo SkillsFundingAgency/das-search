@@ -8,7 +8,13 @@
 }
 
 <h2 class="pageTitle">@Model.Title</h2>
-
+<span>
+    @*@Html.ActionLink("Edit", "EditFramework", new { Id = Model.Id })*@
+    <a href="@Url.Action("EditStandard", routeValues: new { Model.Id })">
+        Edit
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </a>
+</span>
 <div>
     <dl>
         @GetStandardProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
