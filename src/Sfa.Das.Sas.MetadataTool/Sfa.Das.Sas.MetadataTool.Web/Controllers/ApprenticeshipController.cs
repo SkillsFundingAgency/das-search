@@ -74,6 +74,14 @@
         }
 
         [HttpPost]
+        public ActionResult UpdateStandard(StandardMetaData model)
+        {
+            _metaDataHelper.UpdateStandardMetaData(model);
+            var standard = _metaDataHelper.GetStandardMetaData(model.Id.ToString());
+            return View("StandardDetails", standard);
+        }
+
+        [HttpPost]
         public ActionResult UpdateFramework(FrameworkMetaData model)
         {
             _metaDataHelper.UpdateFrameworkMetaData(model);

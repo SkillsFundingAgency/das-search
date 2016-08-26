@@ -84,7 +84,7 @@
                 model,
                 Builders<MongoStandard>.Filter.Eq(x => x.Id, model.Id),
                 Builders<MongoStandard>.Update.Set(x => x.OverviewOfRole, model.OverviewOfRole),
-                _mongoSettings.CollectionNameFrameworks);
+                _mongoSettings.CollectionNameStandards);
         }
     }
 }

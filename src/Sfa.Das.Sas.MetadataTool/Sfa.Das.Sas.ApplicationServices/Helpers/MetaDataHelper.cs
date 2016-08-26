@@ -69,5 +69,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
 
             _log.Debug("MetaDataHelper.GetFrameworkMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.TotalMilliseconds });
         }
+
+        public void UpdateStandardMetaData(StandardMetaData model)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

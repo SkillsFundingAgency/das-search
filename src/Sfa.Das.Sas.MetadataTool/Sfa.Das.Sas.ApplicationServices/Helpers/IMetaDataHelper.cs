@@ -15,5 +15,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
         FrameworkMetaData GetFrameworkMetaData(string id);
 
         void UpdateFrameworkMetaData(FrameworkMetaData model);
+
+        void UpdateStandardMetaData(StandardMetaData model);
     }
 }
