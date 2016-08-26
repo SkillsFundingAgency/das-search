@@ -1,19 +1,35 @@
 ﻿(function () {
     "use strict";
 
+    var deleteGeneric = function (containerId, render) {
+        var containerSelector = '#' + containerId;
+        $(containerSelector + ' .delete').on('click', function (e) {
+
+            var val = $(this).attr('data-value');
+            var jsons = JSON.parse($(containerSelector).attr("data-json"));
+
+            var selectedItem = jsons[val];
+
+            var newValues = jsons.filter(function (x) { return x !== selectedItem });
+
+            $(containerSelector).attr('data-json', JSON.stringify(newValues));
+
+            render();
+        });
+    }
+
     var renderKeywords = function () {
-        var jsons = JSON.parse($("#keywords-container").attr("data-json"));
+        var jsons = JSON.parse($("#keywords-container").attr("data-json")).filter(function(x) { return x !== ""});
 
-        var source = $("#entry-template").html();
-        var template = Handlebars.compile(source);
+        var keywordTemplate = Handlebars.compile($("#entry-template").html());
 
-        var html = jsons.map(function (x) {
-            var context = { keyword: x };
-            return template(context);
+        var html = jsons.map(function (x, i) {
+            var context = { keyword: x, index: i};
+            return keywordTemplate(context);
 
         });
         $('#keywords-container').html(html);
-        deleteKeywordEvent();
+        deleteGeneric('keywords-container', renderKeywords);
     }
     
     var renderJobroles = function () {
@@ -27,37 +43,15 @@
             return template(context);
 
         });
+
         $('#jobrole-container').html(html);
-        deleteJobRoleEvent();
+        deleteGeneric('jobrole-container', renderJobroles);
     }
 
-    var deleteKeywordEvent = function () {
-        $('#keywords-container .delete').on('click', function (e) {
-            var val = $(this).attr('data-value');
-            var values = JSON.parse($('#keywords-container').attr('data-json'));
-
-            var newValues = values.filter(function (x) { return x !== val });
-
-            $('#keywords-container').attr('data-json', JSON.stringify(newValues));
-
-            renderKeywords();
-        });
-    }
-
-    var deleteJobRoleEvent = function () {
-        $('#jobrole-container .delete').on('click', function (e) {
-
-            var val = $(this).attr('data-value');
-            var jsons = JSON.parse($("#jobrole-container").attr("data-json"));
-
-            var selectedJobRole = jsons[val];
-
-            var newValues = jsons.filter(function (x) { return x !== selectedJobRole });
-
-            $('#jobrole-container').attr('data-json', JSON.stringify(newValues));
-
-            renderJobroles();
-        });
+    var readValueFromInput = function(fieldId) {
+        var val = $(fieldId)[0].value;
+        $(fieldId)[0].value = "";
+        return val;
     }
 
     // Add keyword
@@ -66,18 +60,29 @@
             e.preventDefault();
 
             var jsons = JSON.parse($("#keywords-container").attr("data-json"));
-
-            
-            var newKeyword= $('#keyword-input')[0].value;
-            //jsons.push({ Keyword: newKeyword });
+            var newKeyword = readValueFromInput('#keyword-input');
             jsons.push( newKeyword );
 
             $('#keywords-container').attr('data-json', JSON.stringify(jsons));
-
             renderKeywords();
+            return false;
+        }
+    });
 
-            deleteKeywordEvent();
-            $('#keyword-input')[0].value = "";
+    // Add job role
+    $('#jobroles-description').keypress(function (e) {
+        if (e.which === 13) {
+            e.preventDefault();
+
+            var jsons = JSON.parse($("#jobrole-container").attr("data-json"));
+
+            var title = readValueFromInput('#jobroles-title');
+            var description = readValueFromInput('#jobroles-description');
+            jsons.push({ Title: title, Description: description });
+
+            $('#jobrole-container').attr('data-json', JSON.stringify(jsons));
+
+            renderJobroles();
             return false;
         }
     });
@@ -91,32 +96,10 @@
         return true;
     });
 
-    $('#jobroles-description').keypress(function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-
-            var jsons = JSON.parse($("#jobrole-container").attr("data-json"));
-
-            var title = $('#jobroles-title')[0].value;
-            var description = $('#jobroles-description')[0].value;
-            jsons.push({ Title: title, Description: description });
-
-            $('#jobrole-container').attr('data-json', JSON.stringify(jsons));
-
-            renderJobroles();
-
-            $('#jobroles-title')[0].value = "";
-            $('#jobroles-description')[0].value = "";
-
-            deleteJobRoleEvent();
-            return false;
-        }
-    });
-
 
     // Init
-    deleteJobRoleEvent();
-    deleteKeywordEvent();
+    deleteGeneric('jobrole-container', renderJobroles);
+    deleteGeneric('keywords-container', renderKeywords);
     renderKeywords();
     renderJobroles();
 
