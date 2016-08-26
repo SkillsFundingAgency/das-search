@@ -1,4 +1,6 @@
-﻿@model Sfa.Das.Sas.Core.Models.StandardMetaData
+﻿@using MongoDB.Bson
+@using Sfa.Das.Sas.Core.Extensions
+@model Sfa.Das.Sas.Core.Models.StandardMetaData
 
 @{
     ViewBag.Title = "Edit " + Model.Title;
@@ -6,4 +8,102 @@
 
 <h2>Edit @Model.Title </h2>
 
-<form action="/Apprenticeship/UpdateStandard" method="post"></form>
+<div class="edit">
+    <form action="/Apprenticeship/UpdateStandard" method="post">
+        <div class="boxed">
+            @GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
+            <div>
+                <label>Title</label>
+                <input type="text" name="title" value="@Model.Title"/>
+            </div>
+        </div>
+
+        <div class="boxed">
+            <label>Typical length</label>
+            <div>
+                <label>From</label>
+                <input type="text" name="typicalLengthFrom" value="@Model.TypicalLength.From" />
+            </div>
+            <div>
+                <label>To</label>
+                <input type="text" name="typicalLengthTo" value="@Model.TypicalLength.To" />
+            </div>
+            <div>
+                <label>Unit</label>
+                <input type="text" name="typicalLengthUnit" value="@Model.TypicalLength.Unit" />
+            </div>
+        </div>
+
+        <div class="boxed">
+            <label>Keywords</label>
+            <input type="text" id="keyword-input" placeholder="add new keyword"/>
+            <div id="keywords-container" data-json="@Model.Keywords.Where(m => !string.IsNullOrEmpty(m)).ToJson()">
+            </div>
+        </div>
+
+        <div class="boxed">
+            <label>Job Roles</label>
+            <input type="text" id="jobroles-title" placeholder="title"/>
+            <input type="text" id="jobroles-description" placeholder="description"/>
+            <div id="jobrole-container" data-json="@Model.JobRoles.ToJson()">
+            </div>
+        </div>
+
+        <div>
+            <label>Notional end level</label>
+            <textarea name="notionalEndLevel">@Model.NotionalEndLevel</textarea>
+        </div>
+
+        <div>
+            <label>Standard Pdf Url</label>
+            <textarea name="standardPdfUrl">@Model.StandardPdfUrl</textarea>
+        </div>
+
+        <div>
+            <label>Assessment Plan Pdf Url</label>
+            <textarea name="assessmentPlanPdfUrl">@Model.AssessmentPlanPdfUrl</textarea>
+        </div>
+
+        <div>
+            <label>EntryRequirements</label>
+            <textarea name="entryrequirements">@Model.EntryRequirements</textarea>
+        </div>
+        <div>
+            <label>ProfessionalRegistration</label>
+            <textarea name="professionalregistration">@Model.ProfessionalRegistration</textarea>
+        </div>
+        <div>
+            <label>WhatApprenticesWillLearn</label>
+            <textarea name="whatApprenticesWillLearn">@Model.WhatApprenticesWillLearn</textarea>
+        </div>
+        <div>
+            <label>Qualifications</label>
+            <textarea name="qualifications">@Model.Qualifications</textarea>
+        </div>
+        <div>
+            <label>OverviewOfRole</label>
+            <textarea name="overviewOfRole">@Model.OverviewOfRole</textarea>
+        </div>
+        <div>
+            <label>SectorSubjectAreaTier1</label>
+            <input type="number" id="sectorSubjectAreaTier1" placeholder="sectorSubjectAreaTier1" />
+        </div>
+        <div>
+            <label>SectorSubjectAreaTier2</label>
+            <input type="number" id="sectorSubjectAreaTier2" placeholder="sectorSubjectAreaTier2" />
+        </div>
+        
+        <input type="submit" class="btn btn-primary btn-lg" value="Update"/>
+    </form>
+</div>
+
+@helper GetFrameworkProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+            <dd id="@id">
+                @(!string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"))
+            </dd>
+    }
+}
