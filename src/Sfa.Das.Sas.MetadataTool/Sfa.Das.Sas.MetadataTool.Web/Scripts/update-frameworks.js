@@ -98,8 +98,8 @@
 
 
     // Init
-    deleteGeneric('jobrole-container', renderJobroles);
-    deleteGeneric('keywords-container', renderKeywords);
+    //deleteGeneric('jobrole-container', renderJobroles);
+    //deleteGeneric('keywords-container', renderKeywords);
     renderKeywords();
     renderJobroles();
 
