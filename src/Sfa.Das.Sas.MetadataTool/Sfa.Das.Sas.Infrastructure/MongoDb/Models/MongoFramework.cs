@@ -25,7 +25,7 @@
 
         public DateTime EffectiveFrom { get; set; }
 
-        public DateTime? EffectiveTo { get; set; }
+        public DateTime EffectiveTo { get; set; }
 
         public IEnumerable<MongoJobRoleItem> JobRoleItems { get; set; }
 

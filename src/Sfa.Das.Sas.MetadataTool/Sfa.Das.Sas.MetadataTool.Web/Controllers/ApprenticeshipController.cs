@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Das.Sas.MetadataTool.Web.Controllers
 {
-    using System;
     using System.Web.Mvc;
 
     using Newtonsoft.Json;
@@ -74,34 +73,20 @@
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult UpdateStandard(StandardMetaData model)
         {
             _metaDataHelper.UpdateStandardMetaData(model);
-            var standard = _metaDataHelper.GetStandardMetaData(model.Id.ToString());
 
-            var url = Url.Action("StandardDetails", "Apprenticeship", new { model.Id });
-
-            return new RedirectResult(url);
-            return View("StandardDetails", standard);
+            return Redirect(Url.Action("StandardDetails", new { model.Id }));
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult UpdateFramework(FrameworkMetaData model)
         {
             _metaDataHelper.UpdateFrameworkMetaData(model);
-            var framework = _metaDataHelper.GetFrameworkMetaData(model.Id.ToString());
-            return View("FrameworkDetails", framework);
+            return Redirect(Url.Action("FrameworkDetails",  new {id = model.Id }));
         }
-    }
-
-    public class UpdateFrameworkModel
-    {
-        public Guid Id { get; set; }
-
-        public string FrameworkOverview { get; set; }
-
-        public string EntryRequirements { get; set; }
-
-        public string ProfessionalRegistration { get; set; }
     }
 }
