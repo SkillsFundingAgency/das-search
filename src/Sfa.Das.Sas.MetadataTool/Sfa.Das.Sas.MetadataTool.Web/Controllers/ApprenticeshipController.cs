@@ -78,6 +78,10 @@
         {
             _metaDataHelper.UpdateStandardMetaData(model);
             var standard = _metaDataHelper.GetStandardMetaData(model.Id.ToString());
+
+            var url = Url.Action("StandardDetails", "Apprenticeship", new { model.Id });
+
+            return new RedirectResult(url);
             return View("StandardDetails", standard);
         }
 

@@ -15,5 +15,6 @@
         FrameworkMetaData GetFramework(string id);
 
         void UpdateFramework(FrameworkMetaData model);
+        void UpdateStandard(StandardMetaData model);
     }
 }

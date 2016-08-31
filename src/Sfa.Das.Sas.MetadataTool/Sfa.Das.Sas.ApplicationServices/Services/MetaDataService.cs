@@ -82,6 +82,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             throw new NotImplementedException();
         }
 
+        public void UpdateStandard(StandardMetaData model)
+        {
+            throw new NotImplementedException();
+        }
+
         private IDictionary<string, string> GetAllFileContents(string vstsBlobUrl)
         {
             var blobs = GetAllBlobs(vstsBlobUrl);

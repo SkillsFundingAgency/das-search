@@ -29,6 +29,11 @@ namespace Sfa.Das.Sas.ApplicationServices.MetaData
             return standard;
         }
 
+        public void GetStandardMetaData(StandardMetaData model)
+        {
+            _metaDataService.UpdateStandard(model);
+        }
+
         public List<FrameworkMetaData> GetFrameworksMetaData()
         {
             var frameworks = _metaDataService.GetFrameworks()?.ToList();

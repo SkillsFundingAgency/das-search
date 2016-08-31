@@ -72,7 +72,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
 
         public void UpdateStandardMetaData(StandardMetaData model)
         {
-            throw new System.NotImplementedException();
+            var timing = ExecutionTimer.GetTiming(() => _metaDataUpdate.GetStandardMetaData(model));
+
+            _log.Debug("MetaDataHelper.GetStandardMetaData", new TimingLogEntry { ElaspedMilliseconds = timing.TotalMilliseconds });
         }
     }
 }

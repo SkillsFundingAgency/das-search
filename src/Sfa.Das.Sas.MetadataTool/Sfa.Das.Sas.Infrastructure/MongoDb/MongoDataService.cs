@@ -78,12 +78,33 @@
 
         public void UpdateStandard(StandardMetaData updateModel)
         {
-            var model = _mongoDataClient.GetById<MongoStandard>(_mongoSettings.CollectionNameFrameworks, updateModel.Id.ToString());
+            var model = _mongoDataClient.GetById<MongoStandard>(_mongoSettings.CollectionNameStandards, updateModel.Id.ToString());
+
+            var updatedTypicalLength = new MongoTypicalLength
+            {
+                From = updateModel.TypicalLength.From,
+                To = updateModel.TypicalLength.To,
+                Unit = updateModel.TypicalLength.Unit
+            };
 
             _mongoDataClient.Save(
                 model,
                 Builders<MongoStandard>.Filter.Eq(x => x.Id, model.Id),
-                Builders<MongoStandard>.Update.Set(x => x.OverviewOfRole, model.OverviewOfRole),
+                Builders<MongoStandard>.Update
+                    .Set(x => x.AssessmentPlanPdfUrl, updateModel.AssessmentPlanPdfUrl)
+                    .Set(x => x.EntryRequirements, updateModel.EntryRequirements)
+                    .Set(x => x.OverviewOfRole, updateModel.OverviewOfRole)
+                    .Set(x => x.ProfessionalRegistration, updateModel.ProfessionalRegistration)
+                    .Set(x => x.Qualifications, updateModel.Qualifications)
+                    .Set(x => x.StandardPdfUrl, updateModel.StandardPdfUrl)
+                    .Set(x => x.Title, updateModel.Title)
+                    .Set(x => x.WhatApprenticesWillLearn, updateModel.WhatApprenticesWillLearn)
+                    .Set(x => x.JobRoles, updateModel.JobRoles)
+                    .Set(x => x.Keywords, updateModel.Keywords)
+                    .Set(x => x.NotionalEndLevel, updateModel.NotionalEndLevel)
+                    .Set(x => x.SectorSubjectAreaTier1, updateModel.SectorSubjectAreaTier1)
+                    .Set(x => x.SectorSubjectAreaTier2, updateModel.SectorSubjectAreaTier2)
+                    .Set(x => x.TypicalLength, updatedTypicalLength),
                 _mongoSettings.CollectionNameStandards);
         }
     }

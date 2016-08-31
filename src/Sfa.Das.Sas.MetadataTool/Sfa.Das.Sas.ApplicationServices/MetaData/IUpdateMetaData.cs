@@ -5,5 +5,6 @@
     public interface IUpdateMetaData
     {
         void GetFrameworkMetaData(FrameworkMetaData model);
+        void GetStandardMetaData(StandardMetaData model);
     }
 }

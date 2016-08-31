@@ -45,9 +45,8 @@
 
         <div class="boxed">
             <label>Job Roles</label>
-            <input type="text" id="jobroles-title" placeholder="title"/>
-            <input type="text" id="jobroles-description" placeholder="description"/>
-            <div id="jobrole-container" data-json="@Model.JobRoles.ToJson()">
+            <input type="text" id="jobrole" placeholder="job role"/>
+            <div id="keywords-container" data-json="@Model.JobRoles.ToJson()">
             </div>
         </div>
 
@@ -109,3 +108,25 @@
             </dd>
     }
 }
+
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <a href="#" class="delete" data-value="{{index}}">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+        <input type="hidden" name="keywords" value="{{keyword}}" />
+        <span>{{keyword}}</span>
+    </div>
+</script>
+
+<script id="jobrole-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <a href="#" class="delete" data-value="{{index}}">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+        <input type="hidden" name="jobRoles" value="{{jobRole}}" />
+        
+        <span>{{jobRole}}</span>
+        
+    </div>
+</script>
