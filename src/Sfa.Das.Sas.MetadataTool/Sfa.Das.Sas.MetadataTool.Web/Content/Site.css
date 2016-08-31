@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: Tahoma, Geneva, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -56,7 +57,90 @@ option {
 }
 
 .boxed {
-    background-color: #f6f7ff;
+    /*background-color: #f6f7ff;*/
     padding: 15px 6px;
     margin: 15px 0;
+}
+
+.edit {
+    background-color: #cfd6de;
+    border-radius: 5px;
+}
+.edit form > div {
+    margin: 0 10px;
+    margin-top: 20px;
+}
+
+.edit input[type=text] {
+    padding: 5px;
+    border-radius: 7px;
+}
+
+.entry a {
+    border-radius: 50%;
+    border: solid #c3ced2 1px;
+    background: #c3ced2;
+    margin: 4px 0px;
+    padding: 5px 7px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.entry a:hover {
+    border: solid #95acbe 1px;
+    background: #95acbe;
+}
+
+.entry i {
+    color: #000;
+    font-size: 18px;
+}
+
+.edit .edit-header {
+    padding: 5px;
+    background-color: rgb(99, 113, 130);
+    background-color: rgba(99, 113, 130, 0.8);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    display: block;
+}
+
+.edit .edit-header.fixed {
+    position: fixed;
+    top: 50px;
+    display: inline;
+}
+
+@media (min-width: 768px) {
+    .edit .edit-header {
+        width: 719px;
+    }
+}
+
+@media (min-width: 992px){
+    .edit .edit-header {
+        width: 939px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .edit .edit-header {
+        width: 1140px;
+    }
+}
+
+.edit .edit-header input {
+    position: absolute;
+    right: 11px;
+    top: 11px;
+    background-color: #679167;
+    border-color: #679167;
+}
+
+
+/* Framework details */
+.framework-details dd {
+    padding-left: 10px;
 }

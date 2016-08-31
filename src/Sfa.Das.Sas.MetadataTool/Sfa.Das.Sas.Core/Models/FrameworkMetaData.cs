@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Core.Models
 
         public DateTime EffectiveFrom { get; set; }
 
-        public DateTime? EffectiveTo { get; set; }
+        public DateTime EffectiveTo { get; set; }
 
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 

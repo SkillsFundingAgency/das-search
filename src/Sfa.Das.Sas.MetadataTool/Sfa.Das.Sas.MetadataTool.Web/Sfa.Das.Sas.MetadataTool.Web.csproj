@@ -323,6 +323,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\lib\font-awesome\css\font-awesome.css" />
     <Content Include="Content\lib\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\lib\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -370,7 +377,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lib\handlebars-v4.0.5.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\lib\lodash.core.js" />
+    <Content Include="Scripts\lib\tinymce.min.js" />
     <Content Include="Scripts\update-frameworks.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\site.js" />
@@ -412,6 +421,8 @@
     <Content Include="Views\Apprenticeship\EditFramework.cshtml" />
     <Content Include="Views\Apprenticeship\EditStandard.cshtml" />
     <Content Include="Views\Import\ImportEntries.cshtml" />
+    <Content Include="Scripts\site.tinymce.js" />
+    <Content Include="Views\Shared\Templates\_UpdateTemplates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
