@@ -1,14 +1,10 @@
 ﻿var FatMetaData = FatMetaData || {};
 
-(function (editFramework) {
+(function (editStandard) {
     "use strict";
 
     var mapEntry = function (x, i, name) {
         return { entry: x, name: name, index: i };
-    }
-
-    var mapJobRoles = function (x, i, name) {
-        return { title: x.Title, description: x.Description, index: i };
     }
 
     var deleteItem = function (container, render) {
@@ -85,31 +81,6 @@
         }
     });
 
-    // Add job role
-    $('#jobroles-description').keypress(function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            var container = $('#jobrole-container');
-
-            var title = readValueFromInput('#jobroles-title');
-            var description = readValueFromInput('#jobroles-description');
-
-            addData(container, { Title: title, Description: description });
-
-            renderItem(mapJobRoles, "#jobrole-template", "#jobroles-property .property-container");
-            return false;
-        }
-    });
-
-    $('#jobroles-title').keypress(function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            $("#jobroles-description").focus();
-            return false;
-        }
-        return true;
-    });
-
     var setUpCalendar = function() {
         var date = new Date();
         var year = 1900 + date.getYear();
@@ -129,15 +100,10 @@
         });
     };
 
-    editFramework.init = function () {
+    editStandard.init = function () {
 
         renderItem(mapEntry, "#entry-template", "#keyword-property .property-container");
-
-        renderItem(mapJobRoles, "#jobrole-template", "#jobroles-property .property-container");
-
-        renderItem(mapEntry, "#entry-template", "#competencyqualification-property .property-container");
-        renderItem(mapEntry, "#entry-template", "#knowledgequalification-property .property-container");
-        renderItem(mapEntry, "#entry-template", "#combinedqualification-property .property-container");
+        renderItem(mapEntry, "#entry-template", "#jobrole-property .property-container");
 
         setUpCalendar();
 
@@ -163,4 +129,4 @@
     //    }
     //});
 
-}(FatMetaData.EditFramework = {}));
+}(FatMetaData.EditStandard = {}));

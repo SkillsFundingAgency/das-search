@@ -19,8 +19,11 @@ FatMetaData.base = function() {
     }
 
     function loadModules() {
-        if (shouldLoadModule('.edit')) {
+        if (shouldLoadModule('.edit-framework')) {
             FatMetaData.EditFramework.init();
+        }
+        if (shouldLoadModule('.edit-standard')) {
+            FatMetaData.EditStandard.init();
         }
     }
 

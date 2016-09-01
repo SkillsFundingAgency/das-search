@@ -21,6 +21,7 @@ namespace MetadataTool
             bundles.Add(new ScriptBundle("~/jsscripts").Include(
                         "~/Scripts/lib/handlebars-v4.0.5.js",
                         "~/Scripts/lib/lodash.core.js",
+                        "~/Scripts/update-standards.js",
                         "~/Scripts/update-frameworks.js",
                         "~/Scripts/site.js"));
 
