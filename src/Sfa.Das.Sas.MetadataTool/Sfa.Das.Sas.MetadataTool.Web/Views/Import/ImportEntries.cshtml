@@ -16,8 +16,13 @@
             </p>
         </div>
     }
-
-    <form action="/Import/ImportEntries" method="post">
+    @if (!string.IsNullOrEmpty(Model.InnerMessage))
+    {
+        <div class="message">
+            @Model.InnerMessage
+        </div>
+    }
+    <form action="@Url.Action("ImportEntries")" method="post">
         <select class="select-type" name="type">
             <option value="standard">Standard</option>
             <option value="framework">Framework</option>
@@ -25,7 +30,7 @@
             <option value="vstsframework">Vsts Framework</option>
         </select>
 
-        <textarea class="input-text" name="text"></textarea>
+        <textarea class="input-text" name="text">@Model.Data</textarea>
         <br/>
         <button class="btn btn-primary btn-lg" type="submit" value="Import">Import</button>
         <br/>

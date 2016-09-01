@@ -75,6 +75,7 @@
     <Compile Include="Models\FileContents.cs" />
     <Compile Include="Models\VstsFrameworkMetaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Models\MapperResponse.cs" />
     <Compile Include="Services\Interfaces\IDocumentImporter.cs" />
     <Compile Include="Services\Interfaces\IMappingService.cs" />
     <Compile Include="Services\MappingService.cs" />
