@@ -8,7 +8,10 @@
 
 <h2>Edit @Model.FrameworkName: @Model.Pathway</h2>
 <span>
-    @Html.ActionLink("Back", "FrameworkDetails", new { Model.Id } )
+    <a href="@Url.Action("FrameworkDetails", new { Model.Id })">
+        View framework
+        <i class="fa fa-eye" aria-hidden="true"></i>
+    </a>
 </span>
 
 <div class="edit">

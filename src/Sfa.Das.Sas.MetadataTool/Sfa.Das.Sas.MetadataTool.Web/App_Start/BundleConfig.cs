@@ -21,8 +21,8 @@ namespace MetadataTool
             bundles.Add(new ScriptBundle("~/jsscripts").Include(
                         "~/Scripts/lib/handlebars-v4.0.5.js",
                         "~/Scripts/lib/lodash.core.js",
-                        "~/Scripts/site.js",
-                        "~/Scripts/update-frameworks.js"));
+                        "~/Scripts/update-frameworks.js",
+                        "~/Scripts/site.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
