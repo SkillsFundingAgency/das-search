@@ -3,51 +3,41 @@
 (function (editFramework) {
     "use strict";
 
-    var deleteGeneric = function (containerSelector, render, templateQuery, name) {
-        
-        $(containerSelector).find('.delete').on('click', function (e) {
+    var mapEntry = function (x, i, name) {
+        return { entry: x, name: name, index: i };
+    }
 
+    var mapJobRoles = function (x, i, name) {
+        return { title: x.Title, description: x.Description, index: i };
+    }
+
+    var deleteItem = function (container, render) {
+
+        $(container).find('.delete').on('click', function (e) {
             var val = $(this).attr('data-value');
-            var jsons = JSON.parse($(containerSelector).attr("data-json"));
-
+            var jsons = JSON.parse($(container).attr("data-json"));
             var selectedItem = jsons[val];
-
             var newValues = jsons.filter(function (x) { return x !== selectedItem });
 
-            $(containerSelector).attr('data-json', JSON.stringify(newValues));
-
-            render(containerSelector, templateQuery, name);
+            $(container).attr('data-json', JSON.stringify(newValues));
+            render();
         });
     }
 
-    var renderJobroles = function () {
-        var jsons = JSON.parse($("#jobrole-container").attr("data-json"));
-
-        var source = $("#jobrole-template").html();
-        var template = Handlebars.compile(source);
-
-        var html = jsons.map(function (x, i) {
-            var context = { title: x.Title, description: x.Description, index: i };
-            return template(context);
-        });
-
-        $('#jobrole-container').html(html);
-        deleteGeneric('#jobrole-container', renderJobroles, "#jobrole-template");
-    }
-
-    var renderGeneric = function (container, templateQuery, name) {
-
+    var renderItem = function (mapToObj, templateQuery, c) {
+        var container = $(c);
+        var name = container.attr('data-name');
         var jsons = JSON.parse($(container).attr("data-json"));
         var source = $(templateQuery).html();
         var template = Handlebars.compile(source);
 
         var html = jsons.map(function (x, i) {
-            var context = { entry: x, name: name, index: i };
+            var context = mapToObj(x, i, name);
             return template(context);
         });
 
         $(container).html(html);
-        deleteGeneric(container, renderGeneric, templateQuery, name);
+        deleteItem(c, renderItem.bind(null, mapToObj, templateQuery, c));
     }
 
     var readValueFromInput = function(fieldId) {
@@ -68,16 +58,15 @@
         containerSelector.attr('data-json', JSON.stringify(jsons));
     }
 
-    // Add keyword
-    $('#keyword-input').keypress(function (e) {
+    $('.entrybox input').keypress(function (e) {
         if (e.which === 13) {
             e.preventDefault();
-            var container = $("#keywords-container");
-            var newKeyword = readValueFromInput('#keyword-input');
+            var container = $(this.closest('.entrybox')).find('.property-container');
+            var input = readValueFromInput(this);
 
-            addData(container, newKeyword);
+            addData(container, input);
+            renderItem(mapEntry, "#entry-template", container);
 
-            renderGeneric(container, "#entry-template", "keywords");
             return false;
         }
     });
@@ -93,47 +82,7 @@
 
             addData(container, { Title: title, Description: description });
 
-            renderJobroles();
-            return false;
-        }
-    });
-
-    // competencyqualification
-    $('#competencyqualification-input').keypress(function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            var container = $("#competencyqualification-container");
-            var input = readValueFromInput("#competencyqualification-input");
-
-            addData(container, input );
-            renderGeneric(container, "#entry-template", "CompetencyQualification");
-
-            return false;
-        }
-    });
-
-    $('#knowledgequalification-input').keypress(function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            var container = $("#knowledgequalification-container");
-            var input = readValueFromInput("#knowledgequalification-input");
-
-            addData(container, input);
-            renderGeneric(container, "#entry-template", "KnowledgeQualification");
-
-            return false;
-        }
-    });
-
-    $('#combinedqualification-input').keypress(function (e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            var container = $("#combinedqualification-container");
-            var input = readValueFromInput("#combinedqualification-input");
-
-            addData(container, input);
-            renderGeneric(container, "#entry-template", "CombinedQualification");
-
+            renderItem(mapJobRoles, "#jobrole-template", "#jobroles-property .property-container");
             return false;
         }
     });
@@ -167,13 +116,15 @@
     };
     
 
-    editFramework.init = function() {
-        
-        renderGeneric("#keywords-container", "#entry-template", "keywords");
-        renderJobroles();
-        renderGeneric($("#competencyqualification-container"), "#entry-template", "CompetencyQualification");
-        renderGeneric("#knowledgequalification-container", "#entry-template", "KnowledgeQualification");
-        renderGeneric("#combinedqualification-container", "#entry-template", "CombinedQualification");
+    editFramework.init = function () {
+
+        renderItem(mapEntry, "#entry-template", "#keyword-property .property-container");
+
+        renderItem(mapJobRoles, "#jobrole-template", "#jobroles-property .property-container");
+
+        renderItem(mapEntry, "#entry-template", "#competencyqualification-property .property-container");
+        renderItem(mapEntry, "#entry-template", "#knowledgequalification-property .property-container");
+        renderItem(mapEntry, "#entry-template", "#combinedqualification-property .property-container");
 
         setUpCalendar();
 

@@ -36,18 +36,18 @@
             </div>
         </div>
 
-        <div class="boxed">
+        <div class="boxed entrybox" id="keyword-property">
             <label>Keywords</label>
-            <input type="text" id="keyword-input" placeholder="add new keyword"/>
-            <div id="keywords-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()">
+            <input type="text" placeholder="add new keyword"/>
+            <div class="property-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="keywords">
             </div>
         </div>
 
-        <div class="boxed">
+        <div class="boxed" id="jobroles-property">
             <label>Job Roles</label>
             <input type="text" id="jobroles-title" placeholder="title"/>
             <input type="text" id="jobroles-description" placeholder="description"/>
-            <div id="jobrole-container" data-json="@Model.JobRoleItems.ToJson()">
+            <div class="property-container" id="jobrole-container" data-json="@Model.JobRoleItems.ToJson()">
             </div>
         </div>
 
@@ -77,24 +77,24 @@
             </textarea>
         </div>
 
-        <div class="boxed">
+        <div class="boxed entrybox" id="competencyqualification-property">
             <label>Competency Qualification</label>
-            <input type="text" id="competencyqualification-input" placeholder="add new competency qualification"/>
-            <div id="competencyqualification-container" data-json="@Model.CompetencyQualification.WhereSafe(x => x != string.Empty).ToJson()">
+            <input type="text" placeholder="add new competency qualification"/>
+            <div class="property-container" data-json="@Model.CompetencyQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="CompetencyQualification">
             </div>
         </div>
 
-        <div class="boxed">
+        <div class="boxed entrybox" id="knowledgequalification-property">
             <label>Knowledge Qualification</label>
-            <input type="text" id="knowledgequalification-input" placeholder="add new knowledge qualification"/>
-            <div id="knowledgequalification-container" data-json="@Model.KnowledgeQualification.WhereSafe(x => x != string.Empty).ToJson()">
+            <input type="text"  placeholder="add new knowledge qualification"/>
+            <div class="property-container" data-json="@Model.KnowledgeQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="KnowledgeQualification">
             </div>
         </div>
 
-        <div class="boxed">
+        <div class="boxed entrybox" id="combinedqualification-property">
             <label>Combined Qualification</label>
-            <input type="text" id="combinedqualification-input" placeholder="add new combined qualification"/>
-            <div id="combinedqualification-container" data-json="@Model.CombinedQualification.WhereSafe(x => x != string.Empty).ToJson()">
+            <input type="text" placeholder="add new combined qualification"/>
+            <div class="property-container" data-json="@Model.CombinedQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="CombinedQualification">
             </div>
         </div>
     </form>
