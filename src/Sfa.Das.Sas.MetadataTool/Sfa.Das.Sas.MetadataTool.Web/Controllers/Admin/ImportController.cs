@@ -21,6 +21,7 @@
         }
         
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult ImportEntries(string text, string type)
         {
             var viewModel = new ImportEntriesViewModel();
@@ -31,7 +32,6 @@
 
             return View(viewModel);
         }
-
     }
 
     public class ImportEntriesViewModel
