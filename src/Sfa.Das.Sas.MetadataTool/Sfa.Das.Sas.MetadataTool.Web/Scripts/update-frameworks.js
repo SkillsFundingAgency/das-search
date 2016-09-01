@@ -80,6 +80,20 @@
         }
     });
 
+    // Add standard job role
+    $('#jobroles-input').keypress(function (e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            var container = $("#jobroles-container");
+            var newKeyword = readValueFromInput('#jobroles-input');
+
+            addData(container, newKeyword);
+
+            renderGeneric(container, "#entry-template", "jobroles");
+            return false;
+        }
+    });
+
     // Add job role
     $('#jobroles-description').keypress(function (e) {
         if (e.which === 13) {
@@ -165,6 +179,7 @@
     };
     // Init
     renderGeneric("#keywords-container", "#entry-template", "keywords");
+    renderGeneric("#jobroles-container", "#entry-template", "jobroles");
     renderJobroles();
     renderGeneric($("#competencyqualification-container"), "#entry-template", "CompetencyQualification");
     renderGeneric("#knowledgequalification-container", "#entry-template", "KnowledgeQualification");

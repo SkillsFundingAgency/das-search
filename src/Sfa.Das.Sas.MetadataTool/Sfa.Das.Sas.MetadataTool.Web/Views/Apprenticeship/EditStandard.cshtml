@@ -39,17 +39,17 @@
         <div class="boxed">
             <label>Keywords</label>
             <input type="text" id="keyword-input" placeholder="add new keyword"/>
-            <div id="keywords-container" data-json="@Model.Keywords.Where(m => !string.IsNullOrEmpty(m)).ToJson()">
+            <div id="keywords-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()">
             </div>
         </div>
 
         <div class="boxed">
             <label>Job Roles</label>
-            <input type="text" id="jobrole" placeholder="job role"/>
-            <div id="keywords-container" data-json="@Model.JobRoles.ToJson()">
+            <input type="text" id="jobroles-input" placeholder="add new job role" />
+            <div id="jobroles-container" data-json="@Model.JobRoles.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()">
             </div>
         </div>
-
+        
         <div>
             <label>Notional end level</label>
             <textarea name="notionalEndLevel">@Model.NotionalEndLevel</textarea>
@@ -109,24 +109,6 @@
     }
 }
 
-<script id="entry-template" type="text/x-handlebars-template">
-    <div class="entry">
-        <a href="#" class="delete" data-value="{{index}}">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
-        <input type="hidden" name="keywords" value="{{keyword}}" />
-        <span>{{keyword}}</span>
-    </div>
-</script>
-
-<script id="jobrole-template" type="text/x-handlebars-template">
-    <div class="entry">
-        <a href="#" class="delete" data-value="{{index}}">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
-        <input type="hidden" name="jobRoles" value="{{jobRole}}" />
-        
-        <span>{{jobRole}}</span>
-        
-    </div>
-</script>
+@{
+    Html.RenderPartial("Templates/_UpdateTemplates");
+}
