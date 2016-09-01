@@ -144,3 +144,14 @@ option {
 .framework-details dd {
     padding-left: 10px;
 }
+
+.framework-details .top > div {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+}
+
+.framework-details .top {
+    padding: 10px;
+    margin-bottom: 10px;
+}

@@ -17,21 +17,59 @@
         </a>
     </span>
     <div>
-        @GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
-        @GetFrameworkTypicalLengthProperty("Typical Length", "typicalLength", Model.TypicalLength)
-        @GetFrameworkProperty("Framework Code", "frameworkCode", Model.FrameworkCode.ToString())
-        @GetFrameworkProperty("Prog Type", "progType", Model.ProgType.ToString())
-        @GetFrameworkProperty("Pathway Code", "pathwayCode", Model.PathwayCode.ToString())
-        @GetFrameworkProperty("Effective From", "effectiveFrom", Model.EffectiveFrom.ToString(CultureInfo.CurrentCulture))
-        @GetFrameworkProperty("Effective To", "effectiveTo", Model.EffectiveTo.ToString())
-        @GetFrameworkJobRoleItemsListProperty("Job Role Items", "jobRoleItems", Model.JobRoleItems)
+        <div class="top">
+            <div>
+                <label>ApprenticeshipId</label>
+                <div>@Model.ApprenticeshipId.ToString()</div>
+            </div>
+            <div>
+                <label>Framework Code</label>
+                <div>@Model.FrameworkCode</div>
+            </div>
+            <div>
+                <label>Prog Type</label>
+                <div>@Model.ProgType</div>
+            </div>
+            <div>
+                <label>Pathway Code</label>
+                <div>@Model.PathwayCode</div>
+            </div>
+            <div>
+                <label>Typical Length</label>
+                <div>@GetFrameworkTypicalLengthString(Model.TypicalLength)</div>
+            </div>
+
+            <div>
+                <label>Effective From</label>
+                <div>@Model.EffectiveFrom.ToString("yyyy MMMM dd")</div>
+            </div>
+
+            <div>
+                <label>Effective To</label>
+                <div>@Model.EffectiveTo.ToString("yyyy MMMM dd")</div>
+            </div>
+
+            <div>
+                <label title="Sector Subject Area Tier 1">SSA1</label>
+                <div>@Model.SectorSubjectAreaTier1</div>
+            </div>
+
+            <div>
+                <label title="Sector Subject Area Tier 2">SSA2</label>
+                <div>@Model.SectorSubjectAreaTier2</div>
+            </div>
+        </div>
+
+        <hr />
+
         @GetFrameworkListProperty("Keywords", "keywords", Model.Keywords)
-        @GetFrameworkProperty("Sector Subject Area Tier 1", "sectorSubjectAreaTier1", Model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture))
-        @GetFrameworkProperty("Sector Subject Area Tier 2", "sectorSubjectAreaTier2", Model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture))
+        @GetFrameworkJobRoleItemsListProperty("Job Role Items", "jobRoleItems", Model.JobRoleItems)
+        <hr />
         @GetFrameworkPropertyRaw("Framework Overview", "frameworkOverview", @Model.FrameworkOverview)
         @GetFrameworkPropertyRaw("Entry Requirements", "entryRequirements", Model.EntryRequirements)
         @GetFrameworkPropertyRaw("Professional Registration", "professionalRegistration", Model.ProfessionalRegistration)
         @GetFrameworkPropertyRaw("Completion Qualifications", "completionQualifications", Model.CompletionQualifications)
+        <hr />
         @GetFrameworkListProperty("Competency Qualification", "competencyQualification", Model.CompetencyQualification)
         @GetFrameworkListProperty("Knowledge Qualification", "knowledgeQualification", Model.KnowledgeQualification)
         @GetFrameworkListProperty("Combined Qualification", "combinedQualification", Model.CombinedQualification)
@@ -117,4 +155,20 @@
             }
         </dd>
 }
+}
+
+
+@helper GetFrameworkTypicalLengthString(TypicalLength item)
+{
+    if (item != null)
+    {
+        if (item.From.Equals(item.To))
+        {
+            <span>@item.From months</span>
+        }
+        else
+        {
+            <span>From @item.From to @item.To months</span>
+        }
+    }
 }

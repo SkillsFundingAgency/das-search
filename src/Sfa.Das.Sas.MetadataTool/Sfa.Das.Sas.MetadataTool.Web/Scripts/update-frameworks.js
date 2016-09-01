@@ -1,4 +1,6 @@
-﻿(function () {
+﻿var FatMetaData = FatMetaData || {};
+
+(function (editFramework) {
     "use strict";
 
     var deleteGeneric = function (containerSelector, render, templateQuery, name) {
@@ -177,20 +179,38 @@
             yearRange: year + ":" + (year + 20)
         });
     };
-    // Init
-    renderGeneric("#keywords-container", "#entry-template", "keywords");
-    renderGeneric("#jobroles-container", "#entry-template", "jobroles");
-    renderJobroles();
-    renderGeneric($("#competencyqualification-container"), "#entry-template", "CompetencyQualification");
-    renderGeneric("#knowledgequalification-container", "#entry-template", "KnowledgeQualification");
-    renderGeneric("#combinedqualification-container", "#entry-template", "CombinedQualification");
 
-    setUpCalendar();
+    editFramework.init = function() {
+        
+        renderGeneric("#keywords-container", "#entry-template", "keywords");
+        renderGeneric("#jobroles-container", "#entry-template", "jobroles");
+        renderJobroles();
+        renderGeneric($("#competencyqualification-container"), "#entry-template", "CompetencyQualification");
+        renderGeneric("#knowledgequalification-container", "#entry-template", "KnowledgeQualification");
+        renderGeneric("#combinedqualification-container", "#entry-template", "CombinedQualification");
 
-    var top = $('.edit').offset().top;
-    $(window).scroll(function () {
-        var fromTop = $("body").scrollTop();
-        $('.edit-header').toggleClass('fixed', (fromTop > top));
-    });
+        setUpCalendar();
 
-})(this);
+        var top = $('.edit').offset().top;
+        $(window).scroll(function () {
+            var fromTop = $("body").scrollTop();
+            $('.edit-header').toggleClass('fixed', (fromTop > top));
+        });
+
+    }
+
+    //$('input').on('change', function() {
+    //    $('.edit').addClass('changed');
+    //});
+
+    //$('input[type=submit]').on('click', function() {
+    //    $('.edit').removeClass('changed');
+    //});
+
+    //$(window).bind('beforeunload', function () {
+    //    if ($('.edit').hasClass('changed')) {
+    //        return 'Are you sure you want to leave?';
+    //    }
+    //});
+
+}(FatMetaData.EditFramework = {}));
