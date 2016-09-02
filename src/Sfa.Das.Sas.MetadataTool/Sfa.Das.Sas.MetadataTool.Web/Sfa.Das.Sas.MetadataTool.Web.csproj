@@ -461,8 +461,9 @@
     <Content Include="Scripts\lib\tinymce_4.4.2\tinymce\js\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\lib\tinymce_4.4.2\tinymce\js\tinymce\tinymce.min.js" />
     <Content Include="Scripts\lib\tinymce_4.4.2\tinymce\LICENSE.TXT" />
-    <Content Include="Scripts\update-standards.js" />
-    <Content Include="Scripts\update-frameworks.js" />
+    <Content Include="Scripts\modules\update-helper.js" />
+    <Content Include="Scripts\modules\update-standards.js" />
+    <Content Include="Scripts\modules\update-frameworks.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
