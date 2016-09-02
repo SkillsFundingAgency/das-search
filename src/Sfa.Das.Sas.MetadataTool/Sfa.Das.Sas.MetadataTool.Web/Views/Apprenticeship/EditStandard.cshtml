@@ -69,33 +69,47 @@
 
         <div>
             <label>Standard Pdf Url</label>
-            <textarea name="standardPdfUrl">@Model.StandardPdfUrl</textarea>
+            <textarea class="htmledit" name="standardPdfUrl">
+                @Html.Raw(@Model.StandardPdfUrl)
+            </textarea>
         </div>
 
         <div>
             <label>Assessment Plan Pdf Url</label>
-            <textarea name="assessmentPlanPdfUrl">@Model.AssessmentPlanPdfUrl</textarea>
+            <textarea class="htmledit" name="assessmentPlanPdfUrl">
+                @Html.Raw(@Model.AssessmentPlanPdfUrl)
+            </textarea>
         </div>
 
         <div>
             <label>EntryRequirements</label>
-            <textarea name="entryrequirements">@Model.EntryRequirements</textarea>
+            <textarea class="htmledit" name="entryrequirements">
+                @Html.Raw(@Model.EntryRequirements)
+            </textarea>
         </div>
         <div>
             <label>ProfessionalRegistration</label>
-            <textarea name="professionalregistration">@Model.ProfessionalRegistration</textarea>
+            <textarea class="htmledit" name="professionalregistration">
+                @Html.Raw(@Model.ProfessionalRegistration)
+            </textarea>
         </div>
         <div>
             <label>WhatApprenticesWillLearn</label>
-            <textarea name="whatApprenticesWillLearn">@Model.WhatApprenticesWillLearn</textarea>
+            <textarea class="htmledit" name="whatApprenticesWillLearn">
+                @Html.Raw(@Model.WhatApprenticesWillLearn)
+            </textarea>
         </div>
         <div>
             <label>Qualifications</label>
-            <textarea name="qualifications">@Model.Qualifications</textarea>
+            <textarea class="htmledit" name="qualifications">
+                @Html.Raw(@Model.Qualifications)
+            </textarea>
         </div>
         <div>
             <label>OverviewOfRole</label>
-            <textarea name="overviewOfRole">@Model.OverviewOfRole</textarea>
+            <textarea class="htmledit" name="overviewOfRole">
+                @Html.Raw(@Model.OverviewOfRole)
+            </textarea>
         </div>
         <div>
             <label>SectorSubjectAreaTier1</label>

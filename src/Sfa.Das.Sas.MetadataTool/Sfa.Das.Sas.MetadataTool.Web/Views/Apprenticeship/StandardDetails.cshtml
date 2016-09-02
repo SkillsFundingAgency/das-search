@@ -6,61 +6,87 @@
 @{
     ViewBag.Title = $"{@Model.Title} - Standard Details";
 }
+<div class="framework-details">
 
-<h2 class="pageTitle">@Model.Title</h2>
-<span>
-    @*@Html.ActionLink("Edit", "EditFramework", new { Id = Model.Id })*@
-    <a href="@Url.Action("EditStandard", routeValues: new { Model.Id })">
-        Edit
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-    </a>
-</span>
-<div>
-    <dl>
-        @GetStandardProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
-        @GetStandardProperty("Title", "title", Model.Title)
-        @GetStandardTypicalLengthProperty("Typical Length", "typicalLength", Model.TypicalLength)
-        @GetStandardProperty("Notional End Level", "notionalEndLevel", Model.NotionalEndLevel.ToString())
+    <h2 class="pageTitle">@Model.Title</h2>
+    <span>
+        @*@Html.ActionLink("Edit", "EditFramework", new { Id = Model.Id })*@
+        <a href="@Url.Action("EditStandard", routeValues: new { Model.Id })">
+            Edit
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </a>
+    </span>
+    <div>
+        <div class="top">
+            <div>
+                <label>ApprenticeshipId</label>
+                <div>@Model.ApprenticeshipId.ToString()</div>
+            </div>
+            <div>
+                <label>Typical Length</label>
+                <div>@GetStandardTypicalLengthProperty(Model.TypicalLength)</div>
+            </div>
+            <div>
+                <label>Notional End Level</label>
+                <div>@Model.NotionalEndLevel.ToString()</div>
+            </div>
+            <div>
+                <label title="Sector Subject Area Tier 1">SSA1</label>
+                <div>@Model.SectorSubjectAreaTier1</div>
+            </div>
+
+            <div>
+                <label title="Sector Subject Area Tier 2">SSA2</label>
+                <div>@Model.SectorSubjectAreaTier2</div>
+            </div>
+        </div>
+
+        <hr />
+
         @GetStandardListProperty("Job Roles", "jobRoles", Model.JobRoles)
         @GetStandardListProperty("Keywords", "keywords", Model.Keywords)
         @GetStandardUrlProperty("Standard Pdf Url", "standardPdfUrl", Model.StandardPdfUrl)
         @GetStandardUrlProperty("Assessment Plan Pdf Url", "assessmentPlanPdfUrl", Model.AssessmentPlanPdfUrl)
+
+        <hr />
+
         @GetStandardProperty("Entry Requirements", "entryRequirements", Model.EntryRequirements)
         @GetStandardProperty("What Apprentices Will Learn", "whatApprenticesWillLearn", Model.WhatApprenticesWillLearn)
         @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
+
+        <hr />
+
         @GetStandardProperty("Professional Registration", "professionalRegistration", Model.ProfessionalRegistration)
         @GetStandardProperty("Overview Of Role", "overviewOfRole", Model.OverviewOfRole)
-        @GetStandardProperty("Sector Subject Area Tier 1", "sectorSubjectAreaTier1", Model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture))
-        @GetStandardProperty("Sector Subject Area Tier 2", "sectorSubjectAreaTier2", Model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture))
-    </dl>
+    </div>
 </div>
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
         <dt>@title</dt>
         <dd id="@id">
             @(!string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"))
         </dd>
-    }
+}
 }
 
 @helper GetStandardListProperty(string title, string id, IEnumerable<string> itemList, bool hideIfEmpty = false)
 {
-    if (!hideIfEmpty)
-    {
+if (!hideIfEmpty)
+{
         <dt>@title</dt>
         <dd id="@id">
             @(itemList != null && itemList.Any() ? @Html.MarkdownToHtml(String.Join(", ", itemList)) : Html.MarkdownToHtml("none"))
         </dd>
-    }
+}
 }
 
 @helper GetStandardUrlProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
         <dt>@title</dt>
         <dd id="@id">
             @if (!string.IsNullOrEmpty(item))
@@ -72,13 +98,13 @@
                 @Html.MarkdownToHtml("none")
             }
         </dd>
-    }
+}
 }
 
 @helper GetStandardTypicalLengthProperty(string title, string id, TypicalLength item, bool hideIfEmpty = false)
 {
-    if (!hideIfEmpty)
-    {
+if (!hideIfEmpty)
+{
         <dt>@title</dt>
         <dd id="@id">
             @if (item != null)
@@ -90,5 +116,20 @@
                 @Html.MarkdownToHtml("none")
             }
         </dd>
+}
+}
+
+@helper GetStandardTypicalLengthProperty(TypicalLength item)
+{
+if (item != null)
+{
+    if (item.From.Equals(item.To))
+    {
+            <span>@item.From months</span>
     }
+    else
+    {
+            <span>From @item.From to @item.To months</span>
+    }
+}
 }
