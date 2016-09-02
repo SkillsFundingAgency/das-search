@@ -9,6 +9,7 @@ let main argv =
   //let args = Args.parse argv
   let testUrl = "http://das-metadatawebapici.cloudapp.net/"
 
+  canopy.configuration.chromeDir <- @"Tools\drivers\"
   start chrome
 
   "a test that should fail" &&& (fun _ ->
