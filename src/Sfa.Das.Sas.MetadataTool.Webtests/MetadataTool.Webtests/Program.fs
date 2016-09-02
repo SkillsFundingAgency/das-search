@@ -9,10 +9,11 @@ let main argv =
   //let args = Args.parse argv
   let testUrl = "http://das-metadatawebapici.cloudapp.net/"
 
-  canopy.configuration.chromeDir <- @"Tools\drivers\"
-  start chrome
+  //canopy.configuration.chromeDir <- @"Tools\drivers\"
+  canopy.configuration.phantomJSDir <- @"Tools\drivers\phantomjs\bin"
+  start phantomJS
 
-  "a test that should fail" &&& (fun _ ->
+  "a test that should fail 1" &&& (fun _ ->
     url testUrl
     ".jumbotron h1" == "Meta data tool fail"
   )
@@ -21,7 +22,7 @@ let main argv =
     url testUrl
     ".jumbotron h1" == "Meta data tool"
 
-  "a test that should fail" &&& (fun _ ->
+  "a test that should fail 2" &&& (fun _ ->
     url testUrl
     ".jumbotron h1" == "Meta data tool fail"
   )
