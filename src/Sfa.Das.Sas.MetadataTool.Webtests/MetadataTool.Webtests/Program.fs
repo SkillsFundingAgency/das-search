@@ -9,14 +9,12 @@ let main argv =
   //let args = Args.parse argv
   let testUrl = "http://das-metadatawebapici.cloudapp.net/"
 
-  //canopy.configuration.chromeDir <- @"Tools\drivers\"
-  canopy.configuration.phantomJSDir <- @"Tools\drivers\phantomjs\bin"
+  let drivers = sprintf "%s\%s" __SOURCE_DIRECTORY__ @"Tools\drivers\phantomjs\bin"
+  canopy.configuration.phantomJSDir <- drivers
   start phantomJS
 
-  "a test that should fail 1" &&& (fun _ ->
-    url testUrl
-    ".jumbotron h1" == "Meta data tool fail"
-  )
+  printfn  "Drivers: %s" drivers
+
 
   "first test of meta data web sites" &&& fun _ -> 
     url testUrl
