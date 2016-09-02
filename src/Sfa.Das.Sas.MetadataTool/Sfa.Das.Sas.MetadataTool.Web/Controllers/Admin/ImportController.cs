@@ -21,21 +21,27 @@
         }
         
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult ImportEntries(string text, string type)
         {
             var viewModel = new ImportEntriesViewModel();
 
             var message = _documentImporter.Import(text, type);
 
-            viewModel.Message = message;
+            viewModel.Message = message.Message;
+            viewModel.InnerMessage = message.InnerMessage;
+            viewModel.Data = message.Data;
 
             return View(viewModel);
         }
-
     }
 
     public class ImportEntriesViewModel
     {
         public string Message { get; set; }
+
+        public string InnerMessage { get; set; }
+
+        public string Data { get; set; }
     }
 }

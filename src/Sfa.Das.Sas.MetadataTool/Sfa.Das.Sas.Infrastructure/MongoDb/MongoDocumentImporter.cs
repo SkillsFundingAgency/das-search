@@ -15,6 +15,7 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
 
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.ApplicationServices.Services;
+    using Sfa.Das.Sas.ApplicationServices.Services.Models;
     using Sfa.Das.Sas.Core.Models;
 
     public class MongoDocumentImporter : IDocumentImporter
@@ -39,58 +40,97 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
             _mongoDataClient.Insert(documents, collectionName);
         }
 
-        public string Import(string text, string type)
+        public MapperResponse Import(string text, string type)
         {
+            var message = string.Empty;
+            var innerMessage = string.Empty;
+
+            if (!text.StartsWith("["))
+            {
+                return new MapperResponse { Data = text, Message = "Input needs to be a list" };
+            }
+
             if (type.Equals("framework"))
             {
-                var entries = JsonConvert.DeserializeObject<List<MongoFramework>>(text);
-
-                if (entries != null && entries.Count > 0)
+                try
                 {
-                    ImportDocuments(entries, _mongoSettings.CollectionNameFrameworks);
-                    return $"Imported {entries.Count} framework";
+                    var entries = JsonConvert.DeserializeObject<List<MongoFramework>>(text);
+                    if (entries != null && entries.Count > 0)
+                    {
+                        ImportDocuments(entries, _mongoSettings.CollectionNameFrameworks);
+                        message = $"Imported {entries.Count} framework";
+                    }
+                }
+                catch (Exception exception)
+                {
+                    message = $"Not possible to parse json to {type}";
+                    innerMessage = exception.Message;
                 }
             }
 
             if (type.Equals("standard"))
             {
-                var entries = JsonConvert.DeserializeObject<List<MongoStandard>>(text);
-                
-                if (entries != null && entries.Count > 0)
+                try
                 {
-                    ImportDocuments(entries, _mongoSettings.CollectionNameStandards);
-                    return $"Imported {entries.Count} standards";
+
+                    var entries = JsonConvert.DeserializeObject<List<MongoStandard>>(text);
+                
+                    if (entries != null && entries.Count > 0)
+                    {
+                        ImportDocuments(entries, _mongoSettings.CollectionNameStandards);
+                        message = $"Imported {entries.Count} standards";
+                    }
+                }
+                catch (Exception exception)
+                {
+                    message = $"Not possible to parse json to {type}";
+                    innerMessage = exception.Message;
                 }
             }
 
             if (type.Equals("vstsframework"))
-            {
-                var entries = JsonConvert.DeserializeObject<List<VstsFrameworkMetaData>>(text);
-
-                var result = entries.Select(_mappingService.MapFromVstsModel).ToList();
-
-                if (result.Count > 0)
+            {            
+                try
                 {
-                    ImportDocuments(result, _mongoSettings.CollectionNameFrameworks);
-                    return $"Imported {result.Count} framework";
+                    var entries = JsonConvert.DeserializeObject<List<VstsFrameworkMetaData>>(text);
+                    var result = entries.Select(_mappingService.MapFromVstsModel).ToList();
+
+                    if (result.Count > 0)
+                    {
+                        ImportDocuments(result, _mongoSettings.CollectionNameFrameworks);
+                        message = $"Imported {result.Count} framework";
+                    }
+                }
+                catch (Exception exception)
+                {
+                    message = $"Not possible to parse json to {type}";
+                    innerMessage = exception.Message;
                 }
             }
 
             if (type.Equals("vstsstandard"))
             {
-                var entries = JsonConvert.DeserializeObject<List<VstsStandardMetaData>>(text);
-
-                var result = entries.Select(_mappingService.MapFromVstsModel).ToList();
-
-                if (result.Count > 0)
+                try
                 {
-                    ImportDocuments(result, _mongoSettings.CollectionNameStandards);
-                    return $"Imported {result.Count} standards";
+                    var entries = JsonConvert.DeserializeObject<List<VstsStandardMetaData>>(text);
+
+                    var result = entries.Select(_mappingService.MapFromVstsModel).ToList();
+
+                    if (result.Count > 0)
+                    {
+                        ImportDocuments(result, _mongoSettings.CollectionNameStandards);
+                        message = $"Imported {result.Count} standards";
+                    }
+                }
+                catch (Exception exception)
+                {
+                    message = $"Not possible to parse json to {type}";
+                    innerMessage = exception.Message;
                 }
             }
 
-            return "Error importing";
-            
+            return new MapperResponse { Data = text, Message = message, InnerMessage = innerMessage};
+
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Services.Interfaces
 {
+    using Models;
+
     public interface IDocumentImporter
     {
-        string Import(string text, string type);
+        MapperResponse Import(string text, string type);
     }
 }

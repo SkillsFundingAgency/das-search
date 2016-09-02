@@ -123,11 +123,11 @@
                 StandardPdfUrl = arg.StandardPdfUrl,
                 AssessmentPlanPdfUrl = arg.AssessmentPlanPdfUrl,
                 TypicalLength = MapTypicalLength(arg.TypicalLength),
-                EntryRequirements = arg.EntryRequirements,
-                WhatApprenticesWillLearn = arg.WhatApprenticesWillLearn,
-                Qualifications = arg.Qualifications,
-                ProfessionalRegistration = arg.ProfessionalRegistration,
-                OverviewOfRole = arg.OverviewOfRole,
+                EntryRequirements = MarkdownToHtml(arg.EntryRequirements),
+                WhatApprenticesWillLearn = MarkdownToHtml(arg.WhatApprenticesWillLearn),
+                Qualifications = MarkdownToHtml(arg.Qualifications),
+                ProfessionalRegistration = MarkdownToHtml(arg.ProfessionalRegistration),
+                OverviewOfRole = MarkdownToHtml(arg.OverviewOfRole),
             };
         }
 
@@ -182,6 +182,16 @@
         private TypicalLength MapTypicalLength(MongoTypicalLength arg)
         {
             return new TypicalLength { From = arg.From, To = arg.To, Unit = arg.Unit };
+        }
+
+        private string MarkdownToHtml(string markdown)
+        {
+            if (!string.IsNullOrEmpty(markdown))
+            {
+                return CommonMark.CommonMarkConverter.Convert(markdown.Replace("\\r", "\r").Replace("\\n", "\n"));
+            }
+            return string.Empty;
+
         }
     }
 }
