@@ -19,6 +19,12 @@ Target "Test" (fun _ ->
   trace "Testing stuff..."
 )
 
+
+Target "Restore Nuget packages" (fun _ ->
+  solutionFile
+  |> RestoreMSSolutionPackages (id) 
+)
+
 let run args =
   let result =
     ExecProcess (fun info ->
@@ -32,7 +38,14 @@ Target "Run UI tests" (fun _ ->
   run """--browser Chrome --tag All """ 
 )
 
-"Build solution"
+Target "Start Build" DoNothing
+
+// "Build solution"
+//   ==> "Restore Nuget packages"
+
+"Start Build"
+  ==> "Restore Nuget packages"
+  ==> "Build solution"
   ==> "Run UI tests"
   ==> "Test"
 
