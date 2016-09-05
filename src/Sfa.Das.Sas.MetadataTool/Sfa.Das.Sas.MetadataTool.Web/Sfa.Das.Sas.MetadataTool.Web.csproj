@@ -371,14 +371,13 @@
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lib\handlebars-v4.0.5.js" />
     <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\lib\jquery-3.1.0.js" />
+    <Content Include="Scripts\lib\jquery-ui.js" />
+    <Content Include="Scripts\lib\jquery.validate.js" />
     <Content Include="Scripts\lib\lodash.core.js" />
+    <Content Include="Scripts\lib\modernizr-2.8.3.js" />
     <Content Include="Scripts\lib\tinymce.min.js" />
     <Content Include="Scripts\lib\tinymce_4.4.2\tinymce\changelog.txt" />
     <Content Include="Scripts\lib\tinymce_4.4.2\tinymce\js\tinymce\jquery.tinymce.min.js" />
@@ -519,7 +518,9 @@
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
