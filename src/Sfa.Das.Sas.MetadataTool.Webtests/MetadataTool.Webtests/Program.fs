@@ -1,20 +1,21 @@
 ﻿open canopy
 open runner
-open reporters
+//open reporters
 open System
-//open Common
+open Common
 
 [<EntryPoint>]
 let main argv =
-  //let args = Args.parse argv
-  let testUrl = "http://das-metadatawebapici.cloudapp.net/"
+  let args = Args.parse argv
+  let testUrl = 
+    match args.Environment with 
+    | Local -> "http://localhost:19932/"
+    | CI -> "http://das-metadatawebapici.cloudapp.net/"
 
-  let drivers = sprintf "%s\%s" __SOURCE_DIRECTORY__ @"Tools\drivers\phantomjs\bin"
-  canopy.configuration.phantomJSDir <- drivers
-  //start phantomJS
-  start chrome
+  canopy.configuration.phantomJSDir <- @".\"
+  start args.Browser
 
-  printfn  "Drivers: %s" drivers
+  //reporter <- new LiveHtmlReporter(Chrome, configuration.chromeDir) :> IReporter
 
   Frameworks.DisplayFrameworks testUrl
 
@@ -22,15 +23,13 @@ let main argv =
     url testUrl
     ".jumbotron h1" == "Meta data tool"
 
-//  "a test that should fail 2" &&& (fun _ ->
-//    url testUrl
-//    ".jumbotron h1" == "Meta data tool fail"
-//  )
-
   run()
 
-//  printfn "press [enter] to extit"
-//  Console.ReadLine() |> ignore
+  match args.Environment with
+  | Local -> 
+    printfn "press [enter] to extit"
+    Console.ReadLine() |> ignore
+  | CI -> printfn "-- CI --"
 
   quit()
 

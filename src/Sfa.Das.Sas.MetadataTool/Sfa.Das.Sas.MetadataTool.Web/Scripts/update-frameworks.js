@@ -61,7 +61,7 @@
     $('.entrybox input').keypress(function (e) {
         if (e.which === 13) {
             e.preventDefault();
-            var container = $(this.closest('.entrybox')).find('.property-container');
+            var container = $($(this).closest('.entrybox')).find('.property-container');
             var input = readValueFromInput(this);
 
             addData(container, input);

@@ -15,11 +15,6 @@ Target "Build solution" (fun _ ->
   |> ignore
 )
 
-Target "Test" (fun _ ->
-  trace "Testing stuff..."
-)
-
-
 Target "Restore Nuget packages" (fun _ ->
   solutionFile
   |> RestoreMSSolutionPackages (id) 
@@ -35,18 +30,14 @@ let run args =
   if result <> 0 then failwith "Failed result from unit tests"
 
 Target "Run UI tests" (fun _ ->
-  run """--browser Chrome --tag All """ 
+  run """--browser PhantomJS --environment CI """ 
 )
 
 Target "Start Build" DoNothing
-
-// "Build solution"
-//   ==> "Restore Nuget packages"
 
 "Start Build"
   ==> "Restore Nuget packages"
   ==> "Build solution"
   ==> "Run UI tests"
-  ==> "Test"
 
-Run "Test"
+RunTargetOrDefault "Run UI tests"

@@ -56,11 +56,23 @@
   <ItemGroup>
     <Compile Include="tests\Frameworks.fs" />
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Common.fs" />
+    <Compile Include="Args.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
+    <Content Include="phantomjs-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="phantomjs.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Argu">
+      <HintPath>packages\Argu.3.2.0\lib\net40\Argu.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="canopy">
       <HintPath>packages\canopy.0.9.60\lib\canopy.dll</HintPath>
       <Private>True</Private>

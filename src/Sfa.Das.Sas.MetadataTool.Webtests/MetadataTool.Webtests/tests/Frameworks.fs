@@ -23,18 +23,17 @@ let DisplayFrameworks baseUrl =
     url u
     click "42924, Rail Services: Shunting "
     click ".framework-details span a"
+    sleep 1
+    count "#keyword-property .property-container .entry" 0
     "#keyword-property input" << "Keyword 1"
-    //click "#keyword-property input"
     press enter
-
-    "#keyword-property input" << "Keyword 2"
-    //click "#keyword-property input"
-    press enter
-
-    //count "#keyword-property .property-container .entry" 1
-
-    click (first "#keyword-property .entry .delete")
-
-    // count "#keyword-property .property-container .entry" 0
     
+    "#keyword-property input" << "Keyword 2"
+    press enter
+
+    count "#keyword-property .property-container .entry" 2
+
+    click (first "#keyword-property .delete")
+
+    count "#keyword-property .property-container .entry" 1
   )
