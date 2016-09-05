@@ -194,7 +194,7 @@ namespace Sfa.Das.Sas.Web.Services
 
             // Framework detail page
             cfg.CreateMap<GetFrameworkResponse, FrameworkViewModel>()
-                .ForMember(x => x.CombinedQualificiation, y => y.MapFrom(z => z.Framework.CombinedQualificiation))
+                .ForMember(x => x.CombinedQualificiation, y => y.MapFrom(z => z.Framework.CombinedQualification))
                 .ForMember(x => x.CompetencyQualification, y => y.MapFrom(z => z.Framework.CompetencyQualification))
                 .ForMember(x => x.CompletionQualifications, y => y.MapFrom(z => z.Framework.CompletionQualifications))
                 .ForMember(x => x.EntryRequirements, y => y.MapFrom(z => z.Framework.EntryRequirements))
