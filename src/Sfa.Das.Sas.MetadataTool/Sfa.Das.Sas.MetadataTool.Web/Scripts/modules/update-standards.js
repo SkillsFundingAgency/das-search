@@ -5,9 +5,8 @@
 
     var helper = FatMetaData.UpdateHelper;
 
-    var setUp = function ()
-    {
-        $('.entrybox input').keypress(function (e) {
+    var setUp = function() {
+        $('.entrybox input').keypress(function(e) {
             if (e.which === 13) {
                 e.preventDefault();
                 var container = $(this.closest('.entrybox')).find('.property-container');
@@ -19,9 +18,9 @@
                 return false;
             }
         });
-    }
+    };
 
-    editStandard.init = function () {
+    editStandard.init = function() {
         setUp();
 
 
@@ -29,11 +28,10 @@
         helper.renderItem(helper.models.mapEntry, "#entry-template", "#jobrole-property .property-container");
 
         var top = $('.edit').offset().top;
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             var fromTop = $("body").scrollTop();
             $('.edit-header').toggleClass('fixed', (fromTop > top));
         });
-
-    }
+    };
 
 }(FatMetaData.EditStandard = {}));

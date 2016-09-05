@@ -23,6 +23,8 @@
   <Property Name="sonar.exclusions">
 	  	**/Scripts/*.js, 
 	  	**/scripts/*.js,
+	  	**/Scripts/lib/*.js, 
+	  	**/scripts/lib/*.js,
 	  	**/scripts/js-cookie/*.js,
 	  	**/scripts/polyfills/*.js,
 	  	**/StructureMap*.cs,

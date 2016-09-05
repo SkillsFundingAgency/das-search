@@ -4,10 +4,9 @@
     "use strict";
 
     var helper = FatMetaData.UpdateHelper;
-    
+
     var setUp = function() {
-        
-        $('.entrybox input').keypress(function (e) {
+        $('.entrybox input').keypress(function(e) {
             if (e.which === 13) {
                 e.preventDefault();
                 var container = $(this.closest('.entrybox')).find('.property-container');
@@ -20,7 +19,7 @@
             }
         });
 
-        $('#jobroles-description').keypress(function (e) {
+        $('#jobroles-description').keypress(function(e) {
             if (e.which === 13) {
                 e.preventDefault();
                 var container = $('#jobrole-container');
@@ -35,7 +34,7 @@
             }
         });
 
-        $('#jobroles-title').keypress(function (e) {
+        $('#jobroles-title').keypress(function(e) {
             if (e.which === 13) {
                 e.preventDefault();
                 $("#jobroles-description").focus();
@@ -43,7 +42,7 @@
             }
             return true;
         });
-    }
+    };
 
     var setUpCalendar = function() {
         var date = new Date();
@@ -64,7 +63,7 @@
         });
     };
 
-    editFramework.init = function () {
+    editFramework.init = function() {
 
         setUp();
 
@@ -77,25 +76,10 @@
         setUpCalendar();
 
         var top = $('.edit').offset().top;
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             var fromTop = $("body").scrollTop();
             $('.edit-header').toggleClass('fixed', (fromTop > top));
         });
-
-    }
-
-    //$('input').on('change', function() {
-    //    $('.edit').addClass('changed');
-    //});
-
-    //$('input[type=submit]').on('click', function() {
-    //    $('.edit').removeClass('changed');
-    //});
-
-    //$(window).bind('beforeunload', function () {
-    //    if ($('.edit').hasClass('changed')) {
-    //        return 'Are you sure you want to leave?';
-    //    }
-    //});
+    };
 
 }(FatMetaData.EditFramework = {}));
