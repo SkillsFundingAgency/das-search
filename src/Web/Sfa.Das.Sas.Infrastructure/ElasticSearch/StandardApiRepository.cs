@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     using Sfa.Das.Sas.Core.Logging;
     using Sfa.Das.Sas.Infrastructure.Mapping;
 
-    public sealed class StandardRepository : IGetStandards
+    public sealed class StandardApiRepository : IGetStandards
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _applicationLogger;
@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IStandardMapping _standardMapping;
         private readonly IHttpGet _httpService;
 
-        public StandardRepository(
+        public StandardApiRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
