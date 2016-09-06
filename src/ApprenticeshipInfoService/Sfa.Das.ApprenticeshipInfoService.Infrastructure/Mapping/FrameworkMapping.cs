@@ -25,7 +25,7 @@
                 ProfessionalRegistration = document.ProfessionalRegistration,
                 CompetencyQualification = document.CompetencyQualification?.OrderBy(x => x),
                 KnowledgeQualification = document.KnowledgeQualification?.OrderBy(x => x),
-                CombinedQualificiation = document.CombinedQualification?.OrderBy(x => x)
+                CombinedQualification = document.CombinedQualification?.OrderBy(x => x)
             };
 
             return framework;
