@@ -125,6 +125,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\HtmlAgilityPackExtensions.cs" />
+    <Compile Include="Infrastructure\ImportDocumentsTest.cs" />
+    <Compile Include="Infrastructure\ImportVstsDocumentsTest.cs" />
+    <None Include="Infrastructure\TestData\framework2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Infrastructure\TestData\Standard2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Views\FrameworkDetailsPageTests.cs" />
@@ -135,12 +143,26 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Infrastructure\TestData\Framework1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Infrastructure\TestData\Standard1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj">
+      <Project>{0369220E-3EE2-4D4E-9D2D-BA2C048DB127}</Project>
+      <Name>Sfa.Das.Sas.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj">
       <Project>{668EEF13-AD73-4036-9BD5-57B0BBC5C43C}</Project>
       <Name>Sfa.Das.Sas.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj">
+      <Project>{F91E7F40-91F6-4E36-A8C5-AEB15E38C3B4}</Project>
+      <Name>Sfa.Das.Sas.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.MetadataTool.Web\Sfa.Das.Sas.MetadataTool.Web.csproj">
       <Project>{344564A2-FCE7-4759-9994-EC1D317C3E20}</Project>

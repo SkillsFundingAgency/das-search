@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    public class MongoFramework : IMongoDataType
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
+    public class Framework : IDataBaseType
     {
         public Guid Id { get; set; }
 
@@ -50,12 +52,5 @@
         public IEnumerable<string> KnowledgeQualification { get; set; }
 
         public IEnumerable<string> CombinedQualification { get; set; }
-    }
-
-    public interface IMongoDataType
-    {
-        Guid Id { get; set; }
-
-        string DocumentVersion { get; set; }
     }
 }

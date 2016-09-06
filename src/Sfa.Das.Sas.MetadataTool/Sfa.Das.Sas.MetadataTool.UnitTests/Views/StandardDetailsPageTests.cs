@@ -65,10 +65,12 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "#id").Should().Be(model.Id.ToString());
-            GetPartial(html, "#title").Should().Be(model.Title);
-            GetPartial(html, "#typicalLength").Should().Be(string.Concat("From ",model.TypicalLength.From, " to ", model.TypicalLength.To, " ", model.TypicalLength.Unit));
-            GetPartial(html, "#notionalEndLevel").Should().Be(model.NotionalEndLevel.ToString());
+            GetPartial(html, ".top div:nth-child(1) div").Should().Be(model.ApprenticeshipId.ToString());
+            GetPartial(html, ".top div:nth-child(2) div").Should().Be($"From {model.TypicalLength.From} to {model.TypicalLength.To} months");
+            GetPartial(html, ".top div:nth-child(3) div").Should().Be(model.NotionalEndLevel.ToString());
+            GetPartial(html, ".top div:nth-child(4) div").Should().Be(model.SectorSubjectAreaTier1.ToString());
+            GetPartial(html, ".top div:nth-child(5) div").Should().Be(model.SectorSubjectAreaTier2.ToString());
+
             GetPartial(html, "#jobRoles").Should().Be("jobRole1, jobRole2, jobRole3");
             GetPartial(html, "#keywords").Should().Be("keyword1, keyword2, keyword3");
             GetPartial(html, "#standardPdfUrl").Should().Be(model.StandardPdfUrl);
@@ -78,8 +80,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             GetPartial(html, "#qualifications").Should().Be(model.Qualifications);
             GetPartial(html, "#professionalRegistration").Should().Be(model.ProfessionalRegistration);
             GetPartial(html, "#overviewOfRole").Should().Be(model.OverviewOfRole);
-            GetPartial(html, "#sectorSubjectAreaTier1").Should().Be(model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture));
-            GetPartial(html, "#sectorSubjectAreaTier2").Should().Be(model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture));
         }
 
         [Test]
@@ -112,10 +112,12 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "#id").Should().Be(model.Id.ToString());
-            GetPartial(html, "#title").Should().Be("none");
-            GetPartial(html, "#typicalLength").Should().Be(string.Concat("From ", model.TypicalLength.From, " to ", model.TypicalLength.To, " ", model.TypicalLength.Unit));
-            GetPartial(html, "#notionalEndLevel").Should().Be(model.NotionalEndLevel.ToString());
+            GetPartial(html, ".top div:nth-child(1) div").Should().Be(model.ApprenticeshipId.ToString());
+            GetPartial(html, ".top div:nth-child(2) div").Should().Be($"From {model.TypicalLength.From} to {model.TypicalLength.To} months");
+            GetPartial(html, ".top div:nth-child(3) div").Should().Be(model.NotionalEndLevel.ToString());
+            GetPartial(html, ".top div:nth-child(4) div").Should().Be(model.SectorSubjectAreaTier1.ToString());
+            GetPartial(html, ".top div:nth-child(5) div").Should().Be(model.SectorSubjectAreaTier2.ToString());
+
             GetPartial(html, "#jobRoles").Should().Be("none");
             GetPartial(html, "#keywords").Should().Be("none");
             GetPartial(html, "#standardPdfUrl").Should().Be("none");
@@ -125,8 +127,6 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
             GetPartial(html, "#qualifications").Should().Be("none");
             GetPartial(html, "#professionalRegistration").Should().Be("none");
             GetPartial(html, "#overviewOfRole").Should().Be("none");
-            GetPartial(html, "#sectorSubjectAreaTier1").Should().Be(model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture));
-            GetPartial(html, "#sectorSubjectAreaTier2").Should().Be(model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

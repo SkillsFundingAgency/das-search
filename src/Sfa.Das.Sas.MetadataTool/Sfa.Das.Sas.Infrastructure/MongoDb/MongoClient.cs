@@ -8,6 +8,7 @@
 
     using NLog.LayoutRenderers.Wrappers;
 
+    using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Infrastructure.MongoDb.Models;
 
     public class MongoDataClient : IMongoDataClient
@@ -53,7 +54,7 @@
         }
 
         public void Save<T>(T model, string collectionName)
-            where T : IMongoDataType
+            where T : IDataBaseType
         {
             var collection = _database.GetCollection<T>(collectionName);
             collection.UpdateOne(

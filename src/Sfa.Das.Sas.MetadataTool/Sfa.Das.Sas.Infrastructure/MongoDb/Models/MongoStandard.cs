@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    internal class MongoStandard : IMongoDataType
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
+    internal class Standard : IDataBaseType
     {
         public Guid Id { get; set; }
 

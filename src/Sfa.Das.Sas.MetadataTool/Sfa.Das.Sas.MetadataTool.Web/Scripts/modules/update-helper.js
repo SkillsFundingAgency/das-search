@@ -8,13 +8,12 @@
             return { entry: x, name: name, index: i };
         },
 
-        mapJobRoles: function(x, i, name) {
+        mapJobRoles: function(x, i) {
             return { title: x.Title, description: x.Description, index: i };
         }
     };
 
     var deleteItem = function(container, render) {
-
         $(container).find('.delete').on('click', function() {
             var val = $(this).attr('data-value');
             var jsons = JSON.parse($(container).attr("data-json"));

@@ -4,6 +4,7 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
 {
     using MongoDB.Driver;
 
+    using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Infrastructure.MongoDb.Models;
 
     public interface IMongoDataClient
@@ -18,6 +19,6 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
 
         void Save<T>(T model, FilterDefinition<T> filter, UpdateDefinition<T> update, string collectionName);
 
-        void Save<T>(T model, string collectionName) where T : IMongoDataType;
+        void Save<T>(T model, string collectionName) where T : IDataBaseType;
     }
 }

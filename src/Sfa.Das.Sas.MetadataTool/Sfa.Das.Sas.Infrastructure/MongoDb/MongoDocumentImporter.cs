@@ -11,12 +11,8 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
 
     using Models;
 
-    using MongoDB.Bson;
-
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.ApplicationServices.Services;
-    using Sfa.Das.Sas.ApplicationServices.Services.Models;
-    using Sfa.Das.Sas.Core.Models;
+    using ApplicationServices.Models;
+    using ApplicationServices.Services.Models;
 
     public class MongoDocumentImporter : IDocumentImporter
     {
@@ -35,102 +31,93 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
             _mappingService = new MongoMappingService();
         }
 
-        public void ImportDocuments<T>(IEnumerable<T> documents, string collectionName)
+        public MapperResponse Import(string text, string type)
         {
-            _mongoDataClient.Insert(documents, collectionName);
+            var typeStatus = GetImportType(text, type);
+
+            switch (typeStatus)
+            {
+                case MongoImportType.Nothing:
+                    return new MapperResponse { Data = text, Message = "Input not valid" };
+                case MongoImportType.Framework:
+                    return ImportData<Framework>(
+                        text, 
+                        x => !string.IsNullOrEmpty(x.FrameworkName), 
+                        _mongoSettings.CollectionNameFrameworks);
+                case MongoImportType.Standard:
+                    return ImportData<Standard>(
+                        text, 
+                        x => !string.IsNullOrEmpty(x.Title), 
+                        _mongoSettings.CollectionNameStandards);
+                case MongoImportType.VstsFramework:
+                    return ImportFromVsts<VstsFrameworkMetaData, Framework>(
+                        text, 
+                        _mappingService.MapFromVstsModel, 
+                        x => !string.IsNullOrEmpty(x.FrameworkName), 
+                        _mongoSettings.CollectionNameFrameworks);
+                case MongoImportType.VstsStandard:
+                    return ImportFromVsts<VstsStandardMetaData, Standard>(
+                        text, 
+                        _mappingService.MapFromVstsModel, 
+                        x => !string.IsNullOrEmpty(x.Title), 
+                        _mongoSettings.CollectionNameStandards);
+            }
+            return new MapperResponse { Data = text, Message = string.Empty, InnerMessage = string.Empty };
         }
 
-        public MapperResponse Import(string text, string type)
+        private MapperResponse ImportData<T>(string text, Func<T, bool> ensureType, string collectionName)
+        {
+            Func<List<T>> f = () => JsonConvert.DeserializeObject<List<T>>(text).Where(ensureType).ToList();
+
+            var d = ImportDocuments(f, collectionName);
+            return new MapperResponse { Data = text, InnerMessage = d.InnerMessage, Message = d.Message };
+        }
+
+        private MapperResponse ImportFromVsts<T, T2>(string text, Func<T, T2> mapFromVstsModel, Func<T2, bool> ensureType, string collectionName)
+        {
+            Func<List<T2>> f = () => JsonConvert.DeserializeObject<List<T>>(text)
+                .Select(mapFromVstsModel)
+                .Where(ensureType).ToList();
+
+            var d = ImportDocuments(f, collectionName);
+            return new MapperResponse { Data = text, InnerMessage = d.InnerMessage, Message = d.Message };
+        }
+
+        private MapperResponse ImportDocuments<T>(Func<List<T>> func, string collectionName)
         {
             var message = string.Empty;
             var innerMessage = string.Empty;
+            try
+            {
+                var entries = func.Invoke();
 
+                if (entries.Count > 0)
+                {
+                    ImportDocuments(entries, collectionName);
+                    message = $"Imported {entries.Count} {typeof(T).Name}";
+                }
+            }
+            catch (Exception exception)
+            {
+                message = $"Not possible to parse json to {typeof(T).Name}";
+                innerMessage = exception.Message;
+            }
+
+            return new MapperResponse { Data = string.Empty, Message = message, InnerMessage = innerMessage };
+        }
+        private MongoImportType GetImportType(string text, string type)
+        {
             if (!text.StartsWith("["))
             {
-                return new MapperResponse { Data = text, Message = "Input needs to be a list" };
+                return MongoImportType.Nothing;
             }
+            MongoImportType t;
+            return Enum.TryParse(type, true, out t) ? t : t;
+        }
 
-            if (type.Equals("framework"))
-            {
-                try
-                {
-                    var entries = JsonConvert.DeserializeObject<List<MongoFramework>>(text);
-                    if (entries != null && entries.Count > 0)
-                    {
-                        ImportDocuments(entries, _mongoSettings.CollectionNameFrameworks);
-                        message = $"Imported {entries.Count} framework";
-                    }
-                }
-                catch (Exception exception)
-                {
-                    message = $"Not possible to parse json to {type}";
-                    innerMessage = exception.Message;
-                }
-            }
-
-            if (type.Equals("standard"))
-            {
-                try
-                {
-
-                    var entries = JsonConvert.DeserializeObject<List<MongoStandard>>(text);
-                
-                    if (entries != null && entries.Count > 0)
-                    {
-                        ImportDocuments(entries, _mongoSettings.CollectionNameStandards);
-                        message = $"Imported {entries.Count} standards";
-                    }
-                }
-                catch (Exception exception)
-                {
-                    message = $"Not possible to parse json to {type}";
-                    innerMessage = exception.Message;
-                }
-            }
-
-            if (type.Equals("vstsframework"))
-            {            
-                try
-                {
-                    var entries = JsonConvert.DeserializeObject<List<VstsFrameworkMetaData>>(text);
-                    var result = entries.Select(_mappingService.MapFromVstsModel).ToList();
-
-                    if (result.Count > 0)
-                    {
-                        ImportDocuments(result, _mongoSettings.CollectionNameFrameworks);
-                        message = $"Imported {result.Count} framework";
-                    }
-                }
-                catch (Exception exception)
-                {
-                    message = $"Not possible to parse json to {type}";
-                    innerMessage = exception.Message;
-                }
-            }
-
-            if (type.Equals("vstsstandard"))
-            {
-                try
-                {
-                    var entries = JsonConvert.DeserializeObject<List<VstsStandardMetaData>>(text);
-
-                    var result = entries.Select(_mappingService.MapFromVstsModel).ToList();
-
-                    if (result.Count > 0)
-                    {
-                        ImportDocuments(result, _mongoSettings.CollectionNameStandards);
-                        message = $"Imported {result.Count} standards";
-                    }
-                }
-                catch (Exception exception)
-                {
-                    message = $"Not possible to parse json to {type}";
-                    innerMessage = exception.Message;
-                }
-            }
-
-            return new MapperResponse { Data = text, Message = message, InnerMessage = innerMessage};
-
+        private void ImportDocuments<T>(IEnumerable<T> documents, string collectionName)
+        {
+            _mongoDataClient.Insert(documents, collectionName);
         }
     }
 }

@@ -30,37 +30,37 @@
 
         public IEnumerable<StandardMetaData> GetStandards()
         {
-            var models = _mongoDataClient.GetAll<MongoStandard>(_mongoSettings.CollectionNameStandards);
+            var models = _mongoDataClient.GetAll<Standard>(_mongoSettings.CollectionNameStandards);
 
             return models.Select(_mappingService.MapToCoreModel);
         }
 
         public StandardMetaData GetStandard(string id)
         {
-            var model = _mongoDataClient.GetById<MongoStandard>(_mongoSettings.CollectionNameStandards, id);
+            var model = _mongoDataClient.GetById<Standard>(_mongoSettings.CollectionNameStandards, id);
             return _mappingService.MapToCoreModel(model);
         }
 
         public IEnumerable<FrameworkMetaData> GetFrameworks()
         {
-            var models = _mongoDataClient.GetAll<MongoFramework>(_mongoSettings.CollectionNameFrameworks);
+            var models = _mongoDataClient.GetAll<Framework>(_mongoSettings.CollectionNameFrameworks);
             return models.Select(_mappingService.MapToCoreModel);
         }
 
         public FrameworkMetaData GetFramework(string id)
         {
-            var model = _mongoDataClient.GetById<MongoFramework>(_mongoSettings.CollectionNameFrameworks, id);
+            var model = _mongoDataClient.GetById<Framework>(_mongoSettings.CollectionNameFrameworks, id);
             return _mappingService.MapToCoreModel(model);
         }
 
         public void UpdateFramework(FrameworkMetaData updateModel)
         {
-            var model = _mongoDataClient.GetById<MongoFramework>(_mongoSettings.CollectionNameFrameworks, updateModel.Id.ToString());
+            var model = _mongoDataClient.GetById<Framework>(_mongoSettings.CollectionNameFrameworks, updateModel.Id.ToString());
 
             _mongoDataClient.Save(
                 model,
-                Builders<MongoFramework>.Filter.Eq(x => x.Id, model.Id),
-                Builders<MongoFramework>.Update
+                Builders<Framework>.Filter.Eq(x => x.Id, model.Id),
+                Builders<Framework>.Update
                     .Set(x => x.EffectiveFrom, updateModel.EffectiveFrom)
                     .Set(x => x.EffectiveTo, updateModel.EffectiveTo)
                     .Set(x => x.Keywords, updateModel.Keywords)
@@ -78,7 +78,7 @@
 
         public void UpdateStandard(StandardMetaData updateModel)
         {
-            var model = _mongoDataClient.GetById<MongoStandard>(_mongoSettings.CollectionNameStandards, updateModel.Id.ToString());
+            var model = _mongoDataClient.GetById<Standard>(_mongoSettings.CollectionNameStandards, updateModel.Id.ToString());
 
             var updatedTypicalLength = new MongoTypicalLength
             {
@@ -89,8 +89,8 @@
 
             _mongoDataClient.Save(
                 model,
-                Builders<MongoStandard>.Filter.Eq(x => x.Id, model.Id),
-                Builders<MongoStandard>.Update
+                Builders<Standard>.Filter.Eq(x => x.Id, model.Id),
+                Builders<Standard>.Update
                     .Set(x => x.AssessmentPlanPdfUrl, updateModel.AssessmentPlanPdfUrl)
                     .Set(x => x.EntryRequirements, updateModel.EntryRequirements)
                     .Set(x => x.OverviewOfRole, updateModel.OverviewOfRole)

@@ -1,0 +1,38 @@
+﻿{
+  "ApprenticeshipId": 49532,
+  "Id": "005591ee-a22c-439e-a31e-5d79aaa4d815",
+  "FrameworkName": "Cultural and Heritage Venue Operations",
+  "FrameworkCode": 495,
+  "ProgType": 2,
+  "PathwayCode": 2,
+  "Pathway": "Cultural and Heritage Venue Operations",
+  "EffectiveFrom": "0001-01-01T00:00:00Z",
+  "EffectiveTo": "0001-01-01T00:00:00Z",
+  "JobRoleItems": [
+    {
+      "Title": "Front of House staff",
+      "Description": "Ticket sales, exhibition group bookings, dealing with customers, supporting setting up and servicing meetings, setting up and maintaining systems such as finance, staff records, visitor numbers"
+    },
+    {
+      "Title": "Visitor Services Assistant",
+      "Description": "Assisting with the safety of staff, visitors, collections & buildings, helping visitors to get the most from their visit, working with explainers, guides & demonstrators & visitors with special needs or requirements and interpreting and explaining the service, exhibition or site."
+    }
+  ],
+  "Keywords": [
+    "Historian"
+  ],
+  "TypicalLength": {
+    "From": 12,
+    "To": 12,
+    "Unit": "m"
+  },
+  "SectorSubjectAreaTier1": 0,
+  "SectorSubjectAreaTier2": 0,
+  "EntryRequirements": "",
+  "ProfessionalRegistration": "",
+  "CompletionQualifications": "",
+  "FrameworkOverview": "",
+  "CompetencyQualification": null,
+  "KnowledgeQualification": null,
+  "CombinedQualification": null
+}

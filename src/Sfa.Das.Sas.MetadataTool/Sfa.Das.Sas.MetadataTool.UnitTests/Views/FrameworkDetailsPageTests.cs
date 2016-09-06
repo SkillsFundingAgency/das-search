@@ -88,28 +88,19 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "#apprenticeshipId").Should().Be(model.ApprenticeshipId.ToString());
-            GetPartial(html, "#frameworkName").Should().Be(model.FrameworkName);
-            GetPartial(html, "#frameworkCode").Should().Be(model.FrameworkCode.ToString());
+            GetPartial(html, ".top div:nth-child(1) div").Should().Be(model.ApprenticeshipId.ToString());
+            GetPartial(html, ".top div:nth-child(2) div").Should().Be(model.FrameworkCode.ToString());
+            GetPartial(html, ".top div:nth-child(3) div").Should().Be(model.ProgType.ToString());
+            GetPartial(html, ".top div:nth-child(4) div").Should().Be(model.PathwayCode.ToString());
+            GetPartial(html, ".top div:nth-child(5) div").Should().Be($"From {model.TypicalLength.From} to {model.TypicalLength.To} months");
+            GetPartial(html, ".top div:nth-child(6) div").Should().Be(model.EffectiveFrom.ToString("yyyy MMMM dd"));
+            GetPartial(html, ".top div:nth-child(7) div").Should().Be(model.EffectiveTo.ToString("yyyy MMMM dd"));
+            GetPartial(html, ".top div:nth-child(8) div").Should().Be(model.SectorSubjectAreaTier1.ToString());
+            GetPartial(html, ".top div:nth-child(9) div").Should().Be(model.SectorSubjectAreaTier2.ToString());
             GetPartial(html, "#frameworkOverview").Should().Be(model.FrameworkOverview);
-            GetPartial(html, "#typicalLength")
-                .Should()
-                .Be(string.Concat("From ", model.TypicalLength.From, " to ", model.TypicalLength.To, " ",
-                    model.TypicalLength.Unit));
-            GetPartial(html, "#progType").Should().Be(model.ProgType.ToString());
-            GetPartial(html, "#pathwayCode").Should().Be(model.PathwayCode.ToString());
-            GetPartial(html, "#pathway").Should().Be(model.Pathway);
-            GetPartial(html, "#effectiveFrom").Should().Be(model.EffectiveFrom.ToString());
-            GetPartial(html, "#effectiveTo").Should().Be(model.EffectiveTo.ToString());
             GetPartial(html, "#jobRoleItems").Should().Contain("Test job role title");
             GetPartial(html, "#jobRoleItems").Should().Contain("Test job role description");
             GetPartial(html, "#keywords").Should().Be("keyword1, keyword2, keyword3");
-            GetPartial(html, "#sectorSubjectAreaTier1")
-                .Should()
-                .Be(model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture));
-            GetPartial(html, "#sectorSubjectAreaTier2")
-                .Should()
-                .Be(model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture));
             GetPartial(html, "#entryRequirements").Should().Be(model.EntryRequirements);
             GetPartial(html, "#professionalRegistration").Should().Be(model.ProfessionalRegistration);
             GetPartial(html, "#completionQualifications").Should().Be(model.CompletionQualifications);
@@ -158,27 +149,18 @@ namespace Sfa.Das.Sas.MetadataTool.UnitTests.Views
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, "#apprenticeshipId").Should().Be(model.ApprenticeshipId.ToString());
-            GetPartial(html, "#frameworkName").Should().Be("none");
-            GetPartial(html, "#frameworkCode").Should().Be(model.FrameworkCode.ToString());
+            GetPartial(html, ".top div:nth-child(1) div").Should().Be(model.ApprenticeshipId.ToString());
+            GetPartial(html, ".top div:nth-child(2) div").Should().Be(model.FrameworkCode.ToString());
+            GetPartial(html, ".top div:nth-child(3) div").Should().Be(model.ProgType.ToString());
+            GetPartial(html, ".top div:nth-child(4) div").Should().Be(model.PathwayCode.ToString());
+            GetPartial(html, ".top div:nth-child(5) div").Should().Be($"From {model.TypicalLength.From} to {model.TypicalLength.To} months");
+            GetPartial(html, ".top div:nth-child(6) div").Should().Be(model.EffectiveFrom.ToString("yyyy MMMM dd"));
+            GetPartial(html, ".top div:nth-child(7) div").Should().Be(model.EffectiveTo.ToString("yyyy MMMM dd"));
+            GetPartial(html, ".top div:nth-child(8) div").Should().Be(model.SectorSubjectAreaTier1.ToString());
+            GetPartial(html, ".top div:nth-child(9) div").Should().Be(model.SectorSubjectAreaTier2.ToString());
             GetPartial(html, "#frameworkOverview").Should().Be("none");
-            GetPartial(html, "#typicalLength")
-                .Should()
-                .Be(string.Concat("From ", model.TypicalLength.From, " to ", model.TypicalLength.To, " ",
-                    model.TypicalLength.Unit));
-            GetPartial(html, "#progType").Should().Be(model.ProgType.ToString());
-            GetPartial(html, "#pathwayCode").Should().Be(model.PathwayCode.ToString());
-            GetPartial(html, "#pathway").Should().Be("none");
-            GetPartial(html, "#effectiveFrom").Should().Be(model.EffectiveFrom.ToString());
-            GetPartial(html, "#effectiveTo").Should().Be(model.EffectiveTo.ToString());
             GetPartial(html, "#jobRoleItems").Should().Be("none");
             GetPartial(html, "#keywords").Should().Be("none");
-            GetPartial(html, "#sectorSubjectAreaTier1")
-                .Should()
-                .Be(model.SectorSubjectAreaTier1.ToString(CultureInfo.InvariantCulture));
-            GetPartial(html, "#sectorSubjectAreaTier2")
-                .Should()
-                .Be(model.SectorSubjectAreaTier2.ToString(CultureInfo.InvariantCulture));
             GetPartial(html, "#entryRequirements").Should().Be("none");
             GetPartial(html, "#professionalRegistration").Should().Be("none");
             GetPartial(html, "#completionQualifications").Should().Be("none");

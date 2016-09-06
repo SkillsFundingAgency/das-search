@@ -10,7 +10,7 @@
 
     internal class MongoMappingService
     {
-        internal StandardMetaData MapToCoreModel(MongoStandard arg)
+        internal StandardMetaData MapToCoreModel(Standard arg)
         {
             return new StandardMetaData
             {
@@ -33,7 +33,7 @@
             };
         }
 
-        internal FrameworkMetaData MapToCoreModel(MongoFramework arg)
+        internal FrameworkMetaData MapToCoreModel(Framework arg)
         {
             return new FrameworkMetaData
             {
@@ -61,9 +61,9 @@
             };
         }
 
-        internal MongoStandard MapFromCoreModel(StandardMetaData arg)
+        internal Standard MapFromCoreModel(StandardMetaData arg)
         {
-            return new MongoStandard
+            return new Standard
             {
                 Id = arg.Id,
                 Title = arg.Title,
@@ -83,9 +83,9 @@
             };
         }
 
-        internal MongoFramework MapFromCoreModel(FrameworkMetaData arg)
+        internal Framework MapFromCoreModel(FrameworkMetaData arg)
         {
-            return new MongoFramework
+            return new Framework
             {
                 Id = arg.Id,
                 FrameworkCode = arg.FrameworkCode,
@@ -110,9 +110,9 @@
             };
         }
 
-        internal MongoStandard MapFromVstsModel(VstsStandardMetaData arg)
+        internal Standard MapFromVstsModel(VstsStandardMetaData arg)
         {
-            return new MongoStandard
+            return new Standard
             {
                 Id = Guid.NewGuid(),
                 ApprenticeshipId = arg.Id,
@@ -131,9 +131,9 @@
             };
         }
 
-        internal MongoFramework MapFromVstsModel(VstsFrameworkMetaData arg)
+        internal Framework MapFromVstsModel(VstsFrameworkMetaData arg)
         {
-            return new MongoFramework
+            return new Framework
             {
                 Id =  new Guid(),
                 ApprenticeshipId = ToInt(arg.Id),
