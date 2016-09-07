@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elasticsearch\StandardElasticRepository.cs" />
     <Compile Include="Elasticsearch\FrameworkElasticRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
@@ -121,7 +122,7 @@
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
-    <Compile Include="Elasticsearch\StandardRepository.cs" />
+    <Compile Include="Elasticsearch\StandardApiRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
