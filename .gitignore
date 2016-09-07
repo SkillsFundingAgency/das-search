@@ -202,3 +202,9 @@ _ui/src/styles/.sass-cache/
 
 # Chutzpah
 spec/_Chutzpah*
+
+# Metadata UI test
+**/*/Tools/FAKE/*
+**/*/Tools/NUnit.Extension*
+**/*/Tools/NUnit.ConsoleRunner*
+**/*/*.fake/*
