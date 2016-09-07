@@ -1,6 +1,5 @@
 ﻿open canopy
 open runner
-//open reporters
 open System
 open Common
 
@@ -12,10 +11,9 @@ let main argv =
     | Local -> "http://localhost:19932/"
     | CI -> "http://das-metadatawebapici.cloudapp.net/"
 
-  canopy.configuration.phantomJSDir <- @".\"
+  canopy.configuration.phantomJSDir <- System.IO.Path.Combine (__SOURCE_DIRECTORY__, "bin/Debug")
+  printf "%s" canopy.configuration.phantomJSDir
   start args.Browser
-
-  //reporter <- new LiveHtmlReporter(Chrome, configuration.chromeDir) :> IReporter
 
   Frameworks.DisplayFrameworks testUrl
 

@@ -34,36 +34,39 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
         public MapperResponse Import(string text, string type)
         {
             var typeStatus = GetImportType(text, type);
-
             switch (typeStatus)
             {
                 case MongoImportType.Nothing:
                     return new MapperResponse { Data = text, Message = "Input not valid" };
                 case MongoImportType.Framework:
-                    return ImportData<Framework>(
-                        text, 
-                        x => !string.IsNullOrEmpty(x.FrameworkName), 
+                    return ImportData(
+                        text,
+                        EnsureFramework,
                         _mongoSettings.CollectionNameFrameworks);
                 case MongoImportType.Standard:
-                    return ImportData<Standard>(
-                        text, 
-                        x => !string.IsNullOrEmpty(x.Title), 
+                    return ImportData(
+                        text,
+                        EnsureStandard,
                         _mongoSettings.CollectionNameStandards);
                 case MongoImportType.VstsFramework:
                     return ImportFromVsts<VstsFrameworkMetaData, Framework>(
-                        text, 
-                        _mappingService.MapFromVstsModel, 
-                        x => !string.IsNullOrEmpty(x.FrameworkName), 
+                        text,
+                        _mappingService.MapFromVstsModel,
+                        EnsureFramework,
                         _mongoSettings.CollectionNameFrameworks);
                 case MongoImportType.VstsStandard:
                     return ImportFromVsts<VstsStandardMetaData, Standard>(
-                        text, 
-                        _mappingService.MapFromVstsModel, 
-                        x => !string.IsNullOrEmpty(x.Title), 
+                        text,
+                        _mappingService.MapFromVstsModel,
+                        EnsureStandard,
                         _mongoSettings.CollectionNameStandards);
             }
             return new MapperResponse { Data = text, Message = string.Empty, InnerMessage = string.Empty };
         }
+
+        private static Func<Framework, bool> EnsureFramework => x => !string.IsNullOrEmpty(x.FrameworkName);
+        private static Func<Standard, bool> EnsureStandard => x => !string.IsNullOrEmpty(x.Title);
+
 
         private MapperResponse ImportData<T>(string text, Func<T, bool> ensureType, string collectionName)
         {

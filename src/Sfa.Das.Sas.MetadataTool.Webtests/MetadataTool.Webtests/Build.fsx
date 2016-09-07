@@ -6,17 +6,19 @@ open Fake
 open Fake.IISHelper
 
 let solutionFile  = "MetadataTool.Webtests.sln"
-let exe = "bin/Debug"
+let solutionPath = System.IO.Path.Combine (__SOURCE_DIRECTORY__, solutionFile)
+let exe = System.IO.Path.Combine (__SOURCE_DIRECTORY__, "bin/Debug")
+// let exe = "bin/Debug"
 
 Target "Build solution" (fun _ -> 
   trace <| sprintf "Building  %s" solutionFile
-  !! solutionFile
+  !! solutionPath
   |> MSBuildDebug "" "Rebuild"
   |> ignore
 )
 
 Target "Restore Nuget packages" (fun _ ->
-  solutionFile
+  solutionPath
   |> RestoreMSSolutionPackages (id) 
 )
 
