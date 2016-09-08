@@ -6,6 +6,8 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 {
+    using Sfa.Das.Sas.Indexer.Core.Logging;
+
     [TestFixture]
     public class AngleSharpServiceTests
     {
@@ -17,7 +19,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             var mockBrowsingContext = new Mock<IHttpGet>();
             mockBrowsingContext.Setup(m => m.Get(It.IsAny<string>(), null, null)).Returns(_htmlText);
 
-            AngleSharpService angleSharpService = new AngleSharpService(mockBrowsingContext.Object);
+            AngleSharpService angleSharpService = new AngleSharpService(mockBrowsingContext.Object, Mock.Of<ILog>());
             var x = angleSharpService.GetLinks("path/to/something", "div a", "HELLO");
 
             Assert.AreEqual(1, x.Count);
@@ -30,7 +32,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             var mockBrowsingContext = new Mock<IHttpGet>();
             mockBrowsingContext.Setup(m => m.Get(It.IsAny<string>(), null, null)).Returns(_htmlText);
 
-            AngleSharpService angleSharpService = new AngleSharpService(mockBrowsingContext.Object);
+            AngleSharpService angleSharpService = new AngleSharpService(mockBrowsingContext.Object, Mock.Of<ILog>());
             var x = angleSharpService.GetLinks(string.Empty, "div a", "HELLO");
 
             Assert.AreEqual(0, x.Count);
