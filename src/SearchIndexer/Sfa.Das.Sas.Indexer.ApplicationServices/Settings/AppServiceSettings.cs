@@ -56,10 +56,19 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         public string MetadataApiUri => CloudConfigurationManager.GetSetting("MetadataApiUri");
 
+        public bool ToggleFilterOnFunding => ToBool(_settings.GetSetting("ToggleFilterOnFunding"));
+
         public string QueueName(Type type)
         {
             var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Apprenticeship").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
             return _settings.GetSetting(name);
+        }
+
+        private bool ToBool(string input)
+        {
+            bool returnValue;
+            bool.TryParse(input, out returnValue);
+            return returnValue;
         }
     }
 }

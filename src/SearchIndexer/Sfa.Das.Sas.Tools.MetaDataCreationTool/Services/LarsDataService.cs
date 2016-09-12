@@ -67,7 +67,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             return larsMetaData.Frameworks;
         }
 
-        private static void AddQualificationsToFrameworks(LarsMetaData metaData)
+        private void AddQualificationsToFrameworks(LarsMetaData metaData)
         {
             foreach (var framework in metaData.Frameworks)
             {
@@ -89,11 +89,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                             CompetenceDescription = comp.FrameworkComponentTypeDesc
                         }).ToList();
 
-                // Determine if the qualifications are funded or not by the apprenticeship scheme
-                DetermineQualificationFundingStatus(qualifications, metaData.Fundings);
-
-                // Only show funded qualifications
-                qualifications = qualifications.Where(x => x.IsFunded).ToList();
+                if (_appServiceSettings.ToggleFilterOnFunding)
+                {
+                    // Determine if the qualifications are funded or not by the apprenticeship scheme
+                    DetermineQualificationFundingStatus(qualifications, metaData.Fundings);
+                    // Only show funded qualifications
+                    qualifications = qualifications.Where(x => x.IsFunded).ToList();
+                }
 
                 var categorisedQualifications = GetCategorisedQualifications(qualifications);
 
