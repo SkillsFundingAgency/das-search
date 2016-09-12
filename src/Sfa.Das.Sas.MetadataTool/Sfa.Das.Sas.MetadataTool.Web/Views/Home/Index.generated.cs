@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASP
+namespace Sfa.Das.Sas.MetadataTool.Web.Views.Home
 {
     using System;
     using System.Collections.Generic;
@@ -31,9 +31,9 @@ namespace ASP
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Home/Index.cshtml")]
-    public partial class _Views_Home_Index_cshtml : System.Web.Mvc.WebViewPage<dynamic>
+    public partial class Index : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public _Views_Home_Index_cshtml()
+        public Index()
         {
         }
         public override void Execute()
@@ -50,11 +50,11 @@ WriteLiteral("\r\n<div");
 
 WriteLiteral(" class=\"jumbotron\"");
 
-WriteLiteral(">\r\n    <h1>Meta data tool</h1>\r\n    <p");
+WriteLiteral(">\r\n    <h1>\r\n        SFA Metadata Editor\r\n    </h1>\r\n    <p");
 
 WriteLiteral(" class=\"lead\"");
 
-WriteLiteral(">First approach</p>\r\n    <div");
+WriteLiteral(">Standards and Frameworks</p>\r\n    <div");
 
 WriteLiteral(" class=\"row\"");
 
@@ -67,7 +67,7 @@ WriteLiteral(">\r\n            <p>\r\n");
 WriteLiteral("                ");
 
             
-            #line 10 "..\..\Views\Home\Index.cshtml"
+            #line 12 "..\..\Views\Home\Index.cshtml"
            Write(Html.ActionLink("List all standards", "Standards", "Apprenticeship", null, new { @class = "btn btn-primary btn-lg" }));
 
             
@@ -82,7 +82,7 @@ WriteLiteral(">\r\n            <p>\r\n");
 WriteLiteral("                ");
 
             
-            #line 15 "..\..\Views\Home\Index.cshtml"
+            #line 17 "..\..\Views\Home\Index.cshtml"
            Write(Html.ActionLink("List all frameworks", "Frameworks", "Apprenticeship", null, new { @class = "btn btn-primary btn-lg" }));
 
             

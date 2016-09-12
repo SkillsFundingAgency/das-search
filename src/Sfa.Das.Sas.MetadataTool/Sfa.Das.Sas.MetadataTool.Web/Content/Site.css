@@ -2,6 +2,23 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: Tahoma, Geneva, sans-serif;
+    background-color: whitesmoke;
+}
+
+a {
+    word-break: break-all;
+}
+
+.btn-primary {
+    color: #000;
+    background-color: #4285f4;
+    border-color: #4285f4;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #4285f4;
+    border-color: #4285f4;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -45,10 +62,26 @@ option {
     color: #337ab7;
 }
 
+/* EDIT */
 
-.edit label {
-    display: block;
+.edit-standard label, .edit-framework label {
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
 }
+
+.edit-standard .right, .edit-framework .right {
+    display: inline-block;
+    width: 70%;
+}
+
+.pdf-link {
+    max-width: 500px;
+}
+
+/*.edit label {
+    display: block;
+}*/
 
 .edit textarea {
     width: 500px;
@@ -63,9 +96,11 @@ option {
 }
 
 .edit {
-    background-color: #cfd6de;
+    background-color: white;
     border-radius: 5px;
+    padding-bottom: 10px;
 }
+
 .edit form > div {
     margin: 0 10px;
     margin-top: 20px;
@@ -74,6 +109,22 @@ option {
 .edit input[type=text] {
     padding: 5px;
     border-radius: 7px;
+}
+
+.edit input[type=number] {
+    padding: 5px;
+    border-radius: 7px;
+    max-width: 75px;
+}
+
+.entry {
+    display: inline-block;
+    background-color: #4285f4;
+    padding: 0px 10px 0 5px;
+    border-radius: 13.3px;
+    margin: 5px 5px;
+    margin-left: 0;
+    color: white;
 }
 
 .entry a {
@@ -89,7 +140,7 @@ option {
 
 .entry a:hover {
     border: solid #95acbe 1px;
-    background: #95acbe;
+    background: white;
 }
 
 .entry i {
@@ -99,13 +150,23 @@ option {
 
 .edit .edit-header {
     padding: 5px;
-    background-color: rgb(99, 113, 130);
-    background-color: rgba(99, 113, 130, 0.8);
+    background-color: rgb(216, 230, 253);
+    background-color: rgba(216, 230, 253, 0.8);
     position: relative;
     z-index: 1;
     margin: 0;
     display: block;
+    padding-left: 10px;
 }
+
+
+.edit .edit-header h3{
+    max-width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: gray;
+}
+
 
 .edit .edit-header.fixed {
     position: fixed;
@@ -133,19 +194,16 @@ option {
 
 .edit .edit-header input {
     position: absolute;
-    right: 11px;
-    top: 11px;
-    background-color: #679167;
-    border-color: #679167;
+    right: 10px;
+    top: 15px;
+    background-color: green;
+    border-color: green;
 }
 
 
 /* Framework details */
-.framework-details dd {
-    padding-left: 10px;
-}
 
-.framework-details .top > div {
+.framework-details .top > div, .standard-details .top > div {
     display: inline-block;
     margin: 5px;
     padding: 5px;
@@ -154,4 +212,60 @@ option {
 .framework-details .top {
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.framework-details, .standard-details {
+    background-color: white;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/*.framework-details, .standard-details {
+    font-weight: bold;
+    color: #a7a7a7;
+    border-bottom: 2px solid;
+    display: inline-block;
+}*/
+
+.framework-details hr, .standard-details hr {
+    border-top: 27px solid whitesmoke;
+    width: 105%;
+    margin-left: -10px;
+}
+
+.edit-btn {
+    background-color: green;
+    color: white;
+}
+
+.framework-details dd, .standard-details dd {
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-left: 10px;
+    width: 70%;
+}
+
+.framework-details dt, .standard-details dt {
+    font-weight: bold;
+    color: #a7a7a7;
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
+}
+
+/* MENU */ 
+
+.navbar-inverse, .navbar-inverse .container{
+    background-color: #4285f4;
+    color: black;
+    border: none;
+}
+
+.navbar-inverse .navbar-header .navbar-brand{
+    color: black;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+    color: black;
+}
 }

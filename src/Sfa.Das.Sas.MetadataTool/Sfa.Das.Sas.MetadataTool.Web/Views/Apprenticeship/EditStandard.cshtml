@@ -7,7 +7,7 @@
 
 <h2>Edit @Model.Title </h2>
 <span>
-    <a href="@Url.Action("StandardDetails", new { Model.Id })">
+    <a class="btn" href="@Url.Action("StandardDetails", new { Model.Id })">
         View standard
         <i class="fa fa-eye" aria-hidden="true"></i>
     </a>
@@ -23,100 +23,113 @@
 
         <input type="hidden" name="apprenticeshipId" value="@Model.ApprenticeshipId" />
         <div class="boxed">
-            @GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
+            <div>
+                <label id="apprenticeshipId">ApprenticeshipId</label>
+                <span class="right">
+                    @Model.ApprenticeshipId.ToString()
+                </span>
+            </div>
+
             <div>
                 <label>Title</label>
-                <input type="text" name="title" value="@Model.Title"/>
+                <div class="right">
+                    <input type="text" name="title" value="@Model.Title"/>
+                </div>
             </div>
         </div>
 
         <div class="boxed">
             <label>Typical length</label>
-            <div>
-                <label>From</label>
-                <input type="text" name="typicalLength.From" value="@Model.TypicalLength.From"/>
-            </div>
-            <div>
-                <label>To</label>
-                <input type="text" name="typicalLength.To" value="@Model.TypicalLength.To"/>
-            </div>
-            <div>
-                <label>Unit</label>
-                <input type="text" name="typicalLength.Unit" value="@Model.TypicalLength.Unit"/>
+            <div class="right">
+                    <span>From</span>
+                    <input type="number" min="0" name="typicalLength.From" value="@Model.TypicalLength.From"/>
+                    <span>To</span>
+                    <input type="number" min="0" name="typicalLength.To" value="@Model.TypicalLength.To"/>
+                    <span>months</span>
             </div>
         </div>
 
         <div class="boxed entrybox" id="keyword-property">
             <label>Keywords</label>
-            <input type="text" placeholder="add new keyword" />
-            <div class="property-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="keywords">
+            <div class="right">
+                <input type="text" placeholder="add new keyword" />
+                <div class="property-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="keywords">
+                </div>
             </div>
         </div>
 
 
         <div class="boxed entrybox" id="jobrole-property">
             <label>Job Roles</label>
-            <input type="text" placeholder="add new job role"/>
-            <div class="property-container" data-json="@Model.JobRoles.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="jobroles">
+            <div class="right">
+                <input type="text" placeholder="add new job role"/>
+                <div class="property-container" data-json="@Model.JobRoles.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="jobroles">
+                </div>
             </div>
         </div>
         
         <div>
             <label>Notional end level</label>
-            <input type="number" name="notionalEndLevel" placeholder="notionalEndLevel" value="@Model.NotionalEndLevel" />
+            <input class="right" min="0" type="number" name="notionalEndLevel" placeholder="notionalEndLevel" value="@Model.NotionalEndLevel" />
         </div>
 
         <div>
             <label>Standard Pdf Url</label>
-            <textarea class="htmledit" name="standardPdfUrl">
-                @Html.Raw(@Model.StandardPdfUrl)
-            </textarea>
+            <input type="text" class="right pdf-link" name="standardPdfUrl" value="@Model.StandardPdfUrl"/>
         </div>
 
         <div>
             <label>Assessment Plan Pdf Url</label>
-            <textarea class="htmledit" name="assessmentPlanPdfUrl">
-                @Html.Raw(@Model.AssessmentPlanPdfUrl)
-            </textarea>
+            <input type="text" class="right pdf-link" name="assessmentPlanPdfUrl" value="@Model.AssessmentPlanPdfUrl" />
         </div>
 
         <div>
             <label>EntryRequirements</label>
-            <textarea class="htmledit" name="entryrequirements">
-                @Html.Raw(@Model.EntryRequirements)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="entryrequirements">
+                    @Html.Raw(@Model.EntryRequirements)
+                </textarea>
+            </div>
         </div>
         <div>
             <label>ProfessionalRegistration</label>
-            <textarea class="htmledit" name="professionalregistration">
-                @Html.Raw(@Model.ProfessionalRegistration)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit right" name="professionalregistration">
+                    @Html.Raw(@Model.ProfessionalRegistration)
+                </textarea>
+            </div>
         </div>
         <div>
             <label>WhatApprenticesWillLearn</label>
-            <textarea class="htmledit" name="whatApprenticesWillLearn">
-                @Html.Raw(@Model.WhatApprenticesWillLearn)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="whatApprenticesWillLearn">
+                    @Html.Raw(@Model.WhatApprenticesWillLearn)
+                </textarea>
+            </div>
         </div>
         <div>
             <label>Qualifications</label>
-            <textarea class="htmledit" name="qualifications">
-                @Html.Raw(@Model.Qualifications)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="qualifications">
+                    @Html.Raw(@Model.Qualifications)
+                </textarea>
+            </div>
         </div>
         <div>
             <label>OverviewOfRole</label>
+            <div class="right">
             <textarea class="htmledit" name="overviewOfRole">
                 @Html.Raw(@Model.OverviewOfRole)
             </textarea>
+            </div>
         </div>
         <div>
             <label>SectorSubjectAreaTier1</label>
-            <input type="number" name="sectorSubjectAreaTier1" placeholder="sectorSubjectAreaTier1" value="@Model.SectorSubjectAreaTier1">
+            <input class="right" min="0" type="number" name="sectorSubjectAreaTier1" placeholder="sectorSubjectAreaTier1" value="@Model.SectorSubjectAreaTier1">
         </div>
         <div>
             <label>SectorSubjectAreaTier2</label>
-            <input type="number" name="sectorSubjectAreaTier2" placeholder="sectorSubjectAreaTier2" value="@Model.SectorSubjectAreaTier2"/>
+            <input class="right" min="0" type="number" name="sectorSubjectAreaTier2" placeholder="sectorSubjectAreaTier2" value="@Model.SectorSubjectAreaTier2"/>
         </div>
     </form>
 </div>
