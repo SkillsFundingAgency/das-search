@@ -47,6 +47,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _mockHttpGetFile = new Mock<IHttpGetFile>();
             _mockLogger = new Mock<ILog>();
 
+            _mockAppServiceSettings.Setup(m => m.ToggleFilterOnFunding).Returns(true);
+
             _linkEndPoints = new List<string> { "endpoint" };
             _framework = new FrameworkMetaData
             {
