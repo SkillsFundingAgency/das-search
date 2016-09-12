@@ -14,6 +14,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string CsvFileNameLearningDelivery { get; }
 
+        string CsvFileNameFunding { get; }
+
         string GitUsername { get; }
 
         string GitPassword { get; }
@@ -45,5 +47,7 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
         string QueueName(Type type);
 
         string MetadataApiUri { get; }
+
+        bool ToggleFilterOnFunding { get; }
     }
 }

@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
         FrameworkDocument CreateFrameworkDocument(FrameworkMetaData frameworkMetaData);
 
-        int MapLevelProgType(int level);
+        int MapToLevelFromProgType(int level);
 
         StandardProvider CreateStandardProviderDocument(Provider provider, StandardInformation standardInformation, IEnumerable<DeliveryInformation> deliveryInformation);
 
