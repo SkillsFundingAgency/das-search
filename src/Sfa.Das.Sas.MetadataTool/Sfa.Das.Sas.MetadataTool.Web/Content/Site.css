@@ -9,6 +9,11 @@ a {
     word-break: break-all;
 }
 
+input.long {
+    max-width: 500px;
+    width: 500px;
+}
+
 .btn-primary {
     color: #000;
     background-color: #4285f4;
@@ -109,6 +114,7 @@ option {
 .edit input[type=text] {
     padding: 5px;
     border-radius: 7px;
+    margin-bottom: 10px;
 }
 
 .edit input[type=number] {
@@ -136,6 +142,14 @@ option {
     display: inline-block;
     width: 30px;
     height: 30px;
+}
+
+.list .entry {
+    display: table;
+}
+
+.list .entry a {
+    margin: 5px 8px 5px 0;  
 }
 
 .entry a:hover {
@@ -201,6 +215,36 @@ option {
 }
 
 
+#jobroles-property .actions {
+    float: left;
+    margin-left: -20px;
+    margin-top: 8px;
+    padding-right: 10px;
+    display: none;
+}
+
+#jobroles-property:hover .actions {
+    display: inline;
+}
+
+#jobroles-property .fields > input {
+    margin-bottom: 0;
+}
+
+#jobroles-property .fields input:last-child{
+    margin-bottom: 5px; 
+}
+
+#jobroles-property .fields input{
+    border-style: solid;
+    border-color: white;
+}
+
+#jobroles-property .fields input:hover, #jobroles-property .fields input:focus{
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+}
 /* Framework details */
 
 .framework-details .top > div, .standard-details .top > div {

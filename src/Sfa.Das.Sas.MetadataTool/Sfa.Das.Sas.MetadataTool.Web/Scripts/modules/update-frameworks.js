@@ -34,6 +34,16 @@
             }
         });
 
+        $("#jobrole-template .edit").on('click', function () {
+            var val = $(this).attr('data-value');
+            var jsons = JSON.parse($(container).attr("data-json"));
+            var selectedItem = jsons[val];
+            var newValues = jsons.filter(function (x) { return x !== selectedItem });
+
+            $(container).attr('data-json', JSON.stringify(newValues));
+            render();
+        });
+
         $('#jobroles-title').keypress(function(e) {
             if (e.which === 13) {
                 e.preventDefault();
