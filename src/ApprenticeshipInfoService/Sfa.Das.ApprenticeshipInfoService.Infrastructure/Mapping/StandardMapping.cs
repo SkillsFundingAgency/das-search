@@ -24,5 +24,16 @@
                 OverviewOfRole = document.OverviewOfRole
             };
         }
+
+        public StandardSummary MapToStandardSummary(StandardSearchResultsItem document)
+        {
+            return new StandardSummary
+            {
+                Id = document.StandardId,
+                Title = document.Title,
+                Level = document.Level,
+                TypicalLength = document.TypicalLength,
+            };
+        }
     }
 }

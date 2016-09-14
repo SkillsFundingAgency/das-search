@@ -30,5 +30,22 @@
 
             return framework;
         }
+
+        public FrameworkSummary MapToFrameworkSummary(FrameworkSearchResultsItem document)
+        {
+            var framework = new FrameworkSummary
+            {
+                Id = document.FrameworkId,
+                Title = document.Title,
+                Level = document.Level,
+                FrameworkCode = document.FrameworkCode,
+                FrameworkName = document.FrameworkName,
+                PathwayCode = document.PathwayCode,
+                PathwayName = document.PathwayName,
+                TypicalLength = document.TypicalLength,
+            };
+
+            return framework;
+        }
     }
 }

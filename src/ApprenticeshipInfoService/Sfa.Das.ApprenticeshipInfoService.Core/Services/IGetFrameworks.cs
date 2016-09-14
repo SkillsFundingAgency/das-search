@@ -5,6 +5,8 @@
 
     public interface IGetFrameworks
     {
+        IEnumerable<FrameworkSummary> GetAllFrameworks();
+
         Framework GetFrameworkById(int id);
     }
 }

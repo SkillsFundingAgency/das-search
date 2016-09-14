@@ -5,5 +5,7 @@
     public interface IFrameworkMapping
     {
         Framework MapToFramework(FrameworkSearchResultsItem document);
+
+        FrameworkSummary MapToFrameworkSummary(FrameworkSearchResultsItem document);
     }
 }

@@ -5,5 +5,7 @@
     public interface IStandardMapping
     {
         Standard MapToStandard(StandardSearchResultsItem document);
+
+        StandardSummary MapToStandardSummary(StandardSearchResultsItem document);
     }
 }

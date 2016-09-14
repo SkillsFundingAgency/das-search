@@ -1,4 +1,10 @@
-﻿using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+﻿using System;
+using System.Linq;
+using System.Net.Http;
+using System.Web;
+using System.Web.Mvc;
+using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models;
 using Sfa.Das.ApprenticeshipInfoService.Core.Services;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
@@ -11,19 +17,54 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
     public class FrameworkController : ApiController
     {
         private readonly IGetFrameworks _getFrameworks;
+        private readonly IControllerHelper _controllerHelper;
 
-        public FrameworkController(IGetFrameworks getFrameworks)
+        public FrameworkController(IGetFrameworks getFrameworks,
+            IControllerHelper controllerHelper)
         {
             _getFrameworks = getFrameworks;
+            _controllerHelper = controllerHelper;
+        }
+
+        // GET api/values
+        [SwaggerOperation("GetAll")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public IEnumerable<FrameworkSummary> Get()
+        {
+            return _getFrameworks.GetAllFrameworks();
         }
 
         // GET api/values/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public Framework Get(int id)
+        public IEnumerable<FrameworkSummary> GetFramework(int id)
         {
-            return _getFrameworks.GetFrameworkById(id);
+            var response = _getFrameworks.GetAllFrameworks().ToList();
+
+            foreach (var item in response)
+            {
+                item.Uri = Resolve(item.Id);
+            }
+
+            return response;
+        }
+
+        // HEAD api/values/5
+        public void Head(int id)
+        {
+            if (_getFrameworks.GetFrameworkById(id) != null)
+            {
+                return;
+            }
+
+            throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
+
+        private string Resolve(int id)
+        {
+            return Url.Link("DefaultApi", new { controller = "Framework", id = id });
         }
     }
 }
