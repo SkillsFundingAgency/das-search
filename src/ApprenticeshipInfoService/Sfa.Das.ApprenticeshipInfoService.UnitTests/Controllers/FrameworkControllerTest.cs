@@ -28,10 +28,11 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var frameworkListResponse = sc.Get();
 
             frameworkListResponse.Should().NotBeNull();
+            frameworkListResponse.Should().BeOfType<List<FrameworkSummary>>();
         }
 
         [Test]
-        public void GetAllShouldReturnValidFramework()
+        public void GetByIdShouldReturnValidFramework()
         {
             var mockGetFrameworks = new Mock<IGetFrameworks>();
             var mockHelper = new Mock<IControllerHelper>();
@@ -43,6 +44,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var frameworkResponse = sc.GetFramework(1);
 
             frameworkResponse.Should().NotBeNull();
+            frameworkResponse.Should().BeOfType<Framework>();
+
         }
     }
 }

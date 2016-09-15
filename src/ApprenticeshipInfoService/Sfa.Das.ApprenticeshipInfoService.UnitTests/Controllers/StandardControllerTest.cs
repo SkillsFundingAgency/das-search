@@ -27,6 +27,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var standardListResponse = sc.Get();
 
             standardListResponse.Should().NotBeNull();
+            standardListResponse.Should().BeOfType<List<StandardSummary>>();
+
         }
 
         [Test]
@@ -42,6 +44,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var standardResponse = sc.GetStandard(1);
 
             standardResponse.Should().NotBeNull();
+            standardResponse.Should().BeOfType<Standard>();
         }
     }
 }

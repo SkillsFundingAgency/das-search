@@ -39,16 +39,15 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public IEnumerable<FrameworkSummary> GetFramework(int id)
+        public Framework GetFramework(int id)
         {
-            var response = _getFrameworks.GetAllFrameworks().ToList();
-
-            foreach (var item in response)
+            var response = _getFrameworks.GetFrameworkById(id);
+            if (response != null)
             {
-                item.Uri = Resolve(item.Id);
+                return response;
             }
 
-            return response;
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         // HEAD api/values/5
