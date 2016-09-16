@@ -1,22 +1,31 @@
 ﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
-    using System.Web.Http;
+    using System.Linq;
+    using System.Web.Mvc;
     using Health;
-    using Health.Elasticsearch;
+    using Newtonsoft.Json;
 
-    public class HealthController : ApiController
+    public class HealthController : Controller
     {
-        private readonly IElasticsearchService _elasticsearchService;
+        private readonly IHealthService _healthService;
 
-        public HealthController(IElasticsearchService elasticsearchService)
+        public HealthController(IHealthService healthService)
         {
-            _elasticsearchService = elasticsearchService;
+            _healthService = healthService;
         }
 
-        // GET: Health
-        public HealthModel Get()
+        // GET: Health2
+        [OutputCache(Duration = 10)]
+        public ActionResult Index()
         {
-            return _elasticsearchService.GetHealth();
+            var hej = _healthService.CreateModel();
+
+            if (Request.AcceptTypes.Contains("application/json"))
+            {
+                return Content(JsonConvert.SerializeObject(hej));
+            }
+
+            return this.View(hej);
         }
     }
 }

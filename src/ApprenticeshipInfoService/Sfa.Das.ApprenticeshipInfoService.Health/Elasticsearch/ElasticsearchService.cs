@@ -11,15 +11,20 @@
     using Core.Logging;
     using Models;
 
+    using Health.Models;
+
     public class ElasticsearchService : IElasticsearchService
     {
         private readonly IHealthSettings _healthSettings;
 
+        private readonly IHttpServer _httpServer;
+
         private readonly ILog _logger;
 
-        public ElasticsearchService(IHealthSettings healthSettings, ILog logger)
+        public ElasticsearchService(IHealthSettings healthSettings, IHttpServer httpServer, ILog logger)
         {
             _healthSettings = healthSettings;
+            _httpServer = httpServer;
             _logger = logger;
         }
 
@@ -35,16 +40,17 @@
 
             var model = new HealthModel
             {
-                ElasticSearchAliases = aliases,
                 Errors = messages,
                 Status = messages.Any() ? Status.Error : Status.Ok,
-                ElasticsearchLog = GetErrorLogs(_healthSettings.ElasticsearchUrls, _healthSettings.Environment)
+                ElasticSearchAliases = aliases,
+                ElasticsearchLog = GetErrorLogs(_healthSettings.ElasticsearchUrls, _healthSettings.Environment),
+                LarsZipFileStatus = _httpServer.ResponseCode(_healthSettings.LarsZipFileUrl)
             };
 
             return model;
         }
 
-        private ElasticsearchLog GetErrorLogs(IEnumerable<Uri> uriStrings, string environment)
+        public ElasticsearchLog GetErrorLogs(IEnumerable<Uri> uriStrings, string environment)
         {
             var connectionSettings = new ConnectionSettings(new StaticConnectionPool(uriStrings));
             connectionSettings.DisableDirectStreaming();
@@ -81,7 +87,7 @@
             };
         }
 
-        private ElasticsearchResponse GetElasticHealth(IEnumerable<Uri> uris, string environment)
+        public ElasticsearchResponse GetElasticHealth(IEnumerable<Uri> uris, string environment)
         {
             try
             {
@@ -110,7 +116,7 @@
             }
             catch (Exception exception)
             {
-                this._logger.Error(exception, "Not able to get aliases");
+                _logger.Error(exception, "Not able to get aliases");
 
                 return new ElasticsearchResponse { ElasticsearchAliases = new List<ElasticsearchAlias>(), Exception = exception };
             }

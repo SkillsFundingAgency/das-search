@@ -1,0 +1,135 @@
+﻿@model Sfa.Das.ApprenticeshipInfoService.Health.Models.HealthModel
+
+@{
+    ViewBag.Title = "Health";
+}
+
+<html>
+<head>
+    <style>  
+        body {
+            background-color: whitesmoke;
+            font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+            color: rgb(0, 0, 0);
+            color: rgba(0, 0, 0, .8);
+        }
+        .container  {
+            width: 1000px;
+            margin: 50px auto;
+            padding: 5px 10px;
+            background-color: white;
+        }
+
+        .container h2 {
+            color: rgb(0,0,0);
+            color: rgba(0,0,0,.8);
+            padding: 10px;
+        }
+
+        .container .status {
+            padding: 20px;
+            min-height: 10px;
+        }
+
+        .container .status > div {
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .container .elasticsearch {
+            padding: 20px;
+            min-height: 10px;
+        }
+
+    dl.table-display {
+        background-color: white;
+        display: table;
+        width: 60%;
+        margin-bottom: 30px;
+    }
+
+    dl.table-display dt {
+	    clear: left;
+	    float: left;
+	    width: 220px;
+	    margin: 0;
+	    padding: 5px;
+	    font-weight: bold;
+    }
+
+    dl.table-display dd {
+	    margin-left: 230px;
+	    padding: 5px;
+    }
+
+    dl.table-display dd.first { border-top: 1px solid #999; }
+
+    .services {
+        padding: 20px;
+    }
+
+    .services > div {
+        padding: 1px;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status">
+            <h2>Health</h2>
+            <div>@Model.Status</div>
+            <div class="messages">
+                @foreach (var message in @Model.Errors)
+            {
+                    <span>
+                        @message
+                    </span>
+                }
+            </div>
+        </div>
+        <div class="elasticsearch">
+                
+            @foreach (var alias in Model.ElasticSearchAliases)
+            {
+                <dl class="table-display">
+                    <dt>Alias name: </dt>
+                    <dd>@alias.AliasName</dd>
+                    <dt>Index name: </dt>
+                    <dd>@alias.IndexName</dd>
+                    <dt>Health: </dt>
+                    <dd>@alias.Health</dd>
+                    <dt>Document count: </dt>
+                    <dd>@alias.DocumentCount</dd>
+                </dl>
+            }
+            <div>
+                <dl class="table-display">
+                    <dt>Elasticsearch error count: </dt>
+                    <dd>@Model.ElasticsearchLog.ErrorCount</dd>
+                    <dt>Messages: </dt>
+                    <dd>
+                        @if (!Model.ElasticsearchLog.LogErrors.Any())
+                        {
+                            <span>No errors</span>
+                        }
+                        @foreach (var messages in Model.ElasticsearchLog.LogErrors)
+                        {
+                            <div>@messages</div>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="services">
+            <dl class="table-display">
+                <dt>LarsZipFileStatus: </dt>
+                <dd>@Model.LarsZipFileStatus</dd>
+                <dt>CourseDirectoryStatus: </dt>
+                <dd>@Model.CourseDirectoryStatus</dd>
+            </dl>
+        </div>
+
+    </div>
+</body>
+</html>

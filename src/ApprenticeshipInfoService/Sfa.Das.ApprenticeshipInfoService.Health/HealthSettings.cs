@@ -9,7 +9,11 @@
     {
         public string Environment => ConfigurationManager.AppSettings["Environment"];
 
-        public IEnumerable<Uri> ElasticsearchUrls => GetElasticSearchIps("ElasticsearchUrl");
+        public IEnumerable<Uri> ElasticsearchUrls => GetElasticSearchIps("ElasticServerUrls");
+
+        public string LarsZipFileUrl => ConfigurationManager.AppSettings["LarsZipFileUrl"];
+
+        public string CourseDirectoryUrl => ConfigurationManager.AppSettings["CourseDirectoryUrl"];
 
         private IEnumerable<Uri> GetElasticSearchIps(string configString)
         {
@@ -23,5 +27,9 @@
         string Environment { get; }
 
         IEnumerable<Uri> ElasticsearchUrls { get; }
+
+        string LarsZipFileUrl { get; }
+
+        string CourseDirectoryUrl { get; }
     }
 }

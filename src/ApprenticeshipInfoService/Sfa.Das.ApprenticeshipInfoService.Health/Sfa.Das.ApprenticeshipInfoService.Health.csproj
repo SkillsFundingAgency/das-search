@@ -59,11 +59,17 @@
   <ItemGroup>
     <Compile Include="Elasticsearch\Models\ElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\Models\ElasticsearchLogHit.cs" />
+    <Compile Include="HealthService.cs" />
     <Compile Include="HealthSettings.cs" />
     <Compile Include="DependencyResolution\HealthRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchService.cs" />
     <Compile Include="Elasticsearch\IElasticsearchService.cs" />
-    <Compile Include="HealthModel.cs" />
+    <Compile Include="Models\ElasticsearchAlias.cs" />
+    <Compile Include="Models\ElasticsearchLog.cs" />
+    <Compile Include="Models\HealthModel.cs" />
+    <Compile Include="HttpService.cs" />
+    <Compile Include="IHealthService.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
