@@ -21,15 +21,4 @@
             return urlStrings.Select(url => new Uri(url));
         }
     }
-
-    public interface IHealthSettings
-    {
-        string Environment { get; }
-
-        IEnumerable<Uri> ElasticsearchUrls { get; }
-
-        string LarsZipFileUrl { get; }
-
-        string CourseDirectoryUrl { get; }
-    }
 }

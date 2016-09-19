@@ -39,17 +39,7 @@
             {
                 client.OpenRead(url);
                 return client.ResponseHeaders.GetValues("Status Code")?.FirstOrDefault();
-                //return client.DownloadString(url);
             }
         }
-    }
-
-    public interface IHttpServer
-    {
-        string ResponseCode(string url);
-
-        string Ping(string url);
-
-        string GetData(string url);
     }
 }

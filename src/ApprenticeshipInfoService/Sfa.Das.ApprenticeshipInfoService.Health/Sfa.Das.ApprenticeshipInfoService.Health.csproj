@@ -64,6 +64,8 @@
     <Compile Include="DependencyResolution\HealthRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchService.cs" />
     <Compile Include="Elasticsearch\IElasticsearchService.cs" />
+    <Compile Include="IHealthSettings.cs" />
+    <Compile Include="IHttpServer.cs" />
     <Compile Include="Models\ElasticsearchAlias.cs" />
     <Compile Include="Models\ElasticsearchLog.cs" />
     <Compile Include="Models\HealthModel.cs" />

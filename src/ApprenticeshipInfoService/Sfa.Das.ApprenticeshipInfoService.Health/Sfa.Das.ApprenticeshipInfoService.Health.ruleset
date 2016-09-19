@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for Sfa.Das.ApprenticeshipInfoService.Infrastructure" Description="Code analysis rules for Sfa.Das.ApprenticeshipInfoService.Infrastructure.csproj." ToolsVersion="14.0">
-  <Include Path="..\..\..\..\..\vsts\das\src\sfa.eds.das.ruleset" Action="Default" />
+<RuleSet Name="Rules for Sfa.Das.ApprenticeshipInfoService.Health" Description="Code analysis rules for Sfa.Das.ApprenticeshipInfoService.Health.csproj." ToolsVersion="14.0">
+  <Include Path="..\..\sfa.eds.das.ruleset" Action="Default" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Warning" />
     <Rule Id="CA1009" Action="Warning" />

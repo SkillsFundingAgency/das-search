@@ -14,8 +14,6 @@
             _healthService = healthService;
         }
 
-        // GET: Health2
-        [OutputCache(Duration = 10)]
         public ActionResult Index()
         {
             var hej = _healthService.CreateModel();
