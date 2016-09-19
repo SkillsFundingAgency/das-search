@@ -1,56 +1,54 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using Sfa.Das.Sas.ApplicationServices.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Nest;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Core.Logging;
+using Sfa.Das.Sas.Infrastructure.Mapping;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
-    using System;
-    using System.Linq;
-
-    using Nest;
-
-    using Sfa.Das.Sas.ApplicationServices;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Core.Logging;
-    using Sfa.Das.Sas.Infrastructure.Mapping;
-
-    public sealed class StandardRepository : IGetStandards
+    public sealed class StandardElasticRepository : IGetStandards
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
-        private readonly IHttpGet _httpService;
 
-        public StandardRepository(
+        public StandardElasticRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IStandardMapping standardMapping,
-            IHttpGet httpService)
+            IStandardMapping standardMapping)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
-            _httpService = httpService;
         }
 
         public Standard GetStandardById(int id)
         {
-            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Standard/", id);
+            var results =
+                _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
+                    s =>
+                    s.Index(_applicationSettings.ApprenticeshipIndexAlias)
+                        .Type(Types.Parse("standarddocument"))
+                        .From(0)
+                        .Size(1)
+                        .Query(q => q.QueryString(qs => qs.Fields(fs => fs.Field(e => e.StandardId)).Query(id.ToString()))));
 
-            var result = JsonConvert.DeserializeObject<StandardSearchResultsItem>(_httpService.Get(url, null, null));
-
-            if (result == null)
+            if (results.ApiCall.HttpStatusCode != 200)
             {
-                throw new ApplicationException($"Failed to get standard with id {id}");
+                throw new ApplicationException($"Failed query standard with id {id}");
             }
 
-            return _standardMapping.MapToStandard(result);
+            var document = results.Documents.Any() ? results.Documents.First() : null;
+
+            return document != null ? _standardMapping.MapToStandard(document) : null;
         }
 
         // TODO: Review this for performance againt using filters instead
@@ -60,7 +58,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             if (!standardIds.Any())
             {
-                 return new List<Standard>();
+                return new List<Standard>();
             }
 
             var queryString = standardIds.Select(x => x.ToString()).Aggregate((x1, x2) => x1 + " OR " + x2);
