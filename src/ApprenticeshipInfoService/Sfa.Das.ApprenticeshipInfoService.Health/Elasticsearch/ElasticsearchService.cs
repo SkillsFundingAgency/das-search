@@ -13,18 +13,16 @@
 
     using Health.Models;
 
-    public class ElasticsearchService : IElasticsearchService
+    public class ElasticsearchHealthHealthService : IElasticsearchHealthService
     {
         private readonly IHealthSettings _healthSettings;
 
-        private readonly IHttpServer _httpServer;
 
         private readonly ILog _logger;
 
-        public ElasticsearchService(IHealthSettings healthSettings, IHttpServer httpServer, ILog logger)
+        public ElasticsearchHealthHealthService(IHealthSettings healthSettings, ILog logger)
         {
             _healthSettings = healthSettings;
-            _httpServer = httpServer;
             _logger = logger;
         }
 
@@ -44,7 +42,6 @@
                 Status = messages.Any() ? Status.Error : Status.Ok,
                 ElasticSearchAliases = aliases,
                 ElasticsearchLog = GetErrorLogs(_healthSettings.ElasticsearchUrls, _healthSettings.Environment),
-                LarsZipFileStatus = _httpServer.ResponseCode(_healthSettings.LarsZipFileUrl)
             };
 
             return model;
@@ -56,7 +53,7 @@
             connectionSettings.DisableDirectStreaming();
             var elasticClient = new ElasticClient(connectionSettings);
 
-            var hej = DateMath.Now.Subtract(new Time(new TimeSpan(1, 0, 0, 0)));
+            var oneDayAgo = DateMath.Now.Subtract(new Time(new TimeSpan(1, 0, 0, 0)));
             var result = elasticClient.Search<ElasticsearchLogHit>(
                 s => s
                 .Index("logstash-*")
@@ -76,7 +73,7 @@
                                 .Field("Environment")
                                 .Query(environment))
                              , bs2 => bs2
-                             .DateRange(r => r.GreaterThan(hej).Field("@timestamp")))
+                             .DateRange(r => r.GreaterThan(oneDayAgo).Field("@timestamp")))
                       )
                   )
                 );

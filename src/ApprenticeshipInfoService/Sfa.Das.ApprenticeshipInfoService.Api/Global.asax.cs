@@ -1,9 +1,8 @@
-﻿using System.Web.Http;
-using System.Web.Routing;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api
 {
+    using System.Web.Http;
     using System.Web.Mvc;
+    using System.Web.Routing;
 
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -13,14 +12,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api
             RegisterRoutes(RouteTable.Routes);
         }
 
-        public static void RegisterRoutes(RouteCollection routes)
+        private static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Health2", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute("Default", "{controller}/{action}/{id}", 
+                new { controller = "Health", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

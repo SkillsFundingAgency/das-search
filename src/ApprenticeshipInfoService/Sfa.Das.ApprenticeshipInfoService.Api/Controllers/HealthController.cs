@@ -16,14 +16,14 @@
 
         public ActionResult Index()
         {
-            var hej = _healthService.CreateModel();
+            var viewModel = _healthService.CreateModel();
 
             if (Request.AcceptTypes.Contains("application/json"))
             {
-                return Content(JsonConvert.SerializeObject(hej));
+                return Content(JsonConvert.SerializeObject(viewModel));
             }
 
-            return this.View(hej);
+            return this.View(viewModel);
         }
     }
 }

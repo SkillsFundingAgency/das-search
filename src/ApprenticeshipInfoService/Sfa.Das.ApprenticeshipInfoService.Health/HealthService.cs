@@ -9,18 +9,18 @@
 
     public class HealthService : IHealthService
     {
-        private readonly IElasticsearchService _elasticsearchService;
+        private readonly IElasticsearchHealthService _elasticsearchHealthService;
 
         private readonly IHealthSettings _healthSettings;
 
         private readonly IHttpServer _httpServer;
 
         public HealthService(
-            IElasticsearchService elasticsearchService, 
+            IElasticsearchHealthService elasticsearchHealthService, 
             IHealthSettings healthSettings,
             IHttpServer httpServer)
         {
-            _elasticsearchService = elasticsearchService;
+            _elasticsearchHealthService = elasticsearchHealthService;
             _healthSettings = healthSettings;
             _httpServer = httpServer;
         }
@@ -28,8 +28,8 @@
         public HealthModel CreateModel()
         {
             var timer = Stopwatch.StartNew();
-            var elasticserachModel = _elasticsearchService.GetElasticHealth(_healthSettings.ElasticsearchUrls, _healthSettings.Environment);
-            var elasticErrorLogs = _elasticsearchService.GetErrorLogs(
+            var elasticserachModel = _elasticsearchHealthService.GetElasticHealth(_healthSettings.ElasticsearchUrls, _healthSettings.Environment);
+            var elasticErrorLogs = _elasticsearchHealthService.GetErrorLogs(
                 _healthSettings.ElasticsearchUrls,
                 _healthSettings.Environment);
 

@@ -6,7 +6,7 @@
 
     using Health.Models;
 
-    public interface IElasticsearchService
+    public interface IElasticsearchHealthService
     {
         ElasticsearchLog GetErrorLogs(IEnumerable<Uri> uriStrings, string environment);
 

@@ -10,7 +10,7 @@
         public HealthRegistry()
         {
             For<IHealthSettings>().Use<HealthSettings>();
-            For<IElasticsearchService>().Use<ElasticsearchService>();
+            For<IElasticsearchHealthService>().Use<ElasticsearchHealthHealthService>();
             For<IHttpServer>().Use<HttpService>();
             For<IHealthService>().Use<HealthService>();
         }
