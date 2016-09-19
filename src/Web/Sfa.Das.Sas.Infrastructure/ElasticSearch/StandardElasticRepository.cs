@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
@@ -15,18 +14,18 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     public sealed class StandardElasticRepository : IGetStandards
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
-        //private readonly ILog _applicationLogger;
+        private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
 
         public StandardElasticRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
-            /*ILog applicationLogger,*/
+            ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IStandardMapping standardMapping)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
-            //_applicationLogger = applicationLogger;
+            _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
         }
