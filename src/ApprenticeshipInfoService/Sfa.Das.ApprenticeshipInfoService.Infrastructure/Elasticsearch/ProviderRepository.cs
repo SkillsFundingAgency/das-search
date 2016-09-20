@@ -36,18 +36,18 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 
         public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon)
         {
-            var standard = _getStandards.GetStandardById(id);
-            var standardName = standard?.Title;
-
             var coordinates = new Coordinate
             {
                 Lat = lat,
                 Lon = lon
             };
 
-            var a = _providerLocationSearchProvider.SearchStandardProviders(id, coordinates);
+            return _providerLocationSearchProvider.SearchStandardProviders(id, coordinates);
+        }
 
-            return a;
+        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon)
+        {
+            throw new NotImplementedException();
         }
     }
 }

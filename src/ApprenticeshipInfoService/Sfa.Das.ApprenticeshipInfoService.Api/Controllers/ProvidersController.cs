@@ -31,5 +31,19 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
             return new List<StandardProviderSearchResultsItem>();
         }
+
+        [SwaggerOperation("GetById")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("api/framework/{id}/providers")]
+        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat, double? lon)
+        {
+            if (lat != null && lon != null)
+            {
+                return _getProviders.GetByFrameworkIdAndLocation(id, (double)lat, (double)lon);
+            }
+
+            return new List<FrameworkProviderSearchResultsItem>();
+        }
     }
 }
