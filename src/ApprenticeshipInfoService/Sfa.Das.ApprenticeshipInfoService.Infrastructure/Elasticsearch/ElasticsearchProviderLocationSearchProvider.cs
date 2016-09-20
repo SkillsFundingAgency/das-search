@@ -1,0 +1,138 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+using Nest;
+using Sfa.Das.ApprenticeshipInfoService.Core.Configuration;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
+{
+    public class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
+    {
+        private readonly IConfigurationSettings _applicationSettings;
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
+        private const string TrainingTypeAggregateName = "training_type";
+        private const string NationalProviderAggregateName = "national_provider";
+
+        public ElasticsearchProviderLocationSearchProvider(IConfigurationSettings applicationSettings, IElasticsearchCustomClient elasticsearchCustomClient)
+        {
+            _applicationSettings = applicationSettings;
+            _elasticsearchCustomClient = elasticsearchCustomClient;
+        }
+
+        public List<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates)
+        {
+            var qryStr = CreateStandardProviderSearchQuery(standardId.ToString(), coordinates);
+            return PerformStandardProviderSearchWithQuery(qryStr);
+        }
+
+        private SearchDescriptor<StandardProviderSearchResultsItem> CreateStandardProviderSearchQuery(string standardId, Coordinate coordinates)
+        {
+            return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates);
+        }
+
+        private List<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(SearchDescriptor<StandardProviderSearchResultsItem> qryStr)
+        {
+            var take = 10; // take all
+
+            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
+            {
+                return new List<StandardProviderSearchResultsItem>();
+            }
+
+            return results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
+        }
+
+        private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var descriptor =
+                new SearchDescriptor<T>()
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .Type(Types.Parse("standardprovider"))
+                    .Size(1000)
+                    .Query(q => q
+                        .Bool(ft => ft
+                            .Filter(FilterByApprenticeshipId(selector, code))
+                            .Must(NestedLocationsQuery<T>(location))))
+                    .Sort(SortByDistanceFromGivenLocation<T>(location));
+
+            return descriptor;
+        }
+
+        private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByApprenticeshipId<T>(Expression<Func<T, object>> selector, string apprenticeshipIdentifier)
+            where T : class
+        {
+            return f => f.Term(t => t.Field(selector).Value(apprenticeshipIdentifier));
+        }
+
+        private Func<QueryContainerDescriptor<T>, QueryContainer> NestedLocationsQuery<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.Nested(n => n
+                .InnerHits(h => h
+                    .Size(1)
+                    .Sort(NestedSortByDistanceFromGivenLocation<T>(location)))
+                .Path(p => p.TrainingLocations)
+                .Query(q => q
+                    .Bool(b => b
+                        .Filter(FilterByLocation<T>(location)))));
+        }
+
+        private static Func<SortDescriptor<T>, IPromise<IList<ISort>>> NestedSortByDistanceFromGivenLocation<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.GeoDistance(g => g
+                .Field(fd => fd.TrainingLocations.First().LocationPoint)
+                .PinTo(new GeoLocation(location.Lat, location.Lon))
+                .Unit(DistanceUnit.Miles)
+                .Ascending());
+        }
+
+        private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByLocation<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.GeoShapePoint(gp => gp.Field(fd => fd.TrainingLocations.First().Location).Coordinates(location.Lon, location.Lat));
+        }
+
+        private static Func<SortDescriptor<T>, IPromise<IList<ISort>>> SortByDistanceFromGivenLocation<T>(Coordinate location)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            return f => f.GeoDistance(g => g
+                .NestedPath(x => x.TrainingLocations)
+                .Field(fd => fd.TrainingLocations.First().LocationPoint)
+                .PinTo(new GeoLocation(location.Lat, location.Lon))
+                .Unit(DistanceUnit.Miles)
+                .Ascending());
+        }
+
+        private static StandardProviderSearchResultsItem MapToStandardProviderSearchResultsItem(IHit<StandardProviderSearchResultsItem> hit)
+        {
+            return new StandardProviderSearchResultsItem
+            {
+                Ukprn = hit.Source.Ukprn,
+                ContactUsUrl = hit.Source.ContactUsUrl,
+                DeliveryModes = hit.Source.DeliveryModes,
+                Email = hit.Source.Email,
+                EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
+                LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
+                OverallAchievementRate = hit.Source.OverallAchievementRate,
+                ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
+                ProviderName = hit.Source.ProviderName,
+                Phone = hit.Source.Phone,
+                StandardCode = hit.Source.StandardCode,
+                ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
+                Website = hit.Source.Website,
+                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                TrainingLocations = hit.Source.TrainingLocations,
+                MatchingLocationId = hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId,
+                NationalProvider = hit.Source.NationalProvider
+            };
+        }
+    }
+}

@@ -18,9 +18,10 @@
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IGetStandards>().Use<StandardRepository>();
             For<IGetFrameworks>().Use<FrameworkRepository>();
+            For<IGetProviders>().Use<ProviderRepository>();
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
-            //For<IProviderMapping>().Use<ProviderMapping>();
+            For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
         }
     }

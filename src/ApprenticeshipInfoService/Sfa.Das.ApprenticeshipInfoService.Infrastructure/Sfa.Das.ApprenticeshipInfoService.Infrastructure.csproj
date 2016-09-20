@@ -95,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
+    <Compile Include="Elasticsearch\IProviderLocationSearchProvider.cs" />
+    <Compile Include="Elasticsearch\ProviderRepository.cs" />
     <Compile Include="Elasticsearch\StandardRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
