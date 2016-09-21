@@ -18,11 +18,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void GetAllShouldReturnValidListOfStandards()
         {
             var mockGetStandards = new Mock<IGetStandards>();
-            var mockHelper = new Mock<IControllerHelper>();
 
             mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<StandardSummary>());
 
-            StandardsController sc = new StandardsController(mockGetStandards.Object, mockHelper.Object);
+            StandardsController sc = new StandardsController(mockGetStandards.Object);
 
             var standardListResponse = sc.Get();
 
@@ -35,11 +34,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void GetAllShouldReturnValidStandard()
         {
             var mockGetStandards = new Mock<IGetStandards>();
-            var mockHelper = new Mock<IControllerHelper>();
 
             mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
 
-            StandardsController sc = new StandardsController(mockGetStandards.Object, mockHelper.Object);
+            StandardsController sc = new StandardsController(mockGetStandards.Object);
 
             var standardResponse = sc.GetStandard(1);
 

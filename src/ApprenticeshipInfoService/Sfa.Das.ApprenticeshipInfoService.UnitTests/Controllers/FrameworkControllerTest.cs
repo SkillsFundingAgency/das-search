@@ -19,11 +19,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void GetAllShouldReturnValidListOfFrameworks()
         {
             var mockGetFrameworks = new Mock<IGetFrameworks>();
-            var mockHelper = new Mock<IControllerHelper>();
 
             mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<FrameworkSummary>());
 
-            FrameworksController sc = new FrameworksController(mockGetFrameworks.Object, mockHelper.Object);
+            FrameworksController sc = new FrameworksController(mockGetFrameworks.Object);
 
             var frameworkListResponse = sc.Get();
 
@@ -35,11 +34,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void GetByIdShouldReturnValidFramework()
         {
             var mockGetFrameworks = new Mock<IGetFrameworks>();
-            var mockHelper = new Mock<IControllerHelper>();
 
             mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(new Framework());
 
-            FrameworksController sc = new FrameworksController(mockGetFrameworks.Object, mockHelper.Object);
+            FrameworksController sc = new FrameworksController(mockGetFrameworks.Object);
 
             var frameworkResponse = sc.GetFramework(1);
 
