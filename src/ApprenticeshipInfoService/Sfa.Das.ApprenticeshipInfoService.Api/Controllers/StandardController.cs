@@ -1,7 +1,10 @@
 ﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Net;
+    using System.Web;
     using System.Web.Http;
+    using System.Web.Mvc;
+
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -21,7 +24,14 @@
         [SwaggerResponse(HttpStatusCode.NotFound)]
         public Standard Get(int id)
         {
-            return _getStandards.GetStandardById(id);
+            var standard = _getStandards.GetStandardById(id);
+
+            if (standard == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return standard;
         }
     }
 }

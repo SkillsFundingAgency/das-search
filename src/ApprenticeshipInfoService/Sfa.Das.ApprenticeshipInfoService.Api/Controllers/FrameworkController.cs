@@ -1,11 +1,9 @@
-﻿using Sfa.Das.ApprenticeshipInfoService.Core.Models;
-using Sfa.Das.ApprenticeshipInfoService.Core.Services;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
-    using System.Collections.Generic;
     using System.Net;
     using System.Web.Http;
+    using Core.Models;
+    using Core.Services;
     using Swashbuckle.Swagger.Annotations;
 
     public class FrameworkController : ApiController
@@ -23,7 +21,13 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.NotFound)]
         public Framework Get(int id)
         {
-            return _getFrameworks.GetFrameworkById(id);
+            var framework = _getFrameworks.GetFrameworkById(id);
+            if (framework == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return framework;
         }
     }
 }
