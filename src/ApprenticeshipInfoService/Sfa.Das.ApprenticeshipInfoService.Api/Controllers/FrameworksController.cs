@@ -23,7 +23,14 @@
         [SwaggerResponse(HttpStatusCode.NotFound)]
         public IEnumerable<FrameworkSummary> Get()
         {
-            return _getFrameworks.GetAllFrameworks();
+            var response = _getFrameworks.GetAllFrameworks();
+
+            foreach (var item in response)
+            {
+                item.Uri = Resolve(item.Id);
+            }
+
+            return response;
         }
 
         // GET api/values/5

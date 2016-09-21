@@ -52,8 +52,6 @@
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="Models\FrameworkSummary.cs" />
-    <Compile Include="Models\StandardListResponse.cs" />
-    <Compile Include="Models\FrameworkListResponse.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\StandardSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
