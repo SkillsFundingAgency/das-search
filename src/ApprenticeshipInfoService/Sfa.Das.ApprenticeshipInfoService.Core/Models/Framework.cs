@@ -7,6 +7,8 @@
     {
         public int FrameworkId { get; set; }
 
+        public string Uri { get; set; }
+
         public string Title { get; set; }
 
         public string FrameworkName { get; set; }

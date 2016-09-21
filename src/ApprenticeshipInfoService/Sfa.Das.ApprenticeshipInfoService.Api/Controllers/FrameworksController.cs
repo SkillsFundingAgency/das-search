@@ -17,7 +17,7 @@
             _getFrameworks = getFrameworks;
         }
 
-        // GET api/values
+        // GET /frameworks
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
@@ -33,7 +33,7 @@
             return response;
         }
 
-        // GET api/values/5
+        // GET /frameworks/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
@@ -42,13 +42,14 @@
             var response = _getFrameworks.GetFrameworkById(id);
             if (response != null)
             {
+                response.Uri = Resolve(response.FrameworkId);
                 return response;
             }
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        // HEAD api/values/5
+        // HEAD /frameworks/5
         public void Head(int id)
         {
             if (_getFrameworks.GetFrameworkById(id) != null)

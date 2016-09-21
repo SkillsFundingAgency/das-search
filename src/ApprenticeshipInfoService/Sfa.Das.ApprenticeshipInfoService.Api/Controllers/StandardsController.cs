@@ -18,7 +18,7 @@
             _getStandards = getStandards;
         }
 
-        // GET api/values?take&page
+        // GET /standards
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
@@ -34,7 +34,7 @@
             return response;
         }
 
-        // GET api/values/5
+        // GET /standards/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
@@ -43,13 +43,14 @@
             var standard = _getStandards.GetStandardById(id);
             if (standard != null)
             {
+                standard.Uri = Resolve(standard.StandardId);
                 return standard;
             }
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        // HEAD api/values/5
+        // HEAD /standards/5
         public void Head(int id)
         {
             if (_getStandards.GetStandardById(id) != null)
