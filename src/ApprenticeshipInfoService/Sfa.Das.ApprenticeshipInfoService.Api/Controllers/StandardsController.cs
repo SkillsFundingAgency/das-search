@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Policy;
-using System.Web.Http.Routing;
-using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Web.Http;
+    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
 
-    public class StandardController : ApiController
+    public class StandardsController : ApiController
     {
         private readonly IGetStandards _getStandards;
-        private readonly IControllerHelper _controllerHelper;
 
-        public StandardController(IGetStandards getStandards,
-            IControllerHelper controllerHelper)
+        public StandardsController(IGetStandards getStandards)
         {
             _getStandards = getStandards;
-            _controllerHelper = controllerHelper;
         }
 
         // GET api/values?take&page
@@ -70,7 +62,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
         private string Resolve(int id)
         {
-            return Url.Link("DefaultApi", new { controller = "Standard", id = id });
+            return Url.Link("DefaultApi", new { controller = "Standards", id = id });
         }
     }
 }

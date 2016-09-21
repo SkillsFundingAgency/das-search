@@ -1,29 +1,20 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Web;
-using System.Web.Mvc;
-using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
-using Sfa.Das.ApprenticeshipInfoService.Core.Models;
-using Sfa.Das.ApprenticeshipInfoService.Core.Services;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
     using System.Net;
     using System.Web.Http;
+    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
 
-    public class FrameworkController : ApiController
+    public class FrameworksController : ApiController
     {
         private readonly IGetFrameworks _getFrameworks;
-        private readonly IControllerHelper _controllerHelper;
 
-        public FrameworkController(IGetFrameworks getFrameworks,
-            IControllerHelper controllerHelper)
+        public FrameworksController(IGetFrameworks getFrameworks)
         {
             _getFrameworks = getFrameworks;
-            _controllerHelper = controllerHelper;
         }
 
         // GET api/values
@@ -63,7 +54,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
         private string Resolve(int id)
         {
-            return Url.Link("DefaultApi", new { controller = "Framework", id = id });
+            return Url.Link("DefaultApi", new { controller = "Frameworks", id = id });
         }
     }
 }

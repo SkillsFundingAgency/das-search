@@ -23,7 +23,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 
             mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<FrameworkSummary>());
 
-            FrameworkController sc = new FrameworkController(mockGetFrameworks.Object, mockHelper.Object);
+            FrameworksController sc = new FrameworksController(mockGetFrameworks.Object, mockHelper.Object);
 
             var frameworkListResponse = sc.Get();
 
@@ -39,7 +39,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 
             mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<int>())).Returns(new Framework());
 
-            FrameworkController sc = new FrameworkController(mockGetFrameworks.Object, mockHelper.Object);
+            FrameworksController sc = new FrameworksController(mockGetFrameworks.Object, mockHelper.Object);
 
             var frameworkResponse = sc.GetFramework(1);
 

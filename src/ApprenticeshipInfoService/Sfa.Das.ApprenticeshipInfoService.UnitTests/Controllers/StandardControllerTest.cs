@@ -22,7 +22,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 
             mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<StandardSummary>());
 
-            StandardController sc = new StandardController(mockGetStandards.Object, mockHelper.Object);
+            StandardsController sc = new StandardsController(mockGetStandards.Object, mockHelper.Object);
 
             var standardListResponse = sc.Get();
 
@@ -39,7 +39,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 
             mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>())).Returns(new Standard());
 
-            StandardController sc = new StandardController(mockGetStandards.Object, mockHelper.Object);
+            StandardsController sc = new StandardsController(mockGetStandards.Object, mockHelper.Object);
 
             var standardResponse = sc.GetStandard(1);
 
