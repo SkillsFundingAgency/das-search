@@ -13,15 +13,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            //config.Routes.MapHttpRoute("DefaultApiWithAction", "api/{controller}/{action}");
 
-            //config.Routes.MapHttpRoute(
-            //    name: "FrameworkGetAll",
-            //    routeTemplate: "api/{controller}")
-            //    ;
-            //config.Routes.MapHttpRoute(
-            //    name: "FrameworkGetById",
-            //    routeTemplate: "api/{controller}/{id}");
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
