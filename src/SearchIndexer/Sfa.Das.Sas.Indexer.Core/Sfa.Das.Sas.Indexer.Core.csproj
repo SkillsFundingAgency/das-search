@@ -53,6 +53,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\Metrics\ExecutionTimer.cs" />
     <Compile Include="Logging\Metrics\ExecutionTimerResult{T}.cs" />
+    <Compile Include="Logging\Models\DependencyLogEntry.cs" />
     <Compile Include="Logging\Models\ElasticSearchLogEntry.cs" />
     <Compile Include="Logging\Models\ILogEntry.cs" />
     <Compile Include="Logging\Models\TimingLogEntry.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Models\Framework\FrameworkComponentTypeMetaData.cs" />
     <Compile Include="Models\Framework\FrameworkMetaData.cs" />
     <Compile Include="Models\Framework\FrameworkQualification.cs" />
+    <Compile Include="Models\Framework\FundingMetaData.cs" />
     <Compile Include="Models\Framework\LearningDeliveryMetaData.cs" />
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\Provider\Address.cs" />

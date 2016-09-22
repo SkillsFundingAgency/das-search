@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using Newtonsoft.Json;
-using Sfa.Das.Sas.Indexer.ApplicationServices.Http;
-using Sfa.Das.Sas.Indexer.ApplicationServices.Settings;
-using Sfa.Das.Sas.Indexer.Core.Logging;
-using Sfa.Das.Sas.Tools.MetaDataCreationTool.Models.Git;
-using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
-
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
-    using Sfa.Das.Sas.Indexer.Core.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Indexer.ApplicationServices.MetaData;
+    using Indexer.ApplicationServices.Settings;
+    using Indexer.Core.Logging;
+    using Indexer.Core.Models;
+    using Interfaces;
+    using Models.Git;
+    using Newtonsoft.Json;
 
     public class VstsService : IVstsService
     {
@@ -23,7 +19,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
         private readonly IJsonMetaDataConvert _jsonMetaDataConvert;
 
-        private readonly IHttpGet _httpHelper;
+        private readonly IVstsClient _vstsClient;
 
         private readonly ILog _logger;
 
@@ -31,13 +27,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             IAppServiceSettings appServiceSettings,
             IGitDynamicModelGenerator gitDynamicModelGenerator,
             IJsonMetaDataConvert jsonMetaDataConvert,
-            IHttpGet httpHelper,
+            IVstsClient vstsClient,
             ILog logger)
         {
             _appServiceSettings = appServiceSettings;
             _gitDynamicModelGenerator = gitDynamicModelGenerator;
             _jsonMetaDataConvert = jsonMetaDataConvert;
-            _httpHelper = httpHelper;
+            _vstsClient = vstsClient;
             _logger = logger;
         }
 
@@ -74,8 +70,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
         public void PushCommit(List<FileContents> items)
         {
-            var body = _gitDynamicModelGenerator.GenerateCommitBody(_appServiceSettings.GitBranch, GetLatesCommit(), items);
-            Post(_appServiceSettings.VstsGitPushUrl, _appServiceSettings.GitUsername, _appServiceSettings.GitPassword, body);
+            var body = _gitDynamicModelGenerator.GenerateCommitBody(_appServiceSettings.GitBranch, _vstsClient.GetLatesCommit(), items);
+            _vstsClient.Post(_appServiceSettings.VstsGitPushUrl, _appServiceSettings.GitUsername, _appServiceSettings.GitPassword, body);
         }
 
         public IDictionary<string, string> GetAllFileContents(string vstsBlobUrl)
@@ -91,7 +87,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
             foreach (var blob in blobs)
             {
-                var str = _httpHelper.Get(blob.Url, _appServiceSettings.GitUsername, _appServiceSettings.GitPassword);
+                var str = _vstsClient.Get(blob.Url);
                 standardsAsJson.Add(blob.Path, str);
             }
 
@@ -101,10 +97,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         // Helpers
         private IEnumerable<Entity> GetAllBlobs(string vstsUrl)
         {
-            var folderTreeStr = _httpHelper.Get(
-                vstsUrl,
-                _appServiceSettings.GitUsername,
-                _appServiceSettings.GitPassword);
+            var folderTreeStr = _vstsClient.Get(vstsUrl);
             var tree = JsonConvert.DeserializeObject<GitTree>(folderTreeStr);
 
             return tree?.Value.Where(x => x.IsBlob);
@@ -132,34 +125,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             }
 
             return string.Empty;
-        }
-
-        private void Post(string streamUrl, string username, string pwd, string body)
-        {
-            using (var client = new HttpClient())
-            {
-                var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{pwd}"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                using (var content = new StringContent(body, Encoding.UTF8, "application/json"))
-                {
-                    client.PostAsync(streamUrl, content).Wait();
-                }
-            }
-        }
-
-        private string GetLatesCommit()
-        {
-            var commitResponse = _httpHelper.Get(
-                _appServiceSettings.VstsGitAllCommitsUrl,
-                _appServiceSettings.GitUsername,
-                _appServiceSettings.GitPassword);
-            var gitTree = JsonConvert.DeserializeObject<GitTree>(commitResponse);
-            if (gitTree == null)
-            {
-                return string.Empty;
-            }
-
-            return gitTree.Value[0]?.CommitId;
         }
     }
 }

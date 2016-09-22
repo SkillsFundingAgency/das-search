@@ -171,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
@@ -182,6 +184,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\StandardsController.cs" />
     <Compile Include="Controllers\FrameworksController.cs" />
+    <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="DependencyResolution\WebRegistry.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -206,6 +209,8 @@
     <None Include="Transform.ServiceDefinition.csdef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Views\Health\Index.cshtml" />
+    <Content Include="Views\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -224,6 +229,10 @@
     <ProjectReference Include="..\Sfa.Das.ApprenticeshipInfoService.Core\Sfa.Das.ApprenticeshipInfoService.Core.csproj">
       <Project>{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}</Project>
       <Name>Sfa.Das.ApprenticeshipInfoService.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.ApprenticeshipInfoService.Health\Sfa.Das.ApprenticeshipInfoService.Health.csproj">
+      <Project>{8EF19D68-8CCA-4477-B401-D447B7C4627A}</Project>
+      <Name>Sfa.Das.ApprenticeshipInfoService.Health</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.ApprenticeshipInfoService.Infrastructure\Sfa.Das.ApprenticeshipInfoService.Infrastructure.csproj">
       <Project>{3CF1B822-17E6-4F67-B5AB-A031390CB635}</Project>

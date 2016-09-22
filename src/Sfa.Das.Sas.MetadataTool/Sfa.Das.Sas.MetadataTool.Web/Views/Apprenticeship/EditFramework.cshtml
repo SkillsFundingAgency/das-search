@@ -7,7 +7,7 @@
 
 <h2>Edit @Model.FrameworkName: @Model.Pathway</h2>
 <span>
-    <a href="@Url.Action("FrameworkDetails", new { Model.Id })">
+    <a class="btn" href="@Url.Action("FrameworkDetails", new { Model.Id })">
         View framework
         <i class="fa fa-eye" aria-hidden="true"></i>
     </a>
@@ -24,76 +24,98 @@
         </div>
 
         <div class="boxed">
-            @GetFrameworkProperty("ApprenticeshipId", "apprenticeshipId", Model.ApprenticeshipId.ToString())
+            <div>
+                <label id="apprenticeshipId">ApprenticeshipId</label>
+                <span class="right">
+                    @Model.ApprenticeshipId.ToString()
+                </span>
+            </div>
             <div>
                 <label>EffectiveFrom</label>
-                <input type="text" name="effectivefrom" class="datepicker from" value="@Model.EffectiveFrom.ToString("yyyy-MM-dd")"/>
+                <input type="text" name="effectivefrom" class="datepicker from right" value="@Model.EffectiveFrom.ToString("yyyy-MM-dd")"/>
             </div>
             <div>
                 <label>EffectiveTo</label>
-                <input type="text" name="effectiveto" class="datepicker to" value="@Model.EffectiveTo.ToString("yyyy-MM-dd")"/>
+                <input type="text" name="effectiveto" class="datepicker to right" value="@Model.EffectiveTo.ToString("yyyy-MM-dd")"/>
             </div>
         </div>
 
         <div class="boxed entrybox" id="keyword-property">
             <label>Keywords</label>
-            <input type="text" placeholder="add new keyword"/>
-            <div class="property-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="keywords">
+                <div class="right">
+                    <input type="text" placeholder="add new keyword" />
+                    <div class="property-container" data-json="@Model.Keywords.WhereSafe(m => !string.IsNullOrEmpty(m)).ToJson()" data-name="keywords">
+                    </div>
+                </div>
             </div>
-        </div>
 
         <div class="boxed" id="jobroles-property">
             <label>Job Roles</label>
-            <input type="text" id="jobroles-title" placeholder="title"/>
-            <input type="text" id="jobroles-description" placeholder="description"/>
-            <div class="property-container" id="jobrole-container" data-json="@Model.JobRoleItems.ToJson()">
+            <div class="right">
+                <input type="text" id="jobroles-title" placeholder="title"/>
+                <input type="text" id="jobroles-description" placeholder="description"/>
+                <div class="property-container" id="jobrole-container" data-json="@Model.JobRoleItems.ToJson()">
+                </div>
             </div>
         </div>
 
         <div>
             <label>Framework Overview</label>
-            <textarea class="htmledit" name="frameworkoverview">
-                @Html.Raw(@Model.FrameworkOverview)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="frameworkoverview">
+                    @Html.Raw(@Model.FrameworkOverview)
+                </textarea>
+            </div>
         </div>
         <div>
             <label>Entry Requirements</label>
-            <textarea class="htmledit" name="entryrequirements">
-                @Html.Raw(Model.EntryRequirements)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="entryrequirements">
+                    @Html.Raw(Model.EntryRequirements)
+                </textarea>
+            </div>
         </div>
         <div>
             <label>Professional Registration</label>
-            <textarea class="htmledit" name="professionalregistration">
-                @Html.Raw(Model.ProfessionalRegistration)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="professionalregistration">
+                    @Html.Raw(Model.ProfessionalRegistration)
+                </textarea>
+            </div>
         </div>
-
         <div>
             <label>Completion Qualifications</label>
-            <textarea class="htmledit" name="completionqualifications">
-                @Html.Raw(@Model.CompletionQualifications)
-            </textarea>
+            <div class="right">
+                <textarea class="htmledit" name="completionqualifications">
+                    @Html.Raw(@Model.CompletionQualifications)
+                </textarea>
+            </div>
         </div>
 
         <div class="boxed entrybox" id="competencyqualification-property">
             <label>Competency Qualification</label>
-            <input type="text" placeholder="add new competency qualification"/>
-            <div class="property-container" data-json="@Model.CompetencyQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="CompetencyQualification">
+            <div class="right">
+                <input type="text" class="long" placeholder="add new competency qualification"/>
+                <div class="property-container list" data-json="@Model.CompetencyQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="CompetencyQualification">
+                </div>
             </div>
         </div>
 
         <div class="boxed entrybox" id="knowledgequalification-property">
             <label>Knowledge Qualification</label>
-            <input type="text"  placeholder="add new knowledge qualification"/>
-            <div class="property-container" data-json="@Model.KnowledgeQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="KnowledgeQualification">
+            <div class="right">
+                <input type="text" class="long"  placeholder="add new knowledge qualification"/>
+                <div class="property-container list" data-json="@Model.KnowledgeQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="KnowledgeQualification">
+                </div>
             </div>
         </div>
 
         <div class="boxed entrybox" id="combinedqualification-property">
             <label>Combined Qualification</label>
-            <input type="text" placeholder="add new combined qualification"/>
-            <div class="property-container" data-json="@Model.CombinedQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="CombinedQualification">
+            <div class="right list">
+                <input type="text" class="long" placeholder="add new combined qualification"/>
+                <div class="property-container list" data-json="@Model.CombinedQualification.WhereSafe(x => x != string.Empty).ToJson()" data-name="CombinedQualification">
+                </div>
             </div>
         </div>
     </form>

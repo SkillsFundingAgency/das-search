@@ -14,6 +14,8 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
 {
+    using System.IO;
+
     [TestFixture]
     public class LarsDataServiceTest
     {
@@ -30,10 +32,12 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         private FrameworkAimMetaData _frameworkAim;
         private FrameworkComponentTypeMetaData _frameworkComponentType;
         private LearningDeliveryMetaData _learningDelivery;
+        private FundingMetaData _fundingMetaData;
         private List<FrameworkMetaData> _frameworkList;
         private List<FrameworkAimMetaData> _frameworkAimList;
         private List<FrameworkComponentTypeMetaData> _frameworkComponentTypeList;
         private List<LearningDeliveryMetaData> _learningDeliveryList;
+        private List<FundingMetaData> _fundingList;
 
         [SetUp]
         public void Init()
@@ -44,6 +48,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             _mockFileExtractor = new Mock<IUnzipStream>();
             _mockHttpGetFile = new Mock<IHttpGetFile>();
             _mockLogger = new Mock<ILog>();
+
+            _mockAppServiceSettings.Setup(m => m.ToggleFilterOnFunding).Returns(true);
 
             _linkEndPoints = new List<string> { "endpoint" };
             _framework = new FrameworkMetaData
@@ -60,12 +66,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
                 FrameworkComponentType = 1,
             };
 
-            _learningDelivery = new LearningDeliveryMetaData
-            {
-                LearnAimRef = "5001738X",
-                LearnAimRefTitle = "Test Learning Delivery"
-            };
-
             _frameworkAim = new FrameworkAimMetaData
             {
                 FworkCode = _framework.FworkCode,
@@ -75,15 +75,33 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
                 LearnAimRef = "5001738X"
             };
 
+            _learningDelivery = new LearningDeliveryMetaData
+            {
+                LearnAimRef = _frameworkAim.LearnAimRef,
+                LearnAimRefTitle = "Test Learning Delivery"
+            };
+
+            _fundingMetaData = new FundingMetaData
+            {
+                LearnAimRef = _frameworkAim.LearnAimRef,
+                EffectiveFrom = DateTime.Now.AddYears(-2),
+                EffectiveTo = DateTime.Now.AddDays(20),
+                FundingCategory = "APP_ACT_COST", // This category is used to determine an apprenticeship funded qualification
+                RateWeighted = 150
+            };
+
             _frameworkList = new List<FrameworkMetaData> { _framework };
             _frameworkAimList = new List<FrameworkAimMetaData> { _frameworkAim };
             _frameworkComponentTypeList = new List<FrameworkComponentTypeMetaData> { _frameworkComponentType };
             _learningDeliveryList = new List<LearningDeliveryMetaData> { _learningDelivery };
+            _fundingList = new List<FundingMetaData> { _fundingMetaData };
 
+            _mockHttpGetFile.Setup(m => m.GetFile(It.IsAny<string>())).Returns(new MemoryStream());
             _mockCsvService.Setup(x => x.ReadFromString<FrameworkMetaData>(It.IsAny<string>())).Returns(_frameworkList);
             _mockCsvService.Setup(x => x.ReadFromString<FrameworkAimMetaData>(It.IsAny<string>())).Returns(_frameworkAimList);
             _mockCsvService.Setup(x => x.ReadFromString<FrameworkComponentTypeMetaData>(It.IsAny<string>())).Returns(_frameworkComponentTypeList);
             _mockCsvService.Setup(x => x.ReadFromString<LearningDeliveryMetaData>(It.IsAny<string>())).Returns(_learningDeliveryList);
+            _mockCsvService.Setup(x => x.ReadFromString<FundingMetaData>(It.IsAny<string>())).Returns(_fundingList);
 
             _mockAngleSharpService.Setup(x => x.GetLinks(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(_linkEndPoints);
 
@@ -294,6 +312,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
                 FrameworkComponentType = 3
             });
 
+            _fundingList.Add(new FundingMetaData { LearnAimRef = learnRef, RateWeighted = 150, FundingCategory = "APP_ACT_COST" });
+
             // Act
             var frameworks = _sut.GetListOfCurrentFrameworks();
 
@@ -435,6 +455,63 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
             // Assert
             frameworks.Count.Should().Be(1);
             frameworks.First().FworkCode.Should().Be(_framework.FworkCode);
+        }
+
+        [Test]
+        public void ShouldNotAddQualificationWithUnweightedFundingToFramework()
+        {
+            // Assign
+            _fundingMetaData.RateWeighted = 0;
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Should().BeEmpty();
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+        }
+
+        [Test]
+        public void ShouldNotAddQualificationWithExpiredFundingToFramework()
+        {
+            // Assign
+            _fundingMetaData.EffectiveTo = DateTime.Now.AddDays(-1);
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Should().BeEmpty();
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
+        }
+
+        [Test]
+        public void ShouldAddQualificationWithNoEffectiveToDateButWeightedFundingToFramework()
+        {
+            // Assign
+            _fundingMetaData.EffectiveTo = null;
+
+            // Act
+            var frameworks = _sut.GetListOfCurrentFrameworks();
+
+            // Assert
+            frameworks.Count.Should().Be(1);
+
+            var framework = frameworks.First();
+
+            framework.CompetencyQualification.Count().Should().Be(1);
+            framework.KnowledgeQualification.Should().BeEmpty();
+            framework.CombinedQualification.Should().BeEmpty();
         }
     }
 }

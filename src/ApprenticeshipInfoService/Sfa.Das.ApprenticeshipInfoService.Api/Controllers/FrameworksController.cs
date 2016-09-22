@@ -37,7 +37,7 @@
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public Framework GetFramework(int id)
+        public Framework Get(int id)
         {
             var response = _getFrameworks.GetFrameworkById(id);
             if (response != null)

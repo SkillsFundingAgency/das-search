@@ -1,17 +1,16 @@
-﻿@using System.Globalization
-@using Sfa.Das.Sas.Core.Extensions
+﻿@using Sfa.Das.Sas.Core.Extensions
 @using Sfa.Das.Sas.Core.Models
 @model FrameworkMetaData
 
 @{
-    ViewBag.Title = $"{@Model.FrameworkName}: {Model.Pathway} - FrameworkDetails";
+    ViewBag.Title = $"{@Model.FrameworkName}: {Model.Pathway} | Framework Details";
 }
 
 <div class="framework-details">
 
     <h2 class="pageTitle">@Model.FrameworkName: @Model.Pathway</h2>
     <span>
-        <a href="@Url.Action("EditFramework", routeValues: new { Model.Id })">
+        <a class="btn edit-btn" href="@Url.Action("EditFramework", routeValues: new { Model.Id })">
             Edit
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </a>
@@ -76,24 +75,22 @@
     </div>
 </div>
 
-@helper GetFrameworkProperty(string title, string id, string item, bool hideIfEmpty = false)
-{
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
-        <dt>@title</dt>
-        <dd id="@id">
-            @(!string.IsNullOrEmpty(item) ? Html.MarkdownToHtml(item) : Html.MarkdownToHtml("none"))
-        </dd>
-    }
-}
-
 @helper GetFrameworkPropertyRaw(string title, string id, string item, bool hideIfEmpty = false)
 {
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt>@title</dt>
         <dd id="@id">
-            @(!string.IsNullOrEmpty(item) ? @Html.Raw(HttpUtility.HtmlDecode(item)) : Html.MarkdownToHtml("none"))
+            @if (!string.IsNullOrEmpty(item))
+            {
+                @Html.Raw(HttpUtility.HtmlDecode(item))
+            }
+            else
+            {
+                <div>
+                    No data
+                </div>
+            }
         </dd>
     }
 }
@@ -137,24 +134,6 @@
             }
         </dd>
     }
-}
-
-@helper GetFrameworkTypicalLengthProperty(string title, string id, TypicalLength item, bool hideIfEmpty = false)
-{
-    if (!hideIfEmpty)
-    {
-        <dt>@title</dt>
-        <dd id="@id">
-            @if (item != null)
-            {
-                <span>From @item.From to @item.To @item.Unit</span>
-            }
-            else
-            {
-                @Html.MarkdownToHtml("none")
-            }
-        </dd>
-}
 }
 
 

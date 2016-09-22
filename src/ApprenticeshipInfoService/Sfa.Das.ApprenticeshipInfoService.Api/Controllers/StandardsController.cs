@@ -38,7 +38,7 @@
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public Standard GetStandard(int id)
+        public Standard Get(int id)
         {
             var standard = _getStandards.GetStandardById(id);
             if (standard != null)

@@ -14,7 +14,8 @@
     };
 
     var deleteItem = function(container, render) {
-        $(container).find('.delete').on('click', function() {
+        $(container).find('.delete').on('click', function (e) {
+            e.preventDefault();
             var val = $(this).attr('data-value');
             var jsons = JSON.parse($(container).attr("data-json"));
             var selectedItem = jsons[val];

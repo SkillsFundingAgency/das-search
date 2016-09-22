@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.ApplicationInsights.NLogTarget;
-using NLog;
-using NLog.Targets.ElasticSearch;
-using Sfa.Das.Sas.Indexer.Core.Logging;
-using Sfa.Das.Sas.Indexer.Core.Logging.Models;
-
-namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
+﻿namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 {
-    using System.Dynamic;
-
-    using Newtonsoft.Json;
-
-    using Sfa.Das.Sas.Indexer.Infrastructure.Settings;
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.ApplicationInsights.NLogTarget;
+    using NLog;
+    using NLog.Targets.ElasticSearch;
     using SFA.DAS.NLog.Targets.AzureEventHub;
+    using Sfa.Das.Sas.Indexer.Core.Logging;
+    using Sfa.Das.Sas.Indexer.Core.Logging.Models;
+    using Sfa.Das.Sas.Indexer.Infrastructure.Settings;
 
     public class NLogService : ILog
     {
