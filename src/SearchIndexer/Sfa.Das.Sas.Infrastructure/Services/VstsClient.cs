@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
 
     using Newtonsoft.Json;
 
+    using Sfa.Das.Sas.Indexer.Infrastructure.Services.Models;
+
     public class VstsClient : IVstsClient
     {
         private readonly IHttpGet _httpHelper;
@@ -62,7 +64,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
         public string GetLatesCommit()
         {
             var commitResponse = Get(_appServiceSettings.VstsGitAllCommitsUrl);
-            var gitTree = JsonConvert.DeserializeObject<dynamic>(commitResponse);
+            var gitTree = JsonConvert.DeserializeObject<GitTree>(commitResponse);
             if (gitTree == null)
             {
                 return string.Empty;

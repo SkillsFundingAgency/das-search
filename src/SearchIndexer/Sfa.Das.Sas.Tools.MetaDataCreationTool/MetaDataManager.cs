@@ -56,12 +56,12 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                 .Where(m => !currentMetaDataIds.Contains($"{m.Id}"))
                 .ToArray();
 
+
             PushStandardsToGit(standards.Select(MapToFileContent).ToList());
         }
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            //var standards = _metadataApiService.GetStandards();
             var standards = _vstsService.GetStandards().ToList();
 
             UpdateStandardsInformationFromLars(standards);

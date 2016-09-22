@@ -183,6 +183,8 @@
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Services\FileHelper.cs" />
     <Compile Include="Services\HttpService.cs" />
+    <Compile Include="Services\Models\GitTree.cs" />
+    <Compile Include="Services\Models\Entity.cs" />
     <Compile Include="Services\NLogService.cs" />
     <Compile Include="CourseDirectory\CourseDirectoryClient.cs" />
     <Compile Include="Services\RetryService.cs" />
