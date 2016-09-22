@@ -6,8 +6,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Core.Services
 
     public interface IGetProviders
     {
-        List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon);
+        List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon, int page);
 
-        List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon);
+        List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon, int page);
     }
 }

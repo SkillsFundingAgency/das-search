@@ -9,6 +9,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {
     public interface IProviderLocationSearchProvider
     {
-        List<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates);
+        List<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page);
+
+        List<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int id, Coordinate coordinates, int page);
     }
 }

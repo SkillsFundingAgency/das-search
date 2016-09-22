@@ -34,7 +34,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             _providerLocationSearchProvider = providerLocationSearchProvider;
         }
 
-        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon)
+        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon, int page)
         {
             var coordinates = new Coordinate
             {
@@ -42,12 +42,18 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
                 Lon = lon
             };
 
-            return _providerLocationSearchProvider.SearchStandardProviders(id, coordinates);
+            return _providerLocationSearchProvider.SearchStandardProviders(id, coordinates, page);
         }
 
-        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon)
+        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon, int page)
         {
-            throw new NotImplementedException();
+            var coordinates = new Coordinate
+            {
+                Lat = lat,
+                Lon = lon
+            };
+
+            return _providerLocationSearchProvider.SearchFrameworkProviders(id, coordinates, page);
         }
     }
 }

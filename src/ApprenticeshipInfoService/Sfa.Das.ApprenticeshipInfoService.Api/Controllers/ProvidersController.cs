@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
+    using System.Collections.Generic;
     using System.Net;
+    using System.Web.Http;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -21,12 +20,23 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        [Route("api/standard/{id}/providers")]
-        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat, double? lon)
+        [Route("standards/{id}/providers")]
+        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat, double? lon, int? page)
         {
+            var actualPage = 1;
+            if (page != null)
+            {
+                actualPage = (int)page;
+            }
+
+            if (actualPage < 1)
+            {
+                actualPage = 1;
+            }
+
             if (lat != null && lon != null)
             {
-                return _getProviders.GetByStandardIdAndLocation(id, (double)lat, (double)lon);
+                return _getProviders.GetByStandardIdAndLocation(id, (double)lat, (double)lon, actualPage);
             }
 
             return new List<StandardProviderSearchResultsItem>();
@@ -35,12 +45,23 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        [Route("api/framework/{id}/providers")]
-        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat, double? lon)
+        [Route("frameworks/{id}/providers")]
+        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat, double? lon, int? page)
         {
+            var actualPage = 1;
+            if (page != null)
+            {
+                actualPage = (int) page;
+            }
+
+            if (actualPage < 1)
+            {
+                actualPage = 1;
+            }
+
             if (lat != null && lon != null)
             {
-                return _getProviders.GetByFrameworkIdAndLocation(id, (double)lat, (double)lon);
+                return _getProviders.GetByFrameworkIdAndLocation(id, (double)lat, (double)lon, actualPage);
             }
 
             return new List<FrameworkProviderSearchResultsItem>();

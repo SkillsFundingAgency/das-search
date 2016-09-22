@@ -17,16 +17,24 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
         private const string TrainingTypeAggregateName = "training_type";
         private const string NationalProviderAggregateName = "national_provider";
 
-        public ElasticsearchProviderLocationSearchProvider(IConfigurationSettings applicationSettings, IElasticsearchCustomClient elasticsearchCustomClient)
+        public ElasticsearchProviderLocationSearchProvider(
+            IConfigurationSettings applicationSettings,
+            IElasticsearchCustomClient elasticsearchCustomClient)
         {
             _applicationSettings = applicationSettings;
             _elasticsearchCustomClient = elasticsearchCustomClient;
         }
 
-        public List<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates)
+        public List<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page)
         {
             var qryStr = CreateStandardProviderSearchQuery(standardId.ToString(), coordinates);
-            return PerformStandardProviderSearchWithQuery(qryStr);
+            return PerformStandardProviderSearchWithQuery(qryStr, page);
+        }
+
+        public List<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page)
+        {
+            var qryStr = CreateFrameworkProviderSearchQuery(frameworkId.ToString(), coordinates);
+            return PerformFrameworkProviderSearchWithQuery(qryStr, page);
         }
 
         private SearchDescriptor<StandardProviderSearchResultsItem> CreateStandardProviderSearchQuery(string standardId, Coordinate coordinates)
@@ -34,11 +42,18 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates);
         }
 
-        private List<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(SearchDescriptor<StandardProviderSearchResultsItem> qryStr)
+        private SearchDescriptor<FrameworkProviderSearchResultsItem> CreateFrameworkProviderSearchQuery(string frameworkId, Coordinate coordinates)
         {
-            var take = 10; // take all
+            return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates);
+        }
 
-            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Take(take));
+        private List<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(SearchDescriptor<StandardProviderSearchResultsItem> qryStr, int page)
+        {
+            var take = _applicationSettings.ApprenticeshipProviderElements;
+
+            var skipAmount = take * page;
+
+            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skipAmount).Take(take));
 
             if (results.ApiCall?.HttpStatusCode != 200)
             {
@@ -48,13 +63,28 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             return results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
         }
 
+        private List<FrameworkProviderSearchResultsItem> PerformFrameworkProviderSearchWithQuery(SearchDescriptor<FrameworkProviderSearchResultsItem> qryStr, int page)
+        {
+            var take = _applicationSettings.ApprenticeshipProviderElements;
+
+            var skipAmount = take * page;
+
+            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skipAmount).Take(take));
+
+            if (results.ApiCall?.HttpStatusCode != 200)
+            {
+                return new List<FrameworkProviderSearchResultsItem>();
+            }
+
+            return results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
+        }
+
         private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var descriptor =
                 new SearchDescriptor<T>()
                     .Index(_applicationSettings.ProviderIndexAlias)
-                    .Type(Types.Parse("standardprovider"))
                     .Size(1000)
                     .Query(q => q
                         .Bool(ft => ft
@@ -131,6 +161,33 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
                 TrainingLocations = hit.Source.TrainingLocations,
                 MatchingLocationId = hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId,
+                NationalProvider = hit.Source.NationalProvider
+            };
+        }
+
+        private static FrameworkProviderSearchResultsItem MapToFrameworkProviderSearhResultsItem(IHit<FrameworkProviderSearchResultsItem> hit)
+        {
+            return new FrameworkProviderSearchResultsItem
+            {
+                Ukprn = hit.Source.Ukprn,
+                ContactUsUrl = hit.Source.ContactUsUrl,
+                DeliveryModes = hit.Source.DeliveryModes,
+                Email = hit.Source.Email,
+                EmployerSatisfaction = hit.Source.EmployerSatisfaction * 10,
+                LearnerSatisfaction = hit.Source.LearnerSatisfaction * 10,
+                OverallAchievementRate = hit.Source.OverallAchievementRate,
+                ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
+                ProviderName = hit.Source.ProviderName,
+                Phone = hit.Source.Phone,
+                FrameworkId = hit.Source.FrameworkId,
+                FrameworkCode = hit.Source.FrameworkCode,
+                PathwayCode = hit.Source.PathwayCode,
+                ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
+                Level = hit.Source.Level,
+                Website = hit.Source.Website,
+                Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                TrainingLocations = hit.Source.TrainingLocations,
+                MatchingLocationId = hit?.InnerHits != null ? hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId : (int?)null,
                 NationalProvider = hit.Source.NationalProvider
             };
         }

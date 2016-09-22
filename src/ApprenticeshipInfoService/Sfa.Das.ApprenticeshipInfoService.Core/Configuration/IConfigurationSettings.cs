@@ -14,5 +14,7 @@
         string EnvironmentName { get; }
 
         string ApplicationName { get; }
+
+        int ApprenticeshipProviderElements { get; }
     }
 }
