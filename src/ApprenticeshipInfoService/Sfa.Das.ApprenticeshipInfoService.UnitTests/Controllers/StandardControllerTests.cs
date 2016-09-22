@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
+﻿using System.Net.Http;
+using System.Web.Http.Routing;
+
+namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 {
     using System;
     using System.Web.Http;
@@ -21,6 +24,18 @@
             var iGetstandards = new Mock<IGetStandards>();
             iGetstandards.Setup(m => m.GetStandardById(42)).Returns(new Standard { StandardId= 42, Title = "test title" });
             _sut = new StandardsController(iGetstandards.Object);
+            _sut.Request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("http://localhost/standards")
+            };
+            _sut.Configuration = new HttpConfiguration();
+            _sut.Configuration.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+            _sut.RequestContext.RouteData = new HttpRouteData(
+                route: new HttpRoute(),
+                values: new HttpRouteValueDictionary { { "controller", "standards" } });
         }
 
         [Test]
@@ -48,6 +63,7 @@
             Assert.NotNull(standard);
             standard.StandardId.Should().Be(42);
             standard.Title.Should().Be("test title");
+            standard.Uri.Should().Be("http://localhost/api/Standards/42");
         }
     }
 }

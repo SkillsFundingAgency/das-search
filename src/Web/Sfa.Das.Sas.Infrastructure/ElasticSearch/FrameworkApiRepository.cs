@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public Framework GetFrameworkById(int id)
         {
-            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Framework/", id);
+            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Frameworks/", id);
 
             var result = JsonConvert.DeserializeObject<FrameworkSearchResultsItem>(_httpService.Get(url, null, null));
 
