@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public Standard GetStandardById(int id)
         {
-            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Standard/", id);
+            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Standards/", id);
 
             var result = JsonConvert.DeserializeObject<StandardSearchResultsItem>(_httpService.Get(url, null, null));
 
