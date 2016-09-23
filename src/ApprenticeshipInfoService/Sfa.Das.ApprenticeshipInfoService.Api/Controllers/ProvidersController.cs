@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
     using System.Net;
@@ -10,29 +12,24 @@
     public class ProvidersController : ApiController
     {
         private readonly IGetProviders _getProviders;
+        private readonly IControllerHelper _controllerHelper;
 
-        public ProvidersController(IGetProviders getProviders)
+        public ProvidersController(
+            IGetProviders getProviders,
+            IControllerHelper controllerHelper)
         {
             _getProviders = getProviders;
+            _controllerHelper = controllerHelper;
         }
 
-        // GET api/values/5
+        // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{id}/providers")]
         public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat, double? lon, int? page)
         {
-            var actualPage = 1;
-            if (page != null)
-            {
-                actualPage = (int)page;
-            }
-
-            if (actualPage < 1)
-            {
-                actualPage = 1;
-            }
+            var actualPage = _controllerHelper.GetActualPage(page);
 
             if (lat != null && lon != null)
             {
@@ -42,22 +39,14 @@
             return new List<StandardProviderSearchResultsItem>();
         }
 
+        // GET frameworks/5/providers?lat=<latitude>&long=<longitude>&page=#
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}/providers")]
         public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat, double? lon, int? page)
         {
-            var actualPage = 1;
-            if (page != null)
-            {
-                actualPage = (int) page;
-            }
-
-            if (actualPage < 1)
-            {
-                actualPage = 1;
-            }
+            var actualPage = _controllerHelper.GetActualPage(page);
 
             if (lat != null && lon != null)
             {

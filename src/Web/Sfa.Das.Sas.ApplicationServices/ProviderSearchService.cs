@@ -115,7 +115,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             };
         }
 
-        private async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
+        public async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
         {
             if (string.IsNullOrEmpty(postCode))
             {
