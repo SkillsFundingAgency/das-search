@@ -8,6 +8,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
 {
     public sealed class StandardProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
     {
+        // TODO Add URI
         public int Ukprn { get; set; }
 
         public string ProviderName { get; set; }
