@@ -53,6 +53,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\Metrics\ExecutionTimer.cs" />
     <Compile Include="Logging\Metrics\ExecutionTimerResult{T}.cs" />
+    <Compile Include="Logging\Models\DependencyLogEntry.cs" />
     <Compile Include="Logging\Models\ElasticSearchLogEntry.cs" />
     <Compile Include="Logging\Models\ILogEntry.cs" />
     <Compile Include="Logging\Models\TimingLogEntry.cs" />

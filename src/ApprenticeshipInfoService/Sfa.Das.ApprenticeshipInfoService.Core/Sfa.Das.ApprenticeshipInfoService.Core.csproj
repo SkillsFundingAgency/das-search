@@ -58,6 +58,9 @@
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
     <Compile Include="Models\TrainingLocation.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
+    <Compile Include="Models\FrameworkSummary.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\StandardSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logging\IRequestContext.cs" />
     <Compile Include="Logging\ILogEntry.cs" />

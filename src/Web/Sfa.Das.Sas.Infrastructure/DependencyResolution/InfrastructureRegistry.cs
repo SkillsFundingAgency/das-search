@@ -1,4 +1,6 @@
-﻿using Sfa.Das.Sas.ApplicationServices;
+﻿using FeatureToggle.Core.Fluent;
+using Sfa.Das.Sas.ApplicationServices;
+using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
@@ -17,14 +19,27 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
     {
         public InfrastructureRegistry()
         {
-            For<ILog>().Use(x => new NLogLogger(x.ParentType, x.GetInstance<IConfigurationSettings>(), x.GetInstance<IRequestContext>())).AlwaysUnique();
+            For<ILog>().Use(x => new NLogLogger(
+                x.ParentType, 
+                x.GetInstance<IConfigurationSettings>(), 
+                x.GetInstance<IRequestContext>())).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILookupLocations>().Use<PostCodesIoLocator>();
-            For<IGetStandards>().Use<StandardRepository>();
-            For<IGetFrameworks>().Use<FrameworkRepository>();
+
+            if (Is<ApprenticeshipServiceApiFeature>.Enabled)
+            {
+                For<IGetFrameworks>().Use<FrameworkApiRepository>();
+                For<IGetStandards>().Use<StandardApiRepository>();
+            }
+            else
+            {
+                For<IGetFrameworks>().Use<FrameworkElasticRepository>();
+                For<IGetStandards>().Use<StandardElasticRepository>();
+            }
+
             For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
             For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IRetryWebRequests>().Use<WebRequestRetryService>();

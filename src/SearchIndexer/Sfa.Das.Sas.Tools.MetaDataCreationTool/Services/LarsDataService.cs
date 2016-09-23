@@ -11,6 +11,11 @@ using Sfa.Das.Sas.Tools.MetaDataCreationTool.Services.Interfaces;
 
 namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 {
+    using System.IO;
+
+    using Sfa.Das.Sas.Indexer.Core.Logging.Metrics;
+    using Sfa.Das.Sas.Indexer.Core.Logging.Models;
+
     public sealed class LarsDataService : ILarsDataService
     {
         private readonly IReadMetaDataFromCsv _csvService;
@@ -41,7 +46,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             var zipFilePath = GetZipFilePath();
             _logger.Debug($"Zip file path: {zipFilePath}");
 
-            var zipStream = _httpGetFile.GetFile(zipFilePath);
+            var zipStream = GetZipStream(zipFilePath);
+
             _logger.Debug("Zip file downloaded");
 
             var fileContent = _fileExtractor.ExtractFileFromStream(zipStream, _appServiceSettings.CsvFileNameStandards);
@@ -49,6 +55,8 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
 
             var standards = _csvService.ReadFromString<LarsStandard>(fileContent);
             _logger.Debug($"Read: {standards.Count} standards from file.");
+
+            zipStream.Close();
 
             return standards;
         }
@@ -65,6 +73,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
             AddQualificationsToFrameworks(larsMetaData);
 
             return larsMetaData.Frameworks;
+        }
+
+        private Stream GetZipStream(string zipFilePath)
+        {
+            var timer = ExecutionTimer.GetTiming(() => _httpGetFile.GetFile(zipFilePath));
+            LogExecutionTime(zipFilePath, timer.ElaspedMilliseconds);
+            return timer.Result;
         }
 
         private void AddQualificationsToFrameworks(LarsMetaData metaData)
@@ -208,27 +223,39 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
         {
             var csvData = default(LarsCsvData);
 
-            using (var zipStream = _httpGetFile.GetFile(zipFilePath))
-            {
-                _logger.Debug("Zip file downloaded");
+            var zipStream = GetZipStream(zipFilePath);
 
-                csvData.Framework = _fileExtractor.ExtractFileFromStream(
-                    zipStream, _appServiceSettings.CsvFileNameFrameworks, true);
+            _logger.Debug("Zip file downloaded");
+            csvData.Framework = _fileExtractor.ExtractFileFromStream(
+                zipStream, _appServiceSettings.CsvFileNameFrameworks, true);
 
-                csvData.FrameworkAim = _fileExtractor.ExtractFileFromStream(
-                    zipStream, _appServiceSettings.CsvFileNameFrameworksAim, true);
+            csvData.FrameworkAim = _fileExtractor.ExtractFileFromStream(
+                zipStream, _appServiceSettings.CsvFileNameFrameworksAim, true);
 
-                csvData.FrameworkContentType = _fileExtractor.ExtractFileFromStream(
-                    zipStream, _appServiceSettings.CsvFileNameFrameworkComponentType, true);
+            csvData.FrameworkContentType = _fileExtractor.ExtractFileFromStream(
+                zipStream, _appServiceSettings.CsvFileNameFrameworkComponentType, true);
 
                 csvData.LearningDelivery = _fileExtractor.ExtractFileFromStream(
                     zipStream, _appServiceSettings.CsvFileNameLearningDelivery, true);
 
                 csvData.Funding = _fileExtractor.ExtractFileFromStream(
                     zipStream, _appServiceSettings.CsvFileNameFunding, true);
-            }
+
+            zipStream.Close();
 
             return csvData;
+        }
+
+        private void LogExecutionTime(string url, double elaspedMilliseconds)
+        {
+            var logEntry = new DependencyLogEntry
+            {
+                Identifier = "LarsZipDownload",
+                ResponseTime = elaspedMilliseconds,
+                Url = url
+            };
+
+            _logger.Debug("LARS zip download", logEntry);
         }
 
         private struct LarsCsvData

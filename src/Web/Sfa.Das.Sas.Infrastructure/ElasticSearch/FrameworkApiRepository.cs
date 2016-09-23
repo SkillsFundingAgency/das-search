@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using Sfa.Das.Sas.ApplicationServices;
 
-    public sealed class FrameworkRepository : IGetFrameworks
+    public sealed class FrameworkApiRepository : IGetFrameworks
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _applicationLogger;
@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IFrameworkMapping _frameworkMapping;
         private readonly IHttpGet _httpService;
 
-        public FrameworkRepository(
+        public FrameworkApiRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public Framework GetFrameworkById(int id)
         {
-            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Framework/", id);
+            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Frameworks/", id);
 
             var result = JsonConvert.DeserializeObject<FrameworkSearchResultsItem>(_httpService.Get(url, null, null));
 

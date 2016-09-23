@@ -6,6 +6,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
     {
         public int StandardId { get; set; }
 
+        public string Uri { get; set; }
+
         public string Title { get; set; }
 
         public int Level { get; set; }
