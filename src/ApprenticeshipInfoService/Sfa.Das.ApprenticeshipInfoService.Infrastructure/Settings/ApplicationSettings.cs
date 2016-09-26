@@ -19,6 +19,8 @@
 
         public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];
 
+        public int ApprenticeshipProviderElements => int.Parse(ConfigurationManager.AppSettings["ApprenticeshipProviderElements"]);
+
         private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = CloudConfigurationManager.GetSetting("ElasticServerUrls").Split(',');

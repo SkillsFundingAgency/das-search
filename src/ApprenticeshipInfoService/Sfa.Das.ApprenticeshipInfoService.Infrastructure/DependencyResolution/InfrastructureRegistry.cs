@@ -1,9 +1,11 @@
 ﻿namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.DependencyResolution
 {
     using Sfa.Das.ApprenticeshipInfoService.Core.Configuration;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch;
+    using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Logging;
     using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping;
     using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Settings;
@@ -18,10 +20,12 @@
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IGetStandards>().Use<StandardRepository>();
             For<IGetFrameworks>().Use<FrameworkRepository>();
+            For<IGetProviders>().Use<ProviderRepository>();
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
-            //For<IProviderMapping>().Use<ProviderMapping>();
+            For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
+            For<IControllerHelper>().Use<ControllerHelper>();
         }
     }
 }

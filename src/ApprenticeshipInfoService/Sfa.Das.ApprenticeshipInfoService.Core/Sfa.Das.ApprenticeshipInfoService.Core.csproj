@@ -51,6 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
+    <Compile Include="Helpers\IControllerHelper.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
+    <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
+    <Compile Include="Models\TrainingLocation.cs" />
+    <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
     <Compile Include="Models\FrameworkSummary.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\StandardSummary.cs" />
@@ -65,6 +72,7 @@
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Models\Framework.cs" />
+    <Compile Include="Services\IGetProviders.cs" />
     <Compile Include="Services\IGetStandards.cs" />
     <Compile Include="Services\IGetFrameworks.cs" />
   </ItemGroup>
