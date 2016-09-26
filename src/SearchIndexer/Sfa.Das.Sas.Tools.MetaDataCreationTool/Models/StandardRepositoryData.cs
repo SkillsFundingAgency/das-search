@@ -25,5 +25,7 @@
         public string Qualifications { get; set; }
 
         public string ProfessionalRegistration { get; set; }
+
+        public bool Published { get; set; }
     }
 }

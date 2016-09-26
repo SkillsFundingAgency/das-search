@@ -56,6 +56,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                 .Where(m => !currentMetaDataIds.Contains($"{m.Id}"))
                 .ToArray();
 
+            standards.ForEach(m => m.Published = false);
 
             PushStandardsToGit(standards.Select(MapToFileContent).ToList());
         }
