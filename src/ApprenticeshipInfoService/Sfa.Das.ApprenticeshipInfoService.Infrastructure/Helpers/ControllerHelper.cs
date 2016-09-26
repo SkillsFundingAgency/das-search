@@ -1,4 +1,5 @@
 ﻿using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Helpers
 {
@@ -18,6 +19,28 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Helpers
             }
 
             return actualPage;
+        }
+
+        public DetailProviderResponse CreateDetailProviderResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)
+        {
+            if (model == null || apprenticeshipProduct == null)
+            {
+                return new DetailProviderResponse
+                {
+                    StatusCode = DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound
+                };
+            }
+
+            var response = new DetailProviderResponse
+            {
+                StatusCode = DetailProviderResponse.ResponseCodes.Success,
+                ApprenticeshipDetails = model,
+                ApprenticeshipType = apprenticeshipProductType,
+                ApprenticeshipName = apprenticeshipProduct.Title,
+                ApprenticeshipLevel = apprenticeshipProduct.Level.ToString()
+            };
+
+            return response;
         }
     }
 }

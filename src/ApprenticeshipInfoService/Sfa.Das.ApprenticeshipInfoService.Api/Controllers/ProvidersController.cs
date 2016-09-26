@@ -1,4 +1,5 @@
-﻿using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
+﻿using System;
+using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
@@ -13,13 +14,22 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
     {
         private readonly IGetProviders _getProviders;
         private readonly IControllerHelper _controllerHelper;
+        private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
+        private readonly IGetStandards _getStandards;
+        private readonly IGetFrameworks _getFrameworks;
 
         public ProvidersController(
             IGetProviders getProviders,
-            IControllerHelper controllerHelper)
+            IControllerHelper controllerHelper,
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
+            IGetStandards getStandards,
+            IGetFrameworks getFrameworks)
         {
             _getProviders = getProviders;
             _controllerHelper = controllerHelper;
+            _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
+            _getStandards = getStandards;
+            _getFrameworks = getFrameworks;
         }
 
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#
@@ -54,6 +64,50 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             }
 
             return new List<FrameworkProviderSearchResultsItem>();
+        }
+
+        // GET standards/<standardId>/providers?ukprn=<ukprn>&location=<locationId>
+        [SwaggerOperation("GetStandardProviderDetails")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("standards/{standardCode}/providers")]
+        public DetailProviderResponse GetStandardProviderDetails(string standardCode, int? ukprn, int? location)
+        {
+            if (ukprn != null && location != null)
+            {
+                var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
+                    (int)ukprn,
+                    (int)location,
+                    standardCode);
+
+                var apprenticeshipData = _getStandards.GetStandardById(Convert.ToInt32(standardCode));
+
+                return _controllerHelper.CreateDetailProviderResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
+            }
+
+            return new DetailProviderResponse();
+        }
+
+        // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
+        [SwaggerOperation("GetStandardProviderDetails")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("frameworks/{frameworkId}/providers")]
+        public DetailProviderResponse GetFrameworkProviderDetails(string frameworkId, int? ukprn, int? location)
+        {
+            if (ukprn != null && location != null)
+            {
+                var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
+                    (int)ukprn,
+                    (int)location,
+                    frameworkId);
+
+                var apprenticeshipData = _getFrameworks.GetFrameworkById(Convert.ToInt32(frameworkId));
+
+                return _controllerHelper.CreateDetailProviderResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
+            }
+
+            return new DetailProviderResponse();
         }
     }
 }

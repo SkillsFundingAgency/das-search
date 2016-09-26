@@ -53,6 +53,14 @@
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="Helpers\IControllerHelper.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\ApprenticeshipDetails.cs" />
+    <Compile Include="Models\ApprenticeshipProduct.cs" />
+    <Compile Include="Models\ApprenticeshipBasic.cs" />
+    <Compile Include="Models\ApprenticeshipTrainingType.cs" />
+    <Compile Include="Models\DetailProviderResponse.cs" />
+    <Compile Include="Models\ContactInformation.cs" />
+    <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
@@ -72,6 +80,7 @@
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Models\Framework.cs" />
+    <Compile Include="Services\IApprenticeshipProviderRepository.cs" />
     <Compile Include="Services\IGetProviders.cs" />
     <Compile Include="Services\IGetStandards.cs" />
     <Compile Include="Services\IGetFrameworks.cs" />
