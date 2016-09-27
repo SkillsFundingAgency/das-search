@@ -63,7 +63,7 @@
 
         private string Resolve(int id)
         {
-            return Url.Link("DefaultApi", new { controller = "Standards", id = id });
+            return Url.Link("DefaultApi", new { controller = "standards", id = id });
         }
     }
 }

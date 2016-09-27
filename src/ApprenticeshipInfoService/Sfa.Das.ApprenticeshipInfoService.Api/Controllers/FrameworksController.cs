@@ -62,7 +62,7 @@
 
         private string Resolve(int id)
         {
-            return Url.Link("DefaultApi", new { controller = "Frameworks", id = id });
+            return Url.Link("DefaultApi", new { controller = "frameworks", id = id });
         }
     }
 }
