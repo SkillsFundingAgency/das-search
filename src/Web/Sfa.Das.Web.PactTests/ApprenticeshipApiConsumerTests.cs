@@ -58,10 +58,10 @@ namespace Sfa.Das.Web.ApprenticeshipApiTests
                     }
                 });
 
-            var consumer = new ApprenticeshipApiClient(_mockProviderServiceBaseUri);
+            var consumer = new StandardApiClient(_mockProviderServiceBaseUri);
 
             //Act
-            var result = consumer.GetStandard(standardCode);
+            var result = consumer.Get(standardCode);
 
             //Assert
             Assert.AreEqual(standardCode, result.StandardId);
