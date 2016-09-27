@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Sfa.Das.ApprenticeRegistry.Client</id>
+        <id>Sfa.DAS.Apprenticeships.Api.Client</id>
         <version>0.0.1</version>
-        <authors>SFA DAS</authors>
+        <authors>sfanuget scottcowan</authors>
+		<licenseUrl>https://github.com/SkillsFundingAgency/das-search/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/SkillsFundingAgency/das-search</projectUrl>		
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>a client to access apprenticeship registry API</description>
+		<description>Provides a client layer to call the SFA.DAS.ApprenticeshipInfoService service</description>
+		<summary>Client layer for SFA.DAS.ApprenticeshipInfoService service</summary>
         <copyright>Copyright 2016</copyright>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="6.0.3" />
+            <dependency id="Newtonsoft.Json" version="8.0.3" />
         </dependencies>
     </metadata>
      <files>
