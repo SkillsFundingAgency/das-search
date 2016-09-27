@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApprenticeshipApiClient.cs" />
+    <Compile Include="IApprenticeshipApiClient.cs" />
     <Compile Include="Models\Framework.cs" />
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\Standard.cs" />

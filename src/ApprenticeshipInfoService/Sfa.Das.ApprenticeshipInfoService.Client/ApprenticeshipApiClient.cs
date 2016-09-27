@@ -8,7 +8,7 @@ using Sfa.Das.ApprenticeshipInfoService.Client.Models;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Client
 {
-    public class ApprenticeshipApiClient : IDisposable
+    public class ApprenticeshipApiClient : IApprenticeshipApiClient
     {
         private readonly HttpClient _httpClient;
 
