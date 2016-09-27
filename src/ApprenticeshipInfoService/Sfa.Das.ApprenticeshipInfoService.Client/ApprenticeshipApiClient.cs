@@ -20,7 +20,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Client
 
         public ApprenticeshipApiClient(string baseUri = null)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri(baseUri ?? "http://my.api/v2/capture") };
+            _httpClient = new HttpClient { BaseAddress = new Uri(baseUri ?? "http://api.apprenticeships.sfa.bis.gov.uk") };
         }
 
         /// <summary>
