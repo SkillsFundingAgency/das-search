@@ -108,6 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elasticsearch\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\StandardElasticRepository.cs" />
     <Compile Include="Elasticsearch\FrameworkElasticRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
