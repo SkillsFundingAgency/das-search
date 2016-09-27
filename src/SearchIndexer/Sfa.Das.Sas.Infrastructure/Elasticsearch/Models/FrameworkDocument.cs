@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
     {
         public string FrameworkId { get; set; }
 
+        public bool Published { get; set; }
+
         public int FrameworkCode { get; set; }
 
         [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]

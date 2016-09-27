@@ -59,6 +59,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             var doc = new FrameworkDocument
             {
                 FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
+                Published  = frameworkMetaData.Published,
                 Title = CreateFrameworkTitle(frameworkMetaData.NasTitle, frameworkMetaData.PathwayName),
                 FrameworkCode = frameworkMetaData.FworkCode,
                 FrameworkName = frameworkMetaData.NasTitle,

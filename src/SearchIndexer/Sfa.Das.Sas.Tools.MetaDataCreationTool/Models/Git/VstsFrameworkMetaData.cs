@@ -8,6 +8,8 @@
     {
         public int FrameworkCode { get; set; }
 
+        public bool Published { get; set; }
+
         public int ProgType { get; set; }
 
         public int PathwayCode { get; set; }

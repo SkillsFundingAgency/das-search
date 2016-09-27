@@ -118,6 +118,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
                     continue;
                 }
 
+                framework.Published = repositoryFramework.Published;
                 framework.JobRoleItems = repositoryFramework.JobRoleItems;
                 framework.Keywords = repositoryFramework.Keywords;
                 framework.TypicalLength = repositoryFramework.TypicalLength;
