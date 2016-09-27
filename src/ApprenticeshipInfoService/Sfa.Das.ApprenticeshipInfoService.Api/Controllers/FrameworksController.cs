@@ -21,6 +21,7 @@
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("frameworks")]
         public IEnumerable<FrameworkSummary> Get()
         {
             var response = _getFrameworks.GetAllFrameworks();
@@ -36,20 +37,18 @@
         // GET /frameworks/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("frameworks/{id}")]
         public Framework Get(int id)
         {
             var response = _getFrameworks.GetFrameworkById(id);
-            if (response != null)
-            {
-                response.Uri = Resolve(response.FrameworkId);
-                return response;
-            }
-
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            response.Uri = Resolve(response.FrameworkId);
+            return response;
         }
 
         // HEAD /frameworks/5
+        [SwaggerResponse(HttpStatusCode.NoContent)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("frameworks/{id}")]
         public void Head(int id)
         {
             if (_getFrameworks.GetFrameworkById(id) != null)
