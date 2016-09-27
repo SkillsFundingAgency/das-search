@@ -1,9 +1,10 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿using System.Linq;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
     using System.Net;
     using System.Web.Http;
-    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -20,11 +21,10 @@
         // GET /frameworks
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks")]
         public IEnumerable<FrameworkSummary> Get()
         {
-            var response = _getFrameworks.GetAllFrameworks();
+            var response = _getFrameworks.GetAllFrameworks().ToList();
 
             foreach (var item in response)
             {
@@ -37,12 +37,18 @@
         // GET /frameworks/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
         public Framework Get(int id)
         {
-            var response = _getFrameworks.GetFrameworkById(id);
-            response.Uri = Resolve(response.FrameworkId);
-            return response;
+            if (_getFrameworks.GetFrameworkById(id) != null)
+            {
+                var response = _getFrameworks.GetFrameworkById(id);
+                response.Uri = Resolve(response.FrameworkId);
+                return response;
+            }
+
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         // HEAD /frameworks/5

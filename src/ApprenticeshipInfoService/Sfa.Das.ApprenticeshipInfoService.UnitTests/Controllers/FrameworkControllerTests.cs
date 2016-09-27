@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Web.Http.Routing;
+using NUnit.Framework.Constraints;
 
 namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 {
@@ -35,7 +36,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             _sut.Configuration = new HttpConfiguration();
             _sut.Configuration.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
             _sut.RequestContext.RouteData = new HttpRouteData(
                 route: new HttpRoute(),
@@ -45,18 +46,9 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnFrameworkNotFound()
         {
-            Exception exception = null;
-            try
-            {
-                _sut.Get(-2);
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
-            }
+            ActualValueDelegate<object> test = () =>_sut.Get(-2);
 
-            Assert.NotNull(exception);
-            Assert.IsTrue(exception.GetType() == typeof(HttpResponseException));
+            Assert.That(test, Throws.TypeOf<HttpResponseException>());
         }
 
         [Test]
@@ -67,7 +59,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             Assert.NotNull(framework);
             framework.FrameworkId.Should().Be(1234);
             framework.Title.Should().Be("test title");
-            framework.Uri.Should().Be("http://localhost/api/Frameworks/1234");
+            framework.Uri.Should().Be("http://localhost/frameworks/1234");
         }
     }
 }

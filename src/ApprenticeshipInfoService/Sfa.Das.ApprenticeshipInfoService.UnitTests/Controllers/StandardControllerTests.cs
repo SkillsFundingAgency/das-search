@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Web.Http.Routing;
+using NUnit.Framework.Constraints;
 
 namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 {
@@ -31,7 +32,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             _sut.Configuration = new HttpConfiguration();
             _sut.Configuration.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
             _sut.RequestContext.RouteData = new HttpRouteData(
                 route: new HttpRoute(),
@@ -41,18 +42,9 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnStandardkNotFound()
         {
-            Exception exception = null;
-            try
-            {
-                _sut.Get(-2);
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
-            }
+            ActualValueDelegate<object> test = () => _sut.Get(-2);
 
-            Assert.NotNull(exception);
-            Assert.IsTrue(exception.GetType() == typeof(HttpResponseException));
+            Assert.That(test, Throws.TypeOf<HttpResponseException>());
         }
 
         [Test]
@@ -63,7 +55,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             Assert.NotNull(standard);
             standard.StandardId.Should().Be(42);
             standard.Title.Should().Be("test title");
-            standard.Uri.Should().Be("http://localhost/api/Standards/42");
+            standard.Uri.Should().Be("http://localhost/standards/42");
         }
     }
 }
