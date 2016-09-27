@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Sfa.Das.ApprenticeRegistry.Client</id>
+        <version>0.0.1</version>
+        <authors>SFA DAS</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>a client to access apprenticeship registry API</description>
+        <copyright>Copyright 2016</copyright>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="6.0.3" />
+        </dependencies>
+    </metadata>
+     <files>
+        <file src="\..\src\ApprenticeshipInfoService\Sfa.Das.ApprenticeshipInfoService.Client\bin\Release\Sfa*.*" target="" />
+     </files>
+</package>
