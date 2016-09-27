@@ -83,7 +83,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApprenticeshipApi.Client\Sfa.Das.ApprenticeshipInfoService.Client\Sfa.Das.ApprenticeshipInfoService.Client.csproj">
+    <ProjectReference Include="..\..\ApprenticeshipInfoService\Sfa.Das.ApprenticeshipInfoService.Client\Sfa.Das.ApprenticeshipInfoService.Client.csproj">
       <Project>{da7f312c-6132-4084-a38f-b053029226de}</Project>
       <Name>Sfa.Das.ApprenticeshipInfoService.Client</Name>
     </ProjectReference>
