@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Net;
     using System.Web.Http;
-    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -21,7 +20,7 @@
         // GET /standards
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("standards")]
         public IEnumerable<StandardSummary> Get()
         {
             var response = _getStandards.GetAllStandards().ToList();
@@ -38,6 +37,7 @@
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("standards/{id}")]
         public Standard Get(int id)
         {
             var standard = _getStandards.GetStandardById(id);
@@ -51,6 +51,9 @@
         }
 
         // HEAD /standards/5
+        [SwaggerResponse(HttpStatusCode.NoContent)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("standards/{id}")]
         public void Head(int id)
         {
             if (_getStandards.GetStandardById(id) != null)
