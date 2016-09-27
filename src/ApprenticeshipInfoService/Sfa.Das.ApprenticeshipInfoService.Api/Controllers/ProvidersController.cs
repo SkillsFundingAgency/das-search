@@ -71,7 +71,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{standardCode}/providers")]
-        public DetailProviderResponse GetStandardProviderDetails(string standardCode, int? ukprn, int? location)
+        public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int? ukprn, int? location)
         {
             if (ukprn != null && location != null)
             {
@@ -80,12 +80,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
                     (int)location,
                     standardCode);
 
-                var apprenticeshipData = _getStandards.GetStandardById(Convert.ToInt32(standardCode));
-
-                return _controllerHelper.CreateDetailProviderResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
+                return model;
             }
 
-            return new DetailProviderResponse();
+            return new ApprenticeshipDetails();
         }
 
         // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
@@ -93,7 +91,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{frameworkId}/providers")]
-        public DetailProviderResponse GetFrameworkProviderDetails(string frameworkId, int? ukprn, int? location)
+        public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int? ukprn, int? location)
         {
             if (ukprn != null && location != null)
             {
@@ -102,12 +100,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
                     (int)location,
                     frameworkId);
 
-                var apprenticeshipData = _getFrameworks.GetFrameworkById(Convert.ToInt32(frameworkId));
-
-                return _controllerHelper.CreateDetailProviderResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
+                return model;
             }
 
-            return new DetailProviderResponse();
+            return new ApprenticeshipDetails();
         }
     }
 }
