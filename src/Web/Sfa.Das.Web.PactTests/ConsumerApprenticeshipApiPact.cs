@@ -43,11 +43,17 @@ namespace Sfa.Das.Web.ApprenticeshipApiTests
             {
                 throw new FileNotFoundException("couldn't find the pact file", filename);
             }
-            using (var client = new WebClient())
+
+            if (!string.IsNullOrEmpty(pactBrokerUri))
             {
-                client.Headers.Add("Content-Type", "application/json");
-                client.UploadFile($"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{_consumerName.Replace(" ", "%20")}/version/{Assembly.GetExecutingAssembly().GetName().Version}", "PUT",
-                    $"../../pacts/{filename}");
+                using (var client = new WebClient())
+                {
+                    client.Headers.Add("Content-Type", "application/json");
+                    client.UploadFile(
+                        $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{_consumerName.Replace(" ", "%20")}/version/{Assembly.GetExecutingAssembly().GetName().Version}",
+                        "PUT",
+                        $"../../pacts/{filename}");
+                }
             }
         }
     }

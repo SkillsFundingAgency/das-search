@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Sfa.DAS.Apprenticeships.Api.Client</id>
+        <id>SFA.DAS.Apprenticeships.Api.Client</id>
         <version>0.0.1</version>
         <authors>sfanuget scottcowan</authors>
 		<licenseUrl>https://github.com/SkillsFundingAgency/das-search/blob/master/LICENSE</licenseUrl>
