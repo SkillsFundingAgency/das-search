@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Nest;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Infrastructure.Mapping;
+using Sfa.Das.ApprenticeshipInfoService.Core.Configuration;
+using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+using Sfa.Das.ApprenticeshipInfoService.Core.Services;
+using Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping;
 
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {
     public sealed class ApprenticeshipProviderRepository : IApprenticeshipProviderRepository
     {

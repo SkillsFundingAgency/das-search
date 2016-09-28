@@ -44,6 +44,10 @@
       <HintPath>..\packages\FeatureToggle.Core.3.4.0\lib\portable-net40+sl50+wp81+wpa+win\FeatureToggle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
@@ -104,6 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elasticsearch\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\StandardElasticRepository.cs" />
     <Compile Include="Elasticsearch\FrameworkElasticRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />

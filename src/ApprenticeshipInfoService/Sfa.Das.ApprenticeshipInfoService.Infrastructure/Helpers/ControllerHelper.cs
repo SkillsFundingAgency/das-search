@@ -1,23 +1,40 @@
 ﻿using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Helpers
 {
     public class ControllerHelper : IControllerHelper
     {
-        public int GetActualPage(int? page)
+        public int GetActualPage(int page)
         {
-            var actualPage = 1;
-            if (page != null)
+            if (page < 1)
             {
-                actualPage = (int)page;
+                page = 1;
             }
 
-            if (actualPage < 1)
+            return page;
+        }
+
+        public DetailProviderResponse CreateDetailProviderResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)
+        {
+            if (model == null || apprenticeshipProduct == null)
             {
-                actualPage = 1;
+                return new DetailProviderResponse
+                {
+                    StatusCode = DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound
+                };
             }
 
-            return actualPage;
+            var response = new DetailProviderResponse
+            {
+                StatusCode = DetailProviderResponse.ResponseCodes.Success,
+                ApprenticeshipDetails = model,
+                ApprenticeshipType = apprenticeshipProductType,
+                ApprenticeshipName = apprenticeshipProduct.Title,
+                ApprenticeshipLevel = apprenticeshipProduct.Level.ToString()
+            };
+
+            return response;
         }
     }
 }

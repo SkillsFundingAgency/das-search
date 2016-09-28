@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
+    <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Elasticsearch\IProviderLocationSearchProvider.cs" />
     <Compile Include="Elasticsearch\ProviderRepository.cs" />
@@ -108,6 +109,8 @@
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
+    <Compile Include="Mapping\IProviderMapping.cs" />
+    <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="Mapping\StandardMapping.cs" />
     <Compile Include="Mapping\IStandardMapping.cs" />
     <Compile Include="Mapping\FrameworkMapping.cs" />
