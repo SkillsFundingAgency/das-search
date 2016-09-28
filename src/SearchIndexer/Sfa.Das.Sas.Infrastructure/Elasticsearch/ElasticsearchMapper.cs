@@ -57,12 +57,13 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
             var doc = new FrameworkDocument
             {
-                FrameworkId = $"{frameworkMetaData.FworkCode}{MapToLevelFromProgType(frameworkMetaData.ProgType)}{frameworkMetaData.PwayCode}",
+                FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
                 Title = CreateFrameworkTitle(frameworkMetaData.NasTitle, frameworkMetaData.PathwayName),
                 FrameworkCode = frameworkMetaData.FworkCode,
                 FrameworkName = frameworkMetaData.NasTitle,
                 PathwayCode = frameworkMetaData.PwayCode,
                 PathwayName = frameworkMetaData.PathwayName,
+                ProgType = frameworkMetaData.ProgType,
                 Level = MapToLevelFromProgType(frameworkMetaData.ProgType),
                 JobRoleItems = frameworkMetaData.JobRoleItems?.Select(m => new JobRoleItem { Title = m.Title, Description = m.Description }),
                 Keywords = frameworkMetaData.Keywords,
