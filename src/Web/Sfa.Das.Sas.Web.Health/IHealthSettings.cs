@@ -5,5 +5,7 @@
         string ApprenticeshipApiBaseUrl { get; }
 
         string PostcodeUrl { get; }
+
+        string BuildId { get; }
     }
 }

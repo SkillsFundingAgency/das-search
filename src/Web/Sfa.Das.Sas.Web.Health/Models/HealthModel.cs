@@ -5,7 +5,6 @@
 
     public class HealthModel
     {
-        public string WebAppVersion { get; set; }
 
         public Status PostcodeIoStatus { get; set; }
 
@@ -22,6 +21,12 @@
                 return Status.Green;
             }
         }
+
+        public string BuildId { get; set; }
+
+        public string Version { get; set; }
+
+        public string AssemblyVersion { get; set; }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]

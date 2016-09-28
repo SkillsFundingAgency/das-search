@@ -10,9 +10,12 @@
     {
         private readonly IHealthService _healthService;
 
-        public HealthController(IHealthService healthService)
+        private readonly IHealthSettings _healthSettings;
+
+        public HealthController(IHealthService healthService, IHealthSettings healthSettings)
         {
             _healthService = healthService;
+            _healthSettings = healthSettings;
         }
 
         // GET: Health
@@ -21,7 +24,9 @@
             var viewModel = _healthService.CreateModel();
 
             var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            viewModel.WebAppVersion = version;
+            viewModel.BuildId = _healthSettings.BuildId;
+            viewModel.Version = version;
+            viewModel.AssemblyVersion = version;
 
             if (Request.AcceptTypes.Contains("application/json"))
             {

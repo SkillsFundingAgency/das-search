@@ -97,7 +97,13 @@
             Status: <span class="status-lbl @Model.ApplicationStatus.ToString().ToLower()">@Model.ApplicationStatus</span>
         </p>
         <p>
-            Web assembly version: <span>@Model.WebAppVersion</span>
+            Assembly version: <span>@Model.AssemblyVersion</span>
+        </p>
+        <p>
+            Version: <span>@Model.Version</span>
+        </p>
+        <p>
+            BuildId: <span>@Model.BuildId</span>
         </p>
         <p>
             Postcode status: <span class="status-lbl @Model.PostcodeIoStatus.ToString().ToLower()">@Model.PostcodeIoStatus</span>

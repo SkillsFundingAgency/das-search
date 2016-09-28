@@ -21,7 +21,6 @@
         {
             return new HealthModel
             {
-                WebAppVersion = string.Empty,
                 PostcodeIoStatus = GetStatus(_healthSettings.PostcodeUrl + "/N170AP"),
                 ApiStatus = GetStatus(_healthSettings.ApprenticeshipApiBaseUrl)
             };
