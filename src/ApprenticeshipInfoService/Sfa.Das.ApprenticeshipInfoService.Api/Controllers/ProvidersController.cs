@@ -67,52 +67,40 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerOperation("GetStandardProviderDetails")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("standards/{standardCode}/providers")]
-        public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int? ukprn = null, int? location = null)
+        public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int ukprn, int location)
         {
-            if (ukprn.HasValue && location.HasValue)
+            var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
+                ukprn,
+                location,
+                standardCode);
+
+            if (model != null)
             {
-                var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                    ukprn.Value,
-                    location.Value,
-                    standardCode);
-
-                if (model != null)
-                {
-                    return model;
-                }
-
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return model;
             }
 
-            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Ukprn and Location is required");
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
         [SwaggerOperation("GetStandardProviderDetails")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{frameworkId}/providers")]
-        public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int? ukprn = null, int? location = null)
+        public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int ukprn, int location)
         {
-            if (ukprn.HasValue && location.HasValue)
+            var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
+                ukprn,
+                location,
+                frameworkId);
+
+            if (model != null)
             {
-                var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                    ukprn.Value,
-                    location.Value,
-                    frameworkId);
-
-                if (model != null)
-                {
-                    return model;
-                }
-
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return model;
             }
 
-            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Ukprn and Location is required");
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
     }
 }
