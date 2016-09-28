@@ -5,20 +5,14 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Helpers
 {
     public class ControllerHelper : IControllerHelper
     {
-        public int GetActualPage(int? page)
+        public int GetActualPage(int page)
         {
-            var actualPage = 1;
-            if (page != null)
+            if (page < 1)
             {
-                actualPage = (int)page;
+                page = 1;
             }
 
-            if (actualPage < 1)
-            {
-                actualPage = 1;
-            }
-
-            return actualPage;
+            return page;
         }
 
         public DetailProviderResponse CreateDetailProviderResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)

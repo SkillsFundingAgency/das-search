@@ -4,7 +4,7 @@
 
     public interface IControllerHelper
     {
-        int GetActualPage(int? page);
+        int GetActualPage(int page);
 
         DetailProviderResponse CreateDetailProviderResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType);
     }

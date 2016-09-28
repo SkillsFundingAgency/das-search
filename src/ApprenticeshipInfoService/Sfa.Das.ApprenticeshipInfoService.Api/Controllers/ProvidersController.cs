@@ -1,5 +1,6 @@
 ﻿using System;
-using Sfa.Das.ApprenticeshipInfoService.Core.Helpers;
+using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
+using IControllerHelper = Sfa.Das.ApprenticeshipInfoService.Core.Helpers.IControllerHelper;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
@@ -35,75 +36,89 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("standards/{id}/providers")]
-        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat, double? lon, int? page)
+        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
+            // TODO 404 if standard doesn't exists
             var actualPage = _controllerHelper.GetActualPage(page);
 
-            if (lat != null && lon != null)
+            if (lat.HasValue && lon.HasValue)
             {
-                return _getProviders.GetByStandardIdAndLocation(id, (double)lat, (double)lon, actualPage);
+                return _getProviders.GetByStandardIdAndLocation(id, lat.Value, lon.Value, actualPage);
             }
 
-            return new List<StandardProviderSearchResultsItem>();
+            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Latitude and Longitude is required");
         }
 
         // GET frameworks/5/providers?lat=<latitude>&long=<longitude>&page=#
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{id}/providers")]
-        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat, double? lon, int? page)
+        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
+            // TODO 404 if framework doesn't exists
             var actualPage = _controllerHelper.GetActualPage(page);
 
-            if (lat != null && lon != null)
+            if (lat.HasValue && lon.HasValue)
             {
-                return _getProviders.GetByFrameworkIdAndLocation(id, (double)lat, (double)lon, actualPage);
+                return _getProviders.GetByFrameworkIdAndLocation(id, lat.Value, lon.Value, actualPage);
             }
 
-            return new List<FrameworkProviderSearchResultsItem>();
+            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Latitude and Longitude is required");
         }
 
         // GET standards/<standardId>/providers?ukprn=<ukprn>&location=<locationId>
         [SwaggerOperation("GetStandardProviderDetails")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("standards/{standardCode}/providers")]
-        public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int? ukprn, int? location)
+        public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int? ukprn = null, int? location = null)
         {
-            if (ukprn != null && location != null)
+            if (ukprn.HasValue && location.HasValue)
             {
                 var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                    (int)ukprn,
-                    (int)location,
+                    ukprn.Value,
+                    location.Value,
                     standardCode);
 
-                return model;
+                if (model != null)
+                {
+                    return model;
+                }
+
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            return new ApprenticeshipDetails();
+            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Ukprn and Location is required");
         }
 
         // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
         [SwaggerOperation("GetStandardProviderDetails")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{frameworkId}/providers")]
-        public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int? ukprn, int? location)
+        public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int? ukprn = null, int? location = null)
         {
-            if (ukprn != null && location != null)
+            if (ukprn.HasValue && location.HasValue)
             {
                 var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                    (int)ukprn,
-                    (int)location,
+                    ukprn.Value,
+                    location.Value,
                     frameworkId);
 
-                return model;
+                if (model != null)
+                {
+                    return model;
+                }
+
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            return new ApprenticeshipDetails();
+            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Ukprn and Location is required");
         }
     }
 }
