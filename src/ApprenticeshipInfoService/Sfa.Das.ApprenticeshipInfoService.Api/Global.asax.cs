@@ -8,16 +8,28 @@
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             RegisterRoutes(RouteTable.Routes);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
         private static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Default", "{controller}/{action}/{id}", 
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute(
+                name: "HealthRoute",
+                url: "health/{action}/{id}",
+                defaults: new { controller = "Health", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(
+                name: "HomeRoute",
+                url: "home/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(
+                name: "DefaultRoute",
+                url: string.Empty,
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

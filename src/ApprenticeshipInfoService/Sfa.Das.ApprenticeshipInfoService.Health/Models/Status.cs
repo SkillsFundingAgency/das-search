@@ -1,9 +1,7 @@
 namespace Sfa.Das.ApprenticeshipInfoService.Health.Models
 {
-    public static class Status
+    public enum Status
     {
-        public static string Ok => "OK";
-
-        public static string Error => "Error";
+        Green = 0, Red = 1
     }
 }
