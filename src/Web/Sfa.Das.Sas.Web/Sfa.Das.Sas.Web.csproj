@@ -256,6 +256,7 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
+    <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Logging\RequestContext.cs" />
     <Compile Include="Services\IValidation.cs" />
@@ -664,6 +665,7 @@
       <LastGenOutput>_FilterNationalProviders.generated.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Views\Health\Start.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
@@ -705,6 +707,10 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj">
       <Project>{88f7cfd8-69a0-49a9-83f5-d729def4afca}</Project>
       <Name>Sfa.Das.Sas.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Web.Health\Sfa.Das.Sas.Web.Health.csproj">
+      <Project>{C3395D58-2E04-4B28-857B-A0E27C312C1F}</Project>
+      <Name>Sfa.Das.Sas.Web.Health</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
