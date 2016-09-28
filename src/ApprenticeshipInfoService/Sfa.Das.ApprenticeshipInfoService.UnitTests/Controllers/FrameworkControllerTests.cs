@@ -59,7 +59,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             Assert.NotNull(framework);
             framework.FrameworkId.Should().Be(1234);
             framework.Title.Should().Be("test title");
-            framework.Uri.Should().Be("http://localhost/frameworks/1234");
+            framework.Uri.ToLower().Should().Be("http://localhost/frameworks/1234");
         }
     }
 }

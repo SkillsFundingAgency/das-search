@@ -55,7 +55,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             Assert.NotNull(standard);
             standard.StandardId.Should().Be(42);
             standard.Title.Should().Be("test title");
-            standard.Uri.Should().Be("http://localhost/standards/42");
+            standard.Uri.ToLower().Should().Be("http://localhost/standards/42");
         }
     }
 }
