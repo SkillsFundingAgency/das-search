@@ -16,21 +16,15 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         private readonly IGetProviders _getProviders;
         private readonly IControllerHelper _controllerHelper;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
-        private readonly IGetStandards _getStandards;
-        private readonly IGetFrameworks _getFrameworks;
 
         public ProvidersController(
             IGetProviders getProviders,
             IControllerHelper controllerHelper,
-            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
-            IGetStandards getStandards,
-            IGetFrameworks getFrameworks)
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository)
         {
             _getProviders = getProviders;
             _controllerHelper = controllerHelper;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
-            _getStandards = getStandards;
-            _getFrameworks = getFrameworks;
         }
 
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#

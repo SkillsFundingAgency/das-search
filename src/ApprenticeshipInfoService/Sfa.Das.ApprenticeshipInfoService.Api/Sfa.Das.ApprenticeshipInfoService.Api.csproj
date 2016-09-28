@@ -182,6 +182,7 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Helpers\HttpResponseFactory.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />
     <Compile Include="Controllers\StandardsController.cs" />
     <Compile Include="Controllers\FrameworksController.cs" />

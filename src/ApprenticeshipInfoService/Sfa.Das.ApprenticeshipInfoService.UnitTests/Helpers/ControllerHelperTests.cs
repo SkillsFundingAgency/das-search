@@ -22,7 +22,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Helpers
         [TestCase(3, 3)]
         [TestCase(-3, 1)]
         [TestCase(null, 1)]
-        public void ShouldReturnGivenPageOrOneIfLowerThanOne(int? pageGiven, int expected)
+        public void ShouldReturnGivenPageOrOneIfLowerThanOne(int pageGiven, int expected)
         {
             var page = _sut.GetActualPage(pageGiven);
 
