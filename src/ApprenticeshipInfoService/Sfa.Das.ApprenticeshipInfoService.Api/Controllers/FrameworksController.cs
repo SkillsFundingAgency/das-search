@@ -41,14 +41,15 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [Route("frameworks/{id}")]
         public Framework Get(int id)
         {
-            if (_getFrameworks.GetFrameworkById(id) != null)
+            var response = _getFrameworks.GetFrameworkById(id);
+
+            if (response == null)
             {
-                var response = _getFrameworks.GetFrameworkById(id);
-                response.Uri = Resolve(response.FrameworkId);
-                return response;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            response.Uri = Resolve(response.FrameworkId);
+            return response;
         }
 
         // HEAD /frameworks/5

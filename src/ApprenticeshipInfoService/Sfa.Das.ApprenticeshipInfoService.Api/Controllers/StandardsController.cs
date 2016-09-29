@@ -41,13 +41,14 @@
         public Standard Get(int id)
         {
             var standard = _getStandards.GetStandardById(id);
-            if (standard != null)
+
+            if (standard == null)
             {
-                standard.Uri = Resolve(standard.StandardId);
-                return standard;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            standard.Uri = Resolve(standard.StandardId);
+            return standard;
         }
 
         // HEAD /standards/5
