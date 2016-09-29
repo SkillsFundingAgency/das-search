@@ -34,7 +34,7 @@ namespace Sfa.Das.Web.ApprenticeshipApiTests
         {
             //Arrange
             const int standardCode = 12;
-            _mockProviderService.Given($"there is an standard with id '{standardCode}'")
+            _mockProviderService.Given($"the service has standards")
                 .UponReceiving($"a request to retrieve standard with id '{standardCode}'")
                 .With(new ProviderServiceRequest
                 {

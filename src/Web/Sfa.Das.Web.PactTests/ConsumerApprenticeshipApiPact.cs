@@ -49,8 +49,10 @@ namespace Sfa.Das.Web.ApprenticeshipApiTests
                 using (var client = new WebClient())
                 {
                     client.Headers.Add("Content-Type", "application/json");
+                    var url = $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{_consumerName.Replace(" ", "%20")}/version/{Assembly.GetExecutingAssembly().GetName().Version}";
+                    Console.WriteLine($"PUT {url}");
                     client.UploadFile(
-                        $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{_consumerName.Replace(" ", "%20")}/version/{Assembly.GetExecutingAssembly().GetName().Version}",
+                        url,
                         "PUT",
                         $"../../pacts/{filename}");
                 }
