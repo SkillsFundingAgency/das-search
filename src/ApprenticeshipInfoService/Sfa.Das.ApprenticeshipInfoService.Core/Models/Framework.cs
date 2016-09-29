@@ -19,6 +19,8 @@
 
         public int PathwayCode { get; set; }
 
+        public int ProgType { get; set; }
+
         public int Level { get; set; }
 
         public TypicalLength TypicalLength { get; set; }

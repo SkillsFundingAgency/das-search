@@ -17,7 +17,10 @@
 
         public int PathwayCode { get; set; }
 
+        public int ProgType { get; set; }
+
         public int Level { get; set; }
+
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }
