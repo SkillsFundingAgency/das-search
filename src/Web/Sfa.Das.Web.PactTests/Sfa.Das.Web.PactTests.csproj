@@ -100,9 +100,9 @@
     <None Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApprenticeshipInfoService\Sfa.Das.ApprenticeshipInfoService.Client\Sfa.Das.ApprenticeshipInfoService.Client.csproj">
-      <Project>{da7f312c-6132-4084-a38f-b053029226de}</Project>
-      <Name>Sfa.Das.ApprenticeshipInfoService.Client</Name>
+    <ProjectReference Include="..\..\ApprenticeshipInfoService\SFA.DAS.Apprenticeships.Api.Client\SFA.DAS.Apprenticeships.Api.Client.csproj">
+      <Project>{DA7F312C-6132-4084-A38F-B053029226DE}</Project>
+      <Name>SFA.DAS.Apprenticeships.Api.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

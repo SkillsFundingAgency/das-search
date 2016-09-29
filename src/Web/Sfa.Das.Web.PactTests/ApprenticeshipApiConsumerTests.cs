@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
-using Sfa.Das.ApprenticeshipInfoService.Client;
+using SFA.DAS.Apprenticeships.Api.Client;
 
 namespace Sfa.Das.Web.ApprenticeshipApiTests
 {
