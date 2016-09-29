@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Http.Description;
 using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
 using IControllerHelper = Sfa.Das.ApprenticeshipInfoService.Core.Helpers.IControllerHelper;
 
@@ -28,8 +29,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         }
 
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#
-        [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerOperation("GetByStandardIdAndLocation")]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(List<StandardProviderSearchResultsItem>))]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("standards/{id}/providers")]
         public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
@@ -46,8 +47,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         }
 
         // GET frameworks/5/providers?lat=<latitude>&long=<longitude>&page=#
-        [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerOperation("GetByFrameworkIdAndLocation")]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(List<FrameworkProviderSearchResultsItem>))]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{id}/providers")]
         public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
@@ -65,7 +66,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
         // GET standards/<standardId>/providers?ukprn=<ukprn>&location=<locationId>
         [SwaggerOperation("GetStandardProviderDetails")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(ApprenticeshipDetails))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{standardCode}/providers")]
         public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int ukprn, int location)
@@ -84,8 +85,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         }
 
         // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
-        [SwaggerOperation("GetStandardProviderDetails")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerOperation("GetFrameworkProviderDetails")]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(ApprenticeshipDetails))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{frameworkId}/providers")]
         public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int ukprn, int location)

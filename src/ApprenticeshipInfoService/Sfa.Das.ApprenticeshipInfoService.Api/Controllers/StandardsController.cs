@@ -19,7 +19,7 @@
 
         // GET /standards
         [SwaggerOperation("GetAll")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<StandardSummary>))]
         [Route("standards")]
         public IEnumerable<StandardSummary> Get()
         {
@@ -35,7 +35,7 @@
 
         // GET /standards/5
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Standard))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{id}")]
         public Standard Get(int id)

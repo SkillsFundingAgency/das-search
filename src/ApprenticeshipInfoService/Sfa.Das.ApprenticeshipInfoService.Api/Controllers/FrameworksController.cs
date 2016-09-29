@@ -20,7 +20,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
         // GET /frameworks
         [SwaggerOperation("GetAll")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<FrameworkSummary>))]
         [Route("frameworks")]
         public IEnumerable<FrameworkSummary> Get()
         {
@@ -36,7 +36,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
         // GET /frameworks/5
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Framework))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
         public Framework Get(int id)
