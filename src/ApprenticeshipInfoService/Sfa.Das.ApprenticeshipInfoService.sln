@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5F11FF93-1943-45CF-866B-74219AD92BCD}"
 EndProject
@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{042BF8BB-6121-45A1-B24B-74F1E90E4449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.ApprenticeshipInfoService.Client", "Sfa.Das.ApprenticeshipInfoService.Client\Sfa.Das.ApprenticeshipInfoService.Client.csproj", "{DA7F312C-6132-4084-A38F-B053029226DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.Apprenticeships.Api.Client", "SFA.DAS.Apprenticeships.Api.Client\SFA.DAS.Apprenticeships.Api.Client.csproj", "{DA7F312C-6132-4084-A38F-B053029226DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

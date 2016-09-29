@@ -4,7 +4,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Sfa.Das.ApprenticeshipInfoService.Client
+namespace SFA.DAS.Apprenticeships.Api.Client
 {
     public abstract class ApiClientBase
     {

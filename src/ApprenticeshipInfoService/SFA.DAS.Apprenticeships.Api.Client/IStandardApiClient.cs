@@ -1,7 +1,7 @@
 ﻿using System;
-using Sfa.Das.ApprenticeshipInfoService.Client.Models;
+using SFA.DAS.Apprenticeships.Api.Client.Models;
 
-namespace Sfa.Das.ApprenticeshipInfoService.Client
+namespace SFA.DAS.Apprenticeships.Api.Client
 {
     public interface IStandardApiClient : IDisposable
     {
