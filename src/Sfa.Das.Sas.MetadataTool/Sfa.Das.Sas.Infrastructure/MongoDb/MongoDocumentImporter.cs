@@ -60,8 +60,9 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
                         _mappingService.MapFromVstsModel,
                         EnsureStandard,
                         _mongoSettings.CollectionNameStandards);
+                default:
+                    return new MapperResponse { Data = text, Message = string.Empty, InnerMessage = string.Empty };
             }
-            return new MapperResponse { Data = text, Message = string.Empty, InnerMessage = string.Empty };
         }
 
         private static Func<Framework, bool> EnsureFramework => x => !string.IsNullOrEmpty(x.FrameworkName);
@@ -115,7 +116,7 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
                 return MongoImportType.Nothing;
             }
             MongoImportType t;
-            return Enum.TryParse(type, true, out t) ? t : t;
+            return Enum.TryParse(type, true, out t) ? t :  default(MongoImportType);
         }
 
         private void ImportDocuments<T>(IEnumerable<T> documents, string collectionName)
