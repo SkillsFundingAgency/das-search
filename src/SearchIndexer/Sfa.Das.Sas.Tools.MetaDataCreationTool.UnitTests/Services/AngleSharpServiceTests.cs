@@ -11,13 +11,13 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
     [TestFixture]
     public class AngleSharpServiceTests
     {
-        private readonly string _htmlText = "<html><body>" + "<div>" + "<a href=\"goodbye.com\">Goodbye</a>" + "<a href=\"hello.com\">HELLO</a>" + "<a href=\"Hej.com\">Hej</a>" + "</div>" + "</body></html>";
+        private const string HtmlText = "<html><body>" + "<div>" + "<a href=\"goodbye.com\">Goodbye</a>" + "<a href=\"hello.com\">HELLO</a>" + "<a href=\"Hej.com\">Hej</a>" + "</div>" + "</body></html>";
 
         [Test]
         public void WhenGettingLinks()
         {
             var mockBrowsingContext = new Mock<IHttpGet>();
-            mockBrowsingContext.Setup(m => m.Get(It.IsAny<string>(), null, null)).Returns(_htmlText);
+            mockBrowsingContext.Setup(m => m.Get(It.IsAny<string>(), null, null)).Returns(HtmlText);
 
             AngleSharpService angleSharpService = new AngleSharpService(mockBrowsingContext.Object, Mock.Of<ILog>());
             var x = angleSharpService.GetLinks("path/to/something", "div a", "HELLO");
@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests.Services
         public void WhenUrlIsEmpty()
         {
             var mockBrowsingContext = new Mock<IHttpGet>();
-            mockBrowsingContext.Setup(m => m.Get(It.IsAny<string>(), null, null)).Returns(_htmlText);
+            mockBrowsingContext.Setup(m => m.Get(It.IsAny<string>(), null, null)).Returns(HtmlText);
 
             AngleSharpService angleSharpService = new AngleSharpService(mockBrowsingContext.Object, Mock.Of<ILog>());
             var x = angleSharpService.GetLinks(string.Empty, "div a", "HELLO");

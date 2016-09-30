@@ -164,16 +164,9 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Provider
                 _logger.Warn($"Multiple achievement rates found - UPPRN: {achievementRate.FirstOrDefault()?.Ukprn}");
             }
 
-            double? v1;
-
-            if (achievementRate.FirstOrDefault()?.OverallAchievementRate != null)
-            {
-                v1 = Math.Round((double)achievementRate.FirstOrDefault()?.OverallAchievementRate);
-            }
-            else
-            {
-                v1 = null;
-            }
+            var v1 = achievementRate.FirstOrDefault()?.OverallAchievementRate != null
+                             ? (double?)Math.Round(achievementRate.FirstOrDefault()?.OverallAchievementRate ?? 0.0)
+                             : null;
 
             var v2 = achievementRate.FirstOrDefault()?.OverallCohort;
             return new Tuple<double?, string>(v1, v2);

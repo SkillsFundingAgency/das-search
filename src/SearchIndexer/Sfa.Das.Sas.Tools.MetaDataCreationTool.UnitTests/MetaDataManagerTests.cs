@@ -73,7 +73,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
         [Test]
         public void ShouldUpdateMetadataFromLars()
         {
-            // ILarsDataService larsDataService, IVstsService vstsService, IAppServiceSettings settings
             var mockLarsDataService = new Mock<ILarsDataService>();
             var mockVstsService = new Mock<IVstsService>();
             var mockSettings = new Mock<IAppServiceSettings>();
@@ -82,6 +81,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             var mockMetadataApiService = new Mock<IMetadataApiService>();
 
             mockSettings.Setup(x => x.MetadataApiUri).Returns("www.abba.co.uk");
+
             // Add link
             var larsStandards = new List<LarsStandard> { new LarsStandard { Id = 2, Title = "Title1", NotionalEndLevel = 4 } };
             mockLarsDataService.Setup(m => m.GetListOfCurrentStandards()).Returns(larsStandards);
@@ -120,7 +120,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
 
             mockSettings.Setup(x => x.GovWebsiteUrl).Returns("https://www.gov.uk/");
             mockSettings.Setup(x => x.MetadataApiUri).Returns("https://www.abba.co.uk/");
-            
+
             // Add link
             var larsStandards = new List<LarsStandard> { new LarsStandard { Id = 2, Title = "Title1", NotionalEndLevel = 4, StandardUrl = "StandardUrl" } };
             mockLarsDataService.Setup(m => m.GetListOfCurrentStandards()).Returns(larsStandards);
@@ -152,7 +152,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             var mockMetadataApiService = new Mock<IMetadataApiService>();
 
             mockSettings.Setup(x => x.MetadataApiUri).Returns("https://www.abba.co.uk/");
-            
+
             // Add link
             var larsStandards = new List<LarsStandard> { new LarsStandard { Id = 2, Title = "Title1", NotionalEndLevel = 4 } };
             mockLarsDataService.Setup(m => m.GetListOfCurrentStandards()).Returns(larsStandards);

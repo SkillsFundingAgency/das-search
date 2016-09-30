@@ -49,14 +49,13 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         public string GovWebsiteUrl => _settings.GetSetting("GovWebsiteUrl");
 
-        // Private appServiceSettings
-        private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
-
-        private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
-
         public string MetadataApiUri => CloudConfigurationManager.GetSetting("MetadataApiUri");
 
         public bool ToggleFilterOnFunding => ToBool(_settings.GetSetting("ToggleFilterOnFunding"));
+
+        private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
+
+        private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
 
         public string QueueName(Type type)
         {
