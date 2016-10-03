@@ -16,22 +16,62 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
-        private readonly IGetStandards _getStandards;
         private readonly IProviderLocationSearchProvider _providerLocationSearchProvider;
-        private readonly IStandardMapping _standardMapping;
 
         public ProviderRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IGetStandards getStandards,
             IProviderLocationSearchProvider providerLocationSearchProvider)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
-            _getStandards = getStandards;
             _providerLocationSearchProvider = providerLocationSearchProvider;
+        }
+
+        public IEnumerable<Provider> GetAllProviders()
+        {
+            var take = GetProvidersTotalAmount();
+            var results =
+                _elasticsearchCustomClient.Search<Provider>(
+                    s =>
+                    s.Index(_applicationSettings.ProviderIndexAlias)
+                        .Type(Types.Parse("providerdocument"))
+                        .From(0)
+                        .Sort(sort => sort.Ascending(f => f.Ukprn))
+                        .Take(take)
+                        .MatchAll());
+
+            if (results.ApiCall.HttpStatusCode != 200)
+            {
+                throw new ApplicationException($"Failed query all standards");
+            }
+
+            return results.Documents;
+        }
+
+        public IEnumerable<Provider> GetProvidersByUkprn(int ukprn)
+        {
+            var results =
+                _elasticsearchCustomClient.Search<Provider>(
+                    s =>
+                    s.Index(_applicationSettings.ProviderIndexAlias)
+                        .Type(Types.Parse("providerdocument"))
+                        .From(0)
+                        .Sort(sort => sort.Ascending(f => f.Ukprn))
+                        .Take(100)
+                        .Query(q => q
+                            .Terms(t => t
+                                .Field(f => f.Ukprn)
+                                .Terms(ukprn))));
+
+            if (results.ApiCall.HttpStatusCode != 200)
+            {
+                throw new ApplicationException($"Failed query all standards");
+            }
+
+            return results.Documents;
         }
 
         public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon, int page)
@@ -54,6 +94,18 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             };
 
             return _providerLocationSearchProvider.SearchFrameworkProviders(id, coordinates, page);
+        }
+
+        private int GetProvidersTotalAmount()
+        {
+            var results =
+                _elasticsearchCustomClient.Search<Provider>(
+                    s =>
+                    s.Index(_applicationSettings.ProviderIndexAlias)
+                        .Type(Types.Parse("providerdocument"))
+                        .From(0)
+                        .MatchAll());
+            return (int)results.HitsMetaData.Total;
         }
     }
 }

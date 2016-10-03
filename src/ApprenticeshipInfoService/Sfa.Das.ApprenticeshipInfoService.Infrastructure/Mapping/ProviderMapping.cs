@@ -55,7 +55,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
                     LocationName = matchingLocation.LocationName,
                     Address = matchingLocation.Address
                 },
-                Provider = new Provider
+                Provider = new ProviderDetail
                 {
                     Name = item.ProviderName,
                     UkPrn = item.Ukprn,

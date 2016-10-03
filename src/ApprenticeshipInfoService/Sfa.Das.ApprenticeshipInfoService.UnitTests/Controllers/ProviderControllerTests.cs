@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Routing;
 using FluentAssertions;
 using NUnit.Framework.Constraints;
 using Sfa.Das.ApprenticeshipInfoService.Core.Models;
@@ -15,6 +18,45 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 
     public class ProviderControllerTests
     {
+        [Test]
+        public void ShouldReturnProvider()
+        {
+            var expected = new List<Provider> { new Provider() };
+
+            var mockGetProviders = new Mock<IGetProviders>();
+            var mockControllerHelper = new Mock<IControllerHelper>();
+            var mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
+
+            mockGetProviders.Setup(
+                x =>
+                    x.GetProvidersByUkprn(1)).Returns(expected);
+
+            var _sut = new ProvidersController(mockGetProviders.Object, mockControllerHelper.Object, mockApprenticeshipProviderRepository.Object);
+            var actual = _sut.Get(1);
+
+            actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
+        public void ShouldReturnProvidersNotFound()
+        {
+            var expected = new List<Provider> { new Provider() };
+
+            var mockGetProviders = new Mock<IGetProviders>();
+            var mockControllerHelper = new Mock<IControllerHelper>();
+            var mockApprenticeshipProviderRepository = new Mock<IApprenticeshipProviderRepository>();
+
+            mockGetProviders.Setup(
+                x =>
+                    x.GetProvidersByUkprn(1)).Returns(expected);
+
+            var _sut = new ProvidersController(mockGetProviders.Object, mockControllerHelper.Object, mockApprenticeshipProviderRepository.Object);
+
+            ActualValueDelegate<object> test = () => _sut.Get(-2);
+
+            Assert.That(test, Throws.TypeOf<HttpResponseException>());
+        }
+
         [Test]
         public void ShouldReturnValidListOfStandardProviders()
         {

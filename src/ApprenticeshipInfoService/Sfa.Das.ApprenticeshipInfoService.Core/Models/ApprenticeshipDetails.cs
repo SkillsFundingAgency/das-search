@@ -6,6 +6,6 @@
 
         public Location Location { get; set; }
 
-        public Provider Provider { get; set; }
+        public ProviderDetail Provider { get; set; }
     }
 }

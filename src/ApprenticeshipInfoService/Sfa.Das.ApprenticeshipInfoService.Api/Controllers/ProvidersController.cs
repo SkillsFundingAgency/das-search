@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
 using IControllerHelper = Sfa.Das.ApprenticeshipInfoService.Core.Helpers.IControllerHelper;
 
@@ -25,6 +26,34 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             _getProviders = getProviders;
             _controllerHelper = controllerHelper;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
+        }
+
+        // GET /providers
+        [SwaggerOperation("GetAll")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [Route("providers")]
+        public IEnumerable<Provider> Get()
+        {
+            var response = _getProviders.GetAllProviders();
+
+            return response;
+        }
+
+        // GET /providers
+        [SwaggerOperation("GetByUkprn")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("providers/{ukprn}")]
+        public IEnumerable<Provider> Get(int ukprn)
+        {
+            var response = _getProviders.GetProvidersByUkprn(ukprn);
+
+            if (!response.Any())
+            {
+                throw HttpResponseFactory.RaiseException(HttpStatusCode.NotFound, string.Format("No provider with Ukprn {0} found", ukprn));
+            }
+
+            return response;
         }
 
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#

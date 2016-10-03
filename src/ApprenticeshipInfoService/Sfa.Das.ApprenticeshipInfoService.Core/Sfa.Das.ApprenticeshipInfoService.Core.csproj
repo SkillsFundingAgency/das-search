@@ -60,6 +60,7 @@
     <Compile Include="Models\DetailProviderResponse.cs" />
     <Compile Include="Models\ContactInformation.cs" />
     <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\ProviderDetail.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
     <Compile Include="Models\Coordinate.cs" />
