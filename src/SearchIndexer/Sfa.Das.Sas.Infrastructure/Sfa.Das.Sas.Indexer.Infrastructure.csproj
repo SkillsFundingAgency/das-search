@@ -177,6 +177,7 @@
     <Compile Include="Elasticsearch\Models\JobRoleItem.cs" />
     <Compile Include="Elasticsearch\Models\StandardProvider.cs" />
     <Compile Include="Elasticsearch\Models\TrainingLocation.cs" />
+    <Compile Include="Elasticsearch\Models\ProviderDocument.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CsvService.cs" />

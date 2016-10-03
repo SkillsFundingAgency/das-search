@@ -101,6 +101,23 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             return CreateFrameworkProviderDocument(provider, frameworkInformation, new List<DeliveryInformation> { deliveryInformation });
         }
 
+        public ProviderDocument CreateProviderDocument(Provider provider)
+        {
+            var providerDocument = new ProviderDocument
+            {
+                Ukprn = provider.Ukprn,
+                NationalProvider = provider.NationalProvider,
+                ProviderName = provider.Name,
+                Website = provider.ContactDetails.Website,
+                Phone = provider.ContactDetails.Phone,
+                Email = provider.ContactDetails.Email,
+                EmployerSatisfaction = provider.EmployerSatisfaction,
+                LearnerSatisfaction = provider.LearnerSatisfaction
+            };
+
+            return providerDocument;
+        }
+
         public FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation frameworkInformation, IEnumerable<DeliveryInformation> deliveryInformation)
         {
             return CreateFrameworkProviderDocument(provider, frameworkInformation, deliveryInformation.ToList());

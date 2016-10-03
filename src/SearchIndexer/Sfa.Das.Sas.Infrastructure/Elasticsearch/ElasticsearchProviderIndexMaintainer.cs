@@ -52,12 +52,15 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         {
             var bulkStandardTasks = new List<Task<IBulkResponse>>();
             var bulkFrameworkTasks = new List<Task<IBulkResponse>>();
+            var bulkProviderTasks = new List<Task<IBulkResponse>>();
 
             bulkStandardTasks.AddRange(IndexStandards(indexName, indexEntries));
             bulkFrameworkTasks.AddRange(IndexFrameworks(indexName, indexEntries));
+            bulkProviderTasks.AddRange(IndexProviders(indexName, indexEntries));
 
             LogResponse(await Task.WhenAll(bulkStandardTasks), "StandardProvider");
             LogResponse(await Task.WhenAll(bulkFrameworkTasks), "FrameworkProvider");
+            LogResponse(await Task.WhenAll(bulkProviderTasks), "ProviderDocument");
         }
 
         private List<Task<IBulkResponse>> IndexFrameworks(string indexName, ICollection<Provider> indexEntries)
@@ -88,6 +91,19 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                         }
                     }
                 }
+            }
+
+            return bulkProviderLocation.GetTasks();
+        }
+
+        private List<Task<IBulkResponse>> IndexProviders(string indexName, ICollection<Provider> indexEntries)
+        {
+            var bulkProviderLocation = new BulkProviderClient(indexName, Client);
+
+            foreach (var provider in indexEntries)
+            {
+                var mappedProvider = ElasticsearchMapper.CreateProviderDocument(provider);
+                bulkProviderLocation.Create<ProviderDocument>(c => c.Document(mappedProvider));
             }
 
             return bulkProviderLocation.GetTasks();
