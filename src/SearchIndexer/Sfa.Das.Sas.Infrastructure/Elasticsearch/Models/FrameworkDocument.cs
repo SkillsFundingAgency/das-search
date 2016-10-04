@@ -17,6 +17,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
         public int PathwayCode { get; set; }
 
+        public int ProgType { get; set; }
+
         [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]
         public string PathwayName { get; set; }
 

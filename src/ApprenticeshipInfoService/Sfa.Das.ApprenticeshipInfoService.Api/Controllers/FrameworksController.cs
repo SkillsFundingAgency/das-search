@@ -20,7 +20,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 
         // GET /frameworks
         [SwaggerOperation("GetAll")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<FrameworkSummary>))]
         [Route("frameworks")]
         public IEnumerable<FrameworkSummary> Get()
         {
@@ -41,19 +41,20 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         /// </summary>
         /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Framework))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
         public Framework Get(int id)
         {
-            if (_getFrameworks.GetFrameworkById(id) != null)
+            var response = _getFrameworks.GetFrameworkById(id);
+
+            if (response == null)
             {
-                var response = _getFrameworks.GetFrameworkById(id);
-                response.Uri = Resolve(response.FrameworkId);
-                return response;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            response.Uri = Resolve(response.FrameworkId);
+            return response;
         }
 
         // HEAD /frameworks/5
