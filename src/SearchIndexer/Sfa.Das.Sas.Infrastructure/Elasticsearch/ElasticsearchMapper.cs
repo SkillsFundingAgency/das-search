@@ -30,6 +30,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
             var doc = new StandardDocument
             {
                 StandardId = standard.Id,
+                Published = standard.Published,
                 Title = standard.Title,
                 JobRoles = standard.JobRoles,
                 Keywords = standard.Keywords,
