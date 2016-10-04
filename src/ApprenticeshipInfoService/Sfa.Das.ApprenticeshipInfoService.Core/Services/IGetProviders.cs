@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Core.Services
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Services
 {
+    using System.Collections.Generic;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
 
     public interface IGetProviders
     {
@@ -10,8 +10,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Core.Services
 
         IEnumerable<Provider> GetProvidersByUkprn(int ukprn);
 
-        List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon, int page);
+        List<StandardProviderSearchResultsItemResponse> GetByStandardIdAndLocation(int id, double lat, double lon, int page);
 
-        List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon, int page);
+        List<FrameworkProviderSearchResultsItemResponse> GetByFrameworkIdAndLocation(int id, double lat, double lon, int page);
     }
 }

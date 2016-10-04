@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
 using IControllerHelper = Sfa.Das.ApprenticeshipInfoService.Core.Helpers.IControllerHelper;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
@@ -61,7 +62,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("standards/{id}/providers")]
-        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
+        public List<StandardProviderSearchResultsItemResponse> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if standard doesn't exists
             var actualPage = _controllerHelper.GetActualPage(page);
@@ -79,7 +80,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{id}/providers")]
-        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
+        public List<FrameworkProviderSearchResultsItemResponse> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if framework doesn't exists
             var actualPage = _controllerHelper.GetActualPage(page);

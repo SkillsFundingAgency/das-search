@@ -6,6 +6,7 @@ using System.Web.Http.Routing;
 using FluentAssertions;
 using NUnit.Framework.Constraints;
 using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
 
 namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 {
@@ -60,12 +61,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnValidListOfStandardProviders()
         {
-            var element = new StandardProviderSearchResultsItem
+            var element = new StandardProviderSearchResultsItemResponse
             {
                 ProviderName = "Test provider name",
                 ApprenticeshipInfoUrl = "http://www.abba.co.uk"
             };
-            var expected = new List<StandardProviderSearchResultsItem> { element };
+            var expected = new List<StandardProviderSearchResultsItemResponse> { element };
 
             var mockGetProviders = new Mock<IGetProviders>();
             var mockControllerHelper = new Mock<IControllerHelper>();
@@ -82,7 +83,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var response = _sut.GetByStandardIdAndLocation(1, 2, 3, 1);
 
             response.Should().NotBeNull();
-            response.Should().BeOfType<List<StandardProviderSearchResultsItem>>();
+            response.Should().BeOfType<List<StandardProviderSearchResultsItemResponse>>();
             response.Should().NotBeEmpty();
             response.Should().BeEquivalentTo(expected);
             response.First().Should().NotBe(null);
@@ -94,12 +95,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnValidListOfFrameworkProviders()
         {
-            var element = new FrameworkProviderSearchResultsItem
+            var element = new FrameworkProviderSearchResultsItemResponse
             {
                 ProviderName = "Test provider name",
                 ApprenticeshipInfoUrl = "http://www.abba.co.uk"
             };
-            var expected = new List<FrameworkProviderSearchResultsItem> { element };
+            var expected = new List<FrameworkProviderSearchResultsItemResponse> { element };
 
             var mockGetProviders = new Mock<IGetProviders>();
             var mockControllerHelper = new Mock<IControllerHelper>();
@@ -116,7 +117,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var response = _sut.GetByFrameworkIdAndLocation(1, 2, 3, 1);
 
             response.Should().NotBeNull();
-            response.Should().BeOfType<List<FrameworkProviderSearchResultsItem>>();
+            response.Should().BeOfType<List<FrameworkProviderSearchResultsItemResponse>>();
             response.Should().NotBeEmpty();
             response.Should().BeEquivalentTo(expected);
             response.First().Should().NotBe(null);

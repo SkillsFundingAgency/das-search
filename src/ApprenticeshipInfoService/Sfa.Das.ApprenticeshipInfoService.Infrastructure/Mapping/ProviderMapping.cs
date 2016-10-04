@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
 {
@@ -25,6 +26,63 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
             details.Product.Apprenticeship.Code = int.Parse(item.FrameworkId);
 
             return details;
+        }
+
+        public StandardProviderSearchResultsItemResponse MapToStandardProviderResponse(
+            StandardProviderSearchResultsItem item)
+        {
+            return new StandardProviderSearchResultsItemResponse
+            {
+                ProviderName = item.ProviderName,
+                ApprenticeshipInfoUrl = item.ApprenticeshipInfoUrl,
+                ApprenticeshipMarketingInfo = item.ApprenticeshipMarketingInfo,
+                ContactUsUrl = item.ContactUsUrl,
+                DeliveryModes = item.DeliveryModes,
+                Distance = item.Distance,
+                Email = item.Email,
+                EmployerSatisfaction = item.EmployerSatisfaction,
+                LearnerSatisfaction = item.LearnerSatisfaction,
+                MarketingName = item.MarketingName,
+                NationalOverallAchievementRate = item.NationalOverallAchievementRate,
+                NationalProvider = item.NationalProvider,
+                OverallAchievementRate = item.OverallAchievementRate,
+                OverallCohort = item.OverallCohort,
+                Phone = item.Phone,
+                ProviderMarketingInfo = item.ProviderMarketingInfo,
+                TrainingLocations = item.TrainingLocations,
+                Ukprn = item.Ukprn,
+                Website = item.Website
+            };
+        }
+
+        public FrameworkProviderSearchResultsItemResponse MapToFrameworkProviderResponse(
+            FrameworkProviderSearchResultsItem item)
+        {
+            return new FrameworkProviderSearchResultsItemResponse
+            {
+                ProviderName = item.ProviderName,
+                ApprenticeshipInfoUrl = item.ApprenticeshipInfoUrl,
+                ApprenticeshipMarketingInfo = item.ApprenticeshipMarketingInfo,
+                ContactUsUrl = item.ContactUsUrl,
+                DeliveryModes = item.DeliveryModes,
+                Distance = item.Distance,
+                Email = item.Email,
+                EmployerSatisfaction = item.EmployerSatisfaction,
+                LearnerSatisfaction = item.LearnerSatisfaction,
+                MarketingName = item.MarketingName,
+                NationalOverallAchievementRate = item.NationalOverallAchievementRate,
+                NationalProvider = item.NationalProvider,
+                OverallAchievementRate = item.OverallAchievementRate,
+                OverallCohort = item.OverallCohort,
+                Phone = item.Phone,
+                ProviderMarketingInfo = item.ProviderMarketingInfo,
+                TrainingLocations = item.TrainingLocations,
+                Ukprn = item.Ukprn,
+                Website = item.Website,
+                FrameworkCode = item.FrameworkCode,
+                Level = item.Level,
+                PathwayCode = item.PathwayCode
+            };
         }
 
         private static ApprenticeshipDetails MapFromInterface(IApprenticeshipProviderSearchResultsItem item, int locationId)

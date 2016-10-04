@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
+using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {
@@ -17,17 +18,20 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IProviderLocationSearchProvider _providerLocationSearchProvider;
+        private readonly IProviderMapping _providerMapping;
 
         public ProviderRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IProviderLocationSearchProvider providerLocationSearchProvider)
+            IProviderLocationSearchProvider providerLocationSearchProvider,
+            IProviderMapping providerMapping)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _providerLocationSearchProvider = providerLocationSearchProvider;
+            _providerMapping = providerMapping;
         }
 
         public IEnumerable<Provider> GetAllProviders()
@@ -74,7 +78,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             return results.Documents;
         }
 
-        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double lat, double lon, int page)
+        public List<StandardProviderSearchResultsItemResponse> GetByStandardIdAndLocation(int id, double lat, double lon, int page)
         {
             var coordinates = new Coordinate
             {
@@ -82,10 +86,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
                 Lon = lon
             };
 
-            return _providerLocationSearchProvider.SearchStandardProviders(id, coordinates, page);
+            var providers = _providerLocationSearchProvider.SearchStandardProviders(id, coordinates, page);
+
+            return providers.Select(provider => _providerMapping.MapToStandardProviderResponse(provider)).ToList();
         }
 
-        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double lat, double lon, int page)
+        public List<FrameworkProviderSearchResultsItemResponse> GetByFrameworkIdAndLocation(int id, double lat, double lon, int page)
         {
             var coordinates = new Coordinate
             {
@@ -93,7 +99,9 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
                 Lon = lon
             };
 
-            return _providerLocationSearchProvider.SearchFrameworkProviders(id, coordinates, page);
+            var providers = _providerLocationSearchProvider.SearchFrameworkProviders(id, coordinates, page);
+
+            return providers.Select(provider => _providerMapping.MapToFrameworkProviderResponse(provider)).ToList();
         }
 
         private int GetProvidersTotalAmount()

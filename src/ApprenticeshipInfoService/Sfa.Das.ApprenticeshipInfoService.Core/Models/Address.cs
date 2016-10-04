@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
 {
     public class Address
     {
@@ -17,9 +11,5 @@ namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
         public string County { get; set; }
 
         public string Postcode { get; set; }
-
-        public double Lat { get; set; }
-
-        public double Long { get; set; }
     }
 }

@@ -59,11 +59,13 @@
     <Compile Include="Models\ApprenticeshipTrainingType.cs" />
     <Compile Include="Models\DetailProviderResponse.cs" />
     <Compile Include="Models\ContactInformation.cs" />
+    <Compile Include="Models\Responses\FrameworkProviderSearchResultsItemResponse.cs" />
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\ProviderDetail.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
     <Compile Include="Models\Coordinate.cs" />
+    <Compile Include="Models\Responses\StandardProviderSearchResultsItemResponse.cs" />
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
     <Compile Include="Models\TrainingLocation.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
