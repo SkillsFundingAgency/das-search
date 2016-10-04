@@ -60,7 +60,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         // HEAD /frameworks/5
 
         /// <summary>
-        /// Get a framework by composite id
+        /// check if a framework exists by composite id
         /// </summary>
         /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
         [SwaggerResponse(HttpStatusCode.NoContent)]
