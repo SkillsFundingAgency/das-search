@@ -34,7 +34,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             return response;
         }
 
-        // GET /frameworks/5
+        // GET /frameworks/40338
+
+        /// <summary>
+        /// Get a framework by composite id
+        /// </summary>
+        /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
@@ -52,6 +57,11 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         }
 
         // HEAD /frameworks/5
+
+        /// <summary>
+        /// Get a framework by composite id
+        /// </summary>
+        /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
         [SwaggerResponse(HttpStatusCode.NoContent)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
