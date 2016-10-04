@@ -134,7 +134,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 {
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
-                    FrameworkId = string.Concat(frameworkInformation.Code, MapToLevelFromProgType(frameworkInformation.ProgType), frameworkInformation.PathwayCode),
+                    FrameworkId = string.Concat(frameworkInformation.Code, frameworkInformation.ProgType, frameworkInformation.PathwayCode),
                     Level = MapToLevelFromProgType(frameworkInformation.ProgType)
                 };
 
