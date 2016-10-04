@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Services
         private readonly IAppServiceSettings _appServiceSettings;
 
         public VstsClient(
-            IAppServiceSettings appServiceSettings, 
+            IAppServiceSettings appServiceSettings,
             IHttpGet httpHelper,
             IHttpPost httpPost,
             ILog logger)

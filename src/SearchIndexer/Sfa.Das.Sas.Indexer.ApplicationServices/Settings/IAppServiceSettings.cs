@@ -44,10 +44,10 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string GovWebsiteUrl { get; }
 
-        string QueueName(Type type);
-
         string MetadataApiUri { get; }
 
         bool ToggleFilterOnFunding { get; }
+
+        string QueueName(Type type);
     }
 }

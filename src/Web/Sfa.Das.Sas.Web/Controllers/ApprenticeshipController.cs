@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return View(viewModel);
             }
 
-            var rv = CreateRouteParameters(query, response, viewModel);
+            var rv = CreateRouteParameters(query, viewModel);
 
             var url = Url.Action("SearchResults", "Apprenticeship", rv);
 
@@ -155,7 +155,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("SearchForProviders", viewModel);
         }
 
-        private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResponse response, ApprenticeshipSearchResultViewModel viewModel)
+        private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResultViewModel viewModel)
         {
             var rv = new RouteValueDictionary { { "keywords", query?.Keywords }, { "page", viewModel?.LastPage ?? 1 } };
             var index = 0;

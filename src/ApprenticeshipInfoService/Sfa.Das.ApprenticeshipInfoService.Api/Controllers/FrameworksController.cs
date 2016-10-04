@@ -1,9 +1,10 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿using System.Linq;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
     using System.Net;
     using System.Web.Http;
-    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -19,11 +20,11 @@
 
         // GET /frameworks
         [SwaggerOperation("GetAll")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<FrameworkSummary>))]
+        [Route("frameworks")]
         public IEnumerable<FrameworkSummary> Get()
         {
-            var response = _getFrameworks.GetAllFrameworks();
+            var response = _getFrameworks.GetAllFrameworks().ToList();
 
             foreach (var item in response)
             {
@@ -33,23 +34,38 @@
             return response;
         }
 
-        // GET /frameworks/5
+        // GET /frameworks/40338
+
+        /// <summary>
+        /// Get a framework by composite id
+        /// </summary>
+        /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Framework))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("frameworks/{id}")]
         public Framework Get(int id)
         {
             var response = _getFrameworks.GetFrameworkById(id);
-            if (response != null)
+
+            if (response == null)
             {
-                response.Uri = Resolve(response.FrameworkId);
-                return response;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            response.Uri = Resolve(response.FrameworkId);
+            return response;
         }
 
         // HEAD /frameworks/5
+
+        /// <summary>
+        /// Get a framework by composite id
+        /// </summary>
+        /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
+        [SwaggerResponse(HttpStatusCode.NoContent)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("frameworks/{id}")]
         public void Head(int id)
         {
             if (_getFrameworks.GetFrameworkById(id) != null)
@@ -62,7 +78,7 @@
 
         private string Resolve(int id)
         {
-            return Url.Link("DefaultApi", new { controller = "Frameworks", id = id });
+            return Url.Link("DefaultApi", new { controller = "frameworks", id = id });
         }
     }
 }

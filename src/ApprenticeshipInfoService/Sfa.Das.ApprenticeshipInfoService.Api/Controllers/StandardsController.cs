@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Net;
     using System.Web.Http;
-    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -20,8 +19,8 @@
 
         // GET /standards
         [SwaggerOperation("GetAll")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<StandardSummary>))]
+        [Route("standards")]
         public IEnumerable<StandardSummary> Get()
         {
             var response = _getStandards.GetAllStandards().ToList();
@@ -36,21 +35,26 @@
 
         // GET /standards/5
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Standard))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("standards/{id}")]
         public Standard Get(int id)
         {
             var standard = _getStandards.GetStandardById(id);
-            if (standard != null)
+
+            if (standard == null)
             {
-                standard.Uri = Resolve(standard.StandardId);
-                return standard;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            standard.Uri = Resolve(standard.StandardId);
+            return standard;
         }
 
         // HEAD /standards/5
+        [SwaggerResponse(HttpStatusCode.NoContent)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("standards/{id}")]
         public void Head(int id)
         {
             if (_getStandards.GetStandardById(id) != null)
@@ -63,7 +67,7 @@
 
         private string Resolve(int id)
         {
-            return Url.Link("DefaultApi", new { controller = "Standards", id = id });
+            return Url.Link("DefaultApi", new { controller = "standards", id = id });
         }
     }
 }

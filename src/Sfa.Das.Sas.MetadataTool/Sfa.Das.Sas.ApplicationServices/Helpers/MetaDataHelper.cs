@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Helpers
 
         private readonly ILog _log;
 
-        private IUpdateMetaData _metaDataUpdate;
+        private readonly IUpdateMetaData _metaDataUpdate;
 
         public MetaDataHelper(IGetStandardMetaData metaDataReader, ILog log, IGetFrameworkMetaData metaDataFrameworkReader, IUpdateMetaData metaDataUpdate)
         {

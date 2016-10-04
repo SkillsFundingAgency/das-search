@@ -31,6 +31,22 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
             _mappingService = new MongoMappingService();
         }
 
+        private MapperResponse ImportFrameworks(string text, MongoImportType type)
+        {
+            return type == MongoImportType.Framework
+                       ? ImportData(text, EnsureFramework, _mongoSettings.CollectionNameFrameworks)
+                       : ImportFromVsts<VstsFrameworkMetaData, Framework>
+                           (text, _mappingService.MapFromVstsModel, EnsureFramework, _mongoSettings.CollectionNameFrameworks);
+        }
+
+        private MapperResponse ImportStandards(string text, MongoImportType type)
+        {
+            return type == MongoImportType.Standard
+                       ? ImportData(text, EnsureStandard, _mongoSettings.CollectionNameStandards)
+                       : ImportFromVsts<VstsStandardMetaData, Standard>
+                           (text, _mappingService.MapFromVstsModel, EnsureStandard, _mongoSettings.CollectionNameStandards);
+        }
+
         public MapperResponse Import(string text, string type)
         {
             var typeStatus = GetImportType(text, type);
@@ -39,29 +55,14 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
                 case MongoImportType.Nothing:
                     return new MapperResponse { Data = text, Message = "Input not valid" };
                 case MongoImportType.Framework:
-                    return ImportData(
-                        text,
-                        EnsureFramework,
-                        _mongoSettings.CollectionNameFrameworks);
-                case MongoImportType.Standard:
-                    return ImportData(
-                        text,
-                        EnsureStandard,
-                        _mongoSettings.CollectionNameStandards);
                 case MongoImportType.VstsFramework:
-                    return ImportFromVsts<VstsFrameworkMetaData, Framework>(
-                        text,
-                        _mappingService.MapFromVstsModel,
-                        EnsureFramework,
-                        _mongoSettings.CollectionNameFrameworks);
+                    return ImportFrameworks(text, typeStatus);
+                case MongoImportType.Standard:                
                 case MongoImportType.VstsStandard:
-                    return ImportFromVsts<VstsStandardMetaData, Standard>(
-                        text,
-                        _mappingService.MapFromVstsModel,
-                        EnsureStandard,
-                        _mongoSettings.CollectionNameStandards);
+                    return ImportStandards(text, typeStatus);
+                default:
+                    return new MapperResponse { Data = text, Message = string.Empty, InnerMessage = string.Empty };
             }
-            return new MapperResponse { Data = text, Message = string.Empty, InnerMessage = string.Empty };
         }
 
         private static Func<Framework, bool> EnsureFramework => x => !string.IsNullOrEmpty(x.FrameworkName);
@@ -115,7 +116,7 @@ namespace Sfa.Das.Sas.Infrastructure.MongoDb
                 return MongoImportType.Nothing;
             }
             MongoImportType t;
-            return Enum.TryParse(type, true, out t) ? t : t;
+            return Enum.TryParse(type, true, out t) ? t :  default(MongoImportType);
         }
 
         private void ImportDocuments<T>(IEnumerable<T> documents, string collectionName)

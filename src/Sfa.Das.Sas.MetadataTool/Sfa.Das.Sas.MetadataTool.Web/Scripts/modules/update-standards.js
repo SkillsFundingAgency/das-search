@@ -1,7 +1,6 @@
 ﻿var FatMetaData = FatMetaData || {};
 
 (function (editStandard) {
-    "use strict";
 
     var helper = FatMetaData.UpdateHelper;
 

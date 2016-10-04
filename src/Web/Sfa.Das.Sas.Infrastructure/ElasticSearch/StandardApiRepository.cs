@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using Sfa.Das.Sas.ApplicationServices.Http;
+using SFA.DAS.Apprenticeships.Api.Client;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -8,42 +7,34 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     using System.Linq;
 
     using Nest;
-
-    using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Core.Logging;
     using Sfa.Das.Sas.Infrastructure.Mapping;
 
     public sealed class StandardApiRepository : IGetStandards
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
-        private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
-        private readonly IHttpGet _httpService;
+        private readonly IStandardApiClient _standardApiClient;
 
         public StandardApiRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
-            ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IStandardMapping standardMapping,
-            IHttpGet httpService)
+            IStandardApiClient standardApiClient)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
-            _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
-            _httpService = httpService;
+            _standardApiClient = standardApiClient;
         }
 
         public Standard GetStandardById(int id)
         {
-            var url = string.Concat(_applicationSettings.ApprenticeshipApiBaseUrl, "Standards/", id);
-
-            var result = JsonConvert.DeserializeObject<StandardSearchResultsItem>(_httpService.Get(url, null, null));
+            var result = _standardApiClient.Get(id);
 
             if (result == null)
             {

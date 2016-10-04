@@ -104,7 +104,6 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         private void UpdateFrameworkInformation(IEnumerable<FrameworkMetaData> frameworks)
         {
-            //var repositoryFrameworks = _metadataApiService.GetFrameworks();
             var repositoryFrameworks = _vstsService.GetFrameworks();
 
             foreach (var framework in frameworks)
