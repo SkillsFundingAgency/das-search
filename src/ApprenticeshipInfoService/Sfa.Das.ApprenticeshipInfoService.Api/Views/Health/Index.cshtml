@@ -72,13 +72,27 @@
         padding: 1px;
     }
 
+    .status-lbl.red {
+        border-bottom: 5px solid red;
+    }
+
+    .status-lbl.green {
+        border-bottom: 5px solid green;
+    }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="status">
-            <h2>Health</h2>
-            <div>@Model.Status</div>
+            <h2>
+                Health
+            </h2>
+            <div>
+                <span class="status-lbl @Model.Status.ToString().ToLower()">
+                    @Model.Status
+                </span>
+            </div>
             <div class="messages">
                 @foreach (var message in @Model.Errors)
             {
@@ -124,9 +138,17 @@
         <div class="services">
             <dl class="table-display">
                 <dt>LarsZipFileStatus: </dt>
-                <dd>@Model.LarsZipFileStatus</dd>
+                <dd >
+                    <span class="status-lbl @Model.LarsZipFileStatus.ToString().ToLower()">
+                        @Model.LarsZipFileStatus
+                    </span>
+                </dd>
                 <dt>CourseDirectoryStatus: </dt>
-                <dd>@Model.CourseDirectoryStatus</dd>
+                <dd>
+                    <span class="status-lbl @Model.CourseDirectoryStatus.ToString().ToLower()">
+                        @Model.CourseDirectoryStatus
+                    </span>
+                </dd>
             </dl>
         </div>
 

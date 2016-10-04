@@ -22,6 +22,8 @@ using StructureMap;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
 {
+    using Sfa.Das.Sas.Web.Health;
+
     public static class IoC
     {
         public static IContainer Initialize()
@@ -31,6 +33,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
                 c.AddRegistry<WebRegistry>();
                 c.AddRegistry<InfrastructureRegistry>();
                 c.AddRegistry<ApplicationServicesRegistry>();
+                c.AddRegistry<HealthRegistry>();
             });
         }
     }

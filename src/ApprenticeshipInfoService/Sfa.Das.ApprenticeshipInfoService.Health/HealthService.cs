@@ -38,7 +38,7 @@
 
             var model = new HealthModel
             {
-                Status = Status.Ok,
+                Status = Status.Green,
                 Errors = new List<string>(),
                 ElasticSearchAliases = elasticserachModel.ElasticsearchAliases,
                 ElasticsearchLog = elasticErrorLogs,
@@ -48,25 +48,25 @@
 
             if (elasticserachModel.Exception != null)
             {
-                model.Status = Status.Error;
+                model.Status = Status.Red;
                 model.Errors.Add(elasticserachModel.Exception.Message);
             }
 
             if (elasticserachModel.ElasticsearchAliases.Count < 2)
             {
-                model.Status = Status.Error;
+                model.Status = Status.Red;
                 model.Errors.Add($"Missing aliases / indices. Should be 2 but found {elasticserachModel.ElasticsearchAliases.Count}");
             }
 
-            if (model.LarsZipFileStatus != Status.Ok)
+            if (model.LarsZipFileStatus != Status.Green)
             {
-                model.Status = Status.Error;
+                model.Status = Status.Red;
                 model.Errors.Add("Cant access hub.imservices.org.uk (LARS)");
             }
 
-            if (model.CourseDirectoryStatus != Status.Ok)
+            if (model.CourseDirectoryStatus != Status.Green)
             {
-                model.Status = Status.Error;
+                model.Status = Status.Red;
                 model.Errors.Add("Cant access Course Directory");
             }
 

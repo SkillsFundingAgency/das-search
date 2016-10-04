@@ -4,7 +4,7 @@
 
     public class HealthModel
     {
-        public string Status { get; set; }
+        public Status Status { get; set; }
 
         public List<string> Errors { get; set; }
 
@@ -12,9 +12,9 @@
 
         public ElasticsearchLog ElasticsearchLog { get; set; }
 
-        public string LarsZipFileStatus { get; set; }
+        public Status LarsZipFileStatus { get; set; }
 
-        public string CourseDirectoryStatus { get; set; }
+        public Status CourseDirectoryStatus { get; set; }
 
         public long Took { get; set; }
     }

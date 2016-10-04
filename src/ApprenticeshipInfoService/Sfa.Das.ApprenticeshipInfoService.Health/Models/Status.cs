@@ -1,9 +1,11 @@
 namespace Sfa.Das.ApprenticeshipInfoService.Health.Models
 {
-    public static class Status
-    {
-        public static string Ok => "OK";
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
 
-        public static string Error => "Error";
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum Status
+    {
+        Green = 0, Red = 1
     }
 }
