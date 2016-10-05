@@ -44,8 +44,8 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
                 For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderRepository>();
             }
 
-            For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>(new ApplicationSettings().ApprenticeshipApiBaseUrl);
-            For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>(new ApplicationSettings().ApprenticeshipApiBaseUrl);
+            For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
+            For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
             For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
             For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IRetryWebRequests>().Use<WebRequestRetryService>();
