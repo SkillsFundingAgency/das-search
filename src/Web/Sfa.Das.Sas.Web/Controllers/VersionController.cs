@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using System.Deployment.Application;
+using System.Diagnostics;
 using System.Reflection;
 using System.Web.Http;
 using Sfa.Das.Sas.Core.Configuration;
@@ -19,11 +21,13 @@ namespace Sfa.Das.Sas.Web.Controllers
         public VersionInformation Get()
         {
             var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            var buildVersion = ConfigurationManager.AppSettings["BuildVersion"];
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string assemblyInformationalVersion = fileVersionInfo.ProductVersion;
             return new VersionInformation
             {
                 BuildId = _configurationSetttings.BuildId,
-                Version = buildVersion,
+                Version = assemblyInformationalVersion,
                 AssemblyVersion = version
             };
         }
