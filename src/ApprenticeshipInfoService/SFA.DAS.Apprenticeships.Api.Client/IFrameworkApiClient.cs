@@ -5,6 +5,6 @@ namespace SFA.DAS.Apprenticeships.Api.Client
 {
     public interface IFrameworkApiClient : IDisposable
     {
-        Framework Get(int frameworkId);
+        Framework Get(string frameworkId);
     }
 }

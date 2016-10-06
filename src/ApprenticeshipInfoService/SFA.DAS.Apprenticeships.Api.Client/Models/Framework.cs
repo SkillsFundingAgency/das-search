@@ -5,7 +5,7 @@ namespace SFA.DAS.Apprenticeships.Api.Client.Models
 {
     public sealed class Framework
     {
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
 
         public string Uri { get; set; }
 

@@ -7,6 +7,6 @@
     {
         IEnumerable<FrameworkSummary> GetAllFrameworks();
 
-        Framework GetFrameworkById(int id);
+        Framework GetFrameworkById(string id);
     }
 }

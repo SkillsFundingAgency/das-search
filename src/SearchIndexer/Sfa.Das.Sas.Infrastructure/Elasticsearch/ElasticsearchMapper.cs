@@ -58,8 +58,8 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
 
             var doc = new FrameworkDocument
             {
-                FrameworkId = $"{frameworkMetaData.FworkCode}{frameworkMetaData.ProgType}{frameworkMetaData.PwayCode}",
-                Published  = frameworkMetaData.Published,
+                FrameworkId = $"{frameworkMetaData.FworkCode}-{frameworkMetaData.ProgType}-{frameworkMetaData.PwayCode}",
+                Published = frameworkMetaData.Published,
                 Title = CreateFrameworkTitle(frameworkMetaData.NasTitle, frameworkMetaData.PathwayName),
                 FrameworkCode = frameworkMetaData.FworkCode,
                 FrameworkName = frameworkMetaData.NasTitle,
@@ -136,7 +136,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
                 {
                     FrameworkCode = frameworkInformation.Code,
                     PathwayCode = frameworkInformation.PathwayCode,
-                    FrameworkId = string.Concat(frameworkInformation.Code, frameworkInformation.ProgType, frameworkInformation.PathwayCode),
+                    FrameworkId = $"{frameworkInformation.Code}-{frameworkInformation.ProgType}-{frameworkInformation.PathwayCode}",
                     Level = MapToLevelFromProgType(frameworkInformation.ProgType)
                 };
 

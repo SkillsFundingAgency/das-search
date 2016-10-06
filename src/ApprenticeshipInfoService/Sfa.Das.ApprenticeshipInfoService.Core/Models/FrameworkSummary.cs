@@ -5,7 +5,7 @@
 
     public sealed class FrameworkSummary
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Uri { get; set; }
 

@@ -39,12 +39,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         /// <summary>
         /// Get a framework by composite id
         /// </summary>
-        /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
+        /// <param name="id">{FrameworkId}-{ProgType}-{PathwayId} ie: 403-3-8</param>
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Framework))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
-        public Framework Get(int id)
+        public Framework Get(string id)
         {
             var response = _getFrameworks.GetFrameworkById(id);
 
@@ -62,11 +62,11 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         /// <summary>
         /// check if a framework exists by composite id
         /// </summary>
-        /// <param name="id">{FrameworkId}{ProgType}{PathwayId} ie: 40338</param>
+        /// <param name="id">{FrameworkId}-{ProgType}-{PathwayId} ie: 403-3-8</param>
         [SwaggerResponse(HttpStatusCode.NoContent)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
-        public void Head(int id)
+        public void Head(string id)
         {
             if (_getFrameworks.GetFrameworkById(id) != null)
             {
@@ -76,9 +76,9 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        private string Resolve(int id)
+        private string Resolve(string frameworkId)
         {
-            return Url.Link("DefaultApi", new { controller = "frameworks", id = id });
+            return Url.Link("DefaultApi", new { controller = "frameworks", id = frameworkId });
         }
     }
 }

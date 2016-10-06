@@ -27,7 +27,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void Init()
         {
             var iGetFrameworks = new Mock<IGetFrameworks>();
-            iGetFrameworks.Setup(m => m.GetFrameworkById(1234)).Returns(new Framework { FrameworkId = 1234, Title = "test title" });
+            iGetFrameworks.Setup(m => m.GetFrameworkById("12-3-4")).Returns(new Framework { FrameworkId = "12-3-4", Title = "test title" });
             _sut = new FrameworksController(iGetFrameworks.Object);
             _sut.Request = new HttpRequestMessage
             {
@@ -46,7 +46,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnFrameworkNotFound()
         {
-            ActualValueDelegate<object> test = () =>_sut.Get(-2);
+            ActualValueDelegate<object> test = () =>_sut.Get("-2");
 
             Assert.That(test, Throws.TypeOf<HttpResponseException>());
         }
@@ -54,12 +54,12 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnFramework()
         {
-            var framework = _sut.Get(1234);
+            var framework = _sut.Get("12-3-4");
 
             Assert.NotNull(framework);
-            framework.FrameworkId.Should().Be(1234);
+            framework.FrameworkId.Should().Be("12-3-4");
             framework.Title.Should().Be("test title");
-            framework.Uri.ToLower().Should().Be("http://localhost/frameworks/1234");
+            framework.Uri.ToLower().Should().Be("http://localhost/frameworks/12-3-4");
         }
     }
 }
