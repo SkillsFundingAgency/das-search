@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var response = new GetFrameworkResponse();
 
-            if (message.Id.Length < 2)
+            if (message.Id.Length < 5)
             {
                 response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
 

@@ -7,6 +7,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Validators
     {
         public ProviderSearchQueryValidator(IValidation validation)
         {
+            RuleFor(criteria => criteria.ApprenticeshipId).Must(validation.IsPositiveNumber).WithErrorCode(ValidationCodes.InvalidId);
             RuleFor(criteria => criteria.PostCode).NotEmpty().Must(validation.ValidatePostcode).WithErrorCode(ValidationCodes.InvalidPostcode);
         }
     }

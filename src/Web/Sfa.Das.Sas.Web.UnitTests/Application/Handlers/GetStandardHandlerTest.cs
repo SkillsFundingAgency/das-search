@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var response = _sut.Handle(new GetStandardQuery { Id = "-1", Keywords = "Test" });
 
-            response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.InvalidStandardId);
+            response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.StandardNotFound);
         }
 
         [Test]
