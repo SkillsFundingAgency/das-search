@@ -4,7 +4,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
 {
     public sealed class Standard : IApprenticeshipProduct
     {
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         public string Title { get; set; }
 

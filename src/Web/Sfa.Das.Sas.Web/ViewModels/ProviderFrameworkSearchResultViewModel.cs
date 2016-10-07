@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public int LastPage { get; set; }
 
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
 
         public int FrameworkCode { get; set; }
 

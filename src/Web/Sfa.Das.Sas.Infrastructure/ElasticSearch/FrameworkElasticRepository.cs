@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
@@ -32,7 +30,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _frameworkMapping = frameworkMapping;
         }
 
-        public Framework GetFrameworkById(int id)
+        public Framework GetFrameworkById(string id)
         {
             var results =
                 _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(

@@ -63,7 +63,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.LocationId,
                 message.StandardCode);
 
-            var apprenticeshipData = _getStandards.GetStandardById(Convert.ToInt32(message.StandardCode));
+            var apprenticeshipData = _getStandards.GetStandardById(message.StandardCode);
 
             return CreateResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
         }
@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.LocationId,
                 message.FrameworkId);
 
-            var apprenticeshipProduct = _getFrameworks.GetFrameworkById(Convert.ToInt32(message.FrameworkId));
+            var apprenticeshipProduct = _getFrameworks.GetFrameworkById(message.FrameworkId);
 
             return CreateResponse(model, apprenticeshipProduct, ApprenticeshipTrainingType.Framework);
         }

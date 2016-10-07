@@ -18,13 +18,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var response = new GetStandardResponse();
 
-            if (message.Id < 0)
-            {
-                response.StatusCode = GetStandardResponse.ResponseCodes.InvalidStandardId;
-
-                return response;
-            }
-
             var standard = _getStandards.GetStandardById(message.Id);
 
             if (standard == null)

@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var framework = new Framework
             {
-                FrameworkId = 2,
+                FrameworkId = "2",
                 Title = "test framework",
                 Level = 3
             };
@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnNotFoundIsStandardCannotBeFound()
         {
-            _mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<int>()));
+            _mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<string>()));
 
             var response = _sut.Handle(new GetFrameworkProvidersQuery());
 

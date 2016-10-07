@@ -5,7 +5,7 @@ namespace Sfa.Das.Sas.Core.Domain.Services
 {
     public interface IGetStandards
     {
-        Standard GetStandardById(int id);
+        Standard GetStandardById(string id);
         IEnumerable<Standard> GetStandardsByIds(IEnumerable<int> ids);
     }
 }

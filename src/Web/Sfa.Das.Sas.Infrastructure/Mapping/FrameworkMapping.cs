@@ -54,7 +54,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 PathwayName = document.PathwayName,
                 TypicalLength = _typicalLengthMapping.MapTypicalLength(document.TypicalLength),
                 ExpiryDate = document.ExpiryDate,
-                JobRoleItems = mapJobRoleItems(document.JobRoleItems),
+                JobRoleItems = MapJobRoleItems(document.JobRoleItems),
                 CompletionQualifications = document.CompletionQualifications,
                 FrameworkOverview = document.FrameworkOverview,
                 EntryRequirements = document.EntryRequirements,
@@ -65,7 +65,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             };
         }
 
-        private IEnumerable<JobRoleItem> mapJobRoleItems(IEnumerable<ApiJobRoleItem> jobRoleItems)
+        private IEnumerable<JobRoleItem> MapJobRoleItems(IEnumerable<ApiJobRoleItem> jobRoleItems)
         {
             foreach (var jobRoleItem in jobRoleItems)
             {

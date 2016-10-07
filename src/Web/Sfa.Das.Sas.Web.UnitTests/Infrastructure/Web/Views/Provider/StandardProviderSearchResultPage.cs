@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 HasError = true
             };
@@ -37,7 +37,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 StandardLevel = 2,
                 Hits = new List<StandardProviderResultItemViewModel>(),
@@ -57,7 +57,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 7,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 StandardLevel = 3,
                 Hits = new List<StandardProviderResultItemViewModel>(),
@@ -77,7 +77,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 StandardLevel = 2,
                 Hits = new List<StandardProviderResultItemViewModel>(),
@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 7,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 StandardLevel = 3,
                 Hits = new List<StandardProviderResultItemViewModel>(),
@@ -119,7 +119,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 7,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 StandardLevel = 3,
                 Hits = new List<StandardProviderResultItemViewModel>(),
@@ -142,7 +142,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = totalResults,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 StandardLevel = 3,
                 PostCode = "N17",
@@ -187,7 +187,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item, item2 },
                 HasError = false
@@ -223,7 +223,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -253,7 +253,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -283,7 +283,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -312,7 +312,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -349,7 +349,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -388,7 +388,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -429,7 +429,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -463,7 +463,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -495,7 +495,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -528,7 +528,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 1,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test name",
                 Hits = new List<StandardProviderResultItemViewModel> { item },
                 HasError = false
@@ -546,7 +546,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 20,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>
                 {
@@ -582,7 +582,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 20,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>
                 {
@@ -618,7 +618,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 20,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>
                 {
@@ -654,7 +654,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 ActualPage = 1,
@@ -679,7 +679,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 ActualPage = 1,
@@ -703,7 +703,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 StandardLevel = 3,
                 Hits = new List<StandardProviderResultItemViewModel>(),
@@ -730,7 +730,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 10,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>() { new StandardProviderResultItemViewModel() },
                 ActualPage = 1,
@@ -762,7 +762,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 ActualPage = 1,
@@ -794,7 +794,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 ActualPage = 1,
@@ -823,7 +823,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>()
                 {
@@ -856,7 +856,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             {
                 TotalResults = 0,
                 PostCodeMissing = false,
-                StandardId = 1,
+                StandardId = "1",
                 StandardName = "Test standard name",
                 Hits = new List<StandardProviderResultItemViewModel>(),
                 ActualPage = 1,

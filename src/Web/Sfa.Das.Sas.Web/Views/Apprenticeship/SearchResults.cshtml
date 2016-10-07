@@ -66,9 +66,9 @@
 
             @foreach (var item in Model.Results)
             {
-                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != 0 ? item.StandardId : item.FrameworkId)">
+                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != null ? item.StandardId : item.FrameworkId)">
                     <header>
-                        @(item.StandardId > 0 ? GetStandardTitle(item) : GetFrameworkTitle(item))
+                        @(item.StandardId != null ? GetStandardTitle(item) : GetFrameworkTitle(item))
                     </header>
                     <dl class="result-data-list">
                         @GetApprenticeshipDetailItem("Level:", "level", item.Level)

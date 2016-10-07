@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var apprenticeshipResult = new ApprenticeshipSearchResultsItem
             {
-                FrameworkId = 1,
+                FrameworkId = "1",
                 Level = level,
                 FrameworkName = "Framework name",
                 PathwayName = "Pathway name",

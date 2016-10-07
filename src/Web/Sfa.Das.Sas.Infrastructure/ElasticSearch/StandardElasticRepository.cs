@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _standardMapping = standardMapping;
         }
 
-        public Standard GetStandardById(int id)
+        public Standard GetStandardById(string id)
         {
             var results =
                 _elasticsearchCustomClient.Search<StandardSearchResultsItem>(

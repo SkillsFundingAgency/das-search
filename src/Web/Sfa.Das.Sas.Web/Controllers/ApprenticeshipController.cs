@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(int id, string keywords)
+        public ActionResult Standard(string id, string keywords)
         {
             var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
 
@@ -78,7 +78,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Framework(int id, string keywords)
+        public ActionResult Framework(string id, string keywords)
         {
             var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
@@ -106,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(int standardId, string wrongPostcode, string postcode, string keywords, string hasError)
+        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError)
         {
             var query = new GetStandardProvidersQuery
             {
@@ -132,7 +132,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(int frameworkId, string wrongPostcode, string postcode, string keywords, string hasError)
+        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError)
         {
             var query = new GetFrameworkProvidersQuery
             {

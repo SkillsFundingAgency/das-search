@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
         {
             return new Standard
             {
-                StandardId = document.StandardId,
+                StandardId = document.StandardId.ToString(),
                 Title = document.Title,
                 StandardPdf = document.StandardPdf,
                 AssessmentPlanPdf = document.AssessmentPlanPdf,

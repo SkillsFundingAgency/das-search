@@ -2,7 +2,7 @@
 {
     public class StandardViewModel
     {
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         public string Title { get; set; }
 
