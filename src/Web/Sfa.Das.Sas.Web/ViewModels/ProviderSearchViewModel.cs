@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string PostUrl { get; set; }
 
-        public int ApprenticeshipId { get; set; }
+        public string ApprenticeshipId { get; set; }
 
         public string PostCode { get; set; }
 

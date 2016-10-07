@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var standard = new Standard
             {
-                StandardId = 2,
+                StandardId = "2",
                 Title = "test standard",
                 Level = 3
             };
@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnNotFoundIsStandardCannotBeFound()
         {
-            _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<int>()));
+            _mockGetStandards.Setup(x => x.GetStandardById(It.IsAny<string>()));
 
             var response = _sut.Handle(new GetStandardProvidersQuery());
 

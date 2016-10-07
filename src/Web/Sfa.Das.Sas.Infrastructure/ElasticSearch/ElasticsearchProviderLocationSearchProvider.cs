@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Sfa.Das.Sas.Infrastructure.Elasticsearch.Models;
-
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
@@ -30,15 +27,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _applicationSettings = applicationSettings;
         }
 
-        public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(int standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
+        public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(string standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
             var qryStr = CreateStandardProviderSearchQuery(standardId.ToString(), coordinates, filter);
             return PerformStandardProviderSearchWithQuery(page, take, qryStr);
         }
 
-        public SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(int frameworkId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
+        public SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(string frameworkId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
-            var qryStr = CreateFrameworkProviderSearchQuery(frameworkId.ToString(), coordinates, filter);
+            var qryStr = CreateFrameworkProviderSearchQuery(frameworkId, coordinates, filter);
             return PerformFrameworkProviderSearchWithQuery(page, take, qryStr);
         }
 

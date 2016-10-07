@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 ResultsToTake = 10,
                 PostCode = "GU21 6DB",
                 PostCodeMissing = true,
-                StandardId = 1234,
+                StandardId = "1234",
                 StandardName = "Test Name"
             };
 
@@ -67,7 +67,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.PostCodeMissing.Should().BeTrue();
             viewModel.ResultsToTake.Should().Be(10);
             viewModel.ShowAll.Should().BeTrue();
-            viewModel.StandardId.Should().Be(1234);
+            viewModel.StandardId.Should().Be("1234");
             viewModel.StandardName.Should().Be("Test Name");
             viewModel.TotalResultsForCountry.Should().Be(1000);
             viewModel.TotalResults.Should().Be(105);

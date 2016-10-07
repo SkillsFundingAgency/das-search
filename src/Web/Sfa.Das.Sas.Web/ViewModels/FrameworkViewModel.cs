@@ -4,7 +4,7 @@
 
     public class FrameworkViewModel
     {
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
 
         public string Title { get; set; }
 

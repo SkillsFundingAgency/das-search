@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnInvalidStandardIdStatusIfIdIsBelowZero()
         {
-            var response = _sut.Handle(new GetStandardQuery { Id = -1, Keywords = "Test" });
+            var response = _sut.Handle(new GetStandardQuery { Id = "-1", Keywords = "Test" });
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.InvalidStandardId);
         }
@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnStandardNotFoundStatusIfStandardCannotBeFound()
         {
-            var response = _sut.Handle(new GetStandardQuery() { Id = 1, Keywords = "Test" });
+            var response = _sut.Handle(new GetStandardQuery() { Id = "1", Keywords = "Test" });
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.StandardNotFound);
         }
@@ -44,7 +44,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldGetStandardFromGetStandardRepository()
         {
-            var query = new GetStandardQuery() { Id = 1, Keywords = "Test" };
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id));
 
@@ -56,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnFoundStandardInResponse()
         {
-            var query = new GetStandardQuery() { Id = 1, Keywords = "Test" };
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id };
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnSearchTerms()
         {
-            var query = new GetStandardQuery() { Id = 1, Keywords = "Test" };
+            var query = new GetStandardQuery { Id = "1", Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id };
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);

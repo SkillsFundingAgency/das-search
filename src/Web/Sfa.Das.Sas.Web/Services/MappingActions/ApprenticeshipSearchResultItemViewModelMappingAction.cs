@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
         {
             destination.TypicalLengthMessage = ApprenticeshipMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
             destination.Level = GetLevelText(source.Level);
-            destination.ApprenticeshipType = destination.StandardId != 0 ? "standard" : "framework"; // ToDo: use of constants :) (CF)
+            destination.ApprenticeshipType = destination.StandardId != "0" ? "standard" : "framework"; // ToDo: use of constants :) (CF)
             destination.Title = ApprenticeshipMappingHelper.FrameworkTitle(source.Title);
         }
 

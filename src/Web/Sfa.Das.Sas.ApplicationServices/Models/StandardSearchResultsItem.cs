@@ -5,7 +5,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public sealed class StandardSearchResultsItem
     {
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         public string Title { get; set; }
 

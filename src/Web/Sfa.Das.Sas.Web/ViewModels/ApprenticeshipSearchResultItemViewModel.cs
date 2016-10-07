@@ -2,14 +2,14 @@
 {
     public sealed class ApprenticeshipSearchResultItemViewModel
     {
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         public string Title { get; set; }
 
         public string TypicalLengthMessage { get; set; }
 
         // Frameworks
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
 
         public string FrameworkName { get; set; }
 

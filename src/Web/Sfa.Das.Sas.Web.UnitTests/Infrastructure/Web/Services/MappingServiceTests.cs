@@ -71,7 +71,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var response = new GetFrameworkProvidersResponse
             {
-                FrameworkId = 2,
+                FrameworkId = "2",
                 Title = "test title",
                 Level = 3,
                 Keywords = "test words",
@@ -96,7 +96,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var response = new GetStandardProvidersResponse
             {
-                StandardId = 2,
+                StandardId = "2",
                 Title = "test title",
                 Level = 3,
                 Keywords = "test words",

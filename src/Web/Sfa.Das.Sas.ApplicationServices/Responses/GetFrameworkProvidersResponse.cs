@@ -9,7 +9,7 @@
         }
 
         public ResponseCodes StatusCode { get; set; }
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
         public string Keywords { get; set; }
         public string Postcode { get; set; }
         public string Title { get; set; }
