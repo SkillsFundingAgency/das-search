@@ -8,8 +8,8 @@ namespace PactNet.TestExtensions
     public abstract class PactTestBase
     {
         private string _providerName => PactProviderAttribute.GetProviderName(this);
-        private string _pactBrokerUri => ConfigurationFinder.Setting("PactBrokerUri");
-        private string _consumerName => ConfigurationFinder.Setting("PactConsumerName");
+        private string _pactBrokerUri => ConfigurationFinder.OptionalSetting("PactBrokerUri");
+        private string _consumerName => ConfigurationFinder.RequiredSetting("PactConsumerName");
 
         private IPactBuilder PactBuilder { get; set; }
         public IMockProviderService MockProviderService { get; private set; }

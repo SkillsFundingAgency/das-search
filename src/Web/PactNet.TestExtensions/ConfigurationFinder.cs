@@ -5,9 +5,9 @@ namespace PactNet.TestExtensions
 {
     internal static class ConfigurationFinder
     {
-        public static string Setting(string key)
+        public static string RequiredSetting(string key)
         {
-            var setting = Environment.GetEnvironmentVariable(key) ?? ConfigurationManager.AppSettings[key];
+            var setting = OptionalSetting(key);
             if (string.IsNullOrEmpty(setting))
             {
                 throw new SettingsPropertyNotFoundException($"Missing the {key} as an environment variable or in the app.config");
@@ -15,5 +15,11 @@ namespace PactNet.TestExtensions
 
             return setting;
         }
+
+        public static string OptionalSetting(string key)
+        {
+            return Environment.GetEnvironmentVariable(key) ?? ConfigurationManager.AppSettings[key];
+        }
+
     }
 }
