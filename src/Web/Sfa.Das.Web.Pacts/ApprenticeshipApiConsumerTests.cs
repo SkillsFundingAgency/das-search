@@ -1,39 +1,21 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
+using PactNet.TestExtensions;
 using SFA.DAS.Apprenticeships.Api.Client;
 
-namespace Sfa.Das.Web.ApprenticeshipApiTests
+namespace Sfa.Das.Web.Pacts
 {
     [TestFixture]
-    public class ApprenticeshipApiConsumerTests
+    [PactProvider("Apprenticeship API")]
+    public class ApprenticeshipApiClientTests : PactTestBase
     {
-        private IMockProviderService _mockProviderService;
-        private string _mockProviderServiceBaseUri;
-        private ConsumerApprenticeshipApiPact _pact;
-
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            _pact = new ConsumerApprenticeshipApiPact("Find Apprenticeship Training");
-            _mockProviderService = _pact.MockProviderService;
-            _mockProviderServiceBaseUri = _pact.MockProviderServiceBaseUri;
-            _mockProviderService.ClearInteractions();
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            _pact.Dispose();
-        }
-
         [Test]
         public void ShouldGetaStandard()
         {
             //Arrange
             const int standardCode = 12;
-            _mockProviderService.Given($"the service has standards")
+            MockProviderService.Given("An apprenticeship api")
                 .UponReceiving($"a request to retrieve standard with id '{standardCode}'")
                 .With(new ProviderServiceRequest
                 {
@@ -57,7 +39,7 @@ namespace Sfa.Das.Web.ApprenticeshipApiTests
                     }
                 });
 
-            var consumer = new StandardApiClient(_mockProviderServiceBaseUri);
+            var consumer = new StandardApiClient(MockProviderServiceBaseUri);
 
             //Act
             var result = consumer.Get(standardCode);
@@ -65,7 +47,7 @@ namespace Sfa.Das.Web.ApprenticeshipApiTests
             //Assert
             Assert.AreEqual(standardCode, result.StandardId);
 
-            _mockProviderService.VerifyInteractions();
+            MockProviderService.VerifyInteractions();
         }
     }
 }

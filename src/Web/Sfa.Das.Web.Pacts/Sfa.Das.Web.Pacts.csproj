@@ -6,8 +6,8 @@
     <ProjectGuid>{AEE71FBD-1A83-458F-80DE-9F9D16867F2C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sfa.Das.Web.ApprenticeshipApiTests</RootNamespace>
-    <AssemblyName>Sfa.Das.Web.ApprenticeshipApiTests</AssemblyName>
+    <RootNamespace>Sfa.Das.Web.Pacts</RootNamespace>
+    <AssemblyName>Sfa.Das.Web.Pacts</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -83,7 +83,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApprenticeshipApiConsumerTests.cs" />
-    <Compile Include="ConsumerApprenticeshipApiPact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +101,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PactNet.TestExtensions\PactNet.TestExtensions.csproj">
+      <Project>{ca4508b5-bc8b-4106-a6fd-16da1de825f8}</Project>
+      <Name>PactNet.TestExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
