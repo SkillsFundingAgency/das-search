@@ -1,15 +1,13 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses
 {
     using System.Collections.Generic;
 
-    public sealed class FrameworkProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
+    public sealed class FrameworkProviderSearchResultsItemResponse : IApprenticeshipProviderSearchResultsItem
     {
         // TODO Add URI
         public int Ukprn { get; set; }
 
         public string ProviderName { get; set; }
-
-        public string FrameworkId { get; set; }
 
         public int FrameworkCode { get; set; }
 

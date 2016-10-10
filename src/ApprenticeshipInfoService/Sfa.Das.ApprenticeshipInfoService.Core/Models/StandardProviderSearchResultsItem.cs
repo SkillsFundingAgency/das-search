@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
 {
+    using System.Collections.Generic;
+
     public sealed class StandardProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
     {
         // TODO Add URI
@@ -44,8 +40,6 @@ namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
         public double? EmployerSatisfaction { get; set; }
 
         public double? LearnerSatisfaction { get; set; }
-
-        public int? MatchingLocationId { get; set; }
 
         public double? NationalOverallAchievementRate { get; set; }
 

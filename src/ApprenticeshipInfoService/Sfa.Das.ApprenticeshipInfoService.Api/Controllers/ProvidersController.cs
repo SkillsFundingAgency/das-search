@@ -1,16 +1,15 @@
-﻿using System;
-using System.Web.Http.Description;
-using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
-using IControllerHelper = Sfa.Das.ApprenticeshipInfoService.Core.Helpers.IControllerHelper;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Web.Http;
+    using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+    using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
+    using IControllerHelper = Sfa.Das.ApprenticeshipInfoService.Core.Helpers.IControllerHelper;
 
     public class ProvidersController : ApiController
     {
@@ -28,12 +27,40 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
         }
 
+        // GET /providers
+        [SwaggerOperation("GetAll")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [Route("providers")]
+        public IEnumerable<Provider> Get()
+        {
+            var response = _getProviders.GetAllProviders();
+
+            return response;
+        }
+
+        // GET /providers
+        [SwaggerOperation("GetByUkprn")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [Route("providers/{ukprn}")]
+        public IEnumerable<Provider> Get(int ukprn)
+        {
+            var response = _getProviders.GetProvidersByUkprn(ukprn);
+
+            if (!response.Any())
+            {
+                throw HttpResponseFactory.RaiseException(HttpStatusCode.NotFound, string.Format("No provider with Ukprn {0} found", ukprn));
+            }
+
+            return response;
+        }
+
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#
         [SwaggerOperation("GetByStandardIdAndLocation")]
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(List<StandardProviderSearchResultsItem>))]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("standards/{id}/providers")]
-        public List<StandardProviderSearchResultsItem> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
+        public List<StandardProviderSearchResultsItemResponse> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if standard doesn't exists
             var actualPage = _controllerHelper.GetActualPage(page);
@@ -51,7 +78,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(List<FrameworkProviderSearchResultsItem>))]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{id}/providers")]
-        public List<FrameworkProviderSearchResultsItem> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
+        public List<FrameworkProviderSearchResultsItemResponse> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if framework doesn't exists
             var actualPage = _controllerHelper.GetActualPage(page);

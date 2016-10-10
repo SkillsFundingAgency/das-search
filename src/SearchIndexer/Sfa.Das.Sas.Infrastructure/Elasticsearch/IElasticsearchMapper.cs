@@ -22,5 +22,7 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch
         FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation standardInformation, IEnumerable<DeliveryInformation> deliveryInformation);
 
         FrameworkProvider CreateFrameworkProviderDocument(Provider provider, FrameworkInformation standardInformation, DeliveryInformation deliveryInformation);
+
+        ProviderDocument CreateProviderDocument(Provider provider);
     }
 }

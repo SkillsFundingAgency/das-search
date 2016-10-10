@@ -7,8 +7,8 @@
     <ProjectGuid>{DA7F312C-6132-4084-A38F-B053029226DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SFA.DAS.Apprenticeships.Api.Client</RootNamespace>
-    <AssemblyName>SFA.DAS.Apprenticeships.Api.Client</AssemblyName>
+    <RootNamespace>Sfa.Das.ApprenticeshipInfoService.Client</RootNamespace>
+    <AssemblyName>Sfa.Das.ApprenticeshipInfoService.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,8 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiClientBase.cs" />
-    <Compile Include="ProviderApiClient.cs" />
     <Compile Include="IProviderApiClient.cs" />
+    <Compile Include="ProviderApiClient.cs" />
     <Compile Include="FrameworkApiClient.cs" />
     <Compile Include="IFrameworkApiClient.cs" />
     <Compile Include="IStandardApiClient.cs" />
