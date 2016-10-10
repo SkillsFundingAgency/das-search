@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
                     scan.AddAllTypesOf(typeof(IRequestHandler<,>));
                     scan.AddAllTypesOf(typeof(IAsyncRequestHandler<,>));
                 });
-            
+
             For<IHttpGet>().Use<HttpService>();
             For<IApprenticeshipSearchService>().Use<ApprenticeshipSearchService>();
             For<IProviderSearchService>().Use<ProviderSearchService>();

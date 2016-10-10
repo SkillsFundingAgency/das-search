@@ -1,8 +1,8 @@
-﻿using System.Web;
-using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Api.Logging
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Logging
 {
+    using System.Web;
+    using Core.Logging;
+
     public sealed class RequestContext : IRequestContext
     {
         public RequestContext(HttpContextBase context)
@@ -14,7 +14,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Logging
             }
             catch (HttpException)
             {
+
                 // Happens on request that starts the application.
+                IpAddress = string.Empty;
+                Url = string.Empty;
             }
         }
 

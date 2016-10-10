@@ -15,36 +15,11 @@
 
     public class ElasticsearchHealthHealthService : IElasticsearchHealthService
     {
-        private readonly IHealthSettings _healthSettings;
-
-
         private readonly ILog _logger;
 
-        public ElasticsearchHealthHealthService(IHealthSettings healthSettings, ILog logger)
+        public ElasticsearchHealthHealthService(ILog logger)
         {
-            _healthSettings = healthSettings;
             _logger = logger;
-        }
-
-        public HealthModel GetHealth()
-        {
-            var messages = new List<string>();
-            var d = GetElasticHealth(_healthSettings.ElasticsearchUrls, _healthSettings.Environment);
-            var aliases = d.ElasticsearchAliases;
-            if (d.Exception != null)
-            {
-                messages.Add(d.Exception.Message);
-            }
-
-            var model = new HealthModel
-            {
-                Errors = messages,
-                Status = messages.Any() ? Status.Error : Status.Ok,
-                ElasticSearchAliases = aliases,
-                ElasticsearchLog = GetErrorLogs(_healthSettings.ElasticsearchUrls, _healthSettings.Environment),
-            };
-
-            return model;
         }
 
         public ElasticsearchLog GetErrorLogs(IEnumerable<Uri> uriStrings, string environment)

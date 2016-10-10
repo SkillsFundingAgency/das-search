@@ -61,6 +61,10 @@
       <HintPath>..\packages\PactNet.1.1.4\lib\net40\PactNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Client, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Client.0.9.6\lib\SFA.DAS.Apprenticeships.Api.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.IO.Abstractions, Version=1.4.0.86, Culture=neutral, PublicKeyToken=d480b5b72fb413da, processorArchitecture=MSIL">
@@ -98,12 +102,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ApprenticeshipInfoService\Sfa.Das.ApprenticeshipInfoService.Client\Sfa.Das.ApprenticeshipInfoService.Client.csproj">
-      <Project>{da7f312c-6132-4084-a38f-b053029226de}</Project>
-      <Name>Sfa.Das.ApprenticeshipInfoService.Client</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

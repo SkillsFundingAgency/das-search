@@ -19,7 +19,7 @@
 
         // GET /standards
         [SwaggerOperation("GetAll")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<StandardSummary>))]
         [Route("standards")]
         public IEnumerable<StandardSummary> Get()
         {
@@ -35,19 +35,20 @@
 
         // GET /standards/5
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Standard))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{id}")]
         public Standard Get(int id)
         {
             var standard = _getStandards.GetStandardById(id);
-            if (standard != null)
+
+            if (standard == null)
             {
-                standard.Uri = Resolve(standard.StandardId);
-                return standard;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+            standard.Uri = Resolve(standard.StandardId);
+            return standard;
         }
 
         // HEAD /standards/5

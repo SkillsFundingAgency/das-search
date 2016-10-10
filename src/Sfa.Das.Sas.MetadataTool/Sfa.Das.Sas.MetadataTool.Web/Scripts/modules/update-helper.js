@@ -1,7 +1,6 @@
 ﻿var FatMetaData = FatMetaData || {};
 
 (function (self) {
-    "use strict";
 
     self.models = {
         mapEntry: function(x, i, name) {
@@ -19,7 +18,7 @@
             var val = $(this).attr('data-value');
             var jsons = JSON.parse($(container).attr("data-json"));
             var selectedItem = jsons[val];
-            var newValues = jsons.filter(function(x) { return x !== selectedItem });
+            var newValues = jsons.filter(function(x) { return x !== selectedItem; });
 
             $(container).attr('data-json', JSON.stringify(newValues));
             render();

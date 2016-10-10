@@ -134,7 +134,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .Field(p => p.JobRoleItems.First().Title)
                             .Field(p => p.JobRoleItems.First().Description))
                         .Query(formattedKeywords)))
-                .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
+                .PostFilter(m => FilterBySelectedLevels(m, selectedLevels)
+                    && m.Bool(b2 => b2.Filter(f => f.Term(t => t.Field(fi => fi.Published).Value(true)))))
                 .Aggregations(agg => agg
                     .Terms(LevelAggregateName, t => t
                         .Field(f => f.Level).MinimumDocumentCount(0)));
@@ -178,7 +179,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                     .Query(formattedKeywords)
                                     .PrefixLength(3)
                                     .Fuzziness(Fuzziness.Auto)))))
-                    .PostFilter(m => FilterBySelectedLevels(m, selectedLevels))
+                    .PostFilter(m => FilterBySelectedLevels(m, selectedLevels)
+                      && m.Bool(b2 => b2.Filter(f => f.Term(t => t.Field(fi => fi.Published).Value(true)))))
                     .Aggregations(agg => agg
                         .Terms(LevelAggregateName, t => t
                             .Field(f => f.Level).MinimumDocumentCount(0)));

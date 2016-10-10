@@ -1,0 +1,116 @@
+﻿@model Sfa.Das.Sas.Web.Health.Models.HealthModel
+
+@{
+    ViewBag.Title = "SFA Search apprenticeship status";
+    Layout = null;
+}
+
+<html>
+<head>
+    <style>
+        body {
+            background-color: whitesmoke;
+            font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+            color: rgb(0, 0, 0);
+            color: rgba(0, 0, 0, .8);
+        }
+
+        .container {
+            width: 1000px;
+            margin: 50px auto;
+            padding: 5px 10px;
+            background-color: white;
+        }
+
+        .container h2 {
+            color: rgb(0,0,0);
+            color: rgba(0,0,0,.8);
+            padding: 10px;
+        }
+
+        .container .status {
+            padding: 20px;
+            min-height: 10px;
+        }
+
+        .container .status > div {
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .container .elasticsearch {
+            padding: 20px;
+            min-height: 10px;
+        }
+
+        dl.table-display {
+            background-color: white;
+            display: table;
+            width: 60%;
+            margin-bottom: 30px;
+        }
+
+        dl.table-display dt {
+            clear: left;
+            float: left;
+            width: 220px;
+            margin: 0;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        dl.table-display dd {
+            margin-left: 230px;
+            padding: 5px;
+        }
+
+        dl.table-display dd.first {
+            border-top: 1px solid #999;
+        }
+
+        .services {
+            padding: 20px;
+        }
+
+        .services > div {
+            padding: 1px;
+        }
+
+        .status-lbl.red {
+            border-bottom: 5px solid red;
+        }
+
+        .status-lbl.green {
+            border-bottom: 5px solid green;
+        }
+
+    </style>
+</head>
+    <body>
+    <div class="container">
+        
+        <div class="status">
+            <h2>SFA Search apprenticeship status</h2>
+        </div>
+
+        <p>
+            Status: <span class="status-lbl @Model.ApplicationStatus.ToString().ToLower()">@Model.ApplicationStatus</span>
+        </p>
+        <p>
+            Assembly version: <span>@Model.AssemblyVersion</span>
+        </p>
+        <p>
+            Version: <span>@Model.Version</span>
+        </p>
+        <p>
+            BuildId: <span>@Model.BuildId</span>
+        </p>
+        <p>
+            Postcode status: <span class="status-lbl @Model.PostcodeIoStatus.ToString().ToLower()">@Model.PostcodeIoStatus</span>
+        </p>
+        <p>
+            Api Status: <span class="status-lbl @Model.ApiStatus.ToString().ToLower()">@Model.ApiStatus</span>
+        </p>
+    </div>
+    </body>
+</html>

@@ -23,7 +23,7 @@
                 return Content(JsonConvert.SerializeObject(viewModel));
             }
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
     }
 }

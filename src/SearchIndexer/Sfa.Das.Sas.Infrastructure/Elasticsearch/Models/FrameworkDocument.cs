@@ -10,12 +10,16 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
     {
         public string FrameworkId { get; set; }
 
+        public bool Published { get; set; }
+
         public int FrameworkCode { get; set; }
 
         [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]
         public string FrameworkName { get; set; }
 
         public int PathwayCode { get; set; }
+
+        public int ProgType { get; set; }
 
         [String(Analyzer = ElasticsearchConfiguration.AnalyserEnglishCustom)]
         public string PathwayName { get; set; }

@@ -8,6 +8,10 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
 
     public sealed class StandardDocument : ApprenticeshipDocument, IIndexEntry
     {
+        public int StandardId { get; set; }
+
+        public bool Published { get; set; }
+
         [String(Index = FieldIndexOption.NotAnalyzed)]
         public string AssessmentPlanPdf { get; set; }
 
@@ -21,8 +25,6 @@ namespace Sfa.Das.Sas.Indexer.Infrastructure.Elasticsearch.Models
         public string ProfessionalRegistration { get; set; }
 
         public string Qualifications { get; set; }
-
-        public int StandardId { get; set; }
 
         [String(Index = FieldIndexOption.NotAnalyzed)]
         public string StandardPdf { get; set; }

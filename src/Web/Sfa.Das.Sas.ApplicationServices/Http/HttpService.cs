@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+
 using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.ApplicationServices.Http
 {
+    using Logging;
+
     public class HttpService : IHttpGet
     {
         private readonly ILog _logger;
@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Http
                 }
                 catch (WebException ex)
                 {
-                    _logger.Warn(ex.ToString());
+                    _logger.Warn(ex.ToString(), new HttpErrorLogEntry { Url = url });
                     throw;
                 }
             }

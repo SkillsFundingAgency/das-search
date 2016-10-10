@@ -1,12 +1,11 @@
 ﻿var FatMetaData = FatMetaData || {};
 
 (function (editFramework) {
-    "use strict";
 
     var helper = FatMetaData.UpdateHelper;
 
-    var setUp = function() {
-        $('.entrybox input').keypress(function(e) {
+    var keyPressFunctions = function () {
+        $('.entrybox input').keypress(function (e) {
             if (e.which === 13) {
                 e.preventDefault();
                 var container = $($(this).closest('.entrybox')).find('.property-container');
@@ -19,7 +18,7 @@
             }
         });
 
-        $('#jobroles-description').keypress(function(e) {
+        $('#jobroles-description').keypress(function (e) {
             if (e.which === 13) {
                 e.preventDefault();
                 var container = $('#jobrole-container');
@@ -34,23 +33,28 @@
             }
         });
 
-        $("#jobrole-template .edit").on('click', function () {
-            var val = $(this).attr('data-value');
-            var jsons = JSON.parse($(container).attr("data-json"));
-            var selectedItem = jsons[val];
-            var newValues = jsons.filter(function (x) { return x !== selectedItem });
-
-            $(container).attr('data-json', JSON.stringify(newValues));
-            render();
-        });
-
-        $('#jobroles-title').keypress(function(e) {
+        $('#jobroles-title').keypress(function (e) {
             if (e.which === 13) {
                 e.preventDefault();
                 $("#jobroles-description").focus();
                 return false;
             }
             return true;
+        });
+    };
+
+    var setUp = function() {
+
+        keyPressFunctions();
+
+        $("#jobrole-template .edit").on('click', function () {
+            var val = $(this).attr('data-value');
+            var jsons = JSON.parse($(container).attr("data-json"));
+            var selectedItem = jsons[val];
+            var newValues = jsons.filter(function (x) { return x !== selectedItem; });
+
+            $(container).attr('data-json', JSON.stringify(newValues));
+            render();
         });
     };
 

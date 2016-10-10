@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin;
-using Owin;
+﻿using Microsoft.Owin;
 
-[assembly: OwinStartup(typeof(MetadataTool.Startup))]
+using Sfa.Das.Sas.MetadataTool.Web;
 
-namespace MetadataTool
+[assembly: OwinStartup(typeof(Startup))]
+
+namespace Sfa.Das.Sas.MetadataTool.Web
 {
+    using Owin;
+
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)

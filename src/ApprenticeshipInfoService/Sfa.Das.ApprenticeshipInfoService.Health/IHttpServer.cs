@@ -1,11 +1,11 @@
 namespace Sfa.Das.ApprenticeshipInfoService.Health
 {
+    using Sfa.Das.ApprenticeshipInfoService.Health.Models;
+
     public interface IHttpServer
     {
-        string ResponseCode(string url);
+        Status ResponseCode(string url);
 
-        string Ping(string url);
-
-        string GetData(string url);
+        Status GetStatus(string url);
     }
 }

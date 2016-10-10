@@ -1,44 +1,39 @@
 ﻿namespace Sfa.Das.ApprenticeshipInfoService.Health
 {
-    using System;
-    using System.Linq;
     using System.Net;
     using System.Net.Http;
-    using System.Net.NetworkInformation;
     using System.Threading.Tasks;
+
+    using Models;
 
     public class HttpService : IHttpServer
     {
-        public string ResponseCode(string url)
+        public Status ResponseCode(string url)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(url);
                 Task.WaitAll(response);
-                return response.Result.StatusCode.ToString();
+                return response.Result.StatusCode.ToString().ToLower() == "ok"
+                    ? Status.Green : Status.Red;
             }
         }
 
-        public string Ping(string url)
+        public Status GetStatus(string url)
         {
-            var ping = new Ping();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.AllowAutoRedirect = false;
+            request.Method = "HEAD";
             try
             {
-                var response = ping.Send(url);
-                return response?.Status.ToString();
+                using (request.GetResponse())
+                {
+                    return Status.Green;
+                }
             }
-            catch (Exception exception)
+            catch (WebException)
             {
-                return "Error";
-            }
-        }
-
-        public string GetData(string url)
-        {
-            using (var client = new WebClient())
-            {
-                client.OpenRead(url);
-                return client.ResponseHeaders.GetValues("Status Code")?.FirstOrDefault();
+                return Status.Red;
             }
         }
     }

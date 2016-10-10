@@ -6,6 +6,8 @@ namespace Sfa.Das.Sas.Indexer.Core.Models
     {
         public int Id { get; set; }
 
+        public bool Published { get; set; }
+
         public string Title { get; set; }
 
         public IEnumerable<string> JobRoles { get; set; }

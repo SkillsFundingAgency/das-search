@@ -1,23 +1,35 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using FluentValidation;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.ApplicationServices.Settings;
-using Sfa.Das.Sas.ApplicationServices.Validators;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Logging;
-
-namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using FluentValidation;
+    using MediatR;
+    using Models;
+    using Queries;
+    using Responses;
+    using Settings;
+    using Validators;
+    using Core.Domain.Model;
+    using Core.Logging;
+
     public sealed class StandardProviderSearchHandler : IAsyncRequestHandler<StandardProviderSearchQuery, StandardProviderSearchResponse>
     {
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
         private readonly IPaginationSettings _paginationSettings;
         private readonly AbstractValidator<ProviderSearchQuery> _validator;
+
+        private readonly Dictionary<string, StandardProviderSearchResponse.ResponseCodes> _searchResponseCodes =
+            new Dictionary<string, ProviderSearchResponseBase<ProviderStandardSearchResults>.ResponseCodes>
+                {
+                  { LocationLookupResponse.WrongPostcode, StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat },
+                  { LocationLookupResponse.ServerError, StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable },
+                  { LocationLookupResponse.ApprenticeshipNotFound, StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound },
+                  { ServerLookupResponse.InternalServerError, StandardProviderSearchResponse.ResponseCodes.ServerError },
+                  { LocationLookupResponse.Ok, StandardProviderSearchResponse.ResponseCodes.Success },
+                  { string.Empty, StandardProviderSearchResponse.ResponseCodes.Success }
+                };
 
         public StandardProviderSearchHandler(
             ProviderSearchQueryValidator validator,
@@ -93,19 +105,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         private ProviderSearchResponseBase<ProviderStandardSearchResults>.ResponseCodes GetResponseCode(string standardResponseCode)
         {
-            switch (standardResponseCode)
-            {
-                case LocationLookupResponse.WrongPostcode:
-                    return StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;
-                case LocationLookupResponse.ServerError:
-                    return StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable;
-                case LocationLookupResponse.ApprenticeshipNotFound:
-                    return StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound;
-                case ServerLookupResponse.InternalServerError:
-                    return StandardProviderSearchResponse.ResponseCodes.ServerError;
-                default:
-                    return default(StandardProviderSearchResponse.ResponseCodes);
-            }
+            return _searchResponseCodes[standardResponseCode ?? string.Empty];
         }
 
         private async Task<long> GetCountResultForCountry(BaseProviderSearchResults searchResults, ProviderSearchQuery message)

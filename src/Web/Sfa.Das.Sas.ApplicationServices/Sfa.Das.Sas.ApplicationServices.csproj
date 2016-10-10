@@ -88,6 +88,7 @@
     <Compile Include="IApprenticeshipSearchService.cs" />
     <Compile Include="IApprenticeshipSearchProvider.cs" />
     <Compile Include="Logging\ApprenticeshipSearchLogEntry.cs" />
+    <Compile Include="Logging\HttpErrorLogEntry.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\ApprenticeshipTrainingType.cs" />

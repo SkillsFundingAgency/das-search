@@ -7,12 +7,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Helpers
     {
         public int GetActualPage(int page)
         {
-            if (page < 1)
-            {
-                page = 1;
-            }
-
-            return page;
+            return page < 1 ? 1  : page;
         }
 
         public DetailProviderResponse CreateDetailProviderResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)

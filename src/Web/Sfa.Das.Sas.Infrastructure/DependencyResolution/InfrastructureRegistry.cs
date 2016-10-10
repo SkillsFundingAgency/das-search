@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
+﻿using System.Configuration;
+using SFA.DAS.Apprenticeships.Api.Client;
+
+namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
     using FeatureToggle.Core.Fluent;
     using Sfa.Das.Sas.ApplicationServices;
@@ -41,11 +44,14 @@
                 For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderRepository>();
             }
 
+            For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
+            For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
             For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
             For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IRetryWebRequests>().Use<WebRequestRetryService>();
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
+            For<ITypicalLengthMapping>().Use<TypicalLengthMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
         }
