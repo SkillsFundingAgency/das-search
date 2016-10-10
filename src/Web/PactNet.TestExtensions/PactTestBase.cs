@@ -13,7 +13,7 @@ namespace PactNet.TestExtensions
 
         private IPactBuilder PactBuilder { get; set; }
         public IMockProviderService MockProviderService { get; private set; }
-        public int MockServerPort => 1234;
+        public int MockServerPort => 88;
         public string MockProviderServiceBaseUri => $"http://localhost:{MockServerPort}";
 
         [OneTimeSetUp]
