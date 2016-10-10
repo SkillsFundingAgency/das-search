@@ -52,5 +52,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string DeliveryOptionsMessage { get; set; }
 
         public string FrameworkId { get; set; }
+
+        public string LocationAddressLine { get; set; }
     }
 }

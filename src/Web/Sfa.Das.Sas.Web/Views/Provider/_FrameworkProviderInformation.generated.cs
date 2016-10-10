@@ -217,52 +217,7 @@ WriteLiteral(">");
 
             
             #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                       Write(item.LocationName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                          Write(item.Address.Address1);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                 Write(item.Address.Address2);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                        Write(item.Address.Town);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                                           Write(item.Address.County);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 26 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                                                                                                                                                Write(item.Address.Postcode);
+                                       Write(item.LocationAddressLine);
 
             
             #line default

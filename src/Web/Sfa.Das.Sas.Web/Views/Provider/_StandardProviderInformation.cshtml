@@ -1,6 +1,7 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@using Microsoft.Ajax.Utilities
 @model ProviderStandardSearchResultViewModel
 
     @foreach (var item in Model.Hits)
@@ -40,10 +41,10 @@
     <dt><b>Distance:</b></dt>
     <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
 
-    if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
-    {
-        <dd class="address">@item.LocationName @item.Address.Address1 @item.Address.Address2 @item.Address.Town @item.Address.County @item.Address.Postcode</dd>
-    }
+if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
+{
+        <dd class="address">@item.LocationAddressLine</dd>
+}
 
     @RenderDeliveryOptions(item);
 }
