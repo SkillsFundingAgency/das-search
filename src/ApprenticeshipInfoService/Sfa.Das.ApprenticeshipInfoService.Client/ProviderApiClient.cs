@@ -16,7 +16,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Client
         /// Get a list of provider details
         /// GET /providers/{provider-ukprn}
         /// </summary>
-        /// <param name="providerUkprn">an integer for the composite id {frameworkId}{pathway}{progType}</param>
+        /// <param name="providerUkprn">an integer for the provider ukprn</param>
         /// <returns>a framework details based on pathway and level</returns>
         public IEnumerable<Provider> Get(int providerUkprn)
         {
