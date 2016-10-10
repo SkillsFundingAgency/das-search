@@ -18,7 +18,7 @@ namespace SFA.DAS.Apprenticeships.Api.Client
 
         protected ApiClientBase(string baseUri = null)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri(baseUri ?? "http://api.apprenticeships.sfa.bis.gov.uk") };
+            _httpClient = new HttpClient { BaseAddress = new Uri(baseUri ?? "http://das-prd-apprenticeshipinfoservice.cloudapp.net") };
         }
 
         protected static void RaiseResponseError(HttpRequestMessage failedRequest, HttpResponseMessage failedResponse)
