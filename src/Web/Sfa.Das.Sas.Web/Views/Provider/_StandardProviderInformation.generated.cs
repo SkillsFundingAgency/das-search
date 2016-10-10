@@ -34,12 +34,6 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     #line default
     #line hidden
     
-    #line 4 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-    using Microsoft.Ajax.Utilities;
-    
-    #line default
-    #line hidden
-    
     #line 2 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     
@@ -58,14 +52,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class StandardProviderInformation : System.Web.Mvc.WebViewPage<ProviderStandardSearchResultViewModel>
     {
 
-#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 38 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 40 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 39 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
  
 
 
@@ -80,7 +74,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"distance\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.Distance);
 
 
@@ -89,7 +83,7 @@ WriteTo(__razor_helper_writer, item.Distance);
 WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 41 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
            WriteTo(__razor_helper_writer, item.Distance == 1 ? "mile" : "miles");
 
 
@@ -98,7 +92,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 WriteLiteralTo(__razor_helper_writer, " away</dd>\r\n");
 
 
-#line 43 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
 if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
 {
@@ -113,7 +107,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"address\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, item.LocationAddressLine);
 
 
@@ -122,7 +116,7 @@ WriteTo(__razor_helper_writer, item.LocationAddressLine);
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 47 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 
     
@@ -130,14 +124,14 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line default
 #line hidden
 
-#line 49 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 WriteTo(__razor_helper_writer, RenderDeliveryOptions(item));
 
 
 #line default
 #line hidden
 
-#line 49 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 48 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                                 ;
 
 
@@ -145,19 +139,19 @@ WriteTo(__razor_helper_writer, RenderDeliveryOptions(item));
 #line hidden
 });
 
-#line 50 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 49 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden
 
-#line 52 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 51 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 public System.Web.WebPages.HelperResult RenderDeliveryOptions(StandardProviderResultItemViewModel item)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 53 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 52 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
  
 
 
@@ -166,7 +160,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "    <dt><b>Training options:</b></dt>\r\n");
 
 
-#line 55 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 54 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
 
 
@@ -179,7 +173,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"deliveryOptions\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 56 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 55 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
   WriteTo(__razor_helper_writer, item.DeliveryOptionsMessage);
 
 
@@ -188,14 +182,14 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 57 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 56 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 57 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+#line 56 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 }
 #line default
 #line hidden
@@ -208,7 +202,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 WriteLiteral("    ");
 
             
-            #line 7 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 6 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
      foreach (var item in Model.Hits)
     {
 
@@ -228,7 +222,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 12 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 11 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null));
 
             
@@ -237,13 +231,13 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n");
 
             
-            #line 13 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 12 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 12 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                      if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
                     {
 
@@ -257,7 +251,7 @@ WriteLiteral(" class=\"tag tag-new\"");
 WriteLiteral(">National</span>\r\n");
 
             
-            #line 16 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 15 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                     }
 
             
@@ -272,7 +266,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 21 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 20 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
            Write(RenderProviderDetails(item));
 
             
@@ -287,7 +281,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 25 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 24 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(item.EmployerSatisfactionMessage);
 
             
@@ -303,7 +297,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 29 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 28 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(item.LearnerSatisfactionMessage);
 
             
@@ -319,7 +313,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 33 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 32 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
                Write(item.AchievementRateMessage);
 
             
@@ -328,7 +322,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </dd>\r\n            </dl>\r\n        </article>\r\n");
 
             
-            #line 37 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
+            #line 36 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
     }
 
             

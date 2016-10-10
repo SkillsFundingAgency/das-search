@@ -35,6 +35,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
+                LocationAddressLine = "Test location name, Address 1, Address 2, Town, County, PostCode",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 ContactInformation = new ContactInformation
                 {
@@ -67,7 +68,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             this.GetPartial(html, ".training-structure").Should().Contain("Training options");
             this.GetPartial(html, ".block-release").Should().Contain("block release");
             this.GetPartial(html, ".training-location-title").Should().Contain("Training location");
-            this.GetPartial(html, ".training-location").Should().Contain("Test location name Address 1 Address 2 Town County PostCode");
+            this.GetPartial(html, ".training-location").Should().Contain("Test location name, Address 1, Address 2, Town, County, PostCode");
         }
 
         [Test]
@@ -141,6 +142,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
+                LocationAddressLine = "Test location name, Address 1, Address 2",
                 DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
                 ContactInformation = new ContactInformation
                 {
@@ -241,6 +243,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
+                LocationAddressLine = "Test location name, Address 1, Address 2",
                 DeliveryModes = new List<string> { "BlockRelease" },
                 ContactInformation = new ContactInformation
                 {
