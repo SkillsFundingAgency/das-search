@@ -9,7 +9,7 @@
                 return string.Empty;
             }
 
-            str = str.Trim().Replace(" ", string.Empty);
+            str = str.Replace(" ", string.Empty);
             switch (str.Length)
             {
                 case 5:

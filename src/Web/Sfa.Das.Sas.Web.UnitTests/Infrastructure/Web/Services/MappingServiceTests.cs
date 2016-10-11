@@ -128,7 +128,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 {
                     new TrainingLocation
                     {
-                        Address = new Address { Address1 = "Address 1", Address2 = "Address 2"},
+                        Address = new Address { Address1 = "Address 1", Address2 = "Address 2" },
                         LocationName = "Location Name",
                         LocationId = 12345
                     }
@@ -154,7 +154,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 {
                     new TrainingLocation
                     {
-                        Address = new Address { Address1 = "Address 1", County = "Angleterre"},
+                        Address = new Address { Address1 = "Address 1", County = "Angleterre" },
                         LocationName = "Location Name",
                         LocationId = 12345
                     }
