@@ -46,8 +46,6 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         string MetadataApiUri { get; }
 
-        bool ToggleFilterOnFunding { get; }
-
         string QueueName(Type type);
     }
 }

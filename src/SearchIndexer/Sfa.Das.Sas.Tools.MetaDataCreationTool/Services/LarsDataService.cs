@@ -169,14 +169,11 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.Services
                          CompetenceDescription = comp.FrameworkComponentTypeDesc
                      }).ToList();
 
-                if (_appServiceSettings.ToggleFilterOnFunding)
-                {
                     // Determine if the qualifications are funded or not by the apprenticeship scheme
-                    DetermineQualificationFundingStatus(qualifications, metaData.Fundings);
+                DetermineQualificationFundingStatus(qualifications, metaData.Fundings);
 
-                    // Only show funded qualifications
-                    qualifications = qualifications.Where(x => x.IsFunded).ToList();
-                }
+                // Only show funded qualifications
+                qualifications = qualifications.Where(x => x.IsFunded).ToList();
 
                 var categorisedQualifications = GetCategorisedQualifications(qualifications);
 
