@@ -37,6 +37,11 @@ namespace SFA.DAS.Apprenticeships.Api.Client
             return null;
         }
 
+        public Framework Get(int frameworkCode, int pathwayCode, int progamType)
+        {
+            return Get(ConvertToCompositeId(frameworkCode, pathwayCode, progamType));
+        }
+
         public IEnumerable<FrameworkSummary> FindAll()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/frameworks");
@@ -89,6 +94,16 @@ namespace SFA.DAS.Apprenticeships.Api.Client
             }
 
             return false;
+        }
+
+        public bool Exists(int frameworkCode, int pathwayCode, int progamType)
+        {
+            return Exists(ConvertToCompositeId(frameworkCode, pathwayCode, progamType));
+        }
+
+        private static string ConvertToCompositeId(int frameworkCode, int pathwayCode, int progamType)
+        {
+            return $"{frameworkCode}{pathwayCode}{progamType}";
         }
     }
 }
