@@ -258,6 +258,7 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
     <Compile Include="Controllers\HealthController.cs" />
+    <Compile Include="Extensions\PostcodeExtension.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Logging\RequestContext.cs" />
     <Compile Include="Services\IValidation.cs" />
