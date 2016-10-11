@@ -79,6 +79,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             viewModel.EmployerSatisfactionMessage.Should().Be("8.3%");
             viewModel.LearnerSatisfactionMessage.Should().Be("2.1%");
+
+            viewModel.LocationAddressLine.Should().BeEquivalentTo("Location 1, 12, test bay, Market place, Sea Town, Greensville, AB12 3ED");
         }
 
         [Test]

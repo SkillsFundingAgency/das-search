@@ -94,8 +94,8 @@ WriteLiteralTo(__razor_helper_writer, " away</dd>\r\n");
 
 #line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
 
-    if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
-    {
+if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
+{
 
 
 #line default
@@ -108,52 +108,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-WriteTo(__razor_helper_writer, item.LocationName);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                 WriteTo(__razor_helper_writer, item.Address.Address1);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                                        WriteTo(__razor_helper_writer, item.Address.Address2);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                                                               WriteTo(__razor_helper_writer, item.Address.Town);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                                                                                  WriteTo(__razor_helper_writer, item.Address.County);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 45 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-                                                                                                       WriteTo(__razor_helper_writer, item.Address.Postcode);
+WriteTo(__razor_helper_writer, item.LocationAddressLine);
 
 
 #line default
@@ -162,7 +117,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
 #line 46 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-    }
+}
 
     
 

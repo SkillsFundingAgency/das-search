@@ -33,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Sfa.Das.ApprenticeshipInfoService.Api.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Sfa.Das.ApprenticeshipInfoService.Api.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

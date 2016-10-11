@@ -40,5 +40,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string AchievementRateMessage { get; set; }
 
         public string DeliveryOptionsMessage { get; set; }
+
+        public string LocationAddressLine { get; set; }
     }
 }
