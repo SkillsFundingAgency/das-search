@@ -66,7 +66,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             return (int) results.HitsMetaData.Total;
         }
         
-        public Framework GetFrameworkById(int id)
+        public Framework GetFrameworkById(string id)
         {
             var results =
                 _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(

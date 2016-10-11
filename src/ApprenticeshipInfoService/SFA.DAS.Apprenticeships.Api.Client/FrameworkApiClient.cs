@@ -18,7 +18,7 @@ namespace SFA.DAS.Apprenticeships.Api.Client
         /// </summary>
         /// <param name="frameworkId">an integer for the composite id {frameworkId}{pathway}{progType}</param>
         /// <returns>a framework details based on pathway and level</returns>
-        public Framework Get(int frameworkId)
+        public Framework Get(string frameworkId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/frameworks/{frameworkId}");
             request.Headers.Add("Accept", "application/json");

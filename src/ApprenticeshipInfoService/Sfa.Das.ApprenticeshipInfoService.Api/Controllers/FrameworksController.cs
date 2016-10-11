@@ -44,7 +44,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Framework))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
-        public Framework Get(int id)
+        public Framework Get(string id)
         {
             var response = _getFrameworks.GetFrameworkById(id);
 
