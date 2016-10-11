@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Domain.Model;
+    using Core.Logging;
     using FluentValidation;
     using MediatR;
     using Models;
@@ -10,8 +12,6 @@
     using Responses;
     using Settings;
     using Validators;
-    using Core.Domain.Model;
-    using Core.Logging;
 
     public sealed class StandardProviderSearchHandler : IAsyncRequestHandler<StandardProviderSearchQuery, StandardProviderSearchResponse>
     {
