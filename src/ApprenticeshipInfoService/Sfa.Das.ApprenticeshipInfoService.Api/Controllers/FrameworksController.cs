@@ -66,7 +66,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.NoContent)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
-        public void Head(int id)
+        public void Head(string id)
         {
             if (_getFrameworks.GetFrameworkById(id) != null)
             {
