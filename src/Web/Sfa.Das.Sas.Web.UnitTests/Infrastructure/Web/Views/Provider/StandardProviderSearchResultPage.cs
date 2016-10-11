@@ -339,6 +339,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
+                LocationAddressLine = "Address 1, Address 2, Town, County, PostCode",
                 UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
@@ -359,7 +360,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetPartial(html, ".result dl dd").Should().Be("0 miles away");
 
-            GetPartial(html, ".address").Should().Be("Address 1 Address 2 Town County PostCode");
+            GetPartial(html, ".address").Should().Be("Address 1, Address 2, Town, County, PostCode");
         }
 
         [Test]
@@ -418,6 +419,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Postcode = "PostCode",
                     Town = "Town"
                 },
+                LocationAddressLine = "Address 1, Address 2, Town, County, PostCode",
                 UkPrn = 1,
                 LocationId = 2,
                 StandardCode = 12
@@ -438,7 +440,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetPartial(html, ".result dl dd").Should().Be("3 miles away");
 
-            GetPartial(html, ".address").Should().Be("Address 1 Address 2 Town County PostCode");
+            GetPartial(html, ".address").Should().Be("Address 1, Address 2, Town, County, PostCode");
         }
 
         [Test]

@@ -12,6 +12,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
     [TestFixture]
     public sealed class MappingServiceTests
     {
@@ -112,6 +114,58 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.PostCode.Should().Be(response.Postcode);
             viewModel.SearchTerms.Should().Be(response.Keywords);
             viewModel.HasError.Should().Be(response.HasErrors);
+        }
+
+        [Test]
+        public void ShouldMapStandardProvidersItemToViewModel()
+        {
+            var service = new MappingService(Mock.Of<ILog>());
+
+            var response = new StandardProviderSearchResultsItem
+            {
+                StandardCode = 2,
+                TrainingLocations = new List<TrainingLocation>
+                {
+                    new TrainingLocation
+                    {
+                        Address = new Address { Address1 = "Address 1", Address2 = "Address 2"},
+                        LocationName = "Location Name",
+                        LocationId = 12345
+                    }
+                },
+                MatchingLocationId = 12345
+            };
+
+            var viewModel = service.Map<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>(response);
+
+            viewModel.Should().NotBeNull();
+            viewModel.LocationAddressLine.Should().Be("Location Name, Address 1, Address 2");
+        }
+
+        [Test]
+        public void ShouldMapFrameworkProvidersItemToViewModel()
+        {
+            var service = new MappingService(Mock.Of<ILog>());
+
+            var response = new FrameworkProviderSearchResultsItem
+            {
+                FrameworkId = "123-45-6",
+                TrainingLocations = new List<TrainingLocation>
+                {
+                    new TrainingLocation
+                    {
+                        Address = new Address { Address1 = "Address 1", County = "Angleterre"},
+                        LocationName = "Location Name",
+                        LocationId = 12345
+                    }
+                },
+                MatchingLocationId = 12345
+            };
+
+            var viewModel = service.Map<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>(response);
+
+            viewModel.Should().NotBeNull();
+            viewModel.LocationAddressLine.Should().Be("Location Name, Address 1, Angleterre");
         }
     }
 }

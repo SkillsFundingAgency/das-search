@@ -54,5 +54,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string SatisfactionSourceUrl { get; set; }
 
         public string AchievementRateSourceUrl { get; set; }
+
+        public string LocationAddressLine { get; set; }
     }
 }

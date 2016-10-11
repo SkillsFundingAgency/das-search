@@ -3,6 +3,12 @@ using Sfa.Das.Sas.Web.Extensions;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
+    using System.Linq;
+
+    using Microsoft.Ajax.Utilities;
+
+    using Sfa.Das.Sas.ApplicationServices.Models;
+
     internal static class ProviderMappingHelper
     {
         internal static string GetPercentageText(double? level)
@@ -13,6 +19,17 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             }
 
             return $"{level}%";
+        }
+
+        internal static string GetLocationAddressLine(TrainingLocation providerLocation)
+        {
+            return GetCommaList(
+                providerLocation.LocationName,
+                providerLocation.Address.Address1,
+                providerLocation.Address.Address2,
+                providerLocation.Address.Town,
+                providerLocation.Address.County,
+                providerLocation.Address.Postcode);
         }
 
         internal static string GetDeliveryOptionText(List<string> deliveryOptions)
@@ -40,5 +57,11 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
             return $"{deliveryOptionsMessage}";
         }
+
+        internal static string GetCommaList(params string [] list)
+        {
+            return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
+        }
+
     }
 }
