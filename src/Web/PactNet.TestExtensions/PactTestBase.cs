@@ -1,5 +1,7 @@
 using System;
 using System.Configuration;
+using System.Diagnostics;
+using System.Reflection;
 using NUnit.Framework;
 using PactNet.Mocks.MockHttpService;
 
@@ -36,9 +38,16 @@ namespace PactNet.TestExtensions
             {
                 using (var client = new PactBrokerClient())
                 {
-                    client.Upload(_pactBrokerUri, _providerName, _consumerName);
+                    client.Upload(_pactBrokerUri, _providerName, _consumerName, GetVersion());
                 }
             }
+        }
+
+        private string GetVersion()
+        {
+            var assembly = this.GetType().Assembly;
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fileVersionInfo.ProductVersion;
         }
     }
 }
