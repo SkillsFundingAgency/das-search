@@ -133,7 +133,7 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
     {
             <div class="@cssClass">
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
-                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                    <input type="hidden" name="PostCode" value="@Model.PostCode.FormatPostcode()" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
                     <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
                     <input type="hidden" name="keywords" value="@Model.SearchTerms" />
@@ -155,7 +155,7 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode }, { "page", page }, { "showall", Model.ShowAll } };
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode.FormatPostcode() }, { "page", page }, { "showall", Model.ShowAll } };
         int i = 0;
         foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
         {

@@ -10,8 +10,14 @@
         $('form.postcode-form').on('submit', function (e) {
             var postCode = $(this).find('.postcode-search-box').val().trim();
             if (!validation.validatePostcode(postCode)) {
-                $('.form-elements').addClass("error");
                 e.preventDefault();
+                $('.form-elements').addClass("error");
+                postCode = postCode.toUpperCase().trim().replace(/\s/g, "");
+                if (postCode.length > 4 && postCode.length < 8) {
+                    var splitAt = postCode.length - 3;
+                    postCode = [postCode.slice(0, splitAt), " ", postCode.slice(splitAt)].join("");
+                }
+                $('.postcode-search-box').val(postCode);
             }
         });
     };

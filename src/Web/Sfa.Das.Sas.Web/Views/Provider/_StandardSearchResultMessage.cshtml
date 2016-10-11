@@ -1,4 +1,5 @@
-﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderStandardSearchResultViewModel
+﻿@using Sfa.Das.Sas.Web.Extensions
+@model Sfa.Das.Sas.Web.ViewModels.ProviderStandardSearchResultViewModel
 
 <div>
     @if (Model.HasError)
@@ -32,7 +33,7 @@
         <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.
     </p>
     <p class="small-btm-margin">
-        Results are ordered by distance from '<b>@Model.PostCode</b>'.
+        Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.
     </p>
 }
 
@@ -43,6 +44,6 @@
         <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship.
     </p>
     <p class="small-btm-margin">
-        Results are ordered by distance from '<b>@Model.PostCode</b>'.
+        Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.
     </p>
 }
