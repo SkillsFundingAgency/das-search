@@ -1,4 +1,5 @@
-﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel
+﻿@using Sfa.Das.Sas.Web.Extensions
+@model Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel
 @{
     ViewBag.Title = "Search for providers";
 }
@@ -45,7 +46,7 @@
                         <div class="form-group">
                             <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                             <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
-                            <input type="search" name="PostCode" value="@Model.PostCode" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                            <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
                             <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
                         </div>
                     </div>

@@ -12,12 +12,6 @@ namespace SFA.DAS.Apprenticeships.Api.Client
         {
         }
 
-        /// <summary>
-        /// Get a single framework details
-        /// GET /frameworks/{framework-id}
-        /// </summary>
-        /// <param name="frameworkId">an integer for the composite id {frameworkId}{pathway}{progType}</param>
-        /// <returns>a framework details based on pathway and level</returns>
         public Framework Get(string frameworkId)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/frameworks/{frameworkId}");
@@ -43,11 +37,11 @@ namespace SFA.DAS.Apprenticeships.Api.Client
             return null;
         }
 
-        /// <summary>
-        /// Get a collection of frameworks
-        /// GET /frameworks
-        /// </summary>
-        /// <returns>a collection of framework summaries</returns>
+        public Framework Get(int frameworkCode, int pathwayCode, int progamType)
+        {
+            return Get(ConvertToCompositeId(frameworkCode, pathwayCode, progamType));
+        }
+
         public IEnumerable<FrameworkSummary> FindAll()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/frameworks");
@@ -71,6 +65,45 @@ namespace SFA.DAS.Apprenticeships.Api.Client
             }
 
             return null;
+        }
+
+        public bool Exists(string frameworkId)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Head, $"/frameworks/{frameworkId}");
+            request.Headers.Add("Accept", "application/json");
+
+            var response = _httpClient.SendAsync(request);
+
+            try
+            {
+                var result = response.Result;
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return false;
+                }
+
+                RaiseResponseError(request, result);
+            }
+            finally
+            {
+                Dispose(request, response);
+            }
+
+            return false;
+        }
+
+        public bool Exists(int frameworkCode, int pathwayCode, int progamType)
+        {
+            return Exists(ConvertToCompositeId(frameworkCode, pathwayCode, progamType));
+        }
+
+        private static string ConvertToCompositeId(int frameworkCode, int pathwayCode, int progamType)
+        {
+            return $"{frameworkCode}{pathwayCode}{progamType}";
         }
     }
 }

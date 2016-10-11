@@ -43,7 +43,7 @@
         else if (Model.TotalResults == 0)
         {
             <p>
-                Sorry, there are currently no training providers for <b>@Model.Title, level @Model.FrameworkLevel</b> for '<b>@Model.PostCode</b>'.
+                Sorry, there are currently no training providers for <b>@Model.Title, level @Model.FrameworkLevel</b> for '<b>@Model.PostCode.FormatPostcode()</b>'.
             </p>
             <div>
                 You can:
@@ -140,7 +140,7 @@ if (Model.ActualPage < Model.LastPage)
         {
             <div class="filters-block @cssClass">
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
-                    <input type="hidden" name="PostCode" value="@Model.PostCode" />
+                    <input type="hidden" name="PostCode" value="@Model.PostCode.FormatPostcode()" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
                     <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()" />
                     <input type="hidden" name="keywords" value="@Model.SearchTerms" />

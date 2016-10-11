@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -15,7 +16,7 @@ namespace PactNet.TestExtensions
             _client = new WebClient();
         }
 
-        public void Upload(string pactBrokerUri, string providerName, string consumerName)
+        public void Upload(string pactBrokerUri, string providerName, string consumerName, string version)
         {
             var details = new PactDetails { Provider = new Pacticipant { Name = providerName }, Consumer = new Pacticipant { Name = consumerName } };
             var filename = details.GeneratePactFileName();
@@ -27,7 +28,7 @@ namespace PactNet.TestExtensions
             }
 
             _client.Headers.Add("Content-Type", "application/json");
-            var url = $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{consumerName.Replace(" ", "%20")}/version/{Assembly.GetExecutingAssembly().GetName().Version}";
+            var url = $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{consumerName.Replace(" ", "%20")}/version/{version}";
             Console.WriteLine($"PUT {url}");
             _client.UploadFile(
                 url,
