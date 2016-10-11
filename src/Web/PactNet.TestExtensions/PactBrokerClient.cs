@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -27,13 +28,20 @@ namespace PactNet.TestExtensions
             }
 
             _client.Headers.Add("Content-Type", "application/json");
-            var url = $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{consumerName.Replace(" ", "%20")}/version/{Assembly.GetExecutingAssembly().GetName().Version}";
+            var url = $"{pactBrokerUri}/pacts/provider/{providerName.Replace(" ", "%20")}/consumer/{consumerName.Replace(" ", "%20")}/version/{GetVersion()}";
             Console.WriteLine($"PUT {url}");
             _client.UploadFile(
                 url,
                 "PUT",
                 $"../../pacts/{filename}");
 
+        }
+
+        private static string GetVersion()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fileVersionInfo.ProductVersion;
         }
 
         public void Dispose()
