@@ -51,8 +51,10 @@
     <Compile Include="IFrameworkApiClient.cs" />
     <Compile Include="IStandardApiClient.cs" />
     <Compile Include="Models\Framework.cs" />
+    <Compile Include="Models\FrameworkSummary.cs" />
     <Compile Include="Models\JobRoleItem.cs" />
     <Compile Include="Models\Standard.cs" />
+    <Compile Include="Models\StandardSummary.cs" />
     <Compile Include="Models\TypicalLength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StandardApiClient.cs" />
