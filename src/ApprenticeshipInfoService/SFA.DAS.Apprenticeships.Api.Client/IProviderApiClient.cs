@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace SFA.DAS.Apprenticeships.Api.Client
 {

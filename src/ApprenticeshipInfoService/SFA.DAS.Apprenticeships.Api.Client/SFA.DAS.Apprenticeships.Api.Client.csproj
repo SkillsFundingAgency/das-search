@@ -57,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Das.ApprenticeshipInfoService.Core\Sfa.Das.ApprenticeshipInfoService.Core.csproj">
-      <Project>{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}</Project>
-      <Name>Sfa.Das.ApprenticeshipInfoService.Core</Name>
+    <ProjectReference Include="..\SFA.DAS.Apprenticeships.Api.Types\SFA.DAS.Apprenticeships.Api.Types.csproj">
+      <Project>{35cdf98e-a38f-42b7-acce-62b5bb4ba3f3}</Project>
+      <Name>SFA.DAS.Apprenticeships.Api.Types</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

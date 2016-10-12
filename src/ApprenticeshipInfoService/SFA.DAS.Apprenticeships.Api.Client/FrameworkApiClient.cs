@@ -2,11 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace SFA.DAS.Apprenticeships.Api.Client
 {
-    using Sfa.Das.ApprenticeshipInfoService.Core.Models;
-
     public class FrameworkApiClient : ApiClientBase, IFrameworkApiClient
     {
         public FrameworkApiClient(string baseUri = null) : base(baseUri)

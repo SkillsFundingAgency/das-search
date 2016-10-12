@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SFA.DAS.Apprenticeships.Api.Client.Models
+namespace SFA.DAS.Apprenticeships.Api.Types
 {
     public sealed class Standard
     {
