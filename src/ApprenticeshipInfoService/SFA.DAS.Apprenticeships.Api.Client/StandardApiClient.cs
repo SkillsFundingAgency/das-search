@@ -14,6 +14,11 @@ namespace SFA.DAS.Apprenticeships.Api.Client
 
         public Standard Get(int standardCode)
         {
+            return Get(standardCode.ToString());
+        }
+
+        public Standard Get(string standardCode)
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, $"/standards/{standardCode}");
             request.Headers.Add("Accept", "application/json");
 
@@ -38,6 +43,11 @@ namespace SFA.DAS.Apprenticeships.Api.Client
         }
 
         public bool Exists(int standardCode)
+        {
+            return Exists(standardCode.ToString());
+        }
+
+        public bool Exists(string standardCode)
         {
             var request = new HttpRequestMessage(HttpMethod.Head, $"/standards/{standardCode}");
             request.Headers.Add("Accept", "application/json");
