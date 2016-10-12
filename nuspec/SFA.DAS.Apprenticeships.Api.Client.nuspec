@@ -12,9 +12,10 @@
         <copyright>Copyright 2016</copyright>
         <dependencies>
             <dependency id="Newtonsoft.Json" version="8.0.3" />
+            <dependency id="SFA.DAS.Apprenticeships.Api.Types" version="#{BuildNumber}" />
         </dependencies>
     </metadata>
      <files>
-        <file src="\..\src\ApprenticeshipInfoService\SFA.DAS.Apprenticeships.Api.Client\bin\Release\SFA*.dll" target="lib" />
+        <file src="\..\src\ApprenticeshipInfoService\SFA.DAS.Apprenticeships.Api.Client\bin\Release\SFA.DAS.Apprenticeships.Api.Client.dll" target="lib" />
      </files>
 </package>
