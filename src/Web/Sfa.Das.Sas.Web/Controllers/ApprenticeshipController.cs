@@ -85,9 +85,9 @@ namespace Sfa.Das.Sas.Web.Controllers
             switch (response.StatusCode)
             {
                 case GetFrameworkResponse.ResponseCodes.InvalidFrameworkId:
-                    _logger.Info("404 - Attempt to get standard with an ID below zero");
+                    _logger.Info("404 - Framework id has wrong format");
 
-                    return HttpNotFound("Cannot find any standards with an ID below zero");
+                    return HttpNotFound("Framework id has wrong format");
 
                 case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
                     var message = $"Cannot find framework: {id}";

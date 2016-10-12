@@ -25,6 +25,27 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _sut = new GetFrameworkHandler(_mockGetFrameworks.Object);
         }
 
+        [TestCase("1-2-a")]
+        [TestCase("a-2-3")]
+        [TestCase("1-a-3")]
+        [TestCase("1-2-3a")]
+        [TestCase("a1-2-3")]
+        [TestCase("1-2a-3")]
+        [TestCase("--")]
+        [TestCase("1--")]
+        [TestCase("-2-")]
+        [TestCase("--3")]
+        [TestCase("1--3")]
+        [TestCase("-2-3")]
+        [TestCase("1-2-")]
+        [TestCase("")]
+        public void ShouldReturnInvalidFrameworkIdStatus(string frameworkId)
+        {
+            var response = _sut.Handle(new GetFrameworkQuery { Id = frameworkId, Keywords = "Test" });
+
+            response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.InvalidFrameworkId);
+        }
+
         [Test]
         public void ShouldReturnInvalidFrameworkIdStatusIfIdIsBelowZero()
         {
@@ -36,7 +57,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnFrameworkNotFoundStatusIfFrameworkCannotBeFound()
         {
-            var response = _sut.Handle(new GetFrameworkQuery { Id = "1-2-2", Keywords = "Test" });
+            var response = _sut.Handle(new GetFrameworkQuery { Id = "4-1-2", Keywords = "Test" });
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.FrameworkNotFound);
         }

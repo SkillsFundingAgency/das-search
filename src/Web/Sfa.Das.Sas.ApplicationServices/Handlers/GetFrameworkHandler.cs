@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System;
+using System.Text.RegularExpressions;
+using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Services;
@@ -18,7 +20,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var response = new GetFrameworkResponse();
 
-            if (message.Id.Length < 5)
+            if (!ValidateFrameworkId(message.Id))
             {
                 response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
 
@@ -38,6 +40,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             response.SearchTerms = message.Keywords;
 
             return response;
+        }
+
+        private bool ValidateFrameworkId(string id)
+        {
+            return Regex.IsMatch(id, @"^\d+-\d+-\d+$");
         }
     }
 }
