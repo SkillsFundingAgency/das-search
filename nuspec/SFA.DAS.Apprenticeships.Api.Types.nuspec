@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>SFA.DAS.Apprenticeships.Api.Types</id>
+        <version>0.0.1</version>
+        <authors>sfanuget scottcowan</authors>
+		<licenseUrl>https://github.com/SkillsFundingAgency/das-search/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/SkillsFundingAgency/das-search</projectUrl>		
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Provides types for the SFA.DAS.ApprenticeshipInfoService client service</description>
+		<summary>Types used for SFA.DAS.ApprenticeshipInfoService client service</summary>
+        <copyright>Copyright 2016</copyright>
+    </metadata>
+     <files>
+        <file src="\..\src\ApprenticeshipInfoService\SFA.DAS.Apprenticeships.Api.Types\bin\Release\SFA*.dll" target="lib" />
+     </files>
+</package>

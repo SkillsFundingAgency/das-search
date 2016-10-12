@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using SFA.DAS.Apprenticeships.Api.Client.Models;
 
 namespace SFA.DAS.Apprenticeships.Api.Client
 {
+    using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+
     public interface IFrameworkApiClient : IDisposable
     {
         /// <summary>

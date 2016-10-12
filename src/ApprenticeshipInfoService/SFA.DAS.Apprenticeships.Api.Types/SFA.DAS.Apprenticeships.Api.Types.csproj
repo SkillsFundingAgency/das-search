@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA7F312C-6132-4084-A38F-B053029226DE}</ProjectGuid>
+    <ProjectGuid>{35CDF98E-A38F-42B7-ACCE-62B5BB4BA3F3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SFA.DAS.Apprenticeships.Api.Client</RootNamespace>
-    <AssemblyName>SFA.DAS.Apprenticeships.Api.Client</AssemblyName>
+    <RootNamespace>SFA.DAS.Apprenticeships.Api.Types</RootNamespace>
+    <AssemblyName>SFA.DAS.Apprenticeships.Api.Types</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\Web\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,23 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiClientBase.cs" />
-    <Compile Include="ProviderApiClient.cs" />
-    <Compile Include="IProviderApiClient.cs" />
-    <Compile Include="FrameworkApiClient.cs" />
-    <Compile Include="IFrameworkApiClient.cs" />
-    <Compile Include="IStandardApiClient.cs" />
+    <Compile Include="Framework.cs" />
+    <Compile Include="FrameworkSummary.cs" />
+    <Compile Include="JobRoleItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StandardApiClient.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sfa.Das.ApprenticeshipInfoService.Core\Sfa.Das.ApprenticeshipInfoService.Core.csproj">
-      <Project>{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}</Project>
-      <Name>Sfa.Das.ApprenticeshipInfoService.Core</Name>
-    </ProjectReference>
+    <Compile Include="Standard.cs" />
+    <Compile Include="StandardSummary.cs" />
+    <Compile Include="TypicalLength.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
