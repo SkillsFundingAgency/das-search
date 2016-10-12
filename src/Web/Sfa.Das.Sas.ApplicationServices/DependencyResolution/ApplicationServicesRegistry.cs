@@ -32,6 +32,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
             For<IPaginationSettings>().Use<PaginationSettings>();
             For<AbstractValidator<ProviderSearchQuery>>().Use<ProviderSearchQueryValidator>();
             For<AbstractValidator<ProviderDetailQuery>>().Use<ProviderDetailQueryValidator>();
+            For<AbstractValidator<GetFrameworkQuery>>().Use<FrameworkQueryValidator>();
         }
     }
 }

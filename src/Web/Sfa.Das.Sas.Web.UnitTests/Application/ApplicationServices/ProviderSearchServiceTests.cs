@@ -250,8 +250,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         public async Task SearchByFrameworkPostCodeShouldIndicateThereWasAnErrorIfSearchThrowsAnException()
         {
             ProviderSearchService service = new ProviderSearchServiceBuilder()
+                    .SetupFrameworkRepository(m => m.GetFrameworkById(It.IsAny<string>()), new Framework())
                    .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
-                   .SetupLocationSearchProviderException<SearchException>(x => x.SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()));
+                   .SetupLocationSearchProviderException<SearchException>(x => x.
+                        SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()));
 
             var result = await service.SearchFrameworkProviders("-1", "AS3 4AS", _pageZeroWithTenItems, null, false, false);
 

@@ -4,6 +4,6 @@
     {
         bool ValidatePostcode(string postCode);
 
-        bool IsPositiveNumber(string number);
+        bool ValidateFrameowrkId(string id);
     }
 }

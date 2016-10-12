@@ -134,6 +134,7 @@
     <Compile Include="Settings\ICookieSettings.cs" />
     <Compile Include="Settings\IPaginationSettings.cs" />
     <Compile Include="Settings\PaginationSettings.cs" />
+    <Compile Include="Validators\FrameworkQueryValidator.cs" />
     <Compile Include="Validators\IValidation.cs" />
     <Compile Include="Validators\ProviderDetailQueryValidator.cs" />
     <Compile Include="Validators\ProviderSearchQueryValidator.cs" />

@@ -52,17 +52,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldSignalFailureWhenApprenticeshipIdIdIsInvalid()
-        {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "0", PostCode = "AB23 0BB" };
-
-            var response = await _handler.Handle(message);
-
-            response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId);
-        }
-
-        [Test]
         public async Task ShouldSignalFailureWhenPostCodeIsNull()
         {
             var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = null };

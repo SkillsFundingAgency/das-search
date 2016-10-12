@@ -13,10 +13,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Validators
             return match.Success;
         }
 
-        public bool IsPositiveNumber(string number)
+        public bool ValidateFrameowrkId(string id)
         {
-            int numOut;
-            return TryParse(number, out numOut) && numOut > 0;
+            return Regex.IsMatch(id, @"^\d+-\d+-\d+$");
         }
     }
 }
