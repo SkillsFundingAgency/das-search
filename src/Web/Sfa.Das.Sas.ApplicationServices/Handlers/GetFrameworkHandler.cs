@@ -42,13 +42,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 }
             }
 
-            //if (!ValidateFrameworkId(message.Id))
-            //{
-            //    response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
-
-            //    return response;
-            //}
-
             var framework = _getFrameworks.GetFrameworkById(message.Id);
 
             if (framework == null)
