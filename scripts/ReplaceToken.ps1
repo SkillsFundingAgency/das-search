@@ -1,3 +1,4 @@
 Param($file, $key, $value)
 
-(cat $file) -replace '@@$key@@', "$value" > $file
+$contents = cat $file
+$contents -replace "@@$key@@", "$value" > $file
