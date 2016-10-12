@@ -12,6 +12,6 @@
         <copyright>Copyright 2016</copyright>
     </metadata>
      <files>
-        <file src="\..\src\ApprenticeshipInfoService\SFA.DAS.Apprenticeships.Api.Types\bin\Release\SFA*.dll" target="lib" />
+        <file src="\..\src\ApprenticeshipInfoService\SFA.DAS.Apprenticeships.Api.Client\bin\Release\SFA.DAS.Apprenticeships.Api.Types.dll" target="lib" />
      </files>
 </package>
