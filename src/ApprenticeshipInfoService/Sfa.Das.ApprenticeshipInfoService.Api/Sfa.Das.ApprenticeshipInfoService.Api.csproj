@@ -184,6 +184,7 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\ExceptionHandlingAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helpers\HttpResponseFactory.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />

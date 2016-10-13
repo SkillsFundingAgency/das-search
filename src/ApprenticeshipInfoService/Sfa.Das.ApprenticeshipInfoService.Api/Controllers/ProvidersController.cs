@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Net;
     using System.Web.Http;
+
+    using Sfa.Das.ApprenticeshipInfoService.Api.Attributes;
     using Sfa.Das.ApprenticeshipInfoService.Api.Helpers;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
@@ -31,6 +33,7 @@
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [Route("providers")]
+        [ExceptionHandling]
         public IEnumerable<Provider> Get()
         {
             var response = _getProviders.GetAllProviders();
@@ -43,6 +46,7 @@
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("providers/{ukprn}")]
+        [ExceptionHandling]
         public IEnumerable<Provider> Get(int ukprn)
         {
             var response = _getProviders.GetProvidersByUkprn(ukprn);
@@ -78,6 +82,7 @@
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(List<FrameworkProviderSearchResultsItem>))]
         [SwaggerResponse(HttpStatusCode.BadRequest)]
         [Route("frameworks/{id}/providers")]
+        [ExceptionHandling]
         public List<FrameworkProviderSearchResultsItemResponse> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if framework doesn't exists
@@ -96,6 +101,7 @@
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(ApprenticeshipDetails))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{standardCode}/providers")]
+        [ExceptionHandling]
         public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int ukprn, int location)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
@@ -116,6 +122,7 @@
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(ApprenticeshipDetails))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{frameworkId}/providers")]
+        [ExceptionHandling]
         public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int ukprn, int location)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(

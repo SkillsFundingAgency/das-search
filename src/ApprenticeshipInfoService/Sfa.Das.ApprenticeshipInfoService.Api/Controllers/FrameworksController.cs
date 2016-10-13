@@ -5,6 +5,8 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
     using System.Collections.Generic;
     using System.Net;
     using System.Web.Http;
+
+    using Sfa.Das.ApprenticeshipInfoService.Api.Attributes;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
@@ -22,6 +24,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerOperation("GetAll")]
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(IEnumerable<FrameworkSummary>))]
         [Route("frameworks")]
+        [ExceptionHandling]
         public IEnumerable<FrameworkSummary> Get()
         {
             var response = _getFrameworks.GetAllFrameworks().ToList();
@@ -44,6 +47,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK, "OK", typeof(Framework))]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
+        [ExceptionHandling]
         public Framework Get(string id)
         {
             var response = _getFrameworks.GetFrameworkById(id);
@@ -66,6 +70,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [SwaggerResponse(HttpStatusCode.NoContent)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("frameworks/{id}")]
+        [ExceptionHandling]
         public void Head(string id)
         {
             if (_getFrameworks.GetFrameworkById(id) != null)
