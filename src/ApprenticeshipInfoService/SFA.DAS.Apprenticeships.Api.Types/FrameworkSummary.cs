@@ -2,10 +2,19 @@
 {
     public sealed class FrameworkSummary
     {
+        /// <summary>
+        /// A composite framework Id {framework-code}-{program-type}-{pathway-code}
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// a link to the framework details
+        /// </summary>
         public string Uri { get; set; }
 
+        /// <summary>
+        /// a unique title for framework and pathway
+        /// </summary>
         public string Title { get; set; }
 
         public string FrameworkName { get; set; }

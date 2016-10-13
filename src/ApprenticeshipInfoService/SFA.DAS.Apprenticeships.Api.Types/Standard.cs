@@ -4,8 +4,14 @@ namespace SFA.DAS.Apprenticeships.Api.Types
 {
     public sealed class Standard
     {
+        /// <summary>
+        /// The standard identifier from LARS
+        /// </summary>
         public int StandardId { get; set; }
 
+        /// <summary>
+        /// a link to the standard details
+        /// </summary>
         public string Uri { get; set; }
 
         public string Title { get; set; }

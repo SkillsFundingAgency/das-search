@@ -7,6 +7,9 @@ namespace SFA.DAS.Apprenticeships.Api.Types
     {
         public int FrameworkId { get; set; }
 
+        /// <summary>
+        /// a link to the framework information
+        /// </summary>
         public string Uri { get; set; }
 
         public string Title { get; set; }

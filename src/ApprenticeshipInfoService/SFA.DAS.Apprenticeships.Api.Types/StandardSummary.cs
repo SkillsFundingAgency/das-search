@@ -2,10 +2,19 @@
 {
     public class StandardSummary
     {
+        /// <summary>
+        /// The standard identifier from LARS
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// a link to the standard details
+        /// </summary>
         public string Uri { get; set; }
 
+        /// <summary>
+        /// The standard title
+        /// </summary>
         public string Title { get; set; }
 
         public TypicalLength TypicalLength { get; set; }
