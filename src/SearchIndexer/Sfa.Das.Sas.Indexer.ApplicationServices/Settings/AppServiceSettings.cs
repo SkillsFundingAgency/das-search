@@ -51,8 +51,6 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
 
         public string MetadataApiUri => CloudConfigurationManager.GetSetting("MetadataApiUri");
 
-        public bool ToggleFilterOnFunding => ToBool(_settings.GetSetting("ToggleFilterOnFunding"));
-
         private string VstsGitBaseUrl => _settings.GetSetting("VstsGitBaseUrl");
 
         private string VstsGitFrameworksFolderPath => _settings.GetSetting("VstsGitFrameworksFolderPath");
