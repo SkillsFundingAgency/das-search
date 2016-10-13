@@ -5,7 +5,7 @@
         /// <summary>
         /// The standard identifier from LARS
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// a link to the standard details

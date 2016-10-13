@@ -7,7 +7,7 @@ namespace SFA.DAS.Apprenticeships.Api.Types
         /// <summary>
         /// The standard identifier from LARS
         /// </summary>
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         /// <summary>
         /// a link to the standard details
