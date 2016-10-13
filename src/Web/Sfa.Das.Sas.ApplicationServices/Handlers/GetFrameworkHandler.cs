@@ -1,28 +1,45 @@
-﻿using MediatR;
+﻿using System;
+using System.Text.RegularExpressions;
+using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
+    using System.Linq;
+
+    using FluentValidation;
+
+    using Sfa.Das.Sas.ApplicationServices.Validators;
+
     public class GetFrameworkHandler : IRequestHandler<GetFrameworkQuery, GetFrameworkResponse>
     {
         private readonly IGetFrameworks _getFrameworks;
 
-        public GetFrameworkHandler(IGetFrameworks getFrameworks)
+        private readonly AbstractValidator<GetFrameworkQuery> _validator;
+
+        public GetFrameworkHandler(
+            IGetFrameworks getFrameworks,
+            AbstractValidator<GetFrameworkQuery> validator
+            )
         {
             _getFrameworks = getFrameworks;
+            _validator = validator;
         }
 
         public GetFrameworkResponse Handle(GetFrameworkQuery message)
         {
+            var result = _validator.Validate(message);
             var response = new GetFrameworkResponse();
 
-            if (message.Id < 0)
+            if (!result.IsValid)
             {
-                response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
-
-                return response;
+                if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
+                {
+                    response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
+                    return response;
+                }
             }
 
             var framework = _getFrameworks.GetFrameworkById(message.Id);

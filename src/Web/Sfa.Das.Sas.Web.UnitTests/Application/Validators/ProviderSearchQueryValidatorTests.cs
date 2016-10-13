@@ -15,13 +15,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Validators
             _validator = new ProviderSearchQueryValidator(new Validation());
         }
 
-        [TestCase(0)]
-        [TestCase(-1)]
-        public void ShouldHaveErrorWhenIdIsLowerThan1(int apprenticeshipId)
-        {
-            _validator.ShouldHaveValidationErrorFor(query => query.ApprenticeshipId, apprenticeshipId);
-        }
-
         [TestCase("")]
         [TestCase("123")]
         [TestCase("YO31 1")]

@@ -11,6 +11,8 @@ using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
+    using Sfa.Das.Sas.ApplicationServices.Validators;
+
     [TestFixture]
     public sealed class GetFrameworkHandlerTest
     {
@@ -22,13 +24,36 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockGetFrameworks = new Mock<IGetFrameworks>();
 
-            _sut = new GetFrameworkHandler(_mockGetFrameworks.Object);
+            _sut = new GetFrameworkHandler(
+                _mockGetFrameworks.Object,
+                new FrameworkQueryValidator(new Validation()));
+        }
+
+        [TestCase("1-2-a")]
+        [TestCase("a-2-3")]
+        [TestCase("1-a-3")]
+        [TestCase("1-2-3a")]
+        [TestCase("a1-2-3")]
+        [TestCase("1-2a-3")]
+        [TestCase("--")]
+        [TestCase("1--")]
+        [TestCase("-2-")]
+        [TestCase("--3")]
+        [TestCase("1--3")]
+        [TestCase("-2-3")]
+        [TestCase("1-2-")]
+        [TestCase("")]
+        public void ShouldReturnInvalidFrameworkIdStatus(string frameworkId)
+        {
+            var response = _sut.Handle(new GetFrameworkQuery { Id = frameworkId, Keywords = "Test" });
+
+            response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.InvalidFrameworkId);
         }
 
         [Test]
         public void ShouldReturnInvalidFrameworkIdStatusIfIdIsBelowZero()
         {
-            var response = _sut.Handle(new GetFrameworkQuery() { Id = -1, Keywords = "Test" });
+            var response = _sut.Handle(new GetFrameworkQuery() { Id = "-1", Keywords = "Test" });
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.InvalidFrameworkId);
         }
@@ -36,7 +61,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnFrameworkNotFoundStatusIfFrameworkCannotBeFound()
         {
-            var response = _sut.Handle(new GetFrameworkQuery() { Id = 1, Keywords = "Test" });
+            var response = _sut.Handle(new GetFrameworkQuery { Id = "4-1-2", Keywords = "Test" });
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.FrameworkNotFound);
         }
@@ -44,7 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldGetFrameworkFromGetFrameworkRepository()
         {
-            var query = new GetFrameworkQuery() { Id = 1, Keywords = "Test" };
+            var query = new GetFrameworkQuery() { Id = "1-2-3", Keywords = "Test" };
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id));
 
@@ -56,7 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnFoundFrameworkInResponse()
         {
-            var query = new GetFrameworkQuery() { Id = 1, Keywords = "Test" };
+            var query = new GetFrameworkQuery { Id = "1-2-3", Keywords = "Test" };
             var framework = new Framework { FrameworkId = query.Id };
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
@@ -69,7 +94,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnSearchTerms()
         {
-            var query = new GetFrameworkQuery() { Id = 1, Keywords = "Test" };
+            var query = new GetFrameworkQuery { Id = "1-2-3", Keywords = "Test" };
             var framework = new Framework { FrameworkId = query.Id };
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);

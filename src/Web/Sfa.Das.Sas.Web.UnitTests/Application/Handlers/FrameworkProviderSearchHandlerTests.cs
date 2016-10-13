@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             _mockPaginationSettings = new Mock<IPaginationSettings>();
 
             var providerFrameworkSearchResults = new ProviderFrameworkSearchResults();
-            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerFrameworkSearchResults));
+            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerFrameworkSearchResults));
 
             _handler = new FrameworkProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockPaginationSettings.Object, _mockLogger.Object);
         }
@@ -44,28 +44,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldReturnSuccessWhenSearchIsSuccessful()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "AB23 0BB" };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "AB23 0BB" };
 
             var response = await _handler.Handle(message);
 
             response.StatusCode.Should().Be(FrameworkProviderSearchResponse.ResponseCodes.Success);
         }
 
-        [TestCase(0)]
-        public async Task ShouldSignalFailureWhenApprenticeshipIdIdIsInvalid(int apprenticeshipId)
-        {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = apprenticeshipId, PostCode = "AB23 0BB" };
-
-            var response = await _handler.Handle(message);
-
-            response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId);
-        }
-
         [Test]
         public async Task ShouldSignalFailureWhenPostCodeIsNull()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = null };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = null };
 
             var response = await _handler.Handle(message);
 
@@ -76,7 +65,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldSignalFailureWhenPostCodeIsEmpty()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = string.Empty };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = string.Empty };
 
             var response = await _handler.Handle(message);
 
@@ -87,7 +76,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldSignalFailureWhenPostCodeIsInvalidFormat()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "gfsgfdgds" };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "gfsgfdgds" };
 
             var response = await _handler.Handle(message);
 
@@ -98,7 +87,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldSignalFailureOfInvalidApprenticeshipIdAndPostcodeWhenBothInvalid()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 0, PostCode = "gfsgfdgds" };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "0", PostCode = "gfsgfdgds" };
 
             var response = await _handler.Handle(message);
 
@@ -109,7 +98,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldReturnSearchTerms()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", Keywords = "abba 42" };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Keywords = "abba 42" };
 
             var response = await _handler.Handle(message);
 
@@ -119,7 +108,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public async Task ShouldReturnShowAllProvidersFlag()
         {
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", ShowAll = true };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", ShowAll = true };
 
             var response = await _handler.Handle(message);
 
@@ -130,8 +119,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         public async Task ShouldReturnResultOfSearch()
         {
             var providerFrameworkSearchResults = new ProviderFrameworkSearchResults();
-            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerFrameworkSearchResults));
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", Page = 0 };
+            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerFrameworkSearchResults));
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
             var response = await _handler.Handle(message);
 
@@ -143,10 +132,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         {
             var providerFrameworkSearchResults = new ProviderFrameworkSearchResults() { TotalResults = 0 };
             var providerFrameworkSearchResultsAllCountry = new ProviderFrameworkSearchResults() { TotalResults = 5 };
-            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), false)).Returns(Task.FromResult(providerFrameworkSearchResults));
-            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), true)).Returns(Task.FromResult(providerFrameworkSearchResultsAllCountry));
+            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), false)).Returns(Task.FromResult(providerFrameworkSearchResults));
+            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), true)).Returns(Task.FromResult(providerFrameworkSearchResultsAllCountry));
 
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", Page = 0 };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
             var response = await _handler.Handle(message);
 
@@ -158,9 +147,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         {
             _mockPaginationSettings.Setup(x => x.DefaultResultsAmount).Returns(10);
             var providerFrameworkSearchResults = new ProviderFrameworkSearchResults() { TotalResults = 42, Hits = new List<IApprenticeshipProviderSearchResultsItem>() };
-            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), false)).Returns(Task.FromResult(providerFrameworkSearchResults));
+            _mockSearchService.Setup(x => x.SearchFrameworkProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), false)).Returns(Task.FromResult(providerFrameworkSearchResults));
 
-            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = 1, PostCode = "GU21 6DB", Page = 8 };
+            var message = new FrameworkProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 8 };
 
             var response = await _handler.Handle(message);
 

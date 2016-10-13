@@ -14,6 +14,5 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 Unit = typicalLength.Unit
             };
         }
-
     }
 }

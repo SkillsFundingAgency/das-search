@@ -121,7 +121,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                     x => x.Map(It.IsAny<FrameworkProviderSearchResponse>(), It.IsAny<Action<IMappingOperationOptions<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>>>()),
                     stubViewModel).SetupMediator(x => x.SendAsync(It.IsAny<FrameworkProviderSearchQuery>()), Task.FromResult(stubSearchResponse));
 
-            var searchCriteria = new FrameworkProviderSearchQuery { ApprenticeshipId = 123, PostCode = "AB3 1SD" };
+            var searchCriteria = new FrameworkProviderSearchQuery { ApprenticeshipId = "123", PostCode = "AB3 1SD" };
 
             var result = await controller.FrameworkResults(searchCriteria);
 

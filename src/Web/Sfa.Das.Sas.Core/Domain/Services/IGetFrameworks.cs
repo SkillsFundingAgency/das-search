@@ -4,6 +4,6 @@ namespace Sfa.Das.Sas.Core.Domain.Services
 {
     public interface IGetFrameworks
     {
-        Framework GetFrameworkById(int id);
+        Framework GetFrameworkById(string id);
     }
 }

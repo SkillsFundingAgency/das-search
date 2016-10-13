@@ -8,7 +8,7 @@
             NoStandardFound
         }
 
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
         public int Level { get; set; }
         public string Title { get; set; }
         public string Postcode { get; set; }

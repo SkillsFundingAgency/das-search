@@ -19,7 +19,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             MappingService mappingService = new MappingService(null);
             var sri = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 101,
+                StandardId = "101",
                 Title = "Standard 1"
             };
             var resultList = new List<ApprenticeshipSearchResultsItem> { sri };
@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             MappingService mappingService = new MappingService(null);
             var sri = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 101,
+                StandardId = "101",
                 Title = "Standard 1",
                 TypicalLength = new TypicalLength
                 {
@@ -63,7 +63,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             MappingService mappingService = new MappingService(null);
             var sri = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 101,
+                StandardId = "101",
                 Title = "Standard 1",
                 TypicalLength = new TypicalLength
                 {
@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var sri2 = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 102,
+                StandardId = "102",
                 Title = "Standard 2",
                 TypicalLength = new TypicalLength
                 {
@@ -87,7 +87,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var sri3 = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 103,
+                StandardId = "103",
                 Title = "Standard 3",
                 TypicalLength = new TypicalLength
                 {
@@ -117,7 +117,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             MappingService mappingService = new MappingService(null);
             var searchResultItem1 = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 101,
+                StandardId = "101",
                 Title = "Standard 1",
                 TypicalLength = new TypicalLength
                 {
@@ -141,7 +141,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             MappingService mappingService = new MappingService(null);
             var searchResultItem1 = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 101,
+                StandardId = "101",
                 Title = "Standard 1",
                 TypicalLength = new TypicalLength
                 {
@@ -170,7 +170,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             MappingService mappingService = new MappingService(null);
             var searchResultItem1 = new ApprenticeshipSearchResultsItem
             {
-                StandardId = 101,
+                StandardId = "101",
                 Title = "Standard 1",
                 TypicalLength = new TypicalLength
                 {

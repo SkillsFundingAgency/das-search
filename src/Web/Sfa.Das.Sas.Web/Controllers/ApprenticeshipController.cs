@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(int id, string keywords)
+        public ActionResult Standard(string id, string keywords)
         {
             var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
 
@@ -78,16 +78,16 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Framework(int id, string keywords)
+        public ActionResult Framework(string id, string keywords)
         {
             var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
             switch (response.StatusCode)
             {
                 case GetFrameworkResponse.ResponseCodes.InvalidFrameworkId:
-                    _logger.Info("404 - Attempt to get standard with an ID below zero");
+                    _logger.Info("404 - Framework id has wrong format");
 
-                    return HttpNotFound("Cannot find any standards with an ID below zero");
+                    return HttpNotFound("Framework id has wrong format");
 
                 case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
                     var message = $"Cannot find framework: {id}";
@@ -106,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(int standardId, string wrongPostcode, string postcode, string keywords, string hasError)
+        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError)
         {
             var query = new GetStandardProvidersQuery
             {
@@ -132,7 +132,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(int frameworkId, string wrongPostcode, string postcode, string keywords, string hasError)
+        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError)
         {
             var query = new GetFrameworkProvidersQuery
             {

@@ -15,7 +15,6 @@ namespace Sfa.Das.Sas.Web.Logging
             catch (HttpException)
             {
                 // Happens on request that starts the application.
-
                 IpAddress = string.Empty;
                 Url = string.Empty;
             }

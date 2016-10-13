@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
         {
             For<ILog>().Use(x => new NLogLogger(
                 x.ParentType,
-                x.GetInstance<IConfigurationSettings>(), 
+                x.GetInstance<IConfigurationSettings>(),
                 x.GetInstance<IRequestContext>())).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using MediatR;
+﻿using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.ApplicationServices.Queries
 {
-    using Sfa.Das.Sas.ApplicationServices.Models;
-
     public class ProviderSearchQuery
     {
         private string _postcode;
@@ -15,8 +11,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
             get { return _postcode; }
             set { _postcode = value?.Trim(); }
         }
-
-        public int ApprenticeshipId { get; set; }
 
         public int Page { get; set; }
 
@@ -29,5 +23,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
         public IEnumerable<string> DeliveryModes { get; set; }
 
         public string Keywords { get; set; }
+
+        public string ApprenticeshipId { get; set; }
     }
 }

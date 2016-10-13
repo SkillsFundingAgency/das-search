@@ -10,6 +10,8 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.ApplicationServices
 {
+    using System;
+
     public sealed class ProviderSearchService : IProviderSearchService
     {
         private readonly IProviderLocationSearchProvider _searchProvider;
@@ -35,7 +37,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             _paginationSettings = paginationSettings;
         }
 
-        public async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
+        public async Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
         {
             ProviderStandardSearchResults result;
             if (!showAll && !nationalProviders)
@@ -65,7 +67,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             return result;
         }
 
-        public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
+        public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
         {
             ProviderFrameworkSearchResults result;
 
@@ -88,34 +90,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             return result;
         }
 
-        private static ProviderStandardSearchResults GetProviderStandardSearchResultErrorResponse(int standardId, string standardName, string postCode, string responseCode)
-        {
-            return new ProviderStandardSearchResults
-            {
-                TotalResults = 0,
-                StandardId = standardId,
-                StandardName = standardName,
-                PostCode = postCode,
-                Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                StandardResponseCode = responseCode
-            };
-        }
-
-        private static ProviderFrameworkSearchResults GetProviderFrameworkSearchResultErrorResponse(int frameworkId, string postCode, string responseCode)
-        {
-            return new ProviderFrameworkSearchResults
-            {
-                TotalResults = 0,
-                FrameworkId = frameworkId,
-                FrameworkName = string.Empty,
-                PathwayName = string.Empty,
-                PostCode = postCode,
-                Hits = new IApprenticeshipProviderSearchResultsItem[0],
-                FrameworkResponseCode = responseCode
-            };
-        }
-
-        public async Task<ProviderStandardSearchResults> SearchStandardProviders(int standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
+        public async Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -126,11 +101,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
-                if (standardId < 0)
-                {
-                    throw new SearchException("Standard ID cannot be negative");
-                }
-
                 var standard = _getStandards.GetStandardById(standardId);
                 standardName = standard?.Title;
 
@@ -182,6 +152,33 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
         }
 
+        private static ProviderStandardSearchResults GetProviderStandardSearchResultErrorResponse(string standardId, string standardName, string postCode, string responseCode)
+        {
+            return new ProviderStandardSearchResults
+            {
+                TotalResults = 0,
+                StandardId = standardId,
+                StandardName = standardName,
+                PostCode = postCode,
+                Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                StandardResponseCode = responseCode
+            };
+        }
+
+        private static ProviderFrameworkSearchResults GetProviderFrameworkSearchResultErrorResponse(string frameworkId, string postCode, string responseCode)
+        {
+            return new ProviderFrameworkSearchResults
+            {
+                TotalResults = 0,
+                FrameworkId = frameworkId,
+                FrameworkName = string.Empty,
+                PathwayName = string.Empty,
+                PostCode = postCode,
+                Hits = new IApprenticeshipProviderSearchResultsItem[0],
+                FrameworkResponseCode = responseCode
+            };
+        }
+
         private void LogSearchRequest(string postCode, Coordinate coordinates)
         {
             var logEntry = new ApprenticeshipSearchLogEntry
@@ -193,7 +190,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             _logger.Info("Provider location search", logEntry);
         }
 
-        private async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(int frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
+        private async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -202,11 +199,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 
             try
             {
-                if (frameworkId < 0)
-                {
-                    throw new SearchException("Framework ID cannot be negative");
-                }
-
                 var framework = _getFrameworks.GetFrameworkById(frameworkId);
 
                 var frameworkMissing = framework == null;

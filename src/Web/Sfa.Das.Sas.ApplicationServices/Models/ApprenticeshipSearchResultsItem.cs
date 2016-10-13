@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public string Title { get; set; }
 
         // Standards
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         public List<string> JobRoles { get; set; }
 
@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public TypicalLength TypicalLength { get; set; }
 
         // Frameworks
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
 
         public string FrameworkName { get; set; }
 
