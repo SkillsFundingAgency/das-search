@@ -2,7 +2,6 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.Validators
 {
-    using static System.Int32;
 
     public class Validation : IValidation
     {
@@ -15,7 +14,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Validators
 
         public bool ValidateFrameowrkId(string id)
         {
-            return Regex.IsMatch(id, @"^\d+-\d+-\d+$");
+            // ToDo: "Remove match on only \d when there is no risk of having that ID formt. CF"
+            return Regex.IsMatch(id, @"^\d+-\d+-\d+$") || Regex.IsMatch(id, @"^\d+$");
         }
     }
 }
