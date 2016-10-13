@@ -1,0 +1,45 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.StatsViewModel
+@{
+    ViewBag.Title = "Stats";
+}
+
+<main id="content" role="main">
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <hgroup>
+                <h1 class="heading-xlarge">
+                    Stats
+                </h1>
+            </hgroup>
+
+            <p>
+                @Model.StandardCount standards
+            </p>
+            <p>
+                @Model.FrameworkCount frameworks
+            </p>
+            <p>
+                @Model.ProviderCount providers
+            </p>
+            <p>
+                @Model.ExpiringFrameworks frameworks expiring in the next X days
+            </p>
+            <p>
+                @Model.StandardsWithProviders standards with a provider
+            </p>
+            <p>
+                @Model.FrameworksWithProviders frameworks with a provider
+            </p>
+            <p>
+                @Model.StandardsWithoutProviders standards without a provider
+            </p>
+            <p>
+                 @Model.FrameworksWithoutProviders frameworks without a provider
+            </p>
+        </div>
+    </div>
+
+</main>
+

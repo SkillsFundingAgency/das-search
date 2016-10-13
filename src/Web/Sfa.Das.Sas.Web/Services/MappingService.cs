@@ -54,6 +54,17 @@ namespace Sfa.Das.Sas.Web.Services
 
         private static void CreateProviderDetailsMappings(IMapperConfiguration cfg)
         {
+            cfg.CreateMap<StatsResponse, StatsViewModel>()
+                   .ForMember(dest => dest.StandardCount, opt => opt.MapFrom(source => source.StandardCount))
+                   .ForMember(dest => dest.FrameworkCount, opt => opt.MapFrom(source => source.FrameworkCount))
+                   .ForMember(dest => dest.ProviderCount, opt => opt.MapFrom(source => source.ProviderCount))
+                   .ForMember(dest => dest.ExpiringFrameworks, opt => opt.MapFrom(source => source.ExpiringFrameworks))
+                   .ForMember(dest => dest.StandardsWithProviders, opt => opt.MapFrom(source => source.StandardsWithProviders))
+                   .ForMember(dest => dest.StandardsWithoutProviders, opt => opt.MapFrom(source => source.StandardsWithoutProviders))
+                   .ForMember(dest => dest.FrameworksWithProviders, opt => opt.MapFrom(source => source.FrameworksWithProviders))
+                   .ForMember(dest => dest.FrameworksWithoutProviders, opt => opt.MapFrom(source => source.FrameworksWithoutProviders))
+                   ;
+
             cfg.CreateMap<DetailProviderResponse, ApprenticeshipDetailsViewModel>()
                    .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location.Address))
                    .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.Apprenticeship))

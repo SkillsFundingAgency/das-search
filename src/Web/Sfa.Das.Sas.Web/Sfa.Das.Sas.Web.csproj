@@ -257,6 +257,7 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="Extensions\PostcodeExtension.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
@@ -316,6 +317,7 @@
     <Compile Include="ViewModels\CookieViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Compile Include="ViewModels\LevelAggregationViewModel.cs" />
@@ -677,6 +679,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Cookies.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Stats\Stats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

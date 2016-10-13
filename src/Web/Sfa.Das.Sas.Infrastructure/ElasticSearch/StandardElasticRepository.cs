@@ -80,5 +80,17 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return results.Documents.Select(x => _standardMapping.MapToStandard(x))
                                     .Where(p => p != null);
         }
+
+        public long GetStandardsAmount()
+        {
+            var results =
+                   _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ApprenticeshipIndexAlias)
+                           .Type(Types.Parse("standarddocument"))
+                           .From(0)
+                           .MatchAll());
+            return results.HitsMetaData.Total;
+        }
     }
 }
