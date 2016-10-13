@@ -5,6 +5,9 @@ namespace SFA.DAS.Apprenticeships.Api.Types
 {
     public sealed class Framework
     {
+        /// <summary>
+        /// A composite framework Id {framework-code}-{program-type}-{pathway-code}
+        /// </summary>
         public int FrameworkId { get; set; }
 
         /// <summary>
