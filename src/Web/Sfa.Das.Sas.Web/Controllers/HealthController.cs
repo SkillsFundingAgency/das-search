@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using System.IO;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Linq;
     using System.Reflection;
@@ -34,6 +36,15 @@
             }
 
             return View(viewModel);
+        }
+
+        public ActionResult Image()
+        {
+            var viewModel = _healthService.CreateModel();
+
+            var dir = Server.MapPath("/content/dist/images/icons/status");
+            var path = Path.Combine(dir, viewModel.ApplicationStatus + "_16.png");
+            return base.File(path, "image/png");
         }
     }
 }
