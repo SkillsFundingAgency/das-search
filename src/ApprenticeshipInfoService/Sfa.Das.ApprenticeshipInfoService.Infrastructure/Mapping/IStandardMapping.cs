@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
 {
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
 

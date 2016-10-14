@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Services
 {
     using System.Collections.Generic;
-    using Sfa.Das.ApprenticeshipInfoService.Core.Models;
+    using SFA.DAS.Apprenticeships.Api.Types;
 
     public interface IGetFrameworks
     {

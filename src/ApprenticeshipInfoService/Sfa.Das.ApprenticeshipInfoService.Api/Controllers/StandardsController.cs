@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -6,7 +8,6 @@
     using System.Web.Http;
 
     using Sfa.Das.ApprenticeshipInfoService.Api.Attributes;
-    using Sfa.Das.ApprenticeshipInfoService.Core.Models;
     using Sfa.Das.ApprenticeshipInfoService.Core.Services;
     using Swashbuckle.Swagger.Annotations;
 
@@ -42,7 +43,7 @@
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{id}")]
         [ExceptionHandling]
-        public Standard Get(int id)
+        public Standard Get(string id)
         {
             var standard = _getStandards.GetStandardById(id);
 
@@ -60,7 +61,7 @@
         [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("standards/{id}")]
         [ExceptionHandling]
-        public void Head(int id)
+        public void Head(string id)
         {
             if (_getStandards.GetStandardById(id) != null)
             {
@@ -70,7 +71,7 @@
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        private string Resolve(int id)
+        private string Resolve(string id)
         {
             return Url.Link("DefaultApi", new { controller = "standards", id = id });
         }

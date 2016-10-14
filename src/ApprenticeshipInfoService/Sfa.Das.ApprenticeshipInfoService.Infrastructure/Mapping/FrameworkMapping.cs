@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Mapping
 {
     using System.Linq;
     using Sfa.Das.ApprenticeshipInfoService.Core.Models;
@@ -16,7 +18,7 @@
                 FrameworkName = document.FrameworkName,
                 PathwayCode = document.PathwayCode,
                 PathwayName = document.PathwayName,
-                ProgType = document.ProgType,
+                ProgTye = document.ProgType,
                 TypicalLength = document.TypicalLength,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = document.JobRoleItems,

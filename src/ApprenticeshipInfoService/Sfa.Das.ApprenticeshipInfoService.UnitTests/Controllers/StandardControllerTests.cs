@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web.Http.Routing;
 using NUnit.Framework.Constraints;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 {
@@ -23,7 +24,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void Init()
         {
             var iGetstandards = new Mock<IGetStandards>();
-            iGetstandards.Setup(m => m.GetStandardById(42)).Returns(new Standard { StandardId= 42, Title = "test title" });
+            iGetstandards.Setup(m => m.GetStandardById("42")).Returns(new Standard { StandardId = "42", Title = "test title" });
             _sut = new StandardsController(iGetstandards.Object);
             _sut.Request = new HttpRequestMessage
             {
@@ -42,7 +43,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnStandardkNotFound()
         {
-            ActualValueDelegate<object> test = () => _sut.Get(-2);
+            ActualValueDelegate<object> test = () => _sut.Get("-2");
 
             Assert.That(test, Throws.TypeOf<HttpResponseException>());
         }
@@ -50,10 +51,10 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         [Test]
         public void ShouldReturnStandard()
         {
-            var standard = _sut.Get(42);
+            var standard = _sut.Get("42");
 
             Assert.NotNull(standard);
-            standard.StandardId.Should().Be(42);
+            standard.StandardId.Should().Be("42");
             standard.Title.Should().Be("test title");
             standard.Uri.ToLower().Should().Be("http://localhost/standards/42");
         }

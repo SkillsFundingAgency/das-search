@@ -60,7 +60,6 @@
     <Compile Include="Models\DetailProviderResponse.cs" />
     <Compile Include="Models\ContactInformation.cs" />
     <Compile Include="Models\Responses\FrameworkProviderSearchResultsItemResponse.cs" />
-    <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\ProviderDetail.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
@@ -69,20 +68,14 @@
     <Compile Include="Models\StandardProviderSearchResultsItem.cs" />
     <Compile Include="Models\TrainingLocation.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
-    <Compile Include="Models\FrameworkSummary.cs" />
     <Compile Include="Models\Page.cs" />
-    <Compile Include="Models\StandardSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logging\IRequestContext.cs" />
     <Compile Include="Logging\ILogEntry.cs" />
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Models\StandardSearchResultsItem.cs" />
-    <Compile Include="Models\Standard.cs" />
     <Compile Include="Models\FrameworkSearchResultsItem.cs" />
     <Compile Include="Models\IApprenticeshipProduct.cs" />
-    <Compile Include="Models\JobRoleItem.cs" />
-    <Compile Include="Models\TypicalLength.cs" />
-    <Compile Include="Models\Framework.cs" />
     <Compile Include="Services\IApprenticeshipProviderRepository.cs" />
     <Compile Include="Services\IGetProviders.cs" />
     <Compile Include="Services\IGetStandards.cs" />
@@ -98,6 +91,12 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.Apprenticeships.Api.Types\SFA.DAS.Apprenticeships.Api.Types.csproj">
+      <Project>{35cdf98e-a38f-42b7-acce-62b5bb4ba3f3}</Project>
+      <Name>SFA.DAS.Apprenticeships.Api.Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

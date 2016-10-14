@@ -1,11 +1,13 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
 {
     using System;
     using System.Collections.Generic;
 
     public sealed class FrameworkSearchResultsItem
     {
-        public int FrameworkId { get; set; }
+        public string FrameworkId { get; set; }
 
         public string Title { get; set; }
 

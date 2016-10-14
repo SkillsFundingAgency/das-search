@@ -145,6 +145,10 @@
       <Project>{00CEBB2D-C8DC-45E3-8AE0-A38E8BEB8509}</Project>
       <Name>Sfa.Das.ApprenticeshipInfoService.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SFA.DAS.Apprenticeships.Api.Types\SFA.DAS.Apprenticeships.Api.Types.csproj">
+      <Project>{35CDF98E-A38F-42B7-ACCE-62B5BB4BA3F3}</Project>
+      <Name>SFA.DAS.Apprenticeships.Api.Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

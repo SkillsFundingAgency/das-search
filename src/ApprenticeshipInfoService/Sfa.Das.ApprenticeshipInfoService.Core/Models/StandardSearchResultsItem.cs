@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
+﻿namespace Sfa.Das.ApprenticeshipInfoService.Core.Models
 {
+    using System.Collections.Generic;
+    using SFA.DAS.Apprenticeships.Api.Types;
+
     public sealed class StandardSearchResultsItem
     {
-        public int StandardId { get; set; }
+        public string StandardId { get; set; }
 
         public string Title { get; set; }
 

@@ -113,6 +113,10 @@
       <Project>{3CF1B822-17E6-4F67-B5AB-A031390CB635}</Project>
       <Name>Sfa.Das.ApprenticeshipInfoService.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SFA.DAS.Apprenticeships.Api.Types\SFA.DAS.Apprenticeships.Api.Types.csproj">
+      <Project>{35CDF98E-A38F-42B7-ACCE-62B5BB4BA3F3}</Project>
+      <Name>SFA.DAS.Apprenticeships.Api.Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

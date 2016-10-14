@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
@@ -81,7 +82,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
-        private string Resolve(int id)
+        private string Resolve(string id)
         {
             return Url.Link("DefaultApi", new { controller = "frameworks", id = id });
         }

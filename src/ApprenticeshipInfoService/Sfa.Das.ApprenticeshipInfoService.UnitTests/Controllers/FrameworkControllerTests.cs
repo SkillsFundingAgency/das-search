@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web.Http.Routing;
 using NUnit.Framework.Constraints;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
 {
@@ -27,7 +28,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
         public void Init()
         {
             var iGetFrameworks = new Mock<IGetFrameworks>();
-            iGetFrameworks.Setup(m => m.GetFrameworkById("1234")).Returns(new Framework { FrameworkId = 1234, Title = "test title" });
+            iGetFrameworks.Setup(m => m.GetFrameworkById("1234")).Returns(new Framework { FrameworkId = "1234", Title = "test title" });
             _sut = new FrameworksController(iGetFrameworks.Object);
             _sut.Request = new HttpRequestMessage
             {
@@ -57,7 +58,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.UnitTests.Controllers
             var framework = _sut.Get("1234");
 
             Assert.NotNull(framework);
-            framework.FrameworkId.Should().Be(1234);
+            framework.FrameworkId.Should().Be("1234");
             framework.Title.Should().Be("test title");
             framework.Uri.ToLower().Should().Be("http://localhost/frameworks/1234");
         }

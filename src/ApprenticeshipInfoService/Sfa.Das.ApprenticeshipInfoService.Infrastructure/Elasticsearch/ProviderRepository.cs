@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
 using Sfa.Das.ApprenticeshipInfoService.Core.Models.Responses;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {

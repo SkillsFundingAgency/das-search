@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
 {
@@ -49,7 +50,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
             return resultList;
         }
 
-        public Standard GetStandardById(int id)
+        public Standard GetStandardById(string id)
         {
             var results = _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
                 s =>
