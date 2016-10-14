@@ -62,5 +62,33 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                            .MatchAll());
             return results.HitsMetaData.Total;
         }
+
+        public int GetFrameworksExpiringSoon()
+        {
+            try
+            {
+                var take = (int)GetFrameworksAmount();
+                var document =
+                    _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                        .Type("frameworkdocument")
+                        .From(0)
+                        .Take(take)
+                        .Query(q => q
+                            .Bool(b => b
+                                .Filter(f => f
+                                    .Exists(e => e
+                                        .Field(field => field.ExpiryDate))))));
+                var response = document.Documents.GroupBy(x => x.FrameworkId).Count();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _applicationLogger.Error(
+                    ex,
+                    $"Error retrieving amount of frameworks with provider");
+                throw;
+            }
+        }
     }
 }

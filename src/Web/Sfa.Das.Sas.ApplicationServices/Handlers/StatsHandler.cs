@@ -12,13 +12,19 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     {
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
+        private readonly IGetProviders _getProviders;
+        private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
 
         public StatsHandler(
             IGetStandards getStandards,
-            IGetFrameworks getFrameworks)
+            IGetFrameworks getFrameworks,
+            IGetProviders getProviders,
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository)
         {
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
+            _getProviders = getProviders;
+            _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
         }
 
         public StatsResponse Handle(StatsQuery message)
@@ -26,8 +32,15 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             var response = new StatsResponse
             {
                 StandardCount = (int)_getStandards.GetStandardsAmount(),
-                FrameworkCount = (int)_getFrameworks.GetFrameworksAmount()
+                FrameworkCount = (int)_getFrameworks.GetFrameworksAmount(),
+                ProviderCount = (int)_getProviders.GetProvidersAmount(),
+                ExpiringFrameworks = _getFrameworks.GetFrameworksExpiringSoon(),
+                StandardsWithProviders = _apprenticeshipProviderRepository.GetStandardsAmountWithProviders(),
+                FrameworksWithProviders = _apprenticeshipProviderRepository.GetFrameworksAmountWithProviders()
             };
+
+            response.StandardsWithoutProviders = response.StandardCount - response.StandardsWithProviders;
+            response.FrameworksWithoutProviders = response.FrameworkCount - response.FrameworksWithProviders;
 
             return response;
         }

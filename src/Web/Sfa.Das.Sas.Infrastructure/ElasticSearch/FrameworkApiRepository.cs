@@ -43,5 +43,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public int GetFrameworksExpiringSoon()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

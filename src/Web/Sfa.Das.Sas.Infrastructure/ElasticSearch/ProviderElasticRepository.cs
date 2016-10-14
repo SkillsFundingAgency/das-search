@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         public long GetProvidersAmount()
         {
             var results =
-                   _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
+                   _elasticsearchCustomClient.Search<ProviderSearchResultItem>(
                        s =>
                        s.Index(_applicationSettings.ProviderIndexAlias)
                            .Type(Types.Parse("providerdocument"))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
@@ -73,6 +74,74 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     $"Trying to get standard with provider id {ukprn}, framework id {frameworkId} and location id {locationId}");
                 throw;
             }
+        }
+
+        public int GetFrameworksAmountWithProviders()
+        {
+            try
+            {
+                var take = GetFrameworkProvidersTotalAmount();
+                var document =
+                    _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .Type("frameworkprovider")
+                        .From(0)
+                        .Take(take)
+                        .MatchAll());
+                var response = document.Documents.GroupBy(x => x.FrameworkId).Count();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _applicationLogger.Error(
+                    ex,
+                    $"Error retrieving amount of frameworks with provider");
+                throw;
+            }
+        }
+
+        public int GetStandardsAmountWithProviders()
+        {
+            try
+            {
+                var take = GetStandardProvidersTotalAmount();
+                var document =
+                    _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .Type("standardprovider")
+                        .From(0)
+                        .Take(take)
+                        .MatchAll());
+                var response = document.Documents.GroupBy(x => x.StandardCode).Count();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _applicationLogger.Error(
+                    ex,
+                    $"Error retrieving amount of standards with provider");
+                throw;
+            }
+        }
+
+        private int GetStandardProvidersTotalAmount()
+        {
+            var document =
+                    _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .Type("standardprovider")
+                        .MatchAll());
+            return (int)document.HitsMetaData.Total;
+        }
+
+        private int GetFrameworkProvidersTotalAmount()
+        {
+            var document =
+                    _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ProviderIndexAlias)
+                        .Type("frameworkprovider")
+                        .MatchAll());
+            return (int)document.HitsMetaData.Total;
         }
 
         private T GetProvider<T>(Func<QueryContainerDescriptor<T>, QueryContainer> query)

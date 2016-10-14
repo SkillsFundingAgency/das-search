@@ -13,31 +13,110 @@
                     Stats
                 </h1>
             </hgroup>
+            <ul class="vacancies-summary">
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardCount
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standards
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworkCount
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.ProviderCount
+                        </p>
+                        <figcaption>
+                            <h2>
+                                providers
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
 
-            <p>
-                @Model.StandardCount standards
-            </p>
-            <p>
-                @Model.FrameworkCount frameworks
-            </p>
-            <p>
-                @Model.ProviderCount providers
-            </p>
-            <p>
-                @Model.ExpiringFrameworks frameworks expiring in the next X days
-            </p>
-            <p>
-                @Model.StandardsWithProviders standards with a provider
-            </p>
-            <p>
-                @Model.FrameworksWithProviders frameworks with a provider
-            </p>
-            <p>
-                @Model.StandardsWithoutProviders standards without a provider
-            </p>
-            <p>
-                 @Model.FrameworksWithoutProviders frameworks without a provider
-            </p>
+            <ul class="vacancies-summary">
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.ExpiringFrameworks
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks expiring in the next X days
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+
+            <ul class="vacancies-summary">
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardsWithProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standards with a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworksWithProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks with a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardsWithoutProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standards without a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworksWithoutProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks without a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
         </div>
     </div>
 
