@@ -48,7 +48,8 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Queue
 
                 var messages = _cloudQueueService.GetQueueMessages(queueName)?.ToArray();
 
-                if (messages != null && messages.Any())
+                //if (messages != null && messages.Any())
+                if(true)
                 {
                     var latestMessage = messages?.FirstOrDefault();
 

@@ -38,5 +38,10 @@
 
             return _frameworkMapping.MapToFramework(result);
         }
+
+        public long GetFrameworksAmount()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

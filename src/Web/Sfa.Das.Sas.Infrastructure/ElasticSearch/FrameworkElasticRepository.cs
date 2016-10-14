@@ -50,5 +50,17 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             return document != null ? _frameworkMapping.MapToFramework(document) : null;
         }
+
+        public long GetFrameworksAmount()
+        {
+            var results =
+                   _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ApprenticeshipIndexAlias)
+                           .Type(Types.Parse("frameworkdocument"))
+                           .From(0)
+                           .MatchAll());
+            return results.HitsMetaData.Total;
+        }
     }
 }
