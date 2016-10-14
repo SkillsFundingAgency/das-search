@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿using System.IO;
+using Sfa.Das.ApprenticeshipInfoService.Health.Models;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -24,6 +27,15 @@
             }
 
             return View(viewModel);
+        }
+
+        public ActionResult Image()
+        {
+            var viewModel = _healthService.CreateModel();
+
+            var dir = Server.MapPath("/content");
+            var path = Path.Combine(dir, viewModel.Status + "_16.png");
+            return base.File(path, "image/png");
         }
     }
 }

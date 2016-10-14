@@ -172,6 +172,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\green_16.png" />
+    <Content Include="Content\orange_16.png" />
+    <Content Include="Content\red_16.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
