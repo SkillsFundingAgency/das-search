@@ -1,6 +1,7 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.Web.Extensions
 @model ApprenticeshipSearchResultViewModel
 
 @{
@@ -66,9 +67,9 @@
 
             @foreach (var item in Model.Results)
             {
-                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(item.StandardId != null ? item.StandardId : item.FrameworkId)">
+                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
                     <header>
-                        @(item.StandardId != null ? GetStandardTitle(item) : GetFrameworkTitle(item))
+                        @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item) : GetFrameworkTitle(item))
                     </header>
                     <dl class="result-data-list">
                         @GetApprenticeshipDetailItem("Level:", "level", item.Level)

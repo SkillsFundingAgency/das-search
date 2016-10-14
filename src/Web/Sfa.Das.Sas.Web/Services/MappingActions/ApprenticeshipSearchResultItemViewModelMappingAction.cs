@@ -5,6 +5,8 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
+    using Sfa.Das.Sas.Web.Extensions;
+
     using Resources = Resources.EquivalenceLevels;
 
     internal class ApprenticeshipSearchResultItemViewModelMappingAction :
@@ -14,7 +16,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
         {
             destination.TypicalLengthMessage = ApprenticeshipMappingHelper.GetTypicalLengthMessage(source.TypicalLength);
             destination.Level = GetLevelText(source.Level);
-            destination.ApprenticeshipType = destination.StandardId != "0" ? "standard" : "framework"; // ToDo: use of constants :) (CF)
+            destination.ApprenticeshipType = !destination.StandardId.IsNullOrEmpty() ? "standard" : "framework"; // ToDo: use of constants :) (CF)
             destination.Title = ApprenticeshipMappingHelper.FrameworkTitle(source.Title);
         }
 
