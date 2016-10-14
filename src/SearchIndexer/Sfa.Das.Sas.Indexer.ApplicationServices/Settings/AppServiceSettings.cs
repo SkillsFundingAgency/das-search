@@ -60,12 +60,5 @@ namespace Sfa.Das.Sas.Indexer.ApplicationServices.Settings
             var name = type.Name.Replace("IMaintainApprenticeshipIndex", "Apprenticeship").Replace("IMaintainProviderIndex", "Provider") + ".QueueName";
             return _settings.GetSetting(name);
         }
-
-        private bool ToBool(string input)
-        {
-            bool returnValue;
-            bool.TryParse(input, out returnValue);
-            return returnValue;
-        }
     }
 }
