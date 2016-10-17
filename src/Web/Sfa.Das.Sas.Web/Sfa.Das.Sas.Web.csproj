@@ -670,7 +670,7 @@
       <LastGenOutput>_FilterNationalProviders.generated.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Views\Health\Start.cshtml" />
+    <Content Include="Views\Health\Start.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
