@@ -40,7 +40,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
                         && q.Nested(n => n
                             .Path(p => p.TrainingLocations)
                             .Query(nq => nq.Term(nt => nt.TrainingLocations.First().LocationId, locationId))));
-                return _providerMapping.MapToProvider(document, locationId);
+                return document != null ? _providerMapping.MapToProvider(document, locationId) : null;
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Infrastructure.Elasticsearch
                         && q.Nested(n => n
                             .Path(p => p.TrainingLocations)
                             .Query(nq => nq.Term(nt => nt.TrainingLocations.First().LocationId, locationId))));
-                return _providerMapping.MapToProvider(document, locationId);
+                return document != null ? _providerMapping.MapToProvider(document, locationId) : null;
             }
             catch (Exception ex)
             {

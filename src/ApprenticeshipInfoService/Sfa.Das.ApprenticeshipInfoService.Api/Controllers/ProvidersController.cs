@@ -146,25 +146,17 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [ExceptionHandling]
         public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int ukprn, int location)
         {
-            try
-            {
-                var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                    ukprn,
-                    location,
-                    standardCode);
+            var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
+                ukprn,
+                location,
+                standardCode);
 
-                if (model != null)
-                {
-                    return model;
-                }
-
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            catch (Exception e)
+            if (model != null)
             {
-                _logger.Error(e, "App_Error");
-                throw;
+                return model;
             }
+
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
@@ -175,25 +167,17 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         [ExceptionHandling]
         public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int ukprn, int location)
         {
-            try
-            {
-                var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                    ukprn,
-                    location,
-                    frameworkId);
+            var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
+                ukprn,
+                location,
+                frameworkId);
 
-                if (model != null)
-                {
-                    return model;
-                }
-
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-            catch (Exception e)
+            if (model != null)
             {
-                _logger.Error(e, "App_Error");
-                throw;
+                return model;
             }
+
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
     }
 }
