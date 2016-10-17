@@ -1,4 +1,8 @@
-﻿namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
+﻿using System;
+using System.Web;
+using Sfa.Das.ApprenticeshipInfoService.Core.Logging;
+
+namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -18,15 +22,18 @@
         private readonly IGetProviders _getProviders;
         private readonly IControllerHelper _controllerHelper;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
+        private readonly ILog _logger;
 
         public ProvidersController(
             IGetProviders getProviders,
             IControllerHelper controllerHelper,
-            IApprenticeshipProviderRepository apprenticeshipProviderRepository)
+            IApprenticeshipProviderRepository apprenticeshipProviderRepository,
+            ILog logger)
         {
             _getProviders = getProviders;
             _controllerHelper = controllerHelper;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
+            _logger = logger;
         }
 
         // GET /providers
@@ -36,9 +43,17 @@
         [ExceptionHandling]
         public IEnumerable<Provider> Get()
         {
-            var response = _getProviders.GetAllProviders();
+            try
+            {
+                var response = _getProviders.GetAllProviders();
 
-            return response;
+                return response;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "App_Error");
+                throw;
+            }
         }
 
         // GET /providers
@@ -49,14 +64,23 @@
         [ExceptionHandling]
         public IEnumerable<Provider> Get(int ukprn)
         {
-            var response = _getProviders.GetProvidersByUkprn(ukprn);
-
-            if (!response.Any())
+            try
             {
-                throw HttpResponseFactory.RaiseException(HttpStatusCode.NotFound, string.Format("No provider with Ukprn {0} found", ukprn));
-            }
+                var response = _getProviders.GetProvidersByUkprn(ukprn);
 
-            return response;
+                if (!response.Any())
+                {
+                    throw HttpResponseFactory.RaiseException(HttpStatusCode.NotFound,
+                        string.Format("No provider with Ukprn {0} found", ukprn));
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "App_Error");
+                throw;
+            }
         }
 
         // GET standards/5/providers?lat=<latitude>&long=<longitude>&page=#
@@ -67,14 +91,23 @@
         public List<StandardProviderSearchResultsItemResponse> GetByStandardIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if standard doesn't exists
-            var actualPage = _controllerHelper.GetActualPage(page);
-
-            if (lat.HasValue && lon.HasValue)
+            try
             {
-                return _getProviders.GetByStandardIdAndLocation(id, lat.Value, lon.Value, actualPage);
-            }
+                var actualPage = _controllerHelper.GetActualPage(page);
 
-            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Latitude and Longitude is required");
+                if (lat.HasValue && lon.HasValue)
+                {
+                    return _getProviders.GetByStandardIdAndLocation(id, lat.Value, lon.Value, actualPage);
+                }
+
+                throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest,
+                    "A valid Latitude and Longitude is required");
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "App_Error");
+                throw;
+            }
         }
 
         // GET frameworks/5/providers?lat=<latitude>&long=<longitude>&page=#
@@ -86,14 +119,23 @@
         public List<FrameworkProviderSearchResultsItemResponse> GetByFrameworkIdAndLocation(int id, double? lat = null, double? lon = null, int page = 1)
         {
             // TODO 404 if framework doesn't exists
-            var actualPage = _controllerHelper.GetActualPage(page);
-
-            if (lat.HasValue && lon.HasValue)
+            try
             {
-                return _getProviders.GetByFrameworkIdAndLocation(id, lat.Value, lon.Value, actualPage);
-            }
+                var actualPage = _controllerHelper.GetActualPage(page);
 
-            throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest, "A valid Latitude and Longitude is required");
+                if (lat.HasValue && lon.HasValue)
+                {
+                    return _getProviders.GetByFrameworkIdAndLocation(id, lat.Value, lon.Value, actualPage);
+                }
+
+                throw HttpResponseFactory.RaiseException(HttpStatusCode.BadRequest,
+                    "A valid Latitude and Longitude is required");
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "App_Error");
+                throw;
+            }
         }
 
         // GET standards/<standardId>/providers?ukprn=<ukprn>&location=<locationId>
@@ -104,17 +146,25 @@
         [ExceptionHandling]
         public ApprenticeshipDetails GetStandardProviderDetails(string standardCode, int ukprn, int location)
         {
-            var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                ukprn,
-                location,
-                standardCode);
-
-            if (model != null)
+            try
             {
-                return model;
-            }
+                var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
+                    ukprn,
+                    location,
+                    standardCode);
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+                if (model != null)
+                {
+                    return model;
+                }
+
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "App_Error");
+                throw;
+            }
         }
 
         // GET frameworks/<frameworkId>/providers?ukprn=<ukprn>&location=<locationId>
@@ -125,17 +175,25 @@
         [ExceptionHandling]
         public ApprenticeshipDetails GetFrameworkProviderDetails(string frameworkId, int ukprn, int location)
         {
-            var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                ukprn,
-                location,
-                frameworkId);
-
-            if (model != null)
+            try
             {
-                return model;
-            }
+                var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
+                    ukprn,
+                    location,
+                    frameworkId);
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
+                if (model != null)
+                {
+                    return model;
+                }
+
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "App_Error");
+                throw;
+            }
         }
     }
 }
