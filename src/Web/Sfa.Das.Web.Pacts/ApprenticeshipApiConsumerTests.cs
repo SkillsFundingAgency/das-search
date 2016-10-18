@@ -35,7 +35,7 @@ namespace Sfa.Das.Web.Pacts
                     },
                     Body = new
                     {
-                        StandardId = standardCode
+                        StandardId = standardCode.ToString()
                     }
                 });
 
