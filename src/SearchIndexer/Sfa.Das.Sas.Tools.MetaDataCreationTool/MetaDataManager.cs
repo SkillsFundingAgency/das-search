@@ -63,7 +63,10 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool
 
         public List<StandardMetaData> GetStandardsMetaData()
         {
-            var standards = _vstsService.GetStandards().ToList();
+            var standards = _vstsService
+                .GetStandards()
+                .Where(m => m.Published)
+                .ToList();
 
             UpdateStandardsInformationFromLars(standards);
             return standards;
