@@ -47,8 +47,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "www.test-apprenticeship.info.url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -105,8 +104,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -154,8 +152,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -204,8 +201,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -255,8 +251,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -305,8 +300,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -351,8 +345,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -397,8 +390,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -442,8 +434,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -488,8 +479,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -535,8 +525,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 },
                 ProviderMarketingInfo = "Test provider marketing info",
                 ApprenticeshipName = "Test level"
@@ -578,8 +567,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 }
             };
 
@@ -619,8 +607,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Apprenticeship = new ApprenticeshipBasic
                 {
                     ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info",
-                    Code = 1
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
                 }
             };
 

@@ -21,7 +21,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 {
                     Apprenticeship = new ApprenticeshipBasic
                     {
-                        Code = 12,
                         ApprenticeshipInfoUrl = "apprenticeship test url",
                         ApprenticeshipMarketingInfo = "test marketing info"
                     },
