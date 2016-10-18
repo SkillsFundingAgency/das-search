@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             mockAngleSharpService.Setup(m => m.GetLinks("StandardUrl", ".attachment-details h2 a", "Apprenticeship")).Returns(new List<string> { "/link/to/ApprenticeshipPDF" });
             mockAngleSharpService.Setup(m => m.GetLinks("StandardUrl", ".attachment-details h2 a", "Assessment")).Returns(new List<string> { "/link/to/AssessmentPDF" });
 
-            var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1" }, new StandardMetaData { Id = 3, Title = "Title2" } };
+            var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1", Published = true }, new StandardMetaData { Id = 3, Title = "Title2", Published = true } };
             mockMetadataApiService.Setup(x => x.GetStandards()).Returns(standardsFromRepo);
             mockVstsService.Setup(m => m.GetStandards()).Returns(standardsFromRepo);
 
@@ -128,7 +128,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             mockAngleSharpService.Setup(m => m.GetLinks("StandardUrl", ".attachment-details h2 a", "Apprenticeship")).Returns(new List<string> { "/link/to/ApprenticeshipPDF" });
             mockAngleSharpService.Setup(m => m.GetLinks("StandardUrl", ".attachment-details h2 a", "Assessment")).Returns(new List<string> { "/link/to/AssessmentPDF" });
 
-            var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1" }, new StandardMetaData { Id = 3, Title = "Title2" } };
+            var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1", Published = true}, new StandardMetaData { Id = 3, Title = "Title2" } };
 
             mockVstsService.Setup(x => x.GetStandards()).Returns(standardsFromRepo);
 
@@ -160,7 +160,7 @@ namespace Sfa.Das.Sas.Tools.MetaDataCreationTool.UnitTests
             mockAngleSharpService.Setup(m => m.GetLinks("StandardUrl", ".attachment-details h2 a", "Apprenticeship")).Returns(new List<string> { "/link/to/ApprenticeshipPDF" });
             mockAngleSharpService.Setup(m => m.GetLinks("StandardUrl", ".attachment-details h2 a", "Assessment")).Returns(new List<string> { "/link/to/AssessmentPDF" });
 
-            var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1" }, new StandardMetaData { Id = 3, Title = "Title2" } };
+            var standardsFromRepo = new List<StandardMetaData> { new StandardMetaData { Id = 2, Title = "Title1", Published = true }, new StandardMetaData { Id = 3, Title = "Title2", Published = true } };
             mockMetadataApiService.Setup(x => x.GetStandards()).Returns(standardsFromRepo);
             mockVstsService.Setup(m => m.GetStandards()).Returns(standardsFromRepo);
 
