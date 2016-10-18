@@ -14,6 +14,6 @@
      <files>
         <file src="\..\webtests\Sfa.Das.Sas.WebTest.AcceptanceTests\bin\Release\**\*.*" target="" />
 		<file src="\..\webtests\packages\NUnit.ConsoleRunner.3.4.1\**\*.*" target="NUnit.Runners" />
-		<file src="\..\webtests\packages\Pickles.CommandLine.2.8.0\**\*.*" target="Pickles.CommandLine" />
+		<file src="\..\webtests\packages\Pickles.CommandLine.2.8.3\**\*.*" target="Pickles.CommandLine" />
      </files>
 </package>
