@@ -59,7 +59,6 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
         // GET /providers
         [SwaggerOperation("GetByUkprn")]
         [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
         [Route("providers/{ukprn}")]
         [ExceptionHandling]
         public IEnumerable<Provider> Get(int ukprn)
