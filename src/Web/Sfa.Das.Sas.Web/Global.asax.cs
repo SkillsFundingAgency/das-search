@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Web
 
             if (ex is HttpException && ex.Message.EndsWith("was not found or does not implement IController."))
             {
-                logger.Warn("Unknown Controller");
+                logger.Info("Unknown Controller");
             }
             else
             {

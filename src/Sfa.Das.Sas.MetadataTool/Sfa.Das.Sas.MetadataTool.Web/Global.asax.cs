@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Das.Sas.MetadataTool.Web
 {
     using System;
+    using System.Web;
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -26,7 +27,14 @@
             Exception ex = Server.GetLastError().GetBaseException();
             var logger = DependencyResolver.Current.GetService<ILog>();
 
-            logger.Error(ex, "App_Error");
+            if (ex is HttpException && ex.Message.EndsWith("was not found or does not implement IController."))
+            {
+                logger.Info("Unknown Controller");
+            }
+            else
+            {
+                logger.Error(ex, "App_Error");
+            }
         }
     }
 }
