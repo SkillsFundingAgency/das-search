@@ -51,7 +51,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             }
             catch (Exception e)
             {
-                _logger.Error(e, "App_Error");
+                _logger.Error(e, "/providers");
                 throw;
             }
         }
@@ -77,7 +77,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             }
             catch (Exception e)
             {
-                _logger.Error(e, "App_Error");
+                _logger.Error(e, $"providers/{ukprn}");
                 throw;
             }
         }
@@ -104,7 +104,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             }
             catch (Exception e)
             {
-                _logger.Error(e, "App_Error");
+                _logger.Error(e, $"standards/{id}/providers");
                 throw;
             }
         }
@@ -132,7 +132,7 @@ namespace Sfa.Das.ApprenticeshipInfoService.Api.Controllers
             }
             catch (Exception e)
             {
-                _logger.Error(e, "App_Error");
+                _logger.Error(e, $"frameworks/{id}/providers");
                 throw;
             }
         }
