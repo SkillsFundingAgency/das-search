@@ -266,9 +266,15 @@ WriteLiteral(">Warning</span>\r\n                    </i>\r\n                   
 
 WriteLiteral(" class=\"bold-small\"");
 
-WriteLiteral(">\r\n                        Training providers are currently adding their details " +
-"to this service so some may be missing from your search results.\r\n              " +
-"      </strong>\r\n                </div>\r\n\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral(@">
+                        This service contains details of training providers who currently offer apprenticeships.
+                        It will be updated in 2017 to reflect the new register of apprenticeship training providers.
+                    </strong>
+                </div>
+
+        </div>
+    </div>
+</main>");
 
         }
     }
