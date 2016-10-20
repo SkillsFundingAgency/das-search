@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             framework.Title.Should().Be("Sustainable Resource Operations and Management: Higher Apprenticeship in Sustainable Resource Operations and Management");
             framework.Level.Should().Be(4);
-            framework.FrameworkId.Should().Be("123201");
+            framework.FrameworkId.Should().Be("123-20-1");
             framework.JobRoleItems.Count().Should().Be(1);
             framework.Keywords.Should().Contain(new string[] { "keyword1", "keyword2" });
             framework.TypicalLength.From.ShouldBeEquivalentTo(12);
@@ -67,7 +67,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             framework.Title.Should().Be("Trade Business Services: Trade Business Services");
             framework.Level.Should().Be(2);
-            framework.FrameworkId.Should().Be("61631");
+            framework.FrameworkId.Should().Be("616-3-1");
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             framework.Title.Should().Be("Accounting: Accounting");
             framework.Level.Should().Be(2);
-            framework.FrameworkId.Should().Be("61631");
+            framework.FrameworkId.Should().Be("616-3-1");
         }
 
         [Test]
@@ -157,7 +157,7 @@ namespace Sfa.Das.Sas.Indexer.UnitTests.Infrastructure.Elasticsearch
 
             document.FrameworkCode.Should().Be(99);
             document.PathwayCode.Should().Be(1122);
-            document.FrameworkId.Should().Be("99201122");
+            document.FrameworkId.Should().Be("99-20-1122");
             document.Level.Should().Be(4);
 
             document.Ukprn.Should().Be(4556);
