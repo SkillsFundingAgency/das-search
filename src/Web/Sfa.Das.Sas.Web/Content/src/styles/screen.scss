@@ -176,3 +176,164 @@ aside h2:first-child {
         padding: 0 8px;
     }
 }
+
+
+/* Stats */
+
+.stats-summary {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block
+}
+
+.stats-summary li {
+    margin: 0;
+    padding: 0 10px;
+    display: block;
+    float: left
+}
+
+.stats-summary li a {
+    text-decoration: none;
+    display: block
+}
+
+.stats-summary li figure.data .count {
+    font-family: "ntatabularnumbers","nta",Arial,sans-serif;
+    font-size: 48px;
+    line-height: 1.04167;
+    font-weight: 400;
+    text-transform: none;
+    font-weight: 700;
+    margin-bottom: 0
+}
+
+@media(max-width: 640px) {
+    .stats-summary li figure.data .count {
+        font-size:32px;
+        line-height: 1.09375
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .stats-summary li figure.data .count {
+        padding:.25em 0;
+        font-family: "ntatabularnumbers","nta",Arial,sans-serif;
+        font-size: 48px;
+        line-height: 1.04167;
+        font-weight: 400;
+        text-transform: none;
+        font-weight: 700
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .stats-summary li figure.data .count {
+        font-family:"ntatabularnumbers","nta",Arial,sans-serif;
+        font-size: 48px;
+        line-height: 1.04167;
+        font-weight: 400;
+        text-transform: none;
+        font-weight: 700;
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 10px
+    }
+}
+
+@media screen and (max-width: 768px) and (max-width:640px) {
+    .stats-summary li figure.data .count {
+        font-size:32px;
+        line-height: 1.09375
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .stats-summary li figure.data .count {
+        text-align:center
+    }
+}
+
+.stats-summary li figure.data figcaption {
+    display: block
+}
+
+@media screen and (max-width: 768px) {
+    .stats-summary li figure.data figcaption {
+        vertical-align:middle;
+        display: inline-block;
+        margin-right: 10px
+    }
+}
+
+.stats-summary li figure.data figcaption h2 {
+    font-family: "nta",Arial,sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 300;
+    text-transform: none;
+    font-weight: 700;
+    margin-bottom: 0
+}
+
+@media(max-width: 640px) {
+    .stats-summary li figure.data figcaption h2 {
+        font-size:14px
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .stats-summary li figure.data figcaption h2 {
+        font-family:"nta",Arial,sans-serif;
+        font-size: 16px;
+        line-height: 1.25;
+        font-weight: 300;
+        text-transform: none;
+        font-weight: 700
+    }
+}
+
+@media screen and (max-width: 640px) and (max-width:640px) {
+    .stats-summary li figure.data figcaption h2 {
+        font-size:14px
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .stats-summary li figure.data figcaption h2 {
+        text-align:center
+    }
+}
+
+.stats-summary li figure.data figcaption.underline {
+    text-decoration: underline
+}
+
+@media screen and (max-width: 640px) {
+    .stats-summary li {
+        padding:0 10px;
+        width: 100%
+    }
+}
+
+@media screen and (min-width: 641px) {
+    .stats-summary {
+        display: flex;
+        margin-bottom: 25px;
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width:768px) {
+    .stats-summary li {
+        padding:0 10px 0 0;
+        width: 50%
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .stats-summary li {
+        padding:0 10px 0 0;
+        width: 25%
+    }
+}
