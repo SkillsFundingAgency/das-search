@@ -1,3 +1,9 @@
+<%
+Response.Status = "503 Service Unavailable"
+Response.CacheControl = "no-cache"
+Response.AddHeader "Pragma", "no-cache"
+Response.Expires = -1
+%>
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -31,7 +37,7 @@
         <strong class="beta__label">Beta</strong> <span>Find apprenticeship training</span>
       </div>
     </div>
-    <main role="main" id="main">
+    <main role="main" id="main" class="error-503">
 
 <h1 class="heading-xlarge">Sorry, the find apprenticeship training service is currently unavailable</h1>
 
