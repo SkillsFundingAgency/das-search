@@ -14,7 +14,7 @@ namespace Sfa.Das.Web.Pacts
         public void ShouldGetaStandard()
         {
             //Arrange
-            const int standardCode = 12;
+            const string standardCode = "12";
             MockProviderService
                 .UponReceiving($"a request to retrieve standard with id '{standardCode}'")
                 .With(new ProviderServiceRequest
@@ -35,7 +35,7 @@ namespace Sfa.Das.Web.Pacts
                     },
                     Body = new
                     {
-                        StandardId = standardCode.ToString()
+                        StandardId = standardCode
                     }
                 });
 
