@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Indexer.AzureWorkerRole
         {
             var tasks = new List<Task>
             {
-                //_controlQueueConsumer.CheckMessage<IMaintainApprenticeshipIndex>(),
+                _controlQueueConsumer.CheckMessage<IMaintainApprenticeshipIndex>(),
                 _controlQueueConsumer.CheckMessage<IMaintainProviderIndex>()
             };
 
