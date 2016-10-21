@@ -34,7 +34,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 StandardCount = (int)_getStandards.GetStandardsAmount(),
                 FrameworkCount = (int)_getFrameworks.GetFrameworksAmount(),
                 ProviderCount = (int)_getProviders.GetProvidersAmount(),
-                ExpiringFrameworks = _getFrameworks.GetFrameworksExpiringSoon(),
+                ExpiringFrameworks30 = _getFrameworks.GetFrameworksExpiringSoon(30),
+                ExpiringFrameworks60 = _getFrameworks.GetFrameworksExpiringSoon(60),
                 StandardsWithProviders = _apprenticeshipProviderRepository.GetStandardsAmountWithProviders(),
                 FrameworksWithProviders = _apprenticeshipProviderRepository.GetFrameworksAmountWithProviders()
             };

@@ -6,6 +6,6 @@ namespace Sfa.Das.Sas.Core.Domain.Services
     {
         Framework GetFrameworkById(string id);
         long GetFrameworksAmount();
-        int GetFrameworksExpiringSoon();
+        int GetFrameworksExpiringSoon(int daysToExpire);
     }
 }

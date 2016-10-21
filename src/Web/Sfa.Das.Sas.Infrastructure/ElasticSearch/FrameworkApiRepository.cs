@@ -44,7 +44,7 @@
             throw new NotImplementedException();
         }
 
-        public int GetFrameworksExpiringSoon()
+        public int GetFrameworksExpiringSoon(int daysToExpire)
         {
             throw new NotImplementedException();
         }

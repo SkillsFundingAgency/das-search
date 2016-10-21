@@ -56,11 +56,23 @@
                 <li>
                     <figure class="data">
                         <p class="count">
-                            @Model.ExpiringFrameworks
+                            @Model.ExpiringFrameworks30
                         </p>
                         <figcaption>
                             <h2>
-                                frameworks expiring in the next X days
+                                frameworks expiring in the next 30 days
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.ExpiringFrameworks60
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks expiring in the next 60 days
                             </h2>
                         </figcaption>
                     </figure>

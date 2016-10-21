@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Nest;
@@ -63,7 +64,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return results.HitsMetaData.Total;
         }
 
-        public int GetFrameworksExpiringSoon()
+        public int GetFrameworksExpiringSoon(int daysToExpire)
         {
             try
             {
@@ -79,7 +80,12 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                 .Filter(f => f
                                     .Exists(e => e
                                         .Field(field => field.ExpiryDate))))));
-                var response = document.Documents.GroupBy(x => x.FrameworkId).Count();
+
+                var tmp = document.Documents.GroupBy(x => x.FrameworkId).Count();
+
+                var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now) let daysDifference = (int) span.TotalDays where daysDifference <= daysToExpire select item).ToList();
+
+                var response = expiringElements.GroupBy(x => x.FrameworkId).Count();
                 return response;
             }
             catch (Exception ex)
