@@ -1,3 +1,0 @@
-[submodule "src/Sfa.Eds.Das.Web/wwwroot/govuk_toolkit"]
-	path = src/Sfa.Eds.Das.Web/wwwroot/govuk_toolkit
-	url = https://github.com/alphagov/govuk_frontend_toolkit.git

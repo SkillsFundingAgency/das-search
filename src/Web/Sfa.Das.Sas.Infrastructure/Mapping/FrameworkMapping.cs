@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Domain.Model;
-using ApiJobRoleItem = SFA.DAS.Apprenticeships.Api.Client.Models.JobRoleItem;
-
-namespace Sfa.Das.Sas.Infrastructure.Mapping
+﻿namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Core.Domain.Model;
+    using ApiFramework = SFA.DAS.Apprenticeships.Api.Types.Framework;
+    using ApiJobRoleItem = SFA.DAS.Apprenticeships.Api.Types.JobRoleItem;
+
     public class FrameworkMapping : IFrameworkMapping
     {
         private readonly ITypicalLengthMapping _typicalLengthMapping;
@@ -41,7 +42,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             return framework;
         }
 
-        public Framework MapToFramework(SFA.DAS.Apprenticeships.Api.Client.Models.Framework document)
+        public Framework MapToFramework(ApiFramework document)
         {
             return new Framework
             {

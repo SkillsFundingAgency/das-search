@@ -1,6 +1,6 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
-using ApiFramework = SFA.DAS.Apprenticeships.Api.Client.Models.Framework;
+using ApiFramework = SFA.DAS.Apprenticeships.Api.Types.Framework;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {

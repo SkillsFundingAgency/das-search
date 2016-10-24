@@ -93,7 +93,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DashboardOverviewPage.cs" />
     <Compile Include="FrameworkDetailPage.cs" />
     <Compile Include="FrameworkProviderResultPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

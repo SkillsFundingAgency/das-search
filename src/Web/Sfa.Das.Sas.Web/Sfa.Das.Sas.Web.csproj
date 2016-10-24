@@ -273,6 +273,7 @@
     <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
+    <Compile Include="Services\SettingsFinder.cs" />
     <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StartController.cs" />
@@ -435,10 +436,13 @@
     <Content Include="Content\dist\images\govuk-crest.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\icons\status\green_16.png" />
     <Content Include="Content\dist\images\icons\icon-important-2x.png" />
     <Content Include="Content\dist\images\icons\icon-important.png" />
     <Content Include="Content\dist\images\icons\icon-pointer-2x.png" />
     <Content Include="Content\dist\images\icons\icon-pointer.png" />
+    <Content Include="Content\dist\images\icons\status\orange_16.png" />
+    <Content Include="Content\dist\images\icons\status\red_16.png" />
     <Content Include="Content\dist\images\open-government-licence.png" />
     <Content Include="Content\favicons\android-chrome-144x144.png" />
     <Content Include="Content\favicons\android-chrome-192x192.png" />
@@ -669,7 +673,7 @@
       <LastGenOutput>_FilterNationalProviders.generated.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Views\Health\Start.cshtml" />
+    <Content Include="Views\Health\Start.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>

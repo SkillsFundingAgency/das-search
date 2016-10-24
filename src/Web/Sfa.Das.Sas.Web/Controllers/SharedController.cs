@@ -27,7 +27,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = new HeaderViewModel
                                 {
                                     SurveyUrl = _surveyUrl,
-                                    ShowCookieBanner = _cookieService.ShowCookieForBanner(Request?.RequestContext?.HttpContext)
+                                    ShowCookieBanner = _cookieService.ShowCookieForBanner(Request?.RequestContext?.HttpContext),
+                                    ShowGoogleTagManager = SettingsFinder.IsFeatureAvailable("GoogleTagManager")
                                 };
 
             return PartialView("_Header", viewModel);

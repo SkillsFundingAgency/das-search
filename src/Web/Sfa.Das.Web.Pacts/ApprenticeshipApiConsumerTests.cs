@@ -14,13 +14,13 @@ namespace Sfa.Das.Web.Pacts
         public void ShouldGetaStandard()
         {
             //Arrange
-            const int standardCode = 12;
-            MockProviderService.Given("An apprenticeship api")
+            const string standardCode = "12";
+            MockProviderService
                 .UponReceiving($"a request to retrieve standard with id '{standardCode}'")
                 .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
-                    Path = "/standards/" + standardCode,
+                    Path = $"/standards/{standardCode}",
                     Headers = new Dictionary<string, string>
                     {
                         { "Accept", "application/json" }
@@ -42,7 +42,7 @@ namespace Sfa.Das.Web.Pacts
             var consumer = new StandardApiClient(MockProviderServiceBaseUri);
 
             //Act
-            var result = consumer.Get(standardCode);
+            var result = consumer.Get(standardCode); // TODO is this needed?
 
             //Assert
             Assert.AreEqual(standardCode, result.StandardId);

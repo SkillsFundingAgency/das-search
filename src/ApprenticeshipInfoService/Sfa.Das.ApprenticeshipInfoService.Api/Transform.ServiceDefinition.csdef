@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceDefinition name="Sfa.Das.ApprenticeshipInfoService.Api.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6" xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
-  <WebRole vmsize="#{CloudService.Size}" xdt:Transform="SetAttributes(vmsize)" >
-  </WebRole>
-</ServiceDefinition>
