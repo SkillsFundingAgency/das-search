@@ -64,6 +64,18 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return results.HitsMetaData.Total;
         }
 
+        public long GetFrameworksOffer()
+        {
+            var results =
+                   _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ProviderIndexAlias)
+                           .Type(Types.Parse("frameworkprovider"))
+                           .From(0)
+                           .MatchAll());
+            return results.HitsMetaData.Total;
+        }
+
         public int GetFrameworksExpiringSoon(int daysToExpire)
         {
             try
@@ -80,8 +92,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                 .Filter(f => f
                                     .Exists(e => e
                                         .Field(field => field.ExpiryDate))))));
-
-                var tmp = document.Documents.GroupBy(x => x.FrameworkId).Count();
 
                 var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now) let daysDifference = (int) span.TotalDays where daysDifference <= daysToExpire select item).ToList();
 

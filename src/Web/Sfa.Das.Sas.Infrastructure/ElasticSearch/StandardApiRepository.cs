@@ -82,5 +82,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             throw new NotImplementedException();
         }
+
+        public long GetStandardsOffer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

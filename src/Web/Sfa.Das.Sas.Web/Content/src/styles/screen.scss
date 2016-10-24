@@ -189,7 +189,6 @@ aside h2:first-child {
 
 .stats-summary li {
     margin: 0;
-    padding: 0 10px;
     display: block;
     float: left
 }
@@ -312,7 +311,6 @@ aside h2:first-child {
 
 @media screen and (max-width: 640px) {
     .stats-summary li {
-        padding:0 10px;
         width: 100%
     }
 }
@@ -326,14 +324,12 @@ aside h2:first-child {
 
 @media screen and (min-width: 641px) and (max-width:768px) {
     .stats-summary li {
-        padding:0 10px 0 0;
         width: 50%
     }
 }
 
 @media screen and (min-width: 769px) {
     .stats-summary li {
-        padding:0 10px 0 0;
         width: 25%
     }
 }

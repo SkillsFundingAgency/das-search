@@ -44,6 +44,11 @@
             throw new NotImplementedException();
         }
 
+        public long GetFrameworksOffer()
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetFrameworksExpiringSoon(int daysToExpire)
         {
             throw new NotImplementedException();

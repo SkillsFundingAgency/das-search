@@ -92,5 +92,17 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                            .MatchAll());
             return results.HitsMetaData.Total;
         }
+
+        public long GetStandardsOffer()
+        {
+            var results =
+                   _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ProviderIndexAlias)
+                           .Type(Types.Parse("standardprovider"))
+                           .From(0)
+                           .MatchAll());
+            return results.HitsMetaData.Total;
+        }
     }
 }

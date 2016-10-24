@@ -8,9 +8,13 @@
 
         public int ProviderCount { get; set; }
 
+        public int StandardOffer { get; set; }
+
+        public int FrameworkOffer { get; set; }
+
         public int ExpiringFrameworks30 { get; set; }
 
-        public int ExpiringFrameworks60 { get; set; }
+        public int ExpiringFrameworks90 { get; set; }
 
         public int StandardsWithProviders { get; set; }
 

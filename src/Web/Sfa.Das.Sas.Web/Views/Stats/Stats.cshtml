@@ -6,7 +6,7 @@
 <main id="content" role="main">
 
     <div class="grid-row">
-        <div class="column-two-thirds">
+        <div>
 
             <hgroup>
                 <h1 class="heading-xlarge">
@@ -56,6 +56,30 @@
                 <li>
                     <figure class="data">
                         <p class="count">
+                            @Model.StandardOffer
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standard offer
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworkOffer
+                        </p>
+                        <figcaption>
+                            <h2>
+                                framework offer
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
                             @Model.ExpiringFrameworks30
                         </p>
                         <figcaption>
@@ -68,11 +92,11 @@
                 <li>
                     <figure class="data">
                         <p class="count">
-                            @Model.ExpiringFrameworks60
+                            @Model.ExpiringFrameworks90
                         </p>
                         <figcaption>
                             <h2>
-                                frameworks expiring in the next 60 days
+                                frameworks expiring in the next 90 days
                             </h2>
                         </figcaption>
                     </figure>
@@ -95,11 +119,11 @@
                 <li>
                     <figure class="data">
                         <p class="count">
-                            @Model.FrameworksWithProviders
+                            @Model.StandardsWithoutProviders
                         </p>
                         <figcaption>
                             <h2>
-                                frameworks with a provider
+                                standards without a provider
                             </h2>
                         </figcaption>
                     </figure>
@@ -107,11 +131,11 @@
                 <li>
                     <figure class="data">
                         <p class="count">
-                            @Model.StandardsWithoutProviders
+                            @Model.FrameworksWithProviders
                         </p>
                         <figcaption>
                             <h2>
-                                standards without a provider
+                                frameworks with a provider
                             </h2>
                         </figcaption>
                     </figure>
