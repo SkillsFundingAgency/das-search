@@ -8,7 +8,6 @@
     [PageNavigation("/Provider/StandardResults")]
     public class StandardProviderResultsPage : ProviderResultsBase
     {
-        //[ElementLocator(CssSelector = "#apprenticeship-results .standard-result a")]
         public IWebElement FirstStandardProviderResult { get; set; }
     }
 }
