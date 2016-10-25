@@ -18,17 +18,20 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
+        private readonly IElasticsearchHelper _elasticsearchHelper;
 
         public FrameworkElasticRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IFrameworkMapping frameworkMapping)
+            IFrameworkMapping frameworkMapping,
+            IElasticsearchHelper elasticsearchHelper)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
+            _elasticsearchHelper = elasticsearchHelper;
         }
 
         public Framework GetFrameworkById(string id)
@@ -66,14 +69,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public long GetFrameworksOffer()
         {
-            var results =
-                   _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(
-                       s =>
-                       s.Index(_applicationSettings.ProviderIndexAlias)
-                           .Type(Types.Parse("frameworkprovider"))
-                           .From(0)
-                           .MatchAll());
-            return results.HitsMetaData.Total;
+            var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "frameworkprovider");
+            var frameworkIdUkprnList = documents.Select(doc => string.Concat(doc.FrameworkId, doc.Ukprn));
+
+            return frameworkIdUkprnList.Distinct().Count();
         }
 
         public int GetFrameworksExpiringSoon(int daysToExpire)

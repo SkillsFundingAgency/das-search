@@ -117,6 +117,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elasticsearch\ApprenticeshipProviderApiRepository.cs" />
+    <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
+    <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\ProviderElasticRepository.cs" />
     <Compile Include="Elasticsearch\StandardElasticRepository.cs" />
     <Compile Include="Elasticsearch\FrameworkElasticRepository.cs" />

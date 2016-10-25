@@ -17,17 +17,20 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
+        private readonly IElasticsearchHelper _elasticsearchHelper;
 
         public StandardElasticRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IStandardMapping standardMapping)
+            IStandardMapping standardMapping,
+            IElasticsearchHelper elasticsearchHelper)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
+            _elasticsearchHelper = elasticsearchHelper;
         }
 
         public Standard GetStandardById(string id)
@@ -95,14 +98,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public long GetStandardsOffer()
         {
-            var results =
-                   _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
-                       s =>
-                       s.Index(_applicationSettings.ProviderIndexAlias)
-                           .Type(Types.Parse("standardprovider"))
-                           .From(0)
-                           .MatchAll());
-            return results.HitsMetaData.Total;
+            var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<StandardProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "standardprovider");
+            var standardUkprnList = documents.Select(doc => string.Concat(doc.StandardCode, doc.Ukprn));
+
+            return standardUkprnList.Distinct().Count();
         }
     }
 }

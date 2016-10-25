@@ -17,17 +17,20 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly IProviderMapping _providerMapping;
+        private readonly IElasticsearchHelper _elasticsearchHelper;
 
         public ApprenticeshipProviderRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IProviderMapping providerMapping)
+            IProviderMapping providerMapping,
+            IElasticsearchHelper elasticsearchHelper)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _providerMapping = providerMapping;
+            _elasticsearchHelper = elasticsearchHelper;
         }
 
         public ApprenticeshipDetails GetCourseByStandardCode(int ukprn, int locationId, string standardCode)
@@ -80,16 +83,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             try
             {
-                var take = GetFrameworkProvidersTotalAmount();
-                var document =
-                    _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(s => s
-                        .Index(_applicationSettings.ProviderIndexAlias)
-                        .Type("frameworkprovider")
-                        .From(0)
-                        .Take(take)
-                        .MatchAll());
-                var response = document.Documents.GroupBy(x => x.FrameworkId).Count();
-                return response;
+                var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(
+                    _applicationSettings.ProviderIndexAlias,
+                    "frameworkprovider");
+
+                return documents.GroupBy(x => x.FrameworkId).Count();
             }
             catch (Exception ex)
             {
@@ -104,16 +102,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             try
             {
-                var take = GetStandardProvidersTotalAmount();
-                var document =
-                    _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(s => s
-                        .Index(_applicationSettings.ProviderIndexAlias)
-                        .Type("standardprovider")
-                        .From(0)
-                        .Take(take)
-                        .MatchAll());
-                var response = document.Documents.GroupBy(x => x.StandardCode).Count();
-                return response;
+                var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<StandardProviderSearchResultsItem>(
+                    _applicationSettings.ProviderIndexAlias,
+                    "standardprovider");
+
+                return documents.GroupBy(x => x.StandardCode).Count();
             }
             catch (Exception ex)
             {

@@ -33,6 +33,8 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 
             For<IGetProviders>().Use<ProviderElasticRepository>();
 
+            For<IElasticsearchHelper>().Use<ElasticsearchHelper>();
+
             if (Is<ApprenticeshipServiceApiFeature>.Enabled)
             {
                 For<IGetFrameworks>().Use<FrameworkApiRepository>();
