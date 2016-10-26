@@ -109,6 +109,7 @@
     <Compile Include="Domain\Model\TypicalLength.cs" />
     <Compile Include="Domain\Model\LocationLookupResponse.cs" />
     <Compile Include="Domain\Services\IApprenticeshipProviderRepository.cs" />
+    <Compile Include="Domain\Services\IGetProviders.cs" />
     <Compile Include="Domain\Services\IGetStandards.cs" />
     <Compile Include="Domain\Services\IGetFrameworks.cs" />
     <Compile Include="Logging\ILog.cs" />

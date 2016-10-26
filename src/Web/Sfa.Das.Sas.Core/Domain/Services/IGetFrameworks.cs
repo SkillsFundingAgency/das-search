@@ -5,5 +5,8 @@ namespace Sfa.Das.Sas.Core.Domain.Services
     public interface IGetFrameworks
     {
         Framework GetFrameworkById(string id);
+        long GetFrameworksAmount();
+        long GetFrameworksOffer();
+        int GetFrameworksExpiringSoon(int daysToExpire);
     }
 }

@@ -34,6 +34,18 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return result;
         }
 
+        public ISearchResponse<T> Scroll<T>(string time, string scrollId)
+            where T : class
+        {
+            var client = _elasticsearchClientFactory.Create();
+            var stopwatch = Stopwatch.StartNew();
+
+            var result = client.Scroll<T>(time, scrollId);
+
+            SendLog(result, $"Elasticsearch.ScrollSearch.{scrollId}", stopwatch.Elapsed);
+            return result;
+        }
+
         private void SendLog<T>(ISearchResponse<T> result, string identifier, TimeSpan clientRequestTime)
             where T : class
         {

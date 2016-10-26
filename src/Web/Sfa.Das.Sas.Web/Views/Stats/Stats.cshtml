@@ -1,0 +1,160 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.StatsViewModel
+@{
+    ViewBag.Title = "Stats";
+}
+
+<main id="content" role="main">
+
+    <div class="grid-row">
+        <div>
+
+            <hgroup>
+                <h1 class="heading-xlarge">
+                    Apprenticeship information
+                </h1>
+            </hgroup>
+            <ul class="stats-summary">
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardCount
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standards
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworkCount
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.ProviderCount
+                        </p>
+                        <figcaption>
+                            <h2>
+                                providers
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+
+            <ul class="stats-summary">
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardOffer
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standard offer
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworkOffer
+                        </p>
+                        <figcaption>
+                            <h2>
+                                framework offer
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.ExpiringFrameworks30
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks expiring in the next 30 days
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.ExpiringFrameworks90
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks expiring in the next 90 days
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+
+            <ul class="stats-summary">
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardsWithProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standards with a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.StandardsWithoutProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                standards without a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworksWithProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks with a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure class="data">
+                        <p class="count">
+                            @Model.FrameworksWithoutProviders
+                        </p>
+                        <figcaption>
+                            <h2>
+                                frameworks without a provider
+                            </h2>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</main>
+

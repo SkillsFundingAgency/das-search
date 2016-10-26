@@ -31,6 +31,10 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILookupLocations>().Use<PostCodesIoLocator>();
 
+            For<IGetProviders>().Use<ProviderElasticRepository>();
+
+            For<IElasticsearchHelper>().Use<ElasticsearchHelper>();
+
             if (Is<ApprenticeshipServiceApiFeature>.Enabled)
             {
                 For<IGetFrameworks>().Use<FrameworkApiRepository>();

@@ -72,5 +72,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             return result;
         }
+
+        public int GetFrameworksAmountWithProviders()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetStandardsAmountWithProviders()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
