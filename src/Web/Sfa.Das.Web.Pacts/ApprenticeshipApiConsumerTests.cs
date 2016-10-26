@@ -3,7 +3,6 @@ using NUnit.Framework;
 using PactNet.Mocks.MockHttpService.Models;
 using PactNet.TestExtensions;
 using SFA.DAS.Apprenticeships.Api.Client;
-using SFA.DAS.Apprenticeships.Api.Client.PactHelper;
 
 namespace Sfa.Das.Web.Pacts
 {
