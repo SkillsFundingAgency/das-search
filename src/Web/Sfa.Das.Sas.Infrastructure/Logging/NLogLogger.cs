@@ -20,6 +20,7 @@
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
         private AzureEventHubTarget dummy3; // Reference so assembly is copied to Primary output.
+        private NLog.Targets.RedisTarget dummy4; // Reference so assembly is copied to Primary output.
 #pragma warning restore S1144, 0169 // Unused private types or members should be removed
 
         public NLogLogger(Type loggerType, IConfigurationSettings settings, IRequestContext context)
