@@ -1,14 +1,12 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
-@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
-@using FeatureToggle.Core.Fluent
 @using Sfa.Das.Sas.Web.Extensions
 @model ApprenticeshipSearchResultViewModel
 
 @{
     ViewBag.Title = "Search Results";
 }
-
 <main id="content" role="main">
+    <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
     <p class="small-btm-margin">
         @Html.ActionLink("Start a new search", "Search", "Apprenticeship", new { }, new { @class = "link-back new-apprenticeship-search" })
     </p>
@@ -16,12 +14,12 @@
         <h1 class="heading-xlarge">
             Search results
         </h1>
-            @{
-                Html.RenderPartial("_SearchResultMessage");
-            }
+        @{
+            Html.RenderPartial("_SearchResultMessage");
+        }
     </hgroup>
 
-    @if(Model.TotalResults == 0)
+    @if (Model.TotalResults == 0)
     {
         <p>You can:</p>
         <ul class="list-bullet">
@@ -65,18 +63,18 @@
                 </form>
 
 
-            @foreach (var item in Model.Results)
-            {
-                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
-                    <header>
-                        @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item) : GetFrameworkTitle(item))
-                    </header>
-                    <dl class="result-data-list">
-                        @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                        @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
-                    </dl>
-                </article>
-            }
+                @foreach (var item in Model.Results)
+                {
+                    <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
+                        <header>
+                            @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item) : GetFrameworkTitle(item))
+                        </header>
+                        <dl class="result-data-list">
+                            @GetApprenticeshipDetailItem("Level:", "level", item.Level)
+                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                        </dl>
+                    </article>
+                }
 
                 <div class="page-navigation">
                     @GetPaginationBackLink()
@@ -87,15 +85,6 @@
 
     </div>
 </main>
-
-@if (Model.TotalResults == 0)
-{
-    <script>
-        window.onload = function () {
-            SearchAndShortlist.analytics.pushEvent("Apprenticeship Search", "No results", "Search");
-        }
-    </script>
-}
 
 @helper GetPaginationBackLink()
 {

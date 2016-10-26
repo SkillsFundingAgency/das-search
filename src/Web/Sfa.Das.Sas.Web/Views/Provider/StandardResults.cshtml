@@ -7,6 +7,8 @@
 }
 
 <main id="content" role="main">
+    <input type="hidden" value="@Model.PostCode.FormatPostcode()" id="ga-postcode" />
+    <input type="hidden" value="@Model.StandardName, level @Model.StandardLevel" id="ga-apprenticeship-title" />
     @if (Model.Hits.Count() != 0)
     {
         <p class="small-btm-margin">
@@ -83,15 +85,6 @@
         </div>
     </div>
 </main>
-
-@if (Model.TotalResults == 0)
-{
-    <script>
-        window.onload = function () {
-            SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
-        }
-    </script>
-}
 
 @helper GetPaginationBackLink()
 {
