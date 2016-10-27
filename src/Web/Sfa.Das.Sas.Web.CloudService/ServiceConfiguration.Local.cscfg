@@ -14,5 +14,8 @@
       <Setting name="CookieAboutUrl" value="http://www.aboutcookies.org/" />
       <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="cert" thumbprint="18E443B4CFC7A4652B497F241D31866DC7E3D4F7" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
 </ServiceConfiguration>
