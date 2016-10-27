@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using NUnit.Framework;
 using PactNet.Mocks.MockHttpService.Models;
 using PactNet.TestExtensions;
@@ -74,10 +75,7 @@ namespace Sfa.Das.Web.Pacts
             var consumer = new StandardApiClient(MockProviderServiceBaseUri);
 
             //Act
-            var result = consumer.Get(standardCode); // TODO is this needed?
-
-            //Assert
-            Assert.IsNull(result);
+            Assert.Throws<HttpRequestException>(() => consumer.Get(standardCode));
 
             MockProviderService.VerifyInteractions();
         }
@@ -107,7 +105,7 @@ namespace Sfa.Das.Web.Pacts
                     },
                     Body = new
                     {
-                        Id = frameworkId
+                        FrameworkId = frameworkId
                     }
                 });
 
@@ -146,10 +144,7 @@ namespace Sfa.Das.Web.Pacts
             var consumer = new FrameworkApiClient(MockProviderServiceBaseUri);
 
             //Act
-            var result = consumer.Get(frameworkId); // TODO is this needed?
-
-            //Assert
-            Assert.IsNull(result);
+            Assert.Throws<HttpRequestException>(() => consumer.Get(frameworkId));
 
             MockProviderService.VerifyInteractions();
         }
