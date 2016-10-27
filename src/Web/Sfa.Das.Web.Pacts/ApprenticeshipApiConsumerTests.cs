@@ -7,7 +7,7 @@ using SFA.DAS.Apprenticeships.Api.Client;
 namespace Sfa.Das.Web.Pacts
 {
     [TestFixture]
-    [PactProvider("Apprenticeship API")]
+    [PactProvider("Apprenticeship Programs API")]
     public class ApprenticeshipApiClientTests : PactTestBase
     {
         [Test]
@@ -23,7 +23,7 @@ namespace Sfa.Das.Web.Pacts
                     Path = $"/standards/{standardCode}",
                     Headers = new Dictionary<string, string>
                     {
-                        { "Accept", "application/json" }
+                        {"Accept", "application/json"}
                     }
                 })
                 .WillRespondWith(new ProviderServiceResponse
@@ -46,6 +46,110 @@ namespace Sfa.Das.Web.Pacts
 
             //Assert
             Assert.AreEqual(standardCode, result.StandardId);
+
+            MockProviderService.VerifyInteractions();
+        }
+
+        [Test]
+        public void ShouldSeeaStandardIsMissing()
+        {
+            //Arrange
+            const string standardCode = "-1";
+            MockProviderService
+                .UponReceiving($"a request to retrieve standard with id '{standardCode}'")
+                .With(new ProviderServiceRequest
+                {
+                    Method = HttpVerb.Get,
+                    Path = $"/standards/{standardCode}",
+                    Headers = new Dictionary<string, string>
+                    {
+                        {"Accept", "application/json"}
+                    }
+                })
+                .WillRespondWith(new ProviderServiceResponse
+                {
+                    Status = 404
+                });
+
+            var consumer = new StandardApiClient(MockProviderServiceBaseUri);
+
+            //Act
+            var result = consumer.Get(standardCode); // TODO is this needed?
+
+            //Assert
+            Assert.IsNull(result);
+
+            MockProviderService.VerifyInteractions();
+        }
+
+        [Test]
+        public void ShouldGetFramework()
+        {
+            //Arrange
+            const string frameworkId = "403-2-1";
+            MockProviderService
+                .UponReceiving($"a request to retrieve standard with id '{frameworkId}'")
+                .With(new ProviderServiceRequest
+                {
+                    Method = HttpVerb.Get,
+                    Path = $"/frameworks/{frameworkId}",
+                    Headers = new Dictionary<string, string>
+                    {
+                        { "Accept", "application/json" }
+                    }
+                })
+                .WillRespondWith(new ProviderServiceResponse
+                {
+                    Status = 200,
+                    Headers = new Dictionary<string, string>
+                    {
+                        { "Content-Type", "application/json; charset=utf-8" }
+                    },
+                    Body = new
+                    {
+                        Id = frameworkId
+                    }
+                });
+
+            var consumer = new FrameworkApiClient(MockProviderServiceBaseUri);
+
+            //Act
+            var result = consumer.Get(frameworkId); // TODO is this needed?
+
+            //Assert
+            Assert.AreEqual(frameworkId, result.FrameworkId);
+
+            MockProviderService.VerifyInteractions();
+        }
+
+        [Test]
+        public void ShouldSeeAFrameworkIsMissing()
+        {
+            //Arrange
+            const string frameworkId = "1-2-3";
+            MockProviderService
+                .UponReceiving($"a request to retrieve standard with id '{frameworkId}'")
+                .With(new ProviderServiceRequest
+                {
+                    Method = HttpVerb.Get,
+                    Path = $"/frameworks/{frameworkId}",
+                    Headers = new Dictionary<string, string>
+                    {
+                        { "Accept", "application/json" }
+                    }
+                })
+                .WillRespondWith(new ProviderServiceResponse
+                {
+                    Status = 404
+                });
+
+            var consumer = new FrameworkApiClient(MockProviderServiceBaseUri);
+
+            //Act
+            var result = consumer.Get(frameworkId); // TODO is this needed?
+
+            //Assert
+            Assert.IsNull(result);
 
             MockProviderService.VerifyInteractions();
         }
