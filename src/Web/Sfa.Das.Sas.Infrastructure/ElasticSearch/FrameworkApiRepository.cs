@@ -1,4 +1,9 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿using System.Linq;
+using Nest;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Logging;
+
+namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using SFA.DAS.Apprenticeships.Api.Client;
@@ -10,21 +15,30 @@
 
     public sealed class FrameworkApiRepository : IGetFrameworks
     {
+        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
         private readonly IHttpGet _httpService;
+        private readonly ILog _applicationLogger;
         private readonly IFrameworkApiClient _frameworkApiClient;
+        private readonly IElasticsearchHelper _elasticsearchHelper;
 
         public FrameworkApiRepository(
+            IElasticsearchCustomClient elasticsearchCustomClient,
             IConfigurationSettings applicationSettings,
             IFrameworkMapping frameworkMapping,
             IHttpGet httpService,
-            IFrameworkApiClient frameworkApiClient)
+            ILog applicationLogger,
+            IFrameworkApiClient frameworkApiClient,
+            IElasticsearchHelper elasticsearchHelper)
         {
+            _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
             _httpService = httpService;
+            _applicationLogger = applicationLogger;
             _frameworkApiClient = frameworkApiClient;
+            _elasticsearchHelper = elasticsearchHelper;
         }
 
         public Framework GetFrameworkById(string id)
@@ -41,17 +55,53 @@
 
         public long GetFrameworksAmount()
         {
-            throw new NotImplementedException();
+            var results =
+                   _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ApprenticeshipIndexAlias)
+                           .Type(Types.Parse("frameworkdocument"))
+                           .From(0)
+                           .MatchAll());
+            return results.HitsMetaData.Total;
         }
 
         public long GetFrameworksOffer()
         {
-            throw new NotImplementedException();
+            var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "frameworkprovider");
+            var frameworkIdUkprnList = documents.Select(doc => string.Concat(doc.FrameworkId, doc.Ukprn));
+
+            return frameworkIdUkprnList.Distinct().Count();
         }
 
         public int GetFrameworksExpiringSoon(int daysToExpire)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var take = (int)GetFrameworksAmount();
+                var document =
+                    _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(s => s
+                        .Index(_applicationSettings.ApprenticeshipIndexAlias)
+                        .Type("frameworkdocument")
+                        .From(0)
+                        .Take(take)
+                        .Query(q => q
+                            .Bool(b => b
+                                .Filter(f => f
+                                    .Exists(e => e
+                                        .Field(field => field.ExpiryDate))))));
+
+                var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now) let daysDifference = (int)span.TotalDays where daysDifference <= daysToExpire select item).ToList();
+
+                var response = expiringElements.GroupBy(x => x.FrameworkId).Count();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _applicationLogger.Error(
+                    ex,
+                    $"Error retrieving amount of frameworks with provider");
+                throw;
+            }
         }
     }
 }

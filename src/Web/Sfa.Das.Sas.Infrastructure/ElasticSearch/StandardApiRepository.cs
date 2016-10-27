@@ -19,17 +19,20 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
         private readonly IStandardApiClient _standardApiClient;
+        private readonly IElasticsearchHelper _elasticsearchHelper;
 
         public StandardApiRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             IConfigurationSettings applicationSettings,
             IStandardMapping standardMapping,
-            IStandardApiClient standardApiClient)
+            IStandardApiClient standardApiClient,
+            IElasticsearchHelper elasticsearchHelper)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
             _standardApiClient = standardApiClient;
+            _elasticsearchHelper = elasticsearchHelper;
         }
 
         public Standard GetStandardById(string id)
@@ -80,12 +83,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public long GetStandardsAmount()
         {
-            throw new NotImplementedException();
+            var results =
+                   _elasticsearchCustomClient.Search<StandardSearchResultsItem>(
+                       s =>
+                       s.Index(_applicationSettings.ApprenticeshipIndexAlias)
+                           .Type(Types.Parse("standarddocument"))
+                           .From(0)
+                           .MatchAll());
+            return results.HitsMetaData.Total;
         }
 
         public long GetStandardsOffer()
         {
-            throw new NotImplementedException();
+            var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<StandardProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "standardprovider");
+            var standardUkprnList = documents.Select(doc => string.Concat(doc.StandardCode, doc.Ukprn));
+
+            return standardUkprnList.Distinct().Count();
         }
     }
 }
