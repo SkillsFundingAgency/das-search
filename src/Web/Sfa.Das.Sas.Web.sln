@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Resources", "Sf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Web", "Sfa.Das.Sas.Web\Sfa.Das.Sas.Web.csproj", "{E288C11D-B65E-4FD4-9C8D-7D734A7E947D}"
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Das.Sas.Web.CloudService", "Sfa.Das.Sas.Web.CloudService\Sfa.Das.Sas.Web.CloudService.ccproj", "{F638FB0D-3A54-48A3-B04B-52E45341891E}"
+Project("{BB40F520-413E-3EBA-ABD4-2177801094F0}") = "Sfa.Das.Sas.Web.CloudService", "Sfa.Das.Sas.Web.CloudService\Sfa.Das.Sas.Web.CloudService.ccproj", "{F638FB0D-3A54-48A3-B04B-52E45341891E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Web.UnitTests", "Sfa.Das.Sas.Web.UnitTests\Sfa.Das.Sas.Web.UnitTests.csproj", "{FA064318-8BC8-4589-AF79-10C2A8572808}"
 EndProject
