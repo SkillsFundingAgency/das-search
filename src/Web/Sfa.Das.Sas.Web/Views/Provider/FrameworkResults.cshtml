@@ -8,7 +8,9 @@
 
 <main id="content" role="main">
     <input type="hidden" value="@Model.PostCode.FormatPostcode()" id="ga-postcode"/>
-    <input type="hidden" value="@Model.Title" id="ga-apprenticeship-title" />
+    <input type="hidden" value="@Model.Title" id="ga-apprenticeship-title"/>
+    <input type="hidden" value="@Model.Hits.IsNullOrEmpty().ToString()" id="ga-no-result"/>
+
     @if (Model.Hits.Count() != 0)
     {
         <p class="small-btm-margin">

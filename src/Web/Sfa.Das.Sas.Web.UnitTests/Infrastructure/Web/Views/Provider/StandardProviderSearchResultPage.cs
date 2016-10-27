@@ -877,5 +877,51 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetHtmlElement(html, ".new-postcode-search").Should().BeNull();
             GetPartial(html, ".new-postcode-search").Should().BeEmpty();
         }
+
+        [Test]
+        public void ShouldHaveDataForGoogleAnalytic()
+        {
+            var searchPage = new StandardResults();
+            var nameOfStandard = "Name of standard";
+            var level = 2;
+            var title = $"{nameOfStandard}, level {level}";
+            var postcode = "N17";
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                StandardName = nameOfStandard,
+                StandardLevel = level,
+                PostCode = postcode,
+                Hits = new StandardProviderResultItemViewModel [0]
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetAttribute(html, "#ga-apprenticeship-title", "value").Should().BeEquivalentTo(title);
+            GetAttribute(html, "#ga-postcode", "value").Should().BeEquivalentTo(postcode);
+        }
+
+        [Test]
+        public void ShouldDetermineEmptyResultsForGoogleAnalytic()
+        {
+            var searchPage = new StandardResults();
+            var modelWithResults = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                Hits = new[] { new StandardProviderResultItemViewModel() }
+            };
+
+            var modelWithoutResults = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                Hits = new StandardProviderResultItemViewModel[0]
+            };
+
+            var htmlWithResults = searchPage.RenderAsHtml(modelWithResults).ToAngleSharp();
+            var htmlWithoutResults = searchPage.RenderAsHtml(modelWithoutResults).ToAngleSharp();
+
+            GetAttribute(htmlWithResults, "#ga-no-result", "value").Should().BeEquivalentTo("False");
+            GetAttribute(htmlWithoutResults, "#ga-no-result", "value").Should().BeEquivalentTo("True");
+        }
     }
 }
