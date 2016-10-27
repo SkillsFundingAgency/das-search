@@ -63,7 +63,14 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 ukprn,
                 locationId);
 
-            var result = JsonConvert.DeserializeObject<ApprenticeshipDetails>(_httpService.Get(url, null, null));
+            var requestResponse = _httpService.Get(url, null, null);
+
+            if (requestResponse == null)
+            {
+                return null;
+            }
+
+            var result = JsonConvert.DeserializeObject<ApprenticeshipDetails>(requestResponse);
 
             if (result == null)
             {

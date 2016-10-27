@@ -36,6 +36,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Http
                 catch (WebException ex)
                 {
                     _logger.Warn(ex.ToString(), new HttpErrorLogEntry { Url = url });
+
+                    HttpWebResponse res = (HttpWebResponse)ex.Response;
+                    if (res.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+
                     throw;
                 }
             }
