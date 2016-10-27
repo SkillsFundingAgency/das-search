@@ -12,6 +12,6 @@
         </dependencies>
     </metadata>
      <files>
-        <file src="\..\src\Web\Sfa.Das.Sas.Web.CloudService\bin\Release\app.publish\*.*" target="" />
+        <file src="\..\src\Web\Sfa.Das.Sas.Web.CloudService\bin\Release\app.publish\*.*" target="" /> 
      </files>
 </package>
