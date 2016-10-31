@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="Sfa.Das.Sas.Web.CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
   <Role name="Sfa.Das.Sas.Web">
     <Instances count="1" />
@@ -14,6 +14,8 @@
       <Setting name="CookieAboutUrl" value="http://www.aboutcookies.org/" />
       <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/statistical-data-sets/sfa-national-achievement-rates-tables-2014-to-2015" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </Role>
   <NetworkConfiguration>
     <!-- Name of the target Virtual Network -->
