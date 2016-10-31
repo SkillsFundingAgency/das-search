@@ -9,6 +9,8 @@ using Sfa.Das.Sas.Web.Views.Provider;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 {
+    using System.Linq;
+
     [TestFixture]
     public sealed class StandardProviderSearchResultPage : ViewTestBase
     {
@@ -876,6 +878,39 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             GetHtmlElement(html, ".new-postcode-search").Should().BeNull();
             GetPartial(html, ".new-postcode-search").Should().BeEmpty();
+        }
+
+        [TestCase(1, "1-3", 1)]
+        [TestCase(2, "1-3", 1)]
+        [TestCase(3, "1-3", 1)]
+        [TestCase(4, "4-6", 1)]
+        [TestCase(5, "4-6", 1)]
+        [TestCase(6, "4-6", 1)]
+        [TestCase(7, "7-9", 1)]
+        [TestCase(8, "7-9", 1)]
+        [TestCase(9, "7-9", 1)]
+        [TestCase(10, "All Others", 1)]
+        [TestCase(1, "All Others", 0)]
+        [TestCase(1, "All Others", -1)]
+        [TestCase(1, "All Others", 2, Description = "On second page")]
+        [TestCase(4, "All Others", 2, Description = "On second page")]
+        [TestCase(7, "All Others", 2, Description = "On second page")]
+        public void ShouldAddIntervalToResultsForGoogleAnalytics(int resultIndex, string expectedText, int acctualPage)
+        {
+            var searchPage = new StandardProviderInformation();
+
+            var results = from ll in new StandardProviderResultItemViewModel[10]
+                          select new StandardProviderResultItemViewModel { ProviderName = "Test" };
+
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 10,
+                Hits = results,
+                ActualPage = acctualPage,
+                ResultsToTake = 10,
+            };
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+            GetAttribute(html, "article a", "attr-ga-result-interval", resultIndex).Should().BeEquivalentTo(expectedText);
         }
     }
 }

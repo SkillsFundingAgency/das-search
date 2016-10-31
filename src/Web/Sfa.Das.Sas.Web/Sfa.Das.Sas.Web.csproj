@@ -261,6 +261,7 @@
     <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="Extensions\PostcodeExtension.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
+    <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Logging\RequestContext.cs" />
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />

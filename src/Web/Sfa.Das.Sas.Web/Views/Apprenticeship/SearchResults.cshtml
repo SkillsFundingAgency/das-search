@@ -1,7 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.ViewModels
-@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
-@using FeatureToggle.Core.Fluent
 @using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.Web.Helpers
 @model ApprenticeshipSearchResultViewModel
 
 @{
@@ -65,11 +64,14 @@
                 </form>
 
 
-            @foreach (var item in Model.Results)
-            {
-                <article class="result @(item.ApprenticeshipType)-result" id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
+                @{ var index = (Model.ActualPage * Model.ResultsToTake) - Model.ResultsToTake; }
+                @foreach (var item in Model.Results)
+                {
+                    index += 1;
+                    <article class="result @(item.ApprenticeshipType)-result" 
+                             id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
                     <header>
-                        @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item) : GetFrameworkTitle(item))
+                        @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item, index) : GetFrameworkTitle(item, index))
                     </header>
                     <dl class="result-data-list">
                         @GetApprenticeshipDetailItem("Level:", "level", item.Level)
@@ -149,18 +151,22 @@
 }
 
 
-@helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item)
+@helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item, int index)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", new { @id = item.StandardId, @keywords = Model.SearchTerm }, null)
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", 
+            new { @id = item.StandardId, @keywords = Model.SearchTerm}, 
+            new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) } )
         <span class="tag tag-new">New</span>
     </h2>
 }
 
-@helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item)
+@helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item, int index)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Framework", "Apprenticeship", new { @id = item.FrameworkId, @keywords = Model.SearchTerm }, null)
+        @Html.ActionLink(item.Title, "Framework", "Apprenticeship", 
+            new { @id = item.FrameworkId, @keywords = Model.SearchTerm }, 
+            new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
     </h2>
 }
 

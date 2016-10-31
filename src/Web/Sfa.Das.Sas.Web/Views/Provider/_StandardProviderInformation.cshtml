@@ -1,55 +1,56 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.Web.Helpers
 @model ProviderStandardSearchResultViewModel
 
-    @foreach (var item in Model.Hits)
-    {
-        <article class="result">
-            <header>
-                <h2 class="result-title">
-                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode }, null)
-                    @if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
-                    {
-                        <span class="tag tag-new">National</span>
-                    }
-                </h2>
-            </header>
+@{ var index = (Model.ActualPage * Model.ResultsToTake) - Model.ResultsToTake; }
 
-            <dl class="result-data-list">
-                @RenderProviderDetails(item)
+@foreach (var item in Model.Hits)
+{
+    index += 1;
+    <article class="result">
+        <header>
+            <h2 class="result-title">
+                @Html.ActionLink(item.ProviderName, "Detail", "Provider",
+                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode },
+                    new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
+                @if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
+                {
+                    <span class="tag tag-new">National</span>
+                }
+            </h2>
+        </header>
 
-                <dt><b>Employer satisfaction:</b></dt>
-                <dd class="employer-satisfaction">
-                    @item.EmployerSatisfactionMessage
-                </dd>
-                <dt><b>Learner satisfaction:</b></dt>
-                <dd class="learner-satisfaction">
-                    @item.LearnerSatisfactionMessage
-                </dd>
-                <dt><b>Achievement rate:</b></dt>
-                <dd class="achievement-rate">
-                    @item.AchievementRateMessage
-                </dd>
-            </dl>
-        </article>
-    }
+        <dl class="result-data-list">
+            @RenderProviderDetails(item)
+
+            <dt><b>Employer satisfaction:</b></dt>
+            <dd class="employer-satisfaction">
+                @item.EmployerSatisfactionMessage
+            </dd>
+            <dt><b>Learner satisfaction:</b></dt>
+            <dd class="learner-satisfaction">
+                @item.LearnerSatisfactionMessage
+            </dd>
+            <dt><b>Achievement rate:</b></dt>
+            <dd class="achievement-rate">
+                @item.AchievementRateMessage
+            </dd>
+        </dl>
+    </article>
+}
 
 @helper  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
     <dt><b>Distance:</b></dt>
     <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
 
-if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
-{
-        <dd class="address">@item.LocationAddressLine</dd>
-}
+    if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
+    {
+            <dd class="address">@item.LocationAddressLine</dd>
+    }
 
-    @RenderDeliveryOptions(item);
-}
-
-@helper RenderDeliveryOptions(StandardProviderResultItemViewModel item)
-{
     <dt><b>Training options:</b></dt>
 
     <dd class="deliveryOptions">@item.DeliveryOptionsMessage</dd>

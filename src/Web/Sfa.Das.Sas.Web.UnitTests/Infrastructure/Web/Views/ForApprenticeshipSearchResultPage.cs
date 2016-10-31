@@ -8,6 +8,9 @@ using Sfa.Das.Sas.Web.Views.Apprenticeship;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
+    using System.Linq;
+    using System.Web.UI.WebControls;
+
     [TestFixture]
     public sealed class ForApprenticeshipSearchResultPage : ViewTestBase
     {
@@ -494,6 +497,43 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
             GetPartial(html, ".new-apprenticeship-search").Should().NotBeNullOrEmpty();
             GetPartial(html, ".new-apprenticeship-search").Should().Be("Start a new search");
+        }
+
+        [TestCase(1, "1-3", 1)]
+        [TestCase(2, "1-3", 1)]
+        [TestCase(3, "1-3", 1)]
+        [TestCase(4, "4-6", 1)]
+        [TestCase(5, "4-6", 1)]
+        [TestCase(6, "4-6", 1)]
+        [TestCase(7, "7-9", 1)]
+        [TestCase(8, "7-9", 1)]
+        [TestCase(9, "7-9", 1)]
+        [TestCase(10, "All Others", 1)]
+        [TestCase(1, "All Others", 0)]
+        [TestCase(1, "All Others", -1)]
+        [TestCase(1, "All Others", 2, Description = "On second page")]
+        [TestCase(4, "All Others", 2, Description = "On second page")]
+        [TestCase(7, "All Others", 2, Description = "On second page")]
+        public void ShouldAddIntervalToResultsForGoogleAnalytics(int resultIndex, string expectedText, int acctualPage)
+        {
+            var searchPage = new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
+            var searchTerm = "Search Term for user";
+
+            var results = from ll in new ApprenticeshipSearchResultItemViewModel[10]
+                    select new ApprenticeshipSearchResultItemViewModel { Title = "Test" };
+
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 10,
+                SearchTerm = searchTerm,
+                Results = results,
+                ActualPage = acctualPage,
+                ResultsToTake = 10,
+                AggregationLevel = aggList
+            };
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+            GetAttribute(html, "#apprenticeship-results article a", "attr-ga-result-interval", resultIndex).Should().BeEquivalentTo(expectedText);
         }
     }
 }

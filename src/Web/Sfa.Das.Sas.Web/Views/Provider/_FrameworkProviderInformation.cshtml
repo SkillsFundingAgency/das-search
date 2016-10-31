@@ -1,14 +1,19 @@
 ﻿@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.Web.Helpers
 @using Sfa.Das.Sas.Web.ViewModels
 @model Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel
 
-    @foreach (var item in Model.Hits)
-    {
+@{ var index = (Model.ActualPage * Model.ResultsToTake) - Model.ResultsToTake; }
+@foreach (var item in Model.Hits)
+{
+    index += 1;
         <article class="result">
             <header>
                 <h2 class="result-title">
-                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId }, null)
+                    @Html.ActionLink(item.ProviderName, "Detail", "Provider", 
+                        new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId },
+                        new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
                     @if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
                     {
                         <span class="tag tag-new">National</span>
