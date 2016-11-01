@@ -193,12 +193,12 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
              <span class="national-rate">
                  @Model.AchievementRateMessage
              </span>
-             @if (Model.AchievementRateMessage != "no data available" && Model.AchievementRateMessage != "Not currently collected for this training organisation")
+             @if (Model.AchievementRateMessage != "no data available")
              {
                  @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
              }
          </div>
-         @if (Model.AchievementRateMessage != "no data available" && Model.AchievementRateMessage != "Not currently collected for this training organisation")
+         @if (Model.AchievementRateMessage != "no data available")
          {
              <div class="national-achievement-bar">
                  <b class="font-small">National average:</b>

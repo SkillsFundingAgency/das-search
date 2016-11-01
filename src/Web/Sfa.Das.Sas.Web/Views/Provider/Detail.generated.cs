@@ -594,7 +594,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n             </span>\r\n");
 #line hidden
 
 #line 196 "..\..\Views\Provider\Detail.cshtml"
-              if (Model.AchievementRateMessage != "no data available" && Model.AchievementRateMessage != "Not currently collected for this training organisation")
+              if (Model.AchievementRateMessage != "no data available")
              {
                  
 
@@ -625,7 +625,7 @@ WriteLiteralTo(__razor_helper_writer, "         </div>\r\n");
 #line hidden
 
 #line 201 "..\..\Views\Provider\Detail.cshtml"
-          if (Model.AchievementRateMessage != "no data available" && Model.AchievementRateMessage != "Not currently collected for this training organisation")
+          if (Model.AchievementRateMessage != "no data available")
          {
 
 
@@ -709,14 +709,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"font-small\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Source: <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 8853), Tuple.Create("\"", 8891)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 8669), Tuple.Create("\"", 8707)
 
 #line 218 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 8860), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
+, Tuple.Create(Tuple.Create("", 8676), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
 
 #line default
 #line hidden
-, 8860), false)
+, 8676), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -771,16 +771,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9260), Tuple.Create("\"", 9285)
-, Tuple.Create(Tuple.Create("", 9268), Tuple.Create("width:", 9268), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 9076), Tuple.Create("\"", 9101)
+, Tuple.Create(Tuple.Create("", 9084), Tuple.Create("width:", 9084), true)
 
 #line 231 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 9274), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 9090), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 9275), false)
-, Tuple.Create(Tuple.Create("", 9284), Tuple.Create("%", 9284), true)
+, 9091), false)
+, Tuple.Create(Tuple.Create("", 9100), Tuple.Create("%", 9100), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
