@@ -86,7 +86,7 @@ namespace Sfa.Das.Web.Pacts
             //Arrange
             const string frameworkId = "403-2-1";
             MockProviderService
-                .UponReceiving($"a request to retrieve standard with id '{frameworkId}'")
+                .UponReceiving($"a request to retrieve framework with id '{frameworkId}'")
                 .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
@@ -126,7 +126,7 @@ namespace Sfa.Das.Web.Pacts
             //Arrange
             const string frameworkId = "1-2-3";
             MockProviderService
-                .UponReceiving($"a request to retrieve standard with id '{frameworkId}'")
+                .UponReceiving($"a request to retrieve framework with id '{frameworkId}'")
                 .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
