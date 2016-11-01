@@ -6,6 +6,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         public int Ukprn { get; set; }
 
+        public bool Hei { get; set; }
+
         public string ProviderName { get; set; }
 
         public int StandardCode { get; set; }

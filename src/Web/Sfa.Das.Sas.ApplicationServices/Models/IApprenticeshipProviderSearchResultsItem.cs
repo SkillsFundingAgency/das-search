@@ -19,6 +19,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string Phone { get; set; }
         string ApprenticeshipInfoUrl { get; set; }
         int Ukprn { get; set; }
+        bool Hei { get; set; }
         string Website { get; set; }
         IEnumerable<TrainingLocation> TrainingLocations { get; set; }
         int? MatchingLocationId { get; set; }

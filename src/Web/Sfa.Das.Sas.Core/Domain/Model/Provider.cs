@@ -4,6 +4,8 @@
     {
         public int UkPrn { get; set; }
 
+        public bool Hei { get; set; }
+
         public string Name { get; set; }
 
         public bool NationalProvider { get; set; }

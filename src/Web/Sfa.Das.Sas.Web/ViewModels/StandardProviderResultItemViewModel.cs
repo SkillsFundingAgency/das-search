@@ -7,6 +7,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
     {
         public int UkPrn { get; set; }
 
+        public bool Hei { get; set; }
+
         public string ProviderName { get; set; }
 
         public bool NationalProvider { get; set; }

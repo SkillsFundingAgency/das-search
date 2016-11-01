@@ -5,6 +5,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     public sealed class FrameworkProviderSearchResultsItem : IApprenticeshipProviderSearchResultsItem
     {
         public int Ukprn { get; set; }
+        public bool Hei { get; set; }
 
         public string ProviderName { get; set; }
 

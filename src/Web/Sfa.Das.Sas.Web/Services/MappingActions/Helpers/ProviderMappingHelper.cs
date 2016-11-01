@@ -21,6 +21,21 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{level}%";
         }
 
+        internal static string GetPercentageText(double? level, bool hei)
+        {
+            if (level == null && hei)
+            {
+                return "Not currently collected for this training organisation";
+            }
+
+            if (level == null)
+            {
+                return "no data available";
+            }
+
+            return $"{level}%";
+        }
+
         internal static string GetLocationAddressLine(TrainingLocation providerLocation)
         {
             return GetCommaList(
