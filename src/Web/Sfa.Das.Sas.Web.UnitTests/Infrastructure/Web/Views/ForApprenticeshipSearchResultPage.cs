@@ -495,5 +495,56 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             GetPartial(html, ".new-apprenticeship-search").Should().NotBeNullOrEmpty();
             GetPartial(html, ".new-apprenticeship-search").Should().Be("Start a new search");
         }
+
+        [Test]
+        public void ShouldHaveDataForGoogleAnalytic()
+        {
+            var searchPage = new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
+            var searchTerm = "Search Term for user";
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 1,
+                SearchTerm = searchTerm,
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel { Title = "Test" }
+                              },
+                AggregationLevel = aggList
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetAttribute(html, "#ga-search-term", "value").Should().BeEquivalentTo(searchTerm);
+        }
+
+        [Test]
+        public void ShouldDetermineEmptyResultsForGoogleAnalytic()
+        {
+            var searchPage = new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
+            var modelWithResults = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 1,
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel { Title = "Test" }
+                              },
+                AggregationLevel = aggList
+            };
+
+            var modelWithoutResults = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 1,
+                Results = new ApprenticeshipSearchResultItemViewModel[0],
+                AggregationLevel = aggList
+            };
+
+            var htmlWithResults = searchPage.RenderAsHtml(modelWithResults).ToAngleSharp();
+            var htmlWithoutResults = searchPage.RenderAsHtml(modelWithoutResults).ToAngleSharp();
+
+            GetAttribute(htmlWithResults, "#ga-no-result", "value").Should().BeEquivalentTo("False");
+            GetAttribute(htmlWithoutResults, "#ga-no-result", "value").Should().BeEquivalentTo("True");
+        }
     }
 }
