@@ -7,6 +7,10 @@
 }
 
 <main id="content" role="main">
+    <input type="hidden" value="@Model.PostCode.FormatPostcode()" id="ga-postcode"/>
+    <input type="hidden" value="@Model.Title" id="ga-apprenticeship-title"/>
+    <input type="hidden" value="@Model.Hits.IsNullOrEmpty().ToString()" id="ga-no-result"/>
+
     @if (Model.Hits.Count() != 0)
     {
         <p class="small-btm-margin">
@@ -87,30 +91,19 @@
 
 </main>
 
-
-
-@if (Model.TotalResults == 0)
-{
-    <script>
-        window.onload = function () {
-            SearchAndShortlist.analytics.pushEvent("Provider Search", "No results", "Search");
-        }
-    </script>
-}
-
 @helper GetPaginationBackLink()
 {
-if (Model.ActualPage > 1)
-{
-    var previousPage = @Model.ActualPage - 1;
-    var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
+    if (Model.ActualPage > 1)
+    {
+        var previousPage = @Model.ActualPage - 1;
+        var url = @Url.Action("FrameworkResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
 
-        <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
-            <i class="arrow-button fa fa-angle-left"></i>
-            <span class="description">Previous <span class="hide-mob">page</span></span>
-            <span class="counter">@previousPage of @Model.LastPage</span>
-        </a>
-}
+            <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
+                <i class="arrow-button fa fa-angle-left"></i>
+                <span class="description">Previous <span class="hide-mob">page</span></span>
+                <span class="counter">@previousPage of @Model.LastPage</span>
+            </a>
+    }
 }
 
 

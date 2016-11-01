@@ -941,5 +941,48 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
             GetAttribute(html, "article a", "attr-ga-result-interval", resultIndex).Should().BeEquivalentTo(expectedText);
         }
+
+        [Test]
+        public void ShouldHaveDataForGoogleAnalytic()
+        {
+            var searchPage = new FrameworkResults();
+            var title = "This is a title, Level 3";
+            var postcode = "N17";
+            var model = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                Title = title,
+                PostCode = postcode,
+                Hits = new FrameworkProviderResultItemViewModel[0]
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetAttribute(html, "#ga-apprenticeship-title", "value").Should().BeEquivalentTo(title);
+            GetAttribute(html, "#ga-postcode", "value").Should().BeEquivalentTo(postcode);
+        }
+
+        [Test]
+        public void ShouldDetermineEmptyResultsForGoogleAnalytic()
+        {
+            var searchPage = new FrameworkResults();
+            var modelWithResults = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                Hits = new[] { new FrameworkProviderResultItemViewModel() }
+            };
+
+            var modelWithoutResults = new ProviderFrameworkSearchResultViewModel
+            {
+                TotalResults = 1,
+                Hits = new FrameworkProviderResultItemViewModel[0]
+            };
+
+            var htmlWithResults = searchPage.RenderAsHtml(modelWithResults).ToAngleSharp();
+            var htmlWithoutResults = searchPage.RenderAsHtml(modelWithoutResults).ToAngleSharp();
+
+            GetAttribute(htmlWithResults, "#ga-no-result", "value").Should().BeEquivalentTo("False");
+            GetAttribute(htmlWithoutResults, "#ga-no-result", "value").Should().BeEquivalentTo("True");
+        }
     }
 }

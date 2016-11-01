@@ -899,18 +899,57 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         {
             var searchPage = new StandardProviderInformation();
 
-            var results = from ll in new StandardProviderResultItemViewModel[10]
-                          select new StandardProviderResultItemViewModel { ProviderName = "Test" };
+            var results = from ll in new StandardProviderResultItemViewModel[10] select new StandardProviderResultItemViewModel { ProviderName = "Test" };
 
-            var model = new ProviderStandardSearchResultViewModel
-            {
-                TotalResults = 10,
-                Hits = results,
-                ActualPage = acctualPage,
-                ResultsToTake = 10,
-            };
+            var model = new ProviderStandardSearchResultViewModel { TotalResults = 10, Hits = results, ActualPage = acctualPage, ResultsToTake = 10, };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
             GetAttribute(html, "article a", "attr-ga-result-interval", resultIndex).Should().BeEquivalentTo(expectedText);
+        }
+
+        [Test]
+        public void ShouldHaveDataForGoogleAnalytic()
+        {
+            var searchPage = new StandardResults();
+            var nameOfStandard = "Name of standard";
+            var level = 2;
+            var title = $"{nameOfStandard}, level {level}";
+            var postcode = "N17";
+            var model = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                StandardName = nameOfStandard,
+                StandardLevel = level,
+                PostCode = postcode,
+                Hits = new StandardProviderResultItemViewModel [0]
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetAttribute(html, "#ga-apprenticeship-title", "value").Should().BeEquivalentTo(title);
+            GetAttribute(html, "#ga-postcode", "value").Should().BeEquivalentTo(postcode);
+        }
+
+        [Test]
+        public void ShouldDetermineEmptyResultsForGoogleAnalytic()
+        {
+            var searchPage = new StandardResults();
+            var modelWithResults = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                Hits = new[] { new StandardProviderResultItemViewModel() }
+            };
+
+            var modelWithoutResults = new ProviderStandardSearchResultViewModel
+            {
+                TotalResults = 1,
+                Hits = new StandardProviderResultItemViewModel[0]
+            };
+
+            var htmlWithResults = searchPage.RenderAsHtml(modelWithResults).ToAngleSharp();
+            var htmlWithoutResults = searchPage.RenderAsHtml(modelWithoutResults).ToAngleSharp();
+
+            GetAttribute(htmlWithResults, "#ga-no-result", "value").Should().BeEquivalentTo("False");
+            GetAttribute(htmlWithoutResults, "#ga-no-result", "value").Should().BeEquivalentTo("True");
         }
     }
 }
