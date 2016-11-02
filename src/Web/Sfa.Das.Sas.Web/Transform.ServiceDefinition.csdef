@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="Sfa.Das.Sas.Web.CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6" xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <WebRole vmsize="#{CloudService.Size}" xdt:Transform="SetAttributes(vmsize)" >
-    <Sites>
-      <Site name="Web" xdt:Locator="Match(name)">
-        <Bindings>
-          <Binding name="Binding1" endpointName="#{EnvEndpoint}" xdt:Transform="SetAttributes(endpointName)" xdt:Locator="Match(name)" />
-        </Bindings>
-      </Site>
-    </Sites>
   </WebRole>
 </ServiceDefinition>
