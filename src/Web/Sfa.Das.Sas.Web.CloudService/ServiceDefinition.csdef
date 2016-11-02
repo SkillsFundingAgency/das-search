@@ -4,7 +4,7 @@
     <Sites>
       <Site name="Web">
         <Bindings>
-          <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="Endpoint1" endpointName="#{EnvEndpoint}" />
         </Bindings>
       </Site>
     </Sites>
@@ -22,6 +22,7 @@
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+	  <InputEndpoint name="LoadBalancedEndpoint" protocol="http" port="80" loadbalancer="#{AzureInternalLoadBalancerName}"/>
     </Endpoints>
     <Certificates>
     </Certificates>
