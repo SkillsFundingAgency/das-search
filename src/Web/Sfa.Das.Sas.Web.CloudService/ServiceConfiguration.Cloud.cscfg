@@ -31,7 +31,7 @@
       </AccessControl>
     </AccessControls>
     <EndpointAcls>
-      <EndpointAcl role="Sfa.Das.Sas.Web" endPoint="Endpoint1" accessControl="RoleAccess" />
+      <EndpointAcl role="Sfa.Das.Sas.Web" endPoint="SimpleEndpoint" accessControl="RoleAccess" />
     </EndpointAcls>
   </NetworkConfiguration>
 </ServiceConfiguration>
