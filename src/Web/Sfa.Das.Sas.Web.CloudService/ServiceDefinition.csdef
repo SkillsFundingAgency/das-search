@@ -22,7 +22,7 @@
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="SimpleEndpoint" protocol="http" port="80" />
-	  <InputEndpoint name="LoadBalancedEndpoint" protocol="http" port="80" loadbalancer="#{AzureInternalLoadBalancerName}"/>
+	    <InputEndpoint name="LoadBalancedEndpoint" protocol="http" port="80" loadBalancer="AzureInternalLoadBalancerName"/>
     </Endpoints>
     <Certificates>
     </Certificates>
