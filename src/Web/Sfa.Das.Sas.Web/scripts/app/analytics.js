@@ -15,14 +15,6 @@
 
     analytics.init = function () {
 
-        $("#apprenticeship-results .result a:lt(3)").on("click", function () {
-            analytics.pushEvent("Apprenticeship Search Results", "top3");
-        });
-
-        $("#apprenticeship-results .result a:gt(2)").on("click", function () {
-            analytics.pushEvent("Apprenticeship Search Results", "results");
-        });
-
         $("#start-button").on("click", function () {
             analytics.pushEvent("Start page", "Start button");
         });
