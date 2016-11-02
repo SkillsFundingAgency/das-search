@@ -1,5 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.Services
-@if (@SettingsFinder.IsFeatureAvailable("GoogleTagManager"))
+@{var gtmTrackingId = System.Configuration.ConfigurationManager.AppSettings["ga.gtm.trackingid"];}
+@if (!string.IsNullOrEmpty(gtmTrackingId))
 {
     <!-- Google Tag Manager -->
     <script>
@@ -8,7 +9,7 @@
     );var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-T3CZC2');</script>
+    })(window, document, 'script', 'dataLayer', '@gtmTrackingId');</script>
     <!-- End Google Tag Manager -->
 }
 @{var aiInstrumentationKey = @Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey;}
