@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -25,9 +26,12 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var viewModel = _healthService.CreateModel();
 
-            var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            var version = assembly.GetName().Version.ToString();
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
             viewModel.BuildId = _healthSettings.BuildId;
-            viewModel.Version = version;
+            viewModel.Version = fileVersionInfo.ProductVersion;
             viewModel.AssemblyVersion = version;
 
             if (Request.AcceptTypes.Contains("application/json"))
