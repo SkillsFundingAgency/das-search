@@ -23,12 +23,7 @@ Given I navigated to the Start page
 
 	When I choose First Framework Result
 	Then I am on the Framework Details page
-	When I wait for the view to become active
 	When I choose Search Page Button
-	Then I am on the Framework Provider Search page
-
-	When I choose Search Button
-
 	Then I am on the Framework Provider Search page
 
 	When I enter data

@@ -22,7 +22,6 @@ Scenario:Should find a standard and provider
 
 	When I choose First Standard Result
 	Then I am on the Standard Details page	
-	When I wait for the view to become active
 	When I choose Search Page Button
 	Then I am on the Standard Provider Search page
 	When I enter data
