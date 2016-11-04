@@ -8,11 +8,7 @@
             There was a problem performing a search. Try again later.
         </p>
     }
-    else if (Model.ShowAll && Model.TotalResults > 0)
-    {
-        @RenderAllResults()
-    }
-    else if (Model.TotalResults > 0)
+    else
     {
         @RenderMessage()
     }
@@ -20,28 +16,16 @@
     @if (Model.TotalResults > 0 & Model.NationalProviders != null && Model.NationalProviders.Count > 0)
     {
         <p>
-            Results labelled <span class="tag tag-national">National</span> are training providers who are willing to offer apprenticeship training across England.
+            Results labelled <span class="tag tag-national">National</span> are training options run by providers who are willing to offer training across England.
         </p>
     }
 
 </div>
 
-@helper  RenderAllResults()
-{
-    var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
-    <p class="small-btm-margin">
-        <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.
-    </p>
-    <p class="small-btm-margin">
-        Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.
-    </p>
-}
-
 @helper  RenderMessage()
 {
-    var providerLabel = Model.TotalResults > 1 ? "providers" : "provider";
     <p class="small-btm-margin">
-        <b>@Model.TotalResults</b> training @providerLabel for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship.
+        There are <b>@Model.TotalResults</b> training options for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.
     </p>
     <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.

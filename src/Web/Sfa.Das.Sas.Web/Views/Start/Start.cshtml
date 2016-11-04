@@ -2,42 +2,24 @@
     ViewBag.Title = "Skills Funding Agency (SFA)";
 }
 <main id="content" role="main">
-
     <div class="grid-row">
         <div class="column-two-thirds">
-
             <hgroup>
                 <h1 class="heading-xlarge">
                     Find apprenticeship training
                 </h1>
             </hgroup>
-
             <p>For employers looking to take on apprentices.</p>
 
-            <p>You can:</p>
+            <p>Use this service to:</p>
 
             <ul class="list list-bullet">
                 <li>search for apprenticeship training by job role or keyword</li>
-                <li>search for training providers by postcode</li>
+                <li>find training providers who offer the apprenticeship training you choose</li>
             </ul>
 
             @Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" })
 
-            <h2 class="heading-large">What you need to know</h2>
-
-            <p>Apprentices are aged 16 and over and combine working with learning. They can be new or current employees.</p>
-
-            <p>If you hire an apprentice you must:</p>
-
-            <ul class="list list-bullet">
-                <li>usually employ them for at least 30 hours a week</li>
-                <li>pay them at least the minimum wage for apprentices</li>
-                <li>offer them the same conditions and benefits as other employees working at a similar level</li>
-                <li>provide experience and opportunities to help with future job progression</li>
-                <li>allow them to attend training and assessment during their working hours</li>
-            </ul>
-
         </div>
     </div>
-
 </main>
