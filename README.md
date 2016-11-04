@@ -16,6 +16,9 @@ Find Apprenticeship Training Website
 *Sfa.Das.Sas.Web*  
 Employer website to search apprenticeship and providers.
 
+Build dependencies:
+- [Razor Generator](https://visualstudiogallery.msdn.microsoft.com/1f6ec6ff-e89b-4c47-8e79-d2d68df894ec) available from Visual Studio Extensions Gallery
+
 External dependencies: 
 - [Postcodes.io](http://postcodes.io)
 - Searchable index with apprenticeships and providers (Elasticsearch)
@@ -24,7 +27,7 @@ External dependencies:
 ### Tests
 - Unit tests
 - UI (selenium) test in separate solution /webtest/DASWebTests.sln
-- View test using razor generator
+- View test using [Razor Generator](https://visualstudiogallery.msdn.microsoft.com/1f6ec6ff-e89b-4c47-8e79-d2d68df894ec)
 
   
 Apprenticeship Search Indexer 
