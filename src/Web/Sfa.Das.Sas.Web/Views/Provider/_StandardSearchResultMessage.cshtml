@@ -8,7 +8,7 @@
             There was a problem performing a search. Try again later.
         </p>
     }
-    else
+    else if(Model.TotalResults > 0)
     {
         @RenderMessage()
     }
@@ -25,7 +25,14 @@
 @helper  RenderMessage()
 {
     <p class="small-btm-margin">
-        There are <b>@Model.TotalResults</b> training options for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.
+        @if (Model.TotalResults > 1)
+        {
+            <text>There are <b>@Model.TotalResults</b> training options for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.</text>
+        }
+        else
+        {
+            <text>There is <b>1</b> training option for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship in England.</text>
+        }
     </p>
     <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.

@@ -1,6 +1,5 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel
-
 <div class="result-message">
     @if (Model.HasError)
     {
@@ -8,7 +7,7 @@
             There was a problem performing a search. Try again later.
         </p>
     }
-    else
+    else if(Model.TotalResults > 0)
     {
         @RenderMessage()
     }
@@ -19,13 +18,18 @@
             Results labelled <span class="tag tag-national">National</span> are training options run by providers who are willing to offer training across England.
         </p>
     }
-
 </div>
-
 @helper  RenderMessage()
 {
     <p class="small-btm-margin">
-        There are <b>@Model.TotalResults</b> training options for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship in England.
+        @if (Model.TotalResults > 1)
+        {
+            <text>There are <b>@Model.TotalResults</b> training options for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship in England.</text>
+        }
+        else
+        {
+            <text>There is <b>1</b> training option for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship in England.</text>
+        }
     </p>
     <p class="small-btm-margin">
         Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.

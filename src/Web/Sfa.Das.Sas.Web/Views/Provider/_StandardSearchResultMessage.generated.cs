@@ -57,11 +57,29 @@ WriteLiteralTo(__razor_helper_writer, "    <p");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"small-btm-margin\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\n        There are <b>");
+WriteLiteralTo(__razor_helper_writer, ">\n");
 
 
 #line 28 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-WriteTo(__razor_helper_writer, Model.TotalResults);
+        
+
+#line default
+#line hidden
+
+#line 28 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+         if (Model.TotalResults > 1)
+        {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "            ");
+
+WriteLiteralTo(__razor_helper_writer, "There are <b>");
+
+
+#line 30 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+ WriteTo(__razor_helper_writer, Model.TotalResults);
 
 
 #line default
@@ -69,8 +87,8 @@ WriteTo(__razor_helper_writer, Model.TotalResults);
 WriteLiteralTo(__razor_helper_writer, "</b> training options for the <b>");
 
 
-#line 28 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                           WriteTo(__razor_helper_writer, Model.StandardName);
+#line 30 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                                                     WriteTo(__razor_helper_writer, Model.StandardName);
 
 
 #line default
@@ -78,13 +96,57 @@ WriteLiteralTo(__razor_helper_writer, "</b> training options for the <b>");
 WriteLiteralTo(__razor_helper_writer, ", level ");
 
 
-#line 28 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
-                                                                      WriteTo(__razor_helper_writer, Model.StandardLevel);
+#line 30 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                                                                                WriteTo(__razor_helper_writer, Model.StandardLevel);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship in England.\n    </p>\n");
+WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship in England.");
+
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 31 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+        }
+        else
+        {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "            ");
+
+WriteLiteralTo(__razor_helper_writer, "There is <b>1</b> training option for the <b>");
+
+
+#line 34 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                                 WriteTo(__razor_helper_writer, Model.StandardName);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, ", level ");
+
+
+#line 34 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+                                                            WriteTo(__razor_helper_writer, Model.StandardLevel);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship in England.");
+
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 35 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+        }
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "    </p>\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <p");
 
@@ -93,7 +155,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"small-btm-margin\"");
 WriteLiteralTo(__razor_helper_writer, ">\n        Results are ordered by distance from \'<b>");
 
 
-#line 31 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 38 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
                    WriteTo(__razor_helper_writer, Model.PostCode.FormatPostcode());
 
 
@@ -102,14 +164,14 @@ WriteLiteralTo(__razor_helper_writer, ">\n        Results are ordered by distanc
 WriteLiteralTo(__razor_helper_writer, "</b>\'.\n    </p>\n");
 
 
-#line 33 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 33 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
+#line 40 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
 }
 #line default
 #line hidden
@@ -141,7 +203,7 @@ WriteLiteral("        <p>\n            There was a problem performing a search. 
             
             #line 10 "..\..\Views\Provider\_StandardSearchResultMessage.cshtml"
     }
-    else
+    else if(Model.TotalResults > 0)
     {
         
             
