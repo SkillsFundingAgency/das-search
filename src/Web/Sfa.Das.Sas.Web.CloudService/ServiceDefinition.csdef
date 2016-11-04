@@ -21,7 +21,7 @@
 			<Setting name="AchievementRateUrl" />
 		</ConfigurationSettings>
 		<Endpoints>
-			<InputEndpoint name="SimpleEndpoint" protocol="http" port="80" loadBalancer="test"/>
+			<InputEndpoint name="SimpleEndpoint" protocol="http" port="80"/>
 		</Endpoints>
 		<Certificates/>
 	</WebRole>
