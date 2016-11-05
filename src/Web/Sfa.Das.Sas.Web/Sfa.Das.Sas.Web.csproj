@@ -640,10 +640,10 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js.map" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.map" />
-    <None Include="Transform.ServiceConfiguration.p.config">
+    <None Include="Transform.ServiceConfiguration.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Transform.ServiceConfiguration.pp.config">
+    <None Include="Transform.ServiceConfiguration.PreProd.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Transform.ServiceDefinition.csdef">
@@ -681,10 +681,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Health\Start.cshtml" />
-    <None Include="Transform.ServiceDefinition.p.config">
+    <None Include="Transform.ServiceDefinition.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Transform.ServiceDefinition.pp.config" />
+    <None Include="Transform.ServiceDefinition.PreProd.config" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
