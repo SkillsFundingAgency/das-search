@@ -681,7 +681,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Health\Start.cshtml" />
-    <None Include="Transform.ServiceDefinition.PreProd.config">
+    <None Include="Transform.ServiceDefinition.pp.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Transform.ServiceDefinition.Prod.config">
