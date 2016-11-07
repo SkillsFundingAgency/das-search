@@ -44,7 +44,7 @@
 @helper  RenderMessageOneResult()
 {
     <p id="result-summary" class="results-one small-btm-margin">
-        <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
+        There is <b>@Model.TotalResults</b> apprenticeship matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()
 }
@@ -52,7 +52,7 @@
 @helper  RenderMessage()
 {
     <p id="result-summary" class="results-several small-btm-margin">
-        <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
+        There are <b>@Model.TotalResults</b> apprenticeships matching your search for '<b>@Model.SearchTerm</b>'.
     </p>
     @RenderStandardMessage()
 }

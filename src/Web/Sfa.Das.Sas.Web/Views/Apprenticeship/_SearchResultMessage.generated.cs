@@ -178,7 +178,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"results-one small-btm-margin\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        <b>");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        There is <b>");
 
 
 #line 47 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -191,7 +191,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> apprenticeship matching your search 
 
 
 #line 47 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
-                                                 WriteTo(__razor_helper_writer, Model.SearchTerm);
+                                                          WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
@@ -244,7 +244,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"result-summary\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"results-several small-btm-margin\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n        <b>");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        There are <b>");
 
 
 #line 55 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
@@ -257,7 +257,7 @@ WriteLiteralTo(__razor_helper_writer, "</b> apprenticeships matching your search
 
 
 #line 55 "..\..\Views\Apprenticeship\_SearchResultMessage.cshtml"
-                                                  WriteTo(__razor_helper_writer, Model.SearchTerm);
+                                                            WriteTo(__razor_helper_writer, Model.SearchTerm);
 
 
 #line default
