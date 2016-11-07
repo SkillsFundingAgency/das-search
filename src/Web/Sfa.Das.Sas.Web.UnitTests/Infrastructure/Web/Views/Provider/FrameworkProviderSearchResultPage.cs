@@ -97,7 +97,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-message p").Should().Contain("There is 1 training option for the Test name: Pathway test name, level 3 apprenticeship in England.");
+            GetPartial(html, ".result-message p").Should().Contain("There is 1 training option for the Test name: Pathway test name, level 3 apprenticeship.");
         }
 
         [Test]
@@ -143,9 +143,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-message p").Should().Contain("There is 1 training option for the Test name: Pathway test name, level 0 apprenticeship in England.");
+            GetPartial(html, ".result-message p").Should().Contain("There is 1 training option for the Test name: Pathway test name, level 0 apprenticeship.");
 
-            GetPartial(html, "p").Should().Contain("There is 1 training option for the Test name: Pathway test name, level 0 apprenticeship in England.");
+            GetPartial(html, "p").Should().Contain("There is 1 training option for the Test name: Pathway test name, level 0 apprenticeship.");
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".result-message p").Should().Contain("There are 7 training options for the Test name: Pathway test name, level 2 apprenticeship in England.");
+            this.GetPartial(html, ".result-message p").Should().Contain("There are 7 training options for the Test name: Pathway test name, level 2 apprenticeship.");
         }
 
         [Test]
@@ -261,7 +261,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training options for the Test name: Pathway test name, level 0 apprenticeship in England.");
+            this.GetPartial(html, "p").Should().Contain("There are 7 training options for the Test name: Pathway test name, level 0 apprenticeship.");
         }
 
         [Test]

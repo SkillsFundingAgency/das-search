@@ -7,7 +7,11 @@
             There was a problem performing a search. Try again later.
         </p>
     }
-    else if(Model.TotalResults > 0)
+    else if (Model.TotalResults > 0 && Model.ShowAll)
+    {
+        @RenderAllMessage()
+    }
+    else if (Model.TotalResults > 0)
     {
         @RenderMessage()
     }
@@ -19,7 +23,25 @@
         </p>
     }
 </div>
+
 @helper  RenderMessage()
+{
+    <p class="small-btm-margin">
+        @if (Model.TotalResults > 1)
+        {
+            <text>There are <b>@Model.TotalResults</b> training options for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship.</text>
+        }
+        else
+        {
+            <text>There is <b>1</b> training option for the <b>@Model.Title, level @Model.FrameworkLevel</b> apprenticeship.</text>
+        }
+    </p>
+    <p class="small-btm-margin">
+        Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.
+    </p>
+}
+
+@helper  RenderAllMessage()
 {
     <p class="small-btm-margin">
         @if (Model.TotalResults > 1)
