@@ -684,7 +684,9 @@
     <None Include="Transform.ServiceDefinition.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Transform.ServiceDefinition.PreProd.config" />
+    <None Include="Transform.ServiceDefinition.PreProd.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
