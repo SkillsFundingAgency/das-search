@@ -4,7 +4,7 @@
     {
         public int UkPrn { get; set; }
 
-        public bool Hei { get; set; }
+        public bool IsHigherEducationInstitute { get; set; }
 
         public string Name { get; set; }
 
