@@ -81,6 +81,7 @@ namespace Sfa.Das.Web.Pacts
         }
 
         [Test]
+        [Ignore("Dependant on Provider state")]
         public void ShouldGetFramework()
         {
             //Arrange
