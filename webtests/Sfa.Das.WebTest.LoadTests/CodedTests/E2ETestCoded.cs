@@ -41,34 +41,34 @@ namespace DAS_Search_CI_Environment
                 this.ValidateResponseOnPageComplete += new EventHandler<ValidationEventArgs>(validationRule2.Validate);
             }
 
-            WebTestRequest request1 = new WebTestRequest("http://das-pp-search.cloudapp.net/");
+            WebTestRequest request1 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/");
             request1.ReportingName = "Homepage";
             request1.ResponseTimeGoal = 3F;
             yield return request1;
             request1 = null;
 
-            WebTestRequest request2 = new WebTestRequest("http://das-pp-search.cloudapp.net/Apprenticeship/Search");
+            WebTestRequest request2 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Search");
             request2.ReportingName = "Search Page";
             request2.ResponseTimeGoal = 3F;
             request2.Method = "POST";
-            request2.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/"));
+            request2.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/"));
             FormPostHttpBody request2Body = new FormPostHttpBody();
             request2.Body = request2Body;
             yield return request2;
             request2 = null;
 
-            WebTestRequest request3 = new WebTestRequest("http://das-pp-search.cloudapp.net/Apprenticeship/SearchResults");
+            WebTestRequest request3 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/SearchResults");
             request3.ReportingName = "Search Results Page";
             request3.ResponseTimeGoal = 3F;
-            request3.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Apprenticeship/Search"));
+            request3.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Search"));
             request3.QueryStringParameters.Add("Keywords", "business", false, false);
             yield return request3;
             request3 = null;
 
-            WebTestRequest request4 = new WebTestRequest("http://das-pp-search.cloudapp.net/Apprenticeship/Framework/49021");
+            WebTestRequest request4 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Framework/49021");
             request4.ReportingName = "Framework Page";
             request4.ResponseTimeGoal = 3F;
-            request4.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Apprenticeship/SearchResults?Keywords=business"));
+            request4.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/SearchResults?Keywords=business"));
             ExtractHiddenFields extractionRule1 = new ExtractHiddenFields();
             extractionRule1.Required = true;
             extractionRule1.HtmlDecode = true;
@@ -77,19 +77,19 @@ namespace DAS_Search_CI_Environment
             yield return request4;
             request4 = null;
 
-            WebTestRequest request5 = new WebTestRequest("http://das-pp-search.cloudapp.net/Provider/FrameworkResults");
+            WebTestRequest request5 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Provider/FrameworkResults");
             request5.ReportingName = "Provider Results Page";
             request5.ResponseTimeGoal = 3F;
-            request5.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Apprenticeship/Framework/49021"));
+            request5.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Framework/49021"));
             request5.QueryStringParameters.Add("apprenticeshipid", this.Context["$HIDDEN1.apprenticeshipid"].ToString(), false, false);
             request5.QueryStringParameters.Add("PostCode", "WV1+4DJ", false, false);
             yield return request5;
             request5 = null;
 
-            WebTestRequest request6 = new WebTestRequest("http://das-pp-search.cloudapp.net/Provider/Detail");
+            WebTestRequest request6 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Provider/Detail");
             request6.ReportingName = "Provider Detail Page";
             request6.ResponseTimeGoal = 3F;
-            request6.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Provider/FrameworkResults?apprenticeshipid=4902" +
+            request6.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Provider/FrameworkResults?apprenticeshipid=4902" +
                         "1&PostCode=WV1+4DJ"));
             request6.QueryStringParameters.Add("providerId", "10031241", false, false);
             request6.QueryStringParameters.Add("locationId", "11966", false, false);
@@ -97,34 +97,34 @@ namespace DAS_Search_CI_Environment
             yield return request6;
             request6 = null;
 
-            WebTestRequest request7 = new WebTestRequest("http://das-pp-search.cloudapp.net/");
+            WebTestRequest request7 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/");
             request7.ReportingName = "HomePage";
             request7.ResponseTimeGoal = 3F;
             yield return request7;
             request7 = null;
 
-            WebTestRequest request8 = new WebTestRequest("http://das-pp-search.cloudapp.net/Apprenticeship/Search");
+            WebTestRequest request8 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Search");
             request8.ReportingName = "Search Page";
             request8.ResponseTimeGoal = 3F;
             request8.Method = "POST";
-            request8.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/"));
+            request8.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/"));
             FormPostHttpBody request8Body = new FormPostHttpBody();
             request8.Body = request8Body;
             yield return request8;
             request8 = null;
 
-            WebTestRequest request9 = new WebTestRequest("http://das-pp-search.cloudapp.net/Apprenticeship/SearchResults");
+            WebTestRequest request9 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/SearchResults");
             request9.ReportingName = "Search Results";
             request9.ResponseTimeGoal = 3F;
-            request9.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Apprenticeship/Search"));
+            request9.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Search"));
             request9.QueryStringParameters.Add("Keywords", "digital", false, false);
             yield return request9;
             request9 = null;
 
-            WebTestRequest request10 = new WebTestRequest("http://das-pp-search.cloudapp.net/Apprenticeship/Framework/57932");
+            WebTestRequest request10 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Framework/57932");
             request10.ReportingName = "Second Framework Page";
             request10.ResponseTimeGoal = 3F;
-            request10.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Apprenticeship/SearchResults?Keywords=digital"));
+            request10.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/SearchResults?Keywords=digital"));
             ExtractHiddenFields extractionRule2 = new ExtractHiddenFields();
             extractionRule2.Required = true;
             extractionRule2.HtmlDecode = true;
@@ -133,19 +133,19 @@ namespace DAS_Search_CI_Environment
             yield return request10;
             request10 = null;
 
-            WebTestRequest request11 = new WebTestRequest("http://das-pp-search.cloudapp.net/Provider/FrameworkResults");
+            WebTestRequest request11 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Provider/FrameworkResults");
             request11.ReportingName = "Provider Results Page";
             request11.ResponseTimeGoal = 3F;
-            request11.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Apprenticeship/Framework/57932"));
+            request11.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Apprenticeship/Framework/57932"));
             request11.QueryStringParameters.Add("apprenticeshipid", this.Context["$HIDDEN1.apprenticeshipid"].ToString(), false, false);
             request11.QueryStringParameters.Add("PostCode", "WV1+4DJ", false, false);
             yield return request11;
             request11 = null;
 
-            WebTestRequest request12 = new WebTestRequest("http://das-pp-search.cloudapp.net/Provider/Detail");
+            WebTestRequest request12 = new WebTestRequest("https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Provider/Detail");
             request12.ReportingName = "Provider Details Page";
             request12.ResponseTimeGoal = 3F;
-            request12.Headers.Add(new WebTestRequestHeader("Referer", "http://das-pp-search.cloudapp.net/Provider/FrameworkResults?apprenticeshipid=4902" +
+            request12.Headers.Add(new WebTestRequestHeader("Referer", "https://findapprenticeshiptraining-pp.sfa.bis.gov.uk/Provider/FrameworkResults?apprenticeshipid=4902" +
                         "1&PostCode=WV1+4DJ"));
             request12.QueryStringParameters.Add("providerId", "10031241", false, false);
             request12.QueryStringParameters.Add("locationId", "1864", false, false);
