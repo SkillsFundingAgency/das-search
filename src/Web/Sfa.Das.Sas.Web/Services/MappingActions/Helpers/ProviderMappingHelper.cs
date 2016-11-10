@@ -9,9 +9,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
     using Sfa.Das.Sas.ApplicationServices.Models;
 
-    internal static class ProviderMappingHelper
+    public static class ProviderMappingHelper
     {
-        internal static string GetPercentageText(double? level)
+        public static string GetPercentageText(double? level)
         {
             if (level == null)
             {
@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{level}%";
         }
 
-        internal static string GetPercentageText(double? level, bool hei)
+        public static string GetPercentageText(double? level, bool hei)
         {
             if (level == null && hei)
             {
