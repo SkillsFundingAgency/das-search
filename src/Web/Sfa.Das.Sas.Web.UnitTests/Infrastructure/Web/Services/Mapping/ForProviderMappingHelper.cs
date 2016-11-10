@@ -1,11 +1,10 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services.Mapping
+﻿using System.Collections.Generic;
+using FluentAssertions;
+using NUnit.Framework;
+using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services.Mapping
 {
-    using FluentAssertions;
-
-    using NUnit.Framework;
-
-    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
-
     [TestFixture]
     public class ForProviderMappingHelper
     {
@@ -23,6 +22,24 @@
         public void WhenGetPercentageText(double? input, bool hei, string expected)
         {
             ProviderMappingHelper.GetPercentageText(input, hei).Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
+        public void WhenGetCommaList()
+        {
+            string[] list = {
+                "hello",
+                null,
+                "world",
+                string.Empty,
+                "sample",
+                " ",
+                "end"
+            };
+
+            var expected = "hello, world, sample, end";
+
+            ProviderMappingHelper.GetCommaList(list).Should().BeEquivalentTo(expected);
         }
     }
 }

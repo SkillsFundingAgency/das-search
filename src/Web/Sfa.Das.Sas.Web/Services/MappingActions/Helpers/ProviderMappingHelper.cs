@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{deliveryOptionsMessage}";
         }
 
-        internal static string GetCommaList(params string [] list)
+        public static string GetCommaList(params string [] list)
         {
             return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
         }
