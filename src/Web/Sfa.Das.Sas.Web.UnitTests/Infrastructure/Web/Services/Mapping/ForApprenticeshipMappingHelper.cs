@@ -7,7 +7,7 @@
     using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 
     [TestFixture]
-    public class ForForApprenticeshipMappingHelper
+    public class ForApprenticeshipMappingHelper
     {
         [TestCase("", "")]
         [TestCase("Abba", "Abba")]

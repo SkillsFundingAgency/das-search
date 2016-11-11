@@ -9,9 +9,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
     using Sfa.Das.Sas.ApplicationServices.Models;
 
-    internal static class ProviderMappingHelper
+    public static class ProviderMappingHelper
     {
-        internal static string GetPercentageText(double? level)
+        public static string GetPercentageText(double? level)
         {
             if (level == null)
             {
@@ -21,18 +21,22 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{level}%";
         }
 
-        internal static string GetLocationAddressLine(TrainingLocation providerLocation)
+        public static string GetPercentageText(double? level, bool hei)
         {
-            return GetCommaList(
-                providerLocation.LocationName,
-                providerLocation.Address.Address1,
-                providerLocation.Address.Address2,
-                providerLocation.Address.Town,
-                providerLocation.Address.County,
-                providerLocation.Address.Postcode);
+            if (level == null && hei)
+            {
+                return "Not currently collected for this training organisation";
+            }
+
+            if (level == null)
+            {
+                return "no data available";
+            }
+
+            return $"{level}%";
         }
 
-        internal static string GetDeliveryOptionText(List<string> deliveryOptions)
+        public static string GetDeliveryOptionText(List<string> deliveryOptions)
         {
             var deliveryOptionsMessage = string.Empty;
             if (deliveryOptions.IsNullOrEmpty())
@@ -58,10 +62,20 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{deliveryOptionsMessage}";
         }
 
-        internal static string GetCommaList(params string [] list)
+        public static string GetCommaList(params string [] list)
         {
             return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
         }
 
+        internal static string GetLocationAddressLine(TrainingLocation providerLocation)
+        {
+            return GetCommaList(
+                providerLocation.LocationName,
+                providerLocation.Address.Address1,
+                providerLocation.Address.Address2,
+                providerLocation.Address.Town,
+                providerLocation.Address.County,
+                providerLocation.Address.Postcode);
+        }
     }
 }

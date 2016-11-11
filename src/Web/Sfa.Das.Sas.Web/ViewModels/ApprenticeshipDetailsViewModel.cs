@@ -9,6 +9,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
     {
         public string Ukprn { get; set; }
 
+        public bool IsHigherEducationInstitute { get; set; }
+
         public string Name { get; set; }
 
         public Location Location { get; set; }
