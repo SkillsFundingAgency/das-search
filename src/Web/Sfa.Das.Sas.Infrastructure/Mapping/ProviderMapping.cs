@@ -42,8 +42,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                     },
                     DeliveryModes = item.DeliveryModes,
                     ProviderMarketingInfo = item.ProviderMarketingInfo,
-                    EmployerSatisfaction = item.EmployerSatisfaction * 10,
-                    LearnerSatisfaction = item.LearnerSatisfaction * 10,
+                    EmployerSatisfaction = item.EmployerSatisfaction,
+                    LearnerSatisfaction = item.LearnerSatisfaction,
                     AchievementRate = item.OverallAchievementRate,
                     NationalAchievementRate = item.NationalOverallAchievementRate,
                     OverallCohort = item.OverallCohort
