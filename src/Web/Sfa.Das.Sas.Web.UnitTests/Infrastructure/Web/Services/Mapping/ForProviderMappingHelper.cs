@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
@@ -40,6 +41,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services.Mapping
             var expected = "hello, world, sample, end";
 
             ProviderMappingHelper.GetCommaList(list).Should().BeEquivalentTo(expected);
+        }
+
+        [TestCase("day release", "DayRelease")]
+        [TestCase("block release", "BlockRelease")]
+        [TestCase("at your location", "100PercentEmployer")]
+        [TestCase("day release, block release", "DayRelease", "BlockRelease")]
+        [TestCase("day release, at your location", "DayRelease", "100PercentEmployer")]
+        [TestCase("block release, at your location", "BlockRelease", "100PercentEmployer")]
+        [TestCase("day release, block release", "BlockRelease", "DayRelease")]
+        [TestCase("day release, at your location", "100PercentEmployer", "DayRelease")]
+        [TestCase("block release, at your location", "100PercentEmployer", "BlockRelease")]
+        public void WhenGetDeliveryOptionTextt(string expected, params string[] input)
+        {
+            var inputList = input.ToList();
+            ProviderMappingHelper.GetDeliveryOptionText(inputList).Should().BeEquivalentTo(expected);
         }
     }
 }

@@ -36,18 +36,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{level}%";
         }
 
-        internal static string GetLocationAddressLine(TrainingLocation providerLocation)
-        {
-            return GetCommaList(
-                providerLocation.LocationName,
-                providerLocation.Address.Address1,
-                providerLocation.Address.Address2,
-                providerLocation.Address.Town,
-                providerLocation.Address.County,
-                providerLocation.Address.Postcode);
-        }
-
-        internal static string GetDeliveryOptionText(List<string> deliveryOptions)
+        public static string GetDeliveryOptionText(List<string> deliveryOptions)
         {
             var deliveryOptionsMessage = string.Empty;
             if (deliveryOptions.IsNullOrEmpty())
@@ -78,5 +67,15 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
         }
 
+        internal static string GetLocationAddressLine(TrainingLocation providerLocation)
+        {
+            return GetCommaList(
+                providerLocation.LocationName,
+                providerLocation.Address.Address1,
+                providerLocation.Address.Address2,
+                providerLocation.Address.Town,
+                providerLocation.Address.County,
+                providerLocation.Address.Postcode);
+        }
     }
 }
