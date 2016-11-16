@@ -68,6 +68,7 @@
             return new FrameworkProviderSearchResultsItem
             {
                 Ukprn = hit.Source.Ukprn,
+                IsHigherEducationInstitute = hit.Source.IsHigherEducationInstitute,
                 ContactUsUrl = hit.Source.ContactUsUrl,
                 DeliveryModes = hit.Source.DeliveryModes,
                 Email = hit.Source.Email,
