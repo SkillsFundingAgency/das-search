@@ -167,9 +167,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
              <span id="employer-satisfaction">
             @Model.EmployerSatisfactionMessage
         </span>
-             @CreateProgressBar(Model.EmployerSatisfactionMessage, Model.EmployerSatisfaction)
+             @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
          </div>
-
 
          <div>
              <b>Learner satisfaction:</b>
@@ -177,7 +176,6 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
             @Model.LearnerSatisfactionMessage
         </span>
              @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
-
         </div>
 
         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
@@ -225,7 +223,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
 @helper CreateProgressBar(string message, int progress)
 {
-    if (message != "no data available")
+    if (progress > 0)
     {
         <div class="progress-container">
             <div class="progressbar" style="width: @progress%"></div>

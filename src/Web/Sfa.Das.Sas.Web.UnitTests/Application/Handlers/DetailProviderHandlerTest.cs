@@ -196,5 +196,29 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             response.ApprenticeshipName.ShouldAllBeEquivalentTo("Framework1");
             response.ApprenticeshipType.ShouldBeEquivalentTo(ApprenticeshipTrainingType.Framework);
         }
+
+        [Test]
+        public void ShouldReturnAStandardFromAHigherEducationInstitute()
+        {
+            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
+
+            var stubApprenticeship = new ApprenticeshipDetails
+            {
+                Product = new ApprenticeshipProduct(),
+                Location = new Location { LocationId = 55 },
+                Provider = new Provider { UkPrn = 42, IsHigherEducationInstitute = true }
+            };
+            var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
+
+            var response = _handler.Handle(message);
+
+            response.ApprenticeshipDetails.Should().Be(stubApprenticeship);
+            response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");
+            response.ApprenticeshipName.ShouldAllBeEquivalentTo("Standard1");
+            response.ApprenticeshipType.ShouldBeEquivalentTo(ApprenticeshipTrainingType.Standard);
+            response.ApprenticeshipDetails.Provider.IsHigherEducationInstitute.Should().BeTrue();
+        }
     }
 }

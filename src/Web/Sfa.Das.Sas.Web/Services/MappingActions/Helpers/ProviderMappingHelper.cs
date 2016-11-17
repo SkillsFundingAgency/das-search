@@ -21,9 +21,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             return $"{level}%";
         }
 
-        public static string GetPercentageText(double? level, bool hei)
+        public static string GetPercentageText(double? level, bool isHei)
         {
-            if (level == null && hei)
+            if (level == null && isHei)
             {
                 return "Not currently collected for this training organisation";
             }
