@@ -301,7 +301,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApprenticeshipController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
@@ -700,7 +699,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
