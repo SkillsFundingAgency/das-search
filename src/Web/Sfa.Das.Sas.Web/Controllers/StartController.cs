@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Text;
+using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Logging;
@@ -32,8 +34,23 @@ namespace Sfa.Das.Sas.Web.Controllers
                 AboutUrl = _settings.CookieAboutUrl.ToString(),
                 SurveyProviderUrl = _settings.SurveyProviderUrl.ToString()
             };
-
+            
             return View(cookieViewModel);
+        }
+        
+        [OutputCache(Duration = 86400)]
+        public ContentResult RobotsText()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("User-agent: *");
+
+            if (!_settings.EnvironmentName.Equals("Prod", StringComparison.OrdinalIgnoreCase))
+            {
+                stringBuilder.AppendLine("Disallow: /");
+            }
+
+            return Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
         }
     }
 }
