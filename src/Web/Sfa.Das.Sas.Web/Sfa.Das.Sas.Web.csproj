@@ -638,12 +638,16 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js.map" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.map" />
+    <Content Include="Transform.ServiceConfiguration.CI.config" />
+    <Content Include="Transform.ServiceConfiguration.Demo.config" />
     <None Include="Transform.ServiceConfiguration.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Transform.ServiceConfiguration.PreProd.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Transform.ServiceConfiguration.SystemTest.config" />
+    <Content Include="Transform.ServiceDefinition.CI.config" />
     <None Include="Transform.ServiceDefinition.csdef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -679,12 +683,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Health\Start.cshtml" />
+    <Content Include="Transform.ServiceDefinition.Demo.config" />
     <None Include="Transform.ServiceDefinition.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Transform.ServiceDefinition.PreProd.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Transform.ServiceDefinition.SystemTest.config" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
