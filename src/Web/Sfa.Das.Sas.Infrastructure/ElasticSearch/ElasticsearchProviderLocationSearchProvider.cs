@@ -59,7 +59,8 @@
                 Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
                 TrainingLocations = hit.Source.TrainingLocations,
                 MatchingLocationId = hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId,
-                NationalProvider = hit.Source.NationalProvider
+                NationalProvider = hit.Source.NationalProvider,
+                IsHigherEducationInstitute = hit.Source.IsHigherEducationInstitute
             };
         }
 

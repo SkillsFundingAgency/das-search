@@ -82,7 +82,7 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.LearnerSatisfaction))
                    .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.ProviderMarketingInfo))
                    .ForMember(x => x.EmployerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.ApprenticeshipDetails.Product.EmployerSatisfaction, z.ApprenticeshipDetails.Provider.IsHigherEducationInstitute)))
-            .ForMember(x => x.LearnerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.ApprenticeshipDetails.Product.LearnerSatisfaction, z.ApprenticeshipDetails.Provider.IsHigherEducationInstitute)))
+                   .ForMember(x => x.LearnerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.ApprenticeshipDetails.Product.LearnerSatisfaction, z.ApprenticeshipDetails.Provider.IsHigherEducationInstitute)))
                    .ForMember(dest => dest.SurveyUrl, y => y.Ignore())
                    .ForMember(dest => dest.SatisfactionSourceUrl, y => y.Ignore())
                    .ForMember(dest => dest.AchievementRateSourceUrl, y => y.Ignore())
