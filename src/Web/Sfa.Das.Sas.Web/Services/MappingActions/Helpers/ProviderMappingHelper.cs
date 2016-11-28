@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
         {
             if (level == null && isHei)
             {
-                return "Not currently collected for this training organisation";
+                return "not currently collected for this training organisation";
             }
 
             if (level == null)
