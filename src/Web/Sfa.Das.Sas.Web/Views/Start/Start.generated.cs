@@ -83,7 +83,23 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\n\n        </div>\n    </div>\n</main>");
+WriteLiteral("\r\n\r\n            <h2");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">Help</h2>\r\n\r\n            <p>You can contact the National Apprenticeship Service " +
+"for advice or help using the service.</p>\r\n\r\n            <div");
+
+WriteLiteral(" class=\"contact\"");
+
+WriteLiteral(">\r\n                <p>\r\n                    <strong>National Apprenticeship Servi" +
+"ce</strong><br>\r\n                    Telephone: 0800 015 0600\r\n                 " +
+"   <a");
+
+WriteLiteral(" href=\"https://www.gov.uk/call-charges\"");
+
+WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\r\n\r\n   " +
+"     </div>\n    </div>\n</main>");
 
         }
     }
