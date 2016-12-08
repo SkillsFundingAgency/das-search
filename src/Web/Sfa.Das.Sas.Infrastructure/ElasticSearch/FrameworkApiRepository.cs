@@ -90,7 +90,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                     .Exists(e => e
                                         .Field(field => field.ExpiryDate))))));
 
-                var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now) let daysDifference = (int)span.TotalDays where daysDifference <= daysToExpire select item).ToList();
+                var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now.AddDays(1)) let daysDifference = (int)span.TotalDays where daysDifference <= daysToExpire select item).ToList();
 
                 var response = expiringElements.GroupBy(x => x.FrameworkId).Count();
                 return response;
