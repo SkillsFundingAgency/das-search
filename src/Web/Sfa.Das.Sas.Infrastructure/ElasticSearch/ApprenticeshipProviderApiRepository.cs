@@ -87,11 +87,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         {
             try
             {
-                var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(
+                var providerFrameworksList = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(
                     _applicationSettings.ProviderIndexAlias,
-                    "frameworkprovider");
+                    "frameworkprovider").Select(x => x.FrameworkId).Distinct();
 
-                return documents.GroupBy(x => x.FrameworkId).Count();
+                var activeFrameworks = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkSearchResultsItem>(
+                    _applicationSettings.ApprenticeshipIndexAlias,
+                    "frameworkdocument").Select(x => x.FrameworkId).Distinct();
+
+                return providerFrameworksList.Count(providerFramework => activeFrameworks.Contains(providerFramework));
             }
             catch (Exception ex)
             {
