@@ -4,6 +4,7 @@ using NUnit.Framework;
 using PactNet.Mocks.MockHttpService.Models;
 using PactNet.TestExtensions;
 using SFA.DAS.Apprenticeships.Api.Client;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
 namespace Sfa.Das.Web.Pacts
 {
@@ -75,7 +76,7 @@ namespace Sfa.Das.Web.Pacts
             var consumer = new StandardApiClient(MockProviderServiceBaseUri);
 
             //Act
-            Assert.Throws<HttpRequestException>(() => consumer.Get(standardCode));
+            Assert.Throws<EntityNotFoundException>(() => consumer.Get(standardCode));
 
             MockProviderService.VerifyInteractions();
         }
@@ -145,7 +146,7 @@ namespace Sfa.Das.Web.Pacts
             var consumer = new FrameworkApiClient(MockProviderServiceBaseUri);
 
             //Act
-            Assert.Throws<HttpRequestException>(() => consumer.Get(frameworkId));
+            Assert.Throws<EntityNotFoundException>(() => consumer.Get(frameworkId));
 
             MockProviderService.VerifyInteractions();
         }

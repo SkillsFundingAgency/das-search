@@ -2,6 +2,7 @@
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -43,14 +44,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public Framework GetFrameworkById(string id)
         {
-            var result = _frameworkApiClient.Get(id);
-
-            if (result == null)
+            try
             {
-                throw new ApplicationException($"Failed to get framework with id {id}");
+                var result = _frameworkApiClient.Get(id);
+                return _frameworkMapping.MapToFramework(result);
             }
-
-            return _frameworkMapping.MapToFramework(result);
+            catch (EntityNotFoundException ex)
+            {
+                throw new ApplicationException($"Failed to get framework with id {id}", ex);
+            }
         }
 
         public long GetFrameworksAmount()

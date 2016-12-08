@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SFA.DAS.Apprenticeships.Api.Client;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -37,14 +38,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public Standard GetStandardById(string id)
         {
-            var result = _standardApiClient.Get(id);
-
-            if (result == null)
+            try
             {
-                throw new ApplicationException($"Failed to get standard with id {id}");
+                var result = _standardApiClient.Get(id);
+                return _standardMapping.MapToStandard(result);
             }
-
-            return _standardMapping.MapToStandard(result);
+            catch (EntityNotFoundException ex)
+            {
+                throw new ApplicationException($"Failed to get standard with id {id}", ex);
+            }
         }
 
         // TODO: Review this for performance againt using filters instead
