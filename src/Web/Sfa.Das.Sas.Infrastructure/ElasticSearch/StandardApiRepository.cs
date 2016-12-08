@@ -37,11 +37,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public Standard GetStandardById(string id)
         {
-            // ToDo: CF -> Change client to handle strings?
-            int intId;
-            int.TryParse(id, out intId);
-
-            var result = _standardApiClient.Get(intId);
+            var result = _standardApiClient.Get(id);
 
             if (result == null)
             {
