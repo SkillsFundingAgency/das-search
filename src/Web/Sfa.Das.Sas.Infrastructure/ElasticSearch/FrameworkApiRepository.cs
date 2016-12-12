@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Logging;
@@ -8,7 +9,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using SFA.DAS.Apprenticeships.Api.Client;
-    using Sfa.Das.Sas.ApplicationServices.Http;
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Core.Domain.Services;
@@ -19,7 +19,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
-        private readonly IHttpGet _httpService;
         private readonly ILog _applicationLogger;
         private readonly IFrameworkApiClient _frameworkApiClient;
         private readonly IElasticsearchHelper _elasticsearchHelper;
@@ -28,7 +27,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             IElasticsearchCustomClient elasticsearchCustomClient,
             IConfigurationSettings applicationSettings,
             IFrameworkMapping frameworkMapping,
-            IHttpGet httpService,
             ILog applicationLogger,
             IFrameworkApiClient frameworkApiClient,
             IElasticsearchHelper elasticsearchHelper)
@@ -36,7 +34,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
-            _httpService = httpService;
             _applicationLogger = applicationLogger;
             _frameworkApiClient = frameworkApiClient;
             _elasticsearchHelper = elasticsearchHelper;
@@ -53,6 +50,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             {
                 throw new ApplicationException($"Failed to get framework with id {id}", ex);
             }
+        }
+
+        public List<Framework> GetAllFrameworks()
+        {
+            return _elasticsearchHelper.GetAllDocumentsFromIndex<Framework>(_applicationSettings.ApprenticeshipIndexAlias, "frameworkdocument");
         }
 
         public long GetFrameworksAmount()

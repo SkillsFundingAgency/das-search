@@ -41,16 +41,24 @@ namespace Sfa.Das.Sas.Web.Controllers
         [OutputCache(Duration = 86400)]
         public ContentResult RobotsText()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var baseUrl = GetBaseUrl();
+            var builder = new StringBuilder();
 
-            stringBuilder.AppendLine("User-agent: *");
+            builder.AppendLine("User-agent: *");
 
             if (!_settings.EnvironmentName.Equals("Prod", StringComparison.OrdinalIgnoreCase))
             {
-                stringBuilder.AppendLine("Disallow: /");
+                builder.AppendLine("Disallow: /");
             }
 
-            return Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
+            builder.AppendLine($"Sitemap: {baseUrl}/sitemap.xml");
+
+            return Content(builder.ToString(), "text/plain", Encoding.UTF8);
+        }
+
+        private string GetBaseUrl()
+        {
+            return Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
         }
     }
 }

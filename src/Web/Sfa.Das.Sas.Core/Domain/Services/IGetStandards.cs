@@ -9,5 +9,6 @@ namespace Sfa.Das.Sas.Core.Domain.Services
         IEnumerable<Standard> GetStandardsByIds(IEnumerable<int> ids);
         long GetStandardsAmount();
         long GetStandardsOffer();
+        List<Standard> GetAllStandards();
     }
 }
