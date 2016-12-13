@@ -22,16 +22,15 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public SitemapResponse Handle(SitemapQuery message)
         {
-            var identifiers = new List<string>();
+            IEnumerable<string> identifiers;
 
-            switch (message.SitemapRequest)
+            if (message.SitemapRequest == SitemapType.Standards)
             {
-                case SitemapType.Standards:
-                    identifiers = _getStandards.GetAllStandards().Select(x => x.StandardId).ToList();
-                    break;
-                case SitemapType.Frameworks:
-                    identifiers = _getFrameworks.GetAllFrameworks().Select(x => $"{x.FrameworkCode}-{x.ProgType}-{x.PathwayCode}").ToList();
-                    break;
+                identifiers = _getStandards.GetAllStandards().Select(x => x.StandardId);
+            }
+            else
+            {
+                identifiers = _getFrameworks.GetAllFrameworks().Select(x => x.FrameworkId);
             }
 
             var sitemapContents = CreateDocument(identifiers, message.UrlPlaceholder);
@@ -41,8 +40,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 Content = sitemapContents.ToString()
             };
         }
-
-        private XDocument CreateDocument(List<string> items, string urlPlaceholder)
+        
+        private XDocument CreateDocument(IEnumerable<string> items, string urlPlaceholder)
         {
             XNamespace ns = SitemapNamespace;
 

@@ -54,9 +54,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             {
                 new Framework
                 {
-                    FrameworkCode = 23,
-                    ProgType = 5,
-                    PathwayCode = 7,
+                    FrameworkId = "23-5-7"
                 }
             });
 
