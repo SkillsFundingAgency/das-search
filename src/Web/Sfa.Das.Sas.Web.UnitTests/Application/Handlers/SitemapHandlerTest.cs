@@ -52,7 +52,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<Framework>
             {
-                new Framework { FrameworkCode = 23 }
+                new Framework
+                {
+                    FrameworkCode = 23,
+                    ProgType = 5,
+                    PathwayCode = 7,
+                }
             });
 
             var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/Sitemap/Frameworks/{0}", SitemapRequest = SitemapType.Frameworks });
@@ -62,7 +67,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(1);
-            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Frameworks/23");
+            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Frameworks/23-5-7");
         }
     }
 }
