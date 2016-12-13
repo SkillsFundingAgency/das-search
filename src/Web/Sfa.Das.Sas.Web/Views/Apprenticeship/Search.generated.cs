@@ -46,25 +46,25 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
             
             #line default
             #line hidden
-WriteLiteral("\r\n<main");
+WriteLiteral("\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\r\n    <div");
+WriteLiteral(">\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n\r\n            <h1");
+WriteLiteral(">\n\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n\r\n");
+WriteLiteral(">\n                Find apprenticeship training\n            </h1>\n\n");
 
             
             #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
@@ -84,21 +84,19 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n                    <legend>\r\n                        <label");
+WriteLiteral(">\r\n                    <span>Search by keywords</span>\r\n                    <lege" +
+"nd>\r\n\r\n                        <label");
+
+WriteLiteral(" class=\"text-secondary\"");
 
 WriteLiteral(" for=\"keywords\"");
 
-WriteLiteral(">\r\n                            <span");
-
-WriteLiteral(" class=\"form-hint\"");
-
-WriteLiteral(">\r\n                                    Enter a job role or keyword (eg \'accountan" +
-"t\' or \'engineering\')\r\n                                </span>\r\n                 " +
-"       </label>\r\n\r\n                        <span");
+WriteLiteral(">\r\n                            Can include job title or apprenticeship\r\n         " +
+"               </label>\r\n\r\n                        <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral("></span>\r\n                    </legend>\r\n                    <input");
+WriteLiteral("></span>\n                    </legend>\r\n                    <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -110,11 +108,9 @@ WriteLiteral(" class=\"text-box form-control\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
-WriteLiteral(" style=\"width: 50%;\"");
-
 WriteLiteral(" placeholder=\"\"");
 
-WriteLiteral(">\r\n                </div>\r\n");
+WriteLiteral(">\r\n                </div>\n");
 
 WriteLiteral("                <input");
 
@@ -126,7 +122,7 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Search\"");
 
-WriteLiteral("/>\r\n");
+WriteLiteral("/>\n");
 
             
             #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
@@ -135,7 +131,7 @@ WriteLiteral("/>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral("\n        </div>\n    </div>\n</main>");
 
         }
     }
