@@ -147,6 +147,7 @@
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\DetailProviderHandlerTest.cs" />
     <Compile Include="Application\Handlers\FrameworkProviderSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\SitemapHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetStandardHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetFrameworkHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetFrameworkProvidersHandlerTest.cs" />

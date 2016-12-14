@@ -257,6 +257,7 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="Attribute\NoCacheAttribute.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="Extensions\PostcodeExtension.cs" />
@@ -574,6 +575,9 @@
     <Content Include="scripts\vendor\js.cookie-2.1.1.js" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js" />
     <Content Include="scripts\vendor\modernizr-3.3.1.min.js" />
+    <Content Include="sitemap.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
@@ -716,6 +720,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Sitemap\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

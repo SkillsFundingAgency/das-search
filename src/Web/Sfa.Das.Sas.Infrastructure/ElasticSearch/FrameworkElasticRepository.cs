@@ -67,6 +67,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return results.HitsMetaData.Total;
         }
 
+        public List<Framework> GetAllFrameworks()
+        {
+            return _elasticsearchHelper.GetAllDocumentsFromIndex<Framework>(_applicationSettings.ApprenticeshipIndexAlias, "frameworkdocument");
+        }
+
         public long GetFrameworksOffer()
         {
             var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "frameworkprovider");
