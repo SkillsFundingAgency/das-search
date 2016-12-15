@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using MediatR;
@@ -26,10 +27,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (message.SitemapRequest == SitemapType.Standards)
             {
-                identifiers = _getStandards.GetAllStandards().Select(x => x.StandardId);
+                identifiers = _getStandards.GetAllStandards().Where(s => s.IsPublished).Select(x => x.StandardId);
             }
             else
             {
+                var currDate = DateTime.Now;
                 identifiers = _getFrameworks.GetAllFrameworks().Select(x => x.FrameworkId);
             }
 

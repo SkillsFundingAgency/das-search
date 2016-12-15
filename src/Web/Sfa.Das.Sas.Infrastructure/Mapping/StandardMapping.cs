@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
         {
             return new Standard
             {
-                StandardId = document.StandardId.ToString(),
+                StandardId = document.StandardId,
                 Title = document.Title,
                 StandardPdf = document.StandardPdf,
                 AssessmentPlanPdf = document.AssessmentPlanPdf,
@@ -44,6 +44,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 StandardPdf = document.StandardPdf,
                 AssessmentPlanPdf = document.AssessmentPlanPdf,
                 Level = document.Level,
+                IsPublished = document.Published,
                 JobRoles = document.JobRoles,
                 Keywords = document.Keywords,
                 TypicalLength = document.TypicalLength,

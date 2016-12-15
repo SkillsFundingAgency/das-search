@@ -31,5 +31,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

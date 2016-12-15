@@ -84,9 +84,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                     .Where(p => p != null);
         }
 
-        public List<Standard> GetAllStandards()
+        public IEnumerable<Standard> GetAllStandards()
         {
-            return _elasticsearchHelper.GetAllDocumentsFromIndex<Standard>(_applicationSettings.ApprenticeshipIndexAlias, "standarddocument");
+            var results = _elasticsearchHelper.GetAllDocumentsFromIndex<StandardSearchResultsItem>(_applicationSettings.ApprenticeshipIndexAlias, "standarddocument");
+            return results.Select(s => _standardMapping.MapToStandard(s));
         }
 
         public long GetStandardsAmount()
