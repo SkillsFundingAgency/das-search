@@ -32,8 +32,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
             {
-                new Standard {StandardId = "23"},
-                new Standard {StandardId = "43"}
+                new Standard {StandardId = "23", IsPublished = true},
+                new Standard {StandardId = "43", IsPublished = true}
             });
 
             var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/Sitemap/Standards/{0}", SitemapRequest = SitemapType.Standards});
