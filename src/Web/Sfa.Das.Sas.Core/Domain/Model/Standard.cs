@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Core.Domain.Model
 
         public int Level { get; set; }
 
+        public bool IsPublished { get; set; }
+
         public string StandardPdf { get; set; }
 
         public string AssessmentPlanPdf { get; set; }
@@ -31,7 +33,5 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }
-
-        public bool IsPublished { get; set; }
     }
 }

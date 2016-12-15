@@ -23,6 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 StandardPdf = document.StandardPdf,
                 AssessmentPlanPdf = document.AssessmentPlanPdf,
                 Level = document.Level,
+                //IsPublished = document.Published, Api Client doesn't return this property yet
                 JobRoles = document.JobRoles.ToList(),
                 Keywords = document.Keywords.ToList(),
                 TypicalLength = _typicalLengthMapping.MapTypicalLength(document.TypicalLength),
