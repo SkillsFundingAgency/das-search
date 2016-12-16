@@ -99,7 +99,7 @@ WriteLiteralTo(__razor_helper_writer, ">Wales</a>\r\n        </span>\r\n");
 
 #line 79 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     }
-    else if (postcodeCountry.ToLower() == "northenireland")
+    else if (postcodeCountry.ToLower() == "northernireland")
     {
 
 
