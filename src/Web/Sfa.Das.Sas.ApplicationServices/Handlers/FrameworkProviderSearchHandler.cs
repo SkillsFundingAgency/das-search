@@ -5,6 +5,7 @@ using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
 using Sfa.Das.Sas.Core.Domain.Model;
@@ -17,17 +18,20 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
         private readonly IPaginationSettings _paginationSettings;
+        private readonly IPostcodeIoService _postcodeIoService;
         private readonly AbstractValidator<ProviderSearchQuery> _validator;
 
         public FrameworkProviderSearchHandler(
             AbstractValidator<ProviderSearchQuery> validator,
             IProviderSearchService searchService,
             IPaginationSettings paginationSettings,
+            IPostcodeIoService postcodeIoService,
             ILog logger)
         {
             _validator = validator;
             _searchService = searchService;
             _paginationSettings = paginationSettings;
+            _postcodeIoService = postcodeIoService;
             _logger = logger;
         }
 
@@ -52,9 +56,48 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return response;
             }
 
-            message.Page = message.Page <= 0 ? 1 : message.Page;
+            var country = await GetPostcodeCountry(message.PostCode);
 
-            return await PerformSearch(message);
+            switch (country)
+            {
+                case "Wales":
+                    var responseWales = new FrameworkProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.WalesPostcode
+                    };
+                    return responseWales;
+                case "Scotland":
+                    var responseScotland = new FrameworkProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.ScotlandPostcode
+                    };
+                    return responseScotland;
+                case "Northern Ireland":
+                    var responseNorthernIreland = new FrameworkProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode
+                    };
+                    return responseNorthernIreland;
+                case "Error":
+                    var responseError = new FrameworkProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.ServerError
+                    };
+                    return responseError;
+                default:
+                    message.Page = message.Page <= 0 ? 1 : message.Page;
+
+                    return await PerformSearch(message);
+            }
+        }
+
+        private async Task<string> GetPostcodeCountry(string postCode)
+        {
+            return await _postcodeIoService.GetPostcodeCountry(postCode);
         }
 
         private async Task<FrameworkProviderSearchResponse> PerformSearch(FrameworkProviderSearchQuery message)

@@ -12,6 +12,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
             ApprenticeshipNotFound,
             PageNumberOutOfUpperBound,
             LocationServiceUnavailable,
+            ScotlandPostcode,
+            WalesPostcode,
+            NorthernIrelandPostcode,
             ServerError
         }
 

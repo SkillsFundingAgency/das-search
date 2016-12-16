@@ -106,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError)
+        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry)
         {
             var query = new GetStandardProvidersQuery
             {
@@ -128,6 +128,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            if (!string.IsNullOrEmpty(postcodeCountry))
+            {
+                viewModel.PostcodeCountry = postcodeCountry;
+            }
 
             return View("SearchForProviders", viewModel);
         }

@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿using Sfa.Das.Sas.ApplicationServices.Services;
+
+namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -18,6 +20,7 @@
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
         private readonly IPaginationSettings _paginationSettings;
+        private readonly IPostcodeIoService _postcodeIoService;
         private readonly AbstractValidator<ProviderSearchQuery> _validator;
 
         private readonly Dictionary<string, StandardProviderSearchResponse.ResponseCodes> _searchResponseCodes =
@@ -35,11 +38,13 @@
             ProviderSearchQueryValidator validator,
             IProviderSearchService searchService,
             IPaginationSettings paginationSettings,
+            IPostcodeIoService postcodeIoService,
             ILog logger)
         {
             _validator = validator;
             _searchService = searchService;
             _paginationSettings = paginationSettings;
+            _postcodeIoService = postcodeIoService;
             _logger = logger;
         }
 
@@ -64,9 +69,48 @@
                 return response;
             }
 
-            message.Page = message.Page <= 0 ? 1 : message.Page;
+            var country = await GetPostcodeCountry(message.PostCode);
 
-            return await PerformSearch(message);
+            switch (country)
+            {
+                case "Wales":
+                    var responseWales = new StandardProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = StandardProviderSearchResponse.ResponseCodes.WalesPostcode
+                    };
+                    return responseWales;
+                case "Scotland":
+                    var responseScotland = new StandardProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = StandardProviderSearchResponse.ResponseCodes.ScotlandPostcode
+                    };
+                    return responseScotland;
+                case "Northern Ireland":
+                    var responseNorthernIreland = new StandardProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = StandardProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode
+                    };
+                    return responseNorthernIreland;
+                case "Error":
+                    var responseError = new StandardProviderSearchResponse
+                    {
+                        Success = false,
+                        StatusCode = StandardProviderSearchResponse.ResponseCodes.ServerError
+                    };
+                    return responseError;
+                default:
+                    message.Page = message.Page <= 0 ? 1 : message.Page;
+
+                    return await PerformSearch(message);
+            }
+        }
+
+        private async Task<string> GetPostcodeCountry(string postCode)
+        {
+            return await _postcodeIoService.GetPostcodeCountry(postCode);
         }
 
         private async Task<StandardProviderSearchResponse> PerformSearch(ProviderSearchQuery message)

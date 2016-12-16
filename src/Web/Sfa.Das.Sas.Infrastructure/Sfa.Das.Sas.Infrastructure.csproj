@@ -158,7 +158,6 @@
     <Compile Include="Elasticsearch\QueryHelper.cs" />
     <Compile Include="Elasticsearch\StandardApiRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
     <Compile Include="Mapping\IFrameworkMapping.cs" />
     <Compile Include="Mapping\IProviderMapping.cs" />
@@ -169,7 +168,6 @@
     <Compile Include="PostCodeIo\PostCodesIoLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\CookieSettings.cs" />
-    <Compile Include="WebRequestRetryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj">

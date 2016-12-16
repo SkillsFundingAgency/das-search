@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Polly;
 using Sfa.Das.Sas.Core.Logging;
 
-namespace Sfa.Das.Sas.Infrastructure
+namespace Sfa.Das.Sas.Core
 {
     public sealed class WebRequestRetryService : IRetryWebRequests
     {

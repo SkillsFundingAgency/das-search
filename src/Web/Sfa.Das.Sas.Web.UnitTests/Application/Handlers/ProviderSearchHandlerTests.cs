@@ -8,6 +8,7 @@ using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Validators;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Logging;
@@ -24,11 +25,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         private Mock<IPaginationSettings> _mockPaginationSettings;
 
         private StandardProviderSearchHandler _handler;
+        private Mock<IPostcodeIoService> _mockPostcodeIoService;
 
         [SetUp]
         public void Setup()
         {
             _mockSearchService = new Mock<IProviderSearchService>();
+            _mockPostcodeIoService = new Mock<IPostcodeIoService>();
             _mockLogger = new Mock<ILog>();
             _mockPaginationSettings = new Mock<IPaginationSettings>();
 
@@ -38,7 +41,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             };
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
 
-            _handler = new StandardProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockPaginationSettings.Object, _mockLogger.Object);
+            _handler = new StandardProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockPaginationSettings.Object, _mockPostcodeIoService.Object, _mockLogger.Object);
         }
 
         [Test]

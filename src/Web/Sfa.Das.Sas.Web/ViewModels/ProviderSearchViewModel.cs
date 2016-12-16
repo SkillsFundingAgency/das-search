@@ -8,6 +8,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public bool WrongPostcode { get; set; }
 
+        public string PostcodeCountry { get; set; }
+
         public string PostUrl { get; set; }
 
         public string ApprenticeshipId { get; set; }

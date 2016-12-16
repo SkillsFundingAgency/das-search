@@ -15,53 +15,79 @@
     </hgroup>
 
     <div class="grid-row">
-            <div class="column-two-thirds">
+        <div class="column-two-thirds">
     
-                <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
+            <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
 
-                    <div class="form-elements  @(Model.HasError || Model.WrongPostcode ? " error" : "")">
-                        <div class="heading-group">
-                            <h2 class="heading-medium">
-                                Enter a postcode
-                            </h2>
-                            <p>For example: 'SW1A 2AA'</p>
-                        </div>
-
-                        <label class="form-label" for="search-box">
-                            Enter the full postcode of your apprentice’s workplace
-
-                            @if (@Model.HasError)
-                            {
-                                <span class="error-message">
-                                    Sorry, postcode search not working, please try again later
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="error-message">
-                                    You must enter a full and valid postcode
-                                </span>
-                            }
-                        </label>
-                        <div class="form-group">
-                            <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
-                            <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
-                            <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
-                            <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
-                        </div>
+                <div class="form-elements  @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" ? " error" : "")">
+                    <div class="heading-group">
+                        <h2 class="heading-medium">
+                            Enter a postcode
+                        </h2>
+                        <p>For example: 'SW1A 2AA'</p>
                     </div>
-                </form>
-            
-                <div class="notice">
-                    <i class="icon icon-important">
-                        <span class="visuallyhidden">Warning</span>
-                    </i>
-                    <strong class="bold-small">
-                        This service contains details of training providers who currently offer apprenticeships.
-                        It will be updated in 2017 to reflect the new register of apprenticeship training providers.
-                    </strong>
+
+                    <label class="form-label" for="search-box">
+                        Enter the full postcode of your apprentice’s workplace
+                        
+                        @ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry)
+
+                        
+                    </label>
+                    <div class="form-group">
+                        <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
+                        <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
+                        <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+                        <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
+                    </div>
                 </div>
+            </form>
+            
+            <div class="notice">
+                <i class="icon icon-important">
+                    <span class="visuallyhidden">Warning</span>
+                </i>
+                <strong class="bold-small">
+                    This service contains details of training providers who currently offer apprenticeships.
+                    It will be updated in 2017 to reflect the new register of apprenticeship training providers.
+                </strong>
+            </div>
 
         </div>
     </div>
 </main>
+
+@helper ShowErrorMessage(bool hasError, bool wrongPostcode, string postcodeCountry)
+{
+    if(hasError)
+    {
+        <span class="error-message">
+            Sorry, postcode search not working, please try again later
+        </span>
+    }
+    else if (wrongPostcode)
+    {
+        <span class="error-message">
+            You must enter a full and valid postcode
+        </span>
+    }
+    else if (postcodeCountry.ToLower() == "wales")
+    {
+        <span class="error-message">
+            Information about apprenticeships in <a href="https://businesswales.gov.wales/skillsgateway/apprenticeships">Wales</a>
+        </span>
+    }
+    else if (postcodeCountry.ToLower().Contains("ireland"))
+    {
+        <span class="error-message">
+            Information about apprenticeships in <a href="https://www.apprenticeships.scot/">NI</a>
+        </span>
+    }
+    else if (postcodeCountry.ToLower() == "scotland")
+    {
+        <span class="error-message">
+            Information about apprenticeships in <a href="https://www.apprenticeships.scot/">Scotland</a>
+        </span>
+    }
+
+}
