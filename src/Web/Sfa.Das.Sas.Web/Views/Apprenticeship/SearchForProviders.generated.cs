@@ -99,7 +99,7 @@ WriteLiteralTo(__razor_helper_writer, ">Wales</a>\r\n        </span>\r\n");
 
 #line 79 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     }
-    else if (postcodeCountry.ToLower().Contains("ireland"))
+    else if (postcodeCountry.ToLower() == "northenireland")
     {
 
 
@@ -111,9 +111,9 @@ WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n            Information about apprenticeships in <a");
 
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.apprenticeships.scot/\"");
+WriteLiteralTo(__razor_helper_writer, " href=\"https://www.nibusinessinfo.co.uk/content/apprenticeships-employers\"");
 
-WriteLiteralTo(__razor_helper_writer, ">NI</a>\r\n        </span>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">Northern Ireland</a>\r\n        </span>\r\n");
 
 
 #line 85 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
