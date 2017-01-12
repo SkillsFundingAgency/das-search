@@ -4,6 +4,7 @@ using MediatR;
 using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
 using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
 using StructureMap;
@@ -33,6 +34,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
             For<AbstractValidator<ProviderSearchQuery>>().Use<ProviderSearchQueryValidator>();
             For<AbstractValidator<ProviderDetailQuery>>().Use<ProviderDetailQueryValidator>();
             For<AbstractValidator<GetFrameworkQuery>>().Use<FrameworkQueryValidator>();
+            For<IPostcodeIoService>().Use<PostcodeIoService>();
         }
     }
 }

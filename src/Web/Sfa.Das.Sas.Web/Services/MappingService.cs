@@ -242,6 +242,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
                 .ForMember(x => x.PostUrl, y => y.Ignore())
+                .ForMember(x => x.PostcodeCountry, y => y.Ignore())
                 .ForMember(x => x.WrongPostcode, y => y.Ignore());
 
             cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
@@ -249,6 +250,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerms, y => y.MapFrom(z => z.Keywords))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
                 .ForMember(x => x.PostUrl, y => y.Ignore())
+                .ForMember(x => x.PostcodeCountry, y => y.Ignore())
                 .ForMember(x => x.WrongPostcode, y => y.Ignore());
 
             // Provider search

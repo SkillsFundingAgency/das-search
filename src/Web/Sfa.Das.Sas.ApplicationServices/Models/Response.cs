@@ -4,12 +4,12 @@
     {
         public string Postcode { get; set; }
         public int Quality { get; set; }
-        public double Eastings { get; set; }
-        public double Northings { get; set; }
+        public double? Eastings { get; set; }
+        public double? Northings { get; set; }
         public string Country { get; set; }
         public string NhsHa { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public string ParliamentaryConstituency { get; set; }
         public string EuropeanElectoralRegion { get; set; }
         public string PrimaryCareTrust { get; set; }

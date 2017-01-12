@@ -1,20 +1,21 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Exceptions;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Logging;
-
-namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
+﻿namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
     using Core.Configuration;
     using Logging;
+    using Newtonsoft.Json;
+    using Sfa.Das.Sas.ApplicationServices;
+    using Sfa.Das.Sas.ApplicationServices.Exceptions;
+    using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Core;
+    using Sfa.Das.Sas.Core.Domain.Model;
+    using Sfa.Das.Sas.Core.Logging;
+
     public class PostCodesIoLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
@@ -45,8 +46,17 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                 {
                     var value = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
-                    coordinates.Lat = result.Result.Latitude;
-                    coordinates.Lon = result.Result.Longitude;
+                    if (!result.Result.Latitude.HasValue || !result.Result.Longitude.HasValue)
+                    {
+                        return new CoordinateResponse
+                        {
+                            Coordinate = null,
+                            ResponseCode = LocationLookupResponse.MissingCoordinates
+                        };
+                    }
+
+                    coordinates.Lat = result.Result.Latitude.Value;
+                    coordinates.Lon = result.Result.Longitude.Value;
 
                     SendDependencyLog(response.StatusCode, uri, responseTime);
 

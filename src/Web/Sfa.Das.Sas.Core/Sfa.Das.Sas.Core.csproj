@@ -45,6 +45,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Polly, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.4.3.0\lib\net45\Polly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.2.0.402\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -94,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfigurationSettings.cs" />
+    <Compile Include="DependencyResolution\CoreRegistry.cs" />
     <Compile Include="Domain\Model\Address.cs" />
     <Compile Include="Domain\Model\ApprenticeshipDetails.cs" />
     <Compile Include="Domain\Model\ApprenticeshipProduct.cs" />
@@ -112,12 +117,14 @@
     <Compile Include="Domain\Services\IGetProviders.cs" />
     <Compile Include="Domain\Services\IGetStandards.cs" />
     <Compile Include="Domain\Services\IGetFrameworks.cs" />
+    <Compile Include="IRetryWebRequests.cs" />
     <Compile Include="Logging\ILog.cs" />
     <Compile Include="Domain\Model\Coordinate.cs" />
     <Compile Include="Domain\Model\Standard.cs" />
     <Compile Include="Logging\ILogEntry.cs" />
     <Compile Include="Logging\IRequestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebRequestRetryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

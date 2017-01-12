@@ -18,6 +18,7 @@
 
 using Sfa.Das.Sas.ApplicationServices.DependencyResolution;
 using Sfa.Das.Sas.Infrastructure.DependencyResolution;
+using Sfa.Das.Sas.Core.DependencyResolution;
 using StructureMap;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
@@ -31,6 +32,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             return new Container(c => {
                 c.AddRegistry<DefaultRegistry>();
                 c.AddRegistry<WebRegistry>();
+                c.AddRegistry<CoreRegistry>();
                 c.AddRegistry<InfrastructureRegistry>();
                 c.AddRegistry<ApplicationServicesRegistry>();
                 c.AddRegistry<HealthRegistry>();

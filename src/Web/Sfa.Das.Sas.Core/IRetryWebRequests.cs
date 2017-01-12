@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Sfa.Das.Sas.Infrastructure
+namespace Sfa.Das.Sas.Core
 {
     public interface IRetryWebRequests
     {
