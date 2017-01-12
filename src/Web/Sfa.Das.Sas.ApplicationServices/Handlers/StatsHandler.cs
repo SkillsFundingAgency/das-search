@@ -36,6 +36,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 ProviderCount = (int)_getProviders.GetProvidersAmount(),
                 StandardOffer = (int)_getStandards.GetStandardsOffer(),
                 FrameworkOffer = (int)_getFrameworks.GetFrameworksOffer(),
+                UnpublishedStandardsCount = _getStandards.GetAllStandards().Count(s => s.IsPublished == false),
                 ExpiringFrameworks30 = _getFrameworks.GetFrameworksExpiringSoon(30),
                 ExpiringFrameworks90 = _getFrameworks.GetFrameworksExpiringSoon(90),
                 StandardsWithProviders = _apprenticeshipProviderRepository.GetStandardsAmountWithProviders(),

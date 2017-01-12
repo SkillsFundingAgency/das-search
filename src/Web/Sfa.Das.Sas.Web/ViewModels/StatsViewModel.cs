@@ -12,6 +12,8 @@
 
         public int FrameworkOffer { get; set; }
 
+        public int UnpublishedStandardsCount { get; set; }
+
         public int ExpiringFrameworks30 { get; set; }
 
         public int ExpiringFrameworks90 { get; set; }
