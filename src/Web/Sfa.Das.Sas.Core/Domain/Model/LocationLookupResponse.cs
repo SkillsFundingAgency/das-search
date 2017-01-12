@@ -9,5 +9,7 @@
         public const string Ok = "OK";
 
         public const string ApprenticeshipNotFound = "ApprenticeshipNotFound";
+
+        public const string MissingCoordinates = "MissingCoordinates";
     }
 }

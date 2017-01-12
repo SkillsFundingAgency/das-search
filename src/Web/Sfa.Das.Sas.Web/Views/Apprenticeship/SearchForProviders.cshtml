@@ -19,7 +19,7 @@
     
             <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
 
-                <div class="form-elements  @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" ? " error" : "")">
+                <div class="form-elements  @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")">
                     <div class="heading-group">
                         <h2 class="heading-medium">
                             Enter a postcode

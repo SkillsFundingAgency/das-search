@@ -46,8 +46,17 @@
                 {
                     var value = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<PostCodeResponse>(value);
-                    coordinates.Lat = result.Result.Latitude;
-                    coordinates.Lon = result.Result.Longitude;
+                    if (!result.Result.Latitude.HasValue || !result.Result.Longitude.HasValue)
+                    {
+                        return new CoordinateResponse
+                        {
+                            Coordinate = null,
+                            ResponseCode = LocationLookupResponse.MissingCoordinates
+                        };
+                    }
+
+                    coordinates.Lat = result.Result.Latitude.Value;
+                    coordinates.Lon = result.Result.Longitude.Value;
 
                     SendDependencyLog(response.StatusCode, uri, responseTime);
 

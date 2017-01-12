@@ -213,11 +213,11 @@ WriteLiteral(" method=\"get\"");
 
 WriteLiteral(">\r\n\r\n                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 580), Tuple.Create("\"", 734)
+WriteAttribute("class", Tuple.Create(" class=\"", 580), Tuple.Create("\"", 780)
 , Tuple.Create(Tuple.Create("", 588), Tuple.Create("form-elements", 588), true)
             
             #line 22 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("  ", 601), Tuple.Create<System.Object, System.Int32>(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" ? " error" : ""
+, Tuple.Create(Tuple.Create("  ", 601), Tuple.Create<System.Object, System.Int32>(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : ""
             
             #line default
             #line hidden
@@ -265,14 +265,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1479), Tuple.Create("\"", 1510)
+WriteAttribute("value", Tuple.Create(" value=\"", 1525), Tuple.Create("\"", 1556)
             
             #line 38 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                          , Tuple.Create(Tuple.Create("", 1487), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
+                          , Tuple.Create(Tuple.Create("", 1533), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
             
             #line default
             #line hidden
-, 1487), false)
+, 1533), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -283,14 +283,14 @@ WriteLiteral(" name=\"keywords\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1604), Tuple.Create("\"", 1630)
+WriteAttribute("value", Tuple.Create(" value=\"", 1650), Tuple.Create("\"", 1676)
             
             #line 39 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                  , Tuple.Create(Tuple.Create("", 1612), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+                  , Tuple.Create(Tuple.Create("", 1658), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
             
             #line default
             #line hidden
-, 1612), false)
+, 1658), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -299,14 +299,14 @@ WriteLiteral(" type=\"search\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1694), Tuple.Create("\"", 1734)
+WriteAttribute("value", Tuple.Create(" value=\"", 1740), Tuple.Create("\"", 1780)
             
             #line 40 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 1702), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
+, Tuple.Create(Tuple.Create("", 1748), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
             
             #line default
             #line hidden
-, 1702), false)
+, 1748), false)
 );
 
 WriteLiteral(" id=\"search-box\"");
