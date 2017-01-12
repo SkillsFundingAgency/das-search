@@ -37,11 +37,7 @@ namespace Sfa.Das.Sas.Web
             Exception ex = Server.GetLastError().GetBaseException();
             var logger = DependencyResolver.Current.GetService<ILog>();
 
-            if (ex is HttpException && ex.Message.EndsWith("was not found or does not implement IController."))
-            {
-                logger.Info("Unknown Controller");
-            }
-            else
+            if (ex is HttpException && ((HttpException)ex).GetHttpCode() != 404)
             {
                 logger.Error(ex, "App_Error");
             }
