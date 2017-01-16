@@ -136,7 +136,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError)
+        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry)
         {
             var query = new GetFrameworkProvidersQuery
             {
@@ -155,6 +155,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            if (!string.IsNullOrEmpty(postcodeCountry))
+            {
+                viewModel.PostcodeCountry = postcodeCountry;
+            }
 
             return View("SearchForProviders", viewModel);
         }

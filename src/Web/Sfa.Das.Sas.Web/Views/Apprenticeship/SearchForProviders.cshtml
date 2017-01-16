@@ -71,23 +71,25 @@
             You must enter a full and valid postcode
         </span>
     }
-    else if (postcodeCountry.ToLower() == "wales")
+    else if (postcodeCountry != null)
     {
-        <span class="error-message">
-            Information about apprenticeships in <a href="https://businesswales.gov.wales/skillsgateway/apprenticeships">Wales</a>
-        </span>
+        switch (postcodeCountry.ToLower())
+        {
+            case "wales":
+                <span class="error-message">
+                    Information about apprenticeships in <a href="https://businesswales.gov.wales/skillsgateway/apprenticeships">Wales</a>
+                </span>
+                break;
+            case "northernireland":
+                <span class="error-message">
+                    Information about apprenticeships in <a href="https://www.nibusinessinfo.co.uk/content/apprenticeships-employers">Northern Ireland</a>
+                </span>
+                break;
+            case "scotland":
+                <span class="error-message">
+                    Information about apprenticeships in <a href="https://www.apprenticeships.scot/">Scotland</a>
+                </span>
+                break;
+        }
     }
-    else if (postcodeCountry.ToLower() == "northernireland")
-    {
-        <span class="error-message">
-            Information about apprenticeships in <a href="https://www.nibusinessinfo.co.uk/content/apprenticeships-employers">Northern Ireland</a>
-        </span>
-    }
-    else if (postcodeCountry.ToLower() == "scotland")
-    {
-        <span class="error-message">
-            Information about apprenticeships in <a href="https://www.apprenticeships.scot/">Scotland</a>
-        </span>
-    }
-
 }

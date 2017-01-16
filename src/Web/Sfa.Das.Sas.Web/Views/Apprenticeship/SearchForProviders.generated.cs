@@ -80,71 +80,73 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            You must enter a full an
 
 #line 73 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     }
-    else if (postcodeCountry.ToLower() == "wales")
+    else if (postcodeCountry != null)
     {
+        switch (postcodeCountry.ToLower())
+        {
+            case "wales":
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <span");
+WriteLiteralTo(__razor_helper_writer, "                <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            Information about apprenticeships in <a");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    Information about apprenticeships in <a");
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://businesswales.gov.wales/skillsgateway/apprenticeships\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Wales</a>\r\n        </span>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">Wales</a>\r\n                </span>\r\n");
 
 
-#line 79 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-    }
-    else if (postcodeCountry.ToLower() == "northernireland")
-    {
+#line 82 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                break;
+            case "northernireland":
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <span");
+WriteLiteralTo(__razor_helper_writer, "                <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            Information about apprenticeships in <a");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    Information about apprenticeships in <a");
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://www.nibusinessinfo.co.uk/content/apprenticeships-employers\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Northern Ireland</a>\r\n        </span>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">Northern Ireland</a>\r\n                </span>\r\n");
 
 
-#line 85 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-    }
-    else if (postcodeCountry.ToLower() == "scotland")
-    {
+#line 87 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                break;
+            case "scotland":
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <span");
+WriteLiteralTo(__razor_helper_writer, "                <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            Information about apprenticeships in <a");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    Information about apprenticeships in <a");
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://www.apprenticeships.scot/\"");
 
-WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n        </span>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n                </span>\r\n");
 
 
-#line 91 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 92 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                break;
+        }
     }
-
 
 
 #line default
 #line hidden
 });
 
-#line 93 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 95 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
 }
 #line default
 #line hidden
