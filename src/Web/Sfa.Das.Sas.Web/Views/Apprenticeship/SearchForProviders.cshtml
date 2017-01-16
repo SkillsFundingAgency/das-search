@@ -73,6 +73,9 @@
     }
     else if (postcodeCountry != null)
     {
+        <span class="error-message">
+            The postcode entered is not in England.
+        </span>
         switch (postcodeCountry.ToLower())
         {
             case "wales":
@@ -81,6 +84,7 @@
                 </span>
                 break;
             case "northernireland":
+                
                 <span class="error-message">
                     Information about apprenticeships in <a href="https://www.nibusinessinfo.co.uk/content/apprenticeships-employers">Northern Ireland</a>
                 </span>

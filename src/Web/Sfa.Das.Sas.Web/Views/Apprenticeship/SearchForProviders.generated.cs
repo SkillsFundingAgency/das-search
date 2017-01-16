@@ -82,6 +82,18 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            You must enter a full an
     }
     else if (postcodeCountry != null)
     {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n            The postcode entered is not in England.\r\n        </span>\r\n");
+
+
+#line 79 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
         switch (postcodeCountry.ToLower())
         {
             case "wales":
@@ -100,9 +112,10 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://businesswales.gov.wales/s
 WriteLiteralTo(__razor_helper_writer, ">Wales</a>\r\n                </span>\r\n");
 
 
-#line 82 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 85 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                 break;
             case "northernireland":
+                
 
 
 #line default
@@ -118,7 +131,7 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://www.nibusinessinfo.co.uk/
 WriteLiteralTo(__razor_helper_writer, ">Northern Ireland</a>\r\n                </span>\r\n");
 
 
-#line 87 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 91 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                 break;
             case "scotland":
 
@@ -136,7 +149,7 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://www.apprenticeships.scot/
 WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n                </span>\r\n");
 
 
-#line 92 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 96 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                 break;
         }
     }
@@ -146,7 +159,7 @@ WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n                </span>\
 #line hidden
 });
 
-#line 95 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 99 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
 }
 #line default
 #line hidden
