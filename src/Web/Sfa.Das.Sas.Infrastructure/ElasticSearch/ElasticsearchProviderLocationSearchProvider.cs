@@ -120,7 +120,7 @@
 
             return descriptor
                     .Terms(t => t
-                        .Field(x => x.DeliveryModes)
+                        .Field(x => x.DeliveryModesKeywords)
                         .Terms(deliveryModes));
         }
 
