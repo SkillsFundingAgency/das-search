@@ -31,7 +31,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
             else
             {
-                var currDate = DateTime.Now;
                 identifiers = _getFrameworks.GetAllFrameworks().Select(x => x.FrameworkId);
             }
 
@@ -42,7 +41,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 Content = sitemapContents.ToString()
             };
         }
-        
+
         private XDocument CreateDocument(IEnumerable<string> items, string urlPlaceholder)
         {
             XNamespace ns = SitemapNamespace;
