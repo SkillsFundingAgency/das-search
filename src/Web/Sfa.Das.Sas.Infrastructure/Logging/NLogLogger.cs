@@ -19,7 +19,7 @@ namespace Sfa.Das.Sas.Infrastructure.Logging
 
         private readonly string _loggerType;
         private readonly IRequestContext _context;
-        private string _version;
+        private readonly string _version;
 #pragma warning disable S1144, 0169// Unused private types or members should be removed
         private ElasticSearchTarget dummy; // Reference so assembly is copied to Primary output.
         private ApplicationInsightsTarget dummy2; // Reference so assembly is copied to Primary output.
