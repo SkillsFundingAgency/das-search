@@ -7,6 +7,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         public string Title { get; set; }
 
+        public string TitleKeyword { get; set; }
+
         // Standards
         public string StandardId { get; set; }
 

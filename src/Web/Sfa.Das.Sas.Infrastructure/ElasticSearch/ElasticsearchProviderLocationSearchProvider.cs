@@ -145,7 +145,7 @@
                 .Ascending());
         }
 
-        private static Dictionary<string, long?> RetrieveAggregationElements(TermsAggregate termsAggregate)
+        private static Dictionary<string, long?> RetrieveAggregationElements(TermsAggregate<string> termsAggregate)
         {
             var aggregationResult = new Dictionary<string, long?>();
 
@@ -255,7 +255,7 @@
                             .Must(NestedLocationsQuery<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -275,7 +275,7 @@
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -295,7 +295,7 @@
                             .Must(NestedLocationsQuery<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -315,7 +315,7 @@
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 

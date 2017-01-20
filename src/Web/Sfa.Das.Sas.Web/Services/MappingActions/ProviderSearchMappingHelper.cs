@@ -22,15 +22,16 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             {
                 viewModels.Add(new DeliveryModeViewModel
                                    {
-                                       Title = GetName(item.Key),
+                                       Title = GetName(item.Key.ToLower()),
                                        Count = item.Value ?? 0L,
                                        Checked = selectedTrainingOptions?.Contains(item.Key) ?? false,
                                        Value = item.Key
                                    });
             }
 
-            var orderList = new List<string> { "dayrelease", "blockrelease", "100percentemployer" };
-            return orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i)).WhereNotNull();
+            var orderList = new List<string> { "DayRelease", "BlockRelease", "100PercentEmployer" };
+            var response = orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i)).WhereNotNull();
+            return response;
         }
 
         public static NationalProviderViewModel GetNationalProvidersAmount(Dictionary<string, long?> nationalProvidersAggregation, bool selectedNationalProvider)
