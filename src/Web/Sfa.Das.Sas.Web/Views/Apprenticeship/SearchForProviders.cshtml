@@ -38,8 +38,38 @@
                         <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                         <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
                         <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
+
+                    </div>
+
+                    <fieldset>
+                        <legend>
+                            <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
+                        </legend>
+                        <div class="form-group">
+                            <label class="block-label selection-button-radio" for="pay-levy-yes">
+                                <input id="pay-levy-yes" type="radio" name="pay-levy" value="Yes">
+                                Yes
+                            </label>
+                            <label class="block-label selection-button-radio" for="pay-levy-no">
+                                <input id="pay-levy-no" type="radio" name="pay-levy" value="No">
+                                No
+                            </label>
+                        </div>
+
+                        <details>
+                            <summary><span class="summary">What is the Apprenticeship Levy?</span></summary>
+                            <div class="panel panel-border-narrow">
+                                <p>Employers with an annual pay bill of more than £3 million must spend 0.5% of their total PAYE bill on an apprenticeship levy.</p>
+                                <p><a href="" rel="external" target="_blank">Find out more about the apprenticeship levy</a></p>
+                            </div>
+                        </details>
+
+                    </fieldset>
+
+                    <div class="form-row">
                         <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
                     </div>
+
                 </div>
             </form>
             
