@@ -243,7 +243,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.PostcodeCountry, y => y.Ignore())
-                .ForMember(x => x.WrongPostcode, y => y.Ignore());
+                .ForMember(x => x.WrongPostcode, y => y.Ignore())
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
 
             cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
                 .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.StandardId))
@@ -251,7 +252,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.PostcodeCountry, y => y.Ignore())
-                .ForMember(x => x.WrongPostcode, y => y.Ignore());
+                .ForMember(x => x.WrongPostcode, y => y.Ignore())
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
 
             // Provider search
             cfg.CreateMap<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>()

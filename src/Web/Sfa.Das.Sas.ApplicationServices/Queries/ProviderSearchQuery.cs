@@ -12,6 +12,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
             set { _postcode = value?.Trim(); }
         }
 
+        public bool IsLevyPayingEmployer { get; set; }
+
         public int Page { get; set; }
 
         public int Take { get; set; }

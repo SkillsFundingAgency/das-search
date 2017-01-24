@@ -55,35 +55,35 @@ namespace Sfa.Das.Sas.Web.Controllers
                     postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
                     postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { WrongPostcode = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new { WrongPostcode = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.WalesPostcode:
                     postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { PostcodeCountry = "Wales", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new { PostcodeCountry = "Wales", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.ScotlandPostcode:
                     postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { PostcodeCountry = "Scotland", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new { PostcodeCountry = "Scotland", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode:
                     postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { PostcodeCountry = "NorthernIreland", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new { PostcodeCountry = "NorthernIreland", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
 
                 case StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
@@ -122,35 +122,35 @@ namespace Sfa.Das.Sas.Web.Controllers
                     url = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode });
+                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
                     url = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { WrongPostcode = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                        new { WrongPostcode = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.WalesPostcode:
                     url = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { PostcodeCountry = "Wales", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                        new { PostcodeCountry = "Wales", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.ScotlandPostcode:
                     url = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { PostcodeCountry = "Scotland", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                        new { PostcodeCountry = "Scotland", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode:
                     url = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { PostcodeCountry = "NorthernIreland", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode });
+                        new { PostcodeCountry = "NorthernIreland", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(url);
 
                 case FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
