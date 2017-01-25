@@ -13,10 +13,7 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                <div class="standard-result-summary">
-                    <span class="tag tag-new">New</span>
-                    An apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
-                </div>
+                <p class="lede">@Model.OverviewOfRole</p>
             </div>
         </div>
 
@@ -40,7 +37,6 @@
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
             @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
             @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
             @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
