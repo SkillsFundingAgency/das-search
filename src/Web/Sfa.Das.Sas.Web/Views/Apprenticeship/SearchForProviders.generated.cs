@@ -40,14 +40,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     public partial class SearchForProviders : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel>
     {
 
-#line 60 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 61 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
 public System.Web.WebPages.HelperResult ShowErrorMessage(bool hasError, bool wrongPostcode, string postcodeCountry)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 61 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 62 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
  
     if(hasError)
     {
@@ -63,7 +63,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            Sorry, postcode search n
 "  </span>\r\n");
 
 
-#line 67 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 68 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     }
     else if (wrongPostcode)
     {
@@ -78,7 +78,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            You must enter a full and valid postcode\r\n        </span>\r\n");
 
 
-#line 73 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 74 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     }
     else if (postcodeCountry != null)
     {
@@ -93,7 +93,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"error-message\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            The postcode entered is not in England.\r\n        </span>\r\n");
 
 
-#line 79 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 80 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
         switch (postcodeCountry.ToLower())
         {
             case "wales":
@@ -112,7 +112,7 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://businesswales.gov.wales/s
 WriteLiteralTo(__razor_helper_writer, ">Wales</a>\r\n                </span>\r\n");
 
 
-#line 85 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 86 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                 break;
             case "northernireland":
                 
@@ -131,7 +131,7 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://www.nibusinessinfo.co.uk/
 WriteLiteralTo(__razor_helper_writer, ">Northern Ireland</a>\r\n                </span>\r\n");
 
 
-#line 91 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 92 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                 break;
             case "scotland":
 
@@ -149,7 +149,7 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://www.apprenticeships.scot/
 WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n                </span>\r\n");
 
 
-#line 96 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 97 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                 break;
         }
     }
@@ -159,7 +159,7 @@ WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n                </span>\
 #line hidden
 });
 
-#line 99 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+#line 100 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
 }
 #line default
 #line hidden
@@ -173,6 +173,7 @@ WriteLiteralTo(__razor_helper_writer, ">Scotland</a>\r\n                </span>\
             #line 3 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
   
     ViewBag.Title = "Search for providers";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
             #line default
@@ -196,7 +197,7 @@ WriteLiteral(" class=\"lede\"");
 WriteLiteral(">\r\n            For <strong>");
 
             
-            #line 13 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 14 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                    Write(Model.Title);
 
             
@@ -212,14 +213,14 @@ WriteLiteral(" class=\"column-two-thirds\"");
 
 WriteLiteral(">\r\n    \r\n            <form");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 485), Tuple.Create("\"", 508)
+WriteAttribute("action", Tuple.Create(" action=\"", 675), Tuple.Create("\"", 698)
             
-            #line 20 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 494), Tuple.Create<System.Object, System.Int32>(Model.PostUrl
+            #line 21 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 684), Tuple.Create<System.Object, System.Int32>(Model.PostUrl
             
             #line default
             #line hidden
-, 494), false)
+, 684), false)
 );
 
 WriteLiteral(" class=\"postcode-form search-box\"");
@@ -228,15 +229,15 @@ WriteLiteral(" method=\"get\"");
 
 WriteLiteral(">\r\n\r\n                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 580), Tuple.Create("\"", 780)
-, Tuple.Create(Tuple.Create("", 588), Tuple.Create("form-elements", 588), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 770), Tuple.Create("\"", 970)
+, Tuple.Create(Tuple.Create("", 778), Tuple.Create("form-elements", 778), true)
             
-            #line 22 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("  ", 601), Tuple.Create<System.Object, System.Int32>(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : ""
+            #line 23 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+, Tuple.Create(Tuple.Create("  ", 791), Tuple.Create<System.Object, System.Int32>(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : ""
             
             #line default
             #line hidden
-, 603), false)
+, 793), false)
 );
 
 WriteLiteral(">\r\n                    <div");
@@ -261,7 +262,7 @@ WriteLiteral(">\r\n                        Enter the full postcode of your appre
 WriteLiteral("                        ");
 
             
-            #line 33 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 34 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                    Write(ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry));
 
             
@@ -280,14 +281,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1525), Tuple.Create("\"", 1556)
+WriteAttribute("value", Tuple.Create(" value=\"", 1715), Tuple.Create("\"", 1746)
             
-            #line 38 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                          , Tuple.Create(Tuple.Create("", 1533), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
+            #line 39 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                          , Tuple.Create(Tuple.Create("", 1723), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
             
             #line default
             #line hidden
-, 1533), false)
+, 1723), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -298,14 +299,14 @@ WriteLiteral(" name=\"keywords\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1650), Tuple.Create("\"", 1676)
+WriteAttribute("value", Tuple.Create(" value=\"", 1840), Tuple.Create("\"", 1866)
             
-            #line 39 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                  , Tuple.Create(Tuple.Create("", 1658), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+            #line 40 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                  , Tuple.Create(Tuple.Create("", 1848), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
             
             #line default
             #line hidden
-, 1658), false)
+, 1848), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -314,14 +315,14 @@ WriteLiteral(" type=\"search\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 1740), Tuple.Create("\"", 1780)
+WriteAttribute("value", Tuple.Create(" value=\"", 1930), Tuple.Create("\"", 1970)
             
-            #line 40 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 1748), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
+            #line 41 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 1938), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
             
             #line default
             #line hidden
-, 1748), false)
+, 1938), false)
 );
 
 WriteLiteral(" id=\"search-box\"");

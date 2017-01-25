@@ -48,11 +48,12 @@ namespace Sfa.Das.Sas.Web.Views.Start
             #line 4 "..\..\Views\Start\Cookies.cshtml"
   
     ViewBag.Title = "Skills Funding Agency (SFA) - Cookies";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
             #line default
             #line hidden
-WriteLiteral("\n\n<main");
+WriteLiteral("\r\n\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
@@ -60,38 +61,40 @@ WriteLiteral(" role=\"main\"");
 
 WriteLiteral(" class=\"\"");
 
-WriteLiteral(">\n    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\n\n        <div");
+WriteLiteral(">\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n            <header");
+WriteLiteral(">\r\n            <header");
 
 WriteLiteral(" class=\"page-header\"");
 
-WriteLiteral(">\n                <div>\n                    <h1");
+WriteLiteral(">\r\n                <div>\r\n                    <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n                        Cookies\n                    </h1>\n                </div" +
-">\n            </header>\n\n            <div");
+WriteLiteral(">\r\n                        Cookies\r\n                    </h1>\r\n                </" +
+"div>\r\n            </header>\r\n\r\n            <div");
 
 WriteLiteral(" class=\"summary\"");
 
-WriteLiteral(">\n                <p>The Skills Funding Agency (SFA) puts small files (known as ‘" +
-"cookies’) onto your computer to collect information about how you browse our sit" +
-"es.</p>\n            </div>\n\n            <p>Cookies are used to: </p>\n\n          " +
-"  <ul");
+WriteLiteral(">\r\n                <p>The Skills Funding Agency (SFA) puts small files (known as " +
+"‘cookies’) onto your computer to collect information about how you browse our si" +
+"tes.</p>\r\n            </div>\r\n\r\n            <p>Cookies are used to: </p>\r\n\r\n    " +
+"        <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\n                <li>measure how you use our websites so they can be updated and" +
-" improved based on your needs</li>\n                <li>remember the notification" +
-"s you’ve seen so that we don’t show them to you again</li>\n            </ul>\n\n  " +
-"          <div");
+WriteLiteral(@">
+                <li>measure how you use our websites so they can be updated and improved based on your needs</li>
+                <li>remember the notifications you’ve seen so that we don’t show them to you again</li>
+            </ul>
+
+            <div");
 
 WriteLiteral(" role=\"note\"");
 
@@ -114,21 +117,22 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1395), Tuple.Create("\"", 1417)
+WriteAttribute("href", Tuple.Create(" href=\"", 1624), Tuple.Create("\"", 1646)
             
-            #line 40 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 1402), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
+            #line 41 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 1631), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
             
             #line default
             #line hidden
-, 1402), false)
+, 1631), false)
 );
 
-WriteLiteral(">how to manage cookies.</a>\n            </p>\n\n            <h2");
+WriteLiteral(">how to manage cookies.</a>\r\n            </p>\r\n\r\n            <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">\n                How cookies are used by SFA\n            </h2>\n\n            <h3");
+WriteLiteral(">\r\n                How cookies are used by SFA\r\n            </h2>\r\n\r\n            " +
+"<h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
@@ -163,9 +167,9 @@ WriteLiteral(" aria-label=\"Information\"");
 
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
-WriteLiteral(">\n                <p>We don’t allow Google to use or share our analytics data.</p" +
-">\n            </div>\n\n            <p>Google Analytics sets the following cookies" +
-":</p>\n\n            <h3");
+WriteLiteral(">\r\n                <p>We don’t allow Google to use or share our analytics data.</" +
+"p>\r\n            </div>\r\n\r\n            <p>Google Analytics sets the following coo" +
+"kies:</p>\r\n\r\n            <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
@@ -202,17 +206,17 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3676), Tuple.Create("\"", 3699)
+WriteAttribute("href", Tuple.Create(" href=\"", 3964), Tuple.Create("\"", 3987)
             
-            #line 99 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 3683), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
+            #line 100 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 3971), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
             
             #line default
             #line hidden
-, 3683), false)
+, 3971), false)
 );
 
-WriteLiteral(">opt out of Google Analytics cookies.</a>\n            </p>\n\n\n            <h3");
+WriteLiteral(">opt out of Google Analytics cookies.</a>\r\n            </p>\r\n\r\n\r\n            <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
@@ -254,14 +258,14 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4824), Tuple.Create("\"", 4860)
+WriteAttribute("href", Tuple.Create(" href=\"", 5145), Tuple.Create("\"", 5181)
             
-            #line 135 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 4831), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
+            #line 136 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 5152), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
             
             #line default
             #line hidden
-, 4831), false)
+, 5152), false)
 );
 
 WriteLiteral(">Application Insights data retention</a>\r\n            </p>\r\n\r\n            <h2");
@@ -344,46 +348,46 @@ WriteLiteral(@">
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">\n                Government services\n            </h3>\n\n            <p>\n        " +
-"        Most services we link to are run by different government departments, eg" +
-" HM Revenue and Customs (<abbr");
+WriteLiteral(">\r\n                Government services\r\n            </h3>\r\n\r\n            <p>\r\n   " +
+"             Most services we link to are run by different government department" +
+"s, eg HM Revenue and Customs (<abbr");
 
 WriteLiteral(" title=\"HM Revenue and Customs\"");
 
 WriteLiteral(">HMRC</abbr>) or the Home Office. These services may set additional cookies and, " +
-"if so, will have their own cookies policy.\n            </p>\n\n            <h3");
+"if so, will have their own cookies policy.\r\n            </p>\r\n\r\n            <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">\n                Our performance survey\n            </h3>\n\n            <p>\n     " +
-"           We use <a");
+WriteLiteral(">\r\n                Our performance survey\r\n            </h3>\r\n\r\n            <p>\r\n" +
+"                We use <a");
 
 WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 9705), Tuple.Create("\"", 9736)
+WriteAttribute("href", Tuple.Create(" href=\"", 10062), Tuple.Create("\"", 10093)
             
-            #line 253 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 9712), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
+            #line 254 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 10069), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
             
             #line default
             #line hidden
-, 9712), false)
+, 10069), false)
 );
 
 WriteLiteral(">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMon" +
-"key will save extra cookies to your computer to track your progress through it.\n" +
-"            </p>\n\n            <div");
+"key will save extra cookies to your computer to track your progress through it.\r" +
+"\n            </p>\r\n\r\n            <div");
 
 WriteLiteral(" class=\"meta-data group\"");
 
-WriteLiteral(">\n                <p");
+WriteLiteral(">\r\n                <p");
 
 WriteLiteral(" class=\"modmodified-date\"");
 
-WriteLiteral(">Last updated: 8 August 2016</p>\n            </div>\n        </div>\n    </div>\n</m" +
-"ain>");
+WriteLiteral(">Last updated: 8 August 2016</p>\r\n            </div>\r\n        </div>\r\n    </div>\r" +
+"\n</main>");
 
         }
     }

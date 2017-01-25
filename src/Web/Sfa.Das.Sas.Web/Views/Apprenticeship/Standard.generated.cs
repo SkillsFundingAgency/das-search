@@ -174,6 +174,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n
             #line 5 "..\..\Views\Apprenticeship\Standard.cshtml"
   
     ViewBag.Title = @Model.Title + " - Apprenticeship Standard";
+    ViewBag.Description = @Model.OverviewOfRole;
 
             
             #line default
