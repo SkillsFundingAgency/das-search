@@ -150,14 +150,16 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1282), Tuple.Create("\"", 1417)
+WriteLiteral(" rel=\"nofollow\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 1297), Tuple.Create("\"", 1432)
             
             #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 1289), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+      , Tuple.Create(Tuple.Create("", 1304), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 1289), false)
+, 1304), false)
 );
 
 WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n   " +
@@ -853,16 +855,18 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
+WriteLiteral(" rel=\"nofollow\"");
+
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8253), Tuple.Create("\"", 8390)
+WriteAttribute("href", Tuple.Create(" href=\"", 8283), Tuple.Create("\"", 8420)
             
             #line 182 "..\..\Views\Apprenticeship\Framework.cshtml"
-                , Tuple.Create(Tuple.Create("", 8260), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
+                               , Tuple.Create(Tuple.Create("", 8290), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 8260), false)
+, 8290), false)
 );
 
 WriteLiteral(">\r\n                    Find training providers\r\n                </a>\r\n        </d" +

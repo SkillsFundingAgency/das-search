@@ -74,14 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3211), Tuple.Create("\"", 3219)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 3241), Tuple.Create("\"", 3249)
 
 #line 74 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3216), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 3246), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 3216), false)
+, 3246), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -126,14 +126,14 @@ if (!string.IsNullOrEmpty(title))
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3385), Tuple.Create("\"", 3399)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3415), Tuple.Create("\"", 3429)
 
 #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3392), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3422), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3392), false)
+, 3422), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -234,16 +234,18 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
+WriteLiteral(" rel=\"nofollow\"");
+
 WriteLiteral(" id=\"ga-find-provider-top\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 999), Tuple.Create("\"", 1133)
+WriteAttribute("href", Tuple.Create(" href=\"", 1014), Tuple.Create("\"", 1148)
             
             #line 27 "..\..\Views\Apprenticeship\Standard.cshtml"
-                 , Tuple.Create(Tuple.Create("", 1006), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+                                , Tuple.Create(Tuple.Create("", 1021), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 1006), false)
+, 1021), false)
 );
 
 WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n   " +
@@ -369,16 +371,18 @@ WriteLiteral(">\r\n            <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
+WriteLiteral(" rel=\"nofollow\"");
+
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2786), Tuple.Create("\"", 2920)
+WriteAttribute("href", Tuple.Create(" href=\"", 2816), Tuple.Create("\"", 2950)
             
             #line 62 "..\..\Views\Apprenticeship\Standard.cshtml"
-            , Tuple.Create(Tuple.Create("", 2793), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+                           , Tuple.Create(Tuple.Create("", 2823), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 2793), false)
+, 2823), false)
 );
 
 WriteLiteral(">\r\n                Find training providers\r\n            </a>\r\n        </div>\r\n   " +
