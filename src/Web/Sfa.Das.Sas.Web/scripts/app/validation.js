@@ -9,32 +9,38 @@
     validation.init = function () {
         $('form.postcode-form').on('submit', function (e) {
             var postCode = $(this).find('.postcode-search-box').val().trim(),
-                txtPostCode = document.getElementById('search-box'),
+                $txtPostCode = $('#search-box'),
                 rbLevyPayer = document.getElementById('levyPaying'),
                 rbNonLevyPayer = document.getElementById('notLevyPaying');
 
-            txtPostCode.classList.add('form-control');
-            $('.radio-inline').addClass("form-control");
+            $('.form-group').removeClass('error');
 
             if (!validation.validatePostcode(postCode)) {
+
                 e.preventDefault();
-                $('.form-elements').addClass("error");
-                $('.radio-inline').removeClass("form-control error");
-                
+
+                $txtPostCode.parent().addClass('error');
+
                 postCode = postCode.toUpperCase().trim().replace(/\s/g, "");
+
                 if (postCode.length > 4 && postCode.length < 8) {
                     var splitAt = postCode.length - 3;
                     postCode = [postCode.slice(0, splitAt), " ", postCode.slice(splitAt)].join("");
                 }
+
                 $('.postcode-search-box').val(postCode);
             }
+
             else if (rbLevyPayer.checked === false && rbNonLevyPayer.checked === false) {
-                e.preventDefault();
+
+                $(rbLevyPayer).closest('.form-group').addClass('error');
                 $('.form-elements').addClass("error");
-                $('.postcode-search-box').removeClass("form-control error");
+                e.preventDefault();
+
             }
         });
     };
+
     validation.init();
     
 }(SearchAndShortlist.validation = {}));
