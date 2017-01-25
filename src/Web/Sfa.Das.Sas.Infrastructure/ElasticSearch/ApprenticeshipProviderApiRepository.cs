@@ -9,7 +9,6 @@ using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Infrastructure.Mapping;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -17,23 +16,16 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     {
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
-        private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
-        private readonly IProviderMapping _providerMapping;
         private readonly IHttpGet _httpService;
         private readonly IElasticsearchHelper _elasticsearchHelper;
 
-        public ApprenticeshipProviderApiRepository(
-            IElasticsearchCustomClient elasticsearchCustomClient,
-            ILog applicationLogger,
+        public ApprenticeshipProviderApiRepository(ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IProviderMapping providerMapping,
             IHttpGet httpService,
             IElasticsearchHelper elasticsearchHelper)
         {
-            _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
-            _providerMapping = providerMapping;
             _httpService = httpService;
             _elasticsearchHelper = elasticsearchHelper;
         }
