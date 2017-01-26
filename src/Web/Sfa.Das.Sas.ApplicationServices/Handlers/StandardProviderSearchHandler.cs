@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     var responseError = new StandardProviderSearchResponse
                     {
                         Success = false,
-                        StatusCode = StandardProviderSearchResponse.ResponseCodes.ServerError
+                        StatusCode = StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat
                     };
                     return responseError;
                 default:
