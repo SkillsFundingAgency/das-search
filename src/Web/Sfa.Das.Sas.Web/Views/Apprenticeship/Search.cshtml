@@ -5,7 +5,6 @@
 <main id="content" role="main">
     <div class="grid-row">
         <div class="column-two-thirds">
-
             <h1 class="heading-xlarge">
                 Find apprenticeship training
             </h1>
@@ -13,17 +12,13 @@
             @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
             {
                 <div class="form-group">
-
                     <label for="keywords">
                         <span class="form-label-bold">Search by keywords</span>
                         <span class="form-hint">Can include job title or apprenticeship</span>
                     </label>
-
                     <span class="error-message"></span>
-            
-                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200" placeholder="">
+                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
                 </div>
-
                 <input class="button" id="submit-keywords" type="submit" value="Search"/>
             }
 

@@ -40,7 +40,7 @@ aside h2:first-child {
 
 .postcode-search-form {
     @extend %contain-floats;
-    background-color: #DEE0E2;
+    background-color: $grey-3;
     padding: 20px 20px 0;
     margin-bottom: 20px;
     h2 {
@@ -355,6 +355,17 @@ aside h2:first-child {
     text-decoration: none;
     vertical-align: top;
     width: 50%;
+    &:active, 
+    &:focus {
+        background: $grey-4;
+    }
+    .description {
+        display: block;
+    }
+    .counter {
+        display: block;
+        font-size: 14px;
+    }
     .arrow-button {
         color: #2e358b;
         float: left;
@@ -365,5 +376,16 @@ aside h2:first-child {
     &.next {
         float: right;
         text-align: right;
+        .arrow-button {
+            float: right;
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+    .hide-mob {
+        display: none;
+        @media screen and (max-width: 640px) {
+            display: block;
+        }
     }
 }
