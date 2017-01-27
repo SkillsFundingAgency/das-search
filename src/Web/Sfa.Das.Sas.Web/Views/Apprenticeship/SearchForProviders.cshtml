@@ -20,18 +20,19 @@
                     <h2 class="heading-medium">
                         Enter a postcode
                     </h2>
-                    <div class="form-group @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")">
+                    <div class="form-group @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")" data-validation="Enter a valid postcode">
                         <label for="search-box">
                             <span class="form-label-bold">Enter the full postcode of your apprentice's workplace</span>
                             <span class="form-hint">For example: 'SW1A 2AA'</span>
-                            @ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry)
+                            <span class="error-message">@ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry)</span>
                         </label>
                         <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="form-control postcode-search-box" maxlength="200" placeholder="">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-validation="Select an option">
                         <fieldset class="inline">
                             <legend>
                                 <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
+                                <span class="error-message"></span>
                             </legend>
                             <label class="block-label selection-button-radio">
                                 <input type="radio" id="levyPaying" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true">
