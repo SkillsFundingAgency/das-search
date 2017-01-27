@@ -12,7 +12,7 @@ module.exports = function (grunt) {
         sass: {
             dist: {
                 options: {
-                    outputStyle: 'compressed',
+                    outputStyle: 'expanded',
                     noCache: true,
                     sourceMap: false,
                     precision: 3
