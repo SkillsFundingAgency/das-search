@@ -255,7 +255,7 @@
                         .Bool(ft => ft
                             .Filter(FilterByApprenticeshipId(selector, code))
                             .Must(NestedLocationsQuery<T>(location))
-                            .Should(m => m.Term("hasNonLevyContract", true))))
+                            .Should(m => m.Term(f => f.HasNonLevyContract, true))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
@@ -276,7 +276,7 @@
                         .Bool(b => b
                             .Filter(FilterByApprenticeshipId(selector, code))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))
-                            .Should(m => m.Term("hasNonLevyContract", true))))
+                            .Should(m => m.Term(f => f.HasNonLevyContract, true))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
@@ -297,7 +297,7 @@
                         .Bool(ft => ft
                             .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
                             .Must(NestedLocationsQuery<T>(location))
-                            .Should(m => m.Term("hasNonLevyContract", true))))
+                            .Should(m => m.Term(f => f.HasNonLevyContract, true))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
@@ -318,7 +318,7 @@
                         .Bool(b => b
                             .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location))
-                            .Should(m => m.Term("hasNonLevyContract", true))))
+                            .Should(m => m.Term(f => f.HasNonLevyContract, true))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
