@@ -27,5 +27,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         double? NationalOverallAchievementRate { get; set; }
 
         string OverallCohort { get; set; }
+
+        bool HasNonLevyContract { get; set; }
     }
 }
