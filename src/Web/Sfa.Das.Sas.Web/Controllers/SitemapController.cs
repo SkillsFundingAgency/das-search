@@ -13,6 +13,23 @@ namespace Sfa.Das.Sas.Web.Controllers
             _mediator = mediator;
         }
 
+        public ActionResult Root()
+        {
+            var baseUrl = GetBaseUrl();
+
+            var content = $@"<? xml version=""1.0"" encoding=""UTF-8"" ?>
+<sitemapindex xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
+     <sitemap>
+       <loc>{baseUrl}/sitemap/standards</loc>
+     </sitemap>
+     <sitemap>
+       <loc>{baseUrl}/sitemap/frameworks</loc>
+     </sitemap>
+</sitemapindex>";
+
+            return Content(content, "text/xml");
+        }
+
         // GET: Sitemap/Standards
         public ActionResult Standards()
         {
