@@ -50,6 +50,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             {
                 builder.AppendLine("Disallow: /");
             }
+            else
+            {
+                builder.AppendLine("Disallow: /apprenticeship/searchforstandardproviders/");
+            }
 
             builder.AppendLine($"Sitemap: {baseUrl}/sitemap.xml");
 

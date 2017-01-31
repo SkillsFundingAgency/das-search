@@ -42,42 +42,43 @@ namespace Sfa.Das.Sas.Web.Views.Start
             #line 1 "..\..\Views\Start\Start.cshtml"
   
     ViewBag.Title = "Find Apprenticeship Training | Skills Funding Agency";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
             #line default
             #line hidden
-WriteLiteral("\n<main");
+WriteLiteral("\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\n    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\n        <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n            <hgroup>\n                <h1");
+WriteLiteral(">\r\n            <hgroup>\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n                    Find apprenticeship training\n                </h1>\n        " +
-"    </hgroup>\n            <p>For employers looking to take on apprentices.</p>\n\n" +
-"            <p>Use this service to:</p>\n\n            <ul");
+WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n     " +
+"       </hgroup>\r\n            <p>For employers looking to take on apprentices.</" +
+"p>\r\n\r\n            <p>Use this service to:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\n                <li>search for apprenticeship training by job role or keyword</" +
-"li>\n                <li>find training providers who offer the apprenticeship tra" +
-"ining you choose</li>\n            </ul>\n\n");
+WriteLiteral(">\r\n                <li>search for apprenticeship training by job role or keyword<" +
+"/li>\r\n                <li>find training providers who offer the apprenticeship t" +
+"raining you choose</li>\r\n            </ul>\r\n\r\n");
 
 WriteLiteral("            ");
 
             
-            #line 21 "..\..\Views\Start\Start.cshtml"
+            #line 22 "..\..\Views\Start\Start.cshtml"
        Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
 
             
@@ -99,7 +100,7 @@ WriteLiteral(">\r\n                <p>\r\n                    <strong>National A
 WriteLiteral(" href=\"https://www.gov.uk/call-charges\"");
 
 WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\r\n\r\n   " +
-"     </div>\n    </div>\n</main>");
+"     </div>\r\n    </div>\r\n</main>");
 
         }
     }

@@ -2,7 +2,8 @@
 @model Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel
 
 @{
-    ViewBag.Title = @Model.Title + " - Apprenticeship Framework";   
+    ViewBag.Title = @Model.Title + " - Apprenticeship Framework";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 
 <main id="content">
@@ -33,7 +34,7 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+                    <a class="button ui-find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
                         Find training providers
                     </a>
                 </aside>
@@ -179,7 +180,7 @@
         </dl>
 
         <div id="bottom-actions">
-                <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
+                <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
                     Find training providers
                 </a>
         </div>

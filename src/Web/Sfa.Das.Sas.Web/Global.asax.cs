@@ -37,10 +37,23 @@ namespace Sfa.Das.Sas.Web
             Exception ex = Server.GetLastError().GetBaseException();
             var logger = DependencyResolver.Current.GetService<ILog>();
 
-            if (ex is HttpException && ((HttpException)ex).GetHttpCode() != 404)
+            if (ex is HttpException
+                && ((HttpException)ex).GetHttpCode() != 404 
+                && !UrlContains("findatrainingorganisation.nas.apprenticeships.org.uk"))
             {
                 logger.Error(ex, "App_Error");
             }
+        }
+
+        private bool UrlContains(string text)
+        {
+            var url = HttpContext.Current.Request.RequestContext.HttpContext.Request.Url;
+            if (url == null)
+            {
+                return false;
+            }
+
+            return url.OriginalString.Contains(text);
         }
 
         protected void Application_BeginRequest()

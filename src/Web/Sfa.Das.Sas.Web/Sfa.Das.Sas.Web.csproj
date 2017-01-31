@@ -576,9 +576,6 @@
     <Content Include="scripts\vendor\js.cookie-2.1.1.js" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js" />
     <Content Include="scripts\vendor\modernizr-3.3.1.min.js" />
-    <Content Include="sitemap.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>

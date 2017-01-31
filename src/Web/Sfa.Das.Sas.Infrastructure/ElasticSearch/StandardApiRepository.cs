@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using SFA.DAS.Apprenticeships.Api.Client;
-using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
-
+﻿
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-
     using Nest;
+    using SFA.DAS.Apprenticeships.Api.Client;
+    using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
