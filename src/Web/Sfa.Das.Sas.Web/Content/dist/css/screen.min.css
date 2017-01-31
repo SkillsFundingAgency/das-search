@@ -3269,6 +3269,14 @@ b, strong {
   }
 }
 
+.detail-highlight {
+  border-left: 5px solid #fcbe36;
+  padding-left: 10px;
+  background-color: #dee0e2;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 @media (max-width: 640px) {
   .postcode-form.search-box input[type='submit'] {
     display: block;
