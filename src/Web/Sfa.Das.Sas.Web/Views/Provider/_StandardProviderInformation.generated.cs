@@ -71,7 +71,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt><b>Distance:</b></dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt><b>Distance:</b></dt>\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
@@ -95,7 +95,7 @@ WriteLiteralTo(__razor_helper_writer, " ");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, " away</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, " away</dd>\n");
 
 
 #line 48 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -119,7 +119,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</dd>\n");
 
 
 #line 52 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -129,7 +129,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt><b>Training options:</b></dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt><b>Training options:</b></dt>\n");
 
 
 #line 55 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -151,7 +151,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</dd>\n");
 
 
 #line 57 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -177,7 +177,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n\n");
 
             
             #line 9 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -192,24 +192,24 @@ WriteLiteral("    <article");
 
 WriteLiteral(" class=\"result\"");
 
-WriteLiteral(">\r\n        <header>\r\n            <h2");
+WriteLiteral(">\n        <header>\n            <h2");
 
 WriteLiteral(" class=\"result-title\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\n");
 
 WriteLiteral("                ");
 
             
             #line 15 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
            Write(Html.ActionLink(item.ProviderName, "Detail", "Provider",
-                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode },
+                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode, isLevyPayingEmployerVisitor = Model.IsLevyPayingEmployerVisitor },
                     new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
             
             #line 18 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -229,7 +229,7 @@ WriteLiteral("                    <span");
 
 WriteLiteral(" class=\"tag tag-new\"");
 
-WriteLiteral(">National</span>\r\n");
+WriteLiteral(">National</span>\n");
 
             
             #line 21 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -238,11 +238,11 @@ WriteLiteral(">National</span>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("            </h2>\r\n        </header>\r\n\r\n        <dl");
+WriteLiteral("            </h2>\n        </header>\n\n        <dl");
 
 WriteLiteral(" class=\"result-data-list\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\n");
 
 WriteLiteral("            ");
 
@@ -253,11 +253,11 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n            <dt><b>Employer satisfaction:</b></dt>\r\n            <dd");
+WriteLiteral("\n\n            <dt><b>Employer satisfaction:</b></dt>\n            <dd");
 
 WriteLiteral(" class=\"employer-satisfaction\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\n");
 
 WriteLiteral("                ");
 
@@ -268,12 +268,12 @@ WriteLiteral("                ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </dd>\r\n            <dt><b>Learner satisfaction:</b></dt>\r\n         " +
-"   <dd");
+WriteLiteral("\n            </dd>\n            <dt><b>Learner satisfaction:</b></dt>\n            " +
+"<dd");
 
 WriteLiteral(" class=\"learner-satisfaction\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\n");
 
 WriteLiteral("                ");
 
@@ -284,12 +284,11 @@ WriteLiteral("                ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </dd>\r\n            <dt><b>Achievement rate:</b></dt>\r\n            <" +
-"dd");
+WriteLiteral("\n            </dd>\n            <dt><b>Achievement rate:</b></dt>\n            <dd");
 
 WriteLiteral(" class=\"achievement-rate\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\n");
 
 WriteLiteral("                ");
 
@@ -300,7 +299,7 @@ WriteLiteral("                ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </dd>\r\n        </dl>\r\n    </article>\r\n");
+WriteLiteral("\n            </dd>\n        </dl>\n    </article>\n");
 
             
             #line 42 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
@@ -309,7 +308,7 @@ WriteLiteral("\r\n            </dd>\r\n        </dl>\r\n    </article>\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
         }
     }

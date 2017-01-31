@@ -110,7 +110,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 new Pagination { Page = pageNumber, Take = message.Take },
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
-                message.ShowAll);
+                message.ShowAll,
+                hasNonLevyContract: message.IsLevyPayingEmployer == false);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {
@@ -163,7 +164,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 new Pagination(),
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
-                true);
+                true,
+                hasNonLevyContract: message.IsLevyPayingEmployer == false);
 
             totalRestultsForCountry = totalProvidersCountry.TotalResults;
 

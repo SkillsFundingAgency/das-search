@@ -13,7 +13,7 @@
         <header>
             <h2 class="result-title">
                 @Html.ActionLink(item.ProviderName, "Detail", "Provider",
-                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode },
+                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode, isLevyPayingEmployerVisitor = Model.IsLevyPayingEmployerVisitor },
                     new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
                 @if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
                 {

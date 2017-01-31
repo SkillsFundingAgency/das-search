@@ -11,5 +11,11 @@
         public bool NationalProvider { get; set; }
 
         public ContactInformation ContactInformation { get; set; }
+
+        public bool HasNonLevyContract { get; set; }
+
+        public bool HasParentCompanyGuarantee { get; set; }
+
+        public bool IsNew { get; set; }
     }
 }

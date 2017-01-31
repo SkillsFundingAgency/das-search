@@ -10,8 +10,6 @@ using Sfa.Das.Sas.Core.Logging;
 
 namespace Sfa.Das.Sas.ApplicationServices
 {
-    using System;
-
     public sealed class ProviderSearchService : IProviderSearchService
     {
         private readonly IProviderLocationSearchProvider _searchProvider;
@@ -37,37 +35,37 @@ namespace Sfa.Das.Sas.ApplicationServices
             _paginationSettings = paginationSettings;
         }
 
-        public async Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
+        public async Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll, bool hasNonLevyContract)
         {
             ProviderStandardSearchResults result;
             if (!showAll && !nationalProviders)
             {
-                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocation);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocation, hasNonLevyContract);
                 result.ShowNationalProvidersOnly = nationalProviders;
                 return result;
             }
 
             if (showAll && !nationalProviders)
             {
-                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipId);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipId, hasNonLevyContract);
                 result.ShowNationalProvidersOnly = nationalProviders;
                 return result;
             }
 
             if (!showAll && nationalProviders)
             {
-                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly);
+                result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly, hasNonLevyContract);
                 result.ShowNationalProvidersOnly = nationalProviders;
                 return result;
             }
 
-            result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly);
+            result = await SearchStandardProviders(standardId, postCode, pagination, deliveryModes, ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly, hasNonLevyContract);
             result.ShowNationalProvidersOnly = nationalProviders;
 
             return result;
         }
 
-        public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll)
+        public async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll, bool hasNonLevyContract)
         {
             ProviderFrameworkSearchResults result;
 
@@ -85,12 +83,12 @@ namespace Sfa.Das.Sas.ApplicationServices
                 filterOption = ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly;
             }
 
-            result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, filterOption);
+            result = await SearchFrameworkProviders(frameworkId, postCode, pagination, deliveryModes, filterOption, hasNonLevyContract);
             result.ShowNationalProvidersOnly = nationalProviders;
             return result;
         }
 
-        private async Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
+        private async Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection, bool hasNonLevyContract)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -121,7 +119,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var filter = new ProviderSearchFilter
                 {
                     DeliveryModes = deliveryModes,
-                    SearchOption = searchSelection
+                    SearchOption = searchSelection,
+                    HasNonLevyContract = hasNonLevyContract
                 };
 
                 var searchResults = _searchProvider.SearchStandardProviders(standardId, coordinates, pagination.Page, takeElements, filter);
@@ -190,7 +189,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             _logger.Info("Provider location search", logEntry);
         }
 
-        private async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection)
+        private async Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, ProviderFilterOptions searchSelection, bool hasNonLevyContract)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -218,7 +217,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var filter = new ProviderSearchFilter
                 {
                     DeliveryModes = deliveryModes,
-                    SearchOption = searchSelection
+                    SearchOption = searchSelection,
+                    HasNonLevyContract = hasNonLevyContract
                 };
 
                 var searchResults = _searchProvider.SearchFrameworkProviders(frameworkId, coordinates, pagination.Page, takeElements, filter);
