@@ -95,7 +95,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
-                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
+                .AfterMap((src, dest) =>
+                {
+                    dest.AbsolutePath = Request?.Url?.AbsolutePath;
+                    dest.IsLevyPayingEmployerVisitor = criteria.IsLevyPayingEmployer;
+                }));
 
             return View(viewModel);
         }
@@ -163,7 +167,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(response, opt => opt
-                .AfterMap((src, dest) => dest.AbsolutePath = Request?.Url?.AbsolutePath));
+                .AfterMap((src, dest) =>
+                {
+                    dest.AbsolutePath = Request?.Url?.AbsolutePath;
+                    dest.IsLevyPayingEmployerVisitor = criteria.IsLevyPayingEmployer;
+                }));
 
             return View(viewModel);
         }
@@ -190,6 +198,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                                     dest.SurveyUrl = _settings.SurveyUrl.ToString();
                                     dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
                                     dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
+                                    dest.IsLevyPayingEmployerVisitor = criteria.IsLevyPayingEmployerVisitor;
                                 }));
 
             return View(viewModel);
@@ -202,6 +211,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 .AddValue("postcode", criteria?.PostCode ?? string.Empty)
                 .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
                 .AddValue("showall", criteria?.ShowAll)
+                .AddValue("isLevyPayingEmployer", criteria?.IsLevyPayingEmployer)
                 .AddList("deliverymodes", criteria?.DeliveryModes);
         }
     }

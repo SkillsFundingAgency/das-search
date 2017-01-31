@@ -13,5 +13,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
         public string StandardCode { get; set; }
 
         public string FrameworkId { get; set; }
+
+        public bool IsLevyPayingEmployerVisitor { get; set; }
     }
 }
