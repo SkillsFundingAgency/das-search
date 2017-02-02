@@ -8,17 +8,11 @@
 
     public abstract class ProviderSearchPageBase : SharedTemplatePage
     {
-        private IWebElement _searchButton;
-
         [ElementLocator(Id = "search-box")]
         public IWebElement PostcodeSearchBox { get; set; }
 
         [ElementLocator(Class = "postcode-search-button")]
-        public IWebElement SearchButton
-        {
-            get { return _searchButton; }
-            set { _searchButton = value; }
-        }
+        public IWebElement SearchButton { get; set; }
 
         [ElementLocator(CssSelector = ".postcode-form .error-message")]
         public IWebElement ErrorMessage { get; set; }
@@ -27,6 +21,6 @@
         public IWebElement YesImLevyPayingEmployer { get; set; }
 
         [ElementLocator(Id = "notLevyPaying")]
-        public IWebElement NoImNotALevyPayingEmployer { get; set; }
+        public IWebElement NoImNotLevyPayingEmployer { get; set; }
     }
 }
