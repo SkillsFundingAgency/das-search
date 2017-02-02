@@ -35,12 +35,12 @@
                                 <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
                                 <span class="error-message"></span>
                             </legend>
-                            <label class="block-label selection-button-radio">
-                                <input type="radio" id="levyPaying" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true">
+                            <label class="block-label selection-button-radio" id="levyPaying">
+                                <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true">
                                 Yes
                             </label>
-                            <label class="block-label selection-button-radio">
-                                <input type="radio" id="notLevyPaying" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false">
+                            <label class="block-label selection-button-radio" id="notLevyPaying">
+                                <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false">
                                 No
                             </label>
                         </fieldset>

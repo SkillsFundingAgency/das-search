@@ -10,8 +10,8 @@
         $('form.postcode-form').on('submit', function (e) {
             var pcField = $('#search-box'),
                 postCode = pcField.val().trim(),
-                rbLevyPayer = $('#levyPaying'),
-                rbNonLevyPayer = $('#notLevyPaying');
+                rbLevyPayer = $('#levyPaying input'),
+                rbNonLevyPayer = $('#notLevyPaying input');
 
             // Remove any errors
             $('.form-group').removeClass('error');
