@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 .AfterMap((src, dest) =>
                 {
                     dest.AbsolutePath = Request?.Url?.AbsolutePath;
-                    dest.IsLevyPayingEmployerVisitor = criteria.IsLevyPayingEmployer;
+                    dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                 }));
 
             return View(viewModel);
@@ -170,7 +170,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 .AfterMap((src, dest) =>
                 {
                     dest.AbsolutePath = Request?.Url?.AbsolutePath;
-                    dest.IsLevyPayingEmployerVisitor = criteria.IsLevyPayingEmployer;
+                    dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                 }));
 
             return View(viewModel);
@@ -198,7 +198,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                                     dest.SurveyUrl = _settings.SurveyUrl.ToString();
                                     dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
                                     dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
-                                    dest.IsLevyPayingEmployerVisitor = criteria.IsLevyPayingEmployerVisitor;
+                                    dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                                 }));
 
             return View(viewModel);

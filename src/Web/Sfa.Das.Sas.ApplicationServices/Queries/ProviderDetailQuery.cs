@@ -14,6 +14,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
 
         public string FrameworkId { get; set; }
 
-        public bool IsLevyPayingEmployerVisitor { get; set; }
+        public bool IsLevyPayingEmployer { get; set; }
     }
 }

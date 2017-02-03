@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string LocationAddressLine { get; set; }
 
-        public bool? IsLevyPayingEmployerVisitor { get; set; }
+        public bool? IsLevyPayingEmployer { get; set; }
 
         public bool HasParentCompanyGuarantee { get; set; }
 

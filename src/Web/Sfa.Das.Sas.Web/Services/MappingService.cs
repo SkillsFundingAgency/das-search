@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.Web.Services
                     .ForMember(x => x.HasParentCompanyGuarantee, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasParentCompanyGuarantee))
                     .ForMember(x => x.IsNewProvider, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.IsNew))
                     .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasNonLevyContract))
-                    .ForMember(x => x.IsLevyPayingEmployerVisitor, y => y.Ignore())
+                    .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                    ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -188,7 +188,7 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(x => x.HasParentCompanyGuarantee, y => y.MapFrom(z => z.Provider.HasParentCompanyGuarantee))
             .ForMember(x => x.IsNewProvider, y => y.MapFrom(z => z.Provider.IsNew))
             .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.Provider.HasNonLevyContract))
-            .ForMember(x => x.IsLevyPayingEmployerVisitor, y => y.Ignore())
+            .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
             .AfterMap<ProviderViewModelMappingAction>();
         }
 
@@ -282,7 +282,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
-                .ForMember(x => x.IsLevyPayingEmployerVisitor, y => y.Ignore());
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
 
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
@@ -306,7 +306,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
-                .ForMember(x => x.IsLevyPayingEmployerVisitor, y => y.Ignore());
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
         }
 
         private static MapperConfiguration Config()

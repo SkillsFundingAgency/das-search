@@ -23,7 +23,7 @@
                     </p>
                 }
 
-                @if (Model.IsLevyPayingEmployerVisitor.HasValue && Model.IsLevyPayingEmployerVisitor.Value && Model.HasNonLevyContract == false)
+                @if (Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value && Model.HasNonLevyContract == false)
                 {
                     <p class="detail-highlight">
                         Only levy paying employers can work with this provider
