@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Services;
+﻿using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
+using Sfa.Das.Sas.ApplicationServices.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -117,6 +118,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var pageNumber = message.Page <= 0 ? 1 : message.Page;
 
+            var hasNonLevyContract = true;
+
+            if (new FatLevyJourneyFeature().FeatureEnabled)
+            {
+                hasNonLevyContract = message.IsLevyPayingEmployer == false;
+            }
+
             var searchResults = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
@@ -124,7 +132,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
                 message.ShowAll,
-                hasNonLevyContract: message.IsLevyPayingEmployer == false);
+                hasNonLevyContract);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {
@@ -162,6 +170,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return totalRestultsForCountry;
             }
 
+            var hasNonLevyContract = true;
+
+            if (new FatLevyJourneyFeature().FeatureEnabled)
+            {
+                hasNonLevyContract = message.IsLevyPayingEmployer == false;
+            }
+
             var totalProvidersCountry = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
@@ -169,7 +184,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
                 true,
-                hasNonLevyContract: message.IsLevyPayingEmployer == false);
+                hasNonLevyContract);
 
             totalRestultsForCountry = totalProvidersCountry.TotalResults;
 
