@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.FeatureToggles
 {
-    public class FatLevyJourneyFeature : SimpleFeatureToggle
+    public class FatLevyJourneyFeature : EnabledOnOrAfterDateFeatureToggle
     {
     }
 }
