@@ -47,33 +47,33 @@ namespace Sfa.Das.Sas.Web.Views.Start
             
             #line default
             #line hidden
-WriteLiteral("\r\n<main");
+WriteLiteral("\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\r\n    <div");
+WriteLiteral(">\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <hgroup>\r\n                <h1");
+WriteLiteral(">\n            <hgroup>\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n     " +
-"       </hgroup>\r\n            <p>For employers looking to take on apprentices.</" +
-"p>\r\n\r\n            <p>Use this service to:</p>\r\n\r\n            <ul");
+WriteLiteral(">\n                    Find apprenticeship training\n                </h1>\n        " +
+"    </hgroup>\n            <p>For employers looking to take on apprentices.</p>\n\n" +
+"            <p>Use this service to:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(">\r\n                <li>search for apprenticeship training by job role or keyword<" +
 "/li>\r\n                <li>find training providers who offer the apprenticeship t" +
-"raining you choose</li>\r\n            </ul>\r\n\r\n");
+"raining you choose</li>\r\n            </ul>\r\n            \r\n");
 
 WriteLiteral("            ");
 
@@ -84,23 +84,18 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n            <h2");
+WriteLiteral("\r\n\r\n");
 
-WriteLiteral(" class=\"heading-medium\"");
+WriteLiteral("            ");
 
-WriteLiteral(">Help</h2>\r\n\r\n            <p>You can contact the National Apprenticeship Service " +
-"for advice or help using the service.</p>\r\n\r\n            <div");
+            
+            #line 24 "..\..\Views\Start\Start.cshtml"
+       Write(Html.Partial("_Help"));
 
-WriteLiteral(" class=\"contact\"");
-
-WriteLiteral(">\r\n                <p>\r\n                    <strong>National Apprenticeship Servi" +
-"ce</strong><br>\r\n                    Telephone: 0800 015 0600\r\n                 " +
-"   <a");
-
-WriteLiteral(" href=\"https://www.gov.uk/call-charges\"");
-
-WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\r\n\r\n   " +
-"     </div>\r\n    </div>\r\n</main>");
+            
+            #line default
+            #line hidden
+WriteLiteral("\n\n        </div>\n    </div>\n</main>");
 
         }
     }

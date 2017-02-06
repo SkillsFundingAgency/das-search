@@ -714,6 +714,7 @@
       <LastGenOutput>Cookies.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Stats\Stats.cshtml" />
+    <Content Include="Views\Shared\_Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
