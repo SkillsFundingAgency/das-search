@@ -114,7 +114,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Postcode = postcode,
                 Keywords = keywords,
                 HasErrors = hasError,
-                IsLevyPayingEmployer = isLevyPayingEmployer
+                IsLevyPayingEmployer = isLevyPayingEmployer ?? false
             };
 
             var response = _mediator.Send(query);
@@ -147,7 +147,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Postcode = postcode,
                 Keywords = keywords,
                 HasErrors = hasError,
-                IsLevyPayingEmployer = isLevyPayingEmployer
+                IsLevyPayingEmployer = isLevyPayingEmployer ?? false
             };
 
             var response = _mediator.Send(query);
