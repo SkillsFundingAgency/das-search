@@ -105,12 +105,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var pageNumber = message.Page <= 0 ? 1 : message.Page;
 
-            var hasNonLevyContract = true;
-
-            if (new FatLevyJourneyFeature().FeatureEnabled)
-            {
-                hasNonLevyContract = message.IsLevyPayingEmployer == false;
-            }
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
 
             var searchResults = await _searchService.SearchFrameworkProviders(
                 message.ApprenticeshipId,
@@ -166,12 +161,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return totalRestultsForCountry;
             }
 
-            var hasNonLevyContract = true;
-
-            if (new FatLevyJourneyFeature().FeatureEnabled)
-            {
-                hasNonLevyContract = message.IsLevyPayingEmployer == false;
-            }
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
 
             var totalProvidersCountry = await _searchService.SearchFrameworkProviders(
                 message.ApprenticeshipId,
