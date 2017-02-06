@@ -1,4 +1,6 @@
-﻿@using Sfa.Das.Sas.Web.Extensions
+﻿@using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel
 @{
     ViewBag.Title = "Search for providers";
@@ -27,35 +29,44 @@
                             <span class="form-hint">For example: 'SW1A 2AA'</span>
                             <span class="error-message">@ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry)</span>
                         </label>
-                        <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="form-control postcode-search-box" maxlength="200" placeholder="">
+                        <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="form-control postcode-search-box" maxlength="200" placeholder=""/>
                     </div>
-                    <div class="form-group" data-validation="Select an option">
-                        <fieldset class="inline">
-                            <legend>
-                                <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
-                                <span class="error-message"></span>
-                            </legend>
-                            <label class="block-label selection-button-radio" id="levyPaying">
-                                <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true">
-                                Yes
-                            </label>
-                            <label class="block-label selection-button-radio" id="notLevyPaying">
-                                <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false">
-                                No
-                            </label>
-                        </fieldset>
-                    </div>
-                    <details>
-                        <summary>What is the Apprenticeship Levy?</summary>
-                        <div class="panel panel-border-narrow">
-                            <p>
-                                Employers with an annual pay bill of more than £3 million must spend 0.5% of their total PAYE bill on an apprenticeship levy.
-                            </p>
-                            <p>
-                                <a href="https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will-work/apprenticeship-levy-how-it-will-work" target="_blank" rel="external">Find out more about the apprenticeship levy</a>
-                            </p>
+                    @if (Is<FatLevyJourneyFeature>.Enabled)
+                    {
+                        <div>
+                            <div class="form-group" data-validation="Select an option">
+                                <fieldset class="inline">
+                                    <legend>
+                                        <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
+                                        <span class="error-message"></span>
+                                    </legend>
+                                    <label class="block-label selection-button-radio" id="levyPaying">
+                                        <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true"/>
+                                        Yes
+                                    </label>
+                                    <label class="block-label selection-button-radio" id="notLevyPaying">
+                                        <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false"/>
+                                        No
+                                    </label>
+                                </fieldset>
+                            </div>
+                            <details>
+                                <summary>What is the Apprenticeship Levy?</summary>
+                                <div class="panel panel-border-narrow">
+                                    <p>
+                                        Employers with an annual pay bill of more than £3 million must spend 0.5% of their total PAYE bill on an apprenticeship levy.
+                                    </p>
+                                    <p>
+                                        <a href="https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will-work/apprenticeship-levy-how-it-will-work" target="_blank" rel="external">Find out more about the apprenticeship levy</a>
+                                    </p>
+                                </div>
+                            </details>
                         </div>
-                    </details>
+                    }
+                    else
+                    {
+                        <input type="hidden" id="IsLevyPayingEmployer" value="false"/>
+                    }
                     <div class="form-group">
                         <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                         <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">

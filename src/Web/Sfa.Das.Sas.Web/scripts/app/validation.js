@@ -17,7 +17,7 @@
             $('.form-group').removeClass('error');
 
             if ( !validation.validatePostcode(postCode) ||
-                (!rbLevyPayer.prop('checked') && !rbNonLevyPayer.prop('checked')) ) {
+                (rbLevyPayer.length === 1 && rbNonLevyPayer.length === 1) && (!rbLevyPayer.prop('checked') && !rbNonLevyPayer.prop('checked'))) {
 
                 // Prevent form submitting
                 e.preventDefault();
