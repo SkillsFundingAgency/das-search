@@ -84,18 +84,23 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\r\n\r\n            <h2");
 
-WriteLiteral("            ");
+WriteLiteral(" class=\"heading-medium\"");
 
-            
-            #line 24 "..\..\Views\Start\Start.cshtml"
-       Write(Html.Partial("_Help"));
+WriteLiteral(">Help</h2>\r\n            <p>You can contact the National Apprenticeship Service fo" +
+"r advice or help using the service.</p>\r\n            <div");
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\n\n        </div>\n    </div>\n</main>");
+WriteLiteral(" class=\"contact\"");
+
+WriteLiteral(">\r\n                <p>\r\n                    <strong>National Apprenticeship Servi" +
+"ce</strong><br>\r\n                    Telephone: 0800 015 0600\r\n                 " +
+"   <a");
+
+WriteLiteral(" href=\"https://www.gov.uk/call-charges\"");
+
+WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\n\n     " +
+"   </div>\n    </div>\n</main>");
 
         }
     }
