@@ -19,7 +19,6 @@
 			<Setting name="CookieApplicationInsightsUrl" />
 			<Setting name="CookieAboutUrl" />
 			<Setting name="AchievementRateUrl" />
-      <Setting name="FeatureToggle.FatLevyJourneyFeature" />
     </ConfigurationSettings>
 		<Endpoints>
 			<InputEndpoint name="SimpleEndpoint" protocol="http" port="80"/>
