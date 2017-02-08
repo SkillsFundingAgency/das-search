@@ -3,8 +3,6 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
-@using Sfa.Das.Sas.ApplicationServices.Models
-@using FeatureToggle.Core.Fluent
 @model ApprenticeshipDetailsViewModel
 
 @{
@@ -24,6 +22,33 @@
                         <span class="tag tag-new">National</span> This training provider is willing to offer apprenticeship training across England.
                     </p>
                 }
+
+                @if (Is<FatLevyJourneyFeature>.Enabled)
+                {
+
+
+                    if (Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value && Model.HasNonLevyContract == false)
+                     {
+                         <p class="detail-highlight">
+                             Only levy paying employers can work with this provider
+                         </p>
+                     }
+
+                    if (Model.HasParentCompanyGuarantee)
+                     {
+                         <p class="detail-highlight">
+                             Provider is supported by a parent company guarantee
+                         </p>
+                     }
+
+                    if (Model.IsNewProvider)
+                     {
+                         <p class="detail-highlight">
+                             New organisation with no financial track record
+                         </p>
+                     }
+                }
+                
                 <div id="marketing" class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>

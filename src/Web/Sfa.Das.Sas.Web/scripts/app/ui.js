@@ -1,4 +1,7 @@
-﻿var SearchAndShortlist = SearchAndShortlist || {};
+﻿// GDS Radio buttons 
+var selectionButtons = new GOVUK.SelectionButtons("label input[type='radio'], label input[type='checkbox'], section input[type='radio']");
+
+var SearchAndShortlist = SearchAndShortlist || {};
 (function ( ui ) {
 
     ui.init = function () {

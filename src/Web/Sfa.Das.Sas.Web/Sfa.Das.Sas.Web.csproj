@@ -471,6 +471,7 @@
     <Content Include="Content\favicons\mstile-310x310.png" />
     <Content Include="Content\favicons\mstile-70x70.png" />
     <Content Include="Content\favicons\safari-pinned-tab.svg" />
+    <Content Include="Content\Gruntfile.js" />
     <Content Include="Content\src\images\gov.uk_logotype_crown.svg" />
     <Content Include="Content\src\images\govuk-crest.svg" />
     <Content Include="Content\src\images\icons\icon-important-2x.png" />
@@ -545,6 +546,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
+    <Content Include="scripts\app\selection-buttons.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <None Include="scripts\jquery-3.0.0.intellisense.js" />

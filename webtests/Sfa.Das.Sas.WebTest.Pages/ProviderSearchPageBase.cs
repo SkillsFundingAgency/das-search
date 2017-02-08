@@ -16,5 +16,11 @@
 
         [ElementLocator(CssSelector = ".postcode-form .error-message")]
         public IWebElement ErrorMessage { get; set; }
+
+        [ElementLocator(Id = "levyPaying")]
+        public IWebElement YesImLevyPayingEmployer { get; set; }
+
+        [ElementLocator(Id = "notLevyPaying")]
+        public IWebElement NoImNotLevyPayingEmployer { get; set; }
     }
 }

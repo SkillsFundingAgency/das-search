@@ -29,5 +29,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string OverallCohort { get; set; }
 
         bool HasNonLevyContract { get; set; }
+
+        bool HasParentCompanyGuarantee { get; set; }
+
+        bool IsNew { get; set; }
     }
 }

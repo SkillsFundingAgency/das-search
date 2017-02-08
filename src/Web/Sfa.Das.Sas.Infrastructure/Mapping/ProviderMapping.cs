@@ -60,6 +60,9 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                     UkPrn = item.Ukprn,
                     NationalProvider = item.NationalProvider,
                     IsHigherEducationInstitute = item.IsHigherEducationInstitute,
+                    HasNonLevyContract = item.HasNonLevyContract,
+                    HasParentCompanyGuarantee = item.HasParentCompanyGuarantee,
+                    IsNew = item.IsNew,
                     ContactInformation = new ContactInformation
                     {
                         Phone = item.Phone,

@@ -167,13 +167,13 @@
             switch (filter.SearchOption)
             {
                 case ProviderFilterOptions.ApprenticeshipId:
-                    return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
                 default:
-                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
             }
         }
 
@@ -182,13 +182,13 @@
             switch (filter.SearchOption)
             {
                 case ProviderFilterOptions.ApprenticeshipId:
-                    return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
                 default:
-                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes);
+                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
             }
         }
 
@@ -244,7 +244,7 @@
             };
         }
 
-        private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+        private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var descriptor =
@@ -254,8 +254,9 @@
                     .Query(q => q
                         .Bool(ft => ft
                             .Filter(FilterByApprenticeshipId(selector, code))
-                            .Must(NestedLocationsQuery<T>(location)))
-                            && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, true))))
+                            .Must(NestedLocationsQuery<T>(location))) 
+                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
+
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
@@ -265,7 +266,7 @@
             return descriptor;
         }
 
-        private SearchDescriptor<T> CreateProviderQueryWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+        private SearchDescriptor<T> CreateProviderQueryWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var descriptor =
@@ -276,7 +277,7 @@
                         .Bool(b => b
                             .Filter(FilterByApprenticeshipId(selector, code))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location)))
-                            && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, true))))
+                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
@@ -286,7 +287,7 @@
             return descriptor;
         }
 
-        private SearchDescriptor<T> CreateProviderQueryWithNationalProvider<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+        private SearchDescriptor<T> CreateProviderQueryWithNationalProvider<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var descriptor =
@@ -297,7 +298,7 @@
                         .Bool(ft => ft
                             .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
                             .Must(NestedLocationsQuery<T>(location)))
-                            && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, true))))
+                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
@@ -307,7 +308,7 @@
             return descriptor;
         }
 
-        private SearchDescriptor<T> CreateProviderQueryWithNationalProviderWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes)
+        private SearchDescriptor<T> CreateProviderQueryWithNationalProviderWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var descriptor =
@@ -318,7 +319,7 @@
                         .Bool(b => b
                             .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
                             .Must(NestedLocationsQueryWithoutLocationMatch<T>(location)))
-                            && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, true))))
+                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
                         .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))

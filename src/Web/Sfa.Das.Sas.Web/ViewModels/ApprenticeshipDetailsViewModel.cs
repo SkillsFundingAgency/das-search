@@ -58,5 +58,13 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string AchievementRateSourceUrl { get; set; }
 
         public string LocationAddressLine { get; set; }
+
+        public bool? IsLevyPayingEmployer { get; set; }
+
+        public bool HasParentCompanyGuarantee { get; set; }
+
+        public bool IsNewProvider { get; set; }
+
+        public bool HasNonLevyContract { get; set; }
     }
 }

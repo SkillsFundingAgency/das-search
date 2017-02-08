@@ -6,26 +6,20 @@
 <main id="content" role="main">
     <div class="grid-row">
         <div class="column-two-thirds">
-
             <h1 class="heading-xlarge">
                 Find apprenticeship training
             </h1>
-
             @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
             {
                 <div class="form-group">
-                    <span>Search by keywords</span>
-                    <legend>
-
-                        <label class="text-secondary" for="keywords">
-                            Can include job title or apprenticeship
-                        </label>
-
-                        <span class="error-message"></span>
-                    </legend>
-                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200" placeholder="">
+                    <label for="keywords">
+                        <span class="form-label-bold">Search by keywords</span>
+                        <span class="form-hint">Can include job title or apprenticeship</span>
+                    </label>
+                    <span class="error-message"></span>
+                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
                 </div>
-                <input class="button margin-top-x2" id="submit-keywords" type="submit" value="Search"/>
+                <input class="button" id="submit-keywords" type="submit" value="Search"/>
             }
 
         </div>

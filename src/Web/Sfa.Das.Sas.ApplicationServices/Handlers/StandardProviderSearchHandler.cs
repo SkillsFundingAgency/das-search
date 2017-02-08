@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Services;
+﻿using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
+using Sfa.Das.Sas.ApplicationServices.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -117,13 +118,16 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var pageNumber = message.Page <= 0 ? 1 : message.Page;
 
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
+
             var searchResults = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
                 new Pagination { Page = pageNumber, Take = message.Take },
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
-                message.ShowAll);
+                message.ShowAll,
+                hasNonLevyContract);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {
@@ -161,13 +165,16 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return totalRestultsForCountry;
             }
 
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
+
             var totalProvidersCountry = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
                 new Pagination(),
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
-                true);
+                true,
+                hasNonLevyContract);
 
             totalRestultsForCountry = totalProvidersCountry.TotalResults;
 

@@ -25,6 +25,11 @@ main {
   min-height:450px;
 }
 
+.js-enabled .block-label.selection-button-radio:before, 
+.form-control {
+    background: #fff;
+}
+
 .small-btm-margin {
   margin-bottom: 5px;
 }
@@ -33,18 +38,19 @@ aside h2:first-child {
   margin-top: 15px;
 }
 
-.postcode-form {
-    background-color: #DEE0E2;
-    padding: 20px;
+.postcode-search-form {
+    @extend %contain-floats;
+    background-color: $grey-3;
+    padding: 20px 20px 0;
     margin-bottom: 20px;
-    .heading-group{
-        h2{
-            margin: 0;
-        }
+    h2 {
         margin: 0 0 20px;
     }
     label {
         margin: 0 0 20px;
+    }
+    details {
+        margin: 20px 0;
     }
 }
 
@@ -332,5 +338,54 @@ aside h2:first-child {
 @media screen and (min-width: 769px) {
     .stats-summary li {
         width: 25%
+    }
+}
+
+.page-navigation {
+    margin-top: 10px;
+}
+
+.page-navigation__btn {
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 1em;
+    margin-right: -4px;
+    overflow: hidden;
+    padding: 1.2em 0.6em;
+    text-decoration: none;
+    vertical-align: top;
+    width: 50%;
+    &:active, 
+    &:focus {
+        background: $grey-4;
+    }
+    .description {
+        display: block;
+    }
+    .counter {
+        display: block;
+        font-size: 14px;
+    }
+    .arrow-button {
+        color: #2e358b;
+        float: left;
+        font-size: 3.5em;
+        margin-right: 10px;
+        margin-top: -0.2em;
+    }
+    &.next {
+        float: right;
+        text-align: right;
+        .arrow-button {
+            float: right;
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+    .hide-mob {
+        display: none;
+        @media screen and (max-width: 640px) {
+            display: block;
+        }
     }
 }
