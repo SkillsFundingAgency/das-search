@@ -155,13 +155,14 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode.FormatPostcode() }, { "page", page }, { "showall", Model.ShowAll } };
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode.FormatPostcode() }, { "page", page }, { "showall", Model.ShowAll }, { "isLevyPayingEmployer", Model.IsLevyPayingEmployer } };
         int i = 0;
         foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
         {
             rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
             i++;
         }
+
         return rv;
     }
 }
