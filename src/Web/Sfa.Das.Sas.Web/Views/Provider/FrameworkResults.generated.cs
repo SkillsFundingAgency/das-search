@@ -295,48 +295,64 @@ WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5956)
 , 5964), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " />\n                    <input");
+WriteLiteralTo(__razor_helper_writer, " />\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"ShowAll\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6042), Tuple.Create("\"", 6075)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6043), Tuple.Create("\"", 6076)
 
 #line 143 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6050), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
+, Tuple.Create(Tuple.Create("", 6051), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
 
 #line default
 #line hidden
-, 6050), false)
+, 6051), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " />\n                    <input");
+WriteLiteralTo(__razor_helper_writer, "/>\n                    <input");
+
+WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
+
+WriteLiteralTo(__razor_helper_writer, " name=\"isLevyPayingEmployer\"");
+
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6148), Tuple.Create("\"", 6194)
+
+#line 144 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6156), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.ToString()
+
+#line default
+#line hidden
+, 6156), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, " />\r\n\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"keywords\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6136), Tuple.Create("\"", 6162)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6257), Tuple.Create("\"", 6283)
 
-#line 144 "..\..\Views\Provider\FrameworkResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6144), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+#line 146 "..\..\Views\Provider\FrameworkResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6265), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
 
 #line default
 #line hidden
-, 6144), false)
+, 6265), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " />\n");
+WriteLiteralTo(__razor_helper_writer, " />\r\n\n");
 
 
-#line 145 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 148 "..\..\Views\Provider\FrameworkResults.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 145 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 148 "..\..\Views\Provider\FrameworkResults.cshtml"
                       
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     
@@ -346,13 +362,13 @@ WriteLiteralTo(__razor_helper_writer, " />\n");
 WriteLiteralTo(__razor_helper_writer, "\n");
 
 
-#line 148 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 151 "..\..\Views\Provider\FrameworkResults.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 148 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 151 "..\..\Views\Provider\FrameworkResults.cshtml"
                       
                         Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
                     
@@ -370,7 +386,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"button margin-top-x2 postcode-se
 WriteLiteralTo(__razor_helper_writer, " />\n                </form>\n            </div>\n");
 
 
-#line 154 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 157 "..\..\Views\Provider\FrameworkResults.cshtml"
         }
     }
 
@@ -379,12 +395,12 @@ WriteLiteralTo(__razor_helper_writer, " />\n                </form>\n           
 #line hidden
 });
 
-#line 156 "..\..\Views\Provider\FrameworkResults.cshtml"
+#line 159 "..\..\Views\Provider\FrameworkResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 159 "..\..\Views\Provider\FrameworkResults.cshtml"
+        #line 162 "..\..\Views\Provider\FrameworkResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
@@ -396,6 +412,12 @@ WriteLiteralTo(__razor_helper_writer, " />\n                </form>\n           
             rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
             i++;
         }
+
+        if (Model.ShowNationalProviders)
+        {
+            rv.Add("NationalProvidersOnly", true);
+        }
+
         return rv;
     }
 

@@ -135,8 +135,10 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode.FormatPostcode()" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
-                    <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
-                    <input type="hidden" name="keywords" value="@Model.SearchTerms" />
+                    <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()"/>
+                    <input type="hidden" name="isLevyPayingEmployer" value="@Model.IsLevyPayingEmployer.ToString()" />
+                    <input type="hidden" name="keywords" value="@Model.SearchTerms"/>
+
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }
@@ -161,6 +163,11 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
         {
             rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
             i++;
+        }
+
+        if (Model.ShowNationalProviders)
+        {
+            rv.Add("NationalProvidersOnly", true);
         }
 
         return rv;

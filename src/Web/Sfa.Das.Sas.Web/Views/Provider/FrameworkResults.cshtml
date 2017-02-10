@@ -140,8 +140,11 @@ if (Model.ActualPage < Model.LastPage)
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode.FormatPostcode()" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
-                    <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()" />
+                    <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()"/>
+                    <input type="hidden" name="isLevyPayingEmployer" value="@Model.IsLevyPayingEmployer.ToString()" />
+
                     <input type="hidden" name="keywords" value="@Model.SearchTerms" />
+
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }
@@ -167,6 +170,12 @@ if (Model.ActualPage < Model.LastPage)
             rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
             i++;
         }
+
+        if (Model.ShowNationalProviders)
+        {
+            rv.Add("NationalProvidersOnly", true);
+        }
+
         return rv;
     }
 }
