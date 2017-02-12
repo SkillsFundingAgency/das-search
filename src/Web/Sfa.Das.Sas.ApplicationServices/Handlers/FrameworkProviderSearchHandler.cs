@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;

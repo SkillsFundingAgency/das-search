@@ -1,5 +1,4 @@
-﻿using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
-using Sfa.Das.Sas.ApplicationServices.Services;
+﻿using Sfa.Das.Sas.ApplicationServices.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
