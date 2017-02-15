@@ -11,9 +11,6 @@
     <input type="hidden" value="@Model.SearchTerm" id="ga-search-term"/>
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
 
-    <p class="small-btm-margin">
-        @Html.ActionLink("Start a new search", "Search", "Apprenticeship", new { }, new { @class = "link-back new-apprenticeship-search" })
-    </p>
     <hgroup class="hgroup">
         <h1 class="heading-xlarge">
             Search results
@@ -25,13 +22,36 @@
 
     @if (Model.TotalResults == 0)
     {
-        <p>You can:</p>
-        <ul class="list-bullet">
-            <li>@Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship", new { })</li>
-        </ul>
+        using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
+        {
+            <div class="form-group">
+                <label for="keywords">
+                    <span class="form-label-bold">Try a new search</span>
+                    <span class="form-hint">Can include job title or apprenticeship</span>
+                </label>
+                <span class="error-message"></span>
+                <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
+            </div>
+            <input class="button" id="submit-keywords" type="submit" value="Search" />
+        }
     }
 
     <div class="grid-row">
+
+        @if (Model.TotalResults > 0)
+        {
+            using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
+            {
+                <div class="form-group">
+                    <label for="keywords">
+                        <span class="form-label-bold">Showing search results for:</span>
+                    </label>
+                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" value="@Model.SearchTerm" maxlength="200">
+
+                    <input class="button" id="submit-keywords" class="form-control-1-3" type="submit" value="Search" />
+                </div>
+            }
+        }
 
         @if (!Model.HasError && Model.TotalResults > 0)
         {
