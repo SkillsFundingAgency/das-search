@@ -57,6 +57,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 Provider = new Provider
                 {
                     Name = item.ProviderName,
+                    LegalName = item.LegalName,
                     UkPrn = item.Ukprn,
                     NationalProvider = item.NationalProvider,
                     IsHigherEducationInstitute = item.IsHigherEducationInstitute,

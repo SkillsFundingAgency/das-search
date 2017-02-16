@@ -162,7 +162,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "dl dt", 6).Should().Contain("Training location");
+            this.GetPartial(html, "dl dt", 7).Should().Contain("Training location");
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().Contain(model.Location.LocationName);
@@ -211,7 +211,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "dl dt", 6).Should().Contain("Training location");
+            this.GetPartial(html, "dl dt", 7).Should().Contain("Training location");
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().NotContain(model.Location.LocationName);
