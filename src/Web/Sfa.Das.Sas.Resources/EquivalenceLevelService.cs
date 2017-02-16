@@ -2,11 +2,11 @@
 
 namespace Sfa.Das.Sas.Resources
 {
-    public static class EquivalenveLevelService
+    public static class EquivalenceLevelService
     {
         private static readonly Dictionary<int, string> _dictionary;
 
-        static EquivalenveLevelService()
+        static EquivalenceLevelService()
         {
             _dictionary = new Dictionary<int, string>
             {

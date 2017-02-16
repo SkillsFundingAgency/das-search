@@ -233,7 +233,7 @@ WriteLiteral(" (equivalent to ");
 
             
             #line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                       Write(EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString()));
+                                       Write(EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString()));
 
             
             #line default

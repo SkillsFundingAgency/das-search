@@ -75,6 +75,7 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.DeliveryModes))
                    .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location))
                    .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Name))
+                   .ForMember(dest => dest.LegalName, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.LegalName))
                    .ForMember(dest => dest.NationalProvider, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.NationalProvider))
                    .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.UkPrn))
                    .ForMember(dest => dest.IsHigherEducationInstitute, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.IsHigherEducationInstitute))
