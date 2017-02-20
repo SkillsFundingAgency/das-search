@@ -53,6 +53,7 @@
                 FrameworkName = document.FrameworkName,
                 PathwayCode = document.PathwayCode,
                 PathwayName = document.PathwayName,
+                MaxFunding = document.MaxFunding,
                 TypicalLength = _typicalLengthMapping.MapTypicalLength(document.TypicalLength),
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = MapJobRoleItems(document.JobRoleItems),

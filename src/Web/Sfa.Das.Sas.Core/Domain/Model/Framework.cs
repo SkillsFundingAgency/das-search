@@ -21,6 +21,8 @@
 
         public int Level { get; set; }
 
+        public int MaxFunding { get; set; }
+
         public TypicalLength TypicalLength { get; set; }
 
         public DateTime? ExpiryDate { get; set; }
