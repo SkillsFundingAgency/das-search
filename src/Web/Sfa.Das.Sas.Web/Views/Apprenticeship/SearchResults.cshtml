@@ -36,23 +36,25 @@
         }
     }
 
+    
     <div class="grid-row">
-
         @if (Model.TotalResults > 0)
         {
             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
             {
-                <div class="form-group">
-                    <label for="keywords">
-                        <span class="form-label-bold">Showing search results for:</span>
-                    </label>
-                    <input type="search" id="keywords" name="Keywords" class="text-box form-control" value="@Model.SearchTerm" maxlength="200">
-
-                    <input class="button" id="submit-keywords" class="form-control-1-3" type="submit" value="Search" />
+                <div class="column-two-thirds">
+                    <div class="form-group search-form">
+                        <label for="keywords">
+                            <span class="form-label-bold">Showing search results for:</span>
+                        </label>
+                        <input type="search" id="keywords" name="Keywords" class="form-control form-control-3-4" value="@Model.SearchTerm" maxlength="200">
+                        <input id="submit-keywords" class="button" type="submit" value="Search" />
+                    </div>
                 </div>
             }
         }
-
+    </div>
+    <div class="grid-row">
         @if (!Model.HasError && Model.TotalResults > 0)
         {
             <div class="column-one-third">
@@ -68,12 +70,12 @@
 
             <div id="apprenticeship-results" class="column-two-thirds">
                 <form method="GET" id="search-results-order">
-                    <input type="hidden" name="Keywords" value="@Model.SearchTerm"/>
-                    <input type="hidden" name="page" value="@Model.ActualPage"/>
-                    <input type="hidden" name="take" value="@Model.ResultsToTake"/>
+                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                    <input type="hidden" name="page" value="@Model.ActualPage" />
+                    <input type="hidden" name="take" value="@Model.ResultsToTake" />
                     @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
                     {
-                        <input type="hidden" name="SelectedLevels" value="@level.Value"/>
+                        <input type="hidden" name="SelectedLevels" value="@level.Value" />
                     }
                     <div class="form-block">
                         <label for="select-order" class="form-label-bold">Sort by</label>
@@ -90,23 +92,23 @@
                 @foreach (var item in Model.Results)
                 {
                     index += 1;
-                    <article class="result @(item.ApprenticeshipType)-result" 
+                    <article class="result @(item.ApprenticeshipType)-result"
                              id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
-                    <header>
-                        @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item, index) : GetFrameworkTitle(item, index))
-                    </header>
-                    <dl class="result-data-list">
-                        @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                        @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
-                    </dl>
-                </article>
-            }
+                        <header>
+                            @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item, index) : GetFrameworkTitle(item, index))
+                        </header>
+                        <dl class="result-data-list">
+                            @GetApprenticeshipDetailItem("Level:", "level", item.Level)
+                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                        </dl>
+                    </article>
+                }
                 <div class="page-navigation">
                     @GetPaginationBackLink()
                     @GetPaginationNextLink()
                 </div>
             </div>
-        }
+                    }
 
     </div>
 </main>
