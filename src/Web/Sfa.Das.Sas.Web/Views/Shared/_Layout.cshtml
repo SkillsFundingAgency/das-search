@@ -1,4 +1,5 @@
-﻿@using System.Web.UI.WebControls
+﻿@using System.Web.Configuration
+@using System.Web.UI.WebControls
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
@@ -45,7 +46,14 @@
 @Html.Partial("_Analytics")
     </head>
 <body>
-    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+<span style="display: none;">@System.Threading.Thread.CurrentThread.CurrentUICulture.DisplayName</span>
+<span style="display: none;">@System.Threading.Thread.CurrentThread.CurrentUICulture</span>
+<span style="display: none;">@System.Threading.Thread.CurrentThread.CurrentCulture.DisplayName</span>
+<span style="display: none;">@System.Threading.Thread.CurrentThread.CurrentCulture</span>
+
+<script>document.body.className = ((document.body.className)
+    ? document.body.className + ' js-enabled'
+    : 'js-enabled');</script>
 @Html.Action("Header", "Shared")
 
 <div class="container body-content">
