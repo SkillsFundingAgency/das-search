@@ -268,7 +268,7 @@ WriteLiteral("            ");
 
             
             #line 41 "..\..\Views\Apprenticeship\Standard.cshtml"
-       Write(GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
+       Write(GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
 
             
             #line default

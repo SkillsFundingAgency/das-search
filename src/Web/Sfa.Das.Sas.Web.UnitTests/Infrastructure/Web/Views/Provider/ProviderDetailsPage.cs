@@ -20,6 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var model = new ApprenticeshipDetailsViewModel
             {
                 Name = "Test name",
+                LegalName = "Legal Test Name",
                 EmployerSatisfactionMessage = "100%",
                 LearnerSatisfactionMessage = "100%",
                 Location = new Location
@@ -60,6 +61,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             this.GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
             this.GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
             this.GetAttribute(html, ".providerContact", "href").Should().Be("http://www.testcontact.url", "http should only be added once");
+            
+            this.GetPartial(html, ".legal-name").Should().Contain("Legal Test Name");
             this.GetPartial(html, ".phone-title").Should().Contain("Phone");
             this.GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
             this.GetPartial(html, ".email-title").Should().Contain("Email");
@@ -159,7 +162,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "dl dt", 6).Should().Contain("Training location");
+            this.GetPartial(html, "dl dt", 7).Should().Contain("Training location");
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().Contain(model.Location.LocationName);
@@ -208,7 +211,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "dl dt", 6).Should().Contain("Training location");
+            this.GetPartial(html, "dl dt", 7).Should().Contain("Training location");
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().NotContain(model.Location.LocationName);

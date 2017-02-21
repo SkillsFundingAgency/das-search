@@ -61,10 +61,11 @@
                     </h2>
                     <b>Level:</b>
                     <span>
-                        @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))
+                        @Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))
                     </span>
                 </header>
                 <dl class="data-list data-list--compact">
+                    @GetStandardPropertyHtml("Legal Trading Name:", "legal-name", Model.LegalName)
                     @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
                     @GetStandardPropertyHtml("Phone:", "phone", Model.ContactInformation.Phone)
                     @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
@@ -129,19 +130,19 @@
 {
 if (@Model != null)
 {
-        <dt class="training-location-title">@title</dt>
+    <dt class="training-location-title">@title</dt>
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-            <dd id="training-location" class="training-location">
-                Training takes place at your location
-            </dd>
+        <dd id="training-location" class="training-location">
+            Training takes place at your location
+        </dd>
     }
     else
     {
-            <dd id="training-location" class="training-location">
-                @Model.LocationAddressLine 
-            </dd>
+        <dd id="training-location" class="training-location">
+            @Model.LocationAddressLine 
+        </dd>
     }
 }
 }
@@ -150,8 +151,8 @@ if (@Model != null)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-        <dt class="phone-title">@title</dt>
-        <dd id="@id" class="phone">@Html.Raw(item)</dd>
+    <dt class="@id-title">@title</dt>
+    <dd id="@id" class="@id">@Html.Raw(item)</dd>
 }
 }
 
@@ -159,8 +160,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-        <dt class="email-title">@title</dt>
-        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+    <dt class="email-title">@title</dt>
+    <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
 }
 }
 
@@ -169,19 +170,19 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     if (!string.IsNullOrEmpty(url))
     {
         var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
-            <dt class="@classTitle">@title</dt>
-            <dd>
-                <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
-                    @if (string.IsNullOrEmpty(urlTitle))
-                    {
-                        @Html.Raw(url)
-                    }
-                    else
-                    {
-                        @Html.Raw(urlTitle)
-                    }
-                </a>
-            </dd>
+        <dt class="@classTitle">@title</dt>
+        <dd>
+            <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+                @if (string.IsNullOrEmpty(urlTitle))
+                {
+                    @Html.Raw(url)
+                }
+                else
+                {
+                    @Html.Raw(urlTitle)
+                }
+            </a>
+        </dd>
     }
 }
 
@@ -261,38 +262,36 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
 if (items != null)
 {
-        <dt class="training-structure">@title</dt>
-        <dd id="delivery-modes">
-            <ul>
-                @if (items.Exists(m => m.Equals("DayRelease")))
-                {
-                    <li class="day-release">@Html.Raw("day release")</li>
-                }
-                @if (items.Exists(m => m.Equals("BlockRelease")))
-                {
-                    <li class="block-release">@Html.Raw("block release")</li>
-                }
-                @if (items.Exists(m => m.Equals("100PercentEmployer")))
-                {
-                    <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
-                }
-            </ul>
-            <details>
-                <summary>Explain training options</summary>
-                <div class="panel panel-border-narrow">
-                    <p>
-                        <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
-                    </p>
-                    <p>
-                        <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
-                    </p>
-                    <p>
-                        <span class="bold-small">At your location:</span> the training provider comes to your workplace.
-                    </p>
-                </div>
-            </details>
-        </dd>
+    <dt class="training-structure">@title</dt>
+    <dd id="delivery-modes">
+        <ul>
+            @if (items.Exists(m => m.Equals("DayRelease")))
+            {
+                <li class="day-release">@Html.Raw("day release")</li>
+            }
+            @if (items.Exists(m => m.Equals("BlockRelease")))
+            {
+                <li class="block-release">@Html.Raw("block release")</li>
+            }
+            @if (items.Exists(m => m.Equals("100PercentEmployer")))
+            {
+                <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
+            }
+        </ul>
+        <details>
+            <summary>Explain training options</summary>
+            <div class="panel panel-border-narrow">
+                <p>
+                    <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
+                </p>
+                <p>
+                    <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
+                </p>
+                <p>
+                    <span class="bold-small">At your location:</span> the training provider comes to your workplace.
+                </p>
+            </div>
+        </details>
+    </dd>
 }
 }
-
-
