@@ -1,4 +1,6 @@
-﻿@using Sfa.Das.Sas.Resources
+﻿@using System.Globalization
+@using Sfa.Das.Sas.Resources
+@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel
 
 @{
@@ -9,25 +11,25 @@
 <main id="content">
     <div class="grid-row">
         <div class="column-two-thirds">
-                <h1 class="heading-xlarge">
-                    @Model.Title
-                </h1>
-                <p>
-                    This information is taken from an apprenticeship framework. It sets out what qualifications the apprentice can achieve.
-                </p>
-                @if (Model.ExpiryDateString != null)
-                {
+            <h1 class="heading-xlarge">
+                @Model.Title
+            </h1>
+            <p>
+                This information is taken from an apprenticeship framework. It sets out what qualifications the apprentice can achieve.
+            </p>
+            @if (Model.ExpiryDateString != null)
+            {
 
-                    <div class="notice">
-                        <i class="icon icon-important">
-                            <span class="visuallyhidden">Warning</span>
-                        </i>
-                        <strong class="bold-small">
-                            This apprenticeship is closed to new starters from @Model.ExpiryDateString
-                        </strong>
-                    </div>
+                <div class="notice">
+                    <i class="icon icon-important">
+                        <span class="visuallyhidden">Warning</span>
+                    </i>
+                    <strong class="bold-small">
+                        This apprenticeship is closed to new starters from @Model.ExpiryDateString
+                    </strong>
+                </div>
 
-                }
+            }
         </div>
 
         <div class="column-third">
@@ -56,18 +58,12 @@
                 <dt class="overviewTitle">Overview of role</dt>
                 <dd class="overviewText">@Model.FrameworkOverview </dd>
             }
-            <dt>Level</dt>
-            <dd>
-                @Model.Level (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString()) )
-            </dd>
-            @if (!string.IsNullOrEmpty(Model.TypicalLengthMessage))
-            {
-                <dt>Typical length</dt>
-                <dd>@Model.TypicalLengthMessage </dd>
-            }
+            @GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
+            @GetFundingBandProperty(Model.MaxFunding)
+            @GetStandardProperty("Typical length", "length", Model.TypicalLengthMessage)
             <dt>Entry requirements</dt>
             <dd class="entry-requirements">
-                @if (!string.IsNullOrEmpty(@Model.EntryRequirements))
+                @if (!string.IsNullOrEmpty(Model.EntryRequirements))
                 {
                     <div>@Model.EntryRequirements</div>
                 }
@@ -93,15 +89,15 @@
                         }
                     </ul>
                 }
-                    
+
                 <div>
-                    Your chosen training provider can advise you about the kinds of skills apprentices will learn.    
+                    Your chosen training provider can advise you about the kinds of skills apprentices will learn.
                 </div>
             </dd>
             <dt>Qualifications</dt>
             <dd>
                 <div class="qualifications">
-                    @if (Model.CompetencyQualification!= null && Model.CompetencyQualification.Any())
+                    @if (Model.CompetencyQualification != null && Model.CompetencyQualification.Any())
                     {
                         <div class="competencyQualifications">
                             <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
@@ -110,7 +106,7 @@
                                 {
                                     <li>@qualification</li>
                                 }
-                                
+
                                 @if (Model.CompetencyQualification.Count() > 3)
                                 {
                                     foreach (var qualification in Model.CompetencyQualification.Skip(3))
@@ -123,7 +119,7 @@
                         </div>
                     }
 
-                    @if (Model.KnowledgeQualification!= null && Model.KnowledgeQualification.Any())
+                    @if (Model.KnowledgeQualification != null && Model.KnowledgeQualification.Any())
                     {
                         <div class="knowledgeQualifications">
                             <p>Apprentices will also achieve a theory-based (or 'knowledge') qualification:</p>
@@ -132,7 +128,7 @@
                                 {
                                     <li>@qualification</li>
                                 }
-                                
+
                                 @if (Model.KnowledgeQualification.Count() > 3)
                                 {
                                     foreach (var qualification in Model.KnowledgeQualification.Skip(3))
@@ -154,7 +150,7 @@
                                 {
                                     <li>@qualification</li>
                                 }
-                                
+
                                 @if (Model.CombinedQualificiation.Count() > 3)
                                 {
                                     foreach (var qualification in Model.CombinedQualificiation.Skip(3))
@@ -166,23 +162,43 @@
                             </ul>
                         </div>
                     }
-                    </div>
+                </div>
 
-                    @if (Model.CompletionQualifications != string.Empty)
-                    {
-                        <p class="completionQualifications">@Model.CompletionQualifications</p>
-                    }
-                    <p class="qualificationsStatic">Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.</p>
-                </dd>
+                @if (Model.CompletionQualifications != string.Empty)
+                {
+                    <p class="completionQualifications">@Model.CompletionQualifications</p>
+                }
+                <p class="qualificationsStatic">Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.</p>
+            </dd>
 
             <dt>Professional registration</dt>
             <dd>@Model.ProfessionalRegistration</dd>
         </dl>
 
         <div id="bottom-actions">
-                <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
-                    Find training providers
-                </a>
+            <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+                Find training providers
+            </a>
         </div>
     </section>
 </main>
+
+@helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+        <dt>@title</dt>
+        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+}
+}
+
+@helper GetFundingBandProperty(int value)
+{
+var fundingCapFormatted = value.ToString("C0", CultureInfo.CurrentCulture);
+
+    <dt>Funding cap<br />(from 1 May 2017)</dt>
+    <dd id="funding-cap">
+        Up to @fundingCapFormatted per apprentice.<br />
+        <a href="https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will-work/apprenticeship-levy-how-it-will-work#buying-apprenticeship-training-and-assessment" target="_blank">More information about funding</a>
+    </dd>
+}

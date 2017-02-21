@@ -25,6 +25,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 Level = document.Level,
                 JobRoles = document.JobRoles.ToList(),
                 Keywords = document.Keywords.ToList(),
+                MaxFunding = document.MaxFunding,
                 TypicalLength = _typicalLengthMapping.MapTypicalLength(document.TypicalLength),
                 IntroductoryText = document.IntroductoryText,
                 EntryRequirements = document.EntryRequirements,

@@ -10,6 +10,8 @@
 
         public int Level { get; set; }
 
+        public int MaxFunding { get; set; }
+
         public string TypicalLengthMessage { get; set; }
 
         public string ExpiryDateString { get; set; }
