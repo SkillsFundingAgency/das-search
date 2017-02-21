@@ -175,11 +175,11 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
             <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
                 @if (string.IsNullOrEmpty(urlTitle))
                 {
-                    @url
+                    @Html.Raw(url)
                 }
                 else
                 {
-                    @urlTitle
+                    @Html.Raw(urlTitle)
                 }
             </a>
         </dd>

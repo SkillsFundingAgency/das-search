@@ -23,7 +23,7 @@
                     <h2 class="heading-medium">
                         Enter a postcode
                     </h2>
-                    <div class="form-group @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")" data-validation="Enter a valid postcode">
+                    <div class="form-group @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")" data-validation="You must enter a full and valid postcode">
                         <label for="search-box">
                             <span class="form-label-bold">Enter the full postcode of your apprentice's workplace</span>
                             <span class="form-hint">For example: 'SW1A 2AA'</span>
@@ -91,36 +91,36 @@
 {
     if(hasError)
     {
-        <span class="error-message">
+        <span id="error-postcode-service">
             Sorry, postcode search not working, please try again later
         </span>
     }
     else if (wrongPostcode)
     {
-        <span class="error-message">
+        <span id="error-postcode-invalid">
             You must enter a full and valid postcode
         </span>
     }
     else if (postcodeCountry != null)
     {
-        <span class="error-message">
+        <span id="error-postcode-location">
             The postcode entered is not in England.
         </span>
         switch (postcodeCountry.ToLower())
         {
             case "wales":
-                <span class="error-message">
+                <span id="error-postcode-wales">
                     Information about apprenticeships in <a href="https://businesswales.gov.wales/skillsgateway/apprenticeships">Wales</a>
                 </span>
                 break;
             case "northernireland":
                 
-                <span class="error-message">
+                <span id="error-postcode-northern-ireland">
                     Information about apprenticeships in <a href="https://www.nibusinessinfo.co.uk/content/apprenticeships-employers">Northern Ireland</a>
                 </span>
                 break;
             case "scotland":
-                <span class="error-message">
+                <span id="error-postcode-scotland">
                     Information about apprenticeships in <a href="https://www.apprenticeships.scot/">Scotland</a>
                 </span>
                 break;
