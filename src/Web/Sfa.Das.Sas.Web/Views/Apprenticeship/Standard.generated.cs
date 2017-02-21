@@ -337,7 +337,7 @@ WriteLiteral("            ");
 
             
             #line 37 "..\..\Views\Apprenticeship\Standard.cshtml"
-       Write(GetFundingBandProperty(Model.MaxFunding));
+       Write(GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage));
 
             
             #line default
@@ -348,7 +348,7 @@ WriteLiteral("            ");
 
             
             #line 38 "..\..\Views\Apprenticeship\Standard.cshtml"
-       Write(GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage));
+       Write(GetFundingBandProperty(Model.MaxFunding));
 
             
             #line default

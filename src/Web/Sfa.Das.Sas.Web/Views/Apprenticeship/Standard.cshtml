@@ -34,8 +34,8 @@
         </header>
         <dl class="data-list">
             @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
-            @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
+            @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
             @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)

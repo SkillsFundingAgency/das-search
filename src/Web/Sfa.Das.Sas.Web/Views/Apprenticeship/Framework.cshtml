@@ -59,8 +59,8 @@
                 <dd class="overviewText">@Model.FrameworkOverview </dd>
             }
             @GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
-            @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Typical length", "length", Model.TypicalLengthMessage)
+            @GetFundingBandProperty(Model.MaxFunding)
             <dt>Entry requirements</dt>
             <dd class="entry-requirements">
                 @if (!string.IsNullOrEmpty(Model.EntryRequirements))
