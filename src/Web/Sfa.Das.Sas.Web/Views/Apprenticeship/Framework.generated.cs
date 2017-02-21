@@ -148,8 +148,7 @@ WriteTo(__razor_helper_writer, fundingCapFormatted);
 WriteLiteralTo(__razor_helper_writer, " per apprentice.<br />\n        <a");
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
-"-work/apprenticeship-levy-how-it-will-work#buying-apprenticeship-training-and-as" +
-"sessment\"");
+"-work/apprenticeship-levy-how-it-will-work\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 

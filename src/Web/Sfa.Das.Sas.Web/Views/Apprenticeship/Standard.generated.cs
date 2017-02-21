@@ -148,8 +148,7 @@ WriteTo(__razor_helper_writer, fundingCapFormatted);
 WriteLiteralTo(__razor_helper_writer, " per apprentice.<br />\n        <a");
 
 WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
-"-work/apprenticeship-levy-how-it-will-work#buying-apprenticeship-training-and-as" +
-"sessment\"");
+"-work/apprenticeship-levy-how-it-will-work\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
@@ -185,14 +184,14 @@ if (!string.IsNullOrEmpty(title))
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3615), Tuple.Create("\"", 3629)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3569), Tuple.Create("\"", 3583)
 
 #line 85 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3622), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3576), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3622), false)
+, 3576), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
