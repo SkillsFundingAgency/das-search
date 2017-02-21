@@ -68,7 +68,7 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 
 @helper GetFundingBandProperty(int value)
 {
-var fundingCapFormatted = value.ToString("C0", CultureInfo.CurrentCulture);
+    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
     <dt>Funding cap<br />(from 1 May 2017)</dt>
     <dd id="funding-cap">

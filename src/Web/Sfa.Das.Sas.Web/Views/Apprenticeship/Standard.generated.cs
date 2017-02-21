@@ -124,7 +124,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 70 "..\..\Views\Apprenticeship\Standard.cshtml"
  
-var fundingCapFormatted = value.ToString("C0", CultureInfo.CurrentCulture);
+    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
 
 
@@ -184,14 +184,14 @@ if (!string.IsNullOrEmpty(title))
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3569), Tuple.Create("\"", 3583)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3571), Tuple.Create("\"", 3585)
 
 #line 85 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3576), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3578), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3576), false)
+, 3578), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");

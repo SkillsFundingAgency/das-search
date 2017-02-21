@@ -124,7 +124,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 196 "..\..\Views\Apprenticeship\Framework.cshtml"
  
-var fundingCapFormatted = value.ToString("C0", CultureInfo.CurrentCulture);
+    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
 
 
