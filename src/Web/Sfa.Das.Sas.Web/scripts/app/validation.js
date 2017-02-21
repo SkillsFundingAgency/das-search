@@ -27,7 +27,8 @@
 
                     var pcFieldGroup = pcField.closest('.form-group');
                     pcFieldGroup.addClass('error');
-                    pcFieldGroup.find('.error-message').text(pcFieldGroup.data('validation'));
+                    var $errorContainer = pcFieldGroup.find('.error-message');
+                    $errorContainer.empty().append('<span id="error-js-postcode-invalid">' + pcFieldGroup.data('validation') + '</span>');
 
                     postCode = postCode.toUpperCase().trim().replace(/\s/g, "");
 

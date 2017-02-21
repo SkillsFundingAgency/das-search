@@ -13,6 +13,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string Name { get; set; }
 
+        public string LegalName { get; set; }
+
         public Location Location { get; set; }
 
         public string ProviderMarketingInfo { get; set; }

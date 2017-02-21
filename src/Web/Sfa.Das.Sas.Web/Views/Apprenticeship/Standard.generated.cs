@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2952), Tuple.Create("\"", 2960)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 2953), Tuple.Create("\"", 2961)
 
 #line 65 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 2957), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 2958), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 2957), false)
+, 2958), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -130,7 +130,7 @@ var fundingCapFormatted = value.ToString("C0", CultureInfo.CurrentCulture);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Funding cap<br />(from 1 May 2017)</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt>Funding cap<br />(from 1 May 2017)</dt>\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
@@ -185,14 +185,14 @@ if (!string.IsNullOrEmpty(title))
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3618), Tuple.Create("\"", 3632)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3615), Tuple.Create("\"", 3629)
 
 #line 85 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3625), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3622), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3625), false)
+, 3622), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -327,7 +327,7 @@ WriteLiteral("            ");
 
             
             #line 36 "..\..\Views\Apprenticeship\Standard.cshtml"
-       Write(GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
+       Write(GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
 
             
             #line default
@@ -349,7 +349,7 @@ WriteLiteral("            ");
 
             
             #line 38 "..\..\Views\Apprenticeship\Standard.cshtml"
-       Write(GetStandardProperty("Typical length", "length", Model.TypicalLengthMessage));
+       Write(GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage));
 
             
             #line default
@@ -437,14 +437,14 @@ WriteLiteral(" rel=\"nofollow\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2548), Tuple.Create("\"", 2682)
+WriteAttribute("href", Tuple.Create(" href=\"", 2549), Tuple.Create("\"", 2683)
             
             #line 54 "..\..\Views\Apprenticeship\Standard.cshtml"
-                           , Tuple.Create(Tuple.Create("", 2555), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+                           , Tuple.Create(Tuple.Create("", 2556), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 2555), false)
+, 2556), false)
 );
 
 WriteLiteral(">\n                Find training providers\n            </a>\n        </div>\n    </s" +

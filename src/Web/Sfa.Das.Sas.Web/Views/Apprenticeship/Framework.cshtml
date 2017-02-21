@@ -58,8 +58,7 @@
                 <dt class="overviewTitle">Overview of role</dt>
                 <dd class="overviewText">@Model.FrameworkOverview </dd>
             }
-            
-            @GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
+            @GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
             @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Typical length", "length", Model.TypicalLengthMessage)
             <dt>Entry requirements</dt>

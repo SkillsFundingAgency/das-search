@@ -16,6 +16,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string ProviderMarketingInfo { get; set; }
         string ApprenticeshipMarketingInfo { get; set; }
         string ProviderName { get; set; }
+        string LegalName { get; set; }
         string Phone { get; set; }
         string ApprenticeshipInfoUrl { get; set; }
         int Ukprn { get; set; }
