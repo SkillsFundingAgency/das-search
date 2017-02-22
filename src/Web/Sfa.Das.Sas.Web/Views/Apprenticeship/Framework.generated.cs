@@ -90,16 +90,7 @@ WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8476), Tupl
 , 8481), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, ">");
-
-
-#line 191 "..\..\Views\Apprenticeship\Framework.cshtml"
-WriteTo(__razor_helper_writer, Html.MarkdownToHtml(item));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\n");
+WriteLiteralTo(__razor_helper_writer, ">item</dd>\n");
 
 
 #line 192 "..\..\Views\Apprenticeship\Framework.cshtml"
