@@ -96,7 +96,7 @@ $module: 'data-list';
 
 //Apply styles to '.data-list'
 .data-list {
-    @include data-list(30);
+    @include data-list(35);
     margin-bottom: $gutter;
 
     ul {

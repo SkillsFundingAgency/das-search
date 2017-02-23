@@ -1,3 +1,9 @@
+.provider-detail {
+    section h2:first-child {
+        margin-top: 0;
+    }
+}
+
 .standard-result-summary dt  {
     font-weight: 900;
     float: left;
@@ -6,6 +12,27 @@
 
 .rates-list > div {
     margin: 0.3em 0em 1.3em 0;
+}
+
+.rating {
+    margin: 0 0 1em;
+}
+
+.rating--inline {
+    span {
+        width: 50px;
+        float: left;
+    }
+    .progress-container {
+        margin-left: 3em;
+    }
+}
+
+.data-list dd>:first-child.rating {
+    margin-top: .5em;
+     @include media(tablet) {
+         margin-top: 0;
+     }
 }
 
 .progress-container {
@@ -48,5 +75,24 @@
     }
     p{
         margin-bottom: 5px;
+    }
+}
+
+
+.panel--contact {
+    background: $grey-3;
+    padding: 15px;
+    margin-bottom: 10px;
+    h2 {
+        margin-top: 0;
+    }
+    dl {
+        dt {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        dd {
+            overflow-wrap: break-word;
+        }
     }
 }

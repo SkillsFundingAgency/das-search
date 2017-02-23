@@ -12,10 +12,112 @@
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
-            <div>
-                <h1 class="heading-xlarge" id="provider-name">
-                    @Model.Name
-                </h1>
+            <h1 class="heading-xlarge" id="provider-name">
+                @Model.Name
+            </h1>
+        </div>
+    </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <section>
+
+                <h2 class="heading-medium">Training information</h2>
+
+                <dl class="data-list data-list--compact">
+                    <dt>Apprenticeship: </dt>
+                    <dd>@Model.ApprenticeshipName</dd>
+                    <dt>Level: </dt>
+                    <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))</dd>
+
+                    @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
+                    @ShowTrainingLocation("Training location:")
+
+                    <dt>Achievement rates: </dt>
+                    <dd>
+                        <div class="rating">
+                            Acheivement rate: 
+                            <span class="national-rate">
+                                @Model.AchievementRateMessage
+                            </span>
+                            @if (Model.AchievementRateMessage != "no data available")
+                            {
+                                @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
+                            }
+                        </div>
+
+                        @if (Model.AchievementRateMessage != "no data available")
+                        {
+                            <div class="rating national-achievement-bar">
+                                <b class="font-small">National average:</b>
+                                <span class="national-rate">
+                                    @Model.NationalAchievementRateMessage
+                                </span>
+                                @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
+                            </div>
+                        }
+                        @if (Model.AchievementRateMessage != "no data available")
+                        {
+                            <details class="more-information">
+                                <summary>Explain achievement rate</summary>
+                                <div class="panel panel-border-narrow">
+                                    <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
+                                    <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
+                                    <p class="font-small">Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
+                                </div>
+                            </details>
+                        }
+                    </dd>
+                </dl>
+
+                <h3 class="heading-small">About the apprenticeship: </h3>
+                @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
+
+            </section>
+            <h2 class="heading-medium">Provider information</h2>
+        </div>
+        <div class="column-one-third">
+            <div class="panel--contact">
+                <h2 class="heading-medium">Contact details</h2>
+                <dl>
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
+                    @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
+                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
+                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @ShowTrainingLocation("Address:")
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <section>
+                
+                <div class="provider-marketing-info">
+                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
+                </div>
+                <dl class="data-list data-list--compact">
+                    <dt>Employer satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="employer-satisfaction">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                        </div>
+                    </dd>
+                    <dt>Learner satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="learner-satisfaction">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                        </div>
+                    </dd>
+                    @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
+                </dl>
+                
                 @if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
                 {
                     <p class="national-message">
@@ -28,81 +130,30 @@
 
 
                     if (Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value && Model.HasNonLevyContract == false)
-                     {
-                         <p class="detail-highlight">
-                             Only levy paying employers can work with this provider
-                         </p>
-                     }
+                    {
+                        <p class="detail-highlight">
+                            Only levy paying employers can work with this provider
+                        </p>
+                    }
 
                     if (Model.HasParentCompanyGuarantee)
-                     {
-                         <p class="detail-highlight">
-                             Provider is supported by a parent company guarantee
-                         </p>
-                     }
+                    {
+                        <p class="detail-highlight">
+                            Provider is supported by a parent company guarantee
+                        </p>
+                    }
 
                     if (Model.IsNewProvider)
-                     {
-                         <p class="detail-highlight">
-                             New organisation with no financial track record
-                         </p>
-                     }
+                    {
+                        <p class="detail-highlight">
+                            New organisation with no financial track record
+                        </p>
+                    }
                 }
-                
-                <div id="marketing" class="provider-marketing-info">
-                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
-                </div>
-            </div>
-
-            <section>
-                <header class="hgroup">
-                    <h2 class="heading-large apprenticeship-name-level">
-                        @Model.ApprenticeshipName
-                    </h2>
-                    <b>Level:</b>
-                    <span>
-                        @Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))
-                    </span>
-                </header>
-                <dl class="data-list data-list--compact">
-                    @GetStandardPropertyHtml("Legal Trading Name:", "legal-name", Model.LegalName)
-                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
-                    @GetStandardPropertyHtml("Phone:", "phone", Model.ContactInformation.Phone)
-                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
-                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
-                    @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
-                    @ShowTrainingLocation("Training location:")
-                </dl>
-
+                <p>
+                    <em>Content maintained by @Model.Name</em>
+                </p>
             </section>
-
-            <section>
-                <header>
-                    <h2 class="heading-large">Apprenticeship training information</h2>
-                </header>
-                <article class="apprenticeship-marketing-info">
-                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
-                    <p><em>Content maintained by @Model.Name</em>
-                    </p>
-                </article>
-            </section>
-        </div>
-
-        <div class="column-third">
-            <div class="related-container">
-                <aside class="related">
-                    <h2 class="heading-medium">
-                        Training provider quality assessment
-                    </h2>
-                    @GetSatisfactionsHtml()
-                </aside>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-row">
-        <div class="column-two-thirds">
-
             <div class="survey-panel">
                 <h2 class="bold-large">
                     Give us your feedback
@@ -121,7 +172,6 @@
             </aside>
         </div>
     </div>
-
 </main>
 
 
