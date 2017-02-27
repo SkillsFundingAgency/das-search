@@ -64,14 +64,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class Detail : System.Web.Mvc.WebViewPage<ApprenticeshipDetailsViewModel>
     {
 
-#line 179 "..\..\Views\Provider\Detail.cshtml"
+#line 180 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult ShowTrainingLocation(string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 180 "..\..\Views\Provider\Detail.cshtml"
+#line 181 "..\..\Views\Provider\Detail.cshtml"
  
 if (@Model != null)
 {
@@ -86,7 +86,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"training-location-title\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 183 "..\..\Views\Provider\Detail.cshtml"
+#line 184 "..\..\Views\Provider\Detail.cshtml"
           WriteTo(__razor_helper_writer, title);
 
 
@@ -95,7 +95,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 
-#line 184 "..\..\Views\Provider\Detail.cshtml"
+#line 185 "..\..\Views\Provider\Detail.cshtml"
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
@@ -112,7 +112,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"training-location\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            Training takes place at your location\r\n        </dd>\r\n");
 
 
-#line 190 "..\..\Views\Provider\Detail.cshtml"
+#line 191 "..\..\Views\Provider\Detail.cshtml"
     }
     else
     {
@@ -131,7 +131,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 194 "..\..\Views\Provider\Detail.cshtml"
+#line 195 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Model.LocationAddressLine);
 
 
@@ -140,7 +140,7 @@ WriteTo(__razor_helper_writer, Model.LocationAddressLine);
 WriteLiteralTo(__razor_helper_writer, " \r\n        </dd>\r\n");
 
 
-#line 196 "..\..\Views\Provider\Detail.cshtml"
+#line 197 "..\..\Views\Provider\Detail.cshtml"
     }
 }
 
@@ -149,19 +149,19 @@ WriteLiteralTo(__razor_helper_writer, " \r\n        </dd>\r\n");
 #line hidden
 });
 
-#line 198 "..\..\Views\Provider\Detail.cshtml"
+#line 199 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 200 "..\..\Views\Provider\Detail.cshtml"
+#line 201 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 201 "..\..\Views\Provider\Detail.cshtml"
+#line 202 "..\..\Views\Provider\Detail.cshtml"
  
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
@@ -171,21 +171,21 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <dt");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 9334), Tuple.Create("\"", 9351)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 9356), Tuple.Create("\"", 9373)
 
-#line 204 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 9342), Tuple.Create<System.Object, System.Int32>(id
+#line 205 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 9364), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 9342), false)
-, Tuple.Create(Tuple.Create("", 9345), Tuple.Create("-title", 9345), true)
+, 9364), false)
+, Tuple.Create(Tuple.Create("", 9367), Tuple.Create("-title", 9367), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 204 "..\..\Views\Provider\Detail.cshtml"
+#line 205 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -195,30 +195,30 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9373), Tuple.Create("\"", 9381)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9395), Tuple.Create("\"", 9403)
 
-#line 205 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 9378), Tuple.Create<System.Object, System.Int32>(id
+#line 206 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 9400), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 9378), false)
+, 9400), false)
 );
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 9382), Tuple.Create("\"", 9393)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 9404), Tuple.Create("\"", 9415)
 
-#line 205 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 9390), Tuple.Create<System.Object, System.Int32>(id
+#line 206 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 9412), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 9390), false)
+, 9412), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 205 "..\..\Views\Provider\Detail.cshtml"
+#line 206 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.Raw(item));
 
 
@@ -227,7 +227,7 @@ WriteTo(__razor_helper_writer, Html.Raw(item));
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 206 "..\..\Views\Provider\Detail.cshtml"
+#line 207 "..\..\Views\Provider\Detail.cshtml"
 }
 
 
@@ -235,19 +235,19 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 207 "..\..\Views\Provider\Detail.cshtml"
+#line 208 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 209 "..\..\Views\Provider\Detail.cshtml"
+#line 210 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 210 "..\..\Views\Provider\Detail.cshtml"
+#line 211 "..\..\Views\Provider\Detail.cshtml"
  
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
@@ -262,7 +262,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"email-title\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 213 "..\..\Views\Provider\Detail.cshtml"
+#line 214 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -272,35 +272,35 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9623), Tuple.Create("\"", 9631)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9645), Tuple.Create("\"", 9653)
 
-#line 214 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 9628), Tuple.Create<System.Object, System.Int32>(id
+#line 215 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 9650), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 9628), false)
+, 9650), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " class=\"email\"");
 
 WriteLiteralTo(__razor_helper_writer, "><a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 9649), Tuple.Create("\"", 9678)
-, Tuple.Create(Tuple.Create("", 9656), Tuple.Create("mailto:", 9656), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 9671), Tuple.Create("\"", 9700)
+, Tuple.Create(Tuple.Create("", 9678), Tuple.Create("mailto:", 9678), true)
 
-#line 214 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 9663), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
+#line 215 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 9685), Tuple.Create<System.Object, System.Int32>(Html.Raw(item)
 
 #line default
 #line hidden
-, 9663), false)
+, 9685), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 214 "..\..\Views\Provider\Detail.cshtml"
+#line 215 "..\..\Views\Provider\Detail.cshtml"
                                   WriteTo(__razor_helper_writer, Html.Raw(item));
 
 
@@ -309,7 +309,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 
 
-#line 215 "..\..\Views\Provider\Detail.cshtml"
+#line 216 "..\..\Views\Provider\Detail.cshtml"
 }
 
 
@@ -317,19 +317,19 @@ WriteLiteralTo(__razor_helper_writer, "</a></dd>\r\n");
 #line hidden
 });
 
-#line 216 "..\..\Views\Provider\Detail.cshtml"
+#line 217 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 218 "..\..\Views\Provider\Detail.cshtml"
+#line 219 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 219 "..\..\Views\Provider\Detail.cshtml"
+#line 220 "..\..\Views\Provider\Detail.cshtml"
  
     if (!string.IsNullOrEmpty(url))
     {
@@ -340,20 +340,20 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <dt");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 9998), Tuple.Create("\"", 10017)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 10020), Tuple.Create("\"", 10039)
 
-#line 223 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 10006), Tuple.Create<System.Object, System.Int32>(classTitle
+#line 224 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 10028), Tuple.Create<System.Object, System.Int32>(classTitle
 
 #line default
 #line hidden
-, 10006), false)
+, 10028), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 223 "..\..\Views\Provider\Detail.cshtml"
+#line 224 "..\..\Views\Provider\Detail.cshtml"
   WriteTo(__razor_helper_writer, title);
 
 
@@ -363,54 +363,54 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 10060), Tuple.Create("\"", 10084)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 10082), Tuple.Create("\"", 10106)
 
-#line 225 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 10067), Tuple.Create<System.Object, System.Int32>(linkProtocol
-
-#line default
-#line hidden
-, 10067), false)
-
-#line 225 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 10080), Tuple.Create<System.Object, System.Int32>(url
+#line 226 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 10089), Tuple.Create<System.Object, System.Int32>(linkProtocol
 
 #line default
 #line hidden
-, 10080), false)
+, 10089), false)
+
+#line 226 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 10102), Tuple.Create<System.Object, System.Int32>(url
+
+#line default
+#line hidden
+, 10102), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 10116), Tuple.Create("\"", 10150)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 10138), Tuple.Create("\"", 10172)
 
-#line 225 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 10124), Tuple.Create<System.Object, System.Int32>(cssClass
-
-#line default
-#line hidden
-, 10124), false)
-
-#line 225 "..\..\Views\Provider\Detail.cshtml"
-      , Tuple.Create(Tuple.Create(" ", 10133), Tuple.Create<System.Object, System.Int32>(classIdentifier
+#line 226 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 10146), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 10134), false)
+, 10146), false)
+
+#line 226 "..\..\Views\Provider\Detail.cshtml"
+      , Tuple.Create(Tuple.Create(" ", 10155), Tuple.Create<System.Object, System.Int32>(classIdentifier
+
+#line default
+#line hidden
+, 10156), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
-#line 226 "..\..\Views\Provider\Detail.cshtml"
+#line 227 "..\..\Views\Provider\Detail.cshtml"
                 
 
 #line default
 #line hidden
 
-#line 226 "..\..\Views\Provider\Detail.cshtml"
+#line 227 "..\..\Views\Provider\Detail.cshtml"
                  if (string.IsNullOrEmpty(urlTitle))
                 {
                     
@@ -418,14 +418,14 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 #line default
 #line hidden
 
-#line 228 "..\..\Views\Provider\Detail.cshtml"
+#line 229 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.Raw(url));
 
 
 #line default
 #line hidden
 
-#line 228 "..\..\Views\Provider\Detail.cshtml"
+#line 229 "..\..\Views\Provider\Detail.cshtml"
                                   
                 }
                 else
@@ -435,14 +435,14 @@ WriteTo(__razor_helper_writer, Html.Raw(url));
 #line default
 #line hidden
 
-#line 232 "..\..\Views\Provider\Detail.cshtml"
+#line 233 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Html.Raw(urlTitle));
 
 
 #line default
 #line hidden
 
-#line 232 "..\..\Views\Provider\Detail.cshtml"
+#line 233 "..\..\Views\Provider\Detail.cshtml"
                                        
                 }
 
@@ -452,7 +452,7 @@ WriteTo(__razor_helper_writer, Html.Raw(urlTitle));
 WriteLiteralTo(__razor_helper_writer, "            </a>\r\n        </dd>\r\n");
 
 
-#line 236 "..\..\Views\Provider\Detail.cshtml"
+#line 237 "..\..\Views\Provider\Detail.cshtml"
     }
 
 
@@ -460,19 +460,19 @@ WriteLiteralTo(__razor_helper_writer, "            </a>\r\n        </dd>\r\n");
 #line hidden
 });
 
-#line 237 "..\..\Views\Provider\Detail.cshtml"
+#line 238 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 239 "..\..\Views\Provider\Detail.cshtml"
+#line 240 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetSatisfactionsHtml()
  {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 240 "..\..\Views\Provider\Detail.cshtml"
+#line 241 "..\..\Views\Provider\Detail.cshtml"
   
 
 
@@ -492,7 +492,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 245 "..\..\Views\Provider\Detail.cshtml"
+#line 246 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Model.EmployerSatisfactionMessage);
 
 
@@ -503,7 +503,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n");
 WriteLiteralTo(__razor_helper_writer, "             ");
 
 
-#line 247 "..\..\Views\Provider\Detail.cshtml"
+#line 248 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction));
 
 
@@ -519,7 +519,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 253 "..\..\Views\Provider\Detail.cshtml"
+#line 254 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Model.LearnerSatisfactionMessage);
 
 
@@ -530,7 +530,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n        </span>\r\n");
 WriteLiteralTo(__razor_helper_writer, "             ");
 
 
-#line 255 "..\..\Views\Provider\Detail.cshtml"
+#line 256 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction));
 
 
@@ -539,13 +539,13 @@ WriteTo(__razor_helper_writer, CreateProgressBar(Model.LearnerSatisfactionMessag
 WriteLiteralTo(__razor_helper_writer, "\r\n        </div>\r\n\r\n");
 
 
-#line 258 "..\..\Views\Provider\Detail.cshtml"
+#line 259 "..\..\Views\Provider\Detail.cshtml"
         
 
 #line default
 #line hidden
 
-#line 258 "..\..\Views\Provider\Detail.cshtml"
+#line 259 "..\..\Views\Provider\Detail.cshtml"
          if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
         {
 
@@ -558,14 +558,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"satisfaction-source font-small\"
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                Source: <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 11302), Tuple.Create("\"", 11337)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 11324), Tuple.Create("\"", 11359)
 
-#line 261 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 11309), Tuple.Create<System.Object, System.Int32>(Model.SatisfactionSourceUrl
+#line 262 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 11331), Tuple.Create<System.Object, System.Int32>(Model.SatisfactionSourceUrl
 
 #line default
 #line hidden
-, 11309), false)
+, 11331), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -573,7 +573,7 @@ WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 WriteLiteralTo(__razor_helper_writer, ">Skills Funding Agency FE Choices</a>\r\n            </p>\r\n");
 
 
-#line 263 "..\..\Views\Provider\Detail.cshtml"
+#line 264 "..\..\Views\Provider\Detail.cshtml"
         }
 
 
@@ -589,7 +589,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                 ");
 
 
-#line 269 "..\..\Views\Provider\Detail.cshtml"
+#line 270 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Model.AchievementRateMessage);
 
 
@@ -598,13 +598,13 @@ WriteTo(__razor_helper_writer, Model.AchievementRateMessage);
 WriteLiteralTo(__razor_helper_writer, "\r\n             </span>\r\n");
 
 
-#line 271 "..\..\Views\Provider\Detail.cshtml"
+#line 272 "..\..\Views\Provider\Detail.cshtml"
              
 
 #line default
 #line hidden
 
-#line 271 "..\..\Views\Provider\Detail.cshtml"
+#line 272 "..\..\Views\Provider\Detail.cshtml"
               if (Model.AchievementRateMessage != "no data available")
              {
                  
@@ -612,14 +612,14 @@ WriteLiteralTo(__razor_helper_writer, "\r\n             </span>\r\n");
 #line default
 #line hidden
 
-#line 273 "..\..\Views\Provider\Detail.cshtml"
+#line 274 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate));
 
 
 #line default
 #line hidden
 
-#line 273 "..\..\Views\Provider\Detail.cshtml"
+#line 274 "..\..\Views\Provider\Detail.cshtml"
                                                                                         
              }
 
@@ -629,13 +629,13 @@ WriteTo(__razor_helper_writer, CreateProgressBar(Model.AchievementRateMessage, M
 WriteLiteralTo(__razor_helper_writer, "         </div>\r\n");
 
 
-#line 276 "..\..\Views\Provider\Detail.cshtml"
+#line 277 "..\..\Views\Provider\Detail.cshtml"
          
 
 #line default
 #line hidden
 
-#line 276 "..\..\Views\Provider\Detail.cshtml"
+#line 277 "..\..\Views\Provider\Detail.cshtml"
           if (Model.AchievementRateMessage != "no data available")
          {
 
@@ -659,7 +659,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                     ");
 
 
-#line 281 "..\..\Views\Provider\Detail.cshtml"
+#line 282 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, Model.NationalAchievementRateMessage);
 
 
@@ -670,7 +670,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n                 </span>\r\n");
 WriteLiteralTo(__razor_helper_writer, "                 ");
 
 
-#line 283 "..\..\Views\Provider\Detail.cshtml"
+#line 284 "..\..\Views\Provider\Detail.cshtml"
 WriteTo(__razor_helper_writer, CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate));
 
 
@@ -679,7 +679,7 @@ WriteTo(__razor_helper_writer, CreateProgressBar(Model.NationalAchievementRateMe
 WriteLiteralTo(__razor_helper_writer, "\r\n             </div>\r\n");
 
 
-#line 285 "..\..\Views\Provider\Detail.cshtml"
+#line 286 "..\..\Views\Provider\Detail.cshtml"
          }
 
 
@@ -688,7 +688,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n             </div>\r\n");
 WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 286 "..\..\Views\Provider\Detail.cshtml"
+#line 287 "..\..\Views\Provider\Detail.cshtml"
          if (Model.AchievementRateMessage != "no data available")
         {
 
@@ -709,7 +709,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                    <p>Percentage of
 "ased on the latest data for ");
 
 
-#line 292 "..\..\Views\Provider\Detail.cshtml"
+#line 293 "..\..\Views\Provider\Detail.cshtml"
                       WriteTo(__razor_helper_writer, Model.OverallCohort);
 
 
@@ -721,14 +721,14 @@ WriteLiteralTo(__razor_helper_writer, " class=\"font-small\"");
 
 WriteLiteralTo(__razor_helper_writer, ">Source: <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 12806), Tuple.Create("\"", 12844)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 12828), Tuple.Create("\"", 12866)
 
-#line 293 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 12813), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
+#line 294 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 12835), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
 
 #line default
 #line hidden
-, 12813), false)
+, 12835), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -739,7 +739,7 @@ WriteLiteralTo(__razor_helper_writer, ">Skills Funding Agency apprenticeship ach
 "</div>\r\n            </details>\r\n");
 
 
-#line 296 "..\..\Views\Provider\Detail.cshtml"
+#line 297 "..\..\Views\Provider\Detail.cshtml"
         }
 
 
@@ -748,26 +748,26 @@ WriteLiteralTo(__razor_helper_writer, ">Skills Funding Agency apprenticeship ach
 WriteLiteralTo(__razor_helper_writer, "\r\n    </div>\r\n");
 
 
-#line 299 "..\..\Views\Provider\Detail.cshtml"
+#line 300 "..\..\Views\Provider\Detail.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 299 "..\..\Views\Provider\Detail.cshtml"
+#line 300 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 301 "..\..\Views\Provider\Detail.cshtml"
+#line 302 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult CreateProgressBar(string message, int progress)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 302 "..\..\Views\Provider\Detail.cshtml"
+#line 303 "..\..\Views\Provider\Detail.cshtml"
  
     if (progress > 0)
     {
@@ -783,22 +783,22 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 13187), Tuple.Create("\"", 13212)
-, Tuple.Create(Tuple.Create("", 13195), Tuple.Create("width:", 13195), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 13209), Tuple.Create("\"", 13234)
+, Tuple.Create(Tuple.Create("", 13217), Tuple.Create("width:", 13217), true)
 
-#line 306 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 13201), Tuple.Create<System.Object, System.Int32>(progress
+#line 307 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create(" ", 13223), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 13202), false)
-, Tuple.Create(Tuple.Create("", 13211), Tuple.Create("%", 13211), true)
+, 13224), false)
+, Tuple.Create(Tuple.Create("", 13233), Tuple.Create("%", 13233), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
 
 
-#line 308 "..\..\Views\Provider\Detail.cshtml"
+#line 309 "..\..\Views\Provider\Detail.cshtml"
     }
 
 
@@ -806,19 +806,19 @@ WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
 #line hidden
 });
 
-#line 309 "..\..\Views\Provider\Detail.cshtml"
+#line 310 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
 
-#line 311 "..\..\Views\Provider\Detail.cshtml"
+#line 312 "..\..\Views\Provider\Detail.cshtml"
 public System.Web.WebPages.HelperResult GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 312 "..\..\Views\Provider\Detail.cshtml"
+#line 313 "..\..\Views\Provider\Detail.cshtml"
  
 if (items != null)
 {
@@ -833,7 +833,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"training-structure\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 315 "..\..\Views\Provider\Detail.cshtml"
+#line 316 "..\..\Views\Provider\Detail.cshtml"
      WriteTo(__razor_helper_writer, title);
 
 
@@ -848,13 +848,13 @@ WriteLiteralTo(__razor_helper_writer, " id=\"delivery-modes\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <ul>\r\n");
 
 
-#line 318 "..\..\Views\Provider\Detail.cshtml"
+#line 319 "..\..\Views\Provider\Detail.cshtml"
             
 
 #line default
 #line hidden
 
-#line 318 "..\..\Views\Provider\Detail.cshtml"
+#line 319 "..\..\Views\Provider\Detail.cshtml"
              if (items.Exists(m => m.Equals("DayRelease")))
             {
 
@@ -868,7 +868,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"day-release\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 320 "..\..\Views\Provider\Detail.cshtml"
+#line 321 "..\..\Views\Provider\Detail.cshtml"
           WriteTo(__razor_helper_writer, Html.Raw("day release"));
 
 
@@ -877,7 +877,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
-#line 321 "..\..\Views\Provider\Detail.cshtml"
+#line 322 "..\..\Views\Provider\Detail.cshtml"
             }
 
 
@@ -886,7 +886,7 @@ WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 322 "..\..\Views\Provider\Detail.cshtml"
+#line 323 "..\..\Views\Provider\Detail.cshtml"
              if (items.Exists(m => m.Equals("BlockRelease")))
             {
 
@@ -900,7 +900,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"block-release\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 324 "..\..\Views\Provider\Detail.cshtml"
+#line 325 "..\..\Views\Provider\Detail.cshtml"
             WriteTo(__razor_helper_writer, Html.Raw("block release"));
 
 
@@ -909,7 +909,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
-#line 325 "..\..\Views\Provider\Detail.cshtml"
+#line 326 "..\..\Views\Provider\Detail.cshtml"
             }
 
 
@@ -918,7 +918,7 @@ WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 WriteLiteralTo(__razor_helper_writer, "            ");
 
 
-#line 326 "..\..\Views\Provider\Detail.cshtml"
+#line 327 "..\..\Views\Provider\Detail.cshtml"
              if (items.Exists(m => m.Equals("100PercentEmployer")))
             {
 
@@ -932,7 +932,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 328 "..\..\Views\Provider\Detail.cshtml"
+#line 329 "..\..\Views\Provider\Detail.cshtml"
                        WriteTo(__razor_helper_writer, Html.Raw("at your location"));
 
 
@@ -941,7 +941,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
-#line 329 "..\..\Views\Provider\Detail.cshtml"
+#line 330 "..\..\Views\Provider\Detail.cshtml"
             }
 
 
@@ -970,7 +970,7 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the training pr
 "         </p>\r\n            </div>\r\n        </details>\r\n    </dd>\r\n");
 
 
-#line 346 "..\..\Views\Provider\Detail.cshtml"
+#line 347 "..\..\Views\Provider\Detail.cshtml"
 }
 
 
@@ -978,7 +978,7 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the training pr
 #line hidden
 });
 
-#line 347 "..\..\Views\Provider\Detail.cshtml"
+#line 348 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden
@@ -1042,7 +1042,7 @@ WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(">Training information</h2>\r\n\r\n                <dl");
 
-WriteLiteral(" class=\"data-list data-list--compact\"");
+WriteLiteral(" class=\"data-list--provider data-list--compact\"");
 
 WriteLiteral(">\r\n                    <dt>Apprenticeship: </dt>\r\n                    <dd>");
 
@@ -1240,14 +1240,14 @@ WriteLiteral(" class=\"font-small\"");
 
 WriteLiteral(">Source: <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3302), Tuple.Create("\"", 3340)
+WriteAttribute("href", Tuple.Create(" href=\"", 3312), Tuple.Create("\"", 3350)
             
             #line 66 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 3309), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
+, Tuple.Create(Tuple.Create("", 3319), Tuple.Create<System.Object, System.Int32>(Model.AchievementRateSourceUrl
             
             #line default
             #line hidden
-, 3309), false)
+, 3319), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -1376,7 +1376,7 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                </div>\r\n                <dl");
 
-WriteLiteral(" class=\"data-list data-list--compact\"");
+WriteLiteral(" class=\"data-list--provider data-list--compact\"");
 
 WriteLiteral(">\r\n                    <dt>Employer satisfaction:</dt>\r\n                    <dd>\r" +
 "\n                        <div");
@@ -1452,16 +1452,16 @@ WriteLiteral("                    ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </dl>\r\n                \r\n");
+WriteLiteral("\r\n                </dl>\r\n                \r\n\r\n");
 
             
-            #line 121 "..\..\Views\Provider\Detail.cshtml"
+            #line 122 "..\..\Views\Provider\Detail.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 121 "..\..\Views\Provider\Detail.cshtml"
+            #line 122 "..\..\Views\Provider\Detail.cshtml"
                  if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
                 {
 
@@ -1480,7 +1480,7 @@ WriteLiteral(">National</span> This training provider is willing to offer appren
 "ng across England.\r\n                    </p>\r\n");
 
             
-            #line 126 "..\..\Views\Provider\Detail.cshtml"
+            #line 127 "..\..\Views\Provider\Detail.cshtml"
                 }
 
             
@@ -1489,13 +1489,13 @@ WriteLiteral(">National</span> This training provider is willing to offer appren
 WriteLiteral("\r\n");
 
             
-            #line 128 "..\..\Views\Provider\Detail.cshtml"
+            #line 129 "..\..\Views\Provider\Detail.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 128 "..\..\Views\Provider\Detail.cshtml"
+            #line 129 "..\..\Views\Provider\Detail.cshtml"
                  if (Is<FatLevyJourneyFeature>.Enabled)
                 {
 
@@ -1514,7 +1514,7 @@ WriteLiteral(">\r\n                            Only levy paying employers can wo
 "ider\r\n                        </p>\r\n");
 
             
-            #line 137 "..\..\Views\Provider\Detail.cshtml"
+            #line 138 "..\..\Views\Provider\Detail.cshtml"
                     }
 
                     if (Model.HasParentCompanyGuarantee)
@@ -1531,7 +1531,7 @@ WriteLiteral(">\r\n                            Provider is supported by a parent
 "e\r\n                        </p>\r\n");
 
             
-            #line 144 "..\..\Views\Provider\Detail.cshtml"
+            #line 145 "..\..\Views\Provider\Detail.cshtml"
                     }
 
                     if (Model.IsNewProvider)
@@ -1548,7 +1548,7 @@ WriteLiteral(">\r\n                            New organisation with no financia
 "                       </p>\r\n");
 
             
-            #line 151 "..\..\Views\Provider\Detail.cshtml"
+            #line 152 "..\..\Views\Provider\Detail.cshtml"
                     }
                 }
 
@@ -1558,7 +1558,7 @@ WriteLiteral(">\r\n                            New organisation with no financia
 WriteLiteral("                <p>\r\n                    <em>Content maintained by ");
 
             
-            #line 154 "..\..\Views\Provider\Detail.cshtml"
+            #line 155 "..\..\Views\Provider\Detail.cshtml"
                                          Write(Model.Name);
 
             
@@ -1581,14 +1581,14 @@ WriteLiteral(@">
                 </p>
                 <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8020), Tuple.Create("\"", 8043)
+WriteAttribute("href", Tuple.Create(" href=\"", 8042), Tuple.Create("\"", 8065)
             
-            #line 165 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create("", 8027), Tuple.Create<System.Object, System.Int32>(Model.SurveyUrl
+            #line 166 "..\..\Views\Provider\Detail.cshtml"
+, Tuple.Create(Tuple.Create("", 8049), Tuple.Create<System.Object, System.Int32>(Model.SurveyUrl
             
             #line default
             #line hidden
-, 8027), false)
+, 8049), false)
 );
 
 WriteLiteral(" target=\"_blank\"");

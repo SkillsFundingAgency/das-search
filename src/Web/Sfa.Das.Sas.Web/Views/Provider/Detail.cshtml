@@ -24,7 +24,7 @@
 
                 <h2 class="heading-medium">Training information</h2>
 
-                <dl class="data-list data-list--compact">
+                <dl class="data-list--provider data-list--compact">
                     <dt>Apprenticeship: </dt>
                     <dd>@Model.ApprenticeshipName</dd>
                     <dt>Level: </dt>
@@ -96,7 +96,7 @@
                 <div class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
-                <dl class="data-list data-list--compact">
+                <dl class="data-list--provider data-list--compact">
                     <dt>Employer satisfaction:</dt>
                     <dd>
                         <div class="rating rating--inline">
@@ -118,6 +118,7 @@
                     @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
                 </dl>
                 
+
                 @if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
                 {
                     <p class="national-message">

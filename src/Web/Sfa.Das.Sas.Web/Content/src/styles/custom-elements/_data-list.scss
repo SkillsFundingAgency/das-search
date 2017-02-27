@@ -96,7 +96,7 @@ $module: 'data-list';
 
 //Apply styles to '.data-list'
 .data-list {
-    @include data-list(35);
+    @include data-list(30);
     margin-bottom: $gutter;
 
     ul {
@@ -106,8 +106,12 @@ $module: 'data-list';
     }
 }
 
-.provider-detail .data-list ul {
-    margin-bottom: 0;
+.data-list--provider {
+    @include data-list(35);
+    ul {
+        @extend .list-bullet;
+        margin-bottom: 0;
+    }
 }
 
 .standard-detail .data-list .document-list ul {
