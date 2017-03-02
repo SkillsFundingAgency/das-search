@@ -94,7 +94,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 191 "..\..\Views\Apprenticeship\Framework.cshtml"
-WriteTo(__razor_helper_writer, Html.MarkdownToHtml(item));
+WriteTo(__razor_helper_writer, item);
 
 
 #line default
