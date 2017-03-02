@@ -99,7 +99,7 @@
                     <dt>Employer satisfaction:</dt>
                     <dd>
                         <div class="rating rating--inline">
-                            <span id="employer-satisfaction">
+                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
                                 @Model.EmployerSatisfactionMessage
                             </span>
                             @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
