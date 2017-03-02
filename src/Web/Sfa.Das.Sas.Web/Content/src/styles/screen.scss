@@ -391,6 +391,9 @@ aside h2:first-child {
 }
 
 .search-form {
+    .form-control {
+        line-height: 1.45em;
+    }
     .button {
         margin-top: 5px;
     }
