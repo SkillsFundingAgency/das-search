@@ -6,7 +6,7 @@
 @model ApprenticeshipDetailsViewModel
 
 @{
-    ViewBag.Title = @Model.Name + " - Apprenticeship Provider";
+    ViewBag.Title = Model.Name + " - Apprenticeship Provider";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 <main id="content" class="provider-detail">
@@ -28,7 +28,7 @@
                     <dt>Apprenticeship: </dt>
                     <dd>@Model.ApprenticeshipName</dd>
                     <dt>Level: </dt>
-                    <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))</dd>
+                    <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.ApprenticeshipLevel))</dd>
 
                     @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
                     @ShowTrainingLocation("Training location:")
@@ -36,7 +36,6 @@
                     <dt>Achievement rates: </dt>
                     <dd>
                         <div class="rating">
-                            Acheivement rate: 
                             <span class="national-rate">
                                 @Model.AchievementRateMessage
                             </span>
@@ -80,10 +79,10 @@
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
-                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
                     @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
                     @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
-                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", Model.ContactInformation.ContactUsUrl, "contact this training provider")
                     @ShowTrainingLocation("Address:")
                 </dl>
             </div>
@@ -112,9 +111,15 @@
                             <span id="learner-satisfaction">
                                 @Model.LearnerSatisfactionMessage
                             </span>
-                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
                         </div>
                     </dd>
+                    @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                    {
+                        <p class="satisfaction-source font-small">
+                            Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
+                        </p>
+                    }
                     @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
                 </dl>
                 
@@ -128,8 +133,6 @@
 
                 @if (Is<FatLevyJourneyFeature>.Enabled)
                 {
-
-
                     if (Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value && Model.HasNonLevyContract == false)
                     {
                         <p class="detail-highlight">
@@ -235,68 +238,6 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
             </a>
         </dd>
     }
-}
-
-@helper GetSatisfactionsHtml()
- {
-     <div class="rates-list">
-         <div>
-             <b>Employer satisfaction:</b>
-             <span id="employer-satisfaction">
-            @Model.EmployerSatisfactionMessage
-        </span>
-             @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
-         </div>
-
-         <div>
-             <b>Learner satisfaction:</b>
-             <span id="learner-satisfaction">
-            @Model.LearnerSatisfactionMessage
-        </span>
-             @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
-        </div>
-
-        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
-        {
-            <p class="satisfaction-source font-small">
-                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
-            </p>
-        }
-        <hr/>
-
-         <div>
-             <b>Achievement rate:</b>
-             <span class="national-rate">
-                 @Model.AchievementRateMessage
-             </span>
-             @if (Model.AchievementRateMessage != "no data available")
-             {
-                 @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
-             }
-         </div>
-         @if (Model.AchievementRateMessage != "no data available")
-         {
-             <div class="national-achievement-bar">
-                 <b class="font-small">National average:</b>
-                 <span class="national-rate">
-                     @Model.NationalAchievementRateMessage
-                 </span>
-                 @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
-             </div>
-         }
-        @if (Model.AchievementRateMessage != "no data available")
-        {
-            <details class="more-information">
-                <summary>Explain achievement rate</summary>
-                <div class="panel panel-border-narrow">
-                    <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
-                    <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
-                    <p class="font-small">Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
-                </div>
-            </details>
-        }
-
-    </div>
 }
 
 @helper CreateProgressBar(string message, int progress)

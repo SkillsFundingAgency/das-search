@@ -121,7 +121,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
-        public void ShouldShowAddressIfThereAreMoreDeliveryModesAppartFromEmployerLocation()
+        public void ShouldShowAddressIfThereAreMoreDeliveryModesApartFromEmployerLocation()
         {
             var detail = new Detail();
 
@@ -162,7 +162,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "dl dt", 7).Should().Contain("Training location");
+            this.GetPartial(html, "dl dt", 4).Should().Contain("Training location");
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().Contain(model.Location.LocationName);
@@ -211,7 +211,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "dl dt", 7).Should().Contain("Training location");
+            this.GetPartial(html, "dl dt", 4).Should().Contain("Training location");
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().NotContain(model.Location.LocationName);
@@ -260,8 +260,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipName);
 
             var locationText = GetPartial(html, ".training-location");
 
@@ -313,49 +311,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var providerMarketingInfoHtml = GetPartial(html, ".provider-marketing-info");
 
             providerMarketingInfoHtml.Should().Contain(model.ProviderMarketingInfo);
-        }
-
-        [Test]
-        public void ShouldShowApprenticeshipNameWithLevel()
-        {
-            var detail = new Detail();
-            var model = new ApprenticeshipDetailsViewModel
-            {
-                Name = "Test name",
-                EmployerSatisfactionMessage = "100%",
-                LearnerSatisfactionMessage = "100%",
-                Location = new Location
-                {
-                    LocationId = 1,
-                    LocationName = "Test location name"
-                },
-                Address = new Address
-                {
-                    Address1 = "Address 1",
-                    Address2 = "Address 2",
-                    County = "County",
-                    Postcode = "PostCode",
-                    Town = "Town"
-                },
-                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
-                ContactInformation = new ContactInformation
-                {
-                    ContactUsUrl = "Test contact url",
-                    Email = "Test email",
-                    Website = "Test website",
-                    Phone = "Test phone"
-                },
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
-                },
-                ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipName = "Test level"
-            };
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            GetPartial(html, ".apprenticeship-name-level").Should().Contain(model.ApprenticeshipName);
         }
 
         [Test]
