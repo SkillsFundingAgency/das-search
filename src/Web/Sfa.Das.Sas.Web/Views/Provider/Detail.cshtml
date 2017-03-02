@@ -108,7 +108,7 @@
                     <dt>Learner satisfaction:</dt>
                     <dd>
                         <div class="rating rating--inline">
-                            <span id="learner-satisfaction">
+                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
                                 @Model.LearnerSatisfactionMessage
                             </span>
                             @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
