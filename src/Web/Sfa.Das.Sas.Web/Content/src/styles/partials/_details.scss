@@ -1,5 +1,5 @@
 .provider-detail {
-    section h2:first-child {
+    section:first-child h2 {
         margin-top: 0;
     }
 }
@@ -19,6 +19,7 @@
 }
 
 .rating--inline {
+    margin: 5px 0;
     span {
         width: 50px;
         float: left;
@@ -32,15 +33,15 @@
     }
 }
 
-.data-list dd>:first-child.rating {
-    margin-top: .5em;
+.data-list--provider dd>:first-child.rating {
+    margin-top: 5px;
      @include media(tablet) {
          margin-top: 0;
      }
 }
 
 .progress-container {
-    background-color: #DEE0E2;
+    background-color: $grey-3;
 }
 
 .progress-container .progressbar {
@@ -54,9 +55,7 @@
 
 .apprenticeship-marketing-info{
     h2, h3 {
-        font-size: 24px;
-        line-height: 1.1111111111;
-        font-weight: bold;
+        @include bold-24();
     }
     ul{
         padding: 0;
@@ -97,6 +96,40 @@
         }
         dd {
             overflow-wrap: break-word;
+            word-wrap: break-word; 
+            word-break: break-all;
         }
     }
+}
+
+.content-source {
+     @include core-16();
+     color: $grey-1;
+}
+.satisfaction-source {
+    display: block;
+    text-align: right;
+    @include core-16();
+    margin-top: 5px;
+    margin-bottom: 30px;
+    color: $grey-1;
+}
+
+.survey {
+    margin-top: 30px;
+    background:$grey-3;
+}
+
+.survey,
+.provider-disclaimer {
+    h2, h3 {
+        margin-top: 0;
+    }
+    @include core-16();
+    padding: 20px;
+}
+
+.provider-disclaimer {
+    margin-top: 10px;
+    padding: 20px 0;
 }
