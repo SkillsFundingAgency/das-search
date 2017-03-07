@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Polly;
-using Sfa.Das.Sas.Core.Logging;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Core
 {

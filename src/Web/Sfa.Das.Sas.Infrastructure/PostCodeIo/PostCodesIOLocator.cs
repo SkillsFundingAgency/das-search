@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
+﻿using SFA.DAS.NLog.Logger;
+
+namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +16,7 @@
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core;
     using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Core.Logging;
+    
 
     public class PostCodesIoLocator : ILookupLocations
     {

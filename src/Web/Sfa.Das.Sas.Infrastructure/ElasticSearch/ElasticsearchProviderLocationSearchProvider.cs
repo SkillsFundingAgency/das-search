@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿using SFA.DAS.NLog.Logger;
+
+namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +12,6 @@
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Core.Logging;
 
     public sealed class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
     {

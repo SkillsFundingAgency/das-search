@@ -4,6 +4,7 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Web.Controllers;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
@@ -17,7 +18,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockConfiguration = new Mock<IConfigurationSettings>();
 
             // Arrange
-            StartController controller = new StartController(_mockConfiguration.Object);
+            StartController controller = new StartController(_mockConfiguration.Object, new Mock<ILog>().Object);
 
             // Act
             ViewResult result = controller.Start() as ViewResult;

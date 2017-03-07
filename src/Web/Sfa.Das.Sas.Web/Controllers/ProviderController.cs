@@ -7,10 +7,11 @@ using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 ﻿using Sfa.Das.Sas.Core.Configuration;
-﻿using Sfa.Das.Sas.Core.Logging;
+﻿
 using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
+﻿using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {

@@ -4,9 +4,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
-using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Services;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
 {

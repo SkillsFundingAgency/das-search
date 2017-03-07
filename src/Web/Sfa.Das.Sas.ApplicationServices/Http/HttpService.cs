@@ -2,7 +2,8 @@
 using System.Net;
 using System.Text;
 
-using Sfa.Das.Sas.Core.Logging;
+
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Http
 {

@@ -1,4 +1,5 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Services;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -6,7 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Domain.Model;
-    using Core.Logging;
     using FluentValidation;
     using MediatR;
     using Models;
