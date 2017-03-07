@@ -56,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
-            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("training provider website");
+            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("Test name website");
             this.GetAttribute(html, ".apprenticeshipContact", "href").Should().Be("http://www.test-apprenticeship.info.url", "because http be added if missing");
             this.GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
             this.GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             this.GetPartial(html, ".email").Should().Contain(model.ContactInformation.Email);
             this.GetPartial(html, ".training-structure").Should().Contain("Training options");
             this.GetPartial(html, ".block-release").Should().Contain("block release");
-            this.GetPartial(html, ".training-location-title").Should().Contain("Training location");
+            this.GetPartial(html, ".training-location-title").Should().Contain("Address");
             this.GetPartial(html, ".training-location").Should().Contain("Test location name, Address 1, Address 2, Town, County, PostCode");
         }
 
@@ -161,63 +161,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            this.GetPartial(html, "dl dt", 4).Should().Contain("Training location");
+            
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().Contain(model.Location.LocationName);
             locationText.Should().Contain(model.Address.Address1);
             locationText.Should().Contain(model.Address.Address2);
-        }
-
-        [Test]
-        public void ShouldShowMessageIfEmployerLocationIsTheOnlyDeliveryMode()
-        {
-            var detail = new Detail();
-
-            var model = new ApprenticeshipDetailsViewModel
-            {
-                Name = "Test name",
-                EmployerSatisfactionMessage = "100%",
-                LearnerSatisfactionMessage = "100%",
-                Location = new Location
-                {
-                    LocationId = 1,
-                    LocationName = "Test location name"
-                },
-                Address = new Address
-                {
-                    Address1 = "Address 1",
-                    Address2 = "Address 2",
-                    County = "County",
-                    Postcode = "PostCode",
-                    Town = "Town"
-                },
-                DeliveryModes = new List<string> { "100PercentEmployer" },
-                ContactInformation = new ContactInformation
-                {
-                    ContactUsUrl = "Test contact url",
-                    Email = "Test email",
-                    Website = "Test website",
-                    Phone = "Test phone"
-                },
-                Apprenticeship = new ApprenticeshipBasic
-                {
-                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
-                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
-                },
-                ProviderMarketingInfo = "Test provider marketing info",
-                ApprenticeshipName = "Test level"
-            };
-            var html = detail.RenderAsHtml(model).ToAngleSharp();
-
-            this.GetPartial(html, "dl dt", 4).Should().Contain("Training location");
-            var locationText = GetPartial(html, ".training-location");
-
-            locationText.Should().NotContain(model.Location.LocationName);
-            locationText.Should().NotContain(model.Address.Address1);
-            locationText.Should().NotContain(model.Address.Address2);
-            locationText.Should().Contain("Training takes place at your location");
         }
 
         [Test]

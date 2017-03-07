@@ -22,7 +22,7 @@
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
-                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, @Model.Name + "'s website")
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, Model.Name + " website")
                     @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
                     @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
                     @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", Model.ContactInformation.ContactUsUrl, "contact this training provider")
