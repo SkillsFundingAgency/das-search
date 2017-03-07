@@ -18,6 +18,18 @@
         </div>
     </div>
     <div class="grid-row">
+        <div class="column-one-third pull-right">
+            <div class="panel--contact">
+                <h2 class="heading-medium">Contact details</h2>
+                <dl>
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, Model.Name + " website")
+                    @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
+                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
+                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @ShowTrainingLocation("Address:")
+                </dl>
+            </div>
+        </div>
         <div class="column-two-thirds">
 
             <section>
@@ -31,11 +43,11 @@
                     <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.ApprenticeshipLevel))</dd>
 
                     @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
-                    @ShowTrainingLocation("Training location:")
 
                     <dt>Achievement rates: </dt>
                     <dd>
                         <div class="rating">
+                            <b class="font-small">Achievement average:</b>
                             <span class="national-rate">
                                 @Model.AchievementRateMessage
                             </span>
@@ -73,25 +85,9 @@
                 @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
 
             </section>
-            <h2 class="heading-medium">Provider information</h2>
-        </div>
-        <div class="column-one-third">
-            <div class="panel--contact">
-                <h2 class="heading-medium">Contact details</h2>
-                <dl>
-                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
-                    @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
-                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
-                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", Model.ContactInformation.ContactUsUrl, "contact this training provider")
-                    @ShowTrainingLocation("Address:")
-                </dl>
-            </div>
-        </div>
-    </div>
-    <div class="grid-row">
-        <div class="column-two-thirds">
+         
             <section>
-                
+                <h2 class="heading-medium">Provider information</h2>
                 <div class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
@@ -113,16 +109,16 @@
                             </span>
                             @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
                         </div>
+                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                        {
+                            <span class="satisfaction-source font-small">
+                                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
+                            </span>
+                        }
                     </dd>
-                    @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
-                    {
-                        <p class="satisfaction-source font-small">
-                            Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
-                        </p>
-                    }
+                    
                     @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
                 </dl>
-                
 
                 @if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
                 {
@@ -154,12 +150,13 @@
                         </p>
                     }
                 }
-                <p>
-                    <em>Content maintained by @Model.Name</em>
+                <p class="content-source">
+                    Content maintained by @Model.Name
                 </p>
             </section>
-            <div class="survey-panel">
-                <h2 class="bold-large">
+            
+            <div class="survey">
+                <h2 class="heading-small">
                     Give us your feedback
                 </h2>
                 <p>
@@ -168,14 +165,15 @@
                 </p>
                 <a href="@Model.SurveyUrl" target="_blank" class="button">Take the survey</a>
             </div>
-            <aside class="disclaimer">
+            <div class="provider-disclaimer">
                 <h3 class="heading-small">Content disclaimer</h3>
                 <p>
                     Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
                 </p>
-            </aside>
+            </div>
         </div>
     </div>
+  
 </main>
 
 
