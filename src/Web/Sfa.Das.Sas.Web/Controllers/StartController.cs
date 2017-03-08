@@ -21,7 +21,6 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult Start()
         {
-            _log.Info("START");
             return View();
         }
 
