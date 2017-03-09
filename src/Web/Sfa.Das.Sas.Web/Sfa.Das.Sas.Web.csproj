@@ -670,6 +670,9 @@
     <Content Include="Transform.ServiceConfiguration.Demo.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Transform.Nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Transform.ServiceConfiguration.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -180,7 +180,6 @@
     <None Include="packages.config" />
     <None Include="Sfa.Das.Sas.Infrastructure.ruleset" />
     <None Include="stylecop.json" />
-    <None Include="Transform.Nlog.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
