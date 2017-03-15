@@ -45,9 +45,9 @@ Given I navigated to the Start page
 Scenario:Should find a framework and provider for a levy paying employer
 	Given I navigated to the Start page
 	Given I have data in the config
-		| Token    | Key                     |
-		| JOBROLE  | data.framework.JOBROLE  |
-		| Postcode | data.framework.Postcode |
+		| Token    | Key                       |
+		| JOBROLE  | levy.framework.searchterm |
+		| Postcode | levy.framework.Postcode   |
 
 	And I navigated to the Start page
 	When I choose Start Button
@@ -83,9 +83,9 @@ Scenario:Should find a framework and provider for a levy paying employer
 Scenario:Should find a framework and provider for a non levy paying employer
 	Given I navigated to the Start page
 	Given I have data in the config
-		| Token    | Key                     |
-		| JOBROLE  | data.framework.JOBROLE  |
-		| Postcode | data.framework.Postcode |
+		| Token    | Key                           |
+		| JOBROLE  | non-levy.framework.searchterm |
+		| Postcode | non-levy.framework.Postcode   |
 
 	And I navigated to the Start page
 	When I choose Start Button

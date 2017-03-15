@@ -175,10 +175,10 @@ this.ScenarioSetup(scenarioInfo);
                         "Key"});
             table5.AddRow(new string[] {
                         "JOBROLE",
-                        "data.framework.JOBROLE"});
+                        "levy.framework.searchterm"});
             table5.AddRow(new string[] {
                         "Postcode",
-                        "data.framework.Postcode"});
+                        "levy.framework.Postcode"});
 #line 47
  testRunner.Given("I have data in the config", ((string)(null)), table5, "Given ");
 #line 52
@@ -261,10 +261,10 @@ this.ScenarioSetup(scenarioInfo);
                         "Key"});
             table9.AddRow(new string[] {
                         "JOBROLE",
-                        "data.framework.JOBROLE"});
+                        "non-levy.framework.searchterm"});
             table9.AddRow(new string[] {
                         "Postcode",
-                        "data.framework.Postcode"});
+                        "non-levy.framework.Postcode"});
 #line 85
  testRunner.Given("I have data in the config", ((string)(null)), table9, "Given ");
 #line 90

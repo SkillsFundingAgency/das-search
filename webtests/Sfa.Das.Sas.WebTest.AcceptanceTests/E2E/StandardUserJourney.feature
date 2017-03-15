@@ -44,9 +44,9 @@ Scenario:Should find a standard and provider
 @E2E	 
 Scenario:Should find a standard and provider for a levy paying employer
 	Given I have data in the config
-		| Token    | Key                    |
-		| JOBROLE  | data.standard.JOBROLE  |
-		| Postcode | data.standard.Postcode |
+		| Token    | Key                      |
+		| JOBROLE  | levy.standard.searchterm |
+		| Postcode | levy.standard.Postcode   |
 
 	And I navigated to the Start page
 	When I choose Start Button
@@ -78,9 +78,9 @@ Scenario:Should find a standard and provider for a levy paying employer
 @E2E	 
 Scenario:Should find a standard and provider for a non levy paying employer
 	Given I have data in the config
-		| Token    | Key                    |
-		| JOBROLE  | data.standard.JOBROLE  |
-		| Postcode | data.standard.Postcode |
+		| Token    | Key                          |
+		| JOBROLE  | non-levy.standard.searchterm |
+		| Postcode | non-levy.standard.Postcode   |
 
 	And I navigated to the Start page
 	When I choose Start Button
