@@ -3,7 +3,7 @@
 	I want to be able to search for training options
 	and find a provider for a given framework
 
-@E2E		@CI @Demo @SystemTest @PreProd @Prod
+@E2E	@Prod
 Scenario:Should find a framework and provider
 Given I navigated to the Start page
 	Given I have data in the config
@@ -41,7 +41,7 @@ Given I navigated to the Start page
 
 
 
-@E2E		
+@E2E	@CI @Demo @SystemTest @PreProd 
 Scenario:Should find a framework and provider for a levy paying employer
 	Given I navigated to the Start page
 	Given I have data in the config
@@ -79,7 +79,7 @@ Scenario:Should find a framework and provider for a levy paying employer
 		| Provider Name | Exists | true  |
 
 
-@E2E		
+@E2E		@CI @Demo @SystemTest @PreProd 
 Scenario:Should find a framework and provider for a non levy paying employer
 	Given I navigated to the Start page
 	Given I have data in the config

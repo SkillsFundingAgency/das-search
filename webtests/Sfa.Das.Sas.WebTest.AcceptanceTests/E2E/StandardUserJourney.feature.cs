@@ -67,19 +67,11 @@ namespace Sfa.Das.Sas.WebTest.AcceptanceTests.E2E
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a standard and provider")]
         [NUnit.Framework.CategoryAttribute("E2E")]
-        [NUnit.Framework.CategoryAttribute("CI")]
-        [NUnit.Framework.CategoryAttribute("Demo")]
-        [NUnit.Framework.CategoryAttribute("SystemTest")]
-        [NUnit.Framework.CategoryAttribute("PreProd")]
         [NUnit.Framework.CategoryAttribute("Prod")]
         public virtual void ShouldFindAStandardAndProvider()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider", new string[] {
                         "E2E",
-                        "CI",
-                        "Demo",
-                        "SystemTest",
-                        "PreProd",
                         "Prod"});
 #line 9
 this.ScenarioSetup(scenarioInfo);
@@ -159,10 +151,18 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a standard and provider for a levy paying employer")]
         [NUnit.Framework.CategoryAttribute("E2E")]
+        [NUnit.Framework.CategoryAttribute("CI")]
+        [NUnit.Framework.CategoryAttribute("Demo")]
+        [NUnit.Framework.CategoryAttribute("SystemTest")]
+        [NUnit.Framework.CategoryAttribute("PreProd")]
         public virtual void ShouldFindAStandardAndProviderForALevyPayingEmployer()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider for a levy paying employer", new string[] {
-                        "E2E"});
+                        "E2E",
+                        "CI",
+                        "Demo",
+                        "SystemTest",
+                        "PreProd"});
 #line 45
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -243,10 +243,18 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Should find a standard and provider for a non levy paying employer")]
         [NUnit.Framework.CategoryAttribute("E2E")]
+        [NUnit.Framework.CategoryAttribute("CI")]
+        [NUnit.Framework.CategoryAttribute("Demo")]
+        [NUnit.Framework.CategoryAttribute("SystemTest")]
+        [NUnit.Framework.CategoryAttribute("PreProd")]
         public virtual void ShouldFindAStandardAndProviderForANonLevyPayingEmployer()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should find a standard and provider for a non levy paying employer", new string[] {
-                        "E2E"});
+                        "E2E",
+                        "CI",
+                        "Demo",
+                        "SystemTest",
+                        "PreProd"});
 #line 79
 this.ScenarioSetup(scenarioInfo);
 #line hidden

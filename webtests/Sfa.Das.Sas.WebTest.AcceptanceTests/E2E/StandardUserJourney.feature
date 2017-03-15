@@ -5,7 +5,7 @@
 
 
 
-@E2E	 @CI @Demo @SystemTest @PreProd @Prod
+@E2E	 @Prod
 Scenario:Should find a standard and provider
 	Given I have data in the config
 		| Token    | Key                    |
@@ -41,7 +41,7 @@ Scenario:Should find a standard and provider
 
 
 
-@E2E	 
+@E2E	 @CI @Demo @SystemTest @PreProd 
 Scenario:Should find a standard and provider for a levy paying employer
 	Given I have data in the config
 		| Token    | Key                      |
@@ -75,7 +75,7 @@ Scenario:Should find a standard and provider for a levy paying employer
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
-@E2E	 
+@E2E	 @CI @Demo @SystemTest @PreProd 
 Scenario:Should find a standard and provider for a non levy paying employer
 	Given I have data in the config
 		| Token    | Key                          |
