@@ -2,7 +2,7 @@
 
 |               |               |
 | ------------- | ------------- |
-|![crest] (https://assets.publishing.service.gov.uk/government/assets/crests/org_crest_27px-916806dcf065e7273830577de490d5c7c42f36ddec83e907efe62086785f24fb.png)|Find Apprenticeship Training|
+|![crest] (https://assets.publishing.service.gov.uk/static/images/govuk-crest-bb9e22aff7881b895c2ceb41d9340804451c474b883f09fe1b4026e76456f44b.png)|Find Apprenticeship Training|
 | Build | <img alt="Build Status" src="https://sfa-gov-uk.visualstudio.com/DefaultCollection/_apis/public/build/definitions/c39e0c0b-7aff-4606-b160-3566f3bbce23/12/badge" /> |
 | Web  | https://findapprenticeshiptraining.sfa.bis.gov.uk/ |
 | Source  | https://github.com/SkillsFundingAgency/das-search  |
