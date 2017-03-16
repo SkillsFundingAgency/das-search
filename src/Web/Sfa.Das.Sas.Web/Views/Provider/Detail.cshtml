@@ -127,7 +127,7 @@
                     </p>
                 }
 
-                @if (Is<FatLevyJourneyFeature>.Enabled)
+                @*@if (Is<FatLevyJourneyFeature>.Enabled)
                 {
                     if (Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value && Model.HasNonLevyContract == false)
                     {
@@ -149,7 +149,7 @@
                             New organisation with no financial track record
                         </p>
                     }
-                }
+                }*@
                 <p class="content-source">
                     Content maintained by @Model.Name
                 </p>
