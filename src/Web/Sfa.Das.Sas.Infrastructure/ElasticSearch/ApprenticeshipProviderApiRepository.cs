@@ -30,14 +30,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _elasticsearchHelper = elasticsearchHelper;
         }
 
-        public ApprenticeshipDetails GetCourseByStandardCode(int ukprn, int locationId, string standardCode)
+        public ApprenticeshipDetails GetCourseByStandardCode(int ukprn, int locationId, string standardCode, bool hasNonLevyContract)
         {
             var url = string.Format(
-                "{0}standards/{1}/providers?ukprn={2}&location={3}",
+                "{0}standards/{1}/providers?ukprn={2}&location={3}&hasNonLevyContract={4}",
                 _applicationSettings.ApprenticeshipApiBaseUrl,
                 standardCode,
                 ukprn,
-                locationId);
+                locationId,
+                hasNonLevyContract);
 
             var result = JsonConvert.DeserializeObject<ApprenticeshipDetails>(_httpService.Get(url, null, null));
 
@@ -49,14 +50,16 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return result;
         }
 
-        public ApprenticeshipDetails GetCourseByFrameworkId(int ukprn, int locationId, string frameworkId)
+        public ApprenticeshipDetails GetCourseByFrameworkId(int ukprn, int locationId, string frameworkId, bool hasNonLevyContract)
         {
             var url = string.Format(
-                "{0}frameworks/{1}/providers?ukprn={2}&location={3}",
+                "{0}frameworks/{1}/providers?ukprn={2}&location={3}&hasNonLevyContract={4}",
                 _applicationSettings.ApprenticeshipApiBaseUrl,
                 frameworkId,
                 ukprn,
-                locationId);
+                locationId,
+                hasNonLevyContract
+                );
 
             var requestResponse = _httpService.Get(url, null, null);
 
