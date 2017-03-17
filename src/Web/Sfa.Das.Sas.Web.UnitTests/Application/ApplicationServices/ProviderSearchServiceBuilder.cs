@@ -4,7 +4,7 @@ using Moq;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Core.Logging;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Linq;
-using Nest;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Core.Logging;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {

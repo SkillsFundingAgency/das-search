@@ -2,7 +2,8 @@
 using Sfa.Das.Sas.ApplicationServices.Logging;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Settings;
-using Sfa.Das.Sas.Core.Logging;
+
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices
 {

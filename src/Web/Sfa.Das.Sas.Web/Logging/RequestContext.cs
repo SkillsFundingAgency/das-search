@@ -1,5 +1,6 @@
 ﻿using System.Web;
-using Sfa.Das.Sas.Core.Logging;
+using SFA.DAS.NLog.Logger;
+
 
 namespace Sfa.Das.Sas.Web.Logging
 {

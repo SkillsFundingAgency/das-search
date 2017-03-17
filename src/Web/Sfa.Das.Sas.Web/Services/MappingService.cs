@@ -4,11 +4,11 @@ using AutoMapper;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Services.MappingActions;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.Services
 {

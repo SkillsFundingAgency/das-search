@@ -5,7 +5,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.ApplicationInsights.Extensibility;
-using Sfa.Das.Sas.Core.Logging;
+
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web
 {
@@ -35,7 +36,7 @@ namespace Sfa.Das.Sas.Web
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
-            var logger = DependencyResolver.Current.GetService<ILog>();
+            var logger = DependencyResolver.Current.GetService<SFA.DAS.NLog.Logger.ILog>();
 
             if (ex is HttpException
                 && ((HttpException)ex).GetHttpCode() != 404 

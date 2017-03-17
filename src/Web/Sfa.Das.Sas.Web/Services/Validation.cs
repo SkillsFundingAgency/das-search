@@ -1,9 +1,9 @@
-﻿namespace Sfa.Das.Sas.Web.Services
+﻿using SFA.DAS.NLog.Logger;
+
+namespace Sfa.Das.Sas.Web.Services
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-
-    using Sfa.Das.Sas.Core.Logging;
 
     public class Validation : IValidation
     {

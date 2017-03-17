@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿using SFA.DAS.NLog.Logger;
+
+namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +12,7 @@
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Core.Logging;
+    
     using Sfa.Das.Sas.Infrastructure.Mapping;
 
     public sealed class FrameworkApiRepository : IGetFrameworks

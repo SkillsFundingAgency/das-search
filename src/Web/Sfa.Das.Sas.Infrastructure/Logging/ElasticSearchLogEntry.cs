@@ -1,8 +1,10 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Logging
+﻿using SFA.DAS.NLog.Logger;
+
+namespace Sfa.Das.Sas.Infrastructure.Logging
 {
     using Newtonsoft.Json;
     using SFA.DAS.NLog.Targets.AzureEventHub;
-    using Sfa.Das.Sas.Core.Logging;
+    
 
     public class ElasticSearchLogEntry : ILogEntry
     {

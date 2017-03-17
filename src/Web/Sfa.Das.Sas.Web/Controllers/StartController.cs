@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Text;
 using System.Web.Mvc;
-using MediatR;
 using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Logging;
-using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
     public sealed class StartController : Controller
     {
         private IConfigurationSettings _settings;
+        private ILog _log;
 
         public StartController(
-            IConfigurationSettings settings)
+            IConfigurationSettings settings, ILog log)
         {
             _settings = settings;
+            _log = log;
         }
 
         public ActionResult Start()

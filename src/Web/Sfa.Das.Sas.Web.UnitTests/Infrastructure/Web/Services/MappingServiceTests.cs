@@ -6,9 +6,9 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {
