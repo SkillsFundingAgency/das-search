@@ -562,9 +562,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="NLog.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -670,9 +668,7 @@
     <Content Include="Transform.ServiceConfiguration.Demo.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Transform.Nlog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Transform.Nlog.config" />
     <None Include="Transform.ServiceConfiguration.Prod.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
