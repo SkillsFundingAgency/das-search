@@ -1,20 +1,19 @@
-﻿﻿using System.Linq;
-﻿using System.Net;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.Routing;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-﻿using Sfa.Das.Sas.Core.Configuration;
-﻿
-using Sfa.Das.Sas.Web.Extensions;
-using Sfa.Das.Sas.Web.Services;
-using Sfa.Das.Sas.Web.ViewModels;
-﻿using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using MediatR;
+    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.ApplicationServices.Queries;
+    using Sfa.Das.Sas.ApplicationServices.Responses;
+    using Sfa.Das.Sas.Core.Configuration;﻿
+    using Sfa.Das.Sas.Web.Extensions;
+    using Sfa.Das.Sas.Web.Services;
+    using Sfa.Das.Sas.Web.ViewModels;
+
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
