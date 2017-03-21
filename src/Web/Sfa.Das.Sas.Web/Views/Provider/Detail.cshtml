@@ -107,7 +107,7 @@
                             <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
                                 @Model.LearnerSatisfactionMessage
                             </span>
-                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
                         </div>
                         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
@@ -116,7 +116,7 @@
                             </span>
                         }
                     </dd>
-                    
+
                     @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
                 </dl>
 
@@ -127,15 +127,14 @@
                     </p>
                 }
 
-                @*@if (Is<FatLevyJourneyFeature>.Enabled)
+                @if (Is<FatLevyJourneyFeature>.Enabled)
                 {
-                    if (Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value && Model.HasNonLevyContract == false)
+                    if (Model.IsLevyPayerOnly)
                     {
                         <p class="detail-highlight">
                             Only levy paying employers can work with this provider
                         </p>
                     }
-
                     if (Model.HasParentCompanyGuarantee)
                     {
                         <p class="detail-highlight">
@@ -149,11 +148,12 @@
                             New organisation with no financial track record
                         </p>
                     }
-                }*@
+                }
                 <p class="content-source">
                     Content maintained by @Model.Name
                 </p>
             </section>
+
             
             <div class="survey">
                 <h2 class="heading-small">

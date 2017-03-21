@@ -68,5 +68,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool IsNewProvider { get; set; }
 
         public bool HasNonLevyContract { get; set; }
+
+        public bool IsLevyPayerOnly { get; set; }
     }
 }
