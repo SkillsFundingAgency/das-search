@@ -39,8 +39,6 @@ Given I navigated to the Start page
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
 
-
-
 @E2E	@CI @Demo @SystemTest @PreProd 
 Scenario:Should find a framework and provider for a levy paying employer
 	Given I navigated to the Start page
@@ -61,6 +59,9 @@ Scenario:Should find a framework and provider for a levy paying employer
 
 	When I choose First Framework Result
 	Then I am on the Framework Details page
+		And I see
+		| Field        | Rule   | Value                                    |
+		| Summary Text | Equals | Summary of this apprenticeship framework |
 	When I choose Search Page Button
 	Then I am on the Framework Provider Search page
 
@@ -77,7 +78,6 @@ Scenario:Should find a framework and provider for a levy paying employer
 	And I see
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
-
 
 @E2E		@CI @Demo @SystemTest @PreProd 
 Scenario:Should find a framework and provider for a non levy paying employer
@@ -115,3 +115,15 @@ Scenario:Should find a framework and provider for a non levy paying employer
 	And I see
 		| Field         | Rule   | Value |
 		| Provider Name | Exists | true  |
+
+@ignore
+Scenario Outline: Find a Provider and Framework Apprenticeship For an Employer - PreProd
+Given I navigated to the Start page
+When I want to find Provider for Business and Professional Administration framework near S60 1PQ
+And I am <LevyOrNonLevy>
+Then I can see Provider details 
+
+Examples: 
+| LevyOrNonLevy                  |
+| Yes Im levy paying employer    |
+| No Im not Levy Paying Employer |

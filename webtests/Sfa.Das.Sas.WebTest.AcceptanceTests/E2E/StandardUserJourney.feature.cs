@@ -163,7 +163,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Demo",
                         "SystemTest",
                         "PreProd"});
-#line 45
+#line 42
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -175,13 +175,13 @@ this.ScenarioSetup(scenarioInfo);
             table5.AddRow(new string[] {
                         "Postcode",
                         "levy.standard.Postcode"});
-#line 46
+#line 43
  testRunner.Given("I have data in the config", ((string)(null)), table5, "Given ");
-#line 51
+#line 48
  testRunner.And("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 49
  testRunner.When("I choose Start Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 53
+#line 50
  testRunner.Then("I am on the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -190,29 +190,40 @@ this.ScenarioSetup(scenarioInfo);
             table6.AddRow(new string[] {
                         "Search Box",
                         "{JOBROLE}"});
-#line 55
+#line 52
  testRunner.When("I enter data", ((string)(null)), table6, "When ");
-#line 58
+#line 55
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
+#line 56
  testRunner.Then("I am on the Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 61
+#line 58
  testRunner.When("I choose First Standard Result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 62
+#line 59
  testRunner.Then("I am on the Standard Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Field",
+                        "Rule",
+                        "Value"});
+            table7.AddRow(new string[] {
+                        "Summary Text",
+                        "Equals",
+                        "Summary of this apprenticeship standard"});
+#line 60
+ testRunner.And("I see", ((string)(null)), table7, "And ");
 #line 63
  testRunner.When("I choose Search Page Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 64
  testRunner.Then("I am on the Standard Provider Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table7.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "Postcode Search Box",
                         "{Postcode}"});
 #line 65
- testRunner.When("I enter data", ((string)(null)), table7, "When ");
+ testRunner.When("I enter data", ((string)(null)), table8, "When ");
 #line 68
  testRunner.When("I choose Yes Im levy paying employer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 69
@@ -226,16 +237,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 73
  testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Rule",
                         "Value"});
-            table8.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Provider Name",
                         "Exists",
                         "true"});
 #line 74
- testRunner.And("I see", ((string)(null)), table8, "And ");
+ testRunner.And("I see", ((string)(null)), table9, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -258,17 +269,17 @@ this.ScenarioSetup(scenarioInfo);
 #line 79
 this.ScenarioSetup(scenarioInfo);
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Token",
                         "Key"});
-            table9.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "JOBROLE",
                         "non-levy.standard.searchterm"});
-            table9.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Postcode",
                         "non-levy.standard.Postcode"});
 #line 80
- testRunner.Given("I have data in the config", ((string)(null)), table9, "Given ");
+ testRunner.Given("I have data in the config", ((string)(null)), table10, "Given ");
 #line 85
  testRunner.And("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 86
@@ -276,14 +287,14 @@ this.ScenarioSetup(scenarioInfo);
 #line 87
  testRunner.Then("I am on the Search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table10.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "Search Box",
                         "{JOBROLE}"});
 #line 89
- testRunner.When("I enter data", ((string)(null)), table10, "When ");
+ testRunner.When("I enter data", ((string)(null)), table11, "When ");
 #line 92
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 93
@@ -299,14 +310,14 @@ this.ScenarioSetup(scenarioInfo);
 #line 99
  testRunner.When("I choose No Im not Levy Paying Employer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table11.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Postcode Search Box",
                         "{Postcode}"});
 #line 100
- testRunner.When("I enter data", ((string)(null)), table11, "When ");
+ testRunner.When("I enter data", ((string)(null)), table12, "When ");
 #line 103
  testRunner.And("I choose Search Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 104
@@ -318,16 +329,45 @@ this.ScenarioSetup(scenarioInfo);
 #line 107
  testRunner.Then("I am on the Provider Details page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Rule",
                         "Value"});
-            table12.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "Provider Name",
                         "Exists",
                         "true"});
 #line 108
- testRunner.And("I see", ((string)(null)), table12, "And ");
+ testRunner.And("I see", ((string)(null)), table13, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Find a Provider and Standard Apprenticeship For an Employer - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
+        [NUnit.Framework.TestCaseAttribute("Yes Im levy paying employer", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("No Im not Levy Paying Employer", new string[0])]
+        public virtual void FindAProviderAndStandardApprenticeshipForAnEmployer_PreProd(string levyOrNonLevy, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find a Provider and Standard Apprenticeship For an Employer - PreProd", @__tags);
+#line 113
+this.ScenarioSetup(scenarioInfo);
+#line 114
+testRunner.Given("I navigated to the Start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 115
+testRunner.When("I want to find Provider for Business and Professional Administration framework ne" +
+                    "ar S60 1PQ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 116
+testRunner.And(string.Format("I am {0}", levyOrNonLevy), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 117
+testRunner.Then("I can see Provider details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
