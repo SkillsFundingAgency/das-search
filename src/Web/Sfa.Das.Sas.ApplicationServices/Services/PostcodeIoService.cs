@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core;
 using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Logging;
+
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Services
 {

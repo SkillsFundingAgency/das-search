@@ -33,13 +33,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             var result = _validator.Validate(message);
             var response = new GetFrameworkResponse();
 
-            if (!result.IsValid)
+            if (!result.IsValid && result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
             {
-                if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
-                {
-                    response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
-                    return response;
-                }
+                response.StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId;
+                return response;
             }
 
             var framework = _getFrameworks.GetFrameworkById(message.Id);

@@ -25,6 +25,11 @@
         </p>
     }
 
+    @if (Model.IsLevyPayingEmployer == false)
+    {
+        @Html.Partial("_RoatpNonLevyResultsMessage")
+    }
+
 </div>
 
 @helper  RenderMessage()
@@ -39,7 +44,7 @@
             <text>There is <b>1</b> training option for the <b>@Model.StandardName, level @Model.StandardLevel</b> apprenticeship.</text>
         }
     </p>
-    <p class="small-btm-margin">
+    <p>
         Results are ordered by distance from '<b>@Model.PostCode.FormatPostcode()</b>'.
     </p>
 }

@@ -19,7 +19,7 @@
 			<Setting name="CookieApplicationInsightsUrl" />
 			<Setting name="CookieAboutUrl" />
 			<Setting name="AchievementRateUrl" />
-		</ConfigurationSettings>
+    </ConfigurationSettings>
 		<Endpoints>
 			<InputEndpoint name="SimpleEndpoint" protocol="http" port="80"/>
 		</Endpoints>

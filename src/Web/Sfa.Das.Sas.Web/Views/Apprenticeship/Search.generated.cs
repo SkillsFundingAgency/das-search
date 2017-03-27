@@ -42,6 +42,7 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
             #line 2 "..\..\Views\Apprenticeship\Search.cshtml"
   
     ViewBag.Title = "Home Page";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
             #line default
@@ -60,20 +61,20 @@ WriteLiteral(">\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n\n            <h1");
+WriteLiteral(">\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n                Find apprenticeship training\n            </h1>\n\n");
+WriteLiteral(">\n                Find apprenticeship training\n            </h1>\n");
 
             
-            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 12 "..\..\Views\Apprenticeship\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 12 "..\..\Views\Apprenticeship\Search.cshtml"
              using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
             {
 
@@ -84,19 +85,24 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n                    <span>Search by keywords</span>\r\n                    <lege" +
-"nd>\r\n\r\n                        <label");
-
-WriteLiteral(" class=\"text-secondary\"");
+WriteLiteral(">\n                    <label");
 
 WriteLiteral(" for=\"keywords\"");
 
-WriteLiteral(">\r\n                            Can include job title or apprenticeship\r\n         " +
-"               </label>\r\n\r\n                        <span");
+WriteLiteral(">\n                        <span");
+
+WriteLiteral(" class=\"form-label-bold\"");
+
+WriteLiteral(">Search by keywords</span>\n                        <span");
+
+WriteLiteral(" class=\"form-hint\"");
+
+WriteLiteral(">Can include job title or apprenticeship</span>\n                    </label>\n    " +
+"                <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral("></span>\n                    </legend>\r\n                    <input");
+WriteLiteral("></span>\n                    <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -108,13 +114,11 @@ WriteLiteral(" class=\"text-box form-control\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
-WriteLiteral(" placeholder=\"\"");
-
-WriteLiteral(">\r\n                </div>\n");
+WriteLiteral(">\n                </div>\n");
 
 WriteLiteral("                <input");
 
-WriteLiteral(" class=\"button margin-top-x2\"");
+WriteLiteral(" class=\"button\"");
 
 WriteLiteral(" id=\"submit-keywords\"");
 
@@ -125,7 +129,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral("/>\n");
 
             
-            #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 23 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             

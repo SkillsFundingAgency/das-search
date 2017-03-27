@@ -4,11 +4,11 @@ using AutoMapper;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Logging;
 using Sfa.Das.Sas.Web.Services.MappingActions;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.Services
 {
@@ -75,9 +75,11 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.DeliveryModes))
                    .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location))
                    .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Name))
+                   .ForMember(dest => dest.LegalName, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.LegalName))
                    .ForMember(dest => dest.NationalProvider, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.NationalProvider))
                    .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.UkPrn))
                    .ForMember(dest => dest.IsHigherEducationInstitute, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.IsHigherEducationInstitute))
+                   .ForMember(dest => dest.IsLevyPayerOnly, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.IsLevyPayerOnly))
                    .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.EmployerSatisfaction))
                    .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.LearnerSatisfaction))
                    .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.ProviderMarketingInfo))
@@ -94,6 +96,11 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(x => x.ApprenticeshipName, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.ApprenticeshipName)))
                    .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z =>
                         ProviderMappingHelper.GetCommaList(z.ApprenticeshipDetails.Location.LocationName, z.ApprenticeshipDetails.Location.Address.Address1, z.ApprenticeshipDetails.Location.Address.Address2, z.ApprenticeshipDetails.Location.Address.Town, z.ApprenticeshipDetails.Location.Address.County, z.ApprenticeshipDetails.Location.Address.Postcode)))
+                    
+                    .ForMember(x => x.HasParentCompanyGuarantee, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasParentCompanyGuarantee))
+                    .ForMember(x => x.IsNewProvider, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.IsNew))
+                    .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasNonLevyContract))
+                    .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                    ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -159,9 +166,11 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
             .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))
+            .ForMember(dest => dest.LegalName, opt => opt.MapFrom(source => source.Provider.LegalName))
             .ForMember(dest => dest.NationalProvider, opt => opt.MapFrom(source => source.Provider.NationalProvider))
             .ForMember(dest => dest.Ukprn, opt => opt.MapFrom(source => source.Provider.UkPrn))
             .ForMember(dest => dest.IsHigherEducationInstitute, opt => opt.MapFrom(source => source.Provider.IsHigherEducationInstitute))
+            .ForMember(dest => dest.IsLevyPayerOnly, opt => opt.MapFrom(source => source.Provider.IsLevyPayerOnly))
             .ForMember(dest => dest.EmployerSatisfaction, opt => opt.MapFrom(source => source.Product.EmployerSatisfaction))
             .ForMember(dest => dest.LearnerSatisfaction, opt => opt.MapFrom(source => source.Product.LearnerSatisfaction))
             .ForMember(dest => dest.ProviderMarketingInfo, opt => opt.MapFrom(source => source.Product.ProviderMarketingInfo))
@@ -180,6 +189,10 @@ namespace Sfa.Das.Sas.Web.Services
             .ForMember(x => x.OverallCohort, y => y.ResolveUsing<OverallCohortResolver>().FromMember(z => z.Product.OverallCohort))
             .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z =>
                 ProviderMappingHelper.GetCommaList(z.Location.LocationName, z.Location.Address.Address1, z.Location.Address.Address2, z.Location.Address.Town, z.Location.Address.County, z.Location.Address.Postcode)))
+            .ForMember(x => x.HasParentCompanyGuarantee, y => y.MapFrom(z => z.Provider.HasParentCompanyGuarantee))
+            .ForMember(x => x.IsNewProvider, y => y.MapFrom(z => z.Provider.IsNew))
+            .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.Provider.HasNonLevyContract))
+            .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
             .AfterMap<ProviderViewModelMappingAction>();
         }
 
@@ -205,6 +218,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.AssessmentPlanPdf, y => y.MapFrom(z => z.Standard.AssessmentPlanPdf))
                 .ForMember(x => x.EntryRequirements, y => y.MapFrom(z => z.Standard.EntryRequirements))
                 .ForMember(x => x.Level, y => y.MapFrom(z => z.Standard.Level))
+                .ForMember(x => x.MaxFunding, y => y.MapFrom(z => z.Standard.MaxFunding))
                 .ForMember(x => x.OverviewOfRole, y => y.MapFrom(z => z.Standard.OverviewOfRole))
                 .ForMember(x => x.ProfessionalRegistration, y => y.MapFrom(z => z.Standard.ProfessionalRegistration))
                 .ForMember(x => x.Qualifications, y => y.MapFrom(z => z.Standard.Qualifications))
@@ -227,6 +241,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.JobRoles, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTitlesFromJobRoles(z.Framework.JobRoleItems)))
                 .ForMember(x => x.KnowledgeQualification, y => y.MapFrom(z => z.Framework.KnowledgeQualification))
                 .ForMember(x => x.Level, y => y.MapFrom(z => z.Framework.Level))
+                .ForMember(x => x.MaxFunding, y => y.MapFrom(z => z.Framework.MaxFunding))
                 .ForMember(x => x.ProfessionalRegistration, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.Framework.ProfessionalRegistration))
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
@@ -243,7 +258,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.PostcodeCountry, y => y.Ignore())
-                .ForMember(x => x.WrongPostcode, y => y.Ignore());
+                .ForMember(x => x.WrongPostcode, y => y.Ignore())
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
 
             cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
                 .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.StandardId))
@@ -251,7 +267,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasErrors))
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.PostcodeCountry, y => y.Ignore())
-                .ForMember(x => x.WrongPostcode, y => y.Ignore());
+                .ForMember(x => x.WrongPostcode, y => y.Ignore())
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
 
             // Provider search
             cfg.CreateMap<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>()
@@ -270,7 +287,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.MapFrom(z => !z.Success))
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
-                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results));
+                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
 
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
@@ -293,7 +311,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.TotalProvidersCountry, y => y.MapFrom(z => z.TotalResultsForCountry))
                 .ForMember(x => x.DeliveryModes, opt => opt.ResolveUsing<DeliveryModesValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
-                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results));
+                .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
+                .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore());
         }
 
         private static MapperConfiguration Config()

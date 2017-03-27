@@ -1,7 +1,8 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Common
+﻿using SFA.DAS.NLog.Logger;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Common
 {
     using System.Collections.Generic;
-    using Core.Logging;
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;

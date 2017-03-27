@@ -9,7 +9,6 @@ using Sfa.Das.Sas.Web.Views.Apprenticeship;
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
     using System.Linq;
-    using System.Web.UI.WebControls;
 
     [TestFixture]
     public sealed class ForApprenticeshipSearchResultPage : ViewTestBase
@@ -478,7 +477,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
         }
 
         [Test]
-        public void ShouldShowLinkToSearchAgain()
+        public void ShouldShowSearchBoxToSearchAgain()
         {
             var searchPage = new SearchResults();
             var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
@@ -495,8 +494,30 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".new-apprenticeship-search").Should().NotBeNullOrEmpty();
-            GetPartial(html, ".new-apprenticeship-search").Should().Be("Start a new search");
+            GetPartial(html, "label[for='keywords']").Should().NotBeNullOrEmpty();
+            GetPartial(html, "label[for='keywords']").Should().StartWith("Showing search results for:");
+        }
+
+        [Test]
+        public void ShouldShowSearchFormToSearchAgainWhenNoResults()
+        {
+            var searchPage = new SearchResults();
+            var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
+            var model = new ApprenticeshipSearchResultViewModel
+            {
+                TotalResults = 0,
+                SearchTerm = "SearchTerm",
+                Results = new List<ApprenticeshipSearchResultItemViewModel>
+                              {
+                                  new ApprenticeshipSearchResultItemViewModel { Title = "Test" }
+                              },
+                AggregationLevel = aggList
+            };
+
+            var html = searchPage.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, "label[for='keywords']").Should().NotBeNullOrEmpty();
+            GetPartial(html, "label[for='keywords']").Should().StartWith("Try a new search");
         }
 
         [TestCase(1, "1-3", 1)]

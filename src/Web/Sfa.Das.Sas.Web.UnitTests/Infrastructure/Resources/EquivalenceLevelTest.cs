@@ -5,7 +5,7 @@ using Sfa.Das.Sas.Resources;
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Resources
 {
     [TestFixture]
-    public class EquivalenveLevelTest
+    public class EquivalenceLevelTest
     {
         [TestCase("1", "GCSEs at grades D to G")]
         [TestCase("2", "GCSEs at grades A* to C")]
@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Resources
         [TestCase("", "", Description = "Empty input")]
         public void ShouldReturnEquivalenceTextForLevel(string level, string expected)
         {
-            var actual = EquivalenveLevelService.GetApprenticeshipLevel(level);
+            var actual = EquivalenceLevelService.GetApprenticeshipLevel(level);
 
             actual.Should().Be(expected);
         }

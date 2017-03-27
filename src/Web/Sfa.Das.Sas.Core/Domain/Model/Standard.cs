@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.Core.Domain.Model
 
         public int Level { get; set; }
 
+        public int MaxFunding { get; set; }
+
         public bool IsPublished { get; set; }
 
         public string StandardPdf { get; set; }

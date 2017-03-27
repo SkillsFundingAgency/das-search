@@ -7,9 +7,7 @@
     using Sfa.Das.Sas.ApplicationServices.Settings;
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Core.Logging;
     using Sfa.Das.Sas.Infrastructure.Elasticsearch;
-    using Sfa.Das.Sas.Infrastructure.Logging;
     using Sfa.Das.Sas.Infrastructure.Mapping;
     using Sfa.Das.Sas.Infrastructure.PostCodeIo;
     using Sfa.Das.Sas.Infrastructure.Settings;
@@ -19,10 +17,9 @@
     {
         public InfrastructureRegistry()
         {
-            For<ILog>().Use(x => new NLogLogger(
+            For<SFA.DAS.NLog.Logger.ILog>().Use(x => new SFA.DAS.NLog.Logger.NLogLogger(
                 x.ParentType,
-                x.GetInstance<IConfigurationSettings>(),
-                x.GetInstance<IRequestContext>())).AlwaysUnique();
+                x.GetInstance<SFA.DAS.NLog.Logger.IRequestContext>())).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();

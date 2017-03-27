@@ -28,13 +28,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "dd", 2).Should().Contain("bachelor's degree");
+            GetPartial(html, "dd", 1).Should().Contain("bachelor's degree");
 
             html = detail.RenderAsHtml(model2).ToAngleSharp();
-            GetPartial(html, "dd", 2).Should().Contain("certificate of higher education");
+            GetPartial(html, "dd", 1).Should().Contain("certificate of higher education");
 
             html = detail.RenderAsHtml(model3).ToAngleSharp();
-            GetPartial(html, "dd", 2).Should().Contain("doctorate");
+            GetPartial(html, "dd", 1).Should().Contain("doctorate");
         }
     }
 }

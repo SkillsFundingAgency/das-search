@@ -2,7 +2,8 @@
 using System.Net;
 using System.Text;
 
-using Sfa.Das.Sas.Core.Logging;
+
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Http
 {
@@ -30,7 +31,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Http
                 try
                 {
                     client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
-
+                    client.Encoding = Encoding.UTF8;
                     return client.DownloadString(url);
                 }
                 catch (WebException ex)

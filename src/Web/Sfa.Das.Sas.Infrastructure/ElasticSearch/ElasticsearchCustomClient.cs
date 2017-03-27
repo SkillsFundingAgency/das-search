@@ -4,8 +4,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Nest;
 using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.Core.Logging;
+
 using Sfa.Das.Sas.Infrastructure.Logging;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {

@@ -5,11 +5,12 @@ using System.Web.Routing;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Logging;
+
 using Sfa.Das.Sas.Web.Attribute;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -106,14 +107,15 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry)
+        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetStandardProvidersQuery
             {
                 StandardId = standardId,
                 Postcode = postcode,
                 Keywords = keywords,
-                HasErrors = hasError
+                HasErrors = hasError,
+                IsLevyPayingEmployer = isLevyPayingEmployer ?? false
             };
 
             var response = _mediator.Send(query);
@@ -128,6 +130,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
+
             if (!string.IsNullOrEmpty(postcodeCountry))
             {
                 viewModel.PostcodeCountry = postcodeCountry;
@@ -136,11 +140,15 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry)
+        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetFrameworkProvidersQuery
             {
-                FrameworkId = frameworkId, Postcode = postcode, Keywords = keywords, HasErrors = hasError
+                FrameworkId = frameworkId,
+                Postcode = postcode,
+                Keywords = keywords,
+                HasErrors = hasError,
+                IsLevyPayingEmployer = isLevyPayingEmployer ?? false
             };
 
             var response = _mediator.Send(query);
@@ -155,6 +163,8 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
             viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
             viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
+
             if (!string.IsNullOrEmpty(postcodeCountry))
             {
                 viewModel.PostcodeCountry = postcodeCountry;

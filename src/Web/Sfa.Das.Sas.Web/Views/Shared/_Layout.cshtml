@@ -1,11 +1,12 @@
-﻿@using System.Web.UI.WebControls
+﻿@using System.Web.Configuration
+@using System.Web.UI.WebControls
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>@ViewBag.Title - Find apprenticeship training</title>
-        <meta name="description" content="The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers."/>
+        <meta name="description" content="@ViewBag.Description"/>
         <meta name="keywords" content="employers,apprenticeship training course,apprenticeship training provider,apprenticeship standard,apprenticeship framework,trailblazer apprenticeship"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="format-detection" content="telephone=no" />
@@ -45,6 +46,9 @@
 @Html.Partial("_Analytics")
     </head>
 <body>
+<script>document.body.className = ((document.body.className)
+    ? document.body.className + ' js-enabled'
+    : 'js-enabled');</script>
 @Html.Action("Header", "Shared")
 
 <div class="container body-content">

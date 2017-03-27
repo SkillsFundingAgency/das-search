@@ -25,6 +25,11 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Start", action = "RobotsText", id = UrlParameter.Optional });
 
             routes.MapRoute(
+                name: "GetSitemapXml",
+                url: "sitemap.xml",
+                defaults: new { controller = "Sitemap", action = "Root", id = UrlParameter.Optional });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Start", action = "Start", id = UrlParameter.Optional });

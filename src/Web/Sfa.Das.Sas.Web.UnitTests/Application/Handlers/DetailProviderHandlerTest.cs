@@ -1,19 +1,17 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Responses;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
-    using System.Collections.Generic;
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;
-    using Sas.ApplicationServices.Settings;
     using Sfa.Das.Sas.ApplicationServices.Handlers;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.ApplicationServices.Queries;
     using Sfa.Das.Sas.ApplicationServices.Validators;
     using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Core.Logging;
 
     [TestFixture]
     public class DetailProviderHandlerTest

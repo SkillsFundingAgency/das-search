@@ -85,6 +85,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.7\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -95,6 +99,10 @@
     </Reference>
     <Reference Include="ReflectionMagic, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\ReflectionMagic.2.1.0\lib\net40\ReflectionMagic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.23289, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.23289\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -154,7 +162,7 @@
     <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
-    <Compile Include="Infrastructure\Resources\EquivalenveLevelTest.cs" />
+    <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ErrorControllerTests.cs" />

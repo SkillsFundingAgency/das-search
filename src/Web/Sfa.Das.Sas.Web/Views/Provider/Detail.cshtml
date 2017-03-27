@@ -3,81 +3,160 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
-@using Sfa.Das.Sas.ApplicationServices.Models
-@using FeatureToggle.Core.Fluent
 @model ApprenticeshipDetailsViewModel
 
 @{
-    ViewBag.Title = @Model.Name + " - Apprenticeship Provider";
+    ViewBag.Title = Model.Name + " - Apprenticeship Provider";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
-            <div>
-                <h1 class="heading-xlarge" id="provider-name">
-                    @Model.Name
-                </h1>
+            <h1 class="heading-xlarge" id="provider-name">
+                @Model.Name
+            </h1>
+        </div>
+    </div>
+    <div class="grid-row">
+        <div class="column-one-third pull-right">
+            <div class="panel--contact">
+                <h2 class="heading-medium">Contact details</h2>
+                <dl>
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, Model.Name + " website")
+                    @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
+                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
+                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", Model.ContactInformation.ContactUsUrl, "contact this training provider")
+                    @ShowTrainingLocation("Address:")
+                </dl>
+            </div>
+        </div>
+        <div class="column-two-thirds">
+
+            <section>
+
+                <h2 class="heading-medium">Training information</h2>
+
+                <dl class="data-list--provider data-list--compact">
+                    <dt>Apprenticeship: </dt>
+                    <dd>@Model.ApprenticeshipName</dd>
+                    <dt>Level: </dt>
+                    <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.ApprenticeshipLevel))</dd>
+
+                    @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
+
+                    <dt>Achievement rates: </dt>
+                    <dd>
+                        <div class="rating">
+                            <b class="font-small">Achievement average:</b>
+                            <span class="national-rate">
+                                @Model.AchievementRateMessage
+                            </span>
+                            @if (Model.AchievementRateMessage != "no data available")
+                            {
+                                @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
+                            }
+                        </div>
+
+                        @if (Model.AchievementRateMessage != "no data available")
+                        {
+                            <div class="rating national-achievement-bar">
+                                <b class="font-small">National average:</b>
+                                <span class="national-rate">
+                                    @Model.NationalAchievementRateMessage
+                                </span>
+                                @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
+                            </div>
+                        }
+                        @if (Model.AchievementRateMessage != "no data available")
+                        {
+                            <details class="more-information">
+                                <summary>Explain achievement rate</summary>
+                                <div class="panel panel-border-narrow">
+                                    <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
+                                    <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
+                                    <p class="font-small">Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
+                                </div>
+                            </details>
+                        }
+                    </dd>
+                </dl>
+
+                <h3 class="heading-small">About the apprenticeship: </h3>
+                @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
+
+            </section>
+         
+            <section>
+                <h2 class="heading-medium">Provider information</h2>
+                <div class="provider-marketing-info">
+                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
+                </div>
+                <dl class="data-list--provider data-list--compact">
+                    <dt>Employer satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                        </div>
+                    </dd>
+                    <dt>Learner satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                        </div>
+                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                        {
+                            <span class="satisfaction-source font-small">
+                                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
+                            </span>
+                        }
+                    </dd>
+
+                    @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
+                </dl>
+
                 @if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
                 {
                     <p class="national-message">
                         <span class="tag tag-new">National</span> This training provider is willing to offer apprenticeship training across England.
                     </p>
                 }
-                <div id="marketing" class="provider-marketing-info">
-                    @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
-                </div>
-            </div>
 
-            <section>
-                <header class="hgroup">
-                    <h2 class="heading-large apprenticeship-name-level">
-                        @Model.ApprenticeshipName
-                    </h2>
-                    <b>Level:</b>
-                    <span>
-                        @Model.ApprenticeshipLevel (equivalent to @EquivalenveLevelService.GetApprenticeshipLevel(@Model.ApprenticeshipLevel))
-                    </span>
-                </header>
-                <dl class="data-list data-list--compact">
-                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", @Model.Apprenticeship.ApprenticeshipInfoUrl, "training provider website")
-                    @GetStandardPropertyHtml("Phone:", "phone", Model.ContactInformation.Phone)
-                    @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
-                    @GetStandardPropertyAsLinkHtml("Contact page:", "contact-link", "providerContactTitle", "providerContact", @Model.ContactInformation.ContactUsUrl, "contact this training provider")
-                    @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
-                    @ShowTrainingLocation("Training location:")
-                </dl>
+                @if (Is<RoatpProviderFlagsFeature>.Enabled)
+                {
+                    if (Model.IsLevyPayerOnly)
+                    {
+                        <p class="detail-highlight">
+                            Only levy paying employers can work with this provider
+                        </p>
+                    }
+                    if (Model.HasParentCompanyGuarantee)
+                    {
+                        <p class="detail-highlight">
+                            Provider is supported by a parent company guarantee
+                        </p>
+                    }
 
+                    if (Model.IsNewProvider)
+                    {
+                        <p class="detail-highlight">
+                            New organisation with no financial track record
+                        </p>
+                    }
+                }
+                <p class="content-source">
+                    Content maintained by @Model.Name
+                </p>
             </section>
 
-            <section>
-                <header>
-                    <h2 class="heading-large">Apprenticeship training information</h2>
-                </header>
-                <article class="apprenticeship-marketing-info">
-                    @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
-                    <p><em>Content maintained by @Model.Name</em>
-                    </p>
-                </article>
-            </section>
-        </div>
-
-        <div class="column-third">
-            <div class="related-container">
-                <aside class="related">
-                    <h2 class="heading-medium">
-                        Training provider quality assessment
-                    </h2>
-                    @GetSatisfactionsHtml()
-                </aside>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-row">
-        <div class="column-two-thirds">
-
-            <div class="survey-panel">
-                <h2 class="bold-large">
+            
+            <div class="survey">
+                <h2 class="heading-small">
                     Give us your feedback
                 </h2>
                 <p>
@@ -86,15 +165,15 @@
                 </p>
                 <a href="@Model.SurveyUrl" target="_blank" class="button">Take the survey</a>
             </div>
-            <aside class="disclaimer">
+            <div class="provider-disclaimer">
                 <h3 class="heading-small">Content disclaimer</h3>
                 <p>
                     Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
                 </p>
-            </aside>
+            </div>
         </div>
     </div>
-
+  
 </main>
 
 
@@ -103,19 +182,19 @@
 {
 if (@Model != null)
 {
-        <dt class="training-location-title">@title</dt>
+    <dt class="training-location-title">@title</dt>
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-            <dd id="training-location" class="training-location">
-                Training takes place at your location
-            </dd>
+        <dd id="training-location" class="training-location">
+            Training takes place at your location
+        </dd>
     }
     else
     {
-            <dd id="training-location" class="training-location">
-                @Model.LocationAddressLine 
-            </dd>
+        <dd id="training-location" class="training-location">
+            @Model.LocationAddressLine 
+        </dd>
     }
 }
 }
@@ -124,8 +203,8 @@ if (@Model != null)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-        <dt class="phone-title">@title</dt>
-        <dd id="@id" class="phone">@Html.Raw(item)</dd>
+    <dt class="@id-title">@title</dt>
+    <dd id="@id" class="@id">@Html.Raw(item)</dd>
 }
 }
 
@@ -133,8 +212,8 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-        <dt class="email-title">@title</dt>
-        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+    <dt class="email-title">@title</dt>
+    <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
 }
 }
 
@@ -143,82 +222,20 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     if (!string.IsNullOrEmpty(url))
     {
         var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
-            <dt class="@classTitle">@title</dt>
-            <dd>
-                <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
-                    @if (string.IsNullOrEmpty(urlTitle))
-                    {
-                        @url
-                    }
-                    else
-                    {
-                        @urlTitle
-                    }
-                </a>
-            </dd>
+        <dt class="@classTitle">@title</dt>
+        <dd>
+            <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+                @if (string.IsNullOrEmpty(urlTitle))
+                {
+                    @Html.Raw(url)
+                }
+                else
+                {
+                    @Html.Raw(urlTitle)
+                }
+            </a>
+        </dd>
     }
-}
-
-@helper GetSatisfactionsHtml()
- {
-     <div class="rates-list">
-         <div>
-             <b>Employer satisfaction:</b>
-             <span id="employer-satisfaction">
-            @Model.EmployerSatisfactionMessage
-        </span>
-             @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
-         </div>
-
-         <div>
-             <b>Learner satisfaction:</b>
-             <span id="learner-satisfaction">
-            @Model.LearnerSatisfactionMessage
-        </span>
-             @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
-        </div>
-
-        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
-        {
-            <p class="satisfaction-source font-small">
-                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
-            </p>
-        }
-        <hr/>
-
-         <div>
-             <b>Achievement rate:</b>
-             <span class="national-rate">
-                 @Model.AchievementRateMessage
-             </span>
-             @if (Model.AchievementRateMessage != "no data available")
-             {
-                 @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
-             }
-         </div>
-         @if (Model.AchievementRateMessage != "no data available")
-         {
-             <div class="national-achievement-bar">
-                 <b class="font-small">National average:</b>
-                 <span class="national-rate">
-                     @Model.NationalAchievementRateMessage
-                 </span>
-                 @CreateProgressBar(Model.NationalAchievementRateMessage, Model.NationalAchievementRate)
-             </div>
-         }
-        @if (Model.AchievementRateMessage != "no data available")
-        {
-            <details class="more-information">
-                <summary>Explain achievement rate</summary>
-                <div class="panel panel-border-narrow">
-                    <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
-                    <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
-                    <p class="font-small">Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
-                </div>
-            </details>
-        }
-
-    </div>
 }
 
 @helper CreateProgressBar(string message, int progress)
@@ -235,38 +252,36 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
 if (items != null)
 {
-        <dt class="training-structure">@title</dt>
-        <dd id="delivery-modes">
-            <ul>
-                @if (items.Exists(m => m.Equals("DayRelease")))
-                {
-                    <li class="day-release">@Html.Raw("day release")</li>
-                }
-                @if (items.Exists(m => m.Equals("BlockRelease")))
-                {
-                    <li class="block-release">@Html.Raw("block release")</li>
-                }
-                @if (items.Exists(m => m.Equals("100PercentEmployer")))
-                {
-                    <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
-                }
-            </ul>
-            <details>
-                <summary>Explain training options</summary>
-                <div class="panel panel-border-narrow">
-                    <p>
-                        <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
-                    </p>
-                    <p>
-                        <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
-                    </p>
-                    <p>
-                        <span class="bold-small">At your location:</span> the training provider comes to your workplace.
-                    </p>
-                </div>
-            </details>
-        </dd>
+    <dt class="training-structure">@title</dt>
+    <dd id="delivery-modes">
+        <ul>
+            @if (items.Exists(m => m.Equals("DayRelease")))
+            {
+                <li class="day-release">@Html.Raw("day release")</li>
+            }
+            @if (items.Exists(m => m.Equals("BlockRelease")))
+            {
+                <li class="block-release">@Html.Raw("block release")</li>
+            }
+            @if (items.Exists(m => m.Equals("100PercentEmployer")))
+            {
+                <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
+            }
+        </ul>
+        <details>
+            <summary>Explain training options</summary>
+            <div class="panel panel-border-narrow">
+                <p>
+                    <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
+                </p>
+                <p>
+                    <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
+                </p>
+                <p>
+                    <span class="bold-small">At your location:</span> the training provider comes to your workplace.
+                </p>
+            </div>
+        </details>
+    </dd>
 }
 }
-
-

@@ -8,19 +8,49 @@
 
     validation.init = function () {
         $('form.postcode-form').on('submit', function (e) {
-            var postCode = $(this).find('.postcode-search-box').val().trim();
-            if (!validation.validatePostcode(postCode)) {
+            var pcField = $('#search-box'),
+                postCode = pcField.val().trim(),
+                rbLevyPayer = $('#levyPaying input'),
+                rbNonLevyPayer = $('#notLevyPaying input');
+
+            // Remove any errors
+            $('.form-group').removeClass('error');
+
+            if ( !validation.validatePostcode(postCode) ||
+                (rbLevyPayer.length === 1 && rbNonLevyPayer.length === 1) && (!rbLevyPayer.prop('checked') && !rbNonLevyPayer.prop('checked'))) {
+
+                // Prevent form submitting
                 e.preventDefault();
-                $('.form-elements').addClass("error");
-                postCode = postCode.toUpperCase().trim().replace(/\s/g, "");
-                if (postCode.length > 4 && postCode.length < 8) {
-                    var splitAt = postCode.length - 3;
-                    postCode = [postCode.slice(0, splitAt), " ", postCode.slice(splitAt)].join("");
+
+                // Postcode Field
+                if (!validation.validatePostcode(postCode)) {
+
+                    var pcFieldGroup = pcField.closest('.form-group');
+                    pcFieldGroup.addClass('error');
+                    var $errorContainer = pcFieldGroup.find('.error-message');
+                    $errorContainer.empty().append('<span id="error-js-postcode-invalid">' + pcFieldGroup.data('validation') + '</span>');
+
+                    postCode = postCode.toUpperCase().trim().replace(/\s/g, "");
+
+                    if (postCode.length > 4 && postCode.length < 8) {
+                        var splitAt = postCode.length - 3;
+                        postCode = [postCode.slice(0, splitAt), " ", postCode.slice(splitAt)].join("");
+                    }
+
+                    pcField.val(postCode);
                 }
-                $('.postcode-search-box').val(postCode);
+
+                // Radio Buttons
+                if (!rbLevyPayer.prop('checked') && !rbNonLevyPayer.prop('checked')) {
+                    var rbFieldGroup = rbLevyPayer.closest('.form-group');
+                    rbFieldGroup.closest('.form-group').addClass('error');
+                    rbFieldGroup.find('.error-message').text(rbFieldGroup.data('validation'));
+                }
             }
+
         });
     };
-    validation.init();
 
+    validation.init();
+    
 }(SearchAndShortlist.validation = {}));

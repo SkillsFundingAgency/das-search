@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "Provider Search Results";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 
 <main id="content" role="main">
@@ -14,7 +15,7 @@
     @if (Model.Hits.Count() != 0)
     {
         <p class="small-btm-margin">
-            @Html.ActionLink("Find providers for a different postcode", "SearchForFrameworkProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms }, new { @class = "link-back new-postcode-search" })
+            @Html.ActionLink("Find providers for a different postcode", "SearchForFrameworkProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "link-back new-postcode-search" })
         </p>
     }
     <div>
@@ -39,10 +40,12 @@
             <div>
                 <p>You can:</p>
                 <ul class="list list-bullet">
-                    <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "FrameworkResults", "Provider", new { @apprenticeshipid = @Model.FrameworkId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms }, new { })</li>
+                    <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "FrameworkResults", "Provider", new {@apprenticeshipid = @Model.FrameworkId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new {})</li>
                     <li class="start-again">@Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship")</li>
                 </ul>
             </div>
+
+            @Html.Partial("_Help")
         }
         else if (Model.TotalResults == 0)
         {
@@ -54,12 +57,14 @@
                 <ul class="list list-bullet">
                     @if (Model.TotalProvidersCountry > 0)
                     {
-                        <li class="total-providers-country">@Html.ActionLink($"view all ({@Model.TotalProvidersCountry}) training providers", "FrameworkResults", "Provider", new { @apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true }, new { @class = "" }) for <b>@Model.FrameworkName, level @Model.FrameworkLevel</b> in England</li>
+                        <li class="total-providers-country">@Html.ActionLink($"view all ({@Model.TotalProvidersCountry}) training providers", "FrameworkResults", "Provider", new {@apprenticeshipId = @Model.FrameworkId, @postcode = Model.PostCode, @showAll = true, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new {@class = ""}) for <b>@Model.FrameworkName, level @Model.FrameworkLevel</b> in England</li>
                     }
-                    <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { })</li>
+                    <li class="return-search-results">@Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new {@keywords = @Model.SearchTerms}, new {})</li>
                     <li class="start-again">@Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship")</li>
                 </ul>
             </div>
+
+            @Html.Partial("_Help")
         }
     </div>
 
@@ -135,8 +140,11 @@ if (Model.ActualPage < Model.LastPage)
                 <form method="get" autocomplete="off" action="@Model.AbsolutePath">
                     <input type="hidden" name="PostCode" value="@Model.PostCode.FormatPostcode()" />
                     <input type="hidden" name="apprenticeshipid" value="@Model.FrameworkId" />
-                    <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()" />
+                    <input type="hidden" name="ShowAll" value="@Model.ShowAll.ToString()"/>
+                    <input type="hidden" name="isLevyPayingEmployer" value="@Model.IsLevyPayingEmployer.ToString()" />
+
                     <input type="hidden" name="keywords" value="@Model.SearchTerms" />
+
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     }
@@ -155,13 +163,19 @@ if (Model.ActualPage < Model.LastPage)
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
 
-        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page }, { "showall", Model.ShowAll } };
+        var rv = new RouteValueDictionary { { "apprenticeshipid", Model.FrameworkId }, { "postcode", Model.PostCode }, { "page", page }, { "showall", Model.ShowAll }, { "isLevyPayingEmployer", Model.IsLevyPayingEmployer } };
         int i = 0;
         foreach (var deliveryMode in deliveryModes.Where(m => m.Checked))
         {
             rv.Add("DeliveryModes[" + i + "]", deliveryMode.Value);
             i++;
         }
+
+        if (Model.ShowNationalProviders)
+        {
+            rv.Add("NationalProvidersOnly", true);
+        }
+
         return rv;
     }
 }

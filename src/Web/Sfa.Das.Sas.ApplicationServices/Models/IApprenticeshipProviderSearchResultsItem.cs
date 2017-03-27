@@ -17,6 +17,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         string ProviderMarketingInfo { get; set; }
         string ApprenticeshipMarketingInfo { get; set; }
         string ProviderName { get; set; }
+        string LegalName { get; set; }
         string Phone { get; set; }
         string ApprenticeshipInfoUrl { get; set; }
         int Ukprn { get; set; }
@@ -28,5 +29,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         double? NationalOverallAchievementRate { get; set; }
 
         string OverallCohort { get; set; }
+
+        bool HasNonLevyContract { get; set; }
+
+        bool HasParentCompanyGuarantee { get; set; }
+
+        bool IsNew { get; set; }
     }
 }

@@ -57,9 +57,13 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 Provider = new Provider
                 {
                     Name = item.ProviderName,
+                    LegalName = item.LegalName,
                     UkPrn = item.Ukprn,
                     NationalProvider = item.NationalProvider,
                     IsHigherEducationInstitute = item.IsHigherEducationInstitute,
+                    HasNonLevyContract = item.HasNonLevyContract,
+                    HasParentCompanyGuarantee = item.HasParentCompanyGuarantee,
+                    IsNew = item.IsNew,
                     ContactInformation = new ContactInformation
                     {
                         Phone = item.Phone,

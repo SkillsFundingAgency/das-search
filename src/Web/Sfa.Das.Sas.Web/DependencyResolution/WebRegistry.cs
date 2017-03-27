@@ -1,10 +1,11 @@
 using System.Web;
 using MediatR;
-using Sfa.Das.Sas.Core.Logging;
+
 using Sfa.Das.Sas.Web.Factories;
 using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Logging;
 using Sfa.Das.Sas.Web.Services;
+using SFA.DAS.NLog.Logger;
 using StructureMap;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution

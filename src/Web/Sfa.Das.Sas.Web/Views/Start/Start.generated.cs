@@ -42,6 +42,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
             #line 1 "..\..\Views\Start\Start.cshtml"
   
     ViewBag.Title = "Find Apprenticeship Training | Skills Funding Agency";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
             #line default
@@ -66,18 +67,18 @@ WriteLiteral(" class=\"heading-xlarge\"");
 
 WriteLiteral(">\n                    Find apprenticeship training\n                </h1>\n        " +
 "    </hgroup>\n            <p>For employers looking to take on apprentices.</p>\n\n" +
-"            <p>Use this service to:</p>\n\n            <ul");
+"            <p>Use this service to:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\n                <li>search for apprenticeship training by job role or keyword</" +
-"li>\n                <li>find training providers who offer the apprenticeship tra" +
-"ining you choose</li>\n            </ul>\n\n");
+WriteLiteral(">\r\n                <li>search for apprenticeship training by job role or keyword<" +
+"/li>\r\n                <li>find training providers who offer the apprenticeship t" +
+"raining you choose</li>\r\n            </ul>\r\n            \r\n");
 
 WriteLiteral("            ");
 
             
-            #line 21 "..\..\Views\Start\Start.cshtml"
+            #line 22 "..\..\Views\Start\Start.cshtml"
        Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
 
             
@@ -87,8 +88,8 @@ WriteLiteral("\r\n\r\n            <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">Help</h2>\r\n\r\n            <p>You can contact the National Apprenticeship Service " +
-"for advice or help using the service.</p>\r\n\r\n            <div");
+WriteLiteral(">Help</h2>\r\n            <p>You can contact the National Apprenticeship Service fo" +
+"r advice or help using the service.</p>\r\n            <div");
 
 WriteLiteral(" class=\"contact\"");
 
@@ -98,8 +99,8 @@ WriteLiteral(">\r\n                <p>\r\n                    <strong>National A
 
 WriteLiteral(" href=\"https://www.gov.uk/call-charges\"");
 
-WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\r\n\r\n   " +
-"     </div>\n    </div>\n</main>");
+WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\n\n     " +
+"   </div>\n    </div>\n</main>");
 
         }
     }

@@ -10,6 +10,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public string ProviderName { get; set; }
 
+        public string LegalName { get; set; }
+        
         public string FrameworkId { get; set; }
 
         public int FrameworkCode { get; set; }
@@ -53,6 +55,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public double? NationalOverallAchievementRate { get; set; }
 
         public string OverallCohort { get; set; }
+
         public List<string> DeliveryModesKeywords { get; set; }
+
+        public bool HasNonLevyContract { get; set; }
+
+        public bool HasParentCompanyGuarantee { get; set; }
+
+        public bool IsNew { get; set; }
     }
 }

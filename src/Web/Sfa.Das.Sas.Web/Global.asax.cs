@@ -5,7 +5,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.ApplicationInsights.Extensibility;
-using Sfa.Das.Sas.Core.Logging;
+
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web
 {
@@ -35,12 +36,25 @@ namespace Sfa.Das.Sas.Web
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
-            var logger = DependencyResolver.Current.GetService<ILog>();
+            var logger = DependencyResolver.Current.GetService<SFA.DAS.NLog.Logger.ILog>();
 
-            if (ex is HttpException && ((HttpException)ex).GetHttpCode() != 404)
+            if (ex is HttpException
+                && ((HttpException)ex).GetHttpCode() != 404 
+                && !UrlContains("findatrainingorganisation.nas.apprenticeships.org.uk"))
             {
                 logger.Error(ex, "App_Error");
             }
+        }
+
+        private bool UrlContains(string text)
+        {
+            var url = HttpContext.Current.Request.RequestContext.HttpContext.Request.Url;
+            if (url == null)
+            {
+                return false;
+            }
+
+            return url.OriginalString.Contains(text);
         }
 
         protected void Application_BeginRequest()

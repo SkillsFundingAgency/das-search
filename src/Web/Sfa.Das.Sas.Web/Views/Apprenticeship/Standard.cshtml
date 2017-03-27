@@ -1,11 +1,11 @@
-﻿@using Sfa.Das.Sas.Resources
+﻿@using System.Globalization
+@using Sfa.Das.Sas.Resources
 @using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.StandardViewModel
-
 @{
-    ViewBag.Title = @Model.Title + " - Apprenticeship Standard";
+    ViewBag.Title = Model.Title + " - Apprenticeship Standard";
+    ViewBag.Description = Model.OverviewOfRole;
 }
-
 <main id="content" class="standard-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
@@ -13,26 +13,19 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                <div class="standard-result-summary">
-                    <span class="tag tag-new">New</span>
-                    An apprenticeship standard developed by a group of employers. It sets out what the apprentice needs to achieve and how they will be assessed.
-                </div>
+                <p class="lede">@Model.OverviewOfRole</p>
             </div>
         </div>
-
         <div class="column-third">
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
-
-                    <a class="button ui-find-training-providers" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                    <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                         Find training providers
                     </a>
                 </aside>
             </div>
-
         </div>
     </div>
-
     <section>
         <header>
             <h2 class="heading-large">
@@ -40,9 +33,9 @@
             </h2>
         </header>
         <dl class="data-list">
-            @GetStandardProperty("Overview of role", "overview", Model.OverviewOfRole)
-            @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {@EquivalenveLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
+            @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
             @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
+            @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
             @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
@@ -51,28 +44,37 @@
             <dd>
                 <div class="panel-indent panel-indent-info document-list">
                     <ul>
-                        @GetDocumentItem(@Model.StandardPdf, "Standard")
-                        @GetDocumentItem(@Model.AssessmentPlanPdf, "Assessment Plan")
+                        @GetDocumentItem(Model.StandardPdf, "Standard")
+                        @GetDocumentItem(Model.AssessmentPlanPdf, "Assessment Plan")
                     </ul>
                 </div>
             </dd>
         </dl>
-
         <div id="bottom-actions">
-            <a class="button ui-find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+            <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                 Find training providers
             </a>
         </div>
     </section>
 </main>
-
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-        <dt>@title</dt>
-        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+    <dt>@title</dt>
+    <dd id="@id">@Html.MarkdownToHtml(item)</dd>
 }
+}
+
+@helper GetFundingBandProperty(int value)
+{
+    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
+
+    <dt>Funding cap<br />(from 1 May 2017)</dt>
+    <dd id="funding-cap">
+        Up to @fundingCapFormatted per apprentice.<br />
+        <a href="https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will-work/apprenticeship-levy-how-it-will-work" target="_blank">More information about funding</a>
+    </dd>
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)

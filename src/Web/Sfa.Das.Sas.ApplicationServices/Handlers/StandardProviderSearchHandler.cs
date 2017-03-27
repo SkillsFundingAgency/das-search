@@ -1,4 +1,5 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Services;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -6,7 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Domain.Model;
-    using Core.Logging;
     using FluentValidation;
     using MediatR;
     using Models;
@@ -98,7 +98,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     var responseError = new StandardProviderSearchResponse
                     {
                         Success = false,
-                        StatusCode = StandardProviderSearchResponse.ResponseCodes.ServerError
+                        StatusCode = StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat
                     };
                     return responseError;
                 default:
@@ -117,13 +117,16 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var pageNumber = message.Page <= 0 ? 1 : message.Page;
 
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
+
             var searchResults = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
                 new Pagination { Page = pageNumber, Take = message.Take },
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
-                message.ShowAll);
+                message.ShowAll,
+                hasNonLevyContract);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {
@@ -161,13 +164,16 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return totalRestultsForCountry;
             }
 
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
+
             var totalProvidersCountry = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
                 new Pagination(),
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
-                true);
+                true,
+                hasNonLevyContract);
 
             totalRestultsForCountry = totalProvidersCountry.TotalResults;
 

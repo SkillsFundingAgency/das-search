@@ -1,58 +1,79 @@
-﻿@using Sfa.Das.Sas.Web.Extensions
+﻿@using FeatureToggle.Core.Fluent
+@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
+@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.ProviderSearchViewModel
 @{
     ViewBag.Title = "Search for providers";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 
 <main id="content">
-    <hgroup class="hgroup">
-        <h1 class="heading-xlarge">
-            Find a training provider
-        </h1>
-        <p class="lede">
-            For <strong>@Model.Title</strong>:
-        </p>
-    </hgroup>
+ 
+    <h1 class="heading-xlarge">
+        Find a training provider
+    </h1>
+    <p class="lede">
+        For <strong>@Model.Title</strong>:
+    </p>
 
     <div class="grid-row">
         <div class="column-two-thirds">
-    
-            <form action="@Model.PostUrl" class="postcode-form search-box" method="get">
-
-                <div class="form-elements  @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")">
-                    <div class="heading-group">
-                        <h2 class="heading-medium">
-                            Enter a postcode
-                        </h2>
-                        <p>For example: 'SW1A 2AA'</p>
+            <form action="@Model.PostUrl" method="get" class="postcode-form">
+                <div class="postcode-search-form">
+                    <h2 class="heading-medium">
+                        Enter a postcode
+                    </h2>
+                    <div class="form-group @(Model.HasError || Model.WrongPostcode || Model.PostcodeCountry == "Wales" || Model.PostcodeCountry == "Scotland" || Model.PostcodeCountry == "NorthernIreland" ? " error" : "")" data-validation="You must enter a full and valid postcode">
+                        <label for="search-box">
+                            <span class="form-label-bold">Enter the full postcode of your apprentice's workplace</span>
+                            <span class="form-hint">For example: 'SW1A 2AA'</span>
+                            <span class="error-message">@ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry)</span>
+                        </label>
+                        <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="form-control postcode-search-box" maxlength="200" placeholder=""/>
                     </div>
-
-                    <label class="form-label" for="search-box">
-                        Enter the full postcode of your apprentice’s workplace
-                        
-                        @ShowErrorMessage(Model.HasError, Model.WrongPostcode, Model.PostcodeCountry)
-
-                        
-                    </label>
+                    @if (Is<FatLevyJourneyFeature>.Enabled)
+                    {
+                        <div>
+                            <div class="form-group" data-validation="Select an option">
+                                <fieldset class="inline">
+                                    <legend>
+                                        <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
+                                        <span class="error-message"></span>
+                                    </legend>
+                                    <label class="block-label selection-button-radio" id="levyPaying">
+                                        <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true"/>
+                                        Yes
+                                    </label>
+                                    <label class="block-label selection-button-radio" id="notLevyPaying">
+                                        <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false"/>
+                                        No
+                                    </label>
+                                </fieldset>
+                            </div>
+                            <details>
+                                <summary>What is the Apprenticeship Levy?</summary>
+                                <div class="panel panel-border-narrow">
+                                    <p>
+                                        Employers with an annual pay bill of more than £3 million must spend 0.5% of their total PAYE bill on an apprenticeship levy.
+                                    </p>
+                                    <p>
+                                        <a href="https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will-work/apprenticeship-levy-how-it-will-work" target="_blank" rel="external">Find out more about the apprenticeship levy</a>
+                                    </p>
+                                </div>
+                            </details>
+                        </div>
+                    }
+                    else
+                    {
+                        <input type="hidden" id="IsLevyPayingEmployer" value="false"/>
+                    }
                     <div class="form-group">
                         <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                         <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
-                        <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="text-box form-control postcode-search-box" maxlength="200" placeholder="">
-                        <input class="button margin-top-x2 postcode-search-button" type="submit" value="Search">
+                        <input class="button postcode-search-button" type="submit" value="Search">
                     </div>
                 </div>
             </form>
-            
-            <div class="notice">
-                <i class="icon icon-important">
-                    <span class="visuallyhidden">Warning</span>
-                </i>
-                <strong class="bold-small">
-                    This service contains details of training providers who currently offer apprenticeships.
-                    It will be updated in 2017 to reflect the new register of apprenticeship training providers.
-                </strong>
-            </div>
-
         </div>
     </div>
 </main>
@@ -61,36 +82,36 @@
 {
     if(hasError)
     {
-        <span class="error-message">
+        <span id="error-postcode-service">
             Sorry, postcode search not working, please try again later
         </span>
     }
     else if (wrongPostcode)
     {
-        <span class="error-message">
+        <span id="error-postcode-invalid">
             You must enter a full and valid postcode
         </span>
     }
     else if (postcodeCountry != null)
     {
-        <span class="error-message">
+        <span id="error-postcode-location">
             The postcode entered is not in England.
         </span>
         switch (postcodeCountry.ToLower())
         {
             case "wales":
-                <span class="error-message">
+                <span id="error-postcode-wales">
                     Information about apprenticeships in <a href="https://businesswales.gov.wales/skillsgateway/apprenticeships">Wales</a>
                 </span>
                 break;
             case "northernireland":
                 
-                <span class="error-message">
+                <span id="error-postcode-northern-ireland">
                     Information about apprenticeships in <a href="https://www.nibusinessinfo.co.uk/content/apprenticeships-employers">Northern Ireland</a>
                 </span>
                 break;
             case "scotland":
-                <span class="error-message">
+                <span id="error-postcode-scotland">
                     Information about apprenticeships in <a href="https://www.apprenticeships.scot/">Scotland</a>
                 </span>
                 break;
