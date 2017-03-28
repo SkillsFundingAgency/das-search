@@ -161,7 +161,7 @@ WriteLiteral("\n");
             #line hidden
             
             #line 17 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
-                     if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
+                     if (item.NationalProvider)
                     {
 
             
