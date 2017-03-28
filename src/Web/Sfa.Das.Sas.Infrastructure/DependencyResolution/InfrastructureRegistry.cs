@@ -1,4 +1,8 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+
+namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
     using FeatureToggle.Core.Fluent;
     using SFA.DAS.Apprenticeships.Api.Client;
@@ -19,7 +23,9 @@
         {
             For<SFA.DAS.NLog.Logger.ILog>().Use(x => new SFA.DAS.NLog.Logger.NLogLogger(
                 x.ParentType,
-                x.GetInstance<SFA.DAS.NLog.Logger.IRequestContext>())).AlwaysUnique();
+                x.GetInstance<SFA.DAS.NLog.Logger.IRequestContext>(),
+                GetProperties()
+                )).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
@@ -52,6 +58,20 @@
             For<ITypicalLengthMapping>().Use<TypicalLengthMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
+        }
+
+        private IDictionary<string, object> GetProperties()
+        {
+            var properties = new Dictionary<string, object>();
+            properties.Add("Version", GetVersion());
+            return properties;
+        }
+
+        private string GetVersion()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fileVersionInfo.ProductVersion;
         }
     }
 }
