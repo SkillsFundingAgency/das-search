@@ -15,9 +15,11 @@ namespace Sfa.Das.Sas.Web
                 "~/scripts/pages/*.js",
                 "~/scripts/app/*.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/header").Include(
-                "~/scripts/js-errors.js",
-                "~/scripts/vendor/modernizr-3.3.1.min.js"));
+            var header = new ScriptBundle("~/bundles/header")
+                .Include("~/scripts/js-errors.js")
+                .Include("~/scripts/vendor/modernizr-3.3.1.min.js");
+            header.Orderer = new AsIsBundleOrderer();
+            bundles.Add(header);
         }
     }
 }
