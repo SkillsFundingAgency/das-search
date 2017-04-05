@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             _mockLogger = new Mock<ILog>();
 
             var providerFrameworkSearchResults = new ApprenticeshipDetails();
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(providerFrameworkSearchResults);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(providerFrameworkSearchResults);
 
             _handler = new DetailProviderHandler(
                 new ProviderDetailQueryValidator(new Validation()),
@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             };
 
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
             var response = _handler.Handle(message);
@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
                 Provider = new Provider { UkPrn = 42 }
             };
 
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(null as Standard);
 
             var response = _handler.Handle(message);
@@ -104,7 +104,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(null as ApprenticeshipDetails);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
             var response = _handler.Handle(message);
@@ -125,7 +125,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
                 Provider = new Provider { UkPrn = 42 }
             };
 
-            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(stubApprenticeship);
             _mockIGetFrameworks.Setup(x => x.GetFrameworkById("1")).Returns(null as Framework);
 
             var response = _handler.Handle(message);
@@ -140,7 +140,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Framework1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(null as ApprenticeshipDetails);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
             var response = _handler.Handle(message);
@@ -161,7 +161,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
                                              Provider = new Provider { UkPrn = 42 }
                                          };
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4,  };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
             var response = _handler.Handle(message);
@@ -184,7 +184,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
                 Provider = new Provider { UkPrn = 42 }
             };
             var stubStandardProduct = new Framework { Title = "Framework1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(stubApprenticeship);
             _mockIGetFrameworks.Setup(x => x.GetFrameworkById("1")).Returns(stubStandardProduct);
 
             var response = _handler.Handle(message);
@@ -207,7 +207,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
                 Provider = new Provider { UkPrn = 42, IsHigherEducationInstitute = true }
             };
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
-            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
+            _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
             var response = _handler.Handle(message);

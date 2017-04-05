@@ -59,10 +59,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         private DetailProviderResponse GetStandard(ProviderDetailQuery message)
         {
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
+
             var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
                 message.Ukprn,
                 message.LocationId,
-                message.StandardCode);
+                message.StandardCode,
+                hasNonLevyContract);
 
             var apprenticeshipData = _getStandards.GetStandardById(message.StandardCode);
 
@@ -71,10 +74,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         private DetailProviderResponse GetFramework(ProviderDetailQuery message)
         {
+            var hasNonLevyContract = message.IsLevyPayingEmployer == false;
+
             var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
                 message.Ukprn,
                 message.LocationId,
-                message.FrameworkId);
+                message.FrameworkId,
+                hasNonLevyContract);
 
             var apprenticeshipProduct = _getFrameworks.GetFrameworkById(message.FrameworkId);
 
