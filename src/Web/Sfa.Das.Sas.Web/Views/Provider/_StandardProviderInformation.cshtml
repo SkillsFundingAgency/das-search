@@ -15,7 +15,7 @@
                 @Html.ActionLink(item.ProviderName, "Detail", "Provider",
                     new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode, isLevyPayingEmployer = Model.IsLevyPayingEmployer },
                     new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
-                @if (Is<NationalProvidersFeature>.Enabled && item.NationalProvider)
+                @if (item.NationalProvider)
                 {
                     <span class="tag tag-new">National</span>
                 }

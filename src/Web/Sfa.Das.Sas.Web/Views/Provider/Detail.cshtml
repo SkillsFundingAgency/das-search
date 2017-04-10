@@ -120,7 +120,7 @@
                     @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
                 </dl>
 
-                @if (Is<NationalProvidersFeature>.Enabled && Model.NationalProvider)
+                @if (Model.NationalProvider)
                 {
                     <p class="national-message">
                         <span class="tag tag-new">National</span> This training provider is willing to offer apprenticeship training across England.
