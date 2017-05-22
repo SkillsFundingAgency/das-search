@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.ApplicationServices.Settings;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -26,7 +24,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             message.Page = message.Page <= 0 ? 1 : message.Page;
 
-            var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, message.Take, message.Order, message.SelectedLevels);
+            var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, 10, message.Order, message.SelectedLevels);
 
             response.ActualPage = message.Page;
             response.AggregationLevel = searchResults.LevelAggregation;

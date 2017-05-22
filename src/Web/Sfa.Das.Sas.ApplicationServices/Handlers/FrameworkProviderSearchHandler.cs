@@ -110,7 +110,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             var searchResults = await _searchService.SearchFrameworkProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
-                new Pagination { Page = pageNumber, Take = message.Take },
+                new Pagination { Page = pageNumber, Take = 10 },
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
                 message.ShowAll,
@@ -118,7 +118,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {
-                var take = message.Take <= 0 ? _paginationSettings.DefaultResultsAmount : 1;
+                var take = _paginationSettings.DefaultResultsAmount;
                 var lastPage = take > 0 ? (int)System.Math.Ceiling((double)searchResults.TotalResults / take) : 1;
                 return new FrameworkProviderSearchResponse { StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
             }

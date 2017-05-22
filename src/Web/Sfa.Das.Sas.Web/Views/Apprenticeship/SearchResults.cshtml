@@ -72,7 +72,6 @@
                 <form method="GET" id="search-results-order">
                     <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
-                    <input type="hidden" name="take" value="@Model.ResultsToTake" />
                     @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
                     {
                         <input type="hidden" name="SelectedLevels" value="@level.Value" />
@@ -88,7 +87,7 @@
                     </div>
                 </form>
 
-                @{ var index = (Model.ActualPage * Model.ResultsToTake) - Model.ResultsToTake; }
+                @{ var index = (Model.ActualPage * 10) - 10; }
                 @foreach (var item in Model.Results)
                 {
                     index += 1;
@@ -153,7 +152,7 @@
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<LevelAggregationViewModel> selectedLevels, string order)
     {
 
-        var rv = new RouteValueDictionary { { "keywords", Model.SearchTerm }, { "page", page }, { "order", order }, { "take", Model.ResultsToTake } };
+        var rv = new RouteValueDictionary { { "keywords", Model.SearchTerm }, { "page", page }, { "order", order } };
         var i = 0;
         foreach (var level in selectedLevels.Where(m => m.Checked))
         {

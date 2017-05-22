@@ -1,19 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using System.Web.Routing;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-
-using Sfa.Das.Sas.Web.Attribute;
-using Sfa.Das.Sas.Web.Services;
-using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
-using Sfa.Das.Sas.Web.ViewModels;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using MediatR;
+    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.ApplicationServices.Queries;
+    using Sfa.Das.Sas.ApplicationServices.Responses;
+    using Sfa.Das.Sas.Web.Attribute;
+    using Sfa.Das.Sas.Web.Services;
+    using Sfa.Das.Sas.Web.ViewModels;
+
     [NoCache]
     public sealed class ApprenticeshipController : Controller
     {
