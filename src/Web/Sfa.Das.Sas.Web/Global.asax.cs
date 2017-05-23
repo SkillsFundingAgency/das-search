@@ -15,6 +15,13 @@ namespace Sfa.Das.Sas.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private ILog _logger;
+
+        public MvcApplication()
+        {
+            _logger = DependencyResolver.Current.GetService<ILog>();
+        }
+
         protected void Application_Start()
         {
             MvcHandler.DisableMvcResponseHeader = true;
@@ -59,6 +66,11 @@ namespace Sfa.Das.Sas.Web
 
         protected void Application_BeginRequest()
         {
+            _logger = DependencyResolver.Current.GetService<ILog>();
+
+            HttpContext context = base.Context;
+
+            _logger.Info($"{context.Request.HttpMethod} {context.Request.Path}");
         }
 
         protected void Application_EndRequest()
