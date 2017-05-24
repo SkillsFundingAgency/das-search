@@ -28,5 +28,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
         public bool Published { get; set; }
+
+        public int Duration { get; set; }
     }
 }
