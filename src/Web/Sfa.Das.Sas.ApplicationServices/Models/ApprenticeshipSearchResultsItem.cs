@@ -14,8 +14,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public List<string> Keywords { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
-
         // Frameworks
         public string FrameworkId { get; set; }
 

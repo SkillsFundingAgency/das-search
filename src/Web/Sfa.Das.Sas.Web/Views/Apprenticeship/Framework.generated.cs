@@ -61,8 +61,8 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 187 "..\..\Views\Apprenticeship\Framework.cshtml"
  
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
 
 
 #line default
@@ -76,18 +76,18 @@ WriteTo(__razor_helper_writer, title);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dt>\n");
+WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8476), Tuple.Create("\"", 8484)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8673), Tuple.Create("\"", 8681)
 
 #line 191 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 8481), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 8678), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 8481), false)
+, 8678), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -99,11 +99,11 @@ WriteTo(__razor_helper_writer, item);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</dd>\n");
+WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
 #line 192 "..\..\Views\Apprenticeship\Framework.cshtml"
-}
+    }
 
 
 #line default
@@ -116,7 +116,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\n");
 #line hidden
 
 #line 195 "..\..\Views\Apprenticeship\Framework.cshtml"
-public System.Web.WebPages.HelperResult GetFundingBandProperty(int value)
+public System.Web.WebPages.HelperResult GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
@@ -124,45 +124,108 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 196 "..\..\Views\Apprenticeship\Framework.cshtml"
  
-    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
-
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Funding cap<br />(from 1 May 2017)</dt>\n");
+WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
-WriteLiteralTo(__razor_helper_writer, "    <dd");
 
-WriteLiteralTo(__razor_helper_writer, " id=\"funding-cap\"");
+#line 199 "..\..\Views\Apprenticeship\Framework.cshtml"
+WriteTo(__razor_helper_writer, title);
 
-WriteLiteralTo(__razor_helper_writer, ">\n        Up to ");
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "        <dd");
+
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8900), Tuple.Create("\"", 8908)
+
+#line 200 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create("", 8905), Tuple.Create<System.Object, System.Int32>(id
+
+#line default
+#line hidden
+, 8905), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 200 "..\..\Views\Apprenticeship\Framework.cshtml"
+WriteTo(__razor_helper_writer, item);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 
 
 #line 201 "..\..\Views\Apprenticeship\Framework.cshtml"
-WriteTo(__razor_helper_writer, fundingCapFormatted);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " per apprentice.<br />\n        <a");
-
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
-"-work/apprenticeship-levy-how-it-will-work\"");
-
-WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
-
-WriteLiteralTo(__razor_helper_writer, ">More information about funding</a>\n    </dd>\n");
-
-
-#line 204 "..\..\Views\Apprenticeship\Framework.cshtml"
+    }
 
 
 #line default
 #line hidden
 });
 
+#line 202 "..\..\Views\Apprenticeship\Framework.cshtml"
+}
+#line default
+#line hidden
+
 #line 204 "..\..\Views\Apprenticeship\Framework.cshtml"
+public System.Web.WebPages.HelperResult GetFundingBandProperty(int value)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 205 "..\..\Views\Apprenticeship\Framework.cshtml"
+ 
+    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
+
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <dt>Funding cap<br />(from 1 May 2017)</dt>\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "    <dd");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"funding-cap\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n        Up to ");
+
+
+#line 210 "..\..\Views\Apprenticeship\Framework.cshtml"
+WriteTo(__razor_helper_writer, fundingCapFormatted);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, " per apprentice.<br />\r\n        <a");
+
+WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
+"-work/apprenticeship-levy-how-it-will-work\"");
+
+WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
+
+WriteLiteralTo(__razor_helper_writer, ">More information about funding</a>\r\n    </dd>\r\n");
+
+
+#line 213 "..\..\Views\Apprenticeship\Framework.cshtml"
+
+
+#line default
+#line hidden
+});
+
+#line 213 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
@@ -181,23 +244,23 @@ WriteLiteralTo(__razor_helper_writer, ">More information about funding</a>\n    
             
             #line default
             #line hidden
-WriteLiteral("\n\n<main");
+WriteLiteral("\r\n\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
-WriteLiteral(">\n    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\n        <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n            <h1");
+WriteLiteral(">\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
 WriteLiteral("                ");
 
@@ -208,9 +271,9 @@ WriteLiteral("                ");
             
             #line default
             #line hidden
-WriteLiteral("\n            </h1>\n            <p>\n                This information is taken from" +
-" an apprenticeship framework. It sets out what qualifications the apprentice can" +
-" achieve.\n            </p>\n");
+WriteLiteral("\r\n            </h1>\r\n            <p>\r\n                This information is taken f" +
+"rom an apprenticeship framework. It sets out what qualifications the apprentice " +
+"can achieve.\r\n            </p>\r\n");
 
             
             #line 20 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -231,19 +294,19 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"notice\"");
 
-WriteLiteral(">\n                    <i");
+WriteLiteral(">\r\n                    <i");
 
 WriteLiteral(" class=\"icon icon-important\"");
 
-WriteLiteral(">\n                        <span");
+WriteLiteral(">\r\n                        <span");
 
 WriteLiteral(" class=\"visuallyhidden\"");
 
-WriteLiteral(">Warning</span>\n                    </i>\n                    <strong");
+WriteLiteral(">Warning</span>\r\n                    </i>\r\n                    <strong");
 
 WriteLiteral(" class=\"bold-small\"");
 
-WriteLiteral(">\n                        This apprenticeship is closed to new starters from ");
+WriteLiteral(">\r\n                        This apprenticeship is closed to new starters from ");
 
             
             #line 28 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -252,7 +315,7 @@ WriteLiteral(">\n                        This apprenticeship is closed to new st
             
             #line default
             #line hidden
-WriteLiteral("\n                    </strong>\n                </div>\n");
+WriteLiteral("\r\n                    </strong>\r\n                </div>\r\n");
 
             
             #line 31 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -262,46 +325,46 @@ WriteLiteral("\n                    </strong>\n                </div>\n");
             
             #line default
             #line hidden
-WriteLiteral("        </div>\n\n        <div");
+WriteLiteral("        </div>\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
-WriteLiteral(">\n            <div");
+WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"related-container\"");
 
-WriteLiteral(">\n                <aside");
+WriteLiteral(">\r\n                <aside");
 
 WriteLiteral(" class=\"hidden-for-mobile-tablet\"");
 
-WriteLiteral(">\n\n                    <a");
+WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
 WriteLiteral(" rel=\"nofollow\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1442), Tuple.Create("\"", 1577)
+WriteAttribute("href", Tuple.Create(" href=\"", 1480), Tuple.Create("\"", 1615)
             
             #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
-      , Tuple.Create(Tuple.Create("", 1449), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+      , Tuple.Create(Tuple.Create("", 1487), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 1449), false)
+, 1487), false)
 );
 
-WriteLiteral(">\n                        Find training providers\n                    </a>\n      " +
-"          </aside>\n            </div>\n\n        </div>\n    </div>\n\n    <section>\n" +
-"        <header>\n            <h2");
+WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n   " +
+"             </aside>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <" +
+"section>\r\n        <header>\r\n            <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">\n                Summary of this apprenticeship framework\n            </h2>\n    " +
-"    </header>\n\n        <dl");
+WriteLiteral(">\r\n                Summary of this apprenticeship framework\r\n            </h2>\r\n " +
+"       </header>\r\n\r\n        <dl");
 
 WriteLiteral(" class=\"data-list\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
             #line 56 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -321,7 +384,7 @@ WriteLiteral("                <dt");
 
 WriteLiteral(" class=\"overviewTitle\"");
 
-WriteLiteral(">Overview of role</dt>\n");
+WriteLiteral(">Overview of role</dt>\r\n");
 
 WriteLiteral("                <dd");
 
@@ -336,7 +399,7 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral(" </dd>\n");
+WriteLiteral(" </dd>\r\n");
 
             
             #line 60 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -354,18 +417,18 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("            ");
 
             
             #line 62 "..\..\Views\Apprenticeship\Framework.cshtml"
-       Write(GetStandardProperty("Typical length", "length", Model.TypicalLengthMessage));
+       Write(GetDurationProperty("Typical length", "length", Model.Duration.ToString()));
 
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("            ");
 
@@ -376,11 +439,11 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\n            <dt>Entry requirements</dt>\n            <dd");
+WriteLiteral("\r\n            <dt>Entry requirements</dt>\r\n            <dd");
 
 WriteLiteral(" class=\"entry-requirements\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
             #line 66 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -405,7 +468,7 @@ WriteLiteral("                    <div>");
             
             #line default
             #line hidden
-WriteLiteral("</div>\n");
+WriteLiteral("</div>\r\n");
 
             
             #line 69 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -415,12 +478,12 @@ WriteLiteral("</div>\n");
             #line default
             #line hidden
 WriteLiteral("                <div>Your chosen training provider can advise you about entry req" +
-"uirements for apprentices.</div>\n            </dd>\n\n            <dt>Suitable rol" +
-"es for apprentices</dt>\n            <dd");
+"uirements for apprentices.</div>\r\n            </dd>\r\n\r\n            <dt>Suitable " +
+"roles for apprentices</dt>\r\n            <dd");
 
 WriteLiteral(" class=\"job-roles\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
             #line 75 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -436,7 +499,7 @@ WriteLiteral(">\n");
             
             #line default
             #line hidden
-WriteLiteral("                    <ul>\n");
+WriteLiteral("                    <ul>\r\n");
 
             
             #line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -461,7 +524,7 @@ WriteLiteral("                            <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 81 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -495,7 +558,7 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 87 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -510,7 +573,7 @@ WriteLiteral(" href=\"#\"");
 
 WriteLiteral(" class=\"showmore hidden\"");
 
-WriteLiteral(">Show more</a>\n");
+WriteLiteral(">Show more</a>\r\n");
 
             
             #line 89 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -519,7 +582,7 @@ WriteLiteral(">Show more</a>\n");
             
             #line default
             #line hidden
-WriteLiteral("                    </ul>\n");
+WriteLiteral("                    </ul>\r\n");
 
             
             #line 91 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -528,14 +591,18 @@ WriteLiteral("                    </ul>\n");
             
             #line default
             #line hidden
-WriteLiteral("\n                <div>\n                    Your chosen training provider can advi" +
-"se you about the kinds of skills apprentices will learn.\n                </div>\n" +
-"            </dd>\n            <dt>Qualifications</dt>\n            <dd>\n         " +
-"       <div");
+WriteLiteral(@"
+                <div>
+                    Your chosen training provider can advise you about the kinds of skills apprentices will learn.
+                </div>
+            </dd>
+            <dt>Qualifications</dt>
+            <dd>
+                <div");
 
 WriteLiteral(" class=\"qualifications\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
             #line 100 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -555,8 +622,8 @@ WriteLiteral("                        <div");
 
 WriteLiteral(" class=\"competencyQualifications\"");
 
-WriteLiteral(">\n                            <p>Apprentices will achieve a practical (or \'compet" +
-"ence\') qualification:</p>\n                            <ul>\n");
+WriteLiteral(">\r\n                            <p>Apprentices will achieve a practical (or \'compe" +
+"tence\') qualification:</p>\r\n                            <ul>\r\n");
 
             
             #line 105 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -581,7 +648,7 @@ WriteLiteral("                                    <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 108 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -590,7 +657,7 @@ WriteLiteral("</li>\n");
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
             
             #line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -621,7 +688,7 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 115 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -636,7 +703,7 @@ WriteLiteral(" href=\"#\"");
 
 WriteLiteral(" class=\"showmore hidden\"");
 
-WriteLiteral(">Show more</a>\n");
+WriteLiteral(">Show more</a>\r\n");
 
             
             #line 117 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -645,7 +712,7 @@ WriteLiteral(">Show more</a>\n");
             
             #line default
             #line hidden
-WriteLiteral("                            </ul>\n                        </div>\n");
+WriteLiteral("                            </ul>\r\n                        </div>\r\n");
 
             
             #line 120 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -654,7 +721,7 @@ WriteLiteral("                            </ul>\n                        </div>\
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
             
             #line 122 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -674,8 +741,8 @@ WriteLiteral("                        <div");
 
 WriteLiteral(" class=\"knowledgeQualifications\"");
 
-WriteLiteral(">\n                            <p>Apprentices will also achieve a theory-based (or" +
-" \'knowledge\') qualification:</p>\n                            <ul>\n");
+WriteLiteral(">\r\n                            <p>Apprentices will also achieve a theory-based (o" +
+"r \'knowledge\') qualification:</p>\r\n                            <ul>\r\n");
 
             
             #line 127 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -700,7 +767,7 @@ WriteLiteral("                                    <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 130 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -709,7 +776,7 @@ WriteLiteral("</li>\n");
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
             
             #line 132 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -740,7 +807,7 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 137 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -755,7 +822,7 @@ WriteLiteral(" href=\"#\"");
 
 WriteLiteral(" class=\"showmore hidden\"");
 
-WriteLiteral(">Show more</a>\n");
+WriteLiteral(">Show more</a>\r\n");
 
             
             #line 139 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -764,7 +831,7 @@ WriteLiteral(">Show more</a>\n");
             
             #line default
             #line hidden
-WriteLiteral("                            </ul>\n                        </div>\n");
+WriteLiteral("                            </ul>\r\n                        </div>\r\n");
 
             
             #line 142 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -773,7 +840,7 @@ WriteLiteral("                            </ul>\n                        </div>\
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
             
             #line 144 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -793,8 +860,8 @@ WriteLiteral("                        <div");
 
 WriteLiteral(" class=\"combinedQualification\"");
 
-WriteLiteral(">\n                            <p>Apprentices will achieve a practical and theory-" +
-"based (or \'combined\') qualification:</p>\n                            <ul>\n");
+WriteLiteral(">\r\n                            <p>Apprentices will achieve a practical and theory" +
+"-based (or \'combined\') qualification:</p>\r\n                            <ul>\r\n");
 
             
             #line 149 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -819,7 +886,7 @@ WriteLiteral("                                    <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 152 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -828,7 +895,7 @@ WriteLiteral("</li>\n");
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
             
             #line 154 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -859,7 +926,7 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral("</li>\n");
+WriteLiteral("</li>\r\n");
 
             
             #line 159 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -874,7 +941,7 @@ WriteLiteral(" href=\"#\"");
 
 WriteLiteral(" class=\"showmore hidden\"");
 
-WriteLiteral(">Show more</a>\n");
+WriteLiteral(">Show more</a>\r\n");
 
             
             #line 161 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -883,7 +950,7 @@ WriteLiteral(">Show more</a>\n");
             
             #line default
             #line hidden
-WriteLiteral("                            </ul>\n                        </div>\n");
+WriteLiteral("                            </ul>\r\n                        </div>\r\n");
 
             
             #line 164 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -892,7 +959,7 @@ WriteLiteral("                            </ul>\n                        </div>\
             
             #line default
             #line hidden
-WriteLiteral("                </div>\n\n");
+WriteLiteral("                </div>\r\n\r\n");
 
             
             #line 167 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -921,7 +988,7 @@ WriteLiteral(">");
             
             #line default
             #line hidden
-WriteLiteral("</p>\n");
+WriteLiteral("</p>\r\n");
 
             
             #line 170 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -936,8 +1003,8 @@ WriteLiteral(" class=\"qualificationsStatic\"");
 
 WriteLiteral(">Your chosen training provider can advise you about the qualifications open to ap" +
 "prentices as they can change depending on individual and other circumstances.</p" +
-">\n            </dd>\n\n            <dt>Professional registration</dt>\n            " +
-"<dd>");
+">\r\n            </dd>\r\n\r\n            <dt>Professional registration</dt>\r\n        " +
+"    <dd>");
 
             
             #line 175 "..\..\Views\Apprenticeship\Framework.cshtml"
@@ -946,11 +1013,11 @@ WriteLiteral(">Your chosen training provider can advise you about the qualificat
             
             #line default
             #line hidden
-WriteLiteral("</dd>\n        </dl>\n\n        <div");
+WriteLiteral("</dd>\r\n        </dl>\r\n\r\n        <div");
 
 WriteLiteral(" id=\"bottom-actions\"");
 
-WriteLiteral(">\n            <a");
+WriteLiteral(">\r\n            <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
@@ -958,20 +1025,22 @@ WriteLiteral(" rel=\"nofollow\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8062), Tuple.Create("\"", 8197)
+WriteAttribute("href", Tuple.Create(" href=\"", 8239), Tuple.Create("\"", 8374)
             
             #line 179 "..\..\Views\Apprenticeship\Framework.cshtml"
-                           , Tuple.Create(Tuple.Create("", 8069), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+                           , Tuple.Create(Tuple.Create("", 8246), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 8069), false)
+, 8246), false)
 );
 
-WriteLiteral(">\n                Find training providers\n            </a>\n        </div>\n    </s" +
-"ection>\n</main>\n\n");
+WriteLiteral(">\r\n                Find training providers\r\n            </a>\r\n        </div>\r\n   " +
+" </section>\r\n</main>\r\n\r\n");
 
-WriteLiteral("\n");
+WriteLiteral("\r\n");
+
+WriteLiteral("\r\n");
 
         }
     }

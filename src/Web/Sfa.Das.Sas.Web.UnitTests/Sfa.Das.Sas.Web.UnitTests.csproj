@@ -190,7 +190,6 @@
     <Compile Include="Infrastructure\Web\Services\ForMappingApprenticeshipSearchResponseToViewModel.cs" />
     <Compile Include="Infrastructure\Web\ExtensionHelpers\HtmlAgilityPackExtensions.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingApprenticeshipSearchResultItemToViewModel.cs" />
-    <Compile Include="Infrastructure\Web\Services\ForMappingGetStandardResponseToViewModel.cs" />
     <Compile Include="Infrastructure\Web\Services\ForProviderSearchMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Views\ForApprenticeshipSearchResultPage.cs" />
     <Compile Include="Infrastructure\Web\Views\Provider\FilterProviderPageTest.cs" />

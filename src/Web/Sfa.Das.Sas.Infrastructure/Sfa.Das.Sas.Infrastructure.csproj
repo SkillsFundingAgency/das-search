@@ -139,8 +139,6 @@
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
-    <Compile Include="Mapping\ITypicalLengthMapping.cs" />
-    <Compile Include="Mapping\TypicalLengthMapping.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />

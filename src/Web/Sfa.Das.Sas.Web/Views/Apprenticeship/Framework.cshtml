@@ -59,7 +59,7 @@
                 <dd class="overviewText">@Model.FrameworkOverview </dd>
             }
             @GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
-            @GetStandardProperty("Typical length", "length", Model.TypicalLengthMessage)
+            @GetDurationProperty("Typical length", "length", Model.Duration.ToString())
             @GetFundingBandProperty(Model.MaxFunding)
             <dt>Entry requirements</dt>
             <dd class="entry-requirements">
@@ -185,11 +185,20 @@
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
         <dt>@title</dt>
         <dd id="@id">@item</dd>
+    }
 }
+
+@helper GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">@item months</dd>
+    }
 }
 
 @helper GetFundingBandProperty(int value)

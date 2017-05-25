@@ -205,7 +205,6 @@ namespace Sfa.Das.Sas.Web.Services
 
             // Nexzt
             cfg.CreateMap<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>()
-                .ForMember(x => x.TypicalLengthMessage, y => y.Ignore()) // set in aftermap
                 .ForMember(x => x.ApprenticeshipType, y => y.Ignore()) // set in aftermap
                 .AfterMap<ApprenticeshipSearchResultItemViewModelMappingAction>();
         }
@@ -225,7 +224,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
                 .ForMember(x => x.StandardPdf, y => y.MapFrom(z => z.Standard.StandardPdf))
                 .ForMember(x => x.Title, y => y.MapFrom(z => z.Standard.Title))
-                .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.Standard.TypicalLength)))
+                .ForMember(x => x.Duration, y => y.MapFrom(z => z.Standard.Duration))
                 .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))
                 ;
 
@@ -244,8 +243,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.MaxFunding, y => y.MapFrom(z => z.Framework.MaxFunding))
                 .ForMember(x => x.ProfessionalRegistration, y => y.ResolveUsing<FrameworkInformationResolver>().FromMember(z => z.Framework.ProfessionalRegistration))
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
+                .ForMember(x => x.Duration, y => y.MapFrom(z => z.Framework.Duration))
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
-                .ForMember(x => x.TypicalLengthMessage, y => y.MapFrom(z => ApprenticeshipMappingHelper.GetTypicalLengthMessage(z.Framework.TypicalLength)))
                 ;
         }
 

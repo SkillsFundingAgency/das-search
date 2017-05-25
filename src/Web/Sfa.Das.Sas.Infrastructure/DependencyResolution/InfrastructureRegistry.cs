@@ -55,7 +55,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
-            For<ITypicalLengthMapping>().Use<TypicalLengthMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
         }

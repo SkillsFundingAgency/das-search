@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Nest;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
-using SFA.DAS.NLog.Logger;
-
-
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Nest;
+    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.ApplicationServices;
+    using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Core.Configuration;
+
     public sealed class ElasticsearchApprenticeshipSearchProvider : IApprenticeshipSearchProvider
     {
         private const string LevelAggregateName = "level";
@@ -37,31 +35,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return MapToApprenticeshipSearchResults(take, selectedLevels, formattedKeywords, results, levelAggregation);
         }
 
-        private static IEnumerable<ApprenticeshipSearchResultsItem> MapTypicalLength(IEnumerable<ApprenticeshipSearchResultsItem> documents)
-        {
-            return documents.Select(apprenticeshipSearchResultsItem => new ApprenticeshipSearchResultsItem
-                {
-                    Duration = apprenticeshipSearchResultsItem.Duration,
-                    FrameworkId = apprenticeshipSearchResultsItem.FrameworkId,
-                    FrameworkName = apprenticeshipSearchResultsItem.FrameworkName,
-                    JobRoleItems = apprenticeshipSearchResultsItem.JobRoleItems,
-                    JobRoles = apprenticeshipSearchResultsItem.JobRoles,
-                    Keywords = apprenticeshipSearchResultsItem.Keywords,
-                    Level = apprenticeshipSearchResultsItem.Level,
-                    PathwayName = apprenticeshipSearchResultsItem.PathwayName,
-                    Published = apprenticeshipSearchResultsItem.Published,
-                    StandardId = apprenticeshipSearchResultsItem.StandardId,
-                    Title = apprenticeshipSearchResultsItem.Title,
-                    TypicalLength = new TypicalLength
-                    {
-                        From = apprenticeshipSearchResultsItem.Duration,
-                        To = apprenticeshipSearchResultsItem.Duration,
-                        Unit = "m"
-                    }
-                })
-                .ToList();
-        }
-
         private static ApprenticeshipSearchResults MapToApprenticeshipSearchResults(
             int take,
             IEnumerable<int> selectedLevels,
@@ -74,7 +47,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 TotalResults = results.HitsMetaData?.Total ?? 0,
                 ResultsToTake = take,
                 SearchTerm = formattedKeywords,
-                Results = MapTypicalLength(results.Documents),
+                Results = results.Documents,
                 HasError = results.ApiCall.HttpStatusCode != 200,
                 LevelAggregation = levelAggregation,
                 SelectedLevels = selectedLevels

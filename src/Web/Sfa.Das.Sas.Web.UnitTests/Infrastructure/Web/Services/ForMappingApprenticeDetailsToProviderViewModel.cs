@@ -81,25 +81,5 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             viewModel.LocationAddressLine.Should().BeEquivalentTo("Location 1, 12, test bay, Market place, Sea Town, Greensville, AB12 3ED");
         }
-
-        [Test]
-        public void WhenTypicalLengthIsEmpty()
-        {
-            MappingService mappingService = new MappingService(null);
-
-            var providerResult = new ApprenticeshipDetails()
-            {
-                Product = new ApprenticeshipProduct()
-                {
-                    EmployerSatisfaction = 8.3,
-                    LearnerSatisfaction = null
-                }
-            };
-
-            var viewModel = mappingService.Map<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>(providerResult);
-
-            viewModel.EmployerSatisfactionMessage.Should().Be("8.3%");
-            viewModel.LearnerSatisfactionMessage.Should().Be("no data available");
-        }
     }
 }

@@ -34,7 +34,7 @@
         </header>
         <dl class="data-list">
             @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
-            @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
+            @GetDurationProperty("Typical length", "length", Model.Duration.ToString())
             @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
@@ -59,11 +59,20 @@
 </main>
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-    <dt>@title</dt>
-    <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+    }
 }
+
+@helper GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">@item months</dd>
+    }
 }
 
 @helper GetFundingBandProperty(int value)
