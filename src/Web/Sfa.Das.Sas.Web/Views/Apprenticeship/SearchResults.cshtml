@@ -99,7 +99,7 @@
                         </header>
                         <dl class="result-data-list">
                             @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                            @GetApprenticeshipDuration("Typical length:", "length", item.Duration.ToString())
                         </dl>
                     </article>
                 }
@@ -186,12 +186,22 @@
 
 @helper GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
 {
-    if (string.IsNullOrEmpty(item))
-    {
-        return;
-    }
+if (string.IsNullOrEmpty(item))
+{
+    return;
+}
     <dt><b>@title</b></dt>
     <dd class="@id">@item @unit</dd>
+}
+
+@helper GetApprenticeshipDuration(string title, string id, string item, string unit = "")
+{
+if (string.IsNullOrEmpty(item))
+{
+    return;
+}
+    <dt><b>@title</b></dt>
+    <dd class="@id">@item months</dd>
 }
 
 @helper FilterForm(string className)

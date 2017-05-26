@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
 
         public List<string> Keywords { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
+        public int Duration { get; set; }
 
         public string IntroductoryText { get; set; }
 

@@ -35,7 +35,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 {
                     Title = "Abba: Abba",
                     ExpiryDate = new DateTime(1882, 09, 04),
-                    TypicalLength = new TypicalLength { From = 12, To = 18, Unit = "m" },
                     JobRoleItems = new List<JobRoleItem> { new JobRoleItem { Description = "Description 1", Title = "Title1" } }
                 }
             };
@@ -43,7 +42,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             var viewModel = service.Map<GetFrameworkResponse, FrameworkViewModel>(framework);
 
             viewModel.ExpiryDateString.Should().Be("5 September 1882");
-            viewModel.TypicalLengthMessage.Should().Be("12 to 18 months");
             viewModel.JobRoles.FirstOrDefault().Should().Be("Title1");
             viewModel.Title.ShouldBeEquivalentTo("Abba");
         }

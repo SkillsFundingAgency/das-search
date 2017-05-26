@@ -2,7 +2,6 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 
@@ -21,7 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
         [TestCase(8, "8 (equivalent to doctorate)")]
         [TestCase(9, "")]
         [TestCase(null, "")]
-        public void WhenTypicalLengthIsEmpty(int level, string expected)
+        public void WhenLevelIsMapped(int level, string expected)
         {
             MappingService mappingService = new MappingService(null);
 
@@ -33,8 +32,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 PathwayName = "Pathway name",
                 JobRoles = new List<string> { "Job role" },
                 Keywords = new List<string> { "Keyword" },
-                Title = "Title",
-                TypicalLength = new TypicalLength { From = 3, To = 6, Unit = "m" }
+                Title = "Title"
             };
 
             var viewModel = mappingService.Map<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>(apprenticeshipResult);

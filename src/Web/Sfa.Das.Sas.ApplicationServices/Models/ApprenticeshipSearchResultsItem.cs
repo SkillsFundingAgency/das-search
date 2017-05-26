@@ -14,8 +14,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public List<string> Keywords { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
-
         // Frameworks
         public string FrameworkId { get; set; }
 
@@ -28,5 +26,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
         public bool Published { get; set; }
+
+        public int Duration { get; set; }
     }
 }

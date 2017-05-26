@@ -31,7 +31,7 @@
 
         public string ProfessionalRegistration { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
+        public int Duration { get; set; }
 
         public DateTime? ExpiryDate { get; set; }
 

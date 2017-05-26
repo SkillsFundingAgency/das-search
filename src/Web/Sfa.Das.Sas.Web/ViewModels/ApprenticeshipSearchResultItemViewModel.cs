@@ -6,7 +6,7 @@
 
         public string Title { get; set; }
 
-        public string TypicalLengthMessage { get; set; }
+        public int Duration { get; set; }
 
         // Frameworks
         public string FrameworkId { get; set; }

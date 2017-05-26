@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public List<string> Keywords { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
+        public int Duration { get; set; }
 
         public string IntroductoryText { get; set; }
 
