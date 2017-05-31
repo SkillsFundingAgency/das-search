@@ -42,14 +42,20 @@ namespace Sfa.Das.Sas.Web
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            Exception ex = Server.GetLastError().GetBaseException();
+            var ex = Server.GetLastError().GetBaseException();
             var logger = DependencyResolver.Current.GetService<SFA.DAS.NLog.Logger.ILog>();
 
-            if (ex is HttpException
-                && ((HttpException)ex).GetHttpCode() != 404 
-                && !UrlContains("findatrainingorganisation.nas.apprenticeships.org.uk"))
+            if (ex is HttpException)
             {
-                logger.Error(ex, "App_Error");
+                var statusCode = ((HttpException)ex).GetHttpCode();
+                if (statusCode == 404 || ex.Message.Contains("Request.Path"))
+                {
+                    logger.Warn(ex, ex.Message);
+                }
+                else
+                {
+                    logger.Error(ex, "App_Error");
+                }
             }
         }
 
