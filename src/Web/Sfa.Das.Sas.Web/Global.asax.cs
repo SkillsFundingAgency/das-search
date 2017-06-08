@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Web
         protected void Application_Error(object sender, EventArgs e)
         {
             var ex = Server.GetLastError().GetBaseException();
-            var logger = DependencyResolver.Current.GetService<SFA.DAS.NLog.Logger.ILog>();
+            var logger = DependencyResolver.Current.GetService<ILog>();
 
             if (ex is HttpException)
             {
@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Web
 
             HttpContext context = base.Context;
 
-            _logger.Info($"{context.Request.HttpMethod} {context.Request.Path}");
+            _logger.Info($"{context.Request.HttpMethod} {context.Request.Path}?{context.Request.QueryString}");
         }
 
         protected void Application_EndRequest()
