@@ -61,8 +61,8 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 187 "..\..\Views\Apprenticeship\Framework.cshtml"
  
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
 
 
 #line default
@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8673), Tuple.Create("\"", 8681)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8665), Tuple.Create("\"", 8673)
 
 #line 191 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 8678), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 8670), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 8678), false)
+, 8670), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -103,7 +103,7 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
 #line 192 "..\..\Views\Apprenticeship\Framework.cshtml"
-    }
+}
 
 
 #line default
@@ -124,8 +124,8 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 196 "..\..\Views\Apprenticeship\Framework.cshtml"
  
-    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-    {
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
 
 
 #line default
@@ -143,14 +143,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8900), Tuple.Create("\"", 8908)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8880), Tuple.Create("\"", 8888)
 
 #line 200 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 8905), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 8885), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 8905), false)
+, 8885), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -166,7 +166,7 @@ WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 
 
 #line 201 "..\..\Views\Apprenticeship\Framework.cshtml"
-    }
+}
 
 
 #line default
@@ -187,13 +187,13 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 205 "..\..\Views\Apprenticeship\Framework.cshtml"
  
-    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
+var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Funding cap<br />(from 1 May 2017)</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt>Current funding cap</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
@@ -210,8 +210,8 @@ WriteTo(__razor_helper_writer, fundingCapFormatted);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, " per apprentice.<br />\r\n        <a");
 
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
-"-work/apprenticeship-levy-how-it-will-work\"");
+WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-em" +
+"ployers#funding-for-your-apprenticeship\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 

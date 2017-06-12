@@ -193,7 +193,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Funding cap<br />(from 1 May 2017)</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt>Current funding cap</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
@@ -210,8 +210,8 @@ WriteTo(__razor_helper_writer, fundingCapFormatted);
 #line hidden
 WriteLiteralTo(__razor_helper_writer, " per apprentice.<br />\r\n        <a");
 
-WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
-"-work/apprenticeship-levy-how-it-will-work\"");
+WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-em" +
+"ployers#funding-for-your-apprenticeship\"");
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
@@ -239,22 +239,22 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 90 "..\..\Views\Apprenticeship\Standard.cshtml"
  
-if (!string.IsNullOrEmpty(title))
-{
+    if (!string.IsNullOrEmpty(title))
+    {
 
 
 #line default
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3907), Tuple.Create("\"", 3921)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3897), Tuple.Create("\"", 3911)
 
 #line 94 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3914), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3904), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3914), false)
+, 3904), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -274,7 +274,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n
 
 
 #line 98 "..\..\Views\Apprenticeship\Standard.cshtml"
-}
+    }
 
 
 #line default
