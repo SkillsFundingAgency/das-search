@@ -193,7 +193,7 @@ var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Current funding cap</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt>Current funding band</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 

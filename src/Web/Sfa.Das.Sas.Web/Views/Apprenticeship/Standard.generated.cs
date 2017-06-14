@@ -193,7 +193,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <dt>Current funding cap</dt>\r\n");
+WriteLiteralTo(__razor_helper_writer, "    <dt>Current funding band</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "    <dd");
 
@@ -247,14 +247,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3897), Tuple.Create("\"", 3911)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 3898), Tuple.Create("\"", 3912)
 
 #line 94 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3904), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 3905), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 3904), false)
+, 3905), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
