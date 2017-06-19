@@ -553,7 +553,6 @@
     <Content Include="Content\src\styles\custom-elements\_address.scss" />
     <Content Include="Content\src\styles\custom-elements\_results.scss" />
     <Content Include="Content\favicons\manifest.json" />
-    <Content Include="Content\src\styles\_fontawesome.scss" />
     <Content Include="JSLintNet.json" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
