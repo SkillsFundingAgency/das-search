@@ -449,6 +449,7 @@
     <Content Include="Content\dist\css\screen.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\arrow-sprite.png" />
     <Content Include="Content\dist\images\gov.uk_logotype_crown.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
