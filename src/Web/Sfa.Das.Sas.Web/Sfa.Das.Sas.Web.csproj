@@ -449,6 +449,7 @@
     <Content Include="Content\dist\css\screen.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\arrow-sprite.png" />
     <Content Include="Content\dist\images\gov.uk_logotype_crown.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -553,7 +554,6 @@
     <Content Include="Content\src\styles\custom-elements\_address.scss" />
     <Content Include="Content\src\styles\custom-elements\_results.scss" />
     <Content Include="Content\favicons\manifest.json" />
-    <Content Include="Content\src\styles\_fontawesome.scss" />
     <Content Include="JSLintNet.json" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

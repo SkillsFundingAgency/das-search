@@ -2,7 +2,6 @@
 @import "govuk-elements";
 @import "_elements";
 @import "_fonts";
-@import "_fontawesome";
 
 @import "custom-elements/_data-list";
 @import "custom-elements/_address";
@@ -370,22 +369,25 @@ aside h2:first-child {
         color: #2e358b;
         float: left;
         font-size: 3.5em;
-        margin-right: 10px;
-        margin-top: -0.2em;
+        margin: 0;
+        display: block;
+        width: 30px;
+        height: 40px;
+        background: url('/Content/dist/images/arrow-sprite.png');
+        background-position: -4px -2px;
     }
     &.next {
         float: right;
         text-align: right;
         .arrow-button {
             float: right;
-            margin-right: 0;
-            margin-left: 10px;
+            background-position: -86px -2px;
         }
     }
     .hide-mob {
         display: none;
-        @media screen and (max-width: 640px) {
-            display: block;
+        @media screen and (min-width: 640px) {
+            display: inline-block;
         }
     }
 }
