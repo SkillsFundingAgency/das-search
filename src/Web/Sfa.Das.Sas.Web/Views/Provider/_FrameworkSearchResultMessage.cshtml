@@ -22,11 +22,6 @@
             Results labelled <span class="tag tag-national">National</span> are training options run by providers who are willing to offer training across England.
         </p>
     }
-
-    @if (Model.IsLevyPayingEmployer == false)
-    {
-        @Html.Partial("_RoatpNonLevyResultsMessage")
-    }
 </div>
 
 @helper  RenderMessage()
