@@ -7,13 +7,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     public class StandardMapping : IStandardMapping
     {
-        private readonly ITypicalLengthMapping _typicalLengthMapping;
-
-        public StandardMapping(ITypicalLengthMapping typicalLengthMapping)
-        {
-            _typicalLengthMapping = typicalLengthMapping;
-        }
-
         public Standard MapToStandard(ApiStandard document)
         {
             return new Standard
@@ -26,7 +19,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 JobRoles = document.JobRoles.ToList(),
                 Keywords = document.Keywords.ToList(),
                 MaxFunding = document.MaxFunding,
-                TypicalLength = _typicalLengthMapping.MapTypicalLength(document.TypicalLength),
+                Duration = document.Duration,
                 IntroductoryText = document.IntroductoryText,
                 EntryRequirements = document.EntryRequirements,
                 WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
@@ -48,7 +41,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 IsPublished = document.Published,
                 JobRoles = document.JobRoles,
                 Keywords = document.Keywords,
-                TypicalLength = document.TypicalLength,
+                Duration = document.Duration,
                 IntroductoryText = document.IntroductoryText,
                 EntryRequirements = document.EntryRequirements,
                 WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,

@@ -12,11 +12,12 @@
 
         public int MaxFunding { get; set; }
 
-        public string TypicalLengthMessage { get; set; }
+        public int Duration { get; set; }
 
         public string ExpiryDateString { get; set; }
 
         public string SearchTerm { get; set; }
+
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }

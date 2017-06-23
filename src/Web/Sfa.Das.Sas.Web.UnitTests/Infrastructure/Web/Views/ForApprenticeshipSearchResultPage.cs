@@ -148,7 +148,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                                   new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months"
+                                        Duration = 72
                                       },
                                   new ApprenticeshipSearchResultItemViewModel
                                       {
@@ -182,7 +182,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                                   new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                                   new ApprenticeshipSearchResultItemViewModel
@@ -216,67 +215,56 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       }
                 },
                 ActualPage = 1,
                 LastPage = 2,
-                ResultsToTake = 10,
                 HasError = false,
                 AggregationLevel = new List<LevelAggregationViewModel>()
             };
@@ -299,67 +287,56 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       }
                 },
                 ActualPage = 2,
                 LastPage = 3,
-                ResultsToTake = 10,
                 HasError = false,
                 AggregationLevel = new List<LevelAggregationViewModel>()
             };
@@ -382,67 +359,56 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        TypicalLengthMessage = "72 months",
                                         StandardId = "3"
                                       }
                 },
                 ActualPage = 3,
                 LastPage = 3,
-                ResultsToTake = 10,
                 HasError = false,
                 AggregationLevel = new List<LevelAggregationViewModel>()
             };
@@ -550,7 +516,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 SearchTerm = searchTerm,
                 Results = results,
                 ActualPage = acctualPage,
-                ResultsToTake = 10,
                 AggregationLevel = aggList
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();

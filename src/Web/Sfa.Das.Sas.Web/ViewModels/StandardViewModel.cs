@@ -14,7 +14,7 @@
 
         public string AssessmentPlanPdf { get; set; }
 
-        public string TypicalLengthMessage { get; set; }
+        public int Duration { get; set; }
 
         public string EntryRequirements { get; set; }
 

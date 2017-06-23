@@ -34,7 +34,7 @@
         </header>
         <dl class="data-list">
             @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
-            @GetStandardProperty("Typical length", "length", @Model.TypicalLengthMessage)
+            @GetDurationProperty("Typical length", "length", Model.Duration.ToString())
             @GetFundingBandProperty(Model.MaxFunding)
             @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
@@ -59,32 +59,41 @@
 </main>
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-    <dt>@title</dt>
-    <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+    }
 }
+
+@helper GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
+{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
+        <dt>@title</dt>
+        <dd id="@id">@item months</dd>
+    }
 }
 
 @helper GetFundingBandProperty(int value)
 {
     var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
-    <dt>Funding cap<br />(from 1 May 2017)</dt>
+    <dt>Current funding band</dt>
     <dd id="funding-cap">
         Up to @fundingCapFormatted per apprentice.<br />
-        <a href="https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will-work/apprenticeship-levy-how-it-will-work" target="_blank">More information about funding</a>
+        <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank">More information about funding</a>
     </dd>
 }
 
 @helper GetDocumentItem(string pdfUrl, string title)
 {
-if (!string.IsNullOrEmpty(title))
-{
+    if (!string.IsNullOrEmpty(title))
+    {
         <li>
             <a href="@pdfUrl" target="_blank">
                 @title
             </a>
         </li>
-}
+    }
 }

@@ -9,13 +9,6 @@
 
     public class FrameworkMapping : IFrameworkMapping
     {
-        private readonly ITypicalLengthMapping _typicalLengthMapping;
-
-        public FrameworkMapping(ITypicalLengthMapping typicalLengthMapping)
-        {
-            _typicalLengthMapping = typicalLengthMapping;
-        }
-
         public Framework MapToFramework(FrameworkSearchResultsItem document)
         {
             var framework = new Framework
@@ -27,7 +20,7 @@
                 FrameworkName = document.FrameworkName,
                 PathwayCode = document.PathwayCode,
                 PathwayName = document.PathwayName,
-                TypicalLength = document.TypicalLength,
+                Duration = document.Duration,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = document.JobRoleItems,
                 CompletionQualifications = document.CompletionQualifications,
@@ -54,7 +47,7 @@
                 PathwayCode = document.PathwayCode,
                 PathwayName = document.PathwayName,
                 MaxFunding = document.MaxFunding,
-                TypicalLength = _typicalLengthMapping.MapTypicalLength(document.TypicalLength),
+                Duration = document.Duration,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = MapJobRoleItems(document.JobRoleItems),
                 CompletionQualifications = document.CompletionQualifications,

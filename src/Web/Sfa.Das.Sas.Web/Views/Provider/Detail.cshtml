@@ -47,13 +47,19 @@
                     <dt>Achievement rates: </dt>
                     <dd>
                         <div class="rating">
-                            <b class="font-small">Achievement average:</b>
-                            <span class="national-rate">
-                                @Model.AchievementRateMessage
-                            </span>
                             @if (Model.AchievementRateMessage != "no data available")
                             {
+                                <b class="font-small">Achievement average:</b>
+                                <span class="national-rate">
+                                    @Model.AchievementRateMessage
+                                </span>
                                 @CreateProgressBar(Model.AchievementRateMessage, Model.AchievementRate)
+                            }
+                            else
+                            {
+                                <span class="national-rate">
+                                    @Model.AchievementRateMessage
+                                </span>
                             }
                         </div>
 
@@ -117,7 +123,7 @@
                         }
                     </dd>
 
-                    @GetStandardPropertyHtml("Legal trading name:", "legal-name", Model.LegalName)
+                    @GetStandardPropertyHtml("Legal name:", "legal-name", Model.LegalName)
                 </dl>
 
                 @if (Model.NationalProvider)

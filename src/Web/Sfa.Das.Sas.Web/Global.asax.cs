@@ -15,6 +15,13 @@ namespace Sfa.Das.Sas.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private ILog _logger;
+
+        public MvcApplication()
+        {
+            _logger = DependencyResolver.Current.GetService<ILog>();
+        }
+
         protected void Application_Start()
         {
             MvcHandler.DisableMvcResponseHeader = true;
@@ -35,14 +42,20 @@ namespace Sfa.Das.Sas.Web
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            Exception ex = Server.GetLastError().GetBaseException();
-            var logger = DependencyResolver.Current.GetService<SFA.DAS.NLog.Logger.ILog>();
+            var ex = Server.GetLastError().GetBaseException();
+            var logger = DependencyResolver.Current.GetService<ILog>();
 
-            if (ex is HttpException
-                && ((HttpException)ex).GetHttpCode() != 404 
-                && !UrlContains("findatrainingorganisation.nas.apprenticeships.org.uk"))
+            if (ex is HttpException)
             {
-                logger.Error(ex, "App_Error");
+                var statusCode = ((HttpException)ex).GetHttpCode();
+                if (statusCode == 404 || ex.Message.Contains("Request.Path"))
+                {
+                    logger.Warn(ex, ex.Message);
+                }
+                else
+                {
+                    logger.Error(ex, "App_Error");
+                }
             }
         }
 
@@ -59,6 +72,11 @@ namespace Sfa.Das.Sas.Web
 
         protected void Application_BeginRequest()
         {
+            _logger = DependencyResolver.Current.GetService<ILog>();
+
+            HttpContext context = base.Context;
+
+            _logger.Info($"{context.Request.HttpMethod} {context.Request.Path}?{context.Request.QueryString}");
         }
 
         protected void Application_EndRequest()

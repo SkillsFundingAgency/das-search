@@ -10,7 +10,7 @@
 <main id="content" role="main">
     <input type="hidden" value="@Model.SearchTerm" id="ga-search-term"/>
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
-
+    
     <hgroup class="hgroup">
         <h1 class="heading-xlarge">
             Search results
@@ -98,7 +98,7 @@
                         </header>
                         <dl class="result-data-list">
                             @GetApprenticeshipDetailItem("Level:", "level", item.Level)
-                            @GetApprenticeshipDetailItem("Typical length:", "length", item.TypicalLengthMessage)
+                            @GetApprenticeshipDuration("Typical length:", "length", item.Duration.ToString())
                         </dl>
                     </article>
                 }
@@ -185,12 +185,22 @@
 
 @helper GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
 {
-    if (string.IsNullOrEmpty(item))
-    {
-        return;
-    }
+if (string.IsNullOrEmpty(item))
+{
+    return;
+}
     <dt><b>@title</b></dt>
     <dd class="@id">@item @unit</dd>
+}
+
+@helper GetApprenticeshipDuration(string title, string id, string item, string unit = "")
+{
+if (string.IsNullOrEmpty(item))
+{
+    return;
+}
+    <dt><b>@title</b></dt>
+    <dd class="@id">@item months</dd>
 }
 
 @helper FilterForm(string className)

@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Nest;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Configuration;
-using SFA.DAS.NLog.Logger;
-
-
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Nest;
+    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.ApplicationServices;
+    using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Core.Configuration;
+
     public sealed class ElasticsearchApprenticeshipSearchProvider : IApprenticeshipSearchProvider
     {
         private const string LevelAggregateName = "level";

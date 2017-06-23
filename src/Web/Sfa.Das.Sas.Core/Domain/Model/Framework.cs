@@ -23,8 +23,6 @@
 
         public int MaxFunding { get; set; }
 
-        public TypicalLength TypicalLength { get; set; }
-
         public DateTime? ExpiryDate { get; set; }
 
         public string CompletionQualifications { get; set; }
@@ -42,5 +40,7 @@
         public IEnumerable<string> KnowledgeQualification { get; set; }
 
         public IEnumerable<string> CombinedQualification { get; set; }
+
+        public int Duration { get; set; }
     }
 }
