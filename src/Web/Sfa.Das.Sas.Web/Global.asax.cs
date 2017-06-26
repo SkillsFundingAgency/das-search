@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Web
 
             HttpContext context = base.Context;
 
-            _logger.Info($"{context.Request.HttpMethod} {context.Request.Path}?{context.Request.QueryString}");
+            _logger.Info($"{context.Request.HttpMethod} {context.Request.Url.PathAndQuery}");
         }
 
         protected void Application_EndRequest()
