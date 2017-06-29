@@ -122,7 +122,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             var searchResults = await _searchService.SearchStandardProviders(
                 message.ApprenticeshipId,
                 message.PostCode,
-                new Pagination { Page = pageNumber, Take = 10 },
+                new Pagination { Page = pageNumber, Take = _paginationSettings.DefaultResultsAmount },
                 message.DeliveryModes,
                 message.NationalProvidersOnly,
                 message.ShowAll,
