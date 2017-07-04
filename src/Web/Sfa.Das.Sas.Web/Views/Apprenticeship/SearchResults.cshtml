@@ -87,7 +87,7 @@
                     </div>
                 </form>
 
-                @{ var index = (Model.ActualPage * 10) - 10; }
+                @{ var index = PagingHelper.GetPageIndex(Model.ActualPage); }
                 @foreach (var item in Model.Results)
                 {
                     index += 1;
