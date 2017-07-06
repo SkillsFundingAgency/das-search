@@ -7,6 +7,7 @@ using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.ApplicationServices.Settings;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -15,11 +16,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private ApprenticeshipSearchHandler _sut;
         private Mock<IApprenticeshipSearchService> _mockApprenticeshipSearchService;
+        private Mock<IPaginationSettings> _mockPaginationSettings;
 
         [SetUp]
         public void Init()
         {
             _mockApprenticeshipSearchService = new Mock<IApprenticeshipSearchService>();
+            _mockPaginationSettings = new Mock<IPaginationSettings>();
 
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
@@ -29,7 +32,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                     TotalResults = 20
                 });
 
-            _sut = new ApprenticeshipSearchHandler(_mockApprenticeshipSearchService.Object);
+            _sut = new ApprenticeshipSearchHandler(_mockApprenticeshipSearchService.Object, _mockPaginationSettings.Object);
         }
 
         [Test]

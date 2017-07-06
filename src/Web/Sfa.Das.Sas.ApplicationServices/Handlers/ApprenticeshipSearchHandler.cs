@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.ApplicationServices.Settings;
@@ -10,10 +9,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class ApprenticeshipSearchHandler : IRequestHandler<ApprenticeshipSearchQuery, ApprenticeshipSearchResponse>
     {
         private readonly IApprenticeshipSearchService _searchService;
+        private readonly IPaginationSettings _paginationSettings;
 
-        public ApprenticeshipSearchHandler(IApprenticeshipSearchService searchService)
+        public ApprenticeshipSearchHandler(IApprenticeshipSearchService searchService, IPaginationSettings paginationSettings)
         {
             _searchService = searchService;
+            _paginationSettings = paginationSettings;
         }
 
         public ApprenticeshipSearchResponse Handle(ApprenticeshipSearchQuery message)
@@ -26,7 +27,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             message.Page = message.Page <= 0 ? 1 : message.Page;
 
-            var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, message.Take, message.Order, message.SelectedLevels);
+            var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, _paginationSettings.DefaultResultsAmount, message.Order, message.SelectedLevels);
 
             response.ActualPage = message.Page;
             response.AggregationLevel = searchResults.LevelAggregation;

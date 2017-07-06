@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using FluentAssertions;
+using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using RazorGenerator.Testing;
+using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
 using Sfa.Das.Sas.Web.ViewModels;
 using Sfa.Das.Sas.Web.Views.Apprenticeship;
@@ -13,6 +17,19 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
     [TestFixture]
     public sealed class ForApprenticeshipSearchResultPage : ViewTestBase
     {
+        private IPaginationSettings _paginationSettingsMock;
+
+        [SetUp]
+        public void Setup()
+        {
+            _paginationSettingsMock = Substitute.For<IPaginationSettings>();
+            _paginationSettingsMock.DefaultResultsAmount.Returns(10);
+            var dependencyResolver = Substitute.For<IDependencyResolver>();
+            dependencyResolver.GetService<IPaginationSettings>().Returns(_paginationSettingsMock);
+
+            DependencyResolver.SetResolver(dependencyResolver);
+        }
+
         [Test]
         public void WhenSearchResultHasErrors()
         {
@@ -265,7 +282,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 },
                 ActualPage = 1,
                 LastPage = 2,
-                ResultsToTake = 10,
                 HasError = false,
                 AggregationLevel = new List<LevelAggregationViewModel>()
             };
@@ -338,7 +354,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 },
                 ActualPage = 2,
                 LastPage = 3,
-                ResultsToTake = 10,
                 HasError = false,
                 AggregationLevel = new List<LevelAggregationViewModel>()
             };
@@ -411,7 +426,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 },
                 ActualPage = 3,
                 LastPage = 3,
-                ResultsToTake = 10,
                 HasError = false,
                 AggregationLevel = new List<LevelAggregationViewModel>()
             };
@@ -504,7 +518,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
         [TestCase(1, "All Others", 2, Description = "On second page")]
         [TestCase(4, "All Others", 2, Description = "On second page")]
         [TestCase(7, "All Others", 2, Description = "On second page")]
-        public void ShouldAddIntervalToResultsForGoogleAnalytics(int resultIndex, string expectedText, int acctualPage)
+        public void ShouldAddIntervalToResultsForGoogleAnalytics(int resultIndex, string expectedText, int actualPage)
         {
             var searchPage = new SearchResults();
             var aggList = new List<LevelAggregationViewModel> { new LevelAggregationViewModel { Checked = false, Count = 36, Value = "1" }, new LevelAggregationViewModel { Checked = true, Count = 500, Value = "2" } };
@@ -518,8 +532,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 TotalResults = 10,
                 SearchTerm = searchTerm,
                 Results = results,
-                ActualPage = acctualPage,
-                ResultsToTake = 10,
+                ActualPage = actualPage,
                 AggregationLevel = aggList
             };
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
