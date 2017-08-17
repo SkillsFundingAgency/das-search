@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using System;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Linq;
     using System.Net;
@@ -174,6 +176,12 @@
                 }));
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult ProviderDetails()
+        {
+            return View();
         }
 
         [HttpGet]

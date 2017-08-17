@@ -729,6 +729,7 @@
     <Content Include="Transform.ServiceDefinition.SystemTest.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Provider\ProviderDetails.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
