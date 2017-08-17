@@ -1,3 +1,4 @@
+using System;
 using System.Web;
 using MediatR;
 
@@ -6,6 +7,7 @@ using Sfa.Das.Sas.Web.Factories.Interfaces;
 using Sfa.Das.Sas.Web.Logging;
 using Sfa.Das.Sas.Web.Services;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Providers.Api.Client;
 using StructureMap;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
@@ -21,7 +23,9 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
 
             For<IMappingService>().Use<MappingService>();
             For<ICookieService>().Use<CookieService>();
+            For<IProviderService>().Use<ProviderService>();
 
+            For<SFA.DAS.Providers.Api.Client.IProviderApiClient>().Use(x => new ProviderApiClient(null));
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
 
             For<IValidation>().Use<Validation>();

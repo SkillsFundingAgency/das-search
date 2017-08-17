@@ -5,16 +5,19 @@ using System.Text;
 using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Web.Services;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
     public sealed class SitemapController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IProviderService _providerService;
 
-        public SitemapController(IMediator mediator)
+        public SitemapController(IMediator mediator, IProviderService providerService)
         {
             _mediator = mediator;
+            _providerService = providerService;
         }
 
         public ActionResult Root()
@@ -72,14 +75,12 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult Providers()
         {
             var baseUrl = GetBaseUrl();
-            var providers = new SFA.DAS.Providers.Api.Client.ProviderApiClient();
-            var res = providers.FindAll()
-                .ToDictionary(x => x.Ukprn, x => x.ProviderName);
+            var providers = _providerService.GetProviderList();
 
             var builder = new StringBuilder();
             builder.AppendLine(@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">");
 
-            foreach (var provider in res)
+            foreach (var provider in providers)
             {
                 var modifiedProviderName = ModifyProviderNameForUrl(provider.Value);
                 var details = $"{baseUrl}/provider/{provider.Key}/{modifiedProviderName}";
