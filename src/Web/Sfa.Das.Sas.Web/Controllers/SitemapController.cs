@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using MediatR;
@@ -71,19 +73,18 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var baseUrl = GetBaseUrl();
             var providers = new SFA.DAS.Providers.Api.Client.ProviderApiClient();
-            var res = providers.FindAll();
+            var res = providers.FindAll()
+                .ToDictionary(x => x.Ukprn, x => x.ProviderName);
+
             var builder = new StringBuilder();
             builder.AppendLine(@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">");
 
             foreach (var provider in res)
             {
-                var modifiedProviderName = ModifyProviderNameForUrl(provider.ProviderName);
-                builder.AppendLine(@"<url>");
-                builder.AppendLine(@"<loc>");
-                var details = $"{baseUrl}/provider/{provider.Ukprn}/{modifiedProviderName}";
-                builder.AppendLine(details);
-                builder.AppendLine(@"</loc>");
-                builder.AppendLine(@"</url>");
+                var modifiedProviderName = ModifyProviderNameForUrl(provider.Value);
+                var details = $"{baseUrl}/provider/{provider.Key}/{modifiedProviderName}";
+                var urlLocElement = BuildUrlLocElement(details);
+                builder.AppendLine(urlLocElement);
             }
 
             builder.AppendLine(@"</urlset>");
@@ -91,9 +92,20 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(builder.ToString(), "text/xml");
         }
 
-        private string ModifyProviderNameForUrl(string providerName)
+        private static string BuildUrlLocElement(string details)
         {
-            var firstpass = providerName.ToLower().Replace(" ", "-");
+            var item = new StringBuilder();
+            item.AppendLine(@"<url>");
+            item.AppendLine(@"<loc>");
+            item.AppendLine(details);
+            item.AppendLine(@"</loc>");
+            item.AppendLine(@"</url>");
+            return item.ToString();
+        }
+
+        private static string ModifyProviderNameForUrl(string providerName)
+        {
+            var firstpass = providerName.ToLower().Replace("&", "and").Replace("+", "and").Replace(" ", "-");
             var secondpass = new StringBuilder();
             foreach (var c in firstpass)
             {
@@ -103,8 +115,14 @@ namespace Sfa.Das.Sas.Web.Controllers
                 }
             }
 
-            return secondpass.ToString();
+            var thirdpass = secondpass.ToString();
 
+            while (thirdpass.Contains("--"))
+            {
+                thirdpass = thirdpass.Replace("--", "-");
+            }
+
+            return thirdpass;
         }
 
         private string GetBaseUrl()
