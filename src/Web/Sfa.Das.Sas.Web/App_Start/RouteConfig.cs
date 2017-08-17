@@ -38,6 +38,6 @@ namespace Sfa.Das.Sas.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Start", action = "Start", id = UrlParameter.Optional });
-            }
+        }
     }
 }
