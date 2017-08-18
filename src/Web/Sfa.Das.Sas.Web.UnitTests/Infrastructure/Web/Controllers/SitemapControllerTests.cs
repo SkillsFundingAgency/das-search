@@ -18,11 +18,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             var mockContext = new Mock<HttpContextBase>();
             var mockRequest = new Mock<HttpRequestBase>();
-            var prn1 = 11;
-            var prn2 = 2;
-            var name1 = "eleven";
-            var name2 = "a-two";
-
+            const long prn1 = 11;
+            const long prn2 = 2;
+            const string name1 = "eleven";
+            const string name2 = "a-two";
 
             const string dummyDomain = "http://test.com";
             mockRequest.Setup(x => x.Url).Returns(new System.Uri(dummyDomain + "/dummy-path-and-query"));
