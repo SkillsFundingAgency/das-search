@@ -4,14 +4,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using ApplicationServices.Queries;
+    using ApplicationServices.Responses;
+    using Core.Configuration;﻿
+    using Extensions;
     using MediatR;
+    using Services;
     using SFA.DAS.NLog.Logger;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Responses;
-    using Sfa.Das.Sas.Core.Configuration;﻿
-    using Sfa.Das.Sas.Web.Extensions;
-    using Sfa.Das.Sas.Web.Services;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using ViewModels;
 
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller

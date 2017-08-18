@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
 using MediatR;
@@ -32,11 +30,11 @@ namespace Sfa.Das.Sas.Web.Controllers
      <sitemap>
        <loc>{baseUrl}/sitemap/frameworks</loc>
      </sitemap>
- <sitemap>
+     <sitemap>
        <loc>{baseUrl}/sitemap/providers</loc>
      </sitemap>
 </sitemapindex>";
-
+            0
             return Content(content, "text/xml");
         }
 
@@ -74,37 +72,14 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult Providers()
         {
-            var baseUrl = GetBaseUrl();
             var providers = _providerService.GetProviderList();
 
-            var builder = new StringBuilder();
-            builder.AppendLine(@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">");
+            var builder = BuildProviderSitemapFromDictionary(providers);
 
-            foreach (var provider in providers)
-            {
-                var modifiedProviderName = ModifyProviderNameForUrl(provider.Value);
-                var details = $"{baseUrl}/provider/{provider.Key}/{modifiedProviderName}";
-                var urlLocElement = BuildUrlLocElement(details);
-                builder.AppendLine(urlLocElement);
-            }
-
-            builder.AppendLine(@"</urlset>");
-
-            return Content(builder.ToString(), "text/xml");
+            return Content(builder, "text/xml");
         }
 
-        private static string BuildUrlLocElement(string details)
-        {
-            var item = new StringBuilder();
-            item.AppendLine(@"<url>");
-            item.AppendLine(@"<loc>");
-            item.AppendLine(details);
-            item.AppendLine(@"</loc>");
-            item.AppendLine(@"</url>");
-            return item.ToString();
-        }
-
-        private static string ModifyProviderNameForUrl(string providerName)
+        public string ModifyProviderNameForUrl(string providerName)
         {
             var firstpass = providerName.ToLower().Replace("&", "and").Replace("+", "and").Replace(" ", "-");
             var secondpass = new StringBuilder();
@@ -126,9 +101,40 @@ namespace Sfa.Das.Sas.Web.Controllers
             return thirdpass;
         }
 
+        private string BuildProviderSitemapFromDictionary(Dictionary<long, string> providers)
+        {
+            var builder = new StringBuilder();
+            var baseUrl = GetBaseUrl();
+
+            builder.AppendLine(@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">");
+
+            foreach (var provider in providers)
+            {
+                var modifiedProviderName = ModifyProviderNameForUrl(provider.Value);
+                var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Key, modifiedProviderName);
+                builder.AppendLine(urlLocElement);
+            }
+
+            builder.Append(@"</urlset>");
+            return builder.ToString();
+        }
+
+        private string BuildUrlLocElementFromDetails(string baseUrl,string grouping, long key, string modifiedProviderName)
+        {
+              var details = $"{baseUrl}/{grouping}/{key}/{modifiedProviderName}";
+
+            return $@"  <url>
+    <loc>
+      {details}
+    </loc>
+  </url>";
+        }
+
         private string GetBaseUrl()
         {
-            return Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
+            return Request == null || Request.Url == null ?
+                string.Empty :
+                Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
         }
     }
 }

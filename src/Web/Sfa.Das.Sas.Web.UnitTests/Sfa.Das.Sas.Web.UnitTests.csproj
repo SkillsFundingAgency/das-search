@@ -175,6 +175,7 @@
     <Compile Include="Infrastructure\Web\Controllers\SharedControllerTests.cs" />
     <Compile Include="Infrastructure\Web\Controllers\StartControllerTests.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ProviderControllerTest\ProviderControllerTests.cs" />
+    <Compile Include="Infrastructure\Web\Controllers\SitemapControllerTests.cs" />
     <Compile Include="Infrastructure\Web\Extensions\ForPostcodeExtension.cs" />
     <Compile Include="Infrastructure\Web\Extensions\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
