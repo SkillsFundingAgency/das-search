@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -35,9 +36,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             var sitemapController = new SitemapController(null,mockProviderService.Object);
             sitemapController.ControllerContext = new ControllerContext(mockContext.Object, new RouteData(), sitemapController);
-            var result = sitemapController.Providers();
+            var result = (ContentResult)sitemapController.Providers();
 
-            string expectedResult = $@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
+            var expectedResult = $@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
   <url>
     <loc>
       {dummyDomain}/provider/11/eleven
@@ -50,7 +51,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
   </url>
 </urlset>";
 
-            Assert.AreEqual(((ContentResult)result).Content, expectedResult);
+            Assert.AreEqual(result.Content, expectedResult,"The xml returned was not as expected");
+           Assert.AreEqual(result.ContentType, "text/xml", "The content type was not xml");
+
         }
     }
 }

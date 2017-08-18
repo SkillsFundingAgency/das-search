@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.Web.Controllers
        <loc>{baseUrl}/sitemap/providers</loc>
      </sitemap>
 </sitemapindex>";
-            0
+
             return Content(content, "text/xml");
         }
 
@@ -132,9 +132,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         private string GetBaseUrl()
         {
-            return Request == null || Request.Url == null ?
-                string.Empty :
-                Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
+               return Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
         }
     }
 }
