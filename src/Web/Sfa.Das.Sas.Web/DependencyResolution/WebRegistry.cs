@@ -1,17 +1,17 @@
-using System;
-using System.Web;
-using MediatR;
-
-using Sfa.Das.Sas.Web.Factories;
-using Sfa.Das.Sas.Web.Factories.Interfaces;
-using Sfa.Das.Sas.Web.Logging;
-using Sfa.Das.Sas.Web.Services;
-using SFA.DAS.NLog.Logger;
-using SFA.DAS.Providers.Api.Client;
-using StructureMap;
+using Sfa.Das.Sas.Web.Helpers;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
 {
+    using System.Web;
+    using Factories;
+    using Factories.Interfaces;
+    using Logging;
+    using MediatR;
+    using Services;
+    using SFA.DAS.NLog.Logger;
+    using SFA.DAS.Providers.Api.Client;
+    using StructureMap;
+
     public class WebRegistry : Registry
     {
         public WebRegistry()
@@ -24,8 +24,9 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IMappingService>().Use<MappingService>();
             For<ICookieService>().Use<CookieService>();
             For<IProviderService>().Use<ProviderService>();
+            For<IStringUrlHelper>().Use<StringUrlHelper>();
 
-            For<SFA.DAS.Providers.Api.Client.IProviderApiClient>().Use(x => new ProviderApiClient(null));
+            For<IProviderApiClient>().Use(x => new ProviderApiClient(null));
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
 
             For<IValidation>().Use<Validation>();

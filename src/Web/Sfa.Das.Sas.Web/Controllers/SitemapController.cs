@@ -3,6 +3,7 @@ using System.Text;
 using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Web.Helpers;
 using Sfa.Das.Sas.Web.Services;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -11,11 +12,13 @@ namespace Sfa.Das.Sas.Web.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IProviderService _providerService;
+        private readonly IStringUrlHelper _stringUrlHelper;
 
-        public SitemapController(IMediator mediator, IProviderService providerService)
+        public SitemapController(IMediator mediator, IProviderService providerService, IStringUrlHelper stringHelper)
         {
             _mediator = mediator;
             _providerService = providerService;
+            _stringUrlHelper = stringHelper;
         }
 
         public ActionResult Root()
@@ -79,28 +82,6 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(builder, "text/xml");
         }
 
-        public string ModifyProviderNameForUrl(string providerName)
-        {
-            var firstpass = providerName.ToLower().Replace("&", "and").Replace("+", "and").Replace(" ", "-");
-            var secondpass = new StringBuilder();
-            foreach (var c in firstpass)
-            {
-                if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || c == '-')
-                {
-                    secondpass.Append(c);
-                }
-            }
-
-            var thirdpass = secondpass.ToString();
-
-            while (thirdpass.Contains("--"))
-            {
-                thirdpass = thirdpass.Replace("--", "-");
-            }
-
-            return thirdpass;
-        }
-
         private string BuildProviderSitemapFromDictionary(Dictionary<long, string> providers)
         {
             var builder = new StringBuilder();
@@ -110,7 +91,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             foreach (var provider in providers)
             {
-                var modifiedProviderName = ModifyProviderNameForUrl(provider.Value);
+                var modifiedProviderName = _stringUrlHelper.ModifyStringForUrlUsage(provider.Value);
                 var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Key, modifiedProviderName);
                 builder.AppendLine(urlLocElement);
             }
