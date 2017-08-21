@@ -7,39 +7,33 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
     [TestFixture]
     public class StringUrlHelperTests
     {
-
-      /*  5 E LTD.
-    TRN(TRAIN) LTD.
-    ACTIVE LEARNING & DEVELOPMENT LIMITED
-    BARKING & DAGENHAM LONDON BOROUGH COUNCIL
-    AMERSHAM & WYCOMBE COLLEGE
-    ASSET TRAINING & CONSULTANCY LIMITED
-    ASTON RECRUITMENT & TRAINING LIMITED
-    BARNARDO'S
-    BARNET & SOUTHGATE COLLEGE
-    BASSETLAW TRAINING AGENCY(PROPERTIES) LIMITED
-    BERKSHIRE COLLEGE OF AGRICULTURE, THE(BCA)
-    BOURNEMOUTH AND POOLE COLLEGE, THE
-    "BMC (BROOKSBY MELTON COLLEGE)"
-    "C.M.S. VOCATIONAL TRAINING LIMITED"
-    DC TRAINING & DEVELOPMENT SERVICES LIMITED
-    EALING, HAMMERSMITH & WEST LONDON COLLEGE
-    "EAST MIDLANDS CHAMBER (DERBYSHIRE, NOTTINGHAMSHIRE, LEICESTERSHIRE)"
-    stringToProcess	"E.QUALITY TRAINING LIMITED"	string
-    "E.Q.V. (UK) LIMITED"
-    FASHION - ENTER LTD
-    MARITIME + ENGINEERING COLLEGE NORTH WEST
-    N & B TRAINING LTD
-    SOUTH & CITY COLLEGE BIRMINGHAM*/
-
         [TestCase("5 E LTD.", "5-e-ltd")]
         [TestCase("TRN(TRAIN) LTD.", "trn-train-ltd")]
-
+        [TestCase("ACTIVE LEARNING & DEVELOPMENT LIMITED", "active-learning-and-development-limited")]
+        [TestCase("BARKING & DAGENHAM LONDON BOROUGH COUNCIL", "barking-and-dagenham-london-borough-council")]
+        [TestCase("BARNARDO'S", "barnardos")]
+        [TestCase("BASSETLAW TRAINING AGENCY(PROPERTIES) LIMITED", "bassetlaw-training-agency-properties-limited")]
+        [TestCase("BERKSHIRE COLLEGE OF AGRICULTURE, THE(BCA)", "berkshire-college-of-agriculture-the-bca")]
+        [TestCase("BOURNEMOUTH AND POOLE COLLEGE, THE", "bournemouth-and-poole-college-the")]
+        [TestCase("C.M.S.VOCATIONAL TRAINING LIMITED", "c-m-s-vocational-training-limited")]
+        [TestCase("EALING, HAMMERSMITH & WEST LONDON COLLEGE", "ealing-hammersmith-and-west-london-college")]
+        [TestCase("EAST MIDLANDS CHAMBER(DERBYSHIRE, NOTTINGHAMSHIRE, LEICESTERSHIRE)", "east-midlands-chamber-derbyshire-nottinghamshire-leicestershire")]
+        [TestCase("E.QUALITY TRAINING LIMITED", "e-quality-training-limited")]
+        [TestCase("E.Q.V. (UK) LIMITED", "e-q-v-uk-limited")]
+        [TestCase("FASHION - ENTER LTD", "fashion-enter-ltd")]
+        [TestCase("MARITIME + ENGINEERING COLLEGE NORTH WEST", "maritime-and-engineering-college-north-west")]
+        [TestCase(" N & B TRAINING LTD", "n-and-b-training-ltd")]
+        [TestCase("GREENBANK PROJECT(THE)", "greenbank-project-the")]
+        [TestCase("L.I.T.S.LIMITED", "l-i-t-s-limited")]
+        [TestCase("NORTH LANCS.TRAINING GROUP LIMITED(THE)", "north-lancs-training-group-limited-the")]
+        [TestCase("SOUTHAMPTON ENGINEERING TRAINING ASSOCIATION LIMITED(THE)", "southampton-engineering-training-association-limited-the")]
+        [TestCase("SHEFFIELD COLLEGE, THE", "sheffield-college-the")]
+        [TestCase("ST.PATRICK'S INTERNATIONAL COLLEGE LIMITED", "st-patricks-international-college-limited")]
+        [TestCase("GUY'S AND ST THOMAS' NHS FOUNDATION TRUST", "guys-and-st-thomas-nhs-foundation-trust")]
         public void ShouldReturnStringModifiedForUrlUsage(string words, string modifiedwords)
         {
             var actual = new StringUrlHelper().ModifyStringForUrlUsage(words);
             Assert.AreEqual(actual, modifiedwords);
-
         }
     }
 }

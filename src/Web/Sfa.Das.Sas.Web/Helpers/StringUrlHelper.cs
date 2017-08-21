@@ -10,8 +10,8 @@ namespace Sfa.Das.Sas.Web.Helpers
     public class StringUrlHelper : IStringUrlHelper
     {
      public string ModifyStringForUrlUsage(string stringToProcess)
-        {
-            var firstpass = stringToProcess.ToLower().Replace("&", "and").Replace("+", "and").Replace("("," "). Replace(")"," ").Replace(" ", "-");
+     {
+         var firstpass = stringToProcess.ToLower().Replace("&", "and").Replace("+", "and").Replace("("," ").Replace(")"," ").Replace("."," ").Trim().Replace(" ", "-");
             var secondpass = new StringBuilder();
             foreach (var c in firstpass)
             {
@@ -31,6 +31,4 @@ namespace Sfa.Das.Sas.Web.Helpers
             return thirdpass;
         }
     }
-
-  
 }
