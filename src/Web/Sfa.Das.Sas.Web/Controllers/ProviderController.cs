@@ -20,17 +20,20 @@
         private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
         private readonly IConfigurationSettings _settings;
+        private readonly IProviderService _providerService;
 
         public ProviderController(
             ILog logger,
             IMappingService mappingService,
             IMediator mediator,
-            IConfigurationSettings settings)
+            IConfigurationSettings settings,
+            IProviderService providerService)
         {
             _logger = logger;
             _mappingService = mappingService;
             _mediator = mediator;
             _settings = settings;
+            _providerService = providerService;
         }
 
         [HttpGet]
@@ -176,9 +179,11 @@
         }
 
         [HttpGet]
-        public ActionResult ProviderDetails()
+        public ActionResult ProviderDetails(long id)
         {
-            return View();
+            var viewModel = _providerService.GetProviderDetails(id);
+
+            return View(viewModel);
         }
 
         [HttpGet]

@@ -1,17 +1,70 @@
-﻿@{
-    Layout = null;
+﻿@using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.Web.ViewModels
+@model ProviderDetailsViewModel
+
+@{
+    ViewBag.Title = "Provider Details";
+    ViewBag.Description = "stuff";
 }
+<main id="content" class="provider-detail">
+<div class="grid-row">
+<div class="column-two-thirds">
+<h1>
+    @Model.ProviderName
+</h1>
+National: @Model.NationalProvider<br/>
 
-<!DOCTYPE html>
+Trading Names: @Model.TradingNames<br/>
+UKPRN: @Model.Ukprn<br/>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    provider view
-    </div>
-</body>
-</html>
+<h1 class="heading-xlarge">
+    @Model.ProviderName
+</h1>
+Website: @Model.Website<br/>
+Phone: @Model.Phone<br/>
+Email: @Model.Email<br/>
+<br/>
+
+Employer Satisfaction: @{
+    if (Model.EmployerSatisfaction > 0)
+    {
+        @Model.EmployerSatisfaction
+    }
+    else
+    {
+        <p>No data available</p>
+    }
+}<br/>
+
+    Learner Satisfaction:
+    
+@{
+    if (Model.LearnerSatisfaction > 0)
+    {
+        @Model.LearnerSatisfaction
+    }
+    else
+    {
+        <p>No data available</p>
+    }
+}
+    <br/>
+
+    @{
+         if (Model.EmployerSatisfaction >0 || Model.LearnerSatisfaction > 0)
+         {
+             <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
+             <br/>
+         }
+     }
+    <br/>
+    Disclaimer: Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes 
+            no representations about the quality of any courses which appear on the site. Skills Funding Agency 
+            is not liable for any losses suffered as a result of any party relying on the course information 
+            provided.
+    
+        
+</div>
+</div>
+</main>
+
