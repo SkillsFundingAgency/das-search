@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 });
 
             var mockStringUrlHelper = new Mock<IStringUrlHelper>();
-            mockStringUrlHelper.Setup(x => x.ModifyStringForUrlUsage(It.IsAny<string>()))
+            mockStringUrlHelper.Setup(x => x.ModifyProviderNameForUrlUsage(It.IsAny<string>()))
                 .Returns<string>(x => x);
 
             var sitemapController = new SitemapController(null,mockProviderService.Object, mockStringUrlHelper.Object);

@@ -91,7 +91,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             foreach (var provider in providers)
             {
-                var modifiedProviderName = _stringUrlHelper.ModifyStringForUrlUsage(provider.Value);
+                var modifiedProviderName = _stringUrlHelper.ModifyProviderNameForUrlUsage(provider.Value);
                 var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Key, modifiedProviderName);
                 builder.AppendLine(urlLocElement);
             }

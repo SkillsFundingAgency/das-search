@@ -31,9 +31,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         [TestCase("SHEFFIELD COLLEGE, THE", "sheffield-college-the")]
         [TestCase("ST.PATRICK'S INTERNATIONAL COLLEGE LIMITED", "st-patricks-international-college-limited")]
         [TestCase("GUY'S AND ST THOMAS' NHS FOUNDATION TRUST", "guys-and-st-thomas-nhs-foundation-trust")]
+        [TestCase("Name with [ weird $ characters", "name-with-\\[-weird-\\$-characters")]
         public void ShouldReturnStringModifiedForUrlUsage(string words, string modifiedwords)
         {
-            var actual = new StringUrlHelper().ModifyStringForUrlUsage(words);
+            var actual = new StringUrlHelper().ModifyProviderNameForUrlUsage(words);
             Assert.AreEqual(actual, modifiedwords);
         }
     }

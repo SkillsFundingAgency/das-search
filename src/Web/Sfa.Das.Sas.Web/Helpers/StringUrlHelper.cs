@@ -1,34 +1,28 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Sfa.Das.Sas.Web.Helpers
 {
     public interface IStringUrlHelper
     {
-        string ModifyStringForUrlUsage(string stringToProcess);
+        string ModifyProviderNameForUrlUsage(string providerNameToProcess);
     }
 
     public class StringUrlHelper : IStringUrlHelper
     {
-     public string ModifyStringForUrlUsage(string stringToProcess)
-     {
-         var firstpass = stringToProcess.ToLower().Replace("&", "and").Replace("+", "and").Replace("("," ").Replace(")"," ").Replace("."," ").Trim().Replace(" ", "-");
-            var secondpass = new StringBuilder();
-            foreach (var c in firstpass)
-            {
-                if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || c == '-')
-                {
-                    secondpass.Append(c);
-                }
-            }
+        public string ModifyProviderNameForUrlUsage(string providerNameToProcess)
+        {
+            var lowerCaseAndApostrophesAndHyphensRemoved = Regex.Replace(providerNameToProcess.ToLower(),"['-]", string.Empty);
+            var ampersandAndPlusReplaced = Regex.Replace(lowerCaseAndApostrophesAndHyphensRemoved, "[&+]", "and");
+            var splitBySpacesAndOtherChars = Regex.Split(ampersandAndPlusReplaced, @"[\s.(),]+");
+            var rebuildExcludingNoContent = string.Join(
+                "-",
+                splitBySpacesAndOtherChars.Except(new List<string> {string.Empty})
+            );
 
-            var thirdpass = secondpass.ToString();
-
-            while (thirdpass.Contains("--"))
-            {
-                thirdpass = thirdpass.Replace("--", "-");
-            }
-
-            return thirdpass;
-        }
+         return Regex.Escape(rebuildExcludingNoContent);
+     }
     }
 }
