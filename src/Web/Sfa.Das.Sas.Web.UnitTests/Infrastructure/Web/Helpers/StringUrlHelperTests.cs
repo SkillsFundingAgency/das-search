@@ -7,6 +7,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
     [TestFixture]
     public class StringUrlHelperTests
     {
+        [TestCase("WOODSPEEN TRAINING LIMITED","woodspeen-training-limited")]
         [TestCase("5 E LTD.", "5-e-ltd")]
         [TestCase("TRN(TRAIN) LTD.", "trn-train-ltd")]
         [TestCase("ACTIVE LEARNING & DEVELOPMENT LIMITED", "active-learning-and-development-limited")]
