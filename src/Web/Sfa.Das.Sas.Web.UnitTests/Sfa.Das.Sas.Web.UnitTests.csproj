@@ -190,6 +190,7 @@
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
     <Compile Include="Infrastructure\Web\Helpers\StringUrlHelperTests.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderSearchResponseToViewModel.cs" />
+    <Compile Include="Infrastructure\Web\Services\ForMappingProviderToProviderDetailsViewModel.cs" />
     <Compile Include="Infrastructure\Web\Services\MappingServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForProviderMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForApprenticeshipMappingHelper.cs" />

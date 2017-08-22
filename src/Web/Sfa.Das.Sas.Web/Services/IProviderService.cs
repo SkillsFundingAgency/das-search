@@ -7,6 +7,6 @@ namespace Sfa.Das.Sas.Web.Services
     public interface IProviderService
     {
         Dictionary<long, string> GetProviderList();
-        ProviderDetailsViewModel GetProviderDetails(long prn);
+        Provider GetProviderDetails(long prn);
     }
 }

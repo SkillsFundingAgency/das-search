@@ -304,6 +304,7 @@
     <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderDetailsViewModelMappingHelper.cs" />
     <Compile Include="Services\ProviderService.cs" />
     <Compile Include="Services\SettingsFinder.cs" />
     <Compile Include="Services\Validation.cs" />

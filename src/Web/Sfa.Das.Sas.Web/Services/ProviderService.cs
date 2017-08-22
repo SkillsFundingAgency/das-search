@@ -1,4 +1,5 @@
 ﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.Services
 {
@@ -25,40 +26,9 @@ namespace Sfa.Das.Sas.Web.Services
             return res;
         }
 
-        public ProviderDetailsViewModel GetProviderDetails(long prn)
+        public Provider GetProviderDetails(long prn)
         {
-            var provider = _providerApiClient.Get(prn);
-            var viewModel = new ProviderDetailsViewModel();
-            if (provider.Aliases != null)
-            {
-                viewModel.TradingNames = provider.Aliases.ToList().Aggregate((i, j) => i + ", " + j);
-            }
-
-            var employerSatisfationMessage =
-                (provider.EmployerSatisfaction > 0)
-                ? ProviderMappingHelper.GetPercentageText(provider.EmployerSatisfaction) :
-                ProviderMappingHelper.GetPercentageText(null);
-
-            var learnerSatisfationMessage =
-                (provider.LearnerSatisfaction > 0)
-                    ? ProviderMappingHelper.GetPercentageText(provider.LearnerSatisfaction) :
-                    ProviderMappingHelper.GetPercentageText(null);
-
-            viewModel.Email = provider.Email;
-            viewModel.IsEmployerProvider = provider.IsEmployerProvider;
-            viewModel.EmployerSatisfaction = provider.EmployerSatisfaction;
-            viewModel.EmployerSatisfactionMessage = employerSatisfationMessage;
-            viewModel.IsHigherEducationInstitute = provider.IsHigherEducationInstitute;
-            viewModel.LearnerSatisfaction = provider.LearnerSatisfaction;
-            viewModel.LearnerSatisfactionMessage = learnerSatisfationMessage;
-            viewModel.NationalProvider = provider.NationalProvider;
-            viewModel.Phone = provider.Phone;
-            viewModel.Ukprn = provider.Ukprn;
-            viewModel.ProviderName = provider.ProviderName;
-            viewModel.Uri = provider.Uri;
-            viewModel.Website = provider.Website;
-
-            return viewModel;
+            return _providerApiClient.Get(prn);
         }
     }
 }

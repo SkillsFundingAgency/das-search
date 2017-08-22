@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Net;
     using System.Threading.Tasks;
@@ -181,7 +183,9 @@
         [HttpGet]
         public ActionResult ProviderDetails(long id)
         {
-            var viewModel = _providerService.GetProviderDetails(id);
+            var provider= _providerService.GetProviderDetails(id);
+
+            var viewModel = ProviderDetailsViewModelMappingHelper.GetProviderDetailsViewModel(provider);
 
             return View(viewModel);
         }
