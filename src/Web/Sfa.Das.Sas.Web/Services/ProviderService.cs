@@ -1,12 +1,10 @@
-﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
-using SFA.DAS.Apprenticeships.Api.Types.Providers;
+﻿using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.Services
 {
     using System.Collections.Generic;
     using System.Linq;
     using SFA.DAS.Providers.Api.Client;
-    using Sfa.Das.Sas.Web.ViewModels;
 
     public class ProviderService : IProviderService
     {

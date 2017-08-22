@@ -19,6 +19,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBui
         private readonly Mock<IMappingService> _mockMappingService = new Mock<IMappingService>();
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private readonly Mock<IConfigurationSettings> _mockSettings = new Mock<IConfigurationSettings>();
+        private readonly Mock<IProviderService> _mockProviderService = new Mock<IProviderService>();
 
         private UrlHelper _url;
         private HttpContextBase _httpContext;
@@ -30,7 +31,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBui
 
         public ProviderController Build()
         {
-            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object, null);
+            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object, _mockProviderService.Object);
 
             if (_url != null)
             {
