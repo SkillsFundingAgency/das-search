@@ -5,11 +5,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderDetailsViewModel
    {
-        //    public string ContentDisclaimer { get; } = @"Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes
-        //           no representations about the quality of any courses which appear on the site. Skills Funding Agency
-        //           is not liable for any losses suffered as a result of any party relying on the course information
-        //       provided.";
-
        public string TradingNames { get; set; }
 
         public string Email { get; set; }
