@@ -4,9 +4,35 @@
 
 @{
     ViewBag.Title = "Provider Details";
-    ViewBag.Description = "stuff";
+    ViewBag.Description = "";
 }
 <main id="content" class="provider-detail">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge" id="provider-name">
+                @Model.ProviderName 
+                @if (@Model.NationalProvider)
+                {
+                    <span class="tag tag-national">National</span>
+                }
+            </h1>
+        </div>
+    </div>
+    <div class="grid-row">
+        <div class="column-one-third pull-right">
+            <div class="panel--contact">
+                <h2 class="heading-medium">Contact details</h2>
+                <dl>
+                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Website, Model.ProviderName + " website")
+                    @GetStandardPropertyHtml("Phone number:", "phone", Model.Phone)
+                    @GetEmailPropertyHtml("Email:", "email", Model.Email)
+                </dl>
+            </div>
+        </div>
+    </div>
+</main>
+
+
 <div class="grid-row">
 <div class="column-two-thirds">
 <h1>
@@ -66,5 +92,53 @@ Employer Satisfaction: @{
         
 </div>
 </div>
-</main>
 
+
+
+
+
+
+
+
+
+
+
+
+@helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+        <dt class="@id-title">@title</dt>
+        <dd id="@id" class="@id">@Html.Raw(item)</dd>
+}
+}
+
+@helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
+{
+if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+{
+        <dt class="email-title">@title</dt>
+        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+}
+}
+
+@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
+{
+if (!string.IsNullOrEmpty(url))
+{
+    var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
+        <dt class="@classTitle">@title</dt>
+        <dd>
+            <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
+                @if (string.IsNullOrEmpty(urlTitle))
+                {
+                    @Html.Raw(url)
+                }
+                else
+                {
+                    @Html.Raw(urlTitle)
+                }
+            </a>
+        </dd>
+}
+}
