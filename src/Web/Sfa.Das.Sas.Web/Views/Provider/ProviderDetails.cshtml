@@ -19,7 +19,15 @@
         </div>
     </div>
     <div class="grid-row">
-        <div class="column-one-third pull-right">
+        <div class="column-two-thirds">
+            <dl class="data-list--provider data-list--compact">
+                <dt>Trading names:</dt>
+                <dd>@Model.TradingNames</dd>
+                <dt>UKPRN:</dt>
+                <dd>@Model.Ukprn</dd>
+            </dl>
+        </div>
+        <div class="column-one-third">
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
@@ -28,76 +36,46 @@
                     @GetEmailPropertyHtml("Email:", "email", Model.Email)
                 </dl>
             </div>
-        </div>
+            <div class="panel--contact panel--satisfaction">
+                <dl>
+                    <dt>Employer satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                        </div>
+                    </dd>
+                    <dt>Learner satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                        </div>
+                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                        {
+                            <span class="satisfaction-source font-small">
+                                Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
+                            </span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <div class="panel--disclaimer">
+                <h4>Content disclaimer</h4>
+                <p>
+                    Education a Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes
+                    no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency
+                    is not liable for any losses suffered as a result of any party relying on the course information
+                    provided.
+                </p>
+            </div>
+        </div>       
     </div>
 </main>
-
-
-<div class="grid-row">
-<div class="column-two-thirds">
-<h1>
-    @Model.ProviderName
-</h1>
-National: @Model.NationalProvider<br/>
-
-Trading Names: @Model.TradingNames<br/>
-UKPRN: @Model.Ukprn<br/>
-
-<h1 class="heading-xlarge">
-    @Model.ProviderName
-</h1>
-Website: @Model.Website<br/>
-Phone: @Model.Phone<br/>
-Email: @Model.Email<br/>
-<br/>
-
-Employer Satisfaction: @{
-    if (Model.EmployerSatisfaction > 0)
-    {
-        @Model.EmployerSatisfaction
-    }
-    else
-    {
-        <p>No data available</p>
-    }
-}<br/>
-
-    Learner Satisfaction:
-    
-@{
-    if (Model.LearnerSatisfaction > 0)
-    {
-        @Model.LearnerSatisfaction
-    }
-    else
-    {
-        <p>No data available</p>
-    }
-}
-    <br/>
-
-    @{
-         if (Model.EmployerSatisfaction >0 || Model.LearnerSatisfaction > 0)
-         {
-             <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
-             <br/>
-         }
-     }
-    <br/>
-    Disclaimer: Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes 
-            no representations about the quality of any courses which appear on the site. Skills Funding Agency 
-            is not liable for any losses suffered as a result of any party relying on the course information 
-            provided.
-    
-        
-</div>
-</div>
-
-
-
-
-
-
 
 
 
@@ -140,5 +118,15 @@ if (!string.IsNullOrEmpty(url))
                 }
             </a>
         </dd>
+}
+}
+
+@helper CreateProgressBar(string message, int progress)
+{
+if (progress > 0)
+{
+        <div class="progress-container">
+            <div class="progressbar" style="width: @progress%"></div>
+        </div>
 }
 }
