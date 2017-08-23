@@ -17,7 +17,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string Phone { get; set; }
         public string ProviderName { get; set; }
         public long Ukprn { get; set; }
-        public string Uri { get; set; }
         public string Website { get; set; }
     }
 }

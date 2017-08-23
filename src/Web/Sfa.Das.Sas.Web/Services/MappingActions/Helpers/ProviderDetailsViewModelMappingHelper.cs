@@ -35,7 +35,6 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             viewModel.Phone = provider.Phone;
             viewModel.Ukprn = provider.Ukprn;
             viewModel.ProviderName = provider.ProviderName;
-            viewModel.Uri = provider.Uri;
             viewModel.Website = provider.Website;
             return viewModel;
         }

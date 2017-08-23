@@ -87,7 +87,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 Phone = phone,
                 Ukprn = ukPrn,
                 ProviderName = providerName,
-                Uri = uri,
                 Website = website
             };
 
@@ -115,7 +114,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             returnedModel.Phone.Should().Be(expectedProviderDetailViewModel.Phone);
             returnedModel.ProviderName.Should().Be(expectedProviderDetailViewModel.ProviderName);
             returnedModel.Ukprn.Should().Be(expectedProviderDetailViewModel.Ukprn);
-            returnedModel.Uri.Should().Be(expectedProviderDetailViewModel.Uri);
             returnedModel.Website.Should().Be(expectedProviderDetailViewModel.Website);
           }
 

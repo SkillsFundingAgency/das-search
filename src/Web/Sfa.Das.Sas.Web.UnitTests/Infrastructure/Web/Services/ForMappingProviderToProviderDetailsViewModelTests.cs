@@ -30,7 +30,6 @@
             providerDetails.Phone.Should().Be(Phone);
             providerDetails.Ukprn.Should().Be(UkPrn);
             providerDetails.ProviderName.Should().Be(ProviderName);
-            providerDetails.Uri.Should().Be(Uri);
             providerDetails.Website.Should().Be(Website);
         }
 
