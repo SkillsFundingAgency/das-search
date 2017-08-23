@@ -1,17 +1,16 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Moq;
-using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Services;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
     using Core.Configuration;
     using MediatR;
+    using Moq;
+    using Sas.Web.Controllers;
+    using Sas.Web.Services;
+    using SFA.DAS.NLog.Logger;
 
     internal class ProviderControllerBuilder
     {
@@ -19,7 +18,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBui
         private readonly Mock<IMappingService> _mockMappingService = new Mock<IMappingService>();
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private readonly Mock<IConfigurationSettings> _mockSettings = new Mock<IConfigurationSettings>();
-        private readonly Mock<IProviderService> _mockProviderService = new Mock<IProviderService>();
 
         private UrlHelper _url;
         private HttpContextBase _httpContext;
@@ -31,7 +29,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBui
 
         public ProviderController Build()
         {
-            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object, _mockProviderService.Object);
+            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object, null);
 
             if (_url != null)
             {

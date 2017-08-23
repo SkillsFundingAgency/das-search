@@ -7,7 +7,7 @@
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
     [TestFixture]
-    public class ForMappingProviderToProviderDetailsViewModel
+    public class ForMappingProviderToProviderDetailsViewModelTests
     {
         private const string Phone = "123-456";
         private const string ProviderName = "Joe The Plumbers";

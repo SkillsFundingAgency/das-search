@@ -6,7 +6,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
     public class ProviderDetailsViewModel
    {
        public string TradingNames { get; set; }
-
         public string Email { get; set; }
         public double EmployerSatisfaction { get; set; }
         public string EmployerSatisfactionMessage { get; set; }

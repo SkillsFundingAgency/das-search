@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using Moq;
     using NUnit.Framework;
+    using Sas.Web.Services;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using SFA.DAS.Providers.Api.Client;
-    using Sfa.Das.Sas.Web.Services;
 
     [TestFixture]
     public class ProviderServiceTests
