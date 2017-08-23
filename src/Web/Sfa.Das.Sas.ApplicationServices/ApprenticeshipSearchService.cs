@@ -7,8 +7,6 @@ using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices
 {
-
-
     public sealed class ApprenticeshipSearchService : IApprenticeshipSearchService
     {
         private readonly IApprenticeshipSearchProvider _searchProvider;
