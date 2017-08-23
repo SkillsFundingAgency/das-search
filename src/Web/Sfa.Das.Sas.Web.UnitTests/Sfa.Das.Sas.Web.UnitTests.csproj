@@ -197,7 +197,8 @@
     <Compile Include="Infrastructure\Web\Services\Mapping\ForOverallCohortResolver.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForSearchMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\OverallCohortResolverTestClass.cs" />
-    <Compile Include="Infrastructure\Web\Services\ProviderServiceTests.cs" />
+    <Compile Include="Infrastructure\Web\Services\ProviderServiceGetProviderDetailsTests.cs" />
+    <Compile Include="Infrastructure\Web\Services\ProviderServiceGetProviderListTests.cs" />
     <Compile Include="Infrastructure\Web\Views\FrameworkDetailPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ApprenticeshipControllerTests.cs" />

@@ -8,7 +8,7 @@
     using SFA.DAS.Providers.Api.Client;
 
     [TestFixture]
-    public class ProviderServiceTests
+    public class ProviderServiceGetProviderListTests
     {
         private Dictionary<long, string> _actualResult;
         private Dictionary<long, string> _expectedResult;
