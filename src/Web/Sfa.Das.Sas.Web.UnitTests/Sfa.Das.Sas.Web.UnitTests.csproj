@@ -200,6 +200,7 @@
     <Compile Include="Infrastructure\Web\Services\ProviderServiceGetProviderDetailsTests.cs" />
     <Compile Include="Infrastructure\Web\Services\ProviderServiceGetProviderListTests.cs" />
     <Compile Include="Infrastructure\Web\Views\FrameworkDetailPageTests.cs" />
+    <Compile Include="Infrastructure\Web\Views\Provider\ProviderDetailsDetailsPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ApprenticeshipControllerTests.cs" />
     <Compile Include="Infrastructure\Web\Services\ForCookieService.cs" />

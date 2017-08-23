@@ -407,6 +407,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkResults.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Provider\ProviderDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderDetails.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Provider\StandardResults.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -742,7 +747,10 @@
     <Content Include="Transform.ServiceDefinition.SystemTest.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Provider\ProviderDetails.cshtml" />
+    <Content Include="Views\Provider\ProviderDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ProviderDetails.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
