@@ -1,20 +1,19 @@
-﻿using SFA.DAS.NLog.Logger;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Nest;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Infrastructure.Elasticsearch;
+using Sfa.Das.Sas.Infrastructure.Mapping;
+using SFA.DAS.Apprenticeships.Api.Client;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
+using SFA.DAS.NLog.Logger;
 
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Nest;
-    using SFA.DAS.Apprenticeships.Api.Client;
-    using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Core.Domain.Services;
-    
-    using Sfa.Das.Sas.Infrastructure.Mapping;
-
     public sealed class FrameworkApiRepository : IGetFrameworks
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
@@ -73,7 +72,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         public long GetFrameworksOffer()
         {
             var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "frameworkprovider");
-            var frameworkIdUkprnList = documents.Select(doc => string.Concat(doc.FrameworkId, doc.Ukprn));
+            var frameworkIdUkprnList = documents.Select(doc => string.Concat((object) doc.FrameworkId, doc.Ukprn));
 
             return frameworkIdUkprnList.Distinct().Count();
         }

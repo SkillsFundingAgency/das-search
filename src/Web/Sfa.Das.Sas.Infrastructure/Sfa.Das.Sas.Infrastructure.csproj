@@ -134,12 +134,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elasticsearch\ApprenticeshipProviderApiRepository.cs" />
+    <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
-    <Compile Include="Elasticsearch\ProviderElasticRepository.cs" />
-    <Compile Include="Elasticsearch\StandardElasticRepository.cs" />
-    <Compile Include="Elasticsearch\FrameworkElasticRepository.cs" />
+    <Compile Include="Repositories\ProviderElasticRepository.cs" />
+    <Compile Include="Repositories\StandardElasticRepository.cs" />
+    <Compile Include="Repositories\FrameworkElasticRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
@@ -148,16 +148,16 @@
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
-    <Compile Include="Elasticsearch\FrameworkApiRepository.cs" />
+    <Compile Include="Repositories\FrameworkApiRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\IElasticsearchCustomClient.cs" />
     <Compile Include="Elasticsearch\Models\ElasticsearchResponse.cs" />
     <Compile Include="Elasticsearch\ElasticsearchApprenticeshipSearchProvider.cs" />
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
-    <Compile Include="Elasticsearch\ApprenticeshipProviderRepository.cs" />
+    <Compile Include="Repositories\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Elasticsearch\QueryHelper.cs" />
-    <Compile Include="Elasticsearch\StandardApiRepository.cs" />
+    <Compile Include="Repositories\StandardApiRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mapping\IFrameworkMapping.cs" />
     <Compile Include="Mapping\IProviderMapping.cs" />
