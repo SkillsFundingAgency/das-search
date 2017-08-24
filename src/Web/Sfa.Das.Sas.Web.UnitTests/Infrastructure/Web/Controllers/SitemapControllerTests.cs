@@ -39,8 +39,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                     { prn2, name2 }
                 });
 
-            var mockStringUrlHelper = new Mock<IStringUrlHelper>();
-            mockStringUrlHelper.Setup(x => x.ModifyProviderNameForUrlUsage(It.IsAny<string>()))
+            var mockStringUrlHelper = new Mock<IUrlEncoder>();
+            mockStringUrlHelper.Setup(x => x.EncodeTextForUri(It.IsAny<string>()))
                 .Returns<string>(x => x);
 
             var sitemapController = new SitemapController(null,mockProviderService.Object, mockStringUrlHelper.Object);

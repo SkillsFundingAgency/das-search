@@ -1,17 +1,17 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Sfa.Das.Sas.Web.Helpers
 {
-    public interface IStringUrlHelper
+    public interface IUrlEncoder
     {
-        string ModifyProviderNameForUrlUsage(string providerNameToProcess);
+        string EncodeTextForUri(string providerNameToProcess);
     }
 
-    public class StringUrlHelper : IStringUrlHelper
+    public class UrlEncoder : IUrlEncoder
     {
-        public string ModifyProviderNameForUrlUsage(string providerNameToProcess)
+        public string EncodeTextForUri(string providerNameToProcess)
         {
             var lowerCaseAndApostrophesAndHyphensRemoved = Regex.Replace(providerNameToProcess.ToLower(),"['-]", string.Empty);
             var ampersandAndPlusReplaced = Regex.Replace(lowerCaseAndApostrophesAndHyphensRemoved, "[&+]", "and");

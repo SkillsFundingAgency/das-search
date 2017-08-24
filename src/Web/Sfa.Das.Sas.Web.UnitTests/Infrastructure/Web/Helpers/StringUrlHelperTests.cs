@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         [TestCase("Name with [ weird $ characters", "name-with-\\[-weird-\\$-characters")]
         public void ShouldReturnStringModifiedForUrlUsage(string words, string modifiedwords)
         {
-            var actual = new StringUrlHelper().ModifyProviderNameForUrlUsage(words);
+            var actual = new UrlEncoder().EncodeTextForUri(words);
             Assert.AreEqual(actual, modifiedwords);
         }
     }

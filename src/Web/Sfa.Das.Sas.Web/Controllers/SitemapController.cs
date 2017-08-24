@@ -12,13 +12,13 @@ namespace Sfa.Das.Sas.Web.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IProviderService _providerService;
-        private readonly IStringUrlHelper _stringUrlHelper;
+        private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapController(IMediator mediator, IProviderService providerService, IStringUrlHelper stringHelper)
+        public SitemapController(IMediator mediator, IProviderService providerService, IUrlEncoder encoder)
         {
             _mediator = mediator;
             _providerService = providerService;
-            _stringUrlHelper = stringHelper;
+            _urlEncoder = encoder;
         }
 
         public ActionResult Root()
@@ -91,7 +91,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             foreach (var provider in providers)
             {
-                var modifiedProviderName = _stringUrlHelper.ModifyProviderNameForUrlUsage(provider.Value);
+                var modifiedProviderName = _urlEncoder.EncodeTextForUri(provider.Value);
                 var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Key, modifiedProviderName);
                 builder.AppendLine(urlLocElement);
             }
