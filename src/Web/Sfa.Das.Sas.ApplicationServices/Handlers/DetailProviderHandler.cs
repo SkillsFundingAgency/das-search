@@ -7,6 +7,7 @@ using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.ApplicationServices.Validators;
 using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
 
 using SFA.DAS.NLog.Logger;

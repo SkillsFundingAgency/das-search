@@ -1,6 +1,6 @@
 ﻿using Sfa.Das.Sas.Core.Domain.Model;
 
-namespace Sfa.Das.Sas.Core.Domain.Services
+namespace Sfa.Das.Sas.Core.Domain.Repositories
 {
     public interface IApprenticeshipProviderRepository
     {

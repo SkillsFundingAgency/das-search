@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
 using NUnit.Framework;
+using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Helpers;

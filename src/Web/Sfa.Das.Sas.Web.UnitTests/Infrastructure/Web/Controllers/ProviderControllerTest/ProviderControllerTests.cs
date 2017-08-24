@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Infrastructure.Repositories;
+using MediatR;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
@@ -16,7 +16,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
     using Moq;
     using NUnit.Framework;
     using Sas.Web.Controllers;
-    using Sas.Web.Services;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using ViewModels;
 
@@ -44,7 +43,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public void ProviderDetailsShouldResultExpectedViewModel()
         {
-            var mockProviderRepository = new Mock<IProviderRepository>();
+            var mockMediator = new Mock<IMediator>();
+
             var aliases = new List<string> {"item 1", "Another Item", "A different item"};
             const string tradingNames = "item 1, Another Item, A different item";
             const string phone = "123-456";
@@ -91,11 +91,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 Website = website
             };
 
-            mockProviderRepository.Setup(x => x.GetProviderDetails(ukPrn))
-                .Returns(
-                    provider);
+            mockMediator.Setup(x => x.Send(It.IsAny<ProviderQuery>()))
+                .Returns(new ProviderDetailResponse
+                {
+                    Provider = provider,
+                    StatusCode = ProviderDetailResponse.ResponseCodes.Success
+                });
 
-            var providerController = new ProviderController(null, null, null, null, mockProviderRepository.Object);
+            var providerController = new ProviderController(null, null, mockMediator.Object, null);
             var result = providerController.ProviderDetails(ukPrn);
             result.Should().BeOfType<ViewResult>();
 

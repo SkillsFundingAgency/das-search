@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
-namespace Sfa.Das.Sas.Infrastructure.Repositories
+
+namespace Sfa.Das.Sas.Core.Domain.Repositories
 {
     public interface IProviderRepository
     {

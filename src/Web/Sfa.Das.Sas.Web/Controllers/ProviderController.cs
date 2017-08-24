@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.Infrastructure.Repositories;
+﻿using Sfa.Das.Sas.Core.Domain.Repositories;
+using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 
 namespace Sfa.Das.Sas.Web.Controllers
@@ -23,20 +24,17 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
         private readonly IConfigurationSettings _settings;
-        private readonly IProviderRepository _providerRepository;
 
         public ProviderController(
             ILog logger,
             IMappingService mappingService,
             IMediator mediator,
-            IConfigurationSettings settings,
-            IProviderRepository providerRepository)
+            IConfigurationSettings settings)
         {
             _logger = logger;
             _mappingService = mappingService;
             _mediator = mediator;
             _settings = settings;
-            _providerRepository = providerRepository;
         }
 
         [HttpGet]
@@ -184,9 +182,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult ProviderDetails(long id)
         {
-            var provider= _providerRepository.GetProviderDetails(id);
-
-            var viewModel = ProviderDetailsViewModelMappingHelper.GetProviderDetailsViewModel(provider);
+            var response = _mediator.Send(new ProviderQuery {Prn = id});
+            var viewModel = ProviderDetailsViewModelMappingHelper.GetProviderDetailsViewModel(response.Provider);
 
             return View(viewModel);
         }

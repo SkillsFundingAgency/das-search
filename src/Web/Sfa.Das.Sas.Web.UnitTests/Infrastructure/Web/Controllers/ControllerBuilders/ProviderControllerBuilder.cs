@@ -29,7 +29,7 @@
 
         public ProviderController Build()
         {
-            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object, null);
+            var controller = new ProviderController(_mockLogger.Object, _mockMappingService.Object, _mockMediator.Object, _mockSettings.Object);
 
             if (_url != null)
             {

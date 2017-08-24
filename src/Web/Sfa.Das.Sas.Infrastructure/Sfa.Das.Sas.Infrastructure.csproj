@@ -143,7 +143,6 @@
     <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
-    <Compile Include="Repositories\IProviderRepository.cs" />
     <Compile Include="Repositories\ProviderRepository.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />

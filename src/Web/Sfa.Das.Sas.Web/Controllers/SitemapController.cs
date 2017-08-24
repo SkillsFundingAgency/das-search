@@ -3,6 +3,7 @@ using System.Text;
 using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Web.Helpers;
 using Sfa.Das.Sas.Web.Services;
