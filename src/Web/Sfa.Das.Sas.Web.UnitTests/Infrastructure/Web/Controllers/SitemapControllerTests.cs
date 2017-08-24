@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Infrastructure.Repositories;
@@ -34,12 +36,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             var mockProviderRepository = new Mock<IProviderRepository>();
             mockProviderRepository.Setup(x => x.GetProviderList())
-                .Returns(
-                new Dictionary<long, string>
+                .Returns(Task.FromResult(new Dictionary<long, string>
                 {
                     { prn1, name1 },
                     { prn2, name2 }
-                });
+                }));
 
             var mockStringUrlHelper = new Mock<IUrlEncoder>();
             mockStringUrlHelper.Setup(x => x.EncodeTextForUri(It.IsAny<string>()))
@@ -47,7 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             var sitemapController = new SitemapController(null,mockProviderRepository.Object, mockStringUrlHelper.Object);
             sitemapController.ControllerContext = new ControllerContext(mockContext.Object, new RouteData(), sitemapController);
-            var result = (ContentResult)sitemapController.Providers();
+            var result = (ContentResult)sitemapController.Providers().Result;
 
             var expectedResult = $@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
   <url>

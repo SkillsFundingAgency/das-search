@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Infrastructure.Repositories;
@@ -39,9 +40,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
                 { ukprn3, providerName3 }
             };
 
-            mockProviderApiClient.Setup(x => x.FindAll()).Returns(providerSummaries);
+            mockProviderApiClient.Setup(x => x.FindAllAsync()).Returns(Task.FromResult((IEnumerable<ProviderSummary>)providerSummaries));
             var providerRepository = new ProviderRepository(mockProviderApiClient.Object);
-            _actualResult = providerRepository.GetProviderList();
+            var res = providerRepository.GetProviderList();
+            _actualResult = res.Result;
         }
 
         [Test]

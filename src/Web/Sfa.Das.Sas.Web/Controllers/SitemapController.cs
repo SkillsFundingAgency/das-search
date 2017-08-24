@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
@@ -75,9 +76,9 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(resp.Content, "text/xml");
         }
 
-        public ActionResult Providers()
+        public async Task<ActionResult> Providers()
         {
-            var providers = _providerRepository.GetProviderList();
+            var providers = await _providerRepository.GetProviderList();
 
             var builder = BuildProviderSitemapFromDictionary(providers);
 
