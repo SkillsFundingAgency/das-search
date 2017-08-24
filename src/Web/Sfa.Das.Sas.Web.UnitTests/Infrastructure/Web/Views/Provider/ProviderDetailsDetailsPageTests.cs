@@ -34,12 +34,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetPartial(html, ".data-list--provider").Should().Contain(TradingNames);
             GetPartial(html, ".data-list--provider").Should().Contain(UkPrn.ToString());
 
-            GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
             GetPartial(html, ".apprenticeshipContact").Should().Contain(ProviderName + " website");
             GetAttribute(html, ".apprenticeshipContact", "href").Should().Be(Website, "because http be added if missing");
-            GetPartial(html, ".phone-title").Should().Contain("Phone");
             GetPartial(html, ".phone").Should().Contain(model.Phone);
-            GetPartial(html, ".email-title").Should().Contain("Email");
             GetPartial(html, ".email").Should().Contain(model.Email);
             GetPartial(html, "#employer-satisfaction").Should().Be(NoSatisfactionScoreMessage);
             GetPartial(html, "#learner-satisfaction").Should().Contain(SatisfactionScoreMessage);
