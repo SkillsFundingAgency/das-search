@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Infrastructure.Repositories;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
@@ -43,7 +44,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public void ProviderDetailsShouldResultExpectedViewModel()
         {
-            var mockProviderService = new Mock<IProviderService>();
+            var mockProviderRepository = new Mock<IProviderRepository>();
             var aliases = new List<string> {"item 1", "Another Item", "A different item"};
             const string tradingNames = "item 1, Another Item, A different item";
             const string phone = "123-456";
@@ -90,11 +91,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 Website = website
             };
 
-            mockProviderService.Setup(x => x.GetProviderDetails(ukPrn))
+            mockProviderRepository.Setup(x => x.GetProviderDetails(ukPrn))
                 .Returns(
                     provider);
 
-            var providerController = new ProviderController(null, null, null, null, mockProviderService.Object);
+            var providerController = new ProviderController(null, null, null, null, mockProviderRepository.Object);
             var result = providerController.ProviderDetails(ukPrn);
             result.Should().BeOfType<ViewResult>();
 

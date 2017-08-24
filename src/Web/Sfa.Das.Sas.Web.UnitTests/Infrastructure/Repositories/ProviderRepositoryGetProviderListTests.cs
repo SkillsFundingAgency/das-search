@@ -1,14 +1,14 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
-{
-    using System.Collections.Generic;
-    using Moq;
-    using NUnit.Framework;
-    using Sas.Web.Services;
-    using SFA.DAS.Apprenticeships.Api.Types.Providers;
-    using SFA.DAS.Providers.Api.Client;
+﻿using System.Collections.Generic;
+using Moq;
+using NUnit.Framework;
+using Sfa.Das.Sas.Infrastructure.Repositories;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
+using SFA.DAS.Providers.Api.Client;
 
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
+{
     [TestFixture]
-    public class ProviderServiceGetProviderListTests
+    public class ProviderRepositoryGetProviderListTests
     {
         private Dictionary<long, string> _actualResult;
         private Dictionary<long, string> _expectedResult;
@@ -40,8 +40,8 @@
             };
 
             mockProviderApiClient.Setup(x => x.FindAll()).Returns(providerSummaries);
-            var providerService = new ProviderService(mockProviderApiClient.Object);
-            _actualResult = providerService.GetProviderList();
+            var providerRepository = new ProviderRepository(mockProviderApiClient.Object);
+            _actualResult = providerRepository.GetProviderList();
         }
 
         [Test]

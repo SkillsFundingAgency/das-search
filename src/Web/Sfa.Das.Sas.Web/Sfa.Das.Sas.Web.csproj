@@ -292,7 +292,6 @@
     <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Logging\RequestContext.cs" />
-    <Compile Include="Services\IProviderService.cs" />
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
@@ -305,7 +304,6 @@
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderDetailsViewModelMappingHelper.cs" />
-    <Compile Include="Services\ProviderService.cs" />
     <Compile Include="Services\SettingsFinder.cs" />
     <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\SharedController.cs" />

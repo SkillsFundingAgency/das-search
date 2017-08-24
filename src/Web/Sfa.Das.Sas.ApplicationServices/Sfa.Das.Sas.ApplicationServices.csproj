@@ -84,6 +84,7 @@
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
+    <Compile Include="Handlers\ProviderHandler.cs" />
     <Compile Include="Handlers\SitemapHandler.cs" />
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />

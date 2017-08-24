@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
 using NUnit.Framework;
+using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Helpers;
 using Sfa.Das.Sas.Web.Services;
@@ -30,8 +31,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .Setup(c => c.Request)
                 .Returns(mockRequest.Object);
 
-            var mockProviderService = new Mock<IProviderService>();
-            mockProviderService.Setup(x => x.GetProviderList())
+            var mockProviderRepository = new Mock<IProviderRepository>();
+            mockProviderRepository.Setup(x => x.GetProviderList())
                 .Returns(
                 new Dictionary<long, string>
                 {
@@ -43,7 +44,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             mockStringUrlHelper.Setup(x => x.EncodeTextForUri(It.IsAny<string>()))
                 .Returns<string>(x => x);
 
-            var sitemapController = new SitemapController(null,mockProviderService.Object, mockStringUrlHelper.Object);
+            var sitemapController = new SitemapController(null,mockProviderRepository.Object, mockStringUrlHelper.Object);
             sitemapController.ControllerContext = new ControllerContext(mockContext.Object, new RouteData(), sitemapController);
             var result = (ContentResult)sitemapController.Providers();
 

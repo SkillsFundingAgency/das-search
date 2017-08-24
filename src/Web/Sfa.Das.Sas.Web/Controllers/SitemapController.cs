@@ -3,6 +3,7 @@ using System.Text;
 using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Web.Helpers;
 using Sfa.Das.Sas.Web.Services;
 
@@ -11,13 +12,13 @@ namespace Sfa.Das.Sas.Web.Controllers
     public sealed class SitemapController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IProviderService _providerService;
+        private readonly IProviderRepository _providerRepository;
         private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapController(IMediator mediator, IProviderService providerService, IUrlEncoder encoder)
+        public SitemapController(IMediator mediator, IProviderRepository providerRepository, IUrlEncoder encoder)
         {
             _mediator = mediator;
-            _providerService = providerService;
+            _providerRepository = providerRepository;
             _urlEncoder = encoder;
         }
 
@@ -75,7 +76,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public ActionResult Providers()
         {
-            var providers = _providerService.GetProviderList();
+            var providers = _providerRepository.GetProviderList();
 
             var builder = BuildProviderSitemapFromDictionary(providers);
 

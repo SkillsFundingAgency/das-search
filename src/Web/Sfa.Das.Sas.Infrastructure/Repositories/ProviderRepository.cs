@@ -1,17 +1,18 @@
-﻿using SFA.DAS.Apprenticeships.Api.Types.Providers;
+﻿
 
-namespace Sfa.Das.Sas.Web.Services
+using System.Collections.Generic;
+using System.Linq;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
+using SFA.DAS.Providers.Api.Client;
+
+namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using SFA.DAS.Providers.Api.Client;
-
-    public class ProviderService : IProviderService
+    public class ProviderRepository : IProviderRepository
     {
 
         private readonly IProviderApiClient _providerApiClient;
 
-        public ProviderService(IProviderApiClient providerApiClient)
+        public ProviderRepository(IProviderApiClient providerApiClient)
         {
             _providerApiClient = providerApiClient;
         }

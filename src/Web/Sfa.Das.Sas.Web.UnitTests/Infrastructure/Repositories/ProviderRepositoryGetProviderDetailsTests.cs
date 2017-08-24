@@ -1,16 +1,14 @@
-﻿using FluentAssertions;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
 {
     using System.Collections.Generic;
     using Moq;
     using NUnit.Framework;
-    using Sas.Web.Services;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using SFA.DAS.Providers.Api.Client;
+    using Sfa.Das.Sas.Infrastructure.Repositories;
 
     [TestFixture]
-    public class ProviderServiceGetProviderDetailsTests
+    public class ProviderRepositoryGetProviderDetailsTests
     {
         private const long UkPrn = 11000;
         private Provider _actualResult;
@@ -24,8 +22,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             var mockProviderApiClient = new Mock<IProviderApiClient>();
             _expectedResult = provider;
             mockProviderApiClient.Setup(x => x.Get(UkPrn)).Returns(provider);
-            var providerService = new ProviderService(mockProviderApiClient.Object);
-            _actualResult = providerService.GetProviderDetails(UkPrn);
+            var providerRepository = new ProviderRepository(mockProviderApiClient.Object);
+            _actualResult = providerRepository.GetProviderDetails(UkPrn);
         }
 
         [Test]
