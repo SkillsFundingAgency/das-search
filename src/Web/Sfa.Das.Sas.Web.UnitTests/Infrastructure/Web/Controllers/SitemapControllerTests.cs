@@ -2,18 +2,18 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Helpers;
 using Sfa.Das.Sas.Web.Services;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class SitemapControllerTests
     {
-        [TestMethod]
+        [Test]
         public void ShouldGenerateSitemapXmlGivenProviderList()
         {
             var mockContext = new Mock<HttpContextBase>();
