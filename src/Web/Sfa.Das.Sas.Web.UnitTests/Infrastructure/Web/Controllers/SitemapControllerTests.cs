@@ -33,7 +33,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             var mockProviderRepository = new Mock<IProviderDetailRepository>();
             mockProviderRepository.Setup(x => x.GetProviderList())
-                .Returns(Task.FromResult(new Dictionary<long, string>
+                .Returns(Task.FromResult(
+                    (IDictionary<long, string>)
+                    new Dictionary<long, string>
                 {
                     { prn1, name1 },
                     { prn2, name2 }

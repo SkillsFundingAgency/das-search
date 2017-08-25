@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Core.Domain.Repositories
 {
     public interface IProviderDetailRepository
     {
-        Task<Dictionary<long, string>> GetProviderList();
+        Task<IDictionary<long, string>> GetProviderList();
         Task<Provider> GetProviderDetails(long ukprn);
     }
 }

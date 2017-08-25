@@ -22,7 +22,7 @@
             return _providerApiClient.GetAsync(ukprn);
         }
 
-        public async Task<Dictionary<long, string>> GetProviderList()
+        public async Task<IDictionary<long, string>> GetProviderList()
         {
             var res = await _providerApiClient.FindAllAsync();
             return res.ToDictionary(x => x.Ukprn, x => x.ProviderName);
