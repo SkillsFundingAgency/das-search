@@ -303,7 +303,7 @@
     <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
-    <Compile Include="Services\MappingActions\Helpers\ProviderDetailsViewModelMappingHelper.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderDetailViewModelMappingHelper.cs" />
     <Compile Include="Services\SettingsFinder.cs" />
     <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -348,7 +348,7 @@
     <Compile Include="ViewModels\CookieViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
-    <Compile Include="ViewModels\ProviderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ProviderDetailViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
@@ -405,10 +405,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkResults.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Provider\ProviderDetails.generated.cs">
+    <Compile Include="Views\Provider\ProviderDetail.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProviderDetails.cshtml</DependentUpon>
+      <DependentUpon>ProviderDetail.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\StandardResults.generated.cs">
       <AutoGen>True</AutoGen>
@@ -745,9 +745,9 @@
     <Content Include="Transform.ServiceDefinition.SystemTest.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Provider\ProviderDetails.cshtml">
+    <Content Include="Views\Provider\ProviderDetail.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>ProviderDetails.generated.cs</LastGenOutput>
+      <LastGenOutput>ProviderDetail.generated.cs</LastGenOutput>
     </Content>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

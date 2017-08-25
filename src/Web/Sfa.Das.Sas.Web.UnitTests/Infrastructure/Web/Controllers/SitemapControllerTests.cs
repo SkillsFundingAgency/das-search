@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .Setup(c => c.Request)
                 .Returns(mockRequest.Object);
 
-            var mockProviderRepository = new Mock<IProviderRepository>();
+            var mockProviderRepository = new Mock<IProviderDetailRepository>();
             mockProviderRepository.Setup(x => x.GetProviderList())
                 .Returns(Task.FromResult(new Dictionary<long, string>
                 {

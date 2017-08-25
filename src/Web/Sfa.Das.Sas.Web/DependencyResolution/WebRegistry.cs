@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
 
             For<IMappingService>().Use<MappingService>();
             For<ICookieService>().Use<CookieService>();
-            For<IProviderRepository>().Use<ProviderRepository>();
+            For<IProviderDetailRepository>().Use<ProviderDetailRepository>();
             For<IUrlEncoder>().Use<UrlEncoder>();
 
             For<IProviderApiClient>().Use(x => new ProviderApiClient(null));

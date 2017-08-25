@@ -3,7 +3,7 @@ using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    public class ProviderDetailsViewModel
+    public class ProviderDetailViewModel
    {
        public string TradingNames { get; set; }
         public string Email { get; set; }

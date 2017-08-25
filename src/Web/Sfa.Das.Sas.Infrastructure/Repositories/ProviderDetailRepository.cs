@@ -8,12 +8,12 @@
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using SFA.DAS.Providers.Api.Client;
 
-    public class ProviderRepository : IProviderRepository
+    public class ProviderDetailRepository : IProviderDetailRepository
     {
 
         private readonly IProviderApiClient _providerApiClient;
 
-        public ProviderRepository(IProviderApiClient providerApiClient)
+        public ProviderDetailRepository(IProviderApiClient providerApiClient)
         {
             _providerApiClient = providerApiClient;
         }

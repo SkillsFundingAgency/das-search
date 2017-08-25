@@ -4,11 +4,11 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using ViewModels;
 
-    public static class ProviderDetailsViewModelMappingHelper
+    public static class ProviderDetailViewModelMappingHelper
     {
-        public static ProviderDetailsViewModel GetProviderDetailsViewModel(Provider provider)
+        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider)
         {
-            var viewModel = new ProviderDetailsViewModel();
+            var viewModel = new ProviderDetailViewModel();
             if (provider.Aliases != null && provider.Aliases.Any())
             {
                 viewModel.TradingNames = provider.Aliases.ToList().Aggregate((i, j) => i + ", " + j);

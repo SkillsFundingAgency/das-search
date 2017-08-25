@@ -8,7 +8,7 @@
     using Sfa.Das.Sas.Infrastructure.Repositories;
 
     [TestFixture]
-    public class ProviderRepositoryGetProviderDetailsTests
+    public class ProviderRepositoryGetProviderDetailTests
     {
         private const long UkPrn = 11000;
         private Provider _actualResult;
@@ -22,7 +22,7 @@
             var mockProviderApiClient = new Mock<IProviderApiClient>();
             _expectedResult = provider;
             mockProviderApiClient.Setup(x => x.Get(UkPrn)).Returns(provider);
-            var providerRepository = new ProviderRepository(mockProviderApiClient.Object);
+            var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
             _actualResult = providerRepository.GetProviderDetails(UkPrn);
         }
 

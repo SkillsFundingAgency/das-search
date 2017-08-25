@@ -6,21 +6,21 @@ using Sfa.Das.Sas.Core.Domain.Repositories;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class ProviderHandler : IRequestHandler<ProviderQuery, ProviderDetailResponse>
+    public class ProviderHandler : IRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
     {
-        private readonly IProviderRepository _providerRepository;
+        private readonly IProviderDetailRepository _providerDetailRepository;
 
-        public ProviderHandler(IProviderRepository providerRepository)
+        public ProviderHandler(IProviderDetailRepository providerDetailRepository)
         {
-            _providerRepository = providerRepository;
+            _providerDetailRepository = providerDetailRepository;
         }
 
-        public ProviderDetailResponse Handle(ProviderQuery message)
+        public ProviderDetailResponse Handle(ProviderDetailQuery message)
         {
 
             var response = new ProviderDetailResponse();
 
-            var provider = _providerRepository.GetProviderDetails(message.Prn);
+            var provider = _providerDetailRepository.GetProviderDetails(message.Prn);
 
             response.Provider = provider;
 

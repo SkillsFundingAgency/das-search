@@ -14,13 +14,13 @@ namespace Sfa.Das.Sas.Web.Controllers
     public sealed class SitemapController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IProviderRepository _providerRepository;
+        private readonly IProviderDetailRepository _providerDetailRepository;
         private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapController(IMediator mediator, IProviderRepository providerRepository, IUrlEncoder encoder)
+        public SitemapController(IMediator mediator, IProviderDetailRepository providerDetailRepository, IUrlEncoder encoder)
         {
             _mediator = mediator;
-            _providerRepository = providerRepository;
+            _providerDetailRepository = providerDetailRepository;
             _urlEncoder = encoder;
         }
 
@@ -78,7 +78,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
         public async Task<ActionResult> Providers()
         {
-            var providers = await _providerRepository.GetProviderList();
+            var providers = await _providerDetailRepository.GetProviderList();
 
             var builder = BuildProviderSitemapFromDictionary(providers);
 

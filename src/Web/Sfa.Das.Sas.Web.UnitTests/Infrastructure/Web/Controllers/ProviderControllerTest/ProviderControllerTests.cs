@@ -25,11 +25,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public void DetailShouldReturnNotFoundResultIfApprenticeshipProviderNotFound()
         {
-            var searchCriteria = new ProviderDetailQuery();
-            var stubSearchResponse = new DetailProviderResponse { StatusCode = DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound };
+            var searchCriteria = new ApprenticeshipProviderDetailQuery();
+            var stubSearchResponse = new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound };
 
             ProviderController controller = new ProviderControllerBuilder()
-                .SetupMediator(x => x.Send(It.IsAny<ProviderDetailQuery>()), stubSearchResponse);
+                .SetupMediator(x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>()), stubSearchResponse);
 
             var result = controller.Detail(searchCriteria);
 
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 Website = website
 
             };
-            var expectedProviderDetailViewModel = new ProviderDetailsViewModel
+            var expectedProviderDetailViewModel = new ProviderDetailViewModel
             {
                 TradingNames = tradingNames,
                 EmployerSatisfaction = noSatisfactionScore,
@@ -91,7 +91,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 Website = website
             };
 
-            mockMediator.Setup(x => x.Send(It.IsAny<ProviderQuery>()))
+            mockMediator.Setup(x => x.Send(It.IsAny<ProviderDetailQuery>()))
                 .Returns(new ProviderDetailResponse
                 {
                     Provider = provider,
@@ -99,12 +99,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 });
 
             var providerController = new ProviderController(null, null, mockMediator.Object, null);
-            var result = providerController.ProviderDetails(ukPrn);
+            var result = providerController.ProviderDetail(ukPrn);
             result.Should().BeOfType<ViewResult>();
 
             var viewResult = (ViewResult) result;
 
-            var returnedModel = (ProviderDetailsViewModel)viewResult.Model;
+            var returnedModel = (ProviderDetailViewModel)viewResult.Model;
 
             returnedModel.TradingNames.Should().Be(expectedProviderDetailViewModel.TradingNames);
             returnedModel.Email.Should().Be(expectedProviderDetailViewModel.Email);
@@ -124,9 +124,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public void DetailShouldReturnViewResultWhenStandardSearchIsSuccessful()
         {
-            var searchCriteria = new ProviderDetailQuery { StandardCode = "1", LocationId = 2, Ukprn = 3 };
+            var searchCriteria = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 2, Ukprn = 3 };
 
-            var stubSearchResponse = new DetailProviderResponse();
+            var stubSearchResponse = new ApprenticeshipProviderDetailResponse();
 
             var stubProviderViewModel = new ApprenticeshipDetailsViewModel
             {
@@ -141,8 +141,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             urlHelperMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
 
             ProviderController controller = new ProviderControllerBuilder()
-                .SetupMediator(x => x.Send(It.IsAny<ProviderDetailQuery>()), stubSearchResponse)
-                .SetupMappingService(x => x.Map(It.IsAny<DetailProviderResponse>(), It.IsAny<Action<IMappingOperationOptions<DetailProviderResponse, ApprenticeshipDetailsViewModel>>>()), stubProviderViewModel)
+                .SetupMediator(x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>()), stubSearchResponse)
+                .SetupMappingService(x => x.Map(It.IsAny<ApprenticeshipProviderDetailResponse>(), It.IsAny<Action<IMappingOperationOptions<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>>>()), stubProviderViewModel)
                 .WithUrl(urlHelperMock.Object);
 
             var result = controller.Detail(searchCriteria);

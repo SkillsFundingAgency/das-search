@@ -180,31 +180,31 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProviderDetails(long id)
+        public ActionResult ProviderDetail(long id)
         {
-            var response = _mediator.Send(new ProviderQuery {Prn = id});
-            var viewModel = ProviderDetailsViewModelMappingHelper.GetProviderDetailsViewModel(response.Provider);
+            var response = _mediator.Send(new ProviderDetailQuery { Prn = id});
+            var viewModel = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(response.Provider);
 
             return View(viewModel);
         }
 
         [HttpGet]
-        public ActionResult Detail(ProviderDetailQuery criteria)
+        public ActionResult Detail(ApprenticeshipProviderDetailQuery criteria)
         {
             var response = _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
-                case DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound:
+                case ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound:
                     _logger.Warn($"404 - Cannot find provider: ({criteria.Ukprn}) for apprenticeship product: ({criteria.FrameworkId ?? criteria.StandardCode}) with location: ({criteria.LocationId})");
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                case DetailProviderResponse.ResponseCodes.InvalidInput:
+                case ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput:
                     _logger.Warn($"400 - Bad Request: {criteria.Ukprn}");
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var viewModel = _mappingService.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
+            var viewModel = _mappingService.Map<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
                                 .AfterMap((src, dest) =>
                                 {
                                     dest.SurveyUrl = _settings.SurveyUrl.ToString();

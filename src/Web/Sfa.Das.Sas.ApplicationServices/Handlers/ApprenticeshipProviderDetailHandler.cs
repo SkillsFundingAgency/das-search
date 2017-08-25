@@ -14,16 +14,16 @@ using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public sealed class DetailProviderHandler : IRequestHandler<ProviderDetailQuery, DetailProviderResponse>
+    public sealed class ApprenticeshipProviderDetailHandler : IRequestHandler<ApprenticeshipProviderDetailQuery, ApprenticeshipProviderDetailResponse>
     {
-        private readonly AbstractValidator<ProviderDetailQuery> _validator;
+        private readonly AbstractValidator<ApprenticeshipProviderDetailQuery> _validator;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
         private readonly ILog _logger;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
 
-        public DetailProviderHandler(
-            AbstractValidator<ProviderDetailQuery> validator,
+        public ApprenticeshipProviderDetailHandler(
+            AbstractValidator<ApprenticeshipProviderDetailQuery> validator,
             IApprenticeshipProviderRepository apprenticeshipProviderRepository,
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
@@ -36,13 +36,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _logger = logger;
         }
 
-        public DetailProviderResponse Handle(ProviderDetailQuery message)
+        public ApprenticeshipProviderDetailResponse Handle(ApprenticeshipProviderDetailQuery message)
         {
             var result = _validator.Validate(message);
 
             if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidInput))
             {
-                return new DetailProviderResponse { StatusCode = DetailProviderResponse.ResponseCodes.InvalidInput };
+                return new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput };
             }
 
             if (result.IsValid && !string.IsNullOrEmpty(message.StandardCode))
@@ -55,10 +55,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return GetFramework(message);
             }
 
-            return new DetailProviderResponse { StatusCode = DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound };
+            return new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound };
         }
 
-        private DetailProviderResponse GetStandard(ProviderDetailQuery message)
+        private ApprenticeshipProviderDetailResponse GetStandard(ApprenticeshipProviderDetailQuery message)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
                 message.Ukprn,
@@ -70,7 +70,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return CreateResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
         }
 
-        private DetailProviderResponse GetFramework(ProviderDetailQuery message)
+        private ApprenticeshipProviderDetailResponse GetFramework(ApprenticeshipProviderDetailQuery message)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
                 message.Ukprn,
@@ -82,19 +82,19 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return CreateResponse(model, apprenticeshipProduct, ApprenticeshipTrainingType.Framework);
         }
 
-        private DetailProviderResponse CreateResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)
+        private ApprenticeshipProviderDetailResponse CreateResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)
         {
             if (model == null || apprenticeshipProduct == null)
             {
-                return new DetailProviderResponse
+                return new ApprenticeshipProviderDetailResponse
                 {
-                    StatusCode = DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound
+                    StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound
                 };
             }
 
-            var response = new DetailProviderResponse
+            var response = new ApprenticeshipProviderDetailResponse
             {
-                StatusCode = DetailProviderResponse.ResponseCodes.Success,
+                StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.Success,
                 ApprenticeshipDetails = model,
                 ApprenticeshipType = apprenticeshipProductType,
                 ApprenticeshipName = apprenticeshipProduct.Title,

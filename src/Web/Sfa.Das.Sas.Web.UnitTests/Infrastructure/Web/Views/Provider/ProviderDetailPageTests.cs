@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 using RazorGenerator.Testing;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
@@ -9,7 +8,7 @@ using Sfa.Das.Sas.Web.Views.Provider;
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 {
     [TestFixture]
-    public class ProviderDetailsDetailsPageTests : ViewTestBase
+    public class ProviderDetailPageTests : ViewTestBase
     {
         internal const string TradingNames = "item 1, Another Item, A different item";
         internal const string Phone = "123-456";
@@ -25,7 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldShowFieldsAsExpected()
         {
-            var providerDetails = new ProviderDetails();
+            var providerDetails = new ProviderDetail();
             var model = GetProvider();
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
@@ -46,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldShowNoNationalFieldIfNationalIsFalse()
         {
-            var providerDetails = new ProviderDetails();
+            var providerDetails = new ProviderDetail();
             var model = GetProvider();
             model.NationalProvider = false;
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
@@ -56,7 +55,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldShowEmployerSatisfactionIfNot0()
         {
-            var providerDetails = new ProviderDetails();
+            var providerDetails = new ProviderDetail();
             var model = GetProvider();
             model.EmployerSatisfaction = SatisfactionScore;
             model.EmployerSatisfactionMessage = SatisfactionScoreMessage;
@@ -67,7 +66,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldShowLearnerSatisfactionIf0()
         {
-            var providerDetails = new ProviderDetails();
+            var providerDetails = new ProviderDetail();
             var model = GetProvider();
             model.LearnerSatisfaction = NoSatisfactionScore;
             model.LearnerSatisfactionMessage = NoSatisfactionScoreMessage;
@@ -78,7 +77,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         [Test]
         public void ShouldNotShowSourceIfNoSatisfactionScores()
         {
-            var providerDetails = new ProviderDetails();
+            var providerDetails = new ProviderDetail();
             var model = GetProvider();
             model.EmployerSatisfaction = NoSatisfactionScore;
             model.EmployerSatisfactionMessage = NoSatisfactionScoreMessage;
@@ -89,9 +88,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetPartial(html, ".satisfaction-source").Should().Be(string.Empty);
         }
 
-        private static ProviderDetailsViewModel GetProvider()
+        private static ProviderDetailViewModel GetProvider()
         {
-            return new ProviderDetailsViewModel
+            return new ProviderDetailViewModel
             {
                 TradingNames = TradingNames,
                 EmployerSatisfaction = NoSatisfactionScore,

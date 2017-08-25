@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.Web
             routes.MapRoute(
                 name: "Provider",
                 url: "{controller}/{id}/{providerName}",
-                defaults: new { controller = "Provider", action = "ProviderDetails"});
+                defaults: new { controller = "Provider", action = "ProviderDetail"});
 
             routes.MapRoute(
                 name: "Default",

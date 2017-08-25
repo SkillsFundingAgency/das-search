@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
             };
 
             mockProviderApiClient.Setup(x => x.FindAllAsync()).Returns(Task.FromResult((IEnumerable<ProviderSummary>)providerSummaries));
-            var providerRepository = new ProviderRepository(mockProviderApiClient.Object);
+            var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
             var res = providerRepository.GetProviderList();
             _actualResult = res.Result;
         }
