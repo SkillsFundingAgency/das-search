@@ -22,7 +22,7 @@
         <div class="column-two-thirds">
             <dl class="data-list--provider data-list--compact">
                 <dt>Trading names:</dt>
-                <dd>@Model.TradingNames</dd>
+                <dd id="trading-names">@Model.TradingNames</dd>
                 <dt>UKPRN:</dt>
                 <dd>@Model.Ukprn</dd>
             </dl>
@@ -31,9 +31,29 @@
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
-                    @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Website, Model.ProviderName + " website")
-                    @GetStandardPropertyHtml("Phone number:", "phone", Model.Phone)
-                    @GetEmailPropertyHtml("Email:", "email", Model.Email)
+                     @{var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";}
+                    <dt class="apprenticeshipContactTitle">Website:</dt>
+                    <dd>
+                        <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
+                            @Html.Raw(Model.ProviderName + " website")
+                        </a>
+                    </dd>
+
+                    @{
+                    if (!string.IsNullOrEmpty(Model.Phone))
+                        {
+                        <dt class="phone-title">Phone number:</dt>
+                        <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
+                        }
+                    }
+                    @{
+                    if (!string.IsNullOrEmpty(Model.Email))
+                        {
+                            <dt class="email-title">Email:</dt>
+                            <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
+                        }
+                    }
+
                 </dl>
             </div>
             <div class="panel--contact panel--satisfaction">
@@ -76,50 +96,7 @@
         </div>       
     </div>
 </main>
-
-
-
-
-
-
-@helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
-{
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-        <dt class="@id-title">@title</dt>
-        <dd id="@id" class="@id">@Html.Raw(item)</dd>
-}
-}
-
-@helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
-{
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-        <dt class="email-title">@title</dt>
-        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
-}
-}
-
-@helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
-{
-if (!string.IsNullOrEmpty(url))
-{
-    var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
-        <dt class="@classTitle">@title</dt>
-        <dd>
-            <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
-                @if (string.IsNullOrEmpty(urlTitle))
-                {
-                    @Html.Raw(url)
-                }
-                else
-                {
-                    @Html.Raw(urlTitle)
-                }
-            </a>
-        </dd>
-}
-}
+     
 
 @helper CreateProgressBar(string message, int progress)
 {

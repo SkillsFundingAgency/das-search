@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#provider-name").Should().Contain(ProviderName);
             GetPartial(html, ".tag-national").Should().Contain("National");
-            GetPartial(html, ".data-list--provider").Should().Contain(TradingNames);
+            GetPartial(html, "#trading-names").Should().Contain(TradingNames);
             GetPartial(html, ".data-list--provider").Should().Contain(UkPrn.ToString());
 
             GetPartial(html, ".apprenticeshipContact").Should().Contain(ProviderName + " website");
