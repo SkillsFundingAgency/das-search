@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
@@ -6,7 +6,7 @@ using Sfa.Das.Sas.Core.Domain.Repositories;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class ProviderHandler : IRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
+    public class ProviderHandler : IAsyncRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
     {
         private readonly IProviderDetailRepository _providerDetailRepository;
 
@@ -15,12 +15,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _providerDetailRepository = providerDetailRepository;
         }
 
-        public ProviderDetailResponse Handle(ProviderDetailQuery message)
+        public async Task<ProviderDetailResponse> Handle(ProviderDetailQuery message)
         {
 
             var response = new ProviderDetailResponse();
 
-            var provider = _providerDetailRepository.GetProviderDetails(message.Prn);
+            var provider = await _providerDetailRepository.GetProviderDetails(message.Prn);
 
             response.Provider = provider;
 

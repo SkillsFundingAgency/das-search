@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -18,9 +17,9 @@
             _providerApiClient = providerApiClient;
         }
 
-        public Provider GetProviderDetails(long prn)
+        public Task<Provider> GetProviderDetails(long ukprn)
         {
-            return _providerApiClient.Get(prn);
+            return _providerApiClient.GetAsync(ukprn);
         }
 
         public async Task<Dictionary<long, string>> GetProviderList()

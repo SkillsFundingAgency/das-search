@@ -1,6 +1,4 @@
-﻿using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Infrastructure.Repositories;
-using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -180,9 +178,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProviderDetail(long id)
+        public async Task<ActionResult> ProviderDetail(long id)
         {
-            var response = _mediator.Send(new ProviderDetailQuery { Prn = id});
+            var response = await _mediator.SendAsync(new ProviderDetailQuery { Prn = id});
             var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
 
             return View(viewModel);

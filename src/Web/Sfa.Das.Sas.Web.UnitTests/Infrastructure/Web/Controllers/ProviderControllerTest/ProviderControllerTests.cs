@@ -45,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         {
             var mockMediator = new Mock<IMediator>();
 
-            var aliases = new List<string> {"item 1", "Another Item", "A different item"};
+            var aliases = new List<string> { "item 1", "Another Item", "A different item" };
             const string tradingNames = "item 1, Another Item, A different item";
             const string phone = "123-456";
             const string providerName = "Joe The Plumbers";
@@ -91,18 +91,18 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 Website = website
             };
 
-            mockMediator.Setup(x => x.Send(It.IsAny<ProviderDetailQuery>()))
-                .Returns(new ProviderDetailResponse
+            mockMediator.Setup(x => x.SendAsync(It.IsAny<ProviderDetailQuery>()))
+                .Returns(System.Threading.Tasks.Task.FromResult(new ProviderDetailResponse
                 {
                     Provider = provider,
                     StatusCode = ProviderDetailResponse.ResponseCodes.Success
-                });
+                }));
 
             var providerController = new ProviderController(null, null, mockMediator.Object, null);
-            var result = providerController.ProviderDetail(ukPrn);
+            var result = providerController.ProviderDetail(ukPrn).Result;
             result.Should().BeOfType<ViewResult>();
 
-            var viewResult = (ViewResult) result;
+            var viewResult = (ViewResult)result;
 
             var returnedModel = (ProviderDetailViewModel)viewResult.Model;
 
@@ -119,7 +119,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             returnedModel.ProviderName.Should().Be(expectedProviderDetailViewModel.ProviderName);
             returnedModel.Ukprn.Should().Be(expectedProviderDetailViewModel.Ukprn);
             returnedModel.Website.Should().Be(expectedProviderDetailViewModel.Website);
-          }
+        }
 
         [Test]
         public void DetailShouldReturnViewResultWhenStandardSearchIsSuccessful()

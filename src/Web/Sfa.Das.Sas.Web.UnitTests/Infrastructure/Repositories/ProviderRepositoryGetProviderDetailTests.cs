@@ -1,11 +1,12 @@
 ﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Moq;
     using NUnit.Framework;
+    using Sas.Infrastructure.Repositories;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using SFA.DAS.Providers.Api.Client;
-    using Sfa.Das.Sas.Infrastructure.Repositories;
 
     [TestFixture]
     public class ProviderRepositoryGetProviderDetailTests
@@ -21,9 +22,9 @@
             var provider = GetProvider();
             var mockProviderApiClient = new Mock<IProviderApiClient>();
             _expectedResult = provider;
-            mockProviderApiClient.Setup(x => x.Get(UkPrn)).Returns(provider);
+            mockProviderApiClient.Setup(x => x.GetAsync(UkPrn)).Returns(Task.FromResult(provider));
             var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
-            _actualResult = providerRepository.GetProviderDetails(UkPrn);
+            _actualResult = providerRepository.GetProviderDetails(UkPrn).Result;
         }
 
         [Test]
@@ -36,7 +37,7 @@
         {
             return new Provider
             {
-                Aliases = new List<string> {"alias 5", "alias 1"},
+                Aliases = new List<string> { "alias 5", "alias 1" },
                 EmployerSatisfaction = 0,
                 LearnerSatisfaction = 0,
                 Email = "test@test.co.uk",

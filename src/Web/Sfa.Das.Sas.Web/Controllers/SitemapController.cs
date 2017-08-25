@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -85,7 +86,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(builder, "text/xml");
         }
 
-        private string BuildProviderSitemapFromDictionary(Dictionary<long, string> providers)
+        private string BuildProviderSitemapFromDictionary(IDictionary<long, string> providers)
         {
             var builder = new StringBuilder();
             var baseUrl = GetBaseUrl();
