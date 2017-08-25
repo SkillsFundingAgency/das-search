@@ -14,8 +14,9 @@ namespace Sfa.Das.Sas.Web.Helpers
         public string EncodeTextForUri(string providerNameToProcess)
         {
             var lowerCaseAndApostrophesAndHyphensRemoved = Regex.Replace(providerNameToProcess.ToLower(),"['-]", string.Empty);
-            var ampersandAndPlusReplaced = Regex.Replace(lowerCaseAndApostrophesAndHyphensRemoved, "[&+]", "and");
-            var splitBySpacesAndOtherChars = Regex.Split(ampersandAndPlusReplaced, @"[\s.(),]+");
+            var removePeriods = lowerCaseAndApostrophesAndHyphensRemoved.Replace(".", string.Empty);
+            var ampersandAndPlusReplaced = Regex.Replace(removePeriods, "[&+]", "and");
+            var splitBySpacesAndOtherChars = Regex.Split(ampersandAndPlusReplaced, @"[\s(),]+");
             var rebuildExcludingNoContent = string.Join(
                 "-",
                 splitBySpacesAndOtherChars.Except(new List<string> {string.Empty})
