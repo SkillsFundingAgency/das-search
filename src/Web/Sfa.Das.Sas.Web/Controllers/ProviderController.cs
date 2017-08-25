@@ -183,7 +183,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult ProviderDetail(long id)
         {
             var response = _mediator.Send(new ProviderDetailQuery { Prn = id});
-            var viewModel = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(response.Provider);
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
 
             return View(viewModel);
         }

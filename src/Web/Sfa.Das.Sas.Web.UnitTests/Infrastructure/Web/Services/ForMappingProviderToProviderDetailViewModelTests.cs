@@ -22,7 +22,7 @@
         public void ShouldMapAllPassthroughValuesCorrectly()
         {
             var provider = GetProvider();
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.Email.Should().Be(Email);
             providerDetails.IsEmployerProvider.Should().BeTrue();
             providerDetails.IsHigherEducationInstitute.Should().BeTrue();
@@ -38,7 +38,7 @@
         {
             var provider = GetProvider();
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.TradingNames.Should().Be(null);
         }
 
@@ -51,7 +51,7 @@
             var provider = GetProvider();
             provider.Aliases = aliases;
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.TradingNames.Should().Be(tradingNames);
         }
 
@@ -64,7 +64,7 @@
             var provider = GetProvider();
             provider.Aliases = aliases;
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.TradingNames.Should().Be(tradingNames);
         }
 
@@ -74,7 +74,7 @@
             var provider = GetProvider();
             provider.EmployerSatisfaction = 0;
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.EmployerSatisfaction.Should().Be(NoSatisfactionScore);
             providerDetails.EmployerSatisfactionMessage.Should().Be(NoSatisfactionScoreMessage);
         }
@@ -87,7 +87,7 @@
             provider.EmployerSatisfaction = providerEmployerSatisfaction;
             const string expectedEmployerSatisfactionMessage = "1.5%";
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.EmployerSatisfaction.Should().Be(providerEmployerSatisfaction);
             providerDetails.EmployerSatisfactionMessage.Should().Be(expectedEmployerSatisfactionMessage);
         }
@@ -98,7 +98,7 @@
             var provider = GetProvider();
             provider.LearnerSatisfaction = 0;
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.LearnerSatisfaction.Should().Be(NoSatisfactionScore);
             providerDetails.LearnerSatisfactionMessage.Should().Be(NoSatisfactionScoreMessage);
         }
@@ -111,7 +111,7 @@
             provider.LearnerSatisfaction = providerLearnerSatisfaction;
             const string expectedLearnerSatisfactionMessage = "53.3%";
 
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.LearnerSatisfaction.Should().Be(providerLearnerSatisfaction);
             providerDetails.LearnerSatisfactionMessage.Should().Be(expectedLearnerSatisfactionMessage);
         }
@@ -121,7 +121,7 @@
         {
             var provider = GetProvider();
             provider.IsEmployerProvider = true;
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.IsEmployerProvider.Should().BeTrue();
          }
 
@@ -130,7 +130,7 @@
         {
             var provider = GetProvider();
             provider.IsEmployerProvider = false;
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.IsEmployerProvider.Should().BeFalse();
         }
 
@@ -139,7 +139,7 @@
         {
             var provider = GetProvider();
             provider.IsHigherEducationInstitute = true;
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.IsHigherEducationInstitute.Should().BeTrue();
         }
 
@@ -148,7 +148,7 @@
         {
             var provider = GetProvider();
             provider.IsHigherEducationInstitute = false;
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.IsHigherEducationInstitute.Should().BeFalse();
         }
 
@@ -157,7 +157,7 @@
         {
             var provider = GetProvider();
             provider.NationalProvider = true;
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.NationalProvider.Should().BeTrue();
         }
 
@@ -166,7 +166,7 @@
         {
             var provider = GetProvider();
             provider.NationalProvider = false;
-            var providerDetails = ProviderDetailViewModelMappingHelper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
             providerDetails.NationalProvider.Should().BeFalse();
         }
 

@@ -303,7 +303,7 @@
     <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
-    <Compile Include="Services\MappingActions\Helpers\ProviderDetailViewModelMappingHelper.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderDetailViewModelMapper.cs" />
     <Compile Include="Services\SettingsFinder.cs" />
     <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\SharedController.cs" />

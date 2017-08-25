@@ -4,7 +4,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using ViewModels;
 
-    public static class ProviderDetailViewModelMappingHelper
+    public static class ProviderDetailViewModelMapper
     {
         public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider)
         {
