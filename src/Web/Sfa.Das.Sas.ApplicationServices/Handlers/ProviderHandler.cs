@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public async Task<ProviderDetailResponse> Handle(ProviderDetailQuery message)
         {
-            var provider = await _providerDetailRepository.GetProviderDetails(message.ukPrn);
+            var provider = await _providerDetailRepository.GetProviderDetails(message.UkPrn);
 
             return new ProviderDetailResponse
             {

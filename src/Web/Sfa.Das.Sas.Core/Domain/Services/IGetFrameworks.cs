@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Core.Domain.Services
 
         List<Framework> GetAllFrameworks();
 
-        long GetFrameworksAmount();
+        int GetFrameworksAmount();
 
         long GetFrameworksOffer();
 

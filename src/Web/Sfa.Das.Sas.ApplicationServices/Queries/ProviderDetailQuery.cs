@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
 {
     public sealed class ProviderDetailQuery : IAsyncRequest<ProviderDetailResponse>
     {
-        public long ukPrn { get; set; }
+        public long UkPrn { get; set; }
     }
 }
