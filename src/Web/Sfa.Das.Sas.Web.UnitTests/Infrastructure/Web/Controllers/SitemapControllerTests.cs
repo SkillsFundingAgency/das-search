@@ -19,10 +19,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         {
             var mockContext = new Mock<HttpContextBase>();
             var mockRequest = new Mock<HttpRequestBase>();
-            const long prn1 = 11;
-            const long prn2 = 2;
-            const string name1 = "eleven";
-            const string name2 = "a-two";
+            var ukprn1 = 11;
+            var ukprn2 = 2;
+            var name1 = "eleven";
+            var name2 = "a-two";
 
             const string dummyDomain = "http://test.com";
             mockRequest.Setup(x => x.Url).Returns(new System.Uri(dummyDomain + "/dummy-path-and-query"));
@@ -37,8 +37,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                     (IDictionary<long, string>)
                     new Dictionary<long, string>
                 {
-                    { prn1, name1 },
-                    { prn2, name2 }
+                    { ukprn1, name1 },
+                    { ukprn2, name2 }
                 }));
 
             var mockStringUrlHelper = new Mock<IUrlEncoder>();
@@ -52,12 +52,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             var expectedResult = $@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">
   <url>
     <loc>
-      {dummyDomain}/provider/{prn1}/{name1}
+      {dummyDomain}/provider/{ukprn1}/{name1}
     </loc>
   </url>
   <url>
     <loc>
-      {dummyDomain}/provider/{prn2}/{name2}
+      {dummyDomain}/provider/{ukprn2}/{name2}
     </loc>
   </url>
 </urlset>";

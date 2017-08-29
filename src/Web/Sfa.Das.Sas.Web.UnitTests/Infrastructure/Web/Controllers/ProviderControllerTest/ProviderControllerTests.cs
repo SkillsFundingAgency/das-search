@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MediatR;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
@@ -45,80 +46,20 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         {
             var mockMediator = new Mock<IMediator>();
 
-            var aliases = new List<string> { "item 1", "Another Item", "A different item" };
-            const string tradingNames = "item 1, Another Item, A different item";
-            const string phone = "123-456";
-            const string providerName = "Joe The Plumbers";
-            const string email = "test@test.com";
-            const long ukPrn = 2221221;
-            const string uri = "http://test.com/1234";
-            const string website = "http://test.com";
-            const double noSatisfactionScore = 0;
-            const string noSatisfactionScoreMessage = "no data available";
-            const double satisfactionScore = 15.9;
-            const string satisfactionScoreMessage = "15.9%";
-
-            var provider = new Provider
-            {
-                Aliases = aliases,
-                EmployerSatisfaction = noSatisfactionScore,
-                LearnerSatisfaction = satisfactionScore,
-                Email = email,
-                IsEmployerProvider = true,
-                IsHigherEducationInstitute = false,
-                NationalProvider = true,
-                Phone = phone,
-                Ukprn = ukPrn,
-                ProviderName = providerName,
-                Uri = uri,
-                Website = website
-
-            };
-            var expectedProviderDetailViewModel = new ProviderDetailViewModel
-            {
-                TradingNames = tradingNames,
-                EmployerSatisfaction = noSatisfactionScore,
-                EmployerSatisfactionMessage = noSatisfactionScoreMessage,
-                LearnerSatisfaction = satisfactionScore,
-                LearnerSatisfactionMessage = satisfactionScoreMessage,
-                Email = email,
-                IsEmployerProvider = true,
-                IsHigherEducationInstitute = false,
-                NationalProvider = true,
-                Phone = phone,
-                UkPrn = ukPrn,
-                ProviderName = providerName,
-                Website = website
-            };
-
             mockMediator.Setup(x => x.SendAsync(It.IsAny<ProviderDetailQuery>()))
-                .Returns(System.Threading.Tasks.Task.FromResult(new ProviderDetailResponse
+                .Returns(Task.FromResult(new ProviderDetailResponse
                 {
-                    Provider = provider,
+                    Provider = new Provider(),
                     StatusCode = ProviderDetailResponse.ResponseCodes.Success
                 }));
 
             var providerController = new ProviderController(null, null, mockMediator.Object, null);
-            var result = providerController.ProviderDetail(ukPrn).Result;
+            var result = providerController.ProviderDetail(It.IsAny<long>()).Result;
             result.Should().BeOfType<ViewResult>();
 
-            var viewResult = (ViewResult)result;
+            var returnedModel = ((ViewResult)result).Model as ProviderDetailViewModel;
 
-            var returnedModel = (ProviderDetailViewModel)viewResult.Model;
-
-            returnedModel.TradingNames.Should().Be(expectedProviderDetailViewModel.TradingNames);
-            returnedModel.Email.Should().Be(expectedProviderDetailViewModel.Email);
-            returnedModel.EmployerSatisfaction.Should().Be(expectedProviderDetailViewModel.EmployerSatisfaction);
-            returnedModel.EmployerSatisfactionMessage.Should().Be(expectedProviderDetailViewModel.EmployerSatisfactionMessage);
-            returnedModel.LearnerSatisfaction.Should().Be(expectedProviderDetailViewModel.LearnerSatisfaction);
-            returnedModel.LearnerSatisfactionMessage.Should().Be(expectedProviderDetailViewModel.LearnerSatisfactionMessage);
-            returnedModel.IsEmployerProvider.Should().Be(expectedProviderDetailViewModel.IsEmployerProvider);
-            returnedModel.IsHigherEducationInstitute.Should().Be(expectedProviderDetailViewModel.IsHigherEducationInstitute);
-            returnedModel.NationalProvider.Should().Be(expectedProviderDetailViewModel.NationalProvider);
-            returnedModel.Phone.Should().Be(expectedProviderDetailViewModel.Phone);
-            returnedModel.ProviderName.Should().Be(expectedProviderDetailViewModel.ProviderName);
-            returnedModel.UkPrn.Should().Be(expectedProviderDetailViewModel.UkPrn);
-            returnedModel.Website.Should().Be(expectedProviderDetailViewModel.Website);
+            returnedModel.Should().BeOfType<ProviderDetailViewModel>();
         }
 
         [Test]

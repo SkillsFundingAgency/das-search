@@ -17,15 +17,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public async Task<ProviderDetailResponse> Handle(ProviderDetailQuery message)
         {
-
-            var response = new ProviderDetailResponse();
-
             var provider = await _providerDetailRepository.GetProviderDetails(message.ukPrn);
 
-            response.Provider = provider;
-
-            return response;
-
+            return new ProviderDetailResponse
+            {
+                Provider = provider
+            };
         }
     }
 }

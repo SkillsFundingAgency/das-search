@@ -32,10 +32,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         [TestCase("ST.PATRICK'S INTERNATIONAL COLLEGE LIMITED", "st-patricks-international-college-limited")]
         [TestCase("GUY'S AND ST THOMAS' NHS FOUNDATION TRUST", "guys-and-st-thomas-nhs-foundation-trust")]
         [TestCase("Name with [ weird $ characters", "name-with-\\[-weird-\\$-characters")]
-        public void ShouldReturnStringModifiedForUrlUsage(string words, string modifiedwords)
+        public void ShouldReturnStringModifiedForUrlUsage(string inputText, string encodedText)
         {
-            var actual = new UrlEncoder().EncodeTextForUri(words);
-            Assert.AreEqual(actual, modifiedwords);
+            var actual = new UrlEncoder().EncodeTextForUri(inputText);
+            Assert.AreEqual(actual, encodedText);
         }
     }
 }
