@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             var response = new ProviderDetailResponse();
 
-            var provider = await _providerDetailRepository.GetProviderDetails(message.Prn);
+            var provider = await _providerDetailRepository.GetProviderDetails(message.ukPrn);
 
             response.Provider = provider;
 
