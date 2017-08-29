@@ -61,7 +61,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private ApprenticeshipProviderDetailResponse GetStandard(ApprenticeshipProviderDetailQuery message)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByStandardCode(
-                message.Ukprn,
+                message.UkPrn,
                 message.LocationId,
                 message.StandardCode);
 
@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private ApprenticeshipProviderDetailResponse GetFramework(ApprenticeshipProviderDetailQuery message)
         {
             var model = _apprenticeshipProviderRepository.GetCourseByFrameworkId(
-                message.Ukprn,
+                message.UkPrn,
                 message.LocationId,
                 message.FrameworkId);
 

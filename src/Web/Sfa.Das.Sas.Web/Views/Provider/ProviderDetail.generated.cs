@@ -200,7 +200,7 @@ WriteLiteral("</dd>\r\n                <dt>UKPRN:</dt>\r\n                <dd>")
 
             
             #line 27 "..\..\Views\Provider\ProviderDetail.cshtml"
-               Write(Model.Ukprn);
+               Write(Model.UkPrn);
 
             
             #line default

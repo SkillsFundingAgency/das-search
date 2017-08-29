@@ -28,7 +28,7 @@
             providerDetails.IsHigherEducationInstitute.Should().BeTrue();
             providerDetails.NationalProvider.Should().BeTrue();
             providerDetails.Phone.Should().Be(Phone);
-            providerDetails.Ukprn.Should().Be(UkPrn);
+            providerDetails.UkPrn.Should().Be(UkPrn);
             providerDetails.ProviderName.Should().Be(ProviderName);
             providerDetails.Website.Should().Be(Website);
         }

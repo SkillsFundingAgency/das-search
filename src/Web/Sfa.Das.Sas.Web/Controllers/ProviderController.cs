@@ -194,11 +194,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             switch (response.StatusCode)
             {
                 case ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound:
-                    _logger.Warn($"404 - Cannot find provider: ({criteria.Ukprn}) for apprenticeship product: ({criteria.FrameworkId ?? criteria.StandardCode}) with location: ({criteria.LocationId})");
+                    _logger.Warn($"404 - Cannot find provider: ({criteria.UkPrn}) for apprenticeship product: ({criteria.FrameworkId ?? criteria.StandardCode}) with location: ({criteria.LocationId})");
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
                 case ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput:
-                    _logger.Warn($"400 - Bad Request: {criteria.Ukprn}");
+                    _logger.Warn($"400 - Bad Request: {criteria.UkPrn}");
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 

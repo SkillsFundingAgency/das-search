@@ -102,7 +102,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 IsHigherEducationInstitute = true,
                 NationalProvider = true,
                 Phone = Phone,
-                Ukprn = UkPrn,
+                UkPrn = UkPrn,
                 ProviderName = ProviderName,
                 Website = Website
             };

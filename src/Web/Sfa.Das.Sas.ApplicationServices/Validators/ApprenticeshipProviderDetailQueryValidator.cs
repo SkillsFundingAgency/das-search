@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Validators
     {
         public ApprenticeshipProviderDetailQueryValidator(IValidation validation)
         {
-            RuleFor(criteria => criteria.Ukprn).GreaterThan(0).WithErrorCode(ValidationCodes.InvalidInput);
+            RuleFor(criteria => criteria.UkPrn).GreaterThan(0).WithErrorCode(ValidationCodes.InvalidInput);
             RuleFor(criteria => criteria.LocationId).GreaterThan(0).WithErrorCode(ValidationCodes.InvalidInput);
         }
     }

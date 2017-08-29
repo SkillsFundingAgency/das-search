@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool NationalProvider { get; set; }
         public string Phone { get; set; }
         public string ProviderName { get; set; }
-        public long Ukprn { get; set; }
+        public long UkPrn { get; set; }
         public string Website { get; set; }
     }
 }

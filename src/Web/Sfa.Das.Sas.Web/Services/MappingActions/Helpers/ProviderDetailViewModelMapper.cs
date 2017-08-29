@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             viewModel.LearnerSatisfactionMessage = learnerSatisfationMessage;
             viewModel.NationalProvider = provider.NationalProvider;
             viewModel.Phone = provider.Phone;
-            viewModel.Ukprn = provider.Ukprn;
+            viewModel.UkPrn = provider.Ukprn;
             viewModel.ProviderName = provider.ProviderName;
             viewModel.Website = provider.Website;
             return viewModel;

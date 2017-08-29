@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
 
     public class ApprenticeshipProviderDetailQuery : IRequest<ApprenticeshipProviderDetailResponse>
     {
-        public int Ukprn { get; set; }
+        public int UkPrn { get; set; }
 
         public int LocationId { get; set; }
 

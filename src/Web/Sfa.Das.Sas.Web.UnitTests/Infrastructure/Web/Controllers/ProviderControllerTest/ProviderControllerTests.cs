@@ -86,7 +86,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 IsHigherEducationInstitute = false,
                 NationalProvider = true,
                 Phone = phone,
-                Ukprn = ukPrn,
+                UkPrn = ukPrn,
                 ProviderName = providerName,
                 Website = website
             };
@@ -117,14 +117,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             returnedModel.NationalProvider.Should().Be(expectedProviderDetailViewModel.NationalProvider);
             returnedModel.Phone.Should().Be(expectedProviderDetailViewModel.Phone);
             returnedModel.ProviderName.Should().Be(expectedProviderDetailViewModel.ProviderName);
-            returnedModel.Ukprn.Should().Be(expectedProviderDetailViewModel.Ukprn);
+            returnedModel.UkPrn.Should().Be(expectedProviderDetailViewModel.UkPrn);
             returnedModel.Website.Should().Be(expectedProviderDetailViewModel.Website);
         }
 
         [Test]
         public void DetailShouldReturnViewResultWhenStandardSearchIsSuccessful()
         {
-            var searchCriteria = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 2, Ukprn = 3 };
+            var searchCriteria = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 2, UkPrn = 3 };
 
             var stubSearchResponse = new ApprenticeshipProviderDetailResponse();
 

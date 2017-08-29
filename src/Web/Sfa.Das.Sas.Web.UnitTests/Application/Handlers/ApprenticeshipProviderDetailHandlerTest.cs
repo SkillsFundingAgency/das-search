@@ -60,7 +60,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [TestCase(5, 0)]
         public void ShouldNotValidateIfProviderOrLocationIdIsMissing(int ukprn, int locationId)
         {
-            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = locationId, Ukprn = ukprn };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = locationId, UkPrn = ukprn };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -81,7 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetStandard()
         {
-            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -102,7 +102,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetCourceByStandardCode()
         {
-            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, UkPrn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
@@ -117,7 +117,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetFramework()
         {
-            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 5, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -138,7 +138,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetCourceByFrameworkCode()
         {
-            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 5, UkPrn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Framework1", Level = 4, };
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
@@ -153,7 +153,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAStandard()
         {
-            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 55, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
                                          {
@@ -176,7 +176,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAFramework()
         {
-            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 55, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 55, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -199,7 +199,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAStandardFromAHigherEducationInstitute()
         {
-            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 55, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
