@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             var name1 = "eleven";
             var name2 = "a-two";
 
-            const string dummyDomain = "http://test.com";
+            var dummyDomain = "http://test.com";
             mockRequest.Setup(x => x.Url).Returns(new System.Uri(dummyDomain + "/dummy-path-and-query"));
 
             mockContext

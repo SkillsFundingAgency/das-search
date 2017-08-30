@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using MediatR;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
     using System;
     using System.Net;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using ApplicationServices.Models;
@@ -14,6 +11,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
     using AutoMapper;
     using ControllerBuilders;
     using FluentAssertions;
+    using MediatR;
     using Moq;
     using NUnit.Framework;
     using Sas.Web.Controllers;
