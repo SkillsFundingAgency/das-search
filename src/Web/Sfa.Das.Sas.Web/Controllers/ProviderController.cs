@@ -181,8 +181,23 @@ namespace Sfa.Das.Sas.Web.Controllers
         public async Task<ActionResult> ProviderDetail(long id)
         {
             var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = id });
-            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
 
+            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
+            {
+                var message = $"Cannot find provider: {id}";
+                _logger.Warn($"404 - {message}");
+                return new HttpNotFoundResult(message);
+            }
+
+            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.UkPrnNotCorrectLength)
+            {
+                var message = $"Provider Id wrong length: {id}";
+                _logger.Warn($"400 - {message}");
+
+                return new HttpNotFoundResult(message);
+            }
+
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
             return View(viewModel);
         }
 

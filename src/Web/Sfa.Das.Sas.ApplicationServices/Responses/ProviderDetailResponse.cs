@@ -7,7 +7,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
     {
         public enum ResponseCodes
         {
-            Success
+            Success,
+            ProviderNotFound,
+            UkPrnNotCorrectLength
         }
 
         public ResponseCodes StatusCode { get; set; }
