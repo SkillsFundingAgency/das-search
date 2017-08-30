@@ -1,18 +1,17 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Application
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;
-    using Sfa.Das.Sas.ApplicationServices.Handlers;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Validators;
-    using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Core.Domain.Services;
+    using Sas.ApplicationServices.Handlers;
+    using Sas.ApplicationServices.Models;
+    using Sas.ApplicationServices.Queries;
+    using Sas.ApplicationServices.Responses;
+    using Sas.ApplicationServices.Validators;
+    using Sas.Core.Domain.Model;
+    using Sas.Core.Domain.Repositories;
+    using Sas.Core.Domain.Services;
+    using SFA.DAS.NLog.Logger;
 
     [TestFixture]
     public class ApprenticeshipProviderDetailHandlerTest

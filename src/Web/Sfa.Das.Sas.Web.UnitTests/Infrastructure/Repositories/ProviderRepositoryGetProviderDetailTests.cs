@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
     public class ProviderRepositoryGetProviderDetailTests
     {
         [Test]
-        public async Task ShouldProvideTheMatchingNumberOfProviderSummaries()
+        public async Task ShouldBeOfTypeProvider()
         {
             var mockProviderApiClient = new Mock<IProviderApiClient>();
 

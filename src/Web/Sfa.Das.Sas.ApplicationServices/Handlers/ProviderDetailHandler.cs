@@ -1,21 +1,18 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
-
-namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class ProviderHandler : IAsyncRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Core.Domain.Repositories;
+    using MediatR;
+    using Queries;
+    using Responses;
+    using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
+
+    public class ProviderDetailHandler : IAsyncRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
     {
         private readonly IProviderDetailRepository _providerDetailRepository;
 
-        public ProviderHandler(IProviderDetailRepository providerDetailRepository)
+        public ProviderDetailHandler(IProviderDetailRepository providerDetailRepository)
         {
             _providerDetailRepository = providerDetailRepository;
         }
