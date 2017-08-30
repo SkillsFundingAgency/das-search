@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Helpers;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using Core.Domain.Repositories;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.Web.Controllers;
+    using Sas.Web.Helpers;
+    using SFA.DAS.Apprenticeships.Api.Types.Providers;
+
     [TestFixture]
     public class SitemapControllerTests
     {
@@ -31,15 +32,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 .Setup(c => c.Request)
                 .Returns(mockRequest.Object);
 
+            var providerSummaries = new List<ProviderSummary>
+            {
+                new ProviderSummary {Ukprn = ukprn1, ProviderName = name1},
+                new ProviderSummary { Ukprn = ukprn2, ProviderName = name2}
+            };
+
+
             var mockProviderRepository = new Mock<IProviderDetailRepository>();
             mockProviderRepository.Setup(x => x.GetProviderList())
-                .Returns(Task.FromResult(
-                    (IDictionary<long, string>)
-                    new Dictionary<long, string>
-                {
-                    { ukprn1, name1 },
-                    { ukprn2, name2 }
-                }));
+                .Returns(Task.FromResult((IEnumerable<ProviderSummary>)providerSummaries));
 
             var mockStringUrlHelper = new Mock<IUrlEncoder>();
             mockStringUrlHelper.Setup(x => x.EncodeTextForUri(It.IsAny<string>()))

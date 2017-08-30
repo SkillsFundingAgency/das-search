@@ -1,19 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.Infrastructure.Repositories;
-using SFA.DAS.Apprenticeships.Api.Types.Providers;
-using SFA.DAS.Providers.Api.Client;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.Infrastructure.Repositories;
+    using SFA.DAS.Apprenticeships.Api.Types.Providers;
+    using SFA.DAS.Providers.Api.Client;
+
     [TestFixture]
     public class ProviderRepositoryGetProviderListTests
     {
-        private Dictionary<long, string> _actualResult;
-        private Dictionary<long, string> _expectedResult;
- 
+        private List<ProviderSummary> _actualResult;
+        private List<ProviderSummary> _expectedResult;
+
         [SetUp]
         public void Init()
         {
@@ -33,17 +34,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
                 new ProviderSummary { Ukprn = ukprn3, ProviderName = providerName3 }
             };
 
-            _expectedResult = new Dictionary<long, string>
-            {
-                { ukprn, providerName1 },
-                { ukprn2, providerName2 },
-                { ukprn3, providerName3 }
-            };
+            _expectedResult = providerSummaries;
 
             mockProviderApiClient.Setup(x => x.FindAllAsync()).Returns(Task.FromResult((IEnumerable<ProviderSummary>)providerSummaries));
             var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
             var res = providerRepository.GetProviderList();
-            _actualResult = (Dictionary<long, string>)res.Result;
+            _actualResult = res.Result.ToList();
         }
 
         [Test]

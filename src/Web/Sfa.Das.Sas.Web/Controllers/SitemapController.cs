@@ -9,6 +9,7 @@ using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Web.Helpers;
 using Sfa.Das.Sas.Web.Services;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -86,7 +87,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(builder, "text/xml");
         }
 
-        private string BuildProviderSitemapFromDictionary(IDictionary<long, string> providers)
+        private string BuildProviderSitemapFromDictionary(IEnumerable<ProviderSummary> providers)
         {
             var builder = new StringBuilder();
             var baseUrl = GetBaseUrl();
@@ -95,8 +96,8 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             foreach (var provider in providers)
             {
-                var modifiedProviderName = _urlEncoder.EncodeTextForUri(provider.Value);
-                var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Key, modifiedProviderName);
+                var modifiedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
+                var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Ukprn, modifiedProviderName);
                 builder.AppendLine(urlLocElement);
             }
 

@@ -23,10 +23,10 @@
             return result;
         }
 
-        public async Task<IDictionary<long, string>> GetProviderList()
+        public async Task<IEnumerable<ProviderSummary>> GetProviderList()
         {
             var res = await _providerApiClient.FindAllAsync();
-            return res.ToDictionary(x => x.Ukprn, x => x.ProviderName);
+            return res;
         }
     }
 }
