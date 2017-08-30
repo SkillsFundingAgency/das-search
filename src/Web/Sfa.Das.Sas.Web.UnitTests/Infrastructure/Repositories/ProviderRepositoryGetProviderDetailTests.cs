@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
+﻿using FluentAssertions;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -11,46 +13,15 @@
     [TestFixture]
     public class ProviderRepositoryGetProviderDetailTests
     {
-        private const long UkPrn = 11000;
-        private Provider _actualResult;
-        private Provider _expectedResult;
-
-        [SetUp]
-        public void Init()
-        {
-
-            var provider = GetProvider();
-            var mockProviderApiClient = new Mock<IProviderApiClient>();
-            _expectedResult = provider;
-            mockProviderApiClient.Setup(x => x.GetAsync(UkPrn)).Returns(Task.FromResult(provider));
-            var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
-            _actualResult = providerRepository.GetProviderDetails(UkPrn).Result;
-        }
-
         [Test]
-        public void ShouldProvideTheMatchingNumberOfProviderSummaries()
+        public async Task ShouldProvideTheMatchingNumberOfProviderSummaries()
         {
-            Assert.AreEqual(_actualResult, _expectedResult);
-        }
+            var mockProviderApiClient = new Mock<IProviderApiClient>();
 
-        private static Provider GetProvider()
-        {
-            return new Provider
-            {
-                Aliases = new List<string> { "alias 5", "alias 1" },
-                EmployerSatisfaction = 0,
-                LearnerSatisfaction = 0,
-                Email = "test@test.co.uk",
-                IsEmployerProvider = true,
-                IsHigherEducationInstitute = true,
-                NationalProvider = true,
-                Phone = "553434",
-                Ukprn = UkPrn,
-                ProviderName = "The Fire Brigade",
-                Uri = "http://www.tester.com/stuff",
-                Website = "http://www.tester.com"
-            };
+            mockProviderApiClient.Setup(x => x.GetAsync(It.IsAny<long>())).Returns(Task.FromResult(new Provider()));
+            var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
+            var result = await providerRepository.GetProviderDetails(It.IsAny<long>());
+            result.Should().BeOfType<Provider>();
         }
-
     }
 }

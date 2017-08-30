@@ -9,9 +9,9 @@ namespace Sfa.Das.Sas.Core.Domain.Services
 
         List<Framework> GetAllFrameworks();
 
-        int GetFrameworksAmount();
+        long GetFrameworksAmount();
 
-        long GetFrameworksOffer();
+        int GetFrameworksOffer();
 
         int GetFrameworksExpiringSoon(int daysToExpire);
     }

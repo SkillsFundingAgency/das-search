@@ -17,9 +17,10 @@
             _providerApiClient = providerApiClient;
         }
 
-        public Task<Provider> GetProviderDetails(long ukPrn)
+        public async Task<Provider> GetProviderDetails(long ukPrn)
         {
-            return _providerApiClient.GetAsync(ukPrn);
+            var result = await _providerApiClient.GetAsync(ukPrn);
+            return result;
         }
 
         public async Task<IDictionary<long, string>> GetProviderList()

@@ -180,7 +180,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> ProviderDetail(long id)
         {
-            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = id});
+            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = id });
             var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
 
             return View(viewModel);

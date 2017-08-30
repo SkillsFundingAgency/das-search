@@ -69,7 +69,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             return results.HitsMetaData.Total;
         }
 
-        public long GetFrameworksOffer()
+        public int GetFrameworksOffer()
         {
             var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "frameworkprovider");
             var frameworkIdUkprnList = documents.Select(doc => string.Concat((object) doc.FrameworkId, doc.Ukprn));
