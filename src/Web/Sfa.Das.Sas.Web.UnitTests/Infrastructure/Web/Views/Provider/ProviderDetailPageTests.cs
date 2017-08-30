@@ -79,8 +79,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         {
             var providerDetails = new ProviderDetail();
             var model = GetProvider();
-            model.EmployerSatisfaction = NoSatisfactionScore;
-            model.EmployerSatisfactionMessage = NoSatisfactionScoreMessage;
             model.LearnerSatisfaction = NoSatisfactionScore;
             model.LearnerSatisfactionMessage = NoSatisfactionScoreMessage;
 
