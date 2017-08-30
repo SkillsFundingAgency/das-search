@@ -11,7 +11,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             var viewModel = new ProviderDetailViewModel();
             if (provider.Aliases != null && provider.Aliases.Any())
             {
-                viewModel.TradingNames = provider.Aliases.ToList().Aggregate((i, j) => i + ", " + j);
+                viewModel.TradingNames = provider.Aliases.ToList().Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
             }
 
             var employerSatisfationMessage =
