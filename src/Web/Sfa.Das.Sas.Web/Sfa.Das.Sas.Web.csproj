@@ -164,12 +164,20 @@
       <HintPath>..\packages\RazorGenerator.Mvc.2.4.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.87\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.NLog.Targets.Redis, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Targets.Redis.1.0.0.26805\lib\net45\SFA.DAS.NLog.Targets.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.87\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
@@ -280,6 +288,7 @@
     <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="Extensions\PostcodeExtension.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
+    <Compile Include="Helpers\IUrlEncoder.cs" />
     <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Logging\RequestContext.cs" />
@@ -294,6 +303,7 @@
     <Compile Include="Services\MappingActions\ValueResolvers\LastPageValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\DeliveryModesValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\OverallCohortResolver.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderDetailViewModelMapper.cs" />
     <Compile Include="Services\SettingsFinder.cs" />
     <Compile Include="Services\Validation.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -338,6 +348,7 @@
     <Compile Include="ViewModels\CookieViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ProviderDetailViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
@@ -393,6 +404,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FrameworkResults.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\ProviderDetail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderDetail.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\StandardResults.generated.cs">
       <AutoGen>True</AutoGen>
@@ -728,6 +744,10 @@
     </None>
     <Content Include="Transform.ServiceDefinition.SystemTest.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Provider\ProviderDetail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ProviderDetail.generated.cs</LastGenOutput>
     </Content>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

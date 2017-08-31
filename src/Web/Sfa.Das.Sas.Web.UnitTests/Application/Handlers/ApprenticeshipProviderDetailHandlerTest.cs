@@ -1,20 +1,20 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Responses;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Application
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;
-    using Sfa.Das.Sas.ApplicationServices.Handlers;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Validators;
-    using Sfa.Das.Sas.Core.Domain.Model;
-    using Sfa.Das.Sas.Core.Domain.Services;
+    using Sas.ApplicationServices.Handlers;
+    using Sas.ApplicationServices.Models;
+    using Sas.ApplicationServices.Queries;
+    using Sas.ApplicationServices.Responses;
+    using Sas.ApplicationServices.Validators;
+    using Sas.Core.Domain.Model;
+    using Sas.Core.Domain.Repositories;
+    using Sas.Core.Domain.Services;
+    using SFA.DAS.NLog.Logger;
 
     [TestFixture]
-    public class DetailProviderHandlerTest
+    public class ApprenticeshipProviderDetailHandlerTest
     {
         private Mock<IApprenticeshipProviderRepository> _mockSearchService;
 
@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         private Mock<IGetFrameworks> _mockIGetFrameworks;
         private Mock<ILog> _mockLogger;
 
-        private DetailProviderHandler _handler;
+        private ApprenticeshipProviderDetailHandler _handler;
 
         [SetUp]
         public void Setup()
@@ -35,8 +35,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var providerFrameworkSearchResults = new ApprenticeshipDetails();
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(providerFrameworkSearchResults);
 
-            _handler = new DetailProviderHandler(
-                new ProviderDetailQueryValidator(new Validation()),
+            _handler = new ApprenticeshipProviderDetailHandler(
+                new ApprenticeshipProviderDetailQueryValidator(new Validation()),
                 _mockSearchService.Object,
                 _mockIGetStandards.Object,
                 _mockIGetFrameworks.Object,
@@ -46,11 +46,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldNotValidateIfMissingStandardAndFrameworkCode()
         {
-            var message = new ProviderDetailQuery();
+            var message = new ApprenticeshipProviderDetailQuery();
 
             var response = _handler.Handle(message);
 
-            response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.InvalidInput);
+            response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput);
         }
 
         [TestCase(-42, 5)]
@@ -59,7 +59,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [TestCase(5, 0)]
         public void ShouldNotValidateIfProviderOrLocationIdIsMissing(int ukprn, int locationId)
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = locationId, Ukprn = ukprn };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = locationId, UkPrn = ukprn };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -74,13 +74,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
 
             var response = _handler.Handle(message);
 
-            response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.InvalidInput);
+            response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput);
         }
 
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetStandard()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -95,13 +95,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var response = _handler.Handle(message);
 
             _mockIGetStandards.Verify(x => x.GetStandardById(It.IsAny<string>()), Times.Once);
-            response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound);
+            response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
         }
 
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetCourceByStandardCode()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, UkPrn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4, };
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
@@ -110,13 +110,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var response = _handler.Handle(message);
 
             _mockIGetStandards.Verify(x => x.GetStandardById(It.IsAny<string>()), Times.Once);
-            response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound);
+            response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
         }
 
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetFramework()
         {
-            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 5, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -131,13 +131,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var response = _handler.Handle(message);
 
             _mockIGetFrameworks.Verify(x => x.GetFrameworkById(It.IsAny<string>()), Times.Once);
-            response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound);
+            response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
         }
 
         [Test]
         public void ShouldNotValidateIfNotPossibleToGetCourceByFrameworkCode()
         {
-            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 5, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 5, UkPrn = 42 };
 
             var stubStandardProduct = new Standard { Title = "Framework1", Level = 4, };
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
@@ -146,13 +146,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
             var response = _handler.Handle(message);
 
             _mockIGetFrameworks.Verify(x => x.GetFrameworkById(It.IsAny<string>()), Times.Once);
-            response.StatusCode.Should().Be(DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound);
+            response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
         }
 
         [Test]
         public void ShouldReturnAStandard()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 55, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
                                          {
@@ -175,7 +175,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAFramework()
         {
-            var message = new ProviderDetailQuery { FrameworkId = "1", LocationId = 55, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { FrameworkId = "1", LocationId = 55, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {
@@ -198,7 +198,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application
         [Test]
         public void ShouldReturnAStandardFromAHigherEducationInstitute()
         {
-            var message = new ProviderDetailQuery { StandardCode = "1", LocationId = 55, Ukprn = 42 };
+            var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 55, UkPrn = 42 };
 
             var stubApprenticeship = new ApprenticeshipDetails
             {

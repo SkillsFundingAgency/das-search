@@ -3,7 +3,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
-    public class DetailProviderResponse
+    public class ApprenticeshipProviderDetailResponse
     {
         public enum ResponseCodes
         {

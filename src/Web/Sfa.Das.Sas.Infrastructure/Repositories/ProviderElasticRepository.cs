@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nest;
+﻿using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
-
-using Sfa.Das.Sas.Infrastructure.Mapping;
+using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using SFA.DAS.NLog.Logger;
 
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     public sealed class ProviderElasticRepository : IGetProviders
     {

@@ -56,8 +56,16 @@
       <HintPath>..\packages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.87\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.87\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
@@ -84,10 +92,11 @@
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
+    <Compile Include="Handlers\ProviderDetailHandler.cs" />
     <Compile Include="Handlers\SitemapHandler.cs" />
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
-    <Compile Include="Handlers\DetailProviderHandler.cs" />
+    <Compile Include="Handlers\ApprenticeshipProviderDetailHandler.cs" />
     <Compile Include="Handlers\FrameworkProviderSearchHandler.cs" />
     <Compile Include="Handlers\GetFrameworkHandler.cs" />
     <Compile Include="Handlers\GetFrameworkProvidersHandler.cs" />
@@ -128,11 +137,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
+    <Compile Include="Queries\ProviderDetailQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />
     <Compile Include="Queries\StatsQuery.cs" />
     <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
     <Compile Include="Responses\ApprenticeshipSearchResponse.cs" />
-    <Compile Include="Responses\DetailProviderResponse.cs" />
+    <Compile Include="Responses\ApprenticeshipProviderDetailResponse.cs" />
     <Compile Include="Queries\FrameworkProviderSearchQuery.cs" />
     <Compile Include="Responses\FrameworkProviderSearchResponse.cs" />
     <Compile Include="Queries\GetFrameworkProvidersQuery.cs" />
@@ -143,8 +153,9 @@
     <Compile Include="Queries\GetStandardQuery.cs" />
     <Compile Include="Responses\GetFrameworkResponse.cs" />
     <Compile Include="Responses\GetStandardResponse.cs" />
-    <Compile Include="Queries\ProviderDetailQuery.cs" />
+    <Compile Include="Queries\ApprenticeshipProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderSearchQuery.cs" />
+    <Compile Include="Responses\ProviderDetailResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />
@@ -157,7 +168,7 @@
     <Compile Include="Settings\PaginationSettings.cs" />
     <Compile Include="Validators\FrameworkQueryValidator.cs" />
     <Compile Include="Validators\IValidation.cs" />
-    <Compile Include="Validators\ProviderDetailQueryValidator.cs" />
+    <Compile Include="Validators\ApprenticeshipProviderDetailQueryValidator.cs" />
     <Compile Include="Validators\ProviderSearchQueryValidator.cs" />
     <Compile Include="Validators\Validation.cs" />
     <Compile Include="Validators\ValidationCodes.cs" />

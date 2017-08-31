@@ -1,0 +1,109 @@
+﻿@using Sfa.Das.Sas.Web.Extensions
+@using Sfa.Das.Sas.Web.ViewModels
+@model ProviderDetailViewModel
+
+@{
+    ViewBag.Title = "Provider Details";
+    ViewBag.Description = "";
+}
+<main id="content" class="provider-detail">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge" id="provider-name">
+                @Model.ProviderName 
+                @if (@Model.NationalProvider)
+                {
+                    <span class="tag tag-national">National</span>
+                }
+            </h1>
+        </div>
+    </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <dl class="data-list--provider data-list--compact">
+                <dt>Trading names:</dt>
+                <dd id="trading-names">@Model.TradingNames</dd>
+                <dt>UKPRN:</dt>
+                <dd>@Model.UkPrn</dd>
+            </dl>
+        </div>
+        <div class="column-one-third">
+            <div class="panel--contact">
+                <h2 class="heading-medium">Contact details</h2>
+                <dl>
+                     @{var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";}
+                    <dt class="apprenticeshipContactTitle">Website:</dt>
+                    <dd>
+                        <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
+                            @Html.Raw(Model.ProviderName + " website")
+                        </a>
+                    </dd>
+
+                    @{
+                    if (!string.IsNullOrEmpty(Model.Phone))
+                        {
+                        <dt class="phone-title">Phone number:</dt>
+                        <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
+                        }
+                    }
+                    @{
+                    if (!string.IsNullOrEmpty(Model.Email))
+                        {
+                            <dt class="email-title">Email:</dt>
+                            <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
+                        }
+                    }
+
+                </dl>
+            </div>
+            <div class="panel--contact panel--satisfaction">
+                <dl>
+                    <dt>Employer satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                        </div>
+                    </dd>
+                    <dt>Learner satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                        </div>
+                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                        {
+                            <span class="satisfaction-source font-small">
+                                Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
+                            </span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <div class="panel--disclaimer">
+                <h4>Content disclaimer</h4>
+                <p>
+                    Education & Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes 
+                    no representations about the quality of any courses which appear on the site. Education & Skills Funding Agency 
+                    is not liable for any losses suffered as a result of any party relying on the course information 
+                    provided.
+                </p>
+            </div>
+        </div>       
+    </div>
+</main>
+     
+
+@helper CreateProgressBar(string message, int progress)
+{
+if (progress > 0)
+{
+        <div class="progress-container">
+            <div class="progressbar" style="width: @progress%"></div>
+        </div>
+}
+}

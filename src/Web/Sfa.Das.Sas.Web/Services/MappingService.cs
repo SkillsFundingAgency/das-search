@@ -68,7 +68,7 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(dest => dest.FrameworksWithoutProviders, opt => opt.MapFrom(source => source.FrameworksWithoutProviders))
                    ;
 
-            cfg.CreateMap<DetailProviderResponse, ApprenticeshipDetailsViewModel>()
+            cfg.CreateMap<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>()
                    .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location.Address))
                    .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.Apprenticeship))
                    .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.ContactInformation))

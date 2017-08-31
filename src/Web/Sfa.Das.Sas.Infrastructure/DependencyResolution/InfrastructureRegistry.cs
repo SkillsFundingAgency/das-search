@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using Sfa.Das.Sas.Core.Domain.Repositories;
+using Sfa.Das.Sas.Infrastructure.Repositories;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {

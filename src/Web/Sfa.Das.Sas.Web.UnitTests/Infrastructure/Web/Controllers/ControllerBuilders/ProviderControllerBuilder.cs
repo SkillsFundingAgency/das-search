@@ -1,17 +1,16 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Moq;
-using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Services;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
     using Core.Configuration;
     using MediatR;
+    using Moq;
+    using Sas.Web.Controllers;
+    using Sas.Web.Services;
+    using SFA.DAS.NLog.Logger;
 
     internal class ProviderControllerBuilder
     {

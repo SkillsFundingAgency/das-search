@@ -53,8 +53,16 @@
       <HintPath>..\packages\Polly.4.3.0\lib\net45\Polly.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.87\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.87\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
@@ -120,7 +128,8 @@
     <Compile Include="Domain\Model\ApprenticeshipBasic.cs" />
     <Compile Include="Domain\Model\Framework.cs" />
     <Compile Include="Domain\Model\LocationLookupResponse.cs" />
-    <Compile Include="Domain\Services\IApprenticeshipProviderRepository.cs" />
+    <Compile Include="Domain\Repositories\IApprenticeshipProviderRepository.cs" />
+    <Compile Include="Domain\Repositories\IProviderDetailRepository.cs" />
     <Compile Include="Domain\Services\IGetProviders.cs" />
     <Compile Include="Domain\Services\IGetStandards.cs" />
     <Compile Include="Domain\Services\IGetFrameworks.cs" />

@@ -1,16 +1,29 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Core.Domain.Repositories;
+using Sfa.Das.Sas.Infrastructure.Repositories;
+using Sfa.Das.Sas.Web.Helpers;
+using Sfa.Das.Sas.Web.Services;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
     public sealed class SitemapController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IProviderDetailRepository _providerDetailRepository;
+        private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapController(IMediator mediator)
+        public SitemapController(IMediator mediator, IProviderDetailRepository providerDetailRepository, IUrlEncoder encoder)
         {
             _mediator = mediator;
+            _providerDetailRepository = providerDetailRepository;
+            _urlEncoder = encoder;
         }
 
         public ActionResult Root()
@@ -24,6 +37,9 @@ namespace Sfa.Das.Sas.Web.Controllers
      </sitemap>
      <sitemap>
        <loc>{baseUrl}/sitemap/frameworks</loc>
+     </sitemap>
+     <sitemap>
+       <loc>{baseUrl}/sitemap/providers</loc>
      </sitemap>
 </sitemapindex>";
 
@@ -62,9 +78,47 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(resp.Content, "text/xml");
         }
 
+        public async Task<ActionResult> Providers()
+        {
+            var providers = await _providerDetailRepository.GetProviderList();
+
+            var builder = BuildProviderSitemapFromDictionary(providers);
+
+            return Content(builder, "text/xml");
+        }
+
+        private string BuildProviderSitemapFromDictionary(IEnumerable<ProviderSummary> providers)
+        {
+            var builder = new StringBuilder();
+            var baseUrl = GetBaseUrl();
+
+            builder.AppendLine(@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">");
+
+            foreach (var provider in providers)
+            {
+                var modifiedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
+                var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Ukprn, modifiedProviderName);
+                builder.AppendLine(urlLocElement);
+            }
+
+            builder.Append(@"</urlset>");
+            return builder.ToString();
+        }
+
+        private string BuildUrlLocElementFromDetails(string baseUrl,string grouping, long key, string modifiedProviderName)
+        {
+              var details = $"{baseUrl}/{grouping}/{key}/{modifiedProviderName}";
+
+            return $@"  <url>
+    <loc>
+      {details}
+    </loc>
+  </url>";
+        }
+
         private string GetBaseUrl()
         {
-            return Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
+               return Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, string.Empty);
         }
     }
 }

@@ -1,58 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Mapping;
+using SFA.DAS.Apprenticeships.Api.Client;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 using SFA.DAS.NLog.Logger;
 
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    public sealed class FrameworkElasticRepository : IGetFrameworks
+    public sealed class FrameworkApiRepository : IGetFrameworks
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
-        private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
+        private readonly ILog _applicationLogger;
+        private readonly IFrameworkApiClient _frameworkApiClient;
         private readonly IElasticsearchHelper _elasticsearchHelper;
 
-        public FrameworkElasticRepository(
+        public FrameworkApiRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
-            ILog applicationLogger,
             IConfigurationSettings applicationSettings,
             IFrameworkMapping frameworkMapping,
+            ILog applicationLogger,
+            IFrameworkApiClient frameworkApiClient,
             IElasticsearchHelper elasticsearchHelper)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
-            _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
+            _applicationLogger = applicationLogger;
+            _frameworkApiClient = frameworkApiClient;
             _elasticsearchHelper = elasticsearchHelper;
         }
 
         public Framework GetFrameworkById(string id)
         {
-            var results =
-                _elasticsearchCustomClient.Search<FrameworkSearchResultsItem>(
-                    s =>
-                    s.Index(_applicationSettings.ApprenticeshipIndexAlias)
-                        .Type(Types.Parse("frameworkdocument"))
-                        .From(0)
-                        .Size(1)
-                        .Query(q => q.QueryString(qs => qs.Fields(fs => fs.Field(e => e.FrameworkId)).Query(id.ToString()))));
-
-            if (results.ApiCall.HttpStatusCode != 200)
+            try
             {
-                throw new ApplicationException($"Failed query provider with id {id}");
+                var result = _frameworkApiClient.Get(id);
+                return _frameworkMapping.MapToFramework(result);
             }
+            catch (EntityNotFoundException ex)
+            {
+                throw new ApplicationException($"Failed to get framework with id {id}", ex);
+            }
+        }
 
-            var document = results.Documents.Any() ? results.Documents.First() : null;
-
-            return document != null ? _frameworkMapping.MapToFramework(document) : null;
+        public List<Framework> GetAllFrameworks()
+        {
+            return _elasticsearchHelper.GetAllDocumentsFromIndex<Framework>(_applicationSettings.ApprenticeshipIndexAlias, "frameworkdocument");
         }
 
         public long GetFrameworksAmount()
@@ -67,15 +69,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return results.HitsMetaData.Total;
         }
 
-        public List<Framework> GetAllFrameworks()
-        {
-            return _elasticsearchHelper.GetAllDocumentsFromIndex<Framework>(_applicationSettings.ApprenticeshipIndexAlias, "frameworkdocument");
-        }
-
-        public long GetFrameworksOffer()
+        public int GetFrameworksOffer()
         {
             var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(_applicationSettings.ProviderIndexAlias, "frameworkprovider");
-            var frameworkIdUkprnList = documents.Select(doc => string.Concat(doc.FrameworkId, doc.Ukprn));
+            var frameworkIdUkprnList = documents.Select(doc => string.Concat((object) doc.FrameworkId, doc.Ukprn));
 
             return frameworkIdUkprnList.Distinct().Count();
         }
@@ -97,7 +94,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                     .Exists(e => e
                                         .Field(field => field.ExpiryDate))))));
 
-                var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now.AddDays(1)) let daysDifference = (int) span.TotalDays where daysDifference <= daysToExpire select item).ToList();
+                var expiringElements = (from item in document.Documents where item.ExpiryDate != null let span = item.ExpiryDate.Value.Subtract(DateTime.Now.AddDays(1)) let daysDifference = (int)span.TotalDays where daysDifference <= daysToExpire select item).ToList();
 
                 var response = expiringElements.GroupBy(x => x.FrameworkId).Count();
                 return response;

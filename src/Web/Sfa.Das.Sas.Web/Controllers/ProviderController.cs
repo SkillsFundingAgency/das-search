@@ -1,18 +1,19 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using ApplicationServices.Queries;
+    using ApplicationServices.Responses;
+    using Core.Configuration;﻿
+    using Extensions;
     using MediatR;
+    using Services;
     using SFA.DAS.NLog.Logger;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Responses;
-    using Sfa.Das.Sas.Core.Configuration;﻿
-    using Sfa.Das.Sas.Web.Extensions;
-    using Sfa.Das.Sas.Web.Services;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using ViewModels;
 
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
@@ -177,22 +178,46 @@
         }
 
         [HttpGet]
-        public ActionResult Detail(ProviderDetailQuery criteria)
+        public async Task<ActionResult> ProviderDetail(long id)
+        {
+            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = id });
+
+            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
+            {
+                var message = $"Cannot find provider: {id}";
+                _logger.Warn($"404 - {message}");
+                return new HttpNotFoundResult(message);
+            }
+
+            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.HttpRequestException)
+            {
+                var message = $"Provider Id wrong length: {id}";
+                _logger.Warn($"400 - {message}");
+
+                return new HttpNotFoundResult(message);
+            }
+
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Detail(ApprenticeshipProviderDetailQuery criteria)
         {
             var response = _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
-                case DetailProviderResponse.ResponseCodes.ApprenticeshipProviderNotFound:
-                    _logger.Warn($"404 - Cannot find provider: ({criteria.Ukprn}) for apprenticeship product: ({criteria.FrameworkId ?? criteria.StandardCode}) with location: ({criteria.LocationId})");
+                case ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound:
+                    _logger.Warn($"404 - Cannot find provider: ({criteria.UkPrn}) for apprenticeship product: ({criteria.FrameworkId ?? criteria.StandardCode}) with location: ({criteria.LocationId})");
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                case DetailProviderResponse.ResponseCodes.InvalidInput:
-                    _logger.Warn($"400 - Bad Request: {criteria.Ukprn}");
+                case ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput:
+                    _logger.Warn($"400 - Bad Request: {criteria.UkPrn}");
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var viewModel = _mappingService.Map<DetailProviderResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
+            var viewModel = _mappingService.Map<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
                                 .AfterMap((src, dest) =>
                                 {
                                     dest.SurveyUrl = _settings.SurveyUrl.ToString();
