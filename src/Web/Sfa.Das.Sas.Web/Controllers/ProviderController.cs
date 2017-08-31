@@ -189,7 +189,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.UkPrnNotCorrectLength)
+            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.HttpRequestException)
             {
                 var message = $"Provider Id wrong length: {id}";
                 _logger.Warn($"400 - {message}");

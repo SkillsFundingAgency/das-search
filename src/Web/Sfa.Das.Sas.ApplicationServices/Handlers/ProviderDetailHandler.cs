@@ -28,18 +28,18 @@
                     StatusCode = ProviderDetailResponse.ResponseCodes.Success
                 };
             }
-            catch (EntityNotFoundException ex)
+            catch (EntityNotFoundException)
             {
                 return new ProviderDetailResponse
                 {
                     StatusCode = ProviderDetailResponse.ResponseCodes.ProviderNotFound
                 };
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 return new ProviderDetailResponse
                 {
-                    StatusCode = ProviderDetailResponse.ResponseCodes.UkPrnNotCorrectLength
+                    StatusCode = ProviderDetailResponse.ResponseCodes.HttpRequestException
                 };
             }
         }

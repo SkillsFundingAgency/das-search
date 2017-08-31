@@ -48,7 +48,7 @@
         }
 
         [Test]
-        public void ShouldBeUkPrnNotCorrectLengthStatusCodeIfOddStringLength()
+        public void ShouldBeHttpRequestExceptionIfHttpRequestExceptionThrown()
         {
             _mockProviderDetailRepository = new Mock<IProviderDetailRepository>();
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Throws(new HttpRequestException());
@@ -56,7 +56,7 @@
             var message = new ProviderDetailQuery();
             var response = _handler.Handle(message).Result;
 
-            response.StatusCode.Should().Be(ProviderDetailResponse.ResponseCodes.UkPrnNotCorrectLength);
+            response.StatusCode.Should().Be(ProviderDetailResponse.ResponseCodes.HttpRequestException);
             response.Provider.Should().BeNull();
         }
     }

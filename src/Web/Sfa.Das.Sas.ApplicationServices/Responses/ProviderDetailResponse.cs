@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         {
             Success,
             ProviderNotFound,
-            UkPrnNotCorrectLength
+            HttpRequestException
         }
 
         public ResponseCodes StatusCode { get; set; }
