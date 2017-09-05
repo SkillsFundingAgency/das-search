@@ -21,9 +21,9 @@
     <div class="grid-row">
         <div class="column-two-thirds">
             <dl class="data-list--provider data-list--compact">
-                <dt>Trading names:</dt>
                 @if (!string.IsNullOrEmpty(Model.TradingNames))
                 {
+                    <dt>Trading names:</dt>
                     <dd id="trading-names">@Model.TradingNames</dd>
                 }
                 <dt>UKPRN:</dt>
