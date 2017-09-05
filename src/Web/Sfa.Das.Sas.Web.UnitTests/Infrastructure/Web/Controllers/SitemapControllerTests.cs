@@ -22,8 +22,10 @@
             var mockRequest = new Mock<HttpRequestBase>();
             var ukprn1 = 11;
             var ukprn2 = 2;
+            var ukprn3 = 3;
             var name1 = "eleven";
             var name2 = "a-two";
+            var name3 = "three";
 
             var dummyDomain = "http://test.com";
             mockRequest.Setup(x => x.Url).Returns(new System.Uri(dummyDomain + "/dummy-path-and-query"));
@@ -34,8 +36,9 @@
 
             var providerSummaries = new List<ProviderSummary>
             {
-                new ProviderSummary {Ukprn = ukprn1, ProviderName = name1},
-                new ProviderSummary { Ukprn = ukprn2, ProviderName = name2}
+                new ProviderSummary { Ukprn = ukprn1, ProviderName = name1, IsEmployerProvider = false },
+                new ProviderSummary { Ukprn = ukprn2, ProviderName = name2, IsEmployerProvider = true },
+                new ProviderSummary { Ukprn = ukprn3, ProviderName = name3, IsEmployerProvider = false }
             };
 
 
@@ -59,12 +62,12 @@
   </url>
   <url>
     <loc>
-      {dummyDomain}/provider/{ukprn2}/{name2}
+      {dummyDomain}/provider/{ukprn3}/{name3}
     </loc>
   </url>
 </urlset>";
 
-           Assert.AreEqual(result.Content, expectedResult,"The xml returned was not as expected");
+           Assert.AreEqual(result.Content, expectedResult, "The xml returned was not as expected");
            Assert.AreEqual(result.ContentType, "text/xml", "The content type was not set as xml");
         }
     }

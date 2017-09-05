@@ -82,12 +82,13 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var providers = await _providerDetailRepository.GetProviderList();
 
-            var builder = BuildProviderSitemapFromDictionary(providers);
+            var providersExcludingEmployerProviders = providers.Where(x => x.IsEmployerProvider == false);
+            var builder = BuildProviderSitemapFromListOfProviders(providersExcludingEmployerProviders);
 
             return Content(builder, "text/xml");
         }
 
-        private string BuildProviderSitemapFromDictionary(IEnumerable<ProviderSummary> providers)
+        private string BuildProviderSitemapFromListOfProviders(IEnumerable<ProviderSummary> providers)
         {
             var builder = new StringBuilder();
             var baseUrl = GetBaseUrl();
