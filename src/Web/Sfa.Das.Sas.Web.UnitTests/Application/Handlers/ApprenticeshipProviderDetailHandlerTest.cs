@@ -99,7 +99,7 @@
         }
 
         [Test]
-        public void ShouldNotValidateIfNotPossibleToGetCourceByStandardCode()
+        public void ShouldNotValidateIfNotPossibleToGetCourseByStandardCode()
         {
             var message = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 5, UkPrn = 42 };
 
