@@ -70,7 +70,7 @@
 
             var baseUrl = GetBaseUrl();
 
-            var urlPrefix = $"{baseUrl}provider/{{0}}";
+            var urlPrefix = $"{baseUrl}/provider/{{0}}";
 
             var resp = _mediator.Send(new SitemapQuery
             {
