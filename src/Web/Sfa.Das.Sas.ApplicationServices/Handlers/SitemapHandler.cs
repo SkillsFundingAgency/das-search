@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿using System.Runtime.CompilerServices;
+
+namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -27,7 +29,7 @@
 
         public SitemapResponse Handle(SitemapQuery message)
         {
-            IEnumerable<string> identifiers;
+            IEnumerable<string> identifiers = null;
 
             switch (message.SitemapRequest)
             {
@@ -37,10 +39,10 @@
                 case SitemapType.Frameworks:
                     identifiers = _getFrameworks.GetAllFrameworks().Select(x => x.FrameworkId);
                     break;
+                case SitemapType.Providers:
+                    identifiers = GetProviderDetailsInSeoFormat();
+                    break;
                 default:
-                    var providersExcludingEmployerProviders = _getProviders.GetAllProviders().Where(x => x.IsEmployerProvider == false);
-                    var details = BuildProviderSitemapFromProviders(providersExcludingEmployerProviders);
-                    identifiers = details;
                     break;
             }
 
@@ -52,17 +54,21 @@
             };
         }
 
-        private List<string> BuildProviderSitemapFromProviders(IEnumerable<ProviderSummary> providers)
+        private IEnumerable<string> GetProviderDetailsInSeoFormat()
         {
-            var identifiers = new List<string>();
+            var providersExcludingEmployerProviders = _getProviders.GetAllProviders().Where(x => x.IsEmployerProvider == false);
+            var identifiers = BuildProviderSitemapFromProviders(providersExcludingEmployerProviders);
+            return identifiers;
+        }
+
+        private IEnumerable<string> BuildProviderSitemapFromProviders(IEnumerable<ProviderSummary> providers)
+        {
             foreach (var provider in providers)
             {
-                var modifiedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
-                var urlLocElement = $@"{provider.Ukprn}/{modifiedProviderName}";
-                identifiers.Add(urlLocElement);
+                var encodedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
+                var urlLocElement = $@"{provider.Ukprn}/{encodedProviderName}";
+                yield return urlLocElement;
             }
-
-            return identifiers;
         }
 
         private XDocument CreateDocument(IEnumerable<string> items, string urlPlaceholder)

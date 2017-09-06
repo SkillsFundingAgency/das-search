@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using ApplicationServices.Queries;
     using MediatR;
@@ -71,7 +70,7 @@
 
             var baseUrl = GetBaseUrl();
 
-            var urlPrefix = $"{baseUrl}{Url.Action(string.Empty, "provider", new { id = string.Empty })}/{{0}}";
+            var urlPrefix = $"{baseUrl}provider/{{0}}";
 
             var resp = _mediator.Send(new SitemapQuery
             {

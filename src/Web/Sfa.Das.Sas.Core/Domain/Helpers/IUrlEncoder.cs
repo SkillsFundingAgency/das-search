@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Core.Domain.Helpers
         public string EncodeTextForUri(string providerNameToProcess)
         {
             var lowerCaseAndApostrophesAndHyphensRemoved = Regex.Replace(providerNameToProcess.ToLower(),"['-]", string.Empty);
-              var splitBySpacesAndOtherChars = Regex.Split(lowerCaseAndApostrophesAndHyphensRemoved, @"[\s(),.]+");
+            var splitBySpacesAndOtherChars = Regex.Split(lowerCaseAndApostrophesAndHyphensRemoved, @"[\s(),.]+");
             var rebuildExcludingNoContent = string.Join(
                 "-",
                 splitBySpacesAndOtherChars.Except(new List<string> { string.Empty })
