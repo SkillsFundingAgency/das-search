@@ -31,8 +31,8 @@ namespace Sfa.Das.Sas.Web
 
             routes.MapRoute(
                 name: "Provider",
-                url: "{controller}/{id}/{providerName}",
-                defaults: new { controller = "Provider", action = "ProviderDetail"});
+                url: "provider/{ukprn}/{providerName}",
+                defaults: new { controller = "Provider", action = "ProviderDetail", providerName = UrlParameter.Optional});
 
             routes.MapRoute(
                 name: "Default",

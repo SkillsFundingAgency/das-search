@@ -1,30 +1,35 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using FluentAssertions;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Handlers;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Services;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Linq;
+    using Core.Domain.Helpers;
+    using Core.Domain.Model;
+    using Core.Domain.Services;
+    using FluentAssertions;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.ApplicationServices.Handlers;
+    using Sas.ApplicationServices.Queries;
+    using SFA.DAS.Apprenticeships.Api.Types.Providers;
+
     [TestFixture]
     public sealed class SitemapHandlerTest
     {
         private SitemapHandler _sut;
         private Mock<IGetStandards> _mockGetStandards;
         private Mock<IGetFrameworks> _mockGetFrameworks;
-
+        private Mock<IGetProviderDetails> _mockProviderDetailRepository;
+        private Mock<IUrlEncoder> _mockUrlEncoder;
         [SetUp]
         public void Init()
         {
             _mockGetStandards = new Mock<IGetStandards>();
             _mockGetFrameworks = new Mock<IGetFrameworks>();
+            _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
+            _mockUrlEncoder = new Mock<IUrlEncoder>();
 
-            _sut = new SitemapHandler(_mockGetStandards.Object, _mockGetFrameworks.Object);
+            _sut = new SitemapHandler(_mockGetStandards.Object, _mockGetFrameworks.Object, _mockProviderDetailRepository.Object, _mockUrlEncoder.Object);
         }
 
         [Test]
@@ -40,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
-            
+
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
             nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23");
@@ -67,5 +72,42 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             nodes.Count().Should().Be(1);
             nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Frameworks/23-5-7");
         }
+
+        [Test]
+        public void ShouldReturnXmlSitemapWithCorrectLinksToIndividualNonEmployerProviders()
+        {
+            var providerNameToProcess = "test name 2";
+            var providerNameProcessed = "test-name-2";
+
+            var ukprnToProcess = 1111111;
+
+            _mockProviderDetailRepository.Setup(x => x.GetAllProviders()).Returns(new List<ProviderSummary>
+            {
+                new ProviderSummary
+                {
+                    Ukprn = 11111,
+                    ProviderName = "test name",
+                    IsEmployerProvider = true
+                },
+                new ProviderSummary
+                {
+                    Ukprn = ukprnToProcess,
+                    ProviderName = providerNameToProcess,
+                    IsEmployerProvider = false
+                }
+            });
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(providerNameToProcess)).Returns(providerNameProcessed);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/providers/{0}", SitemapRequest = SitemapType.Providers });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(1);
+            nodes.ElementAt(0).Value.Should().Be($"http://localhost/providers/{ukprnToProcess}/{providerNameProcessed}");
+        }
+
     }
 }

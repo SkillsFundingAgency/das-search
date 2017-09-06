@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using Moq;
     using NUnit.Framework;
     using Sas.Infrastructure.Repositories;
@@ -10,7 +9,7 @@
     using SFA.DAS.Providers.Api.Client;
 
     [TestFixture]
-    public class ProviderRepositoryGetProviderListTests
+    public class ProviderApiRepositoryGetProviderListTests
     {
         private List<ProviderSummary> _actualResult;
         private List<ProviderSummary> _expectedResult;
@@ -36,10 +35,10 @@
 
             _expectedResult = providerSummaries;
 
-            mockProviderApiClient.Setup(x => x.FindAllAsync()).Returns(Task.FromResult((IEnumerable<ProviderSummary>)providerSummaries));
-            var providerRepository = new ProviderDetailRepository(mockProviderApiClient.Object);
-            var res = providerRepository.GetProviderList();
-            _actualResult = res.Result.ToList();
+            mockProviderApiClient.Setup(x => x.FindAll()).Returns((IEnumerable<ProviderSummary>)providerSummaries);
+            var providerRepository = new ProviderApiRepository(mockProviderApiClient.Object);
+            var res = providerRepository.GetAllProviders();
+            _actualResult = res.ToList();
         }
 
         [Test]

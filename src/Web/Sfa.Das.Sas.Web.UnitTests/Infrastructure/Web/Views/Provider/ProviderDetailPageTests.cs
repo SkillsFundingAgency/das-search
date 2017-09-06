@@ -53,6 +53,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
+        public void ShouldShowNoTradingNamesFieldIfNoTradingNames()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.TradingNames = string.Empty;
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#trading-names").Should().Be(string.Empty);
+        }
+
+        [Test]
         public void ShouldShowEmployerSatisfactionIfNot0()
         {
             var providerDetails = new ProviderDetail();
