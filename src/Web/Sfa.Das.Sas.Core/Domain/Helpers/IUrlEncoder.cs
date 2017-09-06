@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Sfa.Das.Sas.Web.Helpers
+namespace Sfa.Das.Sas.Core.Domain.Helpers
 {
     public interface IUrlEncoder
     {

@@ -178,20 +178,20 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProviderDetail(long id)
+        public async Task<ActionResult> ProviderDetail(long ukprn)
         {
-            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = id });
+            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = ukprn });
 
             if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
             {
-                var message = $"Cannot find provider: {id}";
+                var message = $"Cannot find provider: {ukprn}";
                 _logger.Warn($"404 - {message}");
                 return new HttpNotFoundResult(message);
             }
 
             if (response.StatusCode == ProviderDetailResponse.ResponseCodes.HttpRequestException)
             {
-                var message = $"Provider Id wrong length: {id}";
+                var message = $"Provider Id wrong length: {ukprn}";
                 _logger.Warn($"400 - {message}");
 
                 return new HttpNotFoundResult(message);

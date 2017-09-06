@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Sfa.Das.Sas.Web.Helpers;
+using Sfa.Das.Sas.Core.Domain.Helpers;
 using Assert = NUnit.Framework.Assert;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers

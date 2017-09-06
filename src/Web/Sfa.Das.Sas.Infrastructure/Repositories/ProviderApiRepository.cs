@@ -1,18 +1,18 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
+﻿using Sfa.Das.Sas.Core.Domain.Services;
+
+namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using Core.Domain.Repositories;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using SFA.DAS.Providers.Api.Client;
 
-    public class ProviderDetailRepository : IProviderDetailRepository
+    public class ProviderApiRepository : IGetProviderDetails
     {
 
         private readonly IProviderApiClient _providerApiClient;
 
-        public ProviderDetailRepository(IProviderApiClient providerApiClient)
+        public ProviderApiRepository(IProviderApiClient providerApiClient)
         {
             _providerApiClient = providerApiClient;
         }
@@ -23,9 +23,9 @@
             return result;
         }
 
-        public async Task<IEnumerable<ProviderSummary>> GetProviderList()
+        public IEnumerable<ProviderSummary> GetAllProviders()
         {
-            var res = await _providerApiClient.FindAllAsync();
+            var res = _providerApiClient.FindAll();
             return res;
         }
     }

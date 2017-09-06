@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
-namespace Sfa.Das.Sas.Core.Domain.Repositories
+namespace Sfa.Das.Sas.Core.Domain.Services
 {
-    public interface IProviderDetailRepository
+    public interface IGetProviderDetails
     {
-        Task<IEnumerable<ProviderSummary>> GetProviderList();
+        IEnumerable<ProviderSummary> GetAllProviders();
         Task<Provider> GetProviderDetails(long ukPrn);
     }
 }

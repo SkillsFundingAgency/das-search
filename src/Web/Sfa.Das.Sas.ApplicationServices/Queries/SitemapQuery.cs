@@ -6,7 +6,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
     public enum SitemapType
     {
         Standards,
-        Frameworks
+        Frameworks,
+        Providers
     }
 
     public class SitemapQuery : IRequest<SitemapResponse>

@@ -288,7 +288,6 @@
     <Compile Include="Controllers\HealthController.cs" />
     <Compile Include="Extensions\PostcodeExtension.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
-    <Compile Include="Helpers\IUrlEncoder.cs" />
     <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Logging\RequestContext.cs" />

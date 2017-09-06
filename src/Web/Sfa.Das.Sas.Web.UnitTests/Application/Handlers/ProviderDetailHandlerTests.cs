@@ -1,9 +1,10 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+﻿using Sfa.Das.Sas.Core.Domain.Services;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Core.Domain.Repositories;
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;
@@ -16,14 +17,14 @@
     [TestFixture]
     public class ProviderDetailHandlerTests
     {
-        private Mock<IProviderDetailRepository> _mockProviderDetailRepository;
+        private Mock<IGetProviderDetails> _mockProviderDetailRepository;
         private ProviderDetailHandler _handler;
 
         [Test]
         public void ShouldBeSuccessIfProviderReturned()
         {
             var provider = new Provider();
-            _mockProviderDetailRepository = new Mock<IProviderDetailRepository>();
+            _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Returns(Task.FromResult(provider));
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();
@@ -37,7 +38,7 @@
         public void ShouldBeProviderNotFoundStatusCodeIfNoProviderReturned()
         {
             var entityNotfoundException = new EntityNotFoundException(string.Empty, new Exception());
-            _mockProviderDetailRepository = new Mock<IProviderDetailRepository>();
+            _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Throws(entityNotfoundException);
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();
@@ -50,7 +51,7 @@
         [Test]
         public void ShouldBeHttpRequestExceptionIfHttpRequestExceptionThrown()
         {
-            _mockProviderDetailRepository = new Mock<IProviderDetailRepository>();
+            _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Throws(new HttpRequestException());
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();

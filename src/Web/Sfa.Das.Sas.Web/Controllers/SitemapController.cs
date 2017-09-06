@@ -1,29 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Infrastructure.Repositories;
-using Sfa.Das.Sas.Web.Helpers;
-using Sfa.Das.Sas.Web.Services;
-using SFA.DAS.Apprenticeships.Api.Types.Providers;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using ApplicationServices.Queries;
+    using MediatR;
+
     public sealed class SitemapController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IProviderDetailRepository _providerDetailRepository;
-        private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapController(IMediator mediator, IProviderDetailRepository providerDetailRepository, IUrlEncoder encoder)
+        public SitemapController(IMediator mediator)
         {
             _mediator = mediator;
-            _providerDetailRepository = providerDetailRepository;
-            _urlEncoder = encoder;
         }
 
         public ActionResult Root()
@@ -78,43 +66,20 @@ namespace Sfa.Das.Sas.Web.Controllers
             return Content(resp.Content, "text/xml");
         }
 
-        public async Task<ActionResult> Providers()
+        public ActionResult Providers()
         {
-            var providers = await _providerDetailRepository.GetProviderList();
 
-            var providersExcludingEmployerProviders = providers.Where(x => x.IsEmployerProvider == false);
-            var builder = BuildProviderSitemapFromListOfProviders(providersExcludingEmployerProviders);
-
-            return Content(builder, "text/xml");
-        }
-
-        private string BuildProviderSitemapFromListOfProviders(IEnumerable<ProviderSummary> providers)
-        {
-            var builder = new StringBuilder();
             var baseUrl = GetBaseUrl();
 
-            builder.AppendLine(@"<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">");
+            var urlPrefix = $"{baseUrl}{Url.Action(string.Empty, "provider", new { id = string.Empty })}/{{0}}";
 
-            foreach (var provider in providers)
+            var resp = _mediator.Send(new SitemapQuery
             {
-                var modifiedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
-                var urlLocElement = BuildUrlLocElementFromDetails(baseUrl, "provider", provider.Ukprn, modifiedProviderName);
-                builder.AppendLine(urlLocElement);
-            }
+                UrlPlaceholder = urlPrefix,
+                SitemapRequest = SitemapType.Providers
+            });
 
-            builder.Append(@"</urlset>");
-            return builder.ToString();
-        }
-
-        private string BuildUrlLocElementFromDetails(string baseUrl,string grouping, long key, string modifiedProviderName)
-        {
-              var details = $"{baseUrl}/{grouping}/{key}/{modifiedProviderName}";
-
-            return $@"  <url>
-    <loc>
-      {details}
-    </loc>
-  </url>";
+            return Content(resp.Content, "text/xml");
         }
 
         private string GetBaseUrl()

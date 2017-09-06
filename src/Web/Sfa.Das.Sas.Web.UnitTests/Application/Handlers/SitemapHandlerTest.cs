@@ -6,8 +6,10 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Core.Domain.Helpers;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
+
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -17,14 +19,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         private SitemapHandler _sut;
         private Mock<IGetStandards> _mockGetStandards;
         private Mock<IGetFrameworks> _mockGetFrameworks;
-
+        private Mock<IGetProviderDetails> _mockProviderDetailRepository;
+        private Mock<IUrlEncoder> _mockUrlEncoder;
         [SetUp]
         public void Init()
         {
             _mockGetStandards = new Mock<IGetStandards>();
             _mockGetFrameworks = new Mock<IGetFrameworks>();
+            _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
+            _mockUrlEncoder = new Mock<IUrlEncoder>();
 
-            _sut = new SitemapHandler(_mockGetStandards.Object, _mockGetFrameworks.Object);
+            _sut = new SitemapHandler(_mockGetStandards.Object, _mockGetFrameworks.Object, _mockProviderDetailRepository.Object, _mockUrlEncoder.Object);
         }
 
         [Test]
@@ -40,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
-            
+
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
             nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23");
