@@ -1,11 +1,13 @@
-﻿using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Services;
-
-namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System;
+    using System.Collections.Generic;
+    using MediatR;
+    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+    using Sfa.Das.Sas.ApplicationServices.Queries;
+    using Sfa.Das.Sas.ApplicationServices.Responses;
+    using Sfa.Das.Sas.Core.Domain.Services;
+    using SFA.DAS.Apprenticeships.Api.Client;
 
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
@@ -37,6 +39,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
                 return response;
             }
+
+            response.AssessmentOrgansations = new List<Organisation>();
 
             response.Standard = standard;
             response.SearchTerms = message.Keywords;

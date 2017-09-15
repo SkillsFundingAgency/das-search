@@ -1,7 +1,9 @@
-﻿using Sfa.Das.Sas.Core.Domain.Model;
-
-namespace Sfa.Das.Sas.ApplicationServices.Responses
+﻿namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
+    using System.Collections.Generic;
+    using Core.Domain.Model;
+    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+
     public class GetStandardResponse
     {
         public enum ResponseCodes
@@ -16,5 +18,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         public Standard Standard { get; set; }
 
         public string SearchTerms { get; set; }
+
+        public List<Organisation> AssessmentOrgansations { get; set; }
+
     }
 }

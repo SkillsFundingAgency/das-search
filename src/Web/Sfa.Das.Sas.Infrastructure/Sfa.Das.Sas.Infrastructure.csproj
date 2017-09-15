@@ -84,6 +84,10 @@
       <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.87\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.87.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.10.87\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
       <Private>True</Private>
@@ -137,6 +141,7 @@
     <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
+    <Compile Include="Repositories\AssessmentOrganisationApiRepository.cs" />
     <Compile Include="Repositories\ProviderElasticRepository.cs" />
     <Compile Include="Repositories\StandardElasticRepository.cs" />
     <Compile Include="Repositories\FrameworkElasticRepository.cs" />

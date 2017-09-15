@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Infrastructure.Repositories;
+using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
@@ -53,6 +54,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 
             For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
             For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
+            For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
             For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
             For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IStandardMapping>().Use<StandardMapping>();
