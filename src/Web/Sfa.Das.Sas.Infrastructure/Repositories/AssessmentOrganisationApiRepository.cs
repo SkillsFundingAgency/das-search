@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    public sealed class AssessmentOrganisationApiRepository: IAssessmentOrgsApiClient
+    public sealed class AssessmentOrganisationApiRepository : IAssessmentOrgsApiClient
     {
         private readonly IAssessmentOrgsApiClient _apiClient;
 

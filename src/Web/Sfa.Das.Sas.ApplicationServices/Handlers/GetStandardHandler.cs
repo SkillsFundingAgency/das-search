@@ -1,13 +1,11 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    using System;
     using System.Collections.Generic;
+    using Core.Domain.Services;
     using MediatR;
+    using Queries;
+    using Responses;
     using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Responses;
-    using Sfa.Das.Sas.Core.Domain.Services;
-    using SFA.DAS.Apprenticeships.Api.Client;
 
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
