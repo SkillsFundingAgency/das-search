@@ -38,7 +38,7 @@
                 return response;
             }
 
-            response.AssessmentOrgansations = new List<Organisation>();
+            response.AssessmentOrganisations = new List<Organisation>();
 
             response.Standard = standard;
             response.SearchTerms = message.Keywords;

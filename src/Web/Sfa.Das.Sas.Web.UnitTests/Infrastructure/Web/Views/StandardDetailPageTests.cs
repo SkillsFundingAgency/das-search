@@ -1,9 +1,11 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using RazorGenerator.Testing;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
 using Sfa.Das.Sas.Web.ViewModels;
 using Sfa.Das.Sas.Web.Views.Apprenticeship;
+using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
@@ -17,14 +19,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var model = new StandardViewModel
             {
                 Level = 6,
+                AssessmentOrganisations = new List<Organisation>()
             };
             var model2 = new StandardViewModel
             {
                 Level = 4,
+                AssessmentOrganisations = new List<Organisation>()
             };
             var model3 = new StandardViewModel
             {
                 Level = 8,
+                AssessmentOrganisations = new List<Organisation>()
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();

@@ -19,7 +19,7 @@
 
         public string SearchTerms { get; set; }
 
-        public List<Organisation> AssessmentOrgansations { get; set; }
+        public List<Organisation> AssessmentOrganisations { get; set; }
 
     }
 }
