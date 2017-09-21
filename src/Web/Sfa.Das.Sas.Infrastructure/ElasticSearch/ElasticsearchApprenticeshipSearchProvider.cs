@@ -92,7 +92,7 @@
         {
             if (order == 0 || order == 1)
             {
-                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.Title).Descending(f => f.Level));
+                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.TitleKeyword).Descending(f => f.Level));
             }
 
             if (order == 2)
@@ -168,8 +168,7 @@
                                         .Field(f => f.JobRoleItems.First().Description))
                                     .Query(formattedKeywords)
                                     .MinimumShouldMatch("2<70%")
-                                    .PrefixLength(3)
-                                    .Fuzziness(Fuzziness.Auto)),
+                                    .PrefixLength(3)),
                                 bs2 => bs2
                                     .MultiMatch(mm => mm
                                     .Type(TextQueryType.CrossFields)
@@ -177,8 +176,7 @@
                                         .Field(f => f.Title, 2)
                                         .Field(f => f.Keywords))
                                     .Query(formattedKeywords)
-                                    .PrefixLength(3)
-                                    .Fuzziness(Fuzziness.Auto)))))
+                                    .PrefixLength(3)))))
                     .PostFilter(m => FilterBySelectedLevels(m, selectedLevels)
                       && m.Bool(b2 => b2.Filter(f => f.Term(t => t.Field(fi => fi.Published).Value(true)))))
                     .Aggregations(agg => agg
