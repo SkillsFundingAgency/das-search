@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿using System.Linq;
+using SFA.DAS.AssessmentOrgs.Api.Client;
+
+namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Collections.Generic;
     using Core.Domain.Services;
@@ -10,10 +13,12 @@
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
         private readonly IGetStandards _getStandards;
+        private readonly IAssessmentOrgsApiClient _getAssessmentOrgs;
 
-        public GetStandardHandler(IGetStandards getStandards)
+        public GetStandardHandler(IGetStandards getStandards, IAssessmentOrgsApiClient getAssessmentOrgs)
         {
             _getStandards = getStandards;
+            _getAssessmentOrgs = getAssessmentOrgs;
         }
 
         public GetStandardResponse Handle(GetStandardQuery message)
@@ -38,7 +43,7 @@
                 return response;
             }
 
-            response.AssessmentOrganisations = new List<Organisation>();
+            response.AssessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId).ToList();
 
             response.Standard = standard;
             response.SearchTerms = message.Keywords;

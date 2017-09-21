@@ -1,28 +1,31 @@
 ﻿using System.Collections.Generic;
-using FluentAssertions;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Handlers;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Services;
+using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
+    using Core.Domain.Model;
+    using Core.Domain.Services;
+    using FluentAssertions;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.ApplicationServices.Handlers;
+    using Sas.ApplicationServices.Queries;
+    using Sas.ApplicationServices.Responses;
+    using SFA.DAS.AssessmentOrgs.Api.Client;
+
     [TestFixture]
     public sealed class GetStandardHandlerTest
     {
         private GetStandardHandler _sut;
         private Mock<IGetStandards> _mockGetStandards;
-
+        private Mock<IAssessmentOrgsApiClient> _mockAssessmentOrgsClient;
         [SetUp]
         public void Init()
         {
             _mockGetStandards = new Mock<IGetStandards>();
+            _mockAssessmentOrgsClient = new Mock<IAssessmentOrgsApiClient>();
 
-            _sut = new GetStandardHandler(_mockGetStandards.Object);
+            _sut = new GetStandardHandler(_mockGetStandards.Object, _mockAssessmentOrgsClient.Object);
         }
 
         [Test]
@@ -64,6 +67,20 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var response = _sut.Handle(query);
 
             response.Standard.Should().Be(standard);
+        }
+
+
+        [Test]
+        public void ShouldReturnFoundStandardAssessmentOrgsInResponse()
+        {
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var standard = new Standard { StandardId = query.Id };
+            var orgs = new List<Organisation> { new Organisation()};
+            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
+            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns(orgs);
+            var response = _sut.Handle(query);
+
+            response.AssessmentOrganisations.Count.Should().Be(1);
         }
 
         [Test]
