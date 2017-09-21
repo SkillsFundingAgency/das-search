@@ -134,6 +134,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\MyCertificateIgnoringHttpConnection.cs" />
+    <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
     <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />

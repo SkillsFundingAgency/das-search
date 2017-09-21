@@ -35,6 +35,10 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri AchievementRateUrl => new Uri(CloudConfigurationManager.GetSetting("AchievementRateUrl"));
 
+        public string ElasticsearchUsername => ConfigurationManager.AppSettings["ElasticsearchUsername"];
+
+        public string ElasticsearchPassword => ConfigurationManager.AppSettings["ElasticsearchPassword"];
+
         public Uri CookieImprovementUrl => new Uri(CloudConfigurationManager.GetSetting("CookieImprovementUrl"));
 
         public Uri CookieGoogleUrl => new Uri(CloudConfigurationManager.GetSetting("CookieGoogleUrl"));

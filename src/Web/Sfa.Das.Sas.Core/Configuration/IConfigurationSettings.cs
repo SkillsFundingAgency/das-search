@@ -38,5 +38,9 @@ namespace Sfa.Das.Sas.Core.Configuration
         Uri SurveyProviderUrl { get; }
 
         Uri AchievementRateUrl { get; }
+
+        string ElasticsearchUsername { get; }
+
+        string ElasticsearchPassword { get; }
     }
 }
