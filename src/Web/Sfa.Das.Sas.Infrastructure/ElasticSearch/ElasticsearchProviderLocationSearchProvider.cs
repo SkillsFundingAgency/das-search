@@ -260,7 +260,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -281,7 +281,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                         && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -302,7 +302,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                         && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
@@ -323,7 +323,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                         && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
                     .Aggregations(aggs => aggs
-                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                        .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                         .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider)))
                     .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
