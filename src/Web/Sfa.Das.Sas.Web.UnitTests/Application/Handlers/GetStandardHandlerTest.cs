@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id };
-            var orgs = new List<Organisation> { new Organisation()};
+            var orgs = new List<Organisation> { new Organisation() };
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns(orgs);
             var response = _sut.Handle(query);

@@ -43,8 +43,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return response;
             }
 
-           // response.AssessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId).ToList();
-            response.AssessmentOrganisations = new List<Organisation>();
+            response.AssessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId).ToList();
 
             response.Standard = standard;
             response.SearchTerms = message.Keywords;
