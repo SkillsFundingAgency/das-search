@@ -84,6 +84,44 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
             else
             {
+
+                var orgs = new List<Organisation>
+                {
+                    new Organisation
+                    {
+                        Name = "BCS, The Chartered Institute for IT",
+                        Website = "http://www.bcs.org/",
+                        Phone = "01793 417417",
+                        Email = "certifications@bcs.uk"
+                    },
+                    new Organisation
+                    {
+                        Name = "BT PLC",
+                        Website = "http://www.bt.com/",
+                        Phone = "0208 726 1098",
+                        Email = "bob.soperdyer@bt.com"
+                    },
+                    new Organisation
+                    {
+                        Name = "City and Guilds",
+                        Website = "http://www.cityandguilds.com",
+                        Phone = "0044 543 0000",
+                        Email = "apprenticeships@cityandguilds.com"
+                    },
+                    new Organisation
+                    {
+                        Name = "The Colleges' Partnership Ltd",
+                        //Website = "http://thecollegespartnership.co.uk",
+                        Phone = "01258 457085",
+                        Email = "mia.bousfield@thecollegesparntership.co.uk"
+                    }
+                };
+
+                if (keywords == "none")
+                {
+                    orgs = null;
+                }
+
                 var getStandardResponse = new GetStandardResponse
                 {
                     Standard = new Standard
@@ -92,37 +130,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                         OverviewOfRole =
                             "Providing customer service products and services for businesses and other organisations including face-to-face, telephone, digital and written contact and communications.",
                     },
-                    AssessmentOrganisations = new List<Organisation>
-                    {
-                        new Organisation
-                            {
-                            Name = "BCS, The Chartered Institute for IT",
-                            Website = "http://www.bcs.org/",
-                            Phone = "01793 417417",
-                            Email = "certifications@bcs.uk"
-                        },
-                        new Organisation
-                        {
-                            Name = "BT PLC",
-                            Website = "http://www.bt.com/",
-                            Phone = "0208 726 1098",
-                            Email = "bob.soperdyer@bt.com"
-                        },
-                        new Organisation
-                        {
-                            Name = "City and Guilds",
-                            Website = "http://www.cityandguilds.com",
-                            Phone = "0044 543 0000",
-                            Email = "apprenticeships@cityandguilds.com"
-                        },
-                        new Organisation
-                        {
-                            Name = "The Colleges' Partnership Ltd",
-                            Website = "http://thecollegespartnership.co.uk",
-                            Phone = "01258 457085",
-                            Email = "mia.bousfield@thecollegesparntership.co.uk"
-                        }
-                    }
+                    AssessmentOrganisations = orgs
                 };
 
                 var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(getStandardResponse);
