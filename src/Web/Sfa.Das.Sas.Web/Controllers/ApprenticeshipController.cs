@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Domain.Model;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using ApplicationServices.Queries;
+    using ApplicationServices.Responses;
+    using Attribute;
+    using Core.Domain.Model;
     using MediatR;
+    using Services;
+    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
     using SFA.DAS.NLog.Logger;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Responses;
-    using Sfa.Das.Sas.Web.Attribute;
-    using Sfa.Das.Sas.Web.Services;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using ViewModels;
 
     [NoCache]
     public sealed class ApprenticeshipController : Controller

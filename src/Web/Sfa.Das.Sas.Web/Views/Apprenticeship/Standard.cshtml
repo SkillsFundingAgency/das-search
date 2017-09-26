@@ -112,7 +112,7 @@
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt>@title</dt>
-        <dd id="@id">@Html.MarkdownToHtml(item) &nbsp;</dd>
+        <dd id="@id">@Html.MarkdownToHtml(item)@if (item == null){ @Html.Raw("&nbsp;") }</dd>
     }
 }
 

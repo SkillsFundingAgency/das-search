@@ -40,6 +40,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
             html = detail.RenderAsHtml(model3).ToAngleSharp();
             GetPartial(html, "dd", 1).Should().Contain("doctorate");
+
+
         }
     }
 }

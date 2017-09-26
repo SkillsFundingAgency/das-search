@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Organisation>> ByStandardAsync(int standardId)
-        { 
+        {
             var result = await _apiClient.ByStandardAsync(standardId);
             return result;
         }

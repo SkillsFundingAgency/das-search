@@ -51,7 +51,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id));
 
-            var response = _sut.Handle(query);
+            _sut.Handle(query);
 
             _mockGetStandards.Verify(x => x.GetStandardById(query.Id), Times.Once);
         }

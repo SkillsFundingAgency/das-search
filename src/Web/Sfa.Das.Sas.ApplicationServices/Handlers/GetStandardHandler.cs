@@ -3,12 +3,10 @@ using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    using System.Collections.Generic;
     using Core.Domain.Services;
     using MediatR;
     using Queries;
     using Responses;
-    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
