@@ -50,46 +50,11 @@
                 </div>
             </dd>
       
-            <dt>End Point Assessment</dt>
-
-            @if (Model.AssessmentOrganisations.Any())
-            {
-                <dd>
-                    <details>
-                        <summary>View a list of end point assessment organisations for this standard</summary>
-                        <table class="responsive">
-                            <thead>
-                            <tr>
-                                <th scope="col">Organisation</th>
-                                <th scope="col">Phone Number</th>
-                                <th scope="col">Email</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var organisation in Model.AssessmentOrganisations)
-                            {
-                                <tr>
-                                    <td class="" data-label="organisation"><a href="@organisation.Website" target="_blank">@organisation.Name</a></td>
-                                    <td class="" data-label="phone-number">@organisation.Phone</td>
-                                    <td class="" data-label="email"><a href="mailto:@organisation.Email" target="_blank">@organisation.Email</a></td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                    </details>
-                </dd>
-            } 
-            else
-            {
-                <dd>There are no end point assessment organisations for this standard yet. There is a monthly application process for organisations interested in delivering end-point assessment. New organisations are added regularly.<br/><br/>
-                    If you have an urgent need to select an assessment organisation for this standard, please email <a href="mailto:apprentice.assessment@education.gov.uk" target="_blank">apprentice.assessment@education.gov.uk</a> with details.
-                </dd>
-            }
        
         </dl>
-        <div id="grid-row"> 
+        <div class="grid-row"> 
             <div class="column-full">
-                <p style="font-weight: bold; position: relative; left: -15px; float:left;width:29%;">End Point Assessment </p>
+                <p style="font-weight: bold; position: relative; float:left;width:29%;">End Point Assessment </p>
             @if (Model.AssessmentOrganisations.Any())
             {
                 <details style="clear:none;">
@@ -147,7 +112,7 @@
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt>@title</dt>
-        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+        <dd id="@id">@Html.MarkdownToHtml(item) &nbsp;</dd>
     }
 }
 
