@@ -76,7 +76,5 @@ module.exports = function (grunt) {
       'svgmin'
     ]);
 
-    grunt.registerTask('default', [
-      'build'
-    ]);
+    grunt.registerTask('default', ['sass', 'watch']);
 };

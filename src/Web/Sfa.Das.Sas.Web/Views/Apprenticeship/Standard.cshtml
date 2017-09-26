@@ -54,10 +54,10 @@
         </dl>
         <div class="grid-row"> 
             <div class="column-full">
-                <p style="font-weight: bold; position: relative; float:left;width:29%;">End Point Assessment </p>
+                <p class="collapsible">End Point Assessment </p>
             @if (Model.AssessmentOrganisations.Any())
             {
-                <details style="clear:none;">
+                <details>
                
                     <summary><span class="summary" style="text-decoration:none">View a list of end point assessment organisations for this standard</span></summary>
 
@@ -101,7 +101,7 @@
             </div>
         </div>
         <div id="bottom-actions">
-            <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+            <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                 Find training providers
             </a>
         </div>
