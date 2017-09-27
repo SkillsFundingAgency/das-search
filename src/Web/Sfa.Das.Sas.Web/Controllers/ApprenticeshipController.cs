@@ -59,83 +59,25 @@
         // GET: Standard
         public ActionResult Standard(string id, string keywords)
         {
-            if (id != "122")
+            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
+
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
             {
-                var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
-
-                if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
-                {
-                    _logger.Info("404 - Attempt to get standard with an ID below zero");
-                    return HttpNotFound("Cannot find any standards with an ID below zero");
-                }
-
-                if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
-                {
-                    var message = $"Cannot find standard: {id}";
-                    _logger.Warn($"404 - {message}");
-
-                    return new HttpNotFoundResult(message);
-                }
-
-                var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
-
-                return View(viewModel);
+                _logger.Info("404 - Attempt to get standard with an ID below zero");
+                return HttpNotFound("Cannot find any standards with an ID below zero");
             }
-            else
+
+            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
             {
+                var message = $"Cannot find standard: {id}";
+                _logger.Warn($"404 - {message}");
 
-                var orgs = new List<Organisation>
-                {
-                    new Organisation
-                    {
-                        Name = "BCS, The Chartered Institute for IT",
-                        Website = "http://www.bcs.org/",
-                        Phone = "01793 417417",
-                        Email = "certifications@bcs.uk"
-                    },
-                    new Organisation
-                    {
-                        Name = "BT PLC",
-                        Website = "http://www.bt.com/",
-                        Phone = "0208 726 1098",
-                        Email = "bob.soperdyer@bt.com"
-                    },
-                    new Organisation
-                    {
-                        Name = "City and Guilds",
-                        Website = "http://www.cityandguilds.com",
-                        Phone = "0044 543 0000",
-                        Email = "apprenticeships@cityandguilds.com"
-                    },
-                    new Organisation
-                    {
-                        Name = "The Colleges' Partnership Ltd",
-                        //Website = "http://thecollegespartnership.co.uk",
-                        Phone = "01258 457085",
-                        Email = "mia.bousfield@thecollegesparntership.co.uk"
-                    }
-                };
-
-                if (keywords == "none")
-                {
-                    orgs = null;
-                }
-
-                var getStandardResponse = new GetStandardResponse
-                {
-                    Standard = new Standard
-                    {
-                        Title = "Customer Service Practitioner",
-                        OverviewOfRole =
-                            "Providing customer service products and services for businesses and other organisations including face-to-face, telephone, digital and written contact and communications.",
-                    },
-                    AssessmentOrganisations = orgs
-                };
-
-                var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(getStandardResponse);
-
-                return View(viewModel);
+                return new HttpNotFoundResult(message);
             }
+
+            var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
+
+            return View(viewModel);
         }
 
         public ActionResult Framework(string id, string keywords)
