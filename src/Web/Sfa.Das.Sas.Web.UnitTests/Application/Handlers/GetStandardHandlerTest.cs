@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -95,9 +97,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.AssessmentOrganisations.Count.Should().Be(0);
         }
 
-
         [Test]
-        public void ShouldBlahBlah()
+        public void ShouldGenerateAHttpRequestExceptionIfHttpExceptionThrownByAssessmentOrgsClient()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id };
@@ -105,7 +106,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(new HttpRequestException());
             var response = _sut.Handle(query);
 
-            //response.StatusCode.Should().Be(    public class GetStandardResponse.ResponseCodes.??);
+            response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.HttpRequestException);
+            response.AssessmentOrganisations.Should().BeNull();
+        }
+
+        [Test]
+        public void ShouldGenerateAnEntityNotFoundExceptionIfEntityNotFoundExceptionThrownByAssessmentOrgsClient()
+        {
+            var entityNotfoundException = new EntityNotFoundException(string.Empty, new Exception());
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var standard = new Standard { StandardId = query.Id };
+            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
+            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(entityNotfoundException);
+            var response = _sut.Handle(query);
+
+            response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound);
             response.AssessmentOrganisations.Should().BeNull();
         }
 

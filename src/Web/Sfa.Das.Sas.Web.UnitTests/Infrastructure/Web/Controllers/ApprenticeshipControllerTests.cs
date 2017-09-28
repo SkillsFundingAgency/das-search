@@ -107,6 +107,21 @@
         }
 
         [Test]
+        public void ShouldReturnAssessmentOrgsEntityNotFound()
+        {
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardQuery>()))
+                .Returns(new GetStandardResponse
+                {
+                    StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound
+                });
+
+            var result = _sut.Standard("2", "test") as HttpNotFoundResult;
+
+            result.Should().NotBeNull();
+            result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
         public void ShouldReturnStandard()
         {
             // Assign

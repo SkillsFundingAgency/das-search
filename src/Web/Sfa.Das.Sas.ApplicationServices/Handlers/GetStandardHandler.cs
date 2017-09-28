@@ -42,6 +42,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 response.StatusCode = GetStandardResponse.ResponseCodes.StandardNotFound;
                 return response;
             }
+
             response.Standard = standard;
             response.SearchTerms = message.Keywords;
 

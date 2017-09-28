@@ -1,17 +1,14 @@
 ﻿namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
     using ApplicationServices.Queries;
     using ApplicationServices.Responses;
     using Attribute;
-    using Core.Domain.Model;
     using MediatR;
     using Services;
-    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
     using SFA.DAS.NLog.Logger;
     using ViewModels;
 
