@@ -21,62 +21,52 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
 
         public Organisation Get(string organisationId)
         {
-            var res = _apiClient.Get(organisationId);
-            return res;
+            return _apiClient.Get(organisationId);
         }
 
         public async Task<Organisation> GetAsync(string organisationId)
         {
-            var result = await _apiClient.GetAsync(organisationId);
-            return result;
+            return await _apiClient.GetAsync(organisationId);
         }
 
         public IEnumerable<Organisation> ByStandard(int standardId)
         {
-            var res = _apiClient.ByStandard(standardId);
-            return res;
+            return _apiClient.ByStandard(standardId);
         }
 
         public async Task<IEnumerable<Organisation>> ByStandardAsync(int standardId)
         {
-            var result = await _apiClient.ByStandardAsync(standardId);
-            return result;
+            return await _apiClient.ByStandardAsync(standardId);
         }
 
         public IEnumerable<Organisation> ByStandard(string standardId)
         {
-            var res = _apiClient.ByStandard(standardId);
-            return res;
+            return _apiClient.ByStandard(standardId);
         }
 
         public async Task<IEnumerable<Organisation>> ByStandardAsync(string standardId)
         {
-            var result = await _apiClient.ByStandardAsync(standardId);
-            return result;
+            return await _apiClient.ByStandardAsync(standardId);
         }
 
         public IEnumerable<OrganisationSummary> FindAll()
         {
-            var res = _apiClient.FindAll();
-            return res;
+            return _apiClient.FindAll();
         }
 
         public async Task<IEnumerable<OrganisationSummary>> FindAllAsync()
         {
-            var result = await _apiClient.FindAllAsync();
-            return result;
+            return await _apiClient.FindAllAsync();
         }
 
         public bool Exists(string organisationId)
         {
-            var res = _apiClient.Exists(organisationId);
-            return res;
+            return _apiClient.Exists(organisationId);
         }
 
         public async Task<bool> ExistsAsync(string organisationId)
         {
-            var result = await _apiClient.ExistsAsync(organisationId);
-            return result;
+            return await _apiClient.ExistsAsync(organisationId);
         }
     }
 }
