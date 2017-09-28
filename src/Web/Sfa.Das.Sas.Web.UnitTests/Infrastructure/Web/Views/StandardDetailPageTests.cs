@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
-using NUnit.Framework;
-using RazorGenerator.Testing;
-using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
-using Sfa.Das.Sas.Web.ViewModels;
-using Sfa.Das.Sas.Web.Views.Apprenticeship;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
+    using System.Collections.Generic;
+    using ExtensionHelpers;
+    using FluentAssertions;
+    using NUnit.Framework;
+    using RazorGenerator.Testing;
+    using Sas.Web.Views.Apprenticeship;
+    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+    using ViewModels;
+
     [TestFixture]
     public sealed class StandardDetailPageTests : ViewTestBase
     {
@@ -40,8 +40,32 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 
             html = detail.RenderAsHtml(model3).ToAngleSharp();
             GetPartial(html, "dd", 1).Should().Contain("doctorate");
+        }
 
+        [Test]
+        public void ShouldShowNoEndPointAssessment()
+        {
+            var detail = new Standard();
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation>()
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#no-assessment-organisations").Should().Contain("There are no end point assessment");
+        }
 
+        [Test]
+        public void ShouldShowEndPointAssessmentNameOnly()
+        {
+            var detail = new Standard();
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation> { new Organisation { Name = "organisation 1" } }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#organisation-name").Should().Be("organisation 1");
         }
     }
 }

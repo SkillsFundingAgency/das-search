@@ -84,6 +84,19 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
+        public void ShouldReturnNoFoundStandardAssessmentOrgsIfNoneInResponse()
+        {
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var standard = new Standard { StandardId = query.Id };
+            var orgs = new List<Organisation> { new Organisation() };
+            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
+            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((List<Organisation>)null);
+            var response = _sut.Handle(query);
+
+            response.AssessmentOrganisations.Count.Should().Be(0);
+        }
+
+        [Test]
         public void ShouldReturnSearchTerms()
         {
             var query = new GetStandardQuery { Id = "1", Keywords = "Test" };

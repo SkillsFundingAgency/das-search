@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -30,18 +32,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             if (intId < 0)
             {
                 response.StatusCode = GetStandardResponse.ResponseCodes.InvalidStandardId;
-
                 return response;
             }
 
             if (standard == null)
             {
                 response.StatusCode = GetStandardResponse.ResponseCodes.StandardNotFound;
-
                 return response;
             }
 
-            response.AssessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId).ToList();
+            var assessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId);
+
+            response.AssessmentOrganisations = assessmentOrganisations?.ToList() ?? new List<Organisation>();
 
             response.Standard = standard;
             response.SearchTerms = message.Keywords;
