@@ -54,12 +54,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             catch (EntityNotFoundException)
             {
                 response.StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound;
-                return response;
             }
             catch (HttpRequestException)
             {
                 response.StatusCode = GetStandardResponse.ResponseCodes.HttpRequestException;
-                return response;
             }
 
             return response;
