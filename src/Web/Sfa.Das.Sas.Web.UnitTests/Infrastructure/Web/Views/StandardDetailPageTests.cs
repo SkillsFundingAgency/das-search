@@ -56,6 +56,19 @@
         }
 
         [Test]
+        public void ShouldNotShowOrganisationDetailsWhenNoEndPointAssessment()
+        {
+            var detail = new Standard();
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation>()
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#organisation-name").Should().BeEmpty();
+        }
+
+        [Test]
         public void ShouldShowEndPointAssessmentNameOnly()
         {
             var detail = new Standard();
@@ -66,6 +79,19 @@
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#organisation-name").Should().Be("organisation 1");
+        }
+
+        [Test]
+        public void ShouldNotShowNoEndPointAssessmentIOrganisationsPresent()
+        {
+            var detail = new Standard();
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation> { new Organisation { Name = "organisation 1" } }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#no-assessment-organisations").Should().BeEmpty();
         }
     }
 }

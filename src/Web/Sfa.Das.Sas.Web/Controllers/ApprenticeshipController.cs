@@ -61,18 +61,36 @@
         {
             var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
 
-            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
+            switch (response.StatusCode)
             {
-                _logger.Info("404 - Attempt to get standard with an ID below zero");
-                return HttpNotFound("Cannot find any standards with an ID below zero");
-            }
+                case GetStandardResponse.ResponseCodes.InvalidStandardId:
+                {
+                    _logger.Info("404 - Attempt to get standard with an ID below zero");
+                    return HttpNotFound("Cannot find any standards with an ID below zero");
+                }
 
-            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
-            {
-                var message = $"Cannot find standard: {id}";
-                _logger.Warn($"404 - {message}");
+                case GetStandardResponse.ResponseCodes.StandardNotFound:
+                {
+                    var message = $"Cannot find standard: {id}";
+                    _logger.Warn($"404 - {message}");
 
-                return new HttpNotFoundResult(message);
+                    return new HttpNotFoundResult(message);
+                }
+
+                case GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound:
+                {
+                    var message = $"Cannot find assessment organisations for standard: {id}";
+                    _logger.Warn($"404 - {message}");
+                    return new HttpNotFoundResult(message);
+                }
+
+                case GetStandardResponse.ResponseCodes.HttpRequestException:
+                {
+                    var message = $"Request error when requesting assessment orgs for standard: {id}";
+                    _logger.Warn($"400 - {message}");
+
+                    return new HttpNotFoundResult(message);
+                }
             }
 
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);

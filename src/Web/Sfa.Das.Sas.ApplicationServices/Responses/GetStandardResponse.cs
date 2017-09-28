@@ -10,7 +10,9 @@
         {
             Success,
             InvalidStandardId,
-            StandardNotFound
+            StandardNotFound,
+            AssessmentOrgsEntityNotFound,
+            HttpRequestException
         }
 
         public ResponseCodes StatusCode { get; set; }

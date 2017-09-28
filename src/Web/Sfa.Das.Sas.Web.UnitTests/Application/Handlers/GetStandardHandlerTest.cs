@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
@@ -69,7 +70,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.Standard.Should().Be(standard);
         }
 
-
         [Test]
         public void ShouldReturnFoundStandardAssessmentOrgsInResponse()
         {
@@ -88,12 +88,25 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id };
-            var orgs = new List<Organisation> { new Organisation() };
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((List<Organisation>)null);
+            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((IEnumerable<Organisation>)null);
             var response = _sut.Handle(query);
 
             response.AssessmentOrganisations.Count.Should().Be(0);
+        }
+
+
+        [Test]
+        public void ShouldBlahBlah()
+        {
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var standard = new Standard { StandardId = query.Id };
+            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
+            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(new HttpRequestException());
+            var response = _sut.Handle(query);
+
+            //response.StatusCode.Should().Be(    public class GetStandardResponse.ResponseCodes.??);
+            response.AssessmentOrganisations.Should().BeNull();
         }
 
         [Test]

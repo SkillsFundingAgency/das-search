@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -40,13 +42,24 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 response.StatusCode = GetStandardResponse.ResponseCodes.StandardNotFound;
                 return response;
             }
-
-            var assessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId);
-
-            response.AssessmentOrganisations = assessmentOrganisations?.ToList() ?? new List<Organisation>();
-
             response.Standard = standard;
             response.SearchTerms = message.Keywords;
+
+            try
+            {
+                var assessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId);
+                response.AssessmentOrganisations = assessmentOrganisations?.ToList() ?? new List<Organisation>();
+            }
+            catch (EntityNotFoundException)
+            {
+                response.StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound;
+                return response;
+            }
+            catch (HttpRequestException)
+            {
+                response.StatusCode = GetStandardResponse.ResponseCodes.HttpRequestException;
+                return response;
+            }
 
             return response;
         }
