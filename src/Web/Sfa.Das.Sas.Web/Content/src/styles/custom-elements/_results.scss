@@ -22,13 +22,6 @@
     text-transform: capitalize;
 }
 
-.result.standard-result h2 {
-    text-transform: lowercase;
-    &:first-letter{
-        text-transform: uppercase;
-    }
-}
-
 .result-data-list {
     @include data-list(20, true, true);
     dt {
