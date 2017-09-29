@@ -88,7 +88,35 @@
                 AssessmentOrganisations = new List<Organisation> { new Organisation { Name = "organisation 1" } }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#organisation-name").Should().Be("organisation 1");
+            GetPartial(html, ".organisation-name").Should().Be("organisation 1");
+        }
+
+        [Test]
+        public void ShouldShowEndPointAssessmentPhoneNumber()
+        {
+            var detail = new Standard();
+            var phoneNumber = "12345";
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation> { new Organisation { Phone = phoneNumber } }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, ".phone-number").Should().Be(phoneNumber);
+        }
+
+        [Test]
+        public void ShouldShowEndPointAssessmentEmail()
+        {
+            var detail = new Standard();
+            var email = "test1@test.com";
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation> { new Organisation { Email = email } }
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, ".email").Should().Be(email);
         }
 
         [Test]

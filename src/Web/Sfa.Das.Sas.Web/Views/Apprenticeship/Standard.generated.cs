@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5683), Tuple.Create("\"", 5691)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5703), Tuple.Create("\"", 5711)
 
 #line 115 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5688), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5708), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5688), false)
+, 5708), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -162,14 +162,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5972), Tuple.Create("\"", 5980)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5992), Tuple.Create("\"", 6000)
 
 #line 124 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5977), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 5997), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5977), false)
+, 5997), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -266,14 +266,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6591), Tuple.Create("\"", 6605)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6611), Tuple.Create("\"", 6625)
 
 #line 144 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6598), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 6618), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 6598), false)
+, 6618), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -577,7 +577,7 @@ WriteLiteral(">Email</th>\r\n                        </tr>\r\n                  
             #line hidden
 WriteLiteral("                            <tr>\r\n                                <td");
 
-WriteLiteral(" id=\"organisation-name\"");
+WriteLiteral(" class=\"organisation-name\"");
 
 WriteLiteral(" data-label=\"organisation\"");
 
@@ -616,14 +616,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3914), Tuple.Create("\"", 3942)
+WriteAttribute("href", Tuple.Create(" href=\"", 3917), Tuple.Create("\"", 3945)
             
             #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 3921), Tuple.Create<System.Object, System.Int32>(organisation.Website
+, Tuple.Create(Tuple.Create("", 3924), Tuple.Create<System.Object, System.Int32>(organisation.Website
             
             #line default
             #line hidden
-, 3921), false)
+, 3924), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -648,7 +648,7 @@ WriteLiteral("</a>\r\n");
             #line hidden
 WriteLiteral("                                </td>\r\n                                <td");
 
-WriteLiteral(" class=\"\"");
+WriteLiteral(" class=\"phone-number\"");
 
 WriteLiteral(" data-label=\"phone-number\"");
 
@@ -656,28 +656,28 @@ WriteLiteral(">");
 
             
             #line 86 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                  Write(organisation.Phone);
+                                                                              Write(organisation.Phone);
 
             
             #line default
             #line hidden
 WriteLiteral("</td>\r\n                                <td");
 
-WriteLiteral(" class=\"\"");
+WriteLiteral(" class=\"email\"");
 
 WriteLiteral(" data-label=\"email\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4225), Tuple.Create("\"", 4258)
-, Tuple.Create(Tuple.Create("", 4232), Tuple.Create("mailto:", 4232), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 4245), Tuple.Create("\"", 4278)
+, Tuple.Create(Tuple.Create("", 4252), Tuple.Create("mailto:", 4252), true)
             
             #line 87 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4239), Tuple.Create<System.Object, System.Int32>(organisation.Email
+     , Tuple.Create(Tuple.Create("", 4259), Tuple.Create<System.Object, System.Int32>(organisation.Email
             
             #line default
             #line hidden
-, 4239), false)
+, 4259), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -686,7 +686,7 @@ WriteLiteral(">");
 
             
             #line 87 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                Write(organisation.Email);
+                                                                                                                     Write(organisation.Email);
 
             
             #line default
@@ -747,14 +747,14 @@ WriteLiteral(" rel=\"nofollow\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5252), Tuple.Create("\"", 5386)
+WriteAttribute("href", Tuple.Create(" href=\"", 5272), Tuple.Create("\"", 5406)
             
             #line 104 "..\..\Views\Apprenticeship\Standard.cshtml"
-                   , Tuple.Create(Tuple.Create("", 5259), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+                   , Tuple.Create(Tuple.Create("", 5279), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 5259), false)
+, 5279), false)
 );
 
 WriteLiteral(">\r\n                Find training providers\r\n            </a>\r\n        </div>\r\n   " +

@@ -73,7 +73,7 @@
                         @foreach (var organisation in Model.AssessmentOrganisations)
                         {
                             <tr>
-                                <td id="organisation-name" data-label="organisation">
+                                <td class="organisation-name" data-label="organisation">
                                     @if (string.IsNullOrEmpty(organisation.Website))
                                     {
                                         @organisation.Name
@@ -83,8 +83,8 @@
                                         <a href="@organisation.Website" target="_blank">@organisation.Name</a>
                                     }
                                 </td>
-                                <td class="" data-label="phone-number">@organisation.Phone</td>
-                                <td class="" data-label="email"><a href="mailto:@organisation.Email" target="_blank">@organisation.Email</a></td>
+                                <td class="phone-number" data-label="phone-number">@organisation.Phone</td>
+                                <td class="email" data-label="email"><a href="mailto:@organisation.Email" target="_blank">@organisation.Email</a></td>
                             </tr>
                         }
                         </tbody>
