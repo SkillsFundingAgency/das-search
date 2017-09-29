@@ -49,9 +49,59 @@
                     </ul>
                 </div>
             </dd>
+      
+       
         </dl>
+        <div class="grid-row"> 
+            <div class="column-full">
+                <p class="collapsible">End Point Assessment </p>
+            @if (Model.AssessmentOrganisations!= null && Model.AssessmentOrganisations.Any())
+            {
+                <details>
+               
+                    <summary><span class="summary" style="text-decoration:none">View a list of end point assessment organisations for this standard</span></summary>
+
+                    <table class="responsive">
+                        <thead>
+                        <tr>
+                            <th scope="col">Organisation</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var organisation in Model.AssessmentOrganisations)
+                        {
+                            <tr>
+                                <td class="organisation-name" data-label="organisation">
+                                    @if (string.IsNullOrEmpty(organisation.Website))
+                                    {
+                                        @organisation.Name
+                                    }
+                                    else
+                                    {
+                                        <a href="@organisation.Website" target="_blank">@organisation.Name</a>
+                                    }
+                                </td>
+                                <td class="phone-number" data-label="phone-number">@organisation.Phone</td>
+                                <td class="email" data-label="email"><a href="mailto:@organisation.Email" target="_blank">@organisation.Email</a></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+
+                </details>
+            } 
+            else
+            {
+                <p class="text-copy" id="no-assessment-organisations">There are no end point assessment organisations for this standard yet. There is a monthly application process for organisations interested in delivering end-point assessment. New organisations are added regularly.<br/><br/>
+                    If you have an urgent need to select an assessment organisation for this standard, please email <a href="mailto:apprentice.assessment@education.gov.uk" target="_blank">apprentice.assessment@education.gov.uk</a> with details.
+                </p>
+            }
+            </div>
+        </div>
         <div id="bottom-actions">
-            <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+            <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
                 Find training providers
             </a>
         </div>
@@ -62,7 +112,7 @@
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt>@title</dt>
-        <dd id="@id">@Html.MarkdownToHtml(item)</dd>
+        <dd id="@id">@Html.MarkdownToHtml(item)@if (item == null){ @Html.Raw("&nbsp;") }</dd>
     }
 }
 

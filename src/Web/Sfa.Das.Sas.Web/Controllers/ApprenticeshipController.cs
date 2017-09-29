@@ -4,13 +4,13 @@
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using ApplicationServices.Queries;
+    using ApplicationServices.Responses;
+    using Attribute;
     using MediatR;
+    using Services;
     using SFA.DAS.NLog.Logger;
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.ApplicationServices.Responses;
-    using Sfa.Das.Sas.Web.Attribute;
-    using Sfa.Das.Sas.Web.Services;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using ViewModels;
 
     [NoCache]
     public sealed class ApprenticeshipController : Controller
@@ -56,20 +56,38 @@
         // GET: Standard
         public ActionResult Standard(string id, string keywords)
         {
-            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keywords });
+            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
 
-            if (response.StatusCode == GetStandardResponse.ResponseCodes.InvalidStandardId)
+            switch (response.StatusCode)
             {
-                _logger.Info("404 - Attempt to get standard with an ID below zero");
-                return HttpNotFound("Cannot find any standards with an ID below zero");
-            }
+                case GetStandardResponse.ResponseCodes.InvalidStandardId:
+                {
+                    _logger.Info("404 - Attempt to get standard with an ID below zero");
+                    return HttpNotFound("Cannot find any standards with an ID below zero");
+                }
 
-            if (response.StatusCode == GetStandardResponse.ResponseCodes.StandardNotFound)
-            {
-                var message = $"Cannot find standard: {id}";
-                _logger.Warn($"404 - {message}");
+                case GetStandardResponse.ResponseCodes.StandardNotFound:
+                {
+                    var message = $"Cannot find standard: {id}";
+                    _logger.Warn($"404 - {message}");
 
-                return new HttpNotFoundResult(message);
+                    return new HttpNotFoundResult(message);
+                }
+
+                case GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound:
+                {
+                    var message = $"Cannot find assessment organisations for standard: {id}";
+                    _logger.Warn($"404 - {message}");
+                    break;
+                }
+
+                case GetStandardResponse.ResponseCodes.HttpRequestException:
+                {
+                    var message = $"Request error when requesting assessment orgs for standard: {id}";
+                    _logger.Warn($"400 - {message}");
+
+                    return new HttpNotFoundResult(message);
+                }
             }
 
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);

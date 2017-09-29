@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.Web.ViewModels
+﻿using System.Collections.Generic;
+using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+
+namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class StandardViewModel
     {
@@ -27,5 +30,8 @@
         public string OverviewOfRole { get; set; }
 
         public string SearchTerm { get; set; }
+
+        public List<Organisation> AssessmentOrganisations { get; set; }
+
     }
 }

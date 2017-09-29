@@ -423,3 +423,29 @@ aside h2:first-child {
         float: right;
     }
 }
+
+/*custom styles to override defaults*/
+
+.standard-detail{
+    .column-full{
+        details{
+         clear:none;
+            summary {
+                width:70%;
+            }
+        }
+        .collapsible{
+        width:30%;
+        font-weight: bold; 
+        position: relative; 
+        float:left;   
+        }
+    }
+    .btn-find-trng-prov{
+        margin-top:30px;
+    }
+    .text-copy{
+       float: right;
+       width:70%;
+    }
+}

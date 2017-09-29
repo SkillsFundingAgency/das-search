@@ -1,18 +1,18 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-using FluentAssertions;
-using MediatR;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Web.Controllers;
-using Sfa.Das.Sas.Web.Services;
-using Sfa.Das.Sas.Web.ViewModels;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using FluentAssertions;
+    using MediatR;
+    using Moq;
+    using NUnit.Framework;
+    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.ApplicationServices.Queries;
+    using Sfa.Das.Sas.ApplicationServices.Responses;
+    using Sfa.Das.Sas.Web.Controllers;
+    using Sfa.Das.Sas.Web.Services;
+    using Sfa.Das.Sas.Web.ViewModels;
+
     [TestFixture]
     public sealed class ApprenticeshipControllerTests
     {
@@ -104,6 +104,22 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             result.Should().NotBeNull();
             result.StatusCode.Should().Be(404);
+        }
+
+        [Test]
+        public void ShouldReturnViewModelWhenAssessmentOrgsEntityNotFound()
+        {
+            var viewModel = new StandardViewModel();
+            var response = new GetStandardResponse { StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound };
+            _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardQuery>()))
+                .Returns(response);
+            _mockMappingService.Setup(m => m.Map<GetStandardResponse, StandardViewModel>(response))
+                .Returns(viewModel);
+
+            var result = _sut.Standard("2", "test") as ViewResult;
+
+            result.Should().NotBeNull();
+            result.Model.Should().Be(viewModel);
         }
 
         [Test]
