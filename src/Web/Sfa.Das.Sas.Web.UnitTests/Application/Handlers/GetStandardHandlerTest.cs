@@ -69,6 +69,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = _sut.Handle(query);
 
+            _mockGetStandards.VerifyAll();
             response.Standard.Should().Be(standard);
         }
 
@@ -82,6 +83,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns(orgs);
             var response = _sut.Handle(query);
 
+            _mockGetStandards.VerifyAll();
+            _mockAssessmentOrgsClient.VerifyAll();
             response.AssessmentOrganisations.Count.Should().Be(1);
         }
 
@@ -94,6 +97,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((IEnumerable<Organisation>)null);
             var response = _sut.Handle(query);
 
+            _mockGetStandards.VerifyAll();
+            _mockAssessmentOrgsClient.VerifyAll();
             response.AssessmentOrganisations.Count.Should().Be(0);
         }
 
@@ -105,6 +110,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(new HttpRequestException());
             var response = _sut.Handle(query);
+
+            _mockGetStandards.VerifyAll();
+            _mockAssessmentOrgsClient.VerifyAll();
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.HttpRequestException);
             response.AssessmentOrganisations.Should().BeNull();
@@ -120,6 +128,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(entityNotfoundException);
             var response = _sut.Handle(query);
 
+            _mockGetStandards.VerifyAll();
+            _mockAssessmentOrgsClient.VerifyAll();
+
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound);
             response.AssessmentOrganisations.Should().BeEquivalentTo(new List<Organisation>());
         }
@@ -134,6 +145,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = _sut.Handle(query);
 
+            _mockGetStandards.VerifyAll();
             response.SearchTerms.Should().Be(query.Keywords);
         }
     }
