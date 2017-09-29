@@ -107,18 +107,19 @@
         }
 
         [Test]
-        public void ShouldReturnAssessmentOrgsEntityNotFound()
+        public void ShouldReturnViewModelWhenAssessmentOrgsEntityNotFound()
         {
+            var viewModel = new StandardViewModel();
+            var response = new GetStandardResponse { StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound };
             _mockMediator.Setup(x => x.Send(It.IsAny<GetStandardQuery>()))
-                .Returns(new GetStandardResponse
-                {
-                    StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound
-                });
+                .Returns(response);
+            _mockMappingService.Setup(m => m.Map<GetStandardResponse, StandardViewModel>(response))
+                .Returns(viewModel);
 
-            var result = _sut.Standard("2", "test") as HttpNotFoundResult;
+            var result = _sut.Standard("2", "test") as ViewResult;
 
             result.Should().NotBeNull();
-            result.StatusCode.Should().Be(404);
+            result.Model.Should().Be(viewModel);
         }
 
         [Test]

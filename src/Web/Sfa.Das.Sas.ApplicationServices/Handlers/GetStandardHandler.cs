@@ -54,6 +54,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             catch (EntityNotFoundException)
             {
                 response.StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound;
+                response.AssessmentOrganisations = new List<Organisation>();
             }
             catch (HttpRequestException)
             {

@@ -55,7 +55,7 @@
         <div class="grid-row"> 
             <div class="column-full">
                 <p class="collapsible">End Point Assessment </p>
-            @if (Model.AssessmentOrganisations.Any())
+            @if (Model.AssessmentOrganisations!= null && Model.AssessmentOrganisations.Any())
             {
                 <details>
                

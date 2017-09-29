@@ -18,18 +18,15 @@
             var detail = new Standard();
             var model = new StandardViewModel
             {
-                Level = 6,
-                AssessmentOrganisations = new List<Organisation>()
+                Level = 6
             };
             var model2 = new StandardViewModel
             {
-                Level = 4,
-                AssessmentOrganisations = new List<Organisation>()
+                Level = 4
             };
             var model3 = new StandardViewModel
             {
-                Level = 8,
-                AssessmentOrganisations = new List<Organisation>()
+                Level = 8
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -56,7 +53,7 @@
         }
 
         [Test]
-        public void ShouldNotShowOrganisationDetailsWhenNoEndPointAssessment()
+        public void ShouldNotShowOrganisationDetailsWhenNoAssessmentOrganisationsPresent()
         {
             var detail = new Standard();
             var model = new StandardViewModel
@@ -69,7 +66,20 @@
         }
 
         [Test]
-        public void ShouldShowEndPointAssessmentNameOnly()
+        public void ShouldNotShowOrganisationDetailsWhenAssessmentOrganisationsAreNull()
+        {
+            var detail = new Standard();
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = null
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#organisation-name").Should().BeEmpty();
+        }
+
+        [Test]
+        public void ShouldShowEndPointAssessmentName()
         {
             var detail = new Standard();
             var model = new StandardViewModel

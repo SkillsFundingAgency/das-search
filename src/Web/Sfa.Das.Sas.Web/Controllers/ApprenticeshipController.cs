@@ -78,7 +78,7 @@
                 {
                     var message = $"Cannot find assessment organisations for standard: {id}";
                     _logger.Warn($"404 - {message}");
-                    return new HttpNotFoundResult(message);
+                    break;
                 }
 
                 case GetStandardResponse.ResponseCodes.HttpRequestException:

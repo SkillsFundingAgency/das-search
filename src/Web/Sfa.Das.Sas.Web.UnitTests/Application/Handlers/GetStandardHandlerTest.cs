@@ -121,7 +121,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var response = _sut.Handle(query);
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound);
-            response.AssessmentOrganisations.Should().BeNull();
+            response.AssessmentOrganisations.Should().BeEquivalentTo(new List<Organisation>());
         }
 
         [Test]
