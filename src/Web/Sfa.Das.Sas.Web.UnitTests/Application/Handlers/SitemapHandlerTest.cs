@@ -48,8 +48,8 @@
 
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
-            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23");
-            nodes.ElementAt(1).Value.Should().Be("http://localhost/Sitemap/Standards/43");
+            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23/");
+            nodes.ElementAt(1).Value.Should().Be("http://localhost/Sitemap/Standards/43/");
         }
 
         [Test]
@@ -107,6 +107,60 @@
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(1);
             nodes.ElementAt(0).Value.Should().Be($"http://localhost/providers/{ukprnToProcess}/{providerNameProcessed}");
+        }
+
+        [Test]
+        public void ShouldReturnXmlSitemapWithStandardNames()
+        {
+            var standardOneTitle = "Standard One";
+            var standardOneEncoded = "standard-one";
+
+            _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
+            {
+                new Standard {StandardId = "1", Title = standardOneTitle, IsPublished = true},
+                new Standard {StandardId = "2", IsPublished = true}
+            });
+
+            const string urlPrefix = "http://localhost/Sitemap/";
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(standardOneTitle)).Returns(standardOneEncoded);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = $"{urlPrefix}Standards/{{0}}", SitemapRequest = SitemapType.Standards });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(2);
+            nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Standards/1/{standardOneEncoded}");
+            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Standards/2/");
+        }
+
+        [Test]
+        public void ShouldReturnXmlSitemapWithFrameworkNames()
+        {
+            var frameworkOneTitle = "Framework One";
+            var frameworkOneEncoded = "framework-one";
+
+            _mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<Framework>
+            {
+                new Framework {FrameworkId = "1", Title = frameworkOneTitle},
+                new Framework {FrameworkId = "2"}
+            });
+
+            const string urlPrefix = "http://localhost/Sitemap/";
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(frameworkOneTitle)).Returns(frameworkOneEncoded);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = $"{urlPrefix}Frameworks/{{0}}", SitemapRequest = SitemapType.Frameworks });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(2);
+            nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Frameworks/1/{frameworkOneEncoded}");
+            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Frameworks/2/");
         }
 
     }
