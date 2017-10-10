@@ -3,7 +3,7 @@ using System.Configuration;
 
 namespace Sfa.Das.Sas.Web.Services
 {
-    using Sfa.Das.Sas.Web.Extensions;
+    using Extensions;
 
     public static class SettingsFinder
     {

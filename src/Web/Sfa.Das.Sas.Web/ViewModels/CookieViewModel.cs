@@ -1,11 +1,5 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
-
-namespace Sfa.Das.Sas.Web.ViewModels
+﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
-    using Sfa.Das.Sas.ApplicationServices.Models;
-
     public class CookieViewModel
     {
         public string ImprovementUrl { get; set; }

@@ -1,4 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Helpers;
 using Assert = NUnit.Framework.Assert;
 
@@ -35,10 +41,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         [TestCase("Travel Services: Tour Operators - Head Office", "travel-services-tour-operators-head-office")]
         [TestCase("SemiColon; & Consulting", "semicolon-and-consulting")]
         [TestCase("Colon: & Consulting", "colon-and-consulting")]
+        [TestCase("Back\\Slash", "back-slash")]
+        [TestCase("Forward/Slash", "forward-slash")]
+        [TestCase("Installation electrician / maintenance electrician", "installation-electrician-maintenance-electrician")]
+        [TestCase("King King", "king-king")]
+        [TestCase("Size? Online", "size-online")]
+        [TestCase("Shazam! Inc.", "shazam-inc")]
         public void ShouldReturnStringModifiedForUrlUsage(string inputText, string encodedText)
         {
             var actual = new UrlEncoder().EncodeTextForUri(inputText);
-            Assert.AreEqual(actual, encodedText);
+            Assert.AreEqual(encodedText, actual);
         }
     }
 }

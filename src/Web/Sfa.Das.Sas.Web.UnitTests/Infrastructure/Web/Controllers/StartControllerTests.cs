@@ -1,13 +1,12 @@
-﻿using System.Web.Mvc;
-using AngleSharp;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Web.Controllers;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
+    using System.Web.Mvc;
+    using Core.Configuration;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.Web.Controllers;
+    using SFA.DAS.NLog.Logger;
+
     [TestFixture]
     public sealed class StartControllerTests
     {

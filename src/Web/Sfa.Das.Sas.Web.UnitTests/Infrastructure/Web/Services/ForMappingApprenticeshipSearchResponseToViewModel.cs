@@ -4,7 +4,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
 

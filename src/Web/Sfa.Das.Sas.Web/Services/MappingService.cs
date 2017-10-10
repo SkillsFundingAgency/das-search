@@ -1,17 +1,18 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Web.Services.MappingActions;
-using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
-using Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers;
-using Sfa.Das.Sas.Web.ViewModels;
-using SFA.DAS.NLog.Logger;
+﻿using System.Linq;
 
 namespace Sfa.Das.Sas.Web.Services
 {
+    using System;
+    using ApplicationServices.Models;
+    using ApplicationServices.Responses;
+    using AutoMapper;
+    using Core.Domain.Model;
+    using MappingActions;
+    using MappingActions.Helpers;
+    using MappingActions.ValueResolvers;
+    using SFA.DAS.NLog.Logger;
+    using ViewModels;
+
     public class MappingService : IMappingService
     {
         private readonly ILog _logger;

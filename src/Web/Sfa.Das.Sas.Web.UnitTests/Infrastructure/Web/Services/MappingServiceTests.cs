@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Web.Services;
-using Sfa.Das.Sas.Web.ViewModels;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {
-    using Sfa.Das.Sas.ApplicationServices.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ApplicationServices.Models;
+    using ApplicationServices.Responses;
+    using Core.Domain.Model;
+    using FluentAssertions;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.Web.Services;
+    using SFA.DAS.NLog.Logger;
+    using ViewModels;
 
     [TestFixture]
     public sealed class MappingServiceTests

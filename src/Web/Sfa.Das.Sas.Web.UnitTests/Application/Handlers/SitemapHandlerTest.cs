@@ -48,8 +48,8 @@
 
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
-            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23/");
-            nodes.ElementAt(1).Value.Should().Be("http://localhost/Sitemap/Standards/43/");
+            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23");
+            nodes.ElementAt(1).Value.Should().Be("http://localhost/Sitemap/Standards/43");
         }
 
         [Test]
@@ -133,7 +133,7 @@
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
             nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Standards/1/{standardOneEncoded}");
-            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Standards/2/");
+            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Standards/2");
         }
 
         [Test]
@@ -160,7 +160,7 @@
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
             nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Frameworks/1/{frameworkOneEncoded}");
-            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Frameworks/2/");
+            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Frameworks/2");
         }
 
     }

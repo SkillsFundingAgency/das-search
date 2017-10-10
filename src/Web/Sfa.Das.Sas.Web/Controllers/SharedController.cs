@@ -3,8 +3,8 @@ using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using Sfa.Das.Sas.Web.Services;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using Services;
+    using ViewModels;
 
     public class SharedController : Controller
     {

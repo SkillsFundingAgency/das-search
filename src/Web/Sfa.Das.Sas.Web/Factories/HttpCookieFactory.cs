@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.Web.Factories
 {
-    using Sfa.Das.Sas.Web.Factories.Interfaces;
+    using Interfaces;
 
     public class HttpCookieFactory : IHttpCookieFactory
     {

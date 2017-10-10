@@ -9,7 +9,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {
-    using Sfa.Das.Sas.Core.Domain.Model;
+    using Core.Domain.Model;
 
     [TestFixture]
     public sealed class ForMappingProviderSearchResponseToViewModel

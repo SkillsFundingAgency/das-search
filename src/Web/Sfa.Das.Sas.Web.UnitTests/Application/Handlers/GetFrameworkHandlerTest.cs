@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
@@ -11,7 +9,7 @@ using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
-    using Sfa.Das.Sas.ApplicationServices.Validators;
+    using Sas.ApplicationServices.Validators;
 
     [TestFixture]
     public sealed class GetFrameworkHandlerTest

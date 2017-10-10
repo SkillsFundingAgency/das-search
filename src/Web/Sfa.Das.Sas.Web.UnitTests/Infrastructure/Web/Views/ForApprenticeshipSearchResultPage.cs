@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using FluentAssertions;
-using Moq;
 using NSubstitute;
 using NUnit.Framework;
 using RazorGenerator.Testing;

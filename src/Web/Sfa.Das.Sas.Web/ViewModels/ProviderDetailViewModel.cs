@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using SFA.DAS.Apprenticeships.Api.Types.Providers;
-
-namespace Sfa.Das.Sas.Web.ViewModels
+﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderDetailViewModel
    {

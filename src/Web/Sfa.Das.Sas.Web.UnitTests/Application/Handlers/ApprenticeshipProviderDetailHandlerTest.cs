@@ -1,5 +1,8 @@
 ﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
+    using Core.Domain.Model;
+    using Core.Domain.Repositories;
+    using Core.Domain.Services;
     using FluentAssertions;
     using Moq;
     using NUnit.Framework;
@@ -8,9 +11,6 @@
     using Sas.ApplicationServices.Queries;
     using Sas.ApplicationServices.Responses;
     using Sas.ApplicationServices.Validators;
-    using Sas.Core.Domain.Model;
-    using Sas.Core.Domain.Repositories;
-    using Sas.Core.Domain.Services;
     using SFA.DAS.NLog.Logger;
 
     [TestFixture]

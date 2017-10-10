@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq.Expressions;
-using Moq;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Settings;
-using Sfa.Das.Sas.Core.Domain.Services;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {
+    using System;
+    using System.Linq.Expressions;
+    using Core.Domain.Services;
+    using Moq;
+    using Sas.ApplicationServices;
+    using Sas.ApplicationServices.Settings;
+    using SFA.DAS.NLog.Logger;
+
     internal sealed class ProviderSearchServiceBuilder
     {
         private readonly Mock<IGetStandards> _standardsRepository = new Mock<IGetStandards>();
