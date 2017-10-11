@@ -76,23 +76,29 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         private IEnumerable<string> BuildFrameworkSitemap(IEnumerable<Framework> frameworks)
         {
-            return from framework in frameworks
-                   let title = EncodeTitle(framework)
-                   select GetSeoFormat(framework.FrameworkId, title);
+            foreach (var framework in frameworks)
+            {
+                var title = EncodeTitle(framework);
+                yield return GetSeoFormat(framework.FrameworkId, title);
+            }
         }
 
         private IEnumerable<string> BuildStandardSitemap(IEnumerable<Standard> standards)
         {
-            return from standard in standards
-                   let title = EncodeTitle(standard)
-                   select GetSeoFormat(standard.StandardId, title);
+            foreach (var standard in standards)
+            {
+                var title = EncodeTitle(standard);
+                yield return GetSeoFormat(standard.StandardId, title);
+            }
         }
 
         private IEnumerable<string> BuildProviderSitemapFromProviders(IEnumerable<ProviderSummary> providers)
         {
-            return from provider in providers
-                   let encodedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName)
-                   select $@"{provider.Ukprn}/{encodedProviderName}";
+            foreach (var provider in providers)
+            {
+                var encodedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
+                yield return $@"{provider.Ukprn}/{encodedProviderName}";
+            }
         }
 
         private string GetSeoFormat(string id, string title)
