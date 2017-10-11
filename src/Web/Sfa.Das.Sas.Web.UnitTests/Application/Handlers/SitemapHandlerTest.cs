@@ -8,10 +8,12 @@
     using Core.Domain.Services;
     using FluentAssertions;
     using Moq;
+    using NSubstitute;
     using NUnit.Framework;
     using Sas.ApplicationServices.Handlers;
     using Sas.ApplicationServices.Queries;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
+    using Sas.ApplicationServices.Queries;
 
     [TestFixture]
     public sealed class SitemapHandlerTest

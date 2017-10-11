@@ -239,7 +239,7 @@
       <Name>Sfa.Das.Sas.ApplicationServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj">
-      <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
+      <Project>{F1B42430-C055-421C-91A0-915A707335F3}</Project>
       <Name>Sfa.Das.Sas.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj">

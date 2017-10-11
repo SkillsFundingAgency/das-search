@@ -72,20 +72,22 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private IEnumerable<string> GetProviderDetailsInSeoFormat()
         {
             var providersExcludingEmployerProviders = _getProviders.GetAllProviders().Where(x => x.IsEmployerProvider == false);
-            var identifiers = BuildProviderSitemapFromProviders(providersExcludingEmployerProviders);
-            return identifiers;
+
+            return BuildProviderSitemapFromProviders(providersExcludingEmployerProviders);
         }
 
-        private IEnumerable<string> BuildFrameworkSitemap(List<Framework> frameworks)
+        private IEnumerable<string> BuildFrameworkSitemap(IEnumerable<Framework> frameworks)
         {
             return from framework in frameworks
-                select $@"{framework.FrameworkId}/{GetTitle(framework)}";
+                   let title = GetTitle(framework)
+                   select GetSeoFormat(framework.FrameworkId, title);
         }
 
         private IEnumerable<string> BuildStandardSitemap(IEnumerable<Standard> standards)
         {
             return from standard in standards
-                select $@"{standard.StandardId}/{GetTitle(standard)}";
+                   let title = GetTitle(standard)
+                   select GetSeoFormat(standard.StandardId, title);
         }
 
         private IEnumerable<string> BuildProviderSitemapFromProviders(IEnumerable<ProviderSummary> providers)
@@ -96,6 +98,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 var urlLocElement = $@"{provider.Ukprn}/{encodedProviderName}";
                 yield return urlLocElement;
             }
+        }
+
+        private string GetSeoFormat(string id, string title)
+        {
+            return string.IsNullOrEmpty(title) ? $"{id}" : $"{id}/{title}";
         }
 
         private string GetTitle(IApprenticeshipProduct product)

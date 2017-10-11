@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Sfa.Das.Sas.Core.Domain.Helpers
@@ -8,12 +7,10 @@ namespace Sfa.Das.Sas.Core.Domain.Helpers
     {
         public string EncodeTextForUri(string textToProcess)
         {
-            var specialCharactersRemoved = Regex.Replace(textToProcess.ToLower(),"['-]", string.Empty);
-            var splitBySpacesAndOtherChars = Regex.Split(specialCharactersRemoved, @"[\s(),.:;]+");
-            var rebuildExcludingNoContent = string.Join(
-                "-",
-                splitBySpacesAndOtherChars.Except(new List<string> {string.Empty})
-            );
+            var specialCharactersRemoved = Regex.Replace(textToProcess.ToLower(), @"['-]", string.Empty);
+            var splitBySpacesAndOtherChars = Regex.Split(specialCharactersRemoved, @"[\s(),.:;?!\\/]+");
+            var emptyRemoved = splitBySpacesAndOtherChars.Where(s => !string.IsNullOrEmpty(s));
+            var rebuildExcludingNoContent = string.Join("-", emptyRemoved);
 
             var processHyphenPattern = ProcessInitialsHyphenPattern(rebuildExcludingNoContent);
 
@@ -32,6 +29,7 @@ namespace Sfa.Das.Sas.Core.Domain.Helpers
                 stringToProcess = stringToProcess.Replace(originalPattern, replacementPattern);
                 match = Regex.Match(stringToProcess, initialsHyphenPattern);
             }
+
             return stringToProcess;
         }
     }
