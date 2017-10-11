@@ -39,8 +39,8 @@
         {
             _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
             {
-                new Standard {StandardId = "23", IsPublished = true},
-                new Standard {StandardId = "43", IsPublished = true}
+                new Standard { StandardId = "23", IsPublished = true},
+                new Standard { StandardId = "43", IsPublished = true}
             });
 
             var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/Sitemap/Standards/{0}", SitemapRequest = SitemapType.Standards});
@@ -119,8 +119,8 @@
 
             _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
             {
-                new Standard {StandardId = "1", Title = standardOneTitle, IsPublished = true},
-                new Standard {StandardId = "2", IsPublished = true}
+                new Standard { StandardId = "1", Title = standardOneTitle, IsPublished = true},
+                new Standard { StandardId = "2", IsPublished = true}
             });
 
             const string urlPrefix = "http://localhost/Sitemap/";
@@ -139,6 +139,30 @@
         }
 
         [Test]
+        public void ShouldReturnNoResultsWhenStandardNotPublished()
+        {
+            var standardOneTitle = "Standard One";
+            var standardOneEncoded = "standard-one";
+
+            _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
+            {
+                new Standard { StandardId = "1", Title = standardOneTitle, IsPublished = false},
+            });
+
+            const string urlPrefix = "http://localhost/Sitemap/";
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(standardOneTitle)).Returns(standardOneEncoded);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = $"{urlPrefix}Standards/{{0}}", SitemapRequest = SitemapType.Standards });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(0);
+        }
+
+        [Test]
         public void ShouldReturnXmlSitemapWithFrameworkNames()
         {
             var frameworkOneTitle = "Framework One";
@@ -146,8 +170,8 @@
 
             _mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<Framework>
             {
-                new Framework {FrameworkId = "1", Title = frameworkOneTitle},
-                new Framework {FrameworkId = "2"}
+                new Framework { FrameworkId = "1", Title = frameworkOneTitle},
+                new Framework { FrameworkId = "2"}
             });
 
             const string urlPrefix = "http://localhost/Sitemap/";

@@ -43,8 +43,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 case SitemapType.Providers:
                     identifiers = GetProviderDetailsInSeoFormat();
                     break;
-                default:
-                    break;
             }
 
             var sitemapContents = CreateDocument(identifiers, message.UrlPlaceholder);
@@ -59,14 +57,14 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var frameworks = _getFrameworks.GetAllFrameworks();
 
-            return this.BuildFrameworkSitemap(frameworks);
+            return BuildFrameworkSitemap(frameworks);
         }
 
         private IEnumerable<string> GetStandardDetailsInSeoFormat()
         {
             var standards = _getStandards.GetAllStandards().Where(s => s.IsPublished);
 
-            return this.BuildStandardSitemap(standards);
+            return BuildStandardSitemap(standards);
         }
 
         private IEnumerable<string> GetProviderDetailsInSeoFormat()
@@ -79,25 +77,22 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private IEnumerable<string> BuildFrameworkSitemap(IEnumerable<Framework> frameworks)
         {
             return from framework in frameworks
-                   let title = GetTitle(framework)
+                   let title = EncodeTitle(framework)
                    select GetSeoFormat(framework.FrameworkId, title);
         }
 
         private IEnumerable<string> BuildStandardSitemap(IEnumerable<Standard> standards)
         {
             return from standard in standards
-                   let title = GetTitle(standard)
+                   let title = EncodeTitle(standard)
                    select GetSeoFormat(standard.StandardId, title);
         }
 
         private IEnumerable<string> BuildProviderSitemapFromProviders(IEnumerable<ProviderSummary> providers)
         {
-            foreach (var provider in providers)
-            {
-                var encodedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
-                var urlLocElement = $@"{provider.Ukprn}/{encodedProviderName}";
-                yield return urlLocElement;
-            }
+            return from provider in providers
+                   let encodedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName)
+                   select $@"{provider.Ukprn}/{encodedProviderName}";
         }
 
         private string GetSeoFormat(string id, string title)
@@ -105,7 +100,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return string.IsNullOrEmpty(title) ? $"{id}" : $"{id}/{title}";
         }
 
-        private string GetTitle(IApprenticeshipProduct product)
+        private string EncodeTitle(IApprenticeshipProduct product)
         {
             return _urlEncoder.EncodeTextForUri(product.Title);
         }
