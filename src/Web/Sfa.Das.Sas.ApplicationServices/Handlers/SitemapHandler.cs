@@ -4,7 +4,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Xml.Linq;
     using Core.Domain.Helpers;
     using Core.Domain.Services;
     using MediatR;
@@ -20,12 +19,15 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IGetProviderDetails _getProviders;
         private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapHandler(IGetStandards getStandards, IGetFrameworks getFrameworks, IGetProviderDetails getProviders, IUrlEncoder urlEncoder)
+        private readonly IXmlDocumentSerialiser _xmlDocumentSerialiser;
+
+        public SitemapHandler(IGetStandards getStandards, IGetFrameworks getFrameworks, IGetProviderDetails getProviders, IUrlEncoder urlEncoder, IXmlDocumentSerialiser documentSerialiser)
         {
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
             _getProviders = getProviders;
             _urlEncoder = urlEncoder;
+            _xmlDocumentSerialiser = documentSerialiser;
         }
 
         public SitemapResponse Handle(SitemapQuery message)
@@ -45,11 +47,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     break;
             }
 
-            var sitemapContents = CreateDocument(identifiers, message.UrlPlaceholder);
+            var sitemapContents = _xmlDocumentSerialiser.Serialise(SitemapNamespace, message.UrlPlaceholder, identifiers);
 
             return new SitemapResponse
             {
-                Content = sitemapContents.ToString()
+                Content = sitemapContents
             };
         }
 
@@ -109,15 +111,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private string EncodeTitle(IApprenticeshipProduct product)
         {
             return _urlEncoder.EncodeTextForUri(product.Title);
-        }
-
-        private XDocument CreateDocument(IEnumerable<string> items, string urlPlaceholder)
-        {
-            XNamespace ns = SitemapNamespace;
-
-            return new XDocument(
-                new XDeclaration("1.0", "utf-8", "yes"), new XElement(ns + "urlset",
-                    items.Select(id => new XElement(ns + "url", new XElement(ns + "loc", string.Format(urlPlaceholder, id))))));
         }
     }
 }

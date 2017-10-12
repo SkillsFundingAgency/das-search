@@ -178,6 +178,7 @@
     <Compile Include="Application\Handlers\GetFrameworkProvidersHandlerTest.cs" />
     <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
+    <Compile Include="Application\Handlers\XmlDocumentSerialiserTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
