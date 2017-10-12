@@ -7,7 +7,12 @@ namespace Sfa.Das.Sas.Core.Domain.Helpers
     {
         public string EncodeTextForUri(string textToProcess)
         {
-            var specialCharactersRemoved = Regex.Replace(textToProcess.ToLower(), @"['-]", string.Empty);
+            if (string.IsNullOrEmpty(textToProcess))
+            {
+                return string.Empty;
+            }
+
+            var specialCharactersRemoved = Regex.Replace(textToProcess.ToLower(), @"[',-]", string.Empty);
             var splitBySpacesAndOtherChars = Regex.Split(specialCharactersRemoved, @"[\s(),.:;?!\\/]+");
             var emptyRemoved = splitBySpacesAndOtherChars.Where(s => !string.IsNullOrEmpty(s));
             var rebuildExcludingNoContent = string.Join("-", emptyRemoved);

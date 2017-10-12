@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Helpers;
 using Assert = NUnit.Framework.Assert;
@@ -47,10 +42,25 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         [TestCase("King King", "king-king")]
         [TestCase("Size? Online", "size-online")]
         [TestCase("Shazam! Inc.", "shazam-inc")]
+        [TestCase("One, two", "one-two")]
+        [TestCase("vessels of less than 3,000 gross tonnage", "vessels-of-less-than-3000-gross-tonnage")]
         public void ShouldReturnStringModifiedForUrlUsage(string inputText, string encodedText)
         {
             var actual = new UrlEncoder().EncodeTextForUri(inputText);
             Assert.AreEqual(encodedText, actual);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(GetEmptyStrings))]
+        public void ShouldReturnEmptyStringWhenNoInput(string input)
+        {
+            Assert.AreEqual(string.Empty, new UrlEncoder().EncodeTextForUri(input));
+        }
+
+        private static IEnumerable<string> GetEmptyStrings()
+        {
+            yield return null;
+            yield return string.Empty;
         }
     }
 }
