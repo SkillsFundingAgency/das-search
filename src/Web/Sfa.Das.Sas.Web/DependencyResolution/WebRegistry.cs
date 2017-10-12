@@ -1,3 +1,4 @@
+using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.Core.Domain.Helpers;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
@@ -29,6 +30,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<ICookieService>().Use<CookieService>();
             For<IGetProviderDetails>().Use<ProviderApiRepository>();
             For<IUrlEncoder>().Use<UrlEncoder>();
+            For<IXmlDocumentSerialiser>().Use<XmlDocumentSerialiser>();
 
             For<IProviderApiClient>().Use(x => new ProviderApiClient(null));
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
