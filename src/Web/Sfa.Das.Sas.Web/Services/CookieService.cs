@@ -3,7 +3,7 @@
     using System;
     using System.Web;
 
-    using Sfa.Das.Sas.Core.Configuration;
+    using Core.Configuration;
 
     public class CookieService : ICookieService
     {

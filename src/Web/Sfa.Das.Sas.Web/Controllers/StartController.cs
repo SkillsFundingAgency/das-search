@@ -1,12 +1,12 @@
-﻿using System;
-using System.Text;
-using System.Web.Mvc;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Web.ViewModels;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
+    using System;
+    using System.Text;
+    using System.Web.Mvc;
+    using Core.Configuration;
+    using SFA.DAS.NLog.Logger;
+    using ViewModels;
+
     public sealed class StartController : Controller
     {
         private IConfigurationSettings _settings;

@@ -3,7 +3,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
-    using Sfa.Das.Sas.ApplicationServices.Models;
+    using ApplicationServices.Models;
 
     public class ApprenticeshipDetailsViewModel
     {

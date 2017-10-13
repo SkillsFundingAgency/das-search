@@ -1,16 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Xml.Linq;
-    using MediatR;
-    using SFA.DAS.Apprenticeships.Api.Types.Providers;
-    using Queries;
-    using Responses;
     using Core.Domain.Helpers;
     using Core.Domain.Services;
+    using MediatR;
+    using Queries;
+    using Responses;
+    using SFA.DAS.Apprenticeships.Api.Types.Providers;
+
     public class SitemapHandler : IRequestHandler<SitemapQuery, SitemapResponse>
     {
         private const string SitemapNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
@@ -19,12 +19,15 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IGetProviderDetails _getProviders;
         private readonly IUrlEncoder _urlEncoder;
 
-        public SitemapHandler(IGetStandards getStandards, IGetFrameworks getFrameworks, IGetProviderDetails getProviders, IUrlEncoder urlEncoder)
+        private readonly IXmlDocumentSerialiser _xmlDocumentSerialiser;
+
+        public SitemapHandler(IGetStandards getStandards, IGetFrameworks getFrameworks, IGetProviderDetails getProviders, IUrlEncoder urlEncoder, IXmlDocumentSerialiser documentSerialiser)
         {
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
             _getProviders = getProviders;
             _urlEncoder = urlEncoder;
+            _xmlDocumentSerialiser = documentSerialiser;
         }
 
         public SitemapResponse Handle(SitemapQuery message)
@@ -34,31 +37,61 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             switch (message.SitemapRequest)
             {
                 case SitemapType.Standards:
-                    identifiers = _getStandards.GetAllStandards().Where(s => s.IsPublished).Select(x => x.StandardId);
+                    identifiers = GetStandardDetailsInSeoFormat();
                     break;
                 case SitemapType.Frameworks:
-                    identifiers = _getFrameworks.GetAllFrameworks().Select(x => x.FrameworkId);
+                    identifiers = GetFrameworkDetailsInSeoFormat();
                     break;
                 case SitemapType.Providers:
                     identifiers = GetProviderDetailsInSeoFormat();
                     break;
-                default:
-                    break;
             }
 
-            var sitemapContents = CreateDocument(identifiers, message.UrlPlaceholder);
+            var sitemapContents = _xmlDocumentSerialiser.Serialise(SitemapNamespace, message.UrlPlaceholder, identifiers);
 
             return new SitemapResponse
             {
-                Content = sitemapContents.ToString()
+                Content = sitemapContents
             };
+        }
+
+        private IEnumerable<string> GetFrameworkDetailsInSeoFormat()
+        {
+            var frameworks = _getFrameworks.GetAllFrameworks();
+
+            return BuildFrameworkSitemap(frameworks);
+        }
+
+        private IEnumerable<string> GetStandardDetailsInSeoFormat()
+        {
+            var standards = _getStandards.GetAllStandards().Where(s => s.IsPublished);
+
+            return BuildStandardSitemap(standards);
         }
 
         private IEnumerable<string> GetProviderDetailsInSeoFormat()
         {
             var providersExcludingEmployerProviders = _getProviders.GetAllProviders().Where(x => x.IsEmployerProvider == false);
-            var identifiers = BuildProviderSitemapFromProviders(providersExcludingEmployerProviders);
-            return identifiers;
+
+            return BuildProviderSitemapFromProviders(providersExcludingEmployerProviders);
+        }
+
+        private IEnumerable<string> BuildFrameworkSitemap(IEnumerable<Framework> frameworks)
+        {
+            foreach (var framework in frameworks)
+            {
+                var title = EncodeTitle(framework);
+                yield return GetSeoFormat(framework.FrameworkId, title);
+            }
+        }
+
+        private IEnumerable<string> BuildStandardSitemap(IEnumerable<Standard> standards)
+        {
+            foreach (var standard in standards)
+            {
+                var title = EncodeTitle(standard);
+                yield return GetSeoFormat(standard.StandardId, title);
+            }
         }
 
         private IEnumerable<string> BuildProviderSitemapFromProviders(IEnumerable<ProviderSummary> providers)
@@ -66,18 +99,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             foreach (var provider in providers)
             {
                 var encodedProviderName = _urlEncoder.EncodeTextForUri(provider.ProviderName);
-                var urlLocElement = $@"{provider.Ukprn}/{encodedProviderName}";
-                yield return urlLocElement;
+                yield return $@"{provider.Ukprn}/{encodedProviderName}";
             }
         }
 
-        private XDocument CreateDocument(IEnumerable<string> items, string urlPlaceholder)
+        private string GetSeoFormat(string id, string title)
         {
-            XNamespace ns = SitemapNamespace;
+            return string.IsNullOrEmpty(title) ? $"{id}" : $"{id}/{title}";
+        }
 
-            return new XDocument(
-                new XDeclaration("1.0", "utf-8", "yes"), new XElement(ns + "urlset",
-                items.Select(id => new XElement(ns + "url", new XElement(ns + "loc", string.Format(urlPlaceholder, id))))));
+        private string EncodeTitle(IApprenticeshipProduct product)
+        {
+            return _urlEncoder.EncodeTextForUri(product.Title);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Start
         [Test]
         public void ShouldHaveStartButton()
         {
-            var startPage = new Sfa.Das.Sas.Web.Views.Start.Start();
+            var startPage = new Sas.Web.Views.Start.Start();
 
             var html = startPage.RenderAsHtml().ToAngleSharp();
 

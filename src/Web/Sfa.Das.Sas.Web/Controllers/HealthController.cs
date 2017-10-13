@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             var dir = Server.MapPath("/content/dist/images/icons/status");
             var path = Path.Combine(dir, viewModel.ApplicationStatus + "_16.png");
-            return base.File(path, "image/png");
+            return File(path, "image/png");
         }
     }
 }

@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using Moq;
-using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Settings;
-using SFA.DAS.NLog.Logger;
-
-
-namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {
+    using System.Collections.Generic;
+    using Moq;
+    using NUnit.Framework;
+    using Sas.ApplicationServices;
+    using Sas.ApplicationServices.Settings;
+    using SFA.DAS.NLog.Logger;
+
     [TestFixture]
     public sealed class StandardSearchServiceTest
     {

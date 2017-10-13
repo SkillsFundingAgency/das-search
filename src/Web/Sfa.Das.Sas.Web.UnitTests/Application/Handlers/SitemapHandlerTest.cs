@@ -16,11 +16,26 @@
     [TestFixture]
     public sealed class SitemapHandlerTest
     {
+        private const string StandardPlaceholder = "http://localhost/Sitemap/Standards/{0}";
+
+        private const string FrameworkPlaceholder = "http://localhost/Sitemap/Frameworks/{0}";
+
+        private const string ProviderPlaceholder = "http://localhost/providers/{0}";
+
+        private const string Namespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
+
         private SitemapHandler _sut;
+
         private Mock<IGetStandards> _mockGetStandards;
+
         private Mock<IGetFrameworks> _mockGetFrameworks;
+
         private Mock<IGetProviderDetails> _mockProviderDetailRepository;
+
         private Mock<IUrlEncoder> _mockUrlEncoder;
+
+        private Mock<IXmlDocumentSerialiser> _mockDocumentCreator;
+
         [SetUp]
         public void Init()
         {
@@ -28,8 +43,9 @@
             _mockGetFrameworks = new Mock<IGetFrameworks>();
             _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
             _mockUrlEncoder = new Mock<IUrlEncoder>();
+            _mockDocumentCreator = new Mock<IXmlDocumentSerialiser>();
 
-            _sut = new SitemapHandler(_mockGetStandards.Object, _mockGetFrameworks.Object, _mockProviderDetailRepository.Object, _mockUrlEncoder.Object);
+            _sut = new SitemapHandler(_mockGetStandards.Object, _mockGetFrameworks.Object, _mockProviderDetailRepository.Object, _mockUrlEncoder.Object, _mockDocumentCreator.Object);
         }
 
         [Test]
@@ -37,14 +53,19 @@
         {
             _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
             {
-                new Standard {StandardId = "23", IsPublished = true},
-                new Standard {StandardId = "43", IsPublished = true}
+                new Standard { StandardId = "23", IsPublished = true},
+                new Standard { StandardId = "43", IsPublished = true}
             });
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/Sitemap/Standards/{0}", SitemapRequest = SitemapType.Standards});
+            var items = new List<string> { "23", "43" };
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), StandardPlaceholder, items))
+                .Returns(CreateDocument(Namespace, StandardPlaceholder, items));
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
 
             var doc = XDocument.Parse(response.Content);
-            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+            XNamespace ns = Namespace;
 
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(2);
@@ -63,10 +84,15 @@
                 }
             });
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/Sitemap/Frameworks/{0}", SitemapRequest = SitemapType.Frameworks });
+            var items = new List<string> { "23-5-7" };
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), FrameworkPlaceholder, items))
+                .Returns(CreateDocument(Namespace, FrameworkPlaceholder, items));
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks });
 
             var doc = XDocument.Parse(response.Content);
-            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+            XNamespace ns = Namespace;
 
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(1);
@@ -97,17 +123,125 @@
                 }
             });
 
+            var items = new List<string> { $"{ukprnToProcess}/{providerNameProcessed}" };
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), ProviderPlaceholder, items))
+                .Returns(CreateDocument(Namespace, ProviderPlaceholder, items));
+
             _mockUrlEncoder.Setup(x => x.EncodeTextForUri(providerNameToProcess)).Returns(providerNameProcessed);
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = "http://localhost/providers/{0}", SitemapRequest = SitemapType.Providers });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = ProviderPlaceholder, SitemapRequest = SitemapType.Providers });
 
             var doc = XDocument.Parse(response.Content);
-            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+            XNamespace ns = Namespace;
 
             var nodes = doc.Descendants(ns + "loc");
             nodes.Count().Should().Be(1);
             nodes.ElementAt(0).Value.Should().Be($"http://localhost/providers/{ukprnToProcess}/{providerNameProcessed}");
         }
 
+        [Test]
+        public void ShouldReturnXmlSitemapWithStandardNames()
+        {
+            var standardOneTitle = "Standard One";
+            var standardOneEncoded = "standard-one";
+
+            _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
+            {
+                new Standard { StandardId = "1", Title = standardOneTitle, IsPublished = true},
+                new Standard { StandardId = "2", IsPublished = true}
+            });
+
+            const string urlPrefix = "http://localhost/Sitemap/";
+
+            var items = new List<string> { $"1/{standardOneEncoded}", "2" };
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), StandardPlaceholder, items))
+                .Returns(CreateDocument(Namespace, StandardPlaceholder, items));
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(standardOneTitle)).Returns(standardOneEncoded);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = Namespace;
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(2);
+            nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Standards/1/{standardOneEncoded}");
+            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Standards/2");
+        }
+
+        [Test]
+        public void ShouldReturnNoResultsWhenStandardNotPublished()
+        {
+            var standardOneTitle = "Standard One";
+            var standardOneEncoded = "standard-one";
+
+            _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
+            {
+                new Standard { StandardId = "1", Title = standardOneTitle, IsPublished = false},
+            });
+
+            const string urlPrefix = "http://localhost/Sitemap/";
+
+            var items = new List<string>();
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), StandardPlaceholder, items))
+                .Returns(CreateDocument(Namespace, StandardPlaceholder, items));
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(standardOneTitle)).Returns(standardOneEncoded);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = Namespace;
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(0);
+        }
+
+        [Test]
+        public void ShouldReturnXmlSitemapWithFrameworkNames()
+        {
+            var frameworkOneTitle = "Framework One";
+            var frameworkOneEncoded = "framework-one";
+
+            _mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<Framework>
+            {
+                new Framework { FrameworkId = "1", Title = frameworkOneTitle},
+                new Framework { FrameworkId = "2"}
+            });
+
+            const string urlPrefix = "http://localhost/Sitemap/";
+
+            var items = new List<string> { $"1/{frameworkOneEncoded}", "2"};
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), FrameworkPlaceholder, items))
+                .Returns(CreateDocument(Namespace, FrameworkPlaceholder, items));
+
+            _mockUrlEncoder.Setup(x => x.EncodeTextForUri(frameworkOneTitle)).Returns(frameworkOneEncoded);
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = Namespace;
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(2);
+            nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Frameworks/1/{frameworkOneEncoded}");
+            nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Frameworks/2");
+        }
+
+        private string CreateDocument(string xmlNamespace, string urlPlaceholder, IEnumerable<string> items)
+        {
+            XNamespace ns = xmlNamespace;
+
+            var document = new XDocument(
+                new XDeclaration("1.0", "utf-8", "yes"),
+                new XElement(ns + "urlset", items.Select(id => new XElement(ns + "url", new XElement(ns + "loc", string.Format(urlPlaceholder, id))))));
+
+            return document.ToString();
+        }
     }
 }

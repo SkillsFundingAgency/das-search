@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Helpers;
 using Assert = NUnit.Framework.Assert;
 
@@ -32,10 +33,35 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         [TestCase("ST.PATRICK'S INTERNATIONAL COLLEGE LIMITED", "st-patricks-international-college-limited")]
         [TestCase("GUY'S AND ST THOMAS' NHS FOUNDATION TRUST", "guys-and-st-thomas-nhs-foundation-trust")]
         [TestCase("Name with [ weird $ characters", "name-with-\\[-weird-\\$-characters")]
+        [TestCase("Travel Services: Tour Operators - Head Office", "travel-services-tour-operators-head-office")]
+        [TestCase("SemiColon; & Consulting", "semicolon-and-consulting")]
+        [TestCase("Colon: & Consulting", "colon-and-consulting")]
+        [TestCase("Back\\Slash", "back-slash")]
+        [TestCase("Forward/Slash", "forward-slash")]
+        [TestCase("Installation electrician / maintenance electrician", "installation-electrician-maintenance-electrician")]
+        [TestCase("King King", "king-king")]
+        [TestCase("Size? Online", "size-online")]
+        [TestCase("Shazam! Inc.", "shazam-inc")]
+        [TestCase("One, two", "one-two")]
+        [TestCase("vessels of less than 3,000 gross tonnage", "vessels-of-less-than-3000-gross-tonnage")]
         public void ShouldReturnStringModifiedForUrlUsage(string inputText, string encodedText)
         {
             var actual = new UrlEncoder().EncodeTextForUri(inputText);
-            Assert.AreEqual(actual, encodedText);
+            Assert.AreEqual(encodedText, actual);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(GetEmptyStrings))]
+        public void ShouldReturnEmptyStringWhenNoInput(string input)
+        {
+            Assert.AreEqual(string.Empty, new UrlEncoder().EncodeTextForUri(input));
+        }
+
+        private static IEnumerable<string> GetEmptyStrings()
+        {
+            yield return null;
+            yield return string.Empty;
+            yield return " ";
         }
     }
 }

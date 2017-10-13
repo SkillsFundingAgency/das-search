@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Deployment.Application;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 using System.Web.Http;
 using Sfa.Das.Sas.Core.Configuration;

@@ -2,7 +2,7 @@
 {
     using FluentAssertions;
     using NUnit.Framework;
-    using Sfa.Das.Sas.Web.Extensions;
+    using Sas.Web.Extensions;
 
     [TestFixture]
     public class ForPostcodeExtension

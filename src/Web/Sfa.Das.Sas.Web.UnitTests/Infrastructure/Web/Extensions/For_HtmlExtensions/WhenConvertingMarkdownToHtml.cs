@@ -8,12 +8,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Extensions.For_HtmlExtens
     [TestFixture]
     public class WhenConvertingMarkdownToHtml
     {
-        private readonly HtmlHelper helper = new HtmlHelper(new ViewContext(), Mock.Of<IViewDataContainer>());
+        private readonly HtmlHelper _helper = new HtmlHelper(new ViewContext(), Mock.Of<IViewDataContainer>());
 
         [Test]
         public void ConvertingBold()
         {
-            var htmlText = helper.MarkdownToHtml("**Hello World**");
+            var htmlText = _helper.MarkdownToHtml("**Hello World**");
 
             Assert.AreEqual("<div class=\"markdown\"><p><strong>Hello World</strong></p>\r\n\r\n</div>", htmlText.ToHtmlString().TrimEnd());
         }
@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Extensions.For_HtmlExtens
         [Test]
         public void ConvertingEmptyString()
         {
-            var htmlText = helper.MarkdownToHtml(string.Empty);
+            var htmlText = _helper.MarkdownToHtml(string.Empty);
 
             Assert.AreEqual(string.Empty, htmlText.ToHtmlString());
         }

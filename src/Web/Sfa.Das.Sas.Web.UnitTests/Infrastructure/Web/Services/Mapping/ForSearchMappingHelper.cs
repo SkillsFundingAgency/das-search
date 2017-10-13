@@ -4,7 +4,7 @@
 
     using NUnit.Framework;
 
-    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+    using Sas.Web.Services.MappingActions.Helpers;
 
     [TestFixture]
     public class ForSearchMappingHelper

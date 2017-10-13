@@ -1,24 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
+    using System;
     using System.Net;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
-
+    using ApplicationServices.Queries;
+    using ApplicationServices.Responses;
     using AutoMapper;
-
+    using ControllerBuilders;
     using FluentAssertions;
-
     using Moq;
-
     using NUnit.Framework;
-
-    using Sfa.Das.Sas.ApplicationServices.Queries;
-    using Sfa.Das.Sas.Web.Controllers;
-    using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders;
-    using Sfa.Das.Sas.Web.ViewModels;
+    using Sas.Web.Controllers;
+    using ViewModels;
 
     [TestFixture]
     public class ForStandardResults
