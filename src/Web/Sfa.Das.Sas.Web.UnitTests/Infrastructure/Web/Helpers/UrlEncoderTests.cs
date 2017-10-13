@@ -61,6 +61,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Helpers
         {
             yield return null;
             yield return string.Empty;
+            yield return " ";
         }
     }
 }
