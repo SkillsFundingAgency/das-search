@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.Web.Controllers
     using System.Web.Routing;
     using ApplicationServices.Queries;
     using ApplicationServices.Responses;
-    using Core.Configuration;﻿
+    using Core.Configuration;
     using Extensions;
     using MediatR;
     using Services;
@@ -178,7 +178,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProviderDetail(long ukprn)
+        public async Task<ActionResult> ProviderDetail(long ukprn, string providerName = "")
         {
             var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = ukprn });
 

@@ -81,6 +81,10 @@
       <HintPath>..\packages\Moq.4.5.13\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvcRouteTester, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcRouteTester.1.2.1\lib\net40\MvcRouteTester.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -223,6 +227,8 @@
     <Compile Include="Infrastructure\Web\Views\SearchResultMessageTests.cs" />
     <Compile Include="Infrastructure\Web\Views\Start\StartPageTest.cs" />
     <Compile Include="Infrastructure\Web\Views\ViewTestBase.cs" />
+    <Compile Include="Routes\NunitAssertEngine.cs" />
+    <Compile Include="Routes\RouteConfigTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

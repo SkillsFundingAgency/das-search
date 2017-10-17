@@ -30,16 +30,26 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Sitemap", action = "Root", id = UrlParameter.Optional });
 
             routes.MapRoute(
+                name: "ProviderDetail",
+                url: "provider/detail",
+                defaults: new { controller = "Provider", action = "Detail" });
+
+            routes.MapRoute(
+                name: "FrameworkProvider",
+                url: "provider/frameworkresults",
+                defaults: new { controller = "Provider", action = "FrameworkResults" });
+
+            routes.MapRoute(
+                name: "StandardProvider",
+                url: "provider/standardresults",
+                defaults: new { controller = "Provider", action = "StandardResults" });
+
+            routes.MapRoute(
                 name: "ProviderWithName",
                 url: "provider/{ukprn}/{providerName}",
-                defaults: new { controller = "Provider", action = "ProviderDetail" });
+                defaults: new { controller = "Provider", action = "ProviderDetail", providerName=UrlParameter.Optional });
 
-            routes.MapRoute(
-                name: "Provider",
-                url: "provider/{ukprn}",
-                defaults: new { controller = "Provider", action = "ProviderDetail" });
-
-            routes.MapRoute(
+             routes.MapRoute(
                 name: "Standard",
                 url: "apprenticeship/standard/{id}/{name}",
                 defaults: new { controller = "Apprenticeship", action = "Standard", keywords = UrlParameter.Optional });
