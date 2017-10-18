@@ -12,7 +12,7 @@
         //[ElementLocator(CssSelector = "#bottom-actions .ui-find-training-providers")]
         //public IWebElement SearchPageButton { get; set; }
 
-        [ElementLocator(Id = "ga-find-provider-top")]
+        [ElementLocator(CssSelector = "#ga-find-provider-bottom.button.ui-find-training-providers")]
         public IWebElement SearchPageButton { get; set; }
     }
 }
