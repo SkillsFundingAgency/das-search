@@ -15,8 +15,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Routes
         [SetUp]
         public void Init()
         {
-            RouteAssert.UseAssertEngine(new NunitAssertEngine());
-
             _routes = new RouteCollection();
 
             RouteConfig.RegisterRoutes(_routes);
@@ -25,7 +23,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Routes
         [Test]
         public void ShouldMapProviderWithoutName()
         {
-            Console.WriteLine(string.Join(Environment.NewLine,_routes.Select(x => (x as System.Web.Routing.Route)?.Url)));
+            Console.WriteLine(string.Join(Environment.NewLine,_routes.Select(x => (x as Route)?.Url)));
 
             var expectedRoute = new { controller = "Provider", action = "ProviderDetail" };
             RouteAssert.HasRoute(_routes, "/provider/1", expectedRoute);
