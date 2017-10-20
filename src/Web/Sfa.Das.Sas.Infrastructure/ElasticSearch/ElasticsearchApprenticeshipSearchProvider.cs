@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿using FeatureToggle.Core.Fluent;
+using Sfa.Das.Sas.Infrastructure.FeatureToggles;
+
+namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -92,7 +95,14 @@
         {
             if (order == 0 || order == 1)
             {
-                searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.TitleKeyword).Descending(f => f.Level));
+	            if (Is<Elk5Feature>.Enabled)
+	            {
+					searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.TitleKeyword).Descending(f => f.Level));
+				}
+	            else
+	            {
+					searchDescriptor.Sort(s => s.Descending(SortSpecialField.Score).Descending(f => f.Title).Descending(f => f.Level));
+				}
             }
 
             if (order == 2)
