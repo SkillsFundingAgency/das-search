@@ -32,7 +32,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     new StaticConnectionPool(_applicationSettings.ElasticServerUrls));
             }
 
-            settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
+	        if (Is<Elk5Feature>.Enabled)
+	        {
+		        settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
+			}
+            
             settings.DisableDirectStreaming();
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
             settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkSearchResultsItem), "frameworkdocument"));
