@@ -462,6 +462,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dist\css\external-links\external-link-24x24.png" />
     <Content Include="Content\dist\css\external-links\external-link.png" />
+    <Content Include="Content\dist\css\images\green-tick.png" />
+    <Content Include="Content\dist\css\images\red-cross.png" />
     <Content Include="Content\dist\css\screen.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -12,6 +12,19 @@
             @using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
             {
                 <div class="form-group">
+                    <!-- EXAMPLE: format of HTML and Classes to be used to get the icons to the right -->
+                    <div class="icon-alerts">
+                        <p class="icon-right">
+                            <span class="icon-content">Green tick (use class="green-tick")</span>
+                            <span class="green-tick"></span>
+                        </p>
+
+                        <p class="icon-right">
+                            <span class="icon-content">Red cross (use class="red-cross")</span>
+                            <span class="red-cross"></span>
+                        </p>
+                    </div>
+                    <!-- END -->
                     <label for="keywords">
                         <span class="form-label-bold">Search by keywords</span>
                         <span class="form-hint">Can include job title or apprenticeship</span>

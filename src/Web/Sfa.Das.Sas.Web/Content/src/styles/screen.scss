@@ -427,7 +427,7 @@ aside h2:first-child {
 /*custom styles to override defaults*/
 
 .standard-detail{
-    .column-full{
+    .column-full{cd
         details{
          clear:none;
             summary {
@@ -447,5 +447,39 @@ aside h2:first-child {
     .text-copy{
        float: right;
        width:70%;
+    }
+}
+
+.icon-alerts{
+    clear:both;
+    float:left;
+    width:100%;
+    margin-bottom:30px;
+    .icon-right{
+        display:block;
+        clear:both;
+        line-height:1.8em;
+            .icon-content{
+                display:block;
+                float:left;
+                margin-right:10px;
+            }
+                .green-tick{
+                    display:block;
+                    background:url("images/green-tick.png")0 0 no-repeat;
+                    width:20px;
+                    height:20px;
+                    float:left;
+                    margin-top:5px;
+                }
+                .red-cross{
+                    display:block;
+                    background:url("images/red-cross.png")0 0 no-repeat;
+                    width:20px;
+                    height:20px;
+                    float:left;
+                    margin-top:5px;
+
+                }
     }
 }
