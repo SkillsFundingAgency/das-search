@@ -9,7 +9,7 @@
     [PageNavigation("/Apprenticeship/Framework")]
     public class FrameworkDetailsPage : SharedTemplatePage
     {
-        [ElementLocator(CssSelector = "#ga-find-provider-bottom.button.ui-find-training-providers")]
+        [ElementLocator(CssSelector = "#ga-find-provider-bottom")]
         public IWebElement SearchPageButton { get; set; }
 
         [ElementLocator(CssSelector = ".column-two-thirds .heading-xlarge")]
