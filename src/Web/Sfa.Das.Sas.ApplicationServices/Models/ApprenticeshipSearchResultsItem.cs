@@ -28,5 +28,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public bool Published { get; set; }
 
         public int Duration { get; set; }
+
+        public string TitleKeyword { get; set; }
     }
 }
