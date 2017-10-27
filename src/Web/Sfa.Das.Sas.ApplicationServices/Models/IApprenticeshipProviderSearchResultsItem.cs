@@ -6,6 +6,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
     {
         string ContactUsUrl { get; set; }
         List<string> DeliveryModes { get; set; }
+        List<string> DeliveryModesKeywords { get; set; }
         double Distance { get; set; }
         string Email { get; set; }
         bool NationalProvider { get; set; }

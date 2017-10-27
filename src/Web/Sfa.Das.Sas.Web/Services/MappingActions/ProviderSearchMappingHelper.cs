@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
             }
 
             var orderList = new List<string> { "dayrelease", "blockrelease", "100percentemployer" };
-            return orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i)).WhereNotNull();
+            return orderList.Select(i => viewModels.SingleOrDefault(m => m.Value.ToLower() == i)).WhereNotNull();
         }
 
         public static NationalProviderViewModel GetNationalProvidersAmount(Dictionary<string, long?> nationalProvidersAggregation, bool selectedNationalProvider)
@@ -61,7 +61,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
 
         private static string GetName(string deliveryModeKey)
         {
-            switch (deliveryModeKey)
+            switch (deliveryModeKey.ToLower())
             {
                 case "dayrelease":
                     return TrainingOptionService.GetApprenticeshipLevel("dayrelease");

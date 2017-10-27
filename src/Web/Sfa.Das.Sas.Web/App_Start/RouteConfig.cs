@@ -31,17 +31,17 @@ namespace Sfa.Das.Sas.Web
 
             routes.MapRoute(
                 name: "ProviderDetail",
-                url: "provider/detail",
+                url: "Provider/Detail",
                 defaults: new { controller = "Provider", action = "Detail" });
 
             routes.MapRoute(
                 name: "FrameworkProvider",
-                url: "provider/frameworkresults",
+                url: "Provider/FrameworkResults",
                 defaults: new { controller = "Provider", action = "FrameworkResults" });
 
             routes.MapRoute(
                 name: "StandardProvider",
-                url: "provider/standardresults",
+                url: "Provider/StandardResults",
                 defaults: new { controller = "Provider", action = "StandardResults" });
 
             routes.MapRoute(

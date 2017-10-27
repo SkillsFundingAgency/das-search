@@ -40,6 +40,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public List<string> DeliveryModes { get; set; }
 
+        public List<string> DeliveryModesKeywords { get; set; }
+
         public string Website { get; set; }
 
         public IEnumerable<TrainingLocation> TrainingLocations { get; set; }
