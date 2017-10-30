@@ -1,8 +1,0 @@
-﻿@{var gtmTrackingId = System.Configuration.ConfigurationManager.AppSettings["ga.gtm.trackingid"];}
-@if (!string.IsNullOrEmpty(gtmTrackingId))
-{
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=@gtmTrackingId"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-}

@@ -759,7 +759,6 @@
     </Content>
     <Content Include="Views\Stats\Stats.cshtml" />
     <Content Include="Views\Shared\_Help.cshtml" />
-    <Content Include="Views\Shared\_AnalyticsNoScript.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
