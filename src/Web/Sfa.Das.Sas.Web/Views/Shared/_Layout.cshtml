@@ -46,9 +46,12 @@
 @Html.Partial("_Analytics")
     </head>
 <body>
-<script>document.body.className = ((document.body.className)
-    ? document.body.className + ' js-enabled'
-    : 'js-enabled');</script>
+@Html.Partial("_AnalyticsNoScript")
+<script>
+    document.body.className = ((document.body.className)
+        ? document.body.className + ' js-enabled'
+        : 'js-enabled');
+</script>
 @Html.Action("Header", "Shared")
 
 <div class="container body-content">
