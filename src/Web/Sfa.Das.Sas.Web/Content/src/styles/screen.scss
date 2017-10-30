@@ -483,3 +483,12 @@ aside h2:first-child {
                 }
     }
 }
+
+.data-list--provider {
+   .icon-alerts{
+    clear:none;
+        .icon-right{
+            display:list-item;
+            }   
+    }
+}
