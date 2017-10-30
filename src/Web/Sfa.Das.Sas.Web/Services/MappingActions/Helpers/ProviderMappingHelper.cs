@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Web.Extensions;
+﻿using System.Text;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
+    using System.Collections.Generic;
     using System.Linq;
-
+    using ApplicationServices.Models;
     using Microsoft.Ajax.Utilities;
-
-    using Sfa.Das.Sas.ApplicationServices.Models;
 
     public static class ProviderMappingHelper
     {
@@ -38,33 +36,28 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
         public static string GetDeliveryOptionText(List<string> deliveryOptions)
         {
-            var deliveryOptionsMessage = string.Empty;
-            if (deliveryOptions.IsNullOrEmpty())
-            {
-                return string.Empty;
-            }
+            var deliveryOptionsMessage = new StringBuilder();
 
-            if (deliveryOptions.Contains("DayRelease"))
-            {
-                deliveryOptionsMessage = "day release";
-            }
+            deliveryOptionsMessage.Append("<div class='icon-alerts'><p class='icon-right'>");
 
-            if (deliveryOptions.Contains("BlockRelease"))
-            {
-                deliveryOptionsMessage = deliveryOptionsMessage == string.Empty ? "block release" : string.Concat(deliveryOptionsMessage, ", block release");
-            }
+            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions.Contains("DayRelease"), "day release"));
+            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions.Contains("BlockRelease"), "block release"));
+            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions.Contains("100PercentEmployer"), "at your location"));
 
-            if (deliveryOptions.Contains("100PercentEmployer"))
-            {
-                deliveryOptionsMessage = deliveryOptionsMessage == string.Empty ? "at your location" : string.Concat(deliveryOptionsMessage, ", at your location");
-            }
-
+            deliveryOptionsMessage.Append("</p></div>");
             return $"{deliveryOptionsMessage}";
         }
 
         public static string GetCommaList(params string [] list)
         {
             return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
+        }
+
+        private static string ProcessDeliveryModeToRedCrossOrGreenTick(bool status, string desc)
+        {
+            return status
+                ? $"<span class='icon-content'>{desc}</span><span class='green-tick'></span>"
+                : $"<span class='icon-content'>{desc}</span><span class='red-cross'></span>";
         }
 
         internal static string GetLocationAddressLine(TrainingLocation providerLocation)

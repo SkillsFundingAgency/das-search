@@ -42,18 +42,75 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services.Mapping
             ProviderMappingHelper.GetCommaList(list).Should().BeEquivalentTo(expected);
         }
 
-        [TestCase("day release", "DayRelease")]
-        [TestCase("block release", "BlockRelease")]
-        [TestCase("at your location", "100PercentEmployer")]
-        [TestCase("day release, block release", "DayRelease", "BlockRelease")]
-        [TestCase("day release, at your location", "DayRelease", "100PercentEmployer")]
-        [TestCase("block release, at your location", "BlockRelease", "100PercentEmployer")]
-        [TestCase("day release, block release", "BlockRelease", "DayRelease")]
-        [TestCase("day release, at your location", "100PercentEmployer", "DayRelease")]
-        [TestCase("block release, at your location", "100PercentEmployer", "BlockRelease")]
-        public void WhenGetDeliveryOptionTextt(string expected, params string[] input)
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
+            "</p></div>")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
+            "</p></div>", "DayRelease")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
+            "</p></div>", "BlockRelease")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
+            "</p></div>", "100PercentEmployer")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
+            "</p></div>", "DayRelease", "BlockRelease")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
+            "</p></div>", "DayRelease", "100PercentEmployer")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
+            "</p></div>", "BlockRelease", "100PercentEmployer")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
+            "</p></div>", "BlockRelease", "DayRelease")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
+            "</p></div>", "100PercentEmployer", "DayRelease")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
+            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
+            "</p></div>", "100PercentEmployer", "BlockRelease")]
+        [TestCase(
+            @"<div class='icon-alerts'><p class='icon-right'>" +
+            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
+            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
+            "</p></div>", "100PercentEmployer", "BlockRelease", "DayRelease")]
+        public void WhenGetDeliveryOptionText(string expected, params string[] input)
         {
-            var inputList = input.ToList();
+            var inputList = input?.ToList();
             ProviderMappingHelper.GetDeliveryOptionText(inputList).Should().BeEquivalentTo(expected);
         }
     }

@@ -47,25 +47,25 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
             
             #line default
             #line hidden
-WriteLiteral("\n<main");
+WriteLiteral("\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\n    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\n        <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n            <h1");
+WriteLiteral(">\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n                Find apprenticeship training\n            </h1>\n");
+WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n");
 
             
             #line 12 "..\..\Views\Apprenticeship\Search.cshtml"
@@ -85,24 +85,93 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\n                    <label");
+WriteLiteral(">\r\n                    <!-- EXAMPLE: format of HTML and Classes to be used to get" +
+" the icons to the right -->\r\n                    <div");
+
+WriteLiteral(" class=\"icon-alerts\"");
+
+WriteLiteral(">\r\n                        <p");
+
+WriteLiteral(" class=\"icon-right\"");
+
+WriteLiteral(">\r\n                            <span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">Green tick (use class=\"green-tick\")</span>\r\n                            <span");
+
+WriteLiteral(" class=\"green-tick\"");
+
+WriteLiteral("></span>\r\n                        </p>\r\n                        <p");
+
+WriteLiteral(" class=\"icon-right\"");
+
+WriteLiteral(">\r\n                            <span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">Red cross (use class=\"red-cross\")</span>\r\n                            <span");
+
+WriteLiteral(" class=\"red-cross\"");
+
+WriteLiteral("></span>\r\n                        </p>\r\n                    </div>\r\n             " +
+"       <div");
+
+WriteLiteral(" class=\"icon-alerts\"");
+
+WriteLiteral(">\r\n                        <p");
+
+WriteLiteral(" class=\"icon-right\"");
+
+WriteLiteral(">\r\n                            <span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">day release</span>\r\n                            <span");
+
+WriteLiteral(" class=\"green-tick\"");
+
+WriteLiteral(" style=\"margin-right:15px\"");
+
+WriteLiteral("></span>\r\n                            <span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">block release</span>\r\n                            <span");
+
+WriteLiteral(" class=\"red-cross\"");
+
+WriteLiteral(" style=\"margin-right:15px\"");
+
+WriteLiteral("></span>\r\n                            <span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">at your location</span>\r\n                            <span");
+
+WriteLiteral(" class=\"red-cross\"");
+
+WriteLiteral(" style=\"margin-right:15px\"");
+
+WriteLiteral("></span>\r\n                        </p>\r\n                    </div>\r\n\r\n           " +
+"         <!-- END -->\r\n                    <label");
 
 WriteLiteral(" for=\"keywords\"");
 
-WriteLiteral(">\n                        <span");
+WriteLiteral(">\r\n                        <span");
 
 WriteLiteral(" class=\"form-label-bold\"");
 
-WriteLiteral(">Search by keywords</span>\n                        <span");
+WriteLiteral(">Search by keywords</span>\r\n                        <span");
 
 WriteLiteral(" class=\"form-hint\"");
 
-WriteLiteral(">Can include job title or apprenticeship</span>\n                    </label>\n    " +
-"                <span");
+WriteLiteral(">Can include job title or apprenticeship</span>\r\n                    </label>\r\n  " +
+"                  <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral("></span>\n                    <input");
+WriteLiteral("></span>\r\n                    <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -114,7 +183,7 @@ WriteLiteral(" class=\"text-box form-control\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
-WriteLiteral(">\n                </div>\n");
+WriteLiteral(">\r\n                </div>\r\n");
 
 WriteLiteral("                <input");
 
@@ -126,16 +195,16 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Search\"");
 
-WriteLiteral("/>\n");
+WriteLiteral("/>\r\n");
 
             
-            #line 23 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 46 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("\n        </div>\n    </div>\n</main>");
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n</main>");
 
         }
     }
