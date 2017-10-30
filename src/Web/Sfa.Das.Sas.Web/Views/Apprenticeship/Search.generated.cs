@@ -131,8 +131,6 @@ WriteLiteral(">day release</span>\r\n                            <span");
 
 WriteLiteral(" class=\"green-tick\"");
 
-WriteLiteral(" style=\"margin-right:15px\"");
-
 WriteLiteral("></span>\r\n                            <span");
 
 WriteLiteral(" class=\"icon-content\"");
@@ -140,8 +138,6 @@ WriteLiteral(" class=\"icon-content\"");
 WriteLiteral(">block release</span>\r\n                            <span");
 
 WriteLiteral(" class=\"red-cross\"");
-
-WriteLiteral(" style=\"margin-right:15px\"");
 
 WriteLiteral("></span>\r\n                            <span");
 
@@ -151,10 +147,42 @@ WriteLiteral(">at your location</span>\r\n                            <span");
 
 WriteLiteral(" class=\"red-cross\"");
 
-WriteLiteral(" style=\"margin-right:15px\"");
+WriteLiteral("></span>\r\n                        </p>\r\n                    </div>\r\n             " +
+"       <section>\r\n                        <dl");
 
-WriteLiteral("></span>\r\n                        </p>\r\n                    </div>\r\n\r\n           " +
-"         <!-- END -->\r\n                    <label");
+WriteLiteral(" class=\"data-list--provider data-list--compact\"");
+
+WriteLiteral(">  \r\n                            <dt");
+
+WriteLiteral(" class=\"training-structure\"");
+
+WriteLiteral(">Training Options:</dt>\r\n                            <dd");
+
+WriteLiteral(" id=\"delivery-modes\"");
+
+WriteLiteral(">\r\n                                <ul>\r\n                                    <li");
+
+WriteLiteral(" class=\"day-release\"");
+
+WriteLiteral("><span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">day release</span>\r\n                                        <span");
+
+WriteLiteral(" class=\"green-tick\"");
+
+WriteLiteral("></span></li>\r\n                                    <li");
+
+WriteLiteral(" class=\"block-release\"");
+
+WriteLiteral(">block release</li>\r\n                                    <li");
+
+WriteLiteral(" class=\"hundred-percent-employer\"");
+
+WriteLiteral(">at your location</li>\r\n                \r\n                                </ul>\r\n" +
+"                            </dd>\r\n                        </dl>\r\n              " +
+"      </section>\r\n                    <!-- END -->\r\n                    <label");
 
 WriteLiteral(" for=\"keywords\"");
 
@@ -198,7 +226,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral("/>\r\n");
 
             
-            #line 46 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 59 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             
