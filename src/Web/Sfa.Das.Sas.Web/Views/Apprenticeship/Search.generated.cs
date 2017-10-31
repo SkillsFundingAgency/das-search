@@ -85,130 +85,7 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n                    <!-- EXAMPLE: format of HTML and Classes to be used to get" +
-" the icons to the right -->\r\n                    <div");
-
-WriteLiteral(" class=\"icon-alerts\"");
-
-WriteLiteral(">\r\n                        <p");
-
-WriteLiteral(" class=\"icon-right\"");
-
-WriteLiteral(">\r\n                            <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">Green tick (use class=\"green-tick\")</span>\r\n                            <span");
-
-WriteLiteral(" class=\"green-tick\"");
-
-WriteLiteral("></span>\r\n                        </p>\r\n                        <p");
-
-WriteLiteral(" class=\"icon-right\"");
-
-WriteLiteral(">\r\n                            <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">Red cross (use class=\"red-cross\")</span>\r\n                            <span");
-
-WriteLiteral(" class=\"red-cross\"");
-
-WriteLiteral("></span>\r\n                        </p>\r\n                    </div>\r\n             " +
-"       <div");
-
-WriteLiteral(" class=\"icon-alerts\"");
-
-WriteLiteral(">\r\n                        <p");
-
-WriteLiteral(" class=\"icon-right\"");
-
-WriteLiteral(">\r\n                            <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">day release</span>\r\n                            <span");
-
-WriteLiteral(" class=\"green-tick\"");
-
-WriteLiteral("></span>\r\n                            <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">block release</span>\r\n                            <span");
-
-WriteLiteral(" class=\"red-cross\"");
-
-WriteLiteral("></span>\r\n                            <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">at your location</span>\r\n                            <span");
-
-WriteLiteral(" class=\"red-cross\"");
-
-WriteLiteral("></span>\r\n                        </p>\r\n                    </div>\r\n             " +
-"       <section>\r\n                        <dl");
-
-WriteLiteral(" class=\"data-list--provider data-list--compact\"");
-
-WriteLiteral(">  \r\n                            <dt");
-
-WriteLiteral(" class=\"training-structure\"");
-
-WriteLiteral(">Training Options:</dt>\r\n                            <dd");
-
-WriteLiteral(" id=\"delivery-modes\"");
-
-WriteLiteral(" class=\"icon-alerts\"");
-
-WriteLiteral(">\r\n                                <ul>\r\n                                    <li");
-
-WriteLiteral(" class=\"day-release icon-right\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">day release</span>\r\n                                        <span");
-
-WriteLiteral(" class=\"green-tick\"");
-
-WriteLiteral("></span>\r\n                                    </li>\r\n                            " +
-"        <li");
-
-WriteLiteral(" class=\"block-release icon-right\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">block release</span>\r\n                                        <span");
-
-WriteLiteral(" class=\"red-cross\"");
-
-WriteLiteral("></span>\r\n                                    </li>\r\n                            " +
-"        <li");
-
-WriteLiteral(" class=\"hundred-percent-employer icon-right\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"icon-content\"");
-
-WriteLiteral(">at your location</span>\r\n                                        <span");
-
-WriteLiteral(" class=\"red-cross\"");
-
-WriteLiteral(@"></span>
-                                    </li>
-                
-                                </ul>
-                            </dd>
-                        </dl>
-                    </section>
-                    <!-- END -->
-                    <label");
+WriteLiteral(">\r\n                   <label");
 
 WriteLiteral(" for=\"keywords\"");
 
@@ -252,7 +129,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral("/>\r\n");
 
             
-            #line 67 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 23 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             

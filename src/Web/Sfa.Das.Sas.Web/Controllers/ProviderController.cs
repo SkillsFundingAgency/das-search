@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -43,18 +40,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             string postCodeUrl;
 
-            StandardProviderSearchResponse response;
-
-            // MFCMFC
-            if (criteria.PostCode == "CV1 2WT")
-            {
-                response = new StandardProviderSearchResponse {StatusCode = StandardProviderSearchResponse.ResponseCodes.Success};
-            }
-            else
-            {
-                response = await _mediator.SendAsync(criteria);
-            }
-
+            var response = await _mediator.SendAsync(criteria);
+            
             switch (response.StatusCode)
             {
                 case StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
@@ -109,64 +96,12 @@ namespace Sfa.Das.Sas.Web.Controllers
                     return new RedirectResult(url);
             }
 
-            ProviderStandardSearchResultViewModel viewModel;
-
-            if (criteria.PostCode == "CV1 2WT")
-            {
-                viewModel = new ProviderStandardSearchResultViewModel
-                {
-                    TotalResults = 1,
-                    ResultsToTake = 1,
-                    ActualPage = 1,
-                    LastPage = 1,
-                    StandardId = "91",
-                    StandardName = "software standard",
-                    StandardLevel = null,
-                    PostCode = criteria.PostCode,
-                    Hits = new List<StandardProviderResultItemViewModel>
-                    {
-                        new StandardProviderResultItemViewModel
-                        {
-                            AchievementRateMessage = "achievement rate message",
-                            Address = new Address
-                            {
-                                Address1 = "123 Brick Lane"
-
-                            },
-                            ContactUsUrl = "http://contactus",
-                            DeliveryModes = new List<string> { "DayRelease", "BlockRelease", "100PercentEmployer" },
-                            UkPrn = 1,
-                            LocationId = 1,
-                            StandardCode = 1,
-                            ProviderName = "name 1"
-                        }
-                    },
-                    PostCodeMissing = false,
-                    TotalResultsForCountry = 30,
-                    DeliveryModes = new List<DeliveryModeViewModel>
-                                        {
-                        new DeliveryModeViewModel { Checked = false, Value = "DayRelease", Title = "day release", Count = 25 },
-                        new DeliveryModeViewModel { Checked = true, Value = "BlockRelease", Title = "block release", Count = 28 },
-                        new DeliveryModeViewModel { Checked = true, Value = "100PercentLocation", Title = "at your location", Count = 30 }
-                        },
-                    NationalProviders = new NationalProviderViewModel { Checked = false, Count = 80, Title = "national providers", Value = "NationalProviders" },
-                    SearchTerms = "software",
-                    AbsolutePath = "aboslutepath",
-                    ShowAll = false,
-                    ShowNationalProviders = false,
-                    IsLevyPayingEmployer = true,
-                    
-                };
-            }
-            else
-            {
-                viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
+            var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
                     .AfterMap((src, dest) =>
                     {
                         dest.AbsolutePath = Request?.Url?.AbsolutePath;
                         dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                     }));
-            }
 
             return View(viewModel);
         }
