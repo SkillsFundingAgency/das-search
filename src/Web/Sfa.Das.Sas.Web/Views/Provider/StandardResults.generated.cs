@@ -46,14 +46,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class StandardResults : System.Web.Mvc.WebViewPage<ProviderStandardSearchResultViewModel>
     {
 
-#line 96 "..\..\Views\Provider\StandardResults.cshtml"
+#line 102 "..\..\Views\Provider\StandardResults.cshtml"
 public System.Web.WebPages.HelperResult GetPaginationBackLink()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 97 "..\..\Views\Provider\StandardResults.cshtml"
+#line 103 "..\..\Views\Provider\StandardResults.cshtml"
  
 if (Model.ActualPage > 1)
 {
@@ -66,25 +66,25 @@ if (Model.ActualPage > 1)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4483), Tuple.Create("\"", 4494)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4889), Tuple.Create("\"", 4900)
 
-#line 103 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4490), Tuple.Create<System.Object, System.Int32>(url
+#line 109 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 4896), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 4490), false)
+, 4896), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"page-navigation__btn prev\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\n            <i");
+WriteLiteralTo(__razor_helper_writer, ">\r\n            <i");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"arrow-button fa fa-angle-left\"");
 
-WriteLiteralTo(__razor_helper_writer, "></i>\n            <span");
+WriteLiteralTo(__razor_helper_writer, "></i>\r\n            <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"description\"");
 
@@ -92,14 +92,14 @@ WriteLiteralTo(__razor_helper_writer, ">Previous <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"hide-mob\"");
 
-WriteLiteralTo(__razor_helper_writer, ">page</span></span>\n            <span");
+WriteLiteralTo(__razor_helper_writer, ">page</span></span>\r\n            <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"counter\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 106 "..\..\Views\Provider\StandardResults.cshtml"
+#line 112 "..\..\Views\Provider\StandardResults.cshtml"
     WriteTo(__razor_helper_writer, previousPage);
 
 
@@ -108,16 +108,16 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, " of ");
 
 
-#line 106 "..\..\Views\Provider\StandardResults.cshtml"
+#line 112 "..\..\Views\Provider\StandardResults.cshtml"
                      WriteTo(__razor_helper_writer, Model.LastPage);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</span>\n        </a>\n");
+WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </a>\r\n");
 
 
-#line 108 "..\..\Views\Provider\StandardResults.cshtml"
+#line 114 "..\..\Views\Provider\StandardResults.cshtml"
 }
 
 
@@ -125,19 +125,19 @@ WriteLiteralTo(__razor_helper_writer, "</span>\n        </a>\n");
 #line hidden
 });
 
-#line 109 "..\..\Views\Provider\StandardResults.cshtml"
+#line 115 "..\..\Views\Provider\StandardResults.cshtml"
 }
 #line default
 #line hidden
 
-#line 111 "..\..\Views\Provider\StandardResults.cshtml"
+#line 117 "..\..\Views\Provider\StandardResults.cshtml"
 public System.Web.WebPages.HelperResult GetPaginationNextLink()
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 112 "..\..\Views\Provider\StandardResults.cshtml"
+#line 118 "..\..\Views\Provider\StandardResults.cshtml"
  
 if (Model.ActualPage < Model.LastPage)
 {
@@ -150,25 +150,25 @@ if (Model.ActualPage < Model.LastPage)
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5047), Tuple.Create("\"", 5058)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5468), Tuple.Create("\"", 5479)
 
-#line 118 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5054), Tuple.Create<System.Object, System.Int32>(url
+#line 124 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 5475), Tuple.Create<System.Object, System.Int32>(url
 
 #line default
 #line hidden
-, 5054), false)
+, 5475), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " style=\"visibility: visible\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"page-navigation__btn next\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\n            <i");
+WriteLiteralTo(__razor_helper_writer, ">\r\n            <i");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"arrow-button fa fa-angle-right\"");
 
-WriteLiteralTo(__razor_helper_writer, "></i>\n            <span");
+WriteLiteralTo(__razor_helper_writer, "></i>\r\n            <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"description\"");
 
@@ -176,14 +176,14 @@ WriteLiteralTo(__razor_helper_writer, ">Next <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"hide-mob\"");
 
-WriteLiteralTo(__razor_helper_writer, ">page</span></span>\n            <span");
+WriteLiteralTo(__razor_helper_writer, ">page</span></span>\r\n            <span");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"counter\"");
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 121 "..\..\Views\Provider\StandardResults.cshtml"
+#line 127 "..\..\Views\Provider\StandardResults.cshtml"
     WriteTo(__razor_helper_writer, nextPage);
 
 
@@ -192,16 +192,16 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, " of ");
 
 
-#line 121 "..\..\Views\Provider\StandardResults.cshtml"
+#line 127 "..\..\Views\Provider\StandardResults.cshtml"
                  WriteTo(__razor_helper_writer, Model.LastPage);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</span>\n        </a>\n");
+WriteLiteralTo(__razor_helper_writer, "</span>\r\n        </a>\r\n");
 
 
-#line 123 "..\..\Views\Provider\StandardResults.cshtml"
+#line 129 "..\..\Views\Provider\StandardResults.cshtml"
 }
 
 
@@ -209,19 +209,19 @@ WriteLiteralTo(__razor_helper_writer, "</span>\n        </a>\n");
 #line hidden
 });
 
-#line 124 "..\..\Views\Provider\StandardResults.cshtml"
+#line 130 "..\..\Views\Provider\StandardResults.cshtml"
 }
 #line default
 #line hidden
 
-#line 126 "..\..\Views\Provider\StandardResults.cshtml"
+#line 132 "..\..\Views\Provider\StandardResults.cshtml"
 public System.Web.WebPages.HelperResult FilterForm(string cssClass)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 127 "..\..\Views\Provider\StandardResults.cshtml"
+#line 133 "..\..\Views\Provider\StandardResults.cshtml"
  
 if (!Model.DeliveryModes.IsNullOrEmpty())
 {
@@ -235,62 +235,62 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "            <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5592), Tuple.Create("\"", 5609)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6029), Tuple.Create("\"", 6046)
 
-#line 134 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5600), Tuple.Create<System.Object, System.Int32>(cssClass
+#line 140 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6037), Tuple.Create<System.Object, System.Int32>(cssClass
 
 #line default
 #line hidden
-, 5600), false)
+, 6037), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, ">\n                <form");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                <form");
 
 WriteLiteralTo(__razor_helper_writer, " method=\"get\"");
 
 WriteLiteralTo(__razor_helper_writer, " autocomplete=\"off\"");
 
-WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 5665), Tuple.Create("\"", 5693)
+WriteAttributeTo(__razor_helper_writer, "action", Tuple.Create(" action=\"", 6103), Tuple.Create("\"", 6131)
 
-#line 135 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5674), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
+#line 141 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6112), Tuple.Create<System.Object, System.Int32>(Model.AbsolutePath
 
 #line default
 #line hidden
-, 5674), false)
+, 6112), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, ">\n                    <input");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"PostCode\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5752), Tuple.Create("\"", 5792)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6191), Tuple.Create("\"", 6231)
 
-#line 136 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5760), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
+#line 142 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6199), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
 
 #line default
 #line hidden
-, 5760), false)
+, 6199), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, " />\n                    <input");
+WriteLiteralTo(__razor_helper_writer, " />\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"apprenticeshipid\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5861), Tuple.Create("\"", 5886)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6301), Tuple.Create("\"", 6326)
 
-#line 137 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5869), Tuple.Create<System.Object, System.Int32>(Model.StandardId
+#line 143 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6309), Tuple.Create<System.Object, System.Int32>(Model.StandardId
 
 #line default
 #line hidden
-, 5869), false)
+, 6309), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                    <input");
@@ -299,30 +299,30 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"showAll\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 5947), Tuple.Create("\"", 5980)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6387), Tuple.Create("\"", 6420)
 
-#line 138 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5955), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
+#line 144 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6395), Tuple.Create<System.Object, System.Int32>(Model.ShowAll.ToString()
 
 #line default
 #line hidden
-, 5955), false)
+, 6395), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, "/>\r\n                    <input");
+WriteLiteralTo(__razor_helper_writer, " />\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"isLevyPayingEmployer\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6053), Tuple.Create("\"", 6099)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6494), Tuple.Create("\"", 6540)
 
-#line 139 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6061), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.ToString()
+#line 145 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6502), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.ToString()
 
 #line default
 #line hidden
-, 6061), false)
+, 6502), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " />\r\n                    <input");
@@ -331,49 +331,49 @@ WriteLiteralTo(__razor_helper_writer, " type=\"hidden\"");
 
 WriteLiteralTo(__razor_helper_writer, " name=\"keywords\"");
 
-WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6161), Tuple.Create("\"", 6187)
+WriteAttributeTo(__razor_helper_writer, "value", Tuple.Create(" value=\"", 6602), Tuple.Create("\"", 6628)
 
-#line 140 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 6169), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+#line 146 "..\..\Views\Provider\StandardResults.cshtml"
+, Tuple.Create(Tuple.Create("", 6610), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
 
 #line default
 #line hidden
-, 6169), false)
+, 6610), false)
 );
 
-WriteLiteralTo(__razor_helper_writer, "/>\n\n");
+WriteLiteralTo(__razor_helper_writer, " />\r\n\r\n");
 
 
-#line 142 "..\..\Views\Provider\StandardResults.cshtml"
+#line 148 "..\..\Views\Provider\StandardResults.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 142 "..\..\Views\Provider\StandardResults.cshtml"
+#line 148 "..\..\Views\Provider\StandardResults.cshtml"
                       
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
                     
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\n");
+WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 145 "..\..\Views\Provider\StandardResults.cshtml"
+#line 151 "..\..\Views\Provider\StandardResults.cshtml"
                     
 
 #line default
 #line hidden
 
-#line 145 "..\..\Views\Provider\StandardResults.cshtml"
+#line 151 "..\..\Views\Provider\StandardResults.cshtml"
                       
                         Html.RenderPartial("_FilterNationalProviders", Model.NationalProviders);
                     
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\n                    <input");
+WriteLiteralTo(__razor_helper_writer, "\r\n                    <input");
 
 WriteLiteralTo(__razor_helper_writer, " type=\"submit\"");
 
@@ -381,10 +381,10 @@ WriteLiteralTo(__razor_helper_writer, " value=\"Update results\"");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"button margin-top-x2 postcode-search-button\"");
 
-WriteLiteralTo(__razor_helper_writer, " />\n                </form>\n            </div>\n");
+WriteLiteralTo(__razor_helper_writer, " />\r\n                </form>\r\n            </div>\r\n");
 
 
-#line 151 "..\..\Views\Provider\StandardResults.cshtml"
+#line 157 "..\..\Views\Provider\StandardResults.cshtml"
                             }
                         }
 
@@ -393,12 +393,12 @@ WriteLiteralTo(__razor_helper_writer, " />\n                </form>\n           
 #line hidden
 });
 
-#line 153 "..\..\Views\Provider\StandardResults.cshtml"
+#line 159 "..\..\Views\Provider\StandardResults.cshtml"
 }
 #line default
 #line hidden
 
-        #line 156 "..\..\Views\Provider\StandardResults.cshtml"
+        #line 162 "..\..\Views\Provider\StandardResults.cshtml"
  
     RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
     {
@@ -436,93 +436,89 @@ WriteLiteralTo(__razor_helper_writer, " />\n                </form>\n           
             
             #line default
             #line hidden
-WriteLiteral("\n\n<main");
+WriteLiteral("\r\n\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\n    <input");
+WriteLiteral(">\r\n    <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 412), Tuple.Create("\"", 452)
+WriteAttribute("value", Tuple.Create(" value=\"", 422), Tuple.Create("\"", 462)
             
             #line 11 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 420), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
+, Tuple.Create(Tuple.Create("", 430), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
             
             #line default
             #line hidden
-, 420), false)
+, 430), false)
 );
 
 WriteLiteral(" id=\"ga-postcode\"");
 
-WriteLiteral(" />\n    <input");
+WriteLiteral(" />\r\n    <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 498), Tuple.Create("\"", 553)
+WriteAttribute("value", Tuple.Create(" value=\"", 509), Tuple.Create("\"", 564)
             
             #line 12 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 506), Tuple.Create<System.Object, System.Int32>(Model.StandardName
+, Tuple.Create(Tuple.Create("", 517), Tuple.Create<System.Object, System.Int32>(Model.StandardName
             
             #line default
             #line hidden
-, 506), false)
-, Tuple.Create(Tuple.Create("", 525), Tuple.Create(",", 525), true)
-, Tuple.Create(Tuple.Create(" ", 526), Tuple.Create("level", 527), true)
+, 517), false)
+, Tuple.Create(Tuple.Create("", 536), Tuple.Create(",", 536), true)
+, Tuple.Create(Tuple.Create(" ", 537), Tuple.Create("level", 538), true)
             
             #line 12 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create(" ", 532), Tuple.Create<System.Object, System.Int32>(Model.StandardLevel
+, Tuple.Create(Tuple.Create(" ", 543), Tuple.Create<System.Object, System.Int32>(Model.StandardLevel
             
             #line default
             #line hidden
-, 533), false)
+, 544), false)
 );
 
 WriteLiteral(" id=\"ga-apprenticeship-title\"");
 
-WriteLiteral("/>\n    <input");
+WriteLiteral(" />\r\n    <input");
 
 WriteLiteral(" type=\"hidden\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 610), Tuple.Create("\"", 656)
+WriteAttribute("value", Tuple.Create(" value=\"", 623), Tuple.Create("\"", 669)
             
             #line 13 "..\..\Views\Provider\StandardResults.cshtml"
-, Tuple.Create(Tuple.Create("", 618), Tuple.Create<System.Object, System.Int32>(Model.Hits.IsNullOrEmpty().ToString()
+, Tuple.Create(Tuple.Create("", 631), Tuple.Create<System.Object, System.Int32>(Model.Hits.IsNullOrEmpty().ToString()
             
             #line default
             #line hidden
-, 618), false)
+, 631), false)
 );
 
 WriteLiteral(" id=\"ga-no-result\"");
 
-WriteLiteral("/>\n\n");
-
-            
-            #line 15 "..\..\Views\Provider\StandardResults.cshtml"
-    
-            
-            #line default
-            #line hidden
-            
-            #line 15 "..\..\Views\Provider\StandardResults.cshtml"
-     if (Model.Hits.Count() != 0)
-    {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <p");
+WriteLiteral(" />\r\n   \r\n    <p");
 
 WriteLiteral(" class=\"small-btm-margin\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
-WriteLiteral("            ");
-
+            
+            #line 16 "..\..\Views\Provider\StandardResults.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 16 "..\..\Views\Provider\StandardResults.cshtml"
+         if (Model.Hits.Count() != 0)
+        {
+            
+            
+            #line default
+            #line hidden
             
             #line 18 "..\..\Views\Provider\StandardResults.cshtml"
        Write(Html.ActionLink("Find providers for a different postcode", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "link-back new-postcode-search" }));
@@ -530,106 +526,137 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("\n        </p>\n");
-
             
-            #line 20 "..\..\Views\Provider\StandardResults.cshtml"
-    }
+            #line 18 "..\..\Views\Provider\StandardResults.cshtml"
+                                                                                                                                                                                                                                                                                                   
+
+        }
 
             
             #line default
             #line hidden
-WriteLiteral("    <div>\n        <div>\n            <hgroup");
+WriteLiteral("        ");
+
+            
+            #line 21 "..\..\Views\Provider\StandardResults.cshtml"
+         if (Model.IsLevyPayingEmployer)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <a");
+
+WriteLiteral(" id=\"register_to_manage\"");
+
+WriteLiteral(" href=\"https://www.gov.uk/guidance/manage-apprenticeship-funds\"");
+
+WriteLiteral(" style=\"float: right; margin-top: 10px;\"");
+
+WriteLiteral(" rel=\"external\"");
+
+WriteLiteral(" target=\"_blank\"");
+
+WriteLiteral(">Register to manage your apprenticeship funds</a>\r\n");
+
+            
+            #line 24 "..\..\Views\Provider\StandardResults.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </p>\r\n\r\n    <div>\r\n        <div>\r\n            <hgroup");
 
 WriteLiteral(" class=\"hgroup\"");
 
-WriteLiteral(">\n                <h1");
+WriteLiteral(">\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n                    Search results\n                </h1>\n");
+WriteLiteral(">\r\n                    Search results\r\n                </h1>\r\n");
 
             
-            #line 27 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 33 "..\..\Views\Provider\StandardResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 27 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 33 "..\..\Views\Provider\StandardResults.cshtml"
                   
                     Html.RenderPartial("_StandardSearchResultMessage");
                 
             
             #line default
             #line hidden
-WriteLiteral("\n            </hgroup>\n        </div>\n    </div>\n\n");
+WriteLiteral("\r\n            </hgroup>\r\n        </div>\r\n    </div>\r\n\r\n");
 
             
-            #line 34 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 40 "..\..\Views\Provider\StandardResults.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 34 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 40 "..\..\Views\Provider\StandardResults.cshtml"
      if (Model.ShowNationalProviders && Model.TotalResults == 0)
     {
 
             
             #line default
             #line hidden
-WriteLiteral("        <p>\n            Sorry, there are currently no results for the filters you" +
-" applied\'.\n        </p>\n");
+WriteLiteral("        <p>\r\n            Sorry, there are currently no results for the filters yo" +
+"u applied\'.\r\n        </p>\r\n");
 
-WriteLiteral("        <div>\n            <p>You can:</p>\n            <ul");
+WriteLiteral("        <div>\r\n            <p>You can:</p>\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\n                <li");
+WriteLiteral(">\r\n                <li");
 
 WriteLiteral(" class=\"return-search-results\"");
 
 WriteLiteral(">");
 
             
-            #line 42 "..\..\Views\Provider\StandardResults.cshtml"
-                                             Write(Html.ActionLink("return to your apprenticeship training search results", "StandardResults", "Provider", new {@apprenticeshipid = @Model.StandardId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new {}));
+            #line 48 "..\..\Views\Provider\StandardResults.cshtml"
+                                             Write(Html.ActionLink("return to your apprenticeship training search results", "StandardResults", "Provider", new { @apprenticeshipid = @Model.StandardId, @postcode = @Model.PostCode, @keywords = @Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { }));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\n                <li");
+WriteLiteral("</li>\r\n                <li");
 
 WriteLiteral(" class=\"start-again\"");
 
 WriteLiteral(">");
 
             
-            #line 43 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 49 "..\..\Views\Provider\StandardResults.cshtml"
                                    Write(Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship"));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\n            </ul>\n        </div>\n");
+WriteLiteral("</li>\r\n            </ul>\r\n        </div>\r\n");
 
             
-            #line 46 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 52 "..\..\Views\Provider\StandardResults.cshtml"
 
         
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 53 "..\..\Views\Provider\StandardResults.cshtml"
    Write(Html.Partial("_Help"));
 
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 53 "..\..\Views\Provider\StandardResults.cshtml"
                               
     }
     else if (Model.TotalResults == 0)
@@ -638,10 +665,11 @@ WriteLiteral("</li>\n            </ul>\n        </div>\n");
             
             #line default
             #line hidden
-WriteLiteral("        <p>\n            Sorry, there are currently no training providers for <b>");
+WriteLiteral("        <p>\r\n            Sorry, there are currently no training providers for <b>" +
+"");
 
             
-            #line 52 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 58 "..\..\Views\Provider\StandardResults.cshtml"
                                                                Write(Model.StandardName);
 
             
@@ -650,7 +678,7 @@ WriteLiteral("        <p>\n            Sorry, there are currently no training pr
 WriteLiteral(", level ");
 
             
-            #line 52 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 58 "..\..\Views\Provider\StandardResults.cshtml"
                                                                                           Write(Model.StandardLevel);
 
             
@@ -659,28 +687,28 @@ WriteLiteral(", level ");
 WriteLiteral("</b> for \'<b>");
 
             
-            #line 52 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 58 "..\..\Views\Provider\StandardResults.cshtml"
                                                                                                                            Write(Model.PostCode);
 
             
             #line default
             #line hidden
-WriteLiteral("</b>\'.\n        </p>\n");
+WriteLiteral("</b>\'.\r\n        </p>\r\n");
 
-WriteLiteral("        <div>\n            <p>You can:</p>\n            <ul");
+WriteLiteral("        <div>\r\n            <p>You can:</p>\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
-            #line 57 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 63 "..\..\Views\Provider\StandardResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 57 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 63 "..\..\Views\Provider\StandardResults.cshtml"
                  if (Model.TotalResultsForCountry > 0)
                 {
 
@@ -694,8 +722,8 @@ WriteLiteral(" class=\"total-providers-country\"");
 WriteLiteral(">");
 
             
-            #line 59 "..\..\Views\Provider\StandardResults.cshtml"
-                                                   Write(Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalResultsForCountry), "StandardResults", "Provider", new {@apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new {@class = ""}));
+            #line 65 "..\..\Views\Provider\StandardResults.cshtml"
+                                                   Write(Html.ActionLink(string.Format("view all ({0}) training providers", @Model.TotalResultsForCountry), "StandardResults", "Provider", new { @apprenticeshipId = @Model.StandardId, @postcode = Model.PostCode, @showAll = true, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "" }));
 
             
             #line default
@@ -703,8 +731,8 @@ WriteLiteral(">");
 WriteLiteral(" for <b>");
 
             
-            #line 59 "..\..\Views\Provider\StandardResults.cshtml"
-                                                                                                                                                                                                                                                                                                                                                              Write(Model.StandardName);
+            #line 65 "..\..\Views\Provider\StandardResults.cshtml"
+                                                                                                                                                                                                                                                                                                                                                                 Write(Model.StandardName);
 
             
             #line default
@@ -712,16 +740,16 @@ WriteLiteral(" for <b>");
 WriteLiteral(", level ");
 
             
-            #line 59 "..\..\Views\Provider\StandardResults.cshtml"
-                                                                                                                                                                                                                                                                                                                                                                                         Write(Model.StandardLevel);
+            #line 65 "..\..\Views\Provider\StandardResults.cshtml"
+                                                                                                                                                                                                                                                                                                                                                                                            Write(Model.StandardLevel);
 
             
             #line default
             #line hidden
-WriteLiteral("</b> in England</li>\n");
+WriteLiteral("</b> in England</li>\r\n");
 
             
-            #line 60 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 66 "..\..\Views\Provider\StandardResults.cshtml"
                 }
 
             
@@ -734,73 +762,73 @@ WriteLiteral(" class=\"return-search-results\"");
 WriteLiteral(">");
 
             
-            #line 61 "..\..\Views\Provider\StandardResults.cshtml"
-                                             Write(Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new {@keywords = @Model.SearchTerms}, new {}));
+            #line 67 "..\..\Views\Provider\StandardResults.cshtml"
+                                             Write(Html.ActionLink("return to your apprenticeship training search results", "SearchResults", "Apprenticeship", new { @keywords = @Model.SearchTerms }, new { }));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\n                <li");
+WriteLiteral("</li>\r\n                <li");
 
 WriteLiteral(" class=\"start-again\"");
 
 WriteLiteral(">");
 
             
-            #line 62 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 68 "..\..\Views\Provider\StandardResults.cshtml"
                                    Write(Html.ActionLink("start your job role or keyword search again", "Search", "Apprenticeship"));
 
             
             #line default
             #line hidden
-WriteLiteral("</li>\n            </ul>\n        </div>\n");
+WriteLiteral("</li>\r\n            </ul>\r\n        </div>\r\n");
 
             
-            #line 65 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 71 "..\..\Views\Provider\StandardResults.cshtml"
 
         
             
             #line default
             #line hidden
             
-            #line 66 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 72 "..\..\Views\Provider\StandardResults.cshtml"
    Write(Html.Partial("_Help"));
 
             
             #line default
             #line hidden
             
-            #line 66 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 72 "..\..\Views\Provider\StandardResults.cshtml"
                               
     }
 
             
             #line default
             #line hidden
-WriteLiteral("\n    <div");
+WriteLiteral("\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\n        <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-third\"");
 
-WriteLiteral(">\n            <div");
+WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"editSearch\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
-            #line 72 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 78 "..\..\Views\Provider\StandardResults.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 72 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 78 "..\..\Views\Provider\StandardResults.cshtml"
                  if (Model.Hits.Any() && !Model.HasError)
-                {
+            {
 
             
             #line default
@@ -809,91 +837,91 @@ WriteLiteral("                    <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">\n                        <a");
+WriteLiteral(">\r\n                        <a");
 
 WriteLiteral(" href=\"#EditSearch\"");
 
-WriteLiteral(">Filter results</a>\n                    </h2>\n");
+WriteLiteral(">Filter results</a>\r\n                    </h2>\r\n");
 
 WriteLiteral("                    <div");
 
 WriteLiteral(" id=\"EditSearch\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
 WriteLiteral("                        ");
 
             
-            #line 78 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 84 "..\..\Views\Provider\StandardResults.cshtml"
                    Write(FilterForm("filter-box"));
 
             
             #line default
             #line hidden
-WriteLiteral("\n                    </div>\n");
+WriteLiteral("\r\n                    </div>\r\n");
 
             
-            #line 80 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 86 "..\..\Views\Provider\StandardResults.cshtml"
                 }
 
             
             #line default
             #line hidden
-WriteLiteral("            </div>\n        </div>\n\n        <div");
+WriteLiteral("            </div>\r\n        </div>\r\n\r\n        <div");
 
 WriteLiteral(" id=\"provider-results\"");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
             
-            #line 85 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 91 "..\..\Views\Provider\StandardResults.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 91 "..\..\Views\Provider\StandardResults.cshtml"
               
                 Html.RenderPartial("_StandardProviderInformation");
             
             
             #line default
             #line hidden
-WriteLiteral("\n            <div");
+WriteLiteral("\r\n            <div");
 
 WriteLiteral(" class=\"page-navigation\"");
 
-WriteLiteral(">\n");
+WriteLiteral(">\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 89 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 95 "..\..\Views\Provider\StandardResults.cshtml"
            Write(GetPaginationBackLink());
 
             
             #line default
             #line hidden
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 90 "..\..\Views\Provider\StandardResults.cshtml"
+            #line 96 "..\..\Views\Provider\StandardResults.cshtml"
            Write(GetPaginationNextLink());
 
             
             #line default
             #line hidden
-WriteLiteral("\n            </div>\n        </div>\n    </div>\n</main>\n\n");
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n");
 
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
-WriteLiteral("\n");
+WriteLiteral("\r\n");
 
         }
     }
