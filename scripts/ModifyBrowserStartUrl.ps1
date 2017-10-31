@@ -1,7 +1,13 @@
 Param($config, $value)
 
-$doc = New-Object System.Xml.XmlDocument
-$doc.Load($config)
-$node = $doc.SelectSingleNode('configuration/specBind/application')
-$node.Attributes['startUrl'].Value = $value
-$doc.Save($config)
+$configFiles = Get-ChildItem $config
+
+foreach ($configFile in $configFiles)
+{
+	$doc = New-Object System.Xml.XmlDocument
+	$doc.Load($configFile)
+	$node = $doc.SelectSingleNode('configuration/specBind/application')
+	$node.Attributes['startUrl'].Value = $value
+	$doc.Save($configFile)
+	Write-Host "updated startUrl in $configFile to $value" -BackgroundColor darkgreen
+}
