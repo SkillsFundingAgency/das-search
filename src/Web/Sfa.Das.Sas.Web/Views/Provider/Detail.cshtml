@@ -263,15 +263,47 @@ if (items != null)
         <ul>
             @if (items.Exists(m => m.Equals("DayRelease")))
             {
-                <li class="day-release">@Html.Raw("day release")</li>
+                <li class="day-release icon-right">
+                    <span class="icon-content">day release</span>
+                    <span class="green-tick"></span>
+                </li>
             }
+            else
+            {
+                <li class="day-release icon-right">
+                    <span class="icon-content">day release</span>
+                    <span class="red-cross"></span>
+                </li>
+            }
+
             @if (items.Exists(m => m.Equals("BlockRelease")))
             {
-                <li class="block-release">@Html.Raw("block release")</li>
+                <li class="block-release icon-right">
+                    <span class="icon-content">block release</span>
+                    <span class="green-tick"></span>
+                </li>
             }
+            else
+            {
+                <li class="block-release icon-right">
+                    <span class="icon-content">block release</span>
+                    <span class="red-cross"></span>
+                </li>
+            }
+
             @if (items.Exists(m => m.Equals("100PercentEmployer")))
             {
-                <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
+                <li class="hundred-percent-employer icon-right">
+                    <span class="icon-content">at your location</span>
+                    <span class="green-tick"></span>
+                </li>
+            }
+            else
+            {
+                <li class="hundred-percent-employer icon-right">
+                    <span class="icon-content">at your location</span>
+                    <span class="red-cross"></span>
+                </li>
             }
         </ul>
         <details>

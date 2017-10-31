@@ -568,30 +568,58 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        <ul>\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"day-release\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"day-release icon-right\"");
 
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">day release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"green-tick\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 266 "..\..\Views\Provider\Detail.cshtml"
-          WriteTo(__razor_helper_writer, Html.Raw("day release"));
+#line 270 "..\..\Views\Provider\Detail.cshtml"
+            }
+            else
+            {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"day-release icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">day release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"red-cross\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 267 "..\..\Views\Provider\Detail.cshtml"
+#line 277 "..\..\Views\Provider\Detail.cshtml"
             }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            ");
+WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 268 "..\..\Views\Provider\Detail.cshtml"
+#line 279 "..\..\Views\Provider\Detail.cshtml"
+            
+
+#line default
+#line hidden
+
+#line 279 "..\..\Views\Provider\Detail.cshtml"
              if (items.Exists(m => m.Equals("BlockRelease")))
             {
 
@@ -600,30 +628,58 @@ WriteLiteralTo(__razor_helper_writer, "            ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"block-release\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"block-release icon-right\"");
 
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">block release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"green-tick\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 270 "..\..\Views\Provider\Detail.cshtml"
-            WriteTo(__razor_helper_writer, Html.Raw("block release"));
+#line 285 "..\..\Views\Provider\Detail.cshtml"
+            }
+            else
+            {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"block-release icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">block release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"red-cross\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 271 "..\..\Views\Provider\Detail.cshtml"
+#line 292 "..\..\Views\Provider\Detail.cshtml"
             }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            ");
+WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 272 "..\..\Views\Provider\Detail.cshtml"
+#line 294 "..\..\Views\Provider\Detail.cshtml"
+            
+
+#line default
+#line hidden
+
+#line 294 "..\..\Views\Provider\Detail.cshtml"
              if (items.Exists(m => m.Equals("100PercentEmployer")))
             {
 
@@ -632,21 +688,43 @@ WriteLiteralTo(__razor_helper_writer, "            ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer icon-right\"");
 
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">at your location</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"green-tick\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 274 "..\..\Views\Provider\Detail.cshtml"
-                       WriteTo(__razor_helper_writer, Html.Raw("at your location"));
+#line 300 "..\..\Views\Provider\Detail.cshtml"
+            }
+            else
+            {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">at your location</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"red-cross\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 275 "..\..\Views\Provider\Detail.cshtml"
+#line 307 "..\..\Views\Provider\Detail.cshtml"
             }
 
 
@@ -675,7 +753,7 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the training pr
 "         </p>\r\n            </div>\r\n        </details>\r\n    </dd>\r\n");
 
 
-#line 292 "..\..\Views\Provider\Detail.cshtml"
+#line 324 "..\..\Views\Provider\Detail.cshtml"
 }
 
 
@@ -683,7 +761,7 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the training pr
 #line hidden
 });
 
-#line 293 "..\..\Views\Provider\Detail.cshtml"
+#line 325 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden

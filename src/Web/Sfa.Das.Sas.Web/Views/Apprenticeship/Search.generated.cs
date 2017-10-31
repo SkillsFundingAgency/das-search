@@ -160,11 +160,13 @@ WriteLiteral(">Training Options:</dt>\r\n                            <dd");
 
 WriteLiteral(" id=\"delivery-modes\"");
 
+WriteLiteral(" class=\"icon-alerts\"");
+
 WriteLiteral(">\r\n                                <ul>\r\n                                    <li");
 
-WriteLiteral(" class=\"day-release\"");
+WriteLiteral(" class=\"day-release icon-right\"");
 
-WriteLiteral("><span");
+WriteLiteral(">\r\n                                        <span");
 
 WriteLiteral(" class=\"icon-content\"");
 
@@ -172,17 +174,41 @@ WriteLiteral(">day release</span>\r\n                                        <sp
 
 WriteLiteral(" class=\"green-tick\"");
 
-WriteLiteral("></span></li>\r\n                                    <li");
+WriteLiteral("></span>\r\n                                    </li>\r\n                            " +
+"        <li");
 
-WriteLiteral(" class=\"block-release\"");
+WriteLiteral(" class=\"block-release icon-right\"");
 
-WriteLiteral(">block release</li>\r\n                                    <li");
+WriteLiteral(">\r\n                                        <span");
 
-WriteLiteral(" class=\"hundred-percent-employer\"");
+WriteLiteral(" class=\"icon-content\"");
 
-WriteLiteral(">at your location</li>\r\n                \r\n                                </ul>\r\n" +
-"                            </dd>\r\n                        </dl>\r\n              " +
-"      </section>\r\n                    <!-- END -->\r\n                    <label");
+WriteLiteral(">block release</span>\r\n                                        <span");
+
+WriteLiteral(" class=\"red-cross\"");
+
+WriteLiteral("></span>\r\n                                    </li>\r\n                            " +
+"        <li");
+
+WriteLiteral(" class=\"hundred-percent-employer icon-right\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"icon-content\"");
+
+WriteLiteral(">at your location</span>\r\n                                        <span");
+
+WriteLiteral(" class=\"red-cross\"");
+
+WriteLiteral(@"></span>
+                                    </li>
+                
+                                </ul>
+                            </dd>
+                        </dl>
+                    </section>
+                    <!-- END -->
+                    <label");
 
 WriteLiteral(" for=\"keywords\"");
 
@@ -226,7 +252,7 @@ WriteLiteral(" value=\"Search\"");
 WriteLiteral("/>\r\n");
 
             
-            #line 59 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 67 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             
