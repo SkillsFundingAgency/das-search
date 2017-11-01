@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.ApplicationServices.Settings;
@@ -29,15 +27,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             message.Page = message.Page <= 0 ? 1 : message.Page;
 
-            var searchResults = new ApprenticeshipSearchResults
-            {
-                Results = new List<ApprenticeshipSearchResultsItem> { new ApprenticeshipSearchResultsItem { Title = "TEST", FrameworkId = "123", FrameworkName = "NAME", StandardId = "standardid"} },
-                ResultsToTake = 1,
-                LastPage = 1,
-                ActualPage = 1,
-                LevelAggregation = new Dictionary<int, long?>(),
-                SelectedLevels = new List<int> {1}
-            };// _searchService.SearchByKeyword(message.Keywords, message.Page, _paginationSettings.DefaultResultsAmount, message.Order, message.SelectedLevels);
+            var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, _paginationSettings.DefaultResultsAmount, message.Order, message.SelectedLevels);
 
             response.ActualPage = message.Page;
             response.AggregationLevel = searchResults.LevelAggregation;

@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             try
             {
-                var assessmentOrganisations = new List<Organisation>();//_getAssessmentOrgs.ByStandard(standard.StandardId);
+                var assessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId);
                 response.AssessmentOrganisations = assessmentOrganisations?.ToList() ?? new List<Organisation>();
             }
             catch (EntityNotFoundException)
