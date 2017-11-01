@@ -1,11 +1,12 @@
 ﻿@model Sfa.Das.Sas.Web.ViewModels.HeaderViewModel
-@if (@Model.ShowGoogleTagManager)
+@{var gtmTrackingId = System.Configuration.ConfigurationManager.AppSettings["ga.gtm.trackingid"];}
+@if (Model.ShowGoogleTagManager)
 {
     <!--Google Tag Manager (noscript)-->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T3CZC2" height="0" width="0" style="display:none;visibility:hidden"></iframe ></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=@gtmTrackingId" height="0" width="0" style="display:none;visibility:hidden"></iframe ></noscript>
     <!--End Google Tag Manager(noscript)-->
 }
-@if (@Model.ShowCookieBanner)
+@if (Model.ShowCookieBanner)
 {
     <div id="global-cookie-message" class="cookie-banner">
         <div class="content-container" role="alert">
