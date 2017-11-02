@@ -47,5 +47,11 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool ShowNationalProviders { get; set; }
 
         public bool IsLevyPayingEmployer { get; set; }
+
+        public ManageApprenticeshipFundsViewModel ManageApprenticeshipFunds
+        {
+            get;
+            set;
+        }
     }
 }

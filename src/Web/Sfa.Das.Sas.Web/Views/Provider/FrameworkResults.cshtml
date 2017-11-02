@@ -11,13 +11,16 @@
     <input type="hidden" value="@Model.PostCode.FormatPostcode()" id="ga-postcode"/>
     <input type="hidden" value="@Model.Title" id="ga-apprenticeship-title"/>
     <input type="hidden" value="@Model.Hits.IsNullOrEmpty().ToString()" id="ga-no-result"/>
-
-    @if (Model.Hits.Count() != 0)
-    {
-        <p class="small-btm-margin">
+    
+    <p class="small-btm-margin">
+        @if (Model.Hits.Count() != 0)
+        {
             @Html.ActionLink("Find providers for a different postcode", "SearchForFrameworkProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "link-back new-postcode-search" })
-        </p>
-    }
+        }
+        
+        @{ Html.RenderPartial("_ManageApprenticeshipFunds", Model.ManageApprenticeshipFunds); }
+    </p>
+
     <div>
         <div>
             <hgroup class="hgroup">

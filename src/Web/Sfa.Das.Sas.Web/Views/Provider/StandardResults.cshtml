@@ -11,17 +11,15 @@
     <input type="hidden" value="@Model.PostCode.FormatPostcode()" id="ga-postcode" />
     <input type="hidden" value="@Model.StandardName, level @Model.StandardLevel" id="ga-apprenticeship-title" />
     <input type="hidden" value="@Model.Hits.IsNullOrEmpty().ToString()" id="ga-no-result" />
-   
+
     <p class="small-btm-margin">
         @if (Model.Hits.Count() != 0)
         {
             @Html.ActionLink("Find providers for a different postcode", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "link-back new-postcode-search" })
 
         }
-        @if (Model.IsLevyPayingEmployer)
-        {
-            <a id="register_to_manage" href="https://www.gov.uk/guidance/manage-apprenticeship-funds" style="float: right; margin-top: 10px;" rel="external" target="_blank">Use your available apprenticeship funds</a>
-        }
+
+        @{ Html.RenderPartial("_ManageApprenticeshipFunds", Model.ManageApprenticeshipFunds); }
     </p>
 
     <div>

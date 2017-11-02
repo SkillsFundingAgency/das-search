@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using AngleSharp.Parser.Html;
 using FluentAssertions;
 using NUnit.Framework;
 using RazorGenerator.Testing;
