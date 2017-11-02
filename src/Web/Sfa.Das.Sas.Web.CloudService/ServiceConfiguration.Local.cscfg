@@ -13,6 +13,7 @@
       <Setting name="CookieApplicationInsightsUrl" value="https://azure.microsoft.com/en-us/documentation/articles/app-insights-data-retention-privacy/" />
       <Setting name="CookieAboutUrl" value="http://www.aboutcookies.org/" />
       <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/collections/sfa-national-success-rates-tables" />
+      <Setting name="ManageApprenticeshipFundsUrl" value="https://www.gov.uk/guidance/manage-apprenticeship-funds"/>
     </ConfigurationSettings>
     <Certificates>
     </Certificates>

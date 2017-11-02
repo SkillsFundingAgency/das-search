@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri SurveyProviderUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyProviderUrl"));
 
-        public Uri ManageApprenticeshipFundsUrl => new Uri(ConfigurationManager.AppSettings["ManageApprenticeshipFundsUrl"]);
+        public Uri ManageApprenticeshipFundsUrl => new Uri(CloudConfigurationManager.GetSetting("ManageApprenticeshipFundsUrl"));
 
         private IEnumerable<Uri> GetElasticSearchIps()
         {
