@@ -19,6 +19,7 @@
 			<Setting name="CookieApplicationInsightsUrl" />
 			<Setting name="CookieAboutUrl" />
 			<Setting name="AchievementRateUrl" />
+		  <Setting name="ManageApprenticeshipFundsUrl"/>
     </ConfigurationSettings>
 		<Endpoints>
 			<InputEndpoint name="SimpleEndpoint" protocol="http" port="80"/>

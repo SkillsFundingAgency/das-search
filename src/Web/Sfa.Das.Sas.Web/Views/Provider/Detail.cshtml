@@ -10,6 +10,9 @@
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 <main id="content" class="provider-detail">
+    <p class="small-btm-margin">
+        @{ Html.RenderPartial("_ManageApprenticeshipFunds", Model.ManageApprenticeshipFunds); }
+    </p>
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge" id="provider-name">
@@ -80,7 +83,9 @@
                                 <div class="panel panel-border-narrow">
                                     <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
                                     <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
-                                    <p class="font-small">Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
+                                    <p class="font-small">
+                                        Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a>
+                                    </p>
                                 </div>
                             </details>
                         }
@@ -91,7 +96,7 @@
                 @Html.MarkdownToHtml(Model.Apprenticeship.ApprenticeshipMarketingInfo)
 
             </section>
-         
+
             <section>
                 <h2 class="heading-medium">Provider information</h2>
                 <div class="provider-marketing-info">
@@ -160,7 +165,7 @@
                 </p>
             </section>
 
-            
+
             <div class="survey">
                 <h2 class="heading-small">
                     Give us your feedback
@@ -179,7 +184,7 @@
             </div>
         </div>
     </div>
-  
+
 </main>
 
 
@@ -188,19 +193,19 @@
 {
 if (@Model != null)
 {
-    <dt class="training-location-title">@title</dt>
+        <dt class="training-location-title">@title</dt>
 
     if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
     {
-        <dd id="training-location" class="training-location">
-            Training takes place at your location
-        </dd>
+            <dd id="training-location" class="training-location">
+                Training takes place at your location
+            </dd>
     }
     else
     {
-        <dd id="training-location" class="training-location">
-            @Model.LocationAddressLine 
-        </dd>
+            <dd id="training-location" class="training-location">
+                @Model.LocationAddressLine
+            </dd>
     }
 }
 }
@@ -209,8 +214,8 @@ if (@Model != null)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-    <dt class="@id-title">@title</dt>
-    <dd id="@id" class="@id">@Html.Raw(item)</dd>
+        <dt class="@id-title">@title</dt>
+        <dd id="@id" class="@id">@Html.Raw(item)</dd>
 }
 }
 
@@ -218,16 +223,16 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
 if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
 {
-    <dt class="email-title">@title</dt>
-    <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
+        <dt class="email-title">@title</dt>
+        <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
 }
 }
 
 @helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
-    if (!string.IsNullOrEmpty(url))
-    {
-        var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
+if (!string.IsNullOrEmpty(url))
+{
+    var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
         <dt class="@classTitle">@title</dt>
         <dd>
             <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
@@ -241,53 +246,53 @@ if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                 }
             </a>
         </dd>
-    }
+}
 }
 
 @helper CreateProgressBar(string message, int progress)
 {
-    if (progress > 0)
-    {
+if (progress > 0)
+{
         <div class="progress-container">
             <div class="progressbar" style="width: @progress%"></div>
         </div>
-    }
+}
 }
 
 @helper GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)
 {
 if (items != null)
 {
-    <dt class="training-structure">@title</dt>
-    <dd id="delivery-modes">
-        <ul>
-            @if (items.Exists(m => m.Equals("DayRelease")))
-            {
-                <li class="day-release">@Html.Raw("day release")</li>
-            }
-            @if (items.Exists(m => m.Equals("BlockRelease")))
-            {
-                <li class="block-release">@Html.Raw("block release")</li>
-            }
-            @if (items.Exists(m => m.Equals("100PercentEmployer")))
-            {
-                <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
-            }
-        </ul>
-        <details>
-            <summary>Explain training options</summary>
-            <div class="panel panel-border-narrow">
-                <p>
-                    <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
-                </p>
-                <p>
-                    <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
-                </p>
-                <p>
-                    <span class="bold-small">At your location:</span> the training provider comes to your workplace.
-                </p>
-            </div>
-        </details>
-    </dd>
+        <dt class="training-structure">@title</dt>
+        <dd id="delivery-modes">
+            <ul>
+                @if (items.Exists(m => m.Equals("DayRelease")))
+                {
+                    <li class="day-release">@Html.Raw("day release")</li>
+                }
+                @if (items.Exists(m => m.Equals("BlockRelease")))
+                {
+                    <li class="block-release">@Html.Raw("block release")</li>
+                }
+                @if (items.Exists(m => m.Equals("100PercentEmployer")))
+                {
+                    <li class="hundred-percent-employer">@Html.Raw("at your location")</li>
+                }
+            </ul>
+            <details>
+                <summary>Explain training options</summary>
+                <div class="panel panel-border-narrow">
+                    <p>
+                        <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
+                    </p>
+                    <p>
+                        <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
+                    </p>
+                    <p>
+                        <span class="bold-small">At your location:</span> the training provider comes to your workplace.
+                    </p>
+                </div>
+            </details>
+        </dd>
 }
 }
