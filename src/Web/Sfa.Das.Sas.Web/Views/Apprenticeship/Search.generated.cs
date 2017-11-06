@@ -85,7 +85,7 @@ WriteLiteral("                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n                   <label");
+WriteLiteral(">\r\n                    <label");
 
 WriteLiteral(" for=\"keywords\"");
 
