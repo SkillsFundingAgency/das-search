@@ -42,5 +42,10 @@ namespace Sfa.Das.Sas.Core.Configuration
         string ElasticsearchUsername { get; }
 
         string ElasticsearchPassword { get; }
+
+        Uri ManageApprenticeshipFundsUrl
+        {
+            get;
+        }
     }
 }

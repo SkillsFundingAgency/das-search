@@ -36,22 +36,24 @@
                         <div class="form-group" data-validation="Select an option">
                             <fieldset class="inline">
                                 <legend>
-                                    <span class="form-label-bold">Does your organisation pay the Apprenticeship Levy?</span>
+                                    <span class="form-label-bold">Your organisation's annual pay bill</span>
                                     <span class="form-hint">Results will be filtered to show approved training providers that can work with your organisation</span>
                                     <span class="error-message"></span>
                                 </legend>
-                                <label class="block-label selection-button-radio" id="levyPaying">
-                                    <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true"/>
-                                    Yes
-                                </label>
                                 <label class="block-label selection-button-radio" id="notLevyPaying">
                                     <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false"/>
-                                    No
+                                    under £3 million (non-levy payer)
+                                </label>
+                                <br/>
+                                <br/>
+                                <label class="block-label selection-button-radio" id="levyPaying">
+                                    <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true" />
+                                    above £3 million (levy payer)
                                 </label>
                             </fieldset>
                         </div>
                         <details>
-                            <summary>What is the Apprenticeship Levy?</summary>
+                            <summary>Find out more about the apprenticeship levy</summary>
                             <div class="panel panel-border-narrow">
                                 <p>
                                     Employers with an annual pay bill of more than £3 million must spend 0.5% of their total PAYE bill on an apprenticeship levy.

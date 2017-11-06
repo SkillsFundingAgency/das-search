@@ -234,6 +234,8 @@ WriteLiteralTo(__razor_helper_writer, " href=\"https://www.gov.uk/guidance/emplo
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
 
+WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
+
 WriteLiteralTo(__razor_helper_writer, ">More information about funding</a>\r\n    </dd>\r\n");
 
 
@@ -266,14 +268,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6941), Tuple.Create("\"", 6955)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 6956), Tuple.Create("\"", 6970)
 
 #line 148 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6948), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 6963), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 6948), false)
+, 6963), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");

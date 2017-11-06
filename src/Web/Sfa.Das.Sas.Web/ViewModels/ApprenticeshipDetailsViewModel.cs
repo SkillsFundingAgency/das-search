@@ -61,7 +61,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string LocationAddressLine { get; set; }
 
-        public bool? IsLevyPayingEmployer { get; set; }
+        public bool IsLevyPayingEmployer { get; set; }
 
         public bool HasParentCompanyGuarantee { get; set; }
 
@@ -70,5 +70,11 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool HasNonLevyContract { get; set; }
 
         public bool IsLevyPayerOnly { get; set; }
+
+        public ManageApprenticeshipFundsViewModel ManageApprenticeshipFunds
+        {
+            get;
+            set;
+        }
     }
 }

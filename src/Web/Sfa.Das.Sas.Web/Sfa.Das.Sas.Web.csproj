@@ -347,6 +347,7 @@
     <Compile Include="ViewModels\CookieViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ManageApprenticeshipFundsViewModel.cs" />
     <Compile Include="ViewModels\ProviderDetailViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
@@ -433,6 +434,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_FrameworkSearchResultMessage.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Provider\_ManageApprenticeshipFunds.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ManageApprenticeshipFunds.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Provider\_StandardProviderInformation.generated.cs">
       <AutoGen>True</AutoGen>
@@ -761,6 +767,10 @@
     </Content>
     <Content Include="Views\Stats\Stats.cshtml" />
     <Content Include="Views\Shared\_Help.cshtml" />
+    <Content Include="Views\Provider\_ManageApprenticeshipFunds.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ManageApprenticeshipFunds.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

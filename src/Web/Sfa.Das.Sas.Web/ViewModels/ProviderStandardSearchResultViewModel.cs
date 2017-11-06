@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
@@ -41,5 +42,11 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool ShowNationalProviders { get; set; }
 
         public bool IsLevyPayingEmployer { get; set; }
+
+        public ManageApprenticeshipFundsViewModel ManageApprenticeshipFunds
+        {
+            get;
+            set;
+        }
     }
 }

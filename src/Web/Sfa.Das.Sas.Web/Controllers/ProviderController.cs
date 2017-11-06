@@ -101,6 +101,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     {
                         dest.AbsolutePath = Request?.Url?.AbsolutePath;
                         dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
+                    dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
                     }));
 
             return View(viewModel);
@@ -173,6 +174,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 {
                     dest.AbsolutePath = Request?.Url?.AbsolutePath;
                     dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
+                    dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
                 }));
 
             return View(viewModel);
@@ -199,6 +201,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
+            
             return View(viewModel);
         }
 
@@ -225,6 +228,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                                     dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
                                     dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
                                     dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
+                                    dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
                                 }));
 
             return View(viewModel);
