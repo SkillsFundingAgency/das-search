@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AngleSharp.Parser.Html;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using RazorGenerator.Testing;
@@ -57,22 +55,27 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
-            this.GetPartial(html, ".apprenticeshipContact").Should().Contain("Test name website");
-            this.GetAttribute(html, ".apprenticeshipContact", "href").Should().Be("http://www.test-apprenticeship.info.url", "because http be added if missing");
-            this.GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
-            this.GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
-            this.GetAttribute(html, ".providerContact", "href").Should().Be("http://www.testcontact.url", "http should only be added once");
-            
-            this.GetPartial(html, ".legal-name").Should().Contain("Legal Test Name");
-            this.GetPartial(html, ".phone-title").Should().Contain("Phone");
-            this.GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
-            this.GetPartial(html, ".email-title").Should().Contain("Email");
-            this.GetPartial(html, ".email").Should().Contain(model.ContactInformation.Email);
-            this.GetPartial(html, ".training-structure").Should().Contain("Training options");
-            this.GetPartial(html, ".block-release").Should().Contain("block release");
-            this.GetPartial(html, ".training-location-title").Should().Contain("Address");
-            this.GetPartial(html, ".training-location").Should().Contain("Test location name, Address 1, Address 2, Town, County, PostCode");
+            GetPartial(html, ".apprenticeshipContactTitle").Should().Contain("Website");
+            GetPartial(html, ".apprenticeshipContact").Should().Contain("Test name website");
+            GetAttribute(html, ".apprenticeshipContact", "href").Should().Be("http://www.test-apprenticeship.info.url", "because http be added if missing");
+            GetPartial(html, ".providerContactTitle").Should().Contain("Contact page");
+            GetPartial(html, ".providerContact").Should().Contain("contact this training provider");
+            GetAttribute(html, ".providerContact", "href").Should().Be("http://www.testcontact.url", "http should only be added once");
+
+            GetPartial(html, ".legal-name").Should().Contain("Legal Test Name");
+            GetPartial(html, ".phone-title").Should().Contain("Phone");
+            GetPartial(html, ".phone").Should().Contain(model.ContactInformation.Phone);
+            GetPartial(html, ".email-title").Should().Contain("Email");
+            GetPartial(html, ".email").Should().Contain(model.ContactInformation.Email);
+            GetPartial(html, ".training-structure").Should().Contain("Training options");
+            GetPartial(html, ".block-release").Should().Contain("block release");
+            GetPartial(html, ".block-release-absent").Should().BeEmpty();
+            GetPartial(html, ".hundred-percent-employer").Should().BeEmpty();
+            GetPartial(html, ".hundred-percent-employer-absent").Should().Contain("at your location");
+            GetPartial(html, ".day-release").Should().BeEmpty();
+            GetPartial(html, ".day-release-absent").Should().Contain("day release");
+            GetPartial(html, ".training-location-title").Should().Contain("Address");
+            GetPartial(html, ".training-location").Should().Contain("Test location name, Address 1, Address 2, Town, County, PostCode");
         }
 
         [Test]
@@ -116,10 +119,63 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, ".training-structure").Should().Contain("Training options");
-            this.GetPartial(html, ".block-release").Should().Contain("block release");
-            this.GetPartial(html, ".hundred-percent-employer").Should().Contain("at your location");
-            this.GetPartial(html, ".day-release").Should().Contain("day release");
+            GetPartial(html, ".training-structure").Should().Contain("Training options");
+            GetPartial(html, ".block-release").Should().Contain("block release");
+            GetPartial(html, ".block-release-absent").Should().BeEmpty();
+            GetPartial(html, ".hundred-percent-employer").Should().Contain("at your location");
+            GetPartial(html, ".hundred-percent-employer-absent").Should().BeEmpty();
+            GetPartial(html, ".day-release").Should().Contain("day release");
+            GetPartial(html, ".day-release-absent").Should().BeEmpty();
+        }
+
+        [Test]
+        public void ShouldShowAllDeliveryModesAreAbsent()
+        {
+            var detail = new Detail();
+
+            var model = new ApprenticeshipDetailsViewModel
+            {
+                Name = "Test name",
+                EmployerSatisfactionMessage = "100%",
+                LearnerSatisfactionMessage = "100%",
+                Location = new Location
+                {
+                    LocationId = 1,
+                    LocationName = "Test location name"
+                },
+                Address = new Address
+                {
+                    Address1 = "Address 1",
+                    Address2 = "Address 2",
+                    County = "County",
+                    Postcode = "PostCode",
+                    Town = "Town"
+                },
+                DeliveryModes = new List<string>(),
+                ContactInformation = new ContactInformation
+                {
+                    ContactUsUrl = "Test contact url",
+                    Email = "Test email",
+                    Website = "Test website",
+                    Phone = "Test phone"
+                },
+                Apprenticeship = new ApprenticeshipBasic
+                {
+                    ApprenticeshipInfoUrl = "Test apprenticeship info url",
+                    ApprenticeshipMarketingInfo = "Test apprenticeship marketing info"
+                },
+                ProviderMarketingInfo = "Test provider marketing info",
+                ApprenticeshipName = "Test level"
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+
+            GetPartial(html, ".training-structure").Should().Contain("Training options");
+            GetPartial(html, ".block-release-absent").Should().Contain("block release");
+            GetPartial(html, ".block-release").Should().BeEmpty();
+            GetPartial(html, ".hundred-percent-employer-absent").Should().Contain("at your location");
+            GetPartial(html, ".hundred-percent-employer").Should().BeEmpty();
+            GetPartial(html, ".day-release-absent").Should().Contain("day release");
+            GetPartial(html, ".day-release").Should().BeEmpty();
         }
 
         [Test]
@@ -146,7 +202,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Town = "Town"
                 },
                 LocationAddressLine = "Test location name, Address 1, Address 2",
-                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                DeliveryModes = new List<string> {"100PercentEmployer", "DayRelease" },
                 ContactInformation = new ContactInformation
                 {
                     ContactUsUrl = "Test contact url",
@@ -163,12 +219,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 ApprenticeshipName = "Test level"
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            
             var locationText = GetPartial(html, ".training-location");
 
             locationText.Should().Contain(model.Location.LocationName);
             locationText.Should().Contain(model.Address.Address1);
             locationText.Should().Contain(model.Address.Address2);
+
         }
 
         [Test]

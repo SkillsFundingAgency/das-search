@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There was a problem performing a search. Try again later.");
+            GetPartial(html, "p").Should().Contain("There was a problem performing a search. Try again later.");
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There is 1 training option for the Test name, level 2 apprenticeship.");
+            GetPartial(html, "p").Should().Contain("There is 1 training option for the Test name, level 2 apprenticeship.");
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
-            this.GetPartial(html, "p").Should().Contain("There are 7 training options for the Test name, level 3 apprenticeship.");
+            GetPartial(html, "p").Should().Contain("There are 7 training options for the Test name, level 3 apprenticeship.");
         }
 
         [Test]

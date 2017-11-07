@@ -40,9 +40,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
             deliveryOptionsMessage.Append("<div class='icon-alerts'><p class='icon-right'>");
 
-            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions.Contains("DayRelease"), "day release"));
-            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions.Contains("BlockRelease"), "block release"));
-            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions.Contains("100PercentEmployer"), "at your location"));
+            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions != null && deliveryOptions.Contains("DayRelease"), "day release"));
+            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions != null && deliveryOptions.Contains("BlockRelease"), "block release"));
+            deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions != null && deliveryOptions.Contains("100PercentEmployer"), "at your location"));
 
             deliveryOptionsMessage.Append("</p></div>");
             return $"{deliveryOptionsMessage}";

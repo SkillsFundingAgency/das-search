@@ -137,6 +137,7 @@
 
             viewModel.Should().NotBeNull();
             viewModel.LocationAddressLine.Should().Be("Location Name, Address 1, Address 2");
+            viewModel.DeliveryModes.Count.Should().Be(0);
         }
 
         [Test]
@@ -156,6 +157,7 @@
                         LocationId = 12345
                     }
                 },
+                DeliveryModes = new List<string> { "100PercentEmployer", "DayRelease"},
                 MatchingLocationId = 12345
             };
 
@@ -163,6 +165,9 @@
 
             viewModel.Should().NotBeNull();
             viewModel.LocationAddressLine.Should().Be("Location Name, Address 1, Angleterre");
+            viewModel.DeliveryModes.Count(x => x.Contains("100PercentEmployer")).Should().Be(1);
+            viewModel.DeliveryModes.Count(x => x.Contains("DayRelease")).Should().Be(1);
+            viewModel.DeliveryModes.Count.Should().Be(2);
         }
     }
 }

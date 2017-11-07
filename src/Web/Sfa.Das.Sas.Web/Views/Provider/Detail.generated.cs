@@ -591,7 +591,7 @@ WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"day-release icon-right\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"day-release-absent icon-right\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
 
@@ -651,7 +651,7 @@ WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"block-release icon-right\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"block-release-absent icon-right\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
 
@@ -711,7 +711,7 @@ WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer icon-right\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer-absent icon-right\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
 
