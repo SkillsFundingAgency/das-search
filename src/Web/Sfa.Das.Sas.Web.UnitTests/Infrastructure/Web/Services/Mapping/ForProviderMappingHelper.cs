@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
@@ -42,76 +43,82 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services.Mapping
             ProviderMappingHelper.GetCommaList(list).Should().BeEquivalentTo(expected);
         }
 
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
-            "</p></div>")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
-            "</p></div>", "DayRelease")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
-            "</p></div>", "BlockRelease")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
-            "</p></div>", "100PercentEmployer")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
-            "</p></div>", "DayRelease", "BlockRelease")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
-            "</p></div>", "DayRelease", "100PercentEmployer")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
-            "</p></div>", "BlockRelease", "100PercentEmployer")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>at your location</span><span class='red-cross'></span>" +
-            "</p></div>", "BlockRelease", "DayRelease")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>block release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
-            "</p></div>", "100PercentEmployer", "DayRelease")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='red-cross'></span>" +
-            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
-            "</p></div>", "100PercentEmployer", "BlockRelease")]
-        [TestCase(
-            @"<div class='icon-alerts'><p class='icon-right'>" +
-            "<span class='icon-content'>day release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>block release</span><span class='green-tick'></span>" +
-            "<span class='icon-content'>at your location</span><span class='green-tick'></span>" +
-            "</p></div>", "100PercentEmployer", "BlockRelease", "DayRelease")]
-        public void WhenGetDeliveryOptionText(string expected, params string[] input)
+        [TestCaseSource(nameof(_deliveryOptionCases))]
+        public void WhenGettingDeliveryOptionText(string expected, List<string> input)
         {
-            var inputList = input?.ToList();
-            ProviderMappingHelper.GetDeliveryOptionText(inputList).Should().BeEquivalentTo(expected);
+            ProviderMappingHelper.GetDeliveryOptionText(input).Should().BeEquivalentTo(expected);
+        }
+
+        private static object[] _deliveryOptionCases =
+        {
+            new object[]
+            {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(true, true, true),
+                new List<string> { "100PercentEmployer", "BlockRelease", "DayRelease" }
+            },
+            new object[]
+            {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(false, true, true),
+                new List<string> { "100PercentEmployer", "BlockRelease" }
+            },
+            new object[]
+            {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(true, false, true),
+                new List<string> { "100PercentEmployer", "DayRelease" }
+            },
+            new object[]
+            {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(true, true, false),
+                new List<string>{ "BlockRelease", "DayRelease" }
+            },
+            new object[]
+            {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(false, true, true),
+                 new List<string> { "BlockRelease", "100PercentEmployer" }
+            },
+            new object[]
+            {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(false, false, false),
+                new List<string>()
+                },
+            new object[]
+                {
+                    GetTextForDeliveryModesDayAndBlockAnd100Percent(true, false, false),
+                new List<string> { "DayRelease" }
+                },
+            new object[]
+                {
+                    GetTextForDeliveryModesDayAndBlockAnd100Percent(false, true, false),
+                new List<string> { "BlockRelease" }
+                },
+            new object[]
+                {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(false, false, true),
+                new List<string> { "100PercentEmployer" }
+                },
+            new object[]
+                {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(true, true, false),
+                new List<string> { "DayRelease", "BlockRelease" }
+                },
+            new object[]
+                {
+                GetTextForDeliveryModesDayAndBlockAnd100Percent(true, false, true),
+                new List<string> { "DayRelease", "100PercentEmployer" }
+                }
+            };
+
+        private static string GetTextForDeliveryModesDayAndBlockAnd100Percent(bool isDayRelease, bool isBlockRelease, bool is100PercentEmployer)
+        {
+            var dayReleaseDesc = isDayRelease ? "green-tick" : "red-cross";
+            var blockReleaseDesc = isBlockRelease ? "green-tick" : "red-cross";
+            var hundredPercentEmployer = is100PercentEmployer ? "green-tick" : "red-cross";
+
+            return $@"<div class='icon-alerts'><p class='icon-right'>" +
+                   $"<span class='icon-content'>day release</span><span class='{dayReleaseDesc}'></span>" +
+                   $"<span class='icon-content'>block release</span><span class='{blockReleaseDesc}'></span>" +
+                   $"<span class='icon-content'>at your location</span><span class='{hundredPercentEmployer}'></span>" +
+                   "</p></div>";
         }
     }
 }

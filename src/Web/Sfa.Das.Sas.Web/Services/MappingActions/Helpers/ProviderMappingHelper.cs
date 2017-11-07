@@ -11,12 +11,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
     {
         public static string GetPercentageText(double? level)
         {
-            if (level == null)
-            {
-                return "no data available";
-            }
-
-            return $"{level}%";
+            return level == null ? "no data available" : $"{level}%";
         }
 
         public static string GetPercentageText(double? level, bool isHei)
@@ -26,12 +21,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 return "not currently collected for this training organisation";
             }
 
-            if (level == null)
-            {
-                return "no data available";
-            }
-
-            return $"{level}%";
+            return level == null ? "no data available" : $"{level}%";
         }
 
         public static string GetDeliveryOptionText(List<string> deliveryOptions)

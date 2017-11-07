@@ -39,9 +39,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
         {
             string postCodeUrl;
-
             var response = await _mediator.SendAsync(criteria);
-            
+
             switch (response.StatusCode)
             {
                 case StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
