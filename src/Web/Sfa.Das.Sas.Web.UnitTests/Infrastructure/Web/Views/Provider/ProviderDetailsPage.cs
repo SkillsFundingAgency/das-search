@@ -202,7 +202,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                     Town = "Town"
                 },
                 LocationAddressLine = "Test location name, Address 1, Address 2",
-                DeliveryModes = new List<string> {"100PercentEmployer", "DayRelease" },
+                DeliveryModes = new List<string> { "100PercentEmployer", "DayRelease" },
                 ContactInformation = new ContactInformation
                 {
                     ContactUsUrl = "Test contact url",
