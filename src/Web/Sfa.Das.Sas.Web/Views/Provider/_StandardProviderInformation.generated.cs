@@ -146,7 +146,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 56 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
-  WriteTo(__razor_helper_writer, item.DeliveryOptionsMessage);
+  WriteTo(__razor_helper_writer, Html.Raw(item.DeliveryOptionsMessage));
 
 
 #line default
