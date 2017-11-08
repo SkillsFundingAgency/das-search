@@ -453,7 +453,7 @@ WriteLiteralTo(__razor_helper_writer, "            </a>\r\n        </dd>\r\n");
 
 
 #line 249 "..\..\Views\Provider\Detail.cshtml"
-}
+    }
 
 
 #line default
@@ -488,16 +488,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 11400), Tuple.Create("\"", 11425)
-, Tuple.Create(Tuple.Create("", 11408), Tuple.Create("width:", 11408), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 11404), Tuple.Create("\"", 11429)
+, Tuple.Create(Tuple.Create("", 11412), Tuple.Create("width:", 11412), true)
 
 #line 257 "..\..\Views\Provider\Detail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 11414), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 11418), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 11415), false)
-, Tuple.Create(Tuple.Create("", 11424), Tuple.Create("%", 11424), true)
+, 11419), false)
+, Tuple.Create(Tuple.Create("", 11428), Tuple.Create("%", 11428), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
@@ -531,7 +531,7 @@ if (items != null)
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <dt");
+WriteLiteralTo(__razor_helper_writer, "    <dt");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"training-structure\"");
 
@@ -539,59 +539,87 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 266 "..\..\Views\Provider\Detail.cshtml"
-         WriteTo(__razor_helper_writer, title);
+     WriteTo(__razor_helper_writer, title);
 
 
 #line default
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        <dd");
+WriteLiteralTo(__razor_helper_writer, "    <dd");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"delivery-modes\"");
 
-WriteLiteralTo(__razor_helper_writer, ">\r\n            <ul>\r\n");
+WriteLiteralTo(__razor_helper_writer, ">\r\n        <ul>\r\n");
 
 
 #line 269 "..\..\Views\Provider\Detail.cshtml"
+            
+
+#line default
+#line hidden
+
+#line 269 "..\..\Views\Provider\Detail.cshtml"
+             if (items.Exists(m => m.Equals("DayRelease")))
+            {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"day-release icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">day release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"green-tick\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
+
+
+#line 275 "..\..\Views\Provider\Detail.cshtml"
+                }
+            else
+            {
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"day-release-absent icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">day release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"red-cross\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
+
+
+#line 282 "..\..\Views\Provider\Detail.cshtml"
+            }
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+
+#line 284 "..\..\Views\Provider\Detail.cshtml"
                 
 
 #line default
 #line hidden
 
-#line 269 "..\..\Views\Provider\Detail.cshtml"
-                 if (items.Exists(m => m.Equals("DayRelease")))
-                {
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "                    <li");
-
-WriteLiteralTo(__razor_helper_writer, " class=\"day-release\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
-
-
-#line 271 "..\..\Views\Provider\Detail.cshtml"
-              WriteTo(__razor_helper_writer, Html.Raw("day release"));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
-
-
-#line 272 "..\..\Views\Provider\Detail.cshtml"
-                }
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "                ");
-
-
-#line 273 "..\..\Views\Provider\Detail.cshtml"
+#line 284 "..\..\Views\Provider\Detail.cshtml"
                  if (items.Exists(m => m.Equals("BlockRelease")))
                 {
 
@@ -600,53 +628,103 @@ WriteLiteralTo(__razor_helper_writer, "                ");
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "                    <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"block-release\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"block-release icon-right\"");
 
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">block release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"green-tick\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 275 "..\..\Views\Provider\Detail.cshtml"
-                WriteTo(__razor_helper_writer, Html.Raw("block release"));
+#line 290 "..\..\Views\Provider\Detail.cshtml"
+            }
+            else
+            {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"block-release-absent icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">block release</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"red-cross\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 276 "..\..\Views\Provider\Detail.cshtml"
+#line 297 "..\..\Views\Provider\Detail.cshtml"
                 }
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                ");
+WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 277 "..\..\Views\Provider\Detail.cshtml"
+#line 299 "..\..\Views\Provider\Detail.cshtml"
+                
+
+#line default
+#line hidden
+
+#line 299 "..\..\Views\Provider\Detail.cshtml"
                  if (items.Exists(m => m.Equals("100PercentEmployer")))
                 {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                    <li");
+WriteLiteralTo(__razor_helper_writer, "                <li");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer icon-right\"");
 
-WriteLiteralTo(__razor_helper_writer, ">");
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">at your location</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"green-tick\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 279 "..\..\Views\Provider\Detail.cshtml"
-                           WriteTo(__razor_helper_writer, Html.Raw("at your location"));
+#line 305 "..\..\Views\Provider\Detail.cshtml"
+            }
+            else
+            {
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
+WriteLiteralTo(__razor_helper_writer, "                <li");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"hundred-percent-employer-absent icon-right\"");
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-content\"");
+
+WriteLiteralTo(__razor_helper_writer, ">at your location</span>\r\n                    <span");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"red-cross\"");
+
+WriteLiteralTo(__razor_helper_writer, "></span>\r\n                </li>\r\n");
 
 
-#line 280 "..\..\Views\Provider\Detail.cshtml"
+#line 312 "..\..\Views\Provider\Detail.cshtml"
                 }
 
 
@@ -678,7 +756,7 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the training pr
 "\r\n");
 
 
-#line 297 "..\..\Views\Provider\Detail.cshtml"
+#line 329 "..\..\Views\Provider\Detail.cshtml"
 }
 
 
@@ -686,7 +764,7 @@ WriteLiteralTo(__razor_helper_writer, ">At your location:</span> the training pr
 #line hidden
 });
 
-#line 298 "..\..\Views\Provider\Detail.cshtml"
+#line 330 "..\..\Views\Provider\Detail.cshtml"
 }
 #line default
 #line hidden

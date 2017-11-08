@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.ApplicationServices.Logging;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Settings;
-
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.ApplicationServices
+﻿namespace Sfa.Das.Sas.ApplicationServices
 {
+    using System.Collections.Generic;
+    using Logging;
+    using Models;
+    using Settings;
+    using SFA.DAS.NLog.Logger;
+
     public sealed class ApprenticeshipSearchService : IApprenticeshipSearchService
     {
         private readonly IApprenticeshipSearchProvider _searchProvider;
@@ -26,7 +25,6 @@ namespace Sfa.Das.Sas.ApplicationServices
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
             var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
-
             var results = _searchProvider.SearchByKeyword(keywords, page, takeElements, order, selectedLevels);
 
             _logger.Info(
