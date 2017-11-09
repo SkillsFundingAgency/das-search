@@ -80,7 +80,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnFoundFrameworkInResponse()
         {
             var query = new GetFrameworkQuery { Id = "1-2-3", Keywords = "Test" };
-            var framework = new Framework { FrameworkId = query.Id };
+            var framework = new Framework { FrameworkId = query.Id, IsActiveFramework = true};
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
 
@@ -93,7 +93,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnSearchTerms()
         {
             var query = new GetFrameworkQuery { Id = "1-2-3", Keywords = "Test" };
-            var framework = new Framework { FrameworkId = query.Id };
+            var framework = new Framework { FrameworkId = query.Id, IsActiveFramework = true};
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
 
