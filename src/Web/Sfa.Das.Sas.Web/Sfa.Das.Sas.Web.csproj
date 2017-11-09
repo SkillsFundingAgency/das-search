@@ -664,6 +664,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="stylecop.json" />
     <Content Include="Views\Error\_Error404.cshtml" />
+    <Content Include="Views\Error\_Error410.cshtml" />
     <Content Include="Views\Error\_Error500.cshtml" />
     <Content Include="Views\Provider\StandardResults.cshtml">
       <Generator>RazorGenerator</Generator>
