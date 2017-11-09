@@ -550,7 +550,7 @@ WriteLiteralTo(__razor_helper_writer, "    <dd");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"delivery-modes\"");
 
-WriteLiteralTo(__razor_helper_writer, "  class=\"icon-alerts\"");
+WriteLiteralTo(__razor_helper_writer, " class=\"icon-alerts\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n        <ul>\r\n");
 

@@ -68,10 +68,10 @@ WriteLiteral("> \r\n        <ul>\r\n");
             #line hidden
 WriteLiteral("                <li>\r\n                    <input");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 334), Tuple.Create("\"", 353)
+WriteAttribute("value", Tuple.Create(" value=\"", 334), Tuple.Create("\"", 363)
             
             #line 10 "..\..\Views\Provider\_FilterProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 342), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 342), Tuple.Create<System.Object, System.Int32>(item.Value.ToLower()
             
             #line default
             #line hidden
@@ -80,15 +80,15 @@ WriteAttribute("value", Tuple.Create(" value=\"", 334), Tuple.Create("\"", 353)
 
 WriteLiteral(" name=\"DeliveryModes\"");
 
-WriteAttribute("id", Tuple.Create("  id=\"", 375), Tuple.Create("\"", 406)
-, Tuple.Create(Tuple.Create("", 381), Tuple.Create("DeliveryModes_", 381), true)
+WriteAttribute("id", Tuple.Create("  id=\"", 385), Tuple.Create("\"", 416)
+, Tuple.Create(Tuple.Create("", 391), Tuple.Create("DeliveryModes_", 391), true)
             
             #line 10 "..\..\Views\Provider\_FilterProviders.cshtml"
-        , Tuple.Create(Tuple.Create("", 395), Tuple.Create<System.Object, System.Int32>(item.Value
+                  , Tuple.Create(Tuple.Create("", 405), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 395), false)
+, 405), false)
 );
 
 WriteLiteral(" type=\"checkbox\"");
@@ -97,7 +97,7 @@ WriteLiteral(" ");
 
             
             #line 10 "..\..\Views\Provider\_FilterProviders.cshtml"
-                                                                                                               Write(Html.Raw(item.Checked ? "checked" : ""));
+                                                                                                                         Write(Html.Raw(item.Checked ? "checked" : ""));
 
             
             #line default
@@ -106,22 +106,22 @@ WriteLiteral(" ");
 
             
             #line 10 "..\..\Views\Provider\_FilterProviders.cshtml"
-                                                                                                                                                        Write(Html.Raw(item.Count == 0 ? "disabled" : ""));
+                                                                                                                                                                  Write(Html.Raw(item.Count == 0 ? "disabled" : ""));
 
             
             #line default
             #line hidden
 WriteLiteral("/>\r\n                    <label");
 
-WriteAttribute("for", Tuple.Create(" for=\"", 539), Tuple.Create("\"", 570)
-, Tuple.Create(Tuple.Create("", 545), Tuple.Create("DeliveryModes_", 545), true)
+WriteAttribute("for", Tuple.Create(" for=\"", 549), Tuple.Create("\"", 580)
+, Tuple.Create(Tuple.Create("", 555), Tuple.Create("DeliveryModes_", 555), true)
             
             #line 11 "..\..\Views\Provider\_FilterProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 559), Tuple.Create<System.Object, System.Int32>(item.Value
+, Tuple.Create(Tuple.Create("", 569), Tuple.Create<System.Object, System.Int32>(item.Value
             
             #line default
             #line hidden
-, 559), false)
+, 569), false)
 );
 
 WriteLiteral(">");
