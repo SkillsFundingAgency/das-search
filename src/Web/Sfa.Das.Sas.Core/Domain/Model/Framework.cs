@@ -25,6 +25,10 @@
 
         public DateTime? ExpiryDate { get; set; }
 
+        public DateTime? EffectiveFrom { get; set; }
+
+        public DateTime? EffectiveTo { get; set; }
+
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }
@@ -42,5 +46,7 @@
         public IEnumerable<string> CombinedQualification { get; set; }
 
         public int Duration { get; set; }
+
+        public bool IsActiveFramework { get; set; }
     }
 }

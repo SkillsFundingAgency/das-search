@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nest;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Infrastructure.Elasticsearch;
-using Sfa.Das.Sas.Infrastructure.Mapping;
-using SFA.DAS.Apprenticeships.Api.Client;
-using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Infrastructure.Repositories
+﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using Nest;
+    using SFA.DAS.Apprenticeships.Api.Client;
+    using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
+    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Core.Configuration;
+    using Sfa.Das.Sas.Core.Domain.Model;
+    using Sfa.Das.Sas.Core.Domain.Services;
+    using Sfa.Das.Sas.Infrastructure.Elasticsearch;
+    using Sfa.Das.Sas.Infrastructure.Mapping;
+
     public sealed class FrameworkApiRepository : IGetFrameworks
     {
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
@@ -48,6 +49,20 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             }
             catch (EntityNotFoundException ex)
             {
+                _applicationLogger.Info($"404 trying to get framework with id {id}");
+                return null;
+            }
+            catch (HttpRequestException ex)
+            {
+                if (ex.Message.Contains("Status: 410"))
+                {
+                    _applicationLogger.Info($"410 trying to get framework with id {id}");
+                    return new Framework
+                    {
+                        IsActiveFramework = false
+                    };
+                }
+
                 throw new ApplicationException($"Failed to get framework with id {id}", ex);
             }
         }

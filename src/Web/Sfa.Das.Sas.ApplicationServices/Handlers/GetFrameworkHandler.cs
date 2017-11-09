@@ -46,6 +46,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return response;
             }
 
+            if (!framework.IsActiveFramework)
+            {
+                response.StatusCode = GetFrameworkResponse.ResponseCodes.Gone;
+
+                return response;
+            }
+
             response.Framework = framework;
             response.SearchTerms = message.Keywords;
 
