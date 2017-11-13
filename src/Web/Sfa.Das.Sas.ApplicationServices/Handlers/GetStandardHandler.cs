@@ -43,6 +43,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return response;
             }
 
+            if (!standard.IsActiveStandard)
+            {
+                response.StatusCode = GetStandardResponse.ResponseCodes.Gone;
+                return response;
+            }
+
             response.Standard = standard;
             response.SearchTerms = message.Keywords;
 
