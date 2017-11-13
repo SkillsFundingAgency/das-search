@@ -1,4 +1,5 @@
-﻿using FeatureToggle.Core.Fluent;
+﻿using System;
+using FeatureToggle.Core.Fluent;
 using Sfa.Das.Sas.Infrastructure.FeatureToggles;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
@@ -150,8 +151,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .Field(p => p.JobRoleItems.First().Title)
                             .Field(p => p.JobRoleItems.First().Description))
                         .Query(formattedKeywords)))
-                .PostFilter(m => FilterBySelectedLevels(m, selectedLevels)
-                    && m.Bool(b2 => b2.Filter(f => f.Term(t => t.Field(fi => fi.Published).Value(true)))))
+                .PostFilter(GetPostFilter(selectedLevels))
                 .Aggregations(agg => agg
                     .Terms(LevelAggregateName, t => t
                         .Field(f => f.Level).MinimumDocumentCount(0)));
@@ -193,8 +193,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                                         .Field(f => f.Keywords))
                                     .Query(formattedKeywords)
                                     .PrefixLength(3)))))
-                    .PostFilter(m => FilterBySelectedLevels(m, selectedLevels)
-                      && m.Bool(b2 => b2.Filter(f => f.Term(t => t.Field(fi => fi.Published).Value(true)))))
+                    .PostFilter(GetPostFilter(selectedLevels))
                     .Aggregations(agg => agg
                         .Terms(LevelAggregateName, t => t
                             .Field(f => f.Level).MinimumDocumentCount(0)));
@@ -202,6 +201,26 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             GetSortingOrder(searchDescriptor, order);
 
             return searchDescriptor;
+        }
+
+        private Func<QueryContainerDescriptor<ApprenticeshipSearchResultsItem>, QueryContainer> GetPostFilter(IList<int> selectedLevels)
+        {
+            return m => FilterBySelectedLevels(m, selectedLevels)
+                        && m.Bool(b => b.Should(n => n
+                            .DateRange(r => r
+                                .GreaterThanOrEquals(DateTime.Now)
+                                .Field(f => f.EffectiveTo))
+                            || n.Missing(mi => mi
+                                .Field(f => f.EffectiveTo))))
+                        && m.Bool(b => b.Should(n => n.DateRange(r => r
+                            .LessThanOrEquals(DateTime.Now)
+                            .Field(f => f.EffectiveFrom))
+                            || n.Missing(mi => mi
+                                .Field(f => f.EffectiveFrom))))
+                        && m.Bool(b2 => b2
+                            .Filter(f => f
+                                .Term(t => t
+                                    .Field(fi => fi.Published).Value(true))));
         }
     }
 }

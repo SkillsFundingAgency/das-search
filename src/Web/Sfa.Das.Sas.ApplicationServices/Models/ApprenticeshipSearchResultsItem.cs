@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
@@ -30,5 +31,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public int Duration { get; set; }
 
         public string TitleKeyword { get; set; }
+
+        public DateTime? EffectiveFrom { get; set; }
+
+        public DateTime? EffectiveTo { get; set; }
     }
 }
