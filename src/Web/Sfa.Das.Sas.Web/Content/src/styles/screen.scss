@@ -482,6 +482,7 @@ aside h2:first-child {
 
                 }
     }
+    .inline-alert{line-height:normal;}
 }
 
 .data-list--provider {
@@ -490,5 +491,12 @@ aside h2:first-child {
         .icon-right{
             display:list-item;
             }   
+    }
+}
+
+.result-data-list{
+    dt.strong{     
+            font-weight:bold;  
+            line-height:1.4em;   
     }
 }
