@@ -48,6 +48,20 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
+        public void ShouldReturnStandardGoneStatusIfStandardIsNotActive()
+        {
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = false };
+
+            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
+
+            var response = _sut.Handle(query);
+
+            response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.Gone);
+        }
+
+        [Test]
         public void ShouldGetStandardFromGetStandardRepository()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };

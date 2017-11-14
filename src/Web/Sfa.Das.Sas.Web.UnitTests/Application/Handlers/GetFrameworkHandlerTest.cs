@@ -65,6 +65,19 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
+        public void ShouldReturnFrameworkGoneStatusIfFrameworkIsNotActive()
+        {
+            var query = new GetFrameworkQuery { Id = "1-2-3", Keywords = "Test" };
+            var framework = new Framework { FrameworkId = query.Id, IsActiveFramework = false };
+
+            _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
+
+            var response = _sut.Handle(query);
+
+            response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.Gone);
+        }
+
+        [Test]
         public void ShouldGetFrameworkFromGetFrameworkRepository()
         {
             var query = new GetFrameworkQuery() { Id = "1-2-3", Keywords = "Test" };
