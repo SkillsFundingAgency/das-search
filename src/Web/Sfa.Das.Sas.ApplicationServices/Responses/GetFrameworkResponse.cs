@@ -8,7 +8,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         {
             Success,
             InvalidFrameworkId,
-            FrameworkNotFound
+            FrameworkNotFound,
+            Gone
         }
 
         public ResponseCodes StatusCode { get; set; }

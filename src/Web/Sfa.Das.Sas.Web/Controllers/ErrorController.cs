@@ -19,6 +19,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("_Error404");
         }
 
+        public ViewResult Gone()
+        {
+            Response.StatusCode = 410;
+
+            return View("_Error410");
+        }
+
         public ViewResult Error()
         {
             Response.StatusCode = 500;

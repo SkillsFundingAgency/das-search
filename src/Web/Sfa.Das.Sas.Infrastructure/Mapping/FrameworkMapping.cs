@@ -29,7 +29,10 @@
                 ProfessionalRegistration = document.ProfessionalRegistration,
                 CompetencyQualification = document.CompetencyQualification?.OrderBy(x => x),
                 KnowledgeQualification = document.KnowledgeQualification?.OrderBy(x => x),
-                CombinedQualification = document.CombinedQualification?.OrderBy(x => x)
+                CombinedQualification = document.CombinedQualification?.OrderBy(x => x),
+                EffectiveFrom = document.EffectiveFrom,
+                EffectiveTo = document.EffectiveTo,
+                IsActiveFramework = document.IsActiveFramework
             };
 
             return framework;
@@ -56,7 +59,10 @@
                 ProfessionalRegistration = document.ProfessionalRegistration,
                 CompetencyQualification = document.CompetencyQualification?.OrderBy(x => x),
                 KnowledgeQualification = document.KnowledgeQualification?.OrderBy(x => x),
-                CombinedQualification = document.CombinedQualification?.OrderBy(x => x)
+                CombinedQualification = document.CombinedQualification?.OrderBy(x => x),
+                EffectiveFrom = document.EffectiveFrom,
+                EffectiveTo = document.EffectiveTo,
+                IsActiveFramework = document.IsActiveFramework
             };
         }
 

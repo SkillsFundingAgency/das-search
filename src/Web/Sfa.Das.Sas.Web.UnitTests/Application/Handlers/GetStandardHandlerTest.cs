@@ -48,6 +48,20 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
+        public void ShouldReturnStandardGoneStatusIfStandardIsNotActive()
+        {
+            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = false };
+
+            _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
+
+            var response = _sut.Handle(query);
+
+            response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.Gone);
+        }
+
+        [Test]
         public void ShouldGetStandardFromGetStandardRepository()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
@@ -63,7 +77,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnFoundStandardInResponse()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
 
@@ -77,7 +91,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnFoundStandardAssessmentOrgsInResponse()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             var orgs = new List<Organisation> { new Organisation() };
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns(orgs);
@@ -92,7 +106,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnNoFoundStandardAssessmentOrgsIfNoneInResponse()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((IEnumerable<Organisation>)null);
             var response = _sut.Handle(query);
@@ -106,7 +120,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldGenerateAHttpRequestExceptionIfHttpExceptionThrownByAssessmentOrgsClient()
         {
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(new HttpRequestException());
             var response = _sut.Handle(query);
@@ -123,7 +137,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var entityNotfoundException = new EntityNotFoundException(string.Empty, new Exception());
             var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(entityNotfoundException);
             var response = _sut.Handle(query);
@@ -139,7 +153,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void ShouldReturnSearchTerms()
         {
             var query = new GetStandardQuery { Id = "1", Keywords = "Test" };
-            var standard = new Standard { StandardId = query.Id };
+            var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
 

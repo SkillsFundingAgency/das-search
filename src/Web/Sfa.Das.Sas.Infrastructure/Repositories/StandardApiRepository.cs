@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
@@ -11,6 +12,7 @@ using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
@@ -21,19 +23,22 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         private readonly IStandardMapping _standardMapping;
         private readonly IStandardApiClient _standardApiClient;
         private readonly IElasticsearchHelper _elasticsearchHelper;
+        private readonly ILog _applicationLogger;
 
         public StandardApiRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             IConfigurationSettings applicationSettings,
             IStandardMapping standardMapping,
             IStandardApiClient standardApiClient,
-            IElasticsearchHelper elasticsearchHelper)
+            IElasticsearchHelper elasticsearchHelper,
+            ILog applicationLogger)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
             _standardApiClient = standardApiClient;
             _elasticsearchHelper = elasticsearchHelper;
+            _applicationLogger = applicationLogger;
         }
 
         public Standard GetStandardById(string id)
@@ -45,6 +50,20 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             }
             catch (EntityNotFoundException ex)
             {
+                _applicationLogger.Info($"404 trying to get standard with id {id}");
+                return null;
+            }
+            catch (HttpRequestException ex)
+            {
+                if (ex.Message.Contains("Status: 410"))
+                {
+                    _applicationLogger.Info($"410 trying to get standard with id {id}");
+                    return new Standard
+                    {
+                        IsActiveStandard = false
+                    };
+                }
+
                 throw new ApplicationException($"Failed to get standard with id {id}", ex);
             }
         }

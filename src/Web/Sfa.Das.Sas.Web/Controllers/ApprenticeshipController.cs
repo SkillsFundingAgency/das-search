@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using System.Net;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -99,6 +101,8 @@
         {
             var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
+            string message;
+
             switch (response.StatusCode)
             {
                 case GetFrameworkResponse.ResponseCodes.InvalidFrameworkId:
@@ -107,11 +111,18 @@
                     return HttpNotFound("Framework id has wrong format");
 
                 case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
-                    var message = $"Cannot find framework: {id}";
+                    message = $"Cannot find framework: {id}";
 
                     _logger.Warn($"404 - {message}");
 
                     return new HttpNotFoundResult(message);
+
+                case GetFrameworkResponse.ResponseCodes.Gone:
+                    message = $"Expired framework request: {id}";
+
+                    _logger.Warn($"410 - {message}");
+
+                    return new HttpStatusCodeResult(HttpStatusCode.Gone);
 
                 case GetFrameworkResponse.ResponseCodes.Success:
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);

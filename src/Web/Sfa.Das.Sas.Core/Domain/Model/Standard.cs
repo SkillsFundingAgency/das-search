@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {
@@ -35,5 +36,11 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }
+
+        public DateTime? EffectiveFrom { get; set; }
+
+        public DateTime? EffectiveTo { get; set; }
+
+        public bool IsActiveStandard { get; set; }
     }
 }

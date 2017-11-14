@@ -12,7 +12,8 @@
             InvalidStandardId,
             StandardNotFound,
             AssessmentOrgsEntityNotFound,
-            HttpRequestException
+            HttpRequestException,
+            Gone
         }
 
         public ResponseCodes StatusCode { get; set; }

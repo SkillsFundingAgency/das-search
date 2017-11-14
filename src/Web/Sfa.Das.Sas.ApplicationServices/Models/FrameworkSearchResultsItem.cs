@@ -35,6 +35,12 @@
 
         public DateTime? ExpiryDate { get; set; }
 
+        public DateTime? EffectiveFrom { get; set; }
+
+        public DateTime? EffectiveTo { get; set; }
+
+        public bool IsActiveFramework { get; set; }
+
         public IEnumerable<JobRoleItem> JobRoleItems { get; set; }
 
         public IEnumerable<string> CompetencyQualification { get; set; }
