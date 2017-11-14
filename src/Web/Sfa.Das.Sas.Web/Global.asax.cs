@@ -54,8 +54,12 @@ namespace Sfa.Das.Sas.Web
                 }
                 else
                 {
-                    logger.Error(ex, "App_Error");
+                    logger.Error(ex, "App_Error - HttpException");
                 }
+            }
+            else
+            {
+                logger.Error(ex, "App_Error");
             }
         }
 
