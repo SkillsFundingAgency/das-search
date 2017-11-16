@@ -210,13 +210,11 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .DateRange(r => r
                                 .GreaterThanOrEquals(DateTime.Now)
                                 .Field(f => f.EffectiveTo))
-                            || n.Missing(mi => mi
-                                .Field(f => f.EffectiveTo))))
+                            || n.Bool(b2 => b2.MustNot(mn => mn.Exists(e => e.Field(f => f.EffectiveTo))))))
                         && m.Bool(b => b.Should(n => n.DateRange(r => r
                             .LessThanOrEquals(DateTime.Now)
                             .Field(f => f.EffectiveFrom))
-                            || n.Missing(mi => mi
-                                .Field(f => f.EffectiveFrom))))
+                            || n.Bool(b2 => b2.MustNot(mn => mn.Exists(e => e.Field(f => f.EffectiveFrom))))))
                         && m.Bool(b2 => b2
                             .Filter(f => f
                                 .Term(t => t
