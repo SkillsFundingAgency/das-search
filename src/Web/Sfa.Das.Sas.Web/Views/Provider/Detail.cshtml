@@ -266,7 +266,7 @@ if (items != null)
     <dt class="training-structure">@title</dt>
     <dd id="delivery-modes" class="icon-alerts">
         <ul>
-            @if (items.Exists(m => m.Equals("DayRelease")))
+            @if (items.Exists(m => m.Equals("dayrelease", StringComparison.OrdinalIgnoreCase)))
             {
                 <li class="day-release icon-right">
                     <span class="icon-content">day release</span>
@@ -281,7 +281,7 @@ if (items != null)
                 </li>
             }
 
-                @if (items.Exists(m => m.Equals("BlockRelease")))
+                @if (items.Exists(m => m.Equals("blockrelease", StringComparison.OrdinalIgnoreCase)))
                 {
                     <li class="block-release icon-right">
                     <span class="icon-content">block release</span>
@@ -296,7 +296,7 @@ if (items != null)
                 </li>
                 }
 
-                @if (items.Exists(m => m.Equals("100PercentEmployer")))
+                @if (items.Exists(m => m.Equals("100percentemployer", StringComparison.OrdinalIgnoreCase)))
                 {
                 <li class="hundred-percent-employer icon-right">
                     <span class="icon-content">at your location</span>

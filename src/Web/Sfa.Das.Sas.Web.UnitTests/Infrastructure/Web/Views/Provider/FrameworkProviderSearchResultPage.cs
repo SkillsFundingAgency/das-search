@@ -333,7 +333,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var item = new FrameworkProviderResultItemViewModel
             {
                 ProviderName = "Provider 1",
-                DeliveryModes = new List<string> { "BlockRelease", "100PercentEmployer", "DayRelease" },
+                DeliveryModes = new List<string> { "blockrelease", "100PercentEmployer", "DayRelease" },
                 Distance = 1.2,
                 Address = new Address(),
                 UkPrn = 1,
