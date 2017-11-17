@@ -114,7 +114,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services.Mapping
             var blockReleaseDesc = isBlockRelease ? "green-tick" : "red-cross";
             var hundredPercentEmployer = is100PercentEmployer ? "green-tick" : "red-cross";
 
-            return $@"<div class='icon-alerts'><p class='icon-right'>" +
+            return $@"<div class='icon-alerts'><p class='icon-right inline-alert'>" +
                    $"<span class='icon-content'>day release</span><span class='{dayReleaseDesc}'></span>" +
                    $"<span class='icon-content'>block release</span><span class='{blockReleaseDesc}'></span>" +
                    $"<span class='icon-content'>at your location</span><span class='{hundredPercentEmployer}'></span>" +

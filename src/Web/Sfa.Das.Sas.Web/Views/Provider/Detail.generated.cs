@@ -562,7 +562,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n        <ul>\r\n");
 #line hidden
 
 #line 269 "..\..\Views\Provider\Detail.cshtml"
-             if (items.Exists(m => m.Equals("DayRelease")))
+             if (items.Exists(m => m.Equals("dayrelease", StringComparison.OrdinalIgnoreCase)))
             {
 
 
@@ -622,7 +622,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 #line hidden
 
 #line 284 "..\..\Views\Provider\Detail.cshtml"
-                 if (items.Exists(m => m.Equals("BlockRelease")))
+                 if (items.Exists(m => m.Equals("blockrelease", StringComparison.OrdinalIgnoreCase)))
                 {
 
 
@@ -682,7 +682,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n");
 #line hidden
 
 #line 299 "..\..\Views\Provider\Detail.cshtml"
-                 if (items.Exists(m => m.Equals("100PercentEmployer")))
+                 if (items.Exists(m => m.Equals("100percentemployer", StringComparison.OrdinalIgnoreCase)))
                 {
 
 

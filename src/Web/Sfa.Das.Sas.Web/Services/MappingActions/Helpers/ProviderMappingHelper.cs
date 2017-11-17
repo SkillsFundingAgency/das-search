@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
         {
             var deliveryOptionsMessage = new StringBuilder();
 
-            deliveryOptionsMessage.Append("<div class='icon-alerts'><p class='icon-right'>");
+            deliveryOptionsMessage.Append("<div class='icon-alerts'><p class='icon-right inline-alert'>");
 
             deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions != null && deliveryOptions.Contains("DayRelease"), "day release"));
             deliveryOptionsMessage.Append(ProcessDeliveryModeToRedCrossOrGreenTick(deliveryOptions != null && deliveryOptions.Contains("BlockRelease"), "block release"));

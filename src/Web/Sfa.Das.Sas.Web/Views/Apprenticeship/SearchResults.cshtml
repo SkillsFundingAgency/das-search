@@ -11,31 +11,34 @@
     <input type="hidden" value="@Model.SearchTerm" id="ga-search-term"/>
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
     
-    <hgroup class="hgroup">
-        <h1 class="heading-xlarge">
-            Search results
-        </h1>
-        @{
-            Html.RenderPartial("_SearchResultMessage");
-        }
-    </hgroup>
+    <div class="grid-row">
+        <div class="column-full">
+            <hgroup class="hgroup">
+                <h1 class="heading-xlarge">
+                    Search results
+                </h1>
+                @{
+                    Html.RenderPartial("_SearchResultMessage");
+                }
+            </hgroup>
 
-    @if (Model.TotalResults == 0)
-    {
-        using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
-        {
-            <div class="form-group">
-                <label for="keywords">
-                    <span class="form-label-bold">Try a new search</span>
-                    <span class="form-hint">Can include job title or apprenticeship</span>
-                </label>
-                <span class="error-message"></span>
-                <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
+            @if (Model.TotalResults == 0)
+            {
+                using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
+                {
+                    <div class="form-group">
+                        <label for="keywords">
+                            <span class="form-label-bold">Try a new search</span>
+                            <span class="form-hint">Can include job title or apprenticeship</span>
+                        </label>
+                        <span class="error-message"></span>
+                        <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
+                    </div>
+                    <input class="button" id="submit-keywords" type="submit" value="Search" />
+                }
+            }
             </div>
-            <input class="button" id="submit-keywords" type="submit" value="Search" />
-        }
-    }
-
+        </div>
     
     <div class="grid-row">
         @if (Model.TotalResults > 0)
