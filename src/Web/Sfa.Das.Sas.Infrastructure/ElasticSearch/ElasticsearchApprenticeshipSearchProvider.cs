@@ -124,6 +124,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 .Index(_applicationSettings.ApprenticeshipIndexAlias)
                 .AllTypes()
                 .Skip(skip)
+                .Take(take)
                 .Query(q => q
                     .QueryString(qs => qs
                         .Fields(fs => fs
