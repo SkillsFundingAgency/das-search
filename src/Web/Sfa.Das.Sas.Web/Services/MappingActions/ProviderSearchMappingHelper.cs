@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
                                    });
             }
 
-            var orderList = new List<string> { "DayRelease", "BlockRelease", "100PercentEmployer" };
+            var orderList = new List<string> { "dayrelease", "blockrelease", "100percentemployer" };
             var response = orderList.Select(i => viewModels.SingleOrDefault(m => m.Value == i)).WhereNotNull();
             return response;
         }
