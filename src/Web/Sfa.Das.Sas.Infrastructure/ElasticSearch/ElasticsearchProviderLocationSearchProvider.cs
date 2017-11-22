@@ -150,7 +150,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 .Ascending());
         }
 
-        private static Dictionary<string, long?> RetrieveAggregationElements(TermsAggregate termsAggregate)
+        private static Dictionary<string, long?> RetrieveAggregationElements(TermsAggregate<string> termsAggregate)
         {
             var aggregationResult = new Dictionary<string, long?>();
 

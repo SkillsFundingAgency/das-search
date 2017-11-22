@@ -61,7 +61,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     Identifier = identifier,
                     ReturnCode = result.ApiCall?.HttpStatusCode,
                     Successful = result.ApiCall?.Success,
-                    SearchTime = result.Took,
+                    SearchTime = (int)result.Took,
                     RequestTime = Math.Round(clientRequestTime.TotalMilliseconds, 2),
                     MaxScore = result.MaxScore,
                     HitCount = result.Hits?.Count(),
