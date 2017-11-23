@@ -8,7 +8,7 @@
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 
-<main id="content">
+<main id="content" class="framework-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge">
@@ -30,19 +30,14 @@
                 </div>
 
             }
-        </div>
-
-        <div class="column-third">
-            <div class="related-container">
-                <aside class="hidden-for-mobile-tablet">
-
-                    <a class="button ui-find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                        Find training providers
-                    </a>
-                </aside>
+            <div class="hidden-for-mobile-tablet">
+                <a class="button btn-find-trng-prov" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
+                    Find training providers
+                </a>
             </div>
 
         </div>
+
     </div>
 
     <section>
@@ -176,7 +171,7 @@
         </dl>
 
         <div id="bottom-actions">
-            <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+            <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
                 Find training providers
             </a>
         </div>
