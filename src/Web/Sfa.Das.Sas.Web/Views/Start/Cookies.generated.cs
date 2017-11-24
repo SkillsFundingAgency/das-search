@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
             
             #line 4 "..\..\Views\Start\Cookies.cshtml"
   
-    ViewBag.Title = "Skills Funding Agency (SFA) - Cookies";
+    ViewBag.Title = "Education and Skills Funding Agency (ESFA) - Cookies";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
@@ -82,7 +82,7 @@ WriteLiteral(">\r\n                        Cookies\r\n                    </h1>\
 
 WriteLiteral(" class=\"summary\"");
 
-WriteLiteral(">\r\n                <p>The Skills Funding Agency (SFA) puts small files (known as " +
+WriteLiteral(">\r\n                <p>The Education and Skills Funding Agency (ESFA) puts small files (known as " +
 "‘cookies’) onto your computer to collect information about how you browse our si" +
 "tes.</p>\r\n            </div>\r\n\r\n            <p>Cookies are used to: </p>\r\n\r\n    " +
 "        <ul");

@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.Views.Start
             
             #line 1 "..\..\Views\Start\Start.cshtml"
   
-    ViewBag.Title = "Find Apprenticeship Training | Skills Funding Agency";
+    ViewBag.Title = "Find Apprenticeship Training | Education and Skills Funding Agency";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 
             
