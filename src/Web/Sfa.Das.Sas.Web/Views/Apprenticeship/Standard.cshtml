@@ -15,16 +15,17 @@
                 <h1 class="heading-xlarge">
                     @Model.Title
                 </h1>
-                <p class="lede">@Model.OverviewOfRole</p>
+                <p>@Model.OverviewOfRole</p>
+            </div>
+            <div class="hidden-for-mobile-tablet">
+                <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                    Find training providers
+                </a>
             </div>
         </div>
         <div class="column-third">
             <div class="related-container">
-                <aside class="hidden-for-mobile-tablet">
-                    <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                        Find training providers
-                    </a>
-                </aside>
+                
             </div>
         </div>
     </div>
