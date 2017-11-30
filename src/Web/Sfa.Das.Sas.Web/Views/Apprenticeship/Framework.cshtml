@@ -30,14 +30,19 @@
                 </div>
 
             }
-            <div class="hidden-for-mobile-tablet">
-                <a class="button btn-find-trng-prov" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new { frameworkId = Model.FrameworkId, keywords = Model.SearchTerm })">
-                    Find training providers
-                </a>
+        </div>
+
+        <div class="column-third">
+            <div class="related-container">
+                <aside class="hidden-for-mobile-tablet">
+
+                    <a class="button ui-find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+                        Find training providers
+                    </a>
+                </aside>
             </div>
 
         </div>
-
     </div>
 
     <section>
