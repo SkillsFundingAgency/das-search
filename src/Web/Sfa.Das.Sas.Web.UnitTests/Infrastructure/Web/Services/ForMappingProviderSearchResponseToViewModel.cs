@@ -51,7 +51,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 SearchTerms = "a b c",
                 ShowAllProviders = true,
                 TotalResultsForCountry = 1000,
-                StatusCode = StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound
+                StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound
             };
 
             var viewModel = mapper.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(source);
@@ -116,7 +116,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 SearchTerms = "a b c",
                 ShowAllProviders = true,
                 TotalResultsForCountry = 1000,
-                StatusCode = FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound
+                StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound
             };
 
             var viewModel = mapper.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(source);

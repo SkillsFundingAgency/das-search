@@ -8,7 +8,5 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
         public string StandardId { get; set; }
         public string Postcode { get; set; }
         public string Keywords { get; set; }
-        public string HasErrors { get; set; }
-        public bool? IsLevyPayingEmployer { get; set; }
     }
 }

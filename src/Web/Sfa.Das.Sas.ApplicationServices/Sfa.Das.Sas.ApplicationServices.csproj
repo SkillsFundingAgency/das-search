@@ -161,6 +161,7 @@
     <Compile Include="Responses\GetStandardResponse.cs" />
     <Compile Include="Queries\ApprenticeshipProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderSearchQuery.cs" />
+    <Compile Include="Responses\PostCodeResponseCodes.cs" />
     <Compile Include="Responses\ProviderDetailResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />

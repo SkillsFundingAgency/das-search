@@ -37,8 +37,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             {
                 FrameworkId = framework.FrameworkId,
                 Keywords = "Test keywords",
-                Postcode = "AB1 2CD",
-                HasErrors = "true"
+                Postcode = "AB1 2CD"
             };
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(framework.FrameworkId)).Returns(framework);
@@ -49,7 +48,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.Keywords.Should().Be(query.Keywords);
             response.Postcode.Should().Be(query.Postcode);
             response.Title.Should().Be(framework.Title);
-            response.HasErrors.Should().Be(true);
         }
 
         [Test]

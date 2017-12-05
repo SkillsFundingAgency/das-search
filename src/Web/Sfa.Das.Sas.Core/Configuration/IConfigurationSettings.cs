@@ -21,6 +21,8 @@ namespace Sfa.Das.Sas.Core.Configuration
 
         Uri PostcodeUrl { get; }
 
+        Uri PostcodeTerminatedUrl { get; }
+
         string EnvironmentName { get; }
 
         string ApplicationName { get; }

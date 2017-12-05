@@ -1,21 +1,23 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Core.Domain.Model;
-    using FluentAssertions;
-    using Moq;
-    using NUnit.Framework;
-    using Sas.ApplicationServices;
-    using Sas.ApplicationServices.Handlers;
-    using Sas.ApplicationServices.Models;
-    using Sas.ApplicationServices.Queries;
-    using Sas.ApplicationServices.Responses;
-    using Sas.ApplicationServices.Services;
-    using Sas.ApplicationServices.Settings;
-    using Sas.ApplicationServices.Validators;
-    using SFA.DAS.NLog.Logger;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+
+using SFA.DAS.NLog.Logger;
+using Sfa.Das.Sas.ApplicationServices;
+using Sfa.Das.Sas.ApplicationServices.Handlers;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.ApplicationServices.Settings;
+using Sfa.Das.Sas.ApplicationServices.Validators;
+using Sfa.Das.Sas.Core.Domain.Model;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+{
     [TestFixture]
     public sealed class ProviderSearchHandlerTests
     {
@@ -40,7 +42,12 @@
             };
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
 
-            _handler = new StandardProviderSearchHandler(new ProviderSearchQueryValidator(new Validation()), _mockSearchService.Object, _mockPaginationSettings.Object, _mockPostcodeIoService.Object, _mockLogger.Object);
+            _handler = new StandardProviderSearchHandler(
+                new ProviderSearchQueryValidator(new Validation()),
+                _mockSearchService.Object,
+                _mockPaginationSettings.Object,
+                _mockPostcodeIoService.Object,
+                _mockLogger.Object);
         }
 
         [Test]
@@ -57,22 +64,24 @@
         public async Task ShouldSignalFailureWhenPostCodeIsNull()
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = null };
-
+            _mockPostcodeIoService.Setup(x => x.GetPostcodeStatus(It.IsAny<string>()))
+                .ReturnsAsync("Error");
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
         [Test]
         public async Task ShouldSignalFailureWhenPostCodeIsEmpty()
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = string.Empty };
-
+            _mockPostcodeIoService.Setup(x => x.GetPostcodeStatus(It.IsAny<string>()))
+                .ReturnsAsync("Error");
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
         [Test]
@@ -83,31 +92,38 @@
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
-        [Test]
-        public async Task ShouldSignalFailureOfInvalidApprenticeshipIdAndPostcodeWhenBothInvalid()
+        [TestCase("Northern Ireland", ProviderSearchResponseCodes.NorthernIrelandPostcode)]
+        [TestCase("Scotland", ProviderSearchResponseCodes.ScotlandPostcode)]
+        [TestCase("Wales", ProviderSearchResponseCodes.WalesPostcode)]
+        [TestCase("Error", ProviderSearchResponseCodes.PostCodeInvalidFormat)]
+        [TestCase("Terminated", ProviderSearchResponseCodes.PostCodeTerminated)]
+        public async Task ShouldNotValidateThePostCode(string returnCode, ProviderSearchResponseCodes expected)
         {
-            var message = new StandardProviderSearchQuery { ApprenticeshipId = "0", PostCode = "gfsgfdgds" };
+            var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "nw67xt" };
+
+            _mockPostcodeIoService.Setup(m => m.GetPostcodeStatus(It.IsAny<string>()))
+                .ReturnsAsync(returnCode);
 
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(expected);
         }
 
         [Test]
         public async Task ShouldSignalFailureWhenApprenticeshipIsNotFound()
         {
-            var providerStandardSearchResults = new ProviderStandardSearchResults { StandardResponseCode = StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound.ToString() };
+            var providerStandardSearchResults = new ProviderStandardSearchResults { StandardResponseCode = ProviderSearchResponseCodes.ApprenticeshipNotFound.ToString() };
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.ApprenticeshipNotFound);
         }
 
         [TestCase(0)]
@@ -191,7 +207,7 @@
             var response = await _handler.Handle(message);
 
             response.CurrentPage.Should().Be(5);
-            response.StatusCode.ShouldBeEquivalentTo(StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PageNumberOutOfUpperBound);
         }
     }
 }

@@ -134,15 +134,13 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry, bool? isLevyPayingEmployer)
+        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetStandardProvidersQuery
             {
                 StandardId = standardId,
                 Postcode = postcode,
-                Keywords = keywords,
-                HasErrors = hasError,
-                IsLevyPayingEmployer = isLevyPayingEmployer ?? false
+                Keywords = keywords
             };
 
             var response = _mediator.Send(query);
@@ -155,27 +153,21 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response);
 
             viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            viewModel.HasError = statusCode.HasValue && statusCode.Value != ProviderSearchResponseCodes.Success;
+            viewModel.ErrorMessage = CreateErrorMessage(statusCode);
+            _logger.Debug($"statusCode: {statusCode}");
             viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
-
-            if (!string.IsNullOrEmpty(postcodeCountry))
-            {
-                viewModel.PostcodeCountry = postcodeCountry;
-            }
 
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(string frameworkId, string wrongPostcode, string postcode, string keywords, string hasError, string postcodeCountry, bool? isLevyPayingEmployer)
+        public ActionResult SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetFrameworkProvidersQuery
             {
                 FrameworkId = frameworkId,
                 Postcode = postcode,
-                Keywords = keywords,
-                HasErrors = hasError,
-                IsLevyPayingEmployer = isLevyPayingEmployer ?? false
+                Keywords = keywords
             };
 
             var response = _mediator.Send(query);
@@ -188,16 +180,34 @@ namespace Sfa.Das.Sas.Web.Controllers
             var viewModel = _mappingService.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response);
 
             viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
-            viewModel.HasError = !string.IsNullOrEmpty(hasError) && bool.Parse(hasError);
-            viewModel.WrongPostcode = !string.IsNullOrEmpty(wrongPostcode) && bool.Parse(wrongPostcode);
+            viewModel.HasError = statusCode.HasValue && statusCode.Value != ProviderSearchResponseCodes.Success;
+            viewModel.ErrorMessage = CreateErrorMessage(statusCode);
+            _logger.Debug($"statusCode: {statusCode}");
             viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
 
-            if (!string.IsNullOrEmpty(postcodeCountry))
+            return View("SearchForProviders", viewModel);
+        }
+
+        private string CreateErrorMessage(ProviderSearchResponseCodes? statusCode)
+        {
+            var postCodeNotInEngland = "The postcode entered is not in England. Information about apprenticeships in";
+            switch (statusCode)
             {
-                viewModel.PostcodeCountry = postcodeCountry;
+                case ProviderSearchResponseCodes.LocationServiceUnavailable:
+                    return "Sorry, postcode search not working, please try again later";
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                    return "Sorry, this postcode is no longer valid";
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return "You must enter a full and valid postcode";
+                case ProviderSearchResponseCodes.WalesPostcode:
+                    return $"{postCodeNotInEngland} <a href=\"https://businesswales.gov.wales/skillsgateway/apprenticeships\">Wales</a>";
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                    return $"{postCodeNotInEngland} <a href=\"https://www.nibusinessinfo.co.uk/content/apprenticeships-employers\">Northern Ireland</a>";
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                    return $"{postCodeNotInEngland} <a href=\"https://www.apprenticeships.scot/\">Scotland</a>";
             }
 
-            return View("SearchForProviders", viewModel);
+            return string.Empty;
         }
 
         private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResultViewModel viewModel)

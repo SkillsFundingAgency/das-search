@@ -13,7 +13,6 @@
         public string Keywords { get; set; }
         public string Postcode { get; set; }
         public string Title { get; set; }
-        public bool HasErrors { get; set; }
         public int Level { get; set; }
     }
 }

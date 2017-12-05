@@ -37,8 +37,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             {
                 StandardId = standard.StandardId,
                 Keywords = "Test keywords",
-                Postcode = "AB1 2CD",
-                HasErrors = "true"
+                Postcode = "AB1 2CD"
             };
 
             _mockGetStandards.Setup(x => x.GetStandardById(standard.StandardId)).Returns(standard);
@@ -49,7 +48,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.Keywords.Should().Be(query.Keywords);
             response.Postcode.Should().Be(query.Postcode);
             response.Title.Should().Be(standard.Title + ", level " + standard.Level);
-            response.HasErrors.Should().Be(true);
         }
 
         [Test]
