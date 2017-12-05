@@ -1,20 +1,18 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Models;
+﻿using System.Web.Mvc;
+using System.Web.Routing;
+using FluentAssertions;
+using MediatR;
+using Moq;
+using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Web.Controllers;
+using Sfa.Das.Sas.Web.Services;
+using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using ApplicationServices.Queries;
-    using ApplicationServices.Responses;
-    using FluentAssertions;
-    using MediatR;
-    using Moq;
-    using NUnit.Framework;
-    using Sas.Web.Controllers;
-    using Sas.Web.Services;
-    using SFA.DAS.NLog.Logger;
-    using ViewModels;
-
     [TestFixture]
     public sealed class ApprenticeshipControllerTests
     {

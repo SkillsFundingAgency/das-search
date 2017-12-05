@@ -52,8 +52,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 {
                     response.StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat;
                 }
-
-                _logger.Debug($"ERROR pC: {string.Join(", ", result.Errors.Select(m => m.ErrorCode))}");
                 return response;
             }
 
@@ -66,7 +64,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 case ProviderSearchResponseCodes.NorthernIrelandPostcode:
                 case ProviderSearchResponseCodes.PostCodeTerminated:
                 case ProviderSearchResponseCodes.PostCodeInvalidFormat:
-                    _logger.Debug($"postcodeStatus: {postcodeStatus}");
                     return new FrameworkProviderSearchResponse
                     {
                         Success = false,

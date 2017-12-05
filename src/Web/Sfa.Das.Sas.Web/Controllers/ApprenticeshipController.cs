@@ -1,5 +1,7 @@
 ﻿using System.Net;
 
+using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+
 namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
@@ -154,8 +156,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.PostUrl = Url?.Action("StandardResults", "Provider");
             viewModel.HasError = statusCode.HasValue && statusCode.Value != ProviderSearchResponseCodes.Success;
-            viewModel.ErrorMessage = CreateErrorMessage(statusCode);
-            _logger.Debug($"statusCode: {statusCode}");
+            viewModel.ErrorMessage = ProviderSearchMapper.CreateErrorMessage(statusCode);
             viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
 
             return View("SearchForProviders", viewModel);
@@ -181,33 +182,10 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             viewModel.PostUrl = Url?.Action("FrameworkResults", "Provider");
             viewModel.HasError = statusCode.HasValue && statusCode.Value != ProviderSearchResponseCodes.Success;
-            viewModel.ErrorMessage = CreateErrorMessage(statusCode);
-            _logger.Debug($"statusCode: {statusCode}");
+            viewModel.ErrorMessage = ProviderSearchMapper.CreateErrorMessage(statusCode);
             viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
 
             return View("SearchForProviders", viewModel);
-        }
-
-        private string CreateErrorMessage(ProviderSearchResponseCodes? statusCode)
-        {
-            var postCodeNotInEngland = "The postcode entered is not in England. Information about apprenticeships in";
-            switch (statusCode)
-            {
-                case ProviderSearchResponseCodes.LocationServiceUnavailable:
-                    return "Sorry, postcode search not working, please try again later";
-                case ProviderSearchResponseCodes.PostCodeTerminated:
-                    return "Sorry, this postcode is no longer valid";
-                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
-                    return "You must enter a full and valid postcode";
-                case ProviderSearchResponseCodes.WalesPostcode:
-                    return $"{postCodeNotInEngland} <a href=\"https://businesswales.gov.wales/skillsgateway/apprenticeships\">Wales</a>";
-                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
-                    return $"{postCodeNotInEngland} <a href=\"https://www.nibusinessinfo.co.uk/content/apprenticeships-employers\">Northern Ireland</a>";
-                case ProviderSearchResponseCodes.ScotlandPostcode:
-                    return $"{postCodeNotInEngland} <a href=\"https://www.apprenticeships.scot/\">Scotland</a>";
-            }
-
-            return string.Empty;
         }
 
         private static RouteValueDictionary CreateRouteParameters(ApprenticeshipSearchQuery query, ApprenticeshipSearchResultViewModel viewModel)
