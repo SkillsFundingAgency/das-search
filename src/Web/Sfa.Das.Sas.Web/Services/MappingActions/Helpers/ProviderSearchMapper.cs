@@ -12,7 +12,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 case ProviderSearchResponseCodes.LocationServiceUnavailable:
                     return "Sorry, postcode search not working, please try again later";
                 case ProviderSearchResponseCodes.PostCodeTerminated:
-                    return "Sorry, this postcode is no longer valid";
+                    return "This postcode is no longer valid; please search again";
                 case ProviderSearchResponseCodes.PostCodeInvalidFormat:
                     return "You must enter a full and valid postcode";
                 case ProviderSearchResponseCodes.WalesPostcode:
