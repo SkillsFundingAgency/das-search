@@ -1,5 +1,6 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Services;
 using SFA.DAS.NLog.Logger;
+using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -23,15 +24,15 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly IPostcodeIoService _postcodeIoService;
         private readonly AbstractValidator<ProviderSearchQuery> _validator;
 
-        private readonly Dictionary<string, StandardProviderSearchResponse.ResponseCodes> _searchResponseCodes =
-            new Dictionary<string, ProviderSearchResponseBase<ProviderStandardSearchResults>.ResponseCodes>
+        private readonly Dictionary<string, ProviderSearchResponseCodes> _searchResponseCodes =
+            new Dictionary<string, ProviderSearchResponseCodes>
                 {
-                  { LocationLookupResponse.WrongPostcode, StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat },
-                  { LocationLookupResponse.ServerError, StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable },
-                  { LocationLookupResponse.ApprenticeshipNotFound, StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound },
-                  { ServerLookupResponse.InternalServerError, StandardProviderSearchResponse.ResponseCodes.ServerError },
-                  { LocationLookupResponse.Ok, StandardProviderSearchResponse.ResponseCodes.Success },
-                  { string.Empty, StandardProviderSearchResponse.ResponseCodes.Success }
+                  { LocationLookupResponse.WrongPostcode, ProviderSearchResponseCodes.PostCodeInvalidFormat },
+                  { LocationLookupResponse.ServerError, ProviderSearchResponseCodes.LocationServiceUnavailable },
+                  { LocationLookupResponse.ApprenticeshipNotFound, ProviderSearchResponseCodes.ApprenticeshipNotFound },
+                  { ServerLookupResponse.InternalServerError, ProviderSearchResponseCodes.ServerError },
+                  { LocationLookupResponse.Ok, ProviderSearchResponseCodes.Success },
+                  { string.Empty, ProviderSearchResponseCodes.Success }
                 };
 
         public StandardProviderSearchHandler(
@@ -58,49 +59,31 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
                 if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
                 {
-                    response.StatusCode = StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId;
+                    response.StatusCode = ProviderSearchResponseCodes.InvalidApprenticeshipId;
                 }
 
                 if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidPostcode))
                 {
-                    response.StatusCode = StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;
+                    response.StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat;
                 }
 
                 return response;
             }
 
-            var country = await GetPostcodeCountry(message.PostCode);
+            var postcodeStatus = await GetPostcodeStatus(message.PostCode);
 
-            switch (country)
+            switch (postcodeStatus)
             {
-                case "Wales":
-                    var responseWales = new StandardProviderSearchResponse
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return new StandardProviderSearchResponse
                     {
                         Success = false,
-                        StatusCode = StandardProviderSearchResponse.ResponseCodes.WalesPostcode
+                        StatusCode = postcodeStatus
                     };
-                    return responseWales;
-                case "Scotland":
-                    var responseScotland = new StandardProviderSearchResponse
-                    {
-                        Success = false,
-                        StatusCode = StandardProviderSearchResponse.ResponseCodes.ScotlandPostcode
-                    };
-                    return responseScotland;
-                case "Northern Ireland":
-                    var responseNorthernIreland = new StandardProviderSearchResponse
-                    {
-                        Success = false,
-                        StatusCode = StandardProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode
-                    };
-                    return responseNorthernIreland;
-                case "Error":
-                    var responseError = new StandardProviderSearchResponse
-                    {
-                        Success = false,
-                        StatusCode = StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat
-                    };
-                    return responseError;
                 default:
                     message.Page = message.Page <= 0 ? 1 : message.Page;
 
@@ -108,9 +91,24 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
         }
 
-        private async Task<string> GetPostcodeCountry(string postCode)
+        private async Task<ProviderSearchResponseCodes> GetPostcodeStatus(string postcode)
         {
-            return await _postcodeIoService.GetPostcodeCountry(postCode);
+            var status = await _postcodeIoService.GetPostcodeStatus(postcode);
+            switch (status)
+            {
+                case "Wales":
+                    return ProviderSearchResponseCodes.WalesPostcode;
+                case "Scotland":
+                    return ProviderSearchResponseCodes.ScotlandPostcode;
+                case "Northern Ireland":
+                    return ProviderSearchResponseCodes.NorthernIrelandPostcode;
+                case "Terminated":
+                    return ProviderSearchResponseCodes.PostCodeTerminated;
+                case "Error":
+                    return ProviderSearchResponseCodes.PostCodeInvalidFormat;
+            }
+
+            return ProviderSearchResponseCodes.Success;
         }
 
         private async Task<StandardProviderSearchResponse> PerformSearch(ProviderSearchQuery message)
@@ -132,7 +130,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             {
                 var take = _paginationSettings.DefaultResultsAmount;
                 var lastPage = take > 0 ? (int)System.Math.Ceiling((double)searchResults.TotalResults / take) : 1;
-                return new StandardProviderSearchResponse { StatusCode = StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
+                return new StandardProviderSearchResponse { StatusCode = ProviderSearchResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
             }
 
             var standardProviderSearchResponse = new StandardProviderSearchResponse
@@ -150,7 +148,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return standardProviderSearchResponse;
         }
 
-        private ProviderSearchResponseBase<ProviderStandardSearchResults>.ResponseCodes GetResponseCode(string standardResponseCode)
+        private ProviderSearchResponseCodes GetResponseCode(string standardResponseCode)
         {
             return _searchResponseCodes[standardResponseCode ?? string.Empty];
         }

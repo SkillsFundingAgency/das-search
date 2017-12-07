@@ -13,7 +13,6 @@
         public string Title { get; set; }
         public string Postcode { get; set; }
         public string Keywords { get; set; }
-        public bool HasErrors { get; set; }
         public ResponseCodes StatusCode { get; set; }
     }
 }

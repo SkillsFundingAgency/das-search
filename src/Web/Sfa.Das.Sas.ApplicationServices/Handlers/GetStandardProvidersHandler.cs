@@ -32,8 +32,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 Title = standard.Title + ", level " + standard.Level,
                 Keywords = message.Keywords,
                 Postcode = message.Postcode,
-                Level = standard.Level,
-                HasErrors = !string.IsNullOrEmpty(message.HasErrors) && bool.Parse(message.HasErrors)
+                Level = standard.Level
             };
         }
     }

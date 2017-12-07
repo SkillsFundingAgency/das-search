@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
+using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
@@ -9,8 +10,6 @@ using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
 using Sfa.Das.Sas.Core.Domain.Model;
-
-using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -46,49 +45,30 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
                 if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidId))
                 {
-                    response.StatusCode = FrameworkProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId;
+                    response.StatusCode = ProviderSearchResponseCodes.InvalidApprenticeshipId;
                 }
 
                 if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidPostcode))
                 {
-                    response.StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;
+                    response.StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat;
                 }
-
                 return response;
             }
 
-            var country = await GetPostcodeCountry(message.PostCode);
+            var postcodeStatus = await GetPostcodeStatus(message.PostCode);
 
-            switch (country)
+            switch (postcodeStatus)
             {
-                case "Wales":
-                    var responseWales = new FrameworkProviderSearchResponse
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return new FrameworkProviderSearchResponse
                     {
                         Success = false,
-                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.WalesPostcode
+                        StatusCode = postcodeStatus
                     };
-                    return responseWales;
-                case "Scotland":
-                    var responseScotland = new FrameworkProviderSearchResponse
-                    {
-                        Success = false,
-                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.ScotlandPostcode
-                    };
-                    return responseScotland;
-                case "Northern Ireland":
-                    var responseNorthernIreland = new FrameworkProviderSearchResponse
-                    {
-                        Success = false,
-                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode
-                    };
-                    return responseNorthernIreland;
-                case "Error":
-                    var responseError = new FrameworkProviderSearchResponse
-                    {
-                        Success = false,
-                        StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat
-                    };
-                    return responseError;
                 default:
                     message.Page = message.Page <= 0 ? 1 : message.Page;
 
@@ -96,9 +76,24 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
         }
 
-        private async Task<string> GetPostcodeCountry(string postCode)
+        private async Task<ProviderSearchResponseCodes> GetPostcodeStatus(string postcode)
         {
-            return await _postcodeIoService.GetPostcodeCountry(postCode);
+            var status = await _postcodeIoService.GetPostcodeStatus(postcode);
+            switch (status)
+            {
+                case "Wales":
+                    return ProviderSearchResponseCodes.WalesPostcode;
+                case "Scotland":
+                    return ProviderSearchResponseCodes.ScotlandPostcode;
+                case "Northern Ireland":
+                    return ProviderSearchResponseCodes.NorthernIrelandPostcode;
+                case "Terminated":
+                    return ProviderSearchResponseCodes.PostCodeTerminated;
+                case "Error":
+                    return ProviderSearchResponseCodes.PostCodeInvalidFormat;
+            }
+
+            return ProviderSearchResponseCodes.Success;
         }
 
         private async Task<FrameworkProviderSearchResponse> PerformSearch(FrameworkProviderSearchQuery message)
@@ -120,7 +115,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             {
                 var take = _paginationSettings.DefaultResultsAmount;
                 var lastPage = take > 0 ? (int)System.Math.Ceiling((double)searchResults.TotalResults / take) : 1;
-                return new FrameworkProviderSearchResponse { StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
+                return new FrameworkProviderSearchResponse { StatusCode = ProviderSearchResponseCodes.PageNumberOutOfUpperBound, CurrentPage = lastPage };
             }
 
             return new FrameworkProviderSearchResponse
@@ -136,20 +131,20 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             };
         }
 
-        private ProviderSearchResponseBase<ProviderFrameworkSearchResults>.ResponseCodes GetResponseCode(string frameworkResponseCode)
+        private ProviderSearchResponseCodes GetResponseCode(string frameworkResponseCode)
         {
             switch (frameworkResponseCode)
             {
                 case LocationLookupResponse.WrongPostcode:
-                    return FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat;
+                    return ProviderSearchResponseCodes.PostCodeInvalidFormat;
                 case LocationLookupResponse.ServerError:
-                    return FrameworkProviderSearchResponse.ResponseCodes.LocationServiceUnavailable;
+                    return ProviderSearchResponseCodes.LocationServiceUnavailable;
                 case LocationLookupResponse.ApprenticeshipNotFound:
-                    return FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound;
+                    return ProviderSearchResponseCodes.ApprenticeshipNotFound;
                 case ServerLookupResponse.InternalServerError:
-                    return FrameworkProviderSearchResponse.ResponseCodes.ServerError;
+                    return ProviderSearchResponseCodes.ServerError;
                 default:
-                    return default(FrameworkProviderSearchResponse.ResponseCodes);
+                    return default(ProviderSearchResponseCodes);
             }
         }
 
