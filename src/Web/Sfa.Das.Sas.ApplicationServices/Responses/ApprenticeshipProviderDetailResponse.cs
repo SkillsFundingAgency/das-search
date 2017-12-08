@@ -1,8 +1,8 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Domain.Model;
-
-namespace Sfa.Das.Sas.ApplicationServices.Responses
+﻿namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
+    using SFA.DAS.Apprenticeships.Api.Types;
+    using Sfa.Das.Sas.Core.Domain.Model;
+
     public class ApprenticeshipProviderDetailResponse
     {
         public enum ResponseCodes

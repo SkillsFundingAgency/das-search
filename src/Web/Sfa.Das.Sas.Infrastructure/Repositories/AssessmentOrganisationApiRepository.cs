@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.AssessmentOrgs.Api.Client;
@@ -67,6 +68,16 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         public async Task<bool> ExistsAsync(string organisationId)
         {
             return await _apiClient.ExistsAsync(organisationId);
+        }
+
+        public IEnumerable<StandardOrganisationSummary> FindAllStandardsByOrganisationId(string organisationId)
+        {
+            return _apiClient.FindAllStandardsByOrganisationId(organisationId);
+        }
+
+        public async Task<IEnumerable<StandardOrganisationSummary>> FindAllStandardsByOrganisationIdAsync(string organisationId)
+        {
+            return await _apiClient.FindAllStandardsByOrganisationIdAsync(organisationId);
         }
     }
 }

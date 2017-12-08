@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application
 {
     using Core.Domain.Model;
     using Core.Domain.Repositories;

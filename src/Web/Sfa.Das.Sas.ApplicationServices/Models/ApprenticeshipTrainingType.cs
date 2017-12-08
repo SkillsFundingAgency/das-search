@@ -1,8 +1,9 @@
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public enum ApprenticeshipTrainingType
-    {
-        Framework,
-        Standard
-    }
+    //MFCMFC
+    //public enum ApprenticeshipTrainingType
+    //{
+    //    Framework,
+    //    Standard
+    //}
 }

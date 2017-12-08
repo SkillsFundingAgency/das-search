@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sfa.Das.Sas.Core.Domain.Model;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {

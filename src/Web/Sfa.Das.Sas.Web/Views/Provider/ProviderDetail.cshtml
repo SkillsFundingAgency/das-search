@@ -28,7 +28,42 @@
                 }
                 <dt>UKPRN:</dt>
                 <dd>@Model.UkPrn</dd>
+                <dt>About this Provider</dt>
+                
+                    
             </dl>
+            @if (string.IsNullOrEmpty(Model.MarketingInfo))
+            {
+                <span>There is no marketing information available about this provider.</span>
+            }
+            else
+            {
+                @Html.MarkdownToHtml(Model.MarketingInfo)
+            }
+            
+            <br/>
+            <br/>
+            @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
+            {
+                <div>
+                    @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
+                </div>
+                <table>
+                    
+                    <thead><th>Apprenticeship</th><th>Type</th><th>Level</th></thead>
+                    <tbody>
+                @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Type</td>
+                        <td>@item.Level</td>
+                        <td><a href="">Details</a></td>
+                    </tr>
+                }
+                    </tbody>
+                </table>
+            }
         </div>
         <div class="column-one-third">
             <div class="panel--contact">
@@ -95,6 +130,23 @@
                     is not liable for any losses suffered as a result of any party relying on the course information 
                     provided.
                 </p>
+            </div>
+            <div >
+                <details>
+                    <summary>Explain Type</summary>
+                    <div class="panel panel-border-narrow">
+                        Type explanation goes here
+                    </div>
+                </details>
+            </div>
+            <div>   
+                <details>
+                    <summary>Explain levels</summary>
+                    <div class="panel panel-border-narrow">
+                        <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
+                        <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
+                    </div>
+                </details>
             </div>
         </div>       
     </div>
