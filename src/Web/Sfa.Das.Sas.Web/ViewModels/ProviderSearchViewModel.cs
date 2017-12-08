@@ -6,10 +6,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public bool HasError { get; set; }
 
-        public bool WrongPostcode { get; set; }
-
-        public string PostcodeCountry { get; set; }
-
         public string PostUrl { get; set; }
 
         public string ApprenticeshipId { get; set; }
@@ -19,5 +15,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string SearchTerms { get; set; }
 
         public bool? IsLevyPayingEmployer { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

@@ -46,7 +46,7 @@
 
             var response = await _handler.Handle(message);
 
-            response.StatusCode.Should().Be(FrameworkProviderSearchResponse.ResponseCodes.Success);
+            response.StatusCode.Should().Be(ProviderSearchResponseCodes.Success);
         }
 
         [Test]
@@ -57,7 +57,7 @@
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
         [Test]
@@ -68,7 +68,7 @@
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
         [Test]
@@ -79,7 +79,7 @@
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
         [Test]
@@ -90,7 +90,7 @@
             var response = await _handler.Handle(message);
 
             response.Success.Should().BeFalse();
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
         }
 
         [Test]
@@ -152,7 +152,7 @@
             var response = await _handler.Handle(message);
 
             response.CurrentPage.Should().Be(5);
-            response.StatusCode.ShouldBeEquivalentTo(FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound);
+            response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PageNumberOutOfUpperBound);
         }
     }
 }

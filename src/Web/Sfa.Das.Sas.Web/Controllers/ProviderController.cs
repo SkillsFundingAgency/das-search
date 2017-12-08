@@ -1,20 +1,19 @@
-﻿using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+﻿using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Routing;
+using MediatR;
+using SFA.DAS.NLog.Logger;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Web.Extensions;
+using Sfa.Das.Sas.Web.Services;
+using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
+using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using ApplicationServices.Queries;
-    using ApplicationServices.Responses;
-    using Core.Configuration;
-    using Extensions;
-    using MediatR;
-    using Services;
-    using SFA.DAS.NLog.Logger;
-    using ViewModels;
-
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
@@ -38,56 +37,31 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
         {
-            string postCodeUrl;
             var response = await _mediator.SendAsync(criteria);
 
             switch (response.StatusCode)
             {
-                case StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
+                case ProviderSearchResponseCodes.InvalidApprenticeshipId:
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-                case StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound:
+                case ProviderSearchResponseCodes.ApprenticeshipNotFound:
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                case StandardProviderSearchResponse.ResponseCodes.ServerError:
+                case ProviderSearchResponseCodes.ServerError:
                     return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
 
-                case StandardProviderSearchResponse.ResponseCodes.LocationServiceUnavailable:
-                    postCodeUrl = Url.Action(
+                case ProviderSearchResponseCodes.LocationServiceUnavailable:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                    var postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { HasError = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
-
-                case StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
-                    postCodeUrl = Url.Action(
-                        "SearchForStandardProviders",
-                        "Apprenticeship",
-                        new { WrongPostcode = true, standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(postCodeUrl);
-
-                case StandardProviderSearchResponse.ResponseCodes.WalesPostcode:
-                    postCodeUrl = Url.Action(
-                        "SearchForStandardProviders",
-                        "Apprenticeship",
-                        new { PostcodeCountry = "Wales", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(postCodeUrl);
-
-                case StandardProviderSearchResponse.ResponseCodes.ScotlandPostcode:
-                    postCodeUrl = Url.Action(
-                        "SearchForStandardProviders",
-                        "Apprenticeship",
-                        new { PostcodeCountry = "Scotland", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(postCodeUrl);
-
-                case StandardProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode:
-                    postCodeUrl = Url.Action(
-                        "SearchForStandardProviders",
-                        "Apprenticeship",
-                        new { PostcodeCountry = "NorthernIreland", standardId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(postCodeUrl);
-
-                case StandardProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
+                case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
                         "StandardResults",
                         "Provider",
@@ -109,62 +83,35 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> FrameworkResults(FrameworkProviderSearchQuery criteria)
         {
-            string url;
-
             var response = await _mediator.SendAsync(criteria);
 
             switch (response.StatusCode)
             {
-                case FrameworkProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId:
+                case ProviderSearchResponseCodes.InvalidApprenticeshipId:
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-                case FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound:
+                case ProviderSearchResponseCodes.ApprenticeshipNotFound:
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                case FrameworkProviderSearchResponse.ResponseCodes.ServerError:
+                case ProviderSearchResponseCodes.ServerError:
                     return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
 
-                case FrameworkProviderSearchResponse.ResponseCodes.LocationServiceUnavailable:
-                    url = Url.Action(
+                case ProviderSearchResponseCodes.LocationServiceUnavailable:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                    var postCodeUrl = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { HasError = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(url);
-
-                case FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat:
-                    url = Url.Action(
-                        "SearchForFrameworkProviders",
-                        "Apprenticeship",
-                        new { WrongPostcode = true, frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(url);
-
-                case FrameworkProviderSearchResponse.ResponseCodes.WalesPostcode:
-                    url = Url.Action(
-                        "SearchForFrameworkProviders",
-                        "Apprenticeship",
-                        new { PostcodeCountry = "Wales", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(url);
-
-                case FrameworkProviderSearchResponse.ResponseCodes.ScotlandPostcode:
-                    url = Url.Action(
-                        "SearchForFrameworkProviders",
-                        "Apprenticeship",
-                        new { PostcodeCountry = "Scotland", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(url);
-
-                case FrameworkProviderSearchResponse.ResponseCodes.NorthernIrelandPostcode:
-                    url = Url.Action(
-                        "SearchForFrameworkProviders",
-                        "Apprenticeship",
-                        new { PostcodeCountry = "NorthernIreland", frameworkId = criteria?.ApprenticeshipId, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
-                    return new RedirectResult(url);
-
-                case FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound:
-                    url = Url.Action(
+                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                    return new RedirectResult(postCodeUrl);
+                case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
+                    var url = Url.Action(
                         "FrameworkResults",
                         "Provider",
                         GenerateProviderResultsRouteValues(criteria, response.CurrentPage));
-
                     return new RedirectResult(url);
             }
 
@@ -200,7 +147,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
-            
+
             return View(viewModel);
         }
 

@@ -74,8 +74,7 @@
                 Title = "test title",
                 Level = 3,
                 Keywords = "test words",
-                Postcode = "AS1 2DF",
-                HasErrors = true
+                Postcode = "AS1 2DF"
             };
 
             var viewModel = service.Map<GetFrameworkProvidersResponse, ProviderSearchViewModel>(response);
@@ -85,7 +84,6 @@
             viewModel.Title.Should().Be($"{response.Title}, level {response.Level}");
             viewModel.PostCode.Should().Be(response.Postcode);
             viewModel.SearchTerms.Should().Be(response.Keywords);
-            viewModel.HasError.Should().Be(response.HasErrors);
         }
 
         [Test]
@@ -99,8 +97,7 @@
                 Title = "test title",
                 Level = 3,
                 Keywords = "test words",
-                Postcode = "AS1 2DF",
-                HasErrors = true
+                Postcode = "AS1 2DF"
             };
 
             var viewModel = service.Map<GetStandardProvidersResponse, ProviderSearchViewModel>(response);
@@ -110,7 +107,6 @@
             viewModel.Title.Should().Be(response.Title);
             viewModel.PostCode.Should().Be(response.Postcode);
             viewModel.SearchTerms.Should().Be(response.Keywords);
-            viewModel.HasError.Should().Be(response.HasErrors);
         }
 
         [Test]

@@ -26,7 +26,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task FrameworkSearchResultsShouldReturnBadRequestStatusCodeIfApprenticeshipIdIsInvalid()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = FrameworkProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId };
+            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.InvalidApprenticeshipId };
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task FrameworkSearchResultsShouldReturnNotFoundStatusCodeIfTheFrameworkIsNotFound()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = FrameworkProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound };
+            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound };
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
@@ -66,7 +66,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task SearchResultsShouldRedirectToSearchEntryPageIfPostCodeIsNotSet()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat };
+            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat };
             var mockUrlHelper = new Mock<UrlHelper>();
             mockUrlHelper.Setup(x => x.Action("SearchForFrameworkProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
 
@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task SearchResultsShouldRedirectToLatPageIfParameterExtendsUpperBound()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = FrameworkProviderSearchResponse.ResponseCodes.PageNumberOutOfUpperBound };
+            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PageNumberOutOfUpperBound };
             var mockUrlHelper = new Mock<UrlHelper>();
             mockUrlHelper.Setup(x => x.Action("FrameworkResults", "Provider", It.IsAny<RouteValueDictionary>())).Returns("someurl");
 
@@ -112,7 +112,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task SearchResultsShouldReturnViewResultWhenFrameworkSearchIsSuccessful()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = FrameworkProviderSearchResponse.ResponseCodes.Success };
+            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.Success };
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel { Title = "title1" };
 

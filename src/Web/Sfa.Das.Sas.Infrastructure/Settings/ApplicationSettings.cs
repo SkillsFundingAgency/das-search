@@ -27,6 +27,8 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri PostcodeUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeUrl"));
 
+        public Uri PostcodeTerminatedUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeTerminatedUrl"));
+
         public string EnvironmentName => ConfigurationManager.AppSettings["EnvironmentName"];
 
         public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];

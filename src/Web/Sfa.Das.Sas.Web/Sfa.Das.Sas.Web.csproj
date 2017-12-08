@@ -292,6 +292,7 @@
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Logging\RequestContext.cs" />
     <Compile Include="Services\IValidation.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderSearchMapper.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\AggregationLevelValueResolver.cs" />
     <Compile Include="Services\MappingActions\ValueResolvers\FrameworkTitleWithLevelResolver.cs" />

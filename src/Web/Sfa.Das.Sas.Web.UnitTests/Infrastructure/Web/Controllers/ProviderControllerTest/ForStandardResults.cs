@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
+﻿using System.Web.Routing;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
     using System;
     using System.Net;
@@ -39,7 +41,7 @@
         [Test]
         public async Task SearchResultsShouldReturnBadRequestStatusCodeIfApprenticeshipIdIsInvalid()
         {
-            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = StandardProviderSearchResponse.ResponseCodes.InvalidApprenticeshipId };
+            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.InvalidApprenticeshipId };
 
             var stubViewModel = new ProviderStandardSearchResultViewModel();
 
@@ -59,7 +61,7 @@
         [Test]
         public async Task SearchResultsShouldReturnNotFoundStatusCodeIfTheStandardIsNotFound()
         {
-            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = StandardProviderSearchResponse.ResponseCodes.ApprenticeshipNotFound };
+            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound };
 
             var stubViewModel = new ProviderStandardSearchResultViewModel();
 
@@ -79,9 +81,32 @@
         [Test]
         public async Task SearchResultsShouldRedirectToSearchEntryPageIfPostCodeIsNotSet()
         {
-            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = StandardProviderSearchResponse.ResponseCodes.PostCodeInvalidFormat };
+            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat };
             var mockUrlHelper = new Mock<UrlHelper>();
             mockUrlHelper.Setup(x => x.Action("SearchForStandardProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
+
+            var stubViewModel = new ProviderStandardSearchResultViewModel();
+
+            ProviderController controller = new ProviderControllerBuilder()
+                                .SetupMappingService(x => x.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(It.IsAny<StandardProviderSearchResponse>()), stubViewModel)
+                                .SetupMediator(x => x.SendAsync(It.IsAny<StandardProviderSearchQuery>()), Task.FromResult(stubSearchResponse))
+                                .WithUrl(mockUrlHelper.Object);
+
+            var result = await controller.StandardResults(new StandardProviderSearchQuery());
+
+            result.Should().BeOfType<RedirectResult>();
+
+            var viewResult = (RedirectResult)result;
+
+            viewResult.Url.Should().Be("someurl");
+        }
+
+        [Test]
+        public async Task SearchResultsShouldRedirectToLatPageIfParameterExtendsUpperBound()
+        {
+            var stubSearchResponse = new StandardProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PageNumberOutOfUpperBound };
+            var mockUrlHelper = new Mock<UrlHelper>();
+            mockUrlHelper.Setup(x => x.Action("StandardResults", "Provider", It.IsAny<RouteValueDictionary>())).Returns("someurl");
 
             var stubViewModel = new ProviderStandardSearchResultViewModel();
 
