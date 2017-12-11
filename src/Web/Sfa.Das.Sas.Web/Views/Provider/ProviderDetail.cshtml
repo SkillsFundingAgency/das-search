@@ -12,7 +12,6 @@
         <div class="column-two-thirds">
             <h1 class="heading-xlarge" id="provider-name">
                 @Model.ProviderName 
-                <span class="tag-national"><span class="font-adjust">National</span></span>
                 @if (@Model.NationalProvider)
                 {
                     <span class="tag-national"><span class="font-adjust">National</span></span>
@@ -28,12 +27,12 @@
                     <dt>Trading names:</dt>
                     <dd id="trading-names">@Model.TradingNames</dd>
                 }
+                <dt>Trading names:</dt>
+                <dd id="trading-names">Dutch College, Birmingham Central, United Kingdom</dd>
                 <dt>UKPRN:</dt>
-                <dd>@Model.UkPrn</dd>
-                <dt>About this Provider</dt>
-                
-                    
+                <dd>@Model.UkPrn</dd>                   
             </dl>
+            <p class="markdown-header-text">About this Provider</p>
             @if (string.IsNullOrEmpty(Model.MarketingInfo))
             {
                 <span>There is no marketing information available about this provider.</span>
@@ -47,12 +46,15 @@
             <br/>
             @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
             {
-                <div>
-                    @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
+               <div id="search-app-offered">
+                     <div class="app-offered">
+                        @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
+                    </div>
+                   @*<div class="search-box">Placeholder for search box</div>*@
                 </div>
                 <table>
                     
-                    <thead><th>Apprenticeship</th><th>Type</th><th>Level</th></thead>
+                    <thead><th>Apprenticeship</th><th>Type</th><th>Level</th><th><span class="visibility-hidden">View details</span></th></thead>
                     <tbody>
                 @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
                 {

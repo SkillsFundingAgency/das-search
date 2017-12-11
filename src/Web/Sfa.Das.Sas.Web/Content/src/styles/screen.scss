@@ -22,7 +22,11 @@ strong {
 
 main {
   min-height:450px;
+  .visibility-hidden{
+      visibility:hidden;
+  }
 }
+
 
 .js-enabled .block-label.selection-button-radio:before, 
 .form-control {
@@ -509,7 +513,7 @@ aside h2:first-child {
 .provider-detail{
    #provider-name{
        line-height:1.5em;
-       margin-bottom:1.5em;
+       margin-bottom:1.3em;
         .tag-national{
             background:$grey-2;
             padding:0px 40px 8px 40px;
@@ -522,4 +526,19 @@ aside h2:first-child {
         }
 
     }
+   .markdown-header-text{
+       font-weight:bold;
+       margin-top:20px;
+   }
+   #search-app-offered{
+       margin-bottom:60px;
+       .app-offered{
+             font-weight:bold;
+             float:left;
+             font-size:22px;
+       }
+       .search-box{
+           float:right;
+       }
+   }
 }
