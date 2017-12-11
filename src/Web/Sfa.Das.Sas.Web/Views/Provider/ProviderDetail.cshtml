@@ -5,15 +5,17 @@
 @{
     ViewBag.Title = "Provider Details";
     ViewBag.Description = "";
+    ViewBag.PageId = "provider-detail-view";
 }
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge" id="provider-name">
                 @Model.ProviderName 
+                <span class="tag-national"><span class="font-adjust">National</span></span>
                 @if (@Model.NationalProvider)
                 {
-                    <span class="tag tag-national">National</span>
+                    <span class="tag-national"><span class="font-adjust">National</span></span>
                 }
             </h1>
         </div>

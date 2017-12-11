@@ -504,3 +504,22 @@ aside h2:first-child {
             line-height:1.4em;   
     }
 }
+
+/*Provider detail table view page*/
+.provider-detail{
+   #provider-name{
+       line-height:1.5em;
+       margin-bottom:1.5em;
+        .tag-national{
+            background:$grey-2;
+            padding:0px 40px 8px 40px;
+            color:#fff;   
+            margin-left: 60px;  
+            .font-adjust{
+                 font-size:25px;
+                font-weight:normal;
+            }      
+        }
+
+    }
+}
