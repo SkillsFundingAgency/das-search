@@ -541,4 +541,23 @@ aside h2:first-child {
            float:right;
        }
    }
+   .panel--satisfaction{
+        margin-top:30px;
+   }
+   .panel-disclaimer{
+    font-size: 14px;
+    line-height: 1.429;
+    margin-top:30px;
+    h4{
+        font-size: 16px;
+        font-weight:bold;
+        line-height: 1.25;
+    }
+   }
+   #expand-collapse{
+       margin-top:30px;
+       details{
+           margin:20px 0;
+       }
+   }
 }
