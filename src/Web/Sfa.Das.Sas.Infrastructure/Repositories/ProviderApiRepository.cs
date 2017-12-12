@@ -2,6 +2,7 @@
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
@@ -26,6 +27,12 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         public IEnumerable<ProviderSummary> GetAllProviders()
         {
             var res = _providerApiClient.FindAll();
+            return res;
+        }
+
+        public async Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn)
+        {
+            var res = await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn);
             return res;
         }
     }

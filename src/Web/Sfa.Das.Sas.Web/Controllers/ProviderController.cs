@@ -146,7 +146,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpNotFoundResult(message);
             }
 
-            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider);
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider, response.ApprenticeshipTrainingSummary);
 
             return View(viewModel);
         }

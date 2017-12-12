@@ -1,17 +1,16 @@
-﻿using System;
-using System.Linq;
-using Newtonsoft.Json;
-using Sfa.Das.Sas.ApplicationServices.Http;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Core.Domain.Services;
-using Sfa.Das.Sas.Infrastructure.Elasticsearch;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Infrastructure.Repositories
+﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
+    using System;
+    using System.Linq;
+    using ApplicationServices.Http;
+    using ApplicationServices.Models;
+    using Core.Configuration;
+    using Core.Domain.Model;
+    using Core.Domain.Repositories;
+    using Elasticsearch;
+    using Newtonsoft.Json;
+    using SFA.DAS.NLog.Logger;
+
     public sealed class ApprenticeshipProviderApiRepository : IApprenticeshipProviderRepository
     {
         private readonly ILog _applicationLogger;
