@@ -120,7 +120,6 @@
     <Compile Include="Logging\HttpErrorLogEntry.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
-    <Compile Include="Models\ApprenticeshipTrainingType.cs" />
     <Compile Include="Models\BaseProviderSearchResults.cs" />
     <Compile Include="Models\CodeTypes.cs" />
     <Compile Include="Models\DeliveryMode.cs" />
