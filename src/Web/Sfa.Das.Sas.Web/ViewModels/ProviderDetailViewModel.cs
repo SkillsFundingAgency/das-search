@@ -18,7 +18,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public long UkPrn { get; set; }
         public string Website { get; set; }
         public string MarketingInfo { get; set; }
-
         public ApprenticeshipTrainingSummary ApprenticeshipTrainingSummary { get; set; }
     }
 }

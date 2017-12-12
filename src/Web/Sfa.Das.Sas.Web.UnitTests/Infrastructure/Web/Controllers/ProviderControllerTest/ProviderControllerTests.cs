@@ -7,7 +7,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
-    using ApplicationServices.Models;
     using ApplicationServices.Queries;
     using ApplicationServices.Responses;
     using AutoMapper;

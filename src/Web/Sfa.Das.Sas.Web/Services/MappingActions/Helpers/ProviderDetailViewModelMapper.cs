@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using SFA.DAS.Apprenticeships.Api.Types;
-
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
     using System.Linq;

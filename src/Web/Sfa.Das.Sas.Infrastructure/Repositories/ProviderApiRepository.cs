@@ -2,7 +2,6 @@
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;

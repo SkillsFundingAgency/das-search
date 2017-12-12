@@ -1,7 +1,7 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
+    using Core.Domain.Model;
     using SFA.DAS.Apprenticeships.Api.Types;
-    using Sfa.Das.Sas.Core.Domain.Model;
 
     public class ApprenticeshipProviderDetailResponse
     {

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Domain.Model;
-using SFA.DAS.Apprenticeships.Api.Types;
-
-namespace Sfa.Das.Sas.Web.ViewModels
+﻿namespace Sfa.Das.Sas.Web.ViewModels
 {
-    using ApplicationServices.Models;
+    using System.Collections.Generic;
+    using Core.Domain.Model;
+    using SFA.DAS.Apprenticeships.Api.Types;
 
     public class ApprenticeshipDetailsViewModel
     {
