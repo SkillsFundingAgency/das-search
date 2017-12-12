@@ -15,6 +15,7 @@
         private const long UkPrn = 2221221;
         private const string Uri = "http://test.com/1234";
         private const string Website = "http://test.com";
+        private const string MarketingInfo = "some marketing info";
         private const int NoSatisfactionScore = 0;
         private const string NoSatisfactionScoreMessage = "no data available";
 
@@ -22,7 +23,8 @@
         public void ShouldMapAllPassthroughValuesCorrectly()
         {
             var provider = GetProvider();
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var apprenticeshipTrainingSummary = GetApprenticeshipTrainingSummary();
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, apprenticeshipTrainingSummary);
             providerDetails.Email.Should().Be(Email);
             providerDetails.IsEmployerProvider.Should().BeTrue();
             providerDetails.IsHigherEducationInstitute.Should().BeTrue();
@@ -31,6 +33,8 @@
             providerDetails.UkPrn.Should().Be(UkPrn);
             providerDetails.ProviderName.Should().Be(ProviderName);
             providerDetails.Website.Should().Be(Website);
+            providerDetails.MarketingInfo.Should().Be(MarketingInfo);
+            providerDetails.ApprenticeshipTrainingSummary.Should().Be(apprenticeshipTrainingSummary);
         }
 
         [Test]
@@ -38,7 +42,7 @@
         {
             var provider = GetProvider();
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.TradingNames.Should().Be(null);
         }
 
@@ -51,7 +55,7 @@
             var provider = GetProvider();
             provider.Aliases = aliases;
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.TradingNames.Should().Be(tradingNames);
         }
 
@@ -64,7 +68,7 @@
             var provider = GetProvider();
             provider.Aliases = aliases;
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.TradingNames.Should().Be(tradingNames);
         }
 
@@ -74,7 +78,7 @@
             var provider = GetProvider();
             provider.EmployerSatisfaction = 0;
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.EmployerSatisfaction.Should().Be(NoSatisfactionScore);
             providerDetails.EmployerSatisfactionMessage.Should().Be(NoSatisfactionScoreMessage);
         }
@@ -87,7 +91,7 @@
             provider.EmployerSatisfaction = providerEmployerSatisfaction;
             const string expectedEmployerSatisfactionMessage = "1.5%";
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.EmployerSatisfaction.Should().Be(providerEmployerSatisfaction);
             providerDetails.EmployerSatisfactionMessage.Should().Be(expectedEmployerSatisfactionMessage);
         }
@@ -98,7 +102,7 @@
             var provider = GetProvider();
             provider.LearnerSatisfaction = 0;
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.LearnerSatisfaction.Should().Be(NoSatisfactionScore);
             providerDetails.LearnerSatisfactionMessage.Should().Be(NoSatisfactionScoreMessage);
         }
@@ -111,7 +115,7 @@
             provider.LearnerSatisfaction = providerLearnerSatisfaction;
             const string expectedLearnerSatisfactionMessage = "53.3%";
 
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.LearnerSatisfaction.Should().Be(providerLearnerSatisfaction);
             providerDetails.LearnerSatisfactionMessage.Should().Be(expectedLearnerSatisfactionMessage);
         }
@@ -121,7 +125,7 @@
         {
             var provider = GetProvider();
             provider.IsEmployerProvider = true;
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.IsEmployerProvider.Should().BeTrue();
          }
 
@@ -130,7 +134,7 @@
         {
             var provider = GetProvider();
             provider.IsEmployerProvider = false;
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.IsEmployerProvider.Should().BeFalse();
         }
 
@@ -139,7 +143,7 @@
         {
             var provider = GetProvider();
             provider.IsHigherEducationInstitute = true;
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.IsHigherEducationInstitute.Should().BeTrue();
         }
 
@@ -148,7 +152,7 @@
         {
             var provider = GetProvider();
             provider.IsHigherEducationInstitute = false;
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.IsHigherEducationInstitute.Should().BeFalse();
         }
 
@@ -157,7 +161,7 @@
         {
             var provider = GetProvider();
             provider.NationalProvider = true;
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.NationalProvider.Should().BeTrue();
         }
 
@@ -166,7 +170,7 @@
         {
             var provider = GetProvider();
             provider.NationalProvider = false;
-            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider);
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.NationalProvider.Should().BeFalse();
         }
 
@@ -185,8 +189,15 @@
                 Ukprn = UkPrn,
                 ProviderName = ProviderName,
                 Uri = Uri,
-                Website = Website
+                Website = Website,
+                MarketingInfo = MarketingInfo
             };
+        }
+
+    
+        private static ApprenticeshipTrainingSummary GetApprenticeshipTrainingSummary()
+        {
+            return new ApprenticeshipTrainingSummary();
         }
     }
 }

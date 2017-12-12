@@ -109,8 +109,8 @@
       <HintPath>..\packages\ReflectionMagic.2.1.0\lib\net40\ReflectionMagic.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.113.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.113\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.116\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
@@ -121,8 +121,8 @@
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.110\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.116.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.116-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -184,6 +184,7 @@
     <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
     <Compile Include="Application\Handlers\XmlDocumentSerialiserTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
+    <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
@@ -207,7 +208,6 @@
     <Compile Include="Infrastructure\Web\Services\Mapping\ForOverallCohortResolver.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForSearchMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\OverallCohortResolverTestClass.cs" />
-    <Compile Include="Infrastructure\Repositories\ProviderRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderListTests.cs" />
     <Compile Include="Infrastructure\Web\Views\FrameworkDetailPageTests.cs" />
     <Compile Include="Infrastructure\Web\Views\Provider\ProviderDetailPageTests.cs" />

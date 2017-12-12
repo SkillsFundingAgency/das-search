@@ -22,5 +22,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
             var result = await providerRepository.GetProviderDetails(It.IsAny<long>());
             result.Should().BeOfType<Provider>();
         }
+
+        [Test]
+        public async Task ShouldBeOfTypeApprenticeshipTrainingSummary()
+        {
+            var mockProviderApiClient = new Mock<IProviderApiClient>();
+
+            mockProviderApiClient.Setup(x => x.GetActiveApprenticeshipTrainingByProviderAsync(It.IsAny<long>())).Returns(Task.FromResult(new ApprenticeshipTrainingSummary()));
+            var providerRepository = new ProviderApiRepository(mockProviderApiClient.Object);
+            var result = await providerRepository.GetApprenticeshipTrainingSummary(It.IsAny<long>());
+            result.Should().BeOfType<ApprenticeshipTrainingSummary>();
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         public ResponseCodes StatusCode { get; set; }
 
         public Provider Provider { get; set; }
+
+        public ApprenticeshipTrainingSummary ApprenticeshipTrainingSummary { get; set; }
     }
 }
