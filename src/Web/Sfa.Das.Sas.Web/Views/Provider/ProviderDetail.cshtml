@@ -46,20 +46,26 @@
             @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
             {
                <div id="search-app-offered">
-                     <div class="heading-medium app-offered">
+                     <h2 class="heading-medium app-offered">
                         @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
-                    </div>
+                    </h2>
                     <!--search box-->               
                     @*<form id="search-box" method="get" action="#">
                             <fieldset class="inline">
                                 <input type="text" id="search-input" class="search-text" name="q" size="21" maxlength="120" value="Search">
                                 <input type="submit" value=" " class="submit-search">
                             </fieldset>
-                    </form>*@               
+                    </form>*@            
                 </div>
                 <table class="app-details">
-                    
-                    <thead><th>Apprenticeship</th><th>Type</th><th>Level</th><th><span class="visibility-hidden">View details</span></th></thead>
+                    <thead>
+                        <tr>
+                            <th>Apprenticeship</th>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th><span class="visibility-hidden">View details</span></th>
+                        </tr>
+                    </thead>
                     <tbody>
                 @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
                 {

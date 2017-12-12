@@ -526,14 +526,21 @@ aside h2:first-child {
         }
 
     }
-   .markdown-header-text{
-       font-weight:bold;
-       margin-top:20px;
-   }
+
+        .markdown-header-text{
+           font-weight:bold;
+           margin-top:20px;
+            }
+       .markdown{
+           margin-bottom:60px;
+       }
+
+  
    #search-app-offered{
        margin-bottom:30px;
        .app-offered{
              float:left;   
+             margin:0;
        }
        /*Search box styles*/
        #search-box{
@@ -594,6 +601,8 @@ aside h2:first-child {
        }
    }
    table.app-details{
-       margin-top:60px;
+       margin-top:20px;
+       float:left;
+       clear:both;
    }
 }
