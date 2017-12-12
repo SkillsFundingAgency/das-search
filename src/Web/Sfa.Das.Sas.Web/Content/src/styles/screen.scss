@@ -531,15 +531,48 @@ aside h2:first-child {
        margin-top:20px;
    }
    #search-app-offered{
-       margin-bottom:60px;
+       margin-bottom:30px;
        .app-offered{
-             font-weight:bold;
-             float:left;
-             font-size:22px;
+             float:left;   
        }
-       .search-box{
-           float:right;
+       /*Search box styles*/
+       #search-box{
+               @include media(tablet) {float:right; margin:0;}
+               float:left;
+               margin:20px 0;
+              
+           .search-text{
+		        margin: 0;
+		        padding: 10px;
+		        font-family: Arial, Helvetica, sans-serif;
+		        font-size:14px;
+		        color:#666;
+		        border:1px solid $border-colour; 
+		        border-right:0px;
+	        }
+	            .submit-search {
+		            margin: 0 0 0 -4px;
+		            padding: 0;
+		            width: 40px;
+                    height: 39px;
+                     @include media(tablet) {height:40px;}
+		            font-family: Arial, Helvetica, sans-serif;
+		            font-size:14px;
+		            font-weight:bold;
+		            outline: none;
+		            cursor: pointer;
+		            text-align: center;
+		            text-decoration: none;
+		            color: #ffffff;
+		            border:0; 
+		            background: $light-blue url('images/search-glass.png') no-repeat 6px 7px;
+	            }
+	            /* Fixes submit button height problem in Firefox */
+	            .submit-search::-moz-focus-inner {
+	              border: 0;
+	            }
        }
+
    }
    .panel--satisfaction{
         margin-top:30px;
@@ -559,5 +592,8 @@ aside h2:first-child {
        details{
            margin:20px 0;
        }
+   }
+   table.app-details{
+       margin-top:60px;
    }
 }

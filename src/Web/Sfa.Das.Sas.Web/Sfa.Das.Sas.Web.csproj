@@ -471,6 +471,7 @@
     <Content Include="Content\dist\css\external-links\external-link.png" />
     <Content Include="Content\dist\css\images\green-tick.png" />
     <Content Include="Content\dist\css\images\red-cross.png" />
+    <Content Include="Content\dist\css\images\search-glass.png" />
     <Content Include="Content\dist\css\screen.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -42,17 +42,22 @@
                 @Html.MarkdownToHtml(Model.MarketingInfo)
             }
             
-            <br/>
-            <br/>
+  
             @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
             {
                <div id="search-app-offered">
-                     <div class="app-offered">
+                     <div class="heading-medium app-offered">
                         @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
                     </div>
-                   @*<div class="search-box">Placeholder for search box</div>*@
+                    <!--search box-->               
+                    @*<form id="search-box" method="get" action="#">
+                            <fieldset class="inline">
+                                <input type="text" id="search-input" class="search-text" name="q" size="21" maxlength="120" value="Search">
+                                <input type="submit" value=" " class="submit-search">
+                            </fieldset>
+                    </form>*@               
                 </div>
-                <table>
+                <table class="app-details">
                     
                     <thead><th>Apprenticeship</th><th>Type</th><th>Level</th><th><span class="visibility-hidden">View details</span></th></thead>
                     <tbody>
