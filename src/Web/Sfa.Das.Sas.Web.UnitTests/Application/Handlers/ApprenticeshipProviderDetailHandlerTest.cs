@@ -1,18 +1,20 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application
-{
-    using Core.Domain.Model;
-    using Core.Domain.Repositories;
-    using Core.Domain.Services;
-    using FluentAssertions;
-    using Moq;
-    using NUnit.Framework;
-    using Sas.ApplicationServices.Handlers;
-    using Sas.ApplicationServices.Models;
-    using Sas.ApplicationServices.Queries;
-    using Sas.ApplicationServices.Responses;
-    using Sas.ApplicationServices.Validators;
-    using SFA.DAS.NLog.Logger;
+﻿using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+using Sfa.Das.Sas.ApplicationServices.Handlers;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.ApplicationServices.Validators;
+using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.Sas.Core.Domain.Repositories;
+using Sfa.Das.Sas.Core.Domain.Services;
+using SFA.DAS.Apprenticeships.Api.Types;
+using SFA.DAS.NLog.Logger;
+using Framework = Sfa.Das.Sas.Core.Domain.Model.Framework;
+using Standard = Sfa.Das.Sas.Core.Domain.Model.Standard;
 
+namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+{
     [TestFixture]
     public class ApprenticeshipProviderDetailHandlerTest
     {
@@ -160,6 +162,7 @@
                                              Location = new Location { LocationId = 55 },
                                              Provider = new Provider { UkPrn = 42 }
                                          };
+
             var stubStandardProduct = new Standard { Title = "Standard1", Level = 4,  };
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);

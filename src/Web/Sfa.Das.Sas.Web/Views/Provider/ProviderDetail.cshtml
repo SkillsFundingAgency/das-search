@@ -13,7 +13,7 @@
                 @Model.ProviderName 
                 @if (@Model.NationalProvider)
                 {
-                    <span class="tag tag-national">National</span>
+                    <span class="tag-national"><span class="font-adjust">National</span></span>
                 }
             </h1>
         </div>
@@ -27,8 +27,48 @@
                     <dd id="trading-names">@Model.TradingNames</dd>
                 }
                 <dt>UKPRN:</dt>
-                <dd>@Model.UkPrn</dd>
+                <dd>@Model.UkPrn</dd>                   
             </dl>
+            <p class="markdown-header-text">About this Provider</p>
+            @if (string.IsNullOrEmpty(Model.MarketingInfo))
+            {
+                <span>There is no marketing information available about this provider.</span>
+            }
+            else
+            {
+                @Html.MarkdownToHtml(Model.MarketingInfo)
+            }
+            
+  
+            @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
+            {
+               <div id="search-app-offered">
+                     <h2 class="heading-medium app-offered">
+                        @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
+                    </h2>        
+                </div>
+                <table class="app-details">
+                    <thead>
+                        <tr>
+                            <th>Apprenticeship</th>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th><span class="visibility-hidden">View details</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Type</td>
+                        <td>@item.Level</td>
+                        <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
+                    </tr>
+                }
+                    </tbody>
+                </table>
+            }
         </div>
         <div class="column-one-third">
             <div class="panel--contact">
@@ -87,7 +127,7 @@
                     </dd>
                 </dl>
             </div>
-            <div class="panel--disclaimer">
+            <div class="panel-disclaimer">
                 <h4>Content disclaimer</h4>
                 <p>
                     Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes 
@@ -95,6 +135,15 @@
                     is not liable for any losses suffered as a result of any party relying on the course information 
                     provided.
                 </p>
+            </div>
+            <div id="expand-collapse">
+               <details>
+                    <summary>Explain levels</summary>
+                    <div class="panel panel-border-narrow">
+                        <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
+                        <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
+                    </div>
+                </details>
             </div>
         </div>       
     </div>

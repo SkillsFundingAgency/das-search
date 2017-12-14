@@ -28,5 +28,10 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             var res = _providerApiClient.FindAll();
             return res;
         }
+
+        public async Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn)
+        {
+            return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn);
+        }
     }
 }

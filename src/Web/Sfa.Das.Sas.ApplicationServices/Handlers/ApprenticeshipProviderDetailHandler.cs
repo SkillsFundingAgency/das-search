@@ -1,19 +1,17 @@
-﻿using System;
-using System.Linq;
-using FluentValidation;
-using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.ApplicationServices.Validators;
-using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Core.Domain.Services;
-
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
+    using System.Linq;
+    using Core.Domain.Model;
+    using Core.Domain.Repositories;
+    using Core.Domain.Services;
+    using FluentValidation;
+    using MediatR;
+    using Queries;
+    using Responses;
+    using SFA.DAS.Apprenticeships.Api.Types;
+    using SFA.DAS.NLog.Logger;
+    using Validators;
+
     public sealed class ApprenticeshipProviderDetailHandler : IRequestHandler<ApprenticeshipProviderDetailQuery, ApprenticeshipProviderDetailResponse>
     {
         private readonly AbstractValidator<ApprenticeshipProviderDetailQuery> _validator;

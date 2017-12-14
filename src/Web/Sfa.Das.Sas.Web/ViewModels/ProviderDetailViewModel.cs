@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.ViewModels
+﻿using SFA.DAS.Apprenticeships.Api.Types.Providers;
+
+namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderDetailViewModel
    {
@@ -15,5 +17,7 @@
         public string ProviderName { get; set; }
         public long UkPrn { get; set; }
         public string Website { get; set; }
+        public string MarketingInfo { get; set; }
+        public ApprenticeshipTrainingSummary ApprenticeshipTrainingSummary { get; set; }
     }
 }

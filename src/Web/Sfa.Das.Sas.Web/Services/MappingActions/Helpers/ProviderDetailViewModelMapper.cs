@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
     public static class ProviderDetailViewModelMapper
     {
-        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider)
+        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary)
         {
             var viewModel = new ProviderDetailViewModel();
             if (provider.Aliases != null && provider.Aliases.Any())
@@ -36,6 +36,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             viewModel.UkPrn = provider.Ukprn;
             viewModel.ProviderName = provider.ProviderName;
             viewModel.Website = provider.Website;
+            viewModel.MarketingInfo = provider.MarketingInfo;
+            viewModel.ApprenticeshipTrainingSummary = apprenticeshipTrainingSummary;
+
             return viewModel;
         }
     }

@@ -1,11 +1,12 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
     using System;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
-    using ApplicationServices.Models;
     using ApplicationServices.Queries;
     using ApplicationServices.Responses;
     using AutoMapper;

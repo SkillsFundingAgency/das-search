@@ -68,5 +68,15 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         {
             return await _apiClient.ExistsAsync(organisationId);
         }
+
+        public IEnumerable<StandardOrganisationSummary> FindAllStandardsByOrganisationId(string organisationId)
+        {
+            return _apiClient.FindAllStandardsByOrganisationId(organisationId);
+        }
+
+        public async Task<IEnumerable<StandardOrganisationSummary>> FindAllStandardsByOrganisationIdAsync(string organisationId)
+        {
+            return await _apiClient.FindAllStandardsByOrganisationIdAsync(organisationId);
+        }
     }
 }
