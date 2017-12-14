@@ -55,15 +55,6 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             }
             catch (HttpRequestException ex)
             {
-                if (ex.Message.Contains("Status: 410"))
-                {
-                    _applicationLogger.Info($"410 trying to get standard with id {id}");
-                    return new Standard
-                    {
-                        IsActiveStandard = false
-                    };
-                }
-
                 throw new ApplicationException($"Failed to get standard with id {id}", ex);
             }
         }
