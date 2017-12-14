@@ -31,8 +31,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
 
         public async Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn)
         {
-            var res = await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn);
-            return res;
+            return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn);
         }
     }
 }
