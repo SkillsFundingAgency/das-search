@@ -82,10 +82,13 @@ WriteLiteral(">\r\n                        Cookies\r\n                    </h1>\
 
 WriteLiteral(" class=\"summary\"");
 
-WriteLiteral(">\r\n                <p>The Education and Skills Funding Agency (ESFA) puts small files (known as " +
-"‘cookies’) onto your computer to collect information about how you browse our si" +
-"tes.</p>\r\n            </div>\r\n\r\n            <p>Cookies are used to: </p>\r\n\r\n    " +
-"        <ul");
+WriteLiteral(@">
+                <p>The Education and Skills Funding Agency (ESFA) puts small files (known as ‘cookies’) onto your computer to collect information about how you browse our sites.</p>
+            </div>
+
+            <p>Cookies are used to: </p>
+
+            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
@@ -117,14 +120,14 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1624), Tuple.Create("\"", 1646)
+WriteAttribute("href", Tuple.Create(" href=\"", 1654), Tuple.Create("\"", 1676)
             
             #line 41 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 1631), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
+, Tuple.Create(Tuple.Create("", 1661), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
             
             #line default
             #line hidden
-, 1631), false)
+, 1661), false)
 );
 
 WriteLiteral(">how to manage cookies.</a>\r\n            </p>\r\n\r\n            <h2");
@@ -206,14 +209,14 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3964), Tuple.Create("\"", 3987)
+WriteAttribute("href", Tuple.Create(" href=\"", 3994), Tuple.Create("\"", 4017)
             
             #line 100 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 3971), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
+, Tuple.Create(Tuple.Create("", 4001), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
             
             #line default
             #line hidden
-, 3971), false)
+, 4001), false)
 );
 
 WriteLiteral(">opt out of Google Analytics cookies.</a>\r\n            </p>\r\n\r\n\r\n            <h3");
@@ -258,14 +261,14 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5145), Tuple.Create("\"", 5181)
+WriteAttribute("href", Tuple.Create(" href=\"", 5175), Tuple.Create("\"", 5211)
             
             #line 136 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 5152), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
+, Tuple.Create(Tuple.Create("", 5182), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
             
             #line default
             #line hidden
-, 5152), false)
+, 5182), false)
 );
 
 WriteLiteral(">Application Insights data retention</a>\r\n            </p>\r\n\r\n            <h2");
@@ -366,14 +369,14 @@ WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 10062), Tuple.Create("\"", 10093)
+WriteAttribute("href", Tuple.Create(" href=\"", 10092), Tuple.Create("\"", 10123)
             
             #line 254 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 10069), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
+, Tuple.Create(Tuple.Create("", 10099), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
             
             #line default
             #line hidden
-, 10069), false)
+, 10099), false)
 );
 
 WriteLiteral(">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMon" +
