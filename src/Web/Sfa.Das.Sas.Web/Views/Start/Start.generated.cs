@@ -47,27 +47,27 @@ namespace Sfa.Das.Sas.Web.Views.Start
             
             #line default
             #line hidden
-WriteLiteral("\n<main");
+WriteLiteral("\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
 WriteLiteral(" role=\"main\"");
 
-WriteLiteral(">\n    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
-WriteLiteral(">\n        <div");
+WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\n            <hgroup>\n                <h1");
+WriteLiteral(">\r\n            <hgroup>\r\n                <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\n                    Find apprenticeship training\n                </h1>\n        " +
-"    </hgroup>\n            <p>For employers looking to take on apprentices.</p>\n\n" +
-"            <p>Use this service to:</p>\r\n\r\n            <ul");
+WriteLiteral(">\r\n                    Find apprenticeship training\r\n                </h1>\r\n     " +
+"       </hgroup>\r\n            <p>For employers looking to take on apprentices.</" +
+"p>\r\n\r\n            <p>Use this service to:</p>\r\n\r\n            <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
@@ -99,8 +99,8 @@ WriteLiteral(">\r\n                <p>\r\n                    <strong>National A
 
 WriteLiteral(" href=\"https://www.gov.uk/call-charges\"");
 
-WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\n\n     " +
-"   </div>\n    </div>\n</main>");
+WriteLiteral(">Find out about call charges</a>\r\n                </p>\r\n            </div>\r\n\r\n   " +
+"     </div>\r\n    </div>\r\n</main>");
 
         }
     }
