@@ -110,11 +110,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#levy-payer-only").Should().Be(string.Empty);
-
             GetPartial(html, "#parent-company-guarantee").Should().Contain(ParentCompanyGuaranteeMessage);
             GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
         }
-
 
         [Test]
         public void ShouldShowIsLevyNewMessageIfSet()
@@ -127,7 +125,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#levy-payer-only").Should().Be(string.Empty);
-
             GetPartial(html, "#parent-company-guarantee").Should().Be(string.Empty);
             GetPartial(html, "#is-new-provider").Should().Contain(IsNewProviderMessage);
         }
@@ -143,7 +140,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#levy-payer-only").Should().Contain(IsLevyPayerOnlyMessage);
-
             GetPartial(html, "#parent-company-guarantee").Should().Be(string.Empty);
             GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
         }

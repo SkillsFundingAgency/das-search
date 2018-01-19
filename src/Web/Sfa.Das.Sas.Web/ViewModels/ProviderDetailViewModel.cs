@@ -19,8 +19,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string Website { get; set; }
         public string MarketingInfo { get; set; }
         public ApprenticeshipTrainingSummary ApprenticeshipTrainingSummary { get; set; }
-       public bool HasParentCompanyGuarantee { get; set; }
-       public bool IsNew { get; set; }
-       public bool IsLevyPayerOnly { get; set; }
+        public bool HasParentCompanyGuarantee { get; set; }
+        public bool IsNew { get; set; }
+        public bool IsLevyPayerOnly { get; set; }
     }
 }
