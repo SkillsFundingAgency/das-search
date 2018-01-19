@@ -38,7 +38,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             viewModel.Website = provider.Website;
             viewModel.MarketingInfo = provider.MarketingInfo;
             viewModel.ApprenticeshipTrainingSummary = apprenticeshipTrainingSummary;
-
+            viewModel.HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee;
+            viewModel.IsNew = provider.IsNew;
+            viewModel.IsLevyPayerOnly = provider.IsLevyPayerOnly;
             return viewModel;
         }
     }

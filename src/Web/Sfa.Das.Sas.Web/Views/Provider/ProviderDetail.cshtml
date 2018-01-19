@@ -29,6 +29,29 @@
                 <dt>UKPRN:</dt>
                 <dd>@Model.UkPrn</dd>                   
             </dl>
+            @{
+                if (Model.IsLevyPayerOnly)
+                {
+                    <p id="levy-payer-only" class="detail-highlight">
+                        Only levy paying employers can work with this provider
+                    </p>
+                }
+                if (Model.HasParentCompanyGuarantee)
+                {
+                    <p id="parent-company-guarantee" class="detail-highlight">
+                        Provider is supported by a parent company guarantee
+                    </p>
+                }
+
+                if (Model.IsNew)
+                {
+                    <p id="is-new-provider" class="detail-highlight">
+                        New organisation with no financial track record
+                    </p>
+                }
+            }
+
+
             <p class="markdown-header-text">About this Provider</p>
             @if (string.IsNullOrEmpty(Model.MarketingInfo))
             {
@@ -38,7 +61,6 @@
             {
                 @Html.MarkdownToHtml(Model.MarketingInfo)
             }
-            
   
             @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
             {
