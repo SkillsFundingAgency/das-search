@@ -20,6 +20,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         internal const string NoSatisfactionScoreMessage = "no data available";
         internal const double SatisfactionScore = 15.9;
         internal const string SatisfactionScoreMessage = "15.9%";
+        internal const string ParentCompanyGuaranteeMessage = "Provider is supported by a parent company guarantee";
+        internal const string IsNewProviderMessage = "New organisation with no financial track record";
+        internal const string IsLevyPayerOnlyMessage = "Only levy paying employers can work with this provider";
 
         [Test]
         public void ShouldShowFieldsAsExpected()
@@ -94,6 +97,55 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, ".satisfaction-source").Should().Be(string.Empty);
+        }
+
+        [Test]
+        public void ShouldShowParentCompanyGuaranteeMessageIfSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.HasParentCompanyGuarantee = true;
+            model.IsLevyPayerOnly = false;
+            model.IsNew = false;
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#levy-payer-only").Should().Be(string.Empty);
+
+            GetPartial(html, "#parent-company-guarantee").Should().Contain(ParentCompanyGuaranteeMessage);
+            GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
+        }
+
+
+        [Test]
+        public void ShouldShowIsLevyNewMessageIfSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.HasParentCompanyGuarantee = false;
+            model.IsLevyPayerOnly = false;
+            model.IsNew = true;
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#levy-payer-only").Should().Be(string.Empty);
+
+            GetPartial(html, "#parent-company-guarantee").Should().Be(string.Empty);
+            GetPartial(html, "#is-new-provider").Should().Contain(IsNewProviderMessage);
+        }
+
+        [Test]
+        public void ShouldShowIsLevyPayerOnlyMessageIfSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.HasParentCompanyGuarantee = false;
+            model.IsLevyPayerOnly = true;
+            model.IsNew = false;
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#levy-payer-only").Should().Contain(IsLevyPayerOnlyMessage);
+
+            GetPartial(html, "#parent-company-guarantee").Should().Be(string.Empty);
+            GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
         }
 
         private static ProviderDetailViewModel GetProvider()

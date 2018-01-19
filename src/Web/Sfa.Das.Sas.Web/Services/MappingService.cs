@@ -97,7 +97,6 @@ namespace Sfa.Das.Sas.Web.Services
                    .ForMember(x => x.ApprenticeshipName, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.ApprenticeshipName)))
                    .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z =>
                         ProviderMappingHelper.GetCommaList(z.ApprenticeshipDetails.Location.LocationName, z.ApprenticeshipDetails.Location.Address.Address1, z.ApprenticeshipDetails.Location.Address.Address2, z.ApprenticeshipDetails.Location.Address.Town, z.ApprenticeshipDetails.Location.Address.County, z.ApprenticeshipDetails.Location.Address.Postcode)))
-                    
                     .ForMember(x => x.HasParentCompanyGuarantee, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasParentCompanyGuarantee))
                     .ForMember(x => x.IsNewProvider, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.IsNew))
                     .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasNonLevyContract))
