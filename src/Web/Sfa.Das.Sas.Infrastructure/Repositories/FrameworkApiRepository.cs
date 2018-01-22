@@ -54,15 +54,6 @@
             }
             catch (HttpRequestException ex)
             {
-                if (ex.Message.Contains("Status: 410"))
-                {
-                    _applicationLogger.Info($"410 trying to get framework with id {id}");
-                    return new Framework
-                    {
-                        IsActiveFramework = false
-                    };
-                }
-
                 throw new ApplicationException($"Failed to get framework with id {id}", ex);
             }
         }

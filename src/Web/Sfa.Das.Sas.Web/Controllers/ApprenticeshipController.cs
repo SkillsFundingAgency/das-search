@@ -1,11 +1,8 @@
-﻿using System.Net;
-
-using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
     using System.Linq;
+    using System.Net;
     using System.Web.Mvc;
     using System.Web.Routing;
     using ApplicationServices.Queries;
@@ -14,6 +11,7 @@ namespace Sfa.Das.Sas.Web.Controllers
     using MediatR;
     using Services;
     using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
     using ViewModels;
 
     [NoCache]
@@ -62,6 +60,8 @@ namespace Sfa.Das.Sas.Web.Controllers
         {
             var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
 
+            string message;
+
             switch (response.StatusCode)
             {
                 case GetStandardResponse.ResponseCodes.InvalidStandardId:
@@ -72,7 +72,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 case GetStandardResponse.ResponseCodes.StandardNotFound:
                 {
-                    var message = $"Cannot find standard: {id}";
+                    message = $"Cannot find standard: {id}";
                     _logger.Warn($"404 - {message}");
 
                     return new HttpNotFoundResult(message);
@@ -80,14 +80,21 @@ namespace Sfa.Das.Sas.Web.Controllers
 
                 case GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound:
                 {
-                    var message = $"Cannot find assessment organisations for standard: {id}";
+                    message = $"Cannot find assessment organisations for standard: {id}";
                     _logger.Warn($"404 - {message}");
                     break;
                 }
 
+                case GetStandardResponse.ResponseCodes.Gone:
+                    message = $"Expired standard request: {id}";
+
+                    _logger.Warn($"410 - {message}");
+
+                    return new HttpStatusCodeResult(HttpStatusCode.Gone);
+
                 case GetStandardResponse.ResponseCodes.HttpRequestException:
                 {
-                    var message = $"Request error when requesting assessment orgs for standard: {id}";
+                    message = $"Request error when requesting assessment orgs for standard: {id}";
                     _logger.Warn($"400 - {message}");
 
                     return new HttpNotFoundResult(message);
