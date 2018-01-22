@@ -3,6 +3,7 @@ using Sfa.Das.Sas.Core.Domain.Helpers;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Repositories;
+using Sfa.Das.Sas.Infrastructure.Settings;
 using Sfa.Das.Sas.Web.Helpers;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
@@ -32,7 +33,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IUrlEncoder>().Use<UrlEncoder>();
             For<IXmlDocumentSerialiser>().Use<XmlDocumentSerialiser>();
 
-            For<IProviderApiClient>().Use(x => new ProviderApiClient(null));
+            For<IProviderApiClient>().Use(x => new ProviderApiClient(new ApplicationSettings().ApprenticeshipApiBaseUrl));
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
 
             For<IValidation>().Use<Validation>();
