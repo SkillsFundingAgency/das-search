@@ -130,6 +130,28 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         }
 
         [Test]
+        public void ShouldShowAboutThisProviderIfNoTradingNamesIsSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.TradingNames = string.Empty;
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#about-this-provider").Should().Contain("About this Provider");
+        }
+
+        [Test]
+        public void ShouldNotShowAboutThisProviderIfTradingNamesIsSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.TradingNames = "here is a trading name";
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#about-this-provider").Should().Be(string.Empty);
+        }
+
+        [Test]
         public void ShouldShowIsLevyPayerOnlyMessageIfSet()
         {
             var providerDetails = new ProviderDetail();
