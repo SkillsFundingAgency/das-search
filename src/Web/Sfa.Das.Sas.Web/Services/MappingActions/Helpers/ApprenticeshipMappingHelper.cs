@@ -12,6 +12,11 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
     {
         public static string FrameworkTitle(string currentTitle)
         {
+            if (currentTitle.IsNullOrEmpty())
+            {
+                return string.Empty;
+            }
+
             var s = currentTitle.Split(':');
             var framworkname = s.Length > 0 ? s[0] : string.Empty;
             var pathwayName = s.Length > 1 ? s[1] : string.Empty;

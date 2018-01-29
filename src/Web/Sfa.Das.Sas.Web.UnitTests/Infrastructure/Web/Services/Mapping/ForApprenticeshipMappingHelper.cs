@@ -16,6 +16,7 @@
         [TestCase("Abba:Sabba", "Abba:Sabba")]
         [TestCase("Abba: Sabba", "Abba: Sabba")]
         [TestCase("Abba: ", "Abba")]
+        [TestCase(null, "")]
         public void WhenMappingFrameworkTitle(string input, string expected)
         {
             ApprenticeshipMappingHelper.FrameworkTitle(input).Should().BeEquivalentTo(expected);
