@@ -51,7 +51,7 @@
                 }
             }
 
-            @if (string.IsNullOrEmpty(Model.TradingNames))
+            @if (!Model.HasMoreThanOneTradingName)
             {
                 <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
                 if (string.IsNullOrEmpty(Model.MarketingInfo))
