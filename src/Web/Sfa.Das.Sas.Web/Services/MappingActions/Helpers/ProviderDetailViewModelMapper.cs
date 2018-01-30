@@ -9,9 +9,15 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
         public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary)
         {
             var viewModel = new ProviderDetailViewModel();
+
+            viewModel.HasMoreThanOneTradingName = false;
             if (provider.Aliases != null && provider.Aliases.Any())
             {
-                viewModel.TradingNames = provider.Aliases.ToList().Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
+                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
+                if (provider.Aliases.Count() > 1)
+                {
+                    viewModel.HasMoreThanOneTradingName = true;
+                }
             }
 
             var employerSatisfationMessage =

@@ -51,17 +51,18 @@
                 }
             }
 
-
-            <p class="markdown-header-text">About this Provider</p>
-            @if (string.IsNullOrEmpty(Model.MarketingInfo))
+            @if (!Model.HasMoreThanOneTradingName)
             {
-                <span>There is no marketing information available about this provider.</span>
+                <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
+                if (string.IsNullOrEmpty(Model.MarketingInfo))
+                 {
+                     <span>There is no marketing information available about this provider.</span>
+                 }
+                 else
+                 {
+                     @Html.MarkdownToHtml(Model.MarketingInfo)
+                 }
             }
-            else
-            {
-                @Html.MarkdownToHtml(Model.MarketingInfo)
-            }
-  
             @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
             {
                <div id="search-app-offered">
