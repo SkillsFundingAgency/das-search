@@ -35,6 +35,8 @@
             providerDetails.Website.Should().Be(Website);
             providerDetails.MarketingInfo.Should().Be(MarketingInfo);
             providerDetails.ApprenticeshipTrainingSummary.Should().Be(apprenticeshipTrainingSummary);
+            providerDetails.HasMoreThanOneTradingName.Should().Be(false);
+
         }
 
         [Test]
@@ -49,7 +51,7 @@
         [Test]
         public void ShouldMapAllSingleAliasValuesCorrectly()
         {
-            var aliases = new List<string> { "alias 1" };
+            var aliases = new List<string> {"alias 1"};
             const string tradingNames = "alias 1";
 
             var provider = GetProvider();
@@ -57,8 +59,22 @@
 
             var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.TradingNames.Should().Be(tradingNames);
+            providerDetails.HasMoreThanOneTradingName.Should().Be(false);
         }
 
+        [Test]
+        public void ShouldMapMultipleAliasValuesCorrectly()
+        {
+            var aliases = new List<string> { "alias 1", "alias 2", "alias 3" };
+            const string tradingNames = "alias 1, alias 2, alias 3";
+
+            var provider = GetProvider();
+            provider.Aliases = aliases;
+
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
+            providerDetails.TradingNames.Should().Be(tradingNames);
+            providerDetails.HasMoreThanOneTradingName.Should().Be(true);
+        }
         [Test]
         public void ShouldMapAllSeveralAliasValuesCorrectly()
         {
