@@ -45,7 +45,7 @@
 @Scripts.Render("~/bundles/header")
 @Html.Partial("_Analytics")
     </head>
-<body>
+<body id="@ViewBag.PageID">
 <script>
     document.body.className = ((document.body.className)
         ? document.body.className + ' js-enabled'
