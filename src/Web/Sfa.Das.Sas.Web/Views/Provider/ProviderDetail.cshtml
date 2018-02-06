@@ -6,6 +6,44 @@
     ViewBag.Title = "Provider Details for " + Model.ProviderName;
     ViewBag.Description = "";
 }
+<style>
+    .page-navigation {
+    .previous, .next {
+        display: inline-block;
+        font-size: 1em;
+        margin-right: -4px;
+        overflow: hidden;
+        padding: 1.2em 0.6em;
+        text-decoration: none;
+        vertical-align: top;
+        width: 50%;
+        box-sizing: border-box;
+        color: $govuk-blue;
+    &:hover, &:focus {
+        background-color: #F8F8F8;
+        color: $link-hover-colour;
+        cursor: pointer;
+    }
+    .arrow-button {
+        float: left;
+        font-size: 3.5em;
+        margin-right: 10px;
+        margin-top: -0.2em;
+    }
+    }
+    .previous {
+        text-align: left
+    }    
+    .next {
+        text-align: right;
+    .arrow-button {
+        float: right;
+        margin-left: 10px;
+        margin-right: 0
+    }            
+    }    
+    }     
+</style>
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
@@ -92,7 +130,20 @@
                     </tbody>
                 </table>
             }
-        </div>
+            <div class="page-navigation">
+                <a class="previous" href="#">
+                    <i class="arrow-button fa fa-angle-left"></i>
+                    <span class="description">Previous <span class="hide-mob">page</span></span>
+                    <span class="counter">Page <span class="prevPage">1</span> of <span class="totalPage">10</span></span>
+                </a>
+                <a class="next" href="#">
+                    <i class="arrow-button fa fa-angle-right"></i>
+                    <span class="description">Next <span class="hide-mob">page</span></span>
+                    <span class="counter">Page <span class="nextPage">3</span> of <span class="totalPage">10</span></span>
+                </a>
+            </div>    
+        </div
+>
         <div class="column-one-third">
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
