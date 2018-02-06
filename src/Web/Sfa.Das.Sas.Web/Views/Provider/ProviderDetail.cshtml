@@ -23,90 +23,111 @@
         <div class="column-two-thirds">
             <dl class="data-list--provider data-list--compact">
                 @if (!string.IsNullOrEmpty(Model.TradingNames))
-                {
-                    <dt>Trading names:</dt>
-                    <dd id="trading-names">@Model.TradingNames</dd>
-                }
+        {
+            <dt>Trading names:</dt>
+            <dd id="trading-names">@Model.TradingNames</dd>
+}
                 <dt>UKPRN:</dt>
-                <dd>@Model.UkPrn</dd>                   
+                <dd>@Model.UkPrn</dd>
             </dl>
             @{
-                if (Model.IsLevyPayerOnly)
-                {
-                    <p id="levy-payer-only" class="detail-highlight">
-                        Only levy paying employers can work with this provider
-                    </p>
-                }
-                if (Model.HasParentCompanyGuarantee)
-                {
-                    <p id="parent-company-guarantee" class="detail-highlight">
-                        Provider is supported by a parent company guarantee
-                    </p>
-                }
+        if (Model.IsLevyPayerOnly)
+        {
+            <p id="levy-payer-only" class="detail-highlight">
+                Only levy paying employers can work with this provider
+            </p>
+}
+if (Model.HasParentCompanyGuarantee)
+{
+        <p id="parent-company-guarantee" class="detail-highlight">
+            Provider is supported by a parent company guarantee
+        </p>
+}
 
-                if (Model.IsNew)
-                {
-                    <p id="is-new-provider" class="detail-highlight">
-                        New organisation with no financial track record
-                    </p>
-                }
+if (Model.IsNew)
+{
+        <p id="is-new-provider" class="detail-highlight">
+            New organisation with no financial track record
+        </p>
+}
             }
 
             @if (!Model.HasMoreThanOneTradingName)
-            {
-                <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
-                if (string.IsNullOrEmpty(Model.MarketingInfo))
-                 {
-                     <span>There is no marketing information available about this provider.</span>
-                 }
-                 else
-                 {
-                     @Html.MarkdownToHtml(Model.MarketingInfo)
-                 }
-            }
+    {
+        <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
+if (string.IsNullOrEmpty(Model.MarketingInfo))
+{
+        <span>There is no marketing information available about this provider.</span>
+}
+else
+{
+        @Html.MarkdownToHtml(Model.MarketingInfo)
+}
+}
             @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
-            {
-               <div id="search-app-offered">
-                     <h2 class="heading-medium app-offered">
-                        @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
-                    </h2>        
-                </div>
-                <table class="app-details">
-                    <thead>
-                        <tr>
-                            <th>Apprenticeship</th>
-                            <th>Type</th>
-                            <th>Level</th>
-                            <th><span class="visibility-hidden">View details</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    {
+        <div id="search-app-offered">
+            <h2 class="heading-medium app-offered">
+                @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
+            </h2>
+        </div>
+        <table class="app-details">
+            <thead>
+                <tr>
+                    <th>Apprenticeship</th>
+                    <th>Type</th>
+                    <th>Level</th>
+                    <th><span class="visibility-hidden">View details</span></th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
-                {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Type</td>
-                        <td>@item.Level</td>
-                        <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
-                    </tr>
-                }
-                    </tbody>
-                </table>
-            }
-            <div class="page-navigation">
-                <a class="previous" href="#">
-                    <i class="arrow-button fa fa-angle-left"></i>
-                    <span class="description">Previous <span class="hide-mob">page</span></span>
-                    <span class="counter">Page <span class="prevPage">1</span> of <span class="totalPage">10</span></span>
-                </a>
-                <a class="next" href="#">
-                    <i class="arrow-button fa fa-angle-right"></i>
-                    <span class="description">Next <span class="hide-mob">page</span></span>
-                    <span class="counter">Page <span class="nextPage">3</span> of <span class="totalPage">10</span></span>
-                </a>
-            </div>    
-        </div
->
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td>@item.Level</td>
+                <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
+            </tr>
+}
+            </tbody>
+        </table>
+}
+        @*<div class="page-navigation">
+        <a class="previous" href="#">
+            <i class="arrow-button fa fa-angle-left"></i>
+            <span class="description">Previous <span class="hide-mob">page</span></span>
+            <span class="counter">Page <span class="prevPage">1</span> of <span class="totalPage">10</span></span>
+        </a>
+        <a class="next" href="#">
+            <i class="arrow-button fa fa-angle-right"></i>
+            <span class="description">Next <span class="hide-mob">page</span></span>
+            <span class="counter">Page <span class="nextPage">3</span> of <span class="totalPage">10</span></span>
+        </a>
+    </div>*@
+
+            <nav role="navigation">
+                <ul class="previous-next-navigation">
+                 
+                <li class="previous">
+                    <a href="#">
+                        Previous <span class="visuallyhidden">page</span>
+                        <span class="page-numbers">Previous page 1 of 10</span>
+                    </a>
+                </li>
+            
+                <li class="next">
+                    <a href="#">
+                        Next <span class="visuallyhidden">page</span>
+                        <span class="page-numbers">Next page 2 of 10 </span>
+                    </a>
+                </li>
+                </ul>
+            </nav>
+
+
+        </div>
+
         <div class="column-one-third">
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>

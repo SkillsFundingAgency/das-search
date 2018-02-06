@@ -29,6 +29,7 @@
     <ApplicationInsightsResourceId>/subscriptions/f0a7800e-fcec-4f5d-b2f5-9265fb7bdbd4/resourcegroups/DAS-CI/providers/microsoft.insights/components/Sfa.Eds.Das.Web</ApplicationInsightsResourceId>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -502,6 +503,7 @@
     <Content Include="Content\dist\images\icons\status\orange_16.png" />
     <Content Include="Content\dist\images\icons\status\red_16.png" />
     <Content Include="Content\dist\images\open-government-licence.png" />
+    <Content Include="Content\dist\images\pagination-arrow-sprite.png" />
     <Content Include="Content\favicons\android-chrome-144x144.png" />
     <Content Include="Content\favicons\android-chrome-192x192.png" />
     <Content Include="Content\favicons\android-chrome-36x36.png" />
