@@ -85,8 +85,8 @@
       <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Client.0.10.116-prerelease\lib\net45\SFA.DAS.Apprenticeships.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.125.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.125\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.130.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.130\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
@@ -105,8 +105,8 @@
       <HintPath>..\packages\SFA.DAS.NLog.Targets.Redis.1.0.0.26805\lib\net45\SFA.DAS.NLog.Targets.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.125.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.125-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.130.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.130-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">

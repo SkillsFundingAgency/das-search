@@ -6,6 +6,7 @@
     ViewBag.PageID = "provider-detail-view";
     ViewBag.Title = "Provider Details for " + Model.ProviderName;
     ViewBag.Description = "";
+    Model.ApprenticeshipTrainingSummary.PaginationDetails.Page = 3;
 }
 
 <main id="content" class="provider-detail">
@@ -65,11 +66,11 @@ else
         @Html.MarkdownToHtml(Model.MarketingInfo)
 }
 }
-            @if (Model.ApprenticeshipTrainingSummary != null && Model.ApprenticeshipTrainingSummary.Count > 0)
+    @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
     {
         <div id="search-app-offered">
             <h2 class="heading-medium app-offered">
-                @Model.ApprenticeshipTrainingSummary.Count Apprenticeships offered
+                @Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount Apprenticeships offered
             </h2>
         </div>
         <table class="app-details">
@@ -109,20 +110,28 @@ else
 
             <nav role="navigation">
                 <ul class="previous-next-navigation">
-                 
-                <li class="previous">
-                    <a href="#">
-                        Previous <span class="visuallyhidden">page</span>
-                        <span class="page-numbers">Previous page 1 of 10</span>
-                    </a>
-                </li>
-            
-                <li class="next">
-                    <a href="#">
-                        Next <span class="visuallyhidden">page</span>
-                        <span class="page-numbers">Next page 2 of 10 </span>
-                    </a>
-                </li>
+                 @if (Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
+                 {
+                     var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
+
+                     <li class="previous">
+                         <a href="/provider/@Model.UkPrn/page/@pageBefore">
+                             Previous <span class="visuallyhidden">page</span>
+                             <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                         </a>
+                     </li>
+                 }
+                @if (Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
+                {
+                    var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
+
+                    <li class="next">
+                        <a href="/provider/@Model.UkPrn/page/@pageAfter">
+                            Next <span class="visuallyhidden">page</span>
+                            <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                        </a>
+                    </li>
+                }
                 </ul>
             </nav>
 
