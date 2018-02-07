@@ -1,9 +1,13 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using RazorGenerator.Testing;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
 using Sfa.Das.Sas.Web.ViewModels;
 using Sfa.Das.Sas.Web.Views.Provider;
+using SFA.DAS.Apprenticeships.Api.Types;
+using SFA.DAS.Apprenticeships.Api.Types.Pagination;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 {
@@ -196,7 +200,22 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Phone = Phone,
                 UkPrn = UkPrn,
                 ProviderName = ProviderName,
-                Website = Website
+                Website = Website,
+                ApprenticeshipTrainingSummary = new ApprenticeshipTrainingSummary
+                {
+                    ApprenticeshipTrainingItems = new List<ApprenticeshipTraining> {
+                        new ApprenticeshipTraining
+                        {
+                            Identifier = "1",
+                            Name = "Aerospace",
+                            Level = 1,
+                            TrainingType = ApprenticeshipTrainingType.Framework,
+                            Type = "Framework"
+                        }
+                    },
+                    Count = 1,
+                    PaginationDetails = new PaginationDetails { LastPage = 1, NumberOfRecordsToSkip = 0, NumberPerPage = 20, TotalCount = 1 }
+                }
             };
         }
     }
