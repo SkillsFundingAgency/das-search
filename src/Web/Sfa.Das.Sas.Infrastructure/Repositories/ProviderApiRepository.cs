@@ -29,9 +29,9 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             return res;
         }
 
-        public async Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn)
+        public async Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn, int pageNumber)
         {
-            return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn);
+            return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn, pageNumber);
         }
     }
 }

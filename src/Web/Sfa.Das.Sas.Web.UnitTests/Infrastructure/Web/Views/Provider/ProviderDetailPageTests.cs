@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using RazorGenerator.Testing;
 using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
@@ -184,6 +185,76 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
         }
 
+        [Test]
+        public void ShouldNotShowAnyNavigationDetailsIfOnlyOnePage()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Be(string.Empty);
+            GetPartial(html, "#next-nav").Should().Be(string.Empty);
+        }
+
+        [Test]
+        public void ShoulShowOnlyNextNavigationDetailsIfMoreThanOnePageAndOnFirstPage()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ApprenticeshipTrainingSummary.PaginationDetails
+                = new PaginationDetails
+                {
+                        LastPage = 2,
+                        NumberOfRecordsToSkip = 0,
+                        NumberPerPage = 20,
+                        TotalCount = 1,
+                        Page = 1
+                };
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Be(string.Empty);
+            GetPartial(html, "#next-nav").Should().Contain("2 of 2");
+        }
+
+        [Test]
+        public void ShoulShowBothNavigationDetailsIfSecondPageOfFour()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ApprenticeshipTrainingSummary.PaginationDetails
+                = new PaginationDetails
+                {
+                    LastPage = 4,
+                    NumberOfRecordsToSkip = 20,
+                    NumberPerPage = 20,
+                    TotalCount = 69,
+                    Page = 2
+                };
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Contain("1 of 4");
+            GetPartial(html, "#next-nav").Should().Contain("3 of 4");
+        }
+
+        [Test]
+        public void ShoulShowOnlyPreviousNavigationDetailsIfLastPage()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ApprenticeshipTrainingSummary.PaginationDetails
+                = new PaginationDetails
+                {
+                    LastPage = 4,
+                    NumberOfRecordsToSkip = 60,
+                    NumberPerPage = 20,
+                    TotalCount = 69,
+                    Page = 4
+                };
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Contain("3 of 4");
+            GetPartial(html, "#next-nav").Should().Be(string.Empty);
+        }
+
         private static ProviderDetailViewModel GetProvider()
         {
             return new ProviderDetailViewModel
@@ -214,7 +285,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                         }
                     },
                     Count = 1,
-                    PaginationDetails = new PaginationDetails { LastPage = 1, NumberOfRecordsToSkip = 0, NumberPerPage = 20, TotalCount = 1 }
+                    PaginationDetails = new PaginationDetails { LastPage = 1, NumberOfRecordsToSkip = 0, NumberPerPage = 20, TotalCount = 1, Page = 1 }
                 }
             };
         }

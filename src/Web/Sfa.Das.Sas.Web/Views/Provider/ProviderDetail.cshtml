@@ -94,26 +94,13 @@ else
             </tbody>
         </table>
 }
-        @*<div class="page-navigation">
-        <a class="previous" href="#">
-            <i class="arrow-button fa fa-angle-left"></i>
-            <span class="description">Previous <span class="hide-mob">page</span></span>
-            <span class="counter">Page <span class="prevPage">1</span> of <span class="totalPage">10</span></span>
-        </a>
-        <a class="next" href="#">
-            <i class="arrow-button fa fa-angle-right"></i>
-            <span class="description">Next <span class="hide-mob">page</span></span>
-            <span class="counter">Page <span class="nextPage">3</span> of <span class="totalPage">10</span></span>
-        </a>
-    </div>*@
-
             <nav role="navigation">
                 <ul class="previous-next-navigation">
                  @if (Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
                  {
                      var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
 
-                     <li class="previous">
+                     <li class="previous" id="previous-nav">
                          <a href="/provider/@Model.UkPrn/page/@pageBefore">
                              Previous <span class="visuallyhidden">page</span>
                              <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
@@ -124,7 +111,7 @@ else
                 {
                     var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
 
-                    <li class="next">
+                    <li class="next" id="next-nav">
                         <a href="/provider/@Model.UkPrn/page/@pageAfter">
                             Next <span class="visuallyhidden">page</span>
                             <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
@@ -133,8 +120,6 @@ else
                 }
                 </ul>
             </nav>
-
-
         </div>
 
         <div class="column-one-third">
