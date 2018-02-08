@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
-using RazorGenerator.Testing;
-using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
-using Sfa.Das.Sas.Web.ViewModels;
-using Sfa.Das.Sas.Web.Views.Provider;
-using SFA.DAS.Apprenticeships.Api.Types;
-using SFA.DAS.Apprenticeships.Api.Types.Pagination;
-using SFA.DAS.Apprenticeships.Api.Types.Providers;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 {
+    using System.Collections.Generic;
+    using ExtensionHelpers;
+    using FluentAssertions;
+    using NUnit.Framework;
+    using RazorGenerator.Testing;
+    using Sas.Web.Views.Provider;
+    using SFA.DAS.Apprenticeships.Api.Types;
+    using SFA.DAS.Apprenticeships.Api.Types.Pagination;
+    using SFA.DAS.Apprenticeships.Api.Types.Providers;
+    using ViewModels;
+
     [TestFixture]
     public class ProviderDetailPageTests : ViewTestBase
     {
