@@ -144,6 +144,7 @@
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
+    <Compile Include="Queries\ProviderNameSearchQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />
     <Compile Include="Queries\StatsQuery.cs" />
     <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Queries\ProviderSearchQuery.cs" />
     <Compile Include="Responses\PostCodeResponseCodes.cs" />
     <Compile Include="Responses\ProviderDetailResponse.cs" />
+    <Compile Include="Responses\ProviderSearchNameResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />

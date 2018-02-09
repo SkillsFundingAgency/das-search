@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -7,6 +8,7 @@ using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
@@ -151,30 +153,31 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> ProviderSearch()
+
+        public ActionResult Search()
         {
-            //var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = ukprn });
-
-            //if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
-            //{
-            //    var message = $"Cannot find provider: {ukprn}";
-            //    _logger.Warn($"404 - {message}");
-            //    return new HttpNotFoundResult(message);
-            //}
-
-            //if (response.StatusCode == ProviderDetailResponse.ResponseCodes.HttpRequestException)
-            //{
-            //    var message = $"Provider Id wrong length: {ukprn}";
-            //    _logger.Warn($"400 - {message}");
-
-            //    return new HttpNotFoundResult(message);
-            //}
-
-            //var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider, response.ApprenticeshipTrainingSummary);
-            
-
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchResults(ProviderNameSearchQuery query)
+        {
+            //var response = _mediator.Send(query);
+
+            //var viewModel = _mappingService.Map<ProviderSearchNameResponse, ProviderNameSearchResultViewModel>(response);
+
+            var viewModel = new ProviderNameSearchResultViewModel();
+            viewModel.TotalResults = 3;
+            viewModel.HasError = false;
+            viewModel.SearchTerm = query.searchTerm;
+            viewModel.Results = new List<ProviderSearchResultSummary>
+            {
+                new ProviderSearchResultSummary {ProviderName = "ABC", UkPrn = 10000055},
+                new ProviderSearchResultSummary {ProviderName = "DEF", UkPrn = 10000056},
+                new ProviderSearchResultSummary {ProviderName = "GHI", UkPrn = 10000057},
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]

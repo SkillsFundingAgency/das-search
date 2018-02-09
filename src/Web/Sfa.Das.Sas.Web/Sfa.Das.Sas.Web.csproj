@@ -362,6 +362,7 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ManageApprenticeshipFundsViewModel.cs" />
     <Compile Include="ViewModels\ProviderDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProviderNameSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
@@ -771,7 +772,8 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ProviderDetail.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Provider\ProviderSearch.cshtml" />
+    <Content Include="Views\Provider\SearchResults.cshtml" />
+    <Content Include="Views\Provider\Search.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
