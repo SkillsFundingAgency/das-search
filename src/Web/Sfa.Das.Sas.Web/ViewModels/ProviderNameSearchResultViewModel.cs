@@ -16,5 +16,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public List<ProviderSearchResultSummary> Results { get; set; }
 
         public bool HasError { get; set; }
+
+        public bool ShortSearchTerm { get; set; }
     }
 }

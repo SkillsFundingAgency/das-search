@@ -162,19 +162,27 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ProviderNameSearchQuery query)
         {
+
+            var viewModel = new ProviderNameSearchResultViewModel {HasError = false, ShortSearchTerm = false, SearchTerm = query.searchTerm, TotalResults = 0, Results = null};
+
+            if (query.searchTerm.Length < 3)
+            {
+                viewModel.ShortSearchTerm = true;
+                return View(viewModel);
+            }
+
             //var response = _mediator.Send(query);
 
             //var viewModel = _mappingService.Map<ProviderSearchNameResponse, ProviderNameSearchResultViewModel>(response);
 
-            var viewModel = new ProviderNameSearchResultViewModel();
             viewModel.TotalResults = 3;
             viewModel.HasError = false;
             viewModel.SearchTerm = query.searchTerm;
             viewModel.Results = new List<ProviderSearchResultSummary>
             {
-                new ProviderSearchResultSummary {ProviderName = "ABC", UkPrn = 10000055},
-                new ProviderSearchResultSummary {ProviderName = "DEF", UkPrn = 10000056},
-                new ProviderSearchResultSummary {ProviderName = "GHI", UkPrn = 10000057},
+                new ProviderSearchResultSummary {ProviderName = "Abingdon and Witney College", UkPrn = 10000055 },
+                new ProviderSearchResultSummary {ProviderName = "Accrington and Rossendale College", UkPrn = 10000093 },
+                new ProviderSearchResultSummary {ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285 },
             };
 
             return View(viewModel);
