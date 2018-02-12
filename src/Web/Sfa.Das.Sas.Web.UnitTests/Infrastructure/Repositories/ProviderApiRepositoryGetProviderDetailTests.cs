@@ -28,9 +28,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
         {
             var mockProviderApiClient = new Mock<IProviderApiClient>();
 
-            mockProviderApiClient.Setup(x => x.GetActiveApprenticeshipTrainingByProviderAsync(It.IsAny<long>())).Returns(Task.FromResult(new ApprenticeshipTrainingSummary()));
+            mockProviderApiClient.Setup(x => x.GetActiveApprenticeshipTrainingByProviderAsync(It.IsAny<long>(), It.IsAny<int>())).Returns(Task.FromResult(new ApprenticeshipTrainingSummary()));
             var providerRepository = new ProviderApiRepository(mockProviderApiClient.Object);
-            var result = await providerRepository.GetApprenticeshipTrainingSummary(It.IsAny<long>());
+            var result = await providerRepository.GetApprenticeshipTrainingSummary(It.IsAny<long>(), It.IsAny<int>());
             result.Should().BeOfType<ApprenticeshipTrainingSummary>();
         }
     }

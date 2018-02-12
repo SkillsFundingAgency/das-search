@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+﻿using SFA.DAS.Apprenticeships.Api.Types.Pagination;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     using System;
     using System.Collections.Generic;
@@ -39,11 +41,19 @@
                         Level = 3,
                         Name = "Software engineer"
                     }
+                },
+                PaginationDetails = new PaginationDetails
+                {
+                    LastPage = 2,
+                    NumberOfRecordsToSkip = 0,
+                    NumberPerPage = 20,
+                    Page = 1,
+                    TotalCount = 21
                 }
             };
             _mockProviderDetailRepository = new Mock<IGetProviderDetails>();
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Returns(Task.FromResult(provider));
-            _mockProviderDetailRepository.Setup(x => x.GetApprenticeshipTrainingSummary(It.IsAny<long>())).Returns(Task.FromResult(apprenticeshipTrainingSummary));
+            _mockProviderDetailRepository.Setup(x => x.GetApprenticeshipTrainingSummary(It.IsAny<long>(), It.IsAny<int>())).Returns(Task.FromResult(apprenticeshipTrainingSummary));
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();
             var response = _handler.Handle(message).Result;

@@ -9,6 +9,6 @@ namespace Sfa.Das.Sas.Core.Domain.Services
     {
         IEnumerable<ProviderSummary> GetAllProviders();
         Task<Provider> GetProviderDetails(long ukPrn);
-        Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn);
+        Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn, int page);
     }
 }
