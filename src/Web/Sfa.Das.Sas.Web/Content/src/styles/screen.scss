@@ -629,6 +629,10 @@ aside h2:first-child {
 }
 
 #provider-detail-view {
+    .data-list--compact {
+        margin-bottom: 60px;
+    }
+
     .panel {
         background: $grey-3;
         border-color: $purple;
