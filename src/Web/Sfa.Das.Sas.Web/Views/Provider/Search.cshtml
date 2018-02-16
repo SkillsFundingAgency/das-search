@@ -11,20 +11,9 @@
             <h1 class="heading-xlarge">
                 Find a training provider by name
             </h1>
-            @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
-            {
-                <div class="form-group">
-                    <label for="searchTerm">
-                        <span class="form-hint">Enter a training provider name</span>
-                    </label>
-                    <span class="error-message"></span>
-                    <input type="search" id="searchTerm" name="SearchTerm" class="text-box form-control" maxlength="200">
-                    <input class="button" id="submit-keywords" type="submit" value="Search"/>
-                </div>
-
-                <span class="form-hint">Results will be listed below</span>
+            @{
+                Html.RenderPartial("_SearchProviderName");
             }
-
         </div>
     </div>
 </main>
