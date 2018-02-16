@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -184,15 +185,19 @@ namespace Sfa.Das.Sas.Web.Controllers
                     viewModel.Results = null;
                     break;
                 case "coll":
-                    viewModel.TotalResults = 3;
+                    viewModel.TotalResults = 4;
                     viewModel.HasError = false;
                     viewModel.Results = new List<ProviderSearchResultSummary>
                     {
-                        new ProviderSearchResultSummary {ProviderName = "Abingdon and Witney College", UkPrn = 10000055},
-                        new ProviderSearchResultSummary {ProviderName = "Accrington and Rossendale College", UkPrn = 10000093},
-                        new ProviderSearchResultSummary {ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285},
-                    };
-                    break;
+                        new ProviderSearchResultSummary { ProviderName = "Abingdon and Witney College", UkPrn = 10000055 },
+                        new ProviderSearchResultSummary { ProviderName = "Accrington and Rossendale College", UkPrn = 10000093 },
+                        new ProviderSearchResultSummary { ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285 },
+                        new ProviderSearchResultSummary
+                        {
+                            ProviderName = "NCG", UkPrn = 10004599, Aliases = new List<string> { "Newcastle College", "Kidderminster College", "Newcastle Sixth Form College", "West Lancashire College", "Carlisle College", "Lewisham Southwark College" } }
+                        };
+
+                      break;
                 case "pages":
                     viewModel.TotalResults = 21;
                     viewModel.HasError = false;
@@ -235,11 +240,16 @@ namespace Sfa.Das.Sas.Web.Controllers
                         }
 
                         break;
+                    case "zero":
+                        viewModel.TotalResults = 0;
+                        viewModel.HasError = false;
+                        viewModel.Results = null;
+                        break;
                     default:
-                            viewModel.TotalResults = 0;
-                            viewModel.HasError = false;
-                            viewModel.Results = null;
-                            break;
+                        viewModel.TotalResults = 0;
+                        viewModel.Results = null;
+                        viewModel.HasError = false;
+                        break;
                     }
 
             return View(viewModel);

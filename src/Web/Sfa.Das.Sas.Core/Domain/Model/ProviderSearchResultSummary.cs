@@ -10,5 +10,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
     {
         public long UkPrn { get; set; }
         public string ProviderName { get; set; }
+
+        public List<string> Aliases { get; set; }
     }
 }
