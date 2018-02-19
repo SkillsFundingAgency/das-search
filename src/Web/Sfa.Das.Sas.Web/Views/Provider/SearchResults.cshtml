@@ -51,82 +51,85 @@
     </div>
 
     <div class="grid-row">
-        @if (Model.TotalResults > 0)
-        {
-            Html.RenderPartial("_SearchProviderName");
-        }
+        <div class="column-two-thirds">
+            @if (Model.TotalResults > 0)
+            {
+                Html.RenderPartial("_SearchProviderName");
+            }
+        </div>
     </div>
 
 
     <div class="grid-row">
-        @if (!Model.HasError && !Model.ShortSearchTerm && Model.TotalResults > 0)
-        {
-            <div id="apprenticeship-results" class="column-two-thirds">
+        <div class="column-two-thirds">
+            @if (!Model.HasError && !Model.ShortSearchTerm && Model.TotalResults > 0)
+            {
+                <div id="provider-search-results">
 
-                <span class="form-hint"> @Model.TotalResults results found</span>
-
-                @foreach (var item in Model.Results)
-                {
-                    <article class="result">
-                        <dl class="result-data-list">
-                            @GetProviderDetailItem(item.ProviderName, item.Aliases, item.UkPrn.ToString())
-                        </dl>
-                    </article>
-                }
-
-            </div>
-        }
-        else
-        {
-            Html.RenderPartial("_SearchResultMessage");
-        }
-
+                    <p class="form-label-bold"> @Model.TotalResults results found</p>
+                    <ul>
+                        @foreach (var item in Model.Results)
+                        {
+                            <li class="results">
+                                @GetProviderDetailItem(item.ProviderName, item.Aliases, item.UkPrn.ToString())
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                Html.RenderPartial("_SearchResultMessage");
+            }
+        </div>
     </div>
- 
-        <nav role="navigation">
-            <ul class="previous-next-navigation">
-                @if (Model.ActualPage > 1)
-                {
-                    var pageBefore = Model.ActualPage - 1;
 
-                    <li class="previous" id="previous-nav">
-                        <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageBefore">
-                            Previous <span class="visuallyhidden">page</span>
-                            <span class="page-numbers">Previous page @pageBefore of @Model.LastPage</span>
-                        </a>
-                    </li>
-                }
-                @if (Model.ActualPage < Model.LastPage)
-                {
-                    var pageAfter = Model.ActualPage + 1;
+    <nav role="navigation">
+        <ul class="previous-next-navigation">
+            @if (Model.ActualPage > 1)
+            {
+                var pageBefore = Model.ActualPage - 1;
 
-                    <li class="next" id="next-nav">
-                        <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageAfter">
-                            Next <span class="visuallyhidden">page</span>
-                            <span class="page-numbers">Next page @pageAfter of @Model.LastPage</span>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </nav>
-  
+                <li class="previous" id="previous-nav">
+                    <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageBefore">
+                        Previous <span class="visuallyhidden">page</span>
+                        <span class="page-numbers">Previous page @pageBefore of @Model.LastPage</span>
+                    </a>
+                </li>
+            }
+            @if (Model.ActualPage < Model.LastPage)
+            {
+                var pageAfter = Model.ActualPage + 1;
+
+                <li class="next" id="next-nav">
+                    <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageAfter">
+                        Next <span class="visuallyhidden">page</span>
+                        <span class="page-numbers">Next page @pageAfter of @Model.LastPage</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+
 </main>
 
 
 
 
 @helper GetProviderDetailItem(string title, List<string> aliases, string ukprn)
-{
-    <dt><b><a href="../Provider/@ukprn">@title</a></b></dt>
-        if (aliases != null && aliases.Count > 0)
-        {
- 
+    {
+        <a href="../Provider/@ukprn">@title</a> 
+       
+            if (aliases != null && aliases.Count > 0)
+            {
+
             foreach (var alias in aliases)
             {
-                <dt>
-                    ...<a href="../Provider/@ukprn">@alias</a>
-                </dt>
+            <span class="sublist">
+                ...<a href="../Provider/@ukprn">@alias xxx</a>
+            </span>
             }
-        }
 
+            }
+      
 }
