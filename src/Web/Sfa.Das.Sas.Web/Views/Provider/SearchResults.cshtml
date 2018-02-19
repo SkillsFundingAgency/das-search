@@ -5,49 +5,64 @@
 
 @{
     ViewBag.Title = "Search Results";
-    ViewBag.PageId = "provider-search";
+    ViewBag.PageID = "search-provider-results";
 }
 <main id="content" role="main">
-    <input type="hidden" value="@Model.SearchTerm" id="ga-search-term"/>
+    <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
-    
-    <div class="grid-row">
-        <div class="column-full">
-            <hgroup class="hgroup">
-                @{
-                    if (Model != null && Model.ShortSearchTerm)
-                    {
-                        <div>
+
+    <div class="grid-row notification-wrapper">
+        <div class="column-two-thirds">
+            @{
+                if (Model != null && Model.ShortSearchTerm)
+                {
+                    @*<div>
                             <span>Errors to fix</span>
                             <span class="error-message">Type at least 3 characters</span>
-                        </div>
-                    }
+                        </div>*@
 
+                    <div tabindex="-1" role="group" class="error-summary">
+                        <h1 id="error-summary" class="heading-medium error-summary-heading">
+                            Errors to fix
+                        </h1>
+                        <p>Check the following details:</p>
+                        <ul class="error-summary-list">
+                            <li><a href="#searchTerm">Type at least 3 characters</a></li>
+                        </ul>
+                    </div>
                 }
-                <h1 class="heading-xlarge">
-                    Find a training provider by name
-                </h1>
-
-            </hgroup>
-
-            @if (Model.TotalResults == 0)
-            {
-                     Html.RenderPartial("_SearchProviderName");
             }
         </div>
     </div>
-    
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge">
+                Find a training provider by name
+            </h1>
+
+
+
+            @if (Model.TotalResults == 0)
+            {
+                Html.RenderPartial("_SearchProviderName");
+            }
+        </div>
+    </div>
+
     <div class="grid-row">
         @if (Model.TotalResults > 0)
         {
-                 Html.RenderPartial("_SearchProviderName");
+            Html.RenderPartial("_SearchProviderName");
         }
     </div>
+
+
     <div class="grid-row">
-        @if (!Model.HasError && !Model.ShortSearchTerm &&  Model.TotalResults > 0)
+        @if (!Model.HasError && !Model.ShortSearchTerm && Model.TotalResults > 0)
         {
             <div id="apprenticeship-results" class="column-two-thirds">
-                
+
                 <span class="form-hint"> @Model.TotalResults results found</span>
 
                 @foreach (var item in Model.Results)
@@ -58,7 +73,7 @@
                         </dl>
                     </article>
                 }
-               
+
             </div>
         }
         else
@@ -67,7 +82,7 @@
         }
 
     </div>
-    <div>
+ 
         <nav role="navigation">
             <ul class="previous-next-navigation">
                 @if (Model.ActualPage > 1)
@@ -94,7 +109,7 @@
                 }
             </ul>
         </nav>
-    </div>
+  
 </main>
 
 

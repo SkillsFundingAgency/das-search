@@ -2,15 +2,15 @@
 @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
 {
 <div class="form-group">
-    @{
+    @*@{
         if (Model != null && Model.ShortSearchTerm)
         {
             <span class="error-message">Type at least 3 characters</span>
         }
 
-    }
+    }*@
 
-    <label for="searchTerm">
+    @*<label for="searchTerm">
         <span class="form-hint">Enter a training provider name</span>
     </label>
     <span class="error-message"></span>
@@ -19,12 +19,12 @@
 
         <input type="search" id="searchTerm" name="SearchTerm" class="text-box form-control" maxlength="200" value="@searchTermValue">
     }
-    <input class="button" id="submit-keywords" type="submit" value="Search" />
+    <input class="button" id="submit-keywords" type="submit" value="Search" />*@
 
 
 
     <!--correct markup-->
-    @*<div class="search-field">
+    <div class="search-field">
         <fieldset class="search-input">
             <label for="searchTerm">
                 <span class="form-label-bold">Enter a training provider name</span>
@@ -38,7 +38,7 @@
             <fieldset class="search-submit">
                 <button type="submit" id="submit-keywords" class="button">Search</button>
         </fieldset>
-    </div>*@
+    </div>
 
 
 
