@@ -8,6 +8,9 @@
     ViewBag.PageID = "search-provider-results";
 }
 <main id="content" role="main">
+    <div class="breadcrumbs">
+        <a href="/" class="link-back">Back</a>
+    </div>
     <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
 
