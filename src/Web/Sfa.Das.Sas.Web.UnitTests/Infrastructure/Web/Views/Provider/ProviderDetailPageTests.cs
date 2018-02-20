@@ -1,12 +1,16 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using RazorGenerator.Testing;
-using Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.ExtensionHelpers;
-using Sfa.Das.Sas.Web.ViewModels;
-using Sfa.Das.Sas.Web.Views.Provider;
-
-namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
+﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 {
+    using System.Collections.Generic;
+    using ExtensionHelpers;
+    using FluentAssertions;
+    using NUnit.Framework;
+    using RazorGenerator.Testing;
+    using Sas.Web.Views.Provider;
+    using SFA.DAS.Apprenticeships.Api.Types;
+    using SFA.DAS.Apprenticeships.Api.Types.Pagination;
+    using SFA.DAS.Apprenticeships.Api.Types.Providers;
+    using ViewModels;
+
     [TestFixture]
     public class ProviderDetailPageTests : ViewTestBase
     {
@@ -180,6 +184,76 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
         }
 
+        [Test]
+        public void ShouldNotShowAnyNavigationDetailsIfOnlyOnePage()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Be(string.Empty);
+            GetPartial(html, "#next-nav").Should().Be(string.Empty);
+        }
+
+        [Test]
+        public void ShoulShowOnlyNextNavigationDetailsIfMoreThanOnePageAndOnFirstPage()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ApprenticeshipTrainingSummary.PaginationDetails
+                = new PaginationDetails
+                {
+                        LastPage = 2,
+                        NumberOfRecordsToSkip = 0,
+                        NumberPerPage = 20,
+                        TotalCount = 1,
+                        Page = 1
+                };
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Be(string.Empty);
+            GetPartial(html, "#next-nav").Should().Contain("2 of 2");
+        }
+
+        [Test]
+        public void ShoulShowBothNavigationDetailsIfSecondPageOfFour()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ApprenticeshipTrainingSummary.PaginationDetails
+                = new PaginationDetails
+                {
+                    LastPage = 4,
+                    NumberOfRecordsToSkip = 20,
+                    NumberPerPage = 20,
+                    TotalCount = 69,
+                    Page = 2
+                };
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Contain("1 of 4");
+            GetPartial(html, "#next-nav").Should().Contain("3 of 4");
+        }
+
+        [Test]
+        public void ShoulShowOnlyPreviousNavigationDetailsIfLastPage()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ApprenticeshipTrainingSummary.PaginationDetails
+                = new PaginationDetails
+                {
+                    LastPage = 4,
+                    NumberOfRecordsToSkip = 60,
+                    NumberPerPage = 20,
+                    TotalCount = 69,
+                    Page = 4
+                };
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#previous-nav").Should().Contain("3 of 4");
+            GetPartial(html, "#next-nav").Should().Be(string.Empty);
+        }
+
         private static ProviderDetailViewModel GetProvider()
         {
             return new ProviderDetailViewModel
@@ -196,7 +270,22 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 Phone = Phone,
                 UkPrn = UkPrn,
                 ProviderName = ProviderName,
-                Website = Website
+                Website = Website,
+                ApprenticeshipTrainingSummary = new ApprenticeshipTrainingSummary
+                {
+                    ApprenticeshipTrainingItems = new List<ApprenticeshipTraining> {
+                        new ApprenticeshipTraining
+                        {
+                            Identifier = "1",
+                            Name = "Aerospace",
+                            Level = 1,
+                            TrainingType = ApprenticeshipTrainingType.Framework,
+                            Type = "Framework"
+                        }
+                    },
+                    Count = 1,
+                    PaginationDetails = new PaginationDetails { LastPage = 1, NumberOfRecordsToSkip = 0, NumberPerPage = 20, TotalCount = 1, Page = 1 }
+                }
             };
         }
     }

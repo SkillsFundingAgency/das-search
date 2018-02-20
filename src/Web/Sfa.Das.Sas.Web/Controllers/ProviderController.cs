@@ -130,9 +130,15 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProviderDetail(long ukprn, string providerName = "")
+        public async Task<ActionResult> ProviderDetail(long ukprn, string providerName = "", string pageNumber = "")
         {
-            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = ukprn });
+            int page;
+            if (!int.TryParse(pageNumber, out page))
+            {
+                page = 1;
+            }
+
+            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = ukprn, Page = page });
 
             if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
             {

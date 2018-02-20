@@ -29,6 +29,7 @@
     <ApplicationInsightsResourceId>/subscriptions/f0a7800e-fcec-4f5d-b2f5-9265fb7bdbd4/resourcegroups/DAS-CI/providers/microsoft.insights/components/Sfa.Eds.Das.Web</ApplicationInsightsResourceId>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -173,8 +174,8 @@
       <HintPath>..\packages\RazorGenerator.Mvc.2.4.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.125.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.125\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.131.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.131\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
@@ -185,8 +186,8 @@
       <HintPath>..\packages\SFA.DAS.NLog.Targets.Redis.1.0.0.26805\lib\net45\SFA.DAS.NLog.Targets.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.125.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.125-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.131.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.131-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
@@ -503,6 +504,7 @@
     <Content Include="Content\dist\images\icons\status\orange_16.png" />
     <Content Include="Content\dist\images\icons\status\red_16.png" />
     <Content Include="Content\dist\images\open-government-licence.png" />
+    <Content Include="Content\dist\images\pagination-arrow-sprite.png" />
     <Content Include="Content\favicons\android-chrome-144x144.png" />
     <Content Include="Content\favicons\android-chrome-192x192.png" />
     <Content Include="Content\favicons\android-chrome-36x36.png" />

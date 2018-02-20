@@ -60,6 +60,11 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Provider", action = "ProviderDetail", providerName=UrlParameter.Optional });
 
             routes.MapRoute(
+                name: "ProviderWithPageNumber",
+                url: "provider/{ukprn}/page/{pageNumber}",
+                defaults: new { controller = "Provider", action = "ProviderDetail"});
+
+            routes.MapRoute(
                 name: "Standard",
                 url: "apprenticeship/standard/{id}/{name}",
                 defaults: new { controller = "Apprenticeship", action = "Standard", keywords = UrlParameter.Optional });

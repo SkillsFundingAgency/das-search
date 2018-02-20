@@ -110,8 +110,8 @@
       <HintPath>..\packages\ReflectionMagic.2.1.0\lib\net40\ReflectionMagic.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.125.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.125\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.131.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.131\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
@@ -122,8 +122,8 @@
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.125.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.125-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.131.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.131-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

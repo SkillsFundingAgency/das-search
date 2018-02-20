@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             try
             {
                 var provider = await _getProviders.GetProviderDetails(message.UkPrn);
-                var apprenticeshipTrainingSummary = await _getProviders.GetApprenticeshipTrainingSummary(message.UkPrn);
+                var apprenticeshipTrainingSummary = await _getProviders.GetApprenticeshipTrainingSummary(message.UkPrn, message.Page);
 
                 return new ProviderDetailResponse
                 {
