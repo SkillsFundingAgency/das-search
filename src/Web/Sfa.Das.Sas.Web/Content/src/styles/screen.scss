@@ -510,221 +510,185 @@ aside h2:first-child {
 }
 
 /*Provider detail table view page*/
-.provider-detail {
-    #provider-name {
-        line-height: 1.5em;
-        margin-bottom: 1.3em;
-
-        .tag-national {
-            background: $grey-2;
-            padding: 0px 40px 8px 40px;
-            color: #fff;
-            margin-left: 60px;
-
-            .font-adjust {
-                font-size: 25px;
-                font-weight: normal;
-            }
+.provider-detail{
+   #provider-name{
+       line-height:1.5em;
+       margin-bottom:1.3em;
+        .tag-national{
+            background:$grey-2;
+            padding:0px 40px 8px 40px;
+            color:#fff;   
+            margin-left: 60px;  
+            .font-adjust{
+                 font-size:25px;
+                font-weight:normal;
+            }      
         }
+
     }
 
-    .markdown-header-text {
-        font-weight: bold;
-        margin-top: 20px;
-    }
-
-    .markdown {
-        margin-bottom: 60px;
-    }
-
-
-    #search-app-offered {
-        margin-bottom: 30px;
-
-        .app-offered {
-            float: left;
-            margin: 0;
-        }
-        /*Search box styles*/
-        #search-box {
-            @include media(tablet) {
-                float: right;
-                margin: 0;
+        .markdown-header-text{
+           font-weight:bold;
+           margin-top:20px;
             }
+       .markdown{
+           margin-bottom:60px;
+       }
 
-            float: left;
-            margin: 20px 0;
+  
+   #search-app-offered{
+       margin-bottom:30px;
+       .app-offered{
+             float:left;   
+             margin:0;
+       }
+       /*Search box styles*/
+       #search-box{
+               @include media(tablet) {float:right; margin:0;}
+               float:left;
+               margin:20px 0;
+              
+           .search-text{
+		        margin: 0;
+		        padding: 10px;
+		        font-family: Arial, Helvetica, sans-serif;
+		        font-size:14px;
+		        color:#666;
+		        border:1px solid $border-colour; 
+		        border-right:0px;
+	        }
+	            .submit-search {
+		            margin: 0 0 0 -4px;
+		            padding: 0;
+		            width: 40px;
+                    height: 39px;
+                     @include media(tablet) {height:40px;}
+		            font-family: Arial, Helvetica, sans-serif;
+		            font-size:14px;
+		            font-weight:bold;
+		            outline: none;
+		            cursor: pointer;
+		            text-align: center;
+		            text-decoration: none;
+		            color: #ffffff;
+		            border:0; 
+		            background: $light-blue url('images/search-glass.png') no-repeat 6px 7px;
+	            }
+	            /* Fixes submit button height problem in Firefox */
+	            .submit-search::-moz-focus-inner {
+	              border: 0;
+	            }
+       }
 
-            .search-text {
-                margin: 0;
-                padding: 10px;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 14px;
-                color: #666;
-                border: 1px solid $border-colour;
-                border-right: 0px;
-            }
+   }
+   .panel--satisfaction{
+        margin-top:30px;
+   }
+   .panel-disclaimer{
+    font-size: 14px;
+    line-height: 1.429;
+    margin-top:30px;
+    h4{
+        font-size: 16px;
+        font-weight:bold;
+        line-height: 1.25;
+    }
+   }
+   #expand-collapse{
+       margin-top:30px;
+       details{
+           margin:20px 0;
+       }
+   }
+   table.app-details{
+       margin-top:20px;
+       float:left;
+       clear:both;
+   }
+}
 
-            .submit-search {
-                margin: 0 0 0 -4px;
-                padding: 0;
-                width: 40px;
-                height: 39px;
+/*provider search*/
+.search-field {
+    position: relative;
+    margin-bottom: 15px;
 
-                @include media(tablet) {
-                    height: 40px;
-                }
-
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                outline: none;
-                cursor: pointer;
-                text-align: center;
-                text-decoration: none;
-                color: #ffffff;
-                border: 0;
-                background: $light-blue url('images/search-glass.png') no-repeat 6px 7px;
-            }
-            /* Fixes submit button height problem in Firefox */
-            .submit-search::-moz-focus-inner {
-                border: 0;
-            }
-        }
+    fieldset {
+        width: auto;
     }
 
-    .panel--satisfaction {
-        margin-top: 30px;
-    }
+    .search-input {
+        padding: 0 50px 0 0;
 
-    .panel-disclaimer {
-        font-size: 14px;
-        line-height: 1.429;
-        margin-top: 30px;
-
-        h4 {
+        input {
+            border-radius: 0;
             font-size: 16px;
-            font-weight: bold;
             line-height: 1.25;
-        }
-    }
-
-    #expand-collapse {
-        margin-top: 30px;
-
-        details {
-            margin: 20px 0;
-        }
-    }
-
-    table.app-details {
-        margin-top: 20px;
-        float: left;
-        clear: both;
-    }
-
-    .data-list--compact{
-        margin-bottom:60px;
-    }
-}
-
-#provider-detail-view {
-    .data-list--compact {
-        margin-bottom: 60px;
-    }
-
-    .panel {
-        background: $grey-3;
-        border-color: $purple;
-    }
-
-    .previous-next-navigation {
-        padding-left: 0;
-        position: relative;
-        overflow: hidden;
-        margin: 60px 0 0;
-        width: 100%;
-
-        li {
-            font-family: "nta", Arial, sans-serif;
-            font-size: 20px;
-            line-height: 1.11111;
             font-weight: 400;
-            text-transform: none;
-            font-size-adjust: 0.5;
+            width: 100%;
+            padding: 0 0 0 10px;
             display: block;
-            padding: 0;
-            margin: 0;
-            width: 50%;
-            float: left;
-
-            a {
-                display: block;
-                text-decoration: none;
-                font-size: 24px;
-                line-height: 0.9em;
-
-                span {
-                    display: block;
-                    font-family: "nta", Arial, sans-serif;
-                    font-size: 12px;
-                    line-height: 1.25;
-                    font-weight: 400;
-                    text-transform: none;
-                    font-size-adjust: 0.5;
-                }
-
-                &:hover {
-                    background: $highlight-colour;
-
-                    .page-numbers {
-                        text-decoration: underline;
-                    }
-                }
-
-                &:focus {
-                    .page-numbers {
-                        text-decoration: underline;
-                    }
-                }
-            }
+            height: 50px;
+            border-color: $grey-2;
+            border-right: none;
+            line-height: 48px;
         }
 
-        li.next {
-            float: right;
-            text-align: right;
-
-            a {
-                padding: 15px 35px 15px 0;
-            }
-
-            a:before {
-                background: transparent url("/Content/dist/images/pagination-arrow-sprite.png") no-repeat -102px -11px;
-                margin: -4px -32px 0 0;
-                display: block;
-                float: right;
-                width: 30px;
-                height: 38px;
-                content: " ";
-            }
+        label {
+            display: block;
         }
+    }
 
-        li.previous {
-            a {
-                padding: 15px 0 15px 35px;
-            }
+    .search-submit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 50px;
+        width: 50px;
+        overflow: visible;
 
-            a:before {
-                background: transparent url("/Content/dist/images/pagination-arrow-sprite.png") no-repeat -20px -11px;
-                margin: -4px 0 0 -32px;
-                display: block;
-                float: left;
-                width: 30px;
-                height: 38px;
-                content: " ";
-            }
+        button {
+            border-radius: 0;
+            box-shadow: none;
+            position: absolute;
+            z-index: 4;
+            right: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            border: none;
+            overflow: hidden;
+            text-indent: -5000px;
+            color: #fff;
+            background-color: $govuk-blue;
+            background-image: url(/Content/dist/css/images/search-glass.png);
+            background-repeat: no-repeat;
+            background-position: 12px 13px;
         }
     }
 }
-// END -pagination styles
- 
+
+#provider-search-results {
+    .results {
+        font-weight: bold;
+        padding: 20px 0;
+        border-bottom: 1px solid $border-colour;
+        .sublist{
+            display:block;
+            font-weight:normal;
+            line-height:1.8em;
+        }
+    }
+}
+
+/*error message accessibility*/
+.error-summary {
+    margin-bottom: 0;
+
+    h1 {
+        display: none;
+
+        & + p {
+            display: none;
+        }
+    }
+}

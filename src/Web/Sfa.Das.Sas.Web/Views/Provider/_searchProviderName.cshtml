@@ -1,25 +1,22 @@
 ﻿  @model Sfa.Das.Sas.Web.ViewModels.ProviderSearchNameResultViewModel
 @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
 {
-    <div class="form-group">
-        @{
-            if (Model != null && Model.ShortSearchTerm)
-            {
-                <span class="error-message">Type at least 3 characters</span>
-            }
-
-        }
+<div class="form-group">
+    <div class="search-field">
+        <fieldset class="search-input">
             <label for="searchTerm">
-                <span class="form-hint">Enter a training provider name</span>
+                <span class="form-label-bold">Enter a training provider name</span>
             </label>
-            <span class="error-message"></span>
-            @{            
-            var searchTermValue = Model?.SearchTerm ?? string.Empty;
 
-                <input type="search" id="searchTerm" name="SearchTerm" class="text-box form-control" maxlength="200" value="@searchTermValue">
+            @{
+            var searchTermValue = Model?.SearchTerm ?? string.Empty;
+            <input type="search" id="searchTerm" name="searchTerm" value="@searchTermValue" class="form-control" maxlength="200" value="@searchTermValue" />
             }
-            <input class="button" id="submit-keywords" type="submit" value="Search"/>
-        </div>
-    
-    <span class="form-hint">Results will be listed below</span>
+        </fieldset>
+            <fieldset class="search-submit">
+                <button type="submit" id="submit-keywords" class="button">Search</button>
+        </fieldset>
+    </div>
+</div>  
+    <p>Results will be listed below</p>
   }
