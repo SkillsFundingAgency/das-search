@@ -99,6 +99,7 @@
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
     <Compile Include="Handlers\ProviderDetailHandler.cs" />
+    <Compile Include="Handlers\ProviderNameSearchHandler.cs" />
     <Compile Include="Handlers\SitemapHandler.cs" />
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
+    <Compile Include="Interfaces\IProviderNameSearchService.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProviderSearchService.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
+    <Compile Include="Models\ProviderNameSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Models\StandardSearchResultsItem.cs" />
     <Compile Include="Models\TrainingLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderNameSearchService.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
@@ -164,7 +168,8 @@
     <Compile Include="Queries\ProviderSearchQuery.cs" />
     <Compile Include="Responses\PostCodeResponseCodes.cs" />
     <Compile Include="Responses\ProviderDetailResponse.cs" />
-    <Compile Include="Responses\ProviderSearchNameResponse.cs" />
+    <Compile Include="Responses\ProviderNameSearchResponse.cs" />
+    <Compile Include="Responses\ProviderNameSearchResponseCodes.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />

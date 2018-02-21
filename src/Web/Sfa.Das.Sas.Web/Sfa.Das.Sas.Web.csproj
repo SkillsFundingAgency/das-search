@@ -363,7 +363,7 @@
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ManageApprenticeshipFundsViewModel.cs" />
     <Compile Include="ViewModels\ProviderDetailViewModel.cs" />
-    <Compile Include="ViewModels\ProviderSearchNameResultViewModel.cs" />
+    <Compile Include="ViewModels\ProviderNameSearchResultViewModel.cs" />
     <Compile Include="ViewModels\StatsViewModel.cs" />
     <Compile Include="ViewModels\NationalProviderViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />

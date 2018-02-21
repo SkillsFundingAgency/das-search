@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {
-    public class ProviderSearchResultSummary
+    public class ProviderNameSearchResult
     {
         public long UkPrn { get; set; }
         public string ProviderName { get; set; }

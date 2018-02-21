@@ -3,15 +3,8 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
-    public class ProviderSearchNameResponse
+    public class ProviderNameSearchResponse
     {
-        public enum ResponseCodes
-        {
-            Success,
-            SearchFailed,
-            NoSearchResultsFound
-        }
-
         public long TotalResults { get; set; }
 
         public int ResultsToTake { get; set; }
@@ -24,7 +17,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
 
         public bool HasError { get; set; }
 
-        public IEnumerable<ProviderSearchResultSummary> Results { get; set; }
-        public ResponseCodes StatusCode { get; set; }
+        public IEnumerable<ProviderNameSearchResult> Results { get; set; }
+        public ProviderNameSearchResponseCodes StatusCode { get; set; }
     }
 }
