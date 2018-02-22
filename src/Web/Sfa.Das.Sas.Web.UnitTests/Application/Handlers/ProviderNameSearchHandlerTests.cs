@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Core.Domain.Model;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     using System.Threading.Tasks;
     using FluentAssertions;
@@ -25,6 +28,7 @@
         private int _resultsToTake;
         private string _searchTerm;
         private int _totalResults;
+        private List<ProviderNameSearchResult> _searchResults;
 
         [SetUp]
         public void Setup()
@@ -41,13 +45,20 @@
 
             _responseCode = ProviderNameSearchResponseCodes.Success;
 
+            _searchResults = new List<ProviderNameSearchResult>
+            {
+                new ProviderNameSearchResult {UkPrn = 12345678, ProviderName = "abc", Aliases = null },
+                new ProviderNameSearchResult {UkPrn = 87654321, ProviderName = "ab stuff", Aliases = new List<string> {"ab1", "ab2" } },
+                new ProviderNameSearchResult {UkPrn = 12341234, ProviderName = "Smiths Learning", Aliases = null }
+            };
+
             var providerNameSearchResults = new ProviderNameSearchResults
             {
                ActualPage = _actualPage,
                 HasError = false,
                 LastPage = _lastPage,
                 ResponseCode = _responseCode,
-                Results = null,
+                Results = _searchResults,
                 ResultsToTake = _resultsToTake,
                 TotalResults = _totalResults
             };
@@ -86,6 +97,27 @@
             response.ResultsToTake.Should().Be(_resultsToTake);
             response.SearchTerm.Should().Be(_searchTerm);
             response.TotalResults.Should().Be(_totalResults);
+            response.Results.Should().BeSameAs(_searchResults);
+        }
+
+        [Test]
+        public async Task ShouldSetTooShortFlagWhenSearchTermIsTooShort()
+        {
+            var message = new ProviderNameSearchQuery { SearchTerm = "ab", Page = 1 };
+            var response = await _handler.Handle(message);
+
+            response.HasError.Should().BeTrue();
+            response.StatusCode.Should().Be(ProviderNameSearchResponseCodes.SearchTermTooShort);
+        }
+
+        [Test]
+        public async Task ShouldSetTooShortFlagWhenSearchTermIsNull()
+        {
+            var message = new ProviderNameSearchQuery { SearchTerm = null, Page = 1 };
+            var response = await _handler.Handle(message);
+
+            response.HasError.Should().BeTrue();
+            response.StatusCode.Should().Be(ProviderNameSearchResponseCodes.SearchTermTooShort);
         }
     }
 }

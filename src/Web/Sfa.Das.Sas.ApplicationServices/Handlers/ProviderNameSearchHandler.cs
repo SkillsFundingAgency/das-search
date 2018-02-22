@@ -23,6 +23,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 { "NoSearchResultsFound", ProviderNameSearchResponseCodes.NoSearchResultsFound },
                 { "SearchFailed", ProviderNameSearchResponseCodes.SearchFailed },
                 { "Success", ProviderNameSearchResponseCodes.Success },
+                { "SearchTermTooShort", ProviderNameSearchResponseCodes.SearchTermTooShort },
                 { string.Empty, ProviderNameSearchResponseCodes.Success }
             };
 
@@ -39,7 +40,30 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         public async Task<ProviderNameSearchResponse> Handle(ProviderNameSearchQuery message)
         {
             var pageNumber = message.Page <= 0 ? 1 : message.Page;
+
+            if (message.SearchTerm == null || message.SearchTerm.Trim().Length < 3)
+            {
+                return new ProviderNameSearchResponse
+                {
+                    ActualPage = pageNumber,
+                    HasError = true,
+                    SearchTerm = message.SearchTerm,
+                    StatusCode = ProviderNameSearchResponseCodes.SearchTermTooShort
+                };
+            }
+
             var searchResults = await _nameSearchService.SearchProviderNameAndAliases(message.SearchTerm, pageNumber, _paginationSettings.DefaultResultsAmount);
+
+
+            if (searchResults.TotalResults > 0)
+            {
+                var take = _paginationSettings.DefaultResultsAmount;
+                var lastPage = take > 0 ? (int)System.Math.Ceiling((double)searchResults.TotalResults / take) : 1;
+                if (searchResults.ActualPage > searchResults.LastPage)
+                {
+                    searchResults.ActualPage = searchResults.LastPage;
+                }
+            }
 
             var providerNameSearchResponse = new ProviderNameSearchResponse
             {
