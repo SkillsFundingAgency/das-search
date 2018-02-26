@@ -1,22 +1,26 @@
-﻿  @model Sfa.Das.Sas.Web.ViewModels.ProviderNameSearchResultViewModel
-@using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
+﻿  @using Sfa.Das.Sas.Web.Extensions  @model Sfa.Das.Sas.Web.ViewModels.ProviderNameSearchResultViewModel
+@using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new {@class = "search-box"}))
 {
-<div class="form-group">
-    <div class="search-field">
-        <fieldset class="search-input">
-            <label for="searchTerm">
-                <span class="form-label-bold">Enter a training provider name</span>
-            </label>
+    <div class="form-group">
+        <div class="search-field">
+            <fieldset class="search-input">
+                <label for="searchTerm">
+                    <span class="form-label-bold">Enter a training provider name</span>
+                </label>
 
-            @{
-            var searchTermValue = Model?.SearchTerm ?? string.Empty;
-            <input type="search" id="searchTerm" name="searchTerm" value="@searchTermValue" class="form-control" maxlength="200" value="@searchTermValue" />
-            }
-        </fieldset>
+                @{
+                    var searchTermValue = Model?.SearchTerm ?? string.Empty;
+                    <input type="search" id="searchTerm" name="searchTerm" value="@searchTermValue" class="form-control" maxlength="200" value="@searchTermValue"/>
+                }
+            </fieldset>
             <fieldset class="search-submit">
                 <button type="submit" id="submit-keywords" class="button">Search</button>
-        </fieldset>
+            </fieldset>
+        </div>
     </div>
-</div>  
-    <p>Results will be listed below</p>
-  }
+    if (Model?.Results == null || Model.Results.IsNullOrEmpty())
+     {
+         <p>Results will be listed below</p>
+     }
+
+}
