@@ -80,33 +80,36 @@
         </div>
     </div>
 
-    <nav role="navigation">
-        <ul class="previous-next-navigation">
-            @if (Model.ActualPage > 1)
-            {
-                var pageBefore = Model.ActualPage - 1;
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <nav role="navigation">
+                <ul class="previous-next-navigation">
+                    @if (Model.ActualPage > 1)
+                    {
+                        var pageBefore = Model.ActualPage - 1;
 
-                <li class="previous" id="previous-nav">
-                    <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageBefore">
-                        Previous <span class="visuallyhidden">page</span>
-                        <span class="page-numbers">Previous page @pageBefore of @Model.LastPage</span>
-                    </a>
-                </li>
-            }
-            @if (Model.ActualPage < Model.LastPage)
-            {
-                var pageAfter = Model.ActualPage + 1;
+                        <li class="previous" id="previous-nav">
+                            <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageBefore">
+                                Previous <span class="visuallyhidden">page</span>
+                                <span class="page-numbers">Previous page @pageBefore of @Model.LastPage</span>
+                            </a>
+                        </li>
+                    }
+                    @if (Model.ActualPage < Model.LastPage)
+                    {
+                        var pageAfter = Model.ActualPage + 1;
 
-                <li class="next" id="next-nav">
-                    <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageAfter">
-                        Next <span class="visuallyhidden">page</span>
-                        <span class="page-numbers">Next page @pageAfter of @Model.LastPage</span>
-                    </a>
-                </li>
-            }
-        </ul>
-    </nav>
-
+                        <li class="next" id="next-nav">
+                            <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageAfter">
+                                Next <span class="visuallyhidden">page</span>
+                                <span class="page-numbers">Next page @pageAfter of @Model.LastPage</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+          </div>
+      </div>
 </main>
 
 
