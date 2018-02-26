@@ -236,7 +236,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                                 new ProviderNameSearchResult {ProviderName = "ABC17", UkPrn = 10000285},
                                 new ProviderNameSearchResult {ProviderName = "ABC18", UkPrn = 10000285},
                                 new ProviderNameSearchResult {ProviderName = "ABC19", UkPrn = 10000285},
-                                new ProviderNameSearchResult {ProviderName = "ABC20", UkPrn = 10000285}
+                                new ProviderNameSearchResult {ProviderName = "ABC_0", UkPrn = 10000285}
                             };
                     }
 
