@@ -47,12 +47,12 @@ namespace Sfa.Das.Sas.Web
             routes.MapRoute(
                 name: "ProviderNameSearch",
                 url: "provider/search",
-                defaults: new { controller = "Provider", action = "Search"});
+                defaults: new { controller = "Provider", action = "Search" });
 
             routes.MapRoute(
-                name: "ProviderNameSearchResults",
+                name: "ProviderNameSearchResultsAndPagination",
                 url: "provider/searchResults",
-                defaults: new { controller = "Provider", action = "SearchResults"});
+                defaults: new { controller = "Provider", action = "SearchResults" });
 
             routes.MapRoute(
                 name: "ProviderWithName",

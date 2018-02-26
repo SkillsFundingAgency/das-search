@@ -1,24 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using Sfa.Das.Sas.ApplicationServices.Interfaces;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Infrastructure.Repositories;
-using SFA.DAS.AssessmentOrgs.Api.Client;
-
-namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
+﻿namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Reflection;
+    using ApplicationServices;
+    using ApplicationServices.FeatureToggles;
+    using ApplicationServices.Interfaces;
+    using ApplicationServices.Settings;
+    using Core.Configuration;
+    using Core.Domain.Repositories;
+    using Core.Domain.Services;
+    using Elasticsearch;
     using FeatureToggle.Core.Fluent;
+    using Mapping;
+    using PostCodeIo;
+    using Repositories;
+    using Settings;
     using SFA.DAS.Apprenticeships.Api.Client;
-    using Sfa.Das.Sas.ApplicationServices;
-    using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
-    using Sfa.Das.Sas.ApplicationServices.Settings;
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Infrastructure.Elasticsearch;
-    using Sfa.Das.Sas.Infrastructure.Mapping;
-    using Sfa.Das.Sas.Infrastructure.PostCodeIo;
-    using Sfa.Das.Sas.Infrastructure.Settings;
+    using SFA.DAS.AssessmentOrgs.Api.Client;
     using StructureMap;
 
     public sealed class InfrastructureRegistry : Registry

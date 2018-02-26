@@ -11,7 +11,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int LastPage { get; set; }
         public string SearchTerm { get; set; }
         public List<ProviderNameSearchResult> Results { get; set; }
-
         public bool HasError { get; set; }
         public bool ShortSearchTerm { get; set; }
     }

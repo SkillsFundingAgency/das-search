@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {
-    public class ProviderSearchItem
+    public class ProviderNameSearchItem
     {
         public int UkPrn { get; set; }
         public string ProviderName { get; set; }

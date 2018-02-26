@@ -130,7 +130,7 @@
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
-    <Compile Include="Models\ProviderNameSearchResults.cs" />
+    <Compile Include="Models\ProviderNameSearchResultsAndPagination.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
