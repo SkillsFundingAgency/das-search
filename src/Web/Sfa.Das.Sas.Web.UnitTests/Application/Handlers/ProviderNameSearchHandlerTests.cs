@@ -12,7 +12,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     using Sas.ApplicationServices.Models;
     using Sas.ApplicationServices.Queries;
     using Sas.ApplicationServices.Responses;
-    using Sas.ApplicationServices.Settings;
     using SFA.DAS.NLog.Logger;
 
     [TestFixture]
@@ -20,7 +19,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private Mock<IProviderNameSearchService> _mockProviderNameSearchService;
         private Mock<ILog> _mockLogger;
-        private Mock<IPaginationSettings> _mockPaginationSettings;
         private ProviderNameSearchHandler _handler;
         private int _actualPage;
         private int _lastPage;
@@ -35,8 +33,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
              _mockProviderNameSearchService = new Mock<IProviderNameSearchService>();
             _mockLogger = new Mock<ILog>();
-            _mockPaginationSettings = new Mock<IPaginationSettings>();
-
             _actualPage = 1;
             _lastPage = 2;
             _resultsToTake = 20;
@@ -64,12 +60,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             };
 
             _mockProviderNameSearchService.Setup(
-                    x => x.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
+                    x => x.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(Task.FromResult(providerNameSearchResults));
 
              _handler = new ProviderNameSearchHandler(
                  _mockProviderNameSearchService.Object,
-                 _mockPaginationSettings.Object,
                  _mockLogger.Object);
         }
 
@@ -98,26 +93,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             response.SearchTerm.Should().Be(_searchTerm);
             response.TotalResults.Should().Be(_totalResults);
             response.Results.Should().BeSameAs(_searchResults);
-        }
-
-        [Test]
-        public async Task ShouldSetTooShortFlagWhenSearchTermIsTooShort()
-        {
-            var message = new ProviderNameSearchQuery { SearchTerm = "ab", Page = 1 };
-            var response = await _handler.Handle(message);
-
-            response.HasError.Should().BeTrue();
-            response.StatusCode.Should().Be(ProviderNameSearchResponseCodes.SearchTermTooShort);
-        }
-
-        [Test]
-        public async Task ShouldSetTooShortFlagWhenSearchTermIsNull()
-        {
-            var message = new ProviderNameSearchQuery { SearchTerm = null, Page = 1 };
-            var response = await _handler.Handle(message);
-
-            response.HasError.Should().BeTrue();
-            response.StatusCode.Should().Be(ProviderNameSearchResponseCodes.SearchTermTooShort);
         }
     }
 }
