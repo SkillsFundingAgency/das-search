@@ -1,4 +1,6 @@
-﻿using Sfa.Das.Sas.Infrastructure.Mapping;
+﻿using Nest;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Infrastructure.Mapping;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -16,24 +18,29 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IProviderNameSearchMapping _nameSearchMapping;
+        private readonly IPaginationOrientationService _paginationOrientationService;
 
-        public ProviderNameSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IProviderNameSearchMapping nameSearchMapping)
+        public ProviderNameSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IProviderNameSearchMapping nameSearchMapping, IPaginationOrientationService paginationOrientationService)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
             _nameSearchMapping = nameSearchMapping;
+            _paginationOrientationService = paginationOrientationService;
         }
 
         public async Task<ProviderNameSearchResultsAndPagination> SearchByTerm(string searchTerm, int page, int take)
         {
-
-            var pageNumber = page <= 0 ? 1 : page;
-
             var formattedSearchTerm = QueryHelper.FormatQueryReturningEmptyStringIfEmptyOrNull(searchTerm).Trim();
+
+            _logger.Info(
+                $"Provider Name Search provider formatting query: SearchTerm: [{searchTerm}] formatted to: [{formattedSearchTerm}]");
 
             if (formattedSearchTerm.Length < 3)
             {
+                _logger.Info(
+                    $"Fromatted search term causing SearchTermTooShort: [{formattedSearchTerm}]");
+
                 return new ProviderNameSearchResultsAndPagination
                 {
                     ActualPage = 1,
@@ -45,10 +52,38 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
 
             var term = $"*{formattedSearchTerm}*";
-            var totalHits = GetTotalMatches(term);
-            var paginationDetails = GeneratePaginationDetails(pageNumber, take, totalHits);
+            _logger.Info($"Provider Name Search provider getting total hits");
 
-            var returnedResults = _elasticsearchCustomClient.Search<ProviderNameSearchResult>(s => s
+            var totalHits = GetTotalMatches(term);
+            _logger.Info($"Provider Name Search provider total hits retrieved: [{totalHits}]");
+            var paginationDetails = _paginationOrientationService.GeneratePaginationDetails(page, take, totalHits);
+
+            _logger.Debug($"Provider Name Search provider getting results based on pagination details: take: [{take}] skip:[{paginationDetails.Skip}], current page [{paginationDetails.CurrentPage}], last page [{paginationDetails.LastPage}] ");
+
+            var returnedResults = GetResults(term, take, paginationDetails);
+
+            _logger.Debug($"Provider Name Search provider retrieved results, mapping to returned format");
+
+            var results = new ProviderNameSearchResultsAndPagination
+            {
+                ActualPage = paginationDetails.CurrentPage,
+                HasError = false,
+                SearchTerm = formattedSearchTerm,
+                Results = _nameSearchMapping.FilterNonMatchingAliases(formattedSearchTerm, returnedResults.Documents),
+                LastPage = paginationDetails.LastPage,
+                TotalResults = totalHits,
+                ResultsToTake = returnedResults.Documents.Count,
+                ResponseCode = returnedResults.Documents.Count > 0 ? ProviderNameSearchResponseCodes.Success : ProviderNameSearchResponseCodes.NoSearchResultsFound
+            };
+
+            _logger.Debug($"Provider Name Search provider retrieved results mapped to returned format");
+
+            return results;
+        }
+
+        private ISearchResponse<ProviderNameSearchResult> GetResults(string term, int take, PaginationOrientationDetails paginationDetails)
+        {
+            return _elasticsearchCustomClient.Search<ProviderNameSearchResult>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
                 .Type("providerapidocument")
                 .Skip(paginationDetails.Skip)
@@ -60,20 +95,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .Field(f => f.Aliases))
                         .Query(term)))
             );
-
-            var results = new ProviderNameSearchResultsAndPagination
-            {
-                ActualPage = paginationDetails.CurrentPage,
-                HasError = false,
-                SearchTerm = formattedSearchTerm,
-                Results = _nameSearchMapping.FilterNonMatchingAliases(formattedSearchTerm,returnedResults.Documents),
-                LastPage = paginationDetails.LastPage,
-                TotalResults = totalHits,
-                ResultsToTake = returnedResults.Documents.Count,
-                ResponseCode = returnedResults.Documents.Count > 0 ? ProviderNameSearchResponseCodes.Success : ProviderNameSearchResponseCodes.NoSearchResultsFound
-            };
-
-            return results;
         }
 
         private long GetTotalMatches(string term)
@@ -90,27 +111,6 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             );
 
             return initialDetails.HitsMetaData.Total;
-        }
-
-        private LocalPaginationDetails GeneratePaginationDetails(int page, int take,  long totalHits)
-        {
-            var res = default(LocalPaginationDetails);
-
-            var skip = (page - 1) * take;
-
-            while (skip >= totalHits)
-            {
-                page = page - 1;
-                skip = skip - take;
-            }
-
-            var lastPage = take > 0 ? (int)System.Math.Ceiling((double)totalHits / take) : 1;
-
-            res.LastPage = lastPage;
-            res.CurrentPage = page;
-            res.Skip = skip;
-
-            return res;
         }
     }
 }

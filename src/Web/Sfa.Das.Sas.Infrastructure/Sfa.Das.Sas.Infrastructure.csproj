@@ -147,7 +147,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elasticsearch\LocalPaginationDetails.cs" />
     <Compile Include="Elasticsearch\ProviderNameSearchProvider.cs" />
     <Compile Include="Extensions\MyCertificateIgnoringHttpConnection.cs" />
     <Compile Include="FeatureToggles\Elk5Feature.cs" />
