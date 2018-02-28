@@ -18,10 +18,9 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                     var aliasesToKeep = new List<string>();
                     foreach (var alias in item.Aliases)
                     {
-                        if (alias.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) <= -1)
-                            { continue; }
-                        var aliasToAdd = alias;
-                        aliasesToKeep.Add(aliasToAdd);
+                        if (alias.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) <= -1) { continue; }
+
+                        aliasesToKeep.Add(alias.Trim());
                     }
 
                     details.Aliases = aliasesToKeep;
