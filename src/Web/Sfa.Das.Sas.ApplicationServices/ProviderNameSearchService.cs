@@ -33,6 +33,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             try
             {
                 results = await _searchProviderName.SearchByTerm(searchTerm, page, take);
+
             }
             catch (Exception e)
             {

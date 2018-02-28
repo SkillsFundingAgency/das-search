@@ -1,7 +1,6 @@
 ﻿using System;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {
@@ -84,7 +83,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         }
 
         [Test]
-        public async Task ShouldCall()
+        public async Task ShouldReturnSuccessCodeAndNotError()
         {
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
