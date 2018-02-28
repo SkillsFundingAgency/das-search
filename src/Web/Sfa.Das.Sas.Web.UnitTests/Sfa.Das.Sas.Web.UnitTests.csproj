@@ -170,6 +170,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationServices\PaginationOrientationServiceTests.cs" />
+    <Compile Include="Application\ApplicationServices\ProviderNameSearchProviderTests.cs" />
     <Compile Include="Application\ApplicationServices\ProviderNameSearchServiceTests.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceBuilder.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
     <Compile Include="Application\Handlers\XmlDocumentSerialiserTests.cs" />
+    <Compile Include="Application\Mapping\ProviderNameSearchMappingTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
