@@ -66,7 +66,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
             For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
-
+            For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
         }
 
         private IDictionary<string, object> GetProperties()
