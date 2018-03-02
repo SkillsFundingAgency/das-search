@@ -358,6 +358,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ViewModels\ApprenticeshipOrProviderViewModel.cs" />
     <Compile Include="ViewModels\CookieViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultItemViewModel.cs" />
     <Compile Include="ViewModels\ApprenticeshipSearchResultViewModel.cs" />
@@ -773,6 +774,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ProviderDetail.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Apprenticeship\ApprenticeshipOrProvider.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>

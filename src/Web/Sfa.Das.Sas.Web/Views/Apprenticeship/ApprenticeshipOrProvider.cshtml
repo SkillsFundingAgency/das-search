@@ -1,0 +1,43 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.ApprenticeshipOrProviderViewModel
+@{
+    ViewBag.Title = "Apprenticeship Or Provider";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
+    ViewBag.PageID = "apprenticeship-or-provider-search";
+}
+<main id="content" role="main">
+
+    <h1 class="heading-xlarge">
+        Search by apprenticeships or named training provider
+    </h1>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <form action="" method="post" class="postcode-form">
+                <div class="search-form">
+                   <div>
+                        <div class="form-group @(Model.HasError ? "error" : "")" data-validation="You need to choose one of these options">
+                            <fieldset class="inline">
+                                <legend>
+                                    <span class="error-message">You need to choose one of these options</span>
+                                </legend>
+                                <label class="block-label selection-button-radio" id="isApprenticeship">
+                                   <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value)" value="true"/>
+
+                                    apprenticeships
+                                </label>
+                                <label class="block-label selection-button-radio" id="isNotApprenticeship">
+                                    <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value == false)" value="false"/>
+                                    the name of a training provider you already know
+                                </label>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" name="retry" value="true">
+                        <input class="button postcode-search-button" type="submit" value="Continue">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
