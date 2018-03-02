@@ -71,15 +71,20 @@ WriteLiteral(">\r\n                    Find apprenticeship training\r\n         
 
 WriteLiteral(" class=\"list list-bullet\"");
 
-WriteLiteral(">\r\n                <li>search for apprenticeship training by job role or keyword<" +
-"/li>\r\n                <li>find training providers who offer the apprenticeship t" +
-"raining you choose</li>\r\n            </ul>\r\n            \r\n");
+WriteLiteral(@">
+                <li>search for apprenticeship training by job role or keyword</li>
+                <li>find training providers who offer the apprenticeship training you choose</li>
+                <li>find a named training provider you want to use</li>
+            
+                </ul>
+            
+");
 
 WriteLiteral("            ");
 
             
-            #line 22 "..\..\Views\Start\Start.cshtml"
-       Write(Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
+            #line 24 "..\..\Views\Start\Start.cshtml"
+       Write(Html.ActionLink("Start", "ApprenticeshipOrProvider", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" }));
 
             
             #line default
