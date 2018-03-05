@@ -2,41 +2,87 @@
 @{
     ViewBag.Title = "Apprenticeship Or Provider";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
-    ViewBag.PageID = "apprenticeship-or-provider-search";
+    ViewBag.PageID = "search-multiple-options";
 }
 <main id="content" role="main">
+    @*<div class="grid-row">
+            <div class="column-two-thirds">
+                <form action="" method="post" class="postcode-form">
+                    <div class="search-form">
+                       <div>
+                            <div class="form-group @(Model.HasError ? "error" : "")" data-validation="You need to choose one of these options">
+                                <fieldset class="inline">
+                                    <legend>
+                                        <span class="error-message">You need to choose one of these options</span>
+                                    </legend>
+                                    <label class="block-label selection-button-radio" id="isApprenticeship">
+                                       <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value)" value="true"/>
 
-    <h1 class="heading-xlarge">
-        Search by apprenticeships or named training provider
-    </h1>
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <form action="" method="post" class="postcode-form">
-                <div class="search-form">
-                   <div>
-                        <div class="form-group @(Model.HasError ? "error" : "")" data-validation="You need to choose one of these options">
-                            <fieldset class="inline">
-                                <legend>
-                                    <span class="error-message">You need to choose one of these options</span>
-                                </legend>
-                                <label class="block-label selection-button-radio" id="isApprenticeship">
-                                   <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value)" value="true"/>
+                                        apprenticeships
+                                    </label>
+                                    <label class="block-label selection-button-radio" id="isNotApprenticeship">
+                                        <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value == false)" value="false"/>
+                                        the name of a training provider you already know
+                                    </label>
+                                </fieldset>
+                            </div>
+                        </div>
 
-                                    apprenticeships
-                                </label>
-                                <label class="block-label selection-button-radio" id="isNotApprenticeship">
-                                    <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value == false)" value="false"/>
-                                    the name of a training provider you already know
-                                </label>
-                            </fieldset>
+                        <div class="form-group">
+                            <input type="hidden" name="retry" value="true">
+                            <input class="button postcode-search-button" type="submit" value="Continue">
                         </div>
                     </div>
+                </form>
+            </div>
+        </div>*@
 
-                    <div class="form-group">
-                        <input type="hidden" name="retry" value="true">
-                        <input class="button postcode-search-button" type="submit" value="Continue">
-                    </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @*
+                *** INJECT THIS CODE WHEN THERE IS ERROR ***
+                <div class="error-summary" role="alert" aria-labelledby="error-search-options" tabindex="-1">
+                <h2 class="heading-medium error-summary-heading" id="error-search-options">
+                    Errors to fix
+                </h2>
+                <ul class="error-summary-list">
+                    <li><a href="#error-selecting-options">You need to choose one of these two options</a></li>
+                </ul>
+            </div>*@
+            <h1 class="heading-xlarge">
+                Find apprenticeship training
+            </h1>
+            <form action="" method="post" class="search-options">
+                <div class="form-group error">@*inject class "error" when there is error message in here*@
+                    <fieldset>
+                        <legend>
+                            <span class="form-label-bold">
+                                Search by apprenticeships or named training provider
+                            </span>
+                            @*
+                             *** INJECT THIS CODE WHEN THERE IS ERROR ***
+                            <span class="error-message" id="error-selecting-options">
+                            You need to choose one of these two options
+                            </span>
+                            *@
+                        </legend>
+                        <div class="multiple-choice">
+                            <label for="search-apprenticeships" class="block-label selection-button-radio">
+                                apprenticeships
+                                <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value)" value="true" id="search-apprenticeships">
+
+                            </label>
+                        </div>
+                        <div class="multiple-choice">
+                            <label for="search-Training-provider" class="block-label selection-button-radio">
+                                the name of a training provider you already know
+                                <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value == false)" value="false" id="search-Training-provider">
+
+                            </label>
+                        </div>
+                    </fieldset>
                 </div>
+                <input class="button" type="submit" value="Continue">
             </form>
         </div>
     </div>
