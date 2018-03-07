@@ -20,7 +20,7 @@
       <Setting name="ApprenticeshipApiBaseUrl" value="__ApprenticeshipApiBaseUrl__" />
       <Setting name="ElasticsearchUsername" value="__ElasticsearchUsername__" />
       <Setting name="ElasticsearchPassword" value="__ElasticsearchPassword__" />
-      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="false" />
+      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="__FeatureToggle_IgnoreSslCertificateFeature__" />
       <Setting name="FeatureToggle.Elk5Feature" value="__FeatureToggle_Elk5Feature__" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="__FeatureToggle_ApprenticeshipServiceApiFeature__" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="__FeatureToggle_RoatpProviderFlagsFeature__" />

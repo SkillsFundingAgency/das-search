@@ -40,7 +40,7 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
     <None Include="ServiceConfiguration.PreProd.cscfg" />
     <None Include="ServiceConfiguration.Prod.cscfg" />
-    <None Include="ServiceConfiguration.Release.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Release.cscfg" />
   </ItemGroup>
 
   <ItemGroup>
