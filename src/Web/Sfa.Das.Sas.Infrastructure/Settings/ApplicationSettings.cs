@@ -11,13 +11,13 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
     public sealed class ApplicationSettings : IConfigurationSettings
     {
-        public string ApprenticeshipIndexAlias => ConfigurationManager.AppSettings["ApprenticeshipIndexAlias"];
+        public string ApprenticeshipIndexAlias => CloudConfigurationManager.GetSetting("ApprenticeshipIndexAlias");
 
-        public string ProviderIndexAlias => ConfigurationManager.AppSettings["ProviderIndexAlias"];
+        public string ProviderIndexAlias => CloudConfigurationManager.GetSetting("ProviderIndexAlias");
 
-        public string ApprenticeshipApiBaseUrl => ConfigurationManager.AppSettings["ApprenticeshipApiBaseUrl"];
+        public string ApprenticeshipApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
 
-        public string BuildId => ConfigurationManager.AppSettings["BuildId"];
+        public string BuildId => CloudConfigurationManager.GetSetting("BuildId");
 
         public IEnumerable<Uri> ElasticServerUrls => GetElasticSearchIps();
 
@@ -29,17 +29,15 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri PostcodeTerminatedUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeTerminatedUrl"));
 
-        public string EnvironmentName => ConfigurationManager.AppSettings["EnvironmentName"];
-
-        public string ApplicationName => ConfigurationManager.AppSettings["ApplicationName"];
+        public string EnvironmentName => CloudConfigurationManager.GetSetting("EnvironmentName");
 
         public Uri SatisfactionSourceUrl => new Uri(CloudConfigurationManager.GetSetting("SatisfactionSourceUrl"));
 
         public Uri AchievementRateUrl => new Uri(CloudConfigurationManager.GetSetting("AchievementRateUrl"));
 
-        public string ElasticsearchUsername => ConfigurationManager.AppSettings["ElasticsearchUsername"];
+        public string ElasticsearchUsername => CloudConfigurationManager.GetSetting("ElasticsearchUsername");
 
-        public string ElasticsearchPassword => ConfigurationManager.AppSettings["ElasticsearchPassword"];
+        public string ElasticsearchPassword => CloudConfigurationManager.GetSetting("ElasticsearchPassword");
 
         public Uri CookieImprovementUrl => new Uri(CloudConfigurationManager.GetSetting("CookieImprovementUrl"));
 

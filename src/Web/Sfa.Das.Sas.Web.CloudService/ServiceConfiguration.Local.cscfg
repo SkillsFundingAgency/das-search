@@ -13,7 +13,18 @@
       <Setting name="CookieApplicationInsightsUrl" value="https://azure.microsoft.com/en-us/documentation/articles/app-insights-data-retention-privacy/" />
       <Setting name="CookieAboutUrl" value="http://www.aboutcookies.org/" />
       <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/collections/sfa-national-success-rates-tables" />
-      <Setting name="ManageApprenticeshipFundsUrl" value="https://www.gov.uk/guidance/manage-apprenticeship-funds"/>
+      <Setting name="ManageApprenticeshipFundsUrl" value="https://www.gov.uk/guidance/manage-apprenticeship-funds" />
+      <Setting name="EnvironmentName" value="local" />
+      <Setting name="ApprenticeshipIndexAlias" value="localapprenticeshipindexalias" />
+      <Setting name="ProviderIndexAlias" value="localproviderindexalias" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="" />
+      <Setting name="ElasticsearchUsername" value="" />
+      <Setting name="ElasticsearchPassword" value="" />
+      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="false" />
+      <Setting name="FeatureToggle.Elk5Feature" value="true" />
+      <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="true" />
+      <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="true" />
+      <Setting name="BuildId" value="" />
     </ConfigurationSettings>
     <Certificates>
     </Certificates>
