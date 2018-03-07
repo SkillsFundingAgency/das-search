@@ -198,7 +198,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Sfa.Das.Sas.Infrastructure.ruleset" />
     <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>

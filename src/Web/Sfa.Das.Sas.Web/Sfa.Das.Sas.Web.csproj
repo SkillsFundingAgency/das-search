@@ -703,32 +703,7 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js.map" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.map" />
-    <Content Include="Transform.ServiceConfiguration.CI.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Transform.ServiceConfiguration.Demo.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Transform.Nlog.config" />
-    <None Include="Transform.ServiceConfiguration.Prod.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Transform.ServiceConfiguration.PreProd.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="Transform.ServiceConfiguration.SystemTest.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Transform.ServiceDefinition.CI.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Transform.ServiceDefinition.csdef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Transform.ServiceConfiguration.Cloud.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Views\Provider\FrameworkResults.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>FrameworkResults.generated.cs</LastGenOutput>
@@ -757,18 +732,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Health\Start.cshtml" />
-    <Content Include="Transform.ServiceDefinition.Demo.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Transform.ServiceDefinition.Prod.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Transform.ServiceDefinition.PreProd.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="Transform.ServiceDefinition.SystemTest.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Provider\ProviderDetail.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ProviderDetail.generated.cs</LastGenOutput>
@@ -850,7 +813,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>24662</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
