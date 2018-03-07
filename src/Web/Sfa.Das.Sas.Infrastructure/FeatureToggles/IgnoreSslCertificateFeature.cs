@@ -1,5 +1,6 @@
 ﻿using FeatureToggle.Core;
 using FeatureToggle.Toggles;
+using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
 
 namespace Sfa.Das.Sas.Infrastructure.FeatureToggles
 {
