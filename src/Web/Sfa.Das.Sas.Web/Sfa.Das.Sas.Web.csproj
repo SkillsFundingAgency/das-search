@@ -603,7 +603,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="NLog.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -703,7 +702,6 @@
     <Content Include="Views\Shared\_Analytics.cshtml" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js.map" />
     <Content Include="scripts\vendor\jquery-1.12.3.min.map" />
-    <Content Include="Transform.Nlog.config" />
     <Content Include="Views\Provider\FrameworkResults.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>FrameworkResults.generated.cs</LastGenOutput>
