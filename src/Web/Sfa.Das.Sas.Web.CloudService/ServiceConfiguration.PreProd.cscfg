@@ -24,7 +24,7 @@
       <Setting name="FeatureToggle.Elk5Feature" value="__FeatureToggle.Elk5Feature__" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="__FeatureToggle.ApprenticeshipServiceApiFeature__" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="__FeatureToggle.RoatpProviderFlagsFeature__" />
-      <Setting name="BuildId" value="__BUILD_BUILDNUMBER__" />
+      <Setting name="BuildId" value="__Build.BuildNumber__" />
     </ConfigurationSettings>
     <Certificates>
       <Certificate name="WebSslCert" thumbprint="E280E23D933FE3A62AF335BE9768A2C9D65CCC9A" thumbprintAlgorithm="sha1" />
