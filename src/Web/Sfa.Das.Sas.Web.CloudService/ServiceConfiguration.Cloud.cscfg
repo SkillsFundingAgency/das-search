@@ -4,7 +4,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="__StorageConnectionString__" />
-      <Setting name="PostcodeUrl" value="http://dashttpstatuscodefake.azurewebsites.net/api/status/500/" />
+      <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
       <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
       <Setting name="ElasticServerUrls" value="__ElasticServerUrls__" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" />
