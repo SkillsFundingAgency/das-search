@@ -22,12 +22,14 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
+        private readonly IDeduplicationService _deduplicationService;
 
-        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings)
+        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IDeduplicationService deduplicationService)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
+            _deduplicationService = deduplicationService;
         }
 
         public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(string standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
@@ -198,34 +200,51 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private SearchResult<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(int page, int take, SearchDescriptor<StandardProviderSearchResultsItem> qryStr)
         {
             var skip = CalculateSkip(page, take);
+            var resultsForCount = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(0).Take(0));
 
-            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+                if (resultsForCount.ApiCall?.HttpStatusCode != 200)
+                {
+                    throw new SearchException($"Search for results count returned a status code of {resultsForCount.ApiCall?.HttpStatusCode}");
+                }
 
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
+                var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(0).Take((int)resultsForCount.Total));
 
-            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
+                if (results.ApiCall?.HttpStatusCode != 200)
+                {
+                    throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
+                }
 
-            var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
+                var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
 
-            var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
+                var documentsDeduped = _deduplicationService.DedupeAtYourLocationOnlyDocuments(documents).ToList();
 
-            return new SearchResult<StandardProviderSearchResultsItem>
-            {
-                Hits = documents,
-                Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation,
-                NationalProvidersAggregation = nationalProvidersAggregation
-            };
+                var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
+
+                var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
+
+                var documentsSubset = documentsDeduped.Skip(skip).Take(take);
+
+                return new SearchResult<StandardProviderSearchResultsItem>
+                {
+                    Hits = documentsSubset,
+                    Total = documentsDeduped.Count,
+                    TrainingOptionsAggregation = trainingOptionsAggregation,
+                    NationalProvidersAggregation = nationalProvidersAggregation
+                };
         }
 
         private SearchResult<FrameworkProviderSearchResultsItem> PerformFrameworkProviderSearchWithQuery(int page, int take, SearchDescriptor<FrameworkProviderSearchResultsItem> qryStr)
         {
             var skip = CalculateSkip(page, take);
 
-            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+            var resultsForCount = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(0).Take(0));
+
+            if (resultsForCount.ApiCall?.HttpStatusCode != 200)
+            {
+                throw new SearchException($"Search for results count returned a status code of {resultsForCount.ApiCall?.HttpStatusCode}");
+            }
+
+            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(0).Take((int)resultsForCount.Total));
 
             if (results.ApiCall?.HttpStatusCode != 200)
             {
@@ -234,14 +253,18 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
 
+            var documentsDeduped = _deduplicationService.DedupeAtYourLocationOnlyDocuments(documents).ToList();
+
             var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
 
             var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
 
+            var documentsSubset = documentsDeduped.Skip(skip).Take(take);
+
             return new SearchResult<FrameworkProviderSearchResultsItem>
             {
-                Hits = documents,
-                Total = results.Total,
+                Hits = documentsSubset,
+                Total = documentsDeduped.Count,
                 TrainingOptionsAggregation = trainingOptionsAggregation,
                 NationalProvidersAggregation = nationalProvidersAggregation
             };
