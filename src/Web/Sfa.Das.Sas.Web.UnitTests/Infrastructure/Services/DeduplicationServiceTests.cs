@@ -127,7 +127,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
             actual.ShouldAllBeEquivalentTo(expectedStandards);
         }
 
-
         [Test]
         public void ShouldHaveNoEffectOnStandardsSameUkprnsButNotOnlyAtOneLocation()
         {
