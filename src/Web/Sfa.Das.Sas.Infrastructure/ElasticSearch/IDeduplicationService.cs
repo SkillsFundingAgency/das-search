@@ -7,10 +7,5 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     {
         IEnumerable<T> DedupeAtYourLocationOnlyDocuments<T>(IEnumerable<T> documents) 
             where T : IApprenticeshipProviderSearchResultsItem;
-        Dictionary<string,long?> RetrieveTrainingOptionsAggregationElements<T>(IEnumerable<T> documents) 
-            where T : IApprenticeshipProviderSearchResultsItem;
-
-        Dictionary<string, long?> RetrieveNationalProvidersAggregationElements<T>(IEnumerable<T> documents)
-            where T : IApprenticeshipProviderSearchResultsItem;
     }
 }

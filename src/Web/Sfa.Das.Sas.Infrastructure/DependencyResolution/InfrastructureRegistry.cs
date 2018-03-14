@@ -61,6 +61,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IDeduplicationService>().Use<DeduplicationService>();
+            For<IProviderLocationProcessingService>().Use<ProviderLocationProcessingService>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
         }
 

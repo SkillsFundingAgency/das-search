@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
     using Sfa.Das.Sas.Infrastructure.FeatureToggles;
-
+    
     public sealed class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
     {
         private const string TrainingTypeAggregateName = "training_type";
@@ -24,13 +24,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IDeduplicationService _deduplicationService;
+        private readonly IProviderLocationProcessingService _providerLocationProcessingService;
 
-        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IDeduplicationService deduplicationService)
+        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IDeduplicationService deduplicationService, IProviderLocationProcessingService providerLocationProcessingService)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
             _deduplicationService = deduplicationService;
+            _providerLocationProcessingService = providerLocationProcessingService;
         }
 
         public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(string standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
@@ -42,10 +44,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 HasNonLevyContract = filter.HasNonLevyContract
             };
 
-           // var qryStr = CreateStandardProviderSearchQuery(standardId, coordinates, filter);
             var qryStrWithOutFilters = CreateStandardProviderSearchQuery(standardId, coordinates, filterWithNoSettings);
-
-            //return PerformStandardProviderSearchWithQuery(page, take, qryStr);
 
             return PerformProviderSearchWithQuery(page, take, qryStrWithOutFilters, filter);
         }
@@ -217,96 +216,37 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private SearchResult<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(int page, int take, SearchDescriptor<StandardProviderSearchResultsItem> qryStr)
-        {
-            var skip = CalculateSkip(page, take);
-            var resultsForCount = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(0).Take(0));
-
-            if (resultsForCount.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search for results count returned a status code of {resultsForCount.ApiCall?.HttpStatusCode}");
-            }
-
-            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(0).Take((int)resultsForCount.Total));
-            
-            if (results.ApiCall?.HttpStatusCode != 200)
-            {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
-
-            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
-
-            var documentsDeduped = _deduplicationService.DedupeAtYourLocationOnlyDocuments(documents).ToList();
-
-            var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
-
-            var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
-
-            var documentsSubset = documentsDeduped.Skip(skip).Take(take);
-
-            return new SearchResult<StandardProviderSearchResultsItem>
-            {
-                Hits = documentsSubset,
-                Total = documentsDeduped.Count,
-                TrainingOptionsAggregation = trainingOptionsAggregation,
-                NationalProvidersAggregation = nationalProvidersAggregation
-            };
-        }
-
         private SearchResult<T> PerformProviderSearchWithQuery<T>(int page, int take, SearchDescriptor<T> qryStrWithoutFilters, ProviderSearchFilter filter)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var skip = CalculateSkip(page, take);
 
             var resultsForCount = GetMatchingResultsCount(qryStrWithoutFilters);
-
             var results = GetAllResultsMatchingLocation(qryStrWithoutFilters, (int)resultsForCount.Total);
 
-            var documents = results.Hits.Select(MapToProviderSearchResultsItem).ToList();
+            var documentsFullList = results.Hits.Select(MapToProviderSearchResultsItem).ToList();
+            var documentsDeduped = _deduplicationService.DedupeAtYourLocationOnlyDocuments(documentsFullList).ToList();
 
-            var documentsDeduped = _deduplicationService.DedupeAtYourLocationOnlyDocuments(documents).ToList();
-            var trainingOptionsAggregation = _deduplicationService.RetrieveTrainingOptionsAggregationElements(documentsDeduped);
-            var nationalProvidersAggregation = _deduplicationService.RetrieveNationalProvidersAggregationElements(documentsDeduped);
+            var trainingOptionsAggregation = _providerLocationProcessingService.RetrieveTrainingOptionsAggregationElements(documentsDeduped);
+            var nationalProvidersAggregation = _providerLocationProcessingService.RetrieveNationalProvidersAggregationElements(documentsDeduped);
 
-            if (filter.SearchOption == ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly)
-            {
-                documentsDeduped = documentsDeduped.Where(x => x.NationalProvider).ToList();
-            }
+            var documentsDedupedAndFiltered = _providerLocationProcessingService.FilterProviderSearchResults(documentsDeduped, filter);
 
-            var isAll = filter.DeliveryModes == null;
-            var is100PercentEmxployer = filter.DeliveryModes != null && filter.DeliveryModes.Contains("100percentemployer");
-            var isDayRelease = filter.DeliveryModes != null && filter.DeliveryModes.Contains("dayrelease");
-            var isBlockRelease = filter.DeliveryModes != null && filter.DeliveryModes.Contains("blockrelease");
+            var documentsOnPage = documentsDedupedAndFiltered.Skip(skip).Take(take).ToList();
 
-            documentsDeduped = documentsDeduped
-                    .Where(x => (isAll
-                                 || (is100PercentEmxployer && x.DeliveryModes.Contains("100PercentEmployer"))
-                                || (isDayRelease && x.DeliveryModes.Contains("DayRelease"))
-                                || (isBlockRelease && x.DeliveryModes.Contains("BlockRelease"))))
-                                .ToList();
-
-            var documentsSubset = documentsDeduped.Skip(skip).Take(take).ToList();
-
-            IEnumerable<T> documentsSubsetRecast;
-
-            if (typeof(T) == typeof(FrameworkProviderSearchResultsItem))
-            {
-                documentsSubsetRecast = (IEnumerable<T>) documentsSubset.Select(x => (FrameworkProviderSearchResultsItem)x).ToList();
-            }
-            else
-            {
-                documentsSubsetRecast = (IEnumerable<T>)documentsSubset.Select(x => (StandardProviderSearchResultsItem)x).ToList();
-            }
+            var documentsOnPageCastToType = _providerLocationProcessingService.CastDocumentsToMatchingResultsItemType<T>(documentsOnPage);
 
             return new SearchResult<T>
             {
-                Hits = documentsSubsetRecast,
+                Hits = documentsOnPageCastToType,
                 Total = documentsDeduped.Count,
                 TrainingOptionsAggregation = trainingOptionsAggregation,
                 NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
-        
+
+       
+
         private IApprenticeshipProviderSearchResultsItem MapToProviderSearchResultsItem<T>(IHit<T> hitToProcess)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {

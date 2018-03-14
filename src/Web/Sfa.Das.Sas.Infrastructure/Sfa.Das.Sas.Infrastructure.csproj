@@ -149,6 +149,8 @@
   <ItemGroup>
     <Compile Include="Elasticsearch\DeduplicationService.cs" />
     <Compile Include="Elasticsearch\IDeduplicationService.cs" />
+    <Compile Include="Elasticsearch\IProviderLocationProcessingService.cs" />
+    <Compile Include="Elasticsearch\ProviderLocationProcessingService.cs" />
     <Compile Include="Extensions\MyCertificateIgnoringHttpConnection.cs" />
     <Compile Include="FeatureToggles\Elk5Feature.cs" />
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
