@@ -41,12 +41,12 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return res;
         }
 
-        public List<T> FilterProviderSearchResults<T>(List<T> documentsDeduped, ProviderSearchFilter filter)
+        public List<T> FilterProviderSearchResults<T>(List<T> documents, ProviderSearchFilter filter)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             if (filter.SearchOption == ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly)
             {
-                documentsDeduped = documentsDeduped.Where(x => x.NationalProvider).ToList();
+                documents = documents.Where(x => x.NationalProvider).ToList();
             }
 
             var isAll = filter.DeliveryModes == null;
@@ -54,31 +54,31 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             var isDayRelease = filter.DeliveryModes != null && filter.DeliveryModes.Contains("dayrelease");
             var isBlockRelease = filter.DeliveryModes != null && filter.DeliveryModes.Contains("blockrelease");
 
-            documentsDeduped = documentsDeduped
+            documents = documents
                 .Where(x => (isAll
                              || (is100PercentEmxployer && x.DeliveryModes.Contains("100PercentEmployer"))
                              || (isDayRelease && x.DeliveryModes.Contains("DayRelease"))
                              || (isBlockRelease && x.DeliveryModes.Contains("BlockRelease"))))
                 .ToList();
-            return documentsDeduped;
+            return documents;
         }
 
-        public IEnumerable<T> CastDocumentsToMatchingResultsItemType<T>(List<IApprenticeshipProviderSearchResultsItem> documentsSubset) 
+        public IEnumerable<T> CastDocumentsToMatchingResultsItemType<T>(List<IApprenticeshipProviderSearchResultsItem> documents)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
-            IEnumerable<T> documentsSubsetRecast = null;
+            IEnumerable<T> documentsRecast = null;
 
             if (typeof(T) == typeof(FrameworkProviderSearchResultsItem))
             {
-                documentsSubsetRecast = (IEnumerable<T>)documentsSubset.Select(x => (FrameworkProviderSearchResultsItem)x).ToList();
+                documentsRecast = (IEnumerable<T>)documents.Select(x => (FrameworkProviderSearchResultsItem)x).ToList();
             }
 
             if (typeof(T) == typeof(StandardProviderSearchResultsItem))
             {
-                documentsSubsetRecast = (IEnumerable<T>)documentsSubset.Select(x => (StandardProviderSearchResultsItem)x).ToList();
+                documentsRecast = (IEnumerable<T>)documents.Select(x => (StandardProviderSearchResultsItem)x).ToList();
             }
 
-            return documentsSubsetRecast;
+            return documentsRecast;
         }
     }
 }

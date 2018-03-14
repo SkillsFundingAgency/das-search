@@ -245,15 +245,13 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             };
         }
 
-       
-
         private IApprenticeshipProviderSearchResultsItem MapToProviderSearchResultsItem<T>(IHit<T> hitToProcess)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
 
             if (typeof(T) == typeof(FrameworkProviderSearchResultsItem))
             {
-                var hit = (IHit<FrameworkProviderSearchResultsItem>) hitToProcess;
+                var hit = (IHit<FrameworkProviderSearchResultsItem>)hitToProcess;
                 return new FrameworkProviderSearchResultsItem
                 {
                     Ukprn = hit.Source.Ukprn,
@@ -280,7 +278,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     HasNonLevyContract = hit.Source.HasNonLevyContract
                 };
             }
-            else
+
+            if (typeof(T) == typeof(StandardProviderSearchResultsItem))
             {
                 var hit = (IHit<StandardProviderSearchResultsItem>)hitToProcess;
                 return new StandardProviderSearchResultsItem
@@ -306,6 +305,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     HasNonLevyContract = hit.Source.HasNonLevyContract
                 };
             }
+
+            return null;
 
         }
 

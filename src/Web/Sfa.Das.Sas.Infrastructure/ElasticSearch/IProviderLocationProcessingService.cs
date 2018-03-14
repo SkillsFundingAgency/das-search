@@ -11,10 +11,10 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         Dictionary<string, long?> RetrieveNationalProvidersAggregationElements<T>(IEnumerable<T> documents)
             where T : IApprenticeshipProviderSearchResultsItem;
 
-        List<T> FilterProviderSearchResults<T>(List<T> documentsDeduped, ProviderSearchFilter filter)
+        List<T> FilterProviderSearchResults<T>(List<T> documents, ProviderSearchFilter filter)
             where T : class, IApprenticeshipProviderSearchResultsItem;
 
-        IEnumerable<T> CastDocumentsToMatchingResultsItemType<T>(List<IApprenticeshipProviderSearchResultsItem> documentsSubset)
+        IEnumerable<T> CastDocumentsToMatchingResultsItemType<T>(List<IApprenticeshipProviderSearchResultsItem> documents)
             where T : class, IApprenticeshipProviderSearchResultsItem;
 
     }
