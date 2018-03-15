@@ -1,6 +1,4 @@
-﻿using FeatureToggle.Core.Fluent;
-using Sfa.Das.Sas.Infrastructure.FeatureToggles;
-using SFA.DAS.NLog.Logger;
+﻿using System.Collections;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -8,13 +6,16 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using FeatureToggle.Core.Fluent;
     using Nest;
+    using SFA.DAS.NLog.Logger;
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Exceptions;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core.Configuration;
     using Sfa.Das.Sas.Core.Domain.Model;
-
+    using Sfa.Das.Sas.Infrastructure.FeatureToggles;
+    
     public sealed class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
     {
         private const string TrainingTypeAggregateName = "training_type";
@@ -22,24 +23,44 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
+        private readonly IDeduplicationService _deduplicationService;
+        private readonly IProviderLocationProcessingService _providerLocationProcessingService;
 
-        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings)
+        public ElasticsearchProviderLocationSearchProvider(IElasticsearchCustomClient elasticsearchCustomClient, ILog logger, IConfigurationSettings applicationSettings, IDeduplicationService deduplicationService, IProviderLocationProcessingService providerLocationProcessingService)
         {
             _elasticsearchCustomClient = elasticsearchCustomClient;
             _logger = logger;
             _applicationSettings = applicationSettings;
+            _deduplicationService = deduplicationService;
+            _providerLocationProcessingService = providerLocationProcessingService;
         }
 
         public SearchResult<StandardProviderSearchResultsItem> SearchStandardProviders(string standardId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
-            var qryStr = CreateStandardProviderSearchQuery(standardId, coordinates, filter);
-            return PerformStandardProviderSearchWithQuery(page, take, qryStr);
+            var filterWithNoSettings = new ProviderSearchFilter
+            {
+                DeliveryModes = null,
+                SearchOption = ProviderFilterOptions.ApprenticeshipLocation,
+                HasNonLevyContract = filter.HasNonLevyContract
+            };
+
+            var qryStrWithOutFilters = CreateStandardProviderSearchQuery(standardId, coordinates, filterWithNoSettings);
+
+            return PerformProviderSearchWithQuery(page, take, qryStrWithOutFilters, filter);
         }
 
         public SearchResult<FrameworkProviderSearchResultsItem> SearchFrameworkProviders(string frameworkId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
-            var qryStr = CreateFrameworkProviderSearchQuery(frameworkId, coordinates, filter);
-            return PerformFrameworkProviderSearchWithQuery(page, take, qryStr);
+            var filterWithNoSettings = new ProviderSearchFilter
+            {
+                DeliveryModes = null,
+                SearchOption = ProviderFilterOptions.ApprenticeshipLocation,
+                HasNonLevyContract = filter.HasNonLevyContract
+            };
+
+            var qryStrWithOutFilters = CreateFrameworkProviderSearchQuery(frameworkId, coordinates, filterWithNoSettings);
+
+            return PerformProviderSearchWithQuery(page, take, qryStrWithOutFilters, filter);
         }
 
         private static StandardProviderSearchResultsItem MapToStandardProviderSearchResultsItem(IHit<StandardProviderSearchResultsItem> hit)
@@ -195,56 +216,124 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
         }
 
-        private SearchResult<StandardProviderSearchResultsItem> PerformStandardProviderSearchWithQuery(int page, int take, SearchDescriptor<StandardProviderSearchResultsItem> qryStr)
+        private SearchResult<T> PerformProviderSearchWithQuery<T>(int page, int take, SearchDescriptor<T> qryStrWithoutFilters, ProviderSearchFilter filter)
+            where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var skip = CalculateSkip(page, take);
 
-            var results = _elasticsearchCustomClient.Search<StandardProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+            var resultsForCount = GetMatchingResultsCount(qryStrWithoutFilters);
+            var results = GetAllResultsMatchingLocation(qryStrWithoutFilters, (int)resultsForCount.Total);
 
-            if (results.ApiCall?.HttpStatusCode != 200)
+            var documentsFullList = results.Hits.Select(MapToProviderSearchResultsItem).ToList();
+            var documentsDeduped = _deduplicationService.DedupeAtYourLocationOnlyDocuments(documentsFullList).ToList();
+
+            var trainingOptionsAggregation = _providerLocationProcessingService.RetrieveTrainingOptionsAggregationElements(documentsDeduped);
+            var nationalProvidersAggregation = _providerLocationProcessingService.RetrieveNationalProvidersAggregationElements(documentsDeduped);
+
+            var documentsDedupedAndFiltered = _providerLocationProcessingService.FilterProviderSearchResults(documentsDeduped, filter);
+
+            var documentsOnPage = documentsDedupedAndFiltered.Skip(skip).Take(take).ToList();
+
+            var documentsOnPageCastToType = _providerLocationProcessingService.CastDocumentsToMatchingResultsItemType<T>(documentsOnPage);
+
+            return new SearchResult<T>
             {
-                throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
-            }
-
-            var documents = results.Hits.Select(MapToStandardProviderSearchResultsItem).ToList();
-
-            var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
-
-            var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
-
-            return new SearchResult<StandardProviderSearchResultsItem>
-            {
-                Hits = documents,
-                Total = results.Total,
+                Hits = documentsOnPageCastToType,
+                Total = documentsDeduped.Count,
                 TrainingOptionsAggregation = trainingOptionsAggregation,
                 NationalProvidersAggregation = nationalProvidersAggregation
             };
         }
 
-        private SearchResult<FrameworkProviderSearchResultsItem> PerformFrameworkProviderSearchWithQuery(int page, int take, SearchDescriptor<FrameworkProviderSearchResultsItem> qryStr)
+        private IApprenticeshipProviderSearchResultsItem MapToProviderSearchResultsItem<T>(IHit<T> hitToProcess)
+            where T : class, IApprenticeshipProviderSearchResultsItem
         {
-            var skip = CalculateSkip(page, take);
 
-            var results = _elasticsearchCustomClient.Search<FrameworkProviderSearchResultsItem>(_ => qryStr.Skip(skip).Take(take));
+            if (typeof(T) == typeof(FrameworkProviderSearchResultsItem))
+            {
+                var hit = (IHit<FrameworkProviderSearchResultsItem>)hitToProcess;
+                return new FrameworkProviderSearchResultsItem
+                {
+                    Ukprn = hit.Source.Ukprn,
+                    IsHigherEducationInstitute = hit.Source.IsHigherEducationInstitute,
+                    ContactUsUrl = hit.Source.ContactUsUrl,
+                    DeliveryModes = hit.Source.DeliveryModes,
+                    Email = hit.Source.Email,
+                    EmployerSatisfaction = hit.Source.EmployerSatisfaction,
+                    LearnerSatisfaction = hit.Source.LearnerSatisfaction,
+                    OverallAchievementRate = hit.Source.OverallAchievementRate,
+                    ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
+                    ProviderName = hit.Source.ProviderName,
+                    Phone = hit.Source.Phone,
+                    FrameworkId = hit.Source.FrameworkId,
+                    FrameworkCode = hit.Source.FrameworkCode,
+                    PathwayCode = hit.Source.PathwayCode,
+                    ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
+                    Level = hit.Source.Level,
+                    Website = hit.Source.Website,
+                    Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                    TrainingLocations = hit.Source.TrainingLocations,
+                    MatchingLocationId = hit?.InnerHits != null ? hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId : (int?) null,
+                    NationalProvider = hit.Source.NationalProvider,
+                    HasNonLevyContract = hit.Source.HasNonLevyContract
+                };
+            }
+
+            if (typeof(T) == typeof(StandardProviderSearchResultsItem))
+            {
+                var hit = (IHit<StandardProviderSearchResultsItem>)hitToProcess;
+                return new StandardProviderSearchResultsItem
+                {
+                    Ukprn = hit.Source.Ukprn,
+                    ContactUsUrl = hit.Source.ContactUsUrl,
+                    DeliveryModes = hit.Source.DeliveryModes,
+                    Email = hit.Source.Email,
+                    EmployerSatisfaction = hit.Source.EmployerSatisfaction,
+                    LearnerSatisfaction = hit.Source.LearnerSatisfaction,
+                    OverallAchievementRate = hit.Source.OverallAchievementRate,
+                    ApprenticeshipMarketingInfo = hit.Source.ApprenticeshipMarketingInfo,
+                    ProviderName = hit.Source.ProviderName,
+                    Phone = hit.Source.Phone,
+                    StandardCode = hit.Source.StandardCode,
+                    ApprenticeshipInfoUrl = hit.Source.ApprenticeshipInfoUrl,
+                    Website = hit.Source.Website,
+                    Distance = hit.Sorts != null ? Math.Round(double.Parse(hit.Sorts.DefaultIfEmpty(0).First().ToString()), 1) : 0,
+                    TrainingLocations = hit.Source.TrainingLocations,
+                    MatchingLocationId = hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId,
+                    NationalProvider = hit.Source.NationalProvider,
+                    IsHigherEducationInstitute = hit.Source.IsHigherEducationInstitute,
+                    HasNonLevyContract = hit.Source.HasNonLevyContract
+                };
+            }
+
+            return null;
+
+        }
+
+        private ISearchResponse<T> GetAllResultsMatchingLocation<T>(SearchDescriptor<T> qryStrWithoutFilters, int resultCount)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var results = _elasticsearchCustomClient.Search<T>(_ => qryStrWithoutFilters.Skip(0).Take(resultCount));
 
             if (results.ApiCall?.HttpStatusCode != 200)
             {
                 throw new SearchException($"Search returned a status code of {results.ApiCall?.HttpStatusCode}");
             }
 
-            var documents = results.Hits.Select(MapToFrameworkProviderSearhResultsItem).ToList();
+            return results;
+        }
 
-            var trainingOptionsAggregation = RetrieveAggregationElements(results.Aggs.Terms(TrainingTypeAggregateName));
+        private ISearchResponse<T> GetMatchingResultsCount<T>(SearchDescriptor<T> qryStrWithoutFilters)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var resultsForCount = _elasticsearchCustomClient.Search<T>(_ => qryStrWithoutFilters.Skip(0).Take(0));
 
-            var nationalProvidersAggregation = RetrieveAggregationElements(results.Aggs.Terms(NationalProviderAggregateName));
-
-            return new SearchResult<FrameworkProviderSearchResultsItem>
+            if (resultsForCount.ApiCall?.HttpStatusCode != 200)
             {
-                Hits = documents,
-                Total = results.Total,
-                TrainingOptionsAggregation = trainingOptionsAggregation,
-                NationalProvidersAggregation = nationalProvidersAggregation
-            };
+                throw new SearchException($"Search for results count returned a status code of {resultsForCount.ApiCall?.HttpStatusCode}");
+            }
+
+            return resultsForCount;
         }
 
         private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)

@@ -187,6 +187,8 @@
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
+    <Compile Include="Infrastructure\Services\DeduplicationServiceTests.cs" />
+    <Compile Include="Infrastructure\Services\ProviderLocationProcessingServicesTests.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ErrorControllerTests.cs" />
