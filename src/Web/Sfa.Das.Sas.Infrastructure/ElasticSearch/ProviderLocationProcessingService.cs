@@ -13,9 +13,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
            var res = new Dictionary<string, long?>();
 
             var documentList = documents.ToList();
-            long? count100PercentEmployer = documentList.Count(x => x.DeliveryModes.Contains("100PercentEmployer"));
-            long? countDayRelease = documentList.Count(x => x.DeliveryModes.Contains("DayRelease"));
-            long? countBlackRelease = documentList.Count(x => x.DeliveryModes.Contains("BlockRelease"));
+            long count100PercentEmployer = documentList.Count(x => x.DeliveryModes != null && x.DeliveryModes.Contains("100PercentEmployer"));
+            long countDayRelease = documentList.Count(x => x.DeliveryModes != null && x.DeliveryModes.Contains("DayRelease"));
+            long countBlackRelease = documentList.Count(x => x.DeliveryModes != null && x.DeliveryModes.Contains("BlockRelease"));
 
             res.Add("100percentemployer", count100PercentEmployer);
             res.Add("dayrelease", countDayRelease);
@@ -56,9 +56,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             documents = documents
                 .Where(x => (isAll
-                             || (is100PercentEmxployer && x.DeliveryModes.Contains("100PercentEmployer"))
-                             || (isDayRelease && x.DeliveryModes.Contains("DayRelease"))
-                             || (isBlockRelease && x.DeliveryModes.Contains("BlockRelease"))))
+                             || (is100PercentEmxployer && x.DeliveryModes != null && x.DeliveryModes.Contains("100PercentEmployer"))
+                             || (isDayRelease && x.DeliveryModes != null && x.DeliveryModes.Contains("DayRelease"))
+                             || (isBlockRelease && x.DeliveryModes != null && x.DeliveryModes.Contains("BlockRelease"))))
                 .ToList();
             return documents;
         }
