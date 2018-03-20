@@ -16,16 +16,16 @@ open Fake
 
 "Set version number"
    ==>"Set Solution Name"
-   ==>"Update WiN Assembly Info Version Numbers"
-   ==>"Clean Directories"
+   ==>"Update Assembly Info Version Numbers"
+   ==>"Clean Directories" 
    ==>"Build Projects"
    ==>"Run NUnit Tests"
    ==>"Run XUnit Tests"
    ==>"Run Jasmine Tests"
    ==>"Build Cloud Projects"
    ==>"Build Database project"
-   ==>"Build WebJob Project"
-   ==>"Publish Solution"
+   ==>"Build WebJob Project" 
+   ==>"Publish Solution"  
    ==>"Compile Views"
    ==>"Create Nuget Package"
 
@@ -36,5 +36,5 @@ open Fake
 "Set version number"
     ==>"Set Solution Name"
     ==> "Zip Compiled Source"
-
+   
 RunTargetOrDefault  "Create Nuget Package"
