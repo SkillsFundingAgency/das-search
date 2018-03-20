@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
@@ -12,19 +13,14 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             var resultsToReturn = new List<ProviderNameSearchResult>();
             foreach (var item in resultsToFilter)
             {
-                var details = new ProviderNameSearchResult { ProviderName = item.ProviderName, UkPrn = item.UkPrn };
-                if (item.Aliases != null)
+                var details = new ProviderNameSearchResult
                 {
-                    var aliasesToKeep = new List<string>();
-                    foreach (var alias in item.Aliases)
-                    {
-                        if (alias.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) <= -1) { continue; }
-
-                        aliasesToKeep.Add(alias.Trim());
-                    }
-
-                    details.Aliases = aliasesToKeep;
-                }
+                    ProviderName = item.ProviderName,
+                    UkPrn = item.UkPrn,
+                    Aliases = item.Aliases?
+                                .Where(m => m.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                                .Select(s => s.Trim()).ToList()
+                };
 
                 resultsToReturn.Add(details);
             }
