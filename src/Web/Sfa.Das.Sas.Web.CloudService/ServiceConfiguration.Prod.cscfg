@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="Sfa.Das.Sas.Web.CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="5" osVersion="*" schemaVersion="2015-04.2.6">
   <Role name="Sfa.Das.Sas.Web">
-    <Instances count="1" />
+    <Instances count="3" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="__StorageConnectionString__" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
@@ -32,4 +32,25 @@
       <Certificate name="WebSslCert" thumbprint="E280E23D933FE3A62AF335BE9768A2C9D65CCC9A" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
+      <NetworkConfiguration>
+    <Dns>
+      <DnsServers>
+        <DnsServer name="Primary" IPAddress="__PrimaryDnsIP__" />
+        <DnsServer name="Secondary" IPAddress="__SecondaryDnsIP__" />
+      </DnsServers>
+    </Dns>
+    <VirtualNetworkSite name="__vnet__" />
+    <AddressAssignments>
+      <InstanceAddress roleName="Sfa.Das.Sas.Web">
+        <Subnets>
+          <Subnet name="__subnet__" />
+        </Subnets>
+      </InstanceAddress>
+    </AddressAssignments>
+    <LoadBalancers>
+      <LoadBalancer name="__ilbname__">
+        <FrontendIPConfiguration type="private" subnet="__subnet__" staticVirtualNetworkIPAddress="10.78.125.242" />
+      </LoadBalancer>
+    </LoadBalancers>
+  </NetworkConfiguration>
 </ServiceConfiguration>

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using Elasticsearch.Net;
 using FeatureToggle.Core.Fluent;
 using Nest;
@@ -47,7 +48,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 			    settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
 		    }
 
-			settings.DisableDirectStreaming();
+	        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            settings.DisableDirectStreaming();
 		    settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
 		    settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkSearchResultsItem), "frameworkdocument"));
 		    settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));

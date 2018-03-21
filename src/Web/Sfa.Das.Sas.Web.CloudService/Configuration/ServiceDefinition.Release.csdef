@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="Sfa.Das.Sas.Web.CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
-  <WebRole name="Sfa.Das.Sas.Web" vmsize="Small">
+  <WebRole name="Sfa.Das.Sas.Web" vmsize="Standard_D2_v2">
     <Sites>
       <Site name="Web">
         <Bindings>
@@ -36,8 +36,8 @@
       <Setting name="LoggingRedisKey" />
     </ConfigurationSettings>
     <Endpoints>
-      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
-      <InputEndpoint name="Endpoint2" protocol="https" port="443" certificate="WebSslCert" />
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" loadBalancer="das-fatweb-ilb"/>
+      <InputEndpoint name="Endpoint2" protocol="https" port="443" certificate="WebSslCert" loadBalancer="das-fatweb-ilb"/>
     </Endpoints>
     <Certificates>
       <Certificate name="WebSslCert" storeLocation="LocalMachine" storeName="My" />

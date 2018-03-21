@@ -13,6 +13,7 @@
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>Sfa.Das.Sas.Web.CloudService</Name>
     <UseWebProjectPorts>True</UseWebProjectPorts>
+    <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup> 
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -34,12 +35,17 @@
   <!-- Items for the project -->
   <ItemGroup>
     <ServiceDefinition Include="ServiceDefinition.csdef" />
+    <None Include="Configuration\ServiceDefinition.Cloud.csdef" />
+    <None Include="Configuration\ServiceDefinition.Release.csdef" />
     <ServiceConfiguration Include="ServiceConfiguration.Local.cscfg" />
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
+    <None Include="ServiceConfiguration.PreProd.cscfg" />
+    <None Include="ServiceConfiguration.Prod.cscfg" />
+    <ServiceConfiguration Include="ServiceConfiguration.Release.cscfg" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Sfa.Das.Sas.WebContent" />
+    <Folder Include="Configuration" />
   </ItemGroup>
   <ItemGroup>
     <DiagnosticsConfiguration Include="Sfa.Das.Sas.WebContent\diagnostics.wadcfgx" />
