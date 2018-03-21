@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System.Linq;
+using Elasticsearch.Net;
 using FeatureToggle.Core.Fluent;
 using Nest;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -22,7 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 	        if (Is<IgnoreSslCertificateFeature>.Enabled)
 	        {
 		        using (var settings = new ConnectionSettings(
-					new StaticConnectionPool(_applicationSettings.ElasticServerUrls),
+					new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault()),
 					new MyCertificateIgnoringHttpConnection()))
 		        {
 					SetDefaultSettings(settings);
@@ -31,7 +32,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 				}
 			}
 
-			using (var settings = new ConnectionSettings(new StaticConnectionPool(_applicationSettings.ElasticServerUrls)))
+			using (var settings = new ConnectionSettings(new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault())))
 	        {
 		        SetDefaultSettings(settings);
 
