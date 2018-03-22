@@ -698,7 +698,8 @@ aside h2:first-child {
 
 /*pagination styles - provider search*/
 
-#search-provider-results {
+#search-provider-results,
+#provider-detail-view {
     .previous-next-navigation {
         padding-left: 0;
         position: relative;
