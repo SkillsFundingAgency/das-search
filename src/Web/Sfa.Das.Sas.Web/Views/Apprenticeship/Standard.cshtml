@@ -42,24 +42,22 @@
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
             @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
             @GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true)
-            <dt>Documents</dt>
-            <dd>
-                <div class="panel-indent panel-indent-info document-list">
-                    <ul>
-                        @GetDocumentItem(Model.StandardPdf, "Standard")
-                        @GetDocumentItem(Model.AssessmentPlanPdf, "Assessment Plan")
-                    </ul>
-                </div>
-            </dd>
+           
             @if (areOrganisationsPresent == false)
             {
-                const string noDetails = @"There are no end point assessment organisations for this standard yet. There is a monthly application process for organisations interested in delivering end-point assessment. " + 
-                                            "New organisations are added regularly.<br /><br />If you have an urgent need to select an assessment organisation for this standard, " +
-                                            "please email <a href='mailto:apprentice.assessment@education.gov.uk' target='_blank'>apprentice.assessment@education.gov.uk</a> with details.";
-                @GetStandardProperty("End Point Assessment", "no-assessment-organisations", noDetails)
-           
+                   const string noDetails = @"A government-approved organisation must assess apprentices towards the end of their apprenticeship. " +
+                                       "This end-point assessment ensures apprentices achieve the skills, training and any qualifications necessary to complete their apprenticeship. " +
+                                       "You can download the assessment plan from the Institute for Apprenticeships. " +
+                                       "There are no end-point assessment organisations for this apprenticeship yet. " +
+                                       "Please email <a href='mailto:apprentice.assessment@education.gov.uk' target='_blank'>apprentice.assessment@education.gov.uk</a> if you urgently need an end-point assessment organisation.";
+
+                @GetStandardProperty("How apprentices are assessed", "no-assessment-organisations", noDetails)
+                
             }
-</dl>
+         
+            @GetMoreInformationProperty(Model.StandardPageUri)
+
+        </dl>
         @if (areOrganisationsPresent)
     {
         <div class="grid-row">
@@ -119,6 +117,22 @@
         <dd id="@id">@Html.MarkdownToHtml(item)@if (item == null){ @Html.Raw("&nbsp;") }</dd>
     }
 }
+
+@helper GetMoreInformationProperty(string link)
+{
+    {
+        var details = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
+        if (link!=null && link.Trim() != string.Empty)
+        {
+            details = @"The Institute for Apprenticeships has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
+        }
+
+        <dt>More Information</dt>
+        <dd>@Html.MarkdownToHtml(details)</dd>
+    }}
+
+var words = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
+
 
 @helper GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
 {

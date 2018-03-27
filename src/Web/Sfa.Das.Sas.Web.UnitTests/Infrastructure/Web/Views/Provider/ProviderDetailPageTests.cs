@@ -283,7 +283,6 @@
                             Type = "Framework"
                         }
                     },
-                    Count = 1,
                     PaginationDetails = new PaginationDetails { LastPage = 1, NumberOfRecordsToSkip = 0, NumberPerPage = 20, TotalCount = 1, Page = 1 }
                 }
             };
