@@ -52,14 +52,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     public partial class Standard : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.StandardViewModel>
     {
 
-#line 112 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 108 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 109 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
@@ -70,7 +70,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 116 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 112 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -80,40 +80,40 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 5980), Tuple.Create("\"", 5988)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6100), Tuple.Create("\"", 6108)
 
-#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 5985), Tuple.Create<System.Object, System.Int32>(id
+#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 6105), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 5985), false)
+, 6105), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, Html.MarkdownToHtml(item));
 
 
 #line default
 #line hidden
 
-#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
                                                 if (item == null){ 
 
 #line default
 #line hidden
 
-#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
                                      WriteTo(__razor_helper_writer, Html.Raw("&nbsp;"));
 
 
 #line default
 #line hidden
 
-#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 113 "..\..\Views\Apprenticeship\Standard.cshtml"
                                                                                        }
 
 #line default
@@ -121,7 +121,7 @@ WriteTo(__razor_helper_writer, Html.MarkdownToHtml(item));
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 118 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 114 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
 
 
@@ -129,19 +129,19 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 119 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 115 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 121 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 117 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetMoreInformationProperty(string link)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 122 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 118 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     {
         var details = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
@@ -163,7 +163,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"more-information\"");
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 131 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 127 "..\..\Views\Apprenticeship\Standard.cshtml"
     WriteTo(__razor_helper_writer, Html.MarkdownToHtml(details));
 
 
@@ -172,26 +172,27 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 132 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 128 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
+
 
 #line default
 #line hidden
 });
 
-#line 132 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 129 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 137 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 131 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 138 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 132 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
@@ -202,7 +203,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "        <dt>");
 
 
-#line 141 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 135 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -212,20 +213,20 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6912), Tuple.Create("\"", 6920)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6923), Tuple.Create("\"", 6931)
 
-#line 142 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6917), Tuple.Create<System.Object, System.Int32>(id
+#line 136 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 6928), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6917), false)
+, 6928), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 142 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 136 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -234,7 +235,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 
 
-#line 143 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 137 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
 
 
@@ -242,19 +243,19 @@ WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 #line hidden
 });
 
-#line 144 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 138 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 146 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 140 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetFundingBandProperty(int value)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 147 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 141 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
@@ -271,7 +272,7 @@ WriteLiteralTo(__razor_helper_writer, " id=\"funding-cap\"");
 WriteLiteralTo(__razor_helper_writer, ">\r\n        Up to ");
 
 
-#line 152 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 146 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, fundingCapFormatted);
 
 
@@ -289,26 +290,26 @@ WriteLiteralTo(__razor_helper_writer, " rel=\"external\"");
 WriteLiteralTo(__razor_helper_writer, ">More information about funding</a>\r\n    </dd>\r\n");
 
 
-#line 155 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 149 "..\..\Views\Apprenticeship\Standard.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 155 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 149 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-#line 157 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 151 "..\..\Views\Apprenticeship\Standard.cshtml"
 public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 158 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 152 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     if (!string.IsNullOrEmpty(title))
     {
@@ -318,14 +319,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7546), Tuple.Create("\"", 7560)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7557), Tuple.Create("\"", 7571)
 
-#line 162 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 7553), Tuple.Create<System.Object, System.Int32>(pdfUrl
+#line 156 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 7564), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 7553), false)
+, 7564), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -335,7 +336,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n");
 WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 163 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 157 "..\..\Views\Apprenticeship\Standard.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -344,7 +345,7 @@ WriteTo(__razor_helper_writer, title);
 WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n");
 
 
-#line 166 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 160 "..\..\Views\Apprenticeship\Standard.cshtml"
     }
 
 
@@ -352,7 +353,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n
 #line hidden
 });
 
-#line 167 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 161 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
@@ -373,7 +374,7 @@ WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n
             
             #line default
             #line hidden
-WriteLiteral("\r\n<main");
+WriteLiteral("\r\n\r\n<main");
 
 WriteLiteral(" id=\"content\"");
 
@@ -396,7 +397,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 16 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 17 "..\..\Views\Apprenticeship\Standard.cshtml"
                Write(Model.Title);
 
             
@@ -409,7 +410,7 @@ WriteLiteral(" class=\"lede\"");
 WriteLiteral(">");
 
             
-            #line 18 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 19 "..\..\Views\Apprenticeship\Standard.cshtml"
                            Write(Model.OverviewOfRole);
 
             
@@ -435,19 +436,19 @@ WriteLiteral(" rel=\"nofollow\"");
 
 WriteLiteral(" id=\"ga-find-provider-top\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 957), Tuple.Create("\"", 1091)
+WriteAttribute("href", Tuple.Create(" href=\"", 959), Tuple.Create("\"", 1093)
             
-            #line 24 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                 , Tuple.Create(Tuple.Create("", 964), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+            #line 25 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                 , Tuple.Create(Tuple.Create("", 966), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 964), false)
+, 966), false)
 );
 
-WriteLiteral(">\r\n                        Find training providers\r\n                    </a>\r\n   " +
-"             </aside>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <sect" +
-"ion>\r\n        <header>\r\n            <h2");
+WriteLiteral(">\r\n                        Find training providers who offer this apprenticeship\r" +
+"\n                    </a>\r\n                </aside>\r\n            </div>\r\n       " +
+" </div>\r\n    </div>\r\n    <section>\r\n        <header>\r\n            <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
@@ -461,7 +462,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 38 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 39 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
 
             
@@ -472,7 +473,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 39 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 40 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetDurationProperty("Typical length", "length", Model.Duration.ToString()));
 
             
@@ -483,7 +484,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 40 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 41 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetFundingBandProperty(Model.MaxFunding));
 
             
@@ -494,7 +495,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 41 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 42 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements));
 
             
@@ -505,7 +506,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 42 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 43 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn));
 
             
@@ -516,7 +517,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 43 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 44 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetStandardProperty("Qualifications", "qualifications", Model.Qualifications));
 
             
@@ -527,30 +528,29 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 44 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 45 "..\..\Views\Apprenticeship\Standard.cshtml"
        Write(GetStandardProperty("Professional registration", "professional-registration", Model.ProfessionalRegistration, true));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n           \r\n");
+WriteLiteral("\r\n\r\n");
 
             
-            #line 46 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 47 "..\..\Views\Apprenticeship\Standard.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 46 "..\..\Views\Apprenticeship\Standard.cshtml"
+            #line 47 "..\..\Views\Apprenticeship\Standard.cshtml"
              if (areOrganisationsPresent == false)
             {
-                   const string noDetails = @"A government-approved organisation must assess apprentices towards the end of their apprenticeship. " +
-                                       "This end-point assessment ensures apprentices achieve the skills, training and any qualifications necessary to complete their apprenticeship. " +
-                                       "You can download the assessment plan from the Institute for Apprenticeships. " +
-                                       "There are no end-point assessment organisations for this apprenticeship yet. " +
-                                       "Please email <a href='mailto:apprentice.assessment@education.gov.uk' target='_blank'>apprentice.assessment@education.gov.uk</a> if you urgently need an end-point assessment organisation.";
-
+                const string noDetails = @"A government-approved organisation must assess apprentices towards the end of their apprenticeship.<br/><br/> " +
+                                    "This end-point assessment ensures apprentices achieve the skills, training and any qualifications necessary to complete their apprenticeship. <br/><br/>" +
+                                    "You can download the assessment plan from the Institute for Apprenticeships. " +
+                                    "There are no end-point assessment organisations for this apprenticeship yet. " +
+                                    "Please email <a href='mailto:apprentice.assessment@education.gov.uk' target='_blank'>apprentice.assessment@education.gov.uk</a> if you urgently need an end-point assessment organisation.";
                 
             
             #line default
@@ -565,94 +565,72 @@ WriteLiteral("\r\n           \r\n");
             
             #line 54 "..\..\Views\Apprenticeship\Standard.cshtml"
                                                                                                               
-                
             }
 
             
             #line default
             #line hidden
-WriteLiteral("         \r\n");
-
-WriteLiteral("            ");
+WriteLiteral("\r\n");
 
             
-            #line 58 "..\..\Views\Apprenticeship\Standard.cshtml"
-       Write(GetMoreInformationProperty(Model.StandardPageUri));
-
+            #line 57 "..\..\Views\Apprenticeship\Standard.cshtml"
             
-            #line default
-            #line hidden
-WriteLiteral("\r\n\r\n        </dl>\r\n");
-
-            
-            #line 61 "..\..\Views\Apprenticeship\Standard.cshtml"
-        
             
             #line default
             #line hidden
             
-            #line 61 "..\..\Views\Apprenticeship\Standard.cshtml"
-         if (areOrganisationsPresent)
-    {
+            #line 57 "..\..\Views\Apprenticeship\Standard.cshtml"
+             if (areOrganisationsPresent)
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div");
+WriteLiteral("                <dt>End Point Assessment</dt>\r\n");
 
-WriteLiteral(" class=\"grid-row\"");
-
-WriteLiteral(">\r\n            <div");
-
-WriteLiteral(" class=\"column-full\"");
-
-WriteLiteral(">\r\n                <p");
-
-WriteLiteral(" class=\"collapsible\"");
-
-WriteLiteral(">End Point Assessment </p>\r\n\r\n                <details>\r\n\r\n                    <s" +
-"ummary><span");
+WriteLiteral("                <dd>\r\n                    <details>\r\n                        <sum" +
+"mary><span");
 
 WriteLiteral(" class=\"summary\"");
 
 WriteLiteral(" style=\"text-decoration: none\"");
 
 WriteLiteral(">View a list of end point assessment organisations for this standard</span></summ" +
-"ary>\r\n\r\n                    <table");
+"ary>\r\n                        <table");
 
 WriteLiteral(" class=\"responsive\"");
 
-WriteLiteral(">\r\n                        <thead>\r\n                        <tr>\r\n               " +
-"             <th");
+WriteLiteral(">\r\n                            <thead>\r\n                                <tr>\r\n   " +
+"                                 <th");
 
 WriteLiteral(" scope=\"col\"");
 
-WriteLiteral(">Organisation</th>\r\n                            <th");
+WriteLiteral(">Organisation</th>\r\n                                    <th");
 
 WriteLiteral(" scope=\"col\"");
 
-WriteLiteral(">Phone Number</th>\r\n                            <th");
+WriteLiteral(">Phone Number</th>\r\n                                    <th");
 
 WriteLiteral(" scope=\"col\"");
 
-WriteLiteral(">Email</th>\r\n                        </tr>\r\n                        </thead>\r\n   " +
-"                     <tbody>\r\n");
+WriteLiteral(">Email</th>\r\n                                </tr>\r\n                            <" +
+"/thead>\r\n                            <tbody>\r\n");
 
             
-            #line 80 "..\..\Views\Apprenticeship\Standard.cshtml"
-                        
+            #line 72 "..\..\Views\Apprenticeship\Standard.cshtml"
+                            
             
             #line default
             #line hidden
             
-            #line 80 "..\..\Views\Apprenticeship\Standard.cshtml"
-                         foreach (var organisation in Model.AssessmentOrganisations)
-                        {
+            #line 72 "..\..\Views\Apprenticeship\Standard.cshtml"
+                             foreach (var organisation in Model.AssessmentOrganisations)
+                            {
 
             
             #line default
             #line hidden
-WriteLiteral("                            <tr>\r\n                                <td");
+WriteLiteral("                                <tr>\r\n                                    <td");
 
 WriteLiteral(" class=\"organisation-name\"");
 
@@ -661,55 +639,54 @@ WriteLiteral(" data-label=\"organisation\"");
 WriteLiteral(">\r\n");
 
             
-            #line 84 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                    
-            
-            #line default
-            #line hidden
-            
-            #line 84 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                     if (string.IsNullOrEmpty(organisation.Website))
-                                    {
+            #line 76 "..\..\Views\Apprenticeship\Standard.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 86 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                   Write(organisation.Name);
+            #line 76 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                         if (string.IsNullOrEmpty(organisation.Website))
+                                        {
+                                            
+            
+            #line default
+            #line hidden
+            
+            #line 78 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                       Write(organisation.Name);
 
             
             #line default
             #line hidden
             
-            #line 86 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                          
-                                    }
-                                    else
-                                    {
-                                        var linkProtocol = organisation.Website.StartsWith("http") ? string.Empty : "http://";
-
+            #line 78 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                              
+                                        }
+                                        else
+                                        {
+                                            var linkProtocol = organisation.Website.StartsWith("http") ? string.Empty : "http://";
 
             
             #line default
             #line hidden
-WriteLiteral("                                        <a");
+WriteLiteral("                                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4803), Tuple.Create("\"", 4844)
+WriteAttribute("href", Tuple.Create(" href=\"", 4767), Tuple.Create("\"", 4808)
             
-            #line 92 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4810), Tuple.Create<System.Object, System.Int32>(linkProtocol
-            
-            #line default
-            #line hidden
-, 4810), false)
-            
-            #line 92 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4823), Tuple.Create<System.Object, System.Int32>(organisation.Website
+            #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 4774), Tuple.Create<System.Object, System.Int32>(linkProtocol
             
             #line default
             #line hidden
-, 4823), false)
+, 4774), false)
+            
+            #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
+, Tuple.Create(Tuple.Create("", 4787), Tuple.Create<System.Object, System.Int32>(organisation.Website
+            
+            #line default
+            #line hidden
+, 4787), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -717,8 +694,8 @@ WriteLiteral(" target=\"_blank\"");
 WriteLiteral(">");
 
             
-            #line 92 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                Write(organisation.Name);
+            #line 83 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                                    Write(organisation.Name);
 
             
             #line default
@@ -726,13 +703,14 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n");
 
             
-            #line 93 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                    }
+            #line 84 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                        }
 
             
             #line default
             #line hidden
-WriteLiteral("                                </td>\r\n                                <td");
+WriteLiteral("                                    </td>\r\n                                    <t" +
+"d");
 
 WriteLiteral(" class=\"phone-number\"");
 
@@ -741,13 +719,13 @@ WriteLiteral(" data-label=\"phone-number\"");
 WriteLiteral(">");
 
             
-            #line 95 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                              Write(organisation.Phone);
+            #line 86 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                  Write(organisation.Phone);
 
             
             #line default
             #line hidden
-WriteLiteral("</td>\r\n                                <td");
+WriteLiteral("</td>\r\n                                    <td");
 
 WriteLiteral(" class=\"email\"");
 
@@ -755,15 +733,15 @@ WriteLiteral(" data-label=\"email\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5144), Tuple.Create("\"", 5177)
-, Tuple.Create(Tuple.Create("", 5151), Tuple.Create("mailto:", 5151), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 5124), Tuple.Create("\"", 5157)
+, Tuple.Create(Tuple.Create("", 5131), Tuple.Create("mailto:", 5131), true)
             
-            #line 96 "..\..\Views\Apprenticeship\Standard.cshtml"
-     , Tuple.Create(Tuple.Create("", 5158), Tuple.Create<System.Object, System.Int32>(organisation.Email
+            #line 87 "..\..\Views\Apprenticeship\Standard.cshtml"
+         , Tuple.Create(Tuple.Create("", 5138), Tuple.Create<System.Object, System.Int32>(organisation.Email
             
             #line default
             #line hidden
-, 5158), false)
+, 5138), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -771,32 +749,43 @@ WriteLiteral(" target=\"_blank\"");
 WriteLiteral(">");
 
             
+            #line 87 "..\..\Views\Apprenticeship\Standard.cshtml"
+                                                                                                                         Write(organisation.Email);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a></td>\r\n                                </tr>\r\n");
+
+            
+            #line 89 "..\..\Views\Apprenticeship\Standard.cshtml"
+                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                            </tbody>\r\n                        </table>\r\n         " +
+"           </details>\r\n                </dd>\r\n");
+
+            
+            #line 94 "..\..\Views\Apprenticeship\Standard.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
             #line 96 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                                                                                                     Write(organisation.Email);
+       Write(GetMoreInformationProperty(Model.StandardPageUri));
 
             
             #line default
             #line hidden
-WriteLiteral("</a></td>\r\n                            </tr>\r\n");
-
-            
-            #line 98 "..\..\Views\Apprenticeship\Standard.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        </tbody>\r\n                    </table>\r\n                <" +
-"/details>\r\n            </div>\r\n        </div>\r\n");
-
-            
-            #line 104 "..\..\Views\Apprenticeship\Standard.cshtml"
-    }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <div");
+WriteLiteral("\r\n        </dl>\r\n        \r\n\r\n        <div");
 
 WriteLiteral(" id=\"bottom-actions\"");
 
@@ -808,23 +797,22 @@ WriteLiteral(" rel=\"nofollow\"");
 
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5549), Tuple.Create("\"", 5683)
+WriteAttribute("href", Tuple.Create(" href=\"", 5637), Tuple.Create("\"", 5771)
             
-            #line 106 "..\..\Views\Apprenticeship\Standard.cshtml"
-                   , Tuple.Create(Tuple.Create("", 5556), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+            #line 101 "..\..\Views\Apprenticeship\Standard.cshtml"
+                   , Tuple.Create(Tuple.Create("", 5644), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 5556), false)
+, 5644), false)
 );
 
-WriteLiteral(">\r\n                Find training providers\r\n            </a>\r\n        </div>\r\n   " +
-" </section>\r\n</main>\r\n");
+WriteLiteral(">\r\n                Find training providers who offer this apprenticeship\r\n       " +
+"     </a>\r\n        </div>\r\n    </section>\r\n</main>\r\n\r\n");
 
 WriteLiteral("\r\n");
 
-WriteLiteral("\r\nvar words = \"The Institute for Apprenticeships has more detailed information ab" +
-"out this apprenticeship.\";\r\n\r\n\r\n");
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 
