@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 	        if (Is<IgnoreSslCertificateFeature>.Enabled)
 	        {
 		        using (var settings = new ConnectionSettings(
-					new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.First()),
+					new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault()),
 					new MyCertificateIgnoringHttpConnection()))
 		        {
 					SetDefaultSettings(settings);
@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 				}
 			}
 
-			using (var settings = new ConnectionSettings(new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.First())))
+			using (var settings = new ConnectionSettings(new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault())))
 	        {
 		        SetDefaultSettings(settings);
 

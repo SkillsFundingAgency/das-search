@@ -157,6 +157,22 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
 
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchResults(ProviderNameSearchQuery query)
+        {
+            var response = _mediator.SendAsync(query);
+
+            var viewModel = _mappingService.Map<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>(response.Result);
+
+            return View(viewModel);
+        }
+
         [HttpGet]
         public ActionResult Detail(ApprenticeshipProviderDetailQuery criteria)
         {
