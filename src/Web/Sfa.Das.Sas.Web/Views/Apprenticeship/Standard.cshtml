@@ -23,7 +23,7 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
                     <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                        Find training providers who offer this apprenticeship
+                        Find training providers
                     </a>
                 </aside>
             </div>
@@ -99,7 +99,7 @@
 
         <div id="bottom-actions">
             <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                Find training providers who offer this apprenticeship
+                Find training providers
             </a>
         </div>
     </section>
@@ -118,9 +118,9 @@
 {
     {
         var details = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
-        if (link!=null && link.Trim() != string.Empty)
+        if (!string.IsNullOrWhiteSpace(link))
         {
-            details = @"The Institute for Apprenticeships has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
+            details = $@"The Institute for Apprenticeships has more <a href='{link}' target='_blank'>detailed information</a> about this apprenticeship.";
         }
 
         <dt>More Information</dt>
