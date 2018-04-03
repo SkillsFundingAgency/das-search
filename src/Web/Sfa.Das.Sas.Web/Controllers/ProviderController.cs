@@ -146,10 +146,10 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             if (response.StatusCode == ProviderDetailResponse.ResponseCodes.HttpRequestException)
             {
-                var message = $"Provider Id wrong length: {ukprn}";
-                _logger.Warn($"400 - {message}");
+                var message = $"Not able to call the apprenticeship service.";
+                _logger.Warn($"{response.StatusCode} - {message}");
 
-                return new HttpNotFoundResult(message);
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, message);
             }
 
             var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider, response.ApprenticeshipTrainingSummary);
