@@ -1,0 +1,25 @@
+﻿@model Sfa.Das.Sas.ApplicationServices.Queries.ProviderNameSearchQuery
+@{
+    ViewBag.Title = "Home Page";
+    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
+    ViewBag.PageId = "provider-search-home";
+}
+<main id="content" role="main">
+    <div class="breadcrumbs">
+        <a href="/" class="link-back">Back</a>
+    </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge">
+                Find a training provider by name
+            </h1>
+            @{
+                Html.RenderPartial("_SearchProviderName");
+            }
+        </div>
+    </div>
+
+
+
+
+</main>
