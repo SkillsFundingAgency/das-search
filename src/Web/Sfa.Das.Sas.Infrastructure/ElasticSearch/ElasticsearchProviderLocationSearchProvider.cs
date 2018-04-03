@@ -1,19 +1,18 @@
-﻿using FeatureToggle.Core.Fluent;
-using Sfa.Das.Sas.Infrastructure.FeatureToggles;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using ApplicationServices;
+    using ApplicationServices.Exceptions;
+    using ApplicationServices.Models;
+    using Core.Configuration;
+    using Core.Domain.Model;
+    using FeatureToggle.Core.Fluent;
+    using FeatureToggles;
     using Nest;
-    using Sfa.Das.Sas.ApplicationServices;
-    using Sfa.Das.Sas.ApplicationServices.Exceptions;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Core.Domain.Model;
+    using SFA.DAS.NLog.Logger;
 
     public sealed class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
     {
