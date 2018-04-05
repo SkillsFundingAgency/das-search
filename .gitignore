@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+*.generated.cs
 .vs/
 
 # Orig files from merge conflicts
