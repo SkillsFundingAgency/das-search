@@ -33,5 +33,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public List<Organisation> AssessmentOrganisations { get; set; }
 
+        public string StandardPageUri { get; set; }
+
     }
 }
