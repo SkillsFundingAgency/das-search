@@ -157,7 +157,11 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
 #line hidden
                     WriteLiteralTo(__razor_helper_writer, "        <dt>More Information</dt>\r\n");
 
-                    WriteLiteralTo(__razor_helper_writer, "        <dd>");
+                    WriteLiteralTo(__razor_helper_writer, "        <dd");
+
+                    WriteLiteralTo(__razor_helper_writer, " id=\"more-information\"");
+
+                    WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 131 "..\..\Views\Apprenticeship\Standard.cshtml"
@@ -209,14 +213,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
 
                     WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-                    WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6890), Tuple.Create("\"", 6898)
+                    WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6912), Tuple.Create("\"", 6920)
 
 #line 142 "..\..\Views\Apprenticeship\Standard.cshtml"
-                        , Tuple.Create(Tuple.Create("", 6895), Tuple.Create<System.Object, System.Int32>(id
+                        , Tuple.Create(Tuple.Create("", 6917), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-                            , 6895), false)
+                            , 6917), false)
                     );
 
                     WriteLiteralTo(__razor_helper_writer, ">");
@@ -315,14 +319,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
 #line hidden
                     WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-                    WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7524), Tuple.Create("\"", 7538)
+                    WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7546), Tuple.Create("\"", 7560)
 
 #line 162 "..\..\Views\Apprenticeship\Standard.cshtml"
-                        , Tuple.Create(Tuple.Create("", 7531), Tuple.Create<System.Object, System.Int32>(pdfUrl
+                        , Tuple.Create(Tuple.Create("", 7553), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-                            , 7531), false)
+                            , 7553), false)
                     );
 
                     WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
