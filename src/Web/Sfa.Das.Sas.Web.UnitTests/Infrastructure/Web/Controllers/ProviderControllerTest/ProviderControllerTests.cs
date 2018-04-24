@@ -3,6 +3,7 @@
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderControllerTest
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web;
@@ -16,6 +17,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
     using Moq;
     using NUnit.Framework;
     using Sas.Web.Controllers;
+    using Sfa.Das.Sas.Core.Configuration;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using ViewModels;
 
@@ -52,7 +54,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                     StatusCode = ProviderDetailResponse.ResponseCodes.Success
                 }));
 
-            var providerController = new ProviderController(null, null, mockMediator.Object, null);
+            var config = new Mock<IConfigurationSettings>();
+            config.Setup(m => m.HideAboutProviderForUkprns)
+                .Returns(new List<long>());
+
+            var providerController = new ProviderController(null, null, mockMediator.Object, config.Object);
             var result = providerController.ProviderDetail(It.IsAny<long>()).Result;
             result.Should().BeOfType<ViewResult>();
 

@@ -1,23 +1,18 @@
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using ViewModels;
 
     public static class ProviderDetailViewModelMapper
     {
-        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary)
+        public static ProviderDetailViewModel GetProviderDetailViewModel(
+            Provider provider,
+            ApprenticeshipTrainingSummary apprenticeshipTrainingSummary,
+            IEnumerable<long> hideAboutThisProviderForUlns = null)
         {
-            var viewModel = new ProviderDetailViewModel {HasMoreThanOneTradingName = false };
-
-            if (provider.Aliases != null && provider.Aliases.Any())
-            {
-                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
-                if (provider.Aliases.Count() > 1)
-                {
-                    viewModel.HasMoreThanOneTradingName = true;
-                }
-            }
+            hideAboutThisProviderForUlns = hideAboutThisProviderForUlns ?? new List<long>();
 
             var employerSatisfationMessage =
                 (provider.EmployerSatisfaction > 0)
@@ -29,23 +24,33 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                     ? ProviderMappingHelper.GetPercentageText(provider.LearnerSatisfaction)
                     : ProviderMappingHelper.GetPercentageText(null);
 
-            viewModel.Email = provider.Email;
-            viewModel.IsEmployerProvider = provider.IsEmployerProvider;
-            viewModel.EmployerSatisfaction = provider.EmployerSatisfaction;
-            viewModel.EmployerSatisfactionMessage = employerSatisfationMessage;
-            viewModel.IsHigherEducationInstitute = provider.IsHigherEducationInstitute;
-            viewModel.LearnerSatisfaction = provider.LearnerSatisfaction;
-            viewModel.LearnerSatisfactionMessage = learnerSatisfationMessage;
-            viewModel.NationalProvider = provider.NationalProvider;
-            viewModel.Phone = provider.Phone;
-            viewModel.UkPrn = provider.Ukprn;
-            viewModel.ProviderName = provider.ProviderName;
-            viewModel.Website = provider.Website;
-            viewModel.MarketingInfo = provider.MarketingInfo;
-            viewModel.ApprenticeshipTrainingSummary = apprenticeshipTrainingSummary;
-            viewModel.HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee;
-            viewModel.IsNew = provider.IsNew;
-            viewModel.IsLevyPayerOnly = provider.IsLevyPayerOnly;
+            var viewModel = new ProviderDetailViewModel
+            {
+                DisplayAboutThisProvider = !hideAboutThisProviderForUlns.Contains(provider.Ukprn),
+                Email = provider.Email,
+                IsEmployerProvider = provider.IsEmployerProvider,
+                EmployerSatisfaction = provider.EmployerSatisfaction,
+                EmployerSatisfactionMessage = employerSatisfationMessage,
+                IsHigherEducationInstitute = provider.IsHigherEducationInstitute,
+                LearnerSatisfaction = provider.LearnerSatisfaction,
+                LearnerSatisfactionMessage = learnerSatisfationMessage,
+                NationalProvider = provider.NationalProvider,
+                Phone = provider.Phone,
+                UkPrn = provider.Ukprn,
+                ProviderName = provider.ProviderName,
+                Website = provider.Website,
+                MarketingInfo = provider.MarketingInfo,
+                ApprenticeshipTrainingSummary = apprenticeshipTrainingSummary,
+                HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee,
+                IsNew = provider.IsNew,
+                IsLevyPayerOnly = provider.IsLevyPayerOnly
+            };
+
+            if (provider.Aliases != null && provider.Aliases.Any())
+            {
+                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
+            }
+
             return viewModel;
         }
     }
