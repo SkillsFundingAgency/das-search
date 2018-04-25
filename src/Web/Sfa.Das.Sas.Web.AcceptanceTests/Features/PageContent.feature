@@ -31,4 +31,4 @@ Scenario: Standard Details Page
 	And  I choose Search Button
 	Then I am on the Search Results page	
 	When I choose First Standard Result
-	Then I am on the Standard Details page
+	Then I am on the Standard Details page 
