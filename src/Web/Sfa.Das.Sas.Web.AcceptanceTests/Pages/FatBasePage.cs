@@ -8,6 +8,8 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
     {
         protected abstract string PageTitle { get; }
 
+        public IWebElement Heading => GetByCss("h1.heading-xlarge");
+
         protected FatBasePage(IWebDriver webDriver) : base(webDriver)
         {
         }

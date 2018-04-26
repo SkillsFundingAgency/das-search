@@ -31,21 +31,4 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests
             Set(searchPage.SearchFor(searchTerm));
         }
     }
-
-    [Binding]
-    public class ApprenticeshipSteps : StepsBase
-    {
-        [When(@"I chooes the first result")]
-        public void WhenIChooesTheFirstResult()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
-        [Then(@"I see the apprenticeship page with heading '(.*)'")]
-        public void ThenISeeAPageWithHeading(string heading)
-        {
-            ScenarioContext.Current.Pending();
-        }
-
-    }
 }

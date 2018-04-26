@@ -57,6 +57,12 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests
         {
             var searchResultPage = Get<SearchResultPage>();
             searchResultPage.SortBy("Level (high to low)");
+        }
+
+        [Then(@"results are sorted from High to Low")]
+        public void ThenResultsAreSordtedFromHighToLow()
+        {
+            var searchResultPage = Get<SearchResultPage>();
             var results = searchResultPage.GetAllResults();
             CollectionAssert.IsOrdered(results.Select(m => m.Level).Reverse());
         }
@@ -66,8 +72,15 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests
         {
             var searchResultPage = Get<SearchResultPage>();
             searchResultPage.SortBy("Level (low to high)");
+        }
+
+        [Then(@"results are sorted from Low to High")]
+        public void ThenResultsAreSortedFromLowToHigh()
+        {
+            var searchResultPage = Get<SearchResultPage>();
             var results = searchResultPage.GetAllResults();
             CollectionAssert.IsOrdered(results.Select(m => m.Level));
         }
+
     }
 }

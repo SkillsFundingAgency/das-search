@@ -11,5 +11,7 @@ Scenario: Sort Apprenticeship Search Results Page
 	Then  I am on the Search Results page
 	When  I choose High to Low Option Selector
 	Then  I am on the Search Results page
+	And results are sorted from High to Low 
 	When  I choose Low to High Option Selector
 	Then  I am on the Search Results page
+	And results are sorted from Low to High

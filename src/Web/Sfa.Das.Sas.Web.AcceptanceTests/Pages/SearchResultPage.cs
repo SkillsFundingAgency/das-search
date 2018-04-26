@@ -42,6 +42,13 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
             );
         }
 
+        internal ApprenticeshipPage ClickOnResult(int resultIndex)
+        {
+            var result = GetByCss($"#apprenticeship-results a:nth-child({resultIndex})");
+            result.Click();
+            return new ApprenticeshipPage(Driver);
+        }
+
         internal void SortBy(string v)
         {
             var el = new SelectElement(SortingDropdown);

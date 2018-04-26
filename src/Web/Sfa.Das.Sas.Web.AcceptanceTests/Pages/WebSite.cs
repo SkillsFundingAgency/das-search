@@ -19,15 +19,21 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
             return new StartPage(WebBrowserDriver);
         }
 
-        internal void Close()
-        {
-            WebBrowserDriver.Quit();
-        }
-
         internal SearchResultPage NavigateToSearchResultPage()
         {
             WebBrowserDriver.Navigate().GoToUrl(BaseUrl.Combine("Apprenticeship/SearchResults?Keywords="));
             return new SearchResultPage(WebBrowserDriver);
+        }
+
+        internal ProviderLocationSearchResultPage NavigateToSearchProviderLocationResultPage(string course, string postCode)
+        {
+            WebBrowserDriver.Navigate().GoToUrl(BaseUrl.Combine($"Provider/FrameworkResults?PostCode={postCode}&IsLevyPayingEmployer=true&apprenticeshipid={course}"));
+            return new ProviderLocationSearchResultPage(WebBrowserDriver);
+        }
+
+        internal void Close()
+        {
+            WebBrowserDriver.Quit();
         }
     }
 }
