@@ -7,19 +7,9 @@
 
 Scenario: Sort Apprenticeship Search Results Page 
 	Given I navigated to the Search page
-	When  I choose Search Button
+	When  I search for 'account'
 	Then  I am on the Search Results page
-	When  I wait for the view to become active
-	Then I see
-	| Field                 | Rule   | Value |
-	| First Standard Result | Exists | True  |
-	| Sorting Dropdown      | Exists | True  |
-	
-	When  I choose High To Low Option Selector	
-	And   I choose Update Results Button	
-	And  I wait for the view to become active
+	When  I choose High to Low Option Selector
 	Then  I am on the Search Results page
 	When  I choose Low to High Option Selector
-	And  I wait for the view to become active	
-	When  I choose Update Results Button	
 	Then  I am on the Search Results page
