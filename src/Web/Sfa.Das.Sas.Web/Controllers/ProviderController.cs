@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -14,6 +15,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
@@ -152,7 +154,10 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, message);
             }
 
-            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider, response.ApprenticeshipTrainingSummary);
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(
+                response.Provider, 
+                response.ApprenticeshipTrainingSummary, 
+                _settings.HideAboutProviderForUkprns);
 
             return View(viewModel);
         }

@@ -4,8 +4,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderDetailViewModel
    {
-       public string TradingNames { get; set; }
-        public bool HasMoreThanOneTradingName { get; set; }
+        public string TradingNames { get; set; }
         public string Email { get; set; }
         public double EmployerSatisfaction { get; set; }
         public string EmployerSatisfactionMessage { get; set; }
@@ -23,5 +22,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool HasParentCompanyGuarantee { get; set; }
         public bool IsNew { get; set; }
         public bool IsLevyPayerOnly { get; set; }
+        public bool DisplayAboutThisProvider { get; set; }
     }
 }

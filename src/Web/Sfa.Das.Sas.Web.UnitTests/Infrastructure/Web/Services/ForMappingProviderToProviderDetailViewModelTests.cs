@@ -35,7 +35,7 @@
             providerDetails.Website.Should().Be(Website);
             providerDetails.MarketingInfo.Should().Be(MarketingInfo);
             providerDetails.ApprenticeshipTrainingSummary.Should().Be(apprenticeshipTrainingSummary);
-            providerDetails.HasMoreThanOneTradingName.Should().Be(false);
+            providerDetails.DisplayAboutThisProvider.Should().Be(true);
 
         }
 
@@ -59,7 +59,20 @@
 
             var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.TradingNames.Should().Be(tradingNames);
-            providerDetails.HasMoreThanOneTradingName.Should().Be(false);
+            providerDetails.DisplayAboutThisProvider.Should().Be(true);
+        }
+
+        [Test]
+        public void ShouldNotDisplayAboutThisProvider()
+        {
+            var aliases = new List<string> { "alias 1" };
+            const string tradingNames = "alias 1";
+
+            var provider = GetProvider();
+            provider.Aliases = aliases;
+
+            var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary(), new List<long> { UkPrn});
+            providerDetails.DisplayAboutThisProvider.Should().Be(false);
         }
 
         [Test]
@@ -73,8 +86,8 @@
 
             var providerDetails = ProviderDetailViewModelMapper.GetProviderDetailViewModel(provider, GetApprenticeshipTrainingSummary());
             providerDetails.TradingNames.Should().Be(tradingNames);
-            providerDetails.HasMoreThanOneTradingName.Should().Be(true);
         }
+
         [Test]
         public void ShouldMapAllSeveralAliasValuesCorrectly()
         {
