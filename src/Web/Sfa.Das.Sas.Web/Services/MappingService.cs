@@ -229,7 +229,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Standard.Duration))
                 .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))
                 .ForMember(x => x.AssessmentOrganisations, y => y.MapFrom(z => z.AssessmentOrganisations))
-                .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri));
+                .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri))
+                .ForMember(x => x.LastDateForNewStarts, y => y.MapFrom(z => z.Standard.LastDateForNewStarts))
+                ;
 
             // Framework detail page
             cfg.CreateMap<GetFrameworkResponse, FrameworkViewModel>()
