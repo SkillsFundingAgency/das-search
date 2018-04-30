@@ -21,79 +21,79 @@
         </div>
     </div>
     <div class="grid-row">
-        <div class="column-two-thirds">
+        <div class="column-two-thirds"></div>
             <dl class="data-list--provider data-list--compact">
                 @if (!string.IsNullOrEmpty(Model.TradingNames))
-        {
-            <dt>Trading names:</dt>
-            <dd id="trading-names">@Model.TradingNames</dd>
-}
+                {
+                    <dt>Trading names:</dt>
+                    <dd id="trading-names">@Model.TradingNames</dd>
+                }
                 <dt>UKPRN:</dt>
                 <dd>@Model.UkPrn</dd>
             </dl>
             @{
-        if (Model.IsLevyPayerOnly)
-        {
-            <p id="levy-payer-only" class="detail-highlight">
-                Only levy paying employers can work with this provider
-            </p>
-}
-if (Model.HasParentCompanyGuarantee)
-{
-        <p id="parent-company-guarantee" class="detail-highlight">
-            Provider is supported by a parent company guarantee
-        </p>
-}
+                if (Model.IsLevyPayerOnly)
+                {
+                    <p id="levy-payer-only" class="detail-highlight">
+                        Only levy paying employers can work with this provider
+                    </p>
+                }
+                if (Model.HasParentCompanyGuarantee)
+                {
+                        <p id="parent-company-guarantee" class="detail-highlight">
+                            Provider is supported by a parent company guarantee
+                        </p>
+                }
 
-if (Model.IsNew)
-{
-        <p id="is-new-provider" class="detail-highlight">
-            New organisation with no financial track record
-        </p>
-}
+                if (Model.IsNew)
+                {
+                        <p id="is-new-provider" class="detail-highlight">
+                            New organisation with no financial track record
+                        </p>
+                }
             }
 
             @if (!Model.HasMoreThanOneTradingName)
-    {
-        <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
-if (string.IsNullOrEmpty(Model.MarketingInfo))
-{
-        <span>There is no marketing information available about this provider.</span>
-}
-else
-{
-        @Html.MarkdownToHtml(Model.MarketingInfo)
-}
-}
-    @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
-    {
-        <div id="search-app-offered">
-            <h2 class="heading-medium app-offered">
-                @Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount Apprenticeships offered
-            </h2>
-        </div>
-        <table class="app-details">
-            <thead>
-                <tr>
-                    <th>Apprenticeship</th>
-                    <th>Type</th>
-                    <th>Level</th>
-                    <th><span class="visibility-hidden">View details</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Type</td>
-                <td>@item.Level</td>
-                <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
-            </tr>
-}
-            </tbody>
-        </table>
-}
+            {
+                <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
+                if (string.IsNullOrEmpty(Model.MarketingInfo))
+                {
+                        <span>There is no marketing information available about this provider.</span>
+                }
+                else
+                {
+                        @Html.MarkdownToHtml(Model.MarketingInfo)
+                }
+            }
+            @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
+            {
+                <div id="search-app-offered">
+                    <h2 class="heading-medium app-offered">
+                        @Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount Apprenticeships offered
+                    </h2>
+                </div>
+                <table class="app-details">
+                    <thead>
+                        <tr>
+                            <th>Apprenticeship</th>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th><span class="visibility-hidden">View details</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Type</td>
+                                <td>@item.Level</td>
+                                <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
             <nav role="navigation">
                 <ul class="previous-next-navigation">
                  @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
@@ -126,23 +126,30 @@ else
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
-                     @{var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";}
-                    <dt class="apprenticeshipContactTitle">Website:</dt>
-                    <dd>
-                        <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
-                            @Html.Raw(Model.ProviderName + " website")
-                        </a>
-                    </dd>
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Website))
+                        {
+                            var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";
+                            <dt class="apprenticeshipContactTitle">Website:</dt>
+                            <dd>
+                                <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
+                                    @Html.Raw(Model.ProviderName + " website")
+                                </a>
+                            </dd>
+                        }
+
+                    }
+                    
 
                     @{
-                    if (!string.IsNullOrEmpty(Model.Phone))
+                        if (!string.IsNullOrEmpty(Model.Phone))
                         {
-                        <dt class="phone-title">Phone number:</dt>
-                        <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
+                            <dt class="phone-title">Phone number:</dt>
+                            <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
                         }
                     }
                     @{
-                    if (!string.IsNullOrEmpty(Model.Email))
+                        if (!string.IsNullOrEmpty(Model.Email))
                         {
                             <dt class="email-title">Email:</dt>
                             <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
@@ -204,10 +211,10 @@ else
 
 @helper CreateProgressBar(string message, int progress)
 {
-if (progress > 0)
-{
+    if (progress > 0)
+    {
         <div class="progress-container">
             <div class="progressbar" style="width: @progress%"></div>
         </div>
-}
+    }
 }
