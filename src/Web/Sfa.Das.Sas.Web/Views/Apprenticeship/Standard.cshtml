@@ -17,6 +17,19 @@
                     @Model.Title
                 </h1>
                 <p class="lede">@Model.OverviewOfRole</p>
+                @if (Model.LastDateForNewStarts.HasValue && Model.LastDateForNewStarts.Value <= DateTime.Today.AddYears(1))
+                {
+                    <br/>
+                    <div class="notice">
+                        <i class="icon icon-important">
+                            <span class="visuallyhidden">Warning</span>
+                        </i>
+                        <strong class="bold-small">
+                            This apprenticeship is closed to new starters from @Model.DayAfterLastDateForNewStartsFormatted
+
+                        </strong>
+                    </div>
+                }
             </div>
         </div>
         <div class="column-third">
