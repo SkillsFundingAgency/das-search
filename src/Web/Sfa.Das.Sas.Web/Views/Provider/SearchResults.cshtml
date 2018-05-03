@@ -5,7 +5,6 @@
 
 @{
     ViewBag.Title = "Search Results";
-    ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
     ViewBag.PageId = "provider-search";
 }
 <main id="content" role="main">
@@ -16,11 +15,9 @@
         <div class="column-full">
             <hgroup class="hgroup">
                 <h1 class="heading-xlarge">
-                    Search results
+                    Find a training provider by name
                 </h1>
-                @{
-                    // Html.RenderPartial("_SearchResultMessage");
-                }
+             
             </hgroup>
 
             @if (Model.TotalResults == 0)
@@ -28,9 +25,8 @@
                 using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
                 {
                     <div class="form-group">
-                        <label for="keywords">
-                            <span class="form-label-bold">Try a new search</span>
-                            <span class="form-hint">Can include job title or apprenticeship</span>
+                        <label for="searchTerm">
+                            <span class="form-hint">Enter a training provider name</span>
                         </label>
                         <span class="error-message"></span>
                         <input type="search" id="searchTerm" name="SearchTerm" class="text-box form-control" maxlength="200">
@@ -48,8 +44,8 @@
             {
                 <div class="column-two-thirds">
                     <div class="form-group search-form">
-                        <label for="keywords">
-                            <span class="form-label-bold">Showing search results for:</span>
+                        <label for="searchTerm">
+                            <span class="form-hint">Enter a training provider name</span>
                         </label>
                         <input type="search" id="searchTerm" name="SearchTerm" class="form-control form-control-3-4" value="@Model.SearchTerm" maxlength="200">
                         <input id="submit-keywords" class="button" type="submit" value="Search" />
@@ -59,28 +55,15 @@
         }
     </div>
     <div class="grid-row">
-        @if (!Model.HasError && Model.TotalResults > 0)
+        @if (!Model.HasError && !Model.ShortSearchTerm &&  Model.TotalResults > 0)
         {
-            <div class="column-one-third">
-                <div class="editSearch">
-                    <h2 class="heading-medium">
-                        <a href="#EditSearch">Filter results</a>
-                    </h2>
-                    <div id="EditSearch">
-                        @FilterForm("filter-box")
-                    </div>
-                </div>
-            </div>
-
             <div id="apprenticeship-results" class="column-two-thirds">
                 
+                <span class="form-hint"> @Model.TotalResults results found</span>
 
                 @foreach (var item in Model.Results)
                 {
                     <article class="result">
-                        <header>
-                            Header details
-                        </header>
                         <dl class="result-data-list">
                             @GetProviderDetailItem(item.ProviderName, item.UkPrn.ToString())
                         </dl>
@@ -88,6 +71,10 @@
                 }
                
             </div>
+        }
+        else
+        {
+            Html.RenderPartial("_SearchResultMessage");
         }
 
     </div>
@@ -98,37 +85,5 @@
 
 @helper GetProviderDetailItem(string title, string ukprn)
 {
-    <dt><b>@title</b></dt>
-    <dd>@ukprn</dd>
-}
-
-
-@helper FilterForm(string className)
-{
-    if (Model.TotalResults <= 0)
-    {
-        return;
-    }
-
-    <div class="filters-block @className">
-        <form method="get" autocomplete="off">
-            <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
-       
-            <fieldset class="filters filters-accordion">
-                <h2 class="toggler heading-small">Apprenticeship level</h2>
-                <div class="toggled-content">
-                    <details>
-                        <summary>Explain levels</summary>
-                        <div class="panel panel-border-narrow">
-                            <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
-                            <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
-                        </div>
-                    </details>
-                    
-
-                </div>
-            </fieldset>
-            <input type="submit" class="button" value="Update results" />
-        </form>
-    </div>
+    <dt><b><a href="../Provider/@ukprn">@title</a></b></dt>
 }

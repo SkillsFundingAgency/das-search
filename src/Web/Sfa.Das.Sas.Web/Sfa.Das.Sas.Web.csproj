@@ -796,6 +796,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_ManageApprenticeshipFunds.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Provider\_SearchResultMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

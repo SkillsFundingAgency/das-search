@@ -4,22 +4,24 @@
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 <main id="content" role="main">
+    <a href="../">Back</a>
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge">
-                Find Provider
+                Find a training provider by name
             </h1>
             @using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
             {
                 <div class="form-group">
-                    <label for="keywords">
-                        <span class="form-label-bold">Search by keywords</span>
-                        <span class="form-hint">Can include job title or apprenticeship</span>
+                    <label for="searchTerm">
+                        <span class="form-hint">Enter a training provider name</span>
                     </label>
                     <span class="error-message"></span>
                     <input type="search" id="searchTerm" name="SearchTerm" class="text-box form-control" maxlength="200">
+                    <input class="button" id="submit-keywords" type="submit" value="Search" />
                 </div>
-                <input class="button" id="submit-keywords" type="submit" value="Search" />
+
+                <span class="form-hint">Results will be listed below</span>
             }
         </div>
     </div>
