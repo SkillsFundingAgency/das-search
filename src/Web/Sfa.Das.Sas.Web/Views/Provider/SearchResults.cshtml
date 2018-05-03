@@ -65,7 +65,7 @@
                 {
                     <article class="result">
                         <dl class="result-data-list">
-                            @GetProviderDetailItem(item.ProviderName, item.UkPrn.ToString())
+                            @GetProviderDetailItem(item.ProviderName, item.Aliases, item.UkPrn.ToString())
                         </dl>
                     </article>
                 }
@@ -83,7 +83,18 @@
 
 
 
-@helper GetProviderDetailItem(string title, string ukprn)
+@helper GetProviderDetailItem(string title, List<string> aliases, string ukprn)
 {
     <dt><b><a href="../Provider/@ukprn">@title</a></b></dt>
+    if (aliases != null && aliases.Count > 0)
+    {
+ 
+        foreach (var alias in aliases)
+        {
+            <dt>
+                ...<a href="../Provider/@ukprn">@alias</a>
+            </dt>
+        }
+    }
+
 }
