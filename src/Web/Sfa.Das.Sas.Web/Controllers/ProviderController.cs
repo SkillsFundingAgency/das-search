@@ -174,20 +174,34 @@ namespace Sfa.Das.Sas.Web.Controllers
                 viewModel.ShortSearchTerm = true;
                 return View(viewModel);
             }
-            
+
             //var response = _mediator.Send(query);
 
             //var viewModel = _mappingService.Map<ProviderSearchNameResponse, ProviderNameSearchResultViewModel>(response);
 
-            viewModel.TotalResults = 3;
-            viewModel.HasError = false;
-            viewModel.SearchTerm = query.searchTerm;
-            viewModel.Results = new List<ProviderSearchResultSummary>
+            switch (query.searchTerm)
             {
-                new ProviderSearchResultSummary {ProviderName = "Abingdon and Witney College", UkPrn = 10000055 },
-                new ProviderSearchResultSummary {ProviderName = "Accrington and Rossendale College", UkPrn = 10000093 },
-                new ProviderSearchResultSummary {ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285 },
-            };
+                case "error":
+                    viewModel.TotalResults = 0;
+                    viewModel.HasError = true;
+                    viewModel.Results = null;
+                    break;
+                case "coll":
+                    viewModel.TotalResults = 3;
+                    viewModel.HasError = false;
+                    viewModel.Results = new List<ProviderSearchResultSummary>
+                    {
+                        new ProviderSearchResultSummary {ProviderName = "Abingdon and Witney College", UkPrn = 10000055},
+                        new ProviderSearchResultSummary {ProviderName = "Accrington and Rossendale College", UkPrn = 10000093},
+                        new ProviderSearchResultSummary {ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285},
+                    };
+                    break;
+                default:
+                    viewModel.TotalResults = 0;
+                    viewModel.HasError = false;
+                    viewModel.Results = null;
+                    break;
+            }
 
             return View(viewModel);
         }
