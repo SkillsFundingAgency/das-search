@@ -167,10 +167,14 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ProviderNameSearchQuery query)
         {
+            if (query.Page <= 0)
+            {
+                query.Page = 1;
+            }
 
-            var viewModel = new ProviderSearchNameResultViewModel { HasError = false, ShortSearchTerm = false, SearchTerm = query.SearchTerm, TotalResults = 0, Results = null };
+            var viewModel = new ProviderSearchNameResultViewModel { HasError = false, ShortSearchTerm = false, SearchTerm = query?.SearchTerm, TotalResults = 0, Results = null };
 
-            if (query.SearchTerm.Length < 3)
+            if (query.SearchTerm == null || query.SearchTerm.Length < 3)
             {
                 viewModel.HasError = false;
                 viewModel.ShortSearchTerm = true;
@@ -202,7 +206,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     };
 
                     break;
-                case "pages":
+                case "abc":
                     viewModel.TotalResults = 21;
                     viewModel.HasError = false;
                     viewModel.LastPage = 2;
@@ -219,7 +223,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                             new ProviderSearchResultSummary {ProviderName = "ABC05", UkPrn = 10000285},
                             new ProviderSearchResultSummary {ProviderName = "ABC06", UkPrn = 10000285},
                             new ProviderSearchResultSummary {ProviderName = "ABC07", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC08", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC08", UkPrn = 10000285, Aliases = new List<string> {"ABC08 area 2", "ABC08 area 4"} },
                             new ProviderSearchResultSummary {ProviderName = "ABC09", UkPrn = 10000285},
                             new ProviderSearchResultSummary {ProviderName = "ABC10", UkPrn = 10000285},
                             new ProviderSearchResultSummary {ProviderName = "ABC11", UkPrn = 10000285},

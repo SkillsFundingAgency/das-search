@@ -3,17 +3,19 @@
 {
     @RenderErrorMessage()
 }
-else if (Model.TotalResults == 0)
+else if (Model.TotalResults == 0 && !Model.ShortSearchTerm)
 {
     @RenderZeroResult()
     ;
 }
+
 @helper  RenderErrorMessage()
     {
         <p id="result-summary" class="results-error">
             There was a problem performing a search. Try again later.
         </p>
 }
+
 @helper RenderZeroResult()
     {
         <p id="result-summary" class="results-empty">

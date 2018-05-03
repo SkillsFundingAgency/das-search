@@ -14,25 +14,25 @@
     <div class="grid-row">
         <div class="column-full">
             <hgroup class="hgroup">
+                @{
+                    if (Model != null && Model.ShortSearchTerm)
+                    {
+                        <div>
+                            <span>Errors to fix</span>
+                            <span class="error-message">Type at least 3 characters</span>
+                        </div>
+                    }
+
+                }
                 <h1 class="heading-xlarge">
                     Find a training provider by name
                 </h1>
-             
+
             </hgroup>
 
             @if (Model.TotalResults == 0)
             {
-                using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
-                {
-                    <div class="form-group">
-                        <label for="searchTerm">
-                            <span class="form-hint">Enter a training provider name</span>
-                        </label>
-                        <span class="error-message"></span>
-                        <input type="search" id="searchTerm" name="SearchTerm" class="text-box form-control" maxlength="200">
-                    </div>
-                    <input class="button" id="submit-keywords" type="submit" value="Search" />
-                }
+                Html.RenderPartial("_SearchProviderName");
             }
         </div>
     </div>
@@ -40,18 +40,7 @@
     <div class="grid-row">
         @if (Model.TotalResults > 0)
         {
-            using (Html.BeginForm("SearchResults", "Provider", FormMethod.Get, new { @class = "search-box" }))
-            {
-                <div class="column-two-thirds">
-                    <div class="form-group search-form">
-                        <label for="searchTerm">
-                            <span class="form-hint">Enter a training provider name</span>
-                        </label>
-                        <input type="search" id="searchTerm" name="SearchTerm" class="form-control form-control-3-4" value="@Model.SearchTerm" maxlength="200">
-                        <input id="submit-keywords" class="button" type="submit" value="Search" />
-                    </div>
-                </div>
-            }
+            Html.RenderPartial("_SearchProviderName");
         }
     </div>
     <div class="grid-row">
@@ -77,6 +66,34 @@
             Html.RenderPartial("_SearchResultMessage");
         }
 
+    </div>
+    <div>
+        <nav role="navigation">
+            <ul class="previous-next-navigation">
+                @if (Model.ActualPage > 1)
+                {
+                    var pageBefore = Model.ActualPage - 1;
+
+                    <li class="previous" id="previous-nav">
+                        <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageBefore">
+                            Previous <span class="visuallyhidden">page</span>
+                            <span class="page-numbers">Previous page @pageBefore of @Model.LastPage</span>
+                        </a>
+                    </li>
+                }
+                @if (Model.ActualPage < Model.LastPage)
+                {
+                    var pageAfter = Model.ActualPage + 1;
+
+                    <li class="next" id="next-nav">
+                        <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageAfter">
+                            Next <span class="visuallyhidden">page</span>
+                            <span class="page-numbers">Next page @pageAfter of @Model.LastPage</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
     </div>
 </main>
 
