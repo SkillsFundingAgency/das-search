@@ -45,6 +45,16 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Provider", action = "StandardResults" });
 
             routes.MapRoute(
+                name: "ProviderNameSearch",
+                url: "provider/search",
+                defaults: new { controller = "Provider", action = "Search" });
+
+            routes.MapRoute(
+                name: "ProviderNameSearchResults",
+                url: "provider/searchResults",
+                defaults: new { controller = "Provider", action = "SearchResults" });
+
+            routes.MapRoute(
                 name: "ProviderWithName",
                 url: "provider/{ukprn}/{providerName}",
                 defaults: new { controller = "Provider", action = "ProviderDetail", providerName=UrlParameter.Optional });
@@ -53,11 +63,6 @@ namespace Sfa.Das.Sas.Web
                 name: "ProviderWithPageNumber",
                 url: "provider/{ukprn}/page/{pageNumber}",
                 defaults: new { controller = "Provider", action = "ProviderDetail"});
-
-            routes.MapRoute(
-                name: "ProviderSearch",
-                url: "provider-search",
-                defaults: new { controller = "Provider", action = "ProviderSearch" });
 
             routes.MapRoute(
                 name: "Standard",
