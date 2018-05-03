@@ -124,6 +124,9 @@
     <Compile Include="Domain\Model\IApprenticeshipProduct.cs" />
     <Compile Include="Domain\Model\JobRoleItem.cs" />
     <Compile Include="Domain\Model\Location.cs" />
+    <Compile Include="Domain\Model\ProviderSearchItem.cs" />
+    <Compile Include="Domain\Model\ProviderSearchResult.cs" />
+    <Compile Include="Domain\Model\ProviderSearchResultSummary.cs" />
     <Compile Include="Domain\Model\ServerLookupResponse.cs" />
     <Compile Include="Domain\Model\Provider.cs" />
     <Compile Include="Domain\Model\ApprenticeshipBasic.cs" />

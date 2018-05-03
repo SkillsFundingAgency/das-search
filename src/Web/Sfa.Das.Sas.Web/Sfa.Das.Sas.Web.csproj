@@ -772,6 +772,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>ProviderDetail.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Provider\ProviderSearch.cshtml" />
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
