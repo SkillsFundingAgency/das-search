@@ -1,29 +1,29 @@
-﻿using MediatR;
+﻿using System.Linq;
+using FluentValidation;
+using MediatR;
+using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.ApplicationServices.Validators;
 using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    using System.Linq;
-
-    using FluentValidation;
-
-    using Sfa.Das.Sas.ApplicationServices.Validators;
-
     public class GetFrameworkHandler : IRequestHandler<GetFrameworkQuery, GetFrameworkResponse>
     {
         private readonly IGetFrameworks _getFrameworks;
 
         private readonly AbstractValidator<GetFrameworkQuery> _validator;
+        private readonly ILog _logger;
 
         public GetFrameworkHandler(
             IGetFrameworks getFrameworks,
-            AbstractValidator<GetFrameworkQuery> validator
-            )
+            AbstractValidator<GetFrameworkQuery> validator,
+            ILog logger)
         {
             _getFrameworks = getFrameworks;
             _validator = validator;
+            _logger = logger;
         }
 
         public GetFrameworkResponse Handle(GetFrameworkQuery message)
@@ -41,6 +41,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (framework == null)
             {
+                _logger.Warn($"Not possible to get framework {message.Id}");
                 response.StatusCode = GetFrameworkResponse.ResponseCodes.FrameworkNotFound;
 
                 return response;
@@ -48,6 +49,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (!framework.IsActiveFramework)
             {
+                _logger.Warn($"Framework {message.Id} is not active");
+
                 response.StatusCode = GetFrameworkResponse.ResponseCodes.Gone;
 
                 return response;
