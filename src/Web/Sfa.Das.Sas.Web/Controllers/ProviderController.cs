@@ -167,19 +167,21 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ProviderNameSearchQuery query)
         {
-            var viewModel = new ProviderNameSearchResultViewModel { HasError = false, ShortSearchTerm = false, SearchTerm = query.searchTerm, TotalResults = 0, Results = null };
 
-            if (query.searchTerm.Length < 3)
+            var viewModel = new ProviderSearchNameResultViewModel { HasError = false, ShortSearchTerm = false, SearchTerm = query.SearchTerm, TotalResults = 0, Results = null };
+
+            if (query.SearchTerm.Length < 3)
             {
+                viewModel.HasError = false;
                 viewModel.ShortSearchTerm = true;
                 return View(viewModel);
             }
 
             //var response = _mediator.Send(query);
 
-            //var viewModel = _mappingService.Map<ProviderSearchNameResponse, ProviderNameSearchResultViewModel>(response);
+            //var viewModel = _mappingService.Map<ProviderSearchNameResponse, ProviderSearchNameResultViewModel>(response);
 
-            switch (query.searchTerm)
+            switch (query.SearchTerm)
             {
                 case "error":
                     viewModel.TotalResults = 0;
@@ -196,6 +198,48 @@ namespace Sfa.Das.Sas.Web.Controllers
                         new ProviderSearchResultSummary {ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285},
                     };
                     break;
+                case "pages":
+                    viewModel.TotalResults = 21;
+                    viewModel.HasError = false;
+                    viewModel.LastPage = 2;
+                    viewModel.ActualPage = query.Page;
+                    if (query.Page == 1)
+                    {
+
+                        viewModel.Results = new List<ProviderSearchResultSummary>
+                        {
+                            new ProviderSearchResultSummary {ProviderName = "ABC01", UkPrn = 10000055},
+                            new ProviderSearchResultSummary {ProviderName = "ABC02", UkPrn = 10000093},
+                            new ProviderSearchResultSummary {ProviderName = "ABC03", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC04", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC05", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC06", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC07", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC08", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC09", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC10", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC11", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC12", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC13", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC14", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC15", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC16", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC17", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC18", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC19", UkPrn = 10000285},
+                            new ProviderSearchResultSummary {ProviderName = "ABC20", UkPrn = 10000285}
+                        };
+                    }
+
+                    if (query.Page == 2)
+                    {
+                        viewModel.Results = new List<ProviderSearchResultSummary>
+                        {
+                            new ProviderSearchResultSummary {ProviderName = "ABC21", UkPrn = 10000055}
+                        };
+                    }
+
+                    break;
                 default:
                     viewModel.TotalResults = 0;
                     viewModel.HasError = false;
@@ -205,6 +249,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return View(viewModel);
         }
+
 
         [HttpGet]
         public ActionResult Detail(ApprenticeshipProviderDetailQuery criteria)
