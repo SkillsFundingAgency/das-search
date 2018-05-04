@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Interfaces
 {
     public interface IProviderNameSearchProvider
     {
-        Task<ProviderNameSearchResults> SearchByTerm(string searchTerm, int page, int take);
+        Task<ProviderNameSearchResultsAndPagination> SearchByTerm(string searchTerm, int page, int take);
     }
 }

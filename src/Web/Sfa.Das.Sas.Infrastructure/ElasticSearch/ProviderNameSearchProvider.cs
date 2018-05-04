@@ -25,14 +25,16 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _nameSearchMapping = nameSearchMapping;
         }
 
-        public async Task<ProviderNameSearchResults> SearchByTerm(string searchTerm, int page, int take)
+        public async Task<ProviderNameSearchResultsAndPagination> SearchByTerm(string searchTerm, int page, int take)
         {
+
+            var pageNumber = page <= 0 ? 1 : page;
 
             var formattedSearchTerm = QueryHelper.FormatQueryReturningEmptyStringIfEmptyOrNull(searchTerm).Trim();
 
             if (formattedSearchTerm.Length < 3)
             {
-                return new ProviderNameSearchResults
+                return new ProviderNameSearchResultsAndPagination
                 {
                     ActualPage = 1,
                     LastPage = 1,
@@ -44,7 +46,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             var term = $"*{formattedSearchTerm}*";
             var totalHits = GetTotalMatches(term);
-            var paginationDetails = GeneratePaginationDetails(page, take, totalHits);
+            var paginationDetails = GeneratePaginationDetails(pageNumber, take, totalHits);
 
             var returnedResults = _elasticsearchCustomClient.Search<ProviderNameSearchResult>(s => s
                 .Index(_applicationSettings.ProviderIndexAlias)
@@ -59,7 +61,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                         .Query(term)))
             );
 
-            var results = new ProviderNameSearchResults
+            var results = new ProviderNameSearchResultsAndPagination
             {
                 ActualPage = paginationDetails.CurrentPage,
                 HasError = false,

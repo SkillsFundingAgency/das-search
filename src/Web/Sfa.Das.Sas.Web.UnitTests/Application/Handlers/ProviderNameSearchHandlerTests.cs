@@ -12,13 +12,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     using Sas.ApplicationServices.Models;
     using Sas.ApplicationServices.Queries;
     using Sas.ApplicationServices.Responses;
-    using SFA.DAS.NLog.Logger;
 
     [TestFixture]
     public class ProviderNameSearchHandlerTests
     {
         private Mock<IProviderNameSearchService> _mockProviderNameSearchService;
-        private Mock<ILog> _mockLogger;
         private ProviderNameSearchHandler _handler;
         private int _actualPage;
         private int _lastPage;
@@ -32,7 +30,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void Setup()
         {
             _mockProviderNameSearchService = new Mock<IProviderNameSearchService>();
-            _mockLogger = new Mock<ILog>();
             _actualPage = 1;
             _lastPage = 2;
             _resultsToTake = 20;
@@ -48,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 new ProviderNameSearchResult {UkPrn = 12341234, ProviderName = "Smiths Learning", Aliases = null }
             };
 
-            var providerNameSearchResults = new ProviderNameSearchResults
+            var providerNameSearchResults = new ProviderNameSearchResultsAndPagination
             {
                 ActualPage = _actualPage,
                 HasError = false,
@@ -64,10 +61,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.FromResult(providerNameSearchResults));
 
             _handler = new ProviderNameSearchHandler(
-                _mockProviderNameSearchService.Object,
-                _mockLogger.Object);
+                _mockProviderNameSearchService.Object);
         }
-
 
         [Test]
         public async Task ShouldReturnSuccessWhenSearchIsSuccessful()

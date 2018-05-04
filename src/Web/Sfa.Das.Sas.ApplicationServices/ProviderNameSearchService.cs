@@ -21,11 +21,14 @@ namespace Sfa.Das.Sas.ApplicationServices
             _logger = logger;
         }
 
-        public async Task<ProviderNameSearchResults> SearchProviderNameAndAliases(string searchTerm, int page)
+        public async Task<ProviderNameSearchResultsAndPagination> SearchProviderNameAndAliases(string searchTerm, int page)
         {
-            var results = new ProviderNameSearchResults();
+            var results = new ProviderNameSearchResultsAndPagination();
 
             var take = _paginationSettings.DefaultResultsAmount;
+
+            _logger.Info(
+                $"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
 
             try
             {
@@ -36,10 +39,11 @@ namespace Sfa.Das.Sas.ApplicationServices
                 _logger.Error(e, $"Provider Name Search eror: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
                 results.ResponseCode = ProviderNameSearchResponseCodes.SearchFailed;
                 results.HasError = true;
+                _logger.Error(e, $"Provider Name Search failed: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
             }
 
             _logger.Info(
-                $"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}], Total Results: [{results.TotalResults}]");
+                $"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{results.ActualPage}], Page Size: [{take}], Total Results: [{results.TotalResults}]");
 
             return results;
         }

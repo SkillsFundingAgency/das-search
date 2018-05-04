@@ -4,7 +4,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public class ProviderNameSearchResults
+    public class ProviderNameSearchResultsAndPagination
     {
         public long TotalResults { get; set; }
 
