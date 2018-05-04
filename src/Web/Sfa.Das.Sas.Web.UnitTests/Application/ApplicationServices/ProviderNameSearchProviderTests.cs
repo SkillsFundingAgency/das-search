@@ -75,16 +75,7 @@
             _mockLogger.Verify(x => x.Info(logInfo1Expected));
 
             _mockProviderQuery.Verify(x => x.GetTotalMatches(It.IsAny<string>()), Times.Once);
-            var logInfo3Expected = $"Provider Name Search provider total hits retrieved: [{totalHits}]";
-            _mockLogger.Verify(x => x.Info(logInfo3Expected));
-
             _mockProviderQuery.Verify(x => x.GetResults(wildcardTerm, take, paginationOrientationDetails), Times.Once);
-
-            var logDebug1Expected = $"Provider Name Search provider getting results based on pagination details: take: [{take}] skip:[{skip}], current page [{pageNumber}], last page [{lastPage}] ";
-            _mockLogger.Verify(x => x.Debug(logDebug1Expected));
-
-            var logDebug3Expected = $"Provider Name Search provider retrieved results mapped to returned format";
-            _mockLogger.Verify(x => x.Debug(logDebug3Expected));
 
             Assert.AreEqual(ProviderNameSearchResponseCodes.Success, result.Result.ResponseCode);
             Assert.AreEqual(pageNumber, result.Result.ActualPage);
@@ -132,16 +123,8 @@
             _mockLogger.Verify(x => x.Info(logInfo1Expected));
 
             _mockProviderQuery.Verify(x => x.GetTotalMatches(It.IsAny<string>()), Times.Once);
-            var logInfo3Expected = $"Provider Name Search provider total hits retrieved: [{totalHits}]";
-            _mockLogger.Verify(x => x.Info(logInfo3Expected));
 
             _mockProviderQuery.Verify(x => x.GetResults(wildcardTerm, take, paginationOrientationDetails), Times.Once);
-
-            var logDebug1Expected = $"Provider Name Search provider getting results based on pagination details: take: [{take}] skip:[{skip}], current page [{pageNumber}], last page [{lastPage}] ";
-            _mockLogger.Verify(x => x.Debug(logDebug1Expected));
-
-            var logDebug3Expected = $"Provider Name Search provider retrieved results mapped to returned format";
-            _mockLogger.Verify(x => x.Debug(logDebug3Expected));
 
             Assert.AreEqual(ProviderNameSearchResponseCodes.NoSearchResultsFound, result.Result.ResponseCode);
             Assert.AreEqual(pageNumber, result.Result.ActualPage);

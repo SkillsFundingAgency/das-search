@@ -44,24 +44,15 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
 
             var term = $"*{formattedSearchTerm}*";
-            _logger.Info($"Provider Name Search provider getting total hits");
-
             var totalHits = _providerNameSearchProviderQuery.GetTotalMatches(term);
-            _logger.Info($"Provider Name Search provider total hits retrieved: [{totalHits}]");
 
             var paginationDetails = _paginationOrientationService.GeneratePaginationDetails(page, take, totalHits);
 
-            _logger.Debug($"Provider Name Search provider getting results based on pagination details: take: [{take}] skip:[{paginationDetails.Skip}], current page [{paginationDetails.CurrentPage}], last page [{paginationDetails.LastPage}] ");
-
             var returnedResults = _providerNameSearchProviderQuery.GetResults(term, take, paginationDetails);
 
-            _logger.Debug($"Provider Name Search provider retrieved results, mapping to returned format");
+            var resultsMappedAndPaginated = MapResultsAndPaginationDetails(paginationDetails, formattedSearchTerm, returnedResults, totalHits);
 
-            var results = MapResultsAndPaginationDetails(paginationDetails, formattedSearchTerm, returnedResults, totalHits);
-
-            _logger.Debug($"Provider Name Search provider retrieved results mapped to returned format");
-
-            return results;
+            return resultsMappedAndPaginated;
         }
 
         private static ProviderNameSearchResultsAndPagination MapProviderNameSearchResultsAndPaginationTooShortDetails(string formattedSearchTerm)
