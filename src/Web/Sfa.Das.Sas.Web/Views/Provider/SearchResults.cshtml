@@ -1,5 +1,6 @@
 ﻿@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.ProviderNameSearchResultViewModel
+
 @{
     ViewBag.Title = "Search Results";
     ViewBag.PageID = "search-provider-results";
@@ -10,6 +11,7 @@
     </div>
     <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
+
     <div class="grid-row notification-wrapper">
         <div class="column-two-thirds">
             @{
@@ -28,11 +30,14 @@
             }
         </div>
     </div>
+
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge">
                 Find a training provider by name
             </h1>
+
+
 
             @if (Model.TotalResults == 0)
             {
@@ -40,6 +45,7 @@
             }
         </div>
     </div>
+
     <div class="grid-row">
         <div class="column-two-thirds">
             @if (Model.TotalResults > 0)
@@ -49,11 +55,13 @@
         </div>
     </div>
 
+
     <div class="grid-row">
         <div class="column-two-thirds">
             @if (!Model.HasError && !Model.ShortSearchTerm && Model.TotalResults > 0)
             {
                 <div id="provider-search-results">
+
                     <p class="form-label-bold"> @Model.TotalResults results found</p>
                     <ul>
                         @foreach (var item in Model.Results)
@@ -71,6 +79,7 @@
             }
         </div>
     </div>
+
     <div class="grid-row">
         <div class="column-two-thirds">
             <nav role="navigation">
@@ -104,18 +113,22 @@
 </main>
 
 
+
+
 @helper GetProviderDetailItem(string title, List<string> aliases, string ukprn)
+{
+    <a href="../Provider/@ukprn">@title</a> 
+       
+    if (aliases != null && aliases.Count > 0)
     {
-        <a href="../Provider/@ukprn">@title</a>
 
-        if (aliases != null && aliases.Count > 0)
+        foreach (var alias in aliases)
         {
-
-            foreach (var alias in aliases)
-            {
-                <span class="sublist">
-                    ...<a href="../Provider/@ukprn">@alias</a>
-                </span>
-            }
+            <span class="sublist">
+                ...<a href="../Provider/@ukprn">@alias</a>
+            </span>
         }
+
+    }
+      
 }
