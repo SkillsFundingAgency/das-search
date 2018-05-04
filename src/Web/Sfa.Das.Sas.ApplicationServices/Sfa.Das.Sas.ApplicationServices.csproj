@@ -112,6 +112,7 @@
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
+    <Compile Include="Interfaces\IProviderNameSearchProvider.cs" />
     <Compile Include="Interfaces\IProviderNameSearchService.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />

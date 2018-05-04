@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using Sfa.Das.Sas.ApplicationServices.Interfaces;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using SFA.DAS.AssessmentOrgs.Api.Client;
@@ -60,7 +61,9 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
+            For<IProviderNameSearchMapping>().Use<ProviderNameSearchMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
+            For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
         }
 
         private IDictionary<string, object> GetProperties()
