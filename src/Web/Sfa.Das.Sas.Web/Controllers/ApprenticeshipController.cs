@@ -36,6 +36,35 @@
             return View();
         }
 
+        public ActionResult ApprenticeshipOrProvider(bool? retry, bool? isApprenticeship)
+        {
+
+            var viewModel = new ApprenticeshipOrProviderViewModel();
+
+            if (retry != null && isApprenticeship == null)
+            {
+                viewModel.HasError = true;
+                return View(viewModel);
+            }
+
+            switch (isApprenticeship)
+            {
+                case null:
+                    return View(viewModel);
+                case true:
+                {
+                    var url = Url.Action("Search", "Apprenticeship");
+                    return new RedirectResult(url);
+                }
+                default:
+                {
+                    var url = Url.Action("Search", "Provider");
+                    return new RedirectResult(url);
+                }
+            }
+        }
+
+
         [HttpGet]
         public ActionResult SearchResults(ApprenticeshipSearchQuery query)
         {
