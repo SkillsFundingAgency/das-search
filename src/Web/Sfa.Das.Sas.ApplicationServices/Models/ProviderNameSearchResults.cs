@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Model;
 
-namespace Sfa.Das.Sas.ApplicationServices.Responses
+namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public class ProviderNameSearchResponse
+    public class ProviderNameSearchResults
     {
         public long TotalResults { get; set; }
 
@@ -18,6 +19,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
         public bool HasError { get; set; }
 
         public IEnumerable<ProviderNameSearchResult> Results { get; set; }
-        public ProviderNameSearchResponseCodes StatusCode { get; set; }
+
+        public ProviderNameSearchResponseCodes ResponseCode { get; set; }
     }
 }

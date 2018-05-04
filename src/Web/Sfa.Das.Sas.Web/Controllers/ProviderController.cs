@@ -172,7 +172,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 query.Page = 1;
             }
 
-            var viewModel = new ProviderSearchNameResultViewModel { HasError = false, ShortSearchTerm = false, SearchTerm = query?.SearchTerm, TotalResults = 0, Results = null };
+            var viewModel = new ProviderNameSearchResultViewModel { HasError = false, ShortSearchTerm = false, SearchTerm = query?.SearchTerm, TotalResults = 0, Results = null };
 
             if (query.SearchTerm == null || query.SearchTerm.Length < 3)
             {
@@ -183,7 +183,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             //var response = _mediator.Send(query);
 
-            //var viewModel = _mappingService.Map<ProviderSearchNameResponse, ProviderSearchNameResultViewModel>(response);
+            //var viewModel = _mappingService.Map<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>(response);
 
             switch (query.SearchTerm)
             {
@@ -195,12 +195,12 @@ namespace Sfa.Das.Sas.Web.Controllers
                 case "coll":
                     viewModel.TotalResults = 4;
                     viewModel.HasError = false;
-                    viewModel.Results = new List<ProviderSearchResultSummary>
+                    viewModel.Results = new List<ProviderNameSearchResult>
                     {
-                        new ProviderSearchResultSummary { ProviderName = "Abingdon and Witney College", UkPrn = 10000055 },
-                        new ProviderSearchResultSummary { ProviderName = "Accrington and Rossendale College", UkPrn = 10000093 },
-                        new ProviderSearchResultSummary { ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285 },
-                        new ProviderSearchResultSummary
+                        new ProviderNameSearchResult { ProviderName = "Abingdon and Witney College", UkPrn = 10000055 },
+                        new ProviderNameSearchResult { ProviderName = "Accrington and Rossendale College", UkPrn = 10000093 },
+                        new ProviderNameSearchResult { ProviderName = "Andrew Collinge Training Limited", UkPrn = 10000285 },
+                        new ProviderNameSearchResult
                         {
                             ProviderName = "NCG", UkPrn = 10004599, Aliases = new List<string> { "Newcastle College", "Kidderminster College", "Newcastle Sixth Form College", "West Lancashire College", "Carlisle College", "Lewisham Southwark College" } }
                     };
@@ -214,36 +214,36 @@ namespace Sfa.Das.Sas.Web.Controllers
                     if (query.Page == 1)
                     {
 
-                        viewModel.Results = new List<ProviderSearchResultSummary>
+                        viewModel.Results = new List<ProviderNameSearchResult>
                         {
-                            new ProviderSearchResultSummary {ProviderName = "ABC01", UkPrn = 10000055},
-                            new ProviderSearchResultSummary {ProviderName = "ABC02", UkPrn = 10000093},
-                            new ProviderSearchResultSummary {ProviderName = "ABC03", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC04", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC05", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC06", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC07", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC08", UkPrn = 10000285, Aliases = new List<string> {"ABC08 area 2", "ABC08 area 4"} },
-                            new ProviderSearchResultSummary {ProviderName = "ABC09", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC10", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC11", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC12", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC13", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC14", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC15", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC16", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC17", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC18", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC19", UkPrn = 10000285},
-                            new ProviderSearchResultSummary {ProviderName = "ABC20", UkPrn = 10000285}
+                            new ProviderNameSearchResult {ProviderName = "ABC01", UkPrn = 10000055},
+                            new ProviderNameSearchResult {ProviderName = "ABC02", UkPrn = 10000093},
+                            new ProviderNameSearchResult {ProviderName = "ABC03", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC04", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC05", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC06", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC07", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC08", UkPrn = 10000285, Aliases = new List<string> {"ABC08 area 2", "ABC08 area 4"} },
+                            new ProviderNameSearchResult {ProviderName = "ABC09", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC10", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC11", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC12", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC13", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC14", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC15", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC16", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC17", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC18", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC19", UkPrn = 10000285},
+                            new ProviderNameSearchResult {ProviderName = "ABC20", UkPrn = 10000285}
                         };
                     }
 
                     if (query.Page == 2)
                     {
-                        viewModel.Results = new List<ProviderSearchResultSummary>
+                        viewModel.Results = new List<ProviderNameSearchResult>
                         {
-                            new ProviderSearchResultSummary {ProviderName = "ABC21", UkPrn = 10000055}
+                            new ProviderNameSearchResult {ProviderName = "ABC21", UkPrn = 10000055}
                         };
                     }
 
