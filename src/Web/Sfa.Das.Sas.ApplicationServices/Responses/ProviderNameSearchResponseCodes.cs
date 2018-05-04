@@ -4,6 +4,7 @@
     {
         Success,
         SearchFailed,
-        NoSearchResultsFound
+        NoSearchResultsFound,
+        SearchTermTooShort
     }
 }
