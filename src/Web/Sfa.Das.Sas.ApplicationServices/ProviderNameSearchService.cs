@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 _logger.Error(e, $"Provider Name Search eror: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
                 results.ResponseCode = ProviderNameSearchResponseCodes.SearchFailed;
                 results.HasError = true;
-                _logger.Error(e, $"Provider Name Search failed: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
+                return results;
             }
 
             _logger.Info(

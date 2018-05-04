@@ -128,6 +128,7 @@
     <Compile Include="Models\DeliveryMode.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
     <Compile Include="Models\Pagination.cs" />
+    <Compile Include="Models\PaginationOrientationDetails.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderNameSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
@@ -175,7 +176,9 @@
     <Compile Include="Responses\SitemapResponse.cs" />
     <Compile Include="Responses\StandardProviderSearchResponse.cs" />
     <Compile Include="Responses\StatsResponse.cs" />
+    <Compile Include="Services\IPaginationOrientationService.cs" />
     <Compile Include="Services\IPostcodeIoService.cs" />
+    <Compile Include="Services\PaginationOrientationService.cs" />
     <Compile Include="Services\PostcodeIoService.cs" />
     <Compile Include="Settings\ICookieSettings.cs" />
     <Compile Include="Settings\IPaginationSettings.cs" />

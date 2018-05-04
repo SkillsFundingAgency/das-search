@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
+﻿using Sfa.Das.Sas.ApplicationServices.Services;
+
+namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -63,7 +65,7 @@
             For<IProviderNameSearchMapping>().Use<ProviderNameSearchMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
             For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
-
+            For<IPaginationOrientationService>().Use<PaginationOrientationService>();
         }
 
         private IDictionary<string, object> GetProperties()
