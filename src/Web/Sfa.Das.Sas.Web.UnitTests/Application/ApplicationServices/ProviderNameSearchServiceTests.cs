@@ -84,7 +84,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         }
 
         [Test]
-        public async Task ShouldCall()
+        public async Task ShouldReturnSuccessCodeAndNotError()
         {
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
