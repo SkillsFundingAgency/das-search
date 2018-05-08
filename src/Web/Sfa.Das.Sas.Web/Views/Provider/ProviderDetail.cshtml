@@ -12,7 +12,7 @@
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge" id="provider-name">
-                @Model.ProviderName 
+                @Model.ProviderName
                 @if (@Model.NationalProvider)
                 {
                     <span class="tag-national"><span class="font-adjust">National</span></span>
@@ -54,7 +54,7 @@
                 }
             }
 
-            @if (!Model.HasMoreThanOneTradingName)
+            @if (Model.DisplayAboutThisProvider)
             {
                 <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
                 if (string.IsNullOrEmpty(Model.MarketingInfo))
@@ -95,119 +95,119 @@
                     </tbody>
                 </table>
             }
-        </div>
+        
     </div>
-
-    <div class="grid-row">
-        <div class="column-two-thirds">
-            <nav role="navigation">
-                <ul class="previous-next-navigation">
-                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
-                    {
-                        var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
-
-                        <li class="previous" id="previous-nav">
-                            <a href="/provider/@Model.UkPrn/page/@pageBefore">
-                                Previous <span class="visuallyhidden">page</span>
-                                <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
-                            </a>
-                        </li>
-                    }
-                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
-                    {
-                        var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
-
-                        <li class="next" id="next-nav">
-                            <a href="/provider/@Model.UkPrn/page/@pageAfter">
-                                Next <span class="visuallyhidden">page</span>
-                                <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <div class="grid-row">
-        <div class="column-one-third">
-            <div class="panel--contact">
-                <h2 class="heading-medium">Contact details</h2>
-                <dl>
-                    @{var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";}
-                    <dt class="apprenticeshipContactTitle">Website:</dt>
-                    <dd>
-                        <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
-                            @Html.Raw(Model.ProviderName + " website")
-                        </a>
-                    </dd>
-
-                    @{
-                        if (!string.IsNullOrEmpty(Model.Phone))
-                        {
-                            <dt class="phone-title">Phone number:</dt>
-                            <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
-                        }
-                    }
-                    @{
-                        if (!string.IsNullOrEmpty(Model.Email))
-                        {
-                            <dt class="email-title">Email:</dt>
-                            <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
-                        }
-                    }
-
+            <div class="column-one-third">
+                <div class="panel--contact">
+                    <h2 class="heading-medium">Contact details</h2>
+                    <dl>
+                        @{var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";}
+                        <dt class="apprenticeshipContactTitle">Website:</dt>
+                        <dd>
+                                <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
+                                        @Html.Raw(Model.ProviderName + " website")
+                                    </a>
+                            </dd>
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Phone))
+                                {
+                                    <dt class="phone-title">Phone number:</dt>
+                                    <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
+                                }
+                            }
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Email))
+                                {
+                                    <dt class="email-title">Email:</dt>
+                                    <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
+                                }
+                            
+                            }               
                 </dl>
             </div>
             <div class="panel--contact panel--satisfaction">
-                <dl>
-                    <dt>Employer satisfaction:</dt>
-                    <dd>
-                        <div class="rating rating--inline">
-                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
-                                @Model.EmployerSatisfactionMessage
-                            </span>
-                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
-                        </div>
-                    </dd>
-                    <dt>Learner satisfaction:</dt>
-                    <dd>
-                        <div class="rating rating--inline">
-                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
-                                @Model.LearnerSatisfactionMessage
-                            </span>
-                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
-                        </div>
-                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                    <dl>
+                            <dt>Employer satisfaction:</dt>
+                            <dd>
+                                    <div class="rating rating--inline">
+                                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
+                                                    @Model.EmployerSatisfactionMessage
+                                                </span>
+                                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                                        </div>
+                                </dd>
+                            <dt>Learner satisfaction:</dt>
+                            <dd>
+                                    <div class="rating rating--inline">
+                                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
+                                                    @Model.LearnerSatisfactionMessage
+                                                </span>
+                                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                                        </div>
+                                    @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
                             <span class="satisfaction-source font-small">
-                                Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
-                            </span>
-                        }
-                    </dd>
+                                    Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
+                                </span>
+                    }
+                        </dd>
                 </dl>
             </div>
             <div class="panel-disclaimer">
                 <h4>Content disclaimer</h4>
                 <p>
-                    Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes
-                    no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency
-                    is not liable for any losses suffered as a result of any party relying on the course information
-                    provided.
-                </p>
+                        Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes
+                        no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency
+                        is not liable for any losses suffered as a result of any party relying on the course information
+                        provided.
+                    </p>
             </div>
             <div id="expand-collapse">
-                <details>
-                    <summary>Explain levels</summary>
-                    <div class="panel panel-border-narrow">
-                        <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
-                        <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
-                    </div>
-                </details>
+                    <details>
+                            <summary>Explain levels</summary>
+                            <div class="panel panel-border-narrow">
+                                    <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
+                                    <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
+                                </div>
+                        </details>
+                </div>
             </div>
         </div>
-    </div>
-</main>
+
+    <div class="grid-row">
+            <div class="column-two-thirds">
+                    <nav role="navigation">
+                            <ul class="previous-next-navigation">
+                                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
+
+                                    {
+                                        var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
+
+                                        <li class="previous" id="previous-nav">
+                                            <a href="/provider/@Model.UkPrn/page/@pageBefore">
+                                                Previous <span class="visuallyhidden">page</span>
+                                                <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    
+                                @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
+                                {
+                                    var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
+
+                                    <li class="next" id="next-nav">
+                                        <a href="/provider/@Model.UkPrn/page/@pageAfter">
+                                            Next <span class="visuallyhidden">page</span>
+                                            <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                    </nav>
+                </div>
+        </div>
+    </main>
      
 
 @helper CreateProgressBar(string message, int progress)
