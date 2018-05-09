@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
             catch (Exception e)
             {
-                _logger.Error(e, $"Provider Name Search eror: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
+                _logger.Error(e, $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
                 results.ResponseCode = ProviderNameSearchResponseCodes.SearchFailed;
                 results.HasError = true;
                 return results;
