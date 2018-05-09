@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             if (Is<IgnoreSslCertificateFeature>.Enabled)
             {
                 using (var settings = new ConnectionSettings(
-                    new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault()),
+                    new StaticConnectionPool(_applicationSettings.ElasticServerUrls),
                     new MyCertificateIgnoringHttpConnection()))
                 {
                     SetDefaultSettings(settings);

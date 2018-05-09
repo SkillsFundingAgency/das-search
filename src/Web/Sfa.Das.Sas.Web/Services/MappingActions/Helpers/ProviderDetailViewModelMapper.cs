@@ -22,8 +22,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                     ? ProviderMappingHelper.GetPercentageText(provider.LearnerSatisfaction)
                     : ProviderMappingHelper.GetPercentageText(null);
 
-            var viewModel = new ProviderDetailViewModel
-                                        {
+            var viewModel = new ProviderDetailViewModel {
                 DisplayAboutThisProvider = !hideAboutThisProviderForUlns.Contains(provider.Ukprn),
                 Email = provider.Email,
                 IsEmployerProvider = provider.IsEmployerProvider,
@@ -42,7 +41,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee,
                 IsNew = provider.IsNew,
                 IsLevyPayerOnly = provider.IsLevyPayerOnly
-                                               };
+                };
 
             if (provider.Aliases != null && provider.Aliases.Any())
                 {

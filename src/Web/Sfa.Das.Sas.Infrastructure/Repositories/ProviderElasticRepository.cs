@@ -8,9 +8,10 @@
 
     public sealed class ProviderElasticRepository : IGetProviders
     {
+        private const string ProviderApiDocumentType = "providerapidocument";
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly IConfigurationSettings _applicationSettings;
-
+  
         public ProviderElasticRepository(
             IElasticsearchCustomClient elasticsearchCustomClient,
             IConfigurationSettings applicationSettings)
@@ -25,7 +26,7 @@
                 _elasticsearchCustomClient.Search<ProviderSearchResultItem>(
                     s =>
                         s.Index(_applicationSettings.ProviderIndexAlias)
-                            .Type(Types.Parse("providerapidocument"))
+                            .Type(Types.Parse(ProviderApiDocumentType))
                             .From(0)
                             .MatchAll());
             return results.HitsMetaData.Total;
