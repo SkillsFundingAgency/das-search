@@ -41,16 +41,16 @@
                 }
                 if (Model.HasParentCompanyGuarantee)
                 {
-                    <p id="parent-company-guarantee" class="detail-highlight">
-                        Provider is supported by a parent company guarantee
-                    </p>
+                        <p id="parent-company-guarantee" class="detail-highlight">
+                            Provider is supported by a parent company guarantee
+                        </p>
                 }
 
                 if (Model.IsNew)
                 {
-                    <p id="is-new-provider" class="detail-highlight">
-                        New organisation with no financial track record
-                    </p>
+                        <p id="is-new-provider" class="detail-highlight">
+                            New organisation with no financial track record
+                        </p>
                 }
             }
 
@@ -75,12 +75,12 @@
                 </div>
                 <table class="app-details">
                     <thead>
-                    <tr>
-                        <th>Apprenticeship</th>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th><span class="visibility-hidden">View details</span></th>
-                    </tr>
+                        <tr>
+                            <th>Apprenticeship</th>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th><span class="visibility-hidden">View details</span></th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
@@ -95,72 +95,106 @@
                     </tbody>
                 </table>
             }
-        
-    </div>
-            <div class="column-one-third">
-                <div class="panel--contact">
-                    <h2 class="heading-medium">Contact details</h2>
-                    <dl>
-                        @{var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";}
-                        <dt class="apprenticeshipContactTitle">Website:</dt>
-                        <dd>
+            <nav role="navigation">
+                <ul class="previous-next-navigation">
+                 @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
+                 {
+                     var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
+
+                     <li class="previous" id="previous-nav">
+                         <a href="/provider/@Model.UkPrn/page/@pageBefore">
+                             Previous <span class="visuallyhidden">page</span>
+                             <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                         </a>
+                     </li>
+                 }
+                @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
+                {
+                    var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
+
+                    <li class="next" id="next-nav">
+                        <a href="/provider/@Model.UkPrn/page/@pageAfter">
+                            Next <span class="visuallyhidden">page</span>
+                            <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                        </a>
+                    </li>
+                }
+                </ul>
+            </nav>
+        </div>
+
+        <div class="column-one-third">
+            <div class="panel--contact">
+                <h2 class="heading-medium">Contact details</h2>
+                <dl>
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Website))
+                        {
+                            var linkProtocol = Model.Website.StartsWith("http") ? string.Empty : "http://";
+                            <dt class="apprenticeshipContactTitle">Website:</dt>
+                            <dd>
                                 <a href="@linkProtocol@Model.Website" rel="external" target="_blank" class="course-link apprenticeshipContact">
-                                        @Html.Raw(Model.ProviderName + " website")
-                                    </a>
+                                    @Html.Raw(Model.ProviderName + " website")
+                                </a>
                             </dd>
-                            @{
-                                if (!string.IsNullOrEmpty(Model.Phone))
-                                {
-                                    <dt class="phone-title">Phone number:</dt>
-                                    <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
-                                }
-                            }
-                            @{
-                                if (!string.IsNullOrEmpty(Model.Email))
-                                {
-                                    <dt class="email-title">Email:</dt>
-                                    <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
-                                }
-                            
-                            }               
+                        }
+
+                    }
+                    
+
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Phone))
+                        {
+                            <dt class="phone-title">Phone number:</dt>
+                            <dd id="phone" class="phone">@Html.Raw(Model.Phone)</dd>
+                        }
+                    }
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Email))
+                        {
+                            <dt class="email-title">Email:</dt>
+                            <dd id="email" class="email"><a href="mailto:@Html.Raw(Model.Email)">@Html.Raw(Model.Email)</a></dd>
+                        }
+                    }
+
                 </dl>
             </div>
             <div class="panel--contact panel--satisfaction">
-                    <dl>
-                            <dt>Employer satisfaction:</dt>
-                            <dd>
-                                    <div class="rating rating--inline">
-                                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
-                                                    @Model.EmployerSatisfactionMessage
-                                                </span>
-                                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
-                                        </div>
-                                </dd>
-                            <dt>Learner satisfaction:</dt>
-                            <dd>
-                                    <div class="rating rating--inline">
-                                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
-                                                    @Model.LearnerSatisfactionMessage
-                                                </span>
-                                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
-                                        </div>
-                                    @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                <dl>
+                    <dt>Employer satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                        </div>
+                    </dd>
+                    <dt>Learner satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                        </div>
+                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
                             <span class="satisfaction-source font-small">
-                                    Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
-                                </span>
-                    }
-                        </dd>
+                                Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
+                            </span>
+                        }
+                    </dd>
                 </dl>
             </div>
             <div class="panel-disclaimer">
                 <h4>Content disclaimer</h4>
                 <p>
-                        Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes
-                        no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency
-                        is not liable for any losses suffered as a result of any party relying on the course information
-                        provided.
-                    </p>
+                    Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes 
+                    no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency 
+                    is not liable for any losses suffered as a result of any party relying on the course information 
+                    provided.
+                </p>
             </div>
             <div id="expand-collapse">
                     <details>
