@@ -129,7 +129,7 @@
             }
 
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
-            viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetTrainingProviderText(HttpContext);
+            viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
 
             return View(viewModel);
         }
@@ -163,7 +163,7 @@
 
                 case GetFrameworkResponse.ResponseCodes.Success:
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
-                    viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetTrainingProviderText(HttpContext);
+                    viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
                     return View(viewModel);
 
                 default:

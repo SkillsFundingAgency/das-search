@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
         [Test]
         public void ShouldSetDefaultTextIfNoReferrerUrl()
         {
-            var buttonText = _buttonTextService.GetTrainingProviderText( _httpContext.Object);
+            var buttonText = _buttonTextService.GetFindTrainingProvidersText( _httpContext.Object);
             buttonText.Should().Be("Find training providers");
         }
 
@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
         public void ShouldSetExpectedTextBasedOnAbsolutePath(string referringUrlAbsolutePath, string expectedText)
         {
             _httpContext.Setup(x => x.Request.UrlReferrer).Returns(new Uri($"http://www.test.com/{referringUrlAbsolutePath}"));
-            var buttonText = _buttonTextService.GetTrainingProviderText(httpContext: _httpContext.Object);
+            var buttonText = _buttonTextService.GetFindTrainingProvidersText(httpContext: _httpContext.Object);
             buttonText.Should().Be(expectedText);
         }
     }
