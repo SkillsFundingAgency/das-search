@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
-            using (var settings = new ConnectionSettings(new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault())))
+            using (var settings = new ConnectionSettings(new StaticConnectionPool(_applicationSettings.ElasticServerUrls)))
             {
                 SetDefaultSettings(settings);
 
