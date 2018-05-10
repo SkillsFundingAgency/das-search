@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.ViewModels
+﻿using System;
+
+namespace Sfa.Das.Sas.Web.ViewModels
 {
     using System.Collections.Generic;
 
@@ -33,5 +35,7 @@
         public IEnumerable<string> KnowledgeQualification { get; set; }
 
         public IEnumerable<string> CombinedQualificiation { get; set; }
+
+        public string FindApprenticeshipTrainingText { get; set; }
     }
 }

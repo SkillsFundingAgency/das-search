@@ -1,6 +1,5 @@
 ﻿@using System.Globalization
 @using Sfa.Das.Sas.Resources
-@using Sfa.Das.Sas.Web.Extensions
 @model Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel
 
 @{
@@ -37,7 +36,7 @@
                 <aside class="hidden-for-mobile-tablet">
 
                     <a class="button ui-find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                        Find training providers
+                        @Model.FindApprenticeshipTrainingText
                     </a>
                 </aside>
             </div>
@@ -177,37 +176,37 @@
 
         <div id="bottom-actions">
             <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                Find training providers
+                @Model.FindApprenticeshipTrainingText
             </a>
         </div>
     </section>
 </main>
 
 @helper GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
-{
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-        <dt>@title</dt>
-        <dd id="@id">@item</dd>
-}
+    {
+        if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+        {
+            <dt>@title</dt>
+            <dd id="@id">@item</dd>
+        }
 }
 
 @helper GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
-{
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
-        <dt>@title</dt>
-        <dd id="@id">@item months</dd>
-}
+    {
+        if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+        {
+            <dt>@title</dt>
+            <dd id="@id">@item months</dd>
+        }
 }
 
 @helper GetFundingBandProperty(int value)
-{
-var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
+    {
+        var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
 
-    <dt>Current funding band</dt>
-    <dd id="funding-cap">
-        Up to @fundingCapFormatted per apprentice.<br />
-        <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank">More information about funding</a>
-    </dd>
+        <dt>Current funding band</dt>
+        <dd id="funding-cap">
+            Up to @fundingCapFormatted per apprentice.<br />
+            <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank">More information about funding</a>
+        </dd>
 }

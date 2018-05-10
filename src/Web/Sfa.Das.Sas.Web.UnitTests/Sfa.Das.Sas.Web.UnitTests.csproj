@@ -211,6 +211,7 @@
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenConvertingMarkdownToHtml.cs" />
     <Compile Include="Infrastructure\Web\Extensions\For_HtmlExtensions\WhenRenderIfExists.cs" />
     <Compile Include="Infrastructure\Web\Helpers\UrlEncoderTests.cs" />
+    <Compile Include="Infrastructure\Web\Services\ButtonTextServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderSearchResponseToViewModel.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderToProviderDetailViewModelTests.cs" />
     <Compile Include="Infrastructure\Web\Services\MappingServiceTests.cs" />

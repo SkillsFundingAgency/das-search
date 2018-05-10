@@ -309,6 +309,8 @@
     <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Logging\RequestContext.cs" />
+    <Compile Include="Services\ButtonTextService.cs" />
+    <Compile Include="Services\IButtonTextService.cs" />
     <Compile Include="Services\IValidation.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderSearchMapper.cs" />
     <Compile Include="Services\MappingActions\Helpers\SearchMappingHelper.cs" />
