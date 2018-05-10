@@ -31,7 +31,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _sut = new ApprenticeshipController(
                 _mockLogger.Object,
                 _mockMappingService.Object,
-                _mockMediator.Object);
+                _mockMediator.Object,
+                Mock.Of<IButtonTextService>());
         }
 
         [Test]

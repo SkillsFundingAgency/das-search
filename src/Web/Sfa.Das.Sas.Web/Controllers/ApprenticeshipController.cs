@@ -10,8 +10,8 @@
     using Attribute;
     using MediatR;
     using Services;
+    using Services.MappingActions.Helpers;
     using SFA.DAS.NLog.Logger;
-    using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
     using ViewModels;
 
     [NoCache]
@@ -20,20 +20,47 @@
         private readonly ILog _logger;
         private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
+        private readonly IButtonTextService _buttonTextService;
 
-        public ApprenticeshipController(
-            ILog logger,
-            IMappingService mappingService,
-            IMediator mediator)
+        public ApprenticeshipController(ILog logger, IMappingService mappingService, IMediator mediator, IButtonTextService buttonTextService)
         {
             _logger = logger;
             _mappingService = mappingService;
             _mediator = mediator;
+            _buttonTextService = buttonTextService;
         }
 
         public ActionResult Search()
         {
             return View();
+        }
+
+        public ActionResult ApprenticeshipOrProvider(bool? retry, bool? isApprenticeship)
+        {
+
+            var viewModel = new ApprenticeshipOrProviderViewModel();
+
+            if (retry != null && isApprenticeship == null)
+            {
+                viewModel.HasError = true;
+                return View(viewModel);
+            }
+
+            switch (isApprenticeship)
+            {
+                case null:
+                    return View(viewModel);
+                case true:
+                {
+                    var url = Url.Action("Search", "Apprenticeship");
+                    return new RedirectResult(url);
+                }
+                default:
+                {
+                    var url = Url.Action("Search", "Provider");
+                    return new RedirectResult(url);
+                }
+            }
         }
 
         [HttpGet]
@@ -102,6 +129,7 @@
             }
 
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
+            viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
 
             return View(viewModel);
         }
@@ -135,7 +163,7 @@
 
                 case GetFrameworkResponse.ResponseCodes.Success:
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
-
+                    viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
                     return View(viewModel);
 
                 default:

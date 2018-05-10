@@ -45,6 +45,8 @@ namespace Sfa.Das.Sas.Core.Configuration
 
         string ElasticsearchPassword { get; }
 
+        IEnumerable<long> HideAboutProviderForUkprns { get; }
+
         Uri ManageApprenticeshipFundsUrl
         {
             get;

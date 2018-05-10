@@ -1,19 +1,18 @@
-﻿using FeatureToggle.Core.Fluent;
-using Sfa.Das.Sas.Infrastructure.FeatureToggles;
-using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+﻿namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using ApplicationServices;
+    using ApplicationServices.Exceptions;
+    using ApplicationServices.Models;
+    using Core.Configuration;
+    using Core.Domain.Model;
+    using FeatureToggle.Core.Fluent;
+    using FeatureToggles;
     using Nest;
-    using Sfa.Das.Sas.ApplicationServices;
-    using Sfa.Das.Sas.ApplicationServices.Exceptions;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Core.Domain.Model;
+    using SFA.DAS.NLog.Logger;
 
     public sealed class ElasticsearchProviderLocationSearchProvider : IProviderLocationSearchProvider
     {
@@ -124,9 +123,9 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             }
 
             return descriptor
-                    .Terms(t => t
-                        .Field(x => x.DeliveryModes)
-                        .Terms(deliveryModes));
+                .Terms(t => t
+                    .Field(x => x.DeliveryModes)
+                    .Terms(deliveryModes));
         }
 
         private static Func<SortDescriptor<T>, IPromise<IList<ISort>>> NestedSortByDistanceFromGivenLocation<T>(Coordinate location)
@@ -250,41 +249,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
         private SearchDescriptor<T> CreateProviderQuery<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
-			var descriptor = new SearchDescriptor<T>()
-				.Index(_applicationSettings.ProviderIndexAlias)
-				.Size(1000)
-				.Query(q => q
-					.Bool(ft => ft
-						.Filter(FilterByApprenticeshipId(selector, code))
-						.Must(NestedLocationsQuery<T>(location)))
-				            && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
-				.Sort(SortByDistanceFromGivenLocation<T>(location))
-				.Aggregations(GetProviderSearchAggregationsSelector<T>())
-				.PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+            var descriptor = new SearchDescriptor<T>()
+                .Index(_applicationSettings.ProviderIndexAlias)
+                .Size(1000)
+                .Query(q => q
+                                .Bool(ft => ft
+                                    .Filter(FilterByApprenticeshipId(selector, code))
+                                    .Must(NestedLocationsQuery<T>(location)))
+                            && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
+                .Sort(SortByDistanceFromGivenLocation<T>(location))
+                .Aggregations(GetProviderSearchAggregationsSelector<T>())
+                .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
-			return descriptor;
-		}
-
-		private SearchDescriptor<T> CreateProviderQueryWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
-            where T : class, IApprenticeshipProviderSearchResultsItem
-        {
-            var descriptor =
-                new SearchDescriptor<T>()
-                    .Index(_applicationSettings.ProviderIndexAlias)
-                    .Size(1000)
-                    .Query(q => q
-                        .Bool(b => b
-                            .Filter(FilterByApprenticeshipId(selector, code))
-                            .Must(NestedLocationsQueryWithoutLocationMatch<T>(location)))
-                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
-                    .Sort(SortByDistanceFromGivenLocation<T>(location))
-					.Aggregations(GetProviderSearchAggregationsSelector<T>())
-                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
-
-			return descriptor;
+            return descriptor;
         }
 
-	    private SearchDescriptor<T> CreateProviderQueryWithNationalProvider<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
+        private SearchDescriptor<T> CreateProviderQueryWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             var descriptor =
@@ -292,15 +272,34 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     .Index(_applicationSettings.ProviderIndexAlias)
                     .Size(1000)
                     .Query(q => q
-                        .Bool(ft => ft
-                            .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
-                            .Must(NestedLocationsQuery<T>(location)))
-                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
+                                    .Bool(b => b
+                                        .Filter(FilterByApprenticeshipId(selector, code))
+                                        .Must(NestedLocationsQueryWithoutLocationMatch<T>(location)))
+                                && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
-	                .Aggregations(GetProviderSearchAggregationsSelector<T>())
-					.PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+                    .Aggregations(GetProviderSearchAggregationsSelector<T>())
+                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
-			return descriptor;
+            return descriptor;
+        }
+
+        private SearchDescriptor<T> CreateProviderQueryWithNationalProvider<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            var descriptor =
+                new SearchDescriptor<T>()
+                    .Index(_applicationSettings.ProviderIndexAlias)
+                    .Size(1000)
+                    .Query(q => q
+                                    .Bool(ft => ft
+                                        .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
+                                        .Must(NestedLocationsQuery<T>(location)))
+                                && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
+                    .Sort(SortByDistanceFromGivenLocation<T>(location))
+                    .Aggregations(GetProviderSearchAggregationsSelector<T>())
+                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+
+            return descriptor;
         }
 
         private SearchDescriptor<T> CreateProviderQueryWithNationalProviderWithoutLocationLimit<T>(Expression<Func<T, object>> selector, string code, Coordinate location, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
@@ -311,33 +310,33 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                     .Index(_applicationSettings.ProviderIndexAlias)
                     .Size(1000)
                     .Query(q => q
-                        .Bool(b => b
-                            .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
-                            .Must(NestedLocationsQueryWithoutLocationMatch<T>(location)))
-                        && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
+                                    .Bool(b => b
+                                        .Filter(FilterByApprenticeshipId(selector, code), FilterByNationalProvider<T>(x => x.NationalProvider))
+                                        .Must(NestedLocationsQueryWithoutLocationMatch<T>(location)))
+                                && q.Bool(ft => ft.Must(m => m.Term(f => f.HasNonLevyContract, hasNonLevyContract))))
                     .Sort(SortByDistanceFromGivenLocation<T>(location))
-	                .Aggregations(GetProviderSearchAggregationsSelector<T>())
-					.PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
+                    .Aggregations(GetProviderSearchAggregationsSelector<T>())
+                    .PostFilter(pf => FilterByDeliveryModes(pf, deliveryModes));
 
             return descriptor;
-		}
+        }
 
-	    private Func<AggregationContainerDescriptor<T>, IAggregationContainer> GetProviderSearchAggregationsSelector<T>()
-		    where T : class, IApprenticeshipProviderSearchResultsItem
-	    {
-		    if (Is<Elk5Feature>.Enabled)
-		    {
-			    return aggs => aggs
-				    .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
-				    .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider));
-		    }
+        private Func<AggregationContainerDescriptor<T>, IAggregationContainer> GetProviderSearchAggregationsSelector<T>()
+            where T : class, IApprenticeshipProviderSearchResultsItem
+        {
+            if (Is<Elk5Feature>.Enabled)
+            {
+                return aggs => aggs
+                    .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
+                    .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider));
+            }
 
-		    return aggs => aggs
-			    .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
-			    .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider));
-	    }
+            return aggs => aggs
+                .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider));
+        }
 
-		private Func<QueryContainerDescriptor<T>, QueryContainer> NestedLocationsQuery<T>(Coordinate location)
+        private Func<QueryContainerDescriptor<T>, QueryContainer> NestedLocationsQuery<T>(Coordinate location)
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
             return f => f.Nested(n => n

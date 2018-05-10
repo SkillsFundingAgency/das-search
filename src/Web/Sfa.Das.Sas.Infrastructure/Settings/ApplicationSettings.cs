@@ -53,7 +53,20 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public Uri ManageApprenticeshipFundsUrl => new Uri(CloudConfigurationManager.GetSetting("ManageApprenticeshipFundsUrl"));
 
-        private IEnumerable<Uri> GetElasticSearchIps()
+        public IEnumerable<long> HideAboutProviderForUkprns => GetHideAboutProviderUrkprns();
+
+        private IEnumerable<long> GetHideAboutProviderUrkprns()
+        {
+            return
+                    CloudConfigurationManager.GetSetting("HideAboutProviderForUkprns")
+                    .Split(',')
+                    .Select(m => m.Trim())
+                    .Where(m => System.Text.RegularExpressions.Regex.IsMatch(m, "^[0-9]{1,18}$"))
+                    .Where(m => !string.IsNullOrEmpty(m))
+                    .Select(m => long.Parse(m));
+        }
+
+    private IEnumerable<Uri> GetElasticSearchIps()
         {
             var urlStrings = CloudConfigurationManager.GetSetting("ElasticServerUrls").Split(',');
             return urlStrings.Select(url => new Uri(url));

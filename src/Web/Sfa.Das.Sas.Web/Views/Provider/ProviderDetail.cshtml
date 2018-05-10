@@ -12,7 +12,7 @@
     <div class="grid-row">
         <div class="column-two-thirds">
             <h1 class="heading-xlarge" id="provider-name">
-                @Model.ProviderName 
+                @Model.ProviderName
                 @if (@Model.NationalProvider)
                 {
                     <span class="tag-national"><span class="font-adjust">National</span></span>
@@ -20,6 +20,7 @@
             </h1>
         </div>
     </div>
+
     <div class="grid-row">
         <div class="column-two-thirds">
             <dl class="data-list--provider data-list--compact">
@@ -53,16 +54,16 @@
                 }
             }
 
-            @if (!Model.HasMoreThanOneTradingName)
+            @if (Model.DisplayAboutThisProvider)
             {
                 <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
                 if (string.IsNullOrEmpty(Model.MarketingInfo))
                 {
-                        <span>There is no marketing information available about this provider.</span>
+                    <span>There is no marketing information available about this provider.</span>
                 }
                 else
                 {
-                        @Html.MarkdownToHtml(Model.MarketingInfo)
+                    @Html.MarkdownToHtml(Model.MarketingInfo)
                 }
             }
             @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
@@ -82,15 +83,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
-                        {
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.Type</td>
-                                <td>@item.Level</td>
-                                <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
-                            </tr>
-                        }
+                    @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Type</td>
+                            <td>@item.Level</td>
+                            <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             }
@@ -196,17 +197,51 @@
                 </p>
             </div>
             <div id="expand-collapse">
-               <details>
-                    <summary>Explain levels</summary>
-                    <div class="panel panel-border-narrow">
-                        <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
-                        <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
-                    </div>
-                </details>
+                    <details>
+                            <summary>Explain levels</summary>
+                            <div class="panel panel-border-narrow">
+                                    <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
+                                    <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
+                                </div>
+                        </details>
+                </div>
             </div>
-        </div>       
-    </div>
-</main>
+        </div>
+
+    <div class="grid-row">
+            <div class="column-two-thirds">
+                    <nav role="navigation">
+                            <ul class="previous-next-navigation">
+                                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
+
+                                    {
+                                        var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
+
+                                        <li class="previous" id="previous-nav">
+                                            <a href="/provider/@Model.UkPrn/page/@pageBefore">
+                                                Previous <span class="visuallyhidden">page</span>
+                                                <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    
+                                @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
+                                {
+                                    var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
+
+                                    <li class="next" id="next-nav">
+                                        <a href="/provider/@Model.UkPrn/page/@pageAfter">
+                                            Next <span class="visuallyhidden">page</span>
+                                            <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                    </nav>
+                </div>
+        </div>
+    </main>
      
 
 @helper CreateProgressBar(string message, int progress)
