@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
 
-            var expected = $"Provider Name Search eror: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
+            var expected = $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
 
             _mockLogger.Verify(x => x.Info(It.IsAny<string>()), Times.Once);
             _mockLogger.Verify(x => x.Error(It.IsAny<Exception>(), expected));

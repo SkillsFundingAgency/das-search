@@ -229,7 +229,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Standard.Duration))
                 .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))
                 .ForMember(x => x.AssessmentOrganisations, y => y.MapFrom(z => z.AssessmentOrganisations))
-                .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri));
+                .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri))
+                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
 
             // Framework detail page
             cfg.CreateMap<GetFrameworkResponse, FrameworkViewModel>()
@@ -248,7 +249,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Framework.Duration))
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
-                ;
+                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
         }
 
         private static void CreateProviderSearchMappings(IMapperConfiguration cfg)

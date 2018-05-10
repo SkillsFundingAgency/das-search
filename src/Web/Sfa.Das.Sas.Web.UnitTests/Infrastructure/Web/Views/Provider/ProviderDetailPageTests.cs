@@ -146,30 +146,6 @@
         }
 
         [Test]
-        public void ShouldNotShowAboutThisProviderIfOneAndOnlyOneTradingNamesIsSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.TradingNames = "here is a trading name";
-            model.DisplayAboutThisProvider = true;
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#about-this-provider").Should().Contain("About this Provider");
-        }
-
-        [Test]
-        public void ShouldNotShowAboutThisProviderIfMoreThanOneTradingNamesIsSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.TradingNames = "here is a trading name, here is another tradingname";
-            model.DisplayAboutThisProvider = true;
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#about-this-provider").Should().Be(string.Empty);
-        }
-
-        [Test]
         public void ShouldShowIsLevyPayerOnlyMessageIfSet()
         {
             var providerDetails = new ProviderDetail();
