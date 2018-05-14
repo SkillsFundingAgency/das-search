@@ -10,6 +10,7 @@ using Sfa.Das.Sas.Core.Domain.Services;
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     using Sas.ApplicationServices.Validators;
+    using SFA.DAS.NLog.Logger;
 
     [TestFixture]
     public sealed class GetFrameworkHandlerTest
@@ -24,7 +25,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _sut = new GetFrameworkHandler(
                 _mockGetFrameworks.Object,
-                new FrameworkQueryValidator(new Validation()));
+                new FrameworkQueryValidator(new Validation()),
+                Mock.Of<ILog>());
         }
 
         [TestCase("1-2-a")]
