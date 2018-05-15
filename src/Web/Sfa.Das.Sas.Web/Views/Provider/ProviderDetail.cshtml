@@ -207,40 +207,6 @@
                 </div>
             </div>
         </div>
-
-    <div class="grid-row">
-            <div class="column-two-thirds">
-                    <nav role="navigation">
-                            <ul class="previous-next-navigation">
-                                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
-
-                                    {
-                                        var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
-
-                                        <li class="previous" id="previous-nav">
-                                            <a href="/provider/@Model.UkPrn/page/@pageBefore">
-                                                Previous <span class="visuallyhidden">page</span>
-                                                <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
-                                            </a>
-                                        </li>
-                                    }
-                                    
-                                @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
-                                {
-                                    var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
-
-                                    <li class="next" id="next-nav">
-                                        <a href="/provider/@Model.UkPrn/page/@pageAfter">
-                                            Next <span class="visuallyhidden">page</span>
-                                            <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
-                                        </a>
-                                    </li>
-                                }
-
-                            </ul>
-                    </nav>
-                </div>
-        </div>
     </main>
      
 
