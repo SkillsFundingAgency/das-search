@@ -74,14 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8703), Tuple.Create("\"", 8711)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8771), Tuple.Create("\"", 8779)
 
 #line 190 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 8708), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 8776), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 8708), false)
+, 8776), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -137,14 +137,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8954), Tuple.Create("\"", 8962)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9022), Tuple.Create("\"", 9030)
 
 #line 199 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 8959), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 9027), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 8959), false)
+, 9027), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -337,16 +337,18 @@ WriteLiteral(">\r\n\r\n                    <a");
 
 WriteLiteral(" class=\"button ui-find-training-providers\"");
 
+WriteLiteral("  target=\"find-training-providers\"");
+
 WriteLiteral(" rel=\"nofollow\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1470), Tuple.Create("\"", 1605)
+WriteAttribute("href", Tuple.Create(" href=\"", 1504), Tuple.Create("\"", 1639)
             
             #line 38 "..\..\Views\Apprenticeship\Framework.cshtml"
-      , Tuple.Create(Tuple.Create("", 1477), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+                                        , Tuple.Create(Tuple.Create("", 1511), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 1477), false)
+, 1511), false)
 );
 
 WriteLiteral(">\r\n");
@@ -1029,16 +1031,18 @@ WriteLiteral(" class=\"button btn-find-trng-prov\"");
 
 WriteLiteral(" rel=\"nofollow\"");
 
+WriteLiteral("  target=\"find-training-providers\"");
+
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8235), Tuple.Create("\"", 8370)
+WriteAttribute("href", Tuple.Create(" href=\"", 8303), Tuple.Create("\"", 8438)
             
             #line 178 "..\..\Views\Apprenticeship\Framework.cshtml"
-                   , Tuple.Create(Tuple.Create("", 8242), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
+                                                     , Tuple.Create(Tuple.Create("", 8310), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
             
             #line default
             #line hidden
-, 8242), false)
+, 8310), false)
 );
 
 WriteLiteral(">\r\n");

@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6066), Tuple.Create("\"", 6074)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6133), Tuple.Create("\"", 6141)
 
 #line 112 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6071), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 6138), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6071), false)
+, 6138), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -213,14 +213,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6889), Tuple.Create("\"", 6897)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 6956), Tuple.Create("\"", 6964)
 
 #line 135 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6894), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 6961), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 6894), false)
+, 6961), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -319,14 +319,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7523), Tuple.Create("\"", 7537)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 7590), Tuple.Create("\"", 7604)
 
 #line 155 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 7530), Tuple.Create<System.Object, System.Int32>(pdfUrl
+, Tuple.Create(Tuple.Create("", 7597), Tuple.Create<System.Object, System.Int32>(pdfUrl
 
 #line default
 #line hidden
-, 7530), false)
+, 7597), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
@@ -433,16 +433,18 @@ WriteLiteral(" class=\"button ui-find-training-providers\"");
 
 WriteLiteral(" rel=\"nofollow\"");
 
+WriteLiteral(" target=\"find-training-providers\"");
+
 WriteLiteral(" id=\"ga-find-provider-top\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 957), Tuple.Create("\"", 1091)
+WriteAttribute("href", Tuple.Create(" href=\"", 990), Tuple.Create("\"", 1124)
             
             #line 24 "..\..\Views\Apprenticeship\Standard.cshtml"
-                                 , Tuple.Create(Tuple.Create("", 964), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+                                                                  , Tuple.Create(Tuple.Create("", 997), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 964), false)
+, 997), false)
 );
 
 WriteLiteral(">\r\n");
@@ -681,21 +683,21 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4749), Tuple.Create("\"", 4790)
+WriteAttribute("href", Tuple.Create(" href=\"", 4782), Tuple.Create("\"", 4823)
             
             #line 82 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4756), Tuple.Create<System.Object, System.Int32>(linkProtocol
+, Tuple.Create(Tuple.Create("", 4789), Tuple.Create<System.Object, System.Int32>(linkProtocol
             
             #line default
             #line hidden
-, 4756), false)
+, 4789), false)
             
             #line 82 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 4769), Tuple.Create<System.Object, System.Int32>(organisation.Website
+, Tuple.Create(Tuple.Create("", 4802), Tuple.Create<System.Object, System.Int32>(organisation.Website
             
             #line default
             #line hidden
-, 4769), false)
+, 4802), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -742,15 +744,15 @@ WriteLiteral(" data-label=\"email\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5106), Tuple.Create("\"", 5139)
-, Tuple.Create(Tuple.Create("", 5113), Tuple.Create("mailto:", 5113), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 5139), Tuple.Create("\"", 5172)
+, Tuple.Create(Tuple.Create("", 5146), Tuple.Create("mailto:", 5146), true)
             
             #line 86 "..\..\Views\Apprenticeship\Standard.cshtml"
-         , Tuple.Create(Tuple.Create("", 5120), Tuple.Create<System.Object, System.Int32>(organisation.Email
+         , Tuple.Create(Tuple.Create("", 5153), Tuple.Create<System.Object, System.Int32>(organisation.Email
             
             #line default
             #line hidden
-, 5120), false)
+, 5153), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -804,16 +806,18 @@ WriteLiteral(" class=\"button btn-find-trng-prov\"");
 
 WriteLiteral(" rel=\"nofollow\"");
 
+WriteLiteral("  target=\"find-training-providers\"");
+
 WriteLiteral(" id=\"ga-find-provider-bottom\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5619), Tuple.Create("\"", 5753)
+WriteAttribute("href", Tuple.Create(" href=\"", 5686), Tuple.Create("\"", 5820)
             
             #line 100 "..\..\Views\Apprenticeship\Standard.cshtml"
-                   , Tuple.Create(Tuple.Create("", 5626), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
+                                                     , Tuple.Create(Tuple.Create("", 5693), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })
             
             #line default
             #line hidden
-, 5626), false)
+, 5693), false)
 );
 
 WriteLiteral(">\r\n");
