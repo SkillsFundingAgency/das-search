@@ -51,7 +51,9 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
                 Qualifications = document.Qualifications,
                 ProfessionalRegistration = document.ProfessionalRegistration,
-                OverviewOfRole = document.OverviewOfRole
+                OverviewOfRole = document.OverviewOfRole,
+                EffectiveFrom = document.EffectiveFrom,
+                EffectiveTo = document.EffectiveTo
             };
         }
     }

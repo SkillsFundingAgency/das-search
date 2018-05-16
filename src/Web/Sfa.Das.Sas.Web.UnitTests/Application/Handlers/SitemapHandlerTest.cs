@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
+﻿using System;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -53,8 +55,8 @@
         {
             _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
             {
-                new Standard { StandardId = "23", IsPublished = true},
-                new Standard { StandardId = "43", IsPublished = true}
+                new Standard { StandardId = "23", IsPublished = true, EffectiveFrom = DateTime.Today},
+                new Standard { StandardId = "43", IsPublished = true, EffectiveFrom = DateTime.Today}
             });
 
             var items = new List<string> { "23", "43" };
@@ -80,7 +82,7 @@
             {
                 new Framework
                 {
-                    FrameworkId = "23-5-7"
+                    FrameworkId = "23-5-7", EffectiveFrom = DateTime.Today
                 }
             });
 
@@ -148,8 +150,8 @@
 
             _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
             {
-                new Standard { StandardId = "1", Title = standardOneTitle, IsPublished = true},
-                new Standard { StandardId = "2", IsPublished = true}
+                new Standard { StandardId = "1", Title = standardOneTitle, IsPublished = true, EffectiveFrom = DateTime.Today },
+                new Standard { StandardId = "2", IsPublished = true, EffectiveFrom = DateTime.Today }
             });
 
             const string urlPrefix = "http://localhost/Sitemap/";
@@ -209,8 +211,8 @@
 
             _mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<Framework>
             {
-                new Framework { FrameworkId = "1", Title = frameworkOneTitle},
-                new Framework { FrameworkId = "2"}
+                new Framework { FrameworkId = "1", Title = frameworkOneTitle, EffectiveFrom = DateTime.Today},
+                new Framework { FrameworkId = "2", EffectiveFrom = DateTime.Today}
             });
 
             const string urlPrefix = "http://localhost/Sitemap/";
@@ -232,6 +234,73 @@
             nodes.ElementAt(0).Value.Should().Be($"{urlPrefix}Frameworks/1/{frameworkOneEncoded}");
             nodes.ElementAt(1).Value.Should().Be($"{urlPrefix}Frameworks/2");
         }
+
+        [TestCaseSource("EffectiveDatesTestData")]
+        public void ShouldReturnXmlSitemapStandardsConsideringEffectiveFromAndToDates(DateTime? effectiveFrom, DateTime? effectiveTo, int incrementIncrease)
+        {
+            _mockGetStandards.Setup(x => x.GetAllStandards()).Returns(new List<Standard>
+            {
+                new Standard { StandardId = "23", IsPublished = true, EffectiveFrom = DateTime.Today.AddDays(-1) },
+                new Standard { StandardId = "43", IsPublished = true, EffectiveFrom = DateTime.Today.AddDays(-1) },
+                new Standard { StandardId = "63", IsPublished = true, EffectiveFrom = effectiveFrom, EffectiveTo = effectiveTo }
+            });
+
+            var items = incrementIncrease == 1 ?
+                new List<string> { "23", "43", "63" } :
+                new List<string> { "23", "43" };
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), StandardPlaceholder, items))
+                .Returns(CreateDocument(Namespace, StandardPlaceholder, items));
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = Namespace;
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(2 + incrementIncrease);
+            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Standards/23");
+            nodes.ElementAt(1).Value.Should().Be("http://localhost/Sitemap/Standards/43");
+        }
+
+        [TestCaseSource("EffectiveDatesTestData")]
+        public void ShouldReturnXmlSitemapFrameworksConsideringEffectiveFromAndToDates(DateTime? effectiveFrom, DateTime? effectiveTo, int incrementIncrease)
+        {
+            _mockGetFrameworks.Setup(x => x.GetAllFrameworks()).Returns(new List<Framework>
+            {
+                new Framework
+                {
+                    FrameworkId = "23-5-7", EffectiveFrom = DateTime.Today
+                },
+                new Framework { FrameworkId = "23-6-7", EffectiveFrom = effectiveFrom, EffectiveTo = effectiveTo }
+            });
+
+            var items = incrementIncrease == 1 ?
+                new List<string> { "23-5-7", "23-6-7" } :
+                new List<string> { "23-5-7" };
+
+            _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), FrameworkPlaceholder, items))
+                .Returns(CreateDocument(Namespace, FrameworkPlaceholder, items));
+
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks });
+
+            var doc = XDocument.Parse(response.Content);
+            XNamespace ns = Namespace;
+
+            var nodes = doc.Descendants(ns + "loc");
+            nodes.Count().Should().Be(1 + incrementIncrease);
+            nodes.ElementAt(0).Value.Should().Be("http://localhost/Sitemap/Frameworks/23-5-7");
+        }
+
+        private static readonly object[] EffectiveDatesTestData =
+        {
+            new object[] {DateTime.Today.AddDays(-1), null, 1 },
+            new object[] {DateTime.Today.AddDays(1), null, 0 },
+            new object[] { null, null, 0 },
+            new object[] { DateTime.Today.AddDays(-10), DateTime.Today, 0 },
+            new object[] {DateTime.Today.AddDays(-1), DateTime.Today.AddDays(1), 1 },
+
+        };
 
         private string CreateDocument(string xmlNamespace, string urlPlaceholder, IEnumerable<string> items)
         {
