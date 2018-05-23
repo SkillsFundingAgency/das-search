@@ -42,5 +42,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public DateTime? EffectiveTo { get; set; }
 
         public bool IsActiveStandard { get; set; }
+
+        public string StandardPageUri { get; set; }
     }
 }

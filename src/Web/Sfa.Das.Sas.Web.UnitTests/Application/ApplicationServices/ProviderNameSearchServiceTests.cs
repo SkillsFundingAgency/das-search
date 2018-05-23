@@ -1,6 +1,7 @@
 ﻿using System;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {
@@ -36,7 +37,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             _mockNameSearchProvider.Setup(m => m.SearchByTerm(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
-            var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object,_mockNameSearchProvider.Object,_mockLogger.Object);
+            var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
             await providerNameSearchService.SearchProviderNameAndAliases("test", pageNumber);
 
@@ -74,7 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
 
-            var expected = $"Provider Name Search eror: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
+            var expected = $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
 
             _mockLogger.Verify(x => x.Info(It.IsAny<string>()), Times.Once);
             _mockLogger.Verify(x => x.Error(It.IsAny<Exception>(), expected));
@@ -88,7 +89,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
             const string searchTerm = "test";
-            var returnedResults = new ProviderNameSearchResultsAndPagination {ActualPage = 1, HasError = false, TotalResults = 1 };
+            var returnedResults = new ProviderNameSearchResultsAndPagination { ActualPage = 1, HasError = false, TotalResults = 1 };
             _mockNameSearchProvider.Setup(m => m.SearchByTerm(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(returnedResults));
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 

@@ -6,7 +6,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     public class ProviderNameSearchMapping : IProviderNameSearchMapping
-        {
+    {
 
         public IEnumerable<ProviderNameSearchResult> FilterNonMatchingAliases(string searchTerm, IEnumerable<ProviderNameSearchResult> resultsToFilter)
         {
@@ -18,8 +18,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                     ProviderName = item.ProviderName,
                     UkPrn = item.UkPrn,
                     Aliases = item.Aliases?
-                                .Where(m => m.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
-                                .Select(s => s.Trim()).ToList()
+                        .Where(m => m.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .Select(s => s.Trim()).ToList()
                 };
 
                 resultsToReturn.Add(details);
