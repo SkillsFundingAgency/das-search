@@ -17,39 +17,28 @@
 
 //TODO: Give the following rogue styles a logical home
 strong {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 main {
-    min-height: 450px;
-
-    .visibility-hidden {
-        visibility: hidden;
-    }
+  min-height:450px;
+  .visibility-hidden{
+      visibility:hidden;
+  }
 }
 
 
-.js-enabled .block-label.selection-button-radio:before,
+.js-enabled .block-label.selection-button-radio:before, 
 .form-control {
     background: #fff;
 }
 
-#content {
-    .form-label-bold {
-        margin-bottom: 15px;
-    }
-
-    .block-label {
-        margin-bottom: 10px;
-    }
-}
-
 .small-btm-margin {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 aside h2:first-child {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .postcode-search-form {
@@ -57,25 +46,22 @@ aside h2:first-child {
     background-color: $grey-3;
     padding: 20px 20px 0;
     margin-bottom: 20px;
-
     h2 {
         margin: 0 0 20px;
     }
-
     label {
         margin: 0 0 20px;
     }
-
     details {
         margin: 20px 0;
     }
 }
 
-.postcode-form input[type="search"] {
+.postcode-form input[type="search"]{
     max-width: 150px;
 }
 
-.postcode-form .error-message {
+.postcode-form .error-message{
     display: none;
 }
 
@@ -89,19 +75,19 @@ aside h2:first-child {
     float: left;
 }
 
-.cookie-banner .content-container {
+.cookie-banner .content-container{
     margin: 0 auto;
     max-width: 960px;
     padding: 0 15px;
 }
 
-.meta-data {
-    .modmodified-date {
+.meta-data{
+    .modmodified-date{
         font-size: 15px;
     }
 }
 
-.container table {
+.container table{
     margin: 20px 0 35px;
 }
 
@@ -110,48 +96,38 @@ aside h2:first-child {
         @include heading-36;
         font-weight: bold;
     }
-
     h3 {
         @include heading-27;
         font-weight: bold;
     }
-
     h4 {
         @include heading-24;
         font-weight: bold;
     }
-
     h5 {
         font-weight: bold;
     }
-
     ul {
         list-style-type: disc;
     }
-
     ol {
         list-style-type: decimal;
     }
-
     ol, ul {
         margin-left: 0;
         padding-left: 2rem;
-
         li {
             margin-left: .5rem;
             padding-left: 0;
         }
-
         margin-bottom: 1rem;
     }
-
     blockquote {
         clear: both;
         display: block;
         border-left: 5px solid #bfc1c3;
         padding: 0.7894736842em;
         margin-bottom: 0.7894736842em;
-
         :first-child {
             margin-top: 0;
         }
@@ -170,46 +146,38 @@ aside h2:first-child {
 /* Temp css for Dashboard */
 .apprenticeship-items {
     border-top: 1px solid gray;
-
     li {
         margin: 5px 0;
         padding: 5px 0;
     }
-
     .apprenticeship-item {
         border-bottom: 1px solid gray;
     }
-
     .action {
         float: right;
     }
-
     .providers {
         margin-left: 40px;
     }
 }
 
-.expire-date {
+.expire-date{
     padding: 10px 0;
     margin: 5px;
     font-size: 18px;
     font-weight: bold;
     margin: 20px 0;
-
-    > div i, span {
+    > div i, span{
         vertical-align: middle;
     }
-
-    > div {
+    > div{
         display: inline;
     }
-
-    i {
+    i{
         font-size: 40px;
         padding: 5px 12px 5px 0;
     }
-
-    span.icon {
+    span.icon{
         margin: auto auto;
         font-family: serif;
         font-size: 1.7em;
@@ -252,14 +220,14 @@ aside h2:first-child {
 
 @media(max-width: 640px) {
     .stats-summary li figure.data .count {
-        font-size: 32px;
+        font-size:32px;
         line-height: 1.09375
     }
 }
 
 @media screen and (max-width: 640px) {
     .stats-summary li figure.data .count {
-        padding: .25em 0;
+        padding:.25em 0;
         font-family: "ntatabularnumbers","nta",Arial,sans-serif;
         font-size: 48px;
         line-height: 1.04167;
@@ -271,7 +239,7 @@ aside h2:first-child {
 
 @media screen and (max-width: 768px) {
     .stats-summary li figure.data .count {
-        font-family: "ntatabularnumbers","nta",Arial,sans-serif;
+        font-family:"ntatabularnumbers","nta",Arial,sans-serif;
         font-size: 48px;
         line-height: 1.04167;
         font-weight: 400;
@@ -285,14 +253,14 @@ aside h2:first-child {
 
 @media screen and (max-width: 768px) and (max-width:640px) {
     .stats-summary li figure.data .count {
-        font-size: 32px;
+        font-size:32px;
         line-height: 1.09375
     }
 }
 
 @media screen and (min-width: 769px) {
     .stats-summary li figure.data .count {
-        text-align: center
+        text-align:center
     }
 }
 
@@ -302,7 +270,7 @@ aside h2:first-child {
 
 @media screen and (max-width: 768px) {
     .stats-summary li figure.data figcaption {
-        vertical-align: middle;
+        vertical-align:middle;
         display: inline-block;
         margin-right: 10px
     }
@@ -320,13 +288,13 @@ aside h2:first-child {
 
 @media(max-width: 640px) {
     .stats-summary li figure.data figcaption h2 {
-        font-size: 14px
+        font-size:14px
     }
 }
 
 @media screen and (max-width: 640px) {
     .stats-summary li figure.data figcaption h2 {
-        font-family: "nta",Arial,sans-serif;
+        font-family:"nta",Arial,sans-serif;
         font-size: 16px;
         line-height: 1.25;
         font-weight: 300;
@@ -337,13 +305,13 @@ aside h2:first-child {
 
 @media screen and (max-width: 640px) and (max-width:640px) {
     .stats-summary li figure.data figcaption h2 {
-        font-size: 14px
+        font-size:14px
     }
 }
 
 @media screen and (min-width: 769px) {
     .stats-summary li figure.data figcaption h2 {
-        text-align: center
+        text-align:center
     }
 }
 
@@ -390,21 +358,17 @@ aside h2:first-child {
     text-decoration: none;
     vertical-align: top;
     width: 50%;
-
-    &:active,
+    &:active, 
     &:focus {
         background: $grey-4;
     }
-
     .description {
         display: block;
     }
-
     .counter {
         display: block;
         font-size: 14px;
     }
-
     .arrow-button {
         color: #2e358b;
         float: left;
@@ -416,20 +380,16 @@ aside h2:first-child {
         background: url('/Content/dist/images/arrow-sprite.png');
         background-position: -4px -2px;
     }
-
     &.next {
         float: right;
         text-align: right;
-
         .arrow-button {
             float: right;
             background-position: -86px -2px;
         }
     }
-
     .hide-mob {
         display: none;
-
         @media screen and (min-width: 640px) {
             display: inline-block;
         }
@@ -440,7 +400,6 @@ aside h2:first-child {
     .form-control {
         line-height: 1.45em;
     }
-
     .button {
         margin-top: 5px;
     }
@@ -454,19 +413,16 @@ aside h2:first-child {
     }
 }
 
-// Layout
+// Layout 
 
 .pull-left {
     float: none;
-
     @media screen and (min-width: 640px) {
         float: left;
     }
 }
-
 .pull-right {
     float: none;
-
     @media screen and (min-width: 640px) {
         float: right;
     }
@@ -474,211 +430,184 @@ aside h2:first-child {
 
 /*custom styles to override defaults*/
 
-.standard-detail {
-    .column-full {
-        details {
-            clear: none;
-
+.standard-detail{
+    .column-full{
+        details{
+         clear:none;
             summary {
-                width: 70%;
+                width:70%;
             }
         }
-
-        .collapsible {
-            width: 30%;
-            font-weight: bold;
-            position: relative;
-            float: left;
+        .collapsible{
+        width:30%;
+        font-weight: bold; 
+        position: relative; 
+        float:left;   
         }
     }
 
-    .text-copy {
-        float: right;
-        width: 70%;
+    .text-copy{
+       float: right;
+       width:70%;
     }
 }
 
-.standard-detail, .framework-detail {
-    .btn-find-trng-prov {
-        margin-top: 30px;
+.standard-detail, .framework-detail{
+    .btn-find-trng-prov{
+        margin-top:30px;
     }
 }
 
-.icon-alerts {
-    clear: both;
-    float: left;
-    width: 100%;
-    margin-bottom: 30px;
+.icon-alerts{
+    clear:both;
+    float:left;
+    width:100%;
+    margin-bottom:30px;
+    .icon-right{
+        display:block;
+        clear:both;
+        line-height:1.8em;
+            .icon-content{
+                display:block;
+                float:left;
+                margin-right:10px;
+            }
+                .green-tick{
+                    display:block;
+                    background:url("images/green-tick.png")0 0 no-repeat;
+                    width:20px;
+                    height:20px;
+                    float:left;
+                    margin:5px 20px 0 0;
+                }
+                .red-cross{
+                    display:block;
+                    background:url("images/red-cross.png")0 0 no-repeat;
+                    width:20px;
+                    height:20px;
+                    float:left;
+                    margin:5px 20px 0 0;
 
-    .icon-right {
-        display: block;
-        clear: both;
-        line-height: 1.8em;
-
-        .icon-content {
-            display: block;
-            float: left;
-            margin-right: 10px;
-        }
-
-        .green-tick {
-            display: block;
-            background: url("images/green-tick.png")0 0 no-repeat;
-            width: 20px;
-            height: 20px;
-            float: left;
-            margin: 5px 20px 0 0;
-        }
-
-        .red-cross {
-            display: block;
-            background: url("images/red-cross.png")0 0 no-repeat;
-            width: 20px;
-            height: 20px;
-            float: left;
-            margin: 5px 20px 0 0;
-        }
+                }
     }
-
-    .inline-alert {
-        line-height: normal;
-    }
+    .inline-alert{line-height:normal;}
 }
 
 .data-list--provider {
-    .icon-alerts {
-        clear: none;
-
-        .icon-right {
-            display: list-item;
-        }
+   .icon-alerts{
+    clear:none;
+        .icon-right{
+            display:list-item;
+            }   
     }
 }
 
-.result-data-list {
-    dt.strong {
-        font-weight: bold;
-        line-height: 1.4em;
+.result-data-list{
+    dt.strong{     
+            font-weight:bold;  
+            line-height:1.4em;   
     }
-
-    dd {
-        float: left;
+    dd{
+        float:left;
     }
 }
 
 /*Provider detail table view page*/
-.provider-detail {
-    #provider-name {
-        line-height: 1.5em;
-        margin-bottom: 1.3em;
-
-        .tag-national {
-            background: $grey-2;
-            padding: 0px 40px 8px 40px;
-            color: #fff;
-            margin-left: 60px;
-
-            .font-adjust {
-                font-size: 25px;
-                font-weight: normal;
-            }
+.provider-detail{
+   #provider-name{
+       line-height:1.5em;
+       margin-bottom:1.3em;
+        .tag-national{
+            background:$grey-2;
+            padding:0px 40px 8px 40px;
+            color:#fff;   
+            margin-left: 60px;  
+            .font-adjust{
+                 font-size:25px;
+                font-weight:normal;
+            }      
         }
+
     }
 
-    .markdown-header-text {
-        font-weight: bold;
-        margin-top: 20px;
-    }
-
-    .markdown {
-        margin-bottom: 60px;
-    }
-
-
-    #search-app-offered {
-        margin-bottom: 30px;
-
-        .app-offered {
-            float: left;
-            margin: 0;
-        }
-        /*Search box styles*/
-        #search-box {
-            @include media(tablet) {
-                float: right;
-                margin: 0;
+        .markdown-header-text{
+           font-weight:bold;
+           margin-top:20px;
             }
+       .markdown{
+           margin-bottom:60px;
+       }
 
-            float: left;
-            margin: 20px 0;
+  
+   #search-app-offered{
+       margin-bottom:30px;
+       .app-offered{
+             float:left;   
+             margin:0;
+       }
+       /*Search box styles*/
+       #search-box{
+               @include media(tablet) {float:right; margin:0;}
+               float:left;
+               margin:20px 0;
+              
+           .search-text{
+		        margin: 0;
+		        padding: 10px;
+		        font-family: Arial, Helvetica, sans-serif;
+		        font-size:14px;
+		        color:#666;
+		        border:1px solid $border-colour; 
+		        border-right:0px;
+	        }
+	            .submit-search {
+		            margin: 0 0 0 -4px;
+		            padding: 0;
+		            width: 40px;
+                    height: 39px;
+                     @include media(tablet) {height:40px;}
+		            font-family: Arial, Helvetica, sans-serif;
+		            font-size:14px;
+		            font-weight:bold;
+		            outline: none;
+		            cursor: pointer;
+		            text-align: center;
+		            text-decoration: none;
+		            color: #ffffff;
+		            border:0; 
+		            background: $light-blue url('images/search-glass.png') no-repeat 6px 7px;
+	            }
+	            /* Fixes submit button height problem in Firefox */
+	            .submit-search::-moz-focus-inner {
+	              border: 0;
+	            }
+       }
 
-            .search-text {
-                margin: 0;
-                padding: 10px;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 14px;
-                color: #666;
-                border: 1px solid $border-colour;
-                border-right: 0px;
-            }
-
-            .submit-search {
-                margin: 0 0 0 -4px;
-                padding: 0;
-                width: 40px;
-                height: 39px;
-
-                @include media(tablet) {
-                    height: 40px;
-                }
-
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                outline: none;
-                cursor: pointer;
-                text-align: center;
-                text-decoration: none;
-                color: #ffffff;
-                border: 0;
-                background: $light-blue url('images/search-glass.png') no-repeat 6px 7px;
-            }
-            /* Fixes submit button height problem in Firefox */
-            .submit-search::-moz-focus-inner {
-                border: 0;
-            }
-        }
+   }
+   .panel--satisfaction{
+        margin-top:30px;
+   }
+   .panel-disclaimer{
+    font-size: 14px;
+    line-height: 1.429;
+    margin-top:30px;
+    h4{
+        font-size: 16px;
+        font-weight:bold;
+        line-height: 1.25;
     }
-
-    .panel--satisfaction {
-        margin-top: 30px;
-    }
-
-    .panel-disclaimer {
-        font-size: 14px;
-        line-height: 1.429;
-        margin-top: 30px;
-
-        h4 {
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 1.25;
-        }
-    }
-
-    #expand-collapse {
-        margin-top: 30px;
-
-        details {
-            margin: 20px 0;
-        }
-    }
-
-    table.app-details {
-        margin-top: 20px;
-        float: left;
-        clear: both;
-    }
+   }
+   #expand-collapse{
+       margin-top:30px;
+       details{
+           margin:20px 0;
+       }
+   }
+   table.app-details{
+       margin-top:20px;
+       float:left;
+       clear:both;
+   }
 }
 
 /*provider search*/
@@ -746,11 +675,10 @@ aside h2:first-child {
         font-weight: bold;
         padding: 20px 0;
         border-bottom: 1px solid $border-colour;
-
-        .sublist {
-            display: block;
-            font-weight: normal;
-            line-height: 1.8em;
+        .sublist{
+            display:block;
+            font-weight:normal;
+            line-height:1.8em;
         }
     }
 }
